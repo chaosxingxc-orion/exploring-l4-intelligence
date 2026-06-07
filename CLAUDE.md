@@ -2,18 +2,84 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Current state
+## What this is
 
-This is an empty research workspace ("chaos research works"). There is no source code, build system, test suite, or version control here yet. The only file present is `.mcp.json`.
+Umbrella repo for a **four-part RL-for-speech-multimodal-LLM** research series. It holds a shared
+library (`common/`), docs, and env scripts; the four works are **separate GitHub repos** under
+`projects/` (each its own git repo, gitignored by this umbrella).
 
-As code is added, update this file with the real build/lint/test commands and an architecture overview. Until then, the notes below are all that apply.
+| # | Work repo (under `projects/`) | Package | Focus |
+|---|---|---|---|
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | gradient-free, reward-guided inference-time RL |
+| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment |
+| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
+| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | RL over contrastive/retrieval objectives for omni embeddings |
 
-## MCP servers
+## Environment (important)
 
-`.mcp.json` configures one project-scoped MCP server:
+- **Compute is WSL2 Ubuntu, not native Windows.** The RTX 5090 (Blackwell, sm_120) has no stable
+  native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only. All training runs in WSL2.
+- **Python is pinned to 3.12** in a uv venv at `~/.venvs/speechrl` (ext4). The system Python 3.14 is
+  too new for ML wheels — do not use it for the stack. **Never touch `D:/ai-stack/mem0-venv`** (the
+  isolated mem0 MCP env from `.mcp.json`).
+- torch from the `cu128` index; if a "no kernel image" error appears, fall back to torch nightly
+  `cu128`, then a source build with `TORCH_CUDA_ARCH_LIST=12.0`.
+- Datasets/checkpoints/outputs live in WSL ext4 (`~/speechrl-data/`), **never in git**.
 
-- **mem0** — a memory server run via `D:/ai-stack/mem0-venv/Scripts/python.exe` executing `D:/ai-stack/mcp/mem0_mcp_server.py`. It exposes `mem0_add`, `mem0_search`, `mem0_list`, `mem0_delete`, and `mem0_project` tools for storing and recalling persistent memories. The server lives outside this directory; changes to its behavior happen in `D:/ai-stack/`, not here.
+## Common commands
 
-## Notes
+Run inside WSL2 with the venv active (`source ~/.venvs/speechrl/bin/activate`):
 
-- Git repository on branch `master`, published to GitHub at `https://github.com/chaosxingxc-orion/chaos-research-works` (remote `origin`).
+```bash
+# One-time env setup (from repo root)
+bash scripts/wsl-setup.sh        # CUDA toolkit for WSL + uv
+bash scripts/env-setup.sh        # py3.12 venv + torch cu128 + verl + editable common
+
+# Work on a single study
+cd projects/speech-mllm-training-free-rl
+uv pip install -e ../../common -e .
+bash scripts/train.sh                          # train (Hydra)
+bash scripts/train.sh rl.learning_rate=2e-6    # override any Hydra key
+bash scripts/eval.sh
+
+# Tests
+pytest common/tests                            # shared-lib smoke tests
+pytest                                         # within a work repo
+
+# Experiment tracking (local MLflow file store; no server/account)
+bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
+```
+
+Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
+
+## Architecture notes (the big picture)
+
+- **Shared library `speechrl_common`** (`common/src/speechrl_common/`): `audio` (load/resample,
+  log-mel), `models` (Qwen2-Audio loader + per-task prompts), `rl` (verifiable reward fns: WER/ASR/
+  exact-match — usable directly as GRPO/TRL reward callables), `data` (dataset registry), `tracking`
+  (local-MLflow helper), `utils` (seed/logging/checkpoint).
+- **Lazy-import discipline:** the package top level imports only light helpers; torch/transformers/
+  librosa/mlflow/jiwer are imported *inside* the functions that use them. So `import speechrl_common`
+  and its smoke tests pass even before the heavy stack is installed. **Preserve this** when adding code
+  — keep heavy imports inside functions, not at module top level.
+- **Each work depends on `common` via `[tool.uv.sources]`** editable path `../../common`. Work
+  `pyproject.toml` deliberately omits torch/verl (those come from the WSL env so the cu128 index is
+  used) — see comments there.
+- **Config:** Hydra per work — `configs/config.yaml` composes `model/ dataset/ rl/ experiment/`.
+- **RL library:** verl (GRPO/PPO with vLLM rollouts). Base model: Qwen2-Audio (swap SALMONN /
+  Qwen2.5-Omni via `models/` + config).
+
+## Gotchas
+
+- **`gh` on PATH:** the real GitHub CLI is `C:\Program Files\GitHub CLI\gh.exe` (System PATH was
+  reordered so `gh` resolves to it, ahead of a shadowing Python script at `C:\Python314\Scripts\gh`).
+- **Line endings:** `.gitattributes` forces `eol=lf` (esp. `*.sh`) so scripts run in WSL — keep it.
+- **Default branch is `master`** for the umbrella and all four work repos.
+- **PYTHONPATH separator is `;` on Windows** Python (not `:`) when testing without an install.
+
+## Research skills
+
+A curated skill set is installed via the Windows Claude Code plugin marketplace (see
+`docs/setup.md`): `academic-research-skills` (paper pipeline, `/ars-*`) + six `ai-research-skills`
+groups (post-training, multimodal, fine-tuning, inference-serving, optimization, mlops). K-Dense
+`scientific-agent-skills` is intentionally not installed.

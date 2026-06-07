@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "speechrl-common"
+version = "0.1.0"
+description = "Shared library for the chaos speech-multimodal-LLM RL research series"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+# Core deps are kept light so `pip install -e .` is fast and `import speechrl_common`
+# works before the heavy ML stack (Phase 4) is installed. Heavy deps are lazy-imported
+# inside functions and declared as optional extras below.
+dependencies = [
+    "numpy",
+    "pyyaml",
+    "omegaconf>=2.3",
+]
+
+[project.optional-dependencies]
+audio = ["librosa", "soundfile", "jiwer"]
+models = ["torch", "torchaudio", "transformers", "accelerate", "peft", "datasets"]
+tracking = ["mlflow"]
+dev = ["pytest", "ruff"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/speechrl_common"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

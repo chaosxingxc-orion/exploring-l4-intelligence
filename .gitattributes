@@ -1,0 +1,33 @@
+# Normalize line endings: LF in the repo, auto on checkout.
+# Fixes the recurring "LF will be replaced by CRLF" warnings and keeps
+# shell scripts runnable in WSL2/Linux.
+* text=auto eol=lf
+
+# Explicit text types (always LF — these run in WSL/Linux)
+*.py    text eol=lf
+*.sh    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
+*.cfg   text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+
+# Windows batch stays CRLF
+*.bat   text eol=crlf
+*.ps1   text eol=crlf
+
+# Binary assets (never normalize/diff)
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.wav  binary
+*.mp3  binary
+*.flac binary
+*.pt   binary
+*.pth  binary
+*.ckpt binary
+*.safetensors binary

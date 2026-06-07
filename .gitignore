@@ -1,0 +1,59 @@
+# ── Python ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ── Environments ───────────────────────────────────────
+.venv/
+venv/
+env/
+.python-version
+.env
+.env.local
+
+# ── ML / RL artifacts (kept out of git; live in WSL ext4) ─
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.h5
+*.onnx
+
+# ── Audio / datasets ───────────────────────────────────
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+data/
+datasets/
+checkpoints/
+
+# ── Experiment tracking / outputs ──────────────────────
+mlruns/
+mlartifacts/
+outputs/
+runs/
+logs/
+wandb/
+.hydra/
+lightning_logs/
+hf-cache/
+
+# ── Each work is its own repo (not tracked by the umbrella) ─
+projects/*/
+
+# ── OS / editor ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
