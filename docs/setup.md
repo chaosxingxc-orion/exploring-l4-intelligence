@@ -38,6 +38,11 @@ python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))
   torch/CUDA/Python combo.
 - Fallback if a "no kernel image" CUDA error appears: torch nightly `cu128`, then a source build
   with `TORCH_CUDA_ARCH_LIST=12.0`.
+- **W4 flagship (omni-embed) extras:** the `omni-embed-nemotron-3b` backbone is a Qwen2.5-Omni-based
+  `sentence-transformers` model. Beyond torch, install `torchvision` (cu128 index — its multimodal
+  processor `Qwen2VLVideoProcessor` requires it even for the audio-only path) and `sentence-transformers`.
+  `flash-attn` is optional: the loader (`speechrl_common.models.omni_embed`) falls back to `sdpa` on
+  Blackwell sm_120. The Operator-A embedding proof needs **no verl/vLLM**.
 
 ## 3. Working on a single work
 
