@@ -6,6 +6,27 @@
 
 ---
 
+### 2026-06-22 · W4 per-factor operator decision (from the algorithm-survey workflow)
+**Decision.** Use **Operator A** (embedding-layer inference-time search: instruction/pooling/layer/
+projector + verifiable-reward argmax) for **content** and **language**; **Operator B** (generative
+Qwen2.5-Omni best-of-N/MBR, frozen weights, GRPO update dropped) for **emotion**; **hybrid** for
+**speaker** (A's layer/pooling/LEACE-RLACE projector search, with B readout if the recovered probe
+margin is too low). Any consensus/B path must gate the per-class plurality separatrix on a held-out
+calibration set; prefer verifiable rewards over majority-vote pseudo-rewards everywhere a ground-truth
+signal exists. Full analysis + sources: [[W4-Training-Free-RL-Feasibility]] §0/§4/§5.
+**Why.** A multi-agent survey (11 agents, arXiv-cited, mostly self-verified) established: (a) Operator
+A has real inference-time DoF on a vector-output model (instruction deltas up to ~55pp; closed-form
+LEACE/RLACE/whitening projections); (b) the binding risk is weak steerability, fixed by reward-guided
+selection; (c) omni-embed-nemotron-3b's Whisper-ASR backbone + contrastive mean-pooling **suppress
+speaker/emotion** in the pooled vector (raw emotion probe ~31%), so those factors need layer/pooling
+recovery or the generative readout; (d) consensus pseudo-rewards are Condorcet-fragile on near-chance
+paralinguistic factors.
+**Consequences.** The CREMA-D proof (E.4) tests the falsifiable cross-probe inequality
+`A_t(e_t) > A_t(e_{t'})` per factor with non-target factors held fixed; a flat row for emotion/speaker
+is a valid negative result (factor below the frozen model's separatrix), not a failure. The W4
+`rl/embed_search` config implements Operator A first; Operator B is a future switch behind the same
+interface.
+
 ### 2026-06-22 · Re-center the umbrella on training-free knowledge activation; W4 becomes flagship
 **Decision.** Frame the whole series around one thesis: use training-free RL (no weight or structure
 change) to *activate* the cross-modal, multi-granularity task knowledge an omni/multimodal LLM absorbed

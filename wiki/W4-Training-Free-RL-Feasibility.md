@@ -6,11 +6,24 @@ and **per-factor operator decision** are completed by the survey workflow (Wave 
 verified sources. Status legend for claims: ✅ self-verified · ◐ sub-agent only · ⚠ assumption ·
 ✗ refuted.
 
-## 0. Bottom line (filled by D.3)
+## 0. Bottom line (D.3 decision — from the verified survey)
 
-> _Pending the survey + CREMA-D pilot._ Working hypothesis: a **hybrid** operator — embedding-layer
-> test-time search (Operator A) for factors the frozen retrieval encoder keeps (content, language),
-> and generative-end search (Operator B) for factors it may suppress (speaker, emotion).
+**Split each factor by whether it is NATIVE to a retrieval-trained SentenceTransformer or SUPPRESSED
+by its contrastive/mean-pooling objective.**
+
+| Factor | Operator | Why |
+|---|---|---|
+| **content** (ASR/ST) | **A** | the factor the model was built to expose; verifiable reward (WER/hit@k) ⇒ A is monotone best-of-K, no Condorcet pathology; instruction DoF is large (best-vs-worst prompt deltas up to ~55pp) |
+| **language** (LID/intent) | **A** | near-semantic, frozen-LLM probes reach ~94–97% language-ID; verifiable labels ⇒ same monotone A selection |
+| **speaker** (SID) | **hybrid** | retrieval+mean-pool tends to suppress speaker, but it lives in mid/late layers → A's layer/pooling/projector search (LEACE/RLACE) can recover it; B (generative readout) when the recovered probe margin is too low; closed-set retrieval gives a verifiable reward, so avoid consensus pseudo-reward |
+| **emotion** (SER) | **B** | most collapsed by retrieval training — raw frozen probe ~31%, reaches ~78% only after (forbidden) adapter training; the generative Qwen2.5-Omni Thinker readout recovers what the pooled vector lost |
+
+Every B/consensus path must gate the **per-class plurality separatrix** (`p_correct > every wrong-class
+mass`, not 2-way `p>1/2`) on a held-out CREMA-D calibration set, because a near-chance paralinguistic
+factor on the same audio makes hard majority vote amplify the dominant content/speaker confound. The
+decisive pilot in all four cases is the falsifiable cross-probe inequality `A_t(e_t) > A_t(e_{t'})` on
+same-audio CREMA-D, with the non-target factors held fixed. _(Source: D.2 survey workflow, 11 agents,
+arXiv-cited; full result archived in the run transcript.)_
 
 ## 1. Problem & the central difficulty
 
@@ -94,28 +107,70 @@ cues) is mandatory for that factor. ⚠ (decided by the CREMA-D pilot in Track E
 
 ## 4. Algorithm survey (completed by the D.2 workflow)
 
-For each candidate the survey records: applies to **A**? to **B**? the **correction** needed for the
-speech modality; and a **convergence** sketch or counterexample — each row with sources + a status
-tag. (Skeleton; rows verified/expanded by Wave D.2.)
+Each row: applies to **A** (embeddings)? to **B** (generation)? the **correction** needed for speech,
+and a **convergence** sketch + concrete counterexample. All rows ✅ self-verified against the cited
+sources in the D.2 workflow.
 
-| Algorithm | A? | B? | Correction for speech | Convergence / counterexample | Status |
-|---|---|---|---|---|---|
-| TTRL (majority-vote pseudo-reward; trains weights as published) | — | partial | replace majority vote with a **verifiable** reward; for frozen use, drop the grad step → best-of-N | Condorcet: vote converges to truth only if base acc > threshold; fails on weak SER/SID | ◐ |
-| TPO (test-time preference opt, frozen) | — | ✓ | rule-based verifiable critique; monotone accept (revert non-improving) | fixed-point if the textual-gradient is a contraction; else oscillation | ◐ |
-| JitRL (KL-closed-form logit modulation) | partial | ✓ | modulate conditioning/projection params, not token logits; gate on memory quality | inherits the KL-optimal closed form; empty/OOD memory ⇒ no-op (safe) | ◐ |
-| MBR (minimum Bayes risk, frozen) | indirect | ✓ | use a non-self utility (embedding cosine / BLEU), 4–8 samples | converges to Bayes-risk min; correlated errors ⇒ confident-wrong centroid | ◐ |
-| best-of-N / reward-guided decoding | A-form (over conditionings) | ✓ | control variates / common random numbers; cap N at the KL knee | monotone in N; over-optimization grows with N | ◐ |
+| Algorithm | A? | B? | Correction for speech | Convergence / counterexample |
+|---|---|---|---|---|
+| **TTRL** (majority-vote pseudo-reward; updates weights) | no — no token dist / no "mode" over a vector; frozen weights forbid the GRPO step. Survives only as best-of-K over conditionings with a **verifiable** reward | partial — drop the GRPO update ⇒ collapses to MBR/self-consistency *selection*, not learning | verifiable > consensus; per-class Condorcet gate; **kill GRPO group-normalization** (it hands largest advantage to least-reliable pseudo-labels); dedup cosine-clustered candidates | amplifier of the model's existing sign per factor (Condorcet separatrix `p>` plurality); **can't create an absent factor** (cond. P). Counterexample: CREMA-D emotion, base ~28% < plurality, content-confound wins the vote → steers to the wrong emotion |
+| **TPO** (test-time preference opt, frozen) | no — no decoding head to emit critiques into; dense embedders don't *obey* instructions (negative WISE −49…−11; SICR 0.1–6.9%) | yes (native) — optimize the decoded text, then export an embedding (a proxy: best text ≠ best vector) | replace the learned RM with **verifiable** rewards; on A drop the textual-gradient loop, keep only verifiable-reward selection; explicit KL cap (TPO has none) | monotone non-decreasing on the *proxy* reward (cache+argmax), converges to a rewrite-operator fixed point; true reward can fall once proxy overfits. Counterexample: instruction-invariant embedder → reward-hacks a small probe set, worse out-of-sample |
+| **JitRL** (KL-closed-form logit modulation + non-param memory) | partial — `z'=z+βÂ` needs a softmax; a vector has none. Re-erect a categorical action space at the **selection** level (which instruction/pool/layer/projector) ⇒ memory-amortized best-of-N over conditionings | yes — logit tilt is native; memory amortizes advantages across episodes | verifiable reward (not the LLM-judge — biased on paralinguistics, breaks the unbiased-return assumption); cosine-kNN over audio features (not Jaccard-over-text); min-count gate before trusting the optimism bonus; entropy floor | contextual-bandit consistency to `q*(a)∝q0 exp(βÂ)` under cosine-kNN + Lipschitz; re-freezing the projector gives drift Δ=0 (cleaner than JitRL's agent setting). Counterexample: speaker⟂emotion confound in the neighborhood → selects a *speaker* embedding for emotion (Goodhart) |
+| **MBR** (minimum Bayes risk, frozen) | no — no sampling distribution to draw N from; cosine-consensus = medoid (nearest mean direction), which does **not** estimate any downstream reward (agreement ≠ correctness) | yes (native home) — sample N transcripts, MBR-select, export the winner's embedding; ASR WER 0.042→0.033, ST BLEU 18.6→22.5 at N=4–8 | never reuse the utility as the eval metric (metric-bias = reward hacking); needs sample **diversity** (ε-sampling T≈1; bias–diversity decomposition); prob-weighted MBR as trust region; length-robust utility (chrF, not corpus BLEU) for short clips | SLLN: `R̂_N→E_{p_θ}[u]` at O(1/√N); converges to the *misspecified* optimum if `p_θ≠p_true`. Counterexample: homophone — 7/8 samples share the same acoustic error, MBR confidently picks the wrong consensus |
+| **best-of-N / reward-guided decoding** | partial — best-of-K over the (small) conditioning/pooling/projector set; the √(log N) ceiling is brutal at tiny N | yes (native) — sample, score by verifiable reward, pick, export | verifiable > pseudo; **soft-BoN** at temperature β (tightens regret under noisy reward); cap `KL ≤ log N − (N−1)/N`; cap N at the over-optimization threshold N\*; common random numbers across candidates; mind the **re-embedding gap** (re-score the exported vector with the same probe) | soft-BoN → `q*(z)∝q0 exp(R/β)`; gain ≤ `R_max·√(KL/2)=O(√log N)`, converges to the *proxy* optimum. Counterexample (A): speaker-invariant embedder ⇒ flat reward ⇒ argmax is noise, soft-BoN collapses to uniform (no steering) |
 
-**Cross-cutting corrections to settle:** verifiable reward instead of majority vote; variance
-reduction for the gradient-free 𝒵_A optimizer; KL/entropy trust region tuned at the reward-vs-KL
-knee; reward calibration (pseudo vs verifiable) on a held-out set.
+**Cross-cutting corrections (settled):** use **verifiable rewards** (WER/exact-match/retrieval-hit/
+probe-accuracy from `speechrl_common.rl`) instead of consensus/majority pseudo-rewards wherever a
+ground-truth signal exists; per-class **Condorcet gate** for any consensus path; **variance reduction**
+(common random numbers + a control-variate baseline) for the gradient-free 𝒵_A search; an explicit
+**KL/entropy trust region** at the reward-vs-KL knee; **reward calibration** (held-out probe set; drop
+medium-consensus candidates); and beware the **re-embedding gap** in Operator B (the reward must
+re-score the exported vector, since best-decoded-text ≠ best-disentangled-vector).
 
-## 5. Per-factor operator decision criteria (filled by D.3)
+### Key empirical findings (D.2, verified)
 
-Select per factor from the CREMA-D + small-pilot evidence: default-embedding linear-probe accuracy
-(**P**), linear-vs-MLP probe gap (**L**), instruction-conditioning shift (**S**), whether the
-inequality `A_t(e_t) > A_t(e_{t'})` holds via conditioning alone, plus compute/latency and license.
-Rule: (P)+(L)+(S) hold ⇒ **A** (cheap, novel); (P) fails ⇒ **B** for that factor.
+- **Operator A has real degrees of freedom** on a vector-output frozen model — instruction text
+  (largest; best-vs-worst-prompt deltas up to ~55pp), closed-form inference-time projections
+  (LEACE/RLACE/whitening), pooling, and layer selection, plus additive steering vectors. The binding
+  risk is weak/uncontrolled **steerability (S)**, which is exactly what reward-guided selection fixes.
+- **The objective is exact.** `J(q)=E_q[R]−β·KL(q‖q0)` has the unique maximizer `q*(z)=q0(z)exp(R/β)/Z`
+  (Gibbs); both operators are estimators of this same tilted target. Best-of-N is a sampling
+  approximation with `KL ≤ log N − (N−1)/N` (an upper bound) and win-rate ≤ `N/(N+1)`.
+- **Model specifics confirm the design.** omni-embed-nemotron-3b merges the text prompt + audio into
+  ONE Qwen2.5-Omni Thinker sequence, then masked-mean-pools to a normalized 2048-d vector — so the
+  `text` conditioning provably reshapes the pooled embedding (validates `embed_batch`). Audio path =
+  Whisper-style, 16 kHz mono, 128 mel.
+- **Suppression risk is mechanistic, not hypothetical.** The Whisper-ASR backbone concentrates
+  speaker/emotion in mid-layers and de-prioritizes them in the final/pooled layer; single-vector
+  contrastive training is dominated by content/speaker variance. Speaker and phonetic content occupy
+  **near-orthogonal subspaces** (avg |cos| ≈ 0.13), and speaker is **linearly removable** without
+  hurting content (projecting out the speaker subspace *improved* ABX phone discrimination) — strong
+  support for the LEACE/RLACE Operator-A projections.
+
+Sources (arXiv): 2605.22544, 2410.23841 (instruction DoF / non-obedience); 2306.03819, ravfogel22a
+(PMLR v162), 2104.01767 (LEACE/RLACE/whitening); 1610.01644 (linear probes); 1503.02406 (IB);
+2504.16084 (TTRL), 2501.12895 (TPO), 2601.18510 (JitRL), 2510.19471 (MBR-for-ASR), 2401.01879,
+2507.05913 (BoN theory); 2305.12464, 2505.19273, 2501.05310, 2410.01162, 2605.02804 (speech
+disentanglement/probing); 2510.03458, Qwen2.5-Omni docs (model specifics).
+
+## 5. Per-factor decision & pilot tests (D.3)
+
+The decision is in §0. Selection rule from the evidence: `(P)+(L)+(S)` hold ⇒ **A**; `(P)` fails (factor
+suppressed) ⇒ **B**; partial ⇒ **hybrid**. Per-factor pilot on same-audio CREMA-D (filename labels):
+
+- **content (A)** — build `Z_A = {3–5 instructions} × {mean/last pooling} × {final, penultimate layer}
+  × {raw, whitened, speaker-erasing LEACE}`; score WER + retrieval hit@1. PASS if argmax-over-`Z_A`
+  beats the default-prompt baseline AND matches/beats a generative-B decode at lower compute.
+- **language (A)** — FLEURS (LID) + MINDS14/SLURP (intent); PASS requires the cross-probe inequality
+  `A_language(e_language) > A_language(e_content)` and vice-versa; LEACE language-erasure control.
+  Escalate intent to hybrid if SLURP intent stays near chance under all A conditionings.
+- **speaker (hybrid)** — sweep layer × pooling × speaker-isolating projector; verifiable closed-set
+  retrieval hit@1 on the 91 filename speakers. Trigger B if best-A probe stays low or B materially
+  exceeds it. Confound check: hold emotion fixed, vary speaker (ensure the axis isn't gender/channel).
+- **emotion (B)** — A-side ceiling (best layer × pooling × diff-of-means steering, probe-margin on a
+  held-out split) vs B-side generative emotion decode with a per-class Condorcet gate. If neither
+  clears the 6-way plurality separatrix, emotion is **below the frozen model's separatrix (P fails)**
+  and no operator disentangles it without an adapter — report that honestly as a negative result.
 
 ## 6. Verifiable-claim registry (schema)
 
@@ -154,5 +209,13 @@ over-optimization). License: NVIDIA OneWay Noncommercial + Qwen Research — res
 训练成对说话人/信道/情感不变，若 `I(e;y_说话人)≈0` 则 (P) 不成立，任何冻结向量算子都无法恢复说话人，该因子
 必须改用 B 类。这由 CREMA-D 试点（Track E.4）裁定。
 
-**算法综述与逐因子决策**见英文区表格（TTRL/TPO/JitRL/MBR/best-of-N 的 A?/B?/修正/收敛性，及验证标记），
-由 D.2 工作流补全、D.3 给出逐因子 A/B/混合结论。试点为 CREMA-D 双因子（同音频说话人+情感）验证闭环。
+**算法综述与逐因子决策**见英文区表格（TTRL/TPO/JitRL/MBR/best-of-N 的 A?/B?/修正/收敛性，均经 D.2
+工作流 11 个 agent 带 arXiv 来源自验证）。**D.3 逐因子结论：内容→A、语言→A、说话人→混合、情感→B**——按
+「该因子是检索式 SentenceTransformer 的原生能力还是被对比/均值池化目标压制」来切分：内容/语言是模型原生
+且有可验证奖励（WER/检索命中/标签），A 即单调 best-of-K、无 Condorcet 病态；情感最易被检索训练压制（冻结
+裸探针约 31%，需被禁止的适配器训练才到约 78%），改用生成式 Qwen2.5-Omni Thinker 读出（B）；说话人居于
+中后层、可被 LEACE/RLACE 投影恢复，故 A 的层/池化/投影搜索 + 必要时 B 读出（混合）。任何 B/共识路径都要在
+留出校准集上过**逐类多数分离阈**（`p_correct >` 每个错误类质量，而非二分 `p>1/2`）。关键经验：模型把文本
+指令与音频并入同一 Thinker 序列再均值池化（证实 `embed_batch` 设计）；Whisper-ASR 主干在末层弱化说话人/情感
+（压制风险有据）；说话人与音素内容近正交（|cos|≈0.13）且可线性移除而不伤内容。试点＝CREMA-D 双因子同音频
+交叉探针不等式 `A_t(e_t) > A_t(e_{t'})`，固定非目标因子以排除混淆。
