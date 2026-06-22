@@ -15,8 +15,8 @@ by its contrastive/mean-pooling objective.**
 |---|---|---|
 | **content** (ASR/ST) | **A** | the factor the model was built to expose; verifiable reward (WER/hit@k) ⇒ A is monotone best-of-K, no Condorcet pathology; instruction DoF is large (best-vs-worst prompt deltas up to ~55pp) |
 | **language** (LID/intent) | **A** | near-semantic, frozen-LLM probes reach ~94–97% language-ID; verifiable labels ⇒ same monotone A selection |
-| **speaker** (SID) | **hybrid** | retrieval+mean-pool tends to suppress speaker, but it lives in mid/late layers → A's layer/pooling/projector search (LEACE/RLACE) can recover it; B (generative readout) when the recovered probe margin is too low; closed-set retrieval gives a verifiable reward, so avoid consensus pseudo-reward |
-| **emotion** (SER) | **B** | most collapsed by retrieval training — raw frozen probe ~31%, reaches ~78% only after (forbidden) adapter training; the generative Qwen2.5-Omni Thinker readout recovers what the pooled vector lost |
+| **speaker** (SID) | **B** (empirical; D.3 said hybrid) | F.1 showed speaker is ~chance across all 37 layers AND audio-token pooling — no weight-free Operator-A axis recovers it, so B is mandatory (closed-set retrieval gives B a verifiable reward; avoid consensus pseudo-reward) |
+| **emotion** (SER) | **B** | most collapsed by retrieval training — Operator-A ceiling ~0.40 (F.1, best at input layer); the generative Qwen2.5-Omni Thinker readout is needed to recover what the pooled vector lost |
 
 Every B/consensus path must gate the **per-class plurality separatrix** (`p_correct > every wrong-class
 mass`, not 2-way `p>1/2`) on a held-out CREMA-D calibration set, because a near-chance paralinguistic
@@ -53,6 +53,24 @@ decision: the next wave must use the richer Operator-A axes (mid-layer pooling, 
 — the survey shows speaker lives in mid-layers and is linearly recoverable) and Operator B for emotion.
 This is a clean existence proof: the verifiable closed loop runs, is reproducible, and measures the
 right thing — yielding both a strong positive (content) and the predicted negatives (emotion/speaker).
+
+**Richer Operator-A axes (F.1) — layer & pooling sweep.** The underlying `NVOmniEmbedModel` exposes 37
+hidden states; we masked-mean-pooled each (and, separately, only the ~50 audio-placeholder tokens) and
+probed every factor per layer (weight-free). Best per-factor probe accuracy across layers:
+
+| pooling | content | emotion | speaker |
+|---|---|---|---|
+| full seq, best layer | 0.990 (L24/36) | 0.400 (L0) | 0.043 (L36) |
+| audio-tokens, best layer | 0.990 (L16) | 0.403 (L0) | 0.043 (L32/36) |
+
+**Speaker stays at chance (~0.02–0.04) across ALL 37 layers and under audio-token-only pooling**;
+emotion plateaus at ~0.40 (best at the input-embedding layer 0). So **no weight-free Operator-A axis —
+instruction conditioning, layer selection, or audio-token pooling — recovers speaker**, and emotion's
+A-ceiling is ~0.40. LEACE/RLACE are removal-only operators (they erase a subspace, they cannot add
+absent information), so they cannot recover a factor that is ~chance at every layer. **Empirical
+conclusion:** for this frozen, retrieval-contrastive, Whisper-ASR-backbone embedder, content is fully
+exposed to Operator A (~1.0) while **speaker (and largely emotion) are genuinely suppressed and require
+Operator B** (generative readout). This refines D.3: speaker moves from "hybrid" to **B-mandatory**.
 
 ## 1. Problem & the central difficulty
 

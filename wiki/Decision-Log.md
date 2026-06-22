@@ -6,6 +6,23 @@
 
 ---
 
+### 2026-06-22 · F.1 empirical finding — speaker/emotion are Operator-B-mandatory on this model
+**Decision.** From the CREMA-D layer/pooling sweep (weight-free Operator A): probe accuracy for
+**speaker stays at chance (~0.03) across all 37 Thinker layers AND under audio-token-only pooling**;
+**emotion plateaus at ~0.40** (best at the input-embedding layer). No weight-free Operator-A axis
+(instruction conditioning, layer selection, audio-token pooling) recovers them, and LEACE/RLACE are
+removal-only (cannot add absent information). Therefore **speaker and emotion are reclassified from
+"hybrid/B-preferred" to Operator-B-mandatory** for this frozen `omni-embed-nemotron-3b`; content
+remains a clean Operator-A win (~1.0). See [[W4-Training-Free-RL-Feasibility]] §0.1.
+**Why.** The backbone is a Whisper-ASR encoder + contrastive retrieval training with masked-mean
+pooling — an objective that is explicitly content-matching and nuisance-invariant, so paralinguistic
+identity/affect are not just under-weighted but effectively absent from the representation at every
+depth.
+**Consequences.** The next W4 wave implements Operator B (generative Qwen2.5-Omni best-of-N / MBR
+readout, frozen weights) for speaker/emotion, and fans Operator A out to content/language on
+LibriSpeech/CoVoST2/FLEURS/MINDS14 (where A is predicted to win). New W4 code: `layer_probe.py`
+(mid-layer / audio-token pooling) + `scripts/layer_sweep.py`, `scripts/audio_pool_probe.py`.
+
 ### 2026-06-22 · W4 per-factor operator decision (from the algorithm-survey workflow)
 **Decision.** Use **Operator A** (embedding-layer inference-time search: instruction/pooling/layer/
 projector + verifiable-reward argmax) for **content** and **language**; **Operator B** (generative

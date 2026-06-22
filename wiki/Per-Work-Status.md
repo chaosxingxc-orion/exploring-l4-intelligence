@@ -21,8 +21,11 @@ MLflow (`bash scripts/train.sh seed=42`). **First result (3-factor CREMA-D):** t
 content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance) — the thesis ("different downstream
 tasks → different performance") demonstrated; instruction conditioning does not steer the embedding
 (columns flat), confirming the suppression prediction (see [[W4-Training-Free-RL-Feasibility]] §0.1).
-**Next:** richer Operator-A axes (mid-layer pooling, LEACE/RLACE) + Operator B for speaker/emotion;
-content/language fan-out across LibriSpeech/CoVoST2/FLEURS/MINDS14.
+**F.1 (richer Operator-A axes) done:** layer sweep (37 layers) + audio-token pooling show speaker
+stays ~chance everywhere and emotion plateaus ~0.40 — **no weight-free Operator-A axis recovers
+speaker**, so speaker/emotion are **Operator-B-mandatory**. **Next:** implement Operator B (generative
+Qwen2.5-Omni best-of-N/MBR readout) for speaker/emotion; content/language fan-out across
+LibriSpeech/CoVoST2/FLEURS/MINDS14.
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download
