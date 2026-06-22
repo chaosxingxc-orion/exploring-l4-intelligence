@@ -25,17 +25,16 @@ ORIGIN="$(git -C "$REPO_ROOT" remote get-url origin)"
 WIKI_URL="${ORIGIN%.git}.wiki.git"
 echo "Wiki remote: $WIKI_URL"
 
-# Clone an existing wiki, refresh it, or first-time-init an empty one via push.
+# Always start from a clean working clone (avoids stale-state wedging across runs).
+rm -rf "$WORK_DIR"
 FRESH=0
-if [[ -d "$WORK_DIR/.git" ]]; then
-  git -C "$WORK_DIR" pull --ff-only || true
-elif git clone "$WIKI_URL" "$WORK_DIR" 2>/dev/null; then
+if git clone "$WIKI_URL" "$WORK_DIR" 2>/dev/null; then
   :   # cloned an existing, initialized wiki
 else
   echo "Wiki not cloneable yet — attempting first-time init via push."
-  echo "(If the push fails: enable Settings -> Features -> Wikis, create the first page"
-  echo " once in the web UI to initialize the repo, then re-run this script.)"
-  rm -rf "$WORK_DIR"; mkdir -p "$WORK_DIR"
+  echo "(If the push fails with 'Repository not found': enable Settings -> Features -> Wikis,"
+  echo " then create the first page once in the web UI to initialize the repo, and re-run.)"
+  mkdir -p "$WORK_DIR"
   git -C "$WORK_DIR" init -q
   git -C "$WORK_DIR" remote add origin "$WIKI_URL"
   git -C "$WORK_DIR" checkout -q -B master
@@ -51,6 +50,12 @@ for f in "$SRC_DIR"/*.md; do
 done
 
 cd "$WORK_DIR"
+# This is a throwaway clone: borrow the umbrella's commit identity and pin line endings
+# (the wiki repo has no .gitattributes, so avoid LF->CRLF churn).
+git config user.name  "$(git -C "$REPO_ROOT" config user.name  2>/dev/null || echo 'wiki-sync')"
+git config user.email "$(git -C "$REPO_ROOT" config user.email 2>/dev/null || echo 'wiki-sync@local')"
+git config core.autocrlf false
+
 if [[ -z "$(git status --porcelain)" ]]; then
   echo "Wiki already up to date — nothing to sync."
   exit 0
