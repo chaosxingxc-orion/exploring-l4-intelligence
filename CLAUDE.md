@@ -83,3 +83,16 @@ A curated skill set is installed via the Windows Claude Code plugin marketplace 
 `docs/setup.md`): `academic-research-skills` (paper pipeline, `/ars-*`) + six `ai-research-skills`
 groups (post-training, multimodal, fine-tuning, inference-serving, optimization, mlops). K-Dense
 `scientific-agent-skills` is intentionally not installed.
+
+## Shared knowledge & memory (README + Wiki)
+
+- **Canonical onboarding is the root `README.md` / `README_CN.md`** — read it first.
+- **Shared, durable team memory is the GitHub Wiki**, sourced from `wiki/` in this repo and published
+  with `bash scripts/wiki-sync.sh`. Edit `wiki/*.md` (never only the web Wiki — it's a mirror that the
+  sync script overwrites).
+- **mem0 MCP is local/personal memory only** — not shared with the team. Promote anything the team
+  needs into the Wiki.
+- **Before starting:** read `wiki/Home.md` and `wiki/Per-Work-Status.md`. **After a notable decision
+  or learning:** append a dated entry to `wiki/Decision-Log.md` (and update `wiki/Per-Work-Status.md`
+  if a work's maturity/plan changed), then run `bash scripts/wiki-sync.sh`. Full protocol:
+  `wiki/AI-Collaboration.md`.
