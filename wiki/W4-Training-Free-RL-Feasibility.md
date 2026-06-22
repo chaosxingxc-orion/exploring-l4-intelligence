@@ -28,27 +28,31 @@ arXiv-cited; full result archived in the run transcript.)_
 ## 0.1 First empirical result (E.4 — CREMA-D, instruction-only Operator A)
 
 The first proof loop ran on the frozen `omni-embed-nemotron-3b` (dev 600 / test 300, seed 42, kNN
-probe, 1000-bootstrap CIs; reproducible: `bash scripts/train.sh seed=42`, reproduced from cache by
-`bash scripts/eval.sh seed=42` — identical numbers). It tested **only** the instruction-conditioning
-axis of Operator A on the **final pooled** embedding (not yet the layer/pooling/LEACE-RLACE axes).
+probe, 1000-bootstrap CIs; reproducible: `bash scripts/train.sh seed=42 run_name=cremad_three_factor_v1`,
+reproduced from cache by `eval.sh` — identical numbers). It tested the instruction-conditioning axis of
+Operator A on the **final pooled** embedding (not yet the layer/pooling/LEACE-RLACE axes), across three
+verifiable factors on the *same* audio: content = sentence-ID (12), emotion (6), speaker (91).
 
 Conditioning × factor **test probe accuracy**:
 
-| conditioning ↓ / factor → | emotion (chance 1/6≈0.17) | speaker (chance 1/91≈0.011) |
-|---|---|---|
-| baseline (no instruction) | 0.360 | 0.040 |
-| emotion instruction | 0.367 | 0.037 |
-| speaker instruction | 0.367 | 0.033 |
+| conditioning ↓ / factor → | content (chance ≈0.08) | emotion (chance ≈0.17) | speaker (chance ≈0.011) |
+|---|---|---|---|
+| baseline (no instruction) | 0.997 | 0.360 | 0.040 |
+| content instruction | 1.000 | 0.333 | 0.043 |
+| emotion instruction | 1.000 | 0.367 | 0.037 |
+| speaker instruction | 1.000 | 0.367 | 0.033 |
 
-`diagonal_dominant = False`; emotion Δ(selected−baseline) = **+0.007** (CIs overlap), speaker Δ =
-**−0.003**. **Reading:** emotion is *partially present* (~0.36 ≫ chance, matching the survey's "raw
-frozen probe ~31%") but **instruction conditioning does not steer it**; speaker is **essentially
-suppressed** (≈chance) and conditioning does not recover it. This **empirically confirms the
-suppression prediction** and the D.3 decision: instruction-only Operator A is insufficient for the
-paralinguistic factors — the next wave must exercise the richer Operator-A axes (mid-layer pooling,
-LEACE/RLACE projection) and Operator B, and must test content/language (where A is predicted to win).
-A flat matrix here is the *predicted* result, not a failure — it is the existence proof that the
-verifiable closed loop runs and measures the right thing.
+**Two findings.** (1) **The thesis holds — different downstream tasks read from the SAME frozen
+embedding get dramatically different performance:** content ≈**1.00**, emotion ≈**0.36**, speaker
+≈**0.04** (≈chance). The embedding is content-dominated, retains partial emotion, and has effectively
+discarded speaker — exactly the retrieval-contrastive profile the survey predicted. (2) **Instruction
+conditioning does *not* steer this embedder** — each factor's column is flat across conditioning rows
+(emotion Δ=+0.007 CIs overlap; speaker Δ=−0.003), so `diagonal_dominant=False`. The "steering" form of
+Operator A (instruction-only) is therefore insufficient for the suppressed factors, confirming the D.3
+decision: the next wave must use the richer Operator-A axes (mid-layer pooling, LEACE/RLACE projection
+— the survey shows speaker lives in mid-layers and is linearly recoverable) and Operator B for emotion.
+This is a clean existence proof: the verifiable closed loop runs, is reproducible, and measures the
+right thing — yielding both a strong positive (content) and the predicted negatives (emotion/speaker).
 
 ## 1. Problem & the central difficulty
 
