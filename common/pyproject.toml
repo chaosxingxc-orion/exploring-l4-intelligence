@@ -21,8 +21,11 @@ dependencies = [
 [project.optional-dependencies]
 audio = ["librosa", "soundfile", "jiwer"]
 models = ["torch", "torchaudio", "transformers", "accelerate", "peft", "datasets"]
+embed = ["sentence-transformers"]          # omni-embed flagship backbone (W4)
+probe = ["scikit-learn"]                    # linear/kNN probes, silhouette (rl.probe, rl.disentanglement)
+metrics = ["sacrebleu"]                     # BLEU/chrF for ST (rl.metrics)
 tracking = ["mlflow"]
-dev = ["pytest", "ruff"]
+dev = ["pytest", "ruff", "scikit-learn", "sacrebleu"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/speechrl_common"]

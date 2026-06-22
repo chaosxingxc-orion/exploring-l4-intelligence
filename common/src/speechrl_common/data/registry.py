@@ -19,9 +19,21 @@ class DatasetSpec:
 
 
 # Seed registry — extend per work. (Examples; not downloaded automatically.)
+# task vocabulary: asr | st | ser | sid | intent | lid (used by prompts.instruction_for + W4 axes).
 REGISTRY: dict[str, DatasetSpec] = {
+    # content / semantics (ASR + ST)
     "librispeech": DatasetSpec("librispeech", hf_id="openslr/librispeech_asr", task="asr"),
     "common_voice": DatasetSpec("common_voice", hf_id="mozilla-foundation/common_voice_17_0", task="asr"),
+    "covost2": DatasetSpec("covost2", hf_id="facebook/covost2", task="st"),
+    "fleurs": DatasetSpec("fleurs", hf_id="google/fleurs", task="lid"),
+    # speaker-ID (VoxCeleb is gated on HF -> ModelScope; local subdir only)
+    "voxceleb": DatasetSpec("voxceleb", hf_id=None, subdir="voxceleb", task="sid"),
+    # emotion / SER
+    "meld": DatasetSpec("meld", hf_id="declare-lab/MELD", task="ser"),
+    "crema_d": DatasetSpec("crema_d", hf_id="MahiA/CREMA-D", subdir="crema-d", task="ser"),
+    # language + intent (SLU)
+    "minds14": DatasetSpec("minds14", hf_id="PolyAI/minds14", task="intent"),
+    "slurp": DatasetSpec("slurp", hf_id=None, subdir="slurp", task="intent"),
 }
 
 

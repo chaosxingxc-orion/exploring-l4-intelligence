@@ -1,7 +1,8 @@
 """Prompt templates for speech tasks, shared across the four works."""
 from __future__ import annotations
 
-# Instruction templates per traditional speech task (W3 multi-task RL uses these).
+# Instruction templates per speech task. W3 multi-task RL uses these; W4 reuses them as the
+# embedding task-conditioning hook (the text paired with the audio).
 TASK_INSTRUCTIONS: dict[str, str] = {
     "asr": "Transcribe the spoken audio into text, verbatim.",
     "st": "Translate the spoken audio into {target_lang} text.",
@@ -9,6 +10,8 @@ TASK_INSTRUCTIONS: dict[str, str] = {
     "sid": "Identify who is speaking in the audio.",
     "gender": "Identify the speaker's gender from the audio.",
     "keyword": "Detect whether the keyword '{keyword}' is spoken in the audio.",
+    "intent": "Identify the speaker's intent from the audio.",
+    "lid": "Identify the spoken language in the audio.",
 }
 
 
