@@ -83,6 +83,8 @@ speechrl-data/
 *.log
 .tmp_*
 hf_probe*
+# Large local AI reference dump — not part of the repo
+CLAUDE-FABLE-5.md
 
 # ── Re-include tracked download scripts ────────────────
 # The broad `data/` rule above also matches scripts/data/, which holds CODE
