@@ -25,6 +25,31 @@ decisive pilot in all four cases is the falsifiable cross-probe inequality `A_t(
 same-audio CREMA-D, with the non-target factors held fixed. _(Source: D.2 survey workflow, 11 agents,
 arXiv-cited; full result archived in the run transcript.)_
 
+## 0.1 First empirical result (E.4 — CREMA-D, instruction-only Operator A)
+
+The first proof loop ran on the frozen `omni-embed-nemotron-3b` (dev 600 / test 300, seed 42, kNN
+probe, 1000-bootstrap CIs; reproducible: `bash scripts/train.sh seed=42`, reproduced from cache by
+`bash scripts/eval.sh seed=42` — identical numbers). It tested **only** the instruction-conditioning
+axis of Operator A on the **final pooled** embedding (not yet the layer/pooling/LEACE-RLACE axes).
+
+Conditioning × factor **test probe accuracy**:
+
+| conditioning ↓ / factor → | emotion (chance 1/6≈0.17) | speaker (chance 1/91≈0.011) |
+|---|---|---|
+| baseline (no instruction) | 0.360 | 0.040 |
+| emotion instruction | 0.367 | 0.037 |
+| speaker instruction | 0.367 | 0.033 |
+
+`diagonal_dominant = False`; emotion Δ(selected−baseline) = **+0.007** (CIs overlap), speaker Δ =
+**−0.003**. **Reading:** emotion is *partially present* (~0.36 ≫ chance, matching the survey's "raw
+frozen probe ~31%") but **instruction conditioning does not steer it**; speaker is **essentially
+suppressed** (≈chance) and conditioning does not recover it. This **empirically confirms the
+suppression prediction** and the D.3 decision: instruction-only Operator A is insufficient for the
+paralinguistic factors — the next wave must exercise the richer Operator-A axes (mid-layer pooling,
+LEACE/RLACE projection) and Operator B, and must test content/language (where A is predicted to win).
+A flat matrix here is the *predicted* result, not a failure — it is the existence proof that the
+verifiable closed loop runs and measures the right thing.
+
 ## 1. Problem & the central difficulty
 
 The flagship backbone `omni-embed-nemotron-3b` emits a **single dense vector** per (audio, text)

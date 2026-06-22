@@ -15,8 +15,13 @@
 structure change) to steer the frozen `omni-embed-nemotron-3b` so task-conditioned embeddings of the
 same audio give different, individually-better downstream performance across content/ASR+ST,
 speaker-ID, emotion/SER, and language+intent. First-proof substrate: CREMA-D (speaker + emotion on the
-same audio). Roadmap: math-feasibility doc + per-factor operator decision → the CREMA-D two-factor
-proof run → per-task fan-out. See [[W4-Training-Free-RL-Feasibility]].
+same audio). **Done:** math-feasibility doc + per-factor operator decision (content→A, language→A,
+speaker→hybrid, emotion→B); the CREMA-D two-factor proof loop runs end-to-end, reproducibly, logged to
+MLflow (`bash scripts/train.sh seed=42`). **First result:** instruction-only Operator A does **not**
+disentangle the paralinguistic factors on the final pooled embedding (emotion ~0.36 but unsteerable;
+speaker ≈chance) — empirically confirming the suppression prediction (see
+[[W4-Training-Free-RL-Feasibility]] §0.1). **Next:** richer Operator-A axes (mid-layer pooling,
+LEACE/RLACE) + Operator B for speaker/emotion; content/language fan-out (where A is predicted to win).
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download
