@@ -4,8 +4,10 @@
 >
 > 仓库标识：**`exploring-l4-intelligence`** — 探索迈向 L4 级（"创新者"）智能的路径。
 
-这是一个**伞仓（umbrella repo）**：用强化学习提升**语音多模态大模型（speech multimodal LLM）**的
-四部曲研究系列，外加四个工作共用的共享库。
+这是一个**伞仓（umbrella repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
+不改权重也不改结构的优化——把语音 / omni 多模态大模型在预训练中习得的知识「激活」出来，提升其在特定
+语音任务上的开箱表现；外加四个工作共用的共享库。旗舰工作（W4）以此**解耦冻结 omni 模型的语音嵌入**。
+完整主旨见 Wiki 的 [[Project-Thesis]] 页。
 
 > 📖 **从这里开始。** 本 README 是人和 AI 协作者的**唯一权威入口**。更深入的文档在 [`docs/`](docs)；
 > 团队共享知识与"记忆"在 **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**
@@ -16,15 +18,15 @@
 每个工作都是**独立的 GitHub 仓库**（独立的历史与 issue），但都通过可编辑安装（editable install）
 依赖同一个 [`common/`](common)（`speechrl-common`）。
 
-| # | 工作（仓库） | 方向 | 状态 |
-|---|---|---|---|
-| W1 | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | 免梯度、奖励引导的推理时 RL | 🟢 **成熟 · 参考范式**（仍在持续扩展） |
-| W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
-| W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |
-| W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | 面向 omni 嵌入的对比/检索目标 RL | 🟡 骨架 |
+| # | 工作（仓库） | 角色 | 方向 | 状态 |
+|---|---|---|---|---|
+| **W4** | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | **旗舰** | 免训练 RL 解耦冻结 omni 模型的嵌入（内容/ASR+ST、说话人、情感/SER、语言+意图） | 🟡 骨架 → 进行中 |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **范式参考** | W4 复用的成熟免训练奖励/评测机制（best-of-N、奖励引导解码、重排序） | 🟢 成熟 · 参考 |
+| W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 支撑 | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
+| W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 支撑 | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |
 
-**W1 是当前最成熟、可作参考范式的工作，仍在持续完善与扩展。** W2–W4 目前是骨架，请以 W1 为模板推进。
-每个工作的最新进度看 Wiki 的 [[Per-Work-Status]] 页面。
+**W4 是旗舰首发工作；W1 是成熟的免训练「范式」参考**，其奖励/评测机制被 W4 复用——推进 W2–W4 时以
+W1 的结构与脚本为模板。每个工作的最新进度看 Wiki 的 [[Per-Work-Status]]；项目主旨见 [[Project-Thesis]]。
 
 ## 仓库结构 · Repo layout
 
@@ -91,11 +93,12 @@ bash scripts/data/inventory.sh      # 审计 COMPLETE / PARTIAL / MISSING
 如果你是 AI 协作者（Claude Code / Codex 等），按这个分层理解仓库：
 
 1. **本 README** —— 权威入口。
-2. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** —— 你的逐工具操作手册（命令、坑、纪律）。
-3. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**（源在 [`wiki/`](wiki)）—— 团队共享、可演进的知识与记忆。
-4. **mem0 MCP** —— **本地、个人**记忆，不与团队共享。
+2. **[[Project-Thesis]]**（Wiki）—— 项目主旨、三个核心术语与旗舰主张；读完本页紧接着读。
+3. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** —— 你的逐工具操作手册（命令、坑、纪律）。
+4. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**（源在 [`wiki/`](wiki)）—— 团队共享、可演进的知识与记忆。
+5. **mem0 MCP** —— **本地、个人**记忆，不与团队共享。
 
-规矩：**开工前先读** Wiki 的 [[Home]] 和 [[Per-Work-Status]]；产生重要决策/经验时，**写回** Wiki 的
+规矩：**开工前先读** Wiki 的 [[Project-Thesis]]、[[Home]] 和 [[Per-Work-Status]]；产生重要决策/经验时，**写回** Wiki 的
 [[Decision-Log]]，再 `bash scripts/wiki-sync.sh` 发布。这样人和各自的 AI 才能拿到一致的理解。完整协议
 见 [[AI-Collaboration]]。
 

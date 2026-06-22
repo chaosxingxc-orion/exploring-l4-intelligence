@@ -1,5 +1,12 @@
 # Architecture
 
+## Thesis
+
+This series uses **training-free RL** — reward-guided, inference-time optimization that changes no
+weights and no structure — to activate the pretrained knowledge of speech / omni LLMs. The flagship
+study **W4** disentangles a frozen omni model's speech embeddings across content/ASR+ST, speaker-ID,
+emotion/SER, and language+intent. Full statement: the Wiki's Project-Thesis page (`wiki/Project-Thesis.md`).
+
 ## Repo model: umbrella + shared library + four independent repos
 
 ```
@@ -13,12 +20,12 @@ exploring-l4-intelligence (umbrella, this repo)
 The four works are **separate GitHub repos** (independent history/issues), but develop against
 one shared `speechrl-common` package via `[tool.uv.sources]` editable path `../../common`.
 
-| # | Repo | Focus |
-|---|------|-------|
-| W1 | `speech-mllm-training-free-rl` | gradient-free, reward-guided inference-time RL |
-| W2 | `speech-mllm-efficient-rl-alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
-| W4 | `speech-mllm-omni-embedding-rl` | RL over contrastive/retrieval objectives for omni embeddings |
+| # | Repo | Role | Focus |
+|---|------|------|-------|
+| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) |
+| **W1** | `speech-mllm-training-free-rl` | **Pattern reference** | mature training-free reward/eval machinery W4 reuses |
+| W2 | `speech-mllm-efficient-rl-alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment |
+| W3 | `speech-mllm-multitask-rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
 
 ## Shared library (`speechrl_common`)
 

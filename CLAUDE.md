@@ -4,20 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Umbrella repo for a **four-part RL-for-speech-multimodal-LLM** research series. It holds a shared
-library (`common/`), docs, and env scripts; the four works are **separate GitHub repos** under
-`projects/` (each its own git repo, gitignored by this umbrella).
+Umbrella repo for a four-part research series on **training-free RL to activate the pretrained
+knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time optimization that changes
+**no weights and no structure** (full statement: `wiki/Project-Thesis.md`). It holds a shared library
+(`common/`), docs, and env scripts; the four works are **separate GitHub repos** under `projects/`
+(each its own git repo, gitignored by this umbrella).
 
-| # | Work repo (under `projects/`) | Package | Focus | Status |
-|---|---|---|---|---|
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | gradient-free, reward-guided inference-time RL | 🟢 mature — **reference pattern** |
-| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 skeleton |
-| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 skeleton |
-| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | RL over contrastive/retrieval objectives for omni embeddings | 🟡 skeleton |
+| # | Work repo (under `projects/`) | Package | Role | Focus | Status |
+|---|---|---|---|---|---|
+| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) | 🟡 skeleton → active |
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | **Pattern reference** | mature training-free reward/eval machinery W4 reuses (best-of-N, reward-guided decoding, reranking) | 🟢 mature |
+| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 skeleton |
+| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 skeleton |
 
-**W1 is the most mature work and the template** for the others (still skeletons): mirror its structure
-and scripts when growing W2–W4. Each work's entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main`
-loop whose RL body is currently a stub (`log.info("TODO: implement the RL loop ...")`).
+**W4 is the flagship first study; W1 is the mature training-free _pattern_ reference** whose
+reward/eval machinery W4 reuses — mirror W1's structure and scripts when growing W2–W4. Each work's
+entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main` loop whose RL body is currently a stub
+(`log.info("TODO: implement the RL loop ...")`).
 
 ## Environment (important)
 
@@ -116,12 +119,15 @@ on the official Lean skills only, to keep the footprint light.
 ## Shared knowledge & memory (README + Wiki)
 
 - **Canonical onboarding is the root `README.md` / `README_CN.md`** — read it first.
+- **Project north star is `wiki/Project-Thesis.md`** — training-free RL to activate pretrained
+  knowledge; the flagship W4 disentangles a frozen omni model's speech embeddings. Read it right after
+  the README.
 - **Shared, durable team memory is the GitHub Wiki**, sourced from `wiki/` in this repo and published
   with `bash scripts/wiki-sync.sh`. Edit `wiki/*.md` (never only the web Wiki — it's a mirror that the
   sync script overwrites).
 - **mem0 MCP is local/personal memory only** — not shared with the team. Promote anything the team
   needs into the Wiki.
-- **Before starting:** read `wiki/Home.md` and `wiki/Per-Work-Status.md`. **After a notable decision
+- **Before starting:** read `wiki/Project-Thesis.md`, `wiki/Home.md` and `wiki/Per-Work-Status.md`. **After a notable decision
   or learning:** append a dated entry to `wiki/Decision-Log.md` (and update `wiki/Per-Work-Status.md`
   if a work's maturity/plan changed), then run `bash scripts/wiki-sync.sh`. Full protocol:
   `wiki/AI-Collaboration.md`.

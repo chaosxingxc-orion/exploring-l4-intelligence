@@ -4,8 +4,11 @@
 >
 > Repo slug: **`exploring-l4-intelligence`** — charting a path toward L4 ("Innovator") intelligence.
 
-The **umbrella repo** for a four-part research series on **reinforcement learning for speech
-multimodal LLMs**, plus a shared library all four works build on.
+The **umbrella repo** for a four-part research series on **training-free RL to activate the
+pretrained knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time optimization
+that changes **no weights and no structure** — plus a shared library all four works build on. The
+flagship study (W4) uses this to **disentangle a frozen omni model's speech embeddings**. Full
+statement of purpose: the Wiki's [[Project-Thesis]] page.
 
 > 📖 **Start here.** This README is the single canonical entry point for humans **and** their AI
 > assistants. Deeper docs live in [`docs/`](docs); shared team knowledge & "memory" live in the
@@ -17,16 +20,16 @@ multimodal LLMs**, plus a shared library all four works build on.
 Each work is its **own GitHub repo** (independent history/issues) but develops against one shared
 [`common/`](common) (`speechrl-common`) via an editable install.
 
-| # | Work (repo) | Focus | Status |
-|---|---|---|---|
-| W1 | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | gradient-free, reward-guided inference-time RL | 🟢 **Mature · reference** (still expanding) |
-| W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 Skeleton |
-| W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 Skeleton |
-| W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | RL over contrastive/retrieval objectives for omni embeddings | 🟡 Skeleton |
+| # | Work (repo) | Role | Focus | Status |
+|---|---|---|---|---|
+| **W4** | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) | 🟡 Skeleton → active |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Pattern reference** | the mature training-free reward/eval machinery W4 reuses (best-of-N, reward-guided decoding, reranking) | 🟢 Mature · reference |
+| W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 Skeleton |
+| W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 Skeleton |
 
-**W1 is the most mature work and serves as the reference pattern — and it is still being expanded.**
-W2–W4 are skeletons, to be grown using W1 as the template. Live per-work progress is on the Wiki's
-[[Per-Work-Status]] page.
+**W4 is the flagship first study; W1 is the mature training-free _pattern_ reference** whose
+reward/eval machinery W4 reuses — mirror W1's structure and scripts when growing W2–W4. Live per-work
+progress is on the Wiki's [[Per-Work-Status]] page; the project's purpose is on [[Project-Thesis]].
 
 ## Repo layout
 
@@ -95,9 +98,10 @@ Wiki's [[Working-Mode]].
 If you are an AI assistant (Claude Code / Codex, etc.), read the repo through this layering:
 
 1. **this README** — canonical onboarding.
-2. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** — your per-tool operating guide (commands, gotchas, discipline).
-3. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)** (source in [`wiki/`](wiki)) — shared, evolving team knowledge & memory.
-4. **mem0 MCP** — local, personal memory — *not* shared with the team.
+2. **[[Project-Thesis]]** (Wiki) — the project's purpose, the three core terms, and the flagship claim; read right after this.
+3. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** — your per-tool operating guide (commands, gotchas, discipline).
+4. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)** (source in [`wiki/`](wiki)) — shared, evolving team knowledge & memory.
+5. **mem0 MCP** — local, personal memory — *not* shared with the team.
 
 Rule of thumb: **before starting**, read the Wiki's [[Home]] and [[Per-Work-Status]]; when you make a
 notable decision or learn something durable, **write it back** to the Wiki's [[Decision-Log]] and

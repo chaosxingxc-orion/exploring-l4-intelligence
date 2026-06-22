@@ -1,6 +1,7 @@
 **exploring-l4-intelligence**
 
 - [[Home]]
+- [[Project-Thesis]]
 - [[Architecture]]
 - [[Environment-and-Setup]]
 - [[Working-Mode]]

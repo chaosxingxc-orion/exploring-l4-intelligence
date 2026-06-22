@@ -6,6 +6,8 @@ project. The goal: an AI picking up the repo cold should reach the same mental m
 **The knowledge layering.**
 
 1. **Root README** (`README.md` / `README_CN.md`) — canonical onboarding; read first.
+1.5. **[[Project-Thesis]]** — the canonical statement of the project's purpose, the three core terms,
+   and the flagship claim. The "why" behind every work; read right after the README.
 2. **`CLAUDE.md` / `AGENTS.md`** — per-tool operating guides (commands, gotchas, discipline). Kept
    byte-for-byte equivalent so Claude Code and Codex behave the same.
 3. **This Wiki** (source in `wiki/`) — **shared, durable, team-visible memory.** Decisions, status,
@@ -15,8 +17,8 @@ project. The goal: an AI picking up the repo cold should reach the same mental m
 
 **Protocol for AI assistants.**
 
-- **Before starting:** read [[Home]] and [[Per-Work-Status]]; skim [[Working-Mode]] and the relevant
-  work's README.
+- **Before starting:** read [[Project-Thesis]], [[Home]] and [[Per-Work-Status]]; skim [[Working-Mode]]
+  and the relevant work's README.
 - **While working:** follow [[Working-Mode]] — commit changes to the *correct* repo (umbrella vs a
   `projects/<work>` repo), preserve lazy-import discipline, keep data out of git.
 - **After a decision or learning:** append a dated entry to [[Decision-Log]] (and update
@@ -41,7 +43,7 @@ drifting apart.
 用 `scripts/wiki-sync.sh` 发布。（4）mem0 MCP——**本地、个人**的临时记忆，不能替代 Wiki；团队需要的东西
 必须升级进 Wiki。
 
-**AI 协作协议：** 开工前读 [[Home]] 和 [[Per-Work-Status]]，浏览 [[Working-Mode]] 与对应工作的 README；
+**AI 协作协议：** 开工前读 [[Project-Thesis]]、[[Home]] 和 [[Per-Work-Status]]，浏览 [[Working-Mode]] 与对应工作的 README；
 工作中遵循 [[Working-Mode]]（把改动提交到**正确**的仓库——伞仓还是 `projects/<work>`，保持惰性导入纪律，
 数据不进 git）；产生决策/经验后，在 [[Decision-Log]] 追加带日期的条目（成熟度/计划变了就更新
 [[Per-Work-Status]]），再 `bash scripts/wiki-sync.sh` 发布；**真源**是仓库里的 `wiki/*.md`，不要只改网页版
