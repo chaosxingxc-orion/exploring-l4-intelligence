@@ -21,11 +21,13 @@ MLflow (`bash scripts/train.sh seed=42`). **First result (3-factor CREMA-D):** t
 content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance) — the thesis ("different downstream
 tasks → different performance") demonstrated; instruction conditioning does not steer the embedding
 (columns flat), confirming the suppression prediction (see [[W4-Training-Free-RL-Feasibility]] §0.1).
-**F.1 (richer Operator-A axes) done:** layer sweep (37 layers) + audio-token pooling show speaker
-stays ~chance everywhere and emotion plateaus ~0.40 — **no weight-free Operator-A axis recovers
-speaker**, so speaker/emotion are **Operator-B-mandatory**. **Next:** implement Operator B (generative
-Qwen2.5-Omni best-of-N/MBR readout) for speaker/emotion; content/language fan-out across
-LibriSpeech/CoVoST2/FLEURS/MINDS14.
+**F.1 (richer Operator-A axes):** layer sweep (37 layers) + audio-token pooling show speaker ~chance
+and emotion ~0.40 *under single-instruction conditioning* — but this is a weak intervention;
+**conclusion is provisional**, the model's strongest lever (ICL / activation heads) is **untested**.
+Archived report: [[2026-06-22-omni-embed-speech-disentanglement-1.1.1]]. **Next (exp 1.2):** activation
+heads / ICL — native text-query zero-shot retrieval + few-shot demonstrations with target-token pooling
+— for speaker/emotion, before any Operator-B claim; then Operator B for what stays flat; then
+content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download

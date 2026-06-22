@@ -6,21 +6,25 @@
 
 ---
 
-### 2026-06-22 · F.1 empirical finding — speaker/emotion are Operator-B-mandatory on this model
-**Decision.** From the CREMA-D layer/pooling sweep (weight-free Operator A): probe accuracy for
-**speaker stays at chance (~0.03) across all 37 Thinker layers AND under audio-token-only pooling**;
-**emotion plateaus at ~0.40** (best at the input-embedding layer). No weight-free Operator-A axis
-(instruction conditioning, layer selection, audio-token pooling) recovers them, and LEACE/RLACE are
-removal-only (cannot add absent information). Therefore **speaker and emotion are reclassified from
-"hybrid/B-preferred" to Operator-B-mandatory** for this frozen `omni-embed-nemotron-3b`; content
-remains a clean Operator-A win (~1.0). See [[W4-Training-Free-RL-Feasibility]] §0.1.
-**Why.** The backbone is a Whisper-ASR encoder + contrastive retrieval training with masked-mean
-pooling — an objective that is explicitly content-matching and nuisance-invariant, so paralinguistic
-identity/affect are not just under-weighted but effectively absent from the representation at every
-depth.
-**Consequences.** The next W4 wave implements Operator B (generative Qwen2.5-Omni best-of-N / MBR
-readout, frozen weights) for speaker/emotion, and fans Operator A out to content/language on
-LibriSpeech/CoVoST2/FLEURS/MINDS14 (where A is predicted to win). New W4 code: `layer_probe.py`
+### 2026-06-22 · F.1 finding (PROVISIONAL) — single-instruction + layer/pooling don't recover speaker; ICL untested
+**Decision.** From the CREMA-D layer/pooling sweep (weight-free Operator A, *single-instruction*
+conditioning): **speaker stays at chance (~0.03) across all 37 Thinker layers AND audio-token pooling**;
+**emotion plateaus at ~0.40**. **Important correction (per review):** this is a *weak* intervention —
+it does not exploit the model's strongest weight-free lever, **in-context learning / activation heads**
+(native text-query cross-modal retrieval, few-shot demonstrations with target-token pooling, rich
+activation prompts). So the negative falsifies only "single-instruction + architectural axes," **not**
+"training-free activation." The earlier "speaker/emotion are Operator-B-mandatory" claim is **withdrawn
+and downgraded to provisional (A(ICL)→B)**, pending experiment 1.2. content remains a clean Operator-A
+win (~1.0). See report `2026-06-22-omni-embed-speech-disentanglement-1.1.1` and
+[[W4-Training-Free-RL-Feasibility]] §0.1.
+**Why.** A single short instruction has little leverage over ~50 content-oriented audio tokens under
+mean pooling, and the model was contrastively trained with only `query:`/`passage:` prompts (weak
+instruction-following) — but its Qwen2.5-Omni backbone has strong ICL, which reshapes the actual
+forward pass and was not tested. Whether ICL survived the retrieval LoRA tuning is an empirical
+question, not an assumption.
+**Consequences.** Next: **experiment 1.2** — activation heads / ICL (text-query zero-shot + few-shot
+with target-token pooling) for speaker/emotion BEFORE any Operator-B claim; then Operator B only for
+factors that stay flat under ICL; then content/language fan-out. New W4 code so far: `layer_probe.py`
 (mid-layer / audio-token pooling) + `scripts/layer_sweep.py`, `scripts/audio_pool_probe.py`.
 
 ### 2026-06-22 · W4 per-factor operator decision (from the algorithm-survey workflow)

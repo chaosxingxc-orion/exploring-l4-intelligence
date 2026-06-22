@@ -15,8 +15,8 @@ by its contrastive/mean-pooling objective.**
 |---|---|---|
 | **content** (ASR/ST) | **A** | the factor the model was built to expose; verifiable reward (WER/hit@k) ⇒ A is monotone best-of-K, no Condorcet pathology; instruction DoF is large (best-vs-worst prompt deltas up to ~55pp) |
 | **language** (LID/intent) | **A** | near-semantic, frozen-LLM probes reach ~94–97% language-ID; verifiable labels ⇒ same monotone A selection |
-| **speaker** (SID) | **B** (empirical; D.3 said hybrid) | F.1 showed speaker is ~chance across all 37 layers AND audio-token pooling — no weight-free Operator-A axis recovers it, so B is mandatory (closed-set retrieval gives B a verifiable reward; avoid consensus pseudo-reward) |
-| **emotion** (SER) | **B** | most collapsed by retrieval training — Operator-A ceiling ~0.40 (F.1, best at input layer); the generative Qwen2.5-Omni Thinker readout is needed to recover what the pooled vector lost |
+| **speaker** (SID) | **A(ICL) → B** (provisional) | F.1 showed speaker ~chance across all 37 layers + audio-token pooling, but only under *single-instruction* conditioning — the ICL/activation-head form of Operator A is untested (exp 1.2). Try ICL first; fall to B only if it also stays flat |
+| **emotion** (SER) | **A(ICL) → B** (provisional) | Operator-A ceiling ~0.40 under single-instruction (F.1); the model's native text-query retrieval + few-shot ICL are the untested levers (exp 1.2) before concluding B is needed |
 
 Every B/consensus path must gate the **per-class plurality separatrix** (`p_correct > every wrong-class
 mass`, not 2-way `p>1/2`) on a held-out CREMA-D calibration set, because a near-chance paralinguistic
@@ -64,13 +64,17 @@ probed every factor per layer (weight-free). Best per-factor probe accuracy acro
 | audio-tokens, best layer | 0.990 (L16) | 0.403 (L0) | 0.043 (L32/36) |
 
 **Speaker stays at chance (~0.02–0.04) across ALL 37 layers and under audio-token-only pooling**;
-emotion plateaus at ~0.40 (best at the input-embedding layer 0). So **no weight-free Operator-A axis —
-instruction conditioning, layer selection, or audio-token pooling — recovers speaker**, and emotion's
-A-ceiling is ~0.40. LEACE/RLACE are removal-only operators (they erase a subspace, they cannot add
-absent information), so they cannot recover a factor that is ~chance at every layer. **Empirical
-conclusion:** for this frozen, retrieval-contrastive, Whisper-ASR-backbone embedder, content is fully
-exposed to Operator A (~1.0) while **speaker (and largely emotion) are genuinely suppressed and require
-Operator B** (generative readout). This refines D.3: speaker moves from "hybrid" to **B-mandatory**.
+emotion plateaus at ~0.40 (best at the input-embedding layer 0). So *single-instruction conditioning +
+layer/pooling* do not recover speaker, and emotion's ceiling under them is ~0.40.
+
+**Scope caveat (this conclusion is provisional).** These axes are a *weak* intervention — they do not
+change the input in the way this model class is most responsive to. The strongest weight-free lever is
+**in-context learning / activation heads** (native text-query cross-modal retrieval; few-shot
+demonstrations with target-token pooling; rich activation prompts), which is **untested** here.
+Therefore the negative result falsifies "single-instruction + architectural axes," **not** "training-free
+activation," and the per-factor verdict for speaker/emotion is **A(ICL)→B provisional**, pending
+experiment 1.2 (see the archived report `2026-06-22-omni-embed-speech-disentanglement-1.1.1`). LEACE/
+RLACE remain removal-only (cannot add absent info), so they are not a recovery path regardless.
 
 ## 1. Problem & the central difficulty
 
