@@ -57,3 +57,39 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+.codex/
+
+# ── Data root: never commit models/datasets (≈281 GB; fetch via scripts/data/) ─
+# This is the single most important guard: speechrl-data/ holds all model weights,
+# datasets, reference repos and logs. It must never reach GitHub.
+speechrl-data/
+
+# ── Extra weight / archive / array formats (defense-in-depth, anywhere in tree) ─
+*.gguf
+*.npy
+*.npz
+*.arrow
+*.parquet
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# ── Scratch, probes, root-level logs ───────────────────
+*.log
+.tmp_*
+hf_probe*
+
+# ── Re-include tracked download scripts ────────────────
+# The broad `data/` rule above also matches scripts/data/, which holds CODE
+# (download scripts), not datasets. Re-include that one path.
+!scripts/data/
+!scripts/data/**
+
+# ── Re-include the speechrl_common.data source module ──
+# The broad `data/` rule also matched this CODE dir, silently dropping the
+# dataset-registry module from git. Keep the source; still ignore its pycache.
+!common/src/speechrl_common/data/
+!common/src/speechrl_common/data/**
+common/src/speechrl_common/data/__pycache__/

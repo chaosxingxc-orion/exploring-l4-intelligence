@@ -3,7 +3,7 @@
 ## Repo model: umbrella + shared library + four independent repos
 
 ```
-chaos-research-works (umbrella, this repo)
+exploring-l4-intelligence (umbrella, this repo)
 ├─ common/        speechrl-common — shared library, editable-installed by each work
 ├─ projects/      the four work repos (each its OWN git repo; gitignored here)
 ├─ docs/          setup + architecture

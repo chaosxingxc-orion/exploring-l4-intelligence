@@ -1,4 +1,6 @@
-# chaos research works
+# L4级智能探索
+
+> Repo slug: **`exploring-l4-intelligence`** · 探索迈向 L4 级（"创新者"）智能的路径。
 
 Umbrella for a four-part research series on **reinforcement learning for speech multimodal LLMs**,
 plus a shared library the four works build on.
@@ -19,8 +21,8 @@ Each is its own repo but shares [`common/`](common) (`speechrl-common`) via an e
 ```
 common/      shared library (speechrl_common): audio, models, rl rewards, data, tracking, utils
 projects/    the four work repos (each its own git repo; not tracked by this umbrella)
-docs/        setup.md (WSL2 + env), architecture.md
-scripts/     wsl-setup.sh, env-setup.sh, mlflow-ui.sh
+docs/        setup.md (WSL2 + env), architecture.md, data.md (downloads)
+scripts/     wsl-setup.sh, env-setup.sh, mlflow-ui.sh, data/ (model+dataset downloads)
 ```
 
 ## Quick start
@@ -35,3 +37,14 @@ source ~/.venvs/speechrl/bin/activate
 ```
 
 Tracking: local MLflow (`bash scripts/mlflow-ui.sh`). Configs: Hydra. RL: verl.
+
+## Data & models
+
+Weights and datasets (~281 GB) are **not** in git — fetch your own copy locally:
+
+```bash
+bash scripts/data/probe-access.sh   # check reachability
+bash scripts/data/fetch-data.sh     # download models + datasets
+```
+
+See [docs/data.md](docs/data.md) for the full asset list, mirrors, and per-asset targets.

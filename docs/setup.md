@@ -14,10 +14,12 @@ wsl --set-version Ubuntu 2         # if it shows 1
 # or: wsl --install -d Ubuntu-24.04
 ```
 
-Then inside Ubuntu:
+Then inside Ubuntu — set `REPO` to where the umbrella repo lives in WSL (later steps reuse `$REPO`):
 
 ```bash
-bash "/mnt/d/chao_workspace/chaos research works/scripts/wsl-setup.sh"
+# New folder name after the rename; until you rename the local folder, use the old name here.
+export REPO="/mnt/d/chao_workspace/exploring-l4-intelligence"
+bash "$REPO/scripts/wsl-setup.sh"
 nvidia-smi        # must list the RTX 5090
 nvcc --version    # CUDA 12.8+
 ```
@@ -25,7 +27,7 @@ nvcc --version    # CUDA 12.8+
 ## 2. Python env + torch + RL stack (Phases 2 & 4)
 
 ```bash
-bash "/mnt/d/chao_workspace/chaos research works/scripts/env-setup.sh"
+bash "$REPO/scripts/env-setup.sh"
 source ~/.venvs/speechrl/bin/activate
 python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))"
 ```
@@ -40,7 +42,7 @@ python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))
 ## 3. Working on a single work
 
 ```bash
-cd "/mnt/d/chao_workspace/chaos research works/projects/speech-mllm-training-free-rl"
+cd "$REPO/projects/speech-mllm-training-free-rl"
 uv pip install -e ../../common -e .
 bash scripts/train.sh                       # Hydra config in configs/
 bash scripts/train.sh rl.learning_rate=2e-6 # override any key
@@ -49,7 +51,7 @@ bash scripts/train.sh rl.learning_rate=2e-6 # override any key
 ## 4. Experiment tracking (local MLflow)
 
 ```bash
-bash "/mnt/d/chao_workspace/chaos research works/scripts/mlflow-ui.sh"   # http://127.0.0.1:5000
+bash "$REPO/scripts/mlflow-ui.sh"   # http://127.0.0.1:5000
 ```
 
 ## 5. Research skills (run in the Windows Claude Code session)
