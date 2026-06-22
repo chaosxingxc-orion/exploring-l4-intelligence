@@ -69,8 +69,17 @@ Installed via the plugin marketplace (namespaced, no collisions). Curated set:
 /plugin install inference-serving@ai-research-skills
 /plugin install optimization@ai-research-skills
 /plugin install mlops@ai-research-skills
+
+# Lean 4 formal proof — official leanprover skills (invoked as lean:* ; host-agnostic)
+/plugin marketplace add leanprover/skills
+/plugin install lean@leanprover
 ```
 
 K-Dense `scientific-agent-skills` is intentionally skipped (bio/chem-heavy, irrelevant, and the
 only hard-collision source). Optional later add-ons: `distributed-training`, `model-architecture`,
 `evaluation`, `emerging-techniques`.
+
+For **Lean formal proof** we align on the official `lean@leanprover` set only (`lean:lean-proof`,
+`lean:lean-setup`, `lean:mathlib-build`, `lean:mathlib-pr`/`lean:mathlib-review`, plus
+bisect/mwe/pr/nightly helpers); the community `cameronfreer/lean4-skills` pack and the `lean-lsp-mcp`
+server are intentionally deferred to keep the footprint light.

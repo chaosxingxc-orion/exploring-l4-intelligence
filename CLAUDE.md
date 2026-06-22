@@ -8,12 +8,16 @@ Umbrella repo for a **four-part RL-for-speech-multimodal-LLM** research series. 
 library (`common/`), docs, and env scripts; the four works are **separate GitHub repos** under
 `projects/` (each its own git repo, gitignored by this umbrella).
 
-| # | Work repo (under `projects/`) | Package | Focus |
-|---|---|---|---|
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | gradient-free, reward-guided inference-time RL |
-| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
-| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | RL over contrastive/retrieval objectives for omni embeddings |
+| # | Work repo (under `projects/`) | Package | Focus | Status |
+|---|---|---|---|---|
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | gradient-free, reward-guided inference-time RL | 🟢 mature — **reference pattern** |
+| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 skeleton |
+| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 skeleton |
+| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | RL over contrastive/retrieval objectives for omni embeddings | 🟡 skeleton |
+
+**W1 is the most mature work and the template** for the others (still skeletons): mirror its structure
+and scripts when growing W2–W4. Each work's entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main`
+loop whose RL body is currently a stub (`log.info("TODO: implement the RL loop ...")`).
 
 ## Environment (important)
 
@@ -52,6 +56,17 @@ bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
 
 Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
 
+Data & model assets (~281 GB, **never in git**) live in `speechrl-data/` (WSL ext4, gitignored).
+Fetch your own copy with the data scripts:
+
+```bash
+bash scripts/data/probe-access.sh   # read-only: check HF / ModelScope reachability
+bash scripts/data/fetch-data.sh     # download models + datasets (skips already-complete assets)
+bash scripts/data/inventory.sh      # audit COMPLETE / PARTIAL / MISSING
+```
+
+Full asset list, targets, and mirrors (hf-mirror + ModelScope): `docs/data.md`.
+
 ## Architecture notes (the big picture)
 
 - **Shared library `speechrl_common`** (`common/src/speechrl_common/`): `audio` (load/resample,
@@ -71,6 +86,13 @@ Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization
 
 ## Gotchas
 
+- **Commit each change where it belongs (most important rule).** This umbrella owns `common/`,
+  `docs/`, `scripts/`, `wiki/`, and root `*.md`. A work's code/configs/`README.md` belong to **that
+  work's own repo** under `projects/<work>/`. `projects/*/` is gitignored here, so if umbrella
+  `git status` ever shows files under `projects/`, they're staged in the wrong repo. Full routing
+  table: `CONTRIBUTING.md`.
+- **`CLAUDE.md` and `AGENTS.md` are sibling guides** (Claude Code / Codex) kept near-identical —
+  when you change operating guidance in one, mirror it in the other.
 - **`gh` on PATH:** the real GitHub CLI is `C:\Program Files\GitHub CLI\gh.exe` (System PATH was
   reordered so `gh` resolves to it, ahead of a shadowing Python script at `C:\Python314\Scripts\gh`).
 - **Line endings:** `.gitattributes` forces `eol=lf` (esp. `*.sh`) so scripts run in WSL — keep it.
@@ -81,8 +103,15 @@ Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization
 
 A curated skill set is installed via the Windows Claude Code plugin marketplace (see
 `docs/setup.md`): `academic-research-skills` (paper pipeline, `/ars-*`) + six `ai-research-skills`
-groups (post-training, multimodal, fine-tuning, inference-serving, optimization, mlops). K-Dense
-`scientific-agent-skills` is intentionally not installed.
+groups (post-training, multimodal, fine-tuning, inference-serving, optimization, mlops), plus the
+official **`lean@leanprover`** pack (`leanprover/skills`, Apache-2.0) for Lean 4 formal proof —
+skills invoked as `lean:*`: `lean:lean-proof` (step-by-step proving), `lean:lean-setup`
+(elan/toolchain), `lean:mathlib-build`, `lean:mathlib-pr`, `lean:mathlib-review`, plus
+`lean:lean-bisect`/`lean:lean-mwe`/`lean:lean-pr`/`lean:nightly-testing`.
+
+Deliberately scoped — K-Dense `scientific-agent-skills`, the community `cameronfreer/lean4-skills`
+pack, and the `lean-lsp-mcp` server are intentionally **not** installed: for formal proof we align
+on the official Lean skills only, to keep the footprint light.
 
 ## Shared knowledge & memory (README + Wiki)
 
