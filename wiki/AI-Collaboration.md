@@ -7,7 +7,8 @@ project. The goal: an AI picking up the repo cold should reach the same mental m
 
 1. **Root README** (`README.md` / `README_CN.md`) — canonical onboarding; read first.
 1.5. **[[Project-Thesis]]** — the canonical statement of the project's purpose, the three core terms,
-   and the flagship claim. The "why" behind every work; read right after the README.
+   and the flagship claim. The "why" behind every work; read right after the README. For the flagship,
+   [[W4-Training-Free-RL-Feasibility]] is the *math* and [[W4-Research-Plan]] is the *plan*.
 2. **`CLAUDE.md` / `AGENTS.md`** — per-tool operating guides (commands, gotchas, discipline). Kept
    byte-for-byte equivalent so Claude Code and Codex behave the same.
 3. **This Wiki** (source in `wiki/`) — **shared, durable, team-visible memory.** Decisions, status,

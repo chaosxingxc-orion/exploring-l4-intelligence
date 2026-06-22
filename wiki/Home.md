@@ -10,6 +10,8 @@ is synced to this Wiki via `scripts/wiki-sync.sh`.
 ## Pages
 
 - [[Project-Thesis]] — the research thesis & flagship claim (**read first**)
+- [[W4-Training-Free-RL-Feasibility]] — flagship math: formalism, operators, algorithm survey
+- [[W4-Research-Plan]] — flagship research plan & technical scheme (waves, gates, routing)
 - [[Architecture]] — repo model & shared library
 - [[Environment-and-Setup]] — WSL2 / CUDA / py3.12 venv / verl
 - [[Working-Mode]] — cross-repo conventions
@@ -33,7 +35,9 @@ Before starting, read this page and [[Per-Work-Status]]; record notable decision
 
 > 仓库的**权威入口是根目录 README**；本 Wiki 是它的延伸知识库。
 
-**页面**：[[Project-Thesis]] 研究主旨与旗舰主张（**先读**）· [[Architecture]] 架构与共享库 · [[Environment-and-Setup]] 环境搭建 · [[Working-Mode]]
+**页面**：[[Project-Thesis]] 研究主旨与旗舰主张（**先读**）· [[W4-Training-Free-RL-Feasibility]]
+旗舰数学（形式化/算子/算法综述）· [[W4-Research-Plan]] 旗舰研究计划与技术方案（波次/关卡/路由）·
+[[Architecture]] 架构与共享库 · [[Environment-and-Setup]] 环境搭建 · [[Working-Mode]]
 协作约定 · [[Per-Work-Status]] 各工作进度（最常更新）· [[Data-and-Assets]] 模型与数据 ·
 [[AI-Collaboration]] AI 如何把 Wiki 当共享记忆 · [[Onboarding]] 从零跑通 · [[Decision-Log]]
 决策与经验（追加式记忆）。
