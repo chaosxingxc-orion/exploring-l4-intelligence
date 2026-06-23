@@ -35,6 +35,10 @@ def mlflow_run(
     """Context manager that opens an MLflow run against the local store."""
     import mlflow  # lazy
 
+    # mlflow >= 3 puts the file store in "maintenance mode" and raises unless this opt-out is set.
+    # The local file store is this project's intentional, server-less tracking design (see module
+    # docstring and scripts/mlflow-ui.sh), so opt back in rather than require a DB backend.
+    os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
     mlflow.set_tracking_uri(tracking_uri())
     mlflow.set_experiment(experiment)
     with mlflow.start_run(run_name=run_name, tags=tags) as run:

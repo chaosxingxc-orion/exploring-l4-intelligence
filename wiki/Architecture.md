@@ -2,7 +2,8 @@
 
 An **umbrella + shared library + four independent repos** model. Full version in the repo's
 [`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md);
-this page is the quick view.
+this page is the quick view. The project's purpose is [[Project-Thesis]] — training-free RL to
+activate pretrained knowledge; **W4** (omni-embedding speech disentanglement) is the flagship.
 
 ## Repo model
 
@@ -18,12 +19,12 @@ exploring-l4-intelligence (umbrella, this repo)
 The four works are **separate GitHub repos** (independent history/issues) but develop against one
 shared `speechrl-common` via the `[tool.uv.sources]` editable path `../../common`.
 
-| # | Repo | Focus |
-|---|------|-------|
-| W1 | `speech-mllm-training-free-rl` | gradient-free, reward-guided inference-time RL |
-| W2 | `speech-mllm-efficient-rl-alignment` | efficient GRPO/DPO (LoRA) for speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
-| W4 | `speech-mllm-omni-embedding-rl` | RL over contrastive/retrieval objectives for omni embeddings |
+| # | Repo | Role | Focus |
+|---|------|------|-------|
+| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) |
+| **W1** | `speech-mllm-training-free-rl` | **Pattern reference** | mature training-free reward/eval machinery W4 reuses |
+| W2 | `speech-mllm-efficient-rl-alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment |
+| W3 | `speech-mllm-multitask-rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
 
 ## Shared library (`speechrl_common`)
 
