@@ -6,6 +6,28 @@
 
 ---
 
+### 2026-06-23 · Pivot toward semantic tasks (omni-embed is semantic-specialized) + public dataset catalog
+**Decision.** The flagship omni-**embedding** (`omni-embed-nemotron-3b`, contrastive InfoNCE bi-encoder →
+one pooled 2048-d vector) is **semantically specialized** (content ≈1.00, language/intent strong, emotion
+≈0.40, speaker ≈0.04), so we lean onto the semantic axis it is *measured*-strong on: **SLU / Spoken-QA /
+Speech-Translation / speech-agentic**, and curate a verified public dataset set for it (new
+[[Speech-Semantic-Task-Datasets]]). Adversarial caveats kept on the record: "only semantic" overstates
+(partial emotion retained); the verdict is scoped to the embedding/retrieval class, **not** generative
+omni; this is *complementary* to the disentanglement thesis (content/language were always Operator-A
+native), not a reversal. OPEN: full pivot vs. a second track (affects breadth-vs-Spoken-QA-depth in the
+starter set).
+**Why.** [[Paralinguistic-Suppression-Survey]] established that fine speaker-ID is destroyed and emotion
+only partially recoverable in the pooled vector; the high-fidelity, native axis is semantic. Playing to
+that measured strength is the highest-confidence near-term use of the frozen embedding.
+**Consequences.** New [[Speech-Semantic-Task-Datasets]] (16 core datasets across 4 families;
+adversarially link-checked — **0 hallucinated, 0 gated**; license/source flags recorded). New umbrella
+scripts `scripts/data/fetch-semantic-modelscope.sh` + `fetch-semantic-manual.sh` (`--list`/`--dry-run`,
+user runs them). **ModelScope reality (web-verified):** only VoiceBench (`lmms-lab/voicebench`) + FLEURS
+(`pengzhendong/fleurs`, already local) are on ModelScope; everything else goes via hf-mirror or direct
+(SLURP→Zenodo 4274930, STOP→dl.fbaipublicfiles.com/stop). Minimal starter = VoiceBench + HeySQuAD (2 new
+fetches; CoVoST2/FLEURS/MINDS-14 already local). Next: a semantic-eval harness (retrieval/probe +
+generative readout) on the starter set — the positive complement to the survey's speaker/emotion negatives.
+
 ### 2026-06-23 · Paralinguistic-suppression survey (D2) + pooling-method probe (D3) — emotion routing upgraded to "Operator A with a richer readout"
 **Decision.** Two converging results refine the per-factor routing. **(D3, own run)** a weight-free
 pooling-METHOD sweep (`scripts/pool_method_probe.py` + `layer_probe.extract_pooled`; CREMA-D, seeds 42
