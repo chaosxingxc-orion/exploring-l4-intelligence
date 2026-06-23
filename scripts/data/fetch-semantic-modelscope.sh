@@ -31,6 +31,7 @@ warn() { printf '[semantic-ms] WARNING: %s\n' "$*" >&2; }
 TARGETS=(
   "voicebench|lmms-lab/voicebench|voicebench|Apache-2.0 | spoken-QA + agentic in ONE (sd-qa/mmsu/openbookqa/commoneval + alpacaeval/ifeval/advbench/wildvoice) | ~11GB"
   "fleurs|pengzhendong/fleurs|fleurs|CC-BY-4.0 | ST 102-lang n-way parallel + language-ID | ALREADY LOCAL (normally skipped)"
+  "tau2-bench|evalscope/tau2-bench-data|tau2-bench|MIT | voice tool-use agent data (tau2 / tau-Voice) | only agentic set confirmed on ModelScope"
 )
 
 has_data() { local d="$1"; [[ -d "$d" ]] && [[ "$(find "$d" -maxdepth 5 -type f ! -name '.*' 2>/dev/null | head -n 5 | wc -l)" -gt 3 ]]; }

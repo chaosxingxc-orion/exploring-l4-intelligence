@@ -100,6 +100,37 @@ Columns: name · subtype · langs · license · **ModelScope?** · source id · 
 | **VocalBench** | 9-axis conversational | en (+zh) | Apache-2.0 | ✗ | hf `VocalNet/VocalBench` | ✗ | manual `vocalbench` |
 | **Big Bench Audio** | spoken reasoning | en | MIT | ✗ | hf `ArtificialAnalysis/big_bench_audio` | ✗ | manual `big-bench-audio` |
 
+**Speech-agentic — recent additions (2024-2026, web-verified, 0 hallucinated)** (none on ModelScope except tau2 → otherwise hf-mirror):
+| dataset | year | subtype | langs | license | source | fetch |
+|---|---|---|---|---|---|---|
+| **VoiceAssistant-Eval** | 2025 | listen/speak/view, 13 categories (incl. roleplay, safety, S2S quality) | en | MIT | hf `MathLLMs/VoiceAssistant-Eval` | manual `voiceassistant-eval` |
+| **VocalBench-zh** | 2025 | **Mandarin** spoken-interaction (11 subsets, +dialect/code-switch) | zh | Apache-2.0 | hf `VocalNet/VocalBench-zh` | manual `vocalbench-zh` |
+| **Audio MultiChallenge** | 2025 | multi-turn instruction retention | en | MIT | hf `ScaleAI/audiomc` | manual `audiomc` |
+| **SoulX-Duplug-Eval** | 2026 | **full-duplex** turn-taking (EN + **ZH**) | en, zh | Apache-2.0 | hf `Soul-AILab/SoulX-Duplug-Eval` | manual `soulx-duplug` |
+| **EVA-Bench** | 2026 | voice-agent task-accuracy + experience (airline) | en | MIT | hf `ServiceNow-AI/eva` | manual `eva-bench` |
+| **tau2-bench (voice)** | 2026 | tool-use agent | en | MIT | **✓ ms `evalscope/tau2-bench-data`** | **ms `tau2-bench`** |
+| VoiceAgentBench | 2025 | voice tool-use / function-calling | en,hi,bn+ | **Krutrim community (gated)** | hf `krutrim-ai-labs/VoiceAgentBench` | gated — accept license |
+
+Also (agentic): SpeechInstructBench (en/zh IF + noise/accent robustness, Apache), Speech-IFEval (IF + catastrophic-forgetting probe), MMAU-Pro (2025 harder MMAU successor, NC), **AudioJailbreak** (`MBZUAI/AudioJailbreak`, safety/refusal, Apache), Full-Duplex-Bench-v2, MultiDialog (emotional face-to-face), RealTalk-CN (150h zh, **gated**, NC).
+
+### Speech-Retrieval (2024-2026) — the bi-encoder's native eval surface
+Our flagship embeds `query:` text and `passage:` audio into one space, so **retrieval benchmarks are the most direct way to score it.** (none on ModelScope → hf-mirror / harness):
+| dataset | year | subtype | langs | license | source | fetch |
+|---|---|---|---|---|---|---|
+| **MAEB** (Massive Audio Embedding Benchmark) | 2026 | audio-embedding suite, 30 tasks (MTEB ecosystem) | 100+ | Apache-2.0 (per-task vary) | MTEB / arXiv `2602.16008` | harness (`mteb`) |
+| **MSEB / SVQ** | 2026 | spoken-query retrieval/rerank under 4 noise conditions, 177k queries | 17 | CC-BY-4.0 | hf `google/svq` | manual `svq` |
+| **FLEURS-Retrieval** (XTREME-S) | 2022* | cross-lingual speech↔text retrieval (fixed-size utterance embedding) | 102 | CC-BY-4.0 | hf `google/xtreme_s` | manual `xtreme-s` |
+| **SLUE-SQA-5** | 2022* | spoken-document retrieval (answer span in spoken passage) | en | mixed CC-BY-SA | hf `asapp/slue-phase-2` | manual `slue-phase-2` |
+| **WavCaps** | 2023* | large text↔audio retrieval, 403k clips / 820 GB | en | CC-BY **academic-only** | hf `cvssp/WavCaps` | (huge; academic-only) |
+| **SpeechBrown** (CLASP) | 2024 | contrastive speech-text retrieval (**synthetic TTS**) | en | MIT | hf `llm-lab/SpeechBrown` | (verify id) |
+
+`*` older but still the reference for that axis (year marked). **MAEB (arXiv 2602.16008, MTEB-ecosystem) and MSEB
+(arXiv 2602.07143, Google) are TWO separate benchmarks** despite near-identical names — don't conflate. For
+omni-embed-nemotron-3b, **MAEB + MSEB/SVQ are the primary surface** (run via the MTEB harness our text side
+already knows); FLEURS-Retrieval / WavCaps / SLUE-SQA-5 add cross-lingual / text↔audio / spoken-document axes.
+Also: MSEB 8-task framework (`google-research/mseb`), SpeechMatrix (S2S mining, NC), **Auto-ACD** (CC0, 1.9M
+audio-text pairs), AudioSetCaps, AudioCaps/Clotho (foundational test sets), SQuTR (2026, niche), OmniSONAR (watch).
+
 ## 4. Multi-family bridges (one fetch, several tasks)
 
 - **VoiceBench** — Spoken-QA *and* agentic in one repo (the cheapest two-family cover); on ModelScope.
@@ -119,6 +150,11 @@ Columns: name · subtype · langs · license · **ModelScope?** · source id · 
 - **EXCLUDE — Fluent Speech Commands:** its license (CC-BY-NC-ND) explicitly forbids
   testing/benchmarking. **GATED (need agreement):** SLUE-Phase-1, MuST-C, SNIPS-Audio, VoxCeleb.
 - **Unverified license (usable, treat with care):** NMSQA, LibriSQA, Spoken-MQA, CN-College-Listen.
+- **Agentic/retrieval recency batch (2024-2026):** VoiceAgentBench **gated** (Krutrim Community License,
+  not OSI); RealTalk-CN **gated** + NC; **WavCaps** academic-only + 820 GB (kept out of the fetch script);
+  **SpeechBrown** is synthetic TTS — verify `llm-lab/SpeechBrown` loads before relying on it; MMAU-Pro /
+  SpeechMatrix are NC. **ModelScope:** only `evalscope/tau2-bench-data` is hosted there — all other recent
+  sets are hf-mirror-only.
 
 ## 6. Status & next
 

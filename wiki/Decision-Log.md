@@ -6,6 +6,20 @@
 
 ---
 
+### 2026-06-23 · Catalog extended — recent (2024-2026) speech-agentic + speech-retrieval datasets
+**Decision.** Extended [[Speech-Semantic-Task-Datasets]] with two web-verified recency batches (workflow
+`wf_b4eb417e-fe1`, 11 agents, 55 candidates → 12 core, **0 hallucinated**): (a) **speech-agentic
+2024-2026** — VoiceAssistant-Eval, VocalBench-zh, Audio-MultiChallenge, SoulX-Duplug-Eval (bilingual
+full-duplex), EVA-Bench, tau2-bench(voice); (b) **speech-retrieval** (the bi-encoder's *native* eval
+surface) — MAEB + MSEB/SVQ (primary), FLEURS-Retrieval, SLUE-SQA-5, WavCaps, SpeechBrown. Both fetch
+scripts updated with the OPEN sets.
+**Why.** The flagship is a frozen retrieval bi-encoder, so MTEB/MSEB-style audio-embedding benchmarks
+(MAEB, SVQ) are the most *direct* way to score it; the agentic batch fills the generative/behavioural axis.
+**Consequences.** ModelScope reality persists — only `evalscope/tau2-bench-data` is hosted there; the rest
+are hf-mirror-only. Flags: VoiceAgentBench / RealTalk-CN **gated**; WavCaps academic-only + 820 GB (out of
+script); SpeechBrown synthetic-TTS (verify id). MAEB (arXiv 2602.16008) ≠ MSEB (arXiv 2602.07143) despite
+similar names. Next: run **MAEB + MSEB/SVQ on omni-embed-nemotron-3b** as the semantic-eval starter.
+
 ### 2026-06-23 · Pivot toward semantic tasks (omni-embed is semantic-specialized) + public dataset catalog
 **Decision.** The flagship omni-**embedding** (`omni-embed-nemotron-3b`, contrastive InfoNCE bi-encoder →
 one pooled 2048-d vector) is **semantically specialized** (content ≈1.00, language/intent strong, emotion

@@ -41,6 +41,16 @@ HF_TARGETS=(
   "fleurs-r|google/fleurs-r|fleurs-r|CC-BY-4.0 | restored-audio FLEURS (HF viewer broken, files download fine)"
   "cvss|google/cvss|cvss|CC-BY-4.0 | speech-to-speech translation, 21 langs -> en"
   "speech-commands|google/speech_commands|speech-commands|CC-BY-4.0 | SLU/keyword-spotting (35 words); benchmarking-OK"
+  # --- speech-agentic, recent (2024-2026) ---
+  "voiceassistant-eval|MathLLMs/VoiceAssistant-Eval|voiceassistant-eval|MIT | spoken-assistant 13-cat (roleplay/safety/S2S), 10.5k | ~9.5GB"
+  "vocalbench-zh|VocalNet/VocalBench-zh|vocalbench-zh|Apache-2.0 | Mandarin spoken-interaction, 10k | ~4GB"
+  "audiomc|ScaleAI/audiomc|audiomc|MIT | multi-turn instruction retention, 452 ex"
+  "soulx-duplug|Soul-AILab/SoulX-Duplug-Eval|soulx-duplug|Apache-2.0 | full-duplex turn-taking EN+ZH | ~332MB"
+  "eva-bench|ServiceNow-AI/eva|eva-bench|MIT | voice-agent task+experience (airline) | tiny"
+  # --- speech-retrieval (bi-encoder native eval) ---
+  "svq|google/svq|svq|CC-BY-4.0 | MSEB spoken-query retrieval under noise, 177k / 17 langs"
+  "xtreme-s|google/xtreme_s|xtreme-s|CC-BY-4.0 | FLEURS-Retrieval cross-lingual speech<->text, 102 langs"
+  "slue-phase-2|asapp/slue-phase-2|slue-phase-2|mixed CC-BY-SA | SLUE-SQA-5 spoken-doc retrieval + dialog-act/NER"
 )
 
 has_data() { local d="$1"; [[ -d "$d" ]] && [[ "$(find "$d" -maxdepth 5 -type f ! -name '.*' 2>/dev/null | head -n 5 | wc -l)" -gt 3 ]]; }
