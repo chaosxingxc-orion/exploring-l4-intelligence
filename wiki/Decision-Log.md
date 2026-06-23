@@ -6,6 +6,34 @@
 
 ---
 
+### 2026-06-23 · Paralinguistic-suppression survey (D2) + pooling-method probe (D3) — emotion routing upgraded to "Operator A with a richer readout"
+**Decision.** Two converging results refine the per-factor routing. **(D3, own run)** a weight-free
+pooling-METHOD sweep (`scripts/pool_method_probe.py` + `layer_probe.extract_pooled`; CREMA-D, seeds 42
+& 7) shows **mean = std = stats** (no gain), while a **weight-free attentive-statistics pool at mid-layer
+L16 modestly lifts emotion** (0.40 → 0.51 seed-42 CI-separated, → 0.45 seed-7 CIs overlap) and **speaker
+stays floored (≤0.067) across every method × layer × seed**. **(D2, 77-agent 3-vote-verified survey,
+`wf_6694eca5-de9`)** the assertion "omni models lose paralinguistics at pooling" is **right in direction,
+too strong in mechanism, and sharply per-factor**: paralinguistics is **suppressed/unread at the
+pooled-vector + decoder readout, not destroyed** (final-layer probes still 3–55× chance); the single
+masked-mean vector is **near-degenerate** (per-frame outputs cos~0.98 to the LLM mean token), so the big
+emotion lever is an **ordered-trajectory / multi-vector readout** (C-Gate 16.8→77.7%, +61pp) not a smarter
+single vector; **fine-grained speaker-ID is never written to the output** and is recovered **only** by an
+external speaker encoder (ECAPA-LLM 1.03% EER) or a disentangled codec — both non-training-free. Net:
+**emotion → Operator A is viable but needs a richer readout (multi-vector/trajectory/layer/generative)
+before B; speaker → Operator B / external-channel (the natural boundary of the training-free thesis).**
+Full evidence + citations: [[Paralinguistic-Suppression-Survey]].
+**Why.** D3 supplies the **mean-vs-stats-vs-attentive ablation the literature lacks** (the two dedicated
+layer-wise omni studies use mean pooling only); its modest single-vector emotion gain + floored speaker
+match D2's mechanism exactly. D2 corrects the earlier "emotion → B or accept ~0.40" by separating *info
+present-but-unread* (emotion, fix the readout) from *info never written* (speaker, fix the source).
+**Consequences.** New durable [[Paralinguistic-Suppression-Survey]] (D1 injection mechanism verified:
+51-token sequence in, pooled 2048-d out; D2 C1–C5 verdicts + 6-class fix taxonomy; D3 table). New W4 code:
+`layer_probe.extract_pooled` (mean/std/stats/attentive, weight-free) + `scripts/pool_method_probe.py`
+(MLflow `2c61b2f1` seed42, `21453cb1` seed7). [[Per-Work-Status]] emotion verdict updated. Next
+experiments: (1) strict same-audio SSL baseline (emotion2vec/WavLM/ECAPA on the CREMA-D split), (2) a
+multi-vector / ordered-trajectory emotion readout, (3) emotion2vec-fusion (emotion analogue of ECAPA-LLM),
+(4) the W1→W4 RL-on-speaker bridge (PALLM-style, proposed-only in the literature).
+
 ### 2026-06-23 · Model-understanding phase (1.2.1) — ICL tested; per-factor verdict now evidence-backed
 **Decision.** After understanding the model thoroughly and **measuring in-context learning** (the lever
 1.1.1 omitted), the per-factor operator decision is upgraded from provisional to evidence-backed:

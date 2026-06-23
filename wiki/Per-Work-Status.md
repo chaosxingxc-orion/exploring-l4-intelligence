@@ -2,7 +2,7 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-06-22.
+> Last reviewed: 2026-06-23.
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
@@ -26,11 +26,22 @@ tasks → different performance") demonstrated; instruction conditioning does no
 frozen model: native text-query recovers content (0.99) but not emotion (0.27); in-context demos
 strongly move the query rep (move 0.336) but are label-insensitive (0.047) and **few-shot demos hurt
 emotion** (0.217→0.150). So **no weight-free Operator-A lever — instruction, layer, pooling, native
-retrieval, or ICL — recovers speaker/emotion**; few-shot is structurally/mechanically supported but not
-a useful label-activation lever. Verdict (evidence-backed): **content→A (~1.0), emotion→B (or ~0.40
-ceiling), speaker→B, language→provisional A**. Refs: [[Omni-Embed-Model-Dossier]],
-[[2026-06-23-omni-embed-speech-disentanglement-1.2.1]]. **Next:** 1.3 Operator B (generative `lm_head`
-best-of-N/MBR readout) for emotion/speaker; 1.4 content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
+retrieval, or ICL — recovers speaker/emotion** *under single-vector mean pooling*; few-shot is
+structurally/mechanically supported but not a useful label-activation lever.
+**Paralinguistic-suppression survey + pooling-method probe (D2+D3) DONE — emotion verdict upgraded.** A
+77-agent 3-vote-verified literature survey + a weight-free pooling-METHOD probe (mean/std/stats/attentive
+× layer, CREMA-D seeds 42/7) show the suppression is **per-factor and a *readout* problem, not destruction**:
+the single masked-mean vector is near-degenerate, so emotion needs a **richer readout** (attentive
+mid-layer lifts emotion 0.40→~0.45–0.51 weight-free; ordered-trajectory/multi-vector is the big lever,
+C-Gate +61pp), whereas **fine-grained speaker-ID is never written to the pooled output** (floored ≤0.067
+across all methods/layers/seeds; recovered only by an external speaker encoder or disentangled codec).
+Verdict (updated): **content→A (~1.0); emotion→A with a richer readout (multi-vector/trajectory/layer/
+generative) BEFORE B; speaker→B / external-channel; language→provisional A**. Refs:
+[[Paralinguistic-Suppression-Survey]], [[Omni-Embed-Model-Dossier]],
+[[2026-06-23-omni-embed-speech-disentanglement-1.2.1]]. New code: `layer_probe.extract_pooled` +
+`scripts/pool_method_probe.py`. **Next:** (1) strict same-audio SSL baseline (emotion2vec/WavLM/ECAPA on
+the CREMA-D split); (2) multi-vector / ordered-trajectory emotion readout; (3) emotion2vec-fusion; (4)
+W1→W4 RL-on-speaker bridge; then 1.4 content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download
