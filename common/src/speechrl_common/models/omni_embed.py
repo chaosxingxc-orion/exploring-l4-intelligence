@@ -85,3 +85,17 @@ def embed_batch(embedder: LoadedEmbedder, wavs, *, sr: int = 16_000,
         docs, batch_size=batch_size, convert_to_numpy=True, normalize_embeddings=normalize
     )
     return np.asarray(emb, dtype=np.float32)
+
+
+def embed_queries(embedder: LoadedEmbedder, texts, *, normalize: bool = True, batch_size: int = 16):
+    """Embed text queries via ``encode_query`` (the model's native query side). Returns ``(N, embed_dim)``.
+
+    Use for zero-shot cross-modal retrieval: classify an audio document by the text query (e.g. a label
+    description) whose embedding it is most cosine-similar to — the model's built-in retrieval geometry.
+    """
+    import numpy as np
+
+    emb = embedder.model.encode_query(
+        list(texts), batch_size=batch_size, convert_to_numpy=True, normalize_embeddings=normalize
+    )
+    return np.asarray(emb, dtype=np.float32)

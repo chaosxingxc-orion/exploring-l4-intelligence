@@ -6,6 +6,26 @@
 
 ---
 
+### 2026-06-23 · Model-understanding phase (1.2.1) — ICL tested; per-factor verdict now evidence-backed
+**Decision.** After understanding the model thoroughly and **measuring in-context learning** (the lever
+1.1.1 omitted), the per-factor operator decision is upgraded from provisional to evidence-backed:
+**content → Operator A** (~1.0); **emotion → Operator B** or accept a ~0.40 ceiling; **speaker →
+Operator B**; **language → provisional A** (mechanism validated, test on FLEURS). Few-shot is
+structurally and mechanically supported but **not a useful label-conditioned activation lever** for the
+suppressed factors. See [[Omni-Embed-Model-Dossier]] and [[2026-06-23-omni-embed-speech-disentanglement-1.2.1]].
+**Why.** Probes (frozen, training-free) established: native text-query retrieval recovers content (0.99)
+but not emotion (0.27 < 0.36 probe); in-context demos strongly move the query representation
+(move=0.336) yet are label-insensitive (0.047) and **few-shot demos reduce emotion accuracy**
+(0.217→0.150). So no weight-free Operator-A lever (instruction, layer, pooling, native retrieval, ICL)
+exceeds ~0.40 for emotion, and speaker is ~chance across all 37 layers — the contrastive Whisper-ASR
+backbone has discarded it. This is the rigorous version of the 1.1.1 conclusion (which was withdrawn for
+not testing ICL).
+**Consequences.** New durable [[Omni-Embed-Model-Dossier]] (architecture + I/O contract + token
+mechanics + few-shot verdict). New W4 diagnostic code: `io_contract.py`, `icl_forward.py`,
+`scripts/diag/*`; `embed_queries` in `common`. Next: 1.3 Operator B (generative `lm_head` readout) for
+emotion/speaker; 1.4 content/language fan-out. Also fixed an infinite derangement-loop bug in the P7
+control (had hung for hours) — model forwards are ~0.11s.
+
 ### 2026-06-22 · F.1 finding (PROVISIONAL) — single-instruction + layer/pooling don't recover speaker; ICL untested
 **Decision.** From the CREMA-D layer/pooling sweep (weight-free Operator A, *single-instruction*
 conditioning): **speaker stays at chance (~0.03) across all 37 Thinker layers AND audio-token pooling**;

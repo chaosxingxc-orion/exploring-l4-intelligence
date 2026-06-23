@@ -12,6 +12,7 @@ is synced to this Wiki via `scripts/wiki-sync.sh`.
 - [[Project-Thesis]] — the research thesis & flagship claim (**read first**)
 - [[W4-Training-Free-RL-Feasibility]] — flagship math: formalism, operators, algorithm survey
 - [[W4-Research-Plan]] — flagship research plan & technical scheme (waves, gates, routing)
+- [[Omni-Embed-Model-Dossier]] — the frozen backbone: architecture, I/O contract, few-shot verdict
 - [[Architecture]] — repo model & shared library
 - [[Environment-and-Setup]] — WSL2 / CUDA / py3.12 venv / verl
 - [[Working-Mode]] — cross-repo conventions

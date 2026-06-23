@@ -21,13 +21,16 @@ MLflow (`bash scripts/train.sh seed=42`). **First result (3-factor CREMA-D):** t
 content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance) — the thesis ("different downstream
 tasks → different performance") demonstrated; instruction conditioning does not steer the embedding
 (columns flat), confirming the suppression prediction (see [[W4-Training-Free-RL-Feasibility]] §0.1).
-**F.1 (richer Operator-A axes):** layer sweep (37 layers) + audio-token pooling show speaker ~chance
-and emotion ~0.40 *under single-instruction conditioning* — but this is a weak intervention;
-**conclusion is provisional**, the model's strongest lever (ICL / activation heads) is **untested**.
-Archived report: [[2026-06-22-omni-embed-speech-disentanglement-1.1.1]]. **Next (exp 1.2):** activation
-heads / ICL — native text-query zero-shot retrieval + few-shot demonstrations with target-token pooling
-— for speaker/emotion, before any Operator-B claim; then Operator B for what stays flat; then
-content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
+**Model-understanding phase (1.2.1) DONE — ICL tested, verdict now evidence-backed.** Diagnostic probes
+(I/O contract, query-token isolation, native text-query retrieval, few-shot ICL + label control) on the
+frozen model: native text-query recovers content (0.99) but not emotion (0.27); in-context demos
+strongly move the query rep (move 0.336) but are label-insensitive (0.047) and **few-shot demos hurt
+emotion** (0.217→0.150). So **no weight-free Operator-A lever — instruction, layer, pooling, native
+retrieval, or ICL — recovers speaker/emotion**; few-shot is structurally/mechanically supported but not
+a useful label-activation lever. Verdict (evidence-backed): **content→A (~1.0), emotion→B (or ~0.40
+ceiling), speaker→B, language→provisional A**. Refs: [[Omni-Embed-Model-Dossier]],
+[[2026-06-23-omni-embed-speech-disentanglement-1.2.1]]. **Next:** 1.3 Operator B (generative `lm_head`
+best-of-N/MBR readout) for emotion/speaker; 1.4 content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download
