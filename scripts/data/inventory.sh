@@ -14,9 +14,10 @@ du -sh "$DR"/* 2>/dev/null
 # Reports: name | size | files | status (COMPLETE|PARTIAL|MISSING|UNKNOWN)
 check_ds() {
   local name="$1"
-  local d="$DR/datasets/$name"
   local expect_min_files="$2"   # min file count for completeness
   local expect_min_size_mb="$3" # min size in MB for completeness
+  local rel="${4:-datasets/$name}"  # optional explicit subpath under the data root (e.g. SLURP audio in repos/)
+  local d="$DR/$rel"
   if [ ! -e "$d" ]; then
     printf '  %-22s MISSING\n' "$name"
     return
@@ -72,32 +73,52 @@ check_model() {
 }
 
 echo
-echo '=== Models (24GB-friendly default + optional) ==='
+echo '=== Models (5 locked; see datasets.lock.json) ==='
 # Min-MB heuristics: very loose lower bound for "looks complete"
-check_model qwen3-omni-30b-a3b-instruct 8000   # INT4 ~8-15GB
-check_model moss-audio-8b-instruct       8000  # 8B BF16 ~16GB
-check_model nemotron3-nano-omni-nvfp4    8000  # NVFP4 ~10-18GB
-check_model minicpm-o-4_5-gguf           2000  # GGUF often a few GB
-check_model minicpm-o-4_5                4000
-check_model baichuan-omni-1d5            6000  # ~7B
-check_model kimi-audio-7b-instruct       6000
-check_model omni-embed-nemotron-3b       6000  # W4 omni embedding ~4.7B
+check_model qwen3-omni-30b-a3b-instruct 8000   # INT4 ~24G
+check_model moss-audio-8b-instruct       8000  # ~17G
+check_model nemotron3-nano-omni-nvfp4    8000  # NVFP4 ~21G
+check_model minicpm-o-4_5                4000   # ~19G
+check_model omni-embed-nemotron-3b       6000  # W4 omni embedding ~8.8G
 
 echo
-echo '=== Datasets (heuristic completeness) ==='
-# Loose floor; tweak if needed
-check_ds librispeech         50  10000     # 100h+960h roughly tens of GB
-check_ds mmau-mini            5  100
-check_ds mmar                 5  100
-check_ds meld                10  500
-check_ds crema-d             10  100
-check_ds minds14              5  100
-check_ds minds14-xtreme_s     5  500
-check_ds covost2              3   10
-check_ds fleurs              20  500
-check_ds voxceleb            20 5000
-check_ds air-bench           10  500
-check_ds slurp                5   10
+echo '=== Datasets (28 locked; heuristic completeness vs datasets.lock.json) ==='
+# Loose floor; tweak if needed.  Deleted placeholders/partials (voxceleb, cvss,
+# speech-commands, minds14-xtreme_s) are intentionally absent.
+# content / ST
+check_ds librispeech         50 10000     # 100h+360h+960h
+check_ds fleurs-r            20  2000     # FLEURS-R (restored)
+check_ds covost2             3    50
+# speaker + emotion
+check_ds crema-d            10   100
+check_ds meld               10   500
+# language + intent (SLU); SLURP audio lives under repos/, not datasets/
+check_ds speech-massive     10  2000
+check_ds slurp               5  2000  repos/slurp/scripts/audio
+check_ds minds14             5   100
+# audio understanding / reasoning / benchmark
+check_ds air-bench          10   500
+check_ds mmar                5   100
+check_ds mmau-mini           5   100
+check_ds mmsu                5   100
+check_ds big-bench-audio    10   100
+# spoken QA / dialogue / assistant / agent
+check_ds heysquad            5  2000
+check_ds uro-bench           5  2000
+check_ds voicebench          5  2000
+check_ds voiceassistant-eval 5  2000
+check_ds audiomc             3   500
+check_ds vocalbench          5   500
+check_ds vocalbench-zh       5   500
+check_ds spoken-squad        5   500
+check_ds soulx-duplug        3   100
+check_ds tau2-bench          3    10
+check_ds eva-bench           1     0
+# tts / reasoning evals
+check_ds seed-tts-eval       3   100
+check_ds aime24              1     0
+check_ds aime25              1     0
+check_ds aime26              1     0
 
 echo
 echo '=== Refs ==='

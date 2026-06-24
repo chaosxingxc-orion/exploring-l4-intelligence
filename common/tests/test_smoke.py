@@ -39,10 +39,16 @@ def test_new_registry_and_prompts():
     from speechrl_common.models.prompts import instruction_for
 
     assert registry.get("crema_d").task == "ser"
-    assert registry.get("voxceleb").task == "sid"
+    assert registry.get("minds14").task == "intent"
     assert registry.get("covost2").task == "st"
     assert instruction_for("intent")
     assert instruction_for("lid")
+    # frozen-snapshot reconciliation: FLEURS-R is what's on disk, pinned revisions are recorded,
+    # and the voxceleb placeholder was removed (deleted from disk; no longer tracked).
+    assert registry.get("fleurs").subdir == "fleurs-r"
+    assert registry.get("crema_d").revision == "ac5b65fb890f1db0d2f7d6268d13994f481e5567"
+    assert registry.get("slurp").revision and registry.get("librispeech").revision is None
+    assert "voxceleb" not in registry.REGISTRY
 
 
 def test_omni_embed_constants_import_only():

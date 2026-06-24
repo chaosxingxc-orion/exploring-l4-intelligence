@@ -15,7 +15,7 @@ imports inside functions so `import speechrl_common` stays cheap.
 **Git conventions.** Default branch is **`master`** for all five repos. Branch for non-trivial work,
 open a PR, keep commits scoped to one repo. `.gitattributes` forces `eol=lf` (especially `*.sh`) so
 scripts run in WSL — keep it. Never commit data: `speechrl-data/` and all weight/dataset/archive
-formats are gitignored (~281 GB stays local).
+formats are gitignored (~410 GB stays local).
 
 **Config & tracking.** Hydra per work (`config.yaml` composes `model/ dataset/ rl/ experiment/`);
 override any key on the CLI (`bash scripts/train.sh rl.learning_rate=2e-6`). Tracking is local MLflow

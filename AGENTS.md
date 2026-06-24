@@ -59,16 +59,19 @@ bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
 
 Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
 
-Data & model assets (~281 GB, **never in git**) live in `speechrl-data/` (WSL ext4, gitignored).
-Fetch your own copy with the data scripts:
+Data & model assets (~410 GB, **never in git**) live in `speechrl-data/` (WSL ext4, gitignored). The
+set is **frozen** to `docs/datasets.lock.json` — the single manifest (28 datasets + 5 models + 7 ref
+repos, pinned revisions). One unified, self-contained downloader reproduces it identically across teams:
 
 ```bash
-bash scripts/data/probe-access.sh   # read-only: check HF / ModelScope reachability
-bash scripts/data/fetch-data.sh     # download models + datasets (skips already-complete assets)
-bash scripts/data/inventory.sh      # audit COMPLETE / PARTIAL / MISSING
+bash scripts/data/fetch-data.sh --list          # show the manifest, fetch nothing
+bash scripts/data/fetch-data.sh                  # fetch everything missing (skips complete; pinned revisions)
+bash scripts/data/fetch-data.sh --install-deps   # install download deps (hf/modelscope/aria2) if missing
+bash scripts/data/inventory.sh                   # audit COMPLETE / PARTIAL / MISSING
 ```
 
-Full asset list, targets, and mirrors (hf-mirror + ModelScope): `docs/data.md`.
+Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/data/gen-lockfile.py`.
+The `wave0_fetch.sh` engine and one-off `fetch-semantic-*`/`campaigns/` scripts were retired (unified).
 
 ## Architecture notes (the big picture)
 

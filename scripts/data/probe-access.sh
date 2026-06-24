@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Probe Hugging Face reachability + auth for the models/datasets this repo downloads.
-# Read-only: confirms repos resolve before kicking off a large fetch. For ModelScope
-# reachability use: bash projects/speech-mllm-training-free-rl/scripts/wave0_fetch.sh check
+# Read-only: confirms repos resolve before a large fetch. The actual download is the unified,
+# lockfile-driven scripts/data/fetch-data.sh (which also preflight-checks its deps).
 # Override the venv with SPEECHRL_VENV.
 set +e
 V="${SPEECHRL_VENV:-$HOME/.venvs/speechrl}"
@@ -17,17 +17,17 @@ api = HfApi()
 items = [
  ("model","nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4"),
  ("model","Qwen/Qwen3-Omni-30B-A3B-Instruct"),
- ("model","OpenMOSS/MOSS-Audio-8B"),
+ ("model","OpenMOSS-Team/MOSS-Audio-8B-Instruct"),
  ("model","openbmb/MiniCPM-o-4_5-gguf"),
  ("model","nvidia/omni-embed-nemotron-3b"),
  ("dataset","openslr/librispeech_asr"),
- ("dataset","AudioLLMs/MMAU-mini"),
+ ("dataset","TwinkStart/MMAU"),
  ("dataset","BoJack/MMAR"),
  ("dataset","declare-lab/MELD"),
  ("dataset","MahiA/CREMA-D"),
  ("dataset","PolyAI/minds14"),
  ("dataset","facebook/covost2"),
- ("dataset","google/fleurs"),
+ ("dataset","google/fleurs-r"),
 ]
 for kind, rid in items:
     try:

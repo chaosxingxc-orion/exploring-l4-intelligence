@@ -40,7 +40,7 @@
 - 五个仓库默认分支都是 **`master`**；非琐碎改动开分支、提 PR。
 - 每个提交 / PR 只限于单个仓库。
 - `.gitattributes` 强制 `eol=lf`（尤其 `*.sh`），让脚本能在 WSL 跑——别动它。
-- **绝不提交数据：** `speechrl-data/` 及各类权重/数据集/压缩格式都被 gitignore（≈281 GB 留在本地）。
+- **绝不提交数据：** `speechrl-data/` 及各类权重/数据集/压缩格式都被 gitignore（≈410 GB 留在本地）。
   用 `scripts/data/` 拉取（见 [docs/data.md](docs/data.md)）。
 - `gh` 解析到 `C:\Program Files\GitHub CLI\gh.exe`；Windows Python 下 `PYTHONPATH` 分隔符是 `;`。
 

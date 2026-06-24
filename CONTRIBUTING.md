@@ -41,7 +41,7 @@ All training runs in **WSL2** (see [docs/setup.md](docs/setup.md)). Use the shar
 - Default branch is **`master`** for all five repos; branch for non-trivial work and open a PR.
 - Keep each commit/PR scoped to a single repo.
 - `.gitattributes` forces `eol=lf` (especially `*.sh`) so scripts run in WSL — keep it.
-- **Never commit data:** `speechrl-data/` and weight/dataset/archive formats are gitignored (~281 GB
+- **Never commit data:** `speechrl-data/` and weight/dataset/archive formats are gitignored (~410 GB
   stays local). Fetch with `scripts/data/` (see [docs/data.md](docs/data.md)).
 - `gh` resolves to `C:\Program Files\GitHub CLI\gh.exe`; on Windows Python the `PYTHONPATH` separator
   is `;`.

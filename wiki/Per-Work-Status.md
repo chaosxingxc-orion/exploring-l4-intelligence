@@ -44,9 +44,10 @@ the CREMA-D split); (2) multi-vector / ordered-trajectory emotion readout; (3) e
 W1→W4 RL-on-speaker bridge; then 1.4 content/language fan-out (LibriSpeech/CoVoST2/FLEURS/MINDS14).
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
-(best-of-N, reward-guided decoding, reranking). The most complete work; owns the asset download
-engine (`scripts/wave0_fetch.sh`); its verifiable-reward/eval machinery is what the flagship W4
-reuses. Roadmap: broaden reward-guided strategies, expand datasets/benchmarks, harden eval.
+(best-of-N, reward-guided decoding, reranking). The most complete work; its verifiable-reward/eval
+machinery is what the flagship W4 reuses. (Asset downloading is now unified in the umbrella's
+`scripts/data/fetch-data.sh`, driven by `docs/datasets.lock.json`; the old W1 `wave0_fetch.sh` engine
+was retired.) Roadmap: broaden reward-guided strategies, harden eval.
 
 **W2 — Efficient RL alignment (skeleton).** Efficient GRPO/DPO with LoRA / partial updates for
 speech↔language alignment. Roadmap: implement the LoRA GRPO/DPO loop on top of the shared rewards;
@@ -69,8 +70,9 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 [[W4-Training-Free-RL-Feasibility]]。
 
 **W1（免训练 RL，成熟范式参考）：** 免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），
-是最完整的工作，维护资产下载引擎（`scripts/wave0_fetch.sh`），其可验证奖励/评测机制正是旗舰 W4 复用的
-地基。路线：拓展奖励引导策略、扩充数据集/基准、强化评测。
+是最完整的工作，其可验证奖励/评测机制正是旗舰 W4 复用的地基。（资产下载已统一到 umbrella 的
+`scripts/data/fetch-data.sh`，由 `docs/datasets.lock.json` 驱动；原 W1 `wave0_fetch.sh` 引擎已退役。）
+路线：拓展奖励引导策略、强化评测。
 
 **W2（高效 RL 对齐，骨架）：** 用 LoRA / 部分更新的高效 GRPO/DPO 做语音↔语言对齐；路线：在共享奖励上
 实现 LoRA 的 GRPO/DPO 主循环，沿用 W1 的配置/评测范式。**W3（多任务 RL，骨架）：** 单策略，跨

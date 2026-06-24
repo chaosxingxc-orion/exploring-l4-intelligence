@@ -2,8 +2,8 @@
 
 A curated, **verified-public** dataset set for the semantic axis our flagship omni **embedding** is
 strong on. Companion to [[Paralinguistic-Suppression-Survey]] (why the embedding is semantic-specialized)
-and [[Data-and-Assets]] (the full asset inventory). Fetch with the two scripts in §2 — you run them
-yourself in WSL.
+and [[Data-and-Assets]] (the full asset inventory). These sets are now **downloaded and FROZEN** — see
+`docs/datasets.lock.json` for the authoritative local inventory (§2); the fetch scripts were retired.
 
 ## 0. The conclusion that motivates this page (adversarial)
 
@@ -28,25 +28,18 @@ re-fetched all 16** → **0 hallucinated, 0 access-gated; license/source caveats
 candidate names from the original ask did not survive: "Spoken-SQuAD-NER" (does not exist → replaced by
 **MSNER**) and SLUE-Phase-1 (listed OPEN but is actually **GATED** → demoted).
 
-## 2. How to fetch (you run these; downloads are large)
+## 2. Status: downloaded & FROZEN (fetch scripts retired)
 
-**ModelScope reality (web-verified):** of the catalog, **only VoiceBench (`lmms-lab/voicebench`) and
-FLEURS (`pengzhendong/fleurs`, already local) are on ModelScope.** Everything else is **not** on
-ModelScope → hf-mirror, or a direct source (SLURP→Zenodo, STOP→fbaipublicfiles). Two scripts split this:
+These datasets are **downloaded and locked**. The dataset set is frozen to the snapshot in
+`docs/datasets.lock.json` — the authoritative record of what is local, with pinned revisions. Audit it
+with `bash scripts/data/inventory.sh`; the full inventory is in [[Data-and-Assets]] / `docs/data.md`.
 
-- `scripts/data/fetch-semantic-modelscope.sh` — the ModelScope-hosted sets. `--list` / `--dry-run` / `all` / `<name>`.
-- `scripts/data/fetch-semantic-manual.sh` — the rest, via hf-mirror (`HF_ENDPOINT=https://hf-mirror.com`,
-  prefers `hfd`+aria2c) + direct (SLURP, STOP print manual instructions). Same flags.
+The two one-off fetch scripts that originally pulled these (`fetch-semantic-modelscope.sh`,
+`fetch-semantic-manual.sh`) have been **removed**. The **local?** column in §3 below is historical and
+is superseded by `datasets.lock.json`.
 
-Both honor `SPEECHRL_DATA_DIR`, `SPEECHRL_SKIP_EXISTING=1` (skip already-local), `SPEECHRL_MS_WORKERS`,
-`SPEECHRL_HFD_THREADS`; dirs land in `speechrl-data/datasets/<hyphenated-name>`. Run in the speechrl venv.
-
-**Minimal starter (covers all four families, only 2 new fetches):**
-```
-bash scripts/data/fetch-semantic-modelscope.sh voicebench    # QA + agentic (ModelScope)
-bash scripts/data/fetch-semantic-manual.sh    heysquad        # clean extractive spoken-QA (hf-mirror)
-# CoVoST2 + FLEURS (ST) and MINDS-14 (SLU) are already local.
-```
+*(Historical note: of this catalog, only VoiceBench and FLEURS were on ModelScope; the rest came via
+hf-mirror or a direct source, e.g. SLURP audio from Zenodo 4274930.)*
 
 ## 3. Core sets per family
 
@@ -168,7 +161,7 @@ negatives (speaker/emotion). Decision: full pivot vs. second track (see §0).
 ## 中文
 
 为旗舰 omni **嵌入**所擅长的语义轴curate 的**已核验公开**数据集（SLU/Spoken-QA/ST/agentic）。配套
-[[Paralinguistic-Suppression-Survey]]（为何嵌入是语义特化）与 [[Data-and-Assets]]。用 §2 两个脚本自行下载。
+[[Paralinguistic-Suppression-Survey]]（为何嵌入是语义特化）与 [[Data-and-Assets]]。这些集已**下载并冻结**——以 `docs/datasets.lock.json` 为本地权威清单（§2）；抓取脚本已退役。
 
 **§0 动因结论（对抗）：** 断言=omni-embed 是语义特化嵌入，最佳用途是语义任务。支持：同音频实测内容≈1.00、
 语言/意图近语义强、情感≈0.40(上限)、说话人≈0.04(随机)。反驳：「仅语义」过强（仍留部分情感+粗粒度副语言）、
@@ -178,11 +171,10 @@ negatives (speaker/emotion). Decision: full pivot vs. second track (see §0).
 **§1 来源与核验：** workflow `wf_bb9e0de5-93c`（6 agent）36→16，**对抗式逐一重抓 16 个链接：0 臆造、0
 gated**；许可/来源风险见 §5。两个原始候选未存活：「Spoken-SQuAD-NER」不存在（→ MSNER）、SLUE-1 实为 GATED。
 
-**§2 下载（你手动跑）：ModelScope 现实**——本目录仅 **VoiceBench(`lmms-lab/voicebench`) 与
-FLEURS(`pengzhendong/fleurs`，已本地)** 在 ModelScope；其余须 hf-mirror 或直链。两脚本：
-`fetch-semantic-modelscope.sh`（ModelScope 可下）与 `fetch-semantic-manual.sh`（hf-mirror + SLURP/STOP
-直链）。均支持 `--list/--dry-run/all/<name>`，`SPEECHRL_SKIP_EXISTING=1` 跳过已在。**最小启动集（仅 2 个新
-下载）**：`voicebench`(ModelScope) + `heysquad`(hf-mirror)，CoVoST2/FLEURS/MINDS-14 已本地。
+**§2 状态：已下载并冻结（抓取脚本已退役）。** 这些数据集已本地化并锁定，集合冻结于
+`docs/datasets.lock.json`（本地权威清单，含锁定版本）。用 `bash scripts/data/inventory.sh` 审计；完整清单见
+[[Data-and-Assets]] / `docs/data.md`。原先用于抓取的两个一次性脚本（`fetch-semantic-modelscope.sh`、
+`fetch-semantic-manual.sh`）已删除；§3 的「local?」列为历史信息，以 `datasets.lock.json` 为准。
 
 **§3 各族 core set** 见英文表（含 **ModelScope 可获得性列** + 本地状态 + fetch 名）。**§4 多族桥**：
 VoiceBench(QA+agentic)、Speech-MASSIVE(SLU+ST)、FLEURS(ST+LID)、AudioBench(harness)。**§5 对抗标记**：

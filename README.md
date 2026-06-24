@@ -39,7 +39,7 @@ projects/       the four work repos (each its OWN git repo; gitignored by this u
 docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads)
 scripts/        wsl-setup.sh, env-setup.sh, mlflow-ui.sh, wiki-sync.sh, data/ (model+dataset downloads)
 wiki/           source for the GitHub Wiki — shared knowledge & memory (push via scripts/wiki-sync.sh)
-speechrl-data/  data root (~281 GB models/datasets/checkpoints) — gitignored, lives in WSL ext4
+speechrl-data/  data root (~410 GB models/datasets/checkpoints) — gitignored, lives in WSL ext4
 CLAUDE.md / AGENTS.md   per-tool operating guides for AI assistants (Claude Code / Codex)
 CONTRIBUTING.md         how to work across the five repos
 ```
@@ -74,7 +74,7 @@ server/account). Config: Hydra per work. RL library: verl.
 
 ## Data & models
 
-Weights and datasets (~281 GB) are **never in git** — fetch your own copy locally (`.gitignore`
+Weights and datasets (~410 GB) are **never in git** — fetch your own copy locally (`.gitignore`
 guards `speechrl-data/` so a stray `git add` can't push data):
 
 ```bash

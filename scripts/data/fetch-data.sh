@@ -1,147 +1,186 @@
 #!/usr/bin/env bash
-# Primary data-fetch entry point (smart wave0 driver).
-#   - skips already-complete assets, logs to the data dir (survives WSL recycles)
-#   - replaces the slow upstream SLURP audio downloader with aria2c -x16 (mass parallel)
-#   - does NOT recursively run download scripts inside cloned reference repos
-#     (those are reference-code only; their data scripts often duplicate our datasets)
+# Unified, lockfile-driven downloader — the SINGLE way every team fetches the shared data & models.
 #
-# Models/datasets are NEVER committed to git (see .gitignore and docs/data.md). This
-# script pulls ~281 GB into $SPEECHRL_DATA_DIR locally; users fetch their own copy.
-# The actual per-asset engine is projects/speech-mllm-training-free-rl/scripts/wave0_fetch.sh.
+# Source of truth: docs/datasets.lock.json (the frozen manifest: 28 datasets + 5 models + 7 ref
+# repos, each with its source id and pinned revision). Any collaborator with THIS repo + the
+# speechrl venv runs `bash scripts/data/fetch-data.sh` and reproduces the IDENTICAL set:
+#   - HF datasets pin to the recorded commit sha (reproducible across teams)
+#   - ModelScope sets track 'master'; SLURP audio comes from Zenodo 4274930
+# The set is FROZEN: this script only fetches what the lockfile records — never new datasets.
+# To change the set, edit the lockfile deliberately (regenerate it), then re-run.
 #
-# Paths derive from this script's location (survives the repo being renamed/moved).
-# Override via env: SPEECHRL_WORKSPACE, SPEECHRL_DATA_DIR, SPEECHRL_VENV.
+#   bash scripts/data/fetch-data.sh             # fetch everything missing (skips complete assets)
+#   bash scripts/data/fetch-data.sh --list      # print the manifest, fetch nothing
+#   bash scripts/data/fetch-data.sh --dry-run   # print the commands, download nothing
+#   bash scripts/data/fetch-data.sh meld slurp  # fetch only the named assets
+#   bash scripts/data/fetch-data.sh --install-deps  # install the download deps (hf/modelscope/aria2) then exit
+#
+# Dependencies: needs the speechrl venv (hf + modelscope CLIs) and aria2c. If they're missing, run
+# `bash scripts/env-setup.sh` (full stack) OR `bash scripts/data/fetch-data.sh --install-deps`
+# (lightweight download deps only). The script preflight-checks and reports exactly what's missing.
+#
+# Models/datasets are NEVER committed to git (see .gitignore and docs/data.md).
 set -uo pipefail
 
-# ---------- paths (derived; env-overridable) ----------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE="${SPEECHRL_WORKSPACE:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
-PROJECT="$WORKSPACE/projects/speech-mllm-training-free-rl"
 DR="${SPEECHRL_DATA_DIR:-$WORKSPACE/speechrl-data}"
-WAVE0="$PROJECT/scripts/wave0_fetch.sh"
-LOG="$DR/wave0_smart.log"
-mkdir -p "$DR"
+LOCK="${SPEECHRL_LOCKFILE:-$WORKSPACE/docs/datasets.lock.json}"
+mkdir -p "$DR/datasets" "$DR/models" "$DR/repos" "$DR/manifests"
 
-stamp() { date '+%Y-%m-%d %H:%M:%S'; }
-section() { echo; echo "================================================================"; echo "==  $* @ $(stamp)"; echo "================================================================"; }
-
-# Activate venv
+# venv (provides the CLIs: hf / huggingface-cli, modelscope, aria2c, git)
 SPEECHRL_VENV="${SPEECHRL_VENV:-$HOME/.venvs/speechrl}"
 # shellcheck disable=SC1091
-source "$SPEECHRL_VENV/bin/activate"
-export PATH="$SPEECHRL_VENV/bin:$PATH"
+[ -f "$SPEECHRL_VENV/bin/activate" ] && { source "$SPEECHRL_VENV/bin/activate"; export PATH="$SPEECHRL_VENV/bin:$PATH"; }
 
-# --- Make output readable in Windows PowerShell terminal ---
-# Force UTF-8 everywhere; ASCII-only progress bars; less verbose progress
-export LANG=C.UTF-8
-export LC_ALL=C.UTF-8
-export PYTHONIOENCODING=utf-8
-# tqdm: ASCII chars instead of Unicode blocks; stay on tty so it overwrites
-export TQDM_ASCII=1
-# huggingface_hub progress
-export HF_HUB_DISABLE_PROGRESS_BARS=0
-# modelscope: it uses tqdm internally; TQDM_ASCII handles it.
-# Also drop colored output where possible
-export NO_COLOR=1
-export CLICOLOR=0
-export TERM=dumb
+# China-friendly mirrors by default; override via env.
+export HF_ENDPOINT="${SPEECHRL_HF_ENDPOINT:-https://hf-mirror.com}"
+export HF_HUB_DISABLE_XET="${HF_HUB_DISABLE_XET:-1}"
+export LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONIOENCODING=utf-8 TQDM_ASCII=1 NO_COLOR=1
+MS_WORKERS="${SPEECHRL_MS_WORKERS:-16}"
+PY="${SPEECHRL_PYTHON:-python}"
+HF_CLI="$(command -v hf || command -v huggingface-cli || echo hf)"
 
-# Skip-existing on; SLURP audio handled separately via aria2.
-export SPEECHRL_SKIP_EXISTING=1
-export SPEECHRL_SKIP_SLURP_AUDIO=1
+DRY=0; LIST=0; INSTALL=0; WANT=()
+for a in "$@"; do case "$a" in
+  --dry-run) DRY=1 ;; --list) LIST=1 ;; --install-deps) INSTALL=1 ;; -h|--help) sed -n '2,26p' "$0"; exit 0 ;;
+  *) WANT+=("$a") ;;
+esac; done
 
-# 1) Symlink to satisfy minicpm-o-4_5-gguf skip check
-if [ -d "$DR/models/minicpm-o-4_5" ] && [ ! -e "$DR/models/minicpm-o-4_5-gguf" ]; then
-  ln -sfn "$DR/models/minicpm-o-4_5" "$DR/models/minicpm-o-4_5-gguf"
-  echo "[fix] symlinked minicpm-o-4_5-gguf -> minicpm-o-4_5"
-fi
+log(){ printf '[fetch] %s\n' "$*"; }
+warn(){ printf '[fetch] WARNING: %s\n' "$*" >&2; }
+[ -f "$LOCK" ] || { warn "lockfile not found: $LOCK"; exit 1; }
 
-# 2) Purge obviously-partial dataset dirs so CLI redoes them
-purge_partial() {
-  local d="$1" why="$2"
-  [ -e "$d" ] && { echo "[purge] $d ($why)"; rm -rf "$d"; }
-}
-[ -d "$DR/datasets/minds14-xtreme_s" ] && {
-  size_kb=$(du -sLk "$DR/datasets/minds14-xtreme_s" 2>/dev/null | awk '{print $1}')
-  [ "${size_kb:-0}" -lt 102400 ] && purge_partial "$DR/datasets/minds14-xtreme_s" "<100MB"
-}
-[ -d "$DR/datasets/covost2" ] && {
-  size_kb=$(du -sLk "$DR/datasets/covost2" 2>/dev/null | awk '{print $1}')
-  [ "${size_kb:-0}" -lt 5120 ] && purge_partial "$DR/datasets/covost2" "<5MB"
+# Emit the manifest, one record per line, fields separated by US (\x1f) so EMPTY fields are
+# preserved (a whitespace IFS like tab collapses them and shifts columns):
+#   kind  name  subdir  method  id  rev  url  zenodo
+rows() {
+  "$PY" - "$LOCK" <<'PY'
+import json, sys
+d = json.load(open(sys.argv[1], encoding="utf-8"))
+def row(e, k):
+    s = e.get("source", {}) or {}
+    print("\x1f".join([e.get("kind", k), e["name"], e.get("local_subdir", ""),
+        s.get("kind", "unknown"), (s.get("id") or s.get("hf_id") or ""),
+        (e.get("revision") or ""), (s.get("url") or ""), (e.get("audio_zenodo_record") or "")]))
+for e in d.get("models", []):
+    if e.get("source"): row(e, "model")
+for e in d.get("datasets", []): row(e, "dataset")
+for e in d.get("ref_repos", []): row(e, "ref")
+PY
 }
 
-# 3) Models
-section "MODELS"
-bash "$WAVE0" m_qwen3omni
-bash "$WAVE0" m_moss
-bash "$WAVE0" m_nemotron
-bash "$WAVE0" m_minicpm_gguf
+want_match(){ [ ${#WANT[@]} -eq 0 ] && return 0; local n; for n in "${WANT[@]}"; do [ "$n" = "$1" ] && return 0; done; return 1; }
+has_data(){ local d="$1"; [ -d "$d" ] && [ "$(find -L "$d" -type f ! -name '.*' 2>/dev/null | head -5 | wc -l)" -gt 3 ]; }
+is_sha(){ printf '%s' "$1" | grep -Eq '^[0-9a-f]{7,40}$'; }
+retry(){ local n=1; while [ $n -le 3 ]; do "$@" && return 0; warn "attempt $n/3 failed; retry in $((n*5))s"; sleep $((n*5)); n=$((n+1)); done; warn "gave up: $*"; return 1; }
 
-# W4 omni-embedding model (nv-community/omni-embed-nemotron-3b, ~4.7B).
-# Set SPEECHRL_SKIP_OMNI_EMBED=1 to skip if you only need the generation models.
-if [ -z "${SPEECHRL_SKIP_OMNI_EMBED:-}" ]; then
-  bash "$WAVE0" m_omni_embed_nemotron
-fi
+# --- dependency channel: ensure the download CLIs exist; offer a lightweight install ----------
+py_has(){ "$PY" -c "import $1" >/dev/null 2>&1; }
+install_deps(){
+  log "installing data-download dependencies (lightweight; no torch needed)"
+  if command -v uv >/dev/null 2>&1 && [ -n "${VIRTUAL_ENV:-}" ]; then
+    uv pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "uv pip install failed"
+  elif command -v pip >/dev/null 2>&1; then
+    pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "pip install failed (no venv? run: bash scripts/env-setup.sh)"
+  else
+    "$PY" -m pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "pip install failed (no venv? run: bash scripts/env-setup.sh)"
+  fi
+  if ! command -v aria2c >/dev/null 2>&1; then
+    if command -v apt-get >/dev/null 2>&1; then
+      sudo apt-get update && sudo apt-get install -y aria2 || warn "aria2 install failed (SLURP audio will use a slower fallback)"
+    else warn "install aria2 for fast SLURP audio (e.g. 'sudo apt-get install -y aria2')"; fi
+  fi
+  log "dependency install attempted; re-run without --install-deps to fetch."
+}
+check_deps(){
+  local miss=()
+  command -v git >/dev/null 2>&1 || miss+=("git")
+  command -v "$PY" >/dev/null 2>&1 || miss+=("python")
+  { command -v "$HF_CLI" >/dev/null 2>&1 || py_has huggingface_hub; } || miss+=("huggingface_hub/hf-cli")
+  { command -v modelscope >/dev/null 2>&1 || py_has modelscope; } || miss+=("modelscope")
+  command -v aria2c >/dev/null 2>&1 || warn "aria2c missing — SLURP audio will use a slower fallback ('sudo apt-get install -y aria2')"
+  if [ ${#miss[@]} -gt 0 ]; then
+    warn "missing dependencies: ${miss[*]}"
+    warn "install with ONE of:"
+    warn "  bash scripts/data/fetch-data.sh --install-deps   # lightweight download deps only"
+    warn "  bash scripts/env-setup.sh                        # full stack (torch/verl/...), creates the venv"
+    return 1
+  fi
+}
 
-# 4) Datasets (excluding slurp; we do slurp ourselves with aria2 for speed)
-section "DATASETS"
-for tgt in d_librispeech d_mmau_mini d_mmar d_meld d_cremad d_minds14 d_covost2 d_fleurs d_voxceleb d_air_bench; do
-  echo "[smart] target: $tgt"
-  bash "$WAVE0" "$tgt" || echo "[smart] WARN: $tgt failed; continuing"
-done
+fetch_hf(){ # id dest rev repotype
+  local id="$1" dest="$2" rev="$3" rt="$4"; local args=(download "$id" --repo-type "$rt" --local-dir "$dest")
+  is_sha "$rev" && args+=(--revision "$rev")
+  if [ "$DRY" = 1 ]; then echo "  DRY> $HF_CLI ${args[*]}  (HF_ENDPOINT=$HF_ENDPOINT)"; return 0; fi
+  retry "$HF_CLI" "${args[@]}"
+}
+fetch_ms(){ # id dest dataset|model
+  local id="$1" dest="$2" rt="$3" flag=--dataset; [ "$rt" = model ] && flag=--model
+  if [ "$DRY" = 1 ]; then echo "  DRY> modelscope download $flag $id --local_dir $dest"; return 0; fi
+  retry modelscope download --max-workers "$MS_WORKERS" "$flag" "$id" --local_dir "$dest"
+}
+fetch_git(){ # url rev dest
+  local url="$1" rev="$2" dest="$3"
+  if [ "$DRY" = 1 ]; then echo "  DRY> git clone $url $dest ; checkout ${rev:0:12}"; return 0; fi
+  [ -d "$dest/.git" ] || retry git clone "$url" "$dest"
+  is_sha "$rev" && { git -C "$dest" checkout -q "$rev" 2>/dev/null || warn "checkout $rev failed in $dest"; }
+}
+fetch_slurp(){ # url rev audiodest
+  local url="$1" rev="$2" audio="$3" repo="$DR/repos/slurp" man="$DR/manifests/slurp.links.txt"
+  if [ "$DRY" = 1 ]; then echo "  DRY> git clone $url repos/slurp@${rev:0:12} ; aria2c Zenodo 4274930 -> $audio"; return 0; fi
+  fetch_git "$url" "$rev" "$repo"
+  mkdir -p "$audio"
+  if [ ! -s "$man" ]; then
+    curl -L -sS -m 30 "https://raw.githubusercontent.com/pswietojanski/slurp/master/scripts/download_audio.sh" \
+      | grep -Eo 'https://[^[:space:]\\]+' | grep -E 'zenodo\.org/.*/files/.*\.tar\.gz' | sort -u >"$man.tmp" && mv "$man.tmp" "$man"
+  fi
+  if command -v aria2c >/dev/null 2>&1 && [ -s "$man" ]; then
+    aria2c -x16 -s16 -j4 -c --auto-file-renaming=false --allow-overwrite=false --dir="$audio" \
+      --input-file="$man" --console-log-level=warn || warn "slurp aria2c returned non-zero"
+    for tgz in "$audio"/*.tar.gz; do [ -f "$tgz" ] || continue; [ -f "$tgz.extracted" ] || { tar -xzf "$tgz" -C "$audio" && touch "$tgz.extracted"; }; done
+  else warn "aria2c or manifest missing; run repos/slurp/scripts/download_audio.sh manually"; fi
+  ln -sfn "$audio" "$DR/datasets/slurp" 2>/dev/null || true
+}
 
-# 5) Reference repos (clone only; no recursive data-script execution)
-section "REFS (clone only)"
-bash "$WAVE0" refs
+if [ "$INSTALL" = 1 ]; then install_deps; exit 0; fi
 
-# 6) SLURP audio with aria2c -x 16 (parallel) using the manifest the script
-#    already produces. This replaces the upstream wget-style downloader.
-section "SLURP (aria2-accelerated)"
-SLURP_DIR="$DR/repos/slurp"
-SLURP_AUDIO="$SLURP_DIR/audio"
-SLURP_MANIFEST="$DR/manifests/slurp.links.txt"
-mkdir -p "$DR/manifests" "$SLURP_AUDIO"
-
-# Generate manifest (cheap; just curls one file)
-( cd "$PROJECT" && bash "$WAVE0" check >/dev/null 2>&1 || true )
-# Fallback: regenerate manifest directly
-if [ ! -s "$SLURP_MANIFEST" ]; then
-  echo "[slurp] regenerating manifest from upstream"
-  curl -L -sS -m 30 "https://raw.githubusercontent.com/pswietojanski/slurp/master/scripts/download_audio.sh" \
-    | grep -Eo 'https://[^[:space:]\\]+' \
-    | grep -E 'zenodo\.org/.*/files/.*\.tar\.gz' \
-    | sort -u >"$SLURP_MANIFEST.tmp"
-  mv "$SLURP_MANIFEST.tmp" "$SLURP_MANIFEST"
-fi
-echo "[slurp] manifest: $SLURP_MANIFEST ($(wc -l <"$SLURP_MANIFEST") urls)"
-
-# Clone repo if missing
-if [ ! -d "$SLURP_DIR/.git" ]; then
-  bash "$WAVE0" refs >/dev/null 2>&1 || true
-fi
-
-# aria2c parallel download with continuation; idempotent.
-if command -v aria2c >/dev/null 2>&1 && [ -s "$SLURP_MANIFEST" ]; then
-  echo "[slurp] aria2c -x16 -j4 -c -d $SLURP_AUDIO -i $SLURP_MANIFEST"
-  aria2c -x 16 -s 16 -j 4 -c --auto-file-renaming=false --allow-overwrite=false \
-    --dir="$SLURP_AUDIO" --input-file="$SLURP_MANIFEST" \
-    --console-log-level=warn --summary-interval=30 \
-    || echo "[slurp] WARN: aria2c returned non-zero; some shards may need retry"
-  # Extract tarballs that haven't been extracted
-  for tgz in "$SLURP_AUDIO"/*.tar.gz; do
-    [ -f "$tgz" ] || continue
-    marker="$tgz.extracted"
-    if [ ! -f "$marker" ]; then
-      echo "[slurp] extracting $(basename "$tgz")"
-      tar -xzf "$tgz" -C "$SLURP_AUDIO" && touch "$marker"
-    fi
+if [ "$LIST" = 1 ]; then
+  printf '%-22s %-8s %-18s %s\n' NAME KIND METHOD SOURCE
+  rows | while IFS=$'\x1f' read -r kind name subdir method id rev url zen; do
+    printf '%-22s %-8s %-18s %s\n' "$name" "$kind" "$method" "${id:-$url}"
   done
-else
-  echo "[slurp] WARN: aria2c missing or manifest empty; falling back to upstream script"
-  unset SPEECHRL_SKIP_SLURP_AUDIO
-  bash "$WAVE0" d_slurp || true
+  exit 0
 fi
-ln -sfn "$SLURP_DIR" "$DR/datasets/slurp"
 
-section "DONE"
-echo "All wave0 targets attempted at $(stamp). Re-run on failure; CLIs resume."
+# preflight: make sure the download tools exist (skip for --dry-run, which calls nothing)
+[ "$DRY" = 1 ] || check_deps || exit 1
+
+COUNT=0; SKIP=0; FAIL=0
+while IFS=$'\x1f' read -r kind name subdir method id rev url zen; do
+  want_match "$name" || continue
+  dest="$DR/$subdir"
+  # skip-existing
+  if [ "$name" = slurp ] && [ "$kind" = dataset ]; then
+    if [ -d "$dest/slurp_real" ] || [ -d "$dest/slurp_synth" ]; then
+      log "skip complete: slurp"; SKIP=$((SKIP+1)); ln -sfn "$dest" "$DR/datasets/slurp" 2>/dev/null || true; continue
+    fi
+  elif [ "$method" = git ]; then
+    [ -d "$dest/.git" ] && { log "skip complete: $name"; SKIP=$((SKIP+1)); continue; }
+  else
+    has_data "$dest" && { log "skip complete: $name"; SKIP=$((SKIP+1)); continue; }
+  fi
+  log "fetch $name  [$method ${id:-$url}]  -> $subdir"
+  rt=dataset; [ "$kind" = model ] && rt=model
+  case "$method" in
+    hf)                 fetch_hf "$id" "$dest" "$rev" "$rt"  && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    modelscope)         fetch_ms "$id" "$dest" "$rt"         && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    modelscope-manual)  warn "$name: optional evalscope set, id not recorded — fetch manually (skipping)" ;;
+    git)                if [ "$name" = slurp ] && [ "$kind" = dataset ]; then fetch_slurp "$url" "$rev" "$dest"; else fetch_git "$url" "$rev" "$dest"; fi \
+                          && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    *)                  warn "$name: unknown method '$method'; skipping" ;;
+  esac
+done < <(rows)
+
+log "done. fetched=$COUNT skipped=$SKIP failed=$FAIL   (manifest: $LOCK)"
+[ "$FAIL" = 0 ]

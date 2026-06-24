@@ -1,0 +1,705 @@
+{
+  "_comment": "FROZEN dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Datasets are not in git; this records the exact local snapshot. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md.",
+  "frozen": true,
+  "generated": "2026-06-24",
+  "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
+  "totals": {
+    "locked_datasets": 28,
+    "models": 5,
+    "total_bytes": 438863026008,
+    "total_h": "408.7G"
+  },
+  "datasets": [
+    {
+      "name": "librispeech",
+      "kind": "dataset",
+      "local_subdir": "datasets/librispeech",
+      "source": {
+        "kind": "modelscope",
+        "id": "openslr/librispeech_asr"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "115.2G",
+      "size_bytes": 123675394690,
+      "files": 262,
+      "task": "asr",
+      "factor_family": "content",
+      "note": "ASR; 100h+360h+960h"
+    },
+    {
+      "name": "covost2",
+      "kind": "dataset",
+      "local_subdir": "datasets/covost2",
+      "source": {
+        "kind": "hf",
+        "id": "facebook/covost2"
+      },
+      "revision": "unknown (no local metadata -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "282.9M",
+      "size_bytes": 296658986,
+      "files": 17,
+      "task": "st",
+      "factor_family": "content",
+      "note": "ST translations (audio via Common Voice)"
+    },
+    {
+      "name": "fleurs-r",
+      "kind": "dataset",
+      "local_subdir": "datasets/fleurs-r",
+      "source": {
+        "kind": "hf",
+        "hf_id": "google/fleurs-r",
+        "license": "cc-by-4.0",
+        "last_modified": "2024-08-19T02:05:15.000Z",
+        "id": "google/fleurs-r"
+      },
+      "revision": "c621c0b7b569dcebcd50273a187a35d1a1fc895f",
+      "status": "COMPLETE",
+      "size_h": "17.3G",
+      "size_bytes": 18584952953,
+      "files": 78,
+      "task": "st",
+      "factor_family": "content",
+      "note": "FLEURS-R restored speech; ST + language-ID"
+    },
+    {
+      "name": "crema-d",
+      "kind": "dataset",
+      "local_subdir": "datasets/crema-d",
+      "source": {
+        "kind": "hf",
+        "hf_id": "MahiA/CREMA-D",
+        "license": "mit",
+        "last_modified": "2024-10-23T13:24:27.000Z",
+        "id": "MahiA/CREMA-D"
+      },
+      "revision": "ac5b65fb890f1db0d2f7d6268d13994f481e5567",
+      "status": "COMPLETE",
+      "size_h": "578.4M",
+      "size_bytes": 606478314,
+      "files": 7448,
+      "task": "ser",
+      "factor_family": "speaker+emotion",
+      "note": "first-proof substrate (speaker+emotion, same audio)"
+    },
+    {
+      "name": "meld",
+      "kind": "dataset",
+      "local_subdir": "datasets/meld",
+      "source": {
+        "kind": "hf",
+        "hf_id": "declare-lab/MELD",
+        "license": "gpl-3.0",
+        "last_modified": "2022-10-24T04:48:06.000Z",
+        "id": "declare-lab/MELD"
+      },
+      "revision": "9abc51ee7903424ffb971297608aa6d3d0de3bfa",
+      "status": "COMPLETE",
+      "size_h": "32.4G",
+      "size_bytes": 34755683864,
+      "files": 13890,
+      "task": "ser",
+      "factor_family": "emotion",
+      "note": "MELD raw + features"
+    },
+    {
+      "name": "minds14",
+      "kind": "dataset",
+      "local_subdir": "datasets/minds14",
+      "source": {
+        "kind": "hf",
+        "id": "PolyAI/minds14"
+      },
+      "revision": "unknown (no local metadata -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "1.1G",
+      "size_bytes": 1133280761,
+      "files": 35,
+      "task": "intent",
+      "factor_family": "lang+intent",
+      "note": "SLU intent, 14 langs"
+    },
+    {
+      "name": "slurp",
+      "kind": "dataset",
+      "local_subdir": "repos/slurp/scripts/audio",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/pswietojanski/slurp"
+      },
+      "revision": "8eb16545762be97ace75334109d73824217311f1",
+      "status": "COMPLETE",
+      "size_h": "12.6G",
+      "size_bytes": 13507477690,
+      "files": 141656,
+      "task": "intent",
+      "factor_family": "lang+intent",
+      "note": "English SLU; audio at repos/slurp/scripts/audio",
+      "audio_zenodo_record": "4274930",
+      "transcripts": "repos/slurp/dataset (git)",
+      "datasets_symlink": "datasets/slurp -> repos/slurp/scripts/audio (create on setup)"
+    },
+    {
+      "name": "speech-massive",
+      "kind": "dataset",
+      "local_subdir": "datasets/speech-massive",
+      "source": {
+        "kind": "hf",
+        "hf_id": "FBK-MT/Speech-MASSIVE",
+        "license": [
+          "cc-by-nc-sa-4.0"
+        ],
+        "last_modified": "2025-10-07T15:21:44.000Z",
+        "id": "FBK-MT/Speech-MASSIVE"
+      },
+      "revision": "ff792febc16187a21e5bca38fb02a55daf91dc05",
+      "status": "COMPLETE",
+      "size_h": "30.3G",
+      "size_bytes": 32498335745,
+      "files": 97,
+      "task": "intent",
+      "factor_family": "lang+intent",
+      "note": "12-lang SLU intent+slot (eval-only NC)"
+    },
+    {
+      "name": "mmau-mini",
+      "kind": "dataset",
+      "local_subdir": "datasets/mmau-mini",
+      "source": {
+        "kind": "hf",
+        "hf_id": "TwinkStart/MMAU",
+        "license": null,
+        "last_modified": "2026-01-16T10:25:34.000Z",
+        "id": "TwinkStart/MMAU"
+      },
+      "revision": "42bd874593a0beed966e505411e896a808f9931f",
+      "status": "COMPLETE",
+      "size_h": "2.6G",
+      "size_bytes": 2843372907,
+      "files": 24,
+      "task": "audio",
+      "factor_family": "audio-understanding",
+      "note": "audio understanding eval"
+    },
+    {
+      "name": "mmar",
+      "kind": "dataset",
+      "local_subdir": "datasets/mmar",
+      "source": {
+        "kind": "hf",
+        "hf_id": "BoJack/MMAR",
+        "license": "cc-by-nc-4.0",
+        "last_modified": "2025-06-06T11:39:37.000Z",
+        "id": "BoJack/MMAR"
+      },
+      "revision": "3bd051123480e80d273ae9e8e9f1653f49010ac7",
+      "status": "COMPLETE",
+      "size_h": "2.8G",
+      "size_bytes": 2994099985,
+      "files": 13,
+      "task": "audio",
+      "factor_family": "audio-reasoning",
+      "note": "audio reasoning eval"
+    },
+    {
+      "name": "air-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/air-bench",
+      "source": {
+        "kind": "modelscope",
+        "id": "qfq/AIR-Bench_24.09"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "40.8G",
+      "size_bytes": 43849433944,
+      "files": 13574,
+      "task": "audio",
+      "factor_family": "audio-benchmark",
+      "note": "AIR-Bench"
+    },
+    {
+      "name": "mmsu",
+      "kind": "dataset",
+      "local_subdir": "datasets/mmsu",
+      "source": {
+        "kind": "hf",
+        "hf_id": "ddwang2000/MMSU",
+        "license": "mit",
+        "last_modified": "2026-04-28T14:25:04.000Z",
+        "id": "ddwang2000/MMSU"
+      },
+      "revision": "548e2283105825bf908a7db5c09c00dbcf42bd4c",
+      "status": "COMPLETE",
+      "size_h": "1.6G",
+      "size_bytes": 1664329065,
+      "files": 4956,
+      "task": "audio",
+      "factor_family": "audio-reasoning",
+      "note": "multi-skill spoken-reasoning MCQ"
+    },
+    {
+      "name": "big-bench-audio",
+      "kind": "dataset",
+      "local_subdir": "datasets/big-bench-audio",
+      "source": {
+        "kind": "hf",
+        "hf_id": "ArtificialAnalysis/big_bench_audio",
+        "license": "mit",
+        "last_modified": "2024-12-20T09:03:36.000Z",
+        "id": "ArtificialAnalysis/big_bench_audio"
+      },
+      "revision": "af7bb9c25b015792583ca4da3ee27ec62cb79fe6",
+      "status": "COMPLETE",
+      "size_h": "304.6M",
+      "size_bytes": 319411819,
+      "files": 1005,
+      "task": "audio",
+      "factor_family": "audio-reasoning",
+      "note": "spoken reasoning, 1000 items"
+    },
+    {
+      "name": "voicebench",
+      "kind": "dataset",
+      "local_subdir": "datasets/voicebench",
+      "source": {
+        "kind": "modelscope",
+        "id": "lmms-lab/voicebench"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "10.4G",
+      "size_bytes": 11200121285,
+      "files": 75,
+      "task": "intent",
+      "factor_family": "spoken-qa/agentic",
+      "note": "spoken-QA + agentic suite"
+    },
+    {
+      "name": "heysquad",
+      "kind": "dataset",
+      "local_subdir": "datasets/heysquad",
+      "source": {
+        "kind": "hf",
+        "hf_id": "yijingwu/HeySQuAD_human",
+        "license": "cc-by-4.0",
+        "last_modified": "2024-02-26T14:17:10.000Z",
+        "id": "yijingwu/HeySQuAD_human"
+      },
+      "revision": "2a9aff6032a76185b98eff703144a2a896313e49",
+      "status": "COMPLETE",
+      "size_h": "13.6G",
+      "size_bytes": 14616760066,
+      "files": 38,
+      "task": "intent",
+      "factor_family": "spoken-qa",
+      "note": "extractive spoken-QA"
+    },
+    {
+      "name": "spoken-squad",
+      "kind": "dataset",
+      "local_subdir": "datasets/spoken-squad",
+      "source": {
+        "kind": "hf",
+        "hf_id": "AudioLLMs/spoken_squad_test",
+        "license": null,
+        "last_modified": "2025-05-06T01:03:39.000Z",
+        "id": "AudioLLMs/spoken_squad_test"
+      },
+      "revision": "b55aab98726d0eab95eeef1ee9992a0532b3226e",
+      "status": "COMPLETE",
+      "size_h": "3.2G",
+      "size_bytes": 3403615926,
+      "files": 25,
+      "task": "intent",
+      "factor_family": "spoken-qa",
+      "note": "ASR-noise-robust spoken QA"
+    },
+    {
+      "name": "uro-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/uro-bench",
+      "source": {
+        "kind": "hf",
+        "hf_id": "Honggao/URO-Bench",
+        "license": "mit",
+        "last_modified": "2025-06-28T11:05:50.000Z",
+        "id": "Honggao/URO-Bench"
+      },
+      "revision": "ae7ebe43bc601df5e893942ca1e09e95ab9562aa",
+      "status": "COMPLETE",
+      "size_h": "11.3G",
+      "size_bytes": 12131704910,
+      "files": 46,
+      "task": "intent",
+      "factor_family": "spoken-dialogue",
+      "note": "EN+ZH spoken-dialogue agentic"
+    },
+    {
+      "name": "vocalbench",
+      "kind": "dataset",
+      "local_subdir": "datasets/vocalbench",
+      "source": {
+        "kind": "hf",
+        "hf_id": "VocalNet/VocalBench",
+        "license": "apache-2.0",
+        "last_modified": "2026-01-16T03:17:52.000Z",
+        "id": "VocalNet/VocalBench"
+      },
+      "revision": "23c7a2876f01c798764236d3682df4cf31849023",
+      "status": "COMPLETE",
+      "size_h": "4.6G",
+      "size_bytes": 4972235750,
+      "files": 9437,
+      "task": "intent",
+      "factor_family": "spoken-dialogue",
+      "note": "9-axis conversational eval"
+    },
+    {
+      "name": "vocalbench-zh",
+      "kind": "dataset",
+      "local_subdir": "datasets/vocalbench-zh",
+      "source": {
+        "kind": "hf",
+        "hf_id": "VocalNet/VocalBench-zh",
+        "license": "apache-2.0",
+        "last_modified": "2026-01-16T03:19:24.000Z",
+        "id": "VocalNet/VocalBench-zh"
+      },
+      "revision": "8ee76e027f2023161820c0fe70aeb7605e15f934",
+      "status": "COMPLETE",
+      "size_h": "3.7G",
+      "size_bytes": 3995816230,
+      "files": 15,
+      "task": "intent",
+      "factor_family": "spoken-dialogue",
+      "note": "Mandarin spoken-interaction"
+    },
+    {
+      "name": "voiceassistant-eval",
+      "kind": "dataset",
+      "local_subdir": "datasets/voiceassistant-eval",
+      "source": {
+        "kind": "hf",
+        "hf_id": "MathLLMs/VoiceAssistant-Eval",
+        "license": "mit",
+        "last_modified": "2025-10-21T08:13:38.000Z",
+        "id": "MathLLMs/VoiceAssistant-Eval"
+      },
+      "revision": "5b6260bc6fe2f90cb857befca73ac9916399da5a",
+      "status": "COMPLETE",
+      "size_h": "8.8G",
+      "size_bytes": 9491293809,
+      "files": 17,
+      "task": "intent",
+      "factor_family": "spoken-assistant",
+      "note": "13-cat assistant eval (roleplay/safety/S2S)"
+    },
+    {
+      "name": "audiomc",
+      "kind": "dataset",
+      "local_subdir": "datasets/audiomc",
+      "source": {
+        "kind": "hf",
+        "hf_id": "ScaleAI/audiomc",
+        "license": "mit",
+        "last_modified": "2026-02-18T18:32:40.000Z",
+        "id": "ScaleAI/audiomc"
+      },
+      "revision": "90ea11040fd05f41cf433b90f97ada45d847c500",
+      "status": "COMPLETE",
+      "size_h": "4.9G",
+      "size_bytes": 5283221784,
+      "files": 6,
+      "task": "intent",
+      "factor_family": "spoken-assistant",
+      "note": "multi-turn instruction retention"
+    },
+    {
+      "name": "soulx-duplug",
+      "kind": "dataset",
+      "local_subdir": "datasets/soulx-duplug",
+      "source": {
+        "kind": "hf",
+        "hf_id": "Soul-AILab/SoulX-Duplug-Eval",
+        "license": "apache-2.0",
+        "last_modified": "2026-03-19T13:27:27.000Z",
+        "id": "Soul-AILab/SoulX-Duplug-Eval"
+      },
+      "revision": "f6e50e8f07f3d33d8b2e77b14df986d14c817ef2",
+      "status": "COMPLETE",
+      "size_h": "316.7M",
+      "size_bytes": 332118583,
+      "files": 7,
+      "task": "intent",
+      "factor_family": "spoken-dialogue",
+      "note": "full-duplex turn-taking EN+ZH (zips)"
+    },
+    {
+      "name": "eva-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/eva-bench",
+      "source": {
+        "kind": "hf",
+        "hf_id": "ServiceNow-AI/eva",
+        "license": "mit",
+        "last_modified": "2026-03-24T18:25:28.000Z",
+        "id": "ServiceNow-AI/eva"
+      },
+      "revision": "566525430d942873f149273f0fa90fcaeba1f975",
+      "status": "COMPLETE",
+      "size_h": "257K",
+      "size_bytes": 263383,
+      "files": 5,
+      "task": "intent",
+      "factor_family": "spoken-agent",
+      "note": "voice-agent task+experience (airline); tiny by design"
+    },
+    {
+      "name": "tau2-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/tau2-bench",
+      "source": {
+        "kind": "modelscope",
+        "id": "evalscope/tau2-bench-data"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "25.0M",
+      "size_bytes": 26257026,
+      "files": 33,
+      "task": "intent",
+      "factor_family": "spoken-agent",
+      "note": "voice tool-use agent data"
+    },
+    {
+      "name": "seed-tts-eval",
+      "kind": "dataset",
+      "local_subdir": "datasets/seed-tts-eval",
+      "source": {
+        "kind": "modelscope-manual",
+        "id": "evalscope (id not recorded; fetch manually)"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "357.4M",
+      "size_bytes": 374790004,
+      "files": 9,
+      "task": "asr",
+      "factor_family": "tts-eval",
+      "note": "Seed-TTS eval set"
+    },
+    {
+      "name": "aime24",
+      "kind": "dataset",
+      "local_subdir": "datasets/aime24",
+      "source": {
+        "kind": "modelscope-manual",
+        "id": "evalscope (id not recorded; fetch manually)"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "16K",
+      "size_bytes": 16243,
+      "files": 2,
+      "task": "asr",
+      "factor_family": "text-reasoning-eval",
+      "note": "AIME 2024 math eval"
+    },
+    {
+      "name": "aime25",
+      "kind": "dataset",
+      "local_subdir": "datasets/aime25",
+      "source": {
+        "kind": "modelscope-manual",
+        "id": "evalscope (id not recorded; fetch manually)"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "31K",
+      "size_bytes": 32121,
+      "files": 3,
+      "task": "asr",
+      "factor_family": "text-reasoning-eval",
+      "note": "AIME 2025 math eval"
+    },
+    {
+      "name": "aime26",
+      "kind": "dataset",
+      "local_subdir": "datasets/aime26",
+      "source": {
+        "kind": "modelscope-manual",
+        "id": "evalscope (id not recorded; fetch manually)"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "18K",
+      "size_bytes": 18005,
+      "files": 2,
+      "task": "asr",
+      "factor_family": "text-reasoning-eval",
+      "note": "AIME 2026 math eval"
+    }
+  ],
+  "models": [
+    {
+      "name": "qwen3-omni-30b-a3b-instruct",
+      "kind": "model",
+      "local_subdir": "models/qwen3-omni-30b-a3b-instruct",
+      "source": {
+        "kind": "modelscope",
+        "id": "Intel/Qwen3-Omni-30B-A3B-Instruct-int4-AutoRound"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "24.5G",
+      "size_bytes": 26284321011,
+      "files": 23,
+      "task": "-",
+      "factor_family": "model",
+      "note": "INT4 generation backbone (W1)"
+    },
+    {
+      "name": "moss-audio-8b-instruct",
+      "kind": "model",
+      "local_subdir": "models/moss-audio-8b-instruct",
+      "source": {
+        "kind": "modelscope",
+        "id": "openmoss/MOSS-Audio-8B-Instruct"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "16.9G",
+      "size_bytes": 18118123263,
+      "files": 30,
+      "task": "-",
+      "factor_family": "model",
+      "note": "generation comparator (W1)"
+    },
+    {
+      "name": "nemotron3-nano-omni-nvfp4",
+      "kind": "model",
+      "local_subdir": "models/nemotron3-nano-omni-nvfp4",
+      "source": {
+        "kind": "modelscope",
+        "id": "nv-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "20.9G",
+      "size_bytes": 22431648317,
+      "files": 26,
+      "task": "-",
+      "factor_family": "model",
+      "note": "NVFP4 generation backbone (W1)"
+    },
+    {
+      "name": "minicpm-o-4_5",
+      "kind": "model",
+      "local_subdir": "models/minicpm-o-4_5",
+      "source": {
+        "kind": "modelscope",
+        "id": "OpenBMB/MiniCPM-o-4_5"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "18.7G",
+      "size_bytes": 20048636942,
+      "files": 53,
+      "task": "-",
+      "factor_family": "model",
+      "note": "GGUF/raw generation comparator (W1)"
+    },
+    {
+      "name": "omni-embed-nemotron-3b",
+      "kind": "model",
+      "local_subdir": "models/omni-embed-nemotron-3b",
+      "source": {
+        "kind": "modelscope",
+        "id": "nv-community/omni-embed-nemotron-3b"
+      },
+      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "8.8G",
+      "size_bytes": 9423120627,
+      "files": 22,
+      "task": "-",
+      "factor_family": "model",
+      "note": "W4 flagship frozen omni-embedding backbone"
+    }
+  ],
+  "ref_repos": [
+    {
+      "name": "slurp",
+      "kind": "ref-repo",
+      "local_subdir": "repos/slurp",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/pswietojanski/slurp"
+      },
+      "revision": "8eb16545762be97ace75334109d73824217311f1"
+    },
+    {
+      "name": "mbr-for-asr",
+      "kind": "ref-repo",
+      "local_subdir": "repos/mbr-for-asr",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/CyberAgentAILab/mbr-for-asr"
+      },
+      "revision": "b6d0f9729488c213beba80f98dc1e61344f9301e"
+    },
+    {
+      "name": "AudioGenie-Reasoner",
+      "kind": "ref-repo",
+      "local_subdir": "repos/AudioGenie-Reasoner",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/ryysayhi/AudioGenie-Reasoner"
+      },
+      "revision": "b80c9ce80b3f7f93241f4d8805ad84f8fbc76e73"
+    },
+    {
+      "name": "TTRL",
+      "kind": "ref-repo",
+      "local_subdir": "repos/TTRL",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/PRIME-RL/TTRL"
+      },
+      "revision": "5806e119789132fcb43552beaf2532d7d0447213"
+    },
+    {
+      "name": "TPO",
+      "kind": "ref-repo",
+      "local_subdir": "repos/TPO",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/yafuly/TPO"
+      },
+      "revision": "395c3d763a4c3df0ae72a4352b0db16fe5ee18e9"
+    },
+    {
+      "name": "JitRL",
+      "kind": "ref-repo",
+      "local_subdir": "repos/JitRL",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/liushiliushi/JitRL"
+      },
+      "revision": "97c8f56a7d30c2372a0c40ae159bd96198445642"
+    },
+    {
+      "name": "slue-toolkit",
+      "kind": "ref-repo",
+      "local_subdir": "repos/slue-toolkit",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/asappresearch/slue-toolkit"
+      },
+      "revision": "ed23039507c8f01b704a5c43ed89b6e808a49405"
+    }
+  ]
+}
