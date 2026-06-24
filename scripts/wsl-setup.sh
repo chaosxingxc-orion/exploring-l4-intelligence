@@ -4,8 +4,8 @@
 set -euo pipefail
 
 sudo apt-get update
-# build tools + git + aria2 (fast multi-connection downloader used for SLURP audio)
-sudo apt-get install -y build-essential git curl ca-certificates wget aria2
+# build tools + git + aria2 (fast multi-connection downloader for HF/SLURP) + jq (hfd JSON parsing)
+sudo apt-get install -y build-essential git curl ca-certificates wget aria2 jq
 
 # CUDA toolkit for WSL-Ubuntu. Blackwell (RTX 5090, sm_120) needs >= 12.8.
 # Adjust 'distro' to match your Ubuntu version (ubuntu2404 / ubuntu2204).

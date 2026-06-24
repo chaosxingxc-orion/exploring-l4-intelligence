@@ -37,12 +37,14 @@ the lockfile + update the registry, then re-fetch — it is never an accident.
 
 ### Dependencies
 
-The downloader needs the speechrl venv (the `hf` + `modelscope` CLIs) and `aria2c` (for SLURP audio).
-If anything is missing it prints exactly what and how to fix it. Two channels:
+The downloader needs `python3`, `git`, `curl`, **`aria2c`**, and **`modelscope`** (`jq` optional, speeds
+up `hfd`). HF datasets are fetched via hf-mirror's `hfd`+`aria2c` (auto-downloaded), because the Python
+`hf` CLI rejects hf-mirror's HEAD metadata — so `aria2c` is required for HF in CN; the `hf` CLI is only a
+fallback (direct huggingface.co). The downloader preflight-checks and, if anything's missing, points to:
 
 ```bash
-bash scripts/env-setup.sh                       # full stack (torch/verl + download CLIs); creates the venv
-bash scripts/data/fetch-data.sh --install-deps  # lightweight: just the download CLIs + aria2 (no torch)
+bash scripts/env-setup.sh                       # full stack (torch/verl + download deps); creates the venv
+bash scripts/data/fetch-data.sh --install-deps  # lightweight: download deps only (modelscope, aria2, jq, hf), no torch
 ```
 
 ## Models (5 local, ~90 GB)

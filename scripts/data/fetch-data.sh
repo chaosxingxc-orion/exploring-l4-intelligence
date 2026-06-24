@@ -36,9 +36,13 @@ SPEECHRL_VENV="${SPEECHRL_VENV:-$HOME/.venvs/speechrl}"
 # China-friendly mirrors by default; override via env.
 export HF_ENDPOINT="${SPEECHRL_HF_ENDPOINT:-https://hf-mirror.com}"
 export HF_HUB_DISABLE_XET="${HF_HUB_DISABLE_XET:-1}"
-export LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONIOENCODING=utf-8 TQDM_ASCII=1 NO_COLOR=1
+# NB: do NOT set TQDM_ASCII — tqdm reads it as the bar charset string ("1" -> len 1 -> div-by-zero
+# in non-TTY/piped runs), which crashes both `hf` and `modelscope` downloads.
+export LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONIOENCODING=utf-8 NO_COLOR=1
 MS_WORKERS="${SPEECHRL_MS_WORKERS:-16}"
-PY="${SPEECHRL_PYTHON:-python}"
+HFD_THREADS="${SPEECHRL_HFD_THREADS:-8}"
+# Prefer the venv's `python`; fall back to `python3` (Ubuntu often has no bare `python`).
+PY="${SPEECHRL_PYTHON:-$(command -v python || command -v python3 || echo python)}"
 HF_CLI="$(command -v hf || command -v huggingface-cli || echo hf)"
 
 DRY=0; LIST=0; INSTALL=0; WANT=()
@@ -79,27 +83,45 @@ retry(){ local n=1; while [ $n -le 3 ]; do "$@" && return 0; warn "attempt $n/3 
 py_has(){ "$PY" -c "import $1" >/dev/null 2>&1; }
 install_deps(){
   log "installing data-download dependencies (lightweight; no torch needed)"
-  if command -v uv >/dev/null 2>&1 && [ -n "${VIRTUAL_ENV:-}" ]; then
-    uv pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "uv pip install failed"
-  elif command -v pip >/dev/null 2>&1; then
-    pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "pip install failed (no venv? run: bash scripts/env-setup.sh)"
+  # 1) ensure a venv: use the active one, else create $SPEECHRL_VENV with uv (idempotent;
+  #    env-setup.sh later adds the training stack to the same venv).
+  if [ -z "${VIRTUAL_ENV:-}" ] && command -v uv >/dev/null 2>&1; then
+    log "creating/using venv at $SPEECHRL_VENV (uv)"
+    uv venv "$SPEECHRL_VENV" --python 3.12 >/dev/null 2>&1 || uv venv "$SPEECHRL_VENV" >/dev/null 2>&1 || true
+    # shellcheck disable=SC1091
+    [ -f "$SPEECHRL_VENV/bin/activate" ] && { source "$SPEECHRL_VENV/bin/activate"; export PATH="$SPEECHRL_VENV/bin:$PATH"; }
+  fi
+  # 2) install the download CLIs (into the venv if we have one; else system pip with a
+  #    PEP 668 fallback for externally-managed Pythons like Ubuntu 24.04).
+  local pkgs=(huggingface_hub hf_transfer modelscope)  # hf CLI ships in base hf-hub; hf_transfer is a separate pkg
+  if [ -n "${VIRTUAL_ENV:-}" ] && command -v uv >/dev/null 2>&1; then
+    uv pip install -U "${pkgs[@]}" || warn "uv pip install failed"
+  elif [ -n "${VIRTUAL_ENV:-}" ]; then
+    pip install -U "${pkgs[@]}" || warn "pip install failed"
   else
-    "$PY" -m pip install -U "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope || warn "pip install failed (no venv? run: bash scripts/env-setup.sh)"
+    pip install -U "${pkgs[@]}" 2>/dev/null \
+      || pip install --break-system-packages -U "${pkgs[@]}" \
+      || "$PY" -m pip install --break-system-packages -U "${pkgs[@]}" \
+      || warn "pip install failed — run: bash scripts/env-setup.sh"
   fi
-  if ! command -v aria2c >/dev/null 2>&1; then
+  # 3) aria2c + jq (system pkgs): aria2c powers hfd (HF) and SLURP audio; jq speeds up hfd JSON parsing
+  local need=(); command -v aria2c >/dev/null 2>&1 || need+=(aria2); command -v jq >/dev/null 2>&1 || need+=(jq)
+  if [ ${#need[@]} -gt 0 ]; then
     if command -v apt-get >/dev/null 2>&1; then
-      sudo apt-get update && sudo apt-get install -y aria2 || warn "aria2 install failed (SLURP audio will use a slower fallback)"
-    else warn "install aria2 for fast SLURP audio (e.g. 'sudo apt-get install -y aria2')"; fi
+      sudo apt-get update && sudo apt-get install -y "${need[@]}" || warn "apt install ${need[*]} failed (HF/SLURP downloads will be slower or use a fallback)"
+    else warn "install ${need[*]} manually (e.g. 'sudo apt-get install -y ${need[*]}')"; fi
   fi
-  log "dependency install attempted; re-run without --install-deps to fetch."
+  log "dependency install attempted. Activate the venv: source ${SPEECHRL_VENV}/bin/activate ; then re-run to fetch."
 }
 check_deps(){
   local miss=()
-  command -v git >/dev/null 2>&1 || miss+=("git")
-  command -v "$PY" >/dev/null 2>&1 || miss+=("python")
-  { command -v "$HF_CLI" >/dev/null 2>&1 || py_has huggingface_hub; } || miss+=("huggingface_hub/hf-cli")
+  command -v "$PY" >/dev/null 2>&1 || miss+=("python3")
+  command -v git  >/dev/null 2>&1 || miss+=("git")
+  command -v curl >/dev/null 2>&1 || miss+=("curl")
   { command -v modelscope >/dev/null 2>&1 || py_has modelscope; } || miss+=("modelscope")
-  command -v aria2c >/dev/null 2>&1 || warn "aria2c missing — SLURP audio will use a slower fallback ('sudo apt-get install -y aria2')"
+  # HF datasets download via hfd+aria2c (the hf CLI is only a fallback and is incompatible with hf-mirror).
+  command -v aria2c >/dev/null 2>&1 || warn "aria2c missing — required for HF datasets (hfd) + SLURP audio: sudo apt-get install -y aria2"
+  command -v jq >/dev/null 2>&1 || warn "jq missing — hfd will parse JSON more slowly (optional): sudo apt-get install -y jq"
   if [ ${#miss[@]} -gt 0 ]; then
     warn "missing dependencies: ${miss[*]}"
     warn "install with ONE of:"
@@ -109,11 +131,33 @@ check_deps(){
   fi
 }
 
+# hfd = hf-mirror's aria2c downloader. It fetches resolve URLs directly (like curl/aria2c), so it
+# works with hf-mirror, whereas the python `hf` CLI rejects the mirror's HEAD metadata
+# (FileMetadataError). Auto-fetch hfd.sh into the data dir if not already on PATH.
+ensure_hfd(){
+  command -v hfd >/dev/null 2>&1 && { command -v hfd; return; }
+  local f="$DR/.bin/hfd.sh"
+  [ -f "$f" ] || { mkdir -p "$DR/.bin"; curl -fsSL "${HF_ENDPOINT}/hfd/hfd.sh" -o "$f" 2>/dev/null && chmod +x "$f"; }
+  [ -s "$f" ] && echo "$f"
+}
 fetch_hf(){ # id dest rev repotype
-  local id="$1" dest="$2" rev="$3" rt="$4"; local args=(download "$id" --repo-type "$rt" --local-dir "$dest")
-  is_sha "$rev" && args+=(--revision "$rev")
-  if [ "$DRY" = 1 ]; then echo "  DRY> $HF_CLI ${args[*]}  (HF_ENDPOINT=$HF_ENDPOINT)"; return 0; fi
-  retry "$HF_CLI" "${args[@]}"
+  local id="$1" dest="$2" rev="$3" rt="$4"
+  if [ "$DRY" = 1 ]; then
+    echo "  DRY> hfd $id $([ "$rt" = dataset ] && echo --dataset) --tool aria2c -x $HFD_THREADS --local-dir $dest $(is_sha "$rev" && echo "--revision $rev")  (HF_ENDPOINT=$HF_ENDPOINT)"
+    return 0
+  fi
+  # Prefer hfd+aria2c (mirror-compatible); fall back to the hf CLI (works against huggingface.co direct).
+  if command -v aria2c >/dev/null 2>&1; then
+    local hfd; hfd="$(ensure_hfd)"
+    if [ -n "$hfd" ]; then
+      local a=("$id" --tool aria2c -x "$HFD_THREADS" --local-dir "$dest"); [ "$rt" = dataset ] && a+=(--dataset)
+      is_sha "$rev" && a+=(--revision "$rev")
+      retry bash "$hfd" "${a[@]}" && return 0
+      warn "$id: hfd failed; falling back to the hf CLI"
+    fi
+  fi
+  local c=(download "$id" --repo-type "$rt" --local-dir "$dest"); is_sha "$rev" && c+=(--revision "$rev")
+  retry "$HF_CLI" "${c[@]}"
 }
 fetch_ms(){ # id dest dataset|model
   local id="$1" dest="$2" rt="$3" flag=--dataset; [ "$rt" = model ] && flag=--model

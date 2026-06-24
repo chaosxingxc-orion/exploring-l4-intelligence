@@ -18,8 +18,9 @@ bash scripts/data/fetch-data.sh meld slurp       # fetch only named assets
 bash scripts/data/inventory.sh                   # audit vs the lock
 ```
 
-**Dependencies.** Needs the speechrl venv (`hf` + `modelscope` CLIs) and `aria2c`. The downloader
-preflight-checks and, if anything is missing, points to:
+**Dependencies.** Needs `python3`, `git`, `curl`, `aria2c`, `modelscope` (`jq` optional). HF datasets
+download via hf-mirror's `hfd`+`aria2c` (the `hf` CLI is only a fallback — it is incompatible with
+hf-mirror). The downloader preflight-checks and, if anything is missing, points to:
 
 ```bash
 bash scripts/env-setup.sh                        # full stack (torch/verl + download CLIs); creates the venv

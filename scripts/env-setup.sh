@@ -26,7 +26,7 @@ uv pip install transformers datasets accelerate peft \
 
 # --- data-download CLIs (needed by scripts/data/fetch-data.sh): HF Hub CLI + fast transfer,
 #     and ModelScope (some models/datasets are ModelScope-only). aria2 comes from wsl-setup.sh. ---
-uv pip install "huggingface_hub[cli,hf_transfer]" hf_transfer modelscope
+uv pip install huggingface_hub hf_transfer modelscope
 
 # --- shared library (editable) ---
 uv pip install -e "$REPO_ROOT/common"
