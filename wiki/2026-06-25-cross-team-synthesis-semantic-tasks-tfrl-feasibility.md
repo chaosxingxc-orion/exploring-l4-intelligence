@@ -75,10 +75,11 @@ task transformations and any synthetic RAG are diagnostics until community-bench
 
 - Operator A (this team): `pool_method_probe.py`, `_intent_pool_probe.py` (gitignored scratch); harness
   `omni_embedding_rl.eval_harness` + `data_cremad`/`data_minds14`/`data_librispeech`.
-- **Independent SLU reproduction (this doc):** `speechrl-data/_repro_minds14_toolintent.py` — rebuilds a
-  seed-42 intent-balanced MInDS-14 en-US subset and runs the collaborator's `evaluation.tool_intent` on
-  the frozen model under three arms, with a paired bootstrap CI.
-  `reproduce: SPEECHRL_DATA_DIR=… python speechrl-data/_repro_minds14_toolintent.py` (GPU).
+- **Independent SLU reproduction (this doc):** tracked W4 script
+  `projects/speech-mllm-omni-embedding-rl/scripts/repro_minds14_toolintent.py` — rebuilds a seed-42
+  intent-balanced MInDS-14 en-US subset and runs the collaborator's `evaluation.tool_intent` on the
+  frozen model under three arms, with a paired bootstrap CI.
+  `reproduce: SPEECHRL_DATA_DIR=… python scripts/repro_minds14_toolintent.py` (GPU; run from the W4 repo).
 - Operator B / policy surface (collaborator): `scripts/tool_intent_retrieval.py`, `route_policy_eval.py`,
   `rag_answer_eval.py`, `paired_rank_compare.py`, `strict_selection.py` (W4 repo).
 - Lean: `cd proofs/tfrl && lake exe cache get && lake build`.
@@ -99,7 +100,7 @@ task transformations and any synthetic RAG are diagnostics until community-bench
 
 ### 6a. Independent MInDS-14 reproduction (this team, GPU)
 
-GPU run `_repro_minds14_toolintent.py`, seed 42, **n=182** (13/class balanced en-US), frozen
+GPU run `scripts/repro_minds14_toolintent.py` (W4 repo), seed 42, **n=182** (13/class balanced en-US), frozen
 `omni-embed-nemotron-3b` on RTX 5090, three arms, paired 1000-bootstrap CI on per-row hit@1:
 
 | Arm (`z`) | Acc@1 |
