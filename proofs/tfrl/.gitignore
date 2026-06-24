@@ -1,0 +1,2 @@
+# Lean build artifacts (rebuild with: lake exe cache get && lake build)
+/.lake/

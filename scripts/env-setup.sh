@@ -19,8 +19,11 @@ source "$VENV/bin/activate"
 uv pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128
 python -c "import torch; assert torch.cuda.is_available(); print('GPU:', torch.cuda.get_device_name(0))"
 
-# --- core science + speech + tracking ---
+# --- core science + speech + tracking + probes/metrics ---
+# sentence-transformers: the frozen omni-embedder loader (Operator A); scikit-learn: linear/kNN probes
+# (rl.probe, the verifiable disentanglement reward); sacrebleu: BLEU/chrF (rl.metrics, ST).
 uv pip install transformers datasets accelerate peft \
+               sentence-transformers scikit-learn sacrebleu \
                librosa soundfile jiwer \
                hydra-core omegaconf mlflow ruff pytest
 

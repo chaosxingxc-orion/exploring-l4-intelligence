@@ -6,6 +6,26 @@
 
 ---
 
+### 2026-06-24 · Training-free RL validation run (waves 0–4): emotion gain + Lean convergence + Operator-B blocker
+**Decision.** Ran the validation-only wave suite on the rebuilt GPU env (RTX 5090). Validated training-free
+RL **Operator A** (frozen omni-embed disentanglement) across factor families and **proved the convergence
+theory in Lean 4**; archived everything to the wiki ([[2026-06-24-tfrl-validation-run-log]] + 3 dated
+per-experiment docs with 5-role adversarial challenges).
+**Why.** Owner goal: feasible sample-level training-free-RL gains on mainstream semantic tasks, with Lean
+math-convergence proof and adversarial validation of the gains.
+**Consequences.** Results: (1) **emotion/SER gain Δ+0.097** (mean→attentive pooling @L16) — a real
+training-free Operator-A gain (scoped: CI-separation marginal at test=300, queue dev-selection+paired
+bootstrap). (2) content exposed (~1.0), intent present-but-not-steerable (~0.25, no pooling gain),
+speaker suppressed (~0.04) — consistent with the disentanglement thesis. (3) **Lean** `proofs/tfrl/`:
+T1 tilting, T3 flat-reward no-go, T4 plurality, T5 MBR-SLLN, T6 regret-O(√log N) **proved sorry-free**;
+T2 KL-bound proved modulo one order-statistics `sorry` (`lake build` 8566 jobs). (4) **Operator-B
+generative best-of-N (ASR/SLU/agentic) BLOCKED** — all 4 downloaded generators incompatible with
+transformers-4.57/vllm-0.14 (minicpm-o-4.5: vllm only 2.6 + audio-encoder bug; qwen3-omni: needs newer
+transformers processor; moss-audio: no modeling code). Fix: bump transformers/vllm or use a
+Qwen2.5-Omni/Qwen2-Audio checkpoint. New reusable code: `common/rl/decode.py`, `data_minds14/librispeech`,
+generalized `eval_harness`, intent/lid conditionings; env-setup gap fixed (sentence-transformers/sklearn/
+sacrebleu). Large-scale deferred pending the emotion-gain significance upgrade + the Operator-B stack fix.
+
 ### 2026-06-24 · Dataset set frozen to a lockfile; downloads unified into one script
 **Decision.** Froze the dataset/model set to exactly what is on disk and recorded it in a single
 committed manifest, `docs/datasets.lock.json` (28 datasets + 5 models + 7 ref repos, each with its
