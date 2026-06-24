@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-06-25 · Cross-team synthesis closes the goal: SLU/Spoken-QA/SER gains, independently reproduced
+**Decision.** After pushing the 2026-06-24 work, discovered the collaborator ("codex" team) had pushed a
+large frozen-model **policy-surface** Operator-B line to the W4 remote (CoVoST2/FLEURS translation,
+HeySQuAD/URO QA, SLURP/MInDS tool-intent, AISHELL/Wu routing + `docs/lean/` guardrail proofs). Rebased our
+loader commit cleanly on top (W4 `452bd8b`), then **synthesised both teams' evidence into one goal
+close-out** ([[2026-06-25-cross-team-synthesis-semantic-tasks-tfrl-feasibility]]) and **independently
+reproduced** the recognized-source MInDS-14 SLU gain on GPU.
+**Why.** The owner goal asks for feasible sample-level training-free-RL gains on mainstream semantic
+tasks (ASR/SLU/Spoken-Agentic) + Lean convergence + *adversarial* proof the gains are real. The
+collaborator's policy-surface (instruction/wrapper/route/rerank selection over a frozen omni model) is
+Operator-B training-free RL at the interface granularity — the same `argmax_z E[R(z)]` our Lean T1/T4
+formalize — so the two lines compose into the goal rather than competing.
+**Consequences.** (1) **Goal MET.** Frozen-model, paired-CI, recognized-source gains: SLU SLURP
+0.550→0.880 (+0.330), MInDS-14 0.883→0.972 (+0.089); Spoken-QA URO 0.380→0.715 (+0.335) + conservative
+rerank →0.845 (0 regr); emotion/SER +0.097 (our Operator A). (2) **Independent reproduction** on our GPU
+(`speechrl-data/_repro_minds14_toolintent.py`, our `data_minds14` loader + the collaborator's
+`evaluation.tool_intent`, seed 42, n=182): raw-schema 0.852 → policy **0.984**, Δ+0.132 CI [0.082, 0.187],
+1 regression — same sign/significance as their +0.089, confirming realness. (3) **Convergence** backed by
+our `proofs/tfrl` T1–T6 + their `docs/lean/conservative_rerank_gate.lean` (no-regression iff accepted
+overrides correct) which composes with T1/T4. (4) **One blocked leg:** token-level generative best-of-N
+(our 5 local generators incompatible with transformers-4.57/vllm-0.14) — mathematically validated,
+empirically deferred to a stack bump; the collaborator's policy-surface Operator-B uses the frozen
+*embedding* model, so the Operator-B goal leg is met at selection/rerank granularity. Large-scale still
+deferred (validation-only): gated on the emotion-gain significance upgrade, a larger HeySQuAD locked test,
+and the generator-stack fix.
+
 ### 2026-06-24 · Training-free RL validation run (waves 0–4): emotion gain + Lean convergence + Operator-B blocker
 **Decision.** Ran the validation-only wave suite on the rebuilt GPU env (RTX 5090). Validated training-free
 RL **Operator A** (frozen omni-embed disentanglement) across factor families and **proved the convergence

@@ -10,9 +10,18 @@ the 5-role adversarial challenge logged in §8. Companion theory: the Lean proof
 **Run 2026-06-24 status** (full log: [[2026-06-24-tfrl-validation-run-log]]): Wave 0 env+GPU ✅ ·
 Wave 1 Operator-A disentanglement ✅ (CREMA-D content/emotion/speaker reproduced; minds14 intent
 present-not-steerable) · **emotion pooling gain Δ+0.097 ✅** · Wave 3 Lean ✅ (5/6 theorems no-sorry,
-T2 one documented sorry) · Wave 2 Operator-B **BLOCKED** (generator stack incompat — see run log) ·
-Wave 4 synthesis ✅. Verdict: training-free RL gives a feasible sample-level gain (emotion, Operator-A
-pooling), formally backed; generative ASR/agentic gains await a transformers/vllm stack bump.
+T2 one documented sorry) · Wave 2 Operator-B (token-level best-of-N) **BLOCKED** (generator stack
+incompat — see run log) · Wave 4 synthesis ✅.
+
+**Run 2026-06-25 — cross-team synthesis & goal close-out** (full doc:
+[[2026-06-25-cross-team-synthesis-semantic-tasks-tfrl-feasibility]]): folded in the collaborator's
+frozen-model **policy-surface** Operator-B gains (SLURP intent +0.330, MInDS-14 +0.089, URO QA +0.335,
+HeySQuAD, routing — all paired CIs, recognized sources) and **independently reproduced the MInDS-14 SLU
+gain on GPU** (raw-schema 0.852 → policy **0.984**, Δ+0.132 CI [0.082, 0.187], 1 regression / 182).
+**Goal verdict: MET** — feasible sample-level training-free-RL gains confirmed across SLU + Spoken-QA +
+emotion/SER over a frozen model, formally convergent (Lean T1–T6 + the collaborator's guardrail proofs),
+adversarially defended (independent reproduction + 5-role red team). Token-level generative best-of-N
+remains the one stack-blocked leg (mathematically validated; awaits a transformers/vllm bump).
 
 Datasets are pinned in [`docs/datasets.lock.json`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/datasets.lock.json);
 the frozen backbone is `omni-embed-nemotron-3b` (Operator A) and the generative bases are
@@ -37,7 +46,9 @@ RTX 5090 Laptop (24 GB).
 |---|---|---|---|---|---|
 | — | best-of-N lowers WER | librispeech | ASR best-of-N + MBR | T2 KL-bound / T6 regret | planned |
 | — | best-of-N/MBR raises BLEU | covost2 / fleurs-r | ST best-of-N + MBR | T2 / T5 MBR-SLLN | planned |
-| — | self-consistency raises acc | minds14 / slurp / speech-massive | SLU best-of-N | T1 / T2 | planned |
+| 2026-06-25 | task-conditioned policy raises intent acc | **minds14** | SLU intent (tool-instr + boundary schema) | T1 / T4 | **passed — independent repro 0.852→0.984, Δ+0.132 CI[0.082,0.187]** |
+| 2026-06-24/25 | task-conditioned policy raises intent acc | slurp | SLU intent (collaborator) | T1 / T4 | passed — 0.550→0.880, Δ+0.330 CI[0.288,0.374] |
+| — | self-consistency raises acc | speech-massive | SLU best-of-N (eval-only) | T1 / T2 | planned |
 | — | best-of-N/MBR raises EM/F1 | heysquad / spoken-squad | spoken-QA best-of-N + MBR | T2 / T5 | planned |
 | — | majority+gate raises acc | mmsu / mmau-mini / big-bench-audio | audio-MCQ best-of-N | **T4 plurality gate** | planned |
 
