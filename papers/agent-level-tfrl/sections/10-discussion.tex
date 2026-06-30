@@ -1,0 +1,143 @@
+\section{Threats to Validity and Limitations}
+\label{sec:threats}
+
+We hold this work to the standard of self-criticism it advocates, and enumerate the threats in
+descending order of how much they could change the paper's claims. We distinguish \emph{threats to
+the thesis} (does optimization-space adequacy actually hold?) from \emph{threats to the moat} (is the
+contribution durable and novel?) and \emph{threats to the empirics} (do the measurements support the
+conclusions?).
+
+\paragraph{The moat is an absence of evidence (fast-follower risk).}
+Our central feasibility argument rests on the observation that no prior work couples training-free,
+reward-guided inference-time optimization with a frozen omni model's disentangled embeddings as the
+search variable. An absence of evidence is structurally weaker than evidence of absence: it is
+falsified the moment a competing group publishes the same coupling, and the individual ingredients
+--- best-of-$N$ and reranking \citep{beirami2024bon,verdun2025softbon}, controlled decoding
+\citep{mudgal2024controlled}, no-gradient credit assignment \citep{jitrl2026}, test-time RL
+\citep{zuo2025ttrl,li2025tpo} --- are all public. We therefore do not claim a defensible technical
+monopoly; we claim a \emph{first-mover synthesis} whose value is the formalization
+(\Cref{sec:threats} notwithstanding, the OSA theorems) and the machine-checked guarantees, not the
+mechanism itself. A reader should weight this contribution as integrative rather than as a primitive
+discovery.
+
+\paragraph{The mechanism is not novel; it is a domain transfer.}
+The Gibbs-optimal tilting $\qs \propto \qo\exp(\Rwd/\beta)$ and its KL-regularized variational
+characterization are textbook results in the alignment-as-Bayesian-inference literature
+\citep{korbak2022kl,yang2024asymptotics}, and the best-of-$N$/KL frontier is now sharply understood
+\citep{beirami2024bon,gui2024bonbon}. Our contribution is to instantiate this machinery over the
+\emph{embedding} action space $\cZA$ of a frozen speech model rather than the token space, and to
+argue that the relevant degrees of freedom $\cZ$ already carry the pretrained paralinguistic and
+semantic structure \citep{frozenllmparaling2024,salmonn2023}. This is a transfer claim, and transfer
+claims fail when the target domain violates a hidden precondition of the source domain --- precisely
+the risks catalogued next.
+
+\paragraph{OSA-2 idealizes context isolation as exact separability.}
+\Cref{sec:threats} aside, OSA-2 models a multi-key agent reward as a sum of per-context-isolated
+components and proves adequacy of the operator-A search distribution under \emph{exact} additive
+separability of $\Rwd$ across the content, speaker, emotion, and language/intent factors. Real agent
+rewards are at best \emph{approximately} separable: an ASR-conditioned downstream reward leaks into
+the emotion channel through prosody, and intent classification is not independent of transcription
+quality. Under a residual coupling of magnitude $\epsilon$ in the cross-factor Hessian, the
+Gibbs optimum of the separable surrogate is displaced from the true optimum, and the gain $\gain$
+we certify is an upper bound that degrades as $\Rwd$ departs from additivity. We have not
+characterized this degradation quantitatively; the gap between idealized and approximate separability
+is the single largest theory-to-practice risk, and the empirical separability of the embedding
+factors \citep{xiao2020whatnot,wang2020alignuniform,leace2023} is an assumption our probes support
+only locally, not globally.
+
+\paragraph{OSA-3b proves the finite-separable optimum; finite-time convergence over the full space is open.}
+OSA-3b establishes that, restricted to a finite, exactly separable action set, the reward-guided
+update reaches the Gibbs optimum $\qs$ and the gate behaves as a stabilizing control law. The
+operational convergence we actually run, however, is JitRL's \citep{jitrl2026} no-gradient credit
+assignment, whose guarantee is \emph{asymptotic under slow drift} of the rollout distribution. The
+two regimes do not compose into a finite-time statement: we do \emph{not} have a monotone-improvement
+guarantee for the gated update over the full, continuous, only-approximately-separable space at a
+finite horizon. This is an open problem, not an oversight, and it bears on the stability claims that
+agentic deployments care about most \citep{ace2025,expfollowing2025,remembering2026}. Until it is
+closed, the control-law framing of the gate is a design principle backed by an idealized proof, not a
+deployment-grade certificate.
+
+\paragraph{The isolated Hoeffding lemma and the T2 order-statistics \texttt{sorry} are load-bearing assumptions.}
+Our machine-checked development contains two acknowledged gaps. The isolated Hoeffding lemma is
+stated and used but its concentration constant is assumed rather than derived from the actual
+reward's bounded-difference structure; if the per-context reward is heavier-tailed than the assumed
+sub-Gaussian envelope, the sample-complexity constants are optimistic. The T2 order-statistics result
+that underwrites the best-of-$N$ spread $\spread$ retains a \texttt{sorry}: the asymptotics of the
+maximum order statistic \citep{yang2024asymptotics,beirami2024bon} are invoked as a hypothesis, not
+proved in our formalization. We flag both explicitly so that no reader mistakes ``machine-checked''
+for ``unconditionally proved''; the checked artifact is sound \emph{relative to} these two
+assumptions.
+
+\paragraph{Reward hacking and Goodhart on verifiable speech rewards.}
+Inference-time optimization against a fixed reward is, by construction, an over-optimization engine:
+pushing $N$ or lowering $\beta$ moves probability mass toward whatever the reward measures, including
+its defects \citep{gao2023overopt,skalse2022rewardhacking}. Verifiable speech rewards (WER, exact
+match, intent accuracy) are more robust than learned reward models, but they are not immune: WER
+rewards literal transcription and can be gamed by hedging or copying, and ``spurious rewards'' can
+induce gains that do not reflect the intended capability \citep{spuriousrewards2025,rlvrincentive2025}.
+Because we change no weights, the failure is recoverable (lower $N$, raise $\beta$) rather than baked
+into parameters --- but the gate must be tuned against held-out, contamination-controlled splits
+\citep{contaminationsurvey2024,gorman2019splits}, or the certified $\gain$ measures the benchmark, not
+the skill.
+
+\paragraph{Paralinguistic keys are dual-use: a mis-estimated label both mis-routes and mis-rewards.}
+The same emotion/speaker estimate that \emph{routes} a query (selecting the context and skill) also
+\emph{rewards} the rollout that produced it. A mis-estimated SER label therefore enters two coupled
+loops with the same sign of error: it sends the query to the wrong context \emph{and} reinforces the
+embedding that yielded the wrong label, a positive-feedback pathway that idealized separability hides.
+This is sharpened by evidence that omni models tend to ``read, not listen'' on paralinguistic cues
+\citep{voxparadox2026,listenortranscribe2025} and that speaker identity resists in-context correction
+\citep{spkverifllm2026}. The mitigation --- decoupling the routing estimator from the reward
+estimator --- is future work, not a property of the current gate.
+
+\paragraph{Memory poisoning via acoustic spoofing.}
+When the optimized embedding is written to agent memory, the acoustic channel becomes an injection
+surface: a spoofed speaker or emotion can plant a poisoned key that later retrieval amplifies
+\citep{agentpoison2024,mempoison2026}. Unlike text poisoning, the attack needs no lexical trigger ---
+it rides paralinguistic features the model already over-trusts. We provide no audit defense here;
+memory hygiene and provenance \citep{anatomymem2026} are required before the embedding-as-memory-key
+design is safe to deploy.
+
+\paragraph{Small-sample confidence intervals.}
+Several of our preliminary results are reported on modest evaluation sets, where bootstrap intervals
+\citep{bisani2004bootstrap} are wide and statistical power is low \citep{card2020power,dror2018hitchhiker}.
+Effects near the resolution of a few hundred utterances should be read as directional, not confirmed;
+adequately powered, seed-averaged \citep{henderson2018drlmatters} replication on the frozen,
+contamination-controlled split is a precondition for any quantitative headline.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have argued, and where possible machine-checked, a single thesis: that the inference-time degrees
+of freedom of a \emph{frozen} speech/omni multimodal LLM constitute an action space $\cZ$ that is
+\emph{adequate} for the optimization we ask of it --- that reward-guided search over $\cZ$, with no
+gradient and no weight or structure change, can activate pretrained capability rather than instill it.
+We formalized this as optimization-space adequacy in three parts. OSA-1 identifies $\cZ$ and its two
+operators, the embedding/Operator-A space $\cZA$ and the generative/Operator-B space $\cZB$, and
+characterizes the Gibbs optimum $\qs \propto \qo\exp(\Rwd/\beta)$ as the target of any KL-regularized
+search $\Fobj{q}=\Exp_q[\Rwd]-\beta\,\KL{q}{\qo}$. OSA-2 shows that, under context isolation, an
+operator-A search distribution is adequate for the multi-key agentic reward. OSA-3 (with OSA-3b)
+establishes the separable-finite optimum and the gate's behavior as a control law on the
+exploration--exploitation frontier. We are deliberate that these are proved under the idealizations
+and the two named assumptions of \Cref{sec:threats}: the contribution is a rigorous \emph{scaffold},
+honestly bounded, not an unconditional theorem.
+
+The feasibility case is correspondingly measured. The moat is open rather than owned, but the
+\emph{components are ready}: verifiable speech rewards, best-of-$N$ and reranking, no-gradient credit
+assignment \citep{jitrl2026}, and a frozen omni embedding model \citep{omniembed2025,qwen25omni} whose
+factors our probes find locally separable. The gate reads not as a heuristic but as a control law with
+an idealized optimality proof, and our preliminary operator-A results on emotion, speaker, and
+language/intent factors are consistent with --- though not yet powered to confirm --- the predicted
+gain $\gain$. The plan that follows is to close the two formalization gaps, to replace exact
+separability with a quantified approximate-separability bound, to decouple the routing and reward
+estimators against the dual-use feedback risk, and to replicate on the frozen,
+contamination-controlled split with adequate power.
+
+We close by reaffirming the discipline that makes the claim falsifiable: a survey-first posture that
+treats our own moat as an absence of evidence to be defended, not assumed; a commitment to
+\emph{verifiable} rewards over learned proxies, precisely to blunt the Goodhart pressure that
+inference-time optimization invites; and a no-gradient, no-weight-change constraint that keeps every
+failure recoverable at inference rather than frozen into parameters. The promise of activating, rather
+than retraining, the latent competence of frozen speech models is, we believe, both real and
+near-term --- and it is worth stating only to the precision that the proofs and the measurements can
+currently bear.

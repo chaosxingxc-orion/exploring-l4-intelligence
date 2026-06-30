@@ -1,0 +1,228 @@
+\appendix
+
+\section{Lean 4 Formalization}
+\label{app:lean}
+
+The core of our training-free RL theory is machine-checked in \textbf{Lean~4 + mathlib} (toolchain and mathlib both pinned to \texttt{v4.31.0}), in the project \texttt{proofs/tfrl} (Lean namespace \texttt{TfrlProofs}). The full library builds with a \emph{single documented} \texttt{sorry}, isolated to the order-statistics step of the best-of-$N$ KL bound (\Cref{app:lean-bon}); every other theorem, including the entire \texttt{TfrlProofs.OptSpace} module that grounds the optimization-space adequacy (OSA) claims of the main text, is \textbf{\texttt{sorry}-free}. Throughout, $\cZ$ is a \texttt{Fintype} (the inference-time action space), $\qo:\cZ\to\bbR$ is a strictly positive reference distribution with $\sum_z \qo(z)=1$, $\Rwd:\cZ\to\bbR$ is a reward, and $\beta>0$ a temperature.
+
+\paragraph{Tilting primitives and the Gibbs inequality.}
+The exponentially tilted optimum $\qs$, its partition function $\Zpart$, and the KL-regularized objective $\Fobj{\cdot}$ are defined exactly as in the main text. We reproduce the Lean signatures verbatim.
+
+\begin{verbatim}
+noncomputable def Zpart (q0 R : Z → ℝ) (β : ℝ) : ℝ := ∑ w, q0 w * Real.exp (R w / β)
+noncomputable def qstar (q0 R : Z → ℝ) (β : ℝ) (z : Z) : ℝ :=
+  q0 z * Real.exp (R z / β) / Zpart q0 R β
+noncomputable def F (q0 R : Z → ℝ) (β : ℝ) (q : Z → ℝ) : ℝ :=
+  (∑ z, q z * R z) - β * ∑ z, q z * Real.log (q z / q0 z)
+
+theorem kl_nonneg {p r : Z → ℝ} (hp : ∀ z, 0 ≤ p z) (hr : ∀ z, 0 < r z)
+    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) :
+    0 ≤ ∑ z, p z * Real.log (p z / r z)
+\end{verbatim}
+
+\noindent
+\texttt{kl\_nonneg} is Gibbs' inequality: the pointwise estimate $p(z)-r(z)\le p(z)\log(p(z)/r(z))$ (trivial when $p(z)=0$; otherwise $\log x \le x-1$ with $x=r(z)/p(z)$ via \texttt{Real.log\_le\_sub\_one\_of\_pos}) summed against $\sum p=\sum r=1$.
+
+\paragraph{Master identity and T1.}
+The decomposition $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}$ is the engine of optimality.
+
+\begin{verbatim}
+theorem F_sub_eq_beta_mul_kl [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β (qstar q0 R β) - F q0 R β q = β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
+
+theorem tilting_optimal [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β q ≤ F q0 R β (qstar q0 R β)
+\end{verbatim}
+
+\noindent
+\textbf{T1} (\texttt{tilting\_optimal}) is then immediate: $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}\ge 0$ by \texttt{kl\_nonneg} and $\beta>0$.
+
+\paragraph{T3 --- flat reward, no tilt.}
+\begin{verbatim}
+theorem qstar_eq_q0_of_const [Nonempty Z] {q0 : Z → ℝ} {β c : ℝ}
+    (hq0sum : ∑ z, q0 z = 1) {R : Z → ℝ} (hR : ∀ z, R z = c) :
+    ∀ z, qstar q0 R β z = q0 z
+\end{verbatim}
+\noindent
+When $\Rwd(z)\equiv c$, $\Zpart=\exp(c/\beta)$ collapses and $\qs(z)=\qo(z)\exp(c/\beta)/\exp(c/\beta)=\qo(z)$: a degenerate action space with zero reward spread admits no steering.
+
+\paragraph{T2 --- best-of-$N$ KL bound.}
+\label{app:lean-bon}
+\begin{verbatim}
+noncomputable def klBoundBoN (N : ℕ) : ℝ := Real.log N - ((N : ℝ) - 1) / N
+theorem klBoundBoN_nonneg {N : ℕ} (hN : 1 ≤ N) : 0 ≤ klBoundBoN N
+theorem kl_best_of_n_le (klBoN : ℕ → ℝ) {N : ℕ}
+    (hBeirami : klBoN N ≤ klBoundBoN N) :
+    klBoN N ≤ Real.log N - ((N : ℝ) - 1) / N := hBeirami
+\end{verbatim}
+\noindent
+We prove rigorously that $\spread_{\mathrm{BoN}}(N):=\log N-(N-1)/N\ge 0$ (it equals $\log N - 1 + 1/N$, nonnegative since $\log N\ge 1-1/N$). The order-statistics derivation $\KL{\pi_{\mathrm{BoN}}}{\qo}\le \texttt{klBoundBoN}\,N$ \citep{beirami2024bon} is the lone documented \texttt{sorry} (\texttt{klBoN\_le\_klBoundBoN\_TODO}); \texttt{kl\_best\_of\_n\_le} takes that estimate as a hypothesis and concludes.
+
+\paragraph{T6 --- $O(\sqrt{\log N})$ regret.}
+\begin{verbatim}
+theorem regret_O_sqrt_log {gain R_max kl : ℝ} {N : ℕ} (hN : 1 ≤ N)
+    (hRmax : 0 ≤ R_max) (hPinsker : gain ≤ R_max * Real.sqrt (kl / 2))
+    (hKL : kl ≤ klBoundBoN N) :
+    gain ≤ R_max * Real.sqrt (Real.log N / 2)
+\end{verbatim}
+\noindent
+Chaining the Pinsker estimate $\gain\le \Rwd_{\max}\sqrt{kl/2}$ (hypothesis) with $kl\le\texttt{klBoundBoN}\,N\le\log N$ and monotonicity of $\sqrt{\cdot}$ yields $\gain = O(\sqrt{\log N})$.
+
+\paragraph{The OSA suite (\texttt{TfrlProofs.OptSpace}, \texttt{sorry}-free).}
+We define the optimization gain $\gain:=\Fobj{\qs}-\Fobj{\qo}$ and prove its structural properties.
+
+\begin{verbatim}
+noncomputable def gain (q0 R : Z → ℝ) (β : ℝ) : ℝ :=
+  F q0 R β (qstar q0 R β) - F q0 R β q0
+
+theorem gain_eq [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) :
+    gain q0 R β = β * Real.log (Zpart q0 R β) - ∑ z, q0 z * R z
+theorem gain_nonneg [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) : 0 ≤ gain q0 R β
+theorem flat_no_gain [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) {c : ℝ} (hR : ∀ z, R z = c) : gain q0 R β = 0
+theorem gain_le_of_hoeffding [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) {S : ℝ}
+    (hHoeff : β * Real.log (Zpart q0 R β) - ∑ z, q0 z * R z ≤ S) :
+    gain q0 R β ≤ S
+
+theorem Zpart_product :
+    Zpart (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β
+      = Zpart q01 R1 β * Zpart q02 R2 β
+theorem gain_product [Nonempty Z1] [Nonempty Z2] (hq01 : ∀ z, 0 < q01 z)
+    (hq02 : ∀ z, 0 < q02 z) (hβ : 0 < β)
+    (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) :
+    gain (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β
+      = gain q01 R1 β + gain q02 R2 β
+theorem qstar_product (p : Z1 × Z2) :
+    qstar (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β p
+      = qstar q01 R1 β p.1 * qstar q02 R2 β p.2
+
+theorem rollout_deficit [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β q = F q0 R β (qstar q0 R β)
+        - β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
+      ∧ 0 ≤ β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
+\end{verbatim}
+
+\noindent
+\texttt{gain\_eq} rewrites the gain as $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]$ (\textbf{OSA-1a}); \texttt{gain\_nonneg} (\textbf{OSA-1b}) is Jensen / Gibbs; \texttt{flat\_no\_gain} (\textbf{OSA-1c}) recovers T3 --- a single-model output-context (degenerate $\cZ$) affords no RL improvement; \texttt{gain\_le\_of\_hoeffding} (\textbf{OSA-1d}) isolates the analytic bound $S$, so $\spread\to 0\Rightarrow\gain\to 0$. The product lemmas (\textbf{OSA-2}, \textbf{OSA-3b}) show that over a context-isolated product $\cZ_1\times\cZ_2$ with $\qo=\qo^{(1)}\otimes\qo^{(2)}$ and separable $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$, the gain is \emph{additive} and $\qs$ factorizes; iterating over $k$ isolated agents gives $\gain=\sum_i\gain_i$, growing with $k$. Finally \texttt{rollout\_deficit} (\textbf{OSA-3a}) shows any rollout policy $q$ sits below $\qs$ by exactly $\beta\,\KL{q}{\qs}\ge 0$: a naive rollout that fails to reach $\qs$ incurs a strictly positive deficit, while the $\beta$-KL trust region enforces the slow-drift precondition of credit-assigned tilting \citep{jitrl2026}.
+
+\section{Extended Proofs}
+\label{app:extended}
+
+We give in full the two analytic results that the Lean development isolates as hypotheses or pure algebra.
+
+\subsection{Hoeffding instance: the gain ceiling \texorpdfstring{$\spread^2/(8\beta)$}{spread2/8beta}}
+\label{app:hoeffding}
+
+\begin{lemma}[Bounded-reward gain ceiling]
+\label{lem:hoeffding}
+Let $\Rwd:\cZ\to[\Rwd_{\min},\Rwd_{\max}]$ with reward spread $\spread:=\Rwd_{\max}-\Rwd_{\min}$, and let $\qo$ be any distribution on $\cZ$ with $\Exp_{\qo}$ the corresponding expectation. Then for every $\beta>0$,
+\[
+\beta\,\log\Exp_{\qo}\!\big[e^{\Rwd/\beta}\big]-\Exp_{\qo}[\Rwd]\;\le\;\frac{\spread^2}{8\beta},
+\]
+and hence, by \texttt{gain\_le\_of\_hoeffding} with $S=\spread^2/(8\beta)$, $\;\gain(\qo,\Rwd,\beta)\le \spread^2/(8\beta)$.
+\end{lemma}
+
+\begin{proof}
+Let $X:=\Rwd(z)/\beta$ for $z\sim\qo$, a random variable supported in $[a,b]$ with $a=\Rwd_{\min}/\beta$, $b=\Rwd_{\max}/\beta$, so $b-a=\spread/\beta$. Define the cumulant generating function $\psi(\lambda):=\log\Exp[e^{\lambda(X-\Exp X)}]$. We use Hoeffding's lemma: for a random variable $X$ supported in $[a,b]$ and any $\lambda\in\bbR$,
+\[
+\psi(\lambda)\;=\;\log\Exp\!\big[e^{\lambda(X-\Exp X)}\big]\;\le\;\frac{\lambda^2(b-a)^2}{8}.
+\]
+To prove this standard bound, set $\varphi(\lambda):=\log\Exp[e^{\lambda X}]$. Then $\varphi(0)=0$, $\varphi'(0)=\Exp X$, and $\varphi''(\lambda)=\operatorname{Var}_{\lambda}(X)$, where $\operatorname{Var}_{\lambda}$ is the variance under the tilted law $d\mu_\lambda\propto e^{\lambda x}d\mu$. Since $X\in[a,b]$ almost surely, the same holds $\mu_\lambda$-a.s., and a random variable bounded in an interval of length $b-a$ has variance at most $((b-a)/2)^2=(b-a)^2/4$ (the extremal case is the two-point distribution at the endpoints). Hence $\varphi''(\lambda)\le (b-a)^2/4$ for all $\lambda$. By Taylor's theorem with integral remainder, for some $\xi\in[0,\lambda]$,
+\[
+\varphi(\lambda)=\varphi(0)+\lambda\varphi'(0)+\tfrac12\lambda^2\varphi''(\xi)\le \lambda\,\Exp X+\frac{\lambda^2 (b-a)^2}{8},
+\]
+so $\psi(\lambda)=\varphi(\lambda)-\lambda\Exp X\le \lambda^2(b-a)^2/8$, which is Hoeffding's lemma.
+
+Now take $\lambda=1$. Then
+\[
+\log\Exp[e^{X}]-\Exp[X]=\psi(1)\le \frac{(b-a)^2}{8}=\frac{1}{8}\Big(\frac{\spread}{\beta}\Big)^2=\frac{\spread^2}{8\beta^2}.
+\]
+Multiplying by $\beta>0$ and substituting $X=\Rwd/\beta$ (so $\Exp[X]=\Exp_{\qo}[\Rwd]/\beta$ and $\Exp[e^X]=\Exp_{\qo}[e^{\Rwd/\beta}]$) gives
+\[
+\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]\le \frac{\spread^2}{8\beta}.
+\]
+By \texttt{gain\_eq}, the left side is exactly $\gain$, completing the proof.
+\end{proof}
+
+\Cref{lem:hoeffding} makes the scaling explicit: the inference-time RL gain is quadratically throttled by the reward spread, $\gain=O(\spread^2/\beta)$, so a flat or near-flat reward landscape (T3, \textbf{OSA-1c}) yields vanishing headroom regardless of search budget --- the analytic counterpart of reward over-optimization saturation \citep{gao2023overopt}.
+
+\subsection{Product factorization (OSA-2) in full}
+\label{app:product}
+
+We verify the algebra underlying \texttt{Zpart\_product}, \texttt{meanR\_product}, and \texttt{gain\_product}. Let $\cZ=\cZ_1\times\cZ_2$, $\qo(z_1,z_2)=\qo^{(1)}(z_1)\,\qo^{(2)}(z_2)$ with $\sum\qo^{(1)}=\sum\qo^{(2)}=1$, and $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$ (context isolation).
+
+\begin{proposition}[Partition factorization]
+$\Zpart(\qo,\Rwd,\beta)=\Zpart(\qo^{(1)},\Rwd_1,\beta)\cdot\Zpart(\qo^{(2)},\Rwd_2,\beta)$.
+\end{proposition}
+\begin{proof}
+Expanding over the product index set and using $e^{(\Rwd_1(z_1)+\Rwd_2(z_2))/\beta}=e^{\Rwd_1(z_1)/\beta}e^{\Rwd_2(z_2)/\beta}$,
+\[
+\Zpart=\sum_{z_1,z_2}\qo^{(1)}(z_1)\qo^{(2)}(z_2)\,e^{\Rwd_1(z_1)/\beta}e^{\Rwd_2(z_2)/\beta}
+=\Big(\sum_{z_1}\qo^{(1)}(z_1)e^{\Rwd_1(z_1)/\beta}\Big)\Big(\sum_{z_2}\qo^{(2)}(z_2)e^{\Rwd_2(z_2)/\beta}\Big),
+\]
+the last step by distributing the double sum (\texttt{Finset.sum\_mul\_sum}), which is the product of the two partition functions.
+\end{proof}
+
+\begin{proposition}[Mean reward additivity]
+$\Exp_{\qo}[\Rwd]=\Exp_{\qo^{(1)}}[\Rwd_1]+\Exp_{\qo^{(2)}}[\Rwd_2]$.
+\end{proposition}
+\begin{proof}
+For fixed $z_1$, $\sum_{z_2}\qo^{(1)}(z_1)\qo^{(2)}(z_2)(\Rwd_1(z_1)+\Rwd_2(z_2))=\qo^{(1)}(z_1)\Rwd_1(z_1)\sum_{z_2}\qo^{(2)}(z_2)+\qo^{(1)}(z_1)\sum_{z_2}\qo^{(2)}(z_2)\Rwd_2(z_2)=\qo^{(1)}(z_1)\Rwd_1(z_1)+\qo^{(1)}(z_1)\Exp_{\qo^{(2)}}[\Rwd_2]$, using $\sum\qo^{(2)}=1$. Summing over $z_1$ and again using $\sum\qo^{(1)}=1$ gives $\Exp_{\qo^{(1)}}[\Rwd_1]+\Exp_{\qo^{(2)}}[\Rwd_2]$.
+\end{proof}
+
+\begin{corollary}[Additive gain, OSA-2]
+$\gain(\qo,\Rwd,\beta)=\gain(\qo^{(1)},\Rwd_1,\beta)+\gain(\qo^{(2)},\Rwd_2,\beta)$.
+\end{corollary}
+\begin{proof}
+By \texttt{gain\_eq}, $\gain=\beta\log\Zpart-\Exp_{\qo}[\Rwd]$. Substituting the two propositions and $\log(xy)=\log x+\log y$ (legitimate since each partition function is strictly positive, \texttt{Zpart\_pos}),
+\[
+\gain=\beta\big(\log\Zpart_1+\log\Zpart_2\big)-\big(\Exp_{\qo^{(1)}}[\Rwd_1]+\Exp_{\qo^{(2)}}[\Rwd_2]\big)=\gain_1+\gain_2.
+\]
+Iterating over $k$ context-isolated components yields $\gain=\sum_{i=1}^k\gain_i$, strictly increasing in $k$ whenever each component has nonzero reward spread (\Cref{lem:hoeffding}). The companion identity $\qs(z_1,z_2)={\qs}^{(1)}(z_1)\,{\qs}^{(2)}(z_2)$ (\texttt{qstar\_product}, \textbf{OSA-3b}) follows by the same exponential split, certifying that per-component credit-assigned tilting reaches the global T1-optimum.
+\end{proof}
+
+\section{Notation}
+\label{app:notation}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Symbol & Meaning \\
+\hline
+$\cZ$ & inference-time action space (degrees of freedom changing no weights) \\
+$\cZA,\cZB$ & embedding/Operator-A space; generative/Operator-B space \\
+$\qo$ & base reference policy $q_0$ (strictly positive, $\sum_z\qo(z)=1$) \\
+$\qz$ & a search distribution $q$ over $\cZ$ \\
+$\qs$ & Gibbs / tilted optimum $\qs(z)=\qo(z)e^{\Rwd(z)/\beta}/\Zpart$ \\
+$\Rwd$ & reward function $\cZ\to\bbR$ \\
+$\beta$ & temperature ($>0$); KL-regularization strength \\
+$\Zpart$ & partition function $\sum_w \qo(w)e^{\Rwd(w)/\beta}$ \\
+$\Fobj{q}$ & KL-regularized objective $\Exp_q[\Rwd]-\beta\,\KL{q}{\qo}$ \\
+$\KL{p}{q}$ & Kullback--Leibler divergence \\
+$\Exp$ & expectation $\mathbb{E}$ \\
+$\gain$ & optimization gain $\Fobj{\qs}-\Fobj{\qo}\ge 0$ \\
+$\spread$ & reward spread $\Rwd_{\max}-\Rwd_{\min}$ \\
+$N$ & number of candidates in best-of-$N$ / search budget \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Verifiable Reward Functions}
+\label{app:rewards}
+
+The reward callables used as verifiable signals $\Rwd$ are exposed by the shared library \texttt{speechrl\_common.rl}, and are deliberately deterministic and contamination-resistant \citep{tulu3}. Heavy dependencies (\texttt{jiwer}, \texttt{scikit-learn}) are imported lazily inside each function so the package and its smoke tests import without the full stack.
+
+\paragraph{Content / ASR (\texttt{rl.reward}).}
+\texttt{wer(reference, hypothesis)} returns the word error rate after normalization; \texttt{asr\_reward} returns $\max(0,\,1-\mathrm{WER})\in[0,1]$, a bounded reward whose spread directly governs the gain ceiling of \Cref{lem:hoeffding}; \texttt{exact\_match\_reward} returns $\mathbf{1}[\text{normalized strings equal}]\in\{0,1\}$ for closed-form tasks (intent, keyword), matching the binary RLVR signal of T4-style plurality selection.
+
+\paragraph{Retrieval / embedding (\texttt{rl.embedding\_metrics}).}
+For the flagship embedding action space $\cZA$, \texttt{recall\_at\_k(query, gallery, labels\_q, labels\_g, k)} and \texttt{mean\_reciprocal\_rank(\dots)} score a frozen model's pooled embeddings against a labelled gallery under cosine similarity (\texttt{cosine\_sim\_matrix} with $\ell_2$ normalization); \texttt{retrieval\_reward(\dots, k)} packages recall@$k$ as a $[0,1]$ reward for speaker-ID / language retrieval.
+
+\paragraph{Probe accuracy (\texttt{rl.probe}).}
+\texttt{linear\_probe\_accuracy} / \texttt{knn\_probe\_accuracy} fit a frozen-feature classifier (held-out split) to score disentanglement of emotion (SER) and language/intent factors; \texttt{probe\_reward(\dots, kind)} returns the held-out accuracy as the reward, providing the verifiable signal for the content/speaker/emotion/language axes the flagship disentangles. Auxiliary metrics (\texttt{macro\_f1}, \texttt{bleu}, \texttt{chrf}, \texttt{eer}) in \texttt{rl.metrics} are used for evaluation only, not as RL rewards, to avoid coupling the reward and the test statistic \citep{skalse2022rewardhacking}.

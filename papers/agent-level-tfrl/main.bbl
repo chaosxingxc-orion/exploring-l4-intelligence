@@ -1,0 +1,685 @@
+\begin{thebibliography}{138}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[ant()]{anthropicskills}
+{anthropics/skills (Agent Skills repo)}.
+\newblock \url{https://github.com/anthropics/skills}.
+
+\bibitem[bis()]{bisani2004bootstrap}
+{Bootstrap estimates for confidence intervals in ASR performance evaluation}.
+\newblock \url{https://ieeexplore.ieee.org/document/1326009}.
+
+\bibitem[dro()]{dror2018hitchhiker}
+{The Hitchhiker's Guide to Testing Statistical Significance in NLP}.
+\newblock \url{https://aclanthology.org/P18-1128/}.
+
+\bibitem[dwo()]{dwork2015reusable}
+{The reusable holdout: Preserving validity in adaptive data analysis}.
+\newblock \url{https://doi.org/10.1126/science.aaa9375}.
+
+\bibitem[gor()]{gorman2019splits}
+{We Need to Talk about Standard Splits}.
+\newblock \url{https://aclanthology.org/P19-1267/}.
+
+\bibitem[gre()]{greensmith2004variance}
+{Variance Reduction Techniques for Gradient Estimates in Reinforcement Learning}.
+\newblock \url{https://www.jmlr.org/papers/volume5/greensmith04a/greensmith04a.pdf}.
+
+\bibitem[koc()]{kocsis2006uct}
+{Bandit Based Monte-Carlo Planning (UCT)}.
+\newblock \url{https://link.springer.com/chapter/10.1007/11871842_29}.
+
+\bibitem[let()]{lettasleeptime}
+{Sleep-time Compute (Letta)}.
+\newblock \url{https://www.letta.com/blog/sleep-time-compute/}.
+
+\bibitem[omn()]{omniembedweights}
+{nvidia/omni-embed-nemotron-3b model weights}.
+\newblock \url{https://huggingface.co/nvidia/omni-embed-nemotron-3b}.
+
+\bibitem[pya()]{pyannotecode}
+{pyannote-audio (diarization)}.
+\newblock \url{https://github.com/pyannote/pyannote-audio}.
+
+\bibitem[roe()]{roelofs2019overfitting}
+{A Meta-Analysis of Overfitting in Machine Learning}.
+\newblock \url{https://papers.nips.cc/paper/9117-a-meta-analysis-of-overfitting-in-machine-learning}.
+
+\bibitem[slu()]{slurp2020}
+{SLURP: A Spoken Language Understanding Resource Package}.
+\newblock \url{https://aclanthology.org/2020.emnlp-main.588/}.
+
+\bibitem[tas()]{taskcontamination2024}
+{Task Contamination: Language Models May Not Be Few-Shot Anymore}.
+\newblock \url{https://ojs.aaai.org/index.php/AAAI/article/view/29808}.
+
+\bibitem[hen(2017)]{henderson2018drlmatters}
+{Deep Reinforcement Learning that Matters}.
+\newblock \emph{arXiv preprint arXiv:1709.06560}, 2017.
+\newblock URL \url{https://arxiv.org/abs/1709.06560}.
+
+\bibitem[att(2018)]{attnstatspool2018}
+{Attentive Statistics Pooling for Deep Speaker Embedding}.
+\newblock \emph{arXiv preprint arXiv:1803.10963}, 2018.
+\newblock URL \url{https://arxiv.org/abs/1803.10963}.
+
+\bibitem[dod(2019)]{dodge2019showyourwork}
+{Show Your Work: Improved Reporting of Experimental Results}.
+\newblock \emph{arXiv preprint arXiv:1909.03004}, 2019.
+\newblock URL \url{https://arxiv.org/abs/1909.03004}.
+
+\bibitem[per(2019)]{personalvad2019}
+{Personal VAD: Speaker-Conditioned Voice Activity Detection}.
+\newblock \emph{arXiv preprint arXiv:1908.04284}, 2019.
+\newblock URL \url{https://arxiv.org/abs/1908.04284}.
+
+\bibitem[car(2020)]{card2020power}
+{With Little Power Comes Great Responsibility}.
+\newblock \emph{arXiv preprint arXiv:2010.06595}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2010.06595}.
+
+\bibitem[col(2020)]{colbert2020}
+{ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT}.
+\newblock \emph{arXiv preprint arXiv:2004.12832}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2004.12832}.
+
+\bibitem[eca(2020)]{ecapatdnn2020}
+{ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN}.
+\newblock \emph{arXiv preprint arXiv:2005.07143}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2005.07143}.
+
+\bibitem[pin(2020)]{pineau2020reproducibility}
+{Improving Reproducibility in Machine Learning Research}.
+\newblock \emph{arXiv preprint arXiv:2003.12206}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2003.12206}.
+
+\bibitem[rag(2020)]{rag2020}
+{Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}.
+\newblock \emph{arXiv preprint arXiv:2005.11401}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2005.11401}.
+
+\bibitem[wan(2020)]{wang2020alignuniform}
+{Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere}.
+\newblock \emph{arXiv preprint arXiv:2005.10242}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2005.10242}.
+
+\bibitem[xia(2020)]{xiao2020whatnot}
+{What Should Not Be Contrastive in Contrastive Learning}.
+\newblock \emph{arXiv preprint arXiv:2008.05659}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2008.05659}.
+
+\bibitem[pas(2021)]{pasad2021layerwise}
+{Layer-wise Analysis of a Self-supervised Speech Representation Model}.
+\newblock \emph{arXiv preprint arXiv:2107.04734}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2107.04734}.
+
+\bibitem[per(2021)]{perez2021truefewshot}
+{True Few-Shot Learning with Language Models}.
+\newblock \emph{arXiv preprint arXiv:2105.11447}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2105.11447}.
+
+\bibitem[sup(2021)]{superb2021}
+{SUPERB: Speech processing Universal PERformance Benchmark}.
+\newblock \emph{arXiv preprint arXiv:2105.01051}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2105.01051}.
+
+\bibitem[xve(2021)]{xvector2021}
+{X-Vectors with Multi-Scale Aggregation for Speaker Diarization}.
+\newblock \emph{arXiv preprint arXiv:2105.07367}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2105.07367}.
+
+\bibitem[cla(2022)]{clap2022}
+{CLAP: Learning Audio Concepts From Natural Language Supervision}.
+\newblock \emph{arXiv preprint arXiv:2206.04769}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2206.04769}.
+
+\bibitem[gao(2022)]{gao2023overopt}
+{Scaling Laws for Reward Model Overoptimization}.
+\newblock \emph{arXiv preprint arXiv:2210.10760}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2210.10760}.
+
+\bibitem[kor(2022)]{korbak2022kl}
+{RL with KL penalties is better viewed as Bayesian inference}.
+\newblock \emph{arXiv preprint arXiv:2205.11275}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2205.11275}.
+
+\bibitem[min(2022)]{min2022rethinking}
+{Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?}
+\newblock \emph{arXiv preprint arXiv:2202.12837}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2202.12837}.
+
+\bibitem[ska(2022)]{skalse2022rewardhacking}
+{Defining and Characterizing Reward Hacking}.
+\newblock \emph{arXiv preprint arXiv:2209.13085}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2209.13085}.
+
+\bibitem[su2(2022)]{su2023instructor}
+{One Embedder, Any Task: Instruction-Finetuned Text Embeddings (INSTRUCTOR)}.
+\newblock \emph{arXiv preprint arXiv:2212.09741}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2212.09741}.
+
+\bibitem[wan(2022)]{wang2023selfconsistency}
+{Self-Consistency Improves Chain of Thought Reasoning in Language Models}.
+\newblock \emph{arXiv preprint arXiv:2203.11171}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2203.11171}.
+
+\bibitem[cra(2023)]{craft2023}
+{CRAFT: Customizing LLMs by Creating and Retrieving from Specialized Toolsets}.
+\newblock \emph{arXiv preprint arXiv:2309.17428}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2309.17428}.
+
+\bibitem[dsp(2023)]{dspy2023}
+{DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines}.
+\newblock \emph{arXiv preprint arXiv:2310.03714}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.03714}.
+
+\bibitem[dyn(2023)]{dynsuperb2023}
+{Dynamic-SUPERB: A Dynamic, Collaborative, Comprehensive Instruction-Tuning Benchmark for Speech}.
+\newblock \emph{arXiv preprint arXiv:2309.09510}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2309.09510}.
+
+\bibitem[exp(2023)]{expel2023}
+{ExpeL: LLM Agents Are Experiential Learners}.
+\newblock \emph{arXiv preprint arXiv:2308.10144}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2308.10144}.
+
+\bibitem[gen(2023)]{genagents2023}
+{Generative Agents: Interactive Simulacra of Human Behavior}.
+\newblock \emph{arXiv preprint arXiv:2304.03442}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2304.03442}.
+
+\bibitem[hsu(2023)]{hsu2023iclspeech}
+{Exploring In-Context Learning of Textless Speech Language Model for Speech Classification Tasks}.
+\newblock \emph{arXiv preprint arXiv:2310.12477}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.12477}.
+
+\bibitem[lat(2023)]{lats2023}
+{Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models (LATS)}.
+\newblock \emph{arXiv preprint arXiv:2310.04406}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.04406}.
+
+\bibitem[lea(2023)]{leace2023}
+{LEACE: Perfect linear concept erasure in closed form}.
+\newblock \emph{arXiv preprint arXiv:2306.03819}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2306.03819}.
+
+\bibitem[mem(2023{\natexlab{a}})]{memgpt2023}
+{MemGPT: Towards LLMs as Operating Systems}.
+\newblock \emph{arXiv preprint arXiv:2310.08560}, 2023{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2310.08560}.
+
+\bibitem[mem(2023{\natexlab{b}})]{memorybank2023}
+{MemoryBank: Enhancing Large Language Models with Long-Term Memory}.
+\newblock \emph{arXiv preprint arXiv:2305.10250}, 2023{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2305.10250}.
+
+\bibitem[mud(2023)]{mudgal2024controlled}
+{Controlled Decoding from Language Models}.
+\newblock \emph{arXiv preprint arXiv:2310.17022}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.17022}.
+
+\bibitem[ref(2023)]{reflexion2023}
+{Reflexion: Language Agents with Verbal Reinforcement Learning}.
+\newblock \emph{arXiv preprint arXiv:2303.11366}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2303.11366}.
+
+\bibitem[sal(2023)]{salmonn2023}
+{SALMONN: Towards Generic Hearing Abilities for Large Language Models}.
+\newblock \emph{arXiv preprint arXiv:2310.13289}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.13289}.
+
+\bibitem[tod(2023)]{todd2024functionvectors}
+{Function Vectors in Large Language Models}.
+\newblock \emph{arXiv preprint arXiv:2310.15213}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.15213}.
+
+\bibitem[voy(2023)]{voyager2023}
+{Voyager: An Open-Ended Embodied Agent with Large Language Models}.
+\newblock \emph{arXiv preprint arXiv:2305.16291}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.16291}.
+
+\bibitem[wei(2023)]{wei2023larger}
+{Larger language models do in-context learning differently}.
+\newblock \emph{arXiv preprint arXiv:2303.03846}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2303.03846}.
+
+\bibitem[ada(2024)]{adas2024}
+{Automated Design of Agentic Systems (ADAS)}.
+\newblock \emph{arXiv preprint arXiv:2408.08435}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2408.08435}.
+
+\bibitem[afl(2024)]{aflow2024}
+{AFlow: Automating Agentic Workflow Generation}.
+\newblock \emph{arXiv preprint arXiv:2410.10762}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.10762}.
+
+\bibitem[age(2024{\natexlab{a}})]{agentpoison2024}
+{AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases}.
+\newblock \emph{arXiv preprint arXiv:2407.12784}, 2024{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2407.12784}.
+
+\bibitem[age(2024{\natexlab{b}})]{agentsquare2024}
+{AgentSquare: Automatic LLM Agent Search in Modular Design Space}.
+\newblock \emph{arXiv preprint arXiv:2410.06153}, 2024{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2410.06153}.
+
+\bibitem[ahm(2024)]{ahmadian2024rloo}
+{Back to Basics: Revisiting REINFORCE Style Optimization (RLOO)}.
+\newblock \emph{arXiv preprint arXiv:2402.14740}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2402.14740}.
+
+\bibitem[ari(2024)]{arigraph2024}
+{AriGraph: Learning Knowledge Graph World Models with Episodic Memory for LLM Agents}.
+\newblock \emph{arXiv preprint arXiv:2407.04363}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2407.04363}.
+
+\bibitem[awm(2024)]{awm2024}
+{Agent Workflow Memory}.
+\newblock \emph{arXiv preprint arXiv:2409.07429}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2409.07429}.
+
+\bibitem[bei(2024)]{beirami2024bon}
+{Theoretical guarantees on the best-of-n alignment policy}.
+\newblock \emph{arXiv preprint arXiv:2401.01879}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2401.01879}.
+
+\bibitem[bge(2024)]{bgeenicl2024}
+{Making Text Embedders Few-Shot Learners (bge-en-icl)}.
+\newblock \emph{arXiv preprint arXiv:2409.15700}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2409.15700}.
+
+\bibitem[con(2024)]{contaminationsurvey2024}
+{Benchmark Data Contamination of Large Language Models: A Survey}.
+\newblock \emph{arXiv preprint arXiv:2406.04244}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.04244}.
+
+\bibitem[fro(2024)]{frozenllmparaling2024}
+{Frozen Large Language Models Can Perceive Paralinguistic Aspects of Speech}.
+\newblock \emph{arXiv preprint arXiv:2410.01162}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.01162}.
+
+\bibitem[gui(2024)]{gui2024bonbon}
+{BoNBoN Alignment for LLMs and the Sweetness of Best-of-n Sampling}.
+\newblock \emph{arXiv preprint arXiv:2406.00832}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.00832}.
+
+\bibitem[hip(2024)]{hipporag2024}
+{HippoRAG: Neurobiologically Inspired Long-Term Memory for LLMs}.
+\newblock \emph{arXiv preprint arXiv:2405.14831}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.14831}.
+
+\bibitem[jin(2024)]{jinnai2024mbrbon}
+{Regularized Best-of-N Sampling with Minimum Bayes Risk Objective for LM Alignment}.
+\newblock \emph{arXiv preprint arXiv:2404.01054}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2404.01054}.
+
+\bibitem[loc(2024)]{locomo2024}
+{Evaluating Very Long-Term Conversational Memory of LLM Agents (LoCoMo)}.
+\newblock \emph{arXiv preprint arXiv:2402.17753}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2402.17753}.
+
+\bibitem[lon(2024)]{longmemeval2024}
+{LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory}.
+\newblock \emph{arXiv preprint arXiv:2410.10813}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.10813}.
+
+\bibitem[nve(2024)]{nvembed2024}
+{NV-Embed: Improved Techniques for Training LLMs as Generalist Embedding Models}.
+\newblock \emph{arXiv preprint arXiv:2405.17428}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.17428}.
+
+\bibitem[pos(2024)]{positionbias2024}
+{Judging the Judges: A Systematic Study of Position Bias in LLM-as-a-Judge}.
+\newblock \emph{arXiv preprint arXiv:2406.07791}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.07791}.
+
+\bibitem[qwe(2024)]{qwen2audio}
+{Qwen2-Audio Technical Report}.
+\newblock \emph{arXiv preprint arXiv:2407.10759}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2407.10759}.
+
+\bibitem[sel(2024)]{selfpreference2024}
+{Self-Preference Bias in LLM-as-a-Judge}.
+\newblock \emph{arXiv preprint arXiv:2410.21819}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.21819}.
+
+\bibitem[sne(2024)]{snell2024ttscompute}
+{Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters}.
+\newblock \emph{arXiv preprint arXiv:2408.03314}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2408.03314}.
+
+\bibitem[spe(2024)]{speechrag2024}
+{Speech Retrieval-Augmented Generation without Automatic Speech Recognition (SpeechRAG)}.
+\newblock \emph{arXiv preprint arXiv:2412.16500}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2412.16500}.
+
+\bibitem[tex(2024)]{textgrad2024}
+{TextGrad: Automatic Differentiation via Text}.
+\newblock \emph{arXiv preprint arXiv:2406.07496}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.07496}.
+
+\bibitem[tul(2024)]{tulu3}
+{Tulu 3: Pushing Frontiers in Open Language Model Post-Training}.
+\newblock \emph{arXiv preprint arXiv:2411.15124}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2411.15124}.
+
+\bibitem[voi(2024)]{voicebench2024}
+{VoiceBench: Benchmarking LLM-Based Voice Assistants}.
+\newblock \emph{arXiv preprint arXiv:2410.17196}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.17196}.
+
+\bibitem[yan(2024)]{yang2024asymptotics}
+{Asymptotics of Language Model Alignment}.
+\newblock \emph{arXiv preprint arXiv:2404.01730}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2404.01730}.
+
+\bibitem[zha(2024)]{zhao2024twistedsmc}
+{Probabilistic Inference in Language Models via Twisted Sequential Monte Carlo}.
+\newblock \emph{arXiv preprint arXiv:2404.17546}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2404.17546}.
+
+\bibitem[ace(2025)]{ace2025}
+{Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models (ACE)}.
+\newblock \emph{arXiv preprint arXiv:2510.04618}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.04618}.
+
+\bibitem[ame(2025)]{amem2025}
+{A-MEM: Agentic Memory for LLM Agents}.
+\newblock \emph{arXiv preprint arXiv:2502.12110}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.12110}.
+
+\bibitem[ami(2025)]{aminian2025smoothing}
+{Best-of-N through the Smoothing Lens: KL Divergence and Regret Analysis}.
+\newblock \emph{arXiv preprint arXiv:2507.05913}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2507.05913}.
+
+\bibitem[aud(2025)]{audiomc2025}
+{Audio MultiChallenge: A Multi-Turn Evaluation of Spoken Dialogue Systems (AudioMC)}.
+\newblock \emph{arXiv preprint arXiv:2512.14865}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2512.14865}.
+
+\bibitem[aur(2025)]{aura2025}
+{AURA: Agent for Understanding, Reasoning, and Automated Tool Use in Voice-Driven Tasks}.
+\newblock \emph{arXiv preprint arXiv:2506.23049}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.23049}.
+
+\bibitem[car(2025)]{carbon2025}
+{CarBoN: Calibrated Best-of-N Sampling Improves Test-time Reasoning}.
+\newblock \emph{arXiv preprint arXiv:2510.15674}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.15674}.
+
+\bibitem[cer(2025)]{certifiedsc2025}
+{Certified Self-Consistency: Statistical Guarantees and Test-Time Training for Reliable Reasoning}.
+\newblock \emph{arXiv preprint arXiv:2510.17472}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.17472}.
+
+\bibitem[cge(2025)]{cges2025}
+{CGES: Confidence-Guided Early Stopping for Efficient Sampling}.
+\newblock \emph{arXiv preprint arXiv:2511.02603}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2511.02603}.
+
+\bibitem[exp(2025)]{expfollowing2025}
+{How Memory Management Impacts LLM Agents: Empirical Study of Experience-Following Behavior}.
+\newblock \emph{arXiv preprint arXiv:2505.16067}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.16067}.
+
+\bibitem[gep(2025)]{gepa2025}
+{GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning}.
+\newblock \emph{arXiv preprint arXiv:2507.19457}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2507.19457}.
+
+\bibitem[ger(2025)]{gerrarewords2025}
+{LLM-based Generative Error Correction for Rare Words with Synthetic Data and Phonetic Context}.
+\newblock \emph{arXiv preprint arXiv:2505.17410}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.17410}.
+
+\bibitem[geu(2025)]{geuter2025gsi}
+{Guided Speculative Inference for Efficient Test-Time Alignment of LLMs}.
+\newblock \emph{arXiv preprint arXiv:2506.04118}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.04118}.
+
+\bibitem[ich(2025)]{ichihara2025mbr}
+{Theoretical Guarantees for Minimum Bayes Risk Decoding}.
+\newblock \emph{arXiv preprint arXiv:2502.12685}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.12685}.
+
+\bibitem[kha(2025)]{khalaf2025hedgetune}
+{Inference-Time Reward Hacking in Large Language Models (HedgeTune, Best-of-Poisson)}.
+\newblock \emph{arXiv preprint arXiv:2506.19248}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.19248}.
+
+\bibitem[li2(2025)]{li2025tpo}
+{Test-Time Preference Optimization: On-the-Fly Alignment via Iterative Textual Feedback}.
+\newblock \emph{arXiv preprint arXiv:2501.12895}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.12895}.
+
+\bibitem[lis(2025)]{listenortranscribe2025}
+{Do Audio LLMs Really LISTEN, or Just Transcribe? Measuring Lexical vs. Acoustic Emotion Cues Reliance}.
+\newblock \emph{arXiv preprint arXiv:2510.10444}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.10444}.
+
+\bibitem[mbr(2025)]{mbrasr2025}
+{Re-evaluating Minimum Bayes Risk Decoding for Automatic Speech Recognition}.
+\newblock \emph{arXiv preprint arXiv:2510.19471}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.19471}.
+
+\bibitem[mem(2025{\natexlab{a}})]{mem0_2025}
+{Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory}.
+\newblock \emph{arXiv preprint arXiv:2504.19413}, 2025{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2504.19413}.
+
+\bibitem[mem(2025{\natexlab{b}})]{memorygraft2025}
+{MemoryGraft: Persistent Compromise of LLM Agents via Poisoned Experience Retrieval}.
+\newblock \emph{arXiv preprint arXiv:2512.16962}, 2025{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2512.16962}.
+
+\bibitem[mem(2025{\natexlab{c}})]{memoryos2025}
+{Memory OS of AI Agent (MemoryOS)}.
+\newblock \emph{arXiv preprint arXiv:2506.06326}, 2025{\natexlab{c}}.
+\newblock URL \url{https://arxiv.org/abs/2506.06326}.
+
+\bibitem[mem(2025{\natexlab{d}})]{memoryr1_2025}
+{Memory-R1: Enhancing LLM Agents to Manage and Utilize Memories via Reinforcement Learning}.
+\newblock \emph{arXiv preprint arXiv:2508.19828}, 2025{\natexlab{d}}.
+\newblock URL \url{https://arxiv.org/abs/2508.19828}.
+
+\bibitem[mim(2025)]{mimoaudio2025}
+{MiMo-Audio: Audio Language Models are Few-Shot Learners}.
+\newblock \emph{arXiv preprint arXiv:2512.23808}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2512.23808}.
+
+\bibitem[omn(2025)]{omniembed2025}
+{Omni-Embed-Nemotron: A Unified Multimodal Retrieval Model for Text, Image, Audio, and Video}.
+\newblock \emph{arXiv preprint arXiv:2510.03458}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.03458}.
+
+\bibitem[par(2025)]{paras2s2025}
+{ParaS2S: Benchmarking and Aligning Spoken Language Models for Paralinguistic-aware S2S Interaction}.
+\newblock \emph{arXiv preprint arXiv:2511.08723}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2511.08723}.
+
+\bibitem[pol(2025)]{polyskill2025}
+{PolySkill: Learning Generalizable Skills Through Polymorphic Abstraction For Continual Learning}.
+\newblock \emph{arXiv preprint arXiv:2510.15863}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.15863}.
+
+\bibitem[qwe(2025{\natexlab{a}})]{qwen25omni}
+{Qwen2.5-Omni Technical Report}.
+\newblock \emph{arXiv preprint arXiv:2503.20215}, 2025{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2503.20215}.
+
+\bibitem[qwe(2025{\natexlab{b}})]{qwen3omni}
+{Qwen3-Omni Technical Report}.
+\newblock \emph{arXiv preprint arXiv:2509.17765}, 2025{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2509.17765}.
+
+\bibitem[rlv(2025)]{rlvrincentive2025}
+{RLVR Implicitly Incentivizes Correct Reasoning in Base LLMs}.
+\newblock \emph{arXiv preprint arXiv:2506.14245}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.14245}.
+
+\bibitem[ser(2025)]{sericl2025}
+{Few-shot Personalization via In-Context Learning for Speech Emotion Recognition based on Speech-LM}.
+\newblock \emph{arXiv preprint arXiv:2509.08344}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2509.08344}.
+
+\bibitem[sin(2025)]{singhal2025fksteering}
+{A General Framework for Inference-time Scaling and Steering of Diffusion Models (FK steering)}.
+\newblock \emph{arXiv preprint arXiv:2501.06848}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.06848}.
+
+\bibitem[spk(2025)]{spkattrprobing2025}
+{A Large-Scale Probing Analysis of Speaker-Specific Attributes in SSL Speech Representations}.
+\newblock \emph{arXiv preprint arXiv:2501.05310}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.05310}.
+
+\bibitem[spu(2025)]{spuriousrewards2025}
+{Spurious Rewards: Rethinking Training Signals in RLVR}.
+\newblock \emph{arXiv preprint arXiv:2506.10947}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.10947}.
+
+\bibitem[tas(2025)]{taskvectors2025}
+{Task Vectors in In-Context Learning: Emergence, Formation, and Benefits}.
+\newblock \emph{arXiv preprint arXiv:2501.09240}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.09240}.
+
+\bibitem[uro(2025)]{urobench2025}
+{URO-Bench: Towards Comprehensive Evaluation for End-to-End Spoken Dialogue Models}.
+\newblock \emph{arXiv preprint arXiv:2502.17810}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.17810}.
+
+\bibitem[ver(2025)]{verdun2025softbon}
+{Soft Best-of-n Sampling for Model Alignment}.
+\newblock \emph{arXiv preprint arXiv:2505.03156}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.03156}.
+
+\bibitem[vox(2025)]{voxrag2025}
+{VoxRAG: A Step Toward Transcription-Free RAG Systems in Spoken Question Answering}.
+\newblock \emph{arXiv preprint arXiv:2505.17326}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.17326}.
+
+\bibitem[wav(2025)]{wavrag2025}
+{WavRAG: Audio-Integrated Retrieval Augmented Generation for Spoken Dialogue Models}.
+\newblock \emph{arXiv preprint arXiv:2502.14727}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.14727}.
+
+\bibitem[zep(2025)]{zep2025}
+{Zep: A Temporal Knowledge Graph Architecture for Agent Memory}.
+\newblock \emph{arXiv preprint arXiv:2501.13956}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.13956}.
+
+\bibitem[zuo(2025)]{zuo2025ttrl}
+{TTRL: Test-Time Reinforcement Learning}.
+\newblock \emph{arXiv preprint arXiv:2504.16084}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2504.16084}.
+
+\bibitem[ali(2026)]{alice2026}
+{ALICE: A Multifaceted Evaluation Framework of Large Audio-Language Models In-Context Learning Ability}.
+\newblock \emph{arXiv preprint arXiv:2603.20433}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2603.20433}.
+
+\bibitem[amb(2026)]{amber2026}
+{A-MBER: Affective Memory Benchmark for Emotion Recognition}.
+\newblock \emph{arXiv preprint arXiv:2604.07017}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.07017}.
+
+\bibitem[ana(2026)]{anatomymem2026}
+{Anatomy of Agentic Memory: Taxonomy and Empirical Analysis of Evaluation and System Limitations}.
+\newblock \emph{arXiv preprint arXiv:2602.19320}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2602.19320}.
+
+\bibitem[coe(2026)]{coevoskills2026}
+{CoEvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification}.
+\newblock \emph{arXiv preprint arXiv:2604.01687}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.01687}.
+
+\bibitem[cor(2026)]{cortis2026}
+{CORTIS: Text-Only Adaptation of Spoken Language Models for Task-Oriented Voice Agents}.
+\newblock \emph{arXiv preprint arXiv:2606.21453}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2606.21453}.
+
+\bibitem[emo(2026)]{emotionneurons2026}
+{Discovering and Causally Validating Emotion-Sensitive Neurons in Large Audio-Language Models}.
+\newblock \emph{arXiv preprint arXiv:2601.03115}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2601.03115}.
+
+\bibitem[eva(2026)]{evabench2026}
+{EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents}.
+\newblock \emph{arXiv preprint arXiv:2605.13841}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2605.13841}.
+
+\bibitem[gsr(2026)]{gsrm2026}
+{GSRM: Generative Speech Reward Model for Speech RLHF}.
+\newblock \emph{arXiv preprint arXiv:2602.13891}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2602.13891}.
+
+\bibitem[jit(2026)]{jitrl2026}
+{Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates}.
+\newblock \emph{arXiv preprint arXiv:2601.18510}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2601.18510}.
+
+\bibitem[mem(2026)]{mempoison2026}
+{Memory Poisoning Attack and Defense on Memory-Based LLM Agents}.
+\newblock \emph{arXiv preprint arXiv:2601.05504}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2601.05504}.
+
+\bibitem[mos(2026)]{moshirag2026}
+{MoshiRAG: Asynchronous Knowledge Retrieval for Full-Duplex Speech Language Models}.
+\newblock \emph{arXiv preprint arXiv:2604.12928}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.12928}.
+
+\bibitem[mus(2026)]{museautoskill2026}
+{MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation}.
+\newblock \emph{arXiv preprint arXiv:2605.27366}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2605.27366}.
+
+\bibitem[new(2026)]{newskills2026}
+{New Skills or Sharper Primitives? A Probabilistic Perspective on the Emergence of Reasoning in RLVR}.
+\newblock \emph{arXiv preprint arXiv:2602.08281}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2602.08281}.
+
+\bibitem[omn(2026)]{omniembedaudio2026}
+{Omni-Embed-Audio: Leveraging Multimodal LLMs for Robust Audio-Text Retrieval}.
+\newblock \emph{arXiv preprint arXiv:2604.18360}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.18360}.
+
+\bibitem[rem(2026)]{remembering2026}
+{Remembering More, Risking More: Longitudinal Safety Risks in Memory-Equipped LLM Agents}.
+\newblock \emph{arXiv preprint arXiv:2605.17830}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2605.17830}.
+
+\bibitem[ski(2026{\natexlab{a}})]{skillrouter2026}
+{SkillRouter: Retrieve-and-Rerank Skill Selection for LLM Agents at Scale}.
+\newblock \emph{arXiv preprint arXiv:2603.22455}, 2026{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2603.22455}.
+
+\bibitem[ski(2026{\natexlab{b}})]{skillsbench2026}
+{SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks}.
+\newblock \emph{arXiv preprint arXiv:2602.12670}, 2026{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2602.12670}.
+
+\bibitem[sok(2026)]{sokskills2026}
+{SoK: Agentic Skills - Beyond Tool Use in LLM Agents}.
+\newblock \emph{arXiv preprint arXiv:2602.20867}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2602.20867}.
+
+\bibitem[sou(2026)]{soulxduplug2026}
+{SoulX-Duplug: Plug-and-Play Streaming State Prediction Module for Realtime Full-Duplex Speech}.
+\newblock \emph{arXiv preprint arXiv:2603.14877}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2603.14877}.
+
+\bibitem[spk(2026)]{spkverifllm2026}
+{Speaker Verification with Speech-Aware LLMs: Evaluation and Augmentation}.
+\newblock \emph{arXiv preprint arXiv:2603.10827}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2603.10827}.
+
+\bibitem[vox(2026)]{voxparadox2026}
+{Do Audio LLMs Listen or Read? Analyzing and Mitigating Paralinguistic Failures with VoxParadox}.
+\newblock \emph{arXiv preprint arXiv:2605.27772}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2605.27772}.
+
+\end{thebibliography}

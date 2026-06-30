@@ -1,0 +1,87 @@
+\section{Feasibility Analysis}
+\label{sec:feasibility}
+
+We now argue that the agent-level program of this work is not only well-posed but already \emph{instantiable} from off-the-shelf components, and that our own preliminary measurements both motivate and constrain the design. The argument proceeds in four steps: we identify the two classes of frozen omni models with the two structural roles an episodic agent requires (\Cref{sec:feas:components}); we show that a single verifiable-reward acceptance gate furnishes the control law shared by memory and skills (\Cref{sec:feas:gate}); we state an honest novelty delta against a crowded mechanism literature (\Cref{sec:feas:novelty}); and we present in-house results that locate the operating regime empirically (\Cref{sec:feas:prelim}).
+
+\subsection{The Two Omni Classes as Agent Components}
+\label{sec:feas:components}
+
+The decisive enabling observation is that the contemporary omni-model ecosystem ships, off the shelf, the two computational primitives an episodic agent needs, and that both can be used \emph{frozen}. On one side, \emph{vector-omni bi-encoders} map an audio (or audio--text) input to a fixed embedding in a shared retrieval space \citep{omniembed2025,omniembedaudio2026}; their natural role is the agent's \emph{memory and index}, the read/write substrate over past episodes, exactly as speech-native retrieval-augmented systems already use them \citep{wavrag2025,speechrag2024,voxrag2025}. On the other side, \emph{generative thinker--talker} omni models map an input to a token sequence under a decoding policy \citep{qwen3omni,qwen25omni,salmonn2023}; their natural role is the agent's \emph{policy and skill executor}. Both classes are pretrained, publicly released, and, for our purposes, \emph{frozen}: the action lives entirely in the inference-time degrees of freedom $\cZ$, partitioned into the embedding/retrieval operator $\cZA$ realised by the bi-encoder and the generative operator $\cZB$ realised by the thinker--talker. This separation is not a convenience but a structural commitment: it lets us treat memory construction (Operator-A) and skill execution (Operator-B) as two faces of a single search distribution $\qz$ over $\cZ$, optimised against the same reward $\Rwd$ without touching weights or architecture. Crucially, both primitives already exist at the quality frontier, so feasibility reduces to whether a \emph{control law} can compose them productively rather than to whether the parts can be built.
+
+\subsection{The Verifiable-Reward Acceptance Gate as the Control Law}
+\label{sec:feas:gate}
+
+The control law is a verifiable-reward \emph{acceptance gate}: a candidate memory write or skill invocation is admitted only if it improves a verifiable reward on held-out probes, and is otherwise rejected. This single mechanism governs both faces of $\cZ$. The case for making the gate the load-bearing component is empirical and, in our reading, decisive. \textsc{SkillsBench} reports that \emph{curated} skills raise agent success by $+16.2$ percentage points, whereas \emph{self-generated} skills contribute essentially zero in aggregate, with $16$ of $84$ skills measurably \emph{negative} \citep{skillsbench2026}. The lesson is not that self-evolution is futile but that unfiltered self-evolution is: without an acceptance test, an append-only memory or skill library accrues as much harm as benefit, a failure mode echoed across the agent-stability literature \citep{expfollowing2025,ace2025,remembering2026,reflexion2023}. The gate is precisely the missing filter. When ground-truth labels are scarce, a surrogate verifier can stand in for the reward without collapsing the guarantee, as co-evolved skill--verifier pairs demonstrate \citep{coevoskills2026}; and for speech specifically the verifiable rewards already exist, from paralinguistic-aware speech reward models \citep{gsrm2026,paras2s2025} to the WER/exact-match/intent rewards reused throughout this series. We therefore adopt the gate as the one control law shared by $\cZA$ (admit a memory entry) and $\cZB$ (admit a skill or decoding action), with the surrogate verifier as the fallback when labelled probes run out. This is the same KL-regularised tilting that underwrites best-of-$N$ and reward-guided decoding \citep{korbak2022kl,mudgal2024controlled,beirami2024bon}, here lifted from token decisions to episode-level admission decisions.
+
+\subsection{Novelty Delta}
+\label{sec:feas:novelty}
+
+We state the contribution honestly. The \emph{mechanism}---self-evolving episodic memory plus a growing skill library refined by feedback---is crowded: reflective self-improvement \citep{reflexion2023,expel2023}, library-building agents \citep{voyager2023,awm2024,museautoskill2026}, and gradient-free inference-time credit assignment \citep{jitrl2026} all occupy adjacent ground. Our claim is not the mechanism in the abstract. The unfilled slot is the specific composition: a \emph{frozen omni policy} (Operator-B) and a \emph{frozen omni memory} (Operator-A), driven by \emph{episodic self-evolution} under a \emph{verifiable speech reward}, with no weight updates anywhere in the loop. The closest priors fall short on exactly this axis. Trainable instruction embedders such as \textsc{bge-en-icl} require gradient training to acquire their in-context behaviour \citep{bgeenicl2024}, violating the frozen-memory constraint; few-shot--emergent audio models such as \textsc{MiMo-Audio} obtain their capability through pretraining rather than through inference-time activation of an already-frozen model \citep{mimoaudio2025}. Neither realises the all-frozen, reward-gated, speech-verifiable agent loop. To our knowledge, this composition has not been demonstrated, and we make the corresponding ``first, to our knowledge'' claim while being explicit that each ingredient in isolation has prior art.
+
+\subsection{Preliminary Empirical Evidence}
+\label{sec:feas:prelim}
+
+Our in-house measurements locate the operating regime and, in doing so, supply the empirical motivation for moving the action up from single-model conditioning to the agent action space. All numbers below are our own preliminary results on a frozen \texttt{omni-embed-nemotron-3b}, with kNN probes, seed $42$, and $1000$-sample bootstrap confidence intervals (CREMA-D dev$600$/test$300$; MInDS-14 dev$280$/test$257$); they are reported here verbatim and labelled as preliminary.
+
+\paragraph{Single-model conditioning is near-flat (OSA-1 in practice).}
+\Cref{tab:cremad-matrix} reports test probe accuracy for the frozen embedding under four instruction-conditioning regimes, crossed against three readout factors. The same frozen embedding simultaneously supports near-perfect content readout ($\approx 1.00$), weak emotion readout ($\approx 0.36$), and at-chance speaker readout ($\approx 0.04$). Decisively, \emph{instruction conditioning does not move the factor accuracies}: the emotion delta from baseline to emotion-instruction is $+0.007$ with overlapping CIs, the speaker delta is $-0.003$, and the conditioning matrix is not diagonally dominant. The picture is stable across the architecture: a sweep over all $37$ hidden states and two pooling readouts leaves speaker accuracy at chance at \emph{every} layer (full-sequence best $0.043$ at L36; audio-token best $0.043$ at L32), with content saturating early (full-seq $0.990$ at L24) and emotion peaking only weakly (full-seq $0.400$ at L0). This flatness is exactly the empirical signature predicted by the near-flat single-model action space (the OSA-1 condition): within one frozen model, instruction-conditioning offers essentially no reward spread $\spread$ to optimise over, so the gain $\gain$ from any Gibbs-tilted search $\qz$ over single-model conditioning is bounded near zero.
+
+\begin{table}[t]
+\centering
+\caption{In-house preliminary results. CREMA-D conditioning$\times$factor TEST probe accuracy (frozen \texttt{omni-embed-nemotron-3b}, seed $42$). Instruction conditioning is flat across all factors (\texttt{diagonal\_dominant}$=$False).}
+\label{tab:cremad-matrix}
+\begin{tabular}{lccc}
+\toprule
+Conditioning & Content & Emotion & Speaker \\
+\midrule
+Baseline              & 0.997 & 0.360 & 0.040 \\
+Content-instruction   & 1.000 & 0.333 & 0.043 \\
+Emotion-instruction   & 1.000 & 0.367 & 0.037 \\
+Speaker-instruction   & 1.000 & 0.367 & 0.033 \\
+\midrule
+Chance                & 0.08  & 0.17  & 0.011 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Operator-A still extracts a real, bounded gain.}
+The flatness of \emph{conditioning} does not mean the embedding is inert: choosing the readout itself---an Operator-A ($\cZA$) action over layer and pooling---yields a measurable emotion gain. \Cref{tab:opA} shows mean-pool emotion accuracy of $0.393$ at L0 (CI $[0.340,0.447]$) rising to $0.490$ under attentive-statistics pooling at L16 (CI $[0.433,0.550]$), a delta of $+0.097$ ($\approx +25\%$ relative). At a test size of $300$ the CIs touch, but the dev-selected seed-$42$ point ($0.513$) strengthens the effect. Speaker remains at chance ($0.047\!\to\!0.063$) and content stays at ceiling ($0.987\!\to\!0.997$), confirming that Operator-A reallocates expressivity it can reach but cannot manufacture speaker information the frozen space does not encode. On MInDS-14 en-US intent ($14$ intents, chance $0.071$), intent \emph{presence} is real---baseline $\approx 0.25$, CI $[0.195,0.304]$, far above chance---yet \emph{steerability} is again unsupported (selected conditioning emotion, delta $+0.016$, overlapping CIs, not diagonally dominant). Operator-A thus delivers a genuine but bounded gain, consistent with a near-flat single-model space.
+
+\begin{table}[t]
+\centering
+\caption{In-house preliminary results. Operator-A ($\cZA$) layer/pooling selection on CREMA-D TEST (seed $42$, $1000$-bootstrap CIs). The emotion gain is real but bounded; speaker stays at chance, content at ceiling.}
+\label{tab:opA}
+\begin{tabular}{lccc}
+\toprule
+Factor & Mean-pool @L0 & Attentive-stats @L16 & $\Delta$ \\
+\midrule
+Emotion (CI)  & 0.393 \,[0.340,0.447] & 0.490 \,[0.433,0.550] & $+0.097$ \\
+Speaker       & 0.047 & 0.063 & $+0.016$ \\
+Content       & 0.987 & 0.997 & $+0.010$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Operator-B task-level selection already yields large gains.}
+The contrast that motivates the agent action space is stark. Where single-model conditioning is flat, \emph{task-level} Operator-B ($\cZB$) selection---choosing among generative candidates under a verifiable reward, the training-free RL move of this series---produces large, well-separated improvements (\Cref{tab:opB}). On SER/emotion the embedding-side gain carries over ($0.393\!\to\!0.490$, $+0.097$). On SLURP intent, accuracy rises $0.550\!\to\!0.880$ ($+0.330$, CI $[0.288,0.374]$). On MInDS-14 intent, $0.883\!\to\!0.972$ ($+0.089$), with an independent raw-schema reproduction improving $0.852\!\to\!0.984$ ($+0.132$, CI $[0.082,0.187]$; $25$ fixes / $1$ regression, RTX 5090, $n{=}182$). On URO spoken-QA, $0.380\!\to\!0.715$ ($+0.335$, CI $[0.265,0.405]$), with a conservative reranking pass lifting this to $0.845$ at \emph{zero} regressions. These paired-bootstrap gains (seed $42$) are an order of magnitude larger than anything single-model conditioning offers, and the Lean-backed guarantees T1--T6 (proofs in \texttt{proofs/tfrl}) bound their reward spread and gain.
+
+\begin{table}[t]
+\centering
+\caption{In-house preliminary results. Cross-team Operator-B ($\cZB$) sample-level training-free-RL gains (seed $42$, paired bootstrap). Task-level selection yields large, well-separated improvements, in contrast to the flat single-model conditioning of \Cref{tab:cremad-matrix}.}
+\label{tab:opB}
+\begin{tabular}{lccc}
+\toprule
+Task & Baseline & After Op-B & $\Delta$ (CI) \\
+\midrule
+Emotion / SER (CREMA-D)        & 0.393 & 0.490 & $+0.097$ \\
+SLURP intent                   & 0.550 & 0.880 & $+0.330$ \,[0.288,0.374] \\
+MInDS-14 intent                & 0.883 & 0.972 & $+0.089$ \\
+\quad repro (raw$\to$policy)   & 0.852 & 0.984 & $+0.132$ \,[0.082,0.187] \\
+URO spoken-QA                  & 0.380 & 0.715 & $+0.335$ \,[0.265,0.405] \\
+\quad $+$ conservative rerank  & 0.715 & 0.845 & (0 regressions) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Reading the evidence.}
+Taken together, the three tables make a single quantitative argument. Within one frozen model, instruction conditioning is near-flat---an empirical instance of the OSA-1 regime, in which the reward spread $\spread$ available to a single-model search distribution $\qz$ is too small to support a useful gain $\gain$. Operator-A can still reach a real but bounded readout gain ($+0.097$ on emotion), and Operator-B task-level selection already delivers far larger gains ($+0.330$ on SLURP, $+0.132$ on MInDS-14, $+0.335$ on URO). The implication for design is direct: the productive action does not live in conditioning a single frozen model but in selecting and composing across operators and episodes---precisely the agent action space this work targets, with the verifiable-reward acceptance gate of \Cref{sec:feas:gate} as its control law. We report all intervals and label these numbers as preliminary; the CI overlaps on the smaller emotion effects are stated explicitly and temper the strength of the Operator-A claim while leaving the Operator-B contrast unambiguous.
