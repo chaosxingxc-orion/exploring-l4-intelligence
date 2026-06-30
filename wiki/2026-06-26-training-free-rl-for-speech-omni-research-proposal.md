@@ -197,7 +197,7 @@ controls pass (§2), eval reproduces train. Established empirically on the pilot
 
 | Risk | L×I | Resolving gate |
 |---|---|---|
-| R1 **compute env unprovisioned** (Step-1 obs) — no GPU/CUDA/venv/assets/llama.cpp in this WSL | **high×high** | provision a GPU env (`wsl-setup.sh`+`env-setup.sh`+assets+llama.cpp) **or** run on the asset-bearing machine; llama.cpp Qwen3-Omni audio path itself is supported |
+| R1 **CORRECTED 2026-06-30 — not a blocker.** Step-1's "unprovisioned" was a **wrong-distro probe** (default `wsl`=`Ubuntu`=WSL1; real env=`Ubuntu-24.04`=WSL2). Verified: **RTX 5090 + torch 2.9.1+cu128 `cuda.is_available()==True`**, py3.12 venv, uv, MLflow present. Only the **~410 GB datasets/models are not on disk** now (empty `~/speechrl-data/{datasets,models}`). | low×med | run via `wsl -d Ubuntu-24.04` + activate the venv; `bash scripts/data/fetch-data.sh` to (re)fetch pinned assets; llama.cpp generative-arm setup still pending |
 | R2 **lexical-prior artifact** — emotion "lift" is read-not-listen | high×high | acoustic-grounding control: label-shuffled demos + transcript-only baseline (arXiv:2605.27772, 2510.10444) |
 | R3 **optimization artifact** — spurious-reward gains that don't transfer | med×high | random-reward null + cross-model sign-consistency (arXiv:2506.10947) |
 | R4 **selection / winner's curse** — demos/prompts/N tuned on test | med×high | selection on disjoint dev; expected-max curve; re-score on held-out (arXiv:2105.11447, 1909.03004) |
@@ -242,4 +242,6 @@ appended after the pilots; notable updates mirrored to [[Decision-Log]].
 
 > **Status for the owner (resume here):** v1.0 is **pre-registered and compute-ready**. The only remaining work
 > is the **empirical track** (Step-1 feasibility round-trip + Steps 4..N pilots), hard-blocked on an
-> unprovisioned GPU environment — see R1. Confirm where the compute/assets live and I'll run the pilots.
+> the assets being absent on disk (R1, corrected 2026-06-30 — the GPU env IS provisioned: 5090 + torch cu128 in
+> WSL2 `Ubuntu-24.04`; only the ~410 GB datasets/models need `fetch-data.sh`). Fetch assets + set up llama.cpp and
+> the pilots can run.
