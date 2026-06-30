@@ -33,8 +33,18 @@ bash    papers/agent-level-tfrl/build.sh
 ```
 
 ## Status
-Compiles clean: 37 pages, all 217 citations + all cross-references resolve, 0 LaTeX errors. The
-theory section + appendix transcribe the Lean theorems faithfully (the one documented order-statistics
-`sorry` in the best-of-N KL bound and the isolated Hoeffding lemma are flagged as explicit
-assumptions, never overclaimed). Reviewed via a 5-role adversarial peer-review loop; see the
-Decision-Log entry.
+Compiles clean: **42 pages**, all 217 citations + all cross-references resolve, 0 LaTeX errors,
+~43k-token source. The theory section + appendix transcribe the Lean theorems faithfully (the one
+documented order-statistics `sorry` in the best-of-N KL bound and the isolated Hoeffding lemma are
+flagged as explicit assumptions, never overclaimed).
+
+**Peer review (`reviews/`).** A 5-role adversarial panel (theory-critic · statistician ·
+speech-domain · reproducibility-auditor · novelty/red-teamer) + area chair reviewed the paper.
+Round 1: **major revision** (correct math, but prose over-claimed). A per-section revision applied
+the must-fix items (OSA-2 downgraded to conditional additivity + a Phase-2 spread-floor conjecture;
+the dual-use key-agreement reward reclassified as a surrogate, not a verifiable reward; "machine-
+checked" qualified to the sorry-free qualitative core vs the conditional quantitative bounds;
+convergence reframed as a design principle with the finite-time guarantee open; single-seed /
+winner's-curse / contamination caveats on the preliminary results; citation softening). Round 2:
+all five reviewers moved to **minor revision** with the gating items resolved; the remaining
+residuals were then applied. See `reviews/round1-review.md` and `reviews/round2-rereview.md`.

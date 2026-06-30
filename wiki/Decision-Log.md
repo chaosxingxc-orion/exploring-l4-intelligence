@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-01 · W5 agent-level proposal written as a peer-reviewed LaTeX paper (42 pp, 217 refs, 5-role review → minor revision)
+**Decision.** Consolidated the W5 agent-level arc into a rigorous, English, NeurIPS-style **LaTeX research
+proposal** at `papers/agent-level-tfrl/` (`main.tex` + `references.bib` + modular `sections/`), compiled to a
+42-page `main.pdf` on a user-space TinyTeX install in WSL2. It folds together the optimization-space-adequacy
+theory (OSA-1/2/3, machine-checked in `proofs/tfrl/TfrlProofs/OptSpace.lean`), the convergence analysis, the
+feasibility case (open moat + two-omni component pairing + the verifiable-reward acceptance gate), preliminary
+in-house results, the self-evolving omni speech-agent system design, and the staged research plan. Drafted via a
+parallel section-writer workflow; bibliography (217 adversarially-verified sources) generated deterministically.
+**Why.** The owner asked for a paper-grade, peer-review-ready write-up (≥30k tokens, full citations + detailed
+proofs + why/how) produced with multi-role adversarial review and a review→revise→re-review loop.
+**Consequences.** (1) **Peer-review loop ran to its target.** A 5-role panel (theory-critic · statistician ·
+speech-domain · reproducibility-auditor · novelty/red-teamer) + area chair returned **major revision** in round 1
+— the math was verified correct on disk (Lean pins, one documented sorry) but the prose over-claimed. A
+per-section revision workflow applied the must-fix items (OSA-2 downgraded to *conditional* additivity + an
+explicit Phase-2 spread-floor **conjecture**; the dual-use key-agreement reward **reclassified as a surrogate**,
+not verifiable per the paper's own definition; "asymptotically inert" → "gain bounded by realized reward spread";
+"machine-checked" **qualified** to the sorry-free qualitative core vs the conditional quantitative bounds;
+convergence reframed as a **design principle**, finite-time guarantee open; single-seed / winner's-curse /
+contamination caveats; citation softening). Round 2: **all five reviewers moved to minor revision**, gating items
+resolved; residual M8/title fixes then applied. Reviews archived under `papers/agent-level-tfrl/reviews/`.
+(2) The paper is **honest by construction**: novelty framed as domain-transfer (mechanism not novel), the one Lean
+`sorry` + the isolated Hoeffding lemma disclosed, agentic recovery (OSA-2) explicitly *not yet measured* (Phase-2).
+(3) Reproducible build shipped (`build.sh`, `_build/` generators). (4) **Survey-first still honored** — Project-Thesis
+and the W4 H1/H2/H3 untouched; this is a proposal, not a thesis change. (5) Branch
+`docs/research-proposal-template-and-first-proposal`, not pushed.
+
 ### 2026-06-30 · Agent-level direction (survey-first POMDP): GO verdict + the optimization-space theorem machine-checked in Lean
 **Decision.** Pursued the owner's strategic pivot — *is the L4-evolution space agent-system-level no-gradient RL
 (skills+memory) rather than single-model output search?* — as a **survey-first POMDP** (Belief-State + Trajectory
