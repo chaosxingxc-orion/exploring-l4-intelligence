@@ -197,7 +197,7 @@ controls pass (§2), eval reproduces train. Established empirically on the pilot
 
 | Risk | L×I | Resolving gate |
 |---|---|---|
-| R1 **CORRECTED 2026-06-30 — not a blocker.** Step-1's "unprovisioned" was a **wrong-distro probe** (default `wsl`=`Ubuntu`=WSL1; real env=`Ubuntu-24.04`=WSL2). Verified: **RTX 5090 + torch 2.9.1+cu128 `cuda.is_available()==True`**, py3.12 venv, uv, MLflow present. Only the **~410 GB datasets/models are not on disk** now (empty `~/speechrl-data/{datasets,models}`). | low×med | run via `wsl -d Ubuntu-24.04` + activate the venv; `bash scripts/data/fetch-data.sh` to (re)fetch pinned assets; llama.cpp generative-arm setup still pending |
+| R1 **RESOLVED 2026-06-30 — NOT a blocker; the empirical track is ready in-place.** Earlier "unprovisioned" was a triple probe error (wrong distro: default `wsl`=WSL1, real=`Ubuntu-24.04`/WSL2; wrong data path: real root is the **D-drive** `/mnt/d/chao_workspace/exploring-l4-intelligence/speechrl-data`, not `~/speechrl-data` ext4; and the GGUF was wrongly thought missing). **Verified present:** RTX 5090 + torch 2.9.1+cu128 (cuda available); py3.12 venv/uv/MLflow; **all 5 models** incl. `omni-embed-nemotron-3b`, `qwen3-omni-30b` (vLLM) **and `qwen3-omni-…-gguf` (Q8_0 32 GB + mmproj 2.2 GB — llama.cpp audio path ready)**; **all 28 datasets** (crema-d/minds14/slurp/librispeech/…). | resolved | run via `wsl -d Ubuntu-24.04`, activate the venv, `export SPEECHRL_DATA_DIR=/mnt/d/chao_workspace/exploring-l4-intelligence/speechrl-data`; no download needed |
 | R2 **lexical-prior artifact** — emotion "lift" is read-not-listen | high×high | acoustic-grounding control: label-shuffled demos + transcript-only baseline (arXiv:2605.27772, 2510.10444) |
 | R3 **optimization artifact** — spurious-reward gains that don't transfer | med×high | random-reward null + cross-model sign-consistency (arXiv:2506.10947) |
 | R4 **selection / winner's curse** — demos/prompts/N tuned on test | med×high | selection on disjoint dev; expected-max curve; re-score on held-out (arXiv:2105.11447, 1909.03004) |
@@ -242,6 +242,6 @@ appended after the pilots; notable updates mirrored to [[Decision-Log]].
 
 > **Status for the owner (resume here):** v1.0 is **pre-registered and compute-ready**. The only remaining work
 > is the **empirical track** (Step-1 feasibility round-trip + Steps 4..N pilots), hard-blocked on an
-> the assets being absent on disk (R1, corrected 2026-06-30 — the GPU env IS provisioned: 5090 + torch cu128 in
-> WSL2 `Ubuntu-24.04`; only the ~410 GB datasets/models need `fetch-data.sh`). Fetch assets + set up llama.cpp and
-> the pilots can run.
+> R1, which is now **RESOLVED** (2026-06-30): the env is fully ready in WSL2 `Ubuntu-24.04` — 5090 + torch cu128,
+> all 5 models (incl. the Qwen3-Omni GGUF+mmproj for llama.cpp) and all 28 datasets are on the D-drive
+> `speechrl-data`. **The pilots can run in-place now** (no download). Pre-registration stands; execution is unblocked.
