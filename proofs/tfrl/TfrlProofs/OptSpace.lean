@@ -90,4 +90,90 @@ theorem gain_le_of_hoeffding [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
     gain q0 R β ≤ S := by
   rw [gain_eq hq0 hβ hq0sum]; exact hHoeff
 
+/-- **OSA-3a (rollout deficit).** Any rollout policy `q` sits below the tilted optimum by exactly
+`β·KL(q ‖ qstar)`, a nonnegative gap (`kl_nonneg`, `β > 0`) that is `0` iff `q = qstar`. So a naive
+rollout that fails to reach `qstar` incurs a strictly positive deficit (no monotone path). That
+append-only / myopic rollout *does* fail (plateau / context-collapse / contamination) is the
+empirical content grounded by the θ2 survey; the `β·KL` trust region enforces the slow-drift
+precondition restoring convergence to `qstar` (OSA-3b; JitRL 2601.18510). -/
+theorem rollout_deficit [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β q = F q0 R β (qstar q0 R β) - β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
+      ∧ 0 ≤ β * ∑ z, q z * Real.log (q z / qstar q0 R β z) := by
+  refine ⟨by linarith [F_sub_eq_beta_mul_kl (R := R) (β := β) hq0 hβ hq hqsum], ?_⟩
+  exact mul_nonneg hβ.le
+    (kl_nonneg hq (fun z => qstar_pos hq0 z) hqsum (qstar_sum_one hq0))
+
+/-! ## OSA-2 / OSA-3b — context-isolated product action space
+
+Two agents with **context isolation** = a product action space `Z1 × Z2` with an independent
+base `q0 = q01 ⊗ q02` and a separable reward `R = R1 ⊞ R2`. The partition function factorizes, so
+the **gain is additive** (`gain_product`, OSA-2 — enlarging the space by isolated agents strictly
+adds optimization headroom; iterate for `k` agents), and the **optimal policy factorizes**
+(`qstar_product`, OSA-3b — per-isolated-component credit-assigned tilting equals the global `qstar`,
+which is T1-optimal). -/
+
+section Product
+
+variable {Z1 Z2 : Type*} [Fintype Z1] [Fintype Z2]
+variable {q01 R1 : Z1 → ℝ} {q02 R2 : Z2 → ℝ} {β : ℝ}
+
+/-- The partition function factorizes over a context-isolated product (pure algebra). -/
+theorem Zpart_product :
+    Zpart (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β
+      = Zpart q01 R1 β * Zpart q02 R2 β := by
+  unfold Zpart
+  rw [Fintype.sum_prod_type]
+  rw [Finset.sum_mul_sum]
+  refine Finset.sum_congr rfl (fun z1 _ => Finset.sum_congr rfl (fun z2 _ => ?_))
+  rw [add_div, Real.exp_add]; ring
+
+/-- The product reference distribution sums to one. -/
+theorem prod_sum_one (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) :
+    ∑ p : Z1 × Z2, q01 p.1 * q02 p.2 = 1 := by
+  rw [Fintype.sum_prod_type, ← Finset.sum_mul_sum, hq01sum, hq02sum, mul_one]
+
+/-- The expected separable reward is additive. -/
+theorem meanR_product (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) :
+    ∑ p : Z1 × Z2, (q01 p.1 * q02 p.2) * (R1 p.1 + R2 p.2)
+      = (∑ z, q01 z * R1 z) + (∑ z, q02 z * R2 z) := by
+  rw [Fintype.sum_prod_type]
+  have : ∀ z1, ∑ z2, q01 z1 * q02 z2 * (R1 z1 + R2 z2)
+      = q01 z1 * R1 z1 + q01 z1 * (∑ z2, q02 z2 * R2 z2) := by
+    intro z1
+    have hpt : ∀ z2, q01 z1 * q02 z2 * (R1 z1 + R2 z2)
+        = q01 z1 * R1 z1 * q02 z2 + q01 z1 * (q02 z2 * R2 z2) := fun z2 => by ring
+    rw [Finset.sum_congr rfl (fun z2 _ => hpt z2), Finset.sum_add_distrib,
+      ← Finset.mul_sum, hq02sum, mul_one, ← Finset.mul_sum]
+  rw [Finset.sum_congr rfl (fun z1 _ => this z1), Finset.sum_add_distrib,
+    ← Finset.sum_mul, hq01sum, one_mul]
+
+/-- **OSA-2 (additive gain over isolated agents).** The gain over a context-isolated product
+equals the sum of the per-component gains: enlarging the action space by an independent agent
+**adds** optimization headroom. -/
+theorem gain_product [Nonempty Z1] [Nonempty Z2]
+    (hq01 : ∀ z, 0 < q01 z) (hq02 : ∀ z, 0 < q02 z) (hβ : 0 < β)
+    (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) :
+    gain (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β
+      = gain q01 R1 β + gain q02 R2 β := by
+  have e0 := gain_eq (q0 := fun p : Z1 × Z2 => q01 p.1 * q02 p.2)
+      (R := fun p => R1 p.1 + R2 p.2)
+      (fun p => mul_pos (hq01 p.1) (hq02 p.2)) hβ (prod_sum_one hq01sum hq02sum)
+  rw [e0, gain_eq hq01 hβ hq01sum, gain_eq hq02 hβ hq02sum,
+    Zpart_product, Real.log_mul (Zpart_pos hq01).ne' (Zpart_pos hq02).ne',
+    meanR_product hq01sum hq02sum]
+  ring
+
+/-- **OSA-3b (optimal policy factorizes = credit-assigned tilt reaches the global optimum).**
+The Gibbs optimum over the isolated product is the product of the per-component optima, so
+per-isolated-component (credit-assigned) tilting equals the global `qstar` — which is T1-optimal. -/
+theorem qstar_product (p : Z1 × Z2) :
+    qstar (fun p : Z1 × Z2 => q01 p.1 * q02 p.2) (fun p => R1 p.1 + R2 p.2) β p
+      = qstar q01 R1 β p.1 * qstar q02 R2 β p.2 := by
+  unfold qstar
+  rw [Zpart_product, add_div, Real.exp_add]
+  ring
+
+end Product
+
 end TfrlProofs.OptSpace
