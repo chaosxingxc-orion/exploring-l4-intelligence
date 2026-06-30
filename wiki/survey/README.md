@@ -20,7 +20,21 @@ This directory archives the verified citations behind the **Survey & Positioning
 **Totals:** 80 kept claims · 93 unique verified sources.
 
 
-## Consolidated bibliography (all verified, deduplicated)
+## Agent-level survey — S1 (2026-06-30)
+
+Strategic direction probe for [[2026-06-30-agent-level-synthesis]] (run `wf_8452c9ae-a11`). 41 verified
+claims / 51 sources; verdict: **GO — add-new-layer, speech-grounded** (domain-transfer, not mechanism-novel).
+Each claim is scope-tagged (no-gradient = in scope vs weight-updating = out).
+
+| Lane | File | Kept |
+|---|---|---|
+| A4 — speech/omni agents & the moat (B3) | [agent-speech-agents](2026-06-30-survey-agent-speech-agents.md) | 15 |
+| A5 — model classes as components + novelty (B5/B7) | [agent-components-novelty](2026-06-30-survey-agent-components-novelty.md) | 13 |
+| A3-headroom — does it compound? (B1/B4) | [agent-does-it-compound](2026-06-30-survey-agent-does-it-compound.md) | 13 |
+
+Living strategic memo: [agent-level-synthesis](2026-06-30-agent-level-synthesis.md).
+
+## Consolidated bibliography (Step-2 model-output survey; all verified, deduplicated)
 
 - [A Large-Scale Probing Analysis of Speaker-Specific Attributes in Self-Supervised Speech Representations](https://arxiv.org/abs/2501.05310)
 - [A Meta-Analysis of Overfitting in Machine Learning (Roelofs et al., NeurIPS 2019)](https://papers.nips.cc/paper/9117-a-meta-analysis-of-overfitting-in-machine-learning)
