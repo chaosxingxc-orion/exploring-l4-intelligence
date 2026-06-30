@@ -34,6 +34,23 @@ Each claim is scope-tagged (no-gradient = in scope vs weight-updating = out).
 
 Living strategic memo: [agent-level-synthesis](2026-06-30-agent-level-synthesis.md).
 
+## Agent-level survey — θ2 convergence (2026-06-30)
+
+Convergence-focused survey grounding the OptSpace proof **OSA-3** (`proofs/tfrl/OptSpace-notes.md`; run
+`wf_14ef3acb-2a3`). 43 verified claims / 54 sources. **Synthesis + convergence map:**
+[agent-convergence](2026-06-30-survey-agent-convergence.md).
+
+| Lane | File | Kept |
+|---|---|---|
+| CV1 — output-level convergence theory | [output-convergence](2026-06-30-survey-agent-output-convergence.md) | 14 |
+| CV2 — agent-level convergence & stability | [agent-stability](2026-06-30-survey-agent-agent-stability.md) | 15 |
+| CV3 — algorithm-level stabilization | [stabilization](2026-06-30-survey-agent-stabilization.md) | 14 |
+
+Key finding: proven *finite-N* convergence lives at the **output level** (soft-BoN O(1/N), MBR, GSI, HedgeTune
+N*); the **agent level** has only **JitRL**'s *asymptotic* consistency under a trust-region/slow-drift
+precondition — the trust region is the hinge that links naive non-convergence (OSA-3a) to credit-assigned
+convergence (OSA-3b). Open-source: [JitRL](https://github.com/liushiliushi/JitRL), HedgeTune, GSI, ACE, AWM, LATS.
+
 ## Consolidated bibliography (Step-2 model-output survey; all verified, deduplicated)
 
 - [A Large-Scale Probing Analysis of Speaker-Specific Attributes in Self-Supervised Speech Representations](https://arxiv.org/abs/2501.05310)
