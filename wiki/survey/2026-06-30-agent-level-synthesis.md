@@ -93,15 +93,18 @@ no-gradient self-evolving-agent recipe in speech/omni," citing general-agent pri
 
 *(Full per-claim registry with verified links: the three S1 lane files linked in the header.)*
 
-## S2 — Conditional deepening (gated on S1) — **planned, owner-gated**
-S1 = `deepen: true`. Priority (adaptive): **(1) agent-RL-formalization** — specialize JitRL's q*→agent-action proof +
-retrieval credit assignment to the SPEECH action space (`z` = which speech memory · which skill · build context · decode
-S2S) with verifiable speech rewards as `R` (the load-bearing formal contribution). **(2) agent-memory** — curated/
-structured episodic memory keyed by paralinguistic state via a frozen vector-omni bi-encoder; the failure-mode literature
-(context collapse / drift / temporal contamination) and what a *speech cross-session memory benchmark* would need (none
-exists — a moat-enabler). **(3) agent-skills** (least new work) — what a speech "skill" is (a verified S2S/tool-use
-behavior) + cross-episode transfer, reusing the resolved general-agent precedent. **Skip:** model-output level (prior
-survey), general-domain mechanism novelty (resolved crowded), weight-updating speech/PRM methods (out of scope).
+## S2 — Conditional deepening (gated on S1) — **DONE**
+**(1) agent-RL-formalization → § S2-θ (DONE):** the optimization-space-adequacy hypothesis is **machine-checked**
+in Lean (`proofs/tfrl/TfrlProofs/OptSpace.lean`, sorry-free): OSA-1 flat/degenerate space ⇒ 0 gain (recovers T3) +
+`gain ≤ spread²/(8β)`; OSA-2 context-isolated agents ⇒ additive gain; OSA-3 rollout deficit + credit-assigned tilt =
+global optimum. Grounded by the θ2 convergence survey ([[2026-06-30-survey-agent-convergence]]).
+**(2) agent-memory + (3) agent-skills → DONE:** design synthesis in [[2026-06-30-agent-memory-skills-design.md]]
+(43 verified claims / 70 sources). **Key finding:** a **verifiable-reward acceptance gate** is the single control law
+for BOTH (SkillsBench: curated +16.2pp vs self-generated ~0 / 16-of-84 negative); θ2's β-KL trust region gets two
+concrete no-gradient instantiations (memory-mutation rate via Mem0 op-count; GEPA Pareto non-regression for skills).
+Both designs run on the project's **existing frozen assets** — Omni-Embed-Nemotron as the memory/skill index, W1's
+verifiable speech rewards as the gates. **Open contribution surface:** no audio cross-session paralinguistically-keyed
+memory benchmark exists.
 
 ## S3 — Synthesis & deferred-decision recommendation  **[TBD — after S2]**
 
@@ -112,3 +115,5 @@ survey), general-domain mechanism novelty (resolved crowded), weight-updating sp
 |---|---|---|---|
 | S0 | 2026-06-30 | reflection → **scaffold the living memo; seed Belief-State** → (no obs) → high-VOI open axes = B1 (compound) + B3 (moat) gate the commit B7 | no |
 | S1 | 2026-06-30 | `b₀` → **decisive probe: 3 lanes (speech-agents · components+novelty · does-it-compound) + adversarial verify, 41 claims / 51 sources** → **obs: B1 compounds *conditionally* (needs structured memory + credit assignment; append-only plateaus/reverses); B3 speech moat OPEN (no speech-native self-improving no-gradient agent; speech evals single-episode); B4 q* *extends* (JitRL closed-form proof); B5 components map cleanly + off-the-shelf audio parts exist, none composed; mechanism NOT novel** → **update: B1/B3/B4/B5/B7 resolved; pivot lean = GO · add-new-layer · speech-grounded (domain-transfer, not mechanism-novel). S2 deepen, priority RL-formalization > memory > skills.** | no (refines, no contradiction) |
+| S2-θ | 2026-06-30 | RL-formalization → **prove optimization-space adequacy in Lean (θ0–θ5) + θ2 convergence survey (43 claims/54 sources)** → **obs: `OptSpace.lean` builds sorry-free (OSA-1/2/3); proven finite-N convergence only at output level, agent level = JitRL asymptotic under trust-region/slow-drift** → update: **B8 resolved** (hypothesis machine-checked); Lean toolchain provisioned | no |
+| S2-deepen | 2026-06-30 | A1/A2 → **memory + skills design survey (2 lanes, adversarial verify, 43 claims / 70 sources, `wf_a066da37-c09`; transient 403 on first run, re-ran after /login)** → **obs: verifiable-reward acceptance GATE is the one control law for both (SkillsBench: curated +16.2pp vs self-gen ~0); β-KL trust region = Mem0 op-count (memory) + GEPA Pareto non-regression (skills); both run on existing frozen assets (Omni-Embed-Nemotron index + W1 rewards); speech cross-session paralinguistic memory benchmark is the open contribution** → update: **A1/A2 resolved (design-ready)**; designs in [[2026-06-30-agent-memory-skills-design.md]] | no |

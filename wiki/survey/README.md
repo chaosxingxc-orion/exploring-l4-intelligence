@@ -34,6 +34,21 @@ Each claim is scope-tagged (no-gradient = in scope vs weight-updating = out).
 
 Living strategic memo: [agent-level-synthesis](2026-06-30-agent-level-synthesis.md).
 
+## Agent-level survey — S2 deepening: memory + skills design (2026-06-30)
+
+Design-oriented deepening (run `wf_a066da37-c09`); 43 verified claims / 70 sources. **Design synthesis:**
+[agent-memory-skills-design](2026-06-30-agent-memory-skills-design.md).
+
+| Lane | File | Kept |
+|---|---|---|
+| A1 — agent memory (deep design + speech) | [agent-memory](2026-06-30-survey-agent-memory.md) | 26 |
+| A2 — agent skills (deep design + speech) | [agent-skills](2026-06-30-survey-agent-skills.md) | 17 |
+
+Key finding: a **verifiable-reward acceptance gate** is the one control law for both components (SkillsBench:
+curated skills +16.2pp vs self-generated ~0); θ2's β-KL trust region instantiates as Mem0 mutation-rate (memory)
++ GEPA Pareto non-regression (skills). Both run on existing frozen assets (Omni-Embed-Nemotron index + W1
+verifiable speech rewards). Open contribution: no audio cross-session paralinguistically-keyed memory benchmark.
+
 ## Agent-level survey — θ2 convergence (2026-06-30)
 
 Convergence-focused survey grounding the OptSpace proof **OSA-3** (`proofs/tfrl/OptSpace-notes.md`; run
