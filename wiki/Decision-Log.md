@@ -6,6 +6,31 @@
 
 ---
 
+### 2026-06-30 · Agent-level direction (survey-first POMDP): GO verdict + the optimization-space theorem machine-checked in Lean
+**Decision.** Pursued the owner's strategic pivot — *is the L4-evolution space agent-system-level no-gradient RL
+(skills+memory) rather than single-model output search?* — as a **survey-first POMDP** (Belief-State + Trajectory
+in [[2026-06-30-agent-level-synthesis]]). **S1** (decisive probe, 41 verified claims) returned **GO** at
+commit-degree *add-new-layer*, scope *speech-grounded*: agent-level self-improvement **compounds**
+(Voyager/ExpeL/AWM/JitRL), the `q*` objective **extends** to agent actions (JitRL closed form), the two omni
+classes map to **memory(embedding)/policy(generative)**, and the **training-free self-improving SPEECH-agent moat
+is open** — but the *mechanism* is not novel, so it's a new layer, not a thesis reframe. Then formalized the
+owner's **optimization-space-adequacy** hypothesis in Lean (`proofs/tfrl/TfrlProofs/OptSpace.lean`, extends
+T1/T3): **OSA-1** flat/degenerate space ⇒ zero gain (recovers T3) + quantitative `gain ≤ spread²/(8β)`; **OSA-2**
+context-isolated agents ⇒ **additive** gain; **OSA-3** rollout deficit + credit-assigned tilt = global optimum.
+`lake build` **green, sorry-free**. Grounded by a convergence survey (θ2, 43 claims / 54 sources,
+[[2026-06-30-survey-agent-convergence]]): proven *finite-N* convergence lives at the **output** level; the agent
+level has only JitRL's *asymptotic* consistency under a **trust-region/slow-drift** precondition — the trust
+region being the hinge between naive non-convergence and credit-assigned convergence.
+**Why.** Owner: optimizing a single model's instruct/output is too small a space; bring it into an agent system
+(context isolation + skills/memory) to enlarge the optimization space — but then rollout-stability/convergence
+needs algorithm-level care. Prove this formally and survey the latest open-source training-free-RL convergence.
+**Consequences.** (1) **Survey-first honored:** [[Project-Thesis]] and the W4 proposal's H1/H2/H3 are **unchanged**;
+the GO + commit-degree is a deferred decision for the owner. (2) The optimization-space hypothesis is now a
+**machine-checked theorem suite** (axis B8 resolved). (3) Two survey rounds archived under `wiki/survey/` with
+real verifiable links (S1 + θ2 convergence). (4) Lean toolchain provisioned on this machine (elan + mathlib
+cache); the W4 proposal's empirical/GPU track stays blocked on R1. (5) Branch
+`docs/research-proposal-template-and-first-proposal`, not pushed.
+
 ### 2026-06-26 · First research proposal authored as a POMDP step-by-step build; Step-2 survey archived (93 verified sources)
 **Decision.** Authored the first proposal on the new [[Research-Proposal-Template]] —
 [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] — for the owner's idea: *how far can
