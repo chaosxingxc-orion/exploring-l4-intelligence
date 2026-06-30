@@ -3,33 +3,39 @@
 
 We hold this work to the standard of self-criticism it advocates, and enumerate the threats in
 descending order of how much they could change the paper's claims. We distinguish \emph{threats to
-the thesis} (is the gain of training-free RL really governed by reward spread, and does that buy us
-anything at the agent level?) from \emph{threats to the moat} (is the contribution durable and
-novel?) and \emph{threats to the empirics} (do the measurements support the conclusions?). The most
-consequential item is not an external risk but an internal, honest negative result of our own, so we
-state it first.
+the thesis} (is the gain of training-free RL really governed by the reward range, and does context
+isolation add anything beyond what a single model already affords?) from \emph{threats to the moat}
+(is the contribution durable and novel?) and \emph{threats to the empirics} (do the measurements
+support the conclusions?). The most consequential item is not an external risk but an internal,
+honest negative result of our own, so we state it first.
 
-\paragraph{Our strongest finding is a negative one: paralinguistic agentic recovery is, on our own
-data, unsupported.}
+\paragraph{Our strongest finding is a negative one: on our embedding probe, the paralinguistic
+per-block rewards the flagship would need are absent.}
 The constructive reading of OSA-2 depends entirely on \Cref{conj:spreadfloor}: that the frozen-model
 context-isolation construction actually yields \emph{non-degenerate} per-block verifiable rewards,
 i.e.\ a per-component spread $\spread_i$ bounded away from zero so that each $\gain(\Rwd_i)>0$. This
-is an empirical conjecture, not a theorem, and our own measurements indicate it \emph{fails or is
-fragile precisely for the flagship's paralinguistic factors}. For speaker, the kNN probe sits at
-$\approx 0.04$ --- near chance --- at \emph{all} $37$ hidden layers and under both pooling readouts,
-so the frozen omni embedding affords essentially no speaker spread to optimize over. For emotion, a
-rigorous multi-seed re-run replaces the earlier single-seed headline: with the readout layer selected
-on dev, a paired-delta bootstrap, and five seeds ($42, 7, 123, 2024, 31337$), the mean improvement is
-$\Delta = +0.037$ (range $[-0.053, +0.097]$), and the paired CI excludes zero in only $2$ of $5$
-seeds. The previously reported single-seed $+0.097$ was the \emph{best} seed under \emph{oracle
-test-layer} selection --- a winner's-curse / selection-leak artifact, not a stable effect. The
-committed artifact is
-\texttt{projects/speech-mllm-omni-embedding-rl/\_repro/emotion\_pool\_paired\_v2.json}. The honest
-conclusion is that the agentic-recovery move is empirically supported for \emph{content/intent}
-factors (where single-model task-level selection already realizes large, well-separated spread ---
-e.g.\ SLURP $+0.330$, \Cref{sec:feasibility}) but \emph{not} for paralinguistics, where on our data
-\Cref{conj:spreadfloor} is likely false. We present this as a central finding of the paper, not as a
-failure to be hidden: it sharply scopes where the reward-spread thesis has empirical teeth.
+is an empirical conjecture, not a theorem, and our own measurements indicate it fails for the
+flagship's paralinguistic factors --- but we are deliberate about the \emph{scope} of that evidence.
+It is established on a \emph{single content bi-encoder} (the omni-embed read-out) via a linear/kNN
+probe, and it therefore bounds only \emph{that read-out}: it does \emph{not} bound the proposed
+generative Operator-B policy, which we have never tested for paralinguistics, and it is not a verdict
+on frozen omni models as a class. For speaker, the kNN/linear probe on the omni-embed embedding sits
+at $\approx 0.04$ --- near chance --- at \emph{all} $37$ hidden layers and under both pooling
+readouts, so that one content read-out affords essentially no speaker spread to optimize over. For
+emotion, a rigorous multi-seed re-run replaces the earlier single-seed headline: with the readout
+layer selected on dev, a paired-delta bootstrap, and five seeds ($42, 7, 123, 2024, 31337$), the
+\emph{across-seed} mean improvement is $\Delta = +0.037$ with a $95\%$ $t$-CI of $[-0.043, +0.116]$
+that spans zero --- i.e.\ \emph{no significant emotion gain at the across-seed level (a null)}.%
+\footnote{The per-seed paired CI happens to exclude zero in $2$ of the $5$ seeds; that vote count is
+\emph{not} the headline --- the across-seed interval, which spans zero, is.}
+The previously reported single-seed $+0.097$ was the \emph{best} seed under \emph{oracle test-layer}
+selection --- a winner's-curse / selection-leak artifact, not a stable effect. The committed artifact
+is \texttt{projects/speech-mllm-omni-embedding-rl/\_repro/emotion\_pool\_paired\_v2.json}. We present
+this as a central finding of the paper, not as a failure to be hidden: it sharply scopes where the
+reward-range thesis has empirical teeth --- \emph{content/intent}, where single-model task-level
+selection already exhibits large, well-separated spread (e.g.\ SLURP $+0.330$, \Cref{sec:feasibility})
+--- and where, on this read-out, it does not: paralinguistics, where on our data
+\Cref{conj:spreadfloor} is, for now, contradicted.
 
 \paragraph{Context isolation buys nothing structurally: the isolated optimum equals the monolithic one.}
 A reader might suppose that decomposing a task into context-isolated blocks is itself the source of
@@ -37,13 +43,14 @@ gain. \Cref{thm:qstarprod} (\texttt{qstar\_product}) forbids that reading: under
 separable reward $\Rwd=\sum_i\Rwd_i$, the global Gibbs optimum factorizes as
 $\qs=\prod_i q^*_i$, so tilting each isolated block to its own optimum assembles \emph{exactly} the
 same distribution --- and the same objective value $\Fobj{\qs}=\beta\log\Zpart$ --- as a single
-monolithic tilt against $\Rwd$. Isolation \emph{per se} adds zero gain. The only way to increase
-$\gain$ is to introduce additional \emph{non-degenerate} verifiable rewards $\Rwd_i$ (each strictly
-positive by \texttt{gain\_pos\_of\_nonconstant}); the architectural act of separating contexts is a
-convenience for credit assignment, not a source of optimization headroom. Any claim that the agent
-structure realizes gain a monolithic search could not is therefore an \emph{empirical} claim about
-the availability of new non-degenerate rewards --- exactly the claim the previous paragraph shows is
-unsupported for paralinguistics.
+monolithic tilt against $\Rwd$. The high-spread content/intent gains are therefore \emph{single-model}
+gains; isolation \emph{per se} adds zero. The only way to increase $\gain$ is to introduce additional
+\emph{non-degenerate} verifiable rewards $\Rwd_i$ (each strictly positive by
+\texttt{gain\_pos\_of\_nonconstant}); the architectural act of separating contexts is a convenience
+for credit assignment, not a source of optimization headroom. Whether agentic decomposition adds
+anything a single model could not is therefore an \emph{empirical} claim about the availability of
+genuinely new non-degenerate rewards --- a claim we have not tested, and one the previous paragraph
+shows is, for paralinguistics, currently unsupported on the omni-embed read-out.
 
 \paragraph{The moat is an absence of evidence (fast-follower risk).}
 Our central feasibility argument rests on the observation that no prior work couples training-free,
@@ -64,11 +71,12 @@ characterization are textbook results in the alignment-as-Bayesian-inference lit
 \citep{beirami2024bon,gui2024bonbon}. Our contribution is to instantiate this machinery over the
 \emph{embedding} action space $\cZA$ of a frozen speech model rather than the token space. The
 transfer assumes the relevant degrees of freedom $\cZ$ already carry the pretrained structure the
-reward asks for \citep{frozenllmparaling2024,salmonn2023}. Our results split this assumption: the
-\emph{semantic/content} structure is clearly present and high-spread, but the \emph{paralinguistic}
-structure (speaker, emotion) is, on our probes, at or near chance --- so for those factors the hidden
-precondition of the transfer is violated, which is exactly why the negative result above is not
-incidental but predicted by the theory.
+reward asks for \citep{frozenllmparaling2024,salmonn2023}. Our results split this assumption: on the
+omni-embed content read-out the \emph{semantic/content} structure is clearly present and high-spread,
+but the \emph{paralinguistic} structure (speaker, emotion) is, on that same probe, at or near chance
+--- so for those factors the hidden precondition of the transfer is violated on the read-out we
+measured, which is exactly why the negative result above is not incidental but predicted by the
+theory.
 
 \paragraph{OSA-2 idealizes context isolation as exact separability.}
 OSA-2 models a multi-key agent reward as a sum of per-context-isolated components and proves
@@ -83,32 +91,41 @@ idealized and approximate separability is a large theory-to-practice risk, and t
 separability of the embedding factors \citep{xiao2020whatnot,wang2020alignuniform,leace2023} is an
 assumption our probes support only locally for content, and not at all for speaker.
 
-\paragraph{OSA-3 is static geometry, not convergence; finite-time convergence is open.}
-OSA-3 establishes two \emph{static} facts --- the rollout deficit $\beta\,\KL{\qz}{\qs}\ge0$
-(\texttt{rollout\_deficit}) and the factorization of the optimum $\qs=\prod_i q^*_i$
-(\texttt{qstar\_product}) --- and nothing dynamical. The operational update we actually run is JitRL's
-\citep{jitrl2026} no-gradient credit assignment, whose guarantee is \emph{asymptotic under slow drift}
-of the rollout distribution. The two regimes do not compose into a finite-time statement: we do
-\emph{not} have a monotone-improvement guarantee for the gated update over the full, continuous,
-only-approximately-separable space at a finite horizon. We read the $\beta$-KL term as a trust region
-by analogy with proximal/trust-region dynamics, but this analogy is an open conjecture, not a theorem,
-and it bears on the stability claims that agentic deployments care about most
-\citep{ace2025,expfollowing2025,remembering2026}. We accordingly demote OSA-3 to a motivating static
-geometry and treat convergence of the gated update as an open problem.
+\paragraph{Reaching the optimum is static geometry, not convergence; finite-time convergence is open.}
+We carry exactly \emph{two} load-bearing results --- OSA-1 (gain governed by the reward range) and
+OSA-2 (additivity with the isolated optimum equal to the monolithic one). What we record beyond them
+is bookkeeping, not a third pillar. The rollout deficit (\texttt{rollout\_deficit},
+\Cref{thm:rollout}) is a corollary of the master identity: every rollout $\qz$ off the optimum incurs
+a \emph{nonnegative} objective deficit $\beta\,\KL{\qz}{\qs}\ge0$ --- which at the base rollout is
+exactly the gain $\beta\,\KL{\qo}{\qs}$ --- a static deficit, not a bounded ``stability tax.'' The
+product factorization $\qs=\prod_i q^*_i$ (\texttt{qstar\_product}, \Cref{thm:qstarprod}) belongs to
+OSA-2, not to any separate dynamical result. Neither statement is a convergence theorem, and they do
+not compose into one. The operational update we actually run is JitRL's \citep{jitrl2026} no-gradient
+credit assignment, whose guarantee is \emph{asymptotic under slow drift} of the rollout distribution;
+the two regimes do not assemble into a finite-time statement, so we do \emph{not} have a
+monotone-improvement guarantee for the gated update over the full, continuous, only-approximately
+separable space at a finite horizon. We read the $\beta$-KL term as a trust region by analogy with
+proximal/trust-region dynamics, but this analogy is an open conjecture, not a theorem, and it bears on
+the stability claims that agentic deployments care about most
+\citep{ace2025,expfollowing2025,remembering2026}. We accordingly treat convergence of the gated
+update as an open problem.
 
-\paragraph{The isolated Hoeffding lemma and the T2 order-statistics \texttt{sorry} are load-bearing assumptions.}
+\paragraph{What ``machine-checked'' covers: one isolated lemma, one Pinsker hypothesis, one documented \texttt{sorry}.}
 Our machine-checked development is sorry-free in its qualitative core --- including the gain identity,
 its nonnegativity, the flat-reward collapse, the partition-function and Gibbs-optimum product
 factorizations, the strict per-non-degenerate-block positivity \texttt{gain\_pos\_of\_nonconstant},
-and \texttt{rollout\_deficit} --- but two \emph{quantitative} results carry named, undischarged
-hypotheses. The isolated Hoeffding lemma underwrites the $\spread^2/(8\beta)$ ceiling but its
-concentration constant is assumed rather than derived from the actual reward's bounded-difference
-structure; if the per-context reward is heavier-tailed than the assumed sub-Gaussian envelope, the
-constants are optimistic. The T2 order-statistics result behind the best-of-$N$ spread $\spread$
-retains a \texttt{sorry}: the asymptotics of the maximum order statistic
-\citep{yang2024asymptotics,beirami2024bon} are invoked as a hypothesis, not proved in our
-formalization. We flag both explicitly so that no reader mistakes ``machine-checked'' for
-``unconditionally proved''; the checked artifact is sound \emph{relative to} these two assumptions.
+and \texttt{rollout\_deficit} --- but the \emph{quantitative} results carry named, undischarged
+hypotheses, and we separate three statuses carefully so no reader mistakes ``machine-checked'' for
+``unconditionally proved.'' (i) Hoeffding's lemma, which underwrites the $\spread^2/(8\beta)$ ceiling,
+is a standard result \emph{discharged on paper} but isolated in Lean as a named hypothesis
+(\texttt{gain\_le\_of\_hoeffding}) rather than reproved from first principles; if the per-context
+reward is heavier-tailed than the assumed sub-Gaussian envelope, its constants are optimistic. (ii)
+Pinsker's inequality, behind the $O(\sqrt{\log N})$ best-of-$N$ regret reading, is \emph{consumed as a
+hypothesis, not discharged}. (iii) The order-statistics step in the best-of-$N$ KL bound carries the
+\emph{single documented \texttt{sorry}} in the development (\texttt{klBoN\_le\_klBoundBoN\_TODO}): the
+asymptotics of the maximum order statistic \citep{yang2024asymptotics,beirami2024bon} are invoked as a
+hypothesis, not proved in our formalization. The checked artifact is sound \emph{relative to} these
+three.
 
 \paragraph{Goodhart on verifiable rewards, and the sharper risk of \emph{model-dependent} rewards.}
 Inference-time optimization against a fixed reward is, by construction, an over-optimization engine:
@@ -133,21 +150,22 @@ loops with the same sign of error: it sends the query to the wrong context \emph
 embedding that yielded the wrong label, a positive-feedback pathway that idealized separability hides.
 This is sharpened by evidence that omni models tend to ``read, not listen'' on paralinguistic cues
 \citep{voxparadox2026,listenortranscribe2025} and that speaker identity resists in-context correction
-\citep{spkverifllm2026} --- exactly the regime where our speaker probe sits at chance. The mitigation
---- decoupling the routing estimator from the reward estimator --- is future work, not a property of
-the current gate.
+\citep{spkverifllm2026} --- exactly the regime where our speaker probe sits at chance on the omni-embed
+read-out. The mitigation --- decoupling the routing estimator from the reward estimator --- is future
+work, not a property of the current gate.
 
-\paragraph{The two-omni ``vector-omni memory'' collapses for paralinguistics; we reposition the design.}
+\paragraph{The two-omni ``vector-omni memory'' collapses for paralinguistics on this read-out; we reposition the design.}
 A natural reading of the system is two frozen omni models --- one as policy (Operator-B), one as a
 vector memory whose embeddings index past episodes (Operator-A) --- with the omni memory carrying
-paralinguistic keys. Our speaker result refutes the load-bearing version of that design: at
-$\approx 0.04$ accuracy (near chance) across all layers, the omni embedding does \emph{not} support
-paralinguistic retrieval, so a memory keyed on it would route on noise. We therefore reposition the
-contribution honestly: the omni embedding is reserved for \emph{content} retrieval, where its spread
-is real, and paralinguistic memory is delegated to classic, purpose-built speech encoders
-(ECAPA-style speaker embeddings, a dedicated SER head) rather than to the omni read-out. The
-``two-omni'' framing is downgraded to ``omni policy $+$ omni content memory $+$ classical
-paralinguistic encoders.''
+paralinguistic keys. Our speaker probe refutes the load-bearing version of that design: at
+$\approx 0.04$ accuracy (near chance) across all layers, the omni-embed \emph{content} read-out does
+\emph{not} support paralinguistic retrieval, so a memory keyed on it would route on noise. We are
+careful that this is a statement about the omni-embed read-out under a probe, not about a generative
+omni policy, which we have not tested for paralinguistics. We nonetheless reposition the contribution
+honestly: the omni embedding is reserved for \emph{content} retrieval, where its spread is real, and
+paralinguistic memory is delegated to classic, purpose-built speech encoders (ECAPA-style speaker
+embeddings, a dedicated SER head) rather than to the omni read-out. The ``two-omni'' framing is
+downgraded to ``omni policy $+$ omni content memory $+$ classical paralinguistic encoders.''
 
 \paragraph{Memory poisoning via acoustic spoofing.}
 When the optimized embedding is written to agent memory, the acoustic channel becomes an injection
@@ -165,55 +183,71 @@ should be read as directional, not confirmed, and adequately powered, seed-avera
 \citep{henderson2018drlmatters} replication on the frozen, contamination-controlled split is a
 precondition for any quantitative headline. Relatedly, the emotion re-run above already surfaced a
 provenance discrepancy between an earlier single-seed, oracle-test-layer number and the multi-seed,
-dev-selected protocol; we are reconciling all reported figures to the committed artifacts and the
-dev-selected, paired-delta protocol, and any residual mismatch between an in-text number and its
-artifact should be read as the artifact governing.
+dev-selected protocol whose across-seed interval spans zero; we are reconciling all reported figures
+to the committed artifacts and the dev-selected, paired-delta protocol, and any residual mismatch
+between an in-text number and its artifact should be read as the artifact governing.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 We have argued, and for its qualitative core machine-checked, a single reframed thesis: the
 optimization gain available to training-free RL --- reward-guided, inference-time search with no
-gradient and no weight or structure change --- is governed by the \emph{realized reward spread} of the
-(action-space, reward) pair, a property of the \emph{reward structure} and not of model class. This is
-the proven core, OSA-1: the gain is the divergence $\gain=\beta\,\KL{\qo}{\qs}$ between what the model
-already does and what the reward would have it do, sandwiched as $0\le\gain\le\spread^2/(8\beta)$. A
-flat reward --- e.g.\ instruction-conditioning of a frozen embedding read-out --- yields vanishing
-gain; a high-spread reward --- e.g.\ task-level verifiable selection --- yields large gain \emph{even
-on a single frozen model}, as our own single-model Operator-B results show (SLURP $+0.330$, URO
-$+0.335$). The lever is the spread, not the agent.
+gradient and no weight or structure change --- is governed by the \emph{reward range} (the spread
+$\spread=\max\Rwd-\min\Rwd$ over $\mathrm{supp}(\qo)$) of the (action-space, reward) pair, a property
+of the \emph{reward structure} and not of model class. This is the proven core, OSA-1: the gain is the
+divergence $\gain=\beta\,\KL{\qo}{\qs}$ between what the model already does and what the reward would
+have it do, sandwiched as $0\le\gain\le\min\!\big(\spread,\ \spread^2/(8\beta)\big)$; to leading order,
+for a concentrated $\qo$, the true discriminator is $\operatorname{Var}_{\qo}(\Rwd)/(2\beta)$, with the
+range-based Hoeffding term as a certified ceiling. A flat reward --- e.g.\ instruction-conditioning of
+a frozen embedding read-out --- yields vanishing gain; a high-spread reward --- e.g.\ task-level
+verifiable selection --- yields large gain \emph{even on a single frozen model}, as our own
+single-model Operator-B results show (SLURP $+0.330$, URO $+0.335$). The lever is the range, not the
+agent.
 
 OSA-2 sharpens this for composed rewards. We prove that gain is \emph{additive} across
 context-isolated blocks (\texttt{gain\_product}) and that each \emph{non-degenerate} block contributes
 \emph{strictly} positive gain (\texttt{gain\_pos\_of\_nonconstant}, sorry-free: a non-constant reward
-forces $\gain>0$). But we also prove (\texttt{qstar\_product}) that the isolated optimum equals the
-monolithic optimum on the product reward $\Rwd=\sum_i\Rwd_i$ --- so context isolation \emph{per se}
-adds nothing; the only new gain comes from introducing additional non-degenerate verifiable rewards.
-Whether a \emph{frozen speech model} actually affords non-degenerate per-block rewards is an empirical
-question (\Cref{conj:spreadfloor}), not a theorem.
+forces $\gain>0$). But we also prove (\texttt{qstar\_product}) that the isolated optimum \emph{equals}
+the monolithic optimum on the product reward $\Rwd=\sum_i\Rwd_i$ --- so context isolation \emph{per se}
+adds nothing structurally, and the only new gain comes from introducing additional non-degenerate
+verifiable rewards. These are the two proven, load-bearing results. Whether a \emph{frozen speech
+model} actually affords non-degenerate per-block rewards is an empirical question
+(\Cref{conj:spreadfloor}), not a theorem; and whether agentic decomposition adds anything a single
+model could not is, equally, untested --- it can be settled only by introducing genuinely new
+non-degenerate rewards and measuring their spread, which we have not done.
 
 On that empirical question our own data return a central, honest negative for the flagship's
-paralinguistic factors. A rigorous multi-seed re-run of the emotion-pooling gain (dev-selected layer,
-paired-delta bootstrap, seeds $42,7,123,2024,31337$) gives mean $\Delta=+0.037$ with the paired CI
-excluding zero in only $2$ of $5$ seeds --- the earlier $+0.097$ was the best seed under oracle
-test-layer selection, a selection leak --- and the speaker probe is at chance ($\approx 0.04$) across
-all $37$ layers. So the agentic-recovery move is empirically supported for \emph{content/intent} but,
-on our evidence, likely \emph{fails} for paralinguistics. We report this not as a setback but as a
-result: it scopes the thesis to where it has teeth and refutes the load-bearing version of a
-two-omni paralinguistic memory, which we accordingly reposition as an omni policy plus omni
-\emph{content} memory plus classical speaker/SER encoders.
+paralinguistic factors --- established, we stress, on the omni-embed \emph{content} read-out via a
+linear/kNN probe, and so silent about the untested generative Operator-B policy. A rigorous multi-seed
+re-run of the emotion-pooling gain (dev-selected layer, paired-delta bootstrap, seeds
+$42,7,123,2024,31337$) gives an across-seed mean $\Delta=+0.037$ with a $95\%$ $t$-CI of
+$[-0.043,+0.116]$ that spans zero: \emph{no significant emotion gain at the across-seed level (a
+null)} --- the earlier $+0.097$ was the best seed under oracle test-layer selection, a selection leak
+--- and the speaker probe is at chance ($\approx 0.04$) across all $37$ layers. So the reward-range
+thesis has teeth for \emph{content/intent}, where the gains are single-model and well-separated, but
+on this read-out it does not for paralinguistics. We report this not as a setback but as a result: it
+scopes the thesis to where it has teeth and refutes the load-bearing version of a two-omni
+paralinguistic memory, which we accordingly reposition as an omni policy plus omni \emph{content}
+memory plus classical speaker/SER encoders.
 
-OSA-3 we demote to motivating static geometry: it exhibits a positive static rollout deficit and a
-static factorization of the optimum, but a finite-time monotone-convergence guarantee for the gated,
-credit-assigned update over the full, only-approximately-separable space remains \emph{open}. The
-trust-region reading of the $\beta$-KL term is an analogy we conjecture, not a theorem we prove.
+The static geometry of reaching the optimum we keep as bookkeeping, not a third result: a nonnegative
+rollout deficit $\beta\,\KL{\qz}{\qs}\ge0$ (\texttt{rollout\_deficit}) off the optimum, and the OSA-2
+factorization $\qs=\prod_i q^*_i$ (\texttt{qstar\_product}). A finite-time monotone-convergence
+guarantee for the gated, credit-assigned update over the full, only-approximately-separable space
+remains \emph{open}, and the trust-region reading of the $\beta$-KL term is an analogy we conjecture,
+not a theorem we prove.
 
-We close by reaffirming the discipline that makes the claim falsifiable: a survey-first posture that
-treats our own moat as an absence of evidence to be defended, not assumed; a commitment to
-\emph{externally verifiable} rewards over learned or model-internal proxies, precisely to blunt the
-Goodhart pressure that inference-time optimization invites; and a no-gradient, no-weight-change
-constraint that keeps every failure recoverable at inference rather than frozen into parameters. The
-promise of \emph{activating}, rather than retraining, the latent competence of frozen speech models is
-real and near-term for content and intent; for paralinguistics it is, on present evidence, an open and
-likely negative hypothesis --- and we state the whole only to the precision that the proofs and the
-measurements can currently bear.
+We are therefore honest about what this system is today: a \emph{testbed}, not a flagship to build out
+now. Its value is threefold --- a falsifiable negative result (paralinguistic per-block rewards are
+absent on the omni-embed read-out), a frozen, contamination-controlled benchmark on which that
+negative and any future positive can be re-measured, and exactly one falsifiable candidate mechanism
+(the reward-range thesis and its per-block non-degeneracy conjecture, \Cref{conj:spreadfloor}) ---
+rather than a deployable agentic stack. We close by reaffirming the discipline that makes the claim
+falsifiable: a survey-first posture that treats our own moat as an absence of evidence to be defended,
+not assumed; a commitment to \emph{externally verifiable} rewards over learned or model-internal
+proxies, precisely to blunt the Goodhart pressure that inference-time optimization invites; and a
+no-gradient, no-weight-change constraint that keeps every failure recoverable at inference rather than
+frozen into parameters. The promise of \emph{activating}, rather than retraining, the latent
+competence of frozen speech models is real and near-term for content and intent; for paralinguistics
+it is, on present evidence, an open and likely negative hypothesis --- and we state the whole only to
+the precision that the proofs and the measurements can currently bear.

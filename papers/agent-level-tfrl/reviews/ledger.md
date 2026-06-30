@@ -36,3 +36,22 @@ the paralinguistic flagship is the hard case where our own evidence is negative/
 **Open / deferred (explicit, falsifiable future work — not hidden):** a Lean-formalized variance/Bernstein OSA-1
 bound; a coupling/perturbation degradation bound for OSA-2 under block dependence; multi-seed re-runs and
 committed artifacts for the Op-B content/intent numbers (Phase-0). These are stated as limitations in the paper.
+
+## Round 2 (fresh panel `wf_be2e7d7e-7a1`; chair: major revision, NOT clean, 13 new major). Root cause: the
+round-1 reframe was applied to the body but not propagated to the most-read sections. All 13 resolved in substance:
+
+| Finding | Resolution |
+|---|---|
+| F1 KL-direction typo (appendix proof of `gain_pos_of_nonconstant` wrote `KL(q*‖q0)`) | **Fixed** — corrected to `β·KL(q0‖q*)` matching `F_sub_eq_beta_mul_kl`; appendix KL directions audited. |
+| F2 front-matter desync (abstract/C1 keep "stability tax"; false "Pinsker discharged"; omit the sorry) | **Fixed** — abstract/C1 re-synced: two load-bearing results + a nonnegative rollout-deficit corollary; "Hoeffding discharged on paper, Pinsker + Beirami order-statistics consumed as hypotheses (latter = the one documented sorry)". |
+| F3 "realized spread" retained vs §5 retraction | **Fixed** — "realized" deleted globally; thesis = reward *range* (+ variance to leading order); ceiling stated range-based. |
+| F4 "agentic recovery" contradicts `qstar_product` | **Fixed** — language removed; content/intent gains labelled single-model high-spread; "does agentic decomposition add anything" stated untested. |
+| F5 title "Not Model Class" undercut by the model-class-switch remedy | **Fixed** — retitled "…Not Search Effort or Agent Wrapping…"; scope sentence added that spread is model-induced. |
+| F6 emotion reported by 2/5 vote-count, not across-seed CI | **Fixed by correct statistic** — across-seed mean +0.037, 95% t-CI **[−0.043, +0.116] spans 0 ⇒ NULL**; reported as "no significant emotion gain at the across-seed level"; "2/5" demoted to a footnote; "fragile"→"null". Artifact JSON updated. |
+| F7 evidence-accumulation confound (more sessions = more audio) | **Fixed in plan** — fixed-audio-budget / evidence-matched control; classic baseline fed identical accumulated evidence; vs-empty-memory contrast demoted. |
+| F8 tautological "0 regressions" rerank | **Fixed** — stated structural (improve-only selector), replaced with a per-item paired CI / removed robustness claim. |
+| F9 provenance under-specified (SLURP/MInDS baselines, missing n/CI) | **Fixed** — selection rule + slice per pair; n for SLURP/URO; CI for MInDS +0.089 or removed; one canonical MInDS row. |
+| F10 baseline update rule unpinned | **Fixed in plan** — pre-registered running-ECAPA-centroid + SER-decay + change-detection rule in the locked artifact. |
+| F11 system has no mechanism to beat the baseline; Phase-2 pre-registers a null | **Reframed (substantive)** — system DEMOTED from "flagship worth building now" to a **speech-agent testbed / falsification harness**, with ONE concrete candidate winning mechanism (Bayesian multi-session speaker-evidence integration under channel variation single-enrollment ECAPA misses) + its isolating ablation. |
+| F12 calibration safeguard reintroduces deployment human labels (vs label-free premise) | **Fixed** — calibration cost made explicit (labels per population/drift/new-speaker); no-calibration ablation added; "sibling extractor" replaced by a committed independent extractor + agreement-with-truth. |
+| F13 negative over-generalized to the generative policy | **Scoped** — negative precisely scoped to one content bi-encoder's linear-probe geometry; explicitly does NOT bound the untested generative Operator-B policy or "frozen omni models" as a class. |

@@ -180,8 +180,8 @@ PREAMBLE = r"""\documentclass[10pt]{article}
   keepspaces=true,showstringspaces=false,frame=single,framesep=3pt}
 
 \title{The Optimization Space of Training-Free Reinforcement Learning Is
-Governed by Reward Spread, Not Model Class:\\[2pt]
-\large Theory, a Self-Evolving Omni Speech Agent, and a Cautionary Study}
+Governed by Reward Spread, Not Search Effort or Agent Wrapping:\\[2pt]
+\large Theory, a Speech-Agent Testbed, and a Cautionary Paralinguistic Study}
 
 \author{Exploring-L4-Intelligence Project}
 \date{}
