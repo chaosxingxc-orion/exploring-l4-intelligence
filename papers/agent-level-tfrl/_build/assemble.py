@@ -114,6 +114,7 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 \newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{assumption}{Assumption}
@@ -127,6 +128,8 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \Crefname{definition}{Definition}{Definitions}
 \crefname{proposition}{Proposition}{Propositions}
 \Crefname{proposition}{Proposition}{Propositions}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
 \crefname{remark}{Remark}{Remarks}
 \Crefname{remark}{Remark}{Remarks}
 

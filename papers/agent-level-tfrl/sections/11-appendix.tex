@@ -3,7 +3,39 @@
 \section{Lean 4 Formalization}
 \label{app:lean}
 
-The core of our training-free RL theory is machine-checked in \textbf{Lean~4 + mathlib} (toolchain and mathlib both pinned to \texttt{v4.31.0}), in the project \texttt{proofs/tfrl} (Lean namespace \texttt{TfrlProofs}). The full library builds with a \emph{single documented} \texttt{sorry}, isolated to the order-statistics step of the best-of-$N$ KL bound (\Cref{app:lean-bon}); every other theorem, including the entire \texttt{TfrlProofs.OptSpace} module that grounds the optimization-space adequacy (OSA) claims of the main text, is \textbf{\texttt{sorry}-free}. Throughout, $\cZ$ is a \texttt{Fintype} (the inference-time action space), $\qo:\cZ\to\bbR$ is a strictly positive reference distribution with $\sum_z \qo(z)=1$, $\Rwd:\cZ\to\bbR$ is a reward, and $\beta>0$ a temperature.
+The \emph{qualitative core} of our training-free RL theory is machine-checked in \textbf{Lean~4 + mathlib} (toolchain and mathlib both pinned to \texttt{v4.31.0}), in the project \texttt{proofs/tfrl} (Lean namespace \texttt{TfrlProofs}). We are careful about what ``machine-checked'' means here, and \Cref{app:lean-status} below states it precisely. In brief: the structural backbone --- the master identity and T1 optimality, the flat-reward collapse, the product factorizations, the gain identity and its nonnegativity, and the rollout deficit (\texttt{gain\_eq}, \texttt{gain\_nonneg}, \texttt{flat\_no\_gain}, \texttt{Zpart\_product}, \texttt{gain\_product}, \texttt{qstar\_product}, \texttt{rollout\_deficit}) --- is \textbf{fully \texttt{sorry}-free}. The \emph{quantitative} results, by contrast, are Lean theorems \textbf{conditional on named, undischarged analytic hypotheses}: the $\spread^2/(8\beta)$ gain ceiling consumes Hoeffding's lemma as a hypothesis (the analytic bound itself is discharged by the \emph{paper} proof of \Cref{lem:hoeffding}, not inside Lean), the best-of-$N$ KL bound carries the single documented order-statistics \texttt{sorry}, and the $O(\sqrt{\log N})$ regret takes Pinsker's inequality as a hypothesis. We therefore do not claim a fully formalized end-to-end quantitative theory; we claim a \texttt{sorry}-free qualitative skeleton plus conditional quantitative corollaries whose remaining analytic inputs are standard and are proved on paper here. Throughout, $\cZ$ is a \texttt{Fintype} (the inference-time action space), $\qo:\cZ\to\bbR$ is a strictly positive reference distribution with $\sum_z \qo(z)=1$, $\Rwd:\cZ\to\bbR$ is a reward, and $\beta>0$ a temperature. Here OSA abbreviates \emph{Optimization-Space Adequacy} (and only that) throughout.
+
+\paragraph{Verification status: \texttt{sorry}-free vs.\ conditional.}
+\label{app:lean-status}
+To prevent any over-reading of ``machine-checked'', we tabulate the exact status of each Lean result.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Lean lemma & Status & Undischarged input \\
+\hline
+\texttt{kl\_nonneg} & \texttt{sorry}-free & --- \\
+\texttt{F\_sub\_eq\_beta\_mul\_kl} & \texttt{sorry}-free & --- \\
+\texttt{tilting\_optimal} (T1) & \texttt{sorry}-free & --- \\
+\texttt{qstar\_eq\_q0\_of\_const} (T3) & \texttt{sorry}-free & --- \\
+\texttt{gain\_eq} (OSA-1a) & \texttt{sorry}-free & --- \\
+\texttt{gain\_nonneg} (OSA-1b) & \texttt{sorry}-free & --- \\
+\texttt{flat\_no\_gain} (OSA-1c) & \texttt{sorry}-free & --- \\
+\texttt{Zpart\_product} (OSA-2) & \texttt{sorry}-free & --- \\
+\texttt{gain\_product} (OSA-2) & \texttt{sorry}-free & --- \\
+\texttt{qstar\_product} (OSA-3b) & \texttt{sorry}-free & --- \\
+\texttt{rollout\_deficit} (OSA-3a) & \texttt{sorry}-free & --- \\
+\texttt{klBoundBoN\_nonneg} & \texttt{sorry}-free & --- \\
+\hline
+\texttt{gain\_le\_of\_hoeffding} (OSA-1d) & \emph{conditional} & Hoeffding bound $S$ (hypothesis; proved on paper, \Cref{lem:hoeffding}) \\
+\texttt{kl\_best\_of\_n\_le} (T2) & \emph{conditional} & order-statistics step (one documented \texttt{sorry}) \\
+\texttt{regret\_O\_sqrt\_log} (T6) & \emph{conditional} & Pinsker's inequality (hypothesis) \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+Every entry in the upper block compiles with no axioms beyond mathlib's and no \texttt{sorry}. Each entry in the lower block is a genuine Lean theorem, but it \emph{takes its analytic input as an explicit hypothesis} (or, for T2, isolates it in the lone documented \texttt{sorry} \texttt{klBoN\_le\_klBoundBoN\_TODO}); the conclusion is then derived rigorously in Lean from that input. In particular, the $\spread^2/(8\beta)$ ceiling is \textbf{not} discharged inside Lean --- Lean only performs the substitution $S\mapsto\gain$ via \texttt{gain\_le\_of\_hoeffding}; the analytic content lives in the paper proof of \Cref{lem:hoeffding}.
 
 \paragraph{Tilting primitives and the Gibbs inequality.}
 The exponentially tilted optimum $\qs$, its partition function $\Zpart$, and the KL-regularized objective $\Fobj{\cdot}$ are defined exactly as in the main text. We reproduce the Lean signatures verbatim.
@@ -21,7 +53,7 @@ theorem kl_nonneg {p r : Z → ℝ} (hp : ∀ z, 0 ≤ p z) (hr : ∀ z, 0 < r z
 \end{verbatim}
 
 \noindent
-\texttt{kl\_nonneg} is Gibbs' inequality: the pointwise estimate $p(z)-r(z)\le p(z)\log(p(z)/r(z))$ (trivial when $p(z)=0$; otherwise $\log x \le x-1$ with $x=r(z)/p(z)$ via \texttt{Real.log\_le\_sub\_one\_of\_pos}) summed against $\sum p=\sum r=1$.
+\texttt{kl\_nonneg} is Gibbs' inequality: the pointwise estimate $p(z)-r(z)\le p(z)\log(p(z)/r(z))$ (trivial when $p(z)=0$; otherwise $\log x \le x-1$ with $x=r(z)/p(z)$ via \texttt{Real.log\_le\_sub\_one\_of\_pos}) is summed only over $\operatorname{supp}(p)$. On that index set $\sum_{z\in\operatorname{supp}(p)} p(z)=1$, while $\sum_{z\in\operatorname{supp}(p)} r(z)\le \sum_z r(z)=1$ (the partial sum over the support is $\le$ the full sum, since $r\ge 0$); the latter inequality is exactly what we need, because it gives $\sum_{z\in\operatorname{supp}(p)}\big(p(z)-r(z)\big)\ge 1-1=0$, hence $\KL{p}{r}\ge 0$. Writing the support sum as an equality with the full sum is never required --- the one-sided bound ``$\le$ the full sum'' is sufficient for $\KL\ge 0$.
 
 \paragraph{Master identity and T1.}
 The decomposition $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}$ is the engine of optimality.
@@ -58,7 +90,7 @@ theorem kl_best_of_n_le (klBoN : ℕ → ℝ) {N : ℕ}
     klBoN N ≤ Real.log N - ((N : ℝ) - 1) / N := hBeirami
 \end{verbatim}
 \noindent
-We prove rigorously that $\spread_{\mathrm{BoN}}(N):=\log N-(N-1)/N\ge 0$ (it equals $\log N - 1 + 1/N$, nonnegative since $\log N\ge 1-1/N$). The order-statistics derivation $\KL{\pi_{\mathrm{BoN}}}{\qo}\le \texttt{klBoundBoN}\,N$ \citep{beirami2024bon} is the lone documented \texttt{sorry} (\texttt{klBoN\_le\_klBoundBoN\_TODO}); \texttt{kl\_best\_of\_n\_le} takes that estimate as a hypothesis and concludes.
+We prove rigorously that $\spread_{\mathrm{BoN}}(N):=\log N-(N-1)/N\ge 0$ (it equals $\log N - 1 + 1/N$, nonnegative since $\log N\ge 1-1/N$). The order-statistics derivation $\KL{\pi_{\mathrm{BoN}}}{\qo}\le \texttt{klBoundBoN}\,N$ \citep{beirami2024bon} is the lone documented \texttt{sorry} (\texttt{klBoN\_le\_klBoundBoN\_TODO}); \texttt{kl\_best\_of\_n\_le} takes that estimate as a hypothesis and concludes. Thus the best-of-$N$ KL bound is a \emph{conditional} Lean theorem: the analytic order-statistics input is not discharged in Lean, only consumed.
 
 \paragraph{T6 --- $O(\sqrt{\log N})$ regret.}
 \begin{verbatim}
@@ -68,10 +100,10 @@ theorem regret_O_sqrt_log {gain R_max kl : ℝ} {N : ℕ} (hN : 1 ≤ N)
     gain ≤ R_max * Real.sqrt (Real.log N / 2)
 \end{verbatim}
 \noindent
-Chaining the Pinsker estimate $\gain\le \Rwd_{\max}\sqrt{kl/2}$ (hypothesis) with $kl\le\texttt{klBoundBoN}\,N\le\log N$ and monotonicity of $\sqrt{\cdot}$ yields $\gain = O(\sqrt{\log N})$.
+Chaining the Pinsker estimate $\gain\le \Rwd_{\max}\sqrt{kl/2}$ (taken as the hypothesis \texttt{hPinsker}, not proved in Lean) with $kl\le\texttt{klBoundBoN}\,N\le\log N$ and monotonicity of $\sqrt{\cdot}$ yields $\gain = O(\sqrt{\log N})$. Like T2, this is therefore a Lean theorem \emph{conditional} on its named analytic input (here Pinsker's inequality).
 
-\paragraph{The OSA suite (\texttt{TfrlProofs.OptSpace}, \texttt{sorry}-free).}
-We define the optimization gain $\gain:=\Fobj{\qs}-\Fobj{\qo}$ and prove its structural properties.
+\paragraph{The OSA suite (\texttt{TfrlProofs.OptSpace}).}
+We define the optimization gain $\gain:=\Fobj{\qs}-\Fobj{\qo}$ and prove its structural properties. Every lemma in this module compiles \texttt{sorry}-free; the only one whose \emph{quantitative} conclusion is conditional is \texttt{gain\_le\_of\_hoeffding}, which is a sound Lean proof that simply consumes the Hoeffding bound as an explicit hypothesis (discharged on paper in \Cref{lem:hoeffding}, not in Lean).
 
 \begin{verbatim}
 noncomputable def gain (q0 R : Z → ℝ) (β : ℝ) : ℝ :=
@@ -109,12 +141,12 @@ theorem rollout_deficit [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
 \end{verbatim}
 
 \noindent
-\texttt{gain\_eq} rewrites the gain as $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]$ (\textbf{OSA-1a}); \texttt{gain\_nonneg} (\textbf{OSA-1b}) is Jensen / Gibbs; \texttt{flat\_no\_gain} (\textbf{OSA-1c}) recovers T3 --- a single-model output-context (degenerate $\cZ$) affords no RL improvement; \texttt{gain\_le\_of\_hoeffding} (\textbf{OSA-1d}) isolates the analytic bound $S$, so $\spread\to 0\Rightarrow\gain\to 0$. The product lemmas (\textbf{OSA-2}, \textbf{OSA-3b}) show that over a context-isolated product $\cZ_1\times\cZ_2$ with $\qo=\qo^{(1)}\otimes\qo^{(2)}$ and separable $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$, the gain is \emph{additive} and $\qs$ factorizes; iterating over $k$ isolated agents gives $\gain=\sum_i\gain_i$, growing with $k$. Finally \texttt{rollout\_deficit} (\textbf{OSA-3a}) shows any rollout policy $q$ sits below $\qs$ by exactly $\beta\,\KL{q}{\qs}\ge 0$: a naive rollout that fails to reach $\qs$ incurs a strictly positive deficit, while the $\beta$-KL trust region enforces the slow-drift precondition of credit-assigned tilting \citep{jitrl2026}.
+\texttt{gain\_eq} rewrites the gain as $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]$ (\textbf{OSA-1a}); \texttt{gain\_nonneg} (\textbf{OSA-1b}) is Jensen / Gibbs; \texttt{flat\_no\_gain} (\textbf{OSA-1c}) recovers T3 --- a single-model output-context (degenerate $\cZ$) affords no RL improvement; \texttt{gain\_le\_of\_hoeffding} (\textbf{OSA-1d}) isolates the analytic bound $S$ as a hypothesis and substitutes it into $\gain$, so that \emph{given} the paper-proved ceiling $S=\spread^2/(8\beta)$ one obtains $\gain\le\spread^2/(8\beta)$ and hence $\spread\to 0\Rightarrow\gain\to 0$ --- the Lean step is the substitution, the analytic content is \Cref{lem:hoeffding}. The product lemmas (\textbf{OSA-2}, \textbf{OSA-3b}) show that over a context-isolated product $\cZ_1\times\cZ_2$ with $\qo=\qo^{(1)}\otimes\qo^{(2)}$ and separable $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$, the gain is \emph{additive} and $\qs$ factorizes; iterating over $k$ isolated agents gives $\gain=\sum_i\gain_i$, growing with $k$. Finally \texttt{rollout\_deficit} (\textbf{OSA-3a}) shows any rollout policy $q$ sits below $\qs$ by exactly $\beta\,\KL{q}{\qs}\ge 0$: a naive rollout that fails to reach $\qs$ incurs a strictly positive deficit, while the $\beta$-KL trust region enforces the slow-drift precondition of credit-assigned tilting \citep{jitrl2026}.
 
 \section{Extended Proofs}
 \label{app:extended}
 
-We give in full the two analytic results that the Lean development isolates as hypotheses or pure algebra.
+We give in full the two analytic results that the Lean development isolates as hypotheses or pure algebra. The first --- the $\spread^2/(8\beta)$ ceiling --- is precisely the input that \texttt{gain\_le\_of\_hoeffding} leaves undischarged: it is established here, on paper, not inside Lean.
 
 \subsection{Hoeffding instance: the gain ceiling \texorpdfstring{$\spread^2/(8\beta)$}{spread2/8beta}}
 \label{app:hoeffding}
@@ -133,7 +165,7 @@ Let $X:=\Rwd(z)/\beta$ for $z\sim\qo$, a random variable supported in $[a,b]$ wi
 \[
 \psi(\lambda)\;=\;\log\Exp\!\big[e^{\lambda(X-\Exp X)}\big]\;\le\;\frac{\lambda^2(b-a)^2}{8}.
 \]
-To prove this standard bound, set $\varphi(\lambda):=\log\Exp[e^{\lambda X}]$. Then $\varphi(0)=0$, $\varphi'(0)=\Exp X$, and $\varphi''(\lambda)=\operatorname{Var}_{\lambda}(X)$, where $\operatorname{Var}_{\lambda}$ is the variance under the tilted law $d\mu_\lambda\propto e^{\lambda x}d\mu$. Since $X\in[a,b]$ almost surely, the same holds $\mu_\lambda$-a.s., and a random variable bounded in an interval of length $b-a$ has variance at most $((b-a)/2)^2=(b-a)^2/4$ (the extremal case is the two-point distribution at the endpoints). Hence $\varphi''(\lambda)\le (b-a)^2/4$ for all $\lambda$. By Taylor's theorem with integral remainder, for some $\xi\in[0,\lambda]$,
+To prove this standard bound, set $\varphi(\lambda):=\log\Exp[e^{\lambda X}]$. Then $\varphi(0)=0$, $\varphi'(0)=\Exp X$, and $\varphi''(\lambda)=\operatorname{Var}_{\lambda}(X)$, where $\operatorname{Var}_{\lambda}$ is the variance under the tilted law $d\mu_\lambda\propto e^{\lambda x}d\mu$. Since $X\in[a,b]$ almost surely, the same holds $\mu_\lambda$-a.s., and a random variable bounded in an interval of length $b-a$ has variance at most $((b-a)/2)^2=(b-a)^2/4$ (the extremal case is the two-point distribution at the endpoints). Hence $\varphi''(\lambda)\le (b-a)^2/4$ for all $\lambda$. By Taylor's theorem with the Lagrange (mean-value) form of the remainder, for some $\xi$ between $0$ and $\lambda$,
 \[
 \varphi(\lambda)=\varphi(0)+\lambda\varphi'(0)+\tfrac12\lambda^2\varphi''(\xi)\le \lambda\,\Exp X+\frac{\lambda^2 (b-a)^2}{8},
 \]
@@ -147,7 +179,7 @@ Multiplying by $\beta>0$ and substituting $X=\Rwd/\beta$ (so $\Exp[X]=\Exp_{\qo}
 \[
 \beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]\le \frac{\spread^2}{8\beta}.
 \]
-By \texttt{gain\_eq}, the left side is exactly $\gain$, completing the proof.
+By \texttt{gain\_eq}, the left side is exactly $\gain$, completing the proof. This is the analytic step that supplies the hypothesis $S=\spread^2/(8\beta)$ to \texttt{gain\_le\_of\_hoeffding}; Lean itself only carries out the final substitution.
 \end{proof}
 
 \Cref{lem:hoeffding} makes the scaling explicit: the inference-time RL gain is quadratically throttled by the reward spread, $\gain=O(\spread^2/\beta)$, so a flat or near-flat reward landscape (T3, \textbf{OSA-1c}) yields vanishing headroom regardless of search budget --- the analytic counterpart of reward over-optimization saturation \citep{gao2023overopt}.
@@ -155,7 +187,7 @@ By \texttt{gain\_eq}, the left side is exactly $\gain$, completing the proof.
 \subsection{Product factorization (OSA-2) in full}
 \label{app:product}
 
-We verify the algebra underlying \texttt{Zpart\_product}, \texttt{meanR\_product}, and \texttt{gain\_product}. Let $\cZ=\cZ_1\times\cZ_2$, $\qo(z_1,z_2)=\qo^{(1)}(z_1)\,\qo^{(2)}(z_2)$ with $\sum\qo^{(1)}=\sum\qo^{(2)}=1$, and $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$ (context isolation).
+We verify the algebra underlying \texttt{Zpart\_product}, \texttt{meanR\_product}, and \texttt{gain\_product} (all of which are \texttt{sorry}-free in Lean; this subsection is the paper transcription of that pure-algebra content). Let $\cZ=\cZ_1\times\cZ_2$, $\qo(z_1,z_2)=\qo^{(1)}(z_1)\,\qo^{(2)}(z_2)$ with $\sum\qo^{(1)}=\sum\qo^{(2)}=1$, and $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$ (context isolation).
 
 \begin{proposition}[Partition factorization]
 $\Zpart(\qo,\Rwd,\beta)=\Zpart(\qo^{(1)},\Rwd_1,\beta)\cdot\Zpart(\qo^{(2)},\Rwd_2,\beta)$.
