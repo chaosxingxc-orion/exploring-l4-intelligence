@@ -5,3 +5,4 @@ import TfrlProofs.Plurality
 import TfrlProofs.BestOfN
 import TfrlProofs.MBR
 import TfrlProofs.Regret
+import TfrlProofs.OptSpace

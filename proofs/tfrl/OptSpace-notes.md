@@ -53,7 +53,7 @@ Define **`spread R := (univ.sup' R) − (univ.inf' R)`** (max−min reward over 
 ## Proof Belief-State `b(proof)` — live (VOI-ordered)
 | # | Axis | Belief | Conf | Status |
 |---|---|---|---|---|
-| P0 | Toolchain builds here (elan + mathlib cache + `lake build` existing `TfrlProofs` green) | unknown | low | **unprobed (θ1)** |
+| P0 | Toolchain builds here (elan + mathlib cache + `lake build` existing `TfrlProofs` green) | **YES** | high | **resolved GREEN (θ1)** |
 | P1 | OSA-1 chain provable via `F_sub_eq_beta_mul_kl`; Hoeffding hypothesis-isolated if needed | likely | med-high | unproven |
 | P2 | mathlib v4.31.0 has the API (`Finset.sup'/inf'`, `Real.add_pow_le_pow_mul_pow_of_sq_le_sq`/Hoeffding, exp/log) | likely | med | unprobed (θ1) |
 | P3 | OSA-2 product factorization (`Fintype.sum_prod_type`, `Finset.prod`, `Real.exp_add`, `Real.log_mul`) | likely | med | unproven |
@@ -65,5 +65,6 @@ Define **`spread R := (univ.sup' R) − (univ.inf' R)`** (max−min reward over 
 | θ | Date | Belief before → action → observation → update | Rollback? |
 |---|---|---|---|
 | θ0 | 2026-06-30 | reflection + S1 GO → **scaffold proof memo; state OSA-1/2/3 in the existing formalism; seed Proof Belief-State** → (no obs) → highest-VOI = P0 (does the toolchain build here) gates everything; OSA-1 is the most-decisive lemma (recovers T3, validates approach) | no |
-| θ1 | 2026-06-30 | P0 → **install elan; `lake exe cache get` + `lake build` existing `TfrlProofs` on ext4** → obs: elan 4.2.3 OK, `cache` exe built (25/25); **mathlib cache download slow/flaky (single-digit KB/s, retries) — build still running** → update: toolchain installs; P0 (local-verify) **pending** the slow cache fetch | — (in progress) |
+| θ1 | 2026-06-30 | P0 → **install elan; `lake exe cache get` + `lake build` existing `TfrlProofs` on ext4** → obs: elan 4.2.3 OK, `cache` exe built (25/25); **mathlib cache download slow/flaky (single-digit KB/s, retries) — cache 99.7% (8519/8542; 23 transient TLS misses) but `lake build` compiled the rest** → **GREEN (8566 jobs); P0 resolved** → update: toolchain works here, local verification enabled | no |
 | θ2 | 2026-06-30 | C* → **convergence survey (3 lanes, 43 claims / 54 sources, `wf_14ef3acb-2a3`)** → obs: **OSA-3 grounded** — naive rollout non-convergent across all axes (Reflexion plateau / ACE collapse / append-only error-prop / temporal contamination) + *proven* output seed (BoN hump inevitable, 2506.19248); OSA-3b = JitRL exact KL-opt (`z'=z+βÂ ⇒ π*∝π_θ·exp(βA)`) + **asymptotic** consistency under **slow-drift**, with the **trust region as the hinge**; proven *finite-N* convergence lives only at the output level → update: **C\* resolved**; OSA-3a/3b grounded + scoped (Lean proves the exact finite backbone, cites JitRL for the asymptotic field version) | no |
+| θ3 | 2026-06-30 | P1 → **write `OptSpace.lean` OSA-1 + `lake build`** → obs: 2 tactic-tail fixes (stray/missing `ring`), then **GREEN, sorry-free** — `gain_eq` (gain = β·log Z − E[R]), `gain_nonneg`, `flat_no_gain` (recovers T3), `gain_le_of_hoeffding` (Hoeffding isolated) → update: **P1 PROVED**; hypothesis part (a) — flat/degenerate space ⇒ 0 gain — is machine-checked; approach validated for OSA-2/3 | no |
