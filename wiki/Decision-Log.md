@@ -6,6 +6,69 @@
 
 ---
 
+### 2026-06-26 · First research proposal authored as a POMDP step-by-step build; Step-2 survey archived (93 verified sources)
+**Decision.** Authored the first proposal on the new [[Research-Proposal-Template]] —
+[[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] — for the owner's idea: *how far can
+training-free RL activate pretrained omni-model capabilities across the two model classes (vector/embedding vs
+thinker-talker/generative), with in-context conditioning (explicit task definition + few-shot) as the lever.*
+Built it explicitly as a **partially-observed decision process (POMDP)** — a live Belief-State table + a
+Trajectory log, each step a committable/rollbackable action ordered by value-of-information — rather than
+one-shot. Ran the **Step-2 survey** as a 5-lane multi-agent workflow (`wf_d76b4901-23c`) with per-lane
+adversarial source verification; archived **80 verified claims / 93 real http-linked sources** under
+`wiki/survey/` (index `survey/README.md`). Pre-registered the proposal to **v1.0** (§1 hypotheses, §2 per-family
+δ/α + go/kill/pivot + mandatory controls, §5(T) theory, §6 risks all FROZEN before any pilot).
+**Why.** First real exercise of the template; the owner asked for broad capability coverage (sampled dev/test),
+thorough survey + reproduction with a technical-principle/scheme emphasis, local models only (Qwen3-Omni-30B-A3B
+via llama.cpp), and a step-by-step iterative build.
+**Consequences.** (1) **Central falsifiable claim H1** — model-class asymmetry of ICL activation: reward-selected
+in-context conditioning activates an under-exposed capability on the generative class but not the vector class
+(label-free contrastive bi-encoder) — plus H2 (presence map + activation order content/intent ≥ emotion ≥
+speaker) and H3 (task-def vs demos vs instruction richness; label-sensitivity as the cross-class diagnostic).
+(2) **Step-1 feasibility probe → R1 blocker:** the WSL compute env on this machine is **unprovisioned** (no GPU /
+CUDA / uv / `~/.venvs/speechrl`, `~/speechrl-data/{models,datasets,repos}` empty, no llama.cpp; only system
+py3.14) — so the **empirical track (feasibility round-trip + all pilots) is BLOCKED-pending-provisioning**; the
+prior experiments ran on another host. llama.cpp's Qwen3-Omni audio path itself IS supported (libmtmd, verified).
+(3) **Survey refined H1 (partial rollback):** on the generative class naive few-shot demos mostly fix *format*
+not task accuracy (ALICE, arXiv:2603.20433), audio LLMs "read not listen" (VoxParadox, 2605.27772), and speaker
+resists even on (B) (2603.10827) — so the lever is **explicit task-definition + reward selection**, not raw
+demos; added §6 controls (random-reward null, cross-model sign-consistency, acoustic-grounding). The survey also
+**corrected an in-house citation** — LEACE is arXiv:2306.03819 (the feasibility doc's `2104.01767` is
+WhiteningBERT). (4) v1.0 is **pre-registered and compute-ready**; only the empirical track remains, gated on
+provisioning. (5) Survey synthesis agent hit a transient 401 mid-run; synthesized in-loop from the verified lanes.
+
+### 2026-06-26 · Research Proposal Template rewritten: pre-registration form with a two-tier theory/effectiveness gate
+**Decision.** Reviewed the lightweight `Research Proposal Template` (multi-agent workflow: 6 review
+dimensions + adversarial synthesis, grounded in the NeurIPS reproducibility checklist / Registered
+Reports / ACM artifact badging / Gorman-&-Bedrick / Kapoor-&-Narayanan AND our own W4 docs) and
+rewrote it into a **portable (project-agnostic) 9-section pre-registration form**, delivered as
+**paired monolingual EN / 中文 docs** (`Research-Proposal-Template.md` + `Research-Proposal-Template_CN.md`,
+cross-linked, per the repo's README/CONTRIBUTING `_CN` convention). Its core is repo-independent; the
+W1–W4 framing, repo wikilinks, lockfile/tracker, and wiki-sync hooks live only in a clearly-**optional**
+"wiring into a project knowledge base" footer: front-matter →
+falsifiable hypothesis → pre-registered success/kill/pivot criteria → survey & positioning →
+reproduced results (baseline + method pilot, with a Repro Manifest, locked-test/anti-gaming guards,
+and an operational 三方检测 definition) → two-tier theory/effectiveness gate → risks/ethics/data-
+governance → decision & outcome → AI-tools-&-verification table. Renamed the file to the dashed
+wikilink convention ([[Research-Proposal-Template]]) and linked it from the sidebar.
+**Why.** The template's rigor bar was right but lived *implicitly*, so it depended on the reader and
+eroded across works. Two self-inflicted flaws: (1) old requirement #3 demanded a mathematical proof
+of *effectiveness* — a category error for an empirical thesis that contradicts our own feasibility
+doc ([[W4-Training-Free-RL-Feasibility]]: the operator is proved; the P/L/S effectiveness conditions
+are "to verify empirically"); (2) section order (Reproduced Results before the proposal) + no
+pre-registered kill-criteria invited HARKing (author the hypothesis after seeing the numbers).
+**Consequences.** (1) Requirement #3 is now a **two-tier gate** — (T) operator convergence/
+well-posedness (a written justification with stated assumptions suffices; Lean only for finitary
+theorems) and (E) a pre-registered *empirical* effectiveness criterion; effectiveness is measured,
+never proven. (2) The falsifiable hypothesis + success/kill/pivot criteria are committed **before**
+the pilot. (3) New required fields lift existing team practice into the form: Repro Manifest,
+locked-test-set / selection≠metric / full-sweep guards, paired-bootstrap-CI stats, a logged
+independent 三方检测 (a different teammate **or** an AI agent, from a clean checkout), a 3-line
+ethics/licensing field (voiceprints = biometric, SER = affective), and an AI-output verification
+table (anti-hallucination). (4) Over-engineering deliberately rejected to keep it a tight fill-in
+form: ACM badge tiers, a formal in-principle sign-off gate, full datasheets/model-cards per study,
+an NSF budget section, blanket multiple-comparison correction. **Not yet published** — run
+`scripts/wiki-sync.sh` to publish to the GitHub Wiki.
+
 ### 2026-06-25 · Cross-team synthesis closes the goal: SLU/Spoken-QA/SER gains, independently reproduced
 **Decision.** After pushing the 2026-06-24 work, discovered the collaborator ("codex" team) had pushed a
 large frozen-model **policy-surface** Operator-B line to the W4 remote (CoVoST2/FLEURS translation,
