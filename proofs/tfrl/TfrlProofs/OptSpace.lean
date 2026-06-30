@@ -62,6 +62,84 @@ theorem gain_nonneg [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
   have hid := F_sub_eq_beta_mul_kl (R := R) (β := β) hq0 hβ (fun z => (hq0 z).le) hq0sum
   nlinarith [mul_nonneg hβ.le hkl, hid]
 
+/-- **Strict Gibbs inequality.** For strictly positive probability distributions `p`, `r` that
+differ at some point, the relative entropy is *strictly* positive. (The non-strict version is
+`kl_nonneg`; the strictness comes from `Real.log_lt_sub_one_of_pos` at the differing coordinate.) -/
+theorem kl_pos_of_ne {p r : Z → ℝ} (hp : ∀ z, 0 < p z) (hr : ∀ z, 0 < r z)
+    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) (hne : ∃ z, p z ≠ r z) :
+    0 < ∑ z, p z * Real.log (p z / r z) := by
+  obtain ⟨z0, hz0⟩ := hne
+  have pointwise : ∀ z, p z - r z ≤ p z * Real.log (p z / r z) := by
+    intro z
+    have hz := hp z
+    have hrz := hr z
+    have hx : 0 < r z / p z := div_pos hrz hz
+    have hlog := Real.log_le_sub_one_of_pos hx
+    have hflip : Real.log (p z / r z) = - Real.log (r z / p z) := by
+      rw [← Real.log_inv]; congr 1; field_simp
+    have hcancel : p z * (r z / p z) = r z := by field_simp
+    rw [hflip]
+    have h2 : p z * (-(r z / p z - 1)) ≤ p z * (- Real.log (r z / p z)) := by
+      apply mul_le_mul_of_nonneg_left _ hz.le; linarith [hlog]
+    have h3 : p z * (-(r z / p z - 1)) = p z - r z := by
+      rw [mul_neg, mul_sub, mul_one, hcancel]; ring
+    linarith [h2, h3.le, h3.ge]
+  have strict0 : p z0 - r z0 < p z0 * Real.log (p z0 / r z0) := by
+    have hz := hp z0
+    have hrz := hr z0
+    have hx : 0 < r z0 / p z0 := div_pos hrz hz
+    have hxne : r z0 / p z0 ≠ 1 := by
+      intro h; apply hz0; field_simp [hz.ne'] at h; linarith
+    have hlog := Real.log_lt_sub_one_of_pos hx hxne
+    have hflip : Real.log (p z0 / r z0) = - Real.log (r z0 / p z0) := by
+      rw [← Real.log_inv]; congr 1; field_simp
+    have hcancel : p z0 * (r z0 / p z0) = r z0 := by field_simp
+    rw [hflip]
+    have h2 : p z0 * (-(r z0 / p z0 - 1)) < p z0 * (- Real.log (r z0 / p z0)) := by
+      apply mul_lt_mul_of_pos_left _ hz; linarith [hlog]
+    have h3 : p z0 * (-(r z0 / p z0 - 1)) = p z0 - r z0 := by
+      rw [mul_neg, mul_sub, mul_one, hcancel]; ring
+    linarith [h2, h3.le, h3.ge]
+  have hsum_lt : ∑ z, (p z - r z) < ∑ z, p z * Real.log (p z / r z) :=
+    Finset.sum_lt_sum (fun z _ => pointwise z) ⟨z0, Finset.mem_univ z0, strict0⟩
+  have hzero : ∑ z, (p z - r z) = 0 := by
+    rw [Finset.sum_sub_distrib, hpsum, hrsum]; ring
+  linarith [hsum_lt, hzero]
+
+/-- **OSA-1 (strict positivity for a non-degenerate reward).** If the reward is *non-constant* on
+the support, the optimization gain is *strictly* positive: `0 < gain`. Combined with the additivity
+`gain_product` (OSA-2), this defeats the "sum of `k` near-zero gains is vacuous" objection — each
+context-isolated block with a non-degenerate reward contributes a strictly positive term, so the
+total gain is strictly increasing in the number of non-degenerate blocks. Whether the frozen model
+actually yields non-degenerate per-block rewards remains the empirical (Phase-2) question. -/
+theorem gain_pos_of_nonconstant [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) (hR : ∃ z w, R z ≠ R w) :
+    0 < gain q0 R β := by
+  have hqs_ne : ∃ z, q0 z ≠ qstar q0 R β z := by
+    by_contra h
+    push_neg at h
+    obtain ⟨z, w, hzw⟩ := hR
+    apply hzw
+    have hZ := Zpart_pos (R := R) (β := β) hq0
+    have key : ∀ u, Real.exp (R u / β) = Zpart q0 R β := by
+      intro u
+      have hu := h u
+      unfold qstar at hu
+      have : q0 u * Zpart q0 R β = q0 u * Real.exp (R u / β) := by
+        field_simp at hu ⊢; linarith [hu]
+      have := mul_left_cancel₀ (hq0 u).ne' this
+      linarith [this]
+    have hexp : Real.exp (R z / β) = Real.exp (R w / β) := by
+      rw [key z, key w]
+    have hdiv : R z / β = R w / β := Real.exp_injective hexp
+    field_simp at hdiv
+    exact hdiv
+  have hkl : 0 < ∑ z, q0 z * Real.log (q0 z / qstar q0 R β z) :=
+    kl_pos_of_ne hq0 (fun z => qstar_pos hq0 z) hq0sum (qstar_sum_one hq0) hqs_ne
+  have hid := F_sub_eq_beta_mul_kl (R := R) (β := β) hq0 hβ (fun z => (hq0 z).le) hq0sum
+  unfold gain
+  nlinarith [mul_pos hβ hkl, hid]
+
 /-- **OSA-1 (flat-reward no-go, recovers T3).** A constant reward — the degenerate / single-model
 output-context action space with zero reward spread — yields **no** optimization gain. -/
 theorem flat_no_gain [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)

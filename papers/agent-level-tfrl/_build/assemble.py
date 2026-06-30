@@ -90,6 +90,18 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \DeclareUnicodeCharacter{2026}{\ldots}
 \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
 \DeclareUnicodeCharacter{2032}{\ensuremath{\prime}}
+\DeclareUnicodeCharacter{2080}{\ensuremath{_{0}}}
+\DeclareUnicodeCharacter{2081}{\ensuremath{_{1}}}
+\DeclareUnicodeCharacter{2082}{\ensuremath{_{2}}}
+\DeclareUnicodeCharacter{2083}{\ensuremath{_{3}}}
+\DeclareUnicodeCharacter{2084}{\ensuremath{_{4}}}
+\DeclareUnicodeCharacter{2096}{\ensuremath{_{k}}}
+\DeclareUnicodeCharacter{1D62}{\ensuremath{_{i}}}
+\DeclareUnicodeCharacter{2C7C}{\ensuremath{_{j}}}
+\DeclareUnicodeCharacter{2070}{\ensuremath{^{0}}}
+\DeclareUnicodeCharacter{00B9}{\ensuremath{^{1}}}
+\DeclareUnicodeCharacter{00B2}{\ensuremath{^{2}}}
+\DeclareUnicodeCharacter{00B3}{\ensuremath{^{3}}}
 \DeclareUnicodeCharacter{2061}{}
 \DeclareUnicodeCharacter{2062}{}
 \usepackage{natbib}
@@ -167,9 +179,9 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,
   keepspaces=true,showstringspaces=false,frame=single,framesep=3pt}
 
-\title{Training-Free Reinforcement Learning Has a Vanishing Optimization
-Space on Single Models but Recovers in Context-Isolated Agent Systems:\\[2pt]
-\large Theory and a Self-Evolving Omni Speech Agent}
+\title{The Optimization Space of Training-Free Reinforcement Learning Is
+Governed by Reward Spread, Not Model Class:\\[2pt]
+\large Theory, a Self-Evolving Omni Speech Agent, and a Cautionary Study}
 
 \author{Exploring-L4-Intelligence Project}
 \date{}

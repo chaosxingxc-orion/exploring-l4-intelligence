@@ -20,7 +20,7 @@ ENTRIES = [
 ("wang2023selfconsistency","Self-Consistency Improves Chain of Thought Reasoning in Language Models","https://arxiv.org/abs/2203.11171"),
 ("zuo2025ttrl","TTRL: Test-Time Reinforcement Learning","https://arxiv.org/abs/2504.16084"),
 ("li2025tpo","Test-Time Preference Optimization: On-the-Fly Alignment via Iterative Textual Feedback","https://arxiv.org/abs/2501.12895"),
-("jitrl2026","Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates","https://arxiv.org/abs/2601.18510"),
+("jitrl2026","Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates (ICML 2026 Spotlight)","https://arxiv.org/abs/2601.18510"),
 ("khalaf2025hedgetune","Inference-Time Reward Hacking in Large Language Models (HedgeTune, Best-of-Poisson)","https://arxiv.org/abs/2506.19248"),
 ("gao2023overopt","Scaling Laws for Reward Model Overoptimization","https://arxiv.org/abs/2210.10760"),
 ("geuter2025gsi","Guided Speculative Inference for Efficient Test-Time Alignment of LLMs","https://arxiv.org/abs/2506.04118"),

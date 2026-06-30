@@ -618,7 +618,7 @@
 \newblock URL \url{https://arxiv.org/abs/2602.13891}.
 
 \bibitem[jit(2026)]{jitrl2026}
-{Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates}.
+{Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates (ICML 2026 Spotlight)}.
 \newblock \emph{arXiv preprint arXiv:2601.18510}, 2026.
 \newblock URL \url{https://arxiv.org/abs/2601.18510}.
 
