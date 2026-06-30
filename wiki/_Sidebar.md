@@ -11,6 +11,7 @@
 - [[Per-Work-Status]]
 - [[Data-and-Assets]]
 - [[AI-Collaboration]]
+- [[Research-Proposal-Template]]
 - [[Onboarding]]
 - [[Decision-Log]]
 
