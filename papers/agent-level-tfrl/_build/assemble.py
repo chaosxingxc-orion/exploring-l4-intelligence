@@ -179,9 +179,9 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,
   keepspaces=true,showstringspaces=false,frame=single,framesep=3pt}
 
-\title{The Optimization Space of Training-Free Reinforcement Learning Is
-Governed by Reward Spread, Not Search Effort or Agent Wrapping:\\[2pt]
-\large Theory, a Speech-Agent Testbed, and a Cautionary Paralinguistic Study}
+\title{Training-Free RL as Verifiable-Reward Selection on a Single Frozen
+Speech Model:\\[2pt]
+\large Content and Intent Gains, a Scoped Paralinguistic Negative, and a Reward-Spread Lens}
 
 \author{Exploring-L4-Intelligence Project}
 \date{}

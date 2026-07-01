@@ -1,254 +1,78 @@
-\section{Theory: Optimization-Space Adequacy}
+\section{A Reward-Spread Lens}
 \label{sec:osa}
 
-The thesis of this paper is that the optimization gain achievable by training-free reinforcement learning is governed not by the cleverness of the search operator, and not by whether the system is a single model or a multi-component agent, but by the \emph{reward spread of the (action-space, reward) pair} over which the search is performed --- which we abbreviate \emph{OSA} (Optimization-Space Adequacy) throughout. The central object is a property of the \emph{reward structure}, not of the \emph{model class}: a flat reward (for instance, instruction-conditioning of a frozen embedding read-out; \Cref{tab:cremad-matrix}) yields vanishing gain, while a high-spread reward (for instance, task-level verifiable selection) yields large gain \emph{even on a single frozen model} (our own single-model Operator-B results, e.g.\ SLURP $+0.330$ in \Cref{tab:opB}). We make this precise with a sequence of theorems that we have additionally formalized in Lean~4. We are deliberately careful about what ``machine-checked'' means here (see \Cref{rem:honesty}): the \emph{qualitative core} --- the gain identity (\texttt{gain\_eq}), its nonnegativity (\texttt{gain\_nonneg}), the flat-reward collapse (\texttt{flat\_no\_gain}), the strictly-positive-gain theorem for a non-degenerate reward (\texttt{gain\_pos\_of\_nonconstant}), the partition-function and Gibbs-optimum product factorizations, and the rollout deficit (\texttt{rollout\_deficit}) --- is \emph{sorry-free}, whereas the \emph{quantitative} results (the $\spread^2/(8\beta)$ ceiling via Hoeffding, the best-of-$N$ KL bound carrying the one documented \texttt{sorry}, and the $O(\sqrt{\log N})$ regret via Pinsker) are Lean theorems stated \emph{conditionally on named, undischarged hypotheses}. The development fixes a finite action space $\cZ$ (the inference-time degrees of freedom of a frozen model --- an embedding code in $\cZA$, a generative continuation in $\cZB$, or a product of such), a strictly positive base measure $\qo:\cZ\to\R_{>0}$ with $\sum_{w\in\cZ}\qo(w)=1$ induced by the model at temperature, a bounded reward $\Rwd:\cZ\to\R$, and an inverse-temperature parameter $\beta>0$. All distributions below are probability mass functions on $\cZ$. We write $\Exp_{\qz}[\cdot]$ for expectation under $\qz$ and adopt the convention $0\log 0=0$.
+We keep one lightweight analytic tool, used \emph{qualitatively} to organize the empirical
+contrast between content/intent and paralinguistics --- not as a novel theorem, and not as a
+``machine-checked quantitative ceiling.'' The claim is simple: inference-time verifiable-reward
+selection over a frozen model can only realize gain to the extent that the reward actually
+\emph{spreads} across the candidates it ranks. Where the reward has spread (content, tool/intent),
+selection helps; where it is nearly flat (speaker, emotion on our frozen omni read-out), it cannot.
 
-\begin{remark}[Honesty about the formalization]
-\label{rem:honesty}
-Every result in \Cref{sec:osa} except the two we explicitly flag is \emph{sorry-free} in our Lean development (file \texttt{OptSpace.lean}, supported by the tilting core in \texttt{Tilting.lean}). The two flagged dependencies are isolated as named hypotheses and are \emph{never} discharged silently: (i) Hoeffding's lemma, used only in \Cref{thm:hoeffding}, is taken as an assumption (\texttt{gain\_le\_of\_hoeffding}); and (ii) the order-statistics step in the best-of-$N$ KL bound (the Beirami--Mroueh integral, \texttt{klBoN\_le\_klBoundBoN}) carries the single documented \texttt{sorry} in the wider development and is consumed elsewhere as a hypothesis, not in this section. In particular the new \Cref{thm:gainpos} (\texttt{gain\_pos\_of\_nonconstant}) is sorry-free, resting only on the strict Gibbs inequality (\texttt{kl\_pos\_of\_ne}). We state both flagged results as assumptions so that no result here over-claims machine verification.
-\end{remark}
-
-\subsection{The Tilting Objective and its Optimum}
-\label{sec:osa-tilt}
-
-The object of study is the KL-regularized reward functional, whose maximizer is the exponential tilt of the base policy. This is the inference-time specialization of the well-known equivalence between KL-regularized control and Bayesian posterior inference \citep{korbak2022kl}; it underlies controlled decoding \citep{mudgal2024controlled} and the best-of-$N$ literature \citep{beirami2024bon}.
-
-\begin{definition}[Partition function, Gibbs optimum, regularized objective]
-\label{def:tilt}
-Define the \emph{partition function}
+Fix a finite candidate set $\cZ$ (the candidate cards a frozen bi-encoder ranks), a strictly
+positive base measure $\qo:\cZ\to\R_{>0}$ with $\sum_{w\in\cZ}\qo(w)=1$, a bounded verifiable reward
+$\Rwd:\cZ\to\R$, and an inverse-temperature $\beta>0$. Write $\Exp_{\qz}[\cdot]$ for expectation
+under $\qz$, adopt $0\log0=0$, and define the tilted (Gibbs) target and its normalizer
 \[
-\Zpart \;:=\; \sum_{w\in\cZ} \qo(w)\,\exp\!\big(\Rwd(w)/\beta\big)\;=\;\Exp_{\qo}\!\big[\exp(\Rwd/\beta)\big]\;>\;0,
-\]
-the \emph{Gibbs optimum} (exponential tilt)
-\[
+\Zpart \;:=\; \Exp_{\qo}\!\big[\exp(\Rwd/\beta)\big] \;>\;0,
+\qquad
 \qs(z) \;:=\; \frac{\qo(z)\,\exp\!\big(\Rwd(z)/\beta\big)}{\Zpart},
 \]
-which is a probability distribution because $\qo>0$ and $\Zpart>0$, and the \emph{KL-regularized objective}
+together with the KL-regularized objective
+$\Fobj{\qz} := \Exp_{\qz}[\Rwd] - \beta\,\KL{\qz}{\qo}$. This is the standard inference-time
+specialization of KL-regularized reward maximization, whose maximizer is the exponential tilt
+\citep{korbak2022kl,mudgal2024controlled}.
+
+\paragraph{Master identity: gain is a KL divergence.}
+A one-line algebraic identity (substitute $\Rwd(z)=\beta(\log\tfrac{\qs(z)}{\qo(z)}+\log\Zpart)$ into
+$\Fobj{\cdot}$) gives, for every distribution $\qz$ on $\cZ$,
 \[
-\Fobj{\qz} \;:=\; \sum_{z\in\cZ}\qz(z)\,\Rwd(z) \;-\; \beta\sum_{z\in\cZ}\qz(z)\,\log\frac{\qz(z)}{\qo(z)} \;=\; \Exp_{\qz}[\Rwd] \;-\; \beta\,\KL{\qz}{\qo}.
+\Fobj{\qz} \;=\; \beta\log\Zpart \;-\; \beta\,\KL{\qz}{\qs}.
 \]
-\end{definition}
-
-The next lemma is the algebraic spine of the whole section: it converts the gap to the optimum into a single nonnegative KL divergence.
-
-\begin{lemma}[Master identity]
-\label{lem:master}
-For every probability distribution $\qz$ on $\cZ$,
+Reading it at the model's own distribution $\qz=\qo$ and defining the optimization \emph{gain}
+$\gain := \Fobj{\qs}-\Fobj{\qo}$ yields the object we actually care about:
 \[
-\Fobj{\qz} \;=\; \beta\log\Zpart \;-\; \beta\,\KL{\qz}{\qs},
-\qquad\text{hence}\qquad
-\Fobj{\qs}-\Fobj{\qz} \;=\; \beta\,\KL{\qz}{\qs}.
+\gain \;=\; \beta\,\KL{\qo}{\qs}
+\;=\; \beta\log\Exp_{\qo}\!\big[\exp(\Rwd/\beta)\big] - \Exp_{\qo}[\Rwd].
+\tag{$\star$}\label{eq:gain}
 \]
-\end{lemma}
+The gain is exactly the divergence between what the model already does, $\qo$, and what the reward
+would have it do, $\qs$. The right-hand form of \eqref{eq:gain} is the free-energy / cumulant
+expression $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]$; by the Donsker--Varadhan variational
+identity it is nonnegative, and it is governed by how much $\Rwd$ varies under $\qo$. We use this
+\emph{qualitatively}: a second-order expansion gives $\gain \approx \operatorname{Var}_{\qo}(\Rwd)/(2\beta)$
+for a concentrated $\qo$, so the gain scales with the \emph{spread} $\spread$ of the reward across
+candidates. This is a well-known identity, invoked here as an organizing lens, not billed as a new
+result or a tight ceiling.
 
-\begin{proof}
-Taking logarithms in \Cref{def:tilt}, $\log\qs(z)=\log\qo(z)+\Rwd(z)/\beta-\log\Zpart$, so that, pointwise,
-\[
-\Rwd(z) \;=\; \beta\Big(\log\tfrac{\qs(z)}{\qo(z)} + \log\Zpart\Big).
-\]
-Substituting into $\Fobj{\qz}$ and using $\sum_z\qz(z)=1$,
-\begin{align*}
-\Fobj{\qz}
-&= \sum_z \qz(z)\Big[\beta\log\tfrac{\qs(z)}{\qo(z)} + \beta\log\Zpart\Big] - \beta\sum_z \qz(z)\log\tfrac{\qz(z)}{\qo(z)} \\
-&= \beta\log\Zpart + \beta\sum_z \qz(z)\Big[\log\tfrac{\qs(z)}{\qo(z)} - \log\tfrac{\qz(z)}{\qo(z)}\Big]
- = \beta\log\Zpart + \beta\sum_z \qz(z)\log\tfrac{\qs(z)}{\qz(z)} \\
-&= \beta\log\Zpart - \beta\,\KL{\qz}{\qs}.
-\end{align*}
-Evaluating at $\qz=\qs$ gives $\Fobj{\qs}=\beta\log\Zpart$ (the KL term vanishes), and subtracting yields the stated gap.
-\end{proof}
+\paragraph{Two endpoints (both sorry-free in Lean).}
+The lens has two exact endpoints, which we have formalized in Lean~4 without \texttt{sorry}.
 
-\begin{theorem}[Tilting optimality; \texttt{tilting\_optimal}, T1]
-\label{thm:t1}
-For every probability distribution $\qz$ on $\cZ$, $\Fobj{\qz}\le \Fobj{\qs}$, with equality iff $\qz=\qs$. Thus the exponential tilt $\qs$ is the unique maximizer of the inference-time objective $\Fobj{\cdot}$.
-\end{theorem}
+\emph{(i) Flat reward $\Rightarrow$ zero gain} (\texttt{flat\_no\_gain}). If $\Rwd\equiv c$ is constant
+on $\cZ$, then $\Zpart=e^{c/\beta}$, so $\qs=\qo$ and, by \eqref{eq:gain}, $\gain=0$. A reward that
+cannot distinguish the candidates leaves the model unchanged: there is nothing for selection to
+exploit.
 
-\begin{proof}
-By \Cref{lem:master}, $\Fobj{\qs}-\Fobj{\qz}=\beta\,\KL{\qz}{\qs}$. Nonnegativity of KL (Gibbs' inequality) follows from $\log x\le x-1$ for $x>0$: writing the ratio $r(z)=\qs(z)/\qz(z)$ on the support of $\qz$,
-\[
--\KL{\qz}{\qs}=\sum_z \qz(z)\log r(z)\;\le\;\sum_z \qz(z)\big(r(z)-1\big)=\sum_z \qs(z)-\sum_z \qz(z)=0,
-\]
-so $\KL{\qz}{\qs}\ge0$ and $\Fobj{\qz}\le\Fobj{\qs}$. Since $\beta>0$ and $\log x=x-1$ only at $x=1$, equality forces $\qz=\qs$ pointwise.
-\end{proof}
+\emph{(ii) Non-constant reward $\Rightarrow$ strictly positive gain} (\texttt{gain\_pos\_of\_nonconstant}).
+If $\Rwd$ is non-constant on $\cZ$ (recall $\qo>0$ everywhere), then $\qo\ne\qs$: were they equal,
+$e^{\Rwd(z)/\beta}=\Zpart$ for all $z$ would force $\Rwd$ constant. By the strict Gibbs inequality
+$\KL{\qo}{\qs}>0$, so \eqref{eq:gain} gives $\gain>0$. Any genuine spread in the verifiable reward
+yields strictly positive headroom for selection to realize.
 
-\Cref{thm:t1} is the entire ceiling of any training-free method: no reranker, decoder, or search distribution $\qz\in\Delta(\cZ)$ can exceed $\Fobj{\qs}=\beta\log\Zpart$. The rest of the section asks the operational question this raises --- \emph{how large is the headroom $\Fobj{\qs}-\Fobj{\qo}$ between the model's own sampling distribution $\qo$ and this ceiling?} --- because that headroom is exactly the gain a training-free optimizer can ever realize.
+These two lemmas are the strict converse of one another: $\Rwd$ constant $\iff \qs=\qo \iff \gain=0$.
 
-\subsection{OSA-1: A Flat or Degenerate Reward Yields Vanishing Gain}
-\label{sec:osa1}
-
-\begin{definition}[Optimization gain]
-\label{def:gain}
-The \emph{gain} of the action space under reward $\Rwd$ at temperature $\beta$ is the headroom $\gain := \Fobj{\qs}-\Fobj{\qo}$.
-\end{definition}
-
-\begin{proposition}[Closed form for the gain; \texttt{gain\_eq}, OSA-1a]
-\label{prop:gaineq}
-\[
-\gain \;=\; \beta\log\Zpart - \Exp_{\qo}[\Rwd] \;=\; \beta\log\Exp_{\qo}\!\big[\exp(\Rwd/\beta)\big] - \Exp_{\qo}[\Rwd].
-\]
-\end{proposition}
-
-\begin{proof}
-Apply \Cref{lem:master} at $\qz=\qo$. Since $\KL{\qo}{\qo}=0$, the definition gives $\Fobj{\qo}=\Exp_{\qo}[\Rwd]-\beta\KL{\qo}{\qo}=\Exp_{\qo}[\Rwd]$, while $\Fobj{\qs}=\beta\log\Zpart$. Subtract, and recall $\Zpart=\Exp_{\qo}[\exp(\Rwd/\beta)]$ from \Cref{def:tilt}.
-\end{proof}
-
-\begin{proposition}[Nonnegativity of the gain; \texttt{gain\_nonneg}, OSA-1b]
-\label{prop:gainnn}
-$\gain\ge0$, with equality iff $\qs=\qo$.
-\end{proposition}
-
-\begin{proof}
-Two equivalent routes. (i) By \Cref{lem:master}, $\gain=\Fobj{\qs}-\Fobj{\qo}=\beta\,\KL{\qo}{\qs}\ge0$, strict unless $\qo=\qs$. (ii) Directly from \Cref{prop:gaineq}, Jensen's inequality applied to the strictly convex $t\mapsto e^{t/\beta}$ gives $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]\ge \beta\,\Exp_{\qo}[\log e^{\Rwd/\beta}]=\Exp_{\qo}[\Rwd]$.
-\end{proof}
-
-The gain is therefore a divergence between what the model already does, $\qo$, and what the reward would have it do, $\qs$. When the reward is \emph{degenerate} --- so that it cannot distinguish the elements of $\cZ$ --- this divergence collapses.
-
-\begin{theorem}[Flat reward, no gain; \texttt{flat\_no\_gain}, OSA-1c $\Rightarrow$ T3]
-\label{thm:flat}
-If $\Rwd\equiv c$ is constant on $\cZ$, then $\qs=\qo$ and $\gain=0$.
-\end{theorem}
-
-\begin{proof}
-With $\Rwd(z)=c$, $\Zpart=\sum_w\qo(w)e^{c/\beta}=e^{c/\beta}$, so $\qs(z)=\qo(z)e^{c/\beta}/e^{c/\beta}=\qo(z)$ (this is exactly T3, \texttt{qstar\_eq\_q0\_of\_const}). By \Cref{prop:gaineq}, $\gain=\beta\log e^{c/\beta}-c=c-c=0$.
-\end{proof}
-
-\Cref{thm:flat} is the formal content of the flat-reward regime, and it is a statement about the \emph{reward}, not about the model class. Its empirical signature in our own data is \emph{instruction-conditioning of a frozen embedding read-out}: in \Cref{tab:cremad-matrix} the conditioning instruction does not measurably move the factor accuracies (overlapping CIs, not diagonally dominant), so the effective $\Rwd$ is approximately flat on $\mathrm{supp}(\qo)$, the tilt does essentially nothing, and there is no leverage for the optimizer to exploit. We stress that this is \emph{not} an artifact of using a single model: the very same single frozen model affords a high-spread reward under task-level Operator-B selection (\Cref{tab:opB}). The flat case is one regime of the reward structure, not a verdict on single-model systems. This is consistent with reports that purely self-referential test-time RL plateaus quickly \citep{zuo2025ttrl,reflexion2023} and with spurious-reward phenomenology \citep{spuriousrewards2025,skalse2022rewardhacking}. The next theorem makes the dependence on reward dispersion quantitative.
-
-\begin{assumption}[Hoeffding's lemma; isolated, cf.\ \Cref{rem:honesty}]
-\label{ass:hoeffding}
-Let $X$ be a random variable supported in an interval of length $\ell$ a.s.\ under a measure $\mu$. Then for all $\lambda\in\R$,
-\[
-\log\Exp_{\mu}\!\big[e^{\lambda X}\big]\;\le\;\lambda\,\Exp_{\mu}[X]+\frac{\lambda^2\ell^2}{8}.
-\]
-In Lean this is the hypothesis named in \texttt{gain\_le\_of\_hoeffding}; we do not prove it from first principles in our development.
-\end{assumption}
-
-\begin{theorem}[Quantitative collapse of gain; \texttt{gain\_le\_of\_hoeffding}, OSA-1d]
-\label{thm:hoeffding}
-Let $\spread:=\max_{z\in\cZ}\Rwd(z)-\min_{z\in\cZ}\Rwd(z)$ be the reward spread (range) on $\cZ$. Under \Cref{ass:hoeffding},
-\[
-\gain \;\le\; \frac{\spread^{2}}{8\beta}.
-\]
-In particular $\spread\to0\Rightarrow\gain\to0$: a vanishing reward spread forces a vanishing gain, uniformly in the search operator.
-\end{theorem}
-
-\begin{proof}
-Apply \Cref{ass:hoeffding} with $\mu=\qo$, $X=\Rwd$ (supported in an interval of length $\spread$ on $\cZ$), and $\lambda=1/\beta$:
-\[
-\log\Exp_{\qo}\!\big[e^{\Rwd/\beta}\big]\;\le\;\frac1\beta\,\Exp_{\qo}[\Rwd]+\frac{1}{\beta^2}\cdot\frac{\spread^2}{8}.
-\]
-Multiply by $\beta>0$ and rearrange to $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]\le \spread^2/(8\beta)$, which is exactly $\gain$ by \Cref{prop:gaineq}. The limit is immediate.
-\end{proof}
-
-\begin{remark}[The ceiling is a loose, range-based bound; do not call it ``realized'']
-\label{rem:ceiling}
-Three honest qualifications attach to \Cref{thm:hoeffding}. (i) \emph{Range, not realized spread.} Because $\qo>0$ everywhere on the finite $\cZ$, the support of $\qo$ is all of $\cZ$, so $\spread$ is simply the \emph{global range} $\max\Rwd-\min\Rwd$; there is no separate ``realized'' spread to speak of, and we drop that adjective. The bound is driven by the two extreme reward values, regardless of how little mass $\qo$ places near them. (ii) \emph{Looseness for a concentrated $\qo$.} A second-order (cumulant) expansion of \Cref{prop:gaineq} gives $\gain=\operatorname{Var}_{\qo}(\Rwd)/(2\beta)+O(1/\beta^2)$, so for a concentrated $\qo$ the true gain scales with the \emph{variance}, not the range; since $\operatorname{Var}_{\qo}(\Rwd)\le\spread^2/4$ (Popoviciu), the Hoeffding ceiling $\spread^2/(8\beta)$ over-estimates the gain by a factor that grows as $\qo$ concentrates. (iii) \emph{Vacuity at small $\beta$ and normalization.} As $\beta\to0$ the ceiling $\spread^2/(8\beta)\to\infty$ and is vacuous; and for a normalized reward $\Rwd\in[0,1]$ it pins to $1/(8\beta)$. The non-vacuous statement is therefore the trivial range bound combined with Hoeffding: since $\Fobj{\qs}\le\max\Rwd$ and $\Fobj{\qo}=\Exp_{\qo}[\Rwd]\ge\min\Rwd$, we always have $\gain\le\spread$, so
-\[
-0\;\le\;\gain\;\le\;\min\!\Big(\spread,\;\tfrac{\spread^2}{8\beta}\Big).
-\]
-We present the ceiling in this $\min$ form throughout and avoid calling $\spread$ ``realized.''
-\end{remark}
-
-\Cref{thm:hoeffding,rem:ceiling} pair with \Cref{prop:gainnn} to sandwich the gain and identify the reward spread as the sole lever of a frozen model under a given reward: it is the inference-time analogue of the reward-model scaling laws that bound over-optimization \citep{gao2023overopt}, and it explains why best-of-$N$ and reranking deliver returns proportional to how much the verifiable reward actually separates candidates \citep{beirami2024bon,khalaf2025hedgetune,snell2024ttscompute}. This makes the \emph{kind} of reward central, so we pause to reconcile the two reward families this paper uses.
-
-\begin{remark}[Two families of verifiable reward, and where Goodhart-immunity applies]
-\label{rem:rewardfamilies}
-Write $g_\theta$ for the frozen model's read-out map (embedding or decode). The verifiable rewards in this series split into two families. \emph{(A) Label-derived rewards} --- WER and exact-match against a ground-truth target $y^\star$ --- are functions of $y^\star$ alone and are genuinely \emph{independent} of $g_\theta$: they cannot be satisfied by exploiting an idiosyncrasy of the frozen model, so the usual Goodhart-immunity / verifiability argument (a label-checked reward resists reward-hacking) applies to them. \emph{(B) Model-dependent verifiable rewards} --- probe accuracy and retrieval hit@$k$ --- are functions of the frozen $g_\theta$ itself. These are still \emph{checkable}, but they are not label-independent: a probe reward reads out the same representation the policy acts in, so it \emph{shares failure modes} with the policy and the Goodhart-immunity argument does \emph{not} transfer to them. In particular Operator-A's read-out-selection reward (\Cref{tab:emotion-multiseed}) is model-dependent: it measures how well a layer/pooling choice of $g_\theta$ supports a paralinguistic probe, and a high probe reward is evidence about $g_\theta$'s representation, not an external check on it. We therefore reserve the strong Goodhart-immunity claim for family (A) and treat family-(B) rewards (probe, retrieval) as informative-but-circular signals whose gains must be read with the model's own biases in mind.
-\end{remark}
-
-\subsection{OSA-2: Context Isolation Makes Gain Additive --- but Buys No Enlargement Per Se}
-\label{sec:osa2}
-
-\Cref{thm:flat,thm:hoeffding} are a diagnosis: a degenerate reward yields no gain. The natural next move is \emph{context isolation} --- factoring a monolithic decision into components decoded under separate, non-interfering contexts (distinct sub-agents, or skill/memory-conditioned roles), each carrying its own verifiable reward. Formally this replaces $\cZ$ by a product and $\Rwd$ by a separable sum. We prove that the gain is additive over such components, but we are careful to show, in the same breath, that isolation \emph{per se} adds no optimization space at all.
-
-\begin{lemma}[Partition function factorizes; \texttt{Zpart\_product}]
-\label{lem:zfactor}
-Let $\cZ=\cZ_1\times\cZ_2$ with base $\qo=q_0^{(1)}\otimes q_0^{(2)}$ and \emph{separable} reward $\Rwd(z_1,z_2)=\Rwd_1(z_1)+\Rwd_2(z_2)$ (context isolation). Then $\Zpart=\Zpart^{(1)}\,\Zpart^{(2)}$, where $\Zpart^{(i)}=\sum_{z_i}q_0^{(i)}(z_i)e^{\Rwd_i(z_i)/\beta}$.
-\end{lemma}
-
-\begin{proof}
-A direct computation using independence and the multiplicativity of the exponential over the separable reward:
-\[
-\Zpart=\sum_{z_1,z_2}q_0^{(1)}(z_1)q_0^{(2)}(z_2)\,e^{(\Rwd_1(z_1)+\Rwd_2(z_2))/\beta}
-=\Big(\sum_{z_1}q_0^{(1)}(z_1)e^{\Rwd_1(z_1)/\beta}\Big)\Big(\sum_{z_2}q_0^{(2)}(z_2)e^{\Rwd_2(z_2)/\beta}\Big).\qedhere
-\]
-\end{proof}
-
-\begin{theorem}[Gain is additive over isolated components; \texttt{gain\_product}, OSA-2]
-\label{thm:gainprod}
-Under the hypotheses of \Cref{lem:zfactor}, $\gain=\gain(\Rwd_1)+\gain(\Rwd_2)$, where $\gain(\Rwd_i)=\beta\log\Zpart^{(i)}-\Exp_{q_0^{(i)}}[\Rwd_i]$. Consequently, for $k$ context-isolated components with product base and additively separable reward $\Rwd=\sum_{i=1}^k\Rwd_i$,
-\[
-\gain=\sum_{i=1}^{k}\gain(\Rwd_i).
-\]
-\end{theorem}
-
-\begin{proof}
-By \Cref{prop:gaineq} and \Cref{lem:zfactor}, $\beta\log\Zpart=\beta\log\Zpart^{(1)}+\beta\log\Zpart^{(2)}$. Under the product base with separable reward, $\Exp_{\qo}[\Rwd]=\Exp_{q_0^{(1)}}[\Rwd_1]+\Exp_{q_0^{(2)}}[\Rwd_2]$. Subtracting term by term gives the two-factor claim; the $k$-fold statement follows by induction on the components.
-\end{proof}
-
-\paragraph{Isolation buys no enlargement: the isolated optimum equals the monolithic optimum.}
-The additivity of \Cref{thm:gainprod} must not be misread as ``isolation enlarges the optimization space.'' It does not. The companion factorization \texttt{qstar\_product} (stated and proved as \Cref{thm:qstarprod} below) shows that the global Gibbs optimum on the product reward factorizes exactly, $\qs=q_1^\star\otimes q_2^\star$ --- so the distribution reached by tilting each isolated, separately-rewarded block to its own local optimum is \emph{identical} to the distribution reached by a single monolithic tilt of $\qo$ against the very same product reward $\Rwd=\sum_i\Rwd_i$. Both attain the same ceiling $\Fobj{\qs}=\beta\log\Zpart$ of \Cref{thm:t1}, and \Cref{thm:gainprod} merely \emph{decomposes} that one number into a sum of per-block contributions. Isolation \emph{per se} therefore contributes \emph{zero} additional optimization space: it is an accounting identity on a fixed objective, not an enlargement of it. The \emph{only} source of additional gain is the introduction of \emph{additional, non-degenerate, separable verifiable rewards} $\Rwd_i$ --- each new non-constant block adds its own strictly positive $\gain(\Rwd_i)$, and nothing is gained by isolating a reward one already had. This is the precise sense in which OSA-2 is a statement about \emph{adding rewards}, not about \emph{partitioning models}.
-
-The strict-positivity claim underlying ``each new non-constant block adds gain'' deserves to be a theorem in its own right, because it is what makes the $k$-fold sum non-vacuous.
-
-\begin{theorem}[Strictly positive gain for a non-degenerate reward; \texttt{gain\_pos\_of\_nonconstant}]
-\label{thm:gainpos}
-If $\Rwd$ is non-constant on the support of $\qo$ (equivalently, on $\cZ$, since $\qo>0$ everywhere), then $\gain>0$.
-\end{theorem}
-
-\begin{proof}
-By route (i) of \Cref{prop:gainnn}, $\gain=\beta\,\KL{\qo}{\qs}$ with $\beta>0$. By the strict Gibbs inequality (\texttt{kl\_pos\_of\_ne}), $\KL{\qo}{\qs}>0$ whenever $\qo\ne\qs$. It remains to show $\qo\ne\qs$. If instead $\qo=\qs$, then for every $z$, $\qo(z)=\qo(z)e^{\Rwd(z)/\beta}/\Zpart$, and since $\qo(z)>0$ this forces $e^{\Rwd(z)/\beta}=\Zpart$ for all $z$, i.e.\ $\Rwd(z)=\beta\log\Zpart$ is constant on $\cZ$ --- contradicting non-constancy. Hence $\qo\ne\qs$ and $\gain>0$. (This is the strict converse of \Cref{thm:flat}: constant $\Rwd\Leftrightarrow\qs=\qo\Leftrightarrow\gain=0$.)
-\end{proof}
-
-\Cref{thm:gainpos} is what makes the additive sum of \Cref{thm:gainprod} ``grow in $k$'' non-vacuously: \emph{each} non-degenerate block contributes a strictly positive increment $\gain(\Rwd_i)>0$, so $k\mapsto\sum_{i\le k}\gain(\Rwd_i)$ is strictly increasing along non-constant blocks. But the theorem also sharpens exactly what remains open. Strict positivity is a \emph{conditional} statement --- it presupposes that the block reward $\Rwd_i$ is non-constant on the frozen model's own support. Whether a frozen speech model actually \emph{affords} non-degenerate per-block rewards for a given factor is an \emph{empirical} question about $g_\theta$, not a theorem.
-
-\begin{conjecture}[Per-block non-degeneracy; empirical crux for Phase~2]
-\label{conj:spreadfloor}
-Under the actual frozen-model context-isolation construction --- decomposing a task across sub-agents and loading distinct skills/memories so that component $i$ is decoded under an isolated context with its own verifiable reward $\Rwd_i$ --- there exists a constant $s_0>0$ such that the per-component reward spread satisfies $\spread_i\ge s_0$ on $\mathrm{supp}(q_0^{(i)})$ for each reward-bearing component. Equivalently, context isolation keeps each block non-degenerate (the hypothesis of \Cref{thm:gainpos}), so that each $\gain(\Rwd_i)$ is bounded away from zero and the additive gain of \Cref{thm:gainprod} is realized rather than vacuous. We state this as an \emph{open conjecture}: it is the empirical crux on which the constructive reading of OSA-2 depends, and is precisely what the Phase~2 experiments are designed to test, not something the present theory establishes.
-\end{conjecture}
-
-\begin{remark}[A standing counterexample for paralinguistic factors]
-\label{rem:counterexample}
-\Cref{conj:spreadfloor} is not idle: our own preliminary evidence already supplies a \emph{standing counterexample} for the flagship's paralinguistic factors, so the conjecture is, for those factors, currently \emph{contradicted}. (i) \emph{Speaker.} The frozen-embedding speaker probe sits at $\approx0.04$ --- near chance --- at \emph{every one} of the $37$ hidden layers (\Cref{tab:cremad-matrix}, \Cref{sec:feas:prelim}); the speaker block is degenerate, $\spread_i\approx0$, and \Cref{thm:gainpos} gives no positive gain because its hypothesis fails. (ii) \emph{Emotion.} The emotion read-out gain is fragile. The previously-reported single-seed $+0.097$ (\Cref{tab:emotion-multiseed}) was the best seed under \emph{oracle test-layer selection} --- a winner's-curse / selection-leak artifact. A rigorous multi-seed re-run (dev-selected layer, paired-delta bootstrap, $5$ seeds $\{42,7,123,2024,31337\}$) gives mean $\Delta=+0.037$ (range $[-0.053,+0.097]$), with the paired CI excluding $0$ in only $2/5$ seeds (committed artifact \texttt{projects/speech-mllm-omni-embedding-rl/\_repro/emotion\_pool\_paired\_v2.json}). Thus, for \emph{content} and \emph{intent}, frozen omni models plausibly do afford non-degenerate per-block rewards (\Cref{tab:opB}), and the OSA-2 program is well-motivated; but for \emph{speaker} and \emph{emotion} the per-block non-degeneracy hypothesis is, on our own data, false or unsupported. The paper says this plainly: the agentic-decomposition argument is empirically backed for content/intent and is a \emph{standing counterexample}, not a success, for paralinguistics.
-\end{remark}
-
-With those qualifications in force, the intended --- and explicitly conditional --- picture is: where a flat reward affords no leverage, \emph{adding} a non-degenerate, separable verifiable reward (e.g.\ a content/intent read-out, or a task-level selection reward) contributes strictly positive gain by \Cref{thm:gainpos}, and isolating such rewards across context-isolated roles lets their gains add by \Cref{thm:gainprod} --- \emph{provided} \Cref{conj:spreadfloor} holds for the factor in question, which our data supports for content/intent and contradicts for speaker/emotion. This is the conjectured mechanism by which agentic decomposition, retrieval-conditioned roles, and verifiable per-skill rewards \citep{tulu3,jitrl2026} could convert a degenerate setting into a tractable one --- where, and only where, the frozen model supplies the requisite non-degenerate blocks.
-
-\subsection{Reaching the Optimum: a Corollary and an Open Convergence Question}
-\label{sec:osa3}
-
-The two facts the previous subsections lean on --- the static rollout deficit and the product factorization of the optimum --- are corollaries of the master identity (\Cref{lem:master}) and the OSA-2 factorization (\Cref{lem:zfactor}), respectively. We record them as such; neither is a convergence theorem, and we make no claim that they assemble into one. We deliberately avoid any ``trichotomy,'' ``stability-tax,'' or ``third-pillar'' framing: there are exactly two load-bearing results (OSA-1 on spread, OSA-2 on additivity-without-enlargement), and what follows is bookkeeping plus an honest statement of what remains open.
-
-\begin{corollary}[Rollout deficit; \texttt{rollout\_deficit}]
-\label{thm:rollout}
-Every rollout policy $\qz$ on $\cZ$ satisfies
-\[
-\Fobj{\qz} \;=\; \Fobj{\qs} \;-\; \beta\,\KL{\qz}{\qs},\qquad \beta\,\KL{\qz}{\qs}\ge0,
-\]
-strictly positive unless $\qz=\qs$. Hence a rollout that fails to land on $\qs$ incurs a strictly positive, irreducible objective deficit.
-\end{corollary}
-
-\begin{proof}
-This is \Cref{lem:master} read as a statement about an arbitrary rollout $\qz$; strictness is the equality case of \Cref{thm:t1}.
-\end{proof}
-
-\begin{theorem}[Per-component tilting assembles the global optimum (static factorization); \texttt{qstar\_product}]
-\label{thm:qstarprod}
-Under the isolated product structure of \Cref{lem:zfactor}, the global Gibbs optimum factorizes:
-\[
-\qs(z_1,z_2)\;=\;q^{*}_{1}(z_1)\,q^{*}_{2}(z_2),\qquad q^{*}_{i}(z_i)=\frac{q_0^{(i)}(z_i)\,e^{\Rwd_i(z_i)/\beta}}{\Zpart^{(i)}}.
-\]
-Therefore tilting each isolated component to its own local optimum $q^{*}_i$ assembles \emph{exactly} the global optimum $\qs$, which by \Cref{thm:t1} is $\Fobj{\cdot}$-optimal over all of $\Delta(\cZ)$. This is the factorization invoked in \Cref{sec:osa2}: it equates the isolated and monolithic optima on the product reward.
-\end{theorem}
-
-\begin{proof}
-Using $\qo=q_0^{(1)}\otimes q_0^{(2)}$, the separable reward, and \Cref{lem:zfactor},
-\[
-\qs(z_1,z_2)=\frac{q_0^{(1)}(z_1)q_0^{(2)}(z_2)\,e^{\Rwd_1(z_1)/\beta}e^{\Rwd_2(z_2)/\beta}}{\Zpart^{(1)}\Zpart^{(2)}}
-=\frac{q_0^{(1)}(z_1)e^{\Rwd_1(z_1)/\beta}}{\Zpart^{(1)}}\cdot\frac{q_0^{(2)}(z_2)e^{\Rwd_2(z_2)/\beta}}{\Zpart^{(2)}}=q^{*}_1(z_1)\,q^{*}_2(z_2).
-\]
-Global optimality is \Cref{thm:t1}.
-\end{proof}
-
-Two caveats bound the reading of \Cref{thm:qstarprod}. First, it presupposes that credit has \emph{already} been assigned: it requires a genuinely separable, per-component observable reward $\Rwd_i$ on each block, and it does \emph{not} solve the credit-assignment problem of inferring per-component advantages from a single scalar reward on the joint outcome. When only a scalar joint reward is available, the product structure is an assumption, not a consequence. Second --- and this is the open question --- both \Cref{thm:rollout} and \Cref{thm:qstarprod} are \emph{static}: they describe the geometry of the fixed objective (a positive deficit off $\qs$, a factorized optimum at $\qs$), not the \emph{trajectory} of any update rule. We read the $\beta\,\KL{\qz}{\qs}$ term as a trust region penalizing drift from the tilted optimum, and we \emph{conjecture}, by analogy with proximal/trust-region dynamics, that a large enough $\beta$ keeps a retrieval-/advantage-tilting update --- such as JitRL's no-gradient credit-assigned tilt \citep{jitrl2026} --- in the basin where per-component tilting decreases $\KL{\cdot}{\qs}$, while a fast-drift rollout that ignores the trust region (appending its own unverified outputs as context and chasing them) is empirically observed to diverge through context collapse and error propagation \citep{reflexion2023,ace2025,gao2023overopt}. We stress that this link is an \emph{analogy/conjecture}, not a theorem: a finite-time monotone convergence guarantee \emph{remains open}, consistent with our Convergence section.
-
-In sum: OSA-1 (\Cref{thm:flat,thm:hoeffding,rem:ceiling}) proves that the gain is governed by the reward spread --- a property of the reward, not of the model class. OSA-2 (\Cref{thm:gainprod,thm:gainpos,thm:qstarprod}) proves that context isolation makes gain \emph{additive} while the isolated optimum \emph{equals} the monolithic one, so isolation buys no enlargement and the only additional gain comes from introducing additional non-degenerate verifiable rewards, each strictly positive. Whether a frozen speech model affords such non-degenerate per-block rewards is the empirical \Cref{conj:spreadfloor}: supported by our data for content/intent, and --- per \Cref{rem:counterexample} --- a standing counterexample for speaker and emotion. Convergence of any credit-assigned tilting dynamics is left open.
+\paragraph{Why the lens explains our results.}
+The lens reads directly onto the empirical contrast of this paper. For \emph{content and intent}, the
+verifiable reward separates candidate cards sharply: on MInDS-14 en-US tool/intent, frozen bi-encoder
+candidate-card selection reaches $\mathrm{Acc}@1\,{=}\,0.984$ versus the raw-schema baseline $0.857$
+($\Delta=+0.126$; \Cref{tab:content}), and SLURP intent corroborates ($0.550\to0.880$). Here $\Rwd$ has
+high spread across candidates, so by \eqref{eq:gain} and endpoint (ii) selection realizes a real gain
+--- the inference-time analogue of why best-of-$N$ and reranking pay off in proportion to how much a
+verifiable reward separates candidates \citep{beirami2024bon,gao2023overopt}. For \emph{paralinguistics},
+the picture is the opposite. The frozen omni content read-out carries near-chance speaker information
+and only modest emotion (\Cref{tab:para}), and training-free pool-selection produces no
+significant emotion gain (across-seed $95\%$ CI $[-0.043,+0.116]$; committed artifact
+\texttt{\_repro/emotion\_pool\_paired\_v2.json}). On these factors $\Rwd$ is nearly flat on
+$\mathrm{supp}(\qo)$, so by endpoint (i) there is little spread to exploit and selection cannot help
+--- exactly what we observe. The reward-spread lens thus does one job, and only that job: it explains
+why identical training-free selection machinery succeeds on content/intent and fails on
+paralinguistics, without appeal to model class, decomposition, or agentic structure.

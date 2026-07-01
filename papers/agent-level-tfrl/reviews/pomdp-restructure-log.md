@@ -24,6 +24,46 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t4 — Step 4 (restructure) → compiles clean; cut verified
+- **action:** parallel rewrite of 8 sections to the collapsed thesis (shared spec); deleted 06-convergence /
+  08-system / 09-plan; retitled to "Training-Free RL as Verifiable-Reward Selection on a Single Frozen Speech
+  Model: …"; reassembled + recompiled.
+- **micro-observations (compile loop):** fixed a stray `\end{abstract}`, a `\Var` undefined macro (which exposed a
+  real spread-definition inconsistency — spread was defined as variance in prelim vs range elsewhere; unified to the
+  RANGE with variance as the leading-order proxy), and two dangling table refs (`tab:opB`→`tab:content`,
+  `tab:cremad-matrix`→`tab:para`).
+- **observation o4:** paper compiles clean — **21 pages** (down from 57), ~22.7k tokens, 0 undefined citations/refs,
+  no fatal errors. Cut verified: no residual OSA-2/3, agentic-recovery, Operator-B, thinker-talker, or
+  stability-tax claims (only the project name in the author line contains "L4"). All agent/generative-operator
+  mentions are honest negations / future-work.
+- **belief update:** the collapsed paper now states the collapsed thesis end-to-end (abstract, 3 contributions,
+  spread lens, results with correct attribution, honest negative, future work). b.paper ≈ stable pending the Step-5
+  hostile-panel observation.
+- **action chosen next:** Step 5 — fresh hostile principle/purpose/feasibility panel on the RESTRUCTURED paper,
+  under DISCLOSURE≠RESOLUTION. If a surviving fundamental challenge → iterate/rollback; else terminate.
+
+### t3 — Step 2 (negative probe) + Step 3 DECISION (theory's fate)
+- **action:** bounded GPU run of `paralinguistic_negative_probe.py` (frozen omni-embed, CREMA-D, speaker 91-way +
+  emotion 6-way, dev-selected layer, 3 seeds, bootstrap CI vs chance).
+- **observation o3 (committed `_repro/paralinguistic_negative_probe.json`):** SPEAKER mean acc **0.033** (range
+  0.023–0.047) vs chance 0.011 → **3.0× chance** (near-chance, but honestly *above* chance — not "at chance");
+  EMOTION mean acc **0.405** (0.387–0.42) vs chance 0.167 → **2.4× chance** (real-but-modest). Combined with the
+  committed pool-selection null (emotion training-free gain CI [−0.043,+0.116]): training-free selection over this
+  encoder yields **no significant paralinguistic improvement**.
+- **belief update:** the honest negative is now precise and committed — the frozen omni CONTENT read-out carries
+  near-chance speaker and modest emotion, with **low exploitable paralinguistic spread**. This directly supports the
+  spread lens: content/intent has HIGH reward spread (MInDS +0.126 SIG) → selection gains; paralinguistics has LOW
+  spread → no gain.
+- **Step 3 DECISION (theory's fate):** the OSA-1 *spread lens* **earns its place** — it does real explanatory work on
+  the fresh data (content-vs-paralinguistic contrast). So: **KEEP** OSA-1 as one short section (the identity
+  gain=β·KL(q0‖q\*) + the honest caveat that it is the Donsker–Varadhan identity, used qualitatively; + the strict
+  Lean lemmas gain_eq / gain_nonneg / flat_no_gain / gain_pos_of_nonconstant / kl_pos_of_ne as an honest
+  formalization). **CUT from the paper's claims:** OSA-2/3 (qstar_product, gain_product, rollout_deficit) — the
+  agent-decomposition theory the principle read showed to be exp-additivity tautology. (Lean file can retain them
+  sorry-free but the paper no longer cites them as contributions.)
+- **action chosen next:** Step 4 — restructure the sections to the single-model thesis (parallel rewriters on a
+  shared collapsed-thesis spec), recompile, then Step 5 hostile panel.
+
 ### t2 — Step 1 CLOSE (MInDS re-run) → belief correction (a rollback of my own suspicion)
 - **action:** bounded GPU re-run of `repro_minds14_toolintent.py` (frozen omni-embed bi-encoder, MInDS-14 en-US,
   n=182, seed 42, 3 arms + paired bootstrap).

@@ -1,12 +1,12 @@
 \section{Preliminaries and Problem Formulation}
 \label{sec:prelim}
 
-We study \emph{training-free} reinforcement learning (RL): a regime in which a frozen multimodal speech/omni model is steered at inference time by a reward signal, with no gradient ever propagated into its parameters and no architectural surgery. This section fixes notation, states the invariant that distinguishes training-free RL from conventional alignment, isolates the two model classes and their associated inference-time operators, lifts the formulation to an agentic action space with context isolation, and specifies the reward class we admit. The objects defined here are reused verbatim in the Theory section.
+We study \emph{training-free} reinforcement learning (RL): a regime in which a single frozen multimodal speech/omni model is steered at inference time by a reward signal, with no gradient ever propagated into its parameters and no architectural surgery. In this paper the regime is realized concretely as \emph{verifiable-reward selection}---best-of-$N$, reranking, and candidate-card retrieval---over a fixed candidate pool, using a frozen bi-encoder to score candidates. This section fixes notation, states the invariant that distinguishes training-free RL from conventional alignment, specifies the single inference-time operator we actually use, introduces the reward-spread quantity that governs when selection helps, and specifies the reward class we admit. The objects defined here are reused verbatim in the Theory section.
 
 \subsection{Training-free RL as constrained inference-time reward maximization}
 \label{subsec:tfrl}
 
-Let $g_\theta$ denote a pretrained speech/omni model with \emph{frozen} parameters $\theta$, and let $x$ be an input (an utterance, a prompt, or a paired context). The inference-time degrees of freedom---the only quantities we are permitted to vary---are collected into an \emph{action} $z \in \cZ$, where $\cZ$ is the model- and task-dependent action space made precise in \Cref{subsec:classes,subsec:agent}. Executing an action produces an output $g_\theta(x,z)$ that is scored by a bounded scalar \emph{reward} $\Rwd\colon \cZ \to [0,1]$ (we write $\Rwd(z)$ for $\Rwd(g_\theta(x,z))$ when $x$ is fixed). A pretrained \emph{base} (or prior) distribution $\qo \in \Delta(\cZ)$ over actions is induced by the frozen model and the default inference procedure---for a generative model, the temperature-scaled autoregressive sampler; for an embedding model, the canonical encoding policy. Training-free RL searches over distributions $\qz \in \Delta(\cZ)$ for one that raises expected reward while remaining close to the prior.
+Let $g_\theta$ denote a pretrained speech/omni model with \emph{frozen} parameters $\theta$, and let $x$ be an input (an utterance, a prompt, or a paired context). The inference-time degrees of freedom---the only quantities we are permitted to vary---are collected into an \emph{action} $z \in \cZ$, where $\cZ$ is the selection action space made precise in \Cref{subsec:operator}. Executing an action produces an output that is scored by a bounded scalar \emph{reward} $\Rwd\colon \cZ \to [0,1]$ (we write $\Rwd(z)$ for the reward of the output realized by $z$ when $x$ is fixed). A pretrained \emph{base} (or prior) distribution $\qo \in \Delta(\cZ)$ over actions is induced by the frozen model and the default inference procedure. Training-free RL searches over distributions $\qz \in \Delta(\cZ)$ for one that raises expected reward while remaining close to the prior.
 
 \begin{definition}[Training-free RL objective]
 \label{def:objective}
@@ -36,68 +36,59 @@ with optimal value $\Fobj{\qs} = \beta \log \Zpart$.
 Adding a Lagrange multiplier for the normalization constraint and differentiating the concave functional \eqref{eq:Fobj} with respect to $\qz(z)$ yields $\Rwd(z) - \beta(\log \qz(z) - \log \qo(z)) - \beta = \text{const}$, i.e. $\log \qz(z) = \log \qo(z) + \Rwd(z)/\beta + \text{const}$; exponentiating and normalizing gives \eqref{eq:gibbs}. Substituting back collapses the objective to $\beta\log\Zpart$.
 \end{proof}
 
-Equation~\eqref{eq:gibbs} is the formal anchor of the paper: every concrete inference-time procedure we analyze---best-of-$N$, soft best-of-$N$, minimum-Bayes-risk decoding, reward-guided decoding, and search over embedding configurations---is read as an \emph{estimator of, or a sampler from, the tilted target} $\qs$, and is therefore comparable through the lens of how well it approximates \eqref{eq:gibbs} at a given query budget. The temperature $\beta$ interpolates between the prior ($\beta\to\infty$, $\qs\to\qo$) and greedy reward maximization ($\beta\to 0^+$, $\qs\to$ the $\arg\max_z \Rwd$ point mass), recovering best-of-$N$ alignment in the low-temperature limit \citep{beirami2024bon,verdun2025softbon,khalaf2025hedgetune}.
+Equation~\eqref{eq:gibbs} is the formal anchor of the paper: every concrete inference-time procedure we analyze---best-of-$N$, soft best-of-$N$, reranking, and candidate-card selection---is read as an \emph{estimator of, or a sampler from, the tilted target} $\qs$, and is therefore comparable through the lens of how well it approximates \eqref{eq:gibbs} at a given query budget. The temperature $\beta$ interpolates between the prior ($\beta\to\infty$, $\qs\to\qo$) and greedy reward maximization ($\beta\to 0^+$, $\qs\to$ the $\arg\max_z \Rwd$ point mass), recovering best-of-$N$ selection in the low-temperature limit \citep{beirami2024bon,verdun2025softbon,khalaf2025hedgetune}.
 
 \begin{definition}[No-weight-update invariant]
 \label{def:invariant}
 A procedure is \emph{training-free} if, for every input and every query budget, the model parameters $\theta$ and the model's computational graph are held fixed; all adaptation is realized through the choice of $\qz$ over the inference-time action space $\cZ$. Formally, the map $\theta \mapsto \theta$ is the identity throughout, and only $\qz$ is optimized.
 \end{definition}
 
-\Cref{def:invariant} is the operational contract of this work. It excludes parameter-efficient fine-tuning and any backpropagation through $g_\theta$; it admits only \emph{selection, reweighting, search, and prompt/context construction} over $\cZ$. Because $\qs$ depends on $\theta$ only through $\qo$ and on the task only through $\Rwd$, the frozen model's pretrained competence is \emph{activated}, never overwritten---the central premise the paper develops empirically and theoretically.
+\Cref{def:invariant} is the operational contract of this work. It excludes parameter-efficient fine-tuning and any backpropagation through $g_\theta$; it admits only \emph{selection, reweighting, and reranking} over a fixed candidate pool. Because $\qs$ depends on $\theta$ only through $\qo$ and on the task only through $\Rwd$, the frozen model's pretrained competence is \emph{activated}, never overwritten---the central premise the paper develops empirically and theoretically.
 
-\subsection{Two model classes and their inference-time operators}
-\label{subsec:classes}
+\subsection{The selection operator: a frozen bi-encoder ranking candidate cards}
+\label{subsec:operator}
 
-The action space $\cZ$ factorizes by model class. We distinguish a \emph{vector} (embedding) class and a \emph{generative} (thinker--talker) class, with corresponding operators $\cZA$ and $\cZB$, $\cZ = \cZA \cup \cZB$.
+Every reproducible result in this paper is produced by a single inference-time operator: a frozen bi-encoder that ranks a finite pool of candidate \emph{cards} by cosine similarity under a verifiable reward. We make this precise; no other operator is instantiated in our experiments.
 
-\paragraph{Vector / embedding omni (Operator A).}
-A contrastive bi-encoder omni model maps a (conditioned) input to a single $\ell_2$-normalized vector, typically by masked-mean pooling over a chosen hidden layer followed by a projection \citep{omniembed2025,clap2022,nvembed2024}. Here $g_\theta$ emits a representation rather than a token sequence, the reward is a representation-quality functional (retrieval hit, probe accuracy, alignment/uniformity surrogate), and the prior $\qo$ is the default encoding policy.
+For a query $x$ we are given a finite \emph{candidate pool} $C(x)=\{y_1,\dots,y_N\}$ (e.g., tool/intent schema cards, or transcript hypotheses). The action space is the probability simplex over this pool, $\cZ = \Delta\big(C(x)\big)$; an action $z$ is a distribution over candidates, and a \emph{selection} action collapses to the vertex that returns a single chosen card.
 
-\begin{definition}[Operator A: embedding search space $\cZA$]
-\label{def:opA}
-For the vector class, an action $z_{\mathrm A} = (c, \ell, \pi, P, S) \in \cZA$ specifies (i) the \emph{conditioning} $c$ (instruction/prompt prepended to the audio), (ii) the \emph{layer} $\ell$ whose hidden states are read, (iii) the \emph{pooling} rule $\pi$ (masked mean, attentive statistics, last-token), (iv) the \emph{projection} $P$ applied to the pooled vector, and (v) the \emph{selection} $S$ over candidate views/segments. The output embedding is $u(z_{\mathrm A}) = P\big(\pi_\ell(g_\theta(x,c))\big)/\lVert\cdot\rVert_2$. Operator A is the search over $\cZA$ that maximizes a verifiable representation reward.
+\begin{definition}[Frozen bi-encoder selection operator]
+\label{def:operator}
+Let $E$ be a frozen bi-encoder (in our experiments \texttt{omni-embed-nemotron-3b}, a SentenceTransformer) that maps the query and each candidate card to $\ell_2$-normalized vectors $E(x)$ and $E(y_i)$. The operator scores each candidate by cosine similarity $s_i = \langle E(x),\,E(y_i)\rangle$ and induces the base distribution $\qo(y_i) \propto \exp(s_i/\beta)$ over the pool. Training-free RL reweights $\qo$ toward the verifiable reward via the Gibbs tilt \eqref{eq:gibbs}, and the realized \emph{selection} returns $\arg\max_i \Rwd(y_i)$ over the ranked pool (best-of-$N$), or the top-ranked card when the reward is used to construct the pool rather than to pick from it.
 \end{definition}
 
-\paragraph{Generative thinker--talker omni (Operator B).}
-An autoregressive omni model defines a distribution over token sequences $y$ conditioned on $(x,c)$; the default sampler is the prior $\qo$ \citep{qwen3omni}. Inference-time alignment reshapes $\qo$ toward $\qs$ either by drawing $N$ candidates and selecting/aggregating (best-of-$N$, minimum-Bayes-risk) or by tilting the per-step transition with a value estimate (reward-guided/controlled decoding) \citep{mudgal2024controlled,beirami2024bon,verdun2025softbon}.
+Two properties of \Cref{def:operator} matter for the analysis. First, the operator is a \emph{single-sample deterministic readout} over a geometric object (points on the unit sphere): it adds no output entropy of its own and can only reweight candidates the pool already contains. Second, its usefulness is entirely governed by how much the reward \emph{varies across the pool}: if the reward is nearly constant over $C(x)$, selection cannot improve on the prior, whereas a reward that separates good from bad candidates lets selection concentrate mass on the reward maximizer. We make this dependence explicit next.
 
-\begin{definition}[Operator B: generative decoding space $\cZB$]
-\label{def:opB}
-For the generative class, an action $z_{\mathrm B} \in \cZB$ specifies a decoding policy over output sequences: a sampling temperature, a candidate budget $N$, and an aggregation rule $A \in \{\text{best-of-}N,\ \text{MBR},\ \text{reward-guided}\}$. Best-of-$N$ returns $\arg\max_{i\le N}\Rwd(y_i)$ for $y_i\sim\qo$; MBR returns $\arg\max_i \Exp_{y'\sim\qo}[u(y_i,y')]$ for a utility $u$ \citep{ichihara2025mbr,mbrasr2025}; reward-guided decoding tilts each transition by $\exp(V(\cdot)/\beta)$ to approximate \eqref{eq:gibbs} token-by-token \citep{mudgal2024controlled}.
-\end{definition}
-
-Operators A and B are not interchangeable: A reweights a \emph{geometric} object (a point on the unit sphere) and contributes no entropy to the output, whereas B reweights a \emph{combinatorial} object (a sequence) drawn from a high-entropy prior. This asymmetry---a single-sample deterministic readout versus an $N$-sample stochastic search---governs the budget--quality trade-offs analyzed later and motivates treating the two as distinct instantiations of the same tilt \eqref{eq:gibbs}.
-
-\subsection{The agent action space and context isolation}
-\label{subsec:agent}
-
-When the frozen model is embedded in an agent, the action is no longer a single decode but a \emph{pipeline}: the agent first \emph{recalls} memory, then \emph{invokes} a skill, then \emph{constructs} context, then \emph{decodes}. We make this explicit.
-
-\begin{definition}[Agentic action]
-\label{def:agentaction}
-An agentic action is a tuple $z = (m, s, c, d)$ where $m$ selects which memory item(s) to recall, $s$ selects which skill/tool to invoke, $c$ builds the context window from $(x,m,s)$, and $d \in \cZA \cup \cZB$ is the terminal embedding or decoding action of \Cref{def:opA,def:opB}. The base distribution $\qo$ factorizes as $\qo(z) = \qo(m)\,\qo(s\mid m)\,\qo(c\mid m,s)\,\qo(d\mid c)$.
-\end{definition}
-
-Many agentic systems decompose a task across $K$ sub-agents that operate on disjoint slices of the action. We formalize the structure that makes such a decomposition tractable.
-
-\begin{definition}[Context isolation / separable structure]
-\label{def:isolation}
-The action space exhibits \emph{context isolation} across $K$ sub-agents if it factorizes as a product $\cZ = \prod_{k=1}^{K}\cZ^{(k)}$ with $z=(z^{(1)},\dots,z^{(K)})$, the base distribution is independent across blocks, $\qo(z)=\prod_{k}\qo^{(k)}(z^{(k)})$, and the reward is \emph{additively separable}, $\Rwd(z)=\sum_{k=1}^{K}\Rwd^{(k)}(z^{(k)})$.
-\end{definition}
-
-\begin{remark}
-\label{rem:factorize}
-Under \Cref{def:isolation}, the Gibbs optimum \eqref{eq:gibbs} factorizes blockwise, $\qs(z)=\prod_{k}{\qs}^{(k)}(z^{(k)})$ with ${\qs}^{(k)}\propto\qo^{(k)}\exp(\Rwd^{(k)}/\beta)$ and $\Zpart=\prod_k \Zpart^{(k)}$. Consequently the search decouples: each sub-agent may sample/select within its own block without cross-block interference, and the partition function---hence the optimization gain---is the product (equivalently, sum in log-space) of per-block contributions. This separability is the formal object the second operator-level result (OSA-2) requires, and it is precisely what \emph{context contamination} between sub-agents destroys.
+\begin{remark}[Generative operators are out of scope]
+\label{rem:generative}
+A co-equal generative operator---an autoregressive thinker--talker model that \emph{produces} rather than \emph{selects} candidates, with best-of-$N$ or reward-guided decoding tilting its sampler toward \eqref{eq:gibbs}---is a natural extension \citep{qwen3omni,mudgal2024controlled}. We do not instantiate one locally, and we make no claim about it; it is discussed only as future work. All results below concern the frozen bi-encoder selection operator of \Cref{def:operator}.
 \end{remark}
+
+\subsection{Reward spread}
+\label{subsec:spread}
+
+Selection helps exactly to the extent that the reward is \emph{not flat} over the candidate pool. We quantify this with the reward spread, the object that the qualitative lens in the Theory section (OSA-1) ties to the optimization gain.
+
+\begin{definition}[Reward spread and optimization gain]
+\label{def:spread}
+Fix $x$, $\qo$, $\Rwd$, and $\beta$. The \emph{reward spread} $\spread$ is the range of $\Rwd$ over the support of the prior, $\spread \;=\; \max_{z\in\operatorname{supp}(\qo)}\Rwd(z)-\min_{z\in\operatorname{supp}(\qo)}\Rwd(z)$ (to leading order the $\qo$-weighted variance $\operatorname{Var}_{\qo}(\Rwd)$ plays the same role), and the \emph{optimization gain} of training-free RL over the prior is
+\begin{equation}
+\label{eq:gain}
+\gain \;=\; \Fobj{\qs} - \Fobj{\qo} \;=\; \beta\log\Zpart \;-\; \Exp_{z\sim\qo}\!\big[\Rwd(z)\big] \;\ge\; 0,
+\end{equation}
+with equality if and only if $\Rwd$ is $\qo$-almost-surely constant.
+\end{definition}
+
+Equation~\eqref{eq:gain} is the free-energy expression for the value of the tilt: $\gain$ is nonnegative, vanishes exactly when the reward carries no spread, and grows as the reward separates candidates. The Theory section develops this as a qualitative lens (the Donsker--Varadhan / free-energy identity, used to explain---not to newly prove---why gains appear) and pins its two endpoints with strict, machine-checked lemmas: a flat reward yields zero gain (\texttt{flat\_no\_gain}), and a non-constant reward yields strictly positive gain (\texttt{gain\_pos\_of\_nonconstant}). Empirically this is the reading of our contrast: content/intent tasks expose high reward spread across candidate cards and therefore admit large selection gains, whereas the frozen model's paralinguistic read-out exposes little spread and selection yields no significant gain.
 
 \subsection{Verifiable versus model-judged rewards}
 \label{subsec:reward}
 
-The validity of every guarantee in \Cref{subsec:tfrl} rests on $\Rwd$ being trustworthy. We admit only \emph{verifiable} rewards.
+The validity of every guarantee in \Cref{subsec:tfrl,subsec:spread} rests on $\Rwd$ being trustworthy. We admit only \emph{verifiable} rewards.
 
 \begin{definition}[Verifiable reward]
 \label{def:verifiable}
-A reward $\Rwd$ is \emph{verifiable} if it is a deterministic, label-derived function of the output and a ground-truth annotation $y^\star$, computable without invoking a learned scorer. Canonical instances are (i) negative word error rate $1-\mathrm{WER}(y,y^\star)$ for ASR/ST, (ii) exact-match/accuracy for classification and intent, (iii) retrieval hit$@k$ for embedding queries, and (iv) probe accuracy for a fixed linear probe. A reward is \emph{model-judged} if it is the output of a separate generative or preference model evaluating $y$.
+A reward $\Rwd$ is \emph{verifiable} if it is a deterministic, label-derived function of the output and a ground-truth annotation $y^\star$, computable without invoking a learned scorer. Canonical instances are (i) negative word error rate $1-\mathrm{WER}(y,y^\star)$ for ASR/ST, (ii) exact-match/accuracy for classification and intent, and (iii) retrieval hit$@k$ / probe accuracy against a fixed label. A reward is \emph{model-judged} if it is the output of a separate generative or preference model evaluating $y$.
 \end{definition}
 
 \begin{assumption}[Verifiability]
@@ -105,4 +96,4 @@ A reward $\Rwd$ is \emph{verifiable} if it is a deterministic, label-derived fun
 Throughout, $\Rwd$ is verifiable in the sense of \Cref{def:verifiable}: bounded in $[0,1]$, deterministic given $y^\star$, and independent of $g_\theta$.
 \end{assumption}
 
-We adopt \Cref{ass:verifiable} for two reasons. First, model-judged rewards are susceptible to \emph{reward hacking}---the optimizer exploits gaps between the proxy and the true objective, so that increasing $\Exp_{\qs}[\Rwd]$ no longer increases task quality \citep{skalse2022rewardhacking,gao2023overopt}. Because the tilt \eqref{eq:gibbs} sharpens precisely along the direction of $\Rwd$, any reward misspecification is amplified rather than averaged out as $\beta\to 0$. Second, learned judges carry systematic artifacts---position bias and self-preference---that contaminate the ranking used by Operator B \citep{positionbias2024,selfpreference2024}; verifiable rewards are invariant to these. Restricting to label-derived $\Rwd$ is therefore not a convenience but a precondition for the no-weight-update invariant of \Cref{def:invariant} to translate into genuine, contamination-free activation of pretrained competence \citep{tulu3}. With \Cref{def:objective,def:invariant,def:opA,def:opB,def:isolation,def:verifiable} and \Cref{ass:verifiable} in place, the notation required by the Theory section is complete.
+We adopt \Cref{ass:verifiable} for two reasons. First, model-judged rewards are susceptible to \emph{reward hacking}---the optimizer exploits gaps between the proxy and the true objective, so that increasing $\Exp_{\qs}[\Rwd]$ no longer increases task quality \citep{skalse2022rewardhacking,gao2023overopt}. Because the tilt \eqref{eq:gibbs} sharpens precisely along the direction of $\Rwd$, any reward misspecification is amplified rather than averaged out as $\beta\to 0$. Second, learned judges carry systematic artifacts---position bias and self-preference---that contaminate the candidate ranking \citep{positionbias2024,selfpreference2024}; verifiable rewards are invariant to these. Restricting to label-derived $\Rwd$ is therefore not a convenience but a precondition for the no-weight-update invariant of \Cref{def:invariant} to translate into genuine, contamination-free activation of pretrained competence \citep{tulu3}. With \Cref{def:objective,def:invariant,def:operator,def:spread,def:verifiable} and \Cref{ass:verifiable} in place, the notation required by the Theory section is complete.
