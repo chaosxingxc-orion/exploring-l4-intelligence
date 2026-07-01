@@ -24,6 +24,47 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t6 — Owner DECISION: path B (earn the RL framing with a real best-of-N)
+- **decision:** run a GENUINE reward-driven best-of-N over MODEL-SAMPLED candidates so "training-free RL" is a true
+  thesis; omni-embed candidate-card classification + the paralinguistic probe become SECONDARY "encoder probing"
+  results (honestly described, not RL). Fixes SC1 (real reward-driven selection now exists), SC3 (the RL result and
+  the probe are honestly distinct), and re-grounds the spread lens on the real best-of-N.
+- **enabler to verify:** W1 (`projects/speech-mllm-training-free-rl`) has `repro_asr_best_of_n_vllm.py` + a
+  `_repro/asr_bon_other_rows.json` artifact — a vLLM ASR best-of-N on LibriSpeech. If it genuinely (i) samples N
+  hypotheses from a LOCAL generative model and (ii) selects by a VERIFIABLE reward (WER/oracle or a reward proxy),
+  it is real training-free RL and can anchor C1. Investigating now.
+- **plan:** (1) verify + (if needed) re-run W1 ASR best-of-N → committed artifact; (2) reframe the paper: primary =
+  real best-of-N (reward-driven selection over sampled candidates); secondary = omni-embed zero-shot SLU
+  classification + paralinguistic probe (honest, not RL); fix SC2 (confound ablation) + SC4 (SLURP artifact/demote);
+  (3) re-run Step 5 hostile panel on the re-reframed paper.
+
+### t5 — Step 5 (fresh hostile panel) → NOT CONVERGED; a belief-invalidating framing finding
+- **action:** fresh hostile principle/purpose/feasibility panel (blind) attacks the collapsed paper; chair under
+  DISCLOSURE≠RESOLUTION (workflow wf_89151145-3bd).
+- **observation o5 (verified against committed code):** NOT converged, 4 surviving:
+  - **SC1 (fundamental/principle):** the executed operator (`tool_intent.py:237,247-249`) is **argmax cosine**; the
+    verifiable reward **never enters selection** (no β, no `exp(R/β)`, no `q*` formed). The +0.126 is an accuracy
+    delta between **two hand-authored card wordings** (two different q0's), NOT the Gibbs gain β·KL(q0‖q\*). So the
+    title/abstract/C1/C3 framing "verifiable-reward selection / Gibbs tilting / best-of-N" is a **partial over-claim**
+    even after the collapse — the method is honestly **zero-shot frozen-bi-encoder embedding classification /
+    candidate-card retrieval** (reward = eval metric + card-construction inspiration, not the selector).
+  - **SC2 (major/feasibility):** the +0.126 confounds **in-set example leakage** (policy card injects up to 3
+    eval-row transcripts) + boundary notes + a query-instruction change → needs a one-factor-at-a-time ablation with
+    card examples from a DISJOINT split.
+  - **SC3 (major/principle):** the "identical machinery" bridge is false — C1 is cosine ranking (no fitting); C2 is a
+    **fitted kNN** probe → drop the "same machinery" claim or run the same operator on paralinguistics.
+  - **SC4 (major/feasibility):** SLURP +0.330 has **no committed artifact / CI / n** → commit one or demote to anecdotal.
+- **belief update (invalidation):** even the collapsed "training-free RL selection" framing OVER-CLAIMS relative to
+  what the omni-embed code does. Twice now the "training-free RL" framing has failed against the code (agent →
+  selection → really zero-shot classification + fitted probing). The honest description of the omni-embed experiments
+  is a **representation-probing / zero-shot-SLU study**, NOT reward-driven RL. A genuine "training-free RL" result
+  would require an ACTUAL reward-tilt / best-of-N over MODEL-SAMPLED candidates (which W1's ASR best-of-N does, but
+  the omni-embed pipeline does not).
+- **DECISION POINT (owner's call — not auto-pivoting a 3rd time):** reframe-to-probing (honest, bounded, but drifts
+  from the project's training-free-RL thesis) vs earn-the-RL-framing-with-a-real-best-of-N (thesis-faithful, larger)
+  vs step back at the project level. Fixes SC2/SC4 (bounded pilots) apply under any path.
+- **action chosen next:** ask the owner the fork; then iterate (Steps 3–5 loop) on the chosen framing.
+
 ### t4 — Step 4 (restructure) → compiles clean; cut verified
 - **action:** parallel rewrite of 8 sections to the collapsed thesis (shared spec); deleted 06-convergence /
   08-system / 09-plan; retitled to "Training-Free RL as Verifiable-Reward Selection on a Single Frozen Speech
