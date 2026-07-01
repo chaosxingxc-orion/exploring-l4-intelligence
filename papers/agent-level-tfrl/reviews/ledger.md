@@ -75,3 +75,24 @@ scope, NOT a fixable new critical. All 4 new majors resolved in substance:
 does agentic decomposition add anything beyond a single frozen model — is **untested** (by `qstar_product` any gain
 can come only from genuinely new non-degenerate rewards). Executing Phase-2 (one pre-registered agentic test) would
 convert the plan into a finding; it is out of scope for authoring+reviewing the proposal and is the paper's stated future work.
+
+## Round 4 — THE CAP (fresh panel `wf_368c69ce-f3d`; chair: major revision, NOT clean, 7 new major, 0 critical; 14 minors).
+Blind panel confirms the math is sound and the emotion NULL reproduces exactly (chair: "no theorem is wrong and no
+proof is broken"). The 7 new majors are internal-consistency / fidelity / artifact-integrity defects — same root
+cause as round 2 (incomplete propagation of the reframe into the most-read anchors + the cited Lean artifact prose).
+This is the pre-registered 4th/final round; all 7 resolved in substance and the loop terminates here (no round 5):
+
+| Finding | Resolution (substance) |
+|---|---|
+| NM1 Contribution **C1 scrambles the concentration inputs** (Pinsker→ceiling, Beirami→regret) — reverse of rem:honesty, the appendix table, and Lean; flagged by 3 reviewers | **Fixed** — `01-intro` rewritten so each input attaches to one theorem: ceiling (`gain_le_of_hoeffding`)←Hoeffding alone (paper-discharged); best-of-N KL bound (`kl_best_of_n_le`)←Beirami (the one `sorry`); regret (`regret_O_sqrt_log`)←Pinsker (named hyp). Wrong mapping absent. |
+| NM2 **cited `OptSpace.lean` carried pre-correction docstrings** ("enlarging … strictly adds optimization headroom"; "restoring convergence to qstar") contradicting `qstar_product` | **Fixed** — docstrings (not statements) edited: `gain_product` = additive **decomposition of a fixed** optimum (isolation buys no headroom); "restoring convergence"→"motivates slow drift, finite-time convergence left open". `lake build` re-run 8559 jobs, sorry-free. |
+| NM3 **artifact integrity:** committed JSON's headline `across_seed_ci95_t` + NULL verdict **not emitted** by the cited reproducer (hand-inserted; a re-run would strip them) | **Fixed by re-run** — added the across-seed one-sample t-CI (`scipy.stats.t`) + `across_seed_significant` + NULL verdict to `pool_method_probe_paired.py`; **GPU re-run reproduced** mean +0.037, t-CI [-0.043,+0.1163], NULL, 2/5 (identical per-seed deltas). JSON now genuinely script-emitted. |
+| NM4 **asymmetric baseline** — identity got the PLDA upgrade (N3) but affect baseline left as differencing+threshold, not a classical online CPD ⇒ arm-(iii) win un-attributable | **Fixed in substance** — affect baseline upgraded to the strongest classical online CPD (CUSUM/BOCPD; PELT upper ref; dev-selected hazard) over the SER-posterior stream, mirroring the PLDA reasoning; propagated through §8/§9 + milestone table + release artifact. |
+| NM5 **§8 conjunctive "win"** (identity AND affect) contradicts §9 per-factor independent falsifiers | **Fixed** — §8 win rewritten per factor and independently (identity win iii>ii on SV/SID; affect win iii>ii on the probe, separately); "we do not require the conjunction". |
+| NM6 appendix "**verbatim**" `kl_pos_of_ne` **weakened `hp` `0<p`→`0≤p`**, overstating machine-verified generality | **Fixed** — quoted signature made byte-identical to source (`0<p z`, `0<r z`, `∃ z, p z≠r z`); `gain_pos_of_nonconstant` `hR`→`∃ z w, R z≠R w`; prose adjusted. |
+| NM8 §9 "**PLDA equivalently cosine+AS-Norm**" — technically false + inconsistent with §8 | **Fixed** — "equivalently" deleted; identity baseline = stronger of {multi-enrollment PLDA, cosine+AS-Norm}, dev-selected; AS-Norm described as a normalization layer atop cosine, matching §8. |
+
+**Terminal state:** no critical since round 1; no broken math/proof in any rigorous round. Convergence trajectory of the
+defect class: structural over-claim (R1) → front-matter desync (R2) → convention/table precision + instrument calibration
+(R3) → anchor-propagation + artifact fidelity (R4). The 4-round adversarial loop ends with an internally consistent,
+machine-checked (bar the one documented Beirami `sorry`) proposal whose every reported number is emitted by its committed reproducer.

@@ -63,13 +63,13 @@ theorem kl_nonneg {p r : Z → ℝ} (hp : ∀ z, 0 ≤ p z) (hr : ∀ z, 0 < r z
 We additionally prove the \emph{strict} form, new in this revision and \texttt{sorry}-free:
 
 \begin{verbatim}
-theorem kl_pos_of_ne {p r : Z → ℝ} (hp : ∀ z, 0 ≤ p z) (hr : ∀ z, 0 < r z)
-    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) (hne : p ≠ r) :
+theorem kl_pos_of_ne {p r : Z → ℝ} (hp : ∀ z, 0 < p z) (hr : ∀ z, 0 < r z)
+    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) (hne : ∃ z, p z ≠ r z) :
     0 < ∑ z, p z * Real.log (p z / r z)
 \end{verbatim}
 
 \noindent
-\texttt{kl\_pos\_of\_ne} upgrades Gibbs to its equality case: $\KL{p}{r}=0\iff p=r$, so $p\ne r\Rightarrow\KL{p}{r}>0$. The pointwise slack $p(z)\log(p(z)/r(z))-\big(p(z)-r(z)\big)\ge 0$ is \emph{strictly} positive at any $z$ with $p(z)>0$ and $p(z)\ne r(z)$ (strict form of $\log x<x-1$ for $x\ne 1$, via \texttt{Real.log\_lt\_sub\_one\_of\_ne}); since $p\ne r$ and both sum to $1$ there must exist such a $z$, so summing the nonnegative slacks --- at least one of which is strictly positive --- gives a strictly positive total. This strict inequality is the engine of the new strict gain lemma below: it is exactly why a non-constant reward yields \emph{strictly} positive optimization gain rather than merely nonnegative gain.
+\texttt{kl\_pos\_of\_ne} upgrades Gibbs to its equality case: $\KL{p}{r}=0\iff p=r$, so $p\ne r\Rightarrow\KL{p}{r}>0$. The pointwise slack $p(z)\log(p(z)/r(z))-\big(p(z)-r(z)\big)\ge 0$ is \emph{strictly} positive at any $z$ with $p(z)>0$ and $p(z)\ne r(z)$ (strict form of $\log x<x-1$ for $x\ne 1$, via \texttt{Real.log\_lt\_sub\_one\_of\_ne}); the hypothesis $\exists z,\ p(z)\ne r(z)$ (with $p$ strictly positive everywhere) supplies exactly such a $z$, so summing the nonnegative slacks --- at least one of which is strictly positive --- gives a strictly positive total. This strict inequality is the engine of the new strict gain lemma below: it is exactly why a non-constant reward yields \emph{strictly} positive optimization gain rather than merely nonnegative gain.
 
 \paragraph{Master identity and T1.}
 The decomposition $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}$ is the engine of optimality.
@@ -131,7 +131,7 @@ theorem gain_eq [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
 theorem gain_nonneg [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
     (hq0sum : ∑ z, q0 z = 1) : 0 ≤ gain q0 R β
 theorem gain_pos_of_nonconstant [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
-    (hq0sum : ∑ z, q0 z = 1) {z₁ z₂ : Z} (hR : R z₁ ≠ R z₂) :
+    (hq0sum : ∑ z, q0 z = 1) (hR : ∃ z w, R z ≠ R w) :
     0 < gain q0 R β
 theorem flat_no_gain [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
     (hq0sum : ∑ z, q0 z = 1) {c : ℝ} (hR : ∀ z, R z = c) : gain q0 R β = 0

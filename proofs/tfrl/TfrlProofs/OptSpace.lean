@@ -172,8 +172,9 @@ theorem gain_le_of_hoeffding [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
 `β·KL(q ‖ qstar)`, a nonnegative gap (`kl_nonneg`, `β > 0`) that is `0` iff `q = qstar`. So a naive
 rollout that fails to reach `qstar` incurs a strictly positive deficit (no monotone path). That
 append-only / myopic rollout *does* fail (plateau / context-collapse / contamination) is the
-empirical content grounded by the θ2 survey; the `β·KL` trust region enforces the slow-drift
-precondition restoring convergence to `qstar` (OSA-3b; JitRL 2601.18510). -/
+empirical content grounded by the θ2 survey; the `β·KL` trust region *motivates* slow drift toward
+`qstar`, but finite-time convergence is left open (a conjecture, not proved here; OSA-3b; JitRL
+2601.18510). -/
 theorem rollout_deficit [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
     {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
     F q0 R β q = F q0 R β (qstar q0 R β) - β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
@@ -186,10 +187,12 @@ theorem rollout_deficit [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
 
 Two agents with **context isolation** = a product action space `Z1 × Z2` with an independent
 base `q0 = q01 ⊗ q02` and a separable reward `R = R1 ⊞ R2`. The partition function factorizes, so
-the **gain is additive** (`gain_product`, OSA-2 — enlarging the space by isolated agents strictly
-adds optimization headroom; iterate for `k` agents), and the **optimal policy factorizes**
-(`qstar_product`, OSA-3b — per-isolated-component credit-assigned tilting equals the global `qstar`,
-which is T1-optimal). -/
+the **gain decomposes additively** (`gain_product`, OSA-2 — the gain over the product *equals* the
+sum of per-component gains; this is a decomposition of a **fixed** optimum, **not** an enlargement:
+by `qstar_product` the isolated optimum *equals* the monolithic one, so context isolation buys no
+extra headroom — additional gain can come only from genuinely new non-degenerate rewards), and the
+**optimal policy factorizes** (`qstar_product`, OSA-3b — per-isolated-component credit-assigned
+tilting equals the global `qstar`, which is T1-optimal). -/
 
 section Product
 
@@ -226,9 +229,12 @@ theorem meanR_product (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) 
   rw [Finset.sum_congr rfl (fun z1 _ => this z1), Finset.sum_add_distrib,
     ← Finset.sum_mul, hq01sum, one_mul]
 
-/-- **OSA-2 (additive gain over isolated agents).** The gain over a context-isolated product
-equals the sum of the per-component gains: enlarging the action space by an independent agent
-**adds** optimization headroom. -/
+/-- **OSA-2 (additive decomposition of the gain over isolated agents).** The gain over a
+context-isolated product **equals the sum** of the per-component gains. This is a decomposition of a
+*fixed* optimum, not an enlargement of it: by `qstar_product` the context-isolated optimum coincides
+with the monolithic optimum, so an independent agent adds **no** optimization headroom beyond what a
+single model already attains on the same reward — extra gain requires a genuinely new
+non-degenerate reward. -/
 theorem gain_product [Nonempty Z1] [Nonempty Z2]
     (hq01 : ∀ z, 0 < q01 z) (hq02 : ∀ z, 0 < q02 z) (hβ : 0 < β)
     (hq01sum : ∑ z, q01 z = 1) (hq02sum : ∑ z, q02 z = 1) :
