@@ -6,6 +6,40 @@
 
 ---
 
+### 2026-07-01 · W5 proposal hardened by a rigorous FOUR-ROUND fresh-adversary review (substance-only fixes; converged at the pre-registered cap)
+**Decision.** The owner judged the first review pass (the entry below) **not rigorous** — one revision cycle, same
+reviewers primed on their own lists, a meta-reviewer that once returned placeholder output, and several items
+patched *in prose*. We re-ran the review as a **multi-round adversarial loop** with a hard discipline: **fresh
+reviewers each round** (blind to prior rounds and to the resolution ledger), a **meta-chair** holding the only
+ledger and reporting solely *genuinely new* critical/major, **fix in substance not prose** (strengthen via
+Lean/GPU-experiment/citation — or cut), and **loop until a clean round, cap 4**.
+**Why.** A proposal that stakes its credibility on machine-checked honesty must survive independent attack, not a
+single self-consistent pass; prose hedging is not a resolution.
+**Consequences.** (1) **Four rounds ran; the defect class shrank monotonically and terminated at the cap:**
+R1 (6 critical + 11 major — the *structural* over-claim: the "single-model inert → agent **recovers**" thesis was
+**unsupported by the theorems** — `qstar_product` proves the isolated optimum *equals* the monolithic one — and
+**contradicted by our own data**; whole paper reframed, title changed, system demoted to a **testbed**) →
+R2 (13 major — the reframe hadn't propagated to the most-read sections; KL-direction, front-matter, emotion
+statistic all re-synced) → R3 (0 critical, 4 major — β-convention in Related Work, the Lean status-table `sorry`
+location, the PLDA-calibrated falsifier, proposal framing) → **R4/cap** (0 critical, 7 major — all
+internal-consistency / fidelity / **artifact-integrity**: C1's Pinsker/Beirami/Hoeffding mapping, pre-correction
+Lean docstrings, the affect baseline upgraded to a classical online CPD, a per-factor win criterion, a byte-verbatim
+appendix signature, and — caught by a blind auditor — the committed emotion t-CI being **hand-inserted rather than
+script-emitted**). Every round's panel certified, from R1 on, that **no theorem is wrong and no proof is broken**.
+(2) **Substance, not prose, throughout.** New sorry-free Lean lemmas `gain_pos_of_nonconstant` / `kl_pos_of_ne`
+(strict Gibbs) added in R1 and re-verified after each Lean edit (`lake build`, 8559 jobs, sorry-free bar the one
+documented Beirami `sorry`). The load-bearing emotion result was **re-run on the RTX 5090** and turned out to be a
+**NULL** (across-seed 95% t-CI **[−0.043, +0.116]** spans 0), not the originally-claimed +0.097 (a single-seed
+oracle-test-layer artifact) — an honest scientific correction; in R4 the reproducer was fixed to *emit* that t-CI
+and re-run so the committed JSON is genuinely script-produced. (3) **The thesis is now honest and precisely scoped:**
+theory (gain governed by reward *spread*, not search effort or agent wrapping — the isolation result is an
+*accounting identity*), a scoped paralinguistic **NULL**, single-model best-of-N content/intent gains explicitly
+*not* evidence for the agentic claim, and a testbed + pre-registered falsification plan whose central question —
+does agentic decomposition add anything beyond a frozen single model — is **disclosed as open** (a *proposal*, not
+an executed result). 57 pp, compiles clean (0 undefined). Six review archives + a resolution `ledger.md` under
+`papers/agent-level-tfrl/reviews/`. Commits: umbrella `70b5aef` (R3), `c2481b4` (R4); W4 `dd6e8d3` (re-run artifact).
+Branch `docs/research-proposal-template-and-first-proposal`, not pushed.
+
 ### 2026-07-01 · W5 agent-level proposal written as a peer-reviewed LaTeX paper (42 pp, 217 refs, 5-role review → minor revision)
 **Decision.** Consolidated the W5 agent-level arc into a rigorous, English, NeurIPS-style **LaTeX research
 proposal** at `papers/agent-level-tfrl/` (`main.tex` + `references.bib` + modular `sections/`), compiled to a
@@ -370,6 +404,24 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-01 · W5 提案经四轮「新对手」对抗式审查加固（只改实质、不改措辞；在预设上限收敛）：** 主人判定首轮
+审查不够严格（只一轮、审稿人复用且被自己的清单诱导、meta 曾返回占位输出、部分问题只在措辞上打补丁）。遂重做
+为**多轮对抗式审查**：每轮**全新审稿人**（对此前各轮与「决议台账」双盲），一位**主审**独持台账、只报**真正新增**
+的 critical/major，**只在实质上修复**（用 Lean/GPU 实验/引用核验加强，或直接删除），**循环至干净一轮、上限 4 轮**。
+**为什么**：一份以「机器可验证的诚实」立信的提案，必须扛住独立攻击，而非一次自洽通过；措辞对冲不算解决。
+**影响**：四轮跑满、缺陷等级单调收敛并在上限终止——R1（6 critical+11 major：结构性夸大——「单模型惰性→智能体**恢复**」
+的论点**不被定理支持**，`qstar_product` 证明隔离最优=单体最优，且被自有数据反驳；全文重构、改标题、系统降级为
+**测试床**）→ R2（13 major：重构未传导到最常读章节；KL 方向、前言、情感统计量全部重同步）→ R3（0 critical、4 major：
+相关工作的 β 约定、Lean 状态表 `sorry` 位置、PLDA 标定的证伪器、提案定位）→ **R4/上限**（0 critical、7 major：全为
+内部一致性/保真/**产物完整性**——C1 的 Pinsker/Beirami/Hoeffding 归属、Lean 旧注释、情感基线升级为经典在线变点检测、
+按因子独立的判胜、逐字节一致的附录签名，以及被盲审发现的：已提交的情感 t-CI 是**手工填入而非脚本产出**）。自 R1 起
+每轮都确认**无定理错误、无证明破损**。旗舰情感结果在 5090 上**重跑为 NULL**（跨种子 95% t-CI **[−0.043,+0.116]** 跨 0），
+诚实修正了原 +0.097（单种子 oracle 选层假象）；R4 修好复现脚本使其**产出**该 t-CI 并重跑，令 JSON 真由脚本生成。论文
+现为诚实且精确限定的「理论(增益由奖励**离散度**决定，而非搜索力度或智能体包装；隔离结论是**会计恒等式**) + 有界的
+副语言 NULL + 测试床与预注册证伪计划」，其核心问题（智能体分解相对冻结单模型是否有增益）**明示为开放**——是**提案**
+而非已执行结果。57 页、编译零未定义。六份审查存档 + `ledger.md` 决议台账于 `papers/agent-level-tfrl/reviews/`。提交：
+伞仓 `70b5aef`(R3)、`c2481b4`(R4)；W4 `dd6e8d3`(重跑产物)。分支 `docs/research-proposal-template-and-first-proposal`，未推送。
 
 **2026-06-22 · 把系列重定到「免训练知识激活」主旨，W4 升为旗舰：** 全系列围绕一个主旨——用免训练 RL
 （不改权重/结构）激活 omni/多模态 LLM 预训练中习得的跨模态多粒度任务知识，提升语音任务开箱表现。把
