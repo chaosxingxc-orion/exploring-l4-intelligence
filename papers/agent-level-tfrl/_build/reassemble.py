@@ -7,9 +7,10 @@ BASE = "/mnt/c/Users/35686/AppData/Local/Temp/claude/D--chao-workspace-exploring
 OUT = "/mnt/d/chao_workspace/exploring-l4-intelligence/papers/agent-level-tfrl"
 SECT = OUT + "/sections"
 
-# read the preamble from the canonical assemble.py so it stays in sync
+# read the preamble from the canonical (repo) assemble.py so it stays in sync
+# (the scratchpad copy is ephemeral across sessions; the repo _build copy is durable)
 import re
-asm = open(BASE + "/scratchpad/assemble.py", encoding="utf-8").read()
+asm = open(OUT + "/_build/assemble.py", encoding="utf-8").read()
 PREAMBLE = asm.split('PREAMBLE = r"""', 1)[1].split('"""', 1)[0]
 FOOTER = "\n\n\\bibliography{references}\n\n\\end{document}\n"
 

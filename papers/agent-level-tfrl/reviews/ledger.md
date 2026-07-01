@@ -55,3 +55,23 @@ round-1 reframe was applied to the body but not propagated to the most-read sect
 | F11 system has no mechanism to beat the baseline; Phase-2 pre-registers a null | **Reframed (substantive)** — system DEMOTED from "flagship worth building now" to a **speech-agent testbed / falsification harness**, with ONE concrete candidate winning mechanism (Bayesian multi-session speaker-evidence integration under channel variation single-enrollment ECAPA misses) + its isolating ablation. |
 | F12 calibration safeguard reintroduces deployment human labels (vs label-free premise) | **Fixed** — calibration cost made explicit (labels per population/drift/new-speaker); no-calibration ablation added; "sibling extractor" replaced by a committed independent extractor + agreement-with-truth. |
 | F13 negative over-generalized to the generative policy | **Scoped** — negative precisely scoped to one content bi-encoder's linear-probe geometry; explicitly does NOT bound the untested generative Operator-B policy or "frozen omni models" as a class. |
+
+## Round 3 (fresh panel `wf_4d21f9ae-904`; chair: major revision, NOT clean, 4 new major; 11 minors).
+The panel certifies the paper is **correct and honest** ("no remaining over-claim, no hidden methodological
+flaw, no broken proof"; chair: "no theorem is wrong and no proof is broken"). The new findings are precision /
+instrument-calibration, not defects. The Senior AC's "reject" is a **venue-fit judgment** (this is a *proposal*;
+to be a top main-track paper you'd execute Phase-2), adjudicated by the chair as the paper's disclosed standing
+scope, NOT a fixable new critical. All 4 new majors resolved in substance:
+
+| Finding | Resolution (substance) |
+|---|---|
+| N1 Related Work uses a **reciprocal-β convention** (`F=E_q[R]−β⁻¹KL`, `q*∝q0 exp(βR)`) contradicting the canonical convention & the β-limit | **Fixed** — `03-related-a` rewritten to canonical `F=E_q[R]−β·KL(q‖q0)`, `q*∝q0 exp(R/β)`; section swept for `exp(βR)`/`β⁻¹`; convention now uniform paper-wide. |
+| N2 Lean status **table mislocates the sole `sorry`** (attributes it to `kl_best_of_n_le` T2, contradicting the verbatim Lean showing T2 sorry-free) — internal contradiction in the auditable-honesty artifact | **Fixed** — added a distinct row `klBoN_le_klBoundBoN_TODO` = "the single documented sorry"; `kl_best_of_n_le` = "conditional (consumes the Beirami bound)". Table + prose + verbatim Lean now agree. |
+| N3 falsification instrument miscalibrated: candidate **IS textbook PLDA/multi-enrollment**, but baseline is only cosine running-centroid ⇒ ablation cannot separate agentic gain from PLDA-over-cosine | **Fixed in substance** — §8 names the PLDA/AS-Norm lineage, restricts possible surplus to curation/decay/trust-region/change-handling (posterior conceded to PLDA); win = arm (iii)-over-(ii = PLDA-over-all-enrollments). §9 upgrades the identity baseline to **ECAPA+PLDA full multi-enrollment**. |
+| N4 candidate **accumulates a posterior over AFFECT** (trait operator) ⇒ erases the affect-CHANGE signal the update/delete probe tests; its null over-generalized | **Fixed in substance** — mechanism **split**: identity = stable trait (integrate); affect = **volatile state** (per-session baseline + change-point/drift detector, "affect changed" a first-class output). Two **separate** pre-registered win/kill criteria; per-factor nulls don't cross-generalize. |
+| AC major #2 title's surprising reading unproven / proven reading definitional | **Reframed** — `01-intro` states plainly this is a **proposal**; the central agentic question is **open and is the motivation, not a result**; OSA-1 framed as variational identity + Hoeffding ceiling, OSA-2/`qstar_product` as an accounting identity (isolated = monolithic optimum). |
+
+**Standing disclosed scope (not a defect):** this is a research *proposal*; its central falsifiable question —
+does agentic decomposition add anything beyond a single frozen model — is **untested** (by `qstar_product` any gain
+can come only from genuinely new non-degenerate rewards). Executing Phase-2 (one pre-registered agentic test) would
+convert the plan into a finding; it is out of scope for authoring+reviewing the proposal and is the paper's stated future work.
