@@ -16,7 +16,7 @@ versus a static embedding probe --- and we are careful throughout not to conflat
 \paragraph{\texttt{llama.cpp} audio input is experimental upstream.}
 The primary result runs the frozen omni model through \texttt{llama.cpp}, whose multimodal audio path
 is flagged experimental upstream and documented as possibly reduced quality relative to the reference
-runtime. Our greedy baseline WER of $0.117$ on LibriSpeech test-other with additive noise is therefore
+runtime. Our greedy baseline WER of $0.118$ on LibriSpeech test-other with additive noise is therefore
 a property of \emph{this} decoding path, and the absolute error rates --- though not necessarily the
 \emph{relative} best-of-$N$ headroom, which is a within-runtime comparison --- may shift under a
 higher-fidelity runtime. Every number is committed to \texttt{\_repro/asr\_bon\_llamacpp\_snr5.json}
@@ -30,19 +30,19 @@ figures are conditional on a perturbation we selected \emph{because} it creates 
 on other corpora, or under other noise types the oracle headroom and the realised deployable gain may
 both be smaller. We report the condition plainly rather than presenting it as a clean-speech result.
 
-\paragraph{The deployable selector realises only a small, boundary-significant fraction of the oracle headroom.}
+\paragraph{The deployable selector does not, on this benchmark, convert the oracle headroom into a significant gain.}
 The honest core of the primary result is a \emph{realised-versus-headroom gap}. The verifiable-reward
 argmax --- oracle-WER best-of-$N$, the $\beta\!\to\!0$ tilt of the reward-spread lens --- reduces WER
-from $0.117$ to $0.073$ at $N{=}8$, a reduction of $+0.044$ ($95\%$ paired-bootstrap CI
-$[0.024,0.067]$, significant; $n{=}96$, pool $8$, temperature $0.8$, seed $42$), and the headroom
-\emph{scales} with $N$ ($+0.013$, $+0.032$, $+0.044$ for $N{=}2,4,8$) --- the empirical best-of-$N$
-shape. But this oracle uses the reference transcript to pick the best candidate, so it is an
-\emph{upper bound}, not a deployable procedure. The deployable, label-free selector is MBR consensus,
-which uses no references and reaches WER $0.102$, a reduction of only $+0.014$ ($95\%$ CI
-$[-0.0001,0.033]$, boundary non-significant at $n{=}96$). The correct reading is thus twofold: the
-verifiable-reward headroom is real, significant, and $N$-scaling on a frozen model (genuine
-training-free RL), while the label-free selector currently captures only a small, boundary-significant
-slice of it. We do not paper over that gap; closing it is the main deployable open problem
+from $0.118$ to $0.077$ at $N{=}8$, a reduction of $+0.042$ ($95\%$ paired-bootstrap CI
+$[0.029,0.056]$, significant; three generation seeds pooled, $n{=}144$, pool $8$, temperature $0.8$), and
+the headroom \emph{climbs} with $N$ ($-0.007$, $+0.007$, $+0.024$, $+0.042$ for $N{=}1,2,4,8$, significant
+from $N{=}4$) --- an order-statistics climb (a single sample is slightly below greedy). But this oracle
+uses the reference transcript to pick the best candidate, so it is an \emph{upper bound}, not a deployable
+procedure. The deployable, label-free selector is MBR consensus, which uses no references and reaches WER
+$0.115$, a reduction of only $+0.004$ ($95\%$ CI $[-0.008,0.017]$, non-significant at every $N$). The
+correct reading is thus twofold: the verifiable-reward headroom is real and significant on a frozen model
+(genuine training-free RL), while the label-free selector does not, on this benchmark, turn it into a
+significant gain. We do not paper over that gap; closing it is the main deployable open problem
 (\Cref{sec:conclusion}).
 
 \paragraph{Possible pretraining contamination of the public sets.}
@@ -105,8 +105,8 @@ a proxy but simply picking the best transcript; there is no proxy--true gap for 
 only defect is non-deployability: it consults the reference at selection time. Goodhart pressure applies
 instead to the \emph{deployable} label-free MBR consensus (and to any future learned reranker), where
 pushing $N$ can move mass toward whatever the proxy measures rather than toward lower true WER; the MBR
-proxy is reference-free precisely to be deployable, at the cost of the boundary significance reported
-above. Because we change no weights, any such proxy failure is recoverable (lower $N$, better proxies).
+proxy is reference-free precisely to be deployable, at the cost of the non-significant realized gain
+reported above. Because we change no weights, any such proxy failure is recoverable (lower $N$, better proxies).
 The lens bounds all of this: no selector can exceed the oracle headroom, which is itself bounded by the
 spread of the reward across the model's sampled candidates.
 
@@ -133,14 +133,14 @@ whether it is governed by the \emph{spread} of that reward across candidates. Ou
 answers the first question affirmatively and modestly. On a frozen generative omni model
 (Qwen3-Omni-30B-A3B via \texttt{llama.cpp}) we sample $N$ transcripts per utterance on LibriSpeech
 test-other with additive noise and select with a verifiable reward --- genuine best-of-$N$ over
-model-sampled candidates. The verifiable-reward argmax reduces WER from $0.117$ (greedy) to $0.073$ at
-$N{=}8$, a significant $+0.044$ reduction ($95\%$ CI $[0.024,0.067]$) whose headroom scales with $N$
-($+0.013,+0.032,+0.044$ for $N{=}2,4,8$; committed artifact
-\texttt{\_repro/asr\_bon\_llamacpp\_snr5.json}). This is genuine training-free RL: reward-driven
-selection over a frozen model's own samples, no weights touched. The label-free, deployable MBR-consensus
-selector realises only a small fraction of that headroom, reaching WER $0.102$ ($+0.014$, $95\%$ CI
-$[-0.0001,0.033]$, boundary non-significant at $n{=}96$) --- an honest realised-versus-headroom gap
-rather than a solved deployment.
+model-sampled candidates. The verifiable-reward argmax reduces WER from $0.118$ (greedy) to $0.077$ at
+$N{=}8$, a significant $+0.042$ reduction ($95\%$ CI $[0.029,0.056]$, three generation seeds pooled,
+$n{=}144$) whose headroom climbs with $N$ ($-0.007,+0.007,+0.024,+0.042$ for $N{=}1,2,4,8$, significant
+from $N{=}4$; committed artifact \texttt{\_repro/asr\_bon\_llamacpp\_snr5.json}). This is genuine
+training-free RL: reward-driven selection over a frozen model's own samples, no weights touched. The
+label-free, deployable MBR-consensus selector realises essentially none of that headroom, reaching WER
+$0.115$ ($+0.004$, $95\%$ CI $[-0.008,0.017]$, non-significant at every $N$) --- an honest
+realised-versus-headroom gap rather than a solved deployment.
 
 Our secondary result is \emph{probing}, on a \emph{different} frozen model and via a \emph{different}
 operator: a frozen content bi-encoder (\texttt{omni-embed-nemotron-3b}) is near chance for speaker
@@ -162,9 +162,10 @@ the reward spread over $\mathrm{supp}(\qo)$, so a flat reward yields vanishing g
 reward yields large gain, on the very same frozen model. Two strict, \texttt{sorry}-free Lean lemmas
 anchor its endpoints: a flat reward forces zero gain (\texttt{flat\_no\_gain}), and a non-constant
 reward forces strictly positive gain (\texttt{gain\_pos\_of\_nonconstant}). This is precisely the
-contrast we observe. In the primary result the oracle best-of-$N$ headroom is governed by the spread of
-the verifiable reward across the model's sampled candidates --- flat reward across candidates would give
-no headroom, and the observed spread gives headroom that grows with $N$. In the secondary result the
+contrast we observe. In the primary result the \emph{sign and ceiling} of the oracle best-of-$N$ headroom are governed by the
+spread of the verifiable reward across the model's sampled candidates --- flat reward across candidates
+would give no headroom, spread gives strictly-positive headroom bounded by that spread; its \emph{growth}
+with $N$ is a distinct order-statistics effect. In the secondary result the
 frozen content encoder exposes reward spread for content and intent but little for paralinguistics, so
 selection over it has purchase in the former and essentially none in the latter.
 

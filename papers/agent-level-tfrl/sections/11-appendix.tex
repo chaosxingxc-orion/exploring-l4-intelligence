@@ -256,18 +256,20 @@ $N$ & number of candidate cards in verifiable selection (best-of-$N$ / reranking
 The reward callables used as verifiable signals $\Rwd$ are exposed by the shared library
 \texttt{speechrl\_common.rl}, and are deliberately deterministic and contamination-resistant
 \citep{tulu3}. Heavy dependencies (\texttt{jiwer}, \texttt{scikit-learn}) are imported lazily inside
-each function so the package and its smoke tests import without the full stack. In our experiments all
-selection is performed by a \emph{frozen bi-encoder} ranking candidate cards by cosine under one of
-these rewards; no weights are updated.
+each function so the package and its smoke tests import without the full stack. Our \emph{primary}
+selection (\Cref{sec:c1}) is best-of-$N$ over transcripts a \emph{frozen generative} omni model samples,
+scored by the WER reward below; the \emph{secondary} study (\Cref{sec:c2}) probes a frozen bi-encoder and
+is not reward-driven selection. No weights are updated in either.
 
 \paragraph{Content / ASR (\texttt{rl.reward}).}
 \texttt{wer(reference, hypothesis)} returns the word error rate after normalization;
 \texttt{asr\_reward} returns $\max(0,\,1-\mathrm{WER})\in[0,1]$, a bounded reward whose spread directly
 governs the gain ceiling of \Cref{lem:hoeffding}; \texttt{exact\_match\_reward} returns
 $\mathbf{1}[\text{normalized strings equal}]\in\{0,1\}$ for closed-form tasks (intent, tool selection,
-keyword). These content/intent rewards are the ones for which our experiments realize a large,
-non-degenerate spread over the candidate cards --- consistent with the frozen bi-encoder card-selection
-gains reported in the main text (MInDS-14 tool/intent, SLURP intent).
+keyword). The WER reward is the one our primary experiment selects on: it realizes a large, non-degenerate spread
+over the generative model's sampled transcripts under acoustic stress --- the oracle best-of-$N$ headroom
+of \Cref{sec:c1}. (The \texttt{exact\_match} reward scores the secondary frozen-encoder zero-shot intent
+ablation of \Cref{sec:c2}, which is a confounded card-design comparison, not reward-driven selection.)
 
 \paragraph{Retrieval / embedding (\texttt{rl.embedding\_metrics}).}
 \texttt{recall\_at\_k(query, gallery, labels\_q, labels\_g, k)} and

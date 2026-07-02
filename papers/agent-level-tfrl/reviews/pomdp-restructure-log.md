@@ -24,6 +24,30 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t15 — Step 5'' (round-3 panel) → 0 fundamental; 3 majors fixed incl. a multi-seed C1 re-run
+- **observation o15 (workflow wf_dff3241a-d58; chair NOT converged, 0 fundamental, 3 majors, "strongly
+  converging", "genuinely honest, modest", Table 1 reproduces to the digit):** three majors, all fixable:
+  - **SC-STALE-RELATED / SC-STALE-APPENDIX:** the path-B reframe rewrote 01/02/05/07/10 but left §3 Related Work and
+    §11 (reward functions) in the pre-reframe framing — still calling the POSITIVE result "frozen bi-encoder card
+    selection" and citing the dropped SLURP. Internal inconsistency.
+  - **SC-SEED:** C1 rested on a single generation-seed config with no pool-generation-variance disclosure.
+  - + minors: 3 prose spots still bound "grows with N" to spread; a baseline-mismatch note (lens baseline = sampling
+    mean, not greedy).
+- **fixes (substance):**
+  - SC-SEED → **multi-seed re-run** (BON_SEEDS=42,7,123, 48 utts each, pooled n=144; paired bootstrap now reflects
+    utterance + pool-generation variance). Result CONFIRMS + STRENGTHENS C1: greedy 0.118; oracle N=8 +0.042 SIG
+    [0.029,0.056] (tighter than the single-seed CI), significant from N=4; N=1 = -0.007 (single sample < greedy, an
+    honest order-statistics detail that also answers the baseline-mismatch minor); MBR n.s. at every N (+0.004
+    [-0.008,0.017]). Runner made multi-seed; committed artifact updated; C1 numbers propagated to abstract, intro,
+    §5, tab:bon, §10.
+  - SC-STALE-RELATED/APPENDIX → rewrote §3 + §11 so the positive result is the generative best-of-N (C1) and the
+    bi-encoder is the C2 probing operator; dropped the SLURP cross-reference.
+  - minors → the 3 "grows-with-N" spots split into lens(sign/ceiling) vs order-statistics(N-curve); the N=1<greedy
+    result makes the sampling-mean-vs-greedy baseline explicit.
+- **observation o15b:** compiles clean (~27.8k tokens, 0 undefined); no stale bi-encoder-positive framing; no stale
+  numbers.
+- **action chosen next:** one final convergence panel (round 4) on the multi-seed-updated paper.
+
 ### t14 — Step 5' hostile panel → SC1-SC4 RESOLVED; 2 new majors fixed (Step 4'')
 - **observation o14 (workflow wf_c60021b7-fb1; chair NOT converged, 2 surviving major, both "not fatal"):** the
   reframe RESOLVED SC1-SC4 (C1 verified genuine reward-driven best-of-N; C2 honest probing; SLURP dropped;

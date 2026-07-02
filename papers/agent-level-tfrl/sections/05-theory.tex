@@ -7,8 +7,10 @@ simple: inference-time verifiable-reward selection over a frozen model can only 
 extent that the reward actually \emph{spreads} across the candidates it ranks. It applies directly to
 the genuine training-free RL of \Cref{sec:c1}: the oracle best-of-$N$ headroom on a frozen generative
 omni model is governed by how much the verifiable reward varies across the transcripts the model
-itself samples. Where the reward has spread, best-of-$N$ has headroom that grows with $N$; where it is
-nearly flat, there is nothing for selection to exploit.
+itself samples. Where the reward has spread, best-of-$N$ has strictly-positive headroom bounded by that spread; where it
+is nearly flat, there is nothing for selection to exploit. (The \emph{growth} of that headroom with $N$
+is a separate order-statistics effect, not something the identity predicts; we make this split precise
+below.)
 
 Fix a finite candidate set $\cZ$ (for \Cref{sec:c1}, the $N$ transcripts a frozen generative model
 samples for one utterance), a strictly positive base measure $\qo:\cZ\to\R_{>0}$ with
@@ -72,18 +74,18 @@ genuine spread across the model's sampled transcripts yields strictly positive b
 by endpoint (i), a flat reward yields none); and the $\beta\to0$ gain is bounded by the reward spread
 $\spread$ over $\operatorname{supp}(\qo)$. Crucially, $\spread$ is a property of the frozen sampling
 distribution and is \emph{$N$-independent} --- so the identity does \emph{not}, by itself, predict the
-$N$-curve. The observed monotone climb of the oracle headroom with $N$ (WER $0.117\!\to\!0.073$;
-reductions $+0.013,+0.032,+0.044$ at $N=2,4,8$; \Cref{tab:bon}) is an \emph{order-statistics} effect, and
+$N$-curve. The observed climb of the oracle headroom with $N$ (WER $0.118\!\to\!0.077$;
+reductions $-0.007,+0.007,+0.024,+0.042$ at $N=1,2,4,8$, significant from $N=4$; \Cref{tab:bon}) is an \emph{order-statistics} effect, and
 we attribute it as such: for i.i.d.\ draws from $\qo$, the expected best reward $\Exp[\max_{i\le N}\Rwd(y_i)]$
 is nondecreasing in $N$ (indeed our oracle is a min-WER over a growing candidate prefix, so its
 $N$-monotonicity holds by construction for any non-constant reward), and it climbs toward the spread
 ceiling the lens bounds \citep{beirami2024bon,verdun2025softbon}. Thus the division of labor is explicit:
 \emph{order statistics} give the shape of the $N$-curve; the \emph{reward-spread lens} gives its sign and
 its ceiling. Endpoint (i) marks that ceiling: were every sampled transcript equally (in)correct, the reward
-would be flat and no selector --- oracle or deployable --- could beat greedy. The deployable label-free
-MBR-consensus selector realizes only a small, boundary-significant fraction of the oracle headroom (WER
-$0.102$, $+0.014$, $95\%$ CI $[-0.0001,0.033]$), an honest realized-vs-headroom gap: the spread is present,
-but a reference-free proxy recovers little of it.
+would be flat and no selector --- oracle or deployable --- could beat the sampled candidates. The deployable
+label-free MBR-consensus selector realizes essentially none of the oracle headroom (WER
+$0.115$, $+0.004$, $95\%$ CI $[-0.008,0.017]$, non-significant), an honest realized-vs-headroom gap: the
+spread is present, but a reference-free proxy does not convert it into a significant gain here.
 
 The same lens organizes the frozen-encoder probing of \Cref{sec:c2} qualitatively. The frozen content
 bi-encoder exposes reward spread for \emph{content and intent} --- its embedding geometry separates
