@@ -24,6 +24,26 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t14 — Step 5' hostile panel → SC1-SC4 RESOLVED; 2 new majors fixed (Step 4'')
+- **observation o14 (workflow wf_c60021b7-fb1; chair NOT converged, 2 surviving major, both "not fatal"):** the
+  reframe RESOLVED SC1-SC4 (C1 verified genuine reward-driven best-of-N; C2 honest probing; SLURP dropped;
+  oracle=upper-bound / deployable-n.s. disclosed; audio caveat adequate). Two concrete defects survived:
+  - **SC-N (principle):** the N-scaling was mis-attributed to the spread lens — the gain identity + Lean lemmas have
+    no N and prove only the SIGN; the real driver is order statistics (E[max over N] nondecreasing; oracle is a
+    min-WER over a growing prefix ⇒ N-monotone by construction).
+  - **SC-REPRO (feasibility):** the committed reproduce command said BON_UTTS=24 but the artifact is n=96.
+  - + 2 minors: Goodhart mis-applied to the oracle (which IS the true objective, no proxy-gap); C2 "pool-selection"
+    called "selection" while asserted not-Gibbs.
+- **fixes (Step 4'', substance/reframe):** (SC-N) rewrote 05-theory + 01-intro C3 + 07-feasibility to split the
+  claim — reward-spread lens = SIGN + CEILING; order statistics = the N-curve (attributed explicitly, incl. the
+  by-construction monotonicity); closing lens sentence restricted to sign/ceiling. (SC-REPRO) fixed BON_UTTS 24→96
+  in the W1 script docstring + reproduce string + both committed artifact copies. (minors) confined Goodhart to the
+  MBR proxy / learned rewards and stated the oracle has no proxy–true gap (only non-deployability); clarified C2's
+  read-out tuning is a config argmax, not model-sampled-output selection. (extra) tightened the abstract to attach
+  "reference-based upper bound, not deployable" to the +0.044 in the same clause.
+- **observation o14b:** compiles clean — ~27k tokens, 0 undefined. 
+- **action chosen next:** Step 5'' — a final fresh hostile panel to confirm convergence.
+
 ### t13 — Step 4' reframe applied → compiles clean (24pp); Step 5' next
 - **action:** reframe workflow rewrote 01/02/05/07/10 to path B (C1 real best-of-N primary; C2 encoder probing;
   C3 lens grounded on C1); retitled "Training-Free RL on Frozen Omni Speech Models: Reward-Guided Best-of-N, a

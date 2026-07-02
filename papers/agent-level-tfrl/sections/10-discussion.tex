@@ -50,9 +50,10 @@ LibriSpeech, and any public set we touch, may overlap the pretraining corpora of
 \citep{contaminationsurvey2024,gorman2019splits,taskcontamination2024}, so absolute error rates can in
 part reflect memorised material. Our primary claim is a \emph{within-utterance, within-runtime}
 best-of-$N$ contrast --- how much a verifiable reward improves over the same model's greedy output on
-the same items --- which is more robust to contamination than an absolute score, and inference-time
-selection against a verifiable reward is by construction an over-optimization engine that will exploit
-any such regularity \citep{gao2023overopt,skalse2022rewardhacking,spuriousrewards2025}. A
+the same items --- which is more robust to contamination than an absolute score. (Selection against a
+\emph{proxy} reward can over-optimize regularities of the proxy \citep{gao2023overopt,skalse2022rewardhacking,spuriousrewards2025};
+our oracle contrast uses the true WER objective, so this concern attaches to the deployable MBR proxy, not
+to the oracle headroom.) A
 contamination-controlled split would still be needed to fully exclude leakage; until then the numbers
 should be read as within-model, within-condition contrasts.
 
@@ -96,14 +97,18 @@ label-free deployable selector, alongside a committed paralinguistic \emph{probi
 second frozen model and the reward-spread lens that organises both. The contribution is integrative and
 empirical, and should be weighted as such.
 
-\paragraph{Goodhart pressure on the oracle reward.}
-Pushing $N$ moves probability mass toward whatever the reward measures, including its defects
-\citep{gao2023overopt,skalse2022rewardhacking,rlvrincentive2025}. Our oracle reward is WER against the
-reference: verifiable and hard to game, but definitionally an upper bound that a deployed system cannot
-compute. The deployable MBR proxy is label-free precisely to avoid this, at the cost of the boundary
-significance reported above. Because we change no weights, the failure mode is recoverable (lower $N$,
-better proxies); the lens simply predicts that no selector can exceed the oracle headroom, which is
-itself bounded by the spread of the reward across the model's sampled candidates.
+\paragraph{Where Goodhart applies --- and where it does not.}
+Reward over-optimization is the exploitation of a \emph{gap} between a proxy and the true objective
+\citep{gao2023overopt,skalse2022rewardhacking,rlvrincentive2025}. Our \emph{oracle} reward is WER against
+the reference---it \emph{is} the true objective, so selecting the min-WER candidate is not reward-hacking
+a proxy but simply picking the best transcript; there is no proxy--true gap for the argmax to exploit. Its
+only defect is non-deployability: it consults the reference at selection time. Goodhart pressure applies
+instead to the \emph{deployable} label-free MBR consensus (and to any future learned reranker), where
+pushing $N$ can move mass toward whatever the proxy measures rather than toward lower true WER; the MBR
+proxy is reference-free precisely to be deployable, at the cost of the boundary significance reported
+above. Because we change no weights, any such proxy failure is recoverable (lower $N$, better proxies).
+The lens bounds all of this: no selector can exceed the oracle headroom, which is itself bounded by the
+spread of the reward across the model's sampled candidates.
 
 \paragraph{Future work.}
 Two directions follow directly and honestly. First, \emph{stronger deployable selectors} --- learned

@@ -65,20 +65,25 @@ yields strictly positive headroom for selection to realize.
 
 These two lemmas are the strict converse of one another: $\Rwd$ constant $\iff \qs=\qo \iff \gain=0$.
 
-\paragraph{Why the lens explains our results.}
-The lens reads directly onto the genuine best-of-$N$ of \Cref{sec:c1}. On the frozen generative omni
-model, the oracle-WER selector (the $\beta\to0$ tilt) reduces WER from a greedy $0.117$ to $0.073$, a
-significant $+0.044$ reduction ($95\%$ CI $[0.024,0.067]$), and this headroom \emph{grows with $N$}:
-$+0.013,\,+0.032,\,+0.044$ at $N=2,4,8$ (\Cref{tab:bon}). Endpoint (ii) is exactly this shape --- the
-model samples transcripts on which the verifiable reward has real spread, so there is strictly positive
-headroom, and drawing more candidates ($N\!\uparrow$) exposes more of that spread and enlarges the gain,
-the inference-time analogue of why best-of-$N$ and reranking pay off in proportion to how much a
-verifiable reward separates candidates \citep{beirami2024bon,gao2023overopt}. Endpoint (i) marks the
-ceiling: were every sampled transcript equally (in)correct, the reward would be flat and no selector
---- oracle or deployable --- could beat greedy. The deployable label-free MBR-consensus selector
-realizes only a small, boundary-significant fraction of this headroom (WER $0.102$, $+0.014$, $95\%$ CI
-$[-0.0001,0.033]$), an honest realized-vs-headroom gap: the reward spread is present, but a reference-free
-proxy recovers little of it.
+\paragraph{What the lens explains --- and what it does not.}
+We are careful to claim only what the identity and the two lemmas actually support. The lens speaks to
+the \emph{sign} of the gain and to a \emph{ceiling}: by \eqref{eq:gain} and endpoint (ii), a reward with
+genuine spread across the model's sampled transcripts yields strictly positive best-of-$N$ headroom (and
+by endpoint (i), a flat reward yields none); and the $\beta\to0$ gain is bounded by the reward spread
+$\spread$ over $\operatorname{supp}(\qo)$. Crucially, $\spread$ is a property of the frozen sampling
+distribution and is \emph{$N$-independent} --- so the identity does \emph{not}, by itself, predict the
+$N$-curve. The observed monotone climb of the oracle headroom with $N$ (WER $0.117\!\to\!0.073$;
+reductions $+0.013,+0.032,+0.044$ at $N=2,4,8$; \Cref{tab:bon}) is an \emph{order-statistics} effect, and
+we attribute it as such: for i.i.d.\ draws from $\qo$, the expected best reward $\Exp[\max_{i\le N}\Rwd(y_i)]$
+is nondecreasing in $N$ (indeed our oracle is a min-WER over a growing candidate prefix, so its
+$N$-monotonicity holds by construction for any non-constant reward), and it climbs toward the spread
+ceiling the lens bounds \citep{beirami2024bon,verdun2025softbon}. Thus the division of labor is explicit:
+\emph{order statistics} give the shape of the $N$-curve; the \emph{reward-spread lens} gives its sign and
+its ceiling. Endpoint (i) marks that ceiling: were every sampled transcript equally (in)correct, the reward
+would be flat and no selector --- oracle or deployable --- could beat greedy. The deployable label-free
+MBR-consensus selector realizes only a small, boundary-significant fraction of the oracle headroom (WER
+$0.102$, $+0.014$, $95\%$ CI $[-0.0001,0.033]$), an honest realized-vs-headroom gap: the spread is present,
+but a reference-free proxy recovers little of it.
 
 The same lens organizes the frozen-encoder probing of \Cref{sec:c2} qualitatively. The frozen content
 bi-encoder exposes reward spread for \emph{content and intent} --- its embedding geometry separates
@@ -88,6 +93,8 @@ flat on $\mathrm{supp}(\qo)$ and training-free pool-selection produces no signif
 (across-seed $95\%$ CI $[-0.043,+0.116]$; committed artifact
 \texttt{\_repro/emotion\_pool\_paired\_v2.json}). By endpoint (i) there is little spread to exploit and
 selection cannot help --- exactly what the probe observes. The reward-spread lens thus does one job, and
-only that job: it explains why verifiable-reward selection has genuine, $N$-scaling headroom on ASR
-content and why a frozen content encoder surfaces content/intent but not paralinguistics, without appeal
-to model class or agentic structure.
+only that job: it explains the \emph{sign} of the effect --- why verifiable-reward selection has
+strictly-positive headroom on ASR content (whose sampled candidates spread in reward) and none on the
+frozen encoder's paralinguistic read-out (whose reward is nearly flat) --- and bounds it by the reward
+spread, without appeal to model class or agentic structure. The size of the $N$-curve is order statistics,
+not the lens.
