@@ -1,0 +1,177 @@
+\section{Threats to Validity and Limitations}
+\label{sec:threats}
+
+We hold this work to the standard of self-criticism it advocates, and enumerate the threats in
+descending order of how much they could change the paper's claims. The scope is deliberately narrow:
+two \emph{frozen omni speech models}, each carrying exactly one of our two results, with no weight
+update and no structural change. Our primary result is genuine training-free RL: on a \emph{frozen
+generative} omni model (Qwen3-Omni-30B-A3B, Q8\_0 GGUF driven by \texttt{llama.cpp}
+\citep{qwen3omni}) we sample $N$ candidate transcripts per utterance and \emph{select} with a
+verifiable reward, i.e.\ best-of-$N$ over model-sampled candidates. Our secondary result is
+\emph{probing}, not RL: a frozen content bi-encoder (\texttt{omni-embed-nemotron-3b}
+\citep{omniembed2025}) is analysed for what paralinguistic information its read-out affords. These are
+\emph{different frozen models} and \emph{different operators} --- a generative best-of-$N$ selector
+versus a static embedding probe --- and we are careful throughout not to conflate them.
+
+\paragraph{\texttt{llama.cpp} audio input is experimental upstream.}
+The primary result runs the frozen omni model through \texttt{llama.cpp}, whose multimodal audio path
+is flagged experimental upstream and documented as possibly reduced quality relative to the reference
+runtime. Our greedy baseline WER of $0.118$ on LibriSpeech test-other with additive noise is therefore
+a property of \emph{this} decoding path, and the absolute error rates --- though not necessarily the
+\emph{relative} best-of-$N$ headroom, which is a within-runtime comparison --- may shift under a
+higher-fidelity runtime. Every number is committed to \texttt{\_repro/asr\_bon\_llamacpp\_snr5.json}
+with its reproduce command, so the runtime dependence is inspectable rather than hidden.
+
+\paragraph{The noise condition is a chosen robustness perturbation; headroom may differ clean or on other corpora.}
+We evaluate on LibriSpeech test-other with additive noise at SNR $5$\,dB, deliberately chosen to expose
+measurable best-of-$N$ headroom: on clean, near-ceiling audio the greedy transcript is often already
+correct and the reward has little spread across sampled candidates to exploit. This means our headroom
+figures are conditional on a perturbation we selected \emph{because} it creates spread. On clean audio,
+on other corpora, or under other noise types the oracle headroom and the realised deployable gain may
+both be smaller. We report the condition plainly rather than presenting it as a clean-speech result.
+
+\paragraph{The deployable selector does not, on this benchmark, convert the oracle headroom into a significant gain.}
+The honest core of the primary result is a \emph{realised-versus-headroom gap}. The verifiable-reward
+argmax --- oracle-WER best-of-$N$, the $\beta\!\to\!0$ tilt of the reward-spread lens --- reduces WER
+from $0.118$ to $0.077$ at $N{=}8$, a reduction of $+0.042$ ($95\%$ paired-bootstrap CI
+$[0.029,0.056]$, significant; three generation seeds pooled, $n{=}144$, pool $8$, temperature $0.8$), and
+the headroom \emph{climbs} with $N$ ($-0.007$, $+0.007$, $+0.024$, $+0.042$ for $N{=}1,2,4,8$, significant
+from $N{=}4$) --- an order-statistics climb (a single sample is slightly below greedy). But this oracle
+uses the reference transcript to pick the best candidate, so it is an \emph{upper bound}, not a deployable
+procedure. The deployable, label-free selector is MBR consensus, which uses no references and reaches WER
+$0.115$, a reduction of only $+0.004$ ($95\%$ CI $[-0.008,0.017]$, non-significant at every $N$). The
+correct reading is thus twofold: the verifiable-reward headroom is real and significant on a frozen model
+(genuine training-free RL), while the label-free selector does not, on this benchmark, turn it into a
+significant gain. We do not paper over that gap; closing it is the main deployable open problem
+(\Cref{sec:conclusion}).
+
+\paragraph{Possible pretraining contamination of the public sets.}
+LibriSpeech, and any public set we touch, may overlap the pretraining corpora of the frozen models
+\citep{contaminationsurvey2024,gorman2019splits,taskcontamination2024}, so absolute error rates can in
+part reflect memorised material. Our primary claim is a \emph{within-utterance, within-runtime}
+best-of-$N$ contrast --- how much a verifiable reward improves over the same model's greedy output on
+the same items --- which is more robust to contamination than an absolute score. (Selection against a
+\emph{proxy} reward can over-optimize regularities of the proxy \citep{gao2023overopt,skalse2022rewardhacking,spuriousrewards2025};
+our oracle contrast uses the true WER objective, so this concern attaches to the deployable MBR proxy, not
+to the oracle headroom.) A
+contamination-controlled split would still be needed to fully exclude leakage; until then the numbers
+should be read as within-model, within-condition contrasts.
+
+\paragraph{The C2 negative is specific to \emph{this} frozen content encoder, not to frozen models as a class.}
+The secondary (probing) negative is precise and committed but narrowly scoped. On CREMA-D, a probe of
+the frozen \texttt{omni-embed-nemotron-3b} \emph{content} read-out (dev-selected layer, three seeds,
+\texttt{\_repro/paralinguistic\_negative\_probe.json}) sits near chance for speaker (mean accuracy
+$0.033$, $3.0\times$ the $91$-way chance rate) and is only modest for emotion ($0.405$, $2.4\times$ the
+$6$-way chance rate); and training-free pool-selection over that read-out yields \emph{no} significant
+emotion gain (across-seed $95\%$ CI $[-0.043,+0.116]$, spanning zero,
+\texttt{\_repro/emotion\_pool\_paired\_v2.json}). This bounds \emph{that content read-out} and nothing
+more. A purpose-built speaker encoder such as an ECAPA-TDNN embedding \citep{ecapatdnn2020} would carry
+speaker identity well --- a well-established property of dedicated speaker models that we \emph{cite}
+rather than claim to have run. The finding is consistent with evidence that omni models tend to
+``read, not listen'' on paralinguistic cues \citep{voxparadox2026,listenortranscribe2025} and that
+speaker identity resists in-context correction \citep{spkverifllm2026}.
+
+\paragraph{The MInDS card comparison is a zero-shot-classification ablation, not a reward-driven selection gain.}
+The same frozen content encoder also does zero-shot SLU/intent classification via candidate-card cosine
+retrieval, reaching MInDS-14 en-US Acc@1 $0.984$
+(\texttt{\_repro/minds14\_toolintent\_paired.json}). We report this plainly and only as a
+\emph{card-representation / zero-shot-classification} result: its ``verifiable reward'' is merely the
+\emph{evaluation} metric and does \emph{not} drive any selection, so it is not best-of-$N$, not Gibbs
+tilting, and not reward-driven RL. It is also a \emph{distinct operator} from the C1 generative
+best-of-$N$ --- we make no claim of identical machinery between them. Moreover the apparent card-design
+improvement is confounded: the ``policy'' card differs from the baseline both by including in-set
+example cards and by a query-instruction change, so any Acc@1 delta cannot be cleanly attributed to a
+selection mechanism. We therefore do not headline it as an RL/selection gain, and we drop the earlier
+SLURP intent figure entirely, as it has no committed artifact.
+
+\paragraph{Relation to best-of-$N$ / MBR / reranking (honest differentiation).}
+The ingredients of the primary result --- best-of-$N$ and reranking
+\citep{beirami2024bon,verdun2025softbon,gui2024bonbon}, MBR decoding and MBR-for-ASR
+\citep{jinnai2024mbrbon,ichihara2025mbr,mbrasr2025}, controlled decoding
+\citep{mudgal2024controlled}, test-time scaling \citep{snell2024ttscompute}, and the Gibbs-optimal
+tilt $\qs\propto\qo\exp(\Rwd/\beta)$ from alignment-as-inference
+\citep{korbak2022kl,yang2024asymptotics} --- are all public, and we claim none as novel. What is
+specific here is applying a genuine verifiable-reward best-of-$N$ to a \emph{frozen omni generative
+model} and reporting the honest realised-versus-headroom gap between the oracle upper bound and a
+label-free deployable selector, alongside a committed paralinguistic \emph{probing} negative on a
+second frozen model and the reward-spread lens that organises both. The contribution is integrative and
+empirical, and should be weighted as such.
+
+\paragraph{Where Goodhart applies --- and where it does not.}
+Reward over-optimization is the exploitation of a \emph{gap} between a proxy and the true objective
+\citep{gao2023overopt,skalse2022rewardhacking,rlvrincentive2025}. Our \emph{oracle} reward is WER against
+the reference---it \emph{is} the true objective, so selecting the min-WER candidate is not reward-hacking
+a proxy but simply picking the best transcript; there is no proxy--true gap for the argmax to exploit. Its
+only defect is non-deployability: it consults the reference at selection time. Goodhart pressure applies
+instead to the \emph{deployable} label-free MBR consensus (and to any future learned reranker), where
+pushing $N$ can move mass toward whatever the proxy measures rather than toward lower true WER; the MBR
+proxy is reference-free precisely to be deployable, at the cost of the non-significant realized gain
+reported above. Because we change no weights, any such proxy failure is recoverable (lower $N$, better proxies).
+The lens bounds all of this: no selector can exceed the oracle headroom, which is itself bounded by the
+spread of the reward across the model's sampled candidates.
+
+\paragraph{Future work.}
+Two directions follow directly and honestly. First, \emph{stronger deployable selectors} --- learned
+rerankers or reference-free quality estimators trained to approximate the verifiable reward --- to
+close the realised-versus-headroom gap left open by MBR consensus. Second, \emph{larger and
+clean-condition best-of-$N$} --- more candidates, clean audio, and additional corpora --- to map how
+the oracle headroom varies with condition and $N$. A larger agent-level program (one frozen model
+routing and rewarding another across sessions) remains deferred, not disproved: it would require a
+cross-session, same-speaker corpus we do not have, and a genuinely new non-separable irreducibility
+theorem showing that decomposing a task into isolated contexts can add optimization headroom a single
+model lacks. Absent such a theorem, the spread lens is explicit that context isolation adds
+\emph{nothing} on a fixed reward --- no new non-constant reward component, no new spread, and by the
+identity below no new gain --- so that theorem is the precondition for any agent-level claim, and it is
+exactly what our present data do not supply.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We set out to test whether the gain available to training-free RL --- inference-time selection under a
+verifiable reward, changing no weights and no structure --- is real on frozen omni speech models, and
+whether it is governed by the \emph{spread} of that reward across candidates. Our primary result
+answers the first question affirmatively and modestly. On a frozen generative omni model
+(Qwen3-Omni-30B-A3B via \texttt{llama.cpp}) we sample $N$ transcripts per utterance on LibriSpeech
+test-other with additive noise and select with a verifiable reward --- genuine best-of-$N$ over
+model-sampled candidates. The verifiable-reward argmax reduces WER from $0.118$ (greedy) to $0.077$ at
+$N{=}8$, a significant $+0.042$ reduction ($95\%$ CI $[0.029,0.056]$, three generation seeds pooled,
+$n{=}144$) whose headroom climbs with $N$ ($-0.007,+0.007,+0.024,+0.042$ for $N{=}1,2,4,8$, significant
+from $N{=}4$; committed artifact \texttt{\_repro/asr\_bon\_llamacpp\_snr5.json}). This is genuine
+training-free RL: reward-driven selection over a frozen model's own samples, no weights touched. The
+label-free, deployable MBR-consensus selector realises essentially none of that headroom, reaching WER
+$0.115$ ($+0.004$, $95\%$ CI $[-0.008,0.017]$, non-significant at every $N$) --- an honest
+realised-versus-headroom gap rather than a solved deployment.
+
+Our secondary result is \emph{probing}, on a \emph{different} frozen model and via a \emph{different}
+operator: a frozen content bi-encoder (\texttt{omni-embed-nemotron-3b}) is near chance for speaker
+(mean $0.033$, $3.0\times$ the $91$-way chance rate) and only modest for emotion ($0.405$, $2.4\times$
+the $6$-way chance rate) on CREMA-D, and training-free pool-selection over its content read-out yields
+no significant emotion gain (across-seed CI $[-0.043,+0.116]$). The same encoder does high-accuracy
+zero-shot intent classification by candidate-card cosine retrieval (MInDS-14 Acc@1 $0.984$), but that
+is a card-representation / zero-shot-classification observation whose reward is only the evaluation
+metric and whose card-design delta is confounded --- \emph{not} a reward-driven selection gain, and not
+the same machinery as the generative best-of-$N$ above. We report the paralinguistic negative not as a
+setback but as a precise, committed measurement that scopes what this frozen \emph{content} read-out
+affords.
+
+The lens that ties these together is deliberately lightweight and used qualitatively. The identity
+$\gain=\beta\,\KL{\qo}{\qs}$ --- the free-energy / Donsker--Varadhan characterisation of the gap between
+what the frozen model already does ($\qo$) and what the reward would have it do ($\qs$) --- is a known
+result, not a novel theorem, and we invoke it to \emph{explain}, not to prove: the gain is bounded by
+the reward spread over $\mathrm{supp}(\qo)$, so a flat reward yields vanishing gain while a high-spread
+reward yields large gain, on the very same frozen model. Two strict, \texttt{sorry}-free Lean lemmas
+anchor its endpoints: a flat reward forces zero gain (\texttt{flat\_no\_gain}), and a non-constant
+reward forces strictly positive gain (\texttt{gain\_pos\_of\_nonconstant}). This is precisely the
+contrast we observe. In the primary result the \emph{sign and ceiling} of the oracle best-of-$N$ headroom are governed by the
+spread of the verifiable reward across the model's sampled candidates --- flat reward across candidates
+would give no headroom, spread gives strictly-positive headroom bounded by that spread; its \emph{growth}
+with $N$ is a distinct order-statistics effect. In the secondary result the
+frozen content encoder exposes reward spread for content and intent but little for paralinguistics, so
+selection over it has purchase in the former and essentially none in the latter.
+
+The conclusion is therefore modest and, we believe, true. A verifiable-reward best-of-$N$ on a frozen
+omni model yields significant, $N$-scaling headroom --- genuine training-free RL; a label-free
+deployable selector currently realises only a small fraction of it; a frozen content encoder is near
+chance on paralinguistics; and the reward-spread lens explains both. What we offer is a small,
+reproducible set of results and a lens that predicts their sign --- not a deployable agentic stack, and
+not a claim beyond the frozen models and committed artifacts we can currently stand behind.

@@ -1,0 +1,305 @@
+\appendix
+
+\section{Lean 4 Formalization}
+\label{app:lean}
+
+The lens of this paper --- that the optimization gain of training-free RL (inference-time
+verifiable-reward selection) is governed by the \emph{reward spread}, not by any model class --- rests
+on one qualitative identity, and \emph{that} identity is machine-checked in \textbf{Lean~4 + mathlib}
+(toolchain and mathlib both pinned to \texttt{v4.31.0}; the exact mathlib commit is recorded in the
+\texttt{lake-manifest.json} committed alongside the proof project, see \Cref{app:lean-status}), in the
+project \texttt{proofs/tfrl} (Lean namespace \texttt{TfrlProofs}). We are careful about what
+``machine-checked'' means, and \Cref{app:lean-status} below states it precisely. The retained core is
+small: the master identity and T1 optimality, the flat-reward collapse, and the gain identity
+$\gain=\beta\,\KL{\qo}{\qs}$ together with its nonnegativity \emph{and its strict positivity under any
+non-constant reward} (\texttt{gain\_eq}, \texttt{gain\_nonneg}, \texttt{gain\_pos\_of\_nonconstant},
+\texttt{kl\_pos\_of\_ne}, \texttt{flat\_no\_gain}) --- all \textbf{fully \texttt{sorry}-free}. This is
+exactly the formal content of the spread lens: the gain is a function of the \emph{reward structure}
+(the range $\Rwd_{\max}-\Rwd_{\min}$ over $\operatorname{supp}(\qo)$), and nothing in the hypotheses
+references a model class. Two \texttt{sorry}-free facts make the lens precise. (i)
+\texttt{gain\_pos\_of\_nonconstant}: every non-degenerate verifiable reward contributes \emph{strictly}
+positive gain, even on a single frozen model --- this is why the high-spread content/intent rewards
+yield selection gains. (ii) \texttt{flat\_no\_gain}: a flat reward yields \emph{zero} gain --- this is
+why a factor with little reward spread (our paralinguistic negative) has nothing for training-free
+selection to exploit. The Lean project \texttt{proofs/tfrl} may contain additional lemmas beyond those
+listed here; only the lemmas in \Cref{app:lean-status} are load-bearing for this paper.
+
+We are explicit about the boundary between the machine-checked identity and its quantitative
+companion. The qualitative identity $\gain=\beta\,\KL{\qo}{\qs}$ and the strict lemmas above are
+machine-checked \texttt{sorry}-free. The \emph{quantitative} spread bound $\gain\le\spread^2/(8\beta)$
+is the standard Donsker--Varadhan / Hoeffding statement (proved on paper in \Cref{lem:hoeffding});
+we use it \emph{qualitatively} --- to say ``small spread $\Rightarrow$ small headroom'' --- and we do
+\textbf{not} bill it as a novel or machine-checked ceiling. Throughout, $\cZ$ is a \texttt{Fintype}
+(the inference-time action space), $\qo:\cZ\to\bbR$ is a strictly positive reference distribution with
+$\sum_z \qo(z)=1$, $\Rwd:\cZ\to\bbR$ is a reward, and $\beta>0$ a temperature.
+
+\paragraph{Verification status.}
+\label{app:lean-status}
+To prevent any over-reading of ``machine-checked'', we tabulate the exact status of each retained Lean
+result.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Lean lemma & Status & Undischarged input \\
+\hline
+\texttt{kl\_nonneg} & \texttt{sorry}-free & --- \\
+\texttt{kl\_pos\_of\_ne} (strict Gibbs) & \texttt{sorry}-free & --- \\
+\texttt{F\_sub\_eq\_beta\_mul\_kl} & \texttt{sorry}-free & --- \\
+\texttt{tilting\_optimal} (T1) & \texttt{sorry}-free & --- \\
+\texttt{qstar\_eq\_q0\_of\_const} (T3) & \texttt{sorry}-free & --- \\
+\texttt{gain\_eq} (OSA-1a) & \texttt{sorry}-free & --- \\
+\texttt{gain\_nonneg} (OSA-1b) & \texttt{sorry}-free & --- \\
+\texttt{gain\_pos\_of\_nonconstant} (OSA-1b$'$) & \texttt{sorry}-free & --- \\
+\texttt{flat\_no\_gain} (OSA-1c) & \texttt{sorry}-free & --- \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+Every entry compiles with no axioms beyond mathlib's and no \texttt{sorry}; the exact mathlib commit
+against which they compile is pinned in the \texttt{lake-manifest.json} committed with the
+\texttt{proofs/tfrl} project, so the build is reproducible bit-for-bit. (``OSA'' abbreviates
+\emph{Optimization-Space Adequacy}; only the OSA-1 single-block lemmas are used in this paper.) The
+one quantitative statement we invoke --- the $\spread^2/(8\beta)$ ceiling --- is \textbf{not} a Lean
+result: it is the standard Hoeffding bound, proved on paper in \Cref{lem:hoeffding} and used only
+qualitatively.
+
+\paragraph{Tilting primitives and the Gibbs inequality.}
+The exponentially tilted optimum $\qs$, its partition function $\Zpart$, and the KL-regularized
+objective $\Fobj{\cdot}$ are defined exactly as in the main text. We reproduce the Lean signatures
+verbatim.
+
+\begin{verbatim}
+noncomputable def Zpart (q0 R : Z → ℝ) (β : ℝ) : ℝ := ∑ w, q0 w * Real.exp (R w / β)
+noncomputable def qstar (q0 R : Z → ℝ) (β : ℝ) (z : Z) : ℝ :=
+  q0 z * Real.exp (R z / β) / Zpart q0 R β
+noncomputable def F (q0 R : Z → ℝ) (β : ℝ) (q : Z → ℝ) : ℝ :=
+  (∑ z, q z * R z) - β * ∑ z, q z * Real.log (q z / q0 z)
+
+theorem kl_nonneg {p r : Z → ℝ} (hp : ∀ z, 0 ≤ p z) (hr : ∀ z, 0 < r z)
+    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) :
+    0 ≤ ∑ z, p z * Real.log (p z / r z)
+\end{verbatim}
+
+\noindent
+\texttt{kl\_nonneg} is Gibbs' inequality: the pointwise estimate $p(z)-r(z)\le p(z)\log(p(z)/r(z))$
+(trivial when $p(z)=0$; otherwise $\log x \le x-1$ with $x=r(z)/p(z)$ via
+\texttt{Real.log\_le\_sub\_one\_of\_pos}) is summed only over $\operatorname{supp}(p)$. On that index
+set $\sum_{z\in\operatorname{supp}(p)} p(z)=1$, while $\sum_{z\in\operatorname{supp}(p)} r(z)\le
+\sum_z r(z)=1$ (the partial sum over the support is $\le$ the full sum, since $r\ge 0$); this gives
+$\sum_{z\in\operatorname{supp}(p)}\big(p(z)-r(z)\big)\ge 1-1=0$, hence $\KL{p}{r}\ge 0$. The one-sided
+bound ``$\le$ the full sum'' is sufficient.
+
+We additionally prove the \emph{strict} form, \texttt{sorry}-free:
+
+\begin{verbatim}
+theorem kl_pos_of_ne {p r : Z → ℝ} (hp : ∀ z, 0 < p z) (hr : ∀ z, 0 < r z)
+    (hpsum : ∑ z, p z = 1) (hrsum : ∑ z, r z = 1) (hne : ∃ z, p z ≠ r z) :
+    0 < ∑ z, p z * Real.log (p z / r z)
+\end{verbatim}
+
+\noindent
+\texttt{kl\_pos\_of\_ne} upgrades Gibbs to its equality case: $\KL{p}{r}=0\iff p=r$, so
+$p\ne r\Rightarrow\KL{p}{r}>0$. The pointwise slack $p(z)\log(p(z)/r(z))-\big(p(z)-r(z)\big)\ge 0$ is
+\emph{strictly} positive at any $z$ with $p(z)>0$ and $p(z)\ne r(z)$ (strict form of $\log x<x-1$ for
+$x\ne 1$, via \texttt{Real.log\_lt\_sub\_one\_of\_ne}); the hypothesis $\exists z,\ p(z)\ne r(z)$
+(with $p$ strictly positive everywhere) supplies such a $z$, so summing the nonnegative slacks --- at
+least one strictly positive --- gives a strictly positive total. This strict inequality is the engine
+of the strict gain lemma below: it is exactly why a non-constant reward yields \emph{strictly}
+positive gain rather than merely nonnegative gain.
+
+\paragraph{Master identity and T1.}
+The decomposition $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}$ is the engine of optimality.
+
+\begin{verbatim}
+theorem F_sub_eq_beta_mul_kl [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β (qstar q0 R β) - F q0 R β q = β * ∑ z, q z * Real.log (q z / qstar q0 R β z)
+
+theorem tilting_optimal [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    {q : Z → ℝ} (hq : ∀ z, 0 ≤ q z) (hqsum : ∑ z, q z = 1) :
+    F q0 R β q ≤ F q0 R β (qstar q0 R β)
+\end{verbatim}
+
+\noindent
+\textbf{T1} (\texttt{tilting\_optimal}) is then immediate: $\Fobj{\qs}-\Fobj{q}=\beta\,\KL{q}{\qs}\ge 0$
+by \texttt{kl\_nonneg} and $\beta>0$.
+
+\paragraph{T3 --- flat reward, no tilt.}
+\begin{verbatim}
+theorem qstar_eq_q0_of_const [Nonempty Z] {q0 : Z → ℝ} {β c : ℝ}
+    (hq0sum : ∑ z, q0 z = 1) {R : Z → ℝ} (hR : ∀ z, R z = c) :
+    ∀ z, qstar q0 R β z = q0 z
+\end{verbatim}
+\noindent
+When $\Rwd(z)\equiv c$, $\Zpart=\exp(c/\beta)$ collapses and
+$\qs(z)=\qo(z)\exp(c/\beta)/\exp(c/\beta)=\qo(z)$: a degenerate action space with zero reward spread
+admits no steering.
+
+\paragraph{The gain identity (\texttt{TfrlProofs.OptSpace}).}
+We define the optimization gain $\gain:=\Fobj{\qs}-\Fobj{\qo}$ and prove its structural properties.
+Every lemma below compiles \texttt{sorry}-free.
+
+\begin{verbatim}
+noncomputable def gain (q0 R : Z → ℝ) (β : ℝ) : ℝ :=
+  F q0 R β (qstar q0 R β) - F q0 R β q0
+
+theorem gain_eq [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) :
+    gain q0 R β = β * Real.log (Zpart q0 R β) - ∑ z, q0 z * R z
+theorem gain_nonneg [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) : 0 ≤ gain q0 R β
+theorem gain_pos_of_nonconstant [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) (hR : ∃ z w, R z ≠ R w) :
+    0 < gain q0 R β
+theorem flat_no_gain [Nonempty Z] (hq0 : ∀ z, 0 < q0 z) (hβ : 0 < β)
+    (hq0sum : ∑ z, q0 z = 1) {c : ℝ} (hR : ∀ z, R z = c) : gain q0 R β = 0
+\end{verbatim}
+
+\noindent
+\texttt{gain\_eq} rewrites the gain as $\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]$
+(\textbf{OSA-1a}); equivalently, read at $q=\qo$, the master identity gives the free-energy /
+Donsker--Varadhan form $\gain=\beta\,\KL{\qo}{\qs}$. \texttt{gain\_nonneg} (\textbf{OSA-1b}) is
+Jensen / Gibbs. \texttt{gain\_pos\_of\_nonconstant} (\textbf{OSA-1b}$'$) is the strict companion: if the
+reward takes two distinct values, $\Rwd(z_1)\ne\Rwd(z_2)$, then $\qs\ne\qo$ (the tilt is non-trivial),
+so by the strict Gibbs lemma \texttt{kl\_pos\_of\_ne} (applied with the strictly-positive argument
+$r=\qs>0$) the identity $\gain=\beta\,\KL{\qo}{\qs}$ is \emph{strictly} positive. This is the formal
+statement of the spread lens at the single-block level: \textbf{any} non-degenerate verifiable reward
+yields strictly positive gain --- crucially, \emph{even on a single frozen model}, since nothing in
+the hypotheses references a model class. Conversely \texttt{flat\_no\_gain} (\textbf{OSA-1c}) recovers
+T3: a flat reward (e.g.\ a frozen embedding read-out that does not separate the labelled classes,
+hence a degenerate $\cZ$ under that reward) affords \emph{zero} improvement. Together OSA-1b$'$/OSA-1c
+make the dichotomy sharp and model-agnostic: gain is governed by whether the reward is non-constant.
+This is precisely the contrast the paper reports empirically --- content/intent rewards have large
+spread (selection gains), the paralinguistic reward on this frozen encoder is near-flat (no
+significant gain).
+
+\section{Extended Proof: the spread bound}
+\label{app:extended}
+
+We record, on paper, the standard analytic statement behind the spread lens: the reward spread caps
+the gain. This is the classical Donsker--Varadhan / Hoeffding bound; we present it for completeness
+and use it only qualitatively. It is \emph{not} a Lean result and we do not bill it as one.
+
+\subsection{Hoeffding instance: the gain ceiling \texorpdfstring{$\spread^2/(8\beta)$}{spread2/8beta}}
+\label{app:hoeffding}
+
+\begin{lemma}[Bounded-reward gain ceiling]
+\label{lem:hoeffding}
+Let $\Rwd:\cZ\to[\Rwd_{\min},\Rwd_{\max}]$ with reward spread $\spread:=\Rwd_{\max}-\Rwd_{\min}$, and
+let $\qo$ be any distribution on $\cZ$ with $\Exp_{\qo}$ the corresponding expectation. Then for every
+$\beta>0$,
+\[
+\gain(\qo,\Rwd,\beta)\;=\;\beta\,\log\Exp_{\qo}\!\big[e^{\Rwd/\beta}\big]-\Exp_{\qo}[\Rwd]\;\le\;\frac{\spread^2}{8\beta}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $X:=\Rwd(z)/\beta$ for $z\sim\qo$, supported in $[a,b]$ with $a=\Rwd_{\min}/\beta$,
+$b=\Rwd_{\max}/\beta$, so $b-a=\spread/\beta$. Set $\varphi(\lambda):=\log\Exp[e^{\lambda X}]$; then
+$\varphi(0)=0$, $\varphi'(0)=\Exp X$, and $\varphi''(\lambda)=\operatorname{Var}_{\lambda}(X)$ under
+the tilted law $d\mu_\lambda\propto e^{\lambda x}d\mu$. Since $X\in[a,b]$ almost surely, the same
+holds $\mu_\lambda$-a.s., and a random variable bounded in an interval of length $b-a$ has variance at
+most $(b-a)^2/4$ (extremal case: the two-point distribution at the endpoints). Hence
+$\varphi''(\lambda)\le (b-a)^2/4$. By Taylor's theorem with the Lagrange remainder, for some $\xi$
+between $0$ and $\lambda$,
+\[
+\varphi(\lambda)=\varphi(0)+\lambda\varphi'(0)+\tfrac12\lambda^2\varphi''(\xi)\le \lambda\,\Exp X+\frac{\lambda^2 (b-a)^2}{8},
+\]
+so $\psi(\lambda):=\varphi(\lambda)-\lambda\Exp X\le \lambda^2(b-a)^2/8$, which is Hoeffding's lemma.
+Taking $\lambda=1$,
+\[
+\log\Exp[e^{X}]-\Exp[X]=\psi(1)\le \frac{(b-a)^2}{8}=\frac{\spread^2}{8\beta^2}.
+\]
+Multiplying by $\beta>0$ and substituting $X=\Rwd/\beta$ gives
+$\beta\log\Exp_{\qo}[e^{\Rwd/\beta}]-\Exp_{\qo}[\Rwd]\le \spread^2/(8\beta)$. By \texttt{gain\_eq} the
+left side is exactly $\gain$.
+\end{proof}
+
+\Cref{lem:hoeffding} makes the scaling explicit: the inference-time selection gain is quadratically
+throttled by the reward spread, $\gain=O(\spread^2/\beta)$, so a flat or near-flat reward landscape
+(T3, \textbf{OSA-1c}) yields vanishing headroom regardless of candidate budget --- the analytic
+counterpart of reward over-optimization saturation \citep{gao2023overopt}. Together with
+\texttt{gain\_pos\_of\_nonconstant} (strict lower bound for any non-constant reward), it brackets the
+gain from both sides: it is the reward spread, not the model class, that sets the ceiling. We use this
+bound qualitatively only.
+
+\section{Notation}
+\label{app:notation}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Symbol & Meaning \\
+\hline
+$\cZ$ & inference-time action space (candidate outputs, e.g.\ model-sampled transcripts; no weights change) \\
+$\qo$ & base reference policy $q_0$ (strictly positive, $\sum_z\qo(z)=1$) \\
+$\qz$ & a search distribution $q$ over $\cZ$ \\
+$\qs$ & Gibbs / tilted optimum $\qs(z)=\qo(z)e^{\Rwd(z)/\beta}/\Zpart$ \\
+$\Rwd$ & verifiable reward function $\cZ\to\bbR$ \\
+$\beta$ & temperature ($>0$); KL-regularization strength \\
+$\Zpart$ & partition function $\sum_w \qo(w)e^{\Rwd(w)/\beta}$ \\
+$\Fobj{q}$ & KL-regularized objective $\Exp_q[\Rwd]-\beta\,\KL{q}{\qo}$ \\
+$\KL{p}{q}$ & Kullback--Leibler divergence \\
+$\Exp$ & expectation $\mathbb{E}$ \\
+$\gain$ & optimization gain $\Fobj{\qs}-\Fobj{\qo}=\beta\,\KL{\qo}{\qs}\ge 0$ \\
+$\spread$ & reward spread $\Rwd_{\max}-\Rwd_{\min}$ \\
+$N$ & number of candidate outputs in verifiable selection (best-of-$N$ / reranking) \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Verifiable Reward Functions}
+\label{app:rewards}
+
+The reward callables used as verifiable signals $\Rwd$ are exposed by the shared library
+\texttt{speechrl\_common.rl}, and are deliberately deterministic and contamination-resistant
+\citep{tulu3}. Heavy dependencies (\texttt{jiwer}, \texttt{scikit-learn}) are imported lazily inside
+each function so the package and its smoke tests import without the full stack. Our \emph{primary}
+selection (\Cref{sec:c1}) is best-of-$N$ over transcripts a \emph{frozen generative} omni model samples,
+scored by the WER reward below; the \emph{secondary} study (\Cref{sec:c2}) probes a frozen bi-encoder and
+is not reward-driven selection. No weights are updated in either.
+
+\paragraph{Content / ASR (\texttt{rl.reward}).}
+\texttt{wer(reference, hypothesis)} returns the word error rate after normalization;
+\texttt{asr\_reward} returns $\max(0,\,1-\mathrm{WER})\in[0,1]$, a bounded reward whose spread directly
+governs the gain ceiling of \Cref{lem:hoeffding}; \texttt{exact\_match\_reward} returns
+$\mathbf{1}[\text{normalized strings equal}]\in\{0,1\}$ for closed-form tasks (intent, tool selection,
+keyword). The WER reward is the one our primary experiment selects on: it realizes a large, non-degenerate spread
+over the generative model's sampled transcripts under acoustic stress --- the oracle best-of-$N$ headroom
+of \Cref{sec:c1}. (The \texttt{exact\_match} reward scores the secondary frozen-encoder zero-shot intent
+ablation of \Cref{sec:c2}, which is a confounded card-design comparison, not reward-driven selection.)
+
+\paragraph{Retrieval / embedding (\texttt{rl.embedding\_metrics}).}
+\texttt{recall\_at\_k(query, gallery, labels\_q, labels\_g, k)} and
+\texttt{mean\_reciprocal\_rank(\dots)} score the frozen model's pooled embeddings against a labelled
+gallery under cosine similarity (\texttt{cosine\_sim\_matrix} with $\ell_2$ normalization);
+\texttt{retrieval\_reward(\dots, k)} packages recall@$k$ as a $[0,1]$ reward. We flag honestly that
+for the \emph{speaker} factor this reward is near-degenerate on the frozen omni embedding: the content
+read-out carries near-chance speaker identity (mean accuracy $0.033$, $3.0\times$ chance on a $91$-way
+task; dev-selected layer, $3$ seeds; committed artifact
+\texttt{\_repro/paralinguistic\_negative\_probe.json}). This is a near-flat landscape under which
+\Cref{lem:hoeffding} predicts vanishing gain --- there is little paralinguistic spread for
+training-free selection to exploit.
+
+\paragraph{Probe accuracy (\texttt{rl.probe}).}
+\texttt{linear\_probe\_accuracy} / \texttt{knn\_probe\_accuracy} fit a frozen-feature classifier
+(held-out split) to score readability of the emotion (SER) and language/intent factors from the
+embeddings; \texttt{probe\_reward(\dots, kind)} returns the held-out accuracy as the reward. For the
+\emph{emotion} factor the frozen read-out is only modestly above chance (accuracy $0.405$, $2.4\times$
+chance on a $6$-way CREMA-D task; dev-selected layer, $3$ seeds; same committed artifact
+\texttt{\_repro/paralinguistic\_negative\_probe.json}), and training-free pool-selection over this
+encoder yields \emph{no significant gain}: a multi-seed re-run with dev-selected pooling layer
+($5$ seeds: $42,7,123,2024,31337$) gives mean $\Delta=+0.037$ with a $95\%$ across-seed $t$-CI of
+$[-0.043,+0.116]$, which spans $0$ --- not significant (committed artifact
+\texttt{\_repro/emotion\_pool\_paired\_v2.json}).\footnote{The per-seed paired-delta bootstrap
+excludes $0$ in $2/5$ seeds; this vote-count is reported only for completeness and is not the headline
+statistic.} The previously-reported single-seed $+0.097$ was the best seed under oracle test-layer
+selection (a selection-leak / winner's-curse artifact). We scope this negative precisely: it is
+established on \emph{one} frozen content bi-encoder (omni-embed) via a linear/kNN probe and
+pool-selection over its embedding space, and it says only that training-free selection over
+\emph{this} encoder has little paralinguistic spread to exploit. Auxiliary metrics
+(\texttt{macro\_f1}, \texttt{bleu}, \texttt{chrf}, \texttt{eer}) in \texttt{rl.metrics} are used for
+evaluation only, not as RL rewards, to avoid coupling the reward and the test statistic
+\citep{skalse2022rewardhacking}.

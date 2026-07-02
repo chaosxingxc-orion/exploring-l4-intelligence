@@ -6,6 +6,186 @@
 
 ---
 
+### 2026-07-02 · Deep principle/purpose/feasibility review collapses W5, then a REAL best-of-N (llama.cpp) earns it back — converged as an honest single-model paper
+**Decision.** The owner judged the prior review still too shallow (syntax/semantic, not **原理/目的/可行**), and asked
+for a genuinely adversarial review run as a **POMDP** (step-by-step, partial observation, iterate + roll back). Three
+independent hostile expert reads (principle · purpose · feasibility) reached a conclusive verdict: **the agent-level /
+L4 framing does not survive** (the OSA theory is tautology-where-proven — `qstar_product` = `exp(a+b)=exp(a)exp(b)`,
+smoking gun in `OptSpace-notes.md` — and unmodellable/untested where interesting; the purpose is self-refuting with
+VoI≈0; the cross-session benchmark data is frozen-absent and the stack unbuilt). Owner chose **Option A: collapse to
+an honest single-model paper.**
+**Why.** Follow the evidence even to restructuring; the direction itself was challengeable; substance over prose;
+bounded local GPU pilots authorized.
+**Consequences (the POMDP trajectory, full log in `papers/agent-level-tfrl/reviews/pomdp-restructure-log.md`).**
+(1) **A forensic provenance pilot** found the paper's content/intent "Operator-B best-of-N" numbers were actually a
+frozen **bi-encoder cosine retrieval** — a real mis-attribution the earlier 4-round review missed — and re-ran MInDS
+to a committed paired-CI artifact. (2) Collapsed 57→21 pp; committed a precise **paralinguistic negative** probe
+(speaker 3×-chance, emotion 2.4×-chance, null training-free gain). (3) **A fresh hostile panel then found a
+fundamental flaw even in the collapse:** the omni-embed "selection" never used the reward (argmax cosine, not
+reward-driven) — so it was *not* training-free RL at all. (4) Owner chose **Path B: earn the RL claim with a real
+best-of-N.** The HF/vLLM int4 loader wall was hit; owner steer **"run the 30B via llama.cpp"** unblocked it.
+(5) **Genuine training-free RL, executed:** Qwen3-Omni-30B-A3B (Q8_0 GGUF, llama.cpp, resident server, `-ngl 28` on a
+24 GB laptop 5090) samples N transcripts per LibriSpeech-test-other+snr5 utterance; a verifiable WER reward selects.
+**Multi-seed (3 generation seeds pooled, n=144): oracle-WER best-of-N headroom +0.042 [0.029,0.056] at N=8,
+significant from N=4 (N=1<greedy — the honest order-statistics climb); deployable label-free MBR non-significant at
+every N** — a real reward-driven headroom + an honest realized-vs-headroom gap. (6) Reframed the paper: **C1** = this
+genuine best-of-N; **C2** = honest frozen-encoder probing (distinct operator, not RL); **C3** = a reward-spread lens
+giving only the *sign + ceiling* (the N-curve is order statistics), two `sorry`-free Lean lemmas. (7) **Four fresh
+hostile rounds on the reframed paper converged: fundamental → major → major → minor, 0 surviving fundamental/major;**
+an integrity reviewer reproduced every C1 number against the committed artifact to the digit. **Verdict: CONVERGED.**
+Every number backed by a committed reproducible artifact (best-of-N in the W1 repo; probes in the W4 repo). New tool
+capability proven: **llama.cpp drives Qwen3-Omni-30B audio ASR + best-of-N on the 24 GB laptop GPU** (audio flagged
+experimental upstream). Commits: W1 `b7b4b0d`/`cd6aa92`/`f9d111a`; umbrella `dff7628`→`20a6a31`→`b03c091`→`67b377d`→
+(round-4). Branch `docs/research-proposal-template-and-first-proposal`, not pushed; wiki not synced.
+
+### 2026-07-01 · W5 proposal hardened by a rigorous FOUR-ROUND fresh-adversary review (substance-only fixes; converged at the pre-registered cap)
+**Decision.** The owner judged the first review pass (the entry below) **not rigorous** — one revision cycle, same
+reviewers primed on their own lists, a meta-reviewer that once returned placeholder output, and several items
+patched *in prose*. We re-ran the review as a **multi-round adversarial loop** with a hard discipline: **fresh
+reviewers each round** (blind to prior rounds and to the resolution ledger), a **meta-chair** holding the only
+ledger and reporting solely *genuinely new* critical/major, **fix in substance not prose** (strengthen via
+Lean/GPU-experiment/citation — or cut), and **loop until a clean round, cap 4**.
+**Why.** A proposal that stakes its credibility on machine-checked honesty must survive independent attack, not a
+single self-consistent pass; prose hedging is not a resolution.
+**Consequences.** (1) **Four rounds ran; the defect class shrank monotonically and terminated at the cap:**
+R1 (6 critical + 11 major — the *structural* over-claim: the "single-model inert → agent **recovers**" thesis was
+**unsupported by the theorems** — `qstar_product` proves the isolated optimum *equals* the monolithic one — and
+**contradicted by our own data**; whole paper reframed, title changed, system demoted to a **testbed**) →
+R2 (13 major — the reframe hadn't propagated to the most-read sections; KL-direction, front-matter, emotion
+statistic all re-synced) → R3 (0 critical, 4 major — β-convention in Related Work, the Lean status-table `sorry`
+location, the PLDA-calibrated falsifier, proposal framing) → **R4/cap** (0 critical, 7 major — all
+internal-consistency / fidelity / **artifact-integrity**: C1's Pinsker/Beirami/Hoeffding mapping, pre-correction
+Lean docstrings, the affect baseline upgraded to a classical online CPD, a per-factor win criterion, a byte-verbatim
+appendix signature, and — caught by a blind auditor — the committed emotion t-CI being **hand-inserted rather than
+script-emitted**). Every round's panel certified, from R1 on, that **no theorem is wrong and no proof is broken**.
+(2) **Substance, not prose, throughout.** New sorry-free Lean lemmas `gain_pos_of_nonconstant` / `kl_pos_of_ne`
+(strict Gibbs) added in R1 and re-verified after each Lean edit (`lake build`, 8559 jobs, sorry-free bar the one
+documented Beirami `sorry`). The load-bearing emotion result was **re-run on the RTX 5090** and turned out to be a
+**NULL** (across-seed 95% t-CI **[−0.043, +0.116]** spans 0), not the originally-claimed +0.097 (a single-seed
+oracle-test-layer artifact) — an honest scientific correction; in R4 the reproducer was fixed to *emit* that t-CI
+and re-run so the committed JSON is genuinely script-produced. (3) **The thesis is now honest and precisely scoped:**
+theory (gain governed by reward *spread*, not search effort or agent wrapping — the isolation result is an
+*accounting identity*), a scoped paralinguistic **NULL**, single-model best-of-N content/intent gains explicitly
+*not* evidence for the agentic claim, and a testbed + pre-registered falsification plan whose central question —
+does agentic decomposition add anything beyond a frozen single model — is **disclosed as open** (a *proposal*, not
+an executed result). 57 pp, compiles clean (0 undefined). Six review archives + a resolution `ledger.md` under
+`papers/agent-level-tfrl/reviews/`. Commits: umbrella `70b5aef` (R3), `c2481b4` (R4); W4 `dd6e8d3` (re-run artifact).
+Branch `docs/research-proposal-template-and-first-proposal`, not pushed.
+
+### 2026-07-01 · W5 agent-level proposal written as a peer-reviewed LaTeX paper (42 pp, 217 refs, 5-role review → minor revision)
+**Decision.** Consolidated the W5 agent-level arc into a rigorous, English, NeurIPS-style **LaTeX research
+proposal** at `papers/agent-level-tfrl/` (`main.tex` + `references.bib` + modular `sections/`), compiled to a
+42-page `main.pdf` on a user-space TinyTeX install in WSL2. It folds together the optimization-space-adequacy
+theory (OSA-1/2/3, machine-checked in `proofs/tfrl/TfrlProofs/OptSpace.lean`), the convergence analysis, the
+feasibility case (open moat + two-omni component pairing + the verifiable-reward acceptance gate), preliminary
+in-house results, the self-evolving omni speech-agent system design, and the staged research plan. Drafted via a
+parallel section-writer workflow; bibliography (217 adversarially-verified sources) generated deterministically.
+**Why.** The owner asked for a paper-grade, peer-review-ready write-up (≥30k tokens, full citations + detailed
+proofs + why/how) produced with multi-role adversarial review and a review→revise→re-review loop.
+**Consequences.** (1) **Peer-review loop ran to its target.** A 5-role panel (theory-critic · statistician ·
+speech-domain · reproducibility-auditor · novelty/red-teamer) + area chair returned **major revision** in round 1
+— the math was verified correct on disk (Lean pins, one documented sorry) but the prose over-claimed. A
+per-section revision workflow applied the must-fix items (OSA-2 downgraded to *conditional* additivity + an
+explicit Phase-2 spread-floor **conjecture**; the dual-use key-agreement reward **reclassified as a surrogate**,
+not verifiable per the paper's own definition; "asymptotically inert" → "gain bounded by realized reward spread";
+"machine-checked" **qualified** to the sorry-free qualitative core vs the conditional quantitative bounds;
+convergence reframed as a **design principle**, finite-time guarantee open; single-seed / winner's-curse /
+contamination caveats; citation softening). Round 2: **all five reviewers moved to minor revision**, gating items
+resolved; residual M8/title fixes then applied. Reviews archived under `papers/agent-level-tfrl/reviews/`.
+(2) The paper is **honest by construction**: novelty framed as domain-transfer (mechanism not novel), the one Lean
+`sorry` + the isolated Hoeffding lemma disclosed, agentic recovery (OSA-2) explicitly *not yet measured* (Phase-2).
+(3) Reproducible build shipped (`build.sh`, `_build/` generators). (4) **Survey-first still honored** — Project-Thesis
+and the W4 H1/H2/H3 untouched; this is a proposal, not a thesis change. (5) Branch
+`docs/research-proposal-template-and-first-proposal`, not pushed.
+
+### 2026-06-30 · Agent-level direction (survey-first POMDP): GO verdict + the optimization-space theorem machine-checked in Lean
+**Decision.** Pursued the owner's strategic pivot — *is the L4-evolution space agent-system-level no-gradient RL
+(skills+memory) rather than single-model output search?* — as a **survey-first POMDP** (Belief-State + Trajectory
+in [[2026-06-30-agent-level-synthesis]]). **S1** (decisive probe, 41 verified claims) returned **GO** at
+commit-degree *add-new-layer*, scope *speech-grounded*: agent-level self-improvement **compounds**
+(Voyager/ExpeL/AWM/JitRL), the `q*` objective **extends** to agent actions (JitRL closed form), the two omni
+classes map to **memory(embedding)/policy(generative)**, and the **training-free self-improving SPEECH-agent moat
+is open** — but the *mechanism* is not novel, so it's a new layer, not a thesis reframe. Then formalized the
+owner's **optimization-space-adequacy** hypothesis in Lean (`proofs/tfrl/TfrlProofs/OptSpace.lean`, extends
+T1/T3): **OSA-1** flat/degenerate space ⇒ zero gain (recovers T3) + quantitative `gain ≤ spread²/(8β)`; **OSA-2**
+context-isolated agents ⇒ **additive** gain; **OSA-3** rollout deficit + credit-assigned tilt = global optimum.
+`lake build` **green, sorry-free**. Grounded by a convergence survey (θ2, 43 claims / 54 sources,
+[[2026-06-30-survey-agent-convergence]]): proven *finite-N* convergence lives at the **output** level; the agent
+level has only JitRL's *asymptotic* consistency under a **trust-region/slow-drift** precondition — the trust
+region being the hinge between naive non-convergence and credit-assigned convergence.
+**Why.** Owner: optimizing a single model's instruct/output is too small a space; bring it into an agent system
+(context isolation + skills/memory) to enlarge the optimization space — but then rollout-stability/convergence
+needs algorithm-level care. Prove this formally and survey the latest open-source training-free-RL convergence.
+**Consequences.** (1) **Survey-first honored:** [[Project-Thesis]] and the W4 proposal's H1/H2/H3 are **unchanged**;
+the GO + commit-degree is a deferred decision for the owner. (2) The optimization-space hypothesis is now a
+**machine-checked theorem suite** (axis B8 resolved). (3) Two survey rounds archived under `wiki/survey/` with
+real verifiable links (S1 + θ2 convergence). (4) Lean toolchain provisioned on this machine (elan + mathlib
+cache); the W4 proposal's empirical/GPU track stays blocked on R1. (5) Branch
+`docs/research-proposal-template-and-first-proposal`, not pushed.
+
+### 2026-06-26 · First research proposal authored as a POMDP step-by-step build; Step-2 survey archived (93 verified sources)
+**Decision.** Authored the first proposal on the new [[Research-Proposal-Template]] —
+[[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] — for the owner's idea: *how far can
+training-free RL activate pretrained omni-model capabilities across the two model classes (vector/embedding vs
+thinker-talker/generative), with in-context conditioning (explicit task definition + few-shot) as the lever.*
+Built it explicitly as a **partially-observed decision process (POMDP)** — a live Belief-State table + a
+Trajectory log, each step a committable/rollbackable action ordered by value-of-information — rather than
+one-shot. Ran the **Step-2 survey** as a 5-lane multi-agent workflow (`wf_d76b4901-23c`) with per-lane
+adversarial source verification; archived **80 verified claims / 93 real http-linked sources** under
+`wiki/survey/` (index `survey/README.md`). Pre-registered the proposal to **v1.0** (§1 hypotheses, §2 per-family
+δ/α + go/kill/pivot + mandatory controls, §5(T) theory, §6 risks all FROZEN before any pilot).
+**Why.** First real exercise of the template; the owner asked for broad capability coverage (sampled dev/test),
+thorough survey + reproduction with a technical-principle/scheme emphasis, local models only (Qwen3-Omni-30B-A3B
+via llama.cpp), and a step-by-step iterative build.
+**Consequences.** (1) **Central falsifiable claim H1** — model-class asymmetry of ICL activation: reward-selected
+in-context conditioning activates an under-exposed capability on the generative class but not the vector class
+(label-free contrastive bi-encoder) — plus H2 (presence map + activation order content/intent ≥ emotion ≥
+speaker) and H3 (task-def vs demos vs instruction richness; label-sensitivity as the cross-class diagnostic).
+(2) **Step-1 feasibility probe → R1 blocker:** the WSL compute env on this machine is **unprovisioned** (no GPU /
+CUDA / uv / `~/.venvs/speechrl`, `~/speechrl-data/{models,datasets,repos}` empty, no llama.cpp; only system
+py3.14) — so the **empirical track (feasibility round-trip + all pilots) is BLOCKED-pending-provisioning**; the
+prior experiments ran on another host. llama.cpp's Qwen3-Omni audio path itself IS supported (libmtmd, verified).
+(3) **Survey refined H1 (partial rollback):** on the generative class naive few-shot demos mostly fix *format*
+not task accuracy (ALICE, arXiv:2603.20433), audio LLMs "read not listen" (VoxParadox, 2605.27772), and speaker
+resists even on (B) (2603.10827) — so the lever is **explicit task-definition + reward selection**, not raw
+demos; added §6 controls (random-reward null, cross-model sign-consistency, acoustic-grounding). The survey also
+**corrected an in-house citation** — LEACE is arXiv:2306.03819 (the feasibility doc's `2104.01767` is
+WhiteningBERT). (4) v1.0 is **pre-registered and compute-ready**; only the empirical track remains, gated on
+provisioning. (5) Survey synthesis agent hit a transient 401 mid-run; synthesized in-loop from the verified lanes.
+
+### 2026-06-26 · Research Proposal Template rewritten: pre-registration form with a two-tier theory/effectiveness gate
+**Decision.** Reviewed the lightweight `Research Proposal Template` (multi-agent workflow: 6 review
+dimensions + adversarial synthesis, grounded in the NeurIPS reproducibility checklist / Registered
+Reports / ACM artifact badging / Gorman-&-Bedrick / Kapoor-&-Narayanan AND our own W4 docs) and
+rewrote it into a **portable (project-agnostic) 9-section pre-registration form**, delivered as
+**paired monolingual EN / 中文 docs** (`Research-Proposal-Template.md` + `Research-Proposal-Template_CN.md`,
+cross-linked, per the repo's README/CONTRIBUTING `_CN` convention). Its core is repo-independent; the
+W1–W4 framing, repo wikilinks, lockfile/tracker, and wiki-sync hooks live only in a clearly-**optional**
+"wiring into a project knowledge base" footer: front-matter →
+falsifiable hypothesis → pre-registered success/kill/pivot criteria → survey & positioning →
+reproduced results (baseline + method pilot, with a Repro Manifest, locked-test/anti-gaming guards,
+and an operational 三方检测 definition) → two-tier theory/effectiveness gate → risks/ethics/data-
+governance → decision & outcome → AI-tools-&-verification table. Renamed the file to the dashed
+wikilink convention ([[Research-Proposal-Template]]) and linked it from the sidebar.
+**Why.** The template's rigor bar was right but lived *implicitly*, so it depended on the reader and
+eroded across works. Two self-inflicted flaws: (1) old requirement #3 demanded a mathematical proof
+of *effectiveness* — a category error for an empirical thesis that contradicts our own feasibility
+doc ([[W4-Training-Free-RL-Feasibility]]: the operator is proved; the P/L/S effectiveness conditions
+are "to verify empirically"); (2) section order (Reproduced Results before the proposal) + no
+pre-registered kill-criteria invited HARKing (author the hypothesis after seeing the numbers).
+**Consequences.** (1) Requirement #3 is now a **two-tier gate** — (T) operator convergence/
+well-posedness (a written justification with stated assumptions suffices; Lean only for finitary
+theorems) and (E) a pre-registered *empirical* effectiveness criterion; effectiveness is measured,
+never proven. (2) The falsifiable hypothesis + success/kill/pivot criteria are committed **before**
+the pilot. (3) New required fields lift existing team practice into the form: Repro Manifest,
+locked-test-set / selection≠metric / full-sweep guards, paired-bootstrap-CI stats, a logged
+independent 三方检测 (a different teammate **or** an AI agent, from a clean checkout), a 3-line
+ethics/licensing field (voiceprints = biometric, SER = affective), and an AI-output verification
+table (anti-hallucination). (4) Over-engineering deliberately rejected to keep it a tight fill-in
+form: ACM badge tiers, a formal in-principle sign-off gate, full datasheets/model-cards per study,
+an NSF budget section, blanket multiple-comparison correction. **Not yet published** — run
+`scripts/wiki-sync.sh` to publish to the GitHub Wiki.
+
 ### 2026-06-25 · Cross-team synthesis closes the goal: SLU/Spoken-QA/SER gains, independently reproduced
 **Decision.** After pushing the 2026-06-24 work, discovered the collaborator ("codex" team) had pushed a
 large frozen-model **policy-surface** Operator-B line to the W4 remote (CoVoST2/FLEURS translation,
@@ -256,6 +436,43 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-02 · 原理/目的/可行三轴深审把 W5「坍缩」，再用真实 best-of-N（llama.cpp）挣回，收敛为一篇诚实的单模型论文：**
+主人判定此前审查仍偏语法语义、未触及**原理/目的/可行**，要求以 **POMDP**（分步、局部观测、迭代+回滚）方式做真正的对抗式审查。
+三份独立敌对专家阅审一致结论：**agent-level/L4 框架不成立**（OSA 理论「证到的是同义反复」——`qstar_product` 即
+`exp(a+b)=exp(a)exp(b)`，`OptSpace-notes.md` 留有把该定理写成相反主张的铁证；有趣处则不可建模、未验证；目的自我否定、
+信息价值≈0；跨会话基准所需数据在冻结集里根本不存在、技术栈未搭）。主人选 **A：坍缩为诚实的单模型论文。跟着证据走。**
+**影响（POMDP 轨迹，完整日志见 `papers/agent-level-tfrl/reviews/pomdp-restructure-log.md`）：**（1）取证式溯源发现论文里的
+content/intent「生成式 best-of-N」其实是**冻结双编码器的余弦检索**——一处此前四轮审查漏掉的**错误归因**，并重跑 MInDS 落一份带
+配对 CI 的可复现产物。（2）57→21 页；提交精确的**副语言负结果**探针（说话人 3×随机、情感 2.4×随机、免训练增益为 null）。
+（3）**新一轮敌对审查发现坍缩后仍有根本缺陷**：omni-embed 的「选择」根本没用到奖励（argmax 余弦，非奖励驱动）——**根本不是
+training-free RL**。（4）主人选 **B：用真实 best-of-N 挣回 RL 主线**。撞上 HF/vLLM 的 int4 加载墙；主人一句**「30B 用 llama.cpp
+跑」**破局。（5）**真正的 training-free RL 落地**：Qwen3-Omni-30B（Q8_0 GGUF、llama.cpp 常驻服务、24GB 笔记本 5090 上 -ngl 28）
+对 LibriSpeech test-other+snr5 每条采样 N 个转写、用可验证 WER 奖励选择。**多种子（3 个生成种子合并，n=144）：oracle best-of-N
+在 N=8 headroom +0.042 [0.029,0.056]、N≥4 显著（N=1<greedy——诚实的序统计爬升）；可部署的无标签 MBR 在每个 N 都不显著**——真实的
+奖励驱动 headroom + 诚实的「已实现 vs 上界」差距。（6）重构：**C1**=该真实 best-of-N；**C2**=诚实的冻结编码器探针（不同算子、非
+RL）；**C3**=只给「符号+上界」的奖励离散度透镜（N-曲线归为序统计），两条 `sorry`-free Lean 引理。（7）**对重构后论文再做四轮新敌对
+审查并收敛：根本→重大→重大→次要，无幸存的根本/重大问题**；一位完整性审稿人把每个 C1 数字逐位复现于已提交产物。**判定：收敛。**
+每个数字都有已提交可复现产物（best-of-N 在 W1 仓、探针在 W4 仓）。新证明的工具能力：**llama.cpp 能在 24GB 笔记本 GPU 上驱动
+Qwen3-Omni-30B 做语音 ASR + best-of-N**（音频输入上游标注为实验性）。分支未推送、wiki 未同步。
+
+**2026-07-01 · W5 提案经四轮「新对手」对抗式审查加固（只改实质、不改措辞；在预设上限收敛）：** 主人判定首轮
+审查不够严格（只一轮、审稿人复用且被自己的清单诱导、meta 曾返回占位输出、部分问题只在措辞上打补丁）。遂重做
+为**多轮对抗式审查**：每轮**全新审稿人**（对此前各轮与「决议台账」双盲），一位**主审**独持台账、只报**真正新增**
+的 critical/major，**只在实质上修复**（用 Lean/GPU 实验/引用核验加强，或直接删除），**循环至干净一轮、上限 4 轮**。
+**为什么**：一份以「机器可验证的诚实」立信的提案，必须扛住独立攻击，而非一次自洽通过；措辞对冲不算解决。
+**影响**：四轮跑满、缺陷等级单调收敛并在上限终止——R1（6 critical+11 major：结构性夸大——「单模型惰性→智能体**恢复**」
+的论点**不被定理支持**，`qstar_product` 证明隔离最优=单体最优，且被自有数据反驳；全文重构、改标题、系统降级为
+**测试床**）→ R2（13 major：重构未传导到最常读章节；KL 方向、前言、情感统计量全部重同步）→ R3（0 critical、4 major：
+相关工作的 β 约定、Lean 状态表 `sorry` 位置、PLDA 标定的证伪器、提案定位）→ **R4/上限**（0 critical、7 major：全为
+内部一致性/保真/**产物完整性**——C1 的 Pinsker/Beirami/Hoeffding 归属、Lean 旧注释、情感基线升级为经典在线变点检测、
+按因子独立的判胜、逐字节一致的附录签名，以及被盲审发现的：已提交的情感 t-CI 是**手工填入而非脚本产出**）。自 R1 起
+每轮都确认**无定理错误、无证明破损**。旗舰情感结果在 5090 上**重跑为 NULL**（跨种子 95% t-CI **[−0.043,+0.116]** 跨 0），
+诚实修正了原 +0.097（单种子 oracle 选层假象）；R4 修好复现脚本使其**产出**该 t-CI 并重跑，令 JSON 真由脚本生成。论文
+现为诚实且精确限定的「理论(增益由奖励**离散度**决定，而非搜索力度或智能体包装；隔离结论是**会计恒等式**) + 有界的
+副语言 NULL + 测试床与预注册证伪计划」，其核心问题（智能体分解相对冻结单模型是否有增益）**明示为开放**——是**提案**
+而非已执行结果。57 页、编译零未定义。六份审查存档 + `ledger.md` 决议台账于 `papers/agent-level-tfrl/reviews/`。提交：
+伞仓 `70b5aef`(R3)、`c2481b4`(R4)；W4 `dd6e8d3`(重跑产物)。分支 `docs/research-proposal-template-and-first-proposal`，未推送。
 
 **2026-06-22 · 把系列重定到「免训练知识激活」主旨，W4 升为旗舰：** 全系列围绕一个主旨——用免训练 RL
 （不改权重/结构）激活 omni/多模态 LLM 预训练中习得的跨模态多粒度任务知识，提升语音任务开箱表现。把
