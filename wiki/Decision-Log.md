@@ -6,6 +6,38 @@
 
 ---
 
+### 2026-07-02 · Deep principle/purpose/feasibility review collapses W5, then a REAL best-of-N (llama.cpp) earns it back — converged as an honest single-model paper
+**Decision.** The owner judged the prior review still too shallow (syntax/semantic, not **原理/目的/可行**), and asked
+for a genuinely adversarial review run as a **POMDP** (step-by-step, partial observation, iterate + roll back). Three
+independent hostile expert reads (principle · purpose · feasibility) reached a conclusive verdict: **the agent-level /
+L4 framing does not survive** (the OSA theory is tautology-where-proven — `qstar_product` = `exp(a+b)=exp(a)exp(b)`,
+smoking gun in `OptSpace-notes.md` — and unmodellable/untested where interesting; the purpose is self-refuting with
+VoI≈0; the cross-session benchmark data is frozen-absent and the stack unbuilt). Owner chose **Option A: collapse to
+an honest single-model paper.**
+**Why.** Follow the evidence even to restructuring; the direction itself was challengeable; substance over prose;
+bounded local GPU pilots authorized.
+**Consequences (the POMDP trajectory, full log in `papers/agent-level-tfrl/reviews/pomdp-restructure-log.md`).**
+(1) **A forensic provenance pilot** found the paper's content/intent "Operator-B best-of-N" numbers were actually a
+frozen **bi-encoder cosine retrieval** — a real mis-attribution the earlier 4-round review missed — and re-ran MInDS
+to a committed paired-CI artifact. (2) Collapsed 57→21 pp; committed a precise **paralinguistic negative** probe
+(speaker 3×-chance, emotion 2.4×-chance, null training-free gain). (3) **A fresh hostile panel then found a
+fundamental flaw even in the collapse:** the omni-embed "selection" never used the reward (argmax cosine, not
+reward-driven) — so it was *not* training-free RL at all. (4) Owner chose **Path B: earn the RL claim with a real
+best-of-N.** The HF/vLLM int4 loader wall was hit; owner steer **"run the 30B via llama.cpp"** unblocked it.
+(5) **Genuine training-free RL, executed:** Qwen3-Omni-30B-A3B (Q8_0 GGUF, llama.cpp, resident server, `-ngl 28` on a
+24 GB laptop 5090) samples N transcripts per LibriSpeech-test-other+snr5 utterance; a verifiable WER reward selects.
+**Multi-seed (3 generation seeds pooled, n=144): oracle-WER best-of-N headroom +0.042 [0.029,0.056] at N=8,
+significant from N=4 (N=1<greedy — the honest order-statistics climb); deployable label-free MBR non-significant at
+every N** — a real reward-driven headroom + an honest realized-vs-headroom gap. (6) Reframed the paper: **C1** = this
+genuine best-of-N; **C2** = honest frozen-encoder probing (distinct operator, not RL); **C3** = a reward-spread lens
+giving only the *sign + ceiling* (the N-curve is order statistics), two `sorry`-free Lean lemmas. (7) **Four fresh
+hostile rounds on the reframed paper converged: fundamental → major → major → minor, 0 surviving fundamental/major;**
+an integrity reviewer reproduced every C1 number against the committed artifact to the digit. **Verdict: CONVERGED.**
+Every number backed by a committed reproducible artifact (best-of-N in the W1 repo; probes in the W4 repo). New tool
+capability proven: **llama.cpp drives Qwen3-Omni-30B audio ASR + best-of-N on the 24 GB laptop GPU** (audio flagged
+experimental upstream). Commits: W1 `b7b4b0d`/`cd6aa92`/`f9d111a`; umbrella `dff7628`→`20a6a31`→`b03c091`→`67b377d`→
+(round-4). Branch `docs/research-proposal-template-and-first-proposal`, not pushed; wiki not synced.
+
 ### 2026-07-01 · W5 proposal hardened by a rigorous FOUR-ROUND fresh-adversary review (substance-only fixes; converged at the pre-registered cap)
 **Decision.** The owner judged the first review pass (the entry below) **not rigorous** — one revision cycle, same
 reviewers primed on their own lists, a meta-reviewer that once returned placeholder output, and several items
@@ -404,6 +436,25 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-02 · 原理/目的/可行三轴深审把 W5「坍缩」，再用真实 best-of-N（llama.cpp）挣回，收敛为一篇诚实的单模型论文：**
+主人判定此前审查仍偏语法语义、未触及**原理/目的/可行**，要求以 **POMDP**（分步、局部观测、迭代+回滚）方式做真正的对抗式审查。
+三份独立敌对专家阅审一致结论：**agent-level/L4 框架不成立**（OSA 理论「证到的是同义反复」——`qstar_product` 即
+`exp(a+b)=exp(a)exp(b)`，`OptSpace-notes.md` 留有把该定理写成相反主张的铁证；有趣处则不可建模、未验证；目的自我否定、
+信息价值≈0；跨会话基准所需数据在冻结集里根本不存在、技术栈未搭）。主人选 **A：坍缩为诚实的单模型论文。跟着证据走。**
+**影响（POMDP 轨迹，完整日志见 `papers/agent-level-tfrl/reviews/pomdp-restructure-log.md`）：**（1）取证式溯源发现论文里的
+content/intent「生成式 best-of-N」其实是**冻结双编码器的余弦检索**——一处此前四轮审查漏掉的**错误归因**，并重跑 MInDS 落一份带
+配对 CI 的可复现产物。（2）57→21 页；提交精确的**副语言负结果**探针（说话人 3×随机、情感 2.4×随机、免训练增益为 null）。
+（3）**新一轮敌对审查发现坍缩后仍有根本缺陷**：omni-embed 的「选择」根本没用到奖励（argmax 余弦，非奖励驱动）——**根本不是
+training-free RL**。（4）主人选 **B：用真实 best-of-N 挣回 RL 主线**。撞上 HF/vLLM 的 int4 加载墙；主人一句**「30B 用 llama.cpp
+跑」**破局。（5）**真正的 training-free RL 落地**：Qwen3-Omni-30B（Q8_0 GGUF、llama.cpp 常驻服务、24GB 笔记本 5090 上 -ngl 28）
+对 LibriSpeech test-other+snr5 每条采样 N 个转写、用可验证 WER 奖励选择。**多种子（3 个生成种子合并，n=144）：oracle best-of-N
+在 N=8 headroom +0.042 [0.029,0.056]、N≥4 显著（N=1<greedy——诚实的序统计爬升）；可部署的无标签 MBR 在每个 N 都不显著**——真实的
+奖励驱动 headroom + 诚实的「已实现 vs 上界」差距。（6）重构：**C1**=该真实 best-of-N；**C2**=诚实的冻结编码器探针（不同算子、非
+RL）；**C3**=只给「符号+上界」的奖励离散度透镜（N-曲线归为序统计），两条 `sorry`-free Lean 引理。（7）**对重构后论文再做四轮新敌对
+审查并收敛：根本→重大→重大→次要，无幸存的根本/重大问题**；一位完整性审稿人把每个 C1 数字逐位复现于已提交产物。**判定：收敛。**
+每个数字都有已提交可复现产物（best-of-N 在 W1 仓、探针在 W4 仓）。新证明的工具能力：**llama.cpp 能在 24GB 笔记本 GPU 上驱动
+Qwen3-Omni-30B 做语音 ASR + best-of-N**（音频输入上游标注为实验性）。分支未推送、wiki 未同步。
 
 **2026-07-01 · W5 提案经四轮「新对手」对抗式审查加固（只改实质、不改措辞；在预设上限收敛）：** 主人判定首轮
 审查不够严格（只一轮、审稿人复用且被自己的清单诱导、meta 曾返回占位输出、部分问题只在措辞上打补丁）。遂重做

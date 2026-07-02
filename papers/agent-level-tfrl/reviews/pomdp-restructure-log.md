@@ -24,6 +24,26 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t16 — Round-4 panel → **CONVERGED** (0 surviving fundamental/major); loop terminates
+- **observation o16 (workflow wf_24d2d71f-893; chair: CONVERGED, minor revision):** all three fresh reviewers at
+  **minor revision**; the integrity reviewer **reproduced every C1 number against the committed artifact to the
+  digit** and confirmed the pooled multi-seed bootstrap is sound (not pseudoreplication). The chair verified the two
+  round-4 "major" tags do NOT survive DISCLOSURE≠RESOLUTION: the "multi-seed confound" rested on a **code misread**
+  (the 3 seeds' 48-utt subsets are near-disjoint fresh draws; the bootstrap correctly *reflects* both variances),
+  and the §7 "spread grows with N" clause is a one-clause editorial slip. **Trajectory: fundamental (R1) → major
+  (R2) → major (R3) → minor (R4). Zero surviving fundamental/major.**
+- **editorial fixes applied anyway (chair: "should be fixed, none a blocker"):** the residual §7:15 "spread grows
+  with N" clause → order-statistics climbing to a fixed ceiling; the notation table + related-work "candidate cards"
+  → "candidate outputs (model-sampled transcripts)", reserving "cards" for the C2 encoder ablation; the abstract's
+  C2 "pool selection" → "read-out configuration search (layer/pooling)", removing the collision with C1's best-of-N
+  pool.
+- **observation o16b:** compiles clean (~27.8k tokens, 0 undefined, 0 residual over-attribution). **The POMDP loop
+  has CONVERGED.**
+- **TERMINAL.** Belief state b ≈ hidden state s*: an honest, modest, internally-consistent single-frozen-model
+  training-free-RL paper — C1 a genuine multi-seed reward-driven best-of-N (significant oracle headroom, honest
+  deployable null), C2 an honest frozen-encoder paralinguistic probe, C3 a sign/ceiling reward-spread lens. Every
+  number is backed by a committed, reproducible artifact.
+
 ### t15 — Step 5'' (round-3 panel) → 0 fundamental; 3 majors fixed incl. a multi-seed C1 re-run
 - **observation o15 (workflow wf_dff3241a-d58; chair NOT converged, 0 fundamental, 3 majors, "strongly
   converging", "genuinely honest, modest", Table 1 reproduces to the digit):** three majors, all fixable:

@@ -233,7 +233,7 @@ bound qualitatively only.
 \hline
 Symbol & Meaning \\
 \hline
-$\cZ$ & inference-time action space (candidate cards; no weights change) \\
+$\cZ$ & inference-time action space (candidate outputs, e.g.\ model-sampled transcripts; no weights change) \\
 $\qo$ & base reference policy $q_0$ (strictly positive, $\sum_z\qo(z)=1$) \\
 $\qz$ & a search distribution $q$ over $\cZ$ \\
 $\qs$ & Gibbs / tilted optimum $\qs(z)=\qo(z)e^{\Rwd(z)/\beta}/\Zpart$ \\
@@ -245,7 +245,7 @@ $\KL{p}{q}$ & Kullback--Leibler divergence \\
 $\Exp$ & expectation $\mathbb{E}$ \\
 $\gain$ & optimization gain $\Fobj{\qs}-\Fobj{\qo}=\beta\,\KL{\qo}{\qs}\ge 0$ \\
 $\spread$ & reward spread $\Rwd_{\max}-\Rwd_{\min}$ \\
-$N$ & number of candidate cards in verifiable selection (best-of-$N$ / reranking) \\
+$N$ & number of candidate outputs in verifiable selection (best-of-$N$ / reranking) \\
 \hline
 \end{tabular}
 \end{center}
