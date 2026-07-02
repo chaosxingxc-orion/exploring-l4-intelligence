@@ -1,17 +1,21 @@
 \section{A Reward-Spread Lens}
 \label{sec:osa}
 
-We keep one lightweight analytic tool, used \emph{qualitatively} to organize the empirical
-contrast between content/intent and paralinguistics --- not as a novel theorem, and not as a
-``machine-checked quantitative ceiling.'' The claim is simple: inference-time verifiable-reward
-selection over a frozen model can only realize gain to the extent that the reward actually
-\emph{spreads} across the candidates it ranks. Where the reward has spread (content, tool/intent),
-selection helps; where it is nearly flat (speaker, emotion on our frozen omni read-out), it cannot.
+We keep one lightweight analytic tool, used \emph{qualitatively} to organize our empirical results
+--- not as a novel theorem, and not as a ``machine-checked quantitative ceiling.'' The claim is
+simple: inference-time verifiable-reward selection over a frozen model can only realize gain to the
+extent that the reward actually \emph{spreads} across the candidates it ranks. It applies directly to
+the genuine training-free RL of \Cref{sec:c1}: the oracle best-of-$N$ headroom on a frozen generative
+omni model is governed by how much the verifiable reward varies across the transcripts the model
+itself samples. Where the reward has spread, best-of-$N$ has headroom that grows with $N$; where it is
+nearly flat, there is nothing for selection to exploit.
 
-Fix a finite candidate set $\cZ$ (the candidate cards a frozen bi-encoder ranks), a strictly
-positive base measure $\qo:\cZ\to\R_{>0}$ with $\sum_{w\in\cZ}\qo(w)=1$, a bounded verifiable reward
-$\Rwd:\cZ\to\R$, and an inverse-temperature $\beta>0$. Write $\Exp_{\qz}[\cdot]$ for expectation
-under $\qz$, adopt $0\log0=0$, and define the tilted (Gibbs) target and its normalizer
+Fix a finite candidate set $\cZ$ (for \Cref{sec:c1}, the $N$ transcripts a frozen generative model
+samples for one utterance), a strictly positive base measure $\qo:\cZ\to\R_{>0}$ with
+$\sum_{w\in\cZ}\qo(w)=1$ (the model's own sampling distribution over candidates), a bounded verifiable
+reward $\Rwd:\cZ\to\R$ (for ASR, negative per-candidate WER), and an inverse-temperature $\beta>0$.
+Write $\Exp_{\qz}[\cdot]$ for expectation under $\qz$, adopt $0\log0=0$, and define the tilted (Gibbs)
+target and its normalizer
 \[
 \Zpart \;:=\; \Exp_{\qo}\!\big[\exp(\Rwd/\beta)\big] \;>\;0,
 \qquad
@@ -20,7 +24,8 @@ under $\qz$, adopt $0\log0=0$, and define the tilted (Gibbs) target and its norm
 together with the KL-regularized objective
 $\Fobj{\qz} := \Exp_{\qz}[\Rwd] - \beta\,\KL{\qz}{\qo}$. This is the standard inference-time
 specialization of KL-regularized reward maximization, whose maximizer is the exponential tilt
-\citep{korbak2022kl,mudgal2024controlled}.
+\citep{korbak2022kl,mudgal2024controlled}; the reward-argmax best-of-$N$ we run in \Cref{sec:c1} is its
+$\beta\to0$ limit.
 
 \paragraph{Master identity: gain is a KL divergence.}
 A one-line algebraic identity (substitute $\Rwd(z)=\beta(\log\tfrac{\qs(z)}{\qo(z)}+\log\Zpart)$ into
@@ -50,7 +55,7 @@ The lens has two exact endpoints, which we have formalized in Lean~4 without \te
 \emph{(i) Flat reward $\Rightarrow$ zero gain} (\texttt{flat\_no\_gain}). If $\Rwd\equiv c$ is constant
 on $\cZ$, then $\Zpart=e^{c/\beta}$, so $\qs=\qo$ and, by \eqref{eq:gain}, $\gain=0$. A reward that
 cannot distinguish the candidates leaves the model unchanged: there is nothing for selection to
-exploit.
+exploit --- when every sampled transcript earns the same WER, best-of-$N$ returns the greedy answer.
 
 \emph{(ii) Non-constant reward $\Rightarrow$ strictly positive gain} (\texttt{gain\_pos\_of\_nonconstant}).
 If $\Rwd$ is non-constant on $\cZ$ (recall $\qo>0$ everywhere), then $\qo\ne\qs$: were they equal,
@@ -61,18 +66,28 @@ yields strictly positive headroom for selection to realize.
 These two lemmas are the strict converse of one another: $\Rwd$ constant $\iff \qs=\qo \iff \gain=0$.
 
 \paragraph{Why the lens explains our results.}
-The lens reads directly onto the empirical contrast of this paper. For \emph{content and intent}, the
-verifiable reward separates candidate cards sharply: on MInDS-14 en-US tool/intent, frozen bi-encoder
-candidate-card selection reaches $\mathrm{Acc}@1\,{=}\,0.984$ versus the raw-schema baseline $0.857$
-($\Delta=+0.126$; \Cref{tab:content}), and SLURP intent corroborates ($0.550\to0.880$). Here $\Rwd$ has
-high spread across candidates, so by \eqref{eq:gain} and endpoint (ii) selection realizes a real gain
---- the inference-time analogue of why best-of-$N$ and reranking pay off in proportion to how much a
-verifiable reward separates candidates \citep{beirami2024bon,gao2023overopt}. For \emph{paralinguistics},
-the picture is the opposite. The frozen omni content read-out carries near-chance speaker information
-and only modest emotion (\Cref{tab:para}), and training-free pool-selection produces no
-significant emotion gain (across-seed $95\%$ CI $[-0.043,+0.116]$; committed artifact
-\texttt{\_repro/emotion\_pool\_paired\_v2.json}). On these factors $\Rwd$ is nearly flat on
-$\mathrm{supp}(\qo)$, so by endpoint (i) there is little spread to exploit and selection cannot help
---- exactly what we observe. The reward-spread lens thus does one job, and only that job: it explains
-why identical training-free selection machinery succeeds on content/intent and fails on
-paralinguistics, without appeal to model class, decomposition, or agentic structure.
+The lens reads directly onto the genuine best-of-$N$ of \Cref{sec:c1}. On the frozen generative omni
+model, the oracle-WER selector (the $\beta\to0$ tilt) reduces WER from a greedy $0.117$ to $0.073$, a
+significant $+0.044$ reduction ($95\%$ CI $[0.024,0.067]$), and this headroom \emph{grows with $N$}:
+$+0.013,\,+0.032,\,+0.044$ at $N=2,4,8$ (\Cref{tab:bon}). Endpoint (ii) is exactly this shape --- the
+model samples transcripts on which the verifiable reward has real spread, so there is strictly positive
+headroom, and drawing more candidates ($N\!\uparrow$) exposes more of that spread and enlarges the gain,
+the inference-time analogue of why best-of-$N$ and reranking pay off in proportion to how much a
+verifiable reward separates candidates \citep{beirami2024bon,gao2023overopt}. Endpoint (i) marks the
+ceiling: were every sampled transcript equally (in)correct, the reward would be flat and no selector
+--- oracle or deployable --- could beat greedy. The deployable label-free MBR-consensus selector
+realizes only a small, boundary-significant fraction of this headroom (WER $0.102$, $+0.014$, $95\%$ CI
+$[-0.0001,0.033]$), an honest realized-vs-headroom gap: the reward spread is present, but a reference-free
+proxy recovers little of it.
+
+The same lens organizes the frozen-encoder probing of \Cref{sec:c2} qualitatively. The frozen content
+bi-encoder exposes reward spread for \emph{content and intent} --- its embedding geometry separates
+transcript- and intent-bearing candidates sharply --- but carries near-chance speaker and only modest
+emotion information (\Cref{tab:para}), so on paralinguistic factors the corresponding reward is nearly
+flat on $\mathrm{supp}(\qo)$ and training-free pool-selection produces no significant emotion gain
+(across-seed $95\%$ CI $[-0.043,+0.116]$; committed artifact
+\texttt{\_repro/emotion\_pool\_paired\_v2.json}). By endpoint (i) there is little spread to exploit and
+selection cannot help --- exactly what the probe observes. The reward-spread lens thus does one job, and
+only that job: it explains why verifiable-reward selection has genuine, $N$-scaling headroom on ASR
+content and why a frozen content encoder surfaces content/intent but not paralinguistics, without appeal
+to model class or agentic structure.

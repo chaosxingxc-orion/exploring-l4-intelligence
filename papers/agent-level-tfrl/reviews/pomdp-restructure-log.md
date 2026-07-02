@@ -24,6 +24,99 @@
   content/intent/QA/paralinguistic sets); only a cross-session corpus is missing (future-work only).
 
 ## Trajectory (newest on top)
+### t13 — Step 4' reframe applied → compiles clean (24pp); Step 5' next
+- **action:** reframe workflow rewrote 01/02/05/07/10 to path B (C1 real best-of-N primary; C2 encoder probing;
+  C3 lens grounded on C1); retitled "Training-Free RL on Frozen Omni Speech Models: Reward-Guided Best-of-N, a
+  Paralinguistic Probe, and a Reward-Spread Lens"; reassembled + recompiled.
+- **micro-observations (compile loop):** added alias labels `sec:c1`/`sec:c2` in 07 (the reframed sections referenced
+  them). Now 0 undefined refs.
+- **observation o13:** paper compiles clean — **24 pp**, ~26.5k tokens, 0 undefined citations/refs, abstract
+  well-formed (single). C1 numbers verified against the artifact (greedy 0.117; oracle 0.073/+0.044 [0.024,0.067];
+  MBR 0.102). SC1 resolved (real reward-driven best-of-N), SC3 resolved ("distinct operators", "no identical
+  machinery" stated 7×), SC4 resolved (SLURP dropped), SC2 resolved (the confounded +0.126 demoted to an honest
+  card-design zero-shot-classification note, not a reward-driven gain). No OSA-2/3/Operator-B/agentic-recovery residue.
+- **action chosen next:** Step 5' — fresh hostile principle/purpose/feasibility panel on the reframed paper; chair
+  decides convergence.
+
+### t12 — GENUINE best-of-N result (n=96) → C1 anchor secured; reframing
+- **observation o12 (committed `_repro/asr_bon_llamacpp_snr5.json`, W1 commit b7b4b0d):** Qwen3-Omni-30B via
+  llama.cpp, LibriSpeech test-other snr5, n=96, pool 8. greedy WER **0.117**; **oracle-WER best-of-N (verifiable-
+  reward argmax): significant headroom** — +0.044 at N=8 (CI [0.024,0.067]), scaling +0.013→+0.032→+0.044 for
+  N=2,4,8; **MBR consensus (deployable, label-free): +0.014 at N=8 (CI [-0.0001,0.033]), boundary-n.s.** SC1
+  RESOLVED: the verifiable reward genuinely drives selection over model-sampled candidates on a frozen model — real
+  training-free RL, with an honest headroom-vs-realized gap. Caveats: llama.cpp audio experimental; snr5 chosen for
+  measurable headroom.
+- **belief update:** C1 = this genuine best-of-N (primary). C2 = omni-embed frozen-encoder PROBING (clean committed
+  paralinguistic negative + an honest note that the encoder also does zero-shot SLU via candidate cards — a
+  card-representation ablation, NOT reward-driven selection, a DISTINCT operator from C1); drop the confounded
+  +0.126 headline (SC2) and SLURP (SC4); state C1≠C2 plainly (SC3). C3 lens now genuinely grounds on C1 (reward
+  spread over sampled candidates governs the oracle headroom; N-scaling) + the C2 contrast. Two frozen models across
+  the two results → frame as "frozen omni speech MODELS," not "single."
+- **action:** Step 4' reframe workflow (01,02,05,07,10 rewritten; 03/11 light edits), recompile, then Step 5'
+  hostile panel.
+
+### t11 — llama-server audio API works (2.8s/gen) → genuine best-of-N running
+- **observation o11:** `llama-server` (Q8 GGUF + mmproj, `-ngl 28`, resident) serves audio via the OpenAI
+  `input_audio` content type; one transcription returns in **2.8 s** with the model resident. → a best-of-N loop is
+  cheap (~24 utts × 9 gens × ~3 s ≈ 11 min).
+- **action:** `scripts/repro_asr_best_of_n_llamacpp.py` (W1) drives the resident server: per LibriSpeech test-other
+  snr5 utt, 1 greedy + 8 temp-sampled transcripts → WER vs ref → **MBR-consensus (deployable)** + **oracle (headroom)**
+  vs greedy, paired-bootstrap CIs, committed artifact `_repro/asr_bon_llamacpp_snr5.json`. Running now (24 utts,
+  pool 8, temp 0.8). This anchors C1 as GENUINE reward-driven training-free RL on a single frozen model.
+
+### t10 — llama.cpp path WORKS → build the real best-of-N
+- **observation o10:** `llama-mtmd-cli` loaded the Q8 GGUF + mmproj with `-ngl 28` (fits 24 GB, partial CPU offload),
+  encoded the audio (436 ms), and transcribed clip 1688-142285-0055 → "Let's go see it now." Load ~3m45 (dominated by
+  31 GB disk read). **Path B is feasible.** Caveat to report honestly: llama.cpp audio input is flagged
+  *experimental* ("may have reduced quality").
+- **action:** since load is ~3.5 min, keep the model resident via `llama-server` and drive a best-of-N client:
+  per utt, 1 greedy (temp 0) + N temp-sampled (temp 0.8, varying seed) transcripts → WER vs ref → MBR-consensus
+  (deployable selector) + oracle-WER (headroom) vs greedy; bounded snr5 subset; committed artifact anchors C1.
+
+### t9 — Owner steer: run the 30B via llama.cpp (GGUF) → the int4 wall is moot
+- **steer:** "qwen-omni-30B 用 llama.cpp 跑" (matches CLAUDE.md). This bypasses the HF/vLLM int4-AutoRound loader
+  wall entirely.
+- **observation o9 (assets found):** on disk — `models/qwen3-omni-30b-a3b-instruct-gguf/Qwen3-Omni-30B-A3B-Instruct-Q8_0.gguf`
+  (31 GB) + `mmproj-…-bf16.gguf` (2.1 GB, the audio/vision projector); llama.cpp built with CUDA at `~/llama.cpp`
+  (`llama-mtmd-cli` handles `--audio`, `llama-server` available). Q8 (31 GB) exceeds 24 GB VRAM → partial CPU
+  offload (`-ngl`), but MoE (3B active) keeps compute cheap.
+- **action:** probe `llama-mtmd-cli --audio` on one snr5 clip (greedy, `-ngl 28`) to verify the GGUF+mmproj+audio
+  ASR pipeline end-to-end + timing. If OK → drive a genuine best-of-N via llama.cpp (greedy + N temp-sampled;
+  MBR-consensus deployable selector + oracle-WER headroom; snr5 subset; committed artifact) to anchor C1 as real
+  training-free RL.
+
+### t8 — Path-B FEASIBILITY WALL (int4 loader), characterized → owner fork (SUPERSEDED by t9: use llama.cpp)
+- **observation o8 (4 probes):** no local generative omni model runs a best-of-N on the 24 GB 5090 with the current
+  stack: moss-audio-8b (custom processor `.py` missing offline), minicpm-o-4.5 (driver hardcodes Qwen3-Omni arch →
+  wrong-arch failure), qwen3-omni-30b full & **thinker-only** (int4 AutoRound experts load as MISSING → HF re-inits
+  them in fp32 → **58 GB → OOM**; vLLM int4 path separately crashed). **Blocker = the AutoRound-int4 LOADER, not raw
+  capacity** — a correctly-loaded 30B-A3B int4 (~15 GB weights) would fit 24 GB.
+- **belief update:** path B is not "reuse W1's best-of-N" (that never ran, same reason); it requires **tooling
+  engineering** — wire an int4 loader (e.g. `auto-round`/`gptqmodel` inference API, likely a pip install) or a vLLM
+  build that supports the quant — with uncertain payoff and a possible network install (vs the frozen-offline
+  discipline). This materially changes path B's cost from the assumption under which it was chosen.
+- **DECISION POINT (owner):** (1) invest in the int4-loader tooling and retry the real best-of-N (bounded but
+  uncertain; may need a pip install), (2) fall back to path A (honest probing reframe — drop the RL framing, describe
+  omni-embed as zero-shot classification + probing, fix SC2/SC4 — bounded, achievable now), or (3) reconsider at the
+  project level. SC2/SC4 fixes apply under any path.
+- **action chosen next:** surface the fork to the owner (do not unilaterally pip-install / sink more time on
+  uncertain tooling without a steer).
+
+### t7 — Step-1'(B) OBSERVATION: W1's best-of-N is scaffolding, not a result; feasibility probe underway
+- **observation o7 (forensic, W1):** W1's ASR best-of-N is **genuine by design** (samples N from Qwen3-Omni-30B via
+  `generative_omni.py`; selectors = **oracle-WER** (upper bound) + **MBR consensus** (the only deployable selector);
+  no reward model/reranker). BUT **no run ever completed**: the sole artifact is degenerate (2 clean utts, all
+  WER 0.0, zero gain); the HF 30B run **stalled loading** on the 24 GB laptop 5090; the vLLM run **crashed**
+  (auto-round int4 engine-init); scripts are **untracked**, artifact **gitignored**, README numberless. So path B has
+  no ready anchor — a genuine best-of-N must be **made to complete** on a model that fits 24 GB, reporting the
+  DEPLOYABLE MBR gain vs greedy (oracle-BoN shown separately as headroom).
+- **belief update:** path B feasibility hinges on getting a local generative omni model to load + sample + complete
+  on 24 GB. The 30B-A3B (24.5 G int4) is borderline/OOM; smaller candidates (moss-audio-8b 16.9 G, minicpm-o 18.7 G)
+  may fit but the driver is Qwen-shaped (processor/chat-template compatibility uncertain).
+- **action:** feasibility probe — load the smallest generative model (moss-audio-8b) via the driver + one greedy
+  transcript on a staged snr5 clip. If it works → run a real best-of-N (greedy vs MBR vs oracle, snr5 subset,
+  committed artifact) to anchor C1. If all local generators fail on 24 GB → report the feasibility wall + options.
+
 ### t6 — Owner DECISION: path B (earn the RL framing with a real best-of-N)
 - **decision:** run a GENUINE reward-driven best-of-N over MODEL-SAMPLED candidates so "training-free RL" is a true
   thesis; omni-embed candidate-card classification + the paralinguistic probe become SECONDARY "encoder probing"

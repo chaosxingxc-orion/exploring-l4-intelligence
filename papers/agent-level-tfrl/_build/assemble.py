@@ -179,9 +179,8 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,
   keepspaces=true,showstringspaces=false,frame=single,framesep=3pt}
 
-\title{Training-Free RL as Verifiable-Reward Selection on a Single Frozen
-Speech Model:\\[2pt]
-\large Content and Intent Gains, a Scoped Paralinguistic Negative, and a Reward-Spread Lens}
+\title{Training-Free RL on Frozen Omni Speech Models:\\[2pt]
+\large Reward-Guided Best-of-$N$, a Paralinguistic Probe, and a Reward-Spread Lens}
 
 \author{Exploring-L4-Intelligence Project}
 \date{}
