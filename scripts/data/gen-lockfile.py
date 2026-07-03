@@ -85,6 +85,7 @@ SOURCE_OVERRIDE = {
     "aime26": ("modelscope-manual", "evalscope (id not recorded; fetch manually)"),
     # models (all fetched from ModelScope)
     "qwen3-omni-30b-a3b-instruct": ("modelscope", "Intel/Qwen3-Omni-30B-A3B-Instruct-int4-AutoRound"),
+    "qwen3-omni-30b-a3b-instruct-gguf": ("hf-manual", "ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF"),
     "moss-audio-8b-instruct": ("modelscope", "openmoss/MOSS-Audio-8B-Instruct"),
     "nemotron3-nano-omni-nvfp4": ("modelscope", "nv-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4"),
     "minicpm-o-4_5": ("modelscope", "OpenBMB/MiniCPM-o-4_5"),
@@ -93,6 +94,7 @@ SOURCE_OVERRIDE = {
 
 MODEL_META = {
     "qwen3-omni-30b-a3b-instruct": "INT4 generation backbone (W1)",
+    "qwen3-omni-30b-a3b-instruct-gguf": "Q8_0 GGUF + bf16 mmproj for llama.cpp -- the W1 genuine best-of-N engine (30B on 24 GB via -ngl 28); file-selective fetch via scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull >110 GB deliberately avoided)",
     "moss-audio-8b-instruct":      "generation comparator (W1)",
     "nemotron3-nano-omni-nvfp4":   "NVFP4 generation backbone (W1)",
     "minicpm-o-4_5":               "GGUF/raw generation comparator (W1)",

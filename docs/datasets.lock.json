@@ -1,13 +1,13 @@
 {
   "_comment": "FROZEN dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Datasets are not in git; this records the exact local snapshot. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md.",
   "frozen": true,
-  "generated": "2026-06-24",
+  "generated": "2026-06-24 (amended 2026-07-03: + qwen3-omni-30b-a3b-instruct-gguf)",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
   "totals": {
     "locked_datasets": 28,
-    "models": 5,
-    "total_bytes": 438863026008,
-    "total_h": "408.7G"
+    "models": 6,
+    "total_bytes": 473554985912,
+    "total_h": "441.0G"
   },
   "datasets": [
     {
@@ -560,6 +560,23 @@
       "task": "-",
       "factor_family": "model",
       "note": "INT4 generation backbone (W1)"
+    },
+    {
+      "name": "qwen3-omni-30b-a3b-instruct-gguf",
+      "kind": "model",
+      "local_subdir": "models/qwen3-omni-30b-a3b-instruct-gguf",
+      "source": {
+        "kind": "hf-manual",
+        "id": "ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF"
+      },
+      "revision": "unknown (no local metadata -- content-fingerprinted)",
+      "status": "COMPLETE",
+      "size_h": "32.3G",
+      "size_bytes": 34691959904,
+      "files": 2,
+      "task": "-",
+      "factor_family": "model",
+      "note": "Q8_0 GGUF + bf16 mmproj for llama.cpp -- the W1 genuine best-of-N engine (30B on 24 GB via -ngl 28); file-selective fetch via scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull >110 GB deliberately avoided)"
     },
     {
       "name": "moss-audio-8b-instruct",

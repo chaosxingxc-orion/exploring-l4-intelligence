@@ -220,6 +220,7 @@ while IFS=$'\x1f' read -r kind name subdir method id rev url zen; do
     hf)                 fetch_hf "$id" "$dest" "$rev" "$rt"  && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
     modelscope)         fetch_ms "$id" "$dest" "$rt"         && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
     modelscope-manual)  warn "$name: optional evalscope set, id not recorded — fetch manually (skipping)" ;;
+    hf-manual)          warn "$name: file-selective GGUF — run scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull deliberately avoided; skipping)" ;;
     git)                if [ "$name" = slurp ] && [ "$kind" = dataset ]; then fetch_slurp "$url" "$rev" "$dest"; else fetch_git "$url" "$rev" "$dest"; fi \
                           && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
     *)                  warn "$name: unknown method '$method'; skipping" ;;

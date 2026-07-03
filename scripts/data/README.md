@@ -1,6 +1,6 @@
 # scripts/data — unified data & model downloader
 
-Models and datasets are **never committed to git** (~410 GB on disk). The set is **FROZEN** to the
+Models and datasets are **never committed to git** (~440 GB on disk). The set is **FROZEN** to the
 snapshot in [`docs/datasets.lock.json`](../../docs/datasets.lock.json) — the single manifest. These
 scripts fetch a local copy into `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. Full reference:
 [`docs/data.md`](../../docs/data.md).

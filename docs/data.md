@@ -1,6 +1,6 @@
 # Data & models (not included in git)
 
-Model weights and datasets are **deliberately kept out of this repository** (~410 GB total on disk).
+Model weights and datasets are **deliberately kept out of this repository** (~440 GB total on disk).
 GitHub only ever holds code, docs, and the download scripts. The dataset set is now **FROZEN** to the
 local snapshot recorded in [`datasets.lock.json`](datasets.lock.json) (see *Frozen set* below) — we no
 longer download new datasets. The `.gitignore` blocks `speechrl-data/` plus all weight/dataset/archive
@@ -9,8 +9,9 @@ formats, so a stray `git add -A` can never push data.
 ## Where it lives
 
 `speechrl-data/` under the repo root by default, resolved as
-`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On WSL2 ext4 (`~/speechrl-data/`) is preferred to avoid
-NTFS overhead — point `SPEECHRL_DATA_DIR` there if you like. Layout: `models/`, `datasets/`, `repos/`
+`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On this machine that repo-root dir on the Windows drive
+(`/mnt/d/…` from WSL) **is** the real data root; ext4 `~/speechrl-data/` holds only the MLflow store
+(`mlruns`). Layout: `models/`, `datasets/`, `repos/`
 (reference clones; SLURP audio lives here too), `manifests/`.
 
 ## Frozen set & unified downloader
@@ -47,7 +48,7 @@ bash scripts/env-setup.sh                       # full stack (torch/verl + downl
 bash scripts/data/fetch-data.sh --install-deps  # lightweight: download deps only (modelscope, aria2, jq, hf), no torch
 ```
 
-## Models (5 local, ~90 GB)
+## Models (6 local, ~122 GB)
 
 The **flagship (W4) backbone is `omni-embed-nemotron-3b`** — a *frozen* omni encoder whose embeddings
 W4 disentangles via training-free RL (never fine-tuned). The generation models are W1's
@@ -56,6 +57,7 @@ reward-guided-RL bases / comparators.
 | Local dir | Size | Source (ModelScope / HF) | Role |
 |---|---|---|---|
 | `qwen3-omni-30b-a3b-instruct` | 24.5G | `Intel/Qwen3-Omni-30B-A3B-Instruct-int4-AutoRound` / `Qwen/Qwen3-Omni-30B-A3B-Instruct` | INT4 generation base (W1) |
+| `qwen3-omni-30b-a3b-instruct-gguf` | 32.3G | `ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF` (Q8_0 + bf16 mmproj only — `scripts/data/fetch-qwen3-omni-gguf.sh`) | **llama.cpp engine for W1's genuine best-of-N** (30B on 24 GB via `-ngl 28`; the vLLM/HF int4 path does not load — see wiki/Inference-Engine-Choice.md) |
 | `nemotron3-nano-omni-nvfp4` | 20.9G | `nv-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4` / `nvidia/…-NVFP4` | NVFP4 generation base (W1) |
 | `minicpm-o-4_5` | 18.7G | `OpenBMB/MiniCPM-o-4_5` / `openbmb/MiniCPM-o-4_5-gguf` | generation comparator (W1) |
 | `moss-audio-8b-instruct` | 16.9G | `openmoss/MOSS-Audio-8B-Instruct` / `OpenMOSS-Team/MOSS-Audio-8B-Instruct` | generation comparator (W1) |
