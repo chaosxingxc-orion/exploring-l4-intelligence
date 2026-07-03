@@ -2,7 +2,7 @@
 title: "Pre-registration — Step 1 Rationality Analysis: Training-Free RL Direction & Omni Agentic Extension"
 date: 2026-07-03
 status: FROZEN-ON-COMMIT
-owner_ack: PENDING
+owner_ack: "ACKED 2026-07-03 (owner, in-session; criteria unchanged from freeze commit b19bff2)"
 null_hypothesis: "2026-07-02 deep-review NO-GO verdict (reviews/deep-review.md) — stands unless overturned by NEW information"
 timebox: "10 working days from the freeze commit"
 ---
