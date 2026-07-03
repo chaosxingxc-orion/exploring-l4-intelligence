@@ -92,6 +92,13 @@ The prosecution defends the 7/02 null on five counts. COUNT 1 (no positive evide
 **Dev grid (144-pool, dev-spent): STRUCTURAL NULL** — all 14 configs tie at red_vs_mbr = 0.00000;
 upper bound 3/144 positions with any pool x session-prior rare-token overlap (sessions 2-9 deep,
 random draws — no surface for the mechanism). Winner by frozen tie-break: V1|0.05|none.
-**Confirmatory slice running** (12 speakers x 12 consecutive reading-order utts, seed 20260703,
-3 replica seeds; freeze commit d4dd117 precedes all generation). PASS/ablation verdict pending —
-this artifact decides G1 / GO-minimal / P-A routing.
+**Confirmatory verdict (single touch, MECHANICAL): NO PASS.** 12 speakers x 12 consecutive
+reading-order utts (seed 20260703), 3 replica seeds, 432 items complete. sel_wer_8 = mbr_wer_8 =
+0.07722 exactly — the memory selector never flipped a single MBR pick even on the designed deep-
+session surface; per-position bins {1-4, 5-8, 9-12} all 0.000. Collateral finding: MBR itself gains
+NOTHING over greedy on this slice (-0.00003, CI [-0.0036, +0.0037]) while oracle headroom is real
+(greedy 0.0772 -> oracle@8 0.0534, +0.0238): deployable label-free capture of the headroom is ~0%.
+PASS(i)=PASS(ii)=False (readings agree); ablation moot (gain 0); Goodhart no-fail.
+Route per frozen criteria: lane result stands as measured — no PASS, P-A trigger NOT met.
+Artifacts: freeze commit d4dd117 precedes all generation; verdict artifact
+`_repro/m5_selector_confirmatory.json`.
