@@ -5,8 +5,6 @@
 > claims tagged `delta_vs_archive` against the 17-file survey archive; every URL adversarially
 > verified (0-hallucination bar). Part-A null hypothesis is INVERTED: the converged paper's positive claim stands unless undermined.
 
-All evidence is in hand. Composing the memo.
-
 # Part-A Memo — Rationality of Training-Free RL on Frozen Omni Speech Models
 
 Role: Part-A analyst, question (i). Null hypothesis (inverted per prereg §7 phase 2): the converged paper's positive claim stands unless undermined. All numbers below were independently recomputed from the committed artifact `projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json` (n=144, 3 generation seeds × 48 disjoint utterances, pool 8, temp 0.8, SNR 5 dB, Qwen3-Omni-30B-A3B Q8_0 via llama.cpp).
