@@ -17,6 +17,7 @@ is synced to this Wiki via `scripts/wiki-sync.sh`.
 - [[Speech-Semantic-Task-Datasets]] — public datasets for the semantic axis (SLU/Spoken-QA/ST/agentic) + ModelScope/hf-mirror fetch scripts
 - [[Architecture]] — repo model & shared library
 - [[Environment-and-Setup]] — WSL2 / CUDA / py3.12 venv / verl
+- [[Inference-Engine-Choice]] — local 30B on 24 GB: llama.cpp (proven) vs vLLM (deferred to W2), measured evidence
 - [[Working-Mode]] — cross-repo conventions
 - [[Per-Work-Status]] — per-work status (changes most often)
 - [[Data-and-Assets]] — models & datasets
@@ -42,7 +43,8 @@ Before starting, read this page and [[Per-Work-Status]]; record notable decision
 旗舰数学（形式化/算子/算法综述）· [[W4-Research-Plan]] 旗舰研究计划与技术方案（波次/关卡/路由）·
 [[Paralinguistic-Suppression-Survey]] 语音注入机制 + 对齐/池化是否压制说话人/情感（C1–C5）+ 修复综述 ·
 [[Speech-Semantic-Task-Datasets]] 语义任务公开数据集（SLU/QA/ST/agentic）+ 取数脚本 ·
-[[Architecture]] 架构与共享库 · [[Environment-and-Setup]] 环境搭建 · [[Working-Mode]]
+[[Architecture]] 架构与共享库 · [[Environment-and-Setup]] 环境搭建 · [[Inference-Engine-Choice]]
+本地 30B 推理引擎取舍（llama.cpp 已验证 / vLLM 留待 W2）· [[Working-Mode]]
 协作约定 · [[Per-Work-Status]] 各工作进度（最常更新）· [[Data-and-Assets]] 模型与数据 ·
 [[AI-Collaboration]] AI 如何把 Wiki 当共享记忆 · [[Onboarding]] 从零跑通 · [[Decision-Log]]
 决策与经验（追加式记忆）。

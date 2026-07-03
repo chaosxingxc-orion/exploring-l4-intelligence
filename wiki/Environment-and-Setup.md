@@ -4,7 +4,8 @@ The authoritative, step-by-step guide is the repo's
 [`docs/setup.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/setup.md).
 This page is the orientation; follow `docs/setup.md` for exact commands.
 
-**Why WSL2.** Compute is **WSL2 Ubuntu, not native Windows**: the RTX 5090 (Blackwell, sm_120) has
+**Why WSL2.** Compute is **WSL2 `Ubuntu-24.04`, not native Windows** (the default `Ubuntu` distro is WSL1 — no GPU;
+always `wsl -d Ubuntu-24.04`): the RTX 5090 (Blackwell, sm_120) has
 no stable native-Windows torch wheels, and verl/vLLM/flash-attn are Linux-only.
 
 **The four phases**
@@ -35,7 +36,7 @@ are in `docs/setup.md` §5.
 [`docs/setup.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/setup.md)；
 本页是导览，确切命令以 `docs/setup.md` 为准。
 
-**为什么用 WSL2：** 算力在 **WSL2 Ubuntu，不在原生 Windows**——RTX 5090（Blackwell, sm_120）没有稳定
+**为什么用 WSL2：** 算力在 **WSL2 `Ubuntu-24.04`，不在原生 Windows**（默认发行版 `Ubuntu` 是 WSL1、无 GPU，务必 `wsl -d Ubuntu-24.04`）——RTX 5090（Blackwell, sm_120）没有稳定
 的原生 Windows torch 轮子，且 verl/vLLM/flash-attn 仅 Linux。
 
 **四个阶段：**（1）WSL2 + CUDA：确保是 WSL2（非 WSL1）Ubuntu，跑 `bash scripts/wsl-setup.sh`，用

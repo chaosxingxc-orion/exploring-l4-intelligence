@@ -39,14 +39,14 @@ projects/       the four work repos (each its OWN git repo; gitignored by this u
 docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads)
 scripts/        wsl-setup.sh, env-setup.sh, mlflow-ui.sh, wiki-sync.sh, data/ (model+dataset downloads)
 wiki/           source for the GitHub Wiki — shared knowledge & memory (push via scripts/wiki-sync.sh)
-speechrl-data/  data root (~410 GB models/datasets/checkpoints) — gitignored, lives in WSL ext4
+speechrl-data/  data root (~440 GB models/datasets/checkpoints) — gitignored; /mnt/d/… from WSL
 CLAUDE.md / AGENTS.md   per-tool operating guides for AI assistants (Claude Code / Codex)
 CONTRIBUTING.md         how to work across the five repos
 ```
 
 ## Environment
 
-**Compute is WSL2 Ubuntu, not native Windows.** The RTX 5090 (Blackwell, sm_120) has no stable
+**Compute is WSL2 `Ubuntu-24.04`, not native Windows** (default `Ubuntu` = WSL1, no GPU). The RTX 5090 (Blackwell, sm_120) has no stable
 native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only — all training runs in WSL2. Python
 is pinned to **3.12** (uv venv at `~/.venvs/speechrl`, on ext4); torch comes from the `cu128` index.
 **Never touch `D:/ai-stack/mem0-venv`** (the isolated mem0 MCP env in `.mcp.json`). Full details:
@@ -74,7 +74,7 @@ server/account). Config: Hydra per work. RL library: verl.
 
 ## Data & models
 
-Weights and datasets (~410 GB) are **never in git** — fetch your own copy locally (`.gitignore`
+Weights and datasets (~440 GB) are **never in git** — fetch your own copy locally (`.gitignore`
 guards `speechrl-data/` so a stray `git add` can't push data):
 
 ```bash

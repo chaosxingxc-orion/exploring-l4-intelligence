@@ -45,5 +45,6 @@ works before the full ML stack is installed.
 - **Config:** Hydra per work (`configs/config.yaml` composing `model/ dataset/ rl/ experiment/`).
 - **Tracking:** local MLflow file store (no server) under `~/speechrl-data/mlruns`.
 - **RL library:** verl (Linux-only; runs in WSL2) for GRPO/PPO with vLLM rollouts.
-- **Artifacts:** datasets/checkpoints/outputs live in WSL ext4 (`~/speechrl-data/`), never in git.
+- **Artifacts:** datasets/checkpoints live in the repo-root `speechrl-data/` on the Windows drive
+  (`/mnt/d/…` from WSL — `SPEECHRL_DATA_DIR`), never in git; MLflow stays in ext4 `~/speechrl-data/mlruns`.
 - **Base model:** Qwen2-Audio by default; swap SALMONN / Qwen2.5-Omni via `models/` + config.

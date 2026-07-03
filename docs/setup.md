@@ -6,7 +6,9 @@ RTX 5090 / Blackwell sm_120 in stable wheels). The system Python 3.14 and
 
 ## 1. WSL2 + CUDA (Phase 1)
 
-WSL2 v2.6.3 is installed; ensure a **WSL2** Ubuntu distro (convert a WSL1 one or install fresh):
+WSL2 v2.6.3 is installed; ensure a **WSL2** Ubuntu distro (convert a WSL1 one or install fresh).
+On this machine the real env is **`Ubuntu-24.04` (WSL2)** — the default `Ubuntu` distro is WSL1 with
+no GPU, so always target it explicitly (`wsl -d Ubuntu-24.04`):
 
 ```powershell
 wsl -l -v                          # check VERSION column
@@ -32,7 +34,8 @@ source ~/.venvs/speechrl/bin/activate
 python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))"
 ```
 
-- venv lives in ext4 (`~/.venvs/speechrl`); datasets/checkpoints/mlruns in `~/speechrl-data/`.
+- venv lives in ext4 (`~/.venvs/speechrl`); datasets/checkpoints in the repo-root `speechrl-data/`
+  (`/mnt/d/…` — set `SPEECHRL_DATA_DIR`); the MLflow store stays in ext4 `~/speechrl-data/mlruns`.
 - torch comes from the `cu128` index; **verl/vLLM/flash-attn are Linux-only** and version-sensitive
   — if `verl`/`vllm` fail, pin versions and prefer a prebuilt `flash-attn` wheel for your
   torch/CUDA/Python combo.

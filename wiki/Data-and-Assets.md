@@ -1,6 +1,6 @@
 # Data & Assets
 
-Model weights and datasets (~410 GB) are **deliberately out of git** — GitHub holds only code, docs,
+Model weights and datasets (~440 GB) are **deliberately out of git** — GitHub holds only code, docs,
 and download scripts. The dataset set is **FROZEN** to the local snapshot recorded in
 [`docs/datasets.lock.json`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/datasets.lock.json)
 (28 datasets + 5 models, with pinned revisions) — we no longer download new datasets. The
@@ -8,7 +8,8 @@ human-readable asset list is the repo's
 [`docs/data.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/data.md).
 
 **Where it lives.** `speechrl-data/` under the repo root by default, resolved as
-`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On WSL2 prefer ext4 (`~/speechrl-data/`). Layout:
+`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On this machine that repo-root dir on the Windows drive
+(`/mnt/d/…` from WSL) **is** the real data root; ext4 `~/speechrl-data/` holds only the MLflow store. Layout:
 `models/`, `datasets/`, `repos/`, `manifests/`, `checkpoints/`, `mlruns/`, `hf-cache/`.
 
 **Fetch / audit.** One unified, lockfile-driven downloader reproduces the exact set — every team runs
@@ -30,12 +31,12 @@ everything is unified in `fetch-data.sh`. Full tables + env knobs: `docs/data.md
 
 ## 中文
 
-模型权重与数据集（≈410 GB）**有意不进 git**——GitHub 只放代码、文档和下载脚本。权威的资产清单（每个
+模型权重与数据集（≈440 GB）**有意不进 git**——GitHub 只放代码、文档和下载脚本。权威的资产清单（每个
 模型与数据集、来源、镜像、环境变量）是仓库的
 [`docs/data.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/data.md)。
 
 **放在哪：** 默认 `speechrl-data/` 在仓库根，按 `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}` 解析；
-WSL2 上优先 ext4（`~/speechrl-data/`）。目录：`models/`、`datasets/`、`repos/`、`manifests/`、
+本机真实数据根就是该仓库根目录（WSL 侧 `/mnt/d/…`）；ext4 `~/speechrl-data/` 只放 MLflow 存储。目录：`models/`、`datasets/`、`repos/`、`manifests/`、
 `checkpoints/`、`mlruns/`、`hf-cache/`。
 
 **拉取/审计：** 统一的、由 lockfile 驱动的下载器复现完全一致的数据集——各团队跑同一条命令得到相同数据

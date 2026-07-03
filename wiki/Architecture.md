@@ -44,7 +44,7 @@ smoke tests pass before the heavy ML stack is installed. Preserve this when addi
 
 **Conventions:** Hydra config per work (`config.yaml` composes `model/ dataset/ rl/ experiment/`);
 local MLflow file store (`~/speechrl-data/mlruns`, no server); verl (Linux-only, in WSL2) for
-GRPO/PPO with vLLM rollouts; artifacts live in WSL ext4 `~/speechrl-data/`, never in git; base model
+GRPO/PPO with vLLM rollouts; artifacts live in the repo-root `speechrl-data/` (`/mnt/d/…` from WSL), never in git; base model
 Qwen2-Audio, swappable to SALMONN / Qwen2.5-Omni via `models/` + config.
 
 ---
@@ -63,5 +63,5 @@ Qwen2-Audio, swappable to SALMONN / Qwen2.5-Omni via `models/` + config.
 
 **约定：** 配置用 Hydra（每个工作 `config.yaml` 组合 `model/ dataset/ rl/ experiment/`）；追踪用本地
 MLflow 文件存储（`~/speechrl-data/mlruns`，无服务器）；RL 库 verl（仅 Linux，在 WSL2 跑）做 GRPO/PPO
-+ vLLM rollout；产物在 WSL ext4 `~/speechrl-data/`，绝不进 git；基座模型默认 Qwen2-Audio，可通过
++ vLLM rollout；产物在仓库根 `speechrl-data/`（WSL 侧 `/mnt/d/…`），绝不进 git；基座模型默认 Qwen2-Audio，可通过
 `models/` + config 换成 SALMONN / Qwen2.5-Omni。

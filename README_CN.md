@@ -36,14 +36,14 @@ projects/       四个工作仓库（各自独立的 git 仓库；被本伞仓 g
 docs/           setup.md（WSL2 + 环境）、architecture.md、data.md（下载）
 scripts/        wsl-setup.sh、env-setup.sh、mlflow-ui.sh、wiki-sync.sh、data/（模型+数据集下载）
 wiki/           GitHub Wiki 的源文件 —— 共享知识与记忆（用 scripts/wiki-sync.sh 推送）
-speechrl-data/  数据根目录（≈410 GB 模型/数据集/检查点）—— 被 gitignore，放在 WSL ext4
+speechrl-data/  数据根目录（≈440 GB 模型/数据集/检查点）—— 被 gitignore；WSL 侧 /mnt/d/…
 CLAUDE.md / AGENTS.md   给 AI 协作者的逐工具操作手册（Claude Code / Codex）
 CONTRIBUTING.md         五个仓库的协作方式
 ```
 
 ## 环境 · Environment
 
-**算力在 WSL2 Ubuntu，不在原生 Windows。** RTX 5090（Blackwell, sm_120）没有稳定的原生 Windows
+**算力在 WSL2 `Ubuntu-24.04`，不在原生 Windows**（默认 `Ubuntu` 是 WSL1、无 GPU）。RTX 5090（Blackwell, sm_120）没有稳定的原生 Windows
 torch 轮子，verl/vLLM/flash-attn 仅 Linux 可用，所有训练都在 WSL2 里跑。Python 固定 **3.12**
 （uv venv 在 `~/.venvs/speechrl`，ext4），torch 走 `cu128` 源。**绝不动 `D:/ai-stack/mem0-venv`**
 （`.mcp.json` 里隔离的 mem0 MCP 环境）。完整说明见 [docs/setup.md](docs/setup.md)。
@@ -70,7 +70,7 @@ bash scripts/eval.sh
 
 ## 数据与模型 · Data & models
 
-权重和数据集（≈410 GB）**永不进 git** —— 自己在本地拉取（`.gitignore` 兜底，`speechrl-data/`
+权重和数据集（≈440 GB）**永不进 git** —— 自己在本地拉取（`.gitignore` 兜底，`speechrl-data/`
 永远不会被误推）：
 
 ```bash

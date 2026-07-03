@@ -6,6 +6,34 @@
 
 ---
 
+### 2026-07-03 · Publication closed out; assets/docs reconciled to reality; inference-engine decision recorded
+**Decision.** Closed every dangling item from the W5 arc in one pass. (1) **Publication:** PR #2 (the
+whole 6/26→7/02 arc) was merged by the owner on 2026-07-02; today the local master was fast-forwarded,
+the wiki synced — which **removed the stale, mis-attributed 2026-06-25 "Operator-B best-of-N" draft
+from the public wiki** (it described the int4/HF path, placeholders unfilled) — and the merged branch
+deleted. (2) **Toolchain committed** (`87154b9`): env-setup Phase 5 (bitsandbytes + cmake/ninja +
+llama.cpp CUDA build, sm_120), the file-selective GGUF fetch script, and
+`speechrl_common.models.generative_omni` (a committed W1 script imported it while it sat untracked);
+`main.bbl` rebuilt to the converged round-4 source (`5f5cfce`); the failed vLLM runner
+(`repro_asr_best_of_n_vllm.py`), the stale 6/25 draft, and the 6/25 TODO note retired. (3) **Lockfile:**
+the Qwen3-Omni GGUF (Q8_0 + bf16 mmproj, 32.3G) added as the **6th frozen model** — new source kind
+`hf-manual` (file-selective; the whole-repo pull >110 GB is deliberately avoided), dispatch added to
+`fetch-data.sh`, regen-stable mappings to `gen-lockfile.py`; totals 408.7G→441.0G. (4) **Docs corrected
+to reality** (~13 files): the real WSL distro is **`Ubuntu-24.04`** (the machine's default `Ubuntu` is
+WSL1 — no GPU), the real data root is the **repo-root `speechrl-data/` on the Windows drive**
+(`/mnt/d/…`; ext4 `~/speechrl-data` holds only `mlruns`), totals ~410→~440 GB. (5) New
+[[Inference-Engine-Choice]] records the measured engine decision (llama.cpp proven — produced W1
+`f9d111a`; vLLM/transformers version pairing deferred to W2); [[Per-Work-Status]] refreshed (W1 genuine
+best-of-N, the emotion NULL correction, the converged cross-work paper).
+**Why.** No dangling state: every number's engine and model must be reproducible from the frozen
+manifest, and operating docs must match the measured environment — the 6/26 "R1 unprovisioned" verdict
+came from probing the wrong distro and the wrong data path.
+**Consequences.** This corrects the 2026-07-02 entry's closing status: the branch IS pushed/merged and
+the wiki IS synced. The lockfile is authoritative including the GGUF, and a regeneration now reproduces
+its entry. Deliberately deferred: the vLLM version pairing (W2), and the open research moves — the
+label-free selector for the realized-vs-headroom gap, the pre-registered H1/H2/H3 pilots (env now
+unblocked), W4's post-NULL experiment queue — which await prioritization.
+
 ### 2026-07-02 · Deep principle/purpose/feasibility review collapses W5, then a REAL best-of-N (llama.cpp) earns it back — converged as an honest single-model paper
 **Decision.** The owner judged the prior review still too shallow (syntax/semantic, not **原理/目的/可行**), and asked
 for a genuinely adversarial review run as a **POMDP** (step-by-step, partial observation, iterate + roll back). Three
@@ -436,6 +464,19 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-03 · 发布线收口；资产/文档对齐现实；推理引擎决策入档：** PR #2（6/26→7/02 全弧线）主人已于
+7/02 合入；本日快进本地 master、同步 wiki（并**从公开 wiki 清除了 6/25 那份占位未填、归因已被推翻的
+「Operator-B best-of-N」草稿**）、删除已合并分支。工具链入库（`87154b9`：env-setup Phase 5 的
+llama.cpp CUDA 构建、按文件取 GGUF 的脚本、补上 W1 已提交脚本断链依赖的 `generative_omni`）；
+`main.bbl` 重建至收敛版（`5f5cfce`）；实测跑不通的 vLLM 脚本与过期草稿/TODO 退役。**GGUF 入 lockfile
+成为第 6 个冻结模型**（新来源类型 `hf-manual`，按文件取、刻意避开 >110 GB 全仓拉取；`fetch-data.sh`
+分发 + `gen-lockfile.py` 映射同步；总量 408.7G→441.0G）。**文档对齐现实**（约 13 个文件）：真实发行版
+是 `Ubuntu-24.04`（默认 `Ubuntu` 为 WSL1、无 GPU）、真实数据根在仓库根 `speechrl-data/`（WSL 侧
+`/mnt/d/…`；ext4 `~/speechrl-data` 只放 `mlruns`）、总量 ~410→~440 GB。新增 [[Inference-Engine-Choice]]
+（llama.cpp 已验证、vLLM 版本配对留待 W2）；[[Per-Work-Status]] 刷新。本条订正 7/02 条目的收尾状态：
+分支已推送合入、wiki 已同步。留待排期的研究项：无标签选择器（收窄 realized-vs-headroom 差距）、
+预注册 H1/H2/H3 pilot（环境已解封）、W4 NULL 后的实验队列。
 
 **2026-07-02 · 原理/目的/可行三轴深审把 W5「坍缩」，再用真实 best-of-N（llama.cpp）挣回，收敛为一篇诚实的单模型论文：**
 主人判定此前审查仍偏语法语义、未触及**原理/目的/可行**，要求以 **POMDP**（分步、局部观测、迭代+回滚）方式做真正的对抗式审查。

@@ -24,14 +24,17 @@ entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main` loop whose RL body is c
 
 ## Environment (important)
 
-- **Compute is WSL2 Ubuntu, not native Windows.** The RTX 5090 (Blackwell, sm_120) has no stable
+- **Compute is WSL2 `Ubuntu-24.04`, not native Windows** — the machine's default `Ubuntu` distro is
+  WSL1 (no GPU), so always target `wsl -d Ubuntu-24.04`. The RTX 5090 (Blackwell, sm_120) has no stable
   native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only. All training runs in WSL2.
 - **Python is pinned to 3.12** in a uv venv at `~/.venvs/speechrl` (ext4). The system Python 3.14 is
   too new for ML wheels — do not use it for the stack. **Never touch `D:/ai-stack/mem0-venv`** (the
   isolated mem0 MCP env from `.mcp.json`).
 - torch from the `cu128` index; if a "no kernel image" error appears, fall back to torch nightly
   `cu128`, then a source build with `TORCH_CUDA_ARCH_LIST=12.0`.
-- Datasets/checkpoints/outputs live in WSL ext4 (`~/speechrl-data/`), **never in git**.
+- Datasets/checkpoints/outputs live in the repo-root `speechrl-data/` on the Windows drive
+  (`/mnt/d/chao_workspace/exploring-l4-intelligence/speechrl-data` from WSL — point `SPEECHRL_DATA_DIR`
+  at it), **never in git**. ext4 `~/speechrl-data/` holds only the local MLflow store (`mlruns`).
 
 ## Common commands
 
@@ -59,8 +62,9 @@ bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
 
 Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
 
-Data & model assets (~410 GB, **never in git**) live in `speechrl-data/` (WSL ext4, gitignored). The
-set is **frozen** to `docs/datasets.lock.json` — the single manifest (28 datasets + 5 models + 7 ref
+Data & model assets (~440 GB, **never in git**) live in the repo-root `speechrl-data/` (gitignored;
+`/mnt/d/…` from WSL). The
+set is **frozen** to `docs/datasets.lock.json` — the single manifest (28 datasets + 6 models + 7 ref
 repos, pinned revisions). One unified, self-contained downloader reproduces it identically across teams:
 
 ```bash
