@@ -7,6 +7,7 @@
 - [[Omni-Embed-Model-Dossier]]
 - [[Architecture]]
 - [[Environment-and-Setup]]
+- [[Inference-Engine-Choice]]
 - [[Working-Mode]]
 - [[Per-Work-Status]]
 - [[Data-and-Assets]]
