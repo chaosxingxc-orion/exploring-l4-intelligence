@@ -39,4 +39,23 @@ uv pip install -e "$REPO_ROOT/common"
 uv pip install verl ray vllm \
   || echo "NOTE: verl/vllm needs attention (Linux-only, version-sensitive) — see docs/setup.md"
 
+# --- Phase 5: LoRA/QLoRA + local GGUF inference toolchain (one-time; covers the full lifecycle:
+#     W1 best-of-N, local 30B inference on 24GB, W2 LoRA-RL, AND post-fine-tune deployment) ---
+# bitsandbytes: 4-bit (QLoRA) base for verl LoRA-RL under tight VRAM.
+uv pip install bitsandbytes
+# cmake + ninja as pip wheels (no sudo / apt needed) to build llama.cpp.
+uv pip install cmake ninja
+# llama.cpp with CUDA (Blackwell sm_120; pin CUDA 12.8 to match torch cu128 — CUDA toolkit comes from
+# wsl-setup.sh, default symlink may point at 13.x). One build serves every downstream need:
+#   - llama-mtmd-cli / llama-server : omni audio inference + `--n-cpu-moe` expert offload (30B on 24GB)
+#   - convert_hf_to_gguf.py + convert_lora_to_gguf.py : post-fine-tune GGUF export (merge path & adapter path)
+LLAMACPP_DIR="${LLAMACPP_DIR:-$HOME/llama.cpp}"
+CUDA_128="${SPEECHRL_CUDA_HOME:-/usr/local/cuda-12.8}"
+[ -d "$LLAMACPP_DIR/.git" ] || git clone --depth 1 https://github.com/ggml-org/llama.cpp "$LLAMACPP_DIR"
+cmake -S "$LLAMACPP_DIR" -B "$LLAMACPP_DIR/build" -G Ninja \
+      -DGGML_CUDA=ON -DCMAKE_CUDA_COMPILER="$CUDA_128/bin/nvcc" \
+      -DCMAKE_CUDA_ARCHITECTURES=120 -DLLAMA_CURL=OFF \
+  && cmake --build "$LLAMACPP_DIR/build" -j 6 \
+  || echo "NOTE: llama.cpp build needs attention — see wiki/Inference-Engine-Choice.md"
+
 echo "Done. Activate with: source $VENV/bin/activate"
