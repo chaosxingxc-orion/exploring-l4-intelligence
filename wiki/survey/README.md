@@ -91,6 +91,27 @@ W1-repo pilot artifacts: `_repro/m3_phase0_selection.json`, `_repro/m3_phase0_ze
 `_repro/m5_selector_dev.json`, `_repro/m5_confirmatory_slice_ids.json`, `_repro/m5_selector_confirmatory.json`,
 `_repro/m5_memo_censuses.json` (12/12 memo numbers reproduced).
 
+## Stage-1 problem-definition campaign — semantic-layer TFRL/ICL (2026-07-04)
+
+> Three-stage methodology now in CLAUDE.md (current stage: 1). Question: is the instruct-prompt
+> rollout optimization space of a frozen omni speech model sufficient for the semantic layer
+> (ASR/SLU/SQA/agentic)? Deliverable: a strict-reviewed survey + a ranked problem-definition doc for
+> the owner's K2 discussion. Runs: wf_d7b939e9-c37 (survey lanes), wf_f2b71475-290 (paper draft),
+> wf_707e82fb-c2a (D5b strict review → MAJOR REVISION), wf_fab1d8d1-ccc (re-review → all-P1-resolved).
+
+- [[2026-07-04-stage1-evidence-regrade]] — D1: prior work re-graded under the Stage-1 lens
+- [[2026-07-04-paralinguistic-premise-consolidation]] — D2: shallow-signal premise (vector settled / generative lit-only)
+- [[2026-07-04-sufficiency-yardstick-memo]] — D3: the H_fix/H_prompt/ρ yardstick (SNR +5 dB corrected)
+- [[2026-07-04-stage1-L1-asr-st]] · [[2026-07-04-stage1-L2-slu]] · [[2026-07-04-stage1-L3-sqa-reasoning]] · [[2026-07-04-stage1-L4-speech-agentic]] — D4 family lanes
+- [[2026-07-04-stage1-X1-prompt-space-quantification]] · [[2026-07-04-stage1-X2-paralinguistic-delta]] · [[2026-07-04-stage1-X3-llm-vlm-testtime-map]] — D4 cross-cutting lanes
+- [[2026-07-04-stage1-3w-crossdomain-comparisons]] — D4 cross-domain WHY/HOW/WHAT triples
+- **[[2026-07-04-stage1-semantic-tfrl-survey]]** — D5a the survey paper (16k words, 171 refs; REVISED-POST-D5B)
+- [[2026-07-04-stage1-survey-d5b-review]] · [[2026-07-04-stage1-survey-d5b-rereview]] — D5b strict review (MAJOR REVISION → all-P1-resolved)
+- **[[2026-07-04-stage1-problem-definition]]** — D5c ranked candidates (top-3: CP-1 H_prompt quantification / CP-3 selector anatomy / CP-8 calibration+PMI); FOR-OWNER-DISCUSSION-K2
+
+W1-repo Stage-1 probe artifact: `_repro/probe_hprompt_vs_hfix.json` (Δ_BM matched-budget, ASR, n=50 [directional-only]);
+scripts `probe_hprompt_vs_hfix.py`, mini-prereg pre-committed at bae2184.
+
 ## Consolidated bibliography (Step-2 model-output survey; all verified, deduplicated)
 
 - [A Large-Scale Probing Analysis of Speaker-Specific Attributes in Self-Supervised Speech Representations](https://arxiv.org/abs/2501.05310)
