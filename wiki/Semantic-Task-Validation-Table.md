@@ -1,18 +1,25 @@
-# Semantic-Task Validation Table (Stage-2 living document)
+# Semantic-Task Validation Table (Stage-1 directional worth-investment checks)
 
-> **Purpose.** The maintainable master table of our flagged speech **semantic** tasks (ASR/ST · SLU ·
-> Spoken-QA/audio-reasoning · Speech-Agentic), each with its **validation set**, **validation goal**,
-> and **validation scheme** — the engineering anchor for the Stage-2 experiments on the K2-selected
-> problems **CP-1** (quantify H_prompt − H_fix), **CP-3** (measure ρ(ASR)), **CP-8** (calibration + PMI
-> on the SLU/MCQ surface), **CP-4** (voice-agent pass@k). See the Stage-1 record:
-> [[2026-07-04-stage1-problem-definition]] (K2-resolved), [[2026-07-04-sufficiency-yardstick-memo]]
-> (the H_fix / H_prompt / ρ yardstick), [[2026-07-04-stage1-semantic-tfrl-survey]] (the reviewed survey).
+> **We are in Stage 1 (theoretical / problem validation).** Per the CLAUDE.md methodology, the
+> experiments below are **small-sample, simple, directional** — each is a cheap "is this direction
+> worth investing in?" check on a K2-selected candidate problem, **not** a large-scale Stage-2
+> validation. Sample sizes are deliberately small (≈50–150 items); a positive directional signal is
+> what justifies the later Stage-2 investment (a fresh Research-Proposal-Template instance with powered
+> n, frozen criteria, full controls). A null/weak directional signal is an equally valid outcome that
+> argues *against* investing further in that problem.
 >
-> **Maintenance rule.** This table is updated as experiments run: the **Result** column is filled from
-> committed `_repro/*.json` artifacts, and every in-house number carries its grade tag
-> (`[directional]` small-n → `[scoped]` → validated). On-disk facts (splits, counts, fields) come from
-> the 2026-07-04 dataset profile; re-profile with `scripts/profile_semantic_datasets.py` if the
-> frozen set changes.
+> **Purpose.** The maintainable master table of our flagged speech **semantic** tasks (ASR/ST · SLU ·
+> Spoken-QA/audio-reasoning · Speech-Agentic), each with its **validation set** (a small slice),
+> **validation goal** (which yardstick quantity / candidate problem it probes), and **validation
+> scheme** (the cheap directional procedure). Candidate problems: **CP-1** (H_prompt − H_fix), **CP-3**
+> (ρ(ASR)), **CP-8** (calibration + PMI on the SLU/MCQ surface), **CP-4** (voice-agent pass@k). Record:
+> [[2026-07-04-stage1-problem-definition]] (K2-resolved), [[2026-07-04-sufficiency-yardstick-memo]],
+> [[2026-07-04-stage1-semantic-tfrl-survey]].
+>
+> **Maintenance rule.** The **Result** column is filled from committed `_repro/*.json` artifacts; every
+> in-house number carries a grade tag — at Stage 1 that is `[directional | small-n | not
+> significance-bearing]`. A directional result never confirms/establishes anything; it only signals
+> whether Stage-2 investment is warranted. On-disk facts from the 2026-07-04 dataset profile.
 
 ## 0. The yardstick quantities each experiment measures (validation goals, defined once)
 
@@ -83,12 +90,14 @@ macro-F1, BLEU, chrF, EER):
 extract `mmar-audio.tar.gz` + fleurs-r tars (finish 2 `.aria2`); fetch mmsu `data/*.parquet` (labels);
 covost2 audio needs Common Voice (out of frozen set — a lockfile-expansion decision); tau2 voice needs TTS.
 
-## 6. Execution order (GPU experiments on the frozen omni model; modern selectors only)
+## 6. Execution order (small directional GPU checks on the frozen omni; modern selectors only)
 
-> **Methodology note (owner steer, 2026-07-04).** Experiments run on **GPU** against the frozen
-> omni model (llama.cpp Qwen3-Omni-30B) and modern LLM selectors. **No n-gram / n-best LM rescoring**
-> — that classical path is off-thesis for training-free RL on frozen omni + modern LLMs. "Cheapest
-> first" means smallest fresh slice, not falling back to CPU/traditional methods.
+> **Methodology note (owner steer, 2026-07-04).** (a) **Stage 1 = small samples.** Each check uses a
+> small slice (≈50–150), simple design, just enough to see whether the direction shows a signal worth
+> a Stage-2 investment — no large-n runs here. (b) **GPU + modern models.** Checks run on the frozen
+> omni (llama.cpp Qwen3-Omni-30B) and modern LLM selectors; **no n-gram / n-best LM rescoring** (that
+> classical path is off-thesis and was reverted). "Cheapest first" means smallest slice / reuse of
+> generations, never a fallback to traditional CPU methods.
 
 1. **CP-1 SLU arm on MInDS-14** — K task-definition instructions × N on the frozen omni; oracle-over-K
    intent accuracy vs the fixed instruction, + a random-instruction control (b1 floor). The
