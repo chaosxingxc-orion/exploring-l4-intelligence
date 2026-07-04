@@ -123,6 +123,27 @@ Deliberately scoped — K-Dense `scientific-agent-skills`, the community `camero
 pack, and the `lean-lsp-mcp` server are intentionally **not** installed: for formal proof we align
 on the official Lean skills only, to keep the footprint light.
 
+## Research methodology — three stages (current stage: 1)
+
+Every research thread moves through three stages; each deliverable states its stage.
+
+1. **Stage 1 — Problem definition (问题定义).** Goal: pin WHICH specific research problem to
+   solve. The core work is ARGUMENTATION — ample survey of what problems exist and what
+   approaches others use — never reliance on experiments. Method exploration must sweep the
+   broader AI literature (text LLM and visual LLM methodology carries as much guidance as
+   speech-LLM work). In-house runs are small-sample quick validations only: cheap, single-touch,
+   tagged `directional-only`; small-n lacks significance and can settle nothing. Stage 1 ends
+   with an owner discussion that selects the problem — never an automatic rollover into Stage 2.
+2. **Stage 2 — Solution validation (方案验证).** Large-scale samples solidify the design and
+   hypotheses: a fresh Research-Proposal-Template instance, pre-registered frozen criteria,
+   paired-bootstrap CIs, full controls, adversarial review — the existing template machinery.
+3. **Stage 3 — Publication (论文发表).** Full experimental substantiation, independent
+   reproduction, hostile review to convergence.
+
+Evidence keeps the grade of the stage that produced it: a Stage-1 number stays
+hypothesis-grade until re-established at Stage 2. Records are append-only — re-grade via a
+dated reflection doc, never rewrite. When reading pre-2026-07 records, apply this lens.
+
 ## Shared knowledge & memory (README + Wiki)
 
 - **Canonical onboarding is the root `README.md` / `README_CN.md`** — read it first.
