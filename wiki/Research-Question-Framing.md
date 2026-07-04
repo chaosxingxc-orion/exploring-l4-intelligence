@@ -42,12 +42,29 @@ Each check measures H_prompt − H_fix and/or ρ on one surface; see [[Semantic-
   (near-saturated); b2-share over the random-label floor only +0.013 (CI [0.0,+0.033]); the fixed instruction
   wins best on 143/150. **Prompt-space ≈ nil on easy intent** — but the surface is near-ceiling, so this is
   as much 'ill-posed surface' as 'insufficient space'. *(directional)*
-- Pending: SQA-MCQ (E3), selector anatomy ρ (E4), voice-agent (E5).
+- SQA-MCQ, MMAU-mini (E3, n=150 **done**): greedy 0.640 (non-saturated). **The decisive split:**
+  **H_fix = +0.133** (condition (a) support is REAL and large — sampling reveals much better answers);
+  **H_prompt − H_fix = +0.020** (CI [−0.02,+0.06], n.s.; b2 vs generic +0.027, n.s.) — condition (b)
+  prompt-reachability ≈ 0 *even where headroom exists*; and **majority = greedy = 0.640** — condition
+  (c) realization ≈ 0 (the deployable selector harvests 0% of the +0.133 headroom). *(directional)*
+- Pending: selector anatomy ρ (E4 — now pivotal), voice-agent (E5).
 
-**Current lean (honest, not yet an anchor).** Both legs point the same way *so far*: the prompt-space
-contribution looks **small / not-clearly-realizable** on the surfaces checked. But we have not yet
-tested the harder / less-saturated surfaces (SQA reasoning, multilingual/OOD intent, agentic) where
-prompt structure could matter more. **We do not anchor Q1 until enough surfaces are checked.**
+**Current lean (honest, sharpening — not yet a formal anchor).** Across BOTH an easy surface (E1
+intent, near-saturated) and a hard, non-saturated surface (E3 MMAU, greedy 0.64) the picture is
+consistent and now *decomposed by condition*:
+- **(a) support is REAL** where the task is non-trivial: E3 H_fix = +0.133 (the frozen q₀ holds much
+  better answers than greedy; sampling reveals them). So best-of-N / sampling-based training-free RL
+  has genuine room.
+- **(b) the instruct-prompt / ICL contribution ≈ 0** on both surfaces (H_prompt − H_fix ≈ 0, not
+  b2-genuine). Instruction diversity is **not** the lever — this is the specific thing Q1 asks about,
+  and the directional answer is leaning **insufficient**.
+- **(c) label-free realization ≈ 0** (E3 majority = greedy exactly; 0% of the +0.133 headroom harvested).
+The nuance that matters for the branch: the value that exists lives in **sampling-support (a)**, which
+neither **prompting (b)** nor **deployable selection (c)** currently captures. So the honest reframing
+is: the *instruct-prompt optimization space* looks insufficient (→ 2.2 territory), but the *sampling
+support* is real and the open lever is **(c) realization** — the pivot to CP-3 (E4). We still owe more
+surfaces (multilingual/OOD, agentic) before a formal anchor, but the (a)/(b)/(c) decomposition is the
+finding.
 
 ---
 
