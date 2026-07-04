@@ -21,7 +21,8 @@ Let m be the family metric, K an instruction/task-definition set size, N a sampl
 
 - **H_fix(T, N)** — oracle-over-sampling headroom under ONE fixed instruction.
   *(Condition (a), SUPPORT, restricted to the current setup. In-house scoped anchor: ASR
-  +0.0418 [0.0289, 0.0564] @ N=8/SNR-5 — one instruction, one model, one condition.)*
+  +0.0418 [0.0289, 0.0564] @ N=8, +5 dB SNR (mild additive noise; the noise-injection math confirms
+  `snr_db=5` → noise power = signal/3.16 → +5 dB, NOT −5) — one instruction, one model, one condition.)*
 - **H_prompt(T, K, N)** — oracle headroom when sampling ranges over K instructions × N rollouts.
   **H_prompt − H_fix is the prompt-space contribution** — zero in-house measurement, zero
   published quantification for omni speech models (verified). This difference is the campaign's

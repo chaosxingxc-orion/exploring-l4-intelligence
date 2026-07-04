@@ -26,7 +26,7 @@ Frozen ASR fabricates fluent content absent from the audio, concentrated on sile
 
 ### P3-oracle-deployable — ladder: c
 
-The n-best oracle-vs-deployable selection gap: large oracle WER headroom exists in sampled/beam pools, but label-free selectors realize only a small fraction. Model-internal confidence is exhausted (11 CTC-internal scoring strategies give no significant gain over greedy at G=16; score-WER correlation degrades with pool size), self-certainty stays significantly below oracle at every N in the text domain, and HyPoradise frames the reranking upper bound that only trained correction surpasses. House anchor (stage-1 directional only, W1 repo): oracle +0.0418 WER reduction @ N=8/SNR-5 vs MBR realizing ~0-10% of it.
+The n-best oracle-vs-deployable selection gap: large oracle WER headroom exists in sampled/beam pools, but label-free selectors realize only a small fraction. Model-internal confidence is exhausted (11 CTC-internal scoring strategies give no significant gain over greedy at G=16; score-WER correlation degrades with pool size), self-certainty stays significantly below oracle at every N in the text domain, and HyPoradise frames the reranking upper bound that only trained correction surpasses. House anchor (stage-1 directional only, W1 repo): oracle +0.0418 WER reduction @ N=8/+5 dB SNR vs MBR realizing ~0-10% of it.
 
 **Metric:** rho = realized fraction of n-best oracle WER reduction by label-free selectors; WER gap to o_nb oracle
 
