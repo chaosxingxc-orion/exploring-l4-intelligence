@@ -20,14 +20,28 @@ identities and bounds**, no iterative-process convergence:
 - **Regret.lean** — `regret_O_sqrt_log`: best-of-N regret = O(√log N). A **rate**, but for a static
   selection, not an iterated process.
 - **OptSpace.lean** — the OSA suite (`gain_eq`, `flat_no_gain`, `gain_le_of_hoeffding` = gain ≤
-  spread²/8β, `gain_product`, `qstar_product`). **These are the identities the 2026-07-02 review
-  correctly flagged as tautology-where-proven** — `qstar_product` is exp(a+b)=exp(a)exp(b). They
-  bound *selection on a fixed q₀*; they say nothing about convergence of an iterative expansion.
+  spread²/8β, `gain_product`, `qstar_product`). They bound *selection on a fixed q₀*. Two are now
+  load-bearing for Q1's branch 2.2: **`gain_pos_of_nonconstant`** (gain strictly positive iff the
+  reward is non-degenerate — the (a)-support anchor) and **`gain_product`/`qstar_product`** (a
+  context-isolated agent composition has gain = sum of component gains and optimum = monolithic optimum
+  → *adding an isolated agent buys no headroom; extra gain requires a genuinely new non-degenerate
+  reward*). The latter is the machine-checked statement that an agentic system helps only by enlarging
+  the reward, not the agent count.
+- **Realization.lean (NEW, 2026-07-04, sorry-free, VERIFIED)** — the **C4** constraint formalized:
+  `realized_gap_le_two_tau` (R(oracle) − R(selector) ≤ 2·τ, τ = sup|R̂ − R|), `exact_estimator_is_oracle`
+  (τ=0 ⇒ ρ=1), and the **convergence theorem** `realized_tendsto_oracle` (along any selector sequence
+  with τ_n → 0, realized reward → oracle, by squeeze). This is the first genuine *convergence* result
+  in the library, with τ as the explicit constraint term. It ties directly to the measured (c) gap.
 
-**Diagnosis.** We have the static theory of condition (a) support and (c) selection. We have **no
-convergence theorem** for any iterative training-free-RL scheme, and **no theorem at all** for
-condition (b) reachability (moving q₀ by conditioning) — the survey's explicit gap. That is exactly
-what the new rule requires us to build before any 2.1/2.2 proposal is "theory-backed."
+**Diagnosis (updated 2026-07-04).** We have the static theory of condition (a) support (`OptSpace`,
+`Tilting`), and now a **verified convergence theorem for condition (c) realization** (`Realization`:
+C4, with τ→0 ⇒ ρ→1). Full `TfrlProofs` builds against Mathlib v4.31.0 (8568 jobs, success); all
+cited theorems sorry-free (the only `sorry` is BestOfN's documented Beirami order-statistics
+derivation). What remains: an *iterative-process* convergence theorem for a full training-free-RL scheme
+(C1 monotone-improvement / C2 budget-cap as iterated processes — the pieces `F_sub_eq_beta_mul_kl`,
+`gain_le_of_hoeffding`, `regret_O_sqrt_log` exist but are not yet assembled into an iterate), and
+**no theorem at all** for condition (b) reachability — the survey's explicit gap. C1/C2 are the
+natural next formalizations if branch 2.1 is taken; (b)'s absence is itself part of the 2.2 anchor.
 
 ## 2. Where convergence fails — and the constraint term that fixes each failure
 
@@ -41,7 +55,7 @@ over-optimization) are non-convergence. Four constraint terms recover it; each i
 | **C1** | Policy drifts too far per step → oscillation / collapse | **KL trust-region** KL(q_{t+1}‖q_t) ≤ ε (equivalently the β in the exp-tilt bounds step size) | *If every step's KL ≤ ε and per-step reward gain ≥ δ(ε) > 0, the process is monotone and converges to a fixed point; gain telescopes to Σδ.* Builds on `F_sub_eq_beta_mul_kl`. |
 | **C2** | Over-optimization: proxy reward ↑ while gold reward ↓ | **Budget cap N ≤ N\*** (the HedgeTune / Best-of-Poisson interior optimum) | *Realized gold-gain(N) is unimodal with a provable interior max N*; for N > N* the gold gain strictly decreases.* Extends `regret_O_sqrt_log` from monotone-bound to unimodal-with-cap. |
 | **C3** | Conditioning/memory drifts faster than the estimator can track → inconsistency | **Slow-drift / Lipschitz** ‖q₀(c_{t+1}) − q₀(c_t)‖ ≤ L·η_t, Σηₜ = ∞, Σηₜ² < ∞ (Robbins–Monro) | *Under the drift bound, the reward-estimate is consistent and the iterate converges a.s. to the constrained optimum.* This is the rigorous form of JitRL's asymptotic-consistency-under-slow-drift. |
-| **C4** | Deployment reward is estimated R̂ ≠ R → Goodhart; realized gain unbounded-below | **Estimation-error bound** ‖R̂ − R‖∞ ≤ τ (or a calibration/KL penalty on the selector) | *Realized gain ≥ oracle-headroom − f(τ); with τ→0 the selector realizes the full headroom (ρ→1).* This ties the theory to the measured ρ gap (the (c) leg). |
+| **C4 ✅ DONE** | Deployment reward is estimated R̂ ≠ R → Goodhart; realized gain unbounded-below | **Estimation-error bound** ‖R̂ − R‖∞ ≤ τ (or a calibration/KL penalty on the selector) | **FORMALIZED & VERIFIED** in `Realization.lean` (sorry-free): `realized_gap_le_two_tau` (R(oracle)−R(selector) ≤ 2τ), `realized_tendsto_oracle` (τ_n→0 ⇒ realized→oracle). Ties the theory to the measured ρ gap (E3/E4: ρ≈0 because τ large — confidently wrong). |
 
 **Why this is real content, not tautology.** Each theorem has the two-part structure the review
 demanded: (i) a **negative result** — the unconstrained process provably does not converge (or is
