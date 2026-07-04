@@ -63,7 +63,9 @@ instrument*, not necessarily about the *space*.
   greedy → **H = +0.000**, and trim adds nothing to the speed pair. The gate compares **time-averaged**
   log-mel, which is length-robust *by construction*, so a ±10% time-stretch scores 0.993 and passes while
   changing duration/tempo/counts — exactly the leakage MMAU's temporal/counting items are vulnerable to.
-  **So E6′ does not establish a valid multimodal conditioning gain.** The two stronger multimodal
+  **So E6′ does not establish a valid multimodal conditioning gain.** (Budget note: even taken at face
+  value, H_mm's baseline is a single greedy decode while the text channel's H_prompt is oracle-over-8, so
+  the two "(b)" numbers are not budget-comparable; a budget-matched sampling control was not run.) The two stronger multimodal
   sub-channels — **M2** audio few-shot ICL and **M3** leakage-audited cross-modal (transcript/lattice)
   injection, where the survey's own evidence is strongest ([134][112][136]) — were **not tested.**
 → On the tested levers, reachability ≈ 0; but the decisive levers (optimized prompt search; M3 cross-modal

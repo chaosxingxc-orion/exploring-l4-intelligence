@@ -38,6 +38,14 @@ blocks Accept. **Decision: MAJOR REVISION.** Applied revision → [[2026-07-04-Q
 | 8 | MAJOR (formal) | **FM-1** §5 "ρ→1 **iff** τ→0" — theorem proves only forward. **FM-2** `gain_le_of_hoeffding` is hypothesis-gated (S assumed, like Beirami) — disclose symmetrically. | "iff"→"when"; Hoeffding cap disclosed as hypothesis-gated. |
 | 9 | MINOR | rms_norm excluded by arbitrary 0.98 despite owner blessing loudness-norm (DA M3); τ inferred-from-ρ circular (Domain m2); ProGRes/RECOVER/PromptingWhisper not engaged (Domain m3); audio-EXPERIMENTAL/Q8_0 confound (Meth m7); CI terminology (Meth m5); unit mixing (Domain m4); glossary (EIC ED-2). | Addressed in v2 threats/limits + wording. |
 
+## Re-review verification (fresh adversary, v2)
+A fresh verification reviewer checked v2 line-by-line against the must-fix list and **independently
+re-derived the decisive recomputation** (oracle{original,trim}=0.640=greedy → +0.000; oracle{original,+both
+speeds}=0.700; every cited mel-cosine matches the artifact). **Verdict: ACCEPT** — all three CRITICALs (1,2,3)
+and MAJORs 4/6/7 fully addressed; no new over-claim or over-correction (v2 declines to call either (b) or the
+selector class "barren", keeps both branches live). Sole note: item 6's budget-mismatch was moot after the
+H_mm withdrawal but not explicitly stated in v2 — now closed with a one-line disclosure in §2(b).
+
 ## The corrected verdict (one line)
 Not "ICL insufficient." On **one** MMAU MCQ surface of **one** quantized omni at **one** operating point,
 **un-optimized instruction diversity and cheap self-referential selection fail to harvest a real oracle
