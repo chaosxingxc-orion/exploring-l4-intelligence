@@ -31,23 +31,31 @@ TEXT sub-channel of c** — they found the text-conditioning contribution ≈ 0.
 conditioning channel moves the rollout is the omni-specific, still-untested part of Q1, and is the
 priority next check. So H_prompt below is understood over the **full** c = {text} × {multimodal}.
 
-**Integrity constraint on multimodal conditioning (owner, 2026-07-04) — this rules out a whole class
-of invalid designs.** `oracle-over-K` is only a valid measure of a conditioning benefit when the K
-variants are **semantically equivalent presentations of the same information**. Text-instruction
-variants (E1/E3) qualify — the audio and the answer-relevant evidence are untouched. **Acoustic
-transforms do NOT** — denoise/band-pass/speed/pre-emphasis/trim alter the answer-relevant audio
-evidence on an audio-reasoning task, so `oracle-over-acoustic-variants` would report a **fabricated**
-gain (content leakage + oracle cherry-picking). We do not inject multimodality by any route that could
-leak or corrupt the semantic content. The **valid** multimodal-conditioning levers are therefore:
-- **(M1) content-preserving robustness** — a *single, uniformly-applied* transform that provably
-  preserves content (loudness normalization is the clearest; measure the accuracy delta vs raw, **no
-  oracle-over-variants**, same transform on every item);
-- **(M2) non-leaking audio few-shot / in-context exemplars** — prepend (audio, answer) pairs from
-  *other* items to condition the model; the test item's answer is never in the context, so no leakage;
-  this is genuine multimodal ICL and the honest way to test whether audio conditioning moves the rollout;
-- **(M3) cross-modal injection only where it provably adds no answer information** (e.g. a text view of
-  the audio for a task whose answer is not recoverable from that text) — case-by-case, leakage-audited.
-Any multimodal design must pass a leakage audit before it runs.
+**Integrity constraint on multimodal conditioning — judged at the FEATURE level (owner correction,
+2026-07-04).** The semantic representation of audio does **not** live in the raw waveform; it lives in
+the **high-order features (log-mel / FBank / MFCC)** that the model's audio encoder (Qwen3-Omni's
+Whisper-style log-mel front end) actually consumes. So leakage/equivalence must be judged **at the
+feature level, not the signal level** — my earlier blanket claim that "any acoustic transform changes
+the answer-relevant evidence" was wrong at the wrong level of analysis. The corrected criterion:
+
+> A waveform transform is a **valid, semantically-equivalent** conditioning (so `oracle-over-K` over
+> it is legitimate, exactly as for text-instruction rewording) **iff it preserves the task-relevant
+> FBank/MFCC content** — neither removing features the answer depends on nor adding features that
+> encode the answer. This is **measurable**: compare the log-mel/MFCC of original vs transformed and
+> require the task-relevant structure to be preserved (e.g. high mel-band cosine similarity), and it
+> is **task-aware** (a denoise is feature-preserving for "what was said" but feature-destroying for
+> "what is the background sound").
+
+Consequences: **loudness normalization is feature-invariant** (a log-domain offset — the mel *shape*,
+which carries the semantics, is preserved) → safe and oracle-legitimate. **Band-pass / aggressive
+denoise remove mel bins** → feature-altering → invalid *for tasks that depend on that content*. **Small
+pitch-preserving speed** mostly preserves mel structure for content questions but changes it for
+counting/duration. So the design rule is: **run a per-transform FBank/MFCC-invariance audit, keep only
+the transforms that provably preserve the task-relevant features, report the audit alongside the
+result.** The universally-clean levers remain: **(M1)** feature-invariant transforms (loudness-class,
+audited); **(M2)** non-leaking audio few-shot ICL (exemplars from *other* items — the test answer is
+never in context); **(M3)** leakage-audited cross-modal injection. Every multimodal design ships its
+feature-level leakage audit before it runs.
 
 **Program-level sufficiency** =
 across the semantic layer, instruct-prompt rollout on the frozen omni reaches enough headroom,
