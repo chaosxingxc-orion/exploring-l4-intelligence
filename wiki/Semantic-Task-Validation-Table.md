@@ -31,7 +31,7 @@ pass@k (H_fix) + reward-realized ρ on agent rollouts.
 
 | Dataset | 验证集 (split · n) | Verifiable reward | Serves | 验证目标 | 验证方案 | Status | Result |
 |---|---|---|---|---|---|---|---|
-| **librispeech** | `test.other` 2,939 · `test.clean` 2,620 · `validation.other` 2,864 · `validation.clean` 2,703 (parquet, audio bytes) | WER (`asr_reward`) | **CP-3**, CP-1(ASR), CP-2 | ρ(ASR): what fraction of oracle headroom a label-free selector harvests; H_prompt−H_fix on ASR | CP-3: re-score the committed C1 pools (`_repro/asr_bon_llamacpp_snr5.json`, 144 utts × 8) with self-certainty + frozen-LM PLL-MBR utility + overlap-MBR vs pool oracle — **CPU, no generation**. CP-1: K-instruction scored search, oracle-over-K vs fixed, on a fresh `test.other` slice + random-instruction control | **CP-3 ready (on-disk pools)**; CP-1 needs llama-server | — |
+| **librispeech** | `test.other` 2,939 · `test.clean` 2,620 · `validation.other` 2,864 · `validation.clean` 2,703 (parquet, audio bytes) | WER (`asr_reward`) | **CP-3**, CP-1(ASR), CP-2 | ρ(ASR): what fraction of oracle headroom a label-free selector harvests; H_prompt−H_fix on ASR | CP-3 (**GPU, modern selectors** — NOT n-gram/n-best rescoring): regenerate pools **with per-token logprobs**, then compare **self-certainty** (omni token-confidence), a **frozen-LLM reranker/judge** (the omni or a modern text LLM scoring candidates), and consensus/MBR vs the pool oracle. CP-1: K-instruction scored search, oracle-over-K vs fixed, on a fresh `test.other` slice + random-instruction control | **needs llama-server (GPU)** | — |
 | **covost2** | `dev`/`test` per pair (e.g. `es_en` test) — TSV | BLEU/chrF (`bleu`/`chrf`) | CP-1(ST), CP-2 | H_prompt−H_fix on ST | (deferred) | **BLOCKED — audio absent** (needs Common Voice, not in frozen set); no source-sentence column | — |
 | **fleurs-r** | 12 langs · `test.tsv` (~264/lang) | WER/CER; LID acc | CP-1(ST/LID) | H_prompt−H_fix on ST/LID | (deferred) | **BLOCKED — audio tarred**, 2 incomplete `.aria2`; no translation column (ST needs cross-lang pairing) | — |
 
@@ -83,15 +83,23 @@ macro-F1, BLEU, chrF, EER):
 extract `mmar-audio.tar.gz` + fleurs-r tars (finish 2 `.aria2`); fetch mmsu `data/*.parquet` (labels);
 covost2 audio needs Common Voice (out of frozen set — a lockfile-expansion decision); tau2 voice needs TTS.
 
-## 6. Execution order (cost-first, per the K2 suggested sequencing)
+## 6. Execution order (GPU experiments on the frozen omni model; modern selectors only)
 
-1. **CP-3 selector anatomy on the committed C1 librispeech pools** — CPU-only re-scoring, no generation,
-   directly tests the house `ρ(ASR) ≈ 0` prior with self-certainty + frozen-LM PLL-MBR + overlap-MBR.
-   *First experiment; cheapest genuine measurement.*
-2. **CP-8 calibration on MInDS-14 intent** — inference-only, schema-rich surface the probe favored.
-3. **CP-1 SLU arm on MInDS-14** — K-instruction scored search (the probe-favored family; +0.126 precedent).
-4. **CP-1 SQA arm on mmau-mini / big-bench-audio** — MCQ oracle-over-K.
-5. **CP-4 pass@k on voicebench verifiable subtasks** — heavier rollout harness, last.
+> **Methodology note (owner steer, 2026-07-04).** Experiments run on **GPU** against the frozen
+> omni model (llama.cpp Qwen3-Omni-30B) and modern LLM selectors. **No n-gram / n-best LM rescoring**
+> — that classical path is off-thesis for training-free RL on frozen omni + modern LLMs. "Cheapest
+> first" means smallest fresh slice, not falling back to CPU/traditional methods.
+
+1. **CP-1 SLU arm on MInDS-14** — K task-definition instructions × N on the frozen omni; oracle-over-K
+   intent accuracy vs the fixed instruction, + a random-instruction control (b1 floor). The
+   probe-favored schema-rich surface with the +0.126 [scoped] in-house precedent. **First experiment.**
+2. **CP-8 calibration on MInDS-14 intent** — contextual/Batch calibration + PMI over the 14-way choice
+   surface; calibrated-vs-raw accuracy and distractor-rephrase variance. Reuses arm-1 generations.
+3. **CP-1 SQA arm on mmau-mini / big-bench-audio** — MCQ oracle-over-K on the frozen omni.
+4. **CP-3 selector anatomy** — regenerate ASR pools **with per-token logprobs**; compare self-certainty,
+   a frozen-LLM reranker/judge, and consensus/MBR vs oracle. (Modern selectors; supersedes the reverted
+   n-gram attempt.)
+5. **CP-4 pass@k on voicebench verifiable subtasks** — N-rollout agent harness, last.
 
 Each experiment: a mini-prereg committed before generation, a `_repro/*.json` artifact with a
 `reproduce:` line, paired-bootstrap CIs, and the **Result** column above back-filled with the graded number.
