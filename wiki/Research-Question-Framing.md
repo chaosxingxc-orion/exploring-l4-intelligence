@@ -92,18 +92,18 @@ Each check measures H_prompt − H_fix and/or ρ on one surface; see [[Semantic-
   **No label-free selector significantly beats majority** — the "confidently-wrong" mechanism (C4:
   large reward-estimation error τ). **(c) realization ≈ 0 confirmed on modern selectors, not just
   majority.** `_repro/cp3_selector_realization_mmau.json`. *(directional)*
-- **Multimodal-conditioning (b), MMAU (E6′, n=150 done, FBank/MFCC-invariance audited):** the audit
-  kept only feature-invariant transforms (mel-cos ≥ 0.98: original, speed0.9, speed1.1, trim) and
-  correctly excluded feature-altering ones (rms_norm 0.978, preemphasis 0.886, denoise 0.926 — which
-  *hurt* to 0.587, telephone 0.931). Over the leakage-free invariant manifold: oracle 0.700 vs original
-  greedy 0.640 → **H_mm = +0.060 (descriptive CI [0.027, 0.100], excludes 0)**. **This is the one place
-  a conditioning channel opens real headroom** — but it is an ORACLE (label-aware) headroom, i.e.
-  another *(a)-support* source (feature-equivalent presentations surface different correct answers),
-  NOT a deployable prompt lever: the best single uniform transform (speed1.1 0.66) beats original by
-  only +0.02, and harvesting the +0.06 needs a label-free selector — the same (c) wall. *(directional;
-  caveat: speed transforms could residually leak for the duration/counting subset — a conservative
-  {original, trim}-only read still shows headroom.)* `_repro/cp1_multimodal_feature_audited_mmau.json`
-- Pending (Stage-2 / future surface): voice-agent (E5, CP-4).
+- **Multimodal-conditioning (b), MMAU (E6′, n=150, M1 acoustic transforms only) — CORRECTED after strict
+  review.** The FBank audit correctly excluded content-altering transforms (rms_norm 0.978, preemphasis
+  0.886, denoise 0.926→hurt 0.587, telephone 0.931). But the headline **H_mm = +0.060 does NOT survive
+  scrutiny**: recomputed from the artifact, 100% of it is speed-driven — oracle{original, trim} = 0.640 =
+  greedy → **H = +0.000**. The gate compares **time-averaged** log-mel (length-robust by construction), so
+  a ±10% time-stretch scores 0.993 and passes while changing duration/tempo/counts — exactly MMAU's
+  temporal-question leakage. **So E6′ does not establish a valid multimodal conditioning gain**, and the
+  two stronger sub-channels — M2 audio few-shot ICL and **M3 leakage-audited cross-modal injection** (the
+  survey's strongest lever) — were **not tested.** `_repro/cp1_multimodal_feature_audited_mmau.json`
+- **Untested (the decisive stronger in-fence instruments):** OPRO/GEPA-style **optimized** prompt search
+  (the survey's "central empty cell"); a **trained-verifier / frozen-LM MBR** selector for (c); M3
+  cross-modal injection for (b); ≥1 non-saturated non-MMAU surface (multilingual/OOD, E5 agentic).
 
 **Current lean (honest, sharpening — not yet a formal anchor).** Across BOTH an easy surface (E1
 intent, near-saturated) and a hard, non-saturated surface (E3 MMAU, greedy 0.64) the picture is
@@ -111,30 +111,31 @@ consistent and now *decomposed by condition*:
 - **(a) support is REAL** where the task is non-trivial: E3 H_fix = +0.133 (the frozen q₀ holds much
   better answers than greedy; sampling reveals them). So best-of-N / sampling-based training-free RL
   has genuine room.
-- **(b) the conditioning contribution splits by channel.** The **text / instruct-prompt** channel ≈ 0
-  on both surfaces (E1 +0.000, E3 +0.020 n.s.) — instruction diversity is **not** the lever, the
-  specific thing Q1 asks about. The **multimodal (acoustic-presentation)** channel is **not** null:
-  over feature-invariant presentations E6′ shows a real **oracle** headroom H_mm = +0.060 (CI excludes
-  0) — but this is another *(a)-support* source (label-aware), not a deployable prompt lever, and the
-  best single deployable transform adds only +0.02. So the **instruct-prompt lever proper is
-  insufficient**; the multimodal channel adds latent oracle headroom, not a reachable-and-realizable
-  prompt gain.
+- **(b) the TESTED conditioning levers are inert, but the STRONGEST were not run.** The **text /
+  instruct-prompt** channel ≈ 0 on both surfaces (E1 +0.000, E3 +0.020 n.s.) — but with **un-optimized,
+  hand-authored** K≈8 prompts, NOT the OPRO/GEPA reward-scored *optimized* search (the survey's "central
+  empty cell", unrun). So naive instruction variation is inert; the space is not shown barren. The
+  **multimodal (acoustic-presentation)** channel's apparent +0.06 is a **speed-driven artifact** (recompute:
+  {original,trim}=+0.000; the time-averaged mel gate can't see temporal leakage) — no valid conditioning
+  gain; M2/M3 (esp. cross-modal injection) untested. → the *naive* prompt lever is inert; whether the
+  *space* is insufficient is **undecided.**
 - **(c) label-free realization ≈ 0** — now tested across selectors, not just majority: E3 majority =
   greedy exactly; E4 (n=150) self-certainty ρ=0.0, majority/conf-vote ρ=−0.047, **best (LLM-judge)
   ρ=0.143 but not significant**. No deployable label-free selector harvests the +0.14 oracle headroom.
-**The Stage-1 answer (all core legs now in — E1/E3/E4/E6′ + verified Lean).** The value that exists
-lives in **latent oracle headroom** from two sources — sampling (a, +0.13) and feature-invariant
-multimodal presentation (b-multimodal, +0.06) — and **neither the text-prompt channel (b-text ≈ 0) nor
-any deployable label-free selector (c, ρ ≈ 0) captures it.** So the *instruct-prompt / ICL optimization
-space proper is insufficient* for training-free RL on the semantic layer: the one lever Q1 names (text
-instruction diversity) is inert, and the real headroom is oracle-only (not reachable-and-realizable via
-prompting). This is **branch 2.2**, but with a constructive shape: the binding wall is **(c) realization**
-(machine-checked C4: ρ→1 only as τ→0), and the latent headroom is real and even *enlargeable* via
-feature-invariant multimodal presentation. So an agentic expansion is warranted **specifically** to
-(i) drive τ down with a genuinely better reward channel and/or (ii) enlarge the feature-invariant
-exploration space — and `OptSpace.gain_product` proves this helps **only** if it adds a new
-non-degenerate reward, not by stacking agents. See [[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]]
-for the locked verdict.
+**The Stage-1 answer (v2, after 4-persona strict review — DIRECTIONAL, for owner discussion, NOT a branch
+decision).** Real latent oracle headroom exists (sampling +0.13) — the frozen model is not the bottleneck.
+But the tested ICL levers do **not** convert it to deployable gain: naive text-prompt diversity is inert
+(E1/E3) and cheap self-referential selection under-harvests (E4). Crucially, **"the ICL optimization space
+is insufficient" is NOT established** — the decisive stronger in-fence instruments were **not run**:
+OPRO/GEPA optimized prompt search, a trained-verifier / MBR selector, M3 cross-modal injection. (The one
+apparent positive, multimodal +0.06, was a speed-driven audit artifact — {original,trim}=+0.000.) So the
+open problem is **(c) realization**, and the honest verdict is: *the cheap/naive ICL levers fail on one MMAU
+surface; run the stronger in-fence instruments before any branch decision.* The agentic question stays
+**open and is NOT forced by `gain_product`** (which forbids only naive isolated agent-stacking, not a
+non-isolated τ-reducing verifier — the very (c)-lever). Both 2.1 (better in-fence selector / optimized
+prompt search) and 2.2 (reward/verification expansion) are live and under-tested. See
+[[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]] (v2) and the review synthesis
+[[2026-07-05-Q1-conclusion-review-synthesis]].
 
 ---
 

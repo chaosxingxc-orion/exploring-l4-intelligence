@@ -6,6 +6,51 @@
 
 ---
 
+### 2026-07-05 · Stage-1 Q1 directional finding (ICL-sufficiency for frozen-omni TFRL) — locked, strict-reviewed, then CORRECTED for over-reach; theory machine-checked in Lean
+**Decision.** Executed the owner's `/goal`: run the planned Stage-1 experiments with full validation, lock
+the research in paper form, prove the theory in Lean, and answer Q1 (is ICL sufficient for training-free RL
+on a frozen omni's semantic layer; if not, design an omni agentic system?). **Experiments (all n=150,
+frozen Qwen3-Omni-30B Q8_0 GGUF via llama.cpp, grade `[directional | single-touch | not
+significance-bearing]`, artifacts in W1 `_repro/`):** E1 SLU text-prompt H_prompt−H_fix=+0.000; E3 SQA-MCQ
++0.020 n.s. with H_fix support +0.133; E4 (c)-realization — no cheap self-referential selector beats
+majority (self-cert ρ=0.0, majority/conf-vote ρ=−0.047, self-judge ρ=0.143 n.s.); E6′ multimodal-b with a
+FBank/MFCC feature-invariance audit. **Theory (machine-checked, `proofs/tfrl`, full TfrlProofs builds
+sorry-free against Mathlib v4.31.0 bar the documented Beirami sorry):** new `Realization.lean` — C4 bound
+`R(oracle)−R(selector) ≤ 2τ` + convergence theorem `realized_tendsto_oracle` (τ→0 ⇒ realized→oracle);
+plus `gain_product`/`qstar_product` (context-isolated separable-reward agent composition is inert).
+**Then ran a 4-persona strict review (methodology / domain / devil's-advocate / EIC+formal, blind, grounded
+in the artifacts + Lean).** Decision: **MAJOR REVISION** — and the review was RIGHT.
+
+**Why (what the review caught, and we corrected).** The v1 verdict ("ICL insufficient → build an agentic
+system", VERDICT-LOCKED) over-reached on three counts: (i) **category error** — it conflated "cheap current
+instruments don't harvest" with "the space is insufficient", when the text leg used *un-optimized*
+hand-authored prompts (not the OPRO/GEPA optimized search — the survey's "central empty cell", unrun) and
+the (c) leg used only *cheap self-referential* selectors (omitting the trained-verifier/MBR class the survey
+says is the only in-fence winner); (ii) **its one affirmative result was an artifact** — E6′'s multimodal
++0.060 is 100% speed-driven (recomputed independently: oracle{original,trim}=0.640=greedy → **+0.000**),
+because the time-averaged log-mel gate is length-robust by construction and can't see the temporal leakage
+that ±10% speed introduces; (iii) it **locked a program decision on Stage-1 n=150 evidence**, which
+CLAUDE.md says "can settle nothing." Formal nits too (an `iff` the theorem proves only forward; the
+`spread²/8β` cap is hypothesis-gated like Beirami; `gain_product` over-generalized to license agent-building
+when it only forbids *isolated* stacking and is silent on a non-isolated τ-reducing verifier).
+
+**Corrected finding (v2, DIRECTIONAL — returned to owner, NOT a branch decision).** Real latent oracle
+headroom exists (sampling +0.13) so the frozen model is not the bottleneck; but the *cheap/naive* ICL
+levers fail to convert it — naive text-prompt diversity inert, cheap self-referential selection
+under-harvests. **"The ICL optimization space is insufficient" is NOT established**, because the decisive
+stronger in-fence instruments were not run (optimized prompt search; trained-verifier/MBR selector; M3
+cross-modal injection; ≥2nd non-saturated surface). **The open problem is (c) realization.** The
+omni-agentic question stays **open and is not forced by `gain_product`** (it forbids only naive isolated
+stacking, not a non-isolated verifier — the very (c)-lever); both branch 2.1 (stronger in-fence selector /
+optimized prompt search) and 2.2 (reward/verification expansion, behind the 7/03 closure fence, with a
+C1–C4 convergence proof) are live and under-tested. **Consequences.** Number-tracing + Lean judged
+exemplary/honest by the panel; the value of this campaign is a *corrected, precisely-scoped* directional
+signal + a machine-checked realization theory + a documented next-probe list — not a program pivot. Artifacts:
+conclusion [[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]] (v2), review [[2026-07-05-Q1-conclusion-review-synthesis]],
+framing [[Research-Question-Framing]], theory [[Theory-Convergence-and-Constraints]]. W1 commits (E1/E3/E4/E6′
+`_repro/`); umbrella commits (Realization.lean + wiki). **Owner discussion selects the next probe; no
+automatic rollover to Stage-2.**
+
 ### 2026-07-04 · Three-stage research methodology codified; Stage-1 problem-definition campaign for the semantic layer closes with a strict-reviewed survey and an owner-selected problem set
 **Decision.** The owner judged the research insufficiently grounded and installed a **three-stage
 methodology** (1 Problem-definition: survey-grounded argumentation, small-n only directional; 2
