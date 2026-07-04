@@ -19,7 +19,19 @@ selection over the model's own rollouts.
     H_prompt(T,K,N) − H_fix(T,N) ≥ δ_T   (reachability — the space instruct-prompting opens beyond one fixed instruction)
     ρ(T) ≥ ρ_min                          (realizability — a label-free selector actually harvests it)
 
-with the genuine-accuracy split b2 (not b1 format artifact) required. **Program-level sufficiency** =
+with the genuine-accuracy split b2 (not b1 format artifact) required.
+
+**The conditioning space is text ⊕ multimodal (owner, 2026-07-04).** For an OMNI model the "prompt" /
+conditioning c is *not only the text instruction* — it includes **multimodal signal injection and
+adjustment**: acoustic conditioning (denoise / normalize / speed / filter / emphasis / segmentation),
+cross-modal injection (transcript or a text view alongside the audio), audio few-shot exemplars, and
+(where relevant) visual context. The diagnostic is **prompt → rollout sensitivity**: hold the task, vary
+c, and measure how the rollout distribution (and its oracle headroom) moves. **E1/E3 measured only the
+TEXT sub-channel of c** — they found the text-conditioning contribution ≈ 0. Whether the *multimodal*
+conditioning channel moves the rollout is the omni-specific, still-untested part of Q1, and is the
+priority next check. So H_prompt below is understood over the **full** c = {text} × {multimodal}.
+
+**Program-level sufficiency** =
 across the semantic layer, instruct-prompt rollout on the frozen omni reaches enough headroom,
 reachably and genuinely, that training-free RL over the prompt/ICL space is worth building on.
 
