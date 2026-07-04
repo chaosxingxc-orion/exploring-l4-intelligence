@@ -38,8 +38,10 @@ reachably and genuinely, that training-free RL over the prompt/ICL space is wort
 ### Experiment leg (the CP directional checks — small-n, worth-investment, Stage-1)
 Each check measures H_prompt − H_fix and/or ρ on one surface; see [[Semantic-Task-Validation-Table]].
 - ASR probe (n=50): **Δ_BM ≈ 0** (matched-budget), uninformative-to-weakly-fix-favoring.
-- SLU intent, MInDS-14 (E1, running): early **greedy ≈ 0.92–0.94, H_prompt − H_fix ≈ 0** — near-saturated
-  surface, little headroom for any method. *(directional, to confirm at n=150)*
+- SLU intent, MInDS-14 (E1, n=150 **done**): **H_prompt − H_fix = +0.000** (CI [−0.02,+0.02]); greedy 0.953
+  (near-saturated); b2-share over the random-label floor only +0.013 (CI [0.0,+0.033]); the fixed instruction
+  wins best on 143/150. **Prompt-space ≈ nil on easy intent** — but the surface is near-ceiling, so this is
+  as much 'ill-posed surface' as 'insufficient space'. *(directional)*
 - Pending: SQA-MCQ (E3), selector anatomy ρ (E4), voice-agent (E5).
 
 **Current lean (honest, not yet an anchor).** Both legs point the same way *so far*: the prompt-space
