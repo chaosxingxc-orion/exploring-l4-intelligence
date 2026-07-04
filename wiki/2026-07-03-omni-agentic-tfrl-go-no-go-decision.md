@@ -2,7 +2,7 @@
 title: "Decision: NO-GO — omni agentic TFRL step-1 rationality campaign (agent-level question closed)"
 date: 2026-07-03
 recommended: NO-GO
-owner_verdict: PENDING
+owner_verdict: "NO-GO (ratified by owner in-session, 2026-07-04; the elective V4 amendment fork was declined)"
 freeze_anchor: b19bff2
 prereg: wiki/2026-07-03-agentic-tfrl-step1-preregistration.md
 null_hypothesis: "2026-07-02 deep-review NO-GO (papers/agent-level-tfrl/reviews/deep-review.md)"
@@ -166,7 +166,7 @@ Record note (correction C12, panel SC-18): r1–r3 are exogenous-only — a corp
 
 ## 11. Decision-Log entry (to be appended to `wiki/Decision-Log.md` upon owner ack)
 
-`2026-07-03 — NO-GO agentic TFRL step 1: M3 killed at F=0.38108 vs kill 0.01 (_repro/m3_phase0_zero_support.json); M5 failed its pre-registered PASS threshold — delta_vs_mbr=0.0 CI[0,0] vs ≥0.015 (_repro/m5_selector_confirmatory.json), frozen selector pre-proven inert → inconclusive → NO-GO by the frozen default (M5 has no kill threshold); M2/M4 design-only and M1 unopened, defaulted to NO-GO per pre-registration b19bff2 (inconclusive = NO-GO); NO-GO clause (b) not strictly met — NO-GO discharged by the frozen default + G1 failure; GO-minimal failed (ablation moot, load_bearing=false); pivots P-A/P-B/P-C not triggered, P-D adopted (unconditional continuation; no trigger defined); Part A (single-model TFRL) RATIONAL-AND-CONTINUING on the C1 oracle contrast (+0.0418 [0.0289, 0.0564]); question closed absent r1–r3; owner_ack: PENDING.`
+`2026-07-03 — NO-GO agentic TFRL step 1: M3 killed at F=0.38108 vs kill 0.01 (_repro/m3_phase0_zero_support.json); M5 failed its pre-registered PASS threshold — delta_vs_mbr=0.0 CI[0,0] vs ≥0.015 (_repro/m5_selector_confirmatory.json), frozen selector pre-proven inert → inconclusive → NO-GO by the frozen default (M5 has no kill threshold); M2/M4 design-only and M1 unopened, defaulted to NO-GO per pre-registration b19bff2 (inconclusive = NO-GO); NO-GO clause (b) not strictly met — NO-GO discharged by the frozen default + G1 failure; GO-minimal failed (ablation moot, load_bearing=false); pivots P-A/P-B/P-C not triggered, P-D adopted (unconditional continuation; no trigger defined); Part A (single-model TFRL) RATIONAL-AND-CONTINUING on the C1 oracle contrast (+0.0418 [0.0289, 0.0564]); question closed absent r1–r3; owner_ack: RATIFIED 2026-07-04 (V4 amendment fork declined).`
 
 Owner gate: this recommendation is subject to the owner gate before any publication and before WF-2 (prereg §7); `owner_verdict: PENDING`. **Alternative before the owner (correction C6 — rejected with reasons, elective):** instead of ratifying closure now, the owner may sign a safeguard-5 amendment freezing the non-inert V4 memory-dominant arm and run it on the existing confirmatory pools (~2 min CPU) or on a second once-touched fresh test-other slice (~7 h GPU; prereg §4 permits plural slices; 9 of 10 timebox days remained at decision time). The compiled record recommends against this on futility grounds — the constructor's own PREDICTION 3 prices the amended arm at +0.001 to +0.006 with CI crossing 0, sub-threshold against the frozen ≥0.015, and the 92% anti-consensus headroom decomposition (committed in `_repro/m5_memo_censuses.json`) makes the bar arithmetically implausible on any LibriSpeech-buildable surface — but the fork is the owner's to decline, not the compiler's.
 

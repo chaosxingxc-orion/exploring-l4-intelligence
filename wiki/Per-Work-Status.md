@@ -2,7 +2,7 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-03.
+> Last reviewed: 2026-07-04.
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
@@ -56,8 +56,7 @@ adversarially collapsed and reframed (2026-07-02) into an honest single-model tr
 **C1** = W1's genuine best-of-N (primary), **C2** = W4's frozen-encoder probing (secondary, not RL),
 **C3** = the reward-spread lens (sign + ceiling only), two sorry-free Lean lemmas. Four fresh hostile
 review rounds → **CONVERGED, 0 surviving fundamental/major**; every number reproduced from committed
-artifacts. Merged via PR #2. Open (pre-registered, not executed): whether agentic decomposition adds
-anything beyond the frozen single model.
+artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): the step-1 rationality campaign — pre-registered criteria (freeze b19bff2), two pilots with freeze-before-run commits, a 6-charge hostile panel, and a unanimous sound-with-corrections /ars-reviewer verdict — ended in an owner-ratified NO-GO** (M3 killed by measurement F=0.38108 vs 0.01; M5 inconclusive-by-inert-instrument → frozen default; re-open only on r1/r2/r3). Single-model work continues via P-D. See [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]] and Decision-Log 2026-07-04.
 
 **W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
 (best-of-N, reward-guided decoding, reranking). The most complete work; its verifiable-reward/eval
@@ -84,7 +83,7 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 ## 中文
 
 > **这是活动状态板——更新最频繁的页面。** 任一工作的成熟度或近期计划变化时就更新它，重大变动同时记到
-> [[Decision-Log]]。最近复核：2026-07-03。
+> [[Decision-Log]]。最近复核：2026-07-04。
 
 各工作状态见上表。**W4（omni 嵌入语音解耦，旗舰，进行中）：** 免训练 RL（不改权重/结构）引导冻结的
 `omni-embed-nemotron-3b`，使同一段音频在不同任务条件下的嵌入，在内容/ASR+ST、说话人、情感/SER、
@@ -101,7 +100,7 @@ umbrella 的 `scripts/data/fetch-data.sh`；原 `wave0_fetch.sh` 已退役。）
 realized-vs-headroom 差距**（更强的无标签选择器）、拓展奖励引导策略、强化评测。另：W4 的旗舰情感增益
 +0.097 经跨种子重跑修正为 **NULL**（t-CI [−0.043,+0.116] 跨 0）；跨工作论文
 `papers/agent-level-tfrl/`（C1=W1 真实 best-of-N，C2=W4 诚实探针，C3=奖励离散度透镜）已于
-2026-07-02 四轮敌对审查收敛并经 PR #2 合入。
+2026-07-02 四轮敌对审查收敛并经 PR #2 合入。论文遗留的开放问题（agentic 分解是否超越冻结单模型）已于 2026-07-04 经预注册战役裁定 **NO-GO 关闭**（M3 测量击杀、M5 惰性仪器按冻结默认、重开仅凭 r1/r2/r3），单模型工作经 P-D 继续——见 [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]]。
 
 **W2（高效 RL 对齐，骨架）：** 用 LoRA / 部分更新的高效 GRPO/DPO 做语音↔语言对齐；路线：在共享奖励上
 实现 LoRA 的 GRPO/DPO 主循环，沿用 W1 的配置/评测范式。**W3（多任务 RL，骨架）：** 单策略，跨

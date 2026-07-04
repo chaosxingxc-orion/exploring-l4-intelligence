@@ -66,6 +66,31 @@ N*); the **agent level** has only **JitRL**'s *asymptotic* consistency under a t
 precondition — the trust region is the hinge that links naive non-convergence (OSA-3a) to credit-assigned
 convergence (OSA-3b). Open-source: [JitRL](https://github.com/liushiliushi/JitRL), HedgeTune, GSI, ACE, AWM, LATS.
 
+## Step-1 rationality campaign — agentic-TFRL GO/NO-GO (2026-07-03/04)
+
+> Pre-registered decision campaign (freeze anchor b19bff2), null hypothesis = the 2026-07-02
+> deep-review verdict. Outcome: **NO-GO ratified by owner 2026-07-04** — the agent-level question is
+> CLOSED absent re-open conditions r1-r3. Decision doc: [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]];
+> pre-registration: [[2026-07-03-agentic-tfrl-step1-preregistration]]. Runs: wf_a68f9164-b3c (Phase 0),
+> wf_68e2556d-7a7 (delta/Part-A/mechanisms), wf_f6d37987-df5 (B-lanes/panel/synthesis),
+> wf_e5dd317b-9cb (/ars-reviewer fresh-adversary panel).
+
+- [[2026-07-03-step1-delta-headroom-theory]] — D1: decomposition/headroom theory delta (10 verified claims; r2 EMPTY)
+- [[2026-07-03-step1-delta-speech-agent-memory]] — D2: speech agent memory/skills delta (11 claims; r1 NOT MET, 12 empty searches)
+- [[2026-07-03-step1-delta-selector-learning]] — D3: selector learning / reference-free QE delta (12 claims)
+- [[2026-07-03-step1-part-a-memo]] — Part-A: single-model TFRL rationality (RATIONAL-AND-CONTINUING)
+- [[2026-07-03-step1-mechanism-support-expansion]] — M3 dossier + Phase-0 KILL (F=0.38108 vs 0.01)
+- [[2026-07-03-step1-mechanism-selector-accumulation]] — M5 dossier + confirmatory NO-PASS (exact zero, inert instrument)
+- [[2026-07-03-step1-mechanism-cross-block-dependence]] — M2 dossier (design-only)
+- [[2026-07-03-step1-mechanism-sampling-isolation]] — M4 dossier (design-only)
+- [[2026-07-03-step1-blanes-memos]] — B3 task-family / B4 VoI / B5 feasibility memos (post-outcome compilation)
+- [[2026-07-03-step1-hostile-panel-verdicts]] — 6-charge panel: all stands; steelman-NO-GO; briefs record
+- [[2026-07-03-step1-ars-reviewer-panel]] — /ars-reviewer 5-persona panel: sound-with-corrections (C1-C12 applied)
+
+W1-repo pilot artifacts: `_repro/m3_phase0_selection.json`, `_repro/m3_phase0_zero_support.json`,
+`_repro/m5_selector_dev.json`, `_repro/m5_confirmatory_slice_ids.json`, `_repro/m5_selector_confirmatory.json`,
+`_repro/m5_memo_censuses.json` (12/12 memo numbers reproduced).
+
 ## Consolidated bibliography (Step-2 model-output survey; all verified, deduplicated)
 
 - [A Large-Scale Probing Analysis of Speaker-Specific Attributes in Self-Supervised Speech Representations](https://arxiv.org/abs/2501.05310)

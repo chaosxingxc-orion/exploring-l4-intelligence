@@ -6,6 +6,40 @@
 
 ---
 
+### 2026-07-04 · Step-1 rationality campaign ratified NO-GO — the agent-level question is CLOSED (pre-registered, measurement-backed, owner-gated)
+**Decision.** The owner ratified the campaign's recommended **NO-GO** on question (ii) — *build an omni
+agentic system (skills/memory/routing over frozen models) to extend training-free RL* — and declined the
+elective safeguard-5 V4-amendment fork (rejected-with-reasons on futility grounds). The 2026-07-02
+verdict stands, now upheld by the campaign's own pre-registered instruments, not review argument alone.
+Question (i) — single-model TFRL as a direction — is **RATIONAL-AND-CONTINUING** via pivot **P-D**
+(condition-mapping of the real C1 headroom). Full record: [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]]
+(owner_verdict stamped), pre-registration [[2026-07-03-agentic-tfrl-step1-preregistration]] (freeze b19bff2).
+**Why.** Criteria frozen BEFORE analysis; null hypothesis = the 7/02 verdict; inconclusive = NO-GO. G1
+failed arithmetically: **M3** (support expansion) was killed by its own Phase-0 zero-support check —
+pooled entity-match **F = 0.38108 vs the frozen 0.01 kill threshold** (38×; train-960h rarity ≠ model-OOV:
+the 30B's pretraining already emits the "rare" book entities); **M5** (selector accumulation) failed its
+PASS bar with an exact zero (sel = MBR = 0.07722 on the designed 12×12 confirmatory surface) — with the
+honest caveat that the frozen V1|0.05 selector was **pre-proven inert** (median flip-λ 60.5), so the M5 arm
+closes by the frozen inconclusive→NO-GO default, *not* by empirical falsification of the mechanism class;
+M2/M4 design-only and M1 unopened → default. Collateral finding: on the fresh slice MBR gains nothing over
+greedy while oracle headroom is real (+0.0238) — deployable label-free capture ≈ 0%.
+**Consequences.** (1) **Rigor chain:** 22-item objection ledger → 3 delta-scan lanes (33 verified claims;
+re-open conditions r1/r2 re-verified EMPTY on decision day) → 4 blind constructor/refuter mechanism pairs →
+2 pre-registered pilots with freeze-before-run commits (b19bff2→c8bebaf→d4dd117→1b53b46→f8ec1d3→d874585) →
+6-charge hostile panel (both blind judges: all six stand) → mechanical synthesis + integrity check →
+**/ars-reviewer 5-persona fresh-adversary panel: unanimous sound-with-corrections**, all 12 corrections
+applied (per-lane reaffirmation attribution, GO-reachability statement, the elective amendment fork
+surfaced at the gate), 12/12 memo censuses reproduced into `_repro/m5_memo_censuses.json`. (2) **The
+converged paper's "deferred, not disproved" question now has a citable closure sentence** (decision doc
+§10). (3) WF-2 (omni-agentic-system survey) NOT launched. Freed capacity → the W4 post-NULL queue + P-D;
+a zero-cost standing r1 monitor (re-run the D2 negative-finding searches periodically). (4) Re-open only
+on r1 (public cross-session same-speaker corpus) / r2 (peer-reviewed non-separable decomposition bound) /
+r3 (a lane kill overturned by literature); an acknowledged coverage gap — no re-open path for in-house
+successor evidence — is recorded for owner-level amendment if ever desired. (5) Campaign mechanics:
+Workflow orchestration + academic-research-skills (research_architect / report_compiler / /ars-reviewer),
+~100 agents, ~1 day wall-clock, ~9 h GPU, all on the single 24 GB 5090. Branch
+`research/agentic-rationality-step1`, PR to master.
+
 ### 2026-07-03 · Publication closed out; assets/docs reconciled to reality; inference-engine decision recorded
 **Decision.** Closed every dangling item from the W5 arc in one pass. (1) **Publication:** PR #2 (the
 whole 6/26→7/02 arc) was merged by the owner on 2026-07-02; today the local master was fast-forwarded,
@@ -464,6 +498,23 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-04 · 第一步合理性战役裁定 NO-GO——agent 级问题关闭（预注册、测量支撑、owner 终审）：**
+Owner 批准战役推荐的 **NO-GO**（问题 ii：是否构建 omni agentic 系统扩展免训练 RL），并放弃了可选的
+safeguard-5 V4 修正案岔路（以徒劳性理由被记录否决）。7/02 判定成立——这次由战役自己的预注册仪器支撑，
+而非仅靠审稿论证。问题 i（单模型 TFRL 方向）**理性且继续**，经由 P-D（C1 真实 headroom 的条件刻画）。
+判据先于分析冻结（b19bff2；零假设=7/02 判定；不确定即 NO-GO）：G1 算术性失败——**M3** 被自己的
+Phase-0 零支撑检查击杀（F=0.38108 超冻结杀线 0.01 达 38 倍：语料罕见 ≠ 模型 OOV）；**M5** 未过 PASS 线
+（设计表面上精确零：sel=MBR=0.07722），并诚实标注冻结选择器 V1|0.05 事前已被证明惰性（翻转 λ 中位 60.5）
+——故 M5 按「不确定→冻结默认」关闭，而非对机制类的经验证伪；M2/M4 仅设计、M1 未开 → 默认。附带发现：
+新切片上 MBR 对 greedy 零增益而 oracle headroom 真实（+0.0238）——可部署无标签捕获率 ≈0%。
+严谨链：22 条反对台账 → 3 增量扫描车道（33 条已验证 claim；r1/r2 决定日复核为空）→ 4 对盲构造/反驳 →
+2 个冻结先于运行的预注册 pilot → 六指控控辩合议庭（双盲法官全部 stands）→ 机械合成+完整性核查 →
+**/ars-reviewer 五人盲审一致 sound-with-corrections**、12 项修正全部落实、12/12 备忘数字复现入
+`_repro/m5_memo_censuses.json`。收敛论文的 "deferred, not disproved" 问题获得可引用的关闭句（决策文档
+§10）。WF-2 不启动；算力转向 W4 队列 + P-D；r1 零成本常设监测。重开仅凭 r1/r2/r3（并记录一处覆盖缺口：
+族内后继证据无重开路径，如需修补属 owner 级修正）。战役机制：Workflow 编排 + academic-research-skills
+（~100 agents、约 1 天、~9h GPU、单卡 24GB 5090）。分支 `research/agentic-rationality-step1`，PR 待合并。
 
 **2026-07-03 · 发布线收口；资产/文档对齐现实；推理引擎决策入档：** PR #2（6/26→7/02 全弧线）主人已于
 7/02 合入；本日快进本地 master、同步 wiki（并**从公开 wiki 清除了 6/25 那份占位未填、归因已被推翻的
