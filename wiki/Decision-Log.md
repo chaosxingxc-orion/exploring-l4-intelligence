@@ -6,6 +6,37 @@
 
 ---
 
+### 2026-07-04 · Three-stage research methodology codified; Stage-1 problem-definition campaign for the semantic layer closes with a strict-reviewed survey and an owner-selected problem set
+**Decision.** The owner judged the research insufficiently grounded and installed a **three-stage
+methodology** (1 Problem-definition: survey-grounded argumentation, small-n only directional; 2
+Solution-validation: large-sample pre-registered; 3 Publication) now in CLAUDE.md/AGENTS.md
+(byte-mirrored). Under Stage 1, we ran a problem-definition campaign on the question: *from the ICL
+perspective, is the instruct-prompt rollout optimization space of a frozen omni speech model
+sufficient for the SEMANTIC layer (ASR/SLU/SQA/agentic)?* At the closing checkpoint (K2) the owner
+selected **CP-1, CP-3, CP-8, and CP-4** to advance to Stage 2. Full record:
+[[2026-07-04-stage1-problem-definition]] (K2-resolved), [[2026-07-04-stage1-semantic-tfrl-survey]]
+(the reviewed survey), [[2026-07-04-sufficiency-yardstick-memo]], [[2026-07-04-stage1-evidence-regrade]].
+**Why.** The prior arc was thesis→operator→mechanism driven, never problem-driven; the C1 pipeline
+used one fixed instruction, so the owner's prompt-space question was never measured in-house. Stage 1
+fixes the problem before spending Stage-2 sample budget.
+**Consequences.** (1) **The honest Stage-1 answer:** sufficiency cannot be settled at Stage 1 — the
+central cell (the *magnitude* of H_prompt − H_fix) is unmeasured for every audio-in model (in-house
+zero; the text-domain APE/OPRO/GEPA quantification has no audio analog; PromptingWhisper is a
+two-point existence-positive that bounds nothing). An operational yardstick (H_fix / H_prompt / ρ;
+b1/b2 split; failure-routing) converts the question into ranked problems. (2) **Evidence re-graded**
+under the Stage-1 lens: the NO-GO campaign's M3/M5 kills drop to `directional`; MInDS +0.126 and the
+C1 headroom to `scoped`; the vector-class paralinguistic negatives stay `settled` — consolidated as
+the premise that focuses research on the semantic layer (resolves the 2026-06-23 OPEN as full
+semantic focus). (3) **A rigor chain executed with Academic-skills + Workflow (~40 agents):** 33
+literature-anchored problems + 101 verified claims + a cross-domain (LLM/VLM/speech) transfer map;
+one budget-matched directional probe [n=50] read Δ_BM ≈ 0 on ASR (a real error caught in review: it
+measures Δ_BM, not H_prompt − H_fix); a 16k-word survey (171 refs) that passed a **/ars-reviewer
+5-persona strict review** — MAJOR REVISION (no CRITICAL), 7 P1 + 14 P2 applied, re-review
+all-P1-resolved (it also caught a confirmed SNR-sign error, +5 dB not −5, fixed across six docs).
+(4) **Stage 2 opens with a fresh Research-Proposal-Template instance** per problem; suggested
+cost-ordering CP-3 → CP-1(SLU/SQA)+CP-8 → CP-4; cross-session variants stay behind the r1–r3 closure
+fence. Branch `research/stage1-problem-definition`, PR to master.
+
 ### 2026-07-04 · Step-1 rationality campaign ratified NO-GO — the agent-level question is CLOSED (pre-registered, measurement-backed, owner-gated)
 **Decision.** The owner ratified the campaign's recommended **NO-GO** on question (ii) — *build an omni
 agentic system (skills/memory/routing over frozen models) to extend training-free RL* — and declined the
@@ -498,6 +529,24 @@ one consistent understanding.
 > 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
 
 **条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+
+**2026-07-04 · 固化三阶段研究方法论；语义层 Stage-1 问题定义战役以严审综述 + owner 选定题集收官：**
+Owner 判定研究合理性不足，确立**三阶段方法论**（①问题定义：survey 支撑的论证、小样本仅方向性；
+②方案验证：大样本预注册；③论文发表）并写入 CLAUDE.md/AGENTS.md（逐字节镜像）。Stage-1 就问题
+"ICL 视角下冻结 omni 语音模型 instruct-prompt rollout 的优化空间对**语义层**（ASR/SLU/SQA/agentic）
+是否足够"开展问题定义战役；收题检查点（K2）owner 选定 **CP-1、CP-3、CP-8、CP-4** 推进 Stage-2。
+**诚实的 Stage-1 答案**：充分性 Stage-1 无法定论——核心格（H_prompt − H_fix 的量级）在所有音频
+输入模型上无人测过（in-house 为零；文本域 APE/OPRO/GEPA 量化无音频对应；PromptingWhisper 仅两点
+存在性正例、定不了界）。可操作标尺（H_fix/H_prompt/ρ、b1/b2 拆分、失败路由）把问题转成排名候选。
+证据经 Stage-1 视角再定级：NO-GO 战役的 M3/M5 击杀降为 directional，MInDS +0.126 与 C1 headroom 为
+scoped，向量类副语言负结果维持 settled（夯实为聚焦语义层的前提，收口 6/23 OPEN 为全转向）。
+用 Academic-skills + Workflow（~40 agents）执行严谨链：33 个文献锚定问题 + 101 条已验证 claim +
+跨域（LLM/VLM/speech）迁移地图；一个等预算定向探针 [n=50] 在 ASR 读出 Δ_BM≈0（审查抓出真实操作化
+错误：测的是 Δ_BM 非 H_prompt−H_fix）；16k 词综述（171 引用）过 **/ars-reviewer 五人格严审**——
+MAJOR REVISION（无 CRITICAL），7 P1+14 P2 全修，re-review 判 all-P1-resolved（并抓出确证的 SNR
+符号错误 +5dB 非 −5，跨六文档订正）。Stage-2 每问题以新 Research-Proposal-Template 实例开始；
+建议成本排序 CP-3 → CP-1(SLU/SQA)+CP-8 → CP-4；跨会话变体留在 r1–r3 关闭围栏后。分支
+`research/stage1-problem-definition`，PR 待合并。
 
 **2026-07-04 · 第一步合理性战役裁定 NO-GO——agent 级问题关闭（预注册、测量支撑、owner 终审）：**
 Owner 批准战役推荐的 **NO-GO**（问题 ii：是否构建 omni agentic 系统扩展免训练 RL），并放弃了可选的

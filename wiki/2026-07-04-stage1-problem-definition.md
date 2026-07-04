@@ -2,7 +2,7 @@
 title: "Stage-1 Problem Definition — Ranked candidate problems for training-free RL on the semantic layer of frozen omni speech models"
 date: 2026-07-04
 stage: 1-problem-definition
-status: FOR-OWNER-DISCUSSION-K2
+status: "K2-RESOLVED 2026-07-04 — owner selected CP-1 + CP-3 + CP-8 + CP-4 for Stage-2"
 source:
   - "wiki/2026-07-04-stage1-semantic-tfrl-survey.md (reviewed survey; S9 candidates CP-1..CP-8; §8.3 directional probe)"
   - "wiki/2026-07-04-sufficiency-yardstick-memo.md (ladder conditions a/b1/b2/c; failure routing)"
@@ -13,6 +13,17 @@ discipline: "Grade tags on every in-house number; the verbs confirms/establishes
 ---
 
 # Stage-1 Problem Definition — ranked candidate problems (semantic layer, frozen omni speech, training-free)
+
+> **K2 verdict (owner, 2026-07-04).** The owner selected **CP-1 (quantify H_prompt − H_fix),
+> CP-3 (measure ρ(ASR) properly), CP-8 (calibration + PMI on the SLU/MCQ surface), and CP-4
+> (voice-agent pass@k + verifiable-reward best-of-N)** to advance to Stage 2 (solution validation).
+> This is the full recommended top-3 plus the strongest reserve. Suggested sequencing on cost
+> (a Stage-2 planning input, not a decision): CP-3 first (near-free re-scoring of on-disk C1 pools)
+> → CP-1 SLU/SQA arms + CP-8 in parallel (cheap inference on schema-rich surfaces the probe weakly
+> favors) → CP-4 last (needs an N-rollout agent harness). Per the methodology, Stage 2 opens with a
+> fresh Research-Proposal-Template instance (pre-registered frozen criteria, powered n, full
+> controls, adversarial review); the cross-session-accumulation variants stay behind the closure
+> fence (owner amendment required). Stage-1 is closed.
 
 > **What this document is.** The reviewed survey (`2026-07-04-stage1-semantic-tfrl-survey.md`) mapped the field and drafted **eight unranked** candidate research problems (CP-1..CP-8). This document does the one thing the survey deliberately withheld: it **ranks** them against a fixed rubric so the owner has a recommendation to react to at the Stage-1 closing discussion (K2). It recommends; the owner decides (survey §9.1; re-grade §3). Every in-house number carries its re-graded tag and is ledgered once in §4 (the single audit surface). The closure fence (r1–r3, NO-GO decision §9–§10) is applied throughout.
 

@@ -2,7 +2,7 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-04.
+> Last reviewed: 2026-07-04 (Stage-1 problem-definition closed).
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
@@ -69,7 +69,12 @@ climb); the deployable label-free **MBR selector is non-significant at every N**
 [[Inference-Engine-Choice]]. (Asset downloading is unified in the umbrella's
 `scripts/data/fetch-data.sh`, driven by `docs/datasets.lock.json`; the old W1 `wave0_fetch.sh` engine
 was retired.) Roadmap: **close the realized-vs-headroom gap** (a stronger label-free selector), broaden
-reward-guided strategies, harden eval.
+reward-guided strategies, harden eval. **Stage-1 problem-definition (2026-07-04, methodology now in CLAUDE.md):** the
+semantic-layer TFRL/ICL sufficiency question was surveyed (a strict-reviewed 16k-word paper, 171 refs,
+[[2026-07-04-stage1-semantic-tfrl-survey]]) and reduced to ranked candidate problems
+([[2026-07-04-stage1-problem-definition]]); at K2 the owner selected **CP-1 (quantify H_prompt−H_fix),
+CP-3 (measure ρ(ASR)), CP-8 (calibration+PMI on SLU/MCQ), CP-4 (voice-agent pass@k)** for Stage-2.
+Next: a semantic-task validation table + per-problem Research-Proposal-Template instances.
 
 **W2 — Efficient RL alignment (skeleton).** Efficient GRPO/DPO with LoRA / partial updates for
 speech↔language alignment. Roadmap: implement the LoRA GRPO/DPO loop on top of the shared rewards;
