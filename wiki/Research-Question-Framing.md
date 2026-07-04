@@ -85,7 +85,14 @@ Each check measures H_prompt − H_fix and/or ρ on one surface; see [[Semantic-
   **H_prompt − H_fix = +0.020** (CI [−0.02,+0.06], n.s.; b2 vs generic +0.027, n.s.) — condition (b)
   prompt-reachability ≈ 0 *even where headroom exists*; and **majority = greedy = 0.640** — condition
   (c) realization ≈ 0 (the deployable selector harvests 0% of the +0.133 headroom). *(directional)*
-- Pending: selector anatomy ρ (E4 — now pivotal), voice-agent (E5).
+- SQA-MCQ realization, MMAU-mini (E4, n=150 **done**, same slice as E3): greedy 0.633, **oracle 0.773
+  (headroom +0.140)**; the modern label-free selectors **all fail to harvest it** — self-certainty
+  (mean-token-logprob) **ρ = 0.0**, majority **ρ = −0.047**, confidence-weighted vote **ρ = −0.047**
+  (both *below* greedy), LLM-judge **ρ = 0.143 but n.s.** (CI vs majority [−0.013, +0.067] crosses 0).
+  **No label-free selector significantly beats majority** — the "confidently-wrong" mechanism (C4:
+  large reward-estimation error τ). **(c) realization ≈ 0 confirmed on modern selectors, not just
+  majority.** `_repro/cp3_selector_realization_mmau.json`. *(directional)*
+- Pending: multimodal-conditioning (b) leg (E6′, feature-audited — running), voice-agent (E5).
 
 **Current lean (honest, sharpening — not yet a formal anchor).** Across BOTH an easy surface (E1
 intent, near-saturated) and a hard, non-saturated surface (E3 MMAU, greedy 0.64) the picture is
@@ -96,13 +103,16 @@ consistent and now *decomposed by condition*:
 - **(b) the instruct-prompt / ICL contribution ≈ 0** on both surfaces (H_prompt − H_fix ≈ 0, not
   b2-genuine). Instruction diversity is **not** the lever — this is the specific thing Q1 asks about,
   and the directional answer is leaning **insufficient**.
-- **(c) label-free realization ≈ 0** (E3 majority = greedy exactly; 0% of the +0.133 headroom harvested).
+- **(c) label-free realization ≈ 0** — now tested across selectors, not just majority: E3 majority =
+  greedy exactly; E4 (n=150) self-certainty ρ=0.0, majority/conf-vote ρ=−0.047, **best (LLM-judge)
+  ρ=0.143 but not significant**. No deployable label-free selector harvests the +0.14 oracle headroom.
 The nuance that matters for the branch: the value that exists lives in **sampling-support (a)**, which
 neither **prompting (b)** nor **deployable selection (c)** currently captures. So the honest reframing
 is: the *instruct-prompt optimization space* looks insufficient (→ 2.2 territory), but the *sampling
-support* is real and the open lever is **(c) realization** — the pivot to CP-3 (E4). We still owe more
-surfaces (multilingual/OOD, agentic) before a formal anchor, but the (a)/(b)/(c) decomposition is the
-finding.
+support* is real and the open lever is **(c) realization** — which E4 now shows current label-free
+selectors do NOT close (the confidently-wrong / large-τ mechanism, machine-checked as C4 in
+`TfrlProofs.Realization`). Remaining before a formal anchor: the multimodal (b) leg (E6′) and broader
+surfaces; but the (a)/(b)/(c) decomposition — support real, prompt ≈ 0, realization ≈ 0 — is the finding.
 
 ---
 
