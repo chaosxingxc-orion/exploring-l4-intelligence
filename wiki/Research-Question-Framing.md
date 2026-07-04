@@ -31,6 +31,24 @@ TEXT sub-channel of c** — they found the text-conditioning contribution ≈ 0.
 conditioning channel moves the rollout is the omni-specific, still-untested part of Q1, and is the
 priority next check. So H_prompt below is understood over the **full** c = {text} × {multimodal}.
 
+**Integrity constraint on multimodal conditioning (owner, 2026-07-04) — this rules out a whole class
+of invalid designs.** `oracle-over-K` is only a valid measure of a conditioning benefit when the K
+variants are **semantically equivalent presentations of the same information**. Text-instruction
+variants (E1/E3) qualify — the audio and the answer-relevant evidence are untouched. **Acoustic
+transforms do NOT** — denoise/band-pass/speed/pre-emphasis/trim alter the answer-relevant audio
+evidence on an audio-reasoning task, so `oracle-over-acoustic-variants` would report a **fabricated**
+gain (content leakage + oracle cherry-picking). We do not inject multimodality by any route that could
+leak or corrupt the semantic content. The **valid** multimodal-conditioning levers are therefore:
+- **(M1) content-preserving robustness** — a *single, uniformly-applied* transform that provably
+  preserves content (loudness normalization is the clearest; measure the accuracy delta vs raw, **no
+  oracle-over-variants**, same transform on every item);
+- **(M2) non-leaking audio few-shot / in-context exemplars** — prepend (audio, answer) pairs from
+  *other* items to condition the model; the test item's answer is never in the context, so no leakage;
+  this is genuine multimodal ICL and the honest way to test whether audio conditioning moves the rollout;
+- **(M3) cross-modal injection only where it provably adds no answer information** (e.g. a text view of
+  the audio for a task whose answer is not recoverable from that text) — case-by-case, leakage-audited.
+Any multimodal design must pass a leakage audit before it runs.
+
 **Program-level sufficiency** =
 across the semantic layer, instruct-prompt rollout on the frozen omni reaches enough headroom,
 reachably and genuinely, that training-free RL over the prompt/ICL space is worth building on.
