@@ -140,6 +140,17 @@ Every research thread moves through three stages; each deliverable states its st
 3. **Stage 3 — Publication (论文发表).** Full experimental substantiation, independent
    reproduction, hostile review to convergence.
 
+**Theory track — Lean-locked, convergence-proved, dual-tracked with engineering.** Every theoretical
+proposal MUST be formalized in Lean 4 (`proofs/tfrl/`, machine-checked, `sorry`-free bar documented
+exceptions) with BOTH a correctness proof AND a **convergence proof** — a static identity is not a
+result (the 2026-07-02 review killed the prior theory for being tautology-where-proven). The
+engineering implementation must be about the SAME object the theorem is about (dual-track: the code's
+selector/update rule ⟷ the theorem's operator). Convergence usually requires **explicit constraint
+terms** that bound the problem's edges — KL trust-region (ε / the β regularizer), an over-optimization
+budget cap (N*), a slow-drift / Lipschitz precondition, a reward-estimation-error bound — and the
+load-bearing content is those constraints: prove the UNCONSTRAINED process fails to converge, then that
+the CONSTRAINED one does. See `wiki/Theory-Convergence-and-Constraints.md`.
+
 Evidence keeps the grade of the stage that produced it: a Stage-1 number stays
 hypothesis-grade until re-established at Stage 2. Records are append-only — re-grade via a
 dated reflection doc, never rewrite. When reading pre-2026-07 records, apply this lens.
