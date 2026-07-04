@@ -92,7 +92,18 @@ Each check measures H_prompt − H_fix and/or ρ on one surface; see [[Semantic-
   **No label-free selector significantly beats majority** — the "confidently-wrong" mechanism (C4:
   large reward-estimation error τ). **(c) realization ≈ 0 confirmed on modern selectors, not just
   majority.** `_repro/cp3_selector_realization_mmau.json`. *(directional)*
-- Pending: multimodal-conditioning (b) leg (E6′, feature-audited — running), voice-agent (E5).
+- **Multimodal-conditioning (b), MMAU (E6′, n=150 done, FBank/MFCC-invariance audited):** the audit
+  kept only feature-invariant transforms (mel-cos ≥ 0.98: original, speed0.9, speed1.1, trim) and
+  correctly excluded feature-altering ones (rms_norm 0.978, preemphasis 0.886, denoise 0.926 — which
+  *hurt* to 0.587, telephone 0.931). Over the leakage-free invariant manifold: oracle 0.700 vs original
+  greedy 0.640 → **H_mm = +0.060 (descriptive CI [0.027, 0.100], excludes 0)**. **This is the one place
+  a conditioning channel opens real headroom** — but it is an ORACLE (label-aware) headroom, i.e.
+  another *(a)-support* source (feature-equivalent presentations surface different correct answers),
+  NOT a deployable prompt lever: the best single uniform transform (speed1.1 0.66) beats original by
+  only +0.02, and harvesting the +0.06 needs a label-free selector — the same (c) wall. *(directional;
+  caveat: speed transforms could residually leak for the duration/counting subset — a conservative
+  {original, trim}-only read still shows headroom.)* `_repro/cp1_multimodal_feature_audited_mmau.json`
+- Pending (Stage-2 / future surface): voice-agent (E5, CP-4).
 
 **Current lean (honest, sharpening — not yet a formal anchor).** Across BOTH an easy surface (E1
 intent, near-saturated) and a hard, non-saturated surface (E3 MMAU, greedy 0.64) the picture is
@@ -100,19 +111,30 @@ consistent and now *decomposed by condition*:
 - **(a) support is REAL** where the task is non-trivial: E3 H_fix = +0.133 (the frozen q₀ holds much
   better answers than greedy; sampling reveals them). So best-of-N / sampling-based training-free RL
   has genuine room.
-- **(b) the instruct-prompt / ICL contribution ≈ 0** on both surfaces (H_prompt − H_fix ≈ 0, not
-  b2-genuine). Instruction diversity is **not** the lever — this is the specific thing Q1 asks about,
-  and the directional answer is leaning **insufficient**.
+- **(b) the conditioning contribution splits by channel.** The **text / instruct-prompt** channel ≈ 0
+  on both surfaces (E1 +0.000, E3 +0.020 n.s.) — instruction diversity is **not** the lever, the
+  specific thing Q1 asks about. The **multimodal (acoustic-presentation)** channel is **not** null:
+  over feature-invariant presentations E6′ shows a real **oracle** headroom H_mm = +0.060 (CI excludes
+  0) — but this is another *(a)-support* source (label-aware), not a deployable prompt lever, and the
+  best single deployable transform adds only +0.02. So the **instruct-prompt lever proper is
+  insufficient**; the multimodal channel adds latent oracle headroom, not a reachable-and-realizable
+  prompt gain.
 - **(c) label-free realization ≈ 0** — now tested across selectors, not just majority: E3 majority =
   greedy exactly; E4 (n=150) self-certainty ρ=0.0, majority/conf-vote ρ=−0.047, **best (LLM-judge)
   ρ=0.143 but not significant**. No deployable label-free selector harvests the +0.14 oracle headroom.
-The nuance that matters for the branch: the value that exists lives in **sampling-support (a)**, which
-neither **prompting (b)** nor **deployable selection (c)** currently captures. So the honest reframing
-is: the *instruct-prompt optimization space* looks insufficient (→ 2.2 territory), but the *sampling
-support* is real and the open lever is **(c) realization** — which E4 now shows current label-free
-selectors do NOT close (the confidently-wrong / large-τ mechanism, machine-checked as C4 in
-`TfrlProofs.Realization`). Remaining before a formal anchor: the multimodal (b) leg (E6′) and broader
-surfaces; but the (a)/(b)/(c) decomposition — support real, prompt ≈ 0, realization ≈ 0 — is the finding.
+**The Stage-1 answer (all core legs now in — E1/E3/E4/E6′ + verified Lean).** The value that exists
+lives in **latent oracle headroom** from two sources — sampling (a, +0.13) and feature-invariant
+multimodal presentation (b-multimodal, +0.06) — and **neither the text-prompt channel (b-text ≈ 0) nor
+any deployable label-free selector (c, ρ ≈ 0) captures it.** So the *instruct-prompt / ICL optimization
+space proper is insufficient* for training-free RL on the semantic layer: the one lever Q1 names (text
+instruction diversity) is inert, and the real headroom is oracle-only (not reachable-and-realizable via
+prompting). This is **branch 2.2**, but with a constructive shape: the binding wall is **(c) realization**
+(machine-checked C4: ρ→1 only as τ→0), and the latent headroom is real and even *enlargeable* via
+feature-invariant multimodal presentation. So an agentic expansion is warranted **specifically** to
+(i) drive τ down with a genuinely better reward channel and/or (ii) enlarge the feature-invariant
+exploration space — and `OptSpace.gain_product` proves this helps **only** if it adds a new
+non-degenerate reward, not by stacking agents. See [[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]]
+for the locked verdict.
 
 ---
 
