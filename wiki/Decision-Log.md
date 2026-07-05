@@ -57,6 +57,22 @@ retrieval / **W4 omni-embedding** as the independent-knowledge signal, #37) and 
 review, the frozen +10% bar, paired-bootstrap CIs, the E10b de-confounder, and the M3 n=3→n=150 noise
 collapse. The locked answer survived all of them.**
 
+**RETRACTION (2026-07-05, owner — a 4th over-reach, deeper than the others).** The "M3 locks Q1b" above is
+**WITHDRAWN.** M3 fed the audio PLUS **the test item's ground-truth text transcript** — an
+**information-boundary violation**: deployment's omni input is *audio only*; a golden transcript doesn't
+exist there, and if it did the omni model is pointless (you'd use a text LLM + ASR — negating the whole
+premise). So M3's +22.4% is **input leakage**, same class as the retracted acoustic-oracle fraud — not a
+valid lever. **Q1a STANDS** (no *valid* internal lever — few-shot/prompt/self-selection/two-system — realizes
+the oracle-δ). **Q1b is REOPENED.** The legitimate path: a **multimodal MEMORY system** injecting *external*
+knowledge keyed by the input, never the test transcript (design: [[2026-07-05-omni-multimodal-memory-design]]).
+**Corrective (G0):** codified the **information-boundary guard** (every lever must pass: deployment has this
+input? respects audio-only modality? no test-item leakage? real capability vs fed-answer). Re-graded: KEEP
+P2/E8/E10/E10b (valid — own samples/prompt/label-free selection); RETRACT M3 (leakage); REDO E7 (few-shot
+mis-designed: gave only the answer, not the task-handling pattern → T2). **Deeper meta-lesson: statistical
+discipline (CIs, controls, review) did NOT catch this one — it took the owner's task-definition /
+modality-boundary lens. Metric-chasing that leaks information the real task lacks is the classic multimodal
+error; the guard now makes it a pre-flight check on every experiment.**
+
 **Why (the strict review, again).** A 3-persona blind panel (methodology / devil's-advocate / EIC+formal)
 returned **MAJOR REVISION** and was right — the v1 verdict over-reached toward agentic (same failure mode
 as Phase-1). It caught: (i) **TH2 `Reachability.lean` did NOT compile** (Mathlib `div_lt_div_iff` rename)

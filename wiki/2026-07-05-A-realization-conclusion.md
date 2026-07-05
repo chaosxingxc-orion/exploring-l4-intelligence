@@ -3,13 +3,30 @@ title: "Can adjusting the conditioning A realize the frozen omni's oracle-δ? �
 date: 2026-07-05
 revised: 2026-07-05 (v2 — after 3-persona strict review; see [[2026-07-05-A-realization-review-synthesis]])
 stage: 1-directional
-status: LOCKED (both Q1a and Q1b) — Q1a ICL insufficient (robust); Q1b YES design a new-signal-injecting agentic system (M3 demonstrates a new independent signal robustly realizes headroom internal ICL cannot). Stage-2 engineers the signal (W4).
+status: "PARTIALLY RETRACTED (2026-07-05, owner) — Q1a (ICL insufficient across VALID internal levers) STANDS; the M3 result and the Q1b 'lock' are WITHDRAWN: M3 injected the test item's GOLDEN TRANSCRIPT = information leakage / boundary-crossing (deployment has no such input; if it did, the omni is pointless). Q1b is REOPENED; the legitimate path is a multimodal MEMORY system (external knowledge, input-keyed, NO test-item leakage). See the retraction banner + [[2026-07-05-omni-multimodal-memory-design]]."
 question: "Given confirmed per-instance oracle-δ, can adjusting A (few-shot ICL / prompt-opt / two-system verifier) convert it into a deployable ≥+10% greedy gain? → branch 2.1 vs 2.2"
 prereg: "[[2026-07-05-stage1-A-realization-prereg]] (frozen before runs)"
 verdict: "Q1a: ICL is INSUFFICIENT (robust) — every cheap in-fence lever fails the +10% bar: few-shot ICL (E7), prompt-opt (E8), self-selection & two-system verifier (E10/E10b REFUTED with CIs). Q1b: YES — design an omni agentic system as a NEW-INDEPENDENT-of-M-signal injector. LOCKED by M3 (n=150, CIs): a new independent signal (ground-truth transcript) robustly realizes headroom on vocalbench-zh (+22.4%, CI[0.04,0.16], clears +10%) where internal ICL cannot; theory-consistent (TH2a floor). Internal composition/self-verification is refuted (E10b) + forbidden (gain_product). Stage-2 ENGINEERS the produced signal (ASR/retrieval/W4 embedding), not re-decides the branch."
 ---
 
 # Can adjusting A realize the oracle-δ? (Phase-2 of Q1)
+
+> ## ⚠️ RETRACTION (2026-07-05, owner) — read first
+> **The M3 result (§3) and the Q1b "lock" (§4, frontmatter) are WITHDRAWN.** M3 injected the **test
+> item's ground-truth text transcript** alongside the audio — an **information-boundary violation**: at
+> deployment the omni's input is *audio only*; a golden transcript does not exist, and if it did you would
+> not need an omni model (you'd use a text LLM, and "add an ASR" negates the whole point of omni). So M3's
+> "+22.4%" is **input leakage**, the same class of error as the earlier acoustic-oracle fraud — **not** a
+> valid realization lever. **What still STANDS:** Q1a — across the *valid* internal levers (few-shot E7,
+> prompt-opt E8, self-selection & two-system verifier E10/E10b, all using only the model's own
+> samples/prompt/selection, no leakage) — **no cheap in-fence lever realizes the oracle-δ.** **What is
+> REOPENED:** Q1b. The legitimate path is a **multimodal MEMORY system** that injects *external* knowledge
+> keyed by the input (NEVER the test item's transcript) — see [[2026-07-05-omni-multimodal-memory-design]].
+> Method lesson codified as the **information-boundary guard** (G0): every lever must pass "does deployment
+> have this input? does it respect the audio-only modality? does it avoid leaking the test item?". Also
+> note: E7's few-shot was *mis-designed* (only gave the answer, not the task-handling pattern) and must be
+> redone (T2). This is append-only; the original text below is preserved, marked retracted where it applies.
+
 
 > **v2 after strict 3-persona review** ([[2026-07-05-A-realization-review-synthesis]], MAJOR REVISION).
 > The v1 verdict ("design an omni agentic system — Yes, positive seed") over-reached — the same failure
