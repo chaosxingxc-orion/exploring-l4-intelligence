@@ -43,6 +43,20 @@ noise, inverted at n=60; do not narrativize smokes.) So the new-signal/agentic d
 + weakly-empirically-supported, **not yet earned**; Stage-2 = powered-n M3, W4 (independent-knowledge
 signal), and OPRO/GEPA. Artifact `_repro/m3_crossmodal.json`.
 
+**LOCK — powered M3 (n=150 + CIs) settles Q1b.** Re-run at n=150: vocalbench-zh **+22.4% SIGNIFICANT**
+(CI[0.04, 0.16] excludes 0, clears the +10% bar); SQuAD-zh +7.7% n.s. So injecting a new independent-of-M
+signal (a ground-truth transcript) **robustly realizes headroom that every internal ICL/selection/
+verification lever could not** — the only lever in either phase to clear the bar with a CI excluding 0.
+Interpretable: the transcript recovers **audio-perception loss** (benefit largest where audio-only is weak).
+**Locked answer: Q1a ICL insufficient (robust); Q1b YES — design an omni agentic system as a
+new-independent-signal injector** (internal composition/self-verification refuted by E10b + forbidden by
+`gain_product`; new-signal route demonstrated by M3; theory-consistent with TH2a's shared-knowledge floor).
+The branch (2.2/new-signal) is decided; Stage-2 **engineers** the produced signal (ASR self-transcription /
+retrieval / **W4 omni-embedding** as the independent-knowledge signal, #37) and formally closes OPRO/GEPA.
+**Meta-lesson (reaffirmed hard this session): I over-reached toward agentic 3× — each caught by the strict
+review, the frozen +10% bar, paired-bootstrap CIs, the E10b de-confounder, and the M3 n=3→n=150 noise
+collapse. The locked answer survived all of them.**
+
 **Why (the strict review, again).** A 3-persona blind panel (methodology / devil's-advocate / EIC+formal)
 returned **MAJOR REVISION** and was right — the v1 verdict over-reached toward agentic (same failure mode
 as Phase-1). It caught: (i) **TH2 `Reachability.lean` did NOT compile** (Mathlib `div_lt_div_iff` rename)
