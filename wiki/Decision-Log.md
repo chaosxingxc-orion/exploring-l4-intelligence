@@ -6,7 +6,44 @@
 
 ---
 
-### 2026-07-05 · Phase-2 (A-realization) — can adjusting A realize the oracle-δ? DIRECTIONAL NULL, strict-reviewed, over-reach corrected (again)
+### 2026-07-05 (later) · 修正战役：信息边界准则立起 → 合法杠杆重测 → Q1 结论订正（M3 撤回后重建）
+**Decision / 背景.** 主人指出一个**低级但根本**的错误：M3（注入 golden 转写）是**信息边界越界**——"如果我都有
+了 text ground truth，为什么还需要音频输入？"若有转写就不需要 omni 模型（改用 ASR→text-LLM，否定了 omni
+的初衷）。这是与早先声学 oracle 造假同类的错误，且**统计纪律没抓到它**——靠的是主人的任务定义/模态边界视角。
+遂**先立准则、再重测、后订正**（全程 Stage-1 方向性；每个杠杆过 [[Information-Boundary-Guard]]）。
+
+**做了什么（全部 boundary-clean）.**
+- **G0** 立 [[Information-Boundary-Guard]]（4 问：部署有此输入？尊重音频-only？无测项泄漏？真能力 vs 喂答案），
+  **撤回 M3/Q1b 锁**（[[2026-07-05-A-realization-conclusion]] 挂撤回横幅），重评旧实验（P2/E8/E10/E10b 保留，
+  M3 撤回，E7 重做）。
+- **T1** [[2026-07-05-task-definition-rubric]]：回到最原始任务定义，逐族列"真实部署输入 / 合法杠杆 / 越界线"
+  （SQA-音频内容[mmau 给文本问题] vs SQA-音频问题[转写=泄漏=M3]）；跨族 R-input/R-reward（**可部署奖励**：
+  自一致/置信/规则/工具成功——WER/对金标准准确率**不是**可部署奖励）/R-fewshot 规则。
+- **T2** 正确的"任务定义 few-shot"（audio+文本 how-to-handle+train 推理示范，测项音频-only）：**仍不超过 plain**
+  （mmau −0.075 n.s.；vocalbench −0.175 SIG−；SQuAD ±0）。示范确带真任务信号（C−b1 SQuAD +0.10 SIG+）但被多模态
+  few-shot 格式成本抵消。**补上了"E7 设计错误 → Q1a 未定"的缺口**：正确设计下 Q1a 仍成立。产物 `_repro/t2_taskdef_fewshot.json`。
+- **T5** [[2026-07-05-t5-headroom-composition]]：仅用模型自身样本（P2 greedy vs oracle@8）拆 headroom = **内部实现
+  gap**（oracle−greedy，E10/E10b 证内部选择拿不到）+ **能力/知识 gap**（1−oracle，无一样本正确→需外部信号）；
+  知识 gap 在知识问答最大——**vocalbench-zh 42.7%**，即记忆系统的目标市场。
+- **T8** `proofs/tfrl/TfrlProofs/InfoBoundary.lean`（sorry-free，全库 green）：形式化 read-out vs new-info。
+  read-out 选择器（best-of-N/自一致/E10 双系统）**只可能选中自己的样本**→ 上界=oracle@N（`readout_acc_le_oracle`），
+  知识 gap 是**整个 read-out 类的不可约误差下界**（`readout_error_ge_gap`）；只有改变采样分布的 new-info 杠杆能越过
+  （`newinfo_can_cross_gap`）。收敛半部接 `BlindSpot.avg_regret_tendsto_zero`（frac=gap）。
+- **#37** [[2026-07-05-W4-value-reassessment]]：旗舰 W4 是 **read-out 杠杆**（重组自身 embedding、不引入新信息）→
+  受 oracle 上界约束、碰不到知识 gap；但它改善记忆的**检索键**（更解耦=更好的键）→ 与 new-info 记忆**互补而非替代**。
+- **T6 Step 1**（主人明确优先方向"step by step 尝试…压缩/检索/使用三策略最核心"）：统一**压缩键**可行性探针——
+  键=模型自产的音频内容压缩摘要（可部署、仅作索引，非注入金标准，绝非 M3）。产物 `_repro/t6_compression_feasibility.json`。
+
+**Verdict（订正后，Stage-1 方向性；[[2026-07-05-Q1-conclusion-corrected]]）.**
+- **Q1a：ICL/指令优化不足**——三个合法 read-out 杠杆（T2 few-shot、E8 提示优化、E10/E10b 双系统）全部不过；
+  read-out 上界是被证明的墙（T8）；击败它的知识 gap 实测高达 ~43%（T5）。
+- **Q1b：需要超越-ICL 的系统，且必须是 new-info 杠杆 = 多模态外部知识记忆**——因为它是唯一能越过知识 gap 的类
+  （T8），而该 gap 真实且大（T5）。**不是**自奖励（E10 已否）、**不是**转写注入（M3 撤回）、**不是**跨会话累积
+  agent（7/03 关闭围栏）。其 training-free 可实现性是下一步方向性探针（T6），**建/不建的裁决是主人 Stage-1 检查点
+  （T9）——本结论不自动滚入 Stage-2**。
+
+**Why it matters.** 这是本弧线第 4 次过度伸张的纠正，且最深：前几次靠统计纪律（CI、E10b、M3 smoke 崩塌）抓住，
+这次**只有任务定义/模态边界视角能抓**。准则现已成文（G0），成为一切杠杆的前置闸。分支未推送、wiki 待同步。
 **Decision.** Owner reframe (2026-07-05): rather than *select* the good answer post-hoc (the (c) wall),
 test whether **adjusting the conditioning A makes the good answer modal (greedy)**, training-free, on the
 non-saturated zh+en surfaces, against a frozen relative +10% bar (prereg
