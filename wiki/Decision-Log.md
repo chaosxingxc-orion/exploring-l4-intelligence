@@ -6,6 +6,41 @@
 
 ---
 
+### 2026-07-05 · Phase-2 (A-realization) — can adjusting A realize the oracle-δ? DIRECTIONAL NULL, strict-reviewed, over-reach corrected (again)
+**Decision.** Owner reframe (2026-07-05): rather than *select* the good answer post-hoc (the (c) wall),
+test whether **adjusting the conditioning A makes the good answer modal (greedy)**, training-free, on the
+non-saturated zh+en surfaces, against a frozen relative +10% bar (prereg
+[[2026-07-05-stage1-A-realization-prereg]]). **Ran:** P2 baselines (n=150; 4 non-sat surfaces, oracle-δ
++0.11…+0.28) → E7 multimodal few-shot ICL (owner's key lever), E8 in-fence prompt-opt, E10 generator/
+verifier two context-differentiated systems (n=24–30). **Theory (machine-checked, full TfrlProofs builds
+8570 jobs, sorry-free):** TH2a `BlindSpot` (two-system realization → oracle as blind-spot fraction → 0) +
+TH2 `Reachability` (the (b) mode-shift + the (b)-cap — the "(b) has no theorem" gap now filled).
+
+**Result / verdict (DIRECTIONAL NULL, Stage-1).** Under the frozen +10% bar **no in-fence lever realizes
+the oracle-δ**: E7 never lifts greedy (and its ±0.033 deltas sit inside temp-0 decode noise), E8 +0.0%
+(but it was a 4-candidate pick, not real OPRO/GEPA), E10 sub-threshold (SQuAD +5.6%, big-bench +8.3%). But
+this **does not close Q1 or establish the agentic branch**, because it is under-powered (n=24, no CIs) AND
+under-scoped — the decisive in-fence instruments (real OPRO/GEPA, M3 cross-modal injection, full
+shot-curve, and an **on-surface self-selection control**) were never run. Returned to owner with those as
+mandatory Stage-2 preconditions; no auto-rollover.
+
+**Why (the strict review, again).** A 3-persona blind panel (methodology / devil's-advocate / EIC+formal)
+returned **MAJOR REVISION** and was right — the v1 verdict over-reached toward agentic (same failure mode
+as Phase-1). It caught: (i) **TH2 `Reachability.lean` did NOT compile** (Mathlib `div_lt_div_iff` rename)
+— I'd falsely claimed it "machine-checked"; fixed to green (`lt_div_iff₀`/`div_lt_iff₀`). (ii) A **post-hoc
+ρ≥0.3 threshold** (not in the prereg) manufactured "E10 clears"; under the frozen +10% bar E10 clears
+nothing. (iii) The **"two-system > self-selection" causal claim is confounded** — E4's self-selection ≈0
+was on MMAU; E10's positives on SQuAD-zh/big-bench-audio (zero overlap, no on-surface control), and on
+MMAU the verifier was *worse* than greedy. (iv) E10 is a **branch-2.1 verifier/MBR selector**, not
+"agentic" — its weak signal argues 2.1 is under-tested, not for 2.2. **Consequences.** The honest value of
+this phase is a precisely-scoped directional null + the two machine-checked theorems + a pinned Stage-2
+precondition list — NOT a build recommendation. Artifacts: conclusion (v2)
+[[2026-07-05-A-realization-conclusion]], review [[2026-07-05-A-realization-review-synthesis]],
+`_repro/{p2_baselines,e7_fewshot,e8_promptopt,e10_verifier,dec_synthesis}.json`,
+`proofs/tfrl/TfrlProofs/{BlindSpot,Reachability}.lean`. **Lesson reaffirmed:** small-n directional
+evidence + a preferred prior (agentic/2.2) reliably produces over-reach; the frozen bar + adversarial
+review are what keep the conclusion honest.
+
 ### 2026-07-05 · Stage-1 Q1 directional finding (ICL-sufficiency for frozen-omni TFRL) — locked, strict-reviewed, then CORRECTED for over-reach; theory machine-checked in Lean
 **Decision.** Executed the owner's `/goal`: run the planned Stage-1 experiments with full validation, lock
 the research in paper form, prove the theory in Lean, and answer Q1 (is ICL sufficient for training-free RL
