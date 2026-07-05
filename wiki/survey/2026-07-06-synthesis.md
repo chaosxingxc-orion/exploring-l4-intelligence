@@ -486,13 +486,17 @@ titles; no hallucinations, no dead links, no topic mismatches. Two are our own s
 = 2509.19567 "RAG-based context discovery for ASR"; "same-model self-check" = 2505.24347) — wording tweaks,
 not citation errors.
 
-**8.2 The framework-test's "strongest candidate" (2505.24347) DISSOLVES → thesis strengthened.** On
-inspection 2505.24347 = *"Fewer Hallucinations, More Verification: A Three-Stage LLM-Based Framework for ASR
-Error Correction"* uses an **external GPT-4o** in a detect→correct→verify loop — a **second model
-(element)**, not same-model self-check. It was never a clean usage-pattern candidate; its gains come from
-GPT-4o's language prior (new-info). The one parked risk is thus largely resolved: it is an **element** case.
-(An in-house oracle-ceiling re-test of self-check *without* a second model remains a clean Stage-1 probe =
-GAP-6.)
+**8.2 The framework-test's "strongest candidate" (2505.24347) is UNRESOLVED, not dissolved (corrected per
+D3 review).** 2505.24347 = *"Fewer Hallucinations, More Verification: A Three-Stage LLM-Based Framework for
+ASR Error Correction"* is a **single frozen GPT-4o** running detect→correct→verify (the D3 domain +
+devil's-advocate reviewers verified this against arXiv; it contradicts an earlier draft's "external second
+model" reading and this doc's own ledger line 115). Its gains (9–21% rel. CER/WER) are measured vs a
+**naive** baseline, with **no oracle@N control**. Correct status: **UNRESOLVED, parked as GAP-6** (does a
+same-model self-check beat the model's *own* oracle@N?), *not* "dissolved into an element." Consequently the
+headline is **"zero *confirmed* usage-pattern crossings; the strongest is unresolved for lack of an oracle
+control,"** not "zero survive scrutiny." (This also shows the citation pass verified ID-resolution, not
+per-claim mechanism — a limitation to state.) The §3 JSON "STRONGEST CANDIDATE ... parked" entry is
+**superseded by this §8.2**.
 
 **8.3 The empty cell was OVER-CLAIMED — corrected.** "No training-free best-of-N/self-consistency/prompt-opt
 win on ANY audio benchmark" is **FALSE**: MMAU has several training-free positives — Audio-CoT (2501.07246:

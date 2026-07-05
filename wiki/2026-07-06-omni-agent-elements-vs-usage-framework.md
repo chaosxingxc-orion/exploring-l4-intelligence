@@ -8,11 +8,15 @@ purpose: "Give the omni agentic system a problem-first anatomy: separate the ELE
 
 # The elements-vs-usage framework
 
-> **One-line thesis.** For a **frozen** model, agentic leverage can only come from adding a genuine
-> **new-information ELEMENT** (a tool that computes/fetches new facts, external knowledge, a memory holding
-> external content, or a genuinely complementary model) — **not** from a cleverer **usage pattern** over the
-> same model (roles, prompts, multi-agent, routing), because those are *read-out* and are capped by the
-> model's own oracle ceiling (`TfrlProofs.InfoBoundary`; measured in E10/E10b).
+> **One-line thesis (contract-relative; corrected per D3 review 2026-07-06).** A **usage pattern** — a
+> role/prompt/multi-agent/routing move that only *selects or orchestrates over the model's fixed generative
+> law* — is *read-out*, capped by the model's own **oracle@N** (`TfrlProofs.InfoBoundary`; measured E10/E10b):
+> it lifts greedy toward the oracle, never past it. **Crossing** that ceiling needs **either** a new-info
+> **ELEMENT** (tool / external knowledge / memory / complementary model) **or** an in-scope **generative-law
+> change** (③ decoding edit, e.g. contrastive decoding — which the canonical explicitly permits). What is
+> *not* true is the tempting absolute "only elements can raise the ceiling" — decoding edits can, info-free.
+> **Elements are the only carriers of new *information* (holds); they are not the only ceiling-raisers.** See
+> §3b + `2026-07-06-review` for the correction; convergence of the constrained selector: `BestOfNConvergence`.
 
 ## 1. Where this came from
 The owner framed a general judgment: once a model is capable enough to *do work*, three deficits remain,
