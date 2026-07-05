@@ -98,6 +98,22 @@ RLHF over-optimization theory, specialized to the training-free tilt — finitar
    `best_of_n`, the CP-1 instruction search). Do we add a CI check that the Lean operator and the Python
    selector stay in sync (a test that the code's update rule matches the theorem's hypotheses)?
 
+## Parked — filling the shared-knowledge floor via the omni-embedding system (deferred, owner 2026-07-05)
+
+The corrected omni-verifier theory (TH2a, 2026-07-05) reframes the omni-as-reward as a **two
+context-differentiated systems** (generator-agent + verifier-agent, same frozen weights, distinct
+system-prompt/context) — an agentic composition, NOT self-reward. The load-bearing constraint is the
+**achievable error-decorrelation δ_corr** between the two systems (context differentiation elicits
+functionally different behavior from the same weights), and convergence → oracle as δ_corr → 0. The one
+**irreducible residual floor** is the **shared knowledge blind-spot**: items where no context
+differentiation of the frozen M helps because M genuinely lacks the information (both systems necessarily
+fail). **Owner note (2026-07-05):** this residual floor is real and is **deferred** — out of scope for
+the current Q1 study. The plan to fill it: **supplement the knowledge blind-spot via the omni-embedding
+system (W4 flagship)** — the embedding system is precisely the *independent-of-M* signal the
+C4/decorrelation theory says you need to beat the floor. This requires **defining new omni agentic
+tasks**, so it will be discussed only when we reach that stage. This is the concrete bridge from the
+(c)-realization floor (this study) to W4 and branch 2.2.
+
 ## 中文摘要
 
 **规则:** 所有理论 proposal 锁定到 `proofs/tfrl/` 的 Lean 证明,必须同时有**正确性证明 + 收敛性证明**,
