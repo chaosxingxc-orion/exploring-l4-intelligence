@@ -35,6 +35,14 @@ internal-composition/self-verification route is refuted (E10b) and forbidden by 
 Stage-2 tests remain to lock it: (a) real OPRO/GEPA (last cheap in-fence lever); (b) M3/W4 (first
 new-signal lever). Artifact `_repro/e10b_control.json`.
 
+**Update — M3 (first new-independent-signal probe, n=60 + CIs): MODEST/BORDERLINE, not locked.** Injecting
+an independent ground-truth text transcript alongside the audio gives vocalbench-zh +20% (CI[0.0, 0.2],
+lower bound at 0) and SQuAD-zh +4% (n.s.) — the **only** lever to show any positive, weakly supporting the
+new-signal direction but not robustly confirmed. (A sharp lesson: the n=3 smoke showed SQuAD "+50%" — pure
+noise, inverted at n=60; do not narrativize smokes.) So the new-signal/agentic direction is theory-supported
++ weakly-empirically-supported, **not yet earned**; Stage-2 = powered-n M3, W4 (independent-knowledge
+signal), and OPRO/GEPA. Artifact `_repro/m3_crossmodal.json`.
+
 **Why (the strict review, again).** A 3-persona blind panel (methodology / devil's-advocate / EIC+formal)
 returned **MAJOR REVISION** and was right — the v1 verdict over-reached toward agentic (same failure mode
 as Phase-1). It caught: (i) **TH2 `Reachability.lean` did NOT compile** (Mathlib `div_lt_div_iff` rename)

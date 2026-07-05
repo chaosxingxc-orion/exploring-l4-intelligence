@@ -6,7 +6,7 @@ stage: 1-directional
 status: CLEAR directional verdict (de-confounded with CIs via E10b); Stage-2 for the 2 remaining in-fence/agentic instruments
 question: "Given confirmed per-instance oracle-δ, can adjusting A (few-shot ICL / prompt-opt / two-system verifier) convert it into a deployable ≥+10% greedy gain? → branch 2.1 vs 2.2"
 prereg: "[[2026-07-05-stage1-A-realization-prereg]] (frozen before runs)"
-verdict: "ICL/cheap-in-fence realization is INSUFFICIENT: every cheap lever fails the +10% bar — few-shot ICL (E7), prompt-opt (E8), self-selection & the two-system verifier (E10/E10b, the latter REFUTED with CIs as a surface confound). An omni agentic system is warranted ONLY if it injects a genuinely NEW INDEPENDENT-of-M signal (cross-modal grounding / new verifiable reward / W4 embedding) — the internal-verification/composition route is refuted. Last open in-fence test: real OPRO/GEPA. Directional (n≤40); Stage-2 confirms."
+verdict: "ICL/cheap-in-fence realization is INSUFFICIENT (robust): every cheap lever fails the +10% bar — few-shot ICL (E7), prompt-opt (E8), self-selection & the two-system verifier (E10/E10b, the latter REFUTED with CIs as a surface confound). An omni agentic system is warranted ONLY as a NEW-INDEPENDENT-of-M-signal injector, not internal composition/verification (refuted). First new-signal probe (M3 cross-modal transcript injection) is MODEST/BORDERLINE (vocalbench +20% CI[0,0.2]; SQuAD +4% n.s.) — weakly supportive, not locked. Directional (n≤60); Stage-2 (powered M3, W4, OPRO/GEPA) confirms."
 ---
 
 # Can adjusting A realize the oracle-δ? (Phase-2 of Q1)
@@ -89,6 +89,18 @@ seed" was **entirely a surface confound** — de-confounded and **refuted with C
 clears the +10% bar (majority: +0.0% / +0.05 borderline / +0.0%). So no in-fence *selection* lever —
 single-model self-selection OR the two-system composition — deployably realizes the headroom.
 
+### M3 — cross-modal (ground-truth transcript) injection: the first NEW-independent-signal lever (n=60, CIs)
+Does adding an independent-of-M text transcript alongside the audio realize headroom that audio-only ICL
+could not? *(Caution: the n=3 smoke showed SQuAD +50% — pure noise; the n=60 result below inverts it.)*
+| Surface | audio-only | audio+text | gain (95% CI) | rel |
+|---|---|---|---|---|
+| SQuAD-zh | 0.817 | 0.850 | +0.033 [−0.067, 0.133] | +4.1% (n.s.) |
+| vocalbench-zh | 0.500 | 0.600 | +0.100 [0.0, 0.20] | +20% (borderline; CI lower bound = 0) |
+→ **A modest, borderline gain** — SQuAD n.s.; vocalbench +20% but the CI lower bound sits exactly at 0.
+So injecting a genuinely new independent signal (an external text transcript) **can** help realize the
+headroom — the first lever to show any positive at all — but the effect is **weak and not robustly
+significant at n=60.** Suggestive support for the new-signal direction, not confirmation.
+
 ## 4. Verdict (Stage-1 directional; de-confounded with CIs — a clear branch answer)
 
 The E10b on-surface control removes the one thing that had kept the verdict "undetermined." The answer is
@@ -109,16 +121,22 @@ this phase adds is that making the frozen model verify/re-rank *itself* (even as
 systems) does not realize the headroom — consistent with the theory: TH2a says the residual is the
 shared-knowledge floor that no internal decorrelation removes, and beating it needs a signal *independent
 of M*. So an agentic system is warranted **specifically** as an injector of new independent information —
-cross-modal grounding (M3 transcript/lattice injection), a new verifiable reward, or the omni-embedding
-system (W4, the parked independent-signal source, #37) — **not** as internal agent-stacking or
-self-verification (which `gain_product` forbids and E10b empirically refutes).
+cross-modal grounding, a new verifiable reward, or the omni-embedding system (W4, the parked
+independent-signal source, #37) — **not** as internal agent-stacking or self-verification (which
+`gain_product` forbids and E10b empirically refutes). **First empirical probe of this direction (M3):**
+injecting an independent ground-truth text transcript gives a **modest, borderline gain** (vocalbench-zh
++20% but CI lower bound = 0; SQuAD-zh +4% n.s.) — the **only** lever to show any positive, weakly
+supporting "new independent signal helps," but **not robustly confirmed at n=60** (and a sharp reminder:
+the n=3 smoke's "+50%" was noise).
 
-**So the clear directional answer:** ICL / cheap-in-fence realization is **insufficient**; the path to
-harvesting the frozen omni's real headroom is a **new-independent-signal** injection (agentic or
-cross-modal), not more internal ICL/selection. **Two Stage-2 tests remain to lock it** (powered n, CIs):
-(a) a real OPRO/GEPA prompt search — the last cheap in-fence lever; (b) an M3 cross-modal-injection /
-W4-embedding test — the first genuinely-new-signal lever. If (a) fails and (b) succeeds, the branch-2.2
-agentic/new-signal direction is fully earned. Returned to owner; no auto-rollover.
+**So the directional answer:** ICL / cheap-in-fence realization is **insufficient** (robust); the path to
+harvesting the frozen omni's real headroom is a **new-independent-signal** injection, not more internal
+ICL/selection — a direction that is theory-supported (TH2a/TH2) and now **weakly, borderline-empirically
+supported** (M3). It is **not yet locked.** **Stage-2 to lock it** (powered n, CIs): (a) real OPRO/GEPA —
+the last cheap in-fence lever (expected null by the (b)-cap); (b) **powered-n M3 across more surfaces**;
+(c) **W4 omni-embedding as the independent-knowledge signal** for the knowledge-blind-spot headroom (#37).
+If the cheap in-fence levers stay null and (b)/(c) turn robustly positive, the branch-2.2 agentic/new-signal
+direction is fully earned. Returned to owner; no auto-rollover.
 
 ## 中文摘要（v3,经三人严格评审 + E10b 去混淆对照修订)
 **判据(冻结):** 任一 in-fence 杠杆须过相对 +10% greedy 增益。**结果(Stage-1,E10b 带配对 bootstrap CI):**
@@ -131,6 +149,8 @@ majority),**两系统上下文差异化 verifier 被证伪**——在同面上�
 不管用(E10b 证伪),与理论一致(TH2a:残余是共享知识底,内部去相关消不掉,越过它需独立信号)。故 agentic 应作
 **新独立信号注入器**(M3 跨模态注入 / 新可验证奖励 / W4 embedding,park #37),**而非**内部堆 agent/自验证
 (gain_product 禁止、E10b 实证否定)。**清晰方向:** ICL/廉价 in-fence 实现**不足**;取头room 之路是**注入新独立
-信号**(agentic 或跨模态),非更多内部 ICL/选择。**两个 Stage-2 收尾测试(powered n + CI):**(a) 真 OPRO/GEPA
-——最后一个廉价 in-fence 杠杆;(b) M3 跨模态注入 / W4-embedding——第一个真·新信号杠杆。若 (a) 败 (b) 成,
-分支-2.2(agentic/新信号)完全坐实。交主人;无自动滚入。
+信号**(agentic 或跨模态),非更多内部 ICL/选择。**第一个新信号探针(M3 跨模态转写注入)已跑:增益弱/边界**
+(vocalbench-zh +20% 但 CI[0,0.2] 下界压 0;SQuAD-zh +4% n.s.;n=3 smoke 的 "+50%" 是噪声)——是唯一有正向的
+杠杆,弱支持"新独立信号有用",但 n=60 未稳健坐实。**未锁定。Stage-2 坐实(powered n + CI):**(a) 真 OPRO/GEPA
+(按 (b)-cap 预期为空);(b) **加大 n、多面重跑 M3**;(c) **W4 omni-embedding 作独立知识信号**补知识盲区头room。
+若廉价 in-fence 仍空、(b)(c) 稳健转正,分支-2.2(agentic/新信号)完全坐实。交主人;无自动滚入。
