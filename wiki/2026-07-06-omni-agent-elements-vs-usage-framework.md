@@ -55,6 +55,28 @@ that *changes the sampling distribution* via a new element can be correct where 
 is Axis ② (weak; E10 refuted it). **Verification-as-tool** (an external checker / code executor / a
 genuinely verifiable reward) is an Axis ① element (new-info: it computes correctness the model can't).
 
+### 3b. Second-pass refinement (D1 survey verification, 2026-07-06)
+The survey's three verification passes (adversarial + positive-search + citation; `2026-07-06-synthesis` §8)
+sharpened two claims — the thesis holds, stated more precisely:
+- **The oracle-reading, stated precisely (NOT "usage patterns are useless").** A usage pattern **can** raise
+  the *deployed (greedy)* score up toward the model's own **oracle@N** — self-consistency / CoT do this on
+  MMAU (2503.23395: +9–150% training-free on frozen ALMs) — but it **cannot exceed** that oracle. The thesis
+  is about the **ceiling** (crossing the capability/knowledge boundary), not whether prompting ever helps.
+  This is exactly `readout_acc_le_oracle` (bound), with greedy ≤ oracle the achievable room. Consequently
+  "empty cell" claims must be scoped: training-free best-of-N is **occupied** on audio-understanding QA
+  (MMAU), and **empty only on interactive voice-agent verifiable tasks** (τ²-voice / EVA-Bench) — the actual
+  GAP-1.
+- **A FOURTH lever family the taxonomy must name: inference-computation edits.** Decoding-algorithm /
+  forward-pass restructuring — **EGLR** (Entropy-Gated Latent Recursion, 2606.16620: +8.2pp oracle expansion,
+  info-free) and contrastive decoding — is training-free, single-model, info-clean, yet changes the model's
+  own **output distribution** (not just its prompt). It is **neither** an element (no new info) **nor** a
+  usage-pattern (not a role/prompt). It changes inference **structure/computation**, so it is **excluded by
+  our "no weight AND no structure change" frozen contract** (Project-Thesis) — but it is the most plausible
+  site of an *info-free* ceiling-expansion, so "the element set is closed" is narrowed to **"closed among
+  prompt/orchestration usage patterns over a fixed inference computation."** (The `InfoBoundary` /
+  `AgenticElements` theorems bound Axis-② selection over a *fixed* distribution; Axis-④ decoding-edits change
+  the distribution and are out of their scope by construction — correctly, and out of our contract too.)
+
 ## 4. Pruning the frontier (owner's two challenges)
 Two owner challenges carved out what our research can *own*:
 

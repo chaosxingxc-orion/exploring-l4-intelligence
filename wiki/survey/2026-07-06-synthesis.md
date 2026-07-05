@@ -468,6 +468,73 @@ usage-pattern levers either read out the frozen model's existing ceiling (self-c
 same-model self-check) or actively failed (homogeneous debate — martingale-proved; CoT-on-audio;
 reflection-confabulation; declared-workflow interruption-recovery). The sensor/brain-split
 (freeze-and-bolt-on) architecture — the thesis's native shape — is competitive-to-best on verifiable
-agentic tasks, and the central lever (training-free reward-guided best-of-N on a voice benchmark)
-remains **completely empty** — the strongest single Stage-2 opportunity (GAP-1). This ends Stage-1;
-the owner discussion selects the problem.
+agentic tasks, and the central lever (training-free reward-guided best-of-N on a **voice-agent** benchmark)
+remains **empty** — the strongest single Stage-2 opportunity (GAP-1, re-scoped per §8). This ends Stage-1;
+the owner discussion selects the problem. **Read §8 first — three verification passes materially sharpened
+the claims above.**
+
+---
+
+## 8. Second-pass hardening (adversarial + positive-search + citation-integrity, 2026-07-06)
+
+Three targeted verification agents were run against this synthesis's central claims. All three materially
+sharpened it; the net is a **stronger, more precisely-stated** thesis. **These corrections supersede the
+looser statements in §3–§5 and §7.**
+
+**8.1 Citation integrity — CLEAN.** All 21 load-bearing arXiv IDs resolve to real papers with matching
+titles; no hallucinations, no dead links, no topic mismatches. Two are our own shorthand labels ("CB-RAG"
+= 2509.19567 "RAG-based context discovery for ASR"; "same-model self-check" = 2505.24347) — wording tweaks,
+not citation errors.
+
+**8.2 The framework-test's "strongest candidate" (2505.24347) DISSOLVES → thesis strengthened.** On
+inspection 2505.24347 = *"Fewer Hallucinations, More Verification: A Three-Stage LLM-Based Framework for ASR
+Error Correction"* uses an **external GPT-4o** in a detect→correct→verify loop — a **second model
+(element)**, not same-model self-check. It was never a clean usage-pattern candidate; its gains come from
+GPT-4o's language prior (new-info). The one parked risk is thus largely resolved: it is an **element** case.
+(An in-house oracle-ceiling re-test of self-check *without* a second model remains a clean Stage-1 probe =
+GAP-6.)
+
+**8.3 The empty cell was OVER-CLAIMED — corrected.** "No training-free best-of-N/self-consistency/prompt-opt
+win on ANY audio benchmark" is **FALSE**: MMAU has several training-free positives — Audio-CoT (2501.07246:
+55.6→58.1 via CoT + 5-vote self-consistency), Scaling Auditory Cognition via TTC (2503.23395: +9–150% via
+majority / beam-reranking / verifier on frozen ALMs), AQA-TTRL DIMV baseline (2510.05478: 64-vote majority).
+**These are READ-OUT gains** — measured vs the model's own **greedy**, bounded above by pass@N oracle
+(consistent with, not contradicting, the thesis). The **defensible empty cell narrows** to: *no training-free
+reward-guided selection reaching the verifiable **pass^k ceiling** on an **interactive voice-agent** benchmark
+(τ²-voice / EVA-Bench).* **GAP-1 is re-scoped to the voice-agent setting** (the MMAU cell is occupied; L4-N1/N2
+must be re-graded "occupied on audio-understanding QA, empty on voice-agent verifiable tasks").
+
+**8.4 State the ORACLE-READING explicitly.** The strict verdict HOLDS (no usage-pattern-only crossing *above
+the model's own oracle* survives four gates), but it is near-tautological under its own bar and must be
+stated precisely: **a usage pattern can move the DEPLOYED (greedy) score UP TOWARD the model's own oracle@N
+— 2503.23395 proves large such gains on audio — but it cannot EXCEED that oracle.** The thesis is about the
+**ceiling** (crossing the capability/knowledge boundary), not "usage patterns are useless." Conflating "beats
+greedy" with "crosses a boundary" would wrongly read the thesis as false. (This is exactly
+`TfrlProofs.InfoBoundary.readout_acc_le_oracle`.)
+
+**8.5 "Element set is closed" is OVER-CLAIMED — a FOURTH lever family exists.** The taxonomy {elements /
+usage-patterns / constraints} omits **inference-computation edits**: decoding-algorithm or forward-pass
+restructuring that is training-free, single-model, and info-clean, yet changes the model's own output
+**distribution** (not just its prompt). Clean case: **EGLR (Entropy-Gated Latent Recursion, 2606.16620)** —
+provably expands a frozen model's verifiable **oracle** by **+8.2pp** beyond the temperature-only oracle
+(MATH-500, Qwen2.5-3B) with **no new external info**; audio analog: Temporal Contrastive Decoding
+(2604.15383). This is neither an element (no new info) nor a usage-pattern (not a role/prompt) — a **distinct
+class**. It changes inference **structure/computation**, so it is **EXCLUDED by this project's "no weight AND
+no structure change" frozen contract** (Project-Thesis) — but the framework must NAME it. Corrected claim:
+*closed among **prompt/orchestration-level** usage patterns over a **fixed inference computation**;
+decoding/inference-compute edits are a separate, structure-touching family, out of scope for the frozen
+contract, and the most plausible site of an info-free ceiling-expansion.*
+
+**8.6 In-house perception-delta datapoint** (supplements the perception-delta lane, which failed external
+verification). Boundary-clean probe (same frozen omni: audio vs its own ASR transcript; p6, n=60):
+**SQuAD-zh +0.283 SIG** CI[0.13,0.43]; mmau +0.117 n.s.; vocalbench-zh +0.000. The omni's direct-audio path
+carries info its own transcript loses, **task-dependent** — validates omni-as-perception-element (D0 item i).
+Caveat: vs its **own** ASR; the strong-external-ASR control is the Stage-2 target (GAP-5). See
+`2026-07-06-exp-perception-delta`.
+
+**8.7 Net.** All three passes leave the thesis **intact and sharper**: usage patterns are oracle-bounded
+(read-out) — confirmed and precisely stated; the one parked counterexample dissolves into an element; the
+empty cell is correctly narrowed to voice-agent verifiable tasks (GAP-1); a fourth lever family
+(decoding-compute, excluded by our contract) is named. Remaining second-pass debts for the paper: missing
+system entries (Kimi-Audio, MiniCPM-o, Doubao, Hume EVI, Sesame CSM), missing benches (AIR-Bench, AudioBench,
+SpokenWOZ), and the Chinese-ecosystem search gap (§6). Grade: **Stage-1 hypothesis, second-pass-hardened.**
