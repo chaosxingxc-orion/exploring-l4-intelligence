@@ -1,106 +1,113 @@
 ---
 title: "Can adjusting the conditioning A realize the frozen omni's oracle-δ? — Stage-1 directional (Phase 2 of Q1)"
 date: 2026-07-05
+revised: 2026-07-05 (v2 — after 3-persona strict review; see [[2026-07-05-A-realization-review-synthesis]])
 stage: 1-directional
-status: VERDICT (directional) — returned to owner; Stage-2 confirmation required; pending strict review
+status: DIRECTIONAL NULL — returned to owner; does NOT close Q1 or establish the agentic branch; Stage-2 preconditions pinned
 question: "Given confirmed per-instance oracle-δ, can adjusting A (few-shot ICL / prompt-opt / two-system verifier) convert it into a deployable ≥+10% greedy gain? → branch 2.1 vs 2.2"
 prereg: "[[2026-07-05-stage1-A-realization-prereg]] (frozen before runs)"
-verdict: "ICL/prompt A-adjustment INSUFFICIENT (E7/E8 fail); the training-free TWO-SYSTEM (agentic) verifier realizes ~50% of the headroom the single model couldn't (E10) → design an omni agentic system (branch 2.2, with a positive seed). Directional, n=24-30."
+verdict: "Under the frozen +10% bar, NO in-fence lever realizes the oracle-δ. But under-powered (n=24, no CIs) AND under-scoped (real OPRO/GEPA, M3 cross-modal, on-surface self-selection control all unrun) → does NOT close Q1, does NOT establish agentic. Directional null returned to owner."
 ---
 
-# Can adjusting A realize the oracle-δ? (Phase-2 of the Q1 study)
+# Can adjusting A realize the oracle-δ? (Phase-2 of Q1)
 
-> Continues [[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]]. Phase-1: (a) real oracle-δ exists,
-> (b-text) naive prompting inert, (c) cheap self-referential selection ≈ 0. Owner reframe (2026-07-05):
-> instead of *selecting* the good answer (the (c) wall), can we **adjust A so the good answer becomes
-> modal** (greedy)? This phase tests that, training-free, on the non-saturated zh+en surfaces, against
-> the frozen P1 bar (relative +10%). **All numbers Stage-1 directional (n=24–30, single model/quant).**
+> **v2 after strict 3-persona review** ([[2026-07-05-A-realization-review-synthesis]], MAJOR REVISION).
+> The v1 verdict ("design an omni agentic system — Yes, positive seed") over-reached — the same failure
+> the Phase-1 review caught. Corrected below: a directional NULL, not a build recommendation.
+> Continues [[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]]. **All numbers Stage-1 directional
+> (n=24–30 on the levers, single model/quant, no bootstrap CIs computed) — settles nothing statistically.**
 
-## 1. Baselines — the δ ceilings each lever aims for (P2, n=150)
+## 1. Baselines — the δ ceilings each lever aimed for (P2, n=150)
 | Surface | lang·family | greedy | oracle-δ | status |
 |---|---|---|---|---|
-| big-bench-audio | en · spoken-reasoning | 0.567 | **+0.280** | non-sat |
-| mmau-mini | en · SQA-reasoning | 0.653 | **+0.147** | non-sat |
-| SQuAD-zh | zh · extractive QA | 0.753 | **+0.140** | non-sat |
-| vocalbench-zh | zh · knowledge QA | 0.467 | **+0.107** | non-sat |
-| spoken-squad | en · extractive QA | 0.873 | +0.087 | near-ceiling (not lever-tested) |
-| OpenbookQA-zh / minds14-zh | zh · MCQ / SLU | 0.97 / 0.94 | ≈0 | SATURATED (demoted) |
+| big-bench-audio | en · spoken-reasoning | 0.567 | +0.280 | non-sat |
+| mmau-mini | en · SQA-reasoning | 0.653 | +0.147 | non-sat |
+| SQuAD-zh | zh · extractive QA | 0.753 | +0.140 | non-sat |
+| vocalbench-zh | zh · knowledge QA | 0.467 | +0.107 | non-sat |
+| spoken-squad / OpenbookQA-zh / minds14-zh | — | 0.87 / 0.97 / 0.94 | ≈0 | near-ceiling / SATURATED (not lever-tested) |
 
-## 2. Theory anchors (Lean, machine-checked, sorry-free)
-- **TH2a `BlindSpot.lean`** — omni-as-reward = two context-differentiated systems (not self-reward);
-  realized → oracle as the shared-knowledge blind-spot fraction → 0; the constraint is the achievable
-  error-**decorrelation**. Residual floor = knowledge blind-spot (PARKED → W4).
-- **TH2 `Reachability.lean`** — the **(b) mode-shift** theorem + the **(b)-cap**
-  (`too_improbable_unreachable`): bounded conditioning cannot promote a too-improbable good answer to
-  greedy → the theory pairing for E7/E8 failing.
+Real oracle-δ exists on the 4 non-saturated surfaces (n=150, N=8). *(Note: the E10 slice at n=24, N=3
+collapses these δ to ≈0.04–0.08 — a much smaller, noisier denominator; see §3.)*
 
-## 3. Results (each traces to `_repro/*.json`)
-### E7 — multimodal few-shot ICL (the owner's key lever): NEGATIVE
+## 2. Theory anchors (Lean, machine-checked, sorry-free — full library builds, 8570 jobs)
+- **TH2a `BlindSpot.lean`** (verified) — the two-system realization bound: realized → oracle as the
+  shared-knowledge blind-spot fraction → 0 (`avg_regret_tendsto_zero`). It **frames** the decorrelation
+  constraint (the constraint quantity is the achievable error-decorrelation); it is **asymptotic** and
+  does **not** predict any fixed-n E10 number, nor does it assert that context isolation *produces*
+  decorrelation (its own docstring says E10 must MEASURE that).
+- **TH2 `Reachability.lean`** (verified — fixed a Mathlib-rename that had made it non-compiling; the
+  earlier "machine-checked" claim was wrong and is corrected) — the **(b) mode-shift** theorem + the
+  **(b)-cap** (`too_improbable_unreachable`). *Scope:* it is a theorem about an **abstract multiplicative
+  reweighting model** `q_A ∝ q0·w` with a stipulated bound `R`; E7/E8 never measure `w`, `R`, or `q0`.
+  So it **frames** why a bounded prompt lever might fail to lift greedy — it is **not** a proven
+  explanation of the data, and it models "no lift," not the "hurts/regresses" that E7 shows.
+
+## 3. Results (each traces to `_repro/*.json`; no bootstrap CIs computed — a deviation from prereg §5)
+### E7 — multimodal few-shot ICL (owner's key lever): did NOT lift greedy (in this configuration)
 | Surface | 0-shot | 2-shot | Δgreedy | b2−b1 floor |
 |---|---|---|---|---|
 | mmau-mini | 0.833 | 0.800 | −0.033 | +0.033 |
 | SQuAD-zh | 0.733 | 0.733 | +0.000 | +0.067 |
 | big-bench-audio | 0.700 | 0.667 | −0.033 | +0.000 |
 | vocalbench-zh | 0.533 | 0.267 | −0.266 | −0.033 |
-→ **Audio few-shot ICL never lifts greedy** (3 hurt, 1 neutral); 0% deployable gain, far below +10%.
-Real exemplars beat the shuffled floor by a little (weak task signal) but it never converts —
-consistent with TH2's (b)-cap and the added difficulty of multimodal ICL.
+→ No surface shows a lift. **Caveat (review):** the ±0.033 deltas are *within* the disclosed temp-0 MoE
+decode noise (mmau greedy reads 0.653/0.833/0.800/0.75 across runs), only k=[0,2] was run (not the
+prereg shot-curve), MAXTOK=64 truncates reasoning, and demos are concatenated audios in one message
+(non-standard ICL) — the vocalbench −0.266 is plausibly a multimodal-attention pathology. So the honest
+reading is "**few-shot did not lift greedy in this configuration**," not "few-shot fundamentally hurts."
 
-### E8 — in-fence global prompt optimization (dev-scored system-prompt search): NEGATIVE
-Test gain **+0.000 on every surface** (the search never beat the base prompt). Transfer 0.82–1.14.
-→ Global prompt optimization does not move greedy either. (Consistent with Phase-1 prompt-space ≈ 0.)
+### E8 — in-fence prompt optimization: null, but UNINFORMATIVE
+Test gain +0.000 on every surface. But this was a **4-candidate system-prompt pick on dev n=20** — **not**
+OPRO/GEPA (iterative, feedback-driven search). Near-zero search power → its null disconfirms nothing.
 
-### E10 — generator/verifier TWO context-differentiated systems + decorrelation ablation: WEAK PARTIAL
-| Surface | greedy | oracle | δ | ρ_isolated | ρ_coupled | isolation gain |
-|---|---|---|---|---|---|---|
-| SQuAD-zh | 0.750 | 0.833 | 0.083 | **0.50** | 0.00 | **+0.042** |
-| big-bench-audio | 0.500 | 0.583 | 0.083 | **0.50** | 0.50 | +0.000 |
-| vocalbench-zh | 0.667 | 0.708 | 0.042 | 0.00 | 0.00 | +0.000 |
-| mmau-mini | 0.750 | 0.750 | 0.000 | (n/a: δ=0 in slice) | — | — |
-→ On the two surfaces with real headroom in this small slice, the **isolated (context-differentiated)
-verifier realizes ~50% of the oracle-δ** — a meaningful contrast with Phase-1's self-referential
-selectors (E4: ρ ≈ 0). On SQuAD-zh, isolation beats the coupled verifier (+0.042: context
-differentiation decorrelates, as TH2a predicts). **But it is weak, inconsistent (ρ=0 on the low-δ
-surface), and very noisy at n=24** — directional only.
+### E10 — generator/verifier two context-differentiated systems: SUB-THRESHOLD, confounded
+| Surface | greedy | verifier(iso) | rel gain | ρ_iso | isolation−coupled |
+|---|---|---|---|---|---|
+| SQuAD-zh | 0.750 | 0.792 | **+5.6%** | 0.50 | +0.042 (1 item) |
+| big-bench-audio | 0.500 | 0.542 | **+8.3%** | 0.50 | +0.000 |
+| vocalbench-zh | 0.667 | 0.667 | +0.0% | 0.00 | +0.000 |
+| mmau-mini | 0.750 | 0.708 | **−5.6%** (worse) | (δ=0 slice) | — |
+→ **Under the frozen +10% bar, E10 clears NOTHING** (best +8.3%). The realization is **net +1 correct
+item / 24** on 2 surfaces, with **no CI** (flip 1 item and it vanishes), **ρ=0 on the low-δ surface**,
+and **worse than greedy on mmau**. Isolation beat the coupled verifier on **one surface, one item**
+(SQuAD +0.042); on big-bench isolation=coupled → the decorrelation mechanism has essentially no support.
+**Crucially, no on-surface self-selection control was run** — E4's self-selection ≈0 was on MMAU (zero
+overlap), so this does NOT establish "two-system > self-selection"; the gap could be entirely surface.
+ρ here is a *realization fraction*, not the error-correlation TH2a is about.
 
-## 4. Verdict (Stage-1 directional — returned to owner; Stage-2 confirmation required)
+## 4. Verdict (Stage-1 directional — returned to owner; NOT a branch decision)
 
-**Q1 (the owner's question), answered for this phase:**
+**By the frozen P1 rule, no in-fence lever (few-shot ICL, prompt-opt, two-system verifier) realizes the
+oracle-δ to the deployable +10% bar.** But two things stop this from answering Q1:
 
-1. **Is ICL sufficient for training-free RL on the frozen omni's semantic layer? — No.** Adjusting the
-   conditioning A by **prompting** does not realize the model's real latent headroom: multimodal
-   few-shot ICL (the key lever) *hurts* greedy (E7), and in-fence global prompt-optimization yields 0%
-   (E8). The good answers exist in the pool (oracle-δ +0.11…+0.28) but bounded prompt-reweighting cannot
-   promote them to greedy — measured, and machine-checked as TH2's (b)-cap.
+1. **Under-powered.** n=24–30, no bootstrap CIs (a prereg deviation); the lever deltas sit inside the
+   model's own temp-0 decode noise. Settles nothing statistically.
+2. **Under-scoped.** The **decisive in-fence instruments were never run** — a real OPRO/GEPA optimized
+   prompt search, M3 cross-modal (transcript/lattice) injection (the survey's strongest lever), the full
+   few-shot shot-curve, and — critically — an **on-surface self-selection control** for E10. Until these
+   run, "ICL is insufficient" is **not established**, and the E10 "two-system advantage" is **confounded**.
 
-2. **Should an omni agentic system be designed? — Yes, and with a positive (not merely default) seed.**
-   The one lever that realizes any headroom is the **training-free two-system composition** (a
-   context-differentiated generator + verifier — already an agentic move): it realizes **~50% of the
-   oracle-δ** on the surfaces with real headroom, where the single model's self-selection realized ≈ 0
-   (E4). Context isolation decorrelates the verifier from the generator (TH2a), giving a real, if weak,
-   realization the single model cannot. So the agentic direction is warranted not as "prompting failed,
-   fall back to agents," but because **the two-system composition demonstrably harvests headroom that
-   ICL/self-selection cannot.**
+**So the honest answer to the owner's Q1, for this phase:**
+- **Is ICL sufficient? — Undetermined, leaning "the limited levers we ran do not realize the headroom."**
+  Not a proof of insufficiency: the strong pro-realization in-fence instruments are untested.
+- **Should an omni agentic system be designed? — Not answered here.** E10 is a **branch-2.1** verifier/MBR
+  selector (the framing books it in-fence), not an agentic system; it **failed** the frozen bar, and its
+  weak sub-threshold signal — if anything — says **branch 2.1 (better in-fence selection) is under-tested**,
+  not that 2.2 is warranted. The agentic question remains **open**.
 
-**This is branch 2.2** — design an omni agentic system — with the shape the theory prescribes:
-context-differentiated composition to drive decorrelation (τ down, ρ up), and the **residual shared
-knowledge blind-spot filled by an independent-of-M signal — the omni-embedding system (W4)** — which
-requires defining new omni agentic tasks (PARKED, [[Theory-Convergence-and-Constraints]] · task #37).
-`gain_product` is respected: the gain comes from the generator-verifier composition (not covered by the
-inertness theorem) and, ultimately, a genuinely new independent reward, not from stacking isolated
-agents.
+**Mandatory Stage-2 preconditions before any branch decision (the value this phase delivers):** run, with
+powered n and paired-bootstrap CIs — (a) a real OPRO/GEPA prompt search; (b) M3 cross-modal injection;
+(c) the full few-shot shot-curve with a proper multi-turn ICL format + raised token cap; (d) E10 **with an
+on-surface self-selection control** and the isolated-vs-coupled ablation with CIs. Only then is the
+2.1-vs-2.2 branch decision earned. Returned to owner; no auto-rollover.
 
-**Confidence & limits.** Stage-1 directional: n=24–30 on the levers, single model / single quantization,
-E10 inconsistent across surfaces and noisy (one ρ is a div-by-0 artifact on a δ=0 slice). This **settles
-nothing** statistically (CLAUDE.md); it is a directional signal for the owner. Stage-2 must confirm the
-E10 two-system realization at powered n with the isolated-vs-coupled ablation before any build commitment.
-
-## 中文摘要
-**问题:** 调 A 能否把已确认的 oracle-δ 变成可部署 greedy 增益。**结果(Stage-1 方向性,n=24–30):**
-① **prompt 类 A-调整不足**——多模态 few-shot(主人关键杠杆)不升反降(E7),in-fence 全局 prompt 优化
-+0.0%(E8);好答案在池中但有界 prompt 重加权推不上去(实测 + TH2 (b)-cap 机器验证)。② **两系统组合
-(上下文差异化 generator/verifier,已是 agentic)是唯一实现头room 的杠杆**:在有真实 δ 的两个面上实现
-**~50% 的 oracle-δ**(ρ_iso=0.5),而单模型自选(E4)≈0;SQuAD-zh 上隔离胜过耦合(+0.042,去相关如 TH2a
-所料)——真实但弱且噪声大。**判定:** Q1=**ICL 不足**;**应设计 omni agentic system**(分支 2.2,带正向种子:
-两系统组合能取到 ICL/自选取不到的头room),按理论走上下文差异化去相关,残余知识盲区用 W4 omni-embedding
-独立信号补(park #37)。**Stage-1 方向性,settle 不了统计,须 Stage-2 夯实。**
+## 中文摘要（v2,经三人严格评审修订)
+**判据(冻结):** 任一 in-fence 杠杆须过相对 +10% greedy 增益。**结果(Stage-1,n=24–30,无 CI):** E7 多模态
+few-shot 未抬 greedy(且落在 temp-0 解码噪声内,只跑了 k=[0,2]);E8 只是 4 候选 system-prompt 挑选、非
+OPRO/GEPA,零信息量;E10 两系统 verifier **全部低于 +10%**(SQuAD +5.6%、big-bench +8.3%)——是每面 24 题里
+净 +1 题、无 CI、低-δ 面 ρ=0、mmau 上反而更差,隔离胜耦合仅 1 面 1 题,**且没跑同面自选取对照**(E4 的自选取
+≈0 在 MMAU、零重叠),故**不能**断言"两系统胜过自选取"(可能全是任务差异)。**判定:按冻结判据无杠杆达标,
+但既欠功效(n 小、无 CI)又欠范围(真 OPRO/GEPA、M3 跨模态注入、完整 shot-curve、同面自选取对照全没跑)——
+故既未关闭 Q1、也未确立 agentic 分支。E10 是分支-2.1 的 verifier/选择器(非 agentic)且未达标,其弱信号若有
+所指是"2.1 欠测",非 2.2。** 交主人;**Stage-2 前置(powered n + 配对 bootstrap CI):真 OPRO/GEPA、M3 注入、
+完整 shot-curve、E10 带同面自选取对照 + 隔离/耦合消融——跑完才谈分支。无自动滚入。
