@@ -9,3 +9,4 @@ import TfrlProofs.OptSpace
 import TfrlProofs.Realization
 import TfrlProofs.BlindSpot
 import TfrlProofs.Reachability
+import TfrlProofs.InfoBoundary
