@@ -6,6 +6,45 @@
 
 ---
 
+### 2026-07-06 · Owner 修正 2026-07-03 关闭：重开完整 omni agentic 系统 + 立「要素-用法」框架 + 开正式综述战役
+**Decision.** Owner **行使 2026-07-03 NO-GO 关闭决定 §9 明确保留的「owner-level amendment」路径**
+（`wiki/2026-07-03-omni-agentic-tfrl-go-no-go-decision.md`：re-open 需外生 r1–r3，且记录注明「in-house
+后继证据无外生重开路径→flagged for owner-level amendment」），**主动修正该关闭，重开完整 omni agentic
+系统**（含被关闭的**跨会话累积** skills/memory/routing），以 Q1 结论（[[2026-07-05-Q1-conclusion-corrected]]：
+ICL 不足 → 需 new-info 记忆）为依据。**Append-only：不改 2026-07-03 记录**；此后引用该关闭须并引本条修正。
+
+**框架（Owner 四轮 Socratic 精修 × 我们的定理，收敛为「要素-用法分类学」）。** Owner 起初提三支柱（能力/
+skills、知识脊柱、记忆），问「还有哪些盲区」。经四轮精修定为**三轴**+一个主论点：
+- **轴① 要素（≈闭集，唯一 new-info 载体）**：model · 系统/用户 prompt · connector 三型{skills/tools ·
+  knowledge · memory}。Owner 三支柱 = 三个 connector 型要素。
+- **轴② 使用方式**（角色/编排/多智能体/路由——规划、校验-as-role 在此）：**对同一冻结模型的花式用法 =
+  read-out 类 = 被 T8 `InfoBoundary` oracle 上界卡死、越不过知识 gap**（E10/E10b 已实测：同权重+critic
+  prompt 的双系统 verifier 从不超过 majority）。
+- **轴③ 约束/质量**：感知保真（model 质量）、实时/全双工（**基座**属性）、对齐（横切）。
+- **主论点**：**对冻结模型，agentic 杠杆只能来自新增 new-info 要素（能算/取新事实的工具、外部知识、带外部
+  内容的记忆、真正互补的另一个模型），不能来自对同一模型的花式使用方式。** Owner 原三要素恰是正确的
+  new-info 载体；我最初误列的四「盲区」被正确归位为轴②/轴③。校验分叉：as-role（弱，E10 已否）vs as-tool
+  （外部 checker/executor = 轴①真要素）。
+
+**Owner 两挑战择出「我们的研究前沿」。** ①驱动规划/控制的模型**不必是多模态**——可用文本 LLM API（DeepSeek
+V4 Pro 类）；⇒ 控制/编排是 **commodity**（且独立更强模型本身即 new-info 互补要素），非我们的 omni 研究点。
+三种 new-info 精确分工：文本 LLM 加推理+世界知识（受转写所限）、omni 加**感知（>转写）**、记忆/知识加外部
+存储。**M3 教训在此咬住**：omni 只喂转写 = ASR→text-LLM、丢了音频。②**omni 不适合作全双工基座**（现有含
+Qwen3-Omni 是回合制/半双工；全双工需双流基座 = 改基座 = 违反冻结主旨，Owner 明确当前不动基座）⇒ 全双工/
+实时**剔出研究范围**（仅作 survey landscape）。**⇒ 我们真正的研究前沿 = 两个 omni 特有的 new-info 要素：
+(i) omni 作富感知要素（训练无关激活、暴露 >转写的 delta；M3 教训升为核心问题）；(ii) 音频-理解为键的
+记忆/知识 connector（Q1b）。** 架构分叉（omni-传感器 vs omni-大脑 vs 混合）**Owner 定：不预锁，survey 扫清、
+T9 定夺**。
+
+**战役（Owner 三决策 2026-07-06）**：正式综述论文 + 五人格严格评审（对标 171-ref 语义综述）；语音/omni 为主
+（VLM/GUI 仅跨域参照）；覆盖 2025-01→今主要多模态/语音 agent 系统的**构建 + 评测**，锚在我们盘上那批**已拥有
+但从未跑过**的 agentic 基准（tau2/eva/soulx-duplug/audiomc/voiceassistant-eval）。交付 A0→D0 框架→D1 survey
+Workflow→D2 论文→D3 评审→D4 问题定义 v2→K 终闸选题（不自动进 Stage-2）。计划 `academic-skill-workflow-*.md`。
+
+**Why.** 关闭当初封的是「在冻结契约下、靠自设机制立即建跨会话 agent」；如今**问题先行**（Q1 已证 ICL 不足、
+只有 new-info 越过知识 gap）+ **要素-用法框架**给了它一个良构的问题定义骨架。修正是程序合规的（走 §9 预留
+路径）、留痕的（本条 append）、且 Stage-1 的（survey/论证为核心，选题仍归 T9 终闸）。分支未推送、wiki 待同步。
+
 ### 2026-07-05 (later) · 修正战役：信息边界准则立起 → 合法杠杆重测 → Q1 结论订正（M3 撤回后重建）
 **Decision / 背景.** 主人指出一个**低级但根本**的错误：M3（注入 golden 转写）是**信息边界越界**——"如果我都有
 了 text ground truth，为什么还需要音频输入？"若有转写就不需要 omni 模型（改用 ASR→text-LLM，否定了 omni
