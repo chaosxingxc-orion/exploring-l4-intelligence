@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-06 (later) · Omni-agentic 综述战役收官 → 契约相对主论点 + 收敛定理 + 7 方向到 K 终闸
+**Result.** 战役 A0→D4 全部完成、到达 owner 终闸(K/T9,不自动进 Stage-2)。产出:框架 D0 + 14-lane/~120-
+系统综述(D1,3 遍文献核查硬化)+ 正式论文 D2 + **五人格严格评审 D3(全 sound-with-corrections)+ 全面修订 +
+re-review 判 cleared-for-owner** + 问题定义 D4。少量实验论证:p6 感知-delta、GAP-1 正向搜索、E10/E10b/T2/T3/
+T5/T6。理论证明:`InfoBoundary`+`AgenticElements`(定义性)+ **`BestOfNConvergence`(收敛,约束项=去相关误差
+τ→0;受约束收敛/无约束不收敛的对偶,填 CLAUDE.md 要求的收敛半)**,全 sorry-free、全库 green(8560 jobs)。
+
+**评审把主论点从过强改到诚实(契约相对)。** 原"冻结模型只有 new-info 要素能跨越"被五人格一致判过强:项目
+canonical 本就把 **decoding / reward-guided decoding 列为 in-scope** 训练无关杠杆,故 **contrastive decoding
+(合约内解码律改动,信息无关)也能抬 ceiling**。修订后:**Claim A(要素=唯一新信息载体,成立)/ Claim B(只有
+要素能抬 ceiling,假)** 分离;**使用方式(对固定生成律的选择/编排)受 oracle@N 界**——能把 greedy 抬向 oracle、
+但抬不过;跨越需要**要素 ① 或 合约内生成律改动 ③**。给了要素的**可操作判据**(是否引入模型推理输入里没有的
+条件比特)。另修正两处过度断言:2505.24347 是**单冻结 GPT-4o 自检、缺 oracle 对照 → 未决(GAP-6)**,非
+"化为要素";p6 "validates" 是我记录在案的过度伸张老毛病 → 降为"方向一致但不充分,自产 ASR 混淆,SQuAD-only/
+VocalBench-zero 的形态反而利于混淆解释,强外部 ASR 对照是前置条件"。
+
+**Verdict(Stage-1,呈交 K).** **构建方案**:冻结文本脑 + 可换 new-info 要素(freeze-and-bolt-on;omni 的非
+commodity 价值=感知>转写 + 音频键记忆/知识;全双工出局=需改基座);能力只来自新要素或合约内解码改动;验证叉
+(verifier-as-tool 有效、as-role 弱)。**推荐研究方向(排序,rubric 先冻结)**:**GAP-6**(oracle 对照的自检=能
+否证伪主论点的决定性最便宜实验,先跑)· **GAP-3**(omni 去相关 verifier,已有收敛理论,W1/W4 对齐)· **GAP-1**
+(voice-agent best-of-N 抵 pass^k——旗舰但部分已知答案的工程 demo)· 外加 **GAP-7**(合约内解码抬 ceiling,评审
+新浮出的信息无关杠杆)。**架构分叉(omni 传感器 vs 大脑)**:survey 证据偏 sensor-split,但感知-delta 前置条件
+未立(p6 未决)——**留 owner 在 T9 定**。**Why it matters**:第 4 次(也最系统的)过度伸张纠正,靠的是五人格
+盲审的独立视角 + 项目自身 canonical 的字面——把一个漂亮但过强的主张,收敛成一个诚实、契约相对、可证伪的
+Stage-1 结论。分支未推送、wiki 待同步。
+
 ### 2026-07-06 · Owner 修正 2026-07-03 关闭：重开完整 omni agentic 系统 + 立「要素-用法」框架 + 开正式综述战役
 **Decision.** Owner **行使 2026-07-03 NO-GO 关闭决定 §9 明确保留的「owner-level amendment」路径**
 （`wiki/2026-07-03-omni-agentic-tfrl-go-no-go-decision.md`：re-open 需外生 r1–r3，且记录注明「in-house
