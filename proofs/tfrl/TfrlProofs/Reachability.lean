@@ -34,7 +34,8 @@ after normalization) **iff** the reweighting ratio exceeds the initial odds: `q0
 theorem mode_shift_iff_ratio (q0 w : Z → ℝ) (zstar m : Z)
     (hqs : 0 < q0 zstar) (hwm : 0 < w m) :
     q0 m * w m < q0 zstar * w zstar ↔ q0 m / q0 zstar < w zstar / w m := by
-  rw [div_lt_div_iff hqs hwm, mul_comm (w zstar) (q0 zstar)]
+  rw [lt_div_iff₀ hwm, div_mul_eq_mul_div, div_lt_iff₀ hqs]
+  constructor <;> intro h <;> nlinarith [h]
 
 /-- If `A`'s reweighting power is bounded by `R` (`w z*/w m ≤ R`), then making `z*` the greedy answer
 requires the initial odds `q0 m/q0 z*` to be below `R`. -/
