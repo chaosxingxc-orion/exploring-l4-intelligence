@@ -24,6 +24,17 @@ under-scoped — the decisive in-fence instruments (real OPRO/GEPA, M3 cross-mod
 shot-curve, and an **on-surface self-selection control**) were never run. Returned to owner with those as
 mandatory Stage-2 preconditions; no auto-rollover.
 
+**Update — E10b de-confounder (n=40 + paired-bootstrap CIs) turns the null into a CLEAR verdict.** The
+review's CRITICAL confound (no on-surface self-selection control) was then run: the two-system verifier
+**never beats on-surface majority self-selection** (ver−maj = −0.075/−0.025/+0.000 on mmau/SQuAD-zh/
+big-bench, all CIs cross/below 0; worse on mmau), so the "two-system positive seed" is **refuted**. Clear
+answer now: **Q1a ICL is insufficient** — every cheap in-fence lever (prompt/few-shot/prompt-opt/
+self-selection/two-system verifier) fails the +10% bar; **Q1b an omni agentic system is warranted ONLY if
+it injects a genuinely new independent-of-M signal** (M3 cross-modal / new reward / W4 embedding) — the
+internal-composition/self-verification route is refuted (E10b) and forbidden by `gain_product`. Two
+Stage-2 tests remain to lock it: (a) real OPRO/GEPA (last cheap in-fence lever); (b) M3/W4 (first
+new-signal lever). Artifact `_repro/e10b_control.json`.
+
 **Why (the strict review, again).** A 3-persona blind panel (methodology / devil's-advocate / EIC+formal)
 returned **MAJOR REVISION** and was right — the v1 verdict over-reached toward agentic (same failure mode
 as Phase-1). It caught: (i) **TH2 `Reachability.lean` did NOT compile** (Mathlib `div_lt_div_iff` rename)

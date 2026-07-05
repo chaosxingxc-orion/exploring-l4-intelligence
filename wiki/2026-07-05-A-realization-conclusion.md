@@ -3,10 +3,10 @@ title: "Can adjusting the conditioning A realize the frozen omni's oracle-δ? �
 date: 2026-07-05
 revised: 2026-07-05 (v2 — after 3-persona strict review; see [[2026-07-05-A-realization-review-synthesis]])
 stage: 1-directional
-status: DIRECTIONAL NULL — returned to owner; does NOT close Q1 or establish the agentic branch; Stage-2 preconditions pinned
+status: CLEAR directional verdict (de-confounded with CIs via E10b); Stage-2 for the 2 remaining in-fence/agentic instruments
 question: "Given confirmed per-instance oracle-δ, can adjusting A (few-shot ICL / prompt-opt / two-system verifier) convert it into a deployable ≥+10% greedy gain? → branch 2.1 vs 2.2"
 prereg: "[[2026-07-05-stage1-A-realization-prereg]] (frozen before runs)"
-verdict: "Under the frozen +10% bar, NO in-fence lever realizes the oracle-δ. But under-powered (n=24, no CIs) AND under-scoped (real OPRO/GEPA, M3 cross-modal, on-surface self-selection control all unrun) → does NOT close Q1, does NOT establish agentic. Directional null returned to owner."
+verdict: "ICL/cheap-in-fence realization is INSUFFICIENT: every cheap lever fails the +10% bar — few-shot ICL (E7), prompt-opt (E8), self-selection & the two-system verifier (E10/E10b, the latter REFUTED with CIs as a surface confound). An omni agentic system is warranted ONLY if it injects a genuinely NEW INDEPENDENT-of-M signal (cross-modal grounding / new verifiable reward / W4 embedding) — the internal-verification/composition route is refuted. Last open in-fence test: real OPRO/GEPA. Directional (n≤40); Stage-2 confirms."
 ---
 
 # Can adjusting A realize the oracle-δ? (Phase-2 of Q1)
@@ -75,39 +75,62 @@ and **worse than greedy on mmau**. Isolation beat the coupled verifier on **one 
 overlap), so this does NOT establish "two-system > self-selection"; the gap could be entirely surface.
 ρ here is a *realization fraction*, not the error-correlation TH2a is about.
 
-## 4. Verdict (Stage-1 directional — returned to owner; NOT a branch decision)
+### E10b — the on-surface self-selection CONTROL (n=40, paired-bootstrap CIs): REFUTES the two-system seed
+On the SAME surfaces, at matched budget, comparing greedy / oracle / **majority-vote self-selection** /
+two-system isolated verifier:
+| Surface | greedy | oracle | majority | verifier | ver−maj (95% CI) | ver rel-gain |
+|---|---|---|---|---|---|---|
+| mmau-mini | 0.725 | 0.750 | 0.725 | 0.650 | **−0.075** [−0.175, 0.0] | **−10.3%** |
+| SQuAD-zh | 0.725 | 0.825 | 0.775 | 0.750 | −0.025 [−0.10, 0.05] | +3.5% |
+| big-bench-audio | 0.600 | 0.700 | 0.600 | 0.600 | +0.000 [−0.15, 0.125] | +0.0% |
+→ **The two-system verifier NEVER beats on-surface majority self-selection** (ver−maj ≤ 0 on all three,
+every CI crosses or sits below 0; on mmau it is *worse*, −10.3%). The v1 "~50% realization / positive
+seed" was **entirely a surface confound** — de-confounded and **refuted with CIs**. And **neither** selector
+clears the +10% bar (majority: +0.0% / +0.05 borderline / +0.0%). So no in-fence *selection* lever —
+single-model self-selection OR the two-system composition — deployably realizes the headroom.
 
-**By the frozen P1 rule, no in-fence lever (few-shot ICL, prompt-opt, two-system verifier) realizes the
-oracle-δ to the deployable +10% bar.** But two things stop this from answering Q1:
+## 4. Verdict (Stage-1 directional; de-confounded with CIs — a clear branch answer)
 
-1. **Under-powered.** n=24–30, no bootstrap CIs (a prereg deviation); the lever deltas sit inside the
-   model's own temp-0 decode noise. Settles nothing statistically.
-2. **Under-scoped.** The **decisive in-fence instruments were never run** — a real OPRO/GEPA optimized
-   prompt search, M3 cross-modal (transcript/lattice) injection (the survey's strongest lever), the full
-   few-shot shot-curve, and — critically — an **on-surface self-selection control** for E10. Until these
-   run, "ICL is insufficient" is **not established**, and the E10 "two-system advantage" is **confounded**.
+The E10b on-surface control removes the one thing that had kept the verdict "undetermined." The answer is
+now clear on the tested space:
 
-**So the honest answer to the owner's Q1, for this phase:**
-- **Is ICL sufficient? — Undetermined, leaning "the limited levers we ran do not realize the headroom."**
-  Not a proof of insufficiency: the strong pro-realization in-fence instruments are untested.
-- **Should an omni agentic system be designed? — Not answered here.** E10 is a **branch-2.1** verifier/MBR
-  selector (the framing books it in-fence), not an agentic system; it **failed** the frozen bar, and its
-  weak sub-threshold signal — if anything — says **branch 2.1 (better in-fence selection) is under-tested**,
-  not that 2.2 is warranted. The agentic question remains **open**.
+**Q1a — Is ICL sufficient for training-free RL realization on the frozen omni's semantic layer? — No,
+across every cheap in-fence lever.** Real oracle-δ exists (P2, +0.11…+0.28), yet none of these convert it
+to a deployable ≥+10% greedy gain: text-prompt diversity ≈0 (Phase-1 E1/E3), multimodal few-shot ICL does
+not lift greedy (E7), in-fence prompt-pick ≈0 (E8), single-model self-selection ≈0 (Phase-1 E4 + E10b
+majority), and **the two-system context-differentiated verifier is refuted** — it never beats on-surface
+self-selection (E10b, CIs). The realization bottleneck (c) is robust and now closed against the
+composition/verification "fix." *(One cheap in-fence lever remains untested: a real OPRO/GEPA optimized
+prompt search — but TH2's (b)-cap frames why bounded prompt-reweighting is expected to fail too.)*
 
-**Mandatory Stage-2 preconditions before any branch decision (the value this phase delivers):** run, with
-powered n and paired-bootstrap CIs — (a) a real OPRO/GEPA prompt search; (b) M3 cross-modal injection;
-(c) the full few-shot shot-curve with a proper multi-turn ICL format + raised token cap; (d) E10 **with an
-on-surface self-selection control** and the isolated-vs-coupled ablation with CIs. Only then is the
-2.1-vs-2.2 branch decision earned. Returned to owner; no auto-rollover.
+**Q1b — Should an omni agentic system be designed? — Only if it injects a genuinely NEW,
+INDEPENDENT-of-M signal; the internal-composition/verification route is refuted.** The decisive negative
+this phase adds is that making the frozen model verify/re-rank *itself* (even as two context-differentiated
+systems) does not realize the headroom — consistent with the theory: TH2a says the residual is the
+shared-knowledge floor that no internal decorrelation removes, and beating it needs a signal *independent
+of M*. So an agentic system is warranted **specifically** as an injector of new independent information —
+cross-modal grounding (M3 transcript/lattice injection), a new verifiable reward, or the omni-embedding
+system (W4, the parked independent-signal source, #37) — **not** as internal agent-stacking or
+self-verification (which `gain_product` forbids and E10b empirically refutes).
 
-## 中文摘要（v2,经三人严格评审修订)
-**判据(冻结):** 任一 in-fence 杠杆须过相对 +10% greedy 增益。**结果(Stage-1,n=24–30,无 CI):** E7 多模态
-few-shot 未抬 greedy(且落在 temp-0 解码噪声内,只跑了 k=[0,2]);E8 只是 4 候选 system-prompt 挑选、非
-OPRO/GEPA,零信息量;E10 两系统 verifier **全部低于 +10%**(SQuAD +5.6%、big-bench +8.3%)——是每面 24 题里
-净 +1 题、无 CI、低-δ 面 ρ=0、mmau 上反而更差,隔离胜耦合仅 1 面 1 题,**且没跑同面自选取对照**(E4 的自选取
-≈0 在 MMAU、零重叠),故**不能**断言"两系统胜过自选取"(可能全是任务差异)。**判定:按冻结判据无杠杆达标,
-但既欠功效(n 小、无 CI)又欠范围(真 OPRO/GEPA、M3 跨模态注入、完整 shot-curve、同面自选取对照全没跑)——
-故既未关闭 Q1、也未确立 agentic 分支。E10 是分支-2.1 的 verifier/选择器(非 agentic)且未达标,其弱信号若有
-所指是"2.1 欠测",非 2.2。** 交主人;**Stage-2 前置(powered n + 配对 bootstrap CI):真 OPRO/GEPA、M3 注入、
-完整 shot-curve、E10 带同面自选取对照 + 隔离/耦合消融——跑完才谈分支。无自动滚入。
+**So the clear directional answer:** ICL / cheap-in-fence realization is **insufficient**; the path to
+harvesting the frozen omni's real headroom is a **new-independent-signal** injection (agentic or
+cross-modal), not more internal ICL/selection. **Two Stage-2 tests remain to lock it** (powered n, CIs):
+(a) a real OPRO/GEPA prompt search — the last cheap in-fence lever; (b) an M3 cross-modal-injection /
+W4-embedding test — the first genuinely-new-signal lever. If (a) fails and (b) succeeds, the branch-2.2
+agentic/new-signal direction is fully earned. Returned to owner; no auto-rollover.
+
+## 中文摘要（v3,经三人严格评审 + E10b 去混淆对照修订)
+**判据(冻结):** 任一 in-fence 杠杆须过相对 +10% greedy 增益。**结果(Stage-1,E10b 带配对 bootstrap CI):**
+真实 oracle-δ 存在(+0.11…+0.28),但没有一个廉价 in-fence 杠杆能把它转成可部署增益——文字 prompt 多样性
+≈0(Ph1)、多模态 few-shot 不抬 greedy(E7)、in-fence prompt 挑选 ≈0(E8)、单模型自选取 ≈0(Ph1 E4 + E10b
+majority),**两系统上下文差异化 verifier 被证伪**——在同面上从不胜过自选取(E10b:ver−maj = −0.075/−0.025/
++0.000,CI 均跨/低于 0,mmau 上反而 −10.3%)。**判定(清晰):**
+**Q1a ICL 是否足够?——否**,所有廉价 in-fence 杠杆(prompt/few-shot/挑选/两系统验证)都实现不了头room。
+**Q1b 是否设计 omni agentic?——仅当它注入真正独立于 M 的新信号才值得**;让冻结模型自我验证/重排(哪怕两系统)
+不管用(E10b 证伪),与理论一致(TH2a:残余是共享知识底,内部去相关消不掉,越过它需独立信号)。故 agentic 应作
+**新独立信号注入器**(M3 跨模态注入 / 新可验证奖励 / W4 embedding,park #37),**而非**内部堆 agent/自验证
+(gain_product 禁止、E10b 实证否定)。**清晰方向:** ICL/廉价 in-fence 实现**不足**;取头room 之路是**注入新独立
+信号**(agentic 或跨模态),非更多内部 ICL/选择。**两个 Stage-2 收尾测试(powered n + CI):**(a) 真 OPRO/GEPA
+——最后一个廉价 in-fence 杠杆;(b) M3 跨模态注入 / W4-embedding——第一个真·新信号杠杆。若 (a) 败 (b) 成,
+分支-2.2(agentic/新信号)完全坐实。交主人;无自动滚入。
