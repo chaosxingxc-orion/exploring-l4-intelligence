@@ -1,50 +1,56 @@
 #!/usr/bin/env bash
 # fetch-candidates.sh — download the WS-D survey-sourced candidate datasets (docs/datasets.candidates.json).
 #
-# These are B-grade (obtainable) datasets NOT in the frozen datasets.lock.json, queued for owner fetch.
-# Exact HF ids are best-effort; entries with a confident id download automatically, the rest print a
-# RESOLVE line (one-time manual id confirmation from the paper, then re-run). Never touches the frozen lock.
+# B-grade (obtainable) datasets NOT in the frozen datasets.lock.json, queued for owner fetch. Sources were
+# web-verified 2026-07-07 (high confidence, evidence in the survey doc). Never touches the frozen lock.
 #
-#   SPEECHRL_DATA_DIR=/mnt/d/chao_workspace/exploring-l4-intelligence/speechrl-data \
-#       bash scripts/data/fetch-candidates.sh            # download confident ids
-#   bash scripts/data/fetch-candidates.sh --list         # just list, fetch nothing
+#   bash scripts/data/fetch-candidates.sh --list        # list only, fetch nothing
+#   bash scripts/data/fetch-candidates.sh               # fetch all HF + git; gated ones print instructions
+#   bash scripts/data/fetch-candidates.sh squtr ...     # fetch only the named dataset(s)
 #
-# Deps: huggingface-cli (pip install -U "huggingface_hub[cli]"). Some sets are gated/registration-only.
+# Deps: huggingface-cli (pip install -U "huggingface_hub[cli]"), git. Data -> $SPEECHRL_DATA_DIR/datasets/<name>.
 set -u
-# Auto-default SPEECHRL_DATA_DIR to <repo>/speechrl-data (script sits at <repo>/scripts/data/),
-# so it runs without an env prefix; override by exporting SPEECHRL_DATA_DIR.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 DATA="${SPEECHRL_DATA_DIR:-$REPO_ROOT/speechrl-data}"
-echo "[fetch-candidates] data dir = $DATA"
 DS="$DATA/datasets"
-LIST_ONLY=0; [ "${1:-}" = "--list" ] && LIST_ONLY=1
+echo "[fetch-candidates] data dir = $DATA"
 mkdir -p "$DS"
 
-# name | HF dataset id (empty = RESOLVE) | note/source
+# name | method | note      (method = hf:<id> | git:<owner/repo> | gated:<url>)
 CANDS=(
-  "esc-50|ashraq/esc50|audio-event knowledge (iKnow-audio); 50-class, confident"
-  "fsd50k|Fhrozen/FSD50K|audio-event knowledge (iKnow-audio); confirm repo id"
-  "slue-sqa-5|asapp/slue-phase-2|spoken-QA (WavRAG); confirm SQA-5 subset/config"
-  "audiocaps-qa||AudioCaps public (d0rj/audiocaps) but VAT-KG QA split needs paper release — RESOLVE"
-  "audio2tool||arXiv 2604.22821 release (github/HF) — RESOLVE"
-  "auditorybench-plusplus||arXiv 2509.17641 data release — RESOLVE"
-  "mlc-slm||Interspeech-2025 MLC-SLM Challenge (nexdata.ai, registration) — RESOLVE"
-  "squtr||arXiv 2602.12783 (6 public sets) — RESOLVE"
-  "full-duplex-bench-v3||arXiv 2604.04847 (100 real recs) — RESOLVE"
+  "audiocaps-qa|hf:AudioLLMs/audiocaps_qa_test|AudioCaps-QA AQA (AudioBench; VAT-KG/M3KG-RAG borrow it), 313 rows, not gated"
+  "audio2tool|hf:RVtech/Audio2Tool|audio-native function-calling ~30k, 8 tiers, CC-BY-NC-4.0, not gated"
+  "auditorybench-plusplus|hf:HJOK/AuditoryBenchpp|auditory-knowledge probe (text-only, ~527kB), CC-BY-4.0, not gated"
+  "squtr|hf:SLLMCommunity/SQuTR|spoken-query retrieval robustness, 21.1GB(!), 6 configs, CC-BY-SA-4.0, not gated"
+  "full-duplex-bench-v3|git:DanielLin94144/Full-Duplex-Bench|FDB-v3 real audio; clones repo, v3 data via Google Drive link in README"
+  "mlc-slm|gated:https://www.nexdata.ai/competition/mlc-slm|MLC-SLM ~1604h, 11 langs: register + sign DUA, link emailed (no HF)"
 )
 
+LIST_ONLY=0; ARGS=()
+for a in "$@"; do if [ "$a" = "--list" ]; then LIST_ONLY=1; else ARGS+=("$a"); fi; done
+sel() { [ "${#ARGS[@]}" -eq 0 ] && return 0; local n="$1"; for w in "${ARGS[@]}"; do [ "$w" = "$n" ] && return 0; done; return 1; }
+
 echo "== WS-D download candidates -> $DS =="
-ok=0; todo=0
 for row in "${CANDS[@]}"; do
-  IFS='|' read -r name hfid note <<< "$row"
-  if [ -z "$hfid" ]; then
-    echo "  [RESOLVE] $name : $note"; todo=$((todo+1)); continue
-  fi
-  echo "  [FETCH ] $name <- hf:$hfid ($note)"
-  ok=$((ok+1))
+  IFS='|' read -r name method note <<< "$row"
+  sel "$name" || continue
+  case "$method" in
+    hf:*)    echo "  [HF   ] $name <- ${method#hf:}   ($note)";;
+    git:*)   echo "  [GIT  ] $name <- github:${method#git:}   ($note)";;
+    gated:*) echo "  [GATED] $name : ${method#gated:}   ($note)";;
+  esac
   [ "$LIST_ONLY" -eq 1 ] && continue
-  huggingface-cli download "$hfid" --repo-type dataset --local-dir "$DS/$name" \
-    || echo "     !! $name failed (id wrong / gated / need auth) — verify hf:$hfid"
+  case "$method" in
+    hf:*)
+      huggingface-cli download "${method#hf:}" --repo-type dataset --local-dir "$DS/$name" \
+        || echo "     !! $name HF download failed (install huggingface_hub[cli] / check auth)";;
+    git:*)
+      git clone "https://github.com/${method#git:}" "$DS/$name" \
+        && echo "     -> cloned; download the v3 data from the Google Drive link in $DS/$name/README (manual)" \
+        || echo "     !! $name git clone failed";;
+    gated:*)
+      echo "     -> GATED: open ${method#gated:} , register + sign the DUA; the download link is emailed (cannot automate).";;
+  esac
 done
-echo "== $ok auto-fetch, $todo need id resolution (edit CANDS[] then re-run) =="
+echo "== done =="
