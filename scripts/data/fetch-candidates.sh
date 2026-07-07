@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 # fetch-candidates.sh — download the WS-D survey-sourced candidate datasets (docs/datasets.candidates.json).
 #
-# Uses the SAME high-throughput, mirror-compatible path as fetch-data.sh: hf-mirror.com + hfd + aria2c
-# (multi-connection). The python `hf` CLI is only a fallback (it rejects hf-mirror's HEAD metadata).
-# B-grade obtainable datasets NOT in the frozen datasets.lock.json; sources web-verified 2026-07-07.
+# Xet-safe, verifiable HF download via hf-mirror.com. Many HF repos now live on the **Xet** backend,
+# whose presigned CDN URLs are byte-range-locked -> aria2c multi-connection range-splitting gets HTTP
+# 403 on nearly every chunk (this silently left datasets ~half-downloaded). So each file is fetched
+# with ONE connection (no range split) and throughput comes from file-level parallelism (aria2c -j).
+# The exact gap set is computed by diffing the repo's file list+sizes (via hf_complete.py) against
+# local disk, then re-verified byte-for-byte after download -> provable 100% completeness. The python
+# `hf` CLI is a single-stream fallback only. Sources web-verified 2026-07-07.
 #
 #   bash scripts/data/fetch-candidates.sh --list        # list only, fetch nothing
 #   bash scripts/data/fetch-candidates.sh               # fetch all HF + git; gated ones print instructions
 #   bash scripts/data/fetch-candidates.sh squtr ...     # fetch only the named dataset(s)
 #
-# Env overrides: SPEECHRL_DATA_DIR, SPEECHRL_HF_ENDPOINT (default hf-mirror.com), SPEECHRL_HFD_THREADS (8).
-# Deps: aria2c + hfd (auto-fetched) for HF; git for github. `bash scripts/data/fetch-data.sh --install-deps`.
+# Env overrides: SPEECHRL_DATA_DIR, SPEECHRL_HF_ENDPOINT (default hf-mirror.com), SPEECHRL_HFD_JOBS (16
+#   = concurrent files). Deps: aria2c + python huggingface_hub for HF; git for github.
 set -u
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -33,11 +37,10 @@ if [ -z "$HF_TOKEN" ]; then
   done
 fi
 export LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONIOENCODING=utf-8 NO_COLOR=1
-HFD_THREADS="${SPEECHRL_HFD_THREADS:-8}"
-# hfd/aria2c hard-caps per-download connections at 1..10 — clamp so an over-eager override still runs.
-case "$HFD_THREADS" in ''|*[!0-9]*) HFD_THREADS=8;; esac
-[ "$HFD_THREADS" -lt 1 ] && HFD_THREADS=1
-[ "$HFD_THREADS" -gt 10 ] && HFD_THREADS=10
+HFD_JOBS="${SPEECHRL_HFD_JOBS:-16}"   # concurrent files (each fetched single-connection -> Xet-safe)
+case "$HFD_JOBS" in ''|*[!0-9]*) HFD_JOBS=16;; esac
+[ "$HFD_JOBS" -lt 1 ] && HFD_JOBS=1
+DIFFER="$SCRIPT_DIR/hf_complete.py"   # repo-vs-local differ that emits a single-connection aria2c list
 HF_CLI="$(command -v hf || command -v huggingface-cli || true)"
 # If no CLI found, try python -m huggingface_hub as last resort
 if [ -z "$HF_CLI" ]; then
@@ -48,7 +51,7 @@ if [ -z "$HF_CLI" ]; then
   fi
 fi
 mkdir -p "$DS"
-echo "[fetch-candidates] data=$DS | HF_ENDPOINT=$HF_ENDPOINT | aria2c -x$HFD_THREADS (fast path)"
+echo "[fetch-candidates] data=$DS | HF_ENDPOINT=$HF_ENDPOINT | aria2c -j$HFD_JOBS single-connection (Xet-safe)"
 
 log(){ printf '[fetch-candidates] %s\n' "$*"; }
 warn(){ printf '[fetch-candidates] WARNING: %s\n' "$*" >&2; }
@@ -85,29 +88,37 @@ clone_git(){ # owner/repo dest
   return 1
 }
 
-# hfd = hf-mirror's aria2c downloader (mirror-compatible, multi-connection). Auto-fetch into $DATA/.bin.
-ensure_hfd(){
-  command -v hfd >/dev/null 2>&1 && { command -v hfd; return; }
-  local f="$DATA/.bin/hfd.sh"
-  [ -f "$f" ] || { mkdir -p "$DATA/.bin"; curl -fsSL "${HF_ENDPOINT}/hfd/hfd.sh" -o "$f" 2>/dev/null && chmod +x "$f"; }
-  [ -s "$f" ] && echo "$f"
-}
 fetch_hf(){ # id dest
   local id="$1" dest="$2"
+  mkdir -p "$dest/.hfd"
   [ -n "${HF_TOKEN:-}" ] && log "$id: using HF_TOKEN (authenticated, higher rate limits)"
-  # FAST PATH: hf-mirror's hfd + aria2c multi-connection. Resume-safe: re-running skips complete
-  # files and finishes partial ones, so this doubles as an integrity/completeness check.
-  if command -v aria2c >/dev/null 2>&1; then
-    local hfd; hfd="$(ensure_hfd)"
-    if [ -n "$hfd" ]; then
-      retry bash "$hfd" "$id" --dataset --tool aria2c -x "$HFD_THREADS" --local-dir "$dest" && return 0
-      warn "$id: hfd/aria2c failed after retries; falling back to hf CLI (slower, single-stream)"
-    fi
-  else
-    warn "aria2c missing (needed for high-concurrency mirror download): sudo apt-get install -y aria2 — falling back to hf CLI"
+
+  # No aria2c or no differ -> single-stream hf CLI fallback (Xet-safe: whole-file, no range split).
+  if ! command -v aria2c >/dev/null 2>&1 || [ ! -f "$DIFFER" ]; then
+    warn "$id: aria2c or hf_complete.py missing -> hf CLI fallback (single-stream, slow)"
+    retry "$HF_CLI" download "$id" --repo-type dataset --local-dir "$dest" --resume-download
+    return
   fi
-  # FALLBACK: hf CLI against the mirror (resume-capable but single-stream)
-  retry "$HF_CLI" download "$id" --repo-type dataset --local-dir "$dest" --resume-download
+
+  # Xet-safe, verifiable: diff -> fetch gaps single-connection -> re-diff, up to 4 rounds (self-heal).
+  local list="$dest/.hfd/missing_xetsafe.txt" round=0 nmiss=1
+  while [ "$round" -lt 4 ]; do
+    round=$((round + 1))
+    python -u "$DIFFER" "$id" "$dest" "$list" || { warn "$id: repo listing failed (bad id? gated?)"; return 1; }
+    nmiss="$(grep -c '^http' "$list" 2>/dev/null || echo 0)"
+    [ "$nmiss" -eq 0 ] && { log "$id: ✅ 100% complete"; return 0; }
+    log "$id: round $round — $nmiss file(s) missing/short; fetching -j$HFD_JOBS single-connection"
+    find "$dest" -name '*.aria2' -delete 2>/dev/null   # stale partials would trigger a 403-prone range resume
+    ( cd "$dest" && aria2c -i "$list" -j "$HFD_JOBS" \
+        --auto-file-renaming=false --allow-overwrite=true --file-allocation=none \
+        --console-log-level=warn --summary-interval=20 \
+        --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=90 )
+  done
+  python -u "$DIFFER" "$id" "$dest" "$list" 2>/dev/null || true
+  nmiss="$(grep -c '^http' "$list" 2>/dev/null || echo 0)"
+  [ "$nmiss" -eq 0 ] && { log "$id: ✅ 100% complete"; return 0; }
+  warn "$id: still $nmiss file(s) missing after $round rounds — re-run to continue"
+  return 1
 }
 
 # name | method | note      (method = hf:<id> | git:<owner/repo> | gated:<url>)
