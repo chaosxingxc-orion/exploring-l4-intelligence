@@ -11,7 +11,12 @@
 #
 # Deps: huggingface-cli (pip install -U "huggingface_hub[cli]"). Some sets are gated/registration-only.
 set -u
-DATA="${SPEECHRL_DATA_DIR:?set SPEECHRL_DATA_DIR}"
+# Auto-default SPEECHRL_DATA_DIR to <repo>/speechrl-data (script sits at <repo>/scripts/data/),
+# so it runs without an env prefix; override by exporting SPEECHRL_DATA_DIR.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DATA="${SPEECHRL_DATA_DIR:-$REPO_ROOT/speechrl-data}"
+echo "[fetch-candidates] data dir = $DATA"
 DS="$DATA/datasets"
 LIST_ONLY=0; [ "${1:-}" = "--list" ] && LIST_ONLY=1
 mkdir -p "$DS"
