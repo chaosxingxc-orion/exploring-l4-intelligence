@@ -12,3 +12,4 @@ import TfrlProofs.Reachability
 import TfrlProofs.InfoBoundary
 import TfrlProofs.AgenticElements
 import TfrlProofs.BestOfNConvergence
+import TfrlProofs.Iterate

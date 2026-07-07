@@ -103,7 +103,14 @@ theorem readout_error_ge_gap
 (`correct := (· = true)`) yet an info-augmented sampler hits. Hence the oracle ceiling is *class
 -dependent*: a lever that changes the sampling distribution by conditioning on new information can cross a
 gap that is impassable for the entire read-out class. This is the formal content of "read-out/ICL
-insufficient ⇒ a new-info (memory) system is required" (Q1b). -/
+insufficient ⇒ a new-info (memory) system is required" (Q1b).
+
+⚠ **FRAMING-ONLY (2026-07-07 WS-E re-grade).** The witness below is a trivial `∃` over `Fin 1 → Bool`
+(const-`false` vs const-`true`); it models NO retrieval/injection/memory mechanism. It proves only that
+*some* distribution *can* differ — not that RAG/memory *does* cross the gap. Under the theory-track
+discipline this carries **no result** (same class as the D3-review re-grade of the read-out counting
+bounds as "a framing bound, not a contribution"). Do not cite it as evidence that knowledge injection
+works. See `[[2026-07-07-knowledge-proof-honest-accounting-and-feasibility]]`. -/
 theorem newinfo_can_cross_gap :
     ∃ (s s' : Fin 1 → Bool), (∀ i, s i ≠ true) ∧ (∃ j, s' j = true) :=
   ⟨fun _ => false, fun _ => true, by decide, ⟨0, rfl⟩⟩

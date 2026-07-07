@@ -58,7 +58,12 @@ theorem single_model_gap_unreachable
 /-- **The new-info escape.** A new-info element can emit an answer that is *not* an `M`-output under any
 context, so there exist configurations where the under-all-contexts gap holds yet the element is correct.
 The oracle ceiling of the single-model class is therefore not absolute — crossing it *requires* a genuine
-new-info element. -/
+new-info element.
+
+⚠ **FRAMING-ONLY (2026-07-07 WS-E re-grade).** The witness is trivial (`M` const-`false`, `correct := (·
+= true)`, external output `true`); it models NO actual element mechanism. It proves only that an escape is
+*logically possible*, not that any real tool/memory/element achieves it. No contribution under the
+theory-track discipline. See `[[2026-07-07-knowledge-proof-honest-accounting-and-feasibility]]`. -/
 theorem external_element_can_escape :
     ∃ (M_can_output : Unit → Unit → Bool → Prop) (correct : Bool → Prop) (input : Unit) (ext_out : Bool),
       (∀ ctx a, M_can_output input ctx a → ¬ correct a) ∧ correct ext_out :=
