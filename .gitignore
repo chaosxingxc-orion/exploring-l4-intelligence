@@ -98,3 +98,4 @@ CLAUDE-FABLE-5.md
 !common/src/speechrl_common/data/
 !common/src/speechrl_common/data/**
 common/src/speechrl_common/data/__pycache__/
+scripts/data/__pycache__/
