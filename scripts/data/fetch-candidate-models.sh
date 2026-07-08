@@ -22,9 +22,10 @@
 #     the basename, which is fiddlier to get right in pure bash string globbing).
 #
 #   bash scripts/data/fetch-candidate-models.sh --list              # table, fetch nothing (all tiers)
-#   bash scripts/data/fetch-candidate-models.sh                     # fetch tier T1 only (default)
-#   bash scripts/data/fetch-candidate-models.sh --tier T2           # fetch tier T2 only
-#   bash scripts/data/fetch-candidate-models.sh --tier all          # fetch every tier (heavy! ~50GB+)
+#   bash scripts/data/fetch-candidate-models.sh                     # fetch EVERY tier (default; ~47GB total —
+#                                                                   #   owner 2026-07-08: heavies in by default)
+#   bash scripts/data/fetch-candidate-models.sh --tier T1           # small set only (~6.3GB)
+#   bash scripts/data/fetch-candidate-models.sh --tier T2           # heavy tier only
 #   bash scripts/data/fetch-candidate-models.sh --only wavlm-large  # fetch one named model (any tier)
 #   bash scripts/data/fetch-candidate-models.sh --install-deps      # print how to install deps
 #
@@ -90,8 +91,9 @@ if [ "$INSTALL" -eq 1 ]; then
   log "  (installs: huggingface_hub + hf_transfer + modelscope into the venv, plus aria2c/jq via apt)"
   exit 0
 fi
-# --list defaults to showing every tier; a real fetch defaults to T1 only (heavies must be asked for).
-if [ -z "$TIER" ]; then [ "$LIST_ONLY" -eq 1 ] && TIER=all || TIER=T1; fi
+# Default = ALL tiers for both --list and fetch (owner 2026-07-08: heavies in the default —
+# "一次性把事情做对"). Use --tier T1 to restrict to the small set.
+if [ -z "$TIER" ]; then TIER=all; fi
 case "$TIER" in T1|T2|T3|all) ;; *) warn "invalid --tier '$TIER' (want T1|T2|T3|all)"; exit 1 ;; esac
 tier_match(){ [ -n "$ONLY" ] && return 0; [ "$TIER" = all ] && return 0; [ "$TIER" = "$1" ]; }  # --only overrides tier
 name_match(){ [ -z "$ONLY" ] && return 0; [ "$ONLY" = "$1" ]; }
