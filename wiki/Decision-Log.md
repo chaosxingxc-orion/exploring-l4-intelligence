@@ -32,6 +32,17 @@ tree 的实际内容降回诚实位置，把信息边界的"标签合规但信�
 "充分调研 → owner 讨论 → 再规划"的顺序纪律。Q1/Q2（统一 vs 特化嵌入器、任务粒度组织）的候选方案
 空间已写入审计文档 §6，待 2025+ 调研矩阵到位后与 owner 讨论定夺。
 
+**（同日后续）调研完成。** 8-finder Opus workflow + 40 条对抗验证（34 CONFIRMED/6 PARTIAL/
+0 REFUTED）收官，主文档 `2026-07-08-speech2vec-survey-2025plus.md`（附录 dims-1-4 / dims-5-8 入
+`survey/`）。七条主发现：**CLAP 词汇内容键失效硬确证**（LibriSpeech R@1 0.1% vs GLAP 93.8%、
+AISHELL-2 98.5%）；**frozen-omni 隐态可检索性获外部支持**（LCO-Omni 无音频对比训练登 MAEB 榜一，
+利好 W4）；无单模型全任务族最优 → 指向「内容主键+speaker/emotion 特化键」2–3 键架构，与 W4
+"单空间多读出"构成待裁决竞争假设 H-a/H-b；codec token 作键=空白+劣势；语音无成熟 late-interaction
+→ slot 走两级检索；ASR 困难样本记忆先例强（BR-ASR 200k 词规模化✅）且"frozen omni 自身嵌入作键"
+确认为文献空白；omni-embed-nemotron 官方 API 确诊 loader 错因（非对称 encode_document/encode_query），
+但其音频零样本弱+NC license → 主键候选地位动摇。8 项 owner 讨论议程见主文档 §7——**选型与 T11
+规划留待讨论，不预执行**。
+
 ### 2026-07-06 (later) · Omni-agentic 综述战役收官 → 契约相对主论点 + 收敛定理 + 7 方向到 K 终闸
 **Result.** 战役 A0→D4 全部完成、到达 owner 终闸(K/T9,不自动进 Stage-2)。产出:框架 D0 + 14-lane/~120-
 系统综述(D1,3 遍文献核查硬化)+ 正式论文 D2 + **五人格严格评审 D3(全 sound-with-corrections)+ 全面修订 +
