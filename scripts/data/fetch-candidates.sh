@@ -127,8 +127,8 @@ CANDS=(
   "audio2tool|hf:RVtech/Audio2Tool|audio-native function-calling ~30k, 8 tiers, CC-BY-NC-4.0, not gated"
   "auditorybench-plusplus|hf:HJOK/AuditoryBenchpp|auditory-knowledge probe (text-only, ~527kB), CC-BY-4.0, not gated"
   "squtr|hf:SLLMCommunity/SQuTR|spoken-query retrieval robustness, 21.1GB(!), 6 configs, CC-BY-SA-4.0, not gated"
-  "full-duplex-bench-v3|git:DanielLin94144/Full-Duplex-Bench|FDB-v3 real audio; clones repo, v3 data via Google Drive link in README"
-  "mlc-slm|gated:https://www.nexdata.ai/competition/mlc-slm|MLC-SLM ~1604h, 11 langs: register + sign DUA, link emailed (no HF)"
+  # DROPPED 2026-07-08 (owner): full-duplex-bench-v3 (git+GoogleDrive) and mlc-slm (gated) removed from
+  # the comparison set — not worth the manual-fetch friction. Local fdb-v3 clone was deleted.
 )
 
 LIST_ONLY=0; ARGS=()
