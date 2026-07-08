@@ -46,6 +46,22 @@
 - 现成 p2 loader：7 个（big-bench-audio、mmau-mini、vocalbench-zh、SQuAD-zh、spoken-squad、
   minds14-zh、OpenbookQA-zh）；纳入清单中其余 ~10 个需补 loader（多为 parquet/清单读取，工作量低）。
 
+## 缺口核定结论（2026-07-08 同日后续，Opus 双代理 web 核验）
+
+三个缺口的候选已核定并落入 `docs/datasets.gap-candidates.json`（下载脚本
+`scripts/data/fetch-candidate-datasets.sh`，三源路径已实测调通）：
+
+- **P1（约 44.4 GB，补齐全部三缺口）**：G1 说话人 = cn-celeb1（SLR82，22GB，CC BY-SA，1000 zh
+  说话人）+ voxceleb1-test-split（HF，1.3GB，40 说话人 en 评测锚，**已下载完成**）；G2 zh ASR =
+  aishell-1（SLR33，15.6GB，Apache-2.0，train=记忆池/dev+test=评测的天然划分）；G3 zh SER =
+  esd（HF，2.5GB，zh+en 平行、research-only license）+ csemotions（HF，3.1GB，Apache-2.0，
+  10 说话人×7 情感）。
+- **P2（选择性追加）**：thchs-30（SLR18，6.4GB，zh-ASR 朗读多样性；探针文件已下）；m3ed（zh 对话
+  情感，**仅百度盘手动下载**，research-only）；cn-celeb2（75GB，仅当 cn-celeb1 不够用时，预算挤占）。
+- **明确否决**：3D-Speaker（191GB 超预算，cn-celeb1 以 22GB 覆盖同缺口）、WenetSpeech（~1TB）、
+  VoxCeleb 全量（数百 GB + 下载渠道不稳）、CASIA（受限分发）。
+- **G4 判定：除上述三缺口外无其他真实缺失**（ST 是生成任务不需要检索评测数据）。
+
 ## 覆盖缺口提示（供讨论）
 
 1. **slot 粒度**只有 slurp / speech-massive 两源，且都无现成 loader——若 slot 方案要评测，
