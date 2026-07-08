@@ -31,11 +31,18 @@
 set -u
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+# Fix WSL HOME sometimes set to a Windows path when launched from PowerShell
+case "$HOME" in [A-Z]:*|/mnt/*) HOME="/root"; [ "$(id -u)" != 0 ] && HOME="/home/$(id -un)";; esac
+# Data root: CANONICAL location is the repo-adjacent speechrl-data/ on the Windows drive (all
+# loaders/kb_registry/inventory assume it; completed sets already live there). Measured 2026-07-08:
+# downloads here are NETWORK-bound (openslr ~50-70KB/s per connection), not 9p-write-bound, so the
+# ext4 speed argument doesn't apply at these rates — export SPEECHRL_DATA_DIR to override if a
+# genuinely I/O-bound case appears (then move results back under the canonical root).
 DATA="${SPEECHRL_DATA_DIR:-$REPO_ROOT/speechrl-data}"
 DATASETS="$DATA/datasets"
 MANIFEST="${SPEECHRL_GAP_DATASETS_MANIFEST:-$REPO_ROOT/docs/datasets.gap-candidates.json}"
 
-# venv + China-friendly mirror + high concurrency — mirrors fetch-candidate-models.sh exactly
+# venv + China-friendly mirror + high concurrency - mirrors fetch-candidate-models.sh exactly
 SPEECHRL_VENV="${SPEECHRL_VENV:-$HOME/.venvs/speechrl}"
 # shellcheck disable=SC1091
 [ -f "$SPEECHRL_VENV/bin/activate" ] && { source "$SPEECHRL_VENV/bin/activate"; export PATH="$SPEECHRL_VENV/bin:$PATH"; }
@@ -51,9 +58,10 @@ if [ -z "$HF_TOKEN" ]; then
   done
 fi
 export LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONIOENCODING=utf-8 NO_COLOR=1
-HFD_JOBS="${SPEECHRL_HFD_JOBS:-16}"   # concurrent files (each fetched single-connection -> Xet-safe)
-case "$HFD_JOBS" in ''|*[!0-9]*) HFD_JOBS=16;; esac
+HFD_JOBS="${SPEECHRL_HFD_JOBS:-4}"    # concurrent files (lowered from 16 to avoid 429)
+case "$HFD_JOBS" in ''|*[!0-9]*) HFD_JOBS=4;; esac
 [ "$HFD_JOBS" -lt 1 ] && HFD_JOBS=1
+
 OPENSLR_MIRROR="${SPEECHRL_OPENSLR_MIRROR:-auto}"
 case "$OPENSLR_MIRROR" in cn|primary|auto) ;; *) OPENSLR_MIRROR=auto;; esac
 DIFFER="$SCRIPT_DIR/hf_complete.py"   # repo-vs-local differ that emits a single-connection aria2c list (unmodified)
@@ -67,6 +75,12 @@ mkdir -p "$DATASETS"
 log(){ printf '[fetch-candidate-datasets] %s\n' "$*"; }
 warn(){ printf '[fetch-candidate-datasets] WARNING: %s\n' "$*" >&2; }
 retry(){ local n=1; while [ $n -le 5 ]; do "$@" && return 0; local w=$((n*10)); warn "attempt $n/5 failed; retry in ${w}s"; sleep "$w"; n=$((n+1)); done; warn "gave up: $*"; return 1; }
+
+# Proxy: only used if SPEECHRL_PROXY is explicitly set. No auto-detection (it was breaking direct downloads).
+if [ -n "${SPEECHRL_PROXY:-}" ]; then
+  export http_proxy="$SPEECHRL_PROXY" https_proxy="$SPEECHRL_PROXY" HTTP_PROXY="$SPEECHRL_PROXY" HTTPS_PROXY="$SPEECHRL_PROXY"
+  log "proxy: $SPEECHRL_PROXY"
+fi
 
 # --- CLI -------------------------------------------------------------------------------------
 LIST_ONLY=0; ONLY=""; PRIORITY=""; ONLY_FILE=""; INSTALL=0
@@ -111,7 +125,8 @@ fi
 # URL lists (primary/cn_mirror) are joined with \x1e (a separator that never appears in a URL) so
 # per-item file counts survive the row round-trip; \x1f still separates the top-level fields.
 # name \x1f gap \x1f source \x1f priority \x1f role \x1f resource \x1f repo \x1f id_or_url \x1f
-#   size_bytes \x1f primary(\x1e-joined) \x1f cn_mirror(\x1e-joined) \x1f notes
+#   size_bytes \x1f primary(\x1e-joined) \x1f cn_mirror(\x1e-joined) \x1f eu_mirror(\x1e-joined) \x1f
+#   ms_ids(\x1e-joined) \x1f notes
 rows() {
   "$PY" - "$MANIFEST" <<'PY'
 import json, sys
@@ -131,6 +146,8 @@ for e in d:
         (str(size) if size is not None else ""),
         ITEMSEP.join(e.get("primary") or []),
         ITEMSEP.join(e.get("cn_mirror") or []),
+        ITEMSEP.join(e.get("eu_mirror") or []),
+        ITEMSEP.join(e.get("ms_ids") or []),
         (e.get("notes", "") or "").replace("\x1f", " ").replace("\x1e", " ").replace("\n", " "),
     ]))
 PY
@@ -170,10 +187,11 @@ status_hf() { # dest
 status_of() { # name source dest primary_csv
   local source="$2" dest="$3" primary_csv="$4"
   case "$source" in
-    openslr) status_openslr "$dest" "$primary_csv" ;;
-    hf)      status_hf "$dest" ;;
-    manual)  echo MANUAL ;;
-    *)       echo UNKNOWN ;;
+    openslr)    status_openslr "$dest" "$primary_csv" ;;
+    hf)         status_hf "$dest" ;;
+    modelscope) status_hf "$dest" ;;   # same existence-only proxy; modelscope CLI verifies on fetch
+    manual)     echo MANUAL ;;
+    *)          echo UNKNOWN ;;
   esac
 }
 
@@ -202,54 +220,116 @@ openslr_verify() { # path url_for_head -> 0=verified-or-accepted-complete, 1=mis
   return 1
 }
 
-fetch_openslr_file() { # name url_primary url_cn dest basename
-  local name="$1" url_primary="$2" url_cn="$3" dest="$4" bn="$5"
+fetch_openslr_file() { # name url_primary url_cn url_eu dest basename
+  local name="$1" url_primary="$2" url_cn="$3" url_eu="$4" dest="$5" bn="$6"
   if openslr_verify "$dest/$bn" "$url_primary"; then
     log "$name: $bn already complete (skip)"; return 0
   fi
+  # Derive the ELDA EU mirror when the manifest doesn't carry one
+  if [ -z "$url_eu" ]; then
+    url_eu="${url_primary/www.openslr.org/openslr.elda.org}"
+    [ "$url_eu" = "$url_primary" ] && url_eu=""
+  fi
+  # Mirror strategy (measured 2026-07-08 evening):
+  #   - CN mirror openslr.magicdatatech.com is effectively DEAD (https: connect fail; http: 206 but
+  #     ~3.5KB/s) -> EXCLUDED from auto (it would poison an aggregate); use SPEECHRL_OPENSLR_MIRROR=cn
+  #     to force-include it if it ever comes back.
+  #   - openslr.org firewall drops >5 concurrent connections; ~50-70KB/s per connection from CN.
+  #   - Fix: AGGREGATE openslr.org + elda.org in ONE aria2c call (multi-source, -x4 per server,
+  #     -s16 splits) -> both servers download different pieces of the same file simultaneously.
   local -a urls=()
   case "$OPENSLR_MIRROR" in
-    cn)      [ -n "$url_cn" ] && urls+=("$url_cn"); urls+=("$url_primary") ;;
+    cn)      [ -n "$url_cn" ] && urls+=("${url_cn/https:\/\/openslr.magicdatatech.com/http:\/\/openslr.magicdatatech.com}")
+             urls+=("$url_primary"); [ -n "$url_eu" ] && urls+=("$url_eu") ;;
     primary) urls+=("$url_primary") ;;
-    auto|*)  if [ -n "$url_cn" ]; then urls+=("$url_cn" "$url_primary"); else urls+=("$url_primary"); fi ;;
+    auto|*)  urls+=("$url_primary"); [ -n "$url_eu" ] && urls+=("$url_eu") ;;
   esac
-  local u ok=1
-  for u in "${urls[@]}"; do
-    log "$name: fetching $bn <- $u  (aria2c -x8 -s8 -c, multi-connection safe: plain HTTP, not Xet)"
-    if ( cd "$dest" && aria2c -x8 -s8 -c --auto-file-renaming=false --allow-overwrite=false \
+  if command -v aria2c >/dev/null 2>&1; then
+    log "$name: fetching $bn <- ${#urls[@]} mirror(s) AGGREGATED (aria2c -x4/server -s16 -c)"
+    if ( cd "$dest" && aria2c -x4 -s16 -j1 -c \
+          --min-split-size=1M --file-allocation=falloc \
+          --auto-file-renaming=false --allow-overwrite=true \
           --console-log-level=warn --summary-interval=20 \
-          --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=90 \
-          --out="$bn" "$u" ); then
-      ok=0; break
+          --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=120 \
+          --out="$bn" "${urls[@]}" ); then
+      openslr_verify "$dest/$bn" "$url_primary" || { warn "$name: $bn incomplete after download"; return 1; }
+      return 0
     fi
-    warn "$name: fetch of $bn failed from $u; trying next mirror if any"
-  done
-  [ "$ok" -eq 0 ] || { warn "$name: all mirrors failed for $bn"; return 1; }
-  openslr_verify "$dest/$bn" "$url_primary" || { warn "$name: $bn incomplete after download"; return 1; }
-  return 0
+    # Aggregated call failed entirely -> sequential single-mirror fallback
+    local u
+    for u in "${urls[@]}"; do
+      warn "$name: aggregated fetch failed; retrying $bn from single mirror $u"
+      if ( cd "$dest" && aria2c -x4 -s4 -c \
+            --min-split-size=1M --file-allocation=falloc \
+            --auto-file-renaming=false --allow-overwrite=true \
+            --console-log-level=warn --summary-interval=20 \
+            --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=120 \
+            --out="$bn" "$u" ); then
+        openslr_verify "$dest/$bn" "$url_primary" || { warn "$name: $bn incomplete after download"; return 1; }
+        return 0
+      fi
+    done
+    warn "$name: all mirrors failed for $bn"; return 1
+  elif command -v curl >/dev/null 2>&1; then
+    local u
+    for u in "${urls[@]}"; do
+      log "$name: fetching $bn <- $u  (curl fallback, aria2c not installed)"
+      if ( cd "$dest" && curl -L -C - --retry 5 --retry-delay 5 --connect-timeout 30 --max-time 600 \
+            -o "$bn" "$u" ); then
+        openslr_verify "$dest/$bn" "$url_primary" || { warn "$name: $bn incomplete after download"; return 1; }
+        return 0
+      fi
+    done
+    warn "$name: all mirrors failed for $bn"; return 1
+  else
+    warn "$name: neither aria2c nor curl found; cannot download $bn"
+    return 1
+  fi
 }
 
-fetch_openslr_item() { # name dest primary_csv cn_mirror_csv only_file
-  local name="$1" dest="$2" primary_csv="$3" cn_mirror_csv="$4" only_file="$5"
+fetch_openslr_item() { # name dest primary_csv cn_mirror_csv eu_mirror_csv only_file
+  local name="$1" dest="$2" primary_csv="$3" cn_mirror_csv="$4" eu_mirror_csv="$5" only_file="$6"
   mkdir -p "$dest"
   local IFS=$'\x1e'
   local -a prim; read -ra prim <<< "$primary_csv"
   local -a cnm; read -ra cnm <<< "$cn_mirror_csv"
-  local i total=0 ok=0 bn url_p url_c
+  local -a eum; read -ra eum <<< "$eu_mirror_csv"
+  local i total=0 ok=0 bn url_p url_c url_e
   for i in "${!prim[@]}"; do
     url_p="${prim[$i]}"
     [ -z "$url_p" ] && continue
     url_c="${cnm[$i]:-}"
+    url_e="${eum[$i]:-}"
     bn="$(basename "$url_p")"
     if [ -n "$only_file" ] && [ "$only_file" != "$bn" ]; then continue; fi
     total=$((total + 1))
-    fetch_openslr_file "$name" "$url_p" "$url_c" "$dest" "$bn" && ok=$((ok + 1))
+    fetch_openslr_file "$name" "$url_p" "$url_c" "$url_e" "$dest" "$bn" && ok=$((ok + 1))
   done
   if [ "$total" -eq 0 ]; then
     [ -n "$only_file" ] && warn "$name: --file '$only_file' matched no archive in this item's URL list"
     return 1
   fi
   [ "$ok" -eq "$total" ]
+}
+
+# --- modelscope dataset fetch: CN-native, fast from China. Used where a reputable ModelScope copy
+# exists (e.g. AISHELL-1 via the official FunASR uploads — full audio, but REPACKAGED layout, not
+# the original OpenSLR archive; fidelity note lives in the manifest). One subdir per dataset id. ----
+fetch_ms_dataset() { # name dest ms_ids_csv
+  local name="$1" dest="$2" ms_ids_csv="$3"
+  mkdir -p "$dest"
+  local IFS=$'\x1e'; local -a ids; read -ra ids <<< "$ms_ids_csv"
+  [ "${#ids[@]}" -gt 0 ] || { warn "$name: source=modelscope but ms_ids is empty"; return 1; }
+  command -v modelscope >/dev/null 2>&1 || "$PY" -c "import modelscope" 2>/dev/null || {
+    warn "$name: modelscope CLI/SDK not found. Install: uv pip install modelscope"; return 1; }
+  local id sub rc=0
+  for id in "${ids[@]}"; do
+    [ -z "$id" ] && continue
+    sub="${id##*/}"
+    log "$name: modelscope download --dataset $id -> $dest/$sub"
+    retry modelscope download --max-workers "${SPEECHRL_MS_WORKERS:-16}" --dataset "$id" --local_dir "$dest/$sub" || rc=1
+  done
+  return $rc
 }
 
 # --- hf fetch: reuses the Xet-safe machinery from fetch-candidate-models.sh, but for datasets there
@@ -310,13 +390,13 @@ fetch_manual() { # name id_or_url dest notes
 if [ "$LIST_ONLY" -eq 1 ]; then
   echo "== gap-candidate datasets -> $DATASETS  (manifest: $MANIFEST) =="
   printf '%-24s %-4s %-9s %-4s %-13s %-20s %s\n' NAME GAP SOURCE PRI STATUS SIZE ID
-  while IFS=$'\x1f' read -r name gap source priority role resource repo id_or_url size primary_csv cn_mirror_csv notes; do
+  while IFS=$'\x1f' read -r name gap source priority role resource repo id_or_url size primary_csv cn_mirror_csv eu_mirror_csv ms_ids_csv notes; do
     name_match "$name" || continue
     priority_match "$priority" || continue
     dest="$DATASETS/$name"
     status="$(status_of "$name" "$source" "$dest" "$primary_csv")"
     if [ -n "$size" ]; then sizemb="$(( size / 1000000 ))MB"; else sizemb="?"; fi
-    id="${resource:-${repo:-$id_or_url}}"
+    id="${resource:-${repo:-${ms_ids_csv:-$id_or_url}}}"
     printf '%-24s %-4s %-9s %-4s %-13s %-20s %s\n' "$name" "$gap" "$source" "$priority" "$status" "$sizemb" "$id"
   done < <(rows)
   exit 0
@@ -324,7 +404,7 @@ fi
 
 echo "== gap-candidate datasets -> $DATASETS  (priority=$PRIORITY${ONLY:+, only=$ONLY}${ONLY_FILE:+, file=$ONLY_FILE}) =="
 COUNT=0; SKIP=0; FAIL=0
-while IFS=$'\x1f' read -r name gap source priority role resource repo id_or_url size primary_csv cn_mirror_csv notes; do
+while IFS=$'\x1f' read -r name gap source priority role resource repo id_or_url size primary_csv cn_mirror_csv eu_mirror_csv ms_ids_csv notes; do
   name_match "$name" || continue
   priority_match "$priority" || continue
   dest="$DATASETS/$name"
@@ -332,12 +412,13 @@ while IFS=$'\x1f' read -r name gap source priority role resource repo id_or_url 
   if [ "$status" = COMPLETE ] && [ -z "$ONLY_FILE" ]; then
     log "skip complete: $name"; SKIP=$((SKIP + 1)); continue
   fi
-  log "fetch $name  [$source ${resource:-${repo:-$id_or_url}}]  gap=$gap priority=$priority status=$status -> datasets/$name"
+  log "fetch $name  [$source ${resource:-${repo:-${ms_ids_csv:-$id_or_url}}}]  gap=$gap priority=$priority status=$status -> datasets/$name"
   case "$source" in
-    openslr) fetch_openslr_item "$name" "$dest" "$primary_csv" "$cn_mirror_csv" "$ONLY_FILE" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
-    hf)      fetch_hf_dataset "$repo" "$dest" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
-    manual)  fetch_manual "$name" "$id_or_url" "$dest" "$notes"; [ $? -eq 2 ] && SKIP=$((SKIP+1)) || FAIL=$((FAIL+1)) ;;
-    *)       warn "$name: unknown source '$source'; skipping" ;;
+    openslr)    fetch_openslr_item "$name" "$dest" "$primary_csv" "$cn_mirror_csv" "$eu_mirror_csv" "$ONLY_FILE" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    hf)         fetch_hf_dataset "$repo" "$dest" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    modelscope) fetch_ms_dataset "$name" "$dest" "$ms_ids_csv" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    manual)     fetch_manual "$name" "$id_or_url" "$dest" "$notes"; [ $? -eq 2 ] && SKIP=$((SKIP+1)) || FAIL=$((FAIL+1)) ;;
+    *)          warn "$name: unknown source '$source'; skipping" ;;
   esac
 done < <(rows)
 log "done. fetched=$COUNT skipped=$SKIP failed=$FAIL   (manifest: $MANIFEST)"
