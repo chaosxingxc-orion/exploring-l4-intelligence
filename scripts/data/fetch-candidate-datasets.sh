@@ -247,7 +247,7 @@ fetch_openslr_file() { # name url_primary url_cn url_eu dest basename
   if command -v aria2c >/dev/null 2>&1; then
     log "$name: fetching $bn <- ${#urls[@]} mirror(s) AGGREGATED (aria2c -x4/server -s16 -c)"
     if ( cd "$dest" && aria2c -x4 -s16 -j1 -c \
-          --min-split-size=1M --file-allocation=falloc \
+          --min-split-size=1M --file-allocation=none \
           --auto-file-renaming=false --allow-overwrite=true \
           --console-log-level=warn --summary-interval=20 \
           --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=120 \
@@ -260,7 +260,7 @@ fetch_openslr_file() { # name url_primary url_cn url_eu dest basename
     for u in "${urls[@]}"; do
       warn "$name: aggregated fetch failed; retrying $bn from single mirror $u"
       if ( cd "$dest" && aria2c -x4 -s4 -c \
-            --min-split-size=1M --file-allocation=falloc \
+            --min-split-size=1M --file-allocation=none \
             --auto-file-renaming=false --allow-overwrite=true \
             --console-log-level=warn --summary-interval=20 \
             --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=120 \

@@ -2,7 +2,7 @@
   {
     "name": "aishell-1",
     "gap": "G2",
-    "source": "openslr",
+    "source": "hf",
     "resource": "SLR33",
     "primary": [
       "https://www.openslr.org/resources/33/data_aishell.tgz"
@@ -10,19 +10,20 @@
     "cn_mirror": [
       "https://openslr.magicdatatech.com/resources/33/data_aishell.tgz"
     ],
-    "size_bytes_approx": 15582913665,
+    "size_bytes_approx": 21645000000,
     "license": "Apache-2.0",
     "access": "open",
     "role": "both",
     "priority": "P1",
-    "notes": "Core zh-ASR memory pool + eval; exact bytes 15582913665 verified via Content-Length. PRIMARY path = openslr AGGREGATED dual-mirror (openslr.org+elda, measured 3-6MiB/s on 2026-07-08 evening; archive-exact fidelity). FALLBACK if openslr degrades: flip source to 'modelscope' — ms_ids carry the official FunASR uploads (full audio, REPACKAGED layout, measured slow ~130KB/s at evening peak but varies).",
+    "notes": "SWITCHED to HF carlot/AIShell 2026-07-08 (openslr ~300KB/s from CN vs hf-mirror ~3MB/s; verified 41 files/20.16GB, full train+dev+test parquet). REPACKAGED parquet (audio bytes + text col), NOT original data_aishell.tgz tar layout. For original layout use HF shenyunhang/AISHELL-1 (wav tree + aishell_transcript_v0.8.txt). Original openslr archive fallback: openslr.org/resources/33/data_aishell.tgz (15.58GB, slow). Core zh-ASR memory pool + eval.",
     "eu_mirror": [
       "https://openslr.elda.org/resources/33/data_aishell.tgz"
     ],
     "ms_ids": [
       "speech_asr/speech_asr_aishell1_trainsets",
       "modelscope/speech_asr_aishell1_testsets"
-    ]
+    ],
+    "repo": "carlot/AIShell"
   },
   {
     "name": "cn-celeb1",
