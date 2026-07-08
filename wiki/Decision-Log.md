@@ -43,6 +43,18 @@ AISHELL-2 98.5%）；**frozen-omni 隐态可检索性获外部支持**（LCO-Omn
 但其音频零样本弱+NC license → 主键候选地位动摇。8 项 owner 讨论议程见主文档 §7——**选型与 T11
 规划留待讨论，不预执行**。
 
+**（同日后续 2）下载底座就位 + 两项 owner 裁定。** 按"Opus 出清单、Sonnet 写脚本、Fable 驱动调试、
+调通即停交 owner 手动下载"的分工完成：模型清单 `docs/models.candidates.json` + 数据集缺口清单
+`docs/datasets.gap-candidates.json`（G1 说话人/G2 zh-ASR/G3 zh-SER，P1≈44GB 补齐全部缺口；否决
+3D-Speaker 191GB/WenetSpeech/CASIA/VoxCeleb 全量），配套 `fetch-candidate-models.sh` /
+`fetch-candidate-datasets.sh`——六条源路径（hf-mirror Xet-safe 单连接 aria2、ModelScope、GitHub
+release、OpenSLR 多连接+CN 镜像回退、HF 数据集、manual）全部实测调通，调试抓出 3 个真 bug（nargs
+--include 覆盖、grep -c 双零、--only 被层级过滤吞）。GGUF 核查（Opus）：**LCO-7B 有社区 GGUF**
+（marksverdhei，Q8_0 8.1GB+mmproj 2.5GB，--pooling last）；e5-omni-7B 全网无 GGUF、自转有
+modal_temp.pt 校准风险。**Owner 裁定：① 重型模型入默认下载清单（一次做对）；② e5-omni-7B 整体
+移出参考范围（删除条目）**。最终模型清单 12 项 ≈28GB；omni 嵌入对决候选收敛为 LCO-3B/7B GGUF
+（llama.cpp 栈内）+ 本地已有 omni-embed-nemotron-3b（对照）。
+
 ### 2026-07-06 (later) · Omni-agentic 综述战役收官 → 契约相对主论点 + 收敛定理 + 7 方向到 K 终闸
 **Result.** 战役 A0→D4 全部完成、到达 owner 终闸(K/T9,不自动进 Stage-2)。产出:框架 D0 + 14-lane/~120-
 系统综述(D1,3 遍文献核查硬化)+ 正式论文 D2 + **五人格严格评审 D3(全 sound-with-corrections)+ 全面修订 +

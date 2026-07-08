@@ -22,8 +22,9 @@
 #     the basename, which is fiddlier to get right in pure bash string globbing).
 #
 #   bash scripts/data/fetch-candidate-models.sh --list              # table, fetch nothing (all tiers)
-#   bash scripts/data/fetch-candidate-models.sh                     # fetch EVERY tier (default; ~47GB total —
-#                                                                   #   owner 2026-07-08: heavies in by default)
+#   bash scripts/data/fetch-candidate-models.sh                     # fetch EVERY tier (default; ~28GB total —
+#                                                                   #   owner 2026-07-08: heavies in by default;
+#                                                                   #   e5-omni dropped from scope same day)
 #   bash scripts/data/fetch-candidate-models.sh --tier T1           # small set only (~6.3GB)
 #   bash scripts/data/fetch-candidate-models.sh --tier T2           # heavy tier only
 #   bash scripts/data/fetch-candidate-models.sh --only wavlm-large  # fetch one named model (any tier)
