@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-08 · 三个技术锚点的批判性审计（A2 再定级提案）+ 语音向量化 survey-first 决定
+
+**Decision.** Owner 提出三个技术锚点并要求对抗性审计。两路独立审计（W1 逐行 + wiki/proofs 盘点，
+判定全部核到 path:line/commit）结论：**A1（speech-key/异构-value KB）设计夯实、验证未夯实**——唯一
+端到端验证是 logmel 冒烟键恒等往返，CLAP/omni-embed 未建过真库，omni-embed loader 实际未接通，且
+CLAP（audio-event 模型）与内容型主任务族可能错配；**A2（"外接能力源优于 rollout 已理论证明"）不成立**
+——已证的是 rollout read-out 上界 + τ→0 假设下的 squeeze，"外接跨越边界"两定理是自评 FRAMING-ONLY
+的平凡 ∃ 见证，over-confidence 只是经验注解非定理，且 clean 经验证据（T8 null + 24% 采纳率）反对朴素
+版主张——**再定级提案：A2 = 已证 rollout 上界 + Stage-2 定理目标（τ*>0 邻域收敛 + N* 预算）+ 方向性
+证据**；**A3（数据+脚本底座）最扎实但有五刺**（T7 boundary 标签误导→已加 errata、verbatim-only 泄露
+审计盲区、item-id 冻结未接入 T 跑、"同基座"与 Hydra stub 脱节、目标 regime 无外部 baseline）。
+"自以为满足信息约束而未达成"清单 6 条入 `2026-07-08-three-anchors-critical-audit.md`。
+
+**Owner 三点指示**：(1) 审计先记录并同步；(2) **survey-first、规划后置**——充分调研 2025-01 之后的
+语音向量化（speech2vec 类）方案、与 owner 讨论后才做实验规划，本轮不锁嵌入器/实验设计；Stage-1 最高
+优先 = **数据集覆盖度**（所有小规模数据集完成验证，产出覆盖最广的数据方案+实验型技术方案统一表）；
+(3) 提交并同步远端，代码与研究进度一致。**模型分工确立**：Fable 只做编排/判据冻结/对抗把关/综合，
+调研委托 Opus 代理群（8 维度 finder + 对抗验证 workflow 已启动），代码实现委托 Sonnet（本日完成
+kb_audit latent bug 修复 + T7 errata）。配套产出：`2026-07-08-dataset-coverage-inventory.md`
+（28/28 数据集逐条盘点，17 纳入/11 显式排除带理由，lock↔kb_registry 双向对齐）。
+
+**Why it matters.** 这是对研究地基的一次系统性"自查自纠"：把最强声称（A2"已证明"）按 committed
+tree 的实际内容降回诚实位置，把信息边界的"标签合规但信息违规"活例（T7）钉进勘误，并在选型前立起
+"充分调研 → owner 讨论 → 再规划"的顺序纪律。Q1/Q2（统一 vs 特化嵌入器、任务粒度组织）的候选方案
+空间已写入审计文档 §6，待 2025+ 调研矩阵到位后与 owner 讨论定夺。
+
 ### 2026-07-06 (later) · Omni-agentic 综述战役收官 → 契约相对主论点 + 收敛定理 + 7 方向到 K 终闸
 **Result.** 战役 A0→D4 全部完成、到达 owner 终闸(K/T9,不自动进 Stage-2)。产出:框架 D0 + 14-lane/~120-
 系统综述(D1,3 遍文献核查硬化)+ 正式论文 D2 + **五人格严格评审 D3(全 sound-with-corrections)+ 全面修订 +
@@ -856,3 +882,24 @@ W4 复用；不改任何仓/包名，仅靠文档、排序与「角色」列重�
 Python 锁 3.12（系统 3.14 太新）；一个伞仓下四个独立工作仓库（各自历史/issue，靠可编辑 `common/` 共享
 代码）；数据绝不进 git（≈410 GB 在 `speechrl-data/`，`.gitignore` 兜底）；RL 用 verl、基座默认
 Qwen2-Audio（可换）；**先做 W1**（免训练 RL 最成熟，是 W2–W4 的参考范式）。
+
+**2026-07-07 · 知识轨（冻结 omni + 外挂多模态知识 + training-free RL）Stage-1 执行 + 结论（T0–T8）：**
+先做了**概念对齐**（知识≠技能≠记忆,按缺失粒度分;之前把"外部知识注入"错标成"记忆",已 dated re-grade,见
+[[2026-07-06-capability-taxonomy-knowledge-skill-memory]]）。取向锁定**效果优先、非概念新**。调研（agentic-RAG 横向对比 +
+2025-相似原理扫描）发现机制在文本域已存在（RTTC/AdaRewriter/TARG）→ **不追净新**,只在冻结 Qwen3-Omni 上抬基线。
+**关键结果（directional,n≤60,paired-bootstrap CI）：** T0 探针——冻结 omni **能**消费注入知识但不完美（错配会拖累）;
+**T7 实验（heysquad RAG）——H0=+0.517 CI[.38,.65]：base 0.283→oracle 0.80,冻结 omni 有巨大知识 gap 且极善消费检索来的
+外部知识（RAG 大幅有效）；但选定的 R1 精度门控被证伪（gate−inject_k=−0.134 CI[−.23,−.05]）——模型对干扰 passage 鲁棒,
+门控牺牲召回反掉点,约束是召回而非精度。** **Lean（T5）：** 创建了 `TfrlProofs/Realization.lean`（sorry-free,全库绿）——
+`selector_tendsto_oracle`：奖励引导选择器在估计误差 τ→0 时收敛到 oracle（C4,realized≥oracle−2τ）。**注意：`Theory-Convergence`
+文档此前声称的 Realization.lean/C4/InfoBoundary 实际盘上不存在（文档夸大）,本轮才真正落地 selection 收敛。**
+**理论⟷实验闭环：** T7 的 R1 失败恰是该定理前提被违反（TF-IDF 相关性代理 τ 太大、丢 gold）→ 定理正确指出"成立与否由奖励代理 τ 决定"。
+**三问结论**（[[2026-07-07-knowledge-track-conclusions]]）：①最优组织=**冻结 omni 单跳下的文本-passage RAG**（非 LLM-Wiki/KG,
+后者留多跳 Stage-2；audio-native KG 空 cell 且检索器要训练）；②应用=**召回优先的文本注入**、边界干净（外部知识非答案）；
+③TFRL **收敛已证（τ→0⇒oracle）**,但干净单跳下准确率杠杆近饱和 → 有效价值重定向到**效率（何时检索）与受压 regime（ASR 噪声/多跳）**。
+全程 directional-only、boundary-clean、不伪造；记忆/技能轨保持 park。Stage-2 由 owner K/T9 gate。产物：`wiki/2026-07-0{6,7}-*`、
+`~/tfrl_proofs/TfrlProofs/Realization.lean`；未 wiki-sync、未 push。
+
+**2026-07-07（更正/续）· 清白重跑推翻 T7 正结果（E0–E6）：** owner 抓出 T7 三处硬伤（覆盖不足 / 检索 query 用 gold 文本越界 / **KB 逐条含 ground truth**，审计 answer_in_own_KB=1.0）。**清白重跑（audio-ASR query + 答案擦除 + 残留 0.017，n=60）：clean_H0=−0.066 CI[−.17,.03]（null）、lookup=+0.516——表面 RAG 增益 100% 是查答案；答案擦除后外部知识零增益。** E0：盘上无干净"事实-gap+外部KB"测试床（OpenbookQA 饱和+无 fact-book）。**结论（[[2026-07-07-E6-final-conclusions-clean]]，无泄漏前提）：①无法断言任何形态增强冻结 omni，RAG=待超越基线且增强价值未清白证实，前提=先构造事实-gap 基准；②检索加载机制可行但清白收益是查答案；③TFRL 收敛已 Lean 证明（τ→0⇒oracle），准确率空间因缺干净测试床暂无可测对象，近期干净可测的是效率（何时检索）。** 幸存清白:Lean/调研/taxonomy；作废:T7 及旧结论正向主张（已挂横幅）。directional、未 sync、未 push。
+
+**2026-07-07（完成）· 清白 E2/E5 + Lean C1/C2 + agentic 触点,收口三问:** hook 指出上一版三处未完成（测试床阻塞 / 覆盖不足 / Lean 只 C4）→ 本轮真做完。**(点3 Lean)** `Iterate.lean`（sorry-free,全库绿）交付 **C1 单调有界收敛 + C2 预算 N*≤(M−x₀)/δ + 无约束发散负结果**（补齐 C4 之外的迭代收敛）。**(点1 清白 E2/E5)** 反事实利用率（CF,无泄漏,3 集）：冻结 omni 冲突时只 **24%** 采纳外部知识(参数固执,SQuAD 上 keep-参数 0.70);答案擦除增强 **null**(T8);**proto-agentic 2 轮工具递送使采纳翻倍 0.175→0.35(t10)——递送形式是清白训练无关杠杆(E5 清白目标,取代已证伪的 R1 精度门控)**。**(点2 覆盖)** semantic 4 集 + proto-agentic;full-agentic 记为离线不可行(需模拟器/DB-env/o4-mini rubric)。**三问清白结论([[2026-07-07-E6-final-conclusions-clean]])：①存储结构(RAG/LLMWiki/KG) under-determined,一阶清白信号在"递送/交互形式"(agentic 工具递送 > flat);②使用=agentic 递送 + 信任校准,检索加载必要不充分;③TFRL 优化空间在"递送-形式选择 + 信任校准"两轴(非精度门控/推理增强),收敛已 Lean 证明(C1/C2/C4,τ/N*)。** 最重要负向机制发现 = **参数固执限制 RAG 修正参数错误**。全程 boundary-clean、directional、未 sync、未 push。
