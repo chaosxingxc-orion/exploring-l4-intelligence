@@ -6,6 +6,23 @@
 
 ---
 
+### 2026-07-09（续5）· Step-0 收官闭环 + 波 1 马拉松放行（224 格开跑）
+
+**Decision/Facts.** Step-0 全项终态闭环：**30B GGUF 音频 embedding WORKS**（HTTP 200、dim 2048、
+音频/文本同空间、暖机 3.2s——**H-b 前提解除无需 LCO 代理**；media_marker 随机化产线实证；证据入
+`speechrl-data/_repro/step0_evidence/`）；**nemotron EXEMPT**（vLLM 0.14 无 arch 精确
+ValidationError + HF 缺 mamba_ssm + TRT-LLM 为 CUDA-13 线与 cu128 栈冲突且 >5GB——证据齐）；
+**22 模型台账零悬空**。Gemma-4 音频核验（owner 问"最新最强？"）：**否**——edge 定位（音频仅
+E2B/E4B/12B、~300M USM 编码器）、官方基准明文排除中文、无 MMAU/VoiceBench、12B 难集崩溃；开源
+头部仍为 Qwen3-Omni-30B（77.5）≈Step-Audio-2（78.0）≈MiniCPM-o 4.5（76.9），**不下载、双底座
+维持**。冻结裁定 #2/#4 落地：**corpus-true 标签清单**（静默缺失实证：slurp 93 意图漏 57；
+speaker_age 占位模板类别性错误——整数岁 vs 年龄段）+ **ifeval STRICT checker 真接线**（Apache
+子树带 PROVENANCE）。单格验证通过（bba×qwen3×dev：mean 0.60 CI[0.45,0.75]，全冻结字段齐）。
+
+**波 1 放行**：224 格（56 条目 × 双 GGUF 底座 × dev/test），预估 5.9h，断点续跑驱动器，
+代码快照 W1 7748515。并行开跑 **Step-3a TFRL 方案调研**（5 维 Opus + 验证）；step-2 网格草案
+（2a×2b 合并）随波 1 期间合成。附记：minicpm/moss HF 删除执行完毕（35.5GB，lock A5）。
+
 ### 2026-07-09（续4）· Step-1 判据冻结生效 + 底座阵容终裁（双 GGUF 定稿；minicpm/moss HF 删除）
 
 **Decision.** Step-0 收官后 owner 冻结 Step-1 判据（[[2026-07-09-step1-freeze-record]]）：
