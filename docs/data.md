@@ -1,6 +1,6 @@
 # Data & models (not included in git)
 
-Model weights and datasets are **deliberately kept out of this repository** (~440 GB total on disk).
+Model weights and datasets are **deliberately kept out of this repository** (~650 GB total on disk).
 GitHub only ever holds code, docs, and the download scripts. The dataset set is now **FROZEN** to the
 local snapshot recorded in [`datasets.lock.json`](datasets.lock.json) (see *Frozen set* below) — we no
 longer download new datasets. The `.gitignore` blocks `speechrl-data/` plus all weight/dataset/archive
@@ -8,9 +8,10 @@ formats, so a stray `git add -A` can never push data.
 
 ## Where it lives
 
-`speechrl-data/` under the repo root by default, resolved as
-`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On this machine that repo-root dir on the Windows drive
-(`/mnt/d/…` from WSL) **is** the real data root; ext4 `~/speechrl-data/` holds only the MLflow store
+`speechrl-data/` on the **E: drive** — `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data`
+from WSL (moved off D: on 2026-07-09). Reached via `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`;
+`SPEECHRL_DATA_DIR` is persisted in the WSL `~/.bashrc` to point at the E: path (the repo-relative
+`<repo>/speechrl-data` fallback no longer holds the data). ext4 `~/speechrl-data/` holds only the MLflow store
 (`mlruns`). Layout: `models/`, `datasets/`, `repos/`
 (reference clones; SLURP audio lives here too), `manifests/`.
 

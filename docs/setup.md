@@ -34,8 +34,9 @@ source ~/.venvs/speechrl/bin/activate
 python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))"
 ```
 
-- venv lives in ext4 (`~/.venvs/speechrl`); datasets/checkpoints in the repo-root `speechrl-data/`
-  (`/mnt/d/…` — set `SPEECHRL_DATA_DIR`); the MLflow store stays in ext4 `~/speechrl-data/mlruns`.
+- venv lives in ext4 (`~/.venvs/speechrl`); datasets/models in `speechrl-data/` on the E: drive
+  (`/mnt/e/…` — `SPEECHRL_DATA_DIR`, persisted in `~/.bashrc`); the MLflow store stays in ext4
+  `~/speechrl-data/mlruns`.
 - torch comes from the `cu128` index; **verl/vLLM/flash-attn are Linux-only** and version-sensitive
   — if `verl`/`vllm` fail, pin versions and prefer a prebuilt `flash-attn` wheel for your
   torch/CUDA/Python combo.

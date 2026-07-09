@@ -1,15 +1,17 @@
 # Data & Assets
 
-Model weights and datasets (~440 GB) are **deliberately out of git** — GitHub holds only code, docs,
+Model weights and datasets (~650 GB) are **deliberately out of git** — GitHub holds only code, docs,
 and download scripts. The dataset set is **FROZEN** to the local snapshot recorded in
 [`docs/datasets.lock.json`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/datasets.lock.json)
 (28 datasets + 5 models, with pinned revisions) — we no longer download new datasets. The
 human-readable asset list is the repo's
 [`docs/data.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/data.md).
 
-**Where it lives.** `speechrl-data/` under the repo root by default, resolved as
-`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`. On this machine that repo-root dir on the Windows drive
-(`/mnt/d/…` from WSL) **is** the real data root; ext4 `~/speechrl-data/` holds only the MLflow store. Layout:
+**Where it lives.** `speechrl-data/` on the **E: drive** —
+`/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data` from WSL (moved off D: on 2026-07-09;
+the repo/code stays on D:). Reached via `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`, with
+`SPEECHRL_DATA_DIR` persisted in the WSL `~/.bashrc` to the E: path (the repo-relative fallback no
+longer holds data); ext4 `~/speechrl-data/` holds only the MLflow store. Layout:
 `models/`, `datasets/`, `repos/`, `manifests/`, `checkpoints/`, `mlruns/`, `hf-cache/`.
 
 **Fetch / audit.** One unified, lockfile-driven downloader reproduces the exact set — every team runs
@@ -31,12 +33,12 @@ everything is unified in `fetch-data.sh`. Full tables + env knobs: `docs/data.md
 
 ## 中文
 
-模型权重与数据集（≈440 GB）**有意不进 git**——GitHub 只放代码、文档和下载脚本。权威的资产清单（每个
+模型权重与数据集（≈650 GB）**有意不进 git**——GitHub 只放代码、文档和下载脚本。权威的资产清单（每个
 模型与数据集、来源、镜像、环境变量）是仓库的
 [`docs/data.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/data.md)。
 
-**放在哪：** 默认 `speechrl-data/` 在仓库根，按 `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}` 解析；
-本机真实数据根就是该仓库根目录（WSL 侧 `/mnt/d/…`）；ext4 `~/speechrl-data/` 只放 MLflow 存储。目录：`models/`、`datasets/`、`repos/`、`manifests/`、
+**放在哪：** `speechrl-data/` 现在在 **E 盘**——WSL 侧 `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data`（2026-07-09 从 D 盘迁出；仓库代码仍在 D 盘）。
+按 `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}` 解析，且已在 WSL `~/.bashrc` 中把 `SPEECHRL_DATA_DIR` 固化为该 E 盘路径（仓库根的回退默认已不再存放数据）；ext4 `~/speechrl-data/` 只放 MLflow 存储。目录：`models/`、`datasets/`、`repos/`、`manifests/`、
 `checkpoints/`、`mlruns/`、`hf-cache/`。
 
 **拉取/审计：** 统一的、由 lockfile 驱动的下载器复现完全一致的数据集——各团队跑同一条命令得到相同数据

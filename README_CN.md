@@ -36,7 +36,7 @@ projects/       四个工作仓库（各自独立的 git 仓库；被本伞仓 g
 docs/           setup.md（WSL2 + 环境）、architecture.md、data.md（下载）
 scripts/        wsl-setup.sh、env-setup.sh、mlflow-ui.sh、wiki-sync.sh、data/（模型+数据集下载）
 wiki/           GitHub Wiki 的源文件 —— 共享知识与记忆（用 scripts/wiki-sync.sh 推送）
-speechrl-data/  数据根目录（≈440 GB 模型/数据集/检查点）—— 被 gitignore；WSL 侧 /mnt/d/…
+speechrl-data/  数据根目录（≈650 GB 模型/数据集）—— 在 E 盘，被 gitignore；WSL 侧 /mnt/e/…
 CLAUDE.md / AGENTS.md   给 AI 协作者的逐工具操作手册（Claude Code / Codex）
 CONTRIBUTING.md         五个仓库的协作方式
 ```

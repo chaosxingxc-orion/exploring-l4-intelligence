@@ -39,7 +39,7 @@ projects/       the four work repos (each its OWN git repo; gitignored by this u
 docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads)
 scripts/        wsl-setup.sh, env-setup.sh, mlflow-ui.sh, wiki-sync.sh, data/ (model+dataset downloads)
 wiki/           source for the GitHub Wiki — shared knowledge & memory (push via scripts/wiki-sync.sh)
-speechrl-data/  data root (~440 GB models/datasets/checkpoints) — gitignored; /mnt/d/… from WSL
+speechrl-data/  data root (~650 GB models/datasets) — on the E: drive, gitignored; /mnt/e/… from WSL
 CLAUDE.md / AGENTS.md   per-tool operating guides for AI assistants (Claude Code / Codex)
 CONTRIBUTING.md         how to work across the five repos
 ```

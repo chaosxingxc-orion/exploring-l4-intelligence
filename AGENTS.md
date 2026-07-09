@@ -32,9 +32,11 @@ entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main` loop whose RL body is c
   isolated mem0 MCP env from `.mcp.json`).
 - torch from the `cu128` index; if a "no kernel image" error appears, fall back to torch nightly
   `cu128`, then a source build with `TORCH_CUDA_ARCH_LIST=12.0`.
-- Datasets/checkpoints/outputs live in the repo-root `speechrl-data/` on the Windows drive
-  (`/mnt/d/chao_workspace/exploring-l4-intelligence/speechrl-data` from WSL — point `SPEECHRL_DATA_DIR`
-  at it), **never in git**. ext4 `~/speechrl-data/` holds only the local MLflow store (`mlruns`).
+- Datasets/checkpoints/outputs live in `speechrl-data/` on the **E: drive**
+  (`/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data` from WSL — moved off D: on
+  2026-07-09; the repo/code itself stays on D:). `SPEECHRL_DATA_DIR` is persisted to this path in the
+  WSL `~/.bashrc`, so runs find the data automatically; **never in git**. ext4 `~/speechrl-data/` holds
+  only the local MLflow store (`mlruns`).
 
 ## Common commands
 
@@ -62,8 +64,8 @@ bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
 
 Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
 
-Data & model assets (~440 GB, **never in git**) live in the repo-root `speechrl-data/` (gitignored;
-`/mnt/d/…` from WSL). The
+Data & model assets (~650 GB, **never in git**) live in `speechrl-data/` on the E: drive (gitignored;
+`/mnt/e/…` from WSL, via `SPEECHRL_DATA_DIR`). The
 set is **frozen** to `docs/datasets.lock.json` — the single manifest (28 datasets + 6 models + 7 ref
 repos, pinned revisions). One unified, self-contained downloader reproduces it identically across teams:
 

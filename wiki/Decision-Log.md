@@ -6,6 +6,26 @@
 
 ---
 
+### 2026-07-09 · 数据根从 D 盘迁到 E 盘（speechrl-data）
+
+**Decision.** 把 `speechrl-data/`（模型 + 数据集 + repos + manifests + _repro，共 ~651 GB）整体从
+`D:\chao_workspace\exploring-l4-intelligence\speechrl-data`（WSL `/mnt/d/…`）迁到
+`E:\chao_workspace\exploring-l4-intelligence\speechrl-data`（WSL `/mnt/e/…`）。仓库/代码仍留在 D 盘。
+迁移方式：robocopy 复制 → 校验文件数/字节数一致 → 删除 D 源。`SPEECHRL_DATA_DIR` 从"逐次内联传参"
+改为在 WSL `~/.bashrc` 固化为 E 盘路径，运行时自动命中。
+
+**What changed.** 唯一硬编码 D 盘*数据*路径的脚本 `scripts/data/fetch-qwen3-omni-gguf.sh` 改为 honor
+`SPEECHRL_DATA_DIR`（默认回退改到 E 盘）；`CLAUDE.md`/`AGENTS.md`/`README(_CN)`/`docs/data.md`/
+`docs/setup.md`/`wiki/Data-and-Assets.md` 的数据位置声明 D→E、~440→~650 GB。其余脚本/配置本就走
+`${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}`，无需改动。历史 dated 记录（append-only）不改写。KB 早已
+在 E 盘（`SPEECHRL_KB_DIR=E:/speechrl-knowledge`），不受影响。
+
+**Why.** D 盘吃紧（迁移前 D 已用 890 GB / 剩 515 GB），E 盘 3.8 TB 空闲；把大体量只读资产迁到 E 腾出
+D 盘，并与既有 E 盘 KB 约定一致。仓库留在 D 以保持 `common/src` 等代码路径不变（如 `m5_selector_rescore_dev.py`
+内的 `sys.path` 绝对路径）。
+
+---
+
 ### 2026-07-08 · 三个技术锚点的批判性审计（A2 再定级提案）+ 语音向量化 survey-first 决定
 
 **Decision.** Owner 提出三个技术锚点并要求对抗性审计。两路独立审计（W1 逐行 + wiki/proofs 盘点，

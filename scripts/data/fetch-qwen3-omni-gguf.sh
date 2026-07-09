@@ -5,13 +5,14 @@
 # (Q4_K_M + Q8_0 + BF16 + all mmproj, >110 GB). For local llama.cpp we want ONE quant by file —
 # so this fetches just the two files you need, via the SAME hf-mirror + aria2c mechanism — but calling
 # aria2c DIRECTLY (not via hfd) so its native, byte-accurate progress is what you see. hfd estimates
-# progress from on-disk block usage, which the /mnt/d NTFS mount over-reports (aria2c's multi-segment
+# progress from on-disk block usage, which the /mnt/e NTFS mount over-reports (aria2c's multi-segment
 # seek-writes pre-allocate the whole file), making the bar jump to ~100% within seconds — far faster
 # than any real download. Set SPEECHRL_HFD_THREADS=1 for a single-connection sequential write if you
 # also want ls/du to track real bytes (fine when your bandwidth, not the mirror, is the limit).
 #
-# Paths are locked to this workspace:
-#   /mnt/d/chao_workspace/exploring-l4-intelligence
+# Repo (this script) lives on the D: drive; the data root lives on the E: drive (moved 2026-07-09):
+#   repo   /mnt/d/chao_workspace/exploring-l4-intelligence
+#   data   /mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data   (override: SPEECHRL_DATA_DIR)
 #
 # Env overrides still supported for model choices and download behavior:
 #   SPEECHRL_VENV         venv             (default: $HOME/.venvs/speechrl)
@@ -25,8 +26,9 @@
 #   QWEN_OMNI_GGUF_QUANT=Qwen3-Omni-30B-A3B-Instruct-Q4_K_M.gguf bash /mnt/d/chao_workspace/exploring-l4-intelligence/scripts/data/fetch-qwen3-omni-gguf.sh
 set -uo pipefail
 
-WORKSPACE="/mnt/d/chao_workspace/exploring-l4-intelligence"
-DATA_DIR="$WORKSPACE/speechrl-data"
+WORKSPACE="/mnt/d/chao_workspace/exploring-l4-intelligence"   # repo (code + scripts) — stays on the D: drive
+# Data root moved to the E: drive (2026-07-09). Honor SPEECHRL_DATA_DIR like the sibling fetch scripts.
+DATA_DIR="${SPEECHRL_DATA_DIR:-/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data}"
 
 REPO="ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF"
 WEIGHT="${QWEN_OMNI_GGUF_QUANT:-Qwen3-Omni-30B-A3B-Instruct-Q8_0.gguf}"
@@ -59,7 +61,7 @@ dl_one(){ # filename
   url="$HF_ENDPOINT/$REPO/resolve/main/$f"
   if command -v aria2c >/dev/null 2>&1; then
     # Direct aria2c (the same resolve URL hfd uses internally) so aria2c's OWN progress readout —
-    # which counts real received bytes — is what prints; honest even on /mnt/d NTFS. -c resumes a
+    # which counts real received bytes — is what prints; honest even on /mnt/e NTFS. -c resumes a
     # partial; --file-allocation=none skips an explicit upfront 30 GB allocation.
     aria2c -c -x "$THREADS" -s "$THREADS" -k 1M \
       --file-allocation=none --auto-file-renaming=false \
