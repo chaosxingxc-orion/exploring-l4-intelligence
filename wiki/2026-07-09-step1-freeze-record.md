@@ -33,6 +33,16 @@ TEST_SEED=SLICE_SEED+1000 · ST 任务族豁免入档（恢复需 covost2 CV-mp3
 QA-containment（K8 计分）· K9 闭卷仅诊断（真检索指标在 step 2）· TruthfulEval 保留标
 directional-weak · air-bench Speech_Grounding 签字位因解堵消失。
 
+## 同日后续：阵容终裁（owner，GGUF 寻源后）
+
+GGUF 寻源判定：minicpm-o-4.5 音频路径**仅存于 OpenBMB fork**（主线含 master 只合了视觉）——
+换用等于引入第二分叉引擎；moss-audio **无 GGUF 无任何 llama.cpp arch 支持**（仅 SGLang fork）。
+替代候选（Gemma-4 E4B / Ultravox-8B / MERaLiON-10B / Qwen2.5-Omni-7B）已呈。
+**Owner 裁定：①双底座定稿**（Qwen3-Omni + MERaLiON-2-3B 贯穿波 1-3；谱系多样性由 step-3 的
+非 Whisper ASR-ensemble 验证器补足，替代底座一个不下）；**②删除 minicpm/moss HF 目录**
+（~36GB，栈上不可用；deferred-not-deleted，重下渠道入 lock 注记；lock 模型数 5→3）。
+nemotron NVFP4 尝试降级为台账豁免证据用途（不再是阵容候选）。
+
 ## 波 1 执行口径
 
 范围 = K8 全部 + K9 闭卷 + K1/K2 × {qwen3-omni-30b-gguf, meralion-2-gguf} × {dev40, test60}；

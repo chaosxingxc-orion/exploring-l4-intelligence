@@ -6,6 +6,28 @@
 
 ---
 
+### 2026-07-09（续4）· Step-1 判据冻结生效 + 底座阵容终裁（双 GGUF 定稿；minicpm/moss HF 删除）
+
+**Decision.** Step-0 收官后 owner 冻结 Step-1 判据（[[2026-07-09-step1-freeze-record]]）：
+①波 1 双 GGUF 先跑；②K4/K6/K7 标签清单改 corpus-true 全池扫描；③SQuAD-zh/OpenbookQA-zh
+双 loader 波 1 双跑交叉验证后弃 legacy；④ifeval checker 补取（Apache-2.0 子树）。
+确认类同录（K5 收窄、TEST_SEED、ST 豁免、K9 仅诊断等）。
+
+**Step-0 冒烟事实.** MERaLiON-2-3B GGUF **WORKS**（36s 加载、zh/en 转写精确命中、钉扎构建
+原生支持未动 patch、license 复核无 NC）；minicpm-o **BLOCKED**（transformers 5.12 vs 钉 4.51）；
+moss-audio **BLOCKED**（发布快照打包缺陷）。loader 65/65 全绿（meld/air-bench 解堵落地，
+heysquad+vocalbench×4 补齐，网格 76 格）。qwen3-omni HF int4 已删。
+
+**GGUF 寻源（owner 指示"统一驱动栈"）判定.** minicpm 音频 = fork-only（tc-mb/llama.cpp-omni，
+主线 master 仍仅视觉）；moss = 无 GGUF 无 arch 支持。替代候选呈报后 **owner 终裁：双底座定稿**
+（Qwen3-Omni + MERaLiON-2-3B 贯穿波 1-3，谱系多样性由 step-3 非 Whisper ASR-ensemble 补）+
+**删除 minicpm/moss HF 目录**（~36GB，deferred-not-deleted，重下渠道入 lock amendments，
+lock 模型 5→3）。判定依据全套引用存 GGUF 寻源 agent 终报（本日）。
+
+**Execution.** 冻结快照已提交（W1 7c4574c）；波 1 前置三路收尾中（标签全池扫描+ifeval 接线 /
+MERaLiON 适配+波 1 驱动器+单格验证 / HF 目录删除）；单格验证通过后波 1 马拉松放行
+（K8+K9 闭卷+K1/K2 × 双底座 × dev/test，断点续跑，预估 GPU 半天-一天）。
+
 ### 2026-07-09（续3）· Stage-1 实验战役定纲：三步走获批开跑（基线锁定 → mock agentic 对比 → TFRL top-N + Lean 论证）
 
 **Decision.** Owner 定 Stage-1 实验三步结构并逐项裁定：①四底座+下 MERaLiON-2（license 先核），
