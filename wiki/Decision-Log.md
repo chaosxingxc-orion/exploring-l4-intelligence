@@ -6,6 +6,37 @@
 
 ---
 
+### 2026-07-09（续2）· P3-prep 收官：欠账清零 + 环境就绪（owner："先把欠账和环境准备好，之后讨论实验设计"）
+
+**Decision.** Owner 批准收敛门材料后指示先清欠账备环境、实验设计另场讨论。执行 14-agent 三段
+流水 workflow + 4 个断连恢复/收尾 agent（API 抖动打断 4 节点，产出全部场外接管，零丢失）。
+
+**落地（全部活体验证，两仓已提交推送：W1 889da66 / umbrella 98ada44）.**
+① **KB 泄露门从声称变现实**：build 遇 LEAKAGE 拒持久化（force_persist 显式豁免+manifest 打戳）、
+load 非 CLEAN 即拒（未审计=不可用）——`test_kb_gate.py` 活体 8/8 过；registry 虚标修正；
+kb_root() POSIX 默认值 bug 根治（"E:" 垃圾目录成因）。
+② **60 个薄 loader 落库**（scripts/loaders/ 新包，容错注册表）：smoke 58/60 PASS，2 个失败均为
+环境阻塞并附解法（meld 缺 ffmpeg；air-bench Speech_Grounding 音频缺失=lock 又一例内容级
+false-COMPLETE，附 fetch 补取命令）。实勘修正：seed-tts 嵌入音频实为 **prompt** wav（调研假设
+反转，按可构造配对实现并留 meta 恢复路径）；thchs-30 的 .trn 是指针文件需跟转。
+③ **复现钉扎**：llama.cpp 钉到实际构建 commit fdbd6abe（HEAD 等值核验）；GGUF 双 sha256 钉扎
+（本机复算全中）；采样参数显式化入 payload+结果 JSON（发现 llama.cpp 文档 repeat_penalty
+1.1/1.0 自相矛盾，按 CLI/props 实值钉 1.0）；_repro/README errata（历史 JSON 一字未动）；
+requirements 快照；lock 元数据 amendments（aime/seed-tts 标签修正 + 10 处 unpinned 枚举）。
+④ **数据欠账清零**：emotion2vec-s 重取至完整 1.13GB；mmsu 元数据补取（5000 行含 answer_gt，
+revision 钉扎）；SENSE/Dasheng/CLSP/SenseVoice-S 四模型下载入 candidates（字节验证；SenseVoice
+非 SPDX license 挂旗）；verify_models.sh 关闭模型侧 false-COMPLETE 盲区；解压积压清零
+（thchs/esd/cn-celeb1/mmar/fleurs-r dev+test），**cn-celeb2 按 owner 指示解压**（1996 说话人/
+52.5 万 flac/74G/tar 退出码 0）。
+⑤ **C2 判定 WORKS 并活体证实**：音频 embedding 正确路径 = `llama-server --embedding --mmproj
+--pooling last` + POST /embeddings（`llama-embedding` 二进制仅文本）；LCO-3B CPU 冒烟 HTTP 200、
+dim 2048、文本同维。**运维陷阱入库：该构建 media marker 每进程随机化，必须从 GET /props 的
+`media_marker` 动态获取**（硬编码 `<__media__>` 即 500）。GPU 全程未触碰。
+
+**Consequences.** H-b"自身隐态作键"的技术前提解除（30B 同路径待 GPU 空窗验证）；环境就绪度：
+45 数据集裁定 + 60 loader + 22 模型在盘 + 双活体验证的泄露门 + 可复现钉扎。下一步 = owner
+实验设计讨论（收敛门 9 项裁决 + 测量协议冻结），P4 理论轨/P5 数据轨据此开跑。
+
 ### 2026-07-09（续）· 覆盖阶段全景落账：模型/数据/理论三路调研收官（owner 定纪律：先覆盖、后收敛）
 
 **Decision.** Owner 连续三项纠正确立**覆盖阶段纪律**：①模型调研未充分覆盖（含嵌入器选型不能
