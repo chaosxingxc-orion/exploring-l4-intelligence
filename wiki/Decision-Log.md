@@ -6,6 +6,38 @@
 
 ---
 
+### 2026-07-09 · 三锚点增量再定级 + Q1/Q2 决策单 + Stage-1 双轨闭环战役设计（A2 再定级生效；三条方法论要求立规；分工硬化）
+
+**Decision.** Owner 复提三锚点（A1 speech-key/异构-value 组织、A2 "已证外接优于 rollout"、A3 数据
+底座）要求批判性反思，并开出 Q1（统一 vs 特化嵌入器，emotion2vec/codec 是否纳入）/Q2（ASR 困难
+样本记忆、SLU intent 整段、slot 片段的粒度组织）两个设计问题。本日裁定：① **A2 接受 07-08 再定级
+提案**——诚实表述 = 已证 rollout read-out 上界 + Stage-2 定理目标（τ*>0 邻域收敛 + N* 预算）+
+方向性经验证据，不再声称"已证明"；② **三条方法论要求立规**：理论必须辅以小规模数据验证并跑
+debate-verify-improve loop、理论必须 survey 充足且以 Lean 保证收敛/一致性并显式提取假设与约束项、
+数据验证必须覆盖全部本地数据集（无 silent cap）；③ **分工硬化（三次重申）**：Fable 5 零 legwork
+（协调/评价/指导），技术验证+方案调研 → Opus，代码 → Sonnet。产出三文档：
+[[2026-07-09-three-anchors-delta-regrade]]、[[2026-07-09-q1q2-embedder-granularity-decision-memo]]、
+[[2026-07-09-stage1-dual-track-campaign]]。
+
+**Evidence.** 三路代码/文档盘点（勘误：误用 Sonnet 执行，owner 当日纠正分工）→ **20 项承重判定经
+6 个 Opus 对抗验证束逐条复核：16 CONFIRMED / 3 PARTIAL / 1 REFUTED**。新发现要点：泄露 verdict
+只写不查（kb_poc 实际构建并检索过 LEAKAGE 源）；持久 KB 从未被任何真实实验使用；registry "built"
+虚标 4 项；T8 结构性同池复用仍在（字符串 scrub 残留 1.7%）；**"同基座"经复核软化为部分成立**
+（REFUTED 我方原判"唯一 importer"——speechrl_common 被 7 个 m 系/repro 脚本真实使用；Hydra+
+Qwen2-Audio 名义路径仍是无映射 stub）；unpinned revision 10/28；W1 reproduce 字段 23/25 因 D→E
+迁移过期；Lean 台账 6.1–6.7 全确认（唯一 sorry=BestOfN:90、三定理前件假设、收敛全为
+squeeze-over-assumed、"跨界"两定理 FRAMING-ONLY、over-confidence 仅 docstring、Reachability 唯一
+实质 few-shot 定理是**上限**方向）。E 盘机器盘存：**39 数据集/18 模型在盘、零无主目录、嵌入器
+候选池 12/12 全齐**（owner 纠正："17"只是 lock 28 的建议纳入子集，覆盖底数必须以盘存为准）。
+
+**Consequences.** 战役结构 P1 收口三文档 → **P2 owner 讨论门**（调研 §7 八项议程 + 3 新裁决位：
+lock 增补扩至 gap 数据集 / "同基座"消解方向 / 复现加固优先级；**不冻结不开跑**）→ P3 前置工程
+（Sonnet；P0 = retrieve 侧强制 verdict 门 + kb_snapshot 接入一切新跑）→ P4 理论轨（Opus survey +
+Lean：τ*>0 门控注入定理、N* 落地、Beirami sorry 清欠、dual-track binding 升级为测试）⟷ P5 数据轨
+（覆盖矩阵：26 纳入 / 13 显式排除各带理由；loader 7 有 ~19 缺）→ P6 辩论 loop（干涸判据 = 一轮无
+新分歧）→ P7 记录。"自以为满足信息约束/工程声称但实际未达成"清单 6→9 条。memory 更新两条（分工
+硬约束、双轨 loop 方法论）。下一步 = P2 讨论门。
+
 ### 2026-07-09 · 数据根从 D 盘迁到 E 盘（speechrl-data）
 
 **Decision.** 把 `speechrl-data/`（模型 + 数据集 + repos + manifests + _repro，共 ~651 GB）整体从
