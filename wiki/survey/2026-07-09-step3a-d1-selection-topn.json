@@ -1,0 +1,243 @@
+{
+ "candidates": [
+  {
+   "name": "Self-certainty selection + Borda aggregation (Zhao et al., NeurIPS 2025)",
+   "what": "Score each of N frozen-model samples by its own distributional self-certainty (mean KL of each token's top-k logprob distribution from uniform), then pick the winner by Borda-rank aggregation across samples. Reward-model-free; explicitly shown to generalize to open-ended tasks where plain majority-vote self-consistency has no answer-space to vote over. Directly deployable on ASR-transcript / audio-QA / MCQ candidate sets.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — dominant cost is the N samples themselves (N sequential/batched HTTP decodes on the resident llama-server, GPU held by the 30B); scoring is near-free but REQUIRES n_probs/logprobs enabled on llama-server (top-k logprobs suffice, as the paper uses a top-k approximation). No extra model, no GPU beyond the N decodes, no faiss call.",
+   "theory_hook": "tau (self-certainty IS the selector; its calibration error = tau); alpha (adopt reranked answer only when its self-certainty margin over the greedy baseline exceeds a threshold)",
+   "evidence": "arxiv.org/abs/2502.18581 (opened): reward-model-free, scales with N like a reward model, complements CoT, generalizes to open-ended; Borda voting over per-sample scores; negligible compute over generation."
+  },
+  {
+   "name": "Radial Consensus Score (RCS) — embedding-centroid selection",
+   "what": "Embed the N candidate answers, compute a weighted Fréchet mean (uniform / frequency- / probability-weighted), and select the candidate with minimum L2 distance to that semantic center: a*=argmin ||u_i - c(P)||. Recovers correct semantically-minority answers that exact-match majority voting discards. Handles short-form QA, MCQ, and math; degrades gracefully in high-diversity/noisy settings.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — N decodes (GPU) + O(Nd) embedding on CPU. Maps 1:1 onto our existing faiss KB embedder (already CPU-resident because the GPU is held by llama-server); no new infra. Embedding of N short answers is L on top of the M generation cost.",
+   "theory_hook": "tau (centroid-distance is the selector; embedding error = tau); delta_corr (using an INDEPENDENT embedder as the utility decorrelates selection error from the generator); recall-floor (frequency/prob weighting + a distance threshold gives a graceful fallback to closed-book when consensus collapses)",
+   "evidence": "arxiv.org/html/2604.12196 (opened): Fréchet mean over all-MiniLM embeddings; +2–7% over majority voting, up to +7% at N=40; O(Nd); beats self-certainty in noisy/high-diversity regimes."
+  },
+  {
+   "name": "MBR selection over ASR/ST transcripts (edit-metric utility → ROVER-equivalent)",
+   "what": "For ASR/ST shapes, sample N transcripts and select ŷ=argmax_y (1/N)Σ_y' u(y,y') with u = negative edit distance / BLEU / a semantic-similarity utility. When u is a token-edit metric this provably reduces to ROVER-style consensus/majority voting but is directly WER-optimizing. No gold reference needed at inference.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — N decodes (GPU) + O(N^2) pairwise utility on CPU (edit distance is trivially cheap for short transcripts; embedding-utility reuses the faiss embedder). Gains appear from just 4–8 samples, so N can stay small → keeps GPU cost bounded.",
+   "theory_hook": "tau (utility-function error is the selector error); delta_corr (swap in the omni/retrieval verifier as the utility u to get a cross-system, error-decorrelated MBR); N* (utility-inflation caps useful N — the paper deliberately avoids WER-as-utility to prevent inflation, which is exactly the over-optimization edge)",
+   "evidence": "arxiv.org/html/2510.19471 (opened): ŷ=argmax mean pairwise utility, epsilon-sampling ε=0.01/T=1.0 up to 64 samples, ~20–35% relative WER reduction vs beam, gains from 4–8 samples, O(UN^2), no gold refs, edit-metric utility ≡ ROVER."
+  },
+  {
+   "name": "Generative Error Correction / N-best rescoring as a candidate SET (ProGRes, H2T)",
+   "what": "Feed the N-best hypotheses (or N sampled transcripts) back to the frozen model with an instructional prompt and let it emit a corrected transcription (hypotheses-to-transcription) — the output can beat every input hypothesis, unlike pure selection. Pairs naturally with a selection/voting stage to pick among the rewrite + originals.",
+   "lever_class": "reranking",
+   "cost": "M-H — the N samples plus one extra long-context decode conditioned on all N hypotheses (GPU decode of a longer prompt on the 30B). Prompt-cache on llama-server amortizes the shared audio-encoding prefix.",
+   "theory_hook": "R (the N-best list acts as in-context few-shot 'reach' that expands the reachable answer set beyond any single sample); tau (rescoring model error); alpha (adopt the H2T output only if it beats the top selected hypothesis)",
+   "evidence": "arxiv.org/pdf/2409.00217 (ProGRes prompted generative rescoring on ASR n-best) and search-surfaced Chen et al. H2T (2307.04172), plus rare-word phonetic GER (2505.17410); GER can produce output better than all initial hypotheses."
+  },
+  {
+   "name": "Universal Self-Consistency (USC) — model-as-selector over open-ended candidates",
+   "what": "Concatenate all N candidates into one prompt and ask the frozen model to pick the most consistent/best one. Extends self-consistency to open-ended generation and free-form QA where there is no discrete answer to majority-vote over. One extra call, no gold, no reward model.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — N decodes + ONE additional long-context decode holding all N candidates (GPU; context length bounded by N × answer length). Cheaper than a pairwise tournament.",
+   "theory_hook": "tau (the model's self-selection error is the selector error); delta_corr is WEAK here (same model, same weights — errors correlate), so this is the low-delta_corr baseline against which cross-system selectors should be measured",
+   "evidence": "arxiv.org/pdf/2311.17311 (USC); search-confirmed as the canonical open-ended extension of self-consistency."
+  },
+  {
+   "name": "Integrative Decoding — implicit self-consistency for open-ended factuality",
+   "what": "Sample N responses, then re-decode the final answer conditioned (one at a time) on each sampled response as context and aggregate token-level, folding self-consistency directly into decoding. Improves factuality on open-ended generation with low added latency and no explicit voting/verification prompt.",
+   "lever_class": "selection(top-N)",
+   "cost": "M-H — N initial samples + N conditioned re-decodes (longer contexts → more GPU decode). Latency-light per the paper but heavier than single-pass selection.",
+   "theory_hook": "tau (aggregation reduces selector variance); R (each sample conditions the re-decode = in-context reach); alpha (implicit adoption of consistent content)",
+   "evidence": "openreview.net/pdf?id=gGWYecsK1U / arxiv.org/abs/2410.01556 (ICLR 2025): implicit self-consistency via decoding conditioned on prior samples; improves factuality open-ended, low latency."
+  },
+  {
+   "name": "DeepConf online — confidence-gated trace filtering + early stop",
+   "what": "Compute group confidence (mean of top-k token logprobs over a sliding window) and bottom-10%/tail confidence; during online generation terminate a trace when local confidence drops below a threshold calibrated on a small warmup batch, keep only the top-η% traces, and do confidence-weighted majority voting. No training, no reward model, drops straight into a serving loop.",
+   "lever_class": "gating",
+   "cost": "L-M — LOWERS effective cost by killing low-confidence traces mid-decode (up to ~84.7% token reduction reported); needs per-token logprobs from llama-server (top-k). Net GPU decode can be below fixed-N BoN.",
+   "theory_hook": "N* (early stop = a data-driven budget cap that stops before over-optimization); tau* (the confidence threshold IS the gating radius); tau (group confidence as the per-trace selector)",
+   "evidence": "arxiv.org/pdf/2508.15260 (opened): group/bottom-10%/tail confidence from logprobs; online early-termination + top-η filtering + confidence-weighted vote; 99.9% AIME25 vs 97.0% majority-vote on GPT-OSS-120B; up to 84.7% fewer tokens; integrates into existing serving frameworks."
+  },
+  {
+   "name": "ReASC — reliability-aware adaptive self-consistency (Beta-posterior stopping)",
+   "what": "Two-stage: (1) accept a single sample if its confidence ≥ τ_gate; (2) otherwise accumulate confidence-weighted pseudo-counts into a Beta posterior and stop sampling once P(top answer beats runner-up) > 0.95. Weights responses by bottom-10% group confidence. Online calibration via a GMM over unlabeled test confidences means NO gold labels required.",
+   "lever_class": "gating",
+   "cost": "L-M — reduces samples (reported ~70% inference-cost cut vs fixed SC k=16); needs logprobs; the online mode needs a one-time unlabeled confidence-distribution fit (cheap, CPU).",
+   "theory_hook": "tau* (τ_gate is literally the gating radius — accept-one vs sample-more); N* (Beta-posterior stopping is a principled budget cap); tau (bottom-10% confidence as the reliability/selector estimate)",
+   "evidence": "arxiv.org/html/2601.02970 (opened): P(p1>p2)>0.95 stop rule via Beta posterior; τ_gate single-sample accept; bottom-10% group-confidence weighting; offline (128 labels) OR online (unlabeled GMM) calibration; 70% cost reduction on GSM8K/Gemma-3-4B."
+  },
+  {
+   "name": "AdaBoN — prompt-difficulty-adaptive N allocation",
+   "what": "Two-stage budget allocator: a small exploration budget estimates each prompt's reward distribution, then a greedy marginal-value rule assigns the remaining sampling budget to the hard prompts. One hyperparameter, minimizes latency; stays competitive with uniform BoN that has 20% more budget.",
+   "lever_class": "gating",
+   "cost": "L-M — reallocates a FIXED total decode budget across items (net GPU roughly constant, better spent); needs a scalar reward/utility per sample (our verifier or self-certainty). Single hyperparameter → low tuning burden.",
+   "theory_hook": "N* (per-prompt budget cap — the core object of the HedgeTune/BoP N* line we already hold, made adaptive); alpha (allocation is driven by marginal reward gain)",
+   "evidence": "arxiv.org/abs/2505.12050 (Apple): two-stage exploration + greedy marginal-value allocation; competitive vs uniform BoN with 20% larger budget; one hyperparameter."
+  },
+  {
+   "name": "Confidence-Informed / Ranked-Voting Self-Consistency (CISC, Borda/IRV)",
+   "what": "Replace uniform majority voting with model-derived scalar weights (response probability, verbal confidence, or token-wise probability), or aggregate per-sample RANKED preferences via Borda count / instant-runoff / reciprocal-rank. Lets the correct answer dominate with far fewer samples; directly applicable to MCQ and short-form QA.",
+   "lever_class": "selection(top-N)",
+   "cost": "L on top of sampling — weighting/ranking is pure CPU arithmetic over existing logprobs; the only cost is the N samples (M). Reported 40–50% sample reduction for equal accuracy.",
+   "theory_hook": "tau (confidence weight quality = selector error); N* (fewer samples to reach the same consensus)",
+   "evidence": "aclanthology.org/2025.findings-acl.1030 (CISC, 40–50% fewer samples); arxiv.org/html/2505.10772 (ranked-voting self-consistency via Borda/IRV/reciprocal-rank beats majority voting)."
+  },
+  {
+   "name": "Knockout / round-robin LLM-as-judge tournament over candidates",
+   "what": "Rank the N candidates by iterative pairwise comparison — knockout bracket (n-1 comparisons, O(log n) rounds) or round-robin ELO — using the frozen model itself (or a differently-prompted context) as judge. PairJudge-RM demonstrates BoN via knockout.",
+   "lever_class": "cross-model-verify",
+   "cost": "H — each comparison is an extra generation call on the 30B; O(n) calls (knockout) to O(n^2) (round-robin) of GPU decode. Heaviest DIM-1 option; reserve for small N or high-value items.",
+   "theory_hook": "delta_corr (a DIFFERENTLY-CONTEXTUALIZED judge — e.g. judge sees retrieval evidence the generator didn't — is the cross-system decorrelation lever from our omni-verifier bridge); tau (pairwise-judge error)",
+   "evidence": "arxiv.org/html/2506.03785 (Knockout Assessment, +0.07 Pearson); search-surfaced PairJudge-RM (BoN + knockout tournament); round-robin/ELO variants."
+  },
+  {
+   "name": "Temperature/seed ensembling as the diversity precondition for all selectors",
+   "what": "Generate the N candidates by varying temperature/seed (T≈1.0 for candidate pools feeding a downstream selector) over the frozen HTTP API. Diversity is the enabling condition: too-low T collapses samples (no selection signal), and calibration limits how much diversity temperature can buy.",
+   "lever_class": "search",
+   "cost": "L infra / M compute — no new components, just per-call sampling params to llama-server; cost is the N decodes. Cheap knob but must be swept, since it sets the ceiling for every selection lever above.",
+   "theory_hook": "N* / coverage (diversity sets the reachable candidate set that BoN/MBR bounds are stated over); tau (miscalibrated temperature inflates selector error); recall-floor (too little diversity → selection cannot beat greedy)",
+   "evidence": "arxiv.org/pdf/2502.11027 (sampling diversity in scaling LLM inference); arxiv.org/html/2510.01218 (selective temperature sampling); arxiv.org/pdf/2605.11128 (calibration is the diversity bottleneck)."
+  },
+  {
+   "name": "Semantic-entropy / NLI-cluster selection for free-form QA",
+   "what": "Cluster the N samples by semantic equivalence (NLI or embedding), then select the answer from the largest / lowest-entropy semantic cluster. Gives a consensus pick for free-form QA where surface forms differ but meaning agrees, and yields a confidence signal for adoption/abstention.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — N decodes + clustering. NLI clustering needs a small entailment model (extra CPU/GPU); embedding-clustering variant reuses the faiss embedder on CPU (cheaper, preferred on our stack).",
+   "theory_hook": "tau (cluster-assignment error = selector error); tau* (entropy threshold gates adopt-vs-abstain); recall-floor (high semantic entropy = low-consensus signal to fall back to closed-book)",
+   "evidence": "Semantic entropy (Kuhn/Farquhar) + arxiv.org/abs/2509.17445 (Semantic Reformulation Entropy, SQuAD/TriviaQA); embedding-based agreement variant arxiv.org/pdf/2606.12003."
+  },
+  {
+   "name": "Soft Best-of-N / Regularized BoN (over-optimization-safe selection)",
+   "what": "Smooth (temperature-weighted softmax) reweighting over the N-sample scores instead of hard argmax, with a tunable smoothing parameter that trades reward against KL to the base policy — mitigates reward-hacking when the selector (verifier) is imperfect. RBoN adds explicit regularization.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — same N decodes; the soft-weight is CPU arithmetic over scores. No extra GPU beyond sampling.",
+   "theory_hook": "N* / tau (this is the constraint-term lever itself: the smoothing parameter bounds KL(SBoN‖ref) and caps over-optimization as N grows — directly instantiates our KL-trust-region / N* budget constraints, complementing the Beirami BoN bounds we already hold)",
+   "evidence": "arxiv.org/pdf/2505.03156 (Soft Best-of-N, KL bounds vs reference); arxiv.org/html/2507.05913 (BoN smoothing lens, KL/regret); RBoN (regularized BoN) surfaced for reward-hacking mitigation."
+  },
+  {
+   "name": "Speculative Rejection — partial-generation early kill (efficiency, partial fit)",
+   "what": "Score partial generations with the reward/utility and early-stop trajectories deemed unpromising, reallocating compute to survivors — 16–32× cheaper than fixed BoN at matched reward. Requires a utility that scores PARTIAL outputs.",
+   "lever_class": "gating",
+   "cost": "M-H, partial fit — big GPU savings in principle, BUT our retrieval/omni verifier scores COMPLETE answers, not partial transcripts, so utility must be swapped for a logprob/self-certainty partial signal (works) rather than the KB (does not). Feasible only with the token-confidence proxy.",
+   "theory_hook": "N* (budget cap via mid-decode pruning); tau* (the rejection threshold on partial-score is a gating radius)",
+   "evidence": "arxiv.org/pdf/2410.20290 (Fast BoN via Speculative Rejection, 16–32× efficiency via reward-correlation early stop)."
+  },
+  {
+   "name": "RL-trained rerankers / rewriters / stopping policies (COMPARISON CLASS — not a candidate)",
+   "what": "Learned reward models, RL-tuned rerankers/rewriters, trained value metrics for MBR, and trained stopping policies. Listed only as the trained-comparator class our training-free levers must beat; excluded because they change weights (violates the no-weight-change constraint) and are already inventoried in the 2a out-of-mock survey.",
+   "lever_class": "comparison-class(RL-trained, not a candidate)",
+   "cost": "N/A — out of scope on our frozen stack; use as an upper-bound reference only.",
+   "theory_hook": "none (defines the baseline our tau/N*/delta_corr training-free selectors are measured against)",
+   "evidence": "Multi-prompt MBR with a TRAINED value metric (PMC12226151); DynamicRAG RL-optimized reranker (search-surfaced); Weaver weak-verifier aggregation (already held) — all trained, hence comparison-class."
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Self-certainty scores a sample by the KL divergence of its token top-k logprob distribution from uniform, aggregated across N samples and combined with Borda voting; it needs NO gold answer and NO external reward model, and is explicitly shown to generalize to open-ended tasks where standard self-consistency fails.",
+   "source": "arxiv.org/abs/2502.18581 (Scalable Best-of-N via Self-Certainty, NeurIPS 2025) — opened",
+   "load_bearing": true,
+   "relevance": "Primary reward-model-free selector; directly deployable on our frozen 30B via llama-server logprobs; instantiates the tau (selector-error) term with near-zero added compute."
+  },
+  {
+   "claim": "Radial Consensus Score selects argmin L2 distance to a weighted Fréchet mean of answer embeddings (uniform/frequency/probability weights), is O(Nd), recovers correct semantic-minority answers that exact-match majority voting discards, and beats both majority voting (+2–7%, up to +7% at N=40) and self-certainty in noisy/high-diversity settings.",
+   "source": "arxiv.org/html/2604.12196 (Beyond Majority Voting: Radial Consensus Score) — opened",
+   "load_bearing": true,
+   "relevance": "Embedding-centroid selection maps 1:1 onto our CPU-resident faiss embedder; instantiates tau and delta_corr (independent embedder) with graceful low-consensus fallback (recall-floor)."
+  },
+  {
+   "claim": "MBR-for-ASR selects ŷ=argmax_y (1/N)Σ_y' u(y,y') with epsilon sampling (ε=0.01, T=1.0, up to 64 samples), needs no gold reference at inference, yields ~20–35% relative WER reduction over beam search with gains emerging from just 4–8 samples, is O(N^2) in the utility, and reduces exactly to ROVER-style majority voting when u is a token-edit metric.",
+   "source": "arxiv.org/html/2510.19471 (Re-evaluating MBR Decoding for ASR) — opened",
+   "load_bearing": true,
+   "relevance": "The canonical selection lever for our ASR/ST shapes; small-N gains keep GPU cost bounded; the omni/retrieval verifier can be dropped in as u to get cross-system (delta_corr) MBR."
+  },
+  {
+   "claim": "MBR utility inflation is real: the ASR paper deliberately avoids WER/CER as the utility function because MBR inflates whatever score it optimizes — a concrete instance of the over-optimization edge that a budget/regularization constraint must bound.",
+   "source": "arxiv.org/html/2510.19471 — opened",
+   "load_bearing": true,
+   "relevance": "Empirical anchor for the N* / over-optimization constraint term when the selector's utility and the reported metric coincide."
+  },
+  {
+   "claim": "DeepConf computes group confidence as the mean of top-k token logprobs over a sliding window (plus bottom-10% and tail variants), performs ONLINE early termination when local confidence drops below a warmup-calibrated threshold, keeps top-η% traces, does confidence-weighted voting, needs only logprobs (no training, no reward model), cuts tokens up to 84.7%, and reaches 99.9% on AIME25 vs 97.0% for majority voting on GPT-OSS-120B.",
+   "source": "arxiv.org/pdf/2508.15260 (Deep Think with Confidence) — opened",
+   "load_bearing": true,
+   "relevance": "Load-bearing N-scheduling/gating lever that LOWERS GPU cost; the confidence threshold instantiates tau*, early-stop instantiates N*; needs n_probs on llama-server."
+  },
+  {
+   "claim": "ReASC accepts a single sample when its confidence ≥ τ_gate, otherwise accumulates confidence-weighted pseudo-counts into a Beta posterior and stops when P(top>runner-up)>0.95; it weights responses by bottom-10% group confidence and can calibrate ONLINE from unlabeled test confidences via a GMM (no gold labels), cutting inference cost ~70% vs fixed SC k=16.",
+   "source": "arxiv.org/html/2601.02970 (Reliability-Aware Adaptive Self-Consistency) — opened",
+   "load_bearing": true,
+   "relevance": "τ_gate is a direct instantiation of the tau* gating radius; the Beta-posterior stop is a principled N* budget cap; unlabeled calibration fits our no-gold deployment."
+  },
+  {
+   "claim": "AdaBoN allocates a fixed BoN budget adaptively by first estimating each prompt's reward distribution with a small exploration budget, then greedily assigning remaining samples by marginal reward value; it has a single hyperparameter and stays competitive with uniform BoN given 20% more budget.",
+   "source": "arxiv.org/abs/2505.12050 (AdaBoN, Apple) — opened via search summary",
+   "load_bearing": true,
+   "relevance": "Makes the N* budget-cap term per-prompt adaptive; requires only a scalar per-sample utility (our verifier or self-certainty)."
+  },
+  {
+   "claim": "Confidence-Informed Self-Consistency (CISC) replaces uniform voting with model-derived scalar weights (response probability / verbal confidence / token-wise probability) and cuts required samples 40–50% at equal accuracy; ranked-voting self-consistency (Borda / instant-runoff / reciprocal-rank) further beats plain majority voting.",
+   "source": "aclanthology.org/2025.findings-acl.1030 (CISC) and arxiv.org/html/2505.10772 (Ranked-Voting SC) — search",
+   "load_bearing": true,
+   "relevance": "Cheap CPU-only reweighting over existing logprobs; reduces N (N*) and sharpens the selector (tau) for MCQ/QA shapes."
+  },
+  {
+   "claim": "Universal Self-Consistency feeds all N candidates into one prompt and asks the model to pick the most consistent, extending self-consistency to open-ended generation with no discrete answer space; Integrative Decoding folds self-consistency implicitly into decoding by conditioning on prior samples, improving open-ended factuality at low latency (ICLR 2025).",
+   "source": "arxiv.org/pdf/2311.17311 (USC) and openreview.net/pdf?id=gGWYecsK1U (Integrative Decoding, arxiv 2410.01556) — search + summary",
+   "load_bearing": true,
+   "relevance": "Open-ended selection levers for audio-QA/summarization shapes; both are same-model (low delta_corr) so they serve as the internal-consensus baseline against cross-system selectors."
+  },
+  {
+   "claim": "Fast Best-of-N via Speculative Rejection early-stops unpromising PARTIAL generations using reward correlation, achieving 16–32× compute efficiency over fixed BoN at matched reward.",
+   "source": "arxiv.org/pdf/2410.20290 (Speculative Rejection) — search",
+   "load_bearing": false,
+   "relevance": "Efficiency lever, but only partially applicable: our retrieval/omni verifier scores complete answers, so it works only with a token-confidence partial proxy, not the KB utility."
+  },
+  {
+   "claim": "Soft Best-of-N replaces hard argmax with a temperature-smoothed reweighting whose parameter bounds KL(SBoN‖reference), giving a tunable reward-vs-KL trade-off; RBoN adds explicit regularization to mitigate reward hacking as N grows.",
+   "source": "arxiv.org/pdf/2505.03156 (Soft Best-of-N) + arxiv.org/html/2507.05913 (BoN smoothing lens) — search",
+   "load_bearing": true,
+   "relevance": "Directly instantiates the KL-trust-region / N* over-optimization constraint terms in our theory ledger, complementing the Beirami BoN bounds we already hold."
+  },
+  {
+   "claim": "Knockout LLM tournaments rank N candidates by iterative pairwise comparison (n-1 comparisons, O(log n) rounds), improving scoring correlation (+0.07 Pearson); PairJudge-RM performs BoN via a knockout tournament; round-robin ELO variants also exist.",
+   "source": "arxiv.org/html/2506.03785 (Knockout Assessment) + PairJudge-RM (search) — search",
+   "load_bearing": false,
+   "relevance": "Cross-model-verify lever; expensive (extra 30B decodes) but a differently-contextualized judge is the delta_corr decorrelation instrument — best reserved for small N."
+  },
+  {
+   "claim": "Semantic entropy clusters N samples by NLI/embedding equivalence and selects from the lowest-entropy (largest) cluster, outperforming token-level entropy and self-evaluation for free-form QA (AUROC ~0.83 vs ~0.80 on TriviaQA); Semantic Reformulation Entropy stabilizes clustering via input paraphrases.",
+   "source": "arxiv.org/abs/2509.17445 (SRE) + semantic-entropy (Kuhn/Farquhar) — search",
+   "load_bearing": false,
+   "relevance": "Free-form QA selector + an adopt/abstain confidence signal (tau*/recall-floor); embedding-cluster variant reuses our faiss embedder."
+  },
+  {
+   "claim": "Sampling diversity (temperature/seed) is the enabling precondition for inference scaling: too-low temperature collapses samples so selection has no signal, and model mis-calibration is the fundamental bottleneck limiting how much diversity temperature can buy ('sampling more, getting less').",
+   "source": "arxiv.org/pdf/2502.11027 (sampling diversity in scaling) + arxiv.org/pdf/2605.11128 (calibration diversity bottleneck) — search",
+   "load_bearing": true,
+   "relevance": "Sets the reachable candidate set every BoN/MBR bound is stated over; a required swept knob, not an optional one, on our frozen HTTP API."
+  },
+  {
+   "claim": "Generative Error Correction / prompted rescoring (ProGRes, H2T) has the model emit a NEW transcription conditioned on the N-best list rather than selecting one, and can produce output better than every input hypothesis; recent GER variants add phonetic context for rare words.",
+   "source": "arxiv.org/pdf/2409.00217 (ProGRes) + ar5iv 2307.04172 (H2T) + arxiv.org/abs/2505.17410 — search",
+   "load_bearing": true,
+   "relevance": "Reranking-plus-rewrite lever that escapes the selection ceiling; the N-best list acts as in-context few-shot reach (R), with an adoption gate (alpha) vs the top selected hypothesis."
+  },
+  {
+   "claim": "No dedicated 2025 paper combines speech/audio-LLM + self-consistency voting + QA in one work; the selection/voting/MBR machinery is established in text/VLM/ASR-classical literature but not yet transferred as a training-free RL lever bundle onto a frozen omni-LLM.",
+   "source": "search across speech-LLM self-consistency queries (no primary hit) — search",
+   "load_bearing": true,
+   "relevance": "Confirms the transfer of these DIM-1 levers to the speech/omni shape is an open slot our Stage-1 program can occupy (effect-over-novelty)."
+  },
+  {
+   "claim": "MBR as consensus/reranking is a generalization of ROVER/majority voting and can use similarity-matrix utilities; efficient approximations reduce its O(N^2) cost, and multi-prompt MBR with a TRAINED value metric exists (the latter being a weight-changing comparison-class method).",
+   "source": "arxiv.org/pdf/2408.04167 (mbrs library) + PMC12226151 (multi-prompt MBR) — search",
+   "load_bearing": false,
+   "relevance": "Positions the training-free MBR variants against the trained-value-metric comparison class; confirms cheap-approximation options for our O(N^2) concern."
+  },
+  {
+   "claim": "Uncertainty quantification via MBR synthesizes model confidence and output consistency across QA, summarization, and MT, giving a consistency-based confidence score without gold labels.",
+   "source": "arxiv.org/abs/2502.04964 (UQ for LLMs through MBR) — search",
+   "load_bearing": false,
+   "relevance": "Supplies an adoption/abstention confidence (alpha, tau*) derivable from the same MBR pass used for selection."
+  }
+ ],
+ "gaps": "Coverage of the six DIM-1 sub-areas is exhaustive; residual gaps are about FIT-TO-STACK and downstream verification, not missing literature:\n\n1) llama.cpp logprob granularity (LOAD-BEARING, unverified on our build): self-certainty, DeepConf, ReASC, and CISC all need per-token logprobs from the resident llama-server. llama-server exposes only TOP-K probabilities via n_probs, not the full-vocab distribution. Self-certainty's KL-from-uniform and DeepConf's group-confidence are top-k approximations in the source papers, so this should work — but it MUST be validated that Qwen3-Omni GGUF returns logprobs for AUDIO-conditioned generations (not just text) before costing these as 'near-free scoring'. If audio-mode logprobs are unavailable, every confidence-based lever collapses to embedding/consensus-only methods (RCS, MBR, semantic-entropy), which need no logprobs.\n\n2) Cross-system (delta_corr) utility is under-instantiated in the opened sources: MBR/knockout/RCS all admit swapping in our retrieval-KB or omni-verifier as the utility u, which is the actual delta_corr decorrelation lever from the omni-verifier bridge memory — but no opened paper measures selection gain as a function of error-decorrelation between an independent verifier and the generator. That empirical curve (δ_corr → selection lift) is the theory-track slot this dimension feeds; it is NOT answered by the survey and needs an in-house directional probe.\n\n3) Speech-shape transfer is unstudied (see claim): the whole DIM-1 lever set is validated on text/math/ASR-classical, with zero prior work bundling it onto a frozen omni-LLM for audio-QA/ASR/MCQ. Effect size on the speech shape is unknown and cannot be inferred from the surveyed numbers.\n\n4) Recall-floor / OOD-harm interaction (cross-dimension, flagged not owned): whether adding a selection stage on top of the step-2 mock retrieval can HARM when retrieval recall is below the kNN-Whisper OOD-harm floor is a gating question that belongs to the gating/adoption dimension; DIM-1 methods only supply the fallback hooks (consensus/entropy thresholds), not the floor itself.\n\n5) N* numeric point: HedgeTune/BoP (already held) give the N* framework, and Soft-BoN/AdaBoN give tuning mechanisms, but the actual over-optimization N* for OUR verifier's error rate on OUR tasks is unmeasured — a required Stage-1 measurement slot, not a survey deliverable.\n\nNot re-surveyed per instructions (already held): Beirami BoN KL bounds, HedgeTune/BoP N*, TARG/Drozdov/Meta-k/NEST gating line, Weaver weak-verifier aggregation, kNN-Whisper OOD harm, and the 2a out-of-mock RL-trained rewriter/reranker/stopping/planning list."
+}

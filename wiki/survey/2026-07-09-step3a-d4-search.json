@@ -1,0 +1,317 @@
+{
+ "claims": [
+  {
+   "claim": "Overestimation-bias theory: verifier/beam-guided search has a MAXIMUM useful width k̂ that grows exponentially with (Δ/σ)² (Δ = quality gap of correct vs incorrect paths, σ = scorer noise); beyond k̂ search DEGRADES via compounding selection noise. Empirically perplexity-guided beam had k̂=1 (no benefit at any width), PRM-guided had k̂≥4 with gains up to +8.9pp, across three 7B models and ten domains.",
+   "source": "https://arxiv.org/abs/2603.15377 (More Test-Time Compute Can Hurt: Overestimation Bias in LLM Beam Search)",
+   "load_bearing": true,
+   "relevance": "This IS the closed-form bound on our tau (selector error) and N*/tau* radius: our verifier's SNR (Δ/σ) decides whether ANY DIM-4 search lever helps. Critically warns that cheap llama-server logprob/perplexity selection is near-worthless (k̂=1) — we MUST use a discriminating verifier (the omni second pass / cross-system delta_corr), not raw token confidence, and must MEASURE Δ/σ on our tasks before scaling any tree."
+  },
+  {
+   "claim": "Audio-native test-time compute on FROZEN audio LLMs (incl. Qwen2-Audio-7B, Audio-Flamingo-2): five inference-only TTC strategies (CoT, temperature majority-vote, beam-search-weighted-loglik BS-W, LLM-verifier top-1, LLM-verifier-weighted). LLM-verifier reranking helped WEAK models most (Audio-Flamingo +150% on hard tasks); but CoT hurt Qwen2-Audio Task-3 by -33% and BS-W hurt Task-1 by -66%. 'Optimal strategy highly dependent on model structure and task complexity.'",
+   "source": "https://arxiv.org/html/2503.23395v1 (Scaling Auditory Cognition via Test-Time Compute in Audio Language Models)",
+   "load_bearing": true,
+   "relevance": "The only audio-native TTC study — same modality/frozen-model regime as ours. Direct evidence that (a) a cross-context LLM-verifier (delta_corr lever) beats perplexity/BS-W selection, (b) TTC CAN HURT per-task, so per-task gating (tau*) and paired-CI gating are mandatory, and (c) our paired-CI-over-greedy design is the right guard."
+  },
+  {
+   "claim": "rStar (Mutual Reasoning): a frozen target SLM augments MCTS with human-like reasoning actions to build trajectories, and a SECOND similar-capability SLM acts as discriminator; mutually-agreed trajectories are kept. No fine-tuning, no larger teacher.",
+   "source": "https://openreview.net/forum?id=6aHUmotXaw (ICLR 2025)",
+   "load_bearing": true,
+   "relevance": "Training-free instantiation of cross-system decorrelation (delta_corr): generator vs discriminator are two context-differentiated readouts of the SAME frozen omni — the exact structure our omni-verifier bridge assumes, applied inside a search loop."
+  },
+  {
+   "claim": "ReSCALE: AlphaZero-style LLM tree search suffers a scaling FAILURE (accuracy DROPS as search budget grows on GSM8K/Game24). Replacing Dirichlet-noise+PUCT with Gumbel sampling + Sequential Halving restores MONOTONE scaling with NO model/training change; reaches 58.4% GSM8K / 85.3% Game24 at budgets where the baseline degrades.",
+   "source": "https://arxiv.org/abs/2603.21162 (Revisiting Tree Search for LLMs: Gumbel + Sequential Halving)",
+   "load_bearing": true,
+   "relevance": "A training-free selection mechanism that operationalizes N* — it makes the budget→accuracy curve monotone (removes the over-optimization dip), which is exactly the constraint our convergence proof needs (unconstrained search fails; the constrained/Sequential-Halving version converges)."
+  },
+  {
+   "claim": "MCTS-RAG interleaves retrieval DECISIONS into MCTS rather than retrieving once up-front; frozen SLMs gain +20% (Llama-3.1-8B) / +6% (Qwen2.5-7B) on ComplexWebQA, ~15%/10% on GPQA. EMNLP Findings 2025.",
+   "source": "https://github.com/yale-nlp/MCTS-RAG",
+   "load_bearing": true,
+   "relevance": "Directly raises the effective recall FLOOR above a static top-k faiss draw by making 'when/what to retrieve' a searched decision — turns our fixed step-2 mock retrieval into an adaptive one; also a gating (tau*) lever."
+  },
+  {
+   "claim": "CRITIC: LLM self-correction via EXTERNAL tool feedback (search APIs, code interp, scorers); a companion ICLR-2024 result shows WITHOUT external feedback self-correction reliably DEGRADES reasoning accuracy. CRITIC gives +7.7 F1 on open-domain QA, 79.2% toxicity reduction.",
+   "source": "https://arxiv.org/abs/2305.11738",
+   "load_bearing": true,
+   "relevance": "Governs the alpha (adoption) and T10 refinement levers: our verifiable rewards (WER/EM/rule-check) + faiss KB ARE the external tool. Warns that Reflexion-style loops with only SELF-judgment (no verifiable signal) will not help — only reward-verifiable refinement is admissible."
+  },
+  {
+   "claim": "REBASE (REward-BAlanced SEarch): expands tree nodes by softmax-normalized reward under a total expansion budget, paired with weighted voting; is compute-OPTIMAL and consistently beats sampling and MCTS across models/tasks; smaller models + REBASE outperform larger models.",
+   "source": "https://arxiv.org/abs/2408.00724 (Inference Scaling Laws, Wu et al.)",
+   "load_bearing": true,
+   "relevance": "A budget-bounded (N*) reranking+search rule with an explicit exploitation/pruning control — cheaper and more stable than MCTS on our single-GPU stack, and its softmax-reward expansion is a clean constraint term for the convergence argument."
+  },
+  {
+   "claim": "Fast Best-of-N via Speculative Rejection: exploits correlation between reward on PARTIAL vs FINAL responses to prune the lowest-scoring fraction mid-generation, reallocating compute; makes N>1000 feasible. Early-Rejection-with-Partial-Reward-Modeling generalizes this with PRMs invoked per token-block.",
+   "source": "https://arxiv.org/pdf/2410.20290",
+   "load_bearing": false,
+   "relevance": "Cost-realism lever for a single 24GB server: cuts BoN/tree cost by killing bad candidates early (N* budget reallocation). CAVEAT: needs mid-generation scoring, which the llama-server OpenAI endpoint does not natively expose — requires custom llama.cpp partial-decode hooks."
+  },
+  {
+   "claim": "Optimal-Stopping (Pandora's Box) for BoN: treat each generation as opening a costly box with random reward; a UCB-style stopping rule (no known reward distribution) matches Best-of-N accuracy with 15-35% FEWER generations on AlpacaFarm/HH-RLHF.",
+   "source": "https://arxiv.org/pdf/2510.01394",
+   "load_bearing": false,
+   "relevance": "Principled adaptive-N (N* cap) as a pure orchestration wrapper — zero model change, directly implementable in the p2 harness around our BoN loop."
+  },
+  {
+   "claim": "DeepConf: uses model-internal token logprob confidence to filter low-confidence traces AND early-terminate online when local confidence drops; -84.7% tokens, 99.9% AIME-2025 on GPT-OSS-120B; 'no training, no tuning, drops into existing serving.'",
+   "source": "https://arxiv.org/abs/2508.15260",
+   "load_bearing": false,
+   "relevance": "Directly implementable because llama-server EXPOSES logprobs — a tau* confidence gate + N* early-stop. But note the overestimation-bias caveat: confidence is a weak SELECTOR (k̂≈1), so use it for GATING/stopping, not final selection."
+  },
+  {
+   "claim": "Pairwise-RM knockout tournament: PAIRWISE correctness comparison of two candidates beats absolute scalar scoring (40-60% relative gain on the hardest 50% of MATH/Olympiad). GenSelect achieves the same generatively (frozen model reads all candidates and writes the selection).",
+   "source": "https://arxiv.org/abs/2501.13007v1",
+   "load_bearing": false,
+   "relevance": "The PROCEDURE is training-free with the frozen omni as pairwise comparator (delta_corr, different context per comparison), sidestepping a trained scalar RM; pairwise framing raises effective verifier SNR (Δ/σ) → larger safe search width per the k̂ bound. (The paper's OWN RM is trained → that part is comparison-class.)"
+  },
+  {
+   "claim": "Archon: automated Inference-Time Architecture Search (ITAS) over a design space of {generation-ensembling, multi-sampling, ranking, fusion, critique, verification, unit-testing} under a compute budget; auto-designed stacks beat GPT-4o/Claude-3.5 by +10.3–14.1pp.",
+   "source": "https://arxiv.org/abs/2409.15254",
+   "load_bearing": false,
+   "relevance": "Meta-lever: rather than hand-pick among our DIM-4 candidates, ITAS searches the COMBINATION under an N* budget — the principled way to compose selection+gating+rerank+verify on our stack and avoid the per-task 'TTC can hurt' trap."
+  },
+  {
+   "claim": "LATS (Language Agent Tree Search): MCTS over ReAct reasoning+acting steps with LM value function and self-reflection; model-free, no training; 94.4% HumanEval (GPT-4), 75.9 WebShop (GPT-3.5). Multi-turn tool/reason steps ARE the search space.",
+   "source": "https://arxiv.org/html/2310.04406v3 (ICML 2024)",
+   "load_bearing": false,
+   "relevance": "Canonical realization of our T10 'multi-turn delivery orchestration as a search space' lever (R reach via tools + recall-floor); but MCTS depth on audio-conditioned generation is the most cost-prohibitive option on our stack (audio re-prefill per node)."
+  },
+  {
+   "claim": "Search-o1 embeds an agentic retrieve-when-uncertain workflow into the reasoning chain plus a Reason-in-Documents module that CONDENSES retrieved docs before injecting them, preserving reasoning flow. EMNLP 2025.",
+   "source": "https://arxiv.org/abs/2501.05366",
+   "load_bearing": false,
+   "relevance": "tau* gating (retrieve only on detected uncertainty) + alpha (condensed docs are more ADOPTED than raw dumps) + recall-floor — a lighter (non-MCTS) alternative to MCTS-RAG that fits a resident server better."
+  },
+  {
+   "claim": "SLG (Scaling-Law-Guided) tail-guided search: estimates the reward TAIL distribution (extreme-value style) to PREDICT the BoN scaling law without exhaustive eval, then allocates compute to high-potential intermediate states; matches peak BoN at half the budget (Qwen-7B AIME-2024).",
+   "source": "https://arxiv.org/abs/2602.01485",
+   "load_bearing": false,
+   "relevance": "An N* mechanism that predicts the point of diminishing returns (ties to the same extreme-value math as the k̂ overestimation bound) — lets us set the search budget analytically instead of by sweep."
+  },
+  {
+   "claim": "ReKG-MCTS (training-free MCTS over knowledge graphs, UCB select + LLM-guided rollouts + value backprop) and FREESON (retriever-free corpus-traversing MCTS where the LLM itself traverses the corpus) both outperform prior training-free methods and rival fine-tuned ones on WebQSP/CWQ.",
+   "source": "https://aclanthology.org/2025.findings-acl.484/",
+   "load_bearing": false,
+   "relevance": "Shows training-free MCTS over an EXTERNAL structured store — pattern transfers to our faiss KB (vector store, not KG, so expansion constraints differ); recall-floor + search levers."
+  },
+  {
+   "claim": "TSR (Trajectory-Search Rollouts) runs lightweight best-of-N / beam / shallow-lookahead search over multi-turn tool-call action sequences using per-turn rewards and selects the highest-scoring trajectory; +15% on Sokoban/FrozenLake/WebShop.",
+   "source": "https://arxiv.org/pdf/2602.11767",
+   "load_bearing": false,
+   "relevance": "The search-rollout PROCEDURE (best-of-N/beam/shallow-lookahead over turns) is training-free and maps exactly onto our T10 two-turn agentic delivery as a searchable trajectory space; the surrounding RL update is comparison-class."
+  },
+  {
+   "claim": "WebDreamer: training-free one-step lookahead where the frozen LLM serves as BOTH world model and value function (propose-simulate-score); competitive with tree search while 4-5x more efficient, but DEGRADES as horizon extends.",
+   "source": "https://arxiv.org/abs/2411.06559",
+   "load_bearing": false,
+   "relevance": "Shallow-lookahead sweet spot for a single-GPU server (R reach + tau self-value); the horizon-degradation is the same over-optimization edge the k̂ bound predicts — argues for depth-1, not deep tree search, on our stack."
+  },
+  {
+   "claim": "s1 budget forcing: control test-time thinking by appending an end-of-think delimiter to force-stop, or suppressing it and appending 'Wait' to force more exploration; +27% over o1-preview on competition math via a thinking model.",
+   "source": "https://arxiv.org/abs/2501.19393",
+   "load_bearing": false,
+   "relevance": "A direct N*/budget knob IF Qwen3-Omni-GGUF exposes a thinking mode — unverified on our box; if available it is the cheapest single-decode budget lever (no extra samples)."
+  },
+  {
+   "claim": "Atom-of-Thoughts (Markov test-time scaling): decompose into atomic subproblems with dependency edges; matches Forest-of-Thought at ONE-QUARTER the compute; +0.6–7.5 pts across six benchmarks (80.6% HotpotQA).",
+   "source": "https://arxiv.org/abs/2502.12018",
+   "load_bearing": false,
+   "relevance": "R (reach) lever via decomposition, and a cheaper structured-search alternative than ToT/FoT — relevant for our compositional K8 spoken-QA where a single decode underperforms."
+  },
+  {
+   "claim": "COMPARISON-CLASS (RL-trained, NOT training-free candidates — position against): rStar-Math (trains policy+PRM via self-evolution), DeepSearch (RLVR+MCTS), TreeRL (on-policy tree-search RL), Search-R1/ReSearch/DeepResearcher (RL search agents), GenPRM/R-PRM (trained process reward models), Pairwise-RM's 443K-pair trained RM, Inference-Aware Fine-Tuning for BoN.",
+   "source": "https://arxiv.org/abs/2501.04519 ; https://arxiv.org/pdf/2509.25454 ; https://arxiv.org/pdf/2506.11902",
+   "load_bearing": true,
+   "relevance": "These share the DIM-4 search machinery but require weight updates → excluded by our no-weight-change constraint. Their TEST-TIME procedures (MCTS shape, tournament, tail-guided allocation) are reusable; only their trained scorers/policies are off-limits. Use as upper-bound reference and to harvest search structure."
+  }
+ ],
+ "candidates": [
+  {
+   "name": "rStar-style training-free MCTS + mutual discriminator",
+   "what": "Frozen omni proposes reasoning/answer actions inside an MCTS; a SECOND pass of the same frozen omni under a different (discriminator) context scores/verifies trajectories; keep mutually-agreed paths. No fine-tuning.",
+   "lever_class": "search + cross-model-verify",
+   "cost": "H — MCTS rollouts × depth, and each audio-conditioned node re-prefills the multimodal context on the single 24GB llama-server (no per-branch KV handle via the OpenAI endpoint); GPU-bound, likely feasible only at small branch/depth (e.g. b=3,d=2).",
+   "theory_hook": "delta_corr (generator vs discriminator = two context-differentiated readouts of the same frozen omni), tau (verifier SNR gates search width), N* (rollout budget cap)",
+   "evidence": "rStar ICLR 2025 (openreview 6aHUmotXaw): mutual-reasoning MCTS with no fine-tuning; the discriminator-agreement structure is exactly our omni-verifier decorrelation bridge."
+  },
+  {
+   "name": "MCTS-RAG (retrieval-decision-in-search over our faiss KB)",
+   "what": "Make 'whether/what to retrieve' a searched decision node inside MCTS instead of a single up-front top-k faiss draw; retrieved evidence scored inside the reasoning before it contributes to the answer.",
+   "lever_class": "search + gating",
+   "cost": "H — MCTS over retrieval+reasoning nodes; extra faiss lookups are cheap (CPU) but each reasoning node is a full omni decode. Retrieval decisions can be batched but decodes serialize on one server.",
+   "theory_hook": "recall-floor (lifts effective recall above static top-k), tau* (retrieve-when-uncertain gate), N* (search budget)",
+   "evidence": "MCTS-RAG EMNLP-F 2025 (yale-nlp): +20% Llama-3.1-8B / +6% Qwen2.5-7B ComplexWebQA, frozen SLMs to GPT-4o parity."
+  },
+  {
+   "name": "Search-o1 agentic retrieve-when-uncertain + Reason-in-Documents condenser",
+   "what": "Detect uncertainty mid-reasoning, fire a retrieval, then CONDENSE retrieved docs to a focused snippet before injecting — a non-MCTS, resident-server-friendly agentic loop.",
+   "lever_class": "gating + search",
+   "cost": "M — a handful of sequential decodes per query (uncertainty check → retrieve → condense → answer); no tree blow-up. Fits a single resident server well.",
+   "theory_hook": "tau* (uncertainty-triggered retrieval radius), recall-floor, alpha (condensed docs adopted more than raw dumps)",
+   "evidence": "Search-o1 EMNLP 2025 (arXiv 2501.05366): agentic search-enhanced reasoning with Reason-in-Documents module."
+  },
+  {
+   "name": "AirRAG (MCTS + self-consistency over a fixed RAG action set)",
+   "what": "Define ~5 reasoning-action primitives (direct answer, decompose, retrieve, verify, backtrack) and run MCTS + self-consistency over them on top of our KB.",
+   "lever_class": "search",
+   "cost": "H — MCTS + multi-sample self-consistency; heaviest of the RAG-search options. Consider only for the hardest K8/K9 slices.",
+   "theory_hook": "recall-floor, N*, R (reach via decomposition/retrieval actions)",
+   "evidence": "AirRAG (arXiv 2501.10053, ACL-F 2025): action-space MCTS+SC significantly beats strong RAG baselines."
+  },
+  {
+   "name": "LATS — MCTS over multi-turn ReAct tool/reason steps (T10 as a tree)",
+   "what": "Expand our T10 two-turn tool-call framing into an MCTS/best-first tree over reasoning+tool-call steps, with the frozen omni as policy and self-reflection as value.",
+   "lever_class": "search",
+   "cost": "H — deepest multi-turn search; each node may re-encode audio. Most cost-prohibitive DIM-4 option on a single 24GB server; reserve for offline analysis, not the live baseline.",
+   "theory_hook": "R (reach expanded via tools), recall-floor, N* (rollout cap), alpha",
+   "evidence": "LATS ICML 2024 (arXiv 2310.04406): model-free MCTS unifying reason/act/plan; 94.4% HumanEval, 75.9 WebShop."
+  },
+  {
+   "name": "TSR-style shallow trajectory search over T10 turns",
+   "what": "Lightweight best-of-N / beam / depth-1 lookahead over the multi-turn tool-call trajectory, selecting the highest per-turn-reward trajectory — the cheap, training-free core of TSR without the RL update.",
+   "lever_class": "search + selection(top-N)",
+   "cost": "M — a few full trajectories (2-3 turns each) then pick best; no deep tree. Directly implementable in the p2 harness on top of the existing t10 script.",
+   "theory_hook": "alpha (adoption across turns), recall-floor, R",
+   "evidence": "TSR (arXiv 2602.11767): best-of-N/beam/shallow-lookahead trajectory search gives +15% on WebShop/Sokoban/FrozenLake."
+  },
+  {
+   "name": "WebDreamer-style depth-1 world-model lookahead",
+   "what": "For each candidate next action/answer, prompt the frozen omni to SIMULATE its outcome and self-score; commit the best. One-step only (deep horizons degrade).",
+   "lever_class": "search",
+   "cost": "M — b candidate simulations + 1 scoring pass per step; 4-5x cheaper than tree search. Feasible on our server at small b.",
+   "theory_hook": "R (reach via simulated futures), tau (self-value SNR governs benefit), N* (depth-1 by design, per horizon-degradation)",
+   "evidence": "WebDreamer (arXiv 2411.06559, Gu et al. 2025): frozen LLM as world-model+value, competitive with tree search at 4-5x efficiency, degrades with horizon."
+  },
+  {
+   "name": "ReSCALE — Gumbel sampling + Sequential Halving tree search",
+   "what": "Replace PUCT/Dirichlet-noise MCTS with Gumbel-top-k proposal + Sequential Halving over a fixed generation budget; restores MONOTONE budget→accuracy scaling with no training.",
+   "lever_class": "search + selection(top-N)",
+   "cost": "M-H — fixed-budget halving is more predictable than open-ended MCTS; budget = number of decodes, tunable to server capacity.",
+   "theory_hook": "N* (this is the mechanism that removes the over-optimization dip — makes scaling monotone)",
+   "evidence": "ReSCALE ICAPS 2026 (arXiv 2603.21162): fixes accuracy-drops-with-budget failure; 58.4% GSM8K / 85.3% Game24 where baseline degrades; Sequential Halving is the driver."
+  },
+  {
+   "name": "REBASE — reward-balanced tree expansion + weighted voting",
+   "what": "Expand nodes proportional to softmax(reward) under a total expansion budget, then weighted-vote the leaves; a compute-optimal middle ground between BoN and MCTS.",
+   "lever_class": "search + reranking",
+   "cost": "M-H — one verifier score per node + budgeted expansion; cheaper and more stable than MCTS. Verifier = omni second pass (adds decodes).",
+   "theory_hook": "N* (explicit expansion budget), tau (softmax over reward — needs discriminating verifier)",
+   "evidence": "REBASE (arXiv 2408.00724): compute-optimal, beats sampling and MCTS across models/tasks; small model + REBASE > larger model."
+  },
+  {
+   "name": "PRM/verifier-guided step-level beam search",
+   "what": "Generate candidate next steps, keep top-B by a process/answer verifier, iterate. Verifier = frozen omni scoring under a different context (no trained PRM).",
+   "lever_class": "reranking + search",
+   "cost": "M-H — B candidates × steps × 1 verify each; verify passes dominate. Batchable but serialized on one server.",
+   "theory_hook": "tau (k̂ ∝ exp((Δ/σ)²) — SNR sets safe B), N*",
+   "evidence": "Overestimation-bias (arXiv 2603.15377): PRM-guided beam k̂≥4, +8.9pp; perplexity-guided k̂=1 (useless) — so DON'T use raw logprobs as the beam scorer."
+  },
+  {
+   "name": "Atom-of-Thoughts decomposition search",
+   "what": "Decompose a spoken-QA item into atomic subproblems with dependency edges, solve/contract iteratively (Markov); cheaper structured search than ToT/FoT.",
+   "lever_class": "search",
+   "cost": "M — subproblem decodes scale with decomposition depth, but ~1/4 of Forest-of-Thought; no verifier needed for the base version.",
+   "theory_hook": "R (reach via compositional subproblem solving), N* efficiency",
+   "evidence": "AoT (arXiv 2502.12018): matches Forest-of-Thought at 1/4 compute; +0.6–7.5 pts on six benchmarks."
+  },
+  {
+   "name": "Verifier-free selection: Universal Self-Consistency + GenSelect",
+   "what": "Sample N candidates, then have the frozen omni read all N and GENERATE the most-consistent/best one — works for free-form ASR/QA where exact-match voting fails.",
+   "lever_class": "selection(top-N)",
+   "cost": "L — N parallel decodes + 1 selection decode; the cheapest selection lever. No verifier training.",
+   "theory_hook": "tau (selection error), delta_corr (weak — same model, different context)",
+   "evidence": "USC & GenSelect (arXiv 2507.17797): generative selection for open-ended tasks, no handcrafted extractor. CAVEAT: self-selection SNR may be low (k̂ small) — measure before trusting."
+  },
+  {
+   "name": "Knockout pairwise tournament with frozen-omni comparator",
+   "what": "Run an N-ary knockout over N candidates using the frozen omni as a PAIRWISE 'which is correct' judge (different context per bout); no trained RM.",
+   "lever_class": "cross-model-verify + selection(top-N)",
+   "cost": "M — O(N) pairwise decodes; N-ary bouts reduce rounds. More decodes than USC but higher-SNR judgments.",
+   "theory_hook": "delta_corr (omni-vs-omni, differentiated context), tau (pairwise raises effective Δ/σ → wider safe search)",
+   "evidence": "Pairwise-RM knockout (arXiv 2501.13007): pairwise beats absolute scoring, 40-60% rel gain on hardest problems (the RM there is trained → we use the frozen-comparator variant)."
+  },
+  {
+   "name": "Cross-context LLM-verifier reranking (audio-native)",
+   "what": "Generate N candidate answers/transcripts, score each with a SECOND frozen-omni pass under a verifier prompt (or a different backbone e.g. MERaLiON), select top-1 or weighted.",
+   "lever_class": "cross-model-verify + reranking",
+   "cost": "M — N decodes + N verify passes. If verifier = a different GGUF, it contends for the 24GB VRAM with the 30B → prefer same-model different-context, or swap-in a small verifier.",
+   "theory_hook": "delta_corr (context/model-differentiated verifier), tau (verifier SNR)",
+   "evidence": "Audio-TTC (arXiv 2503.23395): LLM-verifier reranking gave the LARGEST gains on frozen weak audio models (Audio-Flamingo +150% on hard tasks) — best-supported DIM-4 lever in OUR modality."
+  },
+  {
+   "name": "Adaptive-N stopping (Optimal-Stopping / Adaptive-Consistency / ESC)",
+   "what": "Wrap BoN/self-consistency with a UCB/convergence stopping rule: stop generating once an acceptable/converged answer appears.",
+   "lever_class": "gating",
+   "cost": "L — pure orchestration in the p2 harness; SAVES decodes (15-35% fewer). Zero model change.",
+   "theory_hook": "N* (adaptive budget cap)",
+   "evidence": "Optimal-Stopping (arXiv 2510.01394): matches BoN at 15-35% fewer gens; Adaptive-Consistency: up to 7.9x fewer samples, <0.1% acc drop."
+  },
+  {
+   "name": "DeepConf — logprob-confidence gating + online early-stop",
+   "what": "Use llama-server token logprobs to compute local trace confidence; filter low-confidence traces and early-terminate generations whose confidence drops below a threshold.",
+   "lever_class": "gating",
+   "cost": "L-M — logprobs already returned by llama-server; filtering/early-stop is free and REDUCES tokens (up to -84.7%). No training/tuning.",
+   "theory_hook": "tau* (confidence-threshold gate), N* (early stop). NOT for final selection (confidence is a weak selector, k̂≈1)",
+   "evidence": "DeepConf (arXiv 2508.15260): 99.9% AIME-2025, -84.7% tokens, drops into existing serving."
+  },
+  {
+   "name": "Speculative-Rejection / early-reject partial-reward pruning",
+   "what": "Score partial generations mid-flight and kill the lowest-reward fraction to reallocate budget to promising candidates; enables large-N BoN cheaply.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — cuts total decode cost, BUT requires mid-generation scoring hooks that the llama-server OpenAI endpoint does NOT expose → needs custom llama.cpp partial-decode integration (engineering cost, not GPU cost).",
+   "theory_hook": "N* (budget reallocation), tau (partial-final reward correlation)",
+   "evidence": "Speculative Rejection (arXiv 2410.20290) + Early-Rejection PRM (arXiv 2508.01969): partial-reward correlation prunes early; makes N>1000 feasible."
+  },
+  {
+   "name": "RSD-style two-tier escalation (cheap pass → omni-verify)",
+   "what": "Answer with a cheap first pass (greedy or a small draft); a reward/confidence check decides whether to escalate to a fuller omni search/verify pass only on hard items.",
+   "lever_class": "gating + cross-model-verify",
+   "cost": "M — saves compute on easy items; if the 'cheap' tier is a separate draft model it costs VRAM alongside the 30B. Simplest form: greedy-then-verify with no second model.",
+   "theory_hook": "tau* (escalation gate), N* (spend only where needed), delta_corr (verify pass)",
+   "evidence": "RSD ICML 2025 (arXiv 2501.19324): PRM-gated draft/target escalation, up to 4.4x fewer FLOPs, +3.5 acc vs parallel decoding."
+  },
+  {
+   "name": "CRITIC / reward-verifiable iterative refinement (T10 refine loop)",
+   "what": "Generate → check with a VERIFIABLE tool (our WER/EM/rule-check or a faiss KB lookup) → revise, up to K rounds. Only reward-verified feedback, never pure self-judgment.",
+   "lever_class": "gating + search",
+   "cost": "L-M — K sequential decodes (small K, e.g. 2-3); cheap and directly extends the existing t10 two-turn script.",
+   "theory_hook": "alpha (adoption of tool feedback), recall-floor (KB feedback), R, tau* (revise-until-verified)",
+   "evidence": "CRITIC ICLR 2024 (arXiv 2305.11738): tool feedback +7.7 F1 QA; WITHOUT external feedback self-correction degrades — so verifiable-reward gating is mandatory."
+  },
+  {
+   "name": "SLG reward-tail-guided budget allocation",
+   "what": "Estimate the reward tail (extreme-value) from a few samples to PREDICT the scaling law, then allocate the search/BoN budget to high-potential states analytically.",
+   "lever_class": "selection(top-N) + gating",
+   "cost": "M — needs partial-reward estimates per state; the allocation itself is cheap. Reduces wasted decodes.",
+   "theory_hook": "N* (predict diminishing-returns point), tau (tail SNR)",
+   "evidence": "SLG (arXiv 2602.01485): matches peak BoN at half budget (Qwen-7B AIME-2024); N=500 SLG > N=700 BoN (Llama-1B)."
+  },
+  {
+   "name": "Archon ITAS — automated search over our lever stack",
+   "what": "Treat the choice+composition of the above levers (ensemble/sample/rank/fuse/critique/verify) as a hyperparameter search under a fixed compute budget; auto-select the per-task-optimal architecture.",
+   "lever_class": "selection(top-N)",
+   "cost": "M — the SEARCH is a one-time offline cost; the deployed architecture's cost is whatever it selects. Guards against the 'TTC hurts on this task' trap.",
+   "theory_hook": "N* (budget-constrained composition), composes tau/tau*/delta_corr/recall-floor",
+   "evidence": "Archon (arXiv 2409.15254): ITAS auto-designs inference-time stacks beating GPT-4o/Claude-3.5 by +10.3–14.1pp."
+  },
+  {
+   "name": "s1 budget-forcing (thinking-length control)",
+   "what": "If Qwen3-Omni-GGUF exposes a thinking mode, force-stop or force-continue ('Wait') the reasoning to hit a target token budget in a SINGLE decode — no extra samples.",
+   "lever_class": "gating",
+   "cost": "L — single decode with a controlled stop; cheapest budget knob. BLOCKED pending verification that the GGUF supports a thinking/reasoning channel.",
+   "theory_hook": "N* (per-item thinking budget)",
+   "evidence": "s1 (arXiv 2501.19393): budget forcing via end-of-think delimiter / 'Wait' token; +27% over o1-preview on competition math."
+  },
+  {
+   "name": "ETS KV-sharing tree pruning (efficiency enabler)",
+   "what": "An LP cost model that prunes redundant tree branches to maximize KV-cache sharing while keeping semantically diverse trajectories — makes any tree lever cheaper.",
+   "lever_class": "search",
+   "cost": "H to adopt — 1.8x smaller KV / 1.4x throughput in principle, BUT requires per-branch KV control the llama-server OpenAI endpoint does not expose; needs a custom llama.cpp tree-decode harness. Flag as blocked/engineering-heavy.",
+   "theory_hook": "N* / cost term (makes wider search affordable)",
+   "evidence": "ETS (arXiv 2502.13575): 1.8x KV reduction, 1.4x throughput, minimal accuracy loss vs prior tree search."
+  }
+ ],
+ "gaps": "STACK-SPECIFIC BLOCKERS (single 24GB resident llama-server): (1) The OpenAI-compatible llama-server endpoint exposes LOGPROBS (enables DeepConf, self-certainty, adaptive-stop, confidence gating) but NOT per-branch KV handles (ETS / tree KV-sharing not implementable without a custom llama.cpp tree-decode harness) and NOT mid-generation logit steering / partial scoring (value-guided token decoding and Speculative-Rejection need custom hooks). (2) Audio-conditioned generation makes deep tree/MCTS the most cost-prohibitive class — each node re-prefills the multimodal context (audio encoder + long prompt); depth-1 lookahead / shallow trajectory search / BoN+verifier are the realistic sweet spot, deep LATS/rStar-MCTS reserved for offline only. (3) Two-model methods (RSD draft+target, a separate verifier backbone, Pairwise-RM) contend for the 24GB against the 30B GGUF — the natural fit is omni-as-its-own-verifier under a DIFFERENT context (delta_corr), or swapping a small verifier; a second resident large model is likely infeasible.\n\nMEASUREMENT SLOTS NEEDED (per the assumption-ledger discipline): (a) VERIFIER SNR Δ/σ on OUR K1-K11 tasks is unmeasured — this single quantity decides via k̂ ∝ exp((Δ/σ)²) whether ANY search/rerank lever helps or HURTS (overestimation bias); must be measured before scaling any tree, and it is the empirical bridge to the tau constraint term. (b) Whether raw llama-server logprob/perplexity has any selection SNR on speech tasks (theory says k̂≈1 → near-zero) vs an omni-verify second pass. (c) Whether Qwen3-Omni-GGUF exposes a thinking/reasoning channel (blocks s1 budget-forcing). (d) Partial-vs-final reward correlation on our tasks (gates Speculative-Rejection viability).\n\nCOVERAGE GAPS IN THE LITERATURE ITSELF: There is essentially NO speech/audio-native tree-search or MCTS paper — only arXiv 2503.23395 (frozen audio LLMs with shallow BoN/beam/LLM-verifier, no tree). Deep inference-time SEARCH on audio-conditioned generation is unexplored territory; our contribution space (training-free search + speech-keyed retrieval on a frozen omni) is genuinely open, but also means no audio-domain prior tells us the depth/branch that pays off — the k̂/SNR measurement is the only principled guide.\n\nTHEORY-LEDGER MAPPING SUMMARY: tau ← overestimation-bias k̂ bound (2603.15377), verifier-SNR of every rerank/select lever; tau* ← DeepConf/Search-o1/RSD confidence-and-retrieve gates; N* ← ReSCALE monotone-scaling, Optimal-Stopping, SLG tail-prediction, REBASE/ETS budget caps (complements the HedgeTune/BoP N* you already hold); delta_corr ← rStar mutual-discriminator, knockout pairwise comparator, cross-context LLM-verifier (complements Weaver); R ← LATS/TSR/AoT/WebDreamer reach expansion; alpha ← CRITIC/Search-o1/T10 adoption of tool/retrieved evidence; recall-floor ← MCTS-RAG/AirRAG/ReKG-MCTS adaptive-retrieval-in-search. Comparison-class (RL-trained, excluded but structurally reusable): rStar-Math, DeepSearch, TreeRL, Search-R1/ReSearch/DeepResearcher, GenPRM/R-PRM, Pairwise-RM's trained RM."
+}

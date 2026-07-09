@@ -1,0 +1,251 @@
+{
+ "claims": [
+  {
+   "claim": "Verifier scoring protocol matters and is task-dependent: binary Pass/Fail judgments are more reliable/consistent than fine-grained scalar (0-100) scores; pairwise comparison approximates human preference better than pointwise for ranking BUT is noisier — mean verdict flip rate ~13.6% (28% of questions exceed 20% flip), and pairwise preferences flip 35% of the time under a distractor feature vs 9% for absolute scoring. Implication for our frozen judge: prefer binary or 3-point pointwise for stability, reserve pairwise for the final knockout of a shortlisted top-k.",
+   "source": "arxiv 2504.14716 (COLM'25) + LLM-as-judge best-practice surveys (evidentlyai, emergentmind LLM-as-a-Judge-Scoring)",
+   "load_bearing": true,
+   "relevance": "Sets the prompting-pattern default for every verifier candidate (binary/scalar/pairwise choice)."
+  },
+  {
+   "claim": "Generative verifiers (GenRM / GenRM-CoT, reward modeling as next-token prediction) beat discriminative RMs and LLM-as-judge on Best-of-N and can trade inference compute for accuracy by sampling K rationales and averaging P(Yes) (e.g. GSM8K 73%->93.4%, MATH easy-to-hard 28%->44.6%). Verification quality scales with model size and inference compute.",
+   "source": "arxiv 2408.15240 (Generative Verifiers, ICLR'25) + emergentmind GenRM",
+   "load_bearing": true,
+   "relevance": "Justifies self-verify (same frozen Qwen3-Omni prompted as GenRM-CoT) as a top reranking lever."
+  },
+  {
+   "claim": "COST CAVEAT that gates the whole GenRM path on our stack: generative verifiers UNDERPERFORM plain self-consistency under low inference budgets and need up to 8x more compute just to match self-consistency, with only marginal gains even at 128x budget. Discriminative/scalar verifiers by contrast need a single forward pass. On a resident 30B GGUF server with one 5090, K-rationale generative verification per candidate is the most expensive lever we can pick.",
+   "source": "arxiv 2510.14913 (Budget-aware Test-time Scaling via Discriminative Verification) + emergentmind budget/test-time-compute topics",
+   "load_bearing": true,
+   "relevance": "Forces a budget-aware gating layer (N*/tau*) in front of any generative verifier; makes cheap logit/agreement signals the first-line verifier."
+  },
+  {
+   "claim": "Self-Certainty gives a training-free, gold-free Best-of-N selector: score each candidate by the mean token log-probability SC(y)=(1/|y|)Σ log P(t_i|t_<i) from the model's own logits, rank N candidates, pick the max. One forward pass per candidate (or free if logprobs are captured at generation), 2-5x fewer tokens than majority voting for comparable/better accuracy. Key limitation: measures confidence, not correctness (high-prob can be wrong).",
+   "source": "arxiv 2502.18581 (Scalable Best-of-N Selection via Self-Certainty) — fetched",
+   "load_bearing": true,
+   "relevance": "Cheapest verifier lever, directly implementable on llama.cpp /completion logprobs; instantiates tau (selector error)."
+  },
+  {
+   "claim": "Pairwise RM + knockout tournament: prompt the frozen model to judge two candidates' relative correctness, run a single-elimination bracket needing exactly N-1 comparisons (sequential depth ~log N) to pick the best of N; significantly improves Best-of-N over absolute-score RMs, especially on hard items. All-pairs is stronger but O(N^2).",
+   "source": "arxiv 2501.13007 (Pairwise RM: Best-of-N with Knockout Tournament)",
+   "load_bearing": true,
+   "relevance": "Concrete pairwise reranking recipe; N-1 calls fits a small candidate budget on the resident server."
+  },
+  {
+   "claim": "Unsupervised weak-verifier ensembling works with ZERO labels: Weaver models correctness as a latent variable and estimates each verifier's accuracy via weak-supervision (closes generation-verification gap by 12.8% at 8B / 16.0% at 70B; weighted aggregation beats majority voting by avg 12.3%). FUSE extends this by explicitly CONTROLLING conditional dependencies between verifiers to make the spectral aggregation valid, matching/beating semi-supervised alternatives with zero ground-truth labels (validated on GPQA-Diamond, HLE, IMO-Shortlist).",
+   "source": "arxiv 2506.18203 (Weaver, prior-context) + arxiv 2604.18547 (FUSE: Ensembling Verifiers with Zero Labeled Data) — abs/pdf confirmed",
+   "load_bearing": true,
+   "relevance": "FUSE is the NEW delta over our existing Weaver coverage; its dependency-control is exactly the delta_corr knob (verifiers must be decorrelated for aggregation to gain)."
+  },
+  {
+   "claim": "Architecturally DIVERSE models decorrelate errors: same-architecture models are substantially more correlated than architecturally-diverse ones; when one architecture errs, a different-architecture model is less likely to make the same error, so voting/verification recovers the correct answer. Ensemble gain is governed by reducing correlated errors, not maximizing raw disagreement.",
+   "source": "arxiv 2510.20690 (Neural Diversity Regularizes Hallucinations) + ensemble-diversity literature (emergentmind/sciencedirect diversity studies)",
+   "load_bearing": true,
+   "relevance": "Empirical basis for using MERaLiON-2 (different architecture) rather than a second Qwen sample as the cross-model verifier — directly instantiates delta_corr."
+  },
+  {
+   "claim": "CAUTION: consensus/agreement is NOT verification. Crowd-wisdom / majority-agreement strategies can systematically fail for truthfulness because models share correlated blind spots; agreement is a proxy that both under- and over-credits. Self-verification (P(True)) is also biased because models find their own content credible.",
+   "source": "arxiv 2603.06612 (Consensus is Not Verification) + self-verification/self-evaluation topic pages",
+   "load_bearing": true,
+   "relevance": "Bounds every agreement-feature and self-verify lever; motivates cross-MODEL (decorrelated) verification and dev-set calibration over raw self-agreement."
+  },
+  {
+   "claim": "Verifier scores can be calibrated WITHOUT labels: post-hoc recalibration (temperature scaling, Platt, isotonic) fit on a held-out set maps raw scores to calibrated probabilities; unsupervised variants use self-consistency-based proxy targets (offline sampling) instead of gold. Reported unsupervised calibration reaches near labeled-temperature-scaling quality (e.g. ECE ~23.7%->~8.6% on a 12B model across MMLU). Temperature scaling is 1-parameter and preserves ranking; isotonic is monotonic/piecewise-constant, more flexible but needs more dev data.",
+   "source": "arxiv 2505.16690 (Pre-trained LLM as Unsupervised Confidence Calibrator) — fetched; KDnuggets/Latitude calibration deep-dives; arxiv 2409.19817 (Adaptive Temperature Scaling)",
+   "load_bearing": true,
+   "relevance": "Our frozen dev split (n=40) is exactly the held-out set to fit isotonic/temperature on any verifier score; instantiates tau* (calibrated gate) and alpha (adoption threshold)."
+  },
+  {
+   "claim": "Conformal / risk-controlled selection gives a distribution-free recall-floor guarantee: SAFER does abstention-aware sampling then conformalized filtering under Conformal Risk Control, pruning unreliable candidates while bounding the probability of excluding a correct answer below a user-set level; conformal abstention gives finite-sample participation + conditional-correctness guarantees. Any scoring function becomes a statistically valid accept/reject set via a dev-set calibration threshold.",
+   "source": "arxiv 2510.10193 (SAFER) + arxiv 2405.01563 (Conformal Abstention) + arxiv 2602.13110 (SCOPE, selective conformal pairwise judging)",
+   "load_bearing": true,
+   "relevance": "Turns a verifier score into a gate with an explicit recall-floor (our recall-floor term) and a calibrated radius (tau*); fallback = closed-book step-1 answer when coverage unattainable."
+  },
+  {
+   "claim": "Universal Self-Consistency (USC) and semantic/fine-grained self-consistency handle FREE-FORM answers where exact-match voting fails: prompt the model to select the response most mutually consistent with its peers, or cluster by semantic equivalence (semantic entropy) and pick the largest cluster. Self-certainty and embedding-similarity pairwise voting are the cheap logit/representation-space variants. Semantic entropy negatively correlates with accuracy (AUROC ~0.76-0.83) and enables abstention/early-stop gating.",
+   "source": "arxiv 2311.17311 (USC) + 2407.02056 (Fine-Grained SC) + 2502.18581 (self-certainty) + semantic-entropy topic (emergentmind) + 2606.15741 (self-consistency reranking for QA)",
+   "load_bearing": true,
+   "relevance": "Needed for our K8 QA/free-form cells where letter/EM voting is inapplicable; agreement-in-representation-space uses our faiss embedder."
+  },
+  {
+   "claim": "ASR system combination (ROVER) reduces WER by fusing 1-best hypotheses via word-confusion-network majority voting; confidence-weighted voting and segment-level quality-estimation ranking improve it further; diversity/complementarity of the ASR systems is provably the driver of WER reduction (~14% WERR reported). LLM generative rescoring/error-correction on the n-best (ProGRes, GER) can produce a transcript better than any input hypothesis (5-25% WER relative improvement) by combining ASR confidence + LLM sequence scoring + prompt-based hypothesis expansion.",
+   "source": "Fischer ROVER + arxiv 1706.07238 (ASR combination QE) + arxiv 2409.00217 (ProGRes) + arxiv 2405.10025 (Listen Again) + GER survey 2502.19548",
+   "load_bearing": true,
+   "relevance": "Our non-Whisper ASR-ensemble assets: cross-system WER/agreement is a decorrelated, CPU-cheap verifier signal for K1/K2; instantiates delta_corr + tau + recall-floor."
+  },
+  {
+   "claim": "Audio-LLMs can be training-free judges of speech: AudioJudge finds pairwise > pointwise, chain-of-thought reasoning before the verdict significantly raises human agreement, and CONCATENATING reference+candidate audio in one prompt beats separate processing; 2-3 few-shot examples substantially improve consistency (15-25% higher correlation with humans vs traditional metrics; 73-89% per-dimension accuracy). Related LALM-as-judge work (SpeechLLM-as-Judges, Audio-Aware LLMs as Judges for Speaking Styles, ParaPairAudioBench) confirms the pattern but notes untuned speech-LLMs are weak on fine-grained speech-quality axes.",
+   "source": "arxiv 2507.12705 (AudioJudge) — fetched; 2510.14664 (SpeechLLM-as-Judges); 2506.05984 (Audio-Aware Judges); 2606.24648 (ParaPairAudioBench)",
+   "load_bearing": true,
+   "relevance": "Directly governs how to prompt frozen Qwen3-Omni / MERaLiON-2 as an audio-native verifier (few-shot R, pairwise, CoT, audio-concat) — the R (few-shot reach) term."
+  },
+  {
+   "claim": "Attention-based In-Context Reranking (ICR) is an O(1) (vs O(N log N)) zero-shot reranker that reads relevance directly off a frozen LLM's attention pattern across layers/heads, beating RankGPT-style listwise prompting on hard tasks — BUT it REQUIRES access to the attention distribution of all layers/heads.",
+   "source": "arxiv 2410.02642 (Attention Yields Efficient Zero-Shot Re-Rankers, ICLR'25) + OSU-NLP In-Context-Reranking repo",
+   "load_bearing": true,
+   "relevance": "Attractive cheap reranker for our faiss top-k, but BLOCKED on our stack: llama.cpp resident server does not expose per-head attention; would need llama-cpp-python w/ attn output or a separate HF load — a feasibility gap, not a drop-in."
+  },
+  {
+   "claim": "Zero-shot listwise LLM rerankers (RankGPT / RankVicuna / RankZephyr) outperform pointwise rerankers by attending to multiple candidates jointly to decide relative order, via prompting alone; prompt-variation robustness studied at ECIR'25. Listwise reranking of retrieved passages is a standard training-free win for RAG retrieval quality.",
+   "source": "arxiv 2312.02724 (RankZephyr) + 2309.15088 (RankVicuna) + Sun et al. ECIR'25 prompt-variations + LLM-reranking survey (techrxiv 176300630)",
+   "load_bearing": true,
+   "relevance": "Improves the step-2 mock's retrieved-passage ordering before answering (recall-floor + alpha); one listwise call over top-k on the resident server."
+  },
+  {
+   "claim": "Best-of-N is subject to verifier over-optimization / reward hacking: increasing N makes over-optimization worse; HedgeTune/SBoN/Best-of-Poisson find the reward-KL-optimal stopping N* at inference, and pessimism (LCB on verifier value, error-model down-weighting of atypical responses) avoids the collapse threshold. MBR-regularized BoN bounds the KL to the base policy.",
+   "source": "arxiv 2604.04648 (Curiosity to Caution: Pessimism for BoN) + 2507.05913 (BoN smoothing lens KL/regret) + 2404.01054 (Regularized BoN-MBR) + HedgeTune/BoP (prior context)",
+   "load_bearing": true,
+   "relevance": "Any verifier-reranker must cap N and hedge/calibrate scores or it degrades below the step-2 baseline; ties reranking to the N* budget cap and tau selector-error terms."
+  },
+  {
+   "claim": "MBR decoding selects the candidate maximizing expected utility against the candidate pool (verifier-free), where utility can be embedding similarity or negative cross-WER; reranking-then-MBR matches or beats vanilla MBR, and centroid/clustered MBR (CBMBR) cuts the O(N^2) scoring cost.",
+   "source": "arxiv 2311.05263 (Model-Based MBR) + 2404.01054 (Regularized BoN-MBR) + MBR topic (emergentmind)",
+   "load_bearing": true,
+   "relevance": "A gold-free reranker reusing our faiss embedder as the utility metric; alternative to a prompted verifier, cheap on CPU."
+  },
+  {
+   "claim": "Multi-agent debate / cross-critic verification is training-free (FC-MAD) and robust across backbones — one model as Judge, others as Critics, iterative critique beats static majority voting on fact-checking — BUT documented failure modes: bias amplification in multi-agent judging and a 'confident liar' effect where log-probs and LLM-judge diverge; cost scales with rounds x models.",
+   "source": "arxiv 2507.19090 (Debating Truth) + 2510.12697 (MAD Judges w/ Adaptive Stability) + 2505.19477 (Judging with Many Minds, bias) + 2606.10296 (Confident Liar)",
+   "load_bearing": false,
+   "relevance": "Highest-cost cross-model lever (Qwen3-Omni + MERaLiON debate); include only if cheaper cross-model scoring underperforms — noted for completeness, not first-line."
+  }
+ ],
+ "candidates": [
+  {
+   "name": "Self-Certainty reranking (logit-mean Best-of-N selector)",
+   "what": "Sample N candidates from frozen Qwen3-Omni, score each by mean token log-prob SC(y)=(1/|y|)Σ log P(t_i|t_<i) captured from llama.cpp /completion logprobs, pick argmax. No gold, no extra model, no training. Optional: length-normalize and combine with retrieval score.",
+   "lever_class": "selection(top-N) + reranking",
+   "cost": "L — logprobs are a free by-product of the generation calls already needed for BoN; zero extra GPU. Only the N-way sampling adds resident-server load.",
+   "theory_hook": "tau (this selector's error rate is exactly the tau selector-error term; its curve vs N feeds N*)",
+   "evidence": "arxiv 2502.18581 (fetched): 2-5x fewer tokens than majority voting for comparable/better accuracy; verifier-free."
+  },
+  {
+   "name": "Cross-model verification with MERaLiON-2 (decorrelated second frozen scorer)",
+   "what": "Use the second planned GGUF backbone (MERaLiON-2, different architecture) to score/filter Qwen3-Omni candidates: feed audio + each candidate answer, prompt MERaLiON for a binary correct/incorrect (or P(Yes)); keep/rerank by MERaLiON's verdict. Context-differentiated (per omni-verifier-decorrelation memo) — two frozen systems, not self-reward.",
+   "lever_class": "cross-model-verify",
+   "cost": "H on GPU — a second 30B-class GGUF contends with the resident Qwen3 server on one 5090 (-ngl 28). Options: (a) model-swap between generate/verify phases, (b) MERaLiON on smaller -ngl / partial CPU offload, (c) batch all candidates per audio to amortize the swap. Plan for sequential, not concurrent, residency.",
+   "theory_hook": "delta_corr (the achievable cross-system error-decorrelation is THE constraint term here) + tau (MERaLiON's selector error)",
+   "evidence": "arxiv 2510.20690 + ensemble-diversity lit (architecturally-diverse models decorrelate errors); AudioJudge 2507.12705 for the audio-native verify prompt pattern."
+  },
+  {
+   "name": "ASR cross-system agreement / cross-WER consistency verifier (K1/K2)",
+   "what": "For ASR cells, run 2-3 non-Whisper ASR systems (our ASR-ensemble assets) on the audio, compute pairwise WER/CER among their hypotheses and vs the Qwen3-Omni transcript; low cross-WER = high confidence, select the medoid or ROVER-fuse. Optionally LLM-rescore the n-best (ProGRes/GER pattern) to synthesize a transcript better than any input.",
+   "lever_class": "cross-model-verify + comparison-class(ROVER/QE baseline)",
+   "cost": "L-M — ASR inference is CPU/GPU-light relative to the 30B; cross-WER is trivial CPU. Main cost is running the extra ASR systems once per item (cacheable).",
+   "theory_hook": "delta_corr (ASR-system diversity provably drives WER reduction) + tau + recall-floor (fusion floor)",
+   "evidence": "ROVER + arxiv 1706.07238 (QE combination) + 2409.00217 (ProGRes, 5-25% WER rel. gain) + 2405.10025."
+  },
+  {
+   "name": "GenRM-CoT self-verification (same-model generative verifier)",
+   "what": "Prompt frozen Qwen3-Omni to produce a verification chain-of-thought then a Yes/No token for each candidate; sample K rationales, rank by averaged P(Yes). Binary verdict (per protocol-stability finding), audio re-attended in the verify prompt (AudioJudge audio-concat + CoT).",
+   "lever_class": "reranking (self-verify) / cross-model-verify(same-model variant)",
+   "cost": "H — K extra 30B generations per candidate on the resident server; the single most GPU-expensive lever. MUST be gated (only for low-margin items) per the 8x-compute caveat.",
+   "theory_hook": "tau (verifier selector error) + N* (verification-chain budget K and candidate N caps)",
+   "evidence": "arxiv 2408.15240 (GenRM, ICLR'25) gains; 2510.14913 cost caveat (8x to match self-consistency)."
+  },
+  {
+   "name": "Pairwise knockout tournament over a shortlist",
+   "what": "Cheaply shortlist top-k by self-certainty, then run an N-1-comparison single-elimination bracket where the frozen model (or MERaLiON) judges pairs; binary 'which is better' prompt with audio. All-pairs only if k is tiny.",
+   "lever_class": "reranking",
+   "cost": "M — k-1 sequential 30B judge calls (depth ~log k); bounded by shortlisting first. Reuse the resident server, no model swap if self-judged.",
+   "theory_hook": "tau (pairwise judge flip-rate ~13.6% IS the selector error to bound)",
+   "evidence": "arxiv 2501.13007 (Pairwise RM knockout) + 2504.14716 (pairwise noise/flip-rate)."
+  },
+  {
+   "name": "Verifier-score calibration on the frozen dev split (isotonic / temperature)",
+   "what": "Fit a monotonic isotonic regressor (or 1-param temperature) on the n=40 dev split mapping any raw verifier score (self-certainty, GenRM P(Yes), MERaLiON verdict, cross-WER) to calibrated P(correct); unsupervised variant uses self-consistency proxy targets if dev gold is thin. Apply the frozen map at test.",
+   "lever_class": "reranking (calibration layer) + gating",
+   "cost": "L — one CPU fit on 40 points; negligible. Reuses paired-bootstrap harness for CIs.",
+   "theory_hook": "tau* (calibrated score defines the gating radius) + alpha (calibrated P(correct) sets the adoption threshold)",
+   "evidence": "arxiv 2505.16690 (unsupervised calibrator, fetched) + 2409.19817 (adaptive temp) + calibration deep-dives; unsupervised ~ECE 23.7%->8.6% reported."
+  },
+  {
+   "name": "Conformal risk-controlled selection filter (SAFER-style) with closed-book fallback",
+   "what": "Calibrate a verifier-score accept/reject threshold on dev via Conformal Risk Control so the accepted set keeps a chosen recall floor (bounded prob. of dropping a correct answer); on reject/low-coverage items, abstain to the step-1 closed-book answer. Guarantees are distribution-free, finite-sample.",
+   "lever_class": "gating",
+   "cost": "L-M — conformal calibration is CPU-cheap; cost is only the verifier scores it sits on top of.",
+   "theory_hook": "recall-floor (CRC directly instantiates it) + tau* (calibrated radius) + alpha",
+   "evidence": "arxiv 2510.10193 (SAFER) + 2405.01563 (conformal abstention) + 2602.13110 (SCOPE)."
+  },
+  {
+   "name": "Budget-aware verifier gating (cheap-first, escalate on uncertainty)",
+   "what": "Tier the verifier stack: (1) free self-certainty + cross-WER agreement on every item; (2) escalate to MERaLiON cross-verify or GenRM-CoT ONLY for low-margin / high-semantic-entropy items. State-conditional allocation of expensive calls under a fixed per-run verifier-call budget.",
+   "lever_class": "gating (verifier-cost budgeting)",
+   "cost": "M — the point is to REDUCE mean GPU cost vs verifying everything; adds only routing logic (semantic-entropy/margin threshold) in the p2 harness.",
+   "theory_hook": "N* (per-item and per-run verifier-call budget cap) + tau* (uncertainty gate radius)",
+   "evidence": "arxiv 2510.14913 (budget-aware discriminative verification) + 2507.02076 (reasoning-on-a-budget survey); generative-verifier 8x cost caveat."
+  },
+  {
+   "name": "Universal / semantic self-consistency reranking (free-form K8 cells)",
+   "what": "For QA/free-form cells where EM voting fails, either prompt the frozen model to pick the response most mutually consistent among N candidates (USC), or cluster candidates by semantic equivalence (embedding sim via faiss embedder / semantic entropy) and select the largest-cluster medoid.",
+   "lever_class": "selection(top-N) + reranking",
+   "cost": "L-M — USC is one extra call over N; semantic clustering is O(N^2) CPU embedding-sims on the already-loaded faiss embedder.",
+   "theory_hook": "tau (consistency-as-selector error) + delta_corr (agreement is only a valid signal if candidates are decorrelated — bounded by 'consensus != verification')",
+   "evidence": "arxiv 2311.17311 (USC) + 2407.02056 + semantic-entropy topic; caveat 2603.06612."
+  },
+  {
+   "name": "MBR reranking with embedding/WER utility (verifier-free)",
+   "what": "Select the candidate maximizing expected utility against the candidate pool, utility = faiss-embedding cosine (or negative cross-WER for ASR). Reranking-then-MBR to cut cost; centroid-MBR (CBMBR) to avoid full O(N^2).",
+   "lever_class": "reranking + selection",
+   "cost": "M — O(N^2) similarity on CPU embedder (GPU stays with llama-server); CBMBR reduces to O(N*clusters).",
+   "theory_hook": "tau (MBR selector error) + N* (KL-to-base bounded by regularized BoN-MBR)",
+   "evidence": "arxiv 2311.05263 (Model-Based MBR) + 2404.01054 (Regularized BoN-MBR, KL bound ties to Beirami)."
+  },
+  {
+   "name": "Unsupervised weak-verifier aggregation (FUSE / Weaver, zero labels)",
+   "what": "Combine multiple cheap verifier signals (self-certainty, cross-WER, MERaLiON verdict, retrieval score) via latent-variable weak-supervision weighting; FUSE additionally controls conditional DEPENDENCE between signals so the spectral aggregation is valid — no gold labels needed. Weights estimated on the unlabeled dev pool.",
+   "lever_class": "cross-model-verify (aggregation) + reranking",
+   "cost": "M — CPU aggregation over precomputed per-verifier scores; cost is the underlying verifier calls, not the aggregation.",
+   "theory_hook": "delta_corr (FUSE's dependency-control IS the decorrelation knob) + tau (aggregated selector error)",
+   "evidence": "arxiv 2604.18547 (FUSE, zero labeled data) + 2506.18203 (Weaver, prior-context: +12.3% over majority vote). Weaver already in our coverage; FUSE = the new delta."
+  },
+  {
+   "name": "Feature-stack calibrated selector (lightweight logistic on dev)",
+   "what": "Assemble a cheap feature vector per candidate {self-certainty, ASR cross-WER, answer-overlap/consistency, retrieval score, MERaLiON agree, semantic-entropy}, fit a tiny logistic/isotonic on the n=40 dev split to output a calibrated selection score. The practical 'put-it-together' verifier.",
+   "lever_class": "reranking (feature-based) + cross-model-verify",
+   "cost": "L — features are cheap/cached; one CPU logistic fit. This is the pragmatic aggregator if full FUSE spectral machinery is overkill for n=40.",
+   "theory_hook": "tau (selector) + delta_corr (features chosen to be decorrelated) + alpha (calibrated adoption)",
+   "evidence": "Weaver/FUSE aggregation principle (2506.18203/2604.18547); calibration 2505.16690; agreement-feature validity bounded by 2603.06612."
+  },
+  {
+   "name": "Zero-shot listwise LLM reranking of retrieved KB passages (RankGPT-style)",
+   "what": "Before answering, prompt frozen Qwen3-Omni (or MERaLiON) to listwise-rerank the top-k faiss-retrieved passages/keys (RankZephyr/RankVicuna prompt), then condition the answer on the reordered context. Improves the step-2 mock's retrieval ordering with no training.",
+   "lever_class": "reranking (retrieval) + search",
+   "cost": "M — one listwise call over top-k text on the resident server; sliding-window if k is large.",
+   "theory_hook": "recall-floor (better ordering raises effective retrieval recall) + alpha (whether to adopt retrieved context)",
+   "evidence": "arxiv 2312.02724 (RankZephyr) + 2309.15088 (RankVicuna) + ECIR'25 prompt-variations; listwise > pointwise."
+  },
+  {
+   "name": "Pessimistic / hedged Best-of-N cap (over-optimization guardrail)",
+   "what": "Cap N at the HedgeTune/BoP-optimal point and apply pessimism (lower-confidence-bound on verifier score, down-weight atypical candidates) so verifier reranking cannot collapse below the step-2 baseline as N grows. Wraps every reranker above.",
+   "lever_class": "gating (N* cap)",
+   "cost": "L — analysis/threshold logic only, no extra model calls.",
+   "theory_hook": "N* (the reward-KL-optimal budget cap) + tau (pessimism discount sized to verifier selector error)",
+   "evidence": "arxiv 2604.04648 (pessimism for BoN) + 2507.05913 (BoN KL/regret) + HedgeTune/BoP (prior context)."
+  },
+  {
+   "name": "In-Context Reranking via attention aggregation (ICR) — FLAGGED blocked-on-stack",
+   "what": "O(1) zero-shot reranker reading relevance off the frozen model's attention pattern to reorder faiss top-k; beats RankGPT-listwise on hard tasks. Included for completeness because it is the cheapest strong reranker in the literature.",
+   "lever_class": "reranking + search",
+   "cost": "H/BLOCKED — requires per-layer/head attention weights which the llama.cpp resident server does NOT expose. Would need a separate llama-cpp-python load with attention output or an HF forward pass (extra GPU residency). Not a drop-in on our current serving path.",
+   "theory_hook": "recall-floor + tau* (attention-derived relevance as gate)",
+   "evidence": "arxiv 2410.02642 (ICLR'25) + OSU-NLP In-Context-Reranking repo — validated on Mistral-7B/Llama-3.1-8B (open weights with attn access)."
+  },
+  {
+   "name": "Cross-model multi-agent debate/critique (highest-cost cross-verify)",
+   "what": "Qwen3-Omni proposes, MERaLiON-2 critiques, iterate 1-2 rounds, adjudicate (FC-MAD, training-free). Reserve for the hardest low-margin items only.",
+   "lever_class": "cross-model-verify",
+   "cost": "H — rounds x 2 models x candidates on one GPU; requires model-swap orchestration. Last-resort lever.",
+   "theory_hook": "delta_corr (two decorrelated frozen critics) + tau",
+   "evidence": "arxiv 2507.19090 (Debating Truth) + 2510.12697 (adaptive stability); failure modes 2505.19477 (bias amplification), 2606.10296 (confident liar)."
+  },
+  {
+   "name": "[COMPARISON-CLASS] Trained cross-encoder reranker / trained reward model",
+   "what": "A supervised cross-encoder (BGE/Jina reranker) or a trained scalar RM — the standard reranking baseline the training-free levers must beat. NOT a candidate (weight-training), listed as the comparison anchor.",
+   "lever_class": "comparison-class(RL-trained, not a candidate)",
+   "cost": "N/A — excluded by the no-weight-change constraint; runs only as an external comparison point.",
+   "theory_hook": "none (defines the ceiling the tau/delta_corr levers are measured against)",
+   "evidence": "LLM-reranking survey (techrxiv 176300630); RAG rerankers (Cohere/BGE/Jina)."
+  }
+ ],
+ "gaps": "SOURCING CONFIDENCE: I fetched full/partial text of 2502.18581 (self-certainty), 2507.12705 (AudioJudge), 2505.16690 (unsupervised calibrator). The budget-aware 2510.14913 fetch failed (stream aborted) — its 8x-compute-vs-self-consistency and single-forward-pass discriminative claims come from the search snippet + corroborating survey 2507.02076, so treat as medium-high confidence, not verbatim. Everything else is search-snippet level. SEVERAL 2026-DATED arXiv IDs (2604.18547 FUSE, 2604.04648 pessimism-BoN, 2602.13110 SCOPE, 2603.06612 consensus-not-verification, 2606.24648 ParaPairAudioBench, 2606.10296 confident-liar, 2606.15741 SC-reranking) are plausible for a July-2026 corpus but I verified only that abstract/pdf pages resolve, not their internal numbers — the load-bearing facts I attribute to them are the search-summary claims, flag for a second-pass fetch before Stage-2. The DACA/2505.16690 method-name and the exact 23.7%->8.6% ECE figure were partly reconstructed by the fetch's small model (it rendered 'Disagreement-Aware' vs the paper's actual framing) — the load-bearing takeaway (unsupervised post-hoc calibration on a held-out set can match labeled temperature scaling) is safe; the specific number is medium confidence. STACK-FEASIBILITY UNKNOWNS I could not resolve from web survey: (1) whether llama.cpp /completion reliably returns per-token logprobs for the Qwen3-Omni GGUF audio path (needed for self-certainty/MBR-KL) — must be verified empirically on our server; (2) MERaLiON-2 GGUF second-model residency cost on a single 5090 with Qwen3 already at -ngl 28 (concurrent vs model-swap) — the FREEZE_SHEET notes gpu_session.sh is currently hardcoded to the Qwen3 checkpoint, so cross-model verify needs the second-GGUF parameterization first; (3) ICR is confirmed blocked (no attention exposure via the resident server). NOT COVERED (out of DIM-2 scope, deferred to sibling dims): process reward models / step-level verification for multi-step spoken reasoning; RL-trained rerankers/rewriters/stopping (already in the 2a out-of-mock survey); embedding-kNN verifier variants (kNN-Whisper OOD-harm already in prior coverage). NUMBER-GROUNDING GAP: no paper I found reports verifier-reranking gains on a FROZEN 30B OMNI/audio backbone specifically over closed-book+mock-retrieval — all quantitative BoN/verifier gains are text/math (GSM8K/MATH/GPQA) or TTS-quality judging; the transfer to our speech-QA/ASR grid is a hypothesis to size at Stage-2, not an established number."
+}
