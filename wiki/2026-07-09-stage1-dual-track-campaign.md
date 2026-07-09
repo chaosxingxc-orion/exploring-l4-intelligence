@@ -34,8 +34,14 @@ P1 收口三文档 → P2 Owner 讨论门(冻结测量协议) → P3 前置工�
 | **δ_corr** 双系统去相关 | TH2a：regret ≤ B·blind-spot | `BlindSpot.lean` `total_regret_le`（已证界）；`avg_regret_tendsto_zero`（条件性） | generator/verifier 错误相关系数 | QA/MCQ 各集（双系统 = 同权重不同 context） |
 | **R** few-shot 可达界 | 上限定理：有界重加权抬不动过低概率答案 | `Reachability.lean` `too_improbable_unreachable`（**已证上限**——注意方向是限制注入而非支持注入） | few-shot 对输出分布的影响幅度 | minds14（intent ICL）、slurp（slot ICL）、SQuAD-zh |
 | **α** 采纳率/参数固执 | τ 大的机制解释（目前仅 docstring，非定理） | 无定理；经验 T9=0.237、T10 递送翻倍 0.175→0.35（**均无 CI，重测须补**） | 反事实采纳率 × 递送形式（flat vs 2-turn tool） | QA/MCQ 全部纳入集（T9 协议扩展） |
-| **召回下界** 检索质量 | τ* 定理的前件之一 | 无定理（作为显式假设进 τ* 定理） | 各嵌入器 × 各任务族 R@k / kNN 指标 | **全覆盖矩阵（§2）——同时裁决 H-a vs H-b** |
+| **召回下界** 检索质量 | τ* 定理的前件之一 | 无定理（作为显式假设进 τ* 定理） | 各嵌入器 × 各任务族 R@k / kNN 指标 | **全覆盖矩阵（§2）——同时裁决 H-a vs H-b**；squtr 原生 qrels + 4 档噪声梯度 = 现成量表 |
 | Beirami KL 界 | best-of-N 的 KL 信赖域率 | `BestOfN.lean:90` **唯一 sorry**；`kl_best_of_n_le`/`regret_O_sqrt_log`/`gain_le_of_hoeffding` 把硬内容作假设前件（已复核 CONFIRMED） | N-曲线间接校验 | 同 N* 行 |
+| **delivery-form** 递送形式（**新约束项候选**，2026-07-09 理论调研 D6 提出） | reach 对递送形式的单调性（flat vs 多轮/工具） | 不存在（候选定理 delivery_form_reach_monotonicity） | flat vs 2-turn 工具递送的采纳差 | K8 各集（T10 协议扩展 + 补 CI） |
+
+**2026-07-09 补充**：约束项台账的文献锚与 27 个可 Lean 化定理候选已由理论覆盖调研落账——
+见 `2026-07-09-theory-scheme-coverage.md`（147 claims、16C/8P/0R 验证、6 组文献空白 = 生态位；
+含 Beirami sorry 清欠路径、over-confidence 定理化组件 CDL/Chow/Confidence-Gate、
+Reachability 收敛半边候选、N* 内点最优存在性先例 HedgeTune/BoP）。
 
 **理论轨 Lean 工作单（Opus 执行，驱动 lean:lean-proof / lean:mathlib-build；只对 Windows 提交树
 `proofs/tfrl/`）**：① τ*>0 门控注入邻域收敛（负半+正半）；② N* 落到 best-of-N 算子；③ 清欠——
@@ -47,8 +53,17 @@ finder→adversarial-verify 工艺，产出带验证的引用台账。
 
 ## 2. 数据覆盖矩阵（底数 = E 盘机器盘存，2026-07-09）
 
-**底数核定（机器盘存，不信 manifest）**：39 个数据集在盘 = lock 28（全部 COMPLETE）+ gap 候选 7 +
-WS-D 候选 4；零无主目录。模型 18 个在盘 = lock 6 + 候选 12 全齐（**嵌入器对决候选池已就位**：
+> **2026-07-09 更新（本节被取代）**：owner 纠正后按全底数重做，三个 Opus agent 实地开盘勘察
+> 43 集，最终 **39 在盘 → 29 纳入 / 10 结构性排除**（uro-bench 等 7 集从排除翻为
+> include-subset；covost2/mmsu 因内容级缺失反转为排除；seed-tts-eval 改判 ASR 锚）。
+> 权威版见 `2026-07-09-coverage-dataset-taxonomy.md`（K1–K11 类型学 + 类型→方案表 +
+> 约束项测量落点映射 + 28 个薄 loader 清单）。模型侧权威版见
+> `2026-07-09-coverage-model-matrix.md`。下文原始矩阵仅作历史记录保留。
+
+**底数核定（机器盘存，不信 manifest）**：39 个数据集在盘 = lock 28（字节级 COMPLETE；**内容级
+另有 covost2/mmsu/fleurs-r 三例缺失，见 taxonomy 文档 §0**）+ gap 候选 7 + WS-D 候选 4；零无主
+目录。模型 18 个在盘 = lock 6 + 候选 12（**更正：emotion2vec-s 为 PARTIAL 须重取，见模型矩阵
+文档 §0.1**；其余嵌入器对决候选池已就位：
 GLAP 3.2G、LCO-Omni 3B/7B GGUF、Emotion2Vec-S、emotion2vec-plus-large、ERes2NetV2-zh、CAM++-zh、
 WavLM base+/large、MERaLiON-SE2、ReDimNet-b6、CLAP、omni-embed-nemotron-3b）。
 
@@ -67,7 +82,8 @@ WavLM base+/large、MERaLiON-SE2、ReDimNet-b6、CLAP、omni-embed-nemotron-3b�
 | 备定 | squtr（21G）、audio2tool、auditorybench-plusplus（任务定位与测量项在 P3 核定 loader 时一并定，**不许静默跳过**） | 待定 |
 | 可选 | cn-celeb2（73G，仅当 cn-celeb1 不够用） | SID 扩展 |
 
-loader 现状：**7 有 / ~19 无**——P3 的主工程量（多为 parquet/清单读取）。
+loader 现状：**7 有 / ~28 需建**（2026-07-09 全底数复评后口径）——P3 的主工程量（多为
+parquet/清单读取）。
 
 ### 2.2 显式排除清单（无 silent cap，每条带理由）
 
@@ -106,7 +122,8 @@ GPU 共驻：嵌入器默认走 CPU（既有先例），7B 级与 llama-server �
 ## 4. 工程前置（P3，Sonnet，讨论门后执行）
 
 优先级建议（owner 裁决位 +11）：**P0** = retrieve 侧强制 verdict 门（当前只写不查——任何新实验的
-前置）+ kb_snapshot 接入一切新跑；**P1** = 纳入清单 loader 补齐（~19 个）+ 嵌入器 loader
+前置）+ kb_snapshot 接入一切新跑；**P1** = 纳入清单 loader 补齐（~28 个，2026-07-09 全底数
+复评后的权威清单见 taxonomy 文档 §3）+ 嵌入器 loader
 （GLAP/E2V-S/ERes2NetV2/WavLM + nemotron 官方 API 修复 + llama.cpp embedding 导出探明）+
 llama.cpp SHA 钉扎 / GGUF hash 钉扎 / 采样参数显式化；**P2** = KB schema 演进
 （key_granularity/span/grain）+ lock 元数据修复（aime/seed-tts 误标、10 处 unpinned revision 注记）

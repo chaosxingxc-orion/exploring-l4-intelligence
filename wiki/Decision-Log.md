@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-07-09（续）· 覆盖阶段全景落账：模型/数据/理论三路调研收官（owner 定纪律：先覆盖、后收敛）
+
+**Decision.** Owner 连续三项纠正确立**覆盖阶段纪律**：①模型调研未充分覆盖（含嵌入器选型不能
+只排已下载的）；②数据集必须全覆盖、但 Stage-1 只需每集小规模采样 dev/test；③评测方案按
+"数据集类型→具体方案"成表、跟着 survey 与 lock 走；且**现在不收敛——模型、数据、理论三者
+调研清楚并完成后才可收敛**。据此执行六路 Opus 覆盖（+2 次断连重跑、1 次拆半），全部落账。
+
+**Deliverables（覆盖材料，无选型）.** ①[[2026-07-09-coverage-model-matrix]]：本地 18 模型
+全角色（nemotron-nano license 实为可商用 Open Model Agreement、架构分歧最大=最佳 δ_corr 候选
+但 NVFP4 栈未验证；moss=Qwen3 基座去相关打折；**emotion2vec-s 在盘 PARTIAL 须重取**）+ 本地外
+底座（空格 cell="zh-first×非Qwen×GGUF"，最近者 MERaLiON-2；**非 Whisper ASR ensemble 是更优
+编码器去相关素材**，CrispASR 36 后端 ggml hub）+ 嵌入器 67 条目全账（在盘14/可下13/方法15/
+未确认11/否决8/空白6；净新增下载建议仅 SENSE+Dasheng+CLSP ≈5-6GB）。
+②[[2026-07-09-coverage-dataset-taxonomy]]：45 集全判定（**39 在盘→29 纳入/10 结构排除**，
+7 集从旧排除翻回；**内容级 false-COMPLETE 普查：covost2 无音频、mmsu 无 gold、fleurs-r 仅
+12 语无 en/zh→ST 任务族全空**；squtr 实勘=原生 BEIR 语音检索基准+4 档噪声=τ/召回现成量表；
+audio2tool=离线可验证工具调用；seed-tts 改判 zh+en ASR 锚；audiomc 排除理由修正为
+rubric-judge 依赖）+ K1–K11 类型→方案统一表 + 约束项测量落点映射 + ~28 薄 loader 清单。
+③[[2026-07-09-theory-scheme-coverage]]（附录 95k 入 survey/）：6 维 147 claims、24 承重验证
+**16C/8P/0R**、**27 个可 Lean 化定理目标候选**全列（含清欠 Beirami sorry 的原文路径、
+over-confidence 定理化组件 CDL/Chow/Confidence-Gate、TARG 假设 τ* 待证=T-B、Reachability
+收敛半边、N* 内点最优先例 HedgeTune/BoP）、6 组文献空白=生态位（无门控收敛证明、无 δ_corr
+参数化选择定理、无 τ×N*×α 统一界）、**新约束项候选 delivery-form**。
+④战役设计书台账更新（文献锚+delivery-form+权威口径指针）。
+
+**Quality gate.** Opus 完整性对抗检查逐项普查（18 模型/45 集/147 claims/24 verdicts/8 修正
+全对上），抓出 2 BLOCKER（定理表漏 1/27、不在盘计数 5→6）+ 6 MINOR（含存档易失性）——
+全部修复，5 份原始勘察档晋升入 `wiki/survey/`。**收敛门（Q1/Q2 选型、H-a/H-b 裁决设计、
+lock 增补、T11 冻结）待 owner，本轮所有推荐仅为选型材料。**
+
 ### 2026-07-09 · 三锚点增量再定级 + Q1/Q2 决策单 + Stage-1 双轨闭环战役设计（A2 再定级生效；三条方法论要求立规；分工硬化）
 
 **Decision.** Owner 复提三锚点（A1 speech-key/异构-value 组织、A2 "已证外接优于 rollout"、A3 数据
