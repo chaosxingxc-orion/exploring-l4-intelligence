@@ -1,13 +1,13 @@
 {
   "_comment": "FROZEN dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Datasets are not in git; this records the exact local snapshot. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md.",
   "frozen": true,
-  "generated": "2026-06-24 (amended 2026-07-03: + qwen3-omni-30b-a3b-instruct-gguf)",
+  "generated": "2026-06-24 (amended 2026-07-03: + qwen3-omni-30b-a3b-instruct-gguf; amended 2026-07-09: - qwen3-omni-30b-a3b-instruct [HF int4, GGUF twin retained]; amended 2026-07-09: - minicpm-o-4_5, - moss-audio-8b-instruct [llama.cpp-stack unusable, deferred])",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
   "totals": {
     "locked_datasets": 28,
-    "models": 6,
-    "total_bytes": 473554985912,
-    "total_h": "441.0G"
+    "models": 3,
+    "total_bytes": 409103904696,
+    "total_h": "381.0G"
   },
   "amendments": [
     {
@@ -24,6 +24,28 @@
           "note": "Enumerating (not changing) the 10/28 dataset entries whose \"revision\" is unpinned/content-fingerprint-only rather than a real pinned commit/tag -- i.e. \"revision\" contains \"unpinned -- content-fingerprinted\" (modelscope master, no tag) or \"unknown (no local metadata -- content-fingerprinted)\" (source gave no version metadata at all). These are frozen the same way as every other entry (size_bytes + files fingerprint), just without an upstream revision string to re-pin against.",
           "entries": ["librispeech", "covost2", "minds14", "air-bench", "voicebench", "tau2-bench",
                       "seed-tts-eval", "aime24", "aime25", "aime26"]
+        }
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "task": "A3 (drive-move ops: dedupe qwen3-omni int4 vs. GGUF)",
+      "changes": [
+        {
+          "kind": "model-removal",
+          "note": "owner decision 2026-07-09: the GGUF twin (qwen3-omni-30b-a3b-instruct-gguf, Q8_0 + bf16 mmproj) is the drivable copy for W1 (llama.cpp best-of-N engine); one copy of the same model suffices, so the HF int4 AutoRound copy (models/qwen3-omni-30b-a3b-instruct, Intel/Qwen3-Omni-30B-A3B-Instruct-int4-AutoRound, 26284321011 bytes / 24.5G) was deleted from speechrl-data. GGUF twin retained untouched. Entry removed from the models array below; totals updated models 6->5, total_bytes -26284321011.",
+          "entries": ["qwen3-omni-30b-a3b-instruct"]
+        }
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "task": "A5 (ops: llama.cpp-stack roster finalization -- delete blocked models)",
+      "changes": [
+        {
+          "kind": "model-removal",
+          "note": "owner ruling 2026-07-09 — llama.cpp-unusable [minicpm audio fork-only tc-mb/llama.cpp-omni; moss no GGUF/arch support], deferred-not-deleted, re-download channels: openbmb/MiniCPM-o-4_5 + official openbmb/MiniCPM-o-4_5-gguf when mainline audio lands; OpenMOSS/MOSS-Audio HF; models count 5->3. Local copies deleted from speechrl-data (minicpm-o-4_5: 20048636942 bytes / 18.7G; moss-audio-8b-instruct: 18118123263 bytes / 16.9G; combined 38166760205 bytes / 35.5G). Entries removed from the models array below; totals updated models 5->3, total_bytes -38166760205.",
+          "entries": ["minicpm-o-4_5", "moss-audio-8b-instruct"]
         }
       ]
     }
@@ -564,23 +586,6 @@
   ],
   "models": [
     {
-      "name": "qwen3-omni-30b-a3b-instruct",
-      "kind": "model",
-      "local_subdir": "models/qwen3-omni-30b-a3b-instruct",
-      "source": {
-        "kind": "modelscope",
-        "id": "Intel/Qwen3-Omni-30B-A3B-Instruct-int4-AutoRound"
-      },
-      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
-      "status": "COMPLETE",
-      "size_h": "24.5G",
-      "size_bytes": 26284321011,
-      "files": 23,
-      "task": "-",
-      "factor_family": "model",
-      "note": "INT4 generation backbone (W1)"
-    },
-    {
       "name": "qwen3-omni-30b-a3b-instruct-gguf",
       "kind": "model",
       "local_subdir": "models/qwen3-omni-30b-a3b-instruct-gguf",
@@ -598,23 +603,6 @@
       "note": "Q8_0 GGUF + bf16 mmproj for llama.cpp -- the W1 genuine best-of-N engine (30B on 24 GB via -ngl 28); file-selective fetch via scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull >110 GB deliberately avoided)"
     },
     {
-      "name": "moss-audio-8b-instruct",
-      "kind": "model",
-      "local_subdir": "models/moss-audio-8b-instruct",
-      "source": {
-        "kind": "modelscope",
-        "id": "openmoss/MOSS-Audio-8B-Instruct"
-      },
-      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
-      "status": "COMPLETE",
-      "size_h": "16.9G",
-      "size_bytes": 18118123263,
-      "files": 30,
-      "task": "-",
-      "factor_family": "model",
-      "note": "generation comparator (W1)"
-    },
-    {
       "name": "nemotron3-nano-omni-nvfp4",
       "kind": "model",
       "local_subdir": "models/nemotron3-nano-omni-nvfp4",
@@ -630,23 +618,6 @@
       "task": "-",
       "factor_family": "model",
       "note": "NVFP4 generation backbone (W1)"
-    },
-    {
-      "name": "minicpm-o-4_5",
-      "kind": "model",
-      "local_subdir": "models/minicpm-o-4_5",
-      "source": {
-        "kind": "modelscope",
-        "id": "OpenBMB/MiniCPM-o-4_5"
-      },
-      "revision": "master (modelscope; unpinned -- content-fingerprinted)",
-      "status": "COMPLETE",
-      "size_h": "18.7G",
-      "size_bytes": 20048636942,
-      "files": 53,
-      "task": "-",
-      "factor_family": "model",
-      "note": "GGUF/raw generation comparator (W1)"
     },
     {
       "name": "omni-embed-nemotron-3b",

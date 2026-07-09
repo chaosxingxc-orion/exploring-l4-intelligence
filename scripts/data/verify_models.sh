@@ -207,7 +207,7 @@ if [ -d "$MODELS" ]; then
     case "$n" in
       campplus-zh|eres2netv2-zh) reason="ModelScope source (not HF API-checkable)" ;;
       redimnet-b6) reason="github-release source (not HF API-checkable)" ;;
-      qwen3-omni-30b-a3b-instruct|moss-audio-8b-instruct|nemotron3-nano-omni-nvfp4|minicpm-o-4_5|omni-embed-nemotron-3b)
+      nemotron3-nano-omni-nvfp4|omni-embed-nemotron-3b)
         reason="ModelScope source (not HF API-checkable)" ;;
     esac
     printf '  %-30s %s\n' "$n" "$reason"
