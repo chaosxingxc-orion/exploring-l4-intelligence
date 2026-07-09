@@ -20,6 +20,18 @@
 #   QWEN_OMNI_GGUF_QUANT  weight filename  (default Q8_0; set to ...-Q4_K_M.gguf for the faster/smaller one)
 #   QWEN_OMNI_MMPROJ      mmproj filename  (default bf16)
 #   SPEECHRL_HF_ENDPOINT  HF mirror        (default https://hf-mirror.com)
+#   SPEECHRL_SKIP_GGUF_VERIFY  set to 1 to skip the sha256 verification step below
+#
+# Hash pin (2026-07-09, A4/N17): sha256sum of the two default-quant files as they sit on-disk at
+#   /mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data/models/qwen3-omni-30b-a3b-instruct-gguf/
+# on the box that produced the W1 best-of-N / p2-baseline results (previously only the FILENAME was
+# pinned here — no content check, so a truncated/corrupt/silently-re-quantized re-download of the same
+# name would pass unnoticed). Verification below only fires when WEIGHT/MMPROJ equal these exact
+# default filenames; override QWEN_OMNI_GGUF_QUANT/QWEN_OMNI_MMPROJ to a different quant and the check
+# is skipped (no pin exists for it yet) — add one the same way once you've confirmed a new file is good:
+#   sha256sum "$DEST"/<file>.gguf
+QWEN_OMNI_GGUF_Q8_0_SHA256="${QWEN_OMNI_GGUF_Q8_0_SHA256:-8a50e5a7d29ae6a28fea9ca45e3bb0a142e76ec07e6787a7703cd498eb08ffaa}"
+QWEN_OMNI_MMPROJ_BF16_SHA256="${QWEN_OMNI_MMPROJ_BF16_SHA256:-f0dfe825fb692d426362b1ac79678fc08daa4758f7151526cad110515f122883}"
 #
 # Usage (inside WSL2 Ubuntu-24.04):
 #   bash /mnt/d/chao_workspace/exploring-l4-intelligence/scripts/data/fetch-qwen3-omni-gguf.sh
@@ -72,9 +84,31 @@ dl_one(){ # filename
   hf download "$REPO" "$f" --local-dir "$DEST"
 }
 
+verify_one(){ # filename expected_sha256
+  local f="$1" expected="$2" actual
+  [ -n "$expected" ] || { log "no pinned hash for $f (non-default quant/mmproj) — skipping verify"; return 0; }
+  [ "${SPEECHRL_SKIP_GGUF_VERIFY:-0}" = "1" ] && { log "SPEECHRL_SKIP_GGUF_VERIFY=1 — skipping verify for $f"; return 0; }
+  [ -s "$DEST/$f" ] || { log "cannot verify $f: file missing"; return 1; }
+  log "verifying sha256 of $f (this reads the whole file — can take a few minutes for Q8_0) ..."
+  actual="$(sha256sum "$DEST/$f" | cut -d' ' -f1)"
+  if [ "$actual" = "$expected" ]; then
+    log "sha256 OK: $f"
+    return 0
+  fi
+  log "sha256 MISMATCH for $f: expected $expected, got $actual — file is corrupt/truncated/different; re-download it"
+  return 1
+}
+
 rc=0
 dl_one "$WEIGHT" || rc=1
 dl_one "$MMPROJ" || rc=1
+
+# Only the two default-quant filenames have a pinned hash (see header comment); anything else
+# (QWEN_OMNI_GGUF_QUANT/QWEN_OMNI_MMPROJ overridden) is fetched but not hash-verified here.
+[ "$WEIGHT" = "Qwen3-Omni-30B-A3B-Instruct-Q8_0.gguf" ] \
+  && { verify_one "$WEIGHT" "$QWEN_OMNI_GGUF_Q8_0_SHA256" || rc=1; }
+[ "$MMPROJ" = "mmproj-Qwen3-Omni-30B-A3B-Instruct-bf16.gguf" ] \
+  && { verify_one "$MMPROJ" "$QWEN_OMNI_MMPROJ_BF16_SHA256" || rc=1; }
 
 log "done (rc=$rc). files in $DEST:"
 ls -lh "$DEST"/*.gguf 2>/dev/null || true

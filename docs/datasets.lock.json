@@ -9,6 +9,25 @@
     "total_bytes": 473554985912,
     "total_h": "441.0G"
   },
+  "amendments": [
+    {
+      "date": "2026-07-09",
+      "task": "A4 (reproducibility pinning debts)",
+      "changes": [
+        {
+          "kind": "task-tag-fix",
+          "note": "aime24/aime25/aime26 and seed-tts-eval were misfiled as \"task\": \"asr\" (a copy/paste leftover from the modelscope-manual fetch template; their factor_family was always correct). Corrected in place: aime24/aime25/aime26 -> \"task\": \"text-reasoning-eval\"; seed-tts-eval -> \"task\": \"tts-eval\". No revision/size/source field was touched.",
+          "entries": ["aime24", "aime25", "aime26", "seed-tts-eval"]
+        },
+        {
+          "kind": "unpinned-revision-audit",
+          "note": "Enumerating (not changing) the 10/28 dataset entries whose \"revision\" is unpinned/content-fingerprint-only rather than a real pinned commit/tag -- i.e. \"revision\" contains \"unpinned -- content-fingerprinted\" (modelscope master, no tag) or \"unknown (no local metadata -- content-fingerprinted)\" (source gave no version metadata at all). These are frozen the same way as every other entry (size_bytes + files fingerprint), just without an upstream revision string to re-pin against.",
+          "entries": ["librispeech", "covost2", "minds14", "air-bench", "voicebench", "tau2-bench",
+                      "seed-tts-eval", "aime24", "aime25", "aime26"]
+        }
+      ]
+    }
+  ],
   "datasets": [
     {
       "name": "librispeech",
@@ -487,7 +506,7 @@
       "size_h": "357.4M",
       "size_bytes": 374790004,
       "files": 9,
-      "task": "asr",
+      "task": "tts-eval",
       "factor_family": "tts-eval",
       "note": "Seed-TTS eval set"
     },
@@ -504,7 +523,7 @@
       "size_h": "16K",
       "size_bytes": 16243,
       "files": 2,
-      "task": "asr",
+      "task": "text-reasoning-eval",
       "factor_family": "text-reasoning-eval",
       "note": "AIME 2024 math eval"
     },
@@ -521,7 +540,7 @@
       "size_h": "31K",
       "size_bytes": 32121,
       "files": 3,
-      "task": "asr",
+      "task": "text-reasoning-eval",
       "factor_family": "text-reasoning-eval",
       "note": "AIME 2025 math eval"
     },
@@ -538,7 +557,7 @@
       "size_h": "18K",
       "size_bytes": 18005,
       "files": 2,
-      "task": "asr",
+      "task": "text-reasoning-eval",
       "factor_family": "text-reasoning-eval",
       "note": "AIME 2026 math eval"
     }
