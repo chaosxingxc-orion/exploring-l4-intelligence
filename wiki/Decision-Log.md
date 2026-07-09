@@ -6,6 +6,25 @@
 
 ---
 
+### 2026-07-09（续3）· Stage-1 实验战役定纲：三步走获批开跑（基线锁定 → mock agentic 对比 → TFRL top-N + Lean 论证）
+
+**Decision.** Owner 定 Stage-1 实验三步结构并逐项裁定：①四底座+下 MERaLiON-2（license 先核），
+nemotron 不许静默暂缓（Step 0 限时尝试）；②qwen3-omni HF int4 删除（GGUF 孪生留一份）；
+③Step 1 三波推进；④Step 2 mock 严格无 RL（step3−step2 delta 归因干净）；⑤模型 22/22 与
+数据集 45 集**双全覆盖台账**、每步销号（owner 连续追问补齐：模型覆盖、嵌入器选型覆盖、
+数据集覆盖分析、step 2 方案空间充实——mock 的组织×加载方案空间本身是被对比对象）。
+设计全文 [[2026-07-09-stage1-three-step-experiment-design]]。
+
+**关键设计点.** Step 2 拆 2a 前置调研（多模态知识组织/加载 2025+，survey-first）/ 2b 方案
+空间底账（8 原语、key 4×value 4 组织、检索 5×查询 3×递送 4）/ 2c 预注册削减网格；mmsu
+因元数据补齐从排除翻回纳入（K8 波 1）；ST 任务族空格留 step-1 冻结会裁决；step 3 的 Lean
+论证直接回答 owner 核心问题"多模态协同是否需要改进"（负半=mock 缺陷/正半=约束下 TFRL 改进）。
+
+**Execution kick-off（本日）.** Step-0 workflow 开跑（并行段：license/gpu_session/删 HF int4/
+meld+air-bench 解堵；GPU 段严格串行：HF 双底座冒烟→30B embedding 验证→nemotron 限时尝试→
+MERaLiON 冒烟）；Step-2a 调研 workflow 开跑（4 维 Opus finder + 对抗验证）。下一 owner 触点 =
+Step-1 判据冻结会（模板/n/指标/ST 豁免裁决）。
+
 ### 2026-07-09（续2）· P3-prep 收官：欠账清零 + 环境就绪（owner："先把欠账和环境准备好，之后讨论实验设计"）
 
 **Decision.** Owner 批准收敛门材料后指示先清欠账备环境、实验设计另场讨论。执行 14-agent 三段
