@@ -125,7 +125,7 @@
     Across-seed paired t-CI on the dev-selected pooling delta, five dependent runs (not independent
     replicates — same cohort/task reused across "seeds").
   supersedes: null
-  superseded_by: null
+  superseded_by: emotion_pool_grouped_v1 (C-W4-EMO-GROUPED)
   invalid_reason: null
   adjudicated_on: 2026-07-11
   reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
@@ -146,7 +146,7 @@
     Linear-probe accuracy for speaker identity from the frozen embedding vs. chance baseline
     (chance = 1/n_speakers ~= 0.011).
   supersedes: null
-  superseded_by: null
+  superseded_by: speaker_probe_restatement (C-W4-PARA-RESTATED)
   invalid_reason: null
   adjudicated_on: 2026-07-11
   reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
@@ -366,3 +366,45 @@
     orthogonal to this overlap. No multiplicity correction across the 7 reported deltas yet.
   adjudicated_on: 2026-07-11
   reviewer: "Opus per-repair verifier (a2bf4e5) + coordinator"
+
+- claim_id: C-W4-EMO-GROUPED
+  claim_text: >
+    Under speaker-grouped GroupKFold(5) evaluation over the full CREMA-D corpus (7442 clips /
+    91 speakers), the weight-free attentive-statistics pooling readout shows a small, reliable
+    emotion-accuracy gain over mean pooling: pooled delta +0.0270, cluster(=speaker) bootstrap
+    95% CI [+0.0141, +0.0401] (excludes 0), AND bounded below the pre-declared SESOI of 0.05.
+  status: directional
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_grouped_v1.json
+  code_commit: d04bb89
+  metric_definition: >
+    Paired per-clip accuracy delta (sel audio_attn vs base audio mean-pool), kNN(k=5) probes,
+    layer dev-selected on inner speaker-grouped split of train speakers only; pooled out-of-fold.
+  supersedes: C-W4-EMO
+  superseded_by: null
+  invalid_reason: null
+  caveat: >
+    Opus verification 2026-07-11 ACCEPT: group integrity, recompute, leak-free inner selection,
+    SESOI discipline all PASS; two folds individually significant, three span 0. Statistically
+    reliable but practically below SESOI — does not by itself justify deployment. Single fold-seed;
+    content-correlated features partially present at L16 (recorded per fold). Stage-1 grade.
+  adjudicated_on: 2026-07-11
+  reviewer: "Opus per-repair verifier (a5e4997) + coordinator"
+
+- claim_id: C-W4-PARA-RESTATED
+  claim_text: >
+    The frozen omni embedding is NOT speaker-free: speaker readout is low in absolute terms
+    (~0.033 vs chance 0.011, ~3x) but 2/3 seeds' stored bootstrap CIs exclude chance from below.
+    'No speaker information / never written / measured-zero readout' wording is retired.
+  status: directional
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json
+  code_commit: d04bb89
+  metric_definition: >
+    Pure arithmetic restatement over the frozen paralinguistic_negative_probe.json (sha256-matched);
+    per-seed superiority CIs vs chance; conservative n=3 t-CI flagged directional alongside.
+  supersedes: C-W4-PARA
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "Opus per-repair verifier (a5e4997) + coordinator"
