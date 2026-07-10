@@ -168,7 +168,7 @@
   metric_definition: >
     Paired accuracy delta, policy arm vs. raw-schema baseline arm, MInDS-14 tool/intent selection.
   supersedes: null
-  superseded_by: null
+  superseded_by: minds14_toolintent_v2 (C-MINDS-V2)
   invalid_reason: >
     Invalid as a zero-shot or mechanism claim: (1) transductive — the "policy" uses a fixed 3-shot/
     class support built from held-out EVAL rows, not from a train-only split, so it is not zero-shot;
@@ -340,3 +340,29 @@
     G6 (theory/implementation-parity gate) status: operator-linked theorems = 0; no executable
     conformance test yet ties the Python selector to the Lean operator example-by-example. Treat any
     paper sentence of the form "Lean proves our selector converges" as unsupported until G6 closes.
+
+- claim_id: C-MINDS-V2
+  claim_text: >
+    Clean MInDS-14 factorial (card_pool 126 / eval 437 disjoint, 3 disjoint support draws):
+    naive 0.712; instruction-only (true zero-shot) 0.467 — a SIGNIFICANT REGRESSION of -0.245
+    [-0.286,-0.201]; cards-only 0.958 (+0.246); instruction+cards 0.973 (+0.262). The former
+    "+0.126 policy gain" was card-factor-driven and transductive; the pure instruction-on-cards
+    effect is only +0.015.
+  status: directional
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_v2.json
+  code_commit: 9ead4d4
+  metric_definition: >
+    Acc@1 per arm on the 437-row eval set; paired bootstrap deltas (seed 42, n=1000); pooled over
+    3 disjoint support draws for card arms.
+  supersedes: C-MINDS-POLICY
+  superseded_by: null
+  invalid_reason: null
+  caveat: >
+    Opus verification 2026-07-11 ACCEPT-with-notes: split byte-identical on independent rebuild;
+    all numbers recompute to 1e-9; provenance hashes genuine. Scripted-corpus surface overlap
+    (9 card texts == an eval transcript) contributes ~3% of the card advantage (+3/107 hits) —
+    card-arm figures are not a clean generalization number; the zero-shot regression headline is
+    orthogonal to this overlap. No multiplicity correction across the 7 reported deltas yet.
+  adjudicated_on: 2026-07-11
+  reviewer: "Opus per-repair verifier (a2bf4e5) + coordinator"
