@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 dataset-anchored deliverable (workflow wf_eecec38b, 6 capability + 1 probe + 2 verify + 4 synth agents). SUPERSEDES the wf_a99e2e75 pass on the same topics (this one is grounded in the actual 28-dataset inventory and uses the three-column organizational-form cut, not the cascade subtraction). Adversarial + data-grounding verified; hypothesis-grade until Stage-2. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 An omni agentic system is a **frozen** speech/omni multimodal LLM embedded in an inference-time agent scaffold — controller, tools/skills, memory, knowledge/RAG, and verifier — steered only by **reward-guided, training-free** means (no weight or structure change) to activate the model's pretrained knowledge.
 
 ## Organizational-form subtraction — the method

@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 dataset-anchored deliverable (workflow wf_eecec38b, 6 capability + 1 probe + 2 verify + 4 synth agents). SUPERSEDES the wf_a99e2e75 pass on the same topics (this one is grounded in the actual 28-dataset inventory and uses the three-column organizational-form cut, not the cascade subtraction). Adversarial + data-grounding verified; hypothesis-grade until Stage-2. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # GAP re-evaluation (data-anchored)
 
 **Stage 1 · problem-definition deliverable · 2026-07-06.** Re-ranks the prior 7-gap menu by the product **[organizational-form novelty] × [data-tier feasibility (T1>T2>T3)] × [training-free frozen fit]**, folding in the citation- and data-grounding-verifier corrections. All evidence is hypothesis-grade (Stage-1); internal numbers trace to named run artifacts (`p6_perception_delta.py`, `dec_synthesis.json`, `E10/E10b`, `M5`, `T6`), external claims to arXiv IDs. Residual uncertainty (esp. post-cutoff 2026 IDs) is marked at the end.

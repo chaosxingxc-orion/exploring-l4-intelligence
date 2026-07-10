@@ -5,6 +5,8 @@ stage: 1-argumentation + boundary-clean directional 实验 + Lean 理论(sorry-f
 status: "取代被泄漏污染的旧结论。所有经验证据 boundary-clean(audio 输入 + 无 gold 泄漏)。覆盖:4 个 semantic 集 + proto-agentic;full-agentic 记为离线不可行。directional;须 powered 复现。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # E6 最终结论(在"无数据泄露 + 输入不越界"前提下,论据充足)
 
 > 前提兑现:所有经验证据都满足两条硬约束——输入=音频、KB/注入不含本题 gold(用答案擦除 / 反事实 A′ 两种干净手段各自把关)。全部 directional(n≤60/集)。

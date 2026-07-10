@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Settled premise — frozen omni models and shallow speech signals (speaker / emotion)
 
 > Consolidation of existing evidence (zero new experiments), per the owner's Stage-1 directive:

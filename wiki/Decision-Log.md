@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-11（续11）· 外部对抗审计核验成立 → stop-the-line + G0 主问题裁定 + wiki 治理（owner 四项全签）
+
+**Facts（先记两笔收官）.** ①波 3 收官：8/8 格批量化跑完（2.11× 实测、A/B 0/40 翻转），Step-1
+网格**关账 76/76 数据条目**（W1 `07bbc66`）；②重抽验证格通过：aishell-1 disjoint dev 40/40
+（mean=0.8567 CI[0.817,0.892]，parallel=4），重抽工具链活体验证成立——但全量 ~65 格重跑**未启动
+即被本条暂停**（见下，避免划分单位返工）。
+
+**Decision（owner，据 [[2026-07-11-stage1-audit-response-and-rulings]] 全文）.** 外部审计
+（[[2026-07-10-stage1-adversarial-research-audit]]）经 6 个 Opus 代理对照 HEAD 逐条核验：
+**34 项主张 32 CONFIRMED / 1 STALE / 1 PARTIAL / 0 REFUTED**——事实层面成立，采纳如下：
+①**stop-the-line**：Phase-A（核验实锤**当前不可执行**，4 个独立致命阻塞，连 ref-config 都因
+query-embedder auto 回退 CLAP 而检索不通）、Step-3 新批跑、65 格重抽重跑全部暂停，先工程/统计
+地基、G2 全臂 E2E green 再开跑；已有 Step-1 数字保留 hypothesis-grade。②**G0 主问题=当前战役**：
+primary = "冻结 qwen3 + 清白 KB 下，speech-keyed 知识组织×检索×递送 + label-free selector 能实现
+oracle headroom 的多大比例 ρ"；W4 按审计 §7.1 重定义为独立线不共享 headline。③**主张与术语改述
+全收**：W4 弃 disentanglement 降级 L0/L1；W1 headline="oracle headroom 真实、deployable selector
+未实现"；论文面术语改 **weight-frozen reward-guided inference-time optimization**（内部保留 TFRL
+缩写+首处定义）。④**wiki 治理标准方案**：8 处主事实漂移实锤（含续10 台账 35/140 vs 代码 34/136、
+网格草案"①–⑤已全部完成"失实——簿记按代理报告入账未经 E2E 门，本条承认并由 G2 根治），新建
+wiki/archive/ 收 51 件、LOG 原地挂横幅、4 处 CANON 修漂移、**每次战役收官即归档**成为固定动作。
+
+**Consequences.** 执行票：#25 Phase-2 工程必修（Sonnet）→ #26 统计地基 group-split/cluster
+bootstrap（#23 重跑波解除条件）→ #27 operator-linked 理论重写 → #28 调研 86 条 load-bearing
+全量核验 → #29 W4 fresh proposal。G0 claim tree（primary/secondary estimands、kill criteria、
+不再追逐清单）签署于答复文档 §4。
+
 ### 2026-07-10（续10）· Step-2 判据冻结（owner 全签）+ 批量化获批 + dev/test 全部重抽令
 
 **Decision（owner）.** ①批量化推理获批：-np 4 -c 16384 入冻结协议（n_parallel/cache_ram 写入

@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 WS-A deliverable (workflow wf_fbbba6a0, 11 system + 2 verify + 2 synth agents; recovered via resume after a mid-run agent hang). Adversarial + citation verified; hypothesis-grade. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 > ⚠️ **概念归档更正(2026-07-06).** 本文是**知识(Knowledge)元件**的验证契约(H0 headroom / H1 音频 key vs 转写 key / pillar-d 训练无关 RL 选择),曾错标为"记忆"。见 [[2026-07-06-capability-taxonomy-knowledge-skill-memory]] §5。**记忆(③ 实例召回)与技能(② 任务模板)未在此覆盖,需在新 taxonomy 下另立。**
 
 I have everything needed: the locked design, the Information-Boundary Guard's four questions, the in-house perception-delta result (n=60: SQuAD-zh +0.283 SIG, MMAU-mini +0.117 n.s., VocalBench-zh 0.0 n.s.), and the 11-system comparison with its verification corrections. Here is the deliverable.

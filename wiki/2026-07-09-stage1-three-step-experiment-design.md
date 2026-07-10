@@ -1,5 +1,9 @@
 # 2026-07-09 · Stage-1 实验战役设计：三步走（owner 定纲并批准）
 
+> **2026-07-11 注**：本文"四底座/4(+1) 底座阵容"已被 Decision-Log 续8 主模型单一化取代（qwen3-omni-30b
+> 唯一主底座；MERaLiON 仅为 step-3 封闭形态验证器候选）；开跑前置另受续11 stop-the-line 与 G0 裁定约束。
+> 其余设计仍为现行结构。
+
 > **性质**：Stage-1 实验设计记录（owner 2026-07-09 定纲、逐项裁定后批准执行）。
 > 配套：覆盖三文档（model-matrix / dataset-taxonomy / theory-scheme-coverage）、
 > 双轨战役设计书、Q1/Q2 备忘录。**每步开跑前判据冻结（prereg），每步收尾对模型/数据集

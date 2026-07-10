@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 2026-06-24 · emotion-pooling · CREMA-D · Operator-A sample-level gain
 
 > Validation archive (naming `yyyy-mm-dd-验证方向-数据集-实验目的`). Index: [[Validation-Experiment-Matrix]].

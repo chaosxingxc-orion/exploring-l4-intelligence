@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 T1/WS-1-2-3 deliverable (workflow wf_8b59da73, 9 research + 2 verify + 2 synth). Effect-over-novelty; citation-verified; hypothesis-grade. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Agentic-RAG Landscape, Baselines, and Omni-Speech Applicability
 
 Stage-1 problem-definition deliverable · WS-1 / WS-2 / WS-3 · 2026-07-06

@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "D2 (v2, post-D3-review). Formal Stage-1 survey substantiating the elements-vs-usage framework (D0). Revised per the 5-persona review (2026-07-06-review): thesis re-scoped contract-relative, decoding family confronted, 2505.24347 and p6 over-claims corrected, Lean reframed + a convergence theorem added. Feeds the owner problem-selection (K/T9)."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # What a Frozen Omni Agentic System Can and Cannot Gain
 
 **An elements-vs-usage survey of 2025+ multimodal/speech agent systems, with a machine-checked structure and directional in-house evidence.**

@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 2026-06-24 · Training-free RL validation run — master log
 
 > Autonomous validation run (owner asleep). Goal: complete all waves; validate training-free RL on the

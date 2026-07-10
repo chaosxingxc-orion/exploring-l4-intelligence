@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 dataset-anchored deliverable (workflow wf_eecec38b, 6 capability + 1 probe + 2 verify + 4 synth agents). SUPERSEDES the wf_a99e2e75 pass on the same topics (this one is grounded in the actual 28-dataset inventory and uses the three-column organizational-form cut, not the cascade subtraction). Adversarial + data-grounding verified; hypothesis-grade until Stage-2. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Stage-1 Deliverable — Testable-Now Probes + Data-Construction Spec
 
 **Stage:** 1 (problem definition). **Grade:** all in-house numbers below are hypothesis-grade (small-n, directional-only; re-establish at Stage-2). **Object of study:** a frozen omni (speech/audio) MLLM embedded in an agent scaffold (controller, tools/skills, memory, knowledge/RAG, verifier) — inference-time, reward-guided, no weight/structure change.

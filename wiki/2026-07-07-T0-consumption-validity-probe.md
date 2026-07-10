@@ -5,6 +5,8 @@ stage: 1-directional
 status: "Stage-1 directional (n=40×2, single-touch, NOT significance-bearing). WS-0 of the knowledge track. Boundary-clean (gold-as-reference = ceiling probe only). Owner review pending; wiki-sync deferred。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # T0 有效性探针 —— 结果
 
 **Why.** 综述里"语音-LLM 不 fine-tune 就用不好检索知识"(MARS/RASST/VoxMind)是在 **2025→2026-04 模型**上观察到的;我们的基座是 **Qwen3-Omni(2026-04/05,更强)**。本探针在**我们的实际模型**上重验这条承重前提(directional-only)。

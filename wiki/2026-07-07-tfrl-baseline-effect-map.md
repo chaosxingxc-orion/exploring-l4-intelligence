@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 T1/WS-1-2-3 deliverable (workflow wf_8b59da73, 9 research + 2 verify + 2 synth). Effect-over-novelty; citation-verified; hypothesis-grade. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 All references grounded. The map's code-home targets are real: `common/src/speechrl_common/rl/decode.py` (`best_of_n`, `soft_bon_select`, `plurality_gate` margin gate, `mbr`, `kl_best_of_n_bound` = the N* budget cap), `rl/embedding_metrics.py` (`retrieval_reward`, `recall_at_k`, `mean_reciprocal_rank` = decorrelated omni-embed relevance), `rl/reward.py` (verifiable `asr_reward`/`exact_match_reward`), W4 `tasks/rag_answer.py` (top-k from ASR/omni/RRF → grounded answer → rule-key + constrained judge), and W4 `policies/accept_gate.py` (admission gate with paired-bootstrap delta). T0 (`2026-07-07-T0-consumption-validity-probe.md`) = GO, redirected to utilization (gating + injection/use). Here is the deliverable.
 
 ---

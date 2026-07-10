@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 2026-06-25 · Cross-team synthesis — training-free RL feasibility across mainstream semantic speech tasks
 
 > Goal (owner, autonomous run): *complete all waves; test mainstream semantic tasks incl. ASR, SLU,

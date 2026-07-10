@@ -1,5 +1,13 @@
 # 2026-07-10 · Step-2 网格草案（冻结会材料——2a 调研 × 2b 底账合并，不预执行）
 
+> **2026-07-11 更正（append-only，正文保持原样）**：①§6.7 "工程前置①–⑤已全部完成"经核验不实——Phase-A
+> 当前不可执行（无 --execute 路径、runner/builder source 命名 4vs3 字段错配、qwen3-omni-hidden vs
+> qwen3-omni-own token 错配、query embedder auto 回退 CLAP 致 ref-config 亦检索不通、6 臂 PLAN ONLY、
+> kb_batch_build 仅单 utt 键单 value），修复=工程票 #25，G2 门（全臂 E2E green）后方可开跑；②计数对齐：
+> 续10 裁定 35 臂/140 格（RAPTOR-lite 入列），代码现为 34/136，以裁定为准、#25 对齐代码；③§6.8 重抽
+> 签字位已由续10 裁决为全量重抽（非开放问题）；④本网格开跑前置另受 2026-07-11 stop-the-line 约束，详见
+> [[2026-07-11-stage1-audit-response-and-rulings]]。
+
 > **性质**：Step-2（omni agentic system mock 基线锁定与方案对比）的冻结会输入。合并
 > 2a 调研（105 网格候选，`2026-07-09-step2a-mmknowledge-survey.md`）与 2b 方案空间底账
 > （三步设计 §2b），落成可执行网格 + **预注册削减规则**。mock 口径 = owner 已裁定的

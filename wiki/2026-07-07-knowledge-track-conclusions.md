@@ -5,6 +5,8 @@ stage: 1-argumentation + directional-experiment + theory(Lean)
 status: "Stage-1 结论。论据 = 调研(argumentation)+ 冻结 Qwen3-Omni 上的 directional 实验(n≤60,paired-bootstrap CI,不定论)+ Lean sorry-free 收敛证明。任何 Stage-2 由 owner K/T9 gate。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 知识轨结论(回答三问)
 
 > 🚨 **重大 caveat(2026-07-07,泄漏审计后):经验骨架被污染,Q1/Q2 的经验支撑作废、待边界干净重跑。** T7 的 KB 逐条含 ground truth(audit:answer_in_own_KB=1.0、in_topk=0.90),且检索 query 用了问题文本(部署应为音频)——H0/inject_k 增益几乎全是"查答案"而非知识辅助推理。**清白幸存:③ 的 Lean 收敛证明(纯理论)+ 调研/taxonomy。** ①② 的"RAG 大幅有效/flat-RAG 最优"**在清白重跑([[2026-07-07-T8-clean-rag-rerun]]:音频 query + 答案擦除)完成前不成立**。下文①②按此降级阅读。

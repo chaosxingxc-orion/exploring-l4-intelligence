@@ -6,6 +6,8 @@ decision: MAJOR REVISION (Devil's Advocate found CRITICAL → cannot Accept)
 reviews_target: "[[2026-07-04-Q1-conclusion-ICL-sufficiency-omni]]"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Editorial synthesis — strict review of the Q1 conclusion
 
 Four independent reviewers (Methodology/stats, Domain=speech-omni-ML, Devil's-Advocate, EIC+Formal-Methods),

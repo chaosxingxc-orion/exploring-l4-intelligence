@@ -2,7 +2,8 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-04 (Stage-1 problem-definition closed).
+> Last reviewed: 2026-07-11.
+> 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4。
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
@@ -18,9 +19,11 @@ speaker-ID, emotion/SER, and language+intent. First-proof substrate: CREMA-D (sp
 same audio). **Done:** math-feasibility doc + per-factor operator decision (content→A, language→A,
 speaker→hybrid, emotion→B); the CREMA-D two-factor proof loop runs end-to-end, reproducibly, logged to
 MLflow (`bash scripts/train.sh seed=42`). **First result (3-factor CREMA-D):** the SAME frozen embedding gives
-content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance) — the thesis ("different downstream
-tasks → different performance") demonstrated; instruction conditioning does not steer the embedding
+content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance); instruction conditioning does not steer the embedding
 (columns flat), confirming the suppression prediction (see [[W4-Training-Free-RL-Feasibility]] §0.1).
+W4 首结果为 L0/L1 证据（factor readout availability/suppression：content≈1.0 是 12 句固定句 ID、emotion
+部分可读、speaker 近 chance；matched>mismatched 判据 diagonal_dominant=False 未过）——"已解耦/thesis
+demonstrated" 表述按 [[2026-07-11-stage1-audit-response-and-rulings]] 裁定废止；W4 待按 §7.1 重定义（#29）。
 **Model-understanding phase (1.2.1) DONE — ICL tested, verdict now evidence-backed.** Diagnostic probes
 (I/O contract, query-token isolation, native text-query retrieval, few-shot ICL + label control) on the
 frozen model: native text-query recovers content (0.99) but not emotion (0.27); in-context demos
@@ -79,7 +82,9 @@ Next: a semantic-task validation table + per-problem Research-Proposal-Template 
 {Qwen3-Omni-30B, MERaLiON-2-3B} GGUF × dev/test) fully executed, zero run failures; per-wave Opus
 audit caught 60 mechanically-invalid MCQ cells (K8 gold-resolution bug) → surgical freeze-repair +
 GPU-free rescore from stored replies, regression-guarded. Full table: W1 `_repro/wave1_results.md`.
-Wave-2 (K4–K7, 64 cells) driver is launch-ready but hard-gated on owner release (`WAVE2_RELEASE=1`).
+**Wave-2 completed 32/32** (K4–K7 × qwen3 单底座 × dev/test，W1 `f8ca276` freeze-repair 后全有效)；
+wave-3 8/8 批量化收官、Step-1 网格关账 76/76（W1 `07bbc66`）；重抽验证格通过后全量重跑因 2026-07-11
+stop-the-line 暂停。
 Details: [[Decision-Log]] 2026-07-10（续6）.
 
 **W2 — Efficient RL alignment (skeleton).** Efficient GRPO/DPO with LoRA / partial updates for
@@ -94,7 +99,7 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 ## 中文
 
 > **这是活动状态板——更新最频繁的页面。** 任一工作的成熟度或近期计划变化时就更新它，重大变动同时记到
-> [[Decision-Log]]。最近复核：2026-07-04。
+> [[Decision-Log]]。最近复核：2026-07-11。
 
 各工作状态见上表。**W4（omni 嵌入语音解耦，旗舰，进行中）：** 免训练 RL（不改权重/结构）引导冻结的
 `omni-embed-nemotron-3b`，使同一段音频在不同任务条件下的嵌入，在内容/ASR+ST、说话人、情感/SER、

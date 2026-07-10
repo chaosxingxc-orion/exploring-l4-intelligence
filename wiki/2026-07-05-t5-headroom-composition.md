@@ -5,6 +5,8 @@ stage: 1-directional
 purpose: "Decompose the frozen omni's headroom WITHOUT leakage (own samples only), to see which legitimate lever can realize which part — and to size the multimodal memory's target market (the capability/knowledge gap)."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # T5 — What is the headroom made of?
 
 > Legitimate (Information-Boundary Guard): uses **only the model's own N=8 samples** (P2, n=150). No golden

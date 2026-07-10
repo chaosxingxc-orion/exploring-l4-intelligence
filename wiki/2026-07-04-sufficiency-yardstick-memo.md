@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Sufficiency yardstick memo v0 — "is the instruct-prompt rollout optimization space sufficient?"
 
 > Stage-1 framework document. Defines the operational yardstick the survey campaign's lanes are

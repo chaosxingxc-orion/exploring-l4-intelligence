@@ -5,6 +5,8 @@ stage: 1→2 实验预注册
 status: "重规划,替代被泄漏污染的 T7 单点。三条硬约束写死。执行前 owner 审。boundary-clean、directional→powered。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 完整实验设计(重规划)
 
 > 起因:上一版 T7 三处硬伤——#1 覆盖不足(仅 3 单跳知识-QA、无 agentic)、#2 检索 query 用了 gold 文本(部署应为音频)、#3 **KB 逐条含 ground truth**(审计 answer_in_own_KB=1.0、注入含答案率 0.90)→ "RAG 增益"实为查答案。本设计系统性修正三者。

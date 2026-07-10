@@ -5,6 +5,8 @@ stage: 1-directional
 status: "E0 结论。boundary-clean。directional。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # E0 结论 —— 干净知识-RAG 测试床不在盘上,须构造
 
 **核实过程:**

@@ -12,6 +12,8 @@ review_grade: "sound-with-corrections (ars-reviewer panel wf_e5dd317b-9cb)"
 corrections_applied: "C1-C12+P3 complete (C2 census artifact committed: 12/12 reproduced, 2 reading-pinned)"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Decision: NO-GO — agent-level question closed
 
 ## 0. Role, provenance, and mechanical discipline

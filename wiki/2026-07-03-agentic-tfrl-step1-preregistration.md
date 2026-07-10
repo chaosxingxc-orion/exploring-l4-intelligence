@@ -7,6 +7,8 @@ null_hypothesis: "2026-07-02 deep-review NO-GO verdict (reviews/deep-review.md) 
 timebox: "10 working days from the freeze commit"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Pre-registration: agentic-TFRL step-1 rationality analysis
 
 **Freeze anchor.** The commit hash of this file is the freeze anchor. Every analysis lane, adversary, judge, and synthesis step is bound to the criteria below as of that commit. Amendments require owner sign-off plus a logged diff in `wiki/Decision-Log.md`; un-logged deviation invalidates the affected lane's output.

@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "T2 = effect-map 成品(见 2026-07-07-tfrl-baseline-effect-map.md)。T3 = 自主选定(证据明确、非硬分叉;owner 可否决)。Owner review pending; wiki-sync deferred。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # T2 综合 + T3 选定
 
 ## T2(WS-4 效果映射)—— 结论

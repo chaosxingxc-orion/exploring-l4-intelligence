@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "D4 — distilled from the D3-reviewed survey paper. This is decision material for the owner checkpoint (K/T9); it does NOT auto-advance to Stage-2. Ranking rubric frozen before ranking."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Stage-1 problem definition v2
 
 Distilled from the reviewed survey (`2026-07-06-omni-agentic-systems-survey.md`, D3 `sound-with-corrections`)

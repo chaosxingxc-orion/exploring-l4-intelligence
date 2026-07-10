@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Phase-A foundation doc (owner's 2026-07-06 redirect: anchor components + model config BEFORE building/optimizing). Discussion material for the model-axis decision; not locked."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Component decomposition + model configuration (foundation)
 
 Owner redirect: I jumped too fast to optimization targets (the 7 GAPs). Those are *inside* components; the

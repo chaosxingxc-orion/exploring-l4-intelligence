@@ -6,6 +6,8 @@ lane: knowledge-backbone
 inputs: kb_registry.py (code-backed), 2026-07-07-multimodal-knowledge-systems-alignment.md (survey), T0/T7-T10 runs
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Knowledge Generality & Coverage Diagnostic
 
 Precise boundary of the "generality gap" flagged 2026-07-07, triangulated across **three independent

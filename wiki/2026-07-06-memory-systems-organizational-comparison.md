@@ -5,6 +5,8 @@ stage: 1-argumentation
 status: "Stage-1 WS-A deliverable (workflow wf_fbbba6a0, 11 system + 2 verify + 2 synth agents; recovered via resume after a mid-run agent hang). Adversarial + citation verified; hypothesis-grade. Owner review pending; wiki-sync deferred."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 > ⚠️ **概念归档更正(2026-07-06).** 本文实为**知识(Knowledge)元件**分析,曾错标为"记忆":对比的 11 个系统里 7 个是"召回自身历史"的 episodic 系统(那是**记忆**的对标类),被用来判一个**知识**设计的净新——属对标错类(详见本文 §2 轴 #7 与 [[2026-07-06-capability-taxonomy-knowledge-skill-memory]] §5)。**记忆(实例召回)与技能(任务模板)本文并未覆盖。**
 
 # Memory-System Organizational-Form Comparison

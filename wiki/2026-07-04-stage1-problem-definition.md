@@ -12,6 +12,8 @@ role: "Distillation for the K2 owner discussion. RECOMMENDS a ranking; DECIDES n
 discipline: "Grade tags on every in-house number; the verbs confirms/establishes/demonstrates/significant are not used of in-house numbers; any candidate reducing to cross-session accumulation is flagged 'collides with closed question — owner amendment required' per the closure fence."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Stage-1 Problem Definition — ranked candidate problems (semantic layer, frozen omni speech, training-free)
 
 > **K2 verdict (owner, 2026-07-04).** The owner selected **CP-1 (quantify H_prompt − H_fix),

@@ -5,6 +5,8 @@ decision: MAJOR REVISION (2 CRITICAL: non-compiling Lean falsely labeled verifie
 reviews_target: "[[2026-07-05-A-realization-conclusion]]"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Editorial synthesis — strict review of the A-realization verdict
 
 Three independent reviewers (methodology/stats, devil's-advocate, EIC+formal), grounded in the artifacts,

@@ -157,10 +157,10 @@ each cover one axis only — bge-en-icl shows embedders need *training* to use I
 shows audio ICL emerges from *pretraining* not frozen activation (arXiv:2512.23808), and TTRL/TPO/JitRL are
 *text-only, single-class* (arXiv:2504.16084, 2501.12895, 2601.18510).
 
-**Citation registry.** Full per-claim registry with verified links: `wiki/survey/` — lanes
-[capability-map](survey/2026-06-26-survey-capability-map.md) · [icl-fewshot](survey/2026-06-26-survey-icl-fewshot.md)
-· [tfrl-theory](survey/2026-06-26-survey-tfrl-theory.md) · [rewards-eval](survey/2026-06-26-survey-rewards-eval.md)
-· [novelty-delta](survey/2026-06-26-survey-novelty-delta.md).
+**Citation registry.** Full per-claim registry with verified links: `wiki/archive/survey/2026-06-26-proposal/` — lanes
+[capability-map](archive/survey/2026-06-26-proposal/2026-06-26-survey-capability-map.md) · [icl-fewshot](archive/survey/2026-06-26-proposal/2026-06-26-survey-icl-fewshot.md)
+· [tfrl-theory](archive/survey/2026-06-26-proposal/2026-06-26-survey-tfrl-theory.md) · [rewards-eval](archive/survey/2026-06-26-proposal/2026-06-26-survey-rewards-eval.md)
+· [novelty-delta](archive/survey/2026-06-26-proposal/2026-06-26-survey-novelty-delta.md).
 
 ## 4. Reproduced Results (Baseline + Method Pilot) **[pre-registered plan; results blocked-pending-provisioning]**
 

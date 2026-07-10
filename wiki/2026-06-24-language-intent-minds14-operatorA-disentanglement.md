@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 2026-06-24 · language-intent · MINDS-14 · Operator-A disentanglement (the untested factor)
 
 > Validation archive. Index: [[Validation-Experiment-Matrix]]. Status: **PASSED (null for steering;

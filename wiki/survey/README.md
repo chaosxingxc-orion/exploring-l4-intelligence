@@ -5,17 +5,24 @@
 
 This directory archives the verified citations behind the **Survey & Positioning (§3)** of [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]]. Five lanes, each adversarially verified; a claim is archived only if its source(s) resolved to a real paper (`sources_resolve=true`, `keep=true`).
 
+> **归档约定（2026-07-11 起）**：战役收官即归档——一个调研/实验战役被裁定收官（GO/NO-GO、被后续战役取代、
+> 或结论已改判）后，其过程调研件迁入 `archive/survey/<campaign>/` 子目录，PREPEND 🗄 ARCHIVED 状态横幅，
+> 原文按 append-only 不改写。已迁移：2026-06-26 提案期调研（5 件）→ `archive/survey/2026-06-26-proposal/`；
+> 2026-06-30 agent-level 调研（11 件）→ `archive/survey/2026-06-30-agent-level/`；2026-07-03 NO-GO 战役
+> （11 件）→ `archive/survey/2026-07-03-nogo-campaign/`；2026-07-06 omni-agentic 调研（16 件）→
+> `archive/survey/2026-07-06-omni-agentic/`。裁定见 [[2026-07-11-stage1-audit-response-and-rulings]]。
+> 2026-07-04/07/08/09 前缀的调研件仍为现行 LOG/active，不在此列。
 
 ## Lanes
 
 
 | # | Lane | File | Kept claims |
 |---|---|---|---|
-| 1 | Omni pretrained-capability map & the two model classes | [capability-map](2026-06-26-survey-capability-map.md) | 20/20 |
-| 2 | ICL / few-shot / explicit task-definition & label-sensitivity in audio LLMs | [icl-fewshot](2026-06-26-survey-icl-fewshot.md) | 15/15 |
-| 3 | Training-free / inference-time RL methods & convergence theory | [tfrl-theory](2026-06-26-survey-tfrl-theory.md) | 15/15 |
-| 4 | Verifiable rewards, evaluation & leakage/reproducibility pitfalls | [rewards-eval](2026-06-26-survey-rewards-eval.md) | 18/18 |
-| 5 | Novelty-delta vs the closest prior work | [novelty-delta](2026-06-26-survey-novelty-delta.md) | 12/12 |
+| 1 | Omni pretrained-capability map & the two model classes | [capability-map](archive/survey/2026-06-26-proposal/2026-06-26-survey-capability-map.md) | 20/20 |
+| 2 | ICL / few-shot / explicit task-definition & label-sensitivity in audio LLMs | [icl-fewshot](archive/survey/2026-06-26-proposal/2026-06-26-survey-icl-fewshot.md) | 15/15 |
+| 3 | Training-free / inference-time RL methods & convergence theory | [tfrl-theory](archive/survey/2026-06-26-proposal/2026-06-26-survey-tfrl-theory.md) | 15/15 |
+| 4 | Verifiable rewards, evaluation & leakage/reproducibility pitfalls | [rewards-eval](archive/survey/2026-06-26-proposal/2026-06-26-survey-rewards-eval.md) | 18/18 |
+| 5 | Novelty-delta vs the closest prior work | [novelty-delta](archive/survey/2026-06-26-proposal/2026-06-26-survey-novelty-delta.md) | 12/12 |
 
 **Totals:** 80 kept claims · 93 unique verified sources.
 
@@ -28,21 +35,21 @@ Each claim is scope-tagged (no-gradient = in scope vs weight-updating = out).
 
 | Lane | File | Kept |
 |---|---|---|
-| A4 — speech/omni agents & the moat (B3) | [agent-speech-agents](2026-06-30-survey-agent-speech-agents.md) | 15 |
-| A5 — model classes as components + novelty (B5/B7) | [agent-components-novelty](2026-06-30-survey-agent-components-novelty.md) | 13 |
-| A3-headroom — does it compound? (B1/B4) | [agent-does-it-compound](2026-06-30-survey-agent-does-it-compound.md) | 13 |
+| A4 — speech/omni agents & the moat (B3) | [agent-speech-agents](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-speech-agents.md) | 15 |
+| A5 — model classes as components + novelty (B5/B7) | [agent-components-novelty](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-components-novelty.md) | 13 |
+| A3-headroom — does it compound? (B1/B4) | [agent-does-it-compound](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-does-it-compound.md) | 13 |
 
-Living strategic memo: [agent-level-synthesis](2026-06-30-agent-level-synthesis.md).
+Living strategic memo: [agent-level-synthesis](archive/survey/2026-06-30-agent-level/2026-06-30-agent-level-synthesis.md).
 
 ## Agent-level survey — S2 deepening: memory + skills design (2026-06-30)
 
 Design-oriented deepening (run `wf_a066da37-c09`); 43 verified claims / 70 sources. **Design synthesis:**
-[agent-memory-skills-design](2026-06-30-agent-memory-skills-design.md).
+[agent-memory-skills-design](archive/survey/2026-06-30-agent-level/2026-06-30-agent-memory-skills-design.md).
 
 | Lane | File | Kept |
 |---|---|---|
-| A1 — agent memory (deep design + speech) | [agent-memory](2026-06-30-survey-agent-memory.md) | 26 |
-| A2 — agent skills (deep design + speech) | [agent-skills](2026-06-30-survey-agent-skills.md) | 17 |
+| A1 — agent memory (deep design + speech) | [agent-memory](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-memory.md) | 26 |
+| A2 — agent skills (deep design + speech) | [agent-skills](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-skills.md) | 17 |
 
 Key finding: a **verifiable-reward acceptance gate** is the one control law for both components (SkillsBench:
 curated skills +16.2pp vs self-generated ~0); θ2's β-KL trust region instantiates as Mem0 mutation-rate (memory)
@@ -53,13 +60,13 @@ verifiable speech rewards). Open contribution: no audio cross-session paralingui
 
 Convergence-focused survey grounding the OptSpace proof **OSA-3** (`proofs/tfrl/OptSpace-notes.md`; run
 `wf_14ef3acb-2a3`). 43 verified claims / 54 sources. **Synthesis + convergence map:**
-[agent-convergence](2026-06-30-survey-agent-convergence.md).
+[agent-convergence](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-convergence.md).
 
 | Lane | File | Kept |
 |---|---|---|
-| CV1 — output-level convergence theory | [output-convergence](2026-06-30-survey-agent-output-convergence.md) | 14 |
-| CV2 — agent-level convergence & stability | [agent-stability](2026-06-30-survey-agent-agent-stability.md) | 15 |
-| CV3 — algorithm-level stabilization | [stabilization](2026-06-30-survey-agent-stabilization.md) | 14 |
+| CV1 — output-level convergence theory | [output-convergence](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-output-convergence.md) | 14 |
+| CV2 — agent-level convergence & stability | [agent-stability](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-agent-stability.md) | 15 |
+| CV3 — algorithm-level stabilization | [stabilization](archive/survey/2026-06-30-agent-level/2026-06-30-survey-agent-stabilization.md) | 14 |
 
 Key finding: proven *finite-N* convergence lives at the **output level** (soft-BoN O(1/N), MBR, GSI, HedgeTune
 N*); the **agent level** has only **JitRL**'s *asymptotic* consistency under a trust-region/slow-drift

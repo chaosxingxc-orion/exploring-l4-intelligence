@@ -5,6 +5,8 @@ stage: 1-argumentation → 实验预注册
 status: "Pre-registration for T7. Boundary-clean by design. Stage-1 directional at run n; Stage-2 for power. Owner review pending; wiki-sync deferred。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # T4 验证契约(R1 门控 + R2 注入-格式)
 
 > 预注册 T7 要测的假设、基线、对照、奖励、边界与 go/no-go。锁定后 T6 建引擎、T7 执行,不事后改判据。

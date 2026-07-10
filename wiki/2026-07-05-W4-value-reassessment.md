@@ -5,6 +5,8 @@ stage: 1-directional
 supersedes: nothing (append-only reflection; re-grades the W4 value claim under the 2026-07-05 read-out/new-info lens)
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # W4 (omni-embedding disentanglement) is a read-out lever — reassessed
 
 Closes task #37. The 2026-07-05 information-boundary work ([[Information-Boundary-Guard]], T5

@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Stage-1 reflection — re-grading the evidence base under the three-stage methodology
 
 > Dated reflection doc per the Research-methodology section of CLAUDE.md (records are append-only;

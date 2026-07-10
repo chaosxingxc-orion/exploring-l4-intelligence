@@ -5,6 +5,8 @@ stage: 1-argumentation
 purpose: "Back to the original task definition: for each family, what is the REAL deployment input, what a LEGITIMATE training-free-RL lever may use, and where the boundary is. Gates every experiment (with [[Information-Boundary-Guard]])."
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # T1 — Per-family task definition + information boundary
 
 > Applies [[Information-Boundary-Guard]] to each semantic family + our on-disk datasets. Two cross-cutting

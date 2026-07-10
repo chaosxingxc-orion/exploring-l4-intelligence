@@ -5,6 +5,8 @@ stage: 1-directional
 status: "boundary-clean(反事实注入,无 gold 泄漏,audio 输入)。n=40/集×3 集。directional。"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # E2 清白结果 —— 反事实利用率 + (配对)擦除增强
 
 > 解锁 T7 泄漏后的**边界干净** E2:两条互补的清白测量,共同回答"冻结 omni 到底怎么用外部知识"。

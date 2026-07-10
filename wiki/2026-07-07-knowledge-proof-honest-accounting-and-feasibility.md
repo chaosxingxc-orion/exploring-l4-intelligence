@@ -7,6 +7,8 @@ scope: append-only correction; does NOT rewrite prior records (per methodology)
 audit_basis: read-only inspection of proofs/tfrl/TfrlProofs/*.lean + Theory-Convergence-and-Constraints.md + Decision-Log
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Knowledge-Injection Proofs — Honest Accounting & Feasibility
 
 Per owner (2026-07-07): **first honestly account, then judge feasibility.** This is an append-only
