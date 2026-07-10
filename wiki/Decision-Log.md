@@ -6,6 +6,27 @@
 
 ---
 
+### 2026-07-10（续7）· 波 1 验收 ACCEPT-with-notes：续6 三项遗留全关闭 + step-2/3 前置齐装
+
+**Facts（与续6 互补，跨会话协作）.** 全表 Opus 对抗验收 **ACCEPT-with-notes**
+（[[2026-07-10-wave1-baselines-report]]）：普查 224/224 零缺格、双底座同 item-id 零错配、
+边界纪律机械抽检零泄漏、重评分后无残留指标缺陷。**续6 遗留逐项关闭**：
+③ **dev/test 重叠已量化**——52/56 集有重叠（6 个 legacy dev⊆test 全嵌套、小池 uro 重叠 10–37、
+仅 4 集不相交）：dev/test 为同池两视图非独立 held-out，Stage-1 方向性合规但入档为 caveat，
+"Phase-B 是否不相交重抽"列入 step-2 冻结会裁决位；① **clothoaqa 缺口已补齐**（227 缺片全部
+在上游、已取回 1000/1000 行可解析，另 air-bench iemocap/VocalSound 两对同批补齐；SENSE 判上游
+裸 checkpoint 豁免）；② containment-EM 偏严口径已入 wave1 报告 caveat 呈 owner。
+MERaLiON 角色修正入档：70% 提示词回声（开放式转写）→ 仅作 MCQ/封闭形态验证器。
+
+**同期完成的 step-2/3 前置**：KB schema 演进+14 嵌入器接口（9 个 CPU 活体通过，W1 2a4245b）；
+mock runner（运行时反自适应断言）+ Phase-A 排程（实估 136 格/4.8h）+ gpu_session 双模式
+（52aa61a）；**Lean 库 sorry=0**（Beirami 以 opaque+具名引用公理诚实处置，排掉假全称公理化
+致库不一致的深雷，umbrella 9e999f7）；3a TFRL 方案调研收官（~90 候选带理论钩子）。
+运行韧性根因固化：WSL vmIdleTimeout=8h（VM 秒回收连坐 setsid 的根因）。
+
+**Next.** Step-2 冻结会（owner）：网格草案 7+3 签字位 + 波 1 caveat 裁决位；波 2 驱动器
+已就绪（WAVE2_RELEASE=1 硬门禁）等 owner 放行，与 Phase-A 排程协调。
+
 ### 2026-07-10（续6）· 波 1 收官：224/224 执行完成 + Opus 抽验揪出 60 格机械无效 → 冻结修复 + 免 GPU 重打分
 
 **Facts.** 波 1 冻结网格 **224 格全部执行完毕、零运行失败**（meralion-2-gguf 112 格一次通过
