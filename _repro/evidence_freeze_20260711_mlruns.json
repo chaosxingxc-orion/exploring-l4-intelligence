@@ -1,0 +1,3090 @@
+{
+  "header": {
+    "generated_at": "2026-07-11T00:00:00+00:00",
+    "hostname": "chao",
+    "excluded_dirs": [
+      ".git",
+      ".lake",
+      ".mypy_cache",
+      ".pytest_cache",
+      ".ruff_cache",
+      ".venv",
+      "__pycache__",
+      "node_modules",
+      "venv"
+    ],
+    "one_gb_threshold_bytes": 1073741824,
+    "script": "evidence_freeze_mlruns.py (ticket #26 item 6 -- supplementary WSL-side mlruns freeze; same per-file schema as scripts/evidence_freeze.py, different root -- see that script's own default_roots() for why this is a SEPARATE tree, not covered by its E/mlruns root)",
+    "roots": [
+      {
+        "label": "WSL/mlruns",
+        "path": "/home/chao/speechrl-data/mlruns",
+        "status": "OK",
+        "n_files": 509
+      }
+    ],
+    "summary": {
+      "n_files": 509,
+      "total_bytes": 27739,
+      "hashed_bytes": 27739,
+      "size_only_count": 0,
+      "error_count": 0
+    }
+  },
+  "files": [
+    {
+      "relpath": "WSL/mlruns/500168843308197976/meta.yaml",
+      "size": 315,
+      "mtime_iso": "2026-06-22T14:47:06.348076+00:00",
+      "sha256": "eaadd1ec865d206dbcdbe5d33aee5a59f32afc42fb49f6383d0fc34255de47ec"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/meta.yaml",
+      "size": 402,
+      "mtime_iso": "2026-06-23T02:30:50.634640+00:00",
+      "sha256": "1d2e6ace63914d16de7ead0bbf236586053a93fd99855ad02b701c20839b8a66"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.runName",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "1fa28beb1d0a26d4f104552649dbf6bcbbb24e19ef46967ebdbe47aa3a6a4f7c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.source.git.branch",
+      "size": 6,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "fc613b4dfd6736a7bd268c8a0e74ed0d1c04a959f59dd74ef2874983fd443fc9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "40dde396d37be22fe79f6d6af93ad93e9a80d6232a0a0a7ccf89ba461fc45a90"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.source.name",
+      "size": 28,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "9bbe5f720152db8c0a04e7b99b6855c30154dd0f719afa3c7daacd81acd6a748"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-23T02:30:50.424881+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/params/dev",
+      "size": 3,
+      "mtime_iso": "2026-06-23T02:30:50.429162+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/params/layers",
+      "size": 22,
+      "mtime_iso": "2026-06-23T02:30:50.429162+00:00",
+      "sha256": "74054dab5ac5657c4d000579f966b9c0c0fb77750f3c9785b1e76f8deb2e6587"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/params/pools",
+      "size": 42,
+      "mtime_iso": "2026-06-23T02:30:50.429162+00:00",
+      "sha256": "b60f3ff7f5760c0cb2e91212262c0cd8e7c9be0e6396aef912261c28f1fd932b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-23T02:30:50.429162+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/params/test",
+      "size": 3,
+      "mtime_iso": "2026-06-23T02:30:50.429162+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__all__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.454847+00:00",
+      "sha256": "a55b30c36ba967f08f204b05bc8c4f091b1b6927a1efa4b38281c97f85551cdd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__all__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.433443+00:00",
+      "sha256": "a55d156456e7509ad3855db0dee57544e4ec666385c01247efe78d7df3357a97"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__all__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:30:50.446285+00:00",
+      "sha256": "e02143c54b88fa00ee2d2ae480d59f8617f5ff168f12a4932bfeeefdcd63776b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.497655+00:00",
+      "sha256": "733c883efd565e1ef2a0b46785f78242e65fc6edd1458bf79d325ab9157941b2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.467689+00:00",
+      "sha256": "06a47728024dd644a83ed01e48c8a96c4267cb1fd99d9f7eebc4b6eacc7083ef"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:30:50.484812+00:00",
+      "sha256": "c01a883936802244438ce037e00de01d9ed29e6081a103d4c9a1dd73435471c4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_attn__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.621798+00:00",
+      "sha256": "52933501083a95418d8142c955fd979d398284723e928af30a05df365ebac984"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_attn__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.596113+00:00",
+      "sha256": "584a479e9ca932722ec3ada448b2b665a41e0d7e938b96fa15c1921b7989c6bd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.608955+00:00",
+      "sha256": "a91fe9c5557c0435fa813c482faec1b79b12f34dad5f7c0d0645213aa56de912"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.583271+00:00",
+      "sha256": "177b904311eacaed68836723644ba5098c661535406ad3e1bf07ee873686a6f6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.557586+00:00",
+      "sha256": "4c5f9702280646c96dae4abfc20352cdfa94cc3aafa71060697777b3d8f0b02e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.570428+00:00",
+      "sha256": "4f4df417ad9e2f612dcf0833d31626506615288e67b437d89056070f1c3bb0a0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_std__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.540463+00:00",
+      "sha256": "bf9ee9dfc2618cd855a35302d2114044dfe6a845fc32872bc18ecc9fc967be0c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_std__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.510497+00:00",
+      "sha256": "99855b10c302f9ac3c7d80e1050b8eb1b840dea39397110e688a5d3ef67ea6ac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_acc__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.527620+00:00",
+      "sha256": "5c014f5d38f52b3e74de8a8f8b6dc9c6dd0c33e5a2d11e972ae5d1ac4eda79fe"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__all__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.454847+00:00",
+      "sha256": "cfab00b19b7ff570e285bdf540f0ead2fd5647722f731e5d3946eddfcb6c5d9e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__all__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.433443+00:00",
+      "sha256": "a2e4d9f2cbb69db6ac985a5775a91c2e4db7f6c925b0f883c2151d55274c78d7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__all__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.450566+00:00",
+      "sha256": "2bb08f19dfbc93cce5db34f3c9c4af920014a83a14da88ccd75d366c6139e051"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.501936+00:00",
+      "sha256": "e0eaf2588c908e03340f17c19c2f55c1797a70fa8f7113a7434d22144dc87077"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.471970+00:00",
+      "sha256": "52b05d50b032978f0cb1aea16a63dfe594ac8620d64b3a408a45690ecbab76c2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.484812+00:00",
+      "sha256": "ca3e485e6083bf4af8e7eb77dffec4daa84ff0f4ef1629b94c770be02778e8f8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.626078+00:00",
+      "sha256": "a7f864a29222910627aa90e4276a77ced6a32a9ffd4cab4a18f1330ca1461731"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.596113+00:00",
+      "sha256": "be7f305a00b72ec7b7c36a50fc48981b37342eafa4f7b55d1ab2bfb5d04186a2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_attn__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.608955+00:00",
+      "sha256": "ff040bbd96f10c94cbefedd94196d1704fca5d3e9297e2d2417781035c9c211d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.583271+00:00",
+      "sha256": "7d11cda51405fcb488cee70abb8801515b8abc2f094e6efaf17436c5fc510dd7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_stats__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.561867+00:00",
+      "sha256": "14c8d044431f790149578e62968bdb9dc0c5663c71a3cf814a048f75a4d96f0a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_stats__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.570428+00:00",
+      "sha256": "2b8a227bb5bf328cf1cf7296c0edf5f27c00fd9286718cc7d209ca717caaad79"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_std__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.544744+00:00",
+      "sha256": "3d4ef0fac6b0a7877dca63c887d3042f6fd8b479b4fa70fed729be179e3eb9d0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_std__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.514778+00:00",
+      "sha256": "9d2d47ce31ea940a13bb6f3d336437a7c515e61bb8ca56e131f4cee0860e0eab"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/best_layer__audio_std__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.531901+00:00",
+      "sha256": "754d8d1d41eeb158261d1b85779183879348dfa80b065817017cb100e3d7ea8f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__all__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.463408+00:00",
+      "sha256": "02776e983d0b3ff92a4d5099d1adb9f2cf09f8d69f8ffe3e8c2e4e128cbddc30"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__all__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.442005+00:00",
+      "sha256": "03588f3274821bed91c428c15a083cb515b371b17d02d0cfbc1adc189e484f8f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__all__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.454847+00:00",
+      "sha256": "2862034a40dfe9c10805b1dd728643cc52ebb5992e1f68941781b6e0597241e6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.510497+00:00",
+      "sha256": "9a158fadc4880260676c63566fd86d19cd27b18cd90e1d2d21da549f3fee366f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.480532+00:00",
+      "sha256": "00e8e114d68e26f700235bf9d4a6d0ffc06aa719c32d57364b56c1c297832844"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.493374+00:00",
+      "sha256": "8fb923a5aba3a02b30b6ba60146b939610ae1e56ea8a0c2c76ec2714ac9e7a55"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.634640+00:00",
+      "sha256": "f2637a4e4d60ee34274cef5855464be07b7e0170e73935bb5206f8844bd7b3ab"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.604675+00:00",
+      "sha256": "d2f8648a7a070976b25bc81b92c54bb7506ea50672bb072989990b7b32f8c771"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.621798+00:00",
+      "sha256": "45cd9ee724dee219827f5028d525c640be6881dae4a5c7d3dff2dce7b5cfb0db"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_stats__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.591832+00:00",
+      "sha256": "7198fc7a7ccf38effb44e79522c67388dc9e405e242903a40c45c2e31e3af6b2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.570428+00:00",
+      "sha256": "6e9c921b032ffdff64ef41da201dfcbf838e88637501922c14beade0a839f7c0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.578990+00:00",
+      "sha256": "f0492dbba0a1a17d7d0166fc65e1f7abd591edb44c8916e3ea14b9b54f08f7df"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:30:50.553305+00:00",
+      "sha256": "365b7729184bd1d8f3245787281839aa8081056fce4d48461024cc7f42614329"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_std__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.523340+00:00",
+      "sha256": "1ab35feff762e2f50f693e070b148982982865886c974d58a706f1f03b01ea00"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_hi__audio_std__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.536182+00:00",
+      "sha256": "03837bbc70cfb44a6bb7bf998a0e2a7de169b62aab129578a457cf71a8e84c3d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__all__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.459128+00:00",
+      "sha256": "2d8405a5d4bb8d1f617a8258e8331c4f3b974fc22847aa681e31107e917c0615"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__all__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.437724+00:00",
+      "sha256": "233e97d757887a987c35c085dfc8475f9fc9f5c1c30f78adf36fb4069cd826f6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__all__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:30:50.450566+00:00",
+      "sha256": "70fe0a314f9cdb5a94da763770b35134e996f333c819c5c3afc486547c73b928"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.506217+00:00",
+      "sha256": "98e1e1a87887ca299a69513a09bad7e9244a9344adfbf9baa0bb3e29387936d1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.476251+00:00",
+      "sha256": "c81622a7ca4a94bd69e115cadbcfe1fa1307a97d0af42c2a43bdf8d149bb3347"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:30:50.489093+00:00",
+      "sha256": "44bea9597d296fb048cf9278c0ce41a74933ce962643cab53d78d97e1b30c1d8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_attn__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.630359+00:00",
+      "sha256": "679843a50cbdff64db2a0e85fa26cb13fd15da8b266cda6300d4f63a2ba2b84b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.600394+00:00",
+      "sha256": "258c95b02d4cfcd0f366238701854d403178374a3dfd7d5a712540102a7c77cb"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_attn__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:30:50.613236+00:00",
+      "sha256": "7c6dd2129e1a9d1016ad9a2b2b9f8be62947463fa6d27b58fee040372fbc98e4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.587551+00:00",
+      "sha256": "ba0fb5cfb05b0159cbe524edf9f6cc12a1f11340feb5a3001f7e95d9c92059c5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:30:50.566148+00:00",
+      "sha256": "c630ab7b998da4cc02c015d6b0520a27cbe08a4de7f565bf662c342a1590765c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:30:50.574709+00:00",
+      "sha256": "e474b9d5acca62bc4e0049b9912082c63047328138a1c4103102be2d26b02eb6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_std__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.553305+00:00",
+      "sha256": "b027b923ead4faaf0a2feef5b4029b41e140ea94df380f6af1540270ae72c471"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_std__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.519059+00:00",
+      "sha256": "db2077d2383f1d2c7ad8d5c41b5ff6bb297c280ef474e90702e5407b0b93cc8e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/2c61b2f1f6e64923ae1dda1c3828474f/metrics/ci_lo__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:30:50.531901+00:00",
+      "sha256": "2bf18417123f2eb952c1f386d56a535c97f0aba2bf8b85ad6ceb757427c0ba57"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/meta.yaml",
+      "size": 402,
+      "mtime_iso": "2026-06-22T15:07:10.844848+00:00",
+      "sha256": "1d3f067b387efb19bc3d083476e622e30fce273a387551d720f068aac0512320"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.runName",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "fff216118d7509c044e2d3649df35f7ece394c6068f2dadd2638a5d7a8289a65"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "d76ac1068969c2ed9ef1f285fc8e29eb48ddc47f68a8dfe032888389a0ad6e17"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.source.name",
+      "size": 22,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "e77303e95437908a14d8868764d556605c5f65da3429a4603a862340c7712a34"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T15:07:10.738966+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/params/dev",
+      "size": 3,
+      "mtime_iso": "2026-06-22T15:07:10.743039+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/params/layers",
+      "size": 37,
+      "mtime_iso": "2026-06-22T15:07:10.743039+00:00",
+      "sha256": "466bcf33ccf42e3db70b5f8ef126ffa0476e382fad82336216488f7bfba899f4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T15:07:10.743039+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/params/test",
+      "size": 3,
+      "mtime_iso": "2026-06-22T15:07:10.743039+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L00__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.747111+00:00",
+      "sha256": "63fe85bc6f9f78c1df2d7d653bb534e1d409238223d839556fcf7b33527d844e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L00__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-22T15:07:10.751183+00:00",
+      "sha256": "4fc70971f0e8d67739c8fed00df6ceb56446d4f442ce4519834c42c149056076"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L00__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.755256+00:00",
+      "sha256": "2c2e52cb192d5f24150a1ca54d2d0f7b128ec6fb6c9f8122f3c601019b89fcab"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L04__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.755256+00:00",
+      "sha256": "06289b10f162723da8d6c54bdca97ec2065fb8a1242464952835ce1d0d088397"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L04__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.759328+00:00",
+      "sha256": "5acc55846572e92fc79fd9222d937bc555eaa1805fa507d6199d9256aaa6d8af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L04__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.763400+00:00",
+      "sha256": "7849d4359b814c343bc40b78e02101329c0954615176ef1849f8be2e5de6b7af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L08__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.763400+00:00",
+      "sha256": "118480d1d404177f4e838f98f8a7ee23fee53d8226c8891f8e56079c8f5442e5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L08__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.767473+00:00",
+      "sha256": "0e629e0313da0ffa94ba9cfd70c967ebdcf16587b6e24e35b0be9ba2e089e4b0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L08__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.771545+00:00",
+      "sha256": "d112025c86ecb5ea20bf15fb6b4a49f4f81231388eb259de24527c90ebbbfab4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L12__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.775618+00:00",
+      "sha256": "50ad45a6bf8aa4222e5c2afff639e6e5d6ab1e834db28892cef2b40b06c678e5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L12__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.775618+00:00",
+      "sha256": "c31bf29f78b7ea45f1d39ea6d83c601316ee3bb6eca10f65e23b0b7f18d84779"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L12__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.779690+00:00",
+      "sha256": "20e7be831842f5efdb5b5ba0b5f9a4fd12d0b165d06a21b8b20854f49e6d37ac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L16__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.779690+00:00",
+      "sha256": "834286dfb55c620df17553c53c233b1a057075504eddff81d7c6060c46d275b6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L16__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.783762+00:00",
+      "sha256": "abc4eb6abffde88bf409dd0522172a1fcc85480032d38c4ba76fa6e36cc9cec8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L16__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T15:07:10.787835+00:00",
+      "sha256": "4001a783832794b350db12b896c2aae8fd93016a3fc9fc5652485c4a4071154b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L20__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.791907+00:00",
+      "sha256": "3d391ad8bf6ec1fee75350a0a7a447745529a4684757120def9766a270d51f17"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L20__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.791907+00:00",
+      "sha256": "b4d0fcbacc6e53bb4ba8f3831556e3e41677f7e79ef14685d7c994a70d846cc8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L20__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.795979+00:00",
+      "sha256": "bc391457a435785b86db528f35683592e112a513a8b18c7ee8c8e36796e0c7bc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L24__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.800052+00:00",
+      "sha256": "d250a548caabbdac440ca1791dc797adaffcf6d2f90aaf5cb96e8e9a3e140383"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L24__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.800052+00:00",
+      "sha256": "405bae8ce8f3ebaefe25b795d55480dd74186e392c2e00815be5caac4a4d4b0b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L24__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T15:07:10.804124+00:00",
+      "sha256": "ad1326f63fa52d742c481e1be4397f7f339185251b6c053e970fbbb2fa3e78e0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L28__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.808197+00:00",
+      "sha256": "af6250eadc56a9a4f67b162d8599ddfff5cc5c1789f4c2a94b8da9df6d0157c4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L28__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.808197+00:00",
+      "sha256": "cf2485e463eb18f3811ddb4f010b47942f0de00660246efce1ade9d866a65b5f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L28__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.812269+00:00",
+      "sha256": "b5e777defb11c3748c8d1284035a11426e8216106169624995c9e24727b2ce14"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L32__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.816341+00:00",
+      "sha256": "1dbeee83e1e141a5c7a3bad233b3f84d230b8704f7e98de8acdb7f69cea90f3d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L32__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-22T15:07:10.820414+00:00",
+      "sha256": "4f519b74259e2f3b7e4ea103cbe03cd46078200eaeaadf60ed2d35846efe6aed"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L32__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.820414+00:00",
+      "sha256": "4716d33cb2a99ba9b3f3f8b19d2976de0b13314eaa59439a050f15a268fe1ead"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L36__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.824486+00:00",
+      "sha256": "582e5fb08a715f1cffcf4a50d60226943534cefb0c4983b478b6b6bd49612206"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L36__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:07:10.824486+00:00",
+      "sha256": "3f36e163745d2987140181309c865e69da9f444992edc3756534d18186368790"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/acc__L36__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T15:07:10.824486+00:00",
+      "sha256": "83d0358152ee2143c8091c26b0ce6caac4fedd37ac2d887208e2d48305bc1000"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_acc__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.832631+00:00",
+      "sha256": "d605638a2d57baa39b5e1fde60be3db7f900cdec62d26310e1d4eba4cec6773d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_acc__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-22T15:07:10.840775+00:00",
+      "sha256": "08b42bbb5ef9859c93391029139a127856e31ae7126bad8dede71572c5fb6e1f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_acc__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T15:07:10.844848+00:00",
+      "sha256": "925dcb0cbb6e817874c9a0afcf3bce84ced83902c4450ba8e62fb7c02a9759b5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_layer__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.828558+00:00",
+      "sha256": "d0467a5cff932ff3b784cc6fabd39f082baaa1767d50346507163ad99b623a6e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_layer__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-22T15:07:10.832631+00:00",
+      "sha256": "ec08feb4c79964382c8cfe36ce1bbf57b8647a1d7fe136cbffd5460544bf93f0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/b51fc693bbad4d1ea88fbadaadc58470/metrics/best_layer__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:07:10.840775+00:00",
+      "sha256": "9f6c556cb24e8cd2b0bd7090422451eca6aa90ad1189e9aff66fb3eb925729cf"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/meta.yaml",
+      "size": 393,
+      "mtime_iso": "2026-06-22T14:47:06.653812+00:00",
+      "sha256": "ac48fd53deee5ac6f80307b5857337eeda26ef58a77d2f6fb160d7332ea99baf"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.runName",
+      "size": 12,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "5ba38dbcae6d5a9a85ef0d0cbf095c18e9eee6f5ead54c678bbb2be7e6530b0b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T14:47:06.535594+00:00",
+      "sha256": "c51af89a9a96d1a7a672229362bf648fe4666620963bcf88574aff126649e7ee"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-22T14:47:06.535594+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:47:06.535594+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:47:06.535594+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/dev_size",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/cdcaeac40d734cec84093b133d7231af/params/test_size",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:47:06.539670+00:00",
+      "sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/meta.yaml",
+      "size": 402,
+      "mtime_iso": "2026-06-24T15:19:49.895031+00:00",
+      "sha256": "63ce2f7629be453cd98b7a2952d48a0c9ca399cd554dc06ce0c527d26c8acf93"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.runName",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "1fa28beb1d0a26d4f104552649dbf6bcbbb24e19ef46967ebdbe47aa3a6a4f7c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.source.git.branch",
+      "size": 6,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "fc613b4dfd6736a7bd268c8a0e74ed0d1c04a959f59dd74ef2874983fd443fc9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "46fb8f5bc14b331a1c0cd609eed4cd2915011b7236cca7ef0fee03867a1bf865"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.source.name",
+      "size": 28,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "9bbe5f720152db8c0a04e7b99b6855c30154dd0f719afa3c7daacd81acd6a748"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-24T15:19:49.788698+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/params/dev",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:19:49.792364+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/params/layers",
+      "size": 22,
+      "mtime_iso": "2026-06-24T15:19:49.792364+00:00",
+      "sha256": "74054dab5ac5657c4d000579f966b9c0c0fb77750f3c9785b1e76f8deb2e6587"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/params/pools",
+      "size": 38,
+      "mtime_iso": "2026-06-24T15:19:49.792364+00:00",
+      "sha256": "df65a46977334f147e33b66e2aca7811b2657119095bcfa4bb3245202b8d76a4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-24T15:19:49.792364+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/params/test",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:19:49.792364+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.810698+00:00",
+      "sha256": "21ab003ffe0d67f9ab46d3fbf09098f74059f1caadc4bbb144d25b2bb83012c1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.796031+00:00",
+      "sha256": "3b5abf7b272d0c7d2a0bdcc7069f82c945285a93b7e10db86fcb7b0f4f2c8b2f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.803364+00:00",
+      "sha256": "ba22370f63edbbd042b6900abb1488c56aff06206dc9d40fab1397ad600826f3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_attn__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.887698+00:00",
+      "sha256": "e903e43ae8ba3533ba4c73a67b2ea0e116c60a7348a9e1df27e38890327d8ecf"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.873031+00:00",
+      "sha256": "6ad736ecd42252888cdf1a3155b5cd6c9670c1896851909ca47296e3ec2c6c87"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.880364+00:00",
+      "sha256": "a01999b16e1b4d2f026debb95c852cc65941af2066a6f2b4e3a6d80e04ff0394"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.869364+00:00",
+      "sha256": "1b5f0c5e1623692e36878d5940b7323248269bd2ed303a50cb82caef9340069f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.847364+00:00",
+      "sha256": "75d5f9e0e05920a8ba23f1f887f2b34b415fb751379412264dc696300bc701db"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.854698+00:00",
+      "sha256": "e5326cae77d3ed7954377d4325814e0b988f05bfce22f0f367f262506ef08470"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_std__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.840031+00:00",
+      "sha256": "b7ba80f99c6bb8f54858510980c7c37e531a8710ff40f4411d1de96bb667bbbc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_std__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.818031+00:00",
+      "sha256": "ff85b00d8b56c826bfa6f3409c5e84d6b049f550158ec20bb871698965b39fd5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_acc__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.832698+00:00",
+      "sha256": "4876f609c78c0fce95a631cfefcf8c8ad00349a02b91c6f0b2009e9e5695e6e0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio__content",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.814364+00:00",
+      "sha256": "02fb84e94e6618fa04d409cbc7c4876818d3285059ba8272b2fca673d266ffd5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.796031+00:00",
+      "sha256": "480181be38a459e35f245195494324fc1f59bdb5af376305bc69b5ad33bc66b0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.807031+00:00",
+      "sha256": "5b4910a35e9e88c2b6295590bdb65004d402ba18dd2f4565f06876ca82db49bb"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.891364+00:00",
+      "sha256": "dc65dc0f553f364de6c2eec774a114ff15779c940298f8e6d88e96f8e4d7d6e8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.876698+00:00",
+      "sha256": "6ab304780fe5cc0e9be91f8748ec8730fb35a5cd20bfe5b8540e9a72684b4ee8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_attn__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.884031+00:00",
+      "sha256": "2ce7924f86a013652f9efa7e8225da3355160776028c05017d07f1caeed10998"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.869364+00:00",
+      "sha256": "e8696b337890d8def64073c0eeeb3c3688da465c4ba99a95929157417b869fda"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_stats__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.851031+00:00",
+      "sha256": "55ff15328bdd2690b647a86d5a5b320894ef022465e552895cde7608e6b52cff"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_stats__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.858364+00:00",
+      "sha256": "ee5c99f4594cd3e807c261ff43ed2e73faa5c69f697fec40efd7623beec5224b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_std__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.843698+00:00",
+      "sha256": "6f92e6979f9179fb7778a00d29dd20b97b136f483badef47aa36b8b97718172a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_std__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.825364+00:00",
+      "sha256": "e9fbcacd18b9cce6f1ae68c1e7cb976041961433de37379782d37a989d88b829"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/best_layer__audio_std__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.836364+00:00",
+      "sha256": "cf643ef8759744065f42997ab40bdf1719e3a2468194e63c13229cddc85400a0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.818031+00:00",
+      "sha256": "d85fbd98504906b6b7b35abdc93c87e3fb7ae9095e3466140703e63c8b9003f4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.799698+00:00",
+      "sha256": "b36c0b37c0d101d25d1f4cd0b6ac10d566b33fdb77117665e279dd230d15ca9f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.810698+00:00",
+      "sha256": "11c7ac9138f6b15535bd7bf1833de24c9049fdda3c4f8606ab7d59c8504d0ad2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.895031+00:00",
+      "sha256": "10eef946231fbf20c1714c6b3a26f312b242046cce57d69841e158a0a80d79dc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.880364+00:00",
+      "sha256": "f46ceacf95159c34bc5317ed27c6e2e974274294e0c8fda0dd1dacf3418f6522"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.887698+00:00",
+      "sha256": "89e50de54c03c65777e051b9877b3e881175320d55cdd45d2ce3c478cf7c34a1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_stats__content",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.873031+00:00",
+      "sha256": "6f592599d53b3c65015b1b7703c05f99dce1fd710c4895f2d07f3ab03502e488"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_stats__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.854698+00:00",
+      "sha256": "589682d36bf69e0b396c4af1979755618747cd427a41aa1d83f1023c72613a95"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.862031+00:00",
+      "sha256": "077d5b5765289c836cb406e418db5072cb0a0d476f95bffe6d46736e2357bd04"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:19:49.847364+00:00",
+      "sha256": "ee23e4f64f4733494b41a749fe6bbd0fc524ca7fd7ab19353f32653bef1f3817"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_std__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.829031+00:00",
+      "sha256": "1bfec7b058c3a929661c4d07d16c38ccd8cbd666fdb4a2c8cb79185f29bfc744"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_hi__audio_std__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.840031+00:00",
+      "sha256": "ff521a90e288be9e968e29249e5ba880ad4c41864251939cc91383f22c6d4110"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.814364+00:00",
+      "sha256": "a8c1aecc517448f7a11bb3ef49fe8bee0bc610b335383e65b863481343c979df"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.799698+00:00",
+      "sha256": "b27ac032e1c8e28e2fc0d13b89fc2e36ba284c5a377617051c08b0fe44eb7720"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-24T15:19:49.807031+00:00",
+      "sha256": "cd6c79056390dc98b070167fe48b80b1e13c65c6eed1807e2ce2ef983f0c7b91"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_attn__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.891364+00:00",
+      "sha256": "522d4d60731f4fc587c632308afa85c2360d2e686f5eb95dc005e868133f6abd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_attn__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.876698+00:00",
+      "sha256": "9bee7338e25cbdb9f617ddcfd7192651bede5ef75b3fe1d3a5546cd507e63398"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_attn__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-24T15:19:49.884031+00:00",
+      "sha256": "880da56c9c306e89eb5615ced952031b6339c590831c9dbfdd722ef3e678f959"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.869364+00:00",
+      "sha256": "fb936c50b856147e119cab1dae11ca7dbb3d399f23f0f9c9b584171d3d47d5d0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:19:49.851031+00:00",
+      "sha256": "f6a345c55ca6f3e168168209761fcc4a03a8dc228ff1fd7912b50fe9591b5746"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.862031+00:00",
+      "sha256": "87871c5cc412546274711543d6404f6681b5f24878bbc9c67efb3c0493319d78"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_std__content",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.843698+00:00",
+      "sha256": "95a0af6b7f65ff1e7cee88a79cf0d55b18a7a9c8967dc10c36698248d9a7b701"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_std__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:19:49.825364+00:00",
+      "sha256": "37e05c9bace8f7659ee55c42585b4eb783618f2765728bcbb3e6028f2bfca820"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/981429345eff4e808d94f55016e29133/metrics/ci_lo__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:19:49.836364+00:00",
+      "sha256": "670ebe93d087d1b189dc3eb53e428ea5c82b8cb404115a2a96bc74e38bf03a1a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/meta.yaml",
+      "size": 393,
+      "mtime_iso": "2026-06-22T14:48:45.447384+00:00",
+      "sha256": "8f621c56786b117dd0fdb600569ee7e5ba3a609ce7261800862cdc3d5215201f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.runName",
+      "size": 12,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "5ba38dbcae6d5a9a85ef0d0cbf095c18e9eee6f5ead54c678bbb2be7e6530b0b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "c51af89a9a96d1a7a672229362bf648fe4666620963bcf88574aff126649e7ee"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:48:32.568718+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/dev_size",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/params/test_size",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:48:32.576872+00:00",
+      "sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/artifacts/results.json",
+      "size": 1148,
+      "mtime_iso": "2026-06-22T14:48:45.447384+00:00",
+      "sha256": "022b03e7799fc86c4e7a385ce702e6088814c54f56051bac802cbbb5f3332de6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__baseline__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:48:45.414770+00:00",
+      "sha256": "4c0fc1e6f40f9d9776627c3b48c9379ed162087366c17410fcac6ce47f6ade7f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__baseline__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.418846+00:00",
+      "sha256": "37a6377657627608e9dc9898b7156b1ad976e254ab58eda7c229e981d36ce3ec"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__emotion__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:48:45.418846+00:00",
+      "sha256": "6fdffd2e57185ee73070c7a5fcebe42b758b2eb8206ed493ec4eb9091a0bff95"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__emotion__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.422923+00:00",
+      "sha256": "764bc4c0cb63d7df8804559fed26f26cc7af334aa9bb35d8df983c38dddc744d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__speaker__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:48:45.427000+00:00",
+      "sha256": "2f82040aae97de9abbdcc3a21e8942988d558d32fe055d982d84af319f266d1d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc__speaker__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.427000+00:00",
+      "sha256": "7f43b04ea8ed998f8b6f74a1e2658e80569d27a56b8a42b7cd2b8b320dbb5ea3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc_baseline__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:48:45.435154+00:00",
+      "sha256": "c79906e4dc18a33e79f73716a131eaeee30aa7914dce543370056394c4cabd0c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc_baseline__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.443307+00:00",
+      "sha256": "052282401b7eb5b77d8c856a625bcbf31304efdd600319829ee266dd247ec503"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc_selected__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:48:45.435154+00:00",
+      "sha256": "6800f588efe508c8056cc796abbd060dd4cb8a2b9b81520ba9a9ce77cdd34130"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/acc_selected__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.443307+00:00",
+      "sha256": "6fa462fa63c7b98ea213a1f375cca81d51cd933e86a03eca7674e27a30b14b7a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/delta__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.431077+00:00",
+      "sha256": "90f7a2330bce01629d5b9af393632f9022d5391338cc05282af421602168aa58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/delta__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.439231+00:00",
+      "sha256": "15a62bb4a24a40812cd71fdce27ec1ec4434662c2774146f848acc9e374b5e2a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/26d2a4178a0e4a7a8e15dd074b529bf6/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:48:45.410693+00:00",
+      "sha256": "16a31e274a29a8bd1de3ac6e3ac9295e3d8618643fe45ac54ddbdd8e69e9eef0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/meta.yaml",
+      "size": 404,
+      "mtime_iso": "2026-06-24T15:09:44.685541+00:00",
+      "sha256": "bc57aa894502a4357d873398cf9c3c82f5fead79feff9031dc0cdb01145490db"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.runName",
+      "size": 23,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "0b8d4e6e10c4f62bf38d26ccf171ebbe963053f3700917da4a7c844f19a3f1bb"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.source.git.branch",
+      "size": 6,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "fc613b4dfd6736a7bd268c8a0e74ed0d1c04a959f59dd74ef2874983fd443fc9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "46fb8f5bc14b331a1c0cd609eed4cd2915011b7236cca7ef0fee03867a1bf865"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-24T15:09:00.421615+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/dev_size",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "7f0a22117f8fe0172cf9209ff622b64a51aaeda21d58b5b62685a93dbe2dad25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/params/test_size",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:09:00.425282+00:00",
+      "sha256": "7f0a22117f8fe0172cf9209ff622b64a51aaeda21d58b5b62685a93dbe2dad25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/artifacts/results.json",
+      "size": 905,
+      "mtime_iso": "2026-06-24T15:09:44.685541+00:00",
+      "sha256": "85f37ea390c34ec379bbc0c39b7c5b2017cee6fd6879255c81b6800c5386da6f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc__baseline__intent",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:09:44.666737+00:00",
+      "sha256": "4383380e3e9ef5697e1e811d649acaa898e3a34330e7f23c705279f110de0fc8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc__content__intent",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:09:44.670498+00:00",
+      "sha256": "daeb73f7c3a6ccd0abbb93330a867a3ca6c580618c6e54fb727c1dc63a953ca7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc__emotion__intent",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:09:44.670498+00:00",
+      "sha256": "add6562be2dc676e1396acf5e4923402f93de82751eb422dd5593818f69a3d5b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc__intent__intent",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:09:44.674259+00:00",
+      "sha256": "28737076973b9787a01091bd67c27e7e5774da9c754d959a045aeb535ece2d63"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc_baseline__intent",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:09:44.681781+00:00",
+      "sha256": "f38b1f52fa1db7821555b0b84eef2d384407ba2416c6aa18b7924386d70a49cc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/acc_selected__intent",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:09:44.678020+00:00",
+      "sha256": "4d36f4d68a230a1af6b9a7332388b8518b5fbe3710adb184a84676b5fb378353"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/delta__intent",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:09:44.674259+00:00",
+      "sha256": "5b9210d0273cbc48edaac745b9123c93258c9587f7304d12f25a35121177a795"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/8549f13337194d5ead087c8c04ba5f3b/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:09:44.662977+00:00",
+      "sha256": "4964582345f3dcecd9db3863ebaea32c843d9be8009a2ec59110ffc50b9b363a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/meta.yaml",
+      "size": 403,
+      "mtime_iso": "2026-06-22T14:58:59.384320+00:00",
+      "sha256": "718e969f46079a15dc3aa2a9a96fe373fc1ac0d3eebc521cf147b2f45cafa9b4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.runName",
+      "size": 22,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "a39473ef925bf858c342b836a44c7383705e944fc1203d4e5e6afe8d09821a95"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "22d26fe57725d64051aac29a2ddb523e6551cea5b3ac02337a1e36c8866657af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:57:43.380966+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:57:43.376970+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/dev_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/params/test_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:57:43.396948+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/artifacts/results.json",
+      "size": 2118,
+      "mtime_iso": "2026-06-22T14:58:59.376281+00:00",
+      "sha256": "31b738f3c99125e231dd7c2a1a18fe8a374843c99a39865271a8d83488ac4198"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__baseline__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T14:58:59.315989+00:00",
+      "sha256": "817dd9fccbe6a68add567a4951fe494827fd2baca6d844ad67419fb3d2e89365"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:58:59.320009+00:00",
+      "sha256": "ef804b7a89d72fd30ab3e0351154160bbe7e1ef96ecfa296cb2602bd4b55c990"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:58:59.320009+00:00",
+      "sha256": "d42b98d9ade860764569af09758f467493a307442cd2f27b957c9a3edbd7f50a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__content__content",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:58:59.324028+00:00",
+      "sha256": "b23a83b18a0caaeff1b14eb336c7fd15c2e18b1af2fcbb01d365451e9a10ec62"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__content__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-22T14:58:59.324028+00:00",
+      "sha256": "b6c1838067d264b291e70cba0be2e3f64ebb4e6d9e76113ac1e5079a6ced6967"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__content__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:58:59.328047+00:00",
+      "sha256": "9eb1706bc536472afcfbe3675fa407d717a5248c98ebefb91fced70469dad05f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__emotion__content",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:58:59.328047+00:00",
+      "sha256": "26bdd7d2e519547c5c789201f81cceeeb3b6ba559827fffd814d3a4fae6c7462"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__emotion__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:58:59.332067+00:00",
+      "sha256": "51c13e429c6ff0bbd02d339b6a0fa3f0bea05fcd2831b51253c056fcb3b89105"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__emotion__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:58:59.332067+00:00",
+      "sha256": "e291d013822b625abb173793fa0bea170203c27ecb60ed113f856db000455c7b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__speaker__content",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:58:59.336086+00:00",
+      "sha256": "8da9a51e9795bc723f2a110e2bbb604f2724e630434709e583f29a8b8bee33c8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__speaker__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:58:59.336086+00:00",
+      "sha256": "b227898477bc28e7fce1547ab3c7ca62e93c7eb28067bebed544a1bbc9a89709"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc__speaker__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:58:59.340106+00:00",
+      "sha256": "f5230893c8211f04c619aebf1a38ff29339a55231d809dd0cfe7c69333ca9991"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_baseline__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T14:58:59.344125+00:00",
+      "sha256": "b73ad7f7ecf17f179e86c10f79e110de6bf45d3243723d4f36a79bd30dc727da"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:58:59.356184+00:00",
+      "sha256": "aef7f4255da6eda26f973f5390048280281960be191e9d073892965fd5062ad3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:58:59.364223+00:00",
+      "sha256": "8ee1f74e4539592587c4b7eb33c576cd063f6ee679f6ddca73c9d71527bf7e62"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_selected__content",
+      "size": 35,
+      "mtime_iso": "2026-06-22T14:58:59.344125+00:00",
+      "sha256": "d599c4fbe4d733f557d5ddfc2995c19efe6fc0aebdcd3d79cb6a2d57367795bb"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_selected__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:58:59.352164+00:00",
+      "sha256": "fa7592c0da3af1df8b6c254c3838e90dd12f2463fc1dd12fffa5ffbab2bd702a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/acc_selected__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:58:59.364223+00:00",
+      "sha256": "88d7ec5dba73b37871950157c460e1726d1490c164ff08c831207018b66c0b85"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/delta__content",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:58:59.340106+00:00",
+      "sha256": "ab5d32963bb0deacc5448d0719fa89c937a37c46052546ce990c634a654e3063"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/delta__emotion",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:58:59.348145+00:00",
+      "sha256": "33afe61724594286d3d0aaf4960aaca83ecb7d4a65c20addfae436f40a45d0ca"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/delta__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:58:59.360203+00:00",
+      "sha256": "8350be2ffba3f93c96bacf7b05d9d053bd934e2ded9b8c3e7aee5acaa69196ae"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/17c2436023ff44eea174e3fada4b54ae/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:58:59.315989+00:00",
+      "sha256": "9b575f755a02b53d91455b08a57dbefed8e63d6fc143affbc0c0126aebcebf02"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/meta.yaml",
+      "size": 407,
+      "mtime_iso": "2026-06-22T14:50:57.622244+00:00",
+      "sha256": "7919c5df68429ab2d083ba89fbf281b7bd606b1374ce752026bcaa46c33252e5"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.runName",
+      "size": 26,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "ca44bce21769c76f6992907503c2e11b76e621ad728cb0ac6866fb33f9960915"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "c51af89a9a96d1a7a672229362bf648fe4666620963bcf88574aff126649e7ee"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:49:56.843274+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/dev_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/params/test_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:49:56.847351+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/artifacts/results.json",
+      "size": 1354,
+      "mtime_iso": "2026-06-22T14:50:57.622244+00:00",
+      "sha256": "a8c8a1bb9c5b76e80037f383d72ef9753176385b018cf6e9d9ec7192c48b8f53"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:50:57.589492+00:00",
+      "sha256": "9f39691a5c6d5c91dcbae5f82a12464a1f832690f211e7090ea6a5bb11aa6dca"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:50:57.593586+00:00",
+      "sha256": "f5b05cd16dace65d8c0ad7cbfdf179d5d804ac4c9c68499497a4727a635ab2d7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__emotion__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.593586+00:00",
+      "sha256": "4a7616987500bc22b057b44104e169f8d721724de0fdebadfcb41bbc18779819"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__emotion__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.597680+00:00",
+      "sha256": "0b49d15c9d8472c4caca49e4991d48106dacc075d4a3458e36fd5403fd71702c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__speaker__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.605868+00:00",
+      "sha256": "44fe36867d443fd45c2f3c34cc9ce1efd7872590232680f6bb40463491793cdc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc__speaker__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.605868+00:00",
+      "sha256": "65e9163b833a8ca615810f19db15bb8d8a602558ff9cf61d4a2e44df11fe6fbf"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc_baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:50:57.614056+00:00",
+      "sha256": "55f24db5fa34ffc86b13d443ef456fa4af794998321dcda662c2860801714ffe"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc_baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:50:57.622244+00:00",
+      "sha256": "f2e75d8dd4da3169ab6396affdb8a26d6e837abe755b27660e362b2b590e9f31"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc_selected__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.614056+00:00",
+      "sha256": "e9362d143d338bcc51aa19d4c9d91e9cfe14f98211375e1ec46271660c223c2f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/acc_selected__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:50:57.622244+00:00",
+      "sha256": "31a39eef76e40053059d0058dfde16ddc0234607252227275db2915b0edb4b0f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/delta__emotion",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:50:57.609962+00:00",
+      "sha256": "6475bb5685f065937b2ae30a2b499faaefe50c21a0d4200374c590a912ed80ec"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/delta__speaker",
+      "size": 38,
+      "mtime_iso": "2026-06-22T14:50:57.618150+00:00",
+      "sha256": "2365be65b75b341493026a7e651a96495b4a6ed2e84f98154fb607feddad6e7f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/805460a3a4a24fb595cbbf90e00c0787/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:50:57.585398+00:00",
+      "sha256": "e6d1a4a2f4b474968d4e999f64578d695d10b3e2f6b713459bd577c90c1cc101"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/meta.yaml",
+      "size": 402,
+      "mtime_iso": "2026-06-23T02:37:56.126525+00:00",
+      "sha256": "5d1ad3501f11df34b562f9b5f91156b6cd9439e1978c883cf621cf829f7c99d3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.runName",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "1fa28beb1d0a26d4f104552649dbf6bcbbb24e19ef46967ebdbe47aa3a6a4f7c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.source.git.branch",
+      "size": 6,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "fc613b4dfd6736a7bd268c8a0e74ed0d1c04a959f59dd74ef2874983fd443fc9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "40dde396d37be22fe79f6d6af93ad93e9a80d6232a0a0a7ccf89ba461fc45a90"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.source.name",
+      "size": 28,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "9bbe5f720152db8c0a04e7b99b6855c30154dd0f719afa3c7daacd81acd6a748"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-23T02:37:55.957779+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/params/dev",
+      "size": 3,
+      "mtime_iso": "2026-06-23T02:37:55.966216+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/params/layers",
+      "size": 22,
+      "mtime_iso": "2026-06-23T02:37:55.966216+00:00",
+      "sha256": "74054dab5ac5657c4d000579f966b9c0c0fb77750f3c9785b1e76f8deb2e6587"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/params/pools",
+      "size": 42,
+      "mtime_iso": "2026-06-23T02:37:55.966216+00:00",
+      "sha256": "b60f3ff7f5760c0cb2e91212262c0cd8e7c9be0e6396aef912261c28f1fd932b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/params/seed",
+      "size": 1,
+      "mtime_iso": "2026-06-23T02:37:55.966216+00:00",
+      "sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/params/test",
+      "size": 3,
+      "mtime_iso": "2026-06-23T02:37:55.966216+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__all__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:55.991528+00:00",
+      "sha256": "ed08b2912b4bcad18d4593de05ff8e8f6b7af9293bdbcca8ce248520200310b8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__all__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:55.970435+00:00",
+      "sha256": "71bd04224669eef485b6edf00bf54e176fe650fcf75b5ef52ee3b4fa359bcc11"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__all__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:37:55.983091+00:00",
+      "sha256": "eeb084726e437d182f283a5dad6b351ae08b197ebbd15e9e4f88bdfb6b6e8a5e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.016840+00:00",
+      "sha256": "a3c477be948482ce656f2689289253b321d08117d45d131417144b080d0742e6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.004184+00:00",
+      "sha256": "510f625bed701eeb4abeca909794573ca538fb4e367eba755cce85b35e2c87c6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-23T02:37:56.012622+00:00",
+      "sha256": "641dd38c2ccc5bca68d95e2a0bf0db27ddc0c85cce0f7b0f0356d393ad087f85"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.118088+00:00",
+      "sha256": "21654704714eefc392001404051e8b6b2ae7734e5753367d533e0c97b56c77d8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_attn__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.092776+00:00",
+      "sha256": "162f267dcf1abddd139bf917c3de47c6d2301f1d87b31d46852c4dffa44b2f5b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_attn__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.105432+00:00",
+      "sha256": "3830009c9388ba7f3095f65fa3d81e8d27685fd12e2046d1dc85293827323bd8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.084339+00:00",
+      "sha256": "2e08f267e98b24842833d82767a52ac92a0c438e24556aa6305792561cb8b998"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.063246+00:00",
+      "sha256": "76d0db1896eea7aae6a4290bf67ca756e31ca8865d3661e61f70b596742314a3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_stats__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.075902+00:00",
+      "sha256": "2f36a07256aebd4e33d363cc5fe3b1a1e70bd1ffe7a07320eec05960af2f48d4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.054808+00:00",
+      "sha256": "0b3b9553255c04f6a3d2a58bef66354ebb82f32e31a4b72094099e89e0598a60"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_std__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.029496+00:00",
+      "sha256": "855eab7e99e1570a604d1606922b7b5dfb2ccba99c4a53268aab8446277ecd52"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_acc__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.042152+00:00",
+      "sha256": "370904970e1f24ba43cdfd1a19ff453765c462a6782286a847fc8133232f68e6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__all__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:55.995747+00:00",
+      "sha256": "6c13f5bd7cf3cd2abea4f6301fd787b544d54ea6e736321a31b0af5bf7fce5d2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__all__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:55.970435+00:00",
+      "sha256": "9d6174d5db47dd432d739f016124ef144388d9c29dcb315d50ab8a61d7422d83"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__all__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:55.987310+00:00",
+      "sha256": "0c8c8bed9b79dc0892dc0c7eff8a31c148edfc73067de78f3f29d0536199c9b7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.021059+00:00",
+      "sha256": "3c2ec0ea0ab2d1f75f39cf562e7dbb738fe947997c40507818bdf64621e9aa4b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.004184+00:00",
+      "sha256": "d30ce1130cfc68b3ce0fa298eefcfd35aeeba457a7af3e98f6af0b66f0b5c96a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.012622+00:00",
+      "sha256": "90bea5399e8cfa4bc9b8f2eca4e1dc614d998acdadd72c7627a7c245f1b010e4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_attn__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.118088+00:00",
+      "sha256": "62c19cea931c46e6a98dced121eb1661855a9d4af11d33dec06e785aac41c35a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_attn__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.096995+00:00",
+      "sha256": "dc766b977ab3baf77466798e10e306c85c77bab1c2de90c836cd56e1cb58bf29"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_attn__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.109651+00:00",
+      "sha256": "46247c4195383d0819183b487ef0e4caa38f0fdd6594463e6983bde296df3eca"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_stats__content",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.088557+00:00",
+      "sha256": "a0ba40598c8e020680a25416f35d4c1b783e99c093c2db19259f26b5f4318884"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_stats__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.067464+00:00",
+      "sha256": "c30316ceacf1e3d0b591690123ff027008fa39b41f9bf3291f7288a9be593a81"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_stats__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.075902+00:00",
+      "sha256": "ce6447f0ab046940c03373ed0eaf0121a131f330418d36a5947d9bd8f18d71d2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.059027+00:00",
+      "sha256": "0aeaef0f7553cb332fbc91ab37cd9dfe2f0b9d2dff4b87aa2236668743c655cd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_std__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.033715+00:00",
+      "sha256": "32813edb1805ec342f19b1c0624578ec7e418ce5cd82caf117b36d16d02865ab"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/best_layer__audio_std__speaker",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.046371+00:00",
+      "sha256": "88bd8fbb54432676171cca408c9326b6e94faf1a7565eff22f6d02e3044df343"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__all__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:55.999966+00:00",
+      "sha256": "45dbdbdd50265813fc3478b49dcb03cb0cd93e10f26bc1781d95468bd8ee2103"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__all__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:55.978872+00:00",
+      "sha256": "b4cf8aeb3458e65b836732d7a3c1c2dbaf5a2e63051346b8e3eda3f4dad4a8bc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__all__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:55.991528+00:00",
+      "sha256": "c8e557e0e6ba1ea8ab1d184baacbc1abd688f61649e4863e14481f00974f47d7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.029496+00:00",
+      "sha256": "8c600832a880dcbcee738b5d87289290cc77b97d9170f5ab14a4cebc8aa6e4fe"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.008403+00:00",
+      "sha256": "f4ab491dda778208326b6223ab1d65b8fe022e5f3cf414b69880524a3ca504a6"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.016840+00:00",
+      "sha256": "30da04290b364ad31966b8fe7bdddad86842ecf6656cad4e48cd4e0953aebb92"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_attn__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.126525+00:00",
+      "sha256": "d0c15a4160f005ab481034cb95d9bb21555e384b79ec5d0c49f888beed881554"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_attn__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.105432+00:00",
+      "sha256": "4f2492045b6860239edee25fa86ece6502d683a4ecb43ca3e7c87acf21bc0d45"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.113869+00:00",
+      "sha256": "39921aefd19d5bffc6dd6249cee5c4c0e64c322d34dede2bc71e92c3067e9562"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_stats__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.092776+00:00",
+      "sha256": "65de8d360c287bed5be258db7e4cbf64ed0c5b498656e11e2cfab90cf72f3f3b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_stats__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.071683+00:00",
+      "sha256": "67bce2dcba37ae421ba34a27f8621e52978c7314b5e75277a3ec49e7456c85f3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.080120+00:00",
+      "sha256": "b8687d953a7f772f1278ac253dfee1c0ece53904a4d5cee8b36337f6c3442742"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.063246+00:00",
+      "sha256": "e38fbf9138afef918ae906c5ced8aa175e2590977a32b015dbb2b98bbfd68eb3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_std__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.037934+00:00",
+      "sha256": "cf2803cbf9156161a9adc5a53e6efe0a5c69ccd75243f0943c03b9950592f544"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_hi__audio_std__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.050590+00:00",
+      "sha256": "ad6ae38104c932c66824794c305e5227c49b092acffddb615735157d80d3ecaa"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__all__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:55.995747+00:00",
+      "sha256": "7dd71c5b754d52554444b9f9743df3be624845c0b10d210d4cd28fdb28ef56f1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__all__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:55.974654+00:00",
+      "sha256": "3e73d08793a01634ce59caf3c1974672719cd57c0406fbed3363a1b61594cc89"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__all__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:55.987310+00:00",
+      "sha256": "af81e0502a19da05084373ed3966fb0ed649010a54b15835b7cf41df901d595c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.025278+00:00",
+      "sha256": "6f975cd40df7460054ba0ddf8efa26843f1bf469db3212606aa4f44c9ba9664b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.008403+00:00",
+      "sha256": "2a40e848c837e3f4be2436f4119a3c5883cfe93412fc74ab139ddd89bc4a1572"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.016840+00:00",
+      "sha256": "07b813fd0a3e1ec8e5c491b7eaa592d0aba4e7b2e7ecea95ce1aed0a37832bd8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_attn__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.122307+00:00",
+      "sha256": "6ddbed5e8ba274e6d95df493b3deecf548a706325b3407ab6047d18c741347e1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_attn__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.101213+00:00",
+      "sha256": "bf66a0af262ef30bc2a4cc6c25fdc568f50141175bc78ec677446ff53ab252b0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_attn__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.109651+00:00",
+      "sha256": "8306c05f794d9b68478d58eff826c1aa47a355a5879fcdbe66a9c1045e602d66"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_stats__content",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.092776+00:00",
+      "sha256": "d7ae6d0555dad81e47a60b31c6f5ad5e10acea45a7b2bd76351e3e07b451046e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_stats__emotion",
+      "size": 35,
+      "mtime_iso": "2026-06-23T02:37:56.071683+00:00",
+      "sha256": "a5a09e656545853f9b77517e12d6fffa35fba6f9df89a09f6e25c74bcf0286df"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_stats__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-23T02:37:56.080120+00:00",
+      "sha256": "2b991551466d2dc154d408cd49cffd31bd54055ee260ccf1701fb17698db0122"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_std__content",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.059027+00:00",
+      "sha256": "abd8d53126bc27e7153510ba63fd2daf4b842bec9b6e21fbc4f02d990f861e7e"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_std__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-23T02:37:56.037934+00:00",
+      "sha256": "f94b3c34c3ce89daf0adb1d7542d61e884f452c95d7e8f02fe549317af5a3dc2"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/21453cb138114ea6a667d8d8bb5a6a0e/metrics/ci_lo__audio_std__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-23T02:37:56.046371+00:00",
+      "sha256": "e22f75ac44257a0808319851c2e49c80fdfc11d135cde627f7f3caad96dd9249"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/meta.yaml",
+      "size": 407,
+      "mtime_iso": "2026-06-22T14:52:58.475233+00:00",
+      "sha256": "3bb727d3f81195a9ab9fa7790a90071f5d1c6d226289b9915277c3edd7b63ed8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.runName",
+      "size": 26,
+      "mtime_iso": "2026-06-22T14:52:55.676257+00:00",
+      "sha256": "ca44bce21769c76f6992907503c2e11b76e621ad728cb0ac6866fb33f9960915"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "c51af89a9a96d1a7a672229362bf648fe4666620963bcf88574aff126649e7ee"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:52:55.672222+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/dev_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/mode",
+      "size": 4,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "1bbd174404efbce95f1af489ef93f4aa0f4d55718f24c3504682216afa7b7fb1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/params/test_size",
+      "size": 3,
+      "mtime_iso": "2026-06-22T14:52:55.680292+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/artifacts/results.json",
+      "size": 1354,
+      "mtime_iso": "2026-06-22T14:52:58.471155+00:00",
+      "sha256": "a8c8a1bb9c5b76e80037f383d72ef9753176385b018cf6e9d9ec7192c48b8f53"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:52:58.422221+00:00",
+      "sha256": "5caf33fe91ca210f6b58cc8967b68c248ffb8307d59688cabaa53486f00e509d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:52:58.426299+00:00",
+      "sha256": "4d427a83bf0aa0d3f9cd0fd3945e8429101de6fc1f28cb5e8acba816df96782f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__emotion__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.426299+00:00",
+      "sha256": "37723c30655366306ceb42a6cc3da18d26528bd3b2522bd07a6388e32d2648df"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__emotion__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.430377+00:00",
+      "sha256": "ec95e5ff2deb3a4df2b223e7ffa857abb575fac3398a5825bc23aff4d9aa01b7"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__speaker__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.430377+00:00",
+      "sha256": "f2daa155901e9d2be028aff4494103ab2574d89cd78f03156612c80b16f31c42"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc__speaker__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.434455+00:00",
+      "sha256": "0086b9869bba8e42e3e30dd232c7625d91a30ed80f1bdfafaed591237e7c2ab0"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc_baseline__emotion",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:52:58.442611+00:00",
+      "sha256": "bcdcd81ee9b79109c75d30c4383752c168929f2ff60c3e8ba703f9378ea7c037"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc_baseline__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-22T14:52:58.467077+00:00",
+      "sha256": "380d641d3b219366d6f95a871f30cc92021c3d704d1d2a29a1bae50441055a78"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc_selected__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.438533+00:00",
+      "sha256": "0648ab231d7bf830aa2254a44daffa49ee59a37d8648e5a842e5cc9f69ff5673"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/acc_selected__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-22T14:52:58.463000+00:00",
+      "sha256": "c19cc335910c36572269017d2d51a34496e1ddd45852e48dbc830f747b2777b9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/delta__emotion",
+      "size": 37,
+      "mtime_iso": "2026-06-22T14:52:58.438533+00:00",
+      "sha256": "57f9ee307ebb0e50385c45ff7b9609e3db7c86c1607b7fcdff594b22e3303299"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/delta__speaker",
+      "size": 38,
+      "mtime_iso": "2026-06-22T14:52:58.450766+00:00",
+      "sha256": "a8f25b36929b8560bae6e4bca833b7154e4495636ab79f4eb7fcbe4f3831b47c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/ab121db0f47c401ead3180f8ca6df1dd/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-22T14:52:58.422221+00:00",
+      "sha256": "5890fc11be09c2380917c91de580bd624e47b374ce64014e762adc6a0d111f09"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/meta.yaml",
+      "size": 407,
+      "mtime_iso": "2026-06-24T15:01:38.770038+00:00",
+      "sha256": "923b69b9bab48031ba1b95d8918db3f8bb3fa5cac5ee50d1e74ba09fbc4c4746"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.runName",
+      "size": 26,
+      "mtime_iso": "2026-06-24T15:00:07.627730+00:00",
+      "sha256": "ca44bce21769c76f6992907503c2e11b76e621ad728cb0ac6866fb33f9960915"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.source.git.branch",
+      "size": 6,
+      "mtime_iso": "2026-06-24T15:00:07.627730+00:00",
+      "sha256": "fc613b4dfd6736a7bd268c8a0e74ed0d1c04a959f59dd74ef2874983fd443fc9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-24T15:00:07.623760+00:00",
+      "sha256": "46fb8f5bc14b331a1c0cd609eed4cd2915011b7236cca7ef0fee03867a1bf865"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-24T15:00:07.627730+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.source.name",
+      "size": 116,
+      "mtime_iso": "2026-06-24T15:00:07.623760+00:00",
+      "sha256": "e25456953d688c55fec97b61744e000a06e82d929770d87bc14dec8d076b8cac"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-24T15:00:07.623760+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-24T15:00:07.623760+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/dev_size",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "284b7e6d788f363f910f7beb1910473e23ce9d6c871f1ce0f31f22a982d48ad4"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/knn_k",
+      "size": 1,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/mode",
+      "size": 5,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "116f54c41d0405dbb10e7b04ebc31e262a5b8c85c1233fcf36eaee344d91ae58"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/model",
+      "size": 10,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "da88c6e5152fb75b8ef409132a377253a504e9633056bf37d9a213e096679009"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/operator",
+      "size": 1,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/probe",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "1c32b3e5fbd14dfbabb2bb0201f85f5a96cc1ec3fa4073ea30f1433810e4e3af"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/params/test_size",
+      "size": 3,
+      "mtime_iso": "2026-06-24T15:00:07.631700+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/artifacts/results.json",
+      "size": 2195,
+      "mtime_iso": "2026-06-24T15:01:38.766371+00:00",
+      "sha256": "be85db39d7fe47a4354d489626f187b269b3a11a41a18afa3c29ca53bcb8b953"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__baseline__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:01:38.711371+00:00",
+      "sha256": "cfb59f8bd91ba9fbeed15848bd2714abd8f7919725e93cb3e254c283aa970066"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__baseline__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.715038+00:00",
+      "sha256": "337b48fedd81343c5cab6770bd4b656b1d32f05a00fb67e32d47dce521abff47"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__baseline__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-24T15:01:38.715038+00:00",
+      "sha256": "0e80392ab2502fd2fb9afe56c4f1d343b7e326e13eafdad60f67bf4bc265b514"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__content__content",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:01:38.718704+00:00",
+      "sha256": "65a5f7839a9e18b73e63bdad2ebdd89e2e99f7c62ee7878fb0fcfa5b24a797e9"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__content__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.718704+00:00",
+      "sha256": "d091f62ac0da07fcfb23b5b617612b4d519309410750174e35bd83e9f9568a31"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__content__speaker",
+      "size": 21,
+      "mtime_iso": "2026-06-24T15:01:38.722371+00:00",
+      "sha256": "4b560c1fd35ecb2839450b9f64f17af19386c657969c222694cf05ccc89e52fa"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__emotion__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:01:38.722371+00:00",
+      "sha256": "68b7b575c8c668d7b04b7ae43132fc71cbc460d9b0902cdc228276365cf7911b"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__emotion__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.726038+00:00",
+      "sha256": "cf53ea346e09b02fcdae916cdc3ce30e8380d9811f75a3b2772959d2b4353c19"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__emotion__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.729704+00:00",
+      "sha256": "fc3c879e40cd6256ac8015f63cce4f47d058eb66ec4f2f19bc69e12415dd7ddb"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__speaker__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:01:38.729704+00:00",
+      "sha256": "e0e05085a955ed6b8034bb8e3889381af3d8155c4e0642599242b1f2f576066c"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__speaker__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.733371+00:00",
+      "sha256": "7f9170bc8adbe6c9aabd059e1714066e84e3574a70db9d0e91a72dc713f58adf"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc__speaker__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.740704+00:00",
+      "sha256": "ab0306dc4e90683afd4ba43c56b03241c8f20532f36604c96bd687a2d093f583"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_baseline__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:01:38.751704+00:00",
+      "sha256": "f4db44d1a48cd92900085cf7c28cd442a54fb098cf629e31421fe9c621035627"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_baseline__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.759038+00:00",
+      "sha256": "a46a2ea8db9d2f2e7df4e52d173cd258696addafc8daa2677d18858427742788"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_baseline__speaker",
+      "size": 37,
+      "mtime_iso": "2026-06-24T15:01:38.766371+00:00",
+      "sha256": "de173e1b1d89df5f888a0578a674aa5b9b6379b68141bddd2845b53c3666c6ab"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_selected__content",
+      "size": 35,
+      "mtime_iso": "2026-06-24T15:01:38.751704+00:00",
+      "sha256": "25f75d5342083c41e467e39d69bb39e1372899e25d0e2f767cd00c634912f6f8"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_selected__emotion",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.755371+00:00",
+      "sha256": "291a4b96d82808a291ae646fb6ea40f35fb5b81d20df6075a91b44bcf1dfa3e3"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/acc_selected__speaker",
+      "size": 36,
+      "mtime_iso": "2026-06-24T15:01:38.762704+00:00",
+      "sha256": "3dc2866cf9a5ebefb1e142ce2922ff52710f298cd795d4ac61ed36fcaa522abc"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/delta__content",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:01:38.744371+00:00",
+      "sha256": "e860565faff4f8fb2f75d6aa4a05c5df19897a286d369398b3a0530815460076"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/delta__emotion",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:01:38.755371+00:00",
+      "sha256": "eba7a452e4a2ee4977332bc8f73ea4a966f38854829f1a865a632c46125d0bf1"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/delta__speaker",
+      "size": 38,
+      "mtime_iso": "2026-06-24T15:01:38.762704+00:00",
+      "sha256": "39e0c5660c095b4543ae01e56854611b32c79adb3e43d67f04de2eb8be76d79a"
+    },
+    {
+      "relpath": "WSL/mlruns/500168843308197976/0b6ccd15b09e4ba1b456886243f00bfe/metrics/diagonal_dominant",
+      "size": 20,
+      "mtime_iso": "2026-06-24T15:01:38.711371+00:00",
+      "sha256": "34692a9a56218e4449cdc9c99111d73cf05fa018cff2ca2bab7407be986b88af"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/meta.yaml",
+      "size": 316,
+      "mtime_iso": "2026-06-22T15:53:41.361105+00:00",
+      "sha256": "94098cc26a507f1472137ad9ed15ef613ee6e22851d52d550bd40cae041cf135"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/meta.yaml",
+      "size": 395,
+      "mtime_iso": "2026-06-23T00:20:32.098248+00:00",
+      "sha256": "c4fd598371cd4601d7d2c62435e269ad7609a03870d65efbbbeb1481ee2d0230"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.runName",
+      "size": 14,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "e578603d3e29cec65a49eef0808fb8843627f788f7125985d734292a97d09675"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "261c1e1a331d39d997b8959f8cbc6350883a9f7699a63323ef4f4f614a65e0f1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.source.name",
+      "size": 26,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "6a119aa4f8944a3f97a209c0c9a321b0d86295db3d730773ea2b4646901f5be0"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-23T00:20:32.082112+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/params/factor",
+      "size": 7,
+      "mtime_iso": "2026-06-23T00:20:32.086146+00:00",
+      "sha256": "3b9c4346fbead3ae18ec46b6e9a2094dc56a50a8396f02322897f224cf3078d6"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/params/k",
+      "size": 1,
+      "mtime_iso": "2026-06-23T00:20:32.086146+00:00",
+      "sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/params/nq",
+      "size": 2,
+      "mtime_iso": "2026-06-23T00:20:32.086146+00:00",
+      "sha256": "624b60c58c9d8bfb6ff1886c2fd605d2adeb6ea4da576068201b6c6958ce93f4"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/metrics/label_sensitivity_mean",
+      "size": 37,
+      "mtime_iso": "2026-06-23T00:20:32.098248+00:00",
+      "sha256": "2897aa57f4c979405ad1083087146c675f6e9d68e9ed8335b8cb3bb08d725cb7"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/e562afa8174d4b2da4e3683a46c7c242/metrics/move_mean",
+      "size": 36,
+      "mtime_iso": "2026-06-23T00:20:32.090180+00:00",
+      "sha256": "a3ff8889b2acf66950d509213c5f45b0be275f7bd11eff7345abc0cbcbb7d195"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/meta.yaml",
+      "size": 399,
+      "mtime_iso": "2026-06-23T01:09:22.070481+00:00",
+      "sha256": "0e9753f7683f28bbfce9443019339a0e30f8b427004204b512042513152e4ab8"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.runName",
+      "size": 18,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "a40385a7df70995abd07eeae93f3175020be35bcf2f559963ebfd5c990fb7a8b"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "261c1e1a331d39d997b8959f8cbc6350883a9f7699a63323ef4f4f614a65e0f1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.source.name",
+      "size": 26,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "06ab29b3428324f82900ba307b9c0406770fd45cd4bab035a344811d58474518"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-23T01:09:22.050115+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/params/factor",
+      "size": 7,
+      "mtime_iso": "2026-06-23T01:09:22.058262+00:00",
+      "sha256": "3b9c4346fbead3ae18ec46b6e9a2094dc56a50a8396f02322897f224cf3078d6"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/params/fit",
+      "size": 2,
+      "mtime_iso": "2026-06-23T01:09:22.058262+00:00",
+      "sha256": "39fa9ec190eee7b6f4dff1100d6343e10918d044c75eac8f9e9a2596173f80c9"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/params/k",
+      "size": 1,
+      "mtime_iso": "2026-06-23T01:09:22.058262+00:00",
+      "sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/params/test",
+      "size": 3,
+      "mtime_iso": "2026-06-23T01:09:22.058262+00:00",
+      "sha256": "2abaca4911e68fa9bfbf3482ee797fd5b9045b841fdff7253557c5fe15de6477"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/metrics/acc_demo",
+      "size": 21,
+      "mtime_iso": "2026-06-23T01:09:22.062335+00:00",
+      "sha256": "0bfee42c31fdb2f54f7fabc3a7d50bc25f7c21b21bbac0fa1e47a2ef3fb81178"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/metrics/acc_diff_vector",
+      "size": 36,
+      "mtime_iso": "2026-06-23T01:09:22.070481+00:00",
+      "sha256": "651295700b15d4889a8f9095d3ebab208c292ba8ef27e11c7ca9e057d5d104d0"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/699dbea51ae944ea8c2e38f316c28f49/metrics/acc_no_demo",
+      "size": 36,
+      "mtime_iso": "2026-06-23T01:09:22.062335+00:00",
+      "sha256": "7665d814b187602309eae823b8f8264cb4105654061ee81e31c05e8b280f7e3e"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/meta.yaml",
+      "size": 402,
+      "mtime_iso": "2026-06-22T15:53:41.575301+00:00",
+      "sha256": "edc4d30ca26c272975c3badbd91e80f6e2594823983be693bdcf26d8149ed734"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.runName",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "6d85aebae1194f490b17131279a4bdc5badf15a9af17fb6d29122a7bc6763b8b"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.source.git.branch",
+      "size": 33,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "29e35f557c22c4cd5a5ef7c85f1d7b8383b674944e9ab11de523da91e1967aa1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.source.git.commit",
+      "size": 40,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "261c1e1a331d39d997b8959f8cbc6350883a9f7699a63323ef4f4f614a65e0f1"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.source.git.repoURL",
+      "size": 70,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "b58f14d96dca3873628949b075788184c9f530d4f00dc8600cc8e2093d0a5578"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.source.name",
+      "size": 28,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "cc2b6f0ed1db55326cb2ad8e461e3fc3f5d4b43547646eb791711c52a18013a3"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.source.type",
+      "size": 5,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "646c19373ac9e27e972c8e3bdf6554c4c10d23006c1abec3407cbff80c4ab71f"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/tags/mlflow.user",
+      "size": 4,
+      "mtime_iso": "2026-06-22T15:53:41.547011+00:00",
+      "sha256": "266dd25dac03fce9c8fa8f7db4b64aebdfe91bbbae21b6c32ee6c9f899fe9a25"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/params/seed",
+      "size": 2,
+      "mtime_iso": "2026-06-22T15:53:41.551052+00:00",
+      "sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/params/test_n",
+      "size": 3,
+      "mtime_iso": "2026-06-22T15:53:41.551052+00:00",
+      "sha256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/metrics/p5__content",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:53:41.555094+00:00",
+      "sha256": "ce1438f0dd8d405b6d27f213f0fbed0d91e17f262f3da41deb524deacefb81c8"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/metrics/p5__emotion__emotion_is",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:53:41.571259+00:00",
+      "sha256": "410532c2506ae0ffcae731ac023221942892eaa9dc29336734d79e00b9d0437d"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/metrics/p5__emotion__plain",
+      "size": 36,
+      "mtime_iso": "2026-06-22T15:53:41.559135+00:00",
+      "sha256": "d174ad6f94a42c5b6828fe8b84d0101688965aebc533a3a6736411e46d36fc5b"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/metrics/p5__emotion__speaker_feels",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:53:41.567218+00:00",
+      "sha256": "8e31822d60b2ee784f67dbc98708f6a43b64598af9c313a8d97cd86c11663718"
+    },
+    {
+      "relpath": "WSL/mlruns/741139080879565390/cd38cad2dca54bdfb350887ede8ef09e/metrics/p5__emotion__voice",
+      "size": 21,
+      "mtime_iso": "2026-06-22T15:53:41.563176+00:00",
+      "sha256": "a304a7392d4c5c6d128d7d3a1ec0c1d2df77095f866171c21ae41861abc48339"
+    }
+  ]
+}

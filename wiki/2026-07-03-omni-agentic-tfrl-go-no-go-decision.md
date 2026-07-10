@@ -142,6 +142,18 @@ Defense answers are classified ANSWERS or ROUTES-AROUND only (safeguard 3); fina
 | S6 | **resolved, residual open** | per-token logprob interface still unexercised (prereg note 5) |
 | S7 | **stands** | measured-zero paralinguistic spread unchanged; corroborated by D3-6/D3-9; no paralinguistic artifact exists (chair C6) |
 
+> **2026-07-11 correction to S7 (ticket #34 / INT-013, append-only — the row above is left unedited
+> as the historical record):** "measured-zero paralinguistic spread" overstates the evidence for the
+> SPEAKER axis specifically. The frozen `_repro/paralinguistic_negative_probe.json` (W4 repo) shows
+> speaker accuracy significantly ABOVE chance in 2 of 3 seeds (seed-123 CI [0.0267, 0.070] excludes
+> chance 1/91 = 0.011); it is low (~3x chance) but not zero, and the CI is evidence of that non-zero
+> spread, not evidence against it. "Measured-zero" remains accurate for the exact-zero
+> *selector-gain* findings (M5/U4 lanes) S7 also draws on, but not for the paralinguistic *readout*
+> itself. Recomputation (no rerun, same frozen numbers):
+> `projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json`
+> (`scripts/speaker_probe_restatement.py`). Full context:
+> `wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md` INT-013.
+
 Net (unchanged from the frozen ledger, now measurement-backed): revival of the agent-level framing is gated on P1's theorem (r2) plus S1's corpus (r1) — both re-verified absent as of 2026-07-03.
 
 ## 8. Pivot disposition (B.2 item 4)

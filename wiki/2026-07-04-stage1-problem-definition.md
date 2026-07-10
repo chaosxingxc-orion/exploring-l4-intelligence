@@ -192,6 +192,18 @@ Reproduced from the survey's Appendix A — every in-house number, its grade, an
 
 **Qualitative in-house standings cited without numbers** (governed by the same re-grade / NO-GO records): the vector-class paralinguistic premise (speaker never written to the pooled vector; emotion present-but-unread) `[settled (vector class)]`; and the r1–r3 closure-fence standing `[settled (as of 2026-07-03)]`.
 
+> **2026-07-11 correction (ticket #34 / INT-013, append-only — the line above is left unedited as the
+> historical record):** "speaker never written to the pooled vector" is RETIRED. The frozen
+> `_repro/paralinguistic_negative_probe.json` (W4 repo) carries its own seed-123 bootstrap CI for
+> speaker accuracy of [0.0267, 0.070] against chance 1/91 = 0.011 — the CI's lower bound sits ABOVE
+> chance, i.e. it EXCLUDES chance from below (a superiority result at that seed; 2 of 3 seeds do
+> this). The accurate statement is: speaker readout is low in absolute terms (mean 0.033, ~3x
+> chance over 91 classes) but not zero, and significantly above chance in at least one seed — the
+> representation is not speaker-free. Recomputation (no rerun, same frozen numbers):
+> `projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json`
+> (`scripts/speaker_probe_restatement.py`). Full context:
+> `wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md` INT-013.
+
 ---
 
 ## 5. Explicit non-decisions (what this document deliberately does NOT decide)
