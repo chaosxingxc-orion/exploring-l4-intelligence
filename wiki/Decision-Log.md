@@ -6,6 +6,24 @@
 
 ---
 
+### 2026-07-10（续9）· 波 2 收官（32/32 有效）+ 批量化推理实测定案
+
+**Facts.** 波 2（K4–K7 × qwen3 单底座）执行 32/32 零运行失败；Opus 抽验 ACCEPT-with-notes 揪出
+12 格指标缺陷（K4 字符串 gold 崩溃 6 格、K7 slot-F1 未调用+双 scorer 失灵 6 格）——**安全属性
+兑现：坏格全部诚实 null，无一格带静默错误数字**。冻结修复闭环（W1 f8ca276）：K4 修复+8 格重
+生成（UnderEmotion en 0.55/0.47、zh 0.30/0.28；vocalbench-emotion 经标签管道修复 0→0.675/0.75，
+执行既有裁定 #2）；K7 CPU 重聚合带溯源块（与审计独立参考精确吻合；slurp 报 exact-match 与
+partial-credit 双口径）；坏原件 .broken 存档。**研究信号**：crema-d 6 分类≈随机（0.20/0.25，
+neutral 塌缩 48/60）vs csemotions 0.95——副语言抑制在 en 表演性语料成立、zh 语料不成立，
+为 step-2 H-a/H-b 副语言战场提供最强先验；K7 STRICT-JSON 依从率 100%（300/300）。
+
+**批量化推理实测定案（冻结会签字位 #10 依据）**：钉扎构建 mtmd×-np 4 -c 16384 兼容（零串扰、
+VRAM 余 3.4GB）；无缓存吞吐 K=4 → **1.75×**；**greedy 翻转率 0/24**（K=1 vs K=4 逐字节一致）；
+prompt-cache 对重复前缀额外大增益——**step-3 best-of-N 同 prompt 采 N 次天然受益**。推荐配置
+-np 4 -c 16384，吞吐数字必须标注 cache-ram 状态。
+
+**Next.** Step-2 冻结会（10 签字位全带实测数字）；波 3（K10/K11+长尾）与 Phase-A 排程待冻结会定。
+
 ### 2026-07-10（续8）· 主模型单一化裁定 + MERaLiON 角色改注 + 波 2 放行令
 
 **Decision（owner）.** ① 波 1 证据充分论证 MERaLiON-2-3B **不具备主模型能力**（开放式转写 70%
