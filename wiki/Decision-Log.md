@@ -6,6 +6,19 @@
 
 ---
 
+### 2026-07-10（续10）· Step-2 判据冻结（owner 全签）+ 批量化获批 + dev/test 全部重抽令
+
+**Decision（owner）.** ①批量化推理获批：-np 4 -c 16384 入冻结协议（n_parallel/cache_ram 写入
+结果 JSON），波 3 起采用；②Step-2 全部签字位落定：结构对照臂=**RAPTOR-lite**、**audio+text
+混合 value 入列**（Phase-A 35 臂/140 格）、ref-config/六维枚举/三阶段削减/test 只跑 Phase-B
+赢家/H-a-H-b 分族判报/containment 维持均按推荐通过；③**dev/test 全部重抽**（最严谨选项）：
+52 个重叠数据集全部重新冻结不相交切片，受影响 qwen3 基线格重跑（MERaLiON 历史格保留不重跑，
+已除名非分母）。
+
+**Consequences.** 执行序：波 3（8 格，批量化首用，在跑）→ 重抽工具+新切片冻结（kb_snapshot
+不相交重冻结）→ 受影响基线批量重跑（~104 格，估 3-5h @1.75×+cache）→ Phase-A（嵌入库构建 +
+140 格）。Step-2 判据自本条起冻结，网格内不再更改。
+
 ### 2026-07-10（续9）· 波 2 收官（32/32 有效）+ 批量化推理实测定案
 
 **Facts.** 波 2（K4–K7 × qwen3 单底座）执行 32/32 零运行失败；Opus 抽验 ACCEPT-with-notes 揪出
