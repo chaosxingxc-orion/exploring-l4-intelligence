@@ -75,6 +75,12 @@ semantic-layer TFRL/ICL sufficiency question was surveyed (a strict-reviewed 16k
 ([[2026-07-04-stage1-problem-definition]]); at K2 the owner selected **CP-1 (quantify H_prompt−H_fix),
 CP-3 (measure ρ(ASR)), CP-8 (calibration+PMI on SLU/MCQ), CP-4 (voice-agent pass@k)** for Stage-2.
 Next: a semantic-task validation table + per-problem Research-Proposal-Template instances.
+**Step-1 wave-1 baseline grid COMPLETE (2026-07-10):** the frozen 224-cell grid (56 dataset keys ×
+{Qwen3-Omni-30B, MERaLiON-2-3B} GGUF × dev/test) fully executed, zero run failures; per-wave Opus
+audit caught 60 mechanically-invalid MCQ cells (K8 gold-resolution bug) → surgical freeze-repair +
+GPU-free rescore from stored replies, regression-guarded. Full table: W1 `_repro/wave1_results.md`.
+Wave-2 (K4–K7, 64 cells) driver is launch-ready but hard-gated on owner release (`WAVE2_RELEASE=1`).
+Details: [[Decision-Log]] 2026-07-10（续6）.
 
 **W2 — Efficient RL alignment (skeleton).** Efficient GRPO/DPO with LoRA / partial updates for
 speech↔language alignment. Roadmap: implement the LoRA GRPO/DPO loop on top of the shared rewards;

@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-07-10（续6）· 波 1 收官：224/224 执行完成 + Opus 抽验揪出 60 格机械无效 → 冻结修复 + 免 GPU 重打分
+
+**Facts.** 波 1 冻结网格 **224 格全部执行完毕、零运行失败**（meralion-2-gguf 112 格一次通过
+2906s；qwen3-omni 补 heysquad 2 格）。heysquad 堵点 = loader 只接 validation split，双修复落地
+（run_baseline `_DEFAULT_SPLIT_OVERRIDE`→validation 13ada18 + loader dev/test 别名 8b9b364——两个
+并发会话各自修复、相互兼容）。结果全部入库（9ecb630/dcf74ee；全表 `_repro/wave1_results.md`，
+由新增 `summarize_wave1.py` 以 wave1_cells 冻结网格为唯一口径生成）。
+
+**每波 Opus 抽验（三步走设计要求）裁定：164 格审计干净；60 格机械无效**——全部 14 个
+air-bench-foundation K8 数据集（56 格）+ uro-bench-OpenbookQA-zh（4 格）mean=0.0 与模型无关。
+根因 = metrics K8 gold 解析：air-bench gold 键是 `answer_gt`（代码只认 `answer`）；
+uro-OpenbookQA-zh gold 是 "D. 鲨鱼" 字母前缀格式（代码只认全文匹配或裸字母）。**冻结裁定 §2.6
+的双 loader 交叉验证设计正确触发**：legacy OpenbookQA-zh 0.95 vs uro 0.0 的不一致直接暴露该
+bug（SQuAD-zh 对 0.75/0.73 一致通过）。此外确认：无空生成、无 3B 反超 30B 异常；meralion 中文
+ASR≈0 为真实指令复读行为（正确计分，非 bug）。
+
+**冻结修复（与冻结裁定 #2/#4、heysquad 同模式：手术式 + 日期注释 + 回归护栏）**：metrics.py 两处
+（`answer_gt` 键 + 字母前缀第三回退，镜像 uro_bench `_OPT_PREFIX_RE` 约定）；回归护栏
+HSK5-zh+mmar 全 8 格 **0 分数变化**。**免 GPU 重打分**：生成不动，`rescore_cells.py` 用已存
+reply + loader 按冻结 (split,n,seed) 重推 gold（item_id 配对）重算 60 格，JSON 内嵌
+`rescored{date,reason,original_aggregate}` 溯源块（3b2d4bd）。修复后 15 个数据集均为合理非零
+MCQ-EM（qwen 0.15–0.92、meralion 0.2–0.58；数字维持 Stage-1 hypothesis-grade）。
+
+**遗留/备注**：①clothoaqa 音频池为在案部分下载（351/797）且池大小自波 1 运行后漂移→仅 4–7 条
+可配对，该 4 格 directional-only 待 refetch；②containment-EM 对冗长 gold 偏严（"Twice." vs gold
+"The elevator opens twice." 记 0）——K8 含判口径备注请 owner 过目；③单池数据集 dev/test 抽取
+重叠度待验收复核（heysquad 等，冻结时已挂起的验收项）；④**波 2（K4–K7）驱动已备好未放行**：
+wave2_cells.py/run_wave2.sh，16 数据集 ×2 底座 ×dev/test=64 格，16/16 loader 探测 READY（含 meld
+经 imageio_ffmpeg 兜底），GPU 执行硬门禁 `WAVE2_RELEASE=1`（dry-run 不受限）——等 owner 放行。
+
 ### 2026-07-09（续5）· Step-0 收官闭环 + 波 1 马拉松放行（224 格开跑）
 
 **Decision/Facts.** Step-0 全项终态闭环：**30B GGUF 音频 embedding WORKS**（HTTP 200、dim 2048、
