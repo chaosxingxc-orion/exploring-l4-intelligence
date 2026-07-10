@@ -76,6 +76,9 @@ utt+词级；SenseVoice-S zh 声学键探针）；K6/K7（两级检索 vs 整句
 ## 6. 冻结会签字位
 
 1. ref-config 认可（§1）；2. 维度枚举与对照臂取舍（§2——结构对照臂二选一：RAPTOR-lite vs
-HippoRAG-lite；audio+text 混合 value 是否入列）；3. 三阶段削减规则与 ~450 格预算（§3）；
-4. test 只跑 Phase B 赢家的防过拟合纪律；5. H-a/H-b 判定按任务族分报（§4）；6. Phase A 先行
-基座=qwen3 单基座（省一半，MERaLiON 在 Phase B 补入）；7. 工程前置清单（§5）排期确认。
+HippoRAG-lite 之择、audio+text 混合 value 是否入列）；3. 三阶段削减规则与 **~330 格**预算
+（§3，单底座修订版）；4. test 只跑 Phase B 赢家的防过拟合纪律；5. H-a/H-b 判定按任务族分报
+（§4）；6. ~~Phase A 单基座先行~~（**已被 2026-07-10 主模型单一化裁定取代**：全程 qwen3
+单底座）；7. 工程前置清单（§5）排期确认（①-⑤ 已全部完成，签字即可开跑）。
+另附波 1 caveat 裁决位：8. dev/test 是否为 Phase-B 做不相交重抽（波 1 量化 52/56 集重叠）；
+9. containment-EM 弱指标维持或加语义辅助臂。
