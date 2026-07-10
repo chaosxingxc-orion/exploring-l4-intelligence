@@ -100,7 +100,54 @@ per_item 落 group_id。**留给 owner 的 5 个裁决位**：重跑范围、粗
 10. **push + wiki-sync**：等 ASR 终格入库后一次性执行（发布链已修好；若晨会前 ASR 未收尾，
     现有 commit 也可先推——待你示下或我按"全部收尾后推"的既定序执行）。
 
-## 4. ASR v2 终格（出数后补写）
+## 4. ASR v2 终格
 
-（占位——运行完成并过 Opus 复核后由协调者补写：双条件 corpus/macro 表、oracle vs deployable
-分列、跳过数、livelock 事故的最终影响。）
+### snr5 条件 — VERIFIED（Opus ACCEPT-with-notes：42/42 聚合格精确复算、288/288 选择逻辑复现、0 跳过 0 重试）
+
+n=96、pool_seeds [1,2,3]×8、N∈{1,2,4,8}。@N=8（corpus / macro WER；Δ=对 greedy 改善）：
+
+| selector | corpus | macro | corpus Δ 95% CI | 判定 |
+|---|---|---|---|---|
+| greedy（temp0 基线） | 0.0973 | 0.1113 | — | — |
+| oracle@8（上界，不可部署） | 0.0636 | 0.0760 | +0.0336 [0.0235, 0.0453] | SIG |
+| **logprob 置信@8（可部署）** | **0.0891** | 0.1049 | **+0.0081 [0.0005, 0.0161]** | **SIG（仅 corpus，边缘）** |
+| MBR@8（修复后对称编辑距离） | 0.0924 | 0.1065 | +0.0048 [−0.0023, 0.0121] | ns |
+| random@8 | 0.1033 | 0.1205 | −0.0060 [−0.0159, 0.0040] | ns |
+| length@8 | 0.1086 | 0.1235 | −0.0116 [−0.0264, 0.0022] | ns |
+
+**读法（严格口径）**：① oracle headroom 复现且更稳（+0.0336）；② **首个过 CI 的 deployable
+selector**——logprob@8 实现 ≈24% 的 oracle headroom（ρ≈0.24），但仅 corpus 口径、CI 下界 ~5e-4，
+**Stage-1 directional，禁止读作稳健部署增益**（G4 纪律：不以单个边缘 CI 定论；multiplicity
+未校正）；③ 修复后的 MBR 转正向但 ns（v1 的 MBR null 部分归因于其非对称距离 bug 的说法不成立
+——修好后仍 ns，v1 结论方向侥幸无恙）；④ random/length 为负对照，行为如预期。
+多样性：4.58 unique/8、16.3% 全同池（与 v1 同量级——坍塌是采样配置属性，非实现差异）。
+
+### clean 条件 — VERIFIED（Opus ACCEPT：42/42 聚合格精确复算；同 cohort sha 跨条件一致=纯噪声差分设计确认）
+
+@N=8（greedy corpus 0.0579）：
+
+| selector | corpus | corpus Δ 95% CI | macro Δ 95% CI | 判定 |
+|---|---|---|---|---|
+| oracle@8（上界） | 0.0357 | +0.0223 [0.0136, 0.0316] | +0.0254 [0.0133, 0.0397] | SIG（上界） |
+| **logprob 置信@8** | **0.0486** | **+0.0094 [0.0034, 0.0165]** | **+0.0134 [0.0045, 0.0247]** | **SIG（双口径）** |
+| MBR@8 | 0.0559 | +0.0021 [−0.0021, 0.0068] | +0.0055 [−0.0012, 0.0144] | ns |
+| random@8 | 0.0678 | −0.0098 [−0.0190, −0.0017] | −0.0161 | 显著回归 |
+| length@8 | 0.1004 | −0.0426 [−0.0571, −0.0290] | −0.0592 | 严重回归 |
+
+### 终节结论（Stage-1 directional，双条件合读）
+
+1. **oracle headroom 在两条件均复现**（snr5 +0.0336 / clean +0.0223，相对降幅 ~35%/~38%）——
+   support 真实，且比 v1 的宏平均口径更稳。
+2. **过夜最重要的新信号：logprob 置信是两个条件下唯一 CI 排除 0 的 deployable selector**
+   （clean 双口径显著；实现 oracle headroom 的 ~24%/~42%）。项目的诚实 headline 从
+   "support exists, realization fails" 更新为 **"support exists; a simple confidence selector
+   realizes a small but replicated fraction of it"** —— 仍禁止读作稳健部署增益
+   （单模型/单 runtime、multiplicity 未校正、snr5 侧 CI 下界边缘），这恰是 Proposal-S
+   （Step-3 primary）powered 验证要回答的问题。
+3. MBR（修好非对称 bug 后）两条件均正向但 ns——v1 的 MBR null 结论方向无恙但机理解释需修订；
+   random/length 负对照行为正常（length 在 clean 上严重反向）。
+4. 运行事故记录：第一次尝试 llama-server prompt-cache livelock（best-of-N 同前缀 25×/utt
+   触发 n_past 边界）——超时/断点/护栏/--cache-ram 0 修复后双条件 192/192 utt 零跳过零重试。
+   llama.cpp 该边界已入 gotcha 台账（best-of-N 场景暂用 cache-ram 0，吞吐代价 ~45-66s/utt）。
+
+全部 ledger 裁决：C-ASR-V2 / C-MINDS-V2 / C-W4-EMO-GROUPED / C-W4-PARA-RESTATED（docs/claim_ledger.yaml，16 条）。
