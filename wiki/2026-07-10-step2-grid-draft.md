@@ -29,7 +29,9 @@
   encode_query / HyDE 单发（M 裁决臂）。
 - **递送（6）**：flat / 结构化参考注（grain 角色标记）/ **2-turn 工具递送**（T10 一阶杠杆）/
   system-prompt 注入 / 相关性边缘重排（lost-in-the-middle，L）/ LLMLingua-2 压缩注入（M 裁决臂）。
-- **基座（2）**：Qwen3-Omni-30B / MERaLiON-2-3B（双 GGUF 定稿）。
+- **基座（1）**：Qwen3-Omni-30B（**2026-07-10 修订**：owner 裁定主模型单一化——波 1 论证
+  MERaLiON 不具备主模型能力，从底座除名；其文件保留为 **step-3 封闭形态验证器候选**，去留由
+  step-3 验证臂实验裁决）。
 
 ## 3. 预注册削减规则（全因子 ≈8×4×6×7×4×6×2 天文数字 → 三阶段）
 
@@ -40,8 +42,8 @@
 向量模型维在 squtr 上额外跑 R@1/R@10/nDCG@10（原生 qrels，检索质量与端到端并行出数）。
 
 **Phase B 赢家组合 + 交互对角（dev→test 双切片）**：每维 top-1/top-2 组成 ≤6 个组合配置 +
-已证一阶杠杆交互（递送×查询构造、key×检索策略）≤6 对角格 → **≤12 配置 × 4 集 × 2 基座 ×
-dev/test ≈ 192 格**；test 只跑 Phase B（防 dev 过拟合，Stage-1 版防泄漏纪律）。
+已证一阶杠杆交互（递送×查询构造、key×检索策略）≤6 对角格 → **≤12 配置 × 4 集 × 1 基座 ×
+dev/test ≈ 96 格**（2026-07-10 单底座修订）；test 只跑 Phase B（防 dev 过拟合）。
 
 **Phase C 特化侧翼（各任务族主场，dev n=40 / test n=60 赢家）**：
 K4 SER（E2V-S/e2v+/Dasheng/CLSP/WavLM ×5 vs H-b 读出，crema-d+esd+csemotions）；
@@ -50,7 +52,7 @@ K1/K2 困难样本记忆（memory-grain：librispeech train池→test、aishell-
 utt+词级；SenseVoice-S zh 声学键探针）；K6/K7（两级检索 vs 整句 exemplar，slurp+speech-massive
 +minds14）；K10（audio2tool 工具注册表检索）。≈ **120 格**。
 
-**总预算 ≈ 450 格**（每格 n=40-60、~2-6 min GPU）≈ **2-3 个 GPU 日**，分波与 step-1 波 2/3
+**总预算 ≈ 330 格**（单底座修订后）（每格 n=40-60、~2-6 min GPU）≈ **2-3 个 GPU 日**，分波与 step-1 波 2/3
 交错排程。嵌入库构建（每向量模型 × 每数据集池）走 llama-server 空窗批抽（gpu_session 排程）。
 
 ## 4. 裁决口径

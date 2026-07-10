@@ -6,6 +6,18 @@
 
 ---
 
+### 2026-07-10（续8）· 主模型单一化裁定 + MERaLiON 角色改注 + 波 2 放行令
+
+**Decision（owner）.** ① 波 1 证据充分论证 MERaLiON-2-3B **不具备主模型能力**（开放式转写 70%
+提示词回声、K8 全线大幅落后）——**qwen3-omni-30b 为唯一主模型**，波 2/step-2 一律单底座；
+② **MERaLiON 从底座阵容除名但文件保留**至 step-3 跨模型验证臂出结果（封闭形态 MCQ 验证器角色
+未被证伪：音频 MCQ 超随机；本地唯一非 Qwen 谱系 GGUF；4.5GB 渠道在案）——届时实验定去留；
+③ **波 2 放行**（先于 step-2 冻结会）：K4–K7 × qwen3 单底座 × dev/test = 32 格，WAVE2_RELEASE=1。
+
+**Consequences.** step-2 网格草案修订为单底座版（Phase-B 预算减半 ~96 格、总预算 ~450→~330 格）；
+step-3 跨模型验证臂候选 = MERaLiON（封闭形态）+ 非 Whisper ASR-ensemble（SenseVoice/Paraformer，
+ASR 形态）双路对照。波 2 收官即开 Step-2 冻结会。
+
 ### 2026-07-10（续7）· 波 1 验收 ACCEPT-with-notes：续6 三项遗留全关闭 + step-2/3 前置齐装
 
 **Facts（与续6 互补，跨会话协作）.** 全表 Opus 对抗验收 **ACCEPT-with-notes**
