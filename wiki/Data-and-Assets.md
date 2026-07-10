@@ -57,7 +57,7 @@ everything is unified in `fetch-data.sh`. Full tables + env knobs: `docs/data.md
 `speechrl-data/` is env-var-addressed (`SPEECHRL_DATA_DIR`), so moving it across drives is mostly a
 copy — but the load-bearing risk is everything that *derived* an absolute path from the old root, not
 the bytes. The 2026-07-09 D:→E: move (649.5 GB / 555,618 files) is the reference; see
-[Decision-Log](Decision-Log) (2026-07-09). Order of operations:
+[Decision-Log](Decision-Log.md) (2026-07-09). Order of operations:
 
 1. **Copy** with robocopy (NTFS→NTFS, multithreaded, restartable; ~1.6 GB/s here):
    `robocopy SRC DST /E /COPY:DAT /DCOPY:DAT /MT:16 /R:2 /W:5 /NP /NFL /NDL /LOG:move.log`.

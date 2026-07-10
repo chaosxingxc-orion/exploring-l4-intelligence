@@ -1,0 +1,342 @@
+# Machine-readable claim ledger (RI-G1)
+#
+# PURPOSE
+#   This file is the SINGLE SOURCE OF TRUTH for whether any headline claim made anywhere in this
+#   umbrella (or its four project repos) is currently citable as evidence. Any AI agent or human
+#   MUST resolve a claim's validity from THIS FILE, not from prose in wiki/*.md, docs/*.md, commit
+#   messages, or README files. Those documents may still contain stale positive language (frontmatter
+#   `status:`/`verdict:` fields that predate a later retraction) — this ledger is the authoritative
+#   status layer that overrides them. See wiki/2026-07-10-research-integrity-forensic-audit.md (the
+#   forensic audit that produced gates RI-G0..G7) and wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md
+#   (the 2026-07-11 delta verification that adjudicated several entries below).
+#
+#   Rule of thumb for a consuming agent: look up the claim_id (or grep the artifact path), read
+#   `status`. Only `status: valid` may be cited as confirmatory evidence without further caveats.
+#   `directional` may be cited ONLY labeled as Stage-1 directional/hypothesis-grade, with the stated
+#   scope. `null` and `unverified` must NOT be cited as positive evidence either way. `invalid` must
+#   NEVER be cited as evidence for the claim_text as stated; check `superseded_by` for the corrected
+#   successor claim/record, if any.
+#
+# SCHEMA (one list entry per claim)
+#   claim_id:          stable short identifier, "C-<TOPIC>"
+#   claim_text:        the claim as it was originally asserted (prose), for human matching
+#   status:            valid | directional | "null" | invalid | unverified
+#                        (status: "null" is the quoted STRING "null", one of the five enum values,
+#                        meaning "tested, statistically null" — NOT YAML's null/None type. Other
+#                        fields such as supersedes/superseded_by/invalid_reason use bare `null`
+#                        (YAML None) to mean "not applicable / no value". Do not conflate the two.)
+#                        valid       - confirmed, reproducible, may be cited as-is
+#                        directional - Stage-1 hypothesis-grade signal only (CLAUDE.md three-stage
+#                                      methodology); never confirmatory, scope-limited
+#                        null        - tested, result is statistically indistinguishable from no
+#                                      effect (CI crosses zero / spans null)
+#                        invalid     - the claim as stated is false, mechanism-confounded, or rests
+#                                      on an information-boundary violation; see invalid_reason
+#                        unverified  - no artifact hash / independent check ties the number down, or
+#                                      the specific claim was never actually tested
+#   stage:             1 | 2 | 3   (CLAUDE.md research-methodology stage the evidence belongs to)
+#   artifact:          repo-relative path(s) to the primary result artifact(s) backing the claim
+#   code_commit:       git commit hash(es) (short) that produced the artifact / made the claim
+#   metric_definition: what number is actually being computed (primary metric, condition, arm)
+#   supersedes / superseded_by: claim_id or record (wiki page / artifact) this entry replaces or is
+#                      replaced by, if any
+#   invalid_reason:    why status is `invalid` (or the key caveat for `null`/`directional`/`unverified`)
+#   adjudicated_on:    date this status was last ruled on
+#   reviewer:          who/what performed the adjudication
+#   note:              (optional, non-schema, human-context only) extra caveats that don't cleanly
+#                      fit another field. Not required for machine resolution — status/invalid_reason
+#                      already carry the load-bearing content.
+#
+# Provenance of this ledger: seeded 2026-07-11 per the signed RI-G0/RI-G1 remediation plan, from
+# wiki/2026-07-10-research-integrity-forensic-audit.md §11/§15 and wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md.
+# Append-only in spirit: re-adjudicate by adding a new entry / updating status + adjudicated_on +
+# reviewer, never by silently deleting a prior ruling.
+
+- claim_id: C-ASR-ORACLE
+  claim_text: >
+    Best-of-N (BoN) oracle-8 rescoring realizes headroom / improves ASR under noise (SNR=5, frozen
+    Qwen3-Omni-30B GGUF, llama.cpp).
+  status: directional
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  code_commit: b7b4b0d
+  metric_definition: >
+    Corpus-level WER reduction (oracle-8 best-of-N minus greedy decode), single condition SNR=5 only.
+    Paired bootstrap 95% CI over utterances.
+  supersedes: null
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Corpus-WER effect is +0.0296, CI [0.0212, 0.0390] — SNR=5 only, a single condition; do not
+    generalize to clean/other SNRs without a fresh run. A macro (per-utterance-averaged) figure of
+    +0.0418 also exists in prior write-ups; it MUST be labeled "macro utterance-WER" wherever quoted
+    and never presented as the unqualified/primary WER figure (G4 gate).
+
+- claim_id: C-ASR-MBR
+  claim_text: >
+    Minimum Bayes Risk (MBR-8) rescoring improves ASR WER over greedy decode.
+  status: "null"
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  code_commit: b7b4b0d
+  metric_definition: >
+    Corpus-level WER delta, MBR-8 rescoring vs greedy decode, SNR=5.
+  supersedes: null
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Corpus-level delta is -0.0012, CI crosses 0 — indistinguishable from no effect; MUST NOT be cited
+    as a positive result. A separate review reports N=1/2 (of the disaggregated cells) as
+    significantly WORSE than greedy; that finding is pending re-verification and is not yet folded
+    into this status.
+
+- claim_id: C-ASR-SEEDS
+  claim_text: >
+    Three generation seeds demonstrate best-of-N generation stability / reproducibility.
+  status: invalid
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  code_commit: f9d111a
+  metric_definition: null
+  supersedes: null
+  superseded_by: null
+  invalid_reason: >
+    The "three generation seeds" are not isolated generation-RNG replicates: cohort (utterance
+    sample), noise realization, greedy-decode path, and candidate pool all change simultaneously
+    across the three runs. A seed-stability/reproducibility claim requires holding cohort and noise
+    fixed while varying only the generation seed, which was not done here (G4 gate:
+    "call_three_ASR_runs_generation_seed_replications" is a prohibited framing).
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+
+- claim_id: C-W4-EMO
+  claim_text: >
+    W4 emotion-conditioned pooling/selection yields a stable improvement over baseline (SER-adjacent
+    probe).
+  status: "null"
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_paired_v2.json
+  code_commit: cdbf1d2
+  metric_definition: >
+    Across-seed paired t-CI on the dev-selected pooling delta, five dependent runs (not independent
+    replicates — same cohort/task reused across "seeds").
+  supersedes: null
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Five DEPENDENT runs; the t-CI spans 0. Because the five runs are dependent (share cohort/setup),
+    they carry no independent-replication meaning beyond a single run's worth of evidence — do not
+    describe this as "5x replicated" anywhere.
+
+- claim_id: C-W4-PARA
+  claim_text: >
+    The frozen omni representation carries no speaker information (used to argue the representation
+    is speaker-independent / disentangled from paralinguistic identity).
+  status: unverified
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/paralinguistic_negative_probe.json
+  code_commit: 7ba8d0b
+  metric_definition: >
+    Linear-probe accuracy for speaker identity from the frozen embedding vs. chance baseline
+    (chance = 1/n_speakers ~= 0.011).
+  supersedes: null
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    "No speaker info" is NOT established: the probe reaches 0.0333 accuracy vs. a chance baseline of
+    0.011 (~3x chance). The seed-123 arm's CI excludes chance ABOVE it (i.e., significantly above
+    chance — the opposite direction from the claim). No formal equivalence-to-chance test (e.g. TOST)
+    has ever been run, so the claim is neither confirmed nor refuted by a proper test — it is
+    unverified, and the raw numbers argue against it if anything.
+
+- claim_id: C-MINDS-POLICY
+  claim_text: >
+    A zero-shot reward-guided policy on MInDS-14 tool/intent selection yields a +12.6pp accuracy gain
+    (mechanism: reward-guided selection).
+  status: invalid
+  stage: 1
+  artifact: projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_paired.json
+  code_commit: ff6be7c
+  metric_definition: >
+    Paired accuracy delta, policy arm vs. raw-schema baseline arm, MInDS-14 tool/intent selection.
+  supersedes: null
+  superseded_by: null
+  invalid_reason: >
+    Invalid as a zero-shot or mechanism claim: (1) transductive — the "policy" uses a fixed 3-shot/
+    class support built from held-out EVAL rows, not from a train-only split, so it is not zero-shot;
+    (2) three factors (instruction wording, schema, card/support content) are confounded, so the gain
+    cannot be attributed to reward-guided selection specifically; (3) the raw accuracy NUMBERS
+    themselves are recomputable and stand (not fabricated) — only the zero-shot/causal-mechanism
+    framing is invalid, do not cite this as evidence that "RL selection" drove the gain.
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Second provenance mismatch: the committed artifact's numbers disagree with
+    projects/speech-mllm-omni-embedding-rl/docs/experiment_inventory.md:86 ("MInDS-14 reproduction |
+    182 | raw-schema Acc@1 = 0.852 | policy Acc@1 = 0.984, delta +0.132 CI [0.082, 0.187]") — treat
+    both the doc table and the committed JSON as needing independent reconciliation before either is
+    quoted; this mirrors the earlier audit_source latent schema bug (umbrella commit a517bdd) as a
+    second, distinct instance of doc-vs-artifact drift for the same dataset.
+
+- claim_id: C-M3
+  claim_text: >
+    New-signal cross-modal injection realizes a robust +22.4% accuracy gain on vocalbench-zh, "locking"
+    Q1b (an omni agentic/memory system is warranted as a new-signal injector).
+  status: invalid
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/_repro/m3_crossmodal.json
+  code_commit: 1f4f3b3
+  metric_definition: >
+    Paired accuracy delta on vocalbench-zh, injected-signal arm vs. base arm, n=150 powered run.
+  supersedes: null
+  superseded_by: >
+    wiki/2026-07-05-A-realization-conclusion.md (2026-07-05 owner retraction banner) and the
+    subsequent clean-rerun record set: wiki/2026-07-07-E2-clean-cf-utilization.md and
+    wiki/2026-07-07-E6-final-conclusions-clean.md (2026-07-04/07 clean reruns); see also
+    wiki/2026-07-05-omni-multimodal-memory-design.md for the legitimate (non-leaking) reframing.
+  invalid_reason: >
+    Input leakage / information-boundary violation: the injected "new independent signal" was the
+    TEST ITEM'S OWN ground-truth text transcript. At deployment the omni model's input is audio-only
+    — a golden transcript does not exist, and if it did, an omni model would be unnecessary (a text
+    LLM plus an ASR would suffice, which negates the point of an omni model). The +22.4% is the model
+    reading the answer off a smuggled-in transcript, not a genuine cross-modal capability gain. This
+    is the same error class as the earlier retracted acoustic-oracle result. Absolutely prohibited
+    from citation as positive evidence (G3 leakage red-team gate).
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+
+- claim_id: C-T7
+  claim_text: >
+    RAG-style knowledge injection produces a clean +51.7pp accuracy gain on heysquad-style spoken QA
+    (H0 headroom experiment, R1 gate).
+  status: invalid
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/_repro/t7_rag_gate_probe.json
+  code_commit: 013abbd
+  metric_definition: >
+    Paired accuracy delta, oracle-injection arm (H0) minus base arm, n=60, heysquad SQuAD-style
+    spoken QA, seed 20260707.
+  supersedes: null
+  superseded_by: "2026-07-07-E6-final-conclusions-clean"
+  invalid_reason: >
+    Answer lookup, not knowledge-assisted reasoning: the leakage audit (scripts/t7_leakage_audit.py)
+    showed answer_in_own_KB=1.0 and injected top-k answer-inclusion rate 0.90 — heysquad is SQuAD-type
+    reading comprehension where the "gold" answer is a literal span inside the retrieved context, so
+    the model is copying the answer out of the injected passage, not reasoning over external
+    knowledge. The retrieval query also used the question TEXT (unavailable at deployment; the
+    real input is audio) — a second, independent boundary violation. Clean re-run under
+    2026-07-07-E6-final-conclusions-clean gives clean_H0 = -0.066, a null result. Absolutely
+    prohibited from citation as positive evidence (G3 leakage red-team gate).
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+
+- claim_id: C-W4-DISENTANGLE
+  claim_text: >
+    Training-free RL has disentangled the frozen omni model's embedding (task-relevant vs.
+    task-irrelevant factors separated; e.g. speaker/emotion two-factor Operator-A probe).
+  status: invalid
+  stage: 1
+  artifact:
+    - projects/speech-mllm-omni-embedding-rl/src/omni_embedding_rl/eval_harness.py
+    - projects/speech-mllm-omni-embedding-rl/outputs/2026-06-24/23-08-11/main.log
+  code_commit: 452bd8b
+  metric_definition: >
+    Diagonal-dominance of the matched-vs-mismatched confusion/similarity matrix under the
+    Operator-A two-factor (e.g. CREMA-D speaker x emotion) disentanglement probe; acceptance
+    criterion required diagonal_dominant=True AND matched > mismatched.
+  supersedes: null
+  superseded_by: null
+  invalid_reason: >
+    Acceptance criterion unmet as stated: diagonal_dominant=False and the matched>mismatched
+    criterion did not pass. Per the 2026-07-11 adversarial-review ruling
+    (wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md §3.3), evidence for this claim is
+    downgraded from L2/L3 to L0/L1 — i.e. from "established, generalizing" tiers down to
+    "exploratory/single-touch, not yet meeting its own pre-stated bar". Future work (speaker-grouped
+    split, real transcript/WER, EER/minDCF, additional backbones) may re-open this at a higher tier;
+    it has not yet.
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+
+- claim_id: C-BASELINES
+  claim_text: >
+    The wave-1/2/3 baseline grids (W1, K1-K8 metric types across datasets/backbones) constitute an
+    independent, held-out test-set comparison.
+  status: directional
+  stage: 1
+  artifact:
+    - projects/speech-mllm-training-free-rl/_repro/baselines/
+    - projects/speech-mllm-training-free-rl/_repro/wave1_results.md
+  code_commit:
+    - 3b2d4bd
+    - f8ca276
+    - 07bbc66
+  metric_definition: >
+    Per-cell accuracy / WER / task-specific metric (K1-K8 metric-type taxonomy), dev and test splits,
+    per dataset x backbone.
+  supersedes: null
+  superseded_by: null
+  invalid_reason: null
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Dev/test overlap exists across waves, and a later "disjoint redraw" does NOT constitute a fresh
+    locked test set: the old deterministic seeds reproduce 40/64 of the same test-item ID sets as
+    before the redraw, so treating the redraw as independent held-out evidence is not justified.
+    Directional/Stage-1 only; not a final cross-backbone comparison.
+
+- claim_id: C-PHASEA
+  claim_text: >
+    Step-2 Phase-A has started / is executable (the empirical Phase-A pipeline can be run end to end).
+  status: invalid
+  stage: 1
+  artifact: projects/speech-mllm-training-free-rl/scripts/baselines/phase_a_cells.py
+  code_commit: 52aa61a
+  metric_definition: null
+  supersedes: null
+  superseded_by: null
+  invalid_reason: >
+    No --execute path exists at all; the scheduler is PLAN-ONLY (NotImplementedError on all 6 arms
+    when actually invoked). Four independent P0 blockers per
+    wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md §3.2: (1) no --execute path;
+    (2) runner/builder source-schema inconsistency; (3) registry token inconsistency; (4) the
+    query-embedder auto-fallback silently swaps embedding spaces/dimensions, producing a real
+    mismatch. "Engineering prep complete" language describing this state is bookkeeping-false.
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+
+- claim_id: C-THEORY
+  claim_text: >
+    The Lean 4 formalization proves that the actual (implemented) hard-Best-of-N selector/operator
+    converges, giving the empirical selector a machine-checked theoretical guarantee.
+  status: directional
+  stage: 1
+  artifact: proofs/tfrl/TfrlProofs/BestOfN.lean
+  code_commit: 9e999f7
+  metric_definition: null
+  supersedes: null
+  superseded_by: null
+  invalid_reason: >
+    The specific strong claim ("Lean has proven the actual implemented operator converges") is NOT
+    established and must not be cited as such: the count of theorems directly linked to the
+    engineering-side operator is 0. The core quantitative bound is imported, not proved in-repo: it
+    cites Beirami et al. (2024), arXiv:2401.01879, Theorem 3.1, as a single named, opaque axiom
+    (`beirami_thm_3_1`) rather than a derivation from more primitive Mathlib results. Downstream
+    conclusions are additionally conditional on assumed monotonicity/decay terms (monotone/δ/τ/reach)
+    that are external hypotheses, not derived facts. What remains directional/valid framing: the
+    theory work correctly and honestly documents its own conditionality (sorry-count 0 is not the
+    same claim as "system convergence proven"), and is useful as a scoped, hypothesis-generating
+    formalization effort per Stage-1 status.
+  adjudicated_on: 2026-07-11
+  reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    G6 (theory/implementation-parity gate) status: operator-linked theorems = 0; no executable
+    conformance test yet ties the Python selector to the Lean operator example-by-example. Treat any
+    paper sentence of the form "Lean proves our selector converges" as unsupported until G6 closes.

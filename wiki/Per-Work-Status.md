@@ -68,7 +68,15 @@ machinery is what the flagship W4 reuses. **Genuine best-of-N result (2026-07-02
 `-ngl 28` on the 24 GB laptop 5090) samples N transcripts per LibriSpeech test-other+snr5 utterance,
 a verifiable WER reward selects. Multi-seed (3 generation seeds pooled, n=144): **oracle-WER headroom
 +0.042 [0.029, 0.056] at N=8, significant from N=4** (N=1 < greedy — the honest order-statistics
-climb); the deployable label-free **MBR selector is non-significant at every N**. Engine decision:
+climb); the deployable label-free **MBR selector is non-significant at every N**.
+
+> **2026-07-11 更正**：以上为 macro-utterance 指标，须始终标注为 macro。独立复算的 **CORPUS WER**
+> （2026-07-11）：greedy 0.0925、oracle-8 0.0629（提升 +0.0296，bootstrap CI [0.0212, 0.0390]）、
+> MBR-8 0.0938（−0.0012，CI 跨零）。response-review 指出在 corpus 指标下 **MBR 在 N=1/N=2 显著更差**
+> （待 #26 统计重跑再核实）。此前的 macro-utterance 数字（+0.0418 oracle / +0.0037 MBR）本身没有错，
+> 但必须始终标注为 macro，不得与 corpus WER 混用或省略标注。
+
+Engine decision:
 [[Inference-Engine-Choice]]. (Asset downloading is unified in the umbrella's
 `scripts/data/fetch-data.sh`, driven by `docs/datasets.lock.json`; the old W1 `wave0_fetch.sh` engine
 was retired.) Roadmap: **close the realized-vs-headroom gap** (a stronger label-free selector), broaden
@@ -111,7 +119,8 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 是最完整的工作，其可验证奖励/评测机制正是旗舰 W4 复用的地基。**真实 best-of-N 结果（2026-07-02，
 `b7b4b0d`/`cd6aa92`/`f9d111a`）：** 冻结 Qwen3-Omni-30B（Q8_0 GGUF，llama.cpp，24GB 5090 上
 `-ngl 28`）+ 可验证 WER 奖励选择；多种子（n=144）oracle headroom 在 N=8 达 +0.042 [0.029,0.056]、
-N≥4 显著；无标签 MBR 各 N 均不显著。引擎决策见 [[Inference-Engine-Choice]]。（资产下载已统一到
+N≥4 显著；无标签 MBR 各 N 均不显著（以上为 macro-utterance 指标，**见下方 2026-07-11 更正**）。
+引擎决策见 [[Inference-Engine-Choice]]。（资产下载已统一到
 umbrella 的 `scripts/data/fetch-data.sh`；原 `wave0_fetch.sh` 已退役。）路线：**收窄
 realized-vs-headroom 差距**（更强的无标签选择器）、拓展奖励引导策略、强化评测。另：W4 的旗舰情感增益
 +0.097 经跨种子重跑修正为 **NULL**（t-CI [−0.043,+0.116] 跨 0）；跨工作论文

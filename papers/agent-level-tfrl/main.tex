@@ -1,3 +1,29 @@
+% ============================================================================
+% QUARANTINED DRAFT (2026-07-11) -- KNOWN-WRONG CLAIMS PENDING CORRECTION.
+% DO NOT CITE OR CIRCULATE THIS DRAFT.
+%
+% Response-review (RR-015 / Gate A) found the following load-bearing errors:
+%   (1) headline ASR numbers are macro-utterance WER mislabeled as WER
+%       (corpus WER, independent recompute: oracle-8 +0.0296, MBR-8 -0.0012,
+%       n.s.; the macro-utterance figures are not wrong but were not labeled
+%       macro);
+%   (2) "three generation seeds" conflates cohort/noise/greedy/pool
+%       randomness -- it is not three independent seeds of one factor;
+%   (3) "MBR non-significant at every N" is FALSE under the corpus metric --
+%       at N=1/N=2 MBR is significantly WORSE than greedy;
+%   (4) the MInDS-14 result is a transductive fixed 3-shot/class support
+%       condition, not zero-shot, with three factors confounded;
+%   (5) hard best-of-N is NOT a proven realization of the Gibbs tilt --
+%       operator-linked theorem count = 0; the Beirami KL bound is imported
+%       as a named Lean axiom (beirami_thm_3_1 over opaque klBoNActual), not
+%       a proved theorem.
+%
+% This comment block and the in-document banner right after \begin{document}
+% are quarantine-only scaffolding; they do NOT alter the results text itself
+% (that correction is tracked separately as ticket #31).
+% Pointer / full forensic reply: wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md
+% ============================================================================
+
 \documentclass[10pt]{article}
 
 % Self-contained NeurIPS-approximating preamble (robust; no external .sty).
@@ -175,6 +201,24 @@
 \begin{document}
 \maketitle
 
+\begin{center}
+\noindent\fbox{\parbox{0.94\linewidth}{
+\centering{\bfseries\color{red} QUARANTINED DRAFT (2026-07-11) --- DO NOT CITE OR CIRCULATE}
+\vspace{4pt}
+
+\raggedright\color{black}
+Known-wrong claims pending correction (this notice does not itself alter the results text; see ticket \#31):
+\begin{enumerate}[nosep,leftmargin=1.5em]
+\item headline ASR numbers are macro-utterance WER mislabeled as WER (corpus WER: oracle $+0.0296$, MBR-8 $-0.0012$, n.s.);
+\item ``three generation seeds'' conflates cohort/noise/greedy/pool randomness;
+\item ``MBR non-significant at every $N$'' is \textbf{false} under the corpus metric ($N{=}1$/$N{=}2$ significantly \textbf{worse});
+\item the MInDS result is a \textbf{transductive fixed 3-shot/class support} condition, not zero-shot, with three factors confounded;
+\item hard best-of-$N$ is \textbf{not} a proven realization of the Gibbs tilt (operator-linked theorem count $=0$; the Beirami bound is imported as a named axiom, not proved).
+\end{enumerate}
+\normalsize Pointer: \texttt{wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md}.
+}}
+\end{center}
+\vspace{6pt}
 
 % ===== section 01-intro =====
 \begin{abstract}

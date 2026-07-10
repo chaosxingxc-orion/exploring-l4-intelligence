@@ -6,6 +6,35 @@
 
 ---
 
+### 2026-07-11（续12）· 法证审计 + 答复复审均核验成立 → RI 诚信门 + 状态六级制 + G0 单问题拆分 + 过夜修复令（owner 四项全签）
+
+**Facts（增量核验，Opus×4）.** ①法证审计（[[2026-07-10-research-integrity-forensic-audit]]）新增 8 项
+主张：7 CONFIRMED / 1 PARTIAL / 0 REFUTED——corpus-WER 复算精确成立（oracle-8 +0.0296 CI[0.0212,
+0.0390]；MBR-8 −0.0012 跨 0）；MInDS 三连击实锤（提交 JSON 手工拼装且与 experiment_inventory.md
+数字不一致=第二处出处断裂；policy card 用评测集自身 3 转写/类构建=transductive；三因子同变→+0.126
+不可归因 selection）；K8 原位重评分无侧车（git 父可恢复）；SNR=5 单条件；MLflow 缺 manifest/模型
+hash；INT-014 PARTIAL（operator 桥缺失成立=已承认；但审计把 klBoundBoN 说成 Gibbs 对象不准确——
+Lean 里 Tilting/T1 与 hard-BoN/T2 刻意分模块，我方文本无同一性主张）。②答复复审
+（[[2026-07-11-adversarial-review-of-stage1-audit-response]]）核心判词接受："承认成立、整改闭环不
+成立"——我方答复 v1 的 4 处错误陈述实锤（把裁定/开票写成"已执行"=重复了刚承认的簿记缺陷；"更宽
+CI 更 NULL"统计错误；STALE 总括对象错配 emotion已修/MInDS未修；"MBR all-N n.s."在 corpus 口径下
+错误）；**wiki-sync 只发布顶层**（归档 51 页不会发布、远端 8 旧页将被删）+16 处相对链接错路径
+（幸未 push/sync）；重抽旧种子产出 40/64 个与旧 test 相同 ID=不构成 fresh locked test；传播不完整
+（Project-Thesis/Architecture/W4-Feasibility/main.tex 仍带旧叙事）。
+
+**Decision（owner 四项全签）.** ①接受复审总裁定+**完成状态六级制**（ACKNOWLEDGED→DECIDED→
+TICKETED→IMPLEMENTED→VERIFIED→PUBLISHED），出答复 v2 勘误+36 行核验 ledger；②**RI 诚信门四项
+立即执行**：证据冻结 SHA-256 清单、机器可读 claim_ledger.yaml（M3/T7 默认 INVALID、K8 补侧车）、
+论文挂 QUARANTINED DRAFT、旧叙事传播修正；③**METHOD-G0 单问题拆分**：Step-2 primary=Proposal-R
+（retrieval 因果增益 vs no/random retrieval）、Step-3 primary=Proposal-S（label-free selector 绝对
+corpus-WER 增益 vs greedy/random/MBR/置信度基线）——各自独立 prereg、绝对 delta co-primary、ρ 降
+secondary（joint-bootstrap/Fieller+分母策略预注册）；④发布链修复（sync 子目录+断链+LOG 计数更正+
+重抽新种子与访问纪律）后一次性 push+wiki-sync。**过夜修复令（owner）**："把所有的实验都完整的修
+一遍，解决不了的问题先记录下来"——#32 ASR G5.1（seed 四分离+双口径+条件族+deployable 基线组，GPU
+重跑）、#33 MInDS G5.2（support/eval 分离+真 zero-shot 臂+因子分解+脚本直出）、#34 CREMA G5
+（speaker-grouped+行级预测+等价检验框架）、#25 Phase-A 工程十项、#30 RI 机器化，GPU 修复性重跑
+获授权（Phase-A 网格与 Step-3 新扫描仍禁）。
+
 ### 2026-07-11（续11）· 外部对抗审计核验成立 → stop-the-line + G0 主问题裁定 + wiki 治理（owner 四项全签）
 
 **Facts（先记两笔收官）.** ①波 3 收官：8/8 格批量化跑完（2.11× 实测、A/B 0/40 翻转），Step-1

@@ -3,6 +3,7 @@ title: "T7 — R1 门控 + H0 headroom 实验(heysquad RAG,冻结 Qwen3-Omni)"
 date: 2026-07-07
 stage: 1-directional
 status: "Stage-1 directional (n=60, single-touch, paired-bootstrap CI). Boundary-clean. Owner review pending; wiki-sync deferred。"
+validity: "INVALID — see docs/claim_ledger.yaml (2026-07-11 status layer)"
 ---
 
 > **⛔ SUPERSEDED (2026-07-11)** — 本文 headline 事实已过时；现行真源：[[2026-07-07-E6-final-conclusions-clean]]（T7 正结果 = 查答案泄漏，clean_H0=−0.066 null，已作废）。按 append-only 保留原文，未改写。归档于 [[2026-07-11-stage1-audit-response-and-rulings]] 裁定的 wiki 治理动作。

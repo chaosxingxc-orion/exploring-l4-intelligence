@@ -39,6 +39,8 @@ rewards**. No fine-tuning, no LoRA, no gradient on the base model.
 > content/ASR+ST, speaker-ID, emotion/SER, and language+intent — demonstrating disentanglement of a
 > frozen model's representation purely by reward-guided activation.
 
+> **2026-07-11 更正**：W4「task-conditioned disentanglement」主张按 [[2026-07-11-stage1-audit-response-and-rulings]] 降级为 L0/L1（readout availability/suppression；matched>mismatched 判据未过）；disentanglement 措辞在 L2–L3 判据通过前废止；W4 将按 §7.1 问法重新立项（#29）。G0 现行 primary question 见该文档 §4。
+
 The flagship backbone is `omni-embed-nemotron-3b` (NVIDIA, ~4.7B, output = dense vector dim 2048; a
 bi-encoder retrieval model built on the Qwen2.5-Omni Thinker). The exact inference-time *operator*
 (where the reward-guided search acts) and its mathematical convergence conditions for the speech

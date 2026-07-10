@@ -7,6 +7,7 @@ status: "PARTIALLY RETRACTED (2026-07-05, owner) — Q1a (ICL insufficient acros
 question: "Given confirmed per-instance oracle-δ, can adjusting A (few-shot ICL / prompt-opt / two-system verifier) convert it into a deployable ≥+10% greedy gain? → branch 2.1 vs 2.2"
 prereg: "[[2026-07-05-stage1-A-realization-prereg]] (frozen before runs)"
 verdict: "Q1a: ICL is INSUFFICIENT (robust) — every cheap in-fence lever fails the +10% bar: few-shot ICL (E7), prompt-opt (E8), self-selection & two-system verifier (E10/E10b REFUTED with CIs). Q1b: YES — design an omni agentic system as a NEW-INDEPENDENT-of-M-signal injector. LOCKED by M3 (n=150, CIs): a new independent signal (ground-truth transcript) robustly realizes headroom on vocalbench-zh (+22.4%, CI[0.04,0.16], clears +10%) where internal ICL cannot; theory-consistent (TH2a floor). Internal composition/self-verification is refuted (E10b) + forbidden (gain_product). Stage-2 ENGINEERS the produced signal (ASR/retrieval/W4 embedding), not re-decides the branch."
+validity: "INVALID — see docs/claim_ledger.yaml (2026-07-11 status layer)"
 ---
 
 > **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。

@@ -17,6 +17,10 @@ identities and bounds**, no iterative-process convergence:
   master identity.
 - **BestOfN.lean** — `kl_best_of_n_le`: KL(BoN‖q₀) ≤ log N − (N−1)/N (one documented order-statistics
   `sorry`). A **bounded trust region** for the best-of-N approximation of the tilt.
+  > **2026-07-11 更正**：该 `sorry`已于 2026-07-10（commit `9e999f7`）被消解——消解方式是引入具名的
+  > imported axiom `beirami_thm_3_1`（作用于 opaque 的 `klBoNActual`），而不是给出一个真正证明。按
+  > 2026-07-11 裁定，这属于 **imported-axiom 状态**，不是 Lean-proved theorem；`sorry`计数为零不等于
+  > 该界已被机器验证证明。
 - **Regret.lean** — `regret_O_sqrt_log`: best-of-N regret = O(√log N). A **rate**, but for a static
   selection, not an iterated process.
 - **OptSpace.lean** — the OSA suite (`gain_eq`, `flat_no_gain`, `gain_le_of_hoeffding` = gain ≤
@@ -37,7 +41,13 @@ identities and bounds**, no iterative-process convergence:
 `Tilting`), and now a **verified convergence theorem for condition (c) realization** (`Realization`:
 C4, with τ→0 ⇒ ρ→1). Full `TfrlProofs` builds against Mathlib v4.31.0 (8568 jobs, success); all
 cited theorems sorry-free (the only `sorry` is BestOfN's documented Beirami order-statistics
-derivation). What remains: an *iterative-process* convergence theorem for a full training-free-RL scheme
+derivation).
+
+> **2026-07-11 更正**：该 `sorry` 已于 2026-07-10（commit `9e999f7`）消解为具名 imported axiom
+> `beirami_thm_3_1`（作用于 opaque 的 `klBoNActual`）；按 2026-07-11 裁定为 imported-axiom 状态，非
+> Lean-proved theorem——"sorry-free"不应被读作"该界已证明"。
+
+What remains: an *iterative-process* convergence theorem for a full training-free-RL scheme
 (C1 monotone-improvement / C2 budget-cap as iterated processes — the pieces `F_sub_eq_beta_mul_kl`,
 `gain_le_of_hoeffding`, `regret_O_sqrt_log` exist but are not yet assembled into an iterate), and
 **no theorem at all** for condition (b) reachability — the survey's explicit gap. C1/C2 are the

@@ -3,7 +3,7 @@
 # Agent-level training-free RL — strategic direction memo (living, survey-first)
 
 > project: exploring-l4-intelligence · owner: Charmer · started: 2026-06-30 · status: **running** · version: **v0.2**
-> companion: [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] · survey archive [README](README.md) ·
+> companion: [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] · survey archive [README](../../../survey/README.md) ·
 >   [[Project-Thesis]] · [[Decision-Log]]
 > S1 lanes: [speech-agents](2026-06-30-survey-agent-speech-agents.md) ·
 >   [components-novelty](2026-06-30-survey-agent-components-novelty.md) ·

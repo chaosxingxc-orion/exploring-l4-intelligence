@@ -33,6 +33,9 @@
 **D3 BoN 过优化 / N*（24 claims）**
 - ★ **Beirami Theorem 3.1 的精确形式已核**：KL(BoN‖ref) ≤ log n − (n−1)/n 是**上界非等式**、
   前件=奖励唯一性假设——**我们 BestOfN.lean:90 的 sorry 可按此原文处置**（证明或钉为显式引用假设）。
+  > **2026-07-11 更正**：该 sorry 已于 2026-07-10（commit `9e999f7`）消解——处置方式是"钉为显式引用
+  > 假设"这条路：具名 imported axiom `beirami_thm_3_1`（作用于 opaque 的 `klBoNActual`），并非给出
+  > 证明。按 2026-07-11 裁定，这是 imported-axiom 状态，不是 Lean-proved theorem。
 - ★ Inference-Time Reward Hacking（arXiv:2506.19248）：**内部最优 N* 存在性定理**（TP2 + 严格增
   评分下 hacking 不可避免且有内点最优）+ HedgeTune 求根算法 + Best-of-Poisson 连续预算旋钮——
   N* 落地 best-of-N 算子的全套先例。
@@ -98,6 +101,9 @@
 
 - **Beirami sorry（BestOfN.lean:90）**：Theorem 3.1 原文已核（上界+奖励唯一性前件）→ 按原文
   证明或钉为显式引用假设，两条路都有据。
+  > **2026-07-11 更正**：已于 2026-07-10（commit `9e999f7`）走"钉为显式引用假设"一路消解——具名
+  > imported axiom `beirami_thm_3_1`（作用于 opaque 的 `klBoNActual`）。按 2026-07-11 裁定为
+  > imported-axiom 状态，非 Lean-proved theorem。
 - **τ→0 假设病根**：D1 T-C/T-E + D2 τ* 定理候选给出"τ*>0 邻域"的正确形式——不再假设消失，
   改证"门控下收敛到 oracle−f(τ*) 邻域"。
 - **over-confidence docstring → 定理**：CDL + Chow + Confidence-Gate 三组件组装（D4）。
