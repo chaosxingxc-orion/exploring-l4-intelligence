@@ -8,6 +8,11 @@
 > 签字位已由续10 裁决为全量重抽（非开放问题）；④本网格开跑前置另受 2026-07-11 stop-the-line 约束，详见
 > [[2026-07-11-stage1-audit-response-and-rulings]]。
 
+> **2026-07-11 补正（#28 全量核验）**：§2 递送维的 LLMLingua-2 应称**冻结预训练压缩器**（其压缩器为
+> 上游 LLM 蒸馏训练的 token 分类器，非 training-free by construction——training-free 的是原版
+> LLMLingua）；臂不变（我方冻结使用、不训练），但任何写作不得把 LLMLingua-2 作为 training-free
+> 论题证据（step2a-d3-7 更正，详见 [[2026-07-11-survey-full-verification]]）。
+
 > **性质**：Step-2（omni agentic system mock 基线锁定与方案对比）的冻结会输入。合并
 > 2a 调研（105 网格候选，`2026-07-09-step2a-mmknowledge-survey.md`）与 2b 方案空间底账
 > （三步设计 §2b），落成可执行网格 + **预注册削减规则**。mock 口径 = owner 已裁定的
