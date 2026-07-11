@@ -364,6 +364,8 @@
     (9 card texts == an eval transcript) contributes ~3% of the card advantage (+3/107 hits) —
     card-arm figures are not a clean generalization number; the zero-shot regression headline is
     orthogonal to this overlap. No multiplicity correction across the 7 reported deltas yet.
+  hardening_update_2026_07_11: >
+    Multiplicity addressed: all 7 deltas survive Holm at alpha=0.05 (max-T agrees 7/7); clean-provenance rerun reproduces the verified artifact exactly. W4 f154886.
   adjudicated_on: 2026-07-11
   reviewer: "Opus per-repair verifier (a2bf4e5) + coordinator"
 
@@ -388,6 +390,8 @@
     SESOI discipline all PASS; two folds individually significant, three span 0. Statistically
     reliable but practically below SESOI — does not by itself justify deployment. Single fold-seed;
     content-correlated features partially present at L16 (recorded per fold). Stage-1 grade.
+  hardening_update_2026_07_11: >
+    Fold-seed robustness 4/4 positive (+0.027..+0.043, all cluster CIs exclude 0; clean-prov regen byte-deterministic); bounded-below-SESOI holds 3/4 (seed 123 upper bound 0.0551 marginally crosses 0.05). W4 f154886.
   adjudicated_on: 2026-07-11
   reviewer: "Opus per-repair verifier (a5e4997) + coordinator"
 
@@ -436,5 +440,7 @@
     uncorrected across selectors, logprob snr5 lower CI bound ~5e-4 (marginal), 12/96 pools
     collapse identical across seeds (temp-0.8 easy utts), single noise realization per condition.
     Do not upgrade to "deployable win" before powered locked-test replication (METHOD-G1).
+  hardening_update_2026_07_11: >
+    Noise-replication done (seed 20260713, fresh wavs verified after a wav-cache reuse bug was caught pre-collection): logprob replicates across two independent noise draws (+0.0081/+0.0100, both CIs exclude 0); Holm family-wise significance holds in 1 of 2 realizations - evidence real but marginal; length selector significantly harmful in noise2. W1 fc9e17c.
   adjudicated_on: 2026-07-11
   reviewer: "Opus per-repair verifiers (ad9b3d7 snr5, abef730 clean) + coordinator"
