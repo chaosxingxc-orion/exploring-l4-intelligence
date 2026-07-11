@@ -6,6 +6,25 @@
 
 ---
 
+### 2026-07-11（续13）· 过夜整改验收 + 晨令："实验跑扎实 → 后续工作 workflow 并行"
+
+**Facts.** 过夜整改全收官（[[2026-07-11-overnight-remediation-report]]）：G5 三件套清白重做全部
+Opus 复核通过并入库推送——ASR v2 双条件（**logprob 置信 = 两条件唯一 CI 排除 0 的 deployable
+selector**，实现 headroom ~24%/~42%；MBR 修 bug 后仍 ns；prompt-cache livelock 事故修复入档）、
+MInDS v2（真 zero-shot 反降 0.245，旧增益全系 card 因子 + transductive）、CREMA grouped
+（池化增益真实但 sub-SESOI；"无 speaker 信息"废止）；#25 Phase-A 七项 P0 修复 VERIFIED；
+#26 设计+核心机件落地；RI 机器化（冻结清单 + 16 条 claim ledger）；发布链修复后三仓 push +
+wiki 全树 sync。
+
+**Decision（owner 晨令）.** ①先把实验跑扎实——夯实链开工：CREMA 多 fold-seed 稳健性 + 干净
+provenance 重跑、MInDS 多重比较校正 + 干净 provenance 重跑、ASR 第二噪声实现（嵌套重复）、
+**#26 收尾（G-SOURCE loader 补 meta、locked_split、新锁定 manifest）→ group-locked 基线重跑**；
+②后续工作以 workflow 形式并行：#28 调研 86 条全量核验（workflow）、#31 论文五处改写（新验证
+数字已具备）、#29 W4 fresh proposal 草案、#27 operator-linked 理论首批（coverage 定理 +
+从 asr_bon_v2 存量池实证 p*）。**#26 五个设计参数按设计文档推荐值采纳为协调者默认**（重跑范围
+qwen3 单底座、粗粒度 SER 组不相交+宽 CI caveat、6 个 loader 小改、访问控制=文件约定+访问日志、
+LOCKED_TEST_SEED=611741209），owner 可否决；locked manifest 生成先于任何臂选择，符合预注册纪律。
+
 ### 2026-07-11（续12）· 法证审计 + 答复复审均核验成立 → RI 诚信门 + 状态六级制 + G0 单问题拆分 + 过夜修复令（owner 四项全签）
 
 **Facts（增量核验，Opus×4）.** ①法证审计（[[2026-07-10-research-integrity-forensic-audit]]）新增 8 项
