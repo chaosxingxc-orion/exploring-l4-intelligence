@@ -13,6 +13,13 @@
 > LLMLingua）；臂不变（我方冻结使用、不训练），但任何写作不得把 LLMLingua-2 作为 training-free
 > 论题证据（step2a-d3-7 更正，详见 [[2026-07-11-survey-full-verification]]）。
 
+> **2026-07-12 再定性（owner 内涵裁定）**：vocalbench-knowledge 退出 RAG 主战场≠废弃——其内涵是
+> **闭卷参数化知识探针**（口语短事实 QA，盘上无证据段落；轴名 knowledge 指模型权重内知识，非外挂库）。
+> 误编根因=标签漂移链：调研标其为 KB-retrieval **SOURCE** 候选（库源），网格误滑为检索**测试床**。
+> 重新归位三角色：①Proposal-R no-retrieval 对照的语义锚点（RAG 增益−闭卷增益=外部知识净贡献）；
+> ②Step-3 selector 主场之一（闭卷知识激活，无 KB，最贴"激活预训练知识"旗舰叙事）；③语音通道
+> 知识存取差探针。Phase-A RAG 主场收缩为 squtr（corpus-side 重建后）+ heysquad + SQuAD-zh。
+
 > **性质**：Step-2（omni agentic system mock 基线锁定与方案对比）的冻结会输入。合并
 > 2a 调研（105 网格候选，`2026-07-09-step2a-mmknowledge-survey.md`）与 2b 方案空间底账
 > （三步设计 §2b），落成可执行网格 + **预注册削减规则**。mock 口径 = owner 已裁定的
