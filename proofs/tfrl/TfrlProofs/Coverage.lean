@@ -4,17 +4,24 @@ set_option linter.style.header false
 set_option linter.style.longLine false
 
 /-!
-# T-coverage — best-of-N oracle coverage (the FIRST operator-linked theorem)
+# T-coverage — i.i.d. Bernoulli coverage model for the best-of-N pool loop (code-cited; operator
+# formalization pending — see Proposal-F)
 
-This module formalizes the coverage property of the **actual implemented best-of-N operator**
-and is dual-tracked with the empirical bridge `coverage_bridge.py`.
+This module formalizes the coverage property of an **i.i.d.-Bernoulli model of the best-of-N
+pool-generation loop**, with citations to the actual generation code, and is dual-tracked with the
+empirical bridge `coverage_bridge.py`. It is NOT an operator-linked theorem: no result here is a
+theorem about the reward-argmax *selection rule* (`best_of_n` / `klBoNActual`) itself — see
+`docs/claim_ledger.yaml` entry `C-THEORY` (operator-linked theorem count remains 0) and
+`wiki/Theory-Convergence-and-Constraints.md`'s T-coverage subsection for the authoritative status.
+Formalizing the selection rule itself as an operator-linked theorem is future work (Proposal-F).
 
 ## What object is formalized (read this first — honesty statement)
 
 The engineering operator is `best_of_n` in
 `common/src/speechrl_common/rl/decode.py` (lines 30–39): given a candidate set it returns the
-`argmax_i R(z_i)` of a verifiable reward (here `R = -WER`). In the ASR reproduction, its candidate
-pool is produced by the generation loop of
+`argmax_i R(z_i)` of a verifiable reward (here `R = -WER`). This module does NOT formalize that
+selection rule — it formalizes the i.i.d.-Bernoulli *sampling* step that feeds it: in the ASR
+reproduction, its candidate pool is produced by the generation loop of
 `projects/speech-mllm-training-free-rl/scripts/repro_asr_best_of_n_v2.py` (lines 524–531):
 
 ```

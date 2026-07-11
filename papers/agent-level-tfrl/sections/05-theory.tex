@@ -26,8 +26,11 @@ target and its normalizer
 together with the KL-regularized objective
 $\Fobj{\qz} := \Exp_{\qz}[\Rwd] - \beta\,\KL{\qz}{\qo}$. This is the standard inference-time
 specialization of KL-regularized reward maximization, whose maximizer is the exponential tilt
-\citep{korbak2022kl,mudgal2024controlled}; the reward-argmax best-of-$N$ we run in \Cref{sec:c1} is its
-$\beta\to0$ limit.
+\citep{korbak2022kl,mudgal2024controlled}. The hard reward-argmax best-of-$N$ we run in \Cref{sec:c1}
+is a distinct object: it induces the order-statistics selection distribution over the $N$ sampled
+candidates, which the literature heuristically identifies with this tilt's $\beta\to0$ limit
+\citep{beirami2024bon} but which we do not prove equal to it here (no operator-linked machine proof
+connects the Lean lemmas below to the hard-BoN selector; see \Cref{app:lean}).
 
 \paragraph{Master identity: gain is a KL divergence.}
 A one-line algebraic identity (substitute $\Rwd(z)=\beta(\log\tfrac{\qs(z)}{\qo(z)}+\log\Zpart)$ into
@@ -74,18 +77,21 @@ genuine spread across the model's sampled transcripts yields strictly positive b
 by endpoint (i), a flat reward yields none); and the $\beta\to0$ gain is bounded by the reward spread
 $\spread$ over $\operatorname{supp}(\qo)$. Crucially, $\spread$ is a property of the frozen sampling
 distribution and is \emph{$N$-independent} --- so the identity does \emph{not}, by itself, predict the
-$N$-curve. The observed climb of the oracle headroom with $N$ (WER $0.118\!\to\!0.077$;
-reductions $-0.007,+0.007,+0.024,+0.042$ at $N=1,2,4,8$, significant from $N=4$; \Cref{tab:bon}) is an \emph{order-statistics} effect, and
+$N$-curve. The observed climb of the corpus-WER oracle headroom with $N$ ($+0.0336$ at $N{=}8$, snr5;
+$+0.0223$ at $N{=}8$, clean; \Cref{tab:bon}) is an \emph{order-statistics} effect of the hard-BoN
+selection distribution (\Cref{app:lean}), and
 we attribute it as such: for i.i.d.\ draws from $\qo$, the expected best reward $\Exp[\max_{i\le N}\Rwd(y_i)]$
 is nondecreasing in $N$ (indeed our oracle is a min-WER over a growing candidate prefix, so its
 $N$-monotonicity holds by construction for any non-constant reward), and it climbs toward the spread
 ceiling the lens bounds \citep{beirami2024bon,verdun2025softbon}. Thus the division of labor is explicit:
 \emph{order statistics} give the shape of the $N$-curve; the \emph{reward-spread lens} gives its sign and
 its ceiling. Endpoint (i) marks that ceiling: were every sampled transcript equally (in)correct, the reward
-would be flat and no selector --- oracle or deployable --- could beat the sampled candidates. The deployable
-label-free MBR-consensus selector realizes essentially none of the oracle headroom (WER
-$0.115$, $+0.004$, $95\%$ CI $[-0.008,0.017]$, non-significant), an honest realized-vs-headroom gap: the
-spread is present, but a reference-free proxy does not convert it into a significant gain here.
+would be flat and no selector --- oracle or deployable --- could beat the sampled candidates. Among the
+deployable selectors, MBR-consensus realizes only a non-significant fraction of the oracle headroom in
+both conditions, while logprob-confidence realizes a significant, if modest, fraction in both
+($+0.0081$ $[0.0005,0.0161]$ snr5, corpus-only; $+0.0094$ $[0.0034,0.0165]$ clean, both metrics; Stage-1
+directional) --- an honest realized-vs-headroom gap: the spread is present, and one label-free proxy now
+converts a piece of it into a significant gain, but neither closes the gap to the oracle.
 
 The same lens organizes the frozen-encoder probing of \Cref{sec:c2} qualitatively. The frozen content
 bi-encoder exposes reward spread for \emph{content and intent} --- its embedding geometry separates

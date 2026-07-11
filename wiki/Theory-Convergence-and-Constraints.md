@@ -53,14 +53,25 @@ What remains: an *iterative-process* convergence theorem for a full training-fre
 **no theorem at all** for condition (b) reachability — the survey's explicit gap. C1/C2 are the
 natural next formalizations if branch 2.1 is taken; (b)'s absence is itself part of the 2.2 anchor.
 
-### 2026-07-11 — T-coverage: the FIRST operator-linked theorem (Coverage.lean)
+### 2026-07-11 — T-coverage: i.i.d.-Bernoulli coverage-model lemmas + empirical bridge (Coverage.lean; operator-linked count remains 0)
 
-`proofs/tfrl/TfrlProofs/Coverage.lean` (new, `sorry`-free, **no new axiom** — verified below) is the
-first theorem the theory track binds to an *actually implemented* operator: `decode.best_of_n` (argmax
-reward) / `select_oracle_idx` (argmin-WER) over the pool-generation loop of
-`scripts/repro_asr_best_of_n_v2.py` (lines 524–531). **Status: verified algebra + operator-linked
-empirical bridge** (the algebra is machine-checked; the bridge is Stage-1 / hypothesis-grade evidence
-that the i.i.d. model fits the stored pools — NOT a proof that the frozen model's draws are i.i.d.).
+**2026-07-12 correction (RI item 3 / 续15 naming-correction finding):** this subsection's original
+title called Coverage.lean "the FIRST operator-linked theorem" — that framing was a naming error and
+has been retracted; see `docs/claim_ledger.yaml` entry `C-THEORY`, which is and remains the
+authoritative status record: **the operator-linked theorem count is 0**, unchanged by this module.
+What follows is corrected to match.
+
+`proofs/tfrl/TfrlProofs/Coverage.lean` (new, `sorry`-free, **no new axiom** — verified below) formalizes
+an **i.i.d.-Bernoulli coverage-probability model** for the best-of-N *pool-generation loop*, with code
+citations to the actual generation loop of `scripts/repro_asr_best_of_n_v2.py` (lines 524–531) and to
+the selector it feeds, `decode.best_of_n` (argmax reward) / `select_oracle_idx` (argmin-WER). It is
+**not** a theorem about that selection rule itself (no result here is "operator-linked" in the ledger's
+sense — see C-THEORY); it formalizes the independent-draws *sampling* step that feeds the selector, not
+the reward-argmax *selection* step. **Status: verified algebra + empirical bridge** (the algebra is
+machine-checked; the bridge is Stage-1 / hypothesis-grade evidence that the i.i.d. model fits the
+stored pools — NOT a proof that the frozen model's draws are i.i.d., and not an operator-linked proof
+of convergence for the selector). Operator-linked formalization of the selection rule itself remains
+future work (Proposal-F).
 
 **What is formalized** (honest object: a real-analysis identity on an independent-Bernoulli product,
 docstring states this exactly): per-draw success prob `p` (a draw is *good* = strictly lower WER than

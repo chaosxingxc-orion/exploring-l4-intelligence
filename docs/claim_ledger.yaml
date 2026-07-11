@@ -311,6 +311,21 @@
     mismatch. "Engineering prep complete" language describing this state is bookkeeping-false.
   adjudicated_on: 2026-07-11
   reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
+  note: >
+    Successor status (2026-07-12, 续15): the engineering-side blockers listed in invalid_reason
+    were subsequently fixed and independently verified (W1 commits 28f0a38 "ticket #25 — Phase-A
+    executable, all 7 P0 defects fixed; Opus-verified ACCEPT-with-notes" and 13d06f3 "Proposal-R
+    mechanism control arms + G2 layer-2 CPU prep — coordinator-verified E2E 39/39"), and a DEV-only
+    exploratory sweep was released by Decision-Log 续14 ("Phase-A dev-only 探索扫描放行"). That
+    sweep was then SWEEP HALTED by 续15's wrong-object finding before any of its 140 planned cells
+    executed (0 cells ran on the wrong object): the squtr "knowledge-passage" KB value was actually
+    the FiQA query's own text (not the retrieved corpus document), and vocalbench-knowledge's value
+    was the question's own text — both an object mismatch, not a genuine knowledge-utilization
+    build (see RI item 9 / scripts/knowledge for the corpus-side rebuild fixing this).
+    C-PHASEA's status THEREFORE STAYS invalid — not because the original 6 P0 blockers persist
+    (they don't), but because the corpus-side object bug means no valid Phase-A cell has yet run.
+    Re-open only after (a) the corpus-side rebuild (build_squtr_corpus_source, RI item 9) and (b)
+    a clean re-pass of G2 layer 3 (real-machine ref-config reconstruction).
 
 - claim_id: C-THEORY
   claim_text: >
@@ -340,6 +355,18 @@
     G6 (theory/implementation-parity gate) status: operator-linked theorems = 0; no executable
     conformance test yet ties the Python selector to the Lean operator example-by-example. Treat any
     paper sentence of the form "Lean proves our selector converges" as unsupported until G6 closes.
+    2026-07-12 addendum (RI item 2/3, 续15 naming-correction finding): count=0 remains AUTHORITATIVE
+    and is unchanged by proofs/tfrl/TfrlProofs/Coverage.lean (module `TfrlProofs.Coverage`, added
+    2026-07-11). That module provides i.i.d.-Bernoulli coverage-model lemmas (`missProb_eq_prod`,
+    `missProb_antitone`, `missProb_strictAnti`, `missProb_le_of_N_ge`) for the best-of-N
+    pool-generation loop, WITH code citations to the actual generation loop
+    (scripts/repro_asr_best_of_n_v2.py lines 524-531) and an empirical bridge
+    (scripts/coverage_bridge.py / _repro/coverage_bridge_v1.json) — but it formalizes the
+    independent-DRAWS/sampling step feeding the selector, not a theorem about the reward-argmax
+    SELECTION rule (klBoNActual) itself, so it is correctly NOT counted toward the operator-linked
+    theorem count. The module's original docstring calling this "the FIRST operator-linked theorem"
+    was a naming error and has been corrected (see the module docstring itself and
+    wiki/Theory-Convergence-and-Constraints.md's T-coverage subsection, both retitled 2026-07-12).
 
 - claim_id: C-MINDS-V2
   claim_text: >
@@ -351,7 +378,7 @@
   status: directional
   stage: 1
   artifact: projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_v2.json
-  code_commit: 9ead4d4
+  code_commit: 56b8a9c
   metric_definition: >
     Acc@1 per arm on the 437-row eval set; paired bootstrap deltas (seed 42, n=1000); pooled over
     3 disjoint support draws for card arms.
@@ -365,9 +392,34 @@
     card-arm figures are not a clean generalization number; the zero-shot regression headline is
     orthogonal to this overlap. No multiplicity correction across the 7 reported deltas yet.
   hardening_update_2026_07_11: >
-    Multiplicity addressed: all 7 deltas survive Holm at alpha=0.05 (max-T agrees 7/7); clean-provenance rerun reproduces the verified artifact exactly. W4 f154886.
-  adjudicated_on: 2026-07-11
-  reviewer: "Opus per-repair verifier (a2bf4e5) + coordinator"
+    SUPERSEDED by the 2026-07-12 remediation (RI item 4 / 续15 finding "MInDS '7/7' 实为 5 独特对比"):
+    the "all 7 deltas survive Holm" statement below double-counted 2 report-key duplicates
+    (factor_isolation_deltas.instruction_effect__cards_absent ==
+    deltas_vs_naive.instruction_only; factor_isolation_deltas.cards_effect__instruction_absent ==
+    deltas_vs_naive.cards_only — see _repro/minds14_v2_multiplicity.json's own
+    "note_on_duplicates" field). CORRECTED RESULT: the family is 5 UNIQUE pairwise contrasts (2
+    duplicate report keys removed); re-run with the newly committed generator
+    projects/speech-mllm-omni-embedding-rl/scripts/minds14_multiplicity_v2.py over the deduped
+    family gives ALL 5 SURVIVE Holm at alpha=0.05 (max-T agrees, 5/5) — same conclusion as before
+    (nothing here flips to non-significant), just over the CORRECT, non-inflated family size; see
+    _repro/minds14_v2_multiplicity_v2.json for the full per-contrast numbers and provenance.
+    [Superseded text, kept append-only:] "Multiplicity addressed: all 7 deltas survive Holm at
+    alpha=0.05 (max-T agrees 7/7); clean-provenance rerun reproduces the verified artifact exactly.
+    W4 f154886."
+  note: >
+    (a) code_commit corrected 2026-07-12: the original 9ead4d4 is a commit object that is no longer
+    reachable from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history
+    rewrite — 56b8a9c is the rebased equivalent (same commit message "repro(minds14-v2): clean
+    factorial redo ..."; the 4 files this commit touches —
+    _repro/minds14_toolintent_v2.json/.smoke.json, scripts/repro_minds14_toolintent_v2.py,
+    docs/experiment_inventory.md — are byte-identical between the two hashes except for
+    docs/experiment_inventory.md, which differs only because OTHER, later, unrelated commits
+    inserted rows into that same file between the two commits' respective parents during the
+    rewrite; the artifact this claim actually cites is unchanged). Verified 2026-07-12 via
+    `git diff <hash> <hash> -- <the 4 paths>` in the W4 repo (empty for the 3 artifact/script
+    paths). (b) see hardening_update_2026_07_11 above for the 7-vs-5-contrast correction (RI item 4).
+  adjudicated_on: 2026-07-12
+  reviewer: "Opus per-repair verifier (a2bf4e5) + coordinator; 2026-07-12 RI mechanical remediation (续15)"
 
 - claim_id: C-W4-EMO-GROUPED
   claim_text: >
@@ -378,7 +430,7 @@
   status: directional
   stage: 1
   artifact: projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_grouped_v1.json
-  code_commit: d04bb89
+  code_commit: 40d34c2
   metric_definition: >
     Paired per-clip accuracy delta (sel audio_attn vs base audio mean-pool), kNN(k=5) probes,
     layer dev-selected on inner speaker-grouped split of train speakers only; pooled out-of-fold.
@@ -392,8 +444,16 @@
     content-correlated features partially present at L16 (recorded per fold). Stage-1 grade.
   hardening_update_2026_07_11: >
     Fold-seed robustness 4/4 positive (+0.027..+0.043, all cluster CIs exclude 0; clean-prov regen byte-deterministic); bounded-below-SESOI holds 3/4 (seed 123 upper bound 0.0551 marginally crosses 0.05). W4 f154886.
-  adjudicated_on: 2026-07-11
-  reviewer: "Opus per-repair verifier (a5e4997) + coordinator"
+  note: >
+    code_commit corrected 2026-07-12: the original d04bb89 is a commit object no longer reachable
+    from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history rewrite —
+    40d34c2 is the rebased equivalent (same commit message "repro(crema-grouped-v1)+restatement:
+    speaker-grouped GroupKFold(5) redo ..."; identical git patch-id; the 5 files this commit
+    touches, including this claim's own artifact _repro/emotion_pool_grouped_v1.smoke.json, are
+    byte-identical between the two hashes — verified 2026-07-12 via `git patch-id` and `git diff`
+    in the W4 repo).
+  adjudicated_on: 2026-07-12
+  reviewer: "Opus per-repair verifier (a5e4997) + coordinator; 2026-07-12 RI mechanical remediation (续15)"
 
 - claim_id: C-W4-PARA-RESTATED
   claim_text: >
@@ -403,15 +463,22 @@
   status: directional
   stage: 1
   artifact: projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json
-  code_commit: d04bb89
+  code_commit: 40d34c2
   metric_definition: >
     Pure arithmetic restatement over the frozen paralinguistic_negative_probe.json (sha256-matched);
     per-seed superiority CIs vs chance; conservative n=3 t-CI flagged directional alongside.
   supersedes: C-W4-PARA
   superseded_by: null
   invalid_reason: null
-  adjudicated_on: 2026-07-11
-  reviewer: "Opus per-repair verifier (a5e4997) + coordinator"
+  note: >
+    code_commit corrected 2026-07-12: the original d04bb89 is a commit object no longer reachable
+    from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history rewrite —
+    40d34c2 is the rebased equivalent (identical git patch-id; this claim's own artifact
+    _repro/speaker_probe_restatement.json is byte-identical between the two hashes — verified
+    2026-07-12 via `git patch-id` and `git diff` in the W4 repo). See C-W4-EMO-GROUPED's note for
+    the full verification detail (same commit pair).
+  adjudicated_on: 2026-07-12
+  reviewer: "Opus per-repair verifier (a5e4997) + coordinator; 2026-07-12 RI mechanical remediation (续15)"
 
 - claim_id: C-ASR-V2
   claim_text: >
@@ -425,7 +492,12 @@
     length are significant regressions on clean.
   status: directional
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_{snr5,clean}.json
+  artifact:
+    - projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json
+    - projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json
+  artifact_sha256:
+    projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json: 19a7e1464309bab8468c8a75f4cd587ac6416b178d3502ac7494b0b3649e0ea5
+    projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json: 27591fb96f3b0bc262d38e28b5e57a5a09fbe8119647ecba28c553402d5e1a0d
   code_commit: 28d8f0d
   metric_definition: >
     Corpus WER (sum errors / sum ref words, S/D/I/N per hypothesis stored) and macro utterance-WER,
@@ -442,5 +514,21 @@
     Do not upgrade to "deployable win" before powered locked-test replication (METHOD-G1).
   hardening_update_2026_07_11: >
     Noise-replication done (seed 20260713, fresh wavs verified after a wav-cache reuse bug was caught pre-collection): logprob replicates across two independent noise draws (+0.0081/+0.0100, both CIs exclude 0); Holm family-wise significance holds in 1 of 2 realizations - evidence real but marginal; length selector significantly harmful in noise2. W1 fc9e17c.
-  adjudicated_on: 2026-07-11
-  reviewer: "Opus per-repair verifiers (ad9b3d7 snr5, abef730 clean) + coordinator"
+  hardening_update_correction_2026_07_12: >
+    CORRECTION (RI item 1e / 续15 P0-3 finding, wiki/2026-07-11-step1-completion-forensic-integrity-review.md
+    §4): the hardening_update_2026_07_11 line above's "Holm family-wise significance holds in 1 of 2
+    realizations" used a family NARROWED, after the fact, to 4 deployable selectors at fixed N=8
+    only (Holm4): noise1 raw p=.037 -> Holm4 adjusted .148 (n.s.); noise2 raw p=.005 -> Holm4
+    adjusted .015 (survives). That is NOT the full family actually explored. Recomputed over the
+    real discovery grid (4 deployable selectors x 4 values of N = 16 corpus-WER comparisons per
+    condition, same bootstrap p-values, Holm step-down): noise1 adjusted p = .592 (n.s.), noise2
+    adjusted p = .075 (n.s.) — NEITHER condition survives the full-family correction (if
+    clean/noise1/noise2's 48 comparisons are pooled into one discovery family, noise1/noise2 adjusted
+    p are approx 1.0 and .21 respectively). Corrected framing: in the same cohort's second
+    noise-sensitivity pass, the PRE-SELECTED logprob@8 endpoint replicates in DIRECTION across both
+    noise draws; for the fixed-N=8, 4-selector family, noise2 survives Holm but noise1 does not; the
+    FULL discovery-grid family survives in NEITHER condition. This remains Stage-1 directional
+    evidence, not an independent replication or a deployable win — "Holm family-wise survives"
+    must not be quoted without stating which family.
+  adjudicated_on: 2026-07-12
+  reviewer: "Opus per-repair verifiers (ad9b3d7 snr5, abef730 clean) + coordinator; 2026-07-12 RI mechanical remediation (续15)"

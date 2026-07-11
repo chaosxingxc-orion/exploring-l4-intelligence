@@ -141,9 +141,13 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument(
         "--timestamp",
         required=True,
-        help="generated_at value stamped into the manifest header (ISO-8601, e.g. "
-        "2026-07-11T02:00:00+08:00). Not read from the system clock so the manifest "
-        "is reproducible/attributable to a specific freeze event.",
+        help="PLANNED label stamped into the manifest header as 'planned_label' (ISO-8601, e.g. "
+        "2026-07-11T02:00:00+08:00) -- a coordinator/human-supplied planning tag, hand-typed, NOT "
+        "read from the system clock (2026-07-12, RI item 11: this field was previously named "
+        "'generated_at' and conflated with the actual observation time; a prior forensic finding "
+        "noted 'freeze 时间戳为手填标签' -- the freeze timestamp was a hand-filled label. Fixed by "
+        "separating this planned label from 'observed_at_utc' below, which IS read from the "
+        "system clock at the moment this script actually runs).",
     )
     p.add_argument(
         "--out",
@@ -186,13 +190,31 @@ def main(argv: list[str]) -> int:
     w1_root = repo_root / "projects" / "speech-mllm-training-free-rl"
     w4_root = repo_root / "projects" / "speech-mllm-omni-embedding-rl"
 
+    # 2026-07-12 (RI item 11): git heads are captured HERE, at the moment of this walk/observation
+    # (same as before -- git_head() always ran live), now under a name that says so explicitly and
+    # paired with observed_at_utc (the same moment, from the real system clock) rather than only
+    # the hand-typed planned_label.
+    git_heads_at_observation = {
+        "umbrella": git_head(repo_root),
+        "W1_speech-mllm-training-free-rl": git_head(w1_root),
+        "W4_speech-mllm-omni-embedding-rl": git_head(w4_root),
+    }
+    observed_at_utc = datetime.now(timezone.utc).isoformat()
+
     header = {
-        "generated_at": args.timestamp,
-        "git_heads": {
-            "umbrella": git_head(repo_root),
-            "W1_speech-mllm-training-free-rl": git_head(w1_root),
-            "W4_speech-mllm-omni-embedding-rl": git_head(w4_root),
-        },
+        # 2026-07-12 (RI item 11, forensic finding "freeze 时间戳为手填标签"): separated fields --
+        # `planned_label` is the hand-supplied --timestamp (a planning tag, may be typed ahead of
+        # or after the actual run; NOT authoritative); `observed_at_utc` is the REAL system clock
+        # reading at the moment this script executed the walk; `git_heads_at_observation` are the
+        # repo HEADs read at that same moment. `generated_at` is kept, set equal to `planned_label`,
+        # ONLY for backward compatibility with the pre-2026-07-12 manifest schema (e.g.
+        # _repro/evidence_freeze_20260711.json) -- new consumers should read the three fields
+        # above, not `generated_at`.
+        "planned_label": args.timestamp,
+        "observed_at_utc": observed_at_utc,
+        "git_heads_at_observation": git_heads_at_observation,
+        "generated_at": args.timestamp,  # deprecated alias of planned_label -- see comment above
+        "git_heads": git_heads_at_observation,  # deprecated alias of git_heads_at_observation
         "hostname": socket.gethostname(),
         "excluded_dirs": sorted(exclude_dirs),
         "one_gb_threshold_bytes": ONE_GB,
