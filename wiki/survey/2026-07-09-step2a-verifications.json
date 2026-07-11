@@ -86,4 +86,280 @@
   "evidence": "Verified against the primary source arXiv:2505.03275 (arxiv.org/html/2505.03275v1 and the ar5iv mirror), reading passages multiple times to rule out HTML/MathML duplication artifacts.\n\nCONFIRMED — Mechanism: source states RAG-MCP maintains \"an external vector index of all available MCP metadata,\" a lightweight retriever \"performs a semantic search over the MCP index, returning the top-k candidates,\" and \"Only the single best MCP description... is injected into the LLM prompt.\" Exactly matches the claim's description of external vector index + semantic top-k + inject only the winner's description.\n\nCONFIRMED — Accuracy (Table 1): RAG-MCP 43.13%, Actual Match (keyword) 18.20%, Blank Conditioning (naive/all-tools) 13.62%. Source: \"MCP-RAG achieves the highest accuracy at 43.13%, significantly outperforming the Actual Match and Blank Conditioning methods, which scored 18.20% and 13.62%, respectively.\" All three numbers and their labels match.\n\nCONFIRMED — Prompt tokens (Table 1): RAG-MCP 1,084 vs Blank 2,133.84 (Actual Match 1,646). Abstract: \"cuts prompt tokens (e.g., by over 50%).\" Both the exact numbers (1084 vs 2133) and the >50% framing match the source (the >50% is the paper's own claim; strict arithmetic on 1084/2133.84 is ~49.2%, but the claim faithfully reproduces the paper).\n\nCONFIRMED — Degradation ~100: source stress-test analysis states \"Beyond position ~100, purple dominates, signifying that retrieval precision diminishes when handling very large tool registries.\" Matches \"success degrades beyond ~100 tools.\"\n\nDEFECT — Stress-test range: claim says \"1-1100\"; source says verbatim (consistent across three fetches and two mirrors) \"we vary N from 1 to 11100 in 26 intervals.\" The upper bound is 11,100, not 1,100. Earlier garbled extractions (\"20202020\" tasks, \"NN\") were MathML duplication artifacts, but the 5-digit \"11100\" persisted in the clean ar5iv render and a literal character-level check, so it is genuine. The claim understates the stress-test range by ~10x.\n\nEverything in the claim is accurate except this one figure, hence PARTIAL rather than CONFIRMED.",
   "correction": "The MCP stress test varied the tool pool from 1 to 11,100 servers (in 26 intervals), not 1 to 1,100 — the claim understates the upper bound by roughly 10x. All other assertions are accurate as stated: RAG-MCP 43.13% vs 18.20% keyword (Actual Match) vs 13.62% naive-all-tools (Blank Conditioning); prompt tokens 1,084 vs 2,133.84 with the paper claiming a >50% cut; retrieval = external vector index of MCP metadata + semantic top-k search + inject only the single best MCP description; and selection accuracy/task success declines beyond ~100 tools."
  }
+,
+ {
+  "batch_header": true,
+  "date": "2026-07-11",
+  "pass": "full-coverage verification",
+  "track": "step2a",
+  "added_count": 42,
+  "note": "Full-coverage verification pass (2026-07-11): 42 additional claim verifications appended below (of an 89-item joint batch spanning both step2a and step3a ledgers). Appended entries carry an explicit id field (matching the per-dimension dN-M claim numbering in the sibling *-dN-*.json files) plus source_url, alongside support (evidence) and an optional correction field. See wiki/2026-07-11-survey-full-verification.md for verdict counts, every REFUTED/PARTIAL claim with its correction, an impact assessment against frozen step-2/step-3 decisions, and the 待补 (unresolved) list."
+ },
+ {
+  "id": "d1-5",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2502.10950v1",
+  "support": "Primary source: 'SpeechT-RAG: Reliable Depression Detection in LLMs with Retrieval-Augmented Generation Using Speech Timing Information' (arXiv:2502.10950v1, 16 Feb 2025; ACL 2025 Findings, aclanthology.org/2025.findings-acl.521). (1) Retrieval keys are non-lexical speech-timing features: durations between consecutive acoustic-landmark bigram pairs (mean/variance/IQR) converted to structured text, not transcript content — 'we leverage speech timing features for both accurate depression detection and reliable confidence estimation.' (2) Comparable to fine-tuned LLMs with NO additional training (it is training-free RAG): Table 3 — 'achieves performance comparable to fine-tuned models' (e.g., Llama2-7B-Chat + Timing-RAG F1=0.563 vs fine-tuned F1=0.488; Llama3-8B-Instruct + 4 examples F1=0.692 vs fine-tuned Llama3-13B F1=0.636). (3) Confidence score derived from the SAME temporal features via a Gaussian Process Classifier over landmark-bigram timing features with p<0.05. All three sub-claims supported."
+ },
+ {
+  "id": "d1-6",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2602.14612v3",
+  "support": "Primary source: 'LongAudio-RAG (LA-RAG): Event-Grounded Question Answering over Multi-Hour Long Audio' (arXiv:2602.14612, Qualcomm Technologies, 16 Feb 2026; later versions retitled '...via Structured Retrieval'). (1) Grounds LLM answers in retrieved, timestamped acoustic-event detections stored as structured records: multi-hour streams 'converted into structured event records stored in an SQL database' with event name, start/end time, class confidence, loudness — not raw audio. (2) Uses event-level/structured retrieval. (3) Beats BOTH vanilla RAG and text-to-SQL (Table 1): LA-RAG 68.92% (Industrial IoT) / 76.88% (Home) overall accuracy vs AGM+RAG 49.88% and vs Text2SQL 40.90% / 41.77%; paper notes standard RAG lacks precise temporal structure and Text2SQL produces invalid queries/misreads intervals. All sub-claims supported."
+ },
+ {
+  "id": "d1-7",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2605.20414",
+  "support": "Primary source: 'PlanRAG-Audio: Planning and Retrieval Augmented Generation for Long-form Audio Understanding' (arXiv:2605.20414, CMU LTI + Amazon AGI, 2026). (1) 'the system first plans which modalities (spoken content, speaker information, emotional cues, non-verbal acoustic events), temporal spans, and constraints are required' and retrieves only query-relevant info from a structured text+audio DB. (2) Decouples cost from audio length (Table 4: 60-min recording 115.2k tokens without vs 0.9k tokens with PlanRAG-Audio). (3) The plan Θ(q) specifies exactly the five fields claimed: '1) which modality-specific representations are required; 2) what filters are applied to each stream; 3) how multiple streams are joined; 4) which fields are returned from the merged SQL results; 5) what schema the final generation LLM must follow.' Matches representations / per-stream filters / joins / returned fields / output schema. Fully supported."
+ },
+ {
+  "id": "d1-8",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2603.02206v1",
+  "support": "Primary source: 'VoiceAgentRAG: Solving the RAG Latency Bottleneck in Real-Time Voice Agents Using Dual-Agent Architectures' (arXiv:2603.02206v1, 2 Mar 2026, Salesforce AI Research; code at github.com/SalesforceAIResearch/VoiceAgentRAG). Dual-agent design confirmed: background Slow Thinker 'predicts 3-5 likely follow-up topics, retrieves relevant document chunks from the vector database, and pre-populates a FAISS-backed semantic cache'; foreground Fast Talker 'checks the semantic cache (sub-millisecond lookup), and only falls back to the vector database on cache miss.' Exact numbers all match: '75% overall cache hit rate (79% on warm turns)'; '316x retrieval speedup (110ms -> 0.35ms)'; 'sub-200ms response latency' voice budget. Every quantitative and structural sub-claim supported."
+ },
+ {
+  "id": "d1-9",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2506.20199",
+  "support": "Primary source: 'How to Retrieve Examples in In-context Learning to Improve Conversational Emotion Recognition using Large Language Models?' (arXiv:2506.20199, v1 25 Jun 2025 / v2 28 Jun 2025; USC, Wang/Feng/Narayanan). Method is named 'Augmented Example Retrieval (AER)'. Mechanism matches exactly: LLM paraphrases each reference utterance ('we prompt LLM to generate four paraphrases for each one'); utterances encoded with SentenceTransformer and matched by highest cosine similarity to the target; then 'selecting another three examples with the remaining emotions arbitrarily' (emotion coverage). Results: AER consistently outperforms other ICL retrieval across IEMOCAP (0.575), MELD (0.581), EmoryNLP (0.570) — 'augmented example retrieval consistently outperforms other techniques ... across all datasets.' All sub-claims supported."
+ },
+ {
+  "id": "d1-10",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2508.01166",
+  "support": "Primary source: 'Hearing More with Less: Multi-Modal Retrieval-and-Selection Augmented Conversational LLM-Based ASR' (arXiv:2508.01166, Aug 2025; accepted AAAI 2026; Mu/Liu/Xue/Wei/Xie). The method (named MARS) 'augments conversational LLM-ASR by enabling it to retrieve and select the most relevant acoustic and textual historical context for the current utterance' — i.e., multimodal (acoustic + textual = audio segments + transcripts) retrieval, followed by an explicit selection stage (the paper's core 'retrieval-and-selection' design) to filter redundant/irrelevant candidates before conditioning. Motivation: fixed-window/full-history context causes 'ASR confusion and computational costs due to massive irrelevant and redundant information.' All three sub-claims (multimodal retrieval-and-selection; historical audio + transcripts; selection to filter before injection) supported by title/abstract/method."
+ },
+ {
+  "id": "d1-11",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/html/2601.22777v1",
+  "support": "Primary source: 'RASST: Fast Cross-modal Retrieval-Augmented Simultaneous Speech Translation' (arXiv:2601.22777v1, 2026; JHU + CMU, Luo/Ouyang/Xu/Li). CONFIRMED parts: it is retrieval-augmented SIMULTANEOUS ST; a lightweight cross-modal (speech-text) retriever produces chunkwise terminology hints via multi-scale retrieval under streaming/partial-speech constraints; the Speech-LLM is trained (via synthesized data with ground-truth/empty/incorrect retrieval patterns) to decide whether and when to apply each term; BLEU improves by up to +3 (abstract); overhead is low ('the retriever adds negligible computational overhead compared to Speech LLM inference'; max 0.16 ratio ≈ 16% compute). REFUTED number: terminology accuracy is 'up to 16%' absolute (abstract; Sec 5.1 'improvements reaching up to 16%'), NOT ~40% as claimed.",
+  "correction": "Terminology translation accuracy improves by up to ~16% (absolute), not ~40%. All other elements (chunkwise multi-scale retrieval, train-to-decide-whether/when, +up-to-3 BLEU, negligible retriever overhead) hold. Full title is 'RASST: Fast Cross-modal Retrieval-Augmented Simultaneous Speech Translation' and results are on the ACL 60/60 dev set (three directions)."
+ },
+ {
+  "id": "d1-14",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2604.25022v1",
+  "support": "Primary source: 'AFA: Identity-Aware Memory for Preventing Persona Confusion in Multi-User Dialogue' (arXiv:2604.25022v1, 27 Apr 2026, Univ. of Delaware; AFA = Adaptive Friend Agent). (1) Uses voice embeddings for speaker-ID: 'We use SpeechBrain's ECAPA-TDNN model ... speaker recognition'; audio -> voice embeddings stored in DynamoDB linked to user IDs, and 'when a user speaks, their voice embeddings are compared against existing embeddings using cosine similarity.' (2) Maintains identity-aware per-user memory (Dynamic User Profile Store, separate tables per user) to prevent persona confusion across multiple users sharing one device — identity-aware routing raises Persona Attribution Accuracy from 35.7% (no routing) to 61.3%. Both sub-claims supported."
+ },
+ {
+  "id": "d1-18",
+  "verdict": "PARTIAL",
+  "source_url": "https://github.com/llm-lab-org/Multimodal-RAG-Survey",
+  "support": "Primary source: 'Ask in Any Modality: A Comprehensive Survey on Multimodal RAG' (arXiv:2502.08826, ACL 2025 Findings) + its GitHub repo llm-lab-org/Multimodal-RAG-Survey README '🎶 Audio-Centric' section. CONFIRMED parts: the five named systems ARE listed (as the first five entries) — RECAST, WavRAG, SpeechRAG, SEAL, and 'Contextual ASR with retrieval augmented large language model'; no audio-specific RAG benchmarks appear in the audio section; and the README changelog confirms the enhanced arXiv version 'covers new topics such as agentic interaction and audio-centric retrieval.' REFUTED part: the section does NOT list 'exactly' those five — it lists 11 audio papers total; beyond the five it also includes RECAP, Audiobox TTA-RAG, DRCap, P2PCAP, LA-RAG, and CA-CLAP.",
+  "correction": "The audio-centric section enumerates 11 papers, not exactly the 5 named. The five (RECAST, WavRAG, SpeechRAG, SEAL, contextual-ASR-with-RAG) are the first five entries, but the section also lists RECAP, Audiobox TTA-RAG, DRCap, P2PCAP, LA-RAG, and CA-CLAP. The 'no audio-RAG benchmarks' observation and the enhanced-version topic additions (agentic interaction + audio-centric retrieval) are accurate."
+ },
+ {
+  "id": "d2-5",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2504.20734",
+  "support": "\"UniversalRAG: Retrieval-Augmented Generation over Corpora of Diverse Modalities and Granularities\" (arXiv:2504.20734, v1 29 Apr 2025, orig. titled '...over Multiple Corpora with Diverse Modalities and Granularities'; Yeo et al.). Routes across BOTH modality (text/image/video) and granularity ('granularity—from passages to full documents, or from short clips to full videos'), using trained OR training-free routers. Experiments (10 benchmarks): text = MMLU (no-retrieval), Natural Questions (paragraph), HotpotQA (document), HybridQA; image = MRAG-Bench, WebQA, InfoSeek; video = LVBench (short clip <5 min), VideoRAG-Wiki & VideoRAG-Synth (full video). Beats single-modality/single-granularity baselines. Modalities are text/image/video only — NO audio/speech mentioned anywhere. Claim's cited benchmark names (NQ/HotpotQA text; WebQA/InfoSeek multimodal; VideoRAG video) all appear as stated."
+ },
+ {
+  "id": "d2-6",
+  "verdict": "CONFIRMED",
+  "source_url": "https://aclanthology.org/2025.findings-acl.289/",
+  "support": "\"Context-Aware Hierarchical Merging for Long Document Summarization\", Litu Ou & Mirella Lapata (arXiv:2502.00977; Findings of ACL 2025, pp. 5534-5561). Abstract: hierarchical merging summarizes >100K-token texts by summarizing sections then recursively merging, but 'the recursive merging process can amplify LLM hallucinations.' They enrich merging with source-document context — 'replacing intermediate summaries with relevant input context,' refining them with context as evidence, and aligning via citations. 'Experimental results on datasets representing legal and narrative domains show that contextual augmentation consistently outperforms zero-shot and hierarchical merging baselines for the Llama 3.1 model family.' Matches claim exactly."
+ },
+ {
+  "id": "d2-7",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/html/2504.11544v1",
+  "support": "\"NodeRAG: Structuring Graph-based RAG with Heterogeneous Nodes\" (arXiv:2504.11544, 15 Apr 2025). Table 1: the ~89% figure is on HotpotQA — NodeRAG 89.50% accuracy (vs GraphRAG 89.00%) — NOT MuSiQue. On MuSiQue NodeRAG scores 46.29% accuracy (vs GraphRAG 41.71%, LightRAG 36.00%). Table 3: MuSiQue retrieval = 5,960.25 tokens, indexing 25 min (vs GraphRAG 76 min), query 4.05 s (vs GraphRAG 22.65 s), storage 250 MB. Efficiency superiority over GraphRAG/LightRAG (indexing/query time, storage, multi-hop QA, fewer retrieval tokens) is CONFIRMED; the ~5k-token figure matches MuSiQue (5.96k).",
+  "correction": "The 89% (89.50%) is NodeRAG's HotpotQA accuracy, not MuSiQue. NodeRAG's MuSiQue accuracy is 46.29% (with ~5,960 retrieval tokens). The claim conflates the ~89% score (HotpotQA) with the ~5k-token/MuSiQue result."
+ },
+ {
+  "id": "d2-9",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2605.00631",
+  "support": "\"H-RAG at SemEval-2026 Task 8: Hierarchical Parent-Child Retrieval for Multi-Turn RAG Conversations\" (arXiv:2605.00631, 1 May 2026). Pipeline 'separates fine-grained child-level retrieval from parent-level context reconstruction during generation, with documents segmented into overlapping sentence-based child chunks, while full documents are preserved as parent units to provide coherent context'; retrieval is dense-sparse hybrid + embedding rescoring over child chunks, aggregated at parent level for generation. This is index/match on CHILD (precision), return PARENT (coherent generation) — matches the claim. The build step is chunking + child embeddings with no LLM, consistent with LangChain's ParentDocumentRetriever (the canonical implementation of this pattern, which likewise requires no LLM at index time — only a chunk hierarchy + child embeddings)."
+ },
+ {
+  "id": "d2-11",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2412.06206",
+  "support": "\"SiReRAG: Indexing Similar and Related Information for Multihop Reasoning\" (arXiv:2412.06206, v2; Salesforce AI Research; ICLR-track/OpenReview yp95goUAT1). Indexes BOTH a Similarity Tree (follows RAPTOR, recursive similarity-based tree) AND a Relatedness Tree (LLM-extracted entities/propositions aggregated via entity relations), flattened into one retrieval pool. Explicitly motivated by prior methods modeling only one perspective ('Modeling only one perspective results in insufficient knowledge synthesis... suboptimal performance on... multihop reasoning'); RAPTOR is the similarity-only method it builds on and improves. Evaluated on multihop datasets MuSiQue, 2WikiMultiHopQA, HotpotQA (avg +1.9% F1). Matches claim."
+ },
+ {
+  "id": "d2-12",
+  "verdict": "REFUTED",
+  "source_url": "https://arxiv.org/abs/2602.19320",
+  "support": "The two cited primary surveys do NOT converge on a three-tier episodic/semantic/procedural taxonomy. 'Rethinking Memory Mechanisms of Foundation Agents in the Second Half: A Survey' (arXiv:2602.06052) uses FIVE cognitive memory types — sensory, working, episodic, semantic, procedural — crossed with substrate (internal/external) and subject (user/agent-centric) dimensions. 'Anatomy of Agentic Memory: Taxonomy and Empirical Analysis...' (arXiv:2602.19320) explicitly REJECTS the cognitively-inspired framing in favor of a four-category STRUCTURE-oriented taxonomy: (1) lightweight semantic, (2) entity-centric/personalized, (3) episodic/reflective, (4) structured/hierarchical memory ('Defined by how memory is organized and manipulated... differs from prior surveys that use brain-inspired or evolutionary framings').",
+  "correction": "The episodic/semantic/procedural triad is a real cognitive-science construct (Tulving/Squire) and appears as a subset in some agent-memory work, but the field has NOT converged on it as a three-tier taxonomy: the cited academic surveys use a 5-type cognitive taxonomy and a 4-category structure-oriented taxonomy (the latter explicitly rejecting the cognitive framing). The 'frameworks differ mainly in storage + episodic<->semantic consolidation policy' framing is not what these surveys organize around."
+ },
+ {
+  "id": "d2-13",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2502.12110",
+  "support": "\"A-MEM: Agentic Memory for LLM Agents\" (arXiv:2502.12110, 17 Feb 2025; Xu, Liang, Mei, Gao, Tan, Zhang). Follows Zettelkasten principles: each new memory is a note with structured attributes including contextual description, keywords, and tags (LLM-generated); the system links new notes to relevant historical notes, and 'as new memories are integrated, they can trigger updates to the contextual representations and attributes of existing historical memories' (organic write-back to neighbors). Table 1 LoCoMo multi-hop: A-Mem outperforms baselines, esp. small models (Qwen2.5-1.5b F1 18.23 vs MemGPT 10.44 / LoCoMo 9.05; Llama-3.2-1b 19.06 vs 9.19 / 11.25; GPT-4o 32.86 vs 30.36); paper states A-Mem 'achieves at least two times better performance' on multi-hop. Contrast with mem0's ADD/UPDATE/DELETE/NOOP fact operations is a fair characterization. Matches claim."
+ },
+ {
+  "id": "d2-14",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2501.13956",
+  "support": "\"Zep: A Temporal Knowledge Graph Architecture for Agent Memory\" (arXiv:2501.13956, 20 Jan 2025; Rasmussen et al.). Abstract: DMR benchmark Zep 94.8% vs MemGPT 93.4%; on LongMemEval 'accuracy improvements of up to 18.5% while reducing response latency by 90%'. Body confirms Graphiti's bi-temporal model (timeline T = event chronology; T' = ingestion/transaction order; edges carry t_valid/t_invalid ∈ T and t'_created/t'_expired ∈ T'), three hierarchical subgraphs (Episode 𝒢_e / Semantic Entity 𝒢_s / Community 𝒢_c), and non-lossy updates via validity intervals ('it invalidates the affected edges by setting their t_invalid...' rather than deleting). All numbers and architecture claims confirmed."
+ },
+ {
+  "id": "d2-16",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2509.25140",
+  "support": "\"ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory\" (arXiv:2509.25140, 29 Sep 2025; Ouyang, Yan et al.) 'distills generalizable reasoning strategies from an agent's self-judged successful and failed experiences' into structured memory items retrieved at test time (not raw traces), for self-evolving agents; MaTTS yields up to 34.2% success-rate gain / 16.0% fewer steps. The CBR companion, \"Review of Case-Based Reasoning for LLM Agents...\" (arXiv:2504.06943, Apr 2025; Hatalis, Christou, Kondapalli), formalizes the canonical 4-R cycle ('retrieval of similar cases, reuse/adaptation..., revision..., and retention of new solutions') and represents cases as exemplar triples: 'Memory banks in LLM agents function as repositories of demonstration exemplars, typically in the form of (question, chain-of-thought, answer) triples.' Matches claim precisely."
+ },
+ {
+  "id": "d2-17",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2506.05690",
+  "support": "Primary source: 'When to use Graphs in RAG: A Comprehensive Analysis for Graph Retrieval-Augmented Generation' (arXiv 2506.05690; v1 6 Jun 2025, v2 rev 22 Feb 2026). All three numbers appear verbatim in the Introduction (para 2): (a) 'GraphRAG achieves 13.4% lower accuracy on the Natural Question compared to vanilla RAG'; (b) 'particularly poor performance on time-sensitive queries (e.g., 16.6% accuracy drop for questions requiring real-time knowledge updates)'; (c) 'While graph-based retrieval improves reasoning depth by only 4.5% on HotpotQA's multi-hop questions, it introduces 2.3x higher latency on average.' Matches the claim's -13.4% NQ, -16.6% time-sensitive, and ~2.3x latency / ~4.5% reasoning gain on HotpotQA. Note: the survey presents these as summarized prior-work findings in its intro, but states them as facts; a primary (peer-reviewed arXiv) source thus supports each number as stated."
+ },
+ {
+  "id": "d2-19",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2503.10150",
+  "support": "Core cost-tradeoff CONFIRMED from primary papers. HiRAG ('Retrieval-Augmented Generation with Hierarchical Knowledge', arXiv 2503.10150, v1 13 Mar 2025): offline indexing is more expensive but modest (~$7.55 on the Mix dataset with DeepSeek-V3) and 'HiRAG does not cost any tokens for retrieval' (~zero online retrieval token cost). ArchRAG ('Attributed Community-based Hierarchical Retrieval-Augmented Generation', arXiv 2502.09891, AAAI): emphasizes low online token cost, cutting HotpotQA online tokens ~250x vs GraphRAG-Global (1,394M -> 5.1M). BUT the two illustrative figures are secondary and not primary-verifiable: the '$10-15 to index 800KB with GPT-4.1 (>90% cheaper with mini/Flash)' is a Medium-blog estimate with no primary paper; and 'LightRAG 757M tokens on HotpotQA vs 62M naive' could not be located in any primary source and conflicts with a primary token-cost study (TERAG, arXiv 2509.18667, Table 3), which measures LightRAG on HotpotQA at ~44.6M total tokens (38.8M in + 5.9M out), not 757M (absolute token counts are setup/subset-dependent).",
+  "correction": "The HiRAG offline-heavy/online-~zero and ArchRAG low-online-token claims are solid (primary). The two specific cost numbers are secondary-source illustrations: the $10-15/800KB GPT-4.1 figure is a blog estimate (no primary), and the '757M vs 62M naive' LightRAG figure is unconfirmed in any primary source and inconsistent with the closest primary token-cost measurement (TERAG reports LightRAG ~44.6M on HotpotQA). Treat both numbers as unverified, setup-dependent estimates rather than established primary facts."
+ },
+ {
+  "id": "d2-20",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2502.14727",
+  "support": "WavRAG CONFIRMED ('WavRAG: Audio-Integrated Retrieval Augmented Generation for Spoken Dialogue Models', arXiv 2502.14727, v1 20 Feb 2025): 'we propose the WavRetriever to facilitate the retrieval from a text-audio hybrid knowledge base' and reports 'comparable retrieval performance while delivering a 10x acceleration' vs ASR-Text RAG. PlanRAG-Audio CONFIRMED to exist and use plan-then-retrieve ('PlanRAG-Audio: Planning and Retrieval Augmented Generation for Long-form Audio Understanding', arXiv 2605.20414, CMU + Amazon AGI, submitted 19 May 2026): Stage-2 explicit retrieval planning specifies which modality representations, filters, and stream joins are required before retrieval. HOWEVER the claim that both 'remain flat hybrid indexes' is inaccurate for PlanRAG-Audio, which uses 'a structured, time-aligned audio database D(a) consisting of modality-specific metadata streams' (transcript/speaker/emotion/sound-event streams, temporally aligned by diarization), queried via SQL/Common-Table-Expression joins.",
+  "correction": "The load-bearing point holds: neither WavRAG nor PlanRAG-Audio imposes a graph or hierarchical-community organization (like GraphRAG/HiRAG/ArchRAG). But 'they remain flat hybrid indexes' mischaracterizes PlanRAG-Audio, which is a structured, time-aligned, modality-partitioned relational store (SQL/CTE queries over transcript/speaker/emotion/sound-event streams), not a flat index. WavRAG is the flat hybrid text-audio index; PlanRAG-Audio adds explicit relational structure short of a graph/hierarchy."
+ },
+ {
+  "id": "d3-5",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2501.01880",
+  "support": "Primary source: 'Long Context vs. RAG for LLMs: An Evaluation and Revisits' (arXiv 2501.01880, v1, submitted 27 Dec 2024; Xinze Li, Yixin Cao, Yubo Ma, Aixin Sun). Abstract supports all four sub-claims verbatim: 'LC generally outperforms RAG in question-answering benchmarks, especially for Wikipedia-based questions'; 'RAG has advantages in dialogue-based and general question queries'; 'Summarization-based retrieval performs comparably to LC, while chunk-based retrieval lags behind'; and '...the overlooked importance of context relevance in existing studies.'"
+ },
+ {
+  "id": "d3-6",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2505.20046",
+  "support": "Primary source: 'REARANK: Reasoning Re-ranking Agent via Reinforcement Learning' (arXiv 2505.20046, v1, 26 May 2025). GRPO confirmed (Sec 3.2: 'we employ the simple Grouped Policy Optimization (GRPO) algorithm'). Data confirmed (Sec 4.1: '179 queries from MSMARCO-V2', sampled 20 candidates x 50 repeats -> '12k training instances'). Gains vs RankQwen2.5-7B baseline: Table 1 BEIR avg 50.10 -> 54.59 (+4.49), TREC-DL19 68.25 -> 74.16 (+5.91); Table 2 BRIGHT avg 15.0 -> 17.7 (+2.7), and Rearank-7B (17.7) surpasses RankGPT-4 (16.8). Built on Qwen2.5-7B. Every numeric claim matches."
+ },
+ {
+  "id": "d3-7",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2508.19282",
+  "support": "CORE part CONFIRMED: 'Less Is More: Elevating RAG via Performance-Driven Context Compression' (arXiv 2508.19282, v1 24 Aug 2025, latest v4). It 'directly utilizes task performance as a feedback signal to iteratively refine the compressor policy' (RL driven by downstream answer performance); on Natural Questions it beats no-compression full-context and LongLLMLingua (CORE 41.02 EM vs full-context 38.03 vs LongLLMLingua 33.65), and at ~3% compression improves avg EM by +3.3 vs full documents. LongLLMLingua part CONFIRMED against v1: arXiv 2310.06839 v1 (10 Oct 2023) abstract states 'on NaturalQuestions... a performance boost of up to 17.1%... with ~4x fewer tokens' (note the later v2 revised this to 21.4%). LLMLingua-2 part is where the claim errs: arXiv 2403.12968 confirms it is a Transformer/BERT-family (XLM-RoBERTa/mBERT) token-classification compressor, '3x-6x faster than existing prompt compression methods', with OOD/robust generalization — but it is NOT training-free.",
+  "correction": "LLMLingua-2 is not 'training-free': it is a token classifier TRAINED via data distillation from an LLM (arXiv 2403.12968: 'propose a data distillation procedure to derive knowledge from an LLM to compress prompts'). The original LLMLingua (2310.05736) is the training-free, perplexity-based method; LLMLingua-2 requires training. The '3-6x faster', 'OOD robustness', and 'frozen-at-inference token classifier' descriptors are correct, and LongLLMLingua's +17.1% at ~4x (v1) is correct."
+ },
+ {
+  "id": "d3-8",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2509.21865",
+  "support": "Primary source: 'Beyond RAG vs. Long-Context: Learning Distraction-Aware Retrieval for Efficient Knowledge Grounding' (arXiv 2509.21865, v1 26 Sep 2025, v2 rev 25 Feb 2026). Policy-gradient RL confirmed: the retriever pi_theta is trained via the likelihood-ratio/log-derivative estimator 'theta_{k+1} = theta_k + gamma * r_psi(q,R,y) * grad log pi_theta', learning to select passage sets that mitigate distractor interference. Beats both baselines with fewer tokens (Table 1, 32K setting): LDAR 70.00 (0.467 token ratio) vs long-context 58.62 (1.000) vs RAG 62.12 (0.094); 128K: LDAR 61.55 (0.250) vs long-context 43.65 (1.000) — 'significantly better performance... while using only about half the token usage of the long-context approach.' Minor nuance: RAG uses fewer tokens than LDAR (0.094 vs 0.467) but scores lower; 'fewer tokens' in the claim is relative to long-context, which holds."
+ },
+ {
+  "id": "d3-9",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2509.20415",
+  "support": "Primary source: 'Online-Optimized RAG for Tool Use and Function Calling' (arXiv 2509.20415, v1 24 Sep 2025, v2 26 Sep 2025; Yu Pan, Xiaocheng Li, Hanzhao Wang). Mechanism CONFIRMED: importance-weighted SGD (gradient g_{t,i} carries a 1/p_{t,i_t} inverse-propensity correction); 'if the choice is correct... the update moves theta toward q_t, increasing similarity. If incorrect, the update moves away from q_t.' Benchmarks UltraTool, ToolRet (Web/Code/Customized), FiQA, MultiHopRAG all present; 'negligible per-query latency' / plug-and-play CONFIRMED. However the '+3-9% Recall@10/NDCG@10' range does not hold uniformly: UltraTool (+3.26 to +8.05 R@10), ToolRet-Code (+5.37 to +9.56), ToolRet-Customized (+5.59 to +6.73) fall in range, but ToolRet-Web (+1.29 to +1.63 R@10 / +0.94 to +2.18 N@10) and FiQA (~+1.6 R@10 / ~+2.2 N@10) are below 3%, and MultiHopRAG is reported as end-to-end QA accuracy (0.55 -> 0.68), not Recall@10/NDCG@10.",
+  "correction": "Mechanism, benchmarks, and negligible-latency claims are correct, but the gains are not a uniform +3-9%: retrieval gains span roughly +1% to +9.5%, with FiQA and ToolRet-Web at only ~+1-2%, and MultiHopRAG's improvement is an end-to-end QA-accuracy gain (0.55->0.68), not a Recall@10/NDCG@10 delta. State the range as ~+1% to +9.5% (largest on UltraTool/ToolRet-Code) rather than +3-9% across all four."
+ },
+ {
+  "id": "d3-10",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2507.16754",
+  "support": "Primary source: 'Never Come Up Empty: Adaptive HyDE Retrieval for Improving LLM Developer Support' (arXiv 2507.16754, v1, 22 Jul 2025; Fangjian Lei, Mariam El Mezouar, Shayan Noei, Ying Zou). Abstract/body confirm: 'design and evaluate 7 different RAG pipelines and 63 pipeline variants'; the HyDE + full-answer-context pipeline (HB1) 'performs best in retrieving and answering similar content'; for novel questions it works by 'automatically lowering the similarity threshold during retrieval, thereby increasing the chance of finding partially relevant context'; and it 'consistently outperforms zero-shot baselines across models' by LLM-as-a-judge on helpfulness/correctness/detail. The 4 open-source LLMs are named: Granite-3.1-8B-Instruct, Mistral-7B-Instruct-v0.3, Qwen3-8B, and LLaMA-3.1-8B-Instruct. No hard numbers in abstract, as the claim notes. All sub-claims confirmed."
+ },
+ {
+  "id": "d3-11",
+  "verdict": "PARTIAL",
+  "source_url": "https://www.digitalapplied.com/blog/hybrid-search-bm25-vector-reranking-reference-2026",
+  "support": "The two quantitative claims check out against the cited 2025-26 syntheses (Michael Brenndoerfer, mbrenndoerfer.com/writing/hybrid-search-bm25-dense-retrieval-fusion, and digitalapplied.com/blog/hybrid-search-bm25-vector-reranking-reference-2026), which report the same WANDS numbers from Doug Turnbull's Mar-2025 study. (1) 'Convex Combination (CC) with alpha=0.5 (equal weighting of BM25 and dense scores) achieving Recall@5 of 0.726, outperforming RRF (k=60) at 0.695' — matches exactly (they add that RRF k=10 is the best RRF variant at 0.716). (2) '7.4% NDCG lift over either alone' on WANDS — confirmed (tuned hybrid ~0.7497 vs BM25 0.6983 / dense KNN 0.6953). (3) 'RRF needs no score calibration' — confirmed: 'RRF sidesteps this entirely by operating only on rank positions — no normalization required.'",
+  "correction": "The sub-claim 'convex blending uses raw scores' is the opposite of what the primary sources say. They state convex/linear combination requires min-max NORMALIZED scores; mixing RAW scores is explicitly the failure mode ('Mixing raw scores gives BM25 dominant weight by default' because BM25 is unbounded while cosine is in [-1,1]). Correct statement: RRF is rank-based and needs no calibration, whereas convex/linear blending operates on SCORE values that must be normalized (e.g., min-max) before combining, not raw scores."
+ },
+ {
+  "id": "d3-12",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2407.01449",
+  "support": "All three components verified from the primary papers. (a) ColBERT/late-interaction MaxSim: the ColPali paper (arXiv:2407.01449, 'ColPali: Efficient Document Retrieval with Vision Language Models', v3) restates the operator: 'LI(q,d)=sum over i in [1,Nq] of max over j in [1,Nd] of <Eq(i)|Ed(j)>' — i.e., sum over query vectors of the max dot-product with each document token vector. (b) PLAID: arXiv:2205.09707 'PLAID: An Efficient Engine for Late Interaction Retrieval' (May 2022, SIGIR/CIKM) states latency reductions of 'up to 7x on a GPU and 45x on a CPU' relative to vanilla ColBERTv2, via a novel centroid-interaction mechanism (bag of centroids) plus centroid pruning. (c) ColPali: default variant uses PaliGemma's vision encoder producing 1024 image patch embeddings per page, D=128 vectors, and does retrieval by 'directly embedding the images of the document pages,' bypassing OCR."
+ },
+ {
+  "id": "d3-13",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2510.14337",
+  "support": "All five example systems verified. IRCoT interleaves retrieval with chain-of-thought reasoning (retrieve after each CoT sentence). FLARE (arXiv:2305.06983, 'Active Retrieval Augmented Generation', EMNLP 2023) triggers retrieval when the predicted upcoming sentence contains low-probability/low-confidence tokens. Self-RAG (arXiv:2310.11511) uses trained reflection tokens. Adaptive-RAG (arXiv:2403.14403) routes with a smaller-LM (T5-Large) complexity classifier. Stop-RAG (arXiv:2510.14337 'Stop-RAG: Value-Based Retrieval Control for Iterative RAG', Oct 2025, NeurIPS 2025 MTI-LLM Workshop) casts iterative RAG as a finite-horizon MDP and uses a value-based controller trained with Q(lambda) targets to decide when to stop — i.e., a value function. The prompting/confidence/training-based paradigm grouping is an accurate framing."
+ },
+ {
+  "id": "d3-14",
+  "verdict": "CONFIRMED",
+  "source_url": "https://js.langchain.com/v0.2/docs/how_to/self_query/",
+  "support": "LangChain's self-query retriever docs: 'A self-querying retriever ... uses an LLM to write a structured query from any natural language query and then applies that structured query to its underlying vector store,' using the query for semantic similarity while 'extracting filters from the user query on document metadata and executing those filters' — matches the claim's 'semantic vector plus structured metadata filters, then executes a filtered vector search.' Minor nuance: LangChain emits a semantic query STRING (subsequently embedded to a vector) plus a metadata filter, not a pre-computed vector, but this is immaterial to the claim's mechanism."
+ },
+ {
+  "id": "d3-15",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/html/2603.07379v1",
+  "support": "The qualitative mechanism is well-supported by primary/academic sources: agentic RAG exposes retrieval as a tool the agent calls (function-schema tool description, e.g. 'retrieves up to 5 chunks relevant to the query') and treats retrieval strategy as a learned policy — Search-R1, ReSearch, ToolRL/ToRL, and the SoK on Agentic RAG (arXiv:2603.07379) train agents via RL to choose retrieval behavior and show gains over fixed/static retrieval. So 'retrieval as a tool-call via structured function schemas' and 'learned policy over retriever/top-k/reranker depth/chunk size' are CONFIRMED.",
+  "correction": "The specific figure '15-20% retrieval-quality lift over static configurations' could not be traced to any primary source; it appears only in vendor/blog syntheses (labelyourdata, futureagi) as flagged in the source hint. No locatable paper reports a 15-20% retrieval-quality improvement for early agentic-RAG systems as a general result. Treat the mechanism as confirmed but the magnitude as unsubstantiated (blog-sourced, unverifiable)."
+ },
+ {
+  "id": "d4-5",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2601.01885",
+  "support": "All three verified. Mem0 (arXiv:2504.19413, 'Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory', Chhikara et al. 2025): update phase uses a tool-call mechanism deciding ADD / UPDATE / DELETE / NOOP over salient facts extracted in the extraction phase (exact four operations, with the definitions given). A-Mem (arXiv:2502.12110, 'A-MEM: Agentic Memory for LLM Agents', Xu et al., Feb 2025): Zettelkasten-inspired, with a 'Memory Evolution' component where new memories trigger updates to the contextual representations/attributes of existing linked historical notes — i.e., note-evolution rewriting linked neighbors. Agentic Memory (arXiv:2601.01885, 'Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for LLM Agents', Yi Yu et al., Jan 2026, ACL 2026): exposes store/retrieve/update/summarize/discard as callable tool actions, trained via a three-stage pipeline (SFT warm-up -> task-level outcome-reward RL -> step-level/step-wise GRPO for dense per-action credit assignment). The survey 'Memory for Autonomous LLM Agents' (arXiv:2603.07670) frames all three consistently."
+ },
+ {
+  "id": "d4-6",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2310.11511",
+  "support": "Self-RAG (arXiv:2310.11511, 'Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection', Asai et al. 2023): Table 1 defines exactly four reflection-token types — Retrieve (whether to retrieve), IsRel/ISREL (relevance), IsSup/ISSUP (support/grounding), IsUse/ISUSE (utility, 5-point). These are 'inserted offline into the original corpus by a trained critic model' C (trained on GPT-4-distilled supervision), which annotates training data before the generator M is trained; the critic is not needed at inference. Open-RAG (arXiv:2410.01782, 'Open-RAG: Enhanced Retrieval-Augmented Reasoning with Open-Source LLMs', EMNLP 2024 Findings): 'transforms an arbitrary dense LLM into a parameter-efficient sparse mixture of experts (MoE) model capable of handling complex reasoning tasks' incl. multi-hop. Both systems are trained, so the scoped conclusion 'this reflect/verify primitive requires weight training' holds for Self-RAG/Open-RAG as stated (adaptive reflection can also be done via prompting more broadly, but the two cited systems do require training).",
+  "correction": "Minor scoping caveat only: the generalized clause 'The adaptive reflect/verify primitive therefore REQUIRES weight training' is true for the Self-RAG/Open-RAG family cited, but adaptive reflection in general is not universally training-dependent (e.g., prompting-based reflection). The factual core about both cited papers is correct."
+ },
+ {
+  "id": "d4-7",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/html/2401.15884v3",
+  "support": "CRAG (arXiv:2401.15884, 'Corrective Retrieval Augmented Generation', Yan et al., v3 Oct 2024). Confirmed: (a) a lightweight retrieval evaluator grades retrieved docs and returns a confidence degree mapped to three actions — Correct, Incorrect, Ambiguous. (b) A decompose-then-recompose algorithm splits documents into 'knowledge strips' ('If a retrieved result is as short as one or two sentences, it is regarded as an individual strip, otherwise ... split into smaller units'). (c) Large-scale web search is integrated as an extension when the Incorrect action fires. (d) Ablation on PopQA triggering one action for all instances (Table 11): only-Correct 52.4, only-Incorrect 47.0, only-Ambiguous 52.7 (LLaMA2-hf-7b), showing no single fixed action matches the adaptive routing and that the decomposed-refinement / web-search / evaluator components each contribute. The claim's four-way framing (routing + decomposed filtering + web expansion + correctness verification) is a fair paraphrase, noting 'correctness verification' and 'routing' both refer to the same retrieval evaluator."
+ },
+ {
+  "id": "d4-8",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2403.14403",
+  "support": "Adaptive-RAG (arXiv:2403.14403, 'Adaptive-RAG: Learning to Adapt Retrieval-Augmented LLMs through Question Complexity', Jeong et al., NAACL 2024): trains a smaller LM classifier — implemented as T5-Large — to predict query complexity and route among three strategies: no-retrieval (simple), single-step retrieval (moderate), and multi-step/iterative retrieval (complex), with labels auto-collected from model outcomes and dataset biases; it 'seamlessly adapts' to match the expensive always-multi-step approach on complex queries while saving cost on easy ones. SKR ('Self-Knowledge guided Retrieval augmentation', Wang et al., EMNLP Findings 2023) routes based on the model's apparent self-knowledge (retrieve only when the model likely does not already know the answer) — accurately characterized. Cross-referenced via 'A Systematic Review of RAG Systems' (arXiv:2507.18910)."
+ },
+ {
+  "id": "d4-9",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2507.22050",
+  "support": "All five cited papers verified as real with correct arXiv IDs and substantially correct mechanism descriptions. (1) DeepSieve 'Information Sieving via LLM-as-a-Knowledge-Router' arXiv:2507.22050 (v4 1 Mar 2026; EACL Findings 2026) — modular pipeline with components decomposition, routing, retrieval, REFLEXION, and fusion; routes sub-questions to knowledge sources. ✓ (2) arXiv:2505.22095 'Learning to Route Queries Across Knowledge Bases for Step-wise Retrieval-Augmented Reasoning' (R1-Router, OpenBMB) — RL via Step-GRPO with step-wise rewards; routes among multiple KBs (Text/Text-Image/Table retrievers) for MLLMs. ✓ (3) RAGRouter arXiv:2505.23052 'Learning to Route Queries to Multiple Retrieval-Augmented Language Models' — document embeddings + learnable per-LLM 'RAG capability embedding' with contrastive learning. ✓ (4) GraphRouter arXiv:2410.03834 (ICLR 2025) 'A Graph-based Router for LLM Selections' — LLM selection framed as edge/link prediction over a heterogeneous graph. (5) RealRoute arXiv:2604.20860 'Dynamic Query Routing System via Retrieve-then-Verify Paradigm' — retrieve-then-verify. ✓",
+  "correction": "Two nuances the survey sentence blurs: (a) GraphRouter's heterogeneous graph nodes are TASK, QUERY, and LLM — there is no 'source' node, so 'query-model-source graph' should read task-query-LLM (model). (b) RAGRouter and GraphRouter are LLM/MODEL routers (which model answers), not knowledge-source selectors, and RealRoute deliberately AVOIDS source prediction (parallel source-agnostic retrieval). So the umbrella 'source selection before retrieval' cleanly fits only DeepSieve and R1-Router; it is a loose framing for the other three."
+ },
+ {
+  "id": "d4-12",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2508.12752",
+  "support": "'Deep Research: A Survey of Autonomous Research Agents' arXiv:2508.12752 (18 Aug 2025, Zhang et al.) defines FOUR core pipeline stages: Planning, Question Developing, Web Exploration, Report Generation — there is NO distinct 'verify' stage. Full-text (html v1) check: the survey does NOT describe a deterministic post-processing step that verifies every citation against retrieved sources, and makes NO mention of a separate 'citations agent' that inserts/repairs supports; Section 5.2 discusses generation-time 'faithful modeling' + 'conflict reasoning' and lists explicit source attribution only as a FUTURE DIRECTION. The Step-DeepResearch part IS supported: Step-DeepResearch Technical Report arXiv:2512.20491 (StepFun) proposes a 'Data Synthesis Strategy Based on Atomic Capabilities' reinforcing planning, information gathering, reflection, and report writing.",
+  "correction": "The 'plan->search->synthesize->VERIFY' framing with a deterministic per-citation verification pass against retrieved sources and a separate citations agent that inserts/repairs supports is NOT attributable to the cited survey (whose stages are planning / question-developing / web-exploration / report-generation, with citation/attribution only a future direction, no verify stage and no citations agent). The Step-DeepResearch atomic-capabilities clause is confirmed (note its atomic set is four items — planning, information gathering, reflection, AND report writing)."
+ },
+ {
+  "id": "d4-13",
+  "verdict": "PARTIAL",
+  "source_url": "https://arxiv.org/abs/2510.13910",
+  "support": "RAGCap-Bench arXiv:2510.13910 'Benchmarking Capabilities of LLMs in Agentic Retrieval Augmented Generation Systems' (Lin, Zhang, Liu, Li). Confirmed: four capability categories = Planning, Evidence Extraction, Grounded Reasoning, Noise Robustness (Noise Robustness split into Noise-Abstain and Noise-Reliability). Confirmed: RAGCap performance shows strong positive correlation with end-to-end performance on downstream (multi-hop) QA, and 'slow-thinking' models with stronger RAGCap performance achieve better end-to-end results. WebThinker IS named — it is one of two agentic RAG pipelines evaluated (WebThinker = ReACT-based; HiRA = multi-agent), with generators Qwen3-8B/32B/235B-A22B. Section 4.4: RAGCap-Bench 'can reliably serve as an efficient alternative to the more costly and time-consuming end-to-end QA evaluation.'",
+  "correction": "The specific quantitative claim '~50x faster than full WebThinker workflows' is NOT in the paper (checked abstract, full html, and independent review). The paper only asserts efficiency QUALITATIVELY ('an efficient alternative to costly, time-consuming end-to-end QA evaluation') with no ~50x (or any) speed/cost multiplier. Drop or qualify the 50x figure; everything else in the claim is supported."
+ },
+ {
+  "id": "d4-14",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2509.20415",
+  "support": "'Online-Optimized RAG for Tool Use and Function Calling' arXiv:2509.20415 (submitted 24 Sep 2025, rev 26 Sep 2025; Pan, Li, Wang). A DEPLOYMENT-TIME framework that 'continually adapts retrieval embeddings from live interactions using minimal feedback (e.g., task success)' via 'lightweight online gradient updates with negligible per-query latency' and 'requires no changes to the underlying LLM'; explicitly 'plug-and-play' supporting single- and multi-hop tool use, 'dynamic tool inventories, and K-retrieval with re-ranking.' Every element of the claim (deployment-time online embedding updates, minimal live feedback, negligible latency, no LLM change, dynamic tool inventories, K-retrieval + rerank) matches verbatim."
+ },
+ {
+  "id": "d4-17",
+  "verdict": "CONFIRMED",
+  "source_url": "https://arxiv.org/abs/2511.09803",
+  "support": "(1) TARG arXiv:2511.09803 'Retrieval as a Decision: Training-Free Adaptive Gating for Efficient RAG' (Wang, Wei, Ling; Nov 2025) — a single-shot gate that decides when to retrieve using only a short no-context draft; from the draft's PREFIX LOGITS it computes uncertainty scores (mean token entropy / top1-top2 margin via monotone link / small-N variance) and triggers retrieval when above threshold; model-agnostic, 'requires no additional training or auxiliary heads.' ✓ (2) FLARE (Jiang et al., EMNLP 2023) 'Active Retrieval Augmented Generation' = Forward-Looking Active REtrieval, triggers retrieval on low-confidence anticipated tokens. ✓ (3) Unified Active Retrieval arXiv:2406.12534 — unifies four orthogonal criteria (intent/knowledge/time/self awareness) as plug-and-play classifiers governing retrieval timing. ✓ (4) SeaKR arXiv:2406.19215 — extracts self-aware uncertainty from LLM internal states, activates retrieval on high uncertainty. ✓ (5) SUGAR arXiv:2501.04899 — semantic/context-entropy-guided adaptive retrieval (whether + single vs multi-step). ✓ All 'when-to-retrieve before full decoding' / uncertainty-probe characterizations hold."
+ },
+ {
+  "id": "d4-18",
+  "verdict": "REFUTED",
+  "source_url": "https://arxiv.org/abs/2510.25623",
+  "support": "The cited primary source for the headline claim, arXiv:2510.25623, is 'Evaluating the Role of Verifiers in Test-Time Scaling for LEGAL Reasoning Tasks' (EMNLP NLLP Workshop; legal MCQA, 5 benchmarks, 7 reward models). Its full-text findings CONTRADICT the claim: 'MV [majority vote = self-consistency] remains a strong baseline across benchmarks and generator scales'; 'For larger models... verification provides no performance benefit or even show a decrease compared to MV'; it reports 'diminishing return of verification as the generator model's power increases.' It evaluates only TRAINED reward models (ORMs/PRMs), not prompting-based verifiers, and states NO '1-3x fewer tokens' figure. The secondary clause IS correct: Reason and Verify arXiv:2603.10143 ('A Framework for Faithful RAG') adds a rationale-generation module + eight-category faithfulness-verification taxonomy; FVA-RAG arXiv:2512.07015 ('Falsification-Verification Alignment for Mitigating Sycophantic Hallucinations') is a falsification-first architecture retrieving counter-evidence.",
+  "correction": "The headline is backwards for its cited source: 2510.25623 finds self-consistency/majority-vote is a STRONG baseline and verifier-guided selection gives no benefit (or a decrease) for larger models — not 'higher accuracy at lower k than self-consistency.' It uses trained reward models (not 'prompting-based verifiers need no training') and reports no '1-3x fewer tokens' number. Only the 'Reason-and-Verify and FVA-RAG add faithfulness/falsification-verification passes over RAG outputs' clause is accurate."
+ }
 ]

@@ -230,6 +230,75 @@ ECAPA-TDNN (`2005.07143`), WavLM/HuBERT/wav2vec2, Whisper, FACodec (`2403.03100`
   **speaker** (fix the source/encoder). Updates [[Per-Work-Status]]: emotion → "**Operator A with a richer
   readout** (multi-vector/trajectory/layer/generative) before B"; fine speaker → B / external channel.
 
+## 9. 探针有效性基础文献（审计补课，2026-07-11） — Probing-validity foundations
+
+**Why this page is the home (not the Dossier or the Research-Plan).** The 2026-07-10 adversarial audit
+(ticket #28) found that the W4 literature chain nowhere cites the methodological results that separate
+*"a probe can read a factor"* from *"the representation is disentangled"* — they appear only inside the
+audit docs themselves. Of the three W4-facing pages, **this survey is where that exact inference is
+made**: every load-bearing verdict here (C1/C2/C3 in §4, D3 in §3, the §5 registry) is *derived from
+probe accuracy* across layer × pooling. [[Omni-Embed-Model-Dossier]] is a model fact-sheet
+(architecture / I-O) and [[W4-Research-Plan]] is an execution-wave plan; neither converts probe read-outs
+into suppression/disentanglement claims, so the foundations belong here, adjacent to §4/§5. These five
+references are the controls that gate the audit's **L0–L4 claim ladder**
+([[2026-07-10-stage1-adversarial-research-audit]]: L0 factor-decodability → L1 accessible-readout →
+L2 task-selectivity → L3 disentanglement → L4 deployable-activation). The thesis of this whole section:
+**probe accuracy is L0 only; §3/§4's numbers do not by themselves clear L1, let alone L3.**
+
+- **Locatello et al. 2019 `1811.12359` (ICML 2019) — "Challenging Common Assumptions in the Unsupervised
+  Learning of Disentangled Representations."** Proves (theorem + a ~12,000-model study) that *without*
+  inductive biases or supervision, disentanglement is fundamentally **unidentifiable** — infinitely many
+  equally-good factorizations fit the same data, so high downstream/probe scores never *imply* a
+  disentangled representation. **L-ladder implication:** this is the impossibility result behind the **L3**
+  bar — a diagonal-dominant conditioning×probe matrix (§8, however high its accuracy) is *not* evidence of
+  disentanglement; L3 needs the audit's supervision-grounded controls (target-up **and**
+  nuisance-leakage-down **and** counterfactual intervention), because probe accuracy alone (L0) is
+  identifiability-blind.
+
+- **Hewitt & Liang 2019 `1909.03368` (EMNLP 2019) — "Designing and Interpreting Probes with Control
+  Tasks."** A probe's accuracy conflates what the *representation* encodes with what the *probe* itself can
+  learn; they add **control tasks** (random label assignments) and score **selectivity = task-acc −
+  control-acc**, showing high-capacity probes reach high accuracy even on random labels. **L-ladder
+  implication:** our kNN/linear numbers (§3, C1–C3) are uninterpretable without a selectivity control —
+  **L1** ("accessible readout") must be redefined as *high selectivity on a matched control task*, not raw
+  accuracy; a "speaker ≈ chance" floor and an emotion "gain" only count if they beat their own control
+  task.
+
+- **Voita & Titov 2020 `2003.12298` (EMNLP 2020) — "Information-Theoretic Probing with Minimum Description
+  Length."** Replaces accuracy with **MDL** — the codelength to transmit labels given the representation —
+  which jointly measures *how well* and *how easily* a factor is extracted and is far more stable to
+  probe/hyper-parameter/**seed** choices than accuracy. **L-ladder implication:** MDL is the concrete
+  **L1** control ("low-complexity probe stable on group-held-out"), and it directly disciplines D3's
+  **seed-sensitive** attentive-pooling emotion result (0.513 vs 0.447 across seeds → one
+  codelength verdict instead of two accuracies); adopt MDL as the *primary* read-out metric for any L1/L2
+  claim, accuracy as secondary.
+
+- **Pimentel et al. 2020 `2004.03061` (ACL 2020) — "Information-Theoretic Probing for Linguistic
+  Structure"** *(probe-capacity ref 1).* Frames probing as estimating mutual information
+  I(representation; factor), under which the *most expressive* probe is the correct choice and control-task
+  selectivity is theoretically questioned — the opposite prescription to Hewitt & Liang. **L-ladder
+  implication:** the **L0→L1** boundary is genuinely contested, so W4 should report *both* a
+  capacity-controlled selectivity number (Hewitt–Liang) *and* an MI/MDL estimate (Pimentel /
+  Voita–Titov): a factor present in the MI sense but readable only by a high-capacity probe is **L0**, not
+  the **L1** "accessible readout" the disentanglement story needs.
+
+- **Belinkov 2022 `2102.12452` (Computational Linguistics) — "Probing Classifiers: Promises, Shortcomings,
+  and Advances"** *(probe-capacity ref 2 / synthesis).* The field survey tying the above together: probing
+  shows correlation, not causal use; accuracy is **capacity-confounded**; it prescribes control tasks,
+  information-theoretic measures, and **causal/intervention** probing before any "the model represents X"
+  claim. **L-ladder implication:** this is the checklist for the whole **L0→L3** climb — it underwrites the
+  audit's demotion of W4 from "disentanglement" to "readout availability / suppression / selective-readout
+  limits," and its intervention requirement *is* the **L3** gate; cite it as the umbrella justification
+  that probe accuracy (L0) is the weakest rung.
+
+**Consequence for this survey (registry patch).** C1/C2/C3 and D3 stay *directionally* valid but are
+**L0 / near-L1 evidence** — probe-accuracy read-outs with no selectivity, MDL, or counterfactual control.
+Before any §8 wording climbs to L2/L3 ("selective", "disentangled"), re-establish each on: (a)
+Hewitt–Liang selectivity vs a CREMA-D control task, (b) Voita–Titov MDL/codelength in place of raw
+accuracy (kills the D3 seed-sensitivity), (c) a counterfactual/interventional check for L3. This adds a
+**residual front** to §7: *no probe on this page is capacity- or selectivity-controlled — the single
+largest validity gap under §3/§4.*
+
 ---
 
 ## 中文
@@ -275,3 +344,17 @@ SpeechTokenizer。2026 方法论文多 PAPER-ONLY（要自己复现）。**§7 �
 ②C2 轨迹/多向量未测 ③单向量 vs 多向量检索冲突 ④细粒度说话人是否「从未写入」无证 ⑤emotion2vec 融合未量化
 ⑥W1→W4 RL 桥仅提案。**§8 W4 路由：** 情感→A 富读出（多向量/轨迹/层/生成）再 B；细粒度说话人→B/外接通道
 或 RL 桥；「池化丢失」对情感对、对说话人错。
+
+**§9 探针有效性基础文献（审计补课，2026-07-11）：** 本 survey 每条承重结论（§3 D3、§4 C1/C2/C3、§5 登记表）
+都由 probe accuracy 推出，而 2026-07-10 审计(#28)指出全 W4 文献链缺失「probe 可读 ≠ representation
+disentangled」的方法论基础（仅存于审计文档），故补入此处——[[Omni-Embed-Model-Dossier]] 是模型事实表、
+[[W4-Research-Plan]] 是执行波次，都不把 probe 读出转成 disentanglement 主张。五篇及其对
+**L0–L4 阶梯**（见 [[2026-07-10-stage1-adversarial-research-audit]]）的意义：Locatello 2019 `1811.12359`
+（无监督解耦**不可辨识**→高 probe 分不等于解耦，是 **L3** 的不可能性底线）；Hewitt–Liang 2019 `1909.03368`
+（**control task + selectivity**；高容量 probe 对随机标签也高分→**L1** 须以「匹配 control 上的 selectivity」
+而非裸 accuracy 定义）；Voita–Titov 2020 `2003.12298`（**MDL/codelength** 比 accuracy 稳、抗 seed→D3 的
+0.513/0.447 seed 敏感应换成 codelength；MDL = **L1** 所需控制）；Pimentel 2020 `2004.03061` 与 Belinkov 2022
+`2102.12452`（probe capacity 两篇：MI 视角主张最大容量 probe、与 Hewitt–Liang 相反→L0/L1 边界有争议，须
+同时报 selectivity 与 MI/MDL；Belinkov 综述把 control task + 信息论 + **因果/干预** probing 列为「表示 X」
+主张的前置，其干预要求即 **L3** 闸门）。**后果：** C1/C2/C3/D3 仍方向成立但属 **L0/近 L1**，升 L2/L3 前须补
+selectivity + MDL + counterfactual 控制（§7 新增残余战线：本页无一 probe 做过容量/选择性控制）。
