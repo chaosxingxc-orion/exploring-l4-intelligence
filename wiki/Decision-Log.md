@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-12（续15）· 法证复审 11/11 实锤 → REJECT closeout 全接受；对象错配止损（扫描 0 格未跑）；A+B+F 立项
+
+**Facts（增量核验，Opus×2 + 执行代理活体验证）.** 法证复审
+（[[2026-07-11-step1-completion-forensic-integrity-review]]）可检主张 **11/11 CONFIRMED**：
+①**P0-1 对象错配**——squtr "knowledge-passage" 值=FiQA 查询原文、vocalbench-knowledge 值=问题
+原文（盘上无证据段落列；gold 建库被全局 scrub 掏空）；heysquad/SQuAD-zh 语义正确；**140 格扫描
+在启动前被叫停，0 格跑在错误对象上**；②P0-2 假性 holdout（test_ids 明文、11.20% 旧重叠精确复算、
+census len() 读 test_ids 与 ACCESS_LOG 矛盾坐实）；③P0-3 Holm 家族缩窄（完整 4×4 网格下 noise1
+p=.592/noise2 p=.075——协调者此前"Holm 通过"为过升级表述）；④P0-4 "65/65 零失败"夸大（510/4439
+未评分、provenance 三键空值、65/65 dirty）；⑤P0-5 unsigned DRAFT≠prereg；⑥KB build_hash 不含内容
++原位覆盖；ledger 引用 rebase 后不可达 commit；C-PHASEA/C-THEORY 台账滞后；Coverage.lean 自称
+operator-linked 与 ledger=0 矛盾（实质=i.i.d. Bernoulli 模型+代码引注）；论文 sections/ 为真源
+（main.tex 手改会被重组回退）；freeze 时间戳为手填标签；MInDS "7/7"实为 5 独特对比。
+欺诈矩阵结论接受：NO FFP FINDING / INTENT UNDETERMINED / 严重 QRP+custody 失效已确认。
+
+**Decision（owner 四项全签）.** ①**REJECT closeout 全接受**：现有 locked TEST **永久降级**为
+exposed-dev-like；确证 TEST 待全部设计冻结后由 custodian 库外重抽、仓库只存 salted commitment；
+Step-1 维持未收官（全部数字 directional）；RI-0..RI-6 门照单执行。②custodian = **owner 本人 +
+密封机制**（与本会话无共享上下文的全新 AI 会话库外抽取，执行即 burn）。③**vocalbench-knowledge
+退出 knowledge-RAG 主战场**（降为闭卷 QA 诊断集）；Phase-A 主场 = squtr（qrels corpus-side 重建后）
++ heysquad + SQuAD-zh。④下一轮主动线 = **A（audio-direct vs own-ASR）+ B（selector 跨域泛化）+
+F（operator-linked 约束理论）**，C/D/E 入候选池。机械整改包（ledger 对账/Coverage 改名/论文
+sections 同步/KB content-hash+refuse-overwrite/census 修复/multiplicity 5 对比口径/squtr corpus
+建库器/后整改 freeze）立即执行。**协调者自查记录**：升级表述复发（"零失败"、缩窄家族的"Holm
+通过"、"operator-linked"命名）——机器可读 ledger 为唯一真源的纪律必须先于任何叙述性文字。
+
 ### 2026-07-11（续14）· 夯实链+locked-dev 收官 → Phase-A dev 探索扫描放行（协调者冻结，owner 可否决）
 
 **Facts.** ①夯实链全过：ASR logprob 置信信号**跨两个独立噪声实现复现**（+0.0081/+0.0100，
