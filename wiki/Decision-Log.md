@@ -6,6 +6,22 @@
 
 ---
 
+### 2026-07-11（续14）· 夯实链+locked-dev 收官 → Phase-A dev 探索扫描放行（协调者冻结，owner 可否决）
+
+**Facts.** ①夯实链全过：ASR logprob 置信信号**跨两个独立噪声实现复现**（+0.0081/+0.0100，
+CI 均排除 0；Holm 家族显著性 1/2——真实但边缘；采数前抓获 wav-cache 假复现 bug）；CREMA
+fold-seed 4/4 稳定（+0.027~+0.043）；MInDS 7/7 delta 过 Holm。②locked-DEV 65/65 零失败
+（治理条款全守：test_ids 未读、ACCESS_LOG 留痕、test 半场单次消费保留给确证通道）；flag：
+voicebench-bbh 组不相交把 dev 全集中到 hyperbaton（a/b gold vs Yes/No 模板不兼容→0.0，
+先天不兼容被放大，owner 裁决位）。③G2 三层第 1/2 层绿（fake E2E 39/39 协调者复跑；4 KB 源
+CLEAN；10 CPU 嵌入器冒烟）；Proposal-R 预注册草案交付（8 签字位）。
+
+**Decision（协调者，依 owner "把后续所有实验跑完" 令；owner 可否决）.** Phase-A **dev-only
+探索扫描**放行：预注册推荐默认值冻结（primary=squtr、replication=heysquad、SESOI=0.05、
+TOST margin=SESOI/2、Phase-B winner K 待 owner）；G2 第 3 层（真机 ref-config 重建）先行，
+过绿才开 140 格；**Phase-B 与 locked-TEST 确证层继续留 owner 签字**——本放行只覆盖 dev 映射层
+（n=40 dev、探索分级，不产生任何确证主张）。4 个机制对照臂随跑（primary+replication 两集）。
+
 ### 2026-07-11（续13）· 过夜整改验收 + 晨令："实验跑扎实 → 后续工作 workflow 并行"
 
 **Facts.** 过夜整改全收官（[[2026-07-11-overnight-remediation-report]]）：G5 三件套清白重做全部
