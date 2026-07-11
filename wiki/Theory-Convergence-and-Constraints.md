@@ -53,6 +53,53 @@ What remains: an *iterative-process* convergence theorem for a full training-fre
 **no theorem at all** for condition (b) reachability — the survey's explicit gap. C1/C2 are the
 natural next formalizations if branch 2.1 is taken; (b)'s absence is itself part of the 2.2 anchor.
 
+### 2026-07-11 — T-coverage: the FIRST operator-linked theorem (Coverage.lean)
+
+`proofs/tfrl/TfrlProofs/Coverage.lean` (new, `sorry`-free, **no new axiom** — verified below) is the
+first theorem the theory track binds to an *actually implemented* operator: `decode.best_of_n` (argmax
+reward) / `select_oracle_idx` (argmin-WER) over the pool-generation loop of
+`scripts/repro_asr_best_of_n_v2.py` (lines 524–531). **Status: verified algebra + operator-linked
+empirical bridge** (the algebra is machine-checked; the bridge is Stage-1 / hypothesis-grade evidence
+that the i.i.d. model fits the stored pools — NOT a proof that the frozen model's draws are i.i.d.).
+
+**What is formalized** (honest object: a real-analysis identity on an independent-Bernoulli product,
+docstring states this exactly): per-draw success prob `p` (a draw is *good* = strictly lower WER than
+greedy), miss probability of `N` i.i.d. draws
+* `missProb p N := (1 − p)^N`, `coverageProb p N := 1 − (1 − p)^N`;
+* `missProb_eq_prod` — `= ∏_{i<N}(1 − p)` (the independence identity — makes `(1−p)^N` the *joint*
+  all-miss probability, not a renamed answer);
+* `missProb_antitone` (monotone ↓ in `N`, `0 ≤ p ≤ 1`) and `missProb_strictAnti` (strict ↓, `0<p<1`);
+* `missProb_le_of_N_ge` — the sample-complexity corollary: `0<p<1`, `0<δ<1`,
+  `N ≥ log δ / log(1 − p)` ⇒ `missProb p N ≤ δ`.
+
+**Axiom gate.** New `scripts/lean_axiom_gate.sh` runs a `#print axioms`-style `Lean.collectAxioms`
+audit over **every** `TfrlProofs.*` public declaration and fails on any axiom outside
+`{propext, Classical.choice, Quot.sound, beirami_thm_3_1}`. Run 2026-07-11:
+`AXIOM_GATE_OK checked 89 TfrlProofs declarations; only whitelisted axioms present` → **PASS**. So the
+Coverage results depend on **no** named axiom (in particular they are independent of `beirami_thm_3_1`).
+
+**Python/Lean parity vector** (first machine parity pair): `p=1/4, N=3` ⇒ miss `27/64`, coverage
+`37/64` — checked in Lean (`example … norm_num`) AND in `coverage_bridge.py` (exact `fractions.Fraction`
+assertion). Both agree.
+
+**Empirical bridge** (`scripts/coverage_bridge.py` → `_repro/coverage_bridge_v1.json`, over the frozen
+`asr_bon_v2_{snr5,clean}.json`, n=96, 24 stored candidates/utt, 3 pool seeds). Per-utterance
+`p̂` = fraction of the 24 candidates strictly beating greedy; predicted oracle-coverage `1−(1−p̂)^N`
+vs OBSERVED (best of the first `N` candidates beats greedy, averaged over the 3 pool seeds):
+
+| cond | p̂ | N=1 pred/obs | N=2 pred/obs | N=4 pred/obs | N=8 pred/obs | max\|gap\| |
+|---|---|---|---|---|---|---|
+| snr5 | 0.135 | .135 / .139 | .207 / .222 | .285 / .299 | .349 / .361 | 0.015 |
+| clean | 0.075 | .075 / .076 | .121 / .118 | .173 / .198 | .218 / .226 | 0.025 |
+
+**i.i.d. adequacy.** Because `p̂` is per-utterance, between-utterance difficulty is already absorbed;
+the gap measures only within-pool departure from conditional independence among the temp=0.8 draws
+(which share the prompt+audio). It is small (max |gap| ≤ 0.025) and mostly slightly *negative*
+(observed marginally exceeds the i.i.d. prediction — sampling diversity, not the strong positive
+clustering that would make the model over-state coverage). So `1−(1−p)^N` is an adequate
+operator-level description of the real pools to within ~1–2.5 coverage points at every `N`. This is the
+dual-track anchor for best-of-N: the Lean `coverageProb` operator ⟷ the stored-pool oracle selector.
+
 ## 2. Where convergence fails — and the constraint term that fixes each failure
 
 Any scheme that *iterates* (prompt-refinement rounds, conditioning updates q₀→q₀(c_t), agentic

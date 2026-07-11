@@ -13,6 +13,7 @@ import TfrlProofs.InfoBoundary
 import TfrlProofs.AgenticElements
 import TfrlProofs.BestOfNConvergence
 import TfrlProofs.Iterate
+import TfrlProofs.Coverage
 
 /-!
 # TfrlProofs — root module
@@ -29,4 +30,11 @@ import TfrlProofs.Iterate
   would be false. It replaced the former documented `sorry`
   (`klBoN_le_klBoundBoN_TODO`, removed 2026-07-10); `kl_best_of_n_le` now consumes it
   directly. Audit with `#print axioms TfrlProofs.BestOfN.kl_best_of_n_le`.
+
+* **`TfrlProofs.Coverage` (added 2026-07-11) is fully `sorry`-free and axiom-clean** — its
+  best-of-N oracle-coverage results (`missProb_eq_prod`, `missProb_antitone`,
+  `missProb_strictAnti`, `missProb_le_of_N_ge`) depend on **no** named axiom beyond the
+  standard `propext / Classical.choice / Quot.sound`. It is the first operator-linked theorem
+  (dual-tracked with `decode.best_of_n` and `scripts/coverage_bridge.py`). Enforced by
+  `scripts/lean_axiom_gate.sh`.
 -/
