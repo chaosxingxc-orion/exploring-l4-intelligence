@@ -41,7 +41,7 @@ v1 敌对评审团 5 FUNDAMENTAL + 12 MAJOR + 5 噪音 共 17 项处置见 §12�
 
 ### 1.2 为什么是前端知识校正，而非后端融合（owner 范围裁定）
 
-owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调整与校正输入侧的多模态知识体系；**后端**（重排序 / 验证器）不立为独立研究方向，只作为**数据集无关的标准 reward 信号供给**，令方案跨任务通用。三条理由：(1) 后融合（GER / rescoring）在强、低-WER 的冻结核心上普遍**中性到有害**——自由改写幻觉率 3–12%（Apple，arXiv:2405.15216；见 §2.2），天花板低且反伤；(2) 前端注入受核心生成能力封顶但**不破坏**它，且闭源 API 原生可达（prompt 注入）；(3) 后端只保留其唯一可移植的 training-free 原语（受约束选择 + 误差去相关信号），作为**发现段触发器**与**使用段信任标定器**——换数据集不换信号定义（详见 §7 与附录 B）。
+owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调整与校正输入侧的多模态知识体系；**后端**（重排序 / 验证器）不立为独立研究方向，只作为**数据集无关的标准 reward 信号供给**，令方案跨任务通用。三条理由：(1) 后融合（GER / rescoring）在强、低-WER 的冻结核心上普遍**中性到有害**——自由改写幻觉率 3–12%（Apple，arXiv:2405.15216 **[已弃用]**；**2025+ 再锚**：LIR-ASR arXiv:2509.15095，2025-09——在强核心 Whisper-large-v3（CER/WER 2.89/5.23）上去掉规则约束、令 LLM 自由改写使 CER/WER 恶化到 6.62/9.27，约 2.3× 劣化；arXiv:2501.15310，2025-01——强核心 Gemini-1.5-Pro 经 LLM 纠错后 WER 不降反升；见 §2.2），天花板低且反伤；(2) 前端注入受核心生成能力封顶但**不破坏**它，且闭源 API 原生可达（prompt 注入）；(3) 后端只保留其唯一可移植的 training-free 原语（受约束选择 + 误差去相关信号），作为**发现段触发器**与**使用段信任标定器**——换数据集不换信号定义（详见 §7 与附录 B）。
 
 同时**反转基线哲学**（owner 第二轮修正）：不要求先把核心调到极致再测知识系统。基线 = **裸核心标准用法（bare-core standard usage）**；long-context 全塞入、own-ASR 朴素级联从"基线"改编入**系统复杂度阶梯**（外挂系统的最低阶形态）——主主张比对裸基线，阶梯主张比对**平凡知识供给**，检验"组织智慧"的净增益。
 
@@ -67,25 +67,58 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 ### 2.1 上下文偏置（contextual biasing）：解码器访问分水岭 + 检索式注入线
 
-**六族传统技术在 chat-API omni 下无一原样存活**，分水岭是**解码器内部访问（decoder access）——不是训练与否**：shallow fusion（在线 WFST/NNLM 重打分，需逐步 beam 分数；Zhao IS2019，HB-1）、CLAS / 深度上下文（需训练 bias-encoder attention；arXiv:1808.02480，HB-2）、trie / 前缀树约束解码（需 beam + next-token masking；arXiv:2508.17796，HB-3）、TCPGen（需端到端训练；arXiv:2109.00627，HB-4）、contextual adapters（需训练 adapter；arXiv:2205.13660，HB-5）、transducer/CTC beam boosting（需帧 log-prob；HB-6）。最反直觉的一条：连"免再训练"的 **CTC-WS**（arXiv:2406.07096，NeMo）也失效——它需 CTC 帧 log-prob 在候选帧区间替换贪心结果，而 chat API 对音频编码器不暴露任何帧 logit。**残存的只有三个退化替身**：prompt 注入（退化 CLAS 后裔，黑盒可达）、logit_bias（无结构静态 shallow fusion，字符串级子词袋、表面形式脆弱；llama.cpp issue #13605，HB-8）、GBNF（硬约束 trie 解码，伤开放转写；HB-10）——后两者依赖白盒特权，闭源 API 不保证，故在本系统降为**白盒扩展层**单独申报（附录 A）。
+**六族传统技术在 chat-API omni 下无一原样存活**，分水岭是**解码器内部访问（decoder access）——不是训练与否**（此 watershed 裁定的活体锚点 = 2025 的 trie 研究 arXiv:2508.17796 + 当代 llama.cpp 工具事实 HB-8/10，下列 pre-2025 技术行仅作谱系/已弃用支撑）：shallow fusion（在线 WFST/NNLM 重打分，需逐步 beam 分数；Zhao IS2019 **[谱系]**，HB-1）、CLAS / 深度上下文（需训练 bias-encoder attention；arXiv:1808.02480 **[谱系]**，HB-2）、trie / 前缀树约束解码（需 beam + next-token masking；arXiv:2508.17796，HB-3）、TCPGen（需端到端训练；arXiv:2109.00627 **[已弃用]**，HB-4）、contextual adapters（需训练 adapter；arXiv:2205.13660 **[已弃用]**，HB-5）、transducer/CTC beam boosting（需帧 log-prob；HB-6）。最反直觉的一条：连"免再训练"的 **CTC-WS**（arXiv:2406.07096 **[已弃用]**，NeMo）也失效——它需 CTC 帧 log-prob 在候选帧区间替换贪心结果，而 chat API 对音频编码器不暴露任何帧 logit。**残存的只有三个退化替身**：prompt 注入（退化 CLAS 后裔，黑盒可达）、logit_bias（无结构静态 shallow fusion，字符串级子词袋、表面形式脆弱；llama.cpp issue #13605，HB-8）、GBNF（硬约束 trie 解码，伤开放转写；HB-10）——后两者依赖白盒特权，闭源 API 不保证，故在本系统降为**白盒扩展层**单独申报（附录 A）。
 
-**检索式注入（retrieve-then-inject）是文献收敛出的替代形态**：大偏置库 → 语音键检索小候选子集 → prompt 注入。证据在与 Qwen3-Omni **同族**基座上很强：BR-ASR（Qwen-Audio，arXiv:2505.19179，HB-16）、RECAST（Phi-4 / GPT-4o-mini，EMNLP2025 findings.203，HB-23）、Phoneme-RAG（Apple，arXiv:2409.15353，HB-24）、Hotword-RL（Qwen2.5-7B，arXiv:2512.21828，HB-15）、Locate-and-Focus（Qwen2-Audio，arXiv:2507.18263，ACL2025，HB-25）。两条一致读数：(1) **top-2 甜点**——候选越多单调越差，整表塞 prompt 在 N≥100 灾难幻觉、"list-vomiting"（模型背诵列表而非转写；LOGIC，arXiv:2601.15397，HB-17）；(2) **关键约束**——所有赢家检索器都是**专门训练**的对比检索器（BR-ASR CLAP 命中 93/91%、GLCLAP 89/74%；HB-26），off-the-shelf CLAP 词汇键**已死**（R@1≈0.1），唯一全 training-free 类比 M2R-Whisper（arXiv:2409.11889）的 token-kNN 段需 logit 访问（chat API 无）。**定位**：我方的差异**不在偏置机制新颖**，而在把这条被专训检索器统治的能力，做成**零训练（zero-training）、闭源 API 兼容**的系统——对外效果故事 = "零训练前端追平 / 超越需专训检索器的 pipeline"（S1 的 trained-frozen 对照臂作证）。
+**检索式注入（retrieve-then-inject）是文献收敛出的替代形态**：大偏置库 → 语音键检索小候选子集 → prompt 注入。证据在与 Qwen3-Omni **同族**基座上很强（replacement-form 论点由 2025 的 BR-ASR/RECAST/Hotword-RL/Locate-and-Focus 活体锚定，Phoneme-RAG 为 pre-2025 佐证行）：BR-ASR（Qwen-Audio，arXiv:2505.19179，HB-16）、RECAST（Phi-4 / GPT-4o-mini，EMNLP2025 findings.203，HB-23）、Phoneme-RAG（Apple，arXiv:2409.15353 **[谱系]**，HB-24）、Hotword-RL（Qwen2.5-7B，arXiv:2512.21828，HB-15）、Locate-and-Focus（Qwen2-Audio，arXiv:2507.18263，ACL2025，HB-25）。两条一致读数：(1) **top-2 甜点**——候选越多单调越差，整表塞 prompt 在 N≥100 灾难幻觉、"list-vomiting"（模型背诵列表而非转写；LOGIC，arXiv:2601.15397，HB-17）；(2) **关键约束**——所有赢家检索器都是**专门训练**的对比检索器（BR-ASR CLAP 命中 93/91%、GLCLAP 89/74%；HB-26），off-the-shelf CLAP 词汇键**已死**（R@1≈0.1，此裁定由 2025 BR-ASR/HB-26 co-anchor），唯一全 training-free 类比 M2R-Whisper（arXiv:2409.11889 **[谱系]**）的 token-kNN 段需 logit 访问（chat API 无）。**定位**：我方的差异**不在偏置机制新颖**，而在把这条被专训检索器统治的能力，做成**零训练（zero-training）、闭源 API 兼容**的系统——对外效果故事 = "零训练前端追平 / 超越需专训检索器的 pipeline"（S1 的 trained-frozen 对照臂作证）。
 
 ### 2.2 LLM 重排序 / GER：约束选择安全、自由改写陷阱 → 收编为 reward 基础设施
 
-后融合正典由 **NTU-新加坡 ⟷ NVIDIA ⟷ IBM 的 GER 集群**主导（Yuchen Hu、Chen Chen、Eng Siong Chng、Chao-Han Huck Yang、Pin-Yu Chen；HyPoradise NeurIPS2023 arXiv:2309.15701、RobustGER ICLR2024 arXiv:2401.10446、ClozeGER ACL2024 arXiv:2405.10025、GenSEC SLT2024），**剑桥 CUED**（Ma / Gales / Knill）持 training-free 冻结分析线。对我方最 load-bearing 的裁定是**约束选择安全、自由改写陷阱**：N-best 受约束 closest-mapping（冻结 ChatGPT，1-shot 6.24 vs baseline 6.90、oracle 4.59；剑桥 arXiv:2307.04172）受 oracle 硬封顶、永不幻觉、training-free 可用；而自由改写 GER 在强低-WER 基线上**灾难劣化**（Apple，arXiv:2405.15216：LibriSpeech 2.2/5.3 → Llama-70B 0-shot 8.8/13.0，幻觉率 3–12%），GER 的 −40~−77% 大数**全是 fine-tuned**（HyPoradise 系）。因此 owner 将后端**收编为 reward 基础设施**——只保留受约束选择 / 误差去相关信号，不立后融合研究线；**δ_corr 引 ROVER（Fiscus 1997）"互补错误"谱系作借用基础设施**（28 年前的正典祖先），从本提案定理约束清单中移除，**不作理论贡献主张**（panel R4-MAJOR-5 修复；见 §7、§8）。**认账**：omni 自池 training-free 二遍解码本身确是空白（正典 N-best 源皆经典 ASR、纠错器皆独立文本 LLM），但我方**不以此空白立方向**——只把 logprob@8 端点当作 reward 信号的跨域标定（**C-ASR-V2**，directional）。
+后融合正典由 **NTU-新加坡 ⟷ NVIDIA ⟷ IBM 的 GER 集群**主导（Yuchen Hu、Chen Chen、Eng Siong Chng、Chao-Han Huck Yang、Pin-Yu Chen；HyPoradise NeurIPS2023 arXiv:2309.15701 **[已弃用]**、RobustGER ICLR2024 arXiv:2401.10446 **[已弃用]**、ClozeGER ACL2024 arXiv:2405.10025 **[谱系]**、GenSEC SLT2024 arXiv:2409.09785 **[已弃用]**），**剑桥 CUED**（Ma / Gales / Knill）持 training-free 冻结分析线。对我方最 load-bearing 的裁定是**约束选择安全、自由改写陷阱**：N-best 受约束 closest-mapping（冻结 ChatGPT，1-shot 6.24 vs baseline 6.90、oracle 4.59；剑桥 arXiv:2307.04172 **[谱系]**；**2025+ 再锚**：SEAL arXiv:2501.08421，2025-01——"a simpler constrained decoding strategy reduces LLM hallucinations"，把受约束解码立为安全可部署原语；LIR-ASR arXiv:2509.15095，2025-09——去掉约束令误差近乎翻倍，即约束=安全的反证）受 oracle 硬封顶、永不幻觉、training-free 可用；而自由改写 GER 在强低-WER 基线上**灾难劣化**（Apple，arXiv:2405.15216 **[已弃用]**：LibriSpeech 2.2/5.3 → Llama-70B 0-shot 8.8/13.0，幻觉率 3–12%；**2025+ 再锚**同上 LIR-ASR / arXiv:2501.15310），GER 的 −40~−77% 大数**全是 fine-tuned**（HyPoradise 系）。因此 owner 将后端**收编为 reward 基础设施**——只保留受约束选择 / 误差去相关信号，不立后融合研究线；**δ_corr 引 ROVER（Fiscus 1997 **[谱系]**）"互补错误"谱系作借用基础设施**（28 年前的正典祖先），从本提案定理约束清单中移除，**不作理论贡献主张**（panel R4-MAJOR-5 修复；见 §7、§8）。**认账**：omni 自池 training-free 二遍解码本身确是空白（正典 N-best 源皆经典 ASR、纠错器皆独立文本 LLM），但我方**不以此空白立方向**——只把 logprob@8 端点当作 reward 信号的跨域标定（**C-ASR-V2**，directional）。
+
+> **⚠ 新鲜度审计发现（TOPIC 2，ANCHORED-WITH-REVISION，待 owner 复核）**：「约束选择安全 / 自由改写陷阱」的**大原理**已被 2025 一手证据双向再锚（SEAL 2501.08421 立约束=安全、LIR-ASR 2509.15095 反证去约束翻倍误差），但**没有任何 2025 一手研究直接跑「受约束 N-best 选择/closest-mapping 完胜自由改写」的正面 head-to-head**——那条最贴合的直接证据仍停在 2023–2024（剑桥 2307.04172 / 2409.09554、Amazon TAP 2309.15649）。且剑桥 2409.09554（2024）发现：当 LLM 足够强（GPT-4）时，**无约束**解码在部分集上可**超过 N-best oracle**。故「一律约束」并非普适，而是**依模型能力 / 依 regime**——约束选择的安全优势在 ASR 核心已强、头空小、幻觉风险高（即 W4 的 regime）时最大。建议在本节与 §7 把该原语的适用性显式写为 **regime-conditional，而非普适**，勿把它当作跨能力恒真的结论。
 
 ### 2.3 主动检索（active retrieval）：FLARE / Self-RAG 谱系与 S3 的迁移问题
 
-发现段的**两遍触发管线**（S3：第一遍生成取不确定度 → 决定检索 → 第二遍生成）**不是新方法**，其谱系是文本 LLM 的**主动 / 自适应 RAG**——**FLARE**（Jiang et al. 2023，arXiv:2305.06983，按生成置信度触发检索）与 **Self-RAG**（Asai et al. 2023，arXiv:2310.11511，自反思式按需检索）。两份偏置 / 重排调研均未覆盖此线，v1 提案亦漏引（panel R4-MAJOR-4 修复）。我方定位 S3 = **"主动检索能否迁移到冻结 omni"**（does active-retrieval transfer to frozen omni），非机制新颖；判定用**双门**（增益差 TOST + 调用降幅 ≥30% superiority，两门皆须过），且**在 mock 口径之外**作独立两遍管线运行——不违反 harness 的 `assert_no_adaptive_logic` 不变量（panel R3-FUND 修复）。
+发现段的**两遍触发管线**（S3：第一遍生成取不确定度 → 决定检索 → 第二遍生成）**不是新方法**，其谱系是文本 LLM 的**主动 / 自适应 RAG**——**FLARE**（Jiang et al. 2023，arXiv:2305.06983 **[谱系]**，按生成置信度触发检索）与 **Self-RAG**（Asai et al. 2023，arXiv:2310.11511 **[谱系]**，自反思式按需检索）。两份偏置 / 重排调研均未覆盖此线，v1 提案亦漏引（panel R4-MAJOR-4 修复）。我方定位 S3 = **"主动检索能否迁移到冻结 omni"**（does active-retrieval transfer to frozen omni），非机制新颖；判定用**双门**（增益差 TOST + 调用降幅 ≥30% superiority，两门皆须过），且**在 mock 口径之外**作独立两遍管线运行——不违反 harness 的 `assert_no_adaptive_logic` 不变量（panel R3-FUND 修复）。
 
 ### 2.4 语音 / 多模态 RAG 语境（step2a 已验主张）
 
-补足检索键模态谱与再听前沿：**音频键 / 跨模态检索是最佳拟合**（BR-ASR AcousticBias、VQ-RAG、GLCLAP、M2R-Whisper、Locate-and-Focus），避开"转写-bootstrap 失效"；但 BR-ASR 自身的赢家实为**文本键（TextualBias，更 OOV-鲁棒、更少同音命中）**——这一**分化答案恰恰不利于"omni 嵌入激活"的旗舰叙事**，故 H1（audio-direct vs own-ASR 级联）在文献里**已被差异化回答**，我方按**"training-free 约束下的确认性复现"而非发现**来定位（panel R4-MAJOR-3 修复）。**再听（re-listening）**是当前前沿（ClozeGER / AVGER 把源音频喂回纠错器），Qwen3-Omni 天然可再听——但令 reward 音频接地，**Information-Boundary Guard 适用**（验证器不得见 golden 转写）。**同音 / 近音干扰污染**是音频相似检索的 #1 已证失效（BR-ASR DCL、RECAST 硬负挖掘；HB-21）——任何 retrieve-then-bias selector 须含**显式 precision / 去相关项**，正是理论轨要求的"界定问题边缘的显式约束"。
+补足检索键模态谱与再听前沿：**音频键 / 跨模态检索是最佳拟合**（BR-ASR AcousticBias、VQ-RAG、GLCLAP、M2R-Whisper、Locate-and-Focus），避开"转写-bootstrap 失效"；但 BR-ASR 自身的赢家实为**文本键（TextualBias，更 OOV-鲁棒、更少同音命中）**——这一**分化答案恰恰不利于"omni 嵌入激活"的旗舰叙事**，故 H1（audio-direct vs own-ASR 级联）在文献里**已被差异化回答**，我方按**"training-free 约束下的确认性复现"而非发现**来定位（panel R4-MAJOR-3 修复）。**再听（re-listening）**是当前前沿（ClozeGER arXiv:2405.10025 **[谱系]** / AVGER arXiv:2501.04038——"Listening and Seeing Again"，2025-01，audio-visual GER 用 Q-former 多模态同步编码器把源信号喂回纠错器、LRS3 相对 WER −24%——把源音频喂回纠错器），Qwen3-Omni 天然可再听——但令 reward 音频接地，**Information-Boundary Guard 适用**（验证器不得见 golden 转写）。
+
+> **⚠ 新鲜度审计发现（TOPIC 4，ANCHORED-带模态注记，待 owner 复核）**：AVGER（arXiv:2501.04038）已给「再听 > 纯文本纠错」一个可引的 2025 一手 ID（+24% 相对 WER），但它是 **audio-VISUAL**；同期唯一另一份 2025 再听一手 SEAL（2501.08421）走的是 **speaker-error** 轴（24–43% SER↓）。**纯音频（无视觉）再听、直接针对 WER 的 head-to-head 仍主要靠 2024 的 ClozeGER 锚定**。若本提案在 §7 主张「再听是 WER reward 层的最强杠杆」，须显式标注：该「音频-only-for-WER」切片的 2025 一手证据偏薄，最贴合的新鲜证据是邻模态（视听 / 说话人轴）。**同音 / 近音干扰污染**是音频相似检索的 #1 已证失效（BR-ASR DCL、RECAST 硬负挖掘；HB-21）——任何 retrieve-then-bias selector 须含**显式 precision / 去相关项**，正是理论轨要求的"界定问题边缘的显式约束"。
 
 ### 2.5 定位总述：零训练 omni agentic 系统的效果主张
 
 一句话：**我方不主张任一段的机制新颖，而主张在一个零训练、闭源 API 兼容的 omni agentic 系统上，把 RDU 三段精心组织后取得业务效果**——对裸核心标准用法基线 ≥10% 相对、全家族校正后可靠、边界清白，并在系统复杂度阶梯上相对平凡知识供给（long-context 塞入、own-ASR 朴素级联）有可靠净增益。与每条先行工作的关系：偏置线（§2.1）——我方**零训练** vs 其**专训检索器**；后融合线（§2.2）——**收编为 reward 基础设施**，非方向；主动检索（§2.3）——**迁移问题**，非新方法；语音 RAG（§2.4）——**键模态答案已分化**，H1 为确认性复现。**效果是唯一最终裁判**（owner 裁定）：clean positive 不再是 v1 那种"5 队已复现"的必然结论，因为主张的对象是**系统级零训练效果**（而非任一机制），且成败以业务效果、而非"负结果也是贡献"的自我安慰来判定（后者仅保留给次级科学点 S1–S4）。
+
+### 2.6 引用新鲜度合规声明（Citation-Freshness Compliance）
+
+> **编号说明**：本小节按 owner 指令名为「§2.5 引用新鲜度合规声明」，因 §2.5 号位已被「定位总述」占用，实际落位 **§2.6**（仅编号顺延，内容即指令所指的合规声明）。
+
+**规则（Decision-Log 续17，2026-07-12 owner 裁定）**：每条**方向影响型主张**（方法有效性裁决、替代形态论证、效应量先验、测试床选型理由）必须由 **≥1 篇 ≥2025-01 的一手来源**锚定。较早著作**仅在带显式角色标签**时允许：**[谱系]** = 历史谱系、**[标准]** = 方法学/统计标准（不过期）、**[已弃用]** = 引用以宣告其死亡/被证伪。本提案的调研附录（附录 A/B）**作为有日期的历史记录原样保留**；本合规工作只改**本 FULL 提案**内的引用，并在两份 survey 顶部各加一条「哪些方向主张已在本 FULL 中再锚」的日期注记。
+
+**审计口径与结果（63 条 audit 项）**：
+
+| 判定 | 计数 | 处置 |
+|---|---|---|
+| COMPLIANT（已有 ≥2025 一手 / 当代工具事实，使用正确） | **18** | 无需改动 |
+| NEEDS-ROLE-TAG（pre-2025，仅缺角色标签） | **36** | 于 FULL 内出现处加 [谱系]/[标准]/[已弃用] |
+| NEEDS-REANCHOR（作活体效应量先验但无 ≥2025 co-anchor） | **3** | 加 ≥2025 一手再锚 + 旧源保留带标签 |
+| NEEDS-DATE-CHECK（日期/ID 待确认） | **6** | 4 条已由 ≥2025 一手落定，2 条 survey-scoped 待复核 |
+
+**NEEDS-REANCHOR 三条的落定（锚点猎取全部命中 ≥2025 一手）**：
+- Apple frozen-GER 负结果 arXiv:2405.15216（§1.2/§2.2）→ 再锚 LIR-ASR **arXiv:2509.15095**（2025-09）+ **arXiv:2501.15310**（2025-01），旧源标 **[已弃用]**。
+- 剑桥受约束 closest-mapping arXiv:2307.04172（§2.2）→ 再锚 SEAL **arXiv:2501.08421**（2025-01）+ LIR-ASR 2509.15095，旧源标 **[谱系]**（**带修正**，见下 ⚠）。
+- Amazon TAP arXiv:2309.15649 → **仅存于附录 B（RESCORING §3/§4），不在本 FULL 正文**，此处不改；同题再锚（SEAL/LIR-ASR）已适用，留待 survey 顶注记。
+
+**NEEDS-DATE-CHECK 六条**：4 条以 ≥2025 一手落定并写入 FULL——AVGER **arXiv:2501.04038**（2025-01，§2.4）、GLAP **arXiv:2506.11350**（2025-06，§4.3）、omni-embed-nemotron **arXiv:2510.03458**（2025-10，§4.3）、LCO-Omni **arXiv:2510.11693**（2025-10）+ MAEB **arXiv:2602.16008**（2026-02，§4.3）。**2 条 survey-scoped 未决**（只在附录 A、不在 FULL）：SLLM 列表规模研究 arXiv:2604.12398（ID 形态异常，需确认非转写错）、base-model reports HB-33（Qwen2-Audio 部分 pre-2025、报告 PDF 转换失败未穷尽确认），二者随 survey 顶注记留作后续核验。
+
+**⚠ 触发的方向修正标记（3 处，均已就地加 ⚠ 注，待 owner 复核；本合规工作不擅自改方向）**：
+1. **§2.2（TOPIC 2，ANCHORED-WITH-REVISION）**——「约束选择安全 vs 自由改写陷阱」大原理有 2025 双向锚，但无 2025 一手跑正面 head-to-head；剑桥 2409.09554（2024）显示强 LLM（GPT-4）无约束可超 N-best oracle → 该原语适用性应写为 **regime/能力条件性，非普适**。
+2. **§4.3 + §3.3 S1（GLAP/nemotron/LCO/MAEB，ANCHORED-WITH-REVISION）**——「冻结 omni-own 键充分」应改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、SOTA 证据含一层轻量非音频对比精化而非纯 raw 2048d readout」。
+3. **§2.4（TOPIC 4，ANCHORED-带模态注记）**——「再听是 WER reward 层最强杠杆」的 2025 一手证据为**邻模态**（AVGER 视听 / SEAL 说话人轴）；纯音频-for-WER 切片仍主要靠 2024 ClozeGER，须显式标注证据偏薄。
+
+**旁注（TOPIC 3，ANCHORED，无需 FULL 内改向）**：外部-LM 重排序在强首遍上天花板低（~9–16% 相对）之效应量先验，现由 2026 的 arXiv:2606.23306 与 2025 的 CHSER arXiv:2505.18463 重新锚定；该论点主要承载于附录 B（RESCORING §2）的 pre-2025 谱系（Salazar/Conformer/AED），其 [标准] 标签与新锚随 survey 顶注记登记，不改本 FULL 正文。
 
 ---
 
@@ -101,7 +134,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 - **成功语义（win-design）**：达标 → 系统主张成立，对外效果故事 = 「零训练前端追平/超越需专训检索器的 pipeline」（trained-frozen 对照臂支撑，见 S1）。
 - **失败语义**：不达标 → 进入**系统设计迭代循环**（§9 预算界定的 pivot 规则，Stage-2 内 ≤2 轮、每轮 owner 批准），耗尽迭代预算仍不达标才由 owner 决定是否转向边界性结论。**「负结果也是贡献」的表述禁止用于主问题**——主问题按去赢设计，不设「两头可发表（publishable-either-way）」的自我安慰盾牌；该表述仅保留给次级科学点 S1–S4。（本条明确不采纳 v1 敌对评审团 R4 FUND-1/2 的「把 frozen-key 升为可两头发表的 primary」建议——owner 已 overrule；但评审团对各 estimand 的**修复**全部并入，见 §12 映射。）
-- **合规口径（compliance）**：组件「冻结使用（frozen-use）」= 我方不训练任何参数（零 LoRA、零投影、零 adapter）；上游预训练组件（含 trained-frozen 检索器如 GLAP / nemotron）照 **LLMLingua-2 先例**（Pan et al. 2024, arXiv:2403.12968：方法在部署侧 training-free，但如实披露其压缩器为上游训练所得）标注为「用法 training-free、非 training-free-by-construction」，不作为 by-construction 证据。若任一环节须训练一个薄投影才能达标，则如实报告为 training-free 检索的**负结果**，绝不静默替换。
+- **合规口径（compliance）**：组件「冻结使用（frozen-use）」= 我方不训练任何参数（零 LoRA、零投影、零 adapter）；上游预训练组件（含 trained-frozen 检索器如 GLAP / nemotron）照 **LLMLingua-2 先例**（Pan et al. 2024, arXiv:2403.12968 **[标准]**——作披露惯例而非效果论据：方法在部署侧 training-free，但如实披露其压缩器为上游训练所得）标注为「用法 training-free、非 training-free-by-construction」，不作为 by-construction 证据。若任一环节须训练一个薄投影才能达标，则如实报告为 training-free 检索的**负结果**，绝不静默替换。
 
 ### 3.2 主效果假设 H-sys（primary）
 
@@ -112,9 +145,9 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 ### 3.3 四个次级科学点（S1–S4）
 
-- **S1（frozen-key sufficiency，降级后的 v1 主问题）**。**动机**：冻结 omni 自身 2048d 隐态音频嵌入能否作为**零训练投影的检索键**（v1 旗舰内核，现降为次级）+ 组件选型依据 + 「激活」叙事证据。**Estimand**：omni-own 键 vs 专化冻结键 vs trained-frozen（nemotron）的检索质量（squtr 原生 R@k / nDCG）与端到端贡献。**家族**：3 键空间两两 = **3 项**。**反馈系统设计**：决定检索段键空间选型——若 omni-own 不足，系统换更强冻结组件继续，负结果仅记为 S1 边界，**不阻塞 H-sys**；预注册承诺——若须训练投影，报告为 training-free 的负结果（回应 panel FUND-2，且诚实对待 HB-26「off-the-shelf CLAP 词汇键已死 R@1≈0.1，赢家检索器多 purpose-trained」的激进赌注）。
+- **S1（frozen-key sufficiency，降级后的 v1 主问题）**。**动机**：冻结 omni 自身 2048d 隐态音频嵌入能否作为**零训练投影的检索键**（v1 旗舰内核，现降为次级）+ 组件选型依据 + 「激活」叙事证据。**Estimand**：omni-own 键 vs 专化冻结键 vs trained-frozen（nemotron）的检索质量（squtr 原生 R@k / nDCG）与端到端贡献。**家族**：3 键空间两两 = **3 项**。**反馈系统设计**：决定检索段键空间选型——若 omni-own 不足，系统换更强冻结组件继续，负结果仅记为 S1 边界，**不阻塞 H-sys**；预注册承诺——若须训练投影，报告为 training-free 的负结果（回应 panel FUND-2，且诚实对待 HB-26「off-the-shelf CLAP 词汇键已死 R@1≈0.1，赢家检索器多 purpose-trained」的激进赌注）。**⚠ 新鲜度审计（见 §4.3 ⚠ 注 + §2.6）**：一手 LCO-Embedding（2510.11693）/ MAEB（2602.16008）强制把「冻结 omni-own 键充分」改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、且 SOTA 证据含一层轻量非音频对比精化而非纯 raw readout」——S1 的「纯零适配 2048d readout 即足」措辞据此收紧，待 owner 复核。
 - **S2（递送主效应）**。**动机**：递送形式是全项目最大已验杠杆（结构化 card 递送相对 +34.6%，5/5 过 Holm，**C-MINDS-V2**，directional）。**Estimand（panel F2/#5 修复，取代 v1「≥ 任意维度」的病态定义）**：单一预注册对比 = 递送主效应（card + 两轮 prompt 递送合并最优 vs flat）− 键模态主效应，**联合 CI**。**家族**：**1 项**。**反馈系统设计**：裁定使用段「组织」与检索段「键选择」谁承载更多效应，锁定递送形式。（「两轮 prompt 递送」= 预制两轮消息在**单次**生成调用内递送，非模型发起的工具往返，panel R3-MINOR 更名处置。）
-- **S3（发现段·两遍管线）**。**动机**：何时检索——全项目证据最薄段；定位 = active-retrieval（**FLARE**, Jiang et al. 2023, arXiv:2305.06983 / **Self-RAG**, Asai et al. 2023, arXiv:2310.11511 谱系）向冻结 omni 的迁移。**Estimand + 出 mock 口径（panel F3-R3/#2 修复）**：触发式检索作为**独立 two-pass pipeline**（第一遍生成→取生成不确定度→决定检索→第二遍生成），在 mock 口径**之外**运行，不违反 `assert_no_adaptive_logic` 不变量。**双门判定（dual-gate，panel M4/#14 修复）**：增益差 **TOST**（margin 预注册，触发 vs 恒检索等增益）+ 调用降幅 **≥30% superiority** 检验，**两门皆须过**。**家族**：**2 项**。**反馈系统设计**：裁定触发式检索是否值一次额外生成遍（发现段配「触发」还是「恒检索」）；黑盒层口径触发信号取输出侧自一致性，白盒扩展层口径可取 logprob/熵（见 §4.2、§7）。
+- **S3（发现段·两遍管线）**。**动机**：何时检索——全项目证据最薄段；定位 = active-retrieval（**FLARE**, Jiang et al. 2023, arXiv:2305.06983 **[谱系]** / **Self-RAG**, Asai et al. 2023, arXiv:2310.11511 **[谱系]**）向冻结 omni 的迁移。**Estimand + 出 mock 口径（panel F3-R3/#2 修复）**：触发式检索作为**独立 two-pass pipeline**（第一遍生成→取生成不确定度→决定检索→第二遍生成），在 mock 口径**之外**运行，不违反 `assert_no_adaptive_logic` 不变量。**双门判定（dual-gate，panel M4/#14 修复）**：增益差 **TOST**（margin 预注册，触发 vs 恒检索等增益）+ 调用降幅 **≥30% superiority** 检验，**两门皆须过**。**家族**：**2 项**。**反馈系统设计**：裁定触发式检索是否值一次额外生成遍（发现段配「触发」还是「恒检索」）；黑盒层口径触发信号取输出侧自一致性，白盒扩展层口径可取 logprob/熵（见 §4.2、§7）。
 - **S4（实体粒度实例；热词/上下文偏置）**。**动机**：热词偏置 = RDU 三段在实体粒度的具象（H5），retrieve-then-inject 被 ≥5 篇同族基座论文强证据支持为替代形态（附录 A §4）。**Estimand + 反答案注入（panel F3/#3 修复，规避 C-M3/C-T7 的 answer-injection 失效类）**：可部署列表 = **eval 前冻结的热词库经音频键检索的产出（outcome）**；「真词保证入列」的列表**降为 oracle 上界臂，永久标注不可部署**；B-WER 主指标（相对 ≥15% 靶，比 H-sys 更严）**以检索产出为条件**计算，真词命中如实记录、绝不保证。**H5a 单独报告**：检索召回 + **同音精度（homophone precision）**——BR-ASR RecallH / DCL 类比（HB-21），界定同音误注入率，作为收敛论证要求的显式 precision/去相关项。**家族**：列表长度扫描 {2,5,10,50}（4）+ 主对比（1）= **5 项**。测试床 = is21_deep_bias / AISHELL-NER / SLURP（附录 A 协议）。**反馈系统设计**：偏置列表由检索产出，oracle 臂降级；若三段管线不显著优于 full-list-stuffing → 检索式注入假设在实体粒度证伪，如实报负。
 
 ## 4. 系统架构（System Architecture）
@@ -143,11 +176,13 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 | 组件 | 角色 | 键/来源 | 冻结使用标注 | 依据 |
 |---|---|---|---|---|
-| **qwen3-omni-own** | 键=查询嵌入（旗舰） | 2048d 隐态音频嵌入（H-b 解锁，**活体已验**） | 我方零训练/零投影；核心为上游预训练，按 LLMLingua-2 先例标注（用法 training-free，非 by-construction） | RDU §1 |
-| **GLAP** | 音频-文本对比检索键 | R@1≈93.8/98.5 | **trained-frozen**：purpose-trained 上游对比检索器，冻结使用，非 training-free-by-construction | 附录 A §4；speech2vec facts |
-| **omni-embed-nemotron** | **trained-frozen 对照臂** | asymmetric `encode_document`；NC license | 冻结使用对照，仅作 S1 天花板对照；NC 许可仅研究用 | speech2vec facts |
-| **专化侧翼** | 实体粒度检索器 | 实体/语音学键 | 冻结使用；中文语音学算法不迁移（RECAST Hindi 论证），中文用学习跨模态检索器 | 附录 A §4（HB-24） |
+| **qwen3-omni-own** | 键=查询嵌入（旗舰） | 2048d 隐态音频嵌入（H-b 解锁，**活体已验**） | 我方零训练/零投影；核心为上游预训练，按 LLMLingua-2 先例（arXiv:2403.12968 **[标准]**）标注（用法 training-free，非 by-construction） | RDU §1；**冻结-omni-own 键作可检索性主张的一手锚**：LCO-Embedding arXiv:2510.11693（2025-10，NeurIPS2025，冻结 Qwen2.5-Omni 级 MLLM 无音频训练即 MAEB #1）+ MAEB arXiv:2602.16008（2026-02） |
+| **GLAP** | 音频-文本对比检索键 | R@1≈93.8/98.5 | **trained-frozen**：purpose-trained 上游对比检索器，冻结使用，非 training-free-by-construction | GLAP arXiv:2506.11350（2025-06，>93% EN / ~98% ZH 语音内容检索 R@1，多语种键 CLAP 无法胜任）；附录 A §4；speech2vec facts **[谱系]** |
+| **omni-embed-nemotron** | **trained-frozen 对照臂** | asymmetric `encode_document`；NC license | 冻结使用对照，仅作 S1 天花板对照；NC 许可仅研究用 | Omni-Embed-Nemotron arXiv:2510.03458（2025-10，NVIDIA 基于 Qwen2.5-Omni Thinker 的 4.7B 双编码器，NVIDIA OneWay NC 许可）；speech2vec facts **[谱系]** |
+| **专化侧翼** | 实体粒度检索器 | 实体/语音学键 | 冻结使用；中文语音学算法不迁移（RECAST Hindi 论证），中文用学习跨模态检索器 | 附录 A §4（HB-24 = Phoneme-RAG arXiv:2409.15353 **[谱系]**；replacement-form 由 2025 BR-ASR/RECAST/Locate co-anchor） |
 | **own-ASR→文本级联** | 无音频键的键模态对照 | own-ASR 转写→文本检索 | 边界清白（转写部署可得，非泄漏）；**cascade ASR WER 作 covariate 报告**（panel R2-MINOR） | 附录 B §5 |
+
+> **⚠ 新鲜度审计发现（GLAP/nemotron/LCO-Omni/MAEB，ANCHORED-WITH-REVISION，待 owner 复核）**：组件选型先验（GLAP=多语种语音键 / nemotron=NC-许可天花板 / 冻结 omni 自身状态可检索）现已全部由 2025+ 一手锚定（GLAP 2506.11350、Nemotron 2510.03458、LCO-Embedding 2510.11693、MAEB 2602.16008），内部 speech2vec 记忆笔记被**证实而非反驳**。但一手证据强制一处修正，须回传 S1（§3.3）框架：**旗舰赌注「冻结 omni 自身 2048d 嵌入是充分的 training-free 检索键」应改述为「是最强的廉价键，达到无音频训练的 SOTA，但 MAEB 均分仅约 50–52%（远未饱和），且该 SOTA 证据用了一层轻量非音频对比精化 + 投影，并非纯零适配的 raw 2048d readout」**。两个小数级事实（CLAP 基线近零 R@1；nemotron 精确 encode_query/encode_document API）因本次抓取受限仍属记忆笔记级，若需硬核验请另标。此 ~50–52% 头空正是「training-free RL 值得一搏」的现实效应量先验。
 
 `content_hash` 扩展至**嵌入器 SHA + revision + 量化 + 归一化配置 + 索引参数/top-k**，并断言**键==查询嵌入器 fail-closed**（panel M8/#8 修复，堵 C-PHASEA P0-4 的静默换空间 bug；详见 §6.2）。
 
@@ -190,9 +225,9 @@ owner 第二轮裁定的基线哲学反转落地为阶梯，**不要求先把核
 
 ### 5.4 S4 实体偏置协议（全文；修复 panel #3 的答案注入；完整协议见附录 A）
 
-**度量**：主指标 = 相对 B-WER/B-CER 下降 `(B-WER_nobias − B-WER_bias)/B-WER_nobias`（HB-27；偏置词占比小，整体 WER 会稀释效应，故报 B-WER 不报 WER）；U-WER/插入错误并列报告以惩罚盲抄。
+**度量**：主指标 = 相对 B-WER/B-CER 下降 `(B-WER_nobias − B-WER_bias)/B-WER_nobias`（HB-27；B-WER/U-WER 度量约定 = Le et al. arXiv:2104.02194, IS2021 **[标准]**，度量惯例不过期；偏置词占比小，整体 WER 会稀释效应，故报 B-WER 不报 WER）；U-WER/插入错误并列报告以惩罚盲抄。
 
-**热词库冻结**：每个测试床的热词/实体库在 **eval 之前**冻结（is21 的 ~209.2K 稀词池 HB-28；AISHELL-NER 891 实体 HB-29；SLURP 逐域 slot 值库 HB-30），库快照写入 content_hash（§6.2）。库冻结后不得因看到 eval 结果而增删。
+**热词库冻结**：每个测试床的热词/实体库在 **eval 之前**冻结（测试床皆为标准基准工件 **[标准]**：is21_deep_bias 的 ~209.2K 稀词池 HB-28 = Le et al. 2104.02194, IS2021；AISHELL-NER 891 实体 HB-29 = ICASSP2022；SLURP 逐域 slot 值库 HB-30 = arXiv:2011.13205, EMNLP2020；选型理由由 2025 注入文献 co-motivate），库快照写入 content_hash（§6.2）。库冻结后不得因看到 eval 结果而增删。
 
 **可部署列表 = 音频键检索产出**（不是注入 golden）：对每条 utt，deployable 臂的偏置列表 = {音频键检索 over 冻结库的 **top-k 产出**} ∪ {干扰词}。真实体**不保证入列**——只有当它被检索命中才出现；命中与否作为**检索召回/同音精度（H5a）单独报告**，不进 B-WER 的条件。B-WER **以检索产出为条件计算**，非以注入为条件。这结构性阻断 C-T7（`answer_in_own_KB=1.0`、检索用 question 文本、clean rerun −0.066 null）与 C-M3（注入 test-item golden 转写 → 假 +22.4%）的泄漏类。
 
@@ -288,7 +323,7 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 
 ## 7. reward 信号层（数据集无关的借用基础设施，非理论贡献；详账见附录 B）
 
-**定位（RDU §0 定向 + panel M17/R4-MAJOR-5 修复）**：reward 信号层**不是本提案的研究方向**，而是一组**数据集无关的标准信号供给**——换数据集不换信号定义。它**只**服务两处前端决策：(a) **发现段触发**（S3 两遍管线第一遍的 when/what-to-retrieve 门），(b) **使用段信任标定**（采纳率 α 与冲突消解的权重）。**明确不用于输出重排序作为研究主张**（那是 Proposal-B 的 parked 范围）。**δ_corr 从我方定理约束清单中移除**，引 ROVER（Fiscus 1997，附录 B C17）作为跨源误差互补的 28 年前正典，作**借用基础设施**认账，不作理论贡献。
+**定位（RDU §0 定向 + panel M17/R4-MAJOR-5 修复）**：reward 信号层**不是本提案的研究方向**，而是一组**数据集无关的标准信号供给**——换数据集不换信号定义。它**只**服务两处前端决策：(a) **发现段触发**（S3 两遍管线第一遍的 when/what-to-retrieve 门），(b) **使用段信任标定**（采纳率 α 与冲突消解的权重）。**明确不用于输出重排序作为研究主张**（那是 Proposal-B 的 parked 范围）。**δ_corr 从我方定理约束清单中移除**，引 ROVER（Fiscus 1997 **[谱系]**，附录 B C17）作为跨源误差互补的 28 年前正典，作**借用基础设施**认账，不作理论贡献。
 
 **分层信号表（闭源 API 兼容层约束：黑盒层 = 主配置；白盒扩展层 = 单独申报）**
 
@@ -364,7 +399,7 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 - **M14**（H2 "等增益"接受零假设）→ §3-S3/§5.6：双门 = 增益差 TOST（margin 预注册）+ 调用降幅 ≥30% superiority，两门须过。
 - **M15**（GPU 预算漏多遍臂）→ §4.2/§5.5：按生成遍计价（two-pass ×2），开跑前实测 1 真格。
 - **M16**（logit_bias/GBNF 未建 + ~9%）→ 附录 A + §4.2/§7（白盒扩展层）：标探索-only、非 H5 承重，需新递送代码 + token 实现枚举器。
-- **M17**（δ_corr 既 disclaim 又承重）→ §7/§8：定位"借用基础设施"，引 ROVER/Fiscus，移出定理约束清单。
+- **M17**（δ_corr 既 disclaim 又承重）→ §7/§8：定位"借用基础设施"，引 ROVER/Fiscus（1997 **[谱系]**），移出定理约束清单。
 - **噪音 5 项**（主席驳回）：R1-m1（k=3–4 DL τ²）报固定效应/per-dataset、非决策性；R1-m2 家族重计并入 M11；R3 "2-turn 工具"更名"两轮 prompt 递送"（cosmetic）；R3 "新 scheduler" 作工程任务非设计缺陷；R4-MINOR8 两遍缺口占用被 F1 pivot 吸收。
 
 ## 13. Owner / Reviewer 签字位（9 槽，标推荐默认）

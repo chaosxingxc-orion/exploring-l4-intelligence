@@ -11,6 +11,12 @@ deployment: "冻结 Qwen3-Omni-30B via llama.cpp chat API（无 beam/lattice/fra
 
 # Omni 模型下的热词/上下文偏置：传统技术是否失效，检索式注入是否是替代形态
 
+> **📌 引用新鲜度合规注记（2026-07-12 追加，本调研文本不改、作有日期记录保留）**：依 Decision-Log 续17（方向影响型主张须 ≥1 篇 ≥2025-01 一手锚定；较早著作须带 [谱系]/[标准]/[已弃用] 角色标签），本调研的 direction-claims 已在 **FULL 提案**（`2026-07-12-research-proposal-omni-agentic-frontend-FULL.md` §2.1/§2.4/§4.3/§2.6）完成合规再锚，本survey**不重复改写**。已在 FULL 内落实者：
+> - **替代形态（retrieve-then-inject）**：由 2025 一手 BR-ASR(2505.19179,HB-16)/RECAST(EMNLP2025,HB-23)/Hotword-RL(2512.21828,HB-15)/Locate-and-Focus(2507.18263,HB-25) 活体锚定；pre-2025 佐证 **Phoneme-RAG(2409.15353,HB-24)→[谱系]**、**M2R-Whisper(2409.11889,HB-26)→[谱系]**。
+> - **解码器访问分水岭**：活体锚点 = 2025 trie(2508.17796,HB-3) + 当代 llama.cpp 工具(HB-8/10)；pre-2025 传统技术行 **shallow-fusion Zhao-IS2019(HB-1)/CLAS(1808.02480,HB-2)→[谱系]**、**TCPGen(2109.00627,HB-4)/contextual-adapters(2205.13660,HB-5)/CTC-WS(2406.07096,HB-6)→[已弃用]**。
+> - **组件选型先验**：**GLAP** 已由一手 **arXiv:2506.11350（2025-06）** 锚定（多语种语音键，CLAP 词汇键 R@1≈0.1「已死」由 2025 BR-ASR co-anchor）。
+> - **⚠ 待复核（survey-scoped，未在 FULL 落定）**：SLLM 列表规模研究 **arXiv:2604.12398（HB-12）** ID 形态异常需确认；**base-model reports（HB-33）** 中 Qwen2-Audio 部分 pre-2025 且 PDF 转换失败未穷尽确认——二者留作 survey 侧后续日期核验。
+>
 > **本文定位（owner 定向，2026-07-12）**：这是 RDU-frontend proposal（Proposal-A）挂账的**附录 A**，
 > 也是 retrieve-discover-use 分析里「热词偏置=同一三段在实体粒度的实例」这句断言的证据底账。
 > 任务不是论证「要不要做热词偏置」，而是裁定三件事：(a) 传统 ASR 上下文偏置技术在 **chat-API omni**
