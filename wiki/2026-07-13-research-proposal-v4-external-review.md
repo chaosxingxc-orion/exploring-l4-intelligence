@@ -9,6 +9,17 @@ evidence_grade: "全部先验数字带 claim-ledger ID（C-* / HB-*）；status:
 
 # 以业务效果为裁判的前端多模态知识体系：冻结 omni agentic system 的检索·发现·使用（RDU）
 
+> ## ⚠️ 勘误与状态声明（2026-07-12 发布，append-only；读者请以本节为准）
+>
+> 本文发布当日收到一份对抗式方法学与研究诚信审查（`2026-07-12-research-proposal-v4-adversarial-integrity-review.md`，同 wiki 可见）。我方以 5 路独立复核代理对其 42 项可核验主张逐条核验：**37 CONFIRMED / 5 PARTIAL / 0 REFUTED**。以下四处为本文**事实性错误**，即日更正并对外生效；设计级修订（S3 成本门、接口契约、TFRL 身份、统计族等）属 owner 裁决事项，将以 v4.1 发布。**在 v4.1 发布并完成签字前，本文不得被引用为可签字方案或已通过评审的方案。**
+>
+> 1. **C-MINDS-V2 证据等级更正**：本文 §1.4 / §7.2 写为"已验、valid"。权威 claim ledger 状态为 **directional**（Stage-1 假设级；composite candidate-card 处理，含 card 文本与 eval transcript 重叠 caveat，+24.6pp 不能归因于卡 schema 本身）。一切 "valid" 字样作废。该升级为定稿协调 AI 在"调和双标签"时所写——在审查方已明确告知"directional 不得升级"之后——责任在协调层，特此具名承认。
+> 2. **C-KEEP（24% 采纳）降级为 unverified**：claim ledger 中无此条目（工件溯源与 mint 未完成）。该数字不得作为设计依据；§7.3 相关论证等待正式 mint 后重述。
+> 3. **C-T7 引用作废**：ledger 状态 invalid（信息泄漏语境，明令禁止作正向证据）。本文以其效应方向作"召回优先"的动机，违反本文自设引用规则（frontmatter/§附录）。C-T7 仅保留为失败史；"召回优先"降格为待检验假设。
+> 4. **基线表 SQuAD-zh 数字为数据集身份错配**：0.925 (n=40) 属 `uro-bench-SQuAD-zh` 工件；名为 `SQuAD-zh` 的锁定工件为 **0.85 [0.725, 0.95]**。另：所引锁定基线 provenance 记录 `git_dirty=true` 且 engine build / dataset revision / manifest hash 为空——全部基线数字维持 directional inventory 等级，不具确证级 provenance。
+>
+> 同时声明：本文从未获得任何具名外部评审裁决（§12 签字全部待定）；"CLEAN-FOR-REVIEW"为内部一致性检查的自述，未随提交冻结 checker 工件，不构成科学清白证书。
+
 > **一句话主张**：不改任何一个权重、不改任何结构，把一个**冻结的 omni 核心**（本地 Qwen3-Omni-30B 作科学载具，闭源 API 作价值场景）搭成可验证、可闭环的 agentic system，通过精心组织的**检索–发现–使用（Retrieve–Discover–Use, RDU）**三段前端知识子系统，在知识依赖型语音任务上对**裸核心基线**取得 **≥10% 的错误率相对下降**，全家族校正后统计可靠、信息边界清白。系统接口契约唯一——**音频/文本进、文本出、多次采样**——因而设计天然向任意闭源 API 迁移。
 
 **评审重点导览**（load-bearing 章节）：
