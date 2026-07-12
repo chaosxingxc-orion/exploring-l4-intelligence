@@ -2,7 +2,7 @@
 title: "Research Proposal（v1，供 reviewers 审阅）：冻结 Omni 模型的前端多模态知识体系——检索·发现·使用"
 date: 2026-07-12
 stage: "1-problem-definition → 申请进入 Stage-2 预注册"
-status: "DRAFT for hostile review — owner 未签署；签署前不跑任何实验（含 Phase-A dev）"
+status: "DRAFT v1.1（附录 A/B 已并入）for hostile review — owner 未签署；签署前不跑任何实验"
 lineage: "G0（续12）→ 范围收束（续16/续17 口径）→ 检索-发现-使用分析（2026-07-12）；回应四轮敌对审查的全部 P0"
 verdict_vocabulary: "六级状态制；证据引用一律带 claim-ledger ID；无 ledger ID 的数字 = unverified"
 ---
@@ -164,9 +164,32 @@ Week 1：G2-L3 clean 重建 + 跨模态查询路由补齐 + H5 测试床偏置�
 （§4.3）；5. custodian 密封协议细则；6. H5 偏置列表协议（附录 A 落地后）；7. reward 信号表
 （附录 B 落地后）；8. kill criteria；9. 时间线。
 
-## 附录槽位（调研落地后补齐，补齐前本提案不定稿）
+## 附录 A：热词/上下文偏置调研裁定（全文：[[2026-07-12-omni-hotword-biasing-survey]]，33 条 claim ledger）
 
-- **附录 A**：omni 热词/上下文偏置调研裁定（传统技术存活表、检索式注入证据、本地测试床
-  推荐与偏置协议）——在途；
-- **附录 B**：LM 重排序调研的 reward 信号收割（数据集无关信号表 + δ_corr 文献量化 +
-  Qwen3-Omni 官方 ASR 数字与量化差距分解）——在途。
+1. **传统技术存活性**：六大偏置族在 chat-API omni 下**无一原样存活**（分水岭=解码器内部访问，
+   非训练与否）；退化替身仅三：prompt 注入 / `logit_bias`（脆弱、非序列感知）/ GBNF（仅闭集安全）。
+2. **检索式注入假设：STRONGLY SUPPORTED**（≥5 独立团队，Qwen/Phi 族实测）：整表塞入毁转写
+   （N≥100 灾难幻觉，"list-vomiting"），**检索 top-2 小子集是甜点**。
+3. **对 H5 的两条强约束**（预注册进设计）：①赢家检索器多为专训——"冻结 omni 嵌入作热词键是否
+   足够"本身就是 H1 在实体粒度的形式，作为显式待测假设；②**同音/近音污染是音频相似检索的
+   第一失效模式**——发现段定律按粒度分化：**段落级召回优先（已验），实体级需显式精度约束**
+   （本提案的一个新预注册子假设 H5a）。
+4. **H5 测试床冻结**：LibriSpeech + is21_deep_bias 列表（英文正典协议）；AISHELL-1 + AISHELL-NER
+   （中文，音频在盘）；SLURP（实体+三杠杆全适用）。指标：B-WER 主、U-WER/整体 WER 副；
+   偏置协议 = 检索步替换 oracle 列表（真词+干扰词、列表长度扫描 {2,5,10,50} 预注册）。
+5. **白空间臂**：A-inj-logitbias / A-inj-gbnf（文献未用过的部署杠杆）——探索层收录；警示：
+   LOGIC 类比显示纯 logit_bias 仅 ~9% 相对（门槛线下），达标形态预计是检索短列表 prompt +
+   闭集 GBNF 组合。
+
+## 附录 B：reward 信号收割（全文：[[2026-07-12-omni-lm-rescoring-survey]]，20 条 claim ledger）
+
+1. **数据集无关信号表（供发现段触发/使用段标定）**：自身按句 logprob/熵（已存）、外部冻结文本
+   LM 的 PLL/约束式评分（δ_corr 去相关，ROVER-Fiscus 1997 为可引祖先）、自一致性。**约束式选择
+   是唯一安全 training-free 原语；自由生成式纠错（GER）在强基线上劣化且幻觉（3-12% 幻觉词），
+   出界。**
+2. **文献格局**：GER 谱系主导者 = NTU-SG↔NVIDIA↔IBM 集群（Huck Yang 枢纽）；冻结分析线 =
+   剑桥 CUED；**"omni 自产 N-best 的 training-free 二遍处理"为已核验空白**——本提案 §6 的
+   触发器标定实验恰落此格（但按 owner 定向仅作 reward 基础设施，不立方向主张）。
+3. **工程分账（防效应污染）**：官方 test-other 2.48% vs 我们 oracle@8 3.57%——重排序结构性
+   够不着官方数字；~3.3pp 差距=llama.cpp 实验音频路径+Q8 量化+子集，**工程票 #35 单独追踪，
+   永不计入 TFRL 效应**；一切对外 WER 带栈标注。
