@@ -6,7 +6,21 @@
 
 ---
 
-### 2026-07-13（续22）· M1 工程基座交付并锁定；v4 已发布至共享 wiki 供外审
+### 2026-07-12（续23）· v4 对抗式诚信审查核验（37/42 CONFIRMED、0 REFUTED）+ 24h 内勘误发布
+
+**Status.** 收到 `2026-07-12-research-proposal-v4-adversarial-integrity-review.md`（REJECT/NO-GO，
+四 FUNDAMENTAL + QRP 判定）。按协议 5 路独立复核代理逐条核验其 42 项可核验主张：**37 CONFIRMED /
+5 PARTIAL / 0 REFUTED**（workflow `wf_1cb25cee-1f8`）——审查者无一处被驳倒；其引用的 9 篇文献全部
+真实、描述准确（唯一可抗辩点：最近邻清单多算 3 篇已引文献 BR-ASR/RECAST/HyDE；PARTIAL 均为范围
+限定而非推翻）。**四处事实性错误当日勘误并公开**（v4 顶部 append-only 横幅，commit `aa8bdbb`，
+wiki `59cea7a`）：C-MINDS-V2 回 directional（该 valid 升级为定稿协调 AI 在"调和"时所写——审查方
+已告知后复发，具名承认，QRP 判定接受）；C-KEEP 降 unverified；C-T7 引用作废；SQuAD-zh 0.925 系
+`uro-bench-SQuAD-zh` 身份错配（真值 0.85）。v4 声明为不可签字状态，待 v4.1。**设计级修订全部呈
+owner 裁决**：F-1 S3 成本门数学不可达（5+p vs 1.4）、F-2 黑盒契约 vs 2048d 隐态旗舰键冲突、
+F-3 TFRL 身份（核验注记：审查者的 Path B 恰与 owner 已签 G0 主问题 ρ/selector 同构——v4 把
+reward 层降为基础设施属偏航）、F-4 身份落账（G0 supersession 已签但 Thesis/Per-Work-Status 未
+传播）、custody 最小升级方案（salted commit–reveal 秘密确证种子 + 代码强制 freeze-then-draw，
+保留确定性脚本、不复活密封仪式）、统计/构念修正包。实验冻结维持；M1 维持 DEV-only。
 
 **Status.** 续21 三项指令的执行落账。**①/②（工程基座）**：六件套全部 IMPLEMENTED 并经协调者
 独立复跑关键测试后入库（W1 `20d45a8`）——(1) `deterministic_draw.py` 确定性抽样（三个抽签类型
