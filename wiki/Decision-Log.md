@@ -6,6 +6,19 @@
 
 ---
 
+### 2026-07-12（续26）· owner 批准五项 F′ 处置（按协调者推荐）+ 工程奠基收拢锁定令
+
+**Decision（owner）.** 五项全按推荐执行：① F′-3 squtr 确证检索语料重建为**官方全语料**（57,638 docs；
+qrels 只入评分；310 库永久降为 qrels-conditioned DEV smoke；CLEAN 审计拆分五维、`n_golds=0 →
+NOT_EVALUATED`）；② F′-1 custody 如实改称 **public deterministic evaluation**（§9.5 删"不可预测
+custody"；零机械；确证级主张若将来需要，届时用冻结后第三方一次性评分）；③ F′-2 采用**单一最终
+确证版本制**（此前所有版本一律 development，与三阶段方法论同构）；④ F′-4 reward 改名 **label-free
+proxy reward** + U/Û 符号分离 + ρ 只算任务效用 + 绝对增量 co-primary + 三件 proxy 诊断（对外术语
+维持 G0 的 weight-frozen reward-guided inference-time optimization）；⑤ F′-5 K=1 改标低成本基线，
+S3 采用**轻量 1×3 预算匹配**（同采样预算下 never/always/triggered）。**并令：当前处于工程奠基阶段，
+尽快收拢锁定（M1 lock）**——v4.2 重构 + #38 工程包同步启动，checker 本次交付真实工件
+（脚本+规则清单+JSON+环境），三处保留意见写入给博导级审查者的回信。
+
 ### 2026-07-12（续25）· 博导级复审核验（39/42 CONFIRMED、0 REFUTED）+ 当日勘误二；五 F′ 待 owner 裁决
 
 **Status.** 收到对 v4.1 + 回信 + #37 + 检查报告的博导级对抗复审（回信诚意 ACCEPT、四勘误 ACCEPT、
