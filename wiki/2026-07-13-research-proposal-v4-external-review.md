@@ -13,6 +13,8 @@ evidence_grade: "全部先验数字带 claim-ledger ID（C-* / HB-*）；status:
 >
 > 本文发布当日收到一份对抗式方法学与研究诚信审查（`2026-07-12-research-proposal-v4-adversarial-integrity-review.md`，同 wiki 可见）。我方以 5 路独立复核代理对其 42 项可核验主张逐条核验：**37 CONFIRMED / 5 PARTIAL / 0 REFUTED**。以下四处为本文**事实性错误**，即日更正并对外生效；设计级修订（S3 成本门、接口契约、TFRL 身份、统计族等）属 owner 裁决事项，将以 v4.1 发布。**在 v4.1 发布并完成签字前，本文不得被引用为可签字方案或已通过评审的方案。**
 >
+> **（2026-07-12 更新）v4.1 已按 owner 四项裁决重构发布：`2026-07-12-research-proposal-v41-external-review.md`（一致性检查 RELEASE-READY，冻结检查工件 `docs/checks/v41-conformance-report.md`）。本文自此仅作历史记录，评审请以 v4.1 为准。**
+>
 > 1. **C-MINDS-V2 证据等级更正**：本文 §1.4 / §7.2 写为"已验、valid"。权威 claim ledger 状态为 **directional**（Stage-1 假设级；composite candidate-card 处理，含 card 文本与 eval transcript 重叠 caveat，+24.6pp 不能归因于卡 schema 本身）。一切 "valid" 字样作废。该升级为定稿协调 AI 在"调和双标签"时所写——在审查方已明确告知"directional 不得升级"之后——责任在协调层，特此具名承认。
 > 2. **C-KEEP（24% 采纳）降级为 unverified**：claim ledger 中无此条目（工件溯源与 mint 未完成）。该数字不得作为设计依据；§7.3 相关论证等待正式 mint 后重述。
 > 3. **C-T7 引用作废**：ledger 状态 invalid（信息泄漏语境，明令禁止作正向证据）。本文以其效应方向作"召回优先"的动机，违反本文自设引用规则（frontmatter/§附录）。C-T7 仅保留为失败史；"召回优先"降格为待检验假设。

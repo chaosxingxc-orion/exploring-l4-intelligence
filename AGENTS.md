@@ -12,13 +12,14 @@ knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time o
 
 | # | Work repo (under `projects/`) | Package | Role | Focus | Status |
 |---|---|---|---|---|---|
-| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) | 🟡 skeleton → active |
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | **Pattern reference** | mature training-free reward/eval machinery W4 reuses (best-of-N, reward-guided decoding, reranking) | 🟢 mature |
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | **Primary study** | frozen-core RDU front-end knowledge system + reward-guided trajectory selector (ρ, G0); proposal v4.1 pending signature | 🟢 mature · primary |
+| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | Separate work (repositioned 2026-07-12) | frozen omni embedding utility (L0/L1); fresh proposal pending (#29) | 🟡 skeleton → repositioning |
 | W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 skeleton |
 | W3 | `speech-mllm-multitask-rl` | `multitask_rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 skeleton |
 
-**W4 is the flagship first study; W1 is the mature training-free _pattern_ reference** whose
-reward/eval machinery W4 reuses — mirror W1's structure and scripts when growing W2–W4. Each work's
+**W1 carries the current primary study; W4 is a separate, repositioned work** (2026-07-12 — see
+`wiki/Decision-Log.md` 续24 and the Thesis supersession note). W1's mature structure and scripts
+remain the pattern to mirror when growing W2–W4. Each work's
 entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main` loop whose RL body is currently a stub
 (`log.info("TODO: implement the RL loop ...")`).
 
@@ -161,7 +162,8 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
 
 - **Canonical onboarding is the root `README.md` / `README_CN.md`** — read it first.
 - **Project north star is `wiki/Project-Thesis.md`** — training-free RL to activate pretrained
-  knowledge; the flagship W4 disentangles a frozen omni model's speech embeddings. Read it right after
+  knowledge; the current primary study (W1) builds a frozen-core RDU knowledge system with a
+  reward-guided trajectory selector (see the 2026-07-12 supersession note there). Read it right after
   the README.
 - **Shared, durable team memory is the GitHub Wiki**, sourced from `wiki/` in this repo and published
   with `bash scripts/wiki-sync.sh`. Edit `wiki/*.md` (never only the web Wiki — it's a mirror that the

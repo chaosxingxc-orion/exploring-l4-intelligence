@@ -32,7 +32,28 @@ rewards**. No fine-tuning, no LoRA, no gradient on the base model.
   i.e. different task conditioning produces different, individually-better representations of the same
   audio *without changing the model*.
 
-## Flagship claim (W4)
+## 2026-07-12 supersession note — primary study & flagship framing
+
+> **What changed (owner ruling, Decision-Log 续24 / G0 2026-07-11).** The **series thesis above is
+> unchanged** — training-free, **weight-frozen reward-guided inference-time optimization** of a frozen
+> speech/omni MLLM. What is re-centered is *which work carries the primary study*:
+>
+> - **W1 (`speech-mllm-training-free-rl`) now carries the current PRIMARY study** — a front-end
+>   **Retrieve–Discover–Use (RDU)** knowledge subsystem over a frozen omni core **plus a reward-guided
+>   trajectory-selection operator**; primary metric = **selector realization rate
+>   ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)** (G0). Proposal **v4.1** is drafted and
+>   **pending external review + owner signature** — not yet a passed / Stage-2 plan.
+> - **W4 (`speech-mllm-omni-embedding-rl`) remains a SEPARATE work, repositioned per G0.** The
+>   task-conditioned **disentanglement** headline is dropped/downgraded to **L0/L1 embedding-utility
+>   studies** (readout availability / suppression / selective-readout limits); a fresh proposal is
+>   **pending ticket #29**. W4 still studies the omni's **own embedding space** — untouched by W1's
+>   demotion of the core 2048d hidden state to a white-box diagnostic arm.
+>
+> Lineage: G0 ruling [[2026-07-11-stage1-audit-response-and-rulings]] §4 · Decision-Log 续24 (2026-07-12)
+> · proposal [[2026-07-12-research-proposal-v41-external-review]]. Passages below tagged
+> **[superseded 2026-07-12 → see note]** are kept for history; this note is the current statement.
+
+## Flagship claim (W4) [superseded 2026-07-12 → see note above]
 
 > Training-free RL can steer a **frozen omni-embedding model** so that **different task-conditioned
 > embeddings of the same audio yield different, individually-better downstream performance** across
@@ -50,12 +71,15 @@ modality are argued in [[W4-Training-Free-RL-Feasibility]].
 
 The series is a progression, all grounded in training-free / lightweight RL that does not update base
 weights. **W4 is the flagship first study**; **W1 is the mature training-free *pattern* reference**
-whose verifiable-reward and evaluation machinery the others reuse.
+whose verifiable-reward and evaluation machinery the others reuse. [superseded 2026-07-12 → see note]
+**Current framing (2026-07-12):** W1 carries the primary study — RDU + reward-guided selector, ρ per
+G0; W4 is a separate work repositioned to L0/L1 embedding-utility studies. See the supersession note
+above.
 
 | # | Work (repo) | Role | Focus |
 |---|---|---|---|
-| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings across content/ASR+ST, speaker-ID, emotion/SER, language+intent |
-| **W1** | `speech-mllm-training-free-rl` | **Pattern reference** | the mature, reusable training-free reward/eval machinery (best-of-N, reward-guided decoding, reranking) |
+| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** [superseded 2026-07-12 → see note]; now a **separate work, repositioned per G0** | training-free RL on a frozen omni model's own embeddings — disentanglement headline dropped → L0/L1 embedding-utility studies (fresh proposal pending #29) |
+| **W1** | `speech-mllm-training-free-rl` | **Pattern reference → now carries the primary study** (2026-07-12) | mature, reusable training-free reward/eval machinery (best-of-N, reward-guided decoding, reranking); primary study = RDU front-end knowledge system + reward-guided trajectory selector (ρ per G0), proposal v4.1 pending signature |
 | W2 | `speech-mllm-efficient-rl-alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment |
 | W3 | `speech-mllm-multitask-rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
 
@@ -90,7 +114,25 @@ and [[Decision-Log]] for why the series was re-centered on this thesis.
   **任务条件**下（内容/ASR+ST、说话人、情感/SER、语言+意图）变得可分离、且各自在对应下游任务上更强
   ——即不改模型、仅靠不同条件化即可得到不同且更好的表示。
 
-### 旗舰科学主张（W4）
+### 2026-07-12 取代说明 — primary study 与旗舰框架
+
+> **变更（owner 裁决，Decision-Log 续24 / G0 2026-07-11）。** 上文**系列主旨不变**——免训练、
+> **权重冻结的 reward-guided 推理时优化**。改变的是**哪个工作承载 primary study**：
+>
+> - **W1（`speech-mllm-training-free-rl`）现承载当前 primary study**——冻结 omni 核心之上的前端
+>   **检索–发现–使用（RDU）**知识子系统 **+ 一个 reward-guided 轨迹选择算子**；primary 指标 =
+>   **selector 实现率 ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**（G0）。提案 **v4.1** 已起草，
+>   **待外审 + owner 签字**，尚未通过评审、未进 Stage-2。
+> - **W4（`speech-mllm-omni-embedding-rl`）仍为独立工作、按 G0 重定位。** task-conditioned
+>   **disentanglement** 头条已弃/降级为 **L0/L1 嵌入效用研究**（readout availability / suppression /
+>   selective-readout limits）；fresh proposal **待票 #29**。W4 研究对象仍是 omni **自身嵌入空间**，
+>   不受 W1 把核心 2048d 隐态降为白盒诊断臂影响。
+>
+> lineage：G0 [[2026-07-11-stage1-audit-response-and-rulings]] §4 · Decision-Log 续24（2026-07-12）·
+> 提案 [[2026-07-12-research-proposal-v41-external-review]]。下文标 **[superseded 2026-07-12 → see note]**
+> 者保留作历史，本说明为现行陈述。
+
+### 旗舰科学主张（W4）[superseded 2026-07-12 → 见上方取代说明]
 
 > 免训练 RL 可以引导一个**冻结的 omni 嵌入模型**，使**同一段音频在不同任务条件下的嵌入产生不同、且
 > 各自更优的下游表现**，覆盖内容/ASR+ST、说话人、情感/SER、语言+意图——从而证明：仅靠奖励激活，就能
@@ -106,3 +148,7 @@ and [[Decision-Log]] for why the series was re-centered on this thesis.
 **W1 是成熟的免训练「范式」参考**，其可验证奖励与评测机制被其余工作复用。各工作的角色与重心见上方
 英文表（不重复表格）。仓库结构与共享库见 [[Architecture]]，模型与数据见 [[Data-and-Assets]]，系列为何
 重定到此主旨见 [[Decision-Log]]。
+
+> **现行框架（2026-07-12，取代上文"W4 是旗舰首发"表述）**：W1 承载 primary study（RDU + reward-guided
+> selector，ρ per G0，提案 v4.1 待签字）；W4 为独立工作、按 G0 重定位为 L0/L1 嵌入效用研究（fresh
+> proposal 待 #29）。详见本页顶部 2026-07-12 取代说明。

@@ -2,17 +2,24 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-11.
-> 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4。
+> Last reviewed: 2026-07-12.
+> 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4；
+> primary study 现由 **W1** 承载（提案 [[2026-07-12-research-proposal-v41-external-review]] v4.1 待签字，
+> Decision-Log 续24）。
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
-| **W4** | `speech-mllm-omni-embedding-rl` | 🟡 Skeleton → **active (flagship)** | Flagship: training-free RL to disentangle a frozen omni model's embeddings; omni-embed model wired. |
-| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · pattern reference | Training-free reward/eval machinery W4 reuses; **holds the genuine reward-driven best-of-N result** (frozen Qwen3-Omni-30B via llama.cpp). |
+| **W4** | `speech-mllm-omni-embedding-rl` | 🟡 **Repositioned per G0** (separate work) | Disentanglement headline dropped → **L0/L1 embedding-utility studies** (readout / suppression / selective-readout limits); fresh proposal **pending ticket #29**; omni-embed model wired. |
+| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **now carries the primary study** | **Primary study (per G0): RDU front-end knowledge system + reward-guided trajectory selector; primary metric ρ realization rate.** Proposal **v4.1 drafted, awaiting external review + owner signature**; **M1 engineering base locked at W1 `20d45a8`, experiments frozen.** Also holds the genuine reward-driven best-of-N result (frozen Qwen3-Omni-30B via llama.cpp). |
 | W2 | `speech-mllm-efficient-rl-alignment` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 | W3 | `speech-mllm-multitask-rl` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 
-**W4 — Omni-embedding speech disentanglement (flagship, active).** Training-free RL (no weight/
+**W4 — Omni-embedding speech disentanglement (separate work; repositioned per G0, 2026-07-12).**
+_Status note (2026-07-12, Decision-Log 续24): W4 is no longer THE flagship — the disentanglement
+headline is dropped/downgraded to L0/L1 embedding-utility studies and a fresh proposal is pending
+ticket #29; W1 now carries the primary study. W4's object (the omni's own embedding space) is
+unchanged, and is untouched by W1 v4.1 demoting the core 2048d hidden state to a white-box diagnostic
+arm._ Training-free RL (no weight/
 structure change) to steer the frozen `omni-embed-nemotron-3b` so task-conditioned embeddings of the
 same audio give different, individually-better downstream performance across content/ASR+ST,
 speaker-ID, emotion/SER, and language+intent. First-proof substrate: CREMA-D (speaker + emotion on the
@@ -61,9 +68,16 @@ adversarially collapsed and reframed (2026-07-02) into an honest single-model tr
 review rounds → **CONVERGED, 0 surviving fundamental/major**; every number reproduced from committed
 artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): the step-1 rationality campaign — pre-registered criteria (freeze b19bff2), two pilots with freeze-before-run commits, a 6-charge hostile panel, and a unanimous sound-with-corrections /ars-reviewer verdict — ended in an owner-ratified NO-GO** (M3 killed by measurement F=0.38108 vs 0.01; M5 inconclusive-by-inert-instrument → frozen default; re-open only on r1/r2/r3). Single-model work continues via P-D. See [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]] and Decision-Log 2026-07-04.
 
-**W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
-(best-of-N, reward-guided decoding, reranking). The most complete work; its verifiable-reward/eval
-machinery is what the flagship W4 reuses. **Genuine best-of-N result (2026-07-02, committed
+**W1 — Training-free RL — now carries the primary study (per G0).**
+_Primary study (2026-07-12, Decision-Log 续24 / G0 §4): a front-end **Retrieve–Discover–Use (RDU)**
+knowledge subsystem over the frozen omni core **plus a reward-guided trajectory-selection operator**;
+primary metric = **selector realization rate ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**.
+Proposal **v4.1** ([[2026-07-12-research-proposal-v41-external-review]]) is **drafted, awaiting external
+review + owner signature** (not yet a passed / Stage-2 plan). **M1 engineering base locked at W1
+`20d45a8`; experiments frozen** pending the two S4 assets + external review + §12 signature. The
+mature reward/eval machinery below is the foundation the primary study builds on._ Gradient-free,
+reward-guided inference-time RL (best-of-N, reward-guided decoding, reranking). The most complete work;
+its verifiable-reward/eval machinery is what W4 also reuses. **Genuine best-of-N result (2026-07-02, committed
 `b7b4b0d`/`cd6aa92`/`f9d111a`):** frozen Qwen3-Omni-30B (Q8_0 GGUF, llama.cpp resident server,
 `-ngl 28` on the 24 GB laptop 5090) samples N transcripts per LibriSpeech test-other+snr5 utterance,
 a verifiable WER reward selects. Multi-seed (3 generation seeds pooled, n=144): **oracle-WER headroom
@@ -109,14 +123,23 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 > **这是活动状态板——更新最频繁的页面。** 任一工作的成熟度或近期计划变化时就更新它，重大变动同时记到
 > [[Decision-Log]]。最近复核：2026-07-11。
 
-各工作状态见上表。**W4（omni 嵌入语音解耦，旗舰，进行中）：** 免训练 RL（不改权重/结构）引导冻结的
+各工作状态见上表。**W4（omni 嵌入语音解耦，独立工作，按 G0 重定位，2026-07-12）：**
+_状态更正（2026-07-12，Decision-Log 续24）：W4 已非旗舰——disentanglement 头条降级为 L0/L1 嵌入效用
+研究，fresh proposal 待票 #29；primary study 现由 W1 承载。W4 研究对象（omni 自身嵌入空间）不变，
+不受 W1 v4.1 把核心 2048d 隐态降为白盒诊断臂影响。_ 免训练 RL（不改权重/结构）引导冻结的
 `omni-embed-nemotron-3b`，使同一段音频在不同任务条件下的嵌入，在内容/ASR+ST、说话人、情感/SER、
 语言+意图上产生不同且各自更优的下游表现。首个验证底座为 CREMA-D（同一音频上的说话人+情感）。路线：
 数学可行性文档 + 逐因子算子决策 → CREMA-D 双因子验证闭环 → 各任务族扩展。详见
 [[W4-Training-Free-RL-Feasibility]]。
 
-**W1（免训练 RL，成熟范式参考）：** 免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），
-是最完整的工作，其可验证奖励/评测机制正是旗舰 W4 复用的地基。**真实 best-of-N 结果（2026-07-02，
+**W1（免训练 RL，现承载 primary study，per G0）：**
+_primary study（2026-07-12，Decision-Log 续24 / G0 §4）：冻结 omni 核心之上的前端**检索–发现–使用
+（RDU）**知识子系统 **+ reward-guided 轨迹选择算子**；primary 指标 = **selector 实现率
+ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**。提案 **v4.1**
+（[[2026-07-12-research-proposal-v41-external-review]]）已起草、**待外审 + owner 签字**（尚未通过、未进
+Stage-2）；**M1 工程基座锁定于 W1 `20d45a8`，实验冻结**。以下成熟奖励/评测机制即其地基。_
+免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），是最完整的工作，其可验证奖励/评测
+机制亦被 W4 复用。**真实 best-of-N 结果（2026-07-02，
 `b7b4b0d`/`cd6aa92`/`f9d111a`）：** 冻结 Qwen3-Omni-30B（Q8_0 GGUF，llama.cpp，24GB 5090 上
 `-ngl 28`）+ 可验证 WER 奖励选择；多种子（n=144）oracle headroom 在 N=8 达 +0.042 [0.029,0.056]、
 N≥4 显著；无标签 MBR 各 N 均不显著（以上为 macro-utterance 指标，**见下方 2026-07-11 更正**）。
