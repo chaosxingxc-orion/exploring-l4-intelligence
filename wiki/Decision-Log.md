@@ -6,6 +6,23 @@
 
 ---
 
+### 2026-07-12（续24）· owner 对 v4 审查的四项设计裁决（v4.1 重构令）
+
+**Decision（owner）.** ①（F-1/S3）否决协调者的"廉价触发器 + frontier"修复方案：**效果优先于成本**，
+前期不给自己添加过多约束；撤销一切成本类成功门（≥30% 调用降幅门、Pareto 支配主张移出确证家族），
+成本只作全量诚实计账（"不如一次性把事情作对"——计账口径一次定对，不再反复勘误），效率优化推迟至
+后期阶段。②（F-2）严格黑盒契约确认；检索输入特征**仍是语音向量**——由独立冻结 embedder
+（GLAP/omni-embed-nemotron）产生，属外挂系统组件（如同 KB 本身），不违反核心接口契约（契约约束
+的是对核心 API 的要求，不是系统外挂件）；核心 2048d 隐态降为白盒诊断臂；**此调整不触碰 W4 叙事
+逻辑**（W4 为独立工作，研究对象是 omni 自身嵌入空间）。③（F-3）走 **Path B**：K 条
+rewrite–retrieve–deliver–answer 轨迹 + 可部署 verifiable reward 选择 + 等预算对照
+（random/MBR/单次 RDU），恢复 G0 ρ 主问题为同一对象（#27 Lean 定理与 Python selector 同对象）。
+④（F-4 + custody）身份刷新须**详细认真、保证事务一致性**（Thesis / Per-Work-Status / lineage 同步
+刷新）；**否决审查者的"全部锁死"路线**（独立 custodian、commit–reveal、burn 记录等一并否决，含
+协调者建议的最小 commit–reveal）——替代标准：**tutorial 级可复现**（第三方 step-by-step 跑出全部
+宣称结果）+ 零数据集泄漏 + 零学术欺诈；"我们是在做研究而不是做复杂的系统工程"。确定性脚本 +
+固定种子（续21-B①）维持不变。
+
 ### 2026-07-12（续23）· v4 对抗式诚信审查核验（37/42 CONFIRMED、0 REFUTED）+ 24h 内勘误发布
 
 **Status.** 收到 `2026-07-12-research-proposal-v4-adversarial-integrity-review.md`（REJECT/NO-GO，
