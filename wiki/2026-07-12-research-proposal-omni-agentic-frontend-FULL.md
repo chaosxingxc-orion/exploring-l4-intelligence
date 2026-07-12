@@ -2,7 +2,7 @@
 title: "Research Proposal（完整版 v3，供 reviewers 审阅）：Omni Agentic System 的前端多模态知识体系——以业务效果为裁判的检索·发现·使用（RDU）"
 date: 2026-07-12
 stage: "1-problem-definition → 申请进入 Stage-2 预注册"
-status: "DRAFT-FULL v3.1（续18 单一接口契约清扫完成）— 未签署、签署前零实验；本版为供 reviewers 审阅的完整展开，supersedes v2.1 作为 review copy，v2.1 仍作为决策骨架（decision skeleton）保留"
+status: "DRAFT-FULL v3.2（13 项 walkthrough 裁定并入）— 待评审团复核 + owner 签字；本版为供 reviewers 审阅的完整展开，supersedes v2.1 作为 review copy，v2.1 仍作为决策骨架（decision skeleton）保留"
 supersedes: 2026-07-12-research-proposal-omni-agentic-frontend-v2.md
 decision_skeleton: 2026-07-12-research-proposal-omni-agentic-frontend-v2.md
 verdict_vocabulary: "六级状态制（ACKNOWLEDGED→DECIDED→TICKETED→IMPLEMENTED→VERIFIED→PUBLISHED）；证据引用一律带 claim-ledger ID（docs/claim_ledger.yaml + survey HB-*）；status: valid|directional 者方可引，directional 一律标 Stage-1 假设级；无 ledger ID 的数字 = unverified"
@@ -83,7 +83,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 后融合正典由 **NTU-新加坡 ⟷ NVIDIA ⟷ IBM 的 GER 集群**主导（Yuchen Hu、Chen Chen、Eng Siong Chng、Chao-Han Huck Yang、Pin-Yu Chen；HyPoradise NeurIPS2023 arXiv:2309.15701 **[已弃用]**、RobustGER ICLR2024 arXiv:2401.10446 **[已弃用]**、ClozeGER ACL2024 arXiv:2405.10025 **[谱系]**、GenSEC SLT2024 arXiv:2409.09785 **[已弃用]**），**剑桥 CUED**（Ma / Gales / Knill）持 training-free 冻结分析线。对我方最 load-bearing 的裁定是**约束选择安全、自由改写陷阱**：N-best 受约束 closest-mapping（冻结 ChatGPT，1-shot 6.24 vs baseline 6.90、oracle 4.59；剑桥 arXiv:2307.04172 **[谱系]**；**2025+ 再锚**：SEAL arXiv:2501.08421，2025-01——"a simpler constrained decoding strategy reduces LLM hallucinations"，把受约束解码立为安全可部署原语；LIR-ASR arXiv:2509.15095，2025-09——去掉约束令误差近乎翻倍，即约束=安全的反证）受 oracle 硬封顶、永不幻觉、training-free 可用；而自由改写 GER 在强低-WER 基线上**灾难劣化**（Apple，arXiv:2405.15216 **[已弃用]**：LibriSpeech 2.2/5.3 → Llama-70B 0-shot 8.8/13.0，幻觉率 3–12%；**2025+ 再锚**同上 LIR-ASR / arXiv:2501.15310），GER 的 −40~−77% 大数**全是 fine-tuned**（HyPoradise 系）。因此 owner 将后端**收编为 reward 基础设施**——只保留受约束选择 / 误差去相关信号，不立后融合研究线；**δ_corr 引 ROVER（Fiscus 1997 **[谱系]**）"互补错误"谱系作借用基础设施**（28 年前的正典祖先），从本提案定理约束清单中移除，**不作理论贡献主张**（panel R4-MAJOR-5 修复；见 §7、§8）。**认账**：omni 自池 training-free 二遍解码本身确是空白（正典 N-best 源皆经典 ASR、纠错器皆独立文本 LLM），但我方**不以此空白立方向**——只把 logprob@8 端点当作 reward 信号的跨域标定（**C-ASR-V2**，directional）。
 
-> **⚠ 新鲜度审计发现（TOPIC 2，ANCHORED-WITH-REVISION，待 owner 复核）**：「约束选择安全 / 自由改写陷阱」的**大原理**已被 2025 一手证据双向再锚（SEAL 2501.08421 立约束=安全、LIR-ASR 2509.15095 反证去约束翻倍误差），但**没有任何 2025 一手研究直接跑「受约束 N-best 选择/closest-mapping 完胜自由改写」的正面 head-to-head**——那条最贴合的直接证据仍停在 2023–2024（剑桥 2307.04172 / 2409.09554、Amazon TAP 2309.15649）。且剑桥 2409.09554（2024）发现：当 LLM 足够强（GPT-4）时，**无约束**解码在部分集上可**超过 N-best oracle**。故「一律约束」并非普适，而是**依模型能力 / 依 regime**——约束选择的安全优势在 ASR 核心已强、头空小、幻觉风险高（即 W4 的 regime）时最大。建议在本节与 §7 把该原语的适用性显式写为 **regime-conditional，而非普适**，勿把它当作跨能力恒真的结论。
+> **⚠ 新鲜度审计发现（TOPIC 2，ANCHORED-WITH-REVISION，已裁定采纳 2026-07-12）**：「约束选择安全 / 自由改写陷阱」的**大原理**已被 2025 一手证据双向再锚（SEAL 2501.08421 立约束=安全、LIR-ASR 2509.15095 反证去约束翻倍误差），但**没有任何 2025 一手研究直接跑「受约束 N-best 选择/closest-mapping 完胜自由改写」的正面 head-to-head**——那条最贴合的直接证据仍停在 2023–2024（剑桥 2307.04172 / 2409.09554、Amazon TAP 2309.15649）。且剑桥 2409.09554（2024）发现：当 LLM 足够强（GPT-4）时，**无约束**解码在部分集上可**超过 N-best oracle**。故「一律约束」并非普适，而是**依模型能力 / 依 regime**——约束选择的安全优势在 ASR 核心已强、头空小、幻觉风险高（即 W4 的 regime）时最大。**owner 2026-07-12 裁定采纳**：本节与 §7 把该原语的适用性显式写为 **regime-conditional，而非普适**，不作跨能力恒真的结论。
 
 ### 2.3 主动检索（active retrieval）：FLARE / Self-RAG 谱系与 S3 的迁移问题
 
@@ -93,11 +93,11 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 补足检索键模态谱与再听前沿：**音频键 / 跨模态检索是最佳拟合**（BR-ASR AcousticBias、VQ-RAG、GLCLAP、M2R-Whisper、Locate-and-Focus），避开"转写-bootstrap 失效"；但 BR-ASR 自身的赢家实为**文本键（TextualBias，更 OOV-鲁棒、更少同音命中）**——这一**分化答案恰恰不利于"omni 嵌入激活"的旗舰叙事**，故 H1（audio-direct vs own-ASR 级联）在文献里**已被差异化回答**，我方按**"training-free 约束下的确认性复现"而非发现**来定位（panel R4-MAJOR-3 修复）。**再听（re-listening）**是当前前沿（ClozeGER arXiv:2405.10025 **[谱系]** / AVGER arXiv:2501.04038——"Listening and Seeing Again"，2025-01，audio-visual GER 用 Q-former 多模态同步编码器把源信号喂回纠错器、LRS3 相对 WER −24%——把源音频喂回纠错器），Qwen3-Omni 天然可再听——但令 reward 音频接地，**Information-Boundary Guard 适用**（验证器不得见 golden 转写）。
 
-> **⚠ 新鲜度审计发现（TOPIC 4，ANCHORED-带模态注记，待 owner 复核）**：AVGER（arXiv:2501.04038）已给「再听 > 纯文本纠错」一个可引的 2025 一手 ID（+24% 相对 WER），但它是 **audio-VISUAL**；同期唯一另一份 2025 再听一手 SEAL（2501.08421）走的是 **speaker-error** 轴（24–43% SER↓）。**纯音频（无视觉）再听、直接针对 WER 的 head-to-head 仍主要靠 2024 的 ClozeGER 锚定**。若本提案在 §7 主张「再听是 WER reward 层的最强杠杆」，须显式标注：该「音频-only-for-WER」切片的 2025 一手证据偏薄，最贴合的新鲜证据是邻模态（视听 / 说话人轴）。**同音 / 近音干扰污染**是音频相似检索的 #1 已证失效（BR-ASR DCL、RECAST 硬负挖掘；HB-21）——任何 retrieve-then-bias selector 须含**显式 precision / 去相关项**，正是理论轨要求的"界定问题边缘的显式约束"。
+> **⚠ 新鲜度审计发现（TOPIC 4，ANCHORED-带模态注记，已裁定采纳 2026-07-12）**：AVGER（arXiv:2501.04038）已给「再听 > 纯文本纠错」一个可引的 2025 一手 ID（+24% 相对 WER），但它是 **audio-VISUAL**；同期唯一另一份 2025 再听一手 SEAL（2501.08421）走的是 **speaker-error** 轴（24–43% SER↓）。**纯音频（无视觉）再听、直接针对 WER 的 head-to-head 仍主要靠 2024 的 ClozeGER 锚定**。**owner 2026-07-12 裁定采纳**：本提案在 §7 主张「再听是 WER reward 层的最强杠杆」时须显式标注：该「音频-only-for-WER」切片的 2025 一手证据偏薄，最贴合的新鲜证据是邻模态（视听 / 说话人轴）。**同音 / 近音干扰污染**是音频相似检索的 #1 已证失效（BR-ASR DCL、RECAST 硬负挖掘；HB-21）——任何 retrieve-then-bias selector 须含**显式 precision / 去相关项**，正是理论轨要求的"界定问题边缘的显式约束"。
 
 ### 2.5 定位总述：零训练 omni agentic 系统的效果主张
 
-一句话：**我方不主张任一段的机制新颖，而主张在一个零训练、闭源 API 兼容的 omni agentic 系统上，把 RDU 三段精心组织后取得业务效果**——对裸核心标准用法基线 ≥10% 相对、全家族校正后可靠、边界清白，并在系统复杂度阶梯上相对平凡知识供给（long-context 塞入、own-ASR 朴素级联）有可靠净增益。与每条先行工作的关系：偏置线（§2.1）——我方**零训练** vs 其**专训检索器**；后融合线（§2.2）——**收编为 reward 基础设施**，非方向；主动检索（§2.3）——**迁移问题**，非新方法；语音 RAG（§2.4）——**键模态答案已分化**，H1 为确认性复现。**效果是唯一最终裁判**（owner 裁定）：clean positive 不再是 v1 那种"5 队已复现"的必然结论，因为主张的对象是**系统级零训练效果**（而非任一机制），且成败以业务效果、而非"负结果也是贡献"的自我安慰来判定（后者仅保留给次级科学点 S1–S4）。
+一句话：**我方不主张任一段的机制新颖，而主张在一个零训练、闭源 API 兼容的 omni agentic 系统上，把 RDU 三段精心组织后取得业务效果**——对裸核心标准用法基线错误率相对下降 ≥10%（统一口径，见 §5.6）、全家族校正后可靠、边界清白，并在系统复杂度阶梯上相对平凡知识供给（long-context 塞入、own-ASR 朴素级联）有可靠净增益。与每条先行工作的关系：偏置线（§2.1）——我方**零训练** vs 其**专训检索器**；后融合线（§2.2）——**收编为 reward 基础设施**，非方向；主动检索（§2.3）——**迁移问题**，非新方法；语音 RAG（§2.4）——**键模态答案已分化**，H1 为确认性复现。**效果是唯一最终裁判**（owner 裁定）：clean positive 不再是 v1 那种"5 队已复现"的必然结论，因为主张的对象是**系统级零训练效果**（而非任一机制），且成败以业务效果、而非"负结果也是贡献"的自我安慰来判定（后者仅保留给次级科学点 S1–S4）。
 
 ### 2.6 引用新鲜度合规声明（Citation-Freshness Compliance）
 
@@ -121,7 +121,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 **NEEDS-DATE-CHECK 六条**：4 条以 ≥2025 一手落定并写入 FULL——AVGER **arXiv:2501.04038**（2025-01，§2.4）、GLAP **arXiv:2506.11350**（2025-06，§4.3）、omni-embed-nemotron **arXiv:2510.03458**（2025-10，§4.3）、LCO-Omni **arXiv:2510.11693**（2025-10）+ MAEB **arXiv:2602.16008**（2026-02，§4.3）。**2 条 survey-scoped 未决**（只在附录 A、不在 FULL）：SLLM 列表规模研究 arXiv:2604.12398（ID 形态异常，需确认非转写错）、base-model reports HB-33（Qwen2-Audio 部分 pre-2025、报告 PDF 转换失败未穷尽确认），二者随 survey 顶注记留作后续核验。
 
-**⚠ 触发的方向修正标记（3 处，均已就地加 ⚠ 注，待 owner 复核；本合规工作不擅自改方向）**：
+**⚠ 触发的方向修正标记（3 处，均已就地加 ⚠ 注；owner 2026-07-12 已裁定采纳现有措辞——本合规工作本身不擅自改方向，措辞的采纳由 owner 单独裁定）**：
 1. **§2.2（TOPIC 2，ANCHORED-WITH-REVISION）**——「约束选择安全 vs 自由改写陷阱」大原理有 2025 双向锚，但无 2025 一手跑正面 head-to-head；剑桥 2409.09554（2024）显示强 LLM（GPT-4）无约束可超 N-best oracle → 该原语适用性应写为 **regime/能力条件性，非普适**。
 2. **§4.3 + §3.3 S1（GLAP/nemotron/LCO/MAEB，ANCHORED-WITH-REVISION）**——「冻结 omni-own 键充分」应改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、SOTA 证据含一层轻量非音频对比精化而非纯 raw 2048d readout」。
 3. **§2.4（TOPIC 4，ANCHORED-带模态注记）**——「再听是 WER reward 层最强杠杆」的 2025 一手证据为**邻模态**（AVGER 视听 / SEAL 说话人轴）；纯音频-for-WER 切片仍主要靠 2024 ClozeGER，须显式标注证据偏薄。
@@ -138,22 +138,22 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 > 以冻结 Qwen3-Omni-30B 为核心（科学载具；接口按闭源 API 兼容层约束）的 omni agentic system，加装前端多模态知识子系统（检索-发现-使用三段，组件异构、全部冻结使用），能否在知识依赖型语音任务上，对**裸核心标准用法基线（bare-core baseline）**取得 **≥10% 相对（relative）**、全家族校正后统计可靠、边界清白的业务效果提升？并在**系统复杂度阶梯（sophistication ladder）**上，精心组织的 RDU 配置相对平凡知识供给（long-context 塞入、own-ASR 朴素级联）是否有可靠净增益（net gain，组织智慧的次级主张）？
 
-这是一个**双主张（dual-claim）结构**：(a) **头号主张** = 最优 RDU 配置 vs 裸核心基线，相对 ≥10%；(b) **阶梯主张** = 最优 RDU vs 平凡供给臂（long-context 全塞入 / own-ASR 朴素级联的较优者）的可靠净增益，用以裁定「增益是否归因于 RDU 的组织智慧，而非仅仅来自任何知识供给」。
+这是一个**双主张（dual-claim）结构**：(a) **头号主张** = 最优 RDU 配置 vs 裸核心基线，错误率相对下降 ≥10%（统一口径，见 §5.6）；(b) **阶梯主张** = 最优 RDU vs 平凡供给臂（long-context 全塞入 / own-ASR 朴素级联的较优者）的可靠净增益，用以裁定「增益是否归因于 RDU 的组织智慧，而非仅仅来自任何知识供给」。
 
 - **成功语义（win-design）**：达标 → 系统主张成立，对外效果故事 = 「零训练前端追平/超越需专训检索器的 pipeline」（trained-frozen 对照臂支撑，见 S1）。
-- **失败语义**：不达标 → 进入**系统设计迭代循环**（§9 预算界定的 pivot 规则，Stage-2 内 ≤2 轮、每轮 owner 批准），耗尽迭代预算仍不达标才由 owner 决定是否转向边界性结论。**「负结果也是贡献」的表述禁止用于主问题**——主问题按去赢设计，不设「两头可发表（publishable-either-way）」的自我安慰盾牌；该表述仅保留给次级科学点 S1–S4。（本条明确不采纳 v1 敌对评审团 R4 FUND-1/2 的「把 frozen-key 升为可两头发表的 primary」建议——owner 已 overrule；但评审团对各 estimand 的**修复**全部并入，见 §12 映射。）
+- **失败语义**：不达标 → 进入**系统设计迭代循环**（§9 预算界定的 pivot 规则，Stage-2 内 ≤5 轮、每轮 owner 批准，2026-07-12 由 2 轮上调），耗尽迭代预算仍不达标才由 owner 决定是否转向边界性结论。**「负结果也是贡献」的表述禁止用于主问题**——主问题按去赢设计，不设「两头可发表（publishable-either-way）」的自我安慰盾牌；该表述仅保留给次级科学点 S1–S4。（本条明确不采纳 v1 敌对评审团 R4 FUND-1/2 的「把 frozen-key 升为可两头发表的 primary」建议——owner 已 overrule；但评审团对各 estimand 的**修复**全部并入，见 §12 映射。）
 - **合规口径（compliance）**：组件「冻结使用（frozen-use）」= 我方不训练任何参数（零 LoRA、零投影、零 adapter）；上游预训练组件（含 trained-frozen 检索器如 GLAP / nemotron）照 **LLMLingua-2 先例**（Pan et al. 2024, arXiv:2403.12968 **[标准]**——作披露惯例而非效果论据：方法在部署侧 training-free，但如实披露其压缩器为上游训练所得）标注为「用法 training-free、非 training-free-by-construction」，不作为 by-construction 证据。若任一环节须训练一个薄投影才能达标，则如实报告为 training-free 检索的**负结果**，绝不静默替换。
 
 ### 3.2 主效果假设 H-sys（primary）
 
-- **Estimand**：最优 RDU 配置相对基线的**相对改善百分比**（单尺度），主聚合口径 = 跨集固定效应（cross-dataset fixed effect）；DerSimonian-Laird 随机效应仅作参考（k=3–4，τ² 不可靠，panel R1-m1 处置）。
-- **决策规则（decision rule，panel F1/#4/M6 修复）**：一律相对尺度单门；**per-dataset SESOI 数值表**预注册于统计节（各集基线水平 → 10% 相对换算的绝对值，取代 v1「0.05 绝对 ≈ 10–15% 相对」的跨集伪不变量）；主判定 = 相对 ≥10% 且家族校正后 CI 下界越过该集 SESOI。H-sys 家族 = 最优配置 vs 裸基线（1）+ 阶梯对比（2）= **3 项**，连同 S1–S4 与闭卷锚点共 **15 项全枚举**进 Holm/max-T（表见 §5.6），「显著」必注家族。**交互模型预注册**（panel M3/#13）：键×递送交互 CI 宽度门控主效应解读，H-sys 赢家按**格级（cell-level）**估计选择而非边际估计。cluster bootstrap（group_key；无组集如实回退）。
-- **双主张裁定**：**go = H-sys-a**（vs 裸基线，相对 ≥10%，家族校正 CI 下界越 SESOI）于确证层达标；**H-sys-b（阶梯净增益）单独裁定**——若最优 RDU 对两条平凡供给臂的净增益家族校正 CI 下界均 >0 → 「组织智慧」叙事挣得；若仅 H-sys-a 达标而阶梯净增益为 null → 系统有效但增益归因于「知识供给本身」而非 RDU 组织，如实降级叙事，**不 kill H-sys-a**。闭卷锚点改为 **within-item 配对对比**（同一音频，KB 供给 vs 保留，panel M9/#9 修复），作为家族第 15 项。
+- **Estimand**：最优 RDU 配置相对基线的**错误率相对下降百分比（relative error-rate reduction，2026-07-12 owner 裁定统一口径，定义见 §5.6）**（单尺度），主聚合口径 = 跨集固定效应（cross-dataset fixed effect）；DerSimonian-Laird 随机效应仅作参考（k=3–4，τ² 不可靠，panel R1-m1 处置）。
+- **决策规则（decision rule，panel F1/#4/M6 修复；2026-07-12 尺度统一为错误率相对下降）**：一律错误率相对下降尺度单门；**per-dataset SESOI 数值表**预注册于统计节（各集基线错误率 → 10% 相对下降换算的绝对当量，取代 v1「0.05 绝对 ≈ 10–15% 相对」的跨集伪不变量）；主判定 = 错误率相对下降 ≥10% 且家族校正后 CI 下界越过该集 SESOI。H-sys 家族 = 最优配置 vs 裸基线（1）+ 阶梯对比（2）= **3 项**，连同 S1–S4 与闭卷锚点共 **15 项全枚举（v3.1 暂定基线；2026-07-12 起须待 §5.6 预注册参考系资格规则于 M2 dev 测量后重新枚举——枚举纪律本身不变：全表进 Holm/max-T、不得事后收窄，变的只是成员集）**进 Holm/max-T（表见 §5.6），「显著」必注家族。**交互模型预注册**（panel M3/#13）：键×递送交互 CI 宽度门控主效应解读，H-sys 赢家按**格级（cell-level）**估计选择而非边际估计。cluster bootstrap（group_key；无组集如实回退）。
+- **双主张裁定**：**go = H-sys-a**（vs 裸基线，错误率相对下降 ≥10%，家族校正 CI 下界越 SESOI）于确证层达标；**H-sys-b（阶梯净增益）单独裁定**——若最优 RDU 对两条平凡供给臂的净增益家族校正 CI 下界均 >0 → 「组织智慧」叙事挣得；若仅 H-sys-a 达标而阶梯净增益为 null → 系统有效但增益归因于「知识供给本身」而非 RDU 组织，如实降级叙事，**不 kill H-sys-a**。闭卷锚点改为 **within-item 配对对比**（同一音频，KB 供给 vs 保留，panel M9/#9 修复），作为家族第 15 项（是否留在重枚举后的家族表内，另受 §5.6 资格规则约束——闭卷锚点结构性走 within-item、不受资格规则的①②两条件门控，见 §5.6）。
 - **确证层裁决（confirmatory-layer adjudication）**：判定于确证层、**custodian 单通道单次消费、读取即 burn**；**探索层不触发任何 kill**（panel M2/#12），探索层输出仅为配置排序 + Phase-B 协议草案。
 
 ### 3.3 四个次级科学点（S1–S4）
 
-- **S1（frozen-key sufficiency，降级后的 v1 主问题）**。**动机**：冻结 omni 自身 2048d 隐态音频嵌入能否作为**零训练投影的检索键**（v1 旗舰内核，现降为次级）+ 组件选型依据 + 「激活」叙事证据。**Estimand**：omni-own 键 vs 专化冻结键 vs trained-frozen（nemotron）的检索质量（squtr 原生 R@k / nDCG）与端到端贡献。**家族**：3 键空间两两 = **3 项**。**反馈系统设计**：决定检索段键空间选型——若 omni-own 不足，系统换更强冻结组件继续，负结果仅记为 S1 边界，**不阻塞 H-sys**；预注册承诺——若须训练投影，报告为 training-free 的负结果（回应 panel FUND-2，且诚实对待 HB-26「off-the-shelf CLAP 词汇键已死 R@1≈0.1，赢家检索器多 purpose-trained」的激进赌注）。**⚠ 新鲜度审计（见 §4.3 ⚠ 注 + §2.6）**：一手 LCO-Embedding（2510.11693）/ MAEB（2602.16008）强制把「冻结 omni-own 键充分」改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、且 SOTA 证据含一层轻量非音频对比精化而非纯 raw readout」——S1 的「纯零适配 2048d readout 即足」措辞据此收紧，待 owner 复核。
+- **S1（frozen-key sufficiency，降级后的 v1 主问题）**。**动机**：冻结 omni 自身 2048d 隐态音频嵌入能否作为**零训练投影的检索键**（v1 旗舰内核，现降为次级）+ 组件选型依据 + 「激活」叙事证据。**Estimand**：omni-own 键 vs 专化冻结键 vs trained-frozen（nemotron）的检索质量（squtr 原生 R@k / nDCG）与端到端贡献。**家族**：3 键空间两两 = **3 项**。**反馈系统设计**：决定检索段键空间选型——若 omni-own 不足，系统换更强冻结组件继续，负结果仅记为 S1 边界，**不阻塞 H-sys**；预注册承诺——若须训练投影，报告为 training-free 的负结果（回应 panel FUND-2，且诚实对待 HB-26「off-the-shelf CLAP 词汇键已死 R@1≈0.1，赢家检索器多 purpose-trained」的激进赌注）。**⚠ 新鲜度审计（见 §4.3 ⚠ 注 + §2.6）**：一手 LCO-Embedding（2510.11693）/ MAEB（2602.16008）强制把「冻结 omni-own 键充分」改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、且 SOTA 证据含一层轻量非音频对比精化而非纯 raw readout」——S1 的「纯零适配 2048d readout 即足」措辞据此收紧，**owner 2026-07-12 已裁定采纳**该收紧措辞。
 - **S2（递送主效应）**。**动机**：递送形式是全项目最大已验杠杆（结构化 card 递送相对 +34.6%，5/5 过 Holm，**C-MINDS-V2**，directional）。**Estimand（panel F2/#5 修复，取代 v1「≥ 任意维度」的病态定义）**：单一预注册对比 = 递送主效应（card + 两轮 prompt 递送合并最优 vs flat）− 键模态主效应，**联合 CI**。**家族**：**1 项**。**反馈系统设计**：裁定使用段「组织」与检索段「键选择」谁承载更多效应，锁定递送形式。（「两轮 prompt 递送」= 预制两轮消息在**单次**生成调用内递送，非模型发起的工具往返，panel R3-MINOR 更名处置。）
 - **S3（发现段·两遍管线）**。**动机**：何时检索——全项目证据最薄段；定位 = active-retrieval（**FLARE**, Jiang et al. 2023, arXiv:2305.06983 **[谱系]** / **Self-RAG**, Asai et al. 2023, arXiv:2310.11511 **[谱系]**）向冻结 omni 的迁移。**Estimand + 出 mock 口径（panel F3-R3/#2 修复）**：触发式检索作为**独立 two-pass pipeline**（第一遍生成→取生成不确定度→决定检索→第二遍生成），在 mock 口径**之外**运行，不违反 `assert_no_adaptive_logic` 不变量。**双门判定（dual-gate，panel M4/#14 修复）**：增益差 **TOST**（margin 预注册，触发 vs 恒检索等增益）+ 调用降幅 **≥30% superiority** 检验，**两门皆须过**。**家族**：**2 项**。**反馈系统设计**：裁定触发式检索是否值一次额外生成遍（发现段配「触发」还是「恒检索」）；第一遍不确定度信号取**输出侧 m=3 采样自一致性一致率**（sampled self-consistency agreement rate），不再使用 logprob 阈值——logprob 类信号已退出系统设计，仅留 ledger 作工程诊断（见 §4.2、§7、续18）。
 - **S4（实体粒度实例；热词/上下文偏置）**。**动机**：热词偏置 = RDU 三段在实体粒度的具象（H5），retrieve-then-inject 被 ≥5 篇同族基座论文强证据支持为替代形态（附录 A §4）。**Estimand + 反答案注入（panel F3/#3 修复，规避 C-M3/C-T7 的 answer-injection 失效类）**：可部署列表 = **eval 前冻结的热词库经音频键检索的产出（outcome）**；「真词保证入列」的列表**降为 oracle 上界臂，永久标注不可部署**；B-WER 主指标（相对 ≥15% 靶，比 H-sys 更严）**以检索产出为条件**计算，真词命中如实记录、绝不保证。**H5a 单独报告**：检索召回 + **同音精度（homophone precision）**——BR-ASR RecallH / DCL 类比（HB-21），界定同音误注入率，作为收敛论证要求的显式 precision/去相关项。**家族**：列表长度扫描 {2,5,10,50}（4）+ 主对比（1）= **5 项**。测试床 = is21_deep_bias / AISHELL-NER / SLURP（附录 A 协议）。**反馈系统设计**：偏置列表由检索产出，oracle 臂降级；若三段管线不显著优于 full-list-stuffing → 检索式注入假设在实体粒度证伪，如实报负。
@@ -190,7 +190,7 @@ logprob 触发、`logit_bias` 加性偏置、GBNF 语法硬约束**不是系统�
 | **专化侧翼** | 实体粒度检索器 | 实体/语音学键 | 冻结使用；中文语音学算法不迁移（RECAST Hindi 论证），中文用学习跨模态检索器 | 附录 A §4（HB-24 = Phoneme-RAG arXiv:2409.15353 **[谱系]**；replacement-form 由 2025 BR-ASR/RECAST/Locate co-anchor） |
 | **own-ASR→文本级联** | 无音频键的键模态对照 | own-ASR 转写→文本检索 | 边界清白（转写部署可得，非泄漏）；**cascade ASR WER 作 covariate 报告**（panel R2-MINOR） | 附录 B §5 |
 
-> **⚠ 新鲜度审计发现（GLAP/nemotron/LCO-Omni/MAEB，ANCHORED-WITH-REVISION，待 owner 复核）**：组件选型先验（GLAP=多语种语音键 / nemotron=NC-许可天花板 / 冻结 omni 自身状态可检索）现已全部由 2025+ 一手锚定（GLAP 2506.11350、Nemotron 2510.03458、LCO-Embedding 2510.11693、MAEB 2602.16008），内部 speech2vec 记忆笔记被**证实而非反驳**。但一手证据强制一处修正，须回传 S1（§3.3）框架：**旗舰赌注「冻结 omni 自身 2048d 嵌入是充分的 training-free 检索键」应改述为「是最强的廉价键，达到无音频训练的 SOTA，但 MAEB 均分仅约 50–52%（远未饱和），且该 SOTA 证据用了一层轻量非音频对比精化 + 投影，并非纯零适配的 raw 2048d readout」**。两个小数级事实（CLAP 基线近零 R@1；nemotron 精确 encode_query/encode_document API）因本次抓取受限仍属记忆笔记级，若需硬核验请另标。此 ~50–52% 头空正是「training-free RL 值得一搏」的现实效应量先验。
+> **⚠ 新鲜度审计发现（GLAP/nemotron/LCO-Omni/MAEB，ANCHORED-WITH-REVISION，已裁定采纳 2026-07-12）**：组件选型先验（GLAP=多语种语音键 / nemotron=NC-许可天花板 / 冻结 omni 自身状态可检索）现已全部由 2025+ 一手锚定（GLAP 2506.11350、Nemotron 2510.03458、LCO-Embedding 2510.11693、MAEB 2602.16008），内部 speech2vec 记忆笔记被**证实而非反驳**。但一手证据强制一处修正，须回传 S1（§3.3）框架：**旗舰赌注「冻结 omni 自身 2048d 嵌入是充分的 training-free 检索键」应改述为「是最强的廉价键，达到无音频训练的 SOTA，但 MAEB 均分仅约 50–52%（远未饱和），且该 SOTA 证据用了一层轻量非音频对比精化 + 投影，并非纯零适配的 raw 2048d readout」**。两个小数级事实（CLAP 基线近零 R@1；nemotron 精确 encode_query/encode_document API）因本次抓取受限仍属记忆笔记级，若需硬核验请另标。此 ~50–52% 头空正是「training-free RL 值得一搏」的现实效应量先验。
 
 `content_hash` 扩展至**嵌入器 SHA + revision + 量化 + 归一化配置 + 索引参数/top-k**，并断言**键==查询嵌入器 fail-closed**（panel M8/#8 修复，堵 C-PHASEA P0-4 的静默换空间 bug；详见 §6.2）。
 
@@ -198,7 +198,7 @@ logprob 触发、`logit_bias` 加性偏置、GBNF 语法硬约束**不是系统�
 
 **本地冻结核心 = 科学载具（science vehicle）**：Qwen3-Omni-30B Q8_0 GGUF via llama.cpp（`-ngl 28`，resident `llama-server`），数据/代码/种子全 pin，**确证层结果在此复现**（可复现性由此保证；owner 修正⑥）。
 
-**闭源可迁移性 = 价值主张（portability claim）**：真实价值场景 = 把闭源 API 搭成可验证、可闭环的系统。兑现 = **接口最小化设计**（§4.2 系统接口契约只用音频/文本进、文本出、多采样）+ **跨核心迁移冒烟（cross-core smoke）**——同一系统接口契约配置在第二核心上 1–2 集轻验作可迁移性证据（候选：MERaLiON-2 或一个闭源 API，时间线 Week-3）。二者分工明确：科学结论落在冻结本地核心（严格可复现），可迁移性作为价值证据由跨核心冒烟支撑，**不以单核心成立冒称通用**。
+**闭源可迁移性 = 价值主张（portability claim）**：真实价值场景 = 把闭源 API 搭成可验证、可闭环的系统。兑现 = **接口最小化设计**（§4.2 系统接口契约只用音频/文本进、文本出、多采样）+ **跨核心迁移冒烟（cross-core smoke）**——同一系统接口契约配置在第二核心上 1–2 集轻验作可迁移性证据（候选：MERaLiON-2 或一个闭源 API，对应 §11 里程碑 **M4 确证完成**阶段，2026-07-12 起时间线按里程碑门控 DAG、不设日历周）。二者分工明确：科学结论落在冻结本地核心（严格可复现），可迁移性作为价值证据由跨核心冒烟支撑，**不以单核心成立冒称通用**。
 
 ---
 
@@ -208,12 +208,12 @@ logprob 触发、`logit_bias` 加性偏置、GBNF 语法硬约束**不是系统�
 
 ### 5.1 数据集、主场与 per-dataset 基线（覆盖纪律：多集轻采样 dev n≈40–80）
 
-主场三集 = **squtr（corpus 侧重建后）/ heysquad / SQuAD-zh**；**闭卷锚点** vocalbench-knowledge（§5.6 within-item 配对，非独立 lift 靶，修复 panel #9）；**S4 实体测试床** = is21_deep_bias（英文正典）/ AISHELL-NER（中文正典）/ SLURP（检索原生 SLU）。全部音频已在盘（E: 盘 `SPEECHRL_DATA_DIR`）。下表的 dev 基线来自已冻结的 locked-group 工件（`_repro/baselines/*__qwen3-omni-30b-gguf__dev.locked.json`，seed 20260705，Q8_0 GGUF，`-ngl 28`；**C-BASELINES：directional**，Stage-1，勿当独立 held-out）：
+主场三集（**v3.1 暂定基线，待 §5.6 预注册参考系资格规则于 M2 dev 测量后确认——SQuAD-zh 大概率因基线 0.925≥0.85 退场为诊断状态，届时主场实为二集，见 §5.6/下表**） = **squtr（corpus 侧重建后）/ heysquad / SQuAD-zh**；**闭卷锚点** vocalbench-knowledge（§5.6 within-item 配对，非独立 lift 靶，修复 panel #9）；**S4 实体测试床** = is21_deep_bias（英文正典）/ AISHELL-NER（中文正典）/ SLURP（检索原生 SLU）。全部音频已在盘（E: 盘 `SPEECHRL_DATA_DIR`）。下表的 dev 基线来自已冻结的 locked-group 工件（`_repro/baselines/*__qwen3-omni-30b-gguf__dev.locked.json`，seed 20260705，Q8_0 GGUF，`-ngl 28`；**C-BASELINES：directional**，Stage-1，勿当独立 held-out）：
 
 | 数据集（角色） | dev 基线 mean (n) [ci95] | 度量 (K 型) | 头空判读 |
 |---|---|---|---|
 | **heysquad**（主场，主发力集） | **0.225** (40) [0.10, 0.35] | span/QA acc (K8) | 头空最大；C-T7 提醒此为 SQuAD 式抽取 QA，注入正确 passage 会退化为"抄答案"——deployable 臂必须以检索产出为条件（§6.1）。 |
-| **SQuAD-zh**（uro-bench，主场） | **0.925** (40) [0.825, 1.00] | QA acc (K8) | 近饱和；见 §5.6 SESOI 说明——10% 相对当量超天花板，不可达；仅作近饱和负头空检查，受 §9 oracle-headroom 退场规则约束。 |
+| **SQuAD-zh**（uro-bench，主场） | **0.925** (40) [0.825, 1.00] | QA acc (K8) | 近饱和；2026-07-12 起改按错误率相对下降口径，数值目标本身已可达（error 0.075→0.0675），但按 §5.6 **预注册参考系资格规则条件①**（闭卷 dev 基线需 <0.85）判定大概率**退场为诊断状态**——保留在覆盖列表内作近饱和负头空检查，移出家族表；不再受 §9 oracle-headroom 退场规则处理（该规则处理"oracle-retrieval 无增益"的另一类退场，二者独立、互不替代）。中文知识依赖覆盖改由 S4 AISHELL-NER 实体字段承载。 |
 | **squtr（corpus 侧）**（主场，检索原生） | **待定**（K9，corpus 重建后 1 真格打样；C-PHASEA invalid 的对象修复前不可打分） | 检索-QA (K9) | 唯一检索原生主场；SESOI 待首个合法真格后回填。 |
 | vocalbench-knowledge（闭卷锚点） | 0.8875 (80) [0.8125, 0.95] | QA acc (K8) | 近饱和；锚点=within-item（KB-供 − KB-留同题配对差），不做独立 10% 判定。 |
 | SLURP-intent（S4 邻） | 0.6452 (62) [0.516, 0.758] | intent acc (K6) | 中等头空，可支撑相对判定。 |
@@ -251,21 +251,25 @@ owner 第二轮裁定的基线哲学反转落地为阶梯，**不要求先把核
 
 ### 5.6 统计分析计划
 
-**单尺度（修复 panel #4/F1/F4）**：一律以**相对改善百分比**为主尺度，主判定 = 相对尺度单门 ≥10%（H-sys）/≥15% 相对 B-WER（S4）；**不设"绝对且相对"双门**（避免高基线集自相矛盾达标）。
+**单尺度（修复 panel #4/F1/F4；2026-07-12 owner 裁定统一为错误率相对下降）**：主判定尺度统一为**错误率相对下降（relative error-rate reduction）**——对准确率类指标（QA acc / intent acc）按 error = 1 − acc 换算后取相对下降，对本身即错误率的指标（B-WER/B-CER/WER）直接取相对下降；主判定 = 错误率相对下降 **≥10%**（H-sys）/**≥15%**（S4 B-WER，更严，§5.4 定义已是错误率口径、天然相容）。此统一口径取代 v3.1 的"相对改善百分比"，专为避免**高基线天花板悖论**——例如 SQuAD-zh acc=0.925，若按"accuracy 相对提升 10%"换算需 acc→1.0175（超天花板，导致"不可达又不能算失败"的自相矛盾）；改按错误率相对下降后，error 0.075→0.0675（acc→0.9325），目标落在天花板内、可判定（该集是否进入主参考系另受下方**资格规则**约束）。**不设"绝对且相对"双门**（避免高基线集自相矛盾达标）。
 
-**per-dataset SESOI 数值表（预注册附表）**：为可解释性与功效计算，把 10% 相对门槛换算为各集绝对当量（决策仍在相对尺度）：
+**预注册参考系资格规则（reference-frame eligibility rule，2026-07-12 owner 裁定；dev-only、confirmatory 数据之前判定）**：数据集要进入**主参考系（family table，Holm/max-T 家族）**，须**同时**满足：①**闭卷（closed-book）dev 基线 < 0.85**；②**知识头空（knowledge headroom = oracle-retrieval − bare-core，dev 测得）≥ 2×SESOI**（该集错误率相对下降 10% 绝对当量的 2 倍）。两条件均在**dev 阶段、任何确证数据之前**判定，不得用确证数据回填。不满足者**退场为诊断状态（diagnostic status）**——保留在覆盖列表内、继续测量与报告，但**移出家族表**，不参与 Holm/max-T 家族校正、不作为 H-sys/S1–S4 的主判定对象。
 
-| 数据集 | dev 基线 | 10% 相对 → 绝对当量 (目标水平) | 可达性 |
-|---|---|---|---|
-| heysquad | 0.225 | **+0.0225** (→0.2475) | 可达，头空充足 |
-| SQuAD-zh | 0.925 | +0.0925 (→**1.0175，超天花板**) | **不可达**；受 §9 退场规则，不能同时"达标又失败" |
-| vocalbench-knowledge（锚点） | 0.8875 | within-item 配对差，不设 10% lift 靶 | N/A |
-| SLURP-intent | 0.6452 | **+0.0645** (→0.7097) | 可达 |
-| squtr / SLURP-slot / is21 / AISHELL-NER | 待定 | 首个合法真格后回填（squtr 待 corpus 侧重建；S4 待列表冻结） | 待定（预留 sign-off 槽） |
+**诚实预告（projected consequence，非最终裁定）**：按当前 dev 基线，**SQuAD-zh（0.925）大概率因条件①（基线需 <0.85）不满足而退场为诊断状态**——即使按新错误率相对下降口径其数值目标本身已可达（见上），近饱和基线（≥0.85）意味着知识头空天然稀薄，不是「组织知识供给」的有意义检验对象。中文覆盖不因 SQuAD-zh 退场而缺失——**改由 S4 的 AISHELL-NER 实体字段承载**中文知识依赖信号。**最终名单以 M1/M2 阶段的 dev 测量结果为准**，此处仅作方向性预告。
 
-（SQuAD-zh 的不可达是诚实结果，非缺陷：0.925 近饱和 → 该集大概率触发 §9「oracle-retrieval 无增益 → 退出主场」，保留仅作近饱和负头空检查。）
+**per-dataset SESOI 数值表（预注册附表，2026-07-12 改按错误率相对下降口径重算 + 加资格判定列）**：为可解释性与功效计算，把 10% 错误率相对下降门槛换算为各集绝对当量（决策仍在相对尺度）：
 
-**15 项家族全枚举（修复 panel #11/M1；每假设一预声明家族，全表进 Holm/max-T）**：
+| 数据集 | dev 基线 (acc/WER) | 基线错误率 (1−acc 或原始 WER) | 错误率相对下降 10% → 绝对当量 (目标水平) | 资格规则判定（①基线<0.85 ②headroom≥2×SESOI，dev-only，判定于任何确证数据之前） |
+|---|---|---|---|---|
+| heysquad | 0.225 (acc) | 0.775 | **−0.0775 error**（→acc 0.3025） | ①过（0.225<0.85）；②headroom 待测 → 资格**待定**（M2 dev 判定） |
+| SQuAD-zh | 0.925 (acc) | 0.075 | −0.0075 error（→acc 0.9325，天花板内、数值可达） | ①**不过**（0.925≥0.85）→ **退场为诊断状态**（不论②，见上方诚实预告） |
+| vocalbench-knowledge（锚点） | 0.8875 (acc) | — | within-item 配对差，不设 10% lift 靶 | 结构性排除于资格规则外——闭卷锚点走 within-item 配对，非家族表候选，不受①②门控 |
+| SLURP-intent | 0.6452 (acc) | 0.3548 | **−0.03548 error**（→acc 0.68068） | ①过（0.6452<0.85）；②headroom 待测 → 资格**待定**（M2 dev 判定） |
+| squtr / SLURP-slot / is21 / AISHELL-NER | 待定 | 待定 | 首个合法真格后回填（squtr 待 corpus 侧重建；S4 待列表冻结） | ①②均待测 → 资格**待定**（预留 sign-off 槽，M2 dev 判定） |
+
+（SQuAD-zh 的退场是诚实结果，非缺陷：即使数值目标已可达，0.925 的近饱和基线仍判定其知识头空稀薄而退场为诊断状态，保留仅作近饱和负头空检查，不进家族表、不参与 Holm/max-T；与之前 v3.1"因超天花板而不可达"的表述不同——现在是**资格规则主动排除**，而非数值不可达。）
+
+**家族表——待资格规则落地后重枚举（2026-07-12 owner 裁定；枚举纪律不变，成员集待定）**：下表 15 项为 **v3.1 暂定基线（draft placeholder）**，签署前须待上方资格规则于 **M2** 完成全部数据集的 dev 测量与判定后**重新枚举**——退场为诊断状态的数据集所涉行（如 SQuAD-zh 相关的比较）须移出，家族规模可能小于 15；枚举纪律本身不变：全表进 Holm/max-T、"显著"必注家族、**一经预注册不得事后收窄**（修复 panel #11/M1；每假设一预声明家族）：
 
 | # | 假设族 | 对比 | 检验 |
 |---|---|---|---|
@@ -282,13 +286,13 @@ owner 第二轮裁定的基线哲学反转落地为阶梯，**不要求先把核
 | 14 | S4 | 检索式注入主对比 vs 全列表塞入 | superiority (≥15% 相对) |
 | 15 | 闭卷锚点 | within-item KB-供 vs KB-留 配对差（同音频同题） | paired |
 
-**Holm + max-T**：15 项按 Holm step-down（α=0.05）与 max-T（置换/自举最大统计量）双跑，"显著"必注所属家族与家族规模（吸取 C-ASR-V2 更正教训：曾把家族事后收窄为 4 selector×N=8 报"Holm 存活"，全网格实为 16–48 比较，更正后 neither 存活——**家族一经预注册不得事后收窄**）。
+**Holm + max-T**：上表 15 项（**v3.1 暂定，待资格规则于 M2 dev 测量后重新枚举，见上方家族表标题**）按 Holm step-down（α=0.05）与 max-T（置换/自举最大统计量）双跑，"显著"必注所属家族与家族规模（吸取 C-ASR-V2 更正教训：曾把家族事后收窄为 4 selector×N=8 报"Holm 存活"，全网格实为 16–48 比较，更正后 neither 存活——**家族一经预注册不得事后收窄**；重枚举属预注册前的资格判定，不属于"事后收窄"，二者不冲突）。
 
 **交互模型预注册（修复 panel #13/M3）**：预声明格级模型 `y ~ key + delivery + key×delivery + (1|group)`；H-sys 赢家**按格级估计**选择（非边际）；S2 主效应解读**以 key×delivery 交互 CI 宽度门控**——交互 CI 宽/主导时只报格级、不塌缩为边际（防"边际平均把键模态主效应稀释成 null 而错杀 S1"）。先验预期存在交互（不确定度触发只在好递送下有益；audio-direct 可能只在 card 下有益）。
 
 **cluster bootstrap（诚实回退）**：paired cluster bootstrap，group_key = 来源篇章 id（heysquad/SQuAD：Wikipedia passage）/ 说话人或场景（SLURP）；跨集以**固定效应为主**，DerSimonian-Laird τ²（k=3–4）**仅作参考不决策**（panel R1-m1 处置）。**无组键的集**：或补真组键、或不入确证层（修复 panel #7/M7）；不得以 item-level bootstrap 冒充组无泄漏。
 
-**功效诚实（panel #12/M2）**：dev n≈40、heysquad ci95 宽达 [0.10,0.35]（有效 cluster 数 20–45 而非 40），在 +0.0225 绝对当量上、Holm 校正 15 项后，排除 0 的功效低。**故探索层不触发任何 kill**（输出 = 配置排序 + Phase-B 协议草案）；**kill 仅在确证层**、以加大 n 的锁定 test 抽取后判定。
+**功效诚实（panel #12/M2）**：dev n≈40、heysquad ci95 宽达 [0.10,0.35]（有效 cluster 数 20–45 而非 40），在 **−0.0775 错误率绝对当量**（2026-07-12 改按错误率相对下降口径重算，取代 v3.1 的 +0.0225 accuracy 绝对当量）上、Holm 校正 15 项（**暂定，待 M2 重枚举**）后，排除 0 的功效低。**故探索层不触发任何 kill**（输出 = 配置排序 + Phase-B 协议草案）；**kill 仅在确证层**、以加大 n 的锁定 test 抽取后判定。
 
 ### 5.7 探索/确证防火墙 + 信标种子 custodian 协议（全文；修复 panel #6/#7/#12）
 
@@ -358,7 +362,7 @@ logprob 类白盒信号退出系统设计，其 Stage-1 标定记录保留于 le
 ## 9. 迭代 / 停止规则（效果优先；确证层专属 kill）
 
 1. **确证层 H-sys 达标** → 系统主张成立，进入 Stage-3 评估。
-2. **确证层不达标** → **系统迭代循环**：分解归因瓶颈段（检索/发现/使用）→ 修订组件/协议 → 重新探索；**预算 cap = Stage-2 内最多 2 轮迭代（每轮需 owner 批准，§13 slot 7）**，耗尽后 owner 复盘决定是否转向边界性结论。
+2. **确证层不达标** → **系统迭代循环**：分解归因瓶颈段（检索/发现/使用）→ 修订组件/协议 → 重新探索；**预算 cap = Stage-2 内最多 ≤5 轮迭代（每轮 owner 批准，§13 slot 7；2026-07-12 owner 裁定由原 2 轮上调）**，耗尽后 owner 复盘决定是否转向边界性结论。
 3. **oracle-retrieval 无增益的集** → 该集退出主场（瓶颈不在知识供给，非系统失败）。
 4. **确证层专属 kill（panel M12/F-firewall）**：探索层**不触发任何 kill**，输出 = 配置排序 + Phase-B 协议草案；一切 TOST/CI 判定只在 owner 签 Phase-B 后的 custodian 单通道确证层发生（cluster 有效 N=20–45，探索层 CI 不作 accept/reject）。
 5. **负结果纪律**："负结果也是贡献"**禁用于主问题**（v2.1 §0③）——H-sys 不达标只能进迭代循环，不自我安慰；**次级科学点 S1–S4 各自如实报告，正负皆入 claim_ledger，不影响 H-sys 判定路径**（S1 若 omni-own 键不足，系统换更强冻结组件继续，负结果仅记 S1 边界）。
@@ -367,7 +371,7 @@ logprob 类白盒信号退出系统设计，其 Stage-1 标定记录保留于 le
 
 | 风险 | 似然×影响 | 消解 gate / 实验 |
 |---|---|---|
-| 跨模态路由缺口（audio-query→text-keyed-corpus 未实现，C-PHASEA / R3-MAJOR-1） | 高×高（Week-1 时间线） | Week-1 先交 own-ASR 文本-文本臂；路由并行建+验证；audio-key 臂门控于路由验证；cascade ASR WER 作协变量 |
+| 跨模态路由缺口（audio-query→text-keyed-corpus 未实现，C-PHASEA / R3-MAJOR-1） | 高×高（**M1 工程就绪**门槛项） | M1 门内先交 own-ASR 文本-文本臂；路由并行建+验证；audio-key 臂门控于路由验证；cascade ASR WER 作协变量 |
 | 同音/近音污染（音频相似检索 #1 失效，HB-21；RECAST 硬负挖掘） | 高×中 | 音频键+文本键双持（BR-ASR TextualBias OOV-鲁棒，HB-26）；recall-floor 算子含显式 precision 项；同音精度 H5a 单独报；c_distractor 由 S1 界定 |
 | 闭源 API 信号成本（自一致性/置信引出/验证器一致度需额外采样；δ_corr 需 GPU） | 中×中 | 系统接口契约按生成遍计价（含 m=3 自一致性的 m+1 遍，M15）；离线标定用存量池 CPU near-free；δ_corr = 对存量池一遍打分非重生成；logprob 仅留 ledger 作工程诊断（#35），不进系统触发 |
 | 小簇退化（有效 N=cluster 20–45，R1-M2；k=3–4 时 DL τ² 不可靠） | 中×中 | group_key cluster bootstrap；固定效应为主、DL 仅参考；无组集不入确证层或补组键（M7）；kill 确证层专属 |
@@ -379,29 +383,61 @@ logprob 类白盒信号退出系统设计，其 Stage-1 标定记录保留于 le
 - **P2 对象错配**（KB 值 = 查询自身文本而非检索语料文档；C-PHASEA = invalid）→ 语料侧 KB 重建（squtr 310 docs text-keyed）；content_hash 扩展至嵌入器+索引（M8）；值必为证据内容。
 - **P3 transductive/非零样本混淆**（support 建自 eval 行；C-MINDS-POLICY = invalid）→ card 池与 eval 不相交；确证池组不相交于 union(dev+旧test+65曝光)（M7）；选择仅在 dev。
 - **P4 依赖运行冒充重复 / winner's-curse**（5 依赖运行称"5×"；seed 未隔离；C-W4-EMO、C-ASR-SEEDS = invalid；H3 估计 winner's-curse）→ 独立组 cluster bootstrap；H-sys 赢家按 dev 格级估计选定、确证层单通道重立；S2 单一预注册对比（F5/M13）。
-- **P5 家族误计 / 事后收窄**（7-vs-5 对比；Holm4 vs 全发现网格；C-MINDS-V2、C-ASR-V2 更正）→ 15 项家族全枚举预注册、全进 Holm/max-T（M11）；"显著"必注家族；交互模型预注册（M13）。
+- **P5 家族误计 / 事后收窄**（7-vs-5 对比；Holm4 vs 全发现网格；C-MINDS-V2、C-ASR-V2 更正）→ 15 项家族全枚举预注册（**v3.1 暂定，待 §5.6 资格规则于 M2 重新枚举，枚举纪律不变**）、全进 Holm/max-T（M11）；"显著"必注家族；交互模型预注册（M13）。
 
 **伦理/许可/数据治理**：逐集 license+permitted-use（squtr/heysquad/SQuAD-zh/vocalbench-knowledge/is21_deep_bias/AISHELL-NER/SLURP/LibriSpeech）；生物特征/声纹（AISHELL 说话人、SLURP）与情感数据按 PII/敏感属性处理；**dual-use 注记**：上下文偏置可被误用于监听式关键词 spotting——预期用途界定为**无障碍/知识辅助**。
 
-## 11. 时间线与交付（3 周，v2.1 §10 展开 + 跨核心迁移冒烟）
+## 11. 里程碑门控 DAG（milestone-gate DAG；2026-07-12 owner 裁定取代日历周时间线）
 
-**Week 1（今日可跑技术栈优先，路由并行）**：D1 own-ASR 级联文本-文本臂可跑；D2 文本键系统配置（flat/card/2-turn 递送）；D3 跨模态 audio-query→text-key 路由建成并在留出样本验证；D4 S4 偏置协议（is21_deep_bias 经 WSL git clone + AISHELL-NER 标签 + B-WER 打分器 + 检索→列表对齐）；D5 两遍管线 harness（mock 口径之外，过 assert_no_adaptive_logic）；D6 1 真格 wall-clock/per-pass 标定；D7 探索分两批（batch-1 text-key 周末开跑，batch-2 audio-key 待路由验证）。
-**Week 2（分解归因 + Phase-B 草案）**：D8 三段归因分析（检索/发现/使用）；D9 §7 离线信号标定表（CPU 存量池）；D10 Phase-B 协议草案（预命名赢家 ≤3 + 基线族 3 + 对照臂 4 + custodian 脚本 + 信标 seed 规则 + 候选 ID 全集 hash）；D11 S1 报告（omni-own 键 vs 专化冻结 vs trained-frozen nemotron，squtr 原生 R@k/nDCG）；D12 S2/S3/S4 探索排序 + 交互-CI 宽度检查。
-**Week 3（确证 + 迁移证据）**：D13 owner 签 Phase-B（§13 slot 6）；D14 custodian 信标抽取（公共信标 seed、承诺脚本、全新会话）；D15 单通道确证跑、读取即 burn；D16 H-sys 判定 vs 预注册 SESOI 家族；D17 **跨核心迁移冒烟**——系统接口契约配置在第二核心（MERaLiON-2 或一闭源 API）上 1–2 集轻验，作**可迁移性证据（价值主张）**；D18 Decision-Log 追加 + Per-Work-Status 更新 + wiki-sync。
+**owner 裁定（walkthrough item 12，2026-07-12）**：本节整节替换 v3.1 的"3 周时间线"——不设日历周/日期，进度按**里程碑门（milestone gate）**的进入判据是否全绿来推进；每个 M-门必须**全绿**方可进入下一门（DAG 单向，不设隐性并行绕过）。原 D1–D18 交付项保留、重新挂载到对应门下。
+
+```
+M1 工程就绪 ──▶ M2 探索完成 ──▶ M3 Phase-B 签署（owner） ──▶ M4 确证完成 ──▶ M5 迭代或 Stage-3 裁决
+```
+
+**M1 工程就绪（entry criteria，进入 M2 前须全绿）**：
+- G2-L3 clean-checkout 重建绿（§6.4）
+- 跨模态路由（audio-query→text-keyed-corpus）实现验证（含留出样本；D3）
+- S4 偏置协议落地（is21_deep_bias + AISHELL-NER 标签 + B-WER 打分器 + 检索→列表对齐；D4）
+- 1 真格成本标定（wall-clock/per-pass，含 m=3 自一致性；D6，§5.5 硬承诺）
+- 附带交付：D1 own-ASR 级联文本-文本臂可跑；D2 文本键系统配置（flat/card/2-turn 递送）；D5 两遍管线 harness（mock 口径之外，过 `assert_no_adaptive_logic`）；D7 探索分批（text-key 先、audio-key 待路由验证后）
+- **退出 = 以上全绿**；未绿不得进入 M2（跨模态路由未验证前 audio-key 臂门控，§10 风险行）
+
+**M2 探索完成（entry criteria，进入 M3 前须全绿）**：
+- 全臂族 dev 跑完（键空间 × 递送 × 阶梯 × S1–S4；D7 延续）
+- 三段归因分析（检索/发现/使用；D8）
+- §7 离线信号标定表（CPU 存量池；D9）
+- **资格规则判定**（§5.6 预注册参考系资格规则，dev-only、confirmatory 数据之前）
+- **家族表重枚举**（§5.6，符合资格规则者留家族表，出表者退为诊断状态）
+- S1 报告（omni-own 键 vs 专化冻结 vs trained-frozen nemotron；D11）
+- S2/S3/S4 探索排序 + 交互-CI 宽度检查（D12）
+- 退出 = Phase-B 协议草案成文（预命名赢家 ≤3 + 基线族 3 + 对照臂 4 + custodian 脚本 + 信标 seed 规则 + 候选 ID 全集 hash + 重枚举后的家族表；D10）
+
+**M3 Phase-B 签署（owner）**：owner 审阅 M2 产出（探索排序、资格判定、重枚举家族表、custodian 协议）并签署（§13 slot 6），进入确证层（D13）。**探索层本身不触发任何 kill**（§5.7/§9）。
+
+**M4 确证完成（entry criteria，进入 M5 前须全绿）**：
+- custodian NIST-beacon 抽取（公共信标 seed、承诺脚本、全新会话；D14）
+- 单通道评分、读取即 burn（D15）
+- H-sys 判定 vs 预注册 SESOI 家族（D16）
+- **跨核心迁移冒烟**——系统接口契约配置在第二核心（MERaLiON-2 或一闭源 API）上 1–2 集轻验，作可迁移性证据（价值主张；D17）
+
+**M5 迭代或 Stage-3 裁决**：H-sys 达标 → 进入 Stage-3 评估（§9 规则 1）；不达标 → 系统迭代循环（§9 规则 2，Stage-2 内 ≤5 轮 cap、每轮 owner 批准）或 owner 复盘转向边界性结论。收尾交付：Decision-Log 追加 + Per-Work-Status 更新 + wiki-sync（D18）。
+
+**汇报口径**：进度按门状态（M1…M5 各自 entry criteria 的绿/未绿）汇报，不按日历进度百分比汇报。**预算超支中断规则**：任一门内实测成本（wall-clock/生成遍数）超出该门**首格实测推算值的 1.5×** 时，中断并回报 owner 定夺（继续/削格/退场），不得静默吸收超支（owner walkthrough item 4 裁定）。
 
 ## 12. Panel 17 项处置映射（逐条一行，按全提案编号；六级状态制跟踪）
 
 - **F1**（重构主问题）→ §0/§1/§3：主问题重构为效果口径、裸基线+阶梯双主张，owner 裁定。
 - **F2**（H2 触发被禁 + 未引先行）→ §2.3/§3-S3：触发出 mock 口径作独立两遍管线，引 FLARE/Self-RAG，定位为 active-retrieval 向冻结 omni 迁移。
 - **F3**（H5 B-WER 答案注入）→ §3-S4/§5.4：可部署列表 = 音频键检索产出（非注入），保证入列列表降为 oracle 上界臂、标不可部署。
-- **F4**（co-primary 阈值自相矛盾）→ §3.2/§5.6：单尺度（相对改善%）+ per-dataset SESOI 数值表，去掉绝对/相对双门冲突。
+- **F4**（co-primary 阈值自相矛盾）→ §3.2/§5.6：单尺度（**2026-07-12 起统一为错误率相对下降%**）+ per-dataset SESOI 数值表 + 预注册参考系资格规则，去掉绝对/相对双门冲突与高基线天花板悖论。
 - **F5**（H3 估计病态）→ §3-S2/§5.6：单一预注册对比 = 递送主效应 − 键模态主效应 + 联合 CI，去"≥任意维度"。
 - **M6**（custodian 非独立/承诺不绑定）→ §5.7：独立人 co-sign + 先公布 hash{脚本,候选全集,seed 规则} + 信标 seed + 全新会话只收承诺脚本。
 - **M7**（防火墙漏 42 无组集群泄漏）→ §5.7/§5.6：确证池组不相交于 union(dev+旧test+65曝光)，无组集不入确证或补组键。
 - **M8**（content_hash 漏检索函数）→ §4.3/§6.2：扩展至嵌入器 SHA+revision+量化+归一化 + 索引参数（键==查询 fail-closed）。
 - **M9**（闭卷锚点跨集相减）→ §3.2/§5.1：改 within-item 配对对比（同音频，KB 供给 vs 保留）。
-- **M10**（Week-1 不可跑）→ §11：Week-1 交 own-ASR 文本臂 + 建/验路由 + 重键语料，cascade WER 作协变量。
-- **M11**（家族不完整）→ §5.6：15 项全家族枚举、全进 Holm/max-T，"显著"必注家族。
+- **M10**（原批"Week-1 不可跑"）→ §11：里程碑 **M1 工程就绪**门内交 own-ASR 文本臂 + 建/验路由 + 重键语料，cascade WER 作协变量；2026-07-12 起时间线改按里程碑门控 DAG，不再设日历周（§11 v3.2 全文替换）。
+- **M11**（家族不完整）→ §5.6：15 项全家族枚举（**v3.1 暂定基线，2026-07-12 起待预注册参考系资格规则于 M2 dev 测量后重新枚举**）、全进 Holm/max-T，"显著"必注家族。
 - **M12**（kill 打在欠功探索层）→ §5.7/§9：探索层无 kill，kill 确证层专属，探索层出排序非 accept/reject。
 - **M13**（无交互模型）→ §5.6：预注册键×递送交互，H-sys 赢家按格级估计选，主效应解读受交互-CI 宽度门控。
 - **M14**（H2 "等增益"接受零假设）→ §3-S3/§5.6：双门 = 增益差 TOST（margin 预注册）+ 调用降幅 ≥30% superiority，两门须过。
@@ -413,14 +449,14 @@ logprob 类白盒信号退出系统设计，其 Stage-1 标定记录保留于 le
 ## 13. Owner / Reviewer 签字位（9 槽，标推荐默认）
 
 1. **§1 主问题措辞（裸基线 + 阶梯双主张）+ 系统接口契约（单一，无 tier 划分，续18）** — 推荐默认：**照签**（双主张结构消解 R4-F1/F2）。签字：待定。
-2. **10% 相对门槛 + per-dataset SESOI 数值表** — 推荐默认：**单相对尺度为主判定，签前填满 SESOI 数值表**（各集基线→10% 绝对换算）。签字：待定。
+2. **10% 错误率相对下降门槛 + per-dataset SESOI 数值表 + 预注册参考系资格规则**（2026-07-12：主尺度统一为错误率相对下降；ADD 资格规则①闭卷 dev 基线<0.85 ②knowledge headroom≥2×SESOI，dev-only 判定；SQuAD-zh 大概率退场为诊断状态，中文覆盖改由 S4 AISHELL-NER 承载；家族表待 M2 重枚举） — 推荐默认：**单一错误率相对下降尺度为主判定，签前填满 SESOI 数值表 + 资格规则判定表**（各集基线→10% 绝对当量换算，见更新后 §5.6 表）。签字：待定。
 3. **§3 次级科学点取舍（S1–S4）** — 推荐默认：**四点全留，S1 非阻塞**（omni-own 不足则换冻结组件续跑）。签字：待定。
 4. **§5.5 臂预算（~90 格 + S3 8 格 + S4 ~24 格）** — 推荐默认：**按遍计价、门控于 1 真格标定**（D6 后复核 wall-clock）。签字：待定。
-5. **§5.6 家族表（15 项全枚举）** — 推荐默认：**照签 15 项 Holm/max-T**。签字：待定。
+5. **§5.6 家族表（15 项全枚举，v3.1 暂定基线；2026-07-12 加入预注册参考系资格规则，成员集待 M2 dev 测量后重新枚举）** — 推荐默认：**照签枚举纪律（全表进 Holm/max-T、不得事后收窄），成员集以 M2 重枚举结果为准**。签字：待定。
 6. **custodian 信标协议** — 推荐默认：**独立人 co-sign（非 owner 单签，R2-M6）+ 公共信标 seed + 承诺脚本**。签字：待定。
-7. **§9 迭代预算（Stage-2 内 2 轮 cap，每轮 owner 批准）** — 推荐默认：**2 轮 cap**。签字：待定。
+7. **§9 迭代预算（Stage-2 内 ≤5 轮 cap，每轮 owner 批准；2026-07-12 由 2 轮上调）** — 推荐默认：**≤5 轮 cap**。签字：待定。
 8. **S4 偏置协议（检索产出列表 + oracle 上界臂不可部署）** — 推荐默认：**检索产出列表；测试床 = is21_deep_bias / AISHELL-NER / SLURP**。签字：待定。
-9. **时间线（3 周 + 跨核心迁移冒烟）** — 推荐默认：**照签，带 Week-1 现实化注记**（own-ASR 先行、路由并行；H1/audio-key 门控于路由验证）。签字：待定。
+9. **§11 里程碑门控 DAG（M1 工程就绪→M2 探索完成→M3 Phase-B 签署→M4 确证完成→M5 迭代或 Stage-3 裁决；2026-07-12 取代日历周时间线）** — 推荐默认：**milestone DAG 结构确认**（own-ASR 先行、路由并行纳入 M1 进入判据；H1/audio-key 门控于路由验证；预算超首格实测推算 1.5× 中断回报 owner）。签字：待定。
 
 ---
 
