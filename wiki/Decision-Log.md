@@ -6,6 +6,21 @@
 
 ---
 
+### 2026-07-13（续27）· M1 工程奠基锁定（代码+文档层）；v4.2 经敌意内审环发布
+
+**Status.** 续26 收拢锁定令执行完毕。**工程线**（W1 `159b525`）：全语料建库默认模式（qrels 与候选池
+构成隔离）、五轴审计（`n_golds=0→NOT_EVALUATED`）、run_mock fail-closed（P0 报错，协调者亲手触发
+验证）、group-aware 确证抽签（缺组清单/曝光并集即拒绝）、**唯一标准测试入口 `PYTHONPATH=src pytest
+-q` = 143 passed / 0 errors**（`docs/TESTING.md`）、49 源 v2 分类侧车；实现节点中途被 API 错误击杀，
+敌意"验证→修复→复验"环自愈（2 轮收敛、残留 0）。**文档线**：v4.2 经 3 轮五镜头敌意内审（50 项修复）
++ 1 轮终局确认面板（6 MAJOR：3 项可修已修——机读原子 PF3 区间法一致化、Q-B SESOI 提前至 pre-M2
+冻结类、五轴审计 label_independent_build 改进程属性+作者注入文档专项排除；2 项为 owner 裁定的公开
+contested 敞口如实保留；1 项与前重复）；回信 v5（三处敬意商榷 + 责任表述规范）；**checker 首次以
+可执行工件交付**（`scripts/checks/v42_conformance.py` + rules.yaml + output JSON + 环境捕获，
+12/12 PASS 第三方可复跑——v4.1 轮失信已具名承认并以实际交付关闭）。**M1 代码+文档层锁定**；余项=
+数据尾巴（GLAP 全语料嵌入待 CPU 空窗、nemotron 待 GPU 窗口、#36 两小资产待网络）+ v4.2 外审 +
+owner §14 签字 → M2。编排纪律升级（owner 指令）：发布件一律过多镜头敌意内审环至一轮零新发现。
+
 ### 2026-07-12（续26）· owner 批准五项 F′ 处置（按协调者推荐）+ 工程奠基收拢锁定令
 
 **Decision（owner）.** 五项全按推荐执行：① F′-3 squtr 确证检索语料重建为**官方全语料**（57,638 docs；

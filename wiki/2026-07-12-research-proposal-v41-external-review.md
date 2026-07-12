@@ -13,6 +13,8 @@ relation_to_review: "v4 收到对抗式诚信审查（REJECT/NO-GO，四 FUNDAME
 
 > ## ⚠️ 勘误二（2026-07-12 当日发布，append-only；针对博导级对抗复审的已核验事实项）
 >
+> **v4.2 已按 Decision-Log 续26 裁决发布（`2026-07-12-research-proposal-v42-external-review.md`）；本 v4.1 自此为历史记录，外审一律使用 v4.2。**
+>
 > 本文发布当日收到第二轮对抗复审（`2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md`）。我方 5 路独立复核其 42 项可核验主张：**39 CONFIRMED / 3 PARTIAL / 0 REFUTED**。以下五处为本文**已核验的事实性/算术性缺陷**，即日声明生效；结构修订属 owner 裁决事项，将以 v4.2 发布。**本文维持不可签字状态。**
 >
 > 1. **"可验证 reward" 为错名**（§3.2/§4.2）：自一致性、验证器一致度、置信引出三信号均不读 gold、无确定性验证器，按领域标准用法应称 **label-free proxy reward**；真效用 U 与代理 Û 的符号分离及 proxy 诊断（within-question rank AUROC、self-consistent-error 压力子集、Goodhart 曲线）待 v4.2。

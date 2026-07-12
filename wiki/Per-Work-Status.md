@@ -4,13 +4,13 @@
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
 > Last reviewed: 2026-07-12.
 > 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4；
-> primary study 现由 **W1** 承载（提案 [[2026-07-12-research-proposal-v41-external-review]] v4.1 待签字，
-> Decision-Log 续24）。
+> primary study 现由 **W1** 承载（提案 v4.2，历两轮对抗复审后，待外审 + owner 签字；
+> v4.1 [[2026-07-12-research-proposal-v41-external-review]] 转历史记录，Decision-Log 续24/续26）。
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
 | **W4** | `speech-mllm-omni-embedding-rl` | 🟡 **Repositioned per G0** (separate work) | Disentanglement headline dropped → **L0/L1 embedding-utility studies** (readout / suppression / selective-readout limits); fresh proposal **pending ticket #29**; omni-embed model wired. |
-| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **now carries the primary study** | **Primary study (per G0): RDU front-end knowledge system + reward-guided trajectory selector; primary metric ρ realization rate.** Proposal **v4.1 drafted, awaiting external review + owner signature**; **M1 engineering base locked at W1 `20d45a8`, experiments frozen.** Also holds the genuine reward-driven best-of-N result (frozen Qwen3-Omni-30B via llama.cpp). |
+| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **now carries the primary study** | **Primary study (per G0): RDU front-end knowledge system + reward-guided trajectory selector; primary metric ρ realization rate.** Proposal **v4.2 (after two adversarial-review rounds), awaiting external review + owner signature** (v4.1 → historical record); **M1 engineering base locked at W1 `20d45a8`, experiments frozen.** Also holds the genuine reward-driven best-of-N result (frozen Qwen3-Omni-30B via llama.cpp). |
 | W2 | `speech-mllm-efficient-rl-alignment` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 | W3 | `speech-mllm-multitask-rl` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 
@@ -72,8 +72,9 @@ artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): th
 _Primary study (2026-07-12, Decision-Log 续24 / G0 §4): a front-end **Retrieve–Discover–Use (RDU)**
 knowledge subsystem over the frozen omni core **plus a reward-guided trajectory-selection operator**;
 primary metric = **selector realization rate ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**.
-Proposal **v4.1** ([[2026-07-12-research-proposal-v41-external-review]]) is **drafted, awaiting external
-review + owner signature** (not yet a passed / Stage-2 plan). **M1 engineering base locked at W1
+Proposal **v4.2** (after two adversarial-review rounds) is **awaiting external
+review + owner signature** (not yet a passed / Stage-2 plan; v4.1
+[[2026-07-12-research-proposal-v41-external-review]] → historical record). **M1 engineering base locked at W1
 `20d45a8`; experiments frozen** pending the two S4 assets + external review + §12 signature. The
 mature reward/eval machinery below is the foundation the primary study builds on._ Gradient-free,
 reward-guided inference-time RL (best-of-N, reward-guided decoding, reranking). The most complete work;
@@ -135,9 +136,8 @@ _状态更正（2026-07-12，Decision-Log 续24）：W4 已非旗舰——disent
 **W1（免训练 RL，现承载 primary study，per G0）：**
 _primary study（2026-07-12，Decision-Log 续24 / G0 §4）：冻结 omni 核心之上的前端**检索–发现–使用
 （RDU）**知识子系统 **+ reward-guided 轨迹选择算子**；primary 指标 = **selector 实现率
-ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**。提案 **v4.1**
-（[[2026-07-12-research-proposal-v41-external-review]]）已起草、**待外审 + owner 签字**（尚未通过、未进
-Stage-2）；**M1 工程基座锁定于 W1 `20d45a8`，实验冻结**。以下成熟奖励/评测机制即其地基。_
+ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**。提案 **v4.2**（历两轮对抗复审）**待外审 + owner 签字**（尚未通过、未进
+Stage-2；v4.1 [[2026-07-12-research-proposal-v41-external-review]] 转历史记录）；**M1 工程基座锁定于 W1 `20d45a8`，实验冻结**。以下成熟奖励/评测机制即其地基。_
 免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），是最完整的工作，其可验证奖励/评测
 机制亦被 W4 复用。**真实 best-of-N 结果（2026-07-02，
 `b7b4b0d`/`cd6aa92`/`f9d111a`）：** 冻结 Qwen3-Omni-30B（Q8_0 GGUF，llama.cpp，24GB 5090 上

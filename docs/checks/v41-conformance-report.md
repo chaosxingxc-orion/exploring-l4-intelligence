@@ -17,7 +17,11 @@
 > (c) the four FUNDAMENTAL / numbered dispositions of the v4 adversarial integrity review.
 
 - **Report date:** 2026-07-12 (Asia/Singapore)
-- **Checker:** independent conformance checker (Opus, read-mostly; one mechanical fix applied — see §Fixes)
+- **Checker:** ~~independent conformance checker (Opus, read-mostly~~; one mechanical fix applied — see §Fixes)
+  - **CORRECTION 2026-07-12 (append-only):** field corrected to **internal consistency check** —
+    "independent" is retracted (same-workflow AI second pass, not independent oversight; see banner), and
+    the model-name reference ("Opus", also at §185 below) is retracted per the self-containment / no-model-
+    name discipline that CHECK 6 certifies the proposal is free of.
 - **Rule-list version:** `v41-conformance/rules-2026-07-12` — derived verbatim from Decision-Log 续24
   (R1–R4), the standing rules carried from prior rounds (eligibility-headline scope, reference-freshness
   ≥2025-01, milestone-gate DAG, ledger-conformant-citations-only), and the six numbered CHECKS in the
@@ -189,11 +193,22 @@ disposition.
 
 No structural problems were found; no BLOCKED items.
 
+> **CORRECTION 2026-07-12 (append-only).** "no BLOCKED items" reflects only the 6 checks' narrow scope;
+> the doctoral adversarial review subsequently found 8 real v4.1 contradictions these checks did not
+> cover (see top banner). This line does not certify the absence of structural problems in v4.1.
+
 ---
 
 ## (d) Overall verdict
 
 **RELEASE-READY.**
+
+> **CORRECTION 2026-07-12 (append-only, supersedes the verdict word above).** "RELEASE-READY" is
+> **retracted** and superseded by **"DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW"** (see the top banner).
+> "No BLOCKED items" (below) is likewise retracted: the doctoral review identified 8 real contradictions
+> in v4.1 that this report's 6 checks did not cover. This report certified only internal package
+> consistency, never scientific validity or release-readiness; the verdict body below predates that
+> rescoping and is retained append-only for provenance.
 
 All six checks PASS. Ledger conformance is exact (no nonexistent claim ID cited as evidence; C-T7 confined
 to failure-history/discipline context; C-MINDS-V2 never called valid; C-KEEP/24% flagged unverified).

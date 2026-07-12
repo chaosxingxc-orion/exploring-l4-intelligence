@@ -41,8 +41,9 @@ rewards**. No fine-tuning, no LoRA, no gradient on the base model.
 > - **W1 (`speech-mllm-training-free-rl`) now carries the current PRIMARY study** — a front-end
 >   **Retrieve–Discover–Use (RDU)** knowledge subsystem over a frozen omni core **plus a reward-guided
 >   trajectory-selection operator**; primary metric = **selector realization rate
->   ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)** (G0). Proposal **v4.1** is drafted and
->   **pending external review + owner signature** — not yet a passed / Stage-2 plan.
+>   ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)** (G0). Proposal **v4.2** (after two
+>   adversarial-review rounds) is **pending external review + owner signature** — not yet a passed /
+>   Stage-2 plan (v4.1 → historical record).
 > - **W4 (`speech-mllm-omni-embedding-rl`) remains a SEPARATE work, repositioned per G0.** The
 >   task-conditioned **disentanglement** headline is dropped/downgraded to **L0/L1 embedding-utility
 >   studies** (readout availability / suppression / selective-readout limits); a fresh proposal is

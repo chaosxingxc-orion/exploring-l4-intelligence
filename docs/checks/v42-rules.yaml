@@ -1,0 +1,210 @@
+# ============================================================================
+# v4.2 package conformance rule manifest  (machine-readable)
+# ============================================================================
+# rules_version pins this manifest; the checker echoes it into every output.
+rules_version: "v42-conformance/rules-2026-07-12"
+
+description: >
+  Declarative rule manifest for scripts/checks/v42_conformance.py. Checks the
+  v4.2 "converged & locked" proposal package (proposal + accompanying response
+  letter) against (a) banned-phrase discipline, (b) required-phrase presence,
+  (c) claim-ledger citation discipline, (d) file-existence claims made by the
+  letter, and (e) an appendix-A atom-count vs prose m= numeric recount.
+  This is an INTERNAL CONSISTENCY CHECK (machine-assisted second pass), NOT an
+  independent oversight and NOT an external peer review.
+
+# ---- The v4.2 package under review + reference inputs --------------------------
+targets:
+  proposal: wiki/2026-07-12-research-proposal-v42-external-review.md
+  letter:   wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md
+  ledger:   docs/claim_ledger.yaml
+
+# Lines >= the line of a heading whose text contains one of these markers are
+# treated as the "failure-history appendix" region (invalid ledger IDs and
+# retracted/erratum terms may live here).
+appendix_d_markers: ["附录 D", "Appendix D"]
+appendix_a_markers: ["附录 A", "Appendix A"]
+
+# Lines containing any of these are the namespace LEGEND / definition context
+# (they list ledger-ID *forms* as examples, deferring citability to the ledger;
+# they are not evidence citations, so ledger sub-rules exempt them).
+legend_markers:
+  - "claim-ledger ID 一律形如"
+  - "编码命名空间"
+  - "命名空间图例"
+
+# ---- Shared marker vocabularies (transparent + tunable) -----------------------
+# Matching is substring, case-insensitive for ASCII; CJK matched verbatim.
+vocab:
+  # erratum / failure-history context that legitimises a retracted term mention
+  erratum:            ["撤除", "误称", "误名", "已弃", "弃用", "retracted", "撤回", "F′-4", "F'-4", "失败史", "已被"]
+  # negation that legitimises a RELEASE-READY mention (prohibition context)
+  release_negation:   ["不用", "不再", "避免", "降", "撤回", "retract", "改为", "改 ", "never", "不作", "非 ", "DOCUMENT PACKAGE READY"]
+  # separation/negation that legitimises 等预算 near K=1 (they are kept apart)
+  eqbudget_separation: ["之外", "族外", "绝不标", "不标", "不混入", "不进等预算", "非", "OUTSIDE", "NEVER", "NOT", "低成本基线", "low_cost", "low-cost", "descriptive", "描述性", "撤除", "arbitrary single"]
+  # removal / rename context that legitimises a "不可预测 custody" mention
+  custody_removal:    ["删除", "删去", "删掉", "撤除", "移除", "去除", "去掉", "不采用", "已否决", "否决", "失败史", "一切措辞", "改称", "改名", "public deterministic evaluation"]
+  # negation that legitimises 业务效果/business effect in a heading
+  title_negation:     ["无", "不", "非", "去", "否定", "免责", "without", "no ", "NOT"]
+  # a directional ledger claim must carry one of these within its window
+  directional_markers: ["directional", "方向性", "假设级", "Stage-1", "stage-1", "inventory"]
+  # an invalid ledger claim cited outside the appendix must carry one of these
+  invalid_markers:    ["invalid", "无效", "失败", "泄漏", "复发", "撤除", "已弃", "预防", "prevention", "P0", "P1", "P2", "P3", "P4", "P5", "绝不作正向", "无对应", "误称", "误名", "错配"]
+  # a non-ledger ID is acceptable only if flagged nonexistent by one of these
+  nonexistent_markers: ["不存在", "nonexistent", "无对应条目", "未 mint", "待 mint", "no ledger entry", "unverified", "无 ledger", "未核实"]
+
+# ============================================================================
+# RULES
+# ============================================================================
+rules:
+
+  # -------- Banned phrases ---------------------------------------------------
+  - id: BANNED-VERIFIABLE-REWARD
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['可验证\s*reward', 'verifiable\s+reward']
+    # allowed only inside the failure-history appendix OR on an erratum line
+    allow_in_appendix_d: true
+    allow_if_line_has: erratum
+    rationale: >
+      Per F′-4 the proxy is renamed label-free proxy reward; "verifiable reward"
+      may survive only as a documented erratum in the failure-history appendix.
+
+  - id: BANNED-RELEASE-READY
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['RELEASE-READY', 'RELEASE READY']
+    allow_in_appendix_d: true
+    allow_if_line_has: release_negation
+    rationale: >
+      The verdict term RELEASE-READY is retired; a mention is allowed only in a
+      prohibition/negation context (e.g. 不用 RELEASE-READY).
+
+  - id: BANNED-EQUALBUDGET-NEAR-K1
+    type: proximity
+    applies_to: [proposal]
+    anchor_patterns: ['等预算', 'equal-budget', 'equal budget', 'equal-K', 'equal K']
+    near_patterns: ['K=1', 'K = 1', 'K1']
+    window: 3
+    require_line_has: eqbudget_separation
+    rationale: >
+      K=1 is a low-cost baseline OUTSIDE the equal-budget family (F′-5/G5). Any
+      co-occurrence of 等预算/equal-budget with K=1 within 3 lines must carry a
+      separation/negation marker, else it risks re-asserting K=1 as equal-budget.
+
+  - id: BANNED-UNPREDICTABLE-CUSTODY
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['不可预测\s*custody', 'unpredictable\s+custody']
+    allow_in_appendix_d: true
+    allow_if_line_has: custody_removal
+    rationale: >
+      Per F′-1/G2 the custody layer is renamed public deterministic evaluation;
+      the term "不可预测 custody" may appear only in a removal/failure context.
+
+  - id: BANNED-BUSINESS-EFFECT-TITLE
+    type: banned_phrase_in_titles
+    applies_to: [proposal, letter]
+    patterns: ['业务效果', 'business effect']
+    allow_if_line_has: title_negation
+    rationale: >
+      S-4: the title/headings must not brand the work as "business effect"; a
+      negated heading mention (e.g. 无业务效果分支) is permitted.
+
+  - id: BANNED-FUTURE-DATE
+    type: future_date
+    applies_to: [proposal, letter]
+    threshold: "2026-07-13"          # dates on/after this are violations
+    rationale: >
+      The v4.2 package is dated 2026-07-12; no calendar date 2026-07-13 or later
+      may appear (chronology integrity, review finding E-4). arXiv IDs (YYMM.N),
+      YYYY-MM refs and bare integer seeds are NOT calendar dates and are ignored.
+
+  # -------- Required phrases -------------------------------------------------
+  - id: REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['public deterministic evaluation']
+    min_count: 1
+    rationale: "F′-1/G2 rename must be present."
+
+  - id: REQUIRED-NOT-EVALUATED-RULE
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['NOT_EVALUATED']
+    min_count: 1
+    must_also_have_any: ['规则', 'rule', 'n_golds=0']
+    rationale: "The five-axis audit NOT_EVALUATED rule must be stated."
+
+  - id: REQUIRED-SINGLE-FINAL-CONFIRMATORY-DOCTRINE
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['单一最终确证版本制', 'SINGLE final confirmatory', 'single final confirmatory']
+    min_count: 1
+    rationale: "F′-2/G3 single-final-confirmatory doctrine must be present."
+
+  # -------- Claim-ledger citation discipline --------------------------------
+  - id: LEDGER-CITATIONS
+    type: ledger_citation
+    applies_to: [proposal, letter]
+    id_regex: '(?<![A-Za-z0-9])C-[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*'
+    directional_window: 2            # 假设级/directional within +/- N lines
+    invalid_window: 1                # invalid marker within +/- N lines (else appendix/legend)
+    directional_markers: directional_markers
+    invalid_markers: invalid_markers
+    nonexistent_markers: nonexistent_markers
+    rationale: >
+      Every cited ledger claim id (form C-<UPPER>...) must exist in the ledger
+      (unless explicitly flagged nonexistent); directional claims must carry a
+      Stage-1/directional label within the window; invalid claims may appear
+      only in the failure-history appendix or in an explicitly failure/invalid/
+      prevention-flagged (discipline) context. Review-revision codes C-1..C-6
+      (digit after the dash) are NOT ledger ids and are excluded by id_regex.
+
+  # -------- File-existence claims made by the letter ------------------------
+  - id: FILE-EXISTENCE-LETTER-CLAIMS
+    type: file_exists
+    # Each path curated from a paths-claimed-to-exist statement in the letter.
+    # As of the v4.2 round the letter states the four executable conformance
+    # artifacts (checker script / rule manifest / output JSON / environment
+    # capture) ARE delivered and on disk (the v4.1-round promise is now honored),
+    # so they are existence claims and ARE listed below.
+    must_exist:
+      - path: wiki/2026-07-12-research-proposal-v42-external-review.md
+        source: "letter frontmatter supersedes_scope + §6 (v4.2 to be reviewed)"
+      - path: wiki/2026-07-12-research-proposal-v41-external-review.md
+        source: "letter frontmatter supersedes_scope (v4.1 erratum banner)"
+      - path: wiki/2026-07-12-response-v4-to-adversarial-integrity-review.md
+        source: "letter §勘误附记 (prior letter with three self-corrections)"
+      - path: wiki/2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md
+        source: "letter frontmatter responds_to"
+      - path: docs/checks/v41-conformance-report.md
+        source: "letter §6 (docs/checks currently holds one Markdown report)"
+      - path: docs/datasets.lock.json
+        source: "letter §1 F′-3 + §5.1 (pin corpus-lock into datasets.lock.json)"
+      - path: docs/claim_ledger.yaml
+        source: "letter §1 (machine ledger governs citability); proposal §11"
+      - path: scripts/checks/v42_conformance.py
+        source: "letter §勘误附记① + §6 + 常驻承诺⑨ (v4.2 conformance checker script delivered this round)"
+      - path: docs/checks/v42-rules.yaml
+        source: "letter §勘误附记① + §6 (rule manifest delivered this round)"
+      - path: docs/checks/v42-conformance-output.json
+        source: "letter §勘误附记① + §6 (conformance output JSON delivered this round)"
+      - path: docs/checks/v42-environment.txt
+        source: "letter §勘误附记① + §6 (environment capture delivered this round)"
+    rationale: "Every artifact path the letter presents as existing must exist."
+
+  # -------- Numeric recount: appendix-A atoms vs prose m= --------------------
+  - id: NUMERIC-ATOM-COUNT
+    type: appendix_atom_count
+    applies_to: [proposal]
+    appendix_markers: ["附录 A", "Appendix A"]
+    fence_lang: yaml
+    atoms_key: atoms
+    m_regex: 'm\s*=\s*(\d+)'
+    family_atom_regexes:
+      - '族\s*=\s*\**\s*(\d+)\s*个?\s*原子'
+      - '=\s*\**\s*(\d+)\s*atoms'
+    rationale: >
+      Count the primary confirmatory atoms declared in the appendix-A YAML block
+      and require it to equal every prose m= claim and family atom-count claim.
