@@ -11,6 +11,16 @@ relation_to_review: "v4 收到对抗式诚信审查（REJECT/NO-GO，四 FUNDAME
 
 # 以业务效果为裁判、以 reward-guided selector 为身份锚的前端多模态知识体系（v4.1）
 
+> ## ⚠️ 勘误二（2026-07-12 当日发布，append-only；针对博导级对抗复审的已核验事实项）
+>
+> 本文发布当日收到第二轮对抗复审（`2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md`）。我方 5 路独立复核其 42 项可核验主张：**39 CONFIRMED / 3 PARTIAL / 0 REFUTED**。以下五处为本文**已核验的事实性/算术性缺陷**，即日声明生效；结构修订属 owner 裁决事项，将以 v4.2 发布。**本文维持不可签字状态。**
+>
+> 1. **"可验证 reward" 为错名**（§3.2/§4.2）：自一致性、验证器一致度、置信引出三信号均不读 gold、无确定性验证器，按领域标准用法应称 **label-free proxy reward**；真效用 U 与代理 Û 的符号分离及 proxy 诊断（within-question rank AUROC、self-consistent-error 压力子集、Goodhart 曲线）待 v4.2。
+> 2. **§4.3 算术性自相矛盾**："单次 RDU（K=1）与 selector 严格匹配同一 K 预算"不可能同真——K=1 改标**低成本系统基线**，等预算对照族仅含 K-candidate random / MBR / selector。
+> 3. **§9.5 与 §9.8/§11 矛盾**：签字门要求证明"不可预测 custody"，而本方案采用的公开固定种子（续24④）只提供可复算性、不提供盲法——本方案的 custody 实为 **public deterministic evaluation（透明可复现、非盲法）**，证据等级按此如实标注；措辞修正待 v4.2。
+> 4. **当前活跃 squtr 检索语料为 qrels-conditioned mini-corpus**：310 文档 = 110 个 test-qrels 全部正例 + 200 干扰项，正例密度较官方全语料（57,638 docs）抬升约 ×186——只可作 DEV smoke，**不构成"KB 与评估标注独立构建"**；全语料重建列入 v4.2 工程包。同时其 `n_golds=0 → CLEAN` 审计为空转通过（零 gold 被检查），审计语义拆分（query_independent_corpus / label_independent_build 等）与 `NOT_EVALUATED` 输出待修。
+> 5. **S3 效果对比存在采样算力混杂**：触发臂 5–6 遍生成 vs 恒检索 2 遍，效果差异无法归因于触发策略本身；预算匹配设计（同采样预算下 never/always/triggered）待 v4.2。
+
 > **本版与 v4 审查的关系（一句话）**：v4 被外部对抗式诚信审查判为 REJECT/NO-GO；我方对该审查 42 项可核验主张逐条独立复核（37 CONFIRMED / 5 PARTIAL / 0 REFUTED、无一被驳），据此按 owner 四项裁决（Decision-Log 续24）整体重构为本 v4.1，四处事实错误已改正、四个 FUNDAMENTAL 阻断项已按裁决处置。**在本 v4.1 完成外审与 §签字位 签字前，不得被引用为已通过评审或可进入 Stage-2 的方案。**
 
 > **一句话主张**：不改任何一个权重、不改任何**核心**结构（外挂系统组件另加），把一个**冻结的 omni 核心**（本地 Qwen3-Omni-30B 作科学载具，闭源 API 作价值场景）搭成可验证、可闭环的 agentic system，通过精心组织的**检索–发现–使用（RDU）**前端知识子系统 + 一个**可部署 reward 引导的轨迹选择算子**，在**头空合格的知识依赖型语音任务**上对**裸核心基线**取得 **≥10% 的错误率相对下降**，并把 oracle 头空实现出可靠比例（selector realization rate ρ）。系统接口契约唯一——**音频/文本进、文本出、多次采样**——检索匹配特征由**独立冻结 embedder**（外挂系统组件）产生，故设计为**最小接口设计**，可迁移性由跨核心冒烟作证。

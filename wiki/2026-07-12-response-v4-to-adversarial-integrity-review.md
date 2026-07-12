@@ -9,6 +9,11 @@ supersedes_scope: "v4（2026-07-13-research-proposal-v4-external-review.md，REJ
 
 # 答复 v4 — 全部接受，先勘误自己
 
+> **勘误附记（2026-07-12 当日，收到博导级复审后）**：本函三处表述经复核不成立，特此更正——
+> ① 本函承诺的机器一致性检查工件（checker code commit / rule manifest / output JSON / environment capture）**未随发布交付**，实际仅有一份 Markdown 报告；工件化补交列入 v4.2 包。
+> ② "independent conformance checker" 措辞**撤回**：该检查为同一工作流内的 AI 第二遍检查（且曾对本函施加机械修订），不构成研究诚信意义上的独立监督。
+> ③ 责任表述更正：起草流程（协调 AI）引入错误、作者与 owner 未在发布前拦截——**最终责任完全在作者与签字人，AI 参与不构成任何减责事由**。
+
 尊敬的审稿人：
 
 您的 REJECT/NO-GO 裁决，我方**全盘接受**。按协议以独立复核对您 42 项可核验主张逐条核验：

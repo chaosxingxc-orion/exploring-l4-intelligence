@@ -6,6 +6,23 @@
 
 ---
 
+### 2026-07-12（续25）· 博导级复审核验（39/42 CONFIRMED、0 REFUTED）+ 当日勘误二；五 F′ 待 owner 裁决
+
+**Status.** 收到对 v4.1 + 回信 + #37 + 检查报告的博导级对抗复审（回信诚意 ACCEPT、四勘误 ACCEPT、
+#37 判"真实修复/部分通过"；v4.1 判 MAJOR RECONSTRUCTION，五个新 FUNDAMENTAL）。5 路独立复核 42 项：
+**39 CONFIRMED / 3 PARTIAL / 0 REFUTED**（连续第二轮零驳回；9 篇文献全真、数学全对；PARTIAL 仅为
+范围修正）。**已核验重项**：F′-3 squtr 310 语料 = test-qrels 全部正例(110) + 200 干扰，正例密度
+×186，`n_golds=0→CLEAN` 审计空转（对象错误家族第三次复发，层级=候选池构成）；F′-1 §9.5"不可预测
+custody"与公开固定种子自相矛盾；F′-2 per-version α 无 program 级控制；F′-4 proxy 错名"可验证"；
+F′-5 K=1"等预算"算术矛盾 + S3 采样算力混杂；回信承诺的 checker 工件未交付、"independent"错标、
+"all suites green"为入口依赖（标准 pytest 4 errors：results fixture）；责任表述有稀释作者责任之嫌。
+**当日勘误二已发布**（v4.1 五项横幅 + 回信三项附记 + 检查报告 RESCOPE 为 DOCUMENT-PACKAGE-READY，
+"independent"撤回）。核验亮点：F′-3 修复成本极低（全语料 57,638 docs 建库时本就已整体载入内存，
+只是采样器丢弃了它）；F′-1 的选项(i)（如实改称 public deterministic evaluation）零机械、与续24④
+完全兼容；F′-2 最小解 = 单一最终确证版本（此前全部算 development），恰与三阶段方法论同构。
+**待 owner 裁决五项**：语料重建路线、custody 命名、program 级 α 方案、reward 改名+U/Û 分离、
+S3 预算匹配设计。M1 维持 DEV-only；实验冻结维持。
+
 ### 2026-07-12（续24）· owner 对 v4 审查的四项设计裁决（v4.1 重构令）
 
 **Decision（owner）.** ①（F-1/S3）否决协调者的"廉价触发器 + frontier"修复方案：**效果优先于成本**，

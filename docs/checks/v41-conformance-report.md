@@ -1,7 +1,17 @@
 # v4.1 Release Conformance Report (internal consistency check)
 
-> **Nature.** This is a machine-assisted **internal consistency check**, executed by an independent
-> conformance checker prior to release of the v4.1 package. It is **NOT an external peer review** and
+> **RESCOPED 2026-07-12 (post doctoral adversarial review, verified 39/42 CONFIRMED).** The verdict
+> below is rescoped from "RELEASE-READY" to **"DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW"** — it never
+> certified scientific validity, and the doctoral review identified 8 real contradictions in v4.1 that
+> this report's 6 checks did not cover (business-effect title vs conventional threshold; unpredictable-
+> custody gate vs public seed; burn-record wording; K=1 vs equal-budget; group-disjoint claim vs
+> item-only draw; secondary family not atomized; qrels-conditioned corpus vs independent-KB claim;
+> standard-pytest collection errors). The word "independent" below is retracted: this was a same-workflow
+> AI second pass (which also applied one mechanical fix to the letter), not independent oversight.
+> Checker code / rule manifest / output JSON / environment capture were NOT delivered with this report.
+>
+> **Nature.** This is a machine-assisted **internal consistency check**, executed prior to release of
+> the v4.1 package. It is **NOT an external peer review** and
 > does not constitute owner sign-off. It verifies that the v4.1 proposal and its accompanying response
 > letter conform to (a) the authoritative claim ledger, (b) the owner rulings in Decision-Log 续24, and
 > (c) the four FUNDAMENTAL / numbered dispositions of the v4 adversarial integrity review.
