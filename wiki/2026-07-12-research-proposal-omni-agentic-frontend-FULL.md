@@ -2,13 +2,13 @@
 title: "Research Proposal（完整版 v3，供 reviewers 审阅）：Omni Agentic System 的前端多模态知识体系——以业务效果为裁判的检索·发现·使用（RDU）"
 date: 2026-07-12
 stage: "1-problem-definition → 申请进入 Stage-2 预注册"
-status: "DRAFT-FULL — 未签署、签署前零实验；本版为供 reviewers 审阅的完整展开，supersedes v2.1 作为 review copy，v2.1 仍作为决策骨架（decision skeleton）保留"
+status: "DRAFT-FULL v3.1（续18 单一接口契约清扫完成）— 未签署、签署前零实验；本版为供 reviewers 审阅的完整展开，supersedes v2.1 作为 review copy，v2.1 仍作为决策骨架（decision skeleton）保留"
 supersedes: 2026-07-12-research-proposal-omni-agentic-frontend-v2.md
 decision_skeleton: 2026-07-12-research-proposal-omni-agentic-frontend-v2.md
 verdict_vocabulary: "六级状态制（ACKNOWLEDGED→DECIDED→TICKETED→IMPLEMENTED→VERIFIED→PUBLISHED）；证据引用一律带 claim-ledger ID（docs/claim_ledger.yaml + survey HB-*）；status: valid|directional 者方可引，directional 一律标 Stage-1 假设级；无 ledger ID 的数字 = unverified"
 panel_response: "v1 敌对评审团 5 FUNDAMENTAL + 12 MAJOR 全部处置（§12 映射表）"
 appendices:
-  - "附录 A → 2026-07-12-omni-hotword-biasing-survey.md（S4 热词/上下文偏置协议、测试床、传统技术存活裁定、logit_bias/GBNF 白盒扩展层）"
+  - "附录 A → 2026-07-12-omni-hotword-biasing-survey.md（S4 热词/上下文偏置协议、测试床、传统技术存活裁定；logit_bias/GBNF 白空间臂已依续18裁定移除，调研记录原样保留于原文）"
   - "附录 B → 2026-07-12-omni-lm-rescoring-survey.md（reward 信号层：后融合/重排序认账 + 存量池离线标定实验）"
 ---
 
@@ -32,7 +32,7 @@ v1 的错误：把研究对象收窄到模型本体（frozen-key 纯度），并
 2. **效果是唯一最终裁判**——主问题必须设计成去赢；系统效果不达标的后果是**回炉迭代**（预算界定），"负结果也是贡献"**禁止用于主问题**，仅保留给次级科学点 S1–S4。
 3. **frozen-key sufficiency 降级为次级科学点 S1**（组件选型依据 + 激活叙事证据）。
 4. **基线哲学反转**——不得要求先把核心模型调到极致再测知识系统；真实价值场景 = **把闭源 API 搭成可验证、可闭环的系统，针对性提升外挂能力（知识/记忆/技能）**。基线 = **裸核心标准用法**；long-context 塞入 / own-ASR 级联从"基线"改编入**系统复杂度阶梯**（外挂系统的最低阶形态）。
-5. **闭源 API 兼容层为硬约束**——主配置只用**黑盒层**接口（音频/文本进、文本出、多次采样）；logprob / logit_bias / GBNF 等白盒特权降为**白盒扩展层**单独申报。
+5. **闭源 API 兼容层为硬约束**——系统接口契约唯一：音频/文本进、文本出、多次采样，无 tier 划分（2026-07-12 第三轮裁定取消白盒扩展层，详见文首 banner 与 Decision-Log 续18）。logprob / logit_bias / GBNF 不是系统组件：其 Stage-1 标定记录保留于 ledger，仅供工程诊断，与系统组件严格分离。
 6. **本地冻结核心 = 科学载具（可复现）**，闭源可迁移性 = 价值主张（接口最小化设计 + 跨核心迁移冒烟作证）。
 
 v1 敌对评审团 5 FUNDAMENTAL + 12 MAJOR + 5 噪音 共 17 项处置见 §12，处置状态按**六级状态制**（ACKNOWLEDGED→DECIDED→TICKETED→IMPLEMENTED→VERIFIED→PUBLISHED）跟踪。
@@ -43,7 +43,7 @@ v1 敌对评审团 5 FUNDAMENTAL + 12 MAJOR + 5 噪音 共 17 项处置见 §12�
 
 ### 1.1 问题设定：冻结 omni 核心 + 可验证闭环系统的业务价值
 
-语音 / omni 多模态 LLM 已进入"核心冻结、能力外挂"的部署形态。当下最强的 omni 核心——本地冻结检查点（Qwen3-Omni-30B，arXiv:2509.17765）或闭源 API（GPT-4o-Audio、Gemini 一类）——我方既不能改权重、也不能改结构；闭源 API 更进一步只暴露**黑盒接口**（音频 / 文本进、文本出、多次采样），连 logprob / logit_bias / GBNF 这类白盒特权都不保证可达。这不是缺陷假设，而是**部署现实**。
+语音 / omni 多模态 LLM 已进入"核心冻结、能力外挂"的部署形态。当下最强的 omni 核心——本地冻结检查点（Qwen3-Omni-30B，arXiv:2509.17765）或闭源 API（GPT-4o-Audio、Gemini 一类）——我方既不能改权重、也不能改结构；闭源 API 更进一步只暴露**音频/文本进、文本出、多次采样**这一单一系统接口契约，连 logprob / logit_bias / GBNF 都不保证可达（也不作为系统组件）。这不是缺陷假设，而是**部署现实**。
 
 在这一现实下，真实业务价值**不在**把某个核心模型的裸能力刷到极致（那是模型厂的事），而在把一个既有核心（尤其闭源 API）搭成**可验证（verifiable）、可闭环（closed-loop）**的系统，针对性提升其**外挂能力**——知识（knowledge）、记忆（memory）、技能（skill）。三类补充按**粒度**区分：知识 = 通用事实、记忆 = 特定实例召回、技能 = 任务模板注册；本提案聚焦**知识子系统**，记忆 / 技能为同级外挂，暂缓。系统价值在于：无需触碰核心权重即可在知识依赖型语音任务上兑现效果，且**接口最小化设计**天然向闭源 API 迁移——本地冻结核心是**科学载具**（可复现），闭源可迁移性是**价值主张**。
 
@@ -69,13 +69,13 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 **使用段定律——递送主导 + 采纳固执**：结构化 card 递送 **+24.6pp**（相对 +34.6%，5/5 过 Holm；**C-MINDS-V2**）——**全项目最大已验效应**；2-turn 两轮 prompt 递送使冲突采纳翻倍（0.175→0.35，**C-MINDS-V2** 递送族的子结果，directional）。与之对偶的是**参数固执（adoption stubbornness）**：冲突时仅 **24%** 采纳外部知识（SQuAD keep-参数 0.70；该 keep-率探针**尚未编入 claim_ledger** → 按本版 verdict_vocabulary 记 unverified，签署前须补 ledger ID 或降为定性陈述）——使用段核心约束、信任校准的靶点。
 
-**reward-infra 校准裁定（后端收编口径）**：**C-ASR-V2**——存量池离线选择器电池里，logprob@8 是**唯一**在 clean 与 snr5 两条件下 corpus-WER CI 均排除 0 的可部署选择器（clean +0.0094 [.0034,.0165]、snr5 +0.0081 [.0005,.0161]），兑现约 **24% / 42%** oracle 头空。*诚实的 Holm-16 口径*：在真实发现网格（4 选择器 × 4 个 N = 16 比较）全家族校正下**两条件均不存活**（noise1 adj p=.592、noise2 adj p=.075）；预选 logprob@8 端点仅在两次独立噪声抽样中**方向一致**——directional，非独立复现、非"可部署赢家"。"Holm family-wise survives"绝不得脱离"哪个家族"引用。
+**reward-infra 校准裁定（后端收编口径）**：**C-ASR-V2**——存量池离线选择器电池里，logprob@8 是**唯一**在 clean 与 snr5 两条件下 corpus-WER CI 均排除 0 的可部署选择器（clean +0.0094 [.0034,.0165]、snr5 +0.0081 [.0005,.0161]），兑现约 **24% / 42%** oracle 头空。*诚实的 Holm-16 口径*：在真实发现网格（4 选择器 × 4 个 N = 16 比较）全家族校正下**两条件均不存活**（noise1 adj p=.592、noise2 adj p=.075）；预选 logprob@8 端点仅在两次独立噪声抽样中**方向一致**——directional，非独立复现、非"可部署赢家"。"Holm family-wise survives"绝不得脱离"哪个家族"引用。（依 2026-07-12 续18 裁定，logprob 类信号已退出系统设计，本条记录保留于 ledger 作 Stage-1 标定线，仅供工程诊断，见 §7。）
 
 ## 2. 相关工作与定位（Related Work & Positioning）
 
 ### 2.1 上下文偏置（contextual biasing）：解码器访问分水岭 + 检索式注入线
 
-**六族传统技术在 chat-API omni 下无一原样存活**，分水岭是**解码器内部访问（decoder access）——不是训练与否**（此 watershed 裁定的活体锚点 = 2025 的 trie 研究 arXiv:2508.17796 + 当代 llama.cpp 工具事实 HB-8/10，下列 pre-2025 技术行仅作谱系/已弃用支撑）：shallow fusion（在线 WFST/NNLM 重打分，需逐步 beam 分数；Zhao IS2019 **[谱系]**，HB-1）、CLAS / 深度上下文（需训练 bias-encoder attention；arXiv:1808.02480 **[谱系]**，HB-2）、trie / 前缀树约束解码（需 beam + next-token masking；arXiv:2508.17796，HB-3）、TCPGen（需端到端训练；arXiv:2109.00627 **[已弃用]**，HB-4）、contextual adapters（需训练 adapter；arXiv:2205.13660 **[已弃用]**，HB-5）、transducer/CTC beam boosting（需帧 log-prob；HB-6）。最反直觉的一条：连"免再训练"的 **CTC-WS**（arXiv:2406.07096 **[已弃用]**，NeMo）也失效——它需 CTC 帧 log-prob 在候选帧区间替换贪心结果，而 chat API 对音频编码器不暴露任何帧 logit。**残存的只有三个退化替身**：prompt 注入（退化 CLAS 后裔，黑盒可达）、logit_bias（无结构静态 shallow fusion，字符串级子词袋、表面形式脆弱；llama.cpp issue #13605，HB-8）、GBNF（硬约束 trie 解码，伤开放转写；HB-10）——后两者依赖白盒特权，闭源 API 不保证，故在本系统降为**白盒扩展层**单独申报（附录 A）。
+**六族传统技术在 chat-API omni 下无一原样存活**，分水岭是**解码器内部访问（decoder access）——不是训练与否**（此 watershed 裁定的活体锚点 = 2025 的 trie 研究 arXiv:2508.17796 + 当代 llama.cpp 工具事实 HB-8/10，下列 pre-2025 技术行仅作谱系/已弃用支撑）：shallow fusion（在线 WFST/NNLM 重打分，需逐步 beam 分数；Zhao IS2019 **[谱系]**，HB-1）、CLAS / 深度上下文（需训练 bias-encoder attention；arXiv:1808.02480 **[谱系]**，HB-2）、trie / 前缀树约束解码（需 beam + next-token masking；arXiv:2508.17796，HB-3）、TCPGen（需端到端训练；arXiv:2109.00627 **[已弃用]**，HB-4）、contextual adapters（需训练 adapter；arXiv:2205.13660 **[已弃用]**，HB-5）、transducer/CTC beam boosting（需帧 log-prob；HB-6）。最反直觉的一条：连"免再训练"的 **CTC-WS**（arXiv:2406.07096 **[已弃用]**，NeMo）也失效——它需 CTC 帧 log-prob 在候选帧区间替换贪心结果，而 chat API 对音频编码器不暴露任何帧 logit。**残存的只有三个退化替身**：prompt 注入（退化 CLAS 后裔，经系统接口契约可达）、logit_bias（无结构静态 shallow fusion，字符串级子词袋、表面形式脆弱；llama.cpp issue #13605，HB-8）、GBNF（硬约束 trie 解码，伤开放转写；HB-10）——后两者依赖解码器内部访问特权，闭源 API 不保证，按 2026-07-12 续18 裁定已从本系统臂族移除（不再单独申报；原调研记录保留于附录 A 原文，仅供工程诊断参考，见附录 A 说明）。
 
 **检索式注入（retrieve-then-inject）是文献收敛出的替代形态**：大偏置库 → 语音键检索小候选子集 → prompt 注入。证据在与 Qwen3-Omni **同族**基座上很强（replacement-form 论点由 2025 的 BR-ASR/RECAST/Hotword-RL/Locate-and-Focus 活体锚定，Phoneme-RAG 为 pre-2025 佐证行）：BR-ASR（Qwen-Audio，arXiv:2505.19179，HB-16）、RECAST（Phi-4 / GPT-4o-mini，EMNLP2025 findings.203，HB-23）、Phoneme-RAG（Apple，arXiv:2409.15353 **[谱系]**，HB-24）、Hotword-RL（Qwen2.5-7B，arXiv:2512.21828，HB-15）、Locate-and-Focus（Qwen2-Audio，arXiv:2507.18263，ACL2025，HB-25）。两条一致读数：(1) **top-2 甜点**——候选越多单调越差，整表塞 prompt 在 N≥100 灾难幻觉、"list-vomiting"（模型背诵列表而非转写；LOGIC，arXiv:2601.15397，HB-17）；(2) **关键约束**——所有赢家检索器都是**专门训练**的对比检索器（BR-ASR CLAP 命中 93/91%、GLCLAP 89/74%；HB-26），off-the-shelf CLAP 词汇键**已死**（R@1≈0.1，此裁定由 2025 BR-ASR/HB-26 co-anchor），唯一全 training-free 类比 M2R-Whisper（arXiv:2409.11889 **[谱系]**）的 token-kNN 段需 logit 访问（chat API 无）。**定位**：我方的差异**不在偏置机制新颖**，而在把这条被专训检索器统治的能力，做成**零训练（zero-training）、闭源 API 兼容**的系统——对外效果故事 = "零训练前端追平 / 超越需专训检索器的 pipeline"（S1 的 trained-frozen 对照臂作证）。
 
@@ -155,7 +155,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 - **S1（frozen-key sufficiency，降级后的 v1 主问题）**。**动机**：冻结 omni 自身 2048d 隐态音频嵌入能否作为**零训练投影的检索键**（v1 旗舰内核，现降为次级）+ 组件选型依据 + 「激活」叙事证据。**Estimand**：omni-own 键 vs 专化冻结键 vs trained-frozen（nemotron）的检索质量（squtr 原生 R@k / nDCG）与端到端贡献。**家族**：3 键空间两两 = **3 项**。**反馈系统设计**：决定检索段键空间选型——若 omni-own 不足，系统换更强冻结组件继续，负结果仅记为 S1 边界，**不阻塞 H-sys**；预注册承诺——若须训练投影，报告为 training-free 的负结果（回应 panel FUND-2，且诚实对待 HB-26「off-the-shelf CLAP 词汇键已死 R@1≈0.1，赢家检索器多 purpose-trained」的激进赌注）。**⚠ 新鲜度审计（见 §4.3 ⚠ 注 + §2.6）**：一手 LCO-Embedding（2510.11693）/ MAEB（2602.16008）强制把「冻结 omni-own 键充分」改述为「最强廉价键、无音频训练达 SOTA 但 MAEB 均分仅 ~50–52%、且 SOTA 证据含一层轻量非音频对比精化而非纯 raw readout」——S1 的「纯零适配 2048d readout 即足」措辞据此收紧，待 owner 复核。
 - **S2（递送主效应）**。**动机**：递送形式是全项目最大已验杠杆（结构化 card 递送相对 +34.6%，5/5 过 Holm，**C-MINDS-V2**，directional）。**Estimand（panel F2/#5 修复，取代 v1「≥ 任意维度」的病态定义）**：单一预注册对比 = 递送主效应（card + 两轮 prompt 递送合并最优 vs flat）− 键模态主效应，**联合 CI**。**家族**：**1 项**。**反馈系统设计**：裁定使用段「组织」与检索段「键选择」谁承载更多效应，锁定递送形式。（「两轮 prompt 递送」= 预制两轮消息在**单次**生成调用内递送，非模型发起的工具往返，panel R3-MINOR 更名处置。）
-- **S3（发现段·两遍管线）**。**动机**：何时检索——全项目证据最薄段；定位 = active-retrieval（**FLARE**, Jiang et al. 2023, arXiv:2305.06983 **[谱系]** / **Self-RAG**, Asai et al. 2023, arXiv:2310.11511 **[谱系]**）向冻结 omni 的迁移。**Estimand + 出 mock 口径（panel F3-R3/#2 修复）**：触发式检索作为**独立 two-pass pipeline**（第一遍生成→取生成不确定度→决定检索→第二遍生成），在 mock 口径**之外**运行，不违反 `assert_no_adaptive_logic` 不变量。**双门判定（dual-gate，panel M4/#14 修复）**：增益差 **TOST**（margin 预注册，触发 vs 恒检索等增益）+ 调用降幅 **≥30% superiority** 检验，**两门皆须过**。**家族**：**2 项**。**反馈系统设计**：裁定触发式检索是否值一次额外生成遍（发现段配「触发」还是「恒检索」）；黑盒层口径触发信号取输出侧自一致性，白盒扩展层口径可取 logprob/熵（见 §4.2、§7）。
+- **S3（发现段·两遍管线）**。**动机**：何时检索——全项目证据最薄段；定位 = active-retrieval（**FLARE**, Jiang et al. 2023, arXiv:2305.06983 **[谱系]** / **Self-RAG**, Asai et al. 2023, arXiv:2310.11511 **[谱系]**）向冻结 omni 的迁移。**Estimand + 出 mock 口径（panel F3-R3/#2 修复）**：触发式检索作为**独立 two-pass pipeline**（第一遍生成→取生成不确定度→决定检索→第二遍生成），在 mock 口径**之外**运行，不违反 `assert_no_adaptive_logic` 不变量。**双门判定（dual-gate，panel M4/#14 修复）**：增益差 **TOST**（margin 预注册，触发 vs 恒检索等增益）+ 调用降幅 **≥30% superiority** 检验，**两门皆须过**。**家族**：**2 项**。**反馈系统设计**：裁定触发式检索是否值一次额外生成遍（发现段配「触发」还是「恒检索」）；第一遍不确定度信号取**输出侧 m=3 采样自一致性一致率**（sampled self-consistency agreement rate），不再使用 logprob 阈值——logprob 类信号已退出系统设计，仅留 ledger 作工程诊断（见 §4.2、§7、续18）。
 - **S4（实体粒度实例；热词/上下文偏置）**。**动机**：热词偏置 = RDU 三段在实体粒度的具象（H5），retrieve-then-inject 被 ≥5 篇同族基座论文强证据支持为替代形态（附录 A §4）。**Estimand + 反答案注入（panel F3/#3 修复，规避 C-M3/C-T7 的 answer-injection 失效类）**：可部署列表 = **eval 前冻结的热词库经音频键检索的产出（outcome）**；「真词保证入列」的列表**降为 oracle 上界臂，永久标注不可部署**；B-WER 主指标（相对 ≥15% 靶，比 H-sys 更严）**以检索产出为条件**计算，真词命中如实记录、绝不保证。**H5a 单独报告**：检索召回 + **同音精度（homophone precision）**——BR-ASR RecallH / DCL 类比（HB-21），界定同音误注入率，作为收敛论证要求的显式 precision/去相关项。**家族**：列表长度扫描 {2,5,10,50}（4）+ 主对比（1）= **5 项**。测试床 = is21_deep_bias / AISHELL-NER / SLURP（附录 A 协议）。**反馈系统设计**：偏置列表由检索产出，oracle 臂降级；若三段管线不显著优于 full-list-stuffing → 检索式注入假设在实体粒度证伪，如实报负。
 
 ## 4. 系统架构（System Architecture）
@@ -172,11 +172,11 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 三段各自映射到既有账本机器：**检索段** = 键组织 × 向量模型 × 检索策略；**发现段** = 触发/门控（第一定律「宁可多送、不可漏送」——精度门控已证伪 C-T7 gate−inject=−0.134；纯指令无内容有害 MInDS −0.245，C-MINDS-V2）；**使用段** = 递送形式 + 采纳率 α（参数固执，冲突时仅约 24% 采纳外部知识——信任标定靶点）。
 
-### 4.2 闭源 API 兼容分层（硬约束）
+### 4.2 系统接口契约（硬约束）
 
-**黑盒层（black-box tier，主配置）**——只用任何闭源 API 都保证暴露的接口：**音频/文本输入、文本输出、多次采样（multi-sampling）**。发现段触发用**输出侧信号（output-side signals）**：采样自一致性、验证器一致度、答案级置信引出（re-prompt 引出）。这是可迁移到任意闭源 API 的部署口径。
+**系统接口契约（唯一，无 tier 划分）**——只用任何闭源 API 都保证暴露的接口：**音频/文本输入、文本输出、多次采样（multi-sampling）**。发现段触发用**输出侧信号（output-side signals）**：采样自一致性（m=3）、验证器一致度、答案级置信引出（re-prompt 引出）。这是可迁移到任意闭源 API 的部署口径（2026-07-12 第三轮裁定取消白盒扩展层，见文首 banner）。
 
-**白盒扩展层（white-box tier，单独申报）**——本地核心可用、闭源 API 不保证：logprob 触发、`logit_bias` 加性偏置、GBNF 语法硬约束。**已验 logprob 信号改标白盒扩展层**：我方唯一已验的可部署选择器信号 logprob@8（**C-ASR-V2**，directional：clean 5.79→4.86 corpus-WER，sig）依赖逐 token logprob = 白盒特权，故移入白盒扩展层单独报告，黑盒主配置不依赖它。`logit_bias`/GBNF 仅作探索标注（非 H5 的 15% 载重，panel M16/#16；纯 logit_bias 类比 LOGIC 仅兑现约 9% 相对，恰在门槛下）。
+logprob 触发、`logit_bias` 加性偏置、GBNF 语法硬约束**不是系统组件**：三者均依赖本地核心的解码器内部访问，闭源 API 不保证可达，按续18 裁定已从系统臂族移除。我方唯一已验的相关信号 logprob@8（**C-ASR-V2**，directional：clean 5.79→4.86 corpus-WER，sig）依赖逐 token logprob，其 Stage-1 标定记录保留于 ledger，仅供工程诊断（llama.cpp 白盒能力，#35），与系统组件严格分离，不作发现段触发信号使用——发现段触发一律改用上述输出侧信号。`logit_bias`/GBNF 两臂已删除，不再作 H5 的 15% 载重（原探索记录见附录 A 说明；纯 logit_bias 类比 LOGIC 曾仅兑现约 9% 相对，恰在门槛下，此数字随臂删除一并归档为历史参考）。
 
 ### 4.3 知识子系统候选组件（全冻结使用）
 
@@ -198,7 +198,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 **本地冻结核心 = 科学载具（science vehicle）**：Qwen3-Omni-30B Q8_0 GGUF via llama.cpp（`-ngl 28`，resident `llama-server`），数据/代码/种子全 pin，**确证层结果在此复现**（可复现性由此保证；owner 修正⑥）。
 
-**闭源可迁移性 = 价值主张（portability claim）**：真实价值场景 = 把闭源 API 搭成可验证、可闭环的系统。兑现 = **接口最小化设计**（§4.2 黑盒层只用音频/文本进、文本出、多采样）+ **跨核心迁移冒烟（cross-core smoke）**——黑盒层配置在第二核心上 1–2 集轻验作可迁移性证据（候选：MERaLiON-2 或一个闭源 API，时间线 Week-3）。二者分工明确：科学结论落在冻结本地核心（严格可复现），可迁移性作为价值证据由跨核心冒烟支撑，**不以单核心成立冒称通用**。
+**闭源可迁移性 = 价值主张（portability claim）**：真实价值场景 = 把闭源 API 搭成可验证、可闭环的系统。兑现 = **接口最小化设计**（§4.2 系统接口契约只用音频/文本进、文本出、多采样）+ **跨核心迁移冒烟（cross-core smoke）**——同一系统接口契约配置在第二核心上 1–2 集轻验作可迁移性证据（候选：MERaLiON-2 或一个闭源 API，时间线 Week-3）。二者分工明确：科学结论落在冻结本地核心（严格可复现），可迁移性作为价值证据由跨核心冒烟支撑，**不以单核心成立冒称通用**。
 
 ---
 
@@ -225,7 +225,7 @@ owner 裁定（2026-07-12）：training-free 的主战场在**前端**——调�
 
 ### 5.2 基线定义——"裸核心标准用法"的可操作化（去主观）
 
-基线 = **裸核心（frozen Qwen3-Omni-30B，无任何外挂知识子系统）以标准用法运行**。为使"标准用法"客观可判，操作化定义如下，全部 dev 轻调后**冻结**、写入 prereg，之后不得改：(a) **prompt** = 各 K 型任务的固定模板（`templates.py`，音频进 + 固定任务定义文本：label 集/MCQ 选项/工具注册/JSON schema；绝不含 golden 转写/答案/intent）；(b) **采样** = greedy（temperature 0.0，top_p 0.95，top_k 40，repeat_penalty 1.0，max_tokens 200，即 locked 工件的 `sampling_params`）；(c) **dev 轻调自由度**仅限模板措辞与输出解析正则，在 dev n≈40 上单次择优后冻结，**冻结点写入 hash**；(d) 基线只用**黑盒层**接口（音频/文本进、文本出、采样），与主配置的闭源 API 兼容层同级——不给基线任何白盒特权，也不给外挂。这样"基线是否被刻意压低"可由第三方对照冻结模板与采样参数客观核验。
+基线 = **裸核心（frozen Qwen3-Omni-30B，无任何外挂知识子系统）以标准用法运行**。为使"标准用法"客观可判，操作化定义如下，全部 dev 轻调后**冻结**、写入 prereg，之后不得改：(a) **prompt** = 各 K 型任务的固定模板（`templates.py`，音频进 + 固定任务定义文本：label 集/MCQ 选项/工具注册/JSON schema；绝不含 golden 转写/答案/intent）；(b) **采样** = greedy（temperature 0.0，top_p 0.95，top_k 40，repeat_penalty 1.0，max_tokens 200，即 locked 工件的 `sampling_params`）；(c) **dev 轻调自由度**仅限模板措辞与输出解析正则，在 dev n≈40 上单次择优后冻结，**冻结点写入 hash**；(d) 基线只用**系统接口契约**（音频/文本进、文本出、采样），与主配置同级——不给基线任何额外特权，也不给外挂。这样"基线是否被刻意压低"可由第三方对照冻结模板与采样参数客观核验。
 
 ### 5.3 系统复杂度阶梯（sophistication ladder，臂族内自低向高）
 
@@ -243,11 +243,11 @@ owner 第二轮裁定的基线哲学反转落地为阶梯，**不要求先把核
 
 **干扰词构造**：干扰词从各测试床**固定池**按**预注册 seed + 列表规模 N** 采样（模型不能靠盲抄列表取胜）；真词占比（半 utt 含真实体、半不含，HB-15 惯例）预注册、中途不改。
 
-**列表长度扫描 {2, 5, 10, 50}**（deployable 检索 top-k 轴，4 格）：先验甜点 top-2（HB-15 KER 11.99@top-2 vs 15.21@top-10），更多候选单调更差；此 4 格全进家族（§5.6 #10–13）。另设 oracle-list 距 distractor-N∈{100,500,1000,2000} 的**上界参考曲线**（HB-28 惯例，仅对文献 apples-to-apples，不进主家族）。注入形式 `logit_bias`/GBNF 两杠杆**标 exploratory-only、不作 H5 载荷**（HB-8 表面形式脆弱、纯 logit_bias 类比仅 ~9% 恰在门槛下，附录 A §7；修复 panel #16）。
+**列表长度扫描 {2, 5, 10, 50}**（deployable 检索 top-k 轴，4 格）：先验甜点 top-2（HB-15 KER 11.99@top-2 vs 15.21@top-10），更多候选单调更差；此 4 格全进家族（§5.6 #10–13）。另设 oracle-list 距 distractor-N∈{100,500,1000,2000} 的**上界参考曲线**（HB-28 惯例，仅对文献 apples-to-apples，不进主家族）。注入形式 `logit_bias`/GBNF 两臂**已依 2026-07-12 续18 裁定移除**，不再作为 H5 载荷或探索项（HB-8 表面形式脆弱、纯 logit_bias 类比仅 ~9% 恰在门槛下，原调研记录保留于附录 A §7 原文，仅供工程诊断参考；修复 panel #16）。H5 的 15% 相对靶改由检索短列表 prompt 单独承载，可达性待 D6 首格实测复核（**⚠ 见风险节 §10 标注**）。
 
 ### 5.5 臂预算、按遍计价与 1 真格标定承诺
 
-探索层（dev only）：系统配置 ≈ 键空间(4) × 递送(3) ≈ 12–16 格/集 + 基线族 3（裸/①/②）+ 对照臂 4（random-retrieval、oracle-retrieval 上界、gold-transcript 上界、no-retrieval）≈ **20–23 格 × 4 集 ≈ 90 格** + S3 两遍管线 8 格 + S4 测试床 ~24 格。**每臂按生成遍数计价**：two-pass 臂（own-ASR 级联、HyDE、S3 触发第一遍）×2 生成遍（修复 panel #15，`phase_a_cells.GEN_TIME_S=3.0s` 系未实测常数，只算 1 遍）。**硬承诺**：开跑前**实测 1 真格 wall-clock**（记入 `_repro/step2_mock/`）再据以定预算，不以未实测常数承诺时间线。
+探索层（dev only）：系统配置 ≈ 键空间(4) × 递送(3) ≈ 12–16 格/集 + 基线族 3（裸/①/②）+ 对照臂 4（random-retrieval、oracle-retrieval 上界、gold-transcript 上界、no-retrieval）≈ **20–23 格 × 4 集 ≈ 90 格** + S3 两遍管线 8 格 + S4 测试床 ~24 格。**每臂按生成遍数计价**：own-ASR 级联 / HyDE 两遍臂仍按 ×2 生成遍计价；**S3 触发式检索臂改按 m+1 遍计价**（修复 panel #15 + 续18 自一致性成本口径）——第一遍不确定度信号取 **m=3 次采样的自一致性一致率**（非单遍 logprob 阈值），第一遍本身即需 m=3 次生成，触发后再加 1 次第二遍生成：**触发 item 每条 = m+1 = 4 遍，未触发 item 每条 = m = 3 遍**（原按 2 遍/item 的估计已过时、系统性低估自一致性成本，此处如实上调）。S3 两遍管线 8 格的总生成遍预算相应从 8×2=16 遍上调为区间 **8×3 ~ 8×4 = 24–32 遍**（依实测触发率而定）。**硬承诺**：开跑前**实测 1 真格 wall-clock（含 m=3 采样耗时）**（记入 `_repro/step2_mock/`）再据以定预算，不以未实测常数承诺时间线。
 
 ### 5.6 统计分析计划
 
@@ -333,17 +333,17 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 
 **定位（RDU §0 定向 + panel M17/R4-MAJOR-5 修复）**：reward 信号层**不是本提案的研究方向**，而是一组**数据集无关的标准信号供给**——换数据集不换信号定义。它**只**服务两处前端决策：(a) **发现段触发**（S3 两遍管线第一遍的 when/what-to-retrieve 门），(b) **使用段信任标定**（采纳率 α 与冲突消解的权重）。**明确不用于输出重排序作为研究主张**（那是 Proposal-B 的 parked 范围）。**δ_corr 从我方定理约束清单中移除**，引 ROVER（Fiscus 1997 **[谱系]**，附录 B C17）作为跨源误差互补的 28 年前正典，作**借用基础设施**认账，不作理论贡献。
 
-**分层信号表（闭源 API 兼容层约束：黑盒层 = 主配置；白盒扩展层 = 单独申报）**
+**信号表（系统接口契约约束：全部输出侧信号，无 tier 划分）**
 
-| tier | 信号 | 所需接口 | 触发用途（发现段） | 标定用途（使用段） | 证据/状态 |
-|---|---|---|---|---|---|
-| 黑盒层 | 采样自一致性（多采样离散度 / ROVER 词对齐投票 / MBR 互评 WER） | 多次采样、文本出 | 离散度高→触发检索 | 一致度→信任权重 | MBR@8 中性（ns），C-ASR-V2 directional |
-| 黑盒层 | 验证器一致度（δ_corr：第二个 context-differentiated 冻结 omni 打分候选，同权重异 system-prompt） | 二遍推理、文本出 | 验证器质疑→触发 | 跨源一致→采纳 | 借用基础设施（ROVER/Fiscus，附录 B C17/C19 OPEN） |
-| 黑盒层 | 答案级置信引出（追问模型自评可答性/置信） | 追加一轮、文本出 | 低置信→触发 | 自评置信→α 校准 | 未验，探索层标定 |
-| **白盒扩展层** | token logprob / 序列困惑度（**已验 logprob@8 由头条 endpoint 改标此层**） | token logprobs（本地核心可用，**闭源 API 不保证**） | 句级低置信→触发 | 置信→信任 | logprob@8：clean −0.94pp、snr5 −0.82pp，均 corpus-sig，**C-ASR-V2 directional**（oracle@8 clean 3.57%/snr5 6.36% 为上界；random/length 反伤） |
-| **白盒扩展层** | 逐 span token 熵（FLARE 式低置信 span 定位） | token logprobs | span 熵峰→触发第二遍 | — | 未验，白盒扩展层探索 |
+| 信号 | 所需接口 | 触发用途（发现段） | 标定用途（使用段） | 证据/状态 |
+|---|---|---|---|---|
+| 小样本自一致性（m=3 采样一致率 / ROVER 词对齐投票 / MBR 互评 WER） | 多次采样（m=3）、文本出 | 一致率低→触发检索 | 一致度→信任权重 | MBR@8 中性（ns），C-ASR-V2 directional |
+| 验证器一致度（δ_corr：第二个 context-differentiated 冻结 omni 打分候选，同权重异 system-prompt） | 二遍推理、文本出 | 验证器质疑→触发 | 跨源一致→采纳 | 借用基础设施（ROVER/Fiscus，附录 B C17/C19 OPEN） |
+| 答案级置信引出（追问模型自评可答性/置信） | 追加一轮、文本出 | 低置信→触发 | 自评置信→α 校准 | 未验，探索层标定 |
 
-**离线标定实验（存量池、CPU、near-free；探索层不触发 kill，见 §9）**：在冻结 `_repro/asr_bon_v2_{clean,snr5}.json`（test.other 96 utt × pool8 × 3 seed，候选与 per-utt logprob 已存）上，逐 item 计算各信号与该 item **oracle 知识增益**（oracle@8 − greedy）的 Spearman 秩相关 ρ_s 与标定曲线 → 产出触发阈 τ\* 与使用段信任权重。**报告纪律**：clean/snr5 分列（附录 B §3 区间律，平均会掩盖），corpus+macro 双分母，cluster bootstrap CI，预冻 SESOI，报 S/D/I 与 pool-collapse rate、proxy-vs-oracle 秩相关。**边界（Information-Boundary Guard）**：选择/验证器**永不见 golden 转写**，δ_corr 验证器再听音频时 prompt 里绝不放参考。CPU 臂（logprob/MBR/自一致/熵/PLL）near-zero 边际；**δ_corr 臂需 GPU**（resident llama-server，对存量池一遍打分，不重生成）。
+logprob 类白盒信号退出系统设计，其 Stage-1 标定记录保留于 ledger（C-ASR-V2），仅供工程诊断（#35）。**成本纪律**：自一致性触发需多采样（m 次生成），成本入 §5 的按遍计价（第一遍 m=3 次 + 触发后第二遍 1 次 = 触发 item 共 m+1 遍，见 §5.5）。
+
+**离线标定实验（存量池、CPU、near-free；探索层不触发 kill，见 §9）**：在冻结 `_repro/asr_bon_v2_{clean,snr5}.json`（test.other 96 utt × pool8 × 3 seed，候选与 per-utt logprob 已存，logprob 字段仅供工程诊断复核、不进入触发/标定口径）上，逐 item 计算各信号与该 item **oracle 知识增益**（oracle@8 − greedy）的 Spearman 秩相关 ρ_s 与标定曲线 → 产出触发阈 τ\* 与使用段信任权重。**报告纪律**：clean/snr5 分列（附录 B §3 区间律，平均会掩盖），corpus+macro 双分母，cluster bootstrap CI，预冻 SESOI，报 S/D/I 与 pool-collapse rate、proxy-vs-oracle 秩相关。**边界（Information-Boundary Guard）**：选择/验证器**永不见 golden 转写**，δ_corr 验证器再听音频时 prompt 里绝不放参考。CPU 臂（logprob/MBR/自一致/熵/PLL，均为存量池离线标定 battery、非系统组件）near-zero 边际；**δ_corr 臂需 GPU**（resident llama-server，对存量池一遍打分，不重生成）。
 
 ## 8. 理论轨（形式化对象 = 系统算子；与工程实现同指一物）
 
@@ -369,10 +369,10 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 |---|---|---|
 | 跨模态路由缺口（audio-query→text-keyed-corpus 未实现，C-PHASEA / R3-MAJOR-1） | 高×高（Week-1 时间线） | Week-1 先交 own-ASR 文本-文本臂；路由并行建+验证；audio-key 臂门控于路由验证；cascade ASR WER 作协变量 |
 | 同音/近音污染（音频相似检索 #1 失效，HB-21；RECAST 硬负挖掘） | 高×中 | 音频键+文本键双持（BR-ASR TextualBias OOV-鲁棒，HB-26）；recall-floor 算子含显式 precision 项；同音精度 H5a 单独报；c_distractor 由 S1 界定 |
-| 闭源 API 信号成本（置信引出/验证器一致度需额外采样；δ_corr 需 GPU） | 中×中 | 黑盒层按生成遍计价（M15）；离线标定用存量池 CPU near-free；δ_corr = 对存量池一遍打分非重生成；白盒 logprob 仅白盒扩展层 |
+| 闭源 API 信号成本（自一致性/置信引出/验证器一致度需额外采样；δ_corr 需 GPU） | 中×中 | 系统接口契约按生成遍计价（含 m=3 自一致性的 m+1 遍，M15）；离线标定用存量池 CPU near-free；δ_corr = 对存量池一遍打分非重生成；logprob 仅留 ledger 作工程诊断（#35），不进系统触发 |
 | 小簇退化（有效 N=cluster 20–45，R1-M2；k=3–4 时 DL τ² 不可靠） | 中×中 | group_key cluster bootstrap；固定效应为主、DL 仅参考；无组集不入确证层或补组键（M7）；kill 确证层专属 |
 | GPU 预算（多遍臂被少算，R3-MAJOR-2；per-pass GEN_TIME 未实测） | 中×中 | 按遍计价（M15）；开跑前实测 1 真格；两批切分（text-key 先）；GPU 会话 lock 协调 |
-| logit_bias/GBNF 亚门槛（~9% LOGIC 恰在 10% 线下，中文多 token 实体表面形式脆弱，HB-8/17） | 中×低 | 白盒扩展层探索-only、非承重（M16）；H5 的 15% 靠检索短列表 prompt + 闭集 GBNF 组合达成 |
+| logit_bias/GBNF 亚门槛（历史发现：~9% LOGIC 恰在 10% 线下，中文多 token 实体表面形式脆弱，HB-8/17；两臂已依续18裁定移除） | 低×低（风险随臂移除而消解，但见下方 ⚠） | 两臂不再是系统风险，原调研记录保留于附录 A；**⚠ substance flag**：H5 的 15% 相对靶原设计为「检索短列表 prompt + 闭集 GBNF 组合」达成，GBNF 移除后改为单靠检索短列表 prompt 承载，可达性未经重新验证，需 D6 首格实测复核，若不足须回§9 迭代 |
 
 **五类跨评审周期常驻失败模式（各带结构性预防）**——从 claim_ledger 的 invalid 谱系提炼，作标准风险常挂：
 - **P1 信息边界泄漏**（喂 golden 转写/答案→假增益；C-M3、C-T7 = invalid）→ 结构预防：递送列表 = 检索产出（S4，非注入）；oracle/gold 臂永久标不可部署上界；G3 泄漏红队 gate；每杠杆过 Information-Boundary Guard。
@@ -387,7 +387,7 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 
 **Week 1（今日可跑技术栈优先，路由并行）**：D1 own-ASR 级联文本-文本臂可跑；D2 文本键系统配置（flat/card/2-turn 递送）；D3 跨模态 audio-query→text-key 路由建成并在留出样本验证；D4 S4 偏置协议（is21_deep_bias 经 WSL git clone + AISHELL-NER 标签 + B-WER 打分器 + 检索→列表对齐）；D5 两遍管线 harness（mock 口径之外，过 assert_no_adaptive_logic）；D6 1 真格 wall-clock/per-pass 标定；D7 探索分两批（batch-1 text-key 周末开跑，batch-2 audio-key 待路由验证）。
 **Week 2（分解归因 + Phase-B 草案）**：D8 三段归因分析（检索/发现/使用）；D9 §7 离线信号标定表（CPU 存量池）；D10 Phase-B 协议草案（预命名赢家 ≤3 + 基线族 3 + 对照臂 4 + custodian 脚本 + 信标 seed 规则 + 候选 ID 全集 hash）；D11 S1 报告（omni-own 键 vs 专化冻结 vs trained-frozen nemotron，squtr 原生 R@k/nDCG）；D12 S2/S3/S4 探索排序 + 交互-CI 宽度检查。
-**Week 3（确证 + 迁移证据）**：D13 owner 签 Phase-B（§13 slot 6）；D14 custodian 信标抽取（公共信标 seed、承诺脚本、全新会话）；D15 单通道确证跑、读取即 burn；D16 H-sys 判定 vs 预注册 SESOI 家族；D17 **跨核心迁移冒烟**——黑盒层配置在第二核心（MERaLiON-2 或一闭源 API）上 1–2 集轻验，作**可迁移性证据（价值主张）**；D18 Decision-Log 追加 + Per-Work-Status 更新 + wiki-sync。
+**Week 3（确证 + 迁移证据）**：D13 owner 签 Phase-B（§13 slot 6）；D14 custodian 信标抽取（公共信标 seed、承诺脚本、全新会话）；D15 单通道确证跑、读取即 burn；D16 H-sys 判定 vs 预注册 SESOI 家族；D17 **跨核心迁移冒烟**——系统接口契约配置在第二核心（MERaLiON-2 或一闭源 API）上 1–2 集轻验，作**可迁移性证据（价值主张）**；D18 Decision-Log 追加 + Per-Work-Status 更新 + wiki-sync。
 
 ## 12. Panel 17 项处置映射（逐条一行，按全提案编号；六级状态制跟踪）
 
@@ -406,13 +406,13 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 - **M13**（无交互模型）→ §5.6：预注册键×递送交互，H-sys 赢家按格级估计选，主效应解读受交互-CI 宽度门控。
 - **M14**（H2 "等增益"接受零假设）→ §3-S3/§5.6：双门 = 增益差 TOST（margin 预注册）+ 调用降幅 ≥30% superiority，两门须过。
 - **M15**（GPU 预算漏多遍臂）→ §4.2/§5.5：按生成遍计价（two-pass ×2），开跑前实测 1 真格。
-- **M16**（logit_bias/GBNF 未建 + ~9%）→ 附录 A + §4.2/§7（白盒扩展层）：标探索-only、非 H5 承重，需新递送代码 + token 实现枚举器。
+- **M16**（logit_bias/GBNF 未建 + ~9%）→ 附录 A + §4.2/§7：两臂已依 2026-07-12 续18 裁定移除（原探索记录保留于附录 A），不再作 H5 承重；H5 的 15% 靶改由检索短列表 prompt 单独承载（可达性待复核，见 §10 ⚠）。
 - **M17**（δ_corr 既 disclaim 又承重）→ §7/§8：定位"借用基础设施"，引 ROVER/Fiscus（1997 **[谱系]**），移出定理约束清单。
 - **噪音 5 项**（主席驳回）：R1-m1（k=3–4 DL τ²）报固定效应/per-dataset、非决策性；R1-m2 家族重计并入 M11；R3 "2-turn 工具"更名"两轮 prompt 递送"（cosmetic）；R3 "新 scheduler" 作工程任务非设计缺陷；R4-MINOR8 两遍缺口占用被 F1 pivot 吸收。
 
 ## 13. Owner / Reviewer 签字位（9 槽，标推荐默认）
 
-1. **§1 主问题措辞（裸基线 + 阶梯双主张）+ 闭源兼容分层** — 推荐默认：**照签**（双主张结构消解 R4-F1/F2）。签字：待定。
+1. **§1 主问题措辞（裸基线 + 阶梯双主张）+ 系统接口契约（单一，无 tier 划分，续18）** — 推荐默认：**照签**（双主张结构消解 R4-F1/F2）。签字：待定。
 2. **10% 相对门槛 + per-dataset SESOI 数值表** — 推荐默认：**单相对尺度为主判定，签前填满 SESOI 数值表**（各集基线→10% 绝对换算）。签字：待定。
 3. **§3 次级科学点取舍（S1–S4）** — 推荐默认：**四点全留，S1 非阻塞**（omni-own 不足则换冻结组件续跑）。签字：待定。
 4. **§5.5 臂预算（~90 格 + S3 8 格 + S4 ~24 格）** — 推荐默认：**按遍计价、门控于 1 真格标定**（D6 后复核 wall-clock）。签字：待定。
@@ -426,5 +426,5 @@ v1 §5 边界纪律全部保留，本节按 v2 系统对象逐臂加固。总原
 
 ## 附录（Appendices）
 
-- **附录 A — S4 热词/上下文偏置协议、测试床、传统技术存活裁定、logit_bias/GBNF 白盒扩展层**：`2026-07-12-omni-hotword-biasing-survey.md`（四透镜：Lens1 传统偏置技术 × chat-API 存活性 / Lens2 prompt 偏置效应量与列表规模 / Lens3 检索式注入证据 / Lens4 基准·协议·本地测试床；HB-1…HB-30 账本）。§2.1、§3-S4、§5.4 全部 HB-* 引用与 is21_deep_bias / AISHELL-NER / SLURP 协议以此为准。
+- **附录 A — S4 热词/上下文偏置协议、测试床、传统技术存活裁定**：`2026-07-12-omni-hotword-biasing-survey.md`（四透镜：Lens1 传统偏置技术 × chat-API 存活性 / Lens2 prompt 偏置效应量与列表规模 / Lens3 检索式注入证据 / Lens4 基准·协议·本地测试床；HB-1…HB-30 账本）。§2.1、§3-S4、§5.4 全部 HB-* 引用与 is21_deep_bias / AISHELL-NER / SLURP 协议以此为准。**移除说明（续18）**：`logit_bias`/GBNF 白空间臂已依 2026-07-12 第三轮 owner 裁定（续18）自系统臂族移除，不再是本 FULL 提案的系统组件；本 survey 原文对二者的调研记录（HB-8/HB-10 等）原样保留，仅供工程诊断参考。
 - **附录 B — reward 信号层：后融合/重排序认账 + 存量池离线标定实验**：`2026-07-12-omni-lm-rescoring-survey.md`（Lens1 经典后融合 / Lens2 LLM-GER training-free / Lens3 omni 二遍解码研究现状 / Lens4 存量池离线重排序设计；C17=ROVER/Fiscus 1997、C19=δ_corr OPEN）。§2.2、§7 的 reward-infra 认账、δ_corr 借用定位、logprob@8（C-ASR-V2）标定以此为准。
