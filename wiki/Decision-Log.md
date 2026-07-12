@@ -6,7 +6,22 @@
 
 ---
 
-### 2026-07-13（续21）· owner 第四轮设计裁定 + 三项执行指令
+### 2026-07-13（续22）· M1 工程基座交付并锁定；v4 已发布至共享 wiki 供外审
+
+**Status.** 续21 三项指令的执行落账。**①/②（工程基座）**：六件套全部 IMPLEMENTED 并经协调者
+独立复跑关键测试后入库（W1 `20d45a8`）——(1) `deterministic_draw.py` 确定性抽样（三个抽签类型
+独立种子命名空间、规范排序、字节一致 manifest；16/16，取代密封会话/信标/burn 机制）；(2) 跨模态
+检索路由（音频查询→text-keyed 源，glap/nemotron 联合空间；干净 ARM-BLOCKED/pending-GPU 状态；
+kb_gate 38/38）；(3) 伪问题键合成建库路径（`--key-form pseudo-question`，冻结核离线生成，
+**真 30B 活体验证**：2 篇 HeySQuAD 证据段落各产 3 条格式良好伪问题、泄漏审计 CLEAN、
+content_hash 落章；假模型测试 10/10）；(4) `two_pass_runner.py` S3 两遍契约（m=5 @ T=0.7、
+按 K 类三种一致度度量；**未触发路径证明零调用检索**；17/17）；(5) `knowledge_card.py` 知识卡
+schema v1 并已活接 `run_mock` 结构化递送臂（13/13）；(6) S4 资产盘点（报告级）：is21_deep_bias
+与 AISHELL-NER 均**不在盘、可达、纯文本小体量**；LibriSpeech test-other 与 AISHELL-1 音频**确认
+全量在盘**（解决热词调研 HB-28 的悬置问）——两个小文本资产待网络窗口拉取。**③（v4 外审版）**：
+`2026-07-13-research-proposal-v4-external-review.md` + 一致性检查裁决已推送远端并 wiki-sync 发布
+（伞仓 `8a0e73e`、wiki `57e486a`）——**外部评委现可访问**。**Gate 态**：M1 代码层锁定；余项=
+两个 S4 小资产下载（网络窗口）+ 外审意见 + owner §12 签字 → M2 探索开闸。实验冻结维持。
 
 **Decision（owner）.** A) 三段设计修订：①检索段对象定律修订——**匹配对象与递送对象分离**
 （值=证据内容不变；键=最大化匹配信号的任意形态，含问题形态）；q2q 强信号/q2a 跨分布弱关联
