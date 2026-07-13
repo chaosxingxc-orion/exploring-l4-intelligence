@@ -6,6 +6,35 @@
 
 ---
 
+### 2026-07-14（续35）· 接受预检审查 + 其对抗复审（两份）；breadth-first 确认；记录校正 + Survey v2 启动
+
+**Context.** Stage-1A precheck 博导审查（`2026-07-13-…-doctoral-review.md`）我方处置为
+ACCEPT_WITH_ONE_REASONED_MODIFICATION（response `0be1285`）；其**对抗复审**
+（`2026-07-14-…-adversarial-reassessment.md`，blob `1ce7c525…`）**接受了 breadth-first 跨〔模型×任务〕
+矩阵研究对象**、把 append-only 顾虑降为过渡期冷热层政策、FFP 未成立。协调者本人核验并抽验其承重反例
+（SER reject-option, Sridhar & Busso Interspeech 2019 属实）。**处置 = ACCEPT_IN_FULL**
+（response-v2 `2026-07-14-response-v2-to-reassessment.md`；不申请签署、不放行 Stage-1B、不做 Stage-1C 选题）。
+
+**Decision（接受的校正，多为我方自认的过度声称）.**
+① **P0-SURV-1 → PARTIAL**（计数可重建 CLOSED / raw-query 重放 UNAVAILABLE / 科学覆盖 OPEN）——scout ledger
+已加 `p0_surv1_status_2026_07_14`。② **"非 ASR 格仍空" → UNDERSEARCHED**：SER/SLU/ST/AAC/audio-QA 直接祖先
+存在（reassessment §4.2 举 ~13 篇）。③ **"广度是护城河" → 工作假设**（`breadth=external-validity 维度,
+非本身即贡献`；`novelty=unverified`）。④ MILS 从 I2 的"ASR 格"更正为非 ASR。⑤ 跨任务 ρ **cellwise-only**，
+禁无权重"总 ρ"；部署用 label-free proxy `S`、评估用 `U`，二者不混。⑥ same-selector contract 待 Stage-1C 前定。
+
+**记录政策（冷热分层正式化）.** 新建 `docs/integrity/record-policy-and-attestations.md`：冷审计层
+（Decision-Log/archive/dated 工件，append-only 永不改写）vs 热现状层（Research-Objective/Per-Work-Status，
+派生可刷新）；provenance 三元组不变量（evidence/artifact snapshot 分列 + canonical git-blob 哈希）；
+`0be1285`/`25cffa9` 两工件的 attestation triple 落档。`14943f1` 的既有文件编辑定性为热层补充（历史在 git 内），
+非改写。热层 `Research-Objective.md`/`Per-Work-Status.md` 已同步刷新（本条为其冷层锚）。
+
+**Survey v2 启动（本轮的 调研）.** taxonomy v2（+候选池构造/+上下文供给/+selective-prediction 三新族；
+selection≠revision 拆开）；跨任务矩阵扫 + **adversarial 挑战者猎杀**（找最直接威胁 I1–I4 与伞级组合的工作）；
+非 ASR 祖先 + agentic 近邻（AudioToolAgent/AuTAgent/JitRL）；逐查询搜索日志（补 P0-SURV-1 缺口）；
+task×method×model kill matrix（禁 `EMPTY`，用 DIRECT_OCCUPIED/PARTIAL_ANCESTOR/ANALOGY_ONLY/UNDERSEARCHED/
+NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE）；per-task SOTA cards；每篇引用独立核验。产物 `wiki/survey/2026-07-14-*`。
+**Stage-1B 不放行；M2 冻结；Stage-1C 选题留 owner。**
+
 ### 2026-07-13（续34）· Stage-1A 预检审查处置 + 研究对象锁定（覆盖优先）+ 上下文冷热分离
 
 **预检审查处置.** reviewer 对 Stage-1A survey 设计 + 记录闭环预检裁定 `RETURN_WITH_MANDATORY_REVISIONS`

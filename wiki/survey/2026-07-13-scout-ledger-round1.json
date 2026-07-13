@@ -2489,5 +2489,18 @@
    "claims_match": true,
    "note": "WebFetch tool errored (socket closed) on direct arxiv.org fetch, so verification relies on WebSearch results. Confirmed via search: a paper titled \"The Anatomy of the CTC Oracle Gap: Acoustic Exhaustion and Linguistic Recovery\" by Ivan Novosad exists at arxiv.org/pdf/2606.23306 (30 pages, 8 figures, cs.CL/cs.LG), matching the claimed title, ID, and venue/year (arXiv preprint, June 2026 per the 2606 prefix). Note: could not independently render the abs page directly due to a tool error, so this is search-based rather than direct-page confirmation."
   }
- ]
+ ],
+ "p0_surv1_status_2026_07_14": {
+  "overall": "PARTIAL",
+  "count_and_dedup_reconstruction": "CLOSED",
+  "raw_query_reproducibility": "UNAVAILABLE_FOR_ROUND1",
+  "scientific_coverage": "OPEN",
+  "basis": "reassessment 2026-07-14 §2.3/§C/§13: 57/46 reconstructable, but raw per-call queries were not logged, so the search UNIVERSE is not replayable and inclusion/exclusion criteria are absent; count reconstruction does NOT establish coverage. Survey v2 adds an append-only per-query log to close this."
+ },
+ "wording_regrade_2026_07_14": {
+  "supersedes": "the round-1 family saturation_notes using \"uncontested / whitespace / absent / open\" language for non-ASR task cells (these strings are left intact below as the historical SCOUT record).",
+  "regrade": "Those non-ASR cells (SER/SLU/ST/AAC/audio-QA/audio-understanding as selection/abstention/QE problems) are RE-GRADED from \"empty/uncontested\" to UNDERSEARCHED: the reassessment §4.2 supplies ~13 direct ancestors (e.g. SER reject-option, Sridhar & Busso Interspeech 2019, independently verified real). Wording discipline (precheck §7.4): use \"no direct match within logged scope\", never \"EMPTY\".",
+  "kill_matrix_vocab": "DIRECT_OCCUPIED | PARTIAL_ANCESTOR | ANALOGY_ONLY | UNDERSEARCHED | NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE",
+  "authoritative_successor": "wiki/survey/2026-07-14-* (Survey v2 neighbor matrix / coverage-and-kill-matrix / scout-ledger-round2)."
+ }
 }

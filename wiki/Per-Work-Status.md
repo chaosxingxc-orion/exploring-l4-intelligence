@@ -2,7 +2,9 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-12.
+> **The single hot current-state entry point is now [[Research-Objective]]** (read it first; this
+> board is a secondary status view — Decision-Log is the cold append-only archive).
+> Last reviewed: 2026-07-14.
 > 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4；
 > primary study 现由 **W1** 承载（提案 v4.2，历两轮对抗复审后，待外审 + owner 签字；
 > v4.1 [[2026-07-12-research-proposal-v41-external-review]] 转历史记录，Decision-Log 续24/续26）。
@@ -10,7 +12,7 @@
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
 | **W4** | `speech-mllm-omni-embedding-rl` | 🟡 **Repositioned per G0** (separate work) | Disentanglement headline dropped → **L0/L1 embedding-utility studies** (readout / suppression / selective-readout limits); fresh proposal **pending ticket #29**; omni-embed model wired. |
-| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **now carries the primary study** | **Primary study (per G0): RDU front-end knowledge system + reward-guided trajectory selector; primary metric ρ realization rate.** Proposal **v4.2 (after two adversarial-review rounds), awaiting external review + owner signature** (v4.1 → historical record); **M1 engineering base locked at W1 `20d45a8`, experiments frozen.** Also holds the genuine reward-driven best-of-N result (frozen Qwen3-Omni-30B via llama.cpp). |
+| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **primary study · Stage-1A problem-definition** | **Stage-1A (续34/续35): research object = a label-free, supply-conditional selection operator's realization surface (ρ(c)/H(c)/regret) across the frozen-omni 〔model × task〕 matrix — ASR is one row; breadth is a working hypothesis, not proven novelty.** RDU demoted to secondary; v4.2 archived as a Stage-1 problem-definition deliverable. **Now: Survey v2** (cross-task neighbor + adversarial challenger hunt + task×method×model kill matrix; non-ASR cells UNDERSEARCHED). **Stage-1B NOT authorized; M2 frozen.** M1 engineering base at `20d45a8`; genuine best-of-N result (frozen Qwen3-Omni-30B via llama.cpp) retained. |
 | W2 | `speech-mllm-efficient-rl-alignment` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 | W3 | `speech-mllm-multitask-rl` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 
@@ -81,10 +83,16 @@ Huang ICML 2025, Snell 2024). **Self-check erratum (wf_45c1f5fe):** an earlier v
 cited "in-repo +0.042 bare vs +0.517 supplied" — the +0.517 is the claim-ledger-INVALID C-T7 number
 (answer leakage; citation as positive evidence prohibited; clean T8 rerun = −0.066 null), and +0.042
 must carry its **macro utterance-WER** label (corpus-WER counterpart +0.0296). No valid in-repo
-supply-stratified H(c) measurement exists yet — producing one is the Stage-1B P0 prototype's job. Next Stage-1A work = the
-survey coverage gate (8 method families incl. MBR/N-best rescoring/reference-free QE ancestors,
-2-round saturation, I1–I4 identity candidates with kill conditions). Stage-1B prototypes NOT yet
-released; M2 stays frozen._
+supply-stratified H(c) measurement exists yet — producing one is the Stage-1B P0 prototype's job._
+_**2026-07-14 update (Decision-Log 续35; precheck review + reassessment both accepted):** research
+object reframed to the cross-〔model × task〕 realization surface (breadth-first, reviewer-accepted);
+"non-ASR cells empty" corrected to **UNDERSEARCHED** (SER/SLU/ST/AAC ancestors exist); "breadth is
+the moat" is a **working hypothesis, not proven novelty**; P0-SURV-1 downgraded to **PARTIAL** (count
+reconstructable, raw-query replay OPEN). **Now: Survey v2** — taxonomy v2 (candidate-support /
+contextual-supply / selective-prediction families + selection≠revision split), cross-task scan,
+**adversarial challenger hunt**, agentic near-neighbors (AudioToolAgent/AuTAgent/JitRL), per-query
+search log, task×method×model kill matrix (no `EMPTY`), per-task SOTA cards. Stage-1B NOT released;
+M2 frozen._
 _**2026-07-13 update (Decision-Log 续32)**: the signoff adversarial review **returned** the v4.2
 remediation package (7 FUNDAMENTAL + 6 MAJOR; all accepted, zero refuted on personal re-verification).
 Owner rulings: **single headline = A-SEL** (reward-guided selector realizing the ρ/oracle headroom,
@@ -149,7 +157,7 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 ## 中文
 
 > **这是活动状态板——更新最频繁的页面。** 任一工作的成熟度或近期计划变化时就更新它，重大变动同时记到
-> [[Decision-Log]]。最近复核：2026-07-11。
+> [[Decision-Log]]。**单一热层现状入口现为 [[Research-Objective]]**（先读它；本板为次级状态视图）。最近复核：2026-07-14。
 
 各工作状态见上表。**W4（omni 嵌入语音解耦，独立工作，按 G0 重定位，2026-07-12）：**
 _状态更正（2026-07-12，Decision-Log 续24）：W4 已非旗舰——disentanglement 头条降级为 L0/L1 嵌入效用
