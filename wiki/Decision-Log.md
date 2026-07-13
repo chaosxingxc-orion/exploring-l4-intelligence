@@ -6,6 +6,21 @@
 
 ---
 
+### 2026-07-13（续28）· owner 对 v4.2 博导审查的五项裁决（核验 36/42 CONFIRMED、0 REFUTED 后）
+
+**Decision（owner）.** ①（M4 等级命名之争）**推迟**——"没必要纠结未来论文应该如何写"，当前聚焦
+数据集采样与工程基座夯实；等级标签依方法学要求须在 M4 开火**前**落定（非发表时），具体选择推迟至
+M3 签字，此前不作 confirmatory 宣称。②（SESOI）协调者呈业内定位分析（Lakens 等价检验谱系 / MCID
+传统；见会话记录）；Q-B 两支数值由 owner 从**外部锚点**（效用/文献惯例）设定，口径如实采用
+**post-observation but externally justified** + prior-exposure register 公开全部先验效应观测
+（C-ASR-V2 电池等）。③（管理用词）"就还好"——不搞 DRAFT 重标运动，仅修事实陈旧处（如"4 errors"）。
+④（独立诚实审计）**采纳，且 Stage-1 即重要**——"稍微有一些学术欺诈和作弊，会导致后面几个月的工作
+被大量浪费掉"；形式 = P0 四登记册（prior_exposure / experiment_attempt / discrepancy /
+release_manifest）+ 修复后系统自检 + **详细整改报告呈外部 reviewer 盖章**。⑤（执行令）先把本轮
+全部已识别问题修复完 + 系统性自检，**高质量锁定阶段性工作**，再出报告。另（承上轮口头裁定）：
+全语料构建维持封存至 M2 选型落定（stage-gated artifact 纪律）；本轮核验 6 个 PARTIAL 中 F-7 为
+潜伏雷非现行害（生产路径未传 eval_golds、scrub 空转、无数据受损）。
+
 ### 2026-07-13（续27）· M1 工程奠基锁定（代码+文档层）；v4.2 经敌意内审环发布
 
 **Status.** 续26 收拢锁定令执行完毕。**工程线**（W1 `159b525`）：全语料建库默认模式（qrels 与候选池
