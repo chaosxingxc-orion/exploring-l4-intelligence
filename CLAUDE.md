@@ -226,7 +226,13 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   sync script overwrites).
 - **mem0 MCP is local/personal memory only** — not shared with the team. Promote anything the team
   needs into the Wiki.
-- **Before starting:** read `wiki/Project-Thesis.md`, `wiki/Home.md` and `wiki/Per-Work-Status.md`. **After a notable decision
-  or learning:** append a dated entry to `wiki/Decision-Log.md` (and update `wiki/Per-Work-Status.md`
-  if a work's maturity/plan changed), then run `bash scripts/wiki-sync.sh`. Full protocol:
+- **Before starting:** read `wiki/Research-Objective.md` FIRST — it is the single hot current-state
+  entry point (current stage, research object, active constraints, open items, supersession index).
+  Then `wiki/Project-Thesis.md` (north star). **`wiki/Decision-Log.md` is the cold append-only
+  archive — do NOT read it whole; grep a single 续NN entry only when you need a decision's
+  provenance.** Point subagents at `Research-Objective.md` + the specific entries they need, never at
+  the whole Decision-Log (context hygiene, 续34). **After a notable decision or learning:** append a
+  dated entry to `wiki/Decision-Log.md`, then reflect the current-state delta into
+  `wiki/Research-Objective.md` (archive first, then the hot view), update `wiki/Per-Work-Status.md`
+  if a work's maturity/plan changed, and run `bash scripts/wiki-sync.sh`. Full protocol:
   `wiki/AI-Collaboration.md`.

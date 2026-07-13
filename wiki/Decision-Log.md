@@ -6,6 +6,39 @@
 
 ---
 
+### 2026-07-13（续34）· Stage-1A 预检审查处置 + 研究对象锁定（覆盖优先）+ 上下文冷热分离
+
+**预检审查处置.** reviewer 对 Stage-1A survey 设计 + 记录闭环预检裁定 `RETURN_WITH_MANDATORY_REVISIONS`
+（FFP 未成立、QRP 中）。协调者本人核验，处置 = **ACCEPT_WITH_ONE_REASONED_MODIFICATION**：
+① 记录类（provenance 三元组、status 忠实性、scout ledger）+ 方法类（taxonomy 三新族、selection≠revision、
+ρ(c) 三分解、三预算视角、信息边界）+ I4 **措辞**收窄（宽主张"没人拿供给当轴"已死）——**全接受**；
+② **反制把 scope 塌缩到 ASR**（唯一 modification）：核验 reviewer 24 条文献,语音原生击杀器**全在 ASR 格**
+（§10.6/10.7 的非 ASR 来源是文本/QA），故其"I2/I4 已占据"只在 ASR 单元格成立。
+
+**研究对象锁定（owner 覆盖率铁律）.** Stage-1A 研究对象 =
+**「一个 label-free、供给条件的选择算子,在冻结 omni〔模型 × 任务〕矩阵上的兑现面（ρ(c)/H(c)/regret）」**。
+ASR 是其中一行,非全部;**广度（跨任务 ASR/ST/SER/SLU/spoken-QA/audio-understanding × 跨冻结模型）
+是护城河**——ASR reranker 论文拿不到跨矩阵兑现面。伪统一守卫（应 reviewer P-F）：**共享对象=算子本身
++ H(c) 记账法统一;各任务各留效用 U 与 SESOI;度量同一算子在每格的 ρ(c)**。"击杀器是否跨任务迁移"
+设为 Survey v2 一等轴（ASR 击杀器不迁移→广度对象未被占据的证据）。I4 状态：broad_claim=KILLED /
+narrow_joint=PLAUSIBLE_NOT_VERIFIED（跨矩阵兑现面）/ priority=HIGH_FOR_SURVEY_NOT_SELECTED。
+
+**记录-P0 兑现.** P0-REC-1/2 + P0-SURV-1 落地（提交 `14943f1`）：scout ledger 从 journal 重建
+（8族/57条/**46**独立）、provenance 拆 evidence/artifact 快照 + canonical git-blob 哈希、status 五处
+规范化明细 raw 保全。**提交前敌意自检 `wf_a7603edd` 抓出我自己重算的 off-by-one（47→46）并当场修**，
+敌意环收敛 7→1→0——首次做到"低级错误在提交前被自己拦下,而非被外审抓"。
+
+**上下文冷热分离（owner：内容保鲜 + 信噪比 + 省上下文）.** 三方矛盾（append-only 诚信 / 保鲜 /
+上下文经济与模型抓重点）的解 = **分层**，不是改写历史：
+- **认知层（热、默认加载、极简、有界）**：新建 `Research-Objective.md`——现状/研究对象/约束/open items/
+  取代索引的唯一入口;被取代即掉出,不随时间膨胀;派生自档案、可重建、非唯一记录。**按用途命名,不用
+  W1/A-SEL 等内部代号**（同收词纪律）。
+- **审计层（冷、append-only、只在溯源时读）**：`Decision-Log.md` 等原样不动;存量历史 `git mv` 进
+  `archive/`（内容不改、保 git 溯源,非改写,不踩 reviewer 升级红线）。
+- **访问纪律**：默认只读热层;要出处才 grep 单条;派 agent 喂热层摘要+所需条目,不让其整篇读大文件。
+归档作为独立验证操作执行（防断链/wiki-sync）。此项直接治"上下文缠绕→我丢当前正典线→把漂移引回来"
+这一反复被外审抓的根因。
+
 ### 2026-07-13（续33·勘误）· 自检工作流坐实 T+0 包 6 类缺陷（24 报 21 确认）——本条更正续33 的两处失实，原文不改
 
 owner 指令"起工作流系统性自检后再说完成"执行结果：6 镜头敌意检查 + 逐发现对抗核证（3 项误报被
