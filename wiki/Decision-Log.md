@@ -6,6 +6,29 @@
 
 ---
 
+### 2026-07-14（续36）· Survey v2 完成（调研收官）：I1 killed、I4 最强空位；Stage-1C 决策包待 owner
+
+**执行（owner 授权自主跑到"调研完成"；academic skills + Workflow；提交前敌意自检每轮到零）.**
+Survey v2 = **15 敌意 lane**（6 非 ASR 祖先 + 3 新方法族 + 1 agentic + **5 kill-lane 挑战者猎杀**）,
+**305 条逐查询日志**（补 P0-SURV-1 缺口）,~93 篇,94 引用核查（2 网络 NOT_RESOLVED）。5 篇承重 kill 由
+协调者本人 WebSearch 核验（mbr-asr 2510.19471、READ 2606.04680、scaling-auditory 2503.23395、
+AudioToolAgent 2510.02995、jia-SER 2602.03873）。
+
+**结果（对外只作 SCOUT 级 / 工作假设,非已证新颖性）.** ① **I1 一般 label-free 选择器 = DIRECT_OCCUPIED**
+（MBR 在冻结 Whisper、我方 LS/FLEURS/CoVoST 上等 K 胜 beam,~31% oracle 兑现）——作独立新颖性**杀掉**;
+SER/audio-understanding 亦被占。② **I4 = 供给条件〔模型×任务〕兑现面 ρ(c)/H(c)/regret：全 lane
+NO_DIRECT_MATCH,单一最清空位**（最近邻 KIT-IWSLT 2606.04730 只做 per-task oracle+realized,非 supply-type
+面）。③ strict-I2（同一冻结核心既生成又音频接地打分）、I3-combined（reward+abstain+Goodhart-on-speech）、
+UMBRELLA 交集（training-free RL ∩ 冻结 omni ∩ advantage→下一步动作）均 NO_DIRECT_MATCH——组件各自被占、
+从未合体。IAD 2504.01931 是预登记的坍缩风险（agentic loop 仅比 one-shot BoN 高 ~3–4pt）。
+
+**产物.** `wiki/survey/2026-07-14-{neighbor-matrix-v2.md, coverage-and-kill-matrix-v2.md, sota-cards-v2.md,
+scout-ledger-round2.json, search-query-log.jsonl}` + 决策包 `2026-07-14-stage1c-decision-package.md`
+（per-identity kill/pivot/proceed dossier + 可证伪三结论 + agentic-loop-vs-one-shot 开放问题）。
+**自检**：Batch-A 抓 1 blocking（漏 append 续35）+3 minor,全修;Survey v2 抓 2 headroom 诚实缺陷（3 格
+HAS_HEADROOM 无 oracle → 改 UNKNOWN）,全修。**边界**：SCOUT round-1,只 5 kill 亲验;无自测头空;
+**Stage-1B 不放行、Stage-1C 选题留 owner**。round-2 饱和目标见 ledger。
+
 ### 2026-07-14（续35）· 接受预检审查 + 其对抗复审（两份）；breadth-first 确认；记录校正 + Survey v2 启动
 
 **Context.** Stage-1A precheck 博导审查（`2026-07-13-…-doctoral-review.md`）我方处置为

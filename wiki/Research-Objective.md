@@ -32,10 +32,12 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 
 ## Open items（live）
 
-1. **Survey v2（进行中,2026-07-14）**：taxonomy v2（+候选池构造 / +上下文供给 / +selective-prediction
-   三新族;selection≠revision 拆开）、每族**跨任务矩阵扫**、**adversarial 挑战者猎杀**(找最直接威胁我们的工作)、
-   非 ASR 祖先(SER/SLU/ST/AAC/audio-QA/audio-judge)、agentic 近邻(AudioToolAgent/AuTAgent/JitRL)、
-   逐查询搜索日志、task×method×model kill matrix(禁用 EMPTY)、per-task SOTA cards、per-cell headroom。
+1. **Survey v2 完成（2026-07-14, wf_c6ed06f2）**：15 敌意 lane / 305 查询 / ~93 篇；产物
+   `wiki/survey/2026-07-14-{neighbor-matrix,coverage-and-kill-matrix,sota-cards}-v2.md` +
+   `scout-ledger-round2.json` + `search-query-log.jsonl`。**结果**：I1 一般选择器 DIRECT_OCCUPIED（killed，
+   MBR 在我方 LS/FLEURS/CoVoST 上等 K 胜）；**I4 跨矩阵兑现面 = 唯一 NO_DIRECT_MATCH 全 lane（最强空位）**；
+   strict-I2 / I3-combined / UMBRELLA 交集亦 NO_DIRECT_MATCH（工作假设,非已证）。**决策包**
+   `2026-07-14-stage1c-decision-package.md` 待 owner Stage-1C 选题。round-2 饱和目标见 ledger。
 2. **诚信核查 C1/C4**（Stage-1B 放行前置）：C1 尝试普查（registry vs raw run）、C4 负结果普查。
 3. **same-selector contract**（Stage-1C 前）：冻结 operator/score inputs/预算/弃权/gold 边界/池几何,
    跨任务不可固定处显式标 task-specific。

@@ -1,0 +1,1574 @@
+{
+ "_draft": "DRAFT — pending coordinator per-paper verification, not yet wiki-grade. Every number in the companion .md files is tagged [id — url] or [ours-directional]; no invented numbers.",
+ "counts": {
+  "lanes": 15,
+  "paper_rows_across_lanes": 113,
+  "unique_papers_after_cross_lane_dedup_est": 93,
+  "cite_checks": 94,
+  "cite_fails": 2,
+  "cite_fail_ids": [
+   "semantic-confidence-aac-2512.10170",
+   "brace-2512.10403"
+  ],
+  "cite_fail_reason": "NOT_RESOLVED_THIS_ROUND (WebFetch socket-closed / no external network); flagged UNVERIFIED-CITATION, not confirmed fabrication",
+  "grade_distribution_note": "FT=FULLTEXT_VERIFIED, AB=ABSTRACT_VERIFIED, SC=SCOUT; per-row grades are in neighbor-matrix-v2.md Section A",
+  "our_model_appearances": {
+   "qwen3-omni-30b_benchmarked_as_frozen_selector": [
+    "SpeakerSleuth-ACL2026 (2601.04029): disc acc 60.4 / NDCG@2 73.2 / EM 36.8",
+    "EChO-Agent (2606.15141): Qwen3-Omni-Instruct backbone, MMAR 71.0"
+   ],
+   "qwen2.5-omni_frozen": [
+    "walking-through-uncertainty (2604.25591)",
+    "AQA-TTRL (2510.05478, but weights change)",
+    "Agent-Omni (2511.02834)"
+   ]
+  }
+ },
+ "closest_challenger_per_identity": {
+  "I1": {
+   "verdict": "DIRECT_OCCUPIED",
+   "paper": "mbr-asr-2510.19471",
+   "url": "https://arxiv.org/abs/2510.19471",
+   "one_liner": "Frozen Whisper label-free K=64 MBR on our LibriSpeech/FLEURS/CoVoST; LS WER 4.2->3.3 vs oracle 1.3; bare I1 dies at equal-K; text-scored so I2 survives."
+  },
+  "I2": {
+   "verdict": "PARTIAL (strict I2 = NO_DIRECT_MATCH)",
+   "paper": "scaling-auditory-cognition-2503.23395",
+   "url": "https://arxiv.org/abs/2503.23395",
+   "one_liner": "Frozen audio-LLM's own audio-conditioned beam log-lik BoN (+9-150%); but strongest scorer external GPT-4o, custom tasks, no rho surface. Same-core-as-scorer-as-surface unoccupied."
+  },
+  "I3": {
+   "verdict": "PARTIAL (abstain occupied; Goodhart-on-speech + combined = NO_DIRECT_MATCH)",
+   "paper_abstain": "walking-through-uncertainty-2604.25591",
+   "paper_goodhart": "inference-time-reward-hacking-2506.19248",
+   "url_abstain": "https://arxiv.org/abs/2604.25591",
+   "url_goodhart": "https://arxiv.org/abs/2506.19248",
+   "one_liner": "Frozen-omni selective prediction on MMAU/MMAR/MMSU is DIRECT; HedgeTune/BoP Goodhart selection is DIRECT but text-only; reward-guided+abstain+Goodhart on frozen speech omni unoccupied."
+  },
+  "I4": {
+   "verdict": "NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE",
+   "paper": "KIT-IWSLT2026-2606.04730",
+   "url": "https://arxiv.org/abs/2606.04730",
+   "one_liner": "Per-task oracle+realized across 4 speech tasks exists (PARTIAL_ANCESTOR) but LoRA cascade not frozen omni, task-vector not supply-type surface; supply-type-stratified rho only in text/recsys (ColdStart 2606.29947)."
+  },
+  "UMBRELLA": {
+   "verdict": "NO_DIRECT_MATCH (intersection)",
+   "paper_omni": "scaling-auditory-cognition-2503.23395",
+   "paper_loop_risk": "iad-2504.01931",
+   "url_omni": "https://arxiv.org/abs/2503.23395",
+   "url_loop_risk": "https://arxiv.org/abs/2504.01931",
+   "one_liner": "Every component occupied separately (Reflexion/Training-Free-GRPO/JitRL text; Scaling-Auditory omni one-shot; Agent-Omni/EChO/Audio-Mind frozen agentic) but never jointly; IAD shows loop beats one-shot BoN by only ~3-4pts front-loaded = collapse risk."
+  }
+ },
+ "direct_occupied_real_kills": [
+  "I1 ASR/ST — mbr-asr-2510.19471 (on our datasets, ~31% oracle realized)",
+  "I1/I2 SER — jia2602decodingambiguous-2602.03873 (CREMA-D 36.7->51.26)",
+  "I1/I2 audio-understanding — scaling-auditory-2503.23395 / MUGEN-2603.09714 / Audio-CoT-2501.07246",
+  "I3-abstain audio-understanding+frozen-omni — walking-through-uncertainty-2604.25591 (our core+data)",
+  "I3-conformal ASR(frozen)/SER(trained) — ernez-conformal-ASR / coverage-guaranteed-SER-2503.22712",
+  "I1/I2 AAC mechanism (non-our-datasets) — slam-aac-2410.09503 (CLAP-Refine)",
+  "UMBRELLA-as-system audio-understanding — AudioToolAgent-2510.02995 (MMAU 77.5; occupies system not object)",
+  "recovery/rho metric (text) — judge-bon-fail-2603.12520 (21%->61%)"
+ ],
+ "genuinely_open_after_hunt": [
+  "I4 frozen-omni supply-conditional [model x task] realization surface rho(c)/H(c)/regret — NO_DIRECT_MATCH all lanes (strongest differentiator)",
+  "Strict I2 same-frozen-core generator+scorer as realization surface — NO_DIRECT_MATCH",
+  "I3 combined reward-guided+abstain+Goodhart on frozen speech omni — NO_DIRECT_MATCH; Goodhart-on-speech NO_DIRECT_MATCH",
+  "UMBRELLA intersection {training-free RL} n {frozen OMNI@decision} n {advantage->next action} — NO_DIRECT_MATCH",
+  "SER/SLU-intent frozen-omni reward-guided selection — NO_DIRECT_MATCH / UNDERSEARCHED",
+  "spoken-QA/agent frozen-omni label-free K-pool selection (F2) — UNDERSEARCHED (VoiceBench eval-only)"
+ ],
+ "round2_saturation_targets": [
+  "SER + SLU-intent selective-prediction / self-consistency oracle curves on frozen omni (crema-d/meld/esd/minds14/slurp/speech-massive) — UNDERSEARCHED cells",
+  "spoken-QA/dialogue/agent frozen-omni self-consistency / K-pool selection on VoiceBench/spoken-squad/uro-bench/vocalbench — thinnest F2 cell",
+  "per-benchmark oracle-over-pool + rho curves on our exact audio benchmarks (MMAU/MMAR/AIR-Bench/MMSU/BBAudio) on a WEIGHT-FROZEN omni",
+  "inference-time reward-overoptimization / Goodhart over SPEECH/omni N-best or K-sample pools (M4 cells nearly all NO_DIRECT_MATCH)",
+  "ST-specific conformal / abstention bound to ST N-best selection (M3 ST = NO_DIRECT_MATCH)",
+  "audio-specific conformal prediction on GENERATION (not classification) applied to Qwen-Audio/omni",
+  "non-English SER selection venues; 2026 speech-LLM 'listen-then-rerank' self-consistency preprints",
+  "full-text re-verify of ABSTRACT/SCOUT rows before Stage-2 lock: AudioToolAgent-2510.02995, Agent-Omni-2511.02834, JitRL-2601.18510, IRO-2506.17828, AQA-TTRL-2510.05478, Audio-CoT-2501.07246, sttfm-rescore-2409.16654, Omni-Reward-2510.23451, ProGRes-2409.00217",
+  "RE-VERIFY the 2 failed citations: semantic-confidence-aac-2512.10170, brace-2512.10403 (both NOT_RESOLVED_THIS_ROUND due to network)"
+ ],
+ "families": [
+  {
+   "lane": "ser-selection-abstention",
+   "n_papers": 7,
+   "papers": [
+    {
+     "id": "sridhar2019reject",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "chou2023calibration",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "schrufer2024areyousure",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "coverageguaranteed2025conformalSER",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L13"
+    },
+    {
+     "id": "jia2602decodingambiguous",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "crema-d"
+     ]
+    },
+    {
+     "id": "emotta2025",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "mmcalibration2024erc",
+     "grade": "SC",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [
+      "meld"
+     ]
+    }
+   ],
+   "cells": {
+    "SER_selection_frozen_K_pool": "DIRECT_OCCUPIED (jia2602.03873)",
+    "SER_reject_trained": "DIRECT_OCCUPIED (sridhar/schrufer)",
+    "SER_conformal": "DIRECT_OCCUPIED (coverage-guaranteed)",
+    "SER_oracle_rho": "NO_DIRECT_MATCH",
+    "SER_supply_surface_I4": "NO_DIRECT_MATCH",
+    "SER_MBR": "NO_DIRECT_MATCH",
+    "SER_goodhart": "NO_DIRECT_MATCH"
+   },
+   "saturation": "I1/I2 DIRECT_OCCUPIED by exactly one challenger (jia2602.03873, incl CREMA-D); I3 mature but trained-classifier regime; I3-frozen-abstain and I4 remain unoccupied."
+  },
+  {
+   "lane": "slu-nbest-reject",
+   "n_papers": 7,
+   "papers": [
+    {
+     "id": "li2020-slu-exploit-nbest",
+     "grade": "FT",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "li2020-coling-mtl-nbest-ham",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "caubriere2020-slu-concept-confidence",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "slu-clarify-asru2021",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "stengeleskin2023-didyoumean",
+     "grade": "FT",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "dong2018-confidence-neural-parsing",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "morbini2012-rerank-speech-classification",
+     "grade": "SC",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "SLU_I1_nbest": "PARTIAL_ANCESTOR (li2020, oracle 27.04/realized 14.29 trained)",
+    "SLU_I2_frozen_omni_audio_select": "NO_DIRECT_MATCH",
+    "SLU_I3_abstain": "PARTIAL_ANCESTOR (slu-clarify/CICC)",
+    "SLU_I4_surface": "NO_DIRECT_MATCH",
+    "SLU_goodhart": "NO_DIRECT_MATCH",
+    "SLU_umbrella": "ANALOGY_ONLY"
+   },
+   "saturation": "Selection half = trained integrators/rerankers; reject half = audio-grounded trained probes; I2 frozen-omni, I4 surface, Goodhart, training-free reward-guided all unoccupied."
+  },
+  {
+   "lane": "st-rerank-qe",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "quan2005-integrated-nbest-slt",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "covost2",
+      "fleurs-r"
+     ]
+    },
+    {
+     "id": "ng2015-2016-slt-qe-kbest",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "covost2",
+      "fleurs-r"
+     ]
+    },
+    {
+     "id": "speechqe-han2024-emnlp",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "covost2",
+      "fleurs-r"
+     ]
+    },
+    {
+     "id": "hydraqe-iwslt2026",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "covost2",
+      "fleurs-r"
+     ]
+    },
+    {
+     "id": "freitag2022-mbr-neural-metrics",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "mbr-metric-bias-wmt2024",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "fernandes2022-quality-aware-decoding",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "qe-rerank-doclevel-2025",
+     "grade": "SC",
+     "kills": [
+      "I1"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ST_I1_labelfree_nbest": "DIRECT_OCCUPIED (quan2005/freitag2022/fernandes2022)",
+    "ST_I2_audiogrounded_judge": "PARTIAL_ANCESTOR (SpeechQE/HydraQE, trained scorers)",
+    "ST_I3_goodhart": "PARTIAL_ANCESTOR (mbr-metric-bias, text)",
+    "ST_I3_abstain": "NO_DIRECT_MATCH",
+    "ST_I4_surface": "NO_DIRECT_MATCH",
+    "ST_frozen_omni_self_select": "NO_DIRECT_MATCH"
+   },
+   "saturation": "I1 crowded/DIRECT since 2005; I2 audio-grounded QE exists but all TRAINED metrics not frozen selectors; mandatory guard: never score realized quality with the selection utility."
+  },
+  {
+   "lane": "aac-captioning-select",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "slam-aac-2410.09503",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "enclap-aux-retrieval-2409.01160",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "enclap-plusplus-2409.01201",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "merl-finegrained-aac-2309.17352",
+     "grade": "SC",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "semantic-confidence-aac-2512.10170",
+     "grade": "UNVERIFIED-CITATION",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "cite_status": "NOT_RESOLVED_THIS_ROUND"
+    },
+    {
+     "id": "mace-2411.00321",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "brace-2512.10403",
+     "grade": "UNVERIFIED-CITATION",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "cite_status": "NOT_RESOLVED_THIS_ROUND"
+    },
+    {
+     "id": "caf-score-2603.19615",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "AAC_I1_I2_mechanism": "DIRECT_OCCUPIED (slam-aac/enclap)",
+    "AAC_I3_abstain": "PARTIAL_ANCESTOR (semantic-confidence UNVERIFIED)",
+    "AAC_I4_surface": "NO_DIRECT_MATCH",
+    "AAC_umbrella": "ANALOGY_ONLY"
+   },
+   "saturation": "Mechanism DIRECT_OCCUPIED with frozen CLAP dual-encoder (not generative omni); AudioCaps/Clotho NOT our datasets -> challenger/analogy lane; I3-frozen-abstain + I4 open. 2 cite-fails in this lane."
+  },
+  {
+   "lane": "audio-understanding-ttc",
+   "n_papers": 6,
+   "papers": [
+    {
+     "id": "scaling-auditory-cognition-2025",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": [],
+     "xlane": "L6,L7,L11,L12,L15"
+    },
+    {
+     "id": "mugen-multiaudio-2026",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "aqa-ttrl-2025",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L6,L12",
+     "note": "trained (weights change)"
+    },
+    {
+     "id": "walking-through-uncertainty-2026",
+     "grade": "FT",
+     "kills": [
+      "I3"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L9,L13"
+    },
+    {
+     "id": "audio-mind-agentic-2026",
+     "grade": "FT",
+     "kills": [
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmar"
+     ],
+     "xlane": "L10"
+    },
+    {
+     "id": "audio-cot-2025",
+     "grade": "SC",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini"
+     ]
+    }
+   ],
+   "cells": {
+    "AU_I1_selfconsistency": "DIRECT_OCCUPIED (MUGEN/Audio-CoT/scaling-auditory)",
+    "AU_I2_audiogrounded_verifier": "DIRECT_OCCUPIED (scaling-auditory)",
+    "AU_I3_abstain": "DIRECT_OCCUPIED (walking-uncertainty)",
+    "AU_I3_goodhart": "ANALOGY_ONLY",
+    "AU_I4_surface": "NO_DIRECT_MATCH",
+    "AU_umbrella": "PARTIAL_ANCESTOR (audio-mind)"
+   },
+   "saturation": "Operator families I1/I2 and I3-abstain DIRECT_OCCUPIED; I4 realization surface + Goodhart-constrained selector genuinely open. Anchor contribution on I4 + oracle-gap-on-audio-understanding."
+  },
+  {
+   "lane": "audio-judge-multi",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "AudioJudge-EACL2026",
+     "grade": "FT",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "SpeakerSleuth-ACL2026",
+     "grade": "FT",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "note": "benchmarks Qwen3-Omni-30B (our model): disc 60.4/NDCG 73.2/EM 36.8"
+    },
+    {
+     "id": "AQA-TTRL-2510.05478",
+     "grade": "FT",
+     "kills": [
+      "UMBRELLA",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L5,L12"
+    },
+    {
+     "id": "JudgeBoN-Recovery-2603.12520",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "xlane": "L11",
+     "note": "defines Recovery=rho"
+    },
+    {
+     "id": "AuditoryTTC-2503.23395",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L5"
+    },
+    {
+     "id": "SpeakingStyleJudge-2506.05984",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "ParaPairAudioBench-IS2026",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "ProGRes-2409.00217",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L11"
+    }
+   ],
+   "cells": {
+    "I1_recovery_metric": "DIRECT_OCCUPIED (JudgeBoN, text)",
+    "I2_frozen_audio_judge": "PARTIAL_ANCESTOR (AudioJudge/SpeakerSleuth as evaluators not accuracy-selectors)",
+    "I2_accuracy_raising_selector": "PARTIAL_ANCESTOR (AuditoryTTC)",
+    "I3_audio_abstain_goodhart": "NO_DIRECT_MATCH",
+    "I4_surface": "NO_DIRECT_MATCH"
+   },
+   "saturation": "Judge/evaluator axis mature; recovery/rho metric DIRECTLY defined in text; frozen audio judges are evaluators not rerankers-to-raise-accuracy. Our identity = I2 n I3 n I4 intersection, unoccupied."
+  },
+  {
+   "lane": "candidate-support-diversity",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "novosad2026-ctc-oracle-gap",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "I4"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ]
+    },
+    {
+     "id": "ma2024-asr-ec-nbest-oracle",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ]
+    },
+    {
+     "id": "brown2024-large-language-monkeys",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "freitag2023-epsilon-sampling-mbr",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "divsampling2025-sampling-diversity-scaling",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "wu2025-temperature-tts-coverage",
+     "grade": "AB",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "dang2025-auditory-cognition-ttc",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "I4",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L5"
+    },
+    {
+     "id": "vijayakumar2016-diverse-beam-search",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ASR_supply": "DIRECT_OCCUPIED (novosad/ma2024/ROVER/lattice)",
+    "ST_supply": "PARTIAL_ANCESTOR (epsilon-sampling)",
+    "SER_supply": "ANALOGY_ONLY (ensemble-of-classifiers)",
+    "SLU_supply": "PARTIAL_ANCESTOR (N-best-SLU features)",
+    "spokenQA_supply": "PARTIAL_ANCESTOR (auditory-ttc)",
+    "AU_supply": "PARTIAL_ANCESTOR (auditory-ttc)",
+    "supply_conditional_surface_I4": "NO_DIRECT_MATCH"
+   },
+   "saturation": "Classic ASR supply DIRECT_OCCUPIED; general-LLM supply owned by coverage-scaling laws (text); audio-native supply one partial occupant (auditory-ttc). Pool-construction-as-swept-axis-c-of-a-rho-surface = NO_DIRECT_MATCH."
+  },
+  {
+   "lane": "contextual-supply-retrieval",
+   "n_papers": 7,
+   "papers": [
+    {
+     "id": "siskos2025rag-context-asr",
+     "grade": "FT",
+     "kills": [
+      "I4"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "note": "supply-conditional none/retr/LLM/oracle; ~69-77% oracle WER realized"
+    },
+    {
+     "id": "gong2025brasr",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ]
+    },
+    {
+     "id": "cb-hotword-rl-2512.21828",
+     "grade": "AB",
+     "kills": [
+      "UMBRELLA",
+      "I2"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "note": "LoRA-GRPO (fine-tunes)"
+    },
+    {
+     "id": "li2024larag",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "yang2024rasu",
+     "grade": "SC",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "chen2025wavrag",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I4"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "spoken-dialog-rag-2402.01828",
+     "grade": "AB",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ASR_context": "PARTIAL_ANCESTOR (siskos)",
+    "ST_context": "ANALOGY_ONLY",
+    "SER_context": "ANALOGY_ONLY",
+    "SLU_context": "PARTIAL_ANCESTOR (RASU)",
+    "spokenQA_context": "PARTIAL_ANCESTOR (WavRAG)",
+    "AU_context": "ANALOGY_ONLY"
+   },
+   "saturation": "Siskos is nearest I4 ancestor (supply varied on frozen ASR, fraction-of-oracle realized) but ASR-only, context-injection not K-pool selection, no matrix. Retrieved-context + reward-guided K-pool selection combined = NO_DIRECT_MATCH."
+  },
+  {
+   "lane": "selective-prediction-conformal",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "kamath2020-selective-qa",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "lee2024-selective-generation",
+     "grade": "FT",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "quach2024-conformal-lm",
+     "grade": "AB",
+     "kills": [
+      "I1",
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "mohri2024-conformal-factuality",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "tayebati2025-conformal-abstention-rl",
+     "grade": "FT",
+     "kills": [
+      "I3",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "ernez2023-conformal-asr",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I3"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "librispeech"
+     ],
+     "xlane": "L13"
+    },
+    {
+     "id": "kuan2026-allm-uncertainty",
+     "grade": "AB",
+     "kills": [
+      "I2",
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L5,L13"
+    },
+    {
+     "id": "jin2025-selection-conditional-conformal",
+     "grade": "FT",
+     "kills": [
+      "I4",
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ASR_conformal": "PARTIAL_ANCESTOR->DIRECT (ernez)",
+    "ST_conformal": "NO_DIRECT_MATCH",
+    "SER_conformal": "UNDERSEARCHED",
+    "SLU_conformal": "UNDERSEARCHED",
+    "spokenQA_abstain": "PARTIAL_ANCESTOR (kuan)",
+    "AU_abstain": "PARTIAL_ANCESTOR (kuan)",
+    "I3_operator_labelfree_reward_frozen_omni": "NO_DIRECT_MATCH",
+    "I4_selection_conditional_tool": "jin2025 provides the calibration machinery (ANALOGY)"
+   },
+   "saturation": "Uniformly PARTIAL_ANCESTOR/ANALOGY for I3; supplies abstain/risk-coverage/conformal machinery but NONE is weight-frozen label-free reward-guided abstaining SELECTOR over frozen-omni K-pools with rho surface. SER/SLU conformal UNDERSEARCHED."
+  },
+  {
+   "lane": "agentic",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "AudioToolAgent-2510.02995",
+     "grade": "AB",
+     "kills": [
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "big-bench-audio"
+     ]
+    },
+    {
+     "id": "AuTAgent-2602.13685",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmau-mini",
+      "mmar"
+     ],
+     "note": "trains tool policy; oracle 66.1 vs 50.0"
+    },
+    {
+     "id": "JitRL-2601.18510",
+     "grade": "SC",
+     "kills": [
+      "UMBRELLA",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "tau2-bench",
+      "eva-bench"
+     ],
+     "xlane": "L15"
+    },
+    {
+     "id": "MAV-2502.20379",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "SampleScrutinizeScale-2502.01839",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "AudioMind-2605.28480",
+     "grade": "FT",
+     "kills": [
+      "I3",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L5"
+    },
+    {
+     "id": "EChO-Agent-2606.15141",
+     "grade": "SC",
+     "kills": [
+      "UMBRELLA",
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [
+      "mmar"
+     ],
+     "note": "Qwen3-Omni backbone (our model)"
+    },
+    {
+     "id": "AgentOmni-2511.02834",
+     "grade": "SC",
+     "kills": [
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "meld",
+      "vocalbench"
+     ]
+    }
+   ],
+   "cells": {
+    "AU_agentic_tool_orchestration": "DIRECT_OCCUPIED (AudioToolAgent)",
+    "AU_RL_trained_tool_policy": "DIRECT_OCCUPIED (AuTAgent, trains)",
+    "frozen_omni_reward_K_pool": "NO_DIRECT_MATCH",
+    "text_trainingfree_RL": "DIRECT_OCCUPIED (JitRL/Reflexion/Training-Free-GRPO)",
+    "I3_goodhart_frozen_omni": "PARTIAL_ANCESTOR (audio-mind cliff)",
+    "I4_surface": "UNDERSEARCHED"
+   },
+   "saturation": "Agentic-audio near-neighbors coordinate frozen models via TEXT planner reasoning; none runs label-free reward-scored K-pool from the frozen omni itself. No paper satisfies {frozen-OMNI-core, reward-changes-next-action, weight-frozen} simultaneously."
+  },
+  {
+   "lane": "kill-I1",
+   "n_papers": 7,
+   "papers": [
+    {
+     "id": "mbr-asr-2510.19471",
+     "grade": "FT",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "librispeech",
+      "fleurs-r",
+      "covost2"
+     ],
+     "xlane": "L12,L14,L15"
+    },
+    {
+     "id": "tap-ger-2309.15649",
+     "grade": "FT",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": []
+    },
+    {
+     "id": "progres-2409.00217",
+     "grade": "AB",
+     "kills": [
+      "I1"
+     ],
+     "strength": "DIRECT",
+     "our_data": [],
+     "xlane": "L6"
+    },
+    {
+     "id": "auditory-ttc-2503.23395",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "DIRECT",
+     "our_data": [],
+     "xlane": "L5"
+    },
+    {
+     "id": "thinking-listening-2509.19676",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "hyporadise-2309.15701",
+     "grade": "SC",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ],
+     "note": "trains (LoRA GER)"
+    },
+    {
+     "id": "judge-bon-fail-2603.12520",
+     "grade": "FT",
+     "kills": [
+      "I1",
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "xlane": "L6"
+    }
+   ],
+   "cells": {
+    "ASR_I1": "DIRECT_OCCUPIED (mbr-asr/tap-ger/progres)",
+    "ST_I1": "DIRECT_OCCUPIED (mbr-asr)",
+    "AU_I1": "DIRECT_OCCUPIED (auditory-ttc)",
+    "SER_I1": "ANALOGY_ONLY",
+    "SLU_I1": "PARTIAL_ANCESTOR",
+    "spokenQA_I1": "UNDERSEARCHED",
+    "rho_object": "PARTIAL_ANCESTOR (mbr-asr 31%; judge-bon text 21%)",
+    "I4_surface": "NO_DIRECT_MATCH"
+   },
+   "saturation": "STRONG challenger EXISTS: I1-as-stated DIRECT_OCCUPIED for ASR/ST and demonstrated for audio-LLM selection; will NOT survive equal-K comparison on ASR/ST vs mbr-asr. Differentiate on I2/I3/I4."
+  },
+  {
+   "lane": "kill-I2",
+   "n_papers": 7,
+   "papers": [
+    {
+     "id": "read-2026",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ],
+     "note": "external TTS scorer not omni core"
+    },
+    {
+     "id": "ttc-audio-2025",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "UMBRELLA"
+     ],
+     "strength": "DIRECT",
+     "our_data": [],
+     "xlane": "L5"
+    },
+    {
+     "id": "mbr-asr-2025",
+     "grade": "FT",
+     "kills": [
+      "I1"
+     ],
+     "strength": "NONE",
+     "our_data": [
+      "librispeech",
+      "fleurs-r"
+     ],
+     "xlane": "L11",
+     "note": "text-only, I1 boundary"
+    },
+    {
+     "id": "sttfm-rescore-2024",
+     "grade": "SC",
+     "kills": [
+      "I2"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "mmconsist-dataselect-2026",
+     "grade": "AB",
+     "kills": [
+      "I2"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "aqa-ttrl-2025",
+     "grade": "SC",
+     "kills": [
+      "I2",
+      "UMBRELLA"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "xlane": "L5,L6"
+    },
+    {
+     "id": "omni-reward-2025",
+     "grade": "SC",
+     "kills": [
+      "I2"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ASR_omni_native_select": "PARTIAL_ANCESTOR (read, external-TTS)",
+    "ASR_textonly_rerank": "DIRECT_OCCUPIED (mbr-asr, I1 boundary)",
+    "AU_frozen_omni_native_BoN": "PARTIAL_ANCESTOR (ttc-audio)",
+    "spokenQA_audiogrounded": "ANALOGY_ONLY (omni-reward trained)",
+    "ST_omni_native": "NO_DIRECT_MATCH",
+    "SER_SLU_omni_native": "UNDERSEARCHED",
+    "strict_I2_same_core_surface": "NO_DIRECT_MATCH"
+   },
+   "saturation": "Kill = PARTIAL not clean. Mechanism occupied and works (READ ~70-85% oracle; ttc-audio +36-150%) but split across ancestors; SAME frozen omni core's own native signal as supply-conditional rho surface = NO_DIRECT_MATCH. ST/SER/SLU audio-grounded selection UNDERSEARCHED."
+  },
+  {
+   "lane": "kill-I3",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "I3-01 (2604.25591)",
+     "grade": "FT",
+     "kills": [
+      "I3",
+      "UMBRELLA"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "mmau-mini",
+      "mmar",
+      "mmsu"
+     ],
+     "xlane": "L5,L9"
+    },
+    {
+     "id": "I3-02 RAS (2604.24278)",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "note": "SFT+RL (trains)"
+    },
+    {
+     "id": "I3-03 (2503.22712)",
+     "grade": "FT",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L1"
+    },
+    {
+     "id": "I3-04 ernez-conformal",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "DIRECT",
+     "our_data": [
+      "librispeech"
+     ],
+     "xlane": "L9"
+    },
+    {
+     "id": "I3-05 (2506.19248)",
+     "grade": "FT",
+     "kills": [
+      "I3",
+      "UMBRELLA"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "note": "Goodhart selector, text-only"
+    },
+    {
+     "id": "I3-06 CICC (2403.18973)",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "I3-07 NoRefER (2306.12577)",
+     "grade": "SC",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "I3-08 (2407.21414)",
+     "grade": "SC",
+     "kills": [
+      "I3"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ]
+    }
+   ],
+   "cells": {
+    "ASR_conformal_frozen": "DIRECT_OCCUPIED (ernez/I3-08)",
+    "SER_conformal": "DIRECT_OCCUPIED (2503.22712, trained)",
+    "SLU_conformal": "PARTIAL_ANCESTOR (CICC, text)",
+    "spokenQA_AU_abstain_frozen_omni": "DIRECT_OCCUPIED (walking-uncertainty)",
+    "Goodhart_on_speech": "NO_DIRECT_MATCH",
+    "combined_reward_abstain_goodhart_frozen_omni_rho": "NO_DIRECT_MATCH",
+    "ST_abstain": "NO_DIRECT_MATCH"
+   },
+   "saturation": "Abstention sub-claim DIRECT_OCCUPIED on speech incl our datasets; Goodhart-detection owned only in text. EXACT combined I3 (reward-guided+abstain+Goodhart, frozen omni, rho surface) = NO_DIRECT_MATCH. Survivors: verifiable/audio-grounded reward + frozen omni + Goodhart-aware realization surface."
+  },
+  {
+   "lane": "kill-I4",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "KIT-IWSLT2026",
+     "grade": "FT",
+     "kills": [
+      "I4",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "ASR/ST/SQA analogues"
+     ],
+     "note": "LoRA cascade not frozen omni"
+    },
+    {
+     "id": "MBR-ASR-2510.19471",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech",
+      "fleurs-r"
+     ],
+     "xlane": "L11"
+    },
+    {
+     "id": "GenRM-2408.15240",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I1"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "XLingRetrieval-2509.14749",
+     "grade": "AB",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "ColdStart-Retrieval-2606.29947",
+     "grade": "SC",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "note": "supply-type-stratified rho (17-61 vs 5-7)"
+    },
+    {
+     "id": "RMOveropt-2210.10760",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "xlane": "L15"
+    },
+    {
+     "id": "TextSQL-Nbest-2210.10668",
+     "grade": "AB",
+     "kills": [
+      "I4",
+      "I1"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    },
+    {
+     "id": "TwoRate-ErrorFlow-2604.18245",
+     "grade": "SC",
+     "kills": [
+      "I4"
+     ],
+     "strength": "ANALOGY",
+     "our_data": []
+    }
+   ],
+   "cells": {
+    "ASR_I4": "PARTIAL_ANCESTOR (KIT/novosad)",
+    "ST_I4": "PARTIAL_ANCESTOR (KIT)",
+    "SER_I4": "NO_DIRECT_MATCH",
+    "SLU_I4": "UNDERSEARCHED",
+    "spokenQA_I4": "NO_DIRECT_MATCH",
+    "AU_I4": "NO_DIRECT_MATCH",
+    "supply_type_axis": "ANALOGY_ONLY (text/recsys)",
+    "frozen_omni_full_surface": "NO_DIRECT_MATCH"
+   },
+   "saturation": "NOT direct-occupied. No paper combines {supply-TYPE axis + per-cell rho + weight-frozen OMNI + cross-task matrix}. Ingredients exist separately. This is the single clearest whitespace; SER=no match, SLU=undersearched."
+  },
+  {
+   "lane": "kill-UMBRELLA",
+   "n_papers": 8,
+   "papers": [
+    {
+     "id": "reflexion-2303.11366",
+     "grade": "AB",
+     "kills": [
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "training-free-grpo-2510.08191",
+     "grade": "AB",
+     "kills": [
+      "UMBRELLA",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "note": "name-collision, text"
+    },
+    {
+     "id": "jitrl-2601.18510",
+     "grade": "SC",
+     "kills": [
+      "UMBRELLA",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "tau2-bench",
+      "eva-bench"
+     ],
+     "xlane": "L10"
+    },
+    {
+     "id": "iro-2506.17828",
+     "grade": "AB",
+     "kills": [
+      "UMBRELLA",
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": []
+    },
+    {
+     "id": "iad-2504.01931",
+     "grade": "FT",
+     "kills": [
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "note": "loop vs one-shot BoN adjudicator (+3-4pts)"
+    },
+    {
+     "id": "auditory-ttc-2503.23395",
+     "grade": "FT",
+     "kills": [
+      "I2",
+      "UMBRELLA"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [],
+     "xlane": "L5"
+    },
+    {
+     "id": "reward-overopt-2210.10760",
+     "grade": "AB",
+     "kills": [
+      "I3"
+     ],
+     "strength": "ANALOGY",
+     "our_data": [],
+     "xlane": "L14"
+    },
+    {
+     "id": "mbr-asr-2510.19471",
+     "grade": "FT",
+     "kills": [
+      "I1"
+     ],
+     "strength": "PARTIAL",
+     "our_data": [
+      "librispeech"
+     ],
+     "xlane": "L11"
+    }
+   ],
+   "cells": {
+    "full_intersection_trainingfreeRL_frozenOMNI_advantage": "NO_DIRECT_MATCH",
+    "AU_frozen_omni_oneshot_select": "DIRECT_OCCUPIED (auditory-ttc)",
+    "ASR_I1_labelfree": "DIRECT_OCCUPIED (mbr-asr)",
+    "text_trainingfree_RL_agentic": "DIRECT_OCCUPIED (training-free-grpo/jitrl/reflexion)",
+    "loop_vs_oneshot": "PARTIAL_ANCESTOR (iad, collapse risk)",
+    "I4_supply_surface": "NO_DIRECT_MATCH",
+    "SER_SLU_spokenQA_frozen_omni_selection": "NO_DIRECT_MATCH"
+   },
+   "saturation": "UMBRELLA not made redundant by any single paper but EVERY component occupied. Survives only as intersection: frozen-OMNI + audio-grounded + loop-beats-BoN + supply-conditional rho surface + error-decorrelated frozen-peer verifier. Highest kill risk: omni half (auditory-ttc one-shot) + IAD loop-cap."
+  }
+ ],
+ "cite_checks": {
+  "total": 94,
+  "passed": 92,
+  "failed": 2,
+  "failures": [
+   {
+    "paper_id": "semantic-confidence-aac-2512.10170",
+    "resolves": false,
+    "claims_match": false,
+    "note": "NOT_RESOLVED_THIS_ROUND",
+    "flag": "UNVERIFIED-CITATION",
+    "lane": "aac-captioning-select"
+   },
+   {
+    "paper_id": "brace-2512.10403",
+    "resolves": false,
+    "claims_match": false,
+    "note": "NOT_RESOLVED_THIS_ROUND — WebFetch repeated 'Socket is closed' and Bash curl returned no output (no external network in env); could not verify page resolves.",
+    "flag": "UNVERIFIED-CITATION",
+    "lane": "aac-captioning-select"
+   }
+  ],
+  "passed_note": "All other 92 checks returned resolves:true, claims_match:true. Several were confirmed via WebSearch after direct WebFetch was blocked by network policy (isca-archive, dl.acm.org, proceedings.mlr.press). Minor caveats noted upstream but did not change resolves/claims_match: ng2015 companion ICASSP/MT-journal entries verified only via the Interspeech URL; SpeakerSleuth ACL'26 venue not independently confirmed from arXiv; several 2026-dated arXiv ids (2601-2606) consistent with env clock.",
+  "grade_downgrade_from_cite_check": "none beyond the 2 failures; enclap-aux-retrieval (2409.01160) cite-checked as resolves:true from prior knowledge after WebFetch socket-failure — treat as verified-cite but re-confirm at Stage-2."
+ },
+ "dedup_rule": "Canonical unit = arXiv id (or DOI/venue page for non-arXiv). A paper appearing in multiple lanes is counted once for unique-paper totals; its canonical row is the highest evidence_grade appearance (FT > AB > SC). Cross-lane appearances are recorded in the 'xlane' field per paper and with the '↔Lnn' marker in neighbor-matrix-v2.md Section A. High-recurrence multi-lane papers (>=3 lanes): scaling-auditory-cognition-2503.23395 (6 lanes), mbr-asr-2510.19471 (4), aqa-ttrl-2510.05478 (3), walking-through-uncertainty-2604.25591 (3). When two lanes assign different kill_strength to the same paper, the STRONGER (DIRECT>PARTIAL>ANALOGY) is retained as the paper's headline, with the weaker kept as a per-lane cell verdict.",
+ "_provenance": {
+  "role": "synthesis agent, Stage-1A Survey v2",
+  "inputs": "15 lane result objects (papers/queries/cells/saturation) + 94 cite-checks, all provided by upstream lane agents and cite-check agent",
+  "query_log_note": "This ledger carries a DISTILLED index of the 15 lanes (paper ids + grades + kills + our-dataset matches + cell verdicts + saturation one-liners), NOT the verbatim upstream payloads, to avoid transcription error and invented content. The full per-paper query logs (WebSearch/WebFetch calls, ~250+ across lanes) live in the upstream lane objects; representative note: fetch reliability was poor this round (repeated 'Socket is closed' on arxiv.org/abs, arxiv HTML mirrors, dl.acm.org, isca-archive, proceedings.mlr.press, hal.science Anubis walls, and binary-PDF non-decodes), so many numbers were recovered via ar5iv/arxiv-HTML mirrors or WebSearch snippets and are graded AB/SC accordingly. No number in the companion .md files is invented; each is tagged [id — url] or [ours-directional].",
+  "companion_files": [
+   "neighbor-matrix-v2.md",
+   "coverage-and-kill-matrix-v2.md",
+   "sota-cards-v2.md"
+  ],
+  "verification_status": "DRAFT — pending coordinator per-paper verification, not yet wiki-grade.",
+  "date": "2026-07-14"
+ },
+ "_coordinator_note_2026_07_14": "Round-1 of Survey v2 (wf_c6ed06f2). Counts reconstructable from the append-only wiki/survey/2026-07-14-search-query-log.jsonl (305 queries) + the workflow journal. Cite-checks were WebSearch-degraded (WebFetch blocked); COORDINATOR-VERIFIED = mbr-asr 2510.19471, READ 2606.04680, scaling-auditory 2503.23395, AudioToolAgent 2510.02995, jia-SER 2602.03873; UNVERIFIED = 2512.10170, 2512.10403. This is SCOUT-grade round-1; round-2 saturation targets listed."
+}

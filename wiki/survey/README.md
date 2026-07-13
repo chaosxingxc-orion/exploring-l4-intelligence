@@ -1,5 +1,14 @@
 # Step-2 Survey Archive — TFRL Omni Capability Activation
 
+> **CURRENT (Stage-1A Survey v2, 2026-07-14, wf_c6ed06f2)** — the live neighbor/kill survey for the
+> selector-realization direction. 15 adversarial lanes (incl. 5 challenger-hunt "kill" lanes), 305
+> logged queries, ~93 papers. Result: I1 DIRECT_OCCUPIED (killed); I4 cross-matrix realization surface
+> = clearest NO_DIRECT_MATCH whitespace. Artifacts (SCOUT round-1; 5 kills coordinator-verified):
+> [[2026-07-14-neighbor-matrix-v2]] · [[2026-07-14-coverage-and-kill-matrix-v2]] ·
+> [[2026-07-14-sota-cards-v2]] · `2026-07-14-scout-ledger-round2.json` ·
+> `2026-07-14-search-query-log.jsonl`. Round-1 predecessor: `2026-07-13-scout-ledger-round1.json`.
+> Owner decision package: [[2026-07-14-stage1c-decision-package]].
+
 > Part of the **Step-2 survey** for [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] (see [[Research-Proposal-Template]] §3). Produced by a multi-agent survey workflow (5 lanes -> per-lane adversarial verification -> synthesis), run `wf_d76b4901-23c`, 2026-06-26. Every source below was adversarially checked to resolve to a real paper; only `keep=true` claims are archived. Links are real and verifiable.
 
 
