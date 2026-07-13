@@ -2,7 +2,7 @@
 # v4.2 package conformance rule manifest  (machine-readable)
 # ============================================================================
 # rules_version pins this manifest; the checker echoes it into every output.
-rules_version: "v42-conformance/rules-2026-07-12"
+rules_version: "v42-remediation/rules-2026-07-13"
 
 description: >
   Declarative rule manifest for scripts/checks/v42_conformance.py. Checks the
@@ -52,6 +52,24 @@ vocab:
   invalid_markers:    ["invalid", "无效", "失败", "泄漏", "复发", "撤除", "已弃", "预防", "prevention", "P0", "P1", "P2", "P3", "P4", "P5", "绝不作正向", "无对应", "误称", "误名", "错配"]
   # a non-ledger ID is acceptable only if flagged nonexistent by one of these
   nonexistent_markers: ["不存在", "nonexistent", "无对应条目", "未 mint", "待 mint", "no ledger entry", "unverified", "无 ledger", "未核实"]
+  # ---- 2026-07-13 remediation-round vocabularies (续28-⑤) ----------------------
+  # negation that legitimises a "pre-observation / blindness" mention: the F-2 fix
+  # requires SESOI be described as post-observation-but-externally-justified, so a
+  # blindness / pre-observation phrase may survive ONLY as an explicitly-disavowed
+  # (non-blind) mention.
+  blindness_negation:  ["绝不", "非盲", "不表述", "post-observation", "externally justified", "never", "not ", "延后", "推迟", "contested", "残余", "避免", "婉拒", "外部锚", "非观测", "正交"]
+  # negation that legitimises a tamper-evident mention: the letter retracts the
+  # "防篡改 / tamper-evident" framing for a local append-only JSONL (F-8), so it may
+  # appear only in a retraction / "非 tamper-evident" context.
+  tamper_negation:     ["不是", "非 ", "非防篡", "非 tamper", "不再", "只是", "append-only", "可编辑", "audit trail", "NOT", "retracted", "撤回", "撤除", "prior"]
+  # negation that legitimises a "4 errors" mention: the count is stale (the live
+  # standard entry is 159 passed / 0 errors, M-8/续28③), so it may appear only when
+  # explicitly flagged stale / outdated.
+  stale_negation:      ["陈旧", "已陈旧", "stale", "旧", "outdated", "过时", "159 passed", "143 passed", "续28"]
+  # deferral markers that legitimise an M4 confirmatory-GRADE mention: the M4
+  # evidence-grade label is DEFERRED to M3 signature (续28①/F-3), so any
+  # confirmatory-grade phrasing may appear only in a deferral / not-yet context.
+  m4_deferral:         ["推迟", "届时", "将来", "若", "contested", "不作", "降为", "降级", "UNRESOLVED", "待定", "replayability", "非盲", "exploratory", "M3 签字", "reconcile", "deferred", "不预设", "未预设", "尚无", "将来时"]
 
 # ============================================================================
 # RULES
@@ -114,11 +132,14 @@ rules:
   - id: BANNED-FUTURE-DATE
     type: future_date
     applies_to: [proposal, letter]
-    threshold: "2026-07-13"          # dates on/after this are violations
+    threshold: "2026-07-14"          # dates on/after this are violations
     rationale: >
-      The v4.2 package is dated 2026-07-12; no calendar date 2026-07-13 or later
-      may appear (chronology integrity, review finding E-4). arXiv IDs (YYMM.N),
-      YYYY-MM refs and bare integer seeds are NOT calendar dates and are ignored.
+      The v4.2 package carries a dual timestamp (created_at 2026-07-12 authoring /
+      released_at 2026-07-13 first-git/release day, per discrepancy-register item 3);
+      the legitimate release date 2026-07-13 is permitted, but no calendar date AFTER
+      the release day (2026-07-14 or later) may appear (chronology integrity, review
+      finding E-4). arXiv IDs (YYMM.N), YYYY-MM refs and bare integer seeds are NOT
+      calendar dates and are ignored.
 
   # -------- Required phrases -------------------------------------------------
   - id: REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION
@@ -208,3 +229,120 @@ rules:
     rationale: >
       Count the primary confirmatory atoms declared in the appendix-A YAML block
       and require it to equal every prose m= claim and family atom-count claim.
+      (This same rule carries the 2026-07-13 remediation-round "recount atoms vs
+      YAML" numeric requirement — no duplicate rule is added.)
+
+  # ==========================================================================
+  # 2026-07-13 REMEDIATION ROUND (owner order 续28-⑤) — rules covering the v4.2
+  # doctoral-review disposition (wiki/2026-07-13-v42-doctoral-adversarial-
+  # integrity-review.md). Banned: pre-observation blindness claims, "equally
+  # tamper-evident", the stale "4 errors" count, and confirmatory-GRADE
+  # assertions about M4. Required: post-observation-externally-justified
+  # phrasing, generation-robust rho, pool-mean comparator, the H_RDU_VS_STRONGEST
+  # atom, docs/corpus.lock.json, and the four P0 integrity registers. The atom
+  # recount vs YAML is carried by NUMERIC-ATOM-COUNT above.
+  # ==========================================================================
+
+  # -------- Banned (this round) ---------------------------------------------
+  - id: BANNED-PREOBSERVATION-BLINDNESS
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['pre-observation', 'pre observation', '先于任何\s*selector\s*dev\s*观测']
+    allow_in_appendix_d: true
+    allow_if_line_has: blindness_negation
+    rationale: >
+      F-2: the Q-B SESOI is set post-observation-but-externally-justified; it must
+      NOT be asserted as set blind / pre-observation. A pre-observation / blindness
+      phrase may survive only in an explicitly-disavowed (non-blind) context.
+
+  - id: BANNED-EQUALLY-TAMPER-EVIDENT
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['equally\s*tamper-evident', 'equally\s*tamper', 'tamper-evident', 'tamper evident', '防篡改']
+    allow_in_appendix_d: true
+    allow_if_line_has: tamper_negation
+    rationale: >
+      F-8: a local, ordinary-write append-only JSONL is NOT a tamper-evident ledger;
+      the "equally tamper-evident" / "防篡改" framing is retracted and may appear only
+      in a retraction / "非 tamper-evident" context.
+
+  - id: BANNED-STALE-FOUR-ERRORS
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['(?<!\d)4\s*errors?', '现有\s*4\s*个?\s*error', '现有\s*4\s*errors?']
+    allow_in_appendix_d: true
+    allow_if_line_has: stale_negation
+    rationale: >
+      M-8/续28③: the live standard entry is 159 passed / 0 errors. The old
+      "4 errors" snapshot is stale and may appear only when explicitly flagged
+      stale / outdated.
+
+  - id: BANNED-M4-CONFIRMATORY-GRADE
+    type: banned_phrase
+    applies_to: [proposal, letter]
+    patterns: ['强确证', 'confirmatory-ready', 'confirmatory ready', 'confirmatory-grade', 'confirmatory grade', '确证就绪', 'strong confirmatory', 'blinded confirmatory']
+    allow_in_appendix_d: true
+    allow_if_line_has: m4_deferral
+    rationale: >
+      F-3/续28①: public deterministic evaluation provides replayability, not
+      selection-blindness; the M4 evidence-grade label is DEFERRED to M3 signature.
+      A confirmatory-GRADE assertion about M4 may appear only in a deferral / not-yet
+      context, never as a settled "strong confirmatory" claim.
+
+  # -------- Required (this round) -------------------------------------------
+  - id: REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['post-observation but externally justified', 'post-observation.{0,16}externally.{0,6}justified']
+    min_count: 1
+    rationale: "F-2: the SESOI post-observation-but-externally-justified phrasing must be present."
+
+  - id: REQUIRED-GENERATION-ROBUST-RHO
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['generation-robust']
+    min_count: 1
+    rationale: >
+      F-4 / review suggestion 3: the proposal must track the generation-robust rho
+      disposition (oracle-headroom realization defined across K-pool seeds, not a
+      single-pool rho) — tracked as a deferred gap item (§13.4), not yet operational.
+
+  - id: REQUIRED-POOL-MEAN-COMPARATOR
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['pool-mean', 'pool mean']
+    min_count: 1
+    rationale: >
+      M-3: the proposal must track the pool-mean comparator disposition (compare
+      selector U vs the pool-mean conditional expectation rather than a single seeded
+      random pick) — tracked as a deferred gap item (§13.4), not yet operational.
+
+  - id: REQUIRED-RDU-VS-STRONGEST-ATOM
+    type: required_phrase
+    applies_to: [proposal]
+    patterns: ['H_RDU_VS_STRONGEST']
+    min_count: 1
+    rationale: >
+      F-5: the H_RDU_VS_STRONGEST attribution atom must be named / tracked
+      (registered as an explicit contested-deferred item, m=6 unchanged), never
+      silently dropped.
+
+  - id: REQUIRED-CORPUS-LOCK-EXISTS
+    type: file_exists
+    must_exist:
+      - path: docs/corpus.lock.json
+        source: "F-6 remediation: pinned upstream corpus identity (content_hash + doc_count + upstream revision)"
+    rationale: "F-6: the corpus lock artifact must exist on disk."
+
+  - id: REQUIRED-FOUR-INTEGRITY-REGISTERS
+    type: file_exists
+    must_exist:
+      - path: docs/integrity/prior_exposure_registry.json
+        source: "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+      - path: docs/integrity/experiment_attempt_registry.jsonl
+        source: "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+      - path: docs/integrity/discrepancy_register.md
+        source: "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+      - path: docs/integrity/release_manifest.json
+        source: "P0_INTEGRITY_FREEZE required_artifacts (续28④ / M-8)"
+    rationale: "续28④ / P0: the four integrity registers must exist on disk."

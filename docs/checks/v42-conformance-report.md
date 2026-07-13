@@ -14,8 +14,13 @@
 > deliverables** (checker code + rule manifest + raw output JSON + environment capture), which
 > the prior round was faulted for omitting.
 
-- **Report date:** 2026-07-13 (Asia/Singapore) — checker run at **2026-07-12T17:03:34Z** (UTC;
-  see `v42-environment.txt`). Asia/Singapore is UTC+8, so the run's local date is 2026-07-13.
+- **Report date:** 2026-07-13 (Asia/Singapore). **Post-#39-remediation re-run: 2026-07-13
+  (UTC), 12/12 PASS** — after the in-flight #39 remediation reverted the half-applied SAP
+  forward-edits (F-1/F-4/F-5/M-3/M-4/M-7/PF3 deferred to M3 per Decision-Log 续29) and landed
+  only the mandated stale-fact + F-2-SESOI + dual-timestamp fixes, the checker returns to
+  12/12 PASS (atom-count recount = m=6, matching every prose `m=`; `released_at 2026-07-13`
+  permitted under the updated `2026-07-14` future-date threshold). See
+  `v42-conformance-output.json` for the live JSON.
 - **Rule-list version:** `v42-conformance/rules-2026-07-12`
 - **Overall verdict:** **DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW** (the term `RELEASE-READY`
   is deliberately **not** used — it would misread as "science closed / executable").
@@ -82,7 +87,7 @@ stdlib + PyYAML only, and prints the full JSON verdict to stdout as well as writ
 | 3 | `BANNED-EQUALBUDGET-NEAR-K1` | proximity | **PASS** | 16 co-occurrences of 等预算/equal-budget within 3 lines of `K=1`; **every** window carries a separation marker (之外 / 族外 / 绝不标 / OUTSIDE / NEVER / 低成本基线). |
 | 4 | `BANNED-UNPREDICTABLE-CUSTODY` | banned_phrase | **PASS** | 3 matches, all removal / failure-history context (`proposal L359` "**删除**…'不可预测 custody'…措辞"; `proposal L647` appendix D; `letter L26` "**删去** §9.5 '不可预测 custody' 签字门措辞"). |
 | 5 | `BANNED-BUSINESS-EFFECT-TITLE` | banned_phrase_in_titles | **PASS** | 1 heading match, negated (`proposal L313` "…**无**业务效果分支"); main title (L2/L13) is "以效果为裁判", no branding. |
-| 6 | `BANNED-FUTURE-DATE` | future_date | **PASS** | 12 calendar dates scanned across proposal+letter; latest is `2026-07-12`; none ≥ `2026-07-13`. arXiv IDs (YYMM.N), YYYY-MM refs and bare integer seeds correctly ignored. |
+| 6 | `BANNED-FUTURE-DATE` | future_date | **PASS** | Calendar dates scanned across proposal+letter; latest is `2026-07-13` (the `released_at` first-git/release day, dual-timestamp per discrepancy-register item 3); threshold is `2026-07-14`, so the release day is permitted and none ≥ `2026-07-14`. arXiv IDs (YYMM.N), YYYY-MM refs and bare integer seeds correctly ignored. |
 | 7 | `REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION` | required_phrase | **PASS** | "public deterministic evaluation" present ×11 (proposal §9.8/§11/§12). |
 | 8 | `REQUIRED-NOT-EVALUATED-RULE` | required_phrase | **PASS** | `NOT_EVALUATED` present ×11 with companion "规则/rule" (proposal §6.4). |
 | 9 | `REQUIRED-SINGLE-FINAL-CONFIRMATORY-DOCTRINE` | required_phrase | **PASS** | "单一最终确证版本制 / SINGLE final confirmatory" present ×14 (proposal §9.5 + appendix-A YAML). |
@@ -190,3 +195,11 @@ artifacts exist, and the appendix-A atom family recounts to `m=6` in agreement w
 > claim ledger at the pinned input hashes above. The owner §14 signatures, holdout-supply proof,
 > M1 clean-checkout green, and the real cross-modal live smoke remain the STOP-THE-LINE gates
 > before Stage-2.
+
+---
+
+> **UPDATE 2026-07-13 (#39 remediation round, append-only)**: the narrative above reflects the
+> 2026-07-12 run (12/12, rules-2026-07-12). The AUTHORITATIVE current result is the machine-readable
+> `v42-conformance-output.json`: **22/22 PASS, rules `v42-remediation/rules-2026-07-13`** (12 prior +
+> 10 remediation rules), verdict DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW. This narrative will be
+> regenerated at the next release cycle; until then the JSON governs.

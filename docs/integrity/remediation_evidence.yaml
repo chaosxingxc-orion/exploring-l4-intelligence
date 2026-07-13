@@ -1,0 +1,227 @@
+# ============================================================================
+# Remediation evidence table — 2026-07-13 v4.2 doctoral-review round
+# ============================================================================
+# Owner order 续28-⑤ (systematic self-check). Maps each addressed finding of the
+# 2026-07-13 doctoral adversarial-integrity review to its fix/disposition, the
+# on-disk test/file evidence, and the executable checker rule that mechanically
+# guards it. Produced by the self-check subagent; NOT a commit, NOT an external
+# sign-off.
+#
+# SCOPE (read first — mirrors the checker's own self_scope, guards against the
+# M-9 trap): the executable checker verifies DOCUMENT-PACKAGE SELF-CONSISTENCY
+# and artifact existence only. A PASS here certifies that the package says what
+# it claims and that named artifacts exist — it certifies NOTHING about
+# scientific validity, corpus officialness, sampling isolation, statistical
+# adequacy, or theory. The genuinely load-bearing findings (F-1 estimand, F-9
+# state machine, F-10 theory, M-1/M-2 replication, M-4 same-weight cross-source,
+# M-5 small-cluster tails, M-6 multiplicity, M-7 q2q contamination) remain
+# DEFERRED/CONTESTED and are tracked, not closed — see `deferred_not_closed`.
+
+meta:
+  self_check_round: "续28-⑤ (2026-07-13)"
+  source_review: wiki/2026-07-13-v42-doctoral-adversarial-integrity-review.md
+  reviewed_object: wiki/2026-07-12-research-proposal-v42-external-review.md
+  rules_version: "v42-remediation/rules-2026-07-13"
+  checker: scripts/checks/v42_conformance.py
+  rule_manifest: docs/checks/v42-rules.yaml
+  checker_output: docs/checks/v42-conformance-output.json
+  checker_verdict: "DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW (22/22 PASS, 0 failed)"
+  standard_test_entry:
+    command: "PYTHONPATH=src pytest -q"
+    cwd: projects/speech-mllm-training-free-rl
+    result: "159 passed, 0 failed, 0 errors, 3 warnings"
+    returncode: 0
+    note: >
+      Requires SPEECHRL_DATA_DIR set (E: data root) as the deployment does; in a
+      shell without it, 4 data-dependent tests fail with an explicit
+      'SPEECHRL_DATA_DIR is not set' RuntimeError (environment, not code). Live
+      count supersedes the review's stale 143 and the older 'current 4 errors'.
+    live_capture: docs/integrity/release_manifest.json (standard_test_entry)
+  release_manifest: docs/integrity/release_manifest.json
+
+# ---- Findings covered by an executable checker rule this round ----------------
+entries:
+
+  - finding_id: F-2
+    summary: "SESOI freeze can no longer be claimed blind/pre-observation — selector effect sizes already observed."
+    disposition: fixed
+    fix: >
+      Q-B two-sided SESOIs (Q_B_SESOI_abs / Q_B_SESOI_sup) qualitatively relabeled
+      'post-observation but externally justified'; the blindness/pre-observation
+      framing is explicitly disavowed; prior selector observations are disclosed in
+      the prior-exposure register.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:126 (relabel + '绝不表述为…盲法（blindness）' disavowal)"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:319,:515,:588,:599,:609 (§9.3 / §14 signature slot / appendix-A nulls)"
+      - "docs/integrity/prior_exposure_registry.json (discloses prior selector effect observations)"
+    checker_rules:
+      - {id: BANNED-PREOBSERVATION-BLINDNESS, verdict: PASS, note: "2 matches, all in a disavowal/negation context"}
+      - {id: REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED, verdict: PASS, note: "20 occurrences in proposal"}
+
+  - finding_id: F-8
+    summary: "'fixed seed equally tamper-evident' framing (deterministic_draw header) and the append-only JSONL 'tamper-evident' claim are wrong."
+    disposition: fixed
+    fix: >
+      Code header rewritten to claim 'replayable, not selection-blind' and to name
+      'equally tamper-evident' as the prior, retracted framing; the response letter
+      retracts calling a local ordinary-write append-only JSONL a tamper-evident
+      ledger (it is a useful audit trail only).
+    evidence:
+      - "projects/speech-mllm-training-free-rl/scripts/baselines/deterministic_draw.py:14-15,:34 (retraction; 'never \"equally tamper-evident\"')"
+      - "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md:52,:58 (§3b/§3e retraction; '非 tamper-evident')"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:495 ('append-only JSONL 可编辑非防篡改')"
+    checker_rules:
+      - {id: BANNED-EQUALLY-TAMPER-EVIDENT, verdict: PASS, note: "4 matches (proposal+letter), all in a retraction/negation context; code header not a checker target but verified fixed"}
+
+  - finding_id: M-8-stale-4-errors
+    summary: "Proposal §13.4 stated 'current 4 errors' for the standard test entry — stale at publish (live is 0 errors)."
+    disposition: fixed
+    fix: >
+      Gap-table row updated to the live '159 passed / 0 errors' with the old
+      '4 errors' snapshot explicitly marked stale (旧…已陈旧, 续28③); discrepancy
+      register item 1 records the stale-count inconsistency.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:496 ('159 passed / 0 errors … 旧\"4 errors\"快照已陈旧')"
+      - "docs/integrity/release_manifest.json (standard_test_entry: 159 passed, returncode 0, live)"
+      - "docs/integrity/discrepancy_register.md (item 1: stale '4 errors')"
+    checker_rules:
+      - {id: BANNED-STALE-FOUR-ERRORS, verdict: PASS, note: "1 match, in a stale-flagged context"}
+
+  - finding_id: F-3
+    summary: "Public deterministic evaluation cannot retain a strong-confirmatory grade; M4 grade must not be asserted now."
+    disposition: deferred_tracked
+    fix: >
+      M4 evidence-grade label deferred to M3 signature (续28①); the version makes no
+      confirmatory-grade claim ('此前不作 confirmatory 宣称'); public deterministic
+      evaluation is stated as replayability-only, not selection-blind; the grade
+      dispute is logged as an UNRESOLVED/contested opening.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:465 (M4 grade deferred; '此前不作 confirmatory 宣称'; '本版不在此预设 M4 等级')"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:205 ('本版尚无确证结果，措辞为将来时'), :366-369 (replayability-not-blindness; future blinded option deferred)"
+    checker_rules:
+      - {id: BANNED-M4-CONFIRMATORY-GRADE, verdict: PASS, note: "1 match ('blinded confirmatory'), in a deferral/future context"}
+
+  - finding_id: F-5
+    summary: "No load-bearing RDU-vs-strongest-baseline attribution atom; risk of demoting key attribution to prose."
+    disposition: deferred_tracked
+    fix: >
+      H_RDU_VS_STRONGEST is named and registered as an EXPLICIT contested/deferred
+      item (not silently dropped); m=6 primary family unchanged per the 续29 SAP
+      freeze; promotion-or-atom-trade decision deferred to M3.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:118 (F-5 UNRESOLVED/contested registration)"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:340 (§9.5 cross-ref), :502 (§13.4 gap-table row, M3)"
+    checker_rules:
+      - {id: REQUIRED-RDU-VS-STRONGEST-ATOM, verdict: PASS, note: "4 occurrences; named/tracked, m=6 unchanged"}
+
+  - finding_id: F-4
+    summary: "Single-K-pool conditional inference omits the method's own generation randomness (suggestion 3: generation-robust rho)."
+    disposition: deferred_tracked
+    fix: >
+      Honest gap-table row added: rho oracle-headroom realization to be defined
+      across K-pool seeds (expectation + lower quantile), outer-resample group /
+      inner-resample generation replicate — the world-robust landing point for the
+      already-disclosed 'conditional on one K-draw' limitation. Deferred to M2->M3
+      per the 续29 SAP freeze; NOT operationalized this version.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:504 (§13.4 gap-table row, generation-robust ρ, M2->M3)"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:536 (PF6-minor: single-K-draw conditionality disclosed; optional generation-level resampling)"
+    checker_rules:
+      - {id: REQUIRED-GENERATION-ROBUST-RHO, verdict: PASS, note: "1 occurrence; tracked deferred, not adopted"}
+
+  - finding_id: M-3
+    summary: "Random comparator should use the conditional expectation (pool mean-U), not a single seeded lucky random index."
+    disposition: deferred_tracked
+    fix: >
+      Honest gap-table row added: primary equal-budget random comparator to compare
+      selector U vs pool-mean (conditional expectation of the K candidates' U),
+      removing meaningless Monte-Carlo variance; the actual random draw is retained
+      only as deployment simulation. Deferred to M3 per the 续29 SAP freeze; m=6
+      unchanged; NOT operationalized this version.
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:503 (§13.4 gap-table row, pool-mean comparator, M3)"
+    checker_rules:
+      - {id: REQUIRED-POOL-MEAN-COMPARATOR, verdict: PASS, note: "1 occurrence; tracked deferred, not adopted"}
+
+  - finding_id: F-6
+    summary: "Full-corpus audit self-certifies from a mode string; no upstream-anchored corpus lock (content hash / doc_count / revision)."
+    disposition: fixed_artifact_partial
+    fix: >
+      docs/corpus.lock.json created (pinned upstream corpus identity computed from
+      the real corpus.jsonl) with a fail-closed verify contract in W1
+      (corpus_lock.py: verify_corpus_lock) and audit-axis tests. Full remaining
+      corpus-independence closure (57,638-doc build, upstream revision + public
+      checksum pin into datasets.lock.json) remains an M1 gap item (§13.4).
+    evidence:
+      - "docs/corpus.lock.json (F-6 remediation; content_hash + doc_count + upstream identity)"
+      - "projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py (verify_corpus_lock, fail-closed)"
+      - "projects/speech-mllm-training-free-rl/scripts/knowledge/test_corpus_lock.py, test_corpus_audit_axes.py"
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md:234,:492 (L3-01 parametric gate + M1 pin gap)"
+    checker_rules:
+      - {id: REQUIRED-CORPUS-LOCK-EXISTS, verdict: PASS, note: "docs/corpus.lock.json exists"}
+
+  - finding_id: P0-integrity-registers
+    summary: "P0_INTEGRITY_FREEZE requires four integrity registers (续28④ honest-audit adoption)."
+    disposition: delivered
+    fix: >
+      Four registers present on disk, seeded by scripts/checks/build_registers.py
+      (prior-exposure, experiment-attempt, discrepancy) and
+      build_release_manifest.py (release manifest). NOTE: prior_exposure_registry
+      still lists prompt-template/metric-family enumeration as OUTSTANDING and the
+      experiment-attempt registry is a shallow scan — P0 gate is EXISTENCE-satisfied
+      but CONTENT-INCOMPLETE (see p0_gate_status in prior_exposure_registry.json);
+      this checker rule guards existence only.
+    evidence:
+      - "docs/integrity/prior_exposure_registry.json"
+      - "docs/integrity/experiment_attempt_registry.jsonl"
+      - "docs/integrity/discrepancy_register.md"
+      - "docs/integrity/release_manifest.json"
+    checker_rules:
+      - {id: REQUIRED-FOUR-INTEGRITY-REGISTERS, verdict: PASS, note: "all four exist; content-completeness NOT asserted by this rule"}
+
+  - finding_id: numeric-atom-recount
+    summary: "Appendix-A primary confirmatory atom count must equal every prose m= / family atom-count claim."
+    disposition: verified
+    fix: "No change needed; recount confirms consistency."
+    evidence:
+      - "wiki/2026-07-12-research-proposal-v42-external-review.md appendix-A YAML (6 atoms) vs prose m=6"
+    checker_rules:
+      - {id: NUMERIC-ATOM-COUNT, verdict: PASS, note: "atom_count=6 (yaml_parse); m_values=[6]; family_atom_values=[6]"}
+
+  - finding_id: M-8-transactional-consistency
+    summary: "Release-snapshot vs actual-repo-state mismatch ('converged/0 residual' vs undelivered items)."
+    disposition: fixed_mechanism
+    fix: >
+      build_release_manifest.py records each repo SHA + own dirty flag, the LIVE
+      standard-entry pytest result, and the LIVE checker verdict (never copied from
+      a prior report), so the mismatch is mechanically checkable going forward.
+    evidence:
+      - "docs/integrity/release_manifest.json (umbrella+W1 SHA/dirty; standard_test_entry 159 passed; conformance_checker 22 rules, 0 failed)"
+      - "docs/integrity/discrepancy_register.md (item 2: 'converged' wording scope)"
+    checker_rules:
+      - {id: "(none — mechanism, not a lint rule)", verdict: "n/a", note: "guarded by the manifest script + discrepancy register, not by a phrase rule"}
+
+# ---- Deferred / contested / NOT closed by this self-check (honesty section) ---
+# These review findings are TRACKED (mostly in the §13.4 honest-gap-table) but are
+# NOT closed. The 22/22 checker PASS does NOT touch their scientific substance;
+# they gate at M2/M3 per the 续29 SAP freeze and remain owner-contested where noted.
+deferred_not_closed:
+  - {id: F-1,  item: "primary estimand vs test-object mismatch (relative vs fixed-absolute); anti-conservative surrogate", gate: M3, status: "SAP DRAFT (续29), not operational at Stage-1"}
+  - {id: F-7,  item: "answer_presence_expected scrub semantics inverted for open-corpus", gate: M1, status: "续28: latent (production path does not pass eval_golds), no data damage; fix tracked"}
+  - {id: F-9,  item: "one-shot M4 state machine self-contradiction (fail-final vs M5 iterate)", gate: M3, status: "tracked; machine-readable state machine deferred"}
+  - {id: F-10, item: "no doctoral load-bearing theorem (finite-sample epsilon_n, operator-linked)", gate: "M2 / theory track", status: "baseline argmax-mismatch lemma only"}
+  - {id: M-1,  item: "two no-harm atoms are not positive replication", gate: M3, status: "single-focus headline explicitly scoped"}
+  - {id: M-2,  item: "Q-B single dataset cannot carry general TFRL value", gate: M3, status: "single-focus scoped; cross-set replication deferred"}
+  - {id: M-4,  item: "same-weight different-prompt is not weight-independent cross-source", gate: M2, status: "MEASURED delta_corr required before selector inclusion"}
+  - {id: M-5,  item: "small-cluster tail inference not justified", gate: M2, status: "BCa/studentized-t or calibrated percentile, choose via simulation at M2"}
+  - {id: M-6,  item: "configuration multiplicity ledger incomplete (search space)", gate: M2, status: "experiment_attempt_registry shallow; full trajectory OUTSTANDING"}
+  - {id: M-7,  item: "q2q pretraining-regurgitation contamination blind spot", gate: M2, status: "post-freeze exact/fuzzy/semantic overlap audit deferred (§13.4)"}
+
+scope_disclaimer: >
+  This table and the executable checker verify document-package self-consistency
+  and artifact existence only (续28-⑤ self-check). They are a machine-assisted
+  internal second pass, NOT independent oversight and NOT external peer review.
+  The 2026-07-13 review's integrity verdict stands: FFP NOT ESTABLISHED, QRP risk
+  high, independent honest audit required (adopted at Stage-1, 续28④). A green
+  checker must never be read as scientific validity, M1 closure, or confirmatory
+  readiness.

@@ -1,0 +1,1673 @@
+{
+  "_comment": "P0 integrity register (2026-07-13, v4.2 doctoral review §6 P0_INTEGRITY_FREEZE) -- everything OBSERVED so far, machine-collected WHERE POSSIBLE from W1's _repro/ artifact tree, docs/claim_ledger.yaml, scripts/baselines/templates.py, and the C-ASR-V2 artifacts. 2026-07-13 flesh-out (ticket #38): prompt-template + metric-family enumeration, C-ASR-V2 selector-comparator effect sizes, and a dev-exposure event ledger added. See manual_completion_todo for what still cannot be auto-derived.",
+  "generated_at": "2026-07-13T04:29:01Z",
+  "generated_by": "scripts/checks/build_registers.py",
+  "umbrella_git_sha": "56364ebc21359f6c1cd0a33f1a796cde6756532a",
+  "w1_git_sha": "ab1c68017671f37b302ba4b27d69859d32b42c62",
+  "n_repro_artifacts_scanned": 574,
+  "datasets_touched": {
+    "OpenbookQA-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/OpenbookQA-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/OpenbookQA-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/OpenbookQA-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "SQuAD-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/SQuAD-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/SQuAD-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/SQuAD-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "air-bench-foundation-acoustic-scene-cochlscene": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-cochlscene__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-cochlscene__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-cochlscene__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-acoustic-scene-tut2017": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-tut2017__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-tut2017__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-tut2017__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-audio-grounding": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-audio-grounding__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-audio-grounding__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-audio-grounding__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-aqa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-aqa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-aqa__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-aqa__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-genre-fma": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-fma__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-fma__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-fma__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-genre-mtj-jamendo": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-mtj-jamendo__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-mtj-jamendo__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-genre-mtj-jamendo__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-instruments-mtj-jamendo": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-mtj-jamendo__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-mtj-jamendo__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-mtj-jamendo__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-instruments-nsynth": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-nsynth__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-nsynth__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-instruments-nsynth__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-midi-pitch-nsynth": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-pitch-nsynth__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-pitch-nsynth__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-pitch-nsynth__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-midi-velocity-nsynth": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-velocity-nsynth__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-velocity-nsynth__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-midi-velocity-nsynth__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-music-mood-mtj-jamendo": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-mood-mtj-jamendo__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-mood-mtj-jamendo__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-music-mood-mtj-jamendo__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-sound-aqa-avqa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-avqa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-avqa__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-avqa__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-sound-aqa-clothoaqa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-clothoaqa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-clothoaqa__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-sound-aqa-clothoaqa__meralion-2-gguf__test.json"
+      ]
+    },
+    "air-bench-foundation-speech-grounding": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 8,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-speech-grounding__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-speech-grounding__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-speech-grounding__meralion-2-gguf__test.json"
+      ]
+    },
+    "aishell-1": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 8,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/aishell-1__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/aishell-1__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/aishell-1__qwen3-omni-30b-gguf__dev.disjoint-validation-20260710.json"
+      ]
+    },
+    "audio2tool": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/audio2tool__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/audio2tool__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "audiocaps-qa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/audiocaps-qa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/audiocaps-qa__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/audiocaps-qa__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "big-bench-audio": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/big-bench-audio__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/big-bench-audio__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/big-bench-audio__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "crema-d": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/crema-d__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/crema-d__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/crema-d__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "csemotions": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/csemotions__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/csemotions__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "esd": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/esd__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/esd__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "fleurs-r": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/fleurs-r__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/fleurs-r__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "heysquad": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/heysquad__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/heysquad__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/heysquad__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "librispeech": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/librispeech__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/librispeech__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/librispeech__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "meld": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/meld__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/meld__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "minds14-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/minds14-zh__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/minds14-zh__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/minds14-zh__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "mmar": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmar__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmar__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmar__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "mmau-mini": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmau-mini__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmau-mini__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmau-mini__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "mmsu": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmsu__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmsu__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/mmsu__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "seed-tts-eval-en": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-en__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-en__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-en__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "seed-tts-eval-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/seed-tts-eval-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "slurp": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "slurp-slot": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp-slot__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp-slot__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/slurp-slot__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-de-DE": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-de-DE-attr": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-attr__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-attr__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-attr__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-de-DE-slot": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-slot__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-slot__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-de-DE-slot__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-fr-FR": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-fr-FR-attr": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-attr__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-attr__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-attr__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "speech-massive-fr-FR-slot": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-slot__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-slot__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/speech-massive-fr-FR-slot__qwen3-omni-30b-gguf__dev.pre-lockedrerun-20260711.json"
+      ]
+    },
+    "spoken-squad": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/spoken-squad__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/spoken-squad__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/spoken-squad__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "squtr": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/squtr__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/squtr__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/squtr__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "thchs-30": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/thchs-30__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/thchs-30__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/thchs-30__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-APE-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-APE-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-APE-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-APE-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-GaokaoEval": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-GaokaoEval__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-GaokaoEval__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-GaokaoEval__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-Gsm8kEval": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Gsm8kEval__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Gsm8kEval__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Gsm8kEval__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-HSK5-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-HSK5-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-HSK5-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-HSK5-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-MLC": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-MLC-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLC-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-MLCpro-en": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-en__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-en__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-en__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-MLCpro-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MLCpro-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-MuChoEval-en": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MuChoEval-en__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MuChoEval-en__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-MuChoEval-en__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-OpenbookQA-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 10,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-OpenbookQA-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-OpenbookQA-zh__meralion-2-gguf__dev.pre-rescore-3b2d4bd.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-OpenbookQA-zh__meralion-2-gguf__test.json"
+      ]
+    },
+    "uro-bench-Repeat": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-Repeat-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-Repeat-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-SQuAD-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-SQuAD-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-SQuAD-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-SQuAD-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-TruthfulEval": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-TruthfulEval__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-TruthfulEval__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-TruthfulEval__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "uro-bench-UnderEmotion-en": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-en__qwen3-omni-30b-gguf__dev.broken-20260710.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-en__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-en__qwen3-omni-30b-gguf__dev.locked.json"
+      ]
+    },
+    "uro-bench-UnderEmotion-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-zh__qwen3-omni-30b-gguf__dev.broken-20260710.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-zh__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/uro-bench-UnderEmotion-zh__qwen3-omni-30b-gguf__dev.locked.json"
+      ]
+    },
+    "vocalbench-emotion": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 8,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-emotion__qwen3-omni-30b-gguf__dev.broken-20260710.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-emotion__qwen3-omni-30b-gguf__dev.broken2-20260710.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-emotion__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "vocalbench-knowledge": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-knowledge__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-knowledge__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-knowledge__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "vocalbench-multi-round": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-multi-round__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-multi-round__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-multi-round__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "vocalbench-reasoning": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-reasoning__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-reasoning__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-reasoning__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "vocalbench-zh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-zh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-zh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/vocalbench-zh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voiceassistant-listening-general": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-general__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-general__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-general__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voiceassistant-listening-music": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-music__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-music__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-music__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voiceassistant-listening-sound": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-sound__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-sound__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-sound__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voiceassistant-listening-speech": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-speech__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-speech__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-listening-speech__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voiceassistant-speaking-reasoning": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-speaking-reasoning__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-speaking-reasoning__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voiceassistant-speaking-reasoning__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voicebench-advbench": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-advbench__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-advbench__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "voicebench-bbh": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-bbh__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-bbh__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-bbh__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voicebench-ifeval": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 2,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-ifeval__qwen3-omni-30b-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-ifeval__qwen3-omni-30b-gguf__test.json"
+      ]
+    },
+    "voicebench-mmsu-spoken": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 4,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-mmsu-spoken__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-mmsu-spoken__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-mmsu-spoken__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voicebench-openbookqa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-openbookqa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-openbookqa__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-openbookqa__qwen3-omni-30b-gguf__dev.json"
+      ]
+    },
+    "voicebench-sd-qa": {
+      "splits_touched": [
+        "dev",
+        "test"
+      ],
+      "models_touched": [
+        "meralion-2-gguf",
+        "qwen3-omni-30b-gguf"
+      ],
+      "n_artifacts": 6,
+      "example_artifacts": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-sd-qa__meralion-2-gguf__dev.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-sd-qa__meralion-2-gguf__test.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/voicebench-sd-qa__qwen3-omni-30b-gguf__dev.json"
+      ]
+    }
+  },
+  "n_claim_ledger_entries": 16,
+  "effect_sizes_observed": [
+    {
+      "claim_id": "C-ASR-ORACLE",
+      "status": "directional",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json",
+      "metric_definition": "Corpus-level WER reduction (oracle-8 best-of-N minus greedy decode), single condition SNR=5 only. Paired bootstrap 95% CI over utterances.",
+      "note_excerpt": "Corpus-WER effect is +0.0296, CI [0.0212, 0.0390] — SNR=5 only, a single condition; do not generalize to clean/other SNRs without a fresh run. A macro (per-utterance-averaged) figure of +0.0418 also exists in prior write-ups; it MUST be labeled \"macro utterance-WER\" wherever quoted and never presented as the unqualified/primary WER figure (G4 gate).",
+      "superseded_by": "asr_bon_v2 (C-ASR-V2)"
+    },
+    {
+      "claim_id": "C-ASR-MBR",
+      "status": "null",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json",
+      "metric_definition": "Corpus-level WER delta, MBR-8 rescoring vs greedy decode, SNR=5.",
+      "note_excerpt": "Corpus-level delta is -0.0012, CI crosses 0 — indistinguishable from no effect; MUST NOT be cited as a positive result. A separate review reports N=1/2 (of the disaggregated cells) as significantly WORSE than greedy; that finding is pending re-verification and is not yet folded into this status.",
+      "superseded_by": "asr_bon_v2 (C-ASR-V2)"
+    },
+    {
+      "claim_id": "C-ASR-SEEDS",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json",
+      "metric_definition": "",
+      "note_excerpt": "",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-W4-EMO",
+      "status": "null",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_paired_v2.json",
+      "metric_definition": "Across-seed paired t-CI on the dev-selected pooling delta, five dependent runs (not independent replicates — same cohort/task reused across \"seeds\").",
+      "note_excerpt": "Five DEPENDENT runs; the t-CI spans 0. Because the five runs are dependent (share cohort/setup), they carry no independent-replication meaning beyond a single run's worth of evidence — do not describe this as \"5x replicated\" anywhere.",
+      "superseded_by": "emotion_pool_grouped_v1 (C-W4-EMO-GROUPED)"
+    },
+    {
+      "claim_id": "C-W4-PARA",
+      "status": "unverified",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/paralinguistic_negative_probe.json",
+      "metric_definition": "Linear-probe accuracy for speaker identity from the frozen embedding vs. chance baseline (chance = 1/n_speakers ~= 0.011).",
+      "note_excerpt": "\"No speaker info\" is NOT established: the probe reaches 0.0333 accuracy vs. a chance baseline of 0.011 (~3x chance). The seed-123 arm's CI excludes chance ABOVE it (i.e., significantly above chance — the opposite direction from the claim). No formal equivalence-to-chance test (e.g. TOST) has ever been run, so the claim is neither confirmed nor refuted by a proper test — it is unverified, and the raw numbers argue against it if anything.",
+      "superseded_by": "speaker_probe_restatement (C-W4-PARA-RESTATED)"
+    },
+    {
+      "claim_id": "C-MINDS-POLICY",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_paired.json",
+      "metric_definition": "Paired accuracy delta, policy arm vs. raw-schema baseline arm, MInDS-14 tool/intent selection.",
+      "note_excerpt": "Second provenance mismatch: the committed artifact's numbers disagree with projects/speech-mllm-omni-embedding-rl/docs/experiment_inventory.md:86 (\"MInDS-14 reproduction | 182 | raw-schema Acc@1 = 0.852 | policy Acc@1 = 0.984, delta +0.132 CI [0.082, 0.187]\") — treat both the doc table and the committed JSON as needing independent reconciliation before either is quoted; this mirrors the earlier audit_source latent schema bug (umbrella commit a517bdd) as a second, distinct instance of doc-vs-arti ...",
+      "superseded_by": "minds14_toolintent_v2 (C-MINDS-V2)"
+    },
+    {
+      "claim_id": "C-M3",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/_repro/m3_crossmodal.json",
+      "metric_definition": "Paired accuracy delta on vocalbench-zh, injected-signal arm vs. base arm, n=150 powered run.",
+      "note_excerpt": "",
+      "superseded_by": "wiki/2026-07-05-A-realization-conclusion.md (2026-07-05 owner retraction banner) and the subsequent clean-rerun record set: wiki/2026-07-07-E2-clean-cf-utilization.md and wiki/2026-07-07-E6-final-conclusions-clean.md (2026-07-04/07 clean reruns); see also wiki/2026-07-05-omni-multimodal-memory-design.md for the legitimate (non-leaking) reframing.\n"
+    },
+    {
+      "claim_id": "C-T7",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/_repro/t7_rag_gate_probe.json",
+      "metric_definition": "Paired accuracy delta, oracle-injection arm (H0) minus base arm, n=60, heysquad SQuAD-style spoken QA, seed 20260707.",
+      "note_excerpt": "",
+      "superseded_by": "2026-07-07-E6-final-conclusions-clean"
+    },
+    {
+      "claim_id": "C-W4-DISENTANGLE",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": [
+        "projects/speech-mllm-omni-embedding-rl/src/omni_embedding_rl/eval_harness.py",
+        "projects/speech-mllm-omni-embedding-rl/outputs/2026-06-24/23-08-11/main.log"
+      ],
+      "metric_definition": "Diagonal-dominance of the matched-vs-mismatched confusion/similarity matrix under the Operator-A two-factor (e.g. CREMA-D speaker x emotion) disentanglement probe; acceptance criterion required diagonal_dominant=True AND matched > mismatched.",
+      "note_excerpt": "",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-BASELINES",
+      "status": "directional",
+      "stage": 1,
+      "artifact": [
+        "projects/speech-mllm-training-free-rl/_repro/baselines/",
+        "projects/speech-mllm-training-free-rl/_repro/wave1_results.md"
+      ],
+      "metric_definition": "Per-cell accuracy / WER / task-specific metric (K1-K8 metric-type taxonomy), dev and test splits, per dataset x backbone.",
+      "note_excerpt": "Dev/test overlap exists across waves, and a later \"disjoint redraw\" does NOT constitute a fresh locked test set: the old deterministic seeds reproduce 40/64 of the same test-item ID sets as before the redraw, so treating the redraw as independent held-out evidence is not justified. Directional/Stage-1 only; not a final cross-backbone comparison.",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-PHASEA",
+      "status": "invalid",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-training-free-rl/scripts/baselines/phase_a_cells.py",
+      "metric_definition": "",
+      "note_excerpt": "Successor status (2026-07-12, 续15): the engineering-side blockers listed in invalid_reason were subsequently fixed and independently verified (W1 commits 28f0a38 \"ticket #25 — Phase-A executable, all 7 P0 defects fixed; Opus-verified ACCEPT-with-notes\" and 13d06f3 \"Proposal-R mechanism control arms + G2 layer-2 CPU prep — coordinator-verified E2E 39/39\"), and a DEV-only exploratory sweep was released by Decision-Log 续14 (\"Phase-A dev-only 探索扫描放行\"). That sweep was then SWEEP HALTED by 续15's wrong ...",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-THEORY",
+      "status": "directional",
+      "stage": 1,
+      "artifact": "proofs/tfrl/TfrlProofs/BestOfN.lean",
+      "metric_definition": "",
+      "note_excerpt": "G6 (theory/implementation-parity gate) status: operator-linked theorems = 0; no executable conformance test yet ties the Python selector to the Lean operator example-by-example. Treat any paper sentence of the form \"Lean proves our selector converges\" as unsupported until G6 closes. 2026-07-12 addendum (RI item 2/3, 续15 naming-correction finding): count=0 remains AUTHORITATIVE and is unchanged by proofs/tfrl/TfrlProofs/Coverage.lean (module `TfrlProofs.Coverage`, added 2026-07-11). That module p ...",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-MINDS-V2",
+      "status": "directional",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_v2.json",
+      "metric_definition": "Acc@1 per arm on the 437-row eval set; paired bootstrap deltas (seed 42, n=1000); pooled over 3 disjoint support draws for card arms.",
+      "note_excerpt": "(a) code_commit corrected 2026-07-12: the original 9ead4d4 is a commit object that is no longer reachable from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history rewrite — 56b8a9c is the rebased equivalent (same commit message \"repro(minds14-v2): clean factorial redo ...\"; the 4 files this commit touches — _repro/minds14_toolintent_v2.json/.smoke.json, scripts/repro_minds14_toolintent_v2.py, docs/experiment_inventory.md — are byte-identical between the two hashes excep ...",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-W4-EMO-GROUPED",
+      "status": "directional",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_grouped_v1.json",
+      "metric_definition": "Paired per-clip accuracy delta (sel audio_attn vs base audio mean-pool), kNN(k=5) probes, layer dev-selected on inner speaker-grouped split of train speakers only; pooled out-of-fold.",
+      "note_excerpt": "code_commit corrected 2026-07-12: the original d04bb89 is a commit object no longer reachable from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history rewrite — 40d34c2 is the rebased equivalent (same commit message \"repro(crema-grouped-v1)+restatement: speaker-grouped GroupKFold(5) redo ...\"; identical git patch-id; the 5 files this commit touches, including this claim's own artifact _repro/emotion_pool_grouped_v1.smoke.json, are byte-identical between the two hashes — ...",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-W4-PARA-RESTATED",
+      "status": "directional",
+      "stage": 1,
+      "artifact": "projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json",
+      "metric_definition": "Pure arithmetic restatement over the frozen paralinguistic_negative_probe.json (sha256-matched); per-seed superiority CIs vs chance; conservative n=3 t-CI flagged directional alongside.",
+      "note_excerpt": "code_commit corrected 2026-07-12: the original d04bb89 is a commit object no longer reachable from any branch tip in the W4 (speech-mllm-omni-embedding-rl) repo after a history rewrite — 40d34c2 is the rebased equivalent (identical git patch-id; this claim's own artifact _repro/speaker_probe_restatement.json is byte-identical between the two hashes — verified 2026-07-12 via `git patch-id` and `git diff` in the W4 repo). See C-W4-EMO-GROUPED's note for the full verification detail (same commit pa ...",
+      "superseded_by": null
+    },
+    {
+      "claim_id": "C-ASR-V2",
+      "status": "directional",
+      "stage": 1,
+      "artifact": [
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json"
+      ],
+      "metric_definition": "Corpus WER (sum errors / sum ref words, S/D/I/N per hypothesis stored) and macro utterance-WER, both explicitly labeled; hierarchical bootstrap (utterance x pool-seed) 2000 reps.",
+      "note_excerpt": "",
+      "superseded_by": null
+    }
+  ],
+  "selector_battery_observations_c_asr_v2_family": [
+    {
+      "claim_id": "C-ASR-ORACLE",
+      "status": "directional",
+      "claim_text_excerpt": "Best-of-N (BoN) oracle-8 rescoring realizes headroom / improves ASR under noise (SNR=5, frozen Qwen3-Omni-30B GGUF, llama.cpp).",
+      "note_excerpt": "Corpus-WER effect is +0.0296, CI [0.0212, 0.0390] — SNR=5 only, a single condition; do not generalize to clean/other SNRs without a fresh run. A macro (per-utterance-averaged) figure of +0.0418 also exists in prior write-ups; it MUST be labeled \"macro utterance-WER\" wherever quoted and never presented as the unqualified/primary WER figure (G4 gate)."
+    },
+    {
+      "claim_id": "C-ASR-MBR",
+      "status": "null",
+      "claim_text_excerpt": "Minimum Bayes Risk (MBR-8) rescoring improves ASR WER over greedy decode.",
+      "note_excerpt": "Corpus-level delta is -0.0012, CI crosses 0 — indistinguishable from no effect; MUST NOT be cited as a positive result. A separate review reports N=1/2 (of the disaggregated cells) as significantly WORSE than greedy; that finding is pending re-verification and is not yet folded into this status."
+    },
+    {
+      "claim_id": "C-ASR-SEEDS",
+      "status": "invalid",
+      "claim_text_excerpt": "Three generation seeds demonstrate best-of-N generation stability / reproducibility.",
+      "note_excerpt": ""
+    },
+    {
+      "claim_id": "C-MINDS-POLICY",
+      "status": "invalid",
+      "claim_text_excerpt": "A zero-shot reward-guided policy on MInDS-14 tool/intent selection yields a +12.6pp accuracy gain (mechanism: reward-guided selection).",
+      "note_excerpt": "Second provenance mismatch: the committed artifact's numbers disagree with projects/speech-mllm-omni-embedding-rl/docs/experiment_inventory.md:86 (\"MInDS-14 reproduction | 182 | raw-schema Acc@1 = 0.852 | policy Acc@1 = 0.984, delta +0.132 CI [0.082, 0.187]\") — treat both the doc table and the committed JSON as needing independent reconciliation before either is quoted; this mirrors the earlier audit_source latent schema bug (umbrella commit a517bdd) as a second, distinct instance of doc-vs-arti ..."
+    },
+    {
+      "claim_id": "C-T7",
+      "status": "invalid",
+      "claim_text_excerpt": "RAG-style knowledge injection produces a clean +51.7pp accuracy gain on heysquad-style spoken QA (H0 headroom experiment, R1 gate).",
+      "note_excerpt": ""
+    },
+    {
+      "claim_id": "C-BASELINES",
+      "status": "directional",
+      "claim_text_excerpt": "The wave-1/2/3 baseline grids (W1, K1-K8 metric types across datasets/backbones) constitute an independent, held-out test-set comparison.",
+      "note_excerpt": "Dev/test overlap exists across waves, and a later \"disjoint redraw\" does NOT constitute a fresh locked test set: the old deterministic seeds reproduce 40/64 of the same test-item ID sets as before the redraw, so treating the redraw as independent held-out evidence is not justified. Directional/Stage-1 only; not a final cross-backbone comparison."
+    },
+    {
+      "claim_id": "C-THEORY",
+      "status": "directional",
+      "claim_text_excerpt": "The Lean 4 formalization proves that the actual (implemented) hard-Best-of-N selector/operator converges, giving the empirical selector a machine-checked theoretical guarantee.",
+      "note_excerpt": "G6 (theory/implementation-parity gate) status: operator-linked theorems = 0; no executable conformance test yet ties the Python selector to the Lean operator example-by-example. Treat any paper sentence of the form \"Lean proves our selector converges\" as unsupported until G6 closes. 2026-07-12 addendum (RI item 2/3, 续15 naming-correction finding): count=0 remains AUTHORITATIVE and is unchanged by proofs/tfrl/TfrlProofs/Coverage.lean (module `TfrlProofs.Coverage`, added 2026-07-11). That module p ..."
+    },
+    {
+      "claim_id": "C-ASR-V2",
+      "status": "directional",
+      "claim_text_excerpt": "Clean-protocol best-of-N redo (seed 4-way separation, corpus+macro dual metrics, {clean,snr5} condition family, n=96 fixed cohort, 3 pool seeds x 8 candidates): oracle headroom replicates in both conditions (snr5 +0.0336 [0.0235,0.0453]; clean +0.0223 [0.0136,0.0316], corpus, UPPER BOUND only). The  ...",
+      "note_excerpt": ""
+    }
+  ],
+  "c_asr_v2_selector_comparator_effects": {
+    "source_evidence": [
+      "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json",
+      "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json"
+    ],
+    "claim_id": "C-ASR-V2",
+    "endpoint": "N=8 (deployment endpoint); each selector vs greedy decode; corpus-WER delta >0 = improvement; hierarchical bootstrap (utterance x pool-seed) CI95",
+    "conditions": {
+      "snr5": {
+        "selectors_at_N8": {
+          "oracle": {
+            "corpus_delta_vs_greedy_mean": 0.03362,
+            "corpus_delta_vs_greedy_ci95": [
+              0.02347,
+              0.04531
+            ],
+            "corpus_sig": true,
+            "macro_sig": true
+          },
+          "logprob": {
+            "corpus_delta_vs_greedy_mean": 0.0081,
+            "corpus_delta_vs_greedy_ci95": [
+              0.00053,
+              0.01613
+            ],
+            "corpus_sig": true,
+            "macro_sig": false
+          },
+          "mbr": {
+            "corpus_delta_vs_greedy_mean": 0.00484,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.00225,
+              0.01214
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          },
+          "random": {
+            "corpus_delta_vs_greedy_mean": -0.00597,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.01594,
+              0.00395
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          },
+          "length": {
+            "corpus_delta_vs_greedy_mean": -0.01156,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.0264,
+              0.00224
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          }
+        }
+      },
+      "clean": {
+        "selectors_at_N8": {
+          "oracle": {
+            "corpus_delta_vs_greedy_mean": 0.02234,
+            "corpus_delta_vs_greedy_ci95": [
+              0.01363,
+              0.03155
+            ],
+            "corpus_sig": true,
+            "macro_sig": true
+          },
+          "logprob": {
+            "corpus_delta_vs_greedy_mean": 0.00935,
+            "corpus_delta_vs_greedy_ci95": [
+              0.0034,
+              0.01646
+            ],
+            "corpus_sig": true,
+            "macro_sig": true
+          },
+          "mbr": {
+            "corpus_delta_vs_greedy_mean": 0.00214,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.00207,
+              0.00675
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          },
+          "random": {
+            "corpus_delta_vs_greedy_mean": -0.00978,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.01896,
+              -0.00166
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          },
+          "length": {
+            "corpus_delta_vs_greedy_mean": -0.04262,
+            "corpus_delta_vs_greedy_ci95": [
+              -0.05709,
+              -0.02902
+            ],
+            "corpus_sig": false,
+            "macro_sig": false
+          }
+        }
+      }
+    },
+    "headline_realized_fraction_of_oracle_headroom": {
+      "snr5": 0.2409,
+      "clean": 0.4185
+    },
+    "multiplicity_caveat": "Full discovery-grid Holm correction (4 deployable selectors x 4 N = 16 corpus-WER comparisons/condition) survives in NEITHER condition; the fixed-N=8 4-selector family survives in noise2 only. logprob is the SOLE selector whose corpus-WER CI excludes 0 in BOTH conditions, but the signal is marginal -- Stage-1 directional, NOT a deployable win. MBR positive but ns in both; random and length are significant REGRESSIONS on clean. See claim_ledger C-ASR-V2 hardening_update_correction_2026_07_12."
+  },
+  "prompt_templates_enumerated": {
+    "source_evidence": "projects/speech-mllm-training-free-rl/scripts/baselines/templates.py",
+    "dispatcher": "build_instruction(dataset_key,row) -> k_type_of(dataset_key) -> kN_* builder",
+    "template_functions": [
+      "k10_tool_call",
+      "k11_advbench_probe",
+      "k11_ifeval_passthrough",
+      "k1_asr_en",
+      "k1_echo_en",
+      "k1_qa_short_en",
+      "k2_asr_zh",
+      "k2_echo_zh",
+      "k3_lid_gender",
+      "k4_ser",
+      "k5_attribute",
+      "k6_intent",
+      "k7_slot",
+      "k8_mcq",
+      "k8_qa",
+      "k8_yesno",
+      "k9_squtr_closed_book"
+    ],
+    "n_template_functions": 17,
+    "note": "The NAMED per-K-type prompt builders actually used by the baseline runner. Inline/free-form prompts (run_baseline.py / run_mock.py ad-hoc strings, kb_batch_build.py pseudo-question generator) are NOT captured here -- see manual_completion_todo."
+  },
+  "metric_families_enumerated": {
+    "source_evidence": "projects/speech-mllm-training-free-rl/_repro/baselines/*.json (each artifact's own k_type/stage/aggregate keys)",
+    "n_baseline_artifacts_read": 464,
+    "n_read_errors": 0,
+    "k_type_taxonomy": {
+      "K1": 22,
+      "K10": 2,
+      "K11": 4,
+      "K2": 24,
+      "K3": 2,
+      "K4": 30,
+      "K5": 8,
+      "K6": 12,
+      "K7": 12,
+      "K8": 302,
+      "K8/K6 (legacy)": 40,
+      "K9": 6
+    },
+    "aggregate_metric_keys": {
+      "ci95": 455,
+      "macro_f1": 24,
+      "mean": 464,
+      "n_scored": 464,
+      "n_total": 464,
+      "n_unresolved": 5,
+      "note": 3,
+      "slot_f1": 9
+    },
+    "stages_observed": {
+      "1-directional": 464
+    },
+    "note": "k_type = the K1-K11 metric-type taxonomy (K1/K2 ASR-WER, K3 LID/gender, K4 SER, K5 attribute, K6 intent-acc, K7 slot-F1, K8 MCQ/QA-acc, K9 closed-book, K10 tool-call, K11 passthrough/probe). aggregate_metric_keys are the scored statistics stored per cell. Non-baseline artifacts (asr_bon, selector, probe) record bespoke schemas covered under c_asr_v2_selector_comparator_effects / effect_sizes_observed."
+  },
+  "dev_exposure_events": [
+    {
+      "event_id": "locked_dev_baseline_rerun",
+      "what": "group-aware locked-DEV baseline rerun; per-(dataset,model,split=dev) scored cells",
+      "magnitude": "65 *.locked.json dev cells (ALL 65 dataset keys; test half single-consumer reserved)",
+      "date": "2026-07-11",
+      "claim_id": "C-BASELINES",
+      "n_source_artifacts": 65,
+      "source_evidence": [
+        "projects/speech-mllm-training-free-rl/_repro/LOCKED_HOLDOUT/ACCESS_LOG.md",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/OpenbookQA-zh__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/SQuAD-zh__qwen3-omni-30b-gguf__dev.locked.json",
+        "projects/speech-mllm-training-free-rl/_repro/baselines/air-bench-foundation-acoustic-scene-cochlscene__qwen3-omni-30b-gguf__dev.locked.json"
+      ]
+    },
+    {
+      "event_id": "locked_holdout_permanent_downgrade",
+      "what": "65 LOCKED_HOLDOUT manifests permanently downgraded to exposed-dev-like (plaintext test_ids + confirmed old-test overlap + honor-system access already happened)",
+      "magnitude": "old-test overlap = 11.20% (README banner); 65 manifests downgraded",
+      "date": "2026-07-12",
+      "claim_id": null,
+      "source_evidence": [
+        "projects/speech-mllm-training-free-rl/_repro/LOCKED_HOLDOUT/README.md",
+        "projects/speech-mllm-training-free-rl/_repro/LOCKED_HOLDOUT/ACCESS_LOG.md"
+      ],
+      "note": "This scan does NOT open the per-dataset test_ids/dev_ids lists (governed access)."
+    },
+    {
+      "event_id": "asr_best_of_n_family",
+      "what": "ASR best-of-N / selector-battery exposures (llama.cpp Qwen3-Omni-30B, {clean,snr5}, oracle/logprob/mbr/random/length x N in {1,2,4,8})",
+      "magnitude": "see c_asr_v2_selector_comparator_effects (realized fraction ~24%/~42% of oracle headroom; logprob sole selector with both-condition CI excluding 0)",
+      "date": "2026-07-02..2026-07-11",
+      "claim_id": "C-ASR-V2",
+      "source_evidence": [
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.smoke_n4.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5_noise2.json",
+        "projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5_noise_replication.json"
+      ]
+    },
+    {
+      "event_id": "selector_dev_and_confirmatory_slices",
+      "what": "MMAU selector realization + m5 selector dev/confirmatory slices (rho oracle-headroom realization exposure)",
+      "magnitude": "selector-realization + confirmatory slice artifacts present on disk",
+      "date": "2026-07-03..2026-07-04",
+      "claim_id": "C-ASR-V2",
+      "source_evidence": [
+        "projects/speech-mllm-training-free-rl/_repro/coverage_bridge_v1.json",
+        "projects/speech-mllm-training-free-rl/_repro/cp3_selector_realization_mmau.json",
+        "projects/speech-mllm-training-free-rl/_repro/m5_selector_confirmatory.json",
+        "projects/speech-mllm-training-free-rl/_repro/m5_selector_dev.json"
+      ]
+    },
+    {
+      "event_id": "cross_modal_and_rag_probe_exposures",
+      "what": "cross-modal injection (C-M3, RETRACTED/leaked) + RAG-gate probe (C-T7, RETRACTED/leaked) + hprompt cp1 dev exposures -- kept for failure-history provenance; do NOT cite as positive",
+      "magnitude": "retracted/invalid (information-boundary violations)",
+      "date": "2026-07-04..2026-07-07",
+      "claim_id": [
+        "C-M3",
+        "C-T7"
+      ],
+      "source_evidence": [
+        "projects/speech-mllm-training-free-rl/_repro/cp1_multimodal_feature_audited_mmau.json",
+        "projects/speech-mllm-training-free-rl/_repro/cp1_slu_hprompt_minds14.json",
+        "projects/speech-mllm-training-free-rl/_repro/cp1_sqa_hprompt_mmau.json",
+        "projects/speech-mllm-training-free-rl/_repro/m3_crossmodal.json",
+        "projects/speech-mllm-training-free-rl/_repro/t7_rag_gate_probe.json"
+      ]
+    }
+  ],
+  "manual_completion_todo": [
+    "CONFIG-SELECTION TRAJECTORY (v4.2 review M-6): the full search space actually explored (every tried modality/form/delivery/selector-weight/K/threshold/embedder/PROMPT and its abandonment reason) is only PARTIALLY on disk. Named prompt-template families are now enumerated (prompt_templates_enumerated) and the baseline metric taxonomy is enumerated (metric_families_enumerated), but ad-hoc dev prompts and abandoned weight/threshold/K sweeps NOT persisted to _repro/ cannot be auto-derived -- they must be reconstructed from session logs / human recall. THIS is the load-bearing OUTSTANDING item for P0.",
+    "INLINE/FREE-FORM PROMPTS outside scripts/baselines/templates.py (run_baseline.py / run_mock.py ad-hoc strings; kb_batch_build.py pseudo-question generator) are not captured by the named-function enumeration and need a manual sweep.",
+    "Confirm whether any dataset/split pair was ALSO touched by a process OUTSIDE _repro/ entirely (ad-hoc notebooks, since-deleted scripts, a sibling session's uncommitted local files) -- this scan is limited to what is currently ON DISK under _repro/.",
+    "Reconcile scripts/baselines/_repro/draws/exposure_registry.json (deterministic_draw.py's own F-8(b) registry) against this file once the sampling-isolation track produces real eligibility/exploration/confirmatory draws -- no draws/ directory exists yet on disk."
+  ],
+  "p0_gate_status": {
+    "gate_id": "P0_INTEGRITY_FREEZE",
+    "pass_conditions_met": false,
+    "certification": "NOT_PASS (honest-audit, Decision-Log 续28④). The four required_artifacts now exist AND the two registers are substantially fleshed out: prompt-template + metric-family enumeration and the C-ASR-V2 selector-battery effect sizes are now machine-collected, and experiment_attempt_registry.jsonl now carries per-row status/claim_id/inferred flags. Gate STILL NOT PASS: the config-selection trajectory (M-6) is only partially recoverable from disk, and the independent read-only reviewer snapshot (pass_conditions[2]) is a process step this file cannot self-certify.",
+    "resolved_this_round_2026_07_13": [
+      "prompt-template enumeration -> prompt_templates_enumerated (kN_* builders from templates.py).",
+      "metric-family enumeration -> metric_families_enumerated (K1-K11 taxonomy + aggregate keys, machine-read from every baseline artifact).",
+      "C-ASR-V2 selector battery magnitudes disclosed explicitly -> c_asr_v2_selector_comparator_effects (realized fraction ~24%/~42%; MBR/random/length results at N=8, machine-extracted from the artifacts).",
+      "experiment_attempt_registry.jsonl enriched beyond the shallow filename+mtime scan (status / claim_id / inferred / content_hint per row).",
+      "dev-exposure events enumerated -> dev_exposure_events (locked-dev rerun, LOCKED_HOLDOUT downgrade, asr best-of-N family, selector slices, retracted cross-modal/RAG probes).",
+      "append_only_erratum_for_v42.md created on disk (fourth P0 artifact)."
+    ],
+    "unmet_pass_conditions": [
+      "CONFIG-SELECTION TRAJECTORY (M-6) not fully enumerable: abandoned prompt/weight/threshold/K/embedder sweeps not persisted to _repro/ cannot be auto-derived (manual_completion_todo[0]).",
+      "pass_conditions[2] 'independent reviewer receives read-only artifact snapshot' is a process step, not certified by this file."
+    ],
+    "honest_audit_note": "Independent-honest-audit stance adopted at Stage-1 (Decision-Log 续28④): this gate is reported by its TRUE state. Any remediation report for external-reviewer sign-off MUST present P0 as INCOMPLETE (not PASS) until the config-selection trajectory (M-6) is enumerated and an independent reviewer receives the read-only snapshot."
+  }
+}

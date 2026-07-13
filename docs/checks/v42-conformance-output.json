@@ -1,24 +1,24 @@
 {
   "meta": {
     "tool": "scripts/checks/v42_conformance.py",
-    "rules_version": "v42-conformance/rules-2026-07-12",
+    "rules_version": "v42-remediation/rules-2026-07-13",
     "manifest": "docs/checks/v42-rules.yaml",
     "root": "/mnt/d/chao_workspace/exploring-l4-intelligence",
-    "run_utc": "2026-07-12T17:39:17Z",
+    "run_utc": "2026-07-13T03:52:27Z",
     "self_scope": "machine-assisted internal consistency check (second pass); NOT independent oversight; NOT external peer review; certifies package self-consistency only, not scientific validity",
     "inputs": {
       "docs/checks/v42-rules.yaml": {
-        "sha256": "4cd76b833799008a0119c5b9760847229d871115594a0f4c47b0230bf59739b3",
+        "sha256": "b71d92fad60af6ccf657b771fd0e1f81ff75d1eeedb003a17ddb47d0f6d8f45a",
         "exists": true,
         "role": "rule_manifest"
       },
       "wiki/2026-07-12-research-proposal-v42-external-review.md": {
-        "sha256": "4a008facf34ce0ba628d80ba5633a0eba83bd08070959b2bd46c2c3640e36cb9",
+        "sha256": "182f093aeafe635fab864a2939e9566d3d4ea18d2779fb82a14f710f8aad4260",
         "exists": true,
         "role": "proposal",
-        "lines": 650,
-        "appendix_d_start_line": 641,
-        "appendix_a_start_line": 516
+        "lines": 665,
+        "appendix_d_start_line": 656,
+        "appendix_a_start_line": 529
       },
       "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md": {
         "sha256": "bb8c569ac6cddc8e3f3762ad499f792005154785ba7603b3f0d2bfd1aee1fa60",
@@ -72,7 +72,7 @@
       "verdict": "PASS",
       "n_violations": 0,
       "violations": [],
-      "notes": "anchor-near co-occurrences=16 (separated ones excluded)"
+      "notes": "anchor-near co-occurrences=17 (separated ones excluded)"
     },
     {
       "id": "BANNED-UNPREDICTABLE-CUSTODY",
@@ -108,7 +108,7 @@
       "verdict": "PASS",
       "n_violations": 0,
       "violations": [],
-      "notes": "calendar-dates scanned=12 threshold=2026-07-13"
+      "notes": "calendar-dates scanned=16 threshold=2026-07-14"
     },
     {
       "id": "REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION",
@@ -250,7 +250,7 @@
       "verdict": "PASS",
       "n_violations": 0,
       "violations": [],
-      "notes": "atom_count=6 (via yaml_parse, block lines 531-625); m_values=[6]; family_atom_values=[6]",
+      "notes": "atom_count=6 (via yaml_parse, block lines 546-640); m_values=[6]; family_atom_values=[6]",
       "atom_count": 6,
       "count_method": "yaml_parse",
       "m_values": [
@@ -259,11 +259,150 @@
       "family_atom_values": [
         6
       ]
+    },
+    {
+      "id": "BANNED-PREOBSERVATION-BLINDNESS",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=2 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-EQUALLY-TAMPER-EVIDENT",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=4 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-STALE-FOUR-ERRORS",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=1 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-M4-CONFIRMATORY-GRADE",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=1 (allowed ones excluded)"
+    },
+    {
+      "id": "REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 20}"
+    },
+    {
+      "id": "REQUIRED-GENERATION-ROBUST-RHO",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 1}"
+    },
+    {
+      "id": "REQUIRED-POOL-MEAN-COMPARATOR",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 1}"
+    },
+    {
+      "id": "REQUIRED-RDU-VS-STRONGEST-ATOM",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 4}"
+    },
+    {
+      "id": "REQUIRED-CORPUS-LOCK-EXISTS",
+      "type": "file_exists",
+      "applies_to": [],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "paths checked=1",
+      "paths": [
+        {
+          "path": "docs/corpus.lock.json",
+          "exists": true,
+          "source": "F-6 remediation: pinned upstream corpus identity (content_hash + doc_count + upstream revision)"
+        }
+      ]
+    },
+    {
+      "id": "REQUIRED-FOUR-INTEGRITY-REGISTERS",
+      "type": "file_exists",
+      "applies_to": [],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "paths checked=4",
+      "paths": [
+        {
+          "path": "docs/integrity/prior_exposure_registry.json",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/experiment_attempt_registry.jsonl",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/discrepancy_register.md",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/release_manifest.json",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④ / M-8)"
+        }
+      ]
     }
   ],
   "summary": {
-    "total": 12,
-    "passed": 12,
+    "total": 22,
+    "passed": 22,
     "failed": 0,
     "passed_ids": [
       "BANNED-VERIFIABLE-REWARD",
@@ -277,7 +416,17 @@
       "REQUIRED-SINGLE-FINAL-CONFIRMATORY-DOCTRINE",
       "LEDGER-CITATIONS",
       "FILE-EXISTENCE-LETTER-CLAIMS",
-      "NUMERIC-ATOM-COUNT"
+      "NUMERIC-ATOM-COUNT",
+      "BANNED-PREOBSERVATION-BLINDNESS",
+      "BANNED-EQUALLY-TAMPER-EVIDENT",
+      "BANNED-STALE-FOUR-ERRORS",
+      "BANNED-M4-CONFIRMATORY-GRADE",
+      "REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED",
+      "REQUIRED-GENERATION-ROBUST-RHO",
+      "REQUIRED-POOL-MEAN-COMPARATOR",
+      "REQUIRED-RDU-VS-STRONGEST-ATOM",
+      "REQUIRED-CORPUS-LOCK-EXISTS",
+      "REQUIRED-FOUR-INTEGRITY-REGISTERS"
     ],
     "failed_ids": [],
     "overall_verdict": "DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW"

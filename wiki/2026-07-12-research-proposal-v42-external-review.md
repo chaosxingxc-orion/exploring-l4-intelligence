@@ -1,6 +1,8 @@
 ---
 title: "Research Proposal v4.2：以效果为裁判、以 reward-guided selector 为身份锚的前端多模态知识体系——冻结 omni 的检索·发现·使用（RDU）+ 轨迹选择算子（收敛与锁定版）"
 date: 2026-07-12
+created_at: 2026-07-12    # 文本撰写日
+released_at: 2026-07-13    # 首次进入 Git / 对外发布日（双时间字段，消除发布记录与文件日期不一致，审查 §1）
 version: v4.2
 supersedes: "v4.1（[2026-07-12-research-proposal-v41-external-review.md](2026-07-12-research-proposal-v41-external-review.md)，状态：待外审、五 F′ 待结构性处置）"
 audience: "外部评审（self-contained review copy）"
@@ -113,6 +115,7 @@ WavRAG / VoxRAG / PlanRAG-Audio 已把 audio-RAG + 系统组织的新颖空间�
 - **总体范围（S-2）**：头条限定为**头空合格数据集**（§9.4 资格规则）；对不合格集不主张头条效果；焦点/复制集在 M2 由 eligibility-split 选出，**responder-cohort 选择在头条范围内如实声明**。
 - **主聚合（S-5）**：**一个焦点数据集为 primary + 若干 replication 集带 no-harm 门**，**不以跨异构任务族的固定效应池化作 primary**；如展示任何聚合，报告异质性并要求 ≥2 预定任务族方向一致。
 - **复杂度阶梯并列裁定**：①long-context 全塞入；②own-ASR 朴素级联（modality-bridge 对照，WER 作协变量）；③RDU 完整配置。头条比对裸基线；阶梯净增益（"组织智慧"）**单独裁定**，若仅 Q-A 达标而阶梯净增益 null → 系统有效但归因于"知识供给本身"，如实降级叙事、不 kill Q-A。
+    - **F-5 处置状态如实标注为 UNRESOLVED / contested（非静默消解，比照 §11 L4-6 记名待决项）**：博导 F-5 要求把 **RDU-vs-strongest-baseline 归因**立为一个 **load-bearing 的 primary 确证原子**（H_RDU_VS_STRONGEST，须跨 SESOI 方判成立），并明指"把关键归因降为散文（demote key attribution to prose）"为失败模式——本节"阶梯净增益**单独裁定**、头条仍只比对**裸**基线"正落在 F-5 拒绝的方向。owner 裁决（Decision-Log 续24/26/28）**未覆盖 F-5**；且续29 冻结 proposal 的 SAP 设计迭代（estimand 重定义 / 新增确证原子一律推迟至 M3），故本版**不新增 primary 原子（m=6 不变）**，亦**不在此私自把 F-5 判为已处置**。F-5 因此如实登记为**显式待决 / contested 敞口**：是否把 H_RDU_VS_STRONGEST 升为 load-bearing primary（若担心族增大则删弱价值原子而非降关键归因为散文）、以及阶梯净增益的确证地位，**推迟至 M3 单一确证注册决定**，**绝不以"单独裁定"措辞私自终局**。
 
 ### 3.2 Q-B：selector 效果（TFRL 身份锚；等预算超越性原子 + 预算不匹配部署价值 co-primary；ρ 机制量）
 
@@ -120,7 +123,7 @@ WavRAG / VoxRAG / PlanRAG-Audio 已把 audio-RAG + 系统组织的新颖空间�
 
 - **等预算对照族（硬约束，G5）**：`K-candidate random`（K 条随机取一）/ `K-candidate MBR`（medoid）与 selector **严格匹配同一 K 生成预算与采样配置**。三者构成等预算 selector 族。
 - **K=1 单次 RDU = 低成本系统基线（G5，等预算族之外）**：K=1 与 K>1 在生成预算上不可能严格相同，故 **K=1 永久标为"低成本系统基线"、绝不标"等预算"**；它作描述性成本对照报告，不进等预算 selector 族的确证判定。
-- **Co-primary（绝对增量，G4）**：**Û-selector 的绝对任务效用增量**（R_selector − R_greedy，任务效用尺度）为 co-primary，与等预算超越性并列。**如实披露（F1）**：此原子是**有意的预算不匹配（budget-UNMATCHED）部署价值指标**——把"带 K 预算的系统"对照**RDU 全管线的单次 temp-0 缺省部署**（greedy = 与 selector 同一 RDU 配置、仅单样本零额外采样的部署缺省锚点；**区别于 §9.2 的裸核心基线——裸核心不含 RDU，R_greedy 含完整 RDU 只跑一遍**，F2），与等预算超越性原子（selector vs random/MBR，§4.4）目的不同、不同尺度并列。之所以 selector-vs-greedy 可进确证而 selector-vs-K=1 只作描述性：**greedy 是唯一的规范部署缺省（零额外采样）**，而 **K=1 只是一个任意的单次随机采样**、无规范地位（G5）；故 K=1 恒在等预算族之外只作低成本基线，而 greedy 作为部署缺省锚点进入 co-primary。primary 家族因此**同时含 matched（vs random/MBR）与 mismatched（vs greedy）两类对照，此处明确标注、不隐瞒**。**Q-B 最小效应量（L2-01/PF1）**：selector 绝对增量与等预算超越两类原子**各预注册一个数值 SESOI（pre-M2 冻结常数——owner 于 §14 签字位设定数值、先于任何 exploration/dev 运行，一经设定在任何 selector dev 观测作出后绝不新选或回改；与 Q-A 相对 SESOI 同属 pre-M2 冻结类，杜绝 identity-gating SESOI 被 selector dev 效应量 retro-fit，PF4）——`Q_B_SESOI_abs`（绝对增量，task-utility 尺度）与 `Q_B_SESOI_sup`（等预算超越，normalized-error 尺度）**，两原子的判据都要求 CI 界越过其各自 SESOI（非仅越过 point-zero null；等预算超越原子的 point-zero 口子已在附录 A 同步堵上，PF1）；**承诺显著但平凡（低于对应 Q-B-SESOI）的 selector 增量/超越绝不报为"selector/TFRL 身份已确证"**，杜绝 point-zero null 下任意小显著冒充身份成立。
+- **Co-primary（绝对增量，G4）**：**Û-selector 的绝对任务效用增量**（R_selector − R_greedy，任务效用尺度）为 co-primary，与等预算超越性并列。**如实披露（F1）**：此原子是**有意的预算不匹配（budget-UNMATCHED）部署价值指标**——把"带 K 预算的系统"对照**RDU 全管线的单次 temp-0 缺省部署**（greedy = 与 selector 同一 RDU 配置、仅单样本零额外采样的部署缺省锚点；**区别于 §9.2 的裸核心基线——裸核心不含 RDU，R_greedy 含完整 RDU 只跑一遍**，F2），与等预算超越性原子（selector vs random/MBR，§4.4）目的不同、不同尺度并列。之所以 selector-vs-greedy 可进确证而 selector-vs-K=1 只作描述性：**greedy 是唯一的规范部署缺省（零额外采样）**，而 **K=1 只是一个任意的单次随机采样**、无规范地位（G5）；故 K=1 恒在等预算族之外只作低成本基线，而 greedy 作为部署缺省锚点进入 co-primary。primary 家族因此**同时含 matched（vs random/MBR）与 mismatched（vs greedy）两类对照，此处明确标注、不隐瞒**。**Q-B 最小效应量（L2-01/PF1；SESOI 定性改 post-observation but externally justified，F-2）**：selector 绝对增量与等预算超越两类原子**各预注册一个数值 SESOI——`Q_B_SESOI_abs`（绝对增量，task-utility 尺度）与 `Q_B_SESOI_sup`（等预算超越，normalized-error 尺度），由 owner 于 §14 签字位设定，来源为外部锚点（效用/文献惯例——等价检验 SESOI 传统 / MCID，见 Decision-Log 续28②）**。**如实定性：selector 效应量在先验已被观测（C-ASR-V2 selector 电池，directional/Stage-1 假设级；MBR/random/logprob 等 dev 读数，见 claim ledger 与 prior-exposure register `docs/integrity/prior_exposure_registry.json`——该 register 披露全部先验效应观测）**；故这两支 SESOI 是 **post-observation but externally justified，绝不表述为"先于任何 selector dev 观测冻结"的盲法（blindness）**；其正当性来自外部锚点、**绝不从任何 observed selector winner 反推或回改**（防 retro-fit 到观测赢家仍成立——设定后即冻结，但冻结的依据是外部锚点，非观测盲性）。两原子的判据都要求 CI 界越过其各自 SESOI（非仅越过 point-zero null；等预算超越原子的 point-zero 口子已在附录 A 同步堵上，PF1）；**承诺显著但平凡（低于对应 Q-B-SESOI）的 selector 增量/超越绝不报为"selector/TFRL 身份已确证"**，杜绝 point-zero null 下任意小显著冒充身份成立。
 - **Secondary-mechanistic（ρ，G4 + 博导 §4.4）**：**ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**，selector realization rate，**仅作机制量**，报告口径见 §9.7（aggregate-ratio、联合 cluster bootstrap、预注册分母下限、Fieller/percentile 敏感性），**不进 primary Holm 家族分母**。
 - **身份声明**：Q-B 使本工作成为 thesis 定义的 **weight-frozen reward-guided inference-time optimization**（TFRL），而非"因为没训练就自动算 RL"。算子定义见 §4；同对象 Lean 定理（票 #27）见 §10.2。**机制/身份归因仅由等预算原子承载（L4-2）**：selector/TFRL **机制身份**只由等预算 vs random/MBR 两原子确证——它们才把"argmax-Û 选择技巧"从"raw best-of-K 覆盖增益"中隔离；H_SEL_ABS_DELTA（vs greedy，预算不匹配）是**部署价值**端点（G4 定为 co-primary），**单独不足以支撑机制主张**，正向 selector-vs-greedy 只报为"花 K 预算相对 greedy 的部署收益"、绝不读作"选择技巧已证"。
 - **单集范围如实声明（S-5）**：Q-B 的三原子（H_SEL_ABS_DELTA / vs random / vs MBR）**全部只在单一焦点集 `<FOCUS>` 上确证**（primary m=6 固定，G3，不新增原子）；Q-A 有焦点 + 2 复制 no-harm 门，Q-B **无跨集复制**。故**被确证的 TFRL/selector 身份主张显式限定于该单一焦点集，跨数据集泛化明确推迟**（作 M5 后续 development 迭代或独立复制），**绝不把 selector 身份读成已跨集成立**。
@@ -232,6 +235,7 @@ Lean 票 #27 形式化的正是本算子：**无约束失败 + 有约束收敛**
 - **每个进 primary 家族的知识-QA 集都须自带具名开放语料（L3-02）**：**不止 squtr**——凡进 primary/eligibility 的知识-QA 集（heysquad、SQuAD-zh 等）都必须**具名其共享开放语料及其 hash**，并由 `object_correct` + `query_independent_corpus` 核验 KB 值是**该共享语料里检索到的文档**、**非该 item 自带的 gold 段落**（SQuAD 族天然 per-item context = answer-in-own-KB，正是 C-T7 无效模式，heysquad 曾据此产生无效 +51.7pp）。**在其开放语料被定义并审计通过前，heysquad/SQuAD-zh 不得进入 eligibility/primary**；`answer_presence_expected` 只在语料确为开放共享语料时才成立，绝不用于给 answer-in-own-context 放行。
 - **310 库永久降级 + 禁入任何前向选择（L3-F3）**：当前 310-doc 工件（110 个 test-qrels 全部正例 + 200 干扰，正例密度较全语料抬升约 ×186）**永久标 `qrels-conditioned controlled mini-corpus`，只作 DEV smoke，绝不进头条**。**并明确：任何"选定后冻结进确证"的配置/超参/proxy-reward 权重选择（RDU config、检索 k/阈值、卡 schema、§4.2 selector 权重）绝不得在 310 上做**——凡其 selected config 会前向转入 confirmatory 的 exploration-dev 检索运行，**必须跑在全语料/query-independent 固定语料（同 §6.4，记同一 `corpus_content_hash`）**上；310 仅限**不选择任何东西的纯管线冒烟（plumbing smoke）**。否则在 qrels-conditioned 抬升密度下选出的 config 会把 leakage-shaped selection object 前向转入确证（确证语料虽清白，selection object 已被污染）。
 - **q2q 建库边界**：允许 q2q 离线生成，但**只从全语料文档生成**；q2q generator **不见 test queries/qrels**；corpus build hash 与 q2q generation hash 分开记录。
+- **M-7 语义半：path audit 不足以堵预训练 regurgitation（L3-MIN-7，新增机器可核交付，非仅散文）**：L3-MIN-5 的路径审计（q2q 生成输入 manifest 不含任何 test-query/transcript 路径）只堵**结构性**泄漏；它**堵不住**另一条通道——生成 q2q 的**冻结核心可能在预训练中见过 benchmark 的 test queries** 并从文档中**复述（regurgitate）**出与之高度相似的伪问题，该风险**survive 一次干净的路径审计**。故规则冻结后（M-7 明确要求 post-freeze）另做一次 **exact / fuzzy / semantic query-overlap 审计**：把生成的伪问题（q2q 键）与 test queries / qrels 逐一比对，**报告重叠分布**（精确匹配率、模糊/编辑距离命中率、以独立冻结 embedder 计的语义相似度分布），**非仅 pass/fail**；高语义重叠子集单列，并对头条稳健性另算（剔除高重叠伪问题的敏感性）。此为 **M2 描述性交付**，入 §13.4 缺口表；未交付前 q2q 键的"generator 不见 test queries"仅由路径审计部分保证、语义半明确标为待补。
 - **概念澄清**：在正规 open-corpus QA/IR 中，"相关文档包含答案"是任务定义，**不应把答案从合法证据里 scrub 掉**；真正的泄漏是**用 test qrels/answers 决定语料构成/索引/prompt/候选范围**。**轴治理声明（open-corpus 类，如 squtr/FiQA——qrels-positive gold 文档 by construction 即语料文档）**：此类 open-corpus QA 由 `label_independent_build`（作 **BUILD-PROCESS 属性**判定：语料/索引/候选池/派生键在不读 eval qrels/answers/queries 下构建）治理，答案 span 在语料中自然出现由 `answer_presence_expected` 判为**预期、非失败**——两轴不再对同一事实给相反判决。**只有数据集自身 fabricate/inject 的 per-item gold-context 构念（如 SQuAD 族 per-item context = answer-in-own-KB）才触发 `label_independent_build` 的 per-item 排除**；开放语料里自然出现的文档与答案 span 绝不触发 fail-closed。
 - **五维审计语义（拆分 `CLEAN`）+ 每轴可证伪测试（L3-03，绝非语义标签自证）**：泄漏审计拆为五个独立轴，**每轴给出机器可执行的证伪判据；任一轴的检查输入缺失即该轴输出 `NOT_EVALUATED`（不得默认 CLEAN）**——
   - `object_correct`：**断言 KB 值串 ≠ query 串 且 == 共享语料某文档**（字符串/文档 id 双核对）；
@@ -291,6 +295,8 @@ L1–L3 驱动迭代归因（§13.2 back-edge），但**不承载确证判定**�
 
 ## 9. 实验设计与统计分析计划（SAP）
 
+> **⚠️ 地位声明（Decision-Log 续29，owner 裁定）**：本章与附录 A 整体为**确证协议草案（confirmatory-protocol DRAFT）**——于 **M3 签字时冻结生效，Stage-1 期间不具操作效力**。Stage-1 中"≥10% 相对错误率下降"仅以两个身份存在：方向筛选的北极星目标、未来门禁的验收标准。本草案的存在性用于向评审证明目标可检验且非活动门柱；其内容的最终定稿以 M3 签字版为准。
+
 ### 9.1 基线表（I-8 更正 + provenance caveat）
 
 dev 基线来自冻结 locked-group 工件（seed 20260705，Q8_0 GGUF；**C-BASELINES：directional inventory**，`git_dirty=true`、engine build / dataset revision / manifest hash 空——非确证级 provenance）：
@@ -312,7 +318,7 @@ dev 基线来自冻结 locked-group 工件（seed 20260705，Q8_0 GGUF；**C-BAS
 
 ### 9.3 单尺度与 SESOI（S-3/S-4 诚实标注；**惯例阈值口径，无业务效果分支**）
 
-主判定尺度 = **错误率相对下降**（消高基线天花板悖论）；**≥10% 相对下降（SESOI）这一相对下降尺度仅用于 Q-A 确证主判定（F4：非指"唯一确证判定是 Q-A"——Q-B 三原子有其各自 null/尺度与 Q-B-SESOI，见 §3.2 与附录 A，同为确证裁定的一部分）**。**S4 的 15% B-WER 不是确证主判定**——S4 整族已降为 directional-only 探索（§3.3、§9.5、附录 A），其 15% 仅作**描述性报告参照**，不做 Holm 存活声明、不并入 primary 分母。**相对/绝对尺度分歧如实标注（PF2）**：确证以在冻结裸基线换算的固定 `SESOI_abs`（绝对当量）操作化"≥10% 相对"；当确证半区裸误差 ≠ 冻结值时二者背离（裸误差偏高→对 10% 相对偏松），故另报确证半区裸误差为分母（带下限）的比率 estimand 敏感性（见 §3.1、附录 A H_SYS_FOCUS）。**时序纪律（PF4）——相对 SESOI 于 pre-M2 冻结，不随 dev/eligibility 结果移动**：程序级**相对 10% SESOI、资格门 2×SESOI 阈值、及 Q-B 两支最小效应量 `Q_B_SESOI_abs`/`Q_B_SESOI_sup` 均属 pre-M2 冻结常数，在触碰任何 eligibility-split 或 selector dev 数据之前记录归档**（区别于 M3 才落定的每集绝对换算 `SESOI_abs` 与 α，§9.5/§13.4）；**绝不在 eligibility/头空结果可见后新选或回改相对 SESOI 或资格阈值**（杜绝 focus 资格被 retro-fit 的 look-ahead）：
+主判定尺度 = **错误率相对下降**（消高基线天花板悖论）；**≥10% 相对下降（SESOI）这一相对下降尺度仅用于 Q-A 确证主判定（F4：非指"唯一确证判定是 Q-A"——Q-B 三原子有其各自 null/尺度与 Q-B-SESOI，见 §3.2 与附录 A，同为确证裁定的一部分）**。**S4 的 15% B-WER 不是确证主判定**——S4 整族已降为 directional-only 探索（§3.3、§9.5、附录 A），其 15% 仅作**描述性报告参照**，不做 Holm 存活声明、不并入 primary 分母。**相对/绝对尺度分歧如实标注（PF2）**：确证以在冻结裸基线换算的固定 `SESOI_abs`（绝对当量）操作化"≥10% 相对"；当确证半区裸误差 ≠ 冻结值时二者背离（裸误差偏高→对 10% 相对偏松），故另报确证半区裸误差为分母（带下限）的比率 estimand 敏感性（见 §3.1、附录 A H_SYS_FOCUS）。**时序纪律（PF4，SESOI 定性分层，F-2）**：程序级**相对 10% SESOI、资格门 2×SESOI 阈值**是**外部惯例科学阈值**，可 pre-M2 冻结（在触碰任何 eligibility-split 数据之前记录归档——正当性来自惯例常数、非任何观测导出，故非盲法争议项）；**Q-B 两支最小效应量 `Q_B_SESOI_abs`/`Q_B_SESOI_sup` 改定性为 post-observation but externally justified**——**selector 效应量已在先验被观测（C-ASR-V2 selector 电池等，directional/Stage-1 假设级；prior-exposure register `docs/integrity/prior_exposure_registry.json` 披露全部先验观测），故绝不表述为"先于任何 selector dev 观测冻结"的盲法主张**；owner 从**外部锚点（效用/文献惯例）**设定这两个数值、**绝不从任何 observed selector winner 反推或回改**（区别于 M3 才落定的每集绝对换算 `SESOI_abs` 与 α，§9.5/§13.4）；**绝不在 eligibility/头空/selector dev 结果可见后新选或回改相对 SESOI、资格阈值或 Q-B SESOI**（杜绝 retro-fit look-ahead）：
 - **10% / 15% 明确标注为"惯例科学阈值（conventional scientific threshold）"，不称"业务效果（business effect）"**——本版**不补 stakeholder utility / 错误成本 / 延迟-token-预算 论证**，故按惯例阈值口径贯穿全文（标题、§2.2 及各处**一律不再作"业务效果"主张、不以"业务效果"作为 SESOI 依据**；文中若出现"业务效果"字样，仅为否定性免责说明）。
 - **移除 H5 的 15%→10% 自动回退作为 SESOI 变更**（S-3）：dev <12% 观察**只能**是**工程 futility / 路由决定**，**绝不改变"有意义效果"的定义**。per-dataset SESOI 数值表预注册（把相对下降换算各集绝对当量）。
 
@@ -328,9 +334,12 @@ dev 基线来自冻结 locked-group 工件（seed 20260705，Q8_0 GGUF；**C-BAS
 
 ### 9.5 单一最终确证版本制 + 原子假设族（F′-2 / G3 结构性处置）
 
+> **阶段标注（续29，binding）**：本 §9 统计分析计划整体为**确证协议草案（M3 冻结生效，Stage-1 无操作效力）**；数值/操作化在 M3 单一确证注册落定。
+
 - **单一最终确证版本制（G3）**：**整个研究计划只有一个最终确证版本；此前所有版本（含本 v4.2）按定义均为 development / exploration**。program 级 Type-I 由此控制：确证的"一次开火"是**一次性、不可逆事件**，只发生一次。**所有 development 迭代（M2↔M5 dev loop）都发生在这一枪开火之前**；owner 唯有"有把握"时才签署 M3、进入 M4 开那唯一一枪。**撤销 per-version α 阶梯**（不再"每版声明 α"）；确证族 α 只在那唯一的确证注册时声明一次。
 - **确证失败即终局（S-1，program 级 Type-I 的实体保证）**：一旦那唯一确证一枪开火，**其结果对该头条的显著性检验就是终局**——**通过 → Stage-3；失败 → 显著性检验就此结束，负结果归档入 cumulative evidence，绝不再开第二枪确证 α**。**不存在"迭代后再开那唯一一枪"**（若允许再开，`1−(1−α)^k → 1`，正是 F′-2 要杀死的 repeat-until-success）。开火后即便再迭代改系统，也只能以 **cumulative evidence（非确证显著性）** 报告；要重获确证级显著性只能诉诸 program 外的**独立新数据强制复制**，且须另行 owner 决策，本版不预设。M5→M2 back-edge 因此**仅在确证一枪尚未开火时可用**（即 M4 尚未进入的 development 阶段），**不构成对 M4 的第二次进入**。
 - **原子化（S-1）**：primary 确证族按**原子假设**枚举——每个 **dataset × endpoint × contrast** 一个最终 p 值 + 一条校正路径；**无复合行冒充单一假设**。完整机器可读清单见**附录 A**；本版 primary confirmatory 族 = **6 个原子**（Q-A：1 焦点系统效果 + 2 replication no-harm；Q-B：selector 绝对增量 co-primary + 等预算 vs random + 等预算 vs MBR），**Holm within 族（m=6）**。**确证广度如实标注（L3-MAJ-4）**：这 6 原子 = **1 个焦点效应原子（H_SYS_FOCUS，唯一承载跨裸基线真效应的确证）+ 3 个 selector 原子（均只在单一焦点集 `<FOCUS>`）+ 2 个单侧非劣守卫（H_SYS_REP1/REP2，单侧非劣下任何非劣/受益平凡通过、可零真效应 PASS）**；**故 m=6 不得读作"多数据集确证"**——头条泛化实证仅立于单一焦点集的真效应加两个近乎必过的 no-harm 守卫，跨集泛化明确推迟（§3.2、§9.4 responder-cohort 声明）。
+- **F-5 待决交叉引用（§3.1）**：本 6 原子**不含**任何 RDU-vs-strongest-baseline 归因原子——头条真效应只承载于 H_SYS_FOCUS（vs **裸**核心）。博导 F-5 要求的 load-bearing H_RDU_VS_STRONGEST **未纳入本版**（续29 SAP 冻结 → 推迟 M3 决定），此为**显式待决 / contested 敞口、非静默窄化**；不得把"阶梯净增益单独裁定"读作 F-5 已处置。
 - **ρ 出族**：ρ 为 secondary-mechanistic，**不进 primary Holm 分母**（§9.7）。
 - **次级族降级（无 Holm）**：S1–S4 归**独立探索族**，**directional-only、各自方向性报告、不做 Holm 存活声明、不并入 primary 分母**（附录 A secondary 段）。
 - **主聚合（S-5）**：primary = 焦点集；replication 集走 no-harm 门；**不以异构任务族固定效应池化作 primary**。
@@ -455,7 +464,7 @@ M1 工程就绪 ─▶ M2 探索完成 ─▶ M3 确证协议签署(owner) ─�
                （S-1：绝不第二次进入 M4；back-edge 仅在开火前有效）
 ```
 > **DAG 语义（S-1）**：M4 是**一次性、不可逆**的确证开火。**M2↔M5 的 development back-edge 只在 M4 开火之前有效**；M4 一旦开火，PASS→Stage-3、FAIL→终局归档，**两种结局都不再返回 M4**（不存在"迭代后再打那一枪"）。
-> **独立评分依赖（L3-F2/L5-F1，reconcile §11 L4-6）**：M4 的 PASS 令头条**进入 Stage-3**，但**任何 Stage-3 确证性发表之前须过独立评分门**（§9.8 冻结后第三方一次性评分选项，L4-6）——DAG 显式画出此依赖，与 §11 L4-6 一致。**owner-ruling 冲突如实标注（G2/G3）**：博导 F′-1/E-3 要求"公开固定种子层非盲法→M4 确证结果证据等级下调为 exploratory，或把第三方评分并入 M4 开火本身"；**owner 裁决（续26-G2）保留 confirmatory 等级、custody 仅改名 public deterministic evaluation、第三方评分推迟至发表前"届时再定"**，**故本版按裁决不下调 M4 等级、不把第三方评分并入 M4**——该分歧为 §11 L4-6 记录的 UNRESOLVED/contested 敞口，非已消解（此处不"修复"而如实标注 ruling 冲突）。
+> **独立评分依赖（L3-F2/L5-F1，reconcile §11 L4-6）**：M4 的 PASS 令头条**进入 Stage-3**，但**任何 Stage-3 确证性发表之前须过独立评分门**（§9.8 冻结后第三方一次性评分选项，L4-6）——DAG 显式画出此依赖，与 §11 L4-6 一致。**owner-ruling 冲突如实标注（G2/G3）**：博导 F′-1/E-3 要求"公开固定种子层非盲法→M4 确证结果证据等级下调为 exploratory，或把第三方评分并入 M4 开火本身"；**owner 最新裁决（续28①，上位于续26-G2）：M4 等级标签之争推迟——当前聚焦数据集采样与工程基座，等级标签依方法学须在 M4 开火前落定（非发表时），具体选择推迟至 M3 签字，此前不作 confirmatory 宣称**；custody 仅改名 public deterministic evaluation、第三方评分推迟至发表前"届时再定"。**故本版不在此预设 M4 等级、亦不把第三方评分并入 M4**——该等级选择与非盲法分歧同为 §11 L4-6 记录的 UNRESOLVED/contested 敞口，M3 签字时落定，非已消解（此处不"修复"而如实标注 ruling 冲突与推迟）。
 
 **M1 工程就绪（仅工程可执行项；holdout 表 / 资格判定 / 原子族定稿 / 签字属各自后续门）**：
 - clean-checkout 重建绿；**单一标准测试入口 `PYTHONPATH=src pytest -q` 零 error**（不依赖非标准脚本入口）；
@@ -473,7 +482,7 @@ M1 工程就绪 ─▶ M2 探索完成 ─▶ M3 确证协议签署(owner) ─�
 
 **M4 单一最终确证**：确定性脚本抽取（提交先于选择、group-aware）；单通道评分；primary 原子族 Holm（m=6）判定 vs 预注册 SESOI；ρ 机制量（aggregate-ratio + Fieller/percentile）；跨核心迁移冒烟（非门控）。
 
-**M5**：达标→Stage-3；不达标→development 迭代或 owner 复盘。收尾：Decision-Log 追加 + Per-Work-Status 更新。
+**M5**：达标→Stage-3；不达标→**终局归档**（确证一枪已开火，显著性检验就此结束——负结果入 cumulative evidence + owner 复盘，**绝不回 M2 再开确证 α**；§9.5/§13.2 终局条款约束本行；development 迭代仅存在于 M4 开火前的 M2↔M5 back-edge）。收尾：Decision-Log 追加 + Per-Work-Status 更新。
 
 ### 13.4 诚实缺口表（尚未交付项 × 所属门）
 
@@ -486,11 +495,15 @@ M1 工程就绪 ─▶ M2 探索完成 ─▶ M3 确证协议签署(owner) ─�
 | 五维审计拆分 + `NOT_EVALUATED` 输出 | 待改（现为空转 CLEAN） | **M1** |
 | group-aware 抽样 + 强制 exposure-union 排除 | 现为 item-id 抽样、exclusion optional | **M1** |
 | deterministic_draw confirmatory 模式：pool/exclusion 重定义 fail-closed + 禁 force_supersede 重抽 + pool/exclusion hash 入 provenance | 未实现（现 force_supersede 允许改 pool/exclusion 后重抽；append-only JSONL 可编辑非防篡改，L5-02） | **M1** |
-| 标准 `pytest` 全仓零 error | 现有 4 errors（results fixture） | **M1** |
+| 标准 `pytest` 全仓零 error | 达成（`PYTHONPATH=src pytest -q` → **159 passed / 0 errors**，release_manifest 2026-07-13 实测；旧"4 errors"快照已陈旧，续28③） | **M1 ✅** |
 | 旧 KB 重建 / 永久 incomplete-provenance 标注 | sidecar 含 guess/assumed，非 build-time | **M1** |
 | holdout 供给表（每集 group 基数/互斥/disjoint/power；**含 confirmatory 加大-n 锁定 test 半区规模与功效目标，F1/L2-02**；**含确证族区间/尾部方法选择 BCa/studentized-t 或标定验证的 percentile，PF3**） | 未交付 | **M2** |
-| primary 原子族数值定稿（focus/rep、per-dataset `SESOI_abs`、no-harm margin、K、N\*、reward 权重、α；**相对 10% SESOI、2×SESOI 资格阈值、及 Q-B 两支 `Q_B_SESOI_abs`（selector 绝对增量）/`Q_B_SESOI_sup`（等预算超越，normalized-error 尺度，L2-01/PF1）除外——均属 pre-M2 冻结常数（owner 于 §14 签字位设定、先于任何 exploration/dev 运行、selector dev 观测后绝不回改），PF4**） | 模板占位 | **M2→M3（Q-B-SESOI 除外，pre-M2）** |
+| primary 原子族数值定稿（focus/rep、per-dataset `SESOI_abs`、no-harm margin、K、N\*、reward 权重、α；**相对 10% SESOI、2×SESOI 资格阈值除外——外部惯例科学阈值、pre-M2 冻结（先于 eligibility-split 数据、非观测导出）；Q-B 两支 `Q_B_SESOI_abs`（selector 绝对增量）/`Q_B_SESOI_sup`（等预算超越，normalized-error 尺度，L2-01/PF1）亦除外——owner 于 §14 签字位从外部锚点设定，post-observation but externally justified（selector 效应量已先验被观测、prior-exposure register 披露），设定后冻结、绝不从 observed selector winner 反推或回改（F-2/续28②），PF4**） | 模板占位 | **M2→M3（Q-A 相对 SESOI/资格阈值 pre-M2；Q-B SESOI 于 §14 签字设定、外部锚点）** |
 | 三件 proxy 诊断实测（rank AUROC / self-consistent-error / Goodhart） | 未测 | **M2** |
+| **规则冻结后 q2q query-overlap 审计（exact / fuzzy / semantic，报告重叠分布 + 高重叠子集稳健性）——堵 q2q 键的预训练 regurgitation 语义半（M-7 / L3-MIN-7）** | 未做（现仅 L3-MIN-5 path audit） | **M2** |
+| **F-5 归因原子处置（是否把 RDU-vs-strongest-baseline 升为 load-bearing primary H_RDU_VS_STRONGEST 跨 SESOI；或删弱价值原子而非降关键归因为散文）——显式待决 / contested，本版不新增原子（m=6 不变），续29 SAP 冻结推迟** | 待决（§3.1/§9.5，contested，非静默消解） | **M3** |
+| **随机对照口径处置（M-3，2026-07-13 复审）：primary 改比 selector U vs pool-mean（同一 K-pool 内 K 个候选 U 的条件期望），而非再抽一次 seeded random-pick——去除对照的无意义 Monte-Carlo 方差；实际随机抽取仅保留作部署模拟——显式待决 / tracked，本版不新增/不改原子（m=6 不变），续29 SAP 冻结推迟** | 待决（§3.2/§9.7，contested，非静默消解） | **M3** |
+| **ρ 头空实现率的世代稳健定义（generation-robust ρ，F-4 / 复审建议 3）：oracle 头空实现率改定义为跨 K-pool seeds 的期望 + 下分位数（非单池 ρ），外层重采样 group、内层重采样 generation replicate——§9.7 与附录 A（L536）已披露"条件于单次 K-生成"局限，此为其世代稳健化落点；显式待决 / tracked，续29 SAP 冻结推迟** | 待决（§9.7/附录 A，contested，非静默消解） | **M2→M3** |
 | §7.2 L1 oracle-treatment responsiveness 的**重复采样次数与 estimand 定义**（`P(Y₁−Y₀>0)`）冻结（PF-L5F4-minor；描述性/never-confirmatory，但比照其余测量槽入门） | 未冻结（§7.2 未定采样次数） | **M2** |
 | #27 Lean 首定理（有限样本 regret）+ Python↔Lean conformance | 有可复用 argmax-mismatch bound，operator-linked = 0 | **M2/独立理论轨** |
 | internal consistency check 工件（checker code + rule manifest + 输入 hash + 输出 JSON + 失败项 + 执行环境） | **已交付**（`scripts/checks/v42_conformance.py` + `docs/checks/v42-{rules.yaml,conformance-output.json,environment.txt}`，12/12 PASS 可复跑；v4.1 轮曾承诺未交付，失信已在回信具名承认） | **M1（#38）✅** |
@@ -502,9 +515,11 @@ M1 工程就绪 ─▶ M2 探索完成 ─▶ M3 确证协议签署(owner) ─�
 ## 14. Owner / Reviewer 签字位
 
 > **可修订工作参数**：签字时可修订的三项 = **G 预算内探针遍数（触发/采样诊断设置；PF5-minor：即 §7.1 总预算 G 内的探针遍数，非旧"m"）**、**H5 futility 门槛（工程 futility/路由，非 SESOI）**、**确证族 α（单一确证注册时声明一次）**。**无成本类成功门**，**无 H5 SESOI 回退**，**无 per-version α 阶梯**（均已按 R1/S-3/G3 撤除）。
+>
+> **签字位设定后即冻结（非"可修订工作参数"）的一项——Q-B 两支最小效应量（F-2 落位修复）**：`Q_B_SESOI_abs`（selector 绝对增量，task-utility 尺度）与 `Q_B_SESOI_sup`（等预算超越，normalized-error 尺度）由 owner 于**下方签字项 2** 从**外部锚点**（等价检验 SESOI 传统 / MCID；见 §9.3、附录 A、续28②）设定，**post-observation but externally justified**，**设定后即冻结、不可在签字后再调**（故与上述可在签字时调的三项性质不同、不列入其中），且**绝不从任何 observed selector winner 反推或回改**。此条即 §3.2 / §9.3 / §13.4 / 附录 A YAML 反复所指"由 owner 于 §14 签字位设定"的**实际落位槽**——先前 §14 未开该槽属内部矛盾，此处补齐。
 
 1. **两个可分别裁定的确证问题**（Q-A/Q-B 共用焦点集与 Holm 家族，非"真正独立"，L4-05）（Q-A 系统效果 vs 裸基线 ≥10%、全语料、头条限定 headroom-qualified；Q-B selector vs 等预算 random/MBR、绝对增量 co-primary + ρ 机制量、K=1 低成本基线在族外）+ 系统接口契约（单一，检索特征=独立冻结 embedder 语音向量；核心 2048d 隐态=白盒诊断臂）。签字：待定。
-2. **10% 错误率相对下降（惯例科学阈值口径，不称业务效果）+ per-dataset SESOI 数值表（签字前固定）+ 资格规则（eligibility-split ①闭卷<0.85 ②headroom CI 下界≥2×SESOI；头条限定 headroom-qualified + responder 声明）**。签字：待定。
+2. **10% 错误率相对下降（惯例科学阈值口径，不称业务效果）+ Q-A per-dataset SESOI 数值表（签字前固定）+ Q-B 两支最小效应量 `Q_B_SESOI_abs`/`Q_B_SESOI_sup`（于本签字位从外部锚点设定、post-observation but externally justified、设定后即冻结、绝不从 observed selector winner 反推或回改，F-2/续28②——即 §3.2/§9.3/附录 A 所指"§14 签字位设定"的落位槽）+ 资格规则（eligibility-split ①闭卷<0.85 ②headroom CI 下界≥2×SESOI；头条限定 headroom-qualified + responder 声明）**。签字：待定。
 3. **§4 reward-guided 轨迹选择算子（U/Û 分离、动作/策略/proxy-reward/选择/停止 N\*）+ #27 Lean 同对象（无约束失败 + 有约束首定理 U(τ\*)−U(τ̂)≤2ε + 假设账 ε/N\*/C-4 heuristic）**。签字：待定。
 4. **语料/KB 独立性（全语料 + qrels 只入评分 + 五维审计 + `NOT_EVALUATED` + 310 库永久 DEV smoke）**。签字：待定。
 5. **原子假设族（附录 A，primary m=6，Holm within 族）+ 单一最终确证版本制（G3）+ 次级族 directional 无 Holm + custody = public deterministic evaluation**。签字：待定。
@@ -515,9 +530,11 @@ M1 工程就绪 ─▶ M2 探索完成 ─▶ M3 确证协议签署(owner) ─�
 
 ## 附录 A — 原子假设清单（machine-readable，S-1）
 
+> **阶段标注（Decision-Log 续29，binding）**：本附录连同 §9 统计分析计划整体为**确证协议草案（confirmatory-protocol DRAFT，M3 签字时冻结生效，Stage-1 无操作效力）**——估计量操作化 / SESOI 数值 / 联合重采样 / α 等"门禁施工图"在 M3 单一确证注册时落定；Stage-1 仅以此作方向筛选标尺与未来验收标准，不作任何 Stage-1 操作对象。**本轮（#39）仅落已确认数学错误修复，estimand 重定义 / 新增原子等 SAP 设计迭代一律推迟至 M3、不在本版进行（续29 冻结 proposal 迭代）。**
+
 > primary confirmatory 族 = **6 原子**（Holm within 族，m=6；确证族 α 于单一确证注册时声明一次，G3）。焦点集 `<FOCUS>` 与 replication 集 `<REP1>/<REP2>` 于 M2 eligibility-split 后定名（诚实预告：squtr-全语料 为焦点候选，heysquad/SLURP-intent 为 replication 候选；**heysquad/SQuAD-zh 须先具名并审计其开放共享语料方可进入 eligibility，L3-02**；若按 headroom 选取则声明 responder-cohort）。**非开放语料构念的 fail-closed 泄漏门（L3-F5-minor）**：SLURP-intent 的知识对象是 **ontology/intent-slot schema（§9.6 构念 2，"schema 非答案"）**，无 corpus_content_hash、无 golds-in-corpus、`doc_count==57,638` 对其无意义——五维（open-corpus-QA 形）审计对其**不能整体判 N/A 静默绕过，亦不能在 L3-MAJ-2 下因某轴 NOT_EVALUATED 而含糊**。故 **SLURP-intent 进入 primary Holm 家族之前，须先定义一个构念专属 fail-closed 泄漏审计**：断言 intent/slot schema **不含任何 per-item gold 标签**、且以 content_hash 冻结、其内容与 eval 标签集 **disjoint**；**在该构念专属门定义并通过前，SLURP-intent 不得进入 primary 家族**（或明确将非 open-corpus 构念排除于 replication 原子之外）。**空焦点停止规则（L3-06）：若 eligibility 门下无任何数据集合格，`<FOCUS>` 无法实例化，则 Q-A 判"不可检验（untestable，非失败非通过）"、确证注册暂缓、回退 M2，绝不以空焦点 vacuous 登记/空过。** **次级族（S1–S4）directional-only、各自多重性、不做 Holm 声明、不并入 primary 分母**。
 
-**每原子共享的 p 值算法骨架（paired cluster bootstrap；S-8）**：以下为**算法骨架**，其**边界常数——family α、per-dataset `SESOI_abs`（相对 10% 于签字前换算得的绝对当量）、no-harm margin（绝对尺度，L2-04）、分母下限、N\*、reward 权重——一律于 M3 单一确证注册时落定，本版不填**（§13.4 缺口表 M2→M3）。**注意区分（PF4）**：程序级的**相对 SESOI（10%）、资格门 2×SESOI 阈值、及 Q-B 两支最小效应量 `Q_B_SESOI_abs`（selector 绝对增量，task-utility 尺度）/`Q_B_SESOI_sup`（等预算超越，normalized-error 尺度，L2-01/PF1）均属 pre-M2 冻结常数**（见 §9.3/§9.4，owner 于 §14 签字位设定数值、在触碰任何 eligibility-split 或 selector dev 数据之前记录），M3 只做每集绝对换算与 α 落定，**绝不在 eligibility/头空/selector dev 结果可见后回改相对 SESOI、资格阈值或 Q-B SESOI**。故本规格提供的是"可执行算法的骨架 + 判据形式"，**非已可执行的完整数值规格**，不得据此宣称预注册已就绪。
+**每原子共享的 p 值算法骨架（paired cluster bootstrap；S-8）**：以下为**算法骨架**，其**边界常数——family α、per-dataset `SESOI_abs`（相对 10% 于签字前换算得的绝对当量）、no-harm margin（绝对尺度，L2-04）、分母下限、N\*、reward 权重——一律于 M3 单一确证注册时落定，本版不填**（§13.4 缺口表 M2→M3）。**注意区分（PF4）**：程序级的**相对 SESOI（10%）、资格门 2×SESOI 阈值属 pre-M2 冻结常数**（外部惯例科学阈值，见 §9.3/§9.4，在触碰任何 eligibility-split 数据之前记录、非观测导出）；**Q-B 两支最小效应量 `Q_B_SESOI_abs`（selector 绝对增量，task-utility 尺度）/`Q_B_SESOI_sup`（等预算超越，normalized-error 尺度，L2-01/PF1）由 owner 于 §14 签字位从外部锚点设定，post-observation but externally justified**（selector 效应量已先验被观测、prior-exposure register 披露；设定后冻结、绝不从 observed selector winner 反推或回改，F-2/续28②），M3 只做每集绝对换算与 α 落定，**绝不在 eligibility/头空/selector dev 结果可见后回改相对 SESOI、资格阈值或 Q-B SESOI**。故本规格提供的是"可执行算法的骨架 + 判据形式"，**非已可执行的完整数值规格**，不得据此宣称预注册已就绪。
 - **null**：见各原子 `null`；**direction**：见各原子 `direction`（**全部单侧**：单侧下降 / 单侧非劣 / 单侧优越；**本族无 TOST 双侧原子**，S-2）。
 - **resampling unit = group（cluster）**：按 group_key（篇章 id / 说话人-场景）重采样 group（非 item）；每 bootstrap 重取 B=10000 次。
 - **随机采样方差如实披露（PF6-minor）**：selector/random/MBR 三者输出都依赖**实际抽到的哪 K 条样本**；仅重采样 item/group 是**条件于单次已实现的 K-生成**，未纳入温度 T 采样本身的方差——故 confirmatory 结果**显式声明为条件于该单次 K-生成**，此局限如实标注（"selector superiority conditional on one draw at temperature T"）；预注册**可选**加一个 generation-level 重采样 / 多次独立 K-draw 分量把采样方差纳入确证 CI（若 M2 成本标定允许，M2→M3 决定）。
@@ -572,7 +589,7 @@ atoms:
     dataset: <FOCUS>
     endpoint: absolute_task_utility_delta            # R_selector - R_greedy on task utility U
     contrast: reward_guided_selector_vs_greedy       # F1: DELIBERATELY budget-UNMATCHED deployment-value metric (K-budget system vs greedy). F2: greedy = SINGLE temp-0 pass of the FULL RDU pipeline (same RDU config as selector, one sample), NOT the bare-core §9.2 baseline (bare core has no RDU) -- so this atom's low-end anchor differs from H_SYS_FOCUS's (bare core) and is NOT that contrast restated; no double-count in the Holm family. Distinct purpose from the equal-budget superiority atoms below; K=1 stays descriptive because greedy is the sole canonical default while K=1 is an arbitrary single stochastic sample
-    null: "absolute task-utility delta <= Q_B_SESOI_abs (preregistered minimum effect, PRE-M2 FROZEN CONSTANT set at the §14 signature before any exploration/dev run, never reselected after any selector dev observation per PF4; NOT point-zero, L2-01)"
+    null: "absolute task-utility delta <= Q_B_SESOI_abs (preregistered minimum effect, post-observation but externally justified (external anchors: equivalence-testing SESOI / MCID tradition; prior-exposure register discloses prior selector observations), set at the §14 signature then frozen, never reverse-engineered from any observed selector winner (F-2 / Decision-Log 续28②); NOT point-zero, L2-01)"
     direction: one_sided_positive
     statistic: paired_cluster_bootstrap_mean_diff
     decision: "holm_p<alpha AND uncorrected one-sided 95% BCa/studentized-bootstrap-t CI lower of absolute task-utility delta > Q_B_SESOI_abs (L2-01: preregistered minimum effect, NOT merely >0; L2-05/L2-06); interval/tail = BCa 或 studentized bootstrap-t（M2 标定后二选一冻结；non-studentized percentile 不得为默认，PF3/S-8）"
@@ -583,7 +600,7 @@ atoms:
     dataset: <FOCUS>
     endpoint: normalized_error
     contrast: selector_vs_random_selection_equal_K   # equal-budget selector family
-    null: "selector superiority over equal-K random <= Q_B_SESOI_sup (preregistered minimum effect on normalized-error scale, PRE-M2 FROZEN CONSTANT set at the §14 signature before any exploration/dev run, never reselected after any selector dev observation per PF4; NOT point-zero, L2-01/PF1)"
+    null: "selector superiority over equal-K random <= Q_B_SESOI_sup (preregistered minimum effect on normalized-error scale, post-observation but externally justified (external anchors: equivalence-testing SESOI / MCID tradition; prior-exposure register discloses prior selector observations), set at the §14 signature then frozen, never reverse-engineered from any observed selector winner (F-2 / Decision-Log 续28②); NOT point-zero, L2-01/PF1)"
     direction: one_sided_superiority
     statistic: paired_cluster_bootstrap_mean_diff
     decision: "holm_p<alpha AND uncorrected one-sided 95% BCa/studentized-bootstrap-t CI upper of (selector - comparator) normalized-error paired mean-diff < -Q_B_SESOI_sup (L2-01/PF1: preregistered minimum superiority, NOT merely <0; L2-05 concrete inequality; selector lower normalized error = better); interval/tail = BCa 或 studentized bootstrap-t（M2 标定后二选一冻结；non-studentized percentile 不得为默认，PF3/S-8）"
@@ -593,7 +610,7 @@ atoms:
     dataset: <FOCUS>
     endpoint: normalized_error
     contrast: selector_vs_mbr_medoid_equal_K         # equal-budget selector family
-    null: "selector superiority over equal-K MBR <= Q_B_SESOI_sup (preregistered minimum effect on normalized-error scale, PRE-M2 FROZEN CONSTANT set at the §14 signature before any exploration/dev run, never reselected after any selector dev observation per PF4; NOT point-zero, L2-01/PF1)"
+    null: "selector superiority over equal-K MBR <= Q_B_SESOI_sup (preregistered minimum effect on normalized-error scale, post-observation but externally justified (external anchors: equivalence-testing SESOI / MCID tradition; prior-exposure register discloses prior selector observations), set at the §14 signature then frozen, never reverse-engineered from any observed selector winner (F-2 / Decision-Log 续28②); NOT point-zero, L2-01/PF1)"
     direction: one_sided_superiority
     statistic: paired_cluster_bootstrap_mean_diff
     decision: "holm_p<alpha AND uncorrected one-sided 95% BCa/studentized-bootstrap-t CI upper of (selector - comparator) normalized-error paired mean-diff < -Q_B_SESOI_sup (L2-01/PF1: preregistered minimum superiority, NOT merely <0; L2-05 concrete inequality; selector lower normalized error = better); interval/tail = BCa 或 studentized bootstrap-t（M2 标定后二选一冻结；non-studentized percentile 不得为默认，PF3/S-8）"

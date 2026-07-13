@@ -1,0 +1,24 @@
+{
+  "_comment": "F-6 remediation (2026-07-13 v4.2 doctoral review) -- pinned upstream corpus identity for squtr subsets, computed from the REAL corpus.jsonl on the E: data root. Regenerate with `python projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py --generate`. See scripts/knowledge/corpus_lock.py (W1 repo) for the verification contract (verify_corpus_lock, fail-closed).",
+  "generated_at": "2026-07-13T01:45:06.804046+00:00",
+  "generated_by": "scripts/knowledge/corpus_lock.py (W1 repo)",
+  "expected_doc_count": {
+    "fiqa": 57638
+  },
+  "subsets": {
+    "fiqa": {
+      "subset": "fiqa",
+      "hf_repo": "SLLMCommunity/SQuTR",
+      "hf_revision_sha": "2f1b041e2e98e0d28ed68fbcf22126ef247eb719",
+      "arxiv": "2602.12783",
+      "license": "cc-by-sa-4.0",
+      "zip_member": "source_data/en/fiqa/corpus.jsonl",
+      "corpus_jsonl_sha256": "a5e31bffdcbab9dbe0ff849faa170a6e71b60587ff3a99a4272584183e64d729",
+      "corpus_jsonl_size_bytes": 47027289,
+      "doc_count": 57638,
+      "ordered_doc_id_hash": "8b668b36e5bb4687c38030bead37c09b5e726cd32f0cebdfb0bbc175328685d6",
+      "normalized_content_hash": "268a4f72c8dc0be41b26c753ecd288da5ab36cf45f397e306a34435812729000",
+      "note": "SQuTR bilingual robustness benchmark (SIGIR 2026); fiqa subset (en) -- Stage-1 default per wiki/survey/2026-07-09-datasets-candidates11.json. hf_revision_sha is the HF dataset repo commit this local snapshot was fetched at (speechrl-data/datasets/squtr/.hfd/repo_metadata.json 'sha' field, 2026-07-07)."
+    }
+  }
+}

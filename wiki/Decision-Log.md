@@ -6,6 +6,22 @@
 
 ---
 
+### 2026-07-13（续31）· #39 整改包收官：修复→自检→报告齐备，呈 owner 审阅后送 reviewer 盖章
+
+**Status.** 续28-⑤ 执行令完成。**工程**（W1 `ab1c680` + 提速 `64d697c`）：F-6 语料锁凭证据
+（`docs/corpus.lock.json` 自真实数据生成：57,638 docs、archive sha256、有序 doc-ID hash、HF revision
+pin；建库前后双断言 fail-closed）；F-7 潜伏反转拆除（open-corpus 永不 scrub 合法答案 span、
+`answer_presence_expected` 只作描述、正负 golden test）；F-8 四 split 100% 组覆盖硬错 + 曝光并集
+登记验证 + confirmatory 禁 force_supersede；标准入口 **159 passed / 0 errors**（协调者独立复跑）。
+**文档**：v4.2 十一处修订（估计量对调、generation-robust ρ + 池均值对照、H_RDU_VS_STRONGEST、SESOI
+诚实口径、M5 终局堵口等）+ SAP 整章标"确证协议草案（M3 冻结生效，续29）"。**自检**：可执行 checker
+22/22 PASS（12 旧 + 10 新规则）。**诚信**（续28-④）：P0 四登记册全部在盘且实质充实（先验暴露含
+C-ASR-V2 效应量明示、574 行尝试登记），gate 如实 NOT_PASS（配置选择轨迹不可全量回溯，入
+manual_completion_todo）。**报告**：`2026-07-13-remediation-report-v42-for-reviewer-signoff.md`
+（19 行处置表 + 证据指针，无一发现被静默消解）。**过程记录**：文档修复代理再遭 API 中断击杀，
+敌意环 3 轮吸收（50→残留 5，其中 1 误报 4 已协调者收尾）；proposal 迭代自此**冻结**（续29），
+主线回归采样与工程。待 owner 审阅报告 → 送 reviewer 盖章。
+
 ### 2026-07-13（续30）· owner 裁撤工程票 #35（ASR 绝对差距分解）——锁定基线下只保开源可复现
 
 **Decision（owner）.**"没必要反复纠结了，我们只需要保证开源可复现就好了，既然锁定了基线。"——
