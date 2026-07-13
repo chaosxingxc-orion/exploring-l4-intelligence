@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-13（续33）· Stage-1 重校准：owner 五项裁决——Stage-1A/B/C 细分、收词纪律、供给条件性 H(c)、全盘接受重校准审查、T+0 记录修复
+
+**Context.** 重校准审查（`2026-07-13-response-v6-stage1-recalibrated-review.md`，sha256 `b6268c80…`）
+对 v6 回复与选择器方向草稿裁定 **MAJOR_REVISION_FOR_STAGE1_CLOSURE**：Stage-1 问题定义收官未完成、
+方向性探索可继续；同时校准了中间审查（`f5ad16e…`，同日入库）的 Stage-2 标准前移。协调者**本人**
+逐条核验（owner 指令：不委托）：可核事实**零驳回**——五快照哈希全符、v6 三缺陷坐实（provenance
+两处 + YAML 重复键致 13 项仅存活 2 项，PyYAML 实测复现；**三项均为协调者本人前轮亲笔造成**，教训
+入长期纪律：机读块先 parse 后入库、快照字段拆双栏）、ρ 同名异构坐实、直接近邻文献（Stolcke/Goel/
+NoRefER/HypR/READ/ProGRes）全仓零覆盖坐实。
+
+**Decision（owner 五项）.** ①**Stage-1A/B/C 细分采纳**：1A=问题界定（survey/候选问题/原型空间纸面
+设计/风险审查），1B=方向性原型探索（**须 owner 显式放行**、全尝试登记），1C=收官选题（绝不自动滚入
+Stage-2）；**当前位置 = Stage-1A**；此前草稿的 `stage: 2` 标签为超前错误。②**收词纪律**：不再创造
+新名词——新概念先入 CLAUDE.md/AGENTS.md 术语表（`f57cd81`，镜像）；A-SEL 系外审临时代号，正名
+「选择器兑现率方向」，程序代号 W1-ASEL-S2-001 冻结弃用。③**供给条件性裁定**：oracle headroom 是
+**供给条件量 H(c)**、ρ 是 ρ(c)（owner 提出，survey 核验成立：coverage 条件 Huang et al. ICML 2025
+/ Snell et al. 2024 / 自家数据裸核心 +0.042 vs 检索供给 +0.517）；配 **headroom 归因纪律**：有头空
+的 null 才证伪选择器，无头空的 null 只否定该供给配置且重试必登记；研究对象精确化为 **(供给 c,
+选择器) 二元组**。④**全盘接受重校准审查**（9 项，S1-F3 为 ACCEPT_WITH_REFINEMENT）+ 两处供给条件性
+精化：原型矩阵至少两个供给层、二元组登记为 S1-F2 允许的第四身份候选 I4（只入 Stage-1C 决策包，
+现在不选）；中间审查文件级事实保留、阶段错位项按再分级表处置。⑤**T+0 记录修复本轮执行**（协调者
+亲自）：v6 更正件（provenance 三元组 + 13 项机读，schema 实测验证）、Stage-1A 位置声明与阶段身份
+更正（84c6cf6 草稿降为 PRE_STAGE2_BLUEPRINT）、两份审查文件入库。**下一步（Stage-1A 正题）**：
+survey 覆盖门（八方法家族、两轮饱和、5–8 篇最近邻逐项 delta、I1–I4 各配 kill condition）。
+Stage-1B 未放行；M2 维持冻结。
+
 ### 2026-07-13（续32）· 签署审查退回：owner 四项裁决——全盘接受、A-SEL 唯一 headline、修订续29、public-deterministic 等级帽
 
 **Context.** 外审对整改报告 `c7528fe` 快照裁决**退回、拒签**（`2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md`：7 FUNDAMENTAL + 6 MAJOR；FFP 未成立、QRP 高风险、独立审计 REQUIRED）。本轮核验由协调者**本人**逐条执行（owner 指令：不委托）：负面事实指控**零驳回**——E-09 三哈希漂移、E-10 checker 输入 `182f09…`≠最终 `3f0ac5…`、F-S4 自锁语义（`hf_revision_sha` 本地元数据硬编码、轴 PASS 仅凭自锁）、F-S5 排除仅 item-ID 级+测试无同组负例、E-08 路径错，全部在仓库字节上坐实；另自查出加重事实：**`c7528fe` 提交信息声称的 regeneration/refresh 未发生在该提交内**（已入 discrepancy register）。

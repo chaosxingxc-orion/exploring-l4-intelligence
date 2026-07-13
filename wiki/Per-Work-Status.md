@@ -69,6 +69,17 @@ review rounds → **CONVERGED, 0 surviving fundamental/major**; every number rep
 artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): the step-1 rationality campaign — pre-registered criteria (freeze b19bff2), two pilots with freeze-before-run commits, a 6-charge hostile panel, and a unanimous sound-with-corrections /ars-reviewer verdict — ended in an owner-ratified NO-GO** (M3 killed by measurement F=0.38108 vs 0.01; M5 inconclusive-by-inert-instrument → frozen default; re-open only on r1/r2/r3). Single-model work continues via P-D. See [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]] and Decision-Log 2026-07-04.
 
 **W1 — Training-free RL — now carries the primary study (per G0).**
+_**2026-07-13 recalibration (Decision-Log 续33, supersedes the 续32 note below on stage identity)**:
+current position = **Stage-1A (problem scoping)** under the owner's Stage-1A/B/C subdivision — the
+selector-realization direction (canonical name for the reviewer-coined "A-SEL"; glossary landed in
+CLAUDE.md/AGENTS.md @`f57cd81`) is a confirmed working DIRECTION, not a closed problem definition.
+The 84c6cf6 "Stage-2 proposal v0.1" is re-identified as **PRE_STAGE2_BLUEPRINT** (stage-2 label was
+premature; program code W1-ASEL-S2-001 retired). Oracle headroom is ruled a **supply-conditional
+quantity H(c)** with a null-attribution discipline (owner ruling, survey-verified: coverage /
+Huang ICML 2025, Snell 2024, in-repo +0.042 bare vs +0.517 supplied). Next Stage-1A work = the
+survey coverage gate (8 method families incl. MBR/N-best rescoring/reference-free QE ancestors,
+2-round saturation, I1–I4 identity candidates with kill conditions). Stage-1B prototypes NOT yet
+released; M2 stays frozen._
 _**2026-07-13 update (Decision-Log 续32)**: the signoff adversarial review **returned** the v4.2
 remediation package (7 FUNDAMENTAL + 6 MAJOR; all accepted, zero refuted on personal re-verification).
 Owner rulings: **single headline = A-SEL** (reward-guided selector realizing the ρ/oracle headroom,
