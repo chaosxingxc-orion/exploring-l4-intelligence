@@ -158,6 +158,42 @@ Evidence keeps the grade of the stage that produced it: a Stage-1 number stays
 hypothesis-grade until re-established at Stage 2. Records are append-only — re-grade via a
 dated reflection doc, never rewrite. When reading pre-2026-07 records, apply this lens.
 
+## 术语表（Glossary）与收词纪律
+
+**收词纪律（owner 2026-07-13）：不再发挥创造新名词。** 新概念必须先在本表登记一行人话定义再使用；
+评审/代理新造的代号在 owner 面向文档首次出现处必须括注本表正名；同一个名字绝不承载两个定义
+（同名异构必须拆名，如 ρ）。本表在 CLAUDE.md 与 AGENTS.md 间逐字镜像。
+
+- **能力供给 c（capability supply）**：喂给冻结核心的上下文与外挂能力的总和——prompt、检索证据、
+  RDU 前端、工具输出、解码参数。rollout 的分布条件于它（owner 2026-07-13：合理供给下的 rollout
+  才有意义和价值）。
+- **rollout / K 池（K-sample pool）**：冻结模型在给定供给 c 下对同一输入采样出的 K 个候选输出。
+- **oracle headroom（头空）H(c)**：事后用真实标签度量的「池内最优 − 默认输出」。**供给条件量，
+  非绝对量**——只在给定供给 c 下有定义，换供给必须重测；文献对应 best-of-N 理论的 coverage 条件。
+- **oracle**：假想的「总能选中池内最优」的选择器；只作上界参考，永标 headroom，绝不作可部署数字。
+- **selector（选择器）**：不读黄金答案、只凭奖励/打分信号从 K 池挑输出的算子。
+- **ρ 实现率（realization rate）**：选择器兑现头空的比例，本质是 ρ(c)（供给条件量）。两个变体拆名：
+  **rho_greedy** = (U_sel−U_greedy)/(U_oracle−U_greedy)（Project-Thesis 原定义，锚=部署默认输出）；
+  **rho_pool** = (U_sel−E[U_pool])/(U_oracle−E[U_pool])（锚=池均值）。分母过小不报比率，
+  标 `HEADROOM_TOO_SMALL` 只报绝对量。
+- **headroom 归因纪律**：selector 实验必须同报该池实测头空。**有头空的 null 才证伪选择器**；
+  无头空的 null 只否定该供给配置——不否定选择原理，但也不自动豁免（供给设计须另行问责，
+  不得无限换供给重试而不登记）。
+- **MBR（minimum Bayes risk）**：无标签共识选择；经典强基线 / 新颖性击杀器。
+- **RDU（Retrieve–Discover–Use）**：前端知识子系统——供给侧 c 的一种实现。
+- **对外术语**：weight-frozen reward-guided inference-time optimization（不改权重/结构）；内部简称 TFRL。
+- **A-SEL**：外审 2026-07-13 签署审查临时造的短代号（其 Proposal A 的 selector 选项），
+  正名 =「选择器兑现率方向」。仅作历史引用，新文档一律用正名。
+- **SESOI**：最小实质效应量；数值须外部锚定，Stage-2 才冻结。
+- **directional-only / hypothesis-grade**：Stage-1 小样方向性证据等级；只作背景/方向材料，绝不升级为结论。
+- **Stage-1A / 1B / 1C**（owner 2026-07-13 细分）：**1A**=问题界定（广泛 survey、候选研究问题、
+  原型空间纸面设计、新颖性/可行性/诚信风险审查；既有数字只作背景方向材料）；**1B**=方向性原型探索
+  （廉价小样、单次触碰、须 owner 显式放行、全部尝试与失败登记、不做显著性结论）；**1C**=收官选题
+  （owner 基于 survey+原型决策包选唯一具体问题，kill/pivot/proceed，绝不自动滚入 Stage-2）。
+- **信息边界（information boundary）**：测试 item 的 golden transcript/answer/qrel 不得进入 selector、
+  reward、prompt、检索或候选构造的任何路径；杠杆分 **read-out**（读出既有能力，允许）与
+  **new-info**（注入题目新信息，禁止）两类。
+
 ## Shared knowledge & memory (README + Wiki)
 
 - **Canonical onboarding is the root `README.md` / `README_CN.md`** — read it first.
