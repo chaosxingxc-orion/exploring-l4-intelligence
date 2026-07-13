@@ -14,6 +14,10 @@
 ρ(c) 三分解、三预算视角、信息边界）+ I4 **措辞**收窄（宽主张"没人拿供给当轴"已死）——**全接受**；
 ② **反制把 scope 塌缩到 ASR**（唯一 modification）：核验 reviewer 24 条文献,语音原生击杀器**全在 ASR 格**
 （§10.6/10.7 的非 ASR 来源是文本/QA），故其"I2/I4 已占据"只在 ASR 单元格成立。
+（**勘误 07-14,response 自检坐实,本句不改、追加更正**：措辞"全在 ASR 格"过强——§10 语音击杀器在
+ASR/ASR+ST 格；唯一非 ASR 音频源 MILS(2501.18096)是 generate-and-score 音频字幕、非选择击杀器；
+准确命题是"§10 没有一条把 SER/SLU-intent/spoken-QA 作为**选择**问题、或把 label-free 选择算子放到跨矩阵
+兑现面上"——核心反制不变。以 `2026-07-14-response-to-precheck-doctoral-review.md` §2 为准。）
 
 **研究对象锁定（owner 覆盖率铁律）.** Stage-1A 研究对象 =
 **「一个 label-free、供给条件的选择算子,在冻结 omni〔模型 × 任务〕矩阵上的兑现面（ρ(c)/H(c)/regret）」**。
