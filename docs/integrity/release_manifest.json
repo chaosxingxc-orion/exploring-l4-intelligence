@@ -1,42 +1,19 @@
 {
   "_comment": "P0 release manifest (2026-07-13, v4.2 doctoral review §6 P0_INTEGRITY_FREEZE + M-8) -- repo SHAs/dirty-flags, the REAL standard-entry test result, the REAL conformance-checker verdict, and key artifact hashes, ALL captured live by this run (never copied from a prior report). Regenerate with `python scripts/checks/build_release_manifest.py`.",
-  "generated_at": "2026-07-13T03:58:51Z",
+  "generated_at": "2026-07-13T08:38:48Z",
   "generated_by": "scripts/checks/build_release_manifest.py",
   "repos": {
     "umbrella": {
       "path": ".",
-      "sha": "56364ebc21359f6c1cd0a33f1a796cde6756532a",
-      "dirty": true,
-      "dirty_files": [
-        " M docs/checks/v42-conformance-output.json",
-        " M docs/checks/v42-conformance-report.md",
-        " M docs/checks/v42-environment.txt",
-        " M docs/checks/v42-rules.yaml",
-        " M wiki/2026-07-12-research-proposal-v42-external-review.md",
-        "?? .claude/",
-        "?? docs/corpus.lock.json",
-        "?? docs/integrity/",
-        "?? scripts/checks/build_registers.py",
-        "?? scripts/checks/build_release_manifest.py"
-      ]
+      "sha": "13b5a10235cc544cd0577948ce255ccc765c8e0a",
+      "dirty": false,
+      "dirty_files": []
     },
     "W1_speech-mllm-training-free-rl": {
       "path": "projects/speech-mllm-training-free-rl",
-      "sha": "159b5258f2d1d0cb2fec1b0e81dbb5876148e350",
-      "dirty": true,
-      "dirty_files": [
-        " M scripts/baselines/deterministic_draw.py",
-        " M scripts/baselines/test_deterministic_draw.py",
-        " M scripts/knowledge/build_full_corpus.py",
-        " M scripts/knowledge/build_full_corpus.sh",
-        " M scripts/knowledge/kb_batch_build.py",
-        " M scripts/knowledge/kb_build.py",
-        " M scripts/knowledge/kb_embed.py",
-        " M scripts/knowledge/kb_schema.py",
-        "?? scripts/knowledge/corpus_lock.py",
-        "?? scripts/knowledge/test_corpus_audit_axes.py",
-        "?? scripts/knowledge/test_corpus_lock.py"
-      ]
+      "sha": "a532da06296681b3bbb30446a6fa285ca5bed508",
+      "dirty": false,
+      "dirty_files": []
     }
   },
   "standard_test_entry": {
@@ -44,13 +21,13 @@
     "cwd": "/mnt/d/chao_workspace/exploring-l4-intelligence/projects/speech-mllm-training-free-rl",
     "returncode": 0,
     "passed": true,
-    "stdout_tail": "=============================== warnings summary ===============================\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:16: DeprecationWarning: 'aifc' is deprecated and slated for removal in Python 3.13\n    import aifc\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:17: DeprecationWarning: 'audioop' is deprecated and slated for removal in Python 3.13\n    import audioop\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:19: DeprecationWarning: 'sunau' is deprecated and slated for removal in Python 3.13\n    import sunau\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n159 passed, 3 warnings in 87.07s (0:01:27)",
-    "ran_at_utc": "2026-07-13T03:58:51Z"
+    "stdout_tail": "=============================== warnings summary ===============================\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:16: DeprecationWarning: 'aifc' is deprecated and slated for removal in Python 3.13\n    import aifc\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:17: DeprecationWarning: 'audioop' is deprecated and slated for removal in Python 3.13\n    import audioop\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:19: DeprecationWarning: 'sunau' is deprecated and slated for removal in Python 3.13\n    import sunau\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n159 passed, 3 warnings in 80.74s (0:01:20)",
+    "ran_at_utc": "2026-07-13T08:38:48Z"
   },
   "conformance_checker": {
     "ran": true,
     "returncode": 0,
-    "ran_at_utc": "2026-07-13T03:58:51Z",
+    "ran_at_utc": "2026-07-13T08:38:48Z",
     "overall_verdict": "DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW",
     "total_rules": 22,
     "failed_ids": []
@@ -65,19 +42,19 @@
       "exists": true
     },
     "docs/integrity/prior_exposure_registry.json": {
-      "sha256": "dc76cafb31b1bb00f195a9af5aa5b51851e9bef62705eee4b909d54d3ea5b94a",
+      "sha256": "7d1a33dae9dee0367986392a74fac82ab581254f470cffd4605432f09586b3c2",
       "exists": true
     },
     "docs/integrity/experiment_attempt_registry.jsonl": {
-      "sha256": "22a05a31a28915c1f678f4288d372fc992080ba78d1826a74aa2bbf61f614774",
+      "sha256": "7ea5ef199a3376bb61a9e25beb6873cfbe2a10b43f9442f9dfb8171f749f7a49",
       "exists": true
     },
     "docs/integrity/discrepancy_register.md": {
-      "sha256": "90da3debd15e1cf33847a0d34b63f5a9cfa78952dd14ed0564b8bb6c4dff9f5d",
+      "sha256": "58766320f718062c28156e8b663a0cb69df57261988e933ff07cce33e7fdf83a",
       "exists": true
     },
     "projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py": {
-      "sha256": "f9ab4bc3836275cf01090ebec1d0451e7aec090267e55037cdd895e5f17aaf48",
+      "sha256": "3587a55a3a13fc2e7e472311a75a70c005754d4a3f7b47c4c632abffa6f1c7fb",
       "exists": true
     },
     "projects/speech-mllm-training-free-rl/scripts/baselines/deterministic_draw.py": {
