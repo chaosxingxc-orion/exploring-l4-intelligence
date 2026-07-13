@@ -44,9 +44,11 @@ response_artifact:
     umbrella_commit: 311689818e6650674fac2cc1c19dbe4ee94baa29
 ```
 
-## 3. 13 项机读处置（v6 实质立场的忠实重发，无内容变更）
+## 3. 13 项机读处置（v6 实质立场重发；**字段经规范化，语义等价，明细见 §3a**）
 
-以下只修**载体格式**，不改 v6 的任何实质裁定（13/13 ACCEPT、零抗辩、不申请立即重签）。
+以下重发 v6 的 13 项实质裁定（13/13 ACCEPT、零抗辩、不申请立即重签）。**载体做了字段规范化
+（去括注 / token 大小写归一）**——语义等价但非逐字节相同，故本节标题不再声称"无内容变更"
+（预检博导审查 §7 坐实五处未声明规范化；P0-REC-2）。规范化明细与原值见紧接的 §3a。
 
 ```yaml
 response_items:
@@ -128,6 +130,49 @@ response_items:
     status_after: OPEN
     evidence: "小簇推断模拟契约（DGP 网格/Type-I 上限/独立种子）登记 @c16900c"
     gate: BEFORE_STAGE2_UNFREEZE
+```
+
+## 3a. 字段规范化明细（raw → canonical；P0-REC-2）
+
+§3 机读块的下列五个字段相对 v6 原文做了规范化（去掉解释性括注 / token 大小写与分隔归一）。
+语义等价，但为满足"原值忠实保存"的诚实纪律，此处逐条列出原值。**此前 M-S5/M-S6 的
+`PLAUSIBLE_STAGE_` 曾被误删并已在一/二轮自检恢复；本表覆盖 reviewer 新指出的另五处。**
+
+```yaml
+status_field_normalizations:
+  - finding_id: F-S4
+    field: status_before
+    raw: "PARTIAL（标签超陈述）"
+    canonical: "PARTIAL"
+    rule: strip_parenthetical_annotation
+  - finding_id: F-S5
+    field: status_before
+    raw: "WRONG_GATE（原挂 P2/M2）"
+    canonical: "WRONG_GATE"
+    rule: strip_parenthetical_annotation
+  - finding_id: F-S6
+    field: status_after
+    raw: "CLOSED-as-record"
+    canonical: "CLOSED_AS_RECORD"
+    rule: token_case_and_separator_normalize
+  - finding_id: M-S2
+    field: status_before
+    raw: "PARTIAL（诚实命名已修，实质依据未交付）"
+    canonical: "PARTIAL"
+    rule: strip_parenthetical_annotation
+  - finding_id: M-S4
+    field: status_before
+    raw: "WRONG_GATE（原 M2→M3）"
+    canonical: "WRONG_GATE"
+    rule: strip_parenthetical_annotation
+status_verdict_unchanged: true # 五处规范化都不改 status 的裁定含义；F-S4/F-S5/M-S2/M-S4 去括注（token 字符串不变），F-S6 连字符→下划线（token 字符串形变、含义不变）
+raw_preserved_here: true       # 被去掉的括注原文逐字保存在本表各条 raw 字段
+note: |
+  纠正首版过度声称：F-S4/M-S2 的括注语义确在其 §3 evidence 字段另有体现；F-S6 是 token 的
+  大小写与分隔归一（CLOSED-as-record → CLOSED_AS_RECORD，无括注、无语义变更）；
+  但 F-S5『原挂 P2/M2』与 M-S4『原 M2→M3』是**原(错误)门的溯源**，§3 的 gate 字段记的是
+  改正后的门，故这两处原门溯源不在 §3 字段、只保存在本表 raw。语义等价指 status 裁定含义
+  不变，非指括注在 §3 逐字复现，也非指 F-S6 的 token 字符串逐字不变。
 ```
 
 ## 4. 阶段重校准注（**非 v6 内容的忠实重发部分**——这是 v6 之后的门位再解释，单列于此）
