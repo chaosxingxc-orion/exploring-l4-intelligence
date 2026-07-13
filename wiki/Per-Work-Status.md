@@ -69,11 +69,22 @@ review rounds → **CONVERGED, 0 surviving fundamental/major**; every number rep
 artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): the step-1 rationality campaign — pre-registered criteria (freeze b19bff2), two pilots with freeze-before-run commits, a 6-charge hostile panel, and a unanimous sound-with-corrections /ars-reviewer verdict — ended in an owner-ratified NO-GO** (M3 killed by measurement F=0.38108 vs 0.01; M5 inconclusive-by-inert-instrument → frozen default; re-open only on r1/r2/r3). Single-model work continues via P-D. See [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]] and Decision-Log 2026-07-04.
 
 **W1 — Training-free RL — now carries the primary study (per G0).**
-_Primary study (2026-07-12, Decision-Log 续24 / G0 §4): a front-end **Retrieve–Discover–Use (RDU)**
+_**2026-07-13 update (Decision-Log 续32)**: the signoff adversarial review **returned** the v4.2
+remediation package (7 FUNDAMENTAL + 6 MAJOR; all accepted, zero refuted on personal re-verification).
+Owner rulings: **single headline = A-SEL** (reward-guided selector realizing the ρ/oracle headroom,
+equal-K, generation-marginal, cross-family replication; RDU-vs-strongest demoted to secondary/ablation);
+v4.2 **archived as the Stage-1 problem-definition deliverable** (续29's no-fresh-proposal clause
+amended); evidence route = public-deterministic with an honest grade cap. **Fresh Stage-2 proposal
+v0.1 (program W1-ASEL-S2-001) drafted and submitted for reviewer STRUCTURE verification**
+([[2026-07-13-stage2-proposal-ASEL-v0.1-for-reviewer-verification]]); P0-A evidence-transaction fixes
+landed (umbrella `7b895b5`, W1 `a532da0`); **M2 stays frozen** until P0-B closes (group-union
+cross-split exclusion + negative test, upstream corpus second-fetch anchor, config-history
+reconstruction, FG-1..FG-10 freeze dossiers) and the reviewer signs the Stage-2 gate against the
+fresh proposal._
+_Historical framing (2026-07-12, Decision-Log 续24 / G0 §4): a front-end **Retrieve–Discover–Use (RDU)**
 knowledge subsystem over the frozen omni core **plus a reward-guided trajectory-selection operator**;
 primary metric = **selector realization rate ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**.
-Proposal **v4.2** (after two adversarial-review rounds) is **awaiting external
-review + owner signature** (not yet a passed / Stage-2 plan; v4.1
+Proposal **v4.2** (after two adversarial-review rounds) went to external review (v4.1
 [[2026-07-12-research-proposal-v41-external-review]] → historical record). **M1 engineering base locked at W1
 `20d45a8`; experiments frozen** pending the two S4 assets + external review + §12 signature. The
 mature reward/eval machinery below is the foundation the primary study builds on._ Gradient-free,
