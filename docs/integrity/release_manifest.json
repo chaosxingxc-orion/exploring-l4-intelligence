@@ -1,11 +1,11 @@
 {
   "_comment": "P0 release manifest (2026-07-13, v4.2 doctoral review §6 P0_INTEGRITY_FREEZE + M-8) -- repo SHAs/dirty-flags, the REAL standard-entry test result, the REAL conformance-checker verdict, and key artifact hashes, ALL captured live by this run (never copied from a prior report). Regenerate with `python scripts/checks/build_release_manifest.py`.",
-  "generated_at": "2026-07-13T08:38:48Z",
+  "generated_at": "2026-07-13T11:54:55Z",
   "generated_by": "scripts/checks/build_release_manifest.py",
   "repos": {
     "umbrella": {
       "path": ".",
-      "sha": "13b5a10235cc544cd0577948ce255ccc765c8e0a",
+      "sha": "757465c406625e10dcf37f5895b0f850e5773b75",
       "dirty": false,
       "dirty_files": []
     },
@@ -21,13 +21,13 @@
     "cwd": "/mnt/d/chao_workspace/exploring-l4-intelligence/projects/speech-mllm-training-free-rl",
     "returncode": 0,
     "passed": true,
-    "stdout_tail": "=============================== warnings summary ===============================\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:16: DeprecationWarning: 'aifc' is deprecated and slated for removal in Python 3.13\n    import aifc\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:17: DeprecationWarning: 'audioop' is deprecated and slated for removal in Python 3.13\n    import audioop\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:19: DeprecationWarning: 'sunau' is deprecated and slated for removal in Python 3.13\n    import sunau\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n159 passed, 3 warnings in 80.74s (0:01:20)",
-    "ran_at_utc": "2026-07-13T08:38:48Z"
+    "stdout_tail": "=============================== warnings summary ===============================\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:16: DeprecationWarning: 'aifc' is deprecated and slated for removal in Python 3.13\n    import aifc\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:17: DeprecationWarning: 'audioop' is deprecated and slated for removal in Python 3.13\n    import audioop\n\nscripts/baselines/test_phase_a_e2e.py::test_e2e_all_arms\n  /home/chao/.venvs/speechrl/lib/python3.12/site-packages/audioread/rawread.py:19: DeprecationWarning: 'sunau' is deprecated and slated for removal in Python 3.13\n    import sunau\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n159 passed, 3 warnings in 76.38s (0:01:16)",
+    "ran_at_utc": "2026-07-13T11:54:55Z"
   },
   "conformance_checker": {
     "ran": true,
     "returncode": 0,
-    "ran_at_utc": "2026-07-13T08:38:48Z",
+    "ran_at_utc": "2026-07-13T11:54:55Z",
     "overall_verdict": "DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW",
     "total_rules": 22,
     "failed_ids": []
@@ -35,30 +35,37 @@
   "key_artifact_hashes": {
     "docs/corpus.lock.json": {
       "sha256": "192dd2d0c9a5b5a0fc35b9f7b6a07cd0eb8b1dcdf9452fe4b032c63957ea0c79",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "docs/claim_ledger.yaml": {
       "sha256": "c7a29949a2ef5c493e9359e67605f345110ca8e4095da5dd524b9fef8c4db73d",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "docs/integrity/prior_exposure_registry.json": {
-      "sha256": "7d1a33dae9dee0367986392a74fac82ab581254f470cffd4605432f09586b3c2",
+      "sha256": "d48e30ad22a11d476eefd70cf4622ee8f33fd8cc54e0222aa5aa3d73803c1711",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "docs/integrity/experiment_attempt_registry.jsonl": {
-      "sha256": "7ea5ef199a3376bb61a9e25beb6873cfbe2a10b43f9442f9dfb8171f749f7a49",
+      "sha256": "f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "docs/integrity/discrepancy_register.md": {
-      "sha256": "58766320f718062c28156e8b663a0cb69df57261988e933ff07cce33e7fdf83a",
+      "sha256": "c3774be6f7b9ca765bf63f4a02dcb94590b3486ee7ec16817aeb2c9957a55ce0",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py": {
       "sha256": "3587a55a3a13fc2e7e472311a75a70c005754d4a3f7b47c4c632abffa6f1c7fb",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     },
     "projects/speech-mllm-training-free-rl/scripts/baselines/deterministic_draw.py": {
       "sha256": "7e6444ddf8ebbb10d883296bf302a5a26a6c36b42b32302fead9af3eb3835fe0",
+      "hash_basis": "git_blob_at_HEAD",
       "exists": true
     }
   }
