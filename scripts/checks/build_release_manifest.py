@@ -17,10 +17,11 @@ Records, for THIS run:
     `docs/checks/v42-rules.yaml` (if both are present) -- its own `summary.overall_verdict` folded
     in verbatim; this manifest does NOT re-implement conformance-checking logic, only re-invokes
     the existing checker and records what it said.
-  - key artifact hashes: sha256 of the outputs this remediation package produces/depends on
-    (docs/corpus.lock.json, docs/claim_ledger.yaml, the sibling P0 registers) — each is None (not
-    "0000...") when the file does not exist, so a missing artifact is never mistaken for a hashed
-    empty one.
+  - key artifact hashes: CANONICAL sha256 over the git BLOB bytes at each repo's HEAD
+    (`git show HEAD:<path>` — reproducible from any clean clone; `hash_basis` records the
+    convention). sha256 is None when the path is not TRACKED at HEAD; `exists` independently
+    reports on-disk presence — the two fields are decoupled by design (an on-disk-but-untracked
+    file has sha256=None/exists=true; a tracked-but-deleted file has a hash/exists=false).
 
 Usage (WSL venv):
     python scripts/checks/build_release_manifest.py --umbrella-root . \\
@@ -66,16 +67,6 @@ def git_dirty_files(repo_root: str, limit: int = 40):
         return lines[:limit]
     except Exception:  # pragma: no cover
         return None
-
-
-def sha256_of(path: str):
-    if not os.path.isfile(path):
-        return None
-    h = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for chunk in iter(lambda: fh.read(65536), b""):
-            h.update(chunk)
-    return h.hexdigest()
 
 
 def sha256_of_blob(repo_root: str, relpath: str):

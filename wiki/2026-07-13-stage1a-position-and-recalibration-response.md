@@ -82,12 +82,15 @@ Snell et al. 2024, arXiv 2408.03314）。
 @N=8 vs heysquad 检索供给下 +0.517，相差一个数量级"作自家佐证。撤销理由：(i) +0.517 是
 claim ledger 判 **INVALID** 的 C-T7 数字（答案泄漏：KB passage 含 gold、top-k 答案包含率 ~0.9；
 ledger 原文"Absolutely prohibited from citation as positive evidence"）；(ii) 边界干净的 T8
-复跑给 clean_H0 = **−0.066 CI[−.17,.03]（null）**——干净口径下该供给配置未显示头空；(iii) 两数
+复跑给 clean_H0 = **−0.066 CI[−.17,.03]（null）**——且注意其口径是**单输出注入收益（benefit）**
+（acc(inject_scrub)−acc(base)，单次贪心生成、无 K 池、无 oracle 选择），**不是任何头空测量**：
+T7/T8 谱系从未测过 H(c)；(iii) 两数
 跨任务跨量纲（macro utterance-WER delta vs QA accuracy delta）本就不可比；(iv) +0.042 须按
 2026-07-11 更正标注为 **macro utterance-WER** 口径（corpus-WER 对应值 +0.0296）。结论：**目前
 没有合法的自家 H(c) 供给分层测量**——供给条件性原则现仅由文献支撑；补上这一测量正是 Stage-1B
-P0 原型（供给分层 headroom 地图）的任务。泄漏使表观头空虚高 0.5 这一事实本身，是信息边界纪律
-的最强自家例证，不是供给收益的证据。
+P0 原型（供给分层 headroom 地图）的任务。泄漏使表观**注入收益**虚高 ~0.5 这一事实本身，是信息
+边界纪律的最强自家例证，不是供给收益的证据。（本段首版曾把 clean_H0 误称"未显示头空"——二轮
+自检 MAJOR，已改：benefit 与 headroom 是不同量，正是本次撤引要纠正的那类混淆。）
 
 1. **原型矩阵供给分层（精化 §6.1/§6.2/S1-F3）**：公共骨架由"同一候选池"改为**至少两个供给层**
    （裸核心 / +检索或前端供给），P0 的 headroom checkpoint 变为**供给分层的 headroom 地图**；
@@ -129,3 +132,12 @@ failed/valid-negative/valid-positive/unknown 分类）+ **C2** 叙述数字 line
 7. **EOL 哈希缺陷类**（MAJOR，系统性）：详见 `2026-07-13-response-v6-correction.md` §5.2——
    哈希正典=git blob 字节；两仓 CRLF 工作树副本全量归一；manifest 改为 blob 哈希并重建。
 8. 未确认项 3 条（五哈希计数、P0-B 释义、③④"矛盾"）经对抗核证被驳回，维持原文。
+
+**二轮自检勘误（wf_07217ce2，对修复 diff 本身；9 报 7 确认，2 驳回，当日修复）：**
+
+9. **MAJOR——本文件 §4 撤引段首版又犯同类混淆**：把 T8 的 clean_H0（单输出**注入收益**，无 K 池
+   无 oracle）误称"未显示头空"——benefit 与 headroom 是不同量，正是撤引要纠正的混淆在纠正文本里
+   复发。已改（§4 现明标口径），"表观虚高 0.5"同句改为"注入收益"。
+10. MINOR×6：F-S2 复核输出落档补齐（`docs/checks/manifest-blob-verification-2026-07-13.txt`，
+    F-S2 就此 CLOSED）；`.gitignore` 残留 1 CRLF 行已修（"全量归一"当时不严格）；manifest 脚本
+    docstring 旧语义与死代码清理；诚信核查包 C1–C5 入术语表（含与论文 C1–C3 的拆名警示）。

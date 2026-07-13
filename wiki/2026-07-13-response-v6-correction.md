@@ -151,3 +151,15 @@ response_items:
    暂改 PARTIAL**，以正典哈希重建的 manifest wrapper commit（含 7/7 blob 哈希核验输出）为重新
    闭合的证据。§3 表保持 v6 当时立场的忠实记录不动，现时状态以本节为准。
 3. 阶段重校准注移出 §3（见 §4 说明）。
+
+**二轮自检补正（wf_07217ce2，9 报 7 确认后当日修复）：**
+
+4. **F-S2 重新闭合，落档补齐**：二轮自检指出 wrapper commit `f102aca` 本身并未包含上条预注册的
+   "7/7 blob 哈希核验输出"、闭合停留在提交信息断言。补正：独立复核输出已入库
+   `docs/checks/manifest-blob-verification-2026-07-13.txt`——7/7 哈希从 pinned SHA（umbrella
+   `757465c` / W1 `a532da0`，dirty=false×2）的 git blob 逐一复现 + 双仓祖先关系成立。
+   **F-S2 现时状态 = CLOSED（以该落档文件为证据）**。
+5. 上条 2 的"两仓全部 CRLF 已归一"当时不严格：`.gitignore` 残留 1 个 CRLF 行（不在任何哈希
+   登记工件内）——已修，双仓 `git ls-files --eol` 现零 w/crlf、零 w/mixed。
+6. `build_release_manifest.py` 模块 docstring 的旧盘上哈希语义描述与死代码 `sha256_of` 一并
+   清理（sha256=None 现表示"未被 HEAD 跟踪"，与 exists 字段解耦——docstring 已如实改写）。

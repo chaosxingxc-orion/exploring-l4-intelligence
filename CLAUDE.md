@@ -208,6 +208,11 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   `.gitattributes` 规范化；核验命令 `git show <commit>:<path> | sha256sum`）。Windows 工作树 CRLF
   副本的哈希是**变体**，单独出现不构成证据（2026-07-13 自检工作流坐实的 EOL 缺陷类；变体值须
   standing 注明与正典的换算关系）。
+- **诚信核查包 C1–C5（integrity check pack）**：重校准审查 §8 的五项低成本核查——C1 尝试普查
+  （registry vs raw run 集合差）、C2 叙述数字 lineage 回链、C3 信息边界审计、C4 负结果普查、
+  C5 append-only 工件更正。**拆名警示（同名异构）**：与论文 `papers/agent-level-tfrl` 的贡献
+  编号 C1–C3（真实 best-of-N / 冻结探针 / 奖励离散度透镜）同形异义——引用时必须带"诚信核查"
+  限定语。
 
 ## Shared knowledge & memory (README + Wiki)
 
