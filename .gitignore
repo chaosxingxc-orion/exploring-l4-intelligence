@@ -99,3 +99,7 @@ CLAUDE-FABLE-5.md
 !common/src/speechrl_common/data/**
 common/src/speechrl_common/data/__pycache__/
 scripts/data/__pycache__/
+
+# Claude Code local (machine-specific) settings -- never tracked; was the sole
+# untracked path keeping release-manifest dirty flags true (P0-A transaction fix)
+.claude/settings.local.json
