@@ -24,6 +24,17 @@ Source: `wiki/2026-07-13-v42-doctoral-adversarial-integrity-review.md` §1 (可�
 - Any NEW discrepancy this script's future re-runs surface between this file's last-recorded facts and the live-checked facts at that later run — append, do not overwrite, the "This run's live-checked facts" section above.
 
 
+## 2026-07-13 追加（P0-A，签署审查退回后；依据 wiki/2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md，owner 全盘接受＝续32）
+
+**新登记的 discrepancies（本轮自查/外审坐实）：**
+
+1. **release_manifest.json 陈旧快照（F-S2/E-09，RESOLVED @P0-A）**：manifest 记录 umbrella `56364eb`+dirty / W1 `159b525`+dirty，而最终报告提交为 `c7528fe` / W1 `ab1c680`；prior_exposure（`dc76ca…`→实际 `7d1a33…`）、experiment_attempt（`22a05a…`→`7ea5ef…`）、本册（`90da3d…`→`504404…`）三哈希全部漂移。处置：P0-A 按"finalize→commit→clean 核验→对最终输入重跑→重建 manifest→单独提交"顺序重建（见重建后的 manifest 提交）；该顺序立为发布门。
+2. **v42-conformance-output.json 输入非最终 proposal（F-S3/E-10，RESOLVED @P0-A）**：已提交 JSON `meta.inputs` 记录 proposal sha256 `182f09…`，而最终文件为 `3f0ac5…`。处置：对最终 proposal 重跑并重新提交 output；"可复跑通过"与"已提交最终运行证据"今后分开表述。
+3. **`c7528fe` 提交信息与内容不符（P0-A 自查勘误，RECORDED）**：subject 声称 "conformance JSON regenerated against final proposal (22/22); evidence snapshot refreshed"，但该提交唯一改动是整改报告本身（`git show --stat c7528fe`）——regeneration/refresh 未发生在该提交内。git 历史不可改写，特此登记更正；后续提交信息中的证据性声称须与提交内容一致。
+4. **本册 Open items 陈旧（RESOLVED @P0-A 本条）**：下方 open item 仍称 "append_only_erratum_for_v42.md is not yet on disk" 与 "prompt/metric enumeration OUTSTANDING"——前者已于 `e01c0c0` 落盘；后者的命名模板与指标族枚举已入 `prior_exposure_registry.json:resolved_this_round_2026_07_13`（inline/自由提示清扫仍在 `manual_completion_todo[0]`，保持 OPEN）。逐条 resolution 以本条为准，原文按 append-only 不删。
+
+**门位更正（续32 采纳签署审查 §6 重裁定）**：设计身份类 DEFERRED 项（F-1/F-3/F-4/F-5/F-9/M-1/M-2/M-3）的门由 M3 改为 **BEFORE_STAGE2_UNFREEZE**（fresh Stage-2 proposal 冻结时落定）；F-8 跨 split group-disjoint 与 F-6 上游锚挂**任何真实 split draw / build-PASS 之前**（P0-B）。
+
 ## 2026-07-13 追加（#39 收尾，协调者）
 
 - **docs/checks/v42-conformance-report.md（人读叙事版）已陈旧**：正文仍记 "12/12 PASS / rules-2026-07-12"，而活体机读输出（`v42-conformance-output.json`）已是 **22/22 PASS / rules v42-remediation/rules-2026-07-13**。处置：本文件为准绳时以机读 JSON 为权威；叙事版顶部已加更新注记（见该文件），完整重写排入下一次发布周期。

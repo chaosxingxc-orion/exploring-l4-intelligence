@@ -6,6 +6,14 @@
 
 ---
 
+### 2026-07-13（续32）· 签署审查退回：owner 四项裁决——全盘接受、A-SEL 唯一 headline、修订续29、public-deterministic 等级帽
+
+**Context.** 外审对整改报告 `c7528fe` 快照裁决**退回、拒签**（`2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md`：7 FUNDAMENTAL + 6 MAJOR；FFP 未成立、QRP 高风险、独立审计 REQUIRED）。本轮核验由协调者**本人**逐条执行（owner 指令：不委托）：负面事实指控**零驳回**——E-09 三哈希漂移、E-10 checker 输入 `182f09…`≠最终 `3f0ac5…`、F-S4 自锁语义（`hf_revision_sha` 本地元数据硬编码、轴 PASS 仅凭自锁）、F-S5 排除仅 item-ID 级+测试无同组负例、E-08 路径错，全部在仓库字节上坐实；另自查出加重事实：**`c7528fe` 提交信息声称的 regeneration/refresh 未发生在该提交内**（已入 discrepancy register）。
+
+**Decision（owner 四项）.** ①**全盘接受**评审裁决与 §10 分阶段整改（P0-A→P0-B→P1/P2/P3），response letter 按其 §12 格式逐项 ACCEPT；②**Stage-1 科学身份 = A-SEL**（reward-guided selector 兑现 ρ/oracle headroom，equal-K、跨 generation seeds、跨集复现；与 07-11 已签唯一主问题一致）——唯一 headline，RDU 对比降为 secondary/ablation；③**修订续29**：v4.2 归档为 Stage-1 问题定义交付物，Stage-2 入口新建 fresh proposal（新 program ID），设计身份类待决项（F-1/F-3/F-4/F-5/F-9/M-1/M-2/M-3）门位由 M3 改 **BEFORE_STAGE2_UNFREEZE**——这与 CLAUDE.md 三阶段方法论原文一致，续29 的"不出 fresh proposal"部分废止（append-only：原条目不改）；④**证据等级路线 = public-deterministic + 如实等级帽**（development/controlled benchmark evidence，不作强 confirmatory 宣称；人员级独立评分不再是"可选升级"话术——不做它就不主张需要它的等级）。
+
+**P0-A 执行（本条同日）.** 整改报告加修订块并改标：M-8→PARTIAL、F-6→SELF-PIN VERIFIED / UPSTREAM ANCHOR OPEN、F-8→补记 F-S5 且门改"任何真实 split draw 之前"、FIXED\* 记法废止（拆 mechanism_fixed/scientific_gate_open）、删"送达即满足独立快照"推论、§6.3 商榷撤回；discrepancy register 追加 4 条 resolution/登记；叙事版 conformance report 移出发布证据集；`corpus_lock.py` docstring 路径 `../../../docs`→`../../docs`；对最终 proposal 重跑 checker 并按事务顺序重建 release manifest（见对应提交）。**P0-B（M2 前置）**：group 并集整组排除+负例测试、上游语料第二人 clean fetch、`query_independent_corpus` 轴语义收紧、配置轨迹重建（不可回溯处列 UNKNOWN）、Stage-1 Identity Closure 文档（A-SEL）、fresh Stage-2 proposal。M2 维持冻结直至 P0-B 闭合。
+
 ### 2026-07-13（续31）· #39 整改包收官：修复→自检→报告齐备，呈 owner 审阅后送 reviewer 盖章
 
 **Status.** 续28-⑤ 执行令完成。**工程**（W1 `ab1c680` + 提速 `64d697c`）：F-6 语料锁凭证据

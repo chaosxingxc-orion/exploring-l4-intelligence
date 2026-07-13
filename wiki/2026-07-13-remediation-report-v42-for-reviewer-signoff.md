@@ -13,6 +13,16 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 
 # v4.2 博导级对抗审查 · 整改报告（呈外部审查者盖章）
 
+> **P0-A 修订（2026-07-13，依据签署审查 `2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md`，owner 全盘接受，Decision-Log 续32）**：外审对本报告 `c7528fe` 快照（sha256 `cd987ff0…`）裁决**退回、拒签**（7 FUNDAMENTAL + 6 MAJOR，FFP 未成立、QRP 高风险）。我方逐条独立核验后**零驳回、全盘接受**。本修订仅执行其 P0-A（发布事务与标签，不跑任何新实验）：
+> ① M-8 由 FIXED（机制）改 **PARTIAL**——评审时点 manifest 记录的是 `56364eb`+dirty 的陈旧快照、三个登记册哈希已漂移；最终发布事务于本修订按"finalize→commit→clean 核验→对最终输入重跑→重建 manifest→单独提交 manifest"顺序重执行。
+> ② 已提交 conformance JSON 输入为 `182f09…`（非最终 proposal `3f0ac5…`）——对最终 proposal 重跑并重新提交（见 `docs/checks/v42-conformance-output.json` 的 meta.inputs）。
+> ③ F-6 标签改 **PARTIAL：SELF-PIN VERIFIED / UPSTREAM ANCHOR OPEN**——自锁只证本地字节可复放（replayability），不证上游官方性；`query_independent_corpus` 轴的 PASS 语义收紧挂 P0-B。
+> ④ F-8 补记评审 F-S5：现实现只做 **item-ID 级**跨 manifest 排除，未把先前 draw 的 group key 扩展为整组排除（同 speaker 的另一 item 仍可入 confirmatory）；门从 P2/M2 改为**任何真实 split draw 之前**。
+> ⑤ 删除"本报告送达审查者即满足独立快照流程步"的推论（F-S6/F-S7）；§6.3 的"制度形态差异"商榷**撤回**——外审盖章+机器登记册不构成人员隔离的独立完整性审计。
+> ⑥ 新增自查勘误：`c7528fe` 提交信息声称 "conformance JSON regenerated / evidence snapshot refreshed"，但该提交实际只改动本报告一个文件——已登记入 `discrepancy_register.md`。
+> ⑦ 图例 FIXED\* 拆分为 `mechanism_fixed` 与 `scientific_gate_open` 两个显式字段。
+> 评审快照本身由 git `c7528fe` 保存，本修订为 append-only 之上的新版本。
+
 ## 0. 一句话
 
 对 2026-07-13 博导级审查的 **每一条 F/M 发现**，我们要么**已结构性修复并留机器可核证据**，要么**如实登记为 stage-gated 待决项（指明所属门）**，要么**由 owner 裁决保留为 contested 敞口（附引用）**——无一条被静默消解或改写。本报告不请求"科学已闭合"的判断；它请求审查者**核对处置表与证据指针是否属实、待决项是否正确挂门**，据此盖章或退回残余。审查者的完整性裁决（**FFP 未成立、QRP 高风险、需独立审计**）我们**照单接受并已在 Stage-1 落地为 P0 登记册 + 本报告**，而非用整改抵消它。
@@ -44,7 +54,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 
 ## 3. 逐 finding 处置表
 
-图例：**FIXED** = 结构性修复 + 机器可核证据；**FIXED\*** = 部分修复（框架/工件到位，剩余闭合挂门）；**DEFERRED@门** = 如实登记待决、挂明所属门（续29 SAP 冻结：estimand 重定义/新增确证原子一律推迟至 M3）；**OWNER-RULED** = owner 裁决保留/推迟（附引用）。
+图例：**FIXED** = 结构性修复 + 机器可核证据；**PARTIAL（mechanism_fixed=true / scientific_gate_open=…）** = 机制/工件真实到位，但科学门未闭合——两个字段分开写、绝不合并成一个视觉"已修"标签（P0-A 修订⑦：原 FIXED\* 记法废止，因它让索引表读者高估闭合度）；**DEFERRED@门** = 如实登记待决、挂明所属门；**OWNER-RULED** = owner 裁决保留/推迟（附引用）。门的挂点以续32（全盘接受签署审查的 gate 重裁定）为准：原"续29 冻结推迟至 M3"的设计身份类条目改挂 **BEFORE_STAGE2_UNFREEZE**（fresh Stage-2 proposal 冻结时落定，非 M3）。
 
 ### 3.0 索引表（每条一行；finding-id 对应下方同名详情小节）
 
@@ -55,9 +65,9 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 | **F-3** | public deterministic evaluation 不能保留强 confirmatory 等级 | OWNER-RULED / DEFERRED@M3 | proposal §11 replayability-not-blindness；M4 等级推迟至 M3 | checker `BANNED-M4-CONFIRMATORY-GRADE`=PASS；owner 续28①（"此前不作 confirmatory 宣称"） |
 | **F-4** | 单次 K-pool 条件推断遗漏生成随机性 | DEFERRED@M2→M3 | proposal §13.4 缺口表（generation-robust ρ：跨 seed 期望+下分位、外层 group/内层 replicate） | checker `REQUIRED-GENERATION-ROBUST-RHO`=PASS（tracked, not adopted）；续29 冻结 |
 | **F-5** | 无 load-bearing RDU-vs-strongest 归因原子 | DEFERRED@M3（contested） | proposal §3.1（H_RDU_VS_STRONGEST 具名登记为 UNRESOLVED/contested，m=6 不变） | checker `REQUIRED-RDU-VS-STRONGEST-ATOM`=PASS（named/tracked）；续29 冻结不新增原子 |
-| **F-6** | full-corpus 审计由 mode 字符串自证、无 upstream corpus lock | **FIXED\*** | `docs/corpus.lock.json`（content_hash+doc_count+upstream identity）+ `corpus_lock.py:verify_corpus_lock`（fail-closed）；57,638 全建 + datasets.lock 上游 revision/checksum pin 仍属 **M1 gap** | checker `REQUIRED-CORPUS-LOCK-EXISTS`=PASS；`test_corpus_lock.py`、`test_corpus_audit_axes.py`；proposal §6.4 L234 |
+| **F-6** | full-corpus 审计由 mode 字符串自证、无 upstream corpus lock | **PARTIAL：SELF-PIN VERIFIED / UPSTREAM ANCHOR OPEN**（mechanism_fixed=true / scientific_gate_open=upstream 锚） | `docs/corpus.lock.json` + `corpus_lock.py:verify_corpus_lock`（fail-closed）证**本地字节自锁可复放**；`hf_revision_sha` 来自本地 `.hfd` 元数据、`EXPECTED_DOC_COUNT` 来自自家 loader docstring——**均非上游独立锚**；第二人 clean fetch + 上游 revision 复核挂 **P0-B（eligibility/build PASS 之前）**；`query_independent_corpus` 轴 PASS 语义收紧同挂 P0-B | checker `REQUIRED-CORPUS-LOCK-EXISTS`=PASS；`test_corpus_lock.py`、`test_corpus_audit_axes.py`；签署审查 F-S4 |
 | **F-7** | `answer_presence_expected` 的 scrub 语义与开放语料任务相反 | OWNER-RULED latent / DEFERRED@M1 | 生产路径未传 `eval_golds`（scrub 空转，无数据受损）；修复挂 M1 | 续28 明裁 latent；数据流实证见 §1、§3-F-7；`deferred_not_closed F-7` |
-| **F-8** | group-aware draw 三隔离漏洞 + "fixed seed equally tamper-evident"错述 | **FIXED\***（框架）/ DEFERRED@M2（结构门） | `deterministic_draw.py:14-15,34` 头部改写为 "replayable, not selection-blind"，具名撤回"equally tamper-evident"；100% coverage / singleton / force_supersede 三门挂 P2/M2 | checker `BANNED-EQUALLY-TAMPER-EVIDENT`=PASS；response v5 §3b/§3e 撤回 |
+| **F-8** | group-aware draw 三隔离漏洞 + "fixed seed equally tamper-evident"错述 | **PARTIAL**（mechanism_fixed=三隔离门+措辞撤回 / scientific_gate_open=**跨 split group-disjoint 未实现**） | 三隔离门已落 W1；但签署审查 F-S5 坐实：跨 manifest 排除仅 **item-ID 级**（`deterministic_draw.py` 的 `excluded` 集只装 id），先前 draw 的 group key 未扩展为整组排除，同 speaker 的另一 item 仍可入 confirmatory；测试仅断言 item 交集为零且 prior draws 用 identity grouping、无同组跨 split 负例。修复（prior groups 并集整组排除 + A/B 同组负例测试）挂 **任何真实 split draw 之前**（非 P2/M2 中途） | checker `BANNED-EQUALLY-TAMPER-EVIDENT`=PASS；response v5 §3b/§3e 撤回；签署审查 F-S5 |
 | **F-9** | 一次性 M4 状态机与 §13.3 M5 迭代自相矛盾 | DEFERRED@M3 | 机器可读状态机待落（M4_FAIL_FINAL 终局）；M5 文档限定语已加 | `deferred_not_closed F-9`；续29 冻结 |
 | **F-10** | 无博士级 load-bearing theorem（finite-sample ε_n、同对象） | DEFERRED@M2/理论轨 | 现仅 generic argmax-mismatch lemma（§10.2 已诚实标注非收敛） | `deferred_not_closed F-10`；#27 同对象绑定待闭合 |
 | **M-1** | 两个 no-harm 原子不是正向复制 | DEFERRED@M3 | proposal §3.1：头条如实限定单焦点集 | `deferred_not_closed M-1` |
@@ -67,7 +77,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 | **M-5** | 小簇尾部推断未证成 | DEFERRED@M2 | BCa/studentized-t vs wild-cluster vs randomization，M2 按 simulation 选 | `deferred_not_closed M-5` |
 | **M-6** | 配置多重性账本不全（search space） | DEFERRED@M2（现 INCOMPLETE） | `experiment_attempt_registry.jsonl` 现为浅扫描，未捕获 config-selection 轨迹 | `deferred_not_closed M-6`；`prior_exposure_registry.json:p0_gate_status`（OUTSTANDING） |
 | **M-7** | q2q 预训练回生 test query 盲点 | DEFERRED@M2 | proposal §6.4 L238：规则冻结后 exact/fuzzy/semantic overlap 审计（描述性交付） | `deferred_not_closed M-7` |
-| **M-8** | 提交状态与发布文字不事务一致（"4 errors"陈旧、"converged/0 residual"） | **FIXED**（机制） | `build_release_manifest.py` 记 live SHA+dirty+pytest+checker verdict（永不复制旧报告）；§13.4 更新为 159 passed/0 errors 并标旧快照陈旧 | checker `BANNED-STALE-FOUR-ERRORS`=PASS；`release_manifest.json`；`discrepancy_register.md` item 1&2 |
+| **M-8** | 提交状态与发布文字不事务一致（"4 errors"陈旧、"converged/0 residual"） | **PARTIAL**（mechanism_fixed=true / **final_release_transaction_executed=false @评审时点**；P0-A 已重执行） | 签署审查 E-09 坐实：机制脚本真实存在，但最终发布未重跑——manifest 记录 `56364eb`+dirty、三登记册哈希漂移；且 `c7528fe` 提交信息声称 "JSON regenerated / snapshot refreshed" 而该提交只改了本报告（自查勘误，入 discrepancy register）。P0-A 按事务顺序重建：manifest 由 clean HEAD 重新生成、checker output 对最终 proposal 重跑；任何 dirty=true 或输入 hash 漂移今后使发布门 FAIL | `release_manifest.json`（P0-A 重建版）；`discrepancy_register.md` P0-A 追加节；签署审查 F-S2/F-S3 |
 | **M-9** | conformance checker 通过 ≠ proposal 自洽 | **ADDRESSED** | checker 加 10 条新规则（12→22 条：8 semantic + 2 file-existence）；报告全程 scope 免责、人工/独立审查与机械 lint 分栏 | `v42-conformance-report.md` §Nature；`remediation_evidence.yaml:scope_disclaimer` |
 | **P0** | P0_INTEGRITY_FREEZE 四登记册（续28④） | **DELIVERED / 内容实质充实；gate 如实 NOT_PASS** | 四册全部在盘 + 机采充实；config-selection 轨迹（M-6）与独立只读快照未齐 | `prior_exposure_registry.json:p0_gate_status` = **NOT_PASS（如实）** |
 
@@ -133,11 +143,11 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 - **M3 将交付**：把 H_RDU_VS_STRONGEST 提升为 primary 或置换弱原子；strongest baseline 在 dev 按预注册规则从 long-context / own-ASR text-RAG / frozen retriever 中选出，RDU 须在预算/上下文长度可比条件下越 SESOI。
 - **今日追踪**：checker `REQUIRED-RDU-VS-STRONGEST-ATOM`=PASS（named/tracked，4 处，m=6 未变）；proposal §3.1 的 UNRESOLVED 登记 + §13.4 M3 缺口行；`remediation_evidence.yaml:entries` 的 F-5 条目（`disposition: deferred_tracked`，同 F-4 记录于 entries 块）。
 
-#### F-6（FIXED\*）
+#### F-6（PARTIAL：SELF-PIN VERIFIED / UPSTREAM ANCHOR OPEN）
 
 **What（问题与处置）**：审查发现全语料审计此前由 `query_independent_corpus = PASS iff corpus_mode=="full"` 这一**模式字符串**自证——一个不完整/替换过/错误来源的 `corpus.jsonl` 仍可被标成 query-independent（查询无关）。处置：**部分就地修复**——新增 `docs/corpus.lock.json`（上游语料 identity）+ W1 `corpus_lock.py:verify_corpus_lock` 的 fail-closed（失败即拒绝）验证契约 + 审计轴测试；余"57,638 全建 + `datasets.lock.json` 上游 revision/checksum pin"为如实登记的 **M1 gap**。
 
-**Why（为什么重要、为什么这样处置）**：若审计只信任调用方布尔值/mode 字符串，一个被掉包或截断的语料文件会静默通过"查询无关"，任何检索结果都建立在**未经核验的对象**上——这正是本项目"对象错误"假增益史的谱系。选"证据锁 + fail-closed"而非"更强的 mode 字符串"，因为唯有从真实字节重算的证据才能证明语料官方性；全建封存至 M2 选型是 owner 的 stage-gated-artifact 纪律（续28），非回避。
+**Why（为什么重要、为什么这样处置）**：若审计只信任调用方布尔值/mode 字符串，一个被掉包或截断的语料文件会静默通过"查询无关"，任何检索结果都建立在**未经核验的对象**上——这正是本项目"对象错误"假增益史的谱系。选"证据锁 + fail-closed"而非"更强的 mode 字符串"，因为从真实字节重算的证据能证明**本构建与团队首见快照逐字节一致（replayability）**；但按签署审查 F-S4（我方核验属实并接受）：`hf_revision_sha` 硬编码自本地 `.hfd` 元数据、`EXPECTED_DOC_COUNT` 来自自家 loader docstring、archive hash 为团队首见本地文件后的 self-pin——**自锁不能证明上游官方性/查询无关性**（proposal §6.4 自己规定"须锚定上游第三方 revision + 公开 checksum，非团队自算 hash 单独自证"）。上游锚（第二人 clean fetch + revision/LFS-OID 复核）挂 P0-B；在其闭合前该轴不得读作 upstream-verified。全建封存至 M2 选型是 owner 的 stage-gated-artifact 纪律（续28），非回避。
 
 **How（机制 + 核验配方）**：
 
@@ -146,7 +156,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 - **核验配方①**：`PYTHONPATH=src pytest scripts/knowledge/test_corpus_lock.py -q` → **1 passed**（依赖无数据根，9 个内部 case：内容突变→`normalized_content_hash` 失配；重排→`ordered_doc_id_hash` 失配而 `doc_count` 仍匹配；57637/57639→引 `EXPECTED_DOC_COUNT` 锚失败；`raise_on_mismatch=True` 实抛 `CorpusLockError`；`generate` 遇错写 NOTHING）。
 - **核验配方②**：`PYTHONPATH=src pytest scripts/knowledge/test_corpus_audit_axes.py -q`（numpy venv）→ **1 passed**（改一字节 corpus → `query_independent_corpus`=FAIL、`corpus_lock_verification.verified`=False）。
 - **核验配方③**：`python scripts/checks/v42_conformance.py` → `REQUIRED-CORPUS-LOCK-EXISTS`=PASS。
-- **仍属 M1 gap**：57,638 全建 + 上游 revision/公开 checksum pin 进 `datasets.lock.json`（proposal §13.4 明列）。
+- **OPEN（P0-A 改判）**：上游锚——第二人从 pinned revision clean fetch 逐字节比对 + revision/LFS-OID 复核（若上游无公开 member checksum，则保存完整 archive hash+下载日志+第二人复算，不得把"上游没给 checksum"静默当"自算值等价上游"）——挂 **P0-B，eligibility/build 的该轴 PASS 之前**；57,638 全建维持封存至 M2 选型；`query_independent_corpus` 轴在锚闭合前的正确值为 `SELF_PIN_MATCH / UPSTREAM_NOT_VERIFIED`（代码轴语义收紧同挂 P0-B）。
 
 #### F-7（OWNER-RULED latent / DEFERRED@M1）
 
@@ -160,7 +170,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 - **核验配方**：`PYTHONPATH=src pytest scripts/knowledge/test_corpus_audit_axes.py -q`（numpy venv）→ **1 passed**——含合法 answer span 正向 golden（持久化 value 未被 scrub、gold 文本 verbatim 仍在）+ per-item 注入负向 golden（`no_injected_gold_context`=FAIL，压过其余全清轴）。
 - **今日追踪**：`deferred_not_closed F-7`（gate M1，status latent："生产路径未传 eval_golds、无数据受损，fix tracked"）。
 
-#### F-8（FIXED\* 框架 / DEFERRED@M2 结构门）
+#### F-8（PARTIAL：mechanism_fixed / 跨 split group-disjoint OPEN——门=任何真实 split draw 之前）
 
 **What（问题与处置）**：审查发现 group-aware 确定性抽签有三条隔离漏洞——(1) eligibility/exploration 缺 group manifest（组清单：把同说话人/会话样本归为一组、以防跨 split 泄漏的映射表）只 warning、(2) manifest 缺 item 时静默退化为 `gid=iid` 单例、(3) confirmatory 只要 exclusion path 非空即过门，且 `force_supersede`（强制顶替旧抽签文件的开关）仍可用——外加代码头"fixed seed equally tamper-evident"错述。处置：**就地修复框架**（头改"replayable, not selection-blind"、具名撤回"equally tamper-evident"，三隔离门代码已落 W1）；跨 split 结构门余项挂 P2/M2。
 
@@ -171,7 +181,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 - **措辞修复**：`deterministic_draw.py:14-15,34` 头改"replayable, not selection-blind"，并**具名撤回**"equally tamper-evident"（点名为 prior/retracted framing）。
 - **三隔离门（代码已落 W1）**：`_validate_group_manifest_coverage` 对全部三种 draw type 硬要求 100% 组覆盖，缺/空/无效组键即 `ValueError`（移除 `gid=iid` 静默单例）；confirmatory 机验其 `exclusion_manifest_paths` 覆盖 exposure_registry 的**全并集**，且 `force_supersede` 对 confirmatory 恒 `ValueError`（create-once）；每 manifest 记 `group_manifest_hash`/`exclusion_definition_hash`/`pool_hash`/`code_sha`。
 - **核验配方**：`python scripts/checks/v42_conformance.py` → `BANNED-EQUALLY-TAMPER-EVIDENT`=PASS（4 处命中全在撤回语境）；`PYTHONPATH=src pytest scripts/baselines/test_deterministic_draw.py -q`（三 draw 两两 disjoint + 100% coverage 门 end-to-end 验证）。
-- **今日追踪**：response v5 §3b/§3e 撤回 tamper-evident；跨 split group-disjoint proof 结构门余项挂 P2/M2。
+- **今日追踪（P0-A 改判）**：response v5 §3b/§3e 撤回 tamper-evident。签署审查 F-S5 坐实一条**本节此前未如实呈现的残余**：跨 manifest 排除只做 item-ID 级（`excluded` 集只装 id、"被排除 id 的 group 归属无关"注释即漏洞本身），prior draw 的 group key 未整组排除——同 speaker 的 item B 仍可入 confirmatory；测试只断言 item 交集为零且 prior 用 identity grouping。修复契约：prior manifest 持久化所用 group manifest（或其 hash+路径），confirmatory 先取 prior groups 并集、再删当前 pool 中属这些 groups 的全部 items，负例测试= A/B 同 speaker、不同 ID、跨 manifest，预期硬失败或 B 整组被排。门=**任何真实 split draw 之前**（P0-B），不是 P2/M2 中途。
 
 #### F-9（DEFERRED@M3）
 
@@ -274,7 +284,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 - **M2 将交付**：规则冻结后做 exact/fuzzy/semantic query-overlap 审计，报告分布而非事后按结果调阈值；q2q 与 raw-doc/q2a 同时保留对照。
 - **今日追踪**：`deferred_not_closed M-7`（gate M2）；proposal §6.4 L238 已登记冻结后描述性审计交付。
 
-#### M-8（FIXED，机制）
+#### M-8（PARTIAL：mechanism_fixed=true / 评审时点 final_release_transaction_executed=false；P0-A 已重执行）
 
 **What（问题与处置）**：审查发现提交状态与发布文字不事务一致——W1 `159b525` 已使标准测试 143 passed，但同次发布仍写"现有 4 errors"；同时 commit subject 写"converged (2 rounds, 0 residual)"而同一 proposal 明列 K-harness/live smoke/lock/REPRODUCE 未完成。处置：**就地修复机制**——`build_release_manifest.py` 记 live SHA+dirty+pytest+checker verdict（永不复制旧报告），§13.4 更新为 159 passed/0 errors 并标旧快照陈旧。
 
@@ -284,6 +294,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 
 - **机制**：`build_release_manifest.py` 记 umbrella+W1 的 SHA/dirty、live `standard_test_entry`（159 passed / returncode 0）、live checker verdict（22 规则 / 0 failed）——**永不复制旧报告**，故快照失真可机械发现；`discrepancy_register.md` item 1&2 记陈旧"4 errors"与"converged/0 residual"措辞范围。
 - **核验配方**：`python scripts/checks/v42_conformance.py` → `BANNED-STALE-FOUR-ERRORS`=PASS（唯一"4 errors"命中在 stale-flagged 语境）；核对 `release_manifest.json:standard_test_entry` = 159 passed / returncode 0。
+- **P0-A 补记（签署审查 E-09/F-S2/F-S3，我方核验属实）**：机制脚本存在≠事务执行——评审时点 manifest 记录 `56364eb`+dirty（早于最终提交三个提交）、prior_exposure/attempt/discrepancy 三哈希全部漂移；已提交 checker JSON 输入 `182f09…` ≠ 最终 proposal `3f0ac5…`；`c7528fe` 提交信息声称的 regeneration 未发生在该提交内。P0-A 修复=按"finalize→commit→clean 核验→对最终输入重跑 pytest+checker→重建 manifest→单独提交 manifest→复核记录哈希仍匹配"顺序重执行，并将该顺序立为发布门（违反即 FAIL，不再只记录后继续签署）。
 
 #### M-9（ADDRESSED）
 
@@ -306,7 +317,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 **How（已充实内容 + 未闭合项 + 何处追踪）**：
 
 - **已机采充实**：prior_exposure 明示 C-ASR-V2 selector 效应量（oracle-headroom 实现率 ~24% snr5 / ~42% clean，MBR/random/length 结果）；**17** 个提示模板；K1-K11 指标族自 **464** 工件（0 读错）；**5** 个 dev 暴露事件（含 LOCKED_HOLDOUT 11.20% overlap 永久降级）；experiment_attempt **574** 行带 status/claim_id/inferred 逐行标注。
-- **未闭合项（gate 如实 NOT_PASS）**：`prior_exposure_registry.json:p0_gate_status` = **NOT_PASS**（`pass_conditions_met=false`）；unmet = config-selection 轨迹（M-6，入 `manual_completion_todo[0]`）+ "独立评审者收到只读快照"（**本报告送达审查者即满足该流程步**）。
+- **未闭合项（gate 如实 NOT_PASS）**：`prior_exposure_registry.json:p0_gate_status` = **NOT_PASS**（`pass_conditions_met=false`）；unmet = config-selection 轨迹（M-6，入 `manual_completion_todo[0]`）+ "独立评审者收到只读快照"——**P0-A 更正（F-S6/F-S7）：报告送达外审不构成该流程步的满足**；该步指人员隔离的独立只读快照审计（IA-1..IA-8 类），在其完成前保持 OPEN，P0 期间不解冻任何会新增选择性信息的 M2 搜索。
 - **核验**：checker `REQUIRED-FOUR-INTEGRITY-REGISTERS`=PASS——**仅验四册存在，绝不断言内容完整**。
 
 ## 4. 我们**没有**做什么，以及为什么
@@ -327,7 +338,7 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 
 1. **F-7 应为 latent 而非现行害**。数据流实证（§1）：生产路径未向 scrub 传 `eval_golds`，scrub 空转、零合法答案被删、磁盘无受损工件。我们**接受该轴设计错误必须修**（机制已在 M1 落地），但请求把它记为**潜伏雷（若未来接线才引爆）**而非"当前已改变研究任务"的现行害——这与审查 §5.1 "未见凭空编造的 confirmatory result"一致。
 2. **E2（SESOI）采较轻但诚实的选项（owner 裁决）**。审查建议由未接触效应值的独立统计人员盲设 SESOI、或改用一套全新数据确证；owner 续28②采**较轻**路径：数值由 owner 从**外部锚点**（Lakens 等价检验 / MCID 传统）设定、口径如实标 **post-observation but externally justified**、并以 prior-exposure register 公开**全部**先验效应观测。我们**如实承认这比盲法轻**、公开种子下的 selection-blindness 残余仍是 contested 敞口（§9.8/§11），不冒充已消解。
-3. **独立性以"外审盖章 + 机器可核登记册"落地，而非人员隔离**。审查建议独立 custodian / 两名非开发者复跑 / 第三方冻结后评分；owner 续24 已否决全员锁死路线（"我们是在做研究而不是做复杂的系统工程"），续28④采**诚实审计**形式 = P0 登记册 + 系统自检 + **本报告呈外部审查者盖章**。我们据实说明：这是**制度形态的差异**，不是把独立性取消；人员级独立评分作为 M4 前的**可选**升级保留（F-3 blinded confirmatory 选项）。
+3. ~~**独立性以"外审盖章 + 机器可核登记册"落地，而非人员隔离**~~ **——本条商榷于 P0-A 撤回（签署审查 F-S6 裁定采纳，owner 续32）**。外审盖章 + 机器登记册是有价值的诚实审计构件，但**不构成**人员隔离的独立完整性审计——同一报告不能一边以此闭合 P0 独立性条件、一边在 §7 承认"不是 independent oversight"。更正后的立场：两类记录并存且不混称（reviewer finding 与 owner exception 各自留档）；证据等级按 M-S1 路线选择（owner 续32：public-deterministic + 如实等级帽 = development/controlled benchmark evidence，不作强 confirmatory 宣称），故人员级独立评分不再是"可选升级"话术——不做它，就不主张需要它的证据等级。
 
 ## 7. 请求（盖章位）
 

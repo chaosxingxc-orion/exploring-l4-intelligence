@@ -1,5 +1,10 @@
 # v4.2 Package Conformance Report (internal consistency check)
 
+> **P0-A（2026-07-13，签署审查 F-S3 处置）：本叙事版正式移出发布证据集。** 其正文数字（12/12、
+> 旧规则集）为历史快照、不再随机读输出更新；发布证据集中 conformance 的唯一权威是
+> `docs/checks/v42-conformance-output.json`（live 机读，meta.inputs 记录被检文件的实际 sha256）。
+> 本文件仅存档规则演进叙事，任何管理汇报不得引用本文件的 PASS 数字。
+
 > **Nature (read first).** This is a **machine-assisted internal consistency check** — an
 > AI-driven *second pass* over the v4.2 document package, executed by a real, re-runnable
 > checker (`scripts/checks/v42_conformance.py`) against a versioned rule manifest

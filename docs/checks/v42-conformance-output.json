@@ -4,7 +4,7 @@
     "rules_version": "v42-remediation/rules-2026-07-13",
     "manifest": "docs/checks/v42-rules.yaml",
     "root": "/mnt/d/chao_workspace/exploring-l4-intelligence",
-    "run_utc": "2026-07-13T03:52:27Z",
+    "run_utc": "2026-07-13T08:31:23Z",
     "self_scope": "machine-assisted internal consistency check (second pass); NOT independent oversight; NOT external peer review; certifies package self-consistency only, not scientific validity",
     "inputs": {
       "docs/checks/v42-rules.yaml": {
@@ -13,12 +13,12 @@
         "role": "rule_manifest"
       },
       "wiki/2026-07-12-research-proposal-v42-external-review.md": {
-        "sha256": "182f093aeafe635fab864a2939e9566d3d4ea18d2779fb82a14f710f8aad4260",
+        "sha256": "3f0ac5b6e5c5e021ffc9b85c10f7b8b9f07a4bd6395de6350bcd8c87e1ba18e0",
         "exists": true,
         "role": "proposal",
-        "lines": 665,
-        "appendix_d_start_line": 656,
-        "appendix_a_start_line": 529
+        "lines": 667,
+        "appendix_d_start_line": 658,
+        "appendix_a_start_line": 531
       },
       "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md": {
         "sha256": "bb8c569ac6cddc8e3f3762ad499f792005154785ba7603b3f0d2bfd1aee1fa60",
@@ -250,7 +250,7 @@
       "verdict": "PASS",
       "n_violations": 0,
       "violations": [],
-      "notes": "atom_count=6 (via yaml_parse, block lines 546-640); m_values=[6]; family_atom_values=[6]",
+      "notes": "atom_count=6 (via yaml_parse, block lines 548-642); m_values=[6]; family_atom_values=[6]",
       "atom_count": 6,
       "count_method": "yaml_parse",
       "m_values": [
