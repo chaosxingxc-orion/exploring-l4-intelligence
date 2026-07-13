@@ -78,6 +78,24 @@ def sha256_of(path: str):
     return h.hexdigest()
 
 
+def sha256_of_blob(repo_root: str, relpath: str):
+    """SHA-256 over the git BLOB bytes at HEAD -- the repo's CANONICAL hash convention
+    (2026-07-13 self-check finding: Windows working trees can hold CRLF copies of
+    LF-normalized text files, so on-disk hashes produce non-reproducible variants that a
+    clean clone cannot verify; `git show HEAD:<path> | sha256sum` always reproduces the
+    blob hash). Returns None when the path is not tracked at HEAD."""
+    try:
+        proc = subprocess.run(
+            ["git", "-C", repo_root, "show", "HEAD:%s" % relpath],
+            capture_output=True, timeout=60,
+        )
+        if proc.returncode != 0:
+            return None
+        return hashlib.sha256(proc.stdout).hexdigest()
+    except Exception:  # pragma: no cover
+        return None
+
+
 def run_standard_test_entry(w1_root: str) -> dict:
     """Runs `PYTHONPATH=src pytest -q` FOR REAL inside W1 and captures the outcome verbatim --
     never copied from a prior/cached report (M-8's exact failure mode: a stale count quoted
@@ -137,22 +155,32 @@ def run_conformance_checker(umbrella_root: str) -> dict:
 
 
 def key_artifact_hashes(umbrella_root: str, w1_root: str) -> dict:
+    """Canonical (git-blob-at-HEAD) hashes of the key artifacts. `hash_basis` records the
+    convention explicitly so a verifier knows to use `git show HEAD:<path> | sha256sum`,
+    never an on-disk read that may see platform EOL variants."""
     candidates = {
-        "docs/corpus.lock.json": os.path.join(umbrella_root, "docs", "corpus.lock.json"),
-        "docs/claim_ledger.yaml": os.path.join(umbrella_root, "docs", "claim_ledger.yaml"),
+        "docs/corpus.lock.json": (umbrella_root, "docs/corpus.lock.json"),
+        "docs/claim_ledger.yaml": (umbrella_root, "docs/claim_ledger.yaml"),
         "docs/integrity/prior_exposure_registry.json":
-            os.path.join(umbrella_root, "docs", "integrity", "prior_exposure_registry.json"),
+            (umbrella_root, "docs/integrity/prior_exposure_registry.json"),
         "docs/integrity/experiment_attempt_registry.jsonl":
-            os.path.join(umbrella_root, "docs", "integrity", "experiment_attempt_registry.jsonl"),
+            (umbrella_root, "docs/integrity/experiment_attempt_registry.jsonl"),
         "docs/integrity/discrepancy_register.md":
-            os.path.join(umbrella_root, "docs", "integrity", "discrepancy_register.md"),
+            (umbrella_root, "docs/integrity/discrepancy_register.md"),
         "projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py":
-            os.path.join(w1_root, "scripts", "knowledge", "corpus_lock.py"),
+            (w1_root, "scripts/knowledge/corpus_lock.py"),
         "projects/speech-mllm-training-free-rl/scripts/baselines/deterministic_draw.py":
-            os.path.join(w1_root, "scripts", "baselines", "deterministic_draw.py"),
+            (w1_root, "scripts/baselines/deterministic_draw.py"),
     }
-    return {rel: {"sha256": sha256_of(abspath), "exists": os.path.isfile(abspath)}
-            for rel, abspath in candidates.items()}
+    out = {}
+    for rel, (repo_root, repo_rel) in candidates.items():
+        blob = sha256_of_blob(repo_root, repo_rel)
+        out[rel] = {
+            "sha256": blob,
+            "hash_basis": "git_blob_at_HEAD" if blob is not None else None,
+            "exists": os.path.isfile(os.path.join(repo_root, repo_rel)),
+        }
+    return out
 
 
 def main() -> int:

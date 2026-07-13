@@ -12,7 +12,11 @@ author: "协调者本人（owner 指令：不委托）"
 ## 1. 三处缺陷与更正（协调者本人造成，如实自认）
 
 1. **R6-M1**：v6 frontmatter 的 `reviewed_snapshot_responded_to` 写的是**被审对象**（整改报告
-   `c7528fe` / sha256 `cd987ff0…`），不是被回复的审查文档本身。正确对象见 §2 `responds_to`。
+   `c7528fe` 快照），不是被回复的审查文档本身。正确对象见 §2 `responds_to`。
+   **哈希正典补注（§5 自检勘误②）**：此前各方（含外审与本文件首版）流通的 `cd987ff0…` 是该快照
+   **CRLF 工作树副本的变体哈希**；正典值（git blob 字节，`git show c7528fe:wiki/2026-07-13-remediation-report-v42-for-reviewer-signoff.md | sha256sum`）
+   = `6c6adba2daf537b67174b68eec31b6db34ba3755b5779eda6cb735896bf28418`，换算关系
+   （LF→CRLF 逐行变换后哈希 = `cd987ff0…`）已逐字节验证。
 2. **R6-M2**：v6 的 `this_response_snapshot: umbrella 7b895b5` 是**证据快照**（信中描述的仓库
    状态），不是回复工件自身的提交——v6 于 `3116898` 才进入 Git，一份文档不可能记录包含它自己
    的未来提交。两个概念现拆分为 `evidence_snapshot` 与 `artifact_snapshot` 两栏。
@@ -114,19 +118,36 @@ response_items:
     gate: BEFORE_STAGE2_UNFREEZE
   - finding_id: M-S5
     disposition: ACCEPT
-    status_before: INCOMPLETE_CONTRACT
+    status_before: PLAUSIBLE_STAGE_INCOMPLETE_CONTRACT
     status_after: OPEN
     evidence: "四臂去相关对照族与预冻阈值的契约登记 @c16900c"
     gate: BEFORE_STAGE2_UNFREEZE
   - finding_id: M-S6
     disposition: ACCEPT
-    status_before: INCOMPLETE_CONTRACT
+    status_before: PLAUSIBLE_STAGE_INCOMPLETE_CONTRACT
     status_after: OPEN
     evidence: "小簇推断模拟契约（DGP 网格/Type-I 上限/独立种子）登记 @c16900c"
     gate: BEFORE_STAGE2_UNFREEZE
 ```
 
-**阶段重校准注**（2026-07-13，owner Stage-1A/B/C 细分 + 重校准审查 `deferred_to_stage2` 清单）：
-上表各 `BEFORE_STAGE2_UNFREEZE` 门的解释现统一为——相应数值/协议在**未来 fresh Stage-2 proposal
-冻结时**落定；而该 proposal 本身以 **Stage-1C 的 owner 收官选题**为前置，Stage-1 期间不做其中任何
-确证机械的施工。当前位置：**Stage-1A**。
+## 4. 阶段重校准注（**非 v6 内容的忠实重发部分**——这是 v6 之后的门位再解释，单列于此）
+
+（2026-07-13，owner Stage-1A/B/C 细分 + 重校准审查 `deferred_to_stage2` 清单）：§3 表中各
+`BEFORE_STAGE2_UNFREEZE` 门的解释现统一为——相应数值/协议在**未来 fresh Stage-2 proposal 冻结时**
+落定；而该 proposal 本身以 **Stage-1C 的 owner 收官选题**为前置，Stage-1 期间不做其中任何确证机械
+的施工。当前位置：**Stage-1A**。（首版曾把本注置于 §3"忠实重发"节内，与该节"无内容变更"的自述
+矛盾——自检勘误③，现单列。）
+
+## 5. 2026-07-13 自检勘误（append-only；自检工作流 wf_45c1f5fe 坐实，协调者裁定后修复）
+
+1. **本文件首版自身失真**：M-S5/M-S6 的 `status_before` 曾被写成 `INCOMPLETE_CONTRACT`，丢失了
+   v6 与签署审查原文的 `PLAUSIBLE_STAGE_` 限定（恰是外审认可门位阶段合理性的语义记号）——已在
+   §3 恢复为 `PLAUSIBLE_STAGE_INCOMPLETE_CONTRACT`。"忠实重发"的首版自己就不忠实，如实记录。
+2. **EOL 哈希缺陷类（系统性）**：`cd987ff0…` 及 release manifest @`7b895b5` 的 3/7 登记册哈希
+   （`7d1a33…`/`7ea5ef…`/`58766320…`）均为 **CRLF 工作树变体**，不能从 clean clone 复现（正典
+   blob 值分别为 `6c6adba2…` 与 `d48e30ad…`/`f05e0efb…`/`c3774be6…`）。处置：哈希正典约定入
+   CLAUDE.md/AGENTS.md 术语表；两仓全部 CRLF 工作树副本已归一为 LF；`build_release_manifest.py`
+   改为对 **git blob 字节**取哈希；manifest 按事务顺序重建。**F-S2 的 status_after 由 CLOSED
+   暂改 PARTIAL**，以正典哈希重建的 manifest wrapper commit（含 7/7 blob 哈希核验输出）为重新
+   闭合的证据。§3 表保持 v6 当时立场的忠实记录不动，现时状态以本节为准。
+3. 阶段重校准注移出 §3（见 §4 说明）。

@@ -172,10 +172,15 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   非绝对量**——只在给定供给 c 下有定义，换供给必须重测；文献对应 best-of-N 理论的 coverage 条件。
 - **oracle**：假想的「总能选中池内最优」的选择器；只作上界参考，永标 headroom，绝不作可部署数字。
 - **selector（选择器）**：不读黄金答案、只凭奖励/打分信号从 K 池挑输出的算子。
+- **U（任务效用）**：单条输出的任务效用记号（ASR 用 −WER、QA 用 EM 等）。Project-Thesis 的同一
+  公式用 **R** 记号（R_selector/R_greedy/R_oracle），两套记法同构；本表统一用 U。
 - **ρ 实现率（realization rate）**：选择器兑现头空的比例，本质是 ρ(c)（供给条件量）。两个变体拆名：
-  **rho_greedy** = (U_sel−U_greedy)/(U_oracle−U_greedy)（Project-Thesis 原定义，锚=部署默认输出）；
+  **rho_greedy** = (U_sel−U_greedy)/(U_oracle−U_greedy)（与 Project-Thesis 的
+  ρ=(R_selector−R_greedy)/(R_oracle−R_greedy) 同构，锚=部署默认输出）；
   **rho_pool** = (U_sel−E[U_pool])/(U_oracle−E[U_pool])（锚=池均值）。分母过小不报比率，
   标 `HEADROOM_TOO_SMALL` 只报绝对量。
+- **delta_mbr / regret**：delta_mbr = U_sel − U_mbr（对 MBR 的绝对增量）；regret = U_oracle − U_sel
+  （距 oracle 的遗憾）。Stage-1 报告与 rho_greedy/rho_pool **四量并列**描述（重校准审查 S1-M2）。
 - **headroom 归因纪律**：selector 实验必须同报该池实测头空。**有头空的 null 才证伪选择器**；
   无头空的 null 只否定该供给配置——不否定选择原理，但也不自动豁免（供给设计须另行问责，
   不得无限换供给重试而不登记）。
@@ -193,6 +198,16 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
 - **信息边界（information boundary）**：测试 item 的 golden transcript/answer/qrel 不得进入 selector、
   reward、prompt、检索或候选构造的任何路径；杠杆分 **read-out**（读出既有能力，允许）与
   **new-info**（注入题目新信息，禁止）两类。
+- **I1 / I2 / I3 / I4（身份候选）**：Stage-1C 待选的科学子问题候选——I1=一般 label-free N-best
+  selector；I2=音频接地的冻结 omni selector；I3=受约束/可弃权、显式检测 Goodhart 拐点的跨任务
+  selector（I1–I3 系重校准审查所拟）；I4=(供给 c, 选择器) 二元组——供给分层的兑现率研究（行使该
+  审查 S1-F2 的"第四个"选项）。均为候选，Stage-1C 收官前不选。
+- **PRE_STAGE2_BLUEPRINT（蓝图素材）**：Stage-1A 期间撰写、无现时效力的未来方案结构草图（如
+  `84c6cf6` 的选择器方向 proposal 草稿）；非 Stage-2 入口、非确证协议。
+- **哈希正典（canonical hash）**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（LF，按
+  `.gitattributes` 规范化；核验命令 `git show <commit>:<path> | sha256sum`）。Windows 工作树 CRLF
+  副本的哈希是**变体**，单独出现不构成证据（2026-07-13 自检工作流坐实的 EOL 缺陷类；变体值须
+  standing 注明与正典的换算关系）。
 
 ## Shared knowledge & memory (README + Wiki)
 

@@ -6,6 +6,24 @@
 
 ---
 
+### 2026-07-13（续33·勘误）· 自检工作流坐实 T+0 包 6 类缺陷（24 报 21 确认）——本条更正续33 的两处失实，原文不改
+
+owner 指令"起工作流系统性自检后再说完成"执行结果：6 镜头敌意检查 + 逐发现对抗核证（3 项误报被
+核证代理驳回），**21 项确认**，协调者逐条裁定后当日修复。**续33 原文两处失实，特此更正**：
+①（FUNDAMENTAL）续33-③"自家数据裸核心 +0.042 vs 检索供给 +0.517"——**+0.517 撤引**：系
+claim ledger 判 INVALID 的 C-T7 泄漏数字（"Absolutely prohibited from citation as positive
+evidence"；干净 T8 复跑 clean_H0=−0.066 null），且与 +0.042（**macro utterance-WER** 口径，
+2026-07-11 更正要求必须带标）跨任务跨量纲不可比。更正后事实：**供给条件性 H(c) 原则现仅由文献
+支撑（coverage/Huang 2025、Snell 2024），无合法自家供给分层测量**——补测属 Stage-1B P0 原型。
+②（MAJOR）续33 Context"直接近邻文献全仓零覆盖坐实"——为假：Goel & Byrne（07-04 survey 引文
+[165]）、ProGRes（引文 [33]+专节）、NoRefER/Stolcke 谱系均有既有覆盖；审查 S1-F1 的真实范围是
+"草稿缺结构化最近邻表"（成立），协调者核验时自行膨胀了主张。其余确认项（M-S5/M-S6 限定词丢失、
+EOL 哈希变体系统缺陷→哈希正典约定+全仓 LF 归一+manifest 改 blob 哈希重建、refinement 计数、
+四量表补齐、C1/C4 落位、I1–I4/PRE_STAGE2_BLUEPRINT 补登）修复详情见
+`2026-07-13-response-v6-correction.md` §5 与 `2026-07-13-stage1a-position-and-recalibration-response.md` §6。
+**教训入库**：引用任何数字前查 claim ledger 状态；(commit,hash) 证据对一律用 git blob 正典；
+"忠实重发"类文件须与原文逐字段 diff 验证而非只验 schema。
+
 ### 2026-07-13（续33）· Stage-1 重校准：owner 五项裁决——Stage-1A/B/C 细分、收词纪律、供给条件性 H(c)、全盘接受重校准审查、T+0 记录修复
 
 **Context.** 重校准审查（`2026-07-13-response-v6-stage1-recalibrated-review.md`，sha256 `b6268c80…`）

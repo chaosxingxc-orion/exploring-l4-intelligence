@@ -72,11 +72,16 @@ artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): th
 _**2026-07-13 recalibration (Decision-Log 续33, supersedes the 续32 note below on stage identity)**:
 current position = **Stage-1A (problem scoping)** under the owner's Stage-1A/B/C subdivision — the
 selector-realization direction (canonical name for the reviewer-coined "A-SEL"; glossary landed in
-CLAUDE.md/AGENTS.md @`f57cd81`) is a confirmed working DIRECTION, not a closed problem definition.
+CLAUDE.md/AGENTS.md @`f57cd81`) is graded **CONDITIONALLY VIABLE** as a working direction by that
+review (its exact verdict token — not "confirmed"; problem definition NOT closed).
 The 84c6cf6 "Stage-2 proposal v0.1" is re-identified as **PRE_STAGE2_BLUEPRINT** (stage-2 label was
 premature; program code W1-ASEL-S2-001 retired). Oracle headroom is ruled a **supply-conditional
-quantity H(c)** with a null-attribution discipline (owner ruling, survey-verified: coverage /
-Huang ICML 2025, Snell 2024, in-repo +0.042 bare vs +0.517 supplied). Next Stage-1A work = the
+quantity H(c)** with a null-attribution discipline (owner ruling; literature-supported: coverage /
+Huang ICML 2025, Snell 2024). **Self-check erratum (wf_45c1f5fe):** an earlier version of this note
+cited "in-repo +0.042 bare vs +0.517 supplied" — the +0.517 is the claim-ledger-INVALID C-T7 number
+(answer leakage; citation as positive evidence prohibited; clean T8 rerun = −0.066 null), and +0.042
+must carry its **macro utterance-WER** label (corpus-WER counterpart +0.0296). No valid in-repo
+supply-stratified H(c) measurement exists yet — producing one is the Stage-1B P0 prototype's job. Next Stage-1A work = the
 survey coverage gate (8 method families incl. MBR/N-best rescoring/reference-free QE ancestors,
 2-round saturation, I1–I4 identity candidates with kill conditions). Stage-1B prototypes NOT yet
 released; M2 stays frozen._
