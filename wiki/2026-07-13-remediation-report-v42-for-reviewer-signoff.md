@@ -96,3 +96,37 @@ integrity_stance: "FFP NOT ESTABLISHED / QRP 高风险 / 独立诚实审计已�
 ```
 
 > **范围声明（按 M-9 设计重复）**：本报告 + 其引用的 checker / 登记册是**机器辅助的内部第二遍 + 呈外审盖章**，**不是**独立监督、**不是**已完成的独立完整性审计。审查的完整性裁决（FFP 未成立、QRP 高风险、需独立审计）**依然成立并被采纳**；绿色 checker、159 passed、22/22 PASS 均**不得**被读作科学有效性、M1 闭合或确证就绪。
+
+---
+
+## 附录 · 只读证据快照（机器生成，供第三方核验）
+
+> 生成方式：对下表每一文件计算 SHA-256（脚本逻辑等价于 `Get-FileHash -Algorithm SHA256` / `sha256sum`）；两仓 HEAD 以 `git rev-parse HEAD` 取得。**审查者核验路径**：clone 两仓至下列 HEAD → 对每行重算哈希 → 与本表逐行比对；任何不符即构成"证据不符"退回理由（§7）。本报告自身不在表内（追加本附录会改变自身哈希）；其权威版本以伞仓 git 历史为准。
+
+伞仓 HEAD: `e01c0c02ce22` · W1 HEAD: `ab1c68017671`
+
+| 仓 | 工件 | SHA-256 | bytes |
+|---|---|---|---|
+| 伞仓 | `docs/corpus.lock.json` | `192dd2d0c9a5b5a0fc35b9f7b6a07cd0eb8b1dcdf9452fe4b032c63957ea0c79` | 1541 |
+| 伞仓 | `docs/integrity/prior_exposure_registry.json` | `7d1a33dae9dee0367986392a74fac82ab581254f470cffd4605432f09586b3c2` | 77790 |
+| 伞仓 | `docs/integrity/experiment_attempt_registry.jsonl` | `7ea5ef199a3376bb61a9e25beb6873cfbe2a10b43f9442f9dfb8171f749f7a49` | 250595 |
+| 伞仓 | `docs/integrity/discrepancy_register.md` | `50440434d0ccc822d51ac100accbcdac7e537554dfd5f7057655aa722adb6dde` | 4222 |
+| 伞仓 | `docs/integrity/release_manifest.json` | `8bf43ab147a8542cdbec931bb2131fd5ab5a5fc1b685fe430dcf9e7e4f194163` | 4497 |
+| 伞仓 | `docs/integrity/append_only_erratum_for_v42.md` | `230c1b6ce6403648db10a98e122070a425c763a42725033bec0dae7281de59fd` | 6025 |
+| 伞仓 | `docs/integrity/remediation_evidence.yaml` | `100925458507618295124076f21c57ff13070733a15d8d8429435b11ac033e23` | 15395 |
+| 伞仓 | `docs/checks/v42-rules.yaml` | `b71d92fad60af6ccf657b771fd0e1f81ff75d1eeedb003a17ddb47d0f6d8f45a` | 19052 |
+| 伞仓 | `docs/checks/v42-conformance-output.json` | `2d30c98ca71a17add09dc545f72d5932acc39dc0ae42574caecfd212586a5833` | 13088 |
+| 伞仓 | `docs/checks/v42-environment.txt` | `ff931aad7326d5baee2a5742aecb828d4c4cea9da86196afa99c2df32b326c6e` | 752 |
+| 伞仓 | `docs/checks/v42-conformance-report.md` | `7aa4a996361c536218a446a6fdad8b8ce84e5481851d270e55eea20d2444ba85` | 14428 |
+| 伞仓 | `scripts/checks/v42_conformance.py` | `ab5cad5f04899e04124d10e35e15e25555f8219cc23da0d7cb05cb1d084e57ce` | 27241 |
+| 伞仓 | `scripts/checks/build_registers.py` | `1e49981442775895b90d8affbc31e51e0e0f897ec8cfefc589ec27eadff163f9` | 39863 |
+| 伞仓 | `scripts/checks/build_release_manifest.py` | `da8bfb36ba477473c2426d1d1498e0b01775e3b4fa860075abf88b24aa61a4e0` | 10615 |
+| 伞仓 | `wiki/2026-07-12-research-proposal-v42-external-review.md` | `3f0ac5b6e5c5e021ffc9b85c10f7b8b9f07a4bd6395de6350bcd8c87e1ba18e0` | 126124 |
+| 伞仓 | `wiki/2026-07-13-v42-doctoral-adversarial-integrity-review.md` | `df594f546d3fd263994eb6009274e30392181909d3babaf73a5deaec3324b10b` | 32416 |
+| W1 | `scripts/knowledge/corpus_lock.py` | `f9ab4bc3836275cf01090ebec1d0451e7aec090267e55037cdd895e5f17aaf48` | 19626 |
+| W1 | `scripts/knowledge/test_corpus_lock.py` | `c220d5512eb73f9f9516fa8e3d232e2e7e680d46ac5207fb71ce8b977226e01c` | 11279 |
+| W1 | `scripts/knowledge/test_corpus_audit_axes.py` | `eb974f39a1fcfaacb7356e813d563c456dce70d92b4e59a99bb942359798d371` | 14747 |
+| W1 | `scripts/knowledge/kb_batch_build.py` | `7569a1569c0b2c89762d2a579b4642f53a85ac408ca6fa5cdc881cb87d4df5c3` | 84989 |
+| W1 | `scripts/knowledge/kb_embed.py` | `fbd838b6bf2e5927c2b19b88852cf8d88098b70dad643038c756f9f9e503588d` | 54293 |
+| W1 | `scripts/knowledge/build_full_corpus.py` | `f1330d7e7c1fe48293fa9f09a151098a4efc7d0aad95a1f5b4ddeb8a1feec16f` | 13734 |
+| W1 | `scripts/baselines/deterministic_draw.py` | `7e6444ddf8ebbb10d883296bf302a5a26a6c36b42b32302fead9af3eb3835fe0` | 54936 |
