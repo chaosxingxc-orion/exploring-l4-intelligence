@@ -115,6 +115,7 @@ signoff: { owner: "SIGNED — AskUserQuestion 治理裁决（详 §9）", date: 
 | 日期 | 身份 | 变更 | 触发论文/事件 | novelty 判定是否改变 | 登记人 |
 |---|---|---|---|---|---|
 | 2026-07-14（预置，签核前既有） | UMBRELLA | 「advantage→next action」锐化（首现续36） | Survey v2 猎杀轮 | 否 | 协调者 |
+| 2026-07-14（修正案 №1，待 owner 重签生效） | strict-I2 / UMBRELLA / same-selector | δ_corr 拆名（选择重合移出语义）+ strict-I2 kill-if 重写为两独立测试（音频接地 matched-controls 版 / 同错×无互补）+ §7 对 UMBRELLA 覆盖撤回 | 第三轮复审 §6.3/9.2（构念替换裁定） | 否（判据可执行化 + 合同适用范围更正，不动任何身份定义与占据裁决） | 协调者 |
 
 ## 9. Owner 签核
 

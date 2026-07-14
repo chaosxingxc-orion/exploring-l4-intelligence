@@ -193,3 +193,11 @@ tasks**, so it will be discussed only when we reach that stage. This is the conc
 2.1 每个方案带 C1/C2 收敛定理(基线可证单调提升);2.2 先证"固定 q₀ 的 prompt 空间受限"(缺的 (b) 定理),
 再证 agentic 扩展在 C1–C4 约束下收敛到严格更高的增益——**这正是 deep-review 的前置 P1 与关闭的重开条件 r2
 (同行评审级非可分分解界),在内部机器验证完成**。§4 四个待议问题请你定夺。
+
+---
+
+> **命名注记（2026-07-14，修正案 №1）**：本文 TH2a 处的字面名「achievable error-decorrelation
+> δ_corr」与其极限语义（δ_corr→0 ⇒ 收敛向 oracle）存在命名方向张力——该量实为**残余误差相关**
+> （越小越好）。第三轮博导复审裁定后，δ_corr 仅保留此原义，其经验估计对象=`error_corr`；
+> 「选择重合」永久移出该符号语义。拆名四量与 strict-I2 kill-if 重写见
+> `2026-07-14-identity-contracts-amendment-1.md`（本注为 dated 追加，原文未改）。

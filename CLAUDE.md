@@ -202,6 +202,11 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   selector；I2=音频接地的冻结 omni selector；I3=受约束/可弃权、显式检测 Goodhart 拐点的跨任务
   selector（I1–I3 系重校准审查所拟）；I4=(供给 c, 选择器) 二元组——供给分层的兑现率研究（行使该
   审查 S1-F2 的"第四个"选项）。均为候选，Stage-1C 收官前不选。
+- **δ_corr 拆名警示（同名异构，修正案 №1）**：`δ_corr` 只保留 TH2a 理论原义=**残余误差相关**
+  （越小越近 oracle 收敛），经验估计对象=`error_corr`（有头空 item 上错误指示的 φ 相关）。
+  「选择重合」永久移出该符号——拆名四量：`selection_overlap`（仅描述）/`error_corr`/
+  `conditional_error_mi`/`complementary_gain`（router 上界增益）。曾被误操作化为「重合>90%⇒kill」，
+  第三轮复审裁定构念替换（2026-07-14-identity-contracts-amendment-1.md）。
 - **strict-I2 / 同核曲面选择器（= I2∩I4 合取）**：同一冻结 omni 既作生成器、又以**自身**音频接地
   信号作打分器，且以 ρ(c) 兑现面刻画——即 I2 与 I4 的合取身份。构件出处均早于 Survey v2 猎杀：
   同核双系统+δ_corr（TH2a，2026-07-05）、ρ 面（owner 2026-07-11 签署/续34）、own-signal 生存条件
