@@ -7,7 +7,7 @@ sequencing: "与 claim-ledger-v1 同批交付（遵 RESP-02 §3.5 顺序：台�
 role: "P1 序列 identity-freeze 步骤 + open item 3 same-selector contract 合并交付；1B-0 探针协议与 round-2 检索协议的上游输入"
 freeze_discipline: "冻结先于 round-2 检索与 1B 探针（反合取洗白：先冻结定义，再看新邻居）；每份合同带出处日期链"
 generated_by: "Claude Fable 5 主会话（基于续34–40 正典状态起草）"
-signoff: { owner: PENDING, date: null }
+signoff: { owner: "SIGNED — AskUserQuestion 治理裁决（详 §9）", date: "2026-07-14" }
 ---
 
 # 候选身份合同 v1（六份）+ same-selector contract
