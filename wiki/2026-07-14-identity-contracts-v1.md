@@ -86,7 +86,8 @@ signoff: { owner: PENDING, date: null }
   frozen core + agent 实际接触音频 + reward/advantage 引导下一步动作。**负例**（决策包既有）：
   AudioToolAgent 2510.02995（占 system 格但 agent 不接触音频、无 reward-guided K-pool selection）、
   AuTAgent（训练）、JitRL（纯文本）。
-- **预登记坍缩风险**：IAD 2504.01931（agentic loop 仅胜 one-shot BoN ~3–4pt）。
+- **预登记坍缩风险**：IAD 2504.01931（agentic loop 胜 one-shot BoN：Sketch2Code/Text2SQL ~3–4pt，
+  WebShop 达 8–10%——数据集依赖，勿只引低端；claim-ledger #10）。
 - **kill-if**：等预算下 loop ≤ one-shot BoN（续40 四探针不覆盖此测试——留 Stage-1C/后续实验）。
 - **pivot-if**（决策包既有）：loop ≈ 一次性 rerank → 只是 test-time compute，非新 agentic-RL 系统。
 

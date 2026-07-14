@@ -45,7 +45,12 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    15 敌意 lane / SEARCH 218 + FETCH 87（勿合称"305 查询"）/ **94 记录簇（v1 规则集,113→110→104→94,
    `~93` 不可机械重现）;census v1 已做（续40 批次A）：92 resolved / 2 AMBIGUOUS〔P-0016 误并簇、
    P-0084 KIT=I4 最近邻双候选——双审最高优先〕/ 36 versions pinned / 零跨簇碰撞,
-   CENSUS_V1_SINGLE_PASS_AI（人工双审待 P1）,工件 `wiki/survey/2026-07-14-canonical-census/`**。两轮博导审查均已核验+逐条
+   CENSUS_V1_SINGLE_PASS_AI（人工双审待 P1）,工件 `wiki/survey/2026-07-14-canonical-census/`**。
+   **claim-ledger v1 已建（P0-R3/R7,批次B）**：44 行（35 全文定位/7 摘要/2 不可达）+ 算子普查表,
+   **43 条 discrepancy=候选更正**,承重发现：KIT ST oracle 实为 +6.11（我方误写 +2.0）且其 label-free
+   兑现在 SQA/SSUM 为**负**（仅 ASR 正兑现）——P-0084 歧义借数字对齐解=2606.04730;JudgeBoN 的
+   Recovery 锚=池均值,只formalize rho_pool 非 rho_greedy;ernez 80%=置信水平非覆盖率（I3 格候选更正）。
+   工件 `wiki/survey/2026-07-14-claim-ledger-v1/`,CLAIM_LEDGER_V1_SINGLE_PASS_AI,双审待 P1。两轮博导审查均已核验+逐条
    回应：RESP-01 `2026-07-14-survey-v2-response-and-p0-remediation.md`（其完成度声明/94 标签/全局
    token/签署块已被 RESP-02 supersede）+ **RESP-02 `2026-07-14-p0r-response-to-remediation-rereview.md`
    （现行有效,含按身份索引的最强结论表 §3.3 与三线分签）**。bundle
