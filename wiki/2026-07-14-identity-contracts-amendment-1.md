@@ -4,7 +4,7 @@ title: 身份合同修正案 №1 —— δ_corr 拆名、strict-I2 kill-if 重�
 date: 2026-07-14
 amends: "wiki/2026-07-14-identity-contracts-v1.md（FROZEN@dce5c79，sha256(git blob)=1338f6b16f5409022b0a8193c5e71729dcf65ba78f1fa41b3645e642efc208b1）——正文条款一字不改；§8 日志按其自身规则追加一行；生效以 owner 重签为准"
 trigger: "第三轮博导复审（收档 a06a498）§6.3 / §9.2 / §9.7：δ_corr 同名异义（理论=误差去相关；合同/探针=选择重合>90%）使 strict-I2 kill-if 在数学与构念上不可执行；same-selector contract 对 UMBRELLA 的『环内每一步』覆盖无定义对象；C1/C4 终验与探针授权混签"
-status: DRAFT_FOR_OWNER_RESIGN — 复审明示此类变更改判据，必须走 amendment + owner 重签，不得作执行层小参数
+status: EFFECTIVE — owner 于 2026-07-14 以两次独立 AskUserQuestion 裁决分栏签署（§E 主签 + §D Integrity gate 各自落笔，未混栏）；治理性签署，非审计签署
 posthoc_log_entry: "已按合同 §8 规则同步登记：变更=判据修正（kill-if 可执行化），触发=第三轮复审，novelty 判定不变"
 generated_by: "Claude Fable 5 主会话（依复审 §6.3 拆名清单起草；构念论证引 JudgeBoN within-prompt 教训）"
 signoff: { owner: PENDING_RESIGN, date: null }
@@ -87,7 +87,8 @@ owner 确认：C1 = CENSUS_COMPLETE_WITH_REGISTERED_PERMANENT_GAP（config-selec
     = a3999861674b500e40c4cd24b5f49c1a88c4882c3b6e37d8e35484bb4a663a25
   docs/integrity/2026-07-14-c4-negative-results-census-draft.md
     = 4ae58ae3f320f3407fa3b25960ce6c02879b7f304ec2d5c4aa13fc040e05c5ec
-owner: ____________   date: ____________
+owner: 已签——2026-07-14，AskUserQuestion 第二栏独立裁决（「终验签收」）；C1/C4 就此正式关闭，
+Stage-1B 诚信前置满足（探针开机另需 Gate C Protocol gate）
 
 【Protocol gate —— 留待 Gate C，冻结 run manifest 后单独签】
 对象 = 探针协议 v2 + frozen run manifest 的 exact hash。冻结项 = 复审 §9.5/9.6 全部前置项
@@ -107,5 +108,6 @@ owner: PENDING_GATE_C
 重签语义：仅生效 A–D 条款文本；合同 v1 其余条款不变；§8 post-hoc 日志已同步登记本次变更。
 C1/C4 终验不由本栏承载——owner 须在 §D 的 Integrity gate 栏单独落笔（两栏可同时签,各自独立）。
 Protocol gate 仍留 Gate C。
-owner: ____________   date: ____________
+owner: 已签——2026-07-14，AskUserQuestion 第一栏独立裁决（「重签生效」）；A–D 条款即时生效，
+合同 §8 日志行转正，探针协议 v1 正式作废（v2 于 Gate C 重写）
 ```

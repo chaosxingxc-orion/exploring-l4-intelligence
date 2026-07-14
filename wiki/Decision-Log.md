@@ -6,6 +6,26 @@
 
 ---
 
+### 2026-07-14（续43）· Gate A 收口：census v2 + ledger v2 落地；修正案 №1 两栏分签生效；C1/C4 正式关闭
+
+**构建（两条互补工作流,各一 build 代理 API 失速但产物互补零冲突）.** census v2（commit `28ad858`）：
+94 簇→**95 works** 双表,P-0016 拆二、P-0084=NUMERIC_FINGERPRINT_TABLE3;**94 RESOLVED + 1 如实
+UNRESOLVED**（W-0014）;83/95 版本钉、95/95 全作者;venue-native ID 规则修正案入档。ledger v2：
+**62 行**一 claim×一 work×一 span;discrepancy 五级 NONE 20/MINOR 19/**MATERIAL 15/CRITICAL 2**/
+UNVERIFIED 6（取代已撤回的"43"）;CRITICAL 2=ProGRes/TAP-GER 推翻旧 kill-I1 DIRECT。11 丢弃明细
+零不可恢复。**纪律实践**：构建代理散文两处夸大（版本钉 94→实测 83、resolved 95→实测 94）被协调者
+数据重算当场拦截并更正入档——headline 只出自机器重算。
+
+**签署（owner 两次独立 AskUserQuestion,分栏各签,未混栏——§9.7 纪律落地）.** ① 修正案 №1 主签
+（§E）：δ_corr 拆名四量、strict-I2 kill-if 重写为两独立测试、UMBRELLA 移出 same-selector 覆盖、
+签字块拆分——**即时生效**,合同 §8 日志行转正,探针协议 v1 正式作废;② Integrity gate（§D）：
+**C1/C4 正式关闭**（含 config-selection 永久缺口登记）,Stage-1B 诚信前置满足。RESP-04
+`wiki/2026-07-14-resp04-gate-a-execution.md`（provenance 双锚更正入 P0-R8 机检项）。
+
+**Gate A 残留**：16 行 PIN_PENDING 版本 join + 验收抽样（另一 reviewer 抽 10 works+全部
+MATERIAL/CRITICAL+全部摘要级承重行）。**下一步=Gate B**（query 实例化+PRESS+领域 venue+
+**P0-R8 校验器,不可延期**）。round-2 与 1B 维持零执行。
+
 ### 2026-07-14（续42）· 第三轮复审接受（零抗辩）：P0-R 计分下调；协调者第三次计数升格自纠；Gate A 授权执行
 
 **复审（收档 `a06a498`,RETURN_FOR_MAJOR_REVISION）**：哈希全真、四项自我纠错外部抽核全对
