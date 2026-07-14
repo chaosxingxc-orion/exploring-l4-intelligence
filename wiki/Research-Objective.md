@@ -42,8 +42,10 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 ## Open items（live）
 
 1. **Survey v2 = ROUND1_SCOUT_COMPLETE；P0 整改 = 2 CLOSED + 6 PARTIAL（再复审拒签已接受,续39）**：
-   15 敌意 lane / SEARCH 218 + FETCH 87（勿合称"305 查询"）/ **94 记录簇（v1 规则集,113→110→104→94;
-   非 canonical work census——census=P0-R2 待做,`~93` 不可机械重现）**。两轮博导审查均已核验+逐条
+   15 敌意 lane / SEARCH 218 + FETCH 87（勿合称"305 查询"）/ **94 记录簇（v1 规则集,113→110→104→94,
+   `~93` 不可机械重现）;census v1 已做（续40 批次A）：92 resolved / 2 AMBIGUOUS〔P-0016 误并簇、
+   P-0084 KIT=I4 最近邻双候选——双审最高优先〕/ 36 versions pinned / 零跨簇碰撞,
+   CENSUS_V1_SINGLE_PASS_AI（人工双审待 P1）,工件 `wiki/survey/2026-07-14-canonical-census/`**。两轮博导审查均已核验+逐条
    回应：RESP-01 `2026-07-14-survey-v2-response-and-p0-remediation.md`（其完成度声明/94 标签/全局
    token/签署块已被 RESP-02 supersede）+ **RESP-02 `2026-07-14-p0r-response-to-remediation-rereview.md`
    （现行有效,含按身份索引的最强结论表 §3.3 与三线分签）**。bundle
