@@ -6,6 +6,23 @@
 
 ---
 
+### 2026-07-14（续37）· 知识栈选型评审裁决：全部搁置（SHELVE-ALL），Stage-1C 收官后再议
+
+**对象.** 收到的《AI 协同 Survey 知识栈开源实现选型审查》（推荐 llm-wiki-compiler 带 kill 条件的
+两天隔离试点 + Zotero/OpenAlex 分层栈；收档 commit `b41f9f8`）。
+
+**核验.** 六镜头敌意工作流（wf_ac8220be-dd5，6 agents/557k tokens）+ 协调者亲自复核 6 项承重事实
+（上游 repo/v1.0.0、沙箱 HEAD、entities.ts 门差异、actor-identity advisory、claim_ledger SSOT 被忽略、
+OpenAlex 计费）。**事实层全部立住、零编造**；但 3 P0（时机/大工件三问全不过且 5 对象预设未选的
+I1–I4；owner 门无法运行时强制 + 工期 3–5 倍低估；试点协议被 §9 自己的已知偏差必然触发 kill）
++ 15 P1（存量 claim_ledger 零盘点、收词违规 40+、OpenAlex 计费遗漏、审计/锁定 commit 错位等）。
+
+**裁决（owner 亲答）.** **全部搁置**——试点不批，协调者建议的 schema-first 最小实现也不启动；
+评审留档为选型参考。复活四门（时机/顺序/规格/裁决）与术语过渡规则见
+`wiki/2026-07-14-response-to-knowledge-stack-evaluation.md`；镜头全文证据
+`docs/checks/2026-07-14-knowledge-stack-eval-sixlens-adversarial-review.json`。
+**关键路径不变：Stage-1C 选题 + C1/C4。**
+
 ### 2026-07-14（续36）· Survey v2 完成（调研收官）：I1 killed、I4 最强空位；Stage-1C 决策包待 owner
 
 **执行（owner 授权自主跑到"调研完成"；academic skills + Workflow；提交前敌意自检每轮到零）.**

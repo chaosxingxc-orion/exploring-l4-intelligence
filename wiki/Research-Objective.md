@@ -2,7 +2,7 @@
 title: "Research Objective & Current State — 日常加载的唯一现状入口（热层）"
 role: "认知层：现状/研究对象/约束/open items/取代索引的单一极简入口。派生自 Decision-Log（审计层），可重建，非唯一记录。被取代的条目掉出本文件（在 archive/ 与 Decision-Log 里）。"
 maintained: "每有取代关系变化即更新本文件；新决策先 append 进 Decision-Log 再反映到此。"
-last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-14 (Survey-v2 batch-A)."
+last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-14 (续37 knowledge-stack adjudication)."
 ---
 
 # Research Objective & Current State
@@ -43,6 +43,10 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    跨任务不可固定处显式标 task-specific。
 4. **Stage-1C 决策包**：I1–I4 kill/pivot/proceed dossier + 供给收益/selector 收益分解 + 预算公平性 +
    可证伪三结论（proceed/pivot/kill）;**agentic-loop vs 一次性 rerank** 作为开放的 Stage-1C 问题。
+5. **知识栈选型 = PARKED（续37）**：外来评审（llm-wiki-compiler 试点提案）经六镜头敌意复核后
+   owner 裁决**全部搁置**（含 schema-first）,Stage-1C 收官后按四门复活（时机/顺序/规格/裁决）;
+   回应 `2026-07-14-response-to-knowledge-stack-evaluation.md`。其新造代号（T0–T4 信任层、方案 A 等）
+   **未登记**,引用须带限定语（勿与 T0–T7 探针编号、survey-v2 评审 Proposal A 混同）。
 
 （已闭/移除：reviewer response 已提交 `0be1285` + 接受 reassessment 的 response-v2;冷热归档已执行
 `34024fc`,50 文档入 archive/。）
