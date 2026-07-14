@@ -41,16 +41,21 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 
 ## Open items（live）
 
-1. **Survey v2 = ROUND1_SCOUT_COMPLETE；P0 整改 = 2 CLOSED + 6 PARTIAL（再复审拒签已接受,续39）**：
-   15 敌意 lane / SEARCH 218 + FETCH 87（勿合称"305 查询"）/ **94 记录簇（v1 规则集,113→110→104→94,
-   `~93` 不可机械重现）;census v1 已做（续40 批次A）：92 resolved / 2 AMBIGUOUS〔P-0016 误并簇、
-   P-0084 KIT=I4 最近邻双候选——双审最高优先〕/ 36 versions pinned / 零跨簇碰撞,
-   CENSUS_V1_SINGLE_PASS_AI（人工双审待 P1）,工件 `wiki/survey/2026-07-14-canonical-census/`**。
-   **claim-ledger v1 已建（P0-R3/R7,批次B）**：44 行（35 全文定位/7 摘要/2 不可达）+ 算子普查表,
-   **43 条 discrepancy=候选更正**,承重发现：KIT ST oracle 实为 +6.11（我方误写 +2.0）且其 label-free
-   兑现在 SQA/SSUM 为**负**（仅 ASR 正兑现）——P-0084 歧义借数字对齐解=2606.04730;JudgeBoN 的
-   Recovery 锚=池均值,只formalize rho_pool 非 rho_greedy;ernez 80%=置信水平非覆盖率（I3 格候选更正）。
-   工件 `wiki/survey/2026-07-14-claim-ledger-v1/`,CLAIM_LEDGER_V1_SINGLE_PASS_AI,双审待 P1。两轮博导审查均已核验+逐条
+1. **Survey v2 = ROUND1_SCOUT_COMPLETE；P0-R 计分（第三轮复审 a06a498,续42 接受零抗辩）=
+   R1 CLOSED(附新 provenance 发现)/R4 CLOSED_STRUCTURE_ONLY/R2·R3·R5·R7 PARTIAL/R6 REOPENED(δ_corr)/
+   R8 NOT_DONE**。15 敌意 lane / SEARCH 218 + FETCH 87 / 94 记录簇（`~93` 不可机械重现）。
+   **census v1 = 单遍 AI**：〔勿再引"92 精确 resolved"——其中 6 条无 canonical ID(P-0001/2/9/14/54/62,
+   待 ID 规则修正案)、56 条版本未钉、全作者/内容哈希 0/94〕;P-0016 判拆二 work、P-0084 判数字指纹
+   落 2606.04730（复审已裁,census v2 生效）。**ledger v1 = 单遍 AI**：44 行〔勿再引"35 全文/43
+   discrepancy"——5 行综合/摘要误标全文级;discrepancy 非空 43 中 11 条明示无实质问题,五级枚举重算
+   =Gate A;11 条提取期丢弃明细已从工作流 journal 恢复入库 docs/checks/〕。承重更正维持有效：KIT ST
+   oracle +6.11、SQA/SSUM 负兑现;JudgeBoN=rho_pool;ernez 置信/覆盖。**do_not_claim（复审 §13,机器块）**：
+   P0_R_COMPLETE / 92_EXACT / 35_FULLTEXT / 43_DISCREPANCIES / PREREQUISITES_MET / δ_corr=选择重合。
+   **Gate 路线（续42 接受）**：A 零 GPU 记录修复（census v2 簇-work 分表、ledger v2 一 claim×一 work×
+   一 span、δ_corr 拆名合同修正案→owner 重签、C1/C4 拆签）→ B round-2 查询前（实例化 query+PRESS+
+   领域 venue+P0-R8 校验器,**不可再延期**）→ C 探针开机前（P-γ 改测条件互补性、P-β BLEU 主臂、
+   P-δ 冻结 c1、**换 dev split 防 holdout 污染**、冻结 manifest 分两栏签）→ D 运行后。
+   round-2 与 1B 在 Gate B/C 关闭前不执行。两轮博导审查均已核验+逐条
    回应：RESP-01 `2026-07-14-survey-v2-response-and-p0-remediation.md`（其完成度声明/94 标签/全局
    token/签署块已被 RESP-02 supersede）+ **RESP-02 `2026-07-14-p0r-response-to-remediation-rereview.md`
    （现行有效,含按身份索引的最强结论表 §3.3 与三线分签）**。bundle

@@ -6,6 +6,27 @@
 
 ---
 
+### 2026-07-14（续42）· 第三轮复审接受（零抗辩）：P0-R 计分下调；协调者第三次计数升格自纠；Gate A 授权执行
+
+**复审（收档 `a06a498`,RETURN_FOR_MAJOR_REVISION）**：哈希全真、四项自我纠错外部抽核全对
+（KIT/JudgeBoN/Ernez/Audio-Mind,多数损害我方叙事——FFP 不成立的关键反证）;我方四处旧抗辩**全部
+获裁（半）胜**（WITHIN_LOGGED_SCOPE=reviewer 诱导善意用词;flow counts=永久失败;身份索引方案
+获采纳）。但五承重缺陷坐实——协调者逐条亲验精确命中：「43 条 discrepancy」实为非空字段计数
+（**11 条以 None 开头**）;「35 全文」含 5 行摘要/综合误标;「92 resolved」含 6 条无 canonical ID
+（P-0001/2/9/14/54/62）+56 条版本未钉;送审稿快照字段语义误导（证据锚 78d0485≠送审锚 f5c736e）;
+**δ_corr 构念替换**（选择重合≠误差相关,strict-I2 kill-if 数学上不可执行——合同须修正案重签）。
+**协调者自我裁定：同构计数升格第三次**,根治=P0-R8 机器校验门,升为不可延期。
+
+**科学修正接受**：P-γ echo-logprob 或系已占据 self-likelihood 机制,改测条件互补性
+（overlap/error_corr/complementary_gain 拆名）;P-β 主臂改文献可比 BLEU 效用（1−WER 降 sensitivity
+臂）;P-δ 签批前冻结 c1;**Stage-1B 改用 dev split（LibriSpeech test-other 系 publication holdout,
+探索触碰即污染）**;C1/C4 终验与探针授权拆两个 exact-hash 签字块。
+
+**owner 裁决（亲答）**：接受裁决零抗辩（仅两注记）,立即执行 Gate A（零 GPU）。**已完成**：复审
+收档、两工作流 journal 入库 docs/checks/（provenance 补链——**11 条提取丢弃明细在 journal 中完整
+恢复**,分母缺口可闭）、热层 do_not_claim 合规改写。**进行中**：census v2 / ledger v2 / 合同修正案
+（待 owner 重签）/ RESP-04 回应信。Gate B/C 关闭前 round-2 与 1B 不执行。
+
 ### 2026-07-14（续41）· 身份合同 v1 + same-selector contract 冻结（owner 签核）；claim-ledger v1 落地（43 discrepancy）
 
 **批次 B/C 交付.** claim-ledger v1（P0-R3/R7，commit `a6a2452`）：44 行（35 全文定位/7 摘要/2 不可达，
