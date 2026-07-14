@@ -206,8 +206,10 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   信号作打分器，且以 ρ(c) 兑现面刻画——即 I2 与 I4 的合取身份。构件出处均早于 Survey v2 猎杀：
   同核双系统+δ_corr（TH2a，2026-07-05）、ρ 面（owner 2026-07-11 签署/续34）、own-signal 生存条件
   （I2 拟名当刻，重校准审查 2026-07-13）；「strict-I2」**命名**首现 2026-07-14 Survey v2 工件（补登
-  于 SURVEY-RESP-2026-07-14-01，续38）。注意：bare-I2 的**机制**已被 scaling-auditory 2503.23395 的
-  同核 audio-conditioned beam log-lik 占据（格局混合：ST/SLU 格仍 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE）。
+  于 SURVEY-RESP-2026-07-14-01，续38）。再复审裁定（续39 接受）：**POST_HOC_NARROWED_CANDIDATE，
+  post_hoc_created_at=2026-07-14**——不得以「经攻击幸存」框架引用。bare-I2 的**机制**已被
+  scaling-auditory 2503.23395 的同核 audio-conditioned beam log-lik 占据
+  （DIRECT_OCCUPIED_AT_MECHANISM_LEVEL；任务格覆盖 MIXED/UNDERSEARCHED，单独报告）。
 - **UMBRELLA（伞式交集身份，第五候选）**：training-free RL ∩ 冻结 omni ∩ advantage→下一步动作的
   立项交集对象（2026-06-26 立项即有，非 Survey v2 新造；「advantage→next action」锐化措辞首现
   续36/Survey v2）。与 I1–I4 并列待 Stage-1C；IAD 2504.01931 为预登记坍缩风险。

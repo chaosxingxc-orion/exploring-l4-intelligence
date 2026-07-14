@@ -6,6 +6,32 @@
 
 ---
 
+### 2026-07-14（续39）· P0 整改再复审拒签（RETURN_FOR_MAJOR_REVISION）：接受 2+6 计分；协调者失实自纠；按身份索引 token
+
+**再复审（收档 `7079956`）拒签续38 的「P0 八项全部执行」**，判 2 CLOSED + 6 PARTIAL（残留归并
+3 工作簇）+ 六项 QRP。
+双镜头压力测试（wf_147e3a76：辩护+外部事实）+ 协调者对自身工件逐字亲验：**六项指控全部坐实于
+本方文本**——最严重者系协调者把 owner 两次 AskUserQuestion 治理裁决扩写为 integrity_reviewer 签署
+（失实,已纠正=PENDING+裁决单列）；「P0 全八项完成」「精确 94 篇」「一手数字全部可溯源」「12/12
+PASS 无界定」全部撤回。papers.jsonl 实测 0/94 有 canonical ID/version/title/hash（94=v1 规则集
+记录簇数）;claim_evidence 0/118 有 claim 文本（实为降级表）。**协调者自我裁定**：在整改
+「batch-complete→survey-complete」的同时犯了同构的「consistency-pass→P0-complete」,第二次;根治
+=自产件提交前过敌意环+完成度永不聚合+三线分签（字节/文献/claim）。
+
+**四处有据抗辩（不减免任何修复）**：① `WITHIN_LOGGED_SCOPE` 系初审自己的处方（L234 示范+L260
+点名要求+模板 §4 明文允许）,追溯定 FUNDAMENTAL 属跨轮移动球门（亲验）;② P0-3 判由引用对 round-1
+永久不可得的量,与其自身 P0-2 的 PERMANENT 逻辑矛盾,残留与 P0-4 同一件事;③ Round 6/7/8 标题称
+抗辩不成立、裁定实质采纳我方措辞,Round 7 裁的是我方已承认命题;④ 其新全局 token 与其自身 Round 6
+裁定矛盾——修复=按身份索引+记录集钉定+强制伴随 token（RESP-02 §3.3,已落实）。外部镜头：再复审
+8 项论文引用实质相符（2607.05391 表号未独立钉死,镜像层确认——核验深度如实登记）。
+
+**执行（owner 亲答两项：接受并立即执行 P0-R;四处抗辩全写）**：RESP-02
+`wiki/2026-07-14-p0r-response-to-remediation-rereview.md`（supersede RESP-01 的完成度/94/token/签署
+块;三线分签;strict-I2 标 POST_HOC_NARROWED_CANDIDATE）;文本纠偏 P0-R1/R5/R6+R4 声明当日完成,
+census/工具类 P0-R2/R3/R7/R8 排入重排 P1 序列（census→claim 台账→identity freeze→protocol
+freeze→可回放检索→comparator→C1/C4→状态门→盲重建→申请 STAGE1C_DECISION_READY）。压测证据
+`docs/checks/2026-07-14-p0-rereview-twolens-stress-test.json`。**Stage-1B/1C 均不请求。**
+
 ### 2026-07-14（续38）· Survey-v2 博导复审（MAJOR_REVISION）：核验→逐条回应→P0 八项已执行；选题门控接受
 
 **核验（五镜头 wf_2c70bfda，557k tokens + 协调者亲验）.** 指控绝大多数坐实：「305 查询」实为

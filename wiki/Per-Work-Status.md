@@ -12,7 +12,7 @@
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
 | **W4** | `speech-mllm-omni-embedding-rl` | 🟡 **Repositioned per G0** (separate work) | Disentanglement headline dropped → **L0/L1 embedding-utility studies** (readout / suppression / selective-readout limits); fresh proposal **pending ticket #29**; omni-embed model wired. |
-| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **primary study · Stage-1A problem-definition** | **Stage-1A (续34/续35): research object = a label-free, supply-conditional selection operator's realization surface (ρ(c)/H(c)/regret) across the frozen-omni 〔model × task〕 matrix — ASR is one row; breadth is a working hypothesis, not proven novelty.** RDU demoted to secondary; v4.2 archived as a Stage-1 problem-definition deliverable. **Now: Survey v2** (cross-task neighbor + adversarial challenger hunt + task×method×model kill matrix; non-ASR cells UNDERSEARCHED). **Stage-1B NOT authorized; M2 frozen.** M1 engineering base at `20d45a8`; genuine best-of-N result (frozen Qwen3-Omni-30B via llama.cpp) retained. |
+| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **primary study · Stage-1A problem-definition** | **Stage-1A (续34/续35): research object = a label-free, supply-conditional selection operator's realization surface (ρ(c)/H(c)/regret) across the frozen-omni 〔model × task〕 matrix — ASR is one row; breadth is a working hypothesis, not proven novelty.** RDU demoted to secondary; v4.2 archived as a Stage-1 problem-definition deliverable. **Now: P0-R remediation + replayable P1 round-2** (Survey v2 = ROUND1_SCOUT_COMPLETE; P0 = 2 CLOSED + 6 PARTIAL per the accepted doctoral re-review, 续39; decision package = PRE_STAGE1C_DECISION_DRAFT — Stage-1C selection gated on P0-R+P1 closure; identity-indexed max-claim tokens per RESP-02 §3.3). **Stage-1B NOT authorized; M2 frozen.** M1 engineering base at `20d45a8`; genuine best-of-N result (frozen Qwen3-Omni-30B via llama.cpp) retained. |
 | W2 | `speech-mllm-efficient-rl-alignment` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 | W3 | `speech-mllm-multitask-rl` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 
@@ -88,7 +88,9 @@ _**2026-07-14 update (Decision-Log 续35; precheck review + reassessment both ac
 object reframed to the cross-〔model × task〕 realization surface (breadth-first, reviewer-accepted);
 "non-ASR cells empty" corrected to **UNDERSEARCHED** (SER/SLU/ST/AAC ancestors exist); "breadth is
 the moat" is a **working hypothesis, not proven novelty**; P0-SURV-1 downgraded to **PARTIAL** (count
-reconstructable, raw-query replay OPEN). **Now: Survey v2** — taxonomy v2 (candidate-support /
+reconstructable, raw-query replay OPEN). **Survey v2 (since superseded: now ROUND1_SCOUT_COMPLETE;
+P0 re-review accepted 2 CLOSED + 6 PARTIAL, 续38/39; current work = P0-R + replayable P1)** —
+taxonomy v2 (candidate-support /
 contextual-supply / selective-prediction families + selection≠revision split), cross-task scan,
 **adversarial challenger hunt**, agentic near-neighbors (AudioToolAgent/AuTAgent/JitRL), per-query
 search log, task×method×model kill matrix (no `EMPTY`), per-task SOTA cards. Stage-1B NOT released;

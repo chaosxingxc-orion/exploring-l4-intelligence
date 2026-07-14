@@ -1,0 +1,209 @@
+{
+  "summary": "Two-lens stress test of the P0-remediation re-review: steelman defense + external citation spot-check",
+  "agentCount": 2,
+  "logs": [],
+  "result": {
+    "defense": {
+      "verdict": "复审在机械事实层基本站得住（六项 QRP 文本指控均有出处，我方不翻案；P0-R 修复单应照单执行），但在四处系统性越界，协调者不应出于愧疚全盘接受：(1) P0-3 的 PARTIAL 判由引用的是对 round-1 永久不可得的量（returned/screened/included/excluded），与其自己对 P0-2 的 CLOSED_WITH_PERMANENT_REPLAY_FAILURE 处理逻辑自相矛盾，且模板 §6 本身就把该状态终结为「如实签 REPLAY_FAILED=合格 response」——P0-3 唯一可执行残留是 works/version census（与 P0-4 同一残留，被计成两个 PARTIAL）；(2) Round 6/7/8 三轮均以「抗辩不成立/过强/未成立」开题，但最终裁定实质采纳了我方 §4.4/§4.1/§4.3 自己提出的收窄措辞，且 Round 7 的 NOT ESTABLISHED 裁的是我方已明文承认（而非主张）的命题——分歧被修辞放大；(3) 「否定性结果过界 FUNDAMENTAL」指控惩罚的 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE 措辞正是初审自己开出的整改处方（初审 Round 7 裁定块 + Round 9 点名该限定词），前瞻性降级合理，追溯性定为 FUNDAMENTAL QRP 不公；(4) 六项 QRP 实际坍缩为约三个文本行为（完成度聚合上标、94 标签、签署槽位放置），且每一条「残留」都在我方 response 内部自我披露（§0 未完成清单、frontmatter 双审=P1、signoff unresolved_blockers）——是标签纪律屡犯，不是隐瞒。复审正确之处应明确接受：P0-5/P0-6 PARTIAL 成立（双审在原 P0-5 文内、同类普查未做）、精确 94 篇/claim_evidence 名实不符/owner 签署槽位三项修复照做、strict-I2 标 post_hoc_created_at=2026-07-14、Round 2 的 canonical-ID census 要求成立。建议协调者按「接受全部 P0-R 动作、拒收四处定性」回应。",
+      "findings": [
+        {
+          "point": "Q1：P0-3 判 PARTIAL 的判由（returned/screened/included/excluded 仍为 UNKNOWN）与复审自己的 P0-2 处理逻辑内部矛盾。这四个量对 round-1 永久不可得（原始结果宇宙未捕获），模板规则 2 禁补造，模板 §6 明文规定该状态终结为「签 REPLAY_FAILED」且 L395 称「诚实降级是合格 response」；我方 response §6 已预先如实签 REPLAY_FAILED(search-replay)。P0-2 因「历史缺失未补造+诚实标记」判 CLOSED_WITH_PERMANENT_REPLAY_FAILURE，同一类永久缺失在 P0-3 却被当作未闭残留。",
+          "status": "REREVIEW_OVERREACH",
+          "evidence": "复审 §3 表 P0-2/P0-3 两行（L126-127）；模板 wiki/2026-07-14-survey-response-replayability-template.md L20（规则2）、L380/385（returned/screened 无法重建→签 REPLAY_FAILED）、L395（诚实降级=合格）；response §6「将如实签 REPLAY_FAILED(search-replay)」；bundle flow_report.yaml unresolved 两项 RAW_EVENT_UNAVAILABLE、README「What is honestly missing forever」段。",
+          "proposed_wording": "P0-3：SEARCH=218/FETCH=87 与 113→110→104→94 已闭；returned/screened/included/excluded 对 round-1 永久不可得，按 P0-2 同等逻辑记 CLOSED_WITH_PERMANENT_FLOW_COUNT_FAILURE（已如实签 REPLAY_FAILED）；唯一可执行残留 = exact works/version census（与 P0-4/P0-R2 合并为同一工作项，不重复计数）。"
+        },
+        {
+          "point": "Q1 补：P0-3 的可执行残留确实存在，但与 P0-4 完全重合。papers.jsonl 94 簇中 version 字段 0/94、canonical_key 短名 50/94（实测），version-level identity census 未做——这部分 PARTIAL 有实底，但它就是 P0-R2 那一件事，被计成 P0-3 与 P0-4 两个未闭项，虚增了 6/8 partial 的分量。",
+          "status": "NUANCE",
+          "evidence": "实测 papers.jsonl：total=94，arXiv 式 canonical_key 44/94，短名 50/94，无 version/title/url/content_hash 字段；复审 P0-R2 与 P0-3/P0-4 两行判由指向同一 census。",
+          "proposed_wording": "P0-3 与 P0-4 的残留合并表述为单一工作项「canonical scholarly ID + version census（P0-R2）」，闭环计数按独立工作项而非按原 P0 编号累计。"
+        },
+        {
+          "point": "Q2：我方 response 从未单独声称做过同类错误全量普查——P0-6 指控只经由聚合行附着。逐字引证：§0「已完成：P0 全八项（详 §3/§6/§7）」、signoff「P0 executed」、续38「整改（P0 八项全部执行）」；§3 只列 8 条具体更正（四篇论文+I2 理由行+去重+禁词+5 kill 封顶），无任何「同类错误已普查」句。唯一全称句是 §2 R10 行「一手数字全部可溯源到真实论文真实表格」——它是对初审 R10（造假不成立）裁定的核验栏语，语义是可溯源性（反捏造），不是「已审计全部数字」。P0-6 判 PARTIAL 在实质上正确（原 P0-6 后半句「检查所有数值和 operator type 的同类错误」确未执行），予以接受。",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "response §0 L30、§2 R10 行 L67、§3 全节、signoff L184；Decision-Log 续38 L20；原审 P0-6 原文「纠正事实：READ、MBR/Llama-3、TAP-GER、ProGRes；检查所有数值和 operator type 的同类错误」。",
+          "proposed_wording": "（公平限定）QRP#1（完成状态上标）与 QRP#6（全称外推）实质挂在同两行文本上（「P0 全八项」聚合行 + R10 可溯源句），应合并计为一个标签纪律行为，而非两项独立失实。"
+        },
+        {
+          "point": "Q3：Round 2 循环性指控大体成立但有一处不公。事实准确：脚本确以 B 自身 dedup_rule 计数 +our_data 元组升级两个 uncertain pair（复审两者都点到了）。不公处：(a) bundle 按模板/任务硬约束 stdlib-only 无网络构建（脚本头部明文），外部文献学核验在该工件内结构性不可能，属 P1 census 而非本轮可做未做；(b) dedup_rule 是记录者当时写下的独立字段，重建与其对账能诚实证明「重建复原了记录者的身份意图」——这正是离线 replay bundle 能证的上限，且 bundle 从未声称 content-hash 级身份（相关字段诚实缺席）；(c) 短名记录无书目元数据时任何去重都须某种规则，宁缺勿滥的替代结果是 96 而非 94，复审也并未主张合并有错（自认「不意味着 94 一定错误」）。",
+          "status": "NUANCE",
+          "evidence": "build_and_validate.py L15-27（stdlib/no network 硬规则）、L407-498（ALIAS_CLUSTERS 与升级依据双证据）、dedup_report uncertain_pairs_resolution_note；复审 Round 2 末句「这不意味着 94 一定错误」。",
+          "proposed_wording": "两组 pair 的合并由 ledger 内部三重证据（dedup_rule 计数、our_data 元组、id 字串近似）确认，可证明重建忠实复原记录者身份意图，不可证明文献学身份；94 表述为「v1 规则集下可机械重现的簇数」（相对 ~93 是真实进步），升级为 exact unique works 待 P0-R2 census——热文档「精确 94 篇」标签撤换的要求接受。"
+        },
+        {
+          "point": "Q4a：Round 6 的存在性/全称量词逻辑本身成立，但宣告「格局混合抗辩不成立」的同时，其最终推荐裁定（DIRECT_OCCUPIED_AT_MECHANISM_LEVEL + coverage MIXED/UNDERSEARCHED）与我方 §4.4 提议措辞（「机制已被同核 beam log-lik 占据（audio-understanding/SER 格 DIRECT_OCCUPIED），格局混合」）实质相同——胜负修辞与裁定内容脱节。且被审 kill matrix Part 3 早已作出存在性/全称区分：「DIRECT_OCCUPIED (real kills — do NOT claim as novelty)」清单第 2/3 项把 bare-I2 机制实例（jia-SER 冻结 Qwen2-Audio、scaling-auditory audio-conditioned BoN）登记为身份级 kill，Part 2 才是任务格网格；我方从未以 ST/SLU 空格主张 bare-I2 新颖。",
+          "status": "REREVIEW_OVERREACH",
+          "evidence": "复审 Round 6 推荐裁定块（L270-274）vs response §4.4（L128-131）；kill-matrix v2 Part 3 L97-104（real kills 含 I1/I2 on SER、I1/I2 on audio-understanding，明标 do NOT claim as novelty）、Part 2 I2 网格 L49-58。",
+          "proposed_wording": "「§4.4 抗辩的论证方式（以任务格证据回应存在性整改令）存在量词混用，但其提议的替代表述与本裁定实质一致，予以采纳并加 UNDERSEARCHED 标注；被审工件 Part 3 已将 bare-I2 机制实例登记为不可作新颖性的 real kill，不存在以格局混合恢复身份新颖性的行为。」"
+        },
+        {
+          "point": "Q4b：Round 7 逻辑成立但打在已让渡的靶上。我方 §4.1 明文接受「strict-I2 未登记、未标 post-hoc、身份未冻结」，只争议强形式叙事（「看到近邻才追加限定词保 novelty」）——复审对该实际争议命题的裁定是 REFUTED（我方胜）；其 NOT ESTABLISHED 裁的「具体 strict-I2 身份在近邻前已冻结」是我方从未主张的命题。「仍然过强」的标题制造了并不存在的残余分歧。但有一口公平的新咬合应接受：被审 kill matrix Part 3 确把 strict-I2 列在「Genuinely OPEN after the challenger hunt (survivable ground)」下，带有「经攻击幸存」意味——post_hoc_created_at=2026-07-14 标注与 POST_HOC_NARROWED_CANDIDATE 定性应照做。",
+          "status": "NUANCE",
+          "evidence": "response §4.1 L103「程序指控接受（strict-I2 未登记、未标 post-hoc、身份未冻结……）」；复审 Round 7 三分裁定（L287-289）；kill-matrix Part 3 L109（Strict I2 列于 survivable ground）；术语表 CLAUDE.md L205-208（strict-I2 命名首现 07-14，补登）。",
+          "proposed_wording": "「团队仅主张并成功反驳强形式叙事（组成件事后发明→REFUTED）；身份未冻结系团队自认而非我方新证。新增要求：strict-I2 标 post_hoc_created_at=2026-07-14，撤下『survivable ground』框架。」"
+        },
+        {
+          "point": "Q4c（同模式旁证）：Round 8 与 Round 6 同构——标题「I4 抗辩在科学贡献层面未成立」，但我方 §4.3 已自行采纳收窄（「scaling-surface 方法学族已被 text/VLA 广泛占据……升级为 label-free 可预测规律……不构成 DIRECT_OCCUPIED」），与复审 METHOD_FAMILY_OCCUPIED 裁定实质一致；我方并未主张贡献已示成。复审真正的增量只有「必须给出相对 difficulty/entropy/disagreement baseline 的增量可证伪预测」这一新要求（合理，应接受）。",
+          "status": "NUANCE",
+          "evidence": "response §4.3 L120-125 vs 复审 Round 8 裁定块 L314-321；response §5.1 主动供出 2606.02981「部分占据评审自己给 I4 开的升级药方」。",
+          "proposed_wording": "「接受团队 §4.3 收窄表述为基线，追加：I4 立项须给出相对通用 baseline 的增量预测力检查点（Proposal A 检查点），否则降为实例化/工程贡献。」"
+        },
+        {
+          "point": "Q6 核心：「否定性结果过界 FUNDAMENTAL」指控未披露该措辞的出处是初审自己。NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE 正是初审开的处方：初审 Round 7 裁定块给出正确措辞「在已记录的 round-1 scout 范围内，尚未发现……」，Round 9 点名批评格子「没有 WITHIN_LOGGED_SCOPE 限定」——而初审 Round 2 当时已确认结果宇宙缺失。我方照方抓药，复审转身把服药定为 FUNDAMENTAL QRP。降级为 AMONG_RETAINED_RECORDS 的语义论证成立、应前瞻采纳；但追溯定性不公，属跨轮移动球门。",
+          "status": "REREVIEW_OVERREACH",
+          "evidence": "初审 2026-07-14-survey-v2-...-review.md Round 7 裁定块（L233-235「在已记录的 round-1 scout 范围内」）与 Round 9（L259-260 点名 WITHIN_LOGGED_SCOPE 限定缺失）、Round 2（L111-112 已认定结果宇宙不可回放）；复审 §5.2 QRP 表「否定性结果过界 FUNDAMENTAL」。",
+          "proposed_wording": "「WITHIN_LOGGED_SCOPE 系上一轮审查自拟的限定词，团队采用属善意遵从；本轮发现该限定词本身歧义（logged queries ≠ reviewed result universe），前瞻性替换为 NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS，不构成团队新增 QRP 行为。」"
+        },
+        {
+          "point": "Q5a：2/8-closed 的记分算术上成立（每个 partial 确有某种残留），但六个 partial 的残留坍缩为约三个独立工作簇：(i) canonical-ID/version census（P0-3+P0-4=P0-R2）；(ii) claim 文本/定位器/双审/同类普查（P0-5+P0-6=P0-R3/R7）；(iii) 身份冻结+repo 级状态门（P0-7+P0-8=P0-R6/R8）。且初审自己的 P0/P1 边界有重复指派：初审 P0-7 要求「冻结所有候选定义」而初审 P1-3 又把「形成 I1–I4/UMBRELLA 冻结 identity contract 和 post-hoc 条件日志」列为 P1——我方按 P1-3 排期身份合同并非无据。P0-5 的双审确在 P0 文内（「优先双审」），我方延期属真实 P0 缺口，此点让渡。",
+          "status": "NUANCE",
+          "evidence": "初审 P0-7（L391）vs P1-3（L398）逐字重复；初审 P0-5（L390「优先双审」）；复审 P0-R2/R3/R6/R7/R8 与六 partial 的一一映射。",
+          "proposed_wording": "「P0 闭环记为：2 closed + 6 partial，其中 6 partial 归并为 3 个独立工作簇；identity-contract 冻结在原审 P0-7/P1-3 中双重指派，团队按 P1 排期不计失信；双审延期为真实 P0-5 缺口。」"
+        },
+        {
+          "point": "Q5b：所有被指「残留」均系我方 response 内部主动披露，无一项被隐瞒——这与「把有限修复包装成全面关闭」的定性张力很大。§0 明列「未完成：P1 全部（……identity contract 冻结、comparator 重建、C1/C4、独立盲重建）」；frontmatter「载重更正的人类双审 = P1 排期项」；signoff unresolved_blockers 列 P1 全部+永久缺失+2 UNVERIFIED cites；independent_reviewer 自标 PENDING。QRP#1 的 FUNDAMENTAL 定性应以披露记录减档：这是聚合标签纪律屡犯（真实、应根治、与 07-13 12/12 教训同型），不是对底层事实的失实陈述。",
+          "status": "NUANCE",
+          "evidence": "response §0 L31-35、frontmatter L13、signoff L184-188；对照复审 §5.2「本轮最危险的……把真实但有限的修复包装成全面关闭」。",
+          "proposed_wording": "「『P0 全八项完成』为过度聚合的完成标签，底层残留在同一文件内全部如实披露；定性为 recurrent completion-labeling failure（应机械化根治），不定性为对事实的失实陈述。」"
+        },
+        {
+          "point": "Q5c：QRP#4（12/12 暗示外部学术正确性）与 QRP#5（owner 签署膨胀）文本成立但严重度偏高。#4：两处热文档使用「12/12 校验 PASS」均处于携带诚实限定语的段落内（续38 同段「历史缺失全标 RAW_EVENT_UNAVAILABLE（禁补造）」；Research-Objective 同句「round-1 检索不可重放;12/12 校验 PASS」），暗示仅来自与「P0 八项全部执行」的并置；bundle 自身 README 明文自限（「does not permit claiming saturated/unique/complete/decision-ready」「not FAILED ≠ succeeded」）。#5：签署槽位值本身严格自限（「adjudications of record: P0 authorized post-verification; Stage-1C gating accepted」「recorded via AskUserQuestion」），未声称 owner 审阅过 bundle——结构性放错槽位成立，FUNDAMENTAL 对一条自限条目偏重。两项修复（INTERNAL_BUILD_CONSISTENCY 前缀、integrity_reviewer 置 PENDING+owner 裁决单列）廉价且应照做。",
+          "status": "NUANCE",
+          "evidence": "Decision-Log 续38 L20-23；Research-Objective L39-40；bundle README L12、L34；response signoff L186 逐字。",
+          "proposed_wording": "「#4 定性为并置歧义（修复：固定前缀），#5 定性为签署槽位放置错误（修复：PENDING+单列），二者均非独立的失实陈述行为；严重度 MAJOR→PROCESS，不入 FUNDAMENTAL。」"
+        },
+        {
+          "point": "Q6：复审 §9 unresolved_blockers 把「round-1 search result universe and screening trail permanently unavailable」列为待解 blocker——永久不可能项列为『未解决』与其 P0-2 的 CLOSED_WITH_PERMANENT_FAILURE 逻辑相抵（可辩解读是『永久阻断 survey 级 absence 主张、须 round-2 重搜』，但应写明，否则暗示存在可执行的关闭动作）。",
+          "status": "NUANCE",
+          "evidence": "复审 §9 L582-583 vs §3 P0-2 行 L126。",
+          "proposed_wording": "blockers 区分「可执行未闭项」与「永久性限制（决定结论上限，经 round-2 重搜绕行）」两栏。"
+        },
+        {
+          "point": "Q6：Round 3 字段普查「claim_text 0/118」按字段名统计为真，但修辞上偏重——5 条更正行在 superseded_claim/corrected 字段中携带完整 claim 文本与表号定位（如 READ 行含 Table 1 八组数值逐条），复审两段后自己也承认（「5 条 correction 有 topic、corrected text 和表号」）。113 基础行无 claim 文本、文件命名名实不符的核心指控成立。",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "claim_evidence.jsonl 更正行（build_and_validate.py L804-931 生成逻辑，含 locator 'arXiv 2606.04680 Table 1' 等）；复审 Round 3 自我修正段 L216-218。",
+          "proposed_wording": "（仅限定）字段普查表宜注明 5 条更正行以 superseded_claim/corrected 载有 claim 文本与定位器，避免 0/118 被读成『全无 claim 内容』。"
+        },
+        {
+          "point": "Q6：逐项事实核查复审对我方工件的描述——大多准确：「多数 canonical_key 是短名」实测 50/94（勉强过半，成立）；V8「只扫描 status-like 字段」「V9 检查 README 硬编码 token」与脚本 L1343-1378 一致；218/87/287/18 计数与 README 一致；「uncertain_pairs:[] 直接写入」属实（附 resolution note）。一处措辞缺陷：复审自己的替代结论「NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS：在目前保留下来的 94 个规则簇中尚未确认直接匹配」按字面为假——94 簇中 bare-I1/bare-I2 机制的 DIRECT 匹配恰是双方共认的 real kills；其意指显然是『对仍称开放的候选身份』，但作为要求全库引用的正式 token 定义应写明限定对象。",
+          "status": "REREVIEW_ERROR",
+          "evidence": "实测 canonical_key 44 arXiv 式/50 短名；build_and_validate.py V8/V9 代码；kill-matrix Part 3 L97-104（94 簇内确有已确认 DIRECT 匹配：mbr-asr、jia-SER、scaling-auditory）；复审 L33「在目前保留下来的 94 个规则簇中尚未确认直接匹配」。",
+          "proposed_wording": "「NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS（限指仍主张开放的候选身份 strict-I2/I3-combined/I4-narrowed/UMBRELLA；bare-I1/bare-I2 机制的 DIRECT 占据在保留记录内已确认并保持 kill）」。"
+        },
+        {
+          "point": "Q5d：复审对诚信正向行为记账不足：(a) 我方主动查获双方共漏 3 篇并如实登记其威胁指向，其中 2606.02981 部分占据初审给 I4 开的升级药方——是削弱我方自身空白主张的自证不利披露；(b) mbr 更正使 I1 kill 更强系全文重算的反向收益，无造假动机侧写；(c) bundle 的 input-provenance note 主动揭发任务前提错误（模板文件不在 233dc7e）。复审 2.4 只裁「不是伪造」，未将此类行为计入 QRP 风险的对冲面。这不改变任何 P0-R 要求，但关系「团队完成状态控制问题仍未根治」这一趋势性定性的公平性。",
+          "status": "NUANCE",
+          "evidence": "response §5 全节 + round2_new_targets.jsonl（2606.02981 行 threatens 字段自書 I4 差异化收窄）；README「Input provenance note」段 + build_and_validate.py L87-101（TASK PREMISE WAS FALSE, RECORDED HONESTLY）。",
+          "proposed_wording": "在 QRP 风险评估中并列记载对冲证据：主动自证不利披露 3 项（共漏论文、反向增强更正、任务前提证伪），支持「标签纪律缺陷而非隐瞒倾向」的定性。"
+        },
+        {
+          "point": "总体校准（防止过度让步的边界声明）：以下复审内容我方核查后确认正确、不应争辩——P0-5 PARTIAL（双审在原 P0-5 文内，延期即未闭）；P0-6 PARTIAL（同类普查确未做）；P0-8 PARTIAL（repo 级状态门确不存在，V9 仅护 bundle 内 README）；「精确 94 篇」热文档标签（Research-Objective L36 加粗原文）应撤换；claim_evidence 命名名实不符；五镜头自称「独立核验」而系同模型同工作流（response §0 原文「五镜头独立核验」）——Round 9 此点成立；strict-I2 合取登记在见占据者之后（其 L58 理由行本身引用占据者为证）。",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "Research-Objective.md L36「**精确 94 篇**」；response §0 L30「五镜头独立核验」；kill-matrix L58 理由行「all occupants use external…」（书写时已知占据者）；build_and_validate.py V9 仅校验 bundle 内 README anchor。"
+        }
+      ]
+    },
+    "external": {
+      "verdict": "外部事实核验结论：复审的外部论文引用质量很高——§2.3、§2.4 的四项论文特征描述与 Round 8 的四篇一句话概括全部与 arXiv 摘要/镜像原文相符（8 项 REREVIEW_CORRECT，其中 2607.05391 的\"Table 3\"具体表号因 arXiv 全文被网络策略阻断未能独立钉死，但论文官网确认存在完全对应的 Pass@1/Oracle/Verifier 并列结果表且论文原文确有 \"recovers a significant proportion of the oracle headroom\" 之句，实质内容无误）。唯一实质问题在第 6 项（文档内逻辑，无需联网）：NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS 的指称对象在工件层面有定义（94 个规则簇 = papers.jsonl 的 94 行，可字节级确定性重建），但该 token 存在两个真实逻辑缺口——(i) 未按身份候选（bare-I2/strict-I2/I3/I4/UMBRELLA）索引，作为 YAML 里的全局 maximum_permitted_claim 与同一复审 Round 6 自己裁定的 bare-I2=DIRECT_OCCUPIED_AT_MECHANISM_LEVEL 相矛盾；(ii) §0 把指称钉死在\"94 个规则簇\"，而 §2.4 明言三篇最强新邻居（2606.02981/2607.05391/2602.12281）尚未进入正典 ledger，即 token 可以字面为真而已知的最大压力恰好落在指称集之外。判 NUANCE，建议 token 按身份索引并钉死记录集版本、外加强制伴随 token。核验方式：WebSearch 摘要 + huggingface.co/papers 镜像逐字摘要 + emergentmind/llm-as-a-verifier.com 全文侧证；arxiv.org 与 export.arxiv.org 对 WebFetch 均被\"domain safety\"策略阻断（非论文不存在）。",
+      "findings": [
+        {
+          "point": "§2.3: READ 2606.04680 摘要\"只声称最高约 20% relative error reduction\"",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "arXiv 摘要（经 WebSearch 检索 https://arxiv.org/abs/2606.04680 与 https://arxiv.org/html/2606.04680）：论文题为 'Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy'，摘要原文 'achieving up to 20% relative error rate reduction, with particularly strong gains under noisy conditions'——摘要中唯一的headline数字就是 up to 20% 相对错误率降低，无任何 ~70–85% oracle 表述；复审判团队撤回原'~70–85% oracle'为正确，成立。"
+        },
+        {
+          "point": "§2.4: 2606.02981 用一次 labeled validation sampling 的输出统计预测 Best-of-N gain，Spearman ρ=0.90",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "HuggingFace papers 镜像逐字摘要（https://huggingface.co/papers/2606.02981，对应 https://arxiv.org/pdf/2606.02981 'Predicting Inference-Time Scaling Gains from Labeled Validation-Set Output Statistics'）：'We fit ridge predictors on features computed from a single labeled validation-set sampling pass' + 'a compact ridge predictor built from this core plus an entropy add-on reaches Spearman ρ=0.90 with actual best-of-N gain under a reward-model verifier'。\"一次 sampling run\"（single sampling pass）与 ρ=0.90 两个细节均逐字命中。"
+        },
+        {
+          "point": "§2.4: LLM-as-a-Verifier 2607.05391 Table 3 并列 Pass@1、oracle Pass@N 与 verifier 结果，并称回收较大部分 oracle headroom",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "实质内容全部确认：论文官网（https://llm-as-a-verifier.com/）'Test-Time Scaling Results' 表确实按 benchmark 并列 Pass@1 / Oracle / LLM-as-a-Verifier 三列（如 Terminal-Bench V2: 83.1/92.1/86.5；SWE-Bench Verified: 76.1/84.4/78.2；MedAgentBench: 70.2/75.0/73.3）；emergentmind（https://www.emergentmind.com/papers/2607.05391）引论文原句 'LLM-as-a-Verifier consistently recovers a significant proportion of the oracle headroom exposed by sampling trajectories'——复审\"并称回收较大部分 oracle headroom\"是对论文自身claim的准确转述。唯一未能独立钉死的是\"Table 3\"这个具体表号（arXiv 全文对 WebFetch 被阻断，镜像未标表号；按上述数字算 headroom 兑现率约 25%–65% 随 benchmark 波动，\"较大部分\"系论文自述而非复审背书，转述无误）。"
+        },
+        {
+          "point": "§2.4: CoVer 2602.12281 联合扩展 rephrased instructions 与 action candidates，再选择高层 prompt 与 action chunks",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "HuggingFace papers 镜像逐字摘要（https://huggingface.co/papers/2602.12281，'Scaling Verification Can Be More Effective than Scaling Policy Learning for Vision-Language-Action Alignment'）：'jointly scaling the number of rephrased instructions and generated actions greatly increases test-time sample diversity' + 'uses the verifier to select the optimal high-level prompt and low-level action chunks'。复审措辞与摘要逐字对应（含 action chunks），且\"Proposal E 的强近邻\"定位与该文供给侧+候选侧联合扩展的机制一致。"
+        },
+        {
+          "point": "Round 8: Snell 2408.03314 = \"按 prompt difficulty 自适应分配 test-time compute\"",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "https://arxiv.org/abs/2408.03314 'Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters'（Snell, Lee, Xu, Kumar 2024）：论文核心即 compute-optimal scaling——发现 test-time compute 各策略的有效性随 prompt difficulty 变化，据此 'most effectively allocate test-time compute adaptively per prompt'。一句话概括公允。"
+        },
+        {
+          "point": "Round 8: VG-Search 2505.11730 = \"研究 verifier granularity、budget、generator-verifier 与 task attributes\"",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "HuggingFace papers 镜像逐字摘要（https://huggingface.co/papers/2505.11730，'Rethinking Optimal Verification Granularity for Compute-Efficient Test-Time Scaling'，NeurIPS 2025）：'Extensive experiments with VG-Search under varying compute budgets, generator-verifier configurations, and task attributes'——复审列举的四个研究轴逐字命中摘要。"
+        },
+        {
+          "point": "Round 8: Art-of-TTS 2512.02008 = \"在统一条件下研究 model type、problem difficulty、strategy、budget 的最佳选择\"",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "https://arxiv.org/abs/2512.02008 'The Art of Scaling Test-Time Compute for Large Language Models'（2025-12-01 提交）：摘要明言此前缺 'systematic comparison of well-known TTS strategies under identical conditions'，本文做首个大规模统一条件研究（8 个 7B–235B 模型、300 亿+ token、4 数据集），并给出 'practical recipe for selecting the best TTS strategy, considering problem difficulty, model type, and compute budget'。概括公允。"
+        },
+        {
+          "point": "Round 8: Test-Time-Personalization 2605.10991 = \"把 BoN curve 分解为四个可测量量，研究 reward hacking 和 collapse\"",
+          "status": "REREVIEW_CORRECT",
+          "evidence": "https://arxiv.org/abs/2605.10991 'Test-Time Personalization: A Diagnostic Framework and Probabilistic Fix for Scaling Failures'：摘要含 'a unified scaling law that decomposes any reward model's Best-of-N curve into four measurable quantities'，并给出两类失效模式 'user-level collapse' 与 'query-level reward hacking'。四个量、hacking、collapse 三个要素全部命中。"
+        },
+        {
+          "point": "§7 P0-R5 降级 token NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS 及三个许可 token 的逻辑完备性（'retained records' 指称是否良定义于 94 簇）",
+          "status": "NUANCE",
+          "evidence": "指称在工件层面良定义：§0 明确释义为\"在目前保留下来的 94 个规则簇中\"，而 Round 1 已证 bundle 可 clean-clone 字节级确定性重建（12/12），故外延=papers.jsonl 的 94 行，可机械枚举。但存在两个真实逻辑缺口：(1) 身份索引缺失导致自相矛盾——复审 §9 YAML 把它写成全局 maximum_permitted_claim，可 Round 6 同一复审自己裁定 bare-I2 为 DIRECT_OCCUPIED_AT_MECHANISM_LEVEL（即在保留记录中确认了直接占据），Round 8 又裁 I4 为 METHOD_FAMILY_OCCUPIED；不按身份候选索引时，团队可引用该全局 token 作 blanket cover，与复审自身裁定冲突。(2) 指称集排除了已知最强邻居——§2.4 明言三篇新核验近邻（2606.02981/2607.05391/2602.12281）\"没有以固定版本、locator 和 reviewer 身份进入正典 claim ledger\"，即不在 94 簇内；token 可字面为真而已知直接压力恰在指称集之外，三个许可 token 中无一强制披露此类\"已知未入册邻居\"。次要缺口：(3) 94 是 v1 ruleset 的簇数（Round 2：0/94 有 canonical_id/version/content_hash），P0-R2 身份普查后可合并/拆分而改变计数，将\"94\"写死在释义里使 token 随工件版本漂移；且对无钉版记录判\"是否 match\"本身证据基础弱。三 token 组合方向正确（比 WITHIN_LOGGED_SCOPE 诚实），但需修补。",
+          "proposed_wording": "token 须带参数并钉死记录集：NO_DIRECT_MATCH_CONFIRMED(identity=<候选身份>, record_set=retained_clusters@<bundle content hash>, as_of=<日期>)，逐一身份出裁定（bare-I2 处必须写 DIRECT_MATCH_FOUND_AT_MECHANISM_LEVEL，不得套用本 token）；并新增强制伴随 token KNOWN_NEIGHBOR_RECORDS_PENDING_LEDGER_ENTRY(n=3, ids=[2606.02981, 2607.05391, 2602.12281])——凡存在已核验但未入正典 ledger 的近邻记录，任何 NO_DIRECT_MATCH 陈述必须与之并列出现；释义中\"94 个规则簇\"改为\"v1 ruleset 下的保留记录簇（当前 94，身份普查后可变）\"。"
+        }
+      ]
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Test"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "defense:steelman",
+      "phaseIndex": 1,
+      "phaseTitle": "Test",
+      "agentId": "abbf686fcece21339",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784003256715,
+      "queuedAt": 1784003256703,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "复审在机械事实层基本站得住（六项 QRP 文本指控均有出处，我方…",
+      "promptPreview": "You are the DEFENSE lens. A doctoral re-review (D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-p0-remediation-response-doctoral-adversarial-rereview.md) rejected our P0-remediation sign-off (our response: D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-response-and-p0-remediation.md; our bundle dir: D:/chao_workspace/exploring-l4-intelligence/wiki/surve…",
+      "lastProgressAt": 1784004073903,
+      "tokens": 154709,
+      "toolCalls": 19,
+      "durationMs": 817188,
+      "resultPreview": "{\"verdict\":\"复审在机械事实层基本站得住（六项 QRP 文本指控均有出处，我方不翻案；P0-R 修复单应照单执行），但在四处系统性越界，协调者不应出于愧疚全盘接受：(1) P0-3 的 PARTIAL 判由引用的是对 round-1 永久不可得的量（returned/screened/included/excluded），与其自己对 P0-2 的 CLOSED_WITH_PERMANENT_REPLAY_FAILURE 处理逻辑自相矛盾，且模板 §6 本身就把该状态终结为「如实签 REPLAY_FAILED=合格 response」——P0-3 唯一可执行残留是 works/version census（与 P0-4 同一残留，被计成两个 PARTIAL）；(2) Round 6/7/8 三轮均以「抗辩不成立/过强/未成立」开题，但最终裁定实质采纳了我方 §4.4/§4.1/§4…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "verify:external-facts",
+      "phaseIndex": 1,
+      "phaseTitle": "Test",
+      "agentId": "a502ce1bd5857719b",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784003256716,
+      "queuedAt": 1784003256703,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "外部事实核验结论：复审的外部论文引用质量很高——§2.3、§2.4 的…",
+      "promptPreview": "You are the EXTERNAL-FACTS lens. First ToolSearch \"select:WebFetch,WebSearch\". A doctoral re-review (D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-p0-remediation-response-doctoral-adversarial-rereview.md) makes external paper claims we have not yet verified. Verify each against arXiv (abstract; fulltext if reachable), READ-ONLY, answer in Chinese:\n1. §2.3: READ 2606.04680 a…",
+      "lastProgressAt": 1784003660272,
+      "tokens": 74327,
+      "toolCalls": 23,
+      "durationMs": 403556,
+      "resultPreview": "{\"verdict\":\"外部事实核验结论：复审的外部论文引用质量很高——§2.3、§2.4 的四项论文特征描述与 Round 8 的四篇一句话概括全部与 arXiv 摘要/镜像原文相符（8 项 REREVIEW_CORRECT，其中 2607.05391 的\\\"Table 3\\\"具体表号因 arXiv 全文被网络策略阻断未能独立钉死，但论文官网确认存在完全对应的 Pass@1/Oracle/Verifier 并列结果表且论文原文确有 \\\"recovers a significant proportion of the oracle headroom\\\" 之句，实质内容无误）。唯一实质问题在第 6 项（文档内逻辑，无需联网）：NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS 的指称对象在工件层面有定义（94 个规则簇 = papers.jsonl 的 94 行，可…"
+    }
+  ],
+  "totalTokens": 229036,
+  "totalToolCalls": 42
+}
