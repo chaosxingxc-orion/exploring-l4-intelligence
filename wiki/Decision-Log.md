@@ -6,6 +6,31 @@
 
 ---
 
+### 2026-07-14（续38）· Survey-v2 博导复审（MAJOR_REVISION）：核验→逐条回应→P0 八项已执行；选题门控接受
+
+**核验（五镜头 wf_2c70bfda，557k tokens + 协调者亲验）.** 指控绝大多数坐实：「305 查询」实为
+SEARCH 218 + FETCH 87 且无 raw response（不可回放）；39 个 FT 标签 0/8 抽查有定位器（自我披露型
+标签膨胀，非造假——R10 原文强度接受）；READ「~70-85% oracle」上夸（Table 1 重算 7.7–68.5%，
+LibriSpeech 仅 12–17%）；MBR/Llama-3 焊接、TAP-GER/ProGRes 扩池混写属实（MBR 更正后 I1 kill 反而
+更强）。两处以日期链抗辩：「合取洗白」强形式（TH2a 同核+δ_corr = 07-05，早于占据者入档 8 天；
+I3/UMBRELLA 合取系原始定义/立项对象，REFUTED）；I4 五篇引文全为相邻对象（无供给轴 c）不构成占据，
+但「最清晰空位」修辞降级为「供给轴 × 冻结 omni × label-free 预测律」收窄表述；双方共漏 3 篇
+（CoVer 2602.12281 = Proposal E 最近邻威胁）。
+
+**整改（P0 八项全部执行）.** 状态纠偏：Survey v2 → **ROUND1_SCOUT_COMPLETE**、决策包 →
+**PRE_STAGE1C_DECISION_DRAFT**。replay bundle `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/`
+（`build_and_validate.py` 一键重建、12/12 校验 PASS、协调者亲跑）：305 事件 SEARCH/FETCH 分列、
+历史缺失全标 RAW_EVENT_UNAVAILABLE（禁补造）；**精确去重 94**（113→110→104→94；`~93` 不可机械
+重现，登记为差 1 无法解释）；118 claim 行（113 全量降级封顶 ABSTRACT_VERIFIED + 5 更正行）；8 篇
+新 round-2 目标。正式回应 `wiki/2026-07-14-survey-v2-response-and-p0-remediation.md`
+（ACCEPT_MAJOR_REVISION_WITH_FOUR_EVIDENCED_CONTESTS）；术语表补登 strict-I2（=I2∩I4）与 UMBRELLA
+（CLAUDE/AGENTS 镜像）；核验证据 `docs/checks/2026-07-14-surveyv2-review-fivelens-verification.json`。
+
+**owner 裁决（亲答两项）.** ① P0 核验完即执行——已执行；② **接受选题门控：P0+P1 关闭、
+STAGE1C_DECISION_READY 后才提请选题**。协调者同日早间「关键路径=选题随时可开始」表述错误，由本条
+supersede。**下一步 = P1**：9 既有饱和目标 + 8 新篇（未来轮次按模板全程捕获 raw response，构造性
+可回放）、identity contract 冻结、comparator 重建、C1/C4、独立盲重建。
+
 ### 2026-07-14（续37）· 知识栈选型评审裁决：全部搁置（SHELVE-ALL），Stage-1C 收官后再议
 
 **对象.** 收到的《AI 协同 Survey 知识栈开源实现选型审查》（推荐 llm-wiki-compiler 带 kill 条件的

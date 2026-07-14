@@ -1,0 +1,35 @@
+VALIDATION REPORT
+Bundle: SURVEY-RESP-2026-07-14-01
+Command: C:\Python314\python.exe build_and_validate.py
+Generation date: 2026-07-14
+
+[PASS] V1 all JSON/JSONL bundle files parse
+    detail: search_events.jsonl: 305 lines OK; papers.jsonl: 94 lines OK; claim_evidence.jsonl: 118 lines OK; round2_new_targets.jsonl: 8 lines OK; dedup_report.json: OK
+[PASS] V2 search_events event_id unique and count==305
+    detail: n=305 unique=305
+[PASS] V3 papers.jsonl paper_id unique and count matches Stage-3 final
+    detail: n=94 unique=94 expected=94
+[PASS] V4 claim_evidence.jsonl claim_id unique and count==113+corrections
+    detail: n=118 unique=118 expected=118
+[PASS] V5 every claim_evidence paper_id/paper_ids FK resolves into papers.jsonl
+    detail: unresolved=[]
+[PASS] V6 recounts (search/fetch/failed, papers rows/final, evidence abstract_verified/discovered/corrections) match flow_report.yaml on disk
+    detail: events_ok=True papers_ok=True evidence_ok=True
+[PASS] V7 no effective grade above ABSTRACT_VERIFIED anywhere
+    detail: offenders=[]
+[PASS] V8 banned-token scan (standalone EMPTY; unscoped NO_DIRECT_MATCH) on status-like fields
+    detail: hits=[]
+[PASS] V9 final status token check (README anchor line BUNDLE_STATUS_TOKEN is exactly ROUND1_SCOUT_COMPLETE, declared exactly once)
+    detail: anchors_found=['ROUND1_SCOUT_COMPLETE']
+[PASS] V10 manifest.yaml round-trips (mini-YAML loader) and every listed file's bytes/lines/sha256 match on-disk state
+    detail: mismatches=[]
+[PASS] V11 flow_report.yaml round-trips (mini-YAML loader) and equals the in-memory dict it was generated from
+[PASS] V12 every generated text file is UTF-8, no BOM, LF-only
+    detail: offenders=[]
+
+SUMMARY: 12/12 checks passed, 0 failed
+OVERALL: PASS
+
+BUNDLE_STATUS_TOKEN: ROUND1_SCOUT_COMPLETE
+
+Exit code: 0

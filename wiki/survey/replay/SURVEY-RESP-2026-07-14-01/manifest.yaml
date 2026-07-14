@@ -1,0 +1,80 @@
+bundle_id: "SURVEY-RESP-2026-07-14-01"
+generation_date: "2026-07-14"
+generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+inputs:
+  - path: "wiki/survey/2026-07-14-search-query-log.jsonl"
+    role: "A: search query log"
+    bytes: 122728
+    lines: 305
+    sha256: "6e22c703d5fb50e2d399e5b7493357d813a2389c1992eaa17e5c8c290a6af8f8"
+    claimed_canonical_commit: "233dc7eb9224b5d7bc8df7bfd81a616ab15c6917"
+    claim_verified: true
+    note: "git blob at 233dc7eb matches on-disk bytes exactly (manually verified 2026-07-14 via `git show 233dc7eb:<path> | sha256sum`)."
+  - path: "wiki/survey/2026-07-14-scout-ledger-round2.json"
+    role: "B: scout ledger round 2"
+    bytes: 41455
+    lines: 1574
+    sha256: "2632ebaf335a44cf4044e781335eaf705cee1871cce7643c5e42dbc6e03bc1eb"
+    claimed_canonical_commit: "233dc7eb9224b5d7bc8df7bfd81a616ab15c6917"
+    claim_verified: true
+    note: "git blob at 233dc7eb matches on-disk bytes exactly (manually verified 2026-07-14 via `git show 233dc7eb:<path> | sha256sum`)."
+  - path: "wiki/2026-07-14-survey-response-replayability-template.md"
+    role: "template spec (replayability template)"
+    bytes: 17901
+    lines: 397
+    sha256: "ee48c2ea116c76d6e8bd02f87b9984cb685b993df1b7362693df911339edeeda"
+    claimed_canonical_commit: "233dc7eb9224b5d7bc8df7bfd81a616ab15c6917"
+    claim_verified: false
+    note: "TASK PREMISE WAS FALSE, RECORDED HONESTLY RATHER THAN SILENTLY ACCEPTED: this file does NOT exist at 233dc7eb (`git show 233dc7eb:<path>` fails with 'exists on disk, but not in 233dc7eb'). It was introduced 2 commits later at b41f9f85db359fa5b13cadbcb4024c130d43542e (2026-07-14T10:38:41+08:00, 'docs(review): check in three received 2026-07-14 review artifacts') and is byte-identical from that commit through current HEAD 58ebc7707c736fe0d8cd01bfcb3af3a7564d002f. The true canonical commit for this input is b41f9f85db359fa5b13cadbcb4024c130d43542e."
+files:
+  - name: "build_and_validate.py"
+    bytes: 73550
+    lines: 1617
+    sha256: "115aee4e3020146a94294e3f17cb737bae47ac4215be5ed89d838c7d4d775c38"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "search_events.jsonl"
+    bytes: 234072
+    lines: 305
+    sha256: "df85d97a0a872dfe57585d117c54a81129bf6e025ad3abdc53767a6f0f9a3c82"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "papers.jsonl"
+    bytes: 73731
+    lines: 94
+    sha256: "b6bad37b61d51550d2fcda3c2fbc1596b05e3734897fd21838cfac3465d119f1"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "claim_evidence.jsonl"
+    bytes: 49567
+    lines: 118
+    sha256: "0b9360aa7f28e3a2914597722fa53cbf57a1b02ae7207b18836ffd5e523139d9"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "round2_new_targets.jsonl"
+    bytes: 2895
+    lines: 8
+    sha256: "27b736b9c3877523d37436033ef05748aea91a1c26c2d221ed4d882f73898d85"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "dedup_report.json"
+    bytes: 13985
+    lines: 408
+    sha256: "79ed14760ee13b71382075a863cc86b80f33ac88301824229f9f9cd09930ac4f"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "flow_report.yaml"
+    bytes: 666
+    lines: 31
+    sha256: "1e2cad2d074a149ac4af6ca5f587ee79477999aa2937ddb3cd0da3218bbdeee0"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+  - name: "README.md"
+    bytes: 6930
+    lines: 86
+    sha256: "ce8fc886ca2a7b8475a9fc534090cb689170411b2715e9e0cbd423e18fe58c2c"
+    generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+known_missing_raw_events:
+  - "raw search/fetch response bodies x305 (no response payload was ever captured; A logs query/engine/date/result_cap/note only)"
+  - "search results universe (ranked candidate lists actually returned per query)"
+  - "screening decision trail (include/exclude reasoning per candidate result)"
+  - "intra-day timestamps (A has date-only granularity; timestamp_utc is null throughout)"
+  - "per-query agent identity (only the workflow-level agent_id wf_c6ed06f2 is known)"
+survey_response_md:
+  status: "added-after-build"
+  path: "wiki/2026-07-14-survey-v2-response-and-p0-remediation.md"
+  note: "the formal response letter is authored separately by the coordinator after this bundle validates; intentionally not part of this manifest or this directory"
+self_reference_note: "manifest.yaml does not list its own bytes/lines/sha256 (self-reference paradox: its own hash would change the moment it is written); compute independently after generation, e.g. `sha256sum manifest.yaml`. validation_report.txt is generated after manifest.yaml for the same reason and is likewise excluded from the files list."

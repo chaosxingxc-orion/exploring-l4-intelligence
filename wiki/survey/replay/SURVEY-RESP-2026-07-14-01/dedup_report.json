@@ -1,0 +1,408 @@
+{
+  "generation_date": "2026-07-14",
+  "source_file": "wiki/survey/2026-07-14-scout-ledger-round2.json",
+  "pipeline": [
+    {
+      "stage": 1,
+      "name": "exact_id_string_dedup",
+      "input_count": 113,
+      "output_count": 110,
+      "rows_absorbed": 3,
+      "detail": "id-strings appearing more than once across different lane-family rows: aqa-ttrl-2025 (rows 33,88); auditory-ttc-2503.23395 (rows 79,111); mbr-asr-2510.19471 (rows 76,113)"
+    },
+    {
+      "stage": 2,
+      "name": "arxiv_id_regex_grouping",
+      "regex": "\\d{4}\\.\\d{4,5}",
+      "input_count": 110,
+      "output_count": 104,
+      "records_absorbed": 6,
+      "groups": [
+        {
+          "arxiv_id": "2210.10760",
+          "members": [
+            "RMOveropt-2210.10760",
+            "reward-overopt-2210.10760"
+          ]
+        },
+        {
+          "arxiv_id": "2409.00217",
+          "members": [
+            "ProGRes-2409.00217",
+            "progres-2409.00217"
+          ]
+        },
+        {
+          "arxiv_id": "2503.23395",
+          "members": [
+            "AuditoryTTC-2503.23395",
+            "auditory-ttc-2503.23395"
+          ]
+        },
+        {
+          "arxiv_id": "2510.19471",
+          "members": [
+            "mbr-asr-2510.19471",
+            "MBR-ASR-2510.19471"
+          ]
+        },
+        {
+          "arxiv_id": "2601.18510",
+          "members": [
+            "JitRL-2601.18510",
+            "jitrl-2601.18510"
+          ]
+        },
+        {
+          "arxiv_id": "2603.12520",
+          "members": [
+            "JudgeBoN-Recovery-2603.12520",
+            "judge-bon-fail-2603.12520"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "name": "explicit_alias_clusters",
+      "input_count": 104,
+      "output_count": 94,
+      "records_absorbed": 10,
+      "clusters_applied": 7
+    }
+  ],
+  "final_unique_works": 94,
+  "multi_member_clusters": [
+    {
+      "paper_id": "P-0004",
+      "canonical_key": "2503.22712",
+      "aliases": [
+        "coverageguaranteed2025conformalSER",
+        "I3-03 (2503.22712)"
+      ],
+      "source_row_indices": [
+        4,
+        92
+      ],
+      "lanes": [
+        "kill-I3",
+        "ser-selection-abstention"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": true,
+      "strength_conflict": false,
+      "grades_seen": [
+        "AB",
+        "FT"
+      ],
+      "strengths_seen": [
+        "PARTIAL"
+      ],
+      "merge_basis": "task-specified cluster (coverageguaranteed/I3-03) to verify+include; xlane cross-references match (row4 ser-selection-abstention -> xlane L13=kill-I3; row92 kill-I3 'I3-03 (2503.22712)' -> xlane L1=ser-selection-abstention, i.e. row4's own lane)."
+    },
+    {
+      "paper_id": "P-0031",
+      "canonical_key": "2503.23395",
+      "aliases": [
+        "scaling-auditory-cognition-2025",
+        "AuditoryTTC-2503.23395",
+        "dang2025-auditory-cognition-ttc",
+        "auditory-ttc-2503.23395",
+        "ttc-audio-2025"
+      ],
+      "source_row_indices": [
+        31,
+        41,
+        51,
+        79,
+        84,
+        111
+      ],
+      "lanes": [
+        "audio-judge-multi",
+        "audio-understanding-ttc",
+        "candidate-support-diversity",
+        "kill-I1",
+        "kill-I2",
+        "kill-UMBRELLA"
+      ],
+      "n_lanes": 6,
+      "grade_conflict": false,
+      "strength_conflict": true,
+      "grades_seen": [
+        "FT"
+      ],
+      "strengths_seen": [
+        "DIRECT",
+        "PARTIAL"
+      ],
+      "merge_basis": "task-specified cluster to verify+include; VERIFIED: B's own dedup_rule field states 'scaling-auditory-cognition-2503.23395 (6 lanes)' — these 5 id-strings (6 rows, since auditory-ttc-2503.23395 itself is an exact-string duplicate across kill-I1/kill-UMBRELLA) span exactly the 6 distinct lanes audio-understanding-ttc, audio-judge-multi, candidate-support-diversity, kill-I1, kill-I2, kill-UMBRELLA."
+    },
+    {
+      "paper_id": "P-0033",
+      "canonical_key": "2510.05478",
+      "aliases": [
+        "aqa-ttrl-2025",
+        "AQA-TTRL-2510.05478"
+      ],
+      "source_row_indices": [
+        33,
+        39,
+        88
+      ],
+      "lanes": [
+        "audio-judge-multi",
+        "audio-understanding-ttc",
+        "kill-I2"
+      ],
+      "n_lanes": 3,
+      "grade_conflict": true,
+      "strength_conflict": true,
+      "grades_seen": [
+        "AB",
+        "FT",
+        "SC"
+      ],
+      "strengths_seen": [
+        "ANALOGY",
+        "PARTIAL"
+      ],
+      "merge_basis": "task named this 'aqa-ttrl x2' (the exact-string duplicate of 'aqa-ttrl-2025' alone, rows 33 & 88, already caught by Stage 1 exact-id dedup). On inspection this understates the cluster: B's own dedup_rule field states 'aqa-ttrl-2510.05478 (3)' lanes, which only reconciles if 'AQA-TTRL-2510.05478' (row 39, audio-judge-multi) is the SAME work — confirmed: rows 33/39/88 share identical our_data=['mmau-mini','mmar','mmsu'] (row88's our_data is empty but its xlane L5,L6 cross-references both other rows' lanes), and 33+39+88 span exactly 3 lanes (audio-understanding-ttc, audio-judge-multi, kill-I2), matching the '(3)' count exactly. Promoted from an initial 'uncertain pair' (bare id strings alone would not justify this) to a confirmed merge on this corroborating evidence."
+    },
+    {
+      "paper_id": "P-0034",
+      "canonical_key": "2604.25591",
+      "aliases": [
+        "walking-through-uncertainty-2026",
+        "kuan2026-allm-uncertainty",
+        "I3-01 (2604.25591)"
+      ],
+      "source_row_indices": [
+        34,
+        66,
+        90
+      ],
+      "lanes": [
+        "audio-understanding-ttc",
+        "kill-I3",
+        "selective-prediction-conformal"
+      ],
+      "n_lanes": 3,
+      "grade_conflict": true,
+      "strength_conflict": true,
+      "grades_seen": [
+        "AB",
+        "FT"
+      ],
+      "strengths_seen": [
+        "DIRECT",
+        "PARTIAL"
+      ],
+      "merge_basis": "task-specified cluster to verify+include; VERIFIED: B's own dedup_rule field states 'walking-through-uncertainty-2604.25591 (3)' — matches exactly 3 distinct lanes (audio-understanding-ttc, selective-prediction-conformal, kill-I3); all 3 rows also share identical our_data = ['mmau-mini','mmar','mmsu'], a tuple otherwise unique to this cluster (5 rows total in B carry that tuple, and they split cleanly 3/2 into this cluster and the aqa-ttrl cluster below, with no stray rows)."
+    },
+    {
+      "paper_id": "P-0035",
+      "canonical_key": "2605.28480",
+      "aliases": [
+        "audio-mind-agentic-2026",
+        "AudioMind-2605.28480"
+      ],
+      "source_row_indices": [
+        35,
+        73
+      ],
+      "lanes": [
+        "agentic",
+        "audio-understanding-ttc"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": false,
+      "grades_seen": [
+        "FT"
+      ],
+      "strengths_seen": [
+        "PARTIAL"
+      ],
+      "merge_basis": "task-specified cluster to verify+include; cross-lane xlane tags point at each other's lane (row35 agentic-lane->xlane L5=audio-understanding-ttc; row73 audio-understanding-ttc paper AudioMind-2605.28480 in the agentic lane with xlane L5); same grade (FT) and strength (PARTIAL)."
+    },
+    {
+      "paper_id": "P-0039",
+      "canonical_key": "2603.12520",
+      "aliases": [
+        "JudgeBoN-Recovery-2603.12520",
+        "judge-bon-fail-2603.12520"
+      ],
+      "source_row_indices": [
+        40,
+        82
+      ],
+      "lanes": [
+        "audio-judge-multi",
+        "kill-I1"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": false,
+      "grades_seen": [
+        "FT"
+      ],
+      "strengths_seen": [
+        "ANALOGY"
+      ],
+      "merge_basis": "arxiv_id_regex(2603.12520): id-strings ['JudgeBoN-Recovery-2603.12520', 'judge-bon-fail-2603.12520'] share the embedded arXiv id 2603.12520"
+    },
+    {
+      "paper_id": "P-0042",
+      "canonical_key": "2409.00217",
+      "aliases": [
+        "ProGRes-2409.00217",
+        "progres-2409.00217"
+      ],
+      "source_row_indices": [
+        44,
+        78
+      ],
+      "lanes": [
+        "audio-judge-multi",
+        "kill-I1"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": true,
+      "grades_seen": [
+        "AB"
+      ],
+      "strengths_seen": [
+        "DIRECT",
+        "PARTIAL"
+      ],
+      "merge_basis": "arxiv_id_regex(2409.00217): id-strings ['ProGRes-2409.00217', 'progres-2409.00217'] share the embedded arXiv id 2409.00217"
+    },
+    {
+      "paper_id": "P-0062",
+      "canonical_key": "ernez2023-conformal-asr",
+      "aliases": [
+        "ernez2023-conformal-asr",
+        "I3-04 ernez-conformal"
+      ],
+      "source_row_indices": [
+        65,
+        93
+      ],
+      "lanes": [
+        "kill-I3",
+        "selective-prediction-conformal"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": false,
+      "grades_seen": [
+        "AB"
+      ],
+      "strengths_seen": [
+        "DIRECT"
+      ],
+      "merge_basis": "task-specified cluster (ernez/I3-04) to verify+include; xlane cross-references match (row65 selective-prediction-conformal -> xlane L13=kill-I3; row93 kill-I3 'I3-04 ernez-conformal' -> xlane L9=selective-prediction-conformal, row65's own lane); identical grade (AB) and strength (DIRECT)."
+    },
+    {
+      "paper_id": "P-0066",
+      "canonical_key": "2601.18510",
+      "aliases": [
+        "JitRL-2601.18510",
+        "jitrl-2601.18510"
+      ],
+      "source_row_indices": [
+        70,
+        108
+      ],
+      "lanes": [
+        "agentic",
+        "kill-UMBRELLA"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": false,
+      "grades_seen": [
+        "SC"
+      ],
+      "strengths_seen": [
+        "PARTIAL"
+      ],
+      "merge_basis": "arxiv_id_regex(2601.18510): id-strings ['JitRL-2601.18510', 'jitrl-2601.18510'] share the embedded arXiv id 2601.18510"
+    },
+    {
+      "paper_id": "P-0071",
+      "canonical_key": "2510.19471",
+      "aliases": [
+        "mbr-asr-2510.19471",
+        "mbr-asr-2025",
+        "MBR-ASR-2510.19471"
+      ],
+      "source_row_indices": [
+        76,
+        85,
+        99,
+        113
+      ],
+      "lanes": [
+        "kill-I1",
+        "kill-I2",
+        "kill-I4",
+        "kill-UMBRELLA"
+      ],
+      "n_lanes": 4,
+      "grade_conflict": true,
+      "strength_conflict": true,
+      "grades_seen": [
+        "AB",
+        "FT"
+      ],
+      "strengths_seen": [
+        "DIRECT",
+        "NONE",
+        "PARTIAL"
+      ],
+      "merge_basis": "task named this 'mbr-asr-2510.19471 duplicates' (the arXiv-id-regex-caught pair mbr-asr-2510.19471 / MBR-ASR-2510.19471, rows 76+113 / 99, already merged by Stage 2). On inspection this understates the cluster: B's own dedup_rule field states 'mbr-asr-2510.19471 (4)' lanes, which only reconciles if 'mbr-asr-2025' (row 85, kill-I2, note 'text-only, I1 boundary') is the SAME work — confirmed: row85's our_data=['librispeech','fleurs-r'] is a strict subset shared exactly with row99's identical tuple, and rows 76/85/99/113 span exactly 4 lanes (kill-I1, kill-I2, kill-I4, kill-UMBRELLA), matching the '(4)' count exactly. Promoted from an initial 'uncertain pair' to a confirmed merge on this corroborating evidence; the row's own cautionary note ('text-only, I1 boundary') is preserved verbatim in this paper's strength_conflict (strengths include 'NONE' alongside 'DIRECT'/'PARTIAL')."
+    },
+    {
+      "paper_id": "P-0088",
+      "canonical_key": "2210.10760",
+      "aliases": [
+        "RMOveropt-2210.10760",
+        "reward-overopt-2210.10760"
+      ],
+      "source_row_indices": [
+        103,
+        112
+      ],
+      "lanes": [
+        "kill-I4",
+        "kill-UMBRELLA"
+      ],
+      "n_lanes": 2,
+      "grade_conflict": false,
+      "strength_conflict": false,
+      "grades_seen": [
+        "AB"
+      ],
+      "strengths_seen": [
+        "ANALOGY"
+      ],
+      "merge_basis": "arxiv_id_regex(2210.10760): id-strings ['RMOveropt-2210.10760', 'reward-overopt-2210.10760'] share the embedded arXiv id 2210.10760"
+    }
+  ],
+  "uncertain_pairs": [],
+  "uncertain_pairs_resolution_note": "Two candidate pairs were initially flagged uncertain from bare id-string/arXiv-id inspection alone: (1) 'AQA-TTRL-2510.05478' (row 39) vs the 'aqa-ttrl-2025' exact-dup pair (rows 33, 88); (2) 'mbr-asr-2025' (row 85) vs the 'mbr-asr-2510.19471' cluster (rows 76, 99, 113). Per the no-merge-when-in-doubt rule, both were NOT silently merged; both were instead cross-checked against B's own dedup_rule field (which states explicit lane-recurrence counts for these two canonical works: 'aqa-ttrl-2510.05478 (3)' and 'mbr-asr-2510.19471 (4)') and against the our_data benchmark-tuple field for corroboration. Both counts and both tuple patterns reconcile exactly only if the merge is made, so both were promoted from uncertain to confirmed (see ALIAS_CLUSTERS entries in this script / multi_member_clusters aqa-ttrl-2025 and mbr-asr-2510.19471 above for the full evidence trail). No pairs remain uncertain after this cross-check.",
+  "historical_estimate_reproducibility": {
+    "historical_value": "~93 (_est)",
+    "source": "B: counts.unique_papers_after_cross_lane_dedup_est",
+    "reproducible_by_any_mechanical_path_tested": false,
+    "nearest_mechanical_values_actually_computed": {
+      "stage1_exact_id_dedup": 110,
+      "stage2_plus_arxiv_id_regex": 104,
+      "stage3_final_plus_explicit_alias_clusters": 94
+    },
+    "note": "None of the three mechanically-reproducible checkpoints (110 / 104 / 94) equals the historical estimate of ~93. The nearest is the Stage-3 final count (94), off by 1. No further candidate merge was found in B (id strings, embedded arXiv ids, dedup_rule lane-recurrence counts, and our_data tuple cross-checks) that would close this 1-paper gap without fabricating a justification; it is recorded as unexplained rather than silently rounded away."
+  }
+}

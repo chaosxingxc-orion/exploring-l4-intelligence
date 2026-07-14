@@ -2,7 +2,7 @@
 title: "Research Objective & Current State — 日常加载的唯一现状入口（热层）"
 role: "认知层：现状/研究对象/约束/open items/取代索引的单一极简入口。派生自 Decision-Log（审计层），可重建，非唯一记录。被取代的条目掉出本文件（在 archive/ 与 Decision-Log 里）。"
 maintained: "每有取代关系变化即更新本文件；新决策先 append 进 Decision-Log 再反映到此。"
-last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-14 (续37 knowledge-stack adjudication)."
+last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-14 (续38 survey-v2 MAJOR_REVISION response + P0)."
 ---
 
 # Research Objective & Current State
@@ -32,12 +32,19 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 
 ## Open items（live）
 
-1. **Survey v2 完成（2026-07-14, wf_c6ed06f2）**：15 敌意 lane / 305 查询 / ~93 篇；产物
-   `wiki/survey/2026-07-14-{neighbor-matrix,coverage-and-kill-matrix,sota-cards}-v2.md` +
-   `scout-ledger-round2.json` + `search-query-log.jsonl`。**结果**：I1 一般选择器 DIRECT_OCCUPIED（killed，
-   MBR 在我方 LS/FLEURS/CoVoST 上等 K 胜）；**I4 跨矩阵兑现面 = 唯一 NO_DIRECT_MATCH 全 lane（最强空位）**；
-   strict-I2 / I3-combined / UMBRELLA 交集亦 NO_DIRECT_MATCH（工作假设,非已证）。**决策包**
-   `2026-07-14-stage1c-decision-package.md` 待 owner Stage-1C 选题。round-2 饱和目标见 ledger。
+1. **Survey v2 = ROUND1_SCOUT_COMPLETE（续38 状态纠偏,非"完成/收官"）**：15 敌意 lane /
+   SEARCH 218 + FETCH 87（勿再合称"305 查询"）/ **精确 94 篇**（113→110→104→94,`~93` 不可机械重现）。
+   博导复审 MAJOR_REVISION 已核验+逐条回应+P0 八项整改：回应
+   `2026-07-14-survey-v2-response-and-p0-remediation.md`、replay bundle
+   `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/`（历史 raw response 永久缺失=RAW_EVENT_UNAVAILABLE,
+   round-1 检索不可重放;12/12 校验 PASS）。**结果（证据级封顶 ABSTRACT_VERIFIED 待双审）**：I1 kill
+   方向保持（MBR 更正后更强）;**I4 = NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE,收窄表述**（scaling-surface
+   方法学族已被 text/VLA 占据,空白=供给轴×冻结 omni×label-free 预测律;勿再称"最强空位"）;
+   strict-I2（=I2∩I4,已登记术语表）/I3-combined/UMBRELLA 同带限定开放。**决策包 =
+   PRE_STAGE1C_DECISION_DRAFT**——owner 已接受门控:P0+P1 关闭、STAGE1C_DECISION_READY 后才提请选题。
+   **P1 清单**：9 既有饱和目标 + 8 新篇（bundle `round2_new_targets.jsonl`,含 CoVer 2602.12281=
+   Proposal E 最近邻威胁;未来轮次按可回放模板全程捕获 raw response）、identity contract 冻结、
+   comparator 重建、C1/C4、独立盲重建。
 2. **诚信核查 C1/C4**（Stage-1B 放行前置）：C1 尝试普查（registry vs raw run）、C4 负结果普查。
 3. **same-selector contract**（Stage-1C 前）：冻结 operator/score inputs/预算/弃权/gold 边界/池几何,
    跨任务不可固定处显式标 task-specific。
@@ -68,6 +75,12 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 | "广度是护城河"（已证贡献） | 工作假设,非已证新颖性;`breadth=external-validity 维度` | 续35 |
 | P0-SURV-1 = CLOSED | **PARTIAL**（计数可重建/搜索不可重放/科学覆盖 OPEN） | 续35 |
 | response `0be1285` 的"格空/护城河"措辞 | 由 response-v2 dated successor 取代 | 续35 |
+| "Survey v2 complete / 调研收官"（续36/233dc7e） | **ROUND1_SCOUT_COMPLETE** | 续38 |
+| 决策包"待 owner 选题" | **PRE_STAGE1C_DECISION_DRAFT**（P0+P1 门控后才提请） | 续38 |
+| READ "~70-85% oracle" | 更正:Table 1 兑现 7.7–68.5%（LS 仅 12–17%） | 续38·勘误 |
+| "~93 papers" | **精确 94**（113→110→104→94;93 不可机械重现） | 续38 |
+| I4 "最强空位/strongest differentiator" | 收窄:方法学族邻域已占,空白=供给轴×冻结omni×label-free预测律 | 续38 |
+| TAP-GER/ProGRes = kill-I1 DIRECT | 重分类:扩池/改写算子,非池内选择占据 | 续38·勘误 |
 
 ## 正典工件指针
 

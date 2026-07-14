@@ -202,6 +202,15 @@ dated reflection doc, never rewrite. When reading pre-2026-07 records, apply thi
   selector；I2=音频接地的冻结 omni selector；I3=受约束/可弃权、显式检测 Goodhart 拐点的跨任务
   selector（I1–I3 系重校准审查所拟）；I4=(供给 c, 选择器) 二元组——供给分层的兑现率研究（行使该
   审查 S1-F2 的"第四个"选项）。均为候选，Stage-1C 收官前不选。
+- **strict-I2 / 同核曲面选择器（= I2∩I4 合取）**：同一冻结 omni 既作生成器、又以**自身**音频接地
+  信号作打分器，且以 ρ(c) 兑现面刻画——即 I2 与 I4 的合取身份。构件出处均早于 Survey v2 猎杀：
+  同核双系统+δ_corr（TH2a，2026-07-05）、ρ 面（owner 2026-07-11 签署/续34）、own-signal 生存条件
+  （I2 拟名当刻，重校准审查 2026-07-13）；「strict-I2」**命名**首现 2026-07-14 Survey v2 工件（补登
+  于 SURVEY-RESP-2026-07-14-01，续38）。注意：bare-I2 的**机制**已被 scaling-auditory 2503.23395 的
+  同核 audio-conditioned beam log-lik 占据（格局混合：ST/SLU 格仍 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE）。
+- **UMBRELLA（伞式交集身份，第五候选）**：training-free RL ∩ 冻结 omni ∩ advantage→下一步动作的
+  立项交集对象（2026-06-26 立项即有，非 Survey v2 新造；「advantage→next action」锐化措辞首现
+  续36/Survey v2）。与 I1–I4 并列待 Stage-1C；IAD 2504.01931 为预登记坍缩风险。
 - **PRE_STAGE2_BLUEPRINT（蓝图素材）**：Stage-1A 期间撰写、无现时效力的未来方案结构草图（如
   `84c6cf6` 的选择器方向 proposal 草稿）；非 Stage-2 入口、非确证协议。
 - **哈希正典（canonical hash）**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（LF，按
