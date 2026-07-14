@@ -2,7 +2,7 @@
 title: "Research Objective & Current State — 日常加载的唯一现状入口（热层）"
 role: "认知层：现状/研究对象/约束/open items/取代索引的单一极简入口。派生自 Decision-Log（审计层），可重建，非唯一记录。被取代的条目掉出本文件（在 archive/ 与 Decision-Log 里）。"
 maintained: "每有取代关系变化即更新本文件；新决策先 append 进 Decision-Log 再反映到此。"
-last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-15 (续44 Gate B closed: protocol v2 + PRESS revised + P0-R8 validator v2, six gates green, zero queries executed)."
+last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-15 (续45 owner clarification landed + record-system remediation A/B/C executed; Gate S0 signature = next unlock)."
 ---
 
 # Research Objective & Current State
@@ -88,7 +88,15 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    owner 裁决**全部搁置**（含 schema-first）,Stage-1C 收官后按四门复活（时机/顺序/规格/裁决）;
    回应 `2026-07-14-response-to-knowledge-stack-evaluation.md`。其新造代号（T0–T4 信任层、方案 A 等）
    **未登记**,引用须带限定语（勿与 T0–T7 探针编号、survey-v2 评审 Proposal A 混同）。
-6. **C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A,coordinator 抽查后收档,owner 于 1B-0 签批时终验）**：
+6. **方向澄清 + 记录整改（续45,2026-07-15）**：owner 澄清——**第一创新假设=构建黑盒 omni agentic
+   system,TFRL=牵引北极星,ρ 类兑现率=测量层**（v2 博导评审据此改判 UMBRELLA 升主纲领、selector 降
+   组件,维持 RETURN_FOR_MAJOR_REVISION）;**Gate S0 owner 签字身份页 = 下一解锁动作**,签署后
+   Thesis/本文件全新重写（动作 D）——在此之前本文件的「研究对象」段按旧正典保留、读者须知其已被
+   澄清信号覆盖。配套裁决：资源姿态三阶段（全力摸高→整合→压降,前期预算不限定,等预算判据=
+   PHASE-3_TOOL）;黑盒定案（本地模型=低成本校验）;记录系统整改 A/B/C 已执行（三模板/记忆整编/
+   CLAUDE 瘦身+归档首扫,工件 `2026-07-15-record-system-denoise-and-rationale-survey-proposal.md`）;
+   新专门仓 SHELVED。
+7. **C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A,coordinator 抽查后收档,owner 于 1B-0 签批时终验）**：
    C1 补登 E 盘运行树+W4 outputs+MLflow（`docs/integrity/2026-07-14-edrive-run-inventory.jsonl`,376 行
    聚合）,config-selection 轨迹=**永久缺口**（禁补造,1B 起由探针尝试登记前瞻关闭）;C4 台账 29 行
    （**GLAP full-corpus 构建 PARKED 31000/57638、CUDA 阻塞**在此列入热层;vLLM/int4 OOM 等 2 项转正）。

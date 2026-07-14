@@ -6,6 +6,44 @@
 
 ---
 
+### 2026-07-15（续45）· owner 方向澄清落地 + 记录系统整改（动作 A/B/C 执行）——首条 ADR 骨架条目
+
+**Context.** owner 发现两件事：①连续对抗评审把研究对象从「TFRL 牵引的 agentic system」逐步压缩成
+「固定 K 池 selector 的 ρ 面」——目标置换：ρ 本是北极星**指标**（反向牵引设计），被倒置成研究对象
+本身（RDU 降 ablation〔续32〕→ 对象锁 selector 面〔续34〕→ UMBRELLA 跌第五候选）；②AI 跨会话把
+目的层讨论全部遗忘。owner 向博导评审澄清（第一创新假设 = 构建面向冻结黑盒 omni 的 agentic system；
+training-free RL = 牵引北极星；基础模型按黑盒、只经外部系统优化），评审 v2 改判 UMBRELLA/系统级升
+主纲领、selector 降组件（维持 RETURN_FOR_MAJOR_REVISION；Gate S0 owner 签字身份页待签）。随后
+owner 确诊记录系统两类根因：**只记事实不记推理** + **记录冗杂噪音**，并下三步走指令。
+
+**Decision.**（owner 系列裁决，2026-07-15）① 资源姿态三阶段 = 全力摸高→持续整合→成本压降；前期
+预算不限定；等预算类判据标 `PHASE-3_TOOL` 延后（勿用③阶段判据评①阶段方案）。② 黑盒定案：模型
+一律按黑盒用，本地 llama.cpp 模型 = 低成本校验环节（logprob 同核信号降为校验工具、非承重路径）。
+③ 记录系统三步走：业内调研 → 四承载体选型 → 最简单先用；**新专门仓 SHELVED**（聚焦当前阶段）。
+④ 动作 A/B/C 放行执行；动作 D（热层重写）绑定 Gate S0 签署。
+
+**Rationale.** ①阶段目标是探能力天花板——过早预算归一会系统性杀死「贵但能到达的高点」，高点存在
+②③阶段才有目标空间；黑盒口径服务跨模型可迁移与部署现实，本地白盒信号仍可作廉价 sanity check；
+记录整改依据 = 调研核验三主线（deep-research wf_4fff9a4f，105 Opus 代理 / 23 源 / 25 claims 每条
+三票对抗核验 0 refuted）：推理必须作为一等记忆类型**先于任何压缩**落盘（默认压缩保事实弃推理）、
+context rot 内容驱动实证为真、自动遗忘不可信 → 修剪人工治理可逆。备选「在旧记录上修修补补」被否：
+限定语堆叠正是噪音失效的形态本身。
+
+**Consequences.**（动作已执行，本条即登记）A：三模板生效——记忆五字段 / 续NN ADR 骨架〔本条首用〕/
+热层目的链（全文 [[AI-Collaboration]] §记录规约）。B：Claude 侧记忆库整编 32→17 件（四 WSL 件合一；
+16 件退役 memory/archive/ 带墓碑索引）。C：CLAUDE.md/AGENTS.md 19.8KB→13.2KB——方法论全文迁
+[[Research-Methodology]]（含资源姿态三阶段与研究流程三阶段的同名异构拆名）、死代号/事故史迁
+`wiki/archive/terminology-tombstones.md`、研究状态不再在 CLAUDE.md 维护（单一真源）；新增「记录
+规约」节（默认加载面三处 / 分层取代 / 战役收官即归档 = 活性判据 grep 正典四件）。wiki 首扫：
+≤07-10 不被正典引用的 17 个日期件 git mv → archive/（顶层日期件 75→58）。加载面预算试运行：
+CLAUDE ≤10KB（**实测 13.2KB 超标**，待 owner 定放宽或再外移）、Objective ≤5KB（待动作 D）、记忆
+索引 ≤30 行（已达）。工件：`2026-07-15-record-system-denoise-and-rationale-survey-proposal.md`
+（含 wiki 三分治 §2.7）；两份博导评审件（v1 + v2-owner-clarified）本批入库。
+
+**Supersedes.**「唯一主问题 = ρ 实现率」（G0，续22–24 表述）被 owner 澄清**部分取代**——正典改写
+待 Gate S0 签字（本条只登记取代信号，不代改 Thesis/Objective；墓碑已挂 terminology-tombstones）。
+CLAUDE.md 旧全文版被瘦身版取代（历史在 git）。
+
 ### 2026-07-15（续44）· Gate B 收口：round-2 协议 v2 + PRESS 预检修复 + P0-R8 校验器 v2——六门全绿（执行仍零查询）；Stage-1A 研究提案成稿
 
 **G6（P0-R8 校验器）.** validator v2（commit `fcd1c57`）：R3 两级化（纯摘要承重=FAIL / 混合定位=WARN
