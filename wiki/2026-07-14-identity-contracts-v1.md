@@ -2,8 +2,8 @@
 title: 候选身份合同冻结 v1 + same-selector contract（owner 签核件，触点①）
 date: 2026-07-14
 stage: Stage-1A
-status: DRAFT_FOR_OWNER_SIGNOFF — 签核后即冻结；此后任何限定词变更走 §8 post-hoc 日志
-sequencing: "与 claim-ledger-v1 同批交付（遵 RESP-02 §3.5 顺序：台账先于冻结）——本稿在台账工作流运行期间起草，正式提交 owner 签核以台账 v1 落地并反映其 discrepancies 为前置"
+status: FROZEN — owner 签核于 2026-07-14（AskUserQuestion 治理裁决，见 §9）；任何限定词变更走 §8 post-hoc 日志
+sequencing: "与 claim-ledger-v1 同批交付（遵 RESP-02 §3.5 顺序：台账先于冻结）——台账 v1 落地（commit a6a2452）、其承重 discrepancies（KIT/IAD 等）已反映后提交签核"
 role: "P1 序列 identity-freeze 步骤 + open item 3 same-selector contract 合并交付；1B-0 探针协议与 round-2 检索协议的上游输入"
 freeze_discipline: "冻结先于 round-2 检索与 1B 探针（反合取洗白：先冻结定义，再看新邻居）；每份合同带出处日期链"
 generated_by: "Claude Fable 5 主会话（基于续34–40 正典状态起草）"
@@ -121,5 +121,8 @@ signoff: { owner: PENDING, date: null }
 ```text
 签核语义：冻结以上六份定义+判据与 same-selector contract；此后变更走 §8 日志。
 签核不构成：对任何占据/无匹配裁决的科学终审（那些仍待 P1 双审与盲审）。
-owner: ____________   date: ____________
+owner: 已签核 —— 2026-07-14，AskUserQuestion 治理裁决（问题「身份合同 v1 + same-selector
+contract——签核冻结？」答「签核冻结」；签核前 owner 获交台账承重发现摘要：KIT ST +6.11 纠错、
+SQA/SSUM 负兑现、JudgeBoN=rho_pool、ernez 置信/覆盖更正、MBR ~31% 数据依赖）。
+记录性质：治理性定义冻结裁决，非审计签署（续39 纪律）。
 ```

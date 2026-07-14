@@ -68,8 +68,9 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    四探针 P-α 头空/P-β MBR 基线/P-γ 同核信号/P-δ 供给对比（directional-only,单次触碰,尝试全登记）;
    决策包 v2 = 调研+探针双证据。
 2. **诚信核查 C1/C4**（Stage-1B 放行前置）：C1 尝试普查（registry vs raw run）、C4 负结果普查。
-3. **same-selector contract**（Stage-1C 前）：冻结 operator/score inputs/预算/弃权/gold 边界/池几何,
-   跨任务不可固定处显式标 task-specific。
+3. **same-selector contract = FROZEN（续41,owner 签核）**：与六份身份合同一并冻结于
+   `2026-07-14-identity-contracts-v1.md`（池内选择、打分信号登记轴、信息边界、等 K+MBR 强制基线、
+   ρ cellwise 四量并列;task-specific 留空处显式标注）;限定词变更走合同 §8 post-hoc 日志。
 4. **Stage-1C 决策包**：I1–I4 kill/pivot/proceed dossier + 供给收益/selector 收益分解 + 预算公平性 +
    可证伪三结论（proceed/pivot/kill）;**agentic-loop vs 一次性 rerank** 作为开放的 Stage-1C 问题。
 5. **知识栈选型 = PARKED（续37）**：外来评审（llm-wiki-compiler 试点提案）经六镜头敌意复核后

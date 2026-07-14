@@ -6,6 +6,22 @@
 
 ---
 
+### 2026-07-14（续41）· 身份合同 v1 + same-selector contract 冻结（owner 签核）；claim-ledger v1 落地（43 discrepancy）
+
+**批次 B/C 交付.** claim-ledger v1（P0-R3/R7，commit `a6a2452`）：44 行（35 全文定位/7 摘要/2 不可达，
+11 条提取期丢弃已登记），算子×verifier 普查表；**43 条 discrepancy=候选更正**，承重项：KIT
+2606.04730 的 ST oracle 实为 **+6.11**（我方误写 +2.0）且其 **label-free 兑现在 SQA/SSUM 为负**
+（仅 ASR 正兑现）——census P-0084 歧义借数字对齐解决；JudgeBoN Recovery 锚=池均值（只 formalize
+rho_pool 非 rho_greedy）；ernez「80%」=置信水平非覆盖率（I3 格候选更正）；MBR ~31%=LibriSpeech
+特定（ReazonSpeech ~9%）；audio-mind Goodhart cliff 系 n=6。
+
+**身份合同冻结（owner 触点① 完成）.** `wiki/2026-07-14-identity-contracts-v1.md` 状态 FROZEN：
+六份身份合同（完整三结局判据+量词规则+出处日期链;strict-I2 标 post_hoc_created_at=07-14）+
+same-selector contract（open item 3 交付：池内选择、打分信号登记轴、等 K+MBR 强制基线、四量并列）+
+post-hoc 日志（续36 锐化预置行）。**owner 2026-07-14 AskUserQuestion 签核**（签核前获交台账承重
+发现摘要）——治理性定义冻结，非审计签署。敌意预检两轮（12 缺陷全修后零残留）。
+**解锁**：C2 round-2 协议冻结 + 1B-0 探针协议（下一个 owner 签批件）。
+
 ### 2026-07-14（续40）· owner 裁决：阶段排序回归三段细分原序（1A→1B→1C）；1B 四探针全包（协议签批后开机）
 
 **背景.** Stage-1A 收官规划时发现记录内两种排序并存：owner 2026-07-13 三段细分（1C「基于
