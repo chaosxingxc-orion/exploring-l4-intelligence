@@ -9,6 +9,13 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 
 > **给读者/agent 的一句话**：默认只读本文件 + `CLAUDE.md`。要某条决策的出处才去 grep
 > `Decision-Log.md`（冷档案，勿整篇读）。术语见 CLAUDE.md 术语表。
+>
+> **阶段 vs 工单速查（owner 2026-07-14 要求）**：项目阶段只有 Stage-1A/1B/1C → Stage-2 → Stage-3
+> （**现在 = Stage-1A 收尾**）。P0 / P0-R / P1 是评审开出的 **Stage-1A 内部整改工单批次**（初审 P0
+> 八项 → 再复审 P0-R 返工八项 → 选题前置 P1），C1–C5 是诚信核查包（C1/C4 为 Stage-1B 前置）——
+> 它们都**不是**阶段。**排序（owner 续40 裁决）= 1A→1B→1C**：工单关闭 + Stage-1B 四探针（C1/C4
+> 关闭+协议 owner 签批后开机）→ 申请 STAGE1C_DECISION_READY → owner 以调研+探针**双证据**做
+> Stage-1C 选题收官。
 
 ## 现在在做什么（Stage-1A · 问题界定）
 
@@ -50,7 +57,9 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    **重排 P1 序列（按再复审 §6 相对顺序并入 §7 的 P0-R 编号,两处偏差列明于 RESP-02 §3.5）**：
    P0-R2 canonical census → P0-R3 真 claim 台账 → identity freeze（含 post-hoc 日志）→ round-2
    protocol freeze → 可回放检索（9+8 篇,含 CoVer=Proposal E 威胁）→ comparator cards → C1/C4 →
-   P0-R8 repo 级状态门 → 独立盲重建。
+   P0-R8 repo 级状态门 → 独立盲重建。**并行 GPU 线（续40,1B 先行）**：探针协议预注册→owner 签批→
+   四探针 P-α 头空/P-β MBR 基线/P-γ 同核信号/P-δ 供给对比（directional-only,单次触碰,尝试全登记）;
+   决策包 v2 = 调研+探针双证据。
 2. **诚信核查 C1/C4**（Stage-1B 放行前置）：C1 尝试普查（registry vs raw run）、C4 负结果普查。
 3. **same-selector contract**（Stage-1C 前）：冻结 operator/score inputs/预算/弃权/gold 边界/池几何,
    跨任务不可固定处显式标 task-specific。
