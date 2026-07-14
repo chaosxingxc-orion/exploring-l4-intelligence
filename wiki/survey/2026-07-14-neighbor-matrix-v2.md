@@ -1,5 +1,11 @@
 # Neighbor Matrix — Stage-1A Survey v2
 
+> **⚠ SUPERSESSION（2026-07-14 晚，续39/41；原文一字未改）**：本文件 token 由 RESP-02 §3.3 身份索引表
+> 取代；**已证实的行级更正**（claim-ledger v1，此处只列承重项）：L147 READ「~70-85% oracle」→ Table 1
+> 实测 7.7–68.5%（LS 仅 12–17%）；KIT 行 ST oracle 实为 +6.11 且 SQA/SSUM 兑现为负；TAP-GER/ProGRes
+> 系扩池/改写算子非池内选择（kill-I1 DIRECT 降级）；JudgeBoN Recovery 只 formalize rho_pool。
+> FT 标签按 header 指示全量降级（机器字段版见 claim-ledger）。
+
 > **Coordinator-verified header (2026-07-14, Survey v2 round-1, wf_c6ed06f2).** Evidence-grade honesty: the workflow`s WebFetch was blocked, so per-paper `[FT]` tags in this file are workflow cite-checks via **WebSearch, not fulltext** — treat them as **SCOUT/ABSTRACT** unless listed here. **COORDINATOR-VERIFIED (personal WebSearch this session):** mbr-asr 2510.19471 (Jinnai, real), READ 2606.04680 (real), scaling-auditory 2503.23395 (Dang et al, real), AudioToolAgent 2510.02995 (Wijngaard et al, real, agent does NOT access audio → tool-orchestration not reward-guided selection), jia-SER 2602.03873 (real). **UNVERIFIED-CITATION (network NOT_RESOLVED this round):** 2512.10170, 2512.10403. Future-dated arXiv ids (2602–2606) are plausibly real (current month = 2026-07) but not all personally checked. Raw per-query trail: `wiki/survey/2026-07-14-search-query-log.jsonl` (305 queries). Kill-matrix vocab only; no `EMPTY` cells.
 > Every number tagged `[paper — url]` or `[ours-directional]`. No invented numbers.
 > Cite-check failures are flagged **UNVERIFIED-CITATION** inline (2 total: `semantic-confidence-aac-2512.10170`, `brace-2512.10403` — both `NOT_RESOLVED_THIS_ROUND`, network/socket failure, not confirmed fabrication).

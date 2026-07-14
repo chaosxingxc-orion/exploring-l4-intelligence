@@ -1,4 +1,5 @@
 ---
+superseded_banner: "⚠ SUPERSESSION（2026-07-14 晚，续38/39/41，原文一字未改）：本包状态=PRE_STAGE1C_DECISION_DRAFT（非 decision-ready）；文内 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE 等 token 已由 RESP-02 §3.3 按身份索引表取代（I4 现行=METHOD_FAMILY_OCCUPIED+实例化 UNDERSEARCHED，勿再引'single clearest whitespace'）；'~93 papers'已更正为 94 记录簇（census v1: 92 resolved）；KIT ST oracle 实为 +6.11 且 SQA/SSUM 负兑现（claim-ledger #11）；证据级封顶 ABSTRACT_VERIFIED 待双审。现行定义源=identity-contracts-v1（FROZEN@dce5c79）。"
 title: "Stage-1C Decision Package — candidate-identity dossiers from Survey v2 (owner selects on waking)"
 date: 2026-07-14
 role: "Assembles Survey v2 into an owner-decision-ready form. Makes NO selection. Stage-1B stays unauthorized."

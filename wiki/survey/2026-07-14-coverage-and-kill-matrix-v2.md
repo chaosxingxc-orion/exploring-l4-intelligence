@@ -1,5 +1,11 @@
 # Coverage & Kill Matrix — Stage-1A Survey v2
 
+> **⚠ SUPERSESSION（2026-07-14 晚，续39/41；原文一字未改）**：本文件的 `NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE`
+> 词表与各加粗裁决格已由 **RESP-02 §3.3 按身份索引 token 表**取代（否定性结论现行形式 =
+> `NO_DIRECT_MATCH_AMONG_RETAINED_RECORDS`@94簇 + 强制伴随 token）；身份定义现行源 =
+> `2026-07-14-identity-contracts-v1.md`（FROZEN@dce5c79）；本文件 FT 标签全量降级与逐条更正见
+> `2026-07-14-claim-ledger-v1/`（43 条 discrepancy，含 sota-cards L95 EMPTY 违规承认）。
+
 > **Coordinator-verified header (2026-07-14, Survey v2 round-1, wf_c6ed06f2).** Evidence-grade honesty: the workflow`s WebFetch was blocked, so per-paper `[FT]` tags in this file are workflow cite-checks via **WebSearch, not fulltext** — treat them as **SCOUT/ABSTRACT** unless listed here. **COORDINATOR-VERIFIED (personal WebSearch this session):** mbr-asr 2510.19471 (Jinnai, real), READ 2606.04680 (real), scaling-auditory 2503.23395 (Dang et al, real), AudioToolAgent 2510.02995 (Wijngaard et al, real, agent does NOT access audio → tool-orchestration not reward-guided selection), jia-SER 2602.03873 (real). **UNVERIFIED-CITATION (network NOT_RESOLVED this round):** 2512.10170, 2512.10403. Future-dated arXiv ids (2602–2606) are plausibly real (current month = 2026-07) but not all personally checked. Raw per-query trail: `wiki/survey/2026-07-14-search-query-log.jsonl` (305 queries). Kill-matrix vocab only; no `EMPTY` cells.
 > Verdict vocabulary is fixed: **DIRECT_OCCUPIED** · **PARTIAL_ANCESTOR** · **ANALOGY_ONLY** · **UNDERSEARCHED** · **NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE**. **No cell is ever EMPTY.**
 > Every UNDERSEARCHED cell explicitly states it *withstood the challenger hunt* (a targeted probe was run and found no direct occupant, but coverage was thin — distinct from NO_DIRECT_MATCH, where the probe was adequate).
