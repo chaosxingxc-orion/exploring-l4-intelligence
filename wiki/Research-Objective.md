@@ -50,7 +50,8 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    discrepancy"——5 行综合/摘要误标全文级;discrepancy 非空 43 中 11 条明示无实质问题,五级枚举重算
    =Gate A;11 条提取期丢弃明细已从工作流 journal 恢复入库 docs/checks/〕。承重更正维持有效：KIT ST
    oracle +6.11、SQA/SSUM 负兑现;JudgeBoN=rho_pool;ernez 置信/覆盖。**do_not_claim（复审 §13,机器块）**：
-   P0_R_COMPLETE / 92_EXACT / 35_FULLTEXT / 43_DISCREPANCIES / PREREQUISITES_MET / δ_corr=选择重合。
+   （以下均已撤回停用,勿再引）P0_R_COMPLETE / 92_EXACT / 35_FULLTEXT / 43_DISCREPANCIES /
+   PREREQUISITES_MET / δ_corr=选择重合。
    **Gate 路线（续42 接受）**：**A 主体已执行（RESP-04,commit 28ad858）**——census v2（94 簇→95
    works,94 RESOLVED+1 如实 UNRESOLVED,83/95 版本钉,95/95 全作者,P-0016 拆二/P-0084 指纹落定）+
    ledger v2（62 行一 claim×一 work×一 span;discrepancy 五级：NONE 20/MINOR 19/**MATERIAL 15/
@@ -116,7 +117,7 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 | "~93 papers" → 续38"精确 94" | **「v1 规则集 94 记录簇」**（canonical census=P0-R2 待做） | 续39 |
 | I4 "最强空位/strongest differentiator" | METHOD_FAMILY_OCCUPIED;实例化 UNDERSEARCHED;增量贡献未示 | 续38/39 |
 | TAP-GER/ProGRes = kill-I1 DIRECT | 重分类:扩池/改写算子,非池内选择占据 | 续38·勘误 |
-| 续38"P0 八项全部执行"（RESP-01） | **P0: 2 CLOSED + 6 PARTIAL（3 残留簇）**;RESP-02 supersede | 续39 |
+| 续38"P0 八项全部执行"（RESP-01,已撤回） | **P0: 2 CLOSED + 6 PARTIAL（3 残留簇）**;RESP-02 supersede | 续39 |
 | RESP-01 把 owner 写入 integrity_reviewer 签署位 | **失实更正**:owner 仅两项治理裁决;integrity=PENDING | 续39 |
 | 全局 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE | 按身份索引 token 表（RESP-02 §3.3）;全局 token 停用 | 续39 |
 | "一手数字全部可溯源"（RESP-01 R10 行） | 限定:已抽查者可溯源;未审数字=未核验,不外推 | 续39 |

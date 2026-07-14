@@ -1,4 +1,5 @@
 ---
+superseded_banner: "⚠ SUPERSESSION（2026-07-15，原文一字未改）：本信的完成度声明（P0 全八项）、精确 94、全局 token、以及 signoff 块把 owner 写入 integrity_reviewer 位——均已被 RESP-02（2026-07-14-p0r-response-to-remediation-rereview.md）与第三轮复审裁定撤回/纠正；现行状态见 RESP-04 与 Research-Objective 热层。本文件仅作历史记录保留。"
 response_id: SURVEY-RESP-2026-07-14-01
 title: 对《Survey v2 与 Stage-1C 决策包博导级对抗复审》的正式回应 + P0 整改
 date: 2026-07-14
