@@ -69,6 +69,11 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    owner 裁决**全部搁置**（含 schema-first）,Stage-1C 收官后按四门复活（时机/顺序/规格/裁决）;
    回应 `2026-07-14-response-to-knowledge-stack-evaluation.md`。其新造代号（T0–T4 信任层、方案 A 等）
    **未登记**,引用须带限定语（勿与 T0–T7 探针编号、survey-v2 评审 Proposal A 混同）。
+6. **C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A,coordinator 抽查后收档,owner 于 1B-0 签批时终验）**：
+   C1 补登 E 盘运行树+W4 outputs+MLflow（`docs/integrity/2026-07-14-edrive-run-inventory.jsonl`,376 行
+   聚合）,config-selection 轨迹=**永久缺口**（禁补造,1B 起由探针尝试登记前瞻关闭）;C4 台账 29 行
+   （**GLAP full-corpus 构建 PARKED 31000/57638、CUDA 阻塞**在此列入热层;vLLM/int4 OOM 等 2 项转正）。
+   两份 census：`docs/integrity/2026-07-14-c{1,4}-*-census-draft.md`。
 
 （已闭/移除：reviewer response 已提交 `0be1285` + 接受 reassessment 的 response-v2;冷热归档已执行
 `34024fc`,50 文档入 archive/。）

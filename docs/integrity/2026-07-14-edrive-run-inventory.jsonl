@@ -1,0 +1,377 @@
+{"_meta": "E-drive raw-run inventory + W4 outputs (C1 registry extension), generated 2026-07-14 by coordinator; aggregated: per-dir file listing capped at 15 with summary rows; purpose = discoverability registration, not full manifest"}
+{"path": "_repro", "type": "ROOT", "note": "scan root under E:\\chao_workspace\\exploring-l4-intelligence\\speechrl-data; dirs beyond depth1 aggregated"}
+{"path": "Realization.lean", "type": "file", "bytes": 3868, "mtime": "2026-07-07T00:45:07"}
+{"path": "asr_bon_llamacpp_snr5.json", "type": "file", "bytes": 207419, "mtime": "2026-07-02T18:29:30"}
+{"path": "asr_bon_other_rows.json", "type": "file", "bytes": 1822, "mtime": "2026-06-25T09:52:41"}
+{"path": "asr_bon_v2_clean.json", "type": "file", "bytes": 1439517, "mtime": "2026-07-11T04:18:17"}
+{"path": "asr_bon_v2_full_run.log", "type": "file", "bytes": 967, "mtime": "2026-07-11T01:34:02"}
+{"path": "asr_bon_v2_full_run2.log", "type": "file", "bytes": 26298, "mtime": "2026-07-11T04:18:19"}
+{"path": "asr_bon_v2_noise2_run.log", "type": "file", "bytes": 14873, "mtime": "2026-07-11T10:38:46"}
+{"path": "asr_bon_v2_snr5.json", "type": "file", "bytes": 1442389, "mtime": "2026-07-11T03:25:20"}
+{"path": "asr_bon_v2_snr5.smoke_n4.json", "type": "file", "bytes": 28790, "mtime": "2026-07-11T01:30:18"}
+{"path": "asr_bon_v2_snr5_noise2.json", "type": "file", "bytes": 1442866, "mtime": "2026-07-11T10:38:44"}
+{"path": "asr_run.log", "type": "file", "bytes": 72965, "mtime": "2026-06-25T10:11:04"}
+{"path": "cp1_multimodal_feature_audited_mmau.json", "type": "file", "bytes": 48238, "mtime": "2026-07-05T01:05:40"}
+{"path": "cp1_slu_hprompt_minds14.json", "type": "file", "bytes": 93244, "mtime": "2026-07-04T17:49:40"}
+{"path": "cp1_sqa_hprompt_mmau.json", "type": "file", "bytes": 33449, "mtime": "2026-07-04T18:56:24"}
+{"path": "cp3_selector_realization_mmau.json", "type": "file", "bytes": 29816, "mtime": "2026-07-04T23:53:34"}
+{"path": ".", "type": "file-summary", "n_files_total": 52, "n_listed": 15, "total_bytes_all_files": 9285764}
+{"path": "asr_bon_v2_other_clean_wavs", "type": "dir", "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/1688-142285-0069.wav", "type": "file", "bytes": 168204, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs/1688-142285-0088.wav", "type": "file", "bytes": 202284, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs/1998-29454-0002.wav", "type": "file", "bytes": 260044, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/1998-29454-0034.wav", "type": "file", "bytes": 81324, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2033-164914-0017.wav", "type": "file", "bytes": 586604, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2033-164915-0002.wav", "type": "file", "bytes": 329644, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs/2033-164916-0006.wav", "type": "file", "bytes": 88364, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2033-164916-0008.wav", "type": "file", "bytes": 466284, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-128291-0002.wav", "type": "file", "bytes": 577964, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-128291-0021.wav", "type": "file", "bytes": 416844, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-128292-0015.wav", "type": "file", "bytes": 246604, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-128292-0023.wav", "type": "file", "bytes": 211724, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-128292-0028.wav", "type": "file", "bytes": 258602, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2414-159411-0023.wav", "type": "file", "bytes": 73324, "mtime": "2026-07-11T03:25:22"}
+{"path": "asr_bon_v2_other_clean_wavs/2609-156975-0000.wav", "type": "file", "bytes": 143724, "mtime": "2026-07-11T03:25:21"}
+{"path": "asr_bon_v2_other_clean_wavs", "type": "file-summary", "n_files_total": 96, "n_listed": 15, "total_bytes_all_files": 22032222}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs", "type": "dir", "mtime": "2026-07-11T09:21:21"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/1688-142285-0069.wav", "type": "file", "bytes": 168204, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/1688-142285-0088.wav", "type": "file", "bytes": 202284, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/1998-29454-0002.wav", "type": "file", "bytes": 260044, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/1998-29454-0034.wav", "type": "file", "bytes": 81324, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2033-164914-0017.wav", "type": "file", "bytes": 586604, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2033-164915-0002.wav", "type": "file", "bytes": 329644, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2033-164916-0006.wav", "type": "file", "bytes": 88364, "mtime": "2026-07-11T09:21:21"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2033-164916-0008.wav", "type": "file", "bytes": 466284, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-128291-0002.wav", "type": "file", "bytes": 577964, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-128291-0021.wav", "type": "file", "bytes": 416844, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-128292-0015.wav", "type": "file", "bytes": 246604, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-128292-0023.wav", "type": "file", "bytes": 211724, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-128292-0028.wav", "type": "file", "bytes": 258602, "mtime": "2026-07-11T09:21:21"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2414-159411-0023.wav", "type": "file", "bytes": 73324, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs/2609-156975-0000.wav", "type": "file", "bytes": 143724, "mtime": "2026-07-11T09:21:20"}
+{"path": "asr_bon_v2_other_snr5_ns20260713_wavs", "type": "file-summary", "n_files_total": 96, "n_listed": 15, "total_bytes_all_files": 22032222}
+{"path": "asr_bon_v2_other_snr5_wavs", "type": "dir", "mtime": "2026-07-11T01:34:05"}
+{"path": "asr_bon_v2_other_snr5_wavs/1688-142285-0069.wav", "type": "file", "bytes": 168204, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/1688-142285-0088.wav", "type": "file", "bytes": 202284, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/1998-29454-0002.wav", "type": "file", "bytes": 260044, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/1998-29454-0034.wav", "type": "file", "bytes": 81324, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2033-164914-0017.wav", "type": "file", "bytes": 586604, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2033-164915-0002.wav", "type": "file", "bytes": 329644, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2033-164916-0006.wav", "type": "file", "bytes": 88364, "mtime": "2026-07-11T01:34:05"}
+{"path": "asr_bon_v2_other_snr5_wavs/2033-164916-0008.wav", "type": "file", "bytes": 466284, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-128291-0002.wav", "type": "file", "bytes": 577964, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-128291-0021.wav", "type": "file", "bytes": 416844, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-128292-0015.wav", "type": "file", "bytes": 246604, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-128292-0023.wav", "type": "file", "bytes": 211724, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-128292-0028.wav", "type": "file", "bytes": 258602, "mtime": "2026-07-11T01:34:05"}
+{"path": "asr_bon_v2_other_snr5_wavs/2414-159411-0023.wav", "type": "file", "bytes": 73324, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs/2609-156975-0000.wav", "type": "file", "bytes": 143724, "mtime": "2026-07-11T01:34:04"}
+{"path": "asr_bon_v2_other_snr5_wavs", "type": "file-summary", "n_files_total": 96, "n_listed": 15, "total_bytes_all_files": 22032222}
+{"path": "cp1_minds14_wavs", "type": "dir", "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_0.wav", "type": "file", "bytes": 173442, "mtime": "2026-07-04T16:22:30"}
+{"path": "cp1_minds14_wavs/minds_10.wav", "type": "file", "bytes": 84694, "mtime": "2026-07-04T16:22:30"}
+{"path": "cp1_minds14_wavs/minds_105.wav", "type": "file", "bytes": 98348, "mtime": "2026-07-04T16:22:30"}
+{"path": "cp1_minds14_wavs/minds_109.wav", "type": "file", "bytes": 95618, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_110.wav", "type": "file", "bytes": 344108, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_113.wav", "type": "file", "bytes": 57388, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_115.wav", "type": "file", "bytes": 98126, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_122.wav", "type": "file", "bytes": 69676, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_126.wav", "type": "file", "bytes": 262188, "mtime": "2026-07-04T16:22:30"}
+{"path": "cp1_minds14_wavs/minds_127.wav", "type": "file", "bytes": 158422, "mtime": "2026-07-04T16:22:30"}
+{"path": "cp1_minds14_wavs/minds_131.wav", "type": "file", "bytes": 77320, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_137.wav", "type": "file", "bytes": 46466, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_144.wav", "type": "file", "bytes": 136764, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_145.wav", "type": "file", "bytes": 286856, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs/minds_151.wav", "type": "file", "bytes": 62460, "mtime": "2026-07-04T16:22:31"}
+{"path": "cp1_minds14_wavs", "type": "file-summary", "n_files_total": 150, "n_listed": 15, "total_bytes_all_files": 21280674}
+{"path": "cp1_mmau_mmaudit_wavs", "type": "dir", "mtime": "2026-07-05T01:05:20"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__denoise.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__original.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__preemphasis.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__rms_norm.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__speed0.9.wav", "type": "file", "bytes": 711156, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__speed1.1.wav", "type": "file", "bytes": 581862, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__telephone.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_0__trim.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-05T00:19:00"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__denoise.wav", "type": "file", "bytes": 698412, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__original.wav", "type": "file", "bytes": 698114, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__preemphasis.wav", "type": "file", "bytes": 698114, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__rms_norm.wav", "type": "file", "bytes": 698114, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__speed0.9.wav", "type": "file", "bytes": 775678, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__speed1.1.wav", "type": "file", "bytes": 634654, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs/mmau_105__telephone.wav", "type": "file", "bytes": 698114, "mtime": "2026-07-05T00:26:34"}
+{"path": "cp1_mmau_mmaudit_wavs", "type": "file-summary", "n_files_total": 1200, "n_listed": 15, "total_bytes_all_files": 981746380}
+{"path": "cp1_mmau_wavs", "type": "dir", "mtime": "2026-07-04T17:54:26"}
+{"path": "cp1_mmau_wavs/mmau_0.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-04T17:54:24"}
+{"path": "cp1_mmau_wavs/mmau_10.wav", "type": "file", "bytes": 640044, "mtime": "2026-07-04T17:54:23"}
+{"path": "cp1_mmau_wavs/mmau_105.wav", "type": "file", "bytes": 1396184, "mtime": "2026-07-04T17:54:24"}
+{"path": "cp1_mmau_wavs/mmau_115.wav", "type": "file", "bytes": 2186964, "mtime": "2026-07-04T17:54:25"}
+{"path": "cp1_mmau_wavs/mmau_117.wav", "type": "file", "bytes": 507948, "mtime": "2026-07-04T17:54:25"}
+{"path": "cp1_mmau_wavs/mmau_122.wav", "type": "file", "bytes": 604204, "mtime": "2026-07-04T17:54:25"}
+{"path": "cp1_mmau_wavs/mmau_128.wav", "type": "file", "bytes": 419884, "mtime": "2026-07-04T17:54:23"}
+{"path": "cp1_mmau_wavs/mmau_130.wav", "type": "file", "bytes": 514092, "mtime": "2026-07-04T17:54:22"}
+{"path": "cp1_mmau_wavs/mmau_132.wav", "type": "file", "bytes": 400428, "mtime": "2026-07-04T17:54:24"}
+{"path": "cp1_mmau_wavs/mmau_144.wav", "type": "file", "bytes": 15161180, "mtime": "2026-07-04T17:54:23"}
+{"path": "cp1_mmau_wavs/mmau_15.wav", "type": "file", "bytes": 640084, "mtime": "2026-07-04T17:54:22"}
+{"path": "cp1_mmau_wavs/mmau_150.wav", "type": "file", "bytes": 16880948, "mtime": "2026-07-04T17:54:22"}
+{"path": "cp1_mmau_wavs/mmau_151.wav", "type": "file", "bytes": 16868660, "mtime": "2026-07-04T17:54:24"}
+{"path": "cp1_mmau_wavs/mmau_157.wav", "type": "file", "bytes": 169006, "mtime": "2026-07-04T17:54:22"}
+{"path": "cp1_mmau_wavs/mmau_174.wav", "type": "file", "bytes": 471086, "mtime": "2026-07-04T17:54:24"}
+{"path": "cp1_mmau_wavs", "type": "file-summary", "n_files_total": 150, "n_listed": 15, "total_bytes_all_files": 224103934}
+{"path": "full_corpus_checkpoints", "type": "dir", "mtime": "2026-07-13T09:11:23"}
+{"path": "full_corpus_checkpoints/full_corpus__fiqa__glap.npz", "type": "file", "bytes": 127252320, "mtime": "2026-07-13T09:11:23"}
+{"path": "full_corpus_logs", "type": "dir", "mtime": "2026-07-13T01:43:45"}
+{"path": "librispeech_other_clean_wavs", "type": "dir", "mtime": "2026-06-25T14:37:57"}
+{"path": "librispeech_other_clean_wavs/3528-168669-0034.wav", "type": "file", "bytes": 54124, "mtime": "2026-06-25T14:37:57"}
+{"path": "librispeech_other_clean_wavs/6432-63723-0043.wav", "type": "file", "bytes": 167084, "mtime": "2026-06-25T14:37:57"}
+{"path": "librispeech_other_snr5_wavs", "type": "dir", "mtime": "2026-07-02T18:21:44"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0032.wav", "type": "file", "bytes": 539244, "mtime": "2026-07-02T16:49:01"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0055.wav", "type": "file", "bytes": 76524, "mtime": "2026-07-02T18:04:31"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0056.wav", "type": "file", "bytes": 217324, "mtime": "2026-07-02T18:04:31"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0066.wav", "type": "file", "bytes": 100364, "mtime": "2026-07-02T18:04:31"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0079.wav", "type": "file", "bytes": 122604, "mtime": "2026-07-02T18:13:44"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0085.wav", "type": "file", "bytes": 127404, "mtime": "2026-07-02T18:13:44"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0093.wav", "type": "file", "bytes": 309804, "mtime": "2026-07-02T18:04:31"}
+{"path": "librispeech_other_snr5_wavs/1688-142285-0095.wav", "type": "file", "bytes": 167404, "mtime": "2026-07-02T18:21:44"}
+{"path": "librispeech_other_snr5_wavs/1998-15444-0018.wav", "type": "file", "bytes": 208364, "mtime": "2026-07-02T16:49:01"}
+{"path": "librispeech_other_snr5_wavs/1998-15444-0027.wav", "type": "file", "bytes": 294604, "mtime": "2026-07-02T18:21:43"}
+{"path": "librispeech_other_snr5_wavs/1998-29454-0000.wav", "type": "file", "bytes": 75564, "mtime": "2026-07-02T18:21:44"}
+{"path": "librispeech_other_snr5_wavs/1998-29454-0015.wav", "type": "file", "bytes": 142764, "mtime": "2026-07-02T18:04:31"}
+{"path": "librispeech_other_snr5_wavs/1998-29454-0016.wav", "type": "file", "bytes": 78764, "mtime": "2026-07-02T16:49:01"}
+{"path": "librispeech_other_snr5_wavs/1998-29455-0019.wav", "type": "file", "bytes": 242284, "mtime": "2026-07-02T18:21:44"}
+{"path": "librispeech_other_snr5_wavs/1998-29455-0026.wav", "type": "file", "bytes": 410924, "mtime": "2026-07-02T18:13:44"}
+{"path": "librispeech_other_snr5_wavs", "type": "file-summary", "n_files_total": 191, "n_listed": 15, "total_bytes_all_files": 38130322}
+{"path": "librispeech_other_wavs", "type": "dir", "mtime": "2026-06-25T09:44:53"}
+{"path": "librispeech_other_wavs/3528-168669-0034.wav", "type": "file", "bytes": 54124, "mtime": "2026-06-25T09:44:53"}
+{"path": "librispeech_other_wavs/6432-63723-0043.wav", "type": "file", "bytes": 167084, "mtime": "2026-06-25T09:44:53"}
+{"path": "loader_wavs", "type": "dir", "mtime": "2026-07-10T03:44:21"}
+{"path": "loader_wavs/aishell-1", "type": "dir-summary", "n_files_recursive": 7180, "total_bytes_recursive": 1156426510}
+{"path": "loader_wavs/audiocaps-qa", "type": "dir-summary", "n_files_recursive": 313, "total_bytes_recursive": 98794062}
+{"path": "loader_wavs/csemotions", "type": "dir-summary", "n_files_recursive": 105, "total_bytes_recursive": 86065904}
+{"path": "loader_wavs/heysquad", "type": "dir-summary", "n_files_recursive": 1002, "total_bytes_recursive": 207798732}
+{"path": "loader_wavs/librispeech", "type": "dir-summary", "n_files_recursive": 104, "total_bytes_recursive": 25133534}
+{"path": "loader_wavs/meld", "type": "dir-summary", "n_files_recursive": 104, "total_bytes_recursive": 11024976}
+{"path": "loader_wavs/mmsu", "type": "dir-summary", "n_files_recursive": 957, "total_bytes_recursive": 203199490}
+{"path": "loader_wavs/seed-tts-eval", "type": "dir-summary", "n_files_recursive": 1188, "total_bytes_recursive": 267521588}
+{"path": "loader_wavs/speech-massive-de-DE", "type": "dir-summary", "n_files_recursive": 2036, "total_bytes_recursive": 805934310}
+{"path": "loader_wavs/speech-massive-fr-FR", "type": "dir-summary", "n_files_recursive": 2036, "total_bytes_recursive": 760076514}
+{"path": "loader_wavs/squtr", "type": "dir-summary", "n_files_recursive": 648, "total_bytes_recursive": 155627232}
+{"path": "loader_wavs/uro-bench", "type": "dir-summary", "n_files_recursive": 3370, "total_bytes_recursive": 2426935160}
+{"path": "loader_wavs/vocalbench", "type": "dir-summary", "n_files_recursive": 3900, "total_bytes_recursive": 1054206112}
+{"path": "loader_wavs/voiceassistant-eval", "type": "dir-summary", "n_files_recursive": 6583, "total_bytes_recursive": 5167438436}
+{"path": "loader_wavs/voicebench", "type": "dir-summary", "n_files_recursive": 7830, "total_bytes_recursive": 3426449620}
+{"path": "loader_wavs/voxceleb1-test-split", "type": "dir-summary", "n_files_recursive": 3, "total_bytes_recursive": 417418}
+{"path": "locked_rerun_logs", "type": "dir", "mtime": "2026-07-11T17:35:15"}
+{"path": "locked_rerun_logs/locked_rerun_20260711T082840Z.log", "type": "file", "bytes": 17059, "mtime": "2026-07-11T17:28:00"}
+{"path": "locked_rerun_logs/locked_rerun_20260711T093143Z.log", "type": "file", "bytes": 57550, "mtime": "2026-07-11T20:23:14"}
+{"path": "m3_phase0_wavs", "type": "dir", "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0000.wav", "type": "file", "bytes": 386444, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0010.wav", "type": "file", "bytes": 234924, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0013.wav", "type": "file", "bytes": 147564, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0021.wav", "type": "file", "bytes": 356364, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0023.wav", "type": "file", "bytes": 115404, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/2609-169640-0024.wav", "type": "file", "bytes": 271084, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3528-168669-0002.wav", "type": "file", "bytes": 65484, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3528-168669-0019.wav", "type": "file", "bytes": 86124, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3528-168669-0024.wav", "type": "file", "bytes": 102444, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-142836-0000.wav", "type": "file", "bytes": 165164, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-142836-0018.wav", "type": "file", "bytes": 121804, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-142836-0019.wav", "type": "file", "bytes": 944844, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-163622-0010.wav", "type": "file", "bytes": 101484, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-163622-0011.wav", "type": "file", "bytes": 269324, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs/3538-163622-0013.wav", "type": "file", "bytes": 120204, "mtime": "2026-07-03T15:54:26"}
+{"path": "m3_phase0_wavs", "type": "file-summary", "n_files_total": 36, "n_listed": 15, "total_bytes_all_files": 9377264}
+{"path": "m5_confirmatory_wavs_snr5", "type": "dir", "mtime": "2026-07-03T16:03:49"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0000.wav", "type": "file", "bytes": 290444, "mtime": "2026-07-03T16:03:46"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0001.wav", "type": "file", "bytes": 215724, "mtime": "2026-07-03T16:03:46"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0003.wav", "type": "file", "bytes": 192524, "mtime": "2026-07-03T16:03:46"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0004.wav", "type": "file", "bytes": 137804, "mtime": "2026-07-03T16:03:46"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0005.wav", "type": "file", "bytes": 112364, "mtime": "2026-07-03T16:03:46"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0006.wav", "type": "file", "bytes": 543724, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0007.wav", "type": "file", "bytes": 142764, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0008.wav", "type": "file", "bytes": 552364, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0009.wav", "type": "file", "bytes": 222124, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0010.wav", "type": "file", "bytes": 334124, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0011.wav", "type": "file", "bytes": 286284, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/2033-164914-0012.wav", "type": "file", "bytes": 100204, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/3331-159605-0000.wav", "type": "file", "bytes": 437484, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/3331-159605-0001.wav", "type": "file", "bytes": 99084, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5/3331-159605-0003.wav", "type": "file", "bytes": 178444, "mtime": "2026-07-03T16:03:47"}
+{"path": "m5_confirmatory_wavs_snr5", "type": "file-summary", "n_files_total": 144, "n_listed": 15, "total_bytes_all_files": 37539136}
+{"path": "minds14_en-US_wavs", "type": "dir", "mtime": "2026-07-01T14:31:52"}
+{"path": "minds14_en-US_wavs/row0000_ic6.wav", "type": "file", "bytes": 88790, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0001_ic11.wav", "type": "file", "bytes": 76502, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0002_ic2.wav", "type": "file", "bytes": 106540, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0003_ic8.wav", "type": "file", "bytes": 62850, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0004_ic9.wav", "type": "file", "bytes": 49196, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0005_ic2.wav", "type": "file", "bytes": 178374, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0006_ic9.wav", "type": "file", "bytes": 193922, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0007_ic4.wav", "type": "file", "bytes": 75138, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0008_ic4.wav", "type": "file", "bytes": 72406, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0009_ic7.wav", "type": "file", "bytes": 60118, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0010_ic6.wav", "type": "file", "bytes": 255362, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0011_ic7.wav", "type": "file", "bytes": 68404, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0012_ic0.wav", "type": "file", "bytes": 258622, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0013_ic12.wav", "type": "file", "bytes": 49196, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs/row0014_ic3.wav", "type": "file", "bytes": 60118, "mtime": "2026-07-01T14:31:51"}
+{"path": "minds14_en-US_wavs", "type": "file-summary", "n_files_total": 182, "n_listed": 15, "total_bytes_all_files": 25475228}
+{"path": "minds14_enus_wavs", "type": "dir", "mtime": "2026-06-25T00:03:16"}
+{"path": "minds14_enus_wavs/row0000_ic6.wav", "type": "file", "bytes": 88790, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0001_ic11.wav", "type": "file", "bytes": 76502, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0002_ic2.wav", "type": "file", "bytes": 106540, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0003_ic8.wav", "type": "file", "bytes": 62850, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0004_ic9.wav", "type": "file", "bytes": 49196, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0005_ic2.wav", "type": "file", "bytes": 178374, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0006_ic9.wav", "type": "file", "bytes": 193922, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0007_ic4.wav", "type": "file", "bytes": 75138, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0008_ic4.wav", "type": "file", "bytes": 72406, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0009_ic7.wav", "type": "file", "bytes": 60118, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0010_ic6.wav", "type": "file", "bytes": 255362, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0011_ic7.wav", "type": "file", "bytes": 68404, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0012_ic0.wav", "type": "file", "bytes": 258622, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0013_ic12.wav", "type": "file", "bytes": 49196, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs/row0014_ic3.wav", "type": "file", "bytes": 60118, "mtime": "2026-06-25T00:03:15"}
+{"path": "minds14_enus_wavs", "type": "file-summary", "n_files_total": 182, "n_listed": 15, "total_bytes_all_files": 25475228}
+{"path": "minds14_v2_query_cache", "type": "dir", "mtime": "2026-07-11T01:16:39"}
+{"path": "minds14_v2_query_cache/0072c4f30770e483a706cc8d194b42051c1ef55c93f24eee0dc7485df6d71d5a.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:16:34"}
+{"path": "minds14_v2_query_cache/009f2a788d5c3fb1ebf6a4d13894e6b296dc8a100ee02b0eb072e2357a73d95c.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:16:08"}
+{"path": "minds14_v2_query_cache/00a107555231f56103a6ca8eb03a4cbe6eb77a87e9ab6837209bf5eedf767858.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:13:11"}
+{"path": "minds14_v2_query_cache/00bf8ee5963b32180d07a350d807cc5fe7db74ca2ff9db43cf9c46981c9171ff.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:16:23"}
+{"path": "minds14_v2_query_cache/00fc7a6cee9767a6bdcb9529a2d223edfc41910e0e96b07b12614c569b22ceac.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:15:24"}
+{"path": "minds14_v2_query_cache/010c90567b993d861b460e7fa065774508d3d67f51c2c58c46394658bc757ffc.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:16:12"}
+{"path": "minds14_v2_query_cache/0136ec19fd4de1b9c7b572867a2998283a682ca860683ec22156a50fa9bfec95.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:14:47"}
+{"path": "minds14_v2_query_cache/01a12808659a5acb5c8db04033cf37bd5294e38f95f584b69b81480959905183.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:13:09"}
+{"path": "minds14_v2_query_cache/021e9a752c6402654357e97ca7ede2c31a5a4be16f643b9e404430f0b0f94aaf.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:14:51"}
+{"path": "minds14_v2_query_cache/02669d7182119fc83cfb3296418ee387df1023a0d0def55712e8c159a27d4bd4.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:14:40"}
+{"path": "minds14_v2_query_cache/02b16049c63d363fd790d81f054a784f0b0f987ff0ae727652a6154e97409cd5.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:14:42"}
+{"path": "minds14_v2_query_cache/02e31aa86f079b3a5e62edfea256781aaca59ab24c2a1c617c0807cd88e6992b.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:15:17"}
+{"path": "minds14_v2_query_cache/02ea38cc3d4969f8f712b63eea75f0503b9f69d2174bb1523a75619b6c628369.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:15:11"}
+{"path": "minds14_v2_query_cache/03022e341b1fd052303040347c45c2132eae507a4f96e05076f8cb8d1a281683.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:15:57"}
+{"path": "minds14_v2_query_cache/04a0718856a60db976e2c377205c0b09e4702e04a00993d5b4deb7ff44a99e6a.npy", "type": "file", "bytes": 8320, "mtime": "2026-07-11T01:13:09"}
+{"path": "minds14_v2_query_cache", "type": "file-summary", "n_files_total": 874, "n_listed": 15, "total_bytes_all_files": 7271680}
+{"path": "minds14_v2_wavs", "type": "dir", "mtime": "2026-07-11T01:14:00"}
+{"path": "minds14_v2_wavs/card_abroad_0000.wav", "type": "file", "bytes": 199382, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0001.wav", "type": "file", "bytes": 36908, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0002.wav", "type": "file", "bytes": 214402, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0003.wav", "type": "file", "bytes": 196652, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0004.wav", "type": "file", "bytes": 285398, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0005.wav", "type": "file", "bytes": 178374, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0006.wav", "type": "file", "bytes": 170710, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0007.wav", "type": "file", "bytes": 259458, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_abroad_0008.wav", "type": "file", "bytes": 148866, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0000.wav", "type": "file", "bytes": 249900, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0001.wav", "type": "file", "bytes": 125654, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0002.wav", "type": "file", "bytes": 64214, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0003.wav", "type": "file", "bytes": 84694, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0004.wav", "type": "file", "bytes": 165250, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs/card_address_0005.wav", "type": "file", "bytes": 68310, "mtime": "2026-07-11T01:11:50"}
+{"path": "minds14_v2_wavs", "type": "file-summary", "n_files_total": 563, "n_listed": 15, "total_bytes_all_files": 77289952}
+{"path": "p2_wavs", "type": "dir", "mtime": "2026-07-11T19:51:27"}
+{"path": "p2_wavs/bba_0.wav", "type": "file", "bytes": 751644, "mtime": "2026-07-11T17:46:39"}
+{"path": "p2_wavs/bba_1.wav", "type": "file", "bytes": 728844, "mtime": "2026-07-11T17:46:19"}
+{"path": "p2_wavs/bba_10.wav", "type": "file", "bytes": 1398844, "mtime": "2026-07-11T17:47:20"}
+{"path": "p2_wavs/bba_100.wav", "type": "file", "bytes": 1187372, "mtime": "2026-07-05T12:44:07"}
+{"path": "p2_wavs/bba_101.wav", "type": "file", "bytes": 1287644, "mtime": "2026-07-11T17:47:17"}
+{"path": "p2_wavs/bba_102.wav", "type": "file", "bytes": 993952, "mtime": "2026-07-11T17:46:56"}
+{"path": "p2_wavs/bba_103.wav", "type": "file", "bytes": 1161136, "mtime": "2026-07-11T17:46:43"}
+{"path": "p2_wavs/bba_104.wav", "type": "file", "bytes": 1286844, "mtime": "2026-07-05T12:44:16"}
+{"path": "p2_wavs/bba_105.wav", "type": "file", "bytes": 1262282, "mtime": "2026-07-11T17:46:30"}
+{"path": "p2_wavs/bba_106.wav", "type": "file", "bytes": 976844, "mtime": "2026-07-05T12:44:02"}
+{"path": "p2_wavs/bba_107.wav", "type": "file", "bytes": 800854, "mtime": "2026-07-11T17:46:34"}
+{"path": "p2_wavs/bba_108.wav", "type": "file", "bytes": 1197244, "mtime": "2026-07-11T17:46:38"}
+{"path": "p2_wavs/bba_109.wav", "type": "file", "bytes": 1162808, "mtime": "2026-07-11T17:46:27"}
+{"path": "p2_wavs/bba_11.wav", "type": "file", "bytes": 1151104, "mtime": "2026-07-05T12:44:05"}
+{"path": "p2_wavs/bba_110.wav", "type": "file", "bytes": 1036844, "mtime": "2026-07-11T17:46:35"}
+{"path": "p2_wavs", "type": "file-summary", "n_files_total": 12554, "n_listed": 15, "total_bytes_all_files": 13737873294}
+{"path": "phase_a_agent", "type": "dir", "mtime": "2026-07-11T23:23:12"}
+{"path": "phase_a_agent/cpu_builds.log", "type": "file", "bytes": 87438, "mtime": "2026-07-11T21:40:12"}
+{"path": "phase_a_agent/cpu_builds_done", "type": "file", "bytes": 0, "mtime": "2026-07-11T21:40:12"}
+{"path": "phase_a_agent/cpu_builds_report.json", "type": "file", "bytes": 7497, "mtime": "2026-07-11T21:40:08"}
+{"path": "phase_a_agent/fix_all_wrapper_done", "type": "file", "bytes": 22, "mtime": "2026-07-11T23:23:12"}
+{"path": "phase_a_agent/fix_builds.log", "type": "file", "bytes": 134512, "mtime": "2026-07-11T23:23:12"}
+{"path": "phase_a_agent/fix_builds_done", "type": "file", "bytes": 0, "mtime": "2026-07-11T23:23:12"}
+{"path": "phase_a_agent/fix_heysquad_report.json", "type": "file", "bytes": 168, "mtime": "2026-07-11T23:23:00"}
+{"path": "phase_a_agent/fix_squadzh_report.json", "type": "file", "bytes": 1828, "mtime": "2026-07-11T22:43:34"}
+{"path": "phase_a_agent/fix_squtr_report.json", "type": "file", "bytes": 536, "mtime": "2026-07-11T23:22:23"}
+{"path": "phase_a_agent/fix_vocalbench_report.json", "type": "file", "bytes": 1957, "mtime": "2026-07-11T23:12:49"}
+{"path": "phase_a_agent/gpu_embed_fix.log", "type": "file", "bytes": 2022, "mtime": "2026-07-11T22:27:05"}
+{"path": "phase_a_agent/gpu_embed_fix_done", "type": "file", "bytes": 0, "mtime": "2026-07-11T22:27:05"}
+{"path": "phase_a_agent/gpu_fix_squadzh_report.json", "type": "file", "bytes": 179, "mtime": "2026-07-11T22:08:55"}
+{"path": "phase_a_agent/gpu_fix_vocalbench_report.json", "type": "file", "bytes": 203, "mtime": "2026-07-11T22:27:00"}
+{"path": "phase_a_agent/lco3b_build_report.json", "type": "file", "bytes": 696, "mtime": "2026-07-11T22:41:08"}
+{"path": "phase_a_agent", "type": "file-summary", "n_files_total": 28, "n_listed": 15, "total_bytes_all_files": 5983252}
+{"path": "probe_hpf_wavs_snr5", "type": "dir", "mtime": "2026-07-04T09:23:25"}
+{"path": "probe_hpf_wavs_snr5/1688-142285-0052.wav", "type": "file", "bytes": 226604, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/1688-142285-0091.wav", "type": "file", "bytes": 174604, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/1998-15444-0006.wav", "type": "file", "bytes": 205804, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/1998-29454-0001.wav", "type": "file", "bytes": 125004, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/1998-29455-0020.wav", "type": "file", "bytes": 137964, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/2033-164915-0010.wav", "type": "file", "bytes": 284524, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/2033-164916-0004.wav", "type": "file", "bytes": 217324, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/2609-156975-0004.wav", "type": "file", "bytes": 580204, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3005-163389-0014.wav", "type": "file", "bytes": 438444, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3080-5040-0024.wav", "type": "file", "bytes": 413484, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3080-5040-0031.wav", "type": "file", "bytes": 408684, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3331-159605-0016.wav", "type": "file", "bytes": 414124, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3528-168669-0079.wav", "type": "file", "bytes": 313804, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3528-168669-0102.wav", "type": "file", "bytes": 112524, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5/3528-168669-0127.wav", "type": "file", "bytes": 98764, "mtime": "2026-07-04T09:23:24"}
+{"path": "probe_hpf_wavs_snr5", "type": "file-summary", "n_files_total": 50, "n_listed": 15, "total_bytes_all_files": 11962198}
+{"path": "redraw_logs", "type": "dir", "mtime": "2026-07-10T22:40:26"}
+{"path": "redraw_logs/redraw_20260710T143209Z.log", "type": "file", "bytes": 1032, "mtime": "2026-07-10T22:43:00"}
+{"path": "redraw_logs/redraw_driver_validation.out", "type": "file", "bytes": 3222, "mtime": "2026-07-10T22:43:02"}
+{"path": "step0_evidence", "type": "dir", "mtime": "2026-07-09T22:42:25"}
+{"path": "step0_evidence/embed_server.log", "type": "file", "bytes": 6328, "mtime": "2026-07-09T22:42:25"}
+{"path": "step0_evidence/resp_mm.json", "type": "file", "bytes": 43787, "mtime": "2026-07-09T22:42:25"}
+{"path": "step0_evidence/resp_txt.json", "type": "file", "bytes": 44531, "mtime": "2026-07-09T22:42:25"}
+{"path": "step0_evidence/vllm_attempt.log", "type": "file", "bytes": 28955, "mtime": "2026-07-09T22:42:25"}
+{"path": "wave1_logs", "type": "dir", "mtime": "2026-07-10T08:46:07"}
+{"path": "wave1_logs/wave1_meralion-2-gguf_20260709T151943Z.log", "type": "file", "bytes": 52276, "mtime": "2026-07-09T23:20:17"}
+{"path": "wave1_logs/wave1_meralion-2-gguf_20260710T004517Z.log", "type": "file", "bytes": 85496, "mtime": "2026-07-10T09:34:33"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260709T151548Z.log", "type": "file", "bytes": 53830, "mtime": "2026-07-09T23:19:41"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260709T153046Z.log", "type": "file", "bytes": 877, "mtime": "2026-07-09T23:41:13"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260709T154351Z.log", "type": "file", "bytes": 11974, "mtime": "2026-07-10T00:31:50"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260709T163723Z.log", "type": "file", "bytes": 23345, "mtime": "2026-07-10T03:19:13"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260709T192111Z.log", "type": "file", "bytes": 67178, "mtime": "2026-07-10T06:27:59"}
+{"path": "wave1_logs/wave1_qwen3-omni-30b-gguf_20260710T002259Z.log", "type": "file", "bytes": 28088, "mtime": "2026-07-10T08:45:14"}
+{"path": "wave2_logs", "type": "dir", "mtime": "2026-07-10T16:48:19"}
+{"path": "wave2_logs/wave2_qwen3-omni-30b-gguf_20260710T044430Z.log", "type": "file", "bytes": 23520, "mtime": "2026-07-10T14:48:34"}
+{"path": "wave2_logs/wave2_qwen3-omni-30b-gguf_20260710T082651Z.log", "type": "file", "bytes": 1695, "mtime": "2026-07-10T16:35:24"}
+{"path": "wave2_logs/wave2_qwen3-omni-30b-gguf_20260710T083658Z.log", "type": "file", "bytes": 1762, "mtime": "2026-07-10T16:44:16"}
+{"path": "wave2_logs/wave2_qwen3-omni-30b-gguf_20260710T084433Z.log", "type": "file", "bytes": 1768, "mtime": "2026-07-10T16:51:51"}
+{"path": "wave3_logs", "type": "dir", "mtime": "2026-07-10T22:36:12"}
+{"path": "wave3_logs/fleurs-r__qwen3-omni-30b-gguf__dev.BATCHED_parallel4.json", "type": "file", "bytes": 25636, "mtime": "2026-07-10T22:32:14"}
+{"path": "wave3_logs/fleurs-r__qwen3-omni-30b-gguf__dev.SEQUENTIAL_parallel1.json", "type": "file", "bytes": 25649, "mtime": "2026-07-10T22:36:12"}
+{"path": "wave3_logs/wave3_qwen3-omni-30b-gguf_20260710T131112Z.log", "type": "file", "bytes": 905, "mtime": "2026-07-10T21:16:39"}
+{"path": "wave3_logs/wave3_qwen3-omni-30b-gguf_20260710T131938Z.log", "type": "file", "bytes": 6052, "mtime": "2026-07-10T21:53:06"}
+{"path": "logs", "type": "ROOT", "note": "scan root under E:\\chao_workspace\\exploring-l4-intelligence\\speechrl-data; dirs beyond depth1 aggregated"}
+{"path": "airbench_foundation_fetch.log", "type": "file", "bytes": 1985, "mtime": "2026-07-09T20:58:22"}
+{"path": "airbench_foundation_fetch_remaining8.log", "type": "file", "bytes": 51819, "mtime": "2026-07-09T23:05:54"}
+{"path": "airbench_foundation_fetch_remaining8_fast.log", "type": "file", "bytes": 343, "mtime": "2026-07-09T23:07:03"}
+{"path": "airbench_speechgrounding_fetch.log", "type": "file", "bytes": 2946, "mtime": "2026-07-09T20:54:13"}
+{"path": "airbench_tail_complete.log", "type": "file", "bytes": 193, "mtime": "2026-07-09T23:19:39"}
+{"path": "airbench_tail_complete.sh", "type": "file", "bytes": 1928, "mtime": "2026-07-09T23:10:08"}
+{"path": "_aishell-hf.log", "type": "file", "scope": "data-root-toplevel", "bytes": 2268551, "mtime": "2026-07-09T00:52:21"}
+{"path": "_download-all.log", "type": "file", "scope": "data-root-toplevel", "bytes": 28360, "mtime": "2026-07-08T22:33:53"}
+{"path": "_hf-complete.log", "type": "file", "scope": "data-root-toplevel", "bytes": 2588, "mtime": "2026-07-08T22:35:10"}
+{"path": "_llama_server.log", "type": "file", "scope": "data-root-toplevel", "bytes": 7550, "mtime": "2026-07-12T20:31:47"}
+{"path": "_llama_server_batchsmoke.log", "type": "file", "scope": "data-root-toplevel", "bytes": 440654, "mtime": "2026-07-10T16:06:31"}
+{"path": "_llama_server_batchsmoke_nocache.log", "type": "file", "scope": "data-root-toplevel", "bytes": 71522, "mtime": "2026-07-10T16:13:54"}
+{"path": "_llama_server_meralion.log", "type": "file", "scope": "data-root-toplevel", "bytes": 345580037, "mtime": "2026-07-10T09:34:33"}
+{"path": "_llama_server_qwen3_embed.log", "type": "file", "scope": "data-root-toplevel", "bytes": 982853, "mtime": "2026-07-11T22:27:00"}
+{"path": "_openslr-driver.log", "type": "file", "scope": "data-root-toplevel", "bytes": 193078, "mtime": "2026-07-08T23:36:30"}
+{"path": "wave0_catchup.log", "type": "file", "scope": "data-root-toplevel", "bytes": 32192, "mtime": "2026-06-15T12:03:05"}
+{"path": "wave0_final.log", "type": "file", "scope": "data-root-toplevel", "bytes": 4529798, "mtime": "2026-06-15T12:36:20"}
+{"path": "wave0_phase2.log", "type": "file", "scope": "data-root-toplevel", "bytes": 11661870, "mtime": "2026-06-15T15:25:20"}
+{"path": "wave0_phase2_lite.log", "type": "file", "scope": "data-root-toplevel", "bytes": 66043, "mtime": "2026-06-15T15:27:46"}
+{"path": "wave0_smart.log", "type": "file", "scope": "data-root-toplevel", "bytes": 583051, "mtime": "2026-06-15T00:54:26"}
+{"path": "W4-outputs/2026-06-22", "type": "dir", "scope": "w4-hydra-runs", "n_files": 0}
+{"path": "W4-outputs/2026-06-22/22-44-49", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-22/22-46-22", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-22/22-47-51", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-22/22-49-15", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-22/22-52-50", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-22/22-57-02", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-24", "type": "dir", "scope": "w4-hydra-runs", "n_files": 0}
+{"path": "W4-outputs/2026-06-24/22-58-58", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
+{"path": "W4-outputs/2026-06-24/23-08-11", "type": "dir", "scope": "w4-hydra-runs", "n_files": 1}
