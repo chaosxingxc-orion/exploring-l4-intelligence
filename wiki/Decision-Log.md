@@ -6,6 +6,34 @@
 
 ---
 
+### 2026-07-15（续44）· Gate B 收口：round-2 协议 v2 + PRESS 预检修复 + P0-R8 校验器 v2——六门全绿（执行仍零查询）；Stage-1A 研究提案成稿
+
+**G6（P0-R8 校验器）.** validator v2（commit `fcd1c57`）：R3 两级化（纯摘要承重=FAIL / 混合定位=WARN
+入双审队列）、豁免范围收紧（热层永不豁免）、R4 槽位精确化；coordinator 复跑 **OVERALL PASS exit 0**
+（9 条 R3_MIXED_LOCATOR WARN=公开双审队列）+ 合成 fail-closed 探针 11/11 正确。
+
+**G2–G5（协议实例化）.** `wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md`
+（SURVEY-PROTO-2026-07-15-01，`queries_executed: 0`）：21 lanes（9 饱和目标 + 8 新篇 + 全占据者
+forward-chase + 3 条 disconfirming）、**105 条预注册精确查询 = 102 mandatory + 3 optional 单语探针**
+全部内联；引擎/venue 表补 ACL Anthology/ISCA/IEEE(site:)/Crossref、OpenAlex 排除、trace vs rerun
+分类；IN/EX 各 2 正 2 反真实论文样例 + 冲突规则；机械停轮 + yield curve；census-v2 schema fail-closed
+继承。**PRESS 2015 六要素敌意预检**（`docs/checks/2026-07-15-round2-press-feedback.md`）裁定
+PRESS_REVISE→7 项修复应用（`18056f1`）。
+
+**纪律实践（签署级亲验又一次拦截残留）.** `18056f1` 宣称七修复全应用，协调者逐字亲验发现 5 处
+残留（§13.3 被引用但不存在、§14 缺 MINOR-5 G6 阻断前置、L-DIS-C 缺 cat-filter 违自身规则、
+105 vs 104 计数矛盾、G6 行陈旧）——`aaffe4c` 全部兜齐 + 机械重数工件
+（`docs/checks/2026-07-15-round2-query-recount.txt`，exit-code 门控，OVERALL PASS：21 lanes /
+102+3 / 46 chase + 56 text / 16 cat-filter / 3 site: / 0 bare-TTS）。
+
+**状态与边界.** 协议 status=PREREGISTERED_PRESS_REVISED_PENDING_SIGNOFF——首条查询前仍需
+①reviewer search-design 显式签署（沉默≠批准）②owner 资源批准 ③G6 执行首日复跑。**round-2 与
+1B 维持零执行**。下一门=Gate C（探针协议 v2 + frozen manifest + dev split）。
+
+**提案.** Stage-1A 研究提案（STAGE1A-PROPOSAL-2026-07-15-01，给 reviewer 的问题定义提案——本轮
+探索全轨迹 + 身份候选现状 + 可证伪承诺）成稿，owner 审阅后转交；ledger 数字逐条对账入稿
+（并纠正一处草稿错误：KIT 兑现 ST 实为小幅为正 +0.93/+1.09，非「仅 ASR 正兑现」）。
+
 ### 2026-07-14（续43）· Gate A 收口：census v2 + ledger v2 落地；修正案 №1 两栏分签生效；C1/C4 正式关闭
 
 **构建（两条互补工作流,各一 build 代理 API 失速但产物互补零冲突）.** census v2（commit `28ad858`）：

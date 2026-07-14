@@ -2,7 +2,7 @@
 title: "Research Objective & Current State — 日常加载的唯一现状入口（热层）"
 role: "认知层：现状/研究对象/约束/open items/取代索引的单一极简入口。派生自 Decision-Log（审计层），可重建，非唯一记录。被取代的条目掉出本文件（在 archive/ 与 Decision-Log 里）。"
 maintained: "每有取代关系变化即更新本文件；新决策先 append 进 Decision-Log 再反映到此。"
-last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-14 (续39 P0-rereview accepted: 2 CLOSED + 6 PARTIAL, identity-indexed tokens)."
+last_refreshed_commit: "self-referential hash unavailable pre-commit; this file's post-commit (commit, blob) triple is recorded in docs/integrity/record-policy-and-attestations.md. Last refresh: 2026-07-15 (续44 Gate B closed: protocol v2 + PRESS revised + P0-R8 validator v2, six gates green, zero queries executed)."
 ---
 
 # Research Objective & Current State
@@ -56,8 +56,11 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    works,94 RESOLVED+1 如实 UNRESOLVED,83/95 版本钉,95/95 全作者,P-0016 拆二/P-0084 指纹落定）+
    ledger v2（62 行一 claim×一 work×一 span;discrepancy 五级：NONE 20/MINOR 19/**MATERIAL 15/
    CRITICAL 2**/UNVERIFIED 6;CRITICAL=ProGRes/TAP-GER 推翻旧 kill-I1 DIRECT）+ 11 丢弃明细零不可恢复
-   + δ_corr 修正案成稿（**待 owner 两栏重签**）;A 残留=版本 join(16 行)+验收抽样。→ B round-2
-   查询前（query 实例化+PRESS+领域 venue+P0-R8 校验器,**不可再延期**）→ C 探针开机前（协议 v2+
+   + δ_corr 修正案成稿（已生效,owner 两栏分签 @0a5e108）;A 收口 @b1af8c6（验收抽样
+   ACCEPTANCE_PASS + 16 行版本 pin @b594820）。**→ B 已收口（续44）**：round-2 协议 v2
+   （SURVEY-PROTO-2026-07-15-01,21 lanes/105 条预注册查询=102+3,PRESS_REVISE 七修复+残留清扫
+   `aaffe4c`,机械重数 PASS）+ P0-R8 校验器 v2 PASS（`fcd1c57`）——六门全绿;**执行仍零查询**,
+   首条查询前需 reviewer search-design 签署+owner 批准+G6 复跑 → C 探针开机前（协议 v2+
    frozen manifest+dev split）→ D 运行后。round-2 与 1B 维持零执行。两轮博导审查均已核验+逐条
    回应：RESP-01 `2026-07-14-survey-v2-response-and-p0-remediation.md`（其完成度声明/94 标签/全局
    token/签署块已被 RESP-02 supersede）+ **RESP-02 `2026-07-14-p0r-response-to-remediation-rereview.md`
@@ -128,6 +131,9 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
 - 现状真理：**本文件**。审计真理：`Decision-Log.md`（冷,勿整篇读）、`Per-Work-Status.md`。
 - 发布快照：`docs/integrity/release_manifest.json`（git-blob 哈希）+ `docs/checks/manifest-blob-verification-2026-07-13.txt`。
 - survey：`wiki/survey/2026-07-13-scout-ledger-round1.json`（8族/57条/46独立,SCOUT 级;**计数可重建,
-  raw-query 重放 OPEN,科学覆盖 OPEN**）;Survey v2 产物 `wiki/survey/2026-07-14-*`（生成中）。
+  raw-query 重放 OPEN,科学覆盖 OPEN**）;Survey v2 产物 `wiki/survey/2026-07-14-*`;round-2 协议
+  `wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md`（PENDING_SIGNOFF,零查询）。
+- reviewer 提案：`wiki/2026-07-15-stage1a-research-proposal-for-reviewer.md`
+  （STAGE1A-PROPOSAL-2026-07-15-01,owner 审阅后转交）。
 - 记录政策/attestation：`docs/integrity/record-policy-and-attestations.md`（冷热分层 + provenance 三元组不变量）。
 - 规则/术语：`CLAUDE.md` / `AGENTS.md`（镜像）。
