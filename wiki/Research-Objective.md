@@ -51,11 +51,13 @@ last_refreshed_commit: "self-referential hash unavailable pre-commit; this file'
    =Gate A;11 条提取期丢弃明细已从工作流 journal 恢复入库 docs/checks/〕。承重更正维持有效：KIT ST
    oracle +6.11、SQA/SSUM 负兑现;JudgeBoN=rho_pool;ernez 置信/覆盖。**do_not_claim（复审 §13,机器块）**：
    P0_R_COMPLETE / 92_EXACT / 35_FULLTEXT / 43_DISCREPANCIES / PREREQUISITES_MET / δ_corr=选择重合。
-   **Gate 路线（续42 接受）**：A 零 GPU 记录修复（census v2 簇-work 分表、ledger v2 一 claim×一 work×
-   一 span、δ_corr 拆名合同修正案→owner 重签、C1/C4 拆签）→ B round-2 查询前（实例化 query+PRESS+
-   领域 venue+P0-R8 校验器,**不可再延期**）→ C 探针开机前（P-γ 改测条件互补性、P-β BLEU 主臂、
-   P-δ 冻结 c1、**换 dev split 防 holdout 污染**、冻结 manifest 分两栏签）→ D 运行后。
-   round-2 与 1B 在 Gate B/C 关闭前不执行。两轮博导审查均已核验+逐条
+   **Gate 路线（续42 接受）**：**A 主体已执行（RESP-04,commit 28ad858）**——census v2（94 簇→95
+   works,94 RESOLVED+1 如实 UNRESOLVED,83/95 版本钉,95/95 全作者,P-0016 拆二/P-0084 指纹落定）+
+   ledger v2（62 行一 claim×一 work×一 span;discrepancy 五级：NONE 20/MINOR 19/**MATERIAL 15/
+   CRITICAL 2**/UNVERIFIED 6;CRITICAL=ProGRes/TAP-GER 推翻旧 kill-I1 DIRECT）+ 11 丢弃明细零不可恢复
+   + δ_corr 修正案成稿（**待 owner 两栏重签**）;A 残留=版本 join(16 行)+验收抽样。→ B round-2
+   查询前（query 实例化+PRESS+领域 venue+P0-R8 校验器,**不可再延期**）→ C 探针开机前（协议 v2+
+   frozen manifest+dev split）→ D 运行后。round-2 与 1B 维持零执行。两轮博导审查均已核验+逐条
    回应：RESP-01 `2026-07-14-survey-v2-response-and-p0-remediation.md`（其完成度声明/94 标签/全局
    token/签署块已被 RESP-02 supersede）+ **RESP-02 `2026-07-14-p0r-response-to-remediation-rereview.md`
    （现行有效,含按身份索引的最强结论表 §3.3 与三线分签）**。bundle
