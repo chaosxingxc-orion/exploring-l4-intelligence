@@ -167,7 +167,10 @@ screener_1 / screener_2 / adjudicator / resolution / reason`），保留待 owne
 - **收方偏置禁令**：找到支持「空白」的结果后**不得**提前停轮；找到占据者后**不得**加限定词续命
   （合同 §8 + 修正案）。
 - 全局收轮：全部 lane 达 `LOCALLY_SATURATED_WITHIN_PROTOCOL` **或**显式 gap 登记后。最强允许结论
-  = `NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE`@94簇（+ 强制伴随 token），**不得**写裸 `saturated`/`novel`/`complete`。
+  = **按身份索引 token**（RESP-02 §3.3 + token 覆盖层 `2026-07-15-replayability-template-token-overlay.md`；
+  记录集版本更新为 round-2 后集合，强制伴随 token 照旧——其中 `SEARCH_RESULT_UNIVERSE_UNAVAILABLE`
+  仅指 round-1 范围），**不得**写裸 `saturated`/`novel`/`complete`，**不得**复用已停用的全局
+  `NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE`（PRESS 后措辞对齐修正，2026-07-15；内审环 R2 事实镜头发现）。
 
 ## 7. 语言规则（修正 §8.2 缺陷 9）
 
