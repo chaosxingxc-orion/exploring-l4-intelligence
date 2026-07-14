@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-01
-title: Round-2 可回放检索协议 v2（实例化预注册——零查询执行；press-check 待过）
+title: Round-2 可回放检索协议 v2（实例化预注册——零查询执行；PRESS 已过·修订版待 reviewer 签署）
 date: 2026-07-15
 stage: Stage-1A（P1 序列 round-2 protocol instantiation；Gate B 门 G2–G5）
 status: PREREGISTERED_PRESS_REVISED_PENDING_SIGNOFF
@@ -231,7 +231,7 @@ screener_1 / screener_2 / adjudicator / resolution / reason`），保留待 owne
   date_range: {from: null, to: 2026-07-15}
   languages: [en]
   planned_queries:
-    - 'speech emotion recognition SER "selective classification" self-consistency selection frozen audio language model oracle CREMA-D MELD accuracy'
+    - 'speech emotion recognition SER emotion classification "selective classification" self-consistency selection frozen audio language model oracle CREMA-D MELD accuracy'  # PRESS MOD-3 项8：emotion classification 变体
     - 'spoken language understanding intent "best-of-N" BoN best-of-n sampling confidence calibration frozen SLURP MINDS-14 MINDS14 no fine-tuning'
     - 'site:ieeexplore.ieee.org speech emotion recognition spoken language understanding N-best selection re-ranking frozen ICASSP TASLP'  # PRESS HIGH-2b：IEEE 路由
     - "CITATION_BACKWARD seed=2602.03873 via Semantic Scholar references (jia decoding-ambiguous SER test-time-scaling ancestors)"
@@ -543,6 +543,7 @@ screener_1 / screener_2 / adjudicator / resolution / reason`），保留待 owne
     - "prompt selection context selection instruction optimization inference-time frozen model without training"
     - "demonstration selection exemplar selection in-context learning ICL example retrieval retrieval-augmented generation RAG context ranking test-time no gradient supply"  # alias family (PRESS MOD-3: full forms + ICL/exemplar)
     - "contextual biasing prompt selection context selection ASR speech frozen inference-time supply"  # PRESS MOD-4: audio-grounded supply family, aligns with 2509.19567 forward-chase
+    - '(cat:eess.AS OR cat:cs.SD OR cat:cs.CL) AND (all:"prompt selection" OR all:"context selection" OR all:"contextual biasing") AND all:inference'  # PRESS HIGH-2a：cat-filter 补齐（本 lane engines 含 arXiv_listing，§10 头部规则要求——PRESS 残留修复）
     - "CITATION_BACKWARD seed=2602.12281 via Semantic Scholar references (CoVer instruction-rephrase-selection ancestors)"
     - "CITATION_FORWARD seed=2509.19567 via Semantic Scholar citations (siskos contextual-biasing supply-ladder ASR successors)"
 ```
@@ -568,18 +569,18 @@ comparator seed cards（模板 §3.5 十二字段，达严格可比性前不称 
 | Gate | 要求 | 本协议落点 | 状态 |
 |---|---|---|---|
 | ROUND2-G1 | δ_corr 合同 amendment 已签 | 前置（修正案 №1 EFFECTIVE @0a5e108），本协议 §2 引用 | SATISFIED（外部） |
-| ROUND2-G2 | instantiated protocol.yaml + exact queries 提交/hash | §10 全 lane 嵌入 YAML；104 exact query strings（PRESS 修订前基线 82，修订净增 22：cat-filter 变体/site: 路由/分语言探针/L-DIS-C 补族）；提交后取 blob hash | THIS_DOC |
+| ROUND2-G2 | instantiated protocol.yaml + exact queries 提交/hash | §10 全 lane 嵌入 YAML；105 exact query strings = 102 mandatory + 3 optional 单语探针（基线 82 + 16 cat-filter + 3 IEEE site: + 1 MOD-4 供给族 = 102；与 §10 头部计数一致，机械重数工件 docs/checks/2026-07-15-round2-query-recount.txt）；提交后取 blob hash | THIS_DOC |
 | ROUND2-G3 | database/venue coverage 表已补 | §3（ACL Anthology / ISCA / IEEE / Crossref 补入；OpenAlex 排除；trace vs rerun 分类） | THIS_DOC |
 | ROUND2-G4 | inclusion examples + second-screen plan 已补 | §4（IN/EX 各 2 正 2 反真实论文样例 + 冲突规则）+ §5（三类第二审） | THIS_DOC |
 | ROUND2-G5 | stop rule 可机械执行 | §6（一轮定义 + yield curve + 引擎不可达换查 + 收方偏置禁令） | THIS_DOC |
-| ROUND2-G6 | P0-R8 最小 validator 已通过 | 独立工件，非本协议（gate_dependencies: OUT_OF_SCOPE） | 外部待办 |
+| ROUND2-G6 | P0-R8 最小 validator 已通过 | 独立工件 `scripts/integrity/p0r8_state_gate.py` v2（commit fcd1c57）：coordinator 复跑 OVERALL PASS exit 0 + 合成 fail-closed 探针 11/11（docs/checks/2026-07-15-p0r8-gate-run-coordinator.txt）；§14 列为执行首日阻断前置 | CLOSED（执行首日须复跑） |
 
 ### 13.2 §8.2 十缺陷修复映射
 
 | # | 缺陷（复审 §8.2） | 本协议修复 |
 |---|---|---|
-| 1 | 真正 query strings 不在被审协议中（推迟到未来 yaml） | §10 全 104 条 exact query 预注册入本件（含 PRESS 修订增补）；无推迟 |
-| 2 | `DRAFT—无异议即生效` 不合格 | frontmatter `status: PREREGISTERED_PENDING_PRESS_CHECK`；§0/§1 明示需 press-check + reviewer 签署，沉默≠批准 |
+| 1 | 真正 query strings 不在被审协议中（推迟到未来 yaml） | §10 全 105 条（102 mandatory + 3 optional）exact query 预注册入本件（含 PRESS 修订增补）；无推迟 |
+| 2 | `DRAFT—无异议即生效` 不合格 | frontmatter `status: PREREGISTERED_PRESS_REVISED_PENDING_SIGNOFF`（PRESS 已过、签署前不生效）；§0/§14 明示需 reviewer 签署，沉默≠批准 |
 | 3 | WebSearch 只 trace-replay 非 rerunnable | §3 每引擎 `trace_reconstructable` vs `query_rerunnable` 分类（WebSearch/IEEE=trace-only） |
 | 4 | 数据源覆盖不贴语音/多模态 | §3 补 ACL Anthology / ISCA Archive / IEEE Xplore(site:) / Crossref；OpenAlex 排除 |
 | 5 | RQ 偏向找完整合取占据者 | §1 RQ4 + §10.4 三条 disconfirming lanes（无术语 method-family / trainable 邻域 / 供给选择替代名） |
@@ -589,13 +590,30 @@ comparator seed cards（模板 §3.5 十二字段，达严格可比性前不称 
 | 9 | 语言限制未说明 | §7 非英文 → `awaiting_classification` 不静默丢弃；L-SAT-7 multilingual 例外 |
 | 10 | 版本冻结与 content hash 须继承 census v2 | §8 census v2 schema 入格 + fail-closed（canonical ID 缺→IDENTITY_UNRESOLVED 不计数） |
 
+### 13.3 PRESS_REVISE 七项修复应用映射（feedback = docs/checks/2026-07-15-round2-press-feedback.md）
+
+| 修复项 | 应用落点 |
+|---|---|
+| HIGH-1 L-SAT-7 三语 mega-query 拆分 | L-SAT-7：q2 改为英文点名目标语言（Mandarin/German/Spanish/French）；另设 `optional_native_language_probes` 3 条单语探针（zh/de/es；de 用 Emotionserkennung——PRESS 拼写更正采纳） |
+| HIGH-2a arXiv cat-filter 变体 | 16 条：engines 含 arXiv_listing 的全部检索型 lane 各 1（L-SAT-2/3/4/5/6/7、L-NEW-1/2/3/4/6/7/8、L-DIS-A/B/C）；机械重数见 docs/checks/2026-07-15-round2-query-recount.txt |
+| HIGH-2b IEEE `site:` 实际路由 | 3 条：L-SAT-1 / L-SAT-5 / L-SAT-6（§3 表同步注记「已操作化路由」；覆盖 PRESS 原文 L-SAT-1/6 两种编号读法） |
+| MOD-3 十项 text-word 变体 | ① BoN/best-of-n：L-SAT-1/2/4/5、L-DIS-A；② re-ranking 连字号族：L-SAT-1/2/7、L-DIS-A/B；③ ASR 全称：L-SAT-4/5/6；④ **BBAudio（承重优先）**：L-SAT-3 q1/q2 + cat 变体；⑤ PRM/ORM：L-DIS-A/B；⑥ 数据集去连字号：MINDS14（L-SAT-1）/"AIR Bench"（L-SAT-3）/UROBench（L-SAT-2）；⑦ RAG 全称+ICL+exemplar selection：L-DIS-C q2；⑧ SER 缩写+emotion classification：L-SAT-1 q1、L-SAT-7 q1；⑨ selective classification：L-SAT-1/7；⑩ inference-time scaling：L-NEW-6（cat 变体）、L-DIS-A（inference-time compute 同族） |
+| MOD-4 音频接地供给选择查询 | L-DIS-C q3（contextual biasing…ASR…supply，修正与 2509.19567 forward-chase 的域粒度错配） |
+| MINOR-5 G6 入 §14 阻断前置 | §14 `preflight_gates_before_first_query` 增列 `p0r8_state_gate_rerun`；frontmatter `gate_dependencies.ROUND2-G6` 同步 |
+| MINOR-6 ernez23a Crossref DOI 解析步 | L-CHASE 第 5 条查询改为「Crossref DOI-resolution first → Semantic Scholar citations」 |
+| MINOR-7 查询卫生（exact-phrase 引号 / bare TTS 禁令 / Qwen 代际消歧） | §10 头部「查询卫生规则」三条 |
+
+PRESS 可追溯性两保留项处置：保留 A（IEEE 名义覆盖 vs 操作零覆盖）→ HIGH-2b 已操作化路由；
+保留 B（§14 未列 ROUND2-G6 为阻断前置）→ MINOR-5 已补列。
+
 ---
 
 ## 14. 执行前置（本协议不自我放行）
 
 ```yaml
 preflight_gates_before_first_query:
-  - press_check: "PRISMA-S 检索式留存 + PRESS 六项（RQ translation / Boolean-proximity / subject-headings / text-words / spelling / limits）敌意预检；reviewer 反馈存档"
+  - press_check: "PRISMA-S 检索式留存 + PRESS 六项（RQ translation / Boolean-proximity / subject-headings / text-words / spelling / limits）敌意预检；reviewer 反馈存档 —— 已执行 2026-07-15：PRESS_REVISE → 7 fixes 全部应用（§13.3；feedback = docs/checks/2026-07-15-round2-press-feedback.md）"
+  - p0r8_state_gate_rerun: "ROUND2-G6 阻断前置（PRESS MINOR-5 / 复审 §8.3 六门全绿）：scripts/integrity/p0r8_state_gate.py 于执行首日复跑且 OVERALL PASS exit 0（上次通过 = coordinator run @ fcd1c57，合成 fail-closed 探针 11/11）；FAIL → 不得发任何查询"
   - reviewer_search_design_signoff: "独立 reviewer 对 search design 显式 active 签署（非沉默生效）"
   - owner_resource_approval: "owner 资源/治理批准（非科学终审）"
   - run_manifest_freeze: "执行首日冻结 run_id / agent_id / date_range.to / raw-capture 目录，回填后方可发首条 SEARCH"
