@@ -25,9 +25,9 @@ works are **separate GitHub repos** under `projects/` (each its own git repo, gi
 - **Compute is WSL2 `Ubuntu-24.04`, not native Windows** — the machine's default `Ubuntu` distro is
   WSL1 (no GPU), so always target `wsl -d Ubuntu-24.04`. The RTX 5090 (Blackwell, sm_120) has no
   stable native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only.
-- **Python is pinned to 3.12** in a uv venv at `~/.venvs/speechrl` (ext4). The system Python 3.14 is
-  too new for ML wheels — do not use it for the stack. **Never touch `D:/ai-stack/mem0-venv`** (the
-  isolated mem0 MCP env from `.mcp.json`).
+- **Python is pinned to 3.12** in a uv venv at `~/.venvs/speechrl` (ext4). System Python 3.14 is too
+  new for ML wheels — do not use it. **Never touch `D:/ai-stack/mem0-venv`** (the isolated mem0 MCP
+  env from `.mcp.json`).
 - torch from the `cu128` index; if a "no kernel image" error appears, fall back to torch nightly
   `cu128`, then a source build with `TORCH_CUDA_ARCH_LIST=12.0`.
 - Datasets/checkpoints/outputs live in `speechrl-data/` on the **E: drive**
@@ -122,7 +122,8 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   意图**会话结束前必落盘**。全文：AI-Collaboration §记录规约。
 - **哈希正典**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（核验
   `git show <commit>:<path> | sha256sum`）；Windows 工作树 CRLF 哈希是变体，不作证据。
-- **加载面预算（试运行值）**：CLAUDE.md ≤10KB、Research-Objective ≤5KB、记忆索引 ≤30 行。
+- **加载面预算（试运行值,续46 校准）**：CLAUDE.md ≤12KB、Research-Objective ≤5KB、记忆索引
+  ≤30 行。
 - **发布件提交前过敌意内审环**（复审至一轮零新发现）。决策后：append Decision-Log → 热层 →
   Per-Work-Status → 归档扫描 → `bash scripts/wiki-sync.sh`（wiki 真源=仓内 `wiki/*.md`，网页版
   只是镜像；mem0 MCP=个人便签，团队知识必须进 wiki）。
@@ -144,28 +145,27 @@ AGENTS.md 间逐字镜像。**死代号与事故史**：`wiki/archive/terminolog
   解码参数）；rollout 分布条件于它——合理供给下的 rollout 才有意义。
 - **rollout / K 池**：冻结模型在供给 c 下对同一输入采样的 K 个候选输出。
 - **oracle headroom H(c)**：事后用真值度量的「池内最优 − 默认输出」；**供给条件量**，换供给
-  必须重测（对应 best-of-N 理论的 coverage 条件）。
-- **oracle**：假想「总能选中池内最优」的选择器；只作上界参考，绝不作可部署数字。
+  必须重测。
+- **oracle**：「总选中池内最优」的假想选择器；只作上界，绝不作可部署数字。
 - **selector**：不读 gold、只凭奖励/打分信号从 K 池挑输出的算子。
-- **U（任务效用）**：单条输出效用记号（ASR=−WER、QA=EM…）；Project-Thesis 的 R 记法同构。
+- **U（任务效用）**：单条输出效用记号（ASR=−WER、QA=EM…）。
 - **ρ 实现率**：selector 兑现头空的比例，本质 ρ(c)；拆双锚 **rho_greedy**（锚=部署默认输出）
   / **rho_pool**（锚=池均值）；分母过小不报比率，标 `HEADROOM_TOO_SMALL` 只报绝对量。
 - **delta_mbr / regret**：U_sel−U_mbr / U_oracle−U_sel；Stage-1 报告与双 ρ **四量并列**、
   **cellwise-only**（禁无权重跨任务总平均）；部署用 label-free proxy `S`、评估用 `U`，不混。
 - **headroom 归因纪律**：selector 实验必须同报该池实测头空；**有头空的 null 才证伪选择器**；
   无头空的 null 只否定该供给配置（供给设计须问责登记，不得无限换供给重试）。
-- **MBR**：无标签共识选择；经典强基线/新颖性击杀器；**等 K 强制基线**。
+- **MBR**：无标签共识选择；**等 K 强制基线**。
 - **RDU（Retrieve–Discover–Use）**：前端知识子系统——供给侧 c 的一种实现。
 - **外部控制平面（external control plane / agent scaffold）**：围绕冻结黑盒核心的外部系统总称
   （观察/供给、记忆、工具、评估、选择、预算、停止）；口语「外设优化」的正名。
 - **对外术语**：weight-frozen reward-guided inference-time optimization；内部简称 TFRL。
 - **SESOI**：最小实质效应量；数值须外部锚定，Stage-2 才冻结。
 - **directional-only / hypothesis-grade**：Stage-1 小样方向性证据等级；绝不升级为结论。
-- **信息边界**：test-item 的 golden transcript/answer/qrel 不得进入 selector、reward、prompt、
-  检索或候选构造的任何路径；杠杆分 **read-out**（允许）与 **new-info**（禁止）。
+- **信息边界**：test-item gold（transcript/answer/qrel）不得进入 selector/reward/prompt/检索/
+  候选构造的任何路径；杠杆分 **read-out**（允许）与 **new-info**（禁止）。
 - **候选身份与研究态术语**（I1–I4 / UMBRELLA / strict-I2 / δ_corr / PRE_STAGE2_BLUEPRINT）：
-  属研究态，定义与现状统一维护在 `wiki/Research-Objective.md` §4（不在本表重复）；事故史见
-  墓碑表。
+  定义与现状统一维护在 `wiki/Research-Objective.md` §4；事故史见墓碑表。
 - **诚信核查包 C1–C5**：重校准审查五项核查（尝试普查/数字 lineage/信息边界/负结果/更正）；
   与论文贡献编号 C1–C3 同形异义——引用必带「诚信核查」限定语。
 
