@@ -12,8 +12,8 @@ knowledge** during pretraining. This series asks one question:
 > weights or internal architecture — go to _activate_ that latent knowledge and lift a frozen,
 > black-box omni model's performance on speech / audio tasks?**
 
-**Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; formal Gate S0 signature
-pending — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
+**Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; Gate S0 SIGNED 2026-07-15,
+training_free_scope = TF-Strict — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
 **external reward-guided control plane** (an agentic system) around the frozen black-box core:
 observation/supply building, state & external memory, tool/retrieval use, candidate generation,
 evaluation, selection, budget/risk/stopping, provenance & information-boundary guarding.
@@ -26,9 +26,10 @@ ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is u
 - **Black-box contract**: core methods may not require weights, gradients, hidden states, attention,
   or guaranteed logprobs. The local llama.cpp deployment is a low-cost verification environment —
   gray-box diagnostics only, never load-bearing.
-- **North-star metric family**: headroom / realization accounting — H(c) and the ρ family
-  (pool-level, generalizing to trajectory-level). **The metric pulls the design; the metric is not
-  the research object** (the 2026-07 inversion lesson — see tombstones).
+- **Measurement**: concrete metrics bind to task × dataset and are defined/frozen per study
+  protocol — **the identity level does not legislate a metric** (owner 2026-07-15). Where
+  measurable, report against the frozen model's own ceiling (headroom accounting); the metric is
+  never the research object (the 2026-07 inversion lesson).
 - **Resource posture**: reach the ceiling first (no budget cap; budget logged), then consolidate,
   then cost-reduce. Equal-budget comparisons are `PHASE-3_TOOL`s, not phase-1 gates.
 
@@ -74,7 +75,7 @@ dead (L2–L3 criteria unmet).
 > **仅靠「免训练 RL」——不改核心模型权重与内部结构、由奖励引导的控制——能在多大程度上「激活」
 > 这些潜藏知识，提升一个冻结黑盒 omni 模型在语音任务上的表现？**
 
-**纲领表述（owner 裁决 2026-07-14/15，续45/46；Gate S0 签署待办）**：我们构建并研究的对象是围绕
+**纲领表述（owner 裁决 2026-07-14/15，续45/46；Gate S0 已签署 2026-07-15，TF-Strict）**：我们构建并研究的对象是围绕
 冻结黑盒核心的**外部 reward-guided 控制平面**（agentic system）：观察/供给构造、状态与外部记忆、
 工具/检索、候选生成、评估、选择、预算/风险/停止、溯源与信息边界守卫。**免训练 RL 是牵引该系统
 设计的北极星原则**——reward/advantage 决定下一步动作，池内选择是退化特例。**第一创新假设 =
@@ -83,8 +84,9 @@ dead (L2–L3 criteria unmet).
 
 - **黑盒合同**：核心方法不得要求 weights/gradients/hidden states/attention/保证 logprobs；
   本地 llama.cpp = 低成本校验环节（灰盒诊断，永不承重）。
-- **北极星指标族**：头空/兑现率记账——H(c) 与 ρ 族（池级→轨迹级）。**指标牵引设计，指标不是
-  研究对象**（2026-07 指标倒置教训）。
+- **度量**：具体指标绑定任务×数据集、在各研究协议中定义并于 Stage-2 冻结——**身份层不立法
+  指标**（owner 2026-07-15）；可测处保留相对冻结模型自身天花板的记账纪律（headroom 归因）；
+  指标永不是研究对象（2026-07 倒置教训）。
 - **资源姿态**：全力摸高（预算不设 cap、照实记录）→ 持续整合 → 成本压降；等预算对照 =
   `PHASE-3_TOOL`。
 

@@ -6,6 +6,11 @@
 > @b1af8c6。** 登记规约（从严）：凡 FETCH/精读过的论文必须按此 schema 登记，不登记不算读过；
 > 判决层修订必须带伴随 token。
 >
+> **登记 token（system-first proposal v1 起用）**：`AS_CITED_BY_REVIEW`（评审点名、未做可回放
+> 核查）/ `RETAINED_RECORDS@census-v2`（在 94 记录簇→95 works 保留记录内,@28ad858）/
+> `ROUND2_PREREGISTERED_TARGET`（round-2 预注册待查目标,零执行,题录级 AS_GIVEN_BY_REVIEW）/
+> `TRAINED_COMPARATOR`（带训练组件的对照臂,TF-Strict 下永不承重）。
+>
 > **勿再引已撤回口径**（"~93 papers" / "305 queries" / "I4 最干净 whitespace"——现行结论一律
 > 按身份索引表：RESP-02 §3.3 与 [[Research-Objective]] §4/§5）。Survey v2 状态 =
 > ROUND1_SCOUT_COMPLETE。工件：[[2026-07-14-neighbor-matrix-v2]] ·

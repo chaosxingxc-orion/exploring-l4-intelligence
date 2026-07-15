@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-15（续46:S0 草案落盘 + 正典按 owner 裁决重写;S0 签署 = 效力正式化）"
+last_refresh: "2026-07-15（续48:S0 签署 TF-Strict,正典效力正式化;system-first proposal 重写进行中）"
 ---
 
 # Research Objective & Current State
@@ -13,16 +13,19 @@ last_refresh: "2026-07-15（续46:S0 草案落盘 + 正典按 owner 裁决重写
 **Primary program**：能否用一个外部 reward-guided 控制平面（agentic system），把冻结**黑盒**
 omni foundation model 组织成能感知多模态环境、维护状态、调用工具、利用反馈并选择下一步动作的
 系统，从而把预训练潜藏能力**激活到尽可能高**。——owner 裁决 2026-07-14/15（续45/46）；
-**效力正式化待 Gate S0 签字**（[[2026-07-15-s0-program-identity-signoff]]，含 TF-Strict/TF-Core
-待勾选项）。北极星指标族 = 头空/兑现率记账（H(c)、ρ 族，池级→轨迹级）：**指标牵引设计，指标
-不是对象**。资源姿态 = **全力摸高阶段**（预算不设 cap、照实记录；等预算判据 = PHASE-3_TOOL）。
+**Gate S0 已签署（续48，via 会话指令）：身份三行确认 + training_free_scope = TF-Strict
+（全系统零训练）**（[[2026-07-15-s0-program-identity-signoff]]）。**身份层不立法指标**（owner 07-15）：具体指标绑定任务×数据集、在各研究协议中定义
+与冻结；度量纪律以硬约束形式见 §3。资源姿态 = **全力摸高阶段**（预算不设 cap、照实记录；
+等预算判据 = PHASE-3_TOOL）。
 
 ## 2. 阶段与门（现在在哪、下一步是什么）
 
 - **Stage-1A 收尾**；Stage-1B 未放行（流程定义见 [[Research-Methodology]]）。
-- **下一解锁动作 = owner 签 S0** → system-first proposal 重写（v2 评审 §11 次序）→ system-first
-  survey（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其 21 lanes/105
-  预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 = 两个签字。
+- S0 已签（续48）→ **system-first proposal v1 已成稿**（STAGE1A-PROPOSAL-2026-07-15-02，
+  `2026-07-15-system-first-research-proposal-v1.md`，v2 §11 十一节次序，敌意内审环 R1 三镜头
+  2 MAJOR+5 MINOR 修复 → R2 CONVERGED；**待 owner 审阅转交 reviewer**）→ system-first survey（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
+  21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
+  两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。
