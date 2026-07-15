@@ -6,6 +6,46 @@
 
 ---
 
+### 2026-07-15（续55）· v3 外审收档 + Gate S1 P0-A..D 整改闭环——签署级亲验复核后重新送签待 owner
+
+**Context.** 送审组合（续54）当日返回 v3 外审（`2026-07-15-system-first-research-proposal-
+v3-stage1a-doctoral-review.md`,收档 @5ca99bf）：v3 科学件**有条件接受**（errata 澄清义务）;
+协议包 Gate S1 **退回大修**——六项 P0 缺陷（4.1 类目宇宙 CV/RO 盲区 / 4.2 48 片段≠最终可执行
+查询 / 4.3 75 cap 无溢出语义 / 4.4 副源路线不可回放 / 4.5 基础谱系 lane 缺失 / 4.6 威胁池
+封顶）+ P0-A..D 强制整改清单 + S1-E1..E8 最小证据包判据;零查询约束维持。
+
+**Decision.** P0-A..D 全部执行并经签署级亲验复核（首轮执行 @aa6e660/@262e6f5;复核发现一处
+遗漏,补录 @1c4c26a）：
+- **P0-A 科学表述 errata（七项,v3 修订记录节）**：headroom 拆「输出池命题（三文献锚+支持
+  边界）/系统轨迹假设（待查,不由前者推出）」两层;RL 命名纪律（对外中性术语=reward-guided
+  inference-time sequential control,RL 名称由 SF-L9 谱系裁决）;信息来源六类分解（⑤类增益
+  禁概括为激活预训练知识,登记 survey/README）;RQ-SYS「显著」→「实质性且可复核地」;threat
+  抽取改计划时态;Stechly 锚补全（arXiv 2402.08115 附支持/不支持边界）。
+- **P0-B 检索协议编译**：48 条查询离线编译冻结 `sf-queries.jsonl`（纯 stdlib 编译器零网络,
+  11 项静态检查全过,**复核复跑字节复现** blob=`c87a2301`）;类目冻结+cs.CV/cs.RO（L1/2/4/5,
+  L6-8 不扩的敏感性依据在案）;溢出分页规则（totalResults 全量分页,>2000 年度子窗确定性
+  拆分,禁无声截断）;16 副源路线三级分级（REPLAYABLE_API/DETERMINISTIC_WEB/DISCOVERY_ONLY,
+  网页排序不作 universe）;compiler/queries/routes 版本+哈希入 bundle。
+- **P0-C 文献宇宙补全**：种子 60（快照 51+增量批次1:OmniAgent/CMA-Harness/UCT-ToolCreator
+  〔scope_pending=Y〕/ConMem/Argos + 4 基础谱系 DOI,发现路线全留痕）;威胁首轮 15 非硬上限
+  （Affordance/FineVerify 晋升,增删须记路线禁利己筛选）;SF-L9 无 2022 窗、统计隔离;
+  **复核补录 A1-9**:每篇 `most_threatened_rq` 字段（RQ-SYS/CTRL/OMNI/SAFE/MEASURE/none,
+  P0-C 末项首轮整改遗漏——协议 §6+T2 模板+amendment-1 同步,编译器回归零影响）。
+- **P0-D 审计 bundle 闭合**：bundle manifest 12 工件 git blob 钉定（复核 12/12 重算一致）;
+  v3 内审报告补归档（迟归档如实说明+环后四新镜头入库）;amendment-1 逐处取代关系（A1-1..
+  A1-9）;dated correction #1 钉定 A1-9 三件新 blob @1c4c26a。
+
+**Rationale.** owner 指令「P0-A..D 一次做对」——签署级工作亲自核验不委托：承重声明全部按
+工件重验（哈希重算/编译复跑/逐 checkbox grep）,不沿抄提交信息;发现的唯一残留当场按 §10
+版本化增补修复,不静默改写已钉定工件。
+
+**Consequences.** S1-E1..E8 齐备可定位、hash 可复核、query 执行数=0;**当前动作 = owner
+过目 → 转 reviewer 重新申请 Gate S1 search-design 签署**;执行前置三条件不变（签署+owner
+批准+P0-R8 复跑）。
+
+**Supersedes.** none（续53/54 的「当前动作」状态推进;协议 schema 变更由 amendment-1 登记,
+原字节在 git 历史）。
+
 ### 2026-07-15（续54）· 合并全篇提案 v3 成稿并环收敛——送审组合定型
 
 **Context.** owner 指令「给 reviewer 先要写一份详细的 research proposal」——现有 v1 为十一节

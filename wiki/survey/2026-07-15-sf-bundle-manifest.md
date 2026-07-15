@@ -25,3 +25,19 @@
 类目冻结+溢出规则）/ E4 ✓（#9,可回放分级）/ E5 ✓（#4 增量批次1:直接威胁+基础谱系,SF-L9）/
 E6 ✓（本件）/ E7 ✓（#12,迟归档如实说明）/ E8 ✓（#8,query 执行数=0）。
 **attestation**：截至本 manifest 落笔,联网检索查询执行数 = 0。
+
+## dated correction #1（2026-07-15,续55 签署级亲验复核）
+
+复核方式 = 不沿抄提交信息、逐项按工件重验（12/12 blob 重算一致;编译器离线复跑 blob 复现
+`c87a2301`;P0-A..D 逐 checkbox 对照）。发现唯一残留：**P0-C 末项「每篇最可能推翻的 RQ」
+字段缺失**——修复 = 协议 §6 增 `most_threatened_rq` + T2 模板同步 + amendment-1 A1-9 行
+（commit `1c4c26a`）。上表 #2/#3/#10 三件以更正后 blob 为准,原 @aa6e660 哈希保留不改写;
+其余九件未动（blob 同 aa6e660）：
+
+| # | path | git blob @1c4c26a |
+|---|---|---|
+| 2 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `f135373d49544ee9af577e39775d9aa3a1d2d92d` |
+| 3 | `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | `c6a97969076a258d7fc5599a6025115f19a94632` |
+| 10 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `1763c793248f28acb50051637e8123de69a2760a` |
+
+**attestation（更正后复签）**：截至本更正落笔,联网检索查询执行数 = 0。

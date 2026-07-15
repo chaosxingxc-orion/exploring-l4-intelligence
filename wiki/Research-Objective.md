@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-15（续48:S0 签署 TF-Strict,正典效力正式化;system-first proposal 重写进行中）"
+last_refresh: "2026-07-15（续55:v3 外审收档,Gate S1 P0-A..D 整改闭环+签署级亲验复核,重新送签待 owner）"
 ---
 
 # Research Objective & Current State
@@ -21,24 +21,21 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
 ## 2. 阶段与门（现在在哪、下一步是什么）
 
 - **Stage-1A 收尾**；Stage-1B 未放行（流程定义见 [[Research-Methodology]]）。
-- S0 已签（续48）→ system-first proposal v1 成稿并经**同日两轮外审**（续50）：严评
-  RETURN_FOR_MAJOR_REVISION → 重校准评审 **ACCEPTABLE_TO_PROCEED_WITH_STAGE1A_SURVEY_
-  PROTOCOLIZATION**（判严评六缺陷中四项为阶段错位并撤回；Gate S1 = **协议化已授权 /
-  查询执行仍待签**）；严评仍成立四项已修（四行 delta 改写 TO_VERIFY_FULLTEXT / 自库 5 强近邻
-  检回补入 / CONVERGED 环内限定 / 内审工件归档 docs/checks/）；合并回应已并入
-  **v2 送审版**（STAGE1A-PROPOSAL-2026-07-15-03,`...-proposal-v2.md`,双镜头环 CONVERGED,
-  续51——含续50 措辞更正与自库反扫 4 列名种子,已转交）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS**（续52,
-  修正案 A–F 全采;元流程停止令=不写 v3,承重工件=协议实体）→ **协议 v1 已成稿**
-  （`survey/2026-07-15-system-first-survey-protocol-v1.md`:八 lanes/64 查询/**51 种子快照**
-  〔计数正典=manifest 枚举〕
-  〔含 Omni-Decision 2607.11433 最高优先威胁〕/§5bis 增量扫描/TF 审计子字段/范围多轴）→
-  **签署包已收敛（续53）**：六件套齐备,三轮环 CONVERGED（R1 双镜头 2 MAJOR+8 MINOR 修复;
-  装配规则消除执行者自由度）——**当前动作 = owner 过目 → 转 reviewer**;
-  **送审组合（续54 定型）= v3 合并全篇提案**（STAGE1A-PROPOSAL-2026-07-15-04,十四节科学
-  全文,环收敛——整体评审对象）**+ 协议包六件套**（search-design 签署对象）;执行前置三条件
-  （签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
-  21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
-  两个签字。
+- S0 已签（续48）→ proposal v1 同日双外审（续50：严评 RETURN / 重校准 ACCEPTABLE_TO_PROCEED,
+  存活四项已修）→ v2 送审版（续51）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_
+  REQUIRED_AMENDMENTS**（续52,修正案 A–F 全采）→ 协议 v1+签署包六件套环收敛（续53）→
+  **v3 合并全篇提案**（STAGE1A-PROPOSAL-2026-07-15-04,十四节,环收敛,续54）→ **v3 外审返回**
+  （收档 @5ca99bf）：v3 科学件=有条件接受（errata 义务）,协议包 Gate S1=**退回大修**（类目
+  CV/RO 盲区/片段≠最终查询/75 cap 无溢出/副源不可回放/基础谱系缺失/威胁池封顶）→
+  **P0-A..D 整改闭环（续55,签署级亲验复核）**：v3 errata 七项;检索协议 amendment-1
+  A1-1..A1-9（类目冻结+cs.CV/RO、**48 条查询离线编译冻结** `survey/2026-07-15-sf-queries.jsonl`
+  〔字节可复现,11 静态检查全过,联网查询=0〕、溢出分页规则、16 副源路线三级分级、SF-L9 基础
+  谱系道〔无 2022 窗〕、种子 **60**〔快照51+批次1,计数正典=manifest 枚举,Omni-Decision
+  2607.11433 仍最高优先威胁〕、威胁首轮 15 非硬上限、每篇 most_threatened_rq 字段）;bundle
+  manifest S1-E1..E8 齐备（12 工件 blob 钉定+dated correction #1）——**当前动作 = owner
+  过目 → 转 reviewer 重新申请 search-design 签署**;执行前置三条件（签署+owner 批准+P0-R8
+  复跑）,签署前零查询（attestation=0;selector round-2 协议降为子包 SURVEY-B,其 21 lanes/
+  105 查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。
@@ -88,5 +85,7 @@ P0-R 计分 = 续42（R6 REOPENED 等）；Survey v2 = ROUND1_SCOUT_COMPLETE（r
 热层=本文件 · 北极星=[[Project-Thesis]] · 方法论=[[Research-Methodology]] · 记录规约=
 [[AI-Collaboration]] · 审计=[[Decision-Log]]（grep 单条）· 取代墓碑=
 `archive/research-objective-supersession-index.md` · 死代号=`archive/terminology-tombstones.md` ·
-发布快照=`docs/integrity/release_manifest.json` · reviewer 提案与两轮评审=
-`2026-07-15-stage1a-research-proposal-*` 系列 · Per-Work=[[Per-Work-Status]]。
+发布快照=`docs/integrity/release_manifest.json` · reviewer 提案与评审=
+`2026-07-15-*research-proposal*` 系列（stage1a + system-first v1/v2/v3 及各评审件）·
+Gate S1 协议包=`survey/2026-07-15-system-first-survey-protocol-v1.md` + `survey/2026-07-15-sf-*`
+（bundle manifest 为钉定正典）· Per-Work=[[Per-Work-Status]]。
