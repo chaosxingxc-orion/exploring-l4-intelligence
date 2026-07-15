@@ -6,6 +6,37 @@
 
 ---
 
+### 2026-07-15（续52）· v2 外审收档（APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS）——修正案全采并入协议;检索失效第四例
+
+**Context.** v2 转交当日博导外审返回：**有条件批准继续 Gate S1 协议实例化**（首条查询仍须
+协议单独签署;不评价 close/1B;无 FFP 证据）。stage lens 前置生效——本轮评审自校准到 Stage-1A
+承重对象（检索覆盖/分类/可追溯/问题空间开放）,未再犯阶段错位。评审同时下**元流程停止令**：
+不写 proposal v3,下一承重工件 = 检索协议实体。
+
+**Decision.**（协调者双向核验后全采）① 修正案 A–F 并入协议 v1（种子「全集」→**带截止日
+快照** + 增量扫描 §5bis + CVF/ISCA/PMLR 等领域源 + chaining 续行规则 + 选文留痕 + 范围多轴
+与 TF-Strict 审计子字段）;② 评审 delta scan 七条新种子采纳（Omni-Decision 2607.11433 =
+最高优先威胁〔07-13 提交,training-free omni evidence-state system〕/ Affordance Harness /
+FineVerify / Effective-Feedback-Compute / MUSE-Autoskill / ACE 升列名 / VeGAS 边界对照）,
+种子快照 50→57;③ v2 两处「全集」措辞按评审 8.1-2 授权作事实性更正;④ docs/checks 两归档件
+按 §7.2 风险三改称「评审报告归档」并注明非完整运行记录;⑤ training-free-grpo 加「TF-Strict
+归属待核」定性（外设经 ground-truth 学 token prior——冻结核心 ≠ TF-Strict）,scaling-auditory
+「最紧占据者」降为团队自评待核。
+
+**Rationale（教训链,第四例）.** 评审指出 ACE/MUSE-Autoskill「并非团队不知道」——grep 实证：
+MUSE 在 2026-06-30 归档 survey 与 `papers/agent-level-tfrl/references.bib` 在案,**专职自库
+反扫也漏了它**（反扫范围未含论文引用库）。检索失效四例递进：①proposal v1 漏 census 五条
+→②v2 漏广义自库 AWM/ExpeL→③种子集漏矩阵 Section B 四条→④反扫本身漏 references.bib——
+每次修复「上一层」,漏「下一层」。结构性结论：**自库反扫范围必须枚举式冻结**（census/matrix/
+cards/ledger/归档 lanes/references.bib）,已写入协议 §3;评审的 blob 钉定要求（v1/v2 引用
+三元组化）同理防「无声漂移」。
+
+**Consequences.** 协议 v1 已并修正案成稿（`wiki/survey/2026-07-15-system-first-survey-
+protocol-v1.md`,57 种子快照/64 查询/§5bis 增量扫描）;待办 = seed_manifest.jsonl 生成 +
+协议内审环 → owner 过目 → reviewer search-design 签署;签署前零查询维持。
+
+**Supersedes.** v2 §4「全集」措辞（评审授权更正）;docs/checks 两件「原始工件」称谓。
+
 ### 2026-07-15（续51）· proposal v2（送审版）成稿——双镜头环收敛;续50 措辞更正
 
 **Context.** owner 指令：按十一节模板写 reviewer 面向的 proposal——修订史（改了什么）、现行

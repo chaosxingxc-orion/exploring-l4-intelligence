@@ -27,9 +27,11 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   查询执行仍待签**）；严评仍成立四项已修（四行 delta 改写 TO_VERIFY_FULLTEXT / 自库 5 强近邻
   检回补入 / CONVERGED 环内限定 / 内审工件归档 docs/checks/）；合并回应已并入
   **v2 送审版**（STAGE1A-PROPOSAL-2026-07-15-03,`...-proposal-v2.md`,双镜头环 CONVERGED,
-  续51——含续50 措辞更正与自库反扫 4 列名种子,**待 owner 审阅转交**）→ Gate S1 协议实例化
-  （八 lanes + mandatory seeds 全集 + 系统性自库反扫 + 严评 P0-LIT-3 八项规格 + 重校准
-  Checkpoint A–D）→ system-first survey（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
+  续51——含续50 措辞更正与自库反扫 4 列名种子,已转交）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS**（续52,
+  修正案 A–F 全采;元流程停止令=不写 v3,承重工件=协议实体）→ **协议 v1 已成稿**
+  （`survey/2026-07-15-system-first-survey-protocol-v1.md`:八 lanes/64 查询/**57 种子快照**
+  〔含 Omni-Decision 2607.11433 最高优先威胁〕/§5bis 增量扫描/TF 审计子字段/范围多轴;待
+  seed manifest + 内审环 → owner 过目 → reviewer search-design 签署,签署前零查询）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
   21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
   两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最

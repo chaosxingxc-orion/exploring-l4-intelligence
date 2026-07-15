@@ -97,7 +97,8 @@ mock,StageGuard fail-closed。
 
 见 v1 §4（修订后全表,含检回的五条自库强近邻与四行改写 delta）。现行主张只有一条：**候选
 delta 全部是待证伪假设**;本表身份 = Gate S1 的 seed table,占据结论以可回放 survey 为准。
-协议 mandatory seeds 全集 = 表内 15 项 + 你补充的机制族（AWM/ExpeL、Self-Refine/CRITIC/TPO、
+协议 mandatory seeds（**预协议快照,截止 2026-07-15,允许检索扩展**——本句为 v2 评审 8.1-2
+要求的事实性措辞更正,原「全集」表述撤回）= 表内 15 项 + 你补充的机制族（AWM/ExpeL、Self-Refine/CRITIC/TPO、
 HuggingGPT/AudioGPT、DSPy/TextGrad、TTRL=OUT_OF_SCOPE_WEIGHT_UPDATED 边界对照）——后者题录
 在协议实例化时逐一解析,解析失败者如实标 UNRESOLVED——**+ 本件送审前自库反扫新增的列名种子**
 （双镜头内审检出,均在我方 neighbor-matrix/sota-cards v2）：**training-free-grpo (2510.08191)**
@@ -106,7 +107,8 @@ HuggingGPT/AudioGPT、DSPy/TextGrad、TTRL=OUT_OF_SCOPE_WEIGHT_UPDATED 边界对
 §6 停止行与 lane⑦ 的锚）/ **walking-through-uncertainty (2604.25591)**（冻结 Qwen2.5-Omni 在
 MMAU/MMAR/MMSU 的 selective-prediction DIRECT 占据）/ **scaling-auditory (2503.23395)**（我方
 自评「最紧 omni 机制占据者」,自散文提升为列名种子）。协议实例化含一步**系统性自库反扫**
-（neighbor-matrix v2 + sota-cards v2 + ledger v2 + 归档 lanes）以完成种子全集;中量候选
+（neighbor-matrix v2 + sota-cards v2 + ledger v2 + 归档 lanes + `papers/*/references.bib`）
+以扩充种子快照;中量候选
 （MAV 2502.20379 / SampleScrutinizeScale 2502.01839 / iro 2506.17828 / reward-overopt
 2210.10760 / audio-cot 2501.07246 / mugen 2603.09714 等）届时逐一裁决收录。
 
@@ -155,7 +157,7 @@ TF-Strict 身份的隔离作为工程 ADR 一并处理。
   两侧都查）。
 - **质量规格 = 严评 P0-LIT-3 八项全采**：①发现源 arXiv/ACL Anthology/OpenReview/IEEE Xplore/
   ACM DL（Semantic Scholar/OpenAlex 仅发现,承重回原文）;②每 lane exact Boolean query+同义词+
-  时间窗+结果 cap+排序;③mandatory seeds（§4 全集）+ 对其 backward/forward citation chaining
+  时间窗+结果 cap+排序;③mandatory seeds（§4 快照）+ 对其 backward/forward citation chaining
   一轮;④纳排矩阵编码 core access/parameter update/external state/reward type/policy update/
   modality path/tool use/budget-horizon/task/trained comparator;⑤任何 NO_DIRECT_MATCH 须达
   预注册饱和判据（连续两轮 snowballing 零新增直接邻居+双评审独立同意）;⑥承重 delta 须
