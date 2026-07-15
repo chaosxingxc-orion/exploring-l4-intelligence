@@ -14,6 +14,7 @@
 | A1-6 | 新增 SF-L9 foundational lineage 道（4 经典 DOI 种子,chaining 为主,无 2022 窗限,统计隔离,独立停止规则）——RL 命名裁决依据 | 原八道皆 2022 窗 | 4.5/3.3——基础谱系缺失则 RL vs planning/metareasoning 无从裁决 |
 | A1-7 | seed manifest 增量批次1（+9=60）：v3 外审 delta 5 条（OmniAgent/CMA-Harness/UCT-ToolCreator〔scope_pending=Y〕/ConMem/Argos）+ 基础谱系 4 条;§5bis 增量批次机制首次实际使用 | 快照 51 | 3.2/P0-C——直接威胁与概念祖先补入,发现路线全留痕 |
 | A1-8 | threat 首轮队列 13→15（Affordance/FineVerify 晋升）;OmniAgent/CMA/UCT-ToolCreator/ConMem 待判定入池;Argos 次优先;「非硬上限」明文化;增删须记发现路线,禁只提升利己文献 | 原「首批 13 篇（可增至 15）」 | 4.6——核心威胁池必须优先覆盖最可能杀死身份的工作 |
+| A1-9 | 纳排 schema 增设每篇 `most_threatened_rq` 字段（多值枚举 = RQ-SYS/RQ-CTRL/RQ-OMNI/RQ-SAFE/RQ-MEASURE/none〔none 须附一句理由〕,问题树定义锚 = v3 提案 §3;§11 kill matrix 按此聚合;协议 §6 与 T2 模板同步） | 原 §6 十轴+TF 审计+范围多轴 schema 无该字段 | P0-C 末项「对每篇记录…最可能推翻的 RQ」——首轮整改遗漏,签署级亲验复核（续55）发现补录 |
 
 **S1-E 验收映射**：E1=v3 errata（v3 修订记录节）;E2=queries.jsonl+哈希;E3=A1-1+A1-4;
 E4=A1-5;E5=A1-6+A1-7;E6=bundle manifest（另件,提交后钉哈希）;E7=v3 内审补归档

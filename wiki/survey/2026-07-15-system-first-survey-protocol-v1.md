@@ -254,6 +254,11 @@ component_level_proximity | modality_proximity | tf_strict_compliance | black_bo
 reward_control_proximity | persistence_state_proximity | evidence_grade` 各轴独立编码
 （如 walking-through-uncertainty：组件直接、系统不直接）。
 
+**RQ 威胁标注（v3 外审 P0-C 末项;amendment-1 A1-9 补录）**：每条 INCLUDED 记录另标
+`most_threatened_rq`（多值;枚举 = RQ-SYS/RQ-CTRL/RQ-OMNI/RQ-SAFE/RQ-MEASURE/none,问题树
+定义见 v3 提案 §3）——该工作**最可能推翻或占据**的研究问题;标 none 须附一句理由。§11 的
+coverage/kill matrix v3 按本字段逐 RQ 聚合。
+
 ## §7 抽取字段与证据分级
 
 开放字段（Checkpoint B 全采,允许新增列并版本化）：`core access / modality path / external

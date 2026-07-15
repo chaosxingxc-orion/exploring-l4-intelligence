@@ -28,6 +28,7 @@
   "what_changes_at_test_time":"","persistence_scope":"","compute_scaling":"","claimed_mechanism":"",
   "strongest_result":"","failure_mode":"","reusable_implementation":""},
  "resource_axes":{"model_calls":"","tool_calls":"","tokens":"","latency_cost":"","horizon":"","stopping":""},
+ "most_threatened_rq":["RQ-SYS|RQ-CTRL|RQ-OMNI|RQ-SAFE|RQ-MEASURE|none(须附一句理由)"],
  "evidence_grade":"DISCOVERED|ABSTRACT_VERIFIED|FULLTEXT_OPENED|CLAIM_VERIFIED|REPRODUCED",
  "claim_locators":[{"claim":"","locator":"vN §/p./Table/Eq.","span":""}]}
 ```
