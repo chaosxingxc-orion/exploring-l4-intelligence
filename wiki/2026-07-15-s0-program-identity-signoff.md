@@ -20,10 +20,13 @@ resource_posture      = 全力摸高（当前：预算不设 cap、照实记录�
 black_box_contract    = 严格黑盒 headline：核心方法不得要求 weights / gradients / hidden states /
                         attention / 保证可得的 logprobs；本地 llama.cpp 部署 = 低成本校验环节
                         （GRAY_BOX_DIAGNOSTIC，永不承重）
-training_free_scope   = ☐ TF-Strict（外部 evaluator/controller 亦零可训练参数——与「只通过外部
-                          系统优化」表述一致，草案推荐）
-                        ☐ TF-Core（允许训练外部小组件；headline 须改名 frozen-core agent
-                          optimization，不得裸称 training-free）
+training_free_scope   = （TF-Strict/TF-Core 系 v2 评审拟的代号；人话正名如下括注）
+                        ☐ TF-Strict =「全系统零训练」：核心模型和我们造的全部外部组件
+                          （evaluator/controller/router）都没有任何可训练参数，适应只靠上下文/
+                          记忆/搜索/规则/非参数统计——与「只通过外部系统优化」一致，草案推荐
+                        ☐ TF-Core =「仅核心冻结」：核心冻结，但允许训练外部小组件（如小 reward
+                          model/router）；此时 headline 必须改名 frozen-core agent optimization，
+                          不得裸称 training-free
 core_structure_policy = 核心模型权重与内部架构冻结；外部系统结构显式设计并版本化
                         （旧「不改结构」措辞据此修正，消除字面自相矛盾）
 innovation_status     = 系统级创新 = owner 选择的创新假设；system-first survey 占据核查完成前，
