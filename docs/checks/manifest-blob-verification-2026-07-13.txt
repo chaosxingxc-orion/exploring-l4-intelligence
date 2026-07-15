@@ -1,0 +1,25 @@
+# Canonical blob-hash verification of docs/integrity/release_manifest.json (F-S2 re-closure evidence)
+# Run: 2026-07-13, coordinator-personal, via git blobs only (clean-clone-equivalent view).
+# Method: for each key_artifact_hashes entry, sha256 over the git blob at the pinned SHA of the
+# OWNING repo; plus merge-base --is-ancestor for both pinned SHAs.
+#
+# Exact reproduction recipe (round-3 self-check amendment: manifest keys are umbrella-prefixed,
+# but W1 blobs live in the W1 repo and must be fetched there with W1-repo-relative paths):
+#   umbrella entries (5), run at the umbrella root:
+#     git show 757465c:<path> | sha256sum          # e.g. git show 757465c:docs/corpus.lock.json
+#   W1 entries (2), run inside projects/speech-mllm-training-free-rl/ with the projects/... prefix
+#   stripped:
+#     git show a532da0:scripts/knowledge/corpus_lock.py | sha256sum
+#     git show a532da0:scripts/baselines/deterministic_draw.py | sha256sum
+
+pinned: umbrella 757465c dirty= False | W1 a532da0 dirty= False
+MATCH  git_blob_at_HEAD docs/corpus.lock.json
+MATCH  git_blob_at_HEAD docs/claim_ledger.yaml
+MATCH  git_blob_at_HEAD docs/integrity/prior_exposure_registry.json
+MATCH  git_blob_at_HEAD docs/integrity/experiment_attempt_registry.jsonl
+MATCH  git_blob_at_HEAD docs/integrity/discrepancy_register.md
+MATCH  git_blob_at_HEAD projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py
+MATCH  git_blob_at_HEAD projects/speech-mllm-training-free-rl/scripts/baselines/deterministic_draw.py
+umbrella pinned SHA is ancestor of HEAD: True
+W1 pinned SHA is ancestor of HEAD: True
+ALL_BLOB_HASHES_MATCH_AT_PINNED_SHAS = True

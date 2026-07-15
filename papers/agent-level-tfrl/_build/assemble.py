@@ -11,7 +11,66 @@ root = data.get("result", data)
 sections = root.get("sections", [])
 sections = sorted(sections, key=lambda s: s.get("key",""))
 
-PREAMBLE = r"""\documentclass[10pt]{article}
+PREAMBLE = r"""% ============================================================================
+% CORRECTED DRAFT (2026-07-11) -- 5/5 corrections applied, pending hostile re-review.
+% DO NOT CITE OR CIRCULATE UNTIL RE-REVIEW CLEARS.
+%
+% Response-review (RR-015 / Gate A) found five load-bearing errors in the prior
+% draft; ticket #31 applied corrections for all five, each grounded in a
+% VERIFIED (Opus-audited) artifact / umbrella docs/claim_ledger.yaml entry:
+%   (1) headline ASR numbers were macro-utterance WER mislabeled as WER --
+%       corrected to the v2 dual-metric statement (corpus WER greedy 0.0973
+%       snr5 / 0.0579 clean; oracle-8 upper bound +0.0336 [0.0235,0.0453] /
+%       +0.0223 [0.0136,0.0316]; macro figures now kept only when explicitly
+%       labeled "macro utterance-WER"). Source: _repro/asr_bon_v2_{snr5,clean}.json,
+%       claim_ledger C-ASR-V2.
+%   (2) "three generation seeds" conflated cohort/noise/greedy/pool randomness --
+%       corrected to the v2 4-way separation (cohort seed 20260711, noise seed
+%       20260712, greedy temperature 0 (seed inert), pool seeds 1-3). Source:
+%       same v2 artifacts, claim_ledger C-ASR-SEEDS/C-ASR-V2.
+%   (3) "MBR non-significant at every N" is corrected to: MBR (symmetric
+%       edit-distance implementation; the v1 formula was an asymmetric-distance
+%       bug) is positive but non-significant at N=8 in both conditions; under
+%       v1's data a separate review found N=1/N=2 significantly WORSE on the
+%       corpus metric. NEW verified finding added: logprob-confidence is the
+%       sole deployable selector with corpus-WER CI excluding 0 in both
+%       conditions (+0.0081 [0.0005,0.0161] snr5 corpus-only; +0.0094
+%       [0.0034,0.0165] clean, both metrics), realizing ~24%/~42% of oracle
+%       headroom -- labeled Stage-1 directional, multiplicity-uncorrected.
+%   (4) the MInDS-14 result was a transductive fixed 3-shot/class support
+%       condition mislabeled zero-shot, with three factors confounded --
+%       corrected to the clean C-MINDS-V2 factorial: instruction-only (true
+%       zero-shot) REGRESSES -0.245 [-0.286,-0.201]; cards drive the gain
+%       (+0.246); instruction-on-cards-only is +0.015. Never called zero-shot
+%       or reward-guided RL. Source: _repro/minds14_toolintent_v2.json.
+%   (5) hard best-of-N was asserted as a proven realization of the Gibbs tilt --
+%       corrected throughout to: hard BoN induces the order-statistics
+%       selection distribution; the Beirami KL bound is a statement about
+%       that hard-BoN object, imported into Lean as the named axiom
+%       beirami_thm_3_1 over the opaque functional klBoNActual (NOT
+%       machine-proved here); the Gibbs tilt is a separate object realized by
+%       soft (temperature-controlled) BoN; operator-linked theorem count = 0.
+%
+% Also applied: "training-free RL" in the title/abstract-adjacent prose now
+% uses the ruled primary term "weight-frozen reward-guided inference-time
+% optimization", with TFRL introduced as a defined abbreviation and
+% explicitly distinguished from "test-time RL" (TTRL) in the literature.
+%
+% This comment block and the in-document banner right after \begin{document}
+% are status scaffolding; the results text itself has now been corrected per
+% ticket #31 (this pass). Pending: hostile re-review sign-off.
+% Pointer / full forensic reply: wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md
+%
+% 2026-07-12 (RI mechanical remediation, item 10): this banner/comment block and
+% the boxed in-document notice below now live HERE, in assemble.py's PREAMBLE --
+% the one thing reassemble.py always reads verbatim -- instead of only in a
+% hand-edited main.tex, so a `reassemble.py` re-run from sections/ no longer
+% silently drops them. sections/*.tex were resynced from the (previously
+% out-of-sync) hand-corrected main.tex in the same pass; see docs/claim_ledger.yaml
+% and wiki/Decision-Log.md 续15 for the reconciliation record.
+% ============================================================================
+
+\documentclass[10pt]{article}
 
 % Self-contained NeurIPS-approximating preamble (robust; no external .sty).
 \usepackage[letterpaper,margin=1in]{geometry}
@@ -179,7 +238,7 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,
   keepspaces=true,showstringspaces=false,frame=single,framesep=3pt}
 
-\title{Training-Free RL on Frozen Omni Speech Models:\\[2pt]
+\title{Weight-Frozen Reward-Guided Inference-Time Optimization (TFRL) on Frozen Omni Speech Models:\\[2pt]
 \large Reward-Guided Best-of-$N$, a Paralinguistic Probe, and a Reward-Spread Lens}
 
 \author{Exploring-L4-Intelligence Project}
@@ -187,6 +246,25 @@ PREAMBLE = r"""\documentclass[10pt]{article}
 
 \begin{document}
 \maketitle
+
+\begin{center}
+\noindent\fbox{\parbox{0.94\linewidth}{
+\centering{\bfseries\color{red} 5/5 CORRECTIONS APPLIED (2026-07-11) --- PENDING HOSTILE RE-REVIEW}
+\vspace{4pt}
+
+\raggedright\color{black}
+Ticket \#31 applied corrections for all five load-bearing errors found by response-review (RR-015 / Gate A); each is now grounded in a VERIFIED (Opus-audited) artifact and umbrella \texttt{docs/claim\_ledger.yaml} entry, and the results text below reflects the corrected numbers/framing. This notice remains in place only pending hostile re-review sign-off:
+\begin{enumerate}[nosep,leftmargin=1.5em]
+\item headline ASR numbers: corrected from macro-utterance WER mislabeled as WER to the v2 dual-metric statement --- corpus WER greedy $0.0973$ (snr5) / $0.0579$ (clean); oracle-8 upper bound $+0.0336$ $[0.0235,0.0453]$ / $+0.0223$ $[0.0136,0.0316]$; macro figures kept only when explicitly labeled ``macro utterance-WER'' (\texttt{\_repro/asr\_bon\_v2\_\{snr5,clean\}.json}, claim\_ledger C-ASR-V2);
+\item ``three generation seeds'' corrected to the v2 4-way seed separation: cohort seed $20260711$, noise seed $20260712$, greedy temperature $0$ (seed inert), pool seeds $1$--$3$;
+\item ``MBR non-significant at every $N$'' corrected to: MBR (symmetric edit-distance; the v1 formula was an asymmetric-distance bug) is positive but non-significant at $N{=}8$ in both conditions (under v1's data a separate review found $N{=}1$/$N{=}2$ significantly \textbf{worse} on the corpus metric); \textbf{new} verified finding added --- logprob-confidence is the sole deployable selector with corpus-WER CI excluding $0$ in both conditions ($+0.0081$ $[0.0005,0.0161]$ snr5 corpus-only; $+0.0094$ $[0.0034,0.0165]$ clean, both metrics), realizing $\sim\!24\%/\!\sim\!42\%$ of oracle headroom (Stage-1 directional, multiplicity-uncorrected);
+\item the MInDS result corrected from a mislabeled \textbf{transductive fixed 3-shot/class support} / ``zero-shot'' claim to the clean C-MINDS-V2 factorial: instruction-only (true zero-shot) \textbf{regresses} $-0.245$ $[-0.286,-0.201]$; example cards drive the gain ($+0.246$); instruction-on-cards-only is $+0.015$ --- never called zero-shot or reward-guided RL;
+\item hard best-of-$N$ corrected from ``the concrete realisation of the Gibbs tilt'' to the precise relation: hard BoN induces the order-statistics selection distribution; the Beirami KL bound is a statement about that hard-BoN object, imported into Lean as the named axiom \texttt{beirami\_thm\_3\_1} over the opaque functional \texttt{klBoNActual} (\textbf{not} machine-proved here); the Gibbs tilt is a separate object realized by soft (temperature-controlled) BoN; operator-linked theorem count $=0$.
+\end{enumerate}
+\normalsize Pointer: \texttt{wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md}.
+}}
+\end{center}
+\vspace{6pt}
 """
 
 FOOTER = "\n\n\\bibliography{references}\n\n\\end{document}\n"

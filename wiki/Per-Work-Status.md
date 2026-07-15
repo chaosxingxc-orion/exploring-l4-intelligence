@@ -2,25 +2,37 @@
 
 > **This is the living status board — the page that changes most often.** Update it whenever a
 > work's maturity or near-term plan shifts, and note big moves in [[Decision-Log]].
-> Last reviewed: 2026-07-04.
+> **The single hot current-state entry point is now [[Research-Objective]]** (read it first; this
+> board is a secondary status view — Decision-Log is the cold append-only archive).
+> Last reviewed: 2026-07-14.
+> 现行 primary question（G0，2026-07-11）见 [[2026-07-11-stage1-audit-response-and-rulings]] §4；
+> primary study 现由 **W1** 承载（提案 v4.2，历两轮对抗复审后，待外审 + owner 签字；
+> v4.1 [[2026-07-12-research-proposal-v41-external-review]] 转历史记录，Decision-Log 续24/续26）。
 
 | # | Repo | Status | One-line state |
 |---|------|--------|----------------|
-| **W4** | `speech-mllm-omni-embedding-rl` | 🟡 Skeleton → **active (flagship)** | Flagship: training-free RL to disentangle a frozen omni model's embeddings; omni-embed model wired. |
-| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · pattern reference | Training-free reward/eval machinery W4 reuses; **holds the genuine reward-driven best-of-N result** (frozen Qwen3-Omni-30B via llama.cpp). |
+| **W4** | `speech-mllm-omni-embedding-rl` | 🟡 **Repositioned per G0** (separate work) | Disentanglement headline dropped → **L0/L1 embedding-utility studies** (readout / suppression / selective-readout limits); fresh proposal **pending ticket #29**; omni-embed model wired. |
+| **W1** | `speech-mllm-training-free-rl` | 🟢 Mature · **primary study · Stage-1A problem-definition** | **Stage-1A (续34/续35): research object = a label-free, supply-conditional selection operator's realization surface (ρ(c)/H(c)/regret) across the frozen-omni 〔model × task〕 matrix — ASR is one row; breadth is a working hypothesis, not proven novelty.** RDU demoted to secondary; v4.2 archived as a Stage-1 problem-definition deliverable. **Now: P0-R remediation + replayable P1 round-2** (Survey v2 = ROUND1_SCOUT_COMPLETE; P0 = 2 CLOSED + 6 PARTIAL per the accepted doctoral re-review, 续39; decision package = PRE_STAGE1C_DECISION_DRAFT — Stage-1C selection gated on P0-R+P1 closure; identity-indexed max-claim tokens per RESP-02 §3.3). **Stage-1B NOT authorized; M2 frozen.** M1 engineering base at `20d45a8`; genuine best-of-N result (frozen Qwen3-Omni-30B via llama.cpp) retained. |
 | W2 | `speech-mllm-efficient-rl-alignment` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 | W3 | `speech-mllm-multitask-rl` | 🟡 Skeleton | Hydra scaffold + shared-lib wiring; RL loop to fill in. |
 
-**W4 — Omni-embedding speech disentanglement (flagship, active).** Training-free RL (no weight/
+**W4 — Omni-embedding speech disentanglement (separate work; repositioned per G0, 2026-07-12).**
+_Status note (2026-07-12, Decision-Log 续24): W4 is no longer THE flagship — the disentanglement
+headline is dropped/downgraded to L0/L1 embedding-utility studies and a fresh proposal is pending
+ticket #29; W1 now carries the primary study. W4's object (the omni's own embedding space) is
+unchanged, and is untouched by W1 v4.1 demoting the core 2048d hidden state to a white-box diagnostic
+arm._ Training-free RL (no weight/
 structure change) to steer the frozen `omni-embed-nemotron-3b` so task-conditioned embeddings of the
 same audio give different, individually-better downstream performance across content/ASR+ST,
 speaker-ID, emotion/SER, and language+intent. First-proof substrate: CREMA-D (speaker + emotion on the
 same audio). **Done:** math-feasibility doc + per-factor operator decision (content→A, language→A,
 speaker→hybrid, emotion→B); the CREMA-D two-factor proof loop runs end-to-end, reproducibly, logged to
 MLflow (`bash scripts/train.sh seed=42`). **First result (3-factor CREMA-D):** the SAME frozen embedding gives
-content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance) — the thesis ("different downstream
-tasks → different performance") demonstrated; instruction conditioning does not steer the embedding
+content ≈**1.00**, emotion ≈**0.36**, speaker ≈**0.04** (≈chance); instruction conditioning does not steer the embedding
 (columns flat), confirming the suppression prediction (see [[W4-Training-Free-RL-Feasibility]] §0.1).
+W4 首结果为 L0/L1 证据（factor readout availability/suppression：content≈1.0 是 12 句固定句 ID、emotion
+部分可读、speaker 近 chance；matched>mismatched 判据 diagonal_dominant=False 未过）——"已解耦/thesis
+demonstrated" 表述按 [[2026-07-11-stage1-audit-response-and-rulings]] 裁定废止；W4 待按 §7.1 重定义（#29）。
 **Model-understanding phase (1.2.1) DONE — ICL tested, verdict now evidence-backed.** Diagnostic probes
 (I/O contract, query-token isolation, native text-query retrieval, few-shot ICL + label control) on the
 frozen model: native text-query recovers content (0.99) but not emotion (0.27); in-context demos
@@ -58,18 +70,82 @@ adversarially collapsed and reframed (2026-07-02) into an honest single-model tr
 review rounds → **CONVERGED, 0 surviving fundamental/major**; every number reproduced from committed
 artifacts. Merged via PR #2. **That open question is now CLOSED (2026-07-04): the step-1 rationality campaign — pre-registered criteria (freeze b19bff2), two pilots with freeze-before-run commits, a 6-charge hostile panel, and a unanimous sound-with-corrections /ars-reviewer verdict — ended in an owner-ratified NO-GO** (M3 killed by measurement F=0.38108 vs 0.01; M5 inconclusive-by-inert-instrument → frozen default; re-open only on r1/r2/r3). Single-model work continues via P-D. See [[2026-07-03-omni-agentic-tfrl-go-no-go-decision]] and Decision-Log 2026-07-04.
 
-**W1 — Training-free RL (mature pattern reference).** Gradient-free, reward-guided inference-time RL
-(best-of-N, reward-guided decoding, reranking). The most complete work; its verifiable-reward/eval
-machinery is what the flagship W4 reuses. **Genuine best-of-N result (2026-07-02, committed
+**W1 — Training-free RL — now carries the primary study (per G0).**
+_**2026-07-13 recalibration (Decision-Log 续33, supersedes the 续32 note below on stage identity)**:
+current position = **Stage-1A (problem scoping)** under the owner's Stage-1A/B/C subdivision — the
+selector-realization direction (canonical name for the reviewer-coined "A-SEL"; glossary landed in
+CLAUDE.md/AGENTS.md @`f57cd81`) is graded **CONDITIONALLY VIABLE** as a working direction by that
+review (its exact verdict token — not "confirmed"; problem definition NOT closed).
+The 84c6cf6 "Stage-2 proposal v0.1" is re-identified as **PRE_STAGE2_BLUEPRINT** (stage-2 label was
+premature; program code W1-ASEL-S2-001 retired). Oracle headroom is ruled a **supply-conditional
+quantity H(c)** with a null-attribution discipline (owner ruling; literature-supported: coverage /
+Huang ICML 2025, Snell 2024). **Self-check erratum (wf_45c1f5fe):** an earlier version of this note
+cited "in-repo +0.042 bare vs +0.517 supplied" — the +0.517 is the claim-ledger-INVALID C-T7 number
+(answer leakage; citation as positive evidence prohibited; clean T8 rerun = −0.066 null), and +0.042
+must carry its **macro utterance-WER** label (corpus-WER counterpart +0.0296). No valid in-repo
+supply-stratified H(c) measurement exists yet — producing one is the Stage-1B P0 prototype's job._
+_**2026-07-14 update (Decision-Log 续35; precheck review + reassessment both accepted):** research
+object reframed to the cross-〔model × task〕 realization surface (breadth-first, reviewer-accepted);
+"non-ASR cells empty" corrected to **UNDERSEARCHED** (SER/SLU/ST/AAC ancestors exist); "breadth is
+the moat" is a **working hypothesis, not proven novelty**; P0-SURV-1 downgraded to **PARTIAL** (count
+reconstructable, raw-query replay OPEN). **Survey v2 (since superseded: now ROUND1_SCOUT_COMPLETE;
+P0 re-review accepted 2 CLOSED + 6 PARTIAL, 续38/39; current work = P0-R + replayable P1)** —
+taxonomy v2 (candidate-support /
+contextual-supply / selective-prediction families + selection≠revision split), cross-task scan,
+**adversarial challenger hunt**, agentic near-neighbors (AudioToolAgent/AuTAgent/JitRL), per-query
+search log, task×method×model kill matrix (no `EMPTY`), per-task SOTA cards. Stage-1B NOT released;
+M2 frozen._
+_**2026-07-13 update (Decision-Log 续32)**: the signoff adversarial review **returned** the v4.2
+remediation package (7 FUNDAMENTAL + 6 MAJOR; all accepted, zero refuted on personal re-verification).
+Owner rulings: **single headline = A-SEL** (reward-guided selector realizing the ρ/oracle headroom,
+equal-K, generation-marginal, cross-family replication; RDU-vs-strongest demoted to secondary/ablation);
+v4.2 **archived as the Stage-1 problem-definition deliverable** (续29's no-fresh-proposal clause
+amended); evidence route = public-deterministic with an honest grade cap. **Fresh Stage-2 proposal
+v0.1 (program W1-ASEL-S2-001) drafted and submitted for reviewer STRUCTURE verification**
+([[2026-07-13-stage2-proposal-ASEL-v0.1-for-reviewer-verification]]); P0-A evidence-transaction fixes
+landed (umbrella `7b895b5`, W1 `a532da0`); **M2 stays frozen** until P0-B closes (group-union
+cross-split exclusion + negative test, upstream corpus second-fetch anchor, config-history
+reconstruction, FG-1..FG-10 freeze dossiers) and the reviewer signs the Stage-2 gate against the
+fresh proposal._
+_Historical framing (2026-07-12, Decision-Log 续24 / G0 §4): a front-end **Retrieve–Discover–Use (RDU)**
+knowledge subsystem over the frozen omni core **plus a reward-guided trajectory-selection operator**;
+primary metric = **selector realization rate ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**.
+Proposal **v4.2** (after two adversarial-review rounds) went to external review (v4.1
+[[2026-07-12-research-proposal-v41-external-review]] → historical record). **M1 engineering base locked at W1
+`20d45a8`; experiments frozen** pending the two S4 assets + external review + §12 signature. The
+mature reward/eval machinery below is the foundation the primary study builds on._ Gradient-free,
+reward-guided inference-time RL (best-of-N, reward-guided decoding, reranking). The most complete work;
+its verifiable-reward/eval machinery is what W4 also reuses. **Genuine best-of-N result (2026-07-02, committed
 `b7b4b0d`/`cd6aa92`/`f9d111a`):** frozen Qwen3-Omni-30B (Q8_0 GGUF, llama.cpp resident server,
 `-ngl 28` on the 24 GB laptop 5090) samples N transcripts per LibriSpeech test-other+snr5 utterance,
 a verifiable WER reward selects. Multi-seed (3 generation seeds pooled, n=144): **oracle-WER headroom
 +0.042 [0.029, 0.056] at N=8, significant from N=4** (N=1 < greedy — the honest order-statistics
-climb); the deployable label-free **MBR selector is non-significant at every N**. Engine decision:
+climb); the deployable label-free **MBR selector is non-significant at every N**.
+
+> **2026-07-11 更正**：以上为 macro-utterance 指标，须始终标注为 macro。独立复算的 **CORPUS WER**
+> （2026-07-11）：greedy 0.0925、oracle-8 0.0629（提升 +0.0296，bootstrap CI [0.0212, 0.0390]）、
+> MBR-8 0.0938（−0.0012，CI 跨零）。response-review 指出在 corpus 指标下 **MBR 在 N=1/N=2 显著更差**
+> （待 #26 统计重跑再核实）。此前的 macro-utterance 数字（+0.0418 oracle / +0.0037 MBR）本身没有错，
+> 但必须始终标注为 macro，不得与 corpus WER 混用或省略标注。
+
+Engine decision:
 [[Inference-Engine-Choice]]. (Asset downloading is unified in the umbrella's
 `scripts/data/fetch-data.sh`, driven by `docs/datasets.lock.json`; the old W1 `wave0_fetch.sh` engine
 was retired.) Roadmap: **close the realized-vs-headroom gap** (a stronger label-free selector), broaden
-reward-guided strategies, harden eval.
+reward-guided strategies, harden eval. **Stage-1 problem-definition (2026-07-04, methodology now in CLAUDE.md):** the
+semantic-layer TFRL/ICL sufficiency question was surveyed (a strict-reviewed 16k-word paper, 171 refs,
+[[2026-07-04-stage1-semantic-tfrl-survey]]) and reduced to ranked candidate problems
+([[2026-07-04-stage1-problem-definition]]); at K2 the owner selected **CP-1 (quantify H_prompt−H_fix),
+CP-3 (measure ρ(ASR)), CP-8 (calibration+PMI on SLU/MCQ), CP-4 (voice-agent pass@k)** for Stage-2.
+Next: a semantic-task validation table + per-problem Research-Proposal-Template instances.
+**Step-1 wave-1 baseline grid COMPLETE (2026-07-10):** the frozen 224-cell grid (56 dataset keys ×
+{Qwen3-Omni-30B, MERaLiON-2-3B} GGUF × dev/test) fully executed, zero run failures; per-wave Opus
+audit caught 60 mechanically-invalid MCQ cells (K8 gold-resolution bug) → surgical freeze-repair +
+GPU-free rescore from stored replies, regression-guarded. Full table: W1 `_repro/wave1_results.md`.
+**Wave-2 completed 32/32** (K4–K7 × qwen3 单底座 × dev/test，W1 `f8ca276` freeze-repair 后全有效)；
+wave-3 8/8 批量化收官、Step-1 网格关账 76/76（W1 `07bbc66`）；重抽验证格通过后全量重跑因 2026-07-11
+stop-the-line 暂停。
+Details: [[Decision-Log]] 2026-07-10（续6）.
 
 **W2 — Efficient RL alignment (skeleton).** Efficient GRPO/DPO with LoRA / partial updates for
 speech↔language alignment. Roadmap: implement the LoRA GRPO/DPO loop on top of the shared rewards;
@@ -83,19 +159,28 @@ rewards. Roadmap: wire per-task rewards from `speechrl_common.rl`; multi-task sa
 ## 中文
 
 > **这是活动状态板——更新最频繁的页面。** 任一工作的成熟度或近期计划变化时就更新它，重大变动同时记到
-> [[Decision-Log]]。最近复核：2026-07-04。
+> [[Decision-Log]]。**单一热层现状入口现为 [[Research-Objective]]**（先读它；本板为次级状态视图）。最近复核：2026-07-14。
 
-各工作状态见上表。**W4（omni 嵌入语音解耦，旗舰，进行中）：** 免训练 RL（不改权重/结构）引导冻结的
+各工作状态见上表。**W4（omni 嵌入语音解耦，独立工作，按 G0 重定位，2026-07-12）：**
+_状态更正（2026-07-12，Decision-Log 续24）：W4 已非旗舰——disentanglement 头条降级为 L0/L1 嵌入效用
+研究，fresh proposal 待票 #29；primary study 现由 W1 承载。W4 研究对象（omni 自身嵌入空间）不变，
+不受 W1 v4.1 把核心 2048d 隐态降为白盒诊断臂影响。_ 免训练 RL（不改权重/结构）引导冻结的
 `omni-embed-nemotron-3b`，使同一段音频在不同任务条件下的嵌入，在内容/ASR+ST、说话人、情感/SER、
 语言+意图上产生不同且各自更优的下游表现。首个验证底座为 CREMA-D（同一音频上的说话人+情感）。路线：
 数学可行性文档 + 逐因子算子决策 → CREMA-D 双因子验证闭环 → 各任务族扩展。详见
 [[W4-Training-Free-RL-Feasibility]]。
 
-**W1（免训练 RL，成熟范式参考）：** 免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），
-是最完整的工作，其可验证奖励/评测机制正是旗舰 W4 复用的地基。**真实 best-of-N 结果（2026-07-02，
+**W1（免训练 RL，现承载 primary study，per G0）：**
+_primary study（2026-07-12，Decision-Log 续24 / G0 §4）：冻结 omni 核心之上的前端**检索–发现–使用
+（RDU）**知识子系统 **+ reward-guided 轨迹选择算子**；primary 指标 = **selector 实现率
+ρ = (R_selector − R_greedy)/(R_oracle − R_greedy)**。提案 **v4.2**（历两轮对抗复审）**待外审 + owner 签字**（尚未通过、未进
+Stage-2；v4.1 [[2026-07-12-research-proposal-v41-external-review]] 转历史记录）；**M1 工程基座锁定于 W1 `20d45a8`，实验冻结**。以下成熟奖励/评测机制即其地基。_
+免梯度、奖励引导的推理时 RL（best-of-N、奖励引导解码、重排序），是最完整的工作，其可验证奖励/评测
+机制亦被 W4 复用。**真实 best-of-N 结果（2026-07-02，
 `b7b4b0d`/`cd6aa92`/`f9d111a`）：** 冻结 Qwen3-Omni-30B（Q8_0 GGUF，llama.cpp，24GB 5090 上
 `-ngl 28`）+ 可验证 WER 奖励选择；多种子（n=144）oracle headroom 在 N=8 达 +0.042 [0.029,0.056]、
-N≥4 显著；无标签 MBR 各 N 均不显著。引擎决策见 [[Inference-Engine-Choice]]。（资产下载已统一到
+N≥4 显著；无标签 MBR 各 N 均不显著（以上为 macro-utterance 指标，**见下方 2026-07-11 更正**）。
+引擎决策见 [[Inference-Engine-Choice]]。（资产下载已统一到
 umbrella 的 `scripts/data/fetch-data.sh`；原 `wave0_fetch.sh` 已退役。）路线：**收窄
 realized-vs-headroom 差距**（更强的无标签选择器）、拓展奖励引导策略、强化评测。另：W4 的旗舰情感增益
 +0.097 经跨种子重跑修正为 **NULL**（t-CI [−0.043,+0.116] 跨 0）；跨工作论文

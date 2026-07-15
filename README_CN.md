@@ -5,9 +5,10 @@
 > 仓库标识：**`exploring-l4-intelligence`** — 探索迈向 L4 级（"创新者"）智能的路径。
 
 这是一个**伞仓（umbrella repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
-不改权重也不改结构的优化——把语音 / omni 多模态大模型在预训练中习得的知识「激活」出来，提升其在特定
-语音任务上的开箱表现；外加四个工作共用的共享库。旗舰工作（W4）以此**解耦冻结 omni 模型的语音嵌入**。
-完整主旨见 Wiki 的 [[Project-Thesis]] 页。
+零权重、零核心结构改动（外挂系统组件另加）的优化——把语音 / omni 多模态大模型在预训练中习得的知识
+「激活」出来，提升其在特定语音任务上的开箱表现；外加四个工作共用的共享库。**当前主研究（W1）**把
+冻结核心搭成 **RDU 前端知识系统 + 奖励引导轨迹选择器**（proposal v4.1）；W4 为独立工作、研究冻结
+omni 自身嵌入空间（2026-07-12 按 owner 签署的 G0 裁决重定位）。完整主旨见 Wiki 的 [[Project-Thesis]] 页。
 
 > 📖 **从这里开始。** 本 README 是人和 AI 协作者的**唯一权威入口**。更深入的文档在 [`docs/`](docs)；
 > 团队共享知识与"记忆"在 **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**
@@ -20,13 +21,14 @@
 
 | # | 工作（仓库） | 角色 | 方向 | 状态 |
 |---|---|---|---|---|
-| **W4** | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | **旗舰** | 免训练 RL 解耦冻结 omni 模型的嵌入（内容/ASR+ST、说话人、情感/SER、语言+意图） | 🟡 骨架 → 进行中 |
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **范式参考** | W4 复用的成熟免训练奖励/评测机制（best-of-N、奖励引导解码、重排序） | 🟢 成熟 · 参考 |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **主研究** | 冻结核心 RDU 前端知识系统 + 奖励引导轨迹选择器（ρ 实现率，G0）；proposal v4.1 待签 | 🟢 成熟 · 主研究 |
+| W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | 独立工作（2026-07-12 重定位） | 冻结 omni 嵌入效用（L0/L1）；fresh proposal 待启（#29）；原"解耦旗舰"表述已被取代 | 🟡 骨架 → 重定位中 |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 支撑 | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 支撑 | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |
 
-**W4 是旗舰首发工作；W1 是成熟的免训练「范式」参考**，其奖励/评测机制被 W4 复用——推进 W2–W4 时以
-W1 的结构与脚本为模板。每个工作的最新进度看 Wiki 的 [[Per-Work-Status]]；项目主旨见 [[Project-Thesis]]。
+**W1 承载当前主研究；W4 为独立重定位工作**（2026-07-12——见 [[Decision-Log]] 续24 与 Thesis 页的
+取代注记）。推进 W2–W4 时仍以 W1 的结构与脚本为模板。每个工作的最新进度看 Wiki 的
+[[Per-Work-Status]]；项目主旨见 [[Project-Thesis]]。
 
 ## 仓库结构 · Repo layout
 
@@ -36,7 +38,7 @@ projects/       四个工作仓库（各自独立的 git 仓库；被本伞仓 g
 docs/           setup.md（WSL2 + 环境）、architecture.md、data.md（下载）
 scripts/        wsl-setup.sh、env-setup.sh、mlflow-ui.sh、wiki-sync.sh、data/（模型+数据集下载）
 wiki/           GitHub Wiki 的源文件 —— 共享知识与记忆（用 scripts/wiki-sync.sh 推送）
-speechrl-data/  数据根目录（≈440 GB 模型/数据集/检查点）—— 被 gitignore；WSL 侧 /mnt/d/…
+speechrl-data/  数据根目录（≈650 GB 模型/数据集）—— 在 E 盘，被 gitignore；WSL 侧 /mnt/e/…
 CLAUDE.md / AGENTS.md   给 AI 协作者的逐工具操作手册（Claude Code / Codex）
 CONTRIBUTING.md         五个仓库的协作方式
 ```

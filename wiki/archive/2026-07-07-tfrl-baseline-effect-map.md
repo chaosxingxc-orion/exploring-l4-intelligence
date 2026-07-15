@@ -1,0 +1,94 @@
+---
+title: "TFRL lever x baseline effect-lift map + top opportunities (WS-4 seed)"
+date: 2026-07-07
+stage: 1-argumentation
+status: "Stage-1 T1/WS-1-2-3 deliverable (workflow wf_8b59da73, 9 research + 2 verify + 2 synth). Effect-over-novelty; citation-verified; hypothesis-grade. Owner review pending; wiki-sync deferred."
+---
+
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
+All references grounded. The map's code-home targets are real: `common/src/speechrl_common/rl/decode.py` (`best_of_n`, `soft_bon_select`, `plurality_gate` margin gate, `mbr`, `kl_best_of_n_bound` = the N* budget cap), `rl/embedding_metrics.py` (`retrieval_reward`, `recall_at_k`, `mean_reciprocal_rank` = decorrelated omni-embed relevance), `rl/reward.py` (verifiable `asr_reward`/`exact_match_reward`), W4 `tasks/rag_answer.py` (top-k from ASR/omni/RRF → grounded answer → rule-key + constrained judge), and W4 `policies/accept_gate.py` (admission gate with paired-bootstrap delta). T0 (`2026-07-07-T0-consumption-validity-probe.md`) = GO, redirected to utilization (gating + injection/use). Here is the deliverable.
+
+---
+title: "TFRL × baseline → effect-lift map (WS-4 seed)"
+date: 2026-07-07
+stage: 1
+status: "Stage-1 problem-definition seed (argumentation-grade). Literature baselines web-verified; in-house anchors are directional (n≤40, single-touch, NOT significance-bearing). Boundary-clean by design. Owner discussion pending; wiki-sync deferred."
+---
+
+# TFRL × baseline → effect-lift map (WS-4 seed)
+
+## 0. What this is (and the stance it serves)
+
+A seed map for **WS-4**: for each promising external-knowledge baseline + organization form, the *concrete* training-free RL (TFRL) lever — frozen weights, inference-time selection/gating/injection, boundary-clean — at a **named decision point**, the **expected lift mechanism**, and the **code home** on our stack (`rl/decode.py`, `rl/embedding_metrics.py`, W4 `rag_answer` / `accept_gate`).
+
+**Effect over novelty (load-bearing).** We do not claim a new mechanism. In text, the mechanism already exists (RTTC 2508.10024, AdaRewriter 2506.01381, TARG 2511.09803). The contribution is *raising a named baseline's number* on a **frozen Qwen3-Omni**, reproducibly and boundary-cleanly. Every lever below therefore names **the baseline it must beat**.
+
+**Two constraints re-stated.** (1) *training-free* — no weight update, no trained selector/retriever (this is why AdaRewriter and CRAG's evaluator are contrasts, not templates — see §4 corrections); (2) *boundary-clean* — the reward reads relevance/support/consistency, **never** the test gold answer or gold transcript (Information-Boundary Guard).
+
+## 1. The T0 gate already redirected the target
+
+The model-evolution probe **T0** (`wiki/2026-07-07-T0-consumption-validity-probe.md`, n=40×2, directional) is the premise all recommendations sit downstream of. Result = **GO, redirected**:
+
+- **Consumption channel is open** (B>A and B>C on both sets): frozen Qwen3-Omni *can* in-context consume injected text — the 2025-era "must fine-tune to consume" wall (MARS/RASST/VoxMind) is weakened on our base. ⇒ a pure *enable-consumption* framing is off.
+- **But consumption is unreliable**: even injecting the correct answer as reference, B only ~0.75–0.78; on items A got wrong it rescues only ~42%. ⇒ a pure *selection-only* framing is also off.
+- **Misfit injection actively hurts** (C<A): the model over-trusts injected text ⇒ **admission/gating is a real problem**.
+
+**Net redirect:** the thesis object "utilization efficiency of external knowledge" has **measured, two-sided, training-free-addressable headroom** — an **(a) admission/gating** side (C<A) and a **(b) injection/use** side (B≪1.0). The map below is organized so the highest-effect levers land on exactly these two sides. (Caveat: B−A on big-bench is small/noisy at +0.075; the robust signals are "rescue ~42%" and "C<A", consistent across both sets.)
+
+## 2. The map — decision point × baseline × TFRL lever
+
+Boundary-clean status is **conditional-on-proxy-reward**, not categorical (see §4.5). `∗` = clean only if the selection reward is a proxy/decorrelated/verifiable signal and never gold.
+
+| # | Decision point | Baseline it maps to (real id) | TFRL lever (frozen, boundary-clean∗) | Expected lift mechanism | Code home |
+|---|---|---|---|---|---|
+| D1 | **Admission / accept-gate** (keep-or-drop each retrieved doc before it enters context) | CRAG retrieval-evaluator router (arXiv:2401.15884, *trains a T5-large*); Self-RAG `IsRel` (arXiv:2310.11511, *fine-tuned*); GraphRAG map-step 0–100 filter (arXiv:2404.16130) | Replace the trained evaluator / reflection token with a reward-scored gate over {admit, drop} using a **decorrelated omni-embed relevance** score + margin gate | Rejects the distractor injections that T0 showed *hurt* (C<A). Recovers CRAG-evaluator-style routing **without training the T5**. Directly attacks headroom (a) | W4 `policies/accept_gate.py` (`asr_like_utility`, `paired_binary_delta`); `rl/embedding_metrics.py` `retrieval_reward`/`recall_at_k`; `rl/decode.py` `plurality_gate` |
+| D2 | **Injection-format / injection-modality** (how the admitted element is placed: raw doc vs extractive strip vs audio-payload vs text-snippet) | CRAG decompose-then-recompose refinement (2401.15884); Search-o1 Reason-in-Documents (arXiv:2501.05366, *training-free*); perception-delta (in-house) | Best-of-N over injection **formats/modalities**; reward = groundedness/answer-confidence proxy. Sub-lever: per-item choose **audio payload vs its transcript** | Turns "correct-but-unused" knowledge (T0: B≪1.0) into answer gains; compresses ASR-noisy passages to what a frozen omni consumes. Attacks headroom (b) | W4 `tasks/rag_answer.py` (grounded-answer generation over ASR/omni/RRF candidates); `rl/decode.py` `best_of_n`/`soft_bon_select` |
+| D3 | **Retrieve-or-not / WHEN-gate** (per query, retrieve or answer parametrically) | TARG logit-margin gate (arXiv:2511.09803, *training-free, prior-gen Qwen2.5 text*); FLARE θ trigger (arXiv:2305.06983); SeaKR internal-state gate (arXiv:2406.19215); RTTC route (arXiv:2508.10024, *mixed — see §4.2*) | Re-cast the fixed threshold / trained router as reward-guided per-item selection over {retrieve, abstain}; margin read via `plurality_gate` | FLARE itself shows a fixed high retrieval rate *hurts* (>50% StrategyQA); a per-item gate suppresses distractor injection and cuts retrieval-rate/latency (voice-critical) | `rl/decode.py` `plurality_gate(margin=…)`; W4 `scripts/uro_qa_low_margin_rerank.py` (margin-triggered) |
+| D4 | **Perception-vs-knowledge routing** (speech-native: is low confidence a *knowledge* gap → retrieve, or a *perception/ASR* gap → re-attend to audio?) | none — text FLARE/TARG collapse both into one axis; this is the audio-native extension | Produce candidate continuations under {re-listen, retrieve, answer}; reward selects | Avoids the new failure mode where ASR uncertainty mis-triggers retrieval and pulls irrelevant docs → higher retrieval **precision** on the audio channel | `rl/decode.py` `best_of_n`; `rl/embedding_metrics.py` (audio vs text query embedding) |
+| D5 | **Query formulation / reformulation** (the string/embedding the retriever sees; repair ASR-corrupted entities) | FLARE span-masking (2305.06983); IRCoT next-step query (arXiv:2212.10509); Self-Ask (arXiv:2210.03350); AdaRewriter (arXiv:2506.01381, *trains a reward model — §4.3*); HippoRAG PPR seed-nodes (arXiv:2405.14831) | Sample K candidate queries (ASR-hypothesis variants, entity-normalized rewrites); reward = retrieval-support / downstream self-consistency (never gold) | Highest-leverage **speech-specific** lever: a mis-heard entity poisons every downstream hop; reward picks a reformulation that hedges the ASR error *before* retrieval | `rl/decode.py` `best_of_n`/`mbr`; `rl/embedding_metrics.py` `retrieval_reward` |
+| D6 | **Corrective-action / organizational routing** (which source or form: internal corpus vs web; text-passage vs KG-path vs page-image vs audio-segment; local vs global) | CRAG Correct/Incorrect/Ambiguous router (2401.15884); Adaptive-RAG complexity router (arXiv:2403.14403, *trains a t5-large*); GraphRAG local-vs-global (2404.16130) | Reward-guided bandit / escalation over the discrete actions, cheapest-first, escalate while reward rises | The lever that literally crosses the ceiling: bolts on external knowledge the frozen omni lacks; recovers Adaptive-RAG's accuracy+cost Pareto **without the trained router** | `rl/decode.py` `best_of_n`; W4 `rag_answer` candidate-source mux (ASR/omni/RRF already present) |
+| D7 | **Support / grounding rerank + final-answer best-of-N** (rank N generations by entailment to retrieved evidence, then pick) | Self-RAG `IsSup`/`IsUse` (2310.11511, *fine-tuned*); W1 best-of-N; REBEL multi-criteria rerank (arXiv:2504.07104) | Best-of-N with reward = support/entailment from a decorrelated verifier | Picks the evidence-grounded generation over hallucinated ones. **But** in-house `dec_synthesis`/E10b show read-out best-of-N over a *fixed* candidate set is oracle@N-bounded and null on tested surfaces → treat as **control/stacking lever, not primary** | `rl/decode.py` `best_of_n`/`mbr`; `rl/reward.py` `exact_match_reward` |
+| D8 | **Iteration depth / when-to-stop** (halt the active-retrieval or multi-hop loop) | FLARE loop (2305.06983); Adaptive-RAG multi-step (2403.14403); Search-o1 stop (2501.05366) | Reward-gated stopping: keep retrieving while marginal reward rises, stop at plateau; enforce an explicit budget cap | Prevents over-retrieval noise (FLARE-documented) and caps latency — the binding real-time constraint for a voice agent; maps to the convergence-constraint **N\*** budget | `rl/decode.py` `kl_best_of_n_bound(n)` (the N\* / KL over-optimization bound) |
+
+**Organization forms, ranked by frozen-consumption cleanliness (from WS-2).** (1) entity-keyed → **text-section delivery** = cleanest, provably frozen-consumable (vision proof: IBA arXiv:2606.23881; KIRA OpenReview:IlleFmPNb6 — frozen MLLM beats fine-tuned EchoSight/ReflectiVA); (2) multimodal KG / GraphRAG = best for multi-hop, needs text-serialized paths; (3) vision-native page-image (ColPali, VisRAG) = *requires a trained retriever*; (4) audio-native keying (VoxRAG 2505.17326 fully off-the-shelf but weak R@10 0.34; WavRAG 2502.14727 and SpeechDPR 2401.13463 *train the retriever*) = immature. **Retriever is the trained bottleneck; consumption is the training-free-easy part** — so spend the TFRL budget on D1/D2 utilization, keep an off-the-shelf retriever (CB-RAG-lexical / CLAP) as an external tool.
+
+## 3. Top-3 recommendations (highest-effect / cheapest / cleanest)
+
+### R1 — Reward-guided ADMISSION gate (D1) — *primary, T0-confirmed*
+- **Lever.** A frozen accept/drop gate over each retrieved doc, scored by a decorrelated omni-embed relevance reward + a margin gate; reject low-support injections before they reach the context.
+- **Baseline it must beat.** (i) the **inject-top-k-always** frozen-RAG floor inside W4 `rag_answer` (the C<A regime); (ii) **CRAG** (arXiv:2401.15884) — recover its evaluator-style routing lift *without training the T5-large*. Size-of-prize anchor: CRAG lifted frozen-generator PopQA 37.7→39.8 with a trained evaluator; the open question is how much of that a training-free reward recovers.
+- **Why top.** T0 already **measured** the headroom this lever targets (C<A, over-trust of misfit injection) — it is the one lever whose premise is confirmed, not hoped. Cheapest to stand up: `accept_gate.py` + `embedding_metrics.retrieval_reward` + `decode.plurality_gate` already exist.
+- **Boundary.** Clean iff reward = relevance-to-query / omni-embed support, never gold.
+- **T0 dependence.** **Premise confirmed by T0** (finding a). Robust to further probing.
+
+### R2 — Reward-guided INJECTION-FORMAT / modality selection (D2) — *primary, T0-confirmed*
+- **Lever.** Best-of-N over injection format (raw doc vs extractive strip vs summary vs prepended-terms) and, per item, **audio payload vs its transcript**; reward = groundedness/answer-confidence proxy.
+- **Baseline it must beat.** (i) the **fixed top-k text-dump** default in W4 `rag_answer`; (ii) **CRAG decompose-then-recompose** refinement (2401.15884) without its trained component; (iii) for the modality sub-lever, **omni(own-transcript)** — in-house perception-delta already shows omni(audio) beats omni(own-transcript) by **+0.283 on SQuAD-zh** (commit `9dfba74`, directional).
+- **Why top.** T0 showed correct knowledge is **under-used** (B≪1.0, ~42% rescue) — this is the lever that lifts the use side. Reuses `rag_answer` generation + `decode.best_of_n`.
+- **Boundary.** Clean iff reward is faithfulness-to-source, not gold.
+- **T0 dependence.** **Premise confirmed by T0** (finding b) *and* by the perception-delta repro. Note: the *magnitude* of the modality sub-lever is model-generation-dependent (perception-delta size may shrink on a stronger base).
+
+### R3 — Reward-guided WHEN-gate + query reformulation (D3 + D5) — *cheapest; premise hinges on the model-evolution probe*
+- **Lever.** Re-cast TARG's fixed logit-margin threshold as a reward-guided per-item retrieve/abstain gate (`decode.plurality_gate`, `uro_qa_low_margin_rerank.py`), paired with best-of-N query reformulation to buffer ASR-corrupted entities.
+- **Baseline it must beat.** (i) **TARG** (arXiv:2511.09803) fixed margin threshold — but TARG is *training-free, prior-generation, text-only* (Qwen2.5-7B / Llama-3.1-8B), **not** our base (see §4.1); (ii) **AdaRewriter** (arXiv:2506.01381) — recover its best-of-N query-rewrite lift with a **verifiable/decorrelated reward that trains nothing** (AdaRewriter trains a reward model — §4.3).
+- **⚠ This is the recommendation whose premise depends on the model-evolution (T0-family) probe outcome.** It assumes the audio-conditioned Qwen3-Omni exposes a **calibrated confidence/logit-margin signal that separates knowledge-uncertainty from perception-uncertainty**. TARG's "margin > entropy on modern instruction models" evidence is prior-generation and text-only; **untested** under audio conditioning on our base. If the probe finds the omni is overconfident or its margin is uninformative under audio, D3 collapses toward always-retrieve and the WHEN-gate lift vanishes (the query-reformulation half, D5, survives regardless — it is the robust speech-specific residue).
+
+**Why these three.** They land on the two T0-measured headroom sides (R1 = gating, R2 = injection/use), plus the cheapest speech-specific lever (R3). D7 final-answer best-of-N is deliberately **demoted to a control**: in-house `dec_synthesis`/E10b show read-out best-of-N over a fixed candidate set is oracle@N-bounded and empirically null here — it stacks on R1/R2 but is not a primary bet.
+
+## 4. Verification corrections folded in
+
+1. **TARG (arXiv:2511.09803) is prior-generation, text-only.** Validated on Qwen2.5-7B-Instruct / Llama-3.1-8B — a different generation *and* modality class than Qwen3-Omni (2026-04/05, audio-conditioned). Treated as a lever to validate (R3's flagged premise), not same-generation confirmation.
+2. **RTTC (arXiv:2508.10024) is mixed, not clean-frozen.** Its flagship gains route 60–76% of queries to a Test-Time-Training branch that LoRA-updates weights; its reward is a *learned* reward model (Skywork-Reward-V2), not verifiable. When benchmarking, cite only its frozen RAG-vs-direct routing branch.
+3. **AdaRewriter (arXiv:2506.01381) trains a component.** Policy LLM frozen, but it trains a contrastive reward model to score rewrites. It validates the best-of-N-over-frozen-policy *shape*, not the strictly-training-free reward — our version must use a verifiable/decorrelated reward.
+4. **Auto-RAG (arXiv:2411.19443) = fine-tuned** (not "mixed"). **SpeechRAG (arXiv:2412.16500) = trains-a-component** (trained speech adapter — never label it "frozen speech-RAG"). **WavRAG (arXiv:2502.14727) = trains-a-component** (contrastive WavRetriever). Reserve "frozen speech-RAG" for **CB-RAG** and **VoxRAG** only.
+5. **Boundary-clean is conditional, not categorical.** Two distinct failure modes must be excluded per item: (a) **gold leakage** (hard breach — reward peeks at test answer/transcript); (b) **self-reward decorrelation collapse** (soft — a same-model self-judge carries position/length bias, cf. GraphRAG's own LLM-as-judge; project N2). Both are policed by the Information-Boundary Guard.
+6. **Citation hygiene.** *CB-RAG* = our shorthand for **Siskos et al., "RAG-based context discovery for ASR," arXiv:2509.19567** (WER↓ up to 17%, 24.1% at oracle). *SeaKR* = **arXiv:2406.19215** (OpenReview:NhIaRz9Qf5 is the same paper) — standardized. *RAG-Reward* = **arXiv:2501.13264 v1**, retitled *OpenGenAlign* in v2 (still a trained contrast). *RASST* (arXiv:2601.22777) = simultaneous speech **translation**, not conversational ASR; **MARS** (arXiv:2508.01166) is the conversational LLM-ASR context-selection system. *IBA* (arXiv:2606.23881): report per variant — IBA-Qwen 43.6 / 37.2, IBA-LLaVA 43.2 / 37.8 (each still beats fine-tuned EchoSight 41.8/31.3 own-report and ReflectiVA 38.6/36.4).
+
+## 5. Residual uncertainty & model-generation dependence
+
+- **The make-or-break crux stays open at scale.** T0 says the consumption channel is *open* but *leaky* on our 2026 base — established at n=40, single-touch, directional. Whether a training-free reward *suffices* where 2025-era speech-LLMs needed LoRA is a Stage-2 question; the entire map is hypothesis-grade until re-established with paired-bootstrap CIs on real (non-gold) external knowledge (the H0/H-util / provenance-firewall design, deferred to T7).
+- **Model-generation-dependent claims to re-test on Qwen3-Omni:** (i) R3's logit-margin readability/calibration under audio conditioning (TARG evidence is prior-gen text); (ii) whether the omni needs *structure* (KG/tree) at all vs a long-context flat dump (stronger long-context erodes RAPTOR/GraphRAG's edge); (iii) the *size* of the perception-delta modality sub-lever (may shrink as the base strengthens).
+- **Empty-cell wording softened (not overclaimed).** No audio-native KG/GraphRAG baseline *surfaced in this scan* (checked wav2graph arXiv:2408.04174, M3KG-RAG arXiv:2512.20136 directional); frame as under-explored, not provably empty. Watch item: HippoRAG-2 (arXiv:2502.14802).
+- **Latency is a model-generation-independent break.** Serial retrieve→evaluate→refine→(web)→rerank × best-of-N compounds under a real-time voice budget; D8's reward-gated stopping (the N\* cap in `decode.kl_best_of_n_bound`) is load-bearing for speech, not optional.
+- **In-house anchors are directional only** (perception-delta +0.283, T0 B−A/rescue, dec_synthesis/E10b null): they orient the bets, they do not settle anything at n≤40.

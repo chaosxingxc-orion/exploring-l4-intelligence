@@ -6,9 +6,11 @@
 
 The **umbrella repo** for a four-part research series on **training-free RL to activate the
 pretrained knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time optimization
-that changes **no weights and no structure** — plus a shared library all four works build on. The
-flagship study (W4) uses this to **disentangle a frozen omni model's speech embeddings**. Full
-statement of purpose: the Wiki's [[Project-Thesis]] page.
+that changes **no base-model weights and no base-model structure** (external system components are
+added) — plus a shared library all four works build on. The **current primary study (W1)** builds a
+frozen-core **RDU front-end knowledge system with a reward-guided trajectory selector** (proposal
+v4.1); W4 is a separate work on the frozen omni's own embedding space (repositioned 2026-07-12 per
+the owner-signed G0 ruling). Full statement of purpose: the Wiki's [[Project-Thesis]] page.
 
 > 📖 **Start here.** This README is the single canonical entry point for humans **and** their AI
 > assistants. Deeper docs live in [`docs/`](docs); shared team knowledge & "memory" live in the
@@ -22,13 +24,14 @@ Each work is its **own GitHub repo** (independent history/issues) but develops a
 
 | # | Work (repo) | Role | Focus | Status |
 |---|---|---|---|---|
-| **W4** | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) | 🟡 Skeleton → active |
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Pattern reference** | the mature training-free reward/eval machinery W4 reuses (best-of-N, reward-guided decoding, reranking) | 🟢 Mature · reference |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Primary study** | frozen-core RDU front-end knowledge system + reward-guided trajectory selector (ρ realization rate, G0); proposal v4.1 pending signature | 🟢 Mature · primary |
+| W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | Separate work (repositioned 2026-07-12) | frozen omni embedding utility (L0/L1); fresh proposal pending (#29); former disentanglement-flagship framing superseded | 🟡 Skeleton → repositioning |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 Skeleton |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 Skeleton |
 
-**W4 is the flagship first study; W1 is the mature training-free _pattern_ reference** whose
-reward/eval machinery W4 reuses — mirror W1's structure and scripts when growing W2–W4. Live per-work
+**W1 carries the current primary study; W4 is a separate, repositioned work** (2026-07-12 — see
+[[Decision-Log]] 续24 and the Thesis supersession note). W1's mature structure and scripts remain the
+pattern to mirror when growing W2–W4. Live per-work
 progress is on the Wiki's [[Per-Work-Status]] page; the project's purpose is on [[Project-Thesis]].
 
 ## Repo layout
@@ -39,7 +42,7 @@ projects/       the four work repos (each its OWN git repo; gitignored by this u
 docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads)
 scripts/        wsl-setup.sh, env-setup.sh, mlflow-ui.sh, wiki-sync.sh, data/ (model+dataset downloads)
 wiki/           source for the GitHub Wiki — shared knowledge & memory (push via scripts/wiki-sync.sh)
-speechrl-data/  data root (~440 GB models/datasets/checkpoints) — gitignored; /mnt/d/… from WSL
+speechrl-data/  data root (~650 GB models/datasets) — on the E: drive, gitignored; /mnt/e/… from WSL
 CLAUDE.md / AGENTS.md   per-tool operating guides for AI assistants (Claude Code / Codex)
 CONTRIBUTING.md         how to work across the five repos
 ```

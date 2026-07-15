@@ -5,6 +5,8 @@ An **umbrella + shared library + four independent repos** model. Full version in
 this page is the quick view. The project's purpose is [[Project-Thesis]] — training-free RL to
 activate pretrained knowledge; **W4** (omni-embedding speech disentanglement) is the flagship.
 
+> **2026-07-11 更正**：W4「task-conditioned disentanglement」主张按 [[2026-07-11-stage1-audit-response-and-rulings]] 降级为 L0/L1（readout availability/suppression；matched>mismatched 判据未过）；disentanglement 措辞在 L2–L3 判据通过前废止；W4 将按 §7.1 问法重新立项（#29）。G0 现行 primary question 见该文档 §4。
+
 ## Repo model
 
 ```

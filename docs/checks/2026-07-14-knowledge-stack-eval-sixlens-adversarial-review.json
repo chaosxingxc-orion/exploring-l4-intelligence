@@ -1,0 +1,492 @@
+{
+  "summary": "Adversarial multi-lens review of the 2026-07-14 AI-assisted-survey knowledge-stack evaluation doc",
+  "agentCount": 6,
+  "logs": [],
+  "result": {
+    "upstream": {
+      "verdict": "文档对 atomicstrata/llm-wiki-compiler 的事实刻画经实时 web + 本地沙箱源码双重核验后基本准确、甚至偏保守：仓库真实存在（1745 stars、MIT、TypeScript、创建于 2026-04-05）；v1.0.0 确于 2026-07-11 发布（审查日前 3 天）；§3.1.A 所列全部特性逐项属实；§9 最核心的\"文档宣称 artifact 门存在、运行时未锁门\"审计主张在源码层面完全坐实（docs 指南 L170 要求 healthy experiment-result artifact，但 AutoSci 模板 entities.ts:77 的 experiment.complete 仅要求 resultSummary，四个模板文件中 transitionArtifactRequirements 出现次数为 0，而该机制在基座 types.ts:134 中确实存在）；连文档自我设限的\"疑似路径分隔符问题\"也被代码证实为真实根因。唯一实质缺陷是 P1 级：§9 审计所在 commit（bed4dda，2026-07-13，main HEAD）晚于 §8 试点计划要锁定的 v1.0.0 tag（67306f2，2026-07-11）4 个 commit（含 #152/#153/#155/#156 三个大功能 PR），文档未标注此错位——试点证据基础与锁定目标不是同一份代码。此外维护风险信号（bus factor≈1、开核信号、v0.5.0 全员启动崩溃史）登记不足。不构成推翻推荐的理由；带 kill 条件的隔离试点建议成立。",
+      "key_findings": [
+        "【确认】仓库真实且有实质规模：GitHub API 实测 1745 stars、164 forks、MIT license、TypeScript 98.4%、创建于 2026-04-05、最后 push 2026-07-13、default branch main、主页 llmwiki.atomicstrata.ai；不是概念仓库——与文档 §9 结论一致。",
+        "【确认】v1.0.0 于 2026-07-11T00:17:55Z 发布，早于审查日（2026-07-14）3 天，文档 §3.1.A 保留意见 1 '​v1.0.0 在本审查日前不久发布' 准确。共 14 个 tag / 10 个 GitHub release，首版 v0.1.0 为 2026-04-06——项目仅约 3.2 个月历史，'非常新' 的定性成立。",
+        "【确认】§3.1.A 全部特性主张逐项属实：typed entities/relations 与 fail-closed lifecycle profile（v1.0.0 release notes）；内容哈希锁定审批（'review-time body-hash pinning'、artifact 'hash-pinned'）；review queue（v0.10.0）；freshness（v0.9.0）；claim/source-line citation（v0.4.0 `^[paper.md:42-58]`）；lint（v0.2.0）/eval（v0.8.0）；JSON/JSON-LD/GraphML/OKF 导出（README L28、L47 实测）；SDK/CLI/MCP/context pack（README L44-45、v0.8.0 get_context_pack）；SOURCES_CONTRACT.md 存在；docs/guides/autosci-research-workflow.mdx 与 docs/guides/mcp-agent-integration.mdx 两个被引路径均存在于 HEAD。",
+        "【确认·最载重项】§9 审计主张 3（文档/运行时 artifact 门差异）源码级坐实：docs/guides/autosci-research-workflow.mdx L170 写明 '`result` must resolve to a healthy `experiment-result` artifact'，但 src/profile/templates/builtin/autosci/entities.ts L77 的 experiment 生命周期仅有 `transitionRequirements: { complete: [\"resultSummary\"] }` + 一条 tests 关系前置；`transitionArtifactRequirements` 在 AutoSci 四个模板文件中出现次数均为 0；research workflow 的 complete-experiment stage 无 gate 属性（其他 stage 有 agent:reviewed/human:addressed）。而该机制在基座 src/profile/types.ts:134 确实存在并被 validate/lint 支持——是模板未接线，不是能力缺失，与文档 '文档说门存在、运行时实际未锁门' 的定性完全一致。",
+        "【确认·可升级】§9 的 Windows `template init autosci` 失败被代码证实且根因可从 '疑似' 升级为确认：src/profile/paths.ts L53 把声明目录规范化为 POSIX 分隔符（path.posix.sep），而 src/utils/path-confine.ts 的 isInsideDir 用平台 path.sep 拼前缀——Windows 上 'wiki/papers'.startsWith('wiki\\\\') 恒为 false，触发 paths.ts L76 'entity directory must be under wiki/' 报错，与 §9 报文一字吻合；Linux/WSL2 上 path.sep='/'，该 bug 不触发——文档 '不能直接证明 WSL 失败' 的谨慎表述同样正确。",
+        "【确认】§9 inspect 输出（12 entity、12 relation、5 workflow、7 artifact；relation preconditions=true、artifact preconditions=false）与 entities.ts 实测 12 个 directory、workflows.ts 实测 5 个 workflow（literature-review/research/manuscript-writing/experiment-design/review-response）及 v1.0.0 release notes 完全吻合；AutoSci 含 papers/ideas/experiments/reviews 等科研对象的说法属实。",
+        "【确认】本地沙箱克隆 HEAD bed4dda13f5d4ea61d7cf635a9422d3c2740668e 与实时上游 main HEAD 一致（2026-07-13T09:31:53Z, PR #156）；沙箱中 node_modules 与 dist 目录存在，旁证 §9 'npm ci --ignore-scripts 通过、npm run build 通过' 的记录。",
+        "【确认】issue 响应性良好：仅 6 个 open issues（编号已至 #156），除审查前 1 天新开的 #154 外全部有回应/讨论；v0.5.0 的全员启动崩溃在数天内以 v0.5.1 修复；release notes 逐版点名外部贡献者并跟进其 issue——不是弃管仓库。",
+        "【维护风险实测】bus factor≈1：ethanj 一人署名全部 10 个 release，近 30 个 commit 中约 27 个由其提交；外部贡献者（joshuaknipe、dohu012、JulianKominovic、cadamsdev、alvins82 等约 10 人）均为零星 PR。另有开核信号：HEAD commit 信息明言 'Private marketplace and entitlement functionality remain outside the public repository'；组织中途由 atomicmemory 改名 atomicstrata（旧 release 链接与 LICENSE 版权栏仍留旧名）。"
+      ],
+      "defects": [
+        {
+          "severity": "P1",
+          "claim": "§8 Day-1 第 2 步要求'锁定 llm-wiki-compiler v1.0.0 及精确 commit，不追 main'（文档 L380），而 §9 的全部沙箱审计证据（inspect 输出、artifact preconditions=false、Windows init 失败、npm ci/build 通过）采自 commit bed4dda（L435）——文档未标注两者不是同一份代码。",
+          "evidence": "实时 list_tags：v1.0.0 tag = 67306f2090eb755c9934ce8ed3e5d1199cc94c65（2026-07-11T00:43）；审计 commit bed4dda = main HEAD（2026-07-13T09:31），两者之间隔 4 个 commit，含 #152（guided CLP path）、#153（signing foundations）、#155（signed template taps）、#156（remote template installation）三个大功能 PR——profile/template 子系统恰是审计对象，且正是这几个 PR 改动的区域。",
+          "impact": "试点若按文档锁 v1.0.0，则 §9 的证据基础（在 bed4dda 上取得）对锁定版本不具直接效力：v1.0.0 上 template init/inspect 行为、Windows 失败模式甚至 artifact gate 接线都可能不同；反之若沿用审计过的 bed4dda，则违背'锁 release 版本'的既定纪律。必须在试点前二选一：在 v1.0.0 tag 上重跑 §9 全部核查，或显式改锁 bed4dda 并登记理由。",
+          "claim_doc_lines": null
+        },
+        {
+          "severity": "P2",
+          "claim": "文档 L110 称 SOURCES_CONTRACT.md '明确 source hash、模型与 prompt version、行级 claim 和增量编译'——其中'行级 claim'错置。",
+          "evidence": "实测 SOURCES_CONTRACT.md 全文（blob 553aaae）：内容为 sources/ 目录的输入契约——frontmatter 字段、slug 规则、MAX_SOURCE_CHARS、SHA-256 增量编译，以及导出 envelope 携带 modelId/promptVersion 的一句提及；通篇无行级 claim/citation 内容。行级 claim（`^[paper.md:42-58]`）属于 v0.4.0 的 claim-provenance 特性，文档在别处（release notes / claim citation 文档）而非此契约。",
+          "impact": "轻微误导：读者依文档去 SOURCES_CONTRACT.md 找行级 claim 保证会落空，且可能把'输入契约的稳定性承诺'误延伸到 claim 定位机制上。应把'行级 claim'从该句移到对 claim-provenance 特性的单独引用。",
+          "claim_doc_lines": null
+        },
+        {
+          "severity": "P2",
+          "claim": "文档对维护风险仅给出'该项目非常新，不能把 API 稳定性或长期维护视为已验证'（L117）与 kill 条件 9 的泛化表述（L425），未登记本可低成本核到的具体信号，也未给 kill 条件 9 设可观测基线。",
+          "evidence": "实测：(a) bus factor≈1——ethanj 一人署名全部 10 个 release、近 30 commit 中约 27 个；(b) HEAD commit 信息明言 'Private marketplace and entitlement functionality remain outside the public repository'（开核/商业化方向）；(c) v0.5.0 曾向所有 npm 安装者发布启动即崩溃版本（v0.5.1 release notes 自述）；(d) 组织中途由 atomicmemory 改名 atomicstrata，旧 release 链接与 LICENSE 版权栏仍是旧名；(e) 3.2 个月内 14 个 tag、v1.0.0 即引入 embedding index v2→v3 迁移与 state.json fail-closed 行为变化。",
+          "impact": "kill 条件 9（'项目维护节奏、破坏性变更或许可证条件不适合'）没有基线就无法机械触发——这与文档自己主张的'kill 条件须可机器检查一部分'（L316）不自洽。试点前应把 bus factor、release 破坏性变更频率、私有组件范围（marketplace/entitlement 是否会圈走后续治理特性）登记为监测项。",
+          "claim_doc_lines": null
+        }
+      ],
+      "recommendation": "接受文档 §3.1.A 与 §9 对 atomicstrata/llm-wiki-compiler 的事实刻画——本轮实时核验未发现任何夸大，多处主张（artifact 门差异、Windows 路径根因）反而可从'疑似'升级为源码级确认。但试点放行前必须处理 P1：把 §9 审计与 §8 锁定目标对齐到同一 commit（推荐在 v1.0.0 tag=67306f2 上重跑 §9 五项核查并留档，或显式改锁审计过的 bed4dda 并登记'含 v1.0.0 后 4 个未审 release 的功能'的理由）；同时修正 SOURCES_CONTRACT 的'行级 claim'错置，并为 kill 条件 9 补登本轮实测的维护风险基线（bus factor≈1、开核信号、v0.5.0 崩溃史、组织改名、3 个月 14 tag 的破坏性变更节奏），使其可机械监测。处理完毕后，本 lens 不反对'方案 A 隔离试点'的推荐。"
+    },
+    "alternatives": {
+      "verdict": "LENS 2（备选项与引用事实核验）结论：文档引用的全部 16 个外部项目/资料均真实存在、归属正确，对各备选项的定性（包括所有声称的局限）经逐项对照后基本公允；尤其是最具杀伤力的核心发现——llm-wiki-compiler「文档宣称 experiment 完成需健康 result artifact、但出厂 AutoSci profile 源码未声明该 artifact 转换要求」——被本轮独立核验在上游源码层面坐实（且 v1.0.0 与审计 commit 的该文件 blob SHA 完全一致，发现可迁移到试点锁定版本）。未发现任何死链、张冠李戴或实质性歪曲，故无 P0。存在一个 P1：文档把 OpenAlex 列为知识栈第 3 层并在矩阵中评「运维成本 低」，却完全遗漏了 OpenAlex 于 2026 年 1-2 月生效的强制 API key + 按量计费变更（评审日前约 5 个月）——文档对 nashsu 都细到标注 GPLv3 许可证风险，却漏掉了自己推荐组件的商业条款变化，这是本轮唯一必须在试点前补答的引用事实缺陷。另有两处 P2 精度问题（SOURCES_CONTRACT.md 的「行级 claim」错误归档；§9 审计 commit 与 §8 锁定版本未对账）。总体：引用事实层面该文档可信，修补三处后可放行。",
+      "key_findings": [
+        "【证实】Karpathy gist（442a6bf…）真实存在，作者 @karpathy，2026-04-04 创建。文档第 89 行的全部要素逐字核实：sources 为 source of truth、LLM 编译 Wiki、ingest/query/lint、版本控制（原文 'The wiki is just a git repo of markdown files. You get version history, branching, and collaboration for free.'）、矛盾/陈旧检查（lint 'health checks for contradictions, stale claims, orphan pages'）。文档第 90 行针对的 'LLM owns the wiki' 也是真实原文（'The LLM owns this layer entirely'），不是稻草人。",
+        "【证实】nashsu/llm_wiki 真实存在；GPLv3 逐字证实（'This project is licensed under the GNU General Public License v3.0'）；文档第 129 行的特性清单逐项证实（不可变 raw sources 于 raw/sources/、frontmatter sources 回链、sigma.js 知识图、LanceDB 语义搜索、异步审查队列、Tavily/SerpApi/SearXNG deep research、HTTP API + MCP、Claude Code/Codex agent skill）；第 133 行'缺少 claim-level 状态机/证据审批门/kill condition'证实——仓库公开材料确无任何此类机制。",
+        "【证实】lucasastorian/llmwiki 真实存在；许可证宽松断言正确（Apache-2.0，LICENSE 文件在库）；'缺乏稳定 release 信号'（第 145 行）证实——GitHub Releases 区显示 'No releases published'；本地/远程双模式、Web UI、MCP、多格式摄入、来源/crosslink/graph 均证实；无学术 claim 生命周期证实。",
+        "【证实-核心】文档第 119/441 行对 llm-wiki-compiler '文档说门存在、运行时未锁门'的静态断言被本轮独立坐实：docs/configuration/autosci-profile.mdx 原文 'can enter `complete` only when it has a `resultSummary`, a live `tests` relation to an idea, and a healthy `experiment-result` artifact ref'，而出厂 profile 源码 src/profile/templates/builtin/autosci/entities.ts 中 experiments.lifecycle 的 complete 仅有 transitionRequirements:[\"resultSummary\"] + tests 关系要求，无任何 artifact 转换要求。且该文件在 refs/tags/v1.0.0 与审计 commit bed4dda 的 blob SHA 完全相同（6edf92035ea…），发现可迁移到试点锁定的 v1.0.0。",
+        "【证实】llm-wiki-compiler 仓库元数据：2026-04-05 创建（Karpathy gist 发布次日，'非常新'成立）、MIT、TypeScript、1745 星；v1.0.0 发布于 2026-07-11T00:17Z（评审日前 3 天，第 117 行'前不久发布'成立）；§9 审计 commit bed4dda13f…真实存在（2026-07-13，PR #156）；§9 的 '12 entity、12 relation、5 workflow、7 artifact' 与 v1.0.0 release notes 原文 '12 entity types, 12 relations, five workflows, seven artifact types' 一致，我在 entities.ts 中数得恰好 12 个实体类型；三个深链文档（SOURCES_CONTRACT.md、autosci-research-workflow.mdx、mcp-agent-integration.mdx）全部存在，MCP 文档的'只读 context pack + 外部导入停在待审批'证实（'pendingCandidates means the agent has queued work that needs your approval'）。",
+        "【证实】STORM/Co-STORM（stanford-oval/storm）：多视角提问+检索+大纲合成、Co-STORM 协作话语协议与动态 mind map 均证实；第 175 行'官方也明确生成内容仍需人工编辑'有 README 原文支撑：'the system cannot produce publication-ready articles that often require a significant number of edits'。",
+        "【证实】Graphiti（getzep/graphiti）：episode 溯源（'Every entity and relationship traces back to the episodes'）、时间有效区间（'Facts have validity windows'）、增量更新、Pydantic ontology、混合检索（semantic+BM25+graph traversal）、MCP server、Neo4j/FalkorDB 全部证实；文档第 196 行的警示'事实由 LLM 抽取、自动 invalidation'与上游行为完全一致（'old facts are invalidated—not deleted'），定性准确。",
+        "【证实】TrustGraph：第 210 行 'document→page→chunk→edge 溯源链与查询推理记录' 在官方文档逐字证实（'provenance chain runs four levels deep: Document → Pages → Chunks → Subgraphs (edges)'；PROV-O triples；multi-stage query reasoning traceable）；'很高运维成本'证实且如有低估——需 Cassandra + Qdrant + Garage(S3) + Pulsar/RabbitMQ 整栈。",
+        "【证实】Microsoft GraphRAG：README 两条警示逐字在库（'GraphRAG indexing can be an expensive operation… start small' 与 'Always run graphrag init --root [path] --force between minor version bumps'），第 218 行'官方同时提醒索引成本和版本迁移问题'成立；RAGFlow 真实（84980 星，官方描述 'fuses cutting-edge RAG with Agent capabilities'），'擅长文档解析、RAG 和 agent 服务'公允。",
+        "【证实】Wikibase Data Model Primer 存在且第 204 行的 epistemic 定性有原文支撑：'Wikibase will not be about the truth, but about statements and their references'，statement/qualifier/reference/rank 齐备。",
+        "【证实】Zotero + Better BibTeX：BBT 仓库真实（稳定 citation key、自动导出逐字证实）；文档第 153 行'新版 Zotero 已强化 citation key，试点时应验证哪些能力仍需 BBT'措辞精准——Zotero 8 已内置原生 citation key 字段并取代 BBT 字段（BBT README：'With the advent of Zotero 8, items have a Zotero-native citation key field. This has replaced the BBT citation key field.'），且 2026 年初 Zotero 8/9 与 BBT 曾有兼容动荡，文档的谨慎恰当。",
+        "【证实】developers.openalex.org 是 OpenAlex 官方重建后的现行开发者文档站（'The OpenAlex developer documentation has been completely rebuilt at developers.openalex.org'），引用 URL 未过期。"
+      ],
+      "defects": [
+        {
+          "severity": "P1",
+          "claim": "文档 §3.2（第 159 行）把 OpenAlex API 定位为 DOI/引用关系核对与查漏的正式栈层（§0 第 3 层），§4 矩阵（第 232 行）评其'运维成本 低'，全文未提任何访问条件或成本约束。",
+          "evidence": "OpenAlex 官方博客 2026-02-24《New Features and Usage-Based Pricing》（https://blog.openalex.org/openalex-api-new-features-and-usage-based-pricing/）：'As we announced in January, you'll need an API key for all requests'；计费：list/filter $0.0001/次、search $0.001/次、PDF/XML 下载 $0.01/次，每 key 每日 $1 免费额度；数据快照本身仍免费。该变更发生在评审日（2026-07-14）前约 5 个月，属选型审查应知事实。对照：同一文档对 nashsu/llm_wiki 细致标注了 GPLv3 许可证影响（第 133 行），却漏掉自己推荐组件的商业条款变更，标准不一致。",
+          "impact": "试点与后续 survey 的 SearchEvent 回放设计假定 OpenAlex 是可自由调用的开放 API；实际所有请求需注册 key，批量查漏/去重扫描（search 调用）超过每日 1000 次即产生费用。若不在试点前补答（注册 key、估算查询量、缓存策略、或改为 Crossref/arXiv 优先 + OpenAlex 快照本地化），§4 矩阵中 OpenAlex 的'运维成本 低'评分与栈层 3 的可行性论证失去事实基础，验收门中'100% 论文有 canonical identity'的核对通道也可能在无预算授权下静默受限。"
+        },
+        {
+          "severity": "P2",
+          "claim": "文档第 110 行称 sources contract '明确 source hash、模型与 prompt version、行级 claim 和增量编译'，将'行级 claim'归属于 SOURCES_CONTRACT.md。",
+          "evidence": "对 SOURCES_CONTRACT.md 全文定向检索：'claim'、'line'、'line range'、'line-level' 四词零出现（该文件只讲 sources/ 目录输入契约：frontmatter 字段、SHA-256 整文件哈希、MAX_SOURCE_CHARS、增量编译跳过逻辑；modelId/promptVersion 在 export envelope 中确有）。行级 claim 引用是产品的真实能力，但出处在仓库 README（'Paragraphs and claims cite source files and line ranges'）与其他文档页，不在被引用的这份契约文件里。",
+          "impact": "四项归属中一项挂错文档。对一份以'证据可定位性'为全部论旨、并要求 EvidenceSpan '必须可定位回原文'（第 311 行）的审查报告，审计者按链接核对'行级 claim'会扑空，削弱报告自身的引用纪律示范作用；应把该能力改引 README/引用机制文档。"
+        },
+        {
+          "severity": "P2",
+          "claim": "§8 Day 1（第 380 行）要求试点'锁定 llm-wiki-compiler v1.0.0 及精确 commit，不追 main'，而 §9（第 435 行）的全部审计证据采自 commit bed4dda——文档未说明两者不是同一代码状态，也未论证发现的可迁移性。",
+          "evidence": "GitHub API 核实：v1.0.0 published_at=2026-07-11T00:17:55Z；bed4dda 日期 2026-07-13T09:31:53Z，是 v1.0.0 之后两天的 main 提交（PR #156 'Add secure remote template installation and updates'）。即审计对象比锁定对象新两天、多至少一个功能 PR。本轮我补做了对账：entities.ts 在 refs/tags/v1.0.0 与 bed4dda 的 blob SHA 相同（6edf92035ea…），故 artifact-gate 发现确可迁移——但这一步是本审查补的，文档自己没有做；Windows init 失败与 spawn npx ENOENT 两项运行时发现同样未绑定到锁定版本。",
+          "impact": "按本项目自己的哈希正典纪律（(commit, sha256) 证据对），§9 的证据锚点与 §8 的试点锚点脱节：若上游在 v1.0.0→bed4dda 间恰好改动了被审计面，§9 结论将不适用于试点实际运行的代码。修法便宜：在 §9 注明审计 commit 与 v1.0.0 的关系并附对账结果，或将试点锁定点改为 bed4dda。"
+        }
+      ],
+      "recommendation": "引用事实层面放行，但附三项前置动作：(1) P1——试点开始前在 §3.2 补记 OpenAlex 2026 年强制 API key + 按量计费事实（含每日 $1 免费额度与 search/list 单价），据此复核 §4 矩阵'运维成本 低'评分与验收门的身份核对通道预算；给出退化路径（Crossref/arXiv 优先、OpenAlex 免费快照本地化、检索响应缓存进 T0）。(2) P2——把第 110 行'行级 claim'的出处从 SOURCES_CONTRACT.md 改为仓库 README/引用机制文档。(3) P2——在 §9 补一行审计 commit（bed4dda，2026-07-13，晚于 v1.0.0 两天）与试点锁定版本 v1.0.0 的对账说明，并把'AutoSci profile 源码两版本 blob 一致（6edf920…）'登记为可迁移性证据；Windows 两项失败在 WSL2 复测时以 v1.0.0 为准重跑。除此之外，文档对 Karpathy gist、两个同名 LLM Wiki、STORM、Graphiti、TrustGraph、GraphRAG、RAGFlow、Wikibase、Zotero/BBT 的定性全部经受住逐项敌意核验，其对 llm-wiki-compiler 文档/运行时门差异的核心指控已被上游源码独立坐实——该文档的引用可信度足以支撑'隔离试点、不迁移'的建议。"
+    },
+    "consistency": {
+      "verdict": "该文档的分层信任架构与「隔离试点+kill 条件」的总体思路是健全的，且多处自我设限诚实（矩阵自称启发式、Windows 失败如实报「未通过」、请求 owner 批准而非自行放行）；但按 LENS 3 的字面审查，它**不能按现状接受**：(1) 一条 P0——§8 试点协议与 §9 自己的审计证据自相矛盾：锁定 v1.0.0/精确 commit 后，已实锤的文档/运行时 artifact gate 偏差必然存在于试点版本中，Day-1 第 6 项「验证文档宣称的门和运行时门完全一致」必然失败、kill 条件 2（「再次出现不可自动检测的偏差」——§9 的偏差正是人工静态核对发现、非自动检测）必然触发，验收路径按写就不可通过；(2) 成批收词纪律违规——T0–T4、l4-survey、16 对象名、17 关系名、方案 A/B/C 共 40+ 新代号无一登记，其中 T0–T4 与项目既有 T0–T7 探针/实验编号（archive 四份 T 编号文档 + 热文档 Research-Objective.md 仍引用 C-T7）构成实锤同名异构，「方案 A」与同日姊妹评审文档的「Proposal A — 供给条件下的可预测兑现规律」及术语表 A-SEL 条目的「Proposal A」三重碰撞；(3) 文档自身不满足它要求别人满足的纪律——§9 审计无日志/hash 工件锚、自称「最终签署意见」却无签署人（违反其 §11.2 背书的同日模板规则 8）、KillCondition 第 7/9 条无机器可查成分（违反其 §6 自己的不变量）。修复这些后试点建议方可提交 owner 裁决。",
+      "key_findings": [
+        "【确认成立】frontmatter repository_snapshot 233dc7eb9224b5d7bc8df7bfd81a616ab15c6917 与当前 HEAD 完全一致（git rev-parse 验证），快照锚定纪律合格。",
+        "【确认成立】§2 信任分层写权限表与 §7.1 权限矩阵内部自洽：T2→T1 禁止 AI 自批、T0 只追加、T3 全员禁止直接支持结论，两表无冲突。",
+        "【确认成立】§4 适配矩阵开头明示「评分为本轮评审启发式判断（高/中/低），不是性能 benchmark」，且 llm-wiki-compiler 的「人审门」标为「高潜力」而非「高」，与 §3.1 保留意见的降级处理一致——自我披露纪律合格。",
+        "【确认成立】IdentityCandidate 对象显式锚定「I1–I4 等问题定义」，其门「status=proceed 只能由 owner decision 触发」与 CLAUDE.md Stage-1C「owner 选唯一问题 kill/pivot/proceed，绝不自动滚入 Stage-2」语义完全对齐（登记缺失但语义无冲突）。",
+        "【确认成立】验收门「若上游测试因环境问题失败，状态必须是未通过，而不是『基本通过』」与 §9 自己对 Windows 测试失败如实报「未通过」「不能声称上游 tests passed」一致——文档在此处言行一致。",
+        "【确认成立】文档以「建议批准」形式请求 owner 裁决而非自我放行，符合 Stage-1 owner 门纪律；status=recommendation-for-isolated-pilot 与 §12 结论一致。",
+        "【碰撞实锤】项目 2026-07-07 已用 T0–T7 作探针/实验编号：wiki/archive/2026-07-07-T0-consumption-validity-probe.md、-T2-T3-opportunity-selection.md、-T4-validation-contract-R1-R2.md、-T7-rag-gate-experiment.md；且热文档 wiki/Research-Objective.md 第 59 行仍活跃引用「C-T7 泄漏」。新文档的 T0–T4 信任层与之同名异构。",
+        "【碰撞实锤】同日姊妹文档 2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md 第 307 行有标题「### Proposal A — 供给条件下的可预测兑现规律」；CLAUDE.md 术语表 A-SEL 条目另记录外审「其 Proposal A 的 selector 选项」。本文档 §12「建议批准『方案 A 的隔离试点』」在同日决策包语境中三义。",
+        "【交叉一致】姊妹模板 2026-07-14-survey-response-replayability-template.md 规则 8 要求「任何 AI 生成的结论都必须由指定责任人签名，generated_by 与 verified_by 不得是同一无监督代理」——本文档（§11.2 背书该模板）自身无任何签署人/生成者字段。"
+      ],
+      "defects": [
+        {
+          "severity": "P0",
+          "claim": "§8 试点协议可执行且验收门可通过：Day-1 第 6 项「验证文档宣称的门和运行时门完全一致」（L384），配合「锁定 llm-wiki-compiler v1.0.0 及精确 commit，不追 main」（L380）与 kill 条件 2「文档规则与运行时约束再次出现不可自动检测的偏差」（L418）。",
+          "evidence": "文档自己的 §9（L438、L441）已实锤：在审计 commit bed4dda 上「artifact preconditions 为 false」且「AutoSci 文档要求 experiment 完成时存在健康 result artifact，但当前 profile 源码的 experiment.complete……未看到相同 artifact transition requirement」；§3.1 保留意见 3（L119）称之为「文档说门存在、运行时实际未锁门」。该偏差系人工静态核对发现（L441「静态核对」），正属「不可自动检测」类。版本被锁定后此偏差在试点期间必然存在。",
+          "impact": "按字面执行，试点在 Day-1 必然失败第 6 项、kill 条件 2 必然被已知偏差复现触发——验收路径不可通过，试点死于出发点；或者执行者被迫默默把第 6 项/kill-2 重新限定到 l4-survey profile（文中未写），使 pass/fail 判据变成不可审计的自由裁量。两种情况都意味着「批准该试点协议」不能按写就接受：必须先显式限定检查范围到 l4-survey profile 并对已知 AutoSci 偏差登记豁免，或先验证 artifact precondition 机制在自定义 profile 中确实可启用（若运行时根本不支持，kill 条件 1 当场触发，试点无意义）。"
+        },
+        {
+          "severity": "P1",
+          "claim": "文档遵守其所要治理的术语纪律。实际上它一次性新造 40+ 代号（T0–T4 信任层、l4-survey profile、16 个对象名 PaperWork/EvidenceSpan/KillCondition 等、17 个关系名、方案 A/B/C），无一在 CLAUDE.md 术语表登记。",
+          "evidence": "CLAUDE.md 收词纪律：「不再发挥创造新名词。新概念必须先在本表登记一行人话定义再使用；评审/代理新造的代号在 owner 面向文档首次出现处必须括注本表正名」。术语表现有条目中无 T0–T4、无 l4-survey、无任何 16 对象名。且文档 §6（L301）把强制登记软化为「名称**可**与项目术语表对齐」——把 MUST 改写成 MAY，与纪律直接冲突。",
+          "impact": "一份以「术语/知识生命周期治理」为主题的文档自身违反收词纪律，将立即成为纪律失效的先例；owner 面向文档中未括注正名的代号（如 EvidenceSpan、KillCondition）无正典定义可回链，后续引用即产生漂移。试点前必须批量登记或在首次出现处括注人话正名。"
+        },
+        {
+          "severity": "P1",
+          "claim": "T0–T4 信任层编号无同名异构风险。实际上 T0/T2/T3/T4 已被项目用作 2026-07-07 探针/实验编号，且 T7 仍在热文档中活跃引用。",
+          "evidence": "wiki/archive/2026-07-07-T0-consumption-validity-probe.md、2026-07-07-T2-T3-opportunity-selection.md、2026-07-07-T4-validation-contract-R1-R2.md（正文含「T0 的 B>A」「供 T5 Lean」「T6 建引擎、T7 执行」）、2026-07-07-T7-rag-gate-experiment.md；wiki/Research-Objective.md L59 现行引用「C-T7 泄漏 INVALID」。CLAUDE.md 术语表 C1–C5 条目已有完全同类的「拆名警示（同名异构）」先例并强制限定语。",
+          "impact": "裸写「T1 层」「T4」在本项目语料中歧义解析（T4=验证契约 or T4=会话临时层？）；append-only 记录不可改写，旧 T 编号永久存在，唯一合规出路是新层编号拆名（加限定前缀）并登记——注意不能改用 L0–L4，会与 W4 的 L0/L1 再撞。"
+        },
+        {
+          "severity": "P1",
+          "claim": "「方案 A」命名无碰撞。实际上与同日姊妹评审文档的「Proposal A」及术语表 A-SEL 条目的历史「Proposal A」构成同名三义。",
+          "evidence": "wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md L307「### Proposal A — 供给条件下的可预测兑现规律」（同日、同一决策包、同为 uncommitted）；CLAUDE.md 术语表：「A-SEL：外审 2026-07-13 签署审查临时造的短代号（其 Proposal A 的 selector 选项）」。本文档 §5/§12 的「方案 A」=Git-native 编译栈。",
+          "impact": "owner 在同一天的决策包里会读到两个不同的「(方案|Proposal) A」——一个是研究方向、一个是工具架构；「批准方案 A」的裁决记录将天然歧义，违反「同一个名字绝不承载两个定义」。须改名（如「架构组合 K-A」之类经登记的代号）或全称引用。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§6 学术门「Claim.status=accepted 前至少有一个非 AI 的 EvidenceSpan」（L335）与方案 A 的正典生产流水线兼容。",
+          "evidence": "§5 方案 A 图（L250-264）的唯一入 T1 路径是「AI 提取候选（T2）→ 人审 PR/哈希审批 → T1」；§7.2 要求每条 AI 输出记录来源与模型 ID，即人审批准不改变「AI 来源」属性；「非 AI」谓词全文无定义。",
+          "impact": "两种读法皆坏：若人审后的 AI 抽取 span 仍算「AI 来源」，则方案 A 主流水线永远产不出 accepted claim（门与架构互斥）；若人审即洗白为「非 AI」，则该门形同虚设且与 §7.2 的 lineage 语义冲突。试点前必须精确定义该谓词（例如改为「至少一个经人类逐字核对原文定位的 EvidenceSpan」）。"
+        },
+        {
+          "severity": "P1",
+          "claim": "「两天隔离试点」（§8 标题）足以覆盖 §6 的最低 ontology 与验收门。",
+          "evidence": "§6 L301「试点至少应包含以下对象」= 16 个对象 + 17 个关系 + 7 条跨对象门；§8 Day-1 第 4 项却只写「建立最小 l4-survey profile」且第 5 项只列 4 项门控回归测试（claim 审批、artifact 健康、owner-only decision、supersession）；验收门 L409 要求「所有生命周期门有正例和负例回归测试」外加 WSL2 全量上游测试、Day-2 十篇论文全链录入与 5 项对抗任务、冷重建与 4 类攻击 fail-closed 验证。",
+          "impact": "「最小 profile」与「至少 16 对象」互相矛盾：按 §6 最低要求，两天不现实（16 对象 × 生命周期门 × 正负例 ≥ 数十个测试外加全部录入工作）；按 Day-1 的 4 门清单，则验收门「所有生命周期门」必然不满足。范围未定义将导致试点结束时 pass/fail 争议。须显式规定试点子集 ontology（哪几个对象、哪几条门）并把「两天」改为按该子集估算的工期。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§8 的 9 条 kill 条件符合文档自己 §6 的 KillCondition 不变量「必须可机器检查一部分」。",
+          "evidence": "kill 条件 7（L423）「结构化录入与审批成本显著高于现行模板，却没有带来可量化的查错、查重或回放收益」——「显著」「可量化」无预注册阈值、无度量定义；kill 条件 9（L425）「项目维护节奏、破坏性变更或许可证条件不适合团队持续使用」——纯主观判断。两条均无任何机器可查成分。",
+          "impact": "文档给自己的 kill 条件豁免了它强加给 KillCondition 对象的不变量（自反不合规）；无阈值的 kill 条件在试点后极易被「以后再补」式辩护绕过——这正是 L416「不以『以后再补』豁免」想禁止的。须为 7/9 预注册可操作判据（如：单条 claim 录入+审批耗时上限、对照现行模板的具体倍数）。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§9 沙箱核查记录构成可复核证据。",
+          "evidence": "§8 Day-1 第 3 项要求试点「记录完整日志与 hash」，但 §9 自己的七项结果（npm ci/build 通过、template inspect 输出 12 entity/12 relation、Windows init 失败、spawn npx ENOENT）没有给出任何日志文件路径、输出 hash 或沙箱位置；且审计 commit bed4dda 与 §8 要锁定的「v1.0.0 及精确 commit」之间未建立等同关系（v1.0.0 对应哪个 commit 全文未说）。项目 memory 明确「checker 必须交可执行工件」，哈希正典纪律要求 (commit, sha256) 证据对。",
+          "impact": "作为本建议 load-bearing 的核查证据（正是它推出「隔离试点而非直接采纳」和 P0 所依的 artifact gate 偏差）无法被第三方复核；若 v1.0.0 ≠ bed4dda，全部 §9 发现对锁定版本不随迁。试点前须补：审计工件（日志+hash）归档路径、bed4dda 与 v1.0.0 tag 的关系声明。"
+        },
+        {
+          "severity": "P1",
+          "claim": "文档作为「最终签署意见」（§12 标题）满足签署纪律。",
+          "evidence": "frontmatter（L1-9）无 reviewer 身份、无 generated_by/verified_by 字段；其 §11.2 背书的同日模板 wiki/2026-07-14-survey-response-replayability-template.md 规则 8（L29）：「任何 AI 生成的结论都必须由指定责任人签名。generated_by 与 verified_by 不得是同一无监督代理」。",
+          "impact": "一份要求所有 AI 结论具名签署的治理文档自身匿名「签署」，owner 无法知道该「博士级对抗审查」由谁/哪个模型/几轮完成，也无法执行 memory 中「签署级任务须亲自核验」的纪律。须补 generated_by/verified_by 与审查方法说明。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§4「关键结论：没有单一开源项目同时在『文献管理、claim 证据、研究决策、AI 协同、Git 审计、低运维』上成立」是已确立事实，并直接支撑「组合是必要的」与方案 A 首选。",
+          "evidence": "该结论的直接依据是同节开头自认「启发式判断……不是 benchmark」的评分矩阵；且全文没有记录本次选型调研自身的检索过程（查了哪些源、多少候选、何时、何 query）——而文档 §1 自己要求追问「某个『研究空白』是否只是检索遗漏」，§6 要求 SearchEvent「检索可回放，失败也保留」。",
+          "impact": "一个全称否定命题（「没有单一项目……」）在零检索覆盖记录下按文档自己的标准恰是「检索遗漏」类风险；若存在未调研到的更合适项目，方案 A 的「组合必要性」前提动摇。须补一份本次选型的 SearchEvent 级检索登记（或明示降级为『在已查 N 个候选内没有单一项目成立』的有界命题）。"
+        },
+        {
+          "severity": "P2",
+          "claim": "§0「在试点通过前，不迁移当前 Wiki……不改变团队现行文件」与 §11「对研究团队的明确要求」时序一致。",
+          "evidence": "§11.2（L470）「Survey response 模板中的回放字段应保留，但升级为 SearchEvent、Claim、EvidenceSpan……的结构化记录」、§11.4「所有生成页面必须标注……」等 8 条以现在时态提出，未标注生效条件是「试点通过后」。",
+          "impact": "若 §11 现时生效则违反 §0 冻结承诺（升级模板=改变团队现行文件）；若试点后生效则应写明。小改动即可修复，但不修则两节互相矛盾。"
+        },
+        {
+          "severity": "P2",
+          "claim": "方案 B 进入条件「至少出现 10 个稳定、反复使用……的时间图查询」（L283）是有依据的门槛。",
+          "evidence": "「10 个」全文无任何推导、外部锚定或计数口径定义（多稳定算稳定？多久窗口内？）；对照 CLAUDE.md「SESOI：数值须外部锚定」的纪律精神，这是一个拍脑袋数字被写成了硬门。",
+          "impact": "门槛数字无口径则不可裁决——将来 8 个查询 vs 12 个查询的争论无判据。建议改为登记口径（时间窗、去重规则）或明示为启发式默认值待 owner 定。"
+        },
+        {
+          "severity": "P2",
+          "claim": "文档以 uncommitted 状态即可被引用/裁决。",
+          "evidence": "umbrella git status 显示该文件为 ?? 未跟踪；CLAUDE.md 哈希正典：「一切 (commit, sha256) 证据对以 git blob 字节为正典……Windows 工作树 CRLF 副本的哈希是变体，单独出现不构成证据」。",
+          "impact": "在提交前，任何后续文档（包括 owner 决策记录、试点日志）都无法以 (commit, sha256) 形式锚定本建议书；作为签署级建议应在进入 owner 裁决流程前完成提交以取得正典 blob。"
+        }
+      ],
+      "recommendation": "不按现状接受；按以下顺序修复后再提交 owner 裁决：(1) 解 P0——把 Day-1 第 6 项与 kill 条件 2 的检查范围显式限定到 l4-survey profile，对已知 AutoSci artifact-gate 偏差登记具名豁免，并把「artifact precondition 机制在自定义 profile 中是否可启用」升级为试点前置检查（若不可启用即触发 kill-1，无需开工）；同时声明审计 commit bed4dda 与 v1.0.0 tag 的关系。(2) 收词整改——T0–T4 拆名加限定前缀（勿用 L0–L4，会与 W4 的 L0/L1 再撞）、「方案 A/B/C」改为不与「Proposal A」同形的经登记代号、将 §6「可与术语表对齐」改回强制措辞，并把试点实际要用的对象名批量登记进 CLAUDE.md/AGENTS.md 术语表（一行人话定义）。(3) 补一致性——定义「非 AI 的 EvidenceSpan」谓词、写明试点子集 ontology（哪几个对象/门）以化解「两天 vs 16 对象」矛盾、给 kill 条件 7/9 预注册可操作判据、明确 §11 各条的生效时点。(4) 补自反合规——frontmatter 加 generated_by/verified_by、§9 审计工件（日志+hash）归档、补本次选型调研自身的检索登记（或将 §4 全称结论降级为有界命题）、提交文档取得正典 blob。修复后建议以「LENS 3 复审一轮零新发现」为放行条件（对齐敌意内审环纪律）。"
+    },
+    "stagefit": {
+      "verdict": "该文档的架构判断本身质量较高（分层栈、单一正典、T0–T4 信任分级、带成本/污染 kill 条款、Day-2 十篇子集），与团队纪律方向一致；但作为\"现在批准执行的 Stage-1A 隔离试点\"，阶段适配不成立。全文（grep 核实）零处提及 Stage-1C 决策包、C1/C4 前置、owner 关键路径或执行时机——而仓库现状是：Survey v2 已收官（commit 233dc7e \"调研收官\"）、Stage-1C 唯一等待 owner 选题、C1/C4 是 Stage-1B 放行前置。按 owner\"大工件三问\"逐项检验：①哪个 stage 消费试点产出？文档未答，实际消费者是 post-1C 检索轮与 Stage-2 证据纪律（验收门通过后也只到\"更大试点\"，C1/C4 必然在此之前用现有 Git+schema 完成）；②参数定了吗？16 对象 ontology 中约 5 个（IdentityCandidate/KillCondition/MethodOperator/Proposal/ExperimentHook）依赖尚未做出的 I1–I4 选题和尚未冻结的 same-selector contract；③子集够吗？十篇回放是子集（合格），但 Day-1 要求把全部对象做成 runtime profile+门控回归测试，已是工件构建而非纸面设计。真实痛点（搜索不可重放 OPEN）中，历史部分任何工具都救不回（raw response 未捕获，模板明令禁止补造历史日志），未来部分用库内已有 replayability 模板+一个校验脚本即可小时级解决。结论：架构留档、试点必须重新门控到 Stage-1C 选题之后，现在只做零新工具的廉价补丁与 C1/C4。",
+      "key_findings": [
+        "【确认】痛点真实：Research-Objective.md L65 明记 P0-SURV-1=PARTIAL（计数可重建/搜索不可重放/科学覆盖 OPEN）；实测 wiki/survey/2026-07-14-search-query-log.jsonl 共 305 行、字段仅 {lane, engine, query, date, result_cap, note}，无 raw response hash、无结果宇宙——按已有模板 §2.3 的标准（'只保留 query 而不保留结果列表，不构成可回放检索'）确属不可回放。305 行与 Research-Objective '305 查询'一致，'计数可重建'口径成立。",
+        "【确认】文档的隔离纪律成立：§9 声称未装依赖、未改团队文件——umbrella git status 核实仅 3 个新增 wiki 文档（本文档、replayability 模板、survey-v2 敌意审查），无其它改动；repository_snapshot 233dc7e 与 HEAD 一致。",
+        "【确认】文档多处与 owner 原则同向：kill 条款 7（结构化录入成本显著高于现行模板且无量化收益即杀）、条款 8（污染主研究环境即杀）、Day-2 十篇子集（三问③精神）、L488 '先定义知识对象再让工具编译'（'锁能力层非预建工件'精神）。这些 HOLD。",
+        "【确认】阶段消费者缺位是可机械验证的：grep 'Stage-1C|Stage-1B|C1|C4|决策包|关键路径|机会成本|时机|优先级' 在全文仅命中 L314 的 'I1–I4' 字段示例与 L159 的 URL 撞词——文档确实没有任何一处讨论执行时机与关键路径关系。",
+        "【廉价替代已在库内】同日产出的 wiki/2026-07-14-survey-response-replayability-template.md 已定义 search_events/search_results/screening_decisions/papers/claim_evidence 五套 JSONL schema、五级证据等级、§5 的 12 项自动校验和 reviewer 冷重建五项——与目标文档 16 对象的文献侧语义大面积重叠。补齐现有痛点只差：一个校验脚本 + 下一轮检索按协议捕获 raw response（小时级、零新运行时、即文档自评'高/高/高/高/低运维'的第 1 层）。",
+        "【历史 OPEN 项工具救不回】v2 的 raw-query replay OPEN 无法由任何新工具修复：raw response 当时未捕获，模板 §0 规则 2 明令'不得补造历史日志'——只能标 RAW_EVENT_UNAVAILABLE。装编译器只惠及未来轮次，而未来轮次是否存在取决于 owner 的 Stage-1C 决策。",
+        "【边际 survey 工作清单】Stage-1A 收官/1B 窗口内可证明的剩余 survey 工作只有：(a) 决策包 evidence_grade 中 2 条 UNVERIFIED cites（2512.10170/2512.10403）的核验；(b) 视 owner 选题而定的 round-2 saturation targets（scout-ledger-round2.json 已列）。两者都不需要编译层；C1/C4 是对既有 registry/raw-run 的集合差与负结果普查，同样不消费新知识栈。诚实答案：该栈主要服务 Stage-2+ 与 post-1C 检索轮。",
+        "【ontology 可拆分】16 对象中约 11 个 identity-invariant（PaperWork/PaperVersion/SearchEvent/SearchResult/ScreeningDecision/Claim/EvidenceSpan/SupportRelation/Conflict/Decision/Supersession）——可先纸面定稿但必须与已有模板做单正典对账；约 5 个 identity-dependent（IdentityCandidate/KillCondition/Proposal/ExperimentHook/MethodOperator）——KillCondition 触发谓词按决策包逐 identity 不同（I2: shuffle 音频不改选择；I3: 预算内无 Goodhart 拐点；I4: ρ(c) 是噪声），MethodOperator 的信息边界/池几何/预算字段须与 open item 3 的 same-selector contract（明确排在 Stage-1C 前冻结、尚未冻结）对齐。"
+      ],
+      "defects": [
+        {
+          "severity": "P0",
+          "claim": "文档以 stage: Stage-1A 立项、以'最适合 Stage-1A 快速探索'（L269）为方案 A 的核心优势，建议现在批准两天隔离试点——但未回答'谁在哪个 stage 消费试点产出'，且对与关键路径（owner Stage-1C 选题 + C1/C4 前置）的竞争零讨论。",
+          "evidence": "grep 全文：'Stage-1C/Stage-1B/C1/C4/决策包/时机/优先级'零实质命中（仅 L314 'I1–I4' 字段示例、L159 URL 撞词）。仓库现状：commit 233dc7e 'Survey v2 complete (调研收官)'；Research-Objective.md open items 1–4 = Stage-1C 决策包待 owner 选题、C1/C4 为 Stage-1B 放行前置、same-selector contract 排在 Stage-1C 前。owner 三问记忆原文（stage-gated-artifact-builds.md）：'① which stage/gate consumes this artifact? ② are its parameters already decided…? ③ does a cheaper honest subset serve the current stage? If any answer says later stage / undecided / subset suffices, park the build and surface the decision to the owner'——本试点三问答案分别为 later stage（验收门 L400 通过后也只到'更大试点'，C1/C4 必然在此前用现有 Git+schema 完成）/ undecided（见 P1 ontology 缺陷）/ 部分 suffices（模板+脚本即可解现有痛点）。竞争双轴：agent 两天 vs C1/C4 执行；owner 注意力（10 条验收门裁决，按 personal-verification-for-signoff-work 记忆须 owner 亲验）vs Stage-1C 选题。",
+          "impact": "按文档现有表述批准即等于在 Stage-1A 收官时点把非关键路径的基础设施构建排到 owner 决策瓶颈之前——与被 owner 叫停的 57k GLAP 预建索引同一错误类别（为未选型参数、无当期消费者的能力预建工件）。该缺陷阻断'现在执行'形式的批准；文档必须先补写消费阶段声明并把试点条件化到 post-Stage-1C，其推荐才可被接受。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§6 的 16 对象 l4-survey ontology + Day-1 第 4–5 步（建 profile、写门控回归测试）在 Stage-1C 选题前整体设计并落成 runtime 工件，其中约 5 个对象预判了两个尚未做出的决定。",
+          "evidence": "IdentityCandidate（L314）字段即'I1–I4 等问题定义、必要条件、当前状态'——选题后大半关闭且 live schema 随所选 identity 变形（I4 需 supply-type 分层与 [model×task] 格记账；I3 需 risk-coverage/Goodhart 拐点字段）；KillCondition 触发谓词逐 identity 不同（决策包 dossiers：I2 kill-if='shuffling audio 不改选择'，I3 kill-if='预算内无 speech Goodhart 拐点'，I4 kill-if='ρ(c) 是噪声'）；MethodOperator 的'输入、状态、动作、信息边界'字段与 Research-Objective open item 3 的 same-selector contract（'冻结 operator/score inputs/预算/弃权/gold 边界/池几何'，Stage-1C 前才冻结）直接耦合；Proposal/ExperimentHook 是 Stage-2 对象，'future observable' 取决于所选 identity 的 proceed-if。",
+          "impact": "选题落地后 schema 返工；更隐蔽的风险是 ontology 结构性预设 I4 叙事（把'最强空位'固化进 schema），在 owner 决策前形成事实上的选题倾斜。修复：把 ontology 拆为 identity-invariant 核心（可纸面定稿）与 identity-dependent 扩展（Stage-1C + contract 冻结后再定），门控回归测试推迟到试点获准执行时。"
+        },
+        {
+          "severity": "P1",
+          "claim": "文档自立规则'组合是必要的，但组合必须只有一个正典'（L242），却对同日已存在、覆盖其 16 对象文献侧大部分语义的 replayability 模板只给了一句话（L470），无字段级映射、无 supersession 关系声明。",
+          "evidence": "wiki/2026-07-14-survey-response-replayability-template.md 已规范 search_events.jsonl（=SearchEvent）、search_results.jsonl（=SearchResult）、screening_decisions.jsonl（=ScreeningDecision）、papers.jsonl（=PaperWork+PaperVersion，含 work/version 关系与 dedup_basis）、claim_evidence.jsonl（=Claim+EvidenceSpan+SupportRelation，含五级证据等级与 locator）、supersedes_decision_id（=Supersession 局部）、§3.5 comparator card 12 字段（与 MethodOperator 的 operator/信息边界/预算字段重叠）。目标文档 L470 仅称'回放字段应保留，但升级为…结构化记录'。",
+          "impact": "两套同义异形 schema 并行登记 = 文档自己在 §3–§5 反复警告的双真相源风险；执行 agent 不知按哪份录入，评审无法判定哪份是正典。试点前必须交付字段级对账表并声明单正典（建议：模板为正典，ontology 作为其类型化超集演进）。"
+        },
+        {
+          "severity": "P1",
+          "claim": "需求门不对称（自反性缺陷）：文档给 Graphiti 设了可观测进入条件（L283'至少出现 10 个稳定、反复使用且文本/SQL/静态索引难以满足的时间图查询'），§10 明言'不要把未来可能有很多知识当作今天部署图平台的理由'（L454），却没有给 llm-wiki-compiler 试点自身设任何等价的需求前置条件。",
+          "evidence": "全文无'试点进入条件'一节；§8 直接给出 Day 1/Day 2 执行清单。而当期可证明的需求侧事实：Survey v2 COMPLETE（Research-Objective open item 1），剩余 survey 工作仅 2 条 UNVERIFIED cites 核验 + 条件于 owner 决策的 round-2 saturation；两者均不需要编译层。",
+          "impact": "同一标准下，编译器试点也应先证明'存在下一轮结构化检索需求'（如 owner 选题为 proceed/pivot 且 round-2 排期确认）才获执行资格；不设此门即是文档对自己推荐项的双标，削弱其对重型系统拒绝理由的公信力。"
+        },
+        {
+          "severity": "P2",
+          "claim": "'两天'成本口径不实，且 Stage-1A 标签在文档落笔时点已经陈旧。",
+          "evidence": "§8 的两天不含：§6 全部 16 对象 + 17 关系 + 跨对象门的 ontology 设计、custom profile 编写、'为 claim 审批/artifact 健康/owner-only decision/supersession 编写门控回归测试'（Day-1 第 5 步）、验收门中独立 reviewer 仅凭 context pack 的冷重建回放与四类攻击测试；另有 10 条验收门 + 9 条 kill 条件的裁决属签署级、须 owner 亲验（personal-verification 记忆）。L269'最适合 Stage-1A 快速探索'与 233dc7e '调研收官'矛盾——Stage-1A 的探索性 survey 已结束，热层状态为'Stage-1B 未放行、M2 冻结'。",
+          "impact": "低估对 agent 与 owner 时间的实际侵占，误导排期决策；stage 标签误导读者以为该栈服务当期阶段。"
+        }
+      ],
+      "recommendation": "不以当前形式批准\"现在执行的隔离试点\"；架构内容按选型参考留档。具体处置分三步：(1) 当期（Stage-1A 收官窗口）只做零新工具动作——完成 C1/C4 诚信核查、核验 2 条 UNVERIFIED cites、为已有 replayability 模板补一个自动校验脚本（其 §5 已列 12 项检查），并交付目标文档 16 对象与模板五套 JSONL 的字段级对账表（声明单正典），这已覆盖'搜索不可重放'痛点的全部可救部分（历史部分标 RAW_EVENT_UNAVAILABLE，任何工具救不回）；Zotero/OpenAlex 身份层可分拆独立采纳，不与编译器捆绑。(2) 把 llm-wiki-compiler 试点重新门控为条件项：owner 完成 Stage-1C 选题、same-selector contract 冻结、且确认存在下一轮结构化检索需求（round-2 saturation 或 Stage-2 proposal 证据链）后方可执行——与文档给 Graphiti 设的进入条件同一标准。(3) 文档修订：补写\"消费阶段与关键路径\"一节（明确本栈消费者是 post-1C/Stage-2）、修正 stage 标签与 L269 的陈旧前提、把 ontology 拆为 identity-invariant 核心与 identity-dependent 扩展、给出含 ontology 设计与 owner 裁决在内的诚实成本口径。修订后此文档可作为 post-1C 的 backlog 条件项由 owner 排期。"
+    },
+    "cost": {
+      "verdict": "该文档的架构判断（分层信任、Git 唯一正典、带 kill 条件的隔离试点）基本健全，但从成本现实性镜头看有一个成立的 P0 和一串 P1：(1) \"两天隔离试点\"是 3–5 倍低估，按 §8 实际清单的现实估算为 6–11 人日；(2) §6 的 owner-only 决策门在试点目标工具中根本无法运行时强制——工具自己的源码（src/workflows/actor-identity.ts）声明 actor 身份是 advisory、\"not access control\"，真实边界是文档从未预算的 OS 级用户隔离，这意味着 kill 条件 #1 在 Day-1 即被设计性触发，试点按现规格要么立即失败、要么把门静默降级为约定（正是文档 §3.1.A.3 自己谴责的\"文档说门存在、运行时未锁门\"模式）；(3) kill #7 的成本比较没有对照臂且基线双义（现行模板\"纸面成本\"与\"实践成本\"相差约 3 倍，因为本周的 survey v2 本身就是摘要级核验、未达模板自己的全文定位要求）；(4) 文档把\"Git + schema 最小实现\"定位为失败回退路径，但按其自身 §12 原则（\"先把知识对象、信任区和审批门定义正确，再让 LLM Wiki 编译它\"），一个约 1.5–2 人日的 schema+validator 最小实现是试点的前置件而非回退项，且能捕获 §8 验收门约 85–90% 的价值。试点顺序应当倒置：schema 先行，编译器试点降级为按 §10 自身升级信号条件触发的后置评估。",
+      "key_findings": [
+        "【核验成立】§9 沙箱审计各条与沙箱实物一致：package.json version=1.0.0、engines node>=24；AutoSci profile 实数 12 实体/12 关系（src/profile/templates/builtin/autosci/entities.ts 190 行、relations.ts 21 行）；experiments.complete 的 transitionRequirements 仅 ['resultSummary'] + 对 ideas 的关系要求，result 字段虽为 artifactRef 类型但无 per-state artifact precondition（entities.ts:62-88）——文档§9'静态核对'该条 HOLDS。",
+        "【核验成立·部分利好】workflow 层确有二元 human:/agent: 门且 agent 面不能满足 human 门（src/workflows/authority.ts:96-100 'a human gate can be satisfied ONLY on a surface whose HARD CAP is …'）——文档的 T2→T1 禁 AI 自批前提在二元粒度上成立；缺口在角色粒度（无 owner/reviewer 区分），不在 human 门本身。",
+        "【核验成立】profile 跨对象门原生表达力 = transitionRequirements（字段存在）+ transitionRelationRequirements（关系计数，可按对端 otherTypes/otherStates 收窄，src/profile/types.ts:66-95）——§6 七门中约 3-4 门（KillCondition 证据绑定、claim≥1 EvidenceSpan 经状态编码、Proposal/Supersession 字段门）可原生或经状态编码表达；其余 3 门（非 AI 证据、双角色其一人类、owner-only proceed）超出表达力。",
+        "【试点人日估算】现实 6–11 人日（乐观 ~4.5）：WSL2 Node24 工具链+CN 网络 npm ci 0.25–0.5；官方 538 个测试文件跑通+环境失败定诊 0.25–1（vitest.config.ts 自述子进程易饿死超时，验收门要求任何失败=未通过）；学 profile 体系 0.25–0.5；撰写 16 对象/14 关系 profile（AutoSci 12/12=400 行作底，估 600–900 行）0.75–1.5；3 个不可原生表达的门做设计规避或 OS 隔离 0.5–3；约 46 个正负门控回归测试 0.75–1.5；10 篇论文 T0/身份/SearchEvent backfill（受限网络取 PDF）0.5–1；5 项对抗任务+冷重建 diff 工具 0.75–1.5；验收审计+独立 reviewer+报告 0.5–1。",
+        "【per-claim 成本估算】现行（实践态）：AI workflow 产出 ledger 行人工成本≈0，人审在文档粒度摊薄（round-2 共 94 次 cite-check、coordinator 亲验约 5 篇），每 load-bearing claim 约 5–10 分钟人工。提议栈：论文身份层一次性 backfill 93 篇×10–15 分钟≈2–3 人日；每 claim = Claim 原子化 2–5 分 + EvidenceSpan 全文定位+摘录 hash 5–15 分 + SupportRelation 1–2 分 + T2→T1 人审 3–10 分 = 11–32 分钟/claim（人工份额≥5–15 分）；Stage-2 按 300 claims 计 55–160 小时≈7–20 人日累计。稳态开销≈现行实践态的 3–5 倍；但≈现行模板纸面要求的 1–1.5 倍（模板本已要求逐 claim 定位符+五级核验字段，只是未被机器强制、实际也未达标）。",
+        "【最小替代方案设计】在现有 wiki/survey/ 上：按 §6 的 16 对象定义 JSON Schema（papers 可折叠 Work+Version）；~200 行 Python validator 强制引用完整性（claim→evidence→paper version）、状态枚举、跨对象门（accepted 需≥1 条 verified_by 为人且≠generated_by 的 evidence——此规则现行模板 §0.8 已有原文；proceed 需 owner decision 记录；kill 触发需裁决证据链接；evidence 源路径限 T0 allowlist）；接入 wiki-sync.sh/pre-commit 作 CI。成本 1.5–2 人日，零新运行时。现有资产已近 schema 形态：2026-07-14-search-query-log.jsonl（305 条）即 SearchEvent 原型，scout ledger counts 字段已机器可算——迁移成本近零。",
+        "【价值捕获比】最小方案对 §8 十条验收门：门1/2（身份/定位符 100%）schema 直接强制；门3（0 AI 未审入 T1）merge 时强制（validator+git PR=review queue）；门4（0 T3/T4 作证据）路径 allowlist；门5/6（冷重建一致/删编译输出可重建）因无派生层而空真成立；门7（正负回归测试）pytest 更廉价；门8（上游测试）不适用；门9（context pack 独立回答）部分——无自动 pack 但 93 篇规模下代理直接读文件即可；门10 四类攻击 3.5/4 fail-closed（注入错误区间一项两个方案同样只能靠人审——编译器同样无法机器核对页码与 PDF 内容）。合计≈8.5–9/10 门（85–90% 价值），成本为试点的 15–25%。",
+        "【顺序可倒置且应倒置】l4-survey profile 无论如何必须从团队自己的 schema 推导（§6 正是这个 schema 的草稿），所以 schema-first 是试点 Day-1 工作的严格子集；文档 §10 自己列出的升级触发信号（Git 静态索引无法在可接受时间回答查询等）就是编译器试点的正确入场条件。"
+      ],
+      "defects": [
+        {
+          "severity": "P0",
+          "claim": "§8 Day-1 第 5–6 步与验收门假定 'owner-only decision' 与 '两名角色其一人类 reviewer' 等门可在 llm-wiki-compiler 运行时强制并写出回归测试；§6 明列 'IdentityCandidate.status=proceed 只能由 owner decision 触发'。",
+          "evidence": "沙箱源码 C:/Users/35686/AppData/Local/Temp/llm-wiki-compiler-audit-20260714/src/workflows/actor-identity.ts:7-14 原文：'The identity is ADVISORY, not cryptographic … a CLI-spawning agent SETS `LLMWIKI_ACTOR` freely — so this is provenance/attribution, NOT proof of identity … The real boundary is OS-LEVEL ISOLATION (distinct OS users / a run store the agent cannot write) … it is not access control against a fully-hostile local agent.' 且 src/workflows/gates.ts、authority.ts 全文 grep 无任何 role/owner 概念——门粒度只有二元 human:/agent:。本项目代理与 owner 同一 OS 用户运行（单用户 Windows/WSL2），文档 §8 从未预算 OS 级用户隔离。",
+          "impact": "kill 条件 #1（'profile 无法在运行时真正强制 claim/decision/artifact 门'）在 Day-1 即被设计性触发：试点按现规格要么立即 kill、要么把 owner 门静默降级为约定——后者正是文档 §3.1.A.3 自己谴责的'文档说门存在、运行时实际未锁门'控制面差异。试点规格必须先修（预算 OS 隔离，或显式把 owner 门改由 git PR 层强制并从编译器验收门中移除），否则不应批准。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§8 标题'两天隔离试点'——Day 1 完成工具链+官方测试+16 对象 profile+全部门控回归测试，Day 2 完成 10 篇对抗回放+冷重建+验收。",
+          "evidence": "沙箱实测：test/ 目录 538 个测试文件（vitest 30s 超时、子进程密集，vitest.config.ts 自述 'subprocess spawns get starved past their timeout — a non-deterministic failure'，而验收门要求任何环境失败=未通过，即每个 flaky 都要定诊）；AutoSci 12 实体/12 关系已是 400 行定义（src/profile/templates/builtin/autosci/），l4-survey 16/14 加 7 跨对象门中 3 门需设计规避；每生命周期门正+负测试≈46 个且需自建 CLI 驱动 fixture 与冷重建 diff 工具；10 篇论文需在本周实测 WebFetch 被阻断的网络环境取 PDF、建 T0 hash 与 SearchEvent。逐项累加：现实 6–11 人日、乐观也≈4.5–6 人日。",
+          "impact": "决策者按'两天'批准的是一个实际 6–11 人日的承诺；且按项目自身协议（签署级任务 owner 亲自核验，不可整体委托子代理），其中人审/验收部分是串行人力。低估 3–5 倍会导致试点半途而废或验收门被偷工——两者都比不做更糟。"
+        },
+        {
+          "severity": "P1",
+          "claim": "kill 条件 #7：'每条关键 claim 的结构化录入与审批成本显著高于现行模板，却没有带来可量化的查错、查重或回放收益'——被当作可裁决的 kill 门。",
+          "evidence": "两处未定义使其不可裁决：(a) 基线双义——'现行模板'纸面成本与实践成本差约 3 倍：wiki/2026-07-14-survey-response-replayability-template.md §0.4-0.5 已要求逐 claim 页/节/表/行定位+五级核验字段，但同日 wiki/survey/2026-07-14-sota-cards-v2.md 头部自述本轮 cite-check 是'WebSearch, not fulltext'、'treat them as SCOUT/ABSTRACT'（即现行实践从未支付模板纸面成本）；(b) 无对照臂——§8 Day-2 的 10 篇回放只测门行为，没有安排现行 markdown 流程在同 10 篇上的平行计时与查错率测量，'可量化收益'无从比较。",
+          "impact": "#7 成为一个永远可以被任一方主张已触发/未触发的口水门：拿实践态基线（每 claim 5–10 分钟）比会必然 kill（提议栈 11–32 分钟/claim，3–5 倍）；拿纸面基线比则几乎必然通过（1–1.5 倍）。必须在试点前冻结基线定义并加同语料对照臂。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§6 EvidenceSpan 最低必填'页/段/表/公式/行、摘录 hash'且'必须可定位回原文'；§8 验收门要求 100% load-bearing claims 有 source locator——但全文获取成本与可行性未计。",
+          "evidence": "wiki/survey/2026-07-14-sota-cards-v2.md 头部（同一周、同一环境）：'the workflow`s WebFetch was blocked'、'UNVERIFIED-CITATION (network NOT_RESOLVED this round): 2512.10170, 2512.10403'——当前环境连引用解析都间歇失败，遑论为 93 篇（round-2 ledger counts: unique_papers_after_cross_lane_dedup_est=93）逐篇取 PDF、算内容 hash、翻到页/表/行。按 10–15 分钟/篇计，仅身份+版本层 backfill 即 2–3 人日，文档全篇无此预算，也无网络受限时的降级协议（如 EvidenceSpan 允许 ABSTRACT 级但必须标记）。",
+          "impact": "验收门'100% load-bearing claims 有 locator+hash'在受限网络下不可达，试点会在与工具质量无关的环境问题上假性失败；或团队为过门而降级核验等级却不留痕——恰是文档要防的证据等级混淆。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§8 kill 后备条款把'回退到 Git + schema 的最小实现'定位为失败路径；试点顺序=先评编译器、schema 附带产出。",
+          "evidence": "文档 §12 自己的原则：'先把知识对象、信任区和审批门定义正确，再让 LLM Wiki 编译它；不要先安装一个 Wiki，再让研究方法适应产品已有的数据模型。' 而 l4-survey profile 必须从团队 schema 推导（§6 即其草稿），故 schema 是试点前置件。实测最小方案成本 1.5–2 人日（JSON Schema + ~200 行 Python validator + CI 接入，团队 Python 栈零新运行时；现有 2026-07-14-search-query-log.jsonl 305 条已是 SearchEvent 原型），对 §8 十条验收门捕获≈8.5–9 条（门 5/6 因无派生层空真成立，门 8 不适用，门 9 部分，门 10 中注入错误区间一项与编译器同等依赖人审）。对比编译器试点 6–11 人日。",
+          "impact": "现顺序把最贵的一步（评估一个 v1.0.0、且已知 3/7 门不可原生表达的第三方工具）放在最便宜的前置件（自有 schema 机器化）之前，成本-收益排序倒置：约 1/4 成本可先拿到 85–90% 门价值，编译器试点应改为按 §10 自身升级信号条件触发。文档未做这一对比即推荐试点，属选型分析遗漏。"
+        },
+        {
+          "severity": "P2",
+          "claim": "§4 适配矩阵给 llm-wiki-compiler 运维成本评'中'；§0 称其为'知识编译层'。",
+          "evidence": "沙箱 package.json：engines node>=24（极新的运行时线）、19 个运行时依赖含 @anthropic-ai/claude-agent-sdk ^0.3.163、@anthropic-ai/sdk、openai ^6.42.0、jsdom、pdf-parse 等——'编译器'实为携带双 LLM 供应商 SDK 的完整代理运行时；团队现为 Python-first（uv venv），这是第二条需长期维护的完整工具链，直接加重 kill #9（维护节奏/破坏性变更）的暴露面。",
+          "impact": "运维成本评级偏乐观；若按'中'预算维护人力会低估锁版本升级、Node 大版本跟进与依赖安全面的持续成本。"
+        },
+        {
+          "severity": "P2",
+          "claim": "§8 Day-1 步骤 5（'为 claim 审批、artifact 健康状态、owner-only decision、supersession 编写门控回归测试'）先于步骤 6（'验证文档宣称的门和运行时门完全一致'）。",
+          "evidence": "文档 §9 自己的审计已证明 AutoSci 存在'文档说门在、运行时未锁'（artifact preconditions 为 false，与 entities.ts:62-88 无 artifact precondition 一致——本审已核实）；则步骤 5 为 owner-only 等门写回归测试时门尚不存在（见 P0 缺陷），测试无被测物。步骤顺序应为：先做门存在性/表达力审计（步骤 6 前移），再决定哪些门写测试、哪些门触发 kill #1。",
+          "impact": "小的内部顺序矛盾，但会让 Day-1 执行者浪费在给不存在的运行时特性写测试上，或诱导用'约定+文档'冒充运行时门。"
+        }
+      ],
+      "recommendation": "倒置试点顺序，并修订试点规格后再议批准：(1) 立即执行\"schema-first 最小实现\"（1.5–2 人日）：把 §6 的 16 对象写成 JSON Schema，在现有 wiki/survey/ JSONL/YAML 上跑 ~200 行 Python validator + CI 门（引用完整性、accepted-claim 需人核证据、owner decision 记录、T0 路径 allowlist、supersession 不覆盖），复用现行模板已有的字段定义与 git/PR 审批肌肉——这直接捕获 §8 验收门约 85–90% 的价值且无新运行时。(2) 把 llm-wiki-compiler 试点降级为条件触发的后置评估，入场条件用 §10 自己的信号（静态索引查询超时、context-pack 自动化需求成立），并重定预算为 6–11 人日。(3) 若届时执行，试点规格必须先修四处：owner-only 门要么预算 OS 级用户隔离（distinct OS users，工具源码自认这是唯一真实边界）、要么显式改由 git PR 层强制并从编译器验收项中移除；kill #7 冻结基线定义（纸面模板 vs 实践态，二选一并写明）并加同 10 篇语料的现行流程对照臂（计时+查错率）；计入 93 篇 PDF 获取与身份 backfill 的 2–3 人日及网络受限降级协议；Day-1 把\"门存在性审计\"前移到写回归测试之前。文档其余架构判断（五层信任、单一正典、组合而非单品、kill 条件机制本身）经本镜头核验无成本性硬伤，可保留。"
+    },
+    "completeness": {
+      "verdict": "该文档在防御姿态上是合格的（隔离试点、kill 条件、不迁移正典），但它是以\"绿地\"视角写成的：对本仓库已经运转的存量知识机器（docs/claim_ledger.yaml 这一被明文指定为\"SINGLE SOURCE OF TRUTH\"的 claim 台账、305 条查询的 search-query-log.jsonl、scout-ledger、带 FT/AB/SC 证据等级的 neighbor-matrix、22 规则 conformance checker、git-blob 哈希 release_manifest）零盘点、零映射；对真实团队拓扑（一个 owner + 并发共享同一 checkout 的多个 AI 会话）设定了不存在的\"人类 reviewer\"角色且未讨论多写者纪律；把从未在本项目使用过的 Zotero 写成\"仍然适合承担\"的既有层；其自身作为 AI 产物在其自创的 T0–T4 模型下属 T2，而其 §9 载荷性审计证据（临时沙箱日志）未以 T0 形态留存，按其自身核心不变量不足以直接支撑决策。无 P0 级缺陷——隔离试点建议本身不因此失效——但五项 P1 必须在试点放行前补答，否则试点验收门无法回答真正的采纳问题（\"新栈相对现行机器的边际收益\"）。",
+      "key_findings": [
+        "【证实】文档的核心防御设计成立：隔离试点、锁版本、kill 条件、'删除派生层不得丢失唯一学术判断'（L34）、T2-T4 不得直接影响结论（L77-79）——这些与项目现行 append-only/哈希正典纪律方向一致。",
+        "【证实】atomicstrata/llm-wiki-compiler 真实存在：MIT 许可、v1.0.0 发布于 2026-07-11（与文档 L117 'v1.0.0 在本审查日前不久发布'一致）、1.7k stars、后端 provider-agnostic（默认 Anthropic，支持 OpenAI-compatible/Ollama 本地）。上游文档无多写者/锁机制说明——这反而坐实本评审的并发缺陷指控。",
+        "【证实】文档 L36 '试点通过前不迁移当前 Wiki'、L267 '现有 Git + schema' 表明它知道正典存在；§11.2（L470）也提到把 survey response 回放字段升级为结构化记录——即它对存量有模糊感知，但从未做具体盘点或映射。",
+        "【证实】存量工件与文档 §6 ontology 高度同构：wiki/survey/2026-07-14-search-query-log.jsonl（305 条，含 lane/engine/query/date/result_cap/note，即 proto-SearchEvent，仅缺响应哈希与执行者）；2026-07-14-scout-ledger-round2.json（verdict/挑战者/证据等级，即 proto-SearchResult+Claim）；2026-07-14-neighbor-matrix-v2.md 的 FT/AB/SC 分级（即 proto-EvidenceSpan 等级）；docs/claim_ledger.yaml（claim_id/status 五值枚举/stage/artifact/code_commit/supersedes/adjudicated_on/reviewer，即 Claim+Decision+Supersession 全生命周期，534 行、在用）。",
+        "【证实】Zotero 在全仓库（wiki/docs/scripts/CLAUDE.md）除目标文档外零出现——它今天不在本项目使用中。",
+        "【证实】ASReview（Nature Machine Intelligence 发表、活跃维护的开源主动学习文献 screening 工具）确实存在且直接对应文档 §6 的 ScreeningDecision 对象——文档漏评。",
+        "【证实】本仓库自身的调研轮次刚经历过网络封锁（neighbor-matrix-v2 头部：'the workflow's WebFetch was blocked'，2 条 UNVERIFIED-CITATION 因 network NOT_RESOLVED）——文档提出的 OpenAlex/Crossref 层与 LLM 编译层的网络可达性问题有本地实证先例，但文档未处理。"
+      ],
+      "defects": [
+        {
+          "severity": "P1",
+          "claim": "文档 §4 矩阵把 'Git + schema' 的 claim/证据能力标为'高（需自定义）'（L230），§6 从零提出 Claim/Decision/Supersession/SearchEvent 等 16 个对象，却从未盘点本仓库已在运转的同构存量：docs/claim_ledger.yaml（自我声明 'the SINGLE SOURCE OF TRUTH for whether any headline claim…is currently citable'，含 status 生命周期+supersession+adjudication）、wiki/survey/2026-07-14-search-query-log.jsonl（305 条 proto-SearchEvent）、scout-ledger round1/2、neighbor-matrix 的 FT/AB/SC 证据分级、docs/integrity/v42_conformance.py（22 规则 checker）、release_manifest.json（git-blob 哈希）。",
+          "evidence": "grep 全仓库：目标文档 0 次提及 claim_ledger、scout-ledger、search-query-log、conformance；docs/claim_ledger.yaml 头部原文：'This file is the SINGLE SOURCE OF TRUTH… Any AI agent or human MUST resolve a claim's validity from THIS FILE'。§8 Day-2（L386-396）只测 10 篇新论文的鲜摄入，验收门（L400-411）无一条涉及存量记录导入；kill 条件 7（L423）要求与'现行模板'比成本，但文档从未刻画现行基线成本。",
+          "impact": "试点即使全绿也回答不了采纳问题：编译器自带 claim 存储 + claim_ledger.yaml 继续为 SSOT = 恰好落入文档自己 kill 条件 3 禁止的'手工维护两个事实源'；且 ~93 篇 v2 论文、171 引调研、80/41/43/43 条历史 claim、305 条 SearchEvent 的迁移成本完全未估，采纳决策缺少最大的成本项。"
+        },
+        {
+          "severity": "P1",
+          "claim": "§7.1 权限表设三角色（AI / 人类 reviewer / owner），§6 门规定 'load-bearing claim 至少两名角色中有一名人类 reviewer'（L335）——但本团队实际是一名 owner + 多个 AI 会话，不存在区别于 owner 的人类 reviewer；且并发 Claude 会话共享同一 checkout（项目 memory 记录过 sibling 会话中途提交并启动 sweep 的实例），编译器的 review queue/candidate 分支/构建状态的多写者纪律全文未提。",
+          "evidence": "目标文档 L347-357、L335；CLAUDE.md 团队分工（owner + Fable 编排 + Opus/Sonnet 代理）；memory 'concurrent-sessions-coordination'（sibling 会话共享 checkout+GPU 的实锤事件）；WebFetch 核实上游 README 无任何 multi-user state/locking 说明，仅有单进程 --concurrency 参数。",
+          "impact": "权限模型落地即坍缩为 owner 兼任 reviewer+approver（丧失文档预设的独立性），或两角色门不可满足；owner 单人审批吞吐成为全栈真实瓶颈却零分析（项目 memory 明确 owner 要求签署级任务亲自核验）；并发会话同时写编译器状态可产生竞态损坏，属试点必然踩到而文档未设防的故障模式。"
+        },
+        {
+          "severity": "P1",
+          "claim": "第 2 层直接指定 'Zotero + Better BibTeX'，L153 措辞'Zotero 仍然适合承担人工文献库、附件、批注……'暗示延续现状——但 Zotero 今天并不在本项目使用中，采纳=从零建库+回填 93+ 篇文献，全文无一句迁移/建库成本讨论；且 Zotero 的批注/附件存于其自有 SQLite+storage 目录，非 Git 可重建。",
+          "evidence": "grep -i zotero 全仓库仅命中目标文档自身（1 个文件）；现行文献身份实际由 survey md 中的 arXiv 链接 + neighbor-matrix id 承载。文档 L34 对 LLM Wiki 设立'删除后不得丢失任何唯一学术判断'测试，却未对 Zotero 层适用同一测试——批注（人类学术判断）恰恰会成为 Git 正典之外的唯一记录。",
+          "impact": "引入文档自己最警惕的双真相源与不可重建层于第 2 层而不自知；试点验收门也不覆盖该层，Zotero 采纳成了未经审查的搭便车决策。"
+        },
+        {
+          "severity": "P1",
+          "claim": "文档自身的出处问题：它是 AI 生成的评审件（review_type: doctoral-adversarial-architecture-review），按其自创 T0–T4 模型属 T2（AI 候选层）；其对推荐结论载荷最大的 §9 沙箱审计（artifact precondition 未启用、Windows init 失败、spawn npx ENOENT）在系统临时目录完成，日志与哈希未以 T0 形态存档——文档对未来试点要求'记录完整日志与 hash'（L383），却未对自己的审计适用同一标准。",
+          "evidence": "grep 'bed4dda' 全仓库仅命中目标文档自身；docs/checks/ 与 docs/integrity/ 下无任何本轮沙箱审计日志；项目哈希正典规则（CLAUDE.md：证据对以 git blob 字节为正典）下 §9 各断言现为不可复核口头断言。文档核心不变量 L77-79：'T2–T4 可以提出调查方向；只有回到 T0，并经 T1 的显式判断，才可影响研究结论'。",
+          "impact": "owner 若直接依据本文档批准试点，即以未经 T0 回链的 T2 内容驱动决策，违反文档自己的第一原则；§9 的关键发现（文档门 vs 运行时门差异）无法被后人复核或与上游后续版本对照。修复廉价：重跑审计并把日志+哈希入库，或明示本文档层级与待验状态。"
+        },
+        {
+          "severity": "P1",
+          "claim": "'知识编译层'本质是 LLM 驱动的抽取/生成，但整个文档（含 §8 两天试点计划）没有一行指定编译所用的 LLM 后端、模型、API key、费用与网络可达性；方案 A 结构图却标注'确定性编译'（L262）。",
+          "evidence": "WebFetch 上游 README：默认后端 Anthropic，支持 OpenAI-compatible/Ollama；本仓库刚发生的实证：Survey v2 工作流 WebFetch 被封（neighbor-matrix-v2 头部原文 'the workflow`s WebFetch was blocked'，2 条引用因 network NOT_RESOLVED 未验证），memory 亦记录 CN 网络下 HF 需镜像。§8 Day-1/Day-2 清单（L377-396）无 LLM 后端/成本/离线策略条目。",
+          "impact": "试点第一天就必须回答'编译器调用谁'：云 API（费用+网络封锁风险+可复现性）还是本地 Ollama（GPU 被 llama-server 占用的已知约束）；缺了这一项，Day-2 十篇论文摄入可能根本跑不起来，'确定性编译'的宣称也无从验证。"
+        },
+        {
+          "severity": "P2",
+          "claim": "许可证尽调不对称：文档对 nashsu/llm_wiki 特意提出 GPLv3 风险（L133），对首选候选 llm-wiki-compiler 的许可证却只字未提（尽管 kill 条件 9 含'许可证条件'）。",
+          "evidence": "目标文档全文无 llm-wiki-compiler 许可证陈述；WebFetch 核实其为 MIT——结论无害，但这是评审时未做而靠运气正确的项。",
+          "impact": "选型报告的尽调完备性瑕疵；若上游未来换许可证（v1.0.0 刚发布、治理未稳），无基线记录可对照。"
+        },
+        {
+          "severity": "P2",
+          "claim": "已安装的 academic-research-skills 插件（/ars-citation-check 引用核查、/ars-lit-review、/ars-mark-read 按 citation key 记录人读信号、/ars-cache-invalidate 验证缓存）与提议栈功能重叠——mark-read 本质是既存的 T1 式人类阅读背书机制——文档全文未提 ARS。",
+          "evidence": "CLAUDE.md 'Research skills' 节明列 academic-research-skills 已装且历史调研实际使用过（wf 运行含 /ars-reviewer）；目标文档 0 次出现 'ars'。",
+          "impact": "落地后将并存三套引用验证/阅读记录（ARS 缓存、scout-ledger、编译器 review queue），互不知情，恰是文档自己批判的'循环污染/多真相'温床的低配版。"
+        },
+        {
+          "severity": "P2",
+          "claim": "漏评的著名开源替代/标准：ASReview（开源主动学习文献 screening，直接对应 §6 ScreeningDecision）、JabRef（Git 原生 BibTeX 管理器，对纯文本工作流可能优于 Zotero+插件组合）、Semantic Scholar API（元数据/引用上下文，补 OpenAlex/Crossref）、PRISMA-S / W3C PROV（文档 §6 的 SearchEvent/ScreeningDecision/溯源对象在重新发明这些标准的既有词表而不引用）。",
+          "evidence": "WebSearch 证实 ASReview 活跃（Nature Machine Intelligence 2021 发表、LAB v2 2025）：https://github.com/asreview/asreview；文档 §13 资料清单 16 项中无任一 screening/参考文献管理替代品或报告标准。",
+          "impact": "选型矩阵（§4）的候选集不完整；screening 与文献身份两层的'唯一候选'其实各有成熟对手，未比即选。"
+        },
+        {
+          "severity": "P2",
+          "claim": "与项目现行发布/归档/术语机制的接缝未讨论：T3 编译页面与 scripts/wiki-sync.sh 的 GitHub Wiki 镜像是什么关系（第二发布面？）；'战役收官即归档 archive/survey/<campaign>/' 的 append-only 归档约定如何映射进编译器 freshness/supersession；文档新造 T0–T4、PaperWork、EvidenceSpan 等大量术语未按 CLAUDE.md 收词纪律登记，且 'Claim' 与 claim_ledger.yaml 的 claim 条目同名异构（schema 不同）——按纪律须拆名。",
+          "evidence": "CLAUDE.md 收词纪律：'新概念必须先在本表登记一行人话定义再使用……同一个名字绝不承载两个定义'；wiki/survey/README.md L17-23 归档约定；目标文档无 wiki-sync/归档/术语登记任何讨论。",
+          "impact": "试点若成功推广，会在发布面、归档流、术语表三处与现行纪律静默冲突，事后返工。"
+        },
+        {
+          "severity": "P2",
+          "claim": "时机与机会成本未论证：当前 live open items 是 Stage-1C 选题决策包待 owner 裁决与诚信核查 C1/C4（Stage-1B 前置），文档未回答'为什么现在花 2 天 owner 级带宽做知识栈试点'，也未对照 owner 的 stage-gated 三问（哪个 stage 用？参数定了吗？子集够吗？）。",
+          "evidence": "wiki/Research-Objective.md 'Open items（live）' 1-4 条；memory 'stage-gated-artifact-builds'（大工件建前三问、曾叫停过 Stage-1 预建全量索引）。",
+          "impact": "试点排期可能挤占 Stage-1C 收官——项目当前最高优先级——且 owner 单人审批瓶颈（见 P1-2）使'两天'工期估计对 owner 时间成本失真。"
+        }
+      ],
+      "recommendation": "不否决\"方案 A 隔离试点\"的方向，但在放行前要求文档作者补交五项前置答卷：(1) 存量盘点+映射表——把 docs/claim_ledger.yaml、wiki/survey/2026-07-14-search-query-log.jsonl、scout-ledger、neighbor-matrix 证据分级逐一映射到 §6 对象，明确编译器 claim 存储与 claim_ledger.yaml SSOT 的唯一正典归属，并在 Day-2 增加一项\"存量记录无损导入\"对抗任务、为 kill 条件 7 实测现行模板的每条 claim 录入/审批基线成本；(2) 按单人团队重写 §7.1 权限模型（owner 兼任 reviewer 时的独立性替代方案，如 AI 交叉审+owner 终审），并为并发 Claude 会话规定编译器状态的锁/单写者纪律；(3) 对 Zotero 层适用与 LLM Wiki 相同的可删除/可重建测试，给出建库回填成本与批注归宿，或改评 JabRef/纯 Git 方案；(4) 重跑 §9 沙箱审计并把完整日志+哈希按 T0 纪律入库（docs/checks/），同时在文档头部自标其 T2 层级与待 owner T1 裁决状态；(5) 指定编译层 LLM 后端（含费用、网络可达性、离线策略）。P2 项（许可证记录、ARS 整合、ASReview/JabRef 补评、wiki-sync/归档/术语接缝、排期对 Stage-1C 的让路声明）可随试点报告一并补。五项 P1 答毕后，两天隔离试点本身值得做。"
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Review"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "verify:upstream-compiler",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "a7615730395a7cb90",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652490,
+      "queuedAt": 1783995652473,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "文档对 atomicstrata/llm-wiki-compiler 的事实刻画经实时 web …",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996083806,
+      "tokens": 119372,
+      "toolCalls": 27,
+      "durationMs": 431316,
+      "resultPreview": "{\"verdict\":\"文档对 atomicstrata/llm-wiki-compiler 的事实刻画经实时 web + 本地沙箱源码双重核验后基本准确、甚至偏保守：仓库真实存在（1745 stars、MIT、TypeScript、创建于 2026-04-05）；v1.0.0 确于 2026-07-11 发布（审查日前 3 天）；§3.1.A 所列全部特性逐项属实；§9 最核心的\\\"文档宣称 artifact 门存在、运行时未锁门\\\"审计主张在源码层面完全坐实（docs 指南 L170 要求 healthy experiment-result artifact，但 AutoSci 模板 entities.ts:77 的 experiment.complete 仅要求 resultSummary，四个模板文件中 transitionArtifactRequirements 出现次数为 0，…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "verify:alternatives",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "a5f29b78d629827de",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652492,
+      "queuedAt": 1783995652473,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "LENS 2（备选项与引用事实核验）结论：文档引用的全部 16 个外…",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996320618,
+      "tokens": 104434,
+      "toolCalls": 46,
+      "durationMs": 668126,
+      "resultPreview": "{\"verdict\":\"LENS 2（备选项与引用事实核验）结论：文档引用的全部 16 个外部项目/资料均真实存在、归属正确，对各备选项的定性（包括所有声称的局限）经逐项对照后基本公允；尤其是最具杀伤力的核心发现——llm-wiki-compiler「文档宣称 experiment 完成需健康 result artifact、但出厂 AutoSci profile 源码未声明该 artifact 转换要求」——被本轮独立核验在上游源码层面坐实（且 v1.0.0 与审计 commit 的该文件 blob SHA 完全一致，发现可迁移到试点锁定版本）。未发现任何死链、张冠李戴或实质性歪曲，故无 P0。存在一个 P1：文档把 OpenAlex 列为知识栈第 3 层并在矩阵中评「运维成本 低」，却完全遗漏了 OpenAlex 于 2026 年 1-2 月生效的强制 API key + 按量计费变更…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "critique:consistency",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "afff575b57001fe50",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652493,
+      "queuedAt": 1783995652474,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "该文档的分层信任架构与「隔离试点+kill 条件」的总体思路是健…",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996088972,
+      "tokens": 64889,
+      "toolCalls": 11,
+      "durationMs": 436479,
+      "resultPreview": "{\"verdict\":\"该文档的分层信任架构与「隔离试点+kill 条件」的总体思路是健全的，且多处自我设限诚实（矩阵自称启发式、Windows 失败如实报「未通过」、请求 owner 批准而非自行放行）；但按 LENS 3 的字面审查，它**不能按现状接受**：(1) 一条 P0——§8 试点协议与 §9 自己的审计证据自相矛盾：锁定 v1.0.0/精确 commit 后，已实锤的文档/运行时 artifact gate 偏差必然存在于试点版本中，Day-1 第 6 项「验证文档宣称的门和运行时门完全一致」必然失败、kill 条件 2（「再次出现不可自动检测的偏差」——§9 的偏差正是人工静态核对发现、非自动检测）必然触发，验收路径按写就不可通过；(2) 成批收词纪律违规——T0–T4、l4-survey、16 对象名、17 关系名、方案 A/B/C 共 40+ 新代号无一登记，其中 T…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "critique:stage-fit",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "af014b17eb6e07b91",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652493,
+      "queuedAt": 1783995652474,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "该文档的架构判断本身质量较高（分层栈、单一正典、T0–T4 信任…",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996004153,
+      "tokens": 81774,
+      "toolCalls": 16,
+      "durationMs": 351660,
+      "resultPreview": "{\"verdict\":\"该文档的架构判断本身质量较高（分层栈、单一正典、T0–T4 信任分级、带成本/污染 kill 条款、Day-2 十篇子集），与团队纪律方向一致；但作为\\\"现在批准执行的 Stage-1A 隔离试点\\\"，阶段适配不成立。全文（grep 核实）零处提及 Stage-1C 决策包、C1/C4 前置、owner 关键路径或执行时机——而仓库现状是：Survey v2 已收官（commit 233dc7e \\\"调研收官\\\"）、Stage-1C 唯一等待 owner 选题、C1/C4 是 Stage-1B 放行前置。按 owner\\\"大工件三问\\\"逐项检验：①哪个 stage 消费试点产出？文档未答，实际消费者是 post-1C 检索轮与 Stage-2 证据纪律（验收门通过后也只到\\\"更大试点\\\"，C1/C4 必然在此之前用现有 Git+schema 完成）；②参数定了吗？1…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "critique:cost-realism",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "a67ccf120466be75d",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652494,
+      "queuedAt": 1783995652474,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "该文档的架构判断（分层信任、Git 唯一正典、带 kill 条件的隔…",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996317740,
+      "tokens": 96261,
+      "toolCalls": 25,
+      "durationMs": 665246,
+      "resultPreview": "{\"verdict\":\"该文档的架构判断（分层信任、Git 唯一正典、带 kill 条件的隔离试点）基本健全，但从成本现实性镜头看有一个成立的 P0 和一串 P1：(1) \\\"两天隔离试点\\\"是 3–5 倍低估，按 §8 实际清单的现实估算为 6–11 人日；(2) §6 的 owner-only 决策门在试点目标工具中根本无法运行时强制——工具自己的源码（src/workflows/actor-identity.ts）声明 actor 身份是 advisory、\\\"not access control\\\"，真实边界是文档从未预算的 OS 级用户隔离，这意味着 kill 条件 #1 在 Day-1 即被设计性触发，试点按现规格要么立即失败、要么把门静默降级为约定（正是文档 §3.1.A.3 自己谴责的\\\"文档说门存在、运行时未锁门\\\"模式）；(3) kill #7 的成本比较没有对照臂且基…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "critique:completeness",
+      "phaseIndex": 1,
+      "phaseTitle": "Review",
+      "agentId": "a0c434f96a8b19900",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783995652494,
+      "queuedAt": 1783995652474,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "该文档在防御姿态上是合格的（隔离试点、kill 条件、不迁移正典…",
+      "promptPreview": "You are one lens of a hostile internal review panel (敌意内审环). Target document (READ IT FULLY first): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md. This is a doctoral-adversarial architecture review recommending an isolated pilot of a layered open-source knowledge stack (Git+schema canon, Zotero, OpenAlex, atomicstrata/llm-w…",
+      "lastProgressAt": 1783996048560,
+      "tokens": 90005,
+      "toolCalls": 20,
+      "durationMs": 396066,
+      "resultPreview": "{\"verdict\":\"该文档在防御姿态上是合格的（隔离试点、kill 条件、不迁移正典），但它是以\\\"绿地\\\"视角写成的：对本仓库已经运转的存量知识机器（docs/claim_ledger.yaml 这一被明文指定为\\\"SINGLE SOURCE OF TRUTH\\\"的 claim 台账、305 条查询的 search-query-log.jsonl、scout-ledger、带 FT/AB/SC 证据等级的 neighbor-matrix、22 规则 conformance checker、git-blob 哈希 release_manifest）零盘点、零映射；对真实团队拓扑（一个 owner + 并发共享同一 checkout 的多个 AI 会话）设定了不存在的\\\"人类 reviewer\\\"角色且未讨论多写者纪律；把从未在本项目使用过的 Zotero 写成\\\"仍然适合承担\\\"的既有…"
+    }
+  ],
+  "totalTokens": 556735,
+  "totalToolCalls": 145
+}

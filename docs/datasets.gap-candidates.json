@@ -1,0 +1,151 @@
+[
+  {
+    "name": "aishell-1",
+    "gap": "G2",
+    "source": "hf",
+    "resource": "SLR33",
+    "primary": [
+      "https://www.openslr.org/resources/33/data_aishell.tgz"
+    ],
+    "cn_mirror": [
+      "https://openslr.magicdatatech.com/resources/33/data_aishell.tgz"
+    ],
+    "size_bytes_approx": 21645000000,
+    "license": "Apache-2.0",
+    "access": "open",
+    "role": "both",
+    "priority": "P1",
+    "notes": "SWITCHED to HF carlot/AIShell 2026-07-08 (openslr ~300KB/s from CN vs hf-mirror ~3MB/s; verified 41 files/20.16GB, full train+dev+test parquet). REPACKAGED parquet (audio bytes + text col), NOT original data_aishell.tgz tar layout. For original layout use HF shenyunhang/AISHELL-1 (wav tree + aishell_transcript_v0.8.txt). Original openslr archive fallback: openslr.org/resources/33/data_aishell.tgz (15.58GB, slow). Core zh-ASR memory pool + eval.",
+    "eu_mirror": [
+      "https://openslr.elda.org/resources/33/data_aishell.tgz"
+    ],
+    "ms_ids": [
+      "speech_asr/speech_asr_aishell1_trainsets",
+      "modelscope/speech_asr_aishell1_testsets"
+    ],
+    "repo": "carlot/AIShell"
+  },
+  {
+    "name": "cn-celeb1",
+    "gap": "G1",
+    "source": "openslr",
+    "resource": "SLR82",
+    "primary": [
+      "https://www.openslr.org/resources/82/cn-celeb_v2.tar.gz"
+    ],
+    "cn_mirror": [
+      "https://openslr.magicdatatech.com/resources/82/cn-celeb_v2.tar.gz"
+    ],
+    "size_bytes_approx": 23600000000,
+    "license": "CC BY-SA 4.0",
+    "access": "open",
+    "role": "both",
+    "priority": "P1",
+    "notes": "~22GB; 1000 zh speakers, >130k utts, 11 genres. Core zh speaker-verification set.",
+    "eu_mirror": [
+      "https://openslr.elda.org/resources/82/cn-celeb_v2.tar.gz"
+    ]
+  },
+  {
+    "name": "voxceleb1-test-split",
+    "gap": "G1",
+    "source": "hf",
+    "repo": "asahi417/voxceleb1-test-split",
+    "size_bytes_approx": 1385000000,
+    "license": "CC BY-SA 4.0 (VoxCeleb underlying; card states none)",
+    "access": "open",
+    "role": "eval",
+    "priority": "P1",
+    "notes": "1.29GB, 4874 rows, 40 speakers, split=test. en SV eval anchor."
+  },
+  {
+    "name": "esd",
+    "gap": "G3",
+    "source": "hf",
+    "repo": "sonchuate/ESD_dataset",
+    "size_bytes_approx": 2631000000,
+    "license": "research-only (original ESD terms; card has no license field)",
+    "access": "open",
+    "role": "both",
+    "priority": "P1",
+    "notes": "zh+en parallel emotional speech, 10+10 speakers, 5 emotions."
+  },
+  {
+    "name": "csemotions",
+    "gap": "G3",
+    "source": "hf",
+    "repo": "AIDC-AI/CSEMOTIONS",
+    "size_bytes_approx": 3307000000,
+    "license": "Apache-2.0",
+    "access": "open",
+    "role": "both",
+    "priority": "P1",
+    "notes": "Mandarin, 10 professional speakers (5M/5F), 7 emotions, 4160 samples. Cleanest-licensed zh SER."
+  },
+  {
+    "name": "thchs-30",
+    "gap": "G2",
+    "source": "openslr",
+    "resource": "SLR18",
+    "primary": [
+      "https://www.openslr.org/resources/18/data_thchs30.tgz",
+      "https://www.openslr.org/resources/18/test-noise.tgz",
+      "https://www.openslr.org/resources/18/resource.tgz"
+    ],
+    "cn_mirror": [
+      "https://openslr.magicdatatech.com/resources/18/data_thchs30.tgz",
+      "https://openslr.magicdatatech.com/resources/18/test-noise.tgz",
+      "https://openslr.magicdatatech.com/resources/18/resource.tgz"
+    ],
+    "size_bytes_approx": 6871000000,
+    "license": "Apache-2.0",
+    "access": "open",
+    "role": "memory-pool",
+    "priority": "P2",
+    "notes": "Optional zh-ASR clean-read diversity; AISHELL-1 alone covers G2.",
+    "eu_mirror": [
+      "https://openslr.elda.org/resources/18/data_thchs30.tgz",
+      "https://openslr.elda.org/resources/18/test-noise.tgz",
+      "https://openslr.elda.org/resources/18/resource.tgz"
+    ]
+  },
+  {
+    "name": "cn-celeb2",
+    "gap": "G1",
+    "source": "openslr",
+    "resource": "SLR82",
+    "primary": [
+      "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzaa",
+      "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzab",
+      "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzac"
+    ],
+    "cn_mirror": [
+      "https://openslr.magicdatatech.com/resources/82/cn-celeb2_v2.tar.gzaa",
+      "https://openslr.magicdatatech.com/resources/82/cn-celeb2_v2.tar.gzab",
+      "https://openslr.magicdatatech.com/resources/82/cn-celeb2_v2.tar.gzac"
+    ],
+    "size_bytes_approx": 80500000000,
+    "license": "CC BY-SA 4.0",
+    "access": "open",
+    "role": "memory-pool",
+    "priority": "P2",
+    "notes": "~75GB in 3 split parts (cat parts > full.tar.gz before untar). DEFERRED unless CN-Celeb1 insufficient.",
+    "eu_mirror": [
+      "https://openslr.elda.org/resources/82/cn-celeb2_v2.tar.gzaa",
+      "https://openslr.elda.org/resources/82/cn-celeb2_v2.tar.gzab",
+      "https://openslr.elda.org/resources/82/cn-celeb2_v2.tar.gzac"
+    ]
+  },
+  {
+    "name": "m3ed",
+    "gap": "G3",
+    "source": "manual",
+    "id_or_url": "https://github.com/AIM3-RUC/RUCM3ED (audio via Baidu pan.baidu.com/s/1JvaTabyKoQiWx2GtAIhpdw code 6b5q)",
+    "size_bytes_approx": null,
+    "license": "research/academic-only, non-commercial",
+    "access": "open",
+    "role": "eval",
+    "priority": "P2",
+    "notes": "zh dialog SER, 990 dialogues/24449 utts/7 emotions. Baidu-Cloud-only — MANUAL download; script prints instructions and skips."
+  }
+]

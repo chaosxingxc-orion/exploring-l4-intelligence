@@ -1,0 +1,116 @@
+{
+  "_comment": "Survey-sourced DOWNLOAD CANDIDATES (WS-D, 2026-07-07). This is NOT the frozen datasets.lock.json — it lists B-grade (publicly obtainable) datasets that are NOT yet on disk, surfaced by the post-2025.01 multimodal-knowledge survey and queued for owner review + fetch. Each entry fills an empty coverage cell or enables comparison with an admissible (A/B) baseline. Exact hf/git ids + pinned revisions must be RESOLVED at fetch time (source_hint is best-effort; 'source_resolve' entries need confirmation). To download after review: add confirmed entries to datasets.lock.json (status MISSING) or fetch directly. See wiki/survey/2026-07-07-multimodal-knowledge-systems-alignment.md. RESOLVED (web-verified 2026-07-07): authoritative download sources now live in scripts/data/fetch-candidates.sh CANDS[]. Direct HF: audiocaps-qa=AudioLLMs/audiocaps_qa_test, audio2tool=RVtech/Audio2Tool, auditorybench-plusplus=HJOK/AuditoryBenchpp, squtr=SLLMCommunity/SQuTR (21GB). Special: full-duplex-bench-v3=git DanielLin94144/Full-Duplex-Bench (+Google Drive), mlc-slm=gated nexdata.ai/competition/mlc-slm (register+DUA). AudioCaps-QA is borrowed from AudioBench, NOT a VAT-KG release (VAT-KG artifacts are private/404).",
+  "frozen": false,
+  "generated": "2026-07-07",
+  "source_survey": "wiki/survey/2026-07-07-multimodal-knowledge-systems-alignment.md (workflow wf_bfd8ebb7-8d5)",
+  "candidates": [
+    {
+      "name": "slue-sqa-5",
+      "task": "spoken-QA",
+      "key_modality": "audio",
+      "value_type": "answer",
+      "fills_gap": "spoken-QA breadth beyond heysquad/spoken-squad; audio-native retrieval",
+      "admissible_baseline": "WavRAG (2502.14727, A)",
+      "source_hint": "SLUE Phase-2 (asappresearch/slue-toolkit; HF 'asapp/slue-phase-2' — confirm subset SQA-5)",
+      "obtainability": "B (public)",
+      "status": "CANDIDATE",
+      "note": "WavRAG's second QA eval set; extends the only local-mapped audio-native RAG comparison."
+    },
+    {
+      "name": "audiocaps-qa",
+      "task": "audio-native QA",
+      "key_modality": "audio",
+      "value_type": "answer",
+      "fills_gap": "{audio-native ∩ training-free} comparison — currently EMPTY on local sets",
+      "admissible_baseline": "VAT-KG (2506.21556, B, training-free); M3KG-RAG (2512.20136, B, training-free)",
+      "source_hint": "derived from AudioCaps (HF 'd0rj/audiocaps' / cvssp); VAT-KG QA split may need paper release",
+      "obtainability": "B (AudioCaps public; QA split source_resolve)",
+      "status": "CANDIDATE",
+      "note": "The two training-free audio-native MMKG-RAG baselines both eval here; closest analogue to our thesis."
+    },
+    {
+      "name": "audio2tool",
+      "task": "audio-native function-calling",
+      "key_modality": "audio",
+      "value_type": "response",
+      "fills_gap": "agentic audio-native tool-use (Qwen3-Omni-30B baseline exists — our own model)",
+      "admissible_baseline": "Audio2Tool (2604.22821, B)",
+      "source_hint": "arXiv 2604.22821 release (source_resolve: github/HF pending)",
+      "obtainability": "B (public dataset per paper)",
+      "status": "CANDIDATE",
+      "note": "~30k queries, 8 compositional tiers; strongest non-local audio-native tool-use baseline; Qwen3-Omni-30B numbers directly comparable to our base model."
+    },
+    {
+      "name": "auditorybench-plusplus",
+      "task": "auditory-knowledge probe",
+      "key_modality": "audio",
+      "value_type": "labels",
+      "fills_gap": "audio-native/acoustic KNOWLEDGE probing (pitch/animal/instrument/property) — SER/SID-adjacent",
+      "admissible_baseline": "AuditoryBench++ (2509.17641, B)",
+      "source_hint": "arXiv 2509.17641 (data released; source_resolve github/HF)",
+      "obtainability": "B (released)",
+      "status": "CANDIDATE",
+      "note": "Directly probes non-lexical auditory commonsense — the acoustic-knowledge cell nearest crema-d/meld."
+    },
+    {
+      "name": "esc-50",
+      "task": "audio-event classification",
+      "key_modality": "audio",
+      "value_type": "labels",
+      "fills_gap": "audio-native acoustic-event knowledge (sound-scene keys → labels)",
+      "admissible_baseline": "iKnow-audio (EMNLP-2025.1759, B, audio KG rerank)",
+      "source_hint": "github karolpiczak/ESC-50 (HF 'ashraq/esc50')",
+      "obtainability": "B (public, confident)",
+      "status": "CANDIDATE",
+      "note": "Canonical 50-class environmental sound set; iKnow-audio's AKG reranks CLAP on this family."
+    },
+    {
+      "name": "fsd50k",
+      "task": "audio-event classification",
+      "key_modality": "audio",
+      "value_type": "labels",
+      "fills_gap": "audio-native acoustic-event knowledge (multi-label sound events)",
+      "admissible_baseline": "iKnow-audio (EMNLP-2025.1759, B)",
+      "source_hint": "Zenodo 4060432 (HF 'Fhrozen/FSD50k' — confirm)",
+      "obtainability": "B (public, confident)",
+      "status": "CANDIDATE",
+      "note": "51k clips, 200 classes; larger acoustic-knowledge key source for the audio-native cell."
+    },
+    {
+      "name": "mlc-slm",
+      "task": "multilingual conversational ASR",
+      "key_modality": "audio",
+      "value_type": "transcript",
+      "fills_gap": "conversational multilingual ASR retrieval (ST/ASR lane)",
+      "admissible_baseline": "MARS (2508.01166, B)",
+      "source_hint": "Interspeech 2025 MLC-SLM Challenge (nexdata.ai, registration)",
+      "obtainability": "B (public via registration)",
+      "status": "CANDIDATE",
+      "note": "~1604h; MARS's retrieval-and-select acoustic+text context baseline."
+    },
+    {
+      "name": "squtr",
+      "task": "spoken-query retrieval robustness",
+      "key_modality": "audio",
+      "value_type": "answer",
+      "fills_gap": "retrieval robustness testbed (noise/SNR) for the audio-key retriever itself",
+      "admissible_baseline": "SQuTR (2602.12783, B)",
+      "source_hint": "arXiv 2602.12783 (37,317 queries over 6 public EN/ZH sets; source_resolve)",
+      "obtainability": "B (built from public sets)",
+      "status": "CANDIDATE",
+      "note": "Directly stress-tests our KEY=audio retriever under acoustic noise — a diagnostic for kb_index/kb_embed."
+    },
+    {
+      "name": "full-duplex-bench-v3",
+      "task": "full-duplex tool-use (real audio)",
+      "key_modality": "audio",
+      "value_type": "response",
+      "fills_gap": "agentic/full-duplex on REAL (not TTS) audio; soulx-duplug-adjacent",
+      "admissible_baseline": "Full-Duplex-Bench-v3 (2604.04847, B)",
+      "source_hint": "arXiv 2604.04847 (100 real recordings; source_resolve github/HF)",
+      "obtainability": "B (real-audio benchmark)",
+      "status": "CANDIDATE",
+      "note": "One of few real-audio (not synthetic) agentic sets; complements our soulx-duplug/eva/tau2."
+    }
+  ]
+}

@@ -1,106 +1,96 @@
 # Project Thesis
 
-The single, canonical statement of what this repo is for. Everything else — the four works, the
-shared library, the experiments — serves this thesis. Read this first, then [[Per-Work-Status]].
+The single, canonical statement of what this series is for. Read right after
+[[Research-Objective]] (the hot current-state entry).
 
 ## Thesis (north star)
 
-A modern multimodal / omni LLM has already absorbed broad, **cross-modal, multi-granularity task
-knowledge** during pretraining — speech recognition, speaker identity, content understanding,
-dialogue, translation — from large-scale unsupervised and parallel corpora. This series asks one
-question:
+A modern omni / multimodal LLM has already absorbed broad, **cross-modal, multi-granularity task
+knowledge** during pretraining. This series asks one question:
 
-> **How far can _training-free RL_ — reward-guided optimization that changes no weights and no model
-> structure — go to _activate_ that latent knowledge and lift a frozen model's out-of-the-box
-> performance on specific speech tasks?**
+> **How far can _training-free RL_ — reward-guided control that changes none of the core model's
+> weights or internal architecture — go to _activate_ that latent knowledge and lift a frozen,
+> black-box omni model's performance on speech / audio tasks?**
 
-We treat the pretrained model as **fixed** and search, at inference time, over its own behaviors
-(decoding, candidate selection, task-conditioning, representation read-out) under **verifiable
-rewards**. No fine-tuning, no LoRA, no gradient on the base model.
+**Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; formal Gate S0 signature
+pending — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
+**external reward-guided control plane** (an agentic system) around the frozen black-box core:
+observation/supply building, state & external memory, tool/retrieval use, candidate generation,
+evaluation, selection, budget/risk/stopping, provenance & information-boundary guarding.
+**Training-free RL is the north-star principle pulling this system's design** — reward/advantage
+decides the *next action*; in-pool selection is its degenerate special case. The **first innovation
+hypothesis is the system itself** (the founding UMBRELLA identity, 2026-06-26): occupancy against
+ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is under survey — **no
+"first-ever" claims** before that check closes.
+
+- **Black-box contract**: core methods may not require weights, gradients, hidden states, attention,
+  or guaranteed logprobs. The local llama.cpp deployment is a low-cost verification environment —
+  gray-box diagnostics only, never load-bearing.
+- **North-star metric family**: headroom / realization accounting — H(c) and the ρ family
+  (pool-level, generalizing to trajectory-level). **The metric pulls the design; the metric is not
+  the research object** (the 2026-07 inversion lesson — see tombstones).
+- **Resource posture**: reach the ceiling first (no budget cap; budget logged), then consolidate,
+  then cost-reduce. Equal-budget comparisons are `PHASE-3_TOOL`s, not phase-1 gates.
 
 ## Three terms (defined once, used everywhere)
 
-- **Training-free RL** — reward-guided, gradient-free optimization performed at inference time
-  (best-of-N, reward-guided decoding, reranking, task-conditioning, inference-time representation
-  search) that leaves the base model's weights and architecture untouched. W1 is the mature reference
-  implementation of this *pattern*.
+- **Training-free RL** — reward-guided, gradient-free control at inference time over a frozen core
+  (sequential control; best-of-N / reranking / MBR as special cases). External control-plane
+  structure is explicitly designed and versioned; the core's weights and architecture stay untouched.
 - **Activation of pretrained knowledge** — eliciting capabilities the base model already holds but
-  does not surface out-of-the-box, by steering it with verifiable task rewards rather than re-training.
-- **Speech disentanglement** — for an omni / embedding model, steering a *single* audio input's
-  representation so that **task-conditioned views** (content/ASR+ST, speaker-ID, emotion/SER,
-  language+intent) become separable and each yields strong, task-specific downstream performance —
-  i.e. different task conditioning produces different, individually-better representations of the same
-  audio *without changing the model*.
-
-## Flagship claim (W4)
-
-> Training-free RL can steer a **frozen omni-embedding model** so that **different task-conditioned
-> embeddings of the same audio yield different, individually-better downstream performance** across
-> content/ASR+ST, speaker-ID, emotion/SER, and language+intent — demonstrating disentanglement of a
-> frozen model's representation purely by reward-guided activation.
-
-The flagship backbone is `omni-embed-nemotron-3b` (NVIDIA, ~4.7B, output = dense vector dim 2048; a
-bi-encoder retrieval model built on the Qwen2.5-Omni Thinker). The exact inference-time *operator*
-(where the reward-guided search acts) and its mathematical convergence conditions for the speech
-modality are argued in [[W4-Training-Free-RL-Feasibility]].
+  does not surface out-of-the-box; measured as realized headroom under verifiable rewards.
+- **External control plane（外部控制平面）** — the agent scaffold around the frozen core (supply,
+  memory, tools, evaluation, selection, budget, stopping); the registered plain name for what was
+  colloquially「外设优化」.
 
 ## How the four works relate
 
-The series is a progression, all grounded in training-free / lightweight RL that does not update base
-weights. **W4 is the flagship first study**; **W1 is the mature training-free *pattern* reference**
-whose verifiable-reward and evaluation machinery the others reuse.
+| # | Work (repo) | Role |
+|---|---|---|
+| **W1** | `speech-mllm-training-free-rl` | **Primary-program carrier** — external control plane over a frozen black-box omni core; the mature selector/evaluator line continues as its component dossier |
+| W4 | `speech-mllm-omni-embedding-rl` | Separate work — L0/L1 embedding-utility studies (fresh proposal pending #29) |
+| W2 | `speech-mllm-efficient-rl-alignment` | Supporting — efficient GRPO/DPO (LoRA) speech↔language alignment |
+| W3 | `speech-mllm-multitask-rl` | Supporting — one policy, RL across ASR/ST/SID/SER via verifiable rewards |
 
-| # | Work (repo) | Role | Focus |
-|---|---|---|---|
-| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings across content/ASR+ST, speaker-ID, emotion/SER, language+intent |
-| **W1** | `speech-mllm-training-free-rl` | **Pattern reference** | the mature, reusable training-free reward/eval machinery (best-of-N, reward-guided decoding, reranking) |
-| W2 | `speech-mllm-efficient-rl-alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
+## Supersession
 
-See [[Architecture]] for the repo model and shared library, [[Data-and-Assets]] for models/datasets,
-and [[Decision-Log]] for why the series was re-centered on this thesis.
+This 2026-07-15 restatement **supersedes** the 2026-07-12 note (selector-first primary study,
+"primary metric = ρ") and the earlier W4-flagship framing, per owner rulings in Decision-Log
+续45/46; canonical force is formalized by the Gate S0 signature. Prior full text: git history
+(`git show e482465:wiki/Project-Thesis.md`); dead terms & incident history:
+`wiki/archive/terminology-tombstones.md`. The W4 "speech disentanglement" flagship claim remains
+dead (L2–L3 criteria unmet).
 
 ---
 
 ## 中文
 
-本仓存在的唯一、权威目的陈述。四部曲、共享库、所有实验都服务于这个主旨。请先读本页，再读
-[[Per-Work-Status]]。
+本系列唯一权威目的陈述。紧随 [[Research-Objective]]（热层现状入口）之后读。
 
 ### 主旨（北极星）
 
-现代多模态 / omni 大模型在预训练阶段，已经从大规模无监督数据与平行语料中吸收了**跨模态、多粒度的
-任务知识**——语音识别、说话人识别、语音内容理解、语音对话、翻译。本系列只问一个问题：
+现代 omni / 多模态大模型在预训练中已吸收**跨模态、多粒度的任务知识**。本系列只问一个问题：
 
-> **仅靠「免训练 RL」——不改权重、不改结构、由奖励引导的推理时优化——能在多大程度上「激活」这些潜藏
-> 知识，从而提升一个冻结模型在特定语音任务上的开箱即用表现？**
+> **仅靠「免训练 RL」——不改核心模型权重与内部结构、由奖励引导的控制——能在多大程度上「激活」
+> 这些潜藏知识，提升一个冻结黑盒 omni 模型在语音任务上的表现？**
 
-我们把预训练模型视作**固定**，在推理时、在**可验证奖励**下，搜索模型自身的行为（解码、候选选择、
-任务条件化、表示读出）。不微调、不 LoRA、不对基座求梯度。
+**纲领表述（owner 裁决 2026-07-14/15，续45/46；Gate S0 签署待办）**：我们构建并研究的对象是围绕
+冻结黑盒核心的**外部 reward-guided 控制平面**（agentic system）：观察/供给构造、状态与外部记忆、
+工具/检索、候选生成、评估、选择、预算/风险/停止、溯源与信息边界守卫。**免训练 RL 是牵引该系统
+设计的北极星原则**——reward/advantage 决定下一步动作，池内选择是退化特例。**第一创新假设 =
+系统本身**（立项即有的 UMBRELLA 身份）：对 ReAct/Reflexion/LATS/IAD/MM-ReAct/AudioToolAgent 类
+先行工作的占据核查未完成前，**不得宣称任何「首个」**。
 
-### 三个术语（只定义一次，全仓通用）
+- **黑盒合同**：核心方法不得要求 weights/gradients/hidden states/attention/保证 logprobs；
+  本地 llama.cpp = 低成本校验环节（灰盒诊断，永不承重）。
+- **北极星指标族**：头空/兑现率记账——H(c) 与 ρ 族（池级→轨迹级）。**指标牵引设计，指标不是
+  研究对象**（2026-07 指标倒置教训）。
+- **资源姿态**：全力摸高（预算不设 cap、照实记录）→ 持续整合 → 成本压降；等预算对照 =
+  `PHASE-3_TOOL`。
 
-- **免训练 RL（training-free RL）**：推理时进行的、免梯度、奖励引导的优化（best-of-N、奖励引导解码、
-  重排、任务条件化、推理时表示搜索），不动基座的权重与结构。W1 是该范式的成熟参考实现。
-- **预训练知识激活**：用可验证的任务奖励引导模型，把它「已具备但开箱不显现」的能力 surface 出来，
-  而非重新训练。
-- **语音解耦（speech disentanglement）**：对 omni / 嵌入模型，引导同一段音频的表示，使其在不同
-  **任务条件**下（内容/ASR+ST、说话人、情感/SER、语言+意图）变得可分离、且各自在对应下游任务上更强
-  ——即不改模型、仅靠不同条件化即可得到不同且更好的表示。
+### 取代说明
 
-### 旗舰科学主张（W4）
-
-> 免训练 RL 可以引导一个**冻结的 omni 嵌入模型**，使**同一段音频在不同任务条件下的嵌入产生不同、且
-> 各自更优的下游表现**，覆盖内容/ASR+ST、说话人、情感/SER、语言+意图——从而证明：仅靠奖励激活，就能
-> 解耦一个冻结模型的表示。
-
-旗舰底座是 `omni-embed-nemotron-3b`（NVIDIA，约 4.7B，输出 2048 维稠密向量；基于 Qwen2.5-Omni Thinker
-的双编码器检索模型）。免训练 RL 究竟作用在哪一层（算子形态），以及它对语音模态的数学收敛条件，见
-[[W4-Training-Free-RL-Feasibility]]。
-
-### 四部曲如何关联
-
-整个系列是一条递进线，全部建立在「不更新基座权重」的免训练 / 轻量 RL 之上。**W4 是旗舰首发工作**，
-**W1 是成熟的免训练「范式」参考**，其可验证奖励与评测机制被其余工作复用。各工作的角色与重心见上方
-英文表（不重复表格）。仓库结构与共享库见 [[Architecture]]，模型与数据见 [[Data-and-Assets]]，系列为何
-重定到此主旨见 [[Decision-Log]]。
+本 2026-07-15 版取代 2026-07-12 取代说明（selector-first primary、「primary 指标 = ρ」）与更早的
+W4 旗舰框架（据续45/46；S0 签署使效力正式化）。旧全文在 git 历史
+（`git show e482465:wiki/Project-Thesis.md`）；死名词与事故史在
+`wiki/archive/terminology-tombstones.md`。W4「语音解耦」旗舰主张维持废止（L2–L3 判据未过）。

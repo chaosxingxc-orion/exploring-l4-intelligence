@@ -1,0 +1,299 @@
+{
+ "models": [
+  {
+   "name": "qwen3-omni-30b-a3b-instruct",
+   "kind": "omni-LLM backbone",
+   "roles": [
+    "H-b hidden-state key (candidate export source)",
+    "primary-generator backbone (weights of the GGUF twin)"
+   ],
+   "runnable_24gb": "HF safetensors = int4 AutoRound dir (25GB, 13 shards, quantization_config.json present). Vanilla transformers from_pretrained OOMs: MoE experts load MISSING and re-init in fp32 -> ~58GB (measured, Inference-Engine-Choice.md). So it does NOT run for live generation OR hidden-state export via plain HF. For an H-b own-embedding readout you would need an AutoRound-aware load (auto-round / gptqmodel dequant) or fall back to llama.cpp --embedding on the GGUF twin. Cannot co-reside with resident llama-server regardless. P3 UNKNOWN: is audio-conditioned thinker hidden-state export reachable from this int4 dir at all.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "content/ASR",
+    "spoken-QA",
+    "audio-MCQ",
+    "H-b single-space readout"
+   ],
+   "evidence": "datasets.lock.json models[0]; Inference-Engine-Choice.md L19-27 (int4 OOM); survey 2026-07-08 sec3 L92 (llama.cpp embedding export unverified)",
+   "gaps": "P3: vanilla-HF int4 load OOMs; audio hidden-state/embedding export path from this dir unverified -- needs AutoRound-aware load or is deferred to the GGUF llama.cpp embedding route."
+  },
+  {
+   "name": "qwen3-omni-30b-a3b-instruct-gguf",
+   "kind": "omni-LLM backbone",
+   "roles": [
+    "primary-generator (resident llama-server, produced the W1 best-of-N)",
+    "H-b hidden-state key (candidate, IF llama.cpp --embedding works on the omni thinker)"
+   ],
+   "runnable_24gb": "PROVEN path. llama.cpp Q8_0 (30.3GB) + bf16 mmproj (2.1GB), partial offload -ngl 28 (MoE 3B-active keeps it fast), resident llama-server ~4min load, ~2.8s/generation, POST /v1/chat/completions with input_audio. This is THE working local engine and occupies most of the 24GB -> everything else must run on CPU or time-share the GPU.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "ASR",
+    "ST",
+    "spoken-QA",
+    "audio-MCQ",
+    "best-of-N generation"
+   ],
+   "evidence": "Inference-Engine-Choice.md L33-56; datasets.lock.json models[1]; memory qwen3-omni-30b-llamacpp",
+   "gaps": "P3: whether llama.cpp can export the thinker's audio-conditioned embedding for H-b is unverified (survey sec3 L92)."
+  },
+  {
+   "name": "moss-audio-8b-instruct",
+   "kind": "audio-LLM backbone",
+   "roles": [
+    "cross-model-verifier(new-info element)",
+    "second-generator (independent best-of-N pool)"
+   ],
+   "runnable_24gb": "HF transformers bf16 safetensors ~17GB (4 shards), custom arch MossAudioModel (trust_remote_code: configuration_moss_audio.py + processing_moss_audio.py ARE now on disk -- the earlier 'processor .py missing' offline failure in Inference-Engine-Choice.md predates these files). Fits on 24GB ALONE but cannot co-reside with the resident llama-server -> sequential/GPU time-share (stop llama-server, or generate candidates first then verify in a second pass). No GGUF exists -> no llama.cpp path; HF transformers only, needs a transformers version that supports the moss_audio arch.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "ASR",
+    "spoken-QA",
+    "audio-MCQ",
+    "cross-model verification"
+   ],
+   "evidence": "config.json arch=MossAudioModel, language_config.model_type=qwen3; README license apache-2.0; Inference-Engine-Choice.md L28-30",
+   "gaps": "DELTA_CORR CAVEAT: uses a Qwen3 LM backbone -> partial lineage overlap with Qwen3-Omni's Qwen3-MoE thinker, so decorrelation is weaker than a fully independent-lineage model (its audio encoder is still its own). P3: HF custom-arch load not yet verified to actually run offline; time-share only."
+  },
+  {
+   "name": "nemotron3-nano-omni-nvfp4",
+   "kind": "omni-LLM backbone",
+   "roles": [
+    "cross-model-verifier(new-info element) -- HIGHEST decorrelation candidate",
+    "second-generator (if runtime solved)"
+   ],
+   "runnable_24gb": "UNKNOWN -> explicit P3 blocker. NVFP4 mixed-precision (modelopt producer; quant_algo MIXED_PRECISION with NVFP4+FP8 weights, FP8 KV-cache), 21GB. Arch = NemotronH_Nano_Omni_Reasoning_V3 = NemotronH Mamba2-hybrid LM + parakeet audio encoder + radio vision. NVFP4 needs Blackwell (sm_120 present) AND an execution stack: TensorRT-LLM or vLLM+modelopt. vLLM 0.14.0 already crashes on omni multimodal processors (Inference-Engine-Choice.md); TRT-LLM support for this hybrid omni arch is unverified. No GGUF (llama.cpp supports neither NVFP4 nor NemotronH-omni). 21GB alone -> no co-residence, time-share only.",
+   "license": "other = nvidia-open-model-agreement (NVIDIA Open Model Agreement -- permissive, commercial OK). NOTE: this is DIFFERENT from omni-embed-nemotron-3b's NVIDIA OneWay Noncommercial license -- this one is usable.",
+   "task_families": [
+    "audio-reasoning",
+    "spoken-QA",
+    "cross-model verification"
+   ],
+   "evidence": "config.json arch=NemotronH_Nano_Omni_Reasoning_V3 (model_type parakeet/nemotron_h); hf_quant_config.json producer=modelopt quant_algo=MIXED_PRECISION NVFP4/FP8; README license nvidia-open-model-agreement",
+   "gaps": "P3 PRIMARY BLOCKER: no verified NVFP4 execution path for this Mamba-hybrid omni arch on this box (TRT-LLM/vLLM+modelopt both unproven). If solved, it is the BEST delta_corr verifier (most architecturally divergent from Qwen3-Omni). Do not assume runnable."
+  },
+  {
+   "name": "minicpm-o-4_5",
+   "kind": "omni-LLM backbone",
+   "roles": [
+    "cross-model-verifier(new-info element)",
+    "second-generator (independent best-of-N pool)"
+   ],
+   "runnable_24gb": "HF transformers bf16 safetensors ~19GB (4 shards), custom arch MiniCPMO (trust_remote_code: modeling_minicpmo.py present) = MiniCPM LLM + whisper-medium audio encoder + siglip vision, init_audio=True. Fits on 24GB ALONE (tight) but no co-residence with llama-server -> GPU time-share. MiniCPM-o family has had upstream llama.cpp GGUF support historically (2.6), but NO GGUF for 4.5 on disk and 4.5 GGUF support is unverified. Earlier offline failure ('driver hardcodes Qwen3-Omni arch', Inference-Engine-Choice.md) was a runner-script issue, not the model.",
+   "license": "Apache-2.0 (README declares license: apache-2.0)",
+   "task_families": [
+    "ASR",
+    "spoken-QA",
+    "audio-MCQ",
+    "cross-model verification"
+   ],
+   "evidence": "config.json arch=MiniCPMO, audio_config present, whisper-medium audio; README license apache-2.0; Inference-Engine-Choice.md L28-30",
+   "gaps": "DELTA_CORR: independent lineage (MiniCPM LLM + Whisper audio, NOT Qwen) -> stronger decorrelation than moss, weaker-arch-divergence than nemotron. P3: HF custom-arch omni load not yet verified running; no 4.5 GGUF; time-share only."
+  },
+  {
+   "name": "omni-embed-nemotron-3b",
+   "kind": "omni embedder",
+   "roles": [
+    "H-b omni single-space key (comparison-only)",
+    "NC-license comparison-only content-key candidate"
+   ],
+   "runnable_24gb": "HF sentence-transformers, bf16 ~8.8GB (2 shards). Run on CPU (embedder precedent, GPU held by llama-server) -> co-resides; or GPU time-share. Official API is ASYMMETRIC: SentenceTransformer(trust_remote_code=True) + encode_document([{'audio':path}]) / encode_query(q), dim 2048, audio max_length ~128s. Current in-house loader is BROKEN (feeds bare wav path to .encode()).",
+   "license": "NVIDIA OneWay Noncommercial (LICENSE file = 'NVIDIA License') -> comparison-only; conflicts with the effect-over-novelty open-source stance.",
+   "task_families": [
+    "content/ASR retrieval",
+    "spoken-QA",
+    "cross-modal embedding"
+   ],
+   "evidence": "survey 2026-07-08 F7 L55-60; memory speech2vec-survey-load-bearing-facts; LICENSE file first lines '# NVIDIA License'; datasets.lock.json models[5]",
+   "gaps": "P3: fix asymmetric encode_document/encode_query loader. NC license = comparison-only. Audio near-zero-shot weak (AudioCaps R@1 20.5)."
+  },
+  {
+   "name": "glap",
+   "kind": "contrastive audio-text",
+   "roles": [
+    "H-a content PRIMARY key (the CLAP replacement, zh+en confirmed)"
+   ],
+   "runnable_24gb": "HF transformers trust_remote_code (configuration_glap.py + modeling_glap.py + model.safetensors ~3.2GB), encode_audio() API + sentencepiece 256k tokenizer. CPU or GPU time-share; ~3.2GB on CPU co-resides with llama-server. P1 loader work.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "content/ASR retrieval",
+    "spoken-QA key",
+    "intent key"
+   ],
+   "evidence": "survey 2026-07-08 F1 (LibriSpeech test-other R@1 93.8 en / AISHELL-2 98.5 zh); memory facts; models.candidates.json glap",
+   "gaps": "P1: build encode_audio() loader; 3.43GB (larger than survey estimate)."
+  },
+  {
+   "name": "lco-embedding-omni-7b-gguf",
+   "kind": "omni embedder",
+   "roles": [
+    "H-b omni single-space key (strongest F2 evidence: MAEB #1)",
+    "content-key candidate"
+   ],
+   "runnable_24gb": "llama.cpp --embedding --pooling last (dim 3584), Q8_0 8.1GB + mmproj F16 2.6GB (mmproj REQUIRED for audio), ht-llama.cpp conversion (Qwen2.5-Omni-thinker + audio mmproj). CANNOT co-reside with the resident 30B llama-server -> sequential/GPU time-share (manifest).",
+   "license": "Apache-2.0",
+   "task_families": [
+    "content/ASR retrieval",
+    "spoken-QA key",
+    "H-b single-space"
+   ],
+   "evidence": "survey 2026-07-08 F2 (LCO-Omni-7B MAEB 52.2% #1, no audio contrastive training); models.candidates.json lco-embedding-omni-7b-gguf; on-disk Q8 8.1GB + mmproj 2.6GB",
+   "gaps": "P3: time-share only; verify llama.cpp omni-embedding extraction pipeline end-to-end."
+  },
+  {
+   "name": "lco-embedding-omni-3b-gguf",
+   "kind": "omni embedder",
+   "roles": [
+    "H-b omni single-space key (co-resident-capable option)",
+    "content-key candidate"
+   ],
+   "runnable_24gb": "llama.cpp --embedding --pooling last, Q8_0 3.6GB + mmproj F16 2.6GB (mmproj REQUIRED for audio). Manifest claims it is the ONLY omni-embedder that co-resides with the resident llama-server on 24GB -- but the 30B -ngl 28 already occupies most VRAM, so this concurrency claim needs a concrete VRAM check (P3).",
+   "license": "Apache-2.0",
+   "task_families": [
+    "content/ASR retrieval",
+    "spoken-QA key",
+    "H-b single-space"
+   ],
+   "evidence": "models.candidates.json lco-embedding-omni-3b-gguf ('only omni-embedder option that co-resides'); on-disk Q8 3.6GB + mmproj 2.6GB",
+   "gaps": "P3: verify actual co-residence VRAM budget alongside the 30B -ngl 28 server; verify omni-embedding extraction pipeline."
+  },
+  {
+   "name": "meralion-speech-encoder-2",
+   "kind": "SSL encoder",
+   "roles": [
+    "H-a content/intent candidate (zh+en coverage)",
+    "H-b-adjacent single-space encoder",
+    "SSL baseline"
+   ],
+   "runnable_24gb": "HF transformers trust_remote_code (best-rq conformer: configuration/modeling/processing_bestrq_conformer.py + model.safetensors ~2.4GB). NOT gated. CPU or GPU time-share; ~2.4GB on CPU co-resides.",
+   "license": "MERaLiON Public License (verbatim MIT + attribution; research AND commercial OK)",
+   "task_families": [
+    "content",
+    "intent (IC 98.95)",
+    "SSL probe baseline"
+   ],
+   "evidence": "models.candidates.json meralion-speech-encoder-2; survey PARTIAL #11 (WavLM-large beats it on 5 SUPERB tasks, SID lowest 88.96 -- real value is zh+en coverage not全任务SOTA)",
+   "gaps": "Positioning: competitive claim overstated (survey #11); load-bearing value = bilingual coverage."
+  },
+  {
+   "name": "campplus-zh",
+   "kind": "specialist embedder (speaker)",
+   "roles": [
+    "H-a speaker key (zh)"
+   ],
+   "roles_note": "",
+   "runnable_24gb": "Tiny (27MB, campplus_cn_common.bin). 3D-Speaker/FunASR pipeline loader (NOT transformers). CPU, co-resides freely with llama-server. P1 loader work.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "speaker-ID (zh)"
+   ],
+   "evidence": "models.candidates.json campplus-zh; survey F3 (zh 200k-speaker specialist beats generic encoders at ~25x fewer params)",
+   "gaps": "P1: build 3D-Speaker/FunASR loader (not HF transformers)."
+  },
+  {
+   "name": "eres2netv2-zh",
+   "kind": "specialist embedder (speaker)",
+   "roles": [
+    "H-a speaker key (zh, primary speaker candidate)"
+   ],
+   "runnable_24gb": "Tiny (69MB, pretrained_eres2netv2.ckpt). ModelScope/3D-Speaker loader. CPU, co-resides freely. P1 loader work.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "speaker-ID (zh)"
+   ],
+   "evidence": "models.candidates.json eres2netv2-zh; survey F3 speaker specialists; memory facts (ERes2NetV2 zh = speaker key candidate)",
+   "gaps": "P1: build ModelScope/3D-Speaker loader."
+  },
+  {
+   "name": "redimnet-b6",
+   "kind": "specialist embedder (speaker)",
+   "roles": [
+    "H-a speaker key (en, VoxCeleb2-ft)"
+   ],
+   "runnable_24gb": "Tiny (58MB, b6-vox2-ft_lm.pt weights only). Needs ReDimNet code from github IDRnD/ReDimNet (pin commit 9438b1e) as custom loader. CPU, co-resides freely. P1 loader work.",
+   "license": "MIT",
+   "task_families": [
+    "speaker-ID (en)"
+   ],
+   "evidence": "models.candidates.json redimnet-b6; survey F3 (ReDimNet as ~25x-fewer-param speaker specialist)",
+   "gaps": "P1: weights are bare .pt -> must clone ReDimNet repo code at pinned commit to instantiate."
+  },
+  {
+   "name": "emotion2vec-s",
+   "kind": "specialist embedder (emotion)",
+   "roles": [
+    "H-a emotion key (primary emotion candidate)"
+   ],
+   "runnable_24gb": "FunASR/emotion2vec loader (NOT transformers). CPU, would co-reside freely. BUT DOWNLOAD IS INCOMPLETE: on-disk checkpoint.pt = 1,074,906 bytes (~1MB) with a leftover checkpoint.pt.aria2 control file and .hfd/ dir; manifest expects ~1.13GB. NOT usable until refetched.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "emotion/SER (zh+en)"
+   ],
+   "evidence": "on-disk: du 1.1M, checkpoint.pt 1.07MB + checkpoint.pt.aria2 present; models.candidates.json expects 1132759210 bytes; survey PARTIAL #26 (real zh/M3ED gain only +1.8)",
+   "gaps": "P3 DATA-COMPLETENESS BLOCKER: checkpoint is PARTIAL (~1MB of 1.13GB, aria2 resume file present) -> must refetch before any use. This contradicts the campaign doc's '18 models all complete'底数. Also zh-SER empirical gain small (+1.8)."
+  },
+  {
+   "name": "emotion2vec-plus-large",
+   "kind": "specialist embedder (emotion)",
+   "roles": [
+    "H-a emotion key (larger alternate)"
+   ],
+   "runnable_24gb": "FunASR loader (model.pt ~1.9GB + config.yaml + tokens.txt). CPU, co-resides freely. Complete on disk (1.9GB).",
+   "license": "other (non-SPDX model-license) -- VERIFY NC terms before publication (manifest flag raised to owner)",
+   "task_families": [
+    "emotion/SER"
+   ],
+   "evidence": "models.candidates.json emotion2vec-plus-large (license flag); on-disk model.pt present ~1.9GB",
+   "gaps": "License NC-verify before publication; FunASR loader P1."
+  },
+  {
+   "name": "wavlm-large",
+   "kind": "SSL encoder",
+   "roles": [
+    "SSL baseline (strong)",
+    "H-a speaker/content probe baseline"
+   ],
+   "runnable_24gb": "HF transformers WavLMModel (~316M, pytorch_model.bin 1.2GB, no safetensors). CPU, co-resides freely. P1 loader trivial (WavLMModel).",
+   "license": "MIT (upstream microsoft/unilm; not declared on HF card)",
+   "task_families": [
+    "speaker probe",
+    "content probe",
+    "SSL baseline"
+   ],
+   "evidence": "models.candidates.json wavlm-large; survey F3/PARTIAL #11 (WavLM-large beats MERaLiON-SE2 on 5 SUPERB tasks)",
+   "gaps": "License not declared on HF card (upstream MIT)."
+  },
+  {
+   "name": "wavlm-base-plus",
+   "kind": "SSL encoder",
+   "roles": [
+    "SSL baseline (speaker-robust)",
+    "H-a probe baseline"
+   ],
+   "runnable_24gb": "HF transformers WavLMModel (~95M, pytorch_model.bin 361MB, no safetensors). CPU, co-resides freely. P1 loader trivial.",
+   "license": "MIT (upstream microsoft/unilm; not declared on HF card)",
+   "task_families": [
+    "speaker probe",
+    "SSL baseline"
+   ],
+   "evidence": "models.candidates.json wavlm-base-plus; survey F3 (TS-SUPERB speaker-robust baseline)",
+   "gaps": "License not declared on HF card (upstream MIT)."
+  },
+  {
+   "name": "clap-htsat-unfused",
+   "kind": "contrastive audio-text",
+   "roles": [
+    "NEGATIVE CONTROL (protocol validity check)",
+    "sound-event / audio-caps domain key only"
+   ],
+   "runnable_24gb": "HF transformers ClapModel (~150M, pytorch_model.bin 590MB). CPU, co-resides freely. Already the only currently-wired KB key.",
+   "license": "Apache-2.0",
+   "task_families": [
+    "sound-event retrieval",
+    "negative-control for content tasks"
+   ],
+   "evidence": "survey 2026-07-08 F1 (LibriSpeech test-other content R@1 ~0.1% -> DEAD for lexical content; a good protocol MUST kill CLAP on content tasks); memory facts; models.candidates.json clap-htsat-unfused",
+   "gaps": "Deliberately kept as negative control -- unusable for spoken lexical content; valid only in the sound-event domain."
+  }
+ ]
+}

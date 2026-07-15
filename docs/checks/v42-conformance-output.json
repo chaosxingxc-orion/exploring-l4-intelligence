@@ -1,0 +1,434 @@
+{
+  "meta": {
+    "tool": "scripts/checks/v42_conformance.py",
+    "rules_version": "v42-remediation/rules-2026-07-13",
+    "manifest": "docs/checks/v42-rules.yaml",
+    "root": "/mnt/d/chao_workspace/exploring-l4-intelligence",
+    "run_utc": "2026-07-13T08:31:23Z",
+    "self_scope": "machine-assisted internal consistency check (second pass); NOT independent oversight; NOT external peer review; certifies package self-consistency only, not scientific validity",
+    "inputs": {
+      "docs/checks/v42-rules.yaml": {
+        "sha256": "b71d92fad60af6ccf657b771fd0e1f81ff75d1eeedb003a17ddb47d0f6d8f45a",
+        "exists": true,
+        "role": "rule_manifest"
+      },
+      "wiki/2026-07-12-research-proposal-v42-external-review.md": {
+        "sha256": "3f0ac5b6e5c5e021ffc9b85c10f7b8b9f07a4bd6395de6350bcd8c87e1ba18e0",
+        "exists": true,
+        "role": "proposal",
+        "lines": 667,
+        "appendix_d_start_line": 658,
+        "appendix_a_start_line": 531
+      },
+      "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md": {
+        "sha256": "bb8c569ac6cddc8e3f3762ad499f792005154785ba7603b3f0d2bfd1aee1fa60",
+        "exists": true,
+        "role": "letter",
+        "lines": 97,
+        "appendix_d_start_line": null,
+        "appendix_a_start_line": null
+      },
+      "docs/claim_ledger.yaml": {
+        "sha256": "c7a29949a2ef5c493e9359e67605f345110ca8e4095da5dd524b9fef8c4db73d",
+        "exists": true,
+        "role": "ledger",
+        "lines": 535,
+        "appendix_d_start_line": null,
+        "appendix_a_start_line": null
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "BANNED-VERIFIABLE-REWARD",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=1 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-RELEASE-READY",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=2 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-EQUALBUDGET-NEAR-K1",
+      "type": "proximity",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "anchor-near co-occurrences=17 (separated ones excluded)"
+    },
+    {
+      "id": "BANNED-UNPREDICTABLE-CUSTODY",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=3 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-BUSINESS-EFFECT-TITLE",
+      "type": "banned_phrase_in_titles",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "title-line matches=1"
+    },
+    {
+      "id": "BANNED-FUTURE-DATE",
+      "type": "future_date",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "calendar-dates scanned=16 threshold=2026-07-14"
+    },
+    {
+      "id": "REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 11}"
+    },
+    {
+      "id": "REQUIRED-NOT-EVALUATED-RULE",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 11}"
+    },
+    {
+      "id": "REQUIRED-SINGLE-FINAL-CONFIRMATORY-DOCTRINE",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 14}"
+    },
+    {
+      "id": "LEDGER-CITATIONS",
+      "type": "ledger_citation",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "ledger_entries=16; cited_ids=['C-ASR-V2', 'C-BASELINES', 'C-KEEP', 'C-M3', 'C-MINDS-POLICY', 'C-MINDS-V2', 'C-PHASEA', 'C-T7']; directional_checked=['C-ASR-V2', 'C-BASELINES', 'C-MINDS-V2']; invalid_checked=['C-M3', 'C-MINDS-POLICY', 'C-PHASEA', 'C-T7']; nonledger_checked=['C-KEEP']",
+      "cited_ids": [
+        "C-ASR-V2",
+        "C-BASELINES",
+        "C-KEEP",
+        "C-M3",
+        "C-MINDS-POLICY",
+        "C-MINDS-V2",
+        "C-PHASEA",
+        "C-T7"
+      ],
+      "cited_status": {
+        "C-ASR-V2": "directional",
+        "C-BASELINES": "directional",
+        "C-KEEP": "NOT_IN_LEDGER",
+        "C-M3": "invalid",
+        "C-MINDS-POLICY": "invalid",
+        "C-MINDS-V2": "directional",
+        "C-PHASEA": "invalid",
+        "C-T7": "invalid"
+      }
+    },
+    {
+      "id": "FILE-EXISTENCE-LETTER-CLAIMS",
+      "type": "file_exists",
+      "applies_to": [],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "paths checked=11",
+      "paths": [
+        {
+          "path": "wiki/2026-07-12-research-proposal-v42-external-review.md",
+          "exists": true,
+          "source": "letter frontmatter supersedes_scope + §6 (v4.2 to be reviewed)"
+        },
+        {
+          "path": "wiki/2026-07-12-research-proposal-v41-external-review.md",
+          "exists": true,
+          "source": "letter frontmatter supersedes_scope (v4.1 erratum banner)"
+        },
+        {
+          "path": "wiki/2026-07-12-response-v4-to-adversarial-integrity-review.md",
+          "exists": true,
+          "source": "letter §勘误附记 (prior letter with three self-corrections)"
+        },
+        {
+          "path": "wiki/2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md",
+          "exists": true,
+          "source": "letter frontmatter responds_to"
+        },
+        {
+          "path": "docs/checks/v41-conformance-report.md",
+          "exists": true,
+          "source": "letter §6 (docs/checks currently holds one Markdown report)"
+        },
+        {
+          "path": "docs/datasets.lock.json",
+          "exists": true,
+          "source": "letter §1 F′-3 + §5.1 (pin corpus-lock into datasets.lock.json)"
+        },
+        {
+          "path": "docs/claim_ledger.yaml",
+          "exists": true,
+          "source": "letter §1 (machine ledger governs citability); proposal §11"
+        },
+        {
+          "path": "scripts/checks/v42_conformance.py",
+          "exists": true,
+          "source": "letter §勘误附记① + §6 + 常驻承诺⑨ (v4.2 conformance checker script delivered this round)"
+        },
+        {
+          "path": "docs/checks/v42-rules.yaml",
+          "exists": true,
+          "source": "letter §勘误附记① + §6 (rule manifest delivered this round)"
+        },
+        {
+          "path": "docs/checks/v42-conformance-output.json",
+          "exists": true,
+          "source": "letter §勘误附记① + §6 (conformance output JSON delivered this round)"
+        },
+        {
+          "path": "docs/checks/v42-environment.txt",
+          "exists": true,
+          "source": "letter §勘误附记① + §6 (environment capture delivered this round)"
+        }
+      ]
+    },
+    {
+      "id": "NUMERIC-ATOM-COUNT",
+      "type": "appendix_atom_count",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "atom_count=6 (via yaml_parse, block lines 548-642); m_values=[6]; family_atom_values=[6]",
+      "atom_count": 6,
+      "count_method": "yaml_parse",
+      "m_values": [
+        6
+      ],
+      "family_atom_values": [
+        6
+      ]
+    },
+    {
+      "id": "BANNED-PREOBSERVATION-BLINDNESS",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=2 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-EQUALLY-TAMPER-EVIDENT",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=4 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-STALE-FOUR-ERRORS",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=1 (allowed ones excluded)"
+    },
+    {
+      "id": "BANNED-M4-CONFIRMATORY-GRADE",
+      "type": "banned_phrase",
+      "applies_to": [
+        "proposal",
+        "letter"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "matched-occurrences=1 (allowed ones excluded)"
+    },
+    {
+      "id": "REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 20}"
+    },
+    {
+      "id": "REQUIRED-GENERATION-ROBUST-RHO",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 1}"
+    },
+    {
+      "id": "REQUIRED-POOL-MEAN-COMPARATOR",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 1}"
+    },
+    {
+      "id": "REQUIRED-RDU-VS-STRONGEST-ATOM",
+      "type": "required_phrase",
+      "applies_to": [
+        "proposal"
+      ],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "per-file counts={\"wiki/2026-07-12-research-proposal-v42-external-review.md\": 4}"
+    },
+    {
+      "id": "REQUIRED-CORPUS-LOCK-EXISTS",
+      "type": "file_exists",
+      "applies_to": [],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "paths checked=1",
+      "paths": [
+        {
+          "path": "docs/corpus.lock.json",
+          "exists": true,
+          "source": "F-6 remediation: pinned upstream corpus identity (content_hash + doc_count + upstream revision)"
+        }
+      ]
+    },
+    {
+      "id": "REQUIRED-FOUR-INTEGRITY-REGISTERS",
+      "type": "file_exists",
+      "applies_to": [],
+      "verdict": "PASS",
+      "n_violations": 0,
+      "violations": [],
+      "notes": "paths checked=4",
+      "paths": [
+        {
+          "path": "docs/integrity/prior_exposure_registry.json",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/experiment_attempt_registry.jsonl",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/discrepancy_register.md",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④)"
+        },
+        {
+          "path": "docs/integrity/release_manifest.json",
+          "exists": true,
+          "source": "P0_INTEGRITY_FREEZE required_artifacts (续28④ / M-8)"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total": 22,
+    "passed": 22,
+    "failed": 0,
+    "passed_ids": [
+      "BANNED-VERIFIABLE-REWARD",
+      "BANNED-RELEASE-READY",
+      "BANNED-EQUALBUDGET-NEAR-K1",
+      "BANNED-UNPREDICTABLE-CUSTODY",
+      "BANNED-BUSINESS-EFFECT-TITLE",
+      "BANNED-FUTURE-DATE",
+      "REQUIRED-PUBLIC-DETERMINISTIC-EVALUATION",
+      "REQUIRED-NOT-EVALUATED-RULE",
+      "REQUIRED-SINGLE-FINAL-CONFIRMATORY-DOCTRINE",
+      "LEDGER-CITATIONS",
+      "FILE-EXISTENCE-LETTER-CLAIMS",
+      "NUMERIC-ATOM-COUNT",
+      "BANNED-PREOBSERVATION-BLINDNESS",
+      "BANNED-EQUALLY-TAMPER-EVIDENT",
+      "BANNED-STALE-FOUR-ERRORS",
+      "BANNED-M4-CONFIRMATORY-GRADE",
+      "REQUIRED-POST-OBSERVATION-EXTERNALLY-JUSTIFIED",
+      "REQUIRED-GENERATION-ROBUST-RHO",
+      "REQUIRED-POOL-MEAN-COMPARATOR",
+      "REQUIRED-RDU-VS-STRONGEST-ATOM",
+      "REQUIRED-CORPUS-LOCK-EXISTS",
+      "REQUIRED-FOUR-INTEGRITY-REGISTERS"
+    ],
+    "failed_ids": [],
+    "overall_verdict": "DOCUMENT PACKAGE READY FOR EXTERNAL REVIEW"
+  }
+}

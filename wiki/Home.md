@@ -10,8 +10,8 @@ is synced to this Wiki via `scripts/wiki-sync.sh`.
 ## Pages
 
 - [[Project-Thesis]] — the research thesis & flagship claim (**read first**)
-- [[W4-Training-Free-RL-Feasibility]] — flagship math: formalism, operators, algorithm survey
-- [[W4-Research-Plan]] — flagship research plan & technical scheme (waves, gates, routing)
+- [[W4-Training-Free-RL-Feasibility]] — W4 embedding-utility math: formalism, operators, algorithm survey
+- [[W4-Research-Plan]] — W4 research plan & technical scheme (waves, gates, routing)
 - [[Omni-Embed-Model-Dossier]] — the frozen backbone: architecture, I/O contract, few-shot verdict
 - [[Paralinguistic-Suppression-Survey]] — speech injection mechanism + does alignment/pooling suppress speaker/emotion (C1–C5) + fix survey
 - [[Speech-Semantic-Task-Datasets]] — public datasets for the semantic axis (SLU/Spoken-QA/ST/agentic) + ModelScope/hf-mirror fetch scripts
@@ -40,7 +40,7 @@ Before starting, read this page and [[Per-Work-Status]]; record notable decision
 > 仓库的**权威入口是根目录 README**；本 Wiki 是它的延伸知识库。
 
 **页面**：[[Project-Thesis]] 研究主旨与旗舰主张（**先读**）· [[W4-Training-Free-RL-Feasibility]]
-旗舰数学（形式化/算子/算法综述）· [[W4-Research-Plan]] 旗舰研究计划与技术方案（波次/关卡/路由）·
+W4 嵌入效用数学（形式化/算子/算法综述）· [[W4-Research-Plan]] W4 研究计划与技术方案（波次/关卡/路由）·
 [[Paralinguistic-Suppression-Survey]] 语音注入机制 + 对齐/池化是否压制说话人/情感（C1–C5）+ 修复综述 ·
 [[Speech-Semantic-Task-Datasets]] 语义任务公开数据集（SLU/QA/ST/agentic）+ 取数脚本 ·
 [[Architecture]] 架构与共享库 · [[Environment-and-Setup]] 环境搭建 · [[Inference-Engine-Choice]]

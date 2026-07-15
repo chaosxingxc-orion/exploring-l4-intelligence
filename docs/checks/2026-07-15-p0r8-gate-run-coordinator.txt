@@ -1,0 +1,20 @@
+PASS R1_HOT_CLAIM_QUALIFIERS 0
+PASS R2_UNRESOLVED_VS_EXACT 0
+PASS R3_LEDGER_ENUMS 0
+PASS R4_SIGNOFF_SLOTS 0
+PASS R5_DECISION_READY 0
+PASS R6_ANCHOR_EXISTS 0
+PASS R7_BARE_TOKEN 0
+PASS R8_PROTOCOL_V1_VOID 0
+  WARN R3_MIXED_LOCATOR CL2-0001 (requires human double-review): source_locator='Abstract; Theorem 1 (single interior extremum); Theorem 3 (HedgeTune root-finding n/lambda/mu); Definition 1 (reward-hacking pattern)'
+  WARN R3_MIXED_LOCATOR CL2-0002 (requires human double-review): source_locator='Abstract + Table 9 (LibriSpeech WER, whisper-large-v3, N=64)'
+  WARN R3_MIXED_LOCATOR CL2-0007 (requires human double-review): source_locator='Results table (Qwen2-Audio rows); abstract (eight ALMs, five TTS strategies, three speech-emotion datasets)'
+  WARN R3_MIXED_LOCATOR CL2-0015 (requires human double-review): source_locator='Table 3 + Section 4.2 (domain classification); Section 3/Abstract (trained BiLSTM integration); Section 4.1 (data)'
+  WARN R3_MIXED_LOCATOR CL2-0018 (requires human double-review): source_locator='Section 1.1 (oracle vs G); Abstract (Spearman rho degradation, RoBERTa PLL recovery); Section 5.2 / 1.4 (5.42% vs 5.96% test-other); Zipformer-S CR-CTC LibriSpeech'
+  WARN R3_MIXED_LOCATOR CL2-0022 (requires human double-review): source_locator='ColdStart: Abstract + Sec 6.1 + Table 4 caption + Sec 5'
+  WARN R3_MIXED_LOCATOR CL2-0023 (requires human double-review): source_locator='GenRM: Abstract (BoN 5%->45.3% algorithmic, 73%->93.4% GSM8K) + Figure 5'
+  WARN R3_MIXED_LOCATOR CL2-0039 (requires human double-review): source_locator='System description (LoRA + 3 heads) + Table 3 (segment-level Kendall-tau, test set) + abstract'
+  WARN R3_MIXED_LOCATOR CL2-0060 (requires human double-review): source_locator='Method section (prompted hypothesis generation + linear-interpolation rescoring); abstract (5-25% rel WER)'
+R9_WARN_SUMMARY FAIL_ITEMS=0 WARN_ITEMS=9
+OVERALL: PASS
+EXIT=0

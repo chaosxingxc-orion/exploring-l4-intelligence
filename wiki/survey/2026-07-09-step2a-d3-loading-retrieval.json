@@ -1,0 +1,396 @@
+{
+ "candidates": [
+  {
+   "name": "Direct dense query (bi-encoder ANN) — baseline",
+   "what": "Encode the query (speech vector) once and run faiss ANN against utterance/word keys; the current mock. No generation, no fusion.",
+   "grid_slot": "query-construction",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE (mock = this). The zero-lever reference every other candidate is measured against."
+  },
+  {
+   "name": "HyDE — hypothetical-document embedding",
+   "what": "Frozen omni generates a hypothetical answer to the query, embed that, retrieve with it instead of the raw query. Deterministic single generation.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE compatible (one greedy generation + one embed). Gao et al. HyDE; 2025 variants report large precision/recall lifts. Speech-native 'hypothetical spoken answer' embedding is unexplored (gap)."
+  },
+  {
+   "name": "HyPE — hypothetical prompt embeddings (per-document)",
+   "what": "Offline, generate the questions each KB value could answer and index THOSE; query matches question-space at run time. Optimizes per-document not per-query.",
+   "grid_slot": "key-org",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE (fully offline; zero run-time generation, unlike HyDE). Search-snippet: reports up to +42pt precision / +45pt recall vs plain retrieval (not opened)."
+  },
+  {
+   "name": "Adaptive-HyDE (threshold-lowering, never-empty)",
+   "what": "HyDE plus a rule that auto-lowers the similarity threshold when the top hit is weak, to guarantee non-empty, partially-relevant context.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE (rule-based threshold, no learning). arXiv 2507.16754 (opened): 7 pipelines/63 variants, HyDE+full-answer best, beats zero-shot on 4 OSS LLMs by LLM-judge; no hard numbers in abstract."
+  },
+  {
+   "name": "LLM query rewrite / expansion (single-pass)",
+   "what": "Frozen omni rewrites or term-expands the query before encoding; one deterministic pass.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE. Baseline lever. RL-trained rewriters (below) are the adaptive escalation."
+  },
+  {
+   "name": "Multi-query / multi-embedding fan-out (AMER, multi-view)",
+   "what": "Generate several query views/embeddings and union their retrieved sets before ranking.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE if generation is deterministic. Search-snippet: AMER autoregressively emits multiple query embeddings, beats single-embedding (not opened)."
+  },
+  {
+   "name": "Self-query — LLM-constructed metadata filters",
+   "what": "Frozen omni parses the query into (semantic vector + structured filter) and applies the filter over KB metadata — directly usable to gate our grain tag (knowledge/memory/exemplar), speaker, language, emotion facets.",
+   "grid_slot": "query-construction",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE (LangChain/LlamaIndex self-query, well-established). Strong fit to our grain-tagged values; no speech-facet self-query paper exists (gap/opportunity)."
+  },
+  {
+   "name": "Cross-modal asymmetric encode — Speech-to-Retrieval (S2R)",
+   "what": "Map the spoken query directly to an embedding via an audio query-encoder trained against a separate document-encoder; retrieve without ASR, avoiding transcription-error propagation.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE (encoders frozen at inference). Google S2R, live in production, multilingual (opened marktechpost 2025-10): beats ASR-then-retrieve on Simple Voice Questions, approaches perfect-transcript upper bound; WER shown NOT to predict retrieval quality. Position vs SpeechRAG/VoxRAG: same ASR-free thesis, but S2R is a jointly-trained asymmetric dual-encoder rather than cascade."
+  },
+  {
+   "name": "Query decomposition into sub-queries (DecomposeRAG)",
+   "what": "Split a complex query into simpler sub-queries, retrieve each, merge. Can run at fixed breadth.",
+   "grid_slot": "query-construction",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE at fixed depth; ADAPTIVE if depth/priority is query-conditioned. Search-snippet: DecomposeRAG SOTA on multi-hop QA (not opened)."
+  },
+  {
+   "name": "Latent-space query reasoning (AdaQR / LaSER)",
+   "what": "Produce reasoning in embedding space rather than text, yielding a retrieval-tuned query vector at low latency.",
+   "grid_slot": "query-construction",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK (some variants trained). Search-snippet only (not opened). Listed for completeness."
+  },
+  {
+   "name": "RL-trained query rewriter (TongSearch-QR / ConvSearch-R1 / RAR2-DPO)",
+   "what": "Train a small model with RL/DPO (thinking + performance reward) to rewrite queries for retrieval.",
+   "grid_slot": "out-of-mock",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK (weight updates). The training-free analogue = reward-guided best-of-N over rewrite candidates using the frozen omni's own signal (W1 machinery). Search-snippet (not opened)."
+  },
+  {
+   "name": "Iterative feedback query expansion (ThinkQE / DIVER-QExpand)",
+   "what": "Refine the expansion across rounds using retrieval feedback; DIVER keeps only original+final round to cap token growth.",
+   "grid_slot": "out-of-mock",
+   "cost": "M",
+   "evidence": "INHERENTLY ADAPTIVE (feedback loop → step-3). Search-snippet (not opened)."
+  },
+  {
+   "name": "Hybrid sparse+dense fusion (RRF / convex combination)",
+   "what": "Fuse a lexical list (BM25 over transcripts, or phonetic/discrete-speech-token n-grams) with the dense list via RRF (k≈60) or convex α-blend.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE. Search-snippet evidence: hybrid +7.4% NDCG over either alone (WANDS); convex α=0.5 Recall@5 0.726 > RRF 0.695 (not opened). Speech twist: what plays the 'sparse' role over speech keys (discrete units/phonetic) is an open design choice."
+  },
+  {
+   "name": "Late-interaction multi-vector retrieval (ColBERT/PLAID; Col-* for speech)",
+   "what": "Keep token/frame-level key vectors and score by MaxSim; word-level speech keys are the natural multi-vector unit.",
+   "grid_slot": "primitive",
+   "cost": "H",
+   "evidence": "FIXED-PIPELINE but NOT native to faiss/llama.cpp — needs a PLAID-style engine. PLAID: 45x CPU / 7x GPU latency cut vs ColBERTv2 (snippet). ColPali proves the pattern for vision (patches); no speech-frame Col-* analogue exists (gap)."
+  },
+  {
+   "name": "Frozen cross-encoder reranker (BGE-reranker class)",
+   "what": "Second-pass (query,candidate) joint scoring to reorder the ANN shortlist. For speech, operates on transcripts or omni-scored pairs.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE. Snippet: cross-encoders deliver ~95% of LLM-rerank accuracy at 3x lower latency. No cross-encoder scoring (speech-query, speech-key) directly (gap)."
+  },
+  {
+   "name": "LLM listwise reranker, zero-shot (RankGPT-style on the frozen omni)",
+   "what": "Prompt the frozen Qwen3-Omni to read the candidate list and emit a reordered permutation — reuses the model we already host.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE, training-free, uses the resident llama-server. Snippet: listwise > pointwise/pairwise; +5-8% accuracy but +4-6s latency vs cross-encoder. Cheapest high-value rerank lever for us."
+  },
+  {
+   "name": "Setwise / groupwise reranking (Setwise, GroupRank)",
+   "what": "Score groups of candidates per LLM call to cut the number of comparisons vs full listwise.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE. Efficiency-oriented listwise. GroupRank arXiv 2511.11653 (snippet, not opened)."
+  },
+  {
+   "name": "Distilled open listwise rerankers (RankZephyr / RankVicuna / Rank-without-GPT)",
+   "what": "Drop-in frozen listwise rerankers distilled from GPT, no local training.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE (frozen checkpoints). Snippet via RankLLM toolkit (not opened)."
+  },
+  {
+   "name": "RL-trained reasoning reranker (REARANK / Rank-R1 / Rank1 / ERank)",
+   "what": "Train an LLM reranker with GRPO to reason-then-rank; REARANK on Qwen2.5-7B.",
+   "grid_slot": "out-of-mock",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK (weight updates). REARANK arXiv 2505.20046 (opened): GRPO, only 179 MSMARCO queries →12k, +4.49 nDCG@10 BEIR, +2.7 BRIGHT (beats GPT-4), +5.91 TREC-DL. This is exactly the object a training-free reward-guided reranker would target WITHOUT weights."
+  },
+  {
+   "name": "Fixed-depth iterative / multi-hop retrieval (IRCoT-style, k rounds)",
+   "what": "Interleave retrieval with reasoning for a fixed k rounds; deterministic budget.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE at fixed k (mock-compatible). Becomes adaptive only when k is query-conditioned."
+  },
+  {
+   "name": "Adaptive stopping for iterative retrieval — training-free (TASR)",
+   "what": "Stop retrieving at the first round where the answer repeats AND the calibrated logit-margin > 0.25; variable depth per query.",
+   "grid_slot": "out-of-mock",
+   "cost": "M",
+   "evidence": "INHERENTLY ADAPTIVE (variable depth) but TRAINING-FREE (only a 1-D isotonic calibrator fit once on 100 Q, frozen). arXiv 2606.13814 (opened): F1 57.40 @3.13 calls, +3.42 vs fixed-k=3, 94.8% of fixed-k=5 F1 at 62.6% cost; transferred to a 550B model. Cleanest bridge from mock to step-3 because it needs no policy training — llama.cpp exposes the logprobs it needs. Position vs TARG/NEST gating line: TASR gates the LOOP via self-confidence, not per-token retrieval."
+  },
+  {
+   "name": "Adaptive iterative w/ learned control (FLARE / Self-RAG / SeaKR / Stop-RAG)",
+   "what": "Trigger/stop retrieval on generation confidence, reflection tokens, or a value function.",
+   "grid_slot": "out-of-mock",
+   "cost": "M",
+   "evidence": "INHERENTLY ADAPTIVE (step-3). FLARE=token-prob threshold, Self-RAG=reflection tokens (trained), Stop-RAG=value-based (arXiv 2510.14337, snippet). Reward-guided training-free versions are the W1-style opportunity."
+  },
+  {
+   "name": "Query routing by complexity (Adaptive-RAG router; tier-based)",
+   "what": "Classify query complexity and route: no-retrieval / single-shot / multi-hop.",
+   "grid_slot": "out-of-mock",
+   "cost": "M",
+   "evidence": "ADAPTIVE (needs a classifier) but a RULE-based router (e.g. on self-confidence/length) is mock-compatible. Adaptive-RAG T5-Large 3-class router matches always-expensive at lower cost; RAGRouter-Bench 7,727 queries (snippets, not opened)."
+  },
+  {
+   "name": "Distraction-aware retrieval (LDAR)",
+   "what": "RL policy learns to drop retrieved passages that are relevant-but-misleading, beyond similarity scoring.",
+   "grid_slot": "out-of-mock",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK (policy-gradient trained). arXiv 2509.21865 (opened): beats standard retrieval and long-context with fewer tokens; distractor-filtering is the target a training-free reward-guided selector could approximate."
+  },
+  {
+   "name": "Online-optimized retrieval (deployment-time embedding gradients)",
+   "what": "Nudge item embeddings at deployment from binary success/failure feedback (success→toward query, failure→away).",
+   "grid_slot": "out-of-mock",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK and NOT weight-frozen — it mutates the index embeddings via SGD (not RL). arXiv 2509.20415 (opened): +3-9% Recall@10/NDCG@10 on UltraTool/ToolRet/FiQA/MultiHopRAG, negligible latency. Included as the anti-pattern boundary: this VIOLATES our frozen-KB constraint; a training-free lever must NOT edit the index."
+  },
+  {
+   "name": "Relevance-edge reordering (lost-in-the-middle mitigation)",
+   "what": "Place the highest-scoring retrieved items at the start and end of the prompt, weakest in the middle.",
+   "grid_slot": "delivery",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE, training-free, essentially free. Lost-in-the-middle U-curve persists in 2025 models (Chroma context-rot: GPT-4.1/Claude4/Gemini2.5/Qwen3 all non-uniform). Untested on OMNI models with interleaved audio tokens (gap)."
+  },
+  {
+   "name": "Attention-basin-aligned reordering",
+   "what": "Measure the model's position-attention profile and map the most relevant item to the highest-attention slot.",
+   "grid_slot": "delivery",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE, training-free reorder. arXiv 2508.05128 (opened): 'attention basin' — non-uniform position attention; training-free repositioning improves long-context QA/retrieval/summarization. Feasibility risk: needs attention read-out, not exposed by default in llama.cpp."
+  },
+  {
+   "name": "Extractive prompt compression (LLMLingua-2 / LongLLMLingua)",
+   "what": "Drop low-information tokens from retrieved context before injection using a small frozen token classifier.",
+   "grid_slot": "delivery",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE (LLMLingua-2 = frozen BERT-level classifier). Snippet: LongLLMLingua +17.1% at 4x compression; LLMLingua-2 3-6x faster, OOD-robust. Text-only — compressing retrieved AUDIO/embedding values for an omni model is unexplored (gap)."
+  },
+  {
+   "name": "Abstractive summarization before injection (RECOMP-Abst / summ-retrieval)",
+   "what": "Summarize retrieved passages into a short synopsis before prepending.",
+   "grid_slot": "delivery",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE. Load-bearing: arXiv 2501.01880 (opened) finds SUMMARIZATION-based retrieval ≈ long-context while CHUNK-based lags — a direct steer toward summarize-then-inject over raw chunks."
+  },
+  {
+   "name": "Attention-guided context pruning (AttentionRAG)",
+   "what": "Prune retrieved context by attention relevance to the query focus.",
+   "grid_slot": "delivery",
+   "cost": "H",
+   "evidence": "FIXED-PIPELINE-ish. arXiv 2503.10720 (snippet, not opened). Same llama.cpp attention-access feasibility risk as attention-basin reorder."
+  },
+  {
+   "name": "Soft / embedding context compression (xRAG)",
+   "what": "Map retrieved context to a few dense latent vectors via an MLP, injected as soft tokens.",
+   "grid_slot": "delivery",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK for a FROZEN model (needs a trained projector/adapter into the model's input space). Snippet. Interesting because our KB already stores embeddings — but injecting them into a frozen omni requires an alignment adapter."
+  },
+  {
+   "name": "Performance-driven RL context compression (CORE)",
+   "what": "RL-trained compressor keeps only chunks that raise downstream answer performance.",
+   "grid_slot": "out-of-mock",
+   "cost": "H",
+   "evidence": "OUT-OF-MOCK (RL-trained). arXiv 2508.19282 (opened): beats no-compression and LLMLingua at higher compression. Target for a training-free reward-guided keep/drop selector."
+  },
+  {
+   "name": "Flat prompt injection — baseline delivery",
+   "what": "Concatenate retrieved values into the prompt in similarity order.",
+   "grid_slot": "delivery",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE (mock delivery baseline). Reference for reorder/compress/structured levers."
+  },
+  {
+   "name": "Structured / tool-form delivery (retrieval as a tool-call)",
+   "what": "Expose retrieval as a function schema (search(query, grain, speaker)); the frozen omni emits a tool call and consumes structured results.",
+   "grid_slot": "delivery",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE if a single forced tool call; ADAPTIVE if the model chooses when/which to call. llama.cpp supports Qwen3 tool-calling. Snippet: agentic tool-routing shows 15-20% retrieval-quality lift over static configs (the adaptive version)."
+  },
+  {
+   "name": "Logical / Boolean structured retrieval (LogicalRAG)",
+   "what": "Frozen omni emits a Lucene-style Boolean query (AND/OR/NOT, phrase, field); inverted index gates candidates, BM25 ranks — separates 'what can be retrieved' from 'what ranks'.",
+   "grid_slot": "delivery",
+   "cost": "M",
+   "evidence": "FIXED-PIPELINE, TRAINING-FREE. arXiv 2605.27123 (opened): matches agentic hybrid on KILT (0.717 vs 0.716 judge-acc), 41x faster build, 2.3x throughput, 3.1x lower latency, 35% less hallucination when evidence absent; stronger models reach parity. Note: gains scale with model capability — a 30B omni is a plausible sweet spot."
+  },
+  {
+   "name": "GraphRAG / structured subgraph retrieval + delivery",
+   "what": "Model KB entities/edges as a graph; interpret query, select a subgraph, assemble community summaries + linked values.",
+   "grid_slot": "delivery",
+   "cost": "H",
+   "evidence": "FIXED-PIPELINE possible (precomputed graph) but multi-hop. Snippet: GraphRAG-Bench 2025 — GraphRAG > vanilla on complex reasoning/summarization; gap narrows for simple fact lookup. Heavy to build over speech keys; speaker/turn graph is a speech-native angle (gap)."
+  },
+  {
+   "name": "Grain-typed delivery with role markers",
+   "what": "Deliver retrieved values explicitly labeled by grain (knowledge/memory/exemplar) with role framing, so the frozen model treats a fact vs a recalled instance vs a demonstration differently.",
+   "grid_slot": "delivery",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE. Design lever native to our KB schema (not a single paper); pairs with self-query filtering. No prior work delivers grain-typed speech-KB values to an omni — clean whitespace."
+  },
+  {
+   "name": "Long-context stuffing (no retrieval) — comparison arm",
+   "what": "Dump all/most candidate context into the window, no selection.",
+   "grid_slot": "retrieval-strategy",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE baseline arm. arXiv 2501.01880 (opened): long-context wins on Wikipedia factual QA; RAG wins on dialogue/general. For OMNI, audio tokens are context-expensive — the tradeoff likely shifts hard toward RAG (unbenchmarked, gap)."
+  },
+  {
+   "name": "Isotonic-calibrated self-confidence primitive",
+   "what": "Fit a 1-D isotonic map (once, ~100 Q) from the frozen model's logit-margin to correctness probability; a reusable signal for stop/route/rerank gating.",
+   "grid_slot": "primitive",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE, training-free-compatible (calibrator ≠ policy). From TASR (opened). llama.cpp exposes logprobs; this is the cheapest reusable confidence primitive for later reward-guided levers."
+  },
+  {
+   "name": "RRF / convex fusion primitive",
+   "what": "Rank-fusion operator to merge any two ranked lists (e.g. speech-dense + phonetic-sparse, or two query views).",
+   "grid_slot": "primitive",
+   "cost": "L",
+   "evidence": "FIXED-PIPELINE. Trivial to implement over faiss outputs; enables the hybrid and multi-query candidates."
+  },
+  {
+   "name": "Asymmetric dual-encoder primitive (query-enc ≠ key-enc)",
+   "what": "Allow the speech query-encoder and the KB key-encoder to differ, aligned by contrastive/KALE-style post-hoc alignment.",
+   "grid_slot": "primitive",
+   "cost": "H",
+   "evidence": "Enabling primitive for S2R-style cross-modal encode. Our KB currently likely uses one embedder for keys; supporting an asymmetric query path is a build cost but unlocks ASR-free speech-query retrieval."
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Google Speech-to-Retrieval (S2R) maps a spoken query directly to an embedding via an audio query-encoder jointly trained against a separate document-encoder, retrieves without ASR, is live in production multilingually, beats ASR-then-retrieve on Simple Voice Questions and approaches the perfect-transcript upper bound; they show reducing WER does not reliably improve retrieval.",
+   "source": "Google Speech-to-Retrieval (S2R), MarkTechPost coverage, 2025-10-12 (opened full article)",
+   "load_bearing": true,
+   "relevance": "Directly validates cross-modal asymmetric encode for our speech-vector-keyed KB and positions us against SpeechRAG/VoxRAG (cascade-avoidance) with a bi-encoder that is jointly trained, not cascaded."
+  },
+  {
+   "claim": "TASR stops iterative retrieval at the first round where the model repeats its previous answer AND the calibrated logit-margin exceeds 0.25; it is training-free (only a 1-D isotonic calibrator fit once on 100 questions, frozen), scores F1 57.40 at 3.13 calls (+3.42 vs fixed-k=3; 94.8% of fixed-k=5 F1 at 62.6% cost), and transfers to a 550B model with no regressions.",
+   "source": "TASR: Training-Free Adaptive Stopping for Iterative Retrieval, arXiv 2606.13814 (opened HTML)",
+   "load_bearing": true,
+   "relevance": "Cleanest training-free bridge from the fixed mock to step-3 adaptivity: variable retrieval depth using only the frozen model's logprobs, which llama.cpp exposes. Advances beyond the TARG/NEST per-token gating line by gating the retrieval LOOP via self-confidence."
+  },
+  {
+   "claim": "LogicalRAG has the LLM emit Lucene-style Boolean queries (AND/OR/NOT, phrase, field) over an inverted index (BM25 ranks); training-free, it matches agentic hybrid dense-sparse on KILT-scale Wikipedia (0.717 vs 0.716 judge-accuracy) with 41x faster build, 2.3x throughput, 3.1x lower latency, and 35% lower hallucination when evidence is absent, with gains growing as model capability rises.",
+   "source": "Rethinking Agentic RAG: LLM-Driven Logical Retrieval Beyond Embeddings, arXiv 2605.27123 (opened HTML)",
+   "load_bearing": true,
+   "relevance": "A training-free structured/tool-form delivery where the FROZEN omni constructs the query; capability-scaling means a 30B omni is a plausible sweet spot. Alternative to pure dense retrieval that keeps the KB frozen."
+  },
+  {
+   "claim": "Attention Basin: LLMs allocate non-uniform attention across positions; a training-free reordering that moves important items to attention-favored positions improves long-context QA, retrieval and summarization without any weight update.",
+   "source": "Attention Basin: Why Contextual Position Matters in LLMs, arXiv 2508.05128 (opened PDF)",
+   "load_bearing": true,
+   "relevance": "Grounds a near-free delivery lever (context reordering). Caveat: requires an attention read-out that is not exposed by default in llama.cpp; the relevance-edge reorder variant needs only scores and is trivially implementable."
+  },
+  {
+   "claim": "Lost-in-the-middle persists in 2025 frontier models: Chroma's context-rot report over 18 models (incl. GPT-4.1, Claude 4, Gemini 2.5, Qwen3) finds context is not used uniformly and reliability degrades with input length; placing top-scoring documents at the start/end edges mitigates it.",
+   "source": "Lost-in-the-middle 2025 syntheses incl. arXiv 2510.10276 and Chroma context-rot (search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Justifies relevance-edge reordering as a delivery lever; flags that this is entirely untested on OMNI models whose contexts interleave audio tokens."
+  },
+  {
+   "claim": "In a filtered evaluation, long-context generally beats RAG on Wikipedia-based factual QA while RAG wins on dialogue/general queries; crucially, summarization-based retrieval performs comparably to long-context whereas chunk-based retrieval lags, and context relevance is the overlooked variable.",
+   "source": "Long Context vs. RAG for LLMs: An Evaluation and Revisits, arXiv 2501.01880 (opened abstract)",
+   "load_bearing": true,
+   "relevance": "Steers delivery toward summarize-then-inject over raw chunk injection, and frames the long-context-vs-RAG arm; for an omni model audio tokens are context-expensive so the tradeoff likely tilts to RAG (unbenchmarked)."
+  },
+  {
+   "claim": "REARANK is an RL-trained (GRPO, Qwen2.5-7B) reasoning reranker using only 179 MSMARCO queries augmented to 12k, gaining +4.49 nDCG@10 on BEIR, +2.7 on BRIGHT (surpassing GPT-4), and +5.91 on TREC-DL.",
+   "source": "REARANK: Reasoning Re-ranking Agent via RL, arXiv 2505.20046 (opened HTML)",
+   "load_bearing": true,
+   "relevance": "Defines the trained-reranker object; the training-free counterpart is reward-guided best-of-N reranking with the frozen omni (W1 machinery) — same target, no weights."
+  },
+  {
+   "claim": "CORE compresses RAG context via RL driven by downstream answer performance and beats both no-compression and LLMLingua at higher compression ratios; LLMLingua-2 (a frozen BERT-level token classifier) is training-free and 3-6x faster with OOD robustness, and LongLLMLingua reports +17.1% at 4x compression.",
+   "source": "Less Is More / CORE, arXiv 2508.19282 (opened PDF); LLMLingua family (Microsoft, search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Separates the training-free compression lever (LLMLingua-2, mock-compatible) from the RL-trained one (CORE, step-3 target). All are text-only — audio/embedding-value compression for omni is a gap."
+  },
+  {
+   "claim": "Learning Distraction-Aware Retrieval (LDAR) uses policy-gradient RL to drop retrieved passages that are relevant-but-misleading (distractors), beating standard retrieval and long-context with fewer tokens.",
+   "source": "Beyond RAG vs. Long-Context: Learning Distraction-Aware Retrieval, arXiv 2509.21865 (opened PDF)",
+   "load_bearing": true,
+   "relevance": "Shows similarity-top-k is not the right selection objective; a training-free reward-guided selector approximating distractor-filtering is a step-3 lever over our frozen KB."
+  },
+  {
+   "claim": "Online-Optimized RAG updates item/tool embeddings at deployment via importance-weighted SGD from binary success/failure feedback (success moves embedding toward query, failure away), gaining +3-9% Recall@10/NDCG@10 across UltraTool/ToolRet/FiQA/MultiHopRAG with negligible latency.",
+   "source": "Online-Optimized RAG for Tool Use and Function Calling, arXiv 2509.20415 (opened HTML)",
+   "load_bearing": true,
+   "relevance": "Boundary/anti-pattern: it MUTATES the index (not frozen) and is gradient-based, so it violates our frozen-KB + training-free constraint — a useful contrast for what our levers must NOT do."
+  },
+  {
+   "claim": "Adaptive-HyDE (developer support) sweeps 7 pipelines / 63 variants, finds HyDE-plus-full-answer-context best, and adds a rule to auto-lower the similarity threshold to guarantee non-empty partially-relevant context; it beats zero-shot across 4 OSS LLMs by LLM-as-judge (no hard numbers in abstract).",
+   "source": "Never Come Up Empty: Adaptive HyDE Retrieval, arXiv 2507.16754 (opened HTML)",
+   "load_bearing": true,
+   "relevance": "HyDE remains a live, mock-compatible query-construction lever; the threshold-lowering rule is a cheap never-empty fix. Speech-native 'hypothetical spoken answer' HyDE is unexplored."
+  },
+  {
+   "claim": "Hybrid BM25+dense fusion beats either alone (e.g. +7.4% NDCG on WANDS); convex combination at alpha=0.5 reached Recall@5 0.726 vs RRF(k=60) 0.695; RRF needs no score calibration while convex blending uses raw scores.",
+   "source": "Hybrid search 2025-26 syntheses incl. ceur-ws Vol-4173 and mbrenndoerfer/denser.ai (search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Supports a hybrid-fusion candidate; open question for speech keys is what fills the 'sparse' role (phonetic/discrete-unit n-grams over utterance/word keys)."
+  },
+  {
+   "claim": "Late-interaction multi-vector retrieval (ColBERT) scores by summing per-query-token MaxSim over passage tokens; PLAID cuts latency up to 45x on CPU / 7x on GPU vs ColBERTv2 via centroid interaction; ColPali extends the pattern to document-image patches (1024 patch embeddings/page, MaxSim) removing OCR.",
+   "source": "PLAID arXiv 2205.09707; ColPali arXiv 2407.01449 (search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Late interaction is the natural fit for word-level speech keys, but is not native to faiss/llama.cpp (needs a PLAID-style engine); no speech-frame Col-* analogue exists — a clean gap."
+  },
+  {
+   "claim": "Adaptive iterative RAG decides retrieval timing/stopping via prompting-, confidence-, or training-based paradigms (IRCoT interleaves CoT+retrieval; FLARE triggers on low token probability; Self-RAG uses trained reflection tokens; Adaptive-RAG routes with a T5 complexity classifier; Stop-RAG uses a value function).",
+   "source": "Iterative/adaptive RAG syntheses incl. Stop-RAG arXiv 2510.14337, SeaKR 2406.19215 (search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Maps the adaptive-depth landscape; most require training or trained tokens, so the training-free, reward-guided-on-frozen-omni variant (à la TASR + best-of-N) is the whitespace."
+  },
+  {
+   "claim": "Self-query retrieval uses an LLM to decompose a natural-language query into a semantic vector plus structured metadata filters, then executes a filtered vector search (hybrid of semantic + structured constraints).",
+   "source": "LangChain/LlamaIndex self-query & auto-retrieval docs, 2025 (search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Direct mechanism to gate our grain-tagged values (knowledge/memory/exemplar) plus speaker/language/emotion facets from omni embeddings; a mock-compatible query-construction lever with no speech-specific prior art."
+  },
+  {
+   "claim": "Agentic RAG turns retrieval into a learned policy where the agent chooses retriever, top-k, reranker depth and chunk size per query, with early systems reporting 15-20% retrieval-quality lift over static configurations; retrieval is exposed as a tool-call (search(query)) via structured function schemas.",
+   "source": "Agentic RAG 2025-26 syntheses (labelyourdata, futureagi; search snippets, not opened)",
+   "load_bearing": true,
+   "relevance": "Frames structured/tool-form delivery and the adaptive per-query configuration selection that a training-free reward-guided controller (step-3) would target while keeping the model frozen."
+  },
+  {
+   "claim": "HyPE precomputes, per document, the hypothetical questions each document answers and indexes those (question-space keys), optimizing per-document (fully offline) rather than per-query like HyDE.",
+   "source": "HyPE 2025 (search snippet via HyDE emergentmind/mlplus coverage, not opened)",
+   "load_bearing": false,
+   "relevance": "An alternative key-organization angle: index the value in question-space; offline so zero run-time generation cost, unlike HyDE."
+  }
+ ],
+ "gaps": "EXPLICIT GAPS / WHITESPACE for our frozen-omni + faiss speech-KB program (Dimension 3):\n\n1. SPEECH-NATIVE RERANKING is missing. Every reranker surveyed (cross-encoders, RankGPT/RankZephyr, REARANK, GroupRank) scores text or transcripts. No cross-encoder or LLM reranker scores (speech-query, speech-key) pairs directly in speech-vector space. S2R is a bi-encoder, not a reranker. Opportunity: use the frozen omni itself as a listwise reranker over speech candidates (training-free, reuses our llama-server).\n\n2. SPEECH/EMBEDDING-VALUE COMPRESSION is missing. LLMLingua-2/LongLLMLingua/RECOMP/AttentionRAG/CORE all compress TEXT. Compressing retrieved audio segments or embedding-valued KB entries before injecting to an omni model is unexplored; soft-compression (xRAG) would need an alignment adapter into a frozen omni's input space.\n\n3. LATE-INTERACTION OVER SPEECH FRAMES is absent. ColBERT/PLAID (text) and ColPali/ColQwen (image patches) prove multi-vector MaxSim, but there is no frame/word-level Col-* for speech keys — the natural representation for our word-level keys. Also NOT native to faiss/llama.cpp (needs a PLAID-style engine): a build-cost + feasibility risk to flag.\n\n4. HyDE-FOR-SPEECH unexplored: a 'hypothetical spoken answer' embedding (omni generates, we embed the audio/omni-state) as a query-construction lever has no prior work; only text HyDE/HyPE exist.\n\n5. POSITION / ATTENTION-BASIN effects UNMEASURED ON OMNI. All lost-in-the-middle and attention-basin work is text-token; behavior when the context interleaves audio tokens is unknown. Feasibility: attention-basin/AttentionRAG reordering need attention read-out not exposed by default in llama.cpp (only the relevance-edge reorder, needing scores alone, is trivially implementable now).\n\n6. SELF-QUERY OVER OMNI FACETS is a clean opportunity, not a paper: no work has the frozen omni construct metadata filters over grain tags (knowledge/memory/exemplar) + speaker/language/emotion facets derived from omni embeddings. Pairs with grain-typed delivery.\n\n7. TRAINING-FREE ADAPTIVE RETRIEVAL is thin. The adaptive-depth/selection landscape (FLARE, Self-RAG, Adaptive-RAG, LDAR, CORE, online-opt) is almost entirely TRAINED (classifiers, reflection tokens, policy gradients, or index-mutating SGD). TASR is the lone training-free adaptive-stop (isotonic calibrator only) and it gates the LOOP, not SELECTION/rerank/query-construction. WHITESPACE = a training-free, reward-guided controller that uses ONLY the frozen omni's own signals (logit-margin, answer stability, best-of-N over retrieval configs — the W1 best-of-N machinery) to pick query construction / top-k / rerank order / stop, while the KB stays frozen. Note the hard constraint boundary: Online-Optimized RAG mutates the index, which our frozen-KB rule forbids.\n\n8. LONG-CONTEXT-vs-RAG FOR OMNI is unbenchmarked. Audio tokens are context-expensive, so the text-domain finding (long-context wins Wikipedia QA; summarization-retrieval ≈ long-context; chunk-retrieval lags) may not transfer; the tradeoff likely tilts harder to RAG for omni but no one has measured it.\n\n9. STRUCTURED-vs-FLAT DELIVERY on speech KB untested. LogicalRAG (Boolean/inverted-index) and GraphRAG (subgraph) are text/entity graphs; a speaker/turn/session graph or Boolean-over-transcript-fields delivery for a speech KB, and whether a 30B omni is capable enough for LogicalRAG's capability-scaling regime, are open.\n\n10. HYBRID SPARSE ROLE FOR SPEECH undefined: RRF/convex fusion assumes a lexical (BM25) list; what plays 'sparse' over speech keys (phonetic n-grams, discrete-unit strings, transcript BM25) and how to fuse it with the dense speech-vector list is an unresolved design choice, not covered by any surveyed paper.\n\nCITATION-DISCIPLINE NOTE: 10 primary sources were OPENED in full (S2R article; arXiv 2606.13814 TASR, 2605.27123 LogicalRAG, 2508.05128 Attention Basin, 2501.01880 LC-vs-RAG, 2505.20046 REARANK, 2508.19282 CORE, 2509.21865 LDAR, 2509.20415 Online-Opt, 2507.16754 Adaptive-HyDE). All other cited items (HyPE, hybrid-fusion numbers, PLAID/ColPali, ColBERT, LLMLingua family, Stop-RAG/SeaKR/FLARE/Self-RAG/Adaptive-RAG, self-query docs, agentic-RAG syntheses, GraphRAG-Bench) are SEARCH-SNIPPET ONLY (not opened) and are marked as such in claim sources; treat their exact numbers as unverified pending full-text open at step-2."
+}

@@ -12,6 +12,8 @@ review_grade: "sound-with-corrections (ars-reviewer panel wf_e5dd317b-9cb)"
 corrections_applied: "C1-C12+P3 complete (C2 census artifact committed: 12/12 reproduced, 2 reading-pinned)"
 ---
 
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # Decision: NO-GO — agent-level question closed
 
 ## 0. Role, provenance, and mechanical discipline
@@ -139,6 +141,18 @@ Defense answers are classified ANSWERS or ROUTES-AROUND only (safeguard 3); fina
 | S5 | **contingent** | 0/3 conjunctive conditions moved; discharged only within B5's three scoped routes (B5 §4, `wiki/survey/2026-07-03-step1-blanes-memos.md`; chair C6) |
 | S6 | **resolved, residual open** | per-token logprob interface still unexercised (prereg note 5) |
 | S7 | **stands** | measured-zero paralinguistic spread unchanged; corroborated by D3-6/D3-9; no paralinguistic artifact exists (chair C6) |
+
+> **2026-07-11 correction to S7 (ticket #34 / INT-013, append-only — the row above is left unedited
+> as the historical record):** "measured-zero paralinguistic spread" overstates the evidence for the
+> SPEAKER axis specifically. The frozen `_repro/paralinguistic_negative_probe.json` (W4 repo) shows
+> speaker accuracy significantly ABOVE chance in 2 of 3 seeds (seed-123 CI [0.0267, 0.070] excludes
+> chance 1/91 = 0.011); it is low (~3x chance) but not zero, and the CI is evidence of that non-zero
+> spread, not evidence against it. "Measured-zero" remains accurate for the exact-zero
+> *selector-gain* findings (M5/U4 lanes) S7 also draws on, but not for the paralinguistic *readout*
+> itself. Recomputation (no rerun, same frozen numbers):
+> `projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json`
+> (`scripts/speaker_probe_restatement.py`). Full context:
+> `wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md` INT-013.
 
 Net (unchanged from the frozen ledger, now measurement-backed): revival of the agent-level framing is gated on P1's theorem (r2) plus S1's corpus (r1) — both re-verified absent as of 2026-07-03.
 

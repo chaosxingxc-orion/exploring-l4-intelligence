@@ -54,6 +54,11 @@ decision: the next wave must use the richer Operator-A axes (mid-layer pooling, 
 This is a clean existence proof: the verifiable closed loop runs, is reproducible, and measures the
 right thing — yielding both a strong positive (content) and the predicted negatives (emotion/speaker).
 
+> **2026-07-11 更正**：上述 "the thesis holds" 措辞已废止。按 [[2026-07-11-stage1-audit-response-and-rulings]]
+> 的判定，正式判据 A_t(e_t) > A_t(e_t') 并未满足（`diagonal_dominant=False`，见上文 (2)）；这里观察到的
+> content≈1.00 / emotion≈0.36 / speaker≈0.04 差异应改读为**各因子本身的可读出难度不同**（factor-difficulty
+> heterogeneity，L0/L1 层级），而不是"任务条件化把同一嵌入解耦成了不同、更优的读出"（那需要 L2–L3 判据，未过）。
+
 **Richer Operator-A axes (F.1) — layer & pooling sweep.** The underlying `NVOmniEmbedModel` exposes 37
 hidden states; we masked-mean-pooled each (and, separately, only the ~50 audio-placeholder tokens) and
 probed every factor per layer (weight-free). Best per-factor probe accuracy across layers:

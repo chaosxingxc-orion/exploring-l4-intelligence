@@ -1,0 +1,192 @@
+{
+ "datasets": [
+  {
+   "name": "aishell-1",
+   "ds_type": "zh-asr-content",
+   "labels": "transcription (zh, word-segmented with spaces — strip for CER); audio bytes + path",
+   "slice_recipe": "Ready parquet (test = 3 files, ~7176 utts; train = 35 files). EVAL: sample dev n=40 + test n=60 from data/test-*.parquet, stratified by utterance length (short/med/long) for CER spread; freeze item-ids via kb_snapshot on the parquet `path` field. MEMORY-POOL: draw the zh hard-sample injection pool from data/train-*.parquet (natural train/test separation = pool≠eval).",
+   "metric": "CER (jiwer zh, spaces stripped) verifiable reward; + content R@k on transcript identity",
+   "kb_role": "memory-pool (train pool) + eval-only (test)",
+   "include": "include",
+   "loader": "Reuse p2 parquet reader (bytes+path+transcription cols); already on-disk, no extraction",
+   "retrieval_eval": "content R@k (transcript identity, VocSim same-content) with key spaces = omni-hidden-state / GLAP / LCO-Omni; CLAP as F1 negative-control (must score ~0). Drives τ* gating curve: retrieve nearest train utts, inject as bias/few-shot (BR-ASR-style, kNN-Whisper gating warning).",
+   "exclude_reason": ""
+  },
+  {
+   "name": "thchs-30",
+   "ds_type": "zh-asr-content",
+   "labels": "char + pinyin transcript (.wav.trn sidecar per utt after extraction); speaker folder",
+   "slice_recipe": "Archive not extracted (data_thchs30.tgz). After extract: standard train/dev/test folders. Take ~200 train utts as a clean-read zh diversity memory-pool; optional cross-check test n=40 (CER). AISHELL-1 alone covers G2, so this is diversity padding only.",
+   "metric": "CER (verifiable reward) if used for eval; primarily pool-diversity",
+   "kb_role": "memory-pool",
+   "include": "include-subset",
+   "loader": "Needs extraction (tgz) + new loader (wav + .wav.trn sidecar parse)",
+   "retrieval_eval": "content R@k (same protocol as aishell-1); serves as read-speech acoustic-diversity source for the zh content-key pool",
+   "exclude_reason": ""
+  },
+  {
+   "name": "cn-celeb1",
+   "ds_type": "speaker-verification-id",
+   "labels": "speaker_id (idXXXXX, embedded in flac filename); genre tag (speech/interview/singing/entertainment/drama/movie/live_broadcast/vlog); official eval trial+enroll lists",
+   "slice_recipe": "Archive not extracted (cn-celeb_v2.tar.gz; internal layout confirmed = CN-Celeb_flac/ with eval/test/, enroll, lists, data/ dev speakers). Use eval split: sample ~20 eval speakers → dev n=40 / test n=60 utts, stratified across genres (cross-genre intra-speaker = the hard case). Freeze utt-ids via kb_snapshot on flac relpath. Enroll utts = gallery/memory-pool.",
+   "metric": "speaker-kNN accuracy (label=speaker_id) + open trial-pair EER (official eval/lists trials)",
+   "kb_role": "memory-pool (enroll gallery) + eval",
+   "include": "include",
+   "loader": "Needs extraction (tar.gz, ~22GB) + new loader (flac tree, parse speaker_id/genre from filename, read official trial list)",
+   "retrieval_eval": "speaker kNN + EER; key spaces = ERes2NetV2-zh / CAM++-zh / WavLM (specialized speaker keys) vs omni single-space readout — H-a vs H-b adjudication on zh speakers; cross-genre stress = intra-speaker robustness probe",
+   "exclude_reason": ""
+  },
+  {
+   "name": "cn-celeb2",
+   "ds_type": "speaker-verification-id",
+   "labels": "speaker_id (filename-embedded); genre tag — same schema as cn-celeb1 (2000 dev speakers)",
+   "slice_recipe": "Archive not extracted (3-part cn-celeb2_v2.tar.gzaa/ab/ac, must cat then untar, ~75GB). DEFERRED contingency reserve: extract only if cn-celeb1's 1000 speakers prove insufficient for the H-a/H-b speaker-key adjudication. If activated: gallery/pool expansion only (no separate eval slice).",
+   "metric": "speaker-kNN accuracy (only if activated as pool expansion)",
+   "kb_role": "memory-pool (deferred reserve)",
+   "include": "include-subset",
+   "loader": "Needs extraction (cat 3 parts + untar, ~75GB) + cn-celeb loader; held, not extracted for Stage-1",
+   "retrieval_eval": "speaker kNN gallery expansion for cn-celeb1 (same key spaces); no independent protocol",
+   "exclude_reason": "Not rejected — deferred contingency: 75GB memory-pool held in reserve; extracted only if cn-celeb1 speaker coverage is insufficient (campaign §2.1 '可选')"
+  },
+  {
+   "name": "voxceleb1-test-split",
+   "ds_type": "speaker-verification-id",
+   "labels": "speaker_id (id10270...), id (utt path id10270+vid+utt.wav); 40 speakers; audio bytes",
+   "slice_recipe": "Ready parquet (3 files, ~4874 rows, 40 speakers). Sample dev n=40 / test n=60 utts stratified so all 40 speakers appear; freeze via kb_snapshot on the `id` field. Construct same-speaker/diff-speaker trial pairs from the 40 speakers (official VoxCeleb1 veri_test list is external — reconstruct pairs in-set).",
+   "metric": "speaker-kNN accuracy (label=speaker_id) + constructed-pair EER",
+   "kb_role": "eval-only (en SV anchor)",
+   "include": "include",
+   "loader": "Reuse p2 parquet reader (bytes+path+id+speaker_id); on-disk, no extraction",
+   "retrieval_eval": "speaker kNN + EER; key spaces = ReDimNet / WavLM / ECAPA (specialized) vs omni readout — the en-side H-a/H-b anchor complementing cn-celeb1 (zh)",
+   "exclude_reason": ""
+  },
+  {
+   "name": "esd",
+   "ds_type": "ser-emotion-zh",
+   "labels": "emotion (5: Neutral/Happy/Angry/Sad/Surprise); speaker_id (0001-0010 zh, 0011-0020 en); parallel transcript (per-speaker XXXX.txt, tab-sep: utt_id<TAB>text<TAB>emotion)",
+   "slice_recipe": "Archive not extracted (ESD.zip; layout = Emotion Speech Dataset/<spk>/<Emotion>/*.wav + <spk>.txt). Use zh speakers 0001-0010. Sample dev n=40 / test n=60 utts stratified by emotion×speaker; freeze via kb_snapshot on utt_id (spk_nnnnnn). Parallel design (same text across emotions) enables VocSim same-text/diff-emotion negative pairs.",
+   "metric": "emotion-kNN accuracy (label=emotion) + VocSim same-emotion identity",
+   "kb_role": "exemplar-source (parallel-emotion exemplars) + eval",
+   "include": "include",
+   "loader": "Needs extraction (zip; strip __MACOSX/.DS_Store) + new loader (speaker/emotion folder tree + tab-sep transcript parse)",
+   "retrieval_eval": "emotion kNN + VocSim; key spaces = Emotion2Vec-S (specialized) vs omni single-space readout; parallel design also supports speaker-kNN cross-check (disentangle emotion from speaker). Probes survey #26 zh-SER empirical gap.",
+   "exclude_reason": "License note: research-only (original ESD terms; card has no license field) → eval-only, no redistribution"
+  },
+  {
+   "name": "csemotions",
+   "ds_type": "ser-emotion-zh",
+   "labels": "emotion (7 classes, e.g. angry/...); speaker (female001.../male001..., 10 spk 5M/5F); text; audio bytes",
+   "slice_recipe": "Ready parquet (8 files, ~4160 samples; ONLY a 'train' split exists → self-split with frozen ids). Sample dev n=40 / test n=60 stratified by emotion×speaker, holding out speakers for speaker-independent eval; freeze via kb_snapshot on the `path`/speaker+text key.",
+   "metric": "emotion-kNN accuracy (label=emotion, 7-way) + VocSim same-emotion",
+   "kb_role": "exemplar-source + eval",
+   "include": "include",
+   "loader": "Reuse p2 parquet reader (bytes+path+text+emotion+speaker); on-disk, no extraction; add self-split logic",
+   "retrieval_eval": "emotion kNN; key spaces = Emotion2Vec-S (specialized) vs omni readout — cleanest-licensed zh SER key adjudication (H-a vs H-b), complements esd",
+   "exclude_reason": ""
+  },
+  {
+   "name": "audiocaps-qa",
+   "ds_type": "audio-event-qa",
+   "labels": "instruction (question, string); answer (open-ended free-text, string); context (audio bytes, ~10s AudioCaps/AudioSet clips)",
+   "slice_recipe": "Ready parquet (313 rows, test-only). Sample dev n=40 / test n=60 from 313, freeze via kb_snapshot on row-index; no stratification field available (audio is heterogeneous environmental sound).",
+   "metric": "open-ended answer scoring — semantic-similarity / omni-as-judge (answers are free-form, not extractive), directional paired-bootstrap",
+   "kb_role": "knowledge-source (audio-event captions/answers) + eval",
+   "include": "include",
+   "loader": "Reuse p2 parquet reader (context struct audio + instruction + answer); on-disk, no extraction",
+   "retrieval_eval": "content R@k in the SOUND-EVENT domain — the one place CLAP is a LEGITIMATE key (survey F1: CLAP valid only for sound-events), benchmarked vs omni-hidden-state key. Yields the CLAP validity-domain contrast + τ/δ_corr measurement in a non-speech-content domain.",
+   "exclude_reason": "License note: AudioCaps/AudioSet-derived (YouTube clips); card has no license field → research/eval-only prudent"
+  },
+  {
+   "name": "audio2tool",
+   "ds_type": "spoken-tool-calling",
+   "labels": "expected_tool_call (e.g. 'setLighting()'); extracted_params (dict); additional_tool_calls; tool_id/tool_name/domain/category; functions (available tool specs); speaker_id/source; path (wav)",
+   "slice_recipe": "8 tier JSONs (16.8k queries / 36k wavs, test-only; each JSON = flat list of items with `path` under public/tierN_*_audios/query_XXXXX/). Take cleanest tiers: tier1_direct (2146 q) + tier2_parametric. Sample dev n=40 / test n=60 stratified by domain (smart_home/wearables/smart_car); freeze via kb_snapshot on item `id`. tools_registry.csv (152 tools) = tool-knowledge source.",
+   "metric": "offline tool-call exact-match verifiable reward: tool_name EM + param-dict match (no simulator required, unlike tau2-bench)",
+   "kb_role": "knowledge-source (152-tool registry) + eval-only",
+   "include": "include-subset",
+   "loader": "Needs new loader: read tierN JSON list + wav at item.path; join to tools_registry.csv; on-disk, no extraction",
+   "retrieval_eval": "content-kNN intent→tool (label=tool_id over 152-tool taxonomy) + few-shot ICL tool-spec delivery as the R-reachability / α-adoption lever (T10 delivery-form finding). Tiered difficulty (tier1→tier8) = a built-in stress gradient. Key spaces = content key (GLAP/LCO-Omni/omni).",
+   "exclude_reason": "License note: cc-by-nc-4.0 (non-commercial) → eval-only leaning"
+  },
+  {
+   "name": "squtr",
+   "ds_type": "spoken-query-text-retrieval",
+   "labels": "gold qrels (query-id, corpus-id, score) — native relevance judgments; queries.jsonl (_id,text); corpus.jsonl (_id,title,text); queries_with_audio_*.jsonl (_id,text,audio) per noise level",
+   "slice_recipe": "Zip (source_data.zip; 6 subsets × 4 noise levels; manifests read directly via python zipfile, no full extraction). Pick 1 en (fiqa: 648 q / 57.6k corpus / 1706 qrels) + 1 zh (MedicalRetrieval: 1000 q / 101k corpus / 1000 qrels — avoid nq's 2.68M corpus). dev n=40 / test n=60 queries frozen by _id; evaluate at clean + snr10 + snr0 (noise gradient). Corpus = gold docs (from qrels) + sampled distractors (~2k mini-corpus) to keep Stage-1 cheap.",
+   "metric": "content R@1 / R@10 / nDCG@10 (BEIR/MTEB standard against gold qrels)",
+   "kb_role": "knowledge-source (text corpus = retrievable knowledge) + eval",
+   "include": "include-subset",
+   "loader": "Needs new loader: read jsonl (queries_with_audio_*, corpus, qrels/test) + wav from within zip (or extract one subset); BEIR-format",
+   "retrieval_eval": "content R@k / nDCG@10 — THE native content-retrieval instrument (only dataset that IS a retrieval benchmark). Key spaces = omni-hidden-state / GLAP / LCO-Omni; CLAP as F1 negative-control. The 4-level noise gradient = the retrieval-quality-vs-perturbation curve that directly feeds the τ recall-lower-bound (τ* gating theorem's front-end assumption).",
+   "exclude_reason": "License note: cc-by-sa-4.0 (share-alike) — usable, attribution + SA"
+  },
+  {
+   "name": "auditorybench-plusplus",
+   "ds_type": "text-only-auditory-commonsense",
+   "labels": "text only — animal(sentence,A-D,answer MCQ), pitch/duration/loudness(sentence,answer binary), mmau(sentence,A-D,answer MCQ); 6732 total across 5 CSVs; NO audio field",
+   "slice_recipe": "N/A — 0 audio files on disk; benchmark is by-design text-only ('without requiring direct audio input'). No speech/audio key can be constructed.",
+   "metric": "n/a (excluded)",
+   "kb_role": "none",
+   "include": "exclude",
+   "loader": "n/a",
+   "retrieval_eval": "none — no audio modality; cannot serve as a speech-keyed retrieval or eval instrument",
+   "exclude_reason": "Text-only auditory-commonsense benchmark (verified: 0 wav/mp3/flac; 5 CSVs of [MASK]-style sentences). No speech key possible — same exclusion class as aime24/25/26 (non-speech-key). License cc-by-4.0 is irrelevant given no audio."
+  }
+ ],
+ "type_taxonomy": [
+  {
+   "type": "spoken-query-text-retrieval",
+   "members": [
+    "squtr"
+   ],
+   "eval_scheme": "NEW type (absent from lock 28 — no lock set is a native retrieval benchmark). BEIR/MTEB protocol: encode audio query with a candidate key, cosine-rank the text corpus, score R@1/R@10/nDCG@10 against gold qrels. Sweep the 4-level noise gradient (clean/snr20/snr10/snr0) as the retrieval-quality-vs-perturbation curve feeding the τ recall-lower-bound (the τ* gating theorem's front-end assumption). CLAP is the F1 negative-control (must score ~0 on speech content). Paired-bootstrap directional over frozen query-ids."
+  },
+  {
+   "type": "zh-asr-content",
+   "members": [
+    "aishell-1",
+    "thchs-30"
+   ],
+   "eval_scheme": "Lock-extension (ASR type, new language = zh; lock has librispeech en). CER verifiable reward (jiwer zh, spaces stripped). Content-key kNN R@k on transcript identity (VocSim same-content). Train→dev/test hard-sample memory with τ* gating: retrieve nearest train utts, inject as bias/few-shot (BR-ASR biasing scalability, kNN-Whisper OOD-harm gating warning). aishell-1 = memory-pool(train)+eval(test); thchs-30 = pool diversity only."
+  },
+  {
+   "type": "speaker-verification-id",
+   "members": [
+    "cn-celeb1",
+    "cn-celeb2",
+    "voxceleb1-test-split"
+   ],
+   "eval_scheme": "Lock-extension of SID (crema-d/meld) but with a NEW open trial-pair EER protocol absent from the lock. X-ARES speaker-kNN (label=speaker_id, accuracy) + open trial-pair EER. Adjudicates H-a (specialized speaker keys: ERes2NetV2-zh/CAM++-zh/ReDimNet/WavLM) vs H-b (omni single-space readout). cn-celeb cross-genre = the hard intra-speaker case. voxceleb1 = en anchor (eval-only), cn-celeb1 = zh core (pool+eval), cn-celeb2 = deferred gallery reserve. Paired-bootstrap directional."
+  },
+  {
+   "type": "ser-emotion-zh",
+   "members": [
+    "esd",
+    "csemotions"
+   ],
+   "eval_scheme": "Lock-extension of SER (crema-d/meld en) into zh + parallel-emotion — the survey's flagged empirical gap (#26: zh-SER key gain only +1.8). X-ARES emotion-kNN (label=emotion, accuracy) + VocSim same-emotion identity; ESD parallel text gives same-text/diff-emotion negatives (disentangle emotion from content/speaker). Adjudicates Emotion2Vec-S specialized key vs omni readout (H-a/H-b). esd research-only (eval-only); csemotions Apache (cleanest zh SER). Paired-bootstrap directional."
+  },
+  {
+   "type": "audio-event-qa",
+   "members": [
+    "audiocaps-qa"
+   ],
+   "eval_scheme": "NEW type (absent from lock — all lock QA sets are spoken-QA where content=speech transcript; this is non-speech environmental-sound QA). Open-ended answer scoring via semantic-similarity / omni-as-judge (free-form answers), directional paired-bootstrap. Retrieval-quality = content R@k in the SOUND-EVENT domain — the one domain where CLAP is a LEGITIMATE key (survey F1), benchmarked vs omni-hidden-state key. Supplies the CLAP validity-domain contrast + a τ/δ_corr measurement point outside speech-content."
+  },
+  {
+   "type": "spoken-tool-calling",
+   "members": [
+    "audio2tool"
+   ],
+   "eval_scheme": "NEW type (lock excluded tau2-bench for needing a simulator; audio2tool is OFFLINE-scorable). Offline tool-call exact-match verifiable reward (tool_name EM + param-dict match, no external DB/simulator). Intent→tool content-kNN (label=tool_id over 152-tool taxonomy) + few-shot ICL tool-spec delivery as the R-reachability/α-adoption lever (T10 delivery-form finding). Tiered difficulty (tier1 direct → tier8 intent-blending) = a built-in stress gradient. cc-by-nc (eval-only). Paired-bootstrap directional."
+  },
+  {
+   "type": "text-only-auditory-commonsense",
+   "members": [
+    "auditorybench-plusplus"
+   ],
+   "eval_scheme": "EXCLUDED — no audio modality (verified 0 audio files; text-only [MASK]/MCQ auditory-commonsense reasoning by design). No speech key can be constructed, so no X-ARES/VocSim/MAEB retrieval protocol applies. Same exclusion class as aime24/25/26 (non-speech-key)."
+  }
+ ],
+ "notes": "FIELD-INSPECTION SUMMARY (read-only, E-drive on-disk, 2026-07-09).\n\nWS-D four (previously undocumented) — resolved by opening on disk:\n1) squtr = native BEIR/MTEB Spoken-Query-to-Text Retrieval benchmark (SIGIR-2026), 6 subsets (en: fiqa/hotpotqa/nq; zh: DuRetrieval/MedicalRetrieval/T2Retrieval), gold qrels (query-id,corpus-id,score), corpus/queries jsonl, 4 noise levels. This is the SINGLE most on-thesis instrument in the whole collection — the only dataset that IS a retrieval benchmark natively, and its noise gradient is a ready-made τ recall-lower-bound curve. Corpora are large (nq=2.68M docs) → Stage-1 uses fiqa+MedicalRetrieval with mini-corpus (gold + sampled distractors).\n2) audio2tool = offline-scorable spoken tool-calling (Rivian/VW, cc-by-nc). Gold expected_tool_call + extracted_params + 152-tool tools_registry.csv; 8 tiers, 16.8k queries / 36k wavs. Unlike the lock-excluded tau2-bench, NO simulator needed → offline verifiable reward viable. NEW type.\n3) audiocaps-qa = non-speech audio-event QA (313 test rows, open-ended answers about environmental sounds; AudioCaps/AudioSet-derived). NEW type; the CLAP-legal sound-event domain (CLAP becomes a legitimate key here, not just the negative control).\n4) auditorybench-plusplus = TEXT-ONLY auditory-commonsense (verified 0 audio files; 5 CSVs of [MASK]/binary/MCQ sentences). EXCLUDE — no speech key possible; same class as aime24/25/26. (License cc-by-4.0 moot.)\n\nGap-7 layout verified: aishell-1 (parquet, bytes/path/transcription — train 35 + test 3 files, natural pool/eval split), voxceleb1-test-split (parquet, speaker_id, 40 spk), csemotions (parquet, text/emotion/speaker, 7 emotions, 10 spk, ONLY a train split → self-split needed) are READY parquet. cn-celeb1 (.tar.gz, internal CN-Celeb_flac/eval/test layout confirmed, speaker+genre in filename), cn-celeb2 (3-part .tar.gz, 75GB, DEFERRED reserve), thchs-30 (.tgz), esd (.zip, 20 spk 0001-0010 zh / 0011-0020 en, 5 emotions, tab-sep parallel transcript) all NEED EXTRACTION + new loaders.\n\nINCLUDE decisions: include=aishell-1, cn-celeb1, voxceleb1-test-split, esd, csemotions, audiocaps-qa; include-subset=thchs-30 (pool diversity), cn-celeb2 (deferred reserve), audio2tool (tier1+2 slice), squtr (fiqa+MedicalRetrieval slice); exclude=auditorybench-plusplus (text-only, no speech key).\n\nLICENSE FLAGS: esd research-only (eval-only, no redistribution); audio2tool cc-by-nc-4.0 (eval-only leaning); audiocaps-qa AudioSet-derived, no card license (eval-only prudent); squtr cc-by-sa-4.0 (attribution+SA); csemotions/aishell-1/thchs-30 Apache-2.0 (clean); cn-celeb1/2 & voxceleb1 CC-BY-SA-4.0; auditorybench cc-by-4.0 (moot). aishell-1 transcription is space-segmented ('甚至 出现 交易') — strip spaces before CER.\n\nNEW TYPES introduced beyond the lock-28 families (ASR/ST-LID/SER-SID/SLU-intent/SLU-slot/audio-MCQ/spoken-QA): (a) spoken-query-text-retrieval [squtr] — native qrels IR; (b) audio-event-qa [audiocaps-qa] — non-speech sound-scene QA; (c) spoken-tool-calling [audio2tool] — offline structured function-calling. Lock-extensions (same type, new language/protocol): zh-asr-content, ser-emotion-zh, and speaker-verification-id (adds the open trial-pair EER protocol the lock's crema-d/meld SID lacks). All Stage-1 slices = dev n~40 / test n~60, item-ids frozen via kb_snapshot, directional-only."
+}

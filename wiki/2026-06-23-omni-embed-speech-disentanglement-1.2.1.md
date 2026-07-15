@@ -1,3 +1,5 @@
+> **LOG** — Stage-1 过程记录（hypothesis-grade），非现行真源；现行结论以 [[Decision-Log]] 与 [[Per-Work-Status]] 为准。
+
 # 2026-06-23 · Omni-Embed Speech Disentanglement · Experiment 1.2.1 — Model understanding & few-shot/ICL
 
 > Naming `yyyy-mm-dd-{purpose}-{a.b.c}`: **a=1** (training-free activation/disentanglement of the frozen

@@ -65,6 +65,37 @@ one quantitative statement we invoke --- the $\spread^2/(8\beta)$ ceiling --- is
 result: it is the standard Hoeffding bound, proved on paper in \Cref{lem:hoeffding} and used only
 qualitatively.
 
+\paragraph{Relation to hard best-of-$N$: a separate, axiom-imported module, not an operator-linked proof.}
+None of the lemmas in \Cref{app:lean-status} is \emph{about} the hard-BoN selector we run in
+\Cref{sec:c1}; they are about the abstract Gibbs tilt $\qs$ over a generic finite $\cZ$. The
+\emph{hard}-BoN object --- the KL divergence between the order-statistics selection distribution
+$\pi_{\mathrm{BoN}}$ (draw $N$ i.i.d.\ samples from $\qo$, keep the reward-argmax) and $\qo$ itself ---
+lives in a separate module, \texttt{TfrlProofs.BestOfN}. There, \texttt{klBoundBoN(N)} $:=\log N-(N-1)/N$
+is proved nonnegative and given a closed algebraic form (both \texttt{sorry}-free), but the true
+selection-policy functional \texttt{klBoNActual : ℕ→ℝ} is left \textbf{opaque} (its measure-theoretic,
+order-statistics/reward-CDF definition is out of scope for this project), and the bound relating it to
+\texttt{klBoundBoN} --- Beirami et al.\ (2024), arXiv:2401.01879, Theorem 3.1 --- is imported as a
+single named, explicitly documented \textbf{axiom}, \texttt{beirami\_thm\_3\_1}, rather than derived from
+more primitive results; \texttt{kl\_best\_of\_n\_le} then follows immediately from that axiom. This is a
+deliberate, documented exception to the sorry-free bar (a fixed-but-unspecified opaque functional is a
+\emph{consistent} way to import a cited-but-unformalized result; a universally-quantified version would
+be inconsistent), not an oversight, but it means the \textbf{operator-linked theorem count for the
+hard-BoN selector is $0$}\footnote{A separate, code-cited module, \texttt{TfrlProofs.Coverage}
+(\texttt{proofs/tfrl/TfrlProofs/Coverage.lean}), formalizes an i.i.d.-Bernoulli \emph{coverage-probability}
+model for the best-of-$N$ \emph{pool-generation loop} (cites line numbers in
+\texttt{scripts/repro\_asr\_best\_of\_n\_v2.py}) and is empirically bridged to the stored candidate pools
+(\texttt{scripts/coverage\_bridge.py}, \texttt{\_repro/coverage\_bridge\_v1.json}). It is deliberately
+\textbf{not} counted as an operator-linked theorem for the \emph{selector} in the sense used here: it
+formalizes the independent-draws \emph{sampling} step that feeds the reward-argmax rule, not a theorem
+about the selection rule (\texttt{klBoNActual}) itself. The ledger-authoritative operator-linked count for
+the hard-BoN selector therefore remains $0$ (\texttt{docs/claim\_ledger.yaml}, entry \texttt{C-THEORY}).}:
+no Lean theorem in this project connects \texttt{klBoNActual} (or any object
+about it) to the engineering-side Python selector of \Cref{def:operator}, and no theorem here proves
+that hard BoN's order-statistics distribution equals, or even provably approaches, the Gibbs tilt $\qs$
+at any $\beta$. Wherever the main text identifies hard BoN with the $\beta\to0$ limit of the tilt, that
+identification is the standard heuristic of the literature \citep{beirami2024bon}, not a claim this
+appendix proves.
+
 \paragraph{Tilting primitives and the Gibbs inequality.}
 The exponentially tilted optimum $\qs$, its partition function $\Zpart$, and the KL-regularized
 objective $\Fobj{\cdot}$ are defined exactly as in the main text. We reproduce the Lean signatures
@@ -268,8 +299,10 @@ governs the gain ceiling of \Cref{lem:hoeffding}; \texttt{exact\_match\_reward} 
 $\mathbf{1}[\text{normalized strings equal}]\in\{0,1\}$ for closed-form tasks (intent, tool selection,
 keyword). The WER reward is the one our primary experiment selects on: it realizes a large, non-degenerate spread
 over the generative model's sampled transcripts under acoustic stress --- the oracle best-of-$N$ headroom
-of \Cref{sec:c1}. (The \texttt{exact\_match} reward scores the secondary frozen-encoder zero-shot intent
-ablation of \Cref{sec:c2}, which is a confounded card-design comparison, not reward-driven selection.)
+of \Cref{sec:c1}. (The \texttt{exact\_match} reward scores the secondary frozen-encoder tool/intent
+factorial of \Cref{sec:c2} (instruction wording $\times$ card content), whose true zero-shot arm
+regresses and whose card-driven gain carries a small residual scripted-corpus overlap confound; this
+is an evaluation metric only, not reward-driven selection.)
 
 \paragraph{Retrieval / embedding (\texttt{rl.embedding\_metrics}).}
 \texttt{recall\_at\_k(query, gallery, labels\_q, labels\_g, k)} and

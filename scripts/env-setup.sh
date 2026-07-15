@@ -51,7 +51,16 @@ uv pip install cmake ninja
 #   - convert_hf_to_gguf.py + convert_lora_to_gguf.py : post-fine-tune GGUF export (merge path & adapter path)
 LLAMACPP_DIR="${LLAMACPP_DIR:-$HOME/llama.cpp}"
 CUDA_128="${SPEECHRL_CUDA_HOME:-/usr/local/cuda-12.8}"
-[ -d "$LLAMACPP_DIR/.git" ] || git clone --depth 1 https://github.com/ggml-org/llama.cpp "$LLAMACPP_DIR"
+# Pinned 2026-07-09: this is the exact commit behind the resident Qwen3-Omni llama-server build
+# (verified via `git -C ~/llama.cpp rev-parse HEAD` on the WSL2 box). A shallow `--depth 1` clone of
+# `main` is not reproducible — main moves; pin then checkout so a fresh env-setup.sh run reconstructs
+# the SAME llama.cpp the resident build/results were produced with. Bump this SHA deliberately (with a
+# dated comment) when intentionally moving to a newer llama.cpp, not as a side effect of a rerun.
+LLAMACPP_COMMIT="${LLAMACPP_COMMIT:-fdbd6abee20e408de21e90ca77a24cd50a6ea073}"  # 2026-06-25, "tests: synchronize contexts at end of test-thread-safety (#24935)"
+if [ ! -d "$LLAMACPP_DIR/.git" ]; then
+  git clone https://github.com/ggml-org/llama.cpp "$LLAMACPP_DIR"
+  git -C "$LLAMACPP_DIR" checkout "$LLAMACPP_COMMIT"
+fi
 cmake -S "$LLAMACPP_DIR" -B "$LLAMACPP_DIR/build" -G Ninja \
       -DGGML_CUDA=ON -DCMAKE_CUDA_COMPILER="$CUDA_128/bin/nvcc" \
       -DCMAKE_CUDA_ARCHITECTURES=120 -DLLAMA_CURL=OFF \

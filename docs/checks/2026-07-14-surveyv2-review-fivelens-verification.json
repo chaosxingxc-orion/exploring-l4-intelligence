@@ -1,0 +1,333 @@
+{
+  "summary": "Independent claim-by-claim verification of the survey-v2 MAJOR_REVISION doctoral review before drafting the response",
+  "agentCount": 5,
+  "logs": [],
+  "result": {
+    "mech": {
+      "claim_verdicts": [
+        {
+          "review_claim": "§7-P0.3 / Round-2 表：query log 305 行中 SEARCH(WebSearch)=218、FETCH(WebFetch)=87，应分开计数",
+          "status": "CONFIRMED",
+          "evidence": "对 wiki/survey/2026-07-14-search-query-log.jsonl 逐行 JSON 解析：305 条非空记录，每条字段恰为 {lane, engine, query, date, result_cap, note}（305/305 同一键集）。按 engine 字段计数：WebSearch=218、WebFetch=87，与评审完全一致——区分直接来自 engine 字段，无需推断。Round-2 表其余数字亦全部复现：query 字段本身为 URL 的 53 条；lane 去重 15 个；date 全部为 '2026-07-14' 无时分秒；305 个 query 字符串 exact-unique；result_cap 混用 '10'/'1 doc'/'~9 links'/'full text'/'abstract page'/'multiple' 等 28 种字符串值。无 run/agent/event ID、raw result、returned count、screening decision 字段——评审对字段缺失的描述属实。"
+        },
+        {
+          "review_claim": "§7-P0.5 / Round-3：存在 39 个 FT(FULLTEXT_VERIFIED) 证据标签需逐一审计",
+          "status": "CONFIRMED",
+          "evidence": "两处独立复现 39：(1) scout-ledger-round2.json 的 113 个 paper rows 按 grade 字段统计 = AB 54 / FT 39 / SC 18 / UNVERIFIED-CITATION 2，与评审 Round-3 给出的分布逐字一致；strength 分布 DIRECT 17 / PARTIAL 62 / ANALOGY 33 / NONE 1 亦逐字一致。(2) neighbor-matrix-v2.md Section A/B 表格行末列（grade 列）机械解析 = FT 39 / AB 54 / SC 18，两工件互相一致。另有 9 个 [FT] 括注出现在 Section 'coordinator-verified' 卡片标题（8 个编号卡 + 1 处），与 39 个行级 FT 标签是不同层的标注。"
+        },
+        {
+          "review_claim": "Round-9 / P0.8：禁词仍出现——SOTA card 正文出现 EMPTY/UNDERSEARCHED 与其 header '不写 EMPTY' 直接矛盾；大量 cell 仍写裸 NO_DIRECT_MATCH（无 WITHIN_LOGGED_SCOPE 限定）；自检却报告合规",
+          "status": "CONFIRMED",
+          "evidence": "六工件正则扫描：EMPTY 共 5 处，其中 4 处是 meta 声明（'no EMPTY cells'/'No cell is ever EMPTY'），1 处实质违规 = sota-cards-v2.md 第 95 行 '…but EMPTY/UNDERSEARCHED for SLU-intent and spoken-QA/agent'，与同文件第 3 行 header 'Kill-matrix vocab only; no `EMPTY` cells' 自相矛盾。裸 NO_DIRECT_MATCH（后无 _WITHIN_LOGGED_SCOPE 后缀）共 86 处：coverage-and-kill-matrix 29 / ledger 46 / stage1c-package 6 / neighbor-matrix 3 / sota-cards 1 / query-log 1；带限定的仅 9 处——而 coverage matrix 自己的 header 把固定词表定义为 NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE。'自检报告 0 violation' 的对应物 = 被审 commit 233dc7eb 的提交信息自称 'Self-check … kill-matrix vocab compliant (no EMPTY)'，与 sota-cards 第 95 行的实际违规并存，坐实自检未拦截。"
+        },
+        {
+          "review_claim": "Round-3 / P0.4：'~93' 唯一论文数不可精确重建（评审自己重算得 107 个 exact-unique id 字符串，并指认多套别名如 scaling-auditory-cognition-2025 / AuditoryTTC-2503.23395 / dang2025… / ttc-audio…，且行内无规范 DOI/arXiv/URL）",
+          "status": "PARTIAL",
+          "correction": "实质结论成立（93 不可精确重建、别名系统存在、行无规范 ID），但评审的 '107' 数字本身不精确：原始 exact-unique id 字符串是 110（113 行 − 3 个跨 lane 重复 id：aqa-ttrl-2025、mbr-asr-2510.19471、auditory-ttc-2503.23395 各出现 2 次）；107 只有在大小写折叠后才能得到（lowercase-unique=107）。评审举证的四组别名全部属实且不止四组。",
+          "evidence": "'93' 用点普查：ledger counts.unique_papers_after_cross_lane_dedup_est=93（字段名自带 _est）；stage1c-decision-package.md 第 24 行 '~93 papers'；被审 commit 提交信息 '~93 papers'；survey/README.md 第 5 行 '~93 papers'（README 不在六个被锁哈希工件内）。三个 v2 markdown 无独立 '93' 用法。重建测试：113 rows（与各 lane n_papers 之和一致）→ 原始 exact-unique=110；lowercase=107；去符号规范化=106；按 ledger 自述 dedup rule（canonical unit=arXiv id）对 id 内嵌 arXiv 号机械分组=104；进一步人工别名合并（scaling-auditory×5: scaling-auditory-cognition-2025/AuditoryTTC-2503.23395/auditory-ttc-2503.23395/dang2025-auditory-cognition-ttc/ttc-audio-2025；mbr-asr×3；walking-through-uncertainty×3 含 kuan2026-allm-uncertainty 与 I3-01；aqa-ttrl×2、jitrl×2、judgebon×2、progres×2、rmoveropt×2、audiomind×2、coverageguaranteed/I3-03×2、ernez/I3-04×2）≈ 94——任何机械或尽力重建路径都到不了恰好 93。paper row 键集仅 {id, grade, kills, strength, our_data, [xlane]}，确无独立 DOI/arXiv/version/URL 字段。注意：工件本身从未宣称 93 是精确值（_est 后缀 + 波浪号），评审 '只能叫人工估计' 的定性与团队标注一致；评审要求换成可重建精确值的整改仍然成立。"
+        },
+        {
+          "review_claim": "§2 固定审查快照：六个工件在 commit 233dc7eb9224b5d7bc8df7bfd81a616ab15c6917 的 git-blob 字节 SHA-256 如表所列",
+          "status": "CONFIRMED",
+          "evidence": "`git show 233dc7eb:<path> | sha256sum` 逐一重算六个文件（超出任务要求的至少三个）：coverage-and-kill-matrix-v2.md=921cf68f…f30e43、neighbor-matrix-v2.md=e2855642…277b493、scout-ledger-round2.json=2632ebaf…3e03cb（全串 2632ebaf335a44cf4044e781335eaf705cee1871cce7643c5e42dbc6e03bc1eb）、search-query-log.jsonl=6e22c703…6af8f8、sota-cards-v2.md=fc101f1b…31c541、stage1c-decision-package.md=2c08e177…d23a7c7（全串 2c08e1774443d03af0b5f8830d3c3c7c1b818f9a6fe6da6e6e95ef777d6a23c7）——六条全部与评审 §2 表逐字节一致，0 mismatch。另经 `git hash-object` 验证当前工作树六文件与被审 commit blob 逐字节相同，故本 lens 全部重算均作用于被审快照本身。"
+        }
+      ],
+      "verdict": "机械重算镜头下，该评审的可机检主张几乎全部成立且精度很高：SEARCH=218/FETCH=87、53 条 URL-query、15 lanes、无时间戳、字段集、305 unique query（Round-2 表全部复现）；FT=39 在 ledger 与 neighbor matrix 两处独立复现（AB 54/SC 18/UNVERIFIED 2、DIRECT 17/PARTIAL 62/ANALOGY 33/NONE 1 逐字一致）；禁词违规属实（sota-cards 第 95 行 1 处实质 EMPTY 与自家 header 及 commit 自检声明直接矛盾；六工件共 86 处裸 NO_DIRECT_MATCH 对 9 处带限定）；六个 git-blob SHA-256 全部匹配。唯一发现的评审瑕疵：Round-3 自称重算出 '107 个 exact-unique id 字符串'——原始精确值是 110，107 仅在大小写折叠后成立；但其实质论点（93 不可精确重建：机械按其自述 dedup rule 得 104、尽力人工别名合并得约 94，且 paper row 无规范 DOI/arXiv/URL 字段）完全坐实。回应信可以在承认 P0.3/P0.5/P0.8/哈希锁定与去重整改要求的同时，指出 107 这一处评审自身的重算不精确，并指出 '~93' 在工件内始终带 _est/波浪号标注、从未被当作精确分母参与任何比率计算。",
+      "notes": "回应信要点：(1) 全部重算均已验证作用于被审快照——工作树六文件与 233dc7eb blob 逐字节相同（git hash-object 一致），不存在'审的是旧版'的抗辩空间。(2) 可承认项（证据确凿）：engine 二分 218/87、39 个 FT、86 处裸 NO_DIRECT_MATCH、sota-cards 唯一实质 EMPTY 违规（第 95 行）、六哈希、113 rows、grade/strength 分布。(3) 可礼貌纠正项：评审的 107 应为 110（107=大小写折叠副产物）；EMPTY 违规是恰好 1 处实质出现而非弥漫性（其余 4 处是 'no EMPTY' 的 meta 声明）；'~93' 从未以精确分母形式参与比率计算，ledger 字段名自带 _est——但这不解除 P0.4 整改义务，因为按 ledger 自述的 dedup rule 也只能重建到 104，人工尽力合并 ≈94，93 无法由任何机械程序重现。(4) 别名污染实测比评审列举的更广：至少 12 个别名簇、16 个冗余 id（scaling-auditory 一篇 5 个 id；walking-through-uncertainty 3 个 id 且 grade 不一致——FT 行与 AB 行并存，佐证 Round-4 的'同一论文多行不同证据级'风险）。(5) 佐证 Round-1/Round-9 的旁证：被审 commit 提交信息本身写 'Survey v2 complete (调研收官)' 且自称 'kill-matrix vocab compliant (no EMPTY)'——后者被 sota-cards 第 95 行证伪，可直接引用为'装饰性自检'的实锤。(6) 本 lens 未覆盖（需其他 lens）：READ ~70–85% 数字上夸、MBR/Llama-3 合并、TAP-GER/ProGRes 边界、I2/I4 novelty 论证等 arXiv 一手核验类主张。"
+    },
+    "facts": {
+      "claim_verdicts": [
+        {
+          "review_claim": "Round 5.1：neighbor matrix 写 READ \"~70-85% oracle\" 系上夸；按论文 Table 1 的 greedy/READ/oracle WER 重算，八个条件的 realized-oracle 分数最大值不到 70%，更无 85%；且上一轮 ledger 曾正确写 clean LibriSpeech 几乎不动、shifted set 才约一半",
+          "status": "CONFIRMED",
+          "evidence": "论文（arXiv 2606.04680, \"Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy\", 抓取 HTML 全文）Table 1 八条件 greedy/READ/oracle WER = LS-clean 2.06/1.91/1.15、LS-other 3.66/3.48/2.15、VCTK-noisy 7.41/7.19/6.14、ASRU 9.96/9.67/6.20、TALCS 18.94/14.98/13.07、SWBD 15.02/11.93/10.51、TEDLIUM3 4.22/3.40/2.71、SPGI 4.24/3.33/2.15。我按 (greedy−READ)/(greedy−oracle) 独立重算得 16.5%/11.9%/17.3%/7.7%/67.5%/68.5%/54.3%/43.5%——最大 68.5%<70%，四个条件仅 8-17%；论文全文无任何 70-85% 主张。团队工件三处载有该数字：neighbor-matrix-v2.md L147（\"frozen external TTS NLL rerank; ~70-85% oracle\"，grade FT）、coverage-and-kill-matrix-v2.md L24（\"read-2606.04680 (external-TTS, ~70-85% oracle)\"）、scout-ledger-round2.json L1223（\"READ ~70-85% oracle\"）。Round-1 ledger（2026-07-13-scout-ledger-round1.json L268）确曾更准确地写 \"eating ~19-21% relative / roughly half the oracle gap on 4 domain-shift ASR sets ... while barely moving clean LibriSpeech\"——v2 确属退化。次要偏差：review 自己的八个重算值有四个与我略异（43.8/约56/67.7/68.4 vs 我的 43.5/54.3/67.5/68.5），且 review 链接文字把论文标题误写为 \"READ: Reversible Textual Rescoring for ASR\"；均不影响结论。另查明一个可能的 70-85% 来源：READ Table 2 的 segment-level system combination（如 TALCS 16.77→8.22, oracle 9.61）确可超 70% 甚至越过句级 oracle，但那是组合式改写算子，不是团队 cell 所述的 \"NLL rerank\"，引用它反而坐实算子混写。"
+        },
+        {
+          "review_claim": "Round 5.2：SOTA card 把 \"Whisper-lv3 + Llama-3 scorer\" 与 MBR 3.3/oracle 1.3、O(N²) 放在同一行；原论文中 MBR 用 hypothesis-to-hypothesis BLEU utility，Llama-3 属于 ProGRes comparator，不是 MBR scorer",
+          "status": "CONFIRMED",
+          "evidence": "论文（arXiv 2510.19471, \"Re-evaluating Minimum Bayes Risk Decoding for Automated Speech Recognition Tasks\", 抓取 HTML 全文）明言 \"We use the BLEU score ... implemented by the sacrebleu package ... as the utility function of MBR\"（假设两两互评，故 O(N²)）；Llama-3-8B-Instruct 仅出现在 reranking 对比节，用于给 ProGRes comparator 算 perplexity 分——不在 MBR 管线内。Table 9：ProGRes WER 0.043，MBR 0.033，MBR 显著更优。团队 sota-cards-v2.md L20 的 F2 行将系统列写成 \"Whisper-lv3 + Llama-3 scorer\"，同行 headline 数字却是 \"WER 3.3 (MBR, oracle 1.3 → ~31% realized)\"、成本列 \"O(N²) MBR\"——系统归属与数字血统错配，指控属实。附注：团队引的数字本身有据——0.042(beam)→0.033(MBR) 见论文 Table 6/7（whisper-large-v3, LibriSpeech, no noise），oracle 0.013 见 Table 1；错在把 LLM scorer 焊进 MBR 行。且改正后（Llama-3/ProGRes 0.043 劣于纯 MBR 0.033）反而强化 mbr-asr 作为 I1 杀手的叙事。"
+        },
+        {
+          "review_claim": "Round 5.3：TAP-GER 摘要说 frozen in-context prompting 有竞争力，而低于 N-best oracle WER 的结果来自 prompting 加 fine-tuning；其 generative error correction 还能产生池外输出；它不能作为 \"frozen in-pool selector 击败 oracle\" 的证据",
+          "status": "PARTIAL",
+          "evidence": "论文（arXiv 2309.15649, Yang et al. ASRU'23, PDF 全文本地解析）核验：(a) 摘要确说 frozen ICL rescoring \"competitive with rescoring by domain-tuned LMs\"，且 \"By combining prompting techniques with fine-tuning we achieve error rates below the N-best oracle level\"——review 对摘要的转述准确；(b) 但论文 Table 3 明载 \"(a) Oracle 9.78 / (b) + frozen InstructGPT w/ TAP 8.72\"（WSJ，零 fine-tuning）——团队 neighbor-matrix-v2.md L137 引的 \"WSJ 8.72<9.78\" 数字对在原文逐字存在，review 的 \"低于 oracle 的结果来自 prompting 加 fine-tuning\" 作为全称陈述不精确；(c) review 的池外输出论点成立且正是真正的调和机制：Table 1 显示 InstructGPT correction 把池 oracle 从 9.78 改到 8.41（池被生成式改写扩张），P2 里 frozen GPT-2 得 29.56 WER 远劣于 first-pass 11.87——纯池内选择在两个方向上都不可能出现这种数字，证明 P2 算子产出池外文本；(d) 因此 review 的落点结论成立：团队把该行标 kills=I1、strength=DIRECT、grade=FT（ledger L1058-1064）并措辞 \"frozen InstructGPT rescoring beats N-best oracle\"，把生成式纠错当作池内选择器越过 oracle 的证据，属算子类别混写。综合：结论对、机制论证对，但 \"须 fine-tuning 才低于 oracle\" 这一支撑句与原文 Table 3 矛盾，故 PARTIAL。"
+        },
+        {
+          "review_claim": "Round 5.4：ProGRes 会生成新假设扩展 N-best 再评分，不是纯 in-pool selection；将它与只在固定 K 池内选一个候选的 selector 混为一谈会使 oracle/headroom/信息边界/预算失真",
+          "status": "CONFIRMED",
+          "evidence": "论文（arXiv 2409.00217, \"ProGRes: Prompted Generative Rescoring on ASR n-Best\", Tur/Moumen/Ravanelli, SLT'24, 抓取 abs 页）明言 \"dynamically expand the n-best speech recognition hypotheses with new hypotheses generated through appropriately-prompted LLMs\"（Llama-3-Instruct/GPT-3.5/GPT-4 为生成器，Llama-3 为 sequence scorer；5-25% 相对 WERR）——即候选池扩张+评分，非固定池内选择。团队工件：neighbor-matrix-v2.md L138 将其列入 Lane 11 kill-I1，strength=DIRECT；ledger L1067-1074 同为 kills:[I1], strength DIRECT。团队的算子描述文字本身含 \"generative\"（\"prompted generative rescoring\"），但把候选扩张算子判为对 in-pool selector 身份 I1 的 DIRECT 占据即是 review 所指的混写。另发现内部不一致：同一论文在 ledger L6 条目（L618-626）strength=PARTIAL、L11 条目 strength=DIRECT，佐证 claim-level QC 失效。"
+        }
+      ],
+      "verdict": "Round 5 四项事实指控经论文一手核验：三项 CONFIRMED（5.1 READ \"~70-85% oracle\" 确系上夸——Table 1 重算最大 68.5%、四条件仅 8-17%，且 round-1 ledger 原本写得更准，v2 属退化；5.2 SOTA card 确把 Llama-3 scorer 焊进 MBR 行，原论文 MBR 用 sacrebleu 两两 BLEU、Llama-3 只在 ProGRes comparator 且被 MBR 击败；5.4 ProGRes 确是生成扩池再评分、非池内选择，团队却标 kills-I1 DIRECT），一项 PARTIAL（5.3 TAP-GER：review 的落点结论对——8.72<9.78 是生成式纠错越过原池 oracle、不能证 \"frozen in-pool selector 击败 oracle\"，但 review 自己的支撑句 \"低于 oracle 须 prompting+fine-tuning\" 与原文 Table 3 的 frozen 行矛盾，团队引的数字对在原文逐字存在）。本镜头内 review 的总判断成立：这是 claim extraction 与 operator taxonomy 的质量控制失效，非数字捏造——所有出错数字都能追溯到真实论文的真实表格，错在提取与算子归类。",
+      "notes": "回信必须包含：(1) 承认三处 \"~70-85%\" 载体（neighbor-matrix-v2.md L147、kill-matrix-v2.md L24、ledger L1223）并更正为 Table 1 重算值（clean/近域 8-17%，domain-shift 43-69%，最大 68.5%）；特别要点：READ 是 5 篇 \"COORDINATOR-VERIFIED\" load-bearing 论文之一且该行 grade=FT，仍带错数——这直接坐实 review Round 4 \"FT/VERIFIED 标签不保证 claim 级正确\" 的论点，回信不应只在 5.1 认错而在 Round 4 抵抗。(2) 5.2 更正后对团队有利：ProGRes(Llama-3) 0.043 劣于纯 MBR 0.033（原论文 Table 9），修正不削弱反而强化 mbr-asr 作为 I1 杀手的地位。(3) 5.3 可礼貌指出 review 两处不精确以示独立核验非表演性接受：a) \"低于 N-best oracle 须 fine-tuning\" 与原文 Table 3 \"(b) + frozen InstructGPT w/ TAP 8.72 < (a) Oracle 9.78\" 矛盾（摘要句是作者对 fine-tuning 结果的概括，Table 4 LoRA 低至 2.11）；真正的机制是生成式池外输出（Table 1 显示 correction 把池 oracle 9.78→8.41；frozen GPT-2 29.56 远劣于 first-pass 11.87，纯选择不可能）；b) review 链接文字把 READ 标题误写为 \"READ: Reversible Textual Rescoring for ASR\"（实为 \"Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy\"），其八个重算值中四个与我的重算略有出入（43.8/~56/67.7/68.4 vs 43.5/54.3/67.5/68.5）——均不改结论。(4) 修复动作应含：ProGRes 在 ledger 两 lane 的 strength 不一致（L6 PARTIAL vs L11 DIRECT）；按 review 要求把 selection/revision/candidate-expansion 分列后，TAP-GER 与 ProGRes 应从 kill-I1 DIRECT 降为 \"contests oracle-anchor 语义的扩池算子\"。(5) 一个待查线索：团队 \"~70-85%\" 可能误源于 READ Table 2 segment-level system combination（TALCS 16.77→8.22 可越过句级 oracle 9.61），若属实应在勘误中注明来源混淆。核验环境注记：四篇论文均为一手抓取（2606.04680 与 2510.19471 HTML 全文、2309.15649 PDF 本地解析、2409.00217 abs 页）；工件自 reviewed commit 233dc7e 至 HEAD 58ebc77 无 diff，当前文件即审查快照。"
+    },
+    "i4occ": {
+      "verdict": "Round 7 的五篇引文全部真实存在且描述基本准确(其中 2605.10991 的标题是意译非原题),其中 4/5(VG-Search 2505.11730、诊断律 2605.10991、Art-of-TTS 2512.02008、RoboMonkey)在全部 survey 工件中零命中,且 ledger 的 9 个 round-2 饱和目标全是 speech/audio 内向目标、未自认 general-TTS/VLA/judge-bias 缺口——因此\"survey 漏掉了更广 test-time scaling 文献\"这一覆盖面攻击成立。但在\"占据 vs 相邻\"这一关键问题上,五篇没有任何一篇实现 I4 命名的对象(供给类型条件化的 ρ(c)/H(c)/regret 兑现曲面,冻结 omni,[model×task] 矩阵):Snell 是难度轴、VG-Search 是验证粒度轴、2605.10991 是 personalization RM 的 BoN 诊断分解(方法学上最近)、2512.02008 是策略×模型×预算图集、RoboMonkey 是 VLA 的 K 轴 scaling law——全部是相邻对象;survey 已登录的 siskos-2509.19567(供给条件化 none/retr/LLM/oracle、兑现 ~69-77% oracle)、ColdStart、KIT、JudgeBoN 反而比评审新增五篇更接近 I4 的精确对象。因此 Round 7 的正确效果是:(a) 合法击杀无限定语的\"单一最清晰空白/strongest differentiator\"措辞(曲面/scaling-law 方法学确已被文本与 VLA 广泛占据,ledger 第 74 行\"NO_DIRECT_MATCH all lanes\"的无范围限定表述站不住);(b) 把 I4 的可辩护主张压缩到\"域实例化 + 供给类型轴 + 从描述曲面升级为可预测规律\";但 (c) 并未把 I4 打成 DIRECT_OCCUPIED——评审自己的措辞(\"domain instantiation 可能开放,但 scaling-surface methodology 已被广泛占据\")与证据吻合,是\"加饱和 lane + 降措辞等级\",不是\"空白被占据\"。另外我的独立查询发现三篇双方都漏掉、且比评审五篇更贴近的作品(见 notes),其中 2606.02981 部分占据了评审自己给 I4 开出的升级药方,响应信必须吃下这一点。",
+      "claim_verdicts": [
+        {
+          "review_claim": "Round 7 引文1:Compute-Optimal Test-Time Scaling (arXiv 2408.03314) 存在,内容为'难度条件化的 test-time compute 分配与 verifier 效用'",
+          "status": "CONFIRMED",
+          "evidence": "arXiv 摘要核验:Snell/Lee/Xu/Kumar,'effectiveness ... critically varies depending on the difficulty of the prompt'+'searching against dense, process-based verifier reward models'。描述准确。但需澄清:该文并非全然被漏——round-1 ledger(wiki/survey/2026-07-13-scout-ledger-round1.json L580-594)有完整行,v2 query log(2026-07-14-search-query-log.jsonl L37)的 kill-I4 敌意查询命中并标注'难度轴,text,非 frozen-omni 兑现曲面→analogy,折入 saturation note';只是未进入 v2 邻居矩阵/kill 矩阵行。摘要无供给条件化兑现曲面——相邻,非占据。"
+        },
+        {
+          "review_claim": "Round 7 引文2:Variable Granularity Search (arXiv 2505.11730) 存在,内容为'跨 compute budgets、generator-verifier 配置和 task attributes 的搜索'",
+          "status": "CONFIRMED",
+          "evidence": "arXiv 摘要核验:原题'Rethinking Optimal Verification Granularity for Compute-Efficient Test-Time Scaling'(Chen et al.),方法名 VG-Search;摘要原文'under varying compute budgets, generator-verifier configurations, and task attributes'与评审措辞逐字吻合。survey 全工件 grep 零命中——确系遗漏。对象是验证器调用粒度的效率-精度权衡,无 ρ/oracle-headroom 兑现测量——相邻,非占据。"
+        },
+        {
+          "review_claim": "Round 7 引文3:'A Diagnostic Scaling Law for Test-Time Personalization' (arXiv 2605.10991):把 BoN 曲线分解为可测量量,跨 policy/task 解释与预测",
+          "status": "PARTIAL",
+          "evidence": "论文存在但评审给的标题是意译:原题为'Test-Time Personalization: A Diagnostic Framework and Probabilistic Fix for Scaling Failures'(Linhai Zhang, Yulan He)。内容描述准确:'derive a unified scaling law that decomposes any reward model's Best-of-N curve into four measurable quantities',且显式含 oracle-vs-realized 框架('oracle selection yields expected utility growing logarithmically... standard reward models fail to realize this potential'),跨多 policy/任务。survey 零命中。这是五篇中方法学上最接近 I4'预测性兑现规律'升级路径的一篇——但无供给轴 c、纯文本 personalization 域,不占据 I4 命名对象。",
+          "correction": "响应信引用时应用原题'Test-Time Personalization: A Diagnostic Framework and Probabilistic Fix for Scaling Failures',评审标题系意译。"
+        },
+        {
+          "review_claim": "Round 7 引文4:The Art of Scaling Test-Time Compute (arXiv 2512.02008):8 模型×4 数据集下没有统一最优策略,最优项取决于 model/task/budget",
+          "status": "CONFIRMED",
+          "evidence": "arXiv 摘要核验:原题'The Art of Scaling Test-Time Compute for Large Language Models'(Agarwal/Sengupta/Chakraborty),'eight open-source LLMs (7B to 235B)... four reasoning datasets... no single TTS strategy universally dominates... practical recipe considering problem difficulty, model type, and compute budget'。数字与结论均准确。survey 零命中。对象是 TTS 策略比较图集,无 ρ(c)/H(c) 分解、无供给轴——相邻,非占据。"
+        },
+        {
+          "review_claim": "Round 7 引文5:RoboMonkey (proceedings.mlr.press/v305/kwok25a):VLA/robotics 中的 sampling、verification 与 inference scaling law",
+          "status": "CONFIRMED",
+          "evidence": "PMLR v305 = CoRL 2025 proceedings pp.3200-3217 核实(web search;proceedings.mlr.press 直连被网络策略挡);arXiv 2506.17811 摘要:'action error and the number of generated samples follows an exponentiated power law... indicating the existence of inference-time scaling laws',VLM verifier 选最优 action,OOD +25%。survey 零命中。证明 sampling+verification scaling-law 方法学已跳到 robotics 域;但无供给条件化兑现曲面——相邻,非占据。"
+        },
+        {
+          "review_claim": "Round 7:'团队已列出的 KIT IWSLT 2026、MBR、JudgeBoN、reward overoptimization 等已经是 speech/text 局部祖先'",
+          "status": "CONFIRMED",
+          "evidence": "neighbor-matrix-v2.md Lane 14 kill-I4(L167-177)确有 KIT-IWSLT2026-2606.04730、MBR-ASR-2510.19471、judge-bon-fail/JudgeBoN-2603.12520(L80:'defines Recovery = ρ')、RMOveropt-2210.10760 各行,与评审说法一致。"
+        },
+        {
+          "review_claim": "Round 7 隐含主张:survey 遗漏了这些 lane 且未自认(§1:'I4 的最清晰空白又遗漏了更广泛 test-time scaling 文献对同一方法学对象的占据')",
+          "status": "CONFIRMED",
+          "evidence": "grep 全 wiki:2505.11730/2605.10991/2512.02008/RoboMonkey 仅出现在评审文件本身;scout-ledger-round2.json L81-91 的 9 个 round2_saturation_targets 全部是 speech/audio 内向目标(SER/SLU 曲线、spoken-QA、MMAU oracle、ST conformal、cite 复核),无 general-TTS/vision-VLA/judge-bias 拓宽目标——缺口确未被自认。唯一部分例外是 Snell(见引文1)。"
+        },
+        {
+          "review_claim": "Round 7 裁决(FUNDAMENTAL):'domain instantiation 可能开放,但 scaling-surface methodology 已被广泛占据';I4 从'最清晰空白'降级;若只画描述性矩阵则更像 benchmark/evaluation protocol,升级为贡献需可证伪的预测规律",
+          "status": "PARTIAL",
+          "evidence": "支持面:五篇+我新查到的三篇(见 notes)共同坐实'性能曲面/scaling-law/oracle-vs-realized 框架'在 text 与 VLA 已是常规方法学,故 ledger L74 无范围限定的'NO_DIRECT_MATCH all lanes (strongest differentiator)'与决策包'the single clearest whitespace'的修辞等级不可持有。不支持面:(a) 五篇无一实现 I4 命名对象——供给类型条件化 ρ(c)/H(c)/regret、冻结 omni、[model×task] 矩阵;各自的条件轴是难度/粒度/策略/personalization/K,均无供给类型轴 c;(b) survey 已登录的 siskos-2509.19567(供给条件化 none/retr/LLM/oracle→兑现 ~69-77% oracle WER,冻结 ASR)、ColdStart-2606.29947(供给类型分层兑现头空)、KIT、JudgeBoN 比评审五篇更接近 I4 精确对象;(c) 决策包 I4 条目本身已带范围限定(NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE)并已把'只是记账框架无预测规律'预登记为 pivot-if 降级条件——评审'须升级为预测规律'的要求与包内 proceed-if/pivot-if 同构,非新杀伤。净效果:Round 7 = 加饱和 lane + 击杀无限定修辞 + 抬高贡献门槛,而非把 I4 打成 DIRECT_OCCUPIED;评审自己的引号结论('在已记录范围内未发现完整应用于 frozen omni speech 的单篇;domain instantiation 可能开放')与证据吻合,但正文'同一方法学对象的占据'的说法偏强——被占据的是曲面方法学的邻域,不是 I4 命名对象本身。",
+          "correction": "准确表述应为:'scaling-surface 方法学族已被广泛占据(text/VLA),I4 的可辩护空白收窄为:供给类型轴 c × 冻结 omni 域实例化 × 从描述升级为 label-free 预测规律;不构成 I4 的 DIRECT_OCCUPIED。'"
+        },
+        {
+          "review_claim": "(本镜头第3步自查)是否存在双方都漏掉的更近占据者",
+          "status": "CONFIRMED",
+          "evidence": "三条独立查询发现三篇双方零命中且更贴近的作品:(1) arXiv 2606.02981 'Predicting Inference-Time Scaling Gains from Labeled Validation-Set Output Statistics'——从验证集样本统计预测哪些 (model,task,verifier) 配置能从 BoN 获益(text-only,统计量带标签,无供给轴);这部分占据了评审给 I4 开的升级药方('用小预算测得量预测 held-out rho')——评审的药方本身也是邻域已占;I4/Proposal A 的差异化必须落在 label-free 预测量+供给轴+音频域。(2) arXiv 2607.05391 'LLM-as-a-Verifier'——摘要语言直接是'recovers a significant proportion of the oracle headroom'(text agent 域的头空兑现表述,2026-07)。(3) arXiv 2602.12281 'Scaling Verification Can Be More Effective than Scaling Policy Learning for VLA Alignment'(CoVer,与 RoboMonkey 同一作 Kwok)——verifier 在部署时同时选 rephrased instruction(即供给侧 prompt)与 action chunks,是漏网作品中最接近'供给选择'轴的一篇(亦即 Proposal E 的近邻);摘要仍无 ρ(c)/H(c) 分解。三篇都仍不是 I4 精确对象的占据者,但都必须进 round-2 kill matrix。"
+        }
+      ],
+      "notes": "响应信不可漏的四点:(1) 引文纠错:2605.10991 原题是'Test-Time Personalization: A Diagnostic Framework and Probabilistic Fix for Scaling Failures'(评审标题系意译);RoboMonkey 出处核实为 CoRL 2025 (PMLR v305, pp.3200-3217);Snell 2408.03314 并非全漏——round-1 ledger 有完整行、v2 kill-I4 查询命中并折入 saturation note(query-log L37),只是未升入 v2 矩阵行,响应可指出这点但须承认矩阵级缺席。(2) 反击点:评审五篇全是相邻对象(难度/粒度/策略/personalization/K 轴),无一有供给类型轴 c 或 ρ(c)/H(c)/regret 分解;survey 已登录的 siskos-2509.19567、ColdStart-2606.29947、KIT、JudgeBoN 反而更近——'同一方法学对象的占据'措辞偏强,应接受为'方法学族邻域占据+修辞降级',拒绝'I4 对象被占据'的读法。(3) 必须吃下的新发现:评审自己开的升级药方(小预算可测量预测 held-out rho)已被 2606.02981(label-assisted)与 2605.10991 部分占据——I4 升级版的差异化必须显式登记为 label-free 预测量 × 供给类型轴 × 冻结 omni 音频域(跨模态误差结构);同时 CoVer 2602.12281(verifier 选 prompt+action,VLA)是双方都漏的供给侧选择最近邻,直接威胁 Proposal E,必须进 round-2 kill matrix。(4) 对 Stage-1C 的净含义:Round 7 不推翻 I4 作为候选,但合法击杀 ledger L74 无范围限定的'strongest differentiator'与决策包'single clearest whitespace'措辞;I4 存续表述应收敛为评审 §Round7 引号句式,且 proceed 门槛按决策包既有 proceed-if(可预测规律)执行——这与包内三出口框架一致,无需新增框架,只需把 general-TTS/VLA/judge-bias 三个 lane 与上述 8 篇(评审 5 + 我方新查 3)补进 round-2 饱和目标。核验方法学限制:所有'非占据'判断基于摘要级核验(WebFetch 摘要),未开全文;proceedings.mlr.press 直连被网络策略阻断,PMLR 出处经二手 web search 核实。"
+    },
+    "identity": {
+      "claim_verdicts": [
+        {
+          "review_claim": "Round 6 主张一：团队自己的 neighbor matrix 对 Scaling Auditory Cognition (2503.23395) 记载基本正确——冻结 audio LLM 以自身 audio-conditioned beam likelihood 对 K 候选评分，是 genuine omni-native 信号，直接占据 bare I2 机制",
+          "status": "CONFIRMED",
+          "evidence": "neighbor-matrix-v2.md L198：'(b) audio-conditioned beam log-likelihood best-of-N — a genuine frozen-omni-native audio-grounded signal … This DIRECTLY occupies bare I1/I2 mechanism'；kill-matrix v2 L57（I2 表 audio-understanding 行）：'DIRECT_OCCUPIED · y · scaling-auditory-2503.23395 (audio-conditioned beam log-lik BoN)'；该论文属 5 篇 coordinator 亲验之一（两矩阵 header）。注：论文原文本 lens 禁 web 未核，但评审此句说的是'团队自己的矩阵怎么写'，已实证。"
+        },
+        {
+          "review_claim": "Round 6 主张二：Stage-1C package 声称 strict I2 无 logged match，理由是现有工作依赖 external TTS/GPT-4o/trained reward",
+          "status": "CONFIRMED",
+          "evidence": "stage1c-decision-package.md §I2 L45-48：'Occupants use *external* scorers — READ 2606.04680 (external TTS)…; scaling-auditory (external GPT-4o verifier)…; jia-SER (external GPT-4o). No logged work uses the SAME frozen omni core as both generator and audio-grounded scorer characterized as a ρ surface.'；kill-matrix v2 L58：'strict I2 … NO_DIRECT_MATCH_WITHIN_LOGGED_SCOPE · — · all occupants use external TTS / GPT-4o / trained reward model'。引文准确。"
+        },
+        {
+          "review_claim": "Round 6 主张三：该论证把论文的 strongest external verifier 与论文同样存在的 same-core native likelihood 混在一起——strict-I2 的理由行与团队自家邻居矩阵互相矛盾",
+          "status": "CONFIRMED",
+          "evidence": "同一 kill-matrix 文件内自相矛盾：L57 写 scaling-auditory 以'audio-conditioned beam log-lik BoN'（同核、非 external）DIRECT_OCCUPIED，L58 却写'all occupants use external TTS / GPT-4o / trained reward model'；package §I2 把 scaling-auditory 只标注为'(external GPT-4o verifier)'，而 neighbor-matrix L199 的诚实措辞是'the STRONGEST scorer they use is an external GPT-4o'（承认还有同核信号）。矛盾坐实——但注意其位置在【理由行】：strict-I2 的 NO_DIRECT_MATCH【裁决本身】与矩阵 Section C L244 一致（'Exact same frozen core's own signal as a supply-conditional surface = NO_DIRECT_MATCH'），未被矛盾波及。"
+        },
+        {
+          "review_claim": "Round 6 主张四：裸 I2（含同核机制本身）已被占据；真正开放的'same-core + supply-conditional ρ surface'是 I2∩I4 的合取身份，不是 strict I2 本身",
+          "status": "CONFIRMED",
+          "evidence": "团队自家 scout-ledger-round2.json L36-38 的 I2 one-liner 自己承认：'Frozen audio-LLM's own audio-conditioned beam log-lik BoN (+9-150%)…Same-core-as-scorer-AS-SURFACE unoccupied'——开放格的承重条款正是 surface（=I4 的对象，续34 已锁定 ρ(c)/H(c)/regret 面为研究对象）。即：同核-无-surface 已被 scaling-auditory 占据（矩阵 L198），剩余开放者=同核∧surface=I2∩I4。细微保留：v2 三个工件写的 strict-I2 定义【本身就含】'as ρ surface'条款（kill-matrix L58、package L47-48、ledger L75），工件从未主张'同核-无-surface'开放——是 package 的错误理由行造成了这一误导印象。"
+        },
+        {
+          "review_claim": "Round 6 裁决（FUNDAMENTAL）：这构成高风险 moving-goalpost/合取洗白——看到近邻后不断追加'same-core + surface + Goodhart + cross-task + loop'限定词，再以'无单篇论文同时满足'保住 novelty；strict-I2 限定词系搜索后（post hoc）追加",
+          "status": "PARTIAL",
+          "evidence": "【成立部分】'strict I2'/'同一冻结核心既生成又打分'作为命名身份，全仓 grep 首现于 2026-07-14 v2 工件（commit 233dc7e 07-14 01:47）——晚于 READ 入档（07-13 precheck 评审 24 引文）与 scaling-auditory 入档（round1 ledger，commit 14943f1 07-13 23:49）；且违反 CLAUDE.md 收词纪律：strict-I2 未在术语表登记（表内 I2=『音频接地的冻结 omni selector』，无同核条款，commit 757465c 07-13 19:53），v2 工件亦无任何 post-hoc 标注（grep 'post.hoc' 仅命中 post-hoc calibration 方法名）。【被日期证据削弱部分】各合取构件均有先行出处，非猎杀后发明：(a) 同核生成器+验证器＝Theory-Convergence-and-Constraints.md TH2a（commit 9b71a64，2026-07-05 10:34，早于 READ 入档 8 天）：'TWO context-differentiated systems (generator-agent + verifier-agent, same frozen weights…) achievable error-decorrelation δ_corr…convergence → oracle as δ_corr → 0'；(b) ρ 兑现面＝owner 2026-07-11 签署唯一主问题 + 续34（07-13）研究对象锁定；(c) 'omni 自有信号'delta 在 I2 被拟名当刻即存在：重校准审查（2026-07-13-response-v6-stage1-recalibrated-review.md L245）'I2：冻结 omni 的 audio-grounded training-free selector…需证明 omni 自有信号带来非同构能力'，且 round1 ledger（07-13，v2 猎杀前）盲点(b)已写'the acoustic scorer is always a SEPARATE model…NEVER the frozen omni decoder's OWN native likelihood/signal'。另注意时序事实：I2 拟名（07-13）时 READ 已在档——记录中不存在'先有干净 I2、后见占据者、再加限定词'的完整序列；I2 生来就带 own-signal 生存条件。故：'命名未冻结+未登记+未标 post hoc'的程序指控成立；'为躲避近邻而发明限定词'的叙事不成立。"
+        },
+        {
+          "review_claim": "合取洗白之 I3-combined：'reward-guided + abstain + Goodhart' 组合系看到 abstain 占据者后追加的合取",
+          "status": "REFUTED",
+          "evidence": "组合形态即 I3 的原始定义：CLAUDE.md 术语表（07-13 登记）'I3=受约束/可弃权、显式检测 Goodhart 拐点的跨任务 selector（I1–I3 系重校准审查所拟）'——弃权与 Goodhart 从拟名起就同时在定义内；round1 ledger（07-13，v2 猎杀前）L796 已把'(c) explicit Goodhart-breakpoint ABSTENTION on speech with a verifiable reward'列为 genuinely unclaimed（合取先于占据者被登记为目标格）；abstain 占据者 walking-through-uncertainty 2604.25591 早在 2026-07-04 survey 已入档（2026-07-04-stage1-L2-slu.md L49/L219），Goodhart 文本占据者 HedgeTune/Khalaf 亦在 round1 L796 在档。v2 将 I3 拆为'abstain 已占/Goodhart-on-speech 开放/combined 开放'（kill-matrix L69-70、package §I3）是对占据的诚实承认与分解，方向与洗白相反。"
+        },
+        {
+          "review_claim": "合取洗白之 UMBRELLA：'training-free RL ∩ frozen omni ∩ advantage→next action' 交集系看到 AudioToolAgent 等占据者后拼出的合取",
+          "status": "REFUTED",
+          "evidence": "该交集是立项对象而非新造：2026-06-26 研究提案（archive/2026-06-26-training-free-rl-for-speech-omni-research-proposal.md）、2026-06-30 agent-level survey、2026-07-03 go/no-go（'omni agentic TFRL'为题）、Project-Thesis（07-12 supersession：'RDU…over a frozen omni core PLUS a reward-guided trajectory-selection operator; primary metric = ρ'）全部早于 v2；AudioToolAgent 2510.02995 在 2026-07-06-omni-agentic-systems-survey.md 已在档（作为近邻而非本轮猎杀新知）。反向证据：v2 新发现的 IAD 2504.01931（round1 grep 计数=0）被登记为'pre-registered collapse risk'（package L76：loop 仅胜 one-shot BoN ~3-4pt）而非被定义排除——与洗白操作相反。残留瑕疵：'advantage→next action'这一锐化措辞无 07-14 前出处（首现续36/v2），且 UMBRELLA 作为第五候选身份同样未按收词纪律登记（术语表仅 I1–I4）。"
+        },
+        {
+          "review_claim": "本 lens 核心问题：工件是否诚实分开'bare I2 occupied'与'strict I2 open'，有无任何工件把 bare I2 写成 open",
+          "status": "CONFIRMED",
+          "evidence": "无任何工件把 bare I2 写成 open——分离在裁决层是诚实的：package §0 L32'audio-grounded selection (I2)…are each SEPARATELY OCCUPIED'；§I2 headline'Verdict: PARTIAL; strict form NO_DIRECT_MATCH'；neighbor-matrix L198'DIRECTLY occupies bare I1/I2 mechanism'+L200'Renaming risk: HIGH on mechanism'；kill-matrix Part 3 'real kills — do NOT claim as novelty'第 2/3 条明列 I1/I2 on SER 与 audio-understanding；round2 ledger L35'PARTIAL (strict I2 = NO_DIRECT_MATCH)'。两处削弱分离质量的缺陷：package §I2 与 kill-matrix L58 的错误'all external'理由行（见主张三），及 strict-I2 未登记、未标 post hoc（见主张五）。另注：评审整改令'写 BARE_I2 = DIRECT_OCCUPIED'若按身份级全任务理解则过强——团队自家 kill matrix 中 bare-I2 的 ST/SLU 格是 NO_DIRECT_MATCH（L53/L55，within logged scope），'机制已占、格局混合'才是与自家证据一致的表述。"
+        }
+      ],
+      "verdict": "Round 6 的事实内核经全本地核验大体成立、但其最重的\"合取洗白\"定性只部分成立。成立的：Stage-1C package §I2 与 kill-matrix L58 以\"所有占据者都用 external TTS/GPT-4o/trained reward\"为 strict-I2 开放的理由，确与团队自家矩阵对 scaling-auditory 同核 audio-conditioned beam log-lik（\"genuine frozen-omni-native audio-grounded signal…DIRECTLY occupies bare I1/I2 mechanism\"）的记载直接矛盾——这是坐实的自相矛盾（位置在理由行，非裁决行）；\"strict I2\"作为命名身份确系 07-14 猎杀产出物中首现，未按收词纪律登记、未标 post hoc；开放格的承重条款确是 ρ-surface，即 I2∩I4 合取（团队 ledger 自己的 one-liner \"Same-core-as-scorer-AS-SURFACE unoccupied\" 已承认）。不成立/被削弱的：(1) 工件在裁决层从未把 bare I2 写成 open——\"separately occupied / strict form NO_DIRECT_MATCH\"的分离是明写的，kill 清单明令 do-NOT-claim-as-novelty；(2) \"看到近邻才追加限定词\"的时序叙事被日期证据反驳——同核生成器+验证器+δ_corr 出自 2026-07-05 理论文档（早于 READ/scaling-auditory 入档 8 天），ρ 面出自 07-11 owner 签署与续34，own-signal delta 在 I2 被重校准审查拟名当刻（07-13）即为其生存条件；(3) I3-combined 与 UMBRELLA 的合取分别是 I3 的原始拟名定义与 2026-06-26 立项对象，且 v2 对新发现的 IAD 做的是登记 collapse risk 而非定义排除——与洗白相反。净结论：QRP 级程序缺陷（错误理由行、身份未冻结未登记、无 post-hoc 标注）应接受并整改；FFP 式\"故意追加限定词保 novelty\"的叙事应以日期链据理反驳。",
+      "notes": "回应信要点：(1) 接受并更正两处错误理由行——package §I2 'Occupants use external scorers…scaling-auditory (external GPT-4o verifier)' 与 kill-matrix L58 'all occupants use external TTS / GPT-4o / trained reward model'，改为承认 scaling-auditory 的同核 beam log-lik 已占同核机制（引自家 L57/L198 措辞），开放格改写为 I2∩I4（或在术语表正式登记 strict-I2 定义并注明构件出处）；(2) 接受\"身份冻结+post-hoc 日志\"整改：strict-I2、UMBRELLA（含 advantage→next action 措辞）、I3-combined 拆分名均未按 CLAUDE.md 收词纪律登记——这是自家纪律的违反，应在术语表补登并标注首现日期；(3) 据理反驳\"合取洗白\"时序叙事，出示日期链：TH2a 同核+δ_corr = commit 9b71a64（2026-07-05 10:34，Theory-Convergence-and-Constraints.md L171-175）；ρ 主问题 = owner 07-11 签署；续34 研究对象锁定 = 07-13；I2 拟名自带 own-signal 条件 = 重校准审查 L245（07-13）；round1 ledger 盲点(b) 'never the frozen omni decoder's OWN native likelihood/signal' = commit 14943f1（07-13 23:49，v2 猎杀前）；且 I2 拟名时 READ 已在档，不存在\"干净定义→见占据→加限定\"序列；(4) I3/UMBRELLA 单独反驳：I3 组合=原始定义（术语表+round1 L796 pre-hunt 登记该合取为目标格）；UMBRELLA=立项对象（06-26/06-30/07-03/Project-Thesis），AudioToolAgent 07-06 已在档，IAD 被预登记为 collapse risk 而非排除；(5) 可反将一军：评审整改令 #1 '写 BARE_I2=DIRECT_OCCUPIED' 按全任务身份级理解与团队自家证据不符（kill matrix bare-I2 的 ST/SLU 格为 NO_DIRECT_MATCH within logged scope），建议表述为'bare-I2 机制级 DIRECT_OCCUPIED、格级混合'；(6) 留给 web-lens 的口子：scaling-auditory 论文中 beam log-lik 是否确为同一模型对自身候选打分（评审引 ar5iv 2503.23395 称有 beam-search weighting + audio-grounded verifier）——本 lens 禁 web，只以团队 coordinator-verified 行为据；若论文事实另有出入，主张一/四的强度需重估。时间线速查：757465c(07-13 19:53 术语表 I2 无同核条款)→14943f1(07-13 23:49 round1 ledger 含 READ/scaling-auditory+盲点b)→e40b152(07-14 01:12 续35 v2 启动)→233dc7e(07-14 01:47 v2 工件+strict-I2 首现)。"
+    },
+    "evidence": {
+      "verdict": "V5 镜头结论：Round 4「证据等级系统性上标」CONFIRMED——但需加一个对回信重要的限定：这是「自我披露的标签层膨胀」，不是隐蔽造假。硬证据：(1) ledger 机器字段恰好 39 行 grade=\"FT\"，而团队自己的等级键定义 FT=FULLTEXT_VERIFIED；(2) 三个 survey markdown 的 header 却明说这些 [FT] 是 \"WebSearch, not fulltext——treat them as SCOUT/ABSTRACT\"，即机器标签与自述深度直接矛盾；(3) 全文件 grep 证明两个 md 中不存在任何 Table/节/页码定位或版本钉住的 arXiv URL——按可回放模板 §2.6，抽查的 8 个 FT 行 0/8 达到 CLAIM_VERIFIED，8/8 须降级，且此结论可外推到全部 39/39 FT 行；(4) 5 个 COORDINATOR-VERIFIED 载荷杀伤的记录深度只有 \"personal WebSearch this session\" 的存在性核验（\"real\"），按模板等级至多 DISCOVERED/ABSTRACT_VERIFIED，全部 5/5 低于模板允许进入 kill/coverage 决策的 CLAIM_VERIFIED 门槛；(5) 我的 web 复核实锤了一例实质性失真：kill-I2 的 READ 行（FT 标签）声称 \"~70-85% oracle\"，而 READ 论文 Table 1 重算的兑现率为 7.7%–68.5%（最高 68.5%，且该行自称匹配的 LibriSpeech 上仅 11.9%–16.5%）——一个真做过全文核验的行不可能写出这个数。抵消因素：三个 md header、ledger 的 _draft/_provenance、decision package §5 都主动披露了降级理解，enclap 的 prior-knowledge 问题也是团队自己写进 ledger 的——因此「系统性上标」成立于机器标签层与下游引用层（decision package 用裸 \"[VERIFIED]\"），但评审 Round 10 的「falsification 未建立、QRP 风险高」定性与证据一致。抽样降级比例：8/8 (100%)。",
+      "claim_verdicts": [
+        {
+          "review_claim": "Round 4: 三个 survey markdown 的全局说明承认 WebFetch 受阻、许多 [FT] 其实来自 WebSearch cite check",
+          "status": "CONFIRMED",
+          "evidence": "三个文件第 3 行携带逐字相同的 header：sota-cards-v2.md:3、neighbor-matrix-v2.md:3、coverage-and-kill-matrix-v2.md:3 均写 \"the workflow's WebFetch was blocked, so per-paper [FT] tags in this file are workflow cite-checks via WebSearch, not fulltext — treat them as SCOUT/ABSTRACT unless listed here\"。ledger _provenance.query_log_note 亦承认 \"fetch reliability was poor... many numbers were recovered via ar5iv/arxiv-HTML mirrors or WebSearch snippets\"。"
+        },
+        {
+          "review_claim": "Round 4: ledger 把 39 行机器标为 FT=FULLTEXT_VERIFIED",
+          "status": "CONFIRMED",
+          "evidence": "对 2026-07-14-scout-ledger-round2.json 的 families[].papers[] 机器重算：113 行，grade 分布 FT=39 / AB=54 / SC=18 / UNVERIFIED-CITATION=2，与评审 Round 3/4 报的分布逐项吻合。FT=FULLTEXT_VERIFIED 的语义由团队自己定义：ledger counts.grade_distribution_note 与 neighbor-matrix-v2.md:15 的 Grade key（\"FT = FULLTEXT_VERIFIED\"）。39 个 FT 行清单已逐行列出（含 mbr-asr、read-2026、scaling-auditory、jia、KIT、AuTAgent、judge-bon-fail 等载荷行）。"
+        },
+        {
+          "review_claim": "Round 4: ledger 声称 92/94 resolves:true, claims_match:true",
+          "status": "CONFIRMED",
+          "evidence": "ledger cite_checks: total=94, passed=92, failed=2；passed_note 逐字为 \"All other 92 checks returned resolves:true, claims_match:true. Several were confirmed via WebSearch after direct WebFetch was blocked...\"——即 92 个「claims_match:true」判定本身多数产自 WebSearch 降级通道。"
+        },
+        {
+          "review_claim": "Round 4: enclap 在抓取失败后依据 prior knowledge 记为 resolves:true",
+          "status": "CONFIRMED",
+          "evidence": "ledger cite_checks.grade_downgrade_from_cite_check 逐字：\"enclap-aux-retrieval (2409.01160) cite-checked as resolves:true from prior knowledge after WebFetch socket-failure — treat as verified-cite but re-confirm at Stage-2.\" 注意该行在 lane 4 的机器 grade 还是 FT。"
+        },
+        {
+          "review_claim": "Round 4 核心：机器 FT 标签与实际核验深度不符，下游会把 FT 当已核验事实（『三个事实不能同时成立』）",
+          "status": "CONFIRMED",
+          "evidence": "语义矛盾成立：机器字段说 FULLTEXT_VERIFIED，header 说按 SCOUT/ABSTRACT 理解，二者只能有一个是标签的真值。且下游继承已发生：stage1c-decision-package.md 第 39/45-47/72-73 行对 READ、scaling-auditory、AudioToolAgent 使用裸 \"[VERIFIED]\" / \"[COORDINATOR-VERIFIED]\" 标记，front-matter evidence_grade 把 5 kills 写成 \"COORDINATOR-VERIFIED\"，未带 \"WebSearch-only\" 限定。"
+        },
+        {
+          "review_claim": "V5 任务 2（抽查 8 个 FT 行是否达到模板 §2.6 CLAIM_VERIFIED 的 version+页/节/表定位要求）",
+          "status": "CONFIRMED",
+          "evidence": "抽样 8 行：mbr-asr-2510.19471（LS WER .042→.033, oracle .013）、read-2026（~70-85% oracle）、scaling-auditory-2025（+9-150%, 36.7→50.0）、jia2602（CREMA-D 36.70→51.26）、KIT-IWSLT2026（ASR oracle −32.1 等）、AuTAgent-2602.13685（oracle 66.1 vs 50.0）、judge-bon-fail-2603.12520（Recovery 21.0%→61.2%）、walking-through-uncertainty（AUROC 0.84-0.85, AURAC 0.73-0.92）。全文件 grep（Table|Section|§|p.N|Fig|版本钉住 URL）在 neighbor-matrix-v2.md 与 sota-cards-v2.md 中除标题的 'v2' 外零命中——0/8 有任何定位器或固定版本，8/8 (100%) 须降级；由于定位器全文件为零，可外推 39/39 FT 行均不满足 CLAIM_VERIFIED。",
+          "correction": "8 个抽样 FT 标签存活 0 个；按 header 自己的指示应整体降为 SCOUT/ABSTRACT，按模板则为 DISCOVERED/ABSTRACT_VERIFIED。"
+        },
+        {
+          "review_claim": "V5 任务 3（5 个 COORDINATOR-VERIFIED 载荷杀伤的实际核验深度 vs 模板等级定义）",
+          "status": "CONFIRMED",
+          "evidence": "三个 md header 与 ledger _coordinator_note 记录的深度均为 \"COORDINATOR-VERIFIED (personal WebSearch this session)\"，内容只有存在性判断：mbr-asr \"(Jinnai, real)\"、READ \"(real)\"、scaling-auditory \"(Dang et al, real)\"、AudioToolAgent \"(real, agent does NOT access audio)\"、jia-SER \"(real)\"。模板 §2.6 明文 \"禁止把 WebSearch snippet、聚合页或既有记忆标成 FULLTEXT_OPENED/CLAIM_VERIFIED\"，且只有 CLAIM_VERIFIED 可进入 kill/coverage 矩阵——5/5 不达标。佐证：AudioToolAgent 在 ledger lane 10 的机器 grade 本来就只有 AB，说明 coordinator 核验没有提升行级证据，但 decision package 仍以裸 \"[VERIFIED]\" 引用。",
+          "correction": "5 个 kills 的记录深度 = WebSearch 存在性核验（DISCOVERED～ABSTRACT_VERIFIED），按模板不得支撑 kill/coverage 决策，须全部补做固定版本+定位器的 claim 级双审。"
+        },
+        {
+          "review_claim": "抽查含金量复核（web，3 篇）：FT 标签下的实质主张是否经得起全文核验",
+          "status": "PARTIAL",
+          "evidence": "① READ 2606.04680（真实存在，实际标题 \"Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy\", Li/Wang/Guo/Li/Chen/Yu）：从 arXiv HTML Table 1 重算兑现率 = LS-clean 16.5% / LS-other 11.9% / VCTK 17.3% / ASRU 7.7% / TALCS 67.5% / SWBD 68.5% / TED3 54.3% / SPGI 43.5%——无一达到 70%，而 FT 标注的 kill-I2 行写 \"~70-85% oracle\" 且 our_data=librispeech（LS 上实际仅 11.9-16.5%）→ 该 FT 行被全文级证据实质证伪，坐实标签未经过真实全文核验；② mbr-asr 2510.19471 真实（Jinnai, \"Re-evaluating Minimum Bayes Risk Decoding for ASR\"），摘要支持 \"MBR 多数设置胜 beam\" 方向但不含 4.2→3.3/oracle 1.3/K=64 等数字（摘要深度无法证实也未证伪）；③ scaling-auditory 2503.23395 真实（\"Scaling Auditory Cognition via Test-Time Compute in Audio Language Models\", Dang et al.），摘要级一致（5 个 TTC 方法、5 个 audio LLM），具体数字同样非摘要可核。",
+          "correction": "3 篇抽查中 1 篇（READ）在全文层被证伪、2 篇仅达摘要级一致——支持『FT 标签 ≠ 全文核验』的系统性判定，但不支持『数字普遍捏造』：另两篇方向层面为真。"
+        },
+        {
+          "review_claim": "Round 4 总裁决用语『系统性上标 / systematic inflation』是否成立",
+          "status": "PARTIAL",
+          "evidence": "成立面：39/39 FT 机器标签无一有全文+定位器支撑；92/94 claims_match:true 多产自 WebSearch 降级通道；1 例 prior-knowledge 记 resolves:true；1 例 FT 行数字被全文证伪；下游 decision package 以裸 [VERIFIED] 继承。抵消面：膨胀是『自我披露』的——三个 md header 第 3 行、ledger _draft 首行（\"DRAFT — not yet wiki-grade\"）、_provenance（\"graded AB/SC accordingly\"）、decision package §5（\"SCOUT round-1 grade; only 5 kills coordinator-verified\"）都在显著位置写明降级理解与边界，evidence_grade front-matter 也自称 SCOUT。故『系统性』成立于标签/字段层与下游引用层，但评审自己 Round 10 的定性（falsification 未建立、属 QRP/流程控制风险）才是准确的强度——回信不应接受任何把这读成蓄意造假的措辞，也不应否认标签层膨胀的事实。",
+          "correction": "准确表述：机器可读证据等级字段系统性高于实际核验深度（39/39 FT、5/5 kills 不达 CLAIM_VERIFIED），但每个工件同时携带显著的自我降级披露；属高风险 QRP/记录控制缺陷，非隐蔽造假。"
+        }
+      ],
+      "notes": "回信必须包含的要点：(1) 六个工件的 git-blob SHA-256 全部与评审快照表逐字一致（我用 `git show 233dc7e:<path> | sha256sum` 重算），且工作树自 233dc7e 后未改动这些文件——评审审的就是正确字节，无「审错版本」抗辩空间。(2) 评审自身的两处小错，回信可礼貌指出但不影响其实质：a) Round 5.1 把 READ 的标题写成 \"READ: Reversible Textual Rescoring for ASR\"，实际标题是 \"Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy\"（Li, Wang, Guo, Li, Chen, Yu）；其重算的八个兑现率（7.7/11.9/16.5/17.3/43.8/~56/67.7/68.4%）与我的独立重算（7.7/11.9/16.5/17.3/43.5/54.3/67.5/68.5%）在舍入误差内一致，结论（max<70%，无 85%）完全成立。b) Round 3 称 paper id 精确唯一字符串=107，我机器重算为 110（113 行）——两个数都≠93，评审「~93 不可重建」的核心点反而更强，但回信引用时不要照抄 107。(3) 降级路径已由团队自己的 header 预先给出（\"treat them as SCOUT/ABSTRACT\"），所以 P0-5「39 个 FT 逐一审计降级」实质上是把 header 的 prose 指令落实到机器字段——成本低、无可争辩，建议全盘接受。(4) 5 个 kills 中 AudioToolAgent 在 ledger 的行级 grade 本来就是 AB，说明「coordinator-verified」从未在数据层升过级——膨胀主要发生在 md 表格的 FT 列与 decision package 的裸 [VERIFIED] 标记。(5) 顺带坐实（属 Round 9 镜头但我在 sota-cards-v2.md:95 直接看到）：\"F2 ... EMPTY/UNDERSEARCHED for SLU-intent and spoken-QA/agent\" 与同文件 header \"no EMPTY cells\" 直接矛盾——评审该条属实。(6) READ 行的 \"~70-85% oracle\" 同时出现在 neighbor-matrix Lane 12 行、coverage-and-kill-matrix M2/ASR 单元格与 ledger kill-I2 saturation 字段——修正时三处都要改，且 LibriSpeech 上真实兑现率只有 ~12-17%，该行 our_data=librispeech 的搭配尤其误导。(7) 模板（2026-07-14-survey-response-replayability-template.md）是评审同日配套件，工件先于模板产生——降级是前瞻性合规要求而非追溯违规；但 FT=FULLTEXT_VERIFIED 的语义是团队自己的 grade key 定义的，故标签失实的结论不依赖模板也成立。"
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "verify:mechanical-recount",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a5c6e4d15026b7605",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783998963869,
+      "queuedAt": 1783998963858,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "机械重算镜头下，该评审的可机检主张几乎全部成立且精度很高：S…",
+      "promptPreview": "You are one lens of an independent verification pass over a received MAJOR_REVISION doctoral review (READ IT FULLY FIRST): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md. The review attacks the team's Survey v2 artifacts (in D:/chao_workspace/exploring-l4-intelligence/wiki/survey: 2026-07-14-{neighbor-matrix-v2.md, …",
+      "lastProgressAt": 1783999400988,
+      "tokens": 89193,
+      "toolCalls": 29,
+      "durationMs": 437119,
+      "resultPreview": "{\"claim_verdicts\":[{\"review_claim\":\"§7-P0.3 / Round-2 表：query log 305 行中 SEARCH(WebSearch)=218、FETCH(WebFetch)=87，应分开计数\",\"status\":\"CONFIRMED\",\"evidence\":\"对 wiki/survey/2026-07-14-search-query-log.jsonl 逐行 JSON 解析：305 条非空记录，每条字段恰为 {lane, engine, query, date, result_cap, note}（305/305 同一键集）。按 engine 字段计数：WebSearch=218、WebFetch=87，与评审完全一致——区分直接来自 engine 字段，无需推断。Round-2 表其余数字亦全部复现：query 字段本身为 URL 的 53…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "verify:paper-facts",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "ad3622dfaf211af2c",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783998963870,
+      "queuedAt": 1783998963858,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Round 5 四项事实指控经论文一手核验：三项 CONFIRMED（5.1 REA…",
+      "promptPreview": "You are one lens of an independent verification pass over a received MAJOR_REVISION doctoral review (READ IT FULLY FIRST): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md. The review attacks the team's Survey v2 artifacts (in D:/chao_workspace/exploring-l4-intelligence/wiki/survey: 2026-07-14-{neighbor-matrix-v2.md, …",
+      "lastProgressAt": 1783999624508,
+      "tokens": 103299,
+      "toolCalls": 39,
+      "durationMs": 660638,
+      "resultPreview": "{\"claim_verdicts\":[{\"review_claim\":\"Round 5.1：neighbor matrix 写 READ \\\"~70-85% oracle\\\" 系上夸；按论文 Table 1 的 greedy/READ/oracle WER 重算，八个条件的 realized-oracle 分数最大值不到 70%，更无 85%；且上一轮 ledger 曾正确写 clean LibriSpeech 几乎不动、shifted set 才约一半\",\"status\":\"CONFIRMED\",\"evidence\":\"论文（arXiv 2606.04680, \\\"Read What You Hear: Reference-Free Hypotheses Evaluation with Acoustic Discrepancy\\\", 抓取 HTML 全文）Table 1 八条件 gree…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:i4-occupancy",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "a147fc23c6fc32093",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783998963870,
+      "queuedAt": 1783998963858,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Round 7 的五篇引文全部真实存在且描述基本准确(其中 2605.1099…",
+      "promptPreview": "You are one lens of an independent verification pass over a received MAJOR_REVISION doctoral review (READ IT FULLY FIRST): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md. The review attacks the team's Survey v2 artifacts (in D:/chao_workspace/exploring-l4-intelligence/wiki/survey: 2026-07-14-{neighbor-matrix-v2.md, …",
+      "lastProgressAt": 1783999462102,
+      "tokens": 94334,
+      "toolCalls": 28,
+      "durationMs": 498232,
+      "resultPreview": "{\"verdict\":\"Round 7 的五篇引文全部真实存在且描述基本准确(其中 2605.10991 的标题是意译非原题),其中 4/5(VG-Search 2505.11730、诊断律 2605.10991、Art-of-TTS 2512.02008、RoboMonkey)在全部 survey 工件中零命中,且 ledger 的 9 个 round-2 饱和目标全是 speech/audio 内向目标、未自认 general-TTS/VLA/judge-bias 缺口——因此\\\"survey 漏掉了更广 test-time scaling 文献\\\"这一覆盖面攻击成立。但在\\\"占据 vs 相邻\\\"这一关键问题上,五篇没有任何一篇实现 I4 命名的对象(供给类型条件化的 ρ(c)/H(c)/regret 兑现曲面,冻结 omni,[model×task] 矩阵):Snell 是难度轴、V…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:identity-contradiction",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "adb22456c448881e9",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783998963870,
+      "queuedAt": 1783998963858,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Round 6 的事实内核经全本地核验大体成立、但其最重的\"合取洗白…",
+      "promptPreview": "You are one lens of an independent verification pass over a received MAJOR_REVISION doctoral review (READ IT FULLY FIRST): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md. The review attacks the team's Survey v2 artifacts (in D:/chao_workspace/exploring-l4-intelligence/wiki/survey: 2026-07-14-{neighbor-matrix-v2.md, …",
+      "lastProgressAt": 1783999739823,
+      "tokens": 137552,
+      "toolCalls": 20,
+      "durationMs": 775953,
+      "resultPreview": "{\"claim_verdicts\":[{\"review_claim\":\"Round 6 主张一：团队自己的 neighbor matrix 对 Scaling Auditory Cognition (2503.23395) 记载基本正确——冻结 audio LLM 以自身 audio-conditioned beam likelihood 对 K 候选评分，是 genuine omni-native 信号，直接占据 bare I2 机制\",\"status\":\"CONFIRMED\",\"evidence\":\"neighbor-matrix-v2.md L198：'(b) audio-conditioned beam log-likelihood best-of-N — a genuine frozen-omni-native audio-grounded signal … This DIREC…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "verify:evidence-grades",
+      "phaseIndex": 1,
+      "phaseTitle": "Verify",
+      "agentId": "aa900715076f641da",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1783998963871,
+      "queuedAt": 1783998963858,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "V5 镜头结论：Round 4「证据等级系统性上标」CONFIRMED——但需加…",
+      "promptPreview": "You are one lens of an independent verification pass over a received MAJOR_REVISION doctoral review (READ IT FULLY FIRST): D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md. The review attacks the team's Survey v2 artifacts (in D:/chao_workspace/exploring-l4-intelligence/wiki/survey: 2026-07-14-{neighbor-matrix-v2.md, …",
+      "lastProgressAt": 1783999449640,
+      "tokens": 132565,
+      "toolCalls": 23,
+      "durationMs": 485769,
+      "resultPreview": "{\"verdict\":\"V5 镜头结论：Round 4「证据等级系统性上标」CONFIRMED——但需加一个对回信重要的限定：这是「自我披露的标签层膨胀」，不是隐蔽造假。硬证据：(1) ledger 机器字段恰好 39 行 grade=\\\"FT\\\"，而团队自己的等级键定义 FT=FULLTEXT_VERIFIED；(2) 三个 survey markdown 的 header 却明说这些 [FT] 是 \\\"WebSearch, not fulltext——treat them as SCOUT/ABSTRACT\\\"，即机器标签与自述深度直接矛盾；(3) 全文件 grep 证明两个 md 中不存在任何 Table/节/页码定位或版本钉住的 arXiv URL——按可回放模板 §2.6，抽查的 8 个 FT 行 0/8 达到 CLAIM_VERIFIED，8/8 须降级，且此结论可外推到全部 …"
+    }
+  ],
+  "totalTokens": 556943,
+  "totalToolCalls": 139
+}

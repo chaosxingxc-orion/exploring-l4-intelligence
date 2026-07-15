@@ -1,0 +1,112 @@
+# Round-2 protocol v2 query recount — mechanical check artifact
+# Date: 2026-07-15 (run at 2026-07-14 22:30 +0800)
+# Target: wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md (post-PRESS-residual-fixes working tree)
+# Re-run: python <script below> <protocol.md> ; exit 0 = PASS
+
+## OUTPUT
+lanes_total: 21
+  L-SAT-1: pq=5 opt=0
+  L-SAT-2: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-SAT-3: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-SAT-4: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-SAT-5: pq=6 opt=0 [arXiv_listing: cat-filter OK]
+  L-SAT-6: pq=6 opt=0 [arXiv_listing: cat-filter OK]
+  L-SAT-7: pq=5 opt=3 [arXiv_listing: cat-filter OK]
+  L-SAT-8: pq=0 opt=0
+  L-SAT-9: pq=0 opt=0
+  L-NEW-1: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-2: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-3: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-4: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-5: pq=4 opt=0
+  L-NEW-6: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-7: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-NEW-8: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-CHASE: pq=10 opt=0
+  L-DIS-A: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-DIS-B: pq=5 opt=0 [arXiv_listing: cat-filter OK]
+  L-DIS-C: pq=6 opt=0 [arXiv_listing: cat-filter OK]
+mandatory_total: 102
+optional_total: 3
+grand_total: 105
+citation_chase_instructions: 46
+text_queries (mandatory - chase): 56
+ieee_site_queries: 3
+arxiv_cat_filter_queries: 16
+bare_TTS_violations: 0
+OVERALL: PASS
+
+## SCRIPT (verbatim, re-runnable)
+# Mechanical recount of preregistered query strings in round-2 protocol v2.
+# Re-runnable check: python recount_queries.py <path-to-protocol.md>
+import re, sys
+
+path = sys.argv[1]
+lines = open(path, encoding="utf-8").read().splitlines()
+
+in_yaml = False
+lane = None
+mode = None  # 'pq' | 'opt' | None
+lanes = {}  # lane_id -> {'pq': [...], 'opt': [...], 'engines': str}
+
+for ln in lines:
+    if ln.strip().startswith("```yaml"):
+        in_yaml = True; continue
+    if ln.strip() == "```":
+        in_yaml = False; lane = None; mode = None; continue
+    if not in_yaml:
+        continue
+    m = re.match(r"^- lane_id:\s*(\S+)", ln)
+    if m:
+        lane = m.group(1)
+        lanes[lane] = {"pq": [], "opt": [], "engines": ""}
+        mode = None
+        continue
+    if lane is None:
+        continue
+    if re.match(r"^  engines:", ln):
+        lanes[lane]["engines"] = ln
+        mode = None
+        continue
+    if re.match(r"^  planned_queries:", ln):
+        mode = "pq"; continue
+    if re.match(r"^  optional_native_language_probes:", ln):
+        mode = "opt"; continue
+    if re.match(r"^  \S", ln):  # any other 2-space key ends the list
+        mode = None
+        continue
+    if mode and re.match(r"^    - ", ln):
+        lanes[lane][mode].append(ln.strip()[2:])
+
+mand = sum(len(v["pq"]) for v in lanes.values())
+opt = sum(len(v["opt"]) for v in lanes.values())
+chase = sum(1 for v in lanes.values() for q in v["pq"]
+            if "CITATION_BACKWARD" in q or "CITATION_FORWARD" in q)
+site = sum(1 for v in lanes.values() for q in v["pq"] if "site:ieeexplore" in q)
+cat = sum(1 for v in lanes.values() for q in v["pq"] if "cat:eess.AS" in q)
+
+print(f"lanes_total: {len(lanes)}")
+for k, v in lanes.items():
+    tag = ""
+    if "arXiv_listing" in v["engines"] and v["pq"]:
+        has_cat = any("cat:eess.AS" in q for q in v["pq"])
+        tag = " [arXiv_listing: cat-filter " + ("OK" if has_cat else "MISSING") + "]"
+    print(f"  {k}: pq={len(v['pq'])} opt={len(v['opt'])}{tag}")
+print(f"mandatory_total: {mand}")
+print(f"optional_total: {opt}")
+print(f"grand_total: {mand + opt}")
+print(f"citation_chase_instructions: {chase}")
+print(f"text_queries (mandatory - chase): {mand - chase}")
+print(f"ieee_site_queries: {site}")
+print(f"arxiv_cat_filter_queries: {cat}")
+
+bare_tts = [q for v in lanes.values() for q in v["pq"] + v["opt"]
+            if re.search(r"\bTTS\b", q)]
+print(f"bare_TTS_violations: {len(bare_tts)}")
+for q in bare_tts:
+    print(f"  VIOLATION: {q}")
+
+ok = (mand == 102 and opt == 3 and site == 3 and cat == 16 and len(bare_tts) == 0
+      and len(lanes) == 21)
+print("OVERALL:", "PASS" if ok else "FAIL (expected mand=102 opt=3 site=3 cat=16 tts=0 lanes=21)")
+sys.exit(0 if ok else 1)

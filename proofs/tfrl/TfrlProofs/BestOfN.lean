@@ -18,12 +18,25 @@ We:
 * package the bound as `klBoundBoN N = log N - (N-1)/N`;
 * prove rigorously that it is **nonnegative** (`klBoundBoN_nonneg`) and equals
   `log N - 1 + 1/N` (`klBoundBoN_eq`), so it is a genuine finite `O(log N)` quantity;
-* state the main inequality `kl_best_of_n_le` for an abstract KL functional `klBoN`
-  that obeys the Beirami order-statistics estimate.
+* introduce the true best-of-`N` selection-policy KL functional as an **opaque** constant
+  `klBoNActual : ℕ → ℝ` (its measure-theoretic definition is out of scope for this
+  skeleton), and state the Beirami order-statistics estimate about it as a single,
+  explicitly named, **cited axiom** `beirami_thm_3_1`;
+* derive the main inequality `kl_best_of_n_le` from that axiom.
 
-The order-statistics derivation of `KL(π_BoN ‖ π₀) ≤ klBoundBoN N` itself (an
-integral over the reward CDF) is *not* reproduced here and is left as a documented
-`sorry`; the surrounding analytic facts are fully proved.
+## On the axiom (documented exception to the sorry-free bar)
+
+The order-statistics derivation of `KL(π_BoN ‖ π₀) ≤ klBoundBoN N` — an integral over the
+reward CDF, `P_BoN(z) = F(z)^N - F(z⁻)^N` — is **not** reproduced here. Rather than a
+`sorry`, it is discharged as the single named axiom `beirami_thm_3_1`, citing
+Beirami et al. (2024), arXiv:2401.01879, Theorem 3.1 (verbatim conditions in its
+docstring). The axiom is stated about the **opaque** functional `klBoNActual`, not about
+an arbitrary `ℕ → ℝ`: a parametric version `∀ f, f N ≤ klBoundBoN N` would be
+**inconsistent** (take `f := fun _ => klBoundBoN N + 1`), so asserting it would be strictly
+worse than a `sorry`. Asserting the bound about a *fixed but unspecified* functional is
+consistent (it is satisfiable — e.g. by the zero functional, since `klBoundBoN N ≥ 0`),
+which is the honest way to import a cited-but-unformalized analytic result. No `sorry`
+remains in this module.
 -/
 
 namespace TfrlProofs.BestOfN
@@ -63,30 +76,38 @@ theorem klBoundBoN_nonneg {N : ℕ} (hN : 1 ≤ N) : 0 ≤ klBoundBoN N := by
   rw [hfrac]
   linarith [hlog]
 
-/-- **T2 (best-of-N KL bound).** Given any KL functional `klBoN : ℕ → ℝ` that obeys the
-Beirami order-statistics estimate (hypothesis `hBeirami`), the best-of-`N` selection
-policy stays within `log N - (N-1)/N` of the base policy in KL divergence.
+/-- The genuine best-of-`N` selection-policy KL functional `N ↦ KL(π_BoN ‖ π₀)` for a
+fixed base policy `π₀`. It is left **opaque**: its definition is the measure-theoretic
+order-statistics / reward-CDF integral of Beirami et al. (2024), which this skeleton does
+not build out. Being an opaque constant — a *fixed but unspecified* function, not a
+universally-quantified one — is exactly what makes the cited bound `beirami_thm_3_1`
+below a *consistent* assumption: Lean cannot substitute a counterexample for it. -/
+opaque klBoNActual : ℕ → ℝ
 
-The hypothesis `hBeirami` is exactly the content that requires the order-statistics /
-reward-CDF integral argument; it is isolated as an assumption here (see the
-module docstring). With it, the conclusion is immediate. -/
-theorem kl_best_of_n_le
-    (klBoN : ℕ → ℝ) {N : ℕ}
-    (hBeirami : klBoN N ≤ klBoundBoN N) :
-    klBoN N ≤ Real.log N - ((N : ℝ) - 1) / N :=
-  hBeirami
+/-- **Beirami et al. (2024), Theorem 3.1** — *Theoretical guarantees on the best-of-n
+alignment policy*, arXiv:2401.01879.
 
-/-- Self-contained statement of the Beirami order-statistics estimate as a standalone
-claim: for the best-of-`N` selection-policy KL functional `klBoN`,
-`klBoN N ≤ klBoundBoN N`. The continuous-reward, no-ties derivation is **not**
-formalized here and is left as a documented `sorry` (this is one of the three
-hard-analysis theorems). -/
-theorem klBoN_le_klBoundBoN_TODO
-    (klBoN : ℕ → ℝ) {N : ℕ} (hN : 1 ≤ N) :
-    klBoN N ≤ klBoundBoN N := by
-  -- The Beirami et al. (2024) bound `KL(π_BoN ‖ π₀) ≤ log N - (N-1)/N` follows from an
-  -- integral over the reward CDF / order statistics of the N i.i.d. draws. That
-  -- measure-theoretic derivation is out of scope for this skeleton; documented here.
-  sorry
+Verbatim conditions: on a **finite** outcome space, under Assumption 2.1 (**reward
+uniqueness / distinct rewards** — no ties), the best-of-`n` selection policy `π_BoN`
+satisfies the **upper bound**
+```
+D_KL(π_BoN ‖ π_ref) ≤ log n - (n-1)/n
+```
+(an inequality in general, with equality only in the continuous no-ties limit).
+
+This is the content that requires the order-statistics / reward-CDF integral argument
+(`P_BoN(z) = F(z)^n - F(z⁻)^n`). It is imported here as a single explicitly named, cited
+axiom about the opaque functional `klBoNActual`, replacing the former documented `sorry`.
+It is consistent because it is satisfiable (e.g. by the zero functional, as
+`klBoundBoN n ≥ 0` by `klBoundBoN_nonneg`). -/
+axiom beirami_thm_3_1 {N : ℕ} (hN : 1 ≤ N) : klBoNActual N ≤ klBoundBoN N
+
+/-- **T2 (best-of-N KL bound).** The best-of-`N` selection policy stays within
+`log N - (N-1)/N` of the base policy in KL divergence. This is the main inequality; it now
+*consumes* the cited Beirami order-statistics estimate `beirami_thm_3_1` (about the opaque
+KL functional `klBoNActual`) rather than taking it as a free hypothesis. -/
+theorem kl_best_of_n_le {N : ℕ} (hN : 1 ≤ N) :
+    klBoNActual N ≤ Real.log N - ((N : ℝ) - 1) / N :=
+  beirami_thm_3_1 hN
 
 end TfrlProofs.BestOfN

@@ -1,0 +1,31 @@
+generated_by: "C:\\Python314\\python.exe build_and_validate.py"
+generation_date: "2026-07-14"
+events:
+  search: 218
+  fetch: 87
+  failed: 18
+  outcome_unverified_raw_unavailable: 287
+  failed_matching_substrings:
+    - "BLOCKED"
+    - "Blocked"
+    - "FAILED"
+    - "denied"
+    - "socket-failed"
+papers:
+  rows: 113
+  exact_unique_ids: 110
+  final_works: 94
+evidence:
+  claim_verified: 0
+  fulltext_opened: 0
+  abstract_verified: 93
+  discovered: 20
+  corrections: 5
+unresolved:
+  unverified_citations:
+    count: 2
+    ids:
+      - "2512.10170"
+      - "2512.10403"
+  screening_decisions: "RAW_EVENT_UNAVAILABLE"
+  search_results_universe: "RAW_EVENT_UNAVAILABLE"
