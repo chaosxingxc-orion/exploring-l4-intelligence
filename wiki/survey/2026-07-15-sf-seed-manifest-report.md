@@ -89,7 +89,9 @@ method: "零外部查询——仅枚举本报告§1五个来源文件内已明�
 ——三者均为「直接占据」判定，非 TF 归属待核类；IRO 2506.17828 本身不在本次五来源枚举范围内，
 未产生第二个 Y）。
 
-## §7 lanes 分配统计（八 lane，条目可 1–3 个 lane，总计数 74 = ΣLanes）
+## §7 lanes 分配统计（八 lane，条目可 1–3 个 lane，总计数 74 = ΣLanes——此 74 系**快照51
+期的 lane 重数和**,与现行种子条数 74 数字撞脸纯属巧合;批次2 后现行 lane 和 = 111,见增量
+批次2 附注）
 
 | lane | 主题 | 命中条数 |
 |---|---|---|
@@ -154,3 +156,25 @@ scope_pending 现为 2 条（training-free-grpo + UCT-ToolCreator）。
 - source（60 行）：reviewer点名=18 / 自库继承=7 / 自库反扫=19 / 评审delta-scan=12 /
   **评审点名-基础谱系=4**（第五值,协议 §3 schema 已同步登记）。
 - scope_pending=Y：2（training-free-grpo 2510.08191 + UCT-ToolCreator 2602.01983）。
+
+## 增量批次2 附注（2026-07-16,amendment-3 A3-7 / §5bis 机制第二次使用）
+
+manifest 追加 **14 行**（不改旧行）,来源 = v3 收官就绪度评审 §4 delta scan
+（`2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md`,
+source 字段沿用「评审delta-scan」枚举值）：系统结构自动设计与 reward/feedback 搜索 6 条
+（AFlow / ADAS / GPTSwarm / RAP / ToT / PromptAgent）+ 通用 agentic system 3 条
+（Magentic-One / Agent-S / AutoGen）+ 多模态组合/主动感知/工具闭环 5 条
+（Chameleon / Socratic-Models / AVIS / Visual-Sketchpad / VideoAgent-2026）。
+
+- **新字段 `initial_tag[]`**（amendment-3 A3-7 登记,仅批次2 起使用,旧行不补——多值枚举
+  DIRECT_THREAT / TRAINED_COMPARATOR / METHOD_LINEAGE / COMPONENT_ANALOGY;初判定性仅管
+  阅读优先级,不预判最终纳排结论）。批次2 分布（机器计数）：TRAINED_COMPARATOR=4 /
+  METHOD_LINEAGE=8 / COMPONENT_ANALOGY=3 / DIRECT_THREAT=3（多值可叠）。
+- **存在性待核**：VideoAgent-2026（2606.23327）ID 在协调者知识范围外——执行首步核验,
+  不可解析标 UNRESOLVED（沿用②机制族处置）;Socratic-Models（2204.00598）在默认检索窗前,
+  任何查询不可召回,靠列名进入。
+- **现行总数 = 74**（机器实测:74 行、74 唯一 id、零重复——追加脚本带重复守卫断言）。
+- 批次2 后现值分布（机器 grep/解析）：lane L1=12 / L2=17 / L3=22 / L4=12 / L5=18 / L6=16 /
+  L7=3 / L8=6 / L9=5,Σ=111;verification_level 题录AS_GIVEN=45 / 题录AS_GIVEN|delta待全文
+  核验=4 / census在库(题录+)=22 / 摘要级=3;source reviewer点名=18 / 自库继承=7 / 自库反扫=19 /
+  评审delta-scan=26 / 评审点名-基础谱系=4;scope_pending=Y 维持 2。

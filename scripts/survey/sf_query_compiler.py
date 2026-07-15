@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""sf_query_compiler.py — offline arXiv query compiler for Gate S1 (P0-B).
+"""sf_query_compiler.py — offline arXiv query compiler for Gate S1 (P0-B / A3-8).
 
-Parses the 48 pre-registered exact-query fragments (SF-L1..SF-L8, Q1..Q6) out
-of the frozen protocol document
+Parses the 51 pre-registered exact-query fragments out of the frozen protocol
+document
 
     wiki/survey/2026-07-15-system-first-survey-protocol-v1.md (§4)
 
@@ -12,6 +12,25 @@ widened for SF-L1/L2/L4/L5, date-window exceptions, per-lane pagination cap
 exception for SF-L7-Q3). Writes the frozen JSONL artifact
 
     wiki/survey/2026-07-15-sf-queries.jsonl
+
+**Two-tier query set (amendment-3, A3-8, append-only)**:
+- **base** — the original 48 queries, 8 lanes (SF-L1..SF-L8) x Q1..Q6, each
+  tagged `compiler_version = COMPILER_VERSION_BASE` ("sfqc-1.0.0"). These 48
+  records must byte-for-byte reproduce the pre-A3-8 output (same field
+  content, same order: SF-L1-Q1..SF-L8-Q6) — A3-8 is additive only, it must
+  never mutate a base record.
+- **additions** — 3 further queries registered explicitly in the `ADDITIONS`
+  table below (SF-L1 gets Q7/Q8, SF-L3 gets Q7), each tagged
+  `compiler_version = COMPILER_VERSION_ADDITIONS` ("sfqc-1.1.0"). Any
+  `- Q<n>` line with n present in the protocol text but NOT listed in
+  `ADDITIONS` for its lane is treated as a structural parse failure (exit 1)
+  — this is a deliberate guard against an unregistered/undocumented query
+  line silently entering the compiled set.
+
+Output order = strict prefix preservation: the 48 base records first, in
+their original order, followed by the 3 addition records appended at the end
+in the fixed order SF-L1-Q7, SF-L1-Q8, SF-L3-Q7 (the order the `ADDITIONS`
+table is declared in).
 
 This is a pure protocol *compiler*, not a retrieval executor: it does no
 network I/O of any kind. Only the Python standard library is imported, and
@@ -23,8 +42,10 @@ Usage (from the umbrella repo root, any Python 3.x with only the stdlib):
 
     python scripts/survey/sf_query_compiler.py
 
-Exit code 0 = 48/48 records compiled and all static validations passed.
-Exit code 1 = parse failure or a static validation failure (details printed).
+Exit code 0 = 51/51 records (48 base + 3 addition) compiled and all static
+validations passed.
+Exit code 1 = parse failure (including an unregistered Q>=7 line) or a
+static validation failure (details printed).
 """
 
 from __future__ import annotations
@@ -38,14 +59,44 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
 
-COMPILER_VERSION = "sfqc-1.0.0"
+COMPILER_VERSION_BASE = "sfqc-1.0.0"
+COMPILER_VERSION_ADDITIONS = "sfqc-1.1.0"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "2026-07-15-system-first-survey-protocol-v1.md"
 OUTPUT_JSONL = REPO_ROOT / "wiki" / "survey" / "2026-07-15-sf-queries.jsonl"
 
 EXPECTED_LANES = [f"SF-L{n}" for n in range(1, 9)]
-EXPECTED_Q_NUMS = list(range(1, 7))  # Q1..Q6
+EXPECTED_Q_NUMS = list(range(1, 7))  # Q1..Q6 (base, every lane)
+
+# ---------------------------------------------------------------------------
+# amendment-3 A3-8 — registered query additions (append-only)
+#
+# Each key is a lane id, each value the list of additional Q-numbers that
+# lane's §4 subsection is allowed to carry beyond the base Q1..Q6. Any
+# `- Q<n>` line found in a lane's block whose number is neither in
+# EXPECTED_Q_NUMS nor in this table for that lane is a hard parse failure
+# (see parse_all_queries) — this registry is the ONLY sanctioned way for a
+# lane to grow past Q6, so an undocumented Qn line can never silently enter
+# the compiled set. Iteration/dict order here is also the fixed output
+# order the 3 addition records are appended in.
+# ---------------------------------------------------------------------------
+ADDITIONS = {
+    "SF-L1": [7, 8],
+    "SF-L3": [7],
+}
+
+
+def expected_q_nums_for_lane(lane_id: str) -> list:
+    """Base Q1..Q6 plus any registered ADDITIONS for this lane, ascending."""
+    return EXPECTED_Q_NUMS + sorted(ADDITIONS.get(lane_id, []))
+
+
+def is_addition_query(query_id: str) -> bool:
+    """True iff query_id's Q-number is a registered A3-8 addition for its lane."""
+    lane = lane_of(query_id)
+    q_num = int(query_id.rsplit("-Q", 1)[1])
+    return q_num in ADDITIONS.get(lane, [])
 
 # ---------------------------------------------------------------------------
 # §4 compiled assembly spec (P0-B revision — deterministic, no placeholders)
@@ -150,17 +201,31 @@ def parse_q_fragments(lane_id: str, block_text: str) -> "OrderedDict[int, str]":
     return fragments
 
 
-def parse_all_queries(full_text: str) -> "tuple[OrderedDict[str, str], list[str]]":
-    """Returns (query_id -> raw decoded Q fragment, list of out-of-scope lane
-    ids found in §4 but not compiled). Compilation scope is fixed to
-    SF-L1..SF-L8 (48 Boolean arXiv queries) per the task spec. Any other lane
-    subsection encountered in §4 (e.g. an amendment-added lane that is
-    documented as carrying zero pre-registered Boolean queries, such as a
-    chaining-only 'foundational lineage' lane) is recorded as out-of-scope
-    and skipped rather than treated as a structural parse failure — but ONLY
-    if it genuinely has zero '- Q<n> `...`' lines; if it has any, that is a
-    real structural surprise and must hard-fail rather than be silently
-    dropped."""
+def parse_all_queries(
+    full_text: str,
+) -> "tuple[OrderedDict[str, str], OrderedDict[str, str], list[str]]":
+    """Returns (base_queries, addition_queries, out_of_scope_lanes).
+
+    base_queries: query_id -> raw decoded Q fragment for the 48 original
+    queries, in original order (SF-L1-Q1..SF-L8-Q6).
+
+    addition_queries: query_id -> raw decoded Q fragment for the 3 A3-8
+    registered additions, in the fixed order the ADDITIONS table declares
+    them (SF-L1-Q7, SF-L1-Q8, SF-L3-Q7).
+
+    Compilation scope is fixed to SF-L1..SF-L8 (base Q1..Q6 + whatever is
+    registered in ADDITIONS per lane). Any other lane subsection encountered
+    in §4 (e.g. an amendment-added lane that is documented as carrying zero
+    pre-registered Boolean queries, such as a chaining-only 'foundational
+    lineage' lane) is recorded as out-of-scope and skipped rather than
+    treated as a structural parse failure — but ONLY if it genuinely has
+    zero '- Q<n> `...`' lines; if it has any, that is a real structural
+    surprise and must hard-fail rather than be silently dropped.
+
+    Within an in-scope lane, any '- Q<n>' line whose n is neither a base
+    number (1..6) nor a number registered for that lane in ADDITIONS is
+    likewise a hard parse failure — an unregistered/undocumented addition
+    line must never silently enter the compiled set."""
     section4 = extract_section_4(full_text)
     lane_blocks = split_lane_blocks(section4)
 
@@ -182,22 +247,55 @@ def parse_all_queries(full_text: str) -> "tuple[OrderedDict[str, str], list[str]
     if missing_lanes:
         raise ParseError(f"expected lanes missing from §4: {missing_lanes}")
 
-    all_queries: "OrderedDict[str, str]" = OrderedDict()
+    lane_fragments: dict = {}
     for lane_id in EXPECTED_LANES:
         fragments = parse_q_fragments(lane_id, lane_blocks[lane_id])
+        expected_nums = expected_q_nums_for_lane(lane_id)
         found_nums = sorted(fragments.keys())
-        if found_nums != EXPECTED_Q_NUMS:
-            raise ParseError(
-                f"{lane_id}: expected Q-numbers {EXPECTED_Q_NUMS}, found {found_nums}"
+        if found_nums != expected_nums:
+            extra = sorted(set(found_nums) - set(expected_nums))
+            missing = sorted(set(expected_nums) - set(found_nums))
+            detail = (
+                f"{lane_id}: expected Q-numbers {expected_nums} "
+                f"(base {EXPECTED_Q_NUMS}"
+                + (f" + registered ADDITIONS {ADDITIONS[lane_id]}" if ADDITIONS.get(lane_id) else "")
+                + f"), found {found_nums}."
             )
+            if extra:
+                detail += (
+                    f" UNREGISTERED Q-number(s) {extra} present in protocol text for "
+                    f"{lane_id} but not listed in ADDITIONS — register them in ADDITIONS "
+                    f"before compiling, or remove the stray line(s); refusing to silently "
+                    f"absorb an unregistered addition."
+                )
+            if missing:
+                detail += f" Missing expected Q-number(s) {missing}."
+            raise ParseError(detail)
+        lane_fragments[lane_id] = fragments
+
+    base_queries: "OrderedDict[str, str]" = OrderedDict()
+    for lane_id in EXPECTED_LANES:
         for q_num in EXPECTED_Q_NUMS:
             query_id = f"{lane_id}-Q{q_num}"
-            all_queries[query_id] = fragments[q_num]
+            base_queries[query_id] = lane_fragments[lane_id][q_num]
 
-    if len(all_queries) != 48:
-        raise ParseError(f"expected 48 total Q fragments, parsed {len(all_queries)}")
+    if len(base_queries) != 48:
+        raise ParseError(f"expected 48 base Q fragments, parsed {len(base_queries)}")
 
-    return all_queries, out_of_scope
+    addition_queries: "OrderedDict[str, str]" = OrderedDict()
+    for lane_id, q_nums in ADDITIONS.items():
+        for q_num in q_nums:
+            query_id = f"{lane_id}-Q{q_num}"
+            addition_queries[query_id] = lane_fragments[lane_id][q_num]
+
+    expected_additions_count = sum(len(v) for v in ADDITIONS.values())
+    if len(addition_queries) != expected_additions_count:
+        raise ParseError(
+            f"expected {expected_additions_count} addition Q fragments, "
+            f"parsed {len(addition_queries)}"
+        )
+
+    return base_queries, addition_queries, out_of_scope
 
 
 # ---------------------------------------------------------------------------
@@ -237,13 +335,15 @@ def assemble_record(query_id: str, q_fragment: str) -> dict:
     record["max_results"] = max_results
     record["sortBy"] = SORT_BY
     record["sortOrder"] = SORT_ORDER
-    record["compiler_version"] = COMPILER_VERSION
+    record["compiler_version"] = (
+        COMPILER_VERSION_ADDITIONS if is_addition_query(query_id) else COMPILER_VERSION_BASE
+    )
     record["record_sha256"] = compute_record_hash(dict(record))
     return record
 
 
-def compile_records(all_queries: "OrderedDict[str, str]") -> list:
-    return [assemble_record(qid, frag) for qid, frag in all_queries.items()]
+def compile_records(queries: "OrderedDict[str, str]") -> list:
+    return [assemble_record(qid, frag) for qid, frag in queries.items()]
 
 
 # ---------------------------------------------------------------------------
@@ -279,8 +379,9 @@ def run_validations(records: list) -> "tuple[list, bool]":
         if not passed:
             all_ok = False
 
-    # 1. row count == 48
-    record_check("row_count_equals_48", len(records) == 48, f"got {len(records)}")
+    # 1. row count == 51 (48 base + 3 A3-8 addition)
+    expected_total = 48 + sum(len(v) for v in ADDITIONS.values())
+    record_check("row_count_equals_51", len(records) == expected_total, f"got {len(records)}, expected {expected_total}")
 
     # 2. query_id uniqueness
     ids = [r["query_id"] for r in records]
@@ -368,15 +469,20 @@ def run_validations(records: list) -> "tuple[list, bool]":
         f"failures={bad_dates}" if bad_dates else "clean",
     )
 
-    # 8. each lane has exactly 6 records
+    # 8. each lane has exactly (6 + registered additions) records
     per_lane = defaultdict(int)
     for r in records:
         per_lane[r["lane"]] += 1
-    lane_mismatch = {lane: per_lane.get(lane, 0) for lane in EXPECTED_LANES if per_lane.get(lane, 0) != 6}
+    expected_per_lane = {lane: 6 + len(ADDITIONS.get(lane, [])) for lane in EXPECTED_LANES}
+    lane_mismatch = {
+        lane: (per_lane.get(lane, 0), expected_per_lane[lane])
+        for lane in EXPECTED_LANES
+        if per_lane.get(lane, 0) != expected_per_lane[lane]
+    }
     record_check(
-        "each_lane_has_exactly_6_queries",
+        "each_lane_has_expected_query_count",
         len(lane_mismatch) == 0,
-        f"mismatch={lane_mismatch}" if lane_mismatch else "all lanes=6",
+        f"mismatch(got,expected)={lane_mismatch}" if lane_mismatch else f"all lanes match {expected_per_lane}",
     )
 
     # --- bonus sanity checks (not requested verbatim, cheap and strictly additive) ---
@@ -422,6 +528,33 @@ def run_validations(records: list) -> "tuple[list, bool]":
         f"failures={hash_bad}" if hash_bad else "clean",
     )
 
+    # bonus: compiler_version correctly tiered — base 48 = sfqc-1.0.0,
+    # registered A3-8 additions = sfqc-1.1.0, and nothing else
+    version_bad = []
+    for r in records:
+        expected_version = (
+            COMPILER_VERSION_ADDITIONS if is_addition_query(r["query_id"]) else COMPILER_VERSION_BASE
+        )
+        if r["compiler_version"] != expected_version:
+            version_bad.append((r["query_id"], r["compiler_version"], expected_version))
+    record_check(
+        "bonus_compiler_version_tiered_correctly",
+        len(version_bad) == 0,
+        f"failures(got,expected)={version_bad}" if version_bad else "clean",
+    )
+
+    # bonus: output order = strict prefix (48 base, original order) then the
+    # 3 A3-8 additions appended in the fixed ADDITIONS-declared order
+    expected_base_order = [f"{lane}-Q{q}" for lane in EXPECTED_LANES for q in EXPECTED_Q_NUMS]
+    expected_addition_order = [f"{lane}-Q{q}" for lane, qs in ADDITIONS.items() for q in qs]
+    expected_order = expected_base_order + expected_addition_order
+    actual_order = [r["query_id"] for r in records]
+    record_check(
+        "bonus_output_order_is_base_prefix_then_additions_appended",
+        actual_order == expected_order,
+        "clean" if actual_order == expected_order else f"got={actual_order}, expected={expected_order}",
+    )
+
     return results, all_ok
 
 
@@ -431,17 +564,19 @@ def run_validations(records: list) -> "tuple[list, bool]":
 
 def main() -> int:
     full_text = load_protocol_text()
-    all_queries, out_of_scope_lanes = parse_all_queries(full_text)
+    base_queries, addition_queries, out_of_scope_lanes = parse_all_queries(full_text)
 
-    print(f"[sf_query_compiler] parsed {len(all_queries)} Q fragments from §4 "
-          f"({len(EXPECTED_LANES)} lanes x {len(EXPECTED_Q_NUMS)} each)")
+    print(f"[sf_query_compiler] parsed {len(base_queries)} base Q fragments from §4 "
+          f"({len(EXPECTED_LANES)} lanes x {len(EXPECTED_Q_NUMS)} each) + "
+          f"{len(addition_queries)} A3-8 registered addition(s) {list(addition_queries.keys())}")
     if out_of_scope_lanes:
         print(f"[sf_query_compiler] NOTE: found {len(out_of_scope_lanes)} lane subsection(s) "
               f"in §4 outside compiler scope (SF-L1..SF-L8), each verified to carry ZERO "
               f"'- Q<n>' Boolean query lines, so excluded from compilation without loss: "
               f"{out_of_scope_lanes}")
 
-    records = compile_records(all_queries)
+    # base records first (strict original order/content), additions appended last
+    records = compile_records(base_queries) + compile_records(addition_queries)
 
     OUTPUT_JSONL.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_JSONL, "w", encoding="utf-8", newline="\n") as f:

@@ -38,16 +38,23 @@ core_structure_policy = 核心冻结、外部结构显式版本化;innovation_st
 
 两条 owner 裁决约束全文：**身份层不立法指标**（具体指标绑定任务×数据集,各研究协议定义、
 Stage-2 冻结;度量纪律以硬约束存在——headroom 归因、cellwise、四量并列）;**摸高阶段预算
-不设 cap**（照实记录;等预算类判据 = PHASE-3_TOOL,归因对照用结构匹配而非预算归一）。
+不设 cap**（三拆名,errata-2 ⑤:`ceiling-seeking resource posture` = 摸高不设 cap 照实记录 /
+`causal matched-control entitlement` = RQ-CTRL 归因探针中匹配可用信息/动作空间/horizon/
+调用机会——系内部有效性控制,非预算 cap,不推迟 / `cost-efficiency comparison` = 等预算
+成本效率比较,PHASE-3_TOOL 延后。三者不得互相顶替——把 matched control 推到 Phase-3 会使
+RQ-CTRL 不可证伪）。
 
 ## §2 科学背景与动机（为什么是这个问题）
 
 **起点观察（两层命题,证据等级分立——v3 外审 §2.2-E 拆分）**：
 
-- **已有支持的「输出池」命题**：在特定任务、供给 c 与采样设置下,冻结模型的**输出池**存在
-  大幅 oracle 头空。文献锚（附支持边界）：Large Language Monkeys（arXiv 2407.21787——支持
+- **已有支持的「输出池」命题**：在**若干已研究**任务、供给 c 与采样设置下,冻结模型的
+  **输出池可出现显著的** oracle 头空（条件化命题——不作跨任务普遍事实宣称,errata-2 ①）。
+  文献锚（附支持边界）：Large Language Monkeys（arXiv 2407.21787——支持
   coverage 随采样数对数线性增长;**不支持** agentic 轨迹控制结论）;compute-optimal TTS
-  （Snell,arXiv 2408.03314——支持测试时算力分配→输出池收益;同样不支持轨迹级结论）;
+  （Snell,arXiv 2408.03314——支持测试时算力分配→输出池收益;**TRAINED/GRAY-BOX MECHANISM
+  ANALOGY**:其 verifier/PRM 可为训练型组件,不作 TF-Strict 直接可行性证据〔errata-2 ②〕;
+  同样不支持轨迹级结论）;
   audio TTC（scaling-auditory,arXiv 2503.23395——支持音频域输出级 TTC 存在收益;证据级 =
   census 在库题录+）。自家组件线 directional 数字（hypothesis-grade,census/ledger v2 在案）
   仅作方向性佐证,不作量级依据。
@@ -75,7 +82,7 @@ read-out/new-info 判别更难审计（本项目对边界的警觉源自 C-T7 �
 gold 致 +0.517 判 INVALID——如实注明:该类泄漏 TF-Strict 本身**不**阻止,由信息边界守卫独立
 拦截,两道防线各司其职）;③文献边界清晰——冻结核心+训练外设自成一类作 TRAINED_COMPARATOR
 上界对照（IRO 训 value function / VeGAS 训 verifier / AuTAgent 训 tool policy,三者已坐实;
-training-free-grpo 学 token prior,**TF-Strict 归属待核**——60 种子中 2 条 scope_pending
+training-free-grpo 学 token prior,**TF-Strict 归属待核**——74 种子中 2 条 scope_pending
 之一,另一条 = UCT-ToolCreator 2602.01983〔批次1〕）。
 **代价如实登记**：若
 label-free 冻结信号普遍太弱（Self-Verification Limitations,arXiv 2402.08115——支持「无
@@ -91,19 +98,26 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 ## §3 研究问题树（全部为待证伪假设,Stage-1C 由 owner 双证据选题）
 
 - **RQ-SYS（主）**：严格黑盒+全系统零训练下,外部 reward-guided sequential control 能否把
-  冻结 omni 组织成真实多模态感知/工具行动/状态维护/反馈适应的 agentic system,并把任务效用
-  推到**实质性且可复核地**高于 one-shot 与终态选择的天花板?（统计语义 Stage-2 才冻结）
+  冻结 omni 组织成真实多模态感知/工具行动/状态维护/反馈适应的 agentic system,并在**相同
+  初始任务信息与显式记录的 decision rights** 下,获得终态-only 选择**不能获得的、实质性且
+  可复核的额外效用?（errata-2 ④:天花板依供给/候选构造/调用权/信息边界条件化定义,两侧
+  headroom 分别报告——不宣称「打破同一 oracle ceiling」,agent 改变供给/工具权即是另一
+  ceiling;统计语义 Stage-2 才冻结）
 - **RQ-CTRL**：增量是否归因于 reward/advantage→下一步动作（对反馈阻断/随机化与无奖励搜索的
   结构匹配对照）,而非单纯更多采样/更多调用?
 - **RQ-OMNI**：非文本模态是否因果地改变评估、计划与工具选择（模态移除/置换探针）,还是系统
   实质为文本 agent + 音频工具（AudioToolAgent 邻域,须降名）?
 - **RQ-SAFE**：反馈闭环下的 reward hacking/错误累积/过优化拐点何时出现,悲观评价/弃权/停止
-  能否控制（Goodhart 线锚 = inference-time-reward-hacking,arXiv 2506.19248——其提出的
-  HedgeTune 即停止机制候选）?
+  能否控制（Goodhart 线锚 = inference-time-reward-hacking,arXiv 2506.19248——其 HedgeTune
+  为**输出级过优化控制类比〔output-level overoptimization control analogue〕**,能否迁移为
+  轨迹级停止/弃权机制系待调查问题,非已验证 agent 停止规则,errata-2 ③）?
 - **RQ-MEASURE**：哪些 label-free observables 预测头空、轨迹改进与失败 regime（组件线四量
   记账在终态选择子问题继续可用,不上升为身份）?
 - survey 收官时以上收敛为 **3–5 个 system-level candidate problems**（每个带:已占据部分/
-  未解决 failure/可行原型方向/最强反对证据/尚缺信息）,供 Stage-1C。
+  未解决 failure/可行原型方向/最强反对证据/尚缺信息;**每卡效用归因四行分立〔errata-2 ⑥〕**:
+  total system utility lift / pretrained-knowledge activation-attributable lift /
+  new-info·tool-computation-attributable lift / mixed-未识别——四行不得互借,⑤类增益禁称
+  激活;且每卡须分解为**可被单一反例杀死**的对象,program-level umbrella 不入卡）,供 Stage-1C。
 
 ## §4 五份系统级合同（PROVISIONAL_STAGE1A_TAXONOMY——检索与编码用,survey 证据可修订）
 
@@ -146,7 +160,10 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 
 ## §6 相关工作与种子景观（snapshot 2026-07-15;占据结论以 survey 为准）
 
-**60 条列名种子（快照 51 + amendment-1 增量批次1 九条;manifest 枚举正典）**（快照五来源:
+**74 条列名种子（快照 51 + amendment-1 增量批次1 九条 + amendment-3 增量批次2 十四条
+〔errata-2 ⑦:收官就绪度评审 delta scan——AFlow/ADAS/GPTSwarm/RAP/ToT/PromptAgent/
+Magentic-One/Agent-S/AutoGen/Chameleon/Socratic-Models/AVIS/Visual-Sketchpad/VideoAgent-2026,
+各带 initial_tag 初判〕;manifest 枚举正典;历史口径 60 = 批次2 前）**（快照五来源:
 近邻表 15/评审机制族 10/自库反扫 4/反扫 STRONG
 15/评审 delta 7）+ 22 条执行时裁决 + 9 桶 WEAK。**计划**对 threat 首轮队列（15 篇,
 可增长非硬上限——协议 amendment-1 重排后口径）执行双人独立全文抽取,最高优先 =
@@ -167,14 +184,19 @@ log-lik 占据在案。
 ## §7 方法论：Stage-1A 可回放 survey（当前唯一申请执行的工作）
 
 签署对象 = 协议包六件套（`wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` 及
-manifest/模板/报告/签署区,三轮内审环 CONVERGED）。规格要点：八 lanes + foundational lineage lane（SF-L9,无 2022 窗限）/ 48 条 arXiv 查询已
+manifest/模板/报告/签署区,三轮内审环 TEXT_CONSISTENCY_CONVERGED@d2fab2d 态——A3-10 起
+convergence 声明带对象）。规格要点：八 lanes + foundational lineage lane（SF-L9,无 2022
+窗限）/ 51 条 arXiv 查询（48 原批+3 条 A3-8 增补,append-only）已
 **离线编译冻结**为 `2026-07-15-sf-queries.jsonl`（逐行含 URL 编码/分页字段/行哈希）。
 **可回放承诺分层（v3 外审 §7.2-II 更正,撤回「逐字节一致」表述）**：请求定义可复现（编译
 冻结）+ 原始响应留存 + 派生集合可由原始响应重建;接口侧实时漂移作为外部不确定性记录。
-;检索宇宙 = arXiv 唯一（引用 = arXiv+本地备份,全文强制;发现层另有 T1 十会 proceedings
-题录扫描道——原 16 条副源路线已按 owner 裁决退役,见协议 amendment-2）;执行策略 = BFS 全量
+;检索语料 = arXiv-primary + 免费官方源救援（errata-2 ⑧/协议 A3-1:引擎 arXiv 唯一;免费
+官方开放获取源可承重纳入;付费不可得 = `REMOVED_PAYWALLED_UNOBTAINABLE` 计数移除记账,占据类
+结论必须披露移除计数;全文强制;发现层另有 T1 十会 proceedings 题录扫描道〔50 route 已实例化,
+`2026-07-16-sf-t1-proceedings-routes.md`〕——原 16 条副源路线已按 owner 裁决退役,见协议
+amendment-2）;执行策略 = BFS 全量
 摘要级编码 → 四判据触发 DFS（对象/问题/要素/结论冲突）→ 引文图五层防爆遍历（方法谱系边+
-对比引用边,公共节点剪枝）;60 种子
+对比引用边,公共节点剪枝）;74 种子
 snowballing 至连续两轮零新增 DIRECT;§5bis 时新性增量扫描;十轴纳排 + TF 审计六字段 + 范围
 八轴 + 11 开放抽取字段;NO_DIRECT_MATCH 须预注册饱和+双评审;全量日志/排除理由/失败请求入
 L3 replay;taxonomy 修订版本化。执行前置三条件：reviewer search-design 签署 + owner 批准 +
@@ -219,8 +241,9 @@ GRAY_BOX_DIAGNOSTIC 本地校验臂;P-δ 供给对比 → B2/供给轴——**�
 
 ## §13 门与时间线
 
-S0 已签 → 本提案评审 + **协议包 search-design 签署**（六件套:协议+amendment-1/manifest 60/
-模板 T1–T6/报告/检索串与 schema/签署区）→ 三条件 preflight → survey 执行（threat 首轮 15 篇
+S0 已签 → 本提案评审 + **协议包 search-design 签署**（六件套:协议+amendments 1–3/manifest
+74/模板 REC-1..REC-7/报告/检索串与 schema+routes manifest/签署区）→ 三条件 preflight →
+survey 执行（threat 首轮 15 篇
 优先、非硬上限,Omni-
 Decision 第一）→ §5bis 增量扫描 → 综合 = 3–5 候选问题 → Stage-1A close（独立签字）→ 1B
 放行（再一签字）→ 探针 → Stage-1C owner 双证据选题 → Stage-2 预注册。
@@ -245,3 +268,25 @@ Stage-2 冻结）;⑤§6 threat 抽取改计划时态并按 amendment-1 更新�
 ⑥§7 撤回「逐字节一致」,改分层承诺并指向编译冻结件;⑦§2 Stechly 锚补全（arXiv 2402.08115,
 附支持/不支持边界）。配套:检索协议 amendment-1（八项变更）、seed manifest 增量批次1（+9=60）、
 v3 内审报告补归档（含迟归档如实说明）、bundle manifest（提交后钉哈希）。
+
+## 修订记录第二批（errata-2,收官就绪度评审 P0-6 + §6 整改——2026-07-16）
+
+按 `2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md`
+（v3 科学件 = ACCEPT AS WORKING THESIS;Gate S1 = WITHHOLD — TARGETED MAJOR REVISION）与
+owner 2026-07-16 四裁决（Decision-Log 续59）逐项执行,原字节在 git 历史：①§2「存在大幅
+oracle 头空」→ 条件化「若干已研究任务…可出现显著」;②§2 Snell 锚加
+`TRAINED/GRAY-BOX MECHANISM ANALOGY` 限定（trained verifier 不作 TF-Strict 直接证据）;
+③RQ-SAFE HedgeTune 降格为输出级过优化控制类比（非已验证 agent 停止规则,轨迹级迁移系待查）;
+④RQ-SYS 天花板条件化（相同初始任务信息+显式 decision rights,两侧 headroom 分别报告,不宣称
+打破同一 oracle ceiling）;⑤§1 资源姿态三拆名（ceiling-seeking resource posture /
+causal matched-control entitlement〔不推迟——推迟则 RQ-CTRL 不可证伪〕/ cost-efficiency
+comparison=PHASE-3_TOOL）,§8 用途二分改三分同步;⑥§3 候选问题卡效用归因四行分立
+（total / activation-attributable / new-info-attributable / mixed）+ 单反例可杀性要求
+（RQ-SYS 保持 programme thesis,不入卡）;⑦§6 种子景观同步批次2（60→74,initial_tag 初判）;
+⑧§7 来源政策同步 A3-1（arXiv-primary+免费救援+付费计数移除）、查询计数 48→51、§13 签署包
+组成映射（amendments 1–3/REC 模板/routes manifest）;另 §7「CONVERGED」按 A3-10 改带对象
+表述。配套:检索协议 amendment-3（A3-1..A3-12,独立日期件）、seed manifest 增量批次2
+（+14=74）、T1 routes manifest（50 route 实例化）、模板 REC-1..REC-7 改版、queries.jsonl
+增补重编译（48 原批字节前缀不变+3 增补）、静态验证复跑报告、bundle correction #3
+（提交后钉哈希）。占据类计数的 version pin + full-text locator 义务在 Stage-1A close 前
+完成（评审 P0-6 末项,登记在案）。

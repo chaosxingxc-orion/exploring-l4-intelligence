@@ -6,6 +6,55 @@
 
 ---
 
+### 2026-07-16（续59）· v3 收官就绪度评审收档（Gate S1 WITHHOLD）+ owner 四裁决 + amendment-3 整改批一次性落盘
+
+**Context.** 独立收官就绪度评审
+（`2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md`,审
+@705b69a,proposal blob `ed750194…`/protocol blob `62bc2f90…`）四分裁决：v3 工作纲领 =
+**ACCEPT AS WORKING THESIS** / 上轮响应 = SUBSTANTIAL BUT INCOMPLETE / Gate S1 =
+**WITHHOLD SIGNATURE — TARGETED MAJOR REVISION**（阻塞项 G1 来源偏差 / G2 梯队≠质量 /
+G3 route 未实例化 / G4 schema 未传播 / G5 bundle 失效 / G6 分页缺陷）/ 阶段 = 收官**准备**
+末段而非科学尾声。我方逐项独立核验（reviewer-response-protocol）：correction #2 钉旧 blob
+（`10185474…`/`775fb761…` vs 现行 `ed750194…`/`62bc2f90…`）、静态验证报告输入 SHA 陈旧
+（`b217fbc0…` vs `8abdcb20…`）、REC 字段四组缺失、route 零实例化、评审点名 14 篇全部不在
+60 种子、热层停续56——**全部属实**;另发现 amendment-2 无独立文件（在 `-amendment-1.md` 内
+追加,落盘纪律不一致）。对抗分析三点：G2 与续58「三梯队管证据权重」owner 裁决正面冲突（须
+owner 亲裁）;G1 的付费前提经事实核查大部不成立（T1 十会 8/10 免费官方开放获取,真付费仅
+ICASSP/ACM MM——其 2017 年覆盖率论据亦偏旧,核心 lane 偏差弱于其定性）;评审自身有 meta
+膨胀自反性（§7.2 禁新元报告,G5 又要独立 signoff review）。
+
+**Decision（owner 2026-07-16 四裁决）.** ① 来源 = 修正方案 A：「有免费的官方文件也可以,
+但是付费就废弃这条记录,因为我们获取不到原文」——落地为 A3-1（arXiv-primary + 免费官方源
+救援 + `REMOVED_PAYWALLED_UNOBTAINABLE` 计数移除记账:记录退出语料不承重,移除事件+ID+计数
+入 flow report,占据类结论必须披露计数——与评审「不从存在性记录中消失」以记账方式兼容）;
+② 梯队 =「按照你的逻辑走」：venue_tier 降为默认先验 + `study_quality` 双向覆盖
+（`T2_PROMOTED`/`T1_DEMOTED` 登记理由）+ T3 按相关性/质量裁决,threat 判定不看梯队（A3-2,
+拒绝评审「tier 全降元数据」的矫枉过正）;③ 阶段称谓重校准 GO（A3-11）;④ 整改一批次写完,
+不出 proposal v4。执行 = amendment-3 A3-1..A3-12（独立日期件,自此恢复一修正案一件纪律）+
+种子批次2（+14=74,新字段 `initial_tag`）+ 3 条增补查询（51 条,离线敏感性审计定盲区,48 原批
+字节前缀不变）+ 50 route 实例化（`2026-07-16-sf-t1-proceedings-routes.md`）+ 模板改
+REC-1..REC-7 + 五合同 schema 传播（REC-2 四字段组）+ v3 errata-2 八项 + README token 登记 +
+热层/Per-Work 刷新。分工按 model-division-of-labor：敏感性审计/核验镜头 = Opus,编译器代码 =
+Sonnet,签署级文本与终验 = 协调者本人。
+
+**Rationale.** 方案 A 在本项目 venue 组合下实际零成本,保住占据结论强度（方案 B 降名会废掉
+NO_DIRECT_MATCH 类结论的可用性）;tier 全降元数据丢掉 owner 梯队骨架,「先验+质量覆盖」同时
+满足评审的独立质量轴与续58 裁决的延续性;付费废弃与存在性记账不冲突——退出语料 ≠ 退出账本;
+G5 的「独立 static signoff review」压缩为机器可验证件（复跑报告+correction #3）,不再造散文
+元报告（评审 §7.2 自身的要求）。
+
+**Consequences.** 敌意环收敛 → 提交 → bundle correction #3 钉现行全件 → 重新申请
+search-design **窄幅复核**（只查 G1–G6 闭合与 bundle 一致性）;签署前零查询维持
+（attestation=0）;签署后第一动作 = survey 执行,不再开 proposal 轮次。敏感性审计逐篇结论
+留痕：48 条稳收 AFlow/RAP/PromptAgent;ADAS/GPTSwarm/Magentic-One/AutoGen/Chameleon/AVIS 为
+真漏网（3 条增补覆盖,预期召回逐条登记于协议 §4 增补行）;ToT/Socratic-Models 不为其加查询
+（基石高被引/窗外——种子+引文图兜底）;Agent-S/Visual-Sketchpad/VideoAgent-2026 =
+RECALL_UNCERTAIN（种子已兜底）。
+
+**Supersedes.** A2-1「非 arXiv 可得的信息源不参考」条（→A3-1）;A2-2/A2-8 的「T3 默认不参考」
+与梯队终裁语义（→A3-2,梯队框架保留）;「Stage-1A 收尾」称谓（→A3-11）;空白模板 T1–T6 编号
+（→A3-4）。
+
 ### 2026-07-15（续58）· 检索策略对抗定稿——owner 三批复 + 规则系统 + 引文图五层防爆;「挑战 owner」行为规则确立
 
 **Context.** 续57 四裁决被我原样转写后,owner 明示「不要全盘同意,要批判挑战」——行为规则入

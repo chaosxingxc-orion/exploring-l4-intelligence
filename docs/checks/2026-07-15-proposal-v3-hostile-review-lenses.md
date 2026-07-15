@@ -1,5 +1,7 @@
 # proposal v3（合并全篇）敌意内审环——评审报告归档（R1 双镜头 + R2 + grep 终验）
 
+> **状态标签（2026-07-16 补盖,amendment-3 A3-12）**：`LATE_RECONSTRUCTED_REVIEW_SUMMARY`
+> ——迟归档复盘件,可作问题/修复复盘,不等同原始 replay、不独立证明当时双 agent 环全过程。
 > 性质界定：评审报告归档（问题/修复/复检结论）,非逐 token 重放的完整运行记录。
 > **归档时间说明（如实）**：本文件系 v3 外审 §7.2-I 指出「proposal-v3 hostile review 无可
 > 定位归档」后**补归档**——环确于 v3 提交前真实执行（frontmatter hostile_review 字段的

@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-15（续56:中断恢复后整改包敌意环收敛〔4 MAJOR+10 MINOR 后闭,grep 终验 0/0/0〕,bundle corrections #1/#2 钉定——重新送签待 owner）"
+last_refresh: "2026-07-16（续59:收官就绪度评审 Gate S1 WITHHOLD〔G1–G6〕→ owner 四裁决 → amendment-3 整改批一次性落盘〔来源政策/梯队先验+质量轴/50 route/REC schema/种子74/查询51〕——敌意环+correction #3 后重新申请窄幅复核）"
 ---
 
 # Research Objective & Current State
@@ -20,22 +20,29 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
 
 ## 2. 阶段与门（现在在哪、下一步是什么）
 
-- **Stage-1A 收尾**；Stage-1B 未放行（流程定义见 [[Research-Methodology]]）。
+- **Stage-1A 收官准备末段（survey-ready gate,A3-11——「收尾/尾声」称谓废止）**：问题框架
+  接近稳定,外部证据工作（检索/全文抽取/引文链/饱和/候选问题）尚未开始,科学收官以可回放
+  survey 完成+3–5 候选问题形成起算;Stage-1B 未放行（流程定义见 [[Research-Methodology]]）。
 - S0 已签（续48）→ proposal v1 同日双外审（续50：严评 RETURN / 重校准 ACCEPTABLE_TO_PROCEED,
   存活四项已修）→ v2 送审版（续51）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_
   REQUIRED_AMENDMENTS**（续52,修正案 A–F 全采）→ 协议 v1+签署包六件套环收敛（续53）→
   **v3 合并全篇提案**（STAGE1A-PROPOSAL-2026-07-15-04,十四节,环收敛,续54）→ **v3 外审返回**
   （收档 @5ca99bf）：v3 科学件=有条件接受（errata 义务）,协议包 Gate S1=**退回大修**（类目
   CV/RO 盲区/片段≠最终查询/75 cap 无溢出/副源不可回放/基础谱系缺失/威胁池封顶）→
-  **P0-A..D 整改闭环（续55,签署级亲验复核）**：v3 errata 七项;检索协议 amendment-1
-  A1-1..A1-9（类目冻结+cs.CV/RO、**48 条查询离线编译冻结** `survey/2026-07-15-sf-queries.jsonl`
-  〔字节可复现,11 静态检查全过,联网查询=0〕、溢出分页规则、16 副源路线三级分级、SF-L9 基础
-  谱系道〔无 2022 窗〕、种子 **60**〔快照51+批次1,计数正典=manifest 枚举,Omni-Decision
-  2607.11433 仍最高优先威胁〕、威胁首轮 15 非硬上限、每篇 most_threatened_rq 字段）;bundle
-  manifest S1-E1..E8 齐备（12 工件 blob 钉定+dated correction #1）——**当前动作 = owner
-  过目 → 转 reviewer 重新申请 search-design 签署**;执行前置三条件（签署+owner 批准+P0-R8
-  复跑）,签署前零查询（attestation=0;selector round-2 协议降为子包 SURVEY-B,其 21 lanes/
-  105 查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
+  **P0-A..D 整改闭环（续55/56,amendment-1 A1-1..A1-9 + bundle corrections #1/#2）** →
+  **检索战略对抗定稿（续57/58,amendment-2 A2-1..A2-11）**：三梯队/T1 题录道/全文强制/方法
+  占据四问/BFS→DFS 四判据/引文图五层防爆,16 副源路线退役 → **v3 收官就绪度评审（审
+  @705b69a）**：v3 科学件 = ACCEPT AS WORKING THESIS,Gate S1 = **WITHHOLD**（G1 来源偏差/
+  G2 梯队≠质量/G3 route 未实例化/G4 schema 未传播/G5 bundle 失效/G6 分页缺陷）→
+  **owner 四裁决 + amendment-3 整改批（续59,2026-07-16,一次性落盘）**：A3-1 arXiv-primary+
+  免费官方源救援+付费 `REMOVED_PAYWALLED_UNOBTAINABLE` 计数废弃、A3-2 梯队先验+study_quality
+  双向覆盖+T3 相关性裁决、A3-3 **50 route 实例化**、A3-4 模板 REC-1..7、A3-5 五合同 schema
+  传播、A3-6 分页年→月→日递归、A3-7 种子 **74**〔批次2 +14,initial_tag;Omni-Decision
+  2607.11433 仍最高优先威胁〕、A3-8 查询 **51**〔敏感性审计+3 增补,48 原批字节前缀不变〕、
+  A3-9 v3 errata-2、A3-10 CONVERGED 带对象、A3-11 阶段称谓、A3-12 迟归档定名——**当前动作 =
+  敌意环收敛 → 提交 → bundle correction #3 → 重新申请 search-design 窄幅复核**;执行前置
+  三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0;SURVEY-B 21 lanes/105
+  查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。
@@ -88,4 +95,5 @@ P0-R 计分 = 续42（R6 REOPENED 等）；Survey v2 = ROUND1_SCOUT_COMPLETE（r
 发布快照=`docs/integrity/release_manifest.json` · reviewer 提案与评审=
 `2026-07-15-*research-proposal*` 系列（stage1a + system-first v1/v2/v3 及各评审件）·
 Gate S1 协议包=`survey/2026-07-15-system-first-survey-protocol-v1.md` + `survey/2026-07-15-sf-*`
++ `survey/2026-07-16-sf-protocol-amendment-3.md` + `survey/2026-07-16-sf-t1-proceedings-routes.md`
 （bundle manifest 为钉定正典）· Per-Work=[[Per-Work-Status]]。

@@ -16,14 +16,25 @@
 > 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
 > （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
 > 期去重标记:命中 census v2 既有 work,仍全量登记）。
-> **检索策略 token（amendment-2 起用）**：`venue_tier`（T1 十会正会/T2 其他含 preprint/T3
-> workshop 默认排除）/ `T2_UNREVIEWED`（T2 实验数字引用强制限定语,不得单独支撑 kill/proceed）/
+> **检索策略 token（amendment-2 起用;venue_tier 语义经 A3-2 原位修订）**：`venue_tier`
+> （T1 十会正会/T2 其他含 preprint/T3 workshop——**默认先验非终裁,T3 按相关性/质量裁决不再
+> 自动排除**,study_quality 可双向覆盖）/ `T2_UNREVIEWED`（T2 实验数字引用默认限定语,不得
+> 单独支撑 kill/proceed;可被 T2_PROMOTED 覆盖）/
 > `REMOVED_UNOBTAINABLE`（无 arXiv 且无法备份,移除并计数）/ `COMMON_NODE`（引文图 ≥3 图共现
 > 且不触发判据的公共文献,登记不扩展）/ `dfs_trigger`（T-a 对象/T-b 问题/T-c 要素/T-d 结论
 > 冲突,多值）/ `topic_relevance`（core/element）。
 > **副源可回放等级 token（routes manifest 起用）**：`REPLAYABLE_API`（接口可确定性重放,含
 > 分页冻结）/ `DISCOVERY_ONLY`（网页排序不可确定性重放,命中回 DOI/arXiv/OpenAlex 稳定 ID）/
 > `DETERMINISTIC_WEB`（URL 参数化可导出——已登记备用,现无路线使用）。
+> **amendment-3 token（2026-07-16 起用）**：`REMOVED_PAYWALLED_UNOBTAINABLE`（付费且无
+> arXiv/免费官方版,计数移除记账——移除事件+ID+题名+venue 入 flow report,占据类结论必须披露
+> 移除计数,A3-1）/ `T2_PROMOTED` `T1_DEMOTED`（study_quality 对 venue_tier 先验的双向覆盖,
+> 登记理由,A3-2）/ `initial_tag`（种子初判多值枚举 DIRECT_THREAT/TRAINED_COMPARATOR/
+> METHOD_LINEAGE/COMPONENT_ANALOGY——仅管阅读优先级,A3-7）/
+> `LATE_RECONSTRUCTED_REVIEW_SUMMARY`（迟归档敌意环记录的统一定名——复盘可用,不等同原始
+> replay,A3-12）。**模板编号纪律（A3-4）**：空白模板 = `REC-1..REC-7`,`T` 前缀为 venue 梯队
+> 独占。**convergence 纪律（A3-10）**：声明必须带对象与锚（如 `TEXT_CONSISTENCY_CONVERGED@blob`）,
+> 裸 `CONVERGED` 停用。
 > **信息来源六类分解（v3 外审 §2.2-G 起用,系 read-out/new-info 二分的直系升级——抽取轴与
 > 归因纪律共用）**：①task-native observation ②pretrained-knowledge read-out ③deterministic
 > transformation/computation ④endogenous environment feedback（agent 动作引致）⑤exogenous

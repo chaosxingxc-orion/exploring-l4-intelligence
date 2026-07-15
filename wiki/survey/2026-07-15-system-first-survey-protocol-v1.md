@@ -1,13 +1,13 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1+amendments 1&2——八 lanes + 基础谱系道 SF-L9 / arXiv 唯一宇宙·48 条编译冻结查询 / 顶会三梯队 / BFS→触发式 DFS / 60 列名种子（计数正典 = manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendments 1–3——八 lanes + 基础谱系道 SF-L9 / arXiv-primary 语料+免费官方源救援·51 条编译冻结查询（48+3,A3-8）/ 梯队先验+质量三轴 / BFS→触发式 DFS / 74 列名种子（计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
 quality_bar: "严评 P0-LIT-3 八项最低规格全采 + 重校准 Checkpoint A–D 判据 + 开放抽取字段(Checkpoint B) + v2 评审修正案 A–F 全采（种子快照措辞/增量扫描/领域源/chaining 续行规则/选文留痕/范围多轴+TF 审计子字段）"
 relation_to_survey_b: "SURVEY-B（selector 组件线 round-2 协议 SURVEY-PROTO-2026-07-15-01,21 lanes/105 查询）独立维持零执行、另行签署——本协议不修改不吸收它"
 first_query_gate: "reviewer search-design 签署 + owner 批准 + P0-R8 状态门复跑三条件齐备后,才允许执行第一条查询"
-hostile_review: "R1 双镜头（①事实/计数/一致性〔机器重数级〕;②术语+查询语法纸面可执行性,各 Opus 独立）：镜头1=0 MAJOR+3 MINOR（报告正文表系裁决前快照;『12 条挂标』为沿抄误计,机器 grep=10）;镜头2=2 MAJOR（arXiv exact-query 装配规则缺失——cat:/submittedDate 必须折入查询串,否则执行者自由度复现 round-1 检索宇宙分叉;manifest 字段词汇与 §3 自声明 schema 不对齐）+5 MINOR+NIT;星号通配符陷阱零命中（显式 OR 枚举）。修复后 R2=8/8 FIXED 但新鲜扫描 2 NEW-MINOR（窗口例外代入串不全;报告 §8 陈旧 21）→ NOT_CONVERGED;再修后 R3=2/2 FIXED+邻接零矛盾 → CONVERGED（三轮,环上限内;环内判定≠外部签署）。原始报告归档 docs/checks/2026-07-15-gate-s1-protocol-hostile-review-lenses.md"
+hostile_review: "R1 双镜头（①事实/计数/一致性〔机器重数级〕;②术语+查询语法纸面可执行性,各 Opus 独立）：镜头1=0 MAJOR+3 MINOR（报告正文表系裁决前快照;『12 条挂标』为沿抄误计,机器 grep=10）;镜头2=2 MAJOR（arXiv exact-query 装配规则缺失——cat:/submittedDate 必须折入查询串,否则执行者自由度复现 round-1 检索宇宙分叉;manifest 字段词汇与 §3 自声明 schema 不对齐）+5 MINOR+NIT;星号通配符陷阱零命中（显式 OR 枚举）。修复后 R2=8/8 FIXED 但新鲜扫描 2 NEW-MINOR（窗口例外代入串不全;报告 §8 陈旧 21）→ NOT_CONVERGED;再修后 R3=2/2 FIXED+邻接零矛盾 → PROTOCOL_INTERNAL_LOOP_CONVERGED〔历史环记录,A3-10 立规前的裸 CONVERGED 于 2026-07-16 补锚〕（三轮,环上限内;环内判定≠外部签署）。原始报告归档 docs/checks/2026-07-15-gate-s1-protocol-hostile-review-lenses.md。**A3 批敌意环（2026-07-16,双镜头各 Opus 独立:①计数/一致性机器重数②G1–G6 闭合完备性）**：R1 = 1 MAJOR（Research-Methodology 阶段称谓残留）+ 4 MINOR + 2 NIT,零措辞违规、零越权宣称、G1–G6/P0-1..6 实质全闭合（bundle correction #3 与 occupancy version-pin 为已披露延后项）;修复后 R2 窄幅机器复检 = 全部 fix 落位、词表 73 项零通配符、schema 三处逐字对齐 → A3_BATCH_LOOP_CONVERGED@workingtree（钉定待 correction #3）"
 ---
 
 # System-first Survey 检索协议 v1
@@ -39,22 +39,36 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 
 ## §2 检索宇宙与承重源（A2-1..A2-3 重写,owner 裁决①②③——取代原多库设计）
 
-- **检索宇宙 = arXiv 唯一**：全部检索经 arXiv API（48 条编译查询）;Semantic Scholar/OpenAlex
-  仅作引文图谱发现层,**其一切命中回 arXiv 题名检索解析**;非 arXiv 可得的信息源不参考
-  （T1 顶会例外见下）。原 16 条副源路线整体退役（`2026-07-15-sf-secondary-routes.md` 留档）。
-- **venue 三梯队（注解步骤,非检索路线）**：`venue_tier`——**T1** = {ACL, EMNLP, NeurIPS,
-  ICML, ICLR, CVPR, ICCV, ACM MM, ICASSP, INTERSPEECH} 正会,第一优先参考（清单冻结,扩充走
-  版本化增补）;**T2** = 其他（未发表 preprint/期刊/非 T1 会议）;**T3** = workshop,**默认
-  不参考**（例外登记理由）。判定依据 = arXiv comments/journal-ref + 题名交叉核对。
-- **T1 定向发现道（A2-7,防高价值顶会论文淹没于泛 relevance 排序）**：T1 十会 × 2022–2026
-  proceedings **题录扫描**（发现层,题目级;每会每年一 route ID——proceedings 目录静态,可回放）,
-  topic 关键词过滤 → 命中回 arXiv 题名解析或备份流程。
-- **梯队证据权重（A2-8）**：T1 实验结论可直接承重;**T2 = 创新/机制描述可承重,实验数字引用
-  强制带 `T2_UNREVIEWED` 限定**（缺同行评议、实验或不充分——不得单独支撑 kill/proceed,须
-  T1 佐证或留待 1B 探针自证）;**梯队管证据权重,不管阅读优先级**（优先级 = §4bis 排序键）。
-- **T1 获取规则**：题名检索回链 arXiv;不在 arXiv → 原文备份
-  `$SPEECHRL_DATA_DIR/survey-backups/`（永不进 git;sha256+来源 URL 入 §9 日志）;无法备份 →
-  `REMOVED_UNOBTAINABLE`（登记计数——覆盖代价显式报告,不静默）。SF-L9 经典同适用。
+- **检索语料 = arXiv-primary + 免费官方源救援（A3-1,取代 A2-1「非 arXiv 不参考」条）**：
+  全部预注册检索经 arXiv API（51 条编译查询）;Semantic Scholar/OpenAlex 仅作引文图谱发现层,
+  **其一切命中回 arXiv 题名检索解析**;无 arXiv 版的直接相关工作走**免费官方开放获取源救援**
+  （ACL Anthology/NeurIPS proceedings/PMLR/OpenReview/CVF/ISCA Archive 等,venue-native ID/
+  DOI + 本地备份 + sha256 纳入承重）;**付费且无任何免费版本 → `REMOVED_PAYWALLED_UNOBTAINABLE`**
+  （计数移除记账——移除事件+ID+题名+venue 入 flow report,凡占据类/NO_DIRECT_MATCH 结论必须
+  披露移除计数）。最终产出自称「arXiv-primary systematic mapping（免费开放获取救援+显式移除
+  记账）」,不称 comprehensive universe。原 16 条副源路线整体退役
+  （`2026-07-15-sf-secondary-routes.md` 留档）。
+- **venue 三梯队（注解步骤,非检索路线;A3-2 修订为「先验非终裁」）**：`venue_tier`——**T1** =
+  {ACL, EMNLP, NeurIPS, ICML, ICLR, CVPR, ICCV, ACM MM, ICASSP, INTERSPEECH} 正会（清单冻结,
+  扩充走版本化增补）;**T2** = 其他（未发表 preprint/期刊/非 T1 会议）;**T3** = workshop——
+  **不再按 venue 默认排除,按相关性/质量裁决**,EXCLUDED 必须记相关性/质量理由（A3-2）。
+  判定依据 = arXiv comments/journal-ref + 题名交叉核对。
+- **T1 定向发现道（A2-7,防高价值顶会论文淹没于泛 relevance 排序;A3-3 已实例化）**：T1 十会
+  × 2022–2026 proceedings **题录扫描**（发现层,题目级;每会每年一 route ID——proceedings
+  目录静态,可回放）,topic 关键词过滤 → 命中回 arXiv 题名解析或救援流程。**route 正典 =
+  `2026-07-16-sf-t1-proceedings-routes.md`**（50 route ID/入口/track 界定/词表 v1/归一化与
+  模糊匹配/五计数字段）,执行日志模板 = REC-7。
+- **梯队证据权重（A2-8,经 A3-2 修订为「先验+质量双向覆盖」）**：`venue_tier` = **默认先验
+  权重,非终裁**。T1 实验结论默认承重,study_quality 低者 `T1_DEMOTED`（登记理由降权）;T2 =
+  创新/机制描述可承重,实验数字默认带 `T2_UNREVIEWED` 限定（不得单独支撑 kill/proceed）,
+  **高质者（代码+复现+充分消融）经协调者裁决 `T2_PROMOTED` 可承重**（登记理由,限定语保留
+  加注 override）;逐篇三轴分立 = `verification_depth / publication_status / study_quality`
+  （schema 正典 = REC-2 evidence_axes）;**threat/novelty 判定不看梯队**（未发表工作同样可
+  摧毁首创宣称）;**梯队管证据先验,不管阅读优先级**（优先级 = §4bis 排序键）。
+- **T1 获取规则**：题名检索回链 arXiv;不在 arXiv → 免费官方源原文备份
+  `$SPEECHRL_DATA_DIR/survey-backups/`（永不进 git;sha256+来源 URL 入 §9 日志）;付费且无
+  任何免费版本 → `REMOVED_PAYWALLED_UNOBTAINABLE`;其他不可得 → `REMOVED_UNOBTAINABLE`
+  （两类均登记计数——覆盖代价显式报告,不静默;A3-1）。SF-L9 经典同适用。
 - **承重源与全文强制（A2-9,owner:「一定要读原始论文的全文」）**：arXiv 钉版本 vN（或本地
   备份件+哈希）;**凡被引用为差异点/借鉴点/占据判断依据的工作,必须全文在手且全文读过**;
   摘要级只作存在性登记、不支撑任何承重结论（五级分级沿用：DISCOVERED / ABSTRACT_VERIFIED /
@@ -66,9 +80,10 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 **措辞纪律（v2 评审风险一）**：survey 完成前禁用「全集/完整占据图」表述——本表是**带截止日的
 预协议快照**,执行起按 §5bis 增量批次滚动。
 
-**构成（60 条列名 = 快照 51 + 增量批次1 九条;另 22 条执行时裁决;计数正典 =
-`2026-07-15-sf-seed-manifest.jsonl` 逐行枚举,零 ID 重复——此前草稿的「57/16」为协调者算术
-口径,按 P0-R8 原则以机器枚举更正）**：
+**构成（74 条列名 = 快照 51 + 增量批次1 九条 + 增量批次2 十四条〔A3-7,v3 收官就绪度评审
+delta scan〕;另 22 条执行时裁决;计数正典 = `2026-07-15-sf-seed-manifest.jsonl` 逐行枚举,
+零 ID 重复——此前草稿的「57/16」为协调者算术口径,按 P0-R8 原则以机器枚举更正;历史口径
+「60」= 批次2 前）**：
 ⑥ **v3 外审 delta scan 5 项**（增量批次1,AS_GIVEN）：OmniAgent 2606.19341 / CMA-Harness
 2607.08497 / UCT-ToolCreator 2602.01983（scope_pending=Y,更新对象待全文）/ ConMem
 2606.08702 / Argos 2512.03438——初判多为训练型对照,不预判最终纳入;
@@ -109,7 +124,8 @@ walking-through-uncertainty 按 §6 范围多轴拆编（组件直接 ≠ 系统
 `{id, name, source ∈ {reviewer点名, 自库继承, 自库反扫, 评审delta-scan, 评审点名-基础谱系}
 （执行期可扩: 数据库发现/chaining/作者页）, first_found_at(文件:定位), verification_level ∈
 {题录AS_GIVEN, 题录AS_GIVEN|delta待全文核验, census在库(题录+), 摘要级}, lanes[]⊆{SF-L1..L9},
-rationale,
+rationale, initial_tag[]?（A3-7,批次2 起用旧行不补——多值 ∈ {DIRECT_THREAT,
+TRAINED_COMPARATOR, METHOD_LINEAGE, COMPONENT_ANALOGY},仅管阅读优先级不预判纳排结论）,
 exclusion_reason?, scope_pending(Y/N), snapshot_date}`。**与登记 token 的映射**：题录AS_GIVEN
 ↔ AS_CITED_BY_REVIEW（题录级）;census在库(题录+) ↔ RETAINED_RECORDS@census-v2;
 delta待全文核验 ↔ TO_VERIFY_FULLTEXT;执行期证据升级一律改记 §2 五级英文标尺
@@ -121,7 +137,7 @@ token 块）仍全量登记（dedup 不丢日志）;新工作即读即登记 cen
 （内审 MINOR-5）**：manifest 内 `[lane 协调者已核]`/`既往 grep` 类注记 = 种子策展与历史
 census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行。
 
-## §4 八条 lanes 与 48 条编译冻结查询（A2-1 后现行口径）
+## §4 八条 lanes 与 51 条编译冻结查询（48 原批 + 3 条 A3-8 增补,append-only）
 
 **通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;
 max_results = 75（SF-L7-Q3 为 50）——**语义 = 每页大小,非结果上限**（溢出规则见下）;按
@@ -133,19 +149,25 @@ amendment-1,snowballing 与 SF-L9 兜异类溢出;执行中发现反例即走版
 查询编号 = SF-L{n}-Q{m}（arXiv）。**各 lane 的 S1/S2 副源行已按 A2-1 整体退役**（下文保留
 作历史记录,不执行）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
 
-**exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合）**：48 条查询已由离线编译器
+**exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合;A3-8 后 51 条）**：51 条查询（48 原批
++3 增补——**原批 48 行逐字节不变、增补追加于文件末尾**,原批行保留 compiler_version
+sfqc-1.0.0,增补行标 sfqc-1.1.0）已由离线编译器
 `scripts/survey/sf_query_compiler.py` 装配为 **`2026-07-15-sf-queries.jsonl`**——逐行含
 decoded/URL-encoded 串、类目、date_from/to、start/max_results/sortBy/sortOrder、compiler
-版本与行哈希,**零占位符**;静态验证报告 `docs/checks/2026-07-15-sf-queries-static-validation.md`。
+版本与行哈希,**零占位符**;静态验证报告 `docs/checks/2026-07-15-sf-queries-static-validation.md`
++ 复跑报告 `docs/checks/2026-07-16-sf-queries-static-validation-rerun.md`（A3-8——证明
+「当前协议 → 当前 compiler → 当前 queries.jsonl」链与原批 48 行字节前缀不变）。
 **执行以 jsonl 为正典,本节文字仅人读参考**。窗口例外（SF-L2-Q3/SF-L3-Q3 = 2023-01 起;
 SF-L7-Q3 = 2020-01 起）已折入各行。日期界约定：submittedDate 双闭区间,以 arXiv v1 提交时间
 为准。**可回放承诺分层（v3 外审 §7.2-II）**：请求定义可复现 + 原始响应留存 + 派生集合可由
 原始响应重建;不承诺 API 返回逐字节一致,接口侧漂移记为外部不确定性。
 
-**溢出/分页规则（v3 外审 4.3——完整性控制,非预算 cap）**：执行时读取每查询
-`opensearch:totalResults`,以 start 递增**分页抓取至全量**;若 totalResults > 2000（arXiv API
-实用界限）,按年度子窗对该查询做**确定性拆分**直至每片 ≤2000;每页保存 start/max_results 与
-原始响应哈希,totalResults 全程留痕——**禁止无声截断**。
+**溢出/分页规则（v3 外审 4.3——完整性控制,非预算 cap;A3-6 补递归 fallback）**：执行时读取
+每查询 `opensearch:totalResults`,以 start 递增**分页抓取至全量**;若 totalResults > 2000
+（arXiv API 实用界限）,按 **年 → 月 → 日** 子窗对该查询做**确定性递归拆分**直至每片 ≤2000
+（单一子窗仍超限即降级到下一时间粒度,粒度穷尽则如实登记为接口极限）;派生查询
+`query_id = <父ID>-W<窗口序号>`,REC-1 行内记 `parent_query_sha256`;每页保存 start/max_results
+与原始响应哈希,totalResults 全程留痕——**禁止无声截断**。
 
 **副源路线——已退役（A2-1）**：原 16 条副源路线（`2026-07-15-sf-secondary-routes.md`,曾为
 v3 外审 4.4 的闭合方案）按 owner 裁决①**整体退役留档,不执行**;其发现职能由 §2 的 T1 十会
@@ -159,6 +181,8 @@ A2-1 披露,reviewer 签署时可表态。
 - Q4 `(abs:"tree search" OR abs:MCTS) AND (abs:"language model" OR abs:LLM) AND (abs:agent OR abs:planning)`
 - Q5 `(abs:"environment feedback" OR abs:"execution feedback") AND (abs:LLM OR abs:"language model") ANDNOT abs:RLHF`
 - Q6 `abs:"language agent" AND (abs:search OR abs:planning) AND abs:value`
+- Q7 `(abs:"agentic workflow" OR abs:"agentic system" OR abs:"agentic systems" OR abs:"multi-agent") AND (abs:orchestration OR abs:orchestrator OR abs:conversation OR abs:"automated design" OR abs:generation) AND (abs:LLM OR abs:"language model")`（A3-8 增补 2026-07-16——agentic 系统设计/多 agent 编排盲区道,预期召回 ADAS/AutoGen/Magentic-One）
+- Q8 `(abs:"computational graph" OR abs:"optimizable graph" OR abs:"agent graph" OR abs:"graph optimization") AND (abs:agent OR abs:LLM OR abs:"language model")`（A3-8 增补 2026-07-16——可优化图盲区道,预期召回 GPTSwarm/VideoAgent-2026）
 - S1 ACL Anthology: `language agent environment feedback`；S2 OpenReview(ICLR/NeurIPS/ICML 2023–2026): `LLM agent test-time feedback`
 
 ### SF-L2 test-time agent feedback/control（IAD 族必查——UMBRELLA 坍缩风险主查道）
@@ -177,6 +201,7 @@ A2-1 披露,reviewer 签署时可表态。
 - Q4 `(abs:"audio question answering" OR abs:"audio reasoning" OR abs:"auditory reasoning") AND (abs:tool OR abs:agent OR abs:"chain of thought")`
 - Q5 `(abs:"audio-language model" OR abs:"audio language model" OR abs:"speech language model") AND (abs:"tool use" OR abs:"function call" OR abs:"tool calling")`
 - Q6 `(abs:vision OR abs:video) AND abs:agent AND (abs:"training-free" OR abs:frozen) AND abs:tool`（跨模态类比道）
+- Q7 `(abs:"information seeking" OR abs:"active perception" OR abs:"compositional reasoning" OR abs:"plug-and-play" OR abs:"visual chain of thought" OR abs:"visual chain-of-thought") AND (abs:tool OR abs:module OR abs:visual OR abs:multimodal) AND (abs:LLM OR abs:"language model")`（A3-8 增补 2026-07-16——信息获取/主动感知/多模态组合盲区道,预期召回 AVIS/Chameleon/Visual-Sketchpad）
 - S1 IEEE Xplore(ICASSP/SLT/ASRU): `audio agent tool use LLM`；S2 OpenReview: `omni agent multimodal tool`
 
 ### SF-L4 external memory / skill acquisition（Voyager/AWM/ExpeL 族）
@@ -224,9 +249,11 @@ A2-1 披露,reviewer 签署时可表态。
 - Q6 `(abs:overthinking OR abs:"give up" OR abs:"premature termination") AND (abs:agent OR abs:"long-horizon")`
 - S1 OpenReview: `agent evaluation cost budget pareto`；S2 ACM DL: `LLM agent cost-controlled evaluation`
 
-**计数（A2-1 后现行口径）**：8 lanes × 6 arXiv 编译查询 = **48 条预注册查询**（16 条副源
-路线已退役,历史口径「64」见 amendment-2）。预算/调用量等资源轴不是查询过滤器,是抽取轴
-（§7,重校准 §2.1 口径）。
+**计数（A3-8 后现行口径）**：8 lanes × 6 + 3 条增补（SF-L1-Q7/Q8、SF-L3-Q7）= **51 条
+预注册查询**（历史口径「48」见 amendment-3 A3-8,「64」见 amendment-2;16 条副源路线已退役）。
+预算/调用量等资源轴不是查询过滤器,是抽取轴（§7,重校准 §2.1 口径）。**增补查询的敏感性审计
+留痕**：离线纸面审计（Opus 独立,零联网）结论与逐篇召回表随 amendment-3 批次归档于
+Decision-Log 续59;审计明确 ToT/Socratic-Models 不为其加查询（种子+引文图兜底）。
 
 ### SF-L9 foundational lineage（基础谱系道——amendment-1 新增,v3 外审 4.5;不受 2022 窗限）
 
@@ -243,7 +270,7 @@ A2-1 披露,reviewer 签署时可表态。
 
 ## §4bis 执行策略：广度优先 → 触发式深度遍历（A2-5,owner 裁决④）
 
-- **BFS pass**：48 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
+- **BFS pass**：51 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
   含 §6 矩阵可从摘要判定的轴 + venue_tier + topic_relevance）——不做全文、不做 chaining。
 - **DFS 触发四判据**（满足任一即入队,`dfs_trigger` 多值登记理由;A2-10）：**T-a 对象重合**
   （omni agentic system/多模态知识系统/语音本体）**T-b 问题重合**（回答我们任一 RQ,即使对象
@@ -253,7 +280,7 @@ A2-1 披露,reviewer 签署时可表态。
 - **队列排序键（确定性字典序,不随机游走）**：`(威胁度↓, core>element, 时新性↓, 梯队↑)`——
   威胁最优先（占据核查是第一使命）;新先于旧（创新空间是时间递减资源）;梯队只作平局裁决。
 - **DFS**：全文抽取（FULLTEXT_OPENED 及以上,§6/§7 全字段含方法占据四问）+ §5 引文图遍历。
-- **预判定 DFS 集**：60 列名种子（选入即因相邻性,天然满足触发判据——外审 P0-LIT-3-③ 的
+- **预判定 DFS 集**：74 列名种子（选入即因相邻性,天然满足触发判据——外审 P0-LIT-3-③ 的
   种子 chaining 要求由此满足）+ threat 首轮 15 篇（双人独立全文抽取,§8）。
 
 ## §5 引文图遍历与半径控制（owner 裁决⑤重写——深度遍历 = 引文图结构分析,五层防爆栈）
@@ -290,21 +317,39 @@ forward-方法谱系 > backward-方法谱系 > backward-对比。
 
 ## §6 纳排矩阵（十轴,P0-LIT-3-④）
 
-每条 INCLUDED 记录编码：`core_access(weights/logits/API-text) | parameter_update(none/prompt/
+每条 INCLUDED 记录编码：`core_access(weights/logits/hidden-state/attention/API-text/
+API-multimodal——A3-5 扩枚举) | parameter_update(none/prompt/
 adapter/full) | external_state_update(none/memory/skill/tree) | reward_type(gold/verifier/
 self/env/none) | policy_update(none/nonparametric/trained) | modality_path(text/audio-native/
 audio-tool/vision/omni) | tool_use(none/fixed/routed/learned) | budget_horizon(单步/固定K/
 多轮/任意) | task(域) | trained_comparator(Y/N)`。EXCLUDED 必须记排除理由（§9 日志字段）。
 
-**TF-Strict 审计子字段（标题驱动漂移防护,v2 评审风险二）**：`base_model_updated(Y/N) |
-external_component_trained(Y/N,对象) | ground_truth_used(无/预先/开发集/测试时) |
-learned_object(token-prior/value-fn/verifier/prompt/none) | learning_time(test 前/test 中) |
+**TF-Strict 审计子字段（标题驱动漂移防护,v2 评审风险二;A3-5 扩展）**：`base_model_updated(Y/N) |
+external_component_trained(Y/N,对象) | component_pretrained(Y/N,哪些组件系既有预训练参数) |
+method_specific_parameter_training(Y/N,是否为本任务/系统新训参数) |
+test_time_parameter_update(Y/N) | nonparametric_persistence(within_item/across_items/none) |
+ground_truth_used(无/预先/开发集/测试时) |
+learned_object(token-prior/value-fn/verifier/prompt/memory/skill/tool/code/workflow/graph/
+index/exemplar/none/other〔登记后使用〕) | learning_time(test 前/test 中) |
 test_time_readonly(Y/N)`——「冻结核心 ≠ TF-Strict」（Training-Free GRPO / IRO / VeGAS 类
-必经此审计）。
+必经此审计）;扩展四字段防「冻结通用工具」与「为本任务新训组件」混为一类,扩枚举防
+UCT/AFlow/ADAS/GPTSwarm/Voyager/ConMem 类更新对象无处登记致 scope_pending 不可裁决。
 
-**梯队与策略字段（A2-2/A2-4/A2-5）**：`venue_tier(T1/T2/T3——T3 默认排除,例外登记) |
+**梯队与策略字段（A2-2/A2-4/A2-5;A3-2 修订）**：`venue_tier(T1/T2/T3——默认先验非终裁,
+T3 按相关性/质量裁决,EXCLUDED 记理由) |
 topic_relevance(core=语音/omni agentic 本体, element=技术要素参考) | dfs_trigger(T-a对象重合/T-b问题重合/
-T-c要素重合/T-d结论冲突, 多值;空=仅 BFS——四值与 §4bis/A2-10/T2 模板/README 一致)`。
+T-c要素重合/T-d结论冲突, 多值;空=仅 BFS——四值与 §4bis/A2-10/REC-2 模板/README 一致)`。
+
+**A3-5 新增字段组（schema 正典 = REC-2 空白模板,字段语义见该件补注）**：
+`source_axes`（信息来源六类 / answer_bearing_external_info / gold_path_audit /
+activation_attribution〔readout/new_info/mixed/not_claimed〕）| `omni_axes` 五轴
+（core_model_modal_capability / observation_seen_by_core / tool_input_output_modalities /
+action_modality / multimodal_causal_grounding_evidence——modality_path 降为粗标签,承重判断
+以五轴为准）| `rl_identity` 九字段（state_definition/action_definition/feedback_definition/
+transition_or_controller/policy_representation/cross_step_update_object/credit_assignment/
+stopping_rule/authors_call_it_rl——SF-L9 谱系裁决「RL/planning/search/bandit/metareasoning」
+的记录基础）|
+`evidence_axes`（verification_depth / publication_status / study_quality / quality_override）。
 
 **范围多轴（修正案 F——不用单一 DIRECT/OUT 压平）**：`system_level_proximity |
 component_level_proximity | modality_proximity | tf_strict_compliance | black_box_compliance |
@@ -361,7 +406,8 @@ excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记�
 
 ## §11 停止规则与产出
 
-- 查询停止 = 全部 48 条编译查询执行完毕（含分页抓全,总数口径非每 lane）+ T1 题录道扫描完毕
+- 查询停止 = 全部 51 条编译查询执行完毕（含分页抓全,总数口径非每 lane;历史口径 48 见
+  A3-8）+ T1 题录道 50 route 扫描完毕（可执行数以 routes manifest 状态列机器计数为准）
   + 引文图遍历达饱和（§5）;整体停止不设时间 cap,以覆盖判据（§1）与饱和为准。
 - 产出：coverage/kill matrix v3 + SOTA cards v3 + 更新的 census/ledger + **3–5 个
   system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类;**每个候选附
@@ -376,10 +422,13 @@ excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记�
 3. 执行期间任何查询/种子/判据变更走 §10 版本化增补并即时可见于 replay 目录;
 4. survey 完成 → 综合 → 届时才谈 Stage-1A close（与 1B 放行分立两签）。
 
-**签署包清单（v2 外审 §6.2 六件套）**：① 本协议（exact-query protocol）;② seed manifest
-（`2026-07-15-sf-seed-manifest.jsonl` + 伴随报告）;③ 数据源与检索字符串（本协议 §2/§4）;
+**签署包清单（v2 外审 §6.2 六件套;A3 后组成映射）**：① 本协议 + amendments 1–3
+（amendment-3 独立件 `2026-07-16-sf-protocol-amendment-3.md`）;② seed manifest
+（`2026-07-15-sf-seed-manifest.jsonl` 74 条 + 伴随报告）;③ 数据源与检索字符串（本协议
+§2/§4 + T1 routes manifest `2026-07-16-sf-t1-proceedings-routes.md`）;
 ④ 纳排/抽取 schema（本协议 §6/§7）;⑤ 空白记录模板（`2026-07-15-sf-blank-templates.md`
-T1–T6）;⑥ 本签署区。各件以提交后 (commit, path, blob) 三元组互引,签署对象 = 六件整包。
+REC-1..REC-7,A3-4——原 T1–T6 编号废止）;⑥ 本签署区。各件以提交后 (commit, path, blob)
+三元组互引,签署对象 = 六件整包。
 
 **签署区（三方分立,任一空缺不得执行首条查询）：**
 
