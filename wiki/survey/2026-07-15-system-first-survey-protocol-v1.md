@@ -73,7 +73,9 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 2607.08497 / UCT-ToolCreator 2602.01983（scope_pending=Y,更新对象待全文）/ ConMem
 2606.08702 / Argos 2512.03438——初判多为训练型对照,不预判最终纳入;
 ⑦ **基础谱系 4 项**（增量批次1,SF-L9 专用,DOI 题录）：Russell-Wefald metareasoning 1991 /
-Kaelbling POMDP 1998 / Sutton options 1999 / Kocsis UCT 2006。
+Kaelbling POMDP 1998 / Sutton options 1999 / Kocsis UCT 2006。**执行期注记（A2-9 联动）**：
+本 4 条现为题录级在册,全文/备份获取是执行首步;不可得者按 REMOVED_UNOBTAINABLE 移除——
+「在册」≠「已接受」。
 快照期五分类如下：
 ① v1 §4 表内 15 项（blob 见 §0 钉定）;
 ② 评审补充机制族 10 项（AWM/ExpeL/Self-Refine/CRITIC/TPO/HuggingGPT/AudioGPT/DSPy/TextGrad/
@@ -119,7 +121,7 @@ token 块）仍全量登记（dedup 不丢日志）;新工作即读即登记 cen
 （内审 MINOR-5）**：manifest 内 `[lane 协调者已核]`/`既往 grep` 类注记 = 种子策展与历史
 census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行。
 
-## §4 八条 lanes 与 64 条预注册精确查询
+## §4 八条 lanes 与 48 条编译冻结查询（A2-1 后现行口径）
 
 **通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;
 max_results = 75（SF-L7-Q3 为 50）——**语义 = 每页大小,非结果上限**（溢出规则见下）;按
@@ -145,10 +147,10 @@ SF-L7-Q3 = 2020-01 起）已折入各行。日期界约定：submittedDate 双�
 实用界限）,按年度子窗对该查询做**确定性拆分**直至每片 ≤2000;每页保存 start/max_results 与
 原始响应哈希,totalResults 全程留痕——**禁止无声截断**。
 
-**副源路线（v3 外审 4.4 闭合）**：16 条副源逐条冻结于
-**`2026-07-15-sf-secondary-routes.md`**（route ID/接口/完整查询/排序/时间窗/页码与停止规则/
-导出 schema/原始证据保存;无法确定性导出者如实标 `DISCOVERY_ONLY`,其命中回
-DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
+**副源路线——已退役（A2-1）**：原 16 条副源路线（`2026-07-15-sf-secondary-routes.md`,曾为
+v3 外审 4.4 的闭合方案）按 owner 裁决①**整体退役留档,不执行**;其发现职能由 §2 的 T1 十会
+题录扫描道（可回放性更强）与引文图承接。对 v3 外审 4.4 与修正案 C 的取代已在 amendment-2
+A2-1 披露,reviewer 签署时可表态。
 
 ### SF-L1 reasoning+acting 与环境反馈（ReAct/Reflexion/LATS 族）
 - Q1 `abs:"language agent" AND abs:feedback AND (abs:"test-time" OR abs:"inference-time" OR abs:"training-free")`
@@ -301,8 +303,8 @@ test_time_readonly(Y/N)`——「冻结核心 ≠ TF-Strict」（Training-Free G
 必经此审计）。
 
 **梯队与策略字段（A2-2/A2-4/A2-5）**：`venue_tier(T1/T2/T3——T3 默认排除,例外登记) |
-topic_relevance(core=语音/omni agentic 本体, element=技术要素参考) | dfs_trigger(topic_similar/
-purpose_similar/method_borrowable, 多值;空=仅 BFS)`。
+topic_relevance(core=语音/omni agentic 本体, element=技术要素参考) | dfs_trigger(T-a对象重合/T-b问题重合/
+T-c要素重合/T-d结论冲突, 多值;空=仅 BFS——四值与 §4bis/A2-10/T2 模板/README 一致)`。
 
 **范围多轴（修正案 F——不用单一 DIRECT/OUT 压平）**：`system_level_proximity |
 component_level_proximity | modality_proximity | tf_strict_compliance | black_box_compliance |
@@ -359,8 +361,8 @@ excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记�
 
 ## §11 停止规则与产出
 
-- 每 lane 停止 = 64 条查询全执行 + snowballing 达饱和;整体停止不设时间 cap,以覆盖判据（§1）
-  与饱和（§5）为准。
+- 查询停止 = 全部 48 条编译查询执行完毕（含分页抓全,总数口径非每 lane）+ T1 题录道扫描完毕
+  + 引文图遍历达饱和（§5）;整体停止不设时间 cap,以覆盖判据（§1）与饱和为准。
 - 产出：coverage/kill matrix v3 + SOTA cards v3 + 更新的 census/ledger + **3–5 个
   system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类;**每个候选附
   「改进空间 + 为什么值得占」两栏**——A2-6 渐进式研究观的输出落点）——供 Stage-1C owner

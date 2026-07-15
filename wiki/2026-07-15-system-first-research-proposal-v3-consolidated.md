@@ -171,7 +171,10 @@ manifest/模板/报告/签署区,三轮内审环 CONVERGED）。规格要点：�
 **离线编译冻结**为 `2026-07-15-sf-queries.jsonl`（逐行含 URL 编码/分页字段/行哈希）。
 **可回放承诺分层（v3 外审 §7.2-II 更正,撤回「逐字节一致」表述）**：请求定义可复现（编译
 冻结）+ 原始响应留存 + 派生集合可由原始响应重建;接口侧实时漂移作为外部不确定性记录。
-+ 16 条副源路由（route manifest 逐条冻结或如实标 discovery-only）（ACL/OpenReview/IEEE/ACM + CVF/ISCA/PMLR 回链义务）;60 种子
+;检索宇宙 = arXiv 唯一（引用 = arXiv+本地备份,全文强制;发现层另有 T1 十会 proceedings
+题录扫描道——原 16 条副源路线已按 owner 裁决退役,见协议 amendment-2）;执行策略 = BFS 全量
+摘要级编码 → 四判据触发 DFS（对象/问题/要素/结论冲突）→ 引文图五层防爆遍历（方法谱系边+
+对比引用边,公共节点剪枝）;60 种子
 snowballing 至连续两轮零新增 DIRECT;§5bis 时新性增量扫描;十轴纳排 + TF 审计六字段 + 范围
 八轴 + 11 开放抽取字段;NO_DIRECT_MATCH 须预注册饱和+双评审;全量日志/排除理由/失败请求入
 L3 replay;taxonomy 修订版本化。执行前置三条件：reviewer search-design 签署 + owner 批准 +
