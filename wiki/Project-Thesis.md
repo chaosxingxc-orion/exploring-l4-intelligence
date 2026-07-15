@@ -26,9 +26,10 @@ ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is u
 - **Black-box contract**: core methods may not require weights, gradients, hidden states, attention,
   or guaranteed logprobs. The local llama.cpp deployment is a low-cost verification environment —
   gray-box diagnostics only, never load-bearing.
-- **North-star metric family**: headroom / realization accounting — H(c) and the ρ family
-  (pool-level, generalizing to trajectory-level). **The metric pulls the design; the metric is not
-  the research object** (the 2026-07 inversion lesson — see tombstones).
+- **Measurement**: concrete metrics bind to task × dataset and are defined/frozen per study
+  protocol — **the identity level does not legislate a metric** (owner 2026-07-15). Where
+  measurable, report against the frozen model's own ceiling (headroom accounting); the metric is
+  never the research object (the 2026-07 inversion lesson).
 - **Resource posture**: reach the ceiling first (no budget cap; budget logged), then consolidate,
   then cost-reduce. Equal-budget comparisons are `PHASE-3_TOOL`s, not phase-1 gates.
 
@@ -83,8 +84,9 @@ dead (L2–L3 criteria unmet).
 
 - **黑盒合同**：核心方法不得要求 weights/gradients/hidden states/attention/保证 logprobs；
   本地 llama.cpp = 低成本校验环节（灰盒诊断，永不承重）。
-- **北极星指标族**：头空/兑现率记账——H(c) 与 ρ 族（池级→轨迹级）。**指标牵引设计，指标不是
-  研究对象**（2026-07 指标倒置教训）。
+- **度量**：具体指标绑定任务×数据集、在各研究协议中定义并于 Stage-2 冻结——**身份层不立法
+  指标**（owner 2026-07-15）；可测处保留相对冻结模型自身天花板的记账纪律（headroom 归因）；
+  指标永不是研究对象（2026-07 倒置教训）。
 - **资源姿态**：全力摸高（预算不设 cap、照实记录）→ 持续整合 → 成本压降；等预算对照 =
   `PHASE-3_TOOL`。
 
