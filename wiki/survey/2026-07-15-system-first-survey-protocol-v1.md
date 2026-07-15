@@ -190,7 +190,7 @@ DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
 ### SF-L7 reward hacking / verifier gaming / loop over-optimization（Goodhart 族;Q3 窗口 2020-01 起）
 - Q1 `(abs:"reward hacking" OR abs:"reward gaming" OR abs:"specification gaming") AND (abs:LLM OR abs:"language model" OR abs:"test-time" OR abs:inference)`
 - Q2 `(abs:"reward overoptimization" OR abs:"over-optimization" OR abs:overoptimization) AND (abs:reward OR abs:verifier)`
-- Q3 `abs:Goodhart`（窗口 2020-01 起,cap 50）
+- Q3 `abs:Goodhart`（窗口 2020-01 起,每页 50）
 - Q4 `(abs:"verifier gaming" OR abs:"judge hacking" OR abs:"evaluation gaming" OR abs:"benchmark gaming")`
 - Q5 `(abs:"best-of-n" OR abs:"best-of-N") AND (abs:KL OR abs:overoptimization OR abs:distribution)`
 - Q6 `(abs:"stopping rule" OR abs:abstention OR abs:"early stopping") AND (abs:"test-time" OR abs:inference) AND (abs:reward OR abs:verifier OR abs:confidence)`

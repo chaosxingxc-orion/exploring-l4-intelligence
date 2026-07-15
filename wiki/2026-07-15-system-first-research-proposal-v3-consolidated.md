@@ -75,7 +75,8 @@ read-out/new-info 判别更难审计（本项目对边界的警觉源自 C-T7 �
 gold 致 +0.517 判 INVALID——如实注明:该类泄漏 TF-Strict 本身**不**阻止,由信息边界守卫独立
 拦截,两道防线各司其职）;③文献边界清晰——冻结核心+训练外设自成一类作 TRAINED_COMPARATOR
 上界对照（IRO 训 value function / VeGAS 训 verifier / AuTAgent 训 tool policy,三者已坐实;
-training-free-grpo 学 token prior,**TF-Strict 归属待核**——全 51 种子唯一 scope_pending 项）。
+training-free-grpo 学 token prior,**TF-Strict 归属待核**——60 种子中 2 条 scope_pending
+之一,另一条 = UCT-ToolCreator 2602.01983〔批次1〕）。
 **代价如实登记**：若
 label-free 冻结信号普遍太弱（Self-Verification Limitations,arXiv 2402.08115——支持「无
 sound verifier 时自验证不可靠」;**不支持**「一切 label-free 信号必然失败」）,TF-Strict
@@ -170,7 +171,7 @@ manifest/模板/报告/签署区,三轮内审环 CONVERGED）。规格要点：�
 **离线编译冻结**为 `2026-07-15-sf-queries.jsonl`（逐行含 URL 编码/分页字段/行哈希）。
 **可回放承诺分层（v3 外审 §7.2-II 更正,撤回「逐字节一致」表述）**：请求定义可复现（编译
 冻结）+ 原始响应留存 + 派生集合可由原始响应重建;接口侧实时漂移作为外部不确定性记录。
-+ 16 条副源路由（route manifest 逐条冻结或如实标 discovery-only）（ACL/OpenReview/IEEE/ACM + CVF/ISCA/PMLR 回链义务）;51 种子
++ 16 条副源路由（route manifest 逐条冻结或如实标 discovery-only）（ACL/OpenReview/IEEE/ACM + CVF/ISCA/PMLR 回链义务）;60 种子
 snowballing 至连续两轮零新增 DIRECT;§5bis 时新性增量扫描;十轴纳排 + TF 审计六字段 + 范围
 八轴 + 11 开放抽取字段;NO_DIRECT_MATCH 须预注册饱和+双评审;全量日志/排除理由/失败请求入
 L3 replay;taxonomy 修订版本化。执行前置三条件：reviewer search-design 签署 + owner 批准 +
