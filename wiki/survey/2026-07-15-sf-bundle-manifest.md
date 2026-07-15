@@ -41,3 +41,26 @@ E6 ✓（本件）/ E7 ✓（#12,迟归档如实说明）/ E8 ✓（#8,query 执
 | 10 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `1763c793248f28acb50051637e8123de69a2760a` |
 
 **attestation（更正后复签）**：截至本更正落笔,联网检索查询执行数 = 0。
+## dated correction #2（2026-07-15,中断恢复后的整改包敌意环收敛）
+
+背景：会话中断期间,恢复后的整改包敌意环（R1 七镜头,审 @aa6e660 态）发现 4 MAJOR + 10 MINOR
+——其一（most_threatened_rq）已由 correction #1 先行闭合;其余 13 项于 `8f76a16` 闭合,R2 窄幅
+复检 13/13 FIXED + 3 新残留于 `d2fab2d` 清零（grep 终验 0/0/0）,环收敛。要点：§3 schema 五值
+enum+SF-L9、A1-1 敏感性计数机器重数 16→19/18+eess.IV 补裁决、§9/T1 每页一行 schema 取代 cap
+语义、批次1 后现值分布节（Σ=89,机器解析）、v3 三处陈旧计数+假「唯一 scope_pending」更正。
+受影响工件以 `d2fab2d` blob 为准,原哈希保留不改写：
+
+| # | path | git blob @d2fab2d |
+|---|---|---|
+| 1 | `wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md` | `10185474788c` |
+| 2 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `775fb7615a8b` |
+| 3 | `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | `081ed1c12b8e` |
+| 5 | `wiki/survey/2026-07-15-sf-seed-manifest-report.md` | `445ce34d3c8b` |
+| 8 | `docs/checks/2026-07-15-sf-queries-static-validation.md` | `7d62a77847e7` |
+| 9 | `wiki/survey/2026-07-15-sf-secondary-routes.md` | `5307737a303f` |
+| 10 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `a94f231aed9c` |
+| 12 | `docs/checks/2026-07-15-proposal-v3-hostile-review-lenses.md` | `ecdbd6ace953` |
+| + | `wiki/survey/README.md`（token 登记面,随包） | `dbf6f5eb0000` |
+
+未变件：#4 manifest（`1255fcfd`——批次1 后未再动）/ #6 queries.jsonl（`c87a2301`,编译产物
+全程稳定）/ #7 compiler / #11 sweep。**attestation（更正后复签）**：联网检索查询执行数 = 0。
