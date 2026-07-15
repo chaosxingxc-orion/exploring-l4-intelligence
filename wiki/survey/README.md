@@ -1,13 +1,18 @@
-# Step-2 Survey Archive — TFRL Omni Capability Activation
+# L3 探索知识库入口 — Survey Archive & Paper Registry
 
-> **CURRENT (Stage-1A Survey v2, 2026-07-14, wf_c6ed06f2)** — the live neighbor/kill survey for the
-> selector-realization direction. 15 adversarial lanes (incl. 5 challenger-hunt "kill" lanes), 305
-> logged queries, ~93 papers. Result: I1 DIRECT_OCCUPIED (killed); I4 cross-matrix realization surface
-> = clearest NO_DIRECT_MATCH whitespace. Artifacts (SCOUT round-1; 5 kills coordinator-verified):
-> [[2026-07-14-neighbor-matrix-v2]] · [[2026-07-14-coverage-and-kill-matrix-v2]] ·
-> [[2026-07-14-sota-cards-v2]] · `2026-07-14-scout-ledger-round2.json` ·
-> `2026-07-14-search-query-log.jsonl`. Round-1 predecessor: `2026-07-13-scout-ledger-round1.json`.
-> Owner decision package: [[2026-07-14-stage1c-decision-package]].
+> **本目录 = 探索知识层（L3）的稳定检索库**（知识四层规约见 [[AI-Collaboration]] §记录规约，
+> 续47）。**正典种子 = census v2（95 works，canonical ID + 版本钉，94 RESOLVED + 1 如实
+> UNRESOLVED）+ claim-ledger v2（62 行，claim×work×span，五级证据等级），@28ad858，验收
+> @b1af8c6。** 登记规约（从严）：凡 FETCH/精读过的论文必须按此 schema 登记，不登记不算读过；
+> 判决层修订必须带伴随 token。
+>
+> **勿再引已撤回口径**（"~93 papers" / "305 queries" / "I4 最干净 whitespace"——现行结论一律
+> 按身份索引表：RESP-02 §3.3 与 [[Research-Objective]] §4/§5）。Survey v2 状态 =
+> ROUND1_SCOUT_COMPLETE。工件：[[2026-07-14-neighbor-matrix-v2]] ·
+> [[2026-07-14-coverage-and-kill-matrix-v2]] · [[2026-07-14-sota-cards-v2]] ·
+> `2026-07-14-scout-ledger-round2.json` · `2026-07-14-search-query-log.jsonl` ·
+> round-1 前身 `2026-07-13-scout-ledger-round1.json`（其检索宇宙永久缺失，已如实签
+> REPLAY_FAILED）。
 
 > Part of the **Step-2 survey** for [[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] (see [[Research-Proposal-Template]] §3). Produced by a multi-agent survey workflow (5 lanes -> per-lane adversarial verification -> synthesis), run `wf_d76b4901-23c`, 2026-06-26. Every source below was adversarially checked to resolve to a real paper; only `keep=true` claims are archived. Links are real and verifiable.
 

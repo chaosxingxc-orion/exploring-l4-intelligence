@@ -23,8 +23,8 @@ works are **separate GitHub repos** under `projects/` (each its own git repo, gi
 ## Environment (important)
 
 - **Compute is WSL2 `Ubuntu-24.04`, not native Windows** — the machine's default `Ubuntu` distro is
-  WSL1 (no GPU), so always target `wsl -d Ubuntu-24.04`. The RTX 5090 (Blackwell, sm_120) has no stable
-  native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only. All training runs in WSL2.
+  WSL1 (no GPU), so always target `wsl -d Ubuntu-24.04`. The RTX 5090 (Blackwell, sm_120) has no
+  stable native-Windows torch wheels; verl/vLLM/flash-attn are Linux-only.
 - **Python is pinned to 3.12** in a uv venv at `~/.venvs/speechrl` (ext4). The system Python 3.14 is
   too new for ML wheels — do not use it for the stack. **Never touch `D:/ai-stack/mem0-venv`** (the
   isolated mem0 MCP env from `.mcp.json`).
@@ -65,7 +65,6 @@ Data & model assets (~650 GB, **never in git**) are **frozen** to `docs/datasets
 ```bash
 bash scripts/data/fetch-data.sh --list          # show the manifest, fetch nothing
 bash scripts/data/fetch-data.sh                  # fetch everything missing (pinned revisions)
-bash scripts/data/fetch-data.sh --install-deps   # install download deps if missing
 bash scripts/data/inventory.sh                   # audit COMPLETE / PARTIAL / MISSING
 ```
 
@@ -96,8 +95,8 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   `CONTRIBUTING.md`.
 - **`CLAUDE.md` and `AGENTS.md` are sibling guides** (Claude Code / Codex) kept near-identical —
   when you change operating guidance in one, mirror it in the other.
-- **`gh` on PATH:** the real GitHub CLI is `C:\Program Files\GitHub CLI\gh.exe` (System PATH
-  reordered so it resolves ahead of the shadowing Python script at `C:\Python314\Scripts\gh`).
+- **`gh` on PATH:** the real GitHub CLI is `C:\Program Files\GitHub CLI\gh.exe` (PATH reordered
+  ahead of the shadowing `C:\Python314\Scripts\gh`).
 - **Line endings:** `.gitattributes` forces `eol=lf` (esp. `*.sh`) so scripts run in WSL — keep it.
 - **Default branch is `master`** for the umbrella and all four work repos.
 - **PYTHONPATH separator is `;` on Windows** Python (not `:`) when testing without an install.
@@ -116,6 +115,11 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   supersede-in-place（原位改写 + 墓碑指针），**禁止限定语堆叠**。**战役收官即归档**：不被
   正典四件（Research-Objective / Project-Thesis / Per-Work-Status / CLAUDE.md）引用的日期件
   → `wiki/archive/`。
+- **知识四层（owner 续47）**：事实层（=默认加载面）／工作知识（日志 append-only + 提炼条
+  in-place；战役收官跑**提炼步**）／探索知识（论文库：**FETCH/精读即按 census/ledger schema
+  登记，不登记不算读过**；库入口 `wiki/survey/README.md`）／程序知识（脚本/模板/checklist——
+  **规约优先做成可执行检查**，保鲜=可测性）。**会话逃逸协议**：目的层讨论、承重结论、未完
+  意图**会话结束前必落盘**。全文：AI-Collaboration §记录规约。
 - **哈希正典**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（核验
   `git show <commit>:<path> | sha256sum`）；Windows 工作树 CRLF 哈希是变体，不作证据。
 - **加载面预算（试运行值）**：CLAUDE.md ≤10KB、Research-Objective ≤5KB、记忆索引 ≤30 行。
@@ -123,7 +127,7 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   Per-Work-Status → 归档扫描 → `bash scripts/wiki-sync.sh`（wiki 真源=仓内 `wiki/*.md`，网页版
   只是镜像；mem0 MCP=个人便签，团队知识必须进 wiki）。
 
-## 研究方法论（一行 + 指针）
+## 研究方法论（指针）
 
 **研究流程三阶段** Stage-1（1A 问题界定 / 1B 方向性原型 / 1C 收官选题）→ Stage-2 方案验证 →
 Stage-3 发表，**现在 = Stage-1A 收尾**；证据永持产生阶段的等级。**资源姿态三阶段（owner

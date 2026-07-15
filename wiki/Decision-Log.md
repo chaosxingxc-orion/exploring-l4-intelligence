@@ -6,6 +6,33 @@
 
 ---
 
+### 2026-07-15（续47）· 知识组织四层定稿——程序知识升第四层 + L3 从严登记 + 会话逃逸协议
+
+**Context.** owner 提出知识三层框架（事实层/工作知识/探索知识）并要求与业内主流对镜检查充分性；
+对照 CoALA（episodic/semantic/procedural）、Voyager skill library、runbook 文化等发现**程序知识
+缺位**（owner 2026-07-06「knowledge≠skill≠memory」能力分类学已预言此层——记录系统应镜像之；
+错档实证：wsl-ops-playbook 曾标 reference 实为 runbook），另缺会话边界成文协议（/clear 遗忘
+事故根源）。
+
+**Decision.**（owner 2026-07-15 晚）① 程序知识升第四层；② 晋升判据认可（反复被用+已稳定+
+足够小）；③ L2 提炼步挂战役收官钩子（先于归档扫描，三问判收）；④ **L3 从严：凡 FETCH/精读
+即按 census/ledger schema 登记，不登记不算读过**，与 survey 并行执行；⑤ LLMWiki/嵌入检索走
+轻路径（库先长、工具后置，尊重续37 四门）；⑥ 四层 + 会话逃逸协议入册（CLAUDE/AGENTS 记录规约
+节 + AI-Collaboration §记录规约全文）。
+
+**Rationale.** 程序知识三个维度皆异于他层（介质可执行/保鲜靠可测性/复用靠调用），混入其他层
+导致错档与散落（scripts、CLAUDE、memory 三处无统一登记）；「规约优先做成可执行检查」有 P0-R8
+先例（机器门拦住散文规约拦不住的三次同构失误）。L3 从严是「不重复扫描」的必要条件——round-1
+检索宇宙永久缺失即反例；并行执行成本每篇 2–5 分钟。备选「程序知识作工作知识子类」被否：
+三维差异使其保鲜与登记规则无法与 L2 共用。
+
+**Consequences.** AI-Collaboration 新增四层读写协议表 + 提炼三问 + L3 登记规约 + 晋升管线 +
+会话逃逸协议 + 负清单；CLAUDE/AGENTS 记录规约节补四层一览（预算内）；`wiki/survey/README.md`
+改造为 L3 库入口并清除头部残留的已撤回数字（~93/305/I4-whitespace → 正典口径）；memory 条目
+升级 RULED（改名 knowledge-four-layer-model）。
+
+**Supersedes.** 三层框架（同日 UNDER_DISCUSSION 版）；survey/README 旧头部（含勿再引数字）。
+
 ### 2026-07-15（续46）· S0 签字页草案 + 正典重写（动作 D 先行）+ 规约层预算校准 + sync 修复
 
 **Context.** owner 指令「继续吧，一次性把事情作对」——把 07-15 整改链收全：S0 草案、正典重写、
