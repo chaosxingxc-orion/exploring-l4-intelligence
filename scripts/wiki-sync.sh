@@ -42,8 +42,16 @@ echo "Wiki remote: $WIKI_URL"
 # Always start from a clean working clone (avoids stale-state wedging across runs).
 rm -rf "$WORK_DIR"
 FRESH=0
-if git clone "$WIKI_URL" "$WORK_DIR" 2>/dev/null; then
+CLONE_ERR=""
+if CLONE_ERR="$(git clone "$WIKI_URL" "$WORK_DIR" 2>&1)"; then
   :   # cloned an existing, initialized wiki
+elif ! grep -qiE 'repository .*not found|not found' <<<"$CLONE_ERR"; then
+  # 2026-07-15: a transient network/TLS failure used to be misread as "wiki not
+  # initialized", sending the script down the fresh-init path whose push is then
+  # rejected by the existing remote. Fail fast instead; only a genuine
+  # repository-not-found takes the first-time-init path below.
+  echo "ERROR: wiki clone failed (network?): $CLONE_ERR" >&2
+  exit 1
 else
   echo "Wiki not cloneable yet — attempting first-time init via push."
   echo "(If the push fails with 'Repository not found': enable Settings -> Features -> Wikis,"

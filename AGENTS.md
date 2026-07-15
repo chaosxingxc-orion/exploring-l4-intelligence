@@ -122,9 +122,9 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
 - **哈希正典**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（核验
   `git show <commit>:<path> | sha256sum`）；Windows 工作树 CRLF 哈希是变体，不作证据。
 - **加载面预算（试运行值）**：CLAUDE.md ≤10KB、Research-Objective ≤5KB、记忆索引 ≤30 行。
-- **每个发布件提交前过敌意内审环**（多镜头，修复后复审至一轮零新发现）；决策后：先 append
-  Decision-Log → 反映热层 → Per-Work-Status →（归档扫描）→ `bash scripts/wiki-sync.sh`。
-  wiki 真源是 `wiki/*.md`，网页版只是镜像。mem0 MCP 是个人便签，团队知识必须进 wiki。
+- **发布件提交前过敌意内审环**（复审至一轮零新发现）。决策后：append Decision-Log → 热层 →
+  Per-Work-Status → 归档扫描 → `bash scripts/wiki-sync.sh`（wiki 真源=仓内 `wiki/*.md`，网页版
+  只是镜像；mem0 MCP=个人便签，团队知识必须进 wiki）。
 
 ## 研究方法论（一行 + 指针）
 
@@ -153,33 +153,25 @@ AGENTS.md 间逐字镜像。**死代号与事故史**：`wiki/archive/terminolog
 - **delta_mbr / regret**：U_sel−U_mbr / U_oracle−U_sel；Stage-1 报告与双 ρ **四量并列**、
   **cellwise-only**（禁无权重跨任务总平均）；部署用 label-free proxy `S`、评估用 `U`，不混。
 - **headroom 归因纪律**：selector 实验必须同报该池实测头空；**有头空的 null 才证伪选择器**；
-  无头空的 null 只否定该供给配置——不否定选择原理，但供给设计须问责登记，不得无限换供给重试。
+  无头空的 null 只否定该供给配置（供给设计须问责登记，不得无限换供给重试）。
 - **MBR**：无标签共识选择；经典强基线/新颖性击杀器；**等 K 强制基线**。
-- **RDU（Retrieve–Discover–Use）**：前端知识子系统——供给侧 c 的一种实现（现为
-  secondary/ablation）。
+- **RDU（Retrieve–Discover–Use）**：前端知识子系统——供给侧 c 的一种实现。
+- **外部控制平面（external control plane / agent scaffold）**：围绕冻结黑盒核心的外部系统总称
+  （观察/供给、记忆、工具、评估、选择、预算、停止）；口语「外设优化」的正名。
 - **对外术语**：weight-frozen reward-guided inference-time optimization；内部简称 TFRL。
 - **SESOI**：最小实质效应量；数值须外部锚定，Stage-2 才冻结。
 - **directional-only / hypothesis-grade**：Stage-1 小样方向性证据等级；绝不升级为结论。
 - **信息边界**：test-item 的 golden transcript/answer/qrel 不得进入 selector、reward、prompt、
   检索或候选构造的任何路径；杠杆分 **read-out**（允许）与 **new-info**（禁止）。
-- **I1 / I2 / I3 / I4 / UMBRELLA（候选身份，Stage-1C 才选）**：I1=一般 label-free N-best
-  selector；I2=音频接地的冻结 omni selector；I3=受约束/可弃权/显式 Goodhart 拐点；I4=(供给 c,
-  选择器) 二元组的供给分层兑现率；UMBRELLA=training-free RL ∩ 冻结 omni ∩ advantage→下一步
-  动作的立项交集（2026-06-26 立项即有）。现状与限定：`wiki/Research-Objective.md`。
-- **strict-I2（= I2∩I4 合取）**：同一冻结 omni 既作生成器又以自身音频接地信号打分，以 ρ(c)
-  面刻画；限定 POST_HOC_NARROWED_CANDIDATE（07-14 后验合成，不得以「幸存」框架引用）；
-  命名史见墓碑表。
-- **δ_corr**：仅保留 TH2a 理论义 = 残余误差相关；经验四量 `selection_overlap`/`error_corr`/
-  `conditional_error_mi`/`complementary_gain`（修正案 №1 拆名）；事故史见墓碑表。
-- **PRE_STAGE2_BLUEPRINT**：Stage-1A 期间撰写、无现时效力的未来方案结构草图。
-- **诚信核查包 C1–C5**：重校准审查五项低成本核查（C1 尝试普查/C2 数字 lineage/C3 信息边界
-  审计/C4 负结果普查/C5 append-only 更正）；与论文贡献编号 C1–C3 同形异义——引用必须带
-  「诚信核查」限定语。
+- **候选身份与研究态术语**（I1–I4 / UMBRELLA / strict-I2 / δ_corr / PRE_STAGE2_BLUEPRINT）：
+  属研究态，定义与现状统一维护在 `wiki/Research-Objective.md` §4（不在本表重复）；事故史见
+  墓碑表。
+- **诚信核查包 C1–C5**：重校准审查五项核查（尝试普查/数字 lineage/信息边界/负结果/更正）；
+  与论文贡献编号 C1–C3 同形异义——引用必带「诚信核查」限定语。
 
 ## Research skills
 
 Installed via the Windows Codex plugin marketplace (see `docs/setup.md`):
-`academic-research-skills` (`/ars-*`), six `ai-research-skills` groups, and the official
-**`lean@leanprover`** pack (`lean:*` skills) for Lean 4 formal proof. Deliberately scoped —
-K-Dense scientific-agent-skills, community lean4-skills, and lean-lsp-mcp are intentionally
-**not** installed (official Lean skills only, light footprint).
+`academic-research-skills` (`/ars-*`), six `ai-research-skills` groups, official `lean@leanprover`
+pack (`lean:*`). Deliberately scoped — K-Dense pack, community lean4-skills, lean-lsp-mcp
+intentionally **not** installed.

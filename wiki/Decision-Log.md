@@ -6,6 +6,33 @@
 
 ---
 
+### 2026-07-15（续46）· S0 签字页草案 + 正典重写（动作 D 先行）+ 规约层预算校准 + sync 修复
+
+**Context.** owner 指令「继续吧，一次性把事情作对」——把 07-15 整改链收全：S0 草案、正典重写、
+CLAUDE 预算残留、wiki-sync 缺陷。
+
+**Decision.** ① Gate S0 签字页落盘 `2026-07-15-s0-program-identity-signoff.md`
+（**PENDING_OWNER_SIGNATURE**，含 TF-Strict/TF-Core 勾选项——owner 问答=治理裁决≠签署，签署待
+亲笔）。② Project-Thesis 与 Research-Objective 按续45 裁决 **supersede-in-place 全新重写**
+（system-first；selector 线降组件 dossier〔RO §5〕；取代索引 28 行迁
+`archive/research-objective-supersession-index.md`）。③ CLAUDE/AGENTS 术语表二次拆分：研究态
+词条（I1–I4/UMBRELLA/strict-I2/δ_corr/PRE_STAGE2_BLUEPRINT）迁 Research-Objective §4；登记
+「外部控制平面」正名；**加载面预算校准 CLAUDE ≤12KB**（10KB 试运行值低于活内容底线）。
+④ wiki-sync.sh 修复 clone 失败误判「wiki 未初始化」缺陷（网络错误 fail-fast）。
+
+**Rationale.** 正典若等 S0 签字再改，每个新会话仍从 selector-first 旧文开工（v2 评审 P0-SYS-2
+预言，07-15 已实际发生）——故按治理裁决先行重写、S0 签署使效力正式化；取代信号与签署状态在两份
+正典 §1 显式声明，无冒签。预算不足时删活内容违反调研 N2 结论（删错反噬）——预算应校准到活内容
+底线而非反向硬删。备选「保留旧正典+横幅」被否：横幅即限定语堆叠，正是噪音失效形态。
+
+**Consequences.** Research-Objective 13.3→≈5KB、Project-Thesis 11.2→≈5.6KB、CLAUDE 13.2→≈11.6KB
+（新会话默认加载面合计 ≈43KB→≈27KB，含记忆索引）。**待 owner：S0 亲笔签署（身份四行确认 +
+TF 口径勾选，两项分立）**；签署后 system-first proposal 重写开工。
+
+**Supersedes.** Research-Objective / Project-Thesis 旧全文（字节在 git
+`git show e482465:wiki/<file>`）；CLAUDE.md 术语表 07-15 早间版；试运行预算「CLAUDE ≤10KB」
+（续45）→ ≤12KB。
+
 ### 2026-07-15（续45）· owner 方向澄清落地 + 记录系统整改（动作 A/B/C 执行）——首条 ADR 骨架条目
 
 **Context.** owner 发现两件事：①连续对抗评审把研究对象从「TFRL 牵引的 agentic system」逐步压缩成
