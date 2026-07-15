@@ -9,7 +9,7 @@ identity_authority: "Gate S0 已签署(续48):黑盒 omni agentic system / train
 evidence_discipline: "零新执行;既有数字 directional-only/hypothesis-grade;占据状态按登记 token(AS_CITED_BY_REVIEW / RETAINED_RECORDS@census-v2 / ROUND2_PREREGISTERED_TARGET / TRAINED_COMPARATOR,登记于 wiki/survey/README.md);无确证宣称、无「首个」宣称"
 generated_by: "Claude Fable 5 主会话协调者亲笔(签署级工件不委托)"
 hostile_review: "R1 双镜头（①事实/指针/评审转述准确性;②术语纪律+自库覆盖率+机制叙述残留——后两镜头系 v1 环教训新增,各 Opus 独立）：合并 2 独立 MAJOR（AWM/ExpeL 被误表述『评审净新/不在我方库』——census v2 口径为真但广义自库有 2026-07-04 踪迹,双镜头交叉证实,『查自库』失败模式同批次复发;种子集漏自库 4 条 DIRECT 占据者:training-free-grpo/inference-time-reward-hacking/walking-through-uncertainty/scaling-auditory）+ 6 MINOR（P0-LIT-3 ⑥漏 equation/Checkpoint E 归属/『九行』实为八行/『四镜头』措辞/流程 token 未登记/字面『首个』版本序用法）。逐项修复后 R2 独立复检 8/8 FIXED + 零新发现（四新种子 ID 独立 grep 核验）→ CONVERGED（环内判定,非外部评审通过）。原始报告归档 docs/checks/2026-07-15-proposal-v2-hostile-review-lenses.md"
-owner_transmission: PENDING — owner 审阅后转交 reviewer
+owner_transmission: "TRANSMITTED 2026-07-15 — owner 指令『收敛后就转交 reviewer 吧,开始 Gate S1 协议实例化』;Gate S1 协议实例化同步开工（零查询,协议成稿后送 reviewer 签署）"
 ---
 
 # System-first Stage-1A 研究提案 v2（致 reviewer）
