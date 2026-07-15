@@ -10,6 +10,11 @@
 > 核查）/ `RETAINED_RECORDS@census-v2`（在 94 记录簇→95 works 保留记录内,@28ad858）/
 > `ROUND2_PREREGISTERED_TARGET`（round-2 预注册待查目标,零执行,题录级 AS_GIVEN_BY_REVIEW）/
 > `TRAINED_COMPARATOR`（带训练组件的对照臂,TF-Strict 下永不承重）。
+> **流程/状态 token（重校准评审提供,proposal v2 起用）**：`PROVISIONAL_STAGE1A_TAXONOMY`
+> （五合同现阶段身份=暂定分类学,survey 证据可修订）/ `candidate_kill_logic_for_stage1b_design`
+> （kill 表现阶段身份=1B 设计候选逻辑,非冻结实验）/ `OUT_OF_SCOPE_WEIGHT_UPDATED`（test-time
+> 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
+> （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）。
 >
 > **勿再引已撤回口径**（"~93 papers" / "305 queries" / "I4 最干净 whitespace"——现行结论一律
 > 按身份索引表：RESP-02 §3.3 与 [[Research-Objective]] §4/§5）。Survey v2 状态 =

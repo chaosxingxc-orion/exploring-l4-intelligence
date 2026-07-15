@@ -25,9 +25,11 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   RETURN_FOR_MAJOR_REVISION → 重校准评审 **ACCEPTABLE_TO_PROCEED_WITH_STAGE1A_SURVEY_
   PROTOCOLIZATION**（判严评六缺陷中四项为阶段错位并撤回；Gate S1 = **协议化已授权 /
   查询执行仍待签**）；严评仍成立四项已修（四行 delta 改写 TO_VERIFY_FULLTEXT / 自库 5 强近邻
-  检回补入 / CONVERGED 环内限定 / 内审工件归档 docs/checks/）；**回应信形式待 owner 定**
-  → Gate S1 协议实例化（八 lanes + mandatory seeds〔含严评补充族,题录待解析〕+ 严评
-  P0-LIT-3 八项最低规格）→ system-first survey（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
+  检回补入 / CONVERGED 环内限定 / 内审工件归档 docs/checks/）；合并回应已并入
+  **v2 送审版**（STAGE1A-PROPOSAL-2026-07-15-03,`...-proposal-v2.md`,双镜头环 CONVERGED,
+  续51——含续50 措辞更正与自库反扫 4 列名种子,**待 owner 审阅转交**）→ Gate S1 协议实例化
+  （八 lanes + mandatory seeds 全集 + 系统性自库反扫 + 严评 P0-LIT-3 八项规格 + 重校准
+  Checkpoint A–D）→ system-first survey（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
   21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
   两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最

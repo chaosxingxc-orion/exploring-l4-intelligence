@@ -6,6 +6,31 @@
 
 ---
 
+### 2026-07-15（续51）· proposal v2（送审版）成稿——双镜头环收敛;续50 措辞更正
+
+**Context.** owner 指令：按十一节模板写 reviewer 面向的 proposal——修订史（改了什么）、现行
+主张、下一阶段计划。
+
+**Decision.** STAGE1A-PROPOSAL-2026-07-15-03 成稿（`2026-07-15-system-first-research-proposal-v2.md`，
+v1 保留为细节正典;本件并承担对两评审的合并回应〔§0.3 处置表〕）。内审环 R1 双镜头（含 v1 环
+教训新增的「机制叙述 vs 原文」「自库覆盖率」镜头）= 2 独立 MAJOR + 6 MINOR → 修复 → R2
+8/8 FIXED 零新发现 = CONVERGED（环内判定）。`owner_transmission = PENDING`。
+
+**Rationale（教训链）.**「查自库」失败模式**第三次复发**（AWM/ExpeL 定性）——census v2 正典
+口径与广义自库必须显式区分;自库反扫由个人纪律上升为**协议步骤**并当场检回 4 条 DIRECT 占据
+者列名种子（training-free-grpo / inference-time-reward-hacking / walking-through-uncertainty /
+scaling-auditory）。
+
+**更正（append-only,对续50）.** 续50「AWM/ExpeL 系评审自身知识,2/7 不在库」措辞失准——正确
+表述：**不在 census v2 正典（grep 0 命中）,但广义自库有历史踪迹**（2026-07-04
+3w-crossdomain survey 与归档 A3 lane 曾与 JitRL 同句点名）;不作「评审净新」定性。
+
+**Consequences.** v2 待 owner 审阅转交 reviewer;转交后 Gate S1 协议实例化开工（八 lanes +
+mandatory seeds 全集〔15 表内 + 评审补充族 + 4 自库反扫〕+ 系统性自库反扫步骤 + 严评
+P0-LIT-3 八项规格 + 重校准 Checkpoint A–D 判据）。
+
+**Supersedes.** v1 作为送审版（记录与细节正典保留）;续50 相应措辞（本条更正段）。
+
 ### 2026-07-15（续50）· proposal v1 同日两轮外审收档——重校准通过 + 严评存活项修复
 
 **Context.** proposal v1 交付后同日两轮外审：①严评（`...-v1-doctoral-adversarial-review.md`，
