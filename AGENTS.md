@@ -80,8 +80,7 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   librosa/mlflow/jiwer are imported *inside* the functions that use them. **Preserve this** when
   adding code — keep heavy imports inside functions, not at module top level.
 - **Each work depends on `common` via `[tool.uv.sources]`** editable path `../../common`. Work
-  `pyproject.toml` deliberately omits torch/verl (those come from the WSL env so the cu128 index is
-  used).
+  `pyproject.toml` deliberately omits torch/verl (they come from the WSL env's cu128 index).
 - **Config:** Hydra per work — `configs/config.yaml` composes `model/ dataset/ rl/ experiment/`.
 - **RL library:** verl (GRPO/PPO with vLLM rollouts). Base model: Qwen2-Audio (swap SALMONN /
   Qwen2.5-Omni via `models/` + config).
@@ -101,7 +100,7 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
 - **Default branch is `master`** for the umbrella and all four work repos.
 - **PYTHONPATH separator is `;` on Windows** Python (not `:`) when testing without an install.
 
-## 记录规约（读什么、记什么——2026-07-15 整改生效）
+## 记录规约（读什么、记什么）
 
 - **默认加载面只有三处**：本文件 → `wiki/Research-Objective.md`（现状唯一热层入口，**开工先
   读**）→ `wiki/Project-Thesis.md`（北极星）。**`wiki/Decision-Log.md` 是冷审计层——绝不整篇
@@ -115,15 +114,14 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
   supersede-in-place（原位改写 + 墓碑指针），**禁止限定语堆叠**。**战役收官即归档**：不被
   正典四件（Research-Objective / Project-Thesis / Per-Work-Status / CLAUDE.md）引用的日期件
   → `wiki/archive/`。
-- **知识四层（owner 续47）**：事实层（=默认加载面）／工作知识（日志 append-only + 提炼条
+- **知识四层（续47）**：事实层（=默认加载面）／工作知识（日志 append-only + 提炼条
   in-place；战役收官跑**提炼步**）／探索知识（论文库：**FETCH/精读即按 census/ledger schema
   登记，不登记不算读过**；库入口 `wiki/survey/README.md`）／程序知识（脚本/模板/checklist——
   **规约优先做成可执行检查**，保鲜=可测性）。**会话逃逸协议**：目的层讨论、承重结论、未完
   意图**会话结束前必落盘**。全文：AI-Collaboration §记录规约。
-- **哈希正典**：一切 (commit, sha256) 证据对以 **git blob 字节**为正典（核验
-  `git show <commit>:<path> | sha256sum`）；Windows 工作树 CRLF 哈希是变体，不作证据。
-- **加载面预算（试运行值,续46 校准）**：CLAUDE.md ≤12KB、Research-Objective ≤5KB、记忆索引
-  ≤30 行。
+- **哈希正典**：(commit, sha256) 证据对以 **git blob 字节**为正典
+  （`git show <commit>:<path> | sha256sum`）；工作树 CRLF 哈希是变体，不作证据。
+- **加载面预算（试运行,续46）**：CLAUDE.md ≤12KB、Research-Objective ≤5KB、记忆索引 ≤30 行。
 - **发布件提交前过敌意内审环**（复审至一轮零新发现）。决策后：append Decision-Log → 热层 →
   Per-Work-Status → 归档扫描 → `bash scripts/wiki-sync.sh`（wiki 真源=仓内 `wiki/*.md`，网页版
   只是镜像；mem0 MCP=个人便签，团队知识必须进 wiki）。
@@ -160,7 +158,7 @@ AGENTS.md 间逐字镜像。**死代号与事故史**：`wiki/archive/terminolog
 - **外部控制平面（external control plane / agent scaffold）**：围绕冻结黑盒核心的外部系统总称
   （观察/供给、记忆、工具、评估、选择、预算、停止）；口语「外设优化」的正名。
 - **对外术语**：weight-frozen reward-guided inference-time optimization；内部简称 TFRL。
-- **SESOI**：最小实质效应量；数值须外部锚定，Stage-2 才冻结。
+- **SESOI**：最小实质效应量；外部锚定，Stage-2 冻结。
 - **directional-only / hypothesis-grade**：Stage-1 小样方向性证据等级；绝不升级为结论。
 - **信息边界**：test-item gold（transcript/answer/qrel）不得进入 selector/reward/prompt/检索/
   候选构造的任何路径；杠杆分 **read-out**（允许）与 **new-info**（禁止）。
