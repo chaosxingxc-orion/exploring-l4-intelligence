@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-07-15（续50）· proposal v1 同日两轮外审收档——重校准通过 + 严评存活项修复
+
+**Context.** proposal v1 交付后同日两轮外审：①严评（`...-v1-doctoral-adversarial-review.md`，
+RETURN_FOR_MAJOR_REVISION，六承重缺陷 + P0-A..D 整改计划）；②重校准评审
+（`...-v1-stage1a-recalibrated-review.md`）——判严评把「后续实验成立所需条件提前当成 Stage-1A
+必闭 P0」为阶段错位，撤回预算 cap 前置/RL 二选一前置/轨迹 headroom 冻结/选择性遗漏 QRP 红旗/
+完整工程平台要求，verdict = **ACCEPTABLE_TO_PROCEED_WITH_STAGE1A_SURVEY_PROTOCOLIZATION**
+（Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING）。
+
+**Decision.**（协调者按 reviewer-drift-guard 双向审查后处置）有利裁决不冲掉有效发现——严评
+**仍成立四项**当日修复：①Reflexion/LATS/Voyager/LLM-as-Verifier 四行机制 delta 过度乐观
+（「对方没用我方术语」不构成机制差）→ 改写 + TO_VERIFY_FULLTEXT；②P0-LIT-1 自库强近邻遗漏
+→ grep 实证 JitRL/Audio-Mind/Agent-Omni/EChO-Agent/AuTAgent 五条**均在我方 census v2**，检回
+补入 §4（AWM/ExpeL 系评审自身知识,2/7 不在库,如实分开登记）；③内部 CONVERGED 加「环内判定」
+限定语（重校准 §6 建议）；④内审四镜头原始报告归档
+`docs/checks/2026-07-15-proposal-v1-hostile-review-lenses.md`（严评缺陷 6）。协议质量标准采
+严评 P0-LIT-3 八项最低规格并入 Gate S1。
+
+**Rationale.** 严评的阶段错位与本日 owner 三阶段裁决同构（用后段判据评前段工件——评审也犯了
+协调者上午犯的错）；但其文献镜头（机制叙述 vs 原文、自库覆盖率）恰好补了内审环没有的两个视角
+——环设计已登记此教训。**自库 5 条强近邻漏检 = L3 探索知识「检索失效」当日复发实例**：登记
+规约解决「存」，新规「写最近邻/占据表前必须先查自库」解决「取」。
+
+**Consequences.** Gate S1 协议实例化解锁（mandatory seeds = 自库强近邻 + 评审补充族〔待题录
+解析〕；八项最低规格）；**对两评审的正式回应信形式待 owner 裁决**（完整逐点 vs 合并轻量）；
+重校准的诚信裁定（本提案阶段 NO QRP）不冲销前期评审周期已确立的更正义务。
+
+**Supersedes.** 严评的 S1 NO-GO 与 SELECTIVE_OMISSION_RED_FLAG/MATERIAL_QRP_RISK 定性
+（由重校准评审撤回,本条登记接受）；proposal §4 首版三行 delta 与近邻覆盖。
+
 ### 2026-07-15（续49）· system-first proposal v1 成稿——敌意内审环收敛
 
 **Context.** S0 签署（续48）后 owner 指令推进 proposal 重写（「好，开始吧」）。
