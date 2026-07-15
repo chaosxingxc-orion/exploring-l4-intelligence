@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1（Gate S1 实例化）——八 lanes / 48 条 arXiv 精确查询 + 16 条副源关键词路由 / 51 列名种子快照（计数正典 = seed manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendment-1——八 lanes + 基础谱系道 SF-L9 / 48 条编译冻结 arXiv 查询 + 16 条副源路线 / 60 列名种子（快照 51 + 增量批次1 九条;计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
@@ -49,8 +49,15 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 **措辞纪律（v2 评审风险一）**：survey 完成前禁用「全集/完整占据图」表述——本表是**带截止日的
 预协议快照**,执行起按 §5bis 增量批次滚动。
 
-**快照构成（51 条列名 + 22 条执行时裁决;计数正典 = `2026-07-15-sf-seed-manifest.jsonl` 逐行
-枚举,零 ID 重复——此前草稿的「57/16」为协调者算术口径,按 P0-R8 原则以机器枚举更正）**：
+**构成（60 条列名 = 快照 51 + 增量批次1 九条;另 22 条执行时裁决;计数正典 =
+`2026-07-15-sf-seed-manifest.jsonl` 逐行枚举,零 ID 重复——此前草稿的「57/16」为协调者算术
+口径,按 P0-R8 原则以机器枚举更正）**：
+⑥ **v3 外审 delta scan 5 项**（增量批次1,AS_GIVEN）：OmniAgent 2606.19341 / CMA-Harness
+2607.08497 / UCT-ToolCreator 2602.01983（scope_pending=Y,更新对象待全文）/ ConMem
+2606.08702 / Argos 2512.03438——初判多为训练型对照,不预判最终纳入;
+⑦ **基础谱系 4 项**（增量批次1,SF-L9 专用,DOI 题录）：Russell-Wefald metareasoning 1991 /
+Kaelbling POMDP 1998 / Sutton options 1999 / Kocsis UCT 2006。
+快照期五分类如下：
 ① v1 §4 表内 15 项（blob 见 §0 钉定）;
 ② 评审补充机制族 10 项（AWM/ExpeL/Self-Refine/CRITIC/TPO/HuggingGPT/AudioGPT/DSPy/TextGrad/
 TTRL;题录 AS_GIVEN,执行时解析,失败标 UNRESOLVED）;
@@ -96,20 +103,34 @@ census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行
 
 ## §4 八条 lanes 与 64 条预注册精确查询
 
-**通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;默认
-cap = 75 条/查询、按 relevance 排序;默认类目 cs.CL+cs.AI+cs.LG（SF-3/语音类加 cs.SD+eess.AS）。
+**通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;
+max_results = 75（SF-L7-Q3 为 50）——**语义 = 每页大小,非结果上限**（溢出规则见下）;按
+relevance 排序。**类目映射（amendment-1 确定性冻结,v3 外审 4.1）**：SF-L1/L2/L4/L5 =
+cs.CL+cs.AI+cs.LG+**cs.CV+cs.RO**（agent/感知/记忆-技能/验证层——CoVer/Affordance/具身
+agent 均属视觉-机器人域,类目盲区实证在案）;SF-L3 = 前五类 + cs.SD+eess.AS;SF-L6/L7/L8 =
+cs.CL+cs.AI+cs.LG（黑盒优化/Goodhart/评测经济学文献集中于此三类——纸面敏感性依据见
+amendment-1,snowballing 与 SF-L9 兜异类溢出;执行中发现反例即走版本化增补扩类）。
 每 lane 附 2 条副源路由查询（关键词串,窗口同 lane）。查询编号 = SF-L{n}-Q{m}（arXiv）/
 SF-L{n}-S{m}（副源）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
 
-**exact-query 装配规则（预注册,消除执行者自由度——内审 MAJOR-1 闭合）**：arXiv API 无独立
-类目/日期 HTTP 参数,故每条 Q 串的**最终执行串**统一装配为：
-`(cat:cs.CL OR cat:cs.AI OR cat:cs.LG[SF-L3 及语音类追加 OR cat:cs.SD OR cat:eess.AS]) AND
-submittedDate:[202210010000 TO 202607152359] AND (<该 Q 串>)`;HTTP 层只允许
-`sortBy=relevance&max_results=<cap>`。**窗口例外的最终代入串（全三条,消除推导自由度）**：
-SF-L2-Q3 与 SF-L3-Q3（行内标「2023-01 起」）代入 `submittedDate:[202301010000 TO 202607152359]`;
-SF-L7-Q3 代入 `submittedDate:[202001010000 TO 202607152359]`。副源 S 串按各库站内检索框逐字
-输入,年份/venue 过滤条件在 §9 日志中逐字段记录。**日期界约定**：submittedDate 双闭区间,
-以 arXiv v1 提交时间为准。
+**exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合）**：48 条查询已由离线编译器
+`scripts/survey/sf_query_compiler.py` 装配为 **`2026-07-15-sf-queries.jsonl`**——逐行含
+decoded/URL-encoded 串、类目、date_from/to、start/max_results/sortBy/sortOrder、compiler
+版本与行哈希,**零占位符**;静态验证报告 `docs/checks/2026-07-15-sf-queries-static-validation.md`。
+**执行以 jsonl 为正典,本节文字仅人读参考**。窗口例外（SF-L2-Q3/SF-L3-Q3 = 2023-01 起;
+SF-L7-Q3 = 2020-01 起）已折入各行。日期界约定：submittedDate 双闭区间,以 arXiv v1 提交时间
+为准。**可回放承诺分层（v3 外审 §7.2-II）**：请求定义可复现 + 原始响应留存 + 派生集合可由
+原始响应重建;不承诺 API 返回逐字节一致,接口侧漂移记为外部不确定性。
+
+**溢出/分页规则（v3 外审 4.3——完整性控制,非预算 cap）**：执行时读取每查询
+`opensearch:totalResults`,以 start 递增**分页抓取至全量**;若 totalResults > 2000（arXiv API
+实用界限）,按年度子窗对该查询做**确定性拆分**直至每片 ≤2000;每页保存 start/max_results 与
+原始响应哈希,totalResults 全程留痕——**禁止无声截断**。
+
+**副源路线（v3 外审 4.4 闭合）**：16 条副源逐条冻结于
+**`2026-07-15-sf-secondary-routes.md`**（route ID/接口/完整查询/排序/时间窗/页码与停止规则/
+导出 schema/原始证据保存;无法确定性导出者如实标 `DISCOVERY_ONLY`,其命中回
+DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
 
 ### SF-L1 reasoning+acting 与环境反馈（ReAct/Reflexion/LATS 族）
 - Q1 `abs:"language agent" AND abs:feedback AND (abs:"test-time" OR abs:"inference-time" OR abs:"training-free")`
@@ -183,13 +204,26 @@ SF-L7-Q3 代入 `submittedDate:[202001010000 TO 202607152359]`。副源 S 串按
 - Q6 `(abs:overthinking OR abs:"give up" OR abs:"premature termination") AND (abs:agent OR abs:"long-horizon")`
 - S1 OpenReview: `agent evaluation cost budget pareto`；S2 ACM DL: `LLM agent cost-controlled evaluation`
 
-**计数**：8 lanes × (6 arXiv 精确查询 + 2 副源关键词路由) = **64 条预注册查询**（48 精确 +
-16 路由——「精确」限指 arXiv 串,副源为关键词级,内审 MINOR-1 口径）。预算/调用量等资源轴不是
-查询过滤器,是抽取轴（§7,重校准 §2.1 口径）。
+**计数**：8 lanes × (6 arXiv 精确查询 + 2 副源路线) = **64 条预注册查询**（48 编译冻结 +
+16 路线——「精确」限指 arXiv 串）。预算/调用量等资源轴不是查询过滤器,是抽取轴（§7,重校准
+§2.1 口径）。
+
+### SF-L9 foundational lineage（基础谱系道——amendment-1 新增,v3 外审 4.5;不受 2022 窗限）
+
+- **种子** = manifest 增量批次1 的 4 条经典（metareasoning / POMDP / options / UCT,DOI 题录）;
+- **方法** = 自经典种子 backward/forward chaining（SS/OpenAlex 发现层,承重回正式版）,沿链补
+  value of information / anytime computation / algorithm selection / active perception 代表作;
+- **目标** = 建立 RL/search/planning/metareasoning 概念分类与本研究对象的谱系定位——**「RL」
+  命名保留与否的裁决依据**（RL 控制合同命名纪律引用处）;
+- **统计隔离**：本道产出**不计入** 2022–2026 近期 novelty 池,单独报告;
+- **停止规则**：连续一轮 chaining 无新增概念祖先即停,单独留痕;
+- 无预注册 Boolean 查询（经典文献 arXiv 覆盖不全,以 chaining + DOI 锚为主;Google Scholar
+  仅 DISCOVERY_ONLY）。
 
 ## §5 Snowballing 与饱和判据
 
-- 51 列名种子 + 每条 INCLUDED-DIRECT 命中：backward（参考文献）+ forward（引文,经 SS/OpenAlex
+- 60 列名种子（含 SF-L9 四条——其 chaining 规则与停止见 SF-L9 节）+ 每条 INCLUDED-DIRECT
+  命中：backward（参考文献）+ forward（引文,经 SS/OpenAlex
   发现层）各一轮。**「一轮」是最低动作,不是停止条件（修正案 D）**：每轮产生的新 DIRECT 邻居
   继续 chaining,直至**连续两轮零新增 DIRECT**（饱和）才停;新簇出现即重启该簇计数。
 - **任何 NO_DIRECT_MATCH 类结论**须满足预注册饱和：连续两轮 snowballing 零新增直接邻居 +
@@ -229,13 +263,17 @@ claimed mechanism / strongest result / failure mode / reusable implementation`�
 收益饱和/退化。承重 delta 须 version pin + section/page/table/equation locator + 必要长度
 span（P0-LIT-3-⑥）;L3 即读即登记（census/ledger schema）。
 
-## §8 Threat papers 双人独立全文抽取（P0-LIT-3-⑧）
+## §8 Threat papers 双人独立全文抽取（P0-LIT-3-⑧;amendment-1 重排,v3 外审 4.6）
 
-首批 13 篇（执行中可增至 15,增须登记理由）：**Omni-Decision 2607.11433（最高优先）** /
-IAD 2504.01931 / AudioToolAgent 2510.02995 / EChO-Agent 2606.15141 / Agent-Omni 2511.02834 /
-Audio-Mind 2605.28480 / JitRL 2601.18510 / training-free-grpo 2510.08191 / LATS 2310.04406 /
-Voyager 2305.16291 / Kapoor 2407.01502 / Speech-Copilot 2407.09886 /
-inference-time-reward-hacking 2506.19248。两名独立抽取者（不同 agent 会话,互不见对方产出）
+**首轮队列 15 篇（可增长,非硬上限——「15」是首轮工作队列而非封顶）**：
+**Omni-Decision 2607.11433（最高优先）** / IAD 2504.01931 / AudioToolAgent 2510.02995 /
+EChO-Agent 2606.15141 / Agent-Omni 2511.02834 / Audio-Mind 2605.28480 / JitRL 2601.18510 /
+training-free-grpo 2510.08191 / LATS 2310.04406 / Voyager 2305.16291 / Kapoor 2407.01502 /
+Speech-Copilot 2407.09886 / inference-time-reward-hacking 2506.19248 /
+**Affordance-Agent-Harness 2605.00663（晋升）** / **FineVerify 2606.00660（晋升）**。
+**待判定入池**：OmniAgent 2606.19341 / CMA-Harness 2607.08497 / UCT-ToolCreator 2602.01983 /
+ConMem 2606.08702;**次优先**：Argos 2512.03438。每次增删记录发现路线与理由——**不得只把
+支持己方的文献提升优先级**。两名独立抽取者（不同 agent 会话,互不见对方产出）
 按 §6/§7 编码,冲突由协调者亲验裁决并留痕。**选文过程留痕（修正案 E）**：候选池**完整登记
 清单**、两名评审各自的排序与理由、分歧与最终合并规则全部归档——选文环节零无记录筛选。
 

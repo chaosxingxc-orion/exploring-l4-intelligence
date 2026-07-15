@@ -42,12 +42,22 @@ Stage-2 冻结;度量纪律以硬约束存在——headroom 归因、cellwise、
 
 ## §2 科学背景与动机（为什么是这个问题）
 
-**起点观察**：现代 omni/多模态大模型在预训练中吸收了跨模态、多粒度的任务知识,但开箱表现
-远低于其自身天花板——我们的组件线 directional 证据（hypothesis-grade,census/ledger v2 在案）
-与文献（coverage-vs-K 对数线性律、best-of-N 头空、audio TTC）一致指向：**冻结模型的池内/
-轨迹内潜在能力大幅高于默认输出**（量级判断以文献 best-of-N 头空为据;自家 directional 数字
-仅作方向性佐证,不作量级依据）。北极星问题因此是：不改一个权重,外部系统能把这些潜藏
-能力**兑现到多高**。
+**起点观察（两层命题,证据等级分立——v3 外审 §2.2-E 拆分）**：
+
+- **已有支持的「输出池」命题**：在特定任务、供给 c 与采样设置下,冻结模型的**输出池**存在
+  大幅 oracle 头空。文献锚（附支持边界）：Large Language Monkeys（arXiv 2407.21787——支持
+  coverage 随采样数对数线性增长;**不支持** agentic 轨迹控制结论）;compute-optimal TTS
+  （Snell,arXiv 2408.03314——支持测试时算力分配→输出池收益;同样不支持轨迹级结论）;
+  audio TTC（scaling-auditory,arXiv 2503.23395——支持音频域输出级 TTC 存在收益;证据级 =
+  census 在库题录+）。自家组件线 directional 数字（hypothesis-grade,census/ledger v2 在案）
+  仅作方向性佐证,不作量级依据。
+- **待调查的「系统/轨迹」假设**：在有状态、工具交互、跨模态的 agent **轨迹**中,是否存在
+  可由零训练控制平面稳定兑现的 trajectory headroom——**此命题不由前者自动推出**,系本
+  survey 与未来 1B 探针的调查对象;每次书写 headroom 均带供给 c、任务、采样与 oracle 信息
+  边界限定。
+
+北极星问题据此表述：不改一个权重,外部系统能把潜藏能力兑现到多高——其中「轨迹级潜藏能力的
+存在性」本身即待查项之一。
 
 **为什么是「系统」而不是「选择器」**：本项目曾把研究对象收缩为固定 K 池 label-free selector
 的兑现面（可测性压力下的目标置换,已由 owner 澄清纠偏并墓碑退役）。组件线的诚实结论是：
@@ -66,7 +76,9 @@ gold 致 +0.517 判 INVALID——如实注明:该类泄漏 TF-Strict 本身**不
 上界对照（IRO 训 value function / VeGAS 训 verifier / AuTAgent 训 tool policy,三者已坐实;
 training-free-grpo 学 token prior,**TF-Strict 归属待核**——全 51 种子唯一 scope_pending 项）。
 **代价如实登记**：若
-label-free 冻结信号普遍太弱（Stechly 线自验证失败）,TF-Strict headline 将承压——出口在
+label-free 冻结信号普遍太弱（Self-Verification Limitations,arXiv 2402.08115——支持「无
+sound verifier 时自验证不可靠」;**不支持**「一切 label-free 信号必然失败」）,TF-Strict
+headline 将承压——出口在
 合同里（转 TF-Core 须 owner 新签+改名）,这是本提案**登记在案的首要风险**。
 
 **为什么现在**：2025–2026 的 agent/test-time-control 文献爆发（IAD 的 sampling–evaluation–
@@ -78,7 +90,7 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 
 - **RQ-SYS（主）**：严格黑盒+全系统零训练下,外部 reward-guided sequential control 能否把
   冻结 omni 组织成真实多模态感知/工具行动/状态维护/反馈适应的 agentic system,并把任务效用
-  推到显著高于 one-shot 与终态选择的天花板?
+  推到**实质性且可复核地**高于 one-shot 与终态选择的天花板?（统计语义 Stage-2 才冻结）
 - **RQ-CTRL**：增量是否归因于 reward/advantage→下一步动作（对反馈阻断/随机化与无奖励搜索的
   结构匹配对照）,而非单纯更多采样/更多调用?
 - **RQ-OMNI**：非文本模态是否因果地改变评估、计划与工具选择（模态移除/置换探针）,还是系统
@@ -101,7 +113,12 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
   状态/搜索/非参数统计;TRAINED_COMPARATOR 永不承重。kill-training-free：任何承重增量依赖
   为任务训练的新参数。
 - **RL 控制合同**：state/action/feedback/transition/controller 五元组;reward 只排终态 =
-  reranking 不得称 RL。kill-RL：reward 不影响 next action。
+  reranking 不得称 RL。kill-RL：reward 不影响 next action。**命名纪律（v3 外审 §2.2-F）**：
+  「reward 影响下一动作」仍可能是 search/planning/metareasoning/bandit——对外中性术语 =
+  **reward-guided inference-time sequential control**（与 S0 north_star_method 同义）;「RL」
+  为 owner 北极星与内部待证身份,保留与否由 foundational lineage lane（协议 SF-L9）的谱系
+  比较裁决,survey 抽取字段含:状态/动作/反馈/策略表示/跨步更新对象/信用分配/停止规则/
+  作者是否自称 RL。
 - **agentic 合同**：≥2 步因果反馈链/持久外部状态/真实工具或观察获取/budget·stopping·
   abstention/轨迹 provenance/与固定池终态选择结构匹配可区分。kill-agentic：可等价重写为
   「生成 K 候选取 argmax」。
@@ -110,6 +127,11 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
   不变。
 - **术语降级规则**：任一合同 kill ⇒ headline 删该词并降名,不得用其余四词替代;七句禁句
   （v2 评审 §11）为机器可查项。
+- **信息来源六类分解（v3 外审 §2.2-G,登记于 survey/README;系既有 read-out/new-info 二分的
+  直系升级）**：①task-native observation ②pretrained-knowledge read-out ③deterministic
+  transformation/computation ④endogenous environment feedback（agent 动作引致）
+  ⑤exogenous answer-bearing retrieval / new information ⑥evaluation gold（**严格禁入决策
+  路径**）。未来每个候选机制须标注所用类别;**由⑤带来的增益不得概括为「激活预训练知识」**。
 
 ## §5 系统架构与形式对象
 
@@ -122,8 +144,9 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 ## §6 相关工作与种子景观（snapshot 2026-07-15;占据结论以 survey 为准）
 
 **51 条列名种子**（manifest 枚举正典,五来源:近邻表 15/评审机制族 10/自库反扫 4/反扫 STRONG
-15/评审 delta 7）+ 22 条执行时裁决 + 9 桶 WEAK。**threat 首批 13 篇**双人独立全文抽取,
-最高优先 = **Omni-Decision (2607.11433)**：training-free omni evidence-state 闭环,逐项命中
+15/评审 delta 7）+ 22 条执行时裁决 + 9 桶 WEAK。**计划**对 threat 首轮队列（15 篇,
+可增长非硬上限——协议 amendment-1 重排后口径）执行双人独立全文抽取,最高优先 =
+**Omni-Decision (2607.11433)**：training-free omni evidence-state 闭环,逐项命中
 本纲领大半表达,其未必占据的是「reward/advantage 决定下一步动作」——**本 survey 第一个要
 回答的问题就是它到底占了多少**（威胁优先级第一位——系 v2 外审迟发现的最严重遗漏;IAD
 2504.01931 为**立项即登记**的「预登记坍缩风险」,优先级第二——两者 token 谱系不同,如实分述）。
@@ -140,9 +163,11 @@ log-lik 占据在案。
 ## §7 方法论：Stage-1A 可回放 survey（当前唯一申请执行的工作）
 
 签署对象 = 协议包六件套（`wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` 及
-manifest/模板/报告/签署区,三轮内审环 CONVERGED）。规格要点：八 lanes / 48 条 arXiv 精确查询
-（装配规则把 cat:/submittedDate 折入最终执行串,含全部三条窗口例外——任何执行者的检索宇宙
-逐字节相同）+ 16 条副源路由（ACL/OpenReview/IEEE/ACM + CVF/ISCA/PMLR 回链义务）;51 种子
+manifest/模板/报告/签署区,三轮内审环 CONVERGED）。规格要点：八 lanes + foundational lineage lane（SF-L9,无 2022 窗限）/ 48 条 arXiv 查询已
+**离线编译冻结**为 `2026-07-15-sf-queries.jsonl`（逐行含 URL 编码/分页字段/行哈希）。
+**可回放承诺分层（v3 外审 §7.2-II 更正,撤回「逐字节一致」表述）**：请求定义可复现（编译
+冻结）+ 原始响应留存 + 派生集合可由原始响应重建;接口侧实时漂移作为外部不确定性记录。
++ 16 条副源路由（route manifest 逐条冻结或如实标 discovery-only）（ACL/OpenReview/IEEE/ACM + CVF/ISCA/PMLR 回链义务）;51 种子
 snowballing 至连续两轮零新增 DIRECT;§5bis 时新性增量扫描;十轴纳排 + TF 审计六字段 + 范围
 八轴 + 11 开放抽取字段;NO_DIRECT_MATCH 须预注册饱和+双评审;全量日志/排除理由/失败请求入
 L3 replay;taxonomy 修订版本化。执行前置三条件：reviewer search-design 签署 + owner 批准 +
@@ -198,3 +223,17 @@ Decision 第一）→ §5bis 增量扫描 → 综合 = 3–5 候选问题 → St
 2. 协议包 search-design 签署（或开列修订项——协议签署区在协议 §12）;
 3. 如认为本合并成篇与你「停止元流程」建议冲突,请直接向 owner 提出——本件系 owner 流程
    定夺权下的指令产物,已如实披露于 frontmatter。
+
+---
+
+## 修订记录（errata,v3 外审 P0-A 整改——2026-07-15）
+
+按 v3 外审（`...-v3-stage1a-doctoral-review.md`,v3=有条件接受须澄清）逐项执行,原字节在
+git 历史：①§2 起点观察拆为「输出池命题（有据,附三个文献锚与支持边界）/系统轨迹假设（待查,
+不由前者推出）」两层;②§4 RL 控制合同加命名纪律（对外中性术语=reward-guided inference-time
+sequential control,RL 名称由 SF-L9 谱系裁决）;③§4 新增信息来源六类分解（⑤类增益不得概括为
+激活预训练知识,登记于 survey/README）;④RQ-SYS「显著」→「实质性且可复核地」（统计语义
+Stage-2 冻结）;⑤§6 threat 抽取改计划时态并按 amendment-1 更新为首轮 15 篇非硬上限;
+⑥§7 撤回「逐字节一致」,改分层承诺并指向编译冻结件;⑦§2 Stechly 锚补全（arXiv 2402.08115,
+附支持/不支持边界）。配套:检索协议 amendment-1（八项变更）、seed manifest 增量批次1（+9=60）、
+v3 内审报告补归档（含迟归档如实说明）、bundle manifest（提交后钉哈希）。

@@ -15,7 +15,12 @@
 > （kill 表现阶段身份=1B 设计候选逻辑,非冻结实验）/ `OUT_OF_SCOPE_WEIGHT_UPDATED`（test-time
 > 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
 > （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
-> 期去重标记:命中 census v2 既有 work,仍全量登记）。**manifest 策展期中文值 = 登记 token 的
+> 期去重标记:命中 census v2 既有 work,仍全量登记）。
+> **信息来源六类分解（v3 外审 §2.2-G 起用,系 read-out/new-info 二分的直系升级——抽取轴与
+> 归因纪律共用）**：①task-native observation ②pretrained-knowledge read-out ③deterministic
+> transformation/computation ④endogenous environment feedback（agent 动作引致）⑤exogenous
+> answer-bearing retrieval / new-info ⑥evaluation gold（禁入决策路径）。每个候选机制标注
+> 所用类别;⑤类增益不得概括为「激活预训练知识」。**manifest 策展期中文值 = 登记 token 的
 > 显示形**：题录AS_GIVEN↔AS_CITED_BY_REVIEW、census在库(题录+)↔RETAINED_RECORDS@census-v2、
 > delta待全文核验↔TO_VERIFY_FULLTEXT（协议 §3 有映射表,执行期升级改记五级英文标尺）。
 >

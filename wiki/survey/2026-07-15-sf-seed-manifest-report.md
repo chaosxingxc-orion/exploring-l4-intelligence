@@ -137,3 +137,10 @@ Effective-Feedback-Compute / ACE，均为多主题交叉或资源轴描述语言
 - **核验级修正 1 条**：scaling-auditory 2503.23395 由「摘要级」改「census在库(题录+)」
   （census v2 既往 grep 1 命中）。
 - 修正后 lane 命中分布（机器重数,grep 实测）：L1=8, L2=13, L3=13, L4=7, L5=17, L6=9, L7=3, L8=6（Σ=76）。〔初稿附注曾口算 L2=14/L6=8,当场机器重数更正——教训再证:分布数一律 grep,不口算。〕
+
+## 增量批次1 附注（2026-07-15,amendment-1 / §5bis 机制首次使用）
+
+manifest 追加 9 行（不改旧行）：v3 外审 delta 5 条（OmniAgent/CMA-Harness/UCT-ToolCreator
+〔scope_pending=Y,第二例〕/ConMem/Argos）+ 基础谱系 4 条（SF-L9 专用,DOI 题录）。
+**现行总数 = 60**（机器 wc 实测;快照 51 数字在上文各处保留作 lineage,现行计数以 60 为准）。
+scope_pending 现为 2 条（training-free-grpo + UCT-ToolCreator）。
