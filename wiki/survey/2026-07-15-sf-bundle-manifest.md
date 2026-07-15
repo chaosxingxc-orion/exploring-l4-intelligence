@@ -64,3 +64,35 @@ enum+SF-L9、A1-1 敏感性计数机器重数 16→19/18+eess.IV 补裁决、§9
 
 未变件：#4 manifest（`1255fcfd`——批次1 后未再动）/ #6 queries.jsonl（`c87a2301`,编译产物
 全程稳定）/ #7 compiler / #11 sweep。**attestation（更正后复签）**：联网检索查询执行数 = 0。
+
+## dated correction #3（2026-07-16,amendment-3 整改批 @37da7f3——收官就绪度评审 G5 闭合钉定）
+
+背景：v3 收官就绪度评审裁定 correction #2 所钉对象集已被 `691150a`/`705b69a` 策略改写
+实质取代（G5「bundle 唯一钉定失效」）;owner 四裁决（续59）触发 amendment-3 整改批,一次性
+落盘后以 `37da7f3` 钉定现行全件。原哈希保留不改写。**本 correction 起,签署对象 = 下表
+所列 @37da7f3 的不可变集合。**
+
+| # | path | git blob @37da7f3 | 相对 correction #2 |
+|---|---|---|---|
+| 1 | `wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md` | `30e50c048a2c` | 变更（errata-2 八项） |
+| 2 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `3133ffb76e03` | 变更（A3 折入,v1+amendments 1–3,51 查询/74 种子口径） |
+| 3 | `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | `cfbf1ac326a8` | 含 691150a 期 amendment-2 增补行（本批未动） |
+| 3b | `wiki/survey/2026-07-16-sf-protocol-amendment-3.md` | `061c1437b489` | **新增**（A3-1..A3-12 独立日期件） |
+| 4 | `wiki/survey/2026-07-15-sf-seed-manifest.jsonl` | `7eaefcc923e4` | 变更（批次2 +14 = **74 条**,initial_tag 字段） |
+| 5 | `wiki/survey/2026-07-15-sf-seed-manifest-report.md` | `35148a9ae6f2` | 变更（批次2 附注+机器分布） |
+| 6 | `wiki/survey/2026-07-15-sf-queries.jsonl` | `c56ca22629a2` | 变更（**51 行** = 48 原批字节前缀不变 + 3 增补） |
+| 7 | `scripts/survey/sf_query_compiler.py` | `9508ef9eccdc` | 变更（sfqc-1.0.0/1.1.0 分层+增补注册表+防混入守卫） |
+| 8 | `docs/checks/2026-07-15-sf-queries-static-validation.md` | `7d62a77847e7` | 未变（历史件,链条职能由 8b 取代） |
+| 8b | `docs/checks/2026-07-16-sf-queries-static-validation-rerun.md` | `460c3a113d73` | **新增**（13/13 检查+前缀哈希+终态链条补记） |
+| 9 | `wiki/survey/2026-07-15-sf-secondary-routes.md` | `249da3c7c15e` | 未变（退役留档） |
+| 9b | `wiki/survey/2026-07-16-sf-t1-proceedings-routes.md` | `9bb2f3d3a8ac` | **新增**（50 route 实例化,§6 自检 7/7） |
+| 10 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `7129ed06d394` | 变更（**REC-1..REC-7**,A3-5 schema 传播） |
+| 11 | `wiki/survey/2026-07-15-gate-s1-own-library-sweep.md` | `8cf7b46e79be` | 未变 |
+| 12 | `docs/checks/2026-07-15-proposal-v3-hostile-review-lenses.md` | `5d5e55162b69` | 变更（LATE_RECONSTRUCTED_REVIEW_SUMMARY 补盖,A3-12） |
+| + | `wiki/survey/README.md`（token 登记面,随包） | `7e77aaba5039` | 变更（A3 token 块+venue_tier 语义原位修订） |
+| + | `wiki/2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md` | `7bf0f83654e2` | **新增**（触发评审件,provenance） |
+
+敌意环：双镜头（Opus ①计数一致性②G1–G6 闭合）R1 = 1 MAJOR+4 MINOR+2 NIT → 修复 → R2 窄幅
+机器复检清零 → `A3_BATCH_LOOP_CONVERGED@37da7f3`。**attestation（更正后复签）**：联网检索
+查询执行数 = 0。**下一动作**：本 correction 提交后,重新申请 Gate S1 search-design 窄幅复核
+（范围 = G1–G6 闭合与本表一致性）。
