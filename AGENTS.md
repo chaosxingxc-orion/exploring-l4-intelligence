@@ -12,14 +12,13 @@ works are **separate GitHub repos** under `projects/` (each its own git repo, gi
 
 | # | Work repo (under `projects/`) | Package | Role |
 |---|---|---|---|
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | **Primary-study carrier** (mature; the pattern to mirror for W2–W4) |
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | **Primary-program carrier** (mature; the pattern for W2–W4) |
 | W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | Separate work, repositioned (fresh proposal pending #29) |
 | W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | Supporting (skeleton) |
 | W3 | `speech-mllm-multitask-rl` | `multitask_rl` | Supporting (skeleton) |
 
-研究现状/成熟度**不在本文件维护**（单一真源）：看 `wiki/Research-Objective.md` 与
-`wiki/Per-Work-Status.md`。Each work's entrypoint is `src/<pkg>/main.py`, a Hydra `@hydra.main`
-loop whose RL body is currently a stub.
+研究现状/成熟度不在本文件维护（单一真源 = `wiki/Research-Objective.md` /
+`wiki/Per-Work-Status.md`）。Each work's entrypoint: `src/<pkg>/main.py` (Hydra loop, RL body stub).
 
 ## Environment (important)
 
@@ -59,8 +58,6 @@ pytest                                         # within a work repo
 # Experiment tracking (local MLflow file store; no server/account)
 bash scripts/mlflow-ui.sh                      # http://127.0.0.1:5000
 ```
-
-Run a single test: `pytest common/tests/test_smoke.py::test_reward_normalization_exact_match -q`.
 
 Data & model assets (~650 GB, **never in git**) are **frozen** to `docs/datasets.lock.json`
 (28 datasets + 6 models + 7 ref repos, pinned revisions). One unified downloader reproduces it:
@@ -131,8 +128,7 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
 **研究流程三阶段** Stage-1（1A 问题界定 / 1B 方向性原型 / 1C 收官选题）→ Stage-2 方案验证 →
 Stage-3 发表，**现在 = Stage-1A 收尾**；证据永持产生阶段的等级。**资源姿态三阶段（owner
 2026-07-15）**：全力摸高 → 持续整合 → 成本压降——与研究流程三阶段**同名异构勿混**；前期预算
-不限定，等预算类判据 = 第③阶段工具（`PHASE-3_TOOL`）。全文（含 1A/1B/1C 允许边界与理论轨
-Lean 收敛要求）：`wiki/Research-Methodology.md`。
+不限定，等预算类判据 = 第③阶段工具（`PHASE-3_TOOL`）。全文：`wiki/Research-Methodology.md`。
 
 ## 术语表（Glossary）与收词纪律
 
