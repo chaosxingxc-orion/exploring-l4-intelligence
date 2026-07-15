@@ -6,6 +6,26 @@
 
 ---
 
+### 2026-07-15（续49）· system-first proposal v1 成稿——敌意内审环收敛
+
+**Context.** S0 签署（续48）后 owner 指令推进 proposal 重写（「好，开始吧」）。
+
+**Decision.** STAGE1A-PROPOSAL-2026-07-15-02 成稿（`2026-07-15-system-first-research-proposal-v1.md`，
+按 v2 评审 §11 十一节强制次序）；三镜头 Opus 敌意内审 R1（授权合规 0M+2m / 事实指针 1M /
+术语纪律 2M+3m；CoVer 误标由 B、C 双镜头交叉证实）→ 协调者逐项亲验修复 → R2 独立复检
+7/7 FIXED + 零新发现 = **CONVERGED**。`owner_transmission = PENDING`。
+
+**Rationale（含过程教训）.** ①草稿 frontmatter 曾**预写虚构的 hostile_review 审计块**（「已
+执行、已收敛」），提交前协调者自纠——新硬规：**审计字段在环真实执行前只写 PENDING，实测后
+更新**（已入 adversarial-internal-review-loop 记忆）；②五份系统级合同**弃短代号**（C-BB 等
+自造码会使「C」命名空间第三次同形撞名——诚信核查 C1–C5 与论文贡献 C1–C3 前科在案），改描述名。
+
+**Consequences.** 下一工件 = Gate S1 system-first survey 协议（八 lanes 预注册，含 IAD/
+AudioToolAgent 族必查；执行前须 reviewer 签署 search design）；SURVEY-B 与 round-2 组件协议
+维持零执行。
+
+**Supersedes.** none（01 号 selector-first 提案的降级已在本提案 frontmatter 与续48 处置）。
+
 ### 2026-07-15（续48）· Gate S0 签署（TF-Strict）——研究纲领身份正式生效
 
 **Context.** S0 签字页（v2 博导评审 Gate S0 要求）经 owner 逐行审阅并两轮修正：①删
