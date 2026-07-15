@@ -6,6 +6,72 @@
 
 ---
 
+### 2026-07-15（续58）· 检索策略对抗定稿——owner 三批复 + 规则系统 + 引文图五层防爆;「挑战 owner」行为规则确立
+
+**Context.** 续57 四裁决被我原样转写后,owner 明示「不要全盘同意,要批判挑战」——行为规则入
+记忆（challenge-owner-proposals:owner 设计裁决落地前先交对抗分析,与 reviewer-drift-guard
+对称）。随即三轮对抗讨论定稿检索策略全系统。
+
+**Decision.**（对抗后定稿,amendment-2 A2-6..A2-11）
+① 我方挑战「arXiv-only 伤害语音主场发现面」被 owner 采纳 → **发现/引用拆分**：引用宇宙 =
+arXiv+备份;发现层 = 48 查询 + **T1 十会题录扫描道**（owner 同时诊断:此前泛检索让高价值顶会
+论文被淹没）+ 引文图。
+② owner 定 **T2 证据观**：创新性足够但缺同行评议、实验或不充分 → T2 实验数字强制
+`T2_UNREVIEWED` 限定;梯队管证据权重不管阅读优先级（我方挑战被采纳）。
+③ owner 驳回我方 SF-L9 二手转述例外 → **全文强制**（可复现+可获取,承重引用必须读原文全文,
+无全文即移除）。
+④ owner 研究观教导（入 memory:method-occupation-incremental-doctrine）：**不看名词占据、
+聚焦方法占据;被占后追问改进空间;研究=渐进式推边界**——DFS 四问编码 + 改进空间三小问
+（我方补「值不值得」判据）+ kill/pivot 重述（方法被占且无有价值改进空间才 pivot）。
+⑤ owner 采纳我方 **T-d 结论冲突判据**（防相似性判据漏掉不相似但致命）并要求成套规则 →
+队列确定性排序键 (威胁度↓, core>element, 时新↓, 梯队平局)。
+⑥ owner 半径裁决：深度遍历 = **引文图结构分析**（双向）,公共文献不纠结,重点 = 方法论同族边
++ 对比引用边 → **五层防爆栈**（只从 DFS 节点扩展/边过滤/COMMON_NODE 剪枝/visited-set/饱和停）
++ 我方补 forward-对比边最优先（占据变动最强信号）。
+
+**Rationale.** 对抗流程的实际产出：我方两项挑战被采纳、一项被驳回、owner 两项诊断（泛检索
+淹没/半径爆炸）催生结构性改进——证明「挑战文化」比顺从转写产出更优协议;16 条副源路线退役
+由 T1 题录道（静态目录,可回放性更强）替代,对 v3 外审 4.4/修正案 C 的取代已披露待 reviewer
+表态。
+
+**Consequences.** 协议 §1/§2/§4bis/§5/§7/§11 重写;README 六 token 登记;T2 模板四问字段;
+路线文件退役横幅;记忆三条（challenge-owner-proposals / method-occupation-incremental-
+doctrine / survey-search-doctrine）。待办 = 一致性环 → owner 过目 → 送签。
+
+**Supersedes.** 续57 的 A2-1..A2-5 初稿口径（对抗修订后以 A2 全系列现行版为准）;§5 均匀
+snowballing 语义。
+
+### 2026-07-15（续57）· owner 检索策略四裁决——arXiv 唯一宇宙 / 顶会三梯队 / 备份规则 / BFS→触发式 DFS;amendment-2
+
+**Context.** owner 审阅送签包终态后,在签署前对检索策略下四条设计裁决（原话要义逐条留档）。
+
+**Decision.**（owner 2026-07-15,verbatim 要义）
+① **检索宇宙 = arXiv 唯一**：「所有的源都应该是出自 arXiv 里面,没法通过 arXiv 获得的信息源
+我们不参考」——16 条副源路线整体退役;48 条编译查询不变（本就 arXiv）;chaining 发现的候选
+一律回 arXiv 题名检索解析。
+② **顶会三梯队**：第一优先 = ACL/EMNLP/NeurIPS/ICML/ICLR/CVPR/ICCV/ACM MM/ICASSP/INTERSPEECH
+等国际顶会正会;第二梯队 = 其他论文（含未发表 preprint）;第三梯队 = workshop,一般不做参考。
+③ **顶会获取规则**：顶会论文一律题名检索回链 arXiv;找不到 → 原文备份本地;无法备份 → 移除
+（不参考）。
+④ **核心 topic 与扫描策略**：核心 = how to build omni agentic system（包括但不限于多模态
+知识系统）;主研究方向 = 语音模态,其他模态与单模态成果 = 技术要素参考。扫描**广度优先**;
+遇 topic 很相似 ∨ 工作目的相似 ∨ 解题方法可借鉴 → **深度遍历**。
+
+**Rationale.** 单一可复现宇宙(arXiv)最大化可回放性并消除多库路线的不可确定性;梯队制把
+证据权重与发表质量绑定;BFS→触发式 DFS 把全文精读预算集中到真正相邻的工作上。**与 v3 外审
+的两处冲突如实披露**：外审 4.4 的 16 条副源可回放路线与修正案 C 的 CVF/ISCA/PMLR 回链义务
+被本裁决取代（owner 设计定夺权;覆盖代价可测——REMOVED_UNOBTAINABLE 计数报告,不静默）,
+reviewer 签署时可表态。
+
+**Consequences.** amendment-2（A2-1..A2-5）并入协议;副源路线文件挂退役横幅;T2 模板增
+venue_tier/topic_relevance/dfs_trigger 三字段;SF-L9 四篇经典适用备份规则（默认处置,非 arXiv
+经典 = 备份 fallback）;T1 清单冻结为点名十会（「等」的扩充走版本化增补）;60 列名种子 =
+预判定 DFS 集（外审 P0-LIT-3-③ 种子 chaining 要求由此满足）。检索广度不收窄（Checkpoint A
+维持）,梯队与 topic 字段只影响优先级/编码/报告侧重。
+
+**Supersedes.** 协议 §2 多库发现源设计;副源路线 manifest（退役留档）;「64 条预注册查询」
+计数口径（→ 48 条 arXiv 编译查询）。
+
 ### 2026-07-15（续56）· 中断恢复后整改包敌意环收敛——续55「整改闭环」表述更正;送签包终态
 
 **Context.** 会话进程中断打断了整改包敌意环代理;恢复后其 R1（七镜头,审 @aa6e660 态）返回

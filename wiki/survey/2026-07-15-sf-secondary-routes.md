@@ -1,4 +1,8 @@
-# 副源检索路线 manifest（16 条,amendment-1 冻结——v3 外审 4.4 闭合）
+# 副源检索路线 manifest（16 条）——🗄 已退役（amendment-2 A2-1,owner 裁决①）
+
+> **退役声明（2026-07-15）**：检索宇宙收敛为 **arXiv 唯一**（+T1 十会题录扫描发现道 + 备份
+> 规则,见协议 §2 现行版）;本 16 条路线整体退役,留档作历史记录,**不执行**。原 v3 外审 4.4
+> 的多库要求由 owner 设计裁决取代,冲突已在 amendment-2 披露。
 
 （可回放等级三类：`REPLAYABLE_API`=接口可确定性重放;`DETERMINISTIC_WEB`=URL 参数化、结果可
 导出复核;`DISCOVERY_ONLY`=网页排序不可确定性重放——**其命中一律回 DOI/arXiv/OpenAlex 稳定

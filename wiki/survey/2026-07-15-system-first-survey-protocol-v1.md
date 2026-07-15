@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1+amendment-1——八 lanes + 基础谱系道 SF-L9 / 48 条编译冻结 arXiv 查询 + 16 条副源路线 / 60 列名种子（快照 51 + 增量批次1 九条;计数正典 = manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendments 1&2——八 lanes + 基础谱系道 SF-L9 / arXiv 唯一宇宙·48 条编译冻结查询 / 顶会三梯队 / BFS→触发式 DFS / 60 列名种子（计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
@@ -25,8 +25,11 @@ proposal-v1.md`（blob `d60aa669…`）;proposal v2 = `cf54f1b:wiki/2026-07-15-s
 research-proposal-v2.md`（blob `20e5bd55…`）;暂定 taxonomy = v1 §2（随上述 blob 钉定）;
 seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组互引。
 
-## §1 覆盖判据（Checkpoint A 落实）
+## §1 覆盖判据与核心 topic（Checkpoint A + owner 裁决④,A2-4）
 
+- **核心 topic（owner 钉定）**：**how to build omni agentic system**（包括但不限于多模态知识
+  系统）;主研究方向 = **语音模态**;其他模态与单模态成果 = **技术要素参考**。每篇编码
+  `topic_relevance ∈ {core, element}`——本裁决管优先级/编码/报告侧重,**不收窄检索广度**。
 - **系统域**：text-agent ∧ VLM/omni-agent ∧ audio-agent ∧ compound AI system 四域全查。
 - **机制轴**：search / reflection / memory / tool-routing / verification / non-parametric
   adaptation 全覆盖。
@@ -34,15 +37,29 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
   检索。
 - 每篇按开放字段抽取（§7）,允许新类别出现并版本化修订 taxonomy（§10）。
 
-## §2 发现源与承重源
+## §2 检索宇宙与承重源（A2-1..A2-3 重写,owner 裁决①②③——取代原多库设计）
 
-- **发现源**：arXiv API（主）;ACL Anthology / OpenReview / IEEE Xplore / ACM DL（副,按 lane
-  路由）;**领域正式版本覆盖（修正案 C）**：CVF Open Access（CVPR/ICCV 视觉与 embodied
-  agent）、ISCA Archive（Interspeech 系语音）、PMLR/NeurIPS proceedings、必要时 AAAI/IJCAI
-  正式页——机制结论回链作者版/正式版义务;Semantic Scholar / OpenAlex **仅作发现与引文追踪**。
-- **承重源**：论文原文（arXiv 钉版本 vN / 正式 proceedings 页）;摘要级证据不升全文级
-  （五级证据分级沿用：DISCOVERED / ABSTRACT_VERIFIED / FULLTEXT_OPENED / CLAIM_VERIFIED /
-  REPRODUCED）。
+- **检索宇宙 = arXiv 唯一**：全部检索经 arXiv API（48 条编译查询）;Semantic Scholar/OpenAlex
+  仅作引文图谱发现层,**其一切命中回 arXiv 题名检索解析**;非 arXiv 可得的信息源不参考
+  （T1 顶会例外见下）。原 16 条副源路线整体退役（`2026-07-15-sf-secondary-routes.md` 留档）。
+- **venue 三梯队（注解步骤,非检索路线）**：`venue_tier`——**T1** = {ACL, EMNLP, NeurIPS,
+  ICML, ICLR, CVPR, ICCV, ACM MM, ICASSP, INTERSPEECH} 正会,第一优先参考（清单冻结,扩充走
+  版本化增补）;**T2** = 其他（未发表 preprint/期刊/非 T1 会议）;**T3** = workshop,**默认
+  不参考**（例外登记理由）。判定依据 = arXiv comments/journal-ref + 题名交叉核对。
+- **T1 定向发现道（A2-7,防高价值顶会论文淹没于泛 relevance 排序）**：T1 十会 × 2022–2026
+  proceedings **题录扫描**（发现层,题目级;每会每年一 route ID——proceedings 目录静态,可回放）,
+  topic 关键词过滤 → 命中回 arXiv 题名解析或备份流程。
+- **梯队证据权重（A2-8）**：T1 实验结论可直接承重;**T2 = 创新/机制描述可承重,实验数字引用
+  强制带 `T2_UNREVIEWED` 限定**（缺同行评议、实验或不充分——不得单独支撑 kill/proceed,须
+  T1 佐证或留待 1B 探针自证）;**梯队管证据权重,不管阅读优先级**（优先级 = §4bis 排序键）。
+- **T1 获取规则**：题名检索回链 arXiv;不在 arXiv → 原文备份
+  `$SPEECHRL_DATA_DIR/survey-backups/`（永不进 git;sha256+来源 URL 入 §9 日志）;无法备份 →
+  `REMOVED_UNOBTAINABLE`（登记计数——覆盖代价显式报告,不静默）。SF-L9 经典同适用。
+- **承重源与全文强制（A2-9,owner:「一定要读原始论文的全文」）**：arXiv 钉版本 vN（或本地
+  备份件+哈希）;**凡被引用为差异点/借鉴点/占据判断依据的工作,必须全文在手且全文读过**;
+  摘要级只作存在性登记、不支撑任何承重结论（五级分级沿用：DISCOVERED / ABSTRACT_VERIFIED /
+  FULLTEXT_OPENED / CLAIM_VERIFIED / REPRODUCED）;SF-L9 经典同等适用,无全文即移除,不设
+  二手转述例外。
 
 ## §3 Mandatory seeds——预协议种子快照（snapshot 2026-07-15;允许检索扩展）
 
@@ -111,8 +128,8 @@ cs.CL+cs.AI+cs.LG+**cs.CV+cs.RO**（agent/感知/记忆-技能/验证层——Co
 agent 均属视觉-机器人域,类目盲区实证在案）;SF-L3 = 前五类 + cs.SD+eess.AS;SF-L6/L7/L8 =
 cs.CL+cs.AI+cs.LG（黑盒优化/Goodhart/评测经济学文献集中于此三类——纸面敏感性依据见
 amendment-1,snowballing 与 SF-L9 兜异类溢出;执行中发现反例即走版本化增补扩类）。
-每 lane 附 2 条副源路由查询（关键词串,窗口同 lane）。查询编号 = SF-L{n}-Q{m}（arXiv）/
-SF-L{n}-S{m}（副源）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
+查询编号 = SF-L{n}-Q{m}（arXiv）。**各 lane 的 S1/S2 副源行已按 A2-1 整体退役**（下文保留
+作历史记录,不执行）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
 
 **exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合）**：48 条查询已由离线编译器
 `scripts/survey/sf_query_compiler.py` 装配为 **`2026-07-15-sf-queries.jsonl`**——逐行含
@@ -205,9 +222,9 @@ DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
 - Q6 `(abs:overthinking OR abs:"give up" OR abs:"premature termination") AND (abs:agent OR abs:"long-horizon")`
 - S1 OpenReview: `agent evaluation cost budget pareto`；S2 ACM DL: `LLM agent cost-controlled evaluation`
 
-**计数**：8 lanes × (6 arXiv 精确查询 + 2 副源路线) = **64 条预注册查询**（48 编译冻结 +
-16 路线——「精确」限指 arXiv 串）。预算/调用量等资源轴不是查询过滤器,是抽取轴（§7,重校准
-§2.1 口径）。
+**计数（A2-1 后现行口径）**：8 lanes × 6 arXiv 编译查询 = **48 条预注册查询**（16 条副源
+路线已退役,历史口径「64」见 amendment-2）。预算/调用量等资源轴不是查询过滤器,是抽取轴
+（§7,重校准 §2.1 口径）。
 
 ### SF-L9 foundational lineage（基础谱系道——amendment-1 新增,v3 外审 4.5;不受 2022 窗限）
 
@@ -222,13 +239,45 @@ DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
 - 无预注册 Boolean 查询（经典文献 arXiv 覆盖不全,以 chaining + DOI 锚为主;Google Scholar
   仅 DISCOVERY_ONLY）。
 
-## §5 Snowballing 与饱和判据
+## §4bis 执行策略：广度优先 → 触发式深度遍历（A2-5,owner 裁决④）
 
-- 60 列名种子（含 SF-L9 四条——其 chaining 规则与停止见 SF-L9 节）+ 每条 INCLUDED-DIRECT
-  命中：backward（参考文献）+ forward（引文,经 SS/OpenAlex
-  发现层）各一轮。**「一轮」是最低动作,不是停止条件（修正案 D）**：每轮产生的新 DIRECT 邻居
-  继续 chaining,直至**连续两轮零新增 DIRECT**（饱和）才停;新簇出现即重启该簇计数。
-- **任何 NO_DIRECT_MATCH 类结论**须满足预注册饱和：连续两轮 snowballing 零新增直接邻居 +
+- **BFS pass**：48 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
+  含 §6 矩阵可从摘要判定的轴 + venue_tier + topic_relevance）——不做全文、不做 chaining。
+- **DFS 触发四判据**（满足任一即入队,`dfs_trigger` 多值登记理由;A2-10）：**T-a 对象重合**
+  （omni agentic system/多模态知识系统/语音本体）**T-b 问题重合**（回答我们任一 RQ,即使对象
+  不同）**T-c 要素重合**（方法/组件可迁移进控制平面）**T-d 结论冲突**（结论若真会削弱我们的
+  假设——负结果/评测批判/方法论攻击,锚 = most_threatened_rq ≠ none;防「相似性判据漏掉
+  不相似但致命的工作」）。
+- **队列排序键（确定性字典序,不随机游走）**：`(威胁度↓, core>element, 时新性↓, 梯队↑)`——
+  威胁最优先（占据核查是第一使命）;新先于旧（创新空间是时间递减资源）;梯队只作平局裁决。
+- **DFS**：全文抽取（FULLTEXT_OPENED 及以上,§6/§7 全字段含方法占据四问）+ §5 引文图遍历。
+- **预判定 DFS 集**：60 列名种子（选入即因相邻性,天然满足触发判据——外审 P0-LIT-3-③ 的
+  种子 chaining 要求由此满足）+ threat 首轮 15 篇（双人独立全文抽取,§8）。
+
+## §5 引文图遍历与半径控制（owner 裁决⑤重写——深度遍历 = 引文图结构分析,五层防爆栈）
+
+**遍历对象**：DFS 节点的**双向引文图**——backward（它引用的,全文抽取时天然获得引用上下文）
++ forward（引用它的,经 SS/OpenAlex 发现层取元数据）,综合分析。
+
+**五层防爆（半径不爆炸的结构保证）**：
+1. **只从 DFS 节点扩展**：BFS 级节点登记不扩展;扩展资格 = 该节点自身触发 §4bis 四判据之一。
+2. **边过滤（核心防爆条款,owner 裁决）**：只沿两类边扩展——**方法谱系边**（方法论同族:
+   继承/改进/变体,来源=目标论文 method/related-work 的方法来源引用）与**对比引用边**
+   （作为 baseline/对比方法被引,来源=实验表格与对比段）;背景/概念/数据集/通用工具引用边
+   **不扩展**（登记不遍历）。边功能判定:backward 方向在全文抽取时顺带完成;forward 方向先对
+   引用者做 BFS 编码,其触发 DFS 后打开全文时回判。
+3. **公共节点剪枝（owner:「公共的论文部分就不纠结」）**：在 ≥3 个 DFS 节点的引文图中共现、
+   且自身不触发四判据的高频文献标 `COMMON_NODE`——登记共现计数,不扩展;若其自身触发判据,
+   全局只裁决与扩展**一次**（visited-set）,绝不逐图重复分析。
+4. **visited-set 全局去重**：任何节点整个 survey 至多被扩展一次（图遍历标准语义,防环防重复）。
+5. **饱和停止**：连续两轮扩展零新增触发节点即停;新簇出现重启该簇计数。
+
+**边价值不对称（协调者补充,占据核查用）**：**forward-对比边最优先**——「引用目标论文作
+baseline 并声称超越它」的新工作,是占据格局变动的最强信号（它们标出了邻居已被谁超越、
+改进空间被谁吃掉）;backward-对比边（目标打败过谁）价值次之。遍历队列内 forward-对比 >
+forward-方法谱系 > backward-方法谱系 > backward-对比。
+
+- **任何 NO_DIRECT_MATCH 类结论**须满足预注册饱和：连续两轮遍历零新增触发节点 +
   **双评审独立同意**;伴随 token 制度沿用（按身份索引,禁全局 token）。
 
 ## §5bis 时新性增量扫描（修正案 B——Omni-Decision 已证明此非形式主义）
@@ -251,6 +300,10 @@ learned_object(token-prior/value-fn/verifier/prompt/none) | learning_time(test �
 test_time_readonly(Y/N)`——「冻结核心 ≠ TF-Strict」（Training-Free GRPO / IRO / VeGAS 类
 必经此审计）。
 
+**梯队与策略字段（A2-2/A2-4/A2-5）**：`venue_tier(T1/T2/T3——T3 默认排除,例外登记) |
+topic_relevance(core=语音/omni agentic 本体, element=技术要素参考) | dfs_trigger(topic_similar/
+purpose_similar/method_borrowable, 多值;空=仅 BFS)`。
+
 **范围多轴（修正案 F——不用单一 DIRECT/OUT 压平）**：`system_level_proximity |
 component_level_proximity | modality_proximity | tf_strict_compliance | black_box_compliance |
 reward_control_proximity | persistence_state_proximity | evidence_grade` 各轴独立编码
@@ -265,7 +318,13 @@ coverage/kill matrix v3 按本字段逐 RQ 聚合。
 
 开放字段（Checkpoint B 全采,允许新增列并版本化）：`core access / modality path / external
 components / feedback type / what changes at test time / persistence scope / compute scaling /
-claimed mechanism / strongest result / failure mode / reusable implementation`。资源六轴
+claimed mechanism / strongest result / failure mode / reusable implementation`。
+**方法占据四问（A2-6,DFS 强制——owner:聚焦方法是否被占用而非名词）**：`method_gist(方法是
+什么) / method_limitations(局限在哪) / improvement_space(改进空间——三小问齐备才有效:①哪条
+轴〔精度/鲁棒/成本/模态覆盖/理论保证〕②为何现有方法到不了〔结构障碍还是没人做〕③到了对
+哪个 RQ/任务阈值有实质影响) / borrowable(可借鉴什么)`。占据结论禁止只写 occupied——必须跟
+改进空间与其价值评估;kill/pivot 重述:**名词被占 ≠ kill,方法被占且无有价值改进空间才触发
+pivot**。资源六轴
 `{model calls, tool calls, tokens, latency/cost, horizon, stopping}` 作为文献抽取轴观察
 收益饱和/退化。承重 delta 须 version pin + section/page/table/equation locator + 必要长度
 span（P0-LIT-3-⑥）;L3 即读即登记（census/ledger schema）。
@@ -303,8 +362,9 @@ excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记�
 - 每 lane 停止 = 64 条查询全执行 + snowballing 达饱和;整体停止不设时间 cap,以覆盖判据（§1）
   与饱和（§5）为准。
 - 产出：coverage/kill matrix v3 + SOTA cards v3 + 更新的 census/ledger + **3–5 个
-  system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类）——供 Stage-1C
-  owner 双证据选题;不做 intersection-novelty 论证（Checkpoint C）。
+  system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类;**每个候选附
+  「改进空间 + 为什么值得占」两栏**——A2-6 渐进式研究观的输出落点）——供 Stage-1C owner
+  双证据选题;不做 intersection-novelty 论证（Checkpoint C）。
 
 ## §12 签署流与签署区
 

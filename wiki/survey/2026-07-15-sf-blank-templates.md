@@ -33,6 +33,11 @@
   "strongest_result":"","failure_mode":"","reusable_implementation":""},
  "resource_axes":{"model_calls":"","tool_calls":"","tokens":"","latency_cost":"","horizon":"","stopping":""},
  "most_threatened_rq":["RQ-SYS|RQ-CTRL|RQ-OMNI|RQ-SAFE|RQ-MEASURE|none(须附一句理由)"],
+ "venue_tier":"T1|T2|T3","topic_relevance":"core|element",
+ "dfs_trigger":["T-a对象|T-b问题|T-c要素|T-d结论冲突(空=仅BFS)"],
+ "method_occupation":{"method_gist":"","method_limitations":"",
+  "improvement_space":"三小问齐备才有效:①哪条轴②为何到不了③对哪个RQ/阈值有实质影响",
+  "borrowable":""},
  "evidence_grade":"DISCOVERED|ABSTRACT_VERIFIED|FULLTEXT_OPENED|CLAIM_VERIFIED|REPRODUCED",
  "claim_locators":[{"claim":"","locator":"vN §/p./Table/Eq.","span":""}]}
 ```
