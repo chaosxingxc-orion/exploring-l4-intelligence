@@ -144,3 +144,13 @@ manifest 追加 9 行（不改旧行）：v3 外审 delta 5 条（OmniAgent/CMA-
 〔scope_pending=Y,第二例〕/ConMem/Argos）+ 基础谱系 4 条（SF-L9 专用,DOI 题录）。
 **现行总数 = 60**（机器 wc 实测;快照 51 数字在上文各处保留作 lineage,现行计数以 60 为准）。
 scope_pending 现为 2 条（training-free-grpo + UCT-ToolCreator）。
+
+## 增量批次1 后现值分布（机器 grep/解析,内审 MINOR-5 闭合——上文各表与「现值」字样一律读作
+「快照51裁决后值」,批次1 后现值以本节为准）
+
+- lane 分布（60 行）：L1=8 / L2=14 / L3=16 / L4=10 / L5=18 / L6=10 / L7=3 / L8=6 / **L9=4**,Σ=89。
+- verification_level（60 行）：题录AS_GIVEN=31 / 题录AS_GIVEN|delta待全文核验=4 /
+  census在库(题录+)=22 / 摘要级=3。
+- source（60 行）：reviewer点名=18 / 自库继承=7 / 自库反扫=19 / 评审delta-scan=12 /
+  **评审点名-基础谱系=4**（第五值,协议 §3 schema 已同步登记）。
+- scope_pending=Y：2（training-free-grpo 2510.08191 + UCT-ToolCreator 2602.01983）。

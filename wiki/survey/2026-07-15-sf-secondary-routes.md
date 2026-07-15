@@ -5,8 +5,11 @@
 标识核验,网页排序不作 universe**。全部路线:执行时保存查询时间戳、结果页原始 HTML 或逐条
 转录清单、以及命中→稳定 ID 的映射表。）
 
-**通用字段**：route_id / 源 / 接口 / 完整查询 / 排序 / 时间窗(2022-10→2026-07-15,SF-L9 例外)
-/ 页码与停止 / 导出 schema(title/authors/venue/year/stable_id) / 可回放等级。
+**通用字段**：route_id / 源 / 接口 / 完整查询 / 排序 / 时间窗(2022-10→2026-07-15;SF-L9 无
+副源路线,不适用) / 页码与停止 / 导出 schema(title/authors/venue/year/stable_id) / 可回放等级。
+**REPLAYABLE_API 分页冻结（内审 MINOR-9）**：OpenReview notes API 以 offset 分页抓至全量
+（limit=1000/页）,时间窗按 note cdate 过滤,原始 JSON 全存;每页记 offset/limit/total 与
+响应哈希。
 
 | route_id | 源与接口 | 完整查询（逐字） | 停止规则 | 等级 |
 |---|---|---|---|---|

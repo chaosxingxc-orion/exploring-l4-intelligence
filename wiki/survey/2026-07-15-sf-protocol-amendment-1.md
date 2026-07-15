@@ -6,7 +6,7 @@
 
 | # | 变更 | 取代 | 理由（v3 外审条目） |
 |---|---|---|---|
-| A1-1 | 类目映射确定性冻结：SF-L1/L2/L4/L5 增补 cs.CV+cs.RO;SF-L3 再加 cs.SD+eess.AS;SF-L6/L7/L8 维持 CL/AI/LG | 原「默认 CL+AI+LG,SF-3 加语音类」散文规格 | 4.1——CV/RO 盲区有实证（Affordance Harness 手工种子命中、系统检索召不回）。**L6–L8 不扩的纸面敏感性依据**：黑盒优化/prompt 优化/Goodhart/评测经济学的发表重心在 *CL/*LG/*AI（seed 集内该三 lane 的 16 条种子无一主类为 CV/RO）;溢出由 snowballing+SF-L9 兜底;执行中发现主类 CV/RO 的直接命中即走版本化增补扩类,不静默 |
+| A1-1 | 类目映射确定性冻结：SF-L1/L2/L4/L5 增补 cs.CV+cs.RO;SF-L3 再加 cs.SD+eess.AS;SF-L6/L7/L8 维持 CL/AI/LG | 原「默认 CL+AI+LG,SF-3 加语音类」散文规格 | 4.1——CV/RO 盲区有实证（Affordance Harness 手工种子命中、系统检索召不回）。**L6–L8 不扩的纸面敏感性依据（数字机器重数更正,内审 MAJOR-3）**：黑盒优化/prompt 优化/Goodhart/评测经济学的发表重心在 *CL/*LG/*AI——seed 集内触及该三 lane 的种子 = **19 条**（60 行现值;快照期 18;机器重数,初稿「16」为口算已废）,**题录级初判**无一主类为 CV/RO（主类未逐条登记,此为题录级初判非登记证据,执行期解析校正,判错即扩类）;**eess.IV 敏感性（外审 4.1 点名,补裁决）**：同口径题录级初判零主类命中,不预扩,执行中出现即版本化增补;溢出由 snowballing+SF-L9 兜底,不静默 |
 | A1-2 | 48 条查询离线编译冻结为 `2026-07-15-sf-queries.jsonl`（compiler `scripts/survey/sf_query_compiler.py`,逐行 decoded/URL-encoded/分页字段/行哈希,零占位符）+ 静态验证报告 | 原「装配规则」散文模板（含条件占位符） | 4.2——「48 片段≠48 条最终请求」;编译属 Stage-1A 静态工作,非查询执行 |
 | A1-3 | 可回放承诺分层：请求定义可复现+原始响应留存+派生集合可重建;撤回「逐字节一致 universe」表述 | v3 §7 与协议早稿的字节级承诺 | §7.2-II——API 返回不保证字节一致,过度承诺=治理表述失真风险 |
 | A1-4 | 溢出/分页规则：max_results=每页大小;分页抓全 totalResults;>2000 按年度子窗确定性拆分;全程留痕禁无声截断 | 原 75 条 cap 无溢出语义 | 4.3——完整性控制,与 owner「不设预算 cap」裁决显式区分 |

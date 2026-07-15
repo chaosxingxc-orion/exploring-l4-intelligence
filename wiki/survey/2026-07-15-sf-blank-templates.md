@@ -5,10 +5,14 @@
 ## T1 检索日志行（每次查询一行,JSONL）
 
 ```json
-{"query_id":"SF-L1-Q1","engine":"arxiv_api","exact_query":"<逐字>","window":"2022-10-01..2026-07-15",
- "cap":75,"sort":"relevance","timestamp":"<ISO8601>","raw_response_ref":"<文件/可重建ID清单>",
- "n_hits":0,"included":[],"excluded":[{"id":"","reason":""}],"failed_request":null}
+{"query_id":"SF-L1-Q1","engine":"arxiv_api","query_ref":"2026-07-15-sf-queries.jsonl#record_sha256",
+ "page_start":0,"max_results":75,"totalResults":0,"sortBy":"relevance","sortOrder":"descending",
+ "timestamp":"<ISO8601>","raw_response_ref":"<文件/可重建ID清单>","response_sha256":"<本页>",
+ "n_hits_page":0,"included":[],"excluded":[{"id":"","reason":""}],"failed_request":null}
 ```
+
+（**每页一行**——A1-4 分页语义;totalResults 每页复记;不再使用「cap/window/exact_query 内联」
+旧字段,查询定义一律以 queries.jsonl 行哈希回指。）
 
 ## T2 纳排记录行（每篇 INCLUDED 一行,JSONL）
 
@@ -44,7 +48,7 @@
 ```
 paper: <ID name>   extractor_A: <代理标识>   extractor_B: <代理标识>（互不见对方产出）
 | 字段(T2 全字段) | A 编码 | B 编码 | 一致? | 协调者裁决+理由 |
-候选池全集与两评审排序/分歧记录:见 threat-pool-provenance 文件（修正案 E）
+候选池完整登记清单与两评审排序/分歧记录:见 threat-pool-provenance 文件（修正案 E）
 ```
 
 ## T6 taxonomy 修订记录（版本化增补,§10）

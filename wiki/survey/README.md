@@ -16,6 +16,9 @@
 > 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
 > （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
 > 期去重标记:命中 census v2 既有 work,仍全量登记）。
+> **副源可回放等级 token（routes manifest 起用）**：`REPLAYABLE_API`（接口可确定性重放,含
+> 分页冻结）/ `DISCOVERY_ONLY`（网页排序不可确定性重放,命中回 DOI/arXiv/OpenAlex 稳定 ID）/
+> `DETERMINISTIC_WEB`（URL 参数化可导出——已登记备用,现无路线使用）。
 > **信息来源六类分解（v3 外审 §2.2-G 起用,系 read-out/new-info 二分的直系升级——抽取轴与
 > 归因纪律共用）**：①task-native observation ②pretrained-knowledge read-out ③deterministic
 > transformation/computation ④endogenous environment feedback（agent 动作引致）⑤exogenous

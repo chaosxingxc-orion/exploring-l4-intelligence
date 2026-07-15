@@ -123,3 +123,8 @@ protocol RETURNED FOR MAJOR REVISION"). The live document now:
 None of this changed the compiled scope or count (still `SF-L1..SF-L8`, 48 queries); it is
 recorded here only so a reviewer knows the source file was a moving target during compilation and
 which byte-content (hash above) was actually parsed.
+
+## 补录检查（协调者,内审 MINOR-10 闭合）
+
+「无空字段」检查（P0-B-7 明列项,编译器 11 项检查已实质覆盖但未显式命名）：queries.jsonl
+48 行与 seed-manifest.jsonl 60 行经机器逐字段扫描,零空值——本行补名登记,联网查询数仍为 0。

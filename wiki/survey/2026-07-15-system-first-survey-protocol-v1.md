@@ -87,9 +87,10 @@ walking-through-uncertainty 按 §6 范围多轴拆编（组件直接 ≠ 系统
 
 **seed manifest（签署包组成部分,修正案 A;字段 enum 与 manifest 实值对齐——内审 MAJOR-2
 闭合）**：`2026-07-15-sf-seed-manifest.jsonl` 每行 =
-`{id, name, source ∈ {reviewer点名, 自库继承, 自库反扫, 评审delta-scan}（执行期可扩:
-数据库发现/chaining/作者页）, first_found_at(文件:定位), verification_level ∈ {题录AS_GIVEN,
-题录AS_GIVEN|delta待全文核验, census在库(题录+), 摘要级}, lanes[]⊆{SF-L1..L8}, rationale,
+`{id, name, source ∈ {reviewer点名, 自库继承, 自库反扫, 评审delta-scan, 评审点名-基础谱系}
+（执行期可扩: 数据库发现/chaining/作者页）, first_found_at(文件:定位), verification_level ∈
+{题录AS_GIVEN, 题录AS_GIVEN|delta待全文核验, census在库(题录+), 摘要级}, lanes[]⊆{SF-L1..L9},
+rationale,
 exclusion_reason?, scope_pending(Y/N), snapshot_date}`。**与登记 token 的映射**：题录AS_GIVEN
 ↔ AS_CITED_BY_REVIEW（题录级）;census在库(题录+) ↔ RETAINED_RECORDS@census-v2;
 delta待全文核验 ↔ TO_VERIFY_FULLTEXT;执行期证据升级一律改记 §2 五级英文标尺
@@ -216,7 +217,8 @@ DOI/arXiv/OpenAlex 稳定标识核验,网页排序不当 universe）。
 - **目标** = 建立 RL/search/planning/metareasoning 概念分类与本研究对象的谱系定位——**「RL」
   命名保留与否的裁决依据**（RL 控制合同命名纪律引用处）;
 - **统计隔离**：本道产出**不计入** 2022–2026 近期 novelty 池,单独报告;
-- **停止规则**：连续一轮 chaining 无新增概念祖先即停,单独留痕;
+- **停止规则**：连续**两轮** chaining 零新增概念祖先即停（与主道饱和判据对齐——内审 MINOR-8
+  更正）,单独留痕;
 - 无预注册 Boolean 查询（经典文献 arXiv 覆盖不全,以 chaining + DOI 锚为主;Google Scholar
   仅 DISCOVERY_ONLY）。
 
@@ -284,9 +286,11 @@ ConMem 2606.08702;**次优先**：Argos 2512.03438。每次增删记录发现路
 
 ## §9 日志与可回放（P0-LIT-3-⑦;round-1 宇宙缺失的构造性防复发）
 
-每次查询写 JSONL 一行：`{query_id, engine, exact_query, window, cap, sort, timestamp,
-raw_response_ref 或可重建结果 ID 清单, n_hits, included[], excluded[{id, reason}],
-failed_request(如有)}`——存 `wiki/survey/replay/SF-SURVEY-2026/`。原始响应能存则存,不能存
+**每页一行**（A1-4 分页语义,消除 cap 歧义）：`{query_id, engine, query_ref(=queries.jsonl
+行 record_sha256), page_start, max_results, totalResults, sortBy, sortOrder, timestamp,
+raw_response_ref 或可重建结果 ID 清单, response_sha256, n_hits_page, included[],
+excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记留痕;存
+`wiki/survey/replay/SF-SURVEY-2026/`。原始响应能存则存,不能存
 （接口条款）则记录可重建 ID 集。快照/哈希按哈希正典（git blob）。
 
 ## §10 Taxonomy 版本化修订

@@ -65,7 +65,8 @@ Stage-2 冻结;度量纪律以硬约束存在——headroom 归因、cellwise、
 才是天花板的主要杠杆候选（此为**假设**,survey+探针裁决）。
 
 **为什么黑盒**：跨模型/API 可迁移性与部署现实;同时把「读内部信号」类捷径（logit/hidden
-state——JitRL 式「方法最近、接口不合」边界）排除出承重路径,使结论对闭源前沿模型同样有意义。
+state——JitRL〔2601.18510〕式「方法最近、接口不合」边界）排除出承重路径,使结论对闭源前沿
+模型同样有意义。
 本地部署保留为低成本校验环节。
 
 **为什么 TF-Strict（全系统零训练）**：①与北极星同构——问「预训练已有什么」而非「再学一点
@@ -96,7 +97,8 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 - **RQ-OMNI**：非文本模态是否因果地改变评估、计划与工具选择（模态移除/置换探针）,还是系统
   实质为文本 agent + 音频工具（AudioToolAgent 邻域,须降名）?
 - **RQ-SAFE**：反馈闭环下的 reward hacking/错误累积/过优化拐点何时出现,悲观评价/弃权/停止
-  能否控制（Goodhart 线:inference-time-reward-hacking/HedgeTune 为锚）?
+  能否控制（Goodhart 线锚 = inference-time-reward-hacking,arXiv 2506.19248——其提出的
+  HedgeTune 即停止机制候选）?
 - **RQ-MEASURE**：哪些 label-free observables 预测头空、轨迹改进与失败 regime（组件线四量
   记账在终态选择子问题继续可用,不上升为身份）?
 - survey 收官时以上收敛为 **3–5 个 system-level candidate problems**（每个带:已占据部分/
@@ -143,7 +145,8 @@ feedback 三分、Omni-Decision 的 evidence-state 闭环、audio agent 系）**
 
 ## §6 相关工作与种子景观（snapshot 2026-07-15;占据结论以 survey 为准）
 
-**51 条列名种子**（manifest 枚举正典,五来源:近邻表 15/评审机制族 10/自库反扫 4/反扫 STRONG
+**60 条列名种子（快照 51 + amendment-1 增量批次1 九条;manifest 枚举正典）**（快照五来源:
+近邻表 15/评审机制族 10/自库反扫 4/反扫 STRONG
 15/评审 delta 7）+ 22 条执行时裁决 + 9 桶 WEAK。**计划**对 threat 首轮队列（15 篇,
 可增长非硬上限——协议 amendment-1 重排后口径）执行双人独立全文抽取,最高优先 =
 **Omni-Decision (2607.11433)**：training-free omni evidence-state 闭环,逐项命中
@@ -212,8 +215,9 @@ GRAY_BOX_DIAGNOSTIC 本地校验臂;P-δ 供给对比 → B2/供给轴——**�
 
 ## §13 门与时间线
 
-S0 已签 → 本提案评审 + **协议包 search-design 签署**（六件套:协议/manifest 51/模板 T1–T6/
-报告/检索串与 schema/签署区）→ 三条件 preflight → survey 执行（threat 13 篇优先,Omni-
+S0 已签 → 本提案评审 + **协议包 search-design 签署**（六件套:协议+amendment-1/manifest 60/
+模板 T1–T6/报告/检索串与 schema/签署区）→ 三条件 preflight → survey 执行（threat 首轮 15 篇
+优先、非硬上限,Omni-
 Decision 第一）→ §5bis 增量扫描 → 综合 = 3–5 候选问题 → Stage-1A close（独立签字）→ 1B
 放行（再一签字）→ 探针 → Stage-1C owner 双证据选题 → Stage-2 预注册。
 
