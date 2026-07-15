@@ -6,6 +6,33 @@
 
 ---
 
+### 2026-07-15（续48）· Gate S0 签署（TF-Strict）——研究纲领身份正式生效
+
+**Context.** S0 签字页（v2 博导评审 Gate S0 要求）经 owner 逐行审阅并两轮修正：①删
+`north_star_metric` 行——owner：「north_star_metric 和数据集、任务相关的呀，这个目前讨论有
+什么价值呢？」→ 裁定**身份层不立法指标**，具体指标绑定任务×数据集、在各研究协议中定义并于
+Stage-2 冻结（Thesis/RO 同步改）；②`supersedes` 移出合同区降为簿记页脚；③ TF-Strict/TF-Core
+补人话正名（v2 评审造的代号：「全系统零训练」vs「仅核心冻结」）。
+
+**Decision.** owner 签署 S0（via 会话指令，非问答推断——owner 在读完修订版全文与 TF 两项
+得失分析后明确指令）。授权原文逐字：初次「**S0 我签了，TF-Strict，你继续推进 proposal 重写吧**」
+（后中断要求先看内容）；审阅修订版后确认「**好，开始吧**」（承接主会话「如果读完修订版这句话
+依然作数，回我一声确认，我就把签署块落章」之提议）。签署内容 = 身份三行确认 +
+**training_free_scope = TF-Strict（全系统零训练）**。
+
+**Rationale.** 身份页是消除「问答=裁决≠签署」歧义的专用工具；本次满足知情签署三要件：owner
+读过将签的确切文本、逐项理解了唯一分叉（TF 口径）的得失、给出对文本本身的显式签署指令。
+TF-Strict 与「只通过外部系统优化」及项目招牌 training-free RL 同构；不禁止带训练组件的对照
+实验（只是不得进 headline 系统，转向须新签署）。
+
+**Consequences.** 正典效力正式化：Project-Thesis/Research-Objective 的 system-first 表述由
+「待 S0」转「已签署」；旧「唯一主问题=ρ」（G0）与 Thesis 07-12 取代说明正式退役（簿记页脚
+生效）。解锁：system-first proposal 重写（v2 §11 十一节次序）即刻开工 → 八条 agentic survey
+lanes（Gate S1 协议随 proposal 预注册）。TF-Strict 载入五份系统级合同的 training-free contract。
+
+**Supersedes.**「唯一主问题 = ρ 实现率」（G0 2026-07-11）；Project-Thesis 2026-07-12 取代说明；
+S0 页 PENDING_OWNER_SIGNATURE 状态。
+
 ### 2026-07-15（续47）· 知识组织四层定稿——程序知识升第四层 + L3 从严登记 + 会话逃逸协议
 
 **Context.** owner 提出知识三层框架（事实层/工作知识/探索知识）并要求与业内主流对镜检查充分性；

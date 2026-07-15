@@ -12,8 +12,8 @@ knowledge** during pretraining. This series asks one question:
 > weights or internal architecture — go to _activate_ that latent knowledge and lift a frozen,
 > black-box omni model's performance on speech / audio tasks?**
 
-**Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; formal Gate S0 signature
-pending — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
+**Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; Gate S0 SIGNED 2026-07-15,
+training_free_scope = TF-Strict — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
 **external reward-guided control plane** (an agentic system) around the frozen black-box core:
 observation/supply building, state & external memory, tool/retrieval use, candidate generation,
 evaluation, selection, budget/risk/stopping, provenance & information-boundary guarding.
@@ -75,7 +75,7 @@ dead (L2–L3 criteria unmet).
 > **仅靠「免训练 RL」——不改核心模型权重与内部结构、由奖励引导的控制——能在多大程度上「激活」
 > 这些潜藏知识，提升一个冻结黑盒 omni 模型在语音任务上的表现？**
 
-**纲领表述（owner 裁决 2026-07-14/15，续45/46；Gate S0 签署待办）**：我们构建并研究的对象是围绕
+**纲领表述（owner 裁决 2026-07-14/15，续45/46；Gate S0 已签署 2026-07-15，TF-Strict）**：我们构建并研究的对象是围绕
 冻结黑盒核心的**外部 reward-guided 控制平面**（agentic system）：观察/供给构造、状态与外部记忆、
 工具/检索、候选生成、评估、选择、预算/风险/停止、溯源与信息边界守卫。**免训练 RL 是牵引该系统
 设计的北极星原则**——reward/advantage 决定下一步动作，池内选择是退化特例。**第一创新假设 =
