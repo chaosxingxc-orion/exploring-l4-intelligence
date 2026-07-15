@@ -14,7 +14,10 @@
 > （五合同现阶段身份=暂定分类学,survey 证据可修订）/ `candidate_kill_logic_for_stage1b_design`
 > （kill 表现阶段身份=1B 设计候选逻辑,非冻结实验）/ `OUT_OF_SCOPE_WEIGHT_UPDATED`（test-time
 > 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
-> （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）。
+> （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
+> 期去重标记:命中 census v2 既有 work,仍全量登记）。**manifest 策展期中文值 = 登记 token 的
+> 显示形**：题录AS_GIVEN↔AS_CITED_BY_REVIEW、census在库(题录+)↔RETAINED_RECORDS@census-v2、
+> delta待全文核验↔TO_VERIFY_FULLTEXT（协议 §3 有映射表,执行期升级改记五级英文标尺）。
 >
 > **勿再引已撤回口径**（"~93 papers" / "305 queries" / "I4 最干净 whitespace"——现行结论一律
 > 按身份索引表：RESP-02 §3.3 与 [[Research-Objective]] §4/§5）。Survey v2 状态 =

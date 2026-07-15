@@ -6,6 +6,29 @@
 
 ---
 
+### 2026-07-15（续53）· Gate S1 签署包收敛——阶段 A 完成,待 owner 过目转 reviewer
+
+**Context.** owner 放行阶段 A（A1 seed manifest / A2 空白模板+签署区 / A3 内审环）并指令
+「A1 回来后直接过环收敛」。
+
+**Decision.** 签署包六件套齐备且环收敛：①检索协议 v1（八 lanes/48 arXiv 精确查询+16 副源
+路由/装配规则消除执行者自由度）②seed manifest **51 条**（枚举正典;Sonnet 生成+协调者逐行
+亲验,10 条 lane 挂标裁决:7 确认 3 修改,1 条核验级改判）③空白模板 T1–T6 ④manifest 报告
+（含裁决附注与 lineage）⑤检索串/schema（协议内嵌）⑥签署区（三方分立+attestation）。
+环记录：R1 双镜头 2 MAJOR+8 MINOR（MAJOR=arXiv 装配规则缺失/manifest-schema 词汇错位;
+星号通配符陷阱零命中）→ R2 8/8 FIXED+2 NEW-MINOR NOT_CONVERGED → R3 CONVERGED（三轮,
+上限内）。归档 `docs/checks/2026-07-15-gate-s1-protocol-hostile-review-lenses.md`。
+
+**Rationale（计数教训第五例）.** 协调者裁决附注沿抄代理报告「12 条挂标」未自行 grep
+（实为 10）——「headline 数字只出自机器重数」必须覆盖**引用他人数字**的场合。本批全部
+承重计数（51/64/13/76/22）已机器化。
+
+**Consequences.** A4 = owner 过目 → reviewer search-design 签署;执行前置三条件（签署+owner
+批准+P0-R8 复跑）;签署前零查询维持（attestation 双处=0）。协调者算术口径「57/16/12」系列
+以枚举/grep 更正,lineage 全留痕（含续52 的「50→57」表述按 51 读）。
+
+**Supersedes.** 协议草稿计数口径;报告正文裁决前快照（挂注保留作 lineage）。
+
 ### 2026-07-15（续52）· v2 外审收档（APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS）——修正案全采并入协议;检索失效第四例
 
 **Context.** v2 转交当日博导外审返回：**有条件批准继续 Gate S1 协议实例化**（首条查询仍须

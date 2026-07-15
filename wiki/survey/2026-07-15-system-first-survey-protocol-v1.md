@@ -1,13 +1,13 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1（Gate S1 实例化）——八 lanes / 64 条预注册精确查询 / 57 列名种子快照"
+title: "System-first Survey 检索协议 v1（Gate S1 实例化）——八 lanes / 48 条 arXiv 精确查询 + 16 条副源关键词路由 / 51 列名种子快照（计数正典 = seed manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
 quality_bar: "严评 P0-LIT-3 八项最低规格全采 + 重校准 Checkpoint A–D 判据 + 开放抽取字段(Checkpoint B) + v2 评审修正案 A–F 全采（种子快照措辞/增量扫描/领域源/chaining 续行规则/选文留痕/范围多轴+TF 审计子字段）"
 relation_to_survey_b: "SURVEY-B（selector 组件线 round-2 协议 SURVEY-PROTO-2026-07-15-01,21 lanes/105 查询）独立维持零执行、另行签署——本协议不修改不吸收它"
 first_query_gate: "reviewer search-design 签署 + owner 批准 + P0-R8 状态门复跑三条件齐备后,才允许执行第一条查询"
-hostile_review: "PENDING — 本件送签前须过双镜头内审环;本字段实测后更新"
+hostile_review: "R1 双镜头（①事实/计数/一致性〔机器重数级〕;②术语+查询语法纸面可执行性,各 Opus 独立）：镜头1=0 MAJOR+3 MINOR（报告正文表系裁决前快照;『12 条挂标』为沿抄误计,机器 grep=10）;镜头2=2 MAJOR（arXiv exact-query 装配规则缺失——cat:/submittedDate 必须折入查询串,否则执行者自由度复现 round-1 检索宇宙分叉;manifest 字段词汇与 §3 自声明 schema 不对齐）+5 MINOR+NIT;星号通配符陷阱零命中（显式 OR 枚举）。修复后 R2=8/8 FIXED 但新鲜扫描 2 NEW-MINOR（窗口例外代入串不全;报告 §8 陈旧 21）→ NOT_CONVERGED;再修后 R3=2/2 FIXED+邻接零矛盾 → CONVERGED（三轮,环上限内;环内判定≠外部签署）。原始报告归档 docs/checks/2026-07-15-gate-s1-protocol-hostile-review-lenses.md"
 ---
 
 # System-first Survey 检索协议 v1
@@ -49,11 +49,15 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 **措辞纪律（v2 评审风险一）**：survey 完成前禁用「全集/完整占据图」表述——本表是**带截止日的
 预协议快照**,执行起按 §5bis 增量批次滚动。
 
-**快照构成（57 条列名 + 22 条执行时裁决）**：
-① proposal v2 §4 表内 15 项（blob 见 §0 钉定）;
-② 评审补充机制族 16 项（题录 AS_GIVEN,执行时解析,失败标 UNRESOLVED）;
-③ 自库反扫 STRONG 15 项（`2026-07-15-gate-s1-own-library-sweep.md`）;
-④ **v2 评审 delta scan 新增 7 项**（AS_GIVEN_BY_REVIEW,执行时解析）：
+**快照构成（51 条列名 + 22 条执行时裁决;计数正典 = `2026-07-15-sf-seed-manifest.jsonl` 逐行
+枚举,零 ID 重复——此前草稿的「57/16」为协调者算术口径,按 P0-R8 原则以机器枚举更正）**：
+① v1 §4 表内 15 项（blob 见 §0 钉定）;
+② 评审补充机制族 10 项（AWM/ExpeL/Self-Refine/CRITIC/TPO/HuggingGPT/AudioGPT/DSPy/TextGrad/
+TTRL;题录 AS_GIVEN,执行时解析,失败标 UNRESOLVED）;
+③ 自库反扫已列名 4 项（training-free-grpo / inference-time-reward-hacking /
+walking-through-uncertainty / scaling-auditory,见 v2 §4）;
+④ 自库反扫 STRONG 15 项（`2026-07-15-gate-s1-own-library-sweep.md`）;
+⑤ **v2 评审 delta scan 新增 7 项**（AS_GIVEN_BY_REVIEW,执行时解析）：
 **Omni-Decision (2607.11433)**——最高优先威胁:training-free omni-modal QA evidence-state
 system（confirmed evidence/conflicts/依赖/停止的共享状态驱动闭环）,2026-07-13 提交;
 **Affordance Agent Harness (2605.00663)**——verification-gated skill orchestration 闭环
@@ -74,14 +78,21 @@ training-free」的典型反例。
 walking-through-uncertainty 按 §6 范围多轴拆编（组件直接 ≠ 系统直接）;scaling-auditory
 「最紧 omni 机制占据者」系**团队自评待全文核验**,协议内表述 =「音频域 TTC 强边界」。
 
-**seed manifest（签署包组成部分,修正案 A）**：`seed_manifest.jsonl` 每行 =
-`{id, name, source(评审点名/自库继承/数据库发现/chaining/作者页), first_found_at(文件:定位),
-verification_level(题录/摘要/全文), lanes[], rationale, exclusion_reason?, scope_pending(Y/N),
-snapshot_date}`;快照截止 2026-07-15。
+**seed manifest（签署包组成部分,修正案 A;字段 enum 与 manifest 实值对齐——内审 MAJOR-2
+闭合）**：`2026-07-15-sf-seed-manifest.jsonl` 每行 =
+`{id, name, source ∈ {reviewer点名, 自库继承, 自库反扫, 评审delta-scan}（执行期可扩:
+数据库发现/chaining/作者页）, first_found_at(文件:定位), verification_level ∈ {题录AS_GIVEN,
+题录AS_GIVEN|delta待全文核验, census在库(题录+), 摘要级}, lanes[]⊆{SF-L1..L8}, rationale,
+exclusion_reason?, scope_pending(Y/N), snapshot_date}`。**与登记 token 的映射**：题录AS_GIVEN
+↔ AS_CITED_BY_REVIEW（题录级）;census在库(题录+) ↔ RETAINED_RECORDS@census-v2;
+delta待全文核验 ↔ TO_VERIFY_FULLTEXT;执行期证据升级一律改记 §2 五级英文标尺
+（DISCOVERED→…→REPRODUCED）,策展期中文值不再新增。快照截止 2026-07-15。
 
-**已知工作处理**：命中 census v2 既有 works 者标 KNOWN 仍全量登记（dedup 不丢日志）;新工作
-即读即登记 census/ledger schema（L3 规约,续47）;**自库反扫范围永久包含
-`papers/*/references.bib`**（MUSE 教训）。
+**已知工作处理**：命中 census v2 既有 works 者标 KNOWN（执行期去重标记,登记于 survey/README
+token 块）仍全量登记（dedup 不丢日志）;新工作即读即登记 census/ledger schema（L3 规约,续47）;
+**自库反扫范围永久包含 `papers/*/references.bib`**（MUSE 教训）。**attestation 边界声明
+（内审 MINOR-5）**：manifest 内 `[lane 协调者已核]`/`既往 grep` 类注记 = 种子策展与历史
+census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行。
 
 ## §4 八条 lanes 与 64 条预注册精确查询
 
@@ -89,6 +100,16 @@ snapshot_date}`;快照截止 2026-07-15。
 cap = 75 条/查询、按 relevance 排序;默认类目 cs.CL+cs.AI+cs.LG（SF-3/语音类加 cs.SD+eess.AS）。
 每 lane 附 2 条副源路由查询（关键词串,窗口同 lane）。查询编号 = SF-L{n}-Q{m}（arXiv）/
 SF-L{n}-S{m}（副源）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
+
+**exact-query 装配规则（预注册,消除执行者自由度——内审 MAJOR-1 闭合）**：arXiv API 无独立
+类目/日期 HTTP 参数,故每条 Q 串的**最终执行串**统一装配为：
+`(cat:cs.CL OR cat:cs.AI OR cat:cs.LG[SF-L3 及语音类追加 OR cat:cs.SD OR cat:eess.AS]) AND
+submittedDate:[202210010000 TO 202607152359] AND (<该 Q 串>)`;HTTP 层只允许
+`sortBy=relevance&max_results=<cap>`。**窗口例外的最终代入串（全三条,消除推导自由度）**：
+SF-L2-Q3 与 SF-L3-Q3（行内标「2023-01 起」）代入 `submittedDate:[202301010000 TO 202607152359]`;
+SF-L7-Q3 代入 `submittedDate:[202001010000 TO 202607152359]`。副源 S 串按各库站内检索框逐字
+输入,年份/venue 过滤条件在 §9 日志中逐字段记录。**日期界约定**：submittedDate 双闭区间,
+以 arXiv v1 提交时间为准。
 
 ### SF-L1 reasoning+acting 与环境反馈（ReAct/Reflexion/LATS 族）
 - Q1 `abs:"language agent" AND abs:feedback AND (abs:"test-time" OR abs:"inference-time" OR abs:"training-free")`
@@ -162,12 +183,13 @@ SF-L{n}-S{m}（副源）。允许执行中对拼写变体做**登记后**微调�
 - Q6 `(abs:overthinking OR abs:"give up" OR abs:"premature termination") AND (abs:agent OR abs:"long-horizon")`
 - S1 OpenReview: `agent evaluation cost budget pareto`；S2 ACM DL: `LLM agent cost-controlled evaluation`
 
-**计数**：8 lanes × (6 arXiv + 2 副源) = **64 条预注册查询**。预算/调用量等资源轴不是查询
-过滤器,是抽取轴（§7,重校准 §2.1 口径）。
+**计数**：8 lanes × (6 arXiv 精确查询 + 2 副源关键词路由) = **64 条预注册查询**（48 精确 +
+16 路由——「精确」限指 arXiv 串,副源为关键词级,内审 MINOR-1 口径）。预算/调用量等资源轴不是
+查询过滤器,是抽取轴（§7,重校准 §2.1 口径）。
 
 ## §5 Snowballing 与饱和判据
 
-- 57 列名种子 + 每条 INCLUDED-DIRECT 命中：backward（参考文献）+ forward（引文,经 SS/OpenAlex
+- 51 列名种子 + 每条 INCLUDED-DIRECT 命中：backward（参考文献）+ forward（引文,经 SS/OpenAlex
   发现层）各一轮。**「一轮」是最低动作,不是停止条件（修正案 D）**：每轮产生的新 DIRECT 邻居
   继续 chaining,直至**连续两轮零新增 DIRECT**（饱和）才停;新簇出现即重启该簇计数。
 - **任何 NO_DIRECT_MATCH 类结论**须满足预注册饱和：连续两轮 snowballing 零新增直接邻居 +
@@ -214,8 +236,8 @@ IAD 2504.01931 / AudioToolAgent 2510.02995 / EChO-Agent 2606.15141 / Agent-Omni 
 Audio-Mind 2605.28480 / JitRL 2601.18510 / training-free-grpo 2510.08191 / LATS 2310.04406 /
 Voyager 2305.16291 / Kapoor 2407.01502 / Speech-Copilot 2407.09886 /
 inference-time-reward-hacking 2506.19248。两名独立抽取者（不同 agent 会话,互不见对方产出）
-按 §6/§7 编码,冲突由协调者亲验裁决并留痕。**选文过程留痕（修正案 E）**：候选池全集、两名
-评审各自的排序与理由、分歧与最终合并规则全部归档——选文环节零无记录筛选。
+按 §6/§7 编码,冲突由协调者亲验裁决并留痕。**选文过程留痕（修正案 E）**：候选池**完整登记
+清单**、两名评审各自的排序与理由、分歧与最终合并规则全部归档——选文环节零无记录筛选。
 
 ## §9 日志与可回放（P0-LIT-3-⑦;round-1 宇宙缺失的构造性防复发）
 
@@ -237,9 +259,25 @@ failed_request(如有)}`——存 `wiki/survey/replay/SF-SURVEY-2026/`。原始�
   system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类）——供 Stage-1C
   owner 双证据选题;不做 intersection-novelty 论证（Checkpoint C）。
 
-## §12 签署流
+## §12 签署流与签署区
 
 1. 本协议过内审环 → owner 过目 → 送 reviewer **search-design 签署**;
-2. 签署后执行前置：owner 批准 + P0-R8 状态门复跑（三条件缺一不可,frontmatter first_query_gate）;
+2. 执行前置三条件 = §12.1 的 reviewer 签署 + owner 批准 + P0-R8 状态门复跑（缺一不可,
+   frontmatter first_query_gate）;
 3. 执行期间任何查询/种子/判据变更走 §10 版本化增补并即时可见于 replay 目录;
 4. survey 完成 → 综合 → 届时才谈 Stage-1A close（与 1B 放行分立两签）。
+
+**签署包清单（v2 外审 §6.2 六件套）**：① 本协议（exact-query protocol）;② seed manifest
+（`2026-07-15-sf-seed-manifest.jsonl` + 伴随报告）;③ 数据源与检索字符串（本协议 §2/§4）;
+④ 纳排/抽取 schema（本协议 §6/§7）;⑤ 空白记录模板（`2026-07-15-sf-blank-templates.md`
+T1–T6）;⑥ 本签署区。各件以提交后 (commit, path, blob) 三元组互引,签署对象 = 六件整包。
+
+**签署区（三方分立,任一空缺不得执行首条查询）：**
+
+```text
+[ ] reviewer search-design 签署：signature ______________  date ______  签署 commit ______
+    （签署语义 = 检索设计合格可执行;不构成对研究方案科学成立或 novelty 的背书）
+[ ] owner 执行批准：signature ______________  date ______
+[ ] P0-R8 状态门复跑：exit code ____  运行工件路径 ______________  执行人 ______
+queries_executed_at_signoff: 0（attestation——签署时刻查询执行数必须为零）
+```

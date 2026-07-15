@@ -29,9 +29,12 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   **v2 送审版**（STAGE1A-PROPOSAL-2026-07-15-03,`...-proposal-v2.md`,双镜头环 CONVERGED,
   续51——含续50 措辞更正与自库反扫 4 列名种子,已转交）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS**（续52,
   修正案 A–F 全采;元流程停止令=不写 v3,承重工件=协议实体）→ **协议 v1 已成稿**
-  （`survey/2026-07-15-system-first-survey-protocol-v1.md`:八 lanes/64 查询/**57 种子快照**
-  〔含 Omni-Decision 2607.11433 最高优先威胁〕/§5bis 增量扫描/TF 审计子字段/范围多轴;待
-  seed manifest + 内审环 → owner 过目 → reviewer search-design 签署,签署前零查询）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
+  （`survey/2026-07-15-system-first-survey-protocol-v1.md`:八 lanes/64 查询/**51 种子快照**
+  〔计数正典=manifest 枚举〕
+  〔含 Omni-Decision 2607.11433 最高优先威胁〕/§5bis 增量扫描/TF 审计子字段/范围多轴）→
+  **签署包已收敛（续53）**：六件套齐备,三轮环 CONVERGED（R1 双镜头 2 MAJOR+8 MINOR 修复;
+  装配规则消除执行者自由度）——**当前动作 = owner 过目 → reviewer search-design 签署**;
+  执行前置三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
   21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
   两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
