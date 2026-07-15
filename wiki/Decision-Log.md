@@ -6,6 +6,29 @@
 
 ---
 
+### 2026-07-15（续54）· 合并全篇提案 v3 成稿并环收敛——送审组合定型
+
+**Context.** owner 指令「给 reviewer 先要写一份详细的 research proposal」——现有 v1 为十一节
+骨架、v2 为修订史式送审件、协议为操作件,缺完整成篇的科学文本。**治理张力如实处理**：v2 外审
+曾下元流程停止令（不要求 v3）;owner 行使流程定夺权指令成篇——v3 frontmatter 向 reviewer
+如实披露,并声明协议包仍是 Gate S1 签署对象、v3 为其科学上下文（§14.3 将异议路由回 owner）。
+
+**Decision.** STAGE1A-PROPOSAL-2026-07-15-04（`2026-07-15-system-first-research-proposal-v3-
+consolidated.md`,十四节全篇：纲领身份/科学动机〔净新〕/问题树〔净新〕/五合同/架构/种子景观/
+survey 方法论/基线归因/candidate kill logic/工程/诚信暴露/1B 蓝图/门与时间线/对 reviewer
+请求）。环记录：R1 双镜头 1 MAJOR+10 MINOR——MAJOR=**C-T7 锚点失实**（真实机制=检索供给侧
+泄漏,TF-Strict 不阻止该类;原文暗示了不存在的保护）;token 谱系纠正（「预登记坍缩风险」=IAD
+独占,Omni-Decision=外审迟发现,两类分述）→ R2 8/8 FIXED+1 残留 → 单词修复+机器 grep 核验
+CONVERGED。
+
+**Rationale.** 合并件的主风险=整合失真与新叙事 claim-creep,双镜头即按此设计;C-T7 类锚点
+失实是博导评审的当场击杀项,环先行拦截印证环设计有效。
+
+**Consequences.** **送审组合定型**：v3 合并全篇（整体科学评审对象）+ 协议包六件套
+（search-design 签署对象,续53 已收敛）——待 owner 审阅后转交 reviewer。
+
+**Supersedes.** none（v1/v2 保留原效力;v3 为成篇合并,冲突处以已收敛工件为准）。
+
 ### 2026-07-15（续53）· Gate S1 签署包收敛——阶段 A 完成,待 owner 过目转 reviewer
 
 **Context.** owner 放行阶段 A（A1 seed manifest / A2 空白模板+签署区 / A3 内审环）并指令

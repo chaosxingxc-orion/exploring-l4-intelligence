@@ -33,8 +33,10 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   〔计数正典=manifest 枚举〕
   〔含 Omni-Decision 2607.11433 最高优先威胁〕/§5bis 增量扫描/TF 审计子字段/范围多轴）→
   **签署包已收敛（续53）**：六件套齐备,三轮环 CONVERGED（R1 双镜头 2 MAJOR+8 MINOR 修复;
-  装配规则消除执行者自由度）——**当前动作 = owner 过目 → reviewer search-design 签署**;
-  执行前置三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
+  装配规则消除执行者自由度）——**当前动作 = owner 过目 → 转 reviewer**;
+  **送审组合（续54 定型）= v3 合并全篇提案**（STAGE1A-PROPOSAL-2026-07-15-04,十四节科学
+  全文,环收敛——整体评审对象）**+ 协议包六件套**（search-design 签署对象）;执行前置三条件
+  （签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0）（v2 §4 八条 agentic lanes；selector round-2 协议降为子包 SURVEY-B——其
   21 lanes/105 预注册查询维持**零执行**、待 search-design 签署）→ Stage-1A close 与 1B 放行 =
   两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
