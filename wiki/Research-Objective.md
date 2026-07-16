@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-16（续59:收官就绪度评审 Gate S1 WITHHOLD〔G1–G6〕→ owner 四裁决 → amendment-3 整改批一次性落盘〔来源政策/梯队先验+质量轴/50 route/REC schema/种子74/查询51〕——敌意环+correction #3 后重新申请窄幅复核）"
+last_refresh: "2026-07-16（续60:amendment-3 批 owner 过目通过 → Gate S1 窄幅复核申请书落盘送签〔签署对象=correction #3 @37da7f3 不可变集合;两处对评审偏离如实披露〕——待 reviewer 复核,签署前零查询维持）"
 ---
 
 # Research Objective & Current State
@@ -39,8 +39,10 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   双向覆盖+T3 相关性裁决、A3-3 **50 route 实例化**、A3-4 模板 REC-1..7、A3-5 五合同 schema
   传播、A3-6 分页年→月→日递归、A3-7 种子 **74**〔批次2 +14,initial_tag;Omni-Decision
   2607.11433 仍最高优先威胁〕、A3-8 查询 **51**〔敏感性审计+3 增补,48 原批字节前缀不变〕、
-  A3-9 v3 errata-2、A3-10 CONVERGED 带对象、A3-11 阶段称谓、A3-12 迟归档定名——**当前动作 =
-  敌意环收敛 → 提交 → bundle correction #3 → 重新申请 search-design 窄幅复核**;执行前置
+  A3-9 v3 errata-2、A3-10 CONVERGED 带对象、A3-11 阶段称谓、A3-12 迟归档定名——敌意环收敛+
+  提交（`37da7f3`/`420ae2b`）+correction #3 已毕,**owner 过目通过（07-16）→ 窄幅复核申请书
+  已落盘（续60,`survey/2026-07-16-gate-s1-rereview-application.md`）,当前动作 = 待 reviewer
+  窄幅复核（范围=G1–G6 闭合+correction #3 一致性）**;执行前置
   三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最

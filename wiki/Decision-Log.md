@@ -6,6 +6,33 @@
 
 ---
 
+### 2026-07-16（续60）· amendment-3 批 owner 过目通过——Gate S1 窄幅复核申请书落盘送签
+
+**Context.** 续59 整改批（`37da7f3` + bundle correction #3 @`420ae2b`）交 owner 过目;owner
+批复「我觉得现在没啥问题」并指示写一份面向 reviewer 的明确送签件。
+
+**Decision.** 落盘送签申请书 `wiki/survey/2026-07-16-gate-s1-rereview-application.md`
+（SF-S1-REREVIEW-APP-2026-07-16-01）：签署对象 = correction #3 @37da7f3 不可变 17 件集合
+（六件套映射 = 协议 §12）;G1–G6 逐项闭合对照 + P0-1..P0-6 checkbox 对照;**两处对评审原文的
+有意偏离独立成节请评审裁决**（① 付费不可得 = `REMOVED_PAYWALLED_UNOBTAINABLE` 计数移除记账,
+非评审原文的语料内 coverage-gap 保留〔owner 裁决①〕;② venue_tier 保留默认先验 +
+study_quality 双向覆盖,非纯 publication metadata〔owner 裁决②〕）;执行期义务四项如实列出
+（flow-report 移除记账/VideoAgent-2026 存在性/occupancy version-pin/ENTRY_TO_RESOLVE）;
+请求范围 = 窄幅复核（G1–G6 闭合 + bundle 一致性,评审 §7.2/§9/§11 原定）,不开 proposal
+轮次;owner 送签批准与协议 §12 签署区「owner 执行批准」显式分立。
+
+**Rationale.** 评审已自限窄幅范围,申请书把闭合证据集中为单件使复核无需翻散件;偏离不埋正文
+而独立 §4 请裁决——评审拥有严谨性裁决权（reviewer-drift 纪律的对称义务）;签署级文本由协调者
+亲笔、校验交独立镜头（model-division-of-labor）。
+
+**Consequences.** 申请书自身过独立敌意校验镜头（禁网:blob 17/17 重算、评审引文逐字比对、
+数字逐项、偏离披露完备性扫描）：R1 = 1 MAJOR（协议章节号误引 §13→§12 共 4 处,被引内容
+verbatim 正确）+ 1 MINOR + 4 NIT → 全部修复 → R2 grep 复检清零（协调者亲验）。热层
+last_refresh 续60 + Per-Work-Status W1 行同步。下一步 = reviewer 窄幅复核 → 通过后 owner
+执行批准 + P0-R8 状态门复跑 → survey 首条查询。签署前零查询维持（attestation=0）。
+
+**Supersedes.** 无新取代;续59 Consequences 的「重新申请窄幅复核」动作项由本条落实。
+
 ### 2026-07-16（续59）· v3 收官就绪度评审收档（Gate S1 WITHHOLD）+ owner 四裁决 + amendment-3 整改批一次性落盘
 
 **Context.** 独立收官就绪度评审
