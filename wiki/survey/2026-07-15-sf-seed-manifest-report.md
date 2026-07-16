@@ -178,3 +178,20 @@ source 字段沿用「评审delta-scan」枚举值）：系统结构自动设计
   L7=3 / L8=6 / L9=5,Σ=111;verification_level 题录AS_GIVEN=45 / 题录AS_GIVEN|delta待全文
   核验=4 / census在库(题录+)=22 / 摘要级=3;source reviewer点名=18 / 自库继承=7 / 自库反扫=19 /
   评审delta-scan=26 / 评审点名-基础谱系=4;scope_pending=Y 维持 2。
+
+## 增量批次3（correction #4 C4-6,2026-07-16——博导复审 §9.2 点名 13 篇,ID 核验前置后入册）
+
+- **来源**：Gate S1 再送签博导复审（`2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md`）
+  §9.2 直接遗漏清单 13 篇。**入册前置条件（owner 裁决② 续61）**：逐 ID `ID_DEREFERENCE`
+  联网核验存在性+题名一致性——**14/14 HIT 零幻觉**（含 batch-2 遗留 UNVERIFIED 的
+  VideoAgent-2026 2606.23327,一并解析闭合;AgentEval 2607.06873 v1=2026-07-08 在窗内）。
+  正典留痕 = `2026-07-16-sf-id-dereference-log.jsonl`（逐次 id/时刻/HTTP 状态/裁决）。
+- **verification_level 新值**：`题录ID_DEREFERENCE_VERIFIED`（强于题录AS_GIVEN——存在性与
+  题名已机器核验;全文/合同审计仍归执行期 REC-2）。
+- **initial_tag 批次3 扩枚举**（仅管阅读优先级与角色初判,登记于 README token 块）：
+  MANDATORY_SEED=6 / DISCOVERY_NAVIGATION=2 / PERSISTENCE_BOUNDARY=2 / TRAINED_COMPARATOR=1 /
+  CONTROL_BASELINE=1 / COMPONENT_COMPARATOR=1（主标签计数;多值可叠）。
+- **离线 sentinel recall**（`docs/checks/2026-07-16-sf-sentinel-recall.json`,C4-6）：
+  9 QUERY_HIT + 5 EXPLAINED_MISS（每篇解释+确定性兜底路径已登记,零 unexplained;
+  AgentEval 经 SF-L10 受控类目道增设后由 cat_blocked 转 HIT）。
+- **现行总数 = 87**（74 行原批字节前缀不变 + 13 追加;机器实测 87 行 87 唯一 id）。

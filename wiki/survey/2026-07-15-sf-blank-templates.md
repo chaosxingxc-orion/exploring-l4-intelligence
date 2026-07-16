@@ -1,9 +1,32 @@
 # Gate S1 签署包：空白记录模板（v2 外审 §6.2 六件套之五）
 
-（本文件 = 执行期各类记录的空白骨架。字段语义见协议 §6/§7/§9 与 amendment-3;哈希正典 =
-git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号 = `REC-1..REC-7`——原
-`T1–T6` 编号与 venue 梯队 `T1/T2/T3` 冲突,自本版起废止;历史文件中的旧编号不改写,读旧件时
-按「模板语境 T{n} = REC-{n}」映射。）
+（本文件 = 执行期各类记录的空白骨架。字段语义见协议 §6/§7/§9 与 amendments 3–4;哈希正典 =
+git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号 = `REC-0..REC-7`——原
+`T1–T6` 编号与 venue 梯队 `T1/T2/T3` 冲突,自 A3-4 起废止;历史文件中的旧编号不改写,读旧件时
+按「模板语境 T{n} = REC-{n}」映射;`REC-0` 为 correction #4 C4-4 新增的工作级主账,编号取 0
+因其在管线上游于一切现有模板。）
+
+## REC-0 工作级筛选/去重/裁决主账行（每个 canonical work 一行,不限 INCLUDED;correction #4 C4-4 新增）
+
+```json
+{"canonical_id":"<arXiv ID|DOI>","title":"",
+ "source_hits":[{"source":"query:SF-L1-Q1|route:SF-T1R-ACL-2024|citation_graph:<父节点>|seed:manifest行号","hit_ref":"<REC-1 行/REC-7 resolution 项回指>"}],
+ "dedup":{"merged_from":["<被并 ID/表述变体>"],"merge_basis":"same_arxiv_id|doi_match|title_normalized_exact|fuzzy_adjudicated:<裁决人>"},
+ "screening_stage":"TITLE|ABSTRACT|FULLTEXT",
+ "decision":"INCLUDED|EXCLUDED|DUPLICATE|UNOBTAINABLE",
+ "reason_code":"NOT_RELEVANT|WRONG_OBJECT|DUPLICATE_OF:<id>|REMOVED_PAYWALLED_UNOBTAINABLE|REMOVED_UNOBTAINABLE|INFO_BOUNDARY_FAIL|OTHER:<登记后使用>",
+ "reason_text":"<一句理由;EXCLUDED/UNOBTAINABLE 必填>",
+ "screener":"<初筛人/代理>","screened_at":"<ISO8601>",
+ "second_reviewer":"<复核人;无=null>","adjudicator":"<分歧裁决人;无分歧=null>","adjudication_note":null,
+ "fulltext_version_ref":"<vN/正式版页;FULLTEXT 阶段起必填>",
+ "extraction":{"rec2_backref":"<REC-2 行回指;仅 INCLUDED>","extractor":"","extracted_at":""},
+ "coding_depth":"D0|D1|D2"}
+```
+
+（**完整纳排链条正典**：任何命中工作无论终态都必须有一行——同一 work 被多少查询/route/引文
+边命中、如何合并、在哪一阶段因何排除、谁筛谁核谁裁、抽取回指哪个固定版本,全部可由本表回放;
+`coding_depth` = amendment-4 编码深度纪律〔D0=本行即全部;D1=INCLUDED 精简核;D2=承重全合同〕,
+承重 claim 必须回指 `coding_depth:"D2"` 的 REC-2 行——validator 强制。）
 
 ## REC-1 检索日志行（每次查询一行,JSONL;原 T1）
 
@@ -15,13 +38,22 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
 ```
 
 （**每页一行**——A1-4 分页语义;totalResults 每页复记;查询定义一律以 queries.jsonl 行哈希
-回指。**分页递归拆分（A3-6）**：totalResults>2000 时按 年→月→日 确定性递归拆分,派生查询
-`query_id` = `<父ID>-W<窗口序号>`,行内另记 `parent_query_sha256`——派生行沿用本模板。）
+回指。**分页递归拆分（A3-6;correction #4 C4-5 补全可重放字段）**：totalResults>2000 时按
+年→月→日 确定性递归拆分,单日仍 >2000 = **硬停止**并登记 `API_LIMIT_SINGLE_DAY_OVER_2000`
+（绝不静默截断）。派生行沿用本模板,**另须逐字段携带**：`date_from / date_to /
+timezone:"GMT" / boundary_semantics(闭区间分钟粒度) / decoded_search_query /
+url_encoded_search_query / query_sha256(decoded 串哈希) / parent_query_sha256 /
+split_level(MONTH|DAY) / split_ordinal / trigger_totalresults`;`query_id` = `<父ID>-W<窗口
+序号>` 逐级递归适用。**拆分规范实现 = `scripts/survey/sf_child_query_split.py`**——执行器
+必须调用其 `split_query`,派生记录逐字取其输出;确定性证据 = 离线合成 replay test
+`docs/checks/2026-07-16-sf-child-query-replay-test.json`（9/9 PASS：同父查询+同计数 →
+逐字相同子查询与 hash）。**执行纪律**：调用间隔 ≥3s、失败指数退避、断点自最后完整落账窗口
+续跑（均入 REC-1,arXiv API 手册口径）。）
 
-## REC-2 纳排记录行（每篇 INCLUDED 一行,JSONL;原 T2——amendment-3 A3-5 扩展后骨架）
+## REC-2 抽取记录行（每篇 INCLUDED 一行,JSONL;原 T2——A3-5 扩展 + correction #4 C4-2/C4-4 修订;工作级纳排主账 = REC-0）
 
 ```json
-{"id":"","name":"","version_pin":"vN/正式版页","lanes":[],
+{"id":"","name":"","version_pin":"vN/正式版页","lanes":[],"coding_depth":"D1|D2","rec0_backref":"<REC-0 行回指>",
  "matrix":{"core_access":"weights|logits|hidden-state|attention|API-text|API-multimodal",
   "parameter_update":"none|prompt|adapter|full",
   "external_state_update":"none|memory|skill|tree","reward_type":"gold|verifier|self|env|none",
@@ -36,7 +68,7 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
   "ground_truth_used":"无|预先|开发集|测试时",
   "learned_object":"token-prior|value-fn|verifier|prompt|memory|skill|tool|code|workflow|graph|index|exemplar|none|other:<登记后使用>",
   "learning_time":"test前|test中","test_time_readonly":"Y|N"},
- "source_axes":{"information_source_classes":["①task-native|②pretrained-readout|③deterministic-compute|④endogenous-env-feedback|⑤exogenous-answer-bearing|⑥evaluation-gold"],
+ "source_axes":{"information_source_classes":["TASK_NATIVE","PRETRAINED_READOUT","DETERMINISTIC_COMPUTE","ENDOGENOUS_ENV_FEEDBACK","EXOGENOUS_ANSWER_BEARING","EVALUATION_GOLD"],
   "answer_bearing_external_info":"Y|N|UNCLEAR",
   "gold_path_audit":"<gold 是否以任何路径进入 selector/reward/prompt/检索/候选构造;一句证据>",
   "activation_attribution":"readout|new_info|mixed|not_claimed"},
@@ -48,8 +80,9 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
  "rl_identity":{"state_definition":"","action_definition":"","feedback_definition":"",
   "transition_or_controller":"","policy_representation":"","cross_step_update_object":"",
   "credit_assignment":"","stopping_rule":"","authors_call_it_rl":"Y|N"},
- "proximity":{"system_level":"","component_level":"","modality":"","tf_strict_compliance":"",
-  "black_box_compliance":"","reward_control":"","persistence_state":""},
+ "proximity":{"system_level_proximity":"","component_level_proximity":"","modality_proximity":"",
+  "tf_strict_compliance":"","black_box_compliance":"","reward_control_proximity":"",
+  "persistence_state_proximity":""},
  "extraction":{"core_access":"","modality_path":"","external_components":"","feedback_type":"",
   "what_changes_at_test_time":"","persistence_scope":"","compute_scaling":"","claimed_mechanism":"",
   "strongest_result":"","failure_mode":"","reusable_implementation":""},
@@ -58,23 +91,35 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
  "venue_tier":"T1|T2|T3","topic_relevance":"core|element",
  "evidence_axes":{"verification_depth":"DISCOVERED|ABSTRACT_VERIFIED|FULLTEXT_OPENED|CLAIM_VERIFIED|REPRODUCED",
   "publication_status":"preprint|peer-reviewed|withdrawn|retracted",
-  "study_quality":{"rating":"HIGH|MEDIUM|LOW","reason":"<数据边界/对照公平/统计不确定性/消融/复现性/代码可得/claim-evidence match 一句裁决>"},
-  "quality_override":"none|T2_PROMOTED:<理由>|T1_DEMOTED:<理由>"},
+  "study_quality":{
+   "data_boundary":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "control_fairness":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "uncertainty_reporting":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "ablation_attribution":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "reproducibility":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "artifact_availability":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "claim_evidence_match":{"verdict":"PASS|PARTIAL|FAIL|UNCLEAR|NA","reason":"","locator":""},
+   "summary_rating":"HIGH|MEDIUM|LOW(仅由分维导出或人工裁决登记,不得替代分维)","coder":""}},
  "dfs_trigger":["T-a对象|T-b问题|T-c要素|T-d结论冲突(空=仅BFS)"],
  "method_occupation":{"method_gist":"","method_limitations":"",
   "improvement_space":"三小问齐备才有效:①哪条轴②为何到不了③对哪个RQ/阈值有实质影响",
   "borrowable":""},
- "evidence_grade":"DISCOVERED|ABSTRACT_VERIFIED|FULLTEXT_OPENED|CLAIM_VERIFIED|REPRODUCED",
  "claim_locators":[{"claim":"","locator":"vN §/p./Table/Eq.","span":""}]}
 ```
 
-（**A3-5 字段语义补注**：`evidence_grade` 与 `evidence_axes.verification_depth` 同标尺——
-前者为兼容保留,冲突时以 `evidence_axes` 为准;`source_axes.information_source_classes` 按
-信息来源六类分解登记（README token 块）,⑤类增益禁概括为「激活预训练知识」;`rl_identity`
-九字段供 SF-L9 谱系裁决「RL/planning/search/bandit/metareasoning」;`omni_axes` 五轴对应
-omni 合同五轴分离——`modality_path` 为粗标签保留,承重判断以五轴为准;`tf_audit` 扩展四字段
-区分「冻结通用工具」与「为本任务新训组件」;`study_quality`/`quality_override` 按 A3-2 梯队
-先验+质量覆盖规则使用。）
+（**A3-5/C4 字段语义补注**：`evidence_grade` **已从填写模板移除**——正典 =
+`evidence_axes.verification_depth`,兼容字段仅在导出层生成〔C4-4〕;
+`source_axes.information_source_classes` = **多选枚举数组**,示例列出全枚举域,填写时仅留
+实际适用类〔①..⑥ 圆圈序号映射:①TASK_NATIVE ②PRETRAINED_READOUT ③DETERMINISTIC_COMPUTE
+④ENDOGENOUS_ENV_FEEDBACK ⑤EXOGENOUS_ANSWER_BEARING ⑥EVALUATION_GOLD〕,⑤类增益禁概括为
+「激活预训练知识」;`rl_identity` 九字段供 SF-L9 谱系裁决;`omni_axes` 五轴对应 omni 合同
+五轴分离——`modality_path` 为粗标签保留,承重判断以五轴为准;`tf_audit` 扩展四字段区分
+「冻结通用工具」与「为本任务新训组件」;`study_quality` = **七维结构化**〔C4-2,owner 裁决①:
+venue_tier 零证据权重,承重全由本块决定;`quality_override` 已退役〕;`proximity` 键名与协议
+§6 范围多轴列表逐字一致〔C4-4〕;**编码深度**〔amendment-4〕：D1 行必填 = 身份元数据 +
+topic_relevance + proximity + publication_status + venue_tier + dfs_trigger +
+verification_depth,其余块可整块 `"NA:<理由>"` 折叠;D2〔承重〕= 全字段 + study_quality
+七维完整,承重 claim 必须回指 D2 行——validator 强制。）
 
 ## REC-3 census 增量行 / REC-4 ledger 增量行（原 T3/T4）
 

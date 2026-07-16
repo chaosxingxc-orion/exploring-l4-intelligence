@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1+amendments 1–3——八 lanes + 基础谱系道 SF-L9 / arXiv-primary 语料+免费官方源救援·51 条编译冻结查询（48+3,A3-8）/ 梯队先验+质量三轴 / BFS→触发式 DFS / 74 列名种子（计数正典 = manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendments 1–4——八 lanes + 基础谱系道 SF-L9 + SE/HCI 受控类目道 SF-L10 / arXiv-primary 语料+免费官方源救援·53 条编译冻结查询（48+3+2,A3-8/C4-6）/ 发现优先级 tier+质量七维 / BFS→触发式 DFS / 74 列名种子（计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
@@ -40,7 +40,7 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 ## §2 检索宇宙与承重源（A2-1..A2-3 重写,owner 裁决①②③——取代原多库设计）
 
 - **检索语料 = arXiv-primary + 免费官方源救援（A3-1,取代 A2-1「非 arXiv 不参考」条）**：
-  全部预注册检索经 arXiv API（51 条编译查询）;Semantic Scholar/OpenAlex 仅作引文图谱发现层,
+  全部预注册检索经 arXiv API（53 条编译查询,C4-6 后口径）;Semantic Scholar/OpenAlex 仅作引文图谱发现层,
   **其一切命中回 arXiv 题名检索解析**;无 arXiv 版的直接相关工作走**免费官方开放获取源救援**
   （ACL Anthology/NeurIPS proceedings/PMLR/OpenReview/CVF/ISCA Archive 等,venue-native ID/
   DOI + 本地备份 + sha256 纳入承重）;**付费且无任何免费版本 → `REMOVED_PAYWALLED_UNOBTAINABLE`**
@@ -58,13 +58,20 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
   目录静态,可回放）,topic 关键词过滤 → 命中回 arXiv 题名解析或救援流程。**route 正典 =
   `2026-07-16-sf-t1-proceedings-routes.md`**（50 route ID/入口/track 界定/词表 v1/归一化与
   模糊匹配/五计数字段）,执行日志模板 = REC-7。
-- **梯队证据权重（A2-8,经 A3-2 修订为「先验+质量双向覆盖」）**：`venue_tier` = **默认先验
-  权重,非终裁**。T1 实验结论默认承重,study_quality 低者 `T1_DEMOTED`（登记理由降权）;T2 =
-  创新/机制描述可承重,实验数字默认带 `T2_UNREVIEWED` 限定（不得单独支撑 kill/proceed）,
-  **高质者（代码+复现+充分消融）经协调者裁决 `T2_PROMOTED` 可承重**（登记理由,限定语保留
-  加注 override）;逐篇三轴分立 = `verification_depth / publication_status / study_quality`
-  （schema 正典 = REC-2 evidence_axes）;**threat/novelty 判定不看梯队**（未发表工作同样可
-  摧毁首创宣称）;**梯队管证据先验,不管阅读优先级**（优先级 = §4bis 排序键）。
+- **梯队角色（A2-8;A3-2「先验+双向覆盖」经 correction #4 C4-2 修订为「发现层元数据,零证据
+  权重」——owner 裁决① 2026-07-16,Decision-Log 续61 对续59 裁决②的 dated supersession）**：
+  `venue_tier` 只承载 ① 重点 proceedings 手扫范围标记（T1 题录道来源）② §4bis DFS 排序键的
+  平局裁决 ③ 最终 coverage 分层描述——**不赋予实验结论任何默认可信度**。是否承重由逐篇
+  `study_quality` **七维结构化**决定（`data_boundary / control_fairness /
+  uncertainty_reporting / ablation_attribution / reproducibility / artifact_availability /
+  claim_evidence_match`,每维 `PASS|PARTIAL|FAIL|UNCLEAR|NA` + 一句理由 + 全文 locator +
+  编码者;总评 HIGH/MEDIUM/LOW 仅可由分维导出或人工裁决登记,**不得替代分维记录**——schema
+  正典 = REC-2 evidence_axes C4-2 版）;同行评审状态由 `publication_status`
+  （preprint/peer-reviewed/withdrawn/retracted）独立表达——**`T2_UNREVIEWED` 标签退役**
+  （对 TMLR/JMLR 等非 T1 同行评审 venue 构成语义误标,评审 G2 指正成立）,`T1_DEMOTED`/
+  `T2_PROMOTED` 覆盖机制随先验语义一并退役（无先验可覆盖）;**threat/novelty 判定
+  tier-blind 维持不变**;编码深度纪律（Depth-0/1/2 + 承重时点编码 code-on-use）见
+  amendment-4。
 - **T1 获取规则**：题名检索回链 arXiv;不在 arXiv → 免费官方源原文备份
   `$SPEECHRL_DATA_DIR/survey-backups/`（永不进 git;sha256+来源 URL 入 §9 日志）;付费且无
   任何免费版本 → `REMOVED_PAYWALLED_UNOBTAINABLE`;其他不可得 → `REMOVED_UNOBTAINABLE`
@@ -137,7 +144,7 @@ token 块）仍全量登记（dedup 不丢日志）;新工作即读即登记 cen
 （内审 MINOR-5）**：manifest 内 `[lane 协调者已核]`/`既往 grep` 类注记 = 种子策展与历史
 census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行。
 
-## §4 八条 lanes 与 51 条编译冻结查询（48 原批 + 3 条 A3-8 增补,append-only）
+## §4 检索 lanes 与 53 条编译冻结查询（48 原批 + 3 条 A3-8 增补 + 2 条 C4-6 受控类目道,append-only）
 
 **通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;
 max_results = 75（SF-L7-Q3 为 50）——**语义 = 每页大小,非结果上限**（溢出规则见下）;按
@@ -149,9 +156,10 @@ amendment-1,snowballing 与 SF-L9 兜异类溢出;执行中发现反例即走版
 查询编号 = SF-L{n}-Q{m}（arXiv）。**各 lane 的 S1/S2 副源行已按 A2-1 整体退役**（下文保留
 作历史记录,不执行）。允许执行中对拼写变体做**登记后**微调（原查询照跑,变体新增编号,禁替换）。
 
-**exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合;A3-8 后 51 条）**：51 条查询（48 原批
-+3 增补——**原批 48 行逐字节不变、增补追加于文件末尾**,原批行保留 compiler_version
-sfqc-1.0.0,增补行标 sfqc-1.1.0）已由离线编译器
+**exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合;A3-8 后 51 条;C4-6 后 53 条）**：53 条查询
+（48 原批 +3 A3-8 增补 +2 C4-6 受控类目道——**前 51 行逐字节不变、增补层层追加于文件末尾**,
+原批行保留 compiler_version sfqc-1.0.0,A3-8 增补行标 sfqc-1.1.0,C4-6 道行标 sfqc-1.2.0）
+已由离线编译器
 `scripts/survey/sf_query_compiler.py` 装配为 **`2026-07-15-sf-queries.jsonl`**——逐行含
 decoded/URL-encoded 串、类目、date_from/to、start/max_results/sortBy/sortOrder、compiler
 版本与行哈希,**零占位符**;静态验证报告 `docs/checks/2026-07-15-sf-queries-static-validation.md`
@@ -249,8 +257,9 @@ A2-1 披露,reviewer 签署时可表态。
 - Q6 `(abs:overthinking OR abs:"give up" OR abs:"premature termination") AND (abs:agent OR abs:"long-horizon")`
 - S1 OpenReview: `agent evaluation cost budget pareto`；S2 ACM DL: `LLM agent cost-controlled evaluation`
 
-**计数（A3-8 后现行口径）**：8 lanes × 6 + 3 条增补（SF-L1-Q7/Q8、SF-L3-Q7）= **51 条
-预注册查询**（历史口径「48」见 amendment-3 A3-8,「64」见 amendment-2;16 条副源路线已退役）。
+**计数（correction #4 C4-6 后现行口径）**：8 lanes × 6 + 3 条 A3-8 增补（SF-L1-Q7/Q8、
+SF-L3-Q7）+ 2 条 C4-6 受控类目道（SF-L10-Q1/Q2）= **53 条预注册查询**（历史口径「51」见
+A3-8、「48」见 A3-8 前、「64」见 amendment-2;16 条副源路线已退役）。
 预算/调用量等资源轴不是查询过滤器,是抽取轴（§7,重校准 §2.1 口径）。**增补查询的敏感性审计
 留痕**：离线纸面审计（Opus 独立,零联网）结论与逐篇召回表随 amendment-3 批次归档于
 Decision-Log 续59;审计明确 ToT/Socratic-Models 不为其加查询（种子+引文图兜底）。
@@ -268,9 +277,17 @@ Decision-Log 续59;审计明确 ToT/Socratic-Models 不为其加查询（种子+
 - 无预注册 Boolean 查询（经典文献 arXiv 覆盖不全,以 chaining + DOI 锚为主;Google Scholar
   仅 DISCOVERY_ONLY）。
 
+### SF-L10 SE/HCI agent-systems 受控类目道（correction #4 C4-6 增补 2026-07-16——cs.SE/cs.HC 类目盲区补救）
+- Q1 `(abs:"black-box" OR abs:blackbox) AND (abs:LLM OR abs:"language model") AND (abs:agent OR abs:testing OR abs:optimization)`（C4-6 增补——SE/HC 类目 × 黑盒 agent 身份词族;sentinel AgentEval 2607.06873〔主类目 cs.SE 零 cross-list,v1=2026-07-08 在窗内〕离线词项级已匹配 L6-Q1 族、仅被类目拦截,本道即其确定性补救）
+- Q2 `(abs:agent OR abs:agentic) AND (abs:workflow OR abs:orchestration OR abs:"tool use" OR abs:evaluation OR abs:testing) AND (abs:LLM OR abs:"language model" OR abs:"foundation model")`（C4-6 增补——SE/HC 类目 × agent workflow/评测词族,承接 HCI 侧 agent 系统工作〔哨兵 2508.01186 双类目 cs.AI+cs.HC〕）
+
+（本道类目 = **cs.SE + cs.HC 两类受控投放**,不重复扫描主 lanes 的 cs.AI/cs.CL/cs.LG 等类;
+命中编码/承重规则与主 lanes 完全一致;编译层 = sfqc-1.2.0 **append-only**——53 行文件的前
+51 行逐字节不变;道名取 SF-L10 因 SF-L9 已被基础谱系道占用〔收词纪律:同名不承载两定义〕。）
+
 ## §4bis 执行策略：广度优先 → 触发式深度遍历（A2-5,owner 裁决④）
 
-- **BFS pass**：51 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
+- **BFS pass**：53 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
   含 §6 矩阵可从摘要判定的轴 + venue_tier + topic_relevance）——不做全文、不做 chaining。
 - **DFS 触发四判据**（满足任一即入队,`dfs_trigger` 多值登记理由;A2-10）：**T-a 对象重合**
   （omni agentic system/多模态知识系统/语音本体）**T-b 问题重合**（回答我们任一 RQ,即使对象
@@ -335,7 +352,8 @@ test_time_readonly(Y/N)`——「冻结核心 ≠ TF-Strict」（Training-Free G
 必经此审计）;扩展四字段防「冻结通用工具」与「为本任务新训组件」混为一类,扩枚举防
 UCT/AFlow/ADAS/GPTSwarm/Voyager/ConMem 类更新对象无处登记致 scope_pending 不可裁决。
 
-**梯队与策略字段（A2-2/A2-4/A2-5;A3-2 修订）**：`venue_tier(T1/T2/T3——默认先验非终裁,
+**梯队与策略字段（A2-2/A2-4/A2-5;A3-2 修订;C4-2 再修订——tier 零证据权重,owner 裁决①）**：
+`venue_tier(T1/T2/T3——发现层元数据+§4bis 排序键平局,零证据权重,
 T3 按相关性/质量裁决,EXCLUDED 记理由) |
 topic_relevance(core=语音/omni agentic 本体, element=技术要素参考) | dfs_trigger(T-a对象重合/T-b问题重合/
 T-c要素重合/T-d结论冲突, 多值;空=仅 BFS——四值与 §4bis/A2-10/REC-2 模板/README 一致)`。
@@ -349,12 +367,15 @@ action_modality / multimodal_causal_grounding_evidence——modality_path 降为
 transition_or_controller/policy_representation/cross_step_update_object/credit_assignment/
 stopping_rule/authors_call_it_rl——SF-L9 谱系裁决「RL/planning/search/bandit/metareasoning」
 的记录基础）|
-`evidence_axes`（verification_depth / publication_status / study_quality / quality_override）。
+`evidence_axes`（verification_depth / publication_status / study_quality **七维结构化**——
+C4-2;`quality_override` 已随先验语义退役）。
 
 **范围多轴（修正案 F——不用单一 DIRECT/OUT 压平）**：`system_level_proximity |
 component_level_proximity | modality_proximity | tf_strict_compliance | black_box_compliance |
-reward_control_proximity | persistence_state_proximity | evidence_grade` 各轴独立编码
-（如 walking-through-uncertainty：组件直接、系统不直接）。
+reward_control_proximity | persistence_state_proximity` 各轴独立编码
+（如 walking-through-uncertainty：组件直接、系统不直接）。（C4-4 命名统一：REC-2
+`proximity` 块键名与本列表**逐字一致**;evidence 轴正典 = `evidence_axes.verification_depth`,
+顶层 `evidence_grade` 从填写模板移除、仅在导出层生成兼容字段。）
 
 **RQ 威胁标注（v3 外审 P0-C 末项;amendment-1 A1-9 补录）**：每条 INCLUDED 记录另标
 `most_threatened_rq`（多值;枚举 = RQ-SYS/RQ-CTRL/RQ-OMNI/RQ-SAFE/RQ-MEASURE/none,问题树
@@ -406,8 +427,8 @@ excluded[{id, reason}], failed_request(如有)}`——totalResults 每页复记�
 
 ## §11 停止规则与产出
 
-- 查询停止 = 全部 51 条编译查询执行完毕（含分页抓全,总数口径非每 lane;历史口径 48 见
-  A3-8）+ T1 题录道 50 route 扫描完毕（可执行数以 routes manifest 状态列机器计数为准）
+- 查询停止 = 全部 53 条编译查询执行完毕（含分页抓全,总数口径非每 lane;历史口径 51/48 见
+  A3-8/C4-6）+ T1 题录道 50 route 扫描完毕（可执行数以 routes manifest 状态列机器计数为准）
   + 引文图遍历达饱和（§5）;整体停止不设时间 cap,以覆盖判据（§1）与饱和为准。
 - 产出：coverage/kill matrix v3 + SOTA cards v3 + 更新的 census/ledger + **3–5 个
   system-level candidate problems**（Checkpoint D;候选池含重校准 §4 六类;**每个候选附

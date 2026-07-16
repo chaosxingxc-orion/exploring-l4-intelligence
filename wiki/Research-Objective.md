@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-16（续60:amendment-3 批 owner 过目通过 → Gate S1 窄幅复核申请书落盘送签〔签署对象=correction #3 @37da7f3 不可变集合;两处对评审偏离如实披露〕——待 reviewer 复核,签署前零查询维持）"
+last_refresh: "2026-07-16（续61:博导复审 WITHHOLD—CORRECTION #4 → owner 四裁决〔venue_tier 零证据权重/ID 核验前置/阶段语义/编码三深度〕→ correction #4 六项当日交付——待 reviewer 按复审 §14 清单窄幅复核〔双向合同:全过即签〕,签署前零查询维持）"
 ---
 
 # Research Objective & Current State
@@ -36,14 +36,21 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   G2 梯队≠质量/G3 route 未实例化/G4 schema 未传播/G5 bundle 失效/G6 分页缺陷）→
   **owner 四裁决 + amendment-3 整改批（续59,2026-07-16,一次性落盘）**：A3-1 arXiv-primary+
   免费官方源救援+付费 `REMOVED_PAYWALLED_UNOBTAINABLE` 计数废弃、A3-2 梯队先验+study_quality
-  双向覆盖+T3 相关性裁决、A3-3 **50 route 实例化**、A3-4 模板 REC-1..7、A3-5 五合同 schema
+  双向覆盖+T3 相关性裁决、A3-3 50 route 道设计〔后经复审判定逐条实例化不足,C4-3 补齐〕、A3-4 模板 REC-1..7、A3-5 五合同 schema
   传播、A3-6 分页年→月→日递归、A3-7 种子 **74**〔批次2 +14,initial_tag;Omni-Decision
   2607.11433 仍最高优先威胁〕、A3-8 查询 **51**〔敏感性审计+3 增补,48 原批字节前缀不变〕、
   A3-9 v3 errata-2、A3-10 CONVERGED 带对象、A3-11 阶段称谓、A3-12 迟归档定名——敌意环收敛+
-  提交（`37da7f3`/`420ae2b`）+correction #3 已毕,**owner 过目通过（07-16）→ 窄幅复核申请书
-  已落盘（续60,`survey/2026-07-16-gate-s1-rereview-application.md`）,当前动作 = 待 reviewer
-  窄幅复核（范围=G1–G6 闭合+correction #3 一致性）**;执行前置
-  三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询（attestation=0;SURVEY-B 21 lanes/105
+  提交（`37da7f3`/`420ae2b`）+correction #3 已毕,**owner 过目通过（07-16）→ 窄幅复核申请书落盘（续60）→ 博导复审返回
+  WITHHOLD — CORRECTION #4**（我方逐条独立核验其仓内断言**全属实**;分层定性:G3 完成态夸张
+  认错、G4/G6 原闭+新增要求、G2 披露偏离被驳回）→ **owner 四裁决（续61）**：①venue_tier
+  零证据权重〔dated supersession 续59 裁决②;T2_UNREVIEWED 等三 token 退役,承重=七维
+  study_quality〕②sentinel ID 前置核验〔ID_DEREFERENCE 访问类,14/14 HIT 零幻觉〕③survey
+  执行=Stage-1A〔1B 标志=触碰模型;「1B 开始」表述收回〕④编码 D0/D1/D2+code-on-use →
+  **correction #4 六项当日交付**（amendment-4+回应信:53 查询〔SF-L10 受控 cs.SE/cs.HC 道,
+  51 行前缀字节不变〕/87 种子〔批次3+13〕/50 route 逐条序列化+validator 12/12/REC-0 工作级
+  主账/child-query replay 9/9/sentinel recall 9 HIT+5 EXPLAINED 零 unexplained）,**当前动作 =
+  待 reviewer 按复审 §14 十一项清单窄幅复核（双向合同:全过即签不再延期）**;执行前置三条件
+  （签署+owner 批准+P0-R8 复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，

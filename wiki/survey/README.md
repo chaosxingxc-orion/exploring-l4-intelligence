@@ -16,10 +16,11 @@
 > 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
 > （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
 > 期去重标记:命中 census v2 既有 work,仍全量登记）。
-> **检索策略 token（amendment-2 起用;venue_tier 语义经 A3-2 原位修订）**：`venue_tier`
-> （T1 十会正会/T2 其他含 preprint/T3 workshop——**默认先验非终裁,T3 按相关性/质量裁决不再
-> 自动排除**,study_quality 可双向覆盖）/ `T2_UNREVIEWED`（T2 实验数字引用默认限定语,不得
-> 单独支撑 kill/proceed;可被 T2_PROMOTED 覆盖）/
+> **检索策略 token（amendment-2 起用;venue_tier 语义经 A3-2、correction #4 C4-2 两次原位
+> 修订）**：`venue_tier`（T1 十会正会/T2 其他含 preprint/T3 workshop——**发现层元数据 +
+> §4bis 排序键平局,零证据权重〔C4-2,owner 裁决① 续61〕**;T3 按相关性/质量裁决不再自动
+> 排除;承重由 study_quality 七维决定）/ `T2_UNREVIEWED`（**已退役,C4-2**——对非 T1 同行
+> 评审 venue 构成误标;同行评审状态由 `publication_status` 表达,历史文件读法=当时先验语义）/
 > `REMOVED_UNOBTAINABLE`（无 arXiv 且无法备份,移除并计数）/ `COMMON_NODE`（引文图 ≥3 图共现
 > 且不触发判据的公共文献,登记不扩展）/ `dfs_trigger`（T-a 对象/T-b 问题/T-c 要素/T-d 结论
 > 冲突,多值）/ `topic_relevance`（core/element）。
@@ -28,9 +29,18 @@
 > `DETERMINISTIC_WEB`（URL 参数化可导出——已登记备用,现无路线使用）。
 > **amendment-3 token（2026-07-16 起用）**：`REMOVED_PAYWALLED_UNOBTAINABLE`（付费且无
 > arXiv/免费官方版,计数移除记账——移除事件+ID+题名+venue 入 flow report,占据类结论必须披露
-> 移除计数,A3-1）/ `T2_PROMOTED` `T1_DEMOTED`（study_quality 对 venue_tier 先验的双向覆盖,
-> 登记理由,A3-2）/ `initial_tag`（种子初判多值枚举 DIRECT_THREAT/TRAINED_COMPARATOR/
-> METHOD_LINEAGE/COMPONENT_ANALOGY——仅管阅读优先级,A3-7）/
+> 移除计数,A3-1）/ `T2_PROMOTED` `T1_DEMOTED`（**已退役,C4-2**——先验语义退役后无先验可
+> 覆盖;历史文件读法=A3-2 双向覆盖机制）/ `initial_tag`（种子初判多值枚举 DIRECT_THREAT/
+> TRAINED_COMPARATOR/METHOD_LINEAGE/COMPONENT_ANALOGY——仅管阅读优先级,A3-7;批次3 扩
+> MANDATORY_SEED/DISCOVERY_NAVIGATION/PERSISTENCE_BOUNDARY/CONTROL_BASELINE/
+> COMPONENT_COMPARATOR/CATEGORY_SENTINEL/FULLTEXT_AUDIT/SPLIT_TRAINED_VS_TF/NAMING_THREAT/
+> IDENTITY_AUDIT/MECHANISM_CONTRAST,C4-6）/
+> **correction #4 token（2026-07-16 起用）**：`ID_DEREFERENCE`（按已知 arXiv ID/DOI 取页
+> 核验存在性+题名——非检索查询,不计 queries_executed,逐次留痕,owner 裁决② 续61）/
+> `coding_depth`（D0 主账行/D1 精简核/D2 承重全合同——**承重时点编码 code-on-use**,承重
+> claim 必须回指 D2 行,amendment-4）/ `REC-0`（工作级筛选/去重/裁决主账,C4-4）/
+> `API_LIMIT_SINGLE_DAY_OVER_2000`（单日窗口仍超 slice 上限的硬停止登记,C4-5）/
+> `EXPLAINED_MISS`（sentinel recall 裁决:未命中但解释+兜底路径已登记,C4-6）/
 > `LATE_RECONSTRUCTED_REVIEW_SUMMARY`（迟归档敌意环记录的统一定名——复盘可用,不等同原始
 > replay,A3-12）。**模板编号纪律（A3-4）**：空白模板 = `REC-1..REC-7`,`T` 前缀为 venue 梯队
 > 独占。**convergence 纪律（A3-10）**：声明必须带对象与锚（如 `TEXT_CONSISTENCY_CONVERGED@blob`）,

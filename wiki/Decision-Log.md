@@ -6,6 +6,64 @@
 
 ---
 
+### 2026-07-16（续61）· 窄幅复核返回 WITHHOLD（correction #4）+ owner 四裁决（venue_tier 改判/ID 核验前置/阶段语义/编码三深度）
+
+**Context.** 博导级对抗复审
+（`2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md`）对续60 申请书裁决
+**WITHHOLD SIGNATURE — TARGETED CORRECTION #4 REQUIRED**：G1 = CLOSED WITH LIMITATION /
+G2 = NOT CLOSED / G3 = NOT CLOSED / G4 = 合同传播闭、执行记录系统开 / G5 = CLOSED（17/17
+独立重验一致）/ G6 = PARTIALLY CLOSED；诚信分级 = FFP 未发现、claim–evidence mismatch 确认
+（QRP 风险）、不要求 proposal v4、§14 十一项清单全过即须签署。我方逐条独立核验
+（reviewer-response-protocol）：**复审仓内事实断言全部属实**（route 表 10 行范围写法非 50 条
+逐条 / §6 自检脚本仅存会话记录不可复跑 / REC-1 派生查询不可重建 / REC-2 仅 INCLUDED 建行 /
+`evidence_grade` 重复 / `information_source_classes` 示例歧义 / 51 查询无 cs.SE、cs.HC——
+机器统计证实 / 词表双侧归一化歧义）。对抗分析三点：① mismatch 定性混装三类——G3 = 真实
+完成态夸张（该认）、G4/G6 = 原要求已闭 + 本轮新增要求（措辞应更正）、G2 = 对已如实披露
+偏离的正常裁决驳回（非 mismatch）；② G2 裁决实质推翻续59 owner 裁决②的先验语义 → 须
+owner 亲裁；③ 复审 §9.2 的 13 篇 sentinel 本身未经我方核验（4 篇 2026 编号离线不可证，
+幻觉 ID 入冻结种子污染不可逆）。
+
+**Decision（owner 2026-07-16 四裁决）.** ① **venue_tier 采评审拆分**：tier 只保留发现
+优先级/DFS 排序键角色（梯队平局键不变），实验数字承重全归逐篇 `study_quality`（七维
+结构化：data boundary/对照公平/不确定性/消融归因/复现性/代码可得/claim–evidence match，
+每维 PASS|PARTIAL|FAIL|UNCLEAR|NA + locator + 编码者）；`T2_UNREVIEWED` 标签退役，同行
+评审状态由 `publication_status` 独立承担。② **sentinel ID 核验前置**（「不然错误或者
+幻觉会累积」）：注册 `ID_DEREFERENCE` 访问类——按已知 arXiv ID/DOI 取对应页面核验存在性+
+题名一致性，无查询串无发现行为故不计入 `queries_executed`（零查询 attestation 语义保持
+为真），但逐次留痕（id/时刻/HTTP 状态/HIT|MISMATCH|UNRESOLVED）入机器可读文件并在
+attestation 文字中披露；MISMATCH 者不入种子、回应信指明。③ **阶段语义确认**：survey
+执行 = Stage-1A 核心工作（正典 Research-Methodology：1A = 问题界定含广泛 survey；1B =
+方向性原型探索，标志 = 触碰模型，单次触碰即算实验+exposure）；owner 此前「Stage-1B 正在
+开始」表述据此更正，后续统一称「Stage-1A survey 执行期」。④ **编码三深度 + code-on-use
+（承重时点编码）**：Depth-0 = 每个 canonical 命中一行 ledger（书目字段脚本预填）；
+Depth-1 = INCLUDED 精简必填核；Depth-2 = 完整 REC-2 全合同 + 七维 study_quality，仅在
+工作实际承重（报告引用其数字支撑/摧毁/占据 claim，或标 direct threat）时强制。三道闸防
+暗降：validator 强制承重 claim 回指 Depth-2 完整行、不适用整块单字段 `NA:<理由>` 折叠、
+政策在 correction #4 中预注册并向评审明示待裁。执行 = **correction #4 六项**（C4-1 分层
+回应信 / C4-2 G2 修复 / C4-3 50 行机器可读 route + 仓内 validator + 持久化输出 / C4-4
+REC-0 工作级筛选去重 ledger + proximity 命名统一 + evidence_grade 正典化 +
+information_source_classes 真枚举 / C4-5 派生查询逐字段留痕 + GMT/节流/重试/resume/超限
+停止 + 离线合成 replay test / C4-6 sentinel 前置核验 + cs.SE、cs.HC 敏感性检查），严格按
+复审 §14 清单，一项不多。
+
+**Rationale.** ① 裁决②的辩护词混淆了阅读优先级（tier 已在 DFS 排序键，保留）与证据承重
+（全文强制 A2-9 + 逐篇强制 study_quality 使「初期承重无据」场景在协议上不存在）——评审
+拆分保住所需、只删冗余且有害的部分；② 前置核验成本极低而幻觉污染不可逆，且反向审计评审
+自身；③ 阶段分界 = 跑不跑模型，非忙不忙——「收官准备末段」称谓易误导为 1A 将尽，实则 1A
+最重证据工作尚未开始；④ PRISMA 同构（质量评估本就只对进入综合的研究做），吞吐估算
+~30h（300 命中×1.5min + 80 INCLUDED×8min + 30 承重×25min）对全员 Depth-2 的 ~53h+，
+承重处记录质量不降反升。回应信分层原则 = **认错认准——不该认的认了同样是记录失真**。
+
+**Consequences.** correction #4 同日执行 → 敌意内审环至一轮零新发现 → 提交 → bundle
+manifest dated correction #4 钉 blob → 再送窄幅复核；复审 §14 的「清单全过即须签署、
+不得再以可更完善为由延期」承诺钉入回应信作**双向合同**；签署前零查询维持，
+`ID_DEREFERENCE` 逐次留痕另册。讨论纪要 =
+`wiki/2026-07-16-c4-prep-owner-rulings-and-coding-depth-proposal.md`（本条落地后归档扫描）。
+
+**Supersedes.** 续59 Decision ②中「venue_tier = 默认先验权重（非纯元数据）」的先验语义
+—— dated supersession：先验角色收缩为发现优先级/排序键；其余机制（`T1_DEMOTED`/
+`T2_PROMOTED` 双向登记、T3 相关性裁决、threat 判定 tier-blind）继续有效并入七维结构化。
+
 ### 2026-07-16（续60）· amendment-3 批 owner 过目通过——Gate S1 窄幅复核申请书落盘送签
 
 **Context.** 续59 整改批（`37da7f3` + bundle correction #3 @`420ae2b`）交 owner 过目;owner
