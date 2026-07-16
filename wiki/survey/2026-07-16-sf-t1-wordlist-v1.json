@@ -1,0 +1,135 @@
+{
+ "artifact_id": "SF-T1-WORDLIST-2026-07-16-01",
+ "version": "v1",
+ "date": "2026-07-16",
+ "source": "wiki/survey/2026-07-16-sf-t1-proceedings-routes.md §3（逐项 verbatim 序列化；本件为机器正典，散文表为镜像）",
+ "match_rule": "A_any OR (B_any AND C_any)",
+ "match_semantics": "词边界整词/整短语；显式枚举；零通配符",
+ "normalization": {
+  "version": "norm-v1",
+  "steps": [
+   "lowercase",
+   "unicode NFKC",
+   "replace [-_/] with single space",
+   "collapse whitespace, strip"
+  ],
+  "applies_to": [
+   "title",
+   "wordlist_item"
+  ],
+  "dual_side_canon": "correction #4 裁定：词表项与题名以同一函数归一化后匹配（消除 v3 评审复审指出的单侧归一化实现歧义）；匹配在归一化空间进行",
+  "idempotent_verified": true
+ },
+ "groups": {
+  "A": [
+   "agent",
+   "agents",
+   "agentic",
+   "multi-agent",
+   "multiagent",
+   "tool use",
+   "tool-use",
+   "tool using",
+   "tool calling",
+   "function calling",
+   "orchestration",
+   "orchestrator",
+   "orchestrate",
+   "workflow",
+   "workflows",
+   "test-time",
+   "inference-time",
+   "training-free",
+   "tuning-free",
+   "gradient-free",
+   "reward-guided",
+   "reward guided",
+   "verifier",
+   "verifiers",
+   "self-correction",
+   "self-correct",
+   "self-refine",
+   "self-refinement",
+   "self-verification",
+   "llm-as-a-judge",
+   "llm-as-judge",
+   "best-of-n",
+   "reward hacking",
+   "overoptimization",
+   "over-optimization",
+   "black-box optimization",
+   "compound ai system",
+   "compound ai systems",
+   "copilot"
+  ],
+  "B": [
+   "llm",
+   "llms",
+   "large language model",
+   "language model",
+   "foundation model",
+   "multimodal",
+   "multi-modal",
+   "omni",
+   "audio",
+   "speech",
+   "auditory",
+   "spoken",
+   "voice",
+   "vision-language",
+   "vlm",
+   "mllm",
+   "audio-language",
+   "speech-language"
+  ],
+  "C": [
+   "memory",
+   "skill",
+   "skills",
+   "planning",
+   "planner",
+   "search",
+   "feedback",
+   "reward",
+   "verification",
+   "self-evaluation",
+   "reflection",
+   "judge",
+   "routing",
+   "stopping",
+   "abstention",
+   "assistant"
+  ]
+ },
+ "counts_raw": {
+  "A": 39,
+  "B": 18,
+  "C": 16,
+  "total": 73
+ },
+ "counts_effective_after_normalization": {
+  "A": 37,
+  "B": 18,
+  "C": 16,
+  "total": 71
+ },
+ "normalization_merges": [
+  {
+   "group": "A",
+   "normalized": "tool use",
+   "raw_items": [
+    "tool use",
+    "tool-use"
+   ]
+  },
+  {
+   "group": "A",
+   "normalized": "reward guided",
+   "raw_items": [
+    "reward-guided",
+    "reward guided"
+   ]
+  }
+ ],
+ "note": "raw = 纸面登记项数（73）；effective = 双侧归一化去重后的有效词项数。两个数并列登记，散文『73 项』自此指 raw，机器匹配以 effective 集合为准。"
+}

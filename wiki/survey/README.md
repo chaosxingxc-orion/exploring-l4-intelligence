@@ -10,6 +10,48 @@
 > 核查）/ `RETAINED_RECORDS@census-v2`（在 94 记录簇→95 works 保留记录内,@28ad858）/
 > `ROUND2_PREREGISTERED_TARGET`（round-2 预注册待查目标,零执行,题录级 AS_GIVEN_BY_REVIEW）/
 > `TRAINED_COMPARATOR`（带训练组件的对照臂,TF-Strict 下永不承重）。
+> **流程/状态 token（重校准评审提供,proposal v2 起用）**：`PROVISIONAL_STAGE1A_TAXONOMY`
+> （五合同现阶段身份=暂定分类学,survey 证据可修订）/ `candidate_kill_logic_for_stage1b_design`
+> （kill 表现阶段身份=1B 设计候选逻辑,非冻结实验）/ `OUT_OF_SCOPE_WEIGHT_UPDATED`（test-time
+> 权重更新类,边界对照）/ `PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING`
+> （Gate S1 两段式状态）/ `TO_VERIFY_FULLTEXT`（delta 叙述待全文核验）/ `KNOWN`（survey 执行
+> 期去重标记:命中 census v2 既有 work,仍全量登记）。
+> **检索策略 token（amendment-2 起用;venue_tier 语义经 A3-2、correction #4 C4-2 两次原位
+> 修订）**：`venue_tier`（T1 十会正会/T2 其他含 preprint/T3 workshop——**发现层元数据 +
+> §4bis 排序键平局,零证据权重〔C4-2,owner 裁决① 续61〕**;T3 按相关性/质量裁决不再自动
+> 排除;承重由 study_quality 七维决定）/ `T2_UNREVIEWED`（**已退役,C4-2**——对非 T1 同行
+> 评审 venue 构成误标;同行评审状态由 `publication_status` 表达,历史文件读法=当时先验语义）/
+> `REMOVED_UNOBTAINABLE`（无 arXiv 且无法备份,移除并计数）/ `COMMON_NODE`（引文图 ≥3 图共现
+> 且不触发判据的公共文献,登记不扩展）/ `dfs_trigger`（T-a 对象/T-b 问题/T-c 要素/T-d 结论
+> 冲突,多值）/ `topic_relevance`（core/element）。
+> **副源可回放等级 token（routes manifest 起用）**：`REPLAYABLE_API`（接口可确定性重放,含
+> 分页冻结）/ `DISCOVERY_ONLY`（网页排序不可确定性重放,命中回 DOI/arXiv/OpenAlex 稳定 ID）/
+> `DETERMINISTIC_WEB`（URL 参数化可导出——已登记备用,现无路线使用）。
+> **amendment-3 token（2026-07-16 起用）**：`REMOVED_PAYWALLED_UNOBTAINABLE`（付费且无
+> arXiv/免费官方版,计数移除记账——移除事件+ID+题名+venue 入 flow report,占据类结论必须披露
+> 移除计数,A3-1）/ `T2_PROMOTED` `T1_DEMOTED`（**已退役,C4-2**——先验语义退役后无先验可
+> 覆盖;历史文件读法=A3-2 双向覆盖机制）/ `initial_tag`（种子初判多值枚举 DIRECT_THREAT/
+> TRAINED_COMPARATOR/METHOD_LINEAGE/COMPONENT_ANALOGY——仅管阅读优先级,A3-7;批次3 扩
+> MANDATORY_SEED/DISCOVERY_NAVIGATION/PERSISTENCE_BOUNDARY/CONTROL_BASELINE/
+> COMPONENT_COMPARATOR/CATEGORY_SENTINEL/FULLTEXT_AUDIT/SPLIT_TRAINED_VS_TF/NAMING_THREAT/
+> IDENTITY_AUDIT/MECHANISM_CONTRAST,C4-6）/
+> **correction #4 token（2026-07-16 起用）**：`ID_DEREFERENCE`（按已知 arXiv ID/DOI 取页
+> 核验存在性+题名——非检索查询,不计 queries_executed,逐次留痕,owner 裁决② 续61）/
+> `coding_depth`（D0 主账行/D1 精简核/D2 承重全合同——**承重时点编码 code-on-use**,承重
+> claim 必须回指 D2 行,amendment-4）/ `REC-0`（工作级筛选/去重/裁决主账,C4-4）/
+> `API_LIMIT_SINGLE_DAY_OVER_2000`（单日窗口仍超 slice 上限的硬停止登记,C4-5）/
+> `EXPLAINED_MISS`（sentinel recall 裁决:未命中但解释+兜底路径已登记,C4-6）/
+> `LATE_RECONSTRUCTED_REVIEW_SUMMARY`（迟归档敌意环记录的统一定名——复盘可用,不等同原始
+> replay,A3-12）。**模板编号纪律（A3-4;C4-4 增 REC-0）**：空白模板 = `REC-0..REC-7`,`T` 前缀为 venue 梯队
+> 独占。**convergence 纪律（A3-10）**：声明必须带对象与锚（如 `TEXT_CONSISTENCY_CONVERGED@blob`）,
+> 裸 `CONVERGED` 停用。
+> **信息来源六类分解（v3 外审 §2.2-G 起用,系 read-out/new-info 二分的直系升级——抽取轴与
+> 归因纪律共用）**：①task-native observation ②pretrained-knowledge read-out ③deterministic
+> transformation/computation ④endogenous environment feedback（agent 动作引致）⑤exogenous
+> answer-bearing retrieval / new-info ⑥evaluation gold（禁入决策路径）。每个候选机制标注
+> 所用类别;⑤类增益不得概括为「激活预训练知识」。**manifest 策展期中文值 = 登记 token 的
+> 显示形**：题录AS_GIVEN↔AS_CITED_BY_REVIEW、census在库(题录+)↔RETAINED_RECORDS@census-v2、
+> delta待全文核验↔TO_VERIFY_FULLTEXT（协议 §3 有映射表,执行期升级改记五级英文标尺）。
 >
 > **勿再引已撤回口径**（"~93 papers" / "305 queries" / "I4 最干净 whitespace"——现行结论一律
 > 按身份索引表：RESP-02 §3.3 与 [[Research-Objective]] §4/§5）。Survey v2 状态 =

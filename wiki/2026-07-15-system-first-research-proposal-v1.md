@@ -7,7 +7,8 @@ supersedes: "STAGE1A-PROPOSAL-2026-07-15-01（selector-first）作为主提案�
 identity_authority: "Gate S0 已签署（续48,via 会话指令）：primary_object=黑盒 omni agentic system;north_star_method=training-free reward-guided external control;training_free_scope=TF-Strict（全系统零训练）"
 evidence_discipline: "全部既有数字 directional-only / hypothesis-grade;否定性结论按身份索引+强制伴随 token;先行工作占据状态一律 AS_CITED_BY_REVIEW / RETAINED_RECORDS@census-v2 / ROUND2_PREREGISTERED_TARGET（token 登记于 wiki/survey/README.md）,待可回放 system-first survey 核验;无任何确证宣称、无任何「首个」宣称"
 generated_by: "Claude Fable 5 主会话协调者亲笔（签署级工件不委托）"
-hostile_review: "R1 三镜头（授权合规/事实指针/术语纪律,各 Opus 独立并行）：镜头A=0 MAJOR+2 MINOR（agentic 合同缺 v2 §3.4 第六条件;P0-SYS-2 处置未披露）,十一节次序/七禁句/首个宣称全过;镜头B=1 MAJOR（CoVer 误标 census token——paper_works.jsonl 实测 grep 0 命中,实为 round-2 零执行预注册目标,与提案自身零执行口径自相矛盾）,数字/commit 锚/十条 arXiv 编号/owner 裁决转述全过;镜头C=2 MAJOR（同 CoVer 且与 RESP-02 §3.3 集外声明矛盾;自造 C-BB…C-OM 五码未登记+「C」命名空间第三次同形）+3 MINOR。合并=2 独立 MAJOR+5 MINOR;协调者逐项亲验后全部修复（五合同弃短代号改描述名/CoVer 改 ROUND2_PREREGISTERED_TARGET/补 agentic 第六条件/补 P0-SYS-2 披露/token 复数对齐并登记 L3 库入口/census 计数带溯源/Proposal E 限定语）;R2 独立复检=7/7 FIXED+零新发现 → CONVERGED。过程教训：草稿曾预写虚构审计块,提交前自纠,新硬规=审计字段先 PENDING 实测后更新（续49）"
+hostile_review: "R1 三镜头（授权合规/事实指针/术语纪律,各 Opus 独立并行）：镜头A=0 MAJOR+2 MINOR（agentic 合同缺 v2 §3.4 第六条件;P0-SYS-2 处置未披露）,十一节次序/七禁句/首个宣称全过;镜头B=1 MAJOR（CoVer 误标 census token——paper_works.jsonl 实测 grep 0 命中,实为 round-2 零执行预注册目标,与提案自身零执行口径自相矛盾）,数字/commit 锚/十条 arXiv 编号/owner 裁决转述全过;镜头C=2 MAJOR（同 CoVer 且与 RESP-02 §3.3 集外声明矛盾;自造 C-BB…C-OM 五码未登记+「C」命名空间第三次同形）+3 MINOR。合并=2 独立 MAJOR+5 MINOR;协调者逐项亲验后全部修复（五合同弃短代号改描述名/CoVer 改 ROUND2_PREREGISTERED_TARGET/补 agentic 第六条件/补 P0-SYS-2 披露/token 复数对齐并登记 L3 库入口/census 计数带溯源/Proposal E 限定语）;R2 独立复检=7/7 FIXED+零新发现 → CONVERGED（**环内判定**=一轮零新发现,不等于外部评审通过——重校准评审 §6 措辞建议已采）。原始镜头报告归档 docs/checks/2026-07-15-proposal-v1-hostile-review-lenses.md。过程教训：草稿曾预写虚构审计块,提交前自纠,新硬规=审计字段先 PENDING 实测后更新（续49）"
+external_review: "同日两轮：严评（RETURN_FOR_MAJOR_REVISION,六承重缺陷）→ 重校准评审（ACCEPTABLE_TO_PROCEED_WITH_STAGE1A_SURVEY_PROTOCOLIZATION——撤回预算 cap 前置/RL 二选一前置/轨迹 headroom 冻结/选择性遗漏 QRP 红旗/完整工程平台要求,判其为阶段错位;Gate S1=PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING）。严评**仍成立**四项已按勘误批次修复：①Reflexion/LATS/Voyager/LLM-as-Verifier 四行 delta 过度乐观→改写并标 TO_VERIFY_FULLTEXT;②P0-LIT-1 自库强近邻遗漏→5 条自 census v2 检回补入 §4（L3 检索失效实例,新规:写表先查自库）;③CONVERGED 加环内限定;④内审原始工件归档。协议质量标准采严评 P0-LIT-3 八项最低规格"
 owner_transmission: PENDING — owner 审阅后转交 reviewer
 ---
 
@@ -119,16 +120,29 @@ innovation_status     = 系统级创新 = owner 选择的创新假设；占据�
 
 | 先行工作 | 占据什么 | 候选机制 delta（假设,待核查） | 状态 |
 |---|---|---|---|
-| ReAct (2210.03629) | 推理×行动交织,反馈→下一步 | 文本域;无 omni 核心在环、无兑现率记账 | AS_CITED_BY_REVIEW |
-| Reflexion (2303.11366) | 语言反馈+情节记忆迭代改进 | 同上;其「训练自由」不含严格黑盒约束 | AS_CITED_BY_REVIEW |
-| LATS (2310.04406) | 搜索+价值/反馈+agent 轨迹 | 无 TF-Strict 全系统约束、无模态因果接地 | AS_CITED_BY_REVIEW |
+| ReAct (2210.03629) | 推理×行动交织,反馈→下一步 | 文本域;delta 只能落在 native omni 在环与系统化控制,非「有无 agent loop」 | AS_CITED_BY_REVIEW |
+| Reflexion (2303.11366) | 语言反馈+情节记忆迭代改进——原文明确**不更新权重**、可由黑盒 API 实现 | delta 候选仅剩 omni 感知环+兑现记账;**不得以「未声明严格黑盒」造差**（严评 §2.2 更正,TO_VERIFY_FULLTEXT） | AS_CITED_BY_REVIEW |
+| LATS (2310.04406) | gradient-free MCTS + LM value/self-reflection + 环境反馈——与外部 reward-guided controller **高度相邻** | delta 候选仅剩 omni 接地与黑盒接口约束（严评 §2.2 更正,TO_VERIFY_FULLTEXT） | AS_CITED_BY_REVIEW |
 | IAD (2504.01931) | agentic test-time 的 sampling–evaluation–feedback 三分 | **UMBRELLA 预登记坍缩风险**（立项即登记）——最直接的框架级占据者,必查 | RETAINED_RECORDS@census-v2 |
 | MM-ReAct (2303.11381) | 中央 LLM 编排视觉专家 | 中央体纯文本;omni 核心不在环 | AS_CITED_BY_REVIEW |
 | ViperGPT (2303.08128) | 代码生成+模块执行的视觉推理 | 同上;无 reward-guided 序列控制 | AS_CITED_BY_REVIEW |
-| Voyager (2305.16291) | 环境反馈+技能库的持续 agent | 具身/代码域;无冻结 omni 感知环 | AS_CITED_BY_REVIEW |
+| Voyager (2305.16291) | GPT-4 **黑盒调用、零微调**、环境反馈+自验证+技能库——直接占据 black-box+无权重更新+持久外部技能 | delta 候选=omni 感知与语音任务格（严评 §2.2 更正,TO_VERIFY_FULLTEXT） | AS_CITED_BY_REVIEW |
 | AudioToolAgent (2510.02995) | 中央 LLM 编排 audio-language tools | **音频 agentic 组合空间的直接占据者**;delta 候选=omni 核心自身在环接触音频（非工具转述）——若不成立即降名（omni 合同 kill 即坍缩到其邻域） | AS_CITED_BY_REVIEW |
-| LLM-as-Verifier (2607.05391) | 免训练通用验证+agentic feedback | evaluator 组件层先行;不占系统身份 | AS_CITED_BY_REVIEW |
-| CoVer (2602.12281) | test-time verification 作用于指令+动作 | 已预注册为对 Proposal E（survey-v2 §8 A–E 提案集之 E,活代号——勿与知识栈评审死「方案 A」族混同）的最近邻威胁;系统层重查 | ROUND2_PREREGISTERED_TARGET |
+| LLM-as-Verifier (2607.05391) | 免训练通用验证+agentic feedback（含 task-progress proxy/dense feedback 用法） | evaluator 组件层先行;「不占系统身份」**待全文核验**（严评:该判断过早,TO_VERIFY_FULLTEXT） | AS_CITED_BY_REVIEW |
+| CoVer (2602.12281) | test-time verification 作用于指令+动作（**训练型** verifier→TRAINED_COMPARATOR 边界对照,不承重 TF-Strict） | 已预注册为对 Proposal E（survey-v2 §8 A–E 提案集之 E,活代号——勿与知识栈评审死「方案 A」族混同）的最近邻威胁;系统层重查 | ROUND2_PREREGISTERED_TARGET |
+| **JitRL (2601.18510)** | 非参数经验记忆估计 advantage、调制 action logits——**training-free RL 最直接机制近邻** | 需 logit access,不满足严格黑盒→「方法最近、接口不合」的主边界论文 | RETAINED_RECORDS@census-v2 |
+| **Audio-Mind (2605.28480)** | 冻结 omni 前端 + planner-guided 有界工具使用/重听 | 直接压力测试 frozen-omni agentic system 与长链退化（ledger 有 full-text locator） | RETAINED_RECORDS@census-v2 |
+| **Agent-Omni (2511.02834)** | 不重训协调 text/image/audio/video 专家 | system-level omni orchestration 直接竞争者;delta 候选=omni 核心自身在环 vs 专家路由 | RETAINED_RECORDS@census-v2 |
+| **EChO-Agent (2606.15141)** | 冻结 Qwen3-Omni 的 Tool→Evidence→Reason→Verify 音频推理工作流 | **native audio/omni agent 直接近邻**;delta 候选=reward→下一步动作的控制回路 | RETAINED_RECORDS@census-v2 |
+| **AuTAgent (2602.13685)** | 训练 tool policy 决定「何时调用哪个音频工具」并报告 tool-selection 上界 | TRAINED_COMPARATOR 边界对照,不承重 TF-Strict | RETAINED_RECORDS@census-v2 |
+
+**表末五行的登记说明（勘误性补入）**：JitRL/Audio-Mind/Agent-Omni/EChO-Agent/AuTAgent 五条系
+外审 v1 严评 P0-LIT-1 指出后自我方 census v2 **检回**（grep 实证五条均在库）——首版遗漏即 L3
+探索知识「检索失效」的当日实例（新规：**写任何最近邻/占据表前必须先查自库**）。协议 mandatory
+seeds 另含评审补充、待题录解析的：AWM (2409.07429) / ExpeL (2308.10144)（外部记忆/经验学习占据）、
+Self-Refine / CRITIC / TPO（黑盒反馈修订族）、HuggingGPT / AudioGPT（复合系统编排族）、
+DSPy / TextGrad（compound-system optimization 族）、TTRL (2504.16084)（test-time **权重更新**
+边界对照,归 OUT_OF_SCOPE_WEIGHT_UPDATED）。
 
 **候选 delta 的诚实陈述**：以上第三列全部是**待证伪假设**。特别声明两条自警：①不以「无单篇
 同时含全部组件」式合取缺席论证新颖性（禁句 §2）；②bare-I2 机制已被 scaling-auditory

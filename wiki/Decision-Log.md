@@ -6,6 +6,452 @@
 
 ---
 
+### 2026-07-16（续62）· 博导复审 #4A（WITHHOLD）全量核验属实 + owner 三裁决（P0-R4 时点/D2-core 直接接受/机械化状态动词）+ token 退役语义澄清（P0-R7）
+
+**Context.** 博导复审（`2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md`，untracked
+入库随本批提交）对 correction #4 回应裁决 **WITHHOLD — CORRECTION #4A REQUIRED**（五阻断项 +
+material QRP 认定 + 8 项 P0）。我方按 reviewer-response-protocol **亲自逐条独立核验（不委托）**：
+①仓内事实断言**全部属实**——splitter 宣称 YEAR→MONTH→DAY 实则 ROOT 直拆月且真实冻结行必
+KeyError（`query_sha256` 0/53）、amendment-4 承诺的 record validator 不存在、sentinel 硬编码
+"51 rows" 且 EXPLAINED_MISS 不可证伪、类目缺 cs.MM/cs.MA、协议/README 陈旧口径共存、续61
+Supersedes 与 amendment-4 的 token 退役语义直接冲突、TF-TTCL 旧日志行 241 已发现却 0 转录；
+②评审新引 **7/7 引文零幻觉**（逐 ID dereference + verbatim 摘要，留痕 =
+`2026-07-16-sf-access-log-c4a-review-verification.jsonl`）；③外部事实属实——ACL 2026 会期
+7月2–7日已过且 Anthology 卷已出版（`NOT_YET_PUBLISHED` 为**冻结当时即错**，非事后过时）、
+PMLR v267 = ICML 2025 已出版。对抗保留两点：QRP-4 定性中「约 25 次先前访问」系我方 log header
+主动聚合披露（准确定性 = 顶层 attestation 未携带双计数，非隐瞒）；P0-R4 将 route 状态核验从
+预注册的「执行首步」提前至「签署前」，属合同时点收紧（如实点破并接受——ACL 2026 属
+wrong-at-freeze，收紧有据）。
+
+**Decision（owner 2026-07-16 三裁决 + 执行选项）.** ① **接受 correction #4A 全部 8 项 P0**，
+含 P0-R4 时点收紧（回应信如实记录合同演化，不讨价还价）；② **D2 触发集扩张直接接受**——
+`topic_relevance:"core"` 亦强制 D2（评审 P0-R3 对 amendment-4 code-on-use 的增量），不做前置
+吞吐估算，执行中如实呈报吞吐（「没必要估计啥吧,直接干」）；③ **机械化状态动词**：签署清单
+的状态一律由 `scripts/survey/sf_package_summary.py` 从持久化证据文件推导，人工手填完成态
+废止——同时治 P0-R1 陈旧口径与 premature closure 根因（G3 同型惯性第三次复发的结构性防复发）。
+执行选项：P0-R2 取**选项 1**（实装 `_year_windows`，保留 ROOT→YEAR→MONTH→DAY 三层合同）——
+协议 amendment-4 §G6 已冻结该语义，且跨多年 root 年层探针数远小于直拆月。
+
+**token 退役语义澄清（P0-R7 dated supersession，续61 原文不改写）.**
+`T2_UNREVIEWED` / `T1_DEMOTED` / `T2_PROMOTED` 作为**证据权重/先验 token 全部退役**（正典 =
+amendment-4 C4-2）；续61 Supersedes 所称「双向登记继续有效」的准确语义 = **登记职能**（某 T1
+篇为何不承重、某 T3 篇为何值得读的理由记录）迁入七维 `study_quality` 的 reason/locator 与
+REC-0 的 reason 字段——**token 本身不再出现在任何新记录**；历史记录中的旧 token 仅作
+provenance 保留，读旧件按本条映射；`venue_tier` 仅存排序键/发现层三职能（T1 手扫范围、DFS
+平局键、coverage 分层描述），绝不影响 evidence weight。同名不承载两定义，自本条起消歧。
+
+**Rationale.** ①评审事实可信度经两轮全量核验无瑕疵（上轮 13/13、本轮 7/7 引文零幻觉），其
+P0 清单全部有据；时点收紧的实质理由 = 签署对象不得包含已知为假的冻结事实；②core 篇量未知但
+评审拥有严谨性裁决权，吞吐属执行呈报事项非谈判筹码；③根因治理优于逐次小心——动词由证据
+生成后，「全绿超前」在结构上不可能再发生。
+
+**Consequences.** correction #4A 交付：amendment-5（P0 逐项 + route 状态审计裁定表 + SF-L11 +
+词项 provenance）、回应信（含 7/7 核验致谢、QRP-4 分层陈述、时点收紧记录）、8 项 P0 工件
+（YEAR 层 splitter + realrow dryrun 17/17、record validator + 正负 fixtures 16/16、sentinel
+四分法 21 哨兵零 UNRESOLVED〔两 held-out 均纯查询召回,VQQA 5 hits 验证 SF-L11〕、55 查询
+（前 53 行字节不变）、92 种子（TF-TTCL 转录失败在案登记）、routes v2 + 双层审计、package
+summary 机器清单、双计数 attestation）；新 access class 追认（`VENUE_STATUS_CHECK` /
+`WEB_SEARCH_STATUS`，事实核查用途，非 discovery）；敌意内审环至一轮零新发现后两段提交，
+再送窄幅复核（P0-R8）。签署前 discovery query 维持 0、模型触碰维持 0。
+
+### 2026-07-16（续61）· 窄幅复核返回 WITHHOLD（correction #4）+ owner 四裁决（venue_tier 改判/ID 核验前置/阶段语义/编码三深度）
+
+**Context.** 博导级对抗复审
+（`2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md`）对续60 申请书裁决
+**WITHHOLD SIGNATURE — TARGETED CORRECTION #4 REQUIRED**：G1 = CLOSED WITH LIMITATION /
+G2 = NOT CLOSED / G3 = NOT CLOSED / G4 = 合同传播闭、执行记录系统开 / G5 = CLOSED（17/17
+独立重验一致）/ G6 = PARTIALLY CLOSED；诚信分级 = FFP 未发现、claim–evidence mismatch 确认
+（QRP 风险）、不要求 proposal v4、§14 十一项清单全过即须签署。我方逐条独立核验
+（reviewer-response-protocol）：**复审仓内事实断言全部属实**（route 表 10 行范围写法非 50 条
+逐条 / §6 自检脚本仅存会话记录不可复跑 / REC-1 派生查询不可重建 / REC-2 仅 INCLUDED 建行 /
+`evidence_grade` 重复 / `information_source_classes` 示例歧义 / 51 查询无 cs.SE、cs.HC——
+机器统计证实 / 词表双侧归一化歧义）。对抗分析三点：① mismatch 定性混装三类——G3 = 真实
+完成态夸张（该认）、G4/G6 = 原要求已闭 + 本轮新增要求（措辞应更正）、G2 = 对已如实披露
+偏离的正常裁决驳回（非 mismatch）；② G2 裁决实质推翻续59 owner 裁决②的先验语义 → 须
+owner 亲裁；③ 复审 §9.2 的 13 篇 sentinel 本身未经我方核验（4 篇 2026 编号离线不可证，
+幻觉 ID 入冻结种子污染不可逆）。
+
+**Decision（owner 2026-07-16 四裁决）.** ① **venue_tier 采评审拆分**：tier 只保留发现
+优先级/DFS 排序键角色（梯队平局键不变），实验数字承重全归逐篇 `study_quality`（七维
+结构化：data boundary/对照公平/不确定性/消融归因/复现性/代码可得/claim–evidence match，
+每维 PASS|PARTIAL|FAIL|UNCLEAR|NA + locator + 编码者）；`T2_UNREVIEWED` 标签退役，同行
+评审状态由 `publication_status` 独立承担。② **sentinel ID 核验前置**（「不然错误或者
+幻觉会累积」）：注册 `ID_DEREFERENCE` 访问类——按已知 arXiv ID/DOI 取对应页面核验存在性+
+题名一致性，无查询串无发现行为故不计入 `queries_executed`（零查询 attestation 语义保持
+为真），但逐次留痕（id/时刻/HTTP 状态/HIT|MISMATCH|UNRESOLVED）入机器可读文件并在
+attestation 文字中披露；MISMATCH 者不入种子、回应信指明。③ **阶段语义确认**：survey
+执行 = Stage-1A 核心工作（正典 Research-Methodology：1A = 问题界定含广泛 survey；1B =
+方向性原型探索，标志 = 触碰模型，单次触碰即算实验+exposure）；owner 此前「Stage-1B 正在
+开始」表述据此更正，后续统一称「Stage-1A survey 执行期」。④ **编码三深度 + code-on-use
+（承重时点编码）**：Depth-0 = 每个 canonical 命中一行 ledger（书目字段脚本预填）；
+Depth-1 = INCLUDED 精简必填核；Depth-2 = 完整 REC-2 全合同 + 七维 study_quality，仅在
+工作实际承重（报告引用其数字支撑/摧毁/占据 claim，或标 direct threat）时强制。三道闸防
+暗降：validator 强制承重 claim 回指 Depth-2 完整行、不适用整块单字段 `NA:<理由>` 折叠、
+政策在 correction #4 中预注册并向评审明示待裁。执行 = **correction #4 六项**（C4-1 分层
+回应信 / C4-2 G2 修复 / C4-3 50 行机器可读 route + 仓内 validator + 持久化输出 / C4-4
+REC-0 工作级筛选去重 ledger + proximity 命名统一 + evidence_grade 正典化 +
+information_source_classes 真枚举 / C4-5 派生查询逐字段留痕 + GMT/节流/重试/resume/超限
+停止 + 离线合成 replay test / C4-6 sentinel 前置核验 + cs.SE、cs.HC 敏感性检查），严格按
+复审 §14 清单，一项不多。
+
+**Rationale.** ① 裁决②的辩护词混淆了阅读优先级（tier 已在 DFS 排序键，保留）与证据承重
+（全文强制 A2-9 + 逐篇强制 study_quality 使「初期承重无据」场景在协议上不存在）——评审
+拆分保住所需、只删冗余且有害的部分；② 前置核验成本极低而幻觉污染不可逆，且反向审计评审
+自身；③ 阶段分界 = 跑不跑模型，非忙不忙——「收官准备末段」称谓易误导为 1A 将尽，实则 1A
+最重证据工作尚未开始；④ PRISMA 同构（质量评估本就只对进入综合的研究做），吞吐估算
+~30h（300 命中×1.5min + 80 INCLUDED×8min + 30 承重×25min）对全员 Depth-2 的 ~53h+，
+承重处记录质量不降反升。回应信分层原则 = **认错认准——不该认的认了同样是记录失真**。
+
+**Consequences.** correction #4 同日执行 → 敌意内审环至一轮零新发现 → 提交 → bundle
+manifest dated correction #4 钉 blob → 再送窄幅复核；复审 §14 的「清单全过即须签署、
+不得再以可更完善为由延期」承诺钉入回应信作**双向合同**；签署前零查询维持，
+`ID_DEREFERENCE` 逐次留痕另册。讨论纪要 =
+`wiki/2026-07-16-c4-prep-owner-rulings-and-coding-depth-proposal.md`（本条落地后归档扫描）。
+
+**Supersedes.** 续59 Decision ②中「venue_tier = 默认先验权重（非纯元数据）」的先验语义
+—— dated supersession：先验角色收缩为发现优先级/排序键；其余机制（`T1_DEMOTED`/
+`T2_PROMOTED` 双向登记、T3 相关性裁决、threat 判定 tier-blind）继续有效并入七维结构化。
+
+### 2026-07-16（续60）· amendment-3 批 owner 过目通过——Gate S1 窄幅复核申请书落盘送签
+
+**Context.** 续59 整改批（`37da7f3` + bundle correction #3 @`420ae2b`）交 owner 过目;owner
+批复「我觉得现在没啥问题」并指示写一份面向 reviewer 的明确送签件。
+
+**Decision.** 落盘送签申请书 `wiki/survey/2026-07-16-gate-s1-rereview-application.md`
+（SF-S1-REREVIEW-APP-2026-07-16-01）：签署对象 = correction #3 @37da7f3 不可变 17 件集合
+（六件套映射 = 协议 §12）;G1–G6 逐项闭合对照 + P0-1..P0-6 checkbox 对照;**两处对评审原文的
+有意偏离独立成节请评审裁决**（① 付费不可得 = `REMOVED_PAYWALLED_UNOBTAINABLE` 计数移除记账,
+非评审原文的语料内 coverage-gap 保留〔owner 裁决①〕;② venue_tier 保留默认先验 +
+study_quality 双向覆盖,非纯 publication metadata〔owner 裁决②〕）;执行期义务四项如实列出
+（flow-report 移除记账/VideoAgent-2026 存在性/occupancy version-pin/ENTRY_TO_RESOLVE）;
+请求范围 = 窄幅复核（G1–G6 闭合 + bundle 一致性,评审 §7.2/§9/§11 原定）,不开 proposal
+轮次;owner 送签批准与协议 §12 签署区「owner 执行批准」显式分立。
+
+**Rationale.** 评审已自限窄幅范围,申请书把闭合证据集中为单件使复核无需翻散件;偏离不埋正文
+而独立 §4 请裁决——评审拥有严谨性裁决权（reviewer-drift 纪律的对称义务）;签署级文本由协调者
+亲笔、校验交独立镜头（model-division-of-labor）。
+
+**Consequences.** 申请书自身过独立敌意校验镜头（禁网:blob 17/17 重算、评审引文逐字比对、
+数字逐项、偏离披露完备性扫描）：R1 = 1 MAJOR（协议章节号误引 §13→§12 共 4 处,被引内容
+verbatim 正确）+ 1 MINOR + 4 NIT → 全部修复 → R2 grep 复检清零（协调者亲验）。热层
+last_refresh 续60 + Per-Work-Status W1 行同步。下一步 = reviewer 窄幅复核 → 通过后 owner
+执行批准 + P0-R8 状态门复跑 → survey 首条查询。签署前零查询维持（attestation=0）。
+
+**Supersedes.** 无新取代;续59 Consequences 的「重新申请窄幅复核」动作项由本条落实。
+
+### 2026-07-16（续59）· v3 收官就绪度评审收档（Gate S1 WITHHOLD）+ owner 四裁决 + amendment-3 整改批一次性落盘
+
+**Context.** 独立收官就绪度评审
+（`2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md`,审
+@705b69a,proposal blob `ed750194…`/protocol blob `62bc2f90…`）四分裁决：v3 工作纲领 =
+**ACCEPT AS WORKING THESIS** / 上轮响应 = SUBSTANTIAL BUT INCOMPLETE / Gate S1 =
+**WITHHOLD SIGNATURE — TARGETED MAJOR REVISION**（阻塞项 G1 来源偏差 / G2 梯队≠质量 /
+G3 route 未实例化 / G4 schema 未传播 / G5 bundle 失效 / G6 分页缺陷）/ 阶段 = 收官**准备**
+末段而非科学尾声。我方逐项独立核验（reviewer-response-protocol）：correction #2 钉旧 blob
+（`10185474…`/`775fb761…` vs 现行 `ed750194…`/`62bc2f90…`）、静态验证报告输入 SHA 陈旧
+（`b217fbc0…` vs `8abdcb20…`）、REC 字段四组缺失、route 零实例化、评审点名 14 篇全部不在
+60 种子、热层停续56——**全部属实**;另发现 amendment-2 无独立文件（在 `-amendment-1.md` 内
+追加,落盘纪律不一致）。对抗分析三点：G2 与续58「三梯队管证据权重」owner 裁决正面冲突（须
+owner 亲裁）;G1 的付费前提经事实核查大部不成立（T1 十会 8/10 免费官方开放获取,真付费仅
+ICASSP/ACM MM——其 2017 年覆盖率论据亦偏旧,核心 lane 偏差弱于其定性）;评审自身有 meta
+膨胀自反性（§7.2 禁新元报告,G5 又要独立 signoff review）。
+
+**Decision（owner 2026-07-16 四裁决）.** ① 来源 = 修正方案 A：「有免费的官方文件也可以,
+但是付费就废弃这条记录,因为我们获取不到原文」——落地为 A3-1（arXiv-primary + 免费官方源
+救援 + `REMOVED_PAYWALLED_UNOBTAINABLE` 计数移除记账:记录退出语料不承重,移除事件+ID+计数
+入 flow report,占据类结论必须披露计数——与评审「不从存在性记录中消失」以记账方式兼容）;
+② 梯队 =「按照你的逻辑走」：venue_tier 降为默认先验 + `study_quality` 双向覆盖
+（`T2_PROMOTED`/`T1_DEMOTED` 登记理由）+ T3 按相关性/质量裁决,threat 判定不看梯队（A3-2,
+拒绝评审「tier 全降元数据」的矫枉过正）;③ 阶段称谓重校准 GO（A3-11）;④ 整改一批次写完,
+不出 proposal v4。执行 = amendment-3 A3-1..A3-12（独立日期件,自此恢复一修正案一件纪律）+
+种子批次2（+14=74,新字段 `initial_tag`）+ 3 条增补查询（51 条,离线敏感性审计定盲区,48 原批
+字节前缀不变）+ 50 route 实例化（`2026-07-16-sf-t1-proceedings-routes.md`）+ 模板改
+REC-1..REC-7 + 五合同 schema 传播（REC-2 四字段组）+ v3 errata-2 八项 + README token 登记 +
+热层/Per-Work 刷新。分工按 model-division-of-labor：敏感性审计/核验镜头 = Opus,编译器代码 =
+Sonnet,签署级文本与终验 = 协调者本人。
+
+**Rationale.** 方案 A 在本项目 venue 组合下实际零成本,保住占据结论强度（方案 B 降名会废掉
+NO_DIRECT_MATCH 类结论的可用性）;tier 全降元数据丢掉 owner 梯队骨架,「先验+质量覆盖」同时
+满足评审的独立质量轴与续58 裁决的延续性;付费废弃与存在性记账不冲突——退出语料 ≠ 退出账本;
+G5 的「独立 static signoff review」压缩为机器可验证件（复跑报告+correction #3）,不再造散文
+元报告（评审 §7.2 自身的要求）。
+
+**Consequences.** 敌意环收敛 → 提交 → bundle correction #3 钉现行全件 → 重新申请
+search-design **窄幅复核**（只查 G1–G6 闭合与 bundle 一致性）;签署前零查询维持
+（attestation=0）;签署后第一动作 = survey 执行,不再开 proposal 轮次。敏感性审计逐篇结论
+留痕：48 条稳收 AFlow/RAP/PromptAgent;ADAS/GPTSwarm/Magentic-One/AutoGen/Chameleon/AVIS 为
+真漏网（3 条增补覆盖,预期召回逐条登记于协议 §4 增补行）;ToT/Socratic-Models 不为其加查询
+（基石高被引/窗外——种子+引文图兜底）;Agent-S/Visual-Sketchpad/VideoAgent-2026 =
+RECALL_UNCERTAIN（种子已兜底）。
+
+**Supersedes.** A2-1「非 arXiv 可得的信息源不参考」条（→A3-1）;A2-2/A2-8 的「T3 默认不参考」
+与梯队终裁语义（→A3-2,梯队框架保留）;「Stage-1A 收尾」称谓（→A3-11）;空白模板 T1–T6 编号
+（→A3-4）。
+
+### 2026-07-15（续58）· 检索策略对抗定稿——owner 三批复 + 规则系统 + 引文图五层防爆;「挑战 owner」行为规则确立
+
+**Context.** 续57 四裁决被我原样转写后,owner 明示「不要全盘同意,要批判挑战」——行为规则入
+记忆（challenge-owner-proposals:owner 设计裁决落地前先交对抗分析,与 reviewer-drift-guard
+对称）。随即三轮对抗讨论定稿检索策略全系统。
+
+**Decision.**（对抗后定稿,amendment-2 A2-6..A2-11）
+① 我方挑战「arXiv-only 伤害语音主场发现面」被 owner 采纳 → **发现/引用拆分**：引用宇宙 =
+arXiv+备份;发现层 = 48 查询 + **T1 十会题录扫描道**（owner 同时诊断:此前泛检索让高价值顶会
+论文被淹没）+ 引文图。
+② owner 定 **T2 证据观**：创新性足够但缺同行评议、实验或不充分 → T2 实验数字强制
+`T2_UNREVIEWED` 限定;梯队管证据权重不管阅读优先级（我方挑战被采纳）。
+③ owner 驳回我方 SF-L9 二手转述例外 → **全文强制**（可复现+可获取,承重引用必须读原文全文,
+无全文即移除）。
+④ owner 研究观教导（入 memory:method-occupation-incremental-doctrine）：**不看名词占据、
+聚焦方法占据;被占后追问改进空间;研究=渐进式推边界**——DFS 四问编码 + 改进空间三小问
+（我方补「值不值得」判据）+ kill/pivot 重述（方法被占且无有价值改进空间才 pivot）。
+⑤ owner 采纳我方 **T-d 结论冲突判据**（防相似性判据漏掉不相似但致命）并要求成套规则 →
+队列确定性排序键 (威胁度↓, core>element, 时新↓, 梯队平局)。
+⑥ owner 半径裁决：深度遍历 = **引文图结构分析**（双向）,公共文献不纠结,重点 = 方法论同族边
++ 对比引用边 → **五层防爆栈**（只从 DFS 节点扩展/边过滤/COMMON_NODE 剪枝/visited-set/饱和停）
++ 我方补 forward-对比边最优先（占据变动最强信号）。
+
+**Rationale.** 对抗流程的实际产出：我方两项挑战被采纳、一项被驳回、owner 两项诊断（泛检索
+淹没/半径爆炸）催生结构性改进——证明「挑战文化」比顺从转写产出更优协议;16 条副源路线退役
+由 T1 题录道（静态目录,可回放性更强）替代,对 v3 外审 4.4/修正案 C 的取代已披露待 reviewer
+表态。
+
+**Consequences.** 协议 §1/§2/§4bis/§5/§7/§11 重写;README 六 token 登记;T2 模板四问字段;
+路线文件退役横幅;记忆三条（challenge-owner-proposals / method-occupation-incremental-
+doctrine / survey-search-doctrine）。待办 = 一致性环 → owner 过目 → 送签。
+
+**Supersedes.** 续57 的 A2-1..A2-5 初稿口径（对抗修订后以 A2 全系列现行版为准）;§5 均匀
+snowballing 语义。
+
+### 2026-07-15（续57）· owner 检索策略四裁决——arXiv 唯一宇宙 / 顶会三梯队 / 备份规则 / BFS→触发式 DFS;amendment-2
+
+**Context.** owner 审阅送签包终态后,在签署前对检索策略下四条设计裁决（原话要义逐条留档）。
+
+**Decision.**（owner 2026-07-15,verbatim 要义）
+① **检索宇宙 = arXiv 唯一**：「所有的源都应该是出自 arXiv 里面,没法通过 arXiv 获得的信息源
+我们不参考」——16 条副源路线整体退役;48 条编译查询不变（本就 arXiv）;chaining 发现的候选
+一律回 arXiv 题名检索解析。
+② **顶会三梯队**：第一优先 = ACL/EMNLP/NeurIPS/ICML/ICLR/CVPR/ICCV/ACM MM/ICASSP/INTERSPEECH
+等国际顶会正会;第二梯队 = 其他论文（含未发表 preprint）;第三梯队 = workshop,一般不做参考。
+③ **顶会获取规则**：顶会论文一律题名检索回链 arXiv;找不到 → 原文备份本地;无法备份 → 移除
+（不参考）。
+④ **核心 topic 与扫描策略**：核心 = how to build omni agentic system（包括但不限于多模态
+知识系统）;主研究方向 = 语音模态,其他模态与单模态成果 = 技术要素参考。扫描**广度优先**;
+遇 topic 很相似 ∨ 工作目的相似 ∨ 解题方法可借鉴 → **深度遍历**。
+
+**Rationale.** 单一可复现宇宙(arXiv)最大化可回放性并消除多库路线的不可确定性;梯队制把
+证据权重与发表质量绑定;BFS→触发式 DFS 把全文精读预算集中到真正相邻的工作上。**与 v3 外审
+的两处冲突如实披露**：外审 4.4 的 16 条副源可回放路线与修正案 C 的 CVF/ISCA/PMLR 回链义务
+被本裁决取代（owner 设计定夺权;覆盖代价可测——REMOVED_UNOBTAINABLE 计数报告,不静默）,
+reviewer 签署时可表态。
+
+**Consequences.** amendment-2（A2-1..A2-5）并入协议;副源路线文件挂退役横幅;T2 模板增
+venue_tier/topic_relevance/dfs_trigger 三字段;SF-L9 四篇经典适用备份规则（默认处置,非 arXiv
+经典 = 备份 fallback）;T1 清单冻结为点名十会（「等」的扩充走版本化增补）;60 列名种子 =
+预判定 DFS 集（外审 P0-LIT-3-③ 种子 chaining 要求由此满足）。检索广度不收窄（Checkpoint A
+维持）,梯队与 topic 字段只影响优先级/编码/报告侧重。
+
+**Supersedes.** 协议 §2 多库发现源设计;副源路线 manifest（退役留档）;「64 条预注册查询」
+计数口径（→ 48 条 arXiv 编译查询）。
+
+### 2026-07-15（续56）· 中断恢复后整改包敌意环收敛——续55「整改闭环」表述更正;送签包终态
+
+**Context.** 会话进程中断打断了整改包敌意环代理;恢复后其 R1（七镜头,审 @aa6e660 态）返回
+**4 MAJOR + 10 MINOR**。与续55 的并发协调：续55 的签署级亲验（blob 重算/编译器复跑/checkbox
+对照）先行闭合了其中 MAJOR-1（A1-9 字段,@1c4c26a）——两条线互补不冲突,但**续55「整改闭环/
+唯一残留」表述早了一轮环**（append-only 更正:亲验查的是完整性与哈希,环的七镜头另查 schema
+一致性/计数可复算性/语义陈旧轴,后者多抓 13 项）。
+
+**Decision.** 13 项于 `8f76a16` 闭合（§3 schema 五值 enum+SF-L9;A1-1 敏感性计数机器重数
+**16→19/18** 并降级为题录级初判+eess.IV 补裁决;§9/T1 **每页一行 schema 取代 cap 语义**;
+批次1 后现值分布 Σ=89 机器解析;v3 陈旧计数与引用锚等）;R2 复检 13/13 FIXED + 3 新残留
+（v3 两处陈旧「51」含**假「唯一 scope_pending」**〔正典=2 条〕;「cap 50」措辞）于 `d2fab2d`
+清零,grep 终验 0/0/0——**环收敛**。bundle manifest dated correction #2 @e10a4f2。
+
+**Rationale（教训两条）.** ①「陈旧计数在增量更新后未全传播”成为最高频缺陷类（本日第 N 例:
+57→51→60 每次迁移都漏 1–2 处引用点）——结构性解法留待执行期:计数引用点收敛到单一正典行,
+散文只指不抄（已是台账纪律,需扩展到提案散文）;②签署级亲验与多镜头环**不可互替**：亲验
+擅长完整性/哈希,环擅长一致性/语义——送签件两者都要过。
+
+**Consequences.** 送签包终态 = bundle manifest + corrections #1/#2（全件 blob 钉定,
+queries.jsonl 全程稳定 `c87a2301`,联网查询数=0 三次复签）。**当前动作 = owner 过目 →
+转 reviewer 重新申请 Gate S1 search-design 签署**（S1-E1..E8 齐备）。
+
+**Supersedes.** 续55「整改闭环/唯一残留 A1-9」表述（按本条更正——非事实错误,系环未完成时的
+过早收口宣称;续55 其余内容有效）。
+
+### 2026-07-15（续55）· v3 外审收档 + Gate S1 P0-A..D 整改闭环——签署级亲验复核后重新送签待 owner
+
+**Context.** 送审组合（续54）当日返回 v3 外审（`2026-07-15-system-first-research-proposal-
+v3-stage1a-doctoral-review.md`,收档 @5ca99bf）：v3 科学件**有条件接受**（errata 澄清义务）;
+协议包 Gate S1 **退回大修**——六项 P0 缺陷（4.1 类目宇宙 CV/RO 盲区 / 4.2 48 片段≠最终可执行
+查询 / 4.3 75 cap 无溢出语义 / 4.4 副源路线不可回放 / 4.5 基础谱系 lane 缺失 / 4.6 威胁池
+封顶）+ P0-A..D 强制整改清单 + S1-E1..E8 最小证据包判据;零查询约束维持。
+
+**Decision.** P0-A..D 全部执行并经签署级亲验复核（首轮执行 @aa6e660/@262e6f5;复核发现一处
+遗漏,补录 @1c4c26a）：
+- **P0-A 科学表述 errata（七项,v3 修订记录节）**：headroom 拆「输出池命题（三文献锚+支持
+  边界）/系统轨迹假设（待查,不由前者推出）」两层;RL 命名纪律（对外中性术语=reward-guided
+  inference-time sequential control,RL 名称由 SF-L9 谱系裁决）;信息来源六类分解（⑤类增益
+  禁概括为激活预训练知识,登记 survey/README）;RQ-SYS「显著」→「实质性且可复核地」;threat
+  抽取改计划时态;Stechly 锚补全（arXiv 2402.08115 附支持/不支持边界）。
+- **P0-B 检索协议编译**：48 条查询离线编译冻结 `sf-queries.jsonl`（纯 stdlib 编译器零网络,
+  11 项静态检查全过,**复核复跑字节复现** blob=`c87a2301`）;类目冻结+cs.CV/cs.RO（L1/2/4/5,
+  L6-8 不扩的敏感性依据在案）;溢出分页规则（totalResults 全量分页,>2000 年度子窗确定性
+  拆分,禁无声截断）;16 副源路线三级分级（REPLAYABLE_API/DETERMINISTIC_WEB/DISCOVERY_ONLY,
+  网页排序不作 universe）;compiler/queries/routes 版本+哈希入 bundle。
+- **P0-C 文献宇宙补全**：种子 60（快照 51+增量批次1:OmniAgent/CMA-Harness/UCT-ToolCreator
+  〔scope_pending=Y〕/ConMem/Argos + 4 基础谱系 DOI,发现路线全留痕）;威胁首轮 15 非硬上限
+  （Affordance/FineVerify 晋升,增删须记路线禁利己筛选）;SF-L9 无 2022 窗、统计隔离;
+  **复核补录 A1-9**:每篇 `most_threatened_rq` 字段（RQ-SYS/CTRL/OMNI/SAFE/MEASURE/none,
+  P0-C 末项首轮整改遗漏——协议 §6+T2 模板+amendment-1 同步,编译器回归零影响）。
+- **P0-D 审计 bundle 闭合**：bundle manifest 12 工件 git blob 钉定（复核 12/12 重算一致）;
+  v3 内审报告补归档（迟归档如实说明+环后四新镜头入库）;amendment-1 逐处取代关系（A1-1..
+  A1-9）;dated correction #1 钉定 A1-9 三件新 blob @1c4c26a。
+
+**Rationale.** owner 指令「P0-A..D 一次做对」——签署级工作亲自核验不委托：承重声明全部按
+工件重验（哈希重算/编译复跑/逐 checkbox grep）,不沿抄提交信息;发现的唯一残留当场按 §10
+版本化增补修复,不静默改写已钉定工件。
+
+**Consequences.** S1-E1..E8 齐备可定位、hash 可复核、query 执行数=0;**当前动作 = owner
+过目 → 转 reviewer 重新申请 Gate S1 search-design 签署**;执行前置三条件不变（签署+owner
+批准+P0-R8 复跑）。
+
+**Supersedes.** none（续53/54 的「当前动作」状态推进;协议 schema 变更由 amendment-1 登记,
+原字节在 git 历史）。
+
+### 2026-07-15（续54）· 合并全篇提案 v3 成稿并环收敛——送审组合定型
+
+**Context.** owner 指令「给 reviewer 先要写一份详细的 research proposal」——现有 v1 为十一节
+骨架、v2 为修订史式送审件、协议为操作件,缺完整成篇的科学文本。**治理张力如实处理**：v2 外审
+曾下元流程停止令（不要求 v3）;owner 行使流程定夺权指令成篇——v3 frontmatter 向 reviewer
+如实披露,并声明协议包仍是 Gate S1 签署对象、v3 为其科学上下文（§14.3 将异议路由回 owner）。
+
+**Decision.** STAGE1A-PROPOSAL-2026-07-15-04（`2026-07-15-system-first-research-proposal-v3-
+consolidated.md`,十四节全篇：纲领身份/科学动机〔净新〕/问题树〔净新〕/五合同/架构/种子景观/
+survey 方法论/基线归因/candidate kill logic/工程/诚信暴露/1B 蓝图/门与时间线/对 reviewer
+请求）。环记录：R1 双镜头 1 MAJOR+10 MINOR——MAJOR=**C-T7 锚点失实**（真实机制=检索供给侧
+泄漏,TF-Strict 不阻止该类;原文暗示了不存在的保护）;token 谱系纠正（「预登记坍缩风险」=IAD
+独占,Omni-Decision=外审迟发现,两类分述）→ R2 8/8 FIXED+1 残留 → 单词修复+机器 grep 核验
+CONVERGED。
+
+**Rationale.** 合并件的主风险=整合失真与新叙事 claim-creep,双镜头即按此设计;C-T7 类锚点
+失实是博导评审的当场击杀项,环先行拦截印证环设计有效。
+
+**Consequences.** **送审组合定型**：v3 合并全篇（整体科学评审对象）+ 协议包六件套
+（search-design 签署对象,续53 已收敛）——待 owner 审阅后转交 reviewer。
+
+**Supersedes.** none（v1/v2 保留原效力;v3 为成篇合并,冲突处以已收敛工件为准）。
+
+### 2026-07-15（续53）· Gate S1 签署包收敛——阶段 A 完成,待 owner 过目转 reviewer
+
+**Context.** owner 放行阶段 A（A1 seed manifest / A2 空白模板+签署区 / A3 内审环）并指令
+「A1 回来后直接过环收敛」。
+
+**Decision.** 签署包六件套齐备且环收敛：①检索协议 v1（八 lanes/48 arXiv 精确查询+16 副源
+路由/装配规则消除执行者自由度）②seed manifest **51 条**（枚举正典;Sonnet 生成+协调者逐行
+亲验,10 条 lane 挂标裁决:7 确认 3 修改,1 条核验级改判）③空白模板 T1–T6 ④manifest 报告
+（含裁决附注与 lineage）⑤检索串/schema（协议内嵌）⑥签署区（三方分立+attestation）。
+环记录：R1 双镜头 2 MAJOR+8 MINOR（MAJOR=arXiv 装配规则缺失/manifest-schema 词汇错位;
+星号通配符陷阱零命中）→ R2 8/8 FIXED+2 NEW-MINOR NOT_CONVERGED → R3 CONVERGED（三轮,
+上限内）。归档 `docs/checks/2026-07-15-gate-s1-protocol-hostile-review-lenses.md`。
+
+**Rationale（计数教训第五例）.** 协调者裁决附注沿抄代理报告「12 条挂标」未自行 grep
+（实为 10）——「headline 数字只出自机器重数」必须覆盖**引用他人数字**的场合。本批全部
+承重计数（51/64/13/76/22）已机器化。
+
+**Consequences.** A4 = owner 过目 → reviewer search-design 签署;执行前置三条件（签署+owner
+批准+P0-R8 复跑）;签署前零查询维持（attestation 双处=0）。协调者算术口径「57/16/12」系列
+以枚举/grep 更正,lineage 全留痕（含续52 的「50→57」表述按 51 读）。
+
+**Supersedes.** 协议草稿计数口径;报告正文裁决前快照（挂注保留作 lineage）。
+
+### 2026-07-15（续52）· v2 外审收档（APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_REQUIRED_AMENDMENTS）——修正案全采并入协议;检索失效第四例
+
+**Context.** v2 转交当日博导外审返回：**有条件批准继续 Gate S1 协议实例化**（首条查询仍须
+协议单独签署;不评价 close/1B;无 FFP 证据）。stage lens 前置生效——本轮评审自校准到 Stage-1A
+承重对象（检索覆盖/分类/可追溯/问题空间开放）,未再犯阶段错位。评审同时下**元流程停止令**：
+不写 proposal v3,下一承重工件 = 检索协议实体。
+
+**Decision.**（协调者双向核验后全采）① 修正案 A–F 并入协议 v1（种子「全集」→**带截止日
+快照** + 增量扫描 §5bis + CVF/ISCA/PMLR 等领域源 + chaining 续行规则 + 选文留痕 + 范围多轴
+与 TF-Strict 审计子字段）;② 评审 delta scan 七条新种子采纳（Omni-Decision 2607.11433 =
+最高优先威胁〔07-13 提交,training-free omni evidence-state system〕/ Affordance Harness /
+FineVerify / Effective-Feedback-Compute / MUSE-Autoskill / ACE 升列名 / VeGAS 边界对照）,
+种子快照 50→57;③ v2 两处「全集」措辞按评审 8.1-2 授权作事实性更正;④ docs/checks 两归档件
+按 §7.2 风险三改称「评审报告归档」并注明非完整运行记录;⑤ training-free-grpo 加「TF-Strict
+归属待核」定性（外设经 ground-truth 学 token prior——冻结核心 ≠ TF-Strict）,scaling-auditory
+「最紧占据者」降为团队自评待核。
+
+**Rationale（教训链,第四例）.** 评审指出 ACE/MUSE-Autoskill「并非团队不知道」——grep 实证：
+MUSE 在 2026-06-30 归档 survey 与 `papers/agent-level-tfrl/references.bib` 在案,**专职自库
+反扫也漏了它**（反扫范围未含论文引用库）。检索失效四例递进：①proposal v1 漏 census 五条
+→②v2 漏广义自库 AWM/ExpeL→③种子集漏矩阵 Section B 四条→④反扫本身漏 references.bib——
+每次修复「上一层」,漏「下一层」。结构性结论：**自库反扫范围必须枚举式冻结**（census/matrix/
+cards/ledger/归档 lanes/references.bib）,已写入协议 §3;评审的 blob 钉定要求（v1/v2 引用
+三元组化）同理防「无声漂移」。
+
+**Consequences.** 协议 v1 已并修正案成稿（`wiki/survey/2026-07-15-system-first-survey-
+protocol-v1.md`,57 种子快照/64 查询/§5bis 增量扫描）;待办 = seed_manifest.jsonl 生成 +
+协议内审环 → owner 过目 → reviewer search-design 签署;签署前零查询维持。
+
+**Supersedes.** v2 §4「全集」措辞（评审授权更正）;docs/checks 两件「原始工件」称谓。
+
+### 2026-07-15（续51）· proposal v2（送审版）成稿——双镜头环收敛;续50 措辞更正
+
+**Context.** owner 指令：按十一节模板写 reviewer 面向的 proposal——修订史（改了什么）、现行
+主张、下一阶段计划。
+
+**Decision.** STAGE1A-PROPOSAL-2026-07-15-03 成稿（`2026-07-15-system-first-research-proposal-v2.md`，
+v1 保留为细节正典;本件并承担对两评审的合并回应〔§0.3 处置表〕）。内审环 R1 双镜头（含 v1 环
+教训新增的「机制叙述 vs 原文」「自库覆盖率」镜头）= 2 独立 MAJOR + 6 MINOR → 修复 → R2
+8/8 FIXED 零新发现 = CONVERGED（环内判定）。`owner_transmission = PENDING`。
+
+**Rationale（教训链）.**「查自库」失败模式**第三次复发**（AWM/ExpeL 定性）——census v2 正典
+口径与广义自库必须显式区分;自库反扫由个人纪律上升为**协议步骤**并当场检回 4 条 DIRECT 占据
+者列名种子（training-free-grpo / inference-time-reward-hacking / walking-through-uncertainty /
+scaling-auditory）。
+
+**更正（append-only,对续50）.** 续50「AWM/ExpeL 系评审自身知识,2/7 不在库」措辞失准——正确
+表述：**不在 census v2 正典（grep 0 命中）,但广义自库有历史踪迹**（2026-07-04
+3w-crossdomain survey 与归档 A3 lane 曾与 JitRL 同句点名）;不作「评审净新」定性。
+
+**Consequences.** v2 待 owner 审阅转交 reviewer;转交后 Gate S1 协议实例化开工（八 lanes +
+mandatory seeds 全集〔15 表内 + 评审补充族 + 4 自库反扫〕+ 系统性自库反扫步骤 + 严评
+P0-LIT-3 八项规格 + 重校准 Checkpoint A–D 判据）。
+
+**Supersedes.** v1 作为送审版（记录与细节正典保留）;续50 相应措辞（本条更正段）。
+
+### 2026-07-15（续50）· proposal v1 同日两轮外审收档——重校准通过 + 严评存活项修复
+
+**Context.** proposal v1 交付后同日两轮外审：①严评（`...-v1-doctoral-adversarial-review.md`，
+RETURN_FOR_MAJOR_REVISION，六承重缺陷 + P0-A..D 整改计划）；②重校准评审
+（`...-v1-stage1a-recalibrated-review.md`）——判严评把「后续实验成立所需条件提前当成 Stage-1A
+必闭 P0」为阶段错位，撤回预算 cap 前置/RL 二选一前置/轨迹 headroom 冻结/选择性遗漏 QRP 红旗/
+完整工程平台要求，verdict = **ACCEPTABLE_TO_PROCEED_WITH_STAGE1A_SURVEY_PROTOCOLIZATION**
+（Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING）。
+
+**Decision.**（协调者按 reviewer-drift-guard 双向审查后处置）有利裁决不冲掉有效发现——严评
+**仍成立四项**当日修复：①Reflexion/LATS/Voyager/LLM-as-Verifier 四行机制 delta 过度乐观
+（「对方没用我方术语」不构成机制差）→ 改写 + TO_VERIFY_FULLTEXT；②P0-LIT-1 自库强近邻遗漏
+→ grep 实证 JitRL/Audio-Mind/Agent-Omni/EChO-Agent/AuTAgent 五条**均在我方 census v2**，检回
+补入 §4（AWM/ExpeL 系评审自身知识,2/7 不在库,如实分开登记）；③内部 CONVERGED 加「环内判定」
+限定语（重校准 §6 建议）；④内审四镜头原始报告归档
+`docs/checks/2026-07-15-proposal-v1-hostile-review-lenses.md`（严评缺陷 6）。协议质量标准采
+严评 P0-LIT-3 八项最低规格并入 Gate S1。
+
+**Rationale.** 严评的阶段错位与本日 owner 三阶段裁决同构（用后段判据评前段工件——评审也犯了
+协调者上午犯的错）；但其文献镜头（机制叙述 vs 原文、自库覆盖率）恰好补了内审环没有的两个视角
+——环设计已登记此教训。**自库 5 条强近邻漏检 = L3 探索知识「检索失效」当日复发实例**：登记
+规约解决「存」，新规「写最近邻/占据表前必须先查自库」解决「取」。
+
+**Consequences.** Gate S1 协议实例化解锁（mandatory seeds = 自库强近邻 + 评审补充族〔待题录
+解析〕；八项最低规格）；**对两评审的正式回应信形式待 owner 裁决**（完整逐点 vs 合并轻量）；
+重校准的诚信裁定（本提案阶段 NO QRP）不冲销前期评审周期已确立的更正义务。
+
+**Supersedes.** 严评的 S1 NO-GO 与 SELECTIVE_OMISSION_RED_FLAG/MATERIAL_QRP_RISK 定性
+（由重校准评审撤回,本条登记接受）；proposal §4 首版三行 delta 与近邻覆盖。
+
 ### 2026-07-15（续49）· system-first proposal v1 成稿——敌意内审环收敛
 
 **Context.** S0 签署（续48）后 owner 指令推进 proposal 重写（「好，开始吧」）。

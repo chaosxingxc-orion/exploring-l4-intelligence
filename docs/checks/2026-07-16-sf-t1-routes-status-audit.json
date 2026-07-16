@@ -1,0 +1,655 @@
+{
+ "artifact_id": "SF-T1R-STATUS-AUDIT-2026-07-16-01",
+ "collector": "scripts/survey/sf_t1_routes_status_audit.py",
+ "routes_input": "wiki/survey/2026-07-16-sf-t1-routes.jsonl (frozen v1)",
+ "tier": "A(direct fetch) rows only — B(proxy)/C(search) evidence and the status adjudication table live in the dated amendment citing this artifact",
+ "network_caveat": "regional per-connection resets observed (same host may succeed and fail across attempts); failure codes are explicit, never silently treated as venue-side truth",
+ "n_routes": 50,
+ "rows": [
+  {
+   "route_id": "SF-T1R-ACL-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/acl-2022/",
+   "time_utc": "2026-07-16T09:32:55Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "11648711dddd2b14bda159329db554abf28e905d25b47f43fe963848338bca7c",
+    "title_tag": "60th Annual Meeting of the Association for Computational Linguistics - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ACL-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/acl-2023/",
+   "time_utc": "2026-07-16T09:33:27Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "0e40df427cdbddc82e0b6e3b7897358296d95d26e0d491b43dfc2724328abe7b",
+    "title_tag": "61st Annual Meeting of the Association for Computational Linguistics - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ACL-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/acl-2024/",
+   "time_utc": "2026-07-16T09:33:48Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "e5a7724801c8da275d0fcfbab46fb716680f89a69805f3b898bda84a9e2d944c",
+    "title_tag": "62nd Annual Meeting of the Association for Computational Linguistics - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ACL-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/acl-2025/",
+   "time_utc": "2026-07-16T09:34:17Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "2ef56c1a365d3e6656d7bbee97aeef94ac23044e6dbca70fcf4a319012adf978",
+    "title_tag": "63rd Annual Meeting of the Association for Computational Linguistics - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ACL-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/acl-2026/",
+   "time_utc": "2026-07-16T09:35:00Z",
+   "evidence": {
+    "attempts": 2,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "6d7471dfc3481622e66d4233bf583cb418a3d856fa68b768b3e80ad87727b671",
+    "title_tag": "64th Annual Meeting of the Association for Computational Linguistics - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-EMNLP-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/emnlp-2022/",
+   "time_utc": "2026-07-16T09:35:40Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "22cf9ab272d357f399c0b24c53e50f504a44ecb27b67a4dee21744c85b4b56b6",
+    "title_tag": "The 2022 Conference on Empirical Methods in Natural Language Processing - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-EMNLP-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/emnlp-2023/",
+   "time_utc": "2026-07-16T09:36:23Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "e6be72771256c444f279067e38613ceb9de9a6b84c1cd492dfd49883a5fd66cc",
+    "title_tag": "The 2023 Conference on Empirical Methods in Natural Language Processing - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-EMNLP-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/emnlp-2024/",
+   "time_utc": "2026-07-16T09:36:42Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "8db0c4f8b635a68c588e28e641f21e53d0f6c27707b9e48ae36d7ae893973462",
+    "title_tag": "The 2024 Conference on Empirical Methods in Natural Language Processing - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-EMNLP-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/emnlp-2025/",
+   "time_utc": "2026-07-16T09:36:58Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "6fd2cde9d954f830c5ea853a36fcb7cee3d95d06d435a013a88d031808574fc2",
+    "title_tag": "The 2025 Conference on Empirical Methods in Natural Language Processing - ACL Anthology"
+   }
+  },
+  {
+   "route_id": "SF-T1R-EMNLP-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://aclanthology.org/events/emnlp-2026/",
+   "time_utc": "2026-07-16T09:37:08Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 404,
+    "failure_code": "HTTP_404"
+   }
+  },
+  {
+   "route_id": "SF-T1R-NEURIPS-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://papers.nips.cc/paper_files/paper/2022",
+   "time_utc": "2026-07-16T09:37:13Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "7dceb2363a4c4eb32401c177568945fd57be1b027249833ee75595665d9e619b",
+    "title_tag": "Book"
+   }
+  },
+  {
+   "route_id": "SF-T1R-NEURIPS-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://papers.nips.cc/paper_files/paper/2023",
+   "time_utc": "2026-07-16T09:37:26Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "66bc733c9225fef9c3cd2dc7fb4ef3e98db919cab75cc54079d76c8b3038dabd",
+    "title_tag": "Book"
+   }
+  },
+  {
+   "route_id": "SF-T1R-NEURIPS-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://papers.nips.cc/paper_files/paper/2024",
+   "time_utc": "2026-07-16T09:37:53Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "b4b5ae530d00208fb9757573ebf7233379bdb4badd582c5910b788ff9a2a7256",
+    "title_tag": "Book"
+   }
+  },
+  {
+   "route_id": "SF-T1R-NEURIPS-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://papers.nips.cc/paper_files/paper/2025",
+   "time_utc": "2026-07-16T09:38:15Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "a17a9e0a371a919f351641fcc0848e89f17465dfc59e512440ad5667b12a4065",
+    "title_tag": "Book"
+   }
+  },
+  {
+   "route_id": "SF-T1R-NEURIPS-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://papers.nips.cc/paper_files/paper/2026",
+   "time_utc": "2026-07-16T09:38:42Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 404,
+    "failure_code": "HTTP_404"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICML-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://proceedings.mlr.press/v162/",
+   "time_utc": "2026-07-16T09:38:48Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "2f04c521ce9e870e21adffc568e35a181b4cb46e01d7577b977c446347b8c799",
+    "title_tag": "Proceedings of Machine Learning Research | Proceedings of the 39th International Conference on Machine Learning Held in Baltimore, Maryland, USA on 17-23 July 2"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICML-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://proceedings.mlr.press/v202/",
+   "time_utc": "2026-07-16T09:38:54Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "f0592eebae2bbbcb104fa0064f541beb61384e5648fa9f5868ac9b285f57c1d3",
+    "title_tag": "Proceedings of Machine Learning Research | Proceedings of the 40th International Conference on Machine Learning Held in Honolulu, Hawaii, USA on 23-29 July 2023"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICML-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://proceedings.mlr.press/v235/",
+   "time_utc": "2026-07-16T09:39:02Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "5b6b0dd8cadd6608cb3fc1015fff05cfc5cebff142251ffba9feadcfed2d1fa6",
+    "title_tag": "Proceedings of Machine Learning Research | Proceedings of the 41st International Conference on Machine Learning Held in Vienna, Austria on 21-27 July 2024 Publi"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICML-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": "https://proceedings.mlr.press/v267/",
+   "time_utc": "2026-07-16T09:39:08Z",
+   "evidence": {
+    "attempts": 2,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "7c1c49cdb933a4143d0f8794364d773b18758fd06efc3ba933a87f995319c1f1",
+    "title_tag": "Proceedings of Machine Learning Research | Proceedings of the 42nd International Conference on Machine Learning Held in Vancouver Convention Center, Vancouver, "
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICML-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": "https://proceedings.mlr.press/",
+   "time_utc": "2026-07-16T09:39:15Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 40426,
+    "body_sha256_prefix400k": "2acef2fd7e21e06570d0675049aeaf6e533b5704a632d71098ea6d15d057453a",
+    "title_tag": "Proceedings of Machine Learning Research | The Proceedings of Machine Learning Research (formerly JMLR Workshop and Conference Proceedings) is a series aimed sp"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICLR-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openreview.net/group?id=ICLR.cc/2022/Conference",
+   "time_utc": "2026-07-16T09:39:19Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 176141,
+    "body_sha256_prefix400k": "2ab13bc8a7766b9ff57410a9fad244d7cfe9a5c8456eae033a02a06ff3301e4a",
+    "title_tag": "ICLR 2022 Conference | OpenReview"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICLR-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openreview.net/group?id=ICLR.cc/2023/Conference",
+   "time_utc": "2026-07-16T09:39:24Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 165482,
+    "body_sha256_prefix400k": "be8cf26ef17c987cf51f152cc66599b9ebaa89d44927844b3ad281e13c9ca266",
+    "title_tag": "ICLR 2023 Conference | OpenReview"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICLR-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openreview.net/group?id=ICLR.cc/2024/Conference",
+   "time_utc": "2026-07-16T09:39:29Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 159845,
+    "body_sha256_prefix400k": "feb420d06a305a594ba784d4fcb407c322f30bca284908fe3c4434e185447a43",
+    "title_tag": "ICLR 2024 Conference | OpenReview"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICLR-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openreview.net/group?id=ICLR.cc/2025/Conference",
+   "time_utc": "2026-07-16T09:39:35Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": 200,
+    "body_bytes_read": 161299,
+    "body_sha256_prefix400k": "6a12f5b0b1b20c1384ad6097f39e126b2e5f241222ffc129ea1842bc79630f71",
+    "title_tag": "ICLR 2025 Conference | OpenReview"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICLR-2026",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openreview.net/group?id=ICLR.cc/2026/Conference",
+   "time_utc": "2026-07-16T09:39:48Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 161964,
+    "body_sha256_prefix400k": "731d5cd9ef202039b8f53d7da0d3076ac7eaa2cce44428958df960dd6f93c8c8",
+    "title_tag": "ICLR 2026 Conference | OpenReview"
+   }
+  },
+  {
+   "route_id": "SF-T1R-CVPR-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/CVPR2022",
+   "time_utc": "2026-07-16T09:39:53Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+   }
+  },
+  {
+   "route_id": "SF-T1R-CVPR-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/CVPR2023",
+   "time_utc": "2026-07-16T09:41:23Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+   }
+  },
+  {
+   "route_id": "SF-T1R-CVPR-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/CVPR2024",
+   "time_utc": "2026-07-16T09:42:04Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+   }
+  },
+  {
+   "route_id": "SF-T1R-CVPR-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/CVPR2025",
+   "time_utc": "2026-07-16T09:43:34Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+   }
+  },
+  {
+   "route_id": "SF-T1R-CVPR-2026",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/CVPR2026",
+   "time_utc": "2026-07-16T09:45:04Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICCV-2022",
+   "frozen_status": "NOT_HELD",
+   "frozen_entry_status": "NOT_APPLICABLE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:09Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICCV-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/ICCV2023",
+   "time_utc": "2026-07-16T09:46:09Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:108"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICCV-2024",
+   "frozen_status": "NOT_HELD",
+   "frozen_entry_status": "NOT_APPLICABLE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:25Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICCV-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://openaccess.thecvf.com/ICCV2025",
+   "time_utc": "2026-07-16T09:46:25Z",
+   "evidence": {
+    "attempts": 3,
+    "http_status": null,
+    "failure_code": "CONN_FAIL: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:108"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICCV-2026",
+   "frozen_status": "NOT_HELD",
+   "frozen_entry_status": "NOT_APPLICABLE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:41Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-MM-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": "https://dl.acm.org/conference/mm",
+   "time_utc": "2026-07-16T09:46:41Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 403,
+    "failure_code": "HTTP_403"
+   }
+  },
+  {
+   "route_id": "SF-T1R-MM-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:45Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-MM-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:45Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-MM-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:45Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-MM-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:45Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICASSP-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": "https://ieeexplore.ieee.org/xpl/conhome/1000002/all-proceedings",
+   "time_utc": "2026-07-16T09:46:45Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 35889,
+    "body_sha256_prefix400k": "8eac71108cdbf67448c87abf3fd167ad02a85ae0f8bc03f549fc449354666309",
+    "title_tag": ""
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICASSP-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:53Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICASSP-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:53Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICASSP-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:53Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-ICASSP-2026",
+   "frozen_status": "READY",
+   "frozen_entry_status": "ENTRY_TO_RESOLVE",
+   "url": null,
+   "time_utc": "2026-07-16T09:46:53Z",
+   "evidence": {
+    "failure_code": "NO_CONCRETE_URL",
+    "note": "NOT_APPLICABLE entry (NOT_HELD) or pattern-only; status evidence = tier-B/C in amendment adjudication"
+   }
+  },
+  {
+   "route_id": "SF-T1R-IS-2022",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://www.isca-archive.org/interspeech_2022/index.html",
+   "time_utc": "2026-07-16T09:46:53Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "61d5dac33ab6ca23e377e7b92456e80147839f841222d485f226acb56c9fa21c",
+    "title_tag": "ISCA Archive"
+   }
+  },
+  {
+   "route_id": "SF-T1R-IS-2023",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://www.isca-archive.org/interspeech_2023/index.html",
+   "time_utc": "2026-07-16T09:48:12Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "d783c0cf613c7f77f5bee58f844c13d256b916491c02e326017cca92133b1da0",
+    "title_tag": "ISCA Archive"
+   }
+  },
+  {
+   "route_id": "SF-T1R-IS-2024",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://www.isca-archive.org/interspeech_2024/index.html",
+   "time_utc": "2026-07-16T09:49:15Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "7a6f8e797c54cad14cb3f9de227a098c10120c68db707cdac44299a697b1697b",
+    "title_tag": "ISCA Archive"
+   }
+  },
+  {
+   "route_id": "SF-T1R-IS-2025",
+   "frozen_status": "READY",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://www.isca-archive.org/interspeech_2025/index.html",
+   "time_utc": "2026-07-16T09:49:59Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 200,
+    "body_bytes_read": 400000,
+    "body_sha256_prefix400k": "a22bd2803a85bd8431e3cfc54f95e40b1be6d8debbf25c351e8b6350088d7675",
+    "title_tag": "ISCA Archive"
+   }
+  },
+  {
+   "route_id": "SF-T1R-IS-2026",
+   "frozen_status": "NOT_YET_PUBLISHED",
+   "frozen_entry_status": "EXACT_URL",
+   "url": "https://www.isca-archive.org/interspeech_2026/index.html",
+   "time_utc": "2026-07-16T09:50:46Z",
+   "evidence": {
+    "attempts": 1,
+    "http_status": 404,
+    "failure_code": "HTTP_404"
+   }
+  }
+ ]
+}
