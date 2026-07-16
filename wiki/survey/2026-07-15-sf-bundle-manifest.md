@@ -131,3 +131,42 @@ enum+SF-L9、A1-1 敏感性计数机器重数 16→19/18+eess.IV 补裁决、§9
 清零,`C4_BATCH_LOOP_CONVERGED@f3ab138`。**attestation**：联网检索查询执行数 = 0 维持;
 ID_DEREFERENCE 访问类已注册并逐次留痕（amendment-4 §1）。**下一动作**：本 correction 提交后,
 以回应信为封面请 reviewer 按复审 §14 十一项清单窄幅复核（双向合同:全过即签）。
+
+## dated correction #4A（2026-07-16,博导复审 8 项 P0——钉定基准 commit = **af96a89**）
+
+（触发 = 《Correction #4 执行前博导式对抗复审》WITHHOLD;owner 三裁决 = Decision-Log 续62。
+哈希正典 = git blob,核验 `git rev-parse af96a89:<path>`。31 件 + fixtures 树;状态动词自本批
+起由 `sf_package_summary.py` 机器推导——本表「变更/新增」仅描述文件事实,完成态见机器清单。）
+
+| # | path | git blob @af96a89 | 变更说明 |
+|---|---|---|---|
+| 1 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `6d6adf6c2dbf` | 变更（P0-R1 口径统一:92 种子/55 查询/REC-0..7/amendments 1–5;§4 增 SF-L11 受控道） |
+| 2 | `wiki/survey/2026-07-16-sf-protocol-amendment-5.md` | `f4e118051ee7` | **新增**（C4A 合同全文:P0 对照/splitter 合同/validator V1–V13/SF-L11+四分法/route 裁定表/双计数/机械化动词） |
+| 3 | `wiki/survey/2026-07-15-sf-seed-manifest.jsonl` | `7cf761347223` | 变更（批次4 +5 = **92 条**,87 行前缀字节不变;TF-TTCL 转录失败 provenance 在案） |
+| 4 | `wiki/survey/2026-07-15-sf-seed-manifest-report.md` | `011ec5aae6d2` | 变更（HISTORICAL_SUPERSEDED 范围标注——快照 51 审计件,现行正典=manifest+机器重数） |
+| 5 | `wiki/survey/2026-07-15-sf-queries.jsonl` | `4cfd3b9063f0` | 变更（**55 行** = 53 行前缀字节不变 + SF-L11-Q1/Q2,sfqc-1.3.0） |
+| 6 | `scripts/survey/sf_query_compiler.py` | `a869f816ed74` | 变更（四层版本,ADDITION_LANE_VERSIONS 表;SF-L11 = cs.MM/cs.MA） |
+| 7 | `scripts/survey/sf_child_query_split.py` | `21422f672ca5` | 变更（P0-R2:`_year_windows` 实装/`parent_from_frozen_row` 适配器/`remaining_after`/`assert_unique_ids`;两类哈希机器分离） |
+| 8 | `scripts/survey/sf_child_query_replay_test.py` + `docs/checks/2026-07-16-sf-child-query-replay-test.json` | `e8129113af14` / `ce71ae27af41` | 变更（三层合同期望:首 overflow=SPLIT_YEAR,**10/10 PASS**） |
+| 9 | `scripts/survey/sf_child_query_realrow_dryrun.py` + `docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json` | `e9b4201a51bb` / `91378a4f9691` | **新增**（P0-R2 核心验收:55/55 真实冻结行入规范函数,负例硬错误,**17/17 PASS**） |
+| 10 | `scripts/survey/sf_record_validator.py` + `scripts/survey/sf_record_validator_test.py` + `docs/checks/2026-07-16-sf-record-validator-test.json` | `f7a7c55812e9` / `4e4326163af3` / `2b1b7c53651e` | **新增**（P0-R3:V1–V13 实装;负例子进程非零退出,**16/16 PASS**） |
+| 10b | `wiki/survey/fixtures-c4a/`（15 件） | tree `d930f3c17184` | **新增**（正例 1 + 故意破坏负例 14;逐件 sha256 另钉于 record-validator-test 输出 fixture_sha256 段） |
+| 11 | `wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl` + `scripts/survey/sf_t1_routes_v2_gen.py` | `8e0a5d3ebcee` / `739be87e5c82` | **新增**（P0-R4 supersession:ACL-2026→READY〔唯一状态改判〕/ICML-2025 入口→v267〔唯一入口改判〕/逐行 status_audit_c4a;v1 保留不改写） |
+| 11b | `scripts/survey/sf_t1_routes_validate.py` + `docs/checks/2026-07-16-sf-t1-routes-validation.json` | `cf5be69345eb` / `3efef48872c1` | 变更（active 输入自动取 v2,**12/12 PASS**） |
+| 11c | `scripts/survey/sf_t1_routes_status_audit.py` + `docs/checks/2026-07-16-sf-t1-routes-status-audit.json` + `scripts/survey/probe_hosts_c4a.sh` | `694064a4a56c` / `6494ede500fd` / `aae93eff0a6f` | **新增**（当日外部审计证据件:39 URL 探针 200×28/404×3/403×1/CONN_FAIL×7,失败码逐行留痕;与结构 validator 分立） |
+| 12 | `wiki/survey/2026-07-16-sf-sentinel-data.json` + `scripts/survey/sf_sentinel_recall_test.py` + `docs/checks/2026-07-16-sf-sentinel-recall.json` | `d5b09fd62ba6` / `79a16a3061f0` / `63b3d300a3b3` | 变更（P0-R5 四分法:21 哨兵 QUERY_HIT×14/SEED×7/**UNRESOLVED×0**;两 held-out 纯查询召回,VQQA×5 验证 SF-L11;coverage_note 仅注释） |
+| 13 | `scripts/survey/sf_package_summary.py` + `docs/checks/2026-07-16-sf-package-summary.json` | `6d985c84662b` / `55a66d9df0e8` | **新增**（机械化状态动词 + stale-token 扫描 + 机器重数;八项全 PASS） |
+| 14 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `4334a7ef72ea` | 变更（split_level 增 YEAR;NA 类型稳定对象;INCLUDED⇒reason_code=null;validator 实装引用） |
+| 15 | `wiki/survey/README.md` | `8b8faa70e8b1` | 变更（REC-0..REC-7 编号纪律更新） |
+| 16 | `wiki/survey/2026-07-16-sf-access-log-c4a-review-verification.jsonl` | `483538082912` | **新增**（26 行 append-only:评审引文核验 7/7 HIT + verbatim 摘要 7 + venue 状态 3+8;新 access class 如实披露待追认→amendment-5 §6 已注册） |
+| 17 | `wiki/survey/2026-07-16-gate-s1-correction-4a-response.md` | `96886f96c8f3` | **新增**（回应信:核验先行/完成态收回/两点分层陈述/机器清单/owner 三裁决/P0-R8 申请） |
+| 18 | `wiki/2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md` | `028dfc1b20a3` | **新增**（触发评审件入库,provenance） |
+| 19 | `wiki/Decision-Log.md` | `6f179510f1cb` | 变更（**续62**:owner 三裁决 + P0-R7 token 退役语义澄清 dated supersession） |
+| 20 | `wiki/Research-Objective.md` | `a0b80eea994d` | 变更（热层 last_refresh + gate 状态段更新至 correction #4A） |
+
+敌意环（C4A）：机械镜头（compiler+五脚本 WSL venv 复跑全 PASS/前缀 53 字节证明/append-only
+diff 核验 queries+2 seeds+5）+ 语义镜头（跨件数字口径交叉核对）R1 = 1 finding（「47 探针」
+应为 39 URL 探针——amendment-5/回应信两处）→ 修复 → R2 复检清零。**attestation**：
+`discovery_queries_executed = 0` 维持;双计数正典 = amendment-5 §6。**下一动作**：以回应信为
+封面请 reviewer 执行 P0-R8 窄幅复核（双向合同维持:0 新 MAJOR/0 新 MINOR + 旧项 evidence
+locator 可重放即签署）。
