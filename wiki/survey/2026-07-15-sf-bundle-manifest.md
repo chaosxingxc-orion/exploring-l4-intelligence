@@ -96,3 +96,38 @@ enum+SF-L9、A1-1 敏感性计数机器重数 16→19/18+eess.IV 补裁决、§9
 机器复检清零 → `A3_BATCH_LOOP_CONVERGED@37da7f3`。**attestation（更正后复签）**：联网检索
 查询执行数 = 0。**下一动作**：本 correction 提交后,重新申请 Gate S1 search-design 窄幅复核
 （范围 = G1–G6 闭合与本表一致性）。
+
+## dated correction #4（2026-07-16——博导复审 WITHHOLD 六项整改批 @f3ab138,取代 correction #3 集合为现行签署对象）
+
+签署对象自本 correction 起 = **@f3ab138 钉定的下表 25 件不可变集合**（correction #3 的 17 件
+集合保留为历史钉定;后续任何变更走新 dated correction）。逐件 git blob（`git ls-tree f3ab138`
+机器输出,short 12 位）：
+
+| # | path | blob | 变更说明 |
+|---|---|---|---|
+| 1 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `93ccd1ff1b7a` | 变更（C4-2 tier 零证据权重折入/§4 计数 53/SF-L10 块/§6 七维+命名统一） |
+| 2 | `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | `cfbf1ac326a8` | 未变 |
+| 3 | `wiki/survey/2026-07-16-sf-protocol-amendment-3.md` | `061c1437b489` | 未变 |
+| 3b | `wiki/survey/2026-07-16-sf-protocol-amendment-4.md` | `f44202048c24` | **新增**（C4-1..C4-6 对照+ID_DEREFERENCE 注册+编码深度纪律+两组合成验收案例+工件复跑清单） |
+| 4 | `wiki/survey/2026-07-15-sf-seed-manifest.jsonl` | `cbd05401ff4b` | 变更（批次3 +13 = **87 条**,74 行前缀字节不变;入册前置=ID 核验 14/14 HIT） |
+| 5 | `wiki/survey/2026-07-15-sf-seed-manifest-report.md` | `17ca7ec40c4c` | 变更（批次3 节） |
+| 6 | `wiki/survey/2026-07-15-sf-queries.jsonl` | `d31fc0a66fde` | 变更（**53 行** = 51 行前缀字节不变〔前缀 sha256 `4e40658010d8…`〕+ SF-L10-Q1/Q2,sfqc-1.2.0） |
+| 7 | `scripts/survey/sf_query_compiler.py` | `d3a4d800ae15` | 变更（三层版本 sfqc-1.0.0/1.1.0/1.2.0,ADDITION_LANES 注册表+守卫） |
+| 8 | `docs/checks/2026-07-16-sf-queries-static-validation-c4.md` | `f89b894561af` | **新增**（C4 终态链条:协议→编译器→53 行 jsonl,前缀证明;13/13） |
+| 9 | `wiki/survey/2026-07-16-sf-t1-proceedings-routes.md` | `9bb2f3d3a8ac` | 未变（保留为散文历史;机器正典移交 9b/9c） |
+| 9b | `wiki/survey/2026-07-16-sf-t1-routes.jsonl` | `207acc5d1ac3` | **新增**（C4-3:50 条逐行序列化,exact URL/显式状态/判断依据/词表 hash 钉定/执行期字段占位） |
+| 9c | `wiki/survey/2026-07-16-sf-t1-wordlist-v1.json` | `ee4e2d9750c2` | **新增**（词表机器正典:raw 73/有效 71,双侧归一化正典,合并对显式登记） |
+| 9d | `scripts/survey/sf_t1_routes_validate.py` + `docs/checks/2026-07-16-sf-t1-routes-validation.json` | `c00d75175368` / `c717560d582d` | **新增**（仓内只读 validator + 持久化输出 **12/12 PASS**） |
+| 10 | `wiki/survey/2026-07-15-sf-blank-templates.md` | `92943382e3a9` | 变更（**REC-0 工作级主账新增**;REC-1 派生行 C4-5 字段;REC-2 七维/proximity 统一/真枚举/evidence_grade 移出/coding_depth） |
+| 10b | `scripts/survey/sf_child_query_split.py` + `scripts/survey/sf_child_query_replay_test.py` + `docs/checks/2026-07-16-sf-child-query-replay-test.json` | `6b64918eb7db` / `671b63a7e97d` / `6ad59559bef1` | **新增**（C4-5 拆分规范实现 + 离线合成 replay test **9/9 PASS**） |
+| 11 | `wiki/survey/2026-07-16-sf-id-dereference-log.jsonl` | `515ed499c1c7` | **新增**（C4-6a:ID_DEREFERENCE 逐次留痕,21 次访问 14/14 目标 HIT 零幻觉） |
+| 11b | `wiki/survey/2026-07-16-sf-sentinel-data.json` + `scripts/survey/sf_sentinel_recall_test.py` + `docs/checks/2026-07-16-sf-sentinel-recall.json` | `982cdd921e32` / `6f18b659a373` / `5f69e74cdfce` | **新增**（C4-6b:离线 recall **9 HIT + 5 EXPLAINED_MISS 零 unexplained**;AgentEval 经 SF-L10 转 HIT） |
+| 12 | `wiki/survey/2026-07-16-gate-s1-correction-4-response.md` | `300225e906b5` | **新增**（C4-1 分层回应信:完成性更正表/§14 自评/双向合同/owner 改判披露） |
+| + | `wiki/survey/README.md`（token 登记面） | `1be06b3f8e88` | 变更（T2_UNREVIEWED/T2_PROMOTED/T1_DEMOTED 退役标注;C4 新 token 登记） |
+| + | `wiki/2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md` | `092e389e4e07` | **新增**（触发评审件,provenance） |
+
+敌意环：机械镜头（四脚本复跑/全 JSON 解析/模板块良构/计数交叉/前缀证明）+ 语义镜头
+（跨件引用/口径残留）R1 = 1 finding（编译器 docstring 旧口径 51/48+3）→ 修复 → R2 复检
+清零,`C4_BATCH_LOOP_CONVERGED@f3ab138`。**attestation**：联网检索查询执行数 = 0 维持;
+ID_DEREFERENCE 访问类已注册并逐次留痕（amendment-4 §1）。**下一动作**：本 correction 提交后,
+以回应信为封面请 reviewer 按复审 §14 十一项清单窄幅复核（双向合同:全过即签）。
