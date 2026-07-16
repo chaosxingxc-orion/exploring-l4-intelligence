@@ -22,7 +22,11 @@ import sys
 import unicodedata
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-ROUTES = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes.jsonl")
+_ROUTES_V2 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes-v2.jsonl")
+_ROUTES_V1 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes.jsonl")
+# C4A/P0-R4: v2 (post live-status-audit supersession) is the active canon when present;
+# v1 stays as the frozen historical artifact and is never rewritten.
+ROUTES = _ROUTES_V2 if os.path.exists(_ROUTES_V2) else _ROUTES_V1
 WORDLIST = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-wordlist-v1.json")
 OUT = os.path.join(REPO, "docs", "checks", "2026-07-16-sf-t1-routes-validation.json")
 
@@ -149,7 +153,7 @@ def main():
         "artifact_id": "SF-T1-ROUTES-VALIDATION-2026-07-16-01",
         "validator": "scripts/survey/sf_t1_routes_validate.py",
         "inputs": {
-            "routes_jsonl": {"path": "wiki/survey/2026-07-16-sf-t1-routes.jsonl",
+            "routes_jsonl": {"path": os.path.relpath(ROUTES, REPO).replace("\\", "/"),
                              "sha256": sha256_bytes(routes_bytes)},
             "wordlist_json": {"path": "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json", "sha256": wl_sha},
         },

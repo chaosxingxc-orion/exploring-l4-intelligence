@@ -1,0 +1,140 @@
+{
+ "artifact_id": "SF-RECORD-VALIDATOR-TEST-2026-07-16-01",
+ "validator": "scripts/survey/sf_record_validator.py",
+ "test": "scripts/survey/sf_record_validator_test.py",
+ "fixture_dir": "wiki/survey/fixtures-c4a/",
+ "fixture_sha256": {
+  "positive_package": "e39f212c3c5459de87cac0b4a10c33c0557717abb5640aa12b64b5256673bcd8",
+  "N01_included_missing_rec2_backref": "7825f6c50529c2a491195dd6ed2a905cc694dffde0e823c52f083a3613281f84",
+  "N02_excluded_missing_reason_code": "8606ae31cffee57245c60cd73fc07c46e48b39803483ae6673281b8a7e156c3e",
+  "N03_claim_backref_to_d1_row": "536e6f5c8b0cd56308b34a4898d54b44f9c562dec46e0391c1c8a02d1865c681",
+  "N04_core_row_stuck_at_d1": "4ebf8937cc788c75c504dccc88428311991f945438f796abf231ac7ecfe76ee2",
+  "N05_duplicate_canonical_id": "aa56c5dd30dd872f83db2c718314086b81af1c06003a3a2d2bf73f7ad94be339",
+  "N06_na_as_bare_string": "cfb6a8a6448355c3cdac0ab1a2391a27c37c8d7eec0da770bbbeddb1618d345c",
+  "N07_empty_screener_string": "a1bc8d49a79d36764f7b1520e0b32efda632a3afd5338b88d9c81cdcd2ca4b2d",
+  "N08_decision_enum_drift": "b80afa2b77b17a26d0e07b3d094ff7290ed3c6b0f2e3d82f0adbba12bcbbf76c",
+  "N09_flow_report_hand_tallied_mismatch": "0303aac38952e92cffb99be31f4d9c971a38d578ce39d44cf569042a9de190dd",
+  "N10_dangling_rec0_backref": "50bc8c707e064850e889dfe0e088477667ce7d25fe89eca9f173e246aee186d9",
+  "N11_missing_study_quality_dim": "d6956ffd57329cd8cb0de81deb09ddbc9525cd767254c3856fc3449b424f7b32",
+  "N12_threat_without_dual_coding": "e134cb073bb4d627e78c92d58c715c4038754bee34b7532173da6b8703c285f1",
+  "N13_included_with_reason_code": "24c9b345cc59739431e11e39f4a42aa5b1115cfcba83a6f31baa8e5d7152e47d",
+  "N14_unparseable_source": "e314e73f355a84d07bf769cd94da7ec4bd5fefe55acd5b9ff53f8b64050ae160"
+ },
+ "results": [
+  {
+   "case": "positive_package",
+   "expected_exit": 0,
+   "actual_exit": 0,
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "case": "determinism_two_runs_identical",
+   "expected_exit": 0,
+   "actual_exit": 0,
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "case": "N01_included_missing_rec2_backref",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V4"
+  },
+  {
+   "case": "N02_excluded_missing_reason_code",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V5"
+  },
+  {
+   "case": "N03_claim_backref_to_d1_row",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V11"
+  },
+  {
+   "case": "N04_core_row_stuck_at_d1",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V8"
+  },
+  {
+   "case": "N05_duplicate_canonical_id",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V1"
+  },
+  {
+   "case": "N06_na_as_bare_string",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V10"
+  },
+  {
+   "case": "N07_empty_screener_string",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V10"
+  },
+  {
+   "case": "N08_decision_enum_drift",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V12"
+  },
+  {
+   "case": "N09_flow_report_hand_tallied_mismatch",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V12"
+  },
+  {
+   "case": "N10_dangling_rec0_backref",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V7"
+  },
+  {
+   "case": "N11_missing_study_quality_dim",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V9"
+  },
+  {
+   "case": "N12_threat_without_dual_coding",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V13"
+  },
+  {
+   "case": "N13_included_with_reason_code",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V4"
+  },
+  {
+   "case": "N14_unparseable_source",
+   "expected_exit": "nonzero",
+   "actual_exit": 1,
+   "result": "PASS",
+   "detail": "first_violation_rule=V2"
+  }
+ ],
+ "summary": "16/16 PASS",
+ "verdict": "PASS",
+ "note": "负例经子进程运行,非零退出在进程级验证;fixtures 全部落盘可查,不藏在测试代码里。"
+}

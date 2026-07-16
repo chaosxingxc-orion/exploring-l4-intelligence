@@ -42,7 +42,7 @@
 > `API_LIMIT_SINGLE_DAY_OVER_2000`（单日窗口仍超 slice 上限的硬停止登记,C4-5）/
 > `EXPLAINED_MISS`（sentinel recall 裁决:未命中但解释+兜底路径已登记,C4-6）/
 > `LATE_RECONSTRUCTED_REVIEW_SUMMARY`（迟归档敌意环记录的统一定名——复盘可用,不等同原始
-> replay,A3-12）。**模板编号纪律（A3-4）**：空白模板 = `REC-1..REC-7`,`T` 前缀为 venue 梯队
+> replay,A3-12）。**模板编号纪律（A3-4;C4-4 增 REC-0）**：空白模板 = `REC-0..REC-7`,`T` 前缀为 venue 梯队
 > 独占。**convergence 纪律（A3-10）**：声明必须带对象与锚（如 `TEXT_CONSISTENCY_CONVERGED@blob`）,
 > 裸 `CONVERGED` 停用。
 > **信息来源六类分解（v3 外审 §2.2-G 起用,系 read-out/new-info 二分的直系升级——抽取轴与

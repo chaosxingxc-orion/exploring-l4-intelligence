@@ -3,8 +3,8 @@
  "validator": "scripts/survey/sf_t1_routes_validate.py",
  "inputs": {
   "routes_jsonl": {
-   "path": "wiki/survey/2026-07-16-sf-t1-routes.jsonl",
-   "sha256": "2d3722ee1d5e873f73f3aa3422ec43c1860ae16dc7d6333f33893de0a784b48c"
+   "path": "wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl",
+   "sha256": "a967c97a8c2ae60362c0e82a84520c84381e21be03273337978e5e1d951dfeff"
   },
   "wordlist_json": {
    "path": "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json",
@@ -13,12 +13,12 @@
  },
  "status_distribution": {
   "NOT_HELD": 3,
-  "NOT_YET_PUBLISHED": 6,
-  "READY": 41
+  "NOT_YET_PUBLISHED": 5,
+  "READY": 42
  },
  "entry_distribution": {
-  "ENTRY_TO_RESOLVE": 12,
-  "EXACT_URL": 35,
+  "ENTRY_TO_RESOLVE": 11,
+  "EXACT_URL": 36,
   "NOT_APPLICABLE": 3
  },
  "wordlist_counts": {

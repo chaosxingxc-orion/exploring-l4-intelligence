@@ -19,7 +19,13 @@
   },
   {
    "id": "R2",
-   "check": "月拆分：三个月窗口，1 月降级为 31 个日窗口 → 终端窗口 = 31 天 + 2 月 + 3 月 = 33",
+   "check": "第一 overflow event = SPLIT_YEAR（P0-R2 验收：ROOT 首次超限必拆年层）",
+   "result": "PASS",
+   "detail": "{\"action\": \"SPLIT_YEAR\", \"children\": 1, \"query_id\": \"SF-SYN-Q1\", \"totalresults\": 7000}"
+  },
+  {
+   "id": "R2b",
+   "check": "年→月→日逐级：终端窗口 = 31 天 + 2 月 + 3 月 = 33",
    "result": "PASS",
    "detail": "got=33"
   },
@@ -31,9 +37,9 @@
   },
   {
    "id": "R4",
-   "check": "ID 递归规则：<父ID>-W<n> 逐级适用（日窗口形如 SF-SYN-Q1-W1-W<j>）",
+   "check": "ID 递归规则：<父ID>-W<n> 逐级适用（日窗口在年/月两层之下，形如 SF-SYN-Q1-W1-W1-W<j>）",
    "result": "PASS",
-   "detail": "sample=['SF-SYN-Q1-W1-W1', 'SF-SYN-Q1-W1-W2']"
+   "detail": "sample=['SF-SYN-Q1-W1-W1-W1', 'SF-SYN-Q1-W1-W1-W2']"
   },
   {
    "id": "R5",
@@ -61,26 +67,32 @@
   },
   {
    "id": "R9",
-   "check": "月窗口父 hash 回指原冻结查询",
+   "check": "父 hash 链：月窗口回指年窗口、日窗口回指 1 月窗口（逐级可追溯）",
    "result": "PASS",
    "detail": ""
   }
  ],
- "summary": "9/9 PASS",
+ "summary": "10/10 PASS",
  "verdict": "PASS",
  "events_digest": {
-  "n_events": 35,
+  "n_events": 36,
   "splits": [
+   {
+    "action": "SPLIT_YEAR",
+    "children": 1,
+    "query_id": "SF-SYN-Q1",
+    "totalresults": 7000
+   },
    {
     "action": "SPLIT_MONTH",
     "children": 3,
-    "query_id": "SF-SYN-Q1",
+    "query_id": "SF-SYN-Q1-W1",
     "totalresults": 7000
    },
    {
     "action": "SPLIT_DAY",
     "children": 31,
-    "query_id": "SF-SYN-Q1-W1",
+    "query_id": "SF-SYN-Q1-W1-W1",
     "totalresults": 2500
    }
   ],
@@ -88,11 +100,11 @@
    {
     "action": "STOP_API_LIMIT_SINGLE_DAY",
     "note": "single GMT day exceeds arXiv slice limit; registered, not truncated",
-    "query_id": "SF-SYN-Q1-W1-W15",
+    "query_id": "SF-SYN-Q1-W1-W1-W15",
     "totalresults": 2400
    }
   ]
  },
- "run_sha256": "ef43c163c0981428801f6bce80fc2aba481e636cff92414f08109c020bc2e8ce",
+ "run_sha256": "d661a5554f8b84c3f3084e1a82e89df541ec4ffa387cce2bb08746a0d3bd922d",
  "note": "无网合成 oracle；执行期以 arXiv API totalResults 为 oracle 调用同一 split_query，节流≥3s/指数退避/断点续跑由执行器按 amendment-4 纪律实施并入 REC-1。"
 }

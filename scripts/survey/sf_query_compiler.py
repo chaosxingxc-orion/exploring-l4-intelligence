@@ -27,15 +27,17 @@ exception for SF-L7-Q3). Writes the frozen JSONL artifact
   — this is a deliberate guard against an unregistered/undocumented query
   line silently entering the compiled set.
 
-- **C4-6 lane additions** — whole new lanes registered in `ADDITION_LANES`
-  (SF-L10 Q1/Q2, cs.SE/cs.HC controlled category lanes), each tagged
-  `compiler_version = COMPILER_VERSION_C4_LANES` ("sfqc-1.2.0"). Same guard:
-  an unregistered lane carrying Boolean query lines is a hard parse failure.
+- **C4-6 / C4A lane additions** — whole new lanes registered in
+  `ADDITION_LANES` (SF-L10 Q1/Q2 = cs.SE/cs.HC, "sfqc-1.2.0"; SF-L11 Q1/Q2 =
+  cs.MM/cs.MA, "sfqc-1.3.0" — per-lane tags in `ADDITION_LANE_VERSIONS`).
+  Same guard: an unregistered lane carrying Boolean query lines is a hard
+  parse failure.
 
 Output order = strict prefix preservation: the 48 base records first, in
 their original order, then the 3 A3-8 additions (SF-L1-Q7, SF-L1-Q8,
-SF-L3-Q7), then the C4-6 lane additions in `ADDITION_LANES` declaration
-order — the 51-row prefix must stay byte-identical across C4-6.
+SF-L3-Q7), then the lane additions in `ADDITION_LANES` declaration order —
+the 51-row prefix stays byte-identical across C4-6 and the 53-row prefix
+across C4A.
 
 This is a pure protocol *compiler*, not a retrieval executor: it does no
 network I/O of any kind. Only the Python standard library is imported, and
@@ -47,8 +49,8 @@ Usage (from the umbrella repo root, any Python 3.x with only the stdlib):
 
     python scripts/survey/sf_query_compiler.py
 
-Exit code 0 = 53/53 records (48 base + 3 A3-8 additions + 2 C4-6 lane
-additions) compiled and all static validations passed.
+Exit code 0 = 55/55 records (48 base + 3 A3-8 additions + 2 C4-6 lane
+additions + 2 C4A lane additions) compiled and all static validations passed.
 Exit code 1 = parse failure (including an unregistered Q>=7 line) or a
 static validation failure (details printed).
 """
@@ -67,6 +69,7 @@ from urllib.parse import quote
 COMPILER_VERSION_BASE = "sfqc-1.0.0"
 COMPILER_VERSION_ADDITIONS = "sfqc-1.1.0"
 COMPILER_VERSION_C4_LANES = "sfqc-1.2.0"
+COMPILER_VERSION_C4A_LANES = "sfqc-1.3.0"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "2026-07-15-system-first-survey-protocol-v1.md"
@@ -109,6 +112,14 @@ ADDITIONS = {
 # ---------------------------------------------------------------------------
 ADDITION_LANES = {
     "SF-L10": [1, 2],
+    "SF-L11": [1, 2],
+}
+
+# per-lane compiler_version for ADDITION_LANES tiers (C4-6 vs C4A batches must stay
+# distinguishable; the 53-row prefix keeps its original sfqc-1.2.0 tags byte-for-byte)
+ADDITION_LANE_VERSIONS = {
+    "SF-L10": COMPILER_VERSION_C4_LANES,
+    "SF-L11": COMPILER_VERSION_C4A_LANES,
 }
 
 
@@ -137,6 +148,7 @@ CATEGORY_MAP = {
     "SF-L7": ["cs.CL", "cs.AI", "cs.LG"],
     "SF-L8": ["cs.CL", "cs.AI", "cs.LG"],
     "SF-L10": ["cs.SE", "cs.HC"],
+    "SF-L11": ["cs.MM", "cs.MA"],
 }
 
 DEFAULT_DATE_FROM = "202210010000"
@@ -377,7 +389,7 @@ def assemble_record(query_id: str, q_fragment: str) -> dict:
     record["sortBy"] = SORT_BY
     record["sortOrder"] = SORT_ORDER
     if lane in ADDITION_LANES:
-        record["compiler_version"] = COMPILER_VERSION_C4_LANES
+        record["compiler_version"] = ADDITION_LANE_VERSIONS[lane]
     elif is_addition_query(query_id):
         record["compiler_version"] = COMPILER_VERSION_ADDITIONS
     else:
@@ -579,7 +591,7 @@ def run_validations(records: list) -> "tuple[list, bool]":
     version_bad = []
     for r in records:
         if lane_of(r["query_id"]) in ADDITION_LANES:
-            expected_version = COMPILER_VERSION_C4_LANES
+            expected_version = ADDITION_LANE_VERSIONS[lane_of(r["query_id"])]
         elif is_addition_query(r["query_id"]):
             expected_version = COMPILER_VERSION_ADDITIONS
         else:

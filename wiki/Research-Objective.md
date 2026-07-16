@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-16（续61:博导复审 WITHHOLD—CORRECTION #4 → owner 四裁决〔venue_tier 零证据权重/ID 核验前置/阶段语义/编码三深度〕→ correction #4 六项当日交付——待 reviewer 按复审 §14 清单窄幅复核〔双向合同:全过即签〕,签署前零查询维持）"
+last_refresh: "2026-07-16（续62:博导复审 #4A WITHHOLD〔8 项 P0,我方全量核验属实+7/7 引文零幻觉〕→ owner 三裁决〔P0-R4 时点收紧接受/D2-core 直接接受/机械化状态动词〕→ correction #4A 当日交付〔55 查询+SF-L11/92 种子/routes v2/YEAR splitter/record validator/sentinel 四分法/双计数〕——敌意内审环后送窄幅复核,签署前零查询维持）"
 ---
 
 # Research Objective & Current State
@@ -46,12 +46,16 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   零证据权重〔dated supersession 续59 裁决②;T2_UNREVIEWED 等三 token 退役,承重=七维
   study_quality〕②sentinel ID 前置核验〔ID_DEREFERENCE 访问类,14/14 HIT 零幻觉〕③survey
   执行=Stage-1A〔1B 标志=触碰模型;「1B 开始」表述收回〕④编码 D0/D1/D2+code-on-use →
-  **correction #4 六项当日交付**（amendment-4+回应信:53 查询〔SF-L10 受控 cs.SE/cs.HC 道,
-  51 行前缀字节不变〕/87 种子〔批次3+13〕/50 route 逐条序列化+validator 12/12/REC-0 工作级
-  主账/child-query replay 9/9/sentinel recall 9 HIT+5 EXPLAINED 零 unexplained）,**当前动作 =
-  待 reviewer 按复审 §14 十一项清单窄幅复核（双向合同:全过即签不再延期）**;执行前置三条件
-  （签署+owner 批准+P0-R8 复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
-  查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
+  **correction #4 六项当日交付** → **博导复审 #4A 再裁 WITHHOLD（8 项 P0;我方全量核验:仓内
+  断言全属实+7/7 引文零幻觉+ACL2026 wrong-at-freeze 坐实）→ owner 三裁决（续62:P0-R4 时点
+  收紧接受并点破/D2-core 直接接受/机械化状态动词）→ correction #4A 当日交付**（amendment-5+
+  回应信:55 查询〔SF-L11 受控 cs.MM/cs.MA 道,前 53 行字节不变〕/92 种子〔批次4+5,TF-TTCL
+  转录失败在案登记〕/routes v2〔ACL2026→READY 唯一状态改判,ICML2025 入口解析 v267〕/YEAR 层
+  splitter+真实行 dry-run 17/17/record validator V1–V13+负例 16/16/sentinel 四分法 21 哨兵
+  零 UNRESOLVED〔两 held-out 纯查询召回,VQQA×5 验证 SF-L11〕/双计数 attestation+access
+  class 追认）,**当前动作 = 敌意内审环后两段提交,再送窄幅复核（P0-R8,双向合同维持）**;
+  执行前置三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询维持（attestation=0;SURVEY-B
+  21 lanes/105 查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。

@@ -6,6 +6,54 @@
 
 ---
 
+### 2026-07-16（续62）· 博导复审 #4A（WITHHOLD）全量核验属实 + owner 三裁决（P0-R4 时点/D2-core 直接接受/机械化状态动词）+ token 退役语义澄清（P0-R7）
+
+**Context.** 博导复审（`2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md`，untracked
+入库随本批提交）对 correction #4 回应裁决 **WITHHOLD — CORRECTION #4A REQUIRED**（五阻断项 +
+material QRP 认定 + 8 项 P0）。我方按 reviewer-response-protocol **亲自逐条独立核验（不委托）**：
+①仓内事实断言**全部属实**——splitter 宣称 YEAR→MONTH→DAY 实则 ROOT 直拆月且真实冻结行必
+KeyError（`query_sha256` 0/53）、amendment-4 承诺的 record validator 不存在、sentinel 硬编码
+"51 rows" 且 EXPLAINED_MISS 不可证伪、类目缺 cs.MM/cs.MA、协议/README 陈旧口径共存、续61
+Supersedes 与 amendment-4 的 token 退役语义直接冲突、TF-TTCL 旧日志行 241 已发现却 0 转录；
+②评审新引 **7/7 引文零幻觉**（逐 ID dereference + verbatim 摘要，留痕 =
+`2026-07-16-sf-access-log-c4a-review-verification.jsonl`）；③外部事实属实——ACL 2026 会期
+7月2–7日已过且 Anthology 卷已出版（`NOT_YET_PUBLISHED` 为**冻结当时即错**，非事后过时）、
+PMLR v267 = ICML 2025 已出版。对抗保留两点：QRP-4 定性中「约 25 次先前访问」系我方 log header
+主动聚合披露（准确定性 = 顶层 attestation 未携带双计数，非隐瞒）；P0-R4 将 route 状态核验从
+预注册的「执行首步」提前至「签署前」，属合同时点收紧（如实点破并接受——ACL 2026 属
+wrong-at-freeze，收紧有据）。
+
+**Decision（owner 2026-07-16 三裁决 + 执行选项）.** ① **接受 correction #4A 全部 8 项 P0**，
+含 P0-R4 时点收紧（回应信如实记录合同演化，不讨价还价）；② **D2 触发集扩张直接接受**——
+`topic_relevance:"core"` 亦强制 D2（评审 P0-R3 对 amendment-4 code-on-use 的增量），不做前置
+吞吐估算，执行中如实呈报吞吐（「没必要估计啥吧,直接干」）；③ **机械化状态动词**：签署清单
+的状态一律由 `scripts/survey/sf_package_summary.py` 从持久化证据文件推导，人工手填完成态
+废止——同时治 P0-R1 陈旧口径与 premature closure 根因（G3 同型惯性第三次复发的结构性防复发）。
+执行选项：P0-R2 取**选项 1**（实装 `_year_windows`，保留 ROOT→YEAR→MONTH→DAY 三层合同）——
+协议 amendment-4 §G6 已冻结该语义，且跨多年 root 年层探针数远小于直拆月。
+
+**token 退役语义澄清（P0-R7 dated supersession，续61 原文不改写）.**
+`T2_UNREVIEWED` / `T1_DEMOTED` / `T2_PROMOTED` 作为**证据权重/先验 token 全部退役**（正典 =
+amendment-4 C4-2）；续61 Supersedes 所称「双向登记继续有效」的准确语义 = **登记职能**（某 T1
+篇为何不承重、某 T3 篇为何值得读的理由记录）迁入七维 `study_quality` 的 reason/locator 与
+REC-0 的 reason 字段——**token 本身不再出现在任何新记录**；历史记录中的旧 token 仅作
+provenance 保留，读旧件按本条映射；`venue_tier` 仅存排序键/发现层三职能（T1 手扫范围、DFS
+平局键、coverage 分层描述），绝不影响 evidence weight。同名不承载两定义，自本条起消歧。
+
+**Rationale.** ①评审事实可信度经两轮全量核验无瑕疵（上轮 13/13、本轮 7/7 引文零幻觉），其
+P0 清单全部有据；时点收紧的实质理由 = 签署对象不得包含已知为假的冻结事实；②core 篇量未知但
+评审拥有严谨性裁决权，吞吐属执行呈报事项非谈判筹码；③根因治理优于逐次小心——动词由证据
+生成后，「全绿超前」在结构上不可能再发生。
+
+**Consequences.** correction #4A 交付：amendment-5（P0 逐项 + route 状态审计裁定表 + SF-L11 +
+词项 provenance）、回应信（含 7/7 核验致谢、QRP-4 分层陈述、时点收紧记录）、8 项 P0 工件
+（YEAR 层 splitter + realrow dryrun 17/17、record validator + 正负 fixtures 16/16、sentinel
+四分法 21 哨兵零 UNRESOLVED〔两 held-out 均纯查询召回,VQQA 5 hits 验证 SF-L11〕、55 查询
+（前 53 行字节不变）、92 种子（TF-TTCL 转录失败在案登记）、routes v2 + 双层审计、package
+summary 机器清单、双计数 attestation）；新 access class 追认（`VENUE_STATUS_CHECK` /
+`WEB_SEARCH_STATUS`，事实核查用途，非 discovery）；敌意内审环至一轮零新发现后两段提交，
+再送窄幅复核（P0-R8）。签署前 discovery query 维持 0、模型触碰维持 0。
+
 ### 2026-07-16（续61）· 窄幅复核返回 WITHHOLD（correction #4）+ owner 四裁决（venue_tier 改判/ID 核验前置/阶段语义/编码三深度）
 
 **Context.** 博导级对抗复审

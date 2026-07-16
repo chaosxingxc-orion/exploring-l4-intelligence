@@ -26,7 +26,12 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
 （**完整纳排链条正典**：任何命中工作无论终态都必须有一行——同一 work 被多少查询/route/引文
 边命中、如何合并、在哪一阶段因何排除、谁筛谁核谁裁、抽取回指哪个固定版本,全部可由本表回放;
 `coding_depth` = amendment-4 编码深度纪律〔D0=本行即全部;D1=INCLUDED 精简核;D2=承重全合同〕,
-承重 claim 必须回指 `coding_depth:"D2"` 的 REC-2 行——validator 强制。）
+承重 claim 必须回指 `coding_depth:"D2"` 的 REC-2 行。**validator 已实装〔C4A/P0-R3〕** =
+`scripts/survey/sf_record_validator.py`（V1–V13,正负 fixtures =
+`wiki/survey/fixtures-c4a/`,固定输出 = `docs/checks/2026-07-16-sf-record-validator-test.json`）;
+**INCLUDED ⇒ `reason_code` 必为 null（机器强制,消模板歧义）**,EXCLUDED/UNOBTAINABLE ⇒
+枚举 reason_code + 非空 reason_text,DUPLICATE ⇒ `DUPLICATE_OF:<id>`;flow 五计数由本表
+机器导出,手填不一致 = FAIL。）
 
 ## REC-1 检索日志行（每次查询一行,JSONL;原 T1）
 
@@ -43,11 +48,16 @@ git blob。**编号纪律（amendment-3 A3-4,消同名异构）**：模板编号
 （绝不静默截断）。派生行沿用本模板,**另须逐字段携带**：`date_from / date_to /
 timezone:"GMT" / boundary_semantics(闭区间分钟粒度) / decoded_search_query /
 url_encoded_search_query / query_sha256(decoded 串哈希) / parent_query_sha256 /
-split_level(MONTH|DAY) / split_ordinal / trigger_totalresults`;`query_id` = `<父ID>-W<窗口
-序号>` 逐级递归适用。**拆分规范实现 = `scripts/survey/sf_child_query_split.py`**——执行器
-必须调用其 `split_query`,派生记录逐字取其输出;确定性证据 = 离线合成 replay test
-`docs/checks/2026-07-16-sf-child-query-replay-test.json`（9/9 PASS：同父查询+同计数 →
-逐字相同子查询与 hash）。**执行纪律**：调用间隔 ≥3s、失败指数退避、断点自最后完整落账窗口
+split_level(YEAR|MONTH|DAY,C4A/P0-R2 年层实装) / split_ordinal / trigger_totalresults`;
+`query_id` = `<父ID>-W<窗口序号>` 逐级递归适用。**拆分规范实现 =
+`scripts/survey/sf_child_query_split.py`**——执行器必须经 `parent_from_frozen_row` 适配冻结
+行（`record_sha256`=整记录哈希,`query_sha256`=decoded 串哈希,两类哈希机器强制分离）后调用
+其 `split_query`,派生记录逐字取其输出;断点续跑 = `remaining_after`、落账前查重 =
+`assert_unique_ids`（均为规范函数）。确定性证据 = 离线合成 replay test
+`docs/checks/2026-07-16-sf-child-query-replay-test.json`（10/10 PASS,首个 overflow 必为
+SPLIT_YEAR）+ 真实行集成 dry-run
+`docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json`（17/17 PASS,全部冻结行无
+KeyError 进入规范函数,负例逐项触发硬错误）。**执行纪律**：调用间隔 ≥3s、失败指数退避、断点自最后完整落账窗口
 续跑（均入 REC-1,arXiv API 手册口径）。）
 
 ## REC-2 抽取记录行（每篇 INCLUDED 一行,JSONL;原 T2——A3-5 扩展 + correction #4 C4-2/C4-4 修订;工作级纳排主账 = REC-0）
@@ -116,10 +126,15 @@ split_level(MONTH|DAY) / split_ordinal / trigger_totalresults`;`query_id` = `<�
 五轴分离——`modality_path` 为粗标签保留,承重判断以五轴为准;`tf_audit` 扩展四字段区分
 「冻结通用工具」与「为本任务新训组件」;`study_quality` = **七维结构化**〔C4-2,owner 裁决①:
 venue_tier 零证据权重,承重全由本块决定;`quality_override` 已退役〕;`proximity` 键名与协议
-§6 范围多轴列表逐字一致〔C4-4〕;**编码深度**〔amendment-4〕：D1 行必填 = 身份元数据 +
+§6 范围多轴列表逐字一致〔C4-4〕;**编码深度**〔amendment-4;C4A/P0-R3 类型稳定修订〕：D1 行必填 = 身份元数据 +
 topic_relevance + proximity + publication_status + venue_tier + dfs_trigger +
-verification_depth,其余块可整块 `"NA:<理由>"` 折叠;D2〔承重〕= 全字段 + study_quality
-七维完整,承重 claim 必须回指 D2 行——validator 强制。）
+verification_depth,其余块可整块折叠,**折叠唯一合法形态 = 类型稳定对象
+`{"status":"NA","reason":"<非空理由>"}`——裸字符串 `"NA:<理由>"` 自 C4A 起为 validator
+FAIL（同字段异类型消除）**;D2〔承重;触发 = 被 claim 引用 ∨ initial_tag 含 DIRECT_THREAT ∨
+`topic_relevance:"core"`（评审扩张,owner 2026-07-16 接受）〕= 全字段 + study_quality 七维
+完整（非 NA 维必带 locator）+ claim_locators 非空;DIRECT_THREAT 行另须
+`threat_dual_coding`（双抽取人相异 + rec5_ref + 有分歧必有裁决人）。承重 claim 只能回指
+D2 行——以上全部由 `sf_record_validator.py` 机器强制,不再是纸面承诺。）
 
 ## REC-3 census 增量行 / REC-4 ledger 增量行（原 T3/T4）
 

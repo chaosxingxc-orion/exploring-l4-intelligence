@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Offline sentinel-recall test for the frozen query family (correction #4 / C4-6b).
+"""Offline sentinel-coverage test, four-way falsifiable taxonomy (correction #4A / P0-R5).
 
-For each verified sentinel paper (title/abstract/categories captured via the logged
-ID_DEREFERENCE pass), evaluates every frozen query in
-wiki/survey/2026-07-15-sf-queries.jsonl offline:
-  category filter  = paper categories ∩ query categories ≠ ∅
-  date filter      = v1 submission month within [date_from, date_to] (month granularity;
-                     boundary cases carry an exact-date note in the sentinel data file)
-  term expression  = recursive-descent evaluation of the ti:/abs: boolean expression
-                     against normalized title/abstract text
+Outcome domain per sentinel paper (priority order; free-text can NEVER convert an outcome):
+  QUERY_HIT               — a frozen query's category+date+term expression matches offline;
+  SEED_GUARANTEED         — not query-recalled, but guaranteed by an exact ID in the frozen
+                            seed manifest (never available to held-out sentinels);
+  EXACT_ROUTE_GUARANTEED  — guaranteed by a READY venue route with an exact entry URL;
+  REGISTERED_BOUNDARY     — an accepted coverage boundary registered in a dated amendment
+                            (machine-checked pointer, not an inline explanation);
+  UNRESOLVED_MISS         — none of the above; the test FAILS.
 
-Matching is an offline APPROXIMATION of the arXiv API (no stemming; hyphen/slash/underscore
-folded to spaces on both sides; word-boundary phrase matching). It is conservative in the
-HIT direction: an offline HIT implies the API almost certainly returns the paper; an offline
-term-MISS could still hit via API stemming. Verdicts feed C4-6 (HIT or EXPLAINED_MISS —
-never an unexplained miss). No network. Exit 0 iff every sentinel is HIT or carries an
-explanation. Persists docs/checks/2026-07-16-sf-sentinel-recall.json.
+`coverage_note` fields in the sentinel data are annotations only — the old EXPLAINED_MISS
+mechanism (any free text converts a miss into a pass) is retired as unfalsifiable
+(doctoral review P0-R5). Held-out sentinels (held_out=true) additionally must not appear
+in the seed manifest — a seeded held-out is a design contamination and FAILS.
+
+Offline matcher unchanged from C4-6: category ∩, month-granularity window, recursive-descent
+ti:/abs: boolean evaluation, hyphen folding, word-boundary phrases, light plural tolerance;
+conservative in the HIT direction. Input counts are read live from the JSONL, never
+hardcoded. No network. Persists docs/checks/2026-07-16-sf-sentinel-recall.json.
 
 Run from repo root:
   python scripts/survey/sf_sentinel_recall_test.py wiki/survey/2026-07-16-sf-sentinel-data.json
@@ -114,6 +117,13 @@ def month_of_id(arxiv_id):
     return f"20{yymm[:2]}{yymm[2:]}"
 
 
+SEEDS = os.path.join(REPO, "wiki", "survey", "2026-07-15-sf-seed-manifest.jsonl")
+ROUTES_V2 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes-v2.jsonl")
+ROUTES_V1 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes.jsonl")
+OUTCOME_ORDER = ("QUERY_HIT", "SEED_GUARANTEED", "EXACT_ROUTE_GUARANTEED",
+                 "REGISTERED_BOUNDARY", "UNRESOLVED_MISS")
+
+
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -121,15 +131,20 @@ def main():
         REPO, "wiki", "survey", "2026-07-16-sf-sentinel-data.json")
     sentinels = json.load(open(sentinel_file, encoding="utf-8"))
     queries = [json.loads(l) for l in open(QUERIES, encoding="utf-8") if l.strip()]
+    seed_ids = {json.loads(l)["id"] for l in open(SEEDS, encoding="utf-8") if l.strip()}
+    routes_file = ROUTES_V2 if os.path.exists(ROUTES_V2) else ROUTES_V1
+    routes = {r["route_id"]: r for r in
+              (json.loads(l) for l in open(routes_file, encoding="utf-8") if l.strip())}
 
     unparsed = []
     results = {}
+    contaminated_holdouts = []
     for aid, meta in sentinels["papers"].items():
         title_n = normalize(meta["title"])
         abs_n = normalize(meta["abstract"] or "")
         fields = {"ti": title_n, "abs": abs_n, "all": title_n + " " + abs_n}
         month = month_of_id(aid)
-        hits, cat_blocked, term_missed = [], 0, 0
+        hits, cat_blocked = [], 0
         for q in queries:
             m = SHAPE.match(q["decoded_search_query"])
             if not m:
@@ -146,41 +161,83 @@ def main():
                 hits.append(q["query_id"])
             elif in_date and term_ok and not in_cat:
                 cat_blocked += 1
-            elif in_cat and in_date:
-                term_missed += 1
+
+        held_out = bool(meta.get("held_out"))
+        in_seed = aid in seed_ids
+        if held_out and in_seed:
+            contaminated_holdouts.append(aid)
+
+        route_ok = False
+        vr = meta.get("venue_route")
+        if vr and vr in routes:
+            r = routes[vr]
+            route_ok = (r.get("status") == "READY" and r.get("entry_status") == "EXACT_URL")
+
+        boundary_ok = False
+        ab = meta.get("accepted_boundary")
+        if isinstance(ab, dict) and ab.get("registered_in"):
+            boundary_ok = os.path.exists(os.path.join(REPO, ab["registered_in"]))
+
+        channels = {"QUERY_HIT": bool(hits),
+                    "SEED_GUARANTEED": in_seed and not held_out,
+                    "EXACT_ROUTE_GUARANTEED": route_ok,
+                    "REGISTERED_BOUNDARY": boundary_ok,
+                    "UNRESOLVED_MISS": True}
+        outcome = next(o for o in OUTCOME_ORDER if channels[o])
         results[aid] = {
             "title": meta["title"],
             "categories": meta["categories"],
             "reviewer_role": meta.get("reviewer_role"),
+            "held_out": held_out,
             "query_hits": hits,
             "n_term_match_but_category_blocked": cat_blocked,
-            "verdict": "HIT" if hits else "MISS",
-            "explanation": None if hits else meta.get("miss_explanation"),
+            "channels": {k: v for k, v in channels.items() if k != "UNRESOLVED_MISS"},
+            "outcome": outcome,
+            "coverage_note": meta.get("coverage_note"),
         }
 
-    unexplained = [a for a, r in results.items() if r["verdict"] == "MISS" and not r["explanation"]]
+    unresolved = sorted(a for a, r in results.items() if r["outcome"] == "UNRESOLVED_MISS")
+    holdouts = {a: r["outcome"] for a, r in results.items() if r["held_out"]}
+    counts = {o: sum(1 for r in results.values() if r["outcome"] == o) for o in OUTCOME_ORDER}
+    fail_reasons = []
+    if unresolved:
+        fail_reasons.append(f"UNRESOLVED_MISS: {unresolved}")
+    if unparsed:
+        fail_reasons.append(f"unparsed queries: {sorted(set(unparsed))[:5]}")
+    if not holdouts:
+        fail_reasons.append("no held-out sentinels present")
+    if contaminated_holdouts:
+        fail_reasons.append(f"held-out contaminated by seed manifest: {contaminated_holdouts}")
+
     report = {
-        "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-01",
+        "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-02",
         "test": "scripts/survey/sf_sentinel_recall_test.py",
-        "inputs": {"queries": "wiki/survey/2026-07-15-sf-queries.jsonl (51 rows, frozen)",
+        "inputs": {"queries": f"wiki/survey/2026-07-15-sf-queries.jsonl "
+                              f"({len(queries)} rows, auto-read, frozen)",
+                   "seed_manifest": f"wiki/survey/2026-07-15-sf-seed-manifest.jsonl "
+                                    f"({len(seed_ids)} ids, auto-read)",
+                   "routes": os.path.relpath(routes_file, REPO).replace("\\", "/"),
                    "sentinel_data": os.path.relpath(sentinel_file, REPO).replace("\\", "/")},
         "matching_caveat": "offline approximation：无词干化、连字符折叠、词边界短语匹配；"
                            "HIT 方向保守可信，term-MISS 仍可能被 API 词干化召回——终证以执行期实测为准",
         "unparsed_queries": sorted(set(unparsed)),
         "sentinels": results,
-        "n_hit": sum(1 for r in results.values() if r["verdict"] == "HIT"),
-        "n_explained_miss": sum(1 for r in results.values() if r["verdict"] == "MISS" and r["explanation"]),
-        "n_unexplained_miss": len(unexplained),
-        "verdict": "PASS" if not unexplained and not unparsed else "FAIL",
-        "gate_rule": "每个 sentinel 必须 HIT 或 EXPLAINED_MISS；unexplained miss / 查询不可解析 = FAIL",
+        "outcome_counts": counts,
+        "held_out_outcomes": holdouts,
+        "verdict": "PASS" if not fail_reasons else "FAIL",
+        "fail_reasons": fail_reasons,
+        "gate_rule": "四分法：QUERY_HIT / SEED_GUARANTEED / EXACT_ROUTE_GUARANTEED / "
+                     "REGISTERED_BOUNDARY(须回指 dated amendment) 之一；UNRESOLVED_MISS、"
+                     "查询不可解析、无 held-out、held-out 被种子污染 = FAIL；"
+                     "coverage_note 仅注释，绝不转换 outcome",
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "wb") as f:
         f.write((json.dumps(report, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
-    print(f"HIT={report['n_hit']} EXPLAINED_MISS={report['n_explained_miss']} "
-          f"UNEXPLAINED={report['n_unexplained_miss']} verdict={report['verdict']}")
-    for a, r in results.items():
-        print(f"  {a} {r['verdict']:4s} hits={len(r['query_hits'])} cat_blocked={r['n_term_match_but_category_blocked']} {r['title'][:50]}")
+    print(" ".join(f"{k}={v}" for k, v in counts.items()), f"verdict={report['verdict']}")
+    for a, r in sorted(results.items()):
+        ho = " HELD-OUT" if r["held_out"] else ""
+        print(f"  {a} {r['outcome']:22s} qhits={len(r['query_hits'])}{ho} {r['title'][:46]}")
     return 0 if report["verdict"] == "PASS" else 1
 
 

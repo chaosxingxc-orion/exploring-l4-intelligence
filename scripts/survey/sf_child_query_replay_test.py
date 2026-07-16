@@ -5,8 +5,9 @@
 Acceptance (doctoral review C4-5): given the same parent query and the same totalResults
 inputs, the splitter must generate byte-identical child query lists and hashes. No network.
 
-Scenario (synthetic, frozen):
-  parent window 2024-01-01..2024-03-31, totalResults 7000 -> MONTH split (Jan/Feb/Mar);
+Scenario (synthetic, frozen; C4A/P0-R2 ladder ROOT->YEAR->MONTH->DAY):
+  parent window 2024-01-01..2024-03-31, totalResults 7000 -> YEAR split (single 2024 window,
+  clipped to the parent range) -> 7000 again -> MONTH split (Jan/Feb/Mar);
   Jan = 2500 -> DAY split (31 days); Jan-15 = 2400 -> STOP_API_LIMIT_SINGLE_DAY (registered,
   not truncated); every other day = 80; Feb = 1800, Mar = 900 -> executed as single windows.
 
@@ -64,7 +65,10 @@ def main():
         checks.append({"id": cid, "check": desc, "result": "PASS" if ok else "FAIL", "detail": detail})
 
     check("R1", "确定性：同父查询+同计数两次生成逐字相同", run1 == run2)
-    check("R2", "月拆分：三个月窗口，1 月降级为 31 个日窗口 → 终端窗口 = 31 天 + 2 月 + 3 月 = 33",
+    check("R2", "第一 overflow event = SPLIT_YEAR（P0-R2 验收：ROOT 首次超限必拆年层）",
+          bool(events) and events[0]["action"] == "SPLIT_YEAR" and events[0]["children"] == 1,
+          json.dumps(events[0] if events else None, ensure_ascii=False))
+    check("R2b", "年→月→日逐级：终端窗口 = 31 天 + 2 月 + 3 月 = 33",
           len(terminals) == 33, f"got={len(terminals)}")
     jan15 = [t for t in terminals if t["date_from"].startswith("20240115")]
     check("R3", "单日超限 STOP：Jan-15 标 API_LIMIT_SINGLE_DAY_OVER_2000、登记不静默截断",
@@ -72,8 +76,8 @@ def main():
           json.dumps(jan15[0].get("api_limit") if jan15 else None))
     ids_ok = all(t["query_id"].startswith("SF-SYN-Q1-W") for t in terminals)
     day_ids = [t["query_id"] for t in terminals if t["split_level"] == "DAY"]
-    check("R4", "ID 递归规则：<父ID>-W<n> 逐级适用（日窗口形如 SF-SYN-Q1-W1-W<j>）",
-          ids_ok and all(i.startswith("SF-SYN-Q1-W1-W") for i in day_ids),
+    check("R4", "ID 递归规则：<父ID>-W<n> 逐级适用（日窗口在年/月两层之下，形如 SF-SYN-Q1-W1-W1-W<j>）",
+          ids_ok and all(i.startswith("SF-SYN-Q1-W1-W1-W") for i in day_ids),
           f"sample={day_ids[:2]}")
     fields = ["date_from", "date_to", "timezone", "boundary_semantics", "decoded_search_query",
               "url_encoded_search_query", "query_sha256", "record_sha256",
@@ -87,9 +91,15 @@ def main():
     check("R7", "子查询 sha256 = decoded 字符串哈希，可独立复算", hash_ok)
     chrono = [t["date_from"] for t in terminals]
     check("R8", "终端窗口时间序单调不减（确定性排序）", chrono == sorted(chrono))
-    parent_links = all((t["parent_query_sha256"] == PARENT["query_sha256"])
-                       for t in terminals if t["split_level"] == "MONTH")
-    check("R9", "月窗口父 hash 回指原冻结查询", parent_links)
+    year_decoded = PARENT_DECODED  # 单年窗口 clip 后与根窗口逐字相同（本场景特例，检验链条而非巧合）
+    jan_decoded = year_decoded.replace("[202401010000 TO 202403312359]",
+                                       "[202401010000 TO 202401312359]")
+    month_links = all(t["parent_query_sha256"] == sha256_text(year_decoded)
+                      for t in terminals if t["split_level"] == "MONTH")
+    day_links = all(t["parent_query_sha256"] == sha256_text(jan_decoded)
+                    for t in terminals if t["split_level"] == "DAY")
+    check("R9", "父 hash 链：月窗口回指年窗口、日窗口回指 1 月窗口（逐级可追溯）",
+          month_links and day_links)
 
     n_pass = sum(1 for c in checks if c["result"] == "PASS")
     report = {
