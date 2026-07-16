@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/GjWTZrBaGqGAbXGR3HHxbFpGD8A</id>
+  <title>arXiv Query: search_query=&amp;id_list=2503.12434&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2503.12434" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2503.12434v2</id>
+    <title>A Survey on the Optimization of Large Language Model-based Agents</title>
+    <updated>2026-02-24T15:31:52Z</updated>
+    <link href="https://arxiv.org/abs/2503.12434v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.12434v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rapid development of Large Language Models (LLMs), LLM-based agents have been widely adopted in various fields, becoming essential for autonomous decision-making and interactive tasks. However, current work typically relies on prompt design or fine-tuning strategies applied to vanilla LLMs, which often leads to limited effectiveness or suboptimal performance in complex agent-related environments. Although LLM optimization techniques can improve model performance across many general tasks, they lack specialized optimization towards critical agent functionalities such as long-term planning, dynamic environmental interaction, and complex decision-making. Although numerous recent studies have explored various strategies to optimize LLM-based agents for complex agent tasks, a systematic review summarizing and comparing these methods from a holistic perspective is still lacking. In this survey, we provide a comprehensive review of LLM-based agent optimization approaches, categorizing them into parameter-driven and parameter-free methods. We first focus on parameter-driven optimization, covering fine-tuning-based optimization, reinforcement learning-based optimization, and hybrid strategies, analyzing key aspects such as trajectory data construction, fine-tuning techniques, reward function design, and optimization algorithms. Additionally, we briefly discuss parameter-free strategies that optimize agent behavior through prompt engineering and external knowledge retrieval. Finally, we summarize the datasets and benchmarks used for evaluation and tuning, review key applications of LLM-based agents, and discuss major challenges and promising future directions. Our repository for related references is available at https://github.com/YoungDubbyDu/LLM-Agent-Optimization.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-16T10:09:10Z</published>
+    <arxiv:comment>Published in ACM Computing Surveys, Vol. 58, No. 9, Article 223, July 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>ACM Computing Surveys 58(9), Article 223, July 2026</arxiv:journal_ref>
+    <author>
+      <name>Shangheng Du</name>
+    </author>
+    <author>
+      <name>Jiabao Zhao</name>
+    </author>
+    <author>
+      <name>Jinxin Shi</name>
+    </author>
+    <author>
+      <name>Zhentao Xie</name>
+    </author>
+    <author>
+      <name>Xin Jiang</name>
+    </author>
+    <author>
+      <name>Yanhong Bai</name>
+    </author>
+    <author>
+      <name>Liang He</name>
+    </author>
+    <arxiv:doi>10.1145/3789261</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3789261" title="doi"/>
+  </entry>
+</feed>

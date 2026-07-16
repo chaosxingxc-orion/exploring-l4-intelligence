@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/OEm6ADEDCShWxXWxeIxSClkLx+Y</id>
+  <title>arXiv Query: search_query=&amp;id_list=2603.27706&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:28Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2603.27706" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2603.27706v2</id>
+    <title>MAR3: Multi-Agent Recognition, Reasoning, and Reflection for Reference Audio-Visual Segmentation</title>
+    <updated>2026-07-14T09:25:01Z</updated>
+    <link href="https://arxiv.org/abs/2603.27706v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.27706v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reference Audio-Visual Segmentation (Ref-AVS) aims to segment objects in audible videos based on multimodal cues in reference expressions. Previous methods overlook the explicit recognition of expression difficulty and dominant modality in multimodal cues, over-rely on the quality of the instruction-tuning dataset for object reasoning, and lack reflective validation of segmentation results, leading to erroneous mask predictions. To address these issues, in this paper, we propose a novel training-free Multi-Agent Recognition, Reasoning, and Reflection framework to achieve high-quality Reference Audio-Visual Segmentation, termed MAR3. Incorporating the sociological Delphi theory to achieve robust analysis, a Consensus Multimodal Recognition mechanism is proposed that enables LLM agents to explicitly recognize the difficulty of reference expressions and the dominant modality of multimodal cues. Based on our modality-dominant difficulty rule, we propose an adaptive Collaborative Object Reasoning strategy to reliably reason about the referred object. To further ensure precise mask prediction, we develop a Reflective Learning Segmentation mechanism, in which a check agent examines intermediate segmentation results and iteratively corrects the object text prompt of the segment agent. Experiments demonstrate that MAR3 achieves superior performance (69.2% in J&amp;F) on the Ref-AVSBench dataset, outperforming SOTA by 3.4% absolutely.</summary>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-29T14:09:50Z</published>
+    <arxiv:comment>Accepted by ACM MM 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.MM"/>
+    <author>
+      <name>Yuan Zhao</name>
+    </author>
+    <author>
+      <name>Zhenqi Jia</name>
+    </author>
+    <author>
+      <name>Yongqiang Zhang</name>
+    </author>
+  </entry>
+</feed>

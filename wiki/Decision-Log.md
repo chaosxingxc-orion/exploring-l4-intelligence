@@ -6,6 +6,51 @@
 
 ---
 
+### 2026-07-17（续63）· P0-R8 再裁 WITHHOLD 七变异全数复现属实 + owner 四点裁决（agent-era 时代/CV·learning 受控道/独立代理 held-out/引文链退出机制+全文强制）→ correction #4B
+
+**Context.** 博导 P0-R8 窄幅复审返回 **WITHHOLD（3 MAJOR + 2 MINOR）**：package summary
+可复现 false-green（2-seed/空 route 证据/同行 marker/手写 verdict 四变异全过）、record
+validator 合同弱于声称（cross-wire/空 D2 block/threat 标签删除全过）、SF-L11 独立验收只
+覆盖 cs.MA 一侧且 Seg-Agent 2605.12953 被类目挡住成真漏检、verbatim 用词失实（3/7 摘要经
+渲染规范化）、REGISTERED_BOUNDARY 只查文件存在。我方按 reviewer-response-protocol
+**先逐条独立复现后回应**：七个变异在 C4A 门禁下全部亲手复现,评审外部引文 7/7 反幻觉核验
+通过（TimeLogic/Seg-Agent + §7 表五篇,MemoPilot 坐实 TRAINS_EXTERNAL 威胁样本）——
+**全盘接受,零异议**。根因判定 = 连续第三轮「工件真实但完成态语言超出 oracle 强度」:验收
+oracle 由声称完成的同一方设计且缺 mutation 测试（G3 → 续62 机械化状态动词 → 机械化本身
+又超声称的同构链）。
+
+**Decision（owner 四点裁决,2026-07-16/17）.** ① **agent-era 时代裁决**：基模约 2025 年
+进入 agent 时代,前 2025 论文参考价值有限（概念快速涌现又淘汰）——落地为 held-out 一律
+v1≥2025（runner 机器强制）、深读/队列 2025+ 优先、过时性裁定看 forward 引文存活度;
+**检索窗口/冻结前缀/种子存量不动,不进 study_quality**（与 venue_tier 零证据权重同构,防
+先验变判决）。② **CV = 重要参考域、machine/deep learning = 重要方法域** → SF-L12
+（cs.CV+cs.AI）/SF-L13（cs.LG+stat.ML+cs.NE,arXiv 无独立 DL 类目）受控道,SF-L11 词族
+逐字镜像零新词。③ **独立代理 held-out 批准**：不接触修订 diff/词项的隔离代理选取,预注册
+后跑 matcher,结果如实（era 前两候选被 owner 中断否决即本裁决之触发）。④ **引文链退出
+机制三层架构 + 全文强制**：发现层=检索算法（冻结查询）,相关性廉价筛/退出判据=引文链
+（「一篇都没引=交集为空⇒基本无关」,锚定核心集;backward 自存档全文离线抽取,forward 用
+OpenAlex/SS 类学术索引——Google Scholar 本体无 API）;承重阅读对象=论文全文双份
+（PDF+e-print）,abs 页不再作承重文本源。
+
+**Rationale.** 时代先验管注意力分配不管证据判决,否则重蹈 venue_tier 倒置;引文交集筛不能
+作唯一发现入口——Seg-Agent/DVD 类跨社区平行谱系在结构上引不到核心集,必须由查询层兜住
+（Seg-Agent 引文校准实验已预注册以实证此点）;退出机制给 gate 博弈双向封口:评审不能无限
+再供反例延长 gate,我方不能没有闭包证据就宣布完成。
+
+**Consequences（correction #4B 当日交付）.** fail-closed 门禁 v2（canon 精确计数
+92/61/50/26/5+前缀哈希+八 producer 隔离重跑字节比对+manifest MACHINE_COUNT 对账+
+occurrence 级豁免）;validator v2（V1–V15:双向一一 lineage/种子联结 fail-closed/内层
+schema/单正典位）+ fixtures-c4b（1 正+25 负,子进程级 26/26）;mutation harness（评审全部
+变异+boundary 一正一负必须非零退出——敌意内审环永久新增 mutation 镜头,正典 =
+amendment-6 §0「oracle 必须与声称等强」条）;61 查询（前 55 行
+字节不变;L12/L13 各 Q1..Q3,Q3 = SF-L10-Q2 镜像,补救预注册 matcher 自查发现的第二结构性
+近失例 DVD 2505.18079〔agent 时代词汇漂移轴〕）;26 哨兵（TimeLogic reviewer-supplied
+cs.MM held-out=SF-L11-Q1 HIT;fresh held-out 2602.21497/2605.11374 均纯查询召回,后者直接
+命中新道 SF-L13-Q2;VQQA/MAR3 声称更正）;raw Atom 26 件+全文台账（verbatim 从此仅指 raw
+字节）;routes v3 dated supersession（强化 oracle 自查出 C4A ICASSP 四行 tier 失实——
+A→C 更正,v2 不改写,主动披露）;amendment-6（gate 整改合同）/amendment-7（执行期合同,
+非 gate 阻断）;回应信+P0-R9 申请（两处措辞精确重述为事实句）。签署前零查询维持
+（discovery=0,access log c4b 1 header+12 seq 行双计数）;Stage-1A close 与 1B 放行仍是两个签字。
 ### 2026-07-16（续62）· 博导复审 #4A（WITHHOLD）全量核验属实 + owner 三裁决（P0-R4 时点/D2-core 直接接受/机械化状态动词）+ token 退役语义澄清（P0-R7）
 
 **Context.** 博导复审（`2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md`，untracked

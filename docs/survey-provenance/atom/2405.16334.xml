@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/REw/TgkZRtk/B0yZpudJSCBWZ08</id>
+  <title>arXiv Query: search_query=&amp;id_list=2405.16334&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:47:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2405.16334" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2405.16334v4</id>
+    <title>Devil's Advocate: Anticipatory Reflection for LLM Agents</title>
+    <updated>2024-06-20T19:41:48Z</updated>
+    <link href="https://arxiv.org/abs/2405.16334v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.16334v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we introduce a novel approach that equips LLM agents with introspection, enhancing consistency and adaptability in solving complex tasks. Our approach prompts LLM agents to decompose a given task into manageable subtasks (i.e., to make a plan), and to continuously introspect upon the suitability and results of their actions. %; and when necessary, to explore ``the road not taken.'' We implement a three-fold introspective intervention: 1) anticipatory reflection on potential failures and alternative remedy before action execution, 2) post-action alignment with subtask objectives and backtracking with remedy to ensure utmost effort in plan execution, and 3) comprehensive review upon plan completion for future strategy refinement. By deploying and experimenting with this methodology -- a zero-shot approach -- within WebArena for practical tasks in web environments, our agent demonstrates superior performance with a success rate of 23.5% over existing zero-shot methods by 3.5%. The experimental results suggest that our introspection-driven approach not only enhances the agent's ability to navigate unanticipated challenges through a robust mechanism of plan execution, but also improves efficiency by reducing the number of trials and plan revisions by 45% needed to achieve a task.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-25T19:20:15Z</published>
+    <arxiv:comment>13 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Haoyu Wang</name>
+    </author>
+    <author>
+      <name>Tao Li</name>
+    </author>
+    <author>
+      <name>Zhiwei Deng</name>
+    </author>
+    <author>
+      <name>Dan Roth</name>
+    </author>
+    <author>
+      <name>Yang Li</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/AqZ6fZQi0MwpzxpXg564iLKGqLg</id>
+  <title>arXiv Query: search_query=&amp;id_list=2601.09667&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:18Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2601.09667" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2601.09667v2</id>
+    <title>Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning</title>
+    <updated>2026-01-15T17:20:36Z</updated>
+    <link href="https://arxiv.org/abs/2601.09667v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.09667v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-agent systems have evolved into practical LLM-driven collaborators for many applications, gaining robustness from diversity and cross-checking. However, multi-agent RL (MARL) training is resource-intensive and unstable: co-adapting teammates induce non-stationarity, and rewards are often sparse and high-variance. Therefore, we introduce \textbf{Multi-Agent Test-Time Reinforcement Learning (MATTRL)}, a framework that injects structured textual experience into multi-agent deliberation at inference time. MATTRL forms a multi-expert team of specialists for multi-turn discussions, retrieves and integrates test-time experiences, and reaches consensus for final decision-making. We also study credit assignment for constructing a turn-level experience pool, then reinjecting it into the dialogue. Across challenging benchmarks in medicine, math, and education, MATTRL improves accuracy by an average of 3.67\% over a multi-agent baseline, and by 8.67\% over comparable single-agent baselines. Ablation studies examine different credit-assignment schemes and provide a detailed comparison of how they affect training outcomes. MATTRL offers a stable, effective and efficient path to distribution-shift-robust multi-agent reasoning without tuning.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-14T17:57:43Z</published>
+    <arxiv:comment>Work in Progress</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Zhiyuan Hu</name>
+    </author>
+    <author>
+      <name>Yunhai Hu</name>
+    </author>
+    <author>
+      <name>Juncheng Liu</name>
+    </author>
+    <author>
+      <name>Shuyue Stella Li</name>
+    </author>
+    <author>
+      <name>Yucheng Wang</name>
+    </author>
+    <author>
+      <name>Zhen Xu</name>
+    </author>
+    <author>
+      <name>See-Kiong Ng</name>
+    </author>
+    <author>
+      <name>Anh Tuan Luu</name>
+    </author>
+    <author>
+      <name>Xinxing Xu</name>
+    </author>
+    <author>
+      <name>Bryan Hooi</name>
+    </author>
+    <author>
+      <name>Cynthia Breazeal</name>
+    </author>
+    <author>
+      <name>Hae Won Park</name>
+    </author>
+  </entry>
+</feed>

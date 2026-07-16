@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/z37w+WVqvmDL+3RmmH3HSzmR/HU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2605.11374&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:50:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2605.11374" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.11374v5</id>
+    <title>Test-Time Compute for Frozen Embedding Models through Agentic Program Search</title>
+    <updated>2026-05-30T04:34:48Z</updated>
+    <link href="https://arxiv.org/abs/2605.11374v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.11374v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Test-time compute is widely believed to benefit only large reasoning models, leaving small models with nothing to gain. We argue the opposite for dense retrieval, since modern small embedding models are distilled or adapted from large language model backbones and can inherit their latent test-time-compute potential. We ask how much retrieval quality a frozen embedding model gains at inference alone, with no auxiliary model and no parameters trained at deployment. An agentic loop in which a large language model writes programs over a frozen encoder API explores 144 candidates and yields twelve Pareto-optimal programs that trade inference compute for quality across cost ratios from $c{=}1.2$ to $14.7$, every one improving nDCG@10 on all 14 discovery tasks. The programs use no trainable parameters and recover classical retrieval primitives, among them reciprocal rank fusion, the Fisher linear discriminant, Rocchio pseudo-relevance feedback, and sentence-level MaxSim. Applied unmodified to nineteen held-out tasks and three unseen encoder families, a single fixed program improves the majority of tasks, with a positive median $Δ$nDCG@10 and a 54 to 57% win-rate at $c{\ge}4$, and the gains are largest on encoder families never seen during discovery. A matched-budget learned projection head trained on the same tasks does not transfer this way, improving in-domain retrieval by $+0.20$ to $+0.25$ nDCG@10 yet falling below baseline on every held-out encoder. Small embedding models therefore inherit usable test-time-compute potential, and a frozen encoder converts inference compute into retrieval gains that transfer to new corpora and encoders with no per-domain labels.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-12T00:56:34Z</published>
+    <arxiv:comment>15 pages, 7 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Han Xiao</name>
+    </author>
+  </entry>
+</feed>

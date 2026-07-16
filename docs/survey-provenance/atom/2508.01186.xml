@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/xpzt9gaQFK5VyNe/vu1CLCStI6c</id>
+  <title>arXiv Query: search_query=&amp;id_list=2508.01186&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2508.01186" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2508.01186v1</id>
+    <title>A Survey on Agent Workflow -- Status and Future</title>
+    <updated>2025-08-02T04:15:30Z</updated>
+    <link href="https://arxiv.org/abs/2508.01186v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.01186v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the age of large language models (LLMs), autonomous agents have emerged as a powerful paradigm for achieving general intelligence. These agents dynamically leverage tools, memory, and reasoning capabilities to accomplish user-defined goals. As agent systems grow in complexity, agent workflows-structured orchestration frameworks-have become central to enabling scalable, controllable, and secure AI behaviors. This survey provides a comprehensive review of agent workflow systems, spanning academic frameworks and industrial implementations. We classify existing systems along two key dimensions: functional capabilities (e.g., planning, multi-agent collaboration, external API integration) and architectural features (e.g., agent roles, orchestration flows, specification languages). By comparing over 20 representative systems, we highlight common patterns, potential technical challenges, and emerging trends. We further address concerns related to workflow optimization strategies and security. Finally, we outline open problems such as standardization and multimodal integration, offering insights for future research at the intersection of agent design, workflow infrastructure, and safe automation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-02T04:15:30Z</published>
+    <arxiv:comment>12 pages, 3 figures, accepted to IEEE Conference, ICAIBD(International Conference of Artificial Intelligence and Big Data) 2025. This is the author's version, not the publisher's. See https://ieeexplore.ieee.org/document/11082076</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>IEEE ICAIBD 2025, pp. 770-781</arxiv:journal_ref>
+    <author>
+      <name>Chaojia Yu</name>
+    </author>
+    <author>
+      <name>Zihan Cheng</name>
+    </author>
+    <author>
+      <name>Hanwen Cui</name>
+    </author>
+    <author>
+      <name>Yishuo Gao</name>
+    </author>
+    <author>
+      <name>Zexu Luo</name>
+    </author>
+    <author>
+      <name>Yijin Wang</name>
+    </author>
+    <author>
+      <name>Hangbin Zheng</name>
+    </author>
+    <author>
+      <name>Yong Zhao</name>
+    </author>
+    <arxiv:doi>10.1109/ICAIBD64986.2025.11082076</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICAIBD64986.2025.11082076" title="doi"/>
+  </entry>
+</feed>

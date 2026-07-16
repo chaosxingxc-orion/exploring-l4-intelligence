@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/2A3nt/sSt5fDLMHVrX9C8OdUABA</id>
+  <title>arXiv Query: search_query=&amp;id_list=2604.13552&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:32Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2604.13552" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2604.13552v1</id>
+    <title>Training-Free Test-Time Contrastive Learning for Large Language Models</title>
+    <updated>2026-04-15T06:56:35Z</updated>
+    <link href="https://arxiv.org/abs/2604.13552v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.13552v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) demonstrate strong reasoning capabilities, but their performance often degrades under distribution shift. Existing test-time adaptation (TTA) methods rely on gradient-based updates that require white-box access and need substantial overhead, while training-free alternatives are either static or depend on external guidance. In this paper, we propose Training-Free Test-Time Contrastive Learning TF-TTCL, a training-free adaptation framework that enables a frozen LLM to improve online by distilling supervision from its own inference experiences. Specifically, TF-TTCL implements a dynamic "Explore-Reflect-Steer" loop through three core modules: 1) Semantic Query Augmentation first diversifies problem views via multi-agent role-playing to generate different reasoning trajectories; 2) Contrastive Experience Distillation then captures the semantic gap between superior and inferior trajectories, distilling them into explicit textual rules; and 3) Contextual Rule Retrieval finally activates these stored rules during inference to dynamically steer the frozen LLM toward robust reasoning patterns while avoiding observed errors. Extensive experiments on closed-ended reasoning tasks and open-ended evaluation tasks demonstrate that TF-TTCL consistently outperforms strong zero-shot baselines and representative TTA methods under online evaluation. Code is available at https://github.com/KevinSCUTer/TF-TTCL.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-15T06:56:35Z</published>
+    <arxiv:comment>Accepted by Findings ACL 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kaiwen Zheng</name>
+    </author>
+    <author>
+      <name>Kai Zhou</name>
+    </author>
+    <author>
+      <name>Jinwu Hu</name>
+    </author>
+    <author>
+      <name>Te Gu</name>
+    </author>
+    <author>
+      <name>Mingkai Peng</name>
+    </author>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+  </entry>
+</feed>

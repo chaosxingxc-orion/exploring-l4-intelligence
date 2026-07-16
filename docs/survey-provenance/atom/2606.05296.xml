@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/+1fgopTQHaE1pMb6GYDGAwU8Cck</id>
+  <title>arXiv Query: search_query=&amp;id_list=2606.05296&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:48Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2606.05296" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.05296v1</id>
+    <title>Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents</title>
+    <updated>2026-06-03T18:00:07Z</updated>
+    <link href="https://arxiv.org/abs/2606.05296v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.05296v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM agents operate in two distinct regimes: open-weight agents amenable to reinforcement learning (RL) and black-box agents whose behaviour must be controlled purely at test time. Although black-box agents are often backed by state-of-the-art proprietary LLMs, API-only access precludes parameter-level optimization, rendering most RL methods inapplicable. To address this limitation, we turn to a known equivalence between RL and Bayesian inference. We propose Agentic Monte Carlo (AMC) to directly sample from the optimal policy of a black-box agent rather than training it through RL. The optimal policy is a posterior over trajectories whose prior we define as the fixed black-box LLM agent. We employ Sequential Monte Carlo to sample from this posterior by learning a value function to steer the agent while leaving the underlying black-box model unchanged. We validate AMC on three diverse environments from the AgentGym benchmark, demonstrating significant improvements over prompting baselines and even outperforming Group Relative Policy Optimization (GRPO) as we scale the test-time compute of our method. AMC demonstrates the feasibility of performing principled RL-style optimization of black-box LLM agents. Code is available at https://github.com/layer6ai-labs/Agentic-Monte-Carlo</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-03T18:00:07Z</published>
+    <arxiv:comment>Accepted by ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dae Yon Hwang</name>
+    </author>
+    <author>
+      <name>Raunaq Suri</name>
+    </author>
+    <author>
+      <name>Valentin Villecroze</name>
+    </author>
+    <author>
+      <name>Anthony L. Caterini</name>
+    </author>
+    <author>
+      <name>Jesse C. Cresswell</name>
+    </author>
+    <author>
+      <name>Noël Vouitsis</name>
+    </author>
+    <author>
+      <name>Brendan Leigh Ross</name>
+    </author>
+  </entry>
+</feed>

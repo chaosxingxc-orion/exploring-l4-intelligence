@@ -16,6 +16,19 @@ mechanism (any free text converts a miss into a pass) is retired as unfalsifiabl
 (doctoral review P0-R5). Held-out sentinels (held_out=true) additionally must not appear
 in the seed manifest — a seeded held-out is a design contamination and FAILS.
 
+C4B hardening (correction #4B):
+  - matching text = `source_normalized_abstract` (renamed from `abstract`; the word
+    "verbatim" now refers ONLY to the raw Atom bytes pinned per entry);
+  - every sentinel must carry `atom_xml` + `atom_sha256`, the file must exist and its
+    sha256 must match (tampered/absent provenance = FAIL);
+  - REGISTERED_BOUNDARY no longer means "some file exists" (re-review #4A MINOR-2):
+    the registered file must contain a machine-readable line
+    `BOUNDARY_REG {"paper":"<id>","boundary":"<CODE>","reason":"...",
+    "adjudicator":"...","date":"YYYY-MM-DD"}` for THIS paper with all fields
+    non-empty, else the channel does not fire;
+  - held-out sentinels must be agent-era papers (v1 >= 2025-01, owner doctrine
+    2026-07-16) — an older held-out = FAIL.
+
 Offline matcher unchanged from C4-6: category ∩, month-granularity window, recursive-descent
 ti:/abs: boolean evaluation, hyphen folding, word-boundary phrases, light plural tolerance;
 conservative in the HIT direction. Input counts are read live from the JSONL, never
@@ -24,6 +37,7 @@ hardcoded. No network. Persists docs/checks/2026-07-16-sf-sentinel-recall.json.
 Run from repo root:
   python scripts/survey/sf_sentinel_recall_test.py wiki/survey/2026-07-16-sf-sentinel-data.json
 """
+import hashlib
 import json
 import os
 import re
@@ -117,7 +131,31 @@ def month_of_id(arxiv_id):
     return f"20{yymm[:2]}{yymm[2:]}"
 
 
+def boundary_registered(reg_path, aid):
+    """P0-4.2: the registration file must exist AND carry a complete
+    machine-readable BOUNDARY_REG line for THIS paper; mere existence never fires
+    the channel."""
+    if not os.path.exists(reg_path):
+        return False
+    for line in open(reg_path, encoding="utf-8", errors="replace"):
+        idx = line.find("BOUNDARY_REG ")
+        if idx < 0:
+            continue
+        try:
+            reg = json.loads(line[idx + len("BOUNDARY_REG "):].strip())
+        except json.JSONDecodeError:
+            continue
+        if (reg.get("paper") == aid
+                and str(reg.get("boundary", "")).strip()
+                and str(reg.get("reason", "")).strip()
+                and str(reg.get("adjudicator", "")).strip()
+                and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(reg.get("date", "")))):
+            return True
+    return False
+
+
 SEEDS = os.path.join(REPO, "wiki", "survey", "2026-07-15-sf-seed-manifest.jsonl")
+ROUTES_V3 = os.path.join(REPO, "wiki", "survey", "2026-07-17-sf-t1-routes-v3.jsonl")
 ROUTES_V2 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes-v2.jsonl")
 ROUTES_V1 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes.jsonl")
 OUTCOME_ORDER = ("QUERY_HIT", "SEED_GUARANTEED", "EXACT_ROUTE_GUARANTEED",
@@ -132,17 +170,28 @@ def main():
     sentinels = json.load(open(sentinel_file, encoding="utf-8"))
     queries = [json.loads(l) for l in open(QUERIES, encoding="utf-8") if l.strip()]
     seed_ids = {json.loads(l)["id"] for l in open(SEEDS, encoding="utf-8") if l.strip()}
-    routes_file = ROUTES_V2 if os.path.exists(ROUTES_V2) else ROUTES_V1
+    routes_file = next(p for p in (ROUTES_V3, ROUTES_V2, ROUTES_V1) if os.path.exists(p))
     routes = {r["route_id"]: r for r in
               (json.loads(l) for l in open(routes_file, encoding="utf-8") if l.strip())}
 
     unparsed = []
     results = {}
     contaminated_holdouts = []
+    provenance_failures = []
+    stale_holdouts = []
     for aid, meta in sentinels["papers"].items():
         title_n = normalize(meta["title"])
-        abs_n = normalize(meta["abstract"] or "")
+        abs_n = normalize(meta["source_normalized_abstract"] or "")
         fields = {"ti": title_n, "abs": abs_n, "all": title_n + " " + abs_n}
+
+        atom_rel = meta.get("atom_xml")
+        atom_path = os.path.join(REPO, atom_rel) if atom_rel else None
+        if not atom_rel or not os.path.exists(atom_path):
+            provenance_failures.append(f"{aid}: atom_xml missing")
+        else:
+            digest = hashlib.sha256(open(atom_path, "rb").read()).hexdigest()
+            if digest != meta.get("atom_sha256"):
+                provenance_failures.append(f"{aid}: atom_sha256 mismatch")
         month = month_of_id(aid)
         hits, cat_blocked = [], 0
         for q in queries:
@@ -166,6 +215,8 @@ def main():
         in_seed = aid in seed_ids
         if held_out and in_seed:
             contaminated_holdouts.append(aid)
+        if held_out and month < "202501":
+            stale_holdouts.append(aid)
 
         route_ok = False
         vr = meta.get("venue_route")
@@ -176,7 +227,7 @@ def main():
         boundary_ok = False
         ab = meta.get("accepted_boundary")
         if isinstance(ab, dict) and ab.get("registered_in"):
-            boundary_ok = os.path.exists(os.path.join(REPO, ab["registered_in"]))
+            boundary_ok = boundary_registered(os.path.join(REPO, ab["registered_in"]), aid)
 
         channels = {"QUERY_HIT": bool(hits),
                     "SEED_GUARANTEED": in_seed and not held_out,
@@ -208,9 +259,14 @@ def main():
         fail_reasons.append("no held-out sentinels present")
     if contaminated_holdouts:
         fail_reasons.append(f"held-out contaminated by seed manifest: {contaminated_holdouts}")
+    if provenance_failures:
+        fail_reasons.append(f"raw Atom provenance failures: {provenance_failures}")
+    if stale_holdouts:
+        fail_reasons.append(f"held-out older than agent era (owner doctrine v1>=2025-01): "
+                            f"{stale_holdouts}")
 
     report = {
-        "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-02",
+        "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-03",
         "test": "scripts/survey/sf_sentinel_recall_test.py",
         "inputs": {"queries": f"wiki/survey/2026-07-15-sf-queries.jsonl "
                               f"({len(queries)} rows, auto-read, frozen)",

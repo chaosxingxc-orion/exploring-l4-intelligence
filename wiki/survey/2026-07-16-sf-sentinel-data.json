@@ -1,257 +1,402 @@
 {
- "artifact_id": "SF-SENTINEL-DATA-2026-07-16-01",
- "provenance": "博导复审 §9.2 点名 13 篇 + batch-2 VideoAgent；题名/类目/摘要经 ID_DEREFERENCE 正典 pass 捕获（留痕 = wiki/survey/2026-07-16-sf-id-dereference-log.jsonl）；14/14 HIT 零幻觉 ‖ C4A 批次二(2026-07-16,P0-R5)：+7 篇（博导复审§4.2 五篇 P0 + §4.3 两篇 P1）,verbatim 摘要 ID_DEREFERENCE 留痕 = 2026-07-16-sf-access-log-c4a-review-verification.jsonl seq13-19; miss_explanation 更名 coverage_note(仅注释,不再参与判定——四分法见 sf_sentinel_recall_test.py); held_out=true 者(2605.12978/2603.12310)未入种子且未参与任何查询词项设计,防循环验收",
+ "abstract_provenance": {
+  "c4b_normalization": "新增 5 条正文取自 atom_xml <summary>:仅做空白折叠(\\s+ -> 单空格)与首尾去空白,其余字符不变",
+  "field_semantics": "source_normalized_abstract 是匹配用规范化文本,不是 verbatim;verbatim 所指 = atom_xml 原始字节(sha256 钉定)",
+  "legacy_normalization": "2026-07-16 前的 21 条正文取自 abs 页渲染文本:URL 被渲染为 'this https URL'、LaTeX 转义(如 \\%)被规范化、空白折叠",
+  "raw_canon": "docs/survey-provenance/atom/<id>.xml (exact Atom API bytes) + docs/survey-provenance/atom-ledger.jsonl (append-only fetch ledger)",
+  "registered": "correction #4B / P0-4.1(评审 MINOR-1 补救,owner 全文纪律 2026-07-16)"
+ },
+ "artifact_id": "SF-SENTINEL-DATA-2026-07-16-03",
  "papers": {
-  "2407.01476": {
-   "title": "Tree Search for Language Model Agents",
-   "categories": [
-    "cs.AI",
-    "cs.CL",
-    "cs.LG"
-   ],
-   "abstract": "Autonomous agents powered by language models (LMs) have demonstrated promise in their ability to perform decision-making tasks such as web automation. However, a key limitation remains: LMs, primarily optimized for natural language understanding and generation, struggle with multi-step reasoning, planning, and using environmental feedback when attempting to solve realistic computer tasks. Towards addressing this, we propose an inference-time search algorithm for LM agents to explicitly perform exploration and multi-step planning in interactive web environments. Our approach is a form of best-first tree search that operates within the actual environment space, and is complementary with most existing state-of-the-art agents. It is the first tree search algorithm for LM agents that shows effectiveness on realistic web tasks. On the challenging VisualWebArena benchmark, applying our search algorithm on top of a GPT-4o agent yields a 39.7% relative increase in success rate compared to the same baseline without search, setting a state-of-the-art success rate of 26.4%. On WebArena, search also yields a 28.0% relative improvement over a baseline agent, setting a competitive success rate of 19.2%. Our experiments highlight the effectiveness of search for web agents, and we demonstrate that performance scales with increased test-time compute. We conduct a thorough analysis of our results to highlight improvements from search, limitations, and promising directions for future work. Our code and models are publicly released at this https URL .",
-   "reviewer_role": "强制 seed / 全文审计（inference-time best-first search + 多模态 value fn）",
-   "coverage_note": null,
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2506.07976": {
-   "title": "Thinking vs. Doing: Agents that Reason by Scaling Test-Time Interaction",
-   "categories": [
-    "cs.LG",
-    "cs.AI"
-   ],
-   "abstract": "The current paradigm of test-time scaling relies on generating long reasoning traces (\"thinking\" more) before producing a response. In agent problems that require interaction, this can be done by generating thinking traces before acting in the world. However, this process does not allow agents to acquire new information from the environment or adapt their behavior over time. In this work, we propose to scale test-time interaction, an untapped dimension of test-time scaling that increases the agent's interaction horizon to enable running rich behaviors such as exploration, backtracking, and dynamic re-planning within a single rollout. To demonstrate the promise of this scaling dimension, we study the domain of web agents. We first show that even prompting-based interaction scaling without any training can improve task success on web benchmarks non-trivially. Building on this, we introduce TTI (Test-Time Interaction), a curriculum-based online reinforcement learning (RL) approach that trains agents by adaptively adjusting their rollout lengths. Using a Gemma 3 12B model, TTI produces state-of-the-art open-source, open-data web agents on WebVoyager and WebArena benchmarks. We further show that TTI enables agents to balance exploration and exploitation adaptively. Our results establish interaction scaling as a powerful, complementary axis to scaling per-step compute, offering new avenues for training adaptive agents.",
-   "reviewer_role": "强制 seed / 拆分训练与非训练部分（test-time interaction scaling）",
-   "coverage_note": null,
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2601.09667": {
-   "title": "Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning",
-   "categories": [
-    "cs.AI",
-    "cs.CL"
-   ],
-   "abstract": "Multi-agent systems have evolved into practical LLM-driven collaborators for many applications, gaining robustness from diversity and cross-checking. However, multi-agent RL (MARL) training is resource-intensive and unstable: co-adapting teammates induce non-stationarity, and rewards are often sparse and high-variance. Therefore, we introduce \\textbf{Multi-Agent Test-Time Reinforcement Learning (MATTRL)}, a framework that injects structured textual experience into multi-agent deliberation at inference time. MATTRL forms a multi-expert team of specialists for multi-turn discussions, retrieves and integrates test-time experiences, and reaches consensus for final decision-making. We also study credit assignment for constructing a turn-level experience pool, then reinjecting it into the dialogue. Across challenging benchmarks in medicine, math, and education, MATTRL improves accuracy by an average of 3.67\\% over a multi-agent baseline, and by 8.67\\% over comparable single-agent baselines. Ablation studies examine different credit-assignment schemes and provide a detailed comparison of how they affect training outcomes. MATTRL offers a stable, effective and efficient path to distribution-shift-robust multi-agent reasoning without tuning.",
-   "reviewer_role": "强制 seed / TF-Strict 与持久化审计（test-time RL 命名威胁）",
-   "coverage_note": null,
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2503.12434": {
-   "title": "A Survey on the Optimization of Large Language Model-based Agents",
-   "categories": [
-    "cs.AI"
-   ],
-   "abstract": "With the rapid development of Large Language Models (LLMs), LLM-based agents have been widely adopted in various fields, becoming essential for autonomous decision-making and interactive tasks. However, current work typically relies on prompt design or fine-tuning strategies applied to vanilla LLMs, which often leads to limited effectiveness or suboptimal performance in complex agent-related environments. Although LLM optimization techniques can improve model performance across many general tasks, they lack specialized optimization towards critical agent functionalities such as long-term planning, dynamic environmental interaction, and complex decision-making. Although numerous recent studies have explored various strategies to optimize LLM-based agents for complex agent tasks, a systematic review summarizing and comparing these methods from a holistic perspective is still lacking. In this survey, we provide a comprehensive review of LLM-based agent optimization approaches, categorizing them into parameter-driven and parameter-free methods. We first focus on parameter-driven optimization, covering fine-tuning-based optimization, reinforcement learning-based optimization, and hybrid strategies, analyzing key aspects such as trajectory data construction, fine-tuning techniques, reward function design, and optimization algorithms. Additionally, we briefly discuss parameter-free strategies that optimize agent behavior through prompt engineering and external knowledge retrieval. Finally, we summarize the datasets and benchmarks used for evaluation and tuning, review key applications of LLM-based agents, and discuss major challenges and promising future directions. Our repository for related references is available at this https URL .",
-   "reviewer_role": "仅 DISCOVERY_NAVIGATION，不作一手承重（survey）",
-   "coverage_note": "综述导航件（评审角色=仅 DISCOVERY_NAVIGATION,不作一手承重）：查询词族按设计瞄准一手方法工作,综述元词不入词族（噪声控制）;确定入口 = batch-3 种子 + 引文图导航层。SF-L10 词项级匹配但类目（cs.AI）不在该受控道投放域,属预期。",
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2410.13825": {
-   "title": "AgentOccam: A Simple Yet Strong Baseline for LLM-Based Web Agents",
-   "categories": [
-    "cs.AI",
-    "cs.CL"
-   ],
-   "abstract": "Autonomy via agents using large language models (LLMs) for personalized, standardized tasks boosts human efficiency. Automating web tasks (like booking hotels within a budget) is increasingly sought after. Fulfilling practical needs, the web agent also serves as an important proof-of-concept example for various agent grounding scenarios, with its success promising advancements in many future applications. Prior research often handcrafts web agent strategies (e.g., prompting templates, multi-agent systems, search methods, etc.) and the corresponding in-context examples, which may not generalize well across all real-world scenarios. On the other hand, there has been limited study on the misalignment between a web agent's observation/action representation and the pre-training data of the LLM it's based on. This discrepancy is especially notable when LLMs are primarily trained for language completion rather than tasks involving embodied navigation actions and symbolic web elements. Our study enhances an LLM-based web agent by simply refining its observation and action space to better align with the LLM's capabilities. This approach enables our base agent to significantly outperform previous methods on a wide variety of web tasks. Specifically, on WebArena, a benchmark featuring general-purpose web interaction tasks, our agent AgentOccam surpasses the previous state-of-the-art and concurrent work by 9.8 (+29.4%) and 5.9 (+15.8%) absolute points respectively, and boosts the success rate by 26.6 points (+161%) over similar plain web agents with its observation and action space alignment. We achieve this without using in-context examples, new agent roles, online feedback or search strategies. AgentOccam's simple design highlights LLMs' impressive zero-shot performance on web tasks, and underlines the critical role of carefully tuning observation and action spaces for LLM-based agents.",
-   "reviewer_role": "强制 seed / 机制对照（obs/action space 对齐替代解释）",
-   "coverage_note": "机制词族真实局限（interface/observation-action alignment 表述不在冻结身份词族）——如实登记 coverage limitation;确定性兜底：① batch-3 强制 seed（100% 入语料）② 题名含词表A组 agents→任一 T1 proceedings 出现即被 route 题录道捕获（执行期核验其 venue）③ 引文图:与已 HIT 的 2407.01476 同 web-agent 谱系,forward/backward 边可达。",
-   "held_out": false,
-   "used_in_query_design": true
-  },
   "2309.05950": {
-   "title": "Language Models as Black-Box Optimizers for Vision-Language Models",
+   "atom_sha256": "b02b8c70b581fa97415c8c9c734a0304dc1c9a6421b8d798839380469ed5f949",
+   "atom_xml": "docs/survey-provenance/atom/2309.05950.xml",
    "categories": [
     "cs.CL",
     "cs.CV",
     "cs.LG",
     "cs.MM"
    ],
-   "abstract": "Vision-language models (VLMs) pre-trained on web-scale datasets have demonstrated remarkable capabilities on downstream tasks when fine-tuned with minimal data. However, many VLMs rely on proprietary data and are not open-source, which restricts the use of white-box approaches for fine-tuning. As such, we aim to develop a black-box approach to optimize VLMs through natural language prompts, thereby avoiding the need to access model parameters, feature embeddings, or even output logits. We propose employing chat-based LLMs to search for the best text prompt for VLMs. Specifically, we adopt an automatic hill-climbing procedure that converges to an effective prompt by evaluating the performance of current prompts and asking LLMs to refine them based on textual feedback, all within a conversational process without human-in-the-loop. In a challenging 1-shot image classification setup, our simple approach surpasses the white-box continuous prompting method (CoOp) by an average of 1.5% across 11 datasets including ImageNet. Our approach also outperforms both human-engineered and LLM-generated prompts. We highlight the advantage of conversational feedback that incorporates both positive and negative prompts, suggesting that LLMs can utilize the implicit gradient direction in textual feedback for a more efficient search. In addition, we find that the text prompts generated through our strategy are not only more interpretable but also transfer well across different VLM architectures in a black-box manner. Lastly, we apply our framework to optimize the state-of-the-art black-box VLM (DALL-E 3) for text-to-image generation, prompt inversion, and personalization.",
-   "reviewer_role": "强制 seed / RQ-OMNI、RQ-CTRL（黑盒 VLM 优化先例）",
    "coverage_note": null,
    "held_out": false,
+   "primary_category": "cs.CL",
+   "reviewer_role": "强制 seed / RQ-OMNI、RQ-CTRL（黑盒 VLM 优化先例）",
+   "source_normalized_abstract": "Vision-language models (VLMs) pre-trained on web-scale datasets have demonstrated remarkable capabilities on downstream tasks when fine-tuned with minimal data. However, many VLMs rely on proprietary data and are not open-source, which restricts the use of white-box approaches for fine-tuning. As such, we aim to develop a black-box approach to optimize VLMs through natural language prompts, thereby avoiding the need to access model parameters, feature embeddings, or even output logits. We propose employing chat-based LLMs to search for the best text prompt for VLMs. Specifically, we adopt an automatic hill-climbing procedure that converges to an effective prompt by evaluating the performance of current prompts and asking LLMs to refine them based on textual feedback, all within a conversational process without human-in-the-loop. In a challenging 1-shot image classification setup, our simple approach surpasses the white-box continuous prompting method (CoOp) by an average of 1.5% across 11 datasets including ImageNet. Our approach also outperforms both human-engineered and LLM-generated prompts. We highlight the advantage of conversational feedback that incorporates both positive and negative prompts, suggesting that LLMs can utilize the implicit gradient direction in textual feedback for a more efficient search. In addition, we find that the text prompts generated through our strategy are not only more interpretable but also transfer well across different VLM architectures in a black-box manner. Lastly, we apply our framework to optimize the state-of-the-art black-box VLM (DALL-E 3) for text-to-image generation, prompt inversion, and personalization.",
+   "title": "Language Models as Black-Box Optimizers for Vision-Language Models",
+   "used_in_query_design": true
+  },
+  "2311.04155": {
+   "atom_sha256": "e3b2b6772e6d20a3b8b9e2512169676e65320bfe55838d11685128170fdcc123",
+   "atom_xml": "docs/survey-provenance/atom/2311.04155.xml",
+   "categories": [
+    "cs.CL"
+   ],
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.CL",
+   "reviewer_role": "组件级 comparator（黑盒 prompt 优化）",
+   "source_normalized_abstract": "Large language models (LLMs) have shown impressive success in various applications. However, these models are often not well aligned with human intents, which calls for additional treatments on them; that is, the alignment problem. To make LLMs better follow user instructions, existing alignment methods primarily focus on further training them. However, the extra training of LLMs is usually expensive in terms of GPU computing; even worse, some LLMs are not accessible for user-demanded training, such as GPTs. In this work, we take a different perspective -- Black-Box Prompt Optimization (BPO) -- to perform alignments. The idea is to optimize user prompts to suit LLMs' input understanding, so as to best realize users' intents without updating LLMs' parameters. BPO leverages human preferences to optimize prompts, thus making it superior to LLM (e.g., ChatGPT) as a prompt engineer. Moreover, BPO is model-agnostic, and the empirical results demonstrate that the BPO-aligned ChatGPT yields a 22% increase in the win rate against its original version and 10% for GPT-4. Notably, the BPO-aligned LLMs can outperform the same models aligned by PPO and DPO, and it also brings additional performance gains when combining BPO with PPO or DPO. Code and datasets are released at this https URL .",
+   "title": "Black-Box Prompt Optimization: Aligning Large Language Models without Model Training",
    "used_in_query_design": true
   },
   "2402.11359": {
-   "title": "Offline Training of Language Model Agents with Functions as Learnable Weights",
+   "atom_sha256": "f1373f670b2acbc2128cd54f8091562c18ef02eeaca9dc91b75767547e5c15fb",
+   "atom_xml": "docs/survey-provenance/atom/2402.11359.xml",
    "categories": [
     "cs.AI",
     "cs.CL"
    ],
-   "abstract": "Researchers and practitioners have recently reframed powerful Large Language Models (LLMs) as agents, enabling them to automate complex tasks largely via the use of specialized functions. To facilitate the development of LLM agents, we present a novel paradigm of training LLM agents without modifying the LLM weights, which is particularly useful when the LLMs are difficult or inaccessible for modifications. Inspired by how humans continuously forge tools to adapt to real-world tasks, rather than change our biological structure to fit a static set of tools, we propose to progressively forge agent's functions to better solve the downstream tasks instead of modifying the LLM weights. By treating the functions as learnable `agent parameters' and leveraging the fundamental idea of model training in artificial intelligence, we develop AgentOptimizer that employs the LLM to update agents' functions and devise an agent training algorithm with two strategies, roll-back, and early-stop, to streamline the training process. With extensive experiments, we showcase that the agent training paradigm could significantly improve the performance of representative LLM agents in various downstream tasks. We also study the behavior of the agent training regarding aspects like the learning curve and domain transferability.",
-   "reviewer_role": "trained comparator / 身份审计（agent functions 可学习对象）",
    "coverage_note": "训练式 agent 优化工作,不在 training-free/test-time/black-box 查询主责域（评审自身定位其为 trained comparator）;确定性兜底：① batch-3 seed（TRAINED_COMPARATOR）② 题名含 agents→SF-T1R-ICML-2024（PMLR v235,静态知识判断,执行期核验）route 题录 A 组命中 ③ 引文图。",
    "held_out": false,
+   "primary_category": "cs.AI",
+   "reviewer_role": "trained comparator / 身份审计（agent functions 可学习对象）",
+   "source_normalized_abstract": "Researchers and practitioners have recently reframed powerful Large Language Models (LLMs) as agents, enabling them to automate complex tasks largely via the use of specialized functions. To facilitate the development of LLM agents, we present a novel paradigm of training LLM agents without modifying the LLM weights, which is particularly useful when the LLMs are difficult or inaccessible for modifications. Inspired by how humans continuously forge tools to adapt to real-world tasks, rather than change our biological structure to fit a static set of tools, we propose to progressively forge agent's functions to better solve the downstream tasks instead of modifying the LLM weights. By treating the functions as learnable `agent parameters' and leveraging the fundamental idea of model training in artificial intelligence, we develop AgentOptimizer that employs the LLM to update agents' functions and devise an agent training algorithm with two strategies, roll-back, and early-stop, to streamline the training process. With extensive experiments, we showcase that the agent training paradigm could significantly improve the performance of representative LLM agents in various downstream tasks. We also study the behavior of the agent training regarding aspects like the learning curve and domain transferability.",
+   "title": "Offline Training of Language Model Agents with Functions as Learnable Weights",
    "used_in_query_design": true
   },
   "2403.08978": {
-   "title": "AutoGuide: Automated Generation and Selection of Context-Aware Guidelines for Large Language Model Agents",
+   "atom_sha256": "3ce0cc88e26970b220683ae09445c36600480f1b75b6dfe34f50f9c75e2ea2d0",
+   "atom_xml": "docs/survey-provenance/atom/2403.08978.xml",
    "categories": [
     "cs.CL",
     "cs.LG"
    ],
-   "abstract": "Recent advances in large language models (LLMs) have empowered AI agents capable of performing various sequential decision-making tasks. However, effectively guiding LLMs to perform well in unfamiliar domains like web navigation, where they lack sufficient knowledge, has proven to be difficult with the demonstration-based in-context learning paradigm. In this paper, we introduce a novel framework, called AutoGuide, which addresses this limitation by automatically generating context-aware guidelines from offline experiences. Importantly, each context-aware guideline is expressed in concise natural language and follows a conditional structure, clearly describing the context where it is applicable. As a result, our guidelines facilitate the provision of relevant knowledge for the agent's current decision-making process, overcoming the limitations of the conventional demonstration-based learning paradigm. Our evaluation demonstrates that AutoGuide significantly outperforms competitive baselines in complex benchmark domains, including real-world web navigation.",
-   "reviewer_role": "持久化边界 seed（历史交互→可复用指南）",
    "coverage_note": "guideline-extraction 机制词（guidelines/offline experiences）不在 L4 memory/skill 词族——如实登记 coverage limitation;兜底：① batch-3 seed（持久化边界角色）② 题名含 agents→T1 题录道（venue 执行期核验）③ 引文图:ExpeL/AWM 谱系邻接,L4 族已覆盖该谱系核心节点。SF-L10 词项级匹配但类目（cs.CL/cs.LG）不在受控道投放域,属预期。",
    "held_out": false,
+   "primary_category": "cs.CL",
+   "reviewer_role": "持久化边界 seed（历史交互→可复用指南）",
+   "source_normalized_abstract": "Recent advances in large language models (LLMs) have empowered AI agents capable of performing various sequential decision-making tasks. However, effectively guiding LLMs to perform well in unfamiliar domains like web navigation, where they lack sufficient knowledge, has proven to be difficult with the demonstration-based in-context learning paradigm. In this paper, we introduce a novel framework, called AutoGuide, which addresses this limitation by automatically generating context-aware guidelines from offline experiences. Importantly, each context-aware guideline is expressed in concise natural language and follows a conditional structure, clearly describing the context where it is applicable. As a result, our guidelines facilitate the provision of relevant knowledge for the agent's current decision-making process, overcoming the limitations of the conventional demonstration-based learning paradigm. Our evaluation demonstrates that AutoGuide significantly outperforms competitive baselines in complex benchmark domains, including real-world web navigation.",
+   "title": "AutoGuide: Automated Generation and Selection of Context-Aware Guidelines for Large Language Model Agents",
    "used_in_query_design": true
   },
   "2405.13009": {
-   "title": "MetaReflection: Learning Instructions for Language Agents using Past Reflections",
+   "atom_sha256": "3ad8f5641115bd7c3c3ef3a973b6d96912f22792bbefd5d5c64cc5aee4b279a3",
+   "atom_xml": "docs/survey-provenance/atom/2405.13009.xml",
    "categories": [
     "cs.CL",
     "cs.AI"
    ],
-   "abstract": "The popularity of Large Language Models (LLMs) have unleashed a new age ofLanguage Agents for solving a diverse range of tasks. While contemporary frontier LLMs are capable enough to power reasonably good Language agents, the closed-API model makes it hard to improve in cases they perform sub-optimally. To address this, recent works have explored ways to improve their performance using techniques like self-reflection and prompt optimization. Unfortunately, techniques like self-reflection can be used only in an online setup, while contemporary prompt optimization techniques are designed and tested to work on simple tasks. To this end, we introduce MetaReflection, a novel offline reinforcement learning technique that enhances the performance of Language Agents by augmenting a semantic memory based on experiential learnings from past trials. We demonstrate the efficacy of MetaReflection by evaluating across multiple domains, including complex logical reasoning, biomedical semantic similarity, open world question answering, and vulnerability threat detection, in Infrastructure-as-Code, spanning different agent designs. MetaReflection boosts Language agents' performance by 4% to 16.82% over the raw GPT-4 baseline and performs on par with existing state-of-the-art prompt optimization techniques while requiring fewer LLM calls.",
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.CL",
    "reviewer_role": "持久化边界 seed（反馈→可迁移反思知识）",
-   "coverage_note": null,
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2607.06873": {
-   "title": "Mining Workflow Graphs for Black-Box Boundary Testing of Conversational LLM Agents",
-   "categories": [
-    "cs.SE"
-   ],
-   "abstract": "Conversational LLM agents can cause real-world harm when their internal workflows fail, such as completing a transaction without confirmation. Testing these state-dependent failures is difficult because critical boundaries, such as identity checks and confirmation gates, are hidden behind multi-turn conversational prerequisites, rendering them inaccessible to standard tests. We present AgentEval, a black-box testing framework that discovers and stresses these stateful boundaries. AgentEval interacts with an agent to mine a \\emph{conversational workflow graph}, a model of its behavior. Instead of prompting blindly, AgentEval uses this graph's structure to enumerate specific guards and prerequisites as test targets, replaying the conversational path to a boundary before applying a perturbation. AgentEval then executes each test, determining whether it passes or fails using only the conversation turns. We benchmark AgentEval against a privileged, white-box auditor with access to the agent's underlying source code, which AgentEval never sees. On four $\\tau^3$-bench agents, AgentEval successfully generates tests covering $23$--$38$ distinct boundaries per agent; ablation studies attribute the gain to the graph's structure: $23$ distinct boundaries versus $12$ with a prompt-only baseline, at lower duplicate and false-alarm rates.",
-   "reviewer_role": "强制 seed / 类目敏感性哨兵（cs.SE 主类目,v1=2026-07-08 在窗内）",
-   "coverage_note": null,
-   "held_out": false,
+   "source_normalized_abstract": "The popularity of Large Language Models (LLMs) have unleashed a new age ofLanguage Agents for solving a diverse range of tasks. While contemporary frontier LLMs are capable enough to power reasonably good Language agents, the closed-API model makes it hard to improve in cases they perform sub-optimally. To address this, recent works have explored ways to improve their performance using techniques like self-reflection and prompt optimization. Unfortunately, techniques like self-reflection can be used only in an online setup, while contemporary prompt optimization techniques are designed and tested to work on simple tasks. To this end, we introduce MetaReflection, a novel offline reinforcement learning technique that enhances the performance of Language Agents by augmenting a semantic memory based on experiential learnings from past trials. We demonstrate the efficacy of MetaReflection by evaluating across multiple domains, including complex logical reasoning, biomedical semantic similarity, open world question answering, and vulnerability threat detection, in Infrastructure-as-Code, spanning different agent designs. MetaReflection boosts Language agents' performance by 4% to 16.82% over the raw GPT-4 baseline and performs on par with existing state-of-the-art prompt optimization techniques while requiring fewer LLM calls.",
+   "title": "MetaReflection: Learning Instructions for Language Agents using Past Reflections",
    "used_in_query_design": true
   },
   "2405.16334": {
-   "title": "Devil's Advocate: Anticipatory Reflection for LLM Agents",
+   "atom_sha256": "e96a0033851fc9bc93812493db149ea99ed48b6cbacbf1e9a7e181ad7b22b6a9",
+   "atom_xml": "docs/survey-provenance/atom/2405.16334.xml",
    "categories": [
     "cs.AI"
    ],
-   "abstract": "In this work, we introduce a novel approach that equips LLM agents with introspection, enhancing consistency and adaptability in solving complex tasks. Our approach prompts LLM agents to decompose a given task into manageable subtasks (i.e., to make a plan), and to continuously introspect upon the suitability and results of their actions. %; and when necessary, to explore ``the road not taken.'' We implement a three-fold introspective intervention: 1) anticipatory reflection on potential failures and alternative remedy before action execution, 2) post-action alignment with subtask objectives and backtracking with remedy to ensure utmost effort in plan execution, and 3) comprehensive review upon plan completion for future strategy refinement. By deploying and experimenting with this methodology -- a zero-shot approach -- within WebArena for practical tasks in web environments, our agent demonstrates superior performance with a success rate of 23.5% over existing zero-shot methods by 3.5%. The experimental results suggest that our introspection-driven approach not only enhances the agent's ability to navigate unanticipated challenges through a robust mechanism of plan execution, but also improves efficiency by reducing the number of trials and plan revisions by 45% needed to achieve a task.",
-   "reviewer_role": "控制基线 seed（anticipatory reflection + backtracking）",
    "coverage_note": "reflection 形态学变体（anticipatory reflection≠self-reflection 精确短语）——如实登记词族局限;兜底：① batch-3 seed（控制基线角色）② 题名含 agents→T1 题录道 ③ 引文图:Reflexion 谱系（SF-L1-Q2 族已覆盖核心节点）forward 边可达。",
    "held_out": false,
+   "primary_category": "cs.AI",
+   "reviewer_role": "控制基线 seed（anticipatory reflection + backtracking）",
+   "source_normalized_abstract": "In this work, we introduce a novel approach that equips LLM agents with introspection, enhancing consistency and adaptability in solving complex tasks. Our approach prompts LLM agents to decompose a given task into manageable subtasks (i.e., to make a plan), and to continuously introspect upon the suitability and results of their actions. %; and when necessary, to explore ``the road not taken.'' We implement a three-fold introspective intervention: 1) anticipatory reflection on potential failures and alternative remedy before action execution, 2) post-action alignment with subtask objectives and backtracking with remedy to ensure utmost effort in plan execution, and 3) comprehensive review upon plan completion for future strategy refinement. By deploying and experimenting with this methodology -- a zero-shot approach -- within WebArena for practical tasks in web environments, our agent demonstrates superior performance with a success rate of 23.5% over existing zero-shot methods by 3.5%. The experimental results suggest that our introspection-driven approach not only enhances the agent's ability to navigate unanticipated challenges through a robust mechanism of plan execution, but also improves efficiency by reducing the number of trials and plan revisions by 45% needed to achieve a task.",
+   "title": "Devil's Advocate: Anticipatory Reflection for LLM Agents",
    "used_in_query_design": true
   },
-  "2311.04155": {
-   "title": "Black-Box Prompt Optimization: Aligning Large Language Models without Model Training",
+  "2407.01476": {
+   "atom_sha256": "4516c0d815a72401f61f2ea2b83644c63129f8aa18e4a3afabbe404e57ba6975",
+   "atom_xml": "docs/survey-provenance/atom/2407.01476.xml",
    "categories": [
-    "cs.CL"
+    "cs.AI",
+    "cs.CL",
+    "cs.LG"
    ],
-   "abstract": "Large language models (LLMs) have shown impressive success in various applications. However, these models are often not well aligned with human intents, which calls for additional treatments on them; that is, the alignment problem. To make LLMs better follow user instructions, existing alignment methods primarily focus on further training them. However, the extra training of LLMs is usually expensive in terms of GPU computing; even worse, some LLMs are not accessible for user-demanded training, such as GPTs. In this work, we take a different perspective -- Black-Box Prompt Optimization (BPO) -- to perform alignments. The idea is to optimize user prompts to suit LLMs' input understanding, so as to best realize users' intents without updating LLMs' parameters. BPO leverages human preferences to optimize prompts, thus making it superior to LLM (e.g., ChatGPT) as a prompt engineer. Moreover, BPO is model-agnostic, and the empirical results demonstrate that the BPO-aligned ChatGPT yields a 22% increase in the win rate against its original version and 10% for GPT-4. Notably, the BPO-aligned LLMs can outperform the same models aligned by PPO and DPO, and it also brings additional performance gains when combining BPO with PPO or DPO. Code and datasets are released at this https URL .",
-   "reviewer_role": "组件级 comparator（黑盒 prompt 优化）",
    "coverage_note": null,
    "held_out": false,
+   "primary_category": "cs.AI",
+   "reviewer_role": "强制 seed / 全文审计（inference-time best-first search + 多模态 value fn）",
+   "source_normalized_abstract": "Autonomous agents powered by language models (LMs) have demonstrated promise in their ability to perform decision-making tasks such as web automation. However, a key limitation remains: LMs, primarily optimized for natural language understanding and generation, struggle with multi-step reasoning, planning, and using environmental feedback when attempting to solve realistic computer tasks. Towards addressing this, we propose an inference-time search algorithm for LM agents to explicitly perform exploration and multi-step planning in interactive web environments. Our approach is a form of best-first tree search that operates within the actual environment space, and is complementary with most existing state-of-the-art agents. It is the first tree search algorithm for LM agents that shows effectiveness on realistic web tasks. On the challenging VisualWebArena benchmark, applying our search algorithm on top of a GPT-4o agent yields a 39.7% relative increase in success rate compared to the same baseline without search, setting a state-of-the-art success rate of 26.4%. On WebArena, search also yields a 28.0% relative improvement over a baseline agent, setting a competitive success rate of 19.2%. Our experiments highlight the effectiveness of search for web agents, and we demonstrate that performance scales with increased test-time compute. We conduct a thorough analysis of our results to highlight improvements from search, limitations, and promising directions for future work. Our code and models are publicly released at this https URL .",
+   "title": "Tree Search for Language Model Agents",
+   "used_in_query_design": true
+  },
+  "2410.13825": {
+   "atom_sha256": "6239366cd494d6e14a13cfdb8f07202cd17f1bfda73d4d9239f85b93e57059f4",
+   "atom_xml": "docs/survey-provenance/atom/2410.13825.xml",
+   "categories": [
+    "cs.AI",
+    "cs.CL"
+   ],
+   "coverage_note": "机制词族真实局限（interface/observation-action alignment 表述不在冻结身份词族）——如实登记 coverage limitation;确定性兜底：① batch-3 强制 seed（100% 入语料）② 题名含词表A组 agents→任一 T1 proceedings 出现即被 route 题录道捕获（执行期核验其 venue）③ 引文图:与已 HIT 的 2407.01476 同 web-agent 谱系,forward/backward 边可达。",
+   "held_out": false,
+   "primary_category": "cs.AI",
+   "reviewer_role": "强制 seed / 机制对照（obs/action space 对齐替代解释）",
+   "source_normalized_abstract": "Autonomy via agents using large language models (LLMs) for personalized, standardized tasks boosts human efficiency. Automating web tasks (like booking hotels within a budget) is increasingly sought after. Fulfilling practical needs, the web agent also serves as an important proof-of-concept example for various agent grounding scenarios, with its success promising advancements in many future applications. Prior research often handcrafts web agent strategies (e.g., prompting templates, multi-agent systems, search methods, etc.) and the corresponding in-context examples, which may not generalize well across all real-world scenarios. On the other hand, there has been limited study on the misalignment between a web agent's observation/action representation and the pre-training data of the LLM it's based on. This discrepancy is especially notable when LLMs are primarily trained for language completion rather than tasks involving embodied navigation actions and symbolic web elements. Our study enhances an LLM-based web agent by simply refining its observation and action space to better align with the LLM's capabilities. This approach enables our base agent to significantly outperform previous methods on a wide variety of web tasks. Specifically, on WebArena, a benchmark featuring general-purpose web interaction tasks, our agent AgentOccam surpasses the previous state-of-the-art and concurrent work by 9.8 (+29.4%) and 5.9 (+15.8%) absolute points respectively, and boosts the success rate by 26.6 points (+161%) over similar plain web agents with its observation and action space alignment. We achieve this without using in-context examples, new agent roles, online feedback or search strategies. AgentOccam's simple design highlights LLMs' impressive zero-shot performance on web tasks, and underlines the critical role of carefully tuning observation and action spaces for LLM-based agents.",
+   "title": "AgentOccam: A Simple Yet Strong Baseline for LLM-Based Web Agents",
+   "used_in_query_design": true
+  },
+  "2503.12434": {
+   "atom_sha256": "5c285f5a7e7a92f3459567019efb454a547cde9cc9851474766c97f083a1412f",
+   "atom_xml": "docs/survey-provenance/atom/2503.12434.xml",
+   "categories": [
+    "cs.AI"
+   ],
+   "coverage_note": "综述导航件（评审角色=仅 DISCOVERY_NAVIGATION,不作一手承重）：查询词族按设计瞄准一手方法工作,综述元词不入词族（噪声控制）;确定入口 = batch-3 种子 + 引文图导航层。SF-L10 词项级匹配但类目（cs.AI）不在该受控道投放域,属预期。",
+   "held_out": false,
+   "primary_category": "cs.AI",
+   "reviewer_role": "仅 DISCOVERY_NAVIGATION，不作一手承重（survey）",
+   "source_normalized_abstract": "With the rapid development of Large Language Models (LLMs), LLM-based agents have been widely adopted in various fields, becoming essential for autonomous decision-making and interactive tasks. However, current work typically relies on prompt design or fine-tuning strategies applied to vanilla LLMs, which often leads to limited effectiveness or suboptimal performance in complex agent-related environments. Although LLM optimization techniques can improve model performance across many general tasks, they lack specialized optimization towards critical agent functionalities such as long-term planning, dynamic environmental interaction, and complex decision-making. Although numerous recent studies have explored various strategies to optimize LLM-based agents for complex agent tasks, a systematic review summarizing and comparing these methods from a holistic perspective is still lacking. In this survey, we provide a comprehensive review of LLM-based agent optimization approaches, categorizing them into parameter-driven and parameter-free methods. We first focus on parameter-driven optimization, covering fine-tuning-based optimization, reinforcement learning-based optimization, and hybrid strategies, analyzing key aspects such as trajectory data construction, fine-tuning techniques, reward function design, and optimization algorithms. Additionally, we briefly discuss parameter-free strategies that optimize agent behavior through prompt engineering and external knowledge retrieval. Finally, we summarize the datasets and benchmarks used for evaluation and tuning, review key applications of LLM-based agents, and discuss major challenges and promising future directions. Our repository for related references is available at this https URL .",
+   "title": "A Survey on the Optimization of Large Language Model-based Agents",
+   "used_in_query_design": true
+  },
+  "2505.18079": {
+   "atom_sha256": "a52c7b53df960d6c1b03da5173b860b5c7bdac3395b4726cc512c88948c67b70",
+   "atom_xml": "docs/survey-provenance/atom/2505.18079.xml",
+   "categories": [
+    "cs.CV",
+    "cs.AI",
+    "cs.CL"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "C4B 词汇漂移近失例;预注册 matcher 运行发现 59 查询零命中;query-regression counterexample;SF-L12-Q3/L13-Q3(SF-L10-Q2 词族镜像) = 其确定性补救;原为独立代理备选,因参与补救裁定烧毁 held-out 资格",
+   "source_normalized_abstract": "Long-form video understanding presents significant challenges due to extensive temporal-spatial complexity and the difficulty of question answering under such extended contexts. While Large Language Models (LLMs) have demonstrated considerable advancements in video analysis capabilities and long context handling, they continue to exhibit limitations when processing information-dense hour-long videos. To overcome such limitations, we propose the Deep Video Discovery (DVD) agent to leverage an agentic search strategy over segmented video clips. Unlike previous video agents that rely on predefined workflows applied uniformly across different queries, our approach emphasizes the autonomous and adaptive nature of agents. By providing a set of search-centric tools on multi-granular video database, our DVD agent leverages the advanced reasoning capability of LLM to plan on its current observation state, strategically selects tools to orchestrate adaptive workflow for different queries in light of the gathered information. We perform comprehensive evaluation on multiple long video understanding benchmarks that demonstrates our advantage. Our DVD agent achieves state-of-the-art performance on the challenging LVBench dataset, reaching an accuracy of 74.2%, which substantially surpasses all prior works, and further improves to 76.0% with transcripts. The code has been released at https://github.com/microsoft/DeepVideoDiscovery.",
+   "title": "Deep Video Discovery: Agentic Search with Tool Use for Long-form Video Understanding",
+   "used_in_query_design": false
+  },
+  "2506.07976": {
+   "atom_sha256": "60a3e7522fcaa4738b43494f08861ebb7e7271d614867f7645cec19b72a946e1",
+   "atom_xml": "docs/survey-provenance/atom/2506.07976.xml",
+   "categories": [
+    "cs.LG",
+    "cs.AI"
+   ],
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.LG",
+   "reviewer_role": "强制 seed / 拆分训练与非训练部分（test-time interaction scaling）",
+   "source_normalized_abstract": "The current paradigm of test-time scaling relies on generating long reasoning traces (\"thinking\" more) before producing a response. In agent problems that require interaction, this can be done by generating thinking traces before acting in the world. However, this process does not allow agents to acquire new information from the environment or adapt their behavior over time. In this work, we propose to scale test-time interaction, an untapped dimension of test-time scaling that increases the agent's interaction horizon to enable running rich behaviors such as exploration, backtracking, and dynamic re-planning within a single rollout. To demonstrate the promise of this scaling dimension, we study the domain of web agents. We first show that even prompting-based interaction scaling without any training can improve task success on web benchmarks non-trivially. Building on this, we introduce TTI (Test-Time Interaction), a curriculum-based online reinforcement learning (RL) approach that trains agents by adaptively adjusting their rollout lengths. Using a Gemma 3 12B model, TTI produces state-of-the-art open-source, open-data web agents on WebVoyager and WebArena benchmarks. We further show that TTI enables agents to balance exploration and exploitation adaptively. Our results establish interaction scaling as a powerful, complementary axis to scaling per-step compute, offering new avenues for training adaptive agents.",
+   "title": "Thinking vs. Doing: Agents that Reason by Scaling Test-Time Interaction",
    "used_in_query_design": true
   },
   "2508.01186": {
-   "title": "A Survey on Agent Workflow -- Status and Future",
+   "atom_sha256": "8043519d53b10fdfc8e21aa689b2f9a3bfa064d1b79fd331b45fc66402961897",
+   "atom_xml": "docs/survey-provenance/atom/2508.01186.xml",
    "categories": [
     "cs.AI",
     "cs.HC"
    ],
-   "abstract": "In the age of large language models (LLMs), autonomous agents have emerged as a powerful paradigm for achieving general intelligence. These agents dynamically leverage tools, memory, and reasoning capabilities to accomplish user-defined goals. As agent systems grow in complexity, agent workflows-structured orchestration frameworks-have become central to enabling scalable, controllable, and secure AI behaviors. This survey provides a comprehensive review of agent workflow systems, spanning academic frameworks and industrial implementations. We classify existing systems along two key dimensions: functional capabilities (e.g., planning, multi-agent collaboration, external API integration) and architectural features (e.g., agent roles, orchestration flows, specification languages). By comparing over 20 representative systems, we highlight common patterns, potential technical challenges, and emerging trends. We further address concerns related to workflow optimization strategies and security. Finally, we outline open problems such as standardization and multimodal integration, offering insights for future research at the intersection of agent design, workflow infrastructure, and safe automation.",
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.AI",
    "reviewer_role": "仅导航，不作一手承重（workflow survey,cs.AI+cs.HC）",
-   "coverage_note": null,
-   "held_out": false,
+   "source_normalized_abstract": "In the age of large language models (LLMs), autonomous agents have emerged as a powerful paradigm for achieving general intelligence. These agents dynamically leverage tools, memory, and reasoning capabilities to accomplish user-defined goals. As agent systems grow in complexity, agent workflows-structured orchestration frameworks-have become central to enabling scalable, controllable, and secure AI behaviors. This survey provides a comprehensive review of agent workflow systems, spanning academic frameworks and industrial implementations. We classify existing systems along two key dimensions: functional capabilities (e.g., planning, multi-agent collaboration, external API integration) and architectural features (e.g., agent roles, orchestration flows, specification languages). By comparing over 20 representative systems, we highlight common patterns, potential technical challenges, and emerging trends. We further address concerns related to workflow optimization strategies and security. Finally, we outline open problems such as standardization and multimodal integration, offering insights for future research at the intersection of agent design, workflow infrastructure, and safe automation.",
+   "title": "A Survey on Agent Workflow -- Status and Future",
    "used_in_query_design": true
-  },
-  "2606.23327": {
-   "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
-   "categories": [
-    "cs.CV",
-    "cs.AI"
-   ],
-   "abstract": "Video editing has become essential in digital media creation, yet existing automated systems are restricted to short segment processing and domain-specific tasks. They face two critical limitations: i) inability to handle diverse video comprehension and editing operations, and ii) lack of long-video understanding for coherent narrative creation. We propose VideoAgent, an all-in-one agentic framework addressing these challenges through two key innovations. First, we develop automated video shot creation with shot planning agents for coherent narratives and cross-modal retrieval for aligned visual content. Second, we design a multi-agent orchestration framework integrating over thirty specialized editing agents. Intent parsing filters relevant tools while textual-gradient graph optimization assembles complex editing pipelines. Extensive experiments on our newly-proposed VideoEdit benchmark and public datasets demonstrate VideoAgent's superiority over existing multimodal LLMs and agentic systems. VideoAgent achieves 87-95% orchestration success rates while reducing API costs by 60%. Human evaluation across six video categories shows VideoAgent produces professional-quality content approaching human-level performance, with ratings only 4% below human-created videos. We release our code at this https URL .",
-   "reviewer_role": "batch-2 种子既有条目的存在性核验（原 UNVERIFIED → 已解析）",
-   "coverage_note": null,
-   "held_out": false,
-   "used_in_query_design": true
-  },
-  "2606.05296": {
-   "title": "Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents",
-   "categories": [
-    "cs.LG",
-    "cs.AI"
-   ],
-   "abstract": "LLM agents operate in two distinct regimes: open-weight agents amenable to reinforcement learning (RL) and black-box agents whose behaviour must be controlled purely at test time. Although black-box agents are often backed by state-of-the-art proprietary LLMs, API-only access precludes parameter-level optimization, rendering most RL methods inapplicable. To address this limitation, we turn to a known equivalence between RL and Bayesian inference. We propose Agentic Monte Carlo (AMC) to directly sample from the optimal policy of a black-box agent rather than training it through RL. The optimal policy is a posterior over trajectories whose prior we define as the fixed black-box LLM agent. We employ Sequential Monte Carlo to sample from this posterior by learning a value function to steer the agent while leaving the underlying black-box model unchanged. We validate AMC on three diverse environments from the AgentGym benchmark, demonstrating significant improvements over prompting baselines and even outperforming Group Relative Policy Optimization (GRPO) as we scale the test-time compute of our method. AMC demonstrates the feasibility of performing principled RL-style optimization of black-box LLM agents. Code is available at this https URL",
-   "reviewer_role": "博导复审§4.2-1 直接近邻(P0);DIRECT_THREAT+SPLIT_TRAINED_VS_TF",
-   "held_out": false,
-   "used_in_query_design": false,
-   "in_seed_batch": "增量批次4"
-  },
-  "2604.13552": {
-   "title": "Training-Free Test-Time Contrastive Learning for Large Language Models",
-   "categories": [
-    "cs.CL",
-    "cs.AI"
-   ],
-   "abstract": "Large language models (LLMs) demonstrate strong reasoning capabilities, but their performance often degrades under distribution shift. Existing test-time adaptation (TTA) methods rely on gradient-based updates that require white-box access and need substantial overhead, while training-free alternatives are either static or depend on external guidance. In this paper, we propose Training-Free Test-Time Contrastive Learning TF-TTCL, a training-free adaptation framework that enables a frozen LLM to improve online by distilling supervision from its own inference experiences. Specifically, TF-TTCL implements a dynamic \"Explore-Reflect-Steer\" loop through three core modules: 1) Semantic Query Augmentation first diversifies problem views via multi-agent role-playing to generate different reasoning trajectories; 2) Contrastive Experience Distillation then captures the semantic gap between superior and inferior trajectories, distilling them into explicit textual rules; and 3) Contextual Rule Retrieval finally activates these stored rules during inference to dynamically steer the frozen LLM toward robust reasoning patterns while avoiding observed errors. Extensive experiments on closed-ended reasoning tasks and open-ended evaluation tasks demonstrate that TF-TTCL consistently outperforms strong zero-shot baselines and representative TTA methods under online evaluation. Code is available at this https URL",
-   "reviewer_role": "博导复审§4.2-2 直接近邻(P0);旧日志行241首次发现未转录(QRP-5在案)",
-   "held_out": false,
-   "used_in_query_design": false,
-   "in_seed_batch": "增量批次4"
-  },
-  "2605.14477": {
-   "title": "Test-Time Learning with an Evolving Library",
-   "categories": [
-    "cs.LG"
-   ],
-   "abstract": "We introduce EvoLib, a test-time learning framework that enables large language models to accumulate, reuse, and evolve knowledge across problem instances without parameter updates or external supervision. Instead of adapting model parameters, our approach maintains a shared library of knowledge abstractions, including modular skills and reflective insights, automatically extracted from the model's own inference trajectories. To support continual improvement, we introduce a principled weighting and consolidation mechanism that jointly optimizes for immediate utility and long-term value. This allows simple, instance-specific abstractions to evolve into more general and reusable ones over time. Across challenging benchmarks in mathematical reasoning, code generation, and multi-turn agentic environments, EvoLib improves substantially over the top test-time scaling and learning methods without ground-truth feedback.",
-   "reviewer_role": "博导复审§4.2-3 直接近邻(P0);PERSISTENCE_BOUNDARY",
-   "held_out": false,
-   "used_in_query_design": false,
-   "in_seed_batch": "增量批次4"
   },
   "2510.14900": {
-   "title": "Mapping Smarter, Not Harder: A Test-Time Reinforcement Learning Agent That Improves Without Labels or Model Updates",
+   "atom_sha256": "2c7f16e3b0843ec55e92e90e4d7d2a27653be56d655cd733eca60d8c2a4ac677",
+   "atom_xml": "docs/survey-provenance/atom/2510.14900.xml",
    "categories": [
     "cs.AI",
     "cs.CR"
    ],
-   "abstract": "The Enterprise Intelligence Platform must integrate logs from numerous third-party vendors in order to perform various downstream tasks. However, vendor documentation is often unavailable at test time. It is either misplaced, mismatched, poorly formatted, or incomplete, which makes schema mapping challenging. We introduce a reinforcement learning agent that can self-improve without labeled examples or model weight updates. During inference, the agent: 1) Identifies ambiguous field-mapping attempts. 2) Generates targeted web-search queries to gather external evidence. 3) Applies a confidence-based reward to iteratively refine its mappings. To demonstrate this concept, we converted Microsoft Defender for Endpoint logs into a common schema. Our method increased mapping accuracy from 56.4%(LLM-only) to 72.73%(RAG) to 93.94% over 100 iterations using GPT-4o. At the same time, it reduced the number of low-confidence mappings requiring expert review by 85%. This new approach provides an evidence-driven, transparent method for solving future industry problems, paving the way for more robust, accountable, scalable, efficient, flexible, adaptable, and collaborative solutions.",
+   "held_out": false,
+   "in_seed_batch": "增量批次4",
+   "primary_category": "cs.AI",
    "reviewer_role": "博导复审§4.2-4 边界案例(P0);read-out/new-info 信息边界反例;NAMING_THREAT",
-   "held_out": false,
-   "used_in_query_design": false,
-   "in_seed_batch": "增量批次4"
+   "source_normalized_abstract": "The Enterprise Intelligence Platform must integrate logs from numerous third-party vendors in order to perform various downstream tasks. However, vendor documentation is often unavailable at test time. It is either misplaced, mismatched, poorly formatted, or incomplete, which makes schema mapping challenging. We introduce a reinforcement learning agent that can self-improve without labeled examples or model weight updates. During inference, the agent: 1) Identifies ambiguous field-mapping attempts. 2) Generates targeted web-search queries to gather external evidence. 3) Applies a confidence-based reward to iteratively refine its mappings. To demonstrate this concept, we converted Microsoft Defender for Endpoint logs into a common schema. Our method increased mapping accuracy from 56.4%(LLM-only) to 72.73%(RAG) to 93.94% over 100 iterations using GPT-4o. At the same time, it reduced the number of low-confidence mappings requiring expert review by 85%. This new approach provides an evidence-driven, transparent method for solving future industry problems, paving the way for more robust, accountable, scalable, efficient, flexible, adaptable, and collaborative solutions.",
+   "title": "Mapping Smarter, Not Harder: A Test-Time Reinforcement Learning Agent That Improves Without Labels or Model Updates",
+   "used_in_query_design": false
   },
-  "2603.27706": {
-   "title": "MAR3: Multi-Agent Recognition, Reasoning, and Reflection for Reference Audio-Visual Segmentation",
+  "2601.09667": {
+   "atom_sha256": "c4242d51b5f532f590f5359eaba4d0c3b8086cfd80848cf8d79b9c3907436344",
+   "atom_xml": "docs/survey-provenance/atom/2601.09667.xml",
    "categories": [
-    "cs.MM"
+    "cs.AI",
+    "cs.CL"
    ],
-   "abstract": "Reference Audio-Visual Segmentation (Ref-AVS) aims to segment objects in audible videos based on multimodal cues in reference expressions. Previous methods overlook the explicit recognition of expression difficulty and dominant modality in multimodal cues, over-rely on the quality of the instruction-tuning dataset for object reasoning, and lack reflective validation of segmentation results, leading to erroneous mask predictions. To address these issues, in this paper, we propose a novel training-free Multi-Agent Recognition, Reasoning, and Reflection framework to achieve high-quality Reference Audio-Visual Segmentation, termed MAR3. Incorporating the sociological Delphi theory to achieve robust analysis, a Consensus Multimodal Recognition mechanism is proposed that enables LLM agents to explicitly recognize the difficulty of reference expressions and the dominant modality of multimodal cues. Based on our modality-dominant difficulty rule, we propose an adaptive Collaborative Object Reasoning strategy to reliably reason about the referred object. To further ensure precise mask prediction, we develop a Reflective Learning Segmentation mechanism, in which a check agent examines intermediate segmentation results and iteratively corrects the object text prompt of the segment agent. Experiments demonstrate that MAR3 achieves superior performance (69.2% in J&F) on the Ref-AVSBench dataset, outperforming SOTA by 3.4% absolutely.",
-   "reviewer_role": "博导复审§4.2-5(P0);cs.MM 类目盲区确定反例;SF-L11 in-seed 哨兵",
+   "coverage_note": null,
    "held_out": false,
-   "used_in_query_design": false,
-   "in_seed_batch": "增量批次4"
+   "primary_category": "cs.AI",
+   "reviewer_role": "强制 seed / TF-Strict 与持久化审计（test-time RL 命名威胁）",
+   "source_normalized_abstract": "Multi-agent systems have evolved into practical LLM-driven collaborators for many applications, gaining robustness from diversity and cross-checking. However, multi-agent RL (MARL) training is resource-intensive and unstable: co-adapting teammates induce non-stationarity, and rewards are often sparse and high-variance. Therefore, we introduce \\textbf{Multi-Agent Test-Time Reinforcement Learning (MATTRL)}, a framework that injects structured textual experience into multi-agent deliberation at inference time. MATTRL forms a multi-expert team of specialists for multi-turn discussions, retrieves and integrates test-time experiences, and reaches consensus for final decision-making. We also study credit assignment for constructing a turn-level experience pool, then reinjecting it into the dialogue. Across challenging benchmarks in medicine, math, and education, MATTRL improves accuracy by an average of 3.67\\% over a multi-agent baseline, and by 8.67\\% over comparable single-agent baselines. Ablation studies examine different credit-assignment schemes and provide a detailed comparison of how they affect training outcomes. MATTRL offers a stable, effective and efficient path to distribution-shift-robust multi-agent reasoning without tuning.",
+   "title": "Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning",
+   "used_in_query_design": true
   },
-  "2605.12978": {
-   "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",
+  "2602.21497": {
+   "atom_sha256": "fe2dc34d615e58279f4a1e1080be00d83dee9e87bdccf9bccc64d89105513264",
+   "atom_xml": "docs/survey-provenance/atom/2602.21497.xml",
    "categories": [
-    "cs.AI"
+    "cs.CV"
    ],
-   "abstract": "Learning from past experience benefits from two complementary forms of memory: episodic traces -- raw trajectories of what happened -- and consolidated abstractions distilled across many episodes into reusable, schema-like lessons. Recent agentic-memory systems pursue the consolidated form: an LLM rewrites past trajectories into a textual memory bank that it continuously updates with new interactions, promising self-improving agents without parameter updates. Yet we find that such consolidated memories produced by today's LLMs are often faulty even when derived from useful experiences. As consolidation proceeds, memory utility first rises, then degrades, and can fall below the no-memory baseline. More surprisingly, even when consolidating from ground-truth solutions, GPT-5.4 fails on 54% of a set of ARC-AGI problems it had previously solved without memory. We trace the regression to the consolidation step rather than the underlying experience: the same trajectories yield qualitatively different memories under different update schedules, and an episodic-only control that simply retains those trajectories remains competitive with the consolidators we test. In a controlled ARC-AGI Stream environment that exposes Retain, Delete, and Consolidate actions, agents preserve raw episodes by default and double the accuracy of their forced-consolidation counterparts; disabling consolidation entirely (episodic management only) matches this auto regime. Practically, robust agent memory should treat raw episodes as first-class evidence and gate consolidation explicitly rather than firing it after every interaction. Looking forward, reliable agentic memory will require LLMs that can consolidate without overwriting the evidence they depend on.",
-   "reviewer_role": "博导复审§4.3-1 执行早期优先(P1);held-out 哨兵——未入种子、未参与任何查询设计",
    "held_out": true,
-   "used_in_query_design": false,
-   "in_seed_batch": null
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-3.4 独立代理 held-out(L12/cs.CV 侧);选取代理未接触修订 diff 与词项;era>=2025(owner 时代裁决);预注册后运行",
+   "source_normalized_abstract": "Recent large vision-language models (LVLMs) have demonstrated impressive reasoning ability by generating long chain-of-thought (CoT) responses. However, CoT reasoning in multimodal contexts is highly vulnerable to visual hallucination propagation: once an intermediate reasoning step becomes inconsistent with the visual evidence, subsequent steps-even if logically valid-can still lead to incorrect final answers. Existing solutions attempt to mitigate this issue by training models to \"think with images\" via reinforcement learning (RL). While effective, these methods are costly, model-specific, and difficult to generalize across architectures. Differently, we present a lightweight method that bypasses RL training and provides an iterative, training-free, plug-and-play framework for visually-grounded multimodal reasoning. Our key idea is to supervise each reasoning step at test time with visual evidence, ensuring that every decoded token is justified by corresponding visual cues. Concretely, we construct a textual visual-evidence pool that guides the model's reasoning generation. When existing evidence is insufficient, a visual decider module dynamically extracts additional relevant evidence from the image based on the ongoing reasoning context, expanding the pool until the model achieves sufficient visual certainty to terminate reasoning and produce the final answer. Extensive experiments on multiple LVLM backbones and benchmarks demonstrate the effectiveness of our approach. Our method achieves 16.5%-29.5% improvements on TreeBench and 13.7% RH-AUC gains on RH-Bench, substantially reducing hallucination rates while improving reasoning accuracy without additional training.",
+   "title": "See It, Say It, Sorted: An Iterative Training-Free Framework for Visually-Grounded Multimodal Reasoning in LVLMs",
+   "used_in_query_design": false
   },
   "2603.12310": {
-   "title": "VQQA: An Agentic Approach for Video Evaluation and Quality Improvement",
+   "atom_sha256": "cfef9baa2e6e37ce6e81885db5a3801dd9bdd7a6184d91c2727e1f8dc86e4685",
+   "atom_xml": "docs/survey-provenance/atom/2603.12310.xml",
    "categories": [
     "cs.CV",
     "cs.AI",
     "cs.LG",
     "cs.MA"
    ],
-   "abstract": "Despite rapid advancements in video generation models, aligning their outputs with complex user intent remains challenging. Existing test-time optimization methods are typically either computationally expensive or require white-box access to model internals. To address this, we present VQQA (Video Quality Question Answering), a unified, multi-agent framework generalizable across diverse input modalities and video generation tasks. By dynamically generating visual questions and using the resulting Vision-Language Model (VLM) critiques as semantic gradients, VQQA replaces traditional, passive evaluation metrics with human-interpretable, actionable feedback. This enables a highly efficient, closed-loop prompt optimization process via a black-box natural language interface. Extensive experiments demonstrate that VQQA effectively isolates and resolves visual artifacts, substantially improving generation quality in just a few refinement steps. Applicable to both text-to-video (T2V) and image-to-video (I2V) tasks, our method achieves absolute improvements of +11.57% on T2V-CompBench and +8.43% on VBench2 over vanilla generation, significantly outperforming state-of-the-art stochastic search and prompt optimization techniques.",
-   "reviewer_role": "博导复审§4.3-2 执行早期优先(P1);held-out 哨兵——cs.MA 受控道 SF-L11 的独立验收,摘要未参与词项设计",
    "held_out": true,
-   "used_in_query_design": false,
-   "in_seed_batch": null
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "复审§4.3-2 执行早期件(P1);held-out 哨兵;摘要未参与词项设计;P0-3.2 更正:其 categories 无 cs.MM,故仅独立验证 SF-L11 的 cs.MA 一侧——cs.MM 侧独立验收 = TimeLogic 2606.01631(评审供例)",
+   "source_normalized_abstract": "Despite rapid advancements in video generation models, aligning their outputs with complex user intent remains challenging. Existing test-time optimization methods are typically either computationally expensive or require white-box access to model internals. To address this, we present VQQA (Video Quality Question Answering), a unified, multi-agent framework generalizable across diverse input modalities and video generation tasks. By dynamically generating visual questions and using the resulting Vision-Language Model (VLM) critiques as semantic gradients, VQQA replaces traditional, passive evaluation metrics with human-interpretable, actionable feedback. This enables a highly efficient, closed-loop prompt optimization process via a black-box natural language interface. Extensive experiments demonstrate that VQQA effectively isolates and resolves visual artifacts, substantially improving generation quality in just a few refinement steps. Applicable to both text-to-video (T2V) and image-to-video (I2V) tasks, our method achieves absolute improvements of +11.57% on T2V-CompBench and +8.43% on VBench2 over vanilla generation, significantly outperforming state-of-the-art stochastic search and prompt optimization techniques.",
+   "title": "VQQA: An Agentic Approach for Video Evaluation and Quality Improvement",
+   "used_in_query_design": false
+  },
+  "2603.27706": {
+   "atom_sha256": "bab38295a805540f2383407bd65a3d26cac34e0442f867be03c97112765ff522",
+   "atom_xml": "docs/survey-provenance/atom/2603.27706.xml",
+   "categories": [
+    "cs.MM"
+   ],
+   "held_out": false,
+   "in_seed_batch": "增量批次4",
+   "primary_category": "cs.MM",
+   "reviewer_role": "复审§4.2-5(P0);cs.MM 类目盲区确定反例;P0-3.2 更正:已入种子并参与 SF-L11 设计,身份 = seeded regression,不得称 held-out",
+   "source_normalized_abstract": "Reference Audio-Visual Segmentation (Ref-AVS) aims to segment objects in audible videos based on multimodal cues in reference expressions. Previous methods overlook the explicit recognition of expression difficulty and dominant modality in multimodal cues, over-rely on the quality of the instruction-tuning dataset for object reasoning, and lack reflective validation of segmentation results, leading to erroneous mask predictions. To address these issues, in this paper, we propose a novel training-free Multi-Agent Recognition, Reasoning, and Reflection framework to achieve high-quality Reference Audio-Visual Segmentation, termed MAR3. Incorporating the sociological Delphi theory to achieve robust analysis, a Consensus Multimodal Recognition mechanism is proposed that enables LLM agents to explicitly recognize the difficulty of reference expressions and the dominant modality of multimodal cues. Based on our modality-dominant difficulty rule, we propose an adaptive Collaborative Object Reasoning strategy to reliably reason about the referred object. To further ensure precise mask prediction, we develop a Reflective Learning Segmentation mechanism, in which a check agent examines intermediate segmentation results and iteratively corrects the object text prompt of the segment agent. Experiments demonstrate that MAR3 achieves superior performance (69.2% in J&F) on the Ref-AVSBench dataset, outperforming SOTA by 3.4% absolutely.",
+   "title": "MAR3: Multi-Agent Recognition, Reasoning, and Reflection for Reference Audio-Visual Segmentation",
+   "used_in_query_design": false
+  },
+  "2604.13552": {
+   "atom_sha256": "916ec8139aaebbed9ff16199226d11474200256f788367324d5ef9ee874e67ba",
+   "atom_xml": "docs/survey-provenance/atom/2604.13552.xml",
+   "categories": [
+    "cs.CL",
+    "cs.AI"
+   ],
+   "held_out": false,
+   "in_seed_batch": "增量批次4",
+   "primary_category": "cs.CL",
+   "reviewer_role": "博导复审§4.2-2 直接近邻(P0);旧日志行241首次发现未转录(QRP-5在案)",
+   "source_normalized_abstract": "Large language models (LLMs) demonstrate strong reasoning capabilities, but their performance often degrades under distribution shift. Existing test-time adaptation (TTA) methods rely on gradient-based updates that require white-box access and need substantial overhead, while training-free alternatives are either static or depend on external guidance. In this paper, we propose Training-Free Test-Time Contrastive Learning TF-TTCL, a training-free adaptation framework that enables a frozen LLM to improve online by distilling supervision from its own inference experiences. Specifically, TF-TTCL implements a dynamic \"Explore-Reflect-Steer\" loop through three core modules: 1) Semantic Query Augmentation first diversifies problem views via multi-agent role-playing to generate different reasoning trajectories; 2) Contrastive Experience Distillation then captures the semantic gap between superior and inferior trajectories, distilling them into explicit textual rules; and 3) Contextual Rule Retrieval finally activates these stored rules during inference to dynamically steer the frozen LLM toward robust reasoning patterns while avoiding observed errors. Extensive experiments on closed-ended reasoning tasks and open-ended evaluation tasks demonstrate that TF-TTCL consistently outperforms strong zero-shot baselines and representative TTA methods under online evaluation. Code is available at this https URL",
+   "title": "Training-Free Test-Time Contrastive Learning for Large Language Models",
+   "used_in_query_design": false
+  },
+  "2605.11374": {
+   "atom_sha256": "fec334ae5eb364800ab5eb9c5a617f8a28ba53c0e3e6b40796999a2e45f9cf19",
+   "atom_xml": "docs/survey-provenance/atom/2605.11374.xml",
+   "categories": [
+    "cs.LG",
+    "cs.CL",
+    "cs.IR"
+   ],
+   "held_out": true,
+   "in_seed_batch": null,
+   "primary_category": "cs.LG",
+   "reviewer_role": "P0-3.4 独立代理 held-out(L13/cs.LG 侧);选取代理未接触修订 diff 与词项;era>=2025;info-boundary 注记:discovery 阶段程序选择用带标签任务(不训参数),D2 编码时按 source_axes 如实处理",
+   "source_normalized_abstract": "Test-time compute is widely believed to benefit only large reasoning models, leaving small models with nothing to gain. We argue the opposite for dense retrieval, since modern small embedding models are distilled or adapted from large language model backbones and can inherit their latent test-time-compute potential. We ask how much retrieval quality a frozen embedding model gains at inference alone, with no auxiliary model and no parameters trained at deployment. An agentic loop in which a large language model writes programs over a frozen encoder API explores 144 candidates and yields twelve Pareto-optimal programs that trade inference compute for quality across cost ratios from $c{=}1.2$ to $14.7$, every one improving nDCG@10 on all 14 discovery tasks. The programs use no trainable parameters and recover classical retrieval primitives, among them reciprocal rank fusion, the Fisher linear discriminant, Rocchio pseudo-relevance feedback, and sentence-level MaxSim. Applied unmodified to nineteen held-out tasks and three unseen encoder families, a single fixed program improves the majority of tasks, with a positive median $Δ$nDCG@10 and a 54 to 57% win-rate at $c{\\ge}4$, and the gains are largest on encoder families never seen during discovery. A matched-budget learned projection head trained on the same tasks does not transfer this way, improving in-domain retrieval by $+0.20$ to $+0.25$ nDCG@10 yet falling below baseline on every held-out encoder. Small embedding models therefore inherit usable test-time-compute potential, and a frozen encoder converts inference compute into retrieval gains that transfer to new corpora and encoders with no per-domain labels.",
+   "title": "Test-Time Compute for Frozen Embedding Models through Agentic Program Search",
+   "used_in_query_design": false
+  },
+  "2605.12953": {
+   "atom_sha256": "1b5461ed30918c84629fb39afee2318fe4cfa796b84c762f86fb3c172d6ac2fc",
+   "atom_xml": "docs/survey-provenance/atom/2605.12953.xml",
+   "categories": [
+    "cs.CV",
+    "cs.AI"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "博导复审#4A MAJOR-3 确定漏检反例;query-regression counterexample;词项级匹配 SF-L11 仅被类目拦截;SF-L12 镜像道 = 其确定性补救;参与补救设计故非 held-out",
+   "source_normalized_abstract": "Language-guided segmentation transcends the scope limitations of traditional semantic segmentation, enabling models to segment arbitrary target regions based on natural language instructions. Existing approaches typically adopt a two-stage framework: employing Multimodal Large Language Models (MLLMs) to interpret instructions and generate visual prompts, followed by foundational segmentation models (e.g., SAM) to produce masks. However, due to the limited spatial grounding capabilities of off-the-shelf MLLMs, these methods often rely on extensive training on large-scale datasets to achieve satisfactory accuracy. While recent advances have introduced reasoning mechanisms to improve performance, they predominantly operate within the textual domain, performing chain-of-thought reasoning solely based on abstract text representations without direct visual feedback. In this paper, we propose Seg-Agent, a completely training-free framework that pioneers Explicit Multimodal Chain-of-Reasoning. Unlike prior text-only reasoning, our approach constructs an interactive visual reasoning loop comprising three stages: generation, selection, and refinement. Specifically, we leverage Set-of-Mark (SoM) visual prompting to render candidate regions directly onto the image, allowing the MLLM to ``see'' and iteratively reason about spatial relationships in the visual domain rather than just the textual one. This explicit multimodal interaction enables Seg-Agent to achieve performance comparable to state-of-the-art training-based methods without any parameter updates. Furthermore, to comprehensively evaluate generalization across diverse scenarios, we introduce Various-LangSeg, a novel benchmark covering explicit semantic, generic object, and reasoning-guided segmentation tasks. Extensive experiments demonstrate the effectiveness and robustness of our method.",
+   "title": "Seg-Agent: Test-Time Multimodal Reasoning for Training-Free Language-Guided Segmentation",
+   "used_in_query_design": false
+  },
+  "2605.12978": {
+   "atom_sha256": "cc115e58dbd84e20e279505ab4b758ba0d9c65819a591d873dd74e1f2084dd9f",
+   "atom_xml": "docs/survey-provenance/atom/2605.12978.xml",
+   "categories": [
+    "cs.AI"
+   ],
+   "held_out": true,
+   "in_seed_batch": null,
+   "primary_category": "cs.AI",
+   "reviewer_role": "博导复审§4.3-1 执行早期优先(P1);held-out 哨兵——未入种子、未参与任何查询设计",
+   "source_normalized_abstract": "Learning from past experience benefits from two complementary forms of memory: episodic traces -- raw trajectories of what happened -- and consolidated abstractions distilled across many episodes into reusable, schema-like lessons. Recent agentic-memory systems pursue the consolidated form: an LLM rewrites past trajectories into a textual memory bank that it continuously updates with new interactions, promising self-improving agents without parameter updates. Yet we find that such consolidated memories produced by today's LLMs are often faulty even when derived from useful experiences. As consolidation proceeds, memory utility first rises, then degrades, and can fall below the no-memory baseline. More surprisingly, even when consolidating from ground-truth solutions, GPT-5.4 fails on 54% of a set of ARC-AGI problems it had previously solved without memory. We trace the regression to the consolidation step rather than the underlying experience: the same trajectories yield qualitatively different memories under different update schedules, and an episodic-only control that simply retains those trajectories remains competitive with the consolidators we test. In a controlled ARC-AGI Stream environment that exposes Retain, Delete, and Consolidate actions, agents preserve raw episodes by default and double the accuracy of their forced-consolidation counterparts; disabling consolidation entirely (episodic management only) matches this auto regime. Practically, robust agent memory should treat raw episodes as first-class evidence and gate consolidation explicitly rather than firing it after every interaction. Looking forward, reliable agentic memory will require LLMs that can consolidate without overwriting the evidence they depend on.",
+   "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",
+   "used_in_query_design": false
+  },
+  "2605.14477": {
+   "atom_sha256": "a991dcbfc97f700c5dca40b05f9e2d893ca6834822e609ef682ee2a4a9fe9864",
+   "atom_xml": "docs/survey-provenance/atom/2605.14477.xml",
+   "categories": [
+    "cs.LG"
+   ],
+   "held_out": false,
+   "in_seed_batch": "增量批次4",
+   "primary_category": "cs.LG",
+   "reviewer_role": "博导复审§4.2-3 直接近邻(P0);PERSISTENCE_BOUNDARY",
+   "source_normalized_abstract": "We introduce EvoLib, a test-time learning framework that enables large language models to accumulate, reuse, and evolve knowledge across problem instances without parameter updates or external supervision. Instead of adapting model parameters, our approach maintains a shared library of knowledge abstractions, including modular skills and reflective insights, automatically extracted from the model's own inference trajectories. To support continual improvement, we introduce a principled weighting and consolidation mechanism that jointly optimizes for immediate utility and long-term value. This allows simple, instance-specific abstractions to evolve into more general and reusable ones over time. Across challenging benchmarks in mathematical reasoning, code generation, and multi-turn agentic environments, EvoLib improves substantially over the top test-time scaling and learning methods without ground-truth feedback.",
+   "title": "Test-Time Learning with an Evolving Library",
+   "used_in_query_design": false
+  },
+  "2606.01631": {
+   "atom_sha256": "405803f84c9c84a14b568bc47b219090f10ec4efb917c2a479cb4e3664d246a7",
+   "atom_xml": "docs/survey-provenance/atom/2606.01631.xml",
+   "categories": [
+    "cs.MM"
+   ],
+   "held_out": true,
+   "in_seed_batch": null,
+   "primary_category": "cs.MM",
+   "reviewer_role": "博导复审#4A 供例(P0-3.1);reviewer-supplied primary-cs.MM held-out;来源/版本/哈希先冻结(raw Atom)后运行;预期 SF-L11 QUERY_HIT",
+   "source_normalized_abstract": "Temporal-logic video question answering requires a model to reason about when actions occur relative to one another, such as before, after, until, since, overlap, and multi-event chains, rather than merely what is present in a video. Standard vision-language models typically answer such questions in a single pass over a fixed, uniformly sampled set of frames, which is poorly matched to evidence that is often localized to narrow action boundaries or dispersed across several distant events. We present an evidence-seeking agent that treats temporal-logic VideoQA as active exploration. The agent follows a Think-Act-Observe loop driven by a multi-granular sampling toolkit, where every observation is interleaved with its absolute timestamp so that temporal relations reduce to numerical comparisons on a shared time axis. Its behavior is shaped by benchmark structure: a lightweight classifier routes each question to a temporal category, each with a tailored policy, iteration depth, and prompt, while sampling budgets adapt to corpus characteristics and clip length. The resulting training-free system couples Gemini 3.1 Pro with a temporal-reasoning policy and achieves 77.13 AvgAcc on the official TimeLogic test set.",
+   "title": "TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering",
+   "used_in_query_design": false
+  },
+  "2606.05296": {
+   "atom_sha256": "8302713a2a216a4232e704d080d4743f761d632aab2e73025399b50a829c3abc",
+   "atom_xml": "docs/survey-provenance/atom/2606.05296.xml",
+   "categories": [
+    "cs.LG",
+    "cs.AI"
+   ],
+   "held_out": false,
+   "in_seed_batch": "增量批次4",
+   "primary_category": "cs.LG",
+   "reviewer_role": "博导复审§4.2-1 直接近邻(P0);DIRECT_THREAT+SPLIT_TRAINED_VS_TF",
+   "source_normalized_abstract": "LLM agents operate in two distinct regimes: open-weight agents amenable to reinforcement learning (RL) and black-box agents whose behaviour must be controlled purely at test time. Although black-box agents are often backed by state-of-the-art proprietary LLMs, API-only access precludes parameter-level optimization, rendering most RL methods inapplicable. To address this limitation, we turn to a known equivalence between RL and Bayesian inference. We propose Agentic Monte Carlo (AMC) to directly sample from the optimal policy of a black-box agent rather than training it through RL. The optimal policy is a posterior over trajectories whose prior we define as the fixed black-box LLM agent. We employ Sequential Monte Carlo to sample from this posterior by learning a value function to steer the agent while leaving the underlying black-box model unchanged. We validate AMC on three diverse environments from the AgentGym benchmark, demonstrating significant improvements over prompting baselines and even outperforming Group Relative Policy Optimization (GRPO) as we scale the test-time compute of our method. AMC demonstrates the feasibility of performing principled RL-style optimization of black-box LLM agents. Code is available at this https URL",
+   "title": "Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents",
+   "used_in_query_design": false
+  },
+  "2606.23327": {
+   "atom_sha256": "176861703a0ae0d99e70f66a7a0c7843b9041d2784843c49e38c3c72a6714cab",
+   "atom_xml": "docs/survey-provenance/atom/2606.23327.xml",
+   "categories": [
+    "cs.CV",
+    "cs.AI"
+   ],
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.CV",
+   "reviewer_role": "batch-2 种子既有条目的存在性核验（原 UNVERIFIED → 已解析）",
+   "source_normalized_abstract": "Video editing has become essential in digital media creation, yet existing automated systems are restricted to short segment processing and domain-specific tasks. They face two critical limitations: i) inability to handle diverse video comprehension and editing operations, and ii) lack of long-video understanding for coherent narrative creation. We propose VideoAgent, an all-in-one agentic framework addressing these challenges through two key innovations. First, we develop automated video shot creation with shot planning agents for coherent narratives and cross-modal retrieval for aligned visual content. Second, we design a multi-agent orchestration framework integrating over thirty specialized editing agents. Intent parsing filters relevant tools while textual-gradient graph optimization assembles complex editing pipelines. Extensive experiments on our newly-proposed VideoEdit benchmark and public datasets demonstrate VideoAgent's superiority over existing multimodal LLMs and agentic systems. VideoAgent achieves 87-95% orchestration success rates while reducing API costs by 60%. Human evaluation across six video categories shows VideoAgent produces professional-quality content approaching human-level performance, with ratings only 4% below human-created videos. We release our code at this https URL .",
+   "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
+   "used_in_query_design": true
+  },
+  "2607.06873": {
+   "atom_sha256": "efd843e8c35b3d8a522b8a7e6ccd32bcefcbe0ee7028b0fbe82dff4654d7c3bd",
+   "atom_xml": "docs/survey-provenance/atom/2607.06873.xml",
+   "categories": [
+    "cs.SE"
+   ],
+   "coverage_note": null,
+   "held_out": false,
+   "primary_category": "cs.SE",
+   "reviewer_role": "强制 seed / 类目敏感性哨兵（cs.SE 主类目,v1=2026-07-08 在窗内）",
+   "source_normalized_abstract": "Conversational LLM agents can cause real-world harm when their internal workflows fail, such as completing a transaction without confirmation. Testing these state-dependent failures is difficult because critical boundaries, such as identity checks and confirmation gates, are hidden behind multi-turn conversational prerequisites, rendering them inaccessible to standard tests. We present AgentEval, a black-box testing framework that discovers and stresses these stateful boundaries. AgentEval interacts with an agent to mine a \\emph{conversational workflow graph}, a model of its behavior. Instead of prompting blindly, AgentEval uses this graph's structure to enumerate specific guards and prerequisites as test targets, replaying the conversational path to a boundary before applying a perturbation. AgentEval then executes each test, determining whether it passes or fails using only the conversation turns. We benchmark AgentEval against a privileged, white-box auditor with access to the agent's underlying source code, which AgentEval never sees. On four $\\tau^3$-bench agents, AgentEval successfully generates tests covering $23$--$38$ distinct boundaries per agent; ablation studies attribute the gain to the graph's structure: $23$ distinct boundaries versus $12$ with a prompt-only baseline, at lower duplicate and false-alarm rates.",
+   "title": "Mining Workflow Graphs for Black-Box Boundary Testing of Conversational LLM Agents",
+   "used_in_query_design": true
   }
  },
+ "provenance": "博导复审 §9.2 点名 13 篇 + batch-2 VideoAgent；题名/类目/摘要经 ID_DEREFERENCE 正典 pass 捕获（留痕 = wiki/survey/2026-07-16-sf-id-dereference-log.jsonl）；14/14 HIT 零幻觉 ‖ C4A 批次二(2026-07-16,P0-R5)：+7 篇（博导复审§4.2 五篇 P0 + §4.3 两篇 P1）,verbatim 摘要 ID_DEREFERENCE 留痕 = 2026-07-16-sf-access-log-c4a-review-verification.jsonl seq13-19; miss_explanation 更名 coverage_note(仅注释,不再参与判定——四分法见 sf_sentinel_recall_test.py); held_out=true 者(2605.12978/2603.12310)未入种子且未参与任何查询词项设计,防循环验收 | C4B 2026-07-16: +5 sentinels (TimeLogic/Seg-Agent/SeeItSayIt/DVD/TTCFrozenEmb), abstract->source_normalized_abstract, raw Atom provenance attached, VQQA/MAR3 P0-3.2 claim corrections",
  "schema_note": "papers.* 字段:title/categories/abstract(verbatim)/reviewer_role/coverage_note(注释)/held_out/used_in_query_design/in_seed_batch;可选 accepted_boundary={registered_in,reason} 仅当 dated amendment 登记覆盖边界时使用"
 }

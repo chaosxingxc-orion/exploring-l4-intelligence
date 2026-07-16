@@ -3,8 +3,8 @@
  "validator": "scripts/survey/sf_t1_routes_validate.py",
  "inputs": {
   "routes_jsonl": {
-   "path": "wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl",
-   "sha256": "a967c97a8c2ae60362c0e82a84520c84381e21be03273337978e5e1d951dfeff"
+   "path": "wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl",
+   "sha256": "41bbe80042718a19a0ca36f0348cd9d2adeb1f23f801f3bd703c2c1bd09df70a"
   },
   "wordlist_json": {
    "path": "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json",
