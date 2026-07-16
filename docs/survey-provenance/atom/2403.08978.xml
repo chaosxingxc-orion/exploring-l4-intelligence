@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/TGj2+JG7uvyL1Tug7eYp5LE1hvc</id>
+  <title>arXiv Query: search_query=&amp;id_list=2403.08978&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:46:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2403.08978" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08978v2</id>
+    <title>AutoGuide: Automated Generation and Selection of Context-Aware Guidelines for Large Language Model Agents</title>
+    <updated>2024-12-03T07:36:47Z</updated>
+    <link href="https://arxiv.org/abs/2403.08978v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08978v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in large language models (LLMs) have empowered AI agents capable of performing various sequential decision-making tasks. However, effectively guiding LLMs to perform well in unfamiliar domains like web navigation, where they lack sufficient knowledge, has proven to be difficult with the demonstration-based in-context learning paradigm. In this paper, we introduce a novel framework, called AutoGuide, which addresses this limitation by automatically generating context-aware guidelines from offline experiences. Importantly, each context-aware guideline is expressed in concise natural language and follows a conditional structure, clearly describing the context where it is applicable. As a result, our guidelines facilitate the provision of relevant knowledge for the agent's current decision-making process, overcoming the limitations of the conventional demonstration-based learning paradigm. Our evaluation demonstrates that AutoGuide significantly outperforms competitive baselines in complex benchmark domains, including real-world web navigation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T22:06:03Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yao Fu</name>
+    </author>
+    <author>
+      <name>Dong-Ki Kim</name>
+    </author>
+    <author>
+      <name>Jaekyeom Kim</name>
+    </author>
+    <author>
+      <name>Sungryull Sohn</name>
+    </author>
+    <author>
+      <name>Lajanugen Logeswaran</name>
+    </author>
+    <author>
+      <name>Kyunghoon Bae</name>
+    </author>
+    <author>
+      <name>Honglak Lee</name>
+    </author>
+  </entry>
+</feed>

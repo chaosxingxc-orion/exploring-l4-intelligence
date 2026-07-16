@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/xfIXf1Z1uj6WUgXJwGAqv37qRAo</id>
+  <title>arXiv Query: search_query=&amp;id_list=2405.13009&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:50:04Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2405.13009" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2405.13009v2</id>
+    <title>MetaReflection: Learning Instructions for Language Agents using Past Reflections</title>
+    <updated>2024-10-10T11:51:24Z</updated>
+    <link href="https://arxiv.org/abs/2405.13009v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.13009v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The popularity of Large Language Models (LLMs) have unleashed a new age ofLanguage Agents for solving a diverse range of tasks. While contemporary frontier LLMs are capable enough to power reasonably good Language agents, the closed-API model makes it hard to improve in cases they perform sub-optimally. To address this, recent works have explored ways to improve their performance using techniques like self-reflection and prompt optimization. Unfortunately, techniques like self-reflection can be used only in an online setup, while contemporary prompt optimization techniques are designed and tested to work on simple tasks. To this end, we introduce MetaReflection, a novel offline reinforcement learning technique that enhances the performance of Language Agents by augmenting a semantic memory based on experiential learnings from past trials. We demonstrate the efficacy of MetaReflection by evaluating across multiple domains, including complex logical reasoning, biomedical semantic similarity, open world question answering, and vulnerability threat detection, in Infrastructure-as-Code, spanning different agent designs. MetaReflection boosts Language agents' performance by 4% to 16.82% over the raw GPT-4 baseline and performs on par with existing state-of-the-art prompt optimization techniques while requiring fewer LLM calls.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T10:51:43Z</published>
+    <arxiv:comment>We release our experimental code at: https://aka.ms/metareflection-code</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Priyanshu Gupta</name>
+    </author>
+    <author>
+      <name>Shashank Kirtania</name>
+    </author>
+    <author>
+      <name>Ananya Singha</name>
+    </author>
+    <author>
+      <name>Sumit Gulwani</name>
+    </author>
+    <author>
+      <name>Arjun Radhakrishna</name>
+    </author>
+    <author>
+      <name>Sherry Shi</name>
+    </author>
+    <author>
+      <name>Gustavo Soares</name>
+    </author>
+  </entry>
+</feed>

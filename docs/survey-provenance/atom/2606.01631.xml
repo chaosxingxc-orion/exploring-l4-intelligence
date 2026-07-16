@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/aqxPCruVouPdrRCfxmwNa8BcQoI</id>
+  <title>arXiv Query: search_query=&amp;id_list=2606.01631&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:50:08Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2606.01631" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01631v1</id>
+    <title>TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering</title>
+    <updated>2026-06-01T03:31:42Z</updated>
+    <link href="https://arxiv.org/abs/2606.01631v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01631v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Temporal-logic video question answering requires a model to reason about when actions occur relative to one another, such as before, after, until, since, overlap, and multi-event chains, rather than merely what is present in a video. Standard vision-language models typically answer such questions in a single pass over a fixed, uniformly sampled set of frames, which is poorly matched to evidence that is often localized to narrow action boundaries or dispersed across several distant events. We present an evidence-seeking agent that treats temporal-logic VideoQA as active exploration. The agent follows a Think-Act-Observe loop driven by a multi-granular sampling toolkit, where every observation is interleaved with its absolute timestamp so that temporal relations reduce to numerical comparisons on a shared time axis. Its behavior is shaped by benchmark structure: a lightweight classifier routes each question to a temporal category, each with a tailored policy, iteration depth, and prompt, while sampling budgets adapt to corpus characteristics and clip length. The resulting training-free system couples Gemini 3.1 Pro with a temporal-reasoning policy and achieves 77.13 AvgAcc on the official TimeLogic test set.</summary>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T03:31:42Z</published>
+    <arxiv:primary_category term="cs.MM"/>
+    <author>
+      <name>Zhaoyang Xu</name>
+    </author>
+    <author>
+      <name>Xusheng He</name>
+    </author>
+    <author>
+      <name>Wei Liu</name>
+    </author>
+    <author>
+      <name>Zhenyang Li</name>
+    </author>
+    <author>
+      <name>Jianlong Wu</name>
+    </author>
+  </entry>
+</feed>

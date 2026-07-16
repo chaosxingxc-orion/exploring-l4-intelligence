@@ -1,0 +1,78 @@
+{
+ "artifact_id": "SF-PACKAGE-SUMMARY-MUTATIONS-2026-07-17-01",
+ "test": "scripts/survey/sf_package_summary_test.py",
+ "summary": "10/10 (baseline green + 7 mutations fail closed + boundary pair)",
+ "cases": [
+  {
+   "case": "baseline",
+   "expect": "exit 0 (all green)",
+   "exit_code": 0,
+   "result": "PASS",
+   "tail": "  [PASS            ] 陈旧口径扫描（活跃面机器派生;occurrence 级豁免;缺文件=FAIL）"
+  },
+  {
+   "case": "m1_two_seeds",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m2_empty_route_evidence",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m3_same_line_marker_token",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m4_hand_written_verdict",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m5_delete_active_file",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m6_flip_prefix_byte",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "m7_machine_count_off_by_one",
+   "expect": "exit != 0 (fail closed)",
+   "exit_code": 1,
+   "result": "PASS",
+   "tail": "package summary: FAIL"
+  },
+  {
+   "case": "boundary_positive",
+   "expect": "exit 0 + REGISTERED_BOUNDARY",
+   "exit_code": 0,
+   "outcome": "REGISTERED_BOUNDARY",
+   "result": "PASS"
+  },
+  {
+   "case": "boundary_negative",
+   "expect": "exit != 0 + UNRESOLVED_MISS",
+   "exit_code": 1,
+   "outcome": "UNRESOLVED_MISS",
+   "result": "PASS"
+  }
+ ],
+ "verdict": "PASS"
+}

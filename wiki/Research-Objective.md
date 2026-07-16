@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-16（续62:博导复审 #4A WITHHOLD〔8 项 P0,我方全量核验属实+7/7 引文零幻觉〕→ owner 三裁决〔P0-R4 时点收紧接受/D2-core 直接接受/机械化状态动词〕→ correction #4A 当日交付〔55 查询+SF-L11/92 种子/routes v2/YEAR splitter/record validator/sentinel 四分法/双计数〕——敌意内审环后送窄幅复核,签署前零查询维持）"
+last_refresh: "2026-07-17（续63:P0-R8 再裁 WITHHOLD〔3 MAJOR+2 MINOR,七变异全数亲手复现属实+评审引文 7/7 零幻觉〕→ owner 四点裁决〔agent-era 时代/CV·learning 受控道/独立代理 held-out/引文链退出机制+全文强制〕→ correction #4B 当日交付〔fail-closed 门禁 v2+mutation harness/validator V1–V15+fixtures-c4b/61 查询前 55 行字节不变/26 哨兵 held-out 5/raw Atom+全文台账/routes v3 自查更正〕——送 P0-R9 窄幅复核,签署前零查询维持）"
 ---
 
 # Research Objective & Current State
@@ -53,11 +53,20 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   转录失败在案登记〕/routes v2〔ACL2026→READY 唯一状态改判,ICML2025 入口解析 v267〕/YEAR 层
   splitter+真实行 dry-run 17/17/record validator V1–V13+负例 16/16/sentinel 四分法 21 哨兵
   零 UNRESOLVED〔两 held-out 纯查询召回,VQQA×5 验证 SF-L11〕/双计数 attestation+access
-  class 追认）→ 两段提交（af96a89+b7fd74b,已推送并合入 master@47f5a02）,**当前动作 =
-  P0-R8 申请书已落盘送签（`survey/2026-07-16-gate-s1-p0r8-rereview-application.md`:七项
-  验收集逐项复跑命令+主动披露面）,待评审窄幅复核（双向合同维持）**;
-  执行前置三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询维持（attestation=0;SURVEY-B
-  21 lanes/105 查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
+  class 追认）→ 两段提交（af96a89+b7fd74b,合入 master@47f5a02）→ **P0-R8 再裁 WITHHOLD
+  （3 MAJOR+2 MINOR:门禁 false-green 七变异/validator 合同弱于声称/SF-L11 单侧验收+
+  Seg-Agent 漏检/verbatim 失实/boundary 只查存在——我方逐条亲手复现全属实,全盘接受;根因=
+  oracle 弱于声称、内审环缺 mutation 镜头,连续第三轮同构）→ owner 四点裁决（续63:
+  agent-era 时代/CV·learning 受控道/独立代理 held-out/引文链退出机制+全文强制）→
+  correction #4B 当日交付**（amendment-6/7:fail-closed 门禁 v2〔canon 92/61/50/26/5+八
+  producer 隔离重跑字节比对+MACHINE_COUNT 对账〕/validator V1–V15+fixtures-c4b 26/26/
+  mutation harness 全变异非零退出/61 查询〔前 55 行字节不变;L12 CV/AI+L13 LG/ML/NE 镜像道,
+  Seg-Agent 复验 QUERY_HIT×2,DVD 词汇漂移近失例同批补救〕/26 哨兵〔held-out 5 全纯查询召回,
+  TimeLogic=cs.MM 侧,2605.11374 直接命中新道 L13-Q2〕/raw Atom+全文双份台账/routes v3 自查
+  tier 更正）,**当前动作 = 回应信+P0-R9 申请已落盘（`survey/2026-07-17-gate-s1-correction-
+  4b-response.md`）,待评审窄幅复核（双向合同维持）**;执行前置三条件（签署+owner 批准+
+  复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105 查询维持零执行）→
+  Stage-1A close 与 1B 放行 = 两个签字;survey 退出机制 E1–E3 = amendment-7（执行期合同）。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。

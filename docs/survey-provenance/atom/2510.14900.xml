@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/dE3+GgQG/sl2UyaQBMYHenXUBOI</id>
+  <title>arXiv Query: search_query=&amp;id_list=2510.14900&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-16T15:48:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2510.14900" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.14900v1</id>
+    <title>Mapping Smarter, Not Harder: A Test-Time Reinforcement Learning Agent That Improves Without Labels or Model Updates</title>
+    <updated>2025-10-16T17:17:00Z</updated>
+    <link href="https://arxiv.org/abs/2510.14900v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.14900v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Enterprise Intelligence Platform must integrate logs from numerous third-party vendors in order to perform various downstream tasks. However, vendor documentation is often unavailable at test time. It is either misplaced, mismatched, poorly formatted, or incomplete, which makes schema mapping challenging. We introduce a reinforcement learning agent that can self-improve without labeled examples or model weight updates. During inference, the agent: 1) Identifies ambiguous field-mapping attempts. 2) Generates targeted web-search queries to gather external evidence. 3) Applies a confidence-based reward to iteratively refine its mappings. To demonstrate this concept, we converted Microsoft Defender for Endpoint logs into a common schema. Our method increased mapping accuracy from 56.4\%(LLM-only) to 72.73\%(RAG) to 93.94\% over 100 iterations using GPT-4o. At the same time, it reduced the number of low-confidence mappings requiring expert review by 85\%. This new approach provides an evidence-driven, transparent method for solving future industry problems, paving the way for more robust, accountable, scalable, efficient, flexible, adaptable, and collaborative solutions.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-16T17:17:00Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Wen-Kwang Tsao</name>
+    </author>
+    <author>
+      <name>Yao-Ching Yu</name>
+    </author>
+    <author>
+      <name>Chien-Ming Huang</name>
+    </author>
+  </entry>
+</feed>

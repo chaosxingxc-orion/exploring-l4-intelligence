@@ -22,11 +22,13 @@ import sys
 import unicodedata
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROUTES_V3 = os.path.join(REPO, "wiki", "survey", "2026-07-17-sf-t1-routes-v3.jsonl")
 _ROUTES_V2 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes-v2.jsonl")
 _ROUTES_V1 = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-routes.jsonl")
-# C4A/P0-R4: v2 (post live-status-audit supersession) is the active canon when present;
-# v1 stays as the frozen historical artifact and is never rewritten.
-ROUTES = _ROUTES_V2 if os.path.exists(_ROUTES_V2) else _ROUTES_V1
+# C4A/P0-R4: the newest dated supersession is the active canon when present;
+# earlier versions stay as frozen historical artifacts and are never rewritten
+# (C4B: v3 corrects four ICASSP evidence_tier labels, see sf_t1_routes_v3_gen.py).
+ROUTES = next(p for p in (_ROUTES_V3, _ROUTES_V2, _ROUTES_V1) if os.path.exists(p))
 WORDLIST = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-t1-wordlist-v1.json")
 OUT = os.path.join(REPO, "docs", "checks", "2026-07-16-sf-t1-routes-validation.json")
 

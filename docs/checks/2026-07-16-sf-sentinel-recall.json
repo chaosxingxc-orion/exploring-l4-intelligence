@@ -1,116 +1,15 @@
 {
- "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-02",
+ "artifact_id": "SF-SENTINEL-RECALL-2026-07-16-03",
  "test": "scripts/survey/sf_sentinel_recall_test.py",
  "inputs": {
-  "queries": "wiki/survey/2026-07-15-sf-queries.jsonl (55 rows, auto-read, frozen)",
+  "queries": "wiki/survey/2026-07-15-sf-queries.jsonl (61 rows, auto-read, frozen)",
   "seed_manifest": "wiki/survey/2026-07-15-sf-seed-manifest.jsonl (92 ids, auto-read)",
-  "routes": "wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl",
+  "routes": "wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl",
   "sentinel_data": "wiki/survey/2026-07-16-sf-sentinel-data.json"
  },
  "matching_caveat": "offline approximation：无词干化、连字符折叠、词边界短语匹配；HIT 方向保守可信，term-MISS 仍可能被 API 词干化召回——终证以执行期实测为准",
  "unparsed_queries": [],
  "sentinels": {
-  "2407.01476": {
-   "title": "Tree Search for Language Model Agents",
-   "categories": [
-    "cs.AI",
-    "cs.CL",
-    "cs.LG"
-   ],
-   "reviewer_role": "强制 seed / 全文审计（inference-time best-first search + 多模态 value fn）",
-   "held_out": false,
-   "query_hits": [
-    "SF-L1-Q4"
-   ],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2506.07976": {
-   "title": "Thinking vs. Doing: Agents that Reason by Scaling Test-Time Interaction",
-   "categories": [
-    "cs.LG",
-    "cs.AI"
-   ],
-   "reviewer_role": "强制 seed / 拆分训练与非训练部分（test-time interaction scaling）",
-   "held_out": false,
-   "query_hits": [
-    "SF-L2-Q1"
-   ],
-   "n_term_match_but_category_blocked": 0,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2601.09667": {
-   "title": "Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning",
-   "categories": [
-    "cs.AI",
-    "cs.CL"
-   ],
-   "reviewer_role": "强制 seed / TF-Strict 与持久化审计（test-time RL 命名威胁）",
-   "held_out": false,
-   "query_hits": [
-    "SF-L8-Q3"
-   ],
-   "n_term_match_but_category_blocked": 0,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2503.12434": {
-   "title": "A Survey on the Optimization of Large Language Model-based Agents",
-   "categories": [
-    "cs.AI"
-   ],
-   "reviewer_role": "仅 DISCOVERY_NAVIGATION，不作一手承重（survey）",
-   "held_out": false,
-   "query_hits": [],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": false,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "SEED_GUARANTEED",
-   "coverage_note": "综述导航件（评审角色=仅 DISCOVERY_NAVIGATION,不作一手承重）：查询词族按设计瞄准一手方法工作,综述元词不入词族（噪声控制）;确定入口 = batch-3 种子 + 引文图导航层。SF-L10 词项级匹配但类目（cs.AI）不在该受控道投放域,属预期。"
-  },
-  "2410.13825": {
-   "title": "AgentOccam: A Simple Yet Strong Baseline for LLM-Based Web Agents",
-   "categories": [
-    "cs.AI",
-    "cs.CL"
-   ],
-   "reviewer_role": "强制 seed / 机制对照（obs/action space 对齐替代解释）",
-   "held_out": false,
-   "query_hits": [],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": false,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "SEED_GUARANTEED",
-   "coverage_note": "机制词族真实局限（interface/observation-action alignment 表述不在冻结身份词族）——如实登记 coverage limitation;确定性兜底：① batch-3 强制 seed（100% 入语料）② 题名含词表A组 agents→任一 T1 proceedings 出现即被 route 题录道捕获（执行期核验其 venue）③ 引文图:与已 HIT 的 2407.01476 同 web-agent 谱系,forward/backward 边可达。"
-  },
   "2309.05950": {
    "title": "Language Models as Black-Box Optimizers for Vision-Language Models",
    "categories": [
@@ -125,6 +24,27 @@
     "SF-L6-Q6"
    ],
    "n_term_match_but_category_blocked": 0,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2311.04155": {
+   "title": "Black-Box Prompt Optimization: Aligning Large Language Models without Model Training",
+   "categories": [
+    "cs.CL"
+   ],
+   "reviewer_role": "组件级 comparator（黑盒 prompt 优化）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L6-Q1",
+    "SF-L6-Q4"
+   ],
+   "n_term_match_but_category_blocked": 1,
    "channels": {
     "QUERY_HIT": true,
     "SEED_GUARANTEED": true,
@@ -161,15 +81,17 @@
    ],
    "reviewer_role": "持久化边界 seed（历史交互→可复用指南）",
    "held_out": false,
-   "query_hits": [],
-   "n_term_match_but_category_blocked": 1,
+   "query_hits": [
+    "SF-L13-Q3"
+   ],
+   "n_term_match_but_category_blocked": 2,
    "channels": {
-    "QUERY_HIT": false,
+    "QUERY_HIT": true,
     "SEED_GUARANTEED": true,
     "EXACT_ROUTE_GUARANTEED": false,
     "REGISTERED_BOUNDARY": false
    },
-   "outcome": "SEED_GUARANTEED",
+   "outcome": "QUERY_HIT",
    "coverage_note": "guideline-extraction 机制词（guidelines/offline experiences）不在 L4 memory/skill 词族——如实登记 coverage limitation;兜底：① batch-3 seed（持久化边界角色）② 题名含 agents→T1 题录道（venue 执行期核验）③ 引文图:ExpeL/AWM 谱系邻接,L4 族已覆盖该谱系核心节点。SF-L10 词项级匹配但类目（cs.CL/cs.LG）不在受控道投放域,属预期。"
   },
   "2405.13009": {
@@ -183,30 +105,10 @@
    "query_hits": [
     "SF-L1-Q2",
     "SF-L4-Q3",
-    "SF-L6-Q4"
+    "SF-L6-Q4",
+    "SF-L12-Q2"
    ],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2607.06873": {
-   "title": "Mining Workflow Graphs for Black-Box Boundary Testing of Conversational LLM Agents",
-   "categories": [
-    "cs.SE"
-   ],
-   "reviewer_role": "强制 seed / 类目敏感性哨兵（cs.SE 主类目,v1=2026-07-08 在窗内）",
-   "held_out": false,
-   "query_hits": [
-    "SF-L10-Q1",
-    "SF-L10-Q2"
-   ],
-   "n_term_match_but_category_blocked": 1,
+   "n_term_match_but_category_blocked": 2,
    "channels": {
     "QUERY_HIT": true,
     "SEED_GUARANTEED": true,
@@ -234,18 +136,105 @@
    "outcome": "SEED_GUARANTEED",
    "coverage_note": "reflection 形态学变体（anticipatory reflection≠self-reflection 精确短语）——如实登记词族局限;兜底：① batch-3 seed（控制基线角色）② 题名含 agents→T1 题录道 ③ 引文图:Reflexion 谱系（SF-L1-Q2 族已覆盖核心节点）forward 边可达。"
   },
-  "2311.04155": {
-   "title": "Black-Box Prompt Optimization: Aligning Large Language Models without Model Training",
+  "2407.01476": {
+   "title": "Tree Search for Language Model Agents",
    "categories": [
-    "cs.CL"
+    "cs.AI",
+    "cs.CL",
+    "cs.LG"
    ],
-   "reviewer_role": "组件级 comparator（黑盒 prompt 优化）",
+   "reviewer_role": "强制 seed / 全文审计（inference-time best-first search + 多模态 value fn）",
    "held_out": false,
    "query_hits": [
-    "SF-L6-Q1",
-    "SF-L6-Q4"
+    "SF-L1-Q4",
+    "SF-L12-Q2",
+    "SF-L13-Q2"
    ],
    "n_term_match_but_category_blocked": 1,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2410.13825": {
+   "title": "AgentOccam: A Simple Yet Strong Baseline for LLM-Based Web Agents",
+   "categories": [
+    "cs.AI",
+    "cs.CL"
+   ],
+   "reviewer_role": "强制 seed / 机制对照（obs/action space 对齐替代解释）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L12-Q2"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": "机制词族真实局限（interface/observation-action alignment 表述不在冻结身份词族）——如实登记 coverage limitation;确定性兜底：① batch-3 强制 seed（100% 入语料）② 题名含词表A组 agents→任一 T1 proceedings 出现即被 route 题录道捕获（执行期核验其 venue）③ 引文图:与已 HIT 的 2407.01476 同 web-agent 谱系,forward/backward 边可达。"
+  },
+  "2503.12434": {
+   "title": "A Survey on the Optimization of Large Language Model-based Agents",
+   "categories": [
+    "cs.AI"
+   ],
+   "reviewer_role": "仅 DISCOVERY_NAVIGATION，不作一手承重（survey）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L12-Q3"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": "综述导航件（评审角色=仅 DISCOVERY_NAVIGATION,不作一手承重）：查询词族按设计瞄准一手方法工作,综述元词不入词族（噪声控制）;确定入口 = batch-3 种子 + 引文图导航层。SF-L10 词项级匹配但类目（cs.AI）不在该受控道投放域,属预期。"
+  },
+  "2505.18079": {
+   "title": "Deep Video Discovery: Agentic Search with Tool Use for Long-form Video Understanding",
+   "categories": [
+    "cs.CV",
+    "cs.AI",
+    "cs.CL"
+   ],
+   "reviewer_role": "C4B 词汇漂移近失例;预注册 matcher 运行发现 59 查询零命中;query-regression counterexample;SF-L12-Q3/L13-Q3(SF-L10-Q2 词族镜像) = 其确定性补救;原为独立代理备选,因参与补救裁定烧毁 held-out 资格",
+   "held_out": false,
+   "query_hits": [
+    "SF-L12-Q3"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": false,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2506.07976": {
+   "title": "Thinking vs. Doing: Agents that Reason by Scaling Test-Time Interaction",
+   "categories": [
+    "cs.LG",
+    "cs.AI"
+   ],
+   "reviewer_role": "强制 seed / 拆分训练与非训练部分（test-time interaction scaling）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L2-Q1"
+   ],
+   "n_term_match_but_category_blocked": 0,
    "channels": {
     "QUERY_HIT": true,
     "SEED_GUARANTEED": true,
@@ -266,92 +255,8 @@
    "query_hits": [
     "SF-L3-Q2",
     "SF-L1-Q7",
-    "SF-L10-Q2"
-   ],
-   "n_term_match_but_category_blocked": 0,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2606.23327": {
-   "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
-   "categories": [
-    "cs.CV",
-    "cs.AI"
-   ],
-   "reviewer_role": "batch-2 种子既有条目的存在性核验（原 UNVERIFIED → 已解析）",
-   "held_out": false,
-   "query_hits": [
-    "SF-L3-Q2",
-    "SF-L1-Q7",
-    "SF-L1-Q8"
-   ],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2606.05296": {
-   "title": "Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents",
-   "categories": [
-    "cs.LG",
-    "cs.AI"
-   ],
-   "reviewer_role": "博导复审§4.2-1 直接近邻(P0);DIRECT_THREAT+SPLIT_TRAINED_VS_TF",
-   "held_out": false,
-   "query_hits": [
-    "SF-L2-Q6",
-    "SF-L6-Q1",
-    "SF-L6-Q2"
-   ],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": true,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "QUERY_HIT",
-   "coverage_note": null
-  },
-  "2604.13552": {
-   "title": "Training-Free Test-Time Contrastive Learning for Large Language Models",
-   "categories": [
-    "cs.CL",
-    "cs.AI"
-   ],
-   "reviewer_role": "博导复审§4.2-2 直接近邻(P0);旧日志行241首次发现未转录(QRP-5在案)",
-   "held_out": false,
-   "query_hits": [],
-   "n_term_match_but_category_blocked": 1,
-   "channels": {
-    "QUERY_HIT": false,
-    "SEED_GUARANTEED": true,
-    "EXACT_ROUTE_GUARANTEED": false,
-    "REGISTERED_BOUNDARY": false
-   },
-   "outcome": "SEED_GUARANTEED",
-   "coverage_note": null
-  },
-  "2605.14477": {
-   "title": "Test-Time Learning with an Evolving Library",
-   "categories": [
-    "cs.LG"
-   ],
-   "reviewer_role": "博导复审§4.2-3 直接近邻(P0);PERSISTENCE_BOUNDARY",
-   "held_out": false,
-   "query_hits": [
-    "SF-L2-Q1"
+    "SF-L10-Q2",
+    "SF-L12-Q3"
    ],
    "n_term_match_but_category_blocked": 1,
    "channels": {
@@ -382,17 +287,18 @@
    "outcome": "SEED_GUARANTEED",
    "coverage_note": null
   },
-  "2603.27706": {
-   "title": "MAR3: Multi-Agent Recognition, Reasoning, and Reflection for Reference Audio-Visual Segmentation",
+  "2601.09667": {
+   "title": "Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning",
    "categories": [
-    "cs.MM"
+    "cs.AI",
+    "cs.CL"
    ],
-   "reviewer_role": "博导复审§4.2-5(P0);cs.MM 类目盲区确定反例;SF-L11 in-seed 哨兵",
+   "reviewer_role": "强制 seed / TF-Strict 与持久化审计（test-time RL 命名威胁）",
    "held_out": false,
    "query_hits": [
-    "SF-L11-Q1"
+    "SF-L8-Q3"
    ],
-   "n_term_match_but_category_blocked": 1,
+   "n_term_match_but_category_blocked": 0,
    "channels": {
     "QUERY_HIT": true,
     "SEED_GUARANTEED": true,
@@ -402,17 +308,17 @@
    "outcome": "QUERY_HIT",
    "coverage_note": null
   },
-  "2605.12978": {
-   "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",
+  "2602.21497": {
+   "title": "See It, Say It, Sorted: An Iterative Training-Free Framework for Visually-Grounded Multimodal Reasoning in LVLMs",
    "categories": [
-    "cs.AI"
+    "cs.CV"
    ],
-   "reviewer_role": "博导复审§4.3-1 执行早期优先(P1);held-out 哨兵——未入种子、未参与任何查询设计",
+   "reviewer_role": "P0-3.4 独立代理 held-out(L12/cs.CV 侧);选取代理未接触修订 diff 与词项;era>=2025(owner 时代裁决);预注册后运行",
    "held_out": true,
    "query_hits": [
-    "SF-L4-Q5"
+    "SF-L3-Q7"
    ],
-   "n_term_match_but_category_blocked": 1,
+   "n_term_match_but_category_blocked": 0,
    "channels": {
     "QUERY_HIT": true,
     "SEED_GUARANTEED": false,
@@ -430,14 +336,20 @@
     "cs.LG",
     "cs.MA"
    ],
-   "reviewer_role": "博导复审§4.3-2 执行早期优先(P1);held-out 哨兵——cs.MA 受控道 SF-L11 的独立验收,摘要未参与词项设计",
+   "reviewer_role": "复审§4.3-2 执行早期件(P1);held-out 哨兵;摘要未参与词项设计;P0-3.2 更正:其 categories 无 cs.MM,故仅独立验证 SF-L11 的 cs.MA 一侧——cs.MM 侧独立验收 = TimeLogic 2606.01631(评审供例)",
    "held_out": true,
    "query_hits": [
     "SF-L6-Q1",
     "SF-L6-Q4",
     "SF-L1-Q7",
     "SF-L11-Q1",
-    "SF-L11-Q2"
+    "SF-L11-Q2",
+    "SF-L12-Q1",
+    "SF-L12-Q2",
+    "SF-L12-Q3",
+    "SF-L13-Q1",
+    "SF-L13-Q2",
+    "SF-L13-Q3"
    ],
    "n_term_match_but_category_blocked": 2,
    "channels": {
@@ -448,18 +360,237 @@
    },
    "outcome": "QUERY_HIT",
    "coverage_note": null
+  },
+  "2603.27706": {
+   "title": "MAR3: Multi-Agent Recognition, Reasoning, and Reflection for Reference Audio-Visual Segmentation",
+   "categories": [
+    "cs.MM"
+   ],
+   "reviewer_role": "复审§4.2-5(P0);cs.MM 类目盲区确定反例;P0-3.2 更正:已入种子并参与 SF-L11 设计,身份 = seeded regression,不得称 held-out",
+   "held_out": false,
+   "query_hits": [
+    "SF-L11-Q1"
+   ],
+   "n_term_match_but_category_blocked": 3,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2604.13552": {
+   "title": "Training-Free Test-Time Contrastive Learning for Large Language Models",
+   "categories": [
+    "cs.CL",
+    "cs.AI"
+   ],
+   "reviewer_role": "博导复审§4.2-2 直接近邻(P0);旧日志行241首次发现未转录(QRP-5在案)",
+   "held_out": false,
+   "query_hits": [
+    "SF-L12-Q3"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2605.11374": {
+   "title": "Test-Time Compute for Frozen Embedding Models through Agentic Program Search",
+   "categories": [
+    "cs.LG",
+    "cs.CL",
+    "cs.IR"
+   ],
+   "reviewer_role": "P0-3.4 独立代理 held-out(L13/cs.LG 侧);选取代理未接触修订 diff 与词项;era>=2025;info-boundary 注记:discovery 阶段程序选择用带标签任务(不训参数),D2 编码时按 source_axes 如实处理",
+   "held_out": true,
+   "query_hits": [
+    "SF-L2-Q6",
+    "SF-L13-Q2"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": false,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2605.12953": {
+   "title": "Seg-Agent: Test-Time Multimodal Reasoning for Training-Free Language-Guided Segmentation",
+   "categories": [
+    "cs.CV",
+    "cs.AI"
+   ],
+   "reviewer_role": "博导复审#4A MAJOR-3 确定漏检反例;query-regression counterexample;词项级匹配 SF-L11 仅被类目拦截;SF-L12 镜像道 = 其确定性补救;参与补救设计故非 held-out",
+   "held_out": false,
+   "query_hits": [
+    "SF-L12-Q1",
+    "SF-L12-Q2"
+   ],
+   "n_term_match_but_category_blocked": 4,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": false,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2605.12978": {
+   "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",
+   "categories": [
+    "cs.AI"
+   ],
+   "reviewer_role": "博导复审§4.3-1 执行早期优先(P1);held-out 哨兵——未入种子、未参与任何查询设计",
+   "held_out": true,
+   "query_hits": [
+    "SF-L4-Q5",
+    "SF-L12-Q2"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": false,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2605.14477": {
+   "title": "Test-Time Learning with an Evolving Library",
+   "categories": [
+    "cs.LG"
+   ],
+   "reviewer_role": "博导复审§4.2-3 直接近邻(P0);PERSISTENCE_BOUNDARY",
+   "held_out": false,
+   "query_hits": [
+    "SF-L2-Q1",
+    "SF-L13-Q2"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2606.01631": {
+   "title": "TimeLogic Challenge @ CVPR 2026: Strong MLLMs Meet Evidence-Seeking Agents for Temporal-Logic Video Question Answering",
+   "categories": [
+    "cs.MM"
+   ],
+   "reviewer_role": "博导复审#4A 供例(P0-3.1);reviewer-supplied primary-cs.MM held-out;来源/版本/哈希先冻结(raw Atom)后运行;预期 SF-L11 QUERY_HIT",
+   "held_out": true,
+   "query_hits": [
+    "SF-L11-Q1"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": false,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2606.05296": {
+   "title": "Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents",
+   "categories": [
+    "cs.LG",
+    "cs.AI"
+   ],
+   "reviewer_role": "博导复审§4.2-1 直接近邻(P0);DIRECT_THREAT+SPLIT_TRAINED_VS_TF",
+   "held_out": false,
+   "query_hits": [
+    "SF-L2-Q6",
+    "SF-L6-Q1",
+    "SF-L6-Q2"
+   ],
+   "n_term_match_but_category_blocked": 1,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2606.23327": {
+   "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
+   "categories": [
+    "cs.CV",
+    "cs.AI"
+   ],
+   "reviewer_role": "batch-2 种子既有条目的存在性核验（原 UNVERIFIED → 已解析）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L3-Q2",
+    "SF-L1-Q7",
+    "SF-L1-Q8",
+    "SF-L12-Q3"
+   ],
+   "n_term_match_but_category_blocked": 2,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
+  },
+  "2607.06873": {
+   "title": "Mining Workflow Graphs for Black-Box Boundary Testing of Conversational LLM Agents",
+   "categories": [
+    "cs.SE"
+   ],
+   "reviewer_role": "强制 seed / 类目敏感性哨兵（cs.SE 主类目,v1=2026-07-08 在窗内）",
+   "held_out": false,
+   "query_hits": [
+    "SF-L10-Q1",
+    "SF-L10-Q2"
+   ],
+   "n_term_match_but_category_blocked": 3,
+   "channels": {
+    "QUERY_HIT": true,
+    "SEED_GUARANTEED": true,
+    "EXACT_ROUTE_GUARANTEED": false,
+    "REGISTERED_BOUNDARY": false
+   },
+   "outcome": "QUERY_HIT",
+   "coverage_note": null
   }
  },
  "outcome_counts": {
-  "QUERY_HIT": 14,
-  "SEED_GUARANTEED": 7,
+  "QUERY_HIT": 23,
+  "SEED_GUARANTEED": 3,
   "EXACT_ROUTE_GUARANTEED": 0,
   "REGISTERED_BOUNDARY": 0,
   "UNRESOLVED_MISS": 0
  },
  "held_out_outcomes": {
+  "2602.21497": "QUERY_HIT",
+  "2603.12310": "QUERY_HIT",
+  "2605.11374": "QUERY_HIT",
   "2605.12978": "QUERY_HIT",
-  "2603.12310": "QUERY_HIT"
+  "2606.01631": "QUERY_HIT"
  },
  "verdict": "PASS",
  "fail_reasons": [],

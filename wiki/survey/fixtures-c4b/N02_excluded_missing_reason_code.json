@@ -1,0 +1,402 @@
+{
+ "claims": [
+  {
+   "claim_id": "CLAIM-1",
+   "claim_text": "AMC-type SMC selectors report gains over GRPO on AgentGym",
+   "rec2_backref": "REC2-AMC"
+  }
+ ],
+ "flow_report": {
+  "n_duplicate": 1,
+  "n_excluded": 1,
+  "n_hits": 5,
+  "n_included": 2,
+  "n_unobtainable": 1
+ },
+ "rec0": [
+  {
+   "adjudication_note": null,
+   "adjudicator": null,
+   "canonical_id": "2606.05296",
+   "coding_depth": "D2",
+   "decision": "INCLUDED",
+   "dedup": {
+    "merge_basis": "same_arxiv_id",
+    "merged_from": []
+   },
+   "extraction": {
+    "extracted_at": "2026-07-16T00:00:00Z",
+    "extractor": "coordinator",
+    "rec2_backref": "REC2-AMC"
+   },
+   "fulltext_version_ref": "v1",
+   "reason_code": null,
+   "reason_text": null,
+   "screened_at": "2026-07-16T00:00:00Z",
+   "screener": "coordinator",
+   "screening_stage": "FULLTEXT",
+   "second_reviewer": null,
+   "source_hits": [
+    {
+     "hit_ref": "seed-manifest row 88",
+     "source": "seed:manifest#88"
+    }
+   ],
+   "title": "Agentic Monte Carlo"
+  },
+  {
+   "adjudication_note": null,
+   "adjudicator": null,
+   "canonical_id": "2605.14477",
+   "coding_depth": "D1",
+   "decision": "INCLUDED",
+   "dedup": {
+    "merge_basis": "same_arxiv_id",
+    "merged_from": []
+   },
+   "extraction": {
+    "extracted_at": "2026-07-16T00:00:00Z",
+    "extractor": "coordinator",
+    "rec2_backref": "REC2-EVOLIB"
+   },
+   "fulltext_version_ref": "v1",
+   "reason_code": null,
+   "reason_text": null,
+   "screened_at": "2026-07-16T00:00:00Z",
+   "screener": "coordinator",
+   "screening_stage": "ABSTRACT",
+   "second_reviewer": null,
+   "source_hits": [
+    {
+     "hit_ref": "seed-manifest row 90",
+     "source": "seed:manifest#90"
+    }
+   ],
+   "title": "EvoLib"
+  },
+  {
+   "adjudication_note": null,
+   "adjudicator": null,
+   "canonical_id": "2401.00001",
+   "coding_depth": "D0",
+   "decision": "EXCLUDED",
+   "dedup": {
+    "merge_basis": "same_arxiv_id",
+    "merged_from": []
+   },
+   "extraction": {
+    "extracted_at": null,
+    "extractor": null,
+    "rec2_backref": null
+   },
+   "fulltext_version_ref": null,
+   "reason_code": null,
+   "reason_text": "image diffusion training, no inference-time optimization",
+   "screened_at": "2026-07-16T00:00:00Z",
+   "screener": "coordinator",
+   "screening_stage": "TITLE",
+   "second_reviewer": null,
+   "source_hits": [
+    {
+     "hit_ref": "REC1 line 12",
+     "source": "query:SF-L1-Q1"
+    }
+   ],
+   "title": "Unrelated diffusion paper"
+  },
+  {
+   "adjudication_note": null,
+   "adjudicator": null,
+   "canonical_id": "2401.00002",
+   "coding_depth": "D0",
+   "decision": "DUPLICATE",
+   "dedup": {
+    "merge_basis": "title_normalized_exact",
+    "merged_from": [
+     "2401.00002"
+    ]
+   },
+   "extraction": {
+    "extracted_at": null,
+    "extractor": null,
+    "rec2_backref": null
+   },
+   "fulltext_version_ref": null,
+   "reason_code": "DUPLICATE_OF:2606.05296",
+   "reason_text": "same canonical work",
+   "screened_at": "2026-07-16T00:00:00Z",
+   "screener": "coordinator",
+   "screening_stage": "TITLE",
+   "second_reviewer": null,
+   "source_hits": [
+    {
+     "hit_ref": "REC7 resolution 4",
+     "source": "route:SF-T1R-ACL-2025"
+    }
+   ],
+   "title": "Same work under variant title"
+  },
+  {
+   "adjudication_note": null,
+   "adjudicator": null,
+   "canonical_id": "10.1000/paywalled.1",
+   "coding_depth": "D0",
+   "decision": "UNOBTAINABLE",
+   "dedup": {
+    "merge_basis": "doi_match",
+    "merged_from": []
+   },
+   "extraction": {
+    "extracted_at": null,
+    "extractor": null,
+    "rec2_backref": null
+   },
+   "fulltext_version_ref": null,
+   "reason_code": "REMOVED_PAYWALLED_UNOBTAINABLE",
+   "reason_text": "no OA copy; removal registered per flow-report duty",
+   "screened_at": "2026-07-16T00:00:00Z",
+   "screener": "coordinator",
+   "screening_stage": "ABSTRACT",
+   "second_reviewer": null,
+   "source_hits": [
+    {
+     "hit_ref": "REC7 resolution 9",
+     "source": "route:SF-T1R-ICASSP-2025"
+    }
+   ],
+   "title": "Paywalled venue paper"
+  }
+ ],
+ "rec2": [
+  {
+   "claim_locators": [
+    {
+     "claim": "beats prompting and GRPO on AgentGym",
+     "locator": "v1 §5 Table 1",
+     "span": "rows 3-5"
+    }
+   ],
+   "coding_depth": "D2",
+   "dfs_trigger": [
+    "T-a对象"
+   ],
+   "evidence_axes": {
+    "publication_status": "preprint",
+    "study_quality": {
+     "ablation_attribution": {
+      "locator": "§4/Table 2",
+      "reason": "reported in paper",
+      "verdict": "PASS"
+     },
+     "artifact_availability": {
+      "locator": "§4/Table 2",
+      "reason": "reported in paper",
+      "verdict": "PASS"
+     },
+     "claim_evidence_match": {
+      "locator": "§4/Table 2",
+      "reason": "reported in paper",
+      "verdict": "PASS"
+     },
+     "coder": "coordinator",
+     "control_fairness": {
+      "locator": "§5.1",
+      "reason": "GRPO baseline budget unclear",
+      "verdict": "PARTIAL"
+     },
+     "data_boundary": {
+      "locator": "§4/Table 2",
+      "reason": "reported in paper",
+      "verdict": "PASS"
+     },
+     "reproducibility": {
+      "locator": "§4/Table 2",
+      "reason": "reported in paper",
+      "verdict": "PASS"
+     },
+     "summary_rating": "MEDIUM",
+     "uncertainty_reporting": {
+      "locator": "§5",
+      "reason": "single seed",
+      "verdict": "FAIL"
+     }
+    },
+    "verification_depth": "FULLTEXT_OPENED"
+   },
+   "extraction": {
+    "claimed_mechanism": "posterior sampling",
+    "compute_scaling": "K particles",
+    "core_access": "API-text",
+    "external_components": "learned value fn",
+    "failure_mode": "value bias",
+    "feedback_type": "verifier",
+    "modality_path": "text",
+    "persistence_scope": "none",
+    "reusable_implementation": "code released",
+    "strongest_result": "beats GRPO on AgentGym",
+    "what_changes_at_test_time": "particle set"
+   },
+   "id": "REC2-AMC",
+   "initial_tag": [
+    "DIRECT_THREAT"
+   ],
+   "lanes": [
+    "SF-L1"
+   ],
+   "matrix": {
+    "budget_horizon": "多轮",
+    "core_access": "API-text",
+    "external_state_update": "none",
+    "modality_path": "text",
+    "parameter_update": "none",
+    "policy_update": "none",
+    "reward_type": "verifier",
+    "task": "agent benchmarks",
+    "tool_use": "fixed",
+    "trained_comparator": "Y"
+   },
+   "method_occupation": {
+    "borrowable": "particle reweighting",
+    "improvement_space": "①black-box value ②needs dev labels ③RQ-SYS",
+    "method_gist": "SMC over frozen agent prior",
+    "method_limitations": "trained value fn breaks TFStrict"
+   },
+   "most_threatened_rq": [
+    "RQ-SYS"
+   ],
+   "name": "Agentic Monte Carlo",
+   "omni_axes": {
+    "reason": "text-only agent system, no omni claims",
+    "status": "NA"
+   },
+   "proximity": {
+    "black_box_compliance": "yes",
+    "component_level_proximity": "high",
+    "modality_proximity": "text-only",
+    "persistence_state_proximity": "none",
+    "reward_control_proximity": "high",
+    "system_level_proximity": "high",
+    "tf_strict_compliance": "partial"
+   },
+   "rec0_backref": "2606.05296",
+   "resource_axes": {
+    "reason": "resource table not reported in v1",
+    "status": "NA"
+   },
+   "rl_identity": {
+    "action_definition": "agent actions",
+    "authors_call_it_rl": "Y",
+    "credit_assignment": "value fn",
+    "cross_step_update_object": "particle set",
+    "feedback_definition": "return estimate",
+    "policy_representation": "frozen LLM prior + value reweighting",
+    "state_definition": "env obs",
+    "stopping_rule": "budget",
+    "transition_or_controller": "SMC"
+   },
+   "source_axes": {
+    "activation_attribution": "readout",
+    "answer_bearing_external_info": "N",
+    "gold_path_audit": "no gold in selection path per §3.2",
+    "information_source_classes": [
+     "PRETRAINED_READOUT",
+     "ENDOGENOUS_ENV_FEEDBACK"
+    ]
+   },
+   "tf_audit": {
+    "base_model_updated": "N",
+    "component_pretrained": "N",
+    "external_component_trained": "Y:value-fn",
+    "ground_truth_used": "开发集",
+    "learned_object": "value-fn",
+    "learning_time": "test前",
+    "method_specific_parameter_training": "Y:value-fn",
+    "nonparametric_persistence": "none",
+    "test_time_parameter_update": "N",
+    "test_time_readonly": "Y"
+   },
+   "threat_dual_coding": {
+    "adjudicator": "coordinator",
+    "disagreements": 1,
+    "extractor_A": "coder-1",
+    "extractor_B": "coder-2",
+    "rec5_ref": "REC5-2606.05296"
+   },
+   "topic_relevance": "core",
+   "topic_relevance_note": "core: same problem identity",
+   "venue_tier": "T3",
+   "version_pin": "v1"
+  },
+  {
+   "coding_depth": "D1",
+   "dfs_trigger": [],
+   "evidence_axes": {
+    "publication_status": "preprint",
+    "study_quality": null,
+    "verification_depth": "ABSTRACT_VERIFIED"
+   },
+   "extraction": {
+    "reason": "D1 minimal core",
+    "status": "NA"
+   },
+   "id": "REC2-EVOLIB",
+   "lanes": [
+    "SF-L4"
+   ],
+   "matrix": {
+    "reason": "D1 minimal core; matrix coded on use",
+    "status": "NA"
+   },
+   "method_occupation": {
+    "reason": "coded on use",
+    "status": "NA"
+   },
+   "name": "EvoLib",
+   "omni_axes": {
+    "reason": "text-only",
+    "status": "NA"
+   },
+   "proximity": {
+    "black_box_compliance": "yes",
+    "component_level_proximity": "high",
+    "modality_proximity": "text-only",
+    "persistence_state_proximity": "across_items",
+    "reward_control_proximity": "medium",
+    "system_level_proximity": "medium",
+    "tf_strict_compliance": "yes"
+   },
+   "rec0_backref": "2605.14477",
+   "resource_axes": {
+    "reason": "D1 minimal core",
+    "status": "NA"
+   },
+   "rl_identity": {
+    "reason": "no RL claim in abstract",
+    "status": "NA"
+   },
+   "source_axes": {
+    "reason": "D1 minimal core",
+    "status": "NA"
+   },
+   "tf_audit": {
+    "reason": "D1 minimal core; audited on use",
+    "status": "NA"
+   },
+   "topic_relevance": "element",
+   "venue_tier": "T3",
+   "version_pin": "v1"
+  }
+ ],
+ "seed_manifest": [
+  {
+   "id": "2606.05296",
+   "initial_tag": [
+    "DIRECT_THREAT"
+   ]
+  },
+  {
+   "id": "2605.14477",
+   "initial_tag": []
+  }
+ ]
+}

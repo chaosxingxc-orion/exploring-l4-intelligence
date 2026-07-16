@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1+amendments 1–5——八 lanes + 基础谱系道 SF-L9 + 受控类目道 SF-L10(SE/HC)/SF-L11(MM/MA) / arXiv-primary 语料+免费官方源救援·55 条编译冻结查询（48+3+2+2,A3-8/C4-6/C4A）/ 发现优先级 tier+质量七维 / BFS→触发式 DFS / 92 列名种子（计数正典 = manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendments 1–5——八 lanes + 基础谱系道 SF-L9 + 受控类目道 SF-L10(SE/HC)/SF-L11(MM/MA)/SF-L12(CV/AI)/SF-L13(LG/ML/NE) / arXiv-primary 语料+免费官方源救援·61 条编译冻结查询（48+3+2+2+6,A3-8/C4-6/C4A/C4B）/ 发现优先级 tier+质量七维 / BFS→触发式 DFS / 92 列名种子（计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
@@ -40,7 +40,7 @@ seed manifest 与本协议以各自提交后的 (commit, path, blob) 三元组�
 ## §2 检索宇宙与承重源（A2-1..A2-3 重写,owner 裁决①②③——取代原多库设计）
 
 - **检索语料 = arXiv-primary + 免费官方源救援（A3-1,取代 A2-1「非 arXiv 不参考」条）**：
-  全部预注册检索经 arXiv API（55 条编译查询,C4A 后口径）;Semantic Scholar/OpenAlex 仅作引文图谱发现层,
+  全部预注册检索经 arXiv API（61 条编译查询,C4B 后口径）;Semantic Scholar/OpenAlex 仅作引文图谱发现层,
   **其一切命中回 arXiv 题名检索解析**;无 arXiv 版的直接相关工作走**免费官方开放获取源救援**
   （ACL Anthology/NeurIPS proceedings/PMLR/OpenReview/CVF/ISCA Archive 等,venue-native ID/
   DOI + 本地备份 + sha256 纳入承重）;**付费且无任何免费版本 → `REMOVED_PAYWALLED_UNOBTAINABLE`**
@@ -146,7 +146,7 @@ token 块）仍全量登记（dedup 不丢日志）;新工作即读即登记 cen
 （内审 MINOR-5）**：manifest 内 `[lane 协调者已核]`/`既往 grep` 类注记 = 种子策展与历史
 census 记录,发生于本协议 §4 查询之外且之前,不构成查询执行。
 
-## §4 检索 lanes 与 55 条编译冻结查询（48 原批 + 3 条 A3-8 增补 + 2 条 C4-6 受控类目道 + 2 条 C4A 受控类目道,append-only）
+## §4 检索 lanes 与 61 条编译冻结查询（48 原批 + 3 条 A3-8 增补 + 2 条 C4-6 受控类目道 + 2 条 C4A 受控类目道 + 6 条 C4B 受控类目道,append-only）
 
 **通用规格**：默认引擎 = arXiv API;默认窗口 2022-10-01→2026-07-15（例外行内注明）;
 max_results = 75（SF-L7-Q3 为 50）——**语义 = 每页大小,非结果上限**（溢出规则见下）;按
@@ -161,7 +161,7 @@ amendment-1,snowballing 与 SF-L9 兜异类溢出;执行中发现反例即走版
 **exact-query 冻结正典（amendment-1,v3 外审 4.2 闭合;A3-8 后 51 条;C4-6 后 53 条;C4A 后
 55 条）**：55 条查询（48 原批 +3 A3-8 增补 +2 C4-6 受控类目道 +2 C4A 受控类目道——**前 53
 行逐字节不变、增补层层追加于文件末尾**,原批行保留 compiler_version sfqc-1.0.0,A3-8 增补行
-标 sfqc-1.1.0,C4-6 道行标 sfqc-1.2.0,C4A 道行标 sfqc-1.3.0）
+标 sfqc-1.1.0,C4-6 道行标 sfqc-1.2.0,C4A 道行标 sfqc-1.3.0,C4B 道行标 sfqc-1.4.0）
 已由离线编译器
 `scripts/survey/sf_query_compiler.py` 装配为 **`2026-07-15-sf-queries.jsonl`**——逐行含
 decoded/URL-encoded 串、类目、date_from/to、start/max_results/sortBy/sortOrder、compiler
@@ -262,7 +262,7 @@ A2-1 披露,reviewer 签署时可表态。
 
 **计数（correction #4A P0-R5 后现行口径）**：8 lanes × 6 + 3 条 A3-8 增补（SF-L1-Q7/Q8、
 SF-L3-Q7）+ 2 条 C4-6 受控类目道（SF-L10-Q1/Q2）+ 2 条 C4A 受控类目道（SF-L11-Q1/Q2）=
-**55 条预注册查询**（历史口径「53」见 C4-6、「51」见 A3-8、「48」见 A3-8 前、「64」见
+**61 条预注册查询**（历史口径「55」见 C4A、「53」见 C4-6、「51」见 A3-8、「48」见 A3-8 前、「64」见
 amendment-2;16 条副源路线已退役）。
 预算/调用量等资源轴不是查询过滤器,是抽取轴（§7,重校准 §2.1 口径）。**增补查询的敏感性审计
 留痕**：离线纸面审计（Opus 独立,零联网）结论与逐篇召回表随 amendment-3 批次归档于
@@ -296,9 +296,21 @@ Decision-Log 续59;审计明确 ToT/Socratic-Models 不为其加查询（种子+
 （本道类目 = **cs.MM + cs.MA 两类受控投放**,与 SF-L10 同构;命中编码/承重规则与主 lanes 完全
 一致;编译层 = sfqc-1.3.0 **append-only**——55 行文件的前 53 行逐字节不变。）
 
+### SF-L12 CV/AI vision-agent 受控类目道（correction #4B P0-3.3 增补 2026-07-16——SF-L11 词族跨类目镜像,Seg-Agent 漏检补救）
+- Q1 `(abs:"training-free" OR abs:"test-time" OR abs:"inference-time" OR abs:"tuning-free" OR abs:"without fine-tuning") AND (abs:agent OR abs:agentic OR abs:"multi-agent") AND (abs:multimodal OR abs:audio OR abs:video OR abs:visual OR abs:omni)`（C4B 增补——词项 = **SF-L11-Q1 逐字镜像,零新词**〔评审 P0-3.3:不得从 Seg-Agent 摘要发明词项〕;确定反例 = Seg-Agent 2605.12953〔cs.CV 主类目+cs.AI,training-free 视觉反馈环,离线词项级已匹配 L11-Q1/Q2、仅被类目拦截 = UNRESOLVED_MISS,博导复审 #4A MAJOR-3〕,本道即其确定性补救）
+- Q2 `(abs:LLM OR abs:"language model" OR abs:"foundation model") AND (abs:agent OR abs:agentic OR abs:"multi-agent") AND (abs:"prompt optimization" OR abs:"self-reflection" OR abs:feedback OR abs:"self-improving" OR abs:"self-correction" OR abs:"self-evaluation")`（C4B 增补——SF-L11-Q2 逐字镜像;held-out 独立验收 = 隔离代理选取〔不接触修订 diff/词项,era≥2025 按 owner 时代裁决〕,预注册后运行）
+- Q3 `(abs:agent OR abs:agentic) AND (abs:workflow OR abs:orchestration OR abs:"tool use" OR abs:evaluation OR abs:testing) AND (abs:LLM OR abs:"language model" OR abs:"foundation model")`（C4B 增补——**SF-L10-Q2 逐字镜像,零新词**;触发 = 预注册 matcher 运行发现 DVD 2505.18079 近失例〔Deep Video Discovery,cs.CV/cs.AI/cs.CL,frozen-LLM agentic search,59 查询零命中、SF-L10-Q2 词项级已匹配仅被类目拦截〕——agent 时代词汇漂移轴〔agentic/autonomous/tool-use 取代 training-free/test-time 自述〕的确定性补救;词项未参照 DVD 摘要）
+- （本道类目 = **cs.CV + cs.AI 两类受控投放**;与主 lanes 的 cs.CV/cs.AI 存在类目交叠但词族格不同——主 lanes 词族此前漏检 Seg-Agent 即为证据;去重由 REC-0 多源命中合并承接。）
+
+### SF-L13 LG/ML learning-methods 受控类目道（correction #4B owner 裁决增补 2026-07-16——learning 方法域受控投放）
+- Q1 `(abs:"training-free" OR abs:"test-time" OR abs:"inference-time" OR abs:"tuning-free" OR abs:"without fine-tuning") AND (abs:agent OR abs:agentic OR abs:"multi-agent") AND (abs:multimodal OR abs:audio OR abs:video OR abs:visual OR abs:omni)`（C4B 增补——SF-L11-Q1 逐字镜像;owner 裁决 2026-07-16:learning 相关域 = 重要方法域,cs.LG 主 lanes 已开但词族格未铺,本道补齐〕）
+- Q2 `(abs:LLM OR abs:"language model" OR abs:"foundation model") AND (abs:agent OR abs:agentic OR abs:"multi-agent") AND (abs:"prompt optimization" OR abs:"self-reflection" OR abs:feedback OR abs:"self-improving" OR abs:"self-correction" OR abs:"self-evaluation")`（C4B 增补——SF-L11-Q2 逐字镜像;held-out 独立验收 = 隔离代理选取,同 SF-L12 纪律）
+- Q3 `(abs:agent OR abs:agentic) AND (abs:workflow OR abs:orchestration OR abs:"tool use" OR abs:evaluation OR abs:testing) AND (abs:LLM OR abs:"language model" OR abs:"foundation model")`（C4B 增补——SF-L10-Q2 逐字镜像,与 SF-L12-Q3 同触发〔DVD 词汇漂移近失例〕,方法域对称铺设）
+- （本道类目 = **cs.LG + stat.ML + cs.NE 三类受控投放**——stat.ML/cs.NE 为残差兜底〔该两类相关论文几乎均交叉挂 cs.LG,边际成本≈0〕;arXiv 无独立 deep-learning 类目,DL 工作即落本组类目;Q2 词族在 cs.LG 下命中体量可能较大,75-cap 溢出走 YEAR/MONTH splitter,筛查量执行期如实呈报〔全力摸高阶段不预设 cap〕。）
+
 ## §4bis 执行策略：广度优先 → 触发式深度遍历（A2-5,owner 裁决④）
 
-- **BFS pass**：55 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
+- **BFS pass**：61 条查询的全部命中先做题录/摘要级编码（DISCOVERED / ABSTRACT_VERIFIED,
   含 §6 矩阵可从摘要判定的轴 + venue_tier + topic_relevance）——不做全文、不做 chaining。
 - **DFS 触发四判据**（满足任一即入队,`dfs_trigger` 多值登记理由;A2-10）：**T-a 对象重合**
   （omni agentic system/多模态知识系统/语音本体）**T-b 问题重合**（回答我们任一 RQ,即使对象

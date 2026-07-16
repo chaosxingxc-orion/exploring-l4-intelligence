@@ -170,3 +170,57 @@ diff 核验 queries+2 seeds+5）+ 语义镜头（跨件数字口径交叉核对�
 `discovery_queries_executed = 0` 维持;双计数正典 = amendment-5 §6。**下一动作**：以回应信为
 封面请 reviewer 执行 P0-R8 窄幅复核（双向合同维持:0 新 MAJOR/0 新 MINOR + 旧项 evidence
 locator 可重放即签署）。
+
+## dated correction #4B（2026-07-17,P0-R8 再复审 3 MAJOR + 2 MINOR 整改批——钉定基准 commit = 待 stage-2 追加）
+
+（触发 = 《Gate S1 P0-R8 窄幅博士生导师式对抗复审》WITHHOLD;owner 四点裁决 = Decision-Log
+续63。哈希正典 = git blob,两段提交制:本段（stage-1）钉路径与机器基数,blob 钉定表由 stage-2
+提交追加于本段末——**基数机器对账取代手数**（P0-R8 的 31-vs-33 教训）。计数语义:`files` =
+下表逐件枚举的非树成员;`fixtures` = `wiki/survey/fixtures-c4b/` 树内 json 件数;`atom_xml` =
+atom 树内件数;**本表「变更/新增」行 ∪ 两树 = 本批 git 变更集**（「不变」行为字节级确定性
+重生成一致件,不入 diff）。）
+
+MACHINE_COUNT: files=36 fixtures=26 atom_xml=26
+
+| # | path | 变更说明 |
+|---|---|---|
+| 1 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | 变更（§4 增 SF-L12/SF-L13 受控道各 Q1..Q3;正典口径 61 查询,历史口径链「55」入 C4A 段） |
+| 2 | `wiki/survey/2026-07-15-sf-queries.jsonl` | 变更（**61 行** = 55 行前缀字节不变 + L12/L13 各三行,sfqc-1.4.0;prefix55 哈希钉于 canon） |
+| 3 | `wiki/survey/2026-07-16-sf-sentinel-data.json` | 变更（**26 哨兵** = 21 + TimeLogic/Seg-Agent/2602.21497/2505.18079/2605.11374;`abstract`→`source_normalized_abstract`;逐条 atom provenance;VQQA/MAR3 P0-3.2 声称更正） |
+| 4 | `wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl` | **新增**（dated supersession:ICASSP-2023..2026 evidence_tier A→C 更正,自查披露 amendment-6 §3.8;v2 不改写） |
+| 5 | `wiki/survey/2026-07-17-sf-canon.json` | **新增**（P0-1.1 期望值单一正典:92/61/50/26/5+前缀哈希+类目并集+版本分层+producer 清单+禁词表） |
+| 6 | `wiki/survey/2026-07-17-sf-protocol-amendment-6.md` | **新增**（C4B gate 整改合同全文:P0-1..P0-4+owner 裁决登记+访问类注册） |
+| 7 | `wiki/survey/2026-07-17-sf-protocol-amendment-7.md` | **新增**（执行期合同:退出机制 E1–E3/全文强制细则/时代优先级/校准实验登记——**非 gate 阻断项**） |
+| 8 | `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl` | **新增**（26 哨兵全文双份采集台账,append-only;正文存数据盘不进 git） |
+| 9 | `wiki/survey/2026-07-17-sf-access-log-c4b.jsonl` | **新增**（本批联网活动双计数总账:1 header + 12 seq 行,代理检索词逐字登记;discovery=0） |
+| 10 | `wiki/survey/2026-07-17-gate-s1-correction-4b-response.md` | **新增**（回应信+P0-R9 申请:核验先行/全盘接受/两处措辞精确重述/复跑表） |
+| 11 | `scripts/survey/sf_query_compiler.py` | 变更（ADDITION_LANES 增 L12/L13 各 [1,2,3],sfqc-1.4.0;61/61 静态验证） |
+| 12 | `scripts/survey/sf_record_validator.py` | 变更（**v2:V1–V15**——双向一一 lineage/V14 种子联结 fail-closed/内层 schema 枚举正典/V15 单正典位/后缀与类型稳健,P0-2 全项） |
+| 13 | `scripts/survey/sf_record_validator_test.py` | 变更（v2:fixtures-c4b 子进程级 26/26） |
+| 14 | `scripts/survey/sf_fixtures_c4b_gen.py` | **新增**（负例生成器:25 个命名 mutation 函数 = 负例文档;含评审三组对抗 fixture） |
+| 15 | `scripts/survey/sf_sentinel_recall_test.py` | 变更（source_normalized_abstract/atom 哈希核验/BOUNDARY_REG 强校验/held-out era≥2025 机器强制/routes v3 优先） |
+| 16 | `scripts/survey/sf_package_summary.py` | 变更（**v2 fail-closed**:canon 精确计数/前缀哈希/八 producer 隔离重跑字节比对/collector 降格 EVIDENCE_PRESENT/manifest MACHINE_COUNT 对账/occurrence 级豁免/缺文件=FAIL,P0-1 全项） |
+| 17 | `scripts/survey/sf_package_summary_test.py` | **新增**（P0-1.5 mutation harness:基线绿+7 变异全非零退出+P0-4.3 boundary 一正一负） |
+| 18 | `scripts/survey/sf_t1_routes_adjudication_validate.py` | **新增**（P0-1.3 独立裁定层:R1–R7 逐 route 对齐,50×50） |
+| 19 | `scripts/survey/sf_t1_routes_v3_gen.py` | **新增**（v3 生成器:四行 tier 更正+record_sha256 重算,更正注记内嵌） |
+| 20 | `scripts/survey/sf_t1_routes_validate.py` | 变更（active 输入 v3 优先） |
+| 21 | `scripts/survey/sf_atom_provenance_fetch.py` | **新增**（raw Atom 采集器:export 端点/≥3s/退避/append-only 台账） |
+| 22 | `scripts/survey/sf_fulltext_fetch.py` | **新增**（全文双份采集器:PDF+e-print→数据盘,台账入 git;含 /mnt/<drive> 路径翻译防误落盘） |
+| 22b | `scripts/survey/sf_citation_calibration.py` | **新增**（amendment-7 §4.1 预注册校准实验:Seg-Agent 参考文献 × 存量论文集求交,离线确定性） |
+| 23 | `docs/checks/2026-07-16-sf-package-summary.json` | 变更（v2 门禁输出:13 项清单,含 EVIDENCE_PRESENT 语义与 counts expected/got 并列） |
+| 24 | `docs/checks/2026-07-16-sf-record-validator-test.json` | 变更（26/26,fixture sha256 逐件钉定） |
+| 25 | `docs/checks/2026-07-16-sf-sentinel-recall.json` | 变更（26 哨兵:QUERY_HIT 23/SEED 3/UNRESOLVED 0;held-out 5 全纯查询召回） |
+| 26 | `docs/checks/2026-07-16-sf-child-query-replay-test.json` | 不变（61 行输入下重生成字节一致——确定性旁证） |
+| 27 | `docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json` | 变更（**61/61** 真实冻结行零 KeyError,17/17） |
+| 28 | `docs/checks/2026-07-16-sf-t1-routes-validation.json` | 变更（输入切 v3,12/12） |
+| 29 | `docs/checks/2026-07-16-sf-t1-routes-adjudication.json` | **新增**（PASS,0 violations;曾于 v2 输入下抓到 4 条 tier 失实——触发 v3） |
+| 30 | `docs/checks/2026-07-17-sf-package-summary-mutations.json` | **新增**（harness 输出:基线+7 变异+boundary 对） |
+| 31 | `docs/checks/2026-07-17-sf-citation-calibration-segagent.json` | **新增**（amendment-7 §4.1 预注册校准实验结果） |
+| 32 | `docs/survey-provenance/atom-ledger.jsonl` | **新增**（27 行:26 成功+1 次 TLS 瞬断如实留痕） |
+| 33 | `wiki/2026-07-16-gate-s1-p0r8-rereview-doctoral-review.md` | **新增**（触发评审件入库,provenance） |
+| 34 | `wiki/Decision-Log.md` | 变更（**续63**:owner 四点裁决 + C4B 整改批登记,append-only） |
+| 35 | `wiki/Research-Objective.md` | 变更（热层 last_refresh + gate 状态段更新至 correction #4B） |
+| 树A | `wiki/survey/fixtures-c4b/`（26 件 = 1 正例 + 25 负例） | **新增**（逐件 sha256 钉于 record-validator-test 输出 fixture_sha256 段） |
+| 树B | `docs/survey-provenance/atom/`（26 件 raw Atom XML） | **新增**（逐件 sha256 钉于 sentinel 数据 atom_sha256 字段 + atom-ledger 逐行） |
+
+（stage-2 blob 钉定表追加于此段末;核验 `git rev-parse <stage-1 commit>:<path>`。）

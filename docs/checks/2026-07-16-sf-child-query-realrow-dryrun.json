@@ -4,20 +4,20 @@
  "test": "scripts/survey/sf_child_query_realrow_dryrun.py",
  "input": {
   "file": "wiki/survey/2026-07-15-sf-queries.jsonl",
-  "n_rows_read": 55
+  "n_rows_read": 61
  },
  "checks": [
   {
    "id": "A1",
    "check": "全部真实冻结行经 adapter 进入同一 normative split 函数，无 KeyError（EXECUTE 路径）",
    "result": "PASS",
-   "detail": "55/55 rows; first_err=none"
+   "detail": "61/61 rows; first_err=none"
   },
   {
    "id": "A2",
    "check": "输入行数从 JSONL 实时读取（不硬编码）",
    "result": "PASS",
-   "detail": "n_rows=55"
+   "detail": "n_rows=61"
   },
   {
    "id": "B1",
@@ -122,6 +122,6 @@
   },
   "n_terminals": 46
  },
- "run_sha256": "8b64ff7506fa82e6b112116bef0bba8fadee323953ad79080358ece6a204999e",
+ "run_sha256": "aa6f2d7642ffd1bab94fc4a9cb41f5453e1ac661cfec40fafe8b9d2469d48b09",
  "note": "全负例真实触发非零语义（ValueError）；oracle 为冻结合成函数，无网、无时钟、无随机。"
 }
