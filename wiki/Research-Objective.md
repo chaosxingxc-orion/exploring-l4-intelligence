@@ -53,7 +53,9 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   转录失败在案登记〕/routes v2〔ACL2026→READY 唯一状态改判,ICML2025 入口解析 v267〕/YEAR 层
   splitter+真实行 dry-run 17/17/record validator V1–V13+负例 16/16/sentinel 四分法 21 哨兵
   零 UNRESOLVED〔两 held-out 纯查询召回,VQQA×5 验证 SF-L11〕/双计数 attestation+access
-  class 追认）,**当前动作 = 敌意内审环后两段提交,再送窄幅复核（P0-R8,双向合同维持）**;
+  class 追认）→ 两段提交（af96a89+b7fd74b,已推送并合入 master@47f5a02）,**当前动作 =
+  P0-R8 申请书已落盘送签（`survey/2026-07-16-gate-s1-p0r8-rereview-application.md`:七项
+  验收集逐项复跑命令+主动披露面）,待评审窄幅复核（双向合同维持）**;
   执行前置三条件（签署+owner 批准+P0-R8 复跑）,签署前零查询维持（attestation=0;SURVEY-B
   21 lanes/105 查询维持零执行）→ Stage-1A close 与 1B 放行 = 两个签字。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
