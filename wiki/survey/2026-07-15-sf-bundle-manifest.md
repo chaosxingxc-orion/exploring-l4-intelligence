@@ -171,7 +171,7 @@ diff 核验 queries+2 seeds+5）+ 语义镜头（跨件数字口径交叉核对�
 封面请 reviewer 执行 P0-R8 窄幅复核（双向合同维持:0 新 MAJOR/0 新 MINOR + 旧项 evidence
 locator 可重放即签署）。
 
-## dated correction #4B（2026-07-17,P0-R8 再复审 3 MAJOR + 2 MINOR 整改批——钉定基准 commit = 待 stage-2 追加）
+## dated correction #4B（2026-07-17,P0-R8 再复审 3 MAJOR + 2 MINOR 整改批——钉定基准 commit = **9b1f00b**）
 
 （触发 = 《Gate S1 P0-R8 窄幅博士生导师式对抗复审》WITHHOLD;owner 四点裁决 = Decision-Log
 续63。哈希正典 = git blob,两段提交制:本段（stage-1）钉路径与机器基数,blob 钉定表由 stage-2
@@ -224,3 +224,46 @@ MACHINE_COUNT: files=36 fixtures=26 atom_xml=26
 | 树B | `docs/survey-provenance/atom/`（26 件 raw Atom XML） | **新增**（逐件 sha256 钉于 sentinel 数据 atom_sha256 字段 + atom-ledger 逐行） |
 
 （stage-2 blob 钉定表追加于此段末;核验 `git rev-parse <stage-1 commit>:<path>`。）
+
+### #4B blob 钉定（stage-1 commit = `9b1f00b`;核验 `git rev-parse 9b1f00b:<path>`）
+
+| path | git blob @9b1f00b |
+|---|---|
+| `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `86d6bc3ccb57` |
+| `wiki/survey/2026-07-15-sf-queries.jsonl` | `ded3749a7c30` |
+| `wiki/survey/2026-07-16-sf-sentinel-data.json` | `912fe9f44c06` |
+| `wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl` | `dae803b27743` |
+| `wiki/survey/2026-07-17-sf-canon.json` | `d8450ccc20b5` |
+| `wiki/survey/2026-07-17-sf-protocol-amendment-6.md` | `d2a0b1e8870b` |
+| `wiki/survey/2026-07-17-sf-protocol-amendment-7.md` | `fe26d33aacc4` |
+| `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl` | `f01351e31b8a` |
+| `wiki/survey/2026-07-17-sf-access-log-c4b.jsonl` | `92ad7f3a9693` |
+| `wiki/survey/2026-07-17-gate-s1-correction-4b-response.md` | `f80e70a66f9f` |
+| `scripts/survey/sf_query_compiler.py` | `a1aaef886da8` |
+| `scripts/survey/sf_record_validator.py` | `e2670e780ecb` |
+| `scripts/survey/sf_record_validator_test.py` | `47a642fc31f7` |
+| `scripts/survey/sf_fixtures_c4b_gen.py` | `c87c8568857a` |
+| `scripts/survey/sf_sentinel_recall_test.py` | `6aff85127956` |
+| `scripts/survey/sf_package_summary.py` | `e0c66f3306b5` |
+| `scripts/survey/sf_package_summary_test.py` | `2d554824ceac` |
+| `scripts/survey/sf_t1_routes_adjudication_validate.py` | `43509b16d5c9` |
+| `scripts/survey/sf_t1_routes_v3_gen.py` | `515b63fcce9d` |
+| `scripts/survey/sf_t1_routes_validate.py` | `e34e8d5a62fd` |
+| `scripts/survey/sf_atom_provenance_fetch.py` | `1c26e5f0b416` |
+| `scripts/survey/sf_fulltext_fetch.py` | `6a4f39a4333e` |
+| `scripts/survey/sf_citation_calibration.py` | `9d95dd07dc89` |
+| `docs/checks/2026-07-16-sf-package-summary.json` | `c8fa8e8c21ea` |
+| `docs/checks/2026-07-16-sf-record-validator-test.json` | `3cb97025eb6e` |
+| `docs/checks/2026-07-16-sf-sentinel-recall.json` | `2423f0d5e833` |
+| `docs/checks/2026-07-16-sf-child-query-replay-test.json` | `ce71ae27af41` |
+| `docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json` | `26b4f2229952` |
+| `docs/checks/2026-07-16-sf-t1-routes-validation.json` | `83aa9df40acc` |
+| `docs/checks/2026-07-16-sf-t1-routes-adjudication.json` | `3a58c90c28c5` |
+| `docs/checks/2026-07-17-sf-package-summary-mutations.json` | `7ff670e56230` |
+| `docs/checks/2026-07-17-sf-citation-calibration-segagent.json` | `1bb27168d50f` |
+| `docs/survey-provenance/atom-ledger.jsonl` | `7c2c18ce9a7f` |
+| `wiki/2026-07-16-gate-s1-p0r8-rereview-doctoral-review.md` | `f512936145fc` |
+| `wiki/Decision-Log.md` | `405bc1590140` |
+| `wiki/Research-Objective.md` | `a403aee27300` |
+| `wiki/survey/fixtures-c4b/`（26 件） | tree `17e034b2d650` |
+| `docs/survey-provenance/atom/`（26 件） | tree `4dec7d2b998b` |
