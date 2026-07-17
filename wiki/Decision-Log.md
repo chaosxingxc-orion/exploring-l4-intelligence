@@ -6,6 +6,41 @@
 
 ---
 
+### 2026-07-18（续64）· P0-R9 裁 WITHHOLD（1 Gate MAJOR=方法占位盲区）+ 我方首次有据部分异议（0-hit 表 2/7 不成立）+ owner 五裁决 → correction #4C
+
+**Context.** P0-R9 复审返回 **WITHHOLD**，性质与前三轮不同：评审主动收回对抗变异类要求
+（降为可选 hardening、明示「不应因缺防恶意输入能力拒签」），阻断收敛为一个科学覆盖问题
+**MAJOR-G1**：L11–L13 九条查询全部强制 `agent OR agentic` 连词（把研究目标命名写成检索
+前提=认识论循环），七篇直接占据方法空间的论文被指确定性零命中；另 MAJOR-C1（引文校准以
+arXiv-ID 子集 30/59 冒充完整 bibliography 交集结论,阻 Stage-1A close 不阻 mapping）+ 3 MINOR
+（ledger 17 条 stale locator/热层全称否定过期/回应信空 diff 基准错误）。诚信裁决：无 FFP,
+H2（真实采集+完成态措辞过强）成立。**我方逐项亲手复现**：G1 概念核心/根因/held-out 超强
+措辞（2602.21497 实只中 SF-L3-Q7）/carriage failure（2512.11109 在 07-04 X3 件 4 处）/C1/
+三 MINOR 数字全部属实；**但 0-hit 表 2/7 不成立**——正典 matcher 下 2607.09438 已中 SF-L5-Q1、
+2512.19433 已中 SF-L5-Q5（词命中字面核验）；且评审漏测 T1 路由层（词表 A 组含 test-time/
+training-free/orchestration,A_any 无 agent 连词——ACL survey 本在 T1-ACL-2026 设计通道内）。
+
+**Decision（owner 五裁决,2026-07-18）.** ①方法占位 lane 按「镜像 T1 词表 A 组」方案走;
+②独立查询复核 = 隔离代理(Opus,零设计上下文)+owner 抽查;③七篇威胁论文走 **DFS 四问深读**
+（方法/局限/改进空间/可借鉴）,不采评审静态占位矩阵;④**创新点尚未锁定——「创新点成立/
+不成立」定性两侧皆为时过早**,现在只锁研究方向与内容,评审 §4 定位语一律标 owner 未签;
+⑤「2/7 已命中+T1 通道漏测」作为**首次有据部分异议**入回应信,同时整体接受 G1。
+
+**Rationale.** G1 = owner 自己的方法占位裁决（07-15）反打在查询设计上,无从反驳;但评审
+事实表错误必须以证据指出（对抗对称原则——对 owner 如此,对评审亦然）;L5/T1 已证明方法词
+本体在协议其他层早已存在,修复=对称补全而非发明,这使「非单篇捕获器」结构上可证。
+
+**Consequences（correction #4C 交付）.** SF-L14/L15 方法占位轴 4 查询（sfqc-1.5.0,13 类全
+并集,零 agent 连词;61→65,prefix61 逐字节不变）;七 arXiv 身份全获通道（含 2606.08231=ACL
+survey 孪生,known-item 题名解析发现）并全部入哨兵（26→34）;**PRESS 独立复核制度化**并首轮
+执行（HARDCODING NO/BOOLEAN PASS,MAJOR steering 词族已采纳,3 思想实验采纳后 3/3 命中）;
+**fresh L12 held-out 预注册（e965b71）→ 2603.24257 实中 SF-L12-Q3**,5 候选全披露（ToolGate
+65 全零命中→vocabulary-drift control/gating 轴 1/3 例）;C1 措辞降级（verdict=
+ARXIV_ID_SUBSET_INTERSECTION_EMPTY,work-level resolution 入债务表 D-1,截止=Stage-1A close 前）;
+MINOR 三项修复（17 条逐对象 RELOCATION_SUPERSESSION+机器统计脚本/热层正名/diff 基准更正）;
+七篇 DFS 深读记录;amendment-8（债务表 D-1..D-5+可回放性矩阵三级）;P0-R10 申请。哨兵 34/
+held-out 6/查询 65 为新正典计数。
+
 ### 2026-07-17（续63）· P0-R8 再裁 WITHHOLD 七变异全数复现属实 + owner 四点裁决（agent-era 时代/CV·learning 受控道/独立代理 held-out/引文链退出机制+全文强制）→ correction #4B
 
 **Context.** 博导 P0-R8 窄幅复审返回 **WITHHOLD（3 MAJOR + 2 MINOR）**：package summary

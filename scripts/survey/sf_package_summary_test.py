@@ -118,9 +118,12 @@ def m7_machine_count_off_by_one(root):
     import re
     p = os.path.join(root, MANIFEST)
     t = open(p, encoding="utf-8").read()
-    m = re.search(r"(MACHINE_COUNT:\s*files=)(\d+)", t)
-    if not m:
-        raise RuntimeError("MACHINE_COUNT line not found — manifest #4B section missing")
+    # the summary parses the LAST dated-correction section (canon section_marker),
+    # so the mutation must hit the LAST MACHINE_COUNT line, not the first (#4B)
+    matches = list(re.finditer(r"(MACHINE_COUNT:\s*files=)(\d+)", t))
+    if not matches:
+        raise RuntimeError("MACHINE_COUNT line not found — dated correction section missing")
+    m = matches[-1]
     t = t[:m.start(2)] + str(int(m.group(2)) + 1) + t[m.end(2):]
     open(p, "w", encoding="utf-8", newline="").write(t)
 

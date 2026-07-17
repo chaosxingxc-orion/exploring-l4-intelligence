@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/u8Pl5wYPMHw4d0Y5ZNQt6sCfulc</id>
+  <title>arXiv Query: search_query=&amp;id_list=2606.08231&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-17T17:07:51Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2606.08231" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.08231v1</id>
+    <title>Test-Time Scaling in Multimodal Foundation Models: A Comprehensive Survey of Generation and Reasoning</title>
+    <updated>2026-06-06T15:39:29Z</updated>
+    <link href="https://arxiv.org/abs/2606.08231v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.08231v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Test-time Scaling (TTS) has emerged as a pivotal research direction for enhancing model performance by dynamically allocating computational resources during inference. Recent advancements have adapted this paradigm to Multimodal Foundation Models (MFMs), unlocking their potential in multimodal reasoning and generation. Despite rapid progress, the field lacks a systematic survey and unified theoretical framework to delineate the developmental landscape of multimodal TTS. To bridge this gap, we present the first comprehensive review of TTS research for MFMs, proposing a unified taxonomic framework that categorizes existing methodologies into three distinct strategies: sampling-based, feedback-based, and search-based approaches. We further summarize representative applications and benchmarks commonly utilized to evaluate multimodal TTS capabilities in generation and reasoning tasks. Finally, this survey discusses open challenges and outlines future research directions, providing a systematic roadmap for subsequent studies in this rapidly evolving field.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-06T15:39:29Z</published>
+    <arxiv:comment>Accepted by ACL 2026, Findings</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Cong Wan</name>
+    </author>
+    <author>
+      <name>Ying He</name>
+    </author>
+    <author>
+      <name>Zhongzhan Huang</name>
+    </author>
+    <author>
+      <name>Hefeng Wu</name>
+    </author>
+  </entry>
+</feed>

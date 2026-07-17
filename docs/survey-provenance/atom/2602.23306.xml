@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/0NzIQP3YptDwxl+FtrlUbKSznw0</id>
+  <title>arXiv Query: search_query=&amp;id_list=2602.23306&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-17T17:06:48Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2602.23306" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.23306v2</id>
+    <title>ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding</title>
+    <updated>2026-03-21T06:46:01Z</updated>
+    <link href="https://arxiv.org/abs/2602.23306v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.23306v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Omni-modal reasoning is essential for intelligent systems to understand and draw inferences from diverse data sources. While existing omni-modal large language models (OLLM) excel at perceiving diverse modalities, they lack the complex reasoning abilities of recent large reasoning models (LRM). However, enhancing the reasoning ability of OLLMs through additional training presents significant challenges, including the need for high-quality data, task-specific adaptation, and substantial computational costs. To address these limitations, we propose ThinkOmni, a training-free and data-free framework that lifts textual reasoning to omni-modal scenarios. ThinkOmni introduces two key components: 1) LRM-as-a-Guide, which leverages off-the-shelf LRMs to guide the OLLM decoding process; 2) Stepwise Contrastive Scaling, which adaptively balances perception and reasoning signals without manual hyperparameter tuning. Experiments on six multi-modal reasoning benchmarks demonstrate that ThinkOmni consistently delivers performance improvements, with main results achieving 70.2 on MathVista and 75.5 on MMAU. Overall, ThinkOmni offers a flexible and generalizable solution for omni-modal reasoning and provides new insights into the generalization and application of reasoning capabilities. Code is publicly available at https://github.com/1ranGuan/thinkomni</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-26T18:10:41Z</published>
+    <arxiv:comment>Accept by ICLR 2026, Code: https://github.com/1ranGuan/thinkomni</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yiran Guan</name>
+    </author>
+    <author>
+      <name>Sifan Tu</name>
+    </author>
+    <author>
+      <name>Dingkang Liang</name>
+    </author>
+    <author>
+      <name>Linghao Zhu</name>
+    </author>
+    <author>
+      <name>Jianzhong Ju</name>
+    </author>
+    <author>
+      <name>Zhenbo Luo</name>
+    </author>
+    <author>
+      <name>Jian Luan</name>
+    </author>
+    <author>
+      <name>Yuliang Liu</name>
+    </author>
+    <author>
+      <name>Xiang Bai</name>
+    </author>
+  </entry>
+</feed>

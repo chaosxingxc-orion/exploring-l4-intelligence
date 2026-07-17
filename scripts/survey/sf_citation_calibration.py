@@ -115,10 +115,20 @@ def main(argv):
                        "union": len(stock)},
         "overlap_with_stock": overlap,
         "prediction": "intersection = ∅（跨社区谱系引 SAM/SoM 系）",
-        "verdict": ("PREDICTION_CONFIRMED — 引用交集筛不可作唯一发现入口的实证登记件"
+        # P0-R9 MAJOR-C1: the measurement only resolves regex-extractable arXiv
+        # IDs (30 of ~59 bibliography entries) — the verdict must claim the ID
+        # subset, never the full bibliography, until work-level identifier
+        # resolution (DOI/venue/title) exists (debt table, before Stage-1A close).
+        "measurement_scope": "arXiv-ID 正则可解析子集(30/~59 bibliography entries);"
+                             "DOI-only/venue-only/title-only 引文未解析——完整 work-level"
+                             " 交集结论待 E2 identifier resolution(债务表 C1)",
+        "verdict": ("ARXIV_ID_SUBSET_INTERSECTION_EMPTY — 可解析 arXiv-ID 子集与存量交集为空;"
+                    "支持「引用交集筛不可作唯一发现入口」的方向性登记(hypothesis-grade),"
+                    "不构成完整 bibliography 交集结论(P0-R9 MAJOR-C1 措辞降级)"
                     if prediction_confirmed else
-                    "PREDICTION_REFUTED — 按 amendment-7 §4.1 修正 §1 规则并登记"),
-        "rule_consequence": "维持:交集为空⇒降级轻筛(登记后排除),发现层仍由冻结查询承载"
+                    "ARXIV_ID_SUBSET_INTERSECTION_NONEMPTY — 按 amendment-7 §4.1 修正 §1 规则并登记"),
+        "rule_consequence": "维持:交集为空⇒降级轻筛(登记后排除),发现层仍由冻结查询承载;"
+                            "E2 饱和宣称前必须完成 work-level resolution(在已解析子图上零新增≠闭包干涸)"
                             if prediction_confirmed else
                             "需 owner 复核:交集非空说明引用筛比预期更有召回力",
     }

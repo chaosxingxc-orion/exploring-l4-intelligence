@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PjfaYsCCNtspnmvPDkWRg7OC65I</id>
+  <title>arXiv Query: search_query=&amp;id_list=2603.24257&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-17T17:15:13Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2603.24257" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24257v2</id>
+    <title>Memory-Augmented Vision-Language Agents for Persistent and Semantically Consistent Object Captioning</title>
+    <updated>2026-03-30T09:01:07Z</updated>
+    <link href="https://arxiv.org/abs/2603.24257v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24257v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-Language Models (VLMs) often yield inconsistent descriptions of the same object across viewpoints, hindering the ability of embodied agents to construct consistent semantic representations over time. Previous methods resolved inconsistencies using offline multi-view aggregation or multi-stage pipelines that decouple exploration, data association, and caption learning, with limited capacity to reason over previously observed objects. In this paper, we introduce a unified, memory-augmented Vision-Language agent that simultaneously handles data association, object captioning, and exploration policy within a single autoregressive framework. The model processes the current RGB observation, a top-down explored map, and an object-level episodic memory serialized into object-level tokens, ensuring persistent object identity and semantic consistency across extended sequences. To train the model in a self-supervised manner, we collect a dataset in photorealistic 3D environments using a disagreement-based policy and a pseudo-captioning model that enforces consistency across multi-view caption histories. Extensive evaluation on a manually annotated object-level test set, demonstrate improvements of up to +11.86% in standard captioning scores and +7.39% in caption self-similarity over baseline models, while enabling scalable performance through a compact scene representation. Code, model weights, and data are available at https://hsp-iit.github.io/epos-vlm/.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T12:52:32Z</published>
+    <arxiv:comment>24 pages, 7 figures, 7 tables (including Supplementary Materials)</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Tommaso Galliena</name>
+    </author>
+    <author>
+      <name>Stefano Rosa</name>
+    </author>
+    <author>
+      <name>Tommaso Apicella</name>
+    </author>
+    <author>
+      <name>Pietro Morerio</name>
+    </author>
+    <author>
+      <name>Alessio Del Bue</name>
+    </author>
+    <author>
+      <name>Lorenzo Natale</name>
+    </author>
+  </entry>
+</feed>

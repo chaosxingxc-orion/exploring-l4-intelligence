@@ -27,18 +27,19 @@ exception for SF-L7-Q3). Writes the frozen JSONL artifact
   — this is a deliberate guard against an unregistered/undocumented query
   line silently entering the compiled set.
 
-- **C4-6 / C4A / C4B lane additions** — whole new lanes registered in
+- **C4-6 / C4A / C4B / C4C lane additions** — whole new lanes registered in
   `ADDITION_LANES` (SF-L10 Q1/Q2 = cs.SE/cs.HC, "sfqc-1.2.0"; SF-L11 Q1/Q2 =
   cs.MM/cs.MA, "sfqc-1.3.0"; SF-L12 Q1..Q3 = cs.CV/cs.AI and SF-L13 Q1..Q3 =
-  cs.LG/stat.ML/cs.NE, "sfqc-1.4.0" — per-lane tags in
-  `ADDITION_LANE_VERSIONS`). Same guard: an unregistered lane carrying
-  Boolean query lines is a hard parse failure.
+  cs.LG/stat.ML/cs.NE, "sfqc-1.4.0"; SF-L14 Q1/Q2 and SF-L15 Q1/Q2 =
+  method-occupation axes over the full 13-category union, "sfqc-1.5.0" —
+  per-lane tags in `ADDITION_LANE_VERSIONS`). Same guard: an unregistered
+  lane carrying Boolean query lines is a hard parse failure.
 
 Output order = strict prefix preservation: the 48 base records first, in
 their original order, then the 3 A3-8 additions (SF-L1-Q7, SF-L1-Q8,
 SF-L3-Q7), then the lane additions in `ADDITION_LANES` declaration order —
 the 51-row prefix stays byte-identical across C4-6, the 53-row prefix
-across C4A, and the 55-row prefix across C4B.
+across C4A, the 55-row prefix across C4B, and the 61-row prefix across C4C.
 
 This is a pure protocol *compiler*, not a retrieval executor: it does no
 network I/O of any kind. Only the Python standard library is imported, and
@@ -50,9 +51,9 @@ Usage (from the umbrella repo root, any Python 3.x with only the stdlib):
 
     python scripts/survey/sf_query_compiler.py
 
-Exit code 0 = 61/61 records (48 base + 3 A3-8 additions + 2 C4-6 lane
-additions + 2 C4A lane additions + 6 C4B lane additions) compiled and all
-static validations passed.
+Exit code 0 = 65/65 records (48 base + 3 A3-8 additions + 2 C4-6 lane
+additions + 2 C4A lane additions + 6 C4B lane additions + 4 C4C lane
+additions) compiled and all static validations passed.
 Exit code 1 = parse failure (including an unregistered Q>=7 line) or a
 static validation failure (details printed).
 """
@@ -73,6 +74,7 @@ COMPILER_VERSION_ADDITIONS = "sfqc-1.1.0"
 COMPILER_VERSION_C4_LANES = "sfqc-1.2.0"
 COMPILER_VERSION_C4A_LANES = "sfqc-1.3.0"
 COMPILER_VERSION_C4B_LANES = "sfqc-1.4.0"
+COMPILER_VERSION_C4C_LANES = "sfqc-1.5.0"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "2026-07-15-system-first-survey-protocol-v1.md"
@@ -118,6 +120,8 @@ ADDITION_LANES = {
     "SF-L11": [1, 2],
     "SF-L12": [1, 2, 3],
     "SF-L13": [1, 2, 3],
+    "SF-L14": [1, 2],
+    "SF-L15": [1, 2],
 }
 
 # per-lane compiler_version for ADDITION_LANES tiers (C4-6 vs C4A vs C4B batches must stay
@@ -127,6 +131,15 @@ ADDITION_LANE_VERSIONS = {
     "SF-L11": COMPILER_VERSION_C4A_LANES,
     "SF-L12": COMPILER_VERSION_C4B_LANES,
     "SF-L13": COMPILER_VERSION_C4B_LANES,
+    # C4C / P0-R9 MAJOR-G1 — method-occupation lanes (sfqc-1.5.0): zero
+    # agent-conjunction; terms mirror the T1 wordlist A-group frozen 2026-07-16
+    # (predates the P0-R9 review artifact, hence structurally not a
+    # seven-title hardcoded catcher). SF-L14 = system-object axis
+    # (orchestration/guidance), SF-L15 = mechanism axis (test-time scaling /
+    # self-verification). Category set = the full 13-category frozen union so
+    # the method axis can never reproduce a category blind spot.
+    "SF-L14": COMPILER_VERSION_C4C_LANES,
+    "SF-L15": COMPILER_VERSION_C4C_LANES,
 }
 
 
@@ -158,6 +171,10 @@ CATEGORY_MAP = {
     "SF-L11": ["cs.MM", "cs.MA"],
     "SF-L12": ["cs.CV", "cs.AI"],
     "SF-L13": ["cs.LG", "stat.ML", "cs.NE"],
+    "SF-L14": ["cs.CL", "cs.AI", "cs.LG", "cs.CV", "cs.RO", "cs.SD", "eess.AS",
+               "cs.SE", "cs.HC", "cs.MM", "cs.MA", "stat.ML", "cs.NE"],
+    "SF-L15": ["cs.CL", "cs.AI", "cs.LG", "cs.CV", "cs.RO", "cs.SD", "eess.AS",
+               "cs.SE", "cs.HC", "cs.MM", "cs.MA", "stat.ML", "cs.NE"],
 }
 
 DEFAULT_DATE_FROM = "202210010000"

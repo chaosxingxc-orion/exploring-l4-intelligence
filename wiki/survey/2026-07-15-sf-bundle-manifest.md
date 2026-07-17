@@ -174,7 +174,7 @@ locator 可重放即签署）。
 ## dated correction #4B（2026-07-17,P0-R8 再复审 3 MAJOR + 2 MINOR 整改批——钉定基准 commit = **9b1f00b**）
 
 （触发 = 《Gate S1 P0-R8 窄幅博士生导师式对抗复审》WITHHOLD;owner 四点裁决 = Decision-Log
-续63。哈希正典 = git blob,两段提交制:本段（stage-1）钉路径与机器基数,blob 钉定表由 stage-2
+续63。哈希正典 = git blob,两段提交制:本段（stage-1）钉路径与机器基数〔manifest 自身不入表:自指钉定不可能,如实声明——同文件头先例〕,blob 钉定表由 stage-2
 提交追加于本段末——**基数机器对账取代手数**（P0-R8 的 31-vs-33 教训）。计数语义:`files` =
 下表逐件枚举的非树成员;`fixtures` = `wiki/survey/fixtures-c4b/` 树内 json 件数;`atom_xml` =
 atom 树内件数;**本表「变更/新增」行 ∪ 两树 = 本批 git 变更集**（「不变」行为字节级确定性
@@ -267,3 +267,39 @@ MACHINE_COUNT: files=36 fixtures=26 atom_xml=26
 | `wiki/Research-Objective.md` | `a403aee27300` |
 | `wiki/survey/fixtures-c4b/`（26 件） | tree `17e034b2d650` |
 | `docs/survey-provenance/atom/`（26 件） | tree `4dec7d2b998b` |
+
+## dated correction #4C（2026-07-18,P0-R9 复审 1 Gate MAJOR + 1 close-前 MAJOR + 3 MINOR 整改批）
+
+（触发 = 《Gate S1 Correction #4B / P0-R9 复审》WITHHOLD;owner 五裁决 = Decision-Log 续64。
+两段提交制沿用:本段（stage-1）钉路径与机器基数〔manifest 自身不入表:自指钉定不可能,如实声明——同文件头先例〕,blob 钉定表由 stage-2 提交追加于本段末。
+计数语义:`files` = 下表逐件枚举的非树成员;`fixtures` = `wiki/survey/fixtures-c4b/` 树内
+json 件数（本批不变）;`atom_xml` = atom 树内件数（26+8 新哨兵）。热层三件
+（Research-Objective/Decision-Log/Per-Work-Status）与评审件归档
+（wiki/2026-07-18-gate-s1-correction-4b-stage1a-doctoral-adversarial-review.md）随批提交,
+不入 bundle 表（沿 #4B 先例）。）
+
+MACHINE_COUNT: files=21 fixtures=26 atom_xml=34
+
+| # | path | 变更说明 |
+|---|---|---|
+| 1 | `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | 变更（§4 增 SF-L14/SF-L15 方法占位轴各 Q1/Q2;零 agent 连词;PRESS 采纳注记内嵌） |
+| 2 | `wiki/survey/2026-07-15-sf-queries.jsonl` | 变更（**65 行** = 61 行前缀字节不变 + L14/L15 各两行,sfqc-1.5.0;prefix61 哈希钉于 canon） |
+| 3 | `wiki/survey/2026-07-16-sf-sentinel-data.json` | 变更（**34 哨兵** = 26 + P0-R9 七 arXiv 身份〔含 2606.08231 ACL 孪生〕+ fresh L12 held-out 2603.24257;c4c_normalization 登记） |
+| 4 | `wiki/survey/2026-07-17-sf-canon.json` | 变更（C4C 计数:65/prefix61/34/6/sfqc-1.5.0:4/禁词表+61 变体/section_marker=#4C） |
+| 5 | `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl` | 变更（append:七篇全文 14/14 renditions + **17 条 RELOCATION_SUPERSESSION**〔P0-R9 MINOR-1,逐对象 sha256 复核〕） |
+| 6 | `wiki/survey/2026-07-18-sf-access-log-p0r9-verification.jsonl` | **新增**（本批联网活动总账:1 header + 31 seq 行,含隔离代理 15 次自报 URL;discovery=0） |
+| 7 | `wiki/survey/2026-07-18-sf-heldout-l12-prereg-c4c.md` | **新增**（fresh L12 held-out 预注册 @e965b71 + RESULTS 附录:2603.24257=SF-L12-Q3,5 候选全披露） |
+| 8 | `wiki/survey/2026-07-18-sf-press-query-review-c4c.md` | **新增**（PRESS 独立查询复核正典存档:HARDCODING NO/BOOLEAN PASS + 采纳记录） |
+| 9 | `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | **新增**（P0-R9 整改合同:L14/L15 lane 合同/PRESS 制度化/owner 五裁决/债务表 D-1..D-5/可回放性矩阵） |
+| 10 | `wiki/survey/2026-07-18-gate-s1-correction-4c-response.md` | **新增**（回应信+P0-R10 申请:核验先行/首次有据部分异议〔0-hit 表 2/7〕/九项验收表） |
+| 11 | `wiki/survey/2026-07-18-sf-p0r9-seven-papers-dfs.md` | **新增**（七篇全文 DFS 深读:四问+身份轴+引证抽查 11/12 逐字命中;零创新定性〔owner 裁决④〕） |
+| 12 | `scripts/survey/sf_query_compiler.py` | 变更（ADDITION_LANES 增 L14/L15 各 [1,2],sfqc-1.5.0,13 类全并集;65/65 静态验证） |
+| 13 | `scripts/survey/sf_citation_calibration.py` | 变更（P0-R9 MAJOR-C1 措辞降级:verdict=ARXIV_ID_SUBSET_INTERSECTION_EMPTY + measurement_scope 字段） |
+| 14 | `scripts/survey/sf_fulltext_ledger_status.py` | **新增**（P0-R9 MINOR-1:--relocate 逐对象 supersession + 机器统计;计数散文一律引用其输出） |
+| 15 | `docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json` | 变更（65/65 行零 KeyError 重生成） |
+| 16 | `docs/checks/2026-07-16-sf-sentinel-recall.json` | 变更（34 哨兵 0 UNRESOLVED;七篇通道+2603.24257=SF-L12-Q3 机器可见） |
+| 17 | `docs/checks/2026-07-17-sf-citation-calibration-segagent.json` | 变更（措辞降级重生成;30 ID 子集/107 存量交集空;hypothesis-grade） |
+| 18 | `docs/checks/2026-07-18-sf-fulltext-status.json` | **新增**（机器统计:64/66 renditions,stale=0,unresolved=2 如实列出,PASS） |
+| 19 | `docs/survey-provenance/atom-ledger.jsonl` | 变更（append 8 行:七哨兵+2603.24257 raw Atom 采集留痕） |
+| 20 | `docs/checks/2026-07-16-sf-package-summary.json` | 变更（C4C 正典下 fail-closed 全绿重生成） |
+| 21 | `scripts/survey/sf_package_summary_test.py` | 变更（m7 变异改锚**最后一条** MACHINE_COUNT 行——#4C 段生效后原 first-match 锚点失效被 harness 自身抓出,10/10 恢复） |

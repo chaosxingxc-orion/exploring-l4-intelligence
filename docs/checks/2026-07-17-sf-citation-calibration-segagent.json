@@ -41,11 +41,12 @@
  ],
  "stock_size": {
   "seeds": 92,
-  "sentinels": 26,
-  "union": 99
+  "sentinels": 34,
+  "union": 107
  },
  "overlap_with_stock": [],
  "prediction": "intersection = ∅（跨社区谱系引 SAM/SoM 系）",
- "verdict": "PREDICTION_CONFIRMED — 引用交集筛不可作唯一发现入口的实证登记件",
- "rule_consequence": "维持:交集为空⇒降级轻筛(登记后排除),发现层仍由冻结查询承载"
+ "measurement_scope": "arXiv-ID 正则可解析子集(30/~59 bibliography entries);DOI-only/venue-only/title-only 引文未解析——完整 work-level 交集结论待 E2 identifier resolution(债务表 C1)",
+ "verdict": "ARXIV_ID_SUBSET_INTERSECTION_EMPTY — 可解析 arXiv-ID 子集与存量交集为空;支持「引用交集筛不可作唯一发现入口」的方向性登记(hypothesis-grade),不构成完整 bibliography 交集结论(P0-R9 MAJOR-C1 措辞降级)",
+ "rule_consequence": "维持:交集为空⇒降级轻筛(登记后排除),发现层仍由冻结查询承载;E2 饱和宣称前必须完成 work-level resolution(在已解析子图上零新增≠闭包干涸)"
 }

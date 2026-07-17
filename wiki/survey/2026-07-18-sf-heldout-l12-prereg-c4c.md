@@ -22,3 +22,26 @@ access_class: "HELD_OUT_SENTINEL_SOURCING（15 次检索/解引用 URL 由代理
 
 **预注册预测**：不作方向性预测（该由 matcher 裁决）;验收判据如 frontmatter。
 **matcher 运行前状态**：本件提交时,5 候选的官方 Atom 元数据尚未送入任何 matcher。
+
+---
+
+## RESULTS 附录（预注册提交 e965b71 之后运行,全部 5 候选如实登记,零丢弃）
+
+| # | arXiv ID | 65 查询完整命中 | L12 验收 |
+|---|---|---|---|
+| 1 | 2510.21794 | SF-L2-Q3 | 未中 L12 |
+| 2 | 2506.08691 | SF-L5-Q1, **SF-L15-Q1** | 未中 L12 |
+| 3 | 2603.16253 | SF-L5-Q5, **SF-L15-Q1, SF-L15-Q2** | 未中 L12 |
+| 4 | 2606.03054 | **（零命中）** | 未中 L12 |
+| 5 | 2603.24257 | SF-L4-Q2, **SF-L12-Q3** | **L12_HIT ✓** |
+
+1. **验收成立**：2603.24257（Memory-Augmented Vision-Language Agents,v1 2026-03-25,cs.CV）
+   实际命中 **SF-L12-Q3**——晋升 fresh L12 held-out 哨兵（held_out=true,era 机器校验过）。
+   吸取 C4B 教训的措辞纪律：其命中的是 L12 lane 本身,非旧 lane 救走。
+2. **新 lane 独立泛化证据（非触发集论文）**：候选 2/3 命中 SF-L15-Q1/Q2——L15 机制轴在
+   隔离代理独立选取的论文上命中,进一步佐证非单篇捕获器（与 PRESS 思想实验证据互补）。
+3. **诚实登记新缺口**：2606.03054（ToolGate,pre-call gating/control,cs.AI）65 查询全零命中
+   ——gating/pre-call-control 词族缺口,登记 vocabulary-drift 观察队列（axis: control/gating;
+   amendment-7 §4.2 累计 3 例同轴触发受控增补;不在签署前加词,遵守反无限延长条款）。
+4. 5 候选元数据均经官方 Atom 逐 ID 反幻觉核验（5/5 一致）;代理 15 次访问 + 我方 5 次
+   解引用登记 c4c 访问台账。
