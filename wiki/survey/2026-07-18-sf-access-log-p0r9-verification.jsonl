@@ -1,0 +1,8 @@
+{"artifact_id": "SF-ACCESS-LOG-P0R9-VERIFICATION-2026-07-18-01", "purpose": "P0-R9 评审件独立核验批（reviewer-response-protocol:先逐条复现再回应）", "access_class_default": "REVIEW_CLAIM_VERIFICATION", "attestation": "discovery_queries_executed = 0 维持;本批 7 次 fetch 全部为评审所引论文的 ID dereference（6 arXiv Atom + 1 ACL Anthology 页）,原始 payload 存 scratchpad p0r9_raw/", "note": "per-row UTC 未逐次记录,批窗口=2026-07-18 本会话;如实登记", "date": "2026-07-18"}
+{"seq": 1, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2508.10016", "http": 200, "bytes": 3101, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2508.10016"}
+{"seq": 2, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2602.23306", "http": 200, "bytes": 3257, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2602.23306"}
+{"seq": 3, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2512.11109", "http": 200, "bytes": 2919, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2512.11109"}
+{"seq": 4, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2607.09438", "http": 200, "bytes": 2933, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2607.09438"}
+{"seq": 5, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2606.28864", "http": 200, "bytes": 2973, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2606.28864"}
+{"seq": 6, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2512.19433", "http": 200, "bytes": 3753, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2512.19433"}
+{"seq": 7, "date": "2026-07-18", "url": "https://aclanthology.org/2026.findings-acl.383/", "http": 200, "bytes": 42108, "access_class": "REVIEW_CLAIM_VERIFICATION", "id": "2026.findings-acl.383"}
