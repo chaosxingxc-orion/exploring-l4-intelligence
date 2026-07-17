@@ -303,3 +303,33 @@ MACHINE_COUNT: files=21 fixtures=26 atom_xml=34
 | 19 | `docs/survey-provenance/atom-ledger.jsonl` | 变更（append 8 行:七哨兵+2603.24257 raw Atom 采集留痕） |
 | 20 | `docs/checks/2026-07-16-sf-package-summary.json` | 变更（C4C 正典下 fail-closed 全绿重生成） |
 | 21 | `scripts/survey/sf_package_summary_test.py` | 变更（m7 变异改锚**最后一条** MACHINE_COUNT 行——#4C 段生效后原 first-match 锚点失效被 harness 自身抓出,10/10 恢复） |
+
+### #4C stage-2 blob 钉定表（stage-1 commit = **59e8d35** / 59e8d350bc99ed81f671efdad37de54239043669）
+
+| path | git blob @59e8d35 |
+|---|---|
+| `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `df42891cee2e792d75b46e5daec383ad279b7f38` |
+| `wiki/survey/2026-07-15-sf-queries.jsonl` | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` |
+| `wiki/survey/2026-07-16-sf-sentinel-data.json` | `4eac183b963108668d4cdd8b981010ed0687faaa` |
+| `wiki/survey/2026-07-17-sf-canon.json` | `7f5ce76a3dec64bf5f9982236f02b8493e71dee0` |
+| `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl` | `9f3af53acfead71cf2285ca3ea64e209aa84219f` |
+| `wiki/survey/2026-07-18-sf-access-log-p0r9-verification.jsonl` | `c780fcceca4056f7ff4959243af1cbf2d05869e0` |
+| `wiki/survey/2026-07-18-sf-heldout-l12-prereg-c4c.md` | `054edd056725648838034a68366cdbc7624282b4` |
+| `wiki/survey/2026-07-18-sf-press-query-review-c4c.md` | `92f2f653c57e60327a57991902947e118b6ade28` |
+| `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | `b2bda863f00f83991a7ade97876ad9dab5510746` |
+| `wiki/survey/2026-07-18-gate-s1-correction-4c-response.md` | `c920b4fef8110b80403c3b4281fd2a7364963a4a` |
+| `wiki/survey/2026-07-18-sf-p0r9-seven-papers-dfs.md` | `6a1c98aa2086b77af469011f6826e5a02cc91938` |
+| `scripts/survey/sf_query_compiler.py` | `6066053fbc10ea6c757cf9e03b5abeb7e1824cbb` |
+| `scripts/survey/sf_citation_calibration.py` | `4f16675412e0ee19d3dc6df8d231883230cbee48` |
+| `scripts/survey/sf_fulltext_ledger_status.py` | `5bfc3d85ec9b7f9bb59fcc674cb68a642bfe3b38` |
+| `docs/checks/2026-07-16-sf-child-query-realrow-dryrun.json` | `dea4f20c492ce191212ad51aa8d7e7733c6cc4fd` |
+| `docs/checks/2026-07-16-sf-sentinel-recall.json` | `a9cec5f083742dd02e7b094fb0aa9cf05adff15f` |
+| `docs/checks/2026-07-17-sf-citation-calibration-segagent.json` | `7368ef3d0f27aff90615f38652e68bc10d2ff8bb` |
+| `docs/checks/2026-07-18-sf-fulltext-status.json` | `639e41d8b5797b7a46094a76f7d39d3f715a7bcc` |
+| `docs/survey-provenance/atom-ledger.jsonl` | `a5eb5a5d2dea2036970e3cae500df8accd12bef9` |
+| `docs/checks/2026-07-16-sf-package-summary.json` | `3b4b83b4b7bce1a8f19ef06768c75d597be3f1ed` |
+| `scripts/survey/sf_package_summary_test.py` | `88cdf5c1338f05b2583c1fbc7a7cf028d583fcd9` |
+| `wiki/survey/fixtures-c4b/`（树,26 件） | tree `17e034b2d650e53681cc4b07f7976f42e5ac82ee` |
+| `docs/survey-provenance/atom/`（树,34 件） | tree `d14db4ebdeb89a6c2a044088c1537bb0c86908ca` |
+
+（核验:`git rev-parse 59e8d35:<path>`;树成员 `git ls-tree 59e8d35:<tree>`。本表随 stage-2 提交入库,manifest 自身 blob 由该提交外部可查——自指钉定不可能,如实声明。）
