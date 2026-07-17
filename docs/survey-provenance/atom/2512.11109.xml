@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/BqY8UG/ElnAhq25e+FUcvTdTVzE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2512.11109&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-17T17:06:52Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2512.11109" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2512.11109v1</id>
+    <title>Limits and Gains of Test-Time Scaling in Vision-Language Reasoning</title>
+    <updated>2025-12-11T20:48:54Z</updated>
+    <link href="https://arxiv.org/abs/2512.11109v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.11109v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Test-time scaling (TTS) has emerged as a powerful paradigm for improving the reasoning ability of Large Language Models (LLMs) by allocating additional computation at inference, yet its application to multimodal systems such as Vision-Language Models (VLMs) remains underexplored. In this work, we present a systematic empirical study of inference time reasoning methods applied across both open-source and closed-source VLMs on different benchmarks. Our results reveal that while closed-source models consistently benefit from structured reasoning and iterative Self-Refinement, open-source VLMs show inconsistent behavior: external verification provides the most reliable gains, whereas iterative refinement often degrades performance. We further find that the effectiveness of TTS is dataset-dependent, yielding clear improvements on multi-step reasoning tasks but offering only limited gains on perception-focused benchmarks. These findings demonstrate that TTS is not a universal solution and must be tailored to both model capabilities and task characteristics, motivating future work on adaptive TTS strategies and multimodal reward models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-11T20:48:54Z</published>
+    <arxiv:comment>Mohammadjavad Ahmadpour and Amirmadhi Meighani contributed equally to this work</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mohammadjavad Ahmadpour</name>
+    </author>
+    <author>
+      <name>Amirmahdi Meighani</name>
+    </author>
+    <author>
+      <name>Payam Taebi</name>
+    </author>
+    <author>
+      <name>Omid Ghahroodi</name>
+    </author>
+    <author>
+      <name>Amirmohammad Izadi</name>
+    </author>
+    <author>
+      <name>Mahdieh Soleymani Baghshah</name>
+    </author>
+  </entry>
+</feed>

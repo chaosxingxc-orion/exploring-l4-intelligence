@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/+6/iZuVSZ7Q1AA0k/Ry7YzxUZrw</id>
+  <title>arXiv Query: search_query=&amp;id_list=2512.19433&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-17T17:07:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2512.19433" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2512.19433v2</id>
+    <title>dMLLM-TTS: Self-Verified and Efficient Test-Time Scaling for Diffusion Multi-Modal Large Language Models</title>
+    <updated>2026-04-08T06:02:03Z</updated>
+    <link href="https://arxiv.org/abs/2512.19433v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.19433v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Diffusion Multi-modal Large Language Models (dMLLMs) have recently emerged as a novel architecture unifying image generation and understanding. However, developing effective and efficient Test-Time Scaling (TTS) methods to unlock their full generative potential remains an underexplored challenge. To address this, we propose dMLLM-TTS, a novel framework operating on two complementary scaling axes: (1) trajectory exploration scaling to enhance the diversity of generated hypotheses, and (2) iterative refinement scaling for stable generation. Conventional TTS approaches typically perform linear search across these two dimensions, incurring substantial computational costs of O(NT) and requiring an external verifier for best-of-N selection. To overcome these limitations, we propose two innovations. First, we design an efficient hierarchical search algorithm with O(N+T) complexity that adaptively expands and prunes sampling trajectories. Second, we introduce a self-verified feedback mechanism that leverages the dMLLMs' intrinsic image understanding capabilities to assess text-image alignment, eliminating the need for external verifier. Extensive experiments on the GenEval benchmark across three representative dMLLMs (e.g., Lumina-DiMOO, MMaDA, Muddit) show that our framework substantially improves generation quality while achieving up to 6x greater efficiency than linear search. Project page: https://github.com/Alpha-VLLM/Lumina-DiMOO.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-22T14:31:58Z</published>
+    <arxiv:comment>Project page: https://github.com/Alpha-VLLM/Lumina-DiMOO</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yi Xin</name>
+    </author>
+    <author>
+      <name>Siqi Luo</name>
+    </author>
+    <author>
+      <name>Tianxiang Xu</name>
+    </author>
+    <author>
+      <name>Qi Qin</name>
+    </author>
+    <author>
+      <name>Haoxing Chen</name>
+    </author>
+    <author>
+      <name>Kaiwen Zhu</name>
+    </author>
+    <author>
+      <name>Zhiwei Zhang</name>
+    </author>
+    <author>
+      <name>Yangfan He</name>
+    </author>
+    <author>
+      <name>Rongchao Zhang</name>
+    </author>
+    <author>
+      <name>Jinbin Bai</name>
+    </author>
+    <author>
+      <name>Shuo Cao</name>
+    </author>
+    <author>
+      <name>Bin Fu</name>
+    </author>
+    <author>
+      <name>Junjun He</name>
+    </author>
+    <author>
+      <name>Yihao Liu</name>
+    </author>
+    <author>
+      <name>Yuewen Cao</name>
+    </author>
+    <author>
+      <name>Xiaohong Liu</name>
+    </author>
+  </entry>
+</feed>

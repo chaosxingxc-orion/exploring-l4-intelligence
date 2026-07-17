@@ -1,0 +1,23 @@
+{
+ "artifact_id": "SF-FULLTEXT-STATUS-2026-07-18-01",
+ "generator": "scripts/survey/sf_fulltext_ledger_status.py",
+ "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+ "ledger_rows": 115,
+ "distinct_ids": 33,
+ "expected_renditions": 66,
+ "persisted_renditions": 64,
+ "unresolved_renditions": [
+  {
+   "arxiv_id": "2309.05950",
+   "kind": "eprint"
+  },
+  {
+   "arxiv_id": "2506.07976",
+   "kind": "eprint"
+  }
+ ],
+ "stale_locators_remaining": [],
+ "on_disk_failures": [],
+ "verdict": "PASS",
+ "note": "counts in commit messages / prose MUST quote this machine output (P0-R9 MINOR-1: no hand-counted ledger claims)"
+}

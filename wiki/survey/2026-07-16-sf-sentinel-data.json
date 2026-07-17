@@ -1,6 +1,7 @@
 {
  "abstract_provenance": {
   "c4b_normalization": "新增 5 条正文取自 atom_xml <summary>:仅做空白折叠(\\s+ -> 单空格)与首尾去空白,其余字符不变",
+  "c4c_normalization": "C4C 新增 7 条(P0-R9 反例集)正文取自 atom_xml <summary>:仅做空白折叠(\\s+ -> 单空格)与首尾去空白,其余字符不变(与 c4b 规则同函数)",
   "field_semantics": "source_normalized_abstract 是匹配用规范化文本,不是 verbatim;verbatim 所指 = atom_xml 原始字节(sha256 钉定)",
   "legacy_normalization": "2026-07-16 前的 21 条正文取自 abs 页渲染文本:URL 被渲染为 'this https URL'、LaTeX 转义(如 \\%)被规范化、空白折叠",
   "raw_canon": "docs/survey-provenance/atom/<id>.xml (exact Atom API bytes) + docs/survey-provenance/atom-ledger.jsonl (append-only fetch ledger)",
@@ -189,6 +190,20 @@
    "title": "A Survey on Agent Workflow -- Status and Future",
    "used_in_query_design": true
   },
+  "2508.10016": {
+   "atom_sha256": "dc23f9247315f8ec75d1156959f06807d29cdaf098ddea97603f758f7144d09d",
+   "atom_xml": "docs/survey-provenance/atom/2508.10016.xml",
+   "categories": [
+    "cs.CL"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CL",
+   "reviewer_role": "P0-R9 MAJOR-G1 反例(评审供给):training-free omni-modal orchestration(LLM controller/cross-modal memory/expert routing),61 查询确定性零命中的 system-occupancy 盲区实证;SF-L14-Q1 = 其确定性补救;词项取自先于评审件冻结的 T1 词表 A 组,非取自本篇;烧毁 held-out 资格",
+   "source_normalized_abstract": "Building interactive omni-modal assistants often relies on end-to-end multimodal alignment to fuse heterogeneous modalities, which incurs substantial data and compute costs and limits extensibility. We present Training-Free Large Language Model Orchestration (LLM Orchestration), a training-free orchestration framework that integrates off-the-shelf modality experts into a unified multimodal input--output system without additional gradient-based training for integration. LLM Orchestration comprises three components: (1) an LLM controller that infers user intent and emits explicit control tokens for expert selection and sequencing, enabling protocol-constrained and auditable routing; (2) a text-centric cross-modal memory that compresses multimodal evidence into structured records for lightweight retrieval and reuse, reducing redundant expert invocations across turns; and (3) a unified interaction layer that executes routing and memory decisions to support consistent modality transitions, full-duplex streaming, and interruption-aware dialogue. Across diverse multimodal benchmarks, LLM Orchestration achieves strong performance under standard evaluation constraints while maintaining low orchestration overhead and modular upgradeability, providing a practical alternative to costly joint training for omni-modal systems.",
+   "title": "Training-Free Multimodal Large Language Model Orchestration",
+   "used_in_query_design": false
+  },
   "2510.14900": {
    "atom_sha256": "2c7f16e3b0843ec55e92e90e4d7d2a27653be56d655cd733eca60d8c2a4ac677",
    "atom_xml": "docs/survey-provenance/atom/2510.14900.xml",
@@ -202,6 +217,34 @@
    "reviewer_role": "博导复审§4.2-4 边界案例(P0);read-out/new-info 信息边界反例;NAMING_THREAT",
    "source_normalized_abstract": "The Enterprise Intelligence Platform must integrate logs from numerous third-party vendors in order to perform various downstream tasks. However, vendor documentation is often unavailable at test time. It is either misplaced, mismatched, poorly formatted, or incomplete, which makes schema mapping challenging. We introduce a reinforcement learning agent that can self-improve without labeled examples or model weight updates. During inference, the agent: 1) Identifies ambiguous field-mapping attempts. 2) Generates targeted web-search queries to gather external evidence. 3) Applies a confidence-based reward to iteratively refine its mappings. To demonstrate this concept, we converted Microsoft Defender for Endpoint logs into a common schema. Our method increased mapping accuracy from 56.4%(LLM-only) to 72.73%(RAG) to 93.94% over 100 iterations using GPT-4o. At the same time, it reduced the number of low-confidence mappings requiring expert review by 85%. This new approach provides an evidence-driven, transparent method for solving future industry problems, paving the way for more robust, accountable, scalable, efficient, flexible, adaptable, and collaborative solutions.",
    "title": "Mapping Smarter, Not Harder: A Test-Time Reinforcement Learning Agent That Improves Without Labels or Model Updates",
+   "used_in_query_design": false
+  },
+  "2512.11109": {
+   "atom_sha256": "5996d27329e77cbc132ac65bb1a381d1291235ae3f74aa0bdfeac4614dbca99f",
+   "atom_xml": "docs/survey-provenance/atom/2512.11109.xml",
+   "categories": [
+    "cs.LG"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.LG",
+   "reviewer_role": "P0-R9 MAJOR-G1 反例(评审供给)+carriage failure 实证(2026-07-04 X3 件已引用但未迁移入 gate 面):TTS 异质性/intrinsic refinement 退化负结果;SF-L15-Q1/Q2 = 其确定性补救;烧毁 held-out 资格",
+   "source_normalized_abstract": "Test-time scaling (TTS) has emerged as a powerful paradigm for improving the reasoning ability of Large Language Models (LLMs) by allocating additional computation at inference, yet its application to multimodal systems such as Vision-Language Models (VLMs) remains underexplored. In this work, we present a systematic empirical study of inference time reasoning methods applied across both open-source and closed-source VLMs on different benchmarks. Our results reveal that while closed-source models consistently benefit from structured reasoning and iterative Self-Refinement, open-source VLMs show inconsistent behavior: external verification provides the most reliable gains, whereas iterative refinement often degrades performance. We further find that the effectiveness of TTS is dataset-dependent, yielding clear improvements on multi-step reasoning tasks but offering only limited gains on perception-focused benchmarks. These findings demonstrate that TTS is not a universal solution and must be tailored to both model capabilities and task characteristics, motivating future work on adaptive TTS strategies and multimodal reward models.",
+   "title": "Limits and Gains of Test-Time Scaling in Vision-Language Reasoning",
+   "used_in_query_design": false
+  },
+  "2512.19433": {
+   "atom_sha256": "45e60db68db288885e85fc382dfe73e916a4d87c84124e87babc3ecdb6a0c7a0",
+   "atom_xml": "docs/survey-provenance/atom/2512.19433.xml",
+   "categories": [
+    "cs.CV"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-R9 评审表列举,但我方复现证明其在冻结 61 查询下已命中 SF-L5-Q5(评审 0-hit 声称的 2/7 反例之二);其 abs 写 multi-modal 连字符变体,触发 L14/L15 模态组 abs:\"multi-modal\" 表面变体补全(vocabulary-drift 队列首次执行);生成域边界样本(intrinsic evaluator 机制先验)",
+   "source_normalized_abstract": "Diffusion Multi-modal Large Language Models (dMLLMs) have recently emerged as a novel architecture unifying image generation and understanding. However, developing effective and efficient Test-Time Scaling (TTS) methods to unlock their full generative potential remains an underexplored challenge. To address this, we propose dMLLM-TTS, a novel framework operating on two complementary scaling axes: (1) trajectory exploration scaling to enhance the diversity of generated hypotheses, and (2) iterative refinement scaling for stable generation. Conventional TTS approaches typically perform linear search across these two dimensions, incurring substantial computational costs of O(NT) and requiring an external verifier for best-of-N selection. To overcome these limitations, we propose two innovations. First, we design an efficient hierarchical search algorithm with O(N+T) complexity that adaptively expands and prunes sampling trajectories. Second, we introduce a self-verified feedback mechanism that leverages the dMLLMs' intrinsic image understanding capabilities to assess text-image alignment, eliminating the need for external verifier. Extensive experiments on the GenEval benchmark across three representative dMLLMs (e.g., Lumina-DiMOO, MMaDA, Muddit) show that our framework substantially improves generation quality while achieving up to 6x greater efficiency than linear search. Project page: https://github.com/Alpha-VLLM/Lumina-DiMOO.",
+   "title": "dMLLM-TTS: Self-Verified and Efficient Test-Time Scaling for Diffusion Multi-Modal Large Language Models",
    "used_in_query_design": false
   },
   "2601.09667": {
@@ -233,6 +276,20 @@
    "title": "See It, Say It, Sorted: An Iterative Training-Free Framework for Visually-Grounded Multimodal Reasoning in LVLMs",
    "used_in_query_design": false
   },
+  "2602.23306": {
+   "atom_sha256": "265a4d4359b5fe7b15a4f1b333084c33b453e195536def3c8aa5b1c0eba57421",
+   "atom_xml": "docs/survey-provenance/atom/2602.23306.xml",
+   "categories": [
+    "cs.CV"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-R9 MAJOR-G1 反例(评审供给):training-free/data-free 外部 LRM guidance decoding,61 查询+T1 词表双零命中的最深盲区;SF-L14-Q2(guided/contrastive decoding 通用方法族) = 其确定性补救;boundary 轴 = 外部模型注入(new-info)+logits 访问,非黑盒自激活;烧毁 held-out 资格",
+   "source_normalized_abstract": "Omni-modal reasoning is essential for intelligent systems to understand and draw inferences from diverse data sources. While existing omni-modal large language models (OLLM) excel at perceiving diverse modalities, they lack the complex reasoning abilities of recent large reasoning models (LRM). However, enhancing the reasoning ability of OLLMs through additional training presents significant challenges, including the need for high-quality data, task-specific adaptation, and substantial computational costs. To address these limitations, we propose ThinkOmni, a training-free and data-free framework that lifts textual reasoning to omni-modal scenarios. ThinkOmni introduces two key components: 1) LRM-as-a-Guide, which leverages off-the-shelf LRMs to guide the OLLM decoding process; 2) Stepwise Contrastive Scaling, which adaptively balances perception and reasoning signals without manual hyperparameter tuning. Experiments on six multi-modal reasoning benchmarks demonstrate that ThinkOmni consistently delivers performance improvements, with main results achieving 70.2 on MathVista and 75.5 on MMAU. Overall, ThinkOmni offers a flexible and generalizable solution for omni-modal reasoning and provides new insights into the generalization and application of reasoning capabilities. Code is publicly available at https://github.com/1ranGuan/thinkomni",
+   "title": "ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding",
+   "used_in_query_design": false
+  },
   "2603.12310": {
    "atom_sha256": "cfef9baa2e6e37ce6e81885db5a3801dd9bdd7a6184d91c2727e1f8dc86e4685",
    "atom_xml": "docs/survey-provenance/atom/2603.12310.xml",
@@ -248,6 +305,20 @@
    "reviewer_role": "复审§4.3-2 执行早期件(P1);held-out 哨兵;摘要未参与词项设计;P0-3.2 更正:其 categories 无 cs.MM,故仅独立验证 SF-L11 的 cs.MA 一侧——cs.MM 侧独立验收 = TimeLogic 2606.01631(评审供例)",
    "source_normalized_abstract": "Despite rapid advancements in video generation models, aligning their outputs with complex user intent remains challenging. Existing test-time optimization methods are typically either computationally expensive or require white-box access to model internals. To address this, we present VQQA (Video Quality Question Answering), a unified, multi-agent framework generalizable across diverse input modalities and video generation tasks. By dynamically generating visual questions and using the resulting Vision-Language Model (VLM) critiques as semantic gradients, VQQA replaces traditional, passive evaluation metrics with human-interpretable, actionable feedback. This enables a highly efficient, closed-loop prompt optimization process via a black-box natural language interface. Extensive experiments demonstrate that VQQA effectively isolates and resolves visual artifacts, substantially improving generation quality in just a few refinement steps. Applicable to both text-to-video (T2V) and image-to-video (I2V) tasks, our method achieves absolute improvements of +11.57% on T2V-CompBench and +8.43% on VBench2 over vanilla generation, significantly outperforming state-of-the-art stochastic search and prompt optimization techniques.",
    "title": "VQQA: An Agentic Approach for Video Evaluation and Quality Improvement",
+   "used_in_query_design": false
+  },
+  "2603.24257": {
+   "atom_sha256": "f2550b15c2cd4deea02a83de21bde74aa818538c9412a064735d0ab50d39044d",
+   "atom_xml": "docs/survey-provenance/atom/2603.24257.xml",
+   "categories": [
+    "cs.CV"
+   ],
+   "held_out": true,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-R9 整改项4 fresh L12 held-out:隔离代理(Opus,零设计上下文)5 候选预注册(e965b71)后 matcher 裁决,实命中 SF-L12-Q3(+SF-L4-Q2);era 2026-03 >= 2025(owner 时代裁决);C4B 措辞教训吸取——命中 L12 lane 本身,非旧 lane 救走",
+   "source_normalized_abstract": "Vision-Language Models (VLMs) often yield inconsistent descriptions of the same object across viewpoints, hindering the ability of embodied agents to construct consistent semantic representations over time. Previous methods resolved inconsistencies using offline multi-view aggregation or multi-stage pipelines that decouple exploration, data association, and caption learning, with limited capacity to reason over previously observed objects. In this paper, we introduce a unified, memory-augmented Vision-Language agent that simultaneously handles data association, object captioning, and exploration policy within a single autoregressive framework. The model processes the current RGB observation, a top-down explored map, and an object-level episodic memory serialized into object-level tokens, ensuring persistent object identity and semantic consistency across extended sequences. To train the model in a self-supervised manner, we collect a dataset in photorealistic 3D environments using a disagreement-based policy and a pseudo-captioning model that enforces consistency across multi-view caption histories. Extensive evaluation on a manually annotated object-level test set, demonstrate improvements of up to +11.86% in standard captioning scores and +7.39% in caption self-similarity over baseline models, while enabling scalable performance through a compact scene representation. Code, model weights, and data are available at https://hsp-iit.github.io/epos-vlm/.",
+   "title": "Memory-Augmented Vision-Language Agents for Persistent and Semantically Consistent Object Captioning",
    "used_in_query_design": false
   },
   "2603.27706": {
@@ -367,6 +438,20 @@
    "title": "Agentic Monte Carlo: Simulating Reinforcement Learning for Black-Box Agents",
    "used_in_query_design": false
   },
+  "2606.08231": {
+   "atom_sha256": "32cb78ade46a34073547c75d8311ddc1e3d95eed2b96ecaa2544a66a54a70dd0",
+   "atom_xml": "docs/survey-provenance/atom/2606.08231.xml",
+   "categories": [
+    "cs.CV"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-R9 评审供给的 ACL Findings 2026 TTS survey 之 arXiv 孪生(2026.findings-acl.383,我方 title 检索发现);61 查询零命中,SF-L15-Q1 = 其确定性补救;另有既有 T1-ACL-2026 路由词表通道(title A 组命中)——双通道;DISCOVERY_NAVIGATION 角色,不承载一手效果结论",
+   "source_normalized_abstract": "Test-time Scaling (TTS) has emerged as a pivotal research direction for enhancing model performance by dynamically allocating computational resources during inference. Recent advancements have adapted this paradigm to Multimodal Foundation Models (MFMs), unlocking their potential in multimodal reasoning and generation. Despite rapid progress, the field lacks a systematic survey and unified theoretical framework to delineate the developmental landscape of multimodal TTS. To bridge this gap, we present the first comprehensive review of TTS research for MFMs, proposing a unified taxonomic framework that categorizes existing methodologies into three distinct strategies: sampling-based, feedback-based, and search-based approaches. We further summarize representative applications and benchmarks commonly utilized to evaluate multimodal TTS capabilities in generation and reasoning tasks. Finally, this survey discusses open challenges and outlines future research directions, providing a systematic roadmap for subsequent studies in this rapidly evolving field.",
+   "title": "Test-Time Scaling in Multimodal Foundation Models: A Comprehensive Survey of Generation and Reasoning",
+   "used_in_query_design": false
+  },
   "2606.23327": {
    "atom_sha256": "176861703a0ae0d99e70f66a7a0c7843b9041d2784843c49e38c3c72a6714cab",
    "atom_xml": "docs/survey-provenance/atom/2606.23327.xml",
@@ -382,6 +467,20 @@
    "title": "VideoAgent: All-in-One Framework for Video Understanding and Editing",
    "used_in_query_design": true
   },
+  "2606.28864": {
+   "atom_sha256": "49e690d0cf95119cd1682793ec3cf3e1e9f2a359cca22bc52912e377c4051001",
+   "atom_xml": "docs/survey-provenance/atom/2606.28864.xml",
+   "categories": [
+    "cs.CV"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CV",
+   "reviewer_role": "P0-R9 MAJOR-G1 反例(评审供给):9 方法×多规模×6 基准的 VLM TTS 系统性研究;SF-L15-Q1 = 其确定性补救;烧毁 held-out 资格",
+   "source_normalized_abstract": "Test-time scaling is a paradigm where large models use additional compute at inference to achieve better performance, without changing model weights. While it has been widely studied for Large Language Models (LLMs), its applicability to Large Vision-Language Models (LVLMs) remains less explored and analyzed, with limited analysis of whether, when, and to what extent these approaches transfer to LVLMs. In this work, we ask a simple but fundamental question: can conventional test-time scaling methods developed for LLMs be directly applied to LVLMs? We present the first comprehensive study of test-time scaling for LVLMs, spanning multiple models and model sizes, nine test-time scaling methods, and six diverse benchmarks. Our main findings is that 1) different from previous findings, small, well-performing models benefit the most from test-time scaling, enabling performance improvements of up to around 30\\%, reaching large models performance, and often outperforming them, 2) LVLMs lose focus when given more compute than necessary, and 3) Visual information is encoded early in the reasoning chain, after which the chain is dominated by text-only reasoning and the contribution of image tokens drops significantly. Finally, we also provide a global and fine-grained analysis on the quality and information sufficiency of the reasoning chains produced. Overall, our findings and analysis provide practical guidance and insights into LVLMs and their deployment in research and industry.",
+   "title": "On Test-Time Scaling for Vision-Language Models",
+   "used_in_query_design": false
+  },
   "2607.06873": {
    "atom_sha256": "efd843e8c35b3d8a522b8a7e6ccd32bcefcbe0ee7028b0fbe82dff4654d7c3bd",
    "atom_xml": "docs/survey-provenance/atom/2607.06873.xml",
@@ -395,6 +494,22 @@
    "source_normalized_abstract": "Conversational LLM agents can cause real-world harm when their internal workflows fail, such as completing a transaction without confirmation. Testing these state-dependent failures is difficult because critical boundaries, such as identity checks and confirmation gates, are hidden behind multi-turn conversational prerequisites, rendering them inaccessible to standard tests. We present AgentEval, a black-box testing framework that discovers and stresses these stateful boundaries. AgentEval interacts with an agent to mine a \\emph{conversational workflow graph}, a model of its behavior. Instead of prompting blindly, AgentEval uses this graph's structure to enumerate specific guards and prerequisites as test targets, replaying the conversational path to a boundary before applying a perturbation. AgentEval then executes each test, determining whether it passes or fails using only the conversation turns. We benchmark AgentEval against a privileged, white-box auditor with access to the agent's underlying source code, which AgentEval never sees. On four $\\tau^3$-bench agents, AgentEval successfully generates tests covering $23$--$38$ distinct boundaries per agent; ablation studies attribute the gain to the graph's structure: $23$ distinct boundaries versus $12$ with a prompt-only baseline, at lower duplicate and false-alarm rates.",
    "title": "Mining Workflow Graphs for Black-Box Boundary Testing of Conversational LLM Agents",
    "used_in_query_design": true
+  },
+  "2607.09438": {
+   "atom_sha256": "c68e9c6af363d31680115b9c2a7aca86379cd670af08242d2e80ec0383532af5",
+   "atom_xml": "docs/survey-provenance/atom/2607.09438.xml",
+   "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.LG"
+   ],
+   "held_out": false,
+   "in_seed_batch": null,
+   "primary_category": "cs.CL",
+   "reviewer_role": "P0-R9 评审表列举,但我方复现证明其在冻结 61 查询下已命中 SF-L5-Q1(评审 0-hit 声称的 2/7 反例之一);selector-null/供给混淆负结果样本;新 lane additive 命中 L14-Q2/L15-Q1/Q2;登记为 query-regression 哨兵",
+   "source_normalized_abstract": "Test-time scaling (TTS) reliably improves reasoning in large language models, but whether it transfers to small open vision-language models remains unclear. We examine this on EXAMS-V, a multilingual visual multiple-choice benchmark, comparing self-consistency, describe-then-reason with PRM-guided beam search, and two post-hoc selectors across Qwen2.5-VL-7B-Instruct and Qwen3.5-4B. What matters is the conditions under which TTS runs, not the search or verification machinery. The largest factor is parseability: an early prompt format left many chains reasoning correctly yet never committing to an answer letter, which a standard answer cue and a guided repair step largely remove. A larger decoding budget removes the rest: raising the per-chain token limit from 1k to 2k recovers 3.7 pp, whereas sampling more chains (8 to 16) adds only 0.15 pp. Once chains have room to finish, elaborate methods contribute little: PRM-guided beam search trails plain self-consistency by 0.39 pp at over eight times the cost, and neither a training-free generative critic nor a trained multimodal PRM beats majority vote across both policies. The largest gain comes instead from the policy model itself (+11.4 pp). Our best configuration reaches 84.1% on the held-out ImageCLEF 2026 test split, ranking first on the Visual MCQ leaderboard.",
+   "title": "Test-Time Scaling for Small VLMs on Multilingual Visual MCQ",
+   "used_in_query_design": false
   }
  },
  "provenance": "博导复审 §9.2 点名 13 篇 + batch-2 VideoAgent；题名/类目/摘要经 ID_DEREFERENCE 正典 pass 捕获（留痕 = wiki/survey/2026-07-16-sf-id-dereference-log.jsonl）；14/14 HIT 零幻觉 ‖ C4A 批次二(2026-07-16,P0-R5)：+7 篇（博导复审§4.2 五篇 P0 + §4.3 两篇 P1）,verbatim 摘要 ID_DEREFERENCE 留痕 = 2026-07-16-sf-access-log-c4a-review-verification.jsonl seq13-19; miss_explanation 更名 coverage_note(仅注释,不再参与判定——四分法见 sf_sentinel_recall_test.py); held_out=true 者(2605.12978/2603.12310)未入种子且未参与任何查询词项设计,防循环验收 | C4B 2026-07-16: +5 sentinels (TimeLogic/Seg-Agent/SeeItSayIt/DVD/TTCFrozenEmb), abstract->source_normalized_abstract, raw Atom provenance attached, VQQA/MAR3 P0-3.2 claim corrections",

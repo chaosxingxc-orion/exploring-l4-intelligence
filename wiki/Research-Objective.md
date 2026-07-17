@@ -21,8 +21,10 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
 ## 2. 阶段与门（现在在哪、下一步是什么）
 
 - **Stage-1A 收官准备末段（survey-ready gate,A3-11——「收尾/尾声」称谓废止）**：问题框架
-  接近稳定,外部证据工作（检索/全文抽取/引文链/饱和/候选问题）尚未开始,科学收官以可回放
-  survey 完成+3–5 候选问题形成起算;Stage-1B 未放行（流程定义见 [[Research-Methodology]]）。
+  接近稳定;**系统性 discovery/mapping 查询尚未执行**;定向 ID dereference/raw provenance/
+  全文准备/校准性引文试验已执行（P0-R9 MINOR-2 正名:不再合并全称否定）;科学收官以可回放
+  survey 完成+3–5 候选问题形成起算;Stage-1B 模型/数据实验未放行（流程定义见
+  [[Research-Methodology]]）。
 - S0 已签（续48）→ proposal v1 同日双外审（续50：严评 RETURN / 重校准 ACCEPTABLE_TO_PROCEED,
   存活四项已修）→ v2 送审版（续51）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_
   REQUIRED_AMENDMENTS**（续52,修正案 A–F 全采）→ 协议 v1+签署包六件套环收敛（续53）→
@@ -63,10 +65,22 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   mutation harness 全变异非零退出/61 查询〔前 55 行字节不变;L12 CV/AI+L13 LG/ML/NE 镜像道,
   Seg-Agent 复验 QUERY_HIT×2,DVD 词汇漂移近失例同批补救〕/26 哨兵〔held-out 5 全纯查询召回,
   TimeLogic=cs.MM 侧,2605.11374 直接命中新道 L13-Q2〕/raw Atom+全文双份台账/routes v3 自查
-  tier 更正）,**当前动作 = 回应信+P0-R9 申请已落盘（`survey/2026-07-17-gate-s1-correction-
-  4b-response.md`）,待评审窄幅复核（双向合同维持）**;执行前置三条件（签署+owner 批准+
-  复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105 查询维持零执行）→
-  Stage-1A close 与 1B 放行 = 两个签字;survey 退出机制 E1–E3 = amendment-7（执行期合同）。
+  tier 更正）→ **P0-R9 再裁 WITHHOLD（1 Gate MAJOR=G1 方法占位盲区〔L11–L13 强制 agent
+  连词=认识论循环〕+C1 引文校准子集冒充全交集+3 MINOR;评审自我校准:对抗变异降为可选、无
+  FFP）→ owner 五裁决（续64:L14/L15 镜像 T1 词表方案/PRESS=隔离代理+抽查/七篇走 DFS 四问
+  非静态矩阵/**创新点未锁定·定性两侧皆早**/有据异议获准）→ correction #4C 当日交付**
+  （**首次有据部分异议:0-hit 表 2/7 不成立**〔2607.09438=SF-L5-Q1、2512.19433=SF-L5-Q5,
+  matcher 复现+PRESS O-2 独立收敛〕+T1 路由层漏测〔ACL survey 本在设计通道内〕;SF-L14/L15
+  方法占位轴 4 查询〔sfqc-1.5.0,13 类全并集,零 agent 连词,61→65,prefix61 不变〕/七 arXiv
+  身份全获通道并入哨兵〔26→34,含 2606.08231=ACL 孪生〕/PRESS 首轮〔HARDCODING NO,steering
+  MAJOR 采纳,思想实验 3/3〕/fresh L12 held-out 预注册 e965b71→2603.24257 实中 SF-L12-Q3
+  〔ToolGate 全零命中→drift 队列 control/gating 1/3〕/C1 措辞降级+债务 D-1/17 条
+  RELOCATION_SUPERSESSION+机器统计/DFS 七篇深读〔无定位定性〕/amendment-8 债务表+可回放
+  矩阵）,**当前动作 = 回应信+P0-R10 申请已落盘（`survey/2026-07-18-gate-s1-correction-4c-
+  response.md`）,待评审窄幅复核（双向合同维持）**;执行前置三条件（签署+owner 批准+复跑）,
+  签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105 查询维持零执行）→ Stage-1A close
+  与 1B 放行 = 两个签字;survey 退出机制 E1–E3 = amendment-7（执行期合同,E2 饱和前置=债务
+  D-1 work-level resolution）。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。
