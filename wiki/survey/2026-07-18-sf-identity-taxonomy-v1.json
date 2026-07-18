@@ -1,0 +1,39 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-2026-07-18-01",
+ "title": "reward / training / information-boundary identity taxonomy v1 (v5-review P0-2; owner ruling 2 2026-07-18)",
+ "unit": "method_path (one row per method path, NEVER per paper — a paper with a prompt-only main path and an SFT variant gets two rows)",
+ "fields": {
+  "method_path_id": "string — '<paper_id>#<path>' e.g. '2026.findings-acl.1243#closed-prompt-only'",
+  "core_weight_update": "bool — are the core/policy model weights updated anywhere in the method path",
+  "external_component_weight_update": "bool — is ANY external component (controller/verifier/reward model/memory updater/encoder head) gradient-trained or fine-tuned for this path",
+  "controller_program_or_config_optimized_on_labels": "bool — controller code/config/prompt/exemplars searched or selected using labeled data (dev/search/calibration gold)",
+  "human_or_dev_label_model_selection": "bool — human preferences or dev labels used to SELECT among fixed components (e.g. judger selection), without training",
+  "deployment_label_access": "bool — does the deployed loop read any gold labels at inference time (task-level, not test-item)",
+  "test_item_gold_access": "bool — does the CURRENT test item's gold enter any inference path (the project's 信息边界 red line)",
+  "inference_external_new_information": "bool — does the inference loop actively acquire external information beyond the input (web retrieval, external-model knowledge injection)",
+  "score_type": "enum — the selection/feedback signal family actually used at inference",
+  "model_access_level": "enum — deepest access the method needs on the generator/core",
+  "explicit_candidate_pool_selection": "bool (extension beyond reviewer minimum) — does the path select/prune over an explicit candidate pool (K-pool); needed for occupancy conjunctions",
+  "includes_speech_audio": "bool (extension) — does the path evaluate on speech/audio modality"
+ },
+ "enums": {
+  "score_type": ["verifiable_utility", "rule_reward", "learned_rm_prm", "llm_judge", "consensus_mbr", "self_confidence_loglik", "human_aligned_proxy", "none"],
+  "model_access_level": ["api_text_only", "logits_logprob", "hidden_state", "gradient"]
+ },
+ "derived": {
+  "is_reward_guided": "score_type in {verifiable_utility, rule_reward, learned_rm_prm, llm_judge, human_aligned_proxy} — i.e. a scalar/graded quality signal steers candidate selection/pruning/search; consensus_mbr and self_confidence_loglik are tracked separately, NOT excluded by renaming (v5-review Round D)",
+  "is_all_system_training_free": "NOT core_weight_update AND NOT external_component_weight_update (TF-Strict weight axis; label-dependence is a SEPARATE axis and does not flip this bit)",
+  "is_project_strict_identity": "is_all_system_training_free AND NOT controller_program_or_config_optimized_on_labels AND NOT human_or_dev_label_model_selection AND NOT deployment_label_access AND NOT test_item_gold_access AND NOT inference_external_new_information AND model_access_level == api_text_only (all-system-data-free: dev-label component selection also violates — v5-review Round D)"
+ },
+ "conflict_rules": [
+  "dev/calibration/search gold => controller_program_or_config_optimized_on_labels or human_or_dev_label_model_selection; NEVER test_item_gold_access (v5-review Round D: dev-label dependence must not be reported as test leakage)",
+  "occupancy summaries must be computed from this table by conjunction of named fields; free-text '唯一/零项/全部' without a machine-recomputable conjunction is forbidden",
+  "a mixed-path paper is counted per method_path; paper-level single-value identity is forbidden"
+ ],
+ "counterexample_unit_tests": {
+  "2026.findings-acl.1724#pipeline": {"expect": {"is_reward_guided": true, "is_all_system_training_free": true}, "note": "Selective TTS: llm_judge score prunes explicit candidate pools — self-framed 'guided by reward signals'; renaming it out of the reward axis is forbidden"},
+  "2605.08083#discovered-controller": {"expect": {"controller_program_or_config_optimized_on_labels": true, "test_item_gold_access": false}, "note": "AutoTTS: search-set gold optimizes controller; held-out untouched — dev-label dependence, not test leakage"},
+  "2602.16485#calibrated-orchestration": {"expect": {"human_or_dev_label_model_selection": true, "controller_program_or_config_optimized_on_labels": true, "test_item_gold_access": false}, "note": "Team of Thoughts: cross-calibration gold builds profiles/selects orchestrator; test gold isolated"},
+  "2026.findings-acl.1243#closed-prompt-only": {"expect": {"is_all_system_training_free": true, "inference_external_new_information": true}, "note": "DeepVerifier main path: prompt-only zero training BUT verification agent retrieves web evidence (new-info); the SFT open variant is a SEPARATE row"}
+ }
+}
