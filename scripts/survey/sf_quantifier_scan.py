@@ -23,10 +23,18 @@ import io
 import re
 import sys
 
+# Default set = CURRENT reviewer-facing actives. MUST be updated when the
+# submission artifact changes — a bare run that scans a stale file set passes
+# vacuously (v7 internal review MAJOR-1: the lint attested green on v5 while
+# the actual submission v7 had a hit). Keep this list pointing at what is
+# actually being submitted.
 FILES = [
-    "wiki/2026-07-18-system-first-research-proposal-v5-consolidated.md",
+    "wiki/2026-07-18-system-first-research-proposal-v7-consolidated.md",
     "wiki/2026-07-18-inherited-prior-exposure-union.md",
-    "wiki/survey/2026-07-18-gate-s1-v5-response.md",
+    "wiki/survey/2026-07-18-gate-s1-v6-response.md",
+    "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
+    "wiki/survey/2026-07-18-sf-stage1b-opening-tables.md",
+    "wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md",
 ]
 TOKEN = re.compile(r"全量|唯一|零项|持续缺位")
 SCOPE = re.compile(r"已检视|下界|集合|快照|机器重算|机器可数|合取|≥|>=|〔SCOPED〕|〔HIST:|不称|禁止|不再|禁用|撤回|矛盾|forbidden")
