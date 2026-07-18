@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-07-18（续66）· v5 复审裁 WITHHOLD（3 Gate MAJOR=语义正确性:量词/分类/矩阵 scope）+ owner 五裁决 → W4 四仓考古 + identity taxonomy 冻结 + 量词扫描
+
+**Context.** v5 合并送审版复审 WITHHOLD——**明确拒绝以「量太少」退稿**（不以未完成综述/无
+实验退稿;Round E 十项新工作只入 Stage-1B 首批队列,且 5 arXiv 项全被冻结查询接住〔评审
+自测+我方逐条精确复现——发现协议连续第三轮外部压力测试零覆盖 MAJOR〕）。三 Gate MAJOR 全
+坐实且全为我方语义正确性问题：**P0-1** union 称「全量」与自载 W4 缺口同真矛盾（W4 inventory
+实在,评审列举实验族 grep 80 处命中;W4 末次实验 07-12 早于 gate 冻结→new_touches=0 签字
+幸存,评审如实认定）;**P0-2** Selective TTS 分类自相矛盾（其论文自框架 "guided by reward
+signals",我方却总结「零项 reward-guided K 池」——未冻结 taxonomy 下的私有定义排除;同时
+坐实 dev-label≠test-leakage 三分法混淆）;**P0-3** v5 引 v4 矩阵称「全量」而 v5 新数字全不
+在内。诚信裁决:FFP 未立,**QRP 成立**（完成态/分类类实质误述）,行为性升级警告（收到后仍用
+「全量」= 故意隐瞒调查）。同型失败第六轮,形态进化为**无集合限定量词**——内审环能力包络
+镜头未覆盖量词类。
+
+**Decision（owner 五裁决,2026-07-18）.** ①W1–W4 四仓 exposure 考古批准;②taxonomy 十字段
+采纳（「是否 reward-guided」降派生字段,method-path 分行）;③v5 矩阵/自包含/引用修正;
+④Round E 十项入 Stage-1B 首批保证队列;⑤owner 重申（逐字）:「重申：Stage-1B 全程不得运行
+研究模型或 smoke」。
+
+**Consequences（整改批交付）.** **union v2**（W4 ≈70 事件二轮考古并入〔changelog 4172 行
+全通读〕:8 推理研究模型/14 数据集/评审点名七族全映射零排除/选择决策污染面 ≥11 处〔推理级
+5 + 离线选择器〕=最高优先隔离面/MInDS 手工 JSON 事故八步链与 R2 oracle-artifact 并列入账/
+claim_ledger.yaml 悬空引用新发现主动披露〔亲验:连盘上不存在〕;W2/W3 零实验直验;union v2
+前冻结的 fresh/held-out 切分无效）;**identity taxonomy v1 冻结**（十字段+七枚举
++三派生+四反例单测 5/5 PASS 含负控;9 method path 重编码;占据合取机器重算:speech/audio
+0/9、TF∧reward∧pool 3/9、strict∧reward∧pool 1/9〔Agentic Coding〕——「零项」句撤回）;
+**量词扫描器**（全量/唯一/零项/持续缺位 无限定即 FAIL,负例自测）;v5 增补矩阵+自包含 28 条
+参考文献+ATLAS GPQA-Diamond 条件;amendment-10;回应信。W4 独立佐证:union 考古与评审独立
+发现同一 MInDS 事故链,W4 自身 inventory 的 append-only supersession 纪律经受住外部审查。
+
 ### 2026-07-18（续65）· v4 复审裁 WITHHOLD（P0-1..4）+ owner 五裁决:阶段正典 v2 dated supersession（1B=mapping 执行/方向性原型→2A 复现先行）+ exposure union + 13 轴 schema
 
 **Context.** proposal v4 博导复审（审 @6bfa17f,四轮以来首份我方零事实异议件——8/8 新引

@@ -5,7 +5,7 @@ date: 2026-07-18
 addressee: "Gate S1 评审人 / 评委"
 relation: "v3-consolidated 之 working-thesis 裁定不重开;v4（调研证据呈报版,审 @6bfa17f → WITHHOLD → 更正版已随批入库,修订记录 7 项在案）之全部整改内容**并入本件成一自包含送审件**;v4 复审回应信（survey/2026-07-18-gate-s1-v4-response.md）为逐项对账载体;本件不新增签署对象——签署对象 = 阶段正典 v2 + 整改批 @0817ba6 + 九项门禁重绿"
 stage_account: "四字段（阶段正典 v2,2026-07-18 dated supersession,owner 签署）:current_activity_stage = Stage-1A survey-ready gate;new_model_touches_since_gate_freeze = 0（起算 af96a89）;cumulative_model_touches = 非零（27 历史事件,见 §2.2）;legacy_experiments = INHERITED_PRIOR_EXPOSURE（正典 = wiki/2026-07-18-inherited-prior-exposure-union.md）"
-evidence_discipline: "逐 claim 五值证据模式（amendment-9 §2）;全量矩阵 = wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md;外部论文数字一律 SOURCE_REPORTED_TRACEABLE（可定位未复算,效力限该论文设置内);占据/空位陈述 = directional-only,创新点未锁定（owner 裁决,任何『成立/不成立』定性两侧皆为时过早）"
+evidence_discipline: "逐 claim 五值证据模式（amendment-9 §2）;矩阵 = v4 矩阵（wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md,scope=v4）+ **v5 增补矩阵**（wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md——本件全部新数字与量词逐 claim ID）;占据合取量词一律引用 identity taxonomy 机器重算（docs/checks/2026-07-18-sf-identity-taxonomy-test.json）;外部论文数字一律 SOURCE_REPORTED_TRACEABLE（可定位未复算,效力限该论文设置内);占据/空位陈述 = directional-only,创新点未锁定（owner 裁决,任何『成立/不成立』定性两侧皆为时过早）"
 ---
 
 # Research Proposal v5（整改后合并送审版）
@@ -13,7 +13,7 @@ evidence_discipline: "逐 claim 五值证据模式（amendment-9 §2）;全量�
 ## §0 导读
 
 **是**：v4 复审（WITHHOLD,P0-1..4/P1-1..3）整改完毕后的**自包含**送审件——治理基座（§2）、
-调研基础设施（§3）、预映射证据基座全量细节（§4,含七篇组件级普查与八项 system-control
+调研基础设施（§3）、预映射证据基座详呈（§4,含七篇组件级普查与八项 system-control
 13 轴普查）、Stage-1B 执行计划（§5）与 Stage-2A 冻结草案预告（§6）。**不是**：survey 结果
 报告（systematic mapping 查询 = 0,执行即 Stage-1B 起点）;不是创新点声明。**申请**：签署
 **Stage-1B survey execution**（双向合同:0 新 MAJOR/0 新 MINOR → 签;签署后仍需 owner 执行
@@ -44,21 +44,28 @@ regime）。Stage-1C 收敛为 3–5 候选问题卡（每卡:支持证据/反�
 执行）→ **2A 复现最近邻先行 + 方案探索（方向性原型/小样自此在此）** → 2B 方案验证 → 3
 发表。旧「1B=方向性原型」语义入墓碑;正典全文 = `wiki/Research-Methodology.md`。
 
-### §2.2 exposure union（历史不归零）
+### §2.2 exposure union v2（四仓覆盖;历史不归零;「全量」称谓已按 v5 复审 P0-1 撤回重立）
 
-项目历史模型触碰**全量登记**：27 事件 / ~11 个 distinct 模型 / 数据集并集 ~72 键（含
-2026-07-02..13 的 30B 真 best-of-N n=144、oracle-WER、七集 n=150 头空扫描、Wave-1 双底座
-224 格基线网格、KB 嵌入等）,逐事件带证据指针（Decision-Log 条目 + `_repro/` 结果件;抽查
-6/6 在案）;失败加载单列;W4 仓缺口如实登记。**全部历史数字 =
-PRE-METHODOLOGY_DIRECTIONAL_EVIDENCE**,是后续 held-out/预注册/验证集必须显式排除或分层的
-暴露面。正典 = `wiki/2026-07-18-inherited-prior-exposure-union.md`。
+**四仓考古完成**（union v2 dated supersession）：W1+umbrella = 27 事件（30B 真 best-of-N
+n=144、oracle-WER、七集 n=150 头空扫描、Wave-1 双底座 224 格网格、KB 嵌入等）;**W4 =
+≈70 事件**（二轮考古收敛,changelog 4172 行全通读;omni-embed-nemotron-3b 主力 + jina/
+Gemma-4-E4B/12B/Voxtral/Qwen3-ASR/API-verifier 等 **8 个实际推理研究模型**,CoVoST2
+val1758+locked test1695、HeySQuAD、URO、SLURP、MInDS 等 **14 数据集**;**选择决策污染面
+≥11 处**〔模型推理级选择运行 5 条 + 离线选择器决策〕= 最高优先隔离面;MInDS 手工 JSON
+事故→clean redo 全链与 R2 oracle-artifact 更正**并列入账**,评审点名七族全部映射零排除）;
+W2/W3 = 零实验骨架（直验）;仓外边界 =
+owner attestation（TEAM_ATTESTATION,不称机器证明）。计数按表行机器可数、粒度异构不作单一
+聚合;两仓 omni-embed 同源战役已去重注记。**全部历史数字 =
+PRE-METHODOLOGY_DIRECTIONAL_EVIDENCE**;union v2 落盘前冻结的 fresh/held-out 切分无效,自
+v2 起解除冻结。正典 = `wiki/2026-07-18-inherited-prior-exposure-union.md`（v2）。
 
 ### §2.3 证据模式与完成态语言纪律
 
 五值互斥枚举逐 claim 标注（MACHINE_RECOMPUTED_LOCAL / MACHINE_REPLAYED_STRUCTURE /
 SOURCE_REPORTED_TRACEABLE / REVIEWER_INFERENCE / TEAM_ATTESTATION）;**完成态语言必须与所引
 验证机制的能力包络相等**（敌意内审环新增强制镜头）;九项门禁 = MACHINE_REPLAYED_STRUCTURE
-级,**不覆盖外部论文数字**。全量矩阵 = `survey/2026-07-18-sf-v4-claim-evidence-matrix.md`。
+级,**不覆盖外部论文数字**。矩阵 = v4 矩阵 + **v5 增补矩阵**（`survey/2026-07-18-sf-v5-
+claim-evidence-matrix.md`,scope 各自 frontmatter 明载——量词级称谓仅当矩阵实际覆盖被引文件的完整 claim 集合时可用）。
 
 ### §2.4 评审轨（双向诚信记录）
 
@@ -78,7 +85,7 @@ SOURCE_REPORTED_TRACEABLE / REVIEWER_INFERENCE / TEAM_ATTESTATION）;**完成态
 | 退出机制 | E1 BFS 干涸 ∧ E2 引文闭包 K=2（饱和宣称前置 = work-level identifier resolution,债务 D-1）∧ E3 哨兵清零;逐轮饱和表 PRISMA-S 兼容 | amendment-7/8 |
 | 门禁 | fail-closed 全绿 + mutation harness 10/10 + validator 26/26;可回放性三级（bundle-only/local-data/network-dependent） | #4C 回应信 §5 九项 |
 
-## §4 预映射证据基座（调研结果全量细节;hypothesis-grade）
+## §4 预映射证据基座（调研结果详呈;hypothesis-grade）
 
 ### §4.1 组件级普查（七篇威胁集,全文 DFS,引文抽查 11/12）
 
@@ -103,24 +110,31 @@ SOURCE_REPORTED_TRACEABLE / REVIEWER_INFERENCE / TEAM_ATTESTATION）;**完成态
 
 | 工作 | 控制器形态 | 训练/标签轴 | 选择信号 | 停止/预算 | speech |
 |---|---|---|---|---|---|
-| ATLAS (2606.01667) | 自适应 agentic orchestrator（explore-or-stop） | 零训练、label-free | orchestrator 共识/直接合成 | **自适应停机**（88.9% 轨迹恰在收敛点停） | 无 |
+| ATLAS (2606.01667) | 自适应 agentic orchestrator（explore-or-stop） | 零训练、label-free | orchestrator 共识/直接合成 | **自适应停机**（88.9% 轨迹恰在收敛点停——**GPQA-Diamond 单基准,Fig 7a 有可定义正确多数收敛点的轨迹子集**,非跨基准总体比例） | 无 |
 | AutoTTS (2605.08083) | 离线发现的代码 controller | 零权重更新,**发现用 gold 搜索集** | 答案共识 Agg | controller 自适应 width×depth | 无 |
 | Agentic Coding (2604.16529) | **固定调度**(N=16,T=2) | 零训练、**选择显式不触 gold/测例** | LLM 比较投票（RTV 锦标赛,摘要为基质） | 固定预算 | 无 |
 | Team of Thoughts (2602.16485) | orchestrator 选择性激活工具 agent | 零梯度,**校准/自审用 gold** | 画像匹配+聚合 | 选择性激活 | 无 |
 | ToolGate (2606.03054) | 逐调用 execute/skip 门 | 核冻结,**控制器两变体皆 supervised-trained** | 无 K 池（二值门） | execute-skip 成本控制 | 无 |
 | DeepVerifier (ACL 1243) | rubric 验证器+迭代反馈 | 主实验零训练;开源变体 SFT;验证 agent **检索 new-info** | 序贯精修非 K 池 | 验证器接受即停（3–4 轮见顶后回落） | 无 |
-| Selective TTS (ACL 1724) | 分阶段剪枝流水线 | **全系统零训练**（八项中最接近 TF-Strict） | **label-free LLM-judge 对 K 池选优**（人对齐选 judger,τ=0.55） | **固定预算+剪枝重分配**（α=0.6 最优） | 无 |
+| Selective TTS (ACL 1724) | 分阶段剪枝流水线 | **全系统零训练**（9 路径中 2 条 strict-identity 之外最接近者——judger 选择用人类偏好 = dev-label 轴） | **llm_judge 分数对 K 池选优 = reward-guided**（taxonomy v1;其论文自框架 "guided by reward signals";人对齐选 judger τ=0.55） | **固定预算+剪枝重分配**（α=0.6 最优） | 无 |
 | DREAM (ACL 511) | plan/exec 双相位树搜索 | 核冻结,**PRM 微调**（trained comparator） | **trained-PRM 引导 K 池** | 双阈值早停+补采 | 无 |
 
-**系统级普查事实（对已检视集合;非文献全集结论;定性留待 mapping 与 owner）**：
-① 8 项**零项含 speech/audio**（与 §4.1 一致——已检视 system-control 文献中 speech/omni
-持续缺位）;② **零项做「training-free reward 信号引导冻结核 K 池选择」**——共识/自评/
-比较/画像是主流选择信号;唯一 reward-guided K 池搜索（DREAM）用的是微调 PRM;③「冻结核心
-≠ 全系统 TF-Strict」**五次实证**（ToolGate/DREAM 训练控制器或 PRM;DeepVerifier SFT 变体;
-AutoTTS/Team-of-Thoughts 离线 gold）;④ 五种互补停止/预算机制（自适应停机/双阈值/剪枝重
-分配/execute-skip/验证器早停）入 Stage-2A 组件候选池;⑤ 两条外部控制平面实证约束：「外部
-控制器优于模型自调节」（ToolGate:prompt 自调节把精度降到 60.0 且反增工具量）与「stage
-评估器与终 judger 失配则过剪退化」（Selective TTS α=0.8）。
+**系统级普查事实（对已检视集合;非文献全集结论;定性留待 mapping 与 owner;量词一律引用
+identity taxonomy v1 的机器重算合取表〔`docs/checks/2026-07-18-sf-identity-taxonomy-test.json`,
+9 条 method path——mixed-path 论文分行〕,散文不手数）**：
+① 含 speech/audio = **0/9 路径**〔机器重算〕——在已检视集合中未见 speech/omni 承载;
+② **占据合取表（v5 复审 P0-2 更正——原「零项 reward-guided K 池」句撤回）**：
+training-free(权重轴)∧reward-guided∧显式 K 池 = **3/9 路径已占**（Selective TTS〔llm_judge,
+其论文自框架即 reward signals〕/ Team of Thoughts / Agentic Coding）;再加 strict-identity
+bits（零 dev-label/零 new-info/api-text-only）后 = **1/9 路径**（Agentic Coding,编码域,
+llm_judge）;trained-PRM 引导 K 池 = 1/9（DREAM）。**该交集仍是待检验候选空位的坐标 =
+「strict-identity ∧ reward-guided ∧ K 池 ∧ speech/omni」——已检视集合中 0/9,待 Stage-1B
+mapping 检验**;③ 训练范围轴〔机器重算〕：all-system-training-free = 6/9 路径,同时满足
+strict-identity bits = 2/9——「冻结核心 ≠ 全系统 TF-Strict/data-free」由本表承载（取代
+散文计数）;④ 五种互补停止/预算机制（自适应停机/双阈值/剪枝重分配/execute-skip/验证器
+早停）入 Stage-2A 组件候选池;⑤ 两条外部控制平面实证约束：「外部控制器优于模型自调节」
+（ToolGate:prompt 自调节把精度降到 60.0 且反增工具量）与「stage 评估器与终 judger 失配则
+过剪退化」（Selective TTS α=0.8）。
 
 ### §4.3 负结果先验（双向三栏;异质案例共同提示,非独立复制;各条限于该论文设置内）
 
@@ -158,9 +172,11 @@ held-out 工程件;execution-early 队列（四篇 FULLY_TRAINING_FREE + MemoPil
 
 ## §5 Stage-1B 执行计划（签署后即行;全程禁研究模型;产出只含知识证据）
 
-0. **开局**：known-item 保证队列 **8 项**按 13 轴补全语料级编码;每轮 known-item
+0. **开局**：known-item 保证队列 = 已深读 8 项（13 轴补全语料级编码）+ **v5 复审 Round E
+   新登记 10 项**（附录 A 第二表;5 arXiv 附我方复现的冻结查询命中留痕、5 ACL 附 T1 路由
+   保证;先编码再入正常 BFS/DFS 排序,不冒充 query recall 成果）;每轮 known-item
    carry-forward ledger（旧 survey 近邻/当前命中/引文新增/零命中已知项四列账）。
-1. **BFS**：65 查询 + 50 路由全量执行,REC-0 落账,五计数机器导出,75-cap 溢出 splitter。
+1. **BFS**：65 查询 + 50 路由逐条执行,REC-0 落账,五计数机器导出,75-cap 溢出 splitter。
 2. **DFS**：四判据触发,全文精读（D2 八轴 + 13 轴,validator 机器强制）;队列排序
    （威胁度↓,core>element,时新性↓,梯队平局）,2025+ 优先。
 3. **退出**：E1∧E2∧E3 + 逐轮饱和表;E2 饱和前置 = 债务 D-1（work-level resolution）。
@@ -179,12 +195,51 @@ majority/BoN/Selective-TTS 类强组件基线）→ 复现合同（版本钉定/
 
 **声明（逐条标模式）**：①协议包本地结构/计数/哈希/matcher/validator 可九条命令零联网重放
 （MACHINE_REPLAYED_STRUCTURE——能力包络不含外部论文数字）;②外部研究数字 =
-SOURCE_REPORTED_TRACEABLE（矩阵逐条 locator）;③「discovery query = 0、联网活动全量入三本
+SOURCE_REPORTED_TRACEABLE（矩阵逐条 locator）;③「discovery query = 0、联网活动逐次入三本
 台账、未执行未登记的查询/模型调用」= TEAM_ATTESTATION（签字承诺,不称机器证明）;④阶段四
 字段见 frontmatter;⑤证据 directional-only 不升级;⑥创新点未锁定,本件零终局定性。
 
 **请求**：①按 v4 复审 §7 验收清单复核整改批（回应信逐项对账）;②签署 **Stage-1B survey
 execution**;③签署后 owner 执行批准,首条 systematic query 即 Stage-1B 起点。
 
-—— 研究执行方（W1）,2026-07-18。参考文献 = v4 更正版附录 A（18 条,作者/年份/稳定链接,
-本件不重复);更正走 dated correction。
+—— 研究执行方（W1）,2026-07-18。更正走 dated correction。
+
+## 附录 A：参考文献（本件自包含;arXiv 作者/日期取自仓内正典 raw Atom,ACL 作者取自 Anthology 官方页 citation 元数据）
+
+**已深读集合（§4.1 七篇 + §4.2 八项;18 条）**：
+
+| 引用 | 作者/年份 | 稳定链接 |
+|---|---|---|
+| Training-Free Multimodal Large Language Model Orchestration | Tianyu Xie et al., 2025 | https://arxiv.org/abs/2508.10016 |
+| ThinkOmni: Lifting Textual Reasoning to Omni-modal Scenarios via Guidance Decoding | Yiran Guan et al., 2026 | https://arxiv.org/abs/2602.23306 |
+| Limits and Gains of Test-Time Scaling in Vision-Language Reasoning | Mohammadjavad Ahmadpour et al., 2025 | https://arxiv.org/abs/2512.11109 |
+| Test-Time Scaling in Multimodal Foundation Models: A Comprehensive Survey (ACL Findings 2026) | Cong Wan et al., 2026 | https://arxiv.org/abs/2606.08231 · https://aclanthology.org/2026.findings-acl.383/ |
+| Test-Time Scaling for Small VLMs on Multilingual Visual MCQ | Spiros Baxevanakis et al., 2026 | https://arxiv.org/abs/2607.09438 |
+| On Test-Time Scaling for Vision-Language Models | Fawaz Sammani et al., 2026 | https://arxiv.org/abs/2606.28864 |
+| dMLLM-TTS: Self-Verified and Efficient Test-Time Scaling for Diffusion Multi-Modal LLMs | Yi Xin et al., 2025 | https://arxiv.org/abs/2512.19433 |
+| Deep Video Discovery (DVD) | Xiaoyi Zhang et al., 2025 | https://arxiv.org/abs/2505.18079 |
+| Seg-Agent: Test-Time Multimodal Reasoning | Chao Hao et al., 2026 | https://arxiv.org/abs/2605.12953 |
+| Memory-Augmented Vision-Language Agents（fresh L12 held-out） | Tommaso Galliena et al., 2026 | https://arxiv.org/abs/2603.24257 |
+| ToolGate: Token-Efficient Pre-Call Control for Tool-Augmented VL Agents | Anjie Liu et al., 2026 | https://arxiv.org/abs/2606.03054 |
+| ATLAS: Agentic Test-time Learning-to-Allocate Scaling | Peijia Qin et al., 2026 | https://arxiv.org/abs/2606.01667 |
+| LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling（AutoTTS） | Tong Zheng et al., 2026 | https://arxiv.org/abs/2605.08083 |
+| Scaling Test-Time Compute for Agentic Coding | Joongwon Kim et al., 2026 | https://arxiv.org/abs/2604.16529 |
+| Team of Thoughts: Efficient Test-time Scaling of Agentic Systems | Jeffrey T. H. Wong et al., 2026 | https://arxiv.org/abs/2602.16485 |
+| Inference-Time Scaling of Verification（DeepVerifier, ACL Findings 2026） | Yuxuan Wan et al., 2026 | https://aclanthology.org/2026.findings-acl.1243/ |
+| Scaling Unverifiable Rewards: A Case Study on Visual Insights（ACL Findings 2026） | Shuyu Gan et al., 2026 | https://aclanthology.org/2026.findings-acl.1724/ |
+| A Reward-Guided Dual-Phase Framework for Adaptive Inference-Time Reasoning（DREAM, ACL Findings 2026） | Yingqian Cui et al., 2026 | https://aclanthology.org/2026.findings-acl.511/ |
+
+**Stage-1B 首批 reviewer-known 队列（v5 复审 Round E 供给;登记待读,尚未深读;10 条）**：
+
+| 引用 | 作者/年份 | 稳定链接 | 发现保证 |
+|---|---|---|---|
+| Agentic Test-Time Scaling for WebAgents（CATTS） | Nicholas Lee et al., 2026 | https://arxiv.org/abs/2602.12276 | 冻结查询 SF-L2-Q1（我方复现） |
+| Benchmark Test-Time Scaling of General LLM Agents | Xiaochuan Li et al., 2026 | https://arxiv.org/abs/2602.18998 | SF-L2-Q1 + SF-L12-Q3 |
+| PiCSAR: Probabilistic Confidence Selection And Ranking | Joshua Ong Jun Leang et al., 2025 | https://arxiv.org/abs/2508.21787 | SF-L5-Q1 |
+| Sampling for Quality: Training-Free Reward-Guided SMC Decoding | Jelena Markovic-Voronov et al., 2026 | https://arxiv.org/abs/2604.16453 | SF-L2-Q4 + SF-L5-Q1 |
+| Reward-Guided Decoding for Pre-trained Model Evaluation（EBD） | Shaobo Wang et al., 2026 | https://arxiv.org/abs/2605.28020 | SF-L2-Q4 + SF-L5-Q1 |
+| BrowseConf: Confidence-Guided Test-Time Scaling for Web Agents | Litu Ou et al., 2026 | https://aclanthology.org/2026.findings-acl.21/ | T1-ACL-2026 路由 |
+| Agentic Rubrics as Contextual Verifiers for SWE Agents | Mohit Raghavendra et al., 2026 | https://aclanthology.org/2026.acl-long.697/ | T1-ACL-2026 路由 |
+| AgentV-RL: Scaling Reward Modeling with Agentic Verifier | Jiazheng Zhang et al., 2026 | https://aclanthology.org/2026.findings-acl.1156/ | T1-ACL-2026 路由 |
+| Timely Machine: Awareness of Time Makes Test-Time Scaling Agentic | Yichuan Ma et al., 2026 | https://aclanthology.org/2026.acl-long.211/ | T1-ACL-2026 路由 |
+| FS-Researcher: TTS for Long-Horizon Research with File-System Memory | Chiwei Zhu et al., 2026 | https://aclanthology.org/2026.acl-long.288/ | T1-ACL-2026 路由 |

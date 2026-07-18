@@ -1,0 +1,74 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-TEST-2026-07-18-01",
+ "inputs": {
+  "taxonomy": "wiki/survey/2026-07-18-sf-identity-taxonomy-v1.json",
+  "coding": "wiki/survey/2026-07-18-sf-known-item-coding-v2.json"
+ },
+ "checks": [
+  {
+   "id": "V1",
+   "check": "字段齐备/枚举合法/method_path 形状",
+   "result": "PASS",
+   "detail": "bad=[]"
+  },
+  {
+   "id": "V1b",
+   "check": "method_path_id 全唯一且 9 行（8 works,DeepVerifier 双路径）",
+   "result": "PASS",
+   "detail": "n=9"
+  },
+  {
+   "id": "V3",
+   "check": "四反例单测（Selective TTS/AutoTTS/Team of Thoughts/DeepVerifier 主路径）",
+   "result": "PASS",
+   "detail": "failures=[]"
+  },
+  {
+   "id": "V4",
+   "check": "负控:把 Selective TTS 改名出 reward 集合必须被单测抓住",
+   "result": "PASS",
+   "detail": "detected"
+  },
+  {
+   "id": "V5",
+   "check": "occupancy 合取计数机器重算并持久化（散文量词必须引用本输出）",
+   "result": "PASS",
+   "detail": "strict∧reward∧pool=['2604.16529#rtv-pdr']"
+  }
+ ],
+ "occupancy": {
+  "n_method_paths": 9,
+  "all_system_training_free": [
+   "2026.findings-acl.1243#closed-prompt-only",
+   "2026.findings-acl.1724#pipeline",
+   "2602.16485#calibrated-orchestration",
+   "2604.16529#rtv-pdr",
+   "2605.08083#discovered-controller",
+   "2606.01667#agentic-orchestration"
+  ],
+  "reward_guided": [
+   "2026.findings-acl.1243#closed-prompt-only",
+   "2026.findings-acl.1243#open-sft-variant",
+   "2026.findings-acl.1724#pipeline",
+   "2026.findings-acl.511#prm-guided-search",
+   "2602.16485#calibrated-orchestration",
+   "2604.16529#rtv-pdr",
+   "2606.03054#trained-gate"
+  ],
+  "training_free_AND_reward_guided_AND_explicit_pool": [
+   "2026.findings-acl.1724#pipeline",
+   "2602.16485#calibrated-orchestration",
+   "2604.16529#rtv-pdr"
+  ],
+  "project_strict_identity_bits": [
+   "2604.16529#rtv-pdr",
+   "2606.01667#agentic-orchestration"
+  ],
+  "strict_AND_reward_guided_AND_pool": [
+   "2604.16529#rtv-pdr"
+  ],
+  "includes_speech_audio": []
+ },
+ "summary": "5/5 PASS",
+ "verdict": "PASS"
+}

@@ -83,8 +83,16 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   保证入口;首份我方零事实异议评审件,其撤回 P0-R9 0-hit 误判）→ owner 五裁决（续65:阶段
   正典 v2/exposure union/known-item 保证队列/13 轴 schema/2A 复现先行草案）→ 整改批当日
   交付**（v4 更正版+claim-evidence 矩阵+exposure union 27 事件+known-item 13 轴 DFS×8
-  〔全文双份入库〕+amendment-9）,**当前动作 = v4 回应信已落盘（`survey/2026-07-18-gate-s1-
-  v4-response.md`）,待评审复核签署 Stage-1B survey execution（双向合同维持）**;执行前置
+  〔全文双份入库〕+amendment-9）→ **v5 合并送审版 → v5 复审 WITHHOLD（3 Gate MAJOR 全为语义正确性:「全量」vs W4 缺口/
+  Selective TTS 分类矛盾/矩阵 scope;明确拒绝以量退稿,Round E 5 arXiv 全被冻结查询接住
+  ——协议第三轮外部压测零覆盖 MAJOR;QRP 成立,同型第六轮=无限定量词）→ owner 五裁决
+  （续66:W4 四仓考古/taxonomy 十字段/矩阵与引用/首批队列/重申 1B 禁模型）→ 整改批当日
+  交付**（union v2〔W4 ≈70 事件二轮考古,8 推理模型/14 数据集,选择污染面 ≥11 处,MInDS
+  事故链并列入账,claim_ledger 悬空主动披露〕/identity taxonomy v1 冻结〔四反例单测+占据
+  合取机器重算:speech-audio 0/9、TF∧reward∧pool 3/9、strict∧reward∧pool 1/9,原「零项」
+  句撤回〕/量词扫描器〔第七道防线〕/v5 增补矩阵+自包含 28 条参考文献）,**当前动作 = v5
+  回应信已落盘（`survey/2026-07-18-gate-s1-v5-response.md`）,待评审复核签署 Stage-1B
+  survey execution（双向合同维持）**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。
