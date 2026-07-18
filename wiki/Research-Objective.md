@@ -20,11 +20,12 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
 
 ## 2. 阶段与门（现在在哪、下一步是什么）
 
-- **Stage-1A 收官准备末段（survey-ready gate,A3-11——「收尾/尾声」称谓废止）**：问题框架
-  接近稳定;**系统性 discovery/mapping 查询尚未执行**;定向 ID dereference/raw provenance/
-  全文准备/校准性引文试验已执行（P0-R9 MINOR-2 正名:不再合并全称否定）;科学收官以可回放
-  survey 完成+3–5 候选问题形成起算;Stage-1B 模型/数据实验未放行（流程定义见
-  [[Research-Methodology]]）。
+- **Stage-1A survey-ready gate（阶段正典 v2,续65 dated supersession——1B=mapping 执行
+  〔禁研究模型含 smoke〕,方向性原型→Stage-2A 复现先行）**：问题框架接近稳定;**系统性
+  discovery/mapping 查询尚未执行**（执行即 1B 起点）;定向 ID dereference/raw provenance/
+  全文准备/校准性引文试验已执行;四字段 exposure 记账强制（cumulative_model_touches 非零,
+  union = [[2026-07-18-inherited-prior-exposure-union]]）;1C 以 3–5 候选问题卡收官（流程
+  定义见 [[Research-Methodology]]）。
 - S0 已签（续48）→ proposal v1 同日双外审（续50：严评 RETURN / 重校准 ACCEPTABLE_TO_PROCEED,
   存活四项已修）→ v2 送审版（续51）→ **v2 外审 APPROVE_GATE_S1_PROTOCOL_DRAFTING_WITH_
   REQUIRED_AMENDMENTS**（续52,修正案 A–F 全采）→ 协议 v1+签署包六件套环收敛（续53）→
@@ -76,11 +77,17 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   MAJOR 采纳,思想实验 3/3〕/fresh L12 held-out 预注册 e965b71→2603.24257 实中 SF-L12-Q3
   〔ToolGate 全零命中→drift 队列 control/gating 1/3〕/C1 措辞降级+债务 D-1/17 条
   RELOCATION_SUPERSESSION+机器统计/DFS 七篇深读〔无定位定性〕/amendment-8 债务表+可回放
-  矩阵）,**当前动作 = 回应信+P0-R10 申请已落盘（`survey/2026-07-18-gate-s1-correction-4c-
-  response.md`）,待评审窄幅复核（双向合同维持）**;执行前置三条件（签署+owner 批准+复跑）,
-  签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105 查询维持零执行）→ Stage-1A close
-  与 1B 放行 = 两个签字;survey 退出机制 E1–E3 = amendment-7（执行期合同,E2 饱和前置=债务
-  D-1 work-level resolution）。
+  矩阵）,P0-R10 申请落盘 → **proposal v4（调研证据呈报版,敌意内审 ZERO_MAJOR 后发布 @6bfa17f）→
+  v4 博导复审 WITHHOLD（P0-1 阶段本体+exposure 口径/P0-2 复现性声明超能力包络〔同型第五轮,
+  内审环亦漏——已增「能力包络」镜头〕/P0-3 selector 四轴替代 system 对象/P0-4 ToolGate 无
+  保证入口;首份我方零事实异议评审件,其撤回 P0-R9 0-hit 误判）→ owner 五裁决（续65:阶段
+  正典 v2/exposure union/known-item 保证队列/13 轴 schema/2A 复现先行草案）→ 整改批当日
+  交付**（v4 更正版+claim-evidence 矩阵+exposure union 27 事件+known-item 13 轴 DFS×8
+  〔全文双份入库〕+amendment-9）,**当前动作 = v4 回应信已落盘（`survey/2026-07-18-gate-s1-
+  v4-response.md`）,待评审复核签署 Stage-1B survey execution（双向合同维持）**;执行前置
+  三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
+  查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
+  amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。
 - **1B 探针序未对齐待 owner**：续40 已签 P-α/β/γ/δ vs v2 评审代拟 B0–B5——P-α（头空）仍是最
   便宜首验：无头空则任何 controller 无物可兑现。C1/C4 诚信普查 = CENSUS_COMPLETE（续40 批次A，
   owner 于 1B-0 签批时终验；config-selection 轨迹 = 永久缺口，1B 起由尝试登记前瞻关闭）。

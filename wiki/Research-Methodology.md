@@ -3,32 +3,37 @@
 （2026-07-15 自 CLAUDE.md 迁出成篇——加载面瘦身「动作 C」；本文为正典，修订走 dated
 supersession。CLAUDE.md 只留指针与一行摘要。）
 
-## 研究流程三阶段（Stage-1 / 2 / 3）
+## 研究流程阶段（Stage-1A/1B/1C → 2A/2B → 3;dated supersession 2026-07-18,owner 裁决①）
 
-每条研究线依次经过三个阶段，每份交付物注明所处阶段。**当前 = Stage-1A 收官准备末段
-（survey-ready gate，amendment-3 A3-11——「收尾/尾声」称谓废止：外部证据工作〔检索/全文
-抽取/引文链/饱和/候选问题〕尚未开始，科学收官以可回放 survey 完成起算）。**
+**分界依据 = 活动目的与证据用途**，不是「是否启动过 Python」或「样本是否很少」。每份交付物
+注明所处阶段。**当前 = Stage-1A survey-ready gate**（问题与 survey 设计;系统性 discovery/
+mapping 查询尚未执行,定向 ID dereference/raw provenance/全文准备/校准试验已执行;Gate S1
+签署 + owner 批准后第一条 systematic query 即进入 Stage-1B）。
 
-1. **Stage-1 — 问题定义（问题定义）。** 目标：钉住到底解决哪一个具体研究问题。核心工作是
-   **论证**——充分调研存在什么问题、他人用什么方法——绝不依赖实验下结论。方法探索必须扫
-   更广的 AI 文献（文本 LLM、视觉 LLM 的方法论与语音同权重要）。自研运行只作小样快验：
-   便宜、单次触碰、标 `directional-only`；小样无显著性、什么也定不了。Stage-1 以 owner
-   讨论收官选题——绝不自动滚入 Stage-2。
-   - **Stage-1A** = 问题界定：广泛 survey、候选研究问题、原型空间纸面设计、新颖性/可行性/
-     诚信风险审查；既有数字只作背景方向材料。
-   - **Stage-1B** = 方向性原型探索：廉价小样、单次触碰、须 owner 显式放行、全部尝试与失败
-     登记、不做显著性结论。**即使只跑一个 item、只为 smoke，也算一次实验和一次 exposure。**
-   - **Stage-1C** = 收官选题：owner 基于 survey+原型决策包选唯一具体问题（kill/pivot/
-     proceed），绝不自动滚入 Stage-2。
-   - 排序（owner 续40 裁决）= **1A→1B→1C**：工单关闭 + 1B 探针（协议 owner 签批后开机）→
-     申请 STAGE1C_DECISION_READY → owner 以调研+探针双证据收官。
-2. **Stage-2 — 方案验证（方案验证）。** 大样本固化设计与假设：新开 Research-Proposal-Template
-   实例、预注册冻结判据、paired-bootstrap CI、完整对照、对抗评审。
-3. **Stage-3 — 论文发表。** 完整实验支撑、独立复现、敌意评审至收敛。
+| 阶段 | 使命 | 允许 | 禁止（下一阶段才允许） |
+|---|---|---|---|
+| **Stage-1A** | 问题与 survey 设计 | 问题树、纳排标准、检索式、种子/哨兵、编码 schema、脚本静态与变异测试 | systematic mapping;任何研究模型调用 |
+| **Stage-1B** | systematic survey/mapping **执行** | 检索、去重、题录筛选、全文编码、引文闭包、饱和分析、证据图谱、known-item carry-forward ledger | **smoke、任务指标、模型/方法比较、headroom/accuracy/WER——全程不得运行研究模型**（owner 签署 2026-07-18） |
+| **Stage-1C** | 证据综合与选题 | 3–5 候选问题卡,owner 选唯一问题;冻结复现清单与方案探索边界（Stage-2A 复现合同在此冻结、不执行） | 用临时实验为某候选「拉票」 |
+| **Stage-2A** | 方案探索与技术选型 | **先复现最接近且最强的公开 prior**;复现成立后才做自研方向性原型（廉价小样、owner 显式放行、全部尝试与失败登记、directional-only;**即使只跑一个 item、只为 smoke,也算一次实验和一次 exposure**） | 把方向性结果写成确证;跳过 prior 复现直接宣称超过 SOTA |
+| **Stage-2B** | 方案验证 | 冻结假设、对照、判据后正式实验与统计推断（Research-Proposal-Template 实例、预注册、paired-bootstrap CI、对抗评审） | 事后换主指标、选择性报告 |
+| **Stage-3** | 发表级证据 | 扩展、独立复现、论文级审计、敌意评审至收敛 | 用 Stage-2A 小样代替发表证据 |
 
-**证据等级纪律**：证据永远保持其产生阶段的等级——Stage-1 数字在 Stage-2 重建立之前一直是
-hypothesis-grade。记录 append-only——重定级走带日期的 reflection 文档，绝不改写。读 2026-07
-之前的记录时套用此透镜。
+**exposure 记账（四字段,与阶段声明同报,禁止无范围的「0 次」）**：
+`current_activity_stage` / `new_model_touches_since_gate_freeze`（附起算 commit）/
+`cumulative_model_touches`（项目累计,非零即写非零）/ `legacy_experiments =
+INHERITED_PRIOR_EXPOSURE`（历史实验不删除、不降格、不假装未发生;是后续复现、数据切分与
+假设冻结必须排除或分层处理的 exposure union,正典 =
+[[2026-07-18-inherited-prior-exposure-union]]）。
+
+**墓碑（供审计,勿再引用为现行语义）**：2026-07-18 前的「Stage-1B = 方向性原型探索」语义与
+续40 排序（1A→1B 探针→1C 双证据收官）由本节 dated supersession 取代——方向性原型自此属
+**Stage-2A**;07-16 裁决「survey 执行仍是 1A」的**目的**（禁止误称提前进阶段）由新表继承并
+加强（连 smoke 都推至 2A）。触发 = v4 博导复审 §1.1 + owner 裁决①（Decision-Log 续65）。
+
+**证据等级纪律**：证据永远保持其产生阶段的等级——Stage-1/2A 数字在 Stage-2B 重建立之前一直
+是 hypothesis-grade。记录 append-only——重定级走带日期的 reflection 文档，绝不改写。读
+2026-07 之前的记录时套用此透镜（彼时阶段名按墓碑映射）。
 
 ## 资源姿态三阶段（owner 2026-07-15）——与「研究流程三阶段」同名异构，勿混
 

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Lmql47CeiCycKBxn1H0PLS5MdFE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2604.16529&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-18T08:05:56Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2604.16529" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2604.16529v1</id>
+    <title>Scaling Test-Time Compute for Agentic Coding</title>
+    <updated>2026-04-16T17:39:33Z</updated>
+    <link href="https://arxiv.org/abs/2604.16529v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.16529v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Test-time scaling has become a powerful way to improve large language models. However, existing methods are best suited to short, bounded outputs that can be directly compared, ranked or refined. Long-horizon coding agents violate this premise: each attempt produces an extended trajectory of actions, observations, errors, and partial progress taken by the agent. In this setting, the main challenge is no longer generating more attempts, but representing prior experience in a form that can be effectively selected from and reused. We propose a test-time scaling framework for agentic coding based on compact representations of rollout trajectories. Our framework converts each rollout into a structured summary that preserves its salient hypotheses, progress, and failure modes while discarding low-signal trace details. This representation enables two complementary forms of inference-time scaling. For parallel scaling, we introduce Recursive Tournament Voting (RTV), which recursively narrows a population of rollout summaries through small-group comparisons. For sequential scaling, we adapt Parallel-Distill-Refine (PDR) to the agentic setting by conditioning new rollouts on summaries distilled from prior attempts. Our method consistently improves the performance of frontier coding agents across SWE-Bench Verified and Terminal-Bench v2.0. For example, by using our method Claude-4.5-Opus improves from 70.9% to 77.6% on SWE-Bench Verified (mini-SWE-agent) and 46.9% to 59.1% on Terminal-Bench v2.0 (Terminus 1). Our results suggest that test-time scaling for long-horizon agents is fundamentally a problem of representation, selection, and reuse.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-16T17:39:33Z</published>
+    <arxiv:comment>70 pages, 26 figures, 12 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Joongwon Kim</name>
+    </author>
+    <author>
+      <name>Wannan Yang</name>
+    </author>
+    <author>
+      <name>Kelvin Niu</name>
+    </author>
+    <author>
+      <name>Hongming Zhang</name>
+    </author>
+    <author>
+      <name>Yun Zhu</name>
+    </author>
+    <author>
+      <name>Eryk Helenowski</name>
+    </author>
+    <author>
+      <name>Ruan Silva</name>
+    </author>
+    <author>
+      <name>Zhengxing Chen</name>
+    </author>
+    <author>
+      <name>Srinivasan Iyer</name>
+    </author>
+    <author>
+      <name>Manzil Zaheer</name>
+    </author>
+    <author>
+      <name>Daniel Fried</name>
+    </author>
+    <author>
+      <name>Hannaneh Hajishirzi</name>
+    </author>
+    <author>
+      <name>Sanjeev Arora</name>
+    </author>
+    <author>
+      <name>Gabriel Synnaeve</name>
+    </author>
+    <author>
+      <name>Ruslan Salakhutdinov</name>
+    </author>
+    <author>
+      <name>Anirudh Goyal</name>
+    </author>
+  </entry>
+</feed>

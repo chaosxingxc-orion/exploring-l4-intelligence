@@ -128,9 +128,12 @@ Full asset list + sources: `docs/data.md`. Regenerate the lock with `scripts/dat
 
 ## 研究方法论（指针）
 
-**研究流程三阶段** Stage-1（1A 问题界定 / 1B 方向性原型 / 1C 收官选题）→ Stage-2 方案验证 →
-Stage-3 发表，**现在 = Stage-1A 收官准备末段（survey-ready gate，A3-11——「收尾」称谓废止）**；
-证据永持产生阶段的等级。**资源姿态三阶段（owner
+**研究流程阶段（2026-07-18 dated supersession,owner 裁决①）** Stage-1（1A 问题与 survey
+设计 / **1B systematic mapping 执行〔全程禁研究模型含 smoke〕** / 1C 证据综合与选题）→
+Stage-2（**2A 复现先行+方案探索〔方向性原型自此在这里〕** / 2B 方案验证）→ Stage-3 发表，
+**现在 = Stage-1A survey-ready gate**；阶段声明必须带四字段 exposure 记账（禁无范围「0 次」，
+历史实验 = INHERITED_PRIOR_EXPOSURE）；证据永持产生阶段的等级。旧「1B=方向性原型」语义已入
+墓碑（Research-Methodology §墓碑）。**资源姿态三阶段（owner
 2026-07-15）**：全力摸高 → 持续整合 → 成本压降——与研究流程三阶段**同名异构勿混**；前期预算
 不限定，等预算类判据 = 第③阶段工具（`PHASE-3_TOOL`）。全文：`wiki/Research-Methodology.md`。
 

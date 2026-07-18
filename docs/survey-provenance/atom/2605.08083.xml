@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/1FxFwRZdoQr6a3T9tsQRevKOWGc</id>
+  <title>arXiv Query: search_query=&amp;id_list=2605.08083&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-18T08:05:51Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2605.08083" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.08083v2</id>
+    <title>LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling</title>
+    <updated>2026-05-12T03:46:05Z</updated>
+    <link href="https://arxiv.org/abs/2605.08083v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.08083v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Test-time scaling (TTS) has become an effective approach for improving large language model performance by allocating additional computation during inference. However, existing TTS strategies are largely hand-crafted: researchers manually design reasoning patterns and tune heuristics by intuition, leaving much of the computation-allocation space unexplored. We propose an environment-driven framework, AutoTTS, that changes what researchers design: from individual TTS heuristics to environments where TTS strategies can be discovered automatically. The key to AutoTTS lies in environment construction: the discovery environment must make the control space tractable and provide cheap, frequent feedback for TTS search. As a concrete instantiation, we formulate width--depth TTS as controller synthesis over pre-collected reasoning trajectories and probe signals, where controllers decide when to branch, continue, probe, prune, or stop and can be evaluated cheaply without repeated LLM calls. We further introduce beta parameterization to make the search tractable and fine-grained execution trace feedback to improve discovery efficiency by helping the agent diagnose why a TTS program fails. Experiments on mathematical reasoning benchmarks show that the discovered strategies improve the overall accuracy--cost tradeoff over strong manually designed baselines. The discovered strategies generalize to held-out benchmarks and model scales, while the entire discovery costs only $39.9 and 160 minutes. Our data, and code will be open-source at https://github.com/zhengkid/AutoTTS.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-08T17:59:40Z</published>
+    <arxiv:comment>25 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tong Zheng</name>
+    </author>
+    <author>
+      <name>Haolin Liu</name>
+    </author>
+    <author>
+      <name>Chengsong Huang</name>
+    </author>
+    <author>
+      <name>Huiwen Bao</name>
+    </author>
+    <author>
+      <name>Sheng Zhang</name>
+    </author>
+    <author>
+      <name>Rui Liu</name>
+    </author>
+    <author>
+      <name>Runpeng Dai</name>
+    </author>
+    <author>
+      <name>Ruibo Chen</name>
+    </author>
+    <author>
+      <name>Chenxi Liu</name>
+    </author>
+    <author>
+      <name>Tianyi Xiong</name>
+    </author>
+    <author>
+      <name>Xidong Wu</name>
+    </author>
+    <author>
+      <name>Hongming Zhang</name>
+    </author>
+    <author>
+      <name>Heng Huang</name>
+    </author>
+  </entry>
+</feed>

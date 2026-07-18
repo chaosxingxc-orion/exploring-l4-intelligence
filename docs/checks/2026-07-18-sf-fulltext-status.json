@@ -2,10 +2,10 @@
  "artifact_id": "SF-FULLTEXT-STATUS-2026-07-18-01",
  "generator": "scripts/survey/sf_fulltext_ledger_status.py",
  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
- "ledger_rows": 115,
- "distinct_ids": 33,
- "expected_renditions": 66,
- "persisted_renditions": 64,
+ "ledger_rows": 129,
+ "distinct_ids": 38,
+ "expected_renditions": 76,
+ "persisted_renditions": 74,
  "unresolved_renditions": [
   {
    "arxiv_id": "2309.05950",
