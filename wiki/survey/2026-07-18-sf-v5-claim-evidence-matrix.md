@@ -8,9 +8,9 @@ discipline: "五值证据模式(amendment-9 §2);SOURCE_REPORTED_TRACEABLE 恒�
 
 # v5 增补 claim-evidence 矩阵
 
-## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v4** 重算,输入 = coding-**v5**.json 11 条 method path〔sidecar 单写链生成〕;〔dated correction 第四版 2026-07-19:v7 复审 Gate MAJOR-1/-2 整改——rq 派生加因果 edge 要求,数值经重算不变但全部 edge 背书;新增 V7-Q08;第三版及旧行随 git 历史留档〕〔第三版注:v2 版行经 v6 复审两 Gate MAJOR 更正——PDR 源文错码致 3/11 撤回、身份三分派生取代单一位〕）
+## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v5** 重算,输入 = coding-**v6**.json 11 条 method path〔schema-v2 sidecar 单写链生成,signals[] 实例〕;〔dated correction 第五版 2026-07-19:v8 复审三 Gate MAJOR 整改——rq 派生存在量词化到同信号+同用途粒度,承重字段证据完备合同+裁决行哈希,双平台重放;数值经重算不变;第四版及旧行随 git 历史留档〕〔第四版注:v7 复审整改加因果 edge 要求;第三版注:PDR 源文错码致 3/11 撤回〕）
 
-| claim ID | 陈述 | 复算入口（`sf_identity_taxonomy_v4_test.py` 持久化输出;全部双分母+双政策敏感列） | 独立复验 |
+| claim ID | 陈述 | 复算入口（`sf_identity_taxonomy_v5_test.py` 持久化输出;全部双分母+双政策敏感列;Windows/WSL2 双端同值） | 独立复验 |
 |---|---|---|---|
 | V6-Q01 | is_s0_core_compatible = 0/11;is_rq_sys_control_compatible = 5/11 路径（4/8 works）;is_project_method_candidate = 0/11（重立后的待检验空位坐标） | occupancy.policy_A → 对应键 | 是 |
 | V6-Q02 | strict∧reward∧K 池（机制分层非身份）= 轨迹池 **2/11 路径（unique work 1/8**,#rtv 与 #pipeline 同一篇;PDR 按 TeX 更正后原 3/11 撤回〕 | strict_AND_reward_AND_pool_BY_selection_object（双分母） | 是（eprint sha 一手核验） |
