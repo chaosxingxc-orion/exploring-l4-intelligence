@@ -1,0 +1,113 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-V5-2026-07-19-01",
+ "title": "identity taxonomy v5 — signal-instance identity + load-bearing evidence contract + cross-platform replay (v8 doctoral review Gate MAJOR-1/-2/-3 remediation)",
+ "date": "2026-07-19",
+ "supersession": "v5 supersedes v4 (dated supersession; v4 file retained). Root causes fixed: (1) MAJOR-1 — the flat per-row signal fields conflated multiple signals, letting a reward property and a control edge from DIFFERENT signals be conjoined into a fabricated causal chain; v5 makes signal INSTANCES first-class (signals[].signal_id), every control edge references a signal_id, and every derivation is an existential over the SAME signal instance; (2) MAJOR-2 — reconciliation checked consistency of whatever evidence existed, never completeness; v5 adds a required-evidence contract per derived claim (positive quote / structured metadata / absence adjudication), tri-state unknown that never defaults to False inside strict conjunctions, adjudication row-hash binding (any post-adjudication row change invalidates the adjudication), true locator resolution (PDF page range + anchors via pypdf), and release binding of headline numbers; (3) MAJOR-3 — canonical asset-path resolver so the WSL2 canonical environment replays identically to Windows.",
+ "enums": {
+  "core_topology": ["single_core", "single_core_multi_call", "multi_model_federation", "core_plus_external_model"],
+  "core_native_modality": ["text_only", "vision_native", "audio_native", "omni_native", "asr_mediated", "unknown"],
+  "internal_visibility": ["api_only", "logits_logprob", "hidden_state", "gradient", "unknown"],
+  "core_io_modality": ["text_in_text_out", "multimodal_in_text_out", "multimodal_in_out"],
+  "signal_form": ["scalar_score", "pairwise_comparison", "binary_gate", "text_critique", "confidence", "consensus_vote", "verifiable_outcome", "none"],
+  "signal_source": ["rule", "llm_judge", "trained_classifier", "learned_rm_prm", "environment", "self_confidence", "consensus", "human_aligned_proxy", "state_observation", "none"],
+  "signal_lifecycle": ["offline_calibration", "inference_pre_context", "online_step", "terminal", "none"],
+  "control_horizon": ["terminal", "sequential", "offline_meta"],
+  "selection_object": ["candidate_output", "trajectory", "action", "tool_agent", "plan", "none"],
+  "terminal_operator": ["select_one", "prune", "route", "vote", "merge", "synthesize", "accept_reject", "none"],
+  "selection_policy": ["none", "random_sample", "scored_select", "tournament_select", "consensus_vote", "profile_route", "synthesize_all"],
+  "candidate_pool_exists": [true, false, "unknown"],
+  "strict_bits_tristate": [true, false, "unknown"],
+  "adjudication_status": ["adjudicated_agree", "conflict_queue", "pending_independent_adjudication"],
+  "evidence_kind": ["canon", "tex", "pdf_page", "absence"]
+ },
+ "signal_schema": {
+  "fields": {
+   "signal_id": "stable within the method path; every control edge references exactly one",
+   "form": "signal_form enum", "source": "signal_source enum", "lifecycle": "signal_lifecycle enum",
+   "uses": "subset of signal_use vocabulary",
+   "evidence": "REQUIRED locator (canon/tex quote or structural) grounding form+lifecycle+uses"
+  },
+  "note": "a non-reward control signal (e.g. AutoTTS code-controller state observations) is coded form=none/source=state_observation — the phase conflation the batch-A adjudicator observed is now expressible instead of averaged away"
+ },
+ "control_edge_schema": {
+  "fields": {
+   "signal_id": "REQUIRED — the signal instance exercising control",
+   "signal_use": "must be a member of the referenced signal's uses",
+   "decision_right": "must be a member of the row's decision_rights",
+   "signal_lifecycle": "OPTIONAL; if present MUST equal the referenced signal's lifecycle (mismatch = validator failure, edge invalid)",
+   "source_locator": "REQUIRED", "edge_semantics": "REQUIRED one-sentence causal statement"
+  },
+  "validity": "edge VALID iff referenced signal exists AND signal_use ∈ signal.uses AND decision_right ∈ row.decision_rights AND (signal_use -> decision_right) ∈ allowed_relations AND locator+semantics non-empty AND (edge lifecycle absent or == signal lifecycle); LIVE iff signal.lifecycle==online_step OR (signal.lifecycle==terminal AND decision_right ∈ {synthesize, stop})"
+ },
+ "signal_use": ["select", "prune", "route", "revise", "retry", "branch", "tool_call", "memory_write", "state_update", "supply", "stop_budget", "execute_skip_gate", "synthesize_input", "train_controller", "offline_diagnostic"],
+ "decision_rights": ["route", "retry", "branch", "tool_call", "memory_write", "supply", "stop", "synthesize", "execute_skip"],
+ "reward_forms": ["scalar_score", "pairwise_comparison", "verifiable_outcome"],
+ "allowed_relations": {
+  "select": ["branch", "supply"],
+  "prune": ["branch", "stop", "supply"],
+  "revise": ["retry", "branch"],
+  "retry": ["retry"],
+  "stop_budget": ["stop", "tool_call", "branch"],
+  "supply": ["supply", "branch"],
+  "route": ["route", "tool_call"],
+  "tool_call": ["tool_call"],
+  "memory_write": ["memory_write"],
+  "execute_skip_gate": ["execute_skip"],
+  "synthesize_input": ["synthesize"]
+ },
+ "allowed_relations_provenance": "unchanged from v4 (seed = v7-review §4.3 + four anchored evidence-driven additions, iso-adj-A adjudicated LEGIT with the stop_budget->tool_call non-generalization caveat); extension discipline unchanged (new relation types need a dated supersession + anchor row + adjudication)",
+ "derived_v5": {
+  "signal_is_reward": "s.lifecycle ∈ {online_step, terminal} AND s.form ∈ reward_forms AND s.uses ∩ reward_uses ≠ ∅",
+  "is_reward_guided": "∃ signal s: signal_is_reward(s)",
+  "data_access_strict_bits": "all seven access bits are EXACTLY false AND internal_visibility==api_only; any 'unknown' value fails the conjunction WITHOUT being recorded as false (tri-state, v8-review §5.5)",
+  "is_s0_core_compatible": "strict AND core_topology ∈ topology_policy AND core_native_modality ∈ {audio_native, omni_native}",
+  "is_rq_sys_control_compatible": "control_horizon==sequential AND ∃ signal s AND ∃ VALID LIVE edge e: signal_is_reward(s) AND e.signal_id == s.signal_id AND e.signal_use ∈ reward_uses — the reward property and the control edge must come from the SAME signal instance AND the edge's own use must itself be a reward use (v8-review §4.1–4.3 kills the different-signal splice; the use-granularity clause is the CE-v3 patch: an inert reward-qualifying use elsewhere on the signal cannot promote a pure synthesis edge, fixture __fixture__cross_use_synth_splice)",
+  "is_project_method_candidate": "is_s0_core_compatible AND is_rq_sys_control_compatible",
+  "reward_guided_selection": "candidate_pool_exists==true AND selection_policy ∈ {scored_select, tournament_select} AND selection_object != none AND ∃ signal s: signal_is_reward(s) AND {select, prune} ∩ s.uses ≠ ∅ — same-signal, live-lifecycle; offline_calibration scoring can never qualify (v8-review §4.4)"
+ },
+ "required_evidence_contract": {
+  "principle": "reconciliation now checks COMPLETENESS, not just consistency: every load-bearing field of every derived claim must carry an evidence entry; a missing entry makes the field unknown/not_adjudicated (never a silent False) and fails load-bearing reconciliation (v8-review §5.5)",
+  "claims": {
+   "strict": ["core_weight_update", "external_component_weight_update", "controller_program_or_config_optimized_on_labels", "human_or_dev_label_model_selection", "deployment_label_access", "test_item_gold_access", "inference_external_new_information", "internal_visibility"],
+   "identity": ["core_topology", "core_native_modality"],
+   "control": ["control_horizon", "decision_rights"],
+   "selection": ["candidate_pool_exists", "selection_policy"],
+   "signals": "each signal's evidence locator grounds its form/lifecycle/uses",
+   "edges": "each edge's locator grounds the causal statement"
+  },
+  "evidence_kinds": {
+   "canon": "verbatim quote inside the work's own canonical DFS section",
+   "tex": "verbatim (TeX-normalized) quote inside the pinned eprint",
+   "pdf_page": "page number within the pinned PDF's page range PLUS an anchor token found on that page's extracted text",
+   "absence": "negative-proposition adjudication: structured note + explicit scope of what was inspected (machine floor = presence + value binding; semantic truth is bound by the adjudication row-hash)"
+  }
+ },
+ "adjudication_binding": {
+  "rule": "adjudication_row_sha256 = sha256 over the canonical JSON of the method-path row EXCLUDING adjudication fields; reconciliation recomputes it — ANY post-adjudication change to a load-bearing row (including a single horizon flip or a value+evidence double-flip) invalidates the adjudication and fails closed (v8-review §5.2 killer)",
+  "actors": "unchanged from v4 (stable actor ids, coder != semantic_adjudicator on load-bearing rows, conflict_queue for disagreements, owner spot-check at signing)"
+ },
+ "release_binding": {
+  "rule": "every dated reviewer-facing artifact that quotes headline occupancy numbers carries a machine-readable release_binding block; scripts/survey/sf_release_binding_check.py compares it against the current persisted test output — stale numbers fail (v8-review §5.5 last paragraph)"
+ },
+ "cross_platform_contract": {
+  "rule": "all registered asset paths resolve through scripts/survey/sf_asset_path.py; acceptance = Windows AND wsl -d Ubuntu-24.04 (~/.venvs/speechrl, Python 3.12) produce the same verdict, same occupancy, and byte-identical generator output (v8-review §6.3)"
+ },
+ "killer_and_acceptance_contract": {
+  "K1_native_audio_no_reward": "audio-native strict core without reward is not a candidate",
+  "K2_reward_tool_stop_no_pool": "evidenced same-signal tool/stop edges without a K pool IS a candidate (omni strict)",
+  "K3_online_binary_verifiable": "verifiable online binary counts as reward",
+  "K4_disjoint_no_edge": "select+memory_write with no edge is not rq-compatible",
+  "K5_fabricated_edge": "edge outside allowed_relations never confers rq",
+  "K6_terminal_only_selection": "final-answer selection + unrelated sequential right is not rq-compatible",
+  "K7_terminal_edge_forward_right": "terminal-lifecycle edges license only {synthesize, stop}",
+  "A1_edge_signal_lifecycle_mismatch": "edge lifecycle != referenced signal lifecycle -> validator failure, edge invalid (v8-review §4.2)",
+  "A2_different_signal_splice": "terminal reward + online non-reward route edge -> rq FALSE (v8-review §4.3)",
+  "A3_online_reward_revise_retry": "positive control stays TRUE",
+  "A4_terminal_reward_rights": "terminal reward select edges may target synthesize/stop only",
+  "A5_multi_signal_identity": "multi-signal rows (AutoTTS state+consensus, Selective TTS stage+final judges) derive from per-signal identity, never a flattened average",
+  "A6_rgs_same_signal": "reward_guided_selection requires the same live reward signal with select/prune plus a real pool and selection operator",
+  "A7_offline_calibration_never_rgs": "offline_calibration scoring never yields reward_guided_selection",
+  "A8_cross_use_splice": "CE-v3 (non-implementer): a reward signal whose ONLY live edge exercises a non-reward use (e.g. synthesize_input) must NOT be rq-compatible — enforced by the use-granularity clause; fixtures live in 2026-07-19-sf-independent-counterexamples-v3.json (incl. overlapping-uses/rgs-cross-signal/pool-unknown/strict-unknown regression guards)"
+ },
+ "single_write_pipeline": "unchanged from v4 flow (sidecar -> generator -> coding v6 -> reconciliation -> occupancy) with schema v2 sidecars; coding v6 remains a GENERATED projection (hand edits fail byte-equality)"
+}

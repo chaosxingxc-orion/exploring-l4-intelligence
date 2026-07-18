@@ -6,6 +6,43 @@
 
 ---
 
+### 2026-07-19（续70）· v8 复审裁 WITHHOLD（3 新 Gate MAJOR:信号实例身份/证据完备性/WSL2 正典重放;上轮 MAJOR-3 判 CLOSED;连续第二零异议轮）+ owner 全盘裁决 → P0-A/B/C+P1 整改批:taxonomy v5 信号实例/完备合同+裁决行哈希/跨平台 resolver/开局表 v3
+
+**Context.** v8 复审（審 @a4ed640,blob 8761914971）裁 WITHHOLD,3 新 Gate MAJOR——五个语义
+反例+WSL 复放全部我方亲手复现:**MAJOR-1** 行级扁平信号字段=数据模型表达力缺口（行/边
+lifecycle 矛盾照绿;异信号拼接 candidate=True;offline_calibration 得 rgs=True）;**MAJOR-2**
+reconciliation 只验一致性不验完备性（open-sft horizon 翻转→headline 5/11→4/11 仍 11/11
+全绿=十轮最重;`p9999` 假页码照过;release 数字无对账）;**MAJOR-3** WSL2 正典环境 10/11
+（台账 Windows 盘符路径不可解析）。上轮 v6 恢复被正式判 CLOSED（「本轮最重要的诚信正向
+证据」）。P1 三篇+P2 三篇 6/6 反幻觉核验为真——TF-TTCL 坐实为 correction-4 已登记「转录
+失败」事故二次复发（「看过但遗忘」第五例）。评审明确收敛:三门清零后「应立即允许 1B,不再
+以还可以多找论文为理由无限延长 1A」。
+
+**Decision（owner 2026-07-19「好」）.** 全盘 ACCEPT;signals[] 正规化（评审明说最小补丁
+不足以表达多信号系统）;strict 位三态化;pypdf 依赖接受;release binding 对 v9 起生效;
+P1 照单含 TF-TTCL 复发诚信登记。
+
+**Consequences（整改批交付,零查询零模型）.** **P0-C**:`sf_asset_path.py` canonical
+resolver→双端 12/12 同 occupancy、generator 字节等同（Windows nt/Py3.14+WSL2 posix/
+Py3.12,platform 字段入快照）。**P0-A**:taxonomy v5+schema-v2 sidecars+coding v6——
+signals[].signal_id 一等实例,边引用信号,派生存在量词化;多信号如实拆分（AutoTTS 在线状态
+/终态共识双相位落实前轮裁决观察;STTS 双 judge——α 未对齐负结果直接佐证;DREAM 单 PRM 三
+用途正确不拆）;验收 A1–A8+killer K1–K7。**P0-B**:15 承重字段 required-evidence 合同
+（canon/tex/absence 三类;absence 8 条带已检视 scope）;strict 三态 unknown 永不默认
+False;**裁决行哈希**（裁决后任何行变更 fail-closed——评审 horizon 假绿由此拦截）;pypdf
+页码范围+anchor（p9999 死于 range）;**敏感面突变 13 类于模拟盖章副本+基线为净断言**
+（内审环第十层镜头:突变集从派生公式敏感面推导,不从上轮清单继承）;release-binding 检查
+（headline 与生成输出逐键对账,负 fixture 自测）。**再裁决（schema v2 全 11 行）**:批 A
+6/0+批 B 5/0 **零异议**,跨信号拼接残留=无,七条非致改观察入 provenance,行哈希盖章。
+**CE-v3 再击穿初版 v5**（信号内跨用途拼接:惰性 prune 用途+纯 synthesize 活边伪造
+rq=True,EXPECTED_TO_FAIL 如实交付）→ 当日补丁（活边自身用途∈reward_uses,A8);CE 语料
+v1+v2+v3=17 案全并入。**机器数字（重算不变,自此同信号+同用途双粒度背书）**:reward 6/11、
+rq_sys 5/11（4/8）、candidate 0/11、轨迹 2/11（1/8）、rgs 4/11。**P1**:开局表 v3
+（Reinforced Agent/TF-TTCL/TF-GRPO 边界+表 E P2 队列）。合同测试 **12/12 双平台**;
+amendment-14;v8 回应信（八字段+release binding,第六次申请）;**v9 合并送审件**。
+**元规律第十例入 memory:数据模型表达力层+完备性/一致性之别+环境可移植性;CE 制度两代
+各击穿一次初版派生=制度按设计工作。**
+
 ### 2026-07-19（续69）· v7 复审裁 WITHHOLD（3 Gate MAJOR:RQ-SYS 缺因果边/lineage=presence check/已评审 v6 被原位改写〔我方违规〕）+ owner 全盘裁决 → Step A–E 整改批:审计恢复+immutability check/taxonomy v4 因果 edges/sidecar 单写链+独立裁决/开局表 v2
 
 **Context.** v7 复审（審 @87877f1,blob e2d0d7b9;13/13 纯净副本复跑确认）裁 WITHHOLD,3 Gate

@@ -1,5 +1,6 @@
 {
- "sidecar_id": "SF-SIDECAR-2602.16485-2026-07-19-01",
+ "sidecar_id": "SF-SIDECAR-2602.16485-2026-07-19-02",
+ "schema": "v2 (taxonomy v5: signals[] + claim_evidence + adjudication row-hash)",
  "date": "2026-07-19",
  "paper_work_id": "2602.16485",
  "work_title": "Team of Thoughts: Efficient Test-time Scaling through Orchestrated Tool Calling",
@@ -25,18 +26,22 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
-   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2602.16485#calibrated-orchestration",
    "core_topology": "multi_model_federation",
    "core_native_modality": "text_only",
    "core_io_modality": "text_in_text_out",
-   "signal_form": "text_critique",
-   "signal_source": "llm_judge",
-   "signal_lifecycle": "inference_pre_context",
-   "signal_use": [
-    "route",
-    "synthesize_input"
+   "signals": [
+    {
+     "signal_id": "s_profile",
+     "form": "text_critique",
+     "source": "llm_judge",
+     "lifecycle": "inference_pre_context",
+     "uses": [
+      "route",
+      "synthesize_input"
+     ],
+     "evidence": "canon: '推理时画像喂 orchestrator'"
+    }
    ],
    "control_horizon": "terminal",
    "decision_rights": [
@@ -44,44 +49,110 @@
     "tool_call",
     "synthesize"
    ],
+   "control_edges": [
+    {
+     "signal_id": "s_profile",
+     "signal_use": "route",
+     "decision_right": "route",
+     "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
+     "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context)"
+    },
+    {
+     "signal_id": "s_profile",
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "source_locator": "canon: 'orchestrator 聚合/合成'",
+     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer"
+    }
+   ],
    "selection_object": "tool_agent",
    "terminal_operator": "synthesize",
    "explicit_candidate_pool_selection": true,
    "candidate_pool_exists": true,
    "selection_policy": "profile_route",
-   "control_edges": [
-    {
-     "signal_use": "route",
-     "decision_right": "route",
-     "signal_lifecycle": "inference_pre_context",
-     "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
-     "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context; no online reward)"
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结、无梯度"
     },
-    {
-     "signal_use": "synthesize_input",
-     "decision_right": "synthesize",
-     "signal_lifecycle": "terminal",
-     "source_locator": "canon: 'orchestrator 聚合/合成'",
-     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer (iso-adj-A observation: previously missing documentation edge; no gate impact)"
-    }
-   ],
-   "field_evidence": [
-    {
-     "field": "core_topology",
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无梯度训练"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "带标签校准集"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "calibration 与 self-assessment 用 ground truth"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理时靠画像匹配"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "50% of AIME2025 serves as the calibration set for AIME2024"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "工具=其它 LLM"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本"
+    },
+    "core_topology": {
      "value": "multi_model_federation",
      "kind": "canon",
      "quote": "7 个不同后训练模型族"
     },
-    {
-     "field": "signal_form",
-     "value": "text_critique",
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "数学+代码"
+    },
+    "control_horizon": {
+     "value": "terminal",
+     "kind": "canon",
+     "quote": "单响应为主"
+    },
+    "decision_rights": {
+     "value": [
+      "route",
+      "tool_call",
+      "synthesize"
+     ],
+     "kind": "canon",
+     "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=激活的 k 个工具候选"
+    },
+    "selection_policy": {
+     "value": "profile_route",
      "kind": "canon",
      "quote": "推理时画像喂 orchestrator"
     }
-   ],
-   "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq.3 校准分=唯一标量,离线)",
-   "adjudication_provenance": "v6 复审 P1-1 裁决执行(一手 grep 证据句);独立反例 CE-1a",
-   "note": "Team-of-Thoughts 裁决:profile-conditioned orchestration boundary——部署期无独立标量/比较 reward;edge 为 pre-context 文档边,不计入 rq"
+   },
+   "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq 校准分离线)",
+   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context;〔iso-adj-A2 再裁决 AGREE,观察:lifecycle 编 offline_calibration 亦可辩(画像离线 gold 构造)——两值下边均非 LIVE、gold 依赖已由两 strict 位显著承载,inference_pre_context(画像作静态先验入上下文)被判 defensible,维持〕",
+   "note": "ToT:profile-conditioned orchestration boundary;pre-context 边不计入 rq",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "dc880ad3c0097454461af360c71c7cb4a2535db19c6a5e0e967f03e73c1122bb"
   }
  ]
 }

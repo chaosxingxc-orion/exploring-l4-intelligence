@@ -29,10 +29,10 @@ import sys
 # the actual submission v7 had a hit). Keep this list pointing at what is
 # actually being submitted.
 FILES = [
-    "wiki/2026-07-19-system-first-research-proposal-v8-consolidated.md",
-    "wiki/survey/2026-07-19-gate-s1-v7-response.md",
-    "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
-    "wiki/survey/2026-07-19-sf-stage1b-opening-tables-v2.md",
+    "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
+    "wiki/survey/2026-07-19-gate-s1-v8-response.md",
+    "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
+    "wiki/survey/2026-07-19-sf-stage1b-opening-tables-v3.md",
     "wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md",
     "wiki/2026-07-18-inherited-prior-exposure-union.md",
 ]

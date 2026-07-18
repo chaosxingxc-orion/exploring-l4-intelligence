@@ -1,5 +1,6 @@
 {
- "sidecar_id": "SF-SIDECAR-2605.08083-2026-07-19-01",
+ "sidecar_id": "SF-SIDECAR-2605.08083-2026-07-19-02",
+ "schema": "v2 (taxonomy v5: signals[] + claim_evidence + adjudication row-hash)",
  "date": "2026-07-19",
  "paper_work_id": "2605.08083",
  "work_title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling (AutoTTS)",
@@ -25,63 +26,143 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
-   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2605.08083#discovered-controller",
    "core_topology": "single_core_multi_call",
    "core_native_modality": "text_only",
    "core_io_modality": "text_in_text_out",
-   "signal_form": "consensus_vote",
-   "signal_source": "consensus",
-   "signal_lifecycle": "online_step",
-   "signal_use": [
-    "select",
-    "prune",
-    "stop_budget"
+   "signals": [
+    {
+     "signal_id": "s_state",
+     "form": "none",
+     "source": "state_observation",
+     "lifecycle": "online_step",
+     "uses": [
+      "prune",
+      "stop_budget"
+     ],
+     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'"
+    },
+    {
+     "signal_id": "s_consensus",
+     "form": "consensus_vote",
+     "source": "consensus",
+     "lifecycle": "terminal",
+     "uses": [
+      "select"
+     ],
+     "evidence": "canon: 'selector=controller 终态共识型 Agg'"
+    }
    ],
    "control_horizon": "sequential",
    "decision_rights": [
     "branch",
     "stop"
    ],
+   "control_edges": [
+    {
+     "signal_id": "s_state",
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
+     "edge_semantics": "the discovered code controller's state-conditioned pruning decides which branches continue"
+    },
+    {
+     "signal_id": "s_state",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
+     "edge_semantics": "beta-parameterized budget signal stops sampling"
+    }
+   ],
    "selection_object": "trajectory",
    "terminal_operator": "vote",
    "explicit_candidate_pool_selection": true,
    "candidate_pool_exists": true,
    "selection_policy": "consensus_vote",
-   "control_edges": [
-    {
-     "signal_use": "prune",
-     "decision_right": "branch",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
-     "edge_semantics": "the discovered code controller's state-conditioned pruning decides which branches continue"
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "权重全不改"
     },
-    {
-     "signal_use": "stop_budget",
-     "decision_right": "stop",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
-     "edge_semantics": "beta-parameterized budget signal stops sampling"
-    }
-   ],
-   "field_evidence": [
-    {
-     "field": "core_native_modality",
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "产物=代码非权重"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "标签监督的离线发现"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "发现循环为代码搜索自动化,无人工按标签选模型步骤",
+     "scope": "DFS 轴3/轴8 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理时 controller label-free"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "never used during discovery or selection"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "absence",
+     "note": "controller 观测限于内部状态(分支/深度/probe/预算),无外部信息获取",
+     "scope": "DFS 轴2/轴7/轴12 已检视"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "文本/答案级"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "预采 128 轨迹"
+    },
+    "core_native_modality": {
      "value": "text_only",
      "kind": "canon",
      "quote": "数学(AIME/HMMT)+GPQA 泛化"
     },
-    {
-     "field": "signal_form",
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+    },
+    "decision_rights": {
+     "value": [
+      "branch",
+      "stop"
+     ],
+     "kind": "canon",
+     "quote": "controller 自适应 width×depth 分配+停/剪"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "预采 128 轨迹"
+    },
+    "selection_policy": {
      "value": "consensus_vote",
      "kind": "canon",
      "quote": "selector=controller 终态共识型 Agg"
     }
-   ],
-   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/动作/p4 probe/p5 beta)",
-   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true);〔dated correction 2026-07-19:iso-adj-A DISAGREE 采纳——128 预采轨迹+推理时分支级管理=对单一冻结基座的重复调用,原 single_core 更正为 single_core_multi_call(非改果错码:text_only 轴本已排除 s0);另录其观察:signal_form=consensus_vote 描述终态 Agg 相位,在线边由 controller 状态观测驱动——edge_semantics 已如实标 state-conditioned,行级 form/lifecycle 相位合并无门禁影响〕",
-   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴;在线边=状态驱动,终态=共识 Agg(两相位见 provenance)"
+   },
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/p4 probe/p5 beta)",
+   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕",
+   "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "4ff6acb734ba4cb15a74d2a3e2bd8125e5ccdeb1fadc17a415ad003c2463e8a5"
   }
  ]
 }

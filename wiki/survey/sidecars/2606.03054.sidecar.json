@@ -1,5 +1,6 @@
 {
- "sidecar_id": "SF-SIDECAR-2606.03054-2026-07-19-01",
+ "sidecar_id": "SF-SIDECAR-2606.03054-2026-07-19-02",
+ "schema": "v2 (taxonomy v5: signals[] + claim_evidence + adjudication row-hash)",
  "date": "2026-07-19",
  "paper_work_id": "2606.03054",
  "work_title": "ToolGate: Token-Efficient Pre-Call Control for Tool-Augmented Vision-Language Agents",
@@ -25,53 +26,123 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
-   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2606.03054#trained-gate",
    "core_topology": "single_core",
    "core_native_modality": "vision_native",
    "core_io_modality": "multimodal_in_text_out",
-   "signal_form": "binary_gate",
-   "signal_source": "trained_classifier",
-   "signal_lifecycle": "online_step",
-   "signal_use": [
-    "execute_skip_gate"
+   "signals": [
+    {
+     "signal_id": "s_gate",
+     "form": "binary_gate",
+     "source": "trained_classifier",
+     "lifecycle": "online_step",
+     "uses": [
+      "execute_skip_gate"
+     ],
+     "evidence": "canon: '输出 execute/skip'"
+    }
    ],
    "control_horizon": "sequential",
    "decision_rights": [
     "execute_skip"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_gate",
+     "signal_use": "execute_skip_gate",
+     "decision_right": "execute_skip",
+     "source_locator": "canon: '门决定是否执行'",
+     "edge_semantics": "the trained classifier reads trajectory prefix + proposed call and gates whether that tool call executes"
+    }
    ],
    "selection_object": "none",
    "terminal_operator": "none",
    "explicit_candidate_pool_selection": false,
    "candidate_pool_exists": false,
    "selection_policy": "none",
-   "control_edges": [
-    {
-     "signal_use": "execute_skip_gate",
-     "decision_right": "execute_skip",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: '输出 execute/skip'",
-     "edge_semantics": "the trained classifier reads trajectory prefix + proposed call and gates whether that tool call executes"
-    }
-   ],
-   "field_evidence": [
-    {
-     "field": "core_native_modality",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "冻结 ReAct 式 VLM"
+    },
+    "external_component_weight_update": {
+     "value": true,
+     "kind": "canon",
+     "quote": "supervised-trained"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "标签源=forced-answer 探针+终局正确性"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "门控训练为自动代理标签流程,无按标签人工选模型",
+     "scope": "DFS 轴3 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "部署期无 test gold（干净）"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "gold 仅离线标签/诊断"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "absence",
+     "note": "六感知工具作用于给定图像=任务环境,无外部新信息获取",
+     "scope": "DFS 轴7/轴12 已检视"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "does not access hidden states, image features, decoding log probabilities, or tool outputs"
+    },
+    "core_topology": {
+     "value": "single_core",
+     "kind": "canon",
+     "quote": "单一冻结 VLM 核"
+    },
+    "core_native_modality": {
      "value": "vision_native",
      "kind": "canon",
      "quote": "视觉 VQA 多基准"
     },
-    {
-     "field": "signal_form",
-     "value": "binary_gate",
+    "control_horizon": {
+     "value": "sequential",
      "kind": "canon",
-     "quote": "输出 execute/skip"
+     "quote": "轨迹内逐工具调用级"
+    },
+    "decision_rights": {
+     "value": [
+      "execute_skip"
+     ],
+     "kind": "canon",
+     "quote": "仅对已提议调用 execute/skip"
+    },
+    "candidate_pool_exists": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无 K 池无终答 selector"
+    },
+    "selection_policy": {
+     "value": "none",
+     "kind": "canon",
+     "quote": "无 K 池无终答 selector"
     }
-   ],
+   },
    "source_locator": "canon: '门决定是否执行'",
-   "adjudication_provenance": "独立反例 CE-3(trained gate ≠ RM/PRM 三重理由)",
-   "note": "trained binary gate ≠ reward;binary_gate ∉ reward 形式集;edge 存在但 signal_form 非 reward → rq False(边不救非 reward 信号)"
+   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕",
+   "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "c6bfdc5756dc422654ec8f1cb7d497246fe67b14da00244f0bc8969fb7674e82"
   }
  ]
 }

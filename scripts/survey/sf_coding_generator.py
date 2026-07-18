@@ -24,7 +24,7 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SIDECAR_DIR = os.path.join(REPO, "wiki", "survey", "sidecars")
-OUT = os.path.join(REPO, "wiki", "survey", "2026-07-19-sf-known-item-coding-v5.json")
+OUT = os.path.join(REPO, "wiki", "survey", "2026-07-19-sf-known-item-coding-v6.json")
 
 ROW_KEY_ORDER = [
     "method_path_id", "paper_work_id", "component_path_ids", "core_topology",
@@ -32,12 +32,13 @@ ROW_KEY_ORDER = [
     "core_weight_update", "external_component_weight_update",
     "controller_program_or_config_optimized_on_labels", "human_or_dev_label_model_selection",
     "deployment_label_access", "test_item_gold_access", "inference_external_new_information",
-    "signal_form", "signal_source", "signal_lifecycle", "signal_use", "control_horizon",
-    "decision_rights", "control_edges", "selection_object", "terminal_operator",
+    "signals", "control_horizon", "decision_rights", "control_edges",
+    "selection_object", "terminal_operator",
     "explicit_candidate_pool_selection", "candidate_pool_exists", "selection_policy",
-    "includes_speech_audio", "adjudication_required", "load_bearing", "field_evidence",
+    "includes_speech_audio", "adjudication_required", "load_bearing", "claim_evidence",
     "fulltext_ref", "canonical_record_id", "source_locator", "coder",
-    "semantic_adjudicator", "adjudication_status", "adjudication_provenance", "note",
+    "semantic_adjudicator", "adjudication_status", "adjudication_row_sha256",
+    "adjudication_provenance", "note",
 ]
 
 
@@ -73,12 +74,12 @@ def project(sidecars):
 def render(sidecars):
     rows = project(sidecars)
     doc = {
-        "artifact_id": "SF-KNOWN-ITEM-CODING-V5-2026-07-19-01",
-        "title": "known-item coding v5 — GENERATED single-write projection of per-paper sidecars (taxonomy v4; v7 doctoral review Gate MAJOR-1/-2 remediation)",
-        "taxonomy": "wiki/survey/2026-07-19-sf-identity-taxonomy-v4.json",
+        "artifact_id": "SF-KNOWN-ITEM-CODING-V6-2026-07-19-01",
+        "title": "known-item coding v6 — GENERATED single-write projection of schema-v2 sidecars (taxonomy v5; v8 doctoral review Gate MAJOR-1/-2/-3 remediation)",
+        "taxonomy": "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json",
         "generated_by": "scripts/survey/sf_coding_generator.py — DO NOT HAND-EDIT; edit the sidecar and regenerate",
         "generated_from": [name for name, _ in sorted(sidecars, key=lambda t: t[1]["paper_work_id"])],
-        "supersession": "v5 supersedes coding-v4 (dated supersession; v4 retained for audit). Deltas: control_edges + field_evidence + candidate_pool_exists/selection_policy per taxonomy v4; Selective TTS decision_rights ['stop']->['branch'] (edge-evidence dated correction, see sidecar); actor ids replace W1; all rows load_bearing with independent adjudication status.",
+        "supersession": "v6 supersedes coding-v5 (dated supersession; v5 retained in git for audit of the v4-era claims). Deltas per taxonomy v5: flat signal fields replaced by signals[] instances (AutoTTS state/consensus phase split; Selective TTS stage/final judge split); control_edges reference signal_id; claim_evidence covers every load-bearing field (positive/tex/absence kinds); adjudication_row_sha256 binds adjudication to row content.",
         "rows": rows,
     }
     return json.dumps(doc, ensure_ascii=False, indent=1) + "\n"
@@ -91,9 +92,9 @@ def main():
     if "--check" in sys.argv:
         current = io.open(OUT, encoding="utf-8").read() if os.path.exists(OUT) else None
         if current != text:
-            print("[FAIL] coding v5 is NOT byte-identical to generator output (hand edit or stale)")
+            print("[FAIL] coding is NOT byte-identical to generator output (hand edit or stale)")
             return 1
-        print("[OK] coding v5 byte-identical to generator output")
+        print("[OK] coding byte-identical to generator output")
         return 0
     io.open(OUT, "w", encoding="utf-8", newline="\n").write(text)
     print(f"wrote {os.path.relpath(OUT, REPO)} ({text.count(chr(10))} lines)")

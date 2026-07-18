@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-19（续69:v7 复审 WITHHOLD 3 Gate MAJOR〔RQ-SYS 缺因果边/lineage=presence check/已评审 v6 被原位改写=我方违规〕,九轮首次零异议 → owner 全盘裁决「按建议走」→ Step A–E 整改批当日交付:v6 恢复原字节+immutability registry/taxonomy v4 因果 control_edges/sidecar 单写链→coding v5+真 reconciliation/隔离双代理裁决 11/11+非实现者反例击穿即修/开局表 v2——合同测试 11/11,v7 回应信第五次申请送审）"
+last_refresh: "2026-07-19（续70:v8 复审 WITHHOLD 3 新 Gate MAJOR〔信号实例身份/证据完备性/WSL2 重放;上轮 MAJOR-3 判 CLOSED〕,连续第二零异议轮 → owner 全盘裁决 → P0-A/B/C+P1 整改批当日交付:taxonomy v5 signals[] 存在量词派生/15 承重字段证据合同+裁决行哈希/canonical resolver 双端 12/12/再裁决 11 行零异议/CE-v3 再击穿即修〔A8〕/开局表 v3——v9 合并送审件第六次申请）"
 ---
 
 # Research Objective & Current State
@@ -111,10 +111,16 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   control_edges+K4–K7 killer/sidecar 单写链→coding v5 生成件+真 reconciliation 七类突变
   反空洞/隔离双代理独立裁决 11/11+非实现者反例击穿即修/开局表 v2+NEG-P10 回链;机器数字
   edge 背书:reward 6/11、rq_sys 5/11〔4/8〕、candidate 0/11、轨迹 2/11〔1/8〕、
-  reward_guided_selection 4/11;合同测试 11/11）,**当前动作 = v8 合并送审件已发布
-  （`2026-07-19-system-first-research-proposal-v8-consolidated.md`,自包含干净重钉,附
-  v7 回应信〔§10.3 八字段〕为对账载体;两件均入 immutability registry〔71 件〕）,待评审按
-  v7 复审 §11 放行矩阵复核三门清零 → 签 Stage-1B（第五次申请）**;执行前置
+  reward_guided_selection 4/11;合同测试 11/11） → **v8 复审 WITHHOLD（3 新 Gate
+  MAJOR:信号实例/证据完备/WSL2 重放;上轮 MAJOR-3 判 CLOSED;连续第二零异议轮）→ owner
+  全盘裁决（续70）→ P0-A/B/C+P1 整改批当日交付**（taxonomy v5 signals[] 存在量词派生
+  〔同信号+同用途双粒度,CE-v3 再击穿即修 A8〕/15 承重字段证据合同+strict 三态+裁决行哈希
+  /pypdf locator 真解析/canonical resolver 双端 12/12 同 occupancy/敏感面突变 13 类/
+  release binding/再裁决 11 行零异议/开局表 v3〔+Reinforced Agent/TF-TTCL 复发登记/
+  TF-GRPO 边界/表 E〕）,**当前动作 = v9 合并送审件已发布
+  （`2026-07-19-system-first-research-proposal-v9-consolidated.md`,附 v8 回应信〔八字段+
+  release binding〕为对账载体）,待评审按 v8 复审 §11 放行矩阵复核三门清零 → 签 Stage-1B
+  （第六次申请）**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。
