@@ -111,9 +111,10 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   control_edges+K4–K7 killer/sidecar 单写链→coding v5 生成件+真 reconciliation 七类突变
   反空洞/隔离双代理独立裁决 11/11+非实现者反例击穿即修/开局表 v2+NEG-P10 回链;机器数字
   edge 背书:reward 6/11、rq_sys 5/11〔4/8〕、candidate 0/11、轨迹 2/11〔1/8〕、
-  reward_guided_selection 4/11;合同测试 11/11）,**当前动作 = v7 回应信落盘
-  （`survey/2026-07-19-gate-s1-v7-response.md`,§10.3 八字段逐 finding）,待评审复核三
-  Gate MAJOR 清零 → 签 Stage-1B（第五次申请）**;执行前置
+  reward_guided_selection 4/11;合同测试 11/11）,**当前动作 = v8 合并送审件已发布
+  （`2026-07-19-system-first-research-proposal-v8-consolidated.md`,自包含干净重钉,附
+  v7 回应信〔§10.3 八字段〕为对账载体;两件均入 immutability registry〔71 件〕）,待评审按
+  v7 复审 §11 放行矩阵复核三门清零 → 签 Stage-1B（第五次申请）**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。
