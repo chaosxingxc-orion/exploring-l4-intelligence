@@ -1,0 +1,228 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-V3-TEST-2026-07-18-01",
+ "inputs": {
+  "taxonomy": "wiki/survey/2026-07-18-sf-identity-taxonomy-v3.json",
+  "coding": "wiki/survey/2026-07-18-sf-known-item-coding-v4.json"
+ },
+ "topology_policy": "A(frozen: single_core_multi_call in-scope) + strict-topology sensitivity dual-computed",
+ "checks": [
+  {
+   "id": "V1",
+   "check": "字段/枚举/lineage 齐备;11 唯一;池位一致",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V2",
+   "check": "unknown 不满足合取",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V3",
+   "check": "killer fixtures:K1 原生audio无reward≠candidate;K2 无K池的reward-tool/stop=RQ-SYS compatible(且=method candidate);K3 在线二值可验证=reward",
+   "result": "PASS",
+   "detail": "K1=False K2=True K3=True"
+  },
+  {
+   "id": "V3b",
+   "check": "作者反例(v3 集:PDR 非 reward/RTV 终态退化/pipeline 序贯/ToT 裁决/ToolGate/STTS)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V4",
+   "check": "负控:STTS 改名必须红;PDR 错码回填必须红",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V5",
+   "check": "独立语义反例 x4(字段别名映射)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V5b",
+   "check": "CE-1b 拓扑蕴含在敏感列非空洞（同 row 强制 omni 后:政策A=true/严格拓扑=false,由拓扑轴本身判定）",
+   "result": "PASS",
+   "detail": "A=True strict=False"
+  },
+  {
+   "id": "V6",
+   "check": "occupancy 双分母+机制分层+双政策敏感列持久化",
+   "result": "PASS",
+   "detail": "policyA strict∧reward∧pool={'trajectory': '2/11'}"
+  },
+  {
+   "id": "V7",
+   "check": "lineage reconciliation(fail-closed):fulltext sha 在台账/正典文件+anchor 在/locator 非空",
+   "result": "PASS",
+   "detail": "[]"
+  }
+ ],
+ "occupancy": {
+  "policy_A": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  },
+  "sensitivity_strict_topology": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  }
+ },
+ "summary": "9/9 PASS",
+ "verdict": "PASS"
+}

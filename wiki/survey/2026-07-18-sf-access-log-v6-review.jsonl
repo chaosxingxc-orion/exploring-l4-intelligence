@@ -1,0 +1,4 @@
+{"artifact_id": "SF-ACCESS-LOG-V6-REVIEW-2026-07-18-01", "purpose": "v6 复审核验+整改批(续68)联网活动", "attestation": "discovery_queries_executed = 0 维持", "date": "2026-07-18"}
+{"seq": 1, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2510.01123", "http": 200, "id": "2510.01123", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 2, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2601.22129", "http": 200, "id": "2601.22129", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 3, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2602.03094", "http": 200, "id": "2602.03094", "access_class": "REVIEW_CLAIM_VERIFICATION"}

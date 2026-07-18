@@ -5,7 +5,7 @@ date: 2026-07-18
 addressee: "Gate S1 评审人 / 评委"
 relation: "v3-consolidated working-thesis 裁定不重开;v5（審 @c2b9299→WITHHOLD 3 MAJOR→整改@746a8b1）与 v5-response 复审（審 @746a8b1→WITHHOLD 2 Gate MAJOR〔构念效度/carry-forward〕→整改@0868294）之全部整改内容并入本件成自包含送审件;两轮回应信为逐项对账载体;本件不新增签署对象"
 stage_account: "四字段（阶段正典 v2）:current_activity_stage = Stage-1A survey-ready gate（尾门,Stage-1B 启动签署前）;new_model_touches_since_gate_freeze = 0（起算 af96a89）;cumulative_model_touches = 非零（四仓 union v2 在册）;legacy_experiments = INHERITED_PRIOR_EXPOSURE（wiki/2026-07-18-inherited-prior-exposure-union.md,v2）"
-evidence_discipline: "五值证据模式逐 claim（amendment-9 §2）;占据/量词类唯一正典 = identity taxonomy v2 机器重算（docs/checks/2026-07-18-sf-identity-taxonomy-v2-test.json,含独立语义反例区）;矩阵 = v4 矩阵 + v5 增补矩阵（v2 修订版）;外部论文数字一律 SOURCE_REPORTED_TRACEABLE;量词 prose lint 全件 0 命中;创新点未锁定,本件零终局定性"
+evidence_discipline: "五值证据模式逐 claim（amendment-9 §2）;占据/量词类唯一正典 = identity taxonomy **v3** 机器重算（docs/checks/2026-07-18-sf-identity-taxonomy-v3-test.json,9/9 含 killer fixtures/独立反例/lineage reconciliation;双分母+双政策敏感列）;矩阵 = v4 矩阵 + v5 增补矩阵（v3 修订）;外部论文数字一律 SOURCE_REPORTED_TRACEABLE;量词 prose lint 全件 0 命中;创新点未锁定,本件零终局定性"
 ---
 
 # Research Proposal v6（构念整改后合并送审版）
@@ -80,26 +80,32 @@ On-TTS-VLMs / dMLLM-TTS）逐篇四问+身份轴记录在案（`survey/2026-07-1
 papers-dfs.md`）。组件级事实：专家联邦/logits 融合/新信息注入/生成域各占相邻格;MM TTS
 综述明文不覆盖 audio（范围边界事实）。
 
-### §4.2 系统级普查（known-item 11 method paths,taxonomy v2 机器正典）
+### §4.2 系统级普查（known-item 11 method paths,taxonomy **v3** 机器正典——v6 复审两 Gate MAJOR 整改后换血）
 
-**机器重算现值**（v2 测试持久化输出,散文不手数）：
+**机器重算现值**（v3 测试持久化输出〔`docs/checks/2026-07-18-sf-identity-taxonomy-v3-test.
+json`,9/9 PASS 含 killer fixtures/PDR 错码负控/lineage reconciliation〕;全部**双分母**
+〔method-path 与 unique-work〕;散文不手数）：
 
-- **项目身份候选 = 0/11**（data_access_strict_bits ∧ 单核拓扑 ∧ **原生 audio/omni 进核**;
-  unknown 不满足）;core_native_modality ∈ {audio,omni} = 0/11——数据集含音频位与原生模态
-  轴已分离,benchmark/ASR 级联不可能混入方法占据;
-- **占据合取（按 selection_object 分层）**：strict 位∧reward-guided∧K 池 = **轨迹池
-  3/11,且全部来自同一篇 Agentic Coding**（#rtv/#pdr/#rtv-pdr-pipeline;编码域,llm_judge
-  比较投票）;工具-agent 池（Team-of-Thoughts,终态=合成）与输出池（Selective TTS）各有
-  占据但不满足 strict 位（dev-label 轴）;trained-PRM∧K 池 = 1/11（DREAM,持久化断言）;
-- 权重轴：all_components_weight_frozen = 8/11;data_access_strict_bits = 4/11;
-  is_reward_guided = 8/11（排除 3 条:ToolGate〔trained binary gate,独立反例裁定〕与
-  ATLAS/AutoTTS〔consensus_vote——共识信号按 taxonomy 单列追踪,不因评价性归入 reward,
-  与术语表 MBR≠reward 一致〕）;
-- **待检验候选空位坐标**（非结论）= strict 位 ∧ reward-guided ∧ K 池 ∧ 原生 audio/omni
-  单核——已检视集合 0/11,待 Stage-1B mapping 检验;
-- **构念开放问题（如实呈报,owner Stage-1C 裁决）**：独立反例 CE-1b 主张「同权重多调用的
-  orchestrator+solver 分解即失格单核身份」;我方 RQ-SYS 机制恰是对单一冻结核心的多调用
-  编排——该拓扑蕴含当前不影响任何数字（ATLAS 经原生模态轴失格）,但属构念边界,落码未裁决。
+- **三分派生（P0-1:身份不再由单一命名位承载）**：`is_s0_core_compatible`（严格位∧拓扑
+  政策∧原生 audio/omni 进核）= **0/11**;`is_rq_sys_control_compatible`（**在线** reward/
+  评价反馈〔lifecycle∈{online_step,terminal}〕∧序贯时域∧decision_rights 非空——reward 可
+  作用于 route/retry/tool/supply/stop 等任一下一步动作权,**K 池降为机制分层非身份必要
+  条件**）= **5/11 路径（4/8 works**:pipeline/DeepVerifier×2/Selective TTS/DREAM,四者中
+  三 works 因 strict 位不满足止步于此〕;`is_project_method_candidate` = 两者合取 =
+  **0/11**——**此即重立后的待检验空位坐标**,待 Stage-1B mapping 检验;
+- **机制分层（非身份）**：strict 位∧reward∧K 池 = **轨迹池 2/11 路径（unique work
+  1/8**——#rtv 与 #rtv-pdr-pipeline,同一篇;**PDR 事实错码已按官方 TeX 一手更正**:vanilla
+  PDR = random-K 随机采样无选择信号〔eprint sha 与评审钉定逐字节一致〕,原 3/11 撤回〕;
+  trained-PRM∧K 池 = 1/11（DREAM）;
+- is_reward_guided = **6/11**（排除:#pdr-random-k〔无信号〕、ToolGate〔trained binary
+  gate,独立反例裁定〕、ATLAS/AutoTTS〔consensus 单列,MBR≠reward〕、**Team-of-Thoughts
+  〔P1-1 裁决执行:该文定义的仅有标量 = 离线校准分 Eq.3;推理期 Evaluation 为合成内定性评估;
+  无部署期独立 reward 定义 → profile-conditioned orchestration boundary〕**）;
+- **拓扑政策 A（owner 冻结 2026-07-18）**：同一冻结核心多调用/多角色编排 ∈ 单核身份
+  （这正是 RQ-SYS 机制形态）;**严格拓扑敏感列全程双算持久化**——CE-1b 拓扑蕴含在敏感列
+  中由拓扑轴本身判定（非空洞）,Stage-1C 综合时 owner 选解释;
+- core_native_modality ∈ {audio,omni} = 0/11——数据集含音频位与原生模态轴分离,benchmark/
+  ASR 级联不可能混入方法占据。
 
 ### §4.3 负结果先验（双向;异质案例共同提示;各条限于该论文设置内）
 
@@ -129,13 +135,17 @@ H(c) 条件量）/反证列（复杂 selector 预期价值被削弱;有头空池
    Omni-Decision）;Round E 10 项另于附录 A.3 以 KNOWN_QUEUE 登记待读,执行首轮并入编码;**表 B** speech/omni 测量工具（τ-Voice/FDB-v3/EchoChain/
    From-Text-to-Voice/VoiceAgentBench/Audio2Tool/tau 族——MEASUREMENT_INSTRUMENT 角色,
    为 RQ-OMNI/RQ-SAFE 供「哪里可测、哪里会失败」,**不入方法占据分母**）;**表 C**
-   evaluator/reward 负结果先验。先按 taxonomy v2 编码再入正常 BFS/DFS 排序;每轮产出
-   known-item carry-forward ledger。
+   evaluator/reward 负结果先验（+TRT 2602.03094 = RQ-CTRL 替代解释反例）。表 A 另补
+   **PDR 原始论文（2510.01123,两路径分行）与 SWE-Replay（2601.22129）**——三项均为
+   Agentic Coding TeX 引文键一手可见（v6 复审 P1-2）。先按 taxonomy **v3** 编码（sidecar
+   单写流水线 = Stage-1B 首周工具,amendment-12 §3——coding 行由 DFS sidecar 生成而非
+   手抄,消灭 MAJOR-2 类错误通道）再入正常 BFS/DFS 排序;每轮产出 known-item
+   carry-forward ledger。
 1. **BFS**：65 查询 + 50 路由逐条执行,REC-0 落账,五计数机器导出,溢出走 splitter。
 2. **DFS**：四判据触发,全文精读（D2 八轴 + 13 轴,validator 机器强制）;排序（威胁度↓,
    core>element,时新性↓,梯队平局）,2025+ 优先。
 3. **退出**：E1∧E2∧E3 + 逐轮饱和表;E2 饱和宣称前置 = 债务 D-1。
-4. **产出**：系统级（taxonomy v2 投影）+ 组件级双层 occupancy → 负结果与冲突证据 → 饱和
+4. **产出**：系统级（taxonomy v3 投影,双分母+双政策敏感列）+ 组件级双层 occupancy → 负结果与冲突证据 → 饱和
    轨迹 → exposure union 复核 → 3–5 候选问题卡（四行强制）→ Stage-2A prior reproduction
    shortlist → Stage-1C owner 选题（含 CE-1b 构念裁决）。债务 D-1..D-5 带 owner 与截止 gate。
 
@@ -176,7 +186,7 @@ systematic query 即 Stage-1B 起点。
 | ATLAS: Agentic Test-time Learning-to-Allocate Scaling | Peijia Qin et al., 2026 | https://arxiv.org/abs/2606.01667 |
 | LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling（AutoTTS） | Tong Zheng et al., 2026 | https://arxiv.org/abs/2605.08083 |
 | Scaling Test-Time Compute for Agentic Coding | Joongwon Kim et al., 2026 | https://arxiv.org/abs/2604.16529 |
-| Team of Thoughts: Efficient Test-time Scaling of Agentic Systems | Jeffrey T. H. Wong et al., 2026 | https://arxiv.org/abs/2602.16485 |
+| Team of Thoughts: Efficient Test-time Scaling of Agentic Systems through Orchestrated Tool Calling（全题名;勿缩写 ToT） | Jeffrey T. H. Wong et al., 2026 | https://arxiv.org/abs/2602.16485 |
 | ToolGate: Token-Efficient Pre-Call Control for Tool-Augmented VL Agents | Anjie Liu et al., 2026 | https://arxiv.org/abs/2606.03054 |
 | Inference-Time Scaling of Verification（DeepVerifier, ACL Findings 2026） | Yuxuan Wan et al., 2026 | https://aclanthology.org/2026.findings-acl.1243/ |
 | Scaling Unverifiable Rewards: A Case Study on Visual Insights（ACL Findings 2026） | Shuyu Gan et al., 2026 | https://aclanthology.org/2026.findings-acl.1724/ |
@@ -190,7 +200,7 @@ systematic query 即 Stage-1B 起点。
 | Seg-Agent（引用交集校准） | Chao Hao et al., 2026 | https://arxiv.org/abs/2605.12953 |
 | Memory-Augmented Vision-Language Agents（fresh L12 held-out） | Tommaso Galliena et al., 2026 | https://arxiv.org/abs/2603.24257 |
 
-### A.3 Stage-1B 开局队列（KNOWN_QUEUE,登记待读;Round E 10 条 + 晋升 6 条）
+### A.3 Stage-1B 开局队列（KNOWN_QUEUE,登记待读;Round E 10 条 + 晋升 6 条 + v6 复审补入 3 条）
 
 | 引用 | 作者/年份 | 稳定链接 |
 |---|---|---|
@@ -210,6 +220,9 @@ systematic query 即 Stage-1B 起点。
 | Tree Search for Language Model Agents | Jing Yu Koh et al., 2024 | https://arxiv.org/abs/2407.01476 |
 | Just-In-Time Reinforcement Learning（JitRL,boundary:logits） | Yibo Li et al., 2026 | https://arxiv.org/abs/2601.18510 |
 | Omni-Decision: Progressive Evidence-State Agent System | Ming Ma et al., 2026 | https://arxiv.org/abs/2607.11433 |
+| Rethinking Thinking Tokens: LLMs as Improvement Operators（PDR 原始论文） | Lovish Madaan et al., 2025 | https://arxiv.org/abs/2510.01123 |
+| SWE-Replay: Efficient Test-Time Scaling for Software Engineering Agents | Yifeng Ding et al., 2026 | https://arxiv.org/abs/2601.22129 |
+| Test-time Recursive Thinking: Self-Improvement without External Feedback（TRT,RQ-CTRL 反例队列） | Yufan Zhuang et al., 2026 | https://arxiv.org/abs/2602.03094 |
 
 ### A.4 speech/omni 测量工具（MEASUREMENT_INSTRUMENT,不入方法占据分母;8 条）
 

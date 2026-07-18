@@ -6,6 +6,37 @@
 
 ---
 
+### 2026-07-18（续68）· v6 复审裁 WITHHOLD（2 Gate MAJOR:身份派生仍缺 RQ-SYS 承重内容 / PDR 源文错码撑 3/11）+ owner 六裁决 → taxonomy v3 + 拓扑政策 A + coding v4 源文重编码 + lineage 流水线合同
+
+**Context.** v6 复审（審 @04cf987;12/12 干净态复跑确认;上轮 2506.12928 异议被正式维持
+更正——双向诚信轨）裁 WITHHOLD。**MAJOR-1**:`is_project_identity_candidate` 仍只测「严格
+位+单核+原生模态」,漏 RQ-SYS 承重内容（在线 reward+序贯控制+decision rights）;且 v6 空位
+坐标把 K 池重新抬成身份必要条件（与 system-first thesis 冲突——K 池选择=退化特例）;
+CE-1b 系 vacuous pass（经模态轴通过,拓扑轴未被检验）;拓扑语义参与正典数字却推迟裁决=不可
+接受。**MAJOR-2**:vanilla PDR 被错码为 pairwise/llm_judge——**一手源坐实**（本地 eprint
+sha256 与评审钉定逐字节一致;TeX 明写 'For random-K, we follow PDR and randomly sample
+K previous summaries',select-K 才经 RTV）——3/11 失真;且 12/12 全绿没拦住:合同测试读同
+一份手填值,canon_projection 是声明非可执行 lineage。第八轮同型失败,形态=**源文-编码
+lineage**。Minor:ToT 信号分期未裁决/双分母/独立反例需可证伪性(one-axis+old-red-new-green)。
+§9 三项谱系补入(PDR origin/SWE-Replay/TRT——TeX 引文键一手可见,3/3 反幻觉过)。
+
+**Decision（owner 六裁决,2026-07-18）.** ①**拓扑政策 A 冻结**:共享权重多调用∈单核（RQ-SYS
+机制形态）+严格拓扑敏感列全程双算;②三分派生采纳（s0-core/rq-sys-control/method-candidate,
+K 池降机制分层,signal_lifecycle 新增）;③PDR 重编码+数字联动 GO;④ToT 按全文裁决 OK;
+⑤lineage 最小实现 OK+**工具链扩展性分析**（后续论文按 sidecar 单写流水线——coding 行由
+DFS sidecar 生成而非手抄,消灭 MAJOR-2 错误通道;fixture 库 append-only;locator 前置;
+reconciliation 入门禁);⑥文献登记+引文钉定 GO。
+
+**Consequences（整改批交付,零查询零模型）.** taxonomy v3+coding v4（PDR=random-K 无信号;
+ToT 裁决出列〔全文唯一标量=离线校准分 Eq.3,证据句入行注〕;逐行 lineage 六字段）;合同测试
+v3 **9/9**（killer fixtures 三例〔原生 audio 无 reward≠candidate/无 K 池的 reward-tool-stop=
+RQ-SYS compatible/在线二值可验证=reward〕+PDR 错码负控+CE-1b 敏感列非空洞+lineage
+reconciliation fail-closed）;**机器新正典（双分母）**:reward 6/11、rq_sys_compatible 5/11
+（4/8 works）、strict∧reward∧pool=轨迹池 **2/11（unique work 1/8）**、method_candidate
+0/11=重立空位坐标;开局表+3（PDR origin/SWE-Replay→表 A,TRT→表 C）;引文钉定;v6/矩阵/DFS
+件级联更正;amendment-12;回应信。**元规律第八例入 memory:源文-编码 lineage 层——单写
+原则(生成不手抄)是该层的可执行防线。**
+
 ### 2026-07-18（续67）· v5-response 复审裁 WITHHOLD（2 Gate MAJOR=构念效度:strict-identity 名不副实/carry-forward 采样失衡）+ owner 五裁决 → taxonomy v2 正典投影 + 三张开局保证表 + 独立语义反例制度
 
 **Context.** v5 回应信复审（审 @746a8b1;工程门禁+taxonomy+量词扫描被评审干净态复跑全绿
