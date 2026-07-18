@@ -29,8 +29,33 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 BOUND = [
     "wiki/survey/2026-07-19-gate-s1-v8-response.md",
     "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
+    "wiki/survey/2026-07-19-gate-s1-v9-response.md",
 ]
 BLOCK = re.compile(r"<!--\s*release_binding:\s*(\{.*?\})\s*-->", re.S)
+GEN_BLOCK = re.compile(r"<!--\s*generated_headline_begin\s*-->(.*?)<!--\s*generated_headline_end\s*-->", re.S)
+
+
+def render_headline(report):
+    """Canonical reader-visible headline table, rendered from the persisted
+    test output (v9-review P0-C: the prose table is GENERATED, never hand
+    copied; the checker re-renders and byte-compares)."""
+    occ = report["occupancy"]["policy_A"]
+    pool = occ["strict_AND_reward_AND_pool_BY_selection_object(mechanism)"]
+    rows = [
+        ("is_reward_guided", occ["is_reward_guided"]["n_paths"],
+         occ["is_reward_guided"]["n_works"]),
+        ("is_rq_sys_control_compatible", occ["is_rq_sys_control_compatible"]["n_paths"],
+         occ["is_rq_sys_control_compatible"]["n_works"]),
+        ("is_project_method_candidate", occ["is_project_method_candidate"]["n_paths"],
+         occ["is_project_method_candidate"]["n_works"]),
+        ("reward_guided_selection", occ["reward_guided_selection"]["n_paths"],
+         occ["reward_guided_selection"]["n_works"]),
+        ("strict∧reward∧pool (trajectory)", pool.get("trajectory", {}).get("n_paths", "0/?"),
+         pool.get("trajectory", {}).get("n_works", "0/?")),
+    ]
+    lines = ["| 派生量 | method-path 分母 | unique-work 分母 |", "|---|---|---|"]
+    lines += [f"| {k} | {p} | {w} |" for k, p, w in rows]
+    return "\n".join(lines)
 
 KEYMAP = {
     "reward_guided": lambda occ: occ["policy_A"]["is_reward_guided"]["n_paths"],
@@ -74,6 +99,14 @@ def check_artifact(text, name, cache):
         actual = fn(occ)
         if actual != v:
             fails.append(f"{name}: {k} declared {v} but generated output says {actual}")
+    # v9-review P0-C: if the artifact carries a generated headline block, the
+    # reader-visible table must byte-match a fresh render from the bound source.
+    for gm in GEN_BLOCK.finditer(text):
+        want = render_headline(report).strip()
+        got = gm.group(1).strip()
+        if got != want:
+            fails.append(f"{name}: generated headline block differs from fresh render "
+                         f"(reader-visible numbers are stale or hand-edited)")
     return fails
 
 
@@ -81,12 +114,21 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     cache = {}
-    # oracle-can-fail proof: wrong declared value must be flagged
-    fixture = ('<!-- release_binding: {"source": "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json", '
-               '"reward_guided": "999/11"} -->')
+    # oracle-can-fail proofs: wrong declared value AND a hand-edited generated
+    # block must both be flagged
+    src = "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json"
+    fixture = (f'<!-- release_binding: {{"source": "{src}", "reward_guided": "999/11"}} -->')
     if not any("declared 999/11" in f for f in check_artifact(fixture, "<fixture>", cache)):
         print("[FAIL] negative fixture NOT flagged — release-binding oracle broken")
         return 1
+    if cache.get(src):
+        good = render_headline(cache[src]).replace("6/11", "99/11", 1)
+        fixture2 = (f'<!-- release_binding: {{"source": "{src}"}} -->\n'
+                    f"<!-- generated_headline_begin -->\n{good}\n<!-- generated_headline_end -->")
+        if not any("generated headline block differs" in f
+                   for f in check_artifact(fixture2, "<fixture2>", cache)):
+            print("[FAIL] prose-block fixture NOT flagged — E5 oracle broken")
+            return 1
     all_fails = []
     for rel in BOUND:
         p = os.path.join(REPO, rel.replace("/", os.sep))

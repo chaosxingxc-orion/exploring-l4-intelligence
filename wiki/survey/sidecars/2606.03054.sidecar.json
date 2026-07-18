@@ -39,7 +39,26 @@
      "uses": [
       "execute_skip_gate"
      ],
-     "evidence": "canon: '输出 execute/skip'"
+     "evidence": "canon: '输出 execute/skip'",
+     "claim_evidence": {
+      "form": {
+       "value": "binary_gate",
+       "kind": "canon",
+       "quote": "输出 execute/skip"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "轨迹内逐工具调用级"
+      },
+      "uses": {
+       "value": [
+        "execute_skip_gate"
+       ],
+       "kind": "canon",
+       "quote": "门决定是否执行"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -137,12 +156,12 @@
     }
    },
    "source_locator": "canon: '门决定是否执行'",
-   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕",
+   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "c6bfdc5756dc422654ec8f1cb7d497246fe67b14da00244f0bc8969fb7674e82"
+   "adjudication_row_sha256": "f0e8ee62ec62db53305a49b2efa49c53a988cd58c482021c187e362516adf29e"
   }
  ]
 }

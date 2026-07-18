@@ -261,8 +261,17 @@ def validate(rows):
             s = sigs.get(e["signal_id"])
             if s is None:
                 bad.append(f"{pid}:edge-unknown-signal:{e['signal_id']}")
-            elif e.get("signal_lifecycle") and e["signal_lifecycle"] != s.get("lifecycle"):
+                continue
+            # v9-review P0-A: the edge structural contract is ENFORCED, never
+            # silently skipped (E1) — an inconsistent edge fails the row.
+            if e.get("signal_lifecycle") and e["signal_lifecycle"] != s.get("lifecycle"):
                 bad.append(f"{pid}:edge-signal-lifecycle-mismatch:{e['signal_id']}")
+            if e.get("signal_use") not in s.get("uses", []):
+                bad.append(f"{pid}:edge-use-not-in-signal:{e['signal_id']}:{e.get('signal_use')}")
+            if e.get("decision_right") not in r.get("decision_rights", []):
+                bad.append(f"{pid}:edge-right-not-in-row:{e.get('decision_right')}")
+            if e.get("decision_right") not in ALLOWED.get(e.get("signal_use"), ()):
+                bad.append(f"{pid}:edge-relation-not-whitelisted:{e.get('signal_use')}->{e.get('decision_right')}")
     ids = [r.get("method_path_id") for r in rows]
     if len(ids) != len(set(ids)):
         bad.append("duplicate-method-path-id")
@@ -351,12 +360,27 @@ def pdf_reader(stored_at):
     return reader
 
 
+def _anchor_on_pages(reader, n, anchor):
+    npages = len(reader.pages)
+    for i in range(max(0, n - 2), min(npages, n + 1)):
+        try:
+            if anchor.lower() in (reader.pages[i].extract_text() or "").lower():
+                return True
+        except Exception:
+            pass
+    return False
+
+
 def check_page_tokens(locator, reader, pid, what, fails):
-    """Every pN token must be within the pinned PDF's page range; an adjacent
-    ASCII anchor token is searched on pages N-1..N+1 (arXiv cover tolerance)."""
+    """Every pN token must be within the pinned PDF's page range AND carry a
+    non-empty ASCII anchor found on pages N-1..N+1 (v9-review E3: an in-range
+    page number alone is not a resolved locator)."""
     for m in PAGE_TOKEN.finditer(locator or ""):
         n = int(m.group(1))
         anchor = m.group(2)
+        if not anchor:
+            fails.append(f"{pid}:{what}:page-token-without-anchor:p{n}")
+            continue
         if reader is None:
             fails.append(f"{pid}:{what}:pdf-unreadable-for-page-check")
             return
@@ -364,17 +388,8 @@ def check_page_tokens(locator, reader, pid, what, fails):
         if not (1 <= n <= npages):
             fails.append(f"{pid}:{what}:page-out-of-range:p{n}/{npages}")
             continue
-        if anchor:
-            found = False
-            for i in range(max(0, n - 2), min(npages, n + 1)):
-                try:
-                    if anchor.lower() in (reader.pages[i].extract_text() or "").lower():
-                        found = True
-                        break
-                except Exception:
-                    pass
-            if not found:
-                fails.append(f"{pid}:{what}:page-anchor-missing:p{n}:{anchor}")
+        if not _anchor_on_pages(reader, n, anchor):
+            fails.append(f"{pid}:{what}:page-anchor-missing:p{n}:{anchor}")
 
 
 def check_quotes(locator, section_text, tex_norm, pid, what, fails):
@@ -390,10 +405,10 @@ def check_quotes(locator, section_text, tex_norm, pid, what, fails):
         fails.append(f"{pid}:{what}:locator-unverifiable:'{(locator or '')[:30]}'")
 
 
-def check_evidence_entry(fe, field, mp, section_text, tex_norm, pid, fails):
-    val = mp.get(field)
+def check_evidence_entry(fe, expected, field, section_text, tex_norm, reader, pid, fails):
     fv = fe.get("value")
-    same = (set(val) == set(fv)) if isinstance(val, list) and isinstance(fv, list) else (val == fv)
+    same = (set(expected) == set(fv)) if isinstance(expected, list) and isinstance(fv, list) \
+        else (expected == fv)
     if not same:
         fails.append(f"{pid}:evidence-value-mismatch:{field}")
     kind = fe.get("kind")
@@ -405,6 +420,18 @@ def check_evidence_entry(fe, field, mp, section_text, tex_norm, pid, fails):
         q = fe.get("quote", "")
         if not (tex_norm and _norm(q) in tex_norm):
             fails.append(f"{pid}:evidence-tex-quote-missing:{field}")
+    elif kind == "pdf_page":
+        # v9-review §4.4: declared-but-unimplemented kind is now implemented:
+        # page within pinned PDF range + anchor found on pages N-1..N+1.
+        n, anchor = fe.get("page"), fe.get("anchor")
+        if not (isinstance(n, int) and anchor):
+            fails.append(f"{pid}:pdf-page-entry-incomplete:{field}")
+        elif reader is None:
+            fails.append(f"{pid}:pdf-page-unreadable:{field}")
+        elif not (1 <= n <= len(reader.pages)):
+            fails.append(f"{pid}:pdf-page-out-of-range:{field}:p{n}/{len(reader.pages)}")
+        elif not _anchor_on_pages(reader, n, anchor):
+            fails.append(f"{pid}:pdf-page-anchor-missing:{field}:p{n}:{anchor}")
     elif kind == "absence":
         if not fe.get("note") or not fe.get("scope"):
             fails.append(f"{pid}:absence-entry-incomplete:{field}")
@@ -471,8 +498,20 @@ def reconcile(sidecars, coding_text):
             check_page_tokens(mp.get("source_locator"), reader, pid, "row-locator", fails)
             sig_ids = set()
             for s in mp.get("signals", []):
-                sig_ids.add(s.get("signal_id"))
-                check_quotes(s.get("evidence"), section_text, tex_norm, pid, f"signal:{s.get('signal_id')}", fails)
+                sid = s.get("signal_id")
+                sig_ids.add(sid)
+                check_quotes(s.get("evidence"), section_text, tex_norm, pid, f"signal:{sid}", fails)
+                check_page_tokens(s.get("evidence"), reader, pid, f"signal:{sid}", fails)
+                # v9-review P0-B: signal-level field binding — form/lifecycle/
+                # uses must each declare which evidence supports which value.
+                sce = s.get("claim_evidence") or {}
+                for key in ("form", "lifecycle", "uses"):
+                    fe = sce.get(key)
+                    if fe is None:
+                        fails.append(f"{pid}:signal-evidence-missing:{sid}:{key}")
+                        continue
+                    check_evidence_entry(fe, s.get(key), f"signal:{sid}:{key}",
+                                         section_text, tex_norm, reader, pid, fails)
             for e in mp.get("control_edges", []):
                 if e.get("signal_id") not in sig_ids:
                     fails.append(f"{pid}:edge-references-unknown-signal:{e.get('signal_id')}")
@@ -484,7 +523,8 @@ def reconcile(sidecars, coding_text):
                 if fe is None:
                     fails.append(f"{pid}:required-evidence-missing:{field}")
                     continue
-                check_evidence_entry(fe, field, mp, section_text, tex_norm, pid, fails)
+                check_evidence_entry(fe, mp.get(field), field, section_text, tex_norm,
+                                     reader, pid, fails)
             coder = mp.get("coder") or sc.get("coder")
             adj = mp.get("semantic_adjudicator")
             if coder in (None, "", "W1") or adj in (None, "", "W1"):
@@ -713,11 +753,19 @@ def main():
     baseline_val = set(validate(json.loads(stamped_coding)["rows"]))
     mut_results = {}
 
-    def mutate(tag, fn_sc=None, fn_coding=None, expect_kind=None):
+    def mutate(tag, fn_sc=None, fn_coding=None, expect_kind=None, restamp=False):
+        """restamp=True simulates the NEW-ROW flow (v9-review Round C): the
+        error enters BEFORE adjudication and the row hash is legitimately
+        recomputed — catches must come from validator/evidence contracts,
+        never from the row hash."""
         scs = copy.deepcopy(stamped)
         ct = stamped_coding
         if fn_sc:
             fn_sc(scs)
+            if restamp:
+                for _, sc in scs:
+                    for mp in sc["method_paths"]:
+                        mp["adjudication_row_sha256"] = row_hash(mp)
             ct = render(scs) if fn_coding is None else ct
         if fn_coding:
             ct = fn_coding(ct)
@@ -748,7 +796,7 @@ def main():
 
     def mut_fake_page(scs):
         mp = sc_of(scs, "2606.01667")["method_paths"][0]
-        mp["source_locator"] = "canon: '独占 explore/stop 决策' (p9999)"
+        mp["source_locator"] = "canon: '独占 explore/stop 决策' (p9999 explore)"
 
     def mut_lifecycle(scs):
         mp = sc_of(scs, "2026.findings-acl.1243")["method_paths"][1]
@@ -778,7 +826,28 @@ def main():
     def mut_nonsense(scs):
         sc_of(scs, "2606.01667")["method_paths"][0]["source_locator"] = "nonsense"
 
+    def mut_e1_edge_use(scs):
+        mp = sc_of(scs, "2026.findings-acl.1724")["method_paths"][0]
+        mp["control_edges"][0]["signal_use"] = "select"
+
+    def mut_e2_signal_evidence_page(scs):
+        sc_of(scs, "2606.01667")["method_paths"][0]["signals"][0]["evidence"] = "p9999"
+
+    def mut_e3_bare_page(scs):
+        sc_of(scs, "2606.01667")["method_paths"][0]["source_locator"] = "p1"
+
+    def mut_e4_signal_form(scs):
+        sc_of(scs, "2026.findings-acl.1724")["method_paths"][0]["signals"][0]["form"] = "text_critique"
+
     m_ok = not harness_baseline and all([
+        mutate("E1_edge_use_flip", mut_e1_edge_use, restamp=True,
+               expect_kind="edge-use-not-in-signal"),
+        mutate("E2_signal_evidence_p9999", mut_e2_signal_evidence_page, restamp=True,
+               expect_kind="page"),
+        mutate("E3_bare_in_range_page", mut_e3_bare_page, restamp=True,
+               expect_kind="page-token-without-anchor"),
+        mutate("E4_signal_form_flip", mut_e4_signal_form, restamp=True,
+               expect_kind="evidence-value-mismatch"),
         mutate("wrong_horizon", mut_horizon, expect_kind="row-hash"),
         mutate("double_flip_horizon_plus_evidence", mut_horizon_double_flip, expect_kind="row-hash"),
         mutate("fake_page_p9999", mut_fake_page, expect_kind="page-out-of-range"),
@@ -794,8 +863,8 @@ def main():
         mutate("coding_hand_edit", fn_coding=lambda ct: ct.replace(
             '"control_horizon": "sequential"', '"control_horizon": "terminal"', 1)),
     ])
-    check("V8", "敏感面突变集 13 类全 fail-closed(模拟盖章副本上跑,基线必须净;horizon/双翻转="
-          "裁决哈希拦截,p9999=页码范围拦截,lifecycle 失配=validator 拦截)",
+    check("V8", "敏感面突变集 17 类全 fail-closed(模拟盖章副本+基线必须净;E1–E4 走新行流程"
+          "restamp——拦截必须来自 validator/证据合同而非行哈希)",
           m_ok, {"harness_baseline": sorted(harness_baseline)[:3], **mut_results})
 
     fixture12 = base_row(method_path_id="__fx12__#path", paper_work_id="__fx12__",
@@ -805,10 +874,25 @@ def main():
                          control_edges=[fx_edge("revise", "retry")])
     occ12 = occupancy(("single_core", "single_core_multi_call"), rows + [adapt(fixture12)])
     dup_bad = validate(rows + [dict(rows[0])])
-    check("V9", "扩容:第12行→分母自动 /12;重复 method_path_id 被拒",
+    # v9-review P0-A acceptance: a GENERIC new 12th row (no per-ID author
+    # expectation anywhere) with an E1-style inconsistent edge must be
+    # rejected by the general validator alone.
+    good12 = dict(adapt(fixture12), load_bearing=False,
+                  adjudication_status="adjudicated_agree",
+                  fulltext_ref="fx", canonical_record_id="fx", source_locator="fx",
+                  coder="fx-coder", semantic_adjudicator="fx-adj")
+    bad12 = copy.deepcopy(good12)
+    bad12["control_edges"][0]["signal_use"] = "select"  # not in signal's uses
+    v_good = [b for b in validate([good12]) if "lineage" not in b]
+    v_bad = validate([bad12])
+    check("V9", "扩容:第12行→分母自动 /12;重复被拒;通用第12行无逐ID期望——好行净/E1式坏边行被"
+          "validator 单独拒绝",
           occ12["n_method_paths"] == n_rows + 1
           and occ12["is_reward_guided"]["n_paths"].endswith(f"/{n_rows + 1}")
-          and "duplicate-method-path-id" in dup_bad)
+          and "duplicate-method-path-id" in dup_bad
+          and not v_good
+          and any("edge-use-not-in-signal" in b for b in v_bad),
+          f"good12={v_good[:2]} bad12={[b for b in v_bad if 'edge-use' in b][:1]}")
 
     n_pass = sum(1 for c in checks if c["result"] == "PASS")
     report = {"artifact_id": "SF-IDENTITY-TAXONOMY-V5-TEST-2026-07-19-01",
@@ -821,8 +905,13 @@ def main():
               "summary": f"{n_pass}/{len(checks)} PASS",
               "verdict": "PASS" if n_pass == len(checks) else "FAIL"}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    payload = (json.dumps(report, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
     with open(OUT, "wb") as f:
-        f.write((json.dumps(report, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
+        f.write(payload)
+    # v9-review P2: platform-stamped copy so neither platform's run overwrites
+    # the other's evidence; sf_dual_platform_check.py asserts equality.
+    with open(OUT.replace(".json", f".{os.name}.json"), "wb") as f:
+        f.write(payload)
     print(json.dumps({"summary": report["summary"], "verdict": report["verdict"],
                       "platform": report["platform"],
                       "policy_A_key_numbers": {

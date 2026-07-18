@@ -40,7 +40,27 @@
       "stop_budget",
       "synthesize_input"
      ],
-     "evidence": "canon: 'label-free,共识+自报 confidence'"
+     "evidence": "canon: 'label-free,共识+自报 confidence'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "label-free,共识+自报 confidence"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "凭 in-context 候选池评估独占 explore/stop 决策"
+      },
+      "uses": {
+       "value": [
+        "stop_budget",
+        "synthesize_input"
+       ],
+       "kind": "canon",
+       "quote": "独占 explore/stop 决策"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -54,14 +74,14 @@
      "signal_id": "s_consensus",
      "signal_use": "stop_budget",
      "decision_right": "stop",
-     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8)",
+     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8 Fig)",
      "edge_semantics": "candidate-pool convergence assessment triggers termination"
     },
     {
      "signal_id": "s_consensus",
      "signal_use": "stop_budget",
      "decision_right": "tool_call",
-     "source_locator": "canon: '独占 explore/stop 决策' (p4)",
+     "source_locator": "canon: '独占 explore/stop 决策' (p4 explore)",
      "edge_semantics": "the same assessment controls whether another explore solver call is dispatched (one decision)"
     },
     {
@@ -154,12 +174,12 @@
     }
    },
    "source_locator": "canon: '独占 explore/stop 决策' (p3 Algorithm/p8 Fig/p14 delegated)",
-   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕",
+   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 非 reward 形式,边不升格",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1492caa4f77089ea99168ea3561864cbf331c7e8e7afde708a689c592bc42273"
+   "adjudication_row_sha256": "20b2075a99328dfb10be13779df7d2f33c850f5625658f8a7eb537f4429ee354"
   }
  ]
 }
