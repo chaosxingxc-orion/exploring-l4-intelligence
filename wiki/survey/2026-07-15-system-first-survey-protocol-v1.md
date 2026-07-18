@@ -1,6 +1,6 @@
 ---
 protocol_id: SURVEY-PROTO-2026-07-15-02
-title: "System-first Survey 检索协议 v1+amendments 1–5——八 lanes + 基础谱系道 SF-L9 + 受控类目道 SF-L10(SE/HC)/SF-L11(MM/MA)/SF-L12(CV/AI)/SF-L13(LG/ML/NE) / arXiv-primary 语料+免费官方源救援·65 条编译冻结查询（48+3+2+2+6,A3-8/C4-6/C4A/C4B）/ 发现优先级 tier+质量七维 / BFS→触发式 DFS / 92 列名种子（计数正典 = manifest 枚举）"
+title: "System-first Survey 检索协议 v1+amendments 1–5——八 lanes + 基础谱系道 SF-L9 + 受控类目道 SF-L10(SE/HC)/SF-L11(MM/MA)/SF-L12(CV/AI)/SF-L13(LG/ML/NE) / arXiv-primary 语料+免费官方源救援·65 条编译冻结查询（48+3+2+2+6+4,A3-8/C4-6/C4A/C4B/C4C）/ 发现优先级 tier+质量七维 / BFS→触发式 DFS / 92 列名种子（计数正典 = manifest 枚举）"
 date: 2026-07-15
 status: "DRAFT — 内审环后送 reviewer 签署;签署前零查询执行（queries_executed: 0,本行为 attestation）"
 authorization: "重校准评审 Gate S1 = PROTOCOLIZATION_AUTHORIZED / QUERY_EXECUTION_STILL_PENDING;proposal v2（STAGE1A-PROPOSAL-2026-07-15-03,已转交）§11 为规格来源"
