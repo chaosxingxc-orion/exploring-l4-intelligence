@@ -3,7 +3,7 @@ artifact_id: "SF-KNOWN-ITEM-DFS-SYSTEMCONTROL-2026-07-18-01"
 title: "known-item 保证队列 8 项之 system-control 13 轴 DFS 深读（v4 复审 P0-3/P0-4 整改;owner 裁决③④）"
 date: 2026-07-18
 method: "两个隔离深读代理（Opus）逐篇全文 PDF 精读;schema = amendment-9 §3 的 system-control 13 轴 + 负结果 + 与本项目关系（仅事实差异,禁创新定性——owner 裁决④仍生效）;全文正典:5 arXiv 双 rendition 入 fulltext ledger,3 ACL 官方源救援入 survey-backups（sha256 于 v4-review 访问台账）"
-verification: "主执行方承重引文抽查:批 A 6/6 逐字命中（其一为 PDF 抽取粘连词假阴性后复核命中）;批 B 5/5 命中（其一为连字换行变体复核命中）——合计 11/11;抽查只声称抽中项定位质量"
+verification: "主执行方承重引文抽查:批 A 6/6 逐字命中（其一为 PDF 抽取粘连词假阴性后复核命中）;批 B 5/5 命中（其一为连字换行变体复核命中）——合计 11/11;抽查只声称抽中项定位质量。〔dated correction 2026-07-18(v6 复审):①Agentic Coding 记录中 PDR 段的信号语义以 coding-v4 为准——vanilla PDR = random-K 随机采样无选择信号（TeX 一手:'For random-K, we follow PDR and randomly sample K previous summaries';select-K 才经 RTV）,本文批 A 散文对 PDR/RTV 未分变体处以此更正;②Team-of-Thoughts 信号分期裁决 = 离线校准标量 + 推理期合成内定性评估,无部署期独立 reward（P1-1）——『orchestrator 聚合(画像)』表述维持,reward 归类以 coding-v4 为准〕"
 recall_note: "65 查询离线召回（正典 matcher）:ATLAS 5 命中(SF-L2-Q1/L13-Q1/L13-Q3/L14-Q1/L15-Q1)/AutoTTS=SF-L2-Q1/AgenticCoding=SF-L2-Q1/TeamOfThoughts=零命中/ToolGate=零命中;ACL 3 项非 arXiv 走官方源;known-item 身份与零命中反例身份并存,不加 seed、不称召回修复"
 loadbearing_facts: "〔dated correction 2026-07-18(v5 复审 P0-2/引用审计):本字段的自由文本身份汇总被 identity taxonomy v1 机器重编码取代——正典 = wiki/survey/2026-07-18-sf-known-item-coding-v2.json + docs/checks/2026-07-18-sf-identity-taxonomy-test.json(9 method path,占据合取机器重算;『非 reward-model 引导』类散文口径撤回——llm_judge∈reward 集合);ATLAS 88.9% 补条件 = GPQA-Diamond 单基准 Fig 7a 有可定义正确多数收敛点的轨迹子集,非跨基准总体;正文各篇逐轴事实记录维持不改写〕①八项中零项含 speech/audio〔已检视集合〕;④Agentic Coding 的选择显式不触 gold=read-out-only 实证参照;⑤ATLAS 自适应停机+stateful 直接合成 = decision-rights/停止轴的最强组件先验"
 ---

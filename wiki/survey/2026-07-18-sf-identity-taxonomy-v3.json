@@ -1,0 +1,31 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-2026-07-18-03",
+ "title": "identity taxonomy v3 — RQ-SYS control edition (v6 review P0-1; owner rulings 1-A/2 2026-07-18)",
+ "supersession": "v3 replaces v2 (dated supersession, same day): v2's is_project_identity_candidate lacked the load-bearing RQ-SYS content (reward-guided + sequential control + decision rights) and re-elevated K-pool to identity; v3 splits the derivation into three honestly-named quantities, adds signal_lifecycle, demotes K-pool to mechanism stratification, freezes topology policy A with a strict-topology sensitivity column dual-computed throughout. v2 retained unmodified for audit.",
+ "topology_policy": {
+  "frozen_policy_A": "同一冻结核心的多调用/多角色编排（orchestrator+solver 共享权重,single_core_multi_call）∈ 单核身份——owner 裁决 1-A 2026-07-18;理由:这正是 RQ-SYS 的机制形态,排除它等于排除本项目目标架构",
+  "sensitivity_variant": "strict_topology = {single_core} only——全程双算并持久化（CE-1b 拓扑蕴含在敏感列中非空洞可见;Stage-1C 综合时 owner 选解释）"
+ },
+ "new_fields": {
+  "signal_lifecycle": "enum — offline_calibration(开发/校准期产生,如 judger 选择、controller 发现、gate 训练) / inference_pre_context(推理前注入的静态先验,如能力画像) / online_step(逐步在线产生并影响下一动作) / terminal(终态一次性评价) / none",
+  "paper_work_id": "string — unique-work 分母键（同一论文的多 method path 共享）",
+  "component_path_ids": "array — 组合 pipeline 行声明其成分路径,防独立复制误计",
+  "fulltext_ref": "object {ledger, id, kind} — 全文对象在台账中的定位（reconciliation 检查其在案且带 sha256）",
+  "canonical_record_id": "string — 'file#anchor' 指向 13 轴 DFS 正典记录节（reconciliation 检查文件存在且 anchor 在文内）",
+  "source_locator": "string — 承重字段的原文定位（页/节/表/TeX 段;非空强制）",
+  "coder": "string", "semantic_adjudicator": "string",
+  "adjudication_required": "bool — 语义未决处如实标注,不猜最近枚举"
+ },
+ "signal_form_note": "binary_gate = 学习得到的二值动作决策（非奖励信号）;在线可验证二值结果（如 pass/fail 决定 retry/stop）编码为 verifiable_outcome——二值形式不自动排除（v6 复审 P0-1 验收点）;trained offline gate 不因评价性自动纳入",
+ "derived_v3": {
+  "data_access_strict_bits": "同 v2（权重/标签/信息/访问严格位,机械语义）",
+  "is_reward_guided": "signal_lifecycle ∈ {online_step, terminal} AND signal_form ∈ {scalar_score, pairwise_comparison, verifiable_outcome} AND signal_use ∩ {select, prune, revise, route, retry, branch, tool_call, memory_write, supply, stop_budget, execute_skip_gate} ≠ ∅（Round 4.3 修复:reward 可作用于任一下一步动作权;离线校准标量不计;text_critique/consensus 单列追踪）",
+  "is_s0_core_compatible": "data_access_strict_bits AND core_topology ∈ policy（A:{single_core, single_core_multi_call};敏感列:{single_core}） AND core_native_modality ∈ {audio_native, omni_native}——只声称 S0 核心兼容位,不称项目身份",
+  "is_rq_sys_control_compatible": "is_reward_guided AND control_horizon == sequential AND decision_rights ≠ ∅（reward/反馈因果改变至少一项下一步动作权;终态-only 选择 = 组件/退化路径,不冒充序贯控制）",
+  "is_project_method_candidate": "is_s0_core_compatible AND is_rq_sys_control_compatible（unknown 一律不满足）",
+  "mechanism_stratification": "K 池/selection_object/terminal_operator = 机制分层描述,不入身份合取（v6 复审 4.2:K-pool selector 是序贯控制的退化特例,非身份必要条件——空位坐标随之重立为 is_project_method_candidate 本身）"
+ },
+ "denominators": "全部 occupancy 双报:method-path x/N_paths 与 unique-work y/N_works（paper_work_id 键;组合路径不作独立复制证据）",
+ "killer_fixtures_contract": "三个 Round-C killer cases 为固定 fixture（旧 v2 规则会错、v3 规则会对）:①严格+单核+原生 audio 但无 reward/序贯 → 不得报 method candidate;②严格+单核+原生 omni,reward 决定 tool/stop,无 K 池 → 必须报 RQ-SYS compatible;③在线二值可验证结果决定 retry/stop → 不因二值形式排除。另:PDR 错码 fixture（把 #pdr-random-k 改回 pairwise_comparison 必须红）",
+ "independent_counterexamples_file": "wiki/survey/2026-07-18-sf-independent-counterexamples-v1.json（v3 字段映射:is_project_identity_candidate → is_project_method_candidate;CE-1b 在敏感列中由拓扑本身判定,非空洞）"
+}

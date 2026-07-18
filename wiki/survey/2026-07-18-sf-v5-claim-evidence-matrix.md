@@ -8,17 +8,17 @@ discipline: "五值证据模式(amendment-9 §2);SOURCE_REPORTED_TRACEABLE 恒�
 
 # v5 增补 claim-evidence 矩阵
 
-## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v2** 重算,输入 = coding-**v3**.json **11** 条 method path;〔dated correction:v1 版行以 taxonomy v1 为据,其 strict 位命名与分析单位缺陷经 re-review P0-1 更正——本节全量重立,旧行随 git 历史留档〕）
+## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v3** 重算,输入 = coding-**v4**.json 11 条 method path;〔dated correction 第三版:v2 版行经 v6 复审两 Gate MAJOR 更正——PDR 源文错码致 3/11 撤回、身份三分派生取代单一位;旧行随 git 历史留档〕）
 
-| claim ID | v5 陈述 | 复算入口 | 独立复验 |
+| claim ID | 陈述 | 复算入口（`sf_identity_taxonomy_v3_test.py` 持久化输出;全部双分母+双政策敏感列） | 独立复验 |
 |---|---|---|---|
-| V5-Q01v2 | 原生 audio/omni 进核 = 0/11;项目身份候选 = 0/11（strict 位∧单核拓扑∧原生 audio/omni,unknown 不满足） | `sf_identity_taxonomy_v2_test.py` → core_native_modality_audio_or_omni / is_project_identity_candidate | 是 |
-| V5-Q02v2 | strict-bits∧reward-guided∧K 池 = 轨迹池 3/11（全部同一篇 Agentic Coding:RTV/PDR/pipeline）;工具-agent 池与输出池占据不满足 strict 位 | 同上 → strict_AND_reward_AND_pool_BY_selection_object（按 selection_object 分层,不跨池聚合） | 是 |
-| V5-Q03v2 | all_components_weight_frozen = 8/11;data_access_strict_bits = 4/11 | 同上 → 对应键 | 是 |
-| V5-Q04v2 | is_reward_guided = 8/11（ToolGate 经 Round C 更正为 binary_gate 出集合） | 同上 → is_reward_guided | 是 |
-| V5-Q05v2 | trained-PRM∧K 池 = 1/11（DREAM） | 同上 → **learned_rm_prm_AND_pool（持久化断言,P0-3 修复——v1 版此行无对应机器输出,已更正）** | 是 |
-| V5-Q06v2 | 待检验候选空位坐标 = strict∧reward∧pool∧原生 audio/omni 单核,已检视集合 0/11 | is_project_identity_candidate 与分层合取皆机器输出;**空位属性 = 待 Stage-1B 检验的候选,非结论**〔v1 版以数据模态位冒充原生模态推导——已按 P0-3 撤回重立〕 | 合取机器可算;空位属性待检验 |
-| V5-Q07v2 | exposure union 计数（W1+umbrella 27;W4 ≈70 组级事件） | **证据模式降格（P1-3）:REVIEWER_INFERENCE + TEAM_ATTESTATION 考古估计**——W4 为组级行含多运行,无规范化 event ledger;指针抽查≠独立重算;ledger 化延至 Stage-2 held-out 冻结前 | 否（估计类） |
+| V6-Q01 | is_s0_core_compatible = 0/11;is_rq_sys_control_compatible = 5/11 路径（4/8 works）;is_project_method_candidate = 0/11（重立后的待检验空位坐标） | occupancy.policy_A → 对应键 | 是 |
+| V6-Q02 | strict∧reward∧K 池（机制分层非身份）= 轨迹池 **2/11 路径（unique work 1/8**,#rtv 与 #pipeline 同一篇;PDR 按 TeX 更正后原 3/11 撤回〕 | strict_AND_reward_AND_pool_BY_selection_object（双分母） | 是（eprint sha 一手核验） |
+| V6-Q03 | is_reward_guided = 6/11（PDR 无信号/ToolGate 门/consensus×2/ToT 裁决出列） | is_reward_guided（双分母） | 是 |
+| V6-Q04 | trained-PRM∧K 池 = 1/11（DREAM） | learned_rm_prm_AND_pool | 是 |
+| V6-Q05 | 原生 audio/omni 进核 = 0/11 | core_native_audio_or_omni | 是 |
+| V6-Q06 | 拓扑政策 A 与严格拓扑敏感列双算（CE-1b 在敏感列非空洞） | occupancy.sensitivity_strict_topology + V5b 检查 | 是 |
+| V5-Q07v2 | exposure union 计数（W1+umbrella 27;W4 ≈70 组级事件） | **证据模式降格（P1-3）:REVIEWER_INFERENCE + TEAM_ATTESTATION 考古估计**——组级行含多运行,无规范化 event ledger;ledger 化延至 Stage-2 held-out 冻结前 | 否（估计类） |
 
 ## §2 外部论文数字（SOURCE_REPORTED_TRACEABLE——未复算;效力限该论文报告的模型/任务/设置内）
 

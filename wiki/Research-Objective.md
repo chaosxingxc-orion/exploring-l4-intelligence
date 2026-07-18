@@ -98,8 +98,15 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   coding v3=11 路径,合同测试 6/6 含独立反例区 4 例——CE-1b 拓扑蕴含=构念开放问题留 owner〕
   /机器新正典:身份候选 0/11、strict∧reward∧pool=轨迹池 3/11 同一篇、PRM∧pool 1/11 持久化
   /三张开局保证表〔EchoChain 保证入口+drift full-duplex 轴〕/证据模式降格三处/量词扫描降
-  lint）,**当前动作 = 复审回应信已落盘（`survey/2026-07-18-gate-s1-v5-rereview-response.md`）,
-  待评审 schema 语义轮复核（0 新 Gate MAJOR → 签 Stage-1B）**;执行前置
+  lint）→ **v6 合并送审 → v6 复审 WITHHOLD（2 Gate MAJOR:身份派生缺 RQ-SYS 内容+K 池被抬回身份
+  /PDR 源文错码撑 3/11〔TeX 一手坐实,同型第八轮=源文-编码 lineage〕）→ owner 六裁决
+  （续68:拓扑政策 A/三分派生/重编码/ToT 裁决/lineage+工具链 sidecar 单写合同/文献补入）→
+  整改批当日交付**（taxonomy v3+coding v4:机器新正典〔双分母〕= rq_sys_compatible 5/11
+  〔4/8 works〕、strict∧reward∧pool=轨迹池 2/11〔work 1/8〕、reward 6/11〔ToT 裁决出列〕、
+  method_candidate 0/11=重立空位坐标;合同测试 9/9 含 killer fixtures+PDR 错码负控+CE-1b
+  敏感列非空洞+lineage reconciliation）,**当前动作 = v6 回应信已落盘（`survey/2026-07-18-
+  gate-s1-v6-response.md`,问题—修改—证据—新数字—未决项五列）,待评审按 §13 放行清单复核
+  （0 新 Gate MAJOR → 签 Stage-1B）**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。

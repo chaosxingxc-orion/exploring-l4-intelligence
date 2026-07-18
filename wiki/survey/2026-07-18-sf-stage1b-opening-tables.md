@@ -20,6 +20,8 @@ provenance_note: "「查询命中」列 = 离线正典 matcher 复现(非联网�
 | Tree Search for Language Model Agents (2407.01476) | SEED_GUARANTEED（兼哨兵） | 真实 web 环境推理时搜索 |
 | JitRL (2601.18510) | SEED_GUARANTEED | 无梯度经验记忆+advantage 但依赖 logits——「方法最近、接口不合」关键边界 |
 | Omni-Decision (2607.11433) | SEED_GUARANTEED（在册最高优先威胁） | training-free omni evidence-state 系统;含 web/new-info,非 strict identity 但系统威胁最高 |
+| Rethinking Thinking Tokens（PDR 原始论文,2510.01123,Madaan et al.） | REVIEWER_KNOWN_ITEM（v6 复审 P1-2;Agentic Coding TeX 引文键 pdr-paper 一手可见） | PDR 谱系源头;inference orchestration 与 trained-8B 两路径分行编码——TF-Strict 拆分检验件 |
+| SWE-Replay (2601.22129,Ding et al.) | REVIEWER_KNOWN_ITEM（TeX 引文键 swe-replay-paper） | 历史轨迹复用+branch decision rights+无显式 reward selector——检验「是否错误要求 K 池/标量 reward」的高价值近邻 |
 
 ## 表 B：speech/omni 测量工具（MEASUREMENT_INSTRUMENT——**不入方法占据分母**;为 RQ-OMNI/RQ-SAFE 提供「哪里可测、哪里会失败」）
 
@@ -46,3 +48,4 @@ provenance_note: "「查询命中」列 = 离线正典 matcher 复现(非联网�
 | 外部控制器优于模型 prompt 自调节（自报 VoI 降精度反增调用） | ToolGate (2606.03054) | known-item DFS 批 B |
 | DeepVerifier 迭代早峰后回落（correct→incorrect 迁移跨轮持续） | ACL 1243 | known-item DFS 批 B |
 | symmetric debate 无超越 majority 增益;naive parallel scaling 非普遍有益（引用负结果） | ATLAS 引文 | known-item DFS 批 A |
+| 无外部反馈的自条件化迭代增益（RQ-CTRL 强反例/替代解释:增益或来自供给设计非 reward 引导） | TRT (2602.03094,Zhuang et al.;TeX 引文键 test-time-recursive-thinking-paper) | v6 复审 P1-2 登记,KNOWN_QUEUE 边界/反证队列 |
