@@ -6,6 +6,38 @@
 
 ---
 
+### 2026-07-18（续67）· v5-response 复审裁 WITHHOLD（2 Gate MAJOR=构念效度:strict-identity 名不副实/carry-forward 采样失衡）+ owner 五裁决 → taxonomy v2 正典投影 + 三张开局保证表 + 独立语义反例制度
+
+**Context.** v5 回应信复审（审 @746a8b1;工程门禁+taxonomy+量词扫描被评审干净态复跑全绿
+确认;收敛信号明确:零查询窄幅整改后即签,不再扩张 Stage-1A）裁 WITHHOLD。**MAJOR-1 构念
+效度**：`is_project_strict_identity` 只是权重/标签/访问位,漏单核拓扑/原生模态/decision
+rights/控制时域/终态算子;**内部矛盾坐实**——正典 REC-2 本有 API-text|API-multimodal 双
+枚举,v1 删掉后强制 strict=api_text_only ⇒ 原生 omni 核心永远无法 strict（荒谬后果=构念
+缺陷直接证明）;双 schema 漂移（正典字段已在,另建缩减版）;ToolGate 被 schema 强塞
+RM/PRM（我方 DFS 散文自证矛盾）;K 池分析单位混杂（工具池/轨迹池/输出池;Team-of-Thoughts
+终态=合成;Agentic Coding RTV/PDR 併行）。**MAJOR-2 carry-forward 失衡**：2506.12928 仓内
+精读+种子在册但不在开局队列;speech/voice 测量证据（τ-Voice/FDB-v3/EchoChain/From-Text-
+to-Voice）无保证入口——**EchoChain 65 查询零命中+不在种子（复现坐实,full-duplex 词族=新
+漂移轴）**。同型失败第七轮,形态再上移:量词→**构念命名**;根因=同源 oracle 在构念层必然
+失明（作者自写反例只能验实现-spec 一致,不能验 spec-构念等同）。**有据异议 #2**：复审
+「2506.12928 不命中 65 query」句经正典 matcher 复现不成立——实中 SF-L2-Q1/L5-Q5/L8-Q5
+（carry-forward 论点不受影响,事实句更正）。
+
+**Decision（owner 五裁决,2026-07-18）.** ①构念修复按单一正典投影逻辑;②三张开局保证表;
+③2506.12928 有据异议入回应信;④**独立语义反例制度常设**（非实现者代理自官方全文供给,
+实现者只落码——oracle 不同源原则上移到构念层）;⑤P0-3/P1 机械项全修。
+
+**Consequences（整改批交付,全程零查询零模型）.** taxonomy v2（正典投影+诚实改名
+〔data_access_strict_bits/all_components_weight_frozen〕+恢复 api-multimodal+新增拓扑/原生
+模态/信号三分/decision rights/selection_object/terminal_operator 轴）;coding v3（11 method
+paths,RTV/PDR/pipeline 拆行,ToolGate=trained binary gate 出 reward 集合）;v2 合同测试
+6/6（含**独立语义反例区 4 例**——CE-1b 拓扑蕴含登记为构念开放问题留 owner);机器重算新
+正典:**项目身份候选 0/11、strict∧reward∧pool=轨迹池 3/11（同一篇）、trained-PRM∧pool
+1/11（持久化断言）**;三张开局保证表（表 A 8+10+6 晋升/表 B 测量工具〔EchoChain 保证入口+
+drift 队列 full-duplex 轴 1/3〕/表 C 负结果先验);证据模式降格三处;量词扫描器降 prose
+lint;amendment-11;v5/矩阵/union 同步更正;回应信含异议 #2。**元规律第七例入 memory：
+修一层升一层（动词→能力引用→量词→构念命名),新防线=构念层 oracle 不同源制度。**
+
 ### 2026-07-18（续66）· v5 复审裁 WITHHOLD（3 Gate MAJOR=语义正确性:量词/分类/矩阵 scope）+ owner 五裁决 → W4 四仓考古 + identity taxonomy 冻结 + 量词扫描
 
 **Context.** v5 合并送审版复审 WITHHOLD——**明确拒绝以「量太少」退稿**（不以未完成综述/无

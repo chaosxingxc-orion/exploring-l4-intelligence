@@ -5,7 +5,7 @@ date: 2026-07-18
 addressee: "Gate S1 评审人 / 评委"
 relation: "v3-consolidated 之 working-thesis 裁定不重开;v4（调研证据呈报版,审 @6bfa17f → WITHHOLD → 更正版已随批入库,修订记录 7 项在案）之全部整改内容**并入本件成一自包含送审件**;v4 复审回应信（survey/2026-07-18-gate-s1-v4-response.md）为逐项对账载体;本件不新增签署对象——签署对象 = 阶段正典 v2 + 整改批 @0817ba6 + 九项门禁重绿"
 stage_account: "四字段（阶段正典 v2,2026-07-18 dated supersession,owner 签署）:current_activity_stage = Stage-1A survey-ready gate;new_model_touches_since_gate_freeze = 0（起算 af96a89）;cumulative_model_touches = 非零（27 历史事件,见 §2.2）;legacy_experiments = INHERITED_PRIOR_EXPOSURE（正典 = wiki/2026-07-18-inherited-prior-exposure-union.md）"
-evidence_discipline: "逐 claim 五值证据模式（amendment-9 §2）;矩阵 = v4 矩阵（wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md,scope=v4）+ **v5 增补矩阵**（wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md——本件全部新数字与量词逐 claim ID）;占据合取量词一律引用 identity taxonomy 机器重算（docs/checks/2026-07-18-sf-identity-taxonomy-test.json）;外部论文数字一律 SOURCE_REPORTED_TRACEABLE（可定位未复算,效力限该论文设置内);占据/空位陈述 = directional-only,创新点未锁定（owner 裁决,任何『成立/不成立』定性两侧皆为时过早）"
+evidence_discipline: "逐 claim 五值证据模式（amendment-9 §2）;矩阵 = v4 矩阵（wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md,scope=v4）+ **v5 增补矩阵**（wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md——本件全部新数字与量词逐 claim ID）;占据合取量词一律引用 identity taxonomy v2 机器重算（docs/checks/2026-07-18-sf-identity-taxonomy-v2-test.json,含独立语义反例区）;外部论文数字一律 SOURCE_REPORTED_TRACEABLE（可定位未复算,效力限该论文设置内);占据/空位陈述 = directional-only,创新点未锁定（owner 裁决,任何『成立/不成立』定性两侧皆为时过早）"
 ---
 
 # Research Proposal v5（整改后合并送审版）
@@ -52,7 +52,9 @@ n=144、oracle-WER、七集 n=150 头空扫描、Wave-1 双底座 224 格网格�
 Gemma-4-E4B/12B/Voxtral/Qwen3-ASR/API-verifier 等 **8 个实际推理研究模型**,CoVoST2
 val1758+locked test1695、HeySQuAD、URO、SLURP、MInDS 等 **14 数据集**;**选择决策污染面
 ≥11 处**〔模型推理级选择运行 5 条 + 离线选择器决策〕= 最高优先隔离面;MInDS 手工 JSON
-事故→clean redo 全链与 R2 oracle-artifact 更正**并列入账**,评审点名七族全部映射零排除）;
+事故→clean redo 全链与 R2 oracle-artifact 更正**并列入账**,评审点名七族全部映射零排除;
+**W4 计数证据模式 = 考古估计**〔组级行含多运行,粒度异构——REVIEWER_INFERENCE +
+TEAM_ATTESTATION 级,规范化 event ledger 延至 Stage-2 held-out 冻结前,re-review P1-3〕）;
 W2/W3 = 零实验骨架（直验）;仓外边界 =
 owner attestation（TEAM_ATTESTATION,不称机器证明）。计数按表行机器可数、粒度异构不作单一
 聚合;两仓 omni-embed 同源战役已去重注记。**全部历史数字 =
@@ -120,21 +122,25 @@ claim-evidence-matrix.md`,scope 各自 frontmatter 明载——量词级称谓�
 | DREAM (ACL 511) | plan/exec 双相位树搜索 | 核冻结,**PRM 微调**（trained comparator） | **trained-PRM 引导 K 池** | 双阈值早停+补采 | 无 |
 
 **系统级普查事实（对已检视集合;非文献全集结论;定性留待 mapping 与 owner;量词一律引用
-identity taxonomy v1 的机器重算合取表〔`docs/checks/2026-07-18-sf-identity-taxonomy-test.json`,
-9 条 method path——mixed-path 论文分行〕,散文不手数）**：
-① 含 speech/audio = **0/9 路径**〔机器重算〕——在已检视集合中未见 speech/omni 承载;
-② **占据合取表（v5 复审 P0-2 更正——原「零项 reward-guided K 池」句撤回）**：
-training-free(权重轴)∧reward-guided∧显式 K 池 = **3/9 路径已占**（Selective TTS〔llm_judge,
-其论文自框架即 reward signals〕/ Team of Thoughts / Agentic Coding）;再加 strict-identity
-bits（零 dev-label/零 new-info/api-text-only）后 = **1/9 路径**（Agentic Coding,编码域,
-llm_judge）;trained-PRM 引导 K 池 = 1/9（DREAM）。**该交集仍是待检验候选空位的坐标 =
-「strict-identity ∧ reward-guided ∧ K 池 ∧ speech/omni」——已检视集合中 0/9,待 Stage-1B
-mapping 检验**;③ 训练范围轴〔机器重算〕：all-system-training-free = 6/9 路径,同时满足
-strict-identity bits = 2/9——「冻结核心 ≠ 全系统 TF-Strict/data-free」由本表承载（取代
-散文计数）;④ 五种互补停止/预算机制（自适应停机/双阈值/剪枝重分配/execute-skip/验证器
-早停）入 Stage-2A 组件候选池;⑤ 两条外部控制平面实证约束：「外部控制器优于模型自调节」
-（ToolGate:prompt 自调节把精度降到 60.0 且反增工具量）与「stage 评估器与终 judger 失配则
-过剪退化」（Selective TTS α=0.8）。
+identity taxonomy **v2** 的机器重算输出〔`docs/checks/2026-07-18-sf-identity-taxonomy-v2-test.json`,
+**11 条 method path**——mixed/composed 路径分行:Agentic Coding 拆 RTV/PDR/pipeline 三行,
+DeepVerifier 拆双行;taxonomy v2 = 正典投影版,v1 缩减 schema 已 dated supersession〕）**：
+① **项目身份候选 = 0/11**〔机器推导:strict 位 ∧ 单核拓扑 ∧ 原生 audio/omni 进核——
+unknown 不满足;此为 v1 被撤回量词句经正典投影后的合法重立〕;core_native_modality ∈ {audio,omni} = 0/11
+（数据集含音频位与原生模态轴已分离——benchmark/ASR 级联不再可能混入方法占据）;
+② **占据合取（按 selection_object 分层,不跨池聚合）**：strict-bits∧reward-guided∧K 池 =
+**轨迹池 3/11**——且三条路径全部来自**同一篇** Agentic Coding（RTV/PDR/pipeline）;
+工具-agent 池（Team-of-Thoughts,终态=合成）与输出池（Selective TTS）各有占据但不满足
+strict 位（dev-label 轴）;trained-PRM∧K 池 = 1/11（DREAM,机器持久化断言）;
+**待检验候选空位坐标 = strict 位 ∧ reward-guided ∧ K 池 ∧ 原生 audio/omni 单核——已检视
+集合 0/11,待 Stage-1B mapping 检验**;③ 权重轴〔机器重算〕：all_components_weight_frozen =
+8/11;data_access_strict_bits = 4/11——「冻结核心 ≠ 全系统数据/访问严格」由本表承载;
+ToolGate 经 Round C 更正为 trained binary gate（非 RM/PRM,is_reward_guided=false）;
+④ 五种互补停止/预算机制（自适应停机/双阈值/剪枝重分配/execute-skip/验证器早停）入
+Stage-2A 组件候选池;⑤ 两条外部控制平面实证约束：「外部控制器优于模型自调节」（ToolGate:
+prompt 自调节把精度降到 60.0 且反增工具量）与「stage 评估器与终 judger 失配则过剪退化」
+（Selective TTS α=0.8）。构念防线 = 作者反例 + **独立语义反例区**（P1-4:非实现者代理自
+官方全文供给 4 例,含联邦拓扑/benchmark 角色/trained-gate 三类,6/6 PASS）。
 
 ### §4.3 负结果先验（双向三栏;异质案例共同提示,非独立复制;各条限于该论文设置内）
 
@@ -172,9 +178,14 @@ held-out 工程件;execution-early 队列（四篇 FULLY_TRAINING_FREE + MemoPil
 
 ## §5 Stage-1B 执行计划（签署后即行;全程禁研究模型;产出只含知识证据）
 
-0. **开局**：known-item 保证队列 = 已深读 8 项（13 轴补全语料级编码）+ **v5 复审 Round E
-   新登记 10 项**（附录 A 第二表;5 arXiv 附我方复现的冻结查询命中留痕、5 ACL 附 T1 路由
-   保证;先编码再入正常 BFS/DFS 排序,不冒充 query recall 成果）;每轮 known-item
+0. **开局**：三张互不混分母的保证表（`survey/2026-07-18-sf-stage1b-opening-tables.md`——
+   re-review P0-2）：表 A system/control method paths（已深读 8 项〔11 路径,coding-v3〕+
+   Round E 10 项〔附录 A 第二表〕+ **6 项晋升**:2506.12928〔三重 provenance,含我方复现的
+   3 条查询命中〕/IAD/LATS/TreeSearch/JitRL/Omni-Decision）;表 B **speech/omni 测量工具**
+   （τ-Voice/FDB-v3/**EchoChain〔零命中+无种子→保证入口+drift 队列 full-duplex 轴〕**/
+   From-Text-to-Voice/VoiceAgentBench/Audio2Tool/tau 族——MEASUREMENT_INSTRUMENT 角色,
+   不入方法占据分母）;表 C evaluator/reward 负结果先验。先按 taxonomy v2 编码再入正常
+   BFS/DFS 排序,不冒充 query recall 成果;每轮 known-item
    carry-forward ledger（旧 survey 近邻/当前命中/引文新增/零命中已知项四列账）。
 1. **BFS**：65 查询 + 50 路由逐条执行,REC-0 落账,五计数机器导出,75-cap 溢出 splitter。
 2. **DFS**：四判据触发,全文精读（D2 八轴 + 13 轴,validator 机器强制）;队列排序
@@ -206,7 +217,9 @@ execution**;③签署后 owner 执行批准,首条 systematic query 即 Stage-1B
 
 ## 附录 A：参考文献（本件自包含;arXiv 作者/日期取自仓内正典 raw Atom,ACL 作者取自 Anthology 官方页 citation 元数据）
 
-**已深读集合（§4.1 七篇 + §4.2 八项;18 条）**：
+**正文两级 DFS 集合 15 条（§4.1 七篇 + §4.2 八项）+ 机制/held-out 校准件 3 条（DVD/
+Seg-Agent/Memory-Augmented VL Agents——角色 = CALIBRATION/HELD_OUT,非正文普查成员;
+P1-2 更正:原「18 条已深读」算术表述拆分）**：
 
 | 引用 | 作者/年份 | 稳定链接 |
 |---|---|---|

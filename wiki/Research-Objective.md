@@ -90,9 +90,16 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   交付**（union v2〔W4 ≈70 事件二轮考古,8 推理模型/14 数据集,选择污染面 ≥11 处,MInDS
   事故链并列入账,claim_ledger 悬空主动披露〕/identity taxonomy v1 冻结〔四反例单测+占据
   合取机器重算:speech-audio 0/9、TF∧reward∧pool 3/9、strict∧reward∧pool 1/9,原「零项」
-  句撤回〕/量词扫描器〔第七道防线〕/v5 增补矩阵+自包含 28 条参考文献）,**当前动作 = v5
-  回应信已落盘（`survey/2026-07-18-gate-s1-v5-response.md`）,待评审复核签署 Stage-1B
-  survey execution（双向合同维持）**;执行前置
+  句撤回〕/量词扫描器〔第七道防线〕/v5 增补矩阵+自包含 28 条参考文献）→ **v5-response 复审 WITHHOLD（2 Gate MAJOR=构念效度:strict-identity 名不副实〔含
+  api_multimodal 删除荒谬后果〕/carry-forward 采样失衡〔2506.12928 与 speech 测量件无保证
+  入口,EchoChain 零命中+无种子坐实〕;同型第七轮=构念命名;有据异议 #2:2506.12928 实中
+  3 查询）→ owner 五裁决（续67:正典投影/三张开局表/异议入信/独立语义反例常设/机械项）→
+  整改批当日交付**（taxonomy v2〔正典投影+诚实改名+拓扑/原生模态/信号三分/终态算子轴,
+  coding v3=11 路径,合同测试 6/6 含独立反例区 4 例——CE-1b 拓扑蕴含=构念开放问题留 owner〕
+  /机器新正典:身份候选 0/11、strict∧reward∧pool=轨迹池 3/11 同一篇、PRM∧pool 1/11 持久化
+  /三张开局保证表〔EchoChain 保证入口+drift full-duplex 轴〕/证据模式降格三处/量词扫描降
+  lint）,**当前动作 = 复审回应信已落盘（`survey/2026-07-18-gate-s1-v5-rereview-response.md`）,
+  待评审 schema 语义轮复核（0 新 Gate MAJOR → 签 Stage-1B）**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。

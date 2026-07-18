@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Unscoped-quantifier scan for reviewer-facing artifacts (v5-review lesson:
-sixth completion-language failure was the unscoped-quantifier class 全量/唯一/零项).
+"""Unscoped-quantifier PROSE LINT for reviewer-facing artifacts.
+
+SCOPE OF THIS TOOL (v5-response re-review P1-1): this is a lexical lint that
+catches obviously-unscoped quantifier tokens. It is NOT a semantic defense —
+it can be escaped by rephrasing or a hollow 〔SCOPED〕 marker. Set/denominator/
+analysis-unit/construct correctness is owned by the reviewer checklist and the
+identity-taxonomy contract tests, never by this lint.
+(Origin: sixth completion-language failure was the unscoped-quantifier class.)
 
 A quantifier token on a line is UNSCOPED unless the same line carries a scope
 marker (已检视 / 下界 / 集合 / 快照 / 机器重算 / 本表合取 / ≥ / 〔SCOPED〕) or a
