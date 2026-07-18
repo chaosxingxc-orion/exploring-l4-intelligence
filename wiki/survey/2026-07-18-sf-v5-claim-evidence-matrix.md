@@ -8,17 +8,17 @@ discipline: "五值证据模式(amendment-9 §2);SOURCE_REPORTED_TRACEABLE 恒�
 
 # v5 增补 claim-evidence 矩阵
 
-## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy v1 重算,输入 = coding-v2.json 9 条 method path）
+## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v2** 重算,输入 = coding-**v3**.json **11** 条 method path;〔dated correction:v1 版行以 taxonomy v1 为据,其 strict 位命名与分析单位缺陷经 re-review P0-1 更正——本节全量重立,旧行随 git 历史留档〕）
 
 | claim ID | v5 陈述 | 复算入口 | 独立复验 |
 |---|---|---|---|
-| V5-Q01 | 含 speech/audio = 0/9 路径〔已检视集合〕 | `sf_identity_taxonomy_test.py` → occupancy.includes_speech_audio | 是 |
-| V5-Q02 | training-free∧reward-guided∧显式 K 池 = 3/9（Selective TTS/ToT/Agentic Coding） | 同上 → training_free_AND_reward_guided_AND_explicit_pool | 是 |
-| V5-Q03 | strict-identity∧reward-guided∧K 池 = 1/9（Agentic Coding） | 同上 → strict_AND_reward_guided_AND_pool | 是 |
-| V5-Q04 | all-system-training-free = 6/9;strict-identity bits = 2/9 | 同上 → all_system_training_free / project_strict_identity_bits | 是 |
-| V5-Q05 | trained-PRM 引导 K 池 = 1/9（DREAM） | 同上（score_type=learned_rm_prm ∧ pool 过滤） | 是 |
-| V5-Q06 | 候选空位坐标 = strict∧reward∧pool∧speech/omni,已检视集合中 0/9 | V5-Q01∧V5-Q03 合取;待 Stage-1B 检验〔REVIEWER_INFERENCE 级候选,非结论〕 | 合取机器可算;空位属性待检验 |
-| V5-Q07 | exposure union 事件计数（W1+umbrella 27 + W4 补扫;终值见 union v2） | union v2 表行数机器可数;完成前一律下界表述 | 是（指针抽查） |
+| V5-Q01v2 | 原生 audio/omni 进核 = 0/11;项目身份候选 = 0/11（strict 位∧单核拓扑∧原生 audio/omni,unknown 不满足） | `sf_identity_taxonomy_v2_test.py` → core_native_modality_audio_or_omni / is_project_identity_candidate | 是 |
+| V5-Q02v2 | strict-bits∧reward-guided∧K 池 = 轨迹池 3/11（全部同一篇 Agentic Coding:RTV/PDR/pipeline）;工具-agent 池与输出池占据不满足 strict 位 | 同上 → strict_AND_reward_AND_pool_BY_selection_object（按 selection_object 分层,不跨池聚合） | 是 |
+| V5-Q03v2 | all_components_weight_frozen = 8/11;data_access_strict_bits = 4/11 | 同上 → 对应键 | 是 |
+| V5-Q04v2 | is_reward_guided = 8/11（ToolGate 经 Round C 更正为 binary_gate 出集合） | 同上 → is_reward_guided | 是 |
+| V5-Q05v2 | trained-PRM∧K 池 = 1/11（DREAM） | 同上 → **learned_rm_prm_AND_pool（持久化断言,P0-3 修复——v1 版此行无对应机器输出,已更正）** | 是 |
+| V5-Q06v2 | 待检验候选空位坐标 = strict∧reward∧pool∧原生 audio/omni 单核,已检视集合 0/11 | is_project_identity_candidate 与分层合取皆机器输出;**空位属性 = 待 Stage-1B 检验的候选,非结论**〔v1 版以数据模态位冒充原生模态推导——已按 P0-3 撤回重立〕 | 合取机器可算;空位属性待检验 |
+| V5-Q07v2 | exposure union 计数（W1+umbrella 27;W4 ≈70 组级事件） | **证据模式降格（P1-3）:REVIEWER_INFERENCE + TEAM_ATTESTATION 考古估计**——W4 为组级行含多运行,无规范化 event ledger;指针抽查≠独立重算;ledger 化延至 Stage-2 held-out 冻结前 | 否（估计类） |
 
 ## §2 外部论文数字（SOURCE_REPORTED_TRACEABLE——未复算;效力限该论文报告的模型/任务/设置内）
 

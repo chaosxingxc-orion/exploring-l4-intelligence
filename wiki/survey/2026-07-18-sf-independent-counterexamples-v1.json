@@ -1,0 +1,29 @@
+{
+ "artifact_id": "SF-INDEPENDENT-COUNTEREXAMPLES-2026-07-18-01",
+ "author": "隔离语义反例代理（Opus,非 schema 实现者;P1-4 制度——oracle 与实现不同源）",
+ "provenance": "四篇均经 arxiv.org 官方 abs 页取证(ToolGate 正文分类器细节另经全文命中);证据句存代理交付原文;实现者仅做字段名映射,取值与蕴含方向未改",
+ "implementer_notes": {
+  "CE-1a": "代理断言含前提『label_dependency=false』——与全文事实不符（Team-of-Thoughts 校准/自审用 gold,DFS 在案）;保留其承重蕴含（联邦⇒非项目身份）,删除事实错误前提并如实注记（事实修正≠语义改动）",
+  "CE-1b": "断言值照实现:ATLAS is_project_identity_candidate=false 成立;但其判别轴（拓扑:同权重多调用编排是否即失格）与本 schema 判别轴（native modality）不同——**拓扑蕴含 = 构念开放问题,留 owner Stage-1C 裁决,落码不裁决**（当前 ATLAS 经 vision_native 轴失格,断言方向与取值均满足）",
+  "CE-2": "τ-Voice 为 benchmark 非方法论文,不在 method-path 表——以内联 fixture 实现（若有人试图把它编码进方法占据,这组字段值必须被拦截）"
+ },
+ "cases": {
+  "2602.16485#calibrated-orchestration": {
+   "expect": {"core_topology": "multi_model_federation", "is_project_identity_candidate": false},
+   "note": "CE-1a: 异构多模型联邦——权重/访问位再干净也不得成为 single-core 身份;证据句 'heterogeneous MAS framework that treats diverse models as specialized tools within an orchestrator-driven paradigm'"
+  },
+  "2606.01667#agentic-orchestration": {
+   "expect": {"is_project_identity_candidate": false},
+   "note": "CE-1b: orchestrator+dispatched solvers（同 backbone 亦然）⇒ 非项目身份;证据句 'the orchestrator decides whether to gather more evidence, when to stop';拓扑判别轴之构念开放问题见 implementer_notes"
+  },
+  "2606.03054#trained-gate": {
+   "expect": {"signal_form": "binary_gate", "signal_source": "trained_classifier", "is_reward_guided": false},
+   "note": "CE-3: trained execute/skip 逻辑回归门 ≠ RM/PRM;三重理由(无 K 池择优/监督训练非 label-free/论文自定位 controller 非 reward model);证据句 'predicts execute/skip decisions from trajectory text and simple structural features' + 'ℓ2-regularized logistic regression'"
+  },
+  "__fixture__tau-voice-benchmark": {
+   "row": {"method_path_id": "__fixture__tau-voice-benchmark", "core_topology": "single_core", "core_native_modality": "unknown", "internal_visibility": "api_only", "core_io_modality": "text_in_text_out", "core_weight_update": false, "external_component_weight_update": false, "controller_program_or_config_optimized_on_labels": false, "human_or_dev_label_model_selection": false, "deployment_label_access": false, "test_item_gold_access": false, "inference_external_new_information": false, "signal_form": "none", "signal_source": "none", "signal_use": [], "control_horizon": "terminal", "decision_rights": [], "selection_object": "none", "terminal_operator": "none", "explicit_candidate_pool_selection": false, "includes_speech_audio": true},
+   "expect": {"is_project_identity_candidate": false},
+   "note": "CE-2: τ-Voice (2603.13686) benchmark 角色——includes_speech_audio=true 但无方法核心(core_native_modality=unknown)⇒ 永不计入 speech/omni 方法占据与项目身份;第二味(ASR 级联 core_native_modality=asr_mediated)同轴被 derive 规则拦截;证据句 'a benchmark for evaluating voice agents on grounded tasks'"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{"artifact_id": "SF-ACCESS-LOG-V5-REREVIEW-2026-07-18-01", "purpose": "v5-response 复审核验+整改批(续67)联网活动", "attestation": "discovery_queries_executed = 0 维持", "date": "2026-07-18"}
+{"seq": 1, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2506.12928", "http": 200, "id": "2506.12928", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 2, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2603.13686", "http": 200, "id": "2603.13686", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 3, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2604.04847", "http": 200, "id": "2604.04847", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 4, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2604.16456", "http": 200, "id": "2604.16456", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 5, "date": "2026-07-18", "url": "https://export.arxiv.org/api/query?id_list=2605.15104", "http": 200, "id": "2605.15104", "access_class": "REVIEW_CLAIM_VERIFICATION"}
+{"seq": 6, "date": "2026-07-18", "batch_note": "独立语义反例代理:arxiv.org abs 页 WebFetch x4(2602.16485/2606.01667/2603.13686/2606.03054)+WebSearch 命中 ToolGate PDF 全文(代理自报,转录)", "access_class": "REVIEW_CLAIM_VERIFICATION", "executor": "隔离反例代理(Opus,非实现者)"}
