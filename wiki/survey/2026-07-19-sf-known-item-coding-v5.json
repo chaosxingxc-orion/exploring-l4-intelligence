@@ -1,0 +1,854 @@
+{
+ "artifact_id": "SF-KNOWN-ITEM-CODING-V5-2026-07-19-01",
+ "title": "known-item coding v5 — GENERATED single-write projection of per-paper sidecars (taxonomy v4; v7 doctoral review Gate MAJOR-1/-2 remediation)",
+ "taxonomy": "wiki/survey/2026-07-19-sf-identity-taxonomy-v4.json",
+ "generated_by": "scripts/survey/sf_coding_generator.py — DO NOT HAND-EDIT; edit the sidecar and regenerate",
+ "generated_from": [
+  "2026.findings-acl.1243.sidecar.json",
+  "2026.findings-acl.1724.sidecar.json",
+  "2026.findings-acl.511.sidecar.json",
+  "2602.16485.sidecar.json",
+  "2604.16529.sidecar.json",
+  "2605.08083.sidecar.json",
+  "2606.01667.sidecar.json",
+  "2606.03054.sidecar.json"
+ ],
+ "supersession": "v5 supersedes coding-v4 (dated supersession; v4 retained for audit). Deltas: control_edges + field_evidence + candidate_pool_exists/selection_policy per taxonomy v4; Selective TTS decision_rights ['stop']->['branch'] (edge-evidence dated correction, see sidecar); actor ids replace W1; all rows load_bearing with independent adjudication status.",
+ "rows": [
+  {
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "paper_work_id": "2026.findings-acl.1243",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "vision_native",
+   "internal_visibility": "api_only",
+   "core_io_modality": "multimodal_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "signal_form": "scalar_score",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "revise",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "judge score <=2 rejects the answer and feeds corrective feedback into another attempt"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop"
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "web-research 多模态"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "judge 综合打 1–4 分"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
+   "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮/3–4 轮见顶)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4 复审 DFS 批B 抽查命中",
+   "note": "DeepVerifier 主路径:在线逐步 scalar 判定驱动 retry/stop——rq 兼容但 strict 位不满足(ctrl_label+new_info);tool_call 权无 signal 边(分解 agent 决定查什么,非 judge 分控制)"
+  },
+  {
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "paper_work_id": "2026.findings-acl.1243",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": true,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "signal_form": "scalar_score",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "revise",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "same loop as closed variant; policy backbone SFT-tuned"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop"
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "微调 Qwen3-8B"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "judge 综合打 1–4 分"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
+   "source_locator": "canon: '开源变体对策略主干 SFT'",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4 复审 DFS 批B;〔dated correction 2026-07-19:iso-adj-B DISAGREE 采纳——本行核=SFT 后 Qwen3-8B(纯文本),原 vision_native+『web-research 多模态』为闭源行任务级引文误继承;更正 text_only/text_in_text_out+核级证据『微调 Qwen3-8B』;非改果错码(s0 本已不满足)但如实更正〕",
+   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)"
+  },
+  {
+   "method_path_id": "2026.findings-acl.1724#pipeline",
+   "paper_work_id": "2026.findings-acl.1724",
+   "core_topology": "multi_model_federation",
+   "core_native_modality": "vision_native",
+   "internal_visibility": "api_only",
+   "core_io_modality": "multimodal_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": true,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "scalar_score",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "prune",
+    "select"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选'",
+     "edge_semantics": "stage-local scores decide which candidates advance to the next pipeline stage"
+    }
+   ],
+   "selection_object": "candidate_output",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "scored_select",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "图表/数据科学视觉"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+    "id": "2026.findings-acl.1724",
+    "kind": "pdf",
+    "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724",
+   "source_locator": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选' (α 剪枝/固定预算)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4 复审 DFS 批B 抽查命中;〔dated correction 2026-07-19(v7 复审 Step B edge 逐行复核):decision_rights 原 ['stop'] 与证据不符——stage-local 剪枝控制的是候选晋级(branch 权);预算控制器为固定预算非信号控制,stop 权撤回〕",
+   "note": "Selective TTS:在线 stage-local scalar 剪枝驱动候选晋级——rq 兼容但 dev-label 轴使 strict 位不满足"
+  },
+  {
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "paper_work_id": "2026.findings-acl.511",
+   "core_topology": "single_core",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": true,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "scalar_score",
+   "signal_source": "learned_rm_prm",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "prune",
+    "select",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch",
+    "stop"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n'",
+     "edge_semantics": "PRM scores decide which plan/execution candidates are kept and expanded"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '≥n 候选超高阈值提前停'",
+     "edge_semantics": "high-threshold consensus of PRM scores triggers early stop"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "branch",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '全低于低阈值补采 m'",
+     "edge_semantics": "all-below-low-threshold budget signal triggers supplementary sampling (additional branching)"
+    }
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "scored_select",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "GSM8K/MATH/AMC23+HumanEval/MBPP"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "奖励模型是微调件"
+    },
+    {
+     "field": "signal_source",
+     "value": "learned_rm_prm",
+     "kind": "canon",
+     "quote": "奖励模型是微调件"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511",
+   "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n' (双阈值早停/补采)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4 复审 DFS 批B(基线表 REBASE/MAJ 对照抽查)",
+   "note": "DREAM:trained PRM 在线逐步引导——rq 兼容但 ext_wu 使 strict 位不满足"
+  },
+  {
+   "method_path_id": "2602.16485#calibrated-orchestration",
+   "paper_work_id": "2602.16485",
+   "core_topology": "multi_model_federation",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": true,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "text_critique",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "inference_pre_context",
+   "signal_use": [
+    "route",
+    "synthesize_input"
+   ],
+   "control_horizon": "terminal",
+   "decision_rights": [
+    "route",
+    "tool_call",
+    "synthesize"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "route",
+     "decision_right": "route",
+     "signal_lifecycle": "inference_pre_context",
+     "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
+     "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context; no online reward)"
+    },
+    {
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "signal_lifecycle": "terminal",
+     "source_locator": "canon: 'orchestrator 聚合/合成'",
+     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer (iso-adj-A observation: previously missing documentation edge; no gate impact)"
+    }
+   ],
+   "selection_object": "tool_agent",
+   "terminal_operator": "synthesize",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "profile_route",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_topology",
+     "value": "multi_model_federation",
+     "kind": "canon",
+     "quote": "7 个不同后训练模型族"
+    },
+    {
+     "field": "signal_form",
+     "value": "text_critique",
+     "kind": "canon",
+     "quote": "推理时画像喂 orchestrator"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2602.16485",
+    "kind": "pdf",
+    "sha256": "92e1329334fe3ff98fa30d0235f365bedd02cec4f23c1ba1c6b6415aa0a58d32"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485",
+   "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq.3 校准分=唯一标量,离线)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v6 复审 P1-1 裁决执行(一手 grep 证据句);独立反例 CE-1a",
+   "note": "Team-of-Thoughts 裁决:profile-conditioned orchestration boundary——部署期无独立标量/比较 reward;edge 为 pre-context 文档边,不计入 rq"
+  },
+  {
+   "method_path_id": "2604.16529#pdr-random-k",
+   "paper_work_id": "2604.16529",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "none",
+   "signal_source": "none",
+   "signal_lifecycle": "none",
+   "signal_use": [
+    "supply"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "supply"
+   ],
+   "control_edges": [],
+   "selection_object": "none",
+   "terminal_operator": "none",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": true,
+   "selection_policy": "random_sample",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    {
+     "field": "signal_form",
+     "value": "none",
+     "kind": "tex",
+     "quote": "For random-K, we follow PDR and randomly sample K previous summaries"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
+   "source_locator": "tex: 'For random-K, we follow PDR and randomly sample K previous summaries'",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定 + eprint sha 一手复核;v7 复审 §7.6 pool 事实经 candidate_pool_exists/random_sample 保留",
+   "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无选择信号;池存在但 random_sample 永不计入 reward_guided_selection"
+  },
+  {
+   "method_path_id": "2604.16529#rtv",
+   "paper_work_id": "2604.16529",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "pairwise_comparison",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "terminal",
+   "signal_use": [
+    "select"
+   ],
+   "control_horizon": "terminal",
+   "decision_rights": [],
+   "control_edges": [],
+   "selection_object": "trajectory",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "tournament_select",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    {
+     "field": "signal_form",
+     "value": "pairwise_comparison",
+     "kind": "canon",
+     "quote": "LLM 对摘要的比较投票"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
+   "source_locator": "canon: '投票锦标赛递归淘汰'",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v6 复审 Round D + 一手复核",
+   "note": "并行维:锦标赛比较选 top-1;终态退化路径,非序贯控制——K6 terminal-only 的真实样例"
+  },
+  {
+   "method_path_id": "2604.16529#rtv-pdr-pipeline",
+   "paper_work_id": "2604.16529",
+   "component_path_ids": [
+    "2604.16529#rtv",
+    "2604.16529#pdr-random-k"
+   ],
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "pairwise_comparison",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "select",
+    "prune",
+    "supply"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "supply"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "select",
+     "decision_right": "supply",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '跨迭代状态=选中 K 摘要作精炼上下文'",
+     "edge_semantics": "RTV selection determines which summaries condition the next iteration's refinement context (selection-conditioned supply)"
+    },
+    {
+     "signal_use": "prune",
+     "decision_right": "supply",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '投票锦标赛递归淘汰'",
+     "edge_semantics": "tournament elimination narrows the summary set that supplies the next iteration"
+    }
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "tournament_select",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    {
+     "field": "signal_form",
+     "value": "pairwise_comparison",
+     "kind": "canon",
+     "quote": "LLM 对摘要的比较投票"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
+   "source_locator": "tex: 'apply RTV to obtain a high-quality subset of K summaries'",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v6 复审 Round D + 一手复核;〔dated correction 2026-07-19:原 locator『Iter 0…selection via RTV…』为前轮省略号转述,非 TeX 逐字——换为可机器核验的 Select-K 原句(MAJOR-2 locator 前置纪律)〕",
+   "note": "组合路径:RTV 选 K(取代 random-K)→条件化 iter1→final RTV;成分声明防独立复制误计"
+  },
+  {
+   "method_path_id": "2605.08083#discovered-controller",
+   "paper_work_id": "2605.08083",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "internal_visibility": "api_only",
+   "core_io_modality": "text_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "consensus_vote",
+   "signal_source": "consensus",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "select",
+    "prune",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch",
+    "stop"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
+     "edge_semantics": "the discovered code controller's state-conditioned pruning decides which branches continue"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
+     "edge_semantics": "beta-parameterized budget signal stops sampling"
+    }
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "vote",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "consensus_vote",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "数学(AIME/HMMT)+GPQA 泛化"
+    },
+    {
+     "field": "signal_form",
+     "value": "consensus_vote",
+     "kind": "canon",
+     "quote": "selector=controller 终态共识型 Agg"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083",
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/动作/p4 probe/p5 beta)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true);〔dated correction 2026-07-19:iso-adj-A DISAGREE 采纳——128 预采轨迹+推理时分支级管理=对单一冻结基座的重复调用,原 single_core 更正为 single_core_multi_call(非改果错码:text_only 轴本已排除 s0);另录其观察:signal_form=consensus_vote 描述终态 Agg 相位,在线边由 controller 状态观测驱动——edge_semantics 已如实标 state-conditioned,行级 form/lifecycle 相位合并无门禁影响〕",
+   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴;在线边=状态驱动,终态=共识 Agg(两相位见 provenance)"
+  },
+  {
+   "method_path_id": "2606.01667#agentic-orchestration",
+   "paper_work_id": "2606.01667",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "vision_native",
+   "internal_visibility": "api_only",
+   "core_io_modality": "multimodal_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "consensus_vote",
+   "signal_source": "consensus",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "stop_budget",
+    "synthesize_input"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "tool_call",
+    "stop",
+    "synthesize"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8)",
+     "edge_semantics": "candidate-pool convergence/information-gain assessment triggers termination"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "tool_call",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '独占 explore/stop 决策' (p4)",
+     "edge_semantics": "the same assessment controls whether another explore solver call is dispatched (explore-or-stop is one decision)"
+    },
+    {
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "signal_lifecycle": "terminal",
+     "source_locator": "canon: '直接合成终答'",
+     "edge_semantics": "the accumulated candidate evidence pool is what the orchestrator synthesizes the final answer from"
+    }
+   ],
+   "selection_object": "candidate_output",
+   "terminal_operator": "synthesize",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "synthesize_all",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "BabyVision(视觉)"
+    },
+    {
+     "field": "signal_form",
+     "value": "consensus_vote",
+     "kind": "canon",
+     "quote": "label-free,共识+自报 confidence"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2606.01667",
+    "kind": "pdf",
+    "sha256": "9455e5e590048308f744a8fb113a45743ea468363f727c6be398e310c1e013b4"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667",
+   "source_locator": "canon: '独占 explore/stop 决策' (p3 Algorithm1/p8 Fig7a/p14 delegated roles)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4/v5 rounds: consensus 单列不入 reward;拓扑蕴含 CE-1b 敏感列并算;〔iso-adj-A AGREE,附观察:explicit_candidate_pool_selection=true 与 synthesize_all 政策并存(池被合成消费而非打分选择,派生式不消费该位,无门禁影响,如实留注)〕",
+   "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 单列不入 reward;tool_call/stop 边同源一个 explore-or-stop 决策"
+  },
+  {
+   "method_path_id": "2606.03054#trained-gate",
+   "paper_work_id": "2606.03054",
+   "core_topology": "single_core",
+   "core_native_modality": "vision_native",
+   "internal_visibility": "api_only",
+   "core_io_modality": "multimodal_in_text_out",
+   "core_weight_update": false,
+   "external_component_weight_update": true,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "signal_form": "binary_gate",
+   "signal_source": "trained_classifier",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "execute_skip_gate"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "execute_skip"
+   ],
+   "control_edges": [
+    {
+     "signal_use": "execute_skip_gate",
+     "decision_right": "execute_skip",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '输出 execute/skip'",
+     "edge_semantics": "the trained classifier reads trajectory prefix + proposed call and gates whether that tool call executes"
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "none",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "视觉 VQA 多基准"
+    },
+    {
+     "field": "signal_form",
+     "value": "binary_gate",
+     "kind": "canon",
+     "quote": "输出 execute/skip"
+    }
+   ],
+   "fulltext_ref": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054",
+   "source_locator": "canon: '门决定是否执行'",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "独立反例 CE-3(trained gate ≠ RM/PRM 三重理由)",
+   "note": "trained binary gate ≠ reward;binary_gate ∉ reward 形式集;edge 存在但 signal_form 非 reward → rq False(边不救非 reward 信号)"
+  }
+ ]
+}

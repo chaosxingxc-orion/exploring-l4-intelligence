@@ -6,6 +6,48 @@
 
 ---
 
+### 2026-07-19（续69）· v7 复审裁 WITHHOLD（3 Gate MAJOR:RQ-SYS 缺因果边/lineage=presence check/已评审 v6 被原位改写〔我方违规〕）+ owner 全盘裁决 → Step A–E 整改批:审计恢复+immutability check/taxonomy v4 因果 edges/sidecar 单写链+独立裁决/开局表 v2
+
+**Context.** v7 复审（審 @87877f1,blob e2d0d7b9;13/13 纯净副本复跑确认）裁 WITHHOLD,3 Gate
+MAJOR——**九轮首次零异议**:全部指控经我方亲手复现成立。**MAJOR-1**:rq 派生只查两集合非空,
+评审 disjoint 构造（select+memory_write 无关联）直接产出 method_candidate=True（我方重放
+坐实,`derive()` L76 无因果谓词）;**MAJOR-2**:V7 检查=presence-only——评审在隔离副本改
+paper_work_id/模态/locator 三重语义破坏后 9/9 仍 PASS（我方瞬时突变重放坐实）;四项子指控
+逐行在案:V6 检查=字面量 `True` 假检查（且通过了我方内审环）、`/11` 硬编码、unique work 用
+`split('#')` 推导、V1 强制恰 11 行;coder/adjudicator 全 `W1` 不可追责;**MAJOR-3（我方真实
+流程违规）**:已评审 v6@04cf987 被续68批次原位改写（70c1b04,39+/26−换血）,违反自订审计层
+append-only——根因=级联更正时把已评审送审件误归工作层。研究实质被正式接受不再重开（PDR
+撤回/ToT 降级/K 池降层/拓扑政策 A/文献补链;§3「不应再反复重开」）;评审明确:无需跑模型、
+无需预算 cap、无需重开北极星,三门清零即签 Stage-1B。P1 文献四篇 4/4 反幻觉核验为真
+（EMNLP 931 直接近邻/RFG/DEGS 边界/nllp-1.15 仓内在案漏收）。诚信定性:无欺诈证据、QRP
+风险需即改（presence check 冒充 fail-closed=错误保证）。
+
+**Decision（owner 2026-07-19「按你的建议走」）.** 全盘 ACCEPT（零异议轮）,按评审 §10.2
+Step A→E 顺序执行;actor 方案=稳定 actor id+隔离代理裁决+owner 抽查;sidecar 单写链前置到
+Stage-1A 收口（推翻 v7 自报的「1B 首周」计划,评审双来源体系论证成立）;P1 四项照单;完成态
+语言降级至真实现取代。
+
+**Consequences（整改批交付,零查询零模型）.** **Step A**:v6 恢复原字节（4e760b4,blob
+2af5131 复核一致;70c1b04 保留）+ immutability registry 69 件 blob 钉定 + fail-closed 检查
+（活体突变先红后绿;56496f0）。**Step B/C**:taxonomy v4（control_edges 一等记录逐边
+locator+语义句/关系白名单〔评审种子+4 证据驱动新增,iso-adj-A 判 LEGIT 附不可泛化警示〕/
+K4 disjoint+K5 伪造边+K6 terminal-only killer+P1/P2 正控）;8 件 sidecar 单写源（sha256
+ledger 机器注入）→ generator（字节稳定）→ coding v5 生成件;真 reconciliation（字节等同/
+ledger id+kind+sha 同行绑定/节标题解析/canon+TeX 逐字引文核验/field_evidence 值-证据对/
+actor 纪律）;V8 七类突变**反空洞** fail-closed;V9 分母 len(rows)+paper_work_id 去重+第 12
+行 fixture `/12`;V6 换真断言。**独立裁决（Opus 隔离双代理）**:批 A 5A/1D（AutoTTS 拓扑
+single_core_multi_call 采纳）、批 B 4A/1D（open-sft 核=Qwen3-8B 纯文本采纳）——两 DISAGREE
+均非改果、如实更正入 provenance;11/11 adjudicated_agree,coder≠adjudicator。**非实现者
+反例代理击穿 v4 初版**（白名单 select→branch 边套 terminal 终答仍判 rq=True,
+EXPECTED_TO_FAIL 如实交付）→ 当场补丁:terminal 边只准指向终态权 {synthesize,stop}(K7);
+CE-v2 六案入 V5。**过程中清除三处旧错码**:STTS rights stop→branch、pipeline 省略号转述
+locator、open-sft 模态误继承。**机器数字（重算不变,自此 edge 背书）**:reward 6/11、
+rq_sys 5/11（4/8）、candidate 0/11、轨迹池 2/11（1/8）、新增 reward_guided_selection
+4/11。**Step D**:开局表 v2（EMNLP 931 拆两 path/RFG+DEGS 边界表 D/NEG-P10 回链/claim key
+全列）。合同测试 **11/11 PASS**;amendment-13;回应信（§10.3 八字段）。**元规律第九例入
+memory:字段关系语义层（因果边）+「新增检查 oracle 等强审计」镜头（字面量 True 假检查教训）
++ 审计层归层纪律（已评审件≠工作层）。**
+
 ### 2026-07-18（续68）· v6 复审裁 WITHHOLD（2 Gate MAJOR:身份派生仍缺 RQ-SYS 承重内容 / PDR 源文错码撑 3/11）+ owner 六裁决 → taxonomy v3 + 拓扑政策 A + coding v4 源文重编码 + lineage 流水线合同
 
 **Context.** v6 复审（審 @04cf987;12/12 干净态复跑确认;上轮 2506.12928 异议被正式维持

@@ -1,0 +1,77 @@
+{
+ "sidecar_id": "SF-SIDECAR-2606.03054-2026-07-19-01",
+ "date": "2026-07-19",
+ "paper_work_id": "2606.03054",
+ "work_title": "ToolGate: Token-Efficient Pre-Call Control for Tool-Augmented Vision-Language Agents",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2606.03054",
+  "kind": "pdf",
+  "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": true,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "method_path_id": "2606.03054#trained-gate",
+   "core_topology": "single_core",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signal_form": "binary_gate",
+   "signal_source": "trained_classifier",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "execute_skip_gate"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "execute_skip"
+   ],
+   "selection_object": "none",
+   "terminal_operator": "none",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "control_edges": [
+    {
+     "signal_use": "execute_skip_gate",
+     "decision_right": "execute_skip",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '输出 execute/skip'",
+     "edge_semantics": "the trained classifier reads trajectory prefix + proposed call and gates whether that tool call executes"
+    }
+   ],
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "视觉 VQA 多基准"
+    },
+    {
+     "field": "signal_form",
+     "value": "binary_gate",
+     "kind": "canon",
+     "quote": "输出 execute/skip"
+    }
+   ],
+   "source_locator": "canon: '门决定是否执行'",
+   "adjudication_provenance": "独立反例 CE-3(trained gate ≠ RM/PRM 三重理由)",
+   "note": "trained binary gate ≠ reward;binary_gate ∉ reward 形式集;edge 存在但 signal_form 非 reward → rq False(边不救非 reward 信号)"
+  }
+ ]
+}

@@ -1,0 +1,157 @@
+{
+ "sidecar_id": "SF-SIDECAR-2026.findings-acl.1243-2026-07-19-01",
+ "date": "2026-07-19",
+ "paper_work_id": "2026.findings-acl.1243",
+ "work_title": "DeepVerifier (Inference-Time Scaling of Verification)",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+  "id": "2026.findings-acl.1243",
+  "kind": "pdf",
+  "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signal_form": "scalar_score",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "revise",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "control_edges": [
+    {
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "judge score <=2 rejects the answer and feeds corrective feedback into another attempt"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop"
+    }
+   ],
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "web-research 多模态"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "judge 综合打 1–4 分"
+    }
+   ],
+   "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮/3–4 轮见顶)",
+   "adjudication_provenance": "v4 复审 DFS 批B 抽查命中",
+   "note": "DeepVerifier 主路径:在线逐步 scalar 判定驱动 retry/stop——rq 兼容但 strict 位不满足(ctrl_label+new_info);tool_call 权无 signal 边(分解 agent 决定查什么,非 judge 分控制)"
+  },
+  {
+   "core_weight_update": true,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signal_form": "scalar_score",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "revise",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "control_edges": [
+    {
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "same loop as closed variant; policy backbone SFT-tuned"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop"
+    }
+   ],
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "微调 Qwen3-8B"
+    },
+    {
+     "field": "signal_form",
+     "value": "scalar_score",
+     "kind": "canon",
+     "quote": "judge 综合打 1–4 分"
+    }
+   ],
+   "source_locator": "canon: '开源变体对策略主干 SFT'",
+   "adjudication_provenance": "v4 复审 DFS 批B;〔dated correction 2026-07-19:iso-adj-B DISAGREE 采纳——本行核=SFT 后 Qwen3-8B(纯文本),原 vision_native+『web-research 多模态』为闭源行任务级引文误继承;更正 text_only/text_in_text_out+核级证据『微调 Qwen3-8B』;非改果错码(s0 本已不满足)但如实更正〕",
+   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)"
+  }
+ ]
+}

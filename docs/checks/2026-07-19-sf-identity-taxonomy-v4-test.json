@@ -1,0 +1,305 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-V4-TEST-2026-07-19-01",
+ "inputs": {
+  "taxonomy": "wiki/survey/2026-07-19-sf-identity-taxonomy-v4.json",
+  "coding": "wiki/survey/2026-07-19-sf-known-item-coding-v5.json",
+  "sidecars": [
+   "2026.findings-acl.1243.sidecar.json",
+   "2026.findings-acl.1724.sidecar.json",
+   "2026.findings-acl.511.sidecar.json",
+   "2602.16485.sidecar.json",
+   "2604.16529.sidecar.json",
+   "2605.08083.sidecar.json",
+   "2606.01667.sidecar.json",
+   "2606.03054.sidecar.json"
+  ]
+ },
+ "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
+ "checks": [
+  {
+   "id": "V1",
+   "check": "通用 validator(无硬编码行数;当前 11 行/8 sidecar)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V2",
+   "check": "unknown 不满足合取",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V3",
+   "check": "killers:K1 audio无reward≠cand;K2 有边无池=cand;K3 在线二值=reward;K4 disjoint无边=False;K5 伪造edge越白名单=False;K6 terminal-only+无关right=False;P1/P2 正控=True",
+   "result": "PASS",
+   "detail": "{'k1': False, 'k2': True, 'k3': True, 'k4': False, 'k5': False, 'k6': False, 'p1': True, 'p2': True}"
+  },
+  {
+   "id": "V3b",
+   "check": "作者反例集(含『有边但非 reward 形式不升格』两例:ATLAS/ToolGate)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V4",
+   "check": "负控:STTS 改名必须红;PDR 错码回填必须红",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V5",
+   "check": "独立语义反例 x10(v1+v2,字段别名映射)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V5b",
+   "check": "CE-1b 拓扑蕴含敏感列非空洞",
+   "result": "PASS",
+   "detail": "A=True strict=False"
+  },
+  {
+   "id": "V6",
+   "check": "occupancy 真断言:重算两次同构;分母=len(rows)/unique(paper_work_id);双政策持久化",
+   "result": "PASS",
+   "detail": "paths=11 works=8"
+  },
+  {
+   "id": "V7",
+   "check": "真 reconciliation(单写字节等同/ledger id+kind+sha 同行绑定/正典节标题解析/locator 语法+canon|tex 引文核验/work-id 三向一致/actor 纪律+承重行独立裁决)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V8",
+   "check": "六类语义突变+编码手改 全部 fail-closed(每类须产生基线之外的新失败——防空洞闭合)",
+   "result": "PASS",
+   "detail": "{'wrong_work': ['2606.01667#agentic-orchestration:method-path-prefix-vs-work-id:bogus-work', 'bogus-work:anchor-vs-work-id:2606.01667', 'bogus-work:ledger-row-binding-failed:id+kind+sha256'], 'wrong_modality': ['2606.01667#agentic-orchestration:field-evidence-value-mismatch:core_native_modality'], 'wrong_signal': ['2026.findings-acl.1724#pipeline:field-evidence-value-mismatch:signal_form'], 'nonsense_locator': [\"2606.01667#agentic-orchestration:row-locator:locator-unverifiable:'nonsense'\"], 'wrong_sha': ['2606.01667:ledger-row-binding-failed:id+kind+sha256'], 'wrong_kind': ['2606.01667:ledger-row-binding-failed:id+kind+sha256'], 'coding_hand_edit': ['single-write:coding-not-byte-identical-to-generator-output']}"
+  },
+  {
+   "id": "V9",
+   "check": "扩容:第12行→分母自动 /12;重复 method_path_id 被拒",
+   "result": "PASS",
+   "detail": "n12=12"
+  }
+ ],
+ "occupancy": {
+  "policy_A": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "reward_guided_selection": {
+    "method_paths": [
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "4/11",
+    "unique_works": [
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "3/8"
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  },
+  "sensitivity_strict_topology": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "reward_guided_selection": {
+    "method_paths": [
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "4/11",
+    "unique_works": [
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "3/8"
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  }
+ },
+ "mutation_results": {
+  "wrong_work": [
+   "2606.01667#agentic-orchestration:method-path-prefix-vs-work-id:bogus-work",
+   "bogus-work:anchor-vs-work-id:2606.01667",
+   "bogus-work:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "wrong_modality": [
+   "2606.01667#agentic-orchestration:field-evidence-value-mismatch:core_native_modality"
+  ],
+  "wrong_signal": [
+   "2026.findings-acl.1724#pipeline:field-evidence-value-mismatch:signal_form"
+  ],
+  "nonsense_locator": [
+   "2606.01667#agentic-orchestration:row-locator:locator-unverifiable:'nonsense'"
+  ],
+  "wrong_sha": [
+   "2606.01667:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "wrong_kind": [
+   "2606.01667:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "coding_hand_edit": [
+   "single-write:coding-not-byte-identical-to-generator-output"
+  ]
+ },
+ "summary": "11/11 PASS",
+ "verdict": "PASS"
+}
