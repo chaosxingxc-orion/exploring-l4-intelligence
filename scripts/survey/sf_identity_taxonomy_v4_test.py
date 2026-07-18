@@ -99,8 +99,14 @@ def derive(r, topology_policy=("single_core", "single_core_multi_call")):
               and bool(set(r.get("signal_use", [])) & REWARD_USES))
     s0 = (strict and r["core_topology"] in topology_policy
           and r["core_native_modality"] in {"audio_native", "omni_native"})
+    # CE-v2 patch (isolated non-implementer finding): a terminal-lifecycle edge
+    # may only target a terminal-appropriate right — never a forward-step right
+    # (branch/retry/tool_call/supply/...). Blocks the whitelisted-relation
+    # terminal final-answer smuggle (__fixture__terminal_select_branch_miscat).
     live_edges = [e for e in valid_edges(r)
-                  if e.get("signal_lifecycle") in {"online_step", "terminal"}]
+                  if e.get("signal_lifecycle") == "online_step"
+                  or (e.get("signal_lifecycle") == "terminal"
+                      and e.get("decision_right") in {"synthesize", "stop"})]
     rq = (reward and r["control_horizon"] == "sequential" and len(live_edges) >= 1)
     rgs = (r.get("selection_policy") in {"scored_select", "tournament_select"}
            and r["signal_form"] in REWARD_FORMS)

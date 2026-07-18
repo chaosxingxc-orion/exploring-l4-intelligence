@@ -52,13 +52,14 @@
    {"relation": "stop_budget->tool_call", "anchor_row": "2606.01667#agentic-orchestration", "justification": "ATLAS explore-or-stop is ONE decision: the convergence/information-gain assessment controls both whether another explore tool call is dispatched and whether to stop (canon '独占 explore/stop 决策')"},
    {"relation": "stop_budget->branch", "anchor_row": "2026.findings-acl.511#prm-guided-search", "justification": "DREAM low-threshold triggers supplementary sampling m — the budget signal causes additional branching (canon '全低于低阈值补采 m')"}
   ],
-  "extension_discipline": "new relation types require a dated taxonomy supersession with anchor row + adjudication; field-name-equality guessing forbidden (v7 review §4.3)"
+  "extension_discipline": "new relation types require a dated taxonomy supersession with anchor row + adjudication; field-name-equality guessing forbidden (v7 review §4.3)",
+  "adjudication_2026_07_19": "iso-adj-A adjudicated the three anchored additions LEGIT (select->supply / prune->supply / stop_budget->tool_call), with caveat: stop_budget->tool_call is valid ONLY where dispatch and stop are one decision (ATLAS explore-or-stop); it must not be generalized to papers where they are separate decisions"
  },
  "derived_v4": {
   "data_access_strict_bits": "all seven access booleans false AND internal_visibility==api_only",
   "is_reward_guided": "signal_lifecycle ∈ {online_step, terminal} AND signal_form ∈ reward_forms AND signal_use ∩ reward_uses ≠ ∅ (unchanged from v3)",
   "is_s0_core_compatible": "strict AND core_topology ∈ topology_policy AND core_native_modality ∈ {audio_native, omni_native} (unchanged from v3)",
-  "is_rq_sys_control_compatible": "is_reward_guided AND control_horizon==sequential AND count(VALID control_edges with lifecycle ∈ {online_step, terminal}) >= 1 — CHANGED (MAJOR-1): two non-empty sets no longer suffice; the signal must be shown to control the right",
+  "is_rq_sys_control_compatible": "is_reward_guided AND control_horizon==sequential AND count(LIVE valid control_edges) >= 1, where LIVE = lifecycle==online_step OR (lifecycle==terminal AND decision_right ∈ {synthesize, stop}) — CHANGED (MAJOR-1): two non-empty sets no longer suffice; the signal must be shown to control the right. The terminal-rights restriction is the CE-v2 patch (isolated non-implementer refutation __fixture__terminal_select_branch_miscat: a whitelisted select->branch edge on a terminal final-answer tournament must not confer rq — terminal edges never license forward-step rights)",
   "is_project_method_candidate": "is_s0_core_compatible AND is_rq_sys_control_compatible",
   "reward_guided_selection": "selection_policy ∈ {scored_select, tournament_select} AND signal_form ∈ reward_forms — random_sample/consensus/profile_route/synthesize_all never count (v7 review §7.6: pool fact preserved without re-admitting the wrong 3/11)"
  },
@@ -70,7 +71,8 @@
   "K5_fabricated_edge": "MAJOR-1 killer: a fabricated select->memory_write edge is outside allowed_relations and must NOT confer rq-sys compatibility",
   "K6_terminal_only_selection": "MAJOR-1 killer: final-answer selection plus an unrelated sequential right with no valid edge must NOT be rq-sys compatible",
   "P1_revise_retry": "positive control: evidenced revise->retry edge yields rq-sys compatible",
-  "P2_stop_budget_stop": "positive control: evidenced stop_budget->stop edge yields rq-sys compatible"
+  "P2_stop_budget_stop": "positive control: evidenced stop_budget->stop edge yields rq-sys compatible",
+  "K7_terminal_edge_forward_right": "CE-v2 (non-implementer): terminal-lifecycle edge targeting a forward-step right (e.g. whitelisted select->branch on a final-answer tournament) must NOT confer rq — enforced by the LIVE-edge terminal-rights restriction; fixture lives in 2026-07-19-sf-independent-counterexamples-v2.json"
  },
  "single_write_pipeline": {
   "flow": "per-paper sidecar (wiki/survey/sidecars/*.sidecar.json, canonical source) -> scripts/survey/sf_coding_generator.py -> coding v5 JSON (generated projection) -> reconciliation (sf_identity_taxonomy_v4_test.py V7) -> occupancy",

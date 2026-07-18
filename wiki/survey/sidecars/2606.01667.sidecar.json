@@ -25,8 +25,8 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2606.01667#agentic-orchestration",
    "core_topology": "single_core_multi_call",
    "core_native_modality": "vision_native",
@@ -87,7 +87,7 @@
     }
    ],
    "source_locator": "canon: '独占 explore/stop 决策' (p3 Algorithm1/p8 Fig7a/p14 delegated roles)",
-   "adjudication_provenance": "v4/v5 rounds: consensus 单列不入 reward;拓扑蕴含 CE-1b 敏感列并算",
+   "adjudication_provenance": "v4/v5 rounds: consensus 单列不入 reward;拓扑蕴含 CE-1b 敏感列并算;〔iso-adj-A AGREE,附观察:explicit_candidate_pool_selection=true 与 synthesize_all 政策并存(池被合成消费而非打分选择,派生式不消费该位,无门禁影响,如实留注)〕",
    "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 单列不入 reward;tool_call/stop 边同源一个 explore-or-stop 决策"
   }
  ]

@@ -58,7 +58,7 @@ decision_rights≠∅` 允许「select 信号 + 无关 memory_write 权」拼接
 
 ## §3 Gate MAJOR-2 — sidecar 单写链与真 reconciliation（Step C,已闭合;评审 §5.5 顺序论证采纳——前置到 Stage-1A 收口）
 
-**数据流**：`wiki/survey/sidecars/<work>.sidecar.json`（8 件正典,唯一手写源;sha256 由 ledger 机器注入）
+**数据流**：`wiki/survey/sidecars/<work>.sidecar.json`（8 件正典集合内的单一手写层;sha256 由 ledger 机器注入）
 → `scripts/survey/sf_coding_generator.py`（确定性投影,重复运行零 diff,`--check` 模式验字节等同）
 → `wiki/survey/2026-07-19-sf-known-item-coding-v5.json`（GENERATED,手改=失败）
 → `scripts/survey/sf_identity_taxonomy_v4_test.py` V7 真 reconciliation → occupancy。
@@ -98,7 +98,7 @@ edge+field_evidence+locator 前置）→generator→reconciliation→occupancy;�
   internal-state 边界检验件,不因 training-free 标题计入 project method）;
 - **legal-verifier 负结果**（2025.nllp-1.15）→ 表 C **NEG-P10** 回链（仓内早期在案
   `wiki/2026-07-11-survey-full-verification.md:59,229`,v7 附录漏收更正）;
-- 表 C 全列 **claim key**（NEG-P1..P10,§7.1 可追踪性要求——承重先验→唯一表行）。
+- 表 C 逐行加 **claim key**（集合 = NEG-P1..P10,§7.1 可追踪性要求——每条承重先验绑定表内单行定位）。
 
 ## §5 完成态语言更正与内审环升级（评审 §8.2/§9.2）
 

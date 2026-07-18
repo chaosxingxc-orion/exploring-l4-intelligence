@@ -25,10 +25,10 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2605.08083#discovered-controller",
-   "core_topology": "single_core",
+   "core_topology": "single_core_multi_call",
    "core_native_modality": "text_only",
    "core_io_modality": "text_in_text_out",
    "signal_form": "consensus_vote",
@@ -80,8 +80,8 @@
     }
    ],
    "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/动作/p4 probe/p5 beta)",
-   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true)",
-   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴"
+   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true);〔dated correction 2026-07-19:iso-adj-A DISAGREE 采纳——128 预采轨迹+推理时分支级管理=对单一冻结基座的重复调用,原 single_core 更正为 single_core_multi_call(非改果错码:text_only 轴本已排除 s0);另录其观察:signal_form=consensus_vote 描述终态 Agg 相位,在线边由 controller 状态观测驱动——edge_semantics 已如实标 state-conditioned,行级 form/lifecycle 相位合并无门禁影响〕",
+   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴;在线边=状态驱动,终态=共识 Agg(两相位见 provenance)"
   }
  ]
 }

@@ -1,0 +1,348 @@
+{
+ "artifact_id": "SF-INDEPENDENT-COUNTEREXAMPLES-V2-2026-07-19-01",
+ "author": "isolated adversarial CE agent (Opus, non-implementer)",
+ "author_notes": {
+  "__fixture__terminal_select_branch_miscat": "EXPECTED_TO_FAIL_CURRENT_IMPL — the load-bearing refutation: v4 defends against non-whitelisted relations (K5) and missing edges (K4/K6) but NOT against a WHITELISTED relation applied to a terminal final-answer selection. This row is one token away from the legitimate 2604.16529#rtv-pdr-pipeline: a terminal pairwise tournament (like the real 2604.16529#rtv, which is correctly rq=False with empty rights) that a coder mistakenly gives decision_rights=['branch'] + a select->branch edge. select->branch is whitelisted; derive() discards edge_semantics and counts the terminal-lifecycle edge as a live edge, so rq flips True and (omni strict core) is_project_method_candidate flips True. The taxonomy's OWN relation table (line 48) says select->branch is 'terminal when only final answer' i.e. does NOT hold here, so the correct output is False. Concrete machine-checkable fix that breaks NO existing positive (K2/P1/P2/pipeline edges are online_step; ATLAS terminal edge targets synthesize, a terminal right): a live edge with signal_lifecycle=='terminal' may target only terminal rights (synthesize/stop), never a forward-step right (branch/retry/tool_call/supply). This is the v3-style disjoint-construction attack surviving into v4.",
+  "__fixture__confidence_decoy": "Decoy hardened past K1: omni_native STRICT core with a genuinely VALID live stop_budget->stop edge (n_valid_live_edges=1) and online_step lifecycle — everything a method candidate needs EXCEPT the signal_form is 'confidence' (self-reported), a reward-form the implementer never tested (they tested binary_gate/consensus_vote). Proves the reward-form gate, not a missing edge, is what must block it; guards against anyone widening reward_forms to admit self-confidence.",
+  "__fixture__synthesize_not_reward_use": "Probes the reward-USE half of is_reward_guided (not just the form half). Reward FORM (verifiable_outcome), a WHITELISTED valid live edge (synthesize_input->synthesize), omni STRICT core, sequential horizon — the only thing blocking candidacy is that synthesize_input is deliberately absent from reward_uses, so terminal synthesis is never reward-guided. Untested; documents that the exclusion is load-bearing (adding synthesize_input to reward_uses would silently promote pure terminal synthesizers).",
+  "__fixture__rq_with_edge": "Miscoding-detection anchor (positive half): correctly rq-compatible audio_native strict row with a revise->retry live edge. Pairs with __fixture__rq_edge_dropped_miscode.",
+  "__fixture__rq_edge_dropped_miscode": "Miscoding-detection direction (the v3 hole guard): identical to __fixture__rq_with_edge but the control_edge is DROPPED while decision_rights=['retry'] and signal_use=['revise'] are KEPT — the exact 'two non-empty sets' construction the reviewer used to refute v3. Correct v4 output is False (n_valid_live_edges=0). If derive() ever regresses to v3 semantics this fixture flips to True and the harness catches it; the ONLY delta from the positive twin is the edge, so it isolates the edge as load-bearing.",
+  "2605.08083#discovered-controller": "Real UNTESTED row (absent from author_cases and CE-v1). AutoTTS has TWO valid live edges (prune->branch, stop_budget->stop, n_valid_live_edges=2) + sequential horizon + a candidate pool — a near-miss that stresses the reward-form gate on real data: signal_form=consensus_vote (not a reward form) forces is_reward_guided=False and controller_program_or_config_optimized_on_labels=true forces strict=False, so it must NOT be rq-compatible, s0-compatible, a method candidate, or reward_guided_selection. A miscode of signal_form->scalar_score alone would silently flip is_reward_guided (with the edges already present), so pinning it here is a regression tripwire."
+ },
+ "cases": {
+  "__fixture__terminal_select_branch_miscat": {
+   "row": {
+    "method_path_id": "__fixture__terminal_select_branch_miscat",
+    "paper_work_id": "__fixture__terminal_select_branch_miscat",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "pairwise_comparison",
+    "signal_source": "llm_judge",
+    "signal_lifecycle": "terminal",
+    "signal_use": [
+     "select"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "branch"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "select",
+      "decision_right": "branch",
+      "signal_lifecycle": "terminal",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "the pairwise tournament picks the single FINAL answer; no subsequent branch is conditioned on the choice (taxonomy line 48 'terminal when only final answer' case)"
+     }
+    ],
+    "selection_object": "candidate_output",
+    "terminal_operator": "select_one",
+    "explicit_candidate_pool_selection": true,
+    "candidate_pool_exists": true,
+    "selection_policy": "tournament_select",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "field_evidence": [],
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__terminal_select_branch_miscat",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__terminal_select_branch_miscat",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v2 fixture (non-implementer oracle)",
+    "note": "terminal final-answer tournament dressed with a whitelisted select->branch edge"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "reward_guided_selection": true,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false
+   },
+   "note": "terminal-only selection smuggled through a whitelisted select->branch edge must NOT be rq-compatible (K6 hole via a whitelisted relation)"
+  },
+  "__fixture__confidence_decoy": {
+   "row": {
+    "method_path_id": "__fixture__confidence_decoy",
+    "paper_work_id": "__fixture__confidence_decoy",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "confidence",
+    "signal_source": "self_confidence",
+    "signal_lifecycle": "online_step",
+    "signal_use": [
+     "stop_budget"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "stop"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "stop_budget",
+      "decision_right": "stop",
+      "signal_lifecycle": "online_step",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "self-reported confidence above threshold stops the sampling loop"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "none",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "field_evidence": [],
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__confidence_decoy",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__confidence_decoy",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v2 fixture (non-implementer oracle)",
+    "note": "omni strict core + valid live stop edge, blocked only by confidence (non-reward form)"
+   },
+   "expect": {
+    "is_reward_guided": false,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "reward_guided_selection": false,
+    "n_valid_live_edges": 1
+   },
+   "note": "self-confidence is not a verifiable reward; a valid edge does not rescue a non-reward form"
+  },
+  "__fixture__synthesize_not_reward_use": {
+   "row": {
+    "method_path_id": "__fixture__synthesize_not_reward_use",
+    "paper_work_id": "__fixture__synthesize_not_reward_use",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "verifiable_outcome",
+    "signal_source": "environment",
+    "signal_lifecycle": "terminal",
+    "signal_use": [
+     "synthesize_input"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "synthesize"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "synthesize_input",
+      "decision_right": "synthesize",
+      "signal_lifecycle": "terminal",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "the accumulated verified evidence is what the core synthesizes the final answer from"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "synthesize",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "field_evidence": [],
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__synthesize_not_reward_use",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__synthesize_not_reward_use",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v2 fixture (non-implementer oracle)",
+    "note": "reward form + whitelisted synthesize edge + omni strict, blocked only by synthesize_input not being a reward_use"
+   },
+   "expect": {
+    "is_reward_guided": false,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "n_valid_live_edges": 1
+   },
+   "note": "terminal synthesis is never reward-guided (synthesize_input is not a reward_use), even with a whitelisted valid live edge and a reward form"
+  },
+  "__fixture__rq_with_edge": {
+   "row": {
+    "method_path_id": "__fixture__rq_with_edge",
+    "paper_work_id": "__fixture__rq_with_edge",
+    "core_topology": "single_core",
+    "core_native_modality": "audio_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_text_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "scalar_score",
+    "signal_source": "llm_judge",
+    "signal_lifecycle": "online_step",
+    "signal_use": [
+     "revise"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "retry"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "revise",
+      "decision_right": "retry",
+      "signal_lifecycle": "online_step",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "low judge score rejects the answer and feeds corrective feedback into another attempt"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "accept_reject",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "field_evidence": [],
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__rq_with_edge",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__rq_with_edge",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v2 fixture (non-implementer oracle)",
+    "note": "correctly rq-compatible audio strict core with an evidenced revise->retry edge"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": true,
+    "is_project_method_candidate": true,
+    "n_valid_live_edges": 1
+   },
+   "note": "positive anchor for the miscoding-detection pair (edge present)"
+  },
+  "__fixture__rq_edge_dropped_miscode": {
+   "row": {
+    "method_path_id": "__fixture__rq_edge_dropped_miscode",
+    "paper_work_id": "__fixture__rq_edge_dropped_miscode",
+    "core_topology": "single_core",
+    "core_native_modality": "audio_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_text_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "scalar_score",
+    "signal_source": "llm_judge",
+    "signal_lifecycle": "online_step",
+    "signal_use": [
+     "revise"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "retry"
+    ],
+    "control_edges": [],
+    "selection_object": "none",
+    "terminal_operator": "accept_reject",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "field_evidence": [],
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__rq_edge_dropped_miscode",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__rq_edge_dropped_miscode",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v2 fixture (non-implementer oracle)",
+    "note": "same as __fixture__rq_with_edge but the control_edge is dropped while rights/uses are kept (the v3 refuting construction)"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "n_valid_live_edges": 0
+   },
+   "note": "dropping the edge while keeping non-empty signal_use/decision_rights must flip rq to False (v3 hole regression guard)"
+  },
+  "2605.08083#discovered-controller": {
+   "expect": {
+    "is_reward_guided": false,
+    "data_access_strict_bits": false,
+    "is_s0_core_compatible": false,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "reward_guided_selection": false,
+    "n_valid_live_edges": 2
+   },
+   "note": "AutoTTS: two valid live edges + sequential + pool, but consensus_vote form and ctrl_label axis force not-reward/not-strict/not-candidate"
+  }
+ }
+}

@@ -25,8 +25,8 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2602.16485#calibrated-orchestration",
    "core_topology": "multi_model_federation",
    "core_native_modality": "text_only",
@@ -56,6 +56,13 @@
      "signal_lifecycle": "inference_pre_context",
      "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
      "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context; no online reward)"
+    },
+    {
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "signal_lifecycle": "terminal",
+     "source_locator": "canon: 'orchestrator 聚合/合成'",
+     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer (iso-adj-A observation: previously missing documentation edge; no gate impact)"
     }
    ],
    "field_evidence": [

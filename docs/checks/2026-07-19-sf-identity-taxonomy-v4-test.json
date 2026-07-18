@@ -48,7 +48,7 @@
   },
   {
    "id": "V5",
-   "check": "独立语义反例 x4(v1+v2,字段别名映射)",
+   "check": "独立语义反例 x10(v1+v2,字段别名映射)",
    "result": "PASS",
    "detail": "[]"
   },
@@ -67,8 +67,8 @@
   {
    "id": "V7",
    "check": "真 reconciliation(单写字节等同/ledger id+kind+sha 同行绑定/正典节标题解析/locator 语法+canon|tex 引文核验/work-id 三向一致/actor 纪律+承重行独立裁决)",
-   "result": "FAIL",
-   "detail": "['2026.findings-acl.1243#closed-prompt-only:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.1243#open-sft-variant:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.1724#pipeline:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.511#prm-guided-search:load-bearing-not-adjudicated:pending_independent_adjudication', '2602.16485#calibrated-orchestration:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#rtv:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#pdr-random-k:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#rtv-pdr-pipeline:load-bearing-not-adjudicated:pending_independent_adjudication']"
+   "result": "PASS",
+   "detail": "[]"
   },
   {
    "id": "V8",
@@ -300,6 +300,6 @@
    "single-write:coding-not-byte-identical-to-generator-output"
   ]
  },
- "summary": "10/11 PASS",
- "verdict": "FAIL"
+ "summary": "11/11 PASS",
+ "verdict": "PASS"
 }

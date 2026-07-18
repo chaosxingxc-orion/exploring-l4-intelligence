@@ -89,8 +89,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
    "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮/3–4 轮见顶)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v4 复审 DFS 批B 抽查命中",
    "note": "DeepVerifier 主路径:在线逐步 scalar 判定驱动 retry/stop——rq 兼容但 strict 位不满足(ctrl_label+new_info);tool_call 权无 signal 边(分解 agent 决定查什么,非 judge 分控制)"
   },
@@ -98,9 +98,9 @@
    "method_path_id": "2026.findings-acl.1243#open-sft-variant",
    "paper_work_id": "2026.findings-acl.1243",
    "core_topology": "single_core_multi_call",
-   "core_native_modality": "vision_native",
+   "core_native_modality": "text_only",
    "internal_visibility": "api_only",
-   "core_io_modality": "multimodal_in_text_out",
+   "core_io_modality": "text_in_text_out",
    "core_weight_update": true,
    "external_component_weight_update": false,
    "controller_program_or_config_optimized_on_labels": true,
@@ -148,9 +148,9 @@
    "field_evidence": [
     {
      "field": "core_native_modality",
-     "value": "vision_native",
+     "value": "text_only",
      "kind": "canon",
-     "quote": "web-research 多模态"
+     "quote": "微调 Qwen3-8B"
     },
     {
      "field": "signal_form",
@@ -168,10 +168,10 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
    "source_locator": "canon: '开源变体对策略主干 SFT'",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_provenance": "v4 复审 DFS 批B",
-   "note": "SFT 变体独立行"
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4 复审 DFS 批B;〔dated correction 2026-07-19:iso-adj-B DISAGREE 采纳——本行核=SFT 后 Qwen3-8B(纯文本),原 vision_native+『web-research 多模态』为闭源行任务级引文误继承;更正 text_only/text_in_text_out+核级证据『微调 Qwen3-8B』;非改果错码(s0 本已不满足)但如实更正〕",
+   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)"
   },
   {
    "method_path_id": "2026.findings-acl.1724#pipeline",
@@ -238,8 +238,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724",
    "source_locator": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选' (α 剪枝/固定预算)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v4 复审 DFS 批B 抽查命中;〔dated correction 2026-07-19(v7 复审 Step B edge 逐行复核):decision_rights 原 ['stop'] 与证据不符——stage-local 剪枝控制的是候选晋级(branch 权);预算控制器为固定预算非信号控制,stop 权撤回〕",
    "note": "Selective TTS:在线 stage-local scalar 剪枝驱动候选晋级——rq 兼容但 dev-label 轴使 strict 位不满足"
   },
@@ -330,8 +330,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511",
    "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n' (双阈值早停/补采)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v4 复审 DFS 批B(基线表 REBASE/MAJ 对照抽查)",
    "note": "DREAM:trained PRM 在线逐步引导——rq 兼容但 ext_wu 使 strict 位不满足"
   },
@@ -369,6 +369,13 @@
      "signal_lifecycle": "inference_pre_context",
      "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
      "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context; no online reward)"
+    },
+    {
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "signal_lifecycle": "terminal",
+     "source_locator": "canon: 'orchestrator 聚合/合成'",
+     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer (iso-adj-A observation: previously missing documentation edge; no gate impact)"
     }
    ],
    "selection_object": "tool_agent",
@@ -402,8 +409,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485",
    "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq.3 校准分=唯一标量,离线)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v6 复审 P1-1 裁决执行(一手 grep 证据句);独立反例 CE-1a",
    "note": "Team-of-Thoughts 裁决:profile-conditioned orchestration boundary——部署期无独立标量/比较 reward;edge 为 pre-context 文档边,不计入 rq"
   },
@@ -463,8 +470,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
    "source_locator": "tex: 'For random-K, we follow PDR and randomly sample K previous summaries'",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定 + eprint sha 一手复核;v7 复审 §7.6 pool 事实经 candidate_pool_exists/random_sample 保留",
    "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无选择信号;池存在但 random_sample 永不计入 reward_guided_selection"
   },
@@ -522,8 +529,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
    "source_locator": "canon: '投票锦标赛递归淘汰'",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v6 复审 Round D + 一手复核",
    "note": "并行维:锦标赛比较选 top-1;终态退化路径,非序贯控制——K6 terminal-only 的真实样例"
   },
@@ -604,15 +611,15 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
    "source_locator": "tex: 'apply RTV to obtain a high-quality subset of K summaries'",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "v6 复审 Round D + 一手复核;〔dated correction 2026-07-19:原 locator『Iter 0…selection via RTV…』为前轮省略号转述,非 TeX 逐字——换为可机器核验的 Select-K 原句(MAJOR-2 locator 前置纪律)〕",
    "note": "组合路径:RTV 选 K(取代 random-K)→条件化 iter1→final RTV;成分声明防独立复制误计"
   },
   {
    "method_path_id": "2605.08083#discovered-controller",
    "paper_work_id": "2605.08083",
-   "core_topology": "single_core",
+   "core_topology": "single_core_multi_call",
    "core_native_modality": "text_only",
    "internal_visibility": "api_only",
    "core_io_modality": "text_in_text_out",
@@ -683,10 +690,10 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083",
    "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/动作/p4 probe/p5 beta)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true)",
-   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴"
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true);〔dated correction 2026-07-19:iso-adj-A DISAGREE 采纳——128 预采轨迹+推理时分支级管理=对单一冻结基座的重复调用,原 single_core 更正为 single_core_multi_call(非改果错码:text_only 轴本已排除 s0);另录其观察:signal_form=consensus_vote 描述终态 Agg 相位,在线边由 controller 状态观测驱动——edge_semantics 已如实标 state-conditioned,行级 form/lifecycle 相位合并无门禁影响〕",
+   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴;在线边=状态驱动,终态=共识 Agg(两相位见 provenance)"
   },
   {
    "method_path_id": "2606.01667#agentic-orchestration",
@@ -769,9 +776,9 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667",
    "source_locator": "canon: '独占 explore/stop 决策' (p3 Algorithm1/p8 Fig7a/p14 delegated roles)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_provenance": "v4/v5 rounds: consensus 单列不入 reward;拓扑蕴含 CE-1b 敏感列并算",
+   "semantic_adjudicator": "claude-opus-iso-adj-A:task-ae427dd05",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_provenance": "v4/v5 rounds: consensus 单列不入 reward;拓扑蕴含 CE-1b 敏感列并算;〔iso-adj-A AGREE,附观察:explicit_candidate_pool_selection=true 与 synthesize_all 政策并存(池被合成消费而非打分选择,派生式不消费该位,无门禁影响,如实留注)〕",
    "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 单列不入 reward;tool_call/stop 边同源一个 explore-or-stop 决策"
   },
   {
@@ -838,8 +845,8 @@
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054",
    "source_locator": "canon: '门决定是否执行'",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
+   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_provenance": "独立反例 CE-3(trained gate ≠ RM/PRM 三重理由)",
    "note": "trained binary gate ≠ reward;binary_gate ∉ reward 形式集;edge 存在但 signal_form 非 reward → rq False(边不救非 reward 信号)"
   }
