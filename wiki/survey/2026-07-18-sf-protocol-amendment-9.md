@@ -66,7 +66,7 @@ v4 承重数字全量矩阵 = `wiki/survey/2026-07-18-sf-v4-claim-evidence-matri
 | ATLAS 2606.01667 | system-control 直接近邻 | 5 命中（SF-L2-Q1/L13-Q1/L13-Q3/**L14-Q1/L15-Q1**——C4C 方法占位轴有效） |
 | AutoTTS 2605.08083 | controller synthesis 近邻 | SF-L2-Q1 |
 | Agentic Coding TTC 2604.16529 | 长轨迹 memory/reuse 组件 prior | SF-L2-Q1 |
-| Team of Thoughts 2602.16485 | 多模型联邦边界对照 | **零命中**（text-domain,模态连词挡;我方主动补充登记） |
+| Team of Thoughts 2602.16485 | 多模型联邦边界对照（评审供给,同表其余七项） | **零命中**（text-domain,模态连词挡;零命中身份 = 我方 matcher 复现的主动补充披露〔评审未测此项召回〕） |
 | ToolGate 2606.03054 | **TRAINED_COMPARATOR**（摘要逐字:"learned controller"+"matched-domain trajectory training"）+ decision-rights/停止 prior | **零命中**（gating 词族,drift 队列 1/3 身份保留） |
 | DeepVerifier 2026.findings-acl.1243 | rubric outcome verifier,"without any additional training"(abs 级);verifier 能力来源待全文审计 | 非 arXiv,官方源救援已双份落盘 |
 | Selective TTS 2026.findings-acl.1724 | reward-guided 多阶段 pipeline/judge drift prior | 非 arXiv,同上 |

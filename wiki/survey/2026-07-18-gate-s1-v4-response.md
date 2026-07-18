@@ -5,7 +5,7 @@ date: 2026-07-18
 addressee: "Gate S1 评审人 / 评委"
 in_reply_to: "《System-first Research Proposal v4 调研证据呈报版——阶段校准、证据与学术诚信对抗复审》（WITHHOLD_STAGE1B_SURVEY_EXECUTION_PENDING_MAJOR_REVISION）"
 verification_first: "按 reviewer-response-protocol 逐条独立核验:P0-1/P0-2/P0-3/P0-4/P1-1..3 全部属实;贵审 8 项新引 8/8 反幻觉过、matcher 声称全数精确复现（ATLAS 恰 5 命中含我方 L14/L15 新轴;AutoTTS/Agentic-Coding 各中 SF-L2-Q1）;ToolGate『learned controller+matched-domain trajectory training』摘要逐字坐实;ATLAS 07-03 归档在案坐实——本轮**零异议,全盘接受**"
-supplementary_disclosure: "我方主动补充:Team of Thoughts 2602.16485 经正典 matcher 65 查询零命中（text-domain,模态连词挡）——已与 ToolGate 同法入 known-item 保证队列并保留零命中反例身份"
+supplementary_disclosure: "我方主动补充披露:贵审表内 Team of Thoughts 2602.16485（八项均贵审供给）经正典 matcher 65 查询零命中（text-domain,模态连词挡;贵审未测此项召回）——已与 ToolGate 同法保留零命中反例身份入保证队列"
 attestation: "discovery_queries_executed = 0 维持;本批联网活动 = wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl（1 header + 12 行,双记两台账指针）"
 ---
 
