@@ -1,0 +1,80 @@
+{
+ "sidecar_id": "SF-SIDECAR-2602.16485-2026-07-19-01",
+ "date": "2026-07-19",
+ "paper_work_id": "2602.16485",
+ "work_title": "Team of Thoughts: Efficient Test-time Scaling through Orchestrated Tool Calling",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2602.16485",
+  "kind": "pdf",
+  "sha256": "92e1329334fe3ff98fa30d0235f365bedd02cec4f23c1ba1c6b6415aa0a58d32",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": true,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "semantic_adjudicator": "PENDING-ADJ",
+   "adjudication_status": "pending_independent_adjudication",
+   "method_path_id": "2602.16485#calibrated-orchestration",
+   "core_topology": "multi_model_federation",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signal_form": "text_critique",
+   "signal_source": "llm_judge",
+   "signal_lifecycle": "inference_pre_context",
+   "signal_use": [
+    "route",
+    "synthesize_input"
+   ],
+   "control_horizon": "terminal",
+   "decision_rights": [
+    "route",
+    "tool_call",
+    "synthesize"
+   ],
+   "selection_object": "tool_agent",
+   "terminal_operator": "synthesize",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "profile_route",
+   "control_edges": [
+    {
+     "signal_use": "route",
+     "decision_right": "route",
+     "signal_lifecycle": "inference_pre_context",
+     "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
+     "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context; no online reward)"
+    }
+   ],
+   "field_evidence": [
+    {
+     "field": "core_topology",
+     "value": "multi_model_federation",
+     "kind": "canon",
+     "quote": "7 个不同后训练模型族"
+    },
+    {
+     "field": "signal_form",
+     "value": "text_critique",
+     "kind": "canon",
+     "quote": "推理时画像喂 orchestrator"
+    }
+   ],
+   "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq.3 校准分=唯一标量,离线)",
+   "adjudication_provenance": "v6 复审 P1-1 裁决执行(一手 grep 证据句);独立反例 CE-1a",
+   "note": "Team-of-Thoughts 裁决:profile-conditioned orchestration boundary——部署期无独立标量/比较 reward;edge 为 pre-context 文档边,不计入 rq"
+  }
+ ]
+}

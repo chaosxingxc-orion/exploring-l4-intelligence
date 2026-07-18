@@ -1,0 +1,87 @@
+{
+ "sidecar_id": "SF-SIDECAR-2605.08083-2026-07-19-01",
+ "date": "2026-07-19",
+ "paper_work_id": "2605.08083",
+ "work_title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling (AutoTTS)",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2605.08083",
+  "kind": "pdf",
+  "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "semantic_adjudicator": "PENDING-ADJ",
+   "adjudication_status": "pending_independent_adjudication",
+   "method_path_id": "2605.08083#discovered-controller",
+   "core_topology": "single_core",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signal_form": "consensus_vote",
+   "signal_source": "consensus",
+   "signal_lifecycle": "online_step",
+   "signal_use": [
+    "select",
+    "prune",
+    "stop_budget"
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch",
+    "stop"
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "vote",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "consensus_vote",
+   "control_edges": [
+    {
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
+     "edge_semantics": "the discovered code controller's state-conditioned pruning decides which branches continue"
+    },
+    {
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "signal_lifecycle": "online_step",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
+     "edge_semantics": "beta-parameterized budget signal stops sampling"
+    }
+   ],
+   "field_evidence": [
+    {
+     "field": "core_native_modality",
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "数学(AIME/HMMT)+GPQA 泛化"
+    },
+    {
+     "field": "signal_form",
+     "value": "consensus_vote",
+     "kind": "canon",
+     "quote": "selector=controller 终态共识型 Agg"
+    }
+   ],
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/动作/p4 probe/p5 beta)",
+   "adjudication_provenance": "v4/v5 rounds: 发现期 gold=dev-label 轴(ctrl_label=true)",
+   "note": "AutoTTS:部署 controller 共识 Agg;发现期 gold=dev-label 轴"
+  }
+ ]
+}

@@ -8,9 +8,9 @@ discipline: "五值证据模式(amendment-9 §2);SOURCE_REPORTED_TRACEABLE 恒�
 
 # v5 增补 claim-evidence 矩阵
 
-## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v3** 重算,输入 = coding-**v4**.json 11 条 method path;〔dated correction 第三版:v2 版行经 v6 复审两 Gate MAJOR 更正——PDR 源文错码致 3/11 撤回、身份三分派生取代单一位;旧行随 git 历史留档〕）
+## §1 量词/合取类（MACHINE_RECOMPUTED_LOCAL——identity taxonomy **v4** 重算,输入 = coding-**v5**.json 11 条 method path〔sidecar 单写链生成〕;〔dated correction 第四版 2026-07-19:v7 复审 Gate MAJOR-1/-2 整改——rq 派生加因果 edge 要求,数值经重算不变但全部 edge 背书;新增 V7-Q08;第三版及旧行随 git 历史留档〕〔第三版注:v2 版行经 v6 复审两 Gate MAJOR 更正——PDR 源文错码致 3/11 撤回、身份三分派生取代单一位〕）
 
-| claim ID | 陈述 | 复算入口（`sf_identity_taxonomy_v3_test.py` 持久化输出;全部双分母+双政策敏感列） | 独立复验 |
+| claim ID | 陈述 | 复算入口（`sf_identity_taxonomy_v4_test.py` 持久化输出;全部双分母+双政策敏感列） | 独立复验 |
 |---|---|---|---|
 | V6-Q01 | is_s0_core_compatible = 0/11;is_rq_sys_control_compatible = 5/11 路径（4/8 works）;is_project_method_candidate = 0/11（重立后的待检验空位坐标） | occupancy.policy_A → 对应键 | 是 |
 | V6-Q02 | strict∧reward∧K 池（机制分层非身份）= 轨迹池 **2/11 路径（unique work 1/8**,#rtv 与 #pipeline 同一篇;PDR 按 TeX 更正后原 3/11 撤回〕 | strict_AND_reward_AND_pool_BY_selection_object（双分母） | 是（eprint sha 一手核验） |
@@ -18,6 +18,7 @@ discipline: "五值证据模式(amendment-9 §2);SOURCE_REPORTED_TRACEABLE 恒�
 | V6-Q04 | trained-PRM∧K 池 = 1/11（DREAM） | learned_rm_prm_AND_pool | 是 |
 | V6-Q05 | 原生 audio/omni 进核 = 0/11 | core_native_audio_or_omni | 是 |
 | V6-Q06 | 拓扑政策 A 与严格拓扑敏感列双算（CE-1b 在敏感列非空洞） | occupancy.sensitivity_strict_topology + V5b 检查 | 是 |
+| V7-Q08 | reward_guided_selection = 4/11（§7.6 拆轴:candidate_pool_exists/selection_policy 分离;PDR random-K 池事实保留而永不计入 reward 选择）;rq_sys = 5/11 要求 ≥1 有效因果 edge（K4/K5/K6 killer 在案） | occupancy.policy_A.reward_guided_selection + V3 killer 检查 | 是 |
 | V5-Q07v2 | exposure union 计数（W1+umbrella 27;W4 ≈70 组级事件） | **证据模式降格（P1-3）:REVIEWER_INFERENCE + TEAM_ATTESTATION 考古估计**——组级行含多运行,无规范化 event ledger;ledger 化延至 Stage-2 held-out 冻结前 | 否（估计类） |
 
 ## §2 外部论文数字（SOURCE_REPORTED_TRACEABLE——未复算;效力限该论文报告的模型/任务/设置内）

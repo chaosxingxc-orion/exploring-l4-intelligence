@@ -1,0 +1,95 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-V4-2026-07-19-01",
+ "title": "identity taxonomy v4 — causal control edges + single-write lineage (v7 doctoral review Gate MAJOR-1/-2 remediation)",
+ "date": "2026-07-19",
+ "supersession": "v4 supersedes v3 (dated supersession; v3 file retained for audit). Changes: (1) MAJOR-1 — is_rq_sys_control_compatible now requires >=1 VALID control edge (signal actually controls the right), not two non-empty sets; (2) control_edges become first-class per-method-path records with per-edge source locator + semantics; (3) allowed signal->right relation registry (edges outside it are invalid; extending it requires a dated taxonomy supersession + adjudication); (4) v7-review §7.6 — candidate_pool_exists / selection_policy split so random-K keeps its pool fact without re-entering reward-guided selection; (5) single-write pipeline: coding v5 is GENERATED from per-paper sidecars (scripts/survey/sf_coding_generator.py), hand-editing coding is a reconciliation failure; (6) actor-identity discipline replaces the W1 group label; (7) field_evidence records bind load-bearing field values to canonical-record/TeX quotes.",
+ "enums": {
+  "core_topology": ["single_core", "single_core_multi_call", "multi_model_federation", "core_plus_external_model"],
+  "core_native_modality": ["text_only", "vision_native", "audio_native", "omni_native", "asr_mediated", "unknown"],
+  "internal_visibility": ["api_only", "logits_logprob", "hidden_state", "gradient"],
+  "core_io_modality": ["text_in_text_out", "multimodal_in_text_out", "multimodal_in_out"],
+  "signal_form": ["scalar_score", "pairwise_comparison", "binary_gate", "text_critique", "confidence", "consensus_vote", "verifiable_outcome", "none"],
+  "signal_source": ["rule", "llm_judge", "trained_classifier", "learned_rm_prm", "environment", "self_confidence", "consensus", "human_aligned_proxy", "none"],
+  "signal_lifecycle": ["offline_calibration", "inference_pre_context", "online_step", "terminal", "none"],
+  "control_horizon": ["terminal", "sequential", "offline_meta"],
+  "selection_object": ["candidate_output", "trajectory", "action", "tool_agent", "plan", "none"],
+  "terminal_operator": ["select_one", "prune", "route", "vote", "merge", "synthesize", "accept_reject", "none"],
+  "selection_policy": ["none", "random_sample", "scored_select", "tournament_select", "consensus_vote", "profile_route", "synthesize_all"],
+  "candidate_pool_exists": [true, false, "unknown"],
+  "adjudication_status": ["adjudicated_agree", "conflict_queue", "pending_independent_adjudication"]
+ },
+ "signal_use": ["select", "prune", "route", "revise", "retry", "branch", "tool_call", "memory_write", "state_update", "supply", "stop_budget", "execute_skip_gate", "synthesize_input", "train_controller", "offline_diagnostic"],
+ "decision_rights": ["route", "retry", "branch", "tool_call", "memory_write", "supply", "stop", "synthesize", "execute_skip"],
+ "reward_forms": ["scalar_score", "pairwise_comparison", "verifiable_outcome"],
+ "control_edge_schema": {
+  "fields": {
+   "signal_use": "must be a member of the row's signal_use",
+   "decision_right": "must be a member of the row's decision_rights",
+   "signal_lifecycle": "lifecycle at which the edge operates; only online_step/terminal edges count toward is_rq_sys_control_compatible",
+   "source_locator": "REQUIRED non-empty; 'canon: <quote>' = verbatim quote inside the work's canonical DFS section; 'TeX: <quote>' = verbatim quote in the pinned eprint; plus optional structural tokens (pN/Fig/Table/Algorithm/Eq/§)",
+   "edge_semantics": "REQUIRED one-sentence causal statement: how this signal use controls this right"
+  },
+  "validity": "an edge is VALID iff signal_use∈row.signal_use AND decision_right∈row.decision_rights AND (signal_use -> decision_right) ∈ allowed_relations AND source_locator non-empty AND edge_semantics non-empty; unknown/absent evidence => no edge => not rq-sys-compatible (fail-closed)"
+ },
+ "allowed_relations": {
+  "select": ["branch", "supply"],
+  "prune": ["branch", "stop", "supply"],
+  "revise": ["retry", "branch"],
+  "retry": ["retry"],
+  "stop_budget": ["stop", "tool_call", "branch"],
+  "supply": ["supply", "branch"],
+  "route": ["route", "tool_call"],
+  "tool_call": ["tool_call"],
+  "memory_write": ["memory_write"],
+  "execute_skip_gate": ["execute_skip"],
+  "synthesize_input": ["synthesize"]
+ },
+ "allowed_relations_provenance": {
+  "seed": "v7 doctoral review §4.3 relation table (revise->retry/branch; stop_budget->stop; supply->supply/branch; route->route/tool_call; select/prune->branch when selection decides subsequent branches, terminal when only final answer)",
+  "evidence_driven_additions": [
+   {"relation": "select->supply", "anchor_row": "2604.16529#rtv-pdr-pipeline", "justification": "RTV selection determines WHICH summaries condition the next sequential iteration's refinement context (TeX 'Select-K ... selection via RTV'; canon '跨迭代状态=选中 K 摘要作精炼上下文') — selection-conditioned context construction is a causal edge, distinct from final-answer selection"},
+   {"relation": "prune->supply", "anchor_row": "2604.16529#rtv-pdr-pipeline", "justification": "tournament elimination narrows the summary set that supplies the next iteration (same mechanism as select->supply)"},
+   {"relation": "stop_budget->tool_call", "anchor_row": "2606.01667#agentic-orchestration", "justification": "ATLAS explore-or-stop is ONE decision: the convergence/information-gain assessment controls both whether another explore tool call is dispatched and whether to stop (canon '独占 explore/stop 决策')"},
+   {"relation": "stop_budget->branch", "anchor_row": "2026.findings-acl.511#prm-guided-search", "justification": "DREAM low-threshold triggers supplementary sampling m — the budget signal causes additional branching (canon '全低于低阈值补采 m')"}
+  ],
+  "extension_discipline": "new relation types require a dated taxonomy supersession with anchor row + adjudication; field-name-equality guessing forbidden (v7 review §4.3)"
+ },
+ "derived_v4": {
+  "data_access_strict_bits": "all seven access booleans false AND internal_visibility==api_only",
+  "is_reward_guided": "signal_lifecycle ∈ {online_step, terminal} AND signal_form ∈ reward_forms AND signal_use ∩ reward_uses ≠ ∅ (unchanged from v3)",
+  "is_s0_core_compatible": "strict AND core_topology ∈ topology_policy AND core_native_modality ∈ {audio_native, omni_native} (unchanged from v3)",
+  "is_rq_sys_control_compatible": "is_reward_guided AND control_horizon==sequential AND count(VALID control_edges with lifecycle ∈ {online_step, terminal}) >= 1 — CHANGED (MAJOR-1): two non-empty sets no longer suffice; the signal must be shown to control the right",
+  "is_project_method_candidate": "is_s0_core_compatible AND is_rq_sys_control_compatible",
+  "reward_guided_selection": "selection_policy ∈ {scored_select, tournament_select} AND signal_form ∈ reward_forms — random_sample/consensus/profile_route/synthesize_all never count (v7 review §7.6: pool fact preserved without re-admitting the wrong 3/11)"
+ },
+ "killer_fixtures_contract": {
+  "K1_native_audio_no_reward": "audio_native strict core with no reward signal must NOT be method candidate",
+  "K2_reward_tool_stop_no_pool": "omni-native strict core, verifiable online reward with EVIDENCED tool_call/stop edges, no K pool — MUST be rq-sys compatible and method candidate (edges required under v4)",
+  "K3_online_binary_verifiable": "verifiable_outcome online signal counts as reward",
+  "K4_disjoint_no_edge": "MAJOR-1 killer: select-signal + memory_write-right with NO edge must NOT be rq-sys compatible (was True under v3 — the review's refuting construction)",
+  "K5_fabricated_edge": "MAJOR-1 killer: a fabricated select->memory_write edge is outside allowed_relations and must NOT confer rq-sys compatibility",
+  "K6_terminal_only_selection": "MAJOR-1 killer: final-answer selection plus an unrelated sequential right with no valid edge must NOT be rq-sys compatible",
+  "P1_revise_retry": "positive control: evidenced revise->retry edge yields rq-sys compatible",
+  "P2_stop_budget_stop": "positive control: evidenced stop_budget->stop edge yields rq-sys compatible"
+ },
+ "single_write_pipeline": {
+  "flow": "per-paper sidecar (wiki/survey/sidecars/*.sidecar.json, canonical source) -> scripts/survey/sf_coding_generator.py -> coding v5 JSON (generated projection) -> reconciliation (sf_identity_taxonomy_v4_test.py V7) -> occupancy",
+  "rules": [
+   "coding v5 must be byte-identical to the generator's output over the sidecar set; hand edits to coding are a reconciliation failure",
+   "the same semantic value is written ONCE (in the sidecar); derived fields are recomputed, never trusted from coding",
+   "generator output is deterministically ordered and byte-stable (repeat runs zero diff)",
+   "sidecar fulltext pin binds {ledger, id, kind, sha256} — reconciliation requires the SAME ledger row to carry id+kind+sha256; version binding is byte-level sha256",
+   "batch growth: denominators are len(rows) and unique paper_work_id counts — never hard-coded; duplicate method_path_id rejected; load-bearing rows without adjudicated_agree rejected"
+  ]
+ },
+ "actor_identity_discipline": {
+  "rule": "coder and semantic_adjudicator are stable actor ids, never group labels (W1 forbidden); load-bearing rows require coder != semantic_adjudicator; AI actors record model + task identity; unresolved disagreements go to conflict_queue and never enter completed occupancy",
+  "actors": {
+   "claude-fable-main:s-ea4f0926": "main-session implementer/coder (Claude Fable 5, session ea4f0926)",
+   "claude-opus-iso-adj:<task-id>": "isolated adjudication agent (Opus, fresh context, non-implementer); task id recorded per adjudication",
+   "owner": "human owner — spot-checks and signs",
+   "ext-reviewer": "external doctoral reviewer artifacts"
+  }
+ },
+ "field_evidence_schema": "per load-bearing field: {field, value, kind: canon|tex, quote}; reconciliation asserts value==row field AND quote appears verbatim in the work's canonical DFS section (canon) or pinned eprint TeX (tex); flipping the field without touching its evidence record is a machine-caught inconsistency; flipping both leaves a semantically unsupported pair for the independent adjudicator (documented residual)"
+}
