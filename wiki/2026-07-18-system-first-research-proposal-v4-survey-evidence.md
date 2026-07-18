@@ -209,7 +209,8 @@ locator = claim-evidence 矩阵逐条给出,本件散文不重复。）
 2. **P0-2**：「全部承重数字可机器复跑」两处删除,改五值证据模式逐条声明 + claim-evidence
    矩阵;attestation 降为 TEAM_ATTESTATION 措辞。
 3. **P0-3**：§3.1 四轴普查降组件级,系统级改 13 轴 schema + known-item DFS 件。
-4. **P0-4**：ToolGate（及我方补充 Team of Thoughts）获保证性 DFS 入口,零命中身份保留。
+4. **P0-4**：ToolGate 与 Team of Thoughts 获保证性 DFS 入口（八项全为评审供给;后者零命中
+   身份 = 我方 matcher 复现的主动补充披露）,零命中身份保留。
 5. **P1-1**：§3.2 改双向三栏 + 单观察 kill + 未决替代解释;「独立收敛」改「异质案例共同提示」。
 6. **P1-2**：本附录 A + 引文作用域限定 + 拼接引标注。
 7. **P1-3**：known-item carry-forward ledger 纪律入 §4 与 amendment-9 §4。
