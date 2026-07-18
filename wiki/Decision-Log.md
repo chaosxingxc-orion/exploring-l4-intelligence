@@ -6,6 +6,35 @@
 
 ---
 
+### 2026-07-18（续65）· v4 复审裁 WITHHOLD（P0-1..4）+ owner 五裁决:阶段正典 v2 dated supersession（1B=mapping 执行/方向性原型→2A 复现先行）+ exposure union + 13 轴 schema
+
+**Context.** proposal v4 博导复审（审 @6bfa17f,四轮以来首份我方零事实异议件——8/8 新引
+零幻觉、matcher 声称全精确复现、并正式撤回其 P0-R9 0-hit 误判）裁 WITHHOLD:**P0-1** 阶段
+本体缺陷+「模型触碰 0 次」无范围=事实错误（累计口径下 07-05..10 战役在案）;**P0-2**「全部
+承重数字可九条命令复跑」超出工具能力包络（外部论文数字只可追溯不可复算）——同型失败第五
+轮,且本轮我方内审环亦放过（缺「能力包络」镜头）;**P0-3** 空位判据被 selector 四轴替代
+sequential-control 对象（指标倒置残留回潮）;**P0-4** ToolGate 已知零命中却只入 3 例阈值
+drift 队列无保证入口。另 P1×3（单向措辞/引用不自包含/看过但遗忘——ATLAS 07-03 归档在案未
+迁移 = carriage failure 第二例,我方复核坐实）。
+
+**Decision（owner 五裁决,2026-07-18）.** ①**阶段正典 v2 走 dated supersession**：1A=问题与
+survey 设计/**1B=systematic mapping 执行（全程禁研究模型含 smoke,owner 签署）**/1C=综合选题
+（2A 合同冻结不执行）/**2A=复现最近邻先行+方案探索（方向性原型自此在此）**/2B=验证/3=发表;
+分界依据=活动目的与证据用途;旧「1B=方向性原型」入墓碑（07-16「survey=1A」裁决之目的被继承
+加强）;四字段 exposure 记账强制（禁无范围「0 次」）。②历史实验全量登记
+INHERITED_PRIOR_EXPOSURE（不删不降不归零）。③已知项保证性 DFS 队列（评审 8 项+我方补充
+Team of Thoughts〔65 查询零命中,主动登记〕;drift 3 例阈值只管未知漂移;不动冻结查询）。
+④system-control 13 轴 occupancy schema 采纳,selector 四轴降组件表。⑤Stage-2A 复现先行
+合同接受为 1C 冻结草案。
+
+**Consequences（整改批交付）.** Research-Methodology §阶段 supersession + CLAUDE/AGENTS
+镜像 + memory v2;**exposure union 考古落盘**（27 事件/~11 模型/72 键数据集并集,证据指针
+逐件,W4 仓缺口如实登记）;amendment-9（五值证据模式枚举/13 轴 schema/known-item 队列/2A
+合同草案/内审环增「能力包络」镜头）;v4 更正版（四字段阶段账/证据模式逐条声明/三栏双向
+综合+单观察 kill/组件级-系统级双层普查/reference appendix/修订记录）;claim-evidence 矩阵
+全量;known-item 13 轴 DFS×8（全文双份入库:5 arXiv+3 ACL 官方源救援）;重新送审包。哨兵/
+查询正典计数不变（34/65）。
+
 ### 2026-07-18（续64）· P0-R9 裁 WITHHOLD（1 Gate MAJOR=方法占位盲区）+ 我方首次有据部分异议（0-hit 表 2/7 不成立）+ owner 五裁决 → correction #4C
 
 **Context.** P0-R9 复审返回 **WITHHOLD**，性质与前三轮不同：评审主动收回对抗变异类要求

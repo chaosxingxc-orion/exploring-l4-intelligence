@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QiQnbEKRyuWqs5hkKsuoICvkmSE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2602.16485&amp;start=0&amp;max_results=1</title>
+  <updated>2026-07-18T08:06:22Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=1&amp;id_list=2602.16485" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.16485v2</id>
+    <title>Team of Thoughts: Efficient Test-time Scaling of Agentic Systems through Orchestrated Tool Calling</title>
+    <updated>2026-03-25T17:42:42Z</updated>
+    <link href="https://arxiv.org/abs/2602.16485v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.16485v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing Multi-Agent Systems (MAS) typically rely on homogeneous model configurations, failing to exploit the diverse expertise inherent in different post-trained architectures. We propose Team-of-Thoughts, a heterogeneous MAS framework that treats diverse models as specialized tools within an orchestrator-driven paradigm. Team-of-Thoughts introduces two novel components: (1) Orchestrator Calibration, which identifies models with superior coordination and synthesis capabilities, and (2) Agent Self-Assessment, a protocol where tool agents profile their own domain-specific strengths to guide selection. At inference, the orchestrator dynamically activates the most compatible agents based on these profiles to maximize capability coverage. Across five mathematical reasoning and code generation benchmarks, Team-of-Thoughts consistently outperforms individual models and existing MAS baselines. Notably, on AIME24 and LiveCodeBench, Team-of-Thoughts achieves 96.00% and 77.91% accuracy, respectively, significantly improving over homogeneous role-play baselines (80.00% and 65.93%).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-18T14:19:01Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jeffrey T. H. Wong</name>
+    </author>
+    <author>
+      <name>Zixi Zhang</name>
+    </author>
+    <author>
+      <name>Junyi Liu</name>
+    </author>
+    <author>
+      <name>Yiren Zhao</name>
+    </author>
+  </entry>
+</feed>
