@@ -51,6 +51,12 @@ decision_rights≠∅` 允许「select 信号 + 无关 memory_write 权」拼接
   sidecar `adjudication_provenance`;
 - **另一处 locator 转述清除**：pipeline 行原 locator『Iter 0…selection via RTV…』为省略号转述非
   TeX 逐字,换为可机器核验原句 `'apply RTV to obtain a high-quality subset of K summaries'`;
+- **非实现者反例代理击穿 v4 初版并被修补（第九层防线当场生效）**：CE-v2 代理构造
+  `__fixture__terminal_select_branch_miscat`——白名单 `select→branch` 边套在 terminal 终答
+  锦标赛上,初版 derive 仍判 rq=True（EXPECTED_TO_FAIL 标记如实交付）;补丁 = **terminal
+  生命周期的边只准指向终态权 {synthesize, stop}**（不破坏任何现有正控;killer 合同增 K7）;
+  CE-v2 共 6 案并入合同测试 V5（另含 confidence 诱饵/synthesize_input∉reward_uses 探针/
+  edge 承重成对 fixture/AutoTTS 实行断言）;
 - **重算结果（机器,先冻结语义后看数字）**：rq_sys_compatible = 5/11（works 4/8）、
   method_candidate = 0/11、strict∧reward∧pool 轨迹 = 2/11（works 1/8）、reward = 6/11——
   与 v3 数值相同但全部 edge 背书;新增 `reward_guided_selection = 4/11`（§7.6 拆轴:
@@ -82,9 +88,15 @@ wrong signal / nonsense locator / wrong SHA / wrong kind 六类 sidecar 侧突�
 新增「新检查 oracle 等强审计」镜头,见 §5）。
 
 **actor 方案（owner 2026-07-19 批准）**：`claude-fable-main:s-ea4f0926`（首编）/
-`claude-opus-iso-adj:<task-id>`（隔离裁决代理,非实现者）/ `owner`（抽查+签署）/`ext-reviewer`。
-承重 11 行全部经隔离 Opus 代理独立裁决（批 A/批 B 双代理),非实现者新反例 ≥1 由第三隔离代理
-作者（`2026-07-19-sf-independent-counterexamples-v2.json`,合同测试 V5 并入）。
+`claude-opus-iso-adj-{A,B}:task-…`（隔离裁决代理,非实现者,任务标识入行）/ `owner`（抽查+
+签署）/`ext-reviewer`。**裁决结果**：批 A 5 AGREE/1 DISAGREE（AutoTTS 拓扑
+single_core→single_core_multi_call,证据成立采纳;另录 ATLAS 池位张力与 ToT 缺文档边两观察,
+均无门禁影响、如实入注）;批 B 4 AGREE/1 DISAGREE（open-sft-variant 核=SFT Qwen3-8B 纯文本,
+原 vision_native 为闭源行任务级引文误继承,采纳更正）——两处 DISAGREE 均非改果错码但如实
+更正,DISAGREE→采纳链载于 sidecar `adjudication_provenance`;11/11 行 `adjudicated_agree`,
+coder≠adjudicator 全行成立。非实现者新反例由第三隔离代理作者
+（`2026-07-19-sf-independent-counterexamples-v2.json`,合同测试 V5 并入,其中 1 案击穿初版
+派生并催生 K7 补丁——见 §2）。
 
 **Stage-1B 批次入链合同**：新论文 = fetch(ledger 登记 sha)→DFS/canonical 记录→sidecar（编码+
 edge+field_evidence+locator 前置）→generator→reconciliation→occupancy;首编与裁决分角色;
