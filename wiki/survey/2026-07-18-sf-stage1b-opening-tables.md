@@ -8,9 +8,9 @@ provenance_note: "「查询命中」列 = 离线正典 matcher 复现(非联网�
 
 # Stage-1B 开局三张保证表
 
-## 表 A：system/control method paths（13 轴 + taxonomy v2 编码队列）
+## 表 A：system/control method paths（13 轴 + taxonomy v3 编码队列——版本标签随 v6 整改升级,内容不变）
 
-已深读 8 项（11 method paths,coding-v3 在案）+ 以下 6 项晋升保证编码（全部种子在册）：
+已深读 8 项（11 method paths,coding-v4 在案）+ 以下晋升/补入项保证编码：
 
 | 工作 | 保证 provenance | 备注 |
 |---|---|---|
