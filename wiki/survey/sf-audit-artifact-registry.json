@@ -1,0 +1,292 @@
+{
+  "artifact_id": "SF-AUDIT-ARTIFACT-REGISTRY-2026-07-19-01",
+  "title": "已发布审计层日期件 blob 登记表（v7 复审 Gate MAJOR-3 验收件）",
+  "date": "2026-07-19",
+  "registered_at_commit": "4e760b4d5db49fb62dde04f9332cce28afd5d6b9",
+  "discipline": "审计层 append-only:登记后任何对注册路径的 blob 改动 = 检查失败;更正必须走新日期 supersession 件并 append 登记,绝不原位改写。登记表本身 append-only:只增行,不改已有行(路径重复登记 = 检查失败)。范围 = 评审报告/送审 proposal/回应信;工作层(队列/矩阵/编码表/schema)走 supersede-in-place + dated 墓碑,不在本表。",
+  "incident_log": [
+    {
+      "date": "2026-07-19",
+      "incident": "v6-consolidated 于 04cf987 被评审(blob 2af5131);整改提交 70c1b04 原位改写(39+/26-);v7 复审 Gate MAJOR-3 判定审计层失守;4e760b4 恢复原字节,70c1b04 保留不擦除;本登记表由此事故催生",
+      "restore_commit": "4e760b4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md",
+      "git_blob": "3bf4848732a5e58507eb7f97725b247aed673a43"
+    },
+    {
+      "path": "wiki/2026-07-11-response-to-reviewer-stage1-audit.md",
+      "git_blob": "df8abe01d2b84ad8dd796b15cdfa18c667b71091"
+    },
+    {
+      "path": "wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md",
+      "git_blob": "e5006887a239616bdedb7b480741dab103c99ace"
+    },
+    {
+      "path": "wiki/2026-07-11-stage1-audit-response-and-rulings.md",
+      "git_blob": "4fb70a9f76ce330ba19b3a02fa994e9068a44e9d"
+    },
+    {
+      "path": "wiki/2026-07-11-step1-completion-forensic-integrity-review.md",
+      "git_blob": "5614049487c1f1a2286b2c66c34faa62ddfc2272"
+    },
+    {
+      "path": "wiki/2026-07-12-research-proposal-v41-external-review.md",
+      "git_blob": "04530723706de19cb8438c7a7b37248d49fce8f3"
+    },
+    {
+      "path": "wiki/2026-07-12-research-proposal-v42-external-review.md",
+      "git_blob": "f2829b3450117f21eb6bdc75868eded4713cd279"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v3-to-forensic-completion-review.md",
+      "git_blob": "cd0543d5187e24b0c046431b90aaaee8897f864e"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md",
+      "git_blob": "394943c46996e8e6653d24431fcd7c37ccdc67e8"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v4-to-adversarial-integrity-review.md",
+      "git_blob": "bc65cc280e69ed252c93ac42440c3fcc872c6c08"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md",
+      "git_blob": "5ea6f65fa47a416cf1bca83e0e11114f02d20555"
+    },
+    {
+      "path": "wiki/2026-07-13-remediation-report-v42-for-reviewer-signoff.md",
+      "git_blob": "a46af55d4bf9b5f67448868ac2692658c3cd9231"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-correction.md",
+      "git_blob": "b1204deccf1ae1f850d5f1c8f68d29fca0bbdb97"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-doctoral-adversarial-review.md",
+      "git_blob": "f78ace748c89f9ecd3bbbfa1b4201e096bd61e71"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-stage1-recalibrated-review.md",
+      "git_blob": "1045818b543b26b2cb7c7ce8377cd28d3ca5ac26"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-to-signoff-adversarial-review.md",
+      "git_blob": "d7e6dee0b650d8de8c4fdfd6f01db88226ac72fc"
+    },
+    {
+      "path": "wiki/2026-07-13-reviewer-precheck-survey-design-and-record-closure-doctoral-review.md",
+      "git_blob": "fc7ed7a7372060db7c19572470394ed1f84f0049"
+    },
+    {
+      "path": "wiki/2026-07-13-reviewer-precheck-survey-design-and-record-closure.md",
+      "git_blob": "9e0290728ab8a1376fdb86546ebde87bd72b592e"
+    },
+    {
+      "path": "wiki/2026-07-13-stage1a-position-and-recalibration-response.md",
+      "git_blob": "6aed9b4e6cccc16b0168336f9adbfd1260c306bf"
+    },
+    {
+      "path": "wiki/2026-07-13-stage2-proposal-ASEL-v0.1-for-reviewer-verification.md",
+      "git_blob": "9ffa985c8b64f7ed0ebb84e518f4d4e02f0a1af2"
+    },
+    {
+      "path": "wiki/2026-07-13-v42-doctoral-adversarial-integrity-review.md",
+      "git_blob": "1ca5af49af1260b12a73f3ba55d6e5badd30a27d"
+    },
+    {
+      "path": "wiki/2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md",
+      "git_blob": "612c5285489bb491b5832d048b7424192394d935"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-progress-review-submission.md",
+      "git_blob": "3a00fdad8f4041aa931047dfd169cdef1cc544d2"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-progress-submission-doctoral-adversarial-rereview.md",
+      "git_blob": "e89cea300e8dc6191e230aa7f342303da0b72eec"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-response-to-remediation-rereview.md",
+      "git_blob": "619c681cfbe6219f8db7454caf83ec0bb4e5062b"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-knowledge-stack-evaluation.md",
+      "git_blob": "b6ec0197d6ae11dde963ebd01baff041e7347b7c"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-precheck-doctoral-review-adversarial-reassessment.md",
+      "git_blob": "98c5f3b851938adee9a6267f5378e082a8dc0815"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-precheck-doctoral-review.md",
+      "git_blob": "b8f241e384d1b3565926cda26744f5ac4e0d678a"
+    },
+    {
+      "path": "wiki/2026-07-14-response-v2-to-reassessment.md",
+      "git_blob": "18f36f0b79d456096adcb7766c14d4fc4eb89a48"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md",
+      "git_blob": "22c73d4fbad57c26f1952430d1bffef6480cbb1d"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-p0-remediation-response-doctoral-adversarial-rereview.md",
+      "git_blob": "9bdcfd571931ed067db8eaa715fed556ffab7e14"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-response-and-p0-remediation.md",
+      "git_blob": "e62c53d2f1146426576795fa848d7287ae6ea6f9"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-doctoral-adversarial-review-v2-owner-clarified.md",
+      "git_blob": "d405be4b51f1adf853be538df77a66d85f663d69"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-doctoral-adversarial-review.md",
+      "git_blob": "23441c21e32d7f6d668c1c0fc7bc04ddf73e1083"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-for-reviewer.md",
+      "git_blob": "fa0662db45695383b7853cddc0dc89ae642434c5"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1-doctoral-adversarial-review.md",
+      "git_blob": "72c5f7104826281780e87ebb049b4249de7ce05d"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1-stage1a-recalibrated-review.md",
+      "git_blob": "c677b47494e35a564360a0a503c97a124daae728"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1.md",
+      "git_blob": "d60aa6692c395cc353d4ad5d8fb2f6e4d31c3910"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v2-stage1a-doctoral-review.md",
+      "git_blob": "9f7fe3622f5241421130c659cae44c32ea5393e1"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v2.md",
+      "git_blob": "36ad2d63642fb13643fc1ebaf54a0b97bb342fb3"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md",
+      "git_blob": "30e50c048a2c0fed80a5fe90e2fd02ca229c943b"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md",
+      "git_blob": "7bf0f83654e2bfe6ef3eab0420a9302a6f014a52"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-doctoral-review.md",
+      "git_blob": "5f6942d47ed65c2498323c7ecc82f7becf4e6a8e"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md",
+      "git_blob": "028dfc1b20a32125da38cfe09d86630d24c7e49c"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-p0r8-rereview-doctoral-review.md",
+      "git_blob": "f512936145fc862549e6149b904728c89321a790"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md",
+      "git_blob": "092e389e4e07bd6666b9ea742878be24a7ceae68"
+    },
+    {
+      "path": "wiki/2026-07-18-gate-s1-correction-4b-stage1a-doctoral-adversarial-review.md",
+      "git_blob": "ea9048c95676c1f9bde5d66ca2d6df37a6506620"
+    },
+    {
+      "path": "wiki/2026-07-18-gate-s1-v5-response-stage1a-doctoral-rereview.md",
+      "git_blob": "6900b268626329d934c0d101011bf3572e6daafb"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence-doctoral-review.md",
+      "git_blob": "240200f024ce9bac0604250476ffb632486f8242"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence.md",
+      "git_blob": "c91e001c00e4e2aa72298de11ca9b69ad1342ad0"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated-doctoral-review.md",
+      "git_blob": "83fedb2e5542c5284655cd6d6853a62af6e71419"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated.md",
+      "git_blob": "c028bd14f42400b1b40795f97172c31ebef9dbfe"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v6-consolidated.md",
+      "git_blob": "2af5131830e2a50a579658c8163f96b87524bb81"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v6-stage1a-doctoral-review.md",
+      "git_blob": "fac45ededd1f8af8495e6ae1cef001b67921d9b4"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v7-consolidated.md",
+      "git_blob": "e2d0d7b949431a095290e88ec02300a505a25cb2"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v7-stage1a-doctoral-review.md",
+      "git_blob": "7f91624d3e0d04b3121f6a519f2cd2f8540c3945"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-rereview.md",
+      "git_blob": "79c855667fc72809e61e10f75b21f06f49a57a02"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-review.md",
+      "git_blob": "081446b948edd0c87e4c13ae7951f78a035af9c9"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4-response.md",
+      "git_blob": "300225e906b531e1488ac57f518ac6b8363497d4"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4a-response.md",
+      "git_blob": "96886f96c8f30f1a1ea48b37d658d44f894c4810"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-p0r8-rereview-application.md",
+      "git_blob": "fe005fa38015d00bb5a67c9dc9d8df96f0cf0529"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-rereview-application.md",
+      "git_blob": "a81a01c03dac7e306a05e6629629b85a139e5822"
+    },
+    {
+      "path": "wiki/survey/2026-07-17-gate-s1-correction-4b-response.md",
+      "git_blob": "f80e70a66f9fd553c529eeee317111a2a37fab88"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-correction-4c-response.md",
+      "git_blob": "c920b4fef8110b80403c3b4281fd2a7364963a4a"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v4-response.md",
+      "git_blob": "e4b888403d5f302b7442d76905b9e98da3970a98"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-rereview-response.md",
+      "git_blob": "bd2e94294638dd9e10248a484615f76065a9f996"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-response.md",
+      "git_blob": "b35681d0ed7ceff9be1b8b531f70b937be720e92"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v6-response.md",
+      "git_blob": "c2348f198e7eba97d02f1fedcfcf48661ce5afb0"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-press-query-review-c4c.md",
+      "git_blob": "92f2f653c57e60327a57991902947e118b6ade28"
+    }
+  ]
+}
