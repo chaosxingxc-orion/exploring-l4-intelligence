@@ -30,6 +30,7 @@ BOUND = [
     "wiki/survey/2026-07-19-gate-s1-v8-response.md",
     "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
     "wiki/survey/2026-07-19-gate-s1-v9-response.md",
+    "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
 ]
 BLOCK = re.compile(r"<!--\s*release_binding:\s*(\{.*?\})\s*-->", re.S)
 GEN_BLOCK = re.compile(r"<!--\s*generated_headline_begin\s*-->(.*?)<!--\s*generated_headline_end\s*-->", re.S)
