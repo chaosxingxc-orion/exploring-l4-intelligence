@@ -141,8 +141,14 @@ def derive(r, topology_policy=("single_core", "single_core_multi_call")):
     s0 = (strict and r.get("core_topology") in topology_policy
           and r.get("core_native_modality") in {"audio_native", "omni_native"})
     live = valid_live_edges(r)
+    # CE-v3 patch (isolated non-implementer refutation __fixture__cross_use_
+    # synth_splice): the same-signal tightening carried down to USE granularity
+    # — the live edge's OWN signal_use must itself be a reward use; an inert
+    # reward-qualifying use elsewhere on the signal cannot promote a pure
+    # synthesis edge into reward-guided control.
     rq = (r.get("control_horizon") == "sequential"
-          and any(sig_is_reward(s) for _, s in live))
+          and any(sig_is_reward(s) and e.get("signal_use") in REWARD_USES
+                  for e, s in live))
     rgs = (r.get("candidate_pool_exists") is True
            and r.get("selection_policy") in {"scored_select", "tournament_select"}
            and r.get("selection_object") != "none"

@@ -137,12 +137,12 @@
     }
    },
    "source_locator": "canon: '门决定是否执行'",
-   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门",
+   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕",
    "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "c6bfdc5756dc422654ec8f1cb7d497246fe67b14da00244f0bc8969fb7674e82"
   }
  ]
 }

@@ -125,12 +125,12 @@
     }
    },
    "source_locator": "canon: '投票锦标赛递归淘汰'",
-   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal;〔iso-adj-A2 再裁决 AGREE:rights=[] absence 条目判 honest;reward-guided-but-not-rq 区分被判精确捕获〕",
    "note": "并行维:锦标赛比较选 top-1;终态退化路径",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "e23ca63fd70d79c4927db6c3220d7edd4aecba23c285aae1c960224603f6fd1f"
   },
   {
    "core_weight_update": false,
@@ -235,12 +235,12 @@
     }
    },
    "source_locator": "tex: 'For random-K, we follow PDR and randomly sample K previous summaries'",
-   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制)",
+   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制);〔iso-adj-A2 再裁决 AGREE:零信号编码判 CORRECT——rights 带 supply 而无边=「供给发生但非信号控制」的诚实表达〕",
    "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无信号;池事实经 candidate_pool_exists/random_sample 保留",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "bdc2943d4cc528b19ac2be061a0b7f913fd2c8a844aedf485ad4139e39d57998"
   },
   {
    "core_weight_update": false,
@@ -376,12 +376,12 @@
     }
    },
    "source_locator": "tex: 'apply RTV to obtain a high-quality subset of K summaries'",
-   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕",
    "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "61869ae390f46a9b0a2b28a82cef3d0152c01cfa1037956fdf5f6d4a776ace6b"
   }
  ]
 }

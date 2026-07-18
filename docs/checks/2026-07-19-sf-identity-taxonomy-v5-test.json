@@ -58,7 +58,7 @@
   },
   {
    "id": "V5",
-   "check": "独立语义反例 x10(v1+v2+v3,legacy 经 adapter)",
+   "check": "独立语义反例 x16(v1+v2+v3,legacy 经 adapter)",
    "result": "PASS",
    "detail": "[]"
   },
@@ -77,8 +77,8 @@
   {
    "id": "V7",
    "check": "真 reconciliation:单写字节等同/ledger 同行绑定(路径经 resolver)/节标题解析/canon|tex 引文+PDF 页码范围/签名与边证据/required-evidence 完备/actor+裁决行哈希",
-   "result": "FAIL",
-   "detail": "['2026.findings-acl.1243#closed-prompt-only:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.1243#open-sft-variant:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.1724#pipeline:load-bearing-not-adjudicated:pending_independent_adjudication', '2026.findings-acl.511#prm-guided-search:load-bearing-not-adjudicated:pending_independent_adjudication', '2602.16485#calibrated-orchestration:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#rtv:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#pdr-random-k:load-bearing-not-adjudicated:pending_independent_adjudication', '2604.16529#rtv-pdr-pipeline:load-bearing-not-adjudicated:pending_independent_adjudication']"
+   "result": "PASS",
+   "detail": "[]"
   },
   {
    "id": "V8",
@@ -341,6 +341,6 @@
    "single-write:coding-not-byte-identical-to-generator-output"
   ]
  },
- "summary": "11/12 PASS",
- "verdict": "FAIL"
+ "summary": "12/12 PASS",
+ "verdict": "PASS"
 }

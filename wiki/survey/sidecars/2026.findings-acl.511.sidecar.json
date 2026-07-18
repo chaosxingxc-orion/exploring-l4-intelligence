@@ -155,12 +155,12 @@
     }
    },
    "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n' (双阈值早停/补采)",
-   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途",
+   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕",
    "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "7aae2d6c2933f74fccd68f351d60f628d4d0adb86061febb30774674c4410b15"
   }
  ]
 }

@@ -61,7 +61,7 @@
   "is_reward_guided": "∃ signal s: signal_is_reward(s)",
   "data_access_strict_bits": "all seven access bits are EXACTLY false AND internal_visibility==api_only; any 'unknown' value fails the conjunction WITHOUT being recorded as false (tri-state, v8-review §5.5)",
   "is_s0_core_compatible": "strict AND core_topology ∈ topology_policy AND core_native_modality ∈ {audio_native, omni_native}",
-  "is_rq_sys_control_compatible": "control_horizon==sequential AND ∃ signal s: signal_is_reward(s) AND ∃ VALID LIVE edge e with e.signal_id == s.signal_id — the reward property and the control edge must come from the SAME signal instance (v8-review §4.1–4.3; kills the different-signal splice)",
+  "is_rq_sys_control_compatible": "control_horizon==sequential AND ∃ signal s AND ∃ VALID LIVE edge e: signal_is_reward(s) AND e.signal_id == s.signal_id AND e.signal_use ∈ reward_uses — the reward property and the control edge must come from the SAME signal instance AND the edge's own use must itself be a reward use (v8-review §4.1–4.3 kills the different-signal splice; the use-granularity clause is the CE-v3 patch: an inert reward-qualifying use elsewhere on the signal cannot promote a pure synthesis edge, fixture __fixture__cross_use_synth_splice)",
   "is_project_method_candidate": "is_s0_core_compatible AND is_rq_sys_control_compatible",
   "reward_guided_selection": "candidate_pool_exists==true AND selection_policy ∈ {scored_select, tournament_select} AND selection_object != none AND ∃ signal s: signal_is_reward(s) AND {select, prune} ∩ s.uses ≠ ∅ — same-signal, live-lifecycle; offline_calibration scoring can never qualify (v8-review §4.4)"
  },
@@ -106,7 +106,8 @@
   "A4_terminal_reward_rights": "terminal reward select edges may target synthesize/stop only",
   "A5_multi_signal_identity": "multi-signal rows (AutoTTS state+consensus, Selective TTS stage+final judges) derive from per-signal identity, never a flattened average",
   "A6_rgs_same_signal": "reward_guided_selection requires the same live reward signal with select/prune plus a real pool and selection operator",
-  "A7_offline_calibration_never_rgs": "offline_calibration scoring never yields reward_guided_selection"
+  "A7_offline_calibration_never_rgs": "offline_calibration scoring never yields reward_guided_selection",
+  "A8_cross_use_splice": "CE-v3 (non-implementer): a reward signal whose ONLY live edge exercises a non-reward use (e.g. synthesize_input) must NOT be rq-compatible — enforced by the use-granularity clause; fixtures live in 2026-07-19-sf-independent-counterexamples-v3.json (incl. overlapping-uses/rgs-cross-signal/pool-unknown/strict-unknown regression guards)"
  },
  "single_write_pipeline": "unchanged from v4 flow (sidecar -> generator -> coding v6 -> reconciliation -> occupancy) with schema v2 sidecars; coding v6 remains a GENERATED projection (hand edits fail byte-equality)"
 }

@@ -1,0 +1,367 @@
+{
+ "artifact_id": "SF-INDEPENDENT-COUNTEREXAMPLES-V3-2026-07-19-01",
+ "author": "isolated adversarial CE agent v3 (Opus, non-implementer)",
+ "author_notes": {
+  "__fixture__cross_use_synth_splice": "HEADLINE refutation, EXPECTED_TO_FAIL_CURRENT_IMPL — within-signal CROSS-USE splice. v5 closed the different-SIGNAL splice by binding rq to sig_is_reward(s) of the live edge's signal, but sig_is_reward is a SIGNAL-level property (s.uses ∩ reward_uses != empty). Here ONE terminal signal carries uses=[prune, synthesize_input]: prune makes sig_is_reward True yet has NO live edge; the ONLY live edge exercises synthesize_input->synthesize — the exact edge CE-v2 __fixture__synthesize_not_reward_use proved is NOT reward-guided. Adding an inert prune capability must not manufacture reward-guided sequential control out of an identical pure-synthesis live edge, so correct rq=False (candidate=False). derive() returns rq=True (candidate=True) because it never checks the live edge's USE is itself a reward use. The literal taxonomy is_rq definition shares the flaw. Correct fix (the v4->v5 same-signal tightening carried down to use granularity): a live edge whose signal is reward AND whose signal_use ∈ reward_uses — this breaks NO existing positive (every real rq=True row's live edge already uses select/prune/revise/stop_budget/tool_call).",
+  "__fixture__diff_signal_overlapping_uses": "Suggested surface #1 + 'multi-edge row, only the non-reward signal's edge is live' — regression guard for the same-signal binding under maximal confusion: reward s_reward (online scalar, uses select+tool_call) and non-reward s_ctrl (text_critique, uses tool_call+route) SHARE the use tool_call; the only VALID LIVE edge is s_ctrl's tool_call->tool_call, while s_reward's tool_call edge is A1-invalid (edge lifecycle terminal != signal online_step). Defeats any 'a reward signal exists AND some live edge exists' or 'a reward signal shares the live edge's use' heuristic, and that an INVALID edge on the reward signal cannot rescue rq. Omni strict makes candidacy hinge on rq. Correct rq=False; current impl passes.",
+  "__fixture__rgs_cross_signal_splice": "reward_guided_selection cross-signal splice — reward-ness on s_reward (online scalar, use=revise, no select/prune) and select on s_select (consensus_vote = non-reward form). Pool + scored_select + selection_object=candidate_output all present, so the ONLY thing between this and rgs=True is that no SINGLE signal is both reward AND select/prune. Guards the same-signal conjunction in rgs against a 'is_reward_guided AND has-a-select-signal AND pool' factorization. Current impl passes.",
+  "__fixture__rgs_pool_unknown": "rgs with candidate_pool_exists=='unknown' — every rgs conjunct satisfied (online reward signal with select use, scored_select, selection_object=candidate_output) EXCEPT pool existence is tri-state unknown. Correct rgs=False (a pool cannot be asserted). Guards `candidate_pool_exists is True` against any regression to a truthy / `!= False` test, which would silently admit 'unknown'. Current impl passes.",
+  "__fixture__strict_unknown_bit_with_live_rq": "strict-bits tri-state inside a live reward-guided control path — a would-be omni method candidate with a valid online revise->retry reward edge (rq genuinely True) sunk SOLELY by inference_external_new_information=='unknown'. Correct: data_access_strict_bits=False, s0=False, candidate=False while rq stays True. Guards `all(bit is False)` from ever treating unknown as clean, and proves the strict gate is load-bearing even when the reward-control gate passes (isolates strict from rq). Current impl passes.",
+  "2606.01667#agentic-orchestration": "Real UNTESTED derived value on ATLAS: author_cases pins reward/rq/n_valid_live_edges but NOT reward_guided_selection. This row has a K pool + selection_object=candidate_output but selection_policy=synthesize_all (not in {scored_select,tournament_select}) and a consensus_vote (non-reward) signal — so rgs must be False. Guards the selection_policy gate on real data against admitting generative synthesize-over-a-pool as reward-guided selection."
+ },
+ "cases": {
+  "__fixture__cross_use_synth_splice": {
+   "row": {
+    "method_path_id": "__fixture__cross_use_synth_splice",
+    "paper_work_id": "__fixture__cross_use_synth_splice",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "scalar_score",
+    "signal_source": "environment",
+    "signal_lifecycle": "terminal",
+    "signal_use": [
+     "prune",
+     "synthesize_input"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "synthesize"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "synthesize_input",
+      "decision_right": "synthesize",
+      "signal_lifecycle": "terminal",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "the accumulated verified evidence is what the core synthesizes the final answer from; the signal's prune capability drives no live edge"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "synthesize",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__cross_use_synth_splice",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__cross_use_synth_splice",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce-v3:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v3 fixture (non-implementer oracle)",
+    "note": "terminal reward signal whose only live edge exercises synthesize_input (a non-reward use); its reward-qualifying prune use is inert"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "n_valid_live_edges": 1
+   },
+   "note": "a reward signal's LIVE edge exercising a non-reward use (synthesize_input) is not reward-guided control; an inert prune use cannot confer rq"
+  },
+  "__fixture__diff_signal_overlapping_uses": {
+   "row": {
+    "method_path_id": "__fixture__diff_signal_overlapping_uses",
+    "paper_work_id": "__fixture__diff_signal_overlapping_uses",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signals": [
+     {
+      "signal_id": "s_reward",
+      "form": "scalar_score",
+      "source": "llm_judge",
+      "lifecycle": "online_step",
+      "uses": [
+       "select",
+       "tool_call"
+      ],
+      "evidence": "fixture"
+     },
+     {
+      "signal_id": "s_ctrl",
+      "form": "text_critique",
+      "source": "llm_judge",
+      "lifecycle": "online_step",
+      "uses": [
+       "tool_call",
+       "route"
+      ],
+      "evidence": "fixture"
+     }
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "tool_call"
+    ],
+    "control_edges": [
+     {
+      "signal_id": "s_reward",
+      "signal_use": "tool_call",
+      "decision_right": "tool_call",
+      "signal_lifecycle": "terminal",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "reward signal's tool_call edge, but its declared lifecycle (terminal) contradicts the signal's online_step lifecycle so it is A1-invalid"
+     },
+     {
+      "signal_id": "s_ctrl",
+      "signal_use": "tool_call",
+      "decision_right": "tool_call",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "the non-reward critique signal is what actually decides whether the next tool is called"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "none",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__diff_signal_overlapping_uses",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__diff_signal_overlapping_uses",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce-v3:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v3 fixture (non-implementer oracle)",
+    "note": "reward and non-reward signals share use tool_call; only the non-reward signal has a valid live edge; the reward signal's edge is A1-invalid"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "is_s0_core_compatible": true,
+    "is_rq_sys_control_compatible": false,
+    "is_project_method_candidate": false,
+    "n_valid_live_edges": 1,
+    "n_signals": 2
+   },
+   "note": "the only valid live edge belongs to the non-reward signal; overlapping uses and an invalid reward-signal edge must not confer rq"
+  },
+  "__fixture__rgs_cross_signal_splice": {
+   "row": {
+    "method_path_id": "__fixture__rgs_cross_signal_splice",
+    "paper_work_id": "__fixture__rgs_cross_signal_splice",
+    "core_topology": "single_core",
+    "core_native_modality": "text_only",
+    "internal_visibility": "api_only",
+    "core_io_modality": "text_in_text_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signals": [
+     {
+      "signal_id": "s_reward",
+      "form": "scalar_score",
+      "source": "llm_judge",
+      "lifecycle": "online_step",
+      "uses": [
+       "revise"
+      ],
+      "evidence": "fixture"
+     },
+     {
+      "signal_id": "s_select",
+      "form": "consensus_vote",
+      "source": "consensus",
+      "lifecycle": "online_step",
+      "uses": [
+       "select"
+      ],
+      "evidence": "fixture"
+     }
+    ],
+    "control_horizon": "terminal",
+    "decision_rights": [],
+    "control_edges": [],
+    "selection_object": "candidate_output",
+    "terminal_operator": "select_one",
+    "explicit_candidate_pool_selection": true,
+    "candidate_pool_exists": true,
+    "selection_policy": "scored_select",
+    "includes_speech_audio": false,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__rgs_cross_signal_splice",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__rgs_cross_signal_splice",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce-v3:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v3 fixture (non-implementer oracle)",
+    "note": "reward-ness on the revise signal, select on a non-reward consensus signal; pool+scored_select present"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "reward_guided_selection": false,
+    "n_signals": 2
+   },
+   "note": "reward_guided_selection needs ONE signal that is both reward and select/prune; splitting reward and select across two signals must not qualify"
+  },
+  "__fixture__rgs_pool_unknown": {
+   "row": {
+    "method_path_id": "__fixture__rgs_pool_unknown",
+    "paper_work_id": "__fixture__rgs_pool_unknown",
+    "core_topology": "single_core",
+    "core_native_modality": "text_only",
+    "internal_visibility": "api_only",
+    "core_io_modality": "text_in_text_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": false,
+    "signal_form": "scalar_score",
+    "signal_source": "llm_judge",
+    "signal_lifecycle": "online_step",
+    "signal_use": [
+     "select"
+    ],
+    "control_horizon": "terminal",
+    "decision_rights": [],
+    "control_edges": [],
+    "selection_object": "candidate_output",
+    "terminal_operator": "select_one",
+    "explicit_candidate_pool_selection": true,
+    "candidate_pool_exists": "unknown",
+    "selection_policy": "scored_select",
+    "includes_speech_audio": false,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__rgs_pool_unknown",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__rgs_pool_unknown",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce-v3:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v3 fixture (non-implementer oracle)",
+    "note": "online reward signal with select + scored_select + candidate_output, but candidate_pool_exists is tri-state unknown"
+   },
+   "expect": {
+    "is_reward_guided": true,
+    "reward_guided_selection": false
+   },
+   "note": "candidate_pool_exists=='unknown' must block reward_guided_selection (tri-state; not truthy)"
+  },
+  "__fixture__strict_unknown_bit_with_live_rq": {
+   "row": {
+    "method_path_id": "__fixture__strict_unknown_bit_with_live_rq",
+    "paper_work_id": "__fixture__strict_unknown_bit_with_live_rq",
+    "core_topology": "single_core",
+    "core_native_modality": "omni_native",
+    "internal_visibility": "api_only",
+    "core_io_modality": "multimodal_in_out",
+    "core_weight_update": false,
+    "external_component_weight_update": false,
+    "controller_program_or_config_optimized_on_labels": false,
+    "human_or_dev_label_model_selection": false,
+    "deployment_label_access": false,
+    "test_item_gold_access": false,
+    "inference_external_new_information": "unknown",
+    "signal_form": "scalar_score",
+    "signal_source": "llm_judge",
+    "signal_lifecycle": "online_step",
+    "signal_use": [
+     "revise"
+    ],
+    "control_horizon": "sequential",
+    "decision_rights": [
+     "retry"
+    ],
+    "control_edges": [
+     {
+      "signal_use": "revise",
+      "decision_right": "retry",
+      "signal_lifecycle": "online_step",
+      "source_locator": "fixture-locator",
+      "edge_semantics": "low judge score rejects the answer and feeds corrective feedback into another attempt"
+     }
+    ],
+    "selection_object": "none",
+    "terminal_operator": "accept_reject",
+    "explicit_candidate_pool_selection": false,
+    "candidate_pool_exists": false,
+    "selection_policy": "none",
+    "includes_speech_audio": true,
+    "adjudication_required": false,
+    "load_bearing": false,
+    "fulltext_ref": {
+     "ledger": "fixture-ledger",
+     "id": "__fixture__strict_unknown_bit_with_live_rq",
+     "kind": "pdf",
+     "sha256": "fixture-sha"
+    },
+    "canonical_record_id": "fixture#__fixture__strict_unknown_bit_with_live_rq",
+    "source_locator": "fixture-locator",
+    "coder": "claude-opus-iso-ce-v3:s-ea4f0926",
+    "semantic_adjudicator": "fixture-adj",
+    "adjudication_status": "pending_independent_adjudication",
+    "adjudication_provenance": "isolated adversarial CE v3 fixture (non-implementer oracle)",
+    "note": "genuine rq-compatible omni row with one strict bit set to tri-state unknown"
+   },
+   "expect": {
+    "data_access_strict_bits": false,
+    "is_s0_core_compatible": false,
+    "is_rq_sys_control_compatible": true,
+    "is_project_method_candidate": false,
+    "is_reward_guided": true,
+    "n_valid_live_edges": 1
+   },
+   "note": "a single tri-state 'unknown' strict bit sinks strict/s0/candidate even though the reward-guided control path (rq) is genuinely live"
+  },
+  "2606.01667#agentic-orchestration": {
+   "expect": {
+    "is_reward_guided": false,
+    "reward_guided_selection": false,
+    "n_valid_live_edges": 3
+   },
+   "note": "ATLAS: K pool + candidate_output but selection_policy=synthesize_all and consensus_vote (non-reward) — generative synthesize-over-a-pool is not reward_guided_selection"
+  }
+ }
+}

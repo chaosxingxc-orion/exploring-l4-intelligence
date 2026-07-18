@@ -154,12 +154,12 @@
     }
    },
    "source_locator": "canon: '独占 explore/stop 决策' (p3 Algorithm/p8 Fig/p14 delegated)",
-   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源",
+   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕",
    "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 非 reward 形式,边不升格",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "1492caa4f77089ea99168ea3561864cbf331c7e8e7afde708a689c592bc42273"
   }
  ]
 }

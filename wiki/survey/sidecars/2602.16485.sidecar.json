@@ -147,12 +147,12 @@
     }
    },
    "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq 校准分离线)",
-   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context",
+   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context;〔iso-adj-A2 再裁决 AGREE,观察:lifecycle 编 offline_calibration 亦可辩(画像离线 gold 构造)——两值下边均非 LIVE、gold 依赖已由两 strict 位显著承载,inference_pre_context(画像作静态先验入上下文)被判 defensible,维持〕",
    "note": "ToT:profile-conditioned orchestration boundary;pre-context 边不计入 rq",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING-ADJ",
-   "adjudication_status": "pending_independent_adjudication",
-   "adjudication_row_sha256": ""
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "dc880ad3c0097454461af360c71c7cb4a2535db19c6a5e0e967f03e73c1122bb"
   }
  ]
 }
