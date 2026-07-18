@@ -39,7 +39,27 @@
       "revise",
       "stop_budget"
      ],
-     "evidence": "canon: 'judge 综合打 1–4 分'"
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -160,8 +180,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "61dc22b1dedd665f4af6ca449fb8b8580fcf99478c24d11a26dafa7d5d48a992",
-   "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕",
+   "adjudication_row_sha256": "1814209d35c58a0ef44c8147f7c0b0b2e1033793f559a180690a9bcd2ebac2bf",
+   "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)"
   },
   {
@@ -188,7 +208,27 @@
       "revise",
       "stop_budget"
      ],
-     "evidence": "canon: 'judge 综合打 1–4 分'"
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -310,8 +350,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "c3942be7cdbf09ab69a64d82358e6f4d31296109f28bf383d8b9f8a030becd5e",
-   "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕",
+   "adjudication_row_sha256": "cd6113bedbdc3aca67a72ace24817475132c65be537f8369cb4b3e0d2c241683",
+   "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "SFT 变体独立行;核=Qwen3-8B(text-only)"
   },
   {
@@ -337,7 +377,26 @@
      "uses": [
       "prune"
      ],
-     "evidence": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选'"
+     "evidence": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      },
+      "uses": {
+       "value": [
+        "prune"
+       ],
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      }
+     }
     },
     {
      "signal_id": "s_final_judger",
@@ -347,7 +406,26 @@
      "uses": [
       "select"
      ],
-     "evidence": "canon: 'judger 排序最高者,选优非融合'"
+     "evidence": "canon: 'judger 排序最高者,选优非融合'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "judger 排序最高者,选优非融合"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "judger 排序最高者,选优非融合"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -457,8 +535,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "3e2a724ff89b5b196eb0c2957c465926b98da69ba89dc4676431e1c01b45ece6",
-   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 rights=['branch'] dated correction 正确(固定预算非信号控制,stop 权撤回);v5-schema 迁移:双信号拆分(stage 在线/final 终态)——A5 多信号身份样例;〔iso-adj-B2 再裁决 AGREE:双 judge 拆分被判「强佐证忠实」——α=0.8 未对齐负结果直接断言两评估器为可失配的独立实体;在线边落在线信号、终态 judger 无边=MAJOR-1 拼接的精确拆除;rights=['branch'] 在拆分下维持正确〕",
+   "adjudication_row_sha256": "26398838ae228ee7cdce6ed9247b5fa05bcc25b116ba1532e8fe0db89d65d6b0",
+   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 rights=['branch'] dated correction 正确(固定预算非信号控制,stop 权撤回);v5-schema 迁移:双信号拆分(stage 在线/final 终态)——A5 多信号身份样例;〔iso-adj-B2 再裁决 AGREE:双 judge 拆分被判「强佐证忠实」——α=0.8 未对齐负结果直接断言两评估器为可失配的独立实体;在线边落在线信号、终态 judger 无边=MAJOR-1 拼接的精确拆除;rights=['branch'] 在拆分下维持正确〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "STTS:在线 stage scalar 驱动候选晋级;终态 judger 选优为独立 terminal 信号无前向边"
   },
   {
@@ -486,7 +564,28 @@
       "select",
       "stop_budget"
      ],
-     "evidence": "canon: '各采 N 候选、PRM 打分留 top-n'"
+     "evidence": "canon: '各采 N 候选、PRM 打分留 top-n'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "奖励模型是微调件"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "各采 N 候选、PRM 打分留 top-n"
+      },
+      "uses": {
+       "value": [
+        "prune",
+        "select",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "搜索算法+PRM 决定留哪些 plan/exec"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -613,8 +712,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "7aae2d6c2933f74fccd68f351d60f628d4d0adb86061febb30774674c4410b15",
-   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕",
+   "adjudication_row_sha256": "988e3f372243e7fb4b33cd99478584543d7dbf031b355d087e470408d70ce4f6",
+   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足"
   },
   {
@@ -641,7 +740,27 @@
       "route",
       "synthesize_input"
      ],
-     "evidence": "canon: '推理时画像喂 orchestrator'"
+     "evidence": "canon: '推理时画像喂 orchestrator'",
+     "claim_evidence": {
+      "form": {
+       "value": "text_critique",
+       "kind": "canon",
+       "quote": "推理时画像喂 orchestrator"
+      },
+      "lifecycle": {
+       "value": "inference_pre_context",
+       "kind": "canon",
+       "quote": "推理时画像喂 orchestrator"
+      },
+      "uses": {
+       "value": [
+        "route",
+        "synthesize_input"
+       ],
+       "kind": "canon",
+       "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+      }
+     }
     }
    ],
    "control_horizon": "terminal",
@@ -761,8 +880,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "dc880ad3c0097454461af360c71c7cb4a2535db19c6a5e0e967f03e73c1122bb",
-   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context;〔iso-adj-A2 再裁决 AGREE,观察:lifecycle 编 offline_calibration 亦可辩(画像离线 gold 构造)——两值下边均非 LIVE、gold 依赖已由两 strict 位显著承载,inference_pre_context(画像作静态先验入上下文)被判 defensible,维持〕",
+   "adjudication_row_sha256": "5d721ea22f4d388566f927b3752b2977a46f65602a7250fb03abe65007fd5d2b",
+   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context;〔iso-adj-A2 再裁决 AGREE,观察:lifecycle 编 offline_calibration 亦可辩(画像离线 gold 构造)——两值下边均非 LIVE、gold 依赖已由两 strict 位显著承载,inference_pre_context(画像作静态先验入上下文)被判 defensible,维持〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "ToT:profile-conditioned orchestration boundary;pre-context 边不计入 rq"
   },
   {
@@ -880,7 +999,7 @@
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
    "adjudication_row_sha256": "bdc2943d4cc528b19ac2be061a0b7f913fd2c8a844aedf485ad4139e39d57998",
-   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制);〔iso-adj-A2 再裁决 AGREE:零信号编码判 CORRECT——rights 带 supply 而无边=「供给发生但非信号控制」的诚实表达〕",
+   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制);〔iso-adj-A2 再裁决 AGREE:零信号编码判 CORRECT——rights 带 supply 而无边=「供给发生但非信号控制」的诚实表达〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无信号;池事实经 candidate_pool_exists/random_sample 保留"
   },
   {
@@ -906,7 +1025,26 @@
      "uses": [
       "select"
      ],
-     "evidence": "canon: 'LLM 对摘要的比较投票'"
+     "evidence": "canon: 'LLM 对摘要的比较投票'",
+     "claim_evidence": {
+      "form": {
+       "value": "pairwise_comparison",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "final RTV 返回 top-1 原样"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      }
+     }
     }
    ],
    "control_horizon": "terminal",
@@ -1005,8 +1143,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "e23ca63fd70d79c4927db6c3220d7edd4aecba23c285aae1c960224603f6fd1f",
-   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal;〔iso-adj-A2 再裁决 AGREE:rights=[] absence 条目判 honest;reward-guided-but-not-rq 区分被判精确捕获〕",
+   "adjudication_row_sha256": "e42a9cec2668bf40d6a8f4a35ab9a24ac5770b43a4569f586a4c46fd6f7f6463",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal;〔iso-adj-A2 再裁决 AGREE:rights=[] absence 条目判 honest;reward-guided-but-not-rq 区分被判精确捕获〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "并行维:锦标赛比较选 top-1;终态退化路径"
   },
   {
@@ -1037,7 +1175,27 @@
       "select",
       "prune"
      ],
-     "evidence": "canon: 'LLM 对摘要的比较投票'"
+     "evidence": "canon: 'LLM 对摘要的比较投票'",
+     "claim_evidence": {
+      "form": {
+       "value": "pairwise_comparison",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "跨迭代状态=选中 K 摘要作精炼上下文"
+      },
+      "uses": {
+       "value": [
+        "select",
+        "prune"
+       ],
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -1154,8 +1312,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "61869ae390f46a9b0a2b28a82cef3d0152c01cfa1037956fdf5f6d4a776ace6b",
-   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕",
+   "adjudication_row_sha256": "1155dac0700ead9f906eee75f0492ff8d5b95885925c317043ed204437a59d3e",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借"
   },
   {
@@ -1182,7 +1340,27 @@
       "prune",
       "stop_budget"
      ],
-     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'"
+     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'",
+     "claim_evidence": {
+      "form": {
+       "value": "none",
+       "kind": "canon",
+       "quote": "controller 观测=活跃分支/深度/probe 中间答案/剩余预算"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+      },
+      "uses": {
+       "value": [
+        "prune",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "controller 自适应 width×depth 分配+停/剪"
+      }
+     }
     },
     {
      "signal_id": "s_consensus",
@@ -1192,7 +1370,26 @@
      "uses": [
       "select"
      ],
-     "evidence": "canon: 'selector=controller 终态共识型 Agg'"
+     "evidence": "canon: 'selector=controller 终态共识型 Agg'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -1212,7 +1409,7 @@
      "signal_id": "s_state",
      "signal_use": "stop_budget",
      "decision_right": "stop",
-     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 cost)",
      "edge_semantics": "beta-parameterized budget signal stops sampling"
     }
    ],
@@ -1308,12 +1505,12 @@
     "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
    },
    "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083",
-   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/p4 probe/p5 beta)",
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "4ff6acb734ba4cb15a74d2a3e2bd8125e5ccdeb1fadc17a415ad003c2463e8a5",
-   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕",
+   "adjudication_row_sha256": "23a4177a85fa9f095467857741505bfb8b5394a0051cb6b77f0e400fa1ee3103",
+   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴"
   },
   {
@@ -1340,7 +1537,27 @@
       "stop_budget",
       "synthesize_input"
      ],
-     "evidence": "canon: 'label-free,共识+自报 confidence'"
+     "evidence": "canon: 'label-free,共识+自报 confidence'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "label-free,共识+自报 confidence"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "凭 in-context 候选池评估独占 explore/stop 决策"
+      },
+      "uses": {
+       "value": [
+        "stop_budget",
+        "synthesize_input"
+       ],
+       "kind": "canon",
+       "quote": "独占 explore/stop 决策"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -1354,14 +1571,14 @@
      "signal_id": "s_consensus",
      "signal_use": "stop_budget",
      "decision_right": "stop",
-     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8)",
+     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8 Fig)",
      "edge_semantics": "candidate-pool convergence assessment triggers termination"
     },
     {
      "signal_id": "s_consensus",
      "signal_use": "stop_budget",
      "decision_right": "tool_call",
-     "source_locator": "canon: '独占 explore/stop 决策' (p4)",
+     "source_locator": "canon: '独占 explore/stop 决策' (p4 explore)",
      "edge_semantics": "the same assessment controls whether another explore solver call is dispatched (one decision)"
     },
     {
@@ -1467,8 +1684,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1492caa4f77089ea99168ea3561864cbf331c7e8e7afde708a689c592bc42273",
-   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕",
+   "adjudication_row_sha256": "20b2075a99328dfb10be13779df7d2f33c850f5625658f8a7eb537f4429ee354",
+   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 非 reward 形式,边不升格"
   },
   {
@@ -1494,7 +1711,26 @@
      "uses": [
       "execute_skip_gate"
      ],
-     "evidence": "canon: '输出 execute/skip'"
+     "evidence": "canon: '输出 execute/skip'",
+     "claim_evidence": {
+      "form": {
+       "value": "binary_gate",
+       "kind": "canon",
+       "quote": "输出 execute/skip"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "轨迹内逐工具调用级"
+      },
+      "uses": {
+       "value": [
+        "execute_skip_gate"
+       ],
+       "kind": "canon",
+       "quote": "门决定是否执行"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -1605,8 +1841,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "c6bfdc5756dc422654ec8f1cb7d497246fe67b14da00244f0bc8969fb7674e82",
-   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕",
+   "adjudication_row_sha256": "f0e8ee62ec62db53305a49b2efa49c53a988cd58c482021c187e362516adf29e",
+   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False"
   }
  ]

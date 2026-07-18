@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State — 唯一热层入口"
 role: "现状/对象/约束/open items 的单一默认加载面（工作层,supersede-in-place）。审计真理在 Decision-Log（冷,grep 单条续NN）;被取代内容不在本文件——见 archive/research-objective-supersession-index.md（墓碑）。"
-last_refresh: "2026-07-19（续70:v8 复审 WITHHOLD 3 新 Gate MAJOR〔信号实例身份/证据完备性/WSL2 重放;上轮 MAJOR-3 判 CLOSED〕,连续第二零异议轮 → owner 全盘裁决 → P0-A/B/C+P1 整改批当日交付:taxonomy v5 signals[] 存在量词派生/15 承重字段证据合同+裁决行哈希/canonical resolver 双端 12/12/再裁决 11 行零异议/CE-v3 再击穿即修〔A8〕/开局表 v3——v9 合并送审件第六次申请）"
+last_refresh: "2026-07-19（续71:v9 复审窄幅 WITHHOLD〔MAJOR-1/-3 正式 CLOSED,唯余 MAJOR-2 尾项 E1–E5〕→ owner「Go」→ 窄整改批当日交付:validator 边合同+第 12 行通用测试/信号字段绑定 12×3+锚点强制+pdf_page 落实/生成块 release binding/开局表 v4+书目生成件 65 条/增量裁决 12-0——回应信=签署申请件,按评审 §10-10 立即申请,禁再延迟）"
 ---
 
 # Research Objective & Current State
@@ -117,10 +117,13 @@ omni foundation model 组织成能感知多模态环境、维护状态、调用�
   〔同信号+同用途双粒度,CE-v3 再击穿即修 A8〕/15 承重字段证据合同+strict 三态+裁决行哈希
   /pypdf locator 真解析/canonical resolver 双端 12/12 同 occupancy/敏感面突变 13 类/
   release binding/再裁决 11 行零异议/开局表 v3〔+Reinforced Agent/TF-TTCL 复发登记/
-  TF-GRPO 边界/表 E〕）,**当前动作 = v9 合并送审件已发布
-  （`2026-07-19-system-first-research-proposal-v9-consolidated.md`,附 v8 回应信〔八字段+
-  release binding〕为对账载体）,待评审按 v8 复审 §11 放行矩阵复核三门清零 → 签 Stage-1B
-  （第六次申请）**;执行前置
+  TF-GRPO 边界/表 E〕） → **v9 复审窄幅 WITHHOLD（MAJOR-1/-3
+  正式 CLOSED;唯余 MAJOR-2 尾项 E1–E5,连续第三轮零实质异议）→ owner「Go」→ 窄整改批
+  当日交付（续71:validator 边合同/信号字段绑定/生成块 binding/开局表 v4/书目生成件/
+  增量裁决 12-0;12/12 双平台+聚合断言）**,**当前动作 = v9 回应信已发布
+  （`survey/2026-07-19-gate-s1-v9-response.md`,八字段+生成块 headline,按评审 §10-10
+  即为签署申请件——评审明令不再产新 proposal、不得再延迟）,待评审复核四 FAIL 子门清零 →
+  签 Stage-1B**;执行前置
   三条件（签署+owner 批准+复跑）,签署前零查询维持（attestation=0;SURVEY-B 21 lanes/105
   查询维持零执行）→ 1B（mapping）close 与 Stage-2A 放行 = 两个签字;survey 退出机制 E1–E3 =
   amendment-7（执行期合同,E2 饱和前置=债务 D-1 work-level resolution）。

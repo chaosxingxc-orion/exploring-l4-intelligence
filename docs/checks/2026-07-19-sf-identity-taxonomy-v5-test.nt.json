@@ -15,8 +15,8 @@
   ]
  },
  "platform": {
-  "os": "posix",
-  "python": "3.12.3"
+  "os": "nt",
+  "python": "3.14.3"
  },
  "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
  "checks": [

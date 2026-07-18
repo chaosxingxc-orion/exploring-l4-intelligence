@@ -40,7 +40,27 @@
       "revise",
       "stop_budget"
      ],
-     "evidence": "canon: 'judge 综合打 1–4 分'"
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -148,12 +168,12 @@
     }
    },
    "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮)",
-   "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕",
+   "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "61dc22b1dedd665f4af6ca449fb8b8580fcf99478c24d11a26dafa7d5d48a992"
+   "adjudication_row_sha256": "1814209d35c58a0ef44c8147f7c0b0b2e1033793f559a180690a9bcd2ebac2bf"
   },
   {
    "core_weight_update": true,
@@ -181,7 +201,27 @@
       "revise",
       "stop_budget"
      ],
-     "evidence": "canon: 'judge 综合打 1–4 分'"
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -290,12 +330,12 @@
     }
    },
    "source_locator": "canon: '开源变体对策略主干 SFT'",
-   "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕",
+   "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "SFT 变体独立行;核=Qwen3-8B(text-only)",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "c3942be7cdbf09ab69a64d82358e6f4d31296109f28bf383d8b9f8a030becd5e"
+   "adjudication_row_sha256": "cd6113bedbdc3aca67a72ace24817475132c65be537f8369cb4b3e0d2c241683"
   }
  ]
 }

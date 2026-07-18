@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-07-19（续71）· v9 复审裁窄幅 WITHHOLD（MAJOR-1/-3 正式 CLOSED;MAJOR-2 尾项=E1–E5 五精确反例;连续第三轮零实质异议）+ owner「Go」→ 窄整改批:validator 边合同/信号字段绑定/生成块 release binding/P1 四篇 carry-forward——按评审 §10-10 立即申请签署
+
+**Context.** v9 复审（審 @bb3e2c3,blob 80bd820722）裁 `WITHHOLD_STAGE1B_NARROW_REMEDIATION`:
+v8 MAJOR-1（信号实例）与 MAJOR-3（WSL2 重放）**正式 CLOSED**,唯余 MAJOR-2 尾项 1 Gate——
+E1 validator 不执行边结构合同（静默跳过改 occupancy）/E2 signal evidence 免页码检查
+（p9999 可过）/E3 裸范围内页码免锚点/E4 signal form 无值绑定/E5 release checker 不读正文
+（99/11 照过）——五反例+REQ_FIELDS=14 计数错误全部我方亲手复现（内存内新行流程）。评审
+防拖延条款明确:§10-10 窄整改后立即申请签署,不得再以找论文延迟;§10-9 不得重开已关闭
+MAJOR。P1 四篇 carry-forward:仓内在案断言 3/4 坐实（Mapping Smarter/ASR-TRA/SDiaReward——
+后者为 07-06 archive 在案的「看过但遗忘」**第六例**）;Dual-Axis GRM 论文真实但「仓内已读」
+出处未坐实（首个对评审的小事实项,非实质异议）。P2 六篇 6/6 核验为真。
+
+**Decision（owner「Go」）.** 全盘 ACCEPT;正文表生成块方案;Dual-Axis 记
+REVIEWER_KNOWN_ITEM 如实说明;书目生成式;窄整改后立即申请签署。
+
+**Consequences（窄整改批,零查询零模型,无新 proposal——遵评审 §10-1）.** **P0-A**:validator
+强制边结构合同三类检查（失败=承重行红）+第 12 行通用测试（无逐 ID 期望,好行净/E1 式坏行
+被通用 validator 单独拒）;**P0-B**:12 信号 × {form,lifecycle,uses} 显式字段绑定+程序值
+绑定;signal evidence 纳入页码检查;pN 强制非空 ASCII 锚点;pdf_page kind 落实;「15」计数
+更正为机器实数 14;**P0-C**:读者可见 headline 表=生成块,checker 重渲染整块比对+双负
+fixture;**验收**:E1–E4 在新行流程（restamp,行哈希合法）下由指定证据/schema 检测器拦截、
+E5' 块内手改必红;V8 敏感面突变扩至 **17 类**;合同测试 **12/12 双平台**+双平台聚合断言
+CONFIRMED（平台戳双副本互不覆盖）。**P1/P2**:开局表 v4（表 B 新增 trained speech reward
+instrument 分节〔Dual-Axis+SDiaReward〕/表 D +Mapping Smarter+ASR-TRA/表 E +6/Reinforced
+Agent GEM↔arXiv 去重）;**书目 v1 = 生成件**（65 条七角色,自 v8/v9 钉定 blob 机器抽取,
+重跑零 diff——「读者可见内容机器生成」新纪律与 P0-C 同源）。**增量裁决**:信号绑定 delta
+经隔离代理 **12/12 AGREE**（四条 soft 欠覆盖注记入 provenance,值全 canon-faithful）。
+回应信（八字段+生成块,DISPUTE=0）**即为签署申请件**。**元规律第十一例:完成态措辞覆盖面
+>实现覆盖面的最后回声——散文只指向生成件,数字表由机器渲染。**
+
 ### 2026-07-19（续70）· v8 复审裁 WITHHOLD（3 新 Gate MAJOR:信号实例身份/证据完备性/WSL2 正典重放;上轮 MAJOR-3 判 CLOSED;连续第二零异议轮）+ owner 全盘裁决 → P0-A/B/C+P1 整改批:taxonomy v5 信号实例/完备合同+裁决行哈希/跨平台 resolver/开局表 v3
 
 **Context.** v8 复审（審 @a4ed640,blob 8761914971）裁 WITHHOLD,3 新 Gate MAJOR——五个语义

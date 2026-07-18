@@ -40,7 +40,27 @@
       "prune",
       "stop_budget"
      ],
-     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'"
+     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'",
+     "claim_evidence": {
+      "form": {
+       "value": "none",
+       "kind": "canon",
+       "quote": "controller 观测=活跃分支/深度/probe 中间答案/剩余预算"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+      },
+      "uses": {
+       "value": [
+        "prune",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "controller 自适应 width×depth 分配+停/剪"
+      }
+     }
     },
     {
      "signal_id": "s_consensus",
@@ -50,7 +70,26 @@
      "uses": [
       "select"
      ],
-     "evidence": "canon: 'selector=controller 终态共识型 Agg'"
+     "evidence": "canon: 'selector=controller 终态共识型 Agg'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      }
+     }
     }
    ],
    "control_horizon": "sequential",
@@ -70,7 +109,7 @@
      "signal_id": "s_state",
      "signal_use": "stop_budget",
      "decision_right": "stop",
-     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 beta)",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 cost)",
      "edge_semantics": "beta-parameterized budget signal stops sampling"
     }
    ],
@@ -156,13 +195,13 @@
      "quote": "selector=controller 终态共识型 Agg"
     }
    },
-   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p3 状态/p4 probe/p5 beta)",
-   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕",
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 probe)",
+   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴",
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "4ff6acb734ba4cb15a74d2a3e2bd8125e5ccdeb1fadc17a415ad003c2463e8a5"
+   "adjudication_row_sha256": "23a4177a85fa9f095467857741505bfb8b5394a0051cb6b77f0e400fa1ee3103"
   }
  ]
 }
