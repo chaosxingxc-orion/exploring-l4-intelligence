@@ -1,5 +1,6 @@
 {
- "sidecar_id": "SF-SIDECAR-2026.findings-acl.511-2026-07-19-01",
+ "sidecar_id": "SF-SIDECAR-2026.findings-acl.511-2026-07-19-02",
+ "schema": "v2 (taxonomy v5: signals[] + claim_evidence + adjudication row-hash)",
  "date": "2026-07-19",
  "paper_work_id": "2026.findings-acl.511",
  "work_title": "DREAM (Reward-Guided Dual-Phase Adaptive Inference)",
@@ -25,76 +26,141 @@
    "includes_speech_audio": false,
    "adjudication_required": false,
    "load_bearing": true,
-   "semantic_adjudicator": "claude-opus-iso-adj-B:task-a5f6202fe",
-   "adjudication_status": "adjudicated_agree",
    "method_path_id": "2026.findings-acl.511#prm-guided-search",
    "core_topology": "single_core",
    "core_native_modality": "text_only",
    "core_io_modality": "text_in_text_out",
-   "signal_form": "scalar_score",
-   "signal_source": "learned_rm_prm",
-   "signal_lifecycle": "online_step",
-   "signal_use": [
-    "prune",
-    "select",
-    "stop_budget"
+   "signals": [
+    {
+     "signal_id": "s_prm",
+     "form": "scalar_score",
+     "source": "learned_rm_prm",
+     "lifecycle": "online_step",
+     "uses": [
+      "prune",
+      "select",
+      "stop_budget"
+     ],
+     "evidence": "canon: '各采 N 候选、PRM 打分留 top-n'"
+    }
    ],
    "control_horizon": "sequential",
    "decision_rights": [
     "branch",
     "stop"
    ],
+   "control_edges": [
+    {
+     "signal_id": "s_prm",
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n'",
+     "edge_semantics": "PRM scores decide which plan/execution candidates are kept and expanded"
+    },
+    {
+     "signal_id": "s_prm",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: '≥n 候选超高阈值提前停'",
+     "edge_semantics": "high-threshold consensus of PRM scores triggers early stop"
+    },
+    {
+     "signal_id": "s_prm",
+     "signal_use": "stop_budget",
+     "decision_right": "branch",
+     "source_locator": "canon: '全低于低阈值补采 m'",
+     "edge_semantics": "all-below-low-threshold budget signal triggers supplementary sampling (additional branching)"
+    }
+   ],
    "selection_object": "trajectory",
    "terminal_operator": "select_one",
    "explicit_candidate_pool_selection": true,
    "candidate_pool_exists": true,
    "selection_policy": "scored_select",
-   "control_edges": [
-    {
-     "signal_use": "prune",
-     "decision_right": "branch",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n'",
-     "edge_semantics": "PRM scores decide which plan/execution candidates are kept and expanded"
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "冻结推理 LLM"
     },
-    {
-     "signal_use": "stop_budget",
-     "decision_right": "stop",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: '≥n 候选超高阈值提前停'",
-     "edge_semantics": "high-threshold consensus of PRM scores triggers early stop"
+    "external_component_weight_update": {
+     "value": true,
+     "kind": "canon",
+     "quote": "奖励模型是微调件"
     },
-    {
-     "signal_use": "stop_budget",
-     "decision_right": "branch",
-     "signal_lifecycle": "online_step",
-     "source_locator": "canon: '全低于低阈值补采 m'",
-     "edge_semantics": "all-below-low-threshold budget signal triggers supplementary sampling (additional branching)"
-    }
-   ],
-   "field_evidence": [
-    {
-     "field": "core_native_modality",
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "absence",
+     "note": "搜索算法/阈值为固定设计;标签训练发生在 PRM(ext_wu 轴)而非 controller 配置",
+     "scope": "DFS 轴3/轴5 已检视"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "无按标签人工选模型步骤",
+     "scope": "DFS 轴3 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期无 gold"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期干净"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "代码用可见测试（任务规格非隐藏 gold）"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "对生成器文本级"
+    },
+    "core_topology": {
+     "value": "single_core",
+     "kind": "canon",
+     "quote": "冻结策略 LLM"
+    },
+    "core_native_modality": {
      "value": "text_only",
      "kind": "canon",
      "quote": "GSM8K/MATH/AMC23+HumanEval/MBPP"
     },
-    {
-     "field": "signal_form",
-     "value": "scalar_score",
+    "control_horizon": {
+     "value": "sequential",
      "kind": "canon",
-     "quote": "奖励模型是微调件"
+     "quote": "多步树/beam"
     },
-    {
-     "field": "signal_source",
-     "value": "learned_rm_prm",
+    "decision_rights": {
+     "value": [
+      "branch",
+      "stop"
+     ],
      "kind": "canon",
-     "quote": "奖励模型是微调件"
+     "quote": "搜索算法+PRM 决定留哪些 plan/exec"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池+PRM selector"
+    },
+    "selection_policy": {
+     "value": "scored_select",
+     "kind": "canon",
+     "quote": "PRM 打分留 top-n"
     }
-   ],
+   },
    "source_locator": "canon: '各采 N 候选、PRM 打分留 top-n' (双阈值早停/补采)",
-   "adjudication_provenance": "v4 复审 DFS 批B(基线表 REBASE/MAJ 对照抽查)",
-   "note": "DREAM:trained PRM 在线逐步引导——rq 兼容但 ext_wu 使 strict 位不满足"
+   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途",
+   "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "PENDING-ADJ",
+   "adjudication_status": "pending_independent_adjudication",
+   "adjudication_row_sha256": ""
   }
  ]
 }
