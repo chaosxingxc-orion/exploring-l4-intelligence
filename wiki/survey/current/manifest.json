@@ -1,0 +1,175 @@
+{
+  "schema": "sf-current-manifest-v1",
+  "files": [
+    {
+      "role": "v6_opening_report",
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
+      "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "v6_report_windows",
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
+      "sha256": "f3953b6edd57307430d04e152619b2daf2dfc335e5bd962cd29f9f806657cbcc",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "v6_report_wsl",
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
+      "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "dual_platform_aggregate_checker",
+      "path": "scripts/survey/sf_dual_platform_check.py",
+      "sha256": "f5828f8bf565f1278efe1dc6c771a95fcf5682e34ac8c1a51bf9bb205db8e5ba",
+      "mutability": "normal-code-lifecycle",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "frozen_queries",
+      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
+      "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab",
+      "mutability": "frozen",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "seed_manifest",
+      "path": "wiki/survey/2026-07-15-sf-seed-manifest.jsonl",
+      "sha256": "4837f062362d5b472d9d3cd594ce6b3809380910d63ac7cd337b31a23f40adcc",
+      "mutability": "controlled-append-only",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "canon_registry",
+      "path": "wiki/survey/2026-07-17-sf-canon.json",
+      "sha256": "09d0250e8c9e345ee7238899581f438d1e958375552b121c0318e6d0f9735bf5",
+      "mutability": "controlled-append-only",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "fulltext_ledger",
+      "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+      "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56",
+      "mutability": "controlled-append-only",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "current_router",
+      "path": "wiki/survey/current/README.md",
+      "sha256": "b2e7dda362f53aaf5897330d17b6b853af5e3dddc06f9559660b16d43d20d95d",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "identity_taxonomy_v6",
+      "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
+      "sha256": "976d46358263af6d0bd9f9d48a249aa23e39552aa66d5df501a1ce118cce8893",
+      "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "known_item_coding_v7",
+      "path": "wiki/survey/current/data/known-item-coding-v7.json",
+      "sha256": "bbbfe8988b4df37e5870739aa015fb23c62168991120c4fbdaec3c8c3406bc27",
+      "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "schema_v3_adjudication",
+      "path": "wiki/survey/current/data/schema-v3-adjudication.json",
+      "sha256": "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f",
+      "mutability": "controlled-append-only",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "schema_v3_sidecar:2026.findings-acl.1243.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+      "sha256": "9d60a55dffc0112a4c8eb38aeebe7ea5daf3815d035aaa558812fc86e57911bb",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2026.findings-acl.1724.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+      "sha256": "eb96a83e2eadea96db2af2b1690feb1cfd2792354758adb127649892689839f9",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2026.findings-acl.511.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+      "sha256": "2d97b5ca3d441189d8d8c57eb43b47c09b36c7860f16e54dae6daac2dc957404",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2602.16485.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2602.16485.sidecar.json",
+      "sha256": "b4201e535f7dbea0cee9f92d506c9e8ecd80b031d7f9aa3608e8e5085a68950f",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2604.16529.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+      "sha256": "f946ebd1c50bb117bd787641679e0031a468b8c4c6a46712fd735360e0ce3de9",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2605.08083.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+      "sha256": "c9afb44081e80182c00194f18ffda8c79706075043c711aa8d1219145367bc6e",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2606.01667.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2606.01667.sidecar.json",
+      "sha256": "82056e0957c85d95c1bf4d772af82a2db3ba3d2017f607ae9309bd7c83099d69",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "schema_v3_sidecar:2606.03054.sidecar.json",
+      "path": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+      "sha256": "f5ba2c5c68e72b4f1737fc79d63f0a61423ae5cd2a4886d54e79f1d8a00c1e1b",
+      "mutability": "generated",
+      "load_policy": "machine-only"
+    },
+    {
+      "role": "protocol_v2",
+      "path": "wiki/survey/current/protocol.md",
+      "sha256": "75799f0a39587d228a1a8310eeb6ffdc8dcdc186c7d3d900d112a53da99f056f",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "current_status",
+      "path": "wiki/survey/current/status.md",
+      "sha256": "df3e09a5ce88516348f06d5eeec17f5b96490bd6b1bdb5567ef8edd8e9fd6c5b",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "current_opening_table",
+      "path": "wiki/survey/current/tables/opening-guarantees.md",
+      "sha256": "8c4088fdbb8ada60f24e953e112122f01539ce8afb94a24a84640585dfc9e6ef",
+      "mutability": "generated",
+      "load_policy": "targeted"
+    }
+  ],
+  "release_bound_artifacts": [
+    "wiki/survey/current/tables/opening-guarantees.md"
+  ],
+  "prose_scan_paths": [
+    "wiki/survey/current/README.md",
+    "wiki/survey/current/protocol.md",
+    "wiki/survey/current/status.md",
+    "wiki/survey/current/tables/opening-guarantees.md"
+  ]
+}
