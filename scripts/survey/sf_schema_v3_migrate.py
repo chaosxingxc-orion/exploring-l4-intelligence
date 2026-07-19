@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import os
 import re
 import sys
@@ -357,13 +358,31 @@ def _reject_json_constant(value):
     raise MigrationError(f"non-finite JSON constant {value}")
 
 
+def _validate_loaded_json(value):
+    if isinstance(value, float) and not math.isfinite(value):
+        raise MigrationError("non-finite JSON number decoded from numeric token")
+    if isinstance(value, str) and any(
+        0xD800 <= ord(character) <= 0xDFFF for character in value
+    ):
+        raise MigrationError("unpaired surrogate code point in JSON string")
+    if isinstance(value, Mapping):
+        for key, child in value.items():
+            _validate_loaded_json(key)
+            _validate_loaded_json(child)
+    elif isinstance(value, list):
+        for child in value:
+            _validate_loaded_json(child)
+
+
 def _load_sidecar(path):
     try:
-        return json.loads(
+        loaded = json.loads(
             path.read_text(encoding="utf-8"),
             object_pairs_hook=_reject_duplicate_pairs,
             parse_constant=_reject_json_constant,
         )
+        _validate_loaded_json(loaded)
+        return loaded
     except (OSError, json.JSONDecodeError, MigrationError) as error:
         raise MigrationError(f"cannot read {path}: {error}") from error
 
@@ -431,19 +450,25 @@ def _render_outputs(outputs):
                 json.dumps(sidecar, ensure_ascii=False, indent=1, allow_nan=False)
                 + "\n"
             )
+            data = text.encode("utf-8")
+        except UnicodeEncodeError as error:
+            raise MigrationError(
+                f"cannot render {name} as strict UTF-8 JSON: invalid Unicode scalar"
+            ) from error
         except (TypeError, ValueError) as error:
-            raise MigrationError(f"cannot render {name} as strict JSON: {error}") from error
-        rendered.append((name, text.encode("utf-8")))
+            raise MigrationError(
+                f"cannot render {name} as strict UTF-8 JSON: "
+                f"unsupported or non-finite value ({type(error).__name__})"
+            ) from error
+        rendered.append((name, data))
     duplicates = sorted(name for name, count in Counter(names).items() if count > 1)
     if duplicates:
         raise MigrationError(f"duplicate output sidecar names: {duplicates}")
     return rendered
 
 
-def write_outputs(outputs, output_dir=OUTPUT_DIR):
-    """Write validated outputs as deterministic UTF-8 LF JSON; remove nothing."""
+def _write_rendered_outputs(rendered, output_dir):
     output_dir = Path(output_dir)
-    rendered = _render_outputs(outputs)
     expected_names = {name for name, _ in rendered}
     if output_dir.exists() and not output_dir.is_dir():
         raise MigrationError(f"output destination is not a directory: {output_dir}")
@@ -489,6 +514,11 @@ def write_outputs(outputs, output_dir=OUTPUT_DIR):
         )
 
 
+def write_outputs(outputs, output_dir=OUTPUT_DIR):
+    """Render and write outputs as deterministic UTF-8 LF JSON; remove nothing."""
+    _write_rendered_outputs(_render_outputs(outputs), output_dir)
+
+
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -501,8 +531,9 @@ def main(argv=None, source_dir=SOURCE_DIR, output_dir=OUTPUT_DIR):
     args = parse_args(argv)
     try:
         outputs = build_outputs(source_dir)
+        rendered = _render_outputs(outputs)
         if args.write:
-            write_outputs(outputs, output_dir)
+            _write_rendered_outputs(rendered, output_dir)
     except (MigrationError, OSError) as error:
         print(f"schema-v3 migration: ERROR: {error}", file=sys.stderr)
         return 1

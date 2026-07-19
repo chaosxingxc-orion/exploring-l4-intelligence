@@ -482,6 +482,64 @@ class SchemaV3IntegrationTest(unittest.TestCase):
                     ):
                         build_outputs(source_dir)
 
+    def test_check_and_write_reject_nonportable_input_without_destination_drift(self):
+        malformed_values = ("overflow-number", "unpaired-surrogate")
+        for case in malformed_values:
+            with self.subTest(case=case):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    temp_root = Path(temp_dir)
+                    source_dir = temp_root / "source"
+                    output_dir = temp_root / "destination"
+                    self.copy_pinned_sources(source_dir)
+                    write_outputs(build_outputs(SOURCE_DIR), output_dir)
+                    before = {
+                        path.name: path.read_bytes()
+                        for path in sorted(output_dir.glob("*.sidecar.json"))
+                    }
+                    target = sorted(source_dir.glob("*.sidecar.json"))[0]
+                    source_text = target.read_text(encoding="utf-8")
+                    if case == "overflow-number":
+                        malformed_source = source_text.replace(
+                            "{\n", '{\n "strict_input_probe": 1e9999,\n', 1
+                        )
+                    else:
+                        malformed_source = source_text.replace(
+                            '"method_path_id": '
+                            '"2026.findings-acl.1243#closed-prompt-only"',
+                            '"method_path_id": "\\ud800"',
+                            1,
+                        )
+                    target.write_text(
+                        malformed_source,
+                        encoding="utf-8",
+                        newline="\n",
+                    )
+
+                    for mode in ("--check", "--write"):
+                        with self.subTest(case=case, mode=mode):
+                            stdout = io.StringIO()
+                            stderr = io.StringIO()
+                            with redirect_stdout(stdout), redirect_stderr(stderr):
+                                exit_code = main(
+                                    [mode],
+                                    source_dir=source_dir,
+                                    output_dir=output_dir,
+                                )
+                            self.assertNotEqual(exit_code, 0)
+                            self.assertNotIn("schema-v3 migration: PASS", stdout.getvalue())
+                            self.assertIn("schema-v3 migration: ERROR:", stderr.getvalue())
+                            self.assertFalse(
+                                any(
+                                    0xD800 <= ord(char) <= 0xDFFF
+                                    for char in stderr.getvalue()
+                                )
+                            )
+                            after = {
+                                path.name: path.read_bytes()
+                                for path in sorted(output_dir.glob("*.sidecar.json"))
+                            }
+                            self.assertEqual(after, before)
+
     def test_renderer_rejects_nan_before_touching_destination(self):
         outputs = build_outputs(SOURCE_DIR)
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -493,7 +551,7 @@ class SchemaV3IntegrationTest(unittest.TestCase):
             }
             outputs[0][1]["not_json"] = float("nan")
 
-            with self.assertRaisesRegex(MigrationError, "render.*not JSON|render.*nan"):
+            with self.assertRaisesRegex(MigrationError, "render.*non-finite"):
                 write_outputs(outputs, output_dir)
 
             after = {
