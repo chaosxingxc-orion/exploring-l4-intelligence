@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""sf_query_compiler.py — offline arXiv query compiler for Gate S1 (P0-B / A3-8 / C4-6).
+"""Offline arXiv query compiler for the effective Gate-S1 protocol.
 
-Parses the 53 pre-registered exact-query fragments out of the frozen protocol
-document
+Parses the 65 pre-registered exact-query fragments out of the self-contained
+effective protocol by default:
 
-    wiki/survey/2026-07-15-system-first-survey-protocol-v1.md (§4)
+    wiki/survey/current/protocol.md (§4)
 
-and deterministically assembles each into the final arXiv `search_query`
+The dated protocol-v1 remains an accepted explicit `--protocol` profile. Both
+profiles deterministically assemble each fragment into the final `search_query`
 string per the compiled assembly spec (P0-B revision — category expressions
 widened for SF-L1/L2/L4/L5, date-window exceptions, per-lane pagination cap
 exception for SF-L7-Q3). Writes the frozen JSONL artifact
@@ -49,7 +50,11 @@ only urllib.parse, which is a pure string-manipulation module).
 
 Usage (from the umbrella repo root, any Python 3.x with only the stdlib):
 
-    python scripts/survey/sf_query_compiler.py
+    python scripts/survey/sf_query_compiler.py --check \
+      --check-against wiki/survey/2026-07-15-sf-queries.jsonl
+
+Write mode is explicit by omission of `--check`; output is staged and atomically
+replaced. Check mode compiles and compares raw bytes in memory and never writes.
 
 Exit code 0 = 65/65 records (48 base + 3 A3-8 additions + 2 C4-6 lane
 additions + 2 C4A lane additions + 6 C4B lane additions + 4 C4C lane
@@ -60,10 +65,13 @@ static validation failure (details printed).
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
+import os
 import re
 import sys
+import tempfile
 from collections import OrderedDict, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -77,7 +85,11 @@ COMPILER_VERSION_C4B_LANES = "sfqc-1.4.0"
 COMPILER_VERSION_C4C_LANES = "sfqc-1.5.0"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "2026-07-15-system-first-survey-protocol-v1.md"
+LEGACY_PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "2026-07-15-system-first-survey-protocol-v1.md"
+CURRENT_PROTOCOL_MD = REPO_ROOT / "wiki" / "survey" / "current" / "protocol.md"
+# Compatibility for import callers that used the old constant name.  The
+# effective protocol is now the default; the dated v1 path remains explicit.
+PROTOCOL_MD = CURRENT_PROTOCOL_MD
 OUTPUT_JSONL = REPO_ROOT / "wiki" / "survey" / "2026-07-15-sf-queries.jsonl"
 
 EXPECTED_LANES = [f"SF-L{n}" for n in range(1, 9)]
@@ -210,16 +222,24 @@ class ParseError(SystemExit):
 # Parsing §4
 # ---------------------------------------------------------------------------
 
-def load_protocol_text() -> str:
-    if not PROTOCOL_MD.is_file():
-        raise ParseError(f"protocol file not found: {PROTOCOL_MD}")
-    return PROTOCOL_MD.read_text(encoding="utf-8")
+def load_protocol_text(path: Path = PROTOCOL_MD) -> str:
+    """Load a protocol as UTF-8 text (legacy no-argument callers still work)."""
+    path = Path(path)
+    if not path.is_file():
+        raise ParseError(f"protocol file not found: {path}")
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        raise ParseError(f"protocol is not valid UTF-8: {path}: {exc}") from exc
 
 
 def extract_section_4(full_text: str) -> str:
-    m = re.search(r"^## §4.*?(?=^## §5)", full_text, flags=re.MULTILINE | re.DOTALL)
+    # §4bis is a peer H2, not part of the exact compiled-query declaration.
+    # Stop at the next H2 so protocol-v1 and protocol-v2 can be byte-locked on
+    # precisely the query block while preserving the 65-query assembly.
+    m = re.search(r"^## §4(?:\s|$).*?(?=^## |\Z)", full_text, flags=re.MULTILINE | re.DOTALL)
     if not m:
-        raise ParseError("could not locate '## §4 ... ## §5' bounded section in protocol md")
+        raise ParseError("could not locate an H2-bounded '## §4' section in protocol md")
     return m.group(0)
 
 
@@ -426,6 +446,36 @@ def assemble_record(query_id: str, q_fragment: str) -> dict:
 
 def compile_records(queries: "OrderedDict[str, str]") -> list:
     return [assemble_record(qid, frag) for qid, frag in queries.items()]
+
+
+def render_records(records: list) -> bytes:
+    """Render the frozen JSONL format exactly, including the final LF."""
+    return "".join(
+        json.dumps(record, ensure_ascii=False) + "\n" for record in records
+    ).encode("utf-8")
+
+
+def atomic_write_bytes(destination: Path, payload: bytes) -> None:
+    """Publish bytes with one same-directory replace or leave the old file intact."""
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    fd, raw_temp = tempfile.mkstemp(
+        prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
+    )
+    temp_path = Path(raw_temp)
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        if temp_path.read_bytes() != payload:
+            raise OSError(f"staged output verification failed: {temp_path}")
+        os.replace(temp_path, destination)
+    except BaseException:
+        try:
+            temp_path.unlink(missing_ok=True)
+        finally:
+            raise
 
 
 # ---------------------------------------------------------------------------
@@ -650,34 +700,22 @@ def run_validations(records: list) -> "tuple[list, bool]":
 # main
 # ---------------------------------------------------------------------------
 
-def main() -> int:
-    full_text = load_protocol_text()
-    base_queries, addition_queries, lane_addition_queries, out_of_scope_lanes = parse_all_queries(full_text)
+def _argument_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Compile the effective Gate-S1 protocol without network access."
+    )
+    parser.add_argument("--protocol", type=Path, default=PROTOCOL_MD)
+    parser.add_argument("--out", type=Path, default=OUTPUT_JSONL)
+    parser.add_argument("--check-against", type=Path)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="compare compiled raw bytes in memory; never write --out",
+    )
+    return parser
 
-    print(f"[sf_query_compiler] parsed {len(base_queries)} base Q fragments from §4 "
-          f"({len(EXPECTED_LANES)} lanes x {len(EXPECTED_Q_NUMS)} each) + "
-          f"{len(addition_queries)} A3-8 registered addition(s) {list(addition_queries.keys())} + "
-          f"{len(lane_addition_queries)} C4-6 lane addition(s) {list(lane_addition_queries.keys())}")
-    if out_of_scope_lanes:
-        print(f"[sf_query_compiler] NOTE: found {len(out_of_scope_lanes)} lane subsection(s) "
-              f"in §4 outside compiler scope (SF-L1..SF-L8), each verified to carry ZERO "
-              f"'- Q<n>' Boolean query lines, so excluded from compilation without loss: "
-              f"{out_of_scope_lanes}")
 
-    # base records first (strict original order/content), then A3-8 additions,
-    # then C4-6 lane additions — the 51-row prefix must stay byte-identical
-    records = (compile_records(base_queries) + compile_records(addition_queries)
-               + compile_records(lane_addition_queries))
-
-    OUTPUT_JSONL.parent.mkdir(parents=True, exist_ok=True)
-    with open(OUTPUT_JSONL, "w", encoding="utf-8", newline="\n") as f:
-        for r in records:
-            f.write(json.dumps(r, ensure_ascii=False))
-            f.write("\n")
-    print(f"[sf_query_compiler] wrote {len(records)} records -> {OUTPUT_JSONL}")
-
-    results, all_ok = run_validations(records)
-
+def _print_validation_report(results: list, all_ok: bool) -> None:
     print("\n[sf_query_compiler] static validation report")
     print("=" * 72)
     for name, passed, details in results:
@@ -686,7 +724,63 @@ def main() -> int:
     print("=" * 72)
     print(f"OVERALL: {'PASS' if all_ok else 'FAIL'}")
 
-    return 0 if all_ok else 1
+
+def main(argv=None) -> int:
+    parser = _argument_parser()
+    args = parser.parse_args(argv)
+    if args.check and args.check_against is None:
+        parser.error("--check requires --check-against PATH")
+
+    full_text = load_protocol_text(args.protocol)
+    base_queries, addition_queries, lane_addition_queries, out_of_scope_lanes = (
+        parse_all_queries(full_text)
+    )
+
+    print(f"[sf_query_compiler] parsed {len(base_queries)} base Q fragments from §4 "
+          f"({len(EXPECTED_LANES)} lanes x {len(EXPECTED_Q_NUMS)} each) + "
+          f"{len(addition_queries)} A3-8 registered addition(s) {list(addition_queries.keys())} + "
+          f"{len(lane_addition_queries)} registered lane addition(s) "
+          f"{list(lane_addition_queries.keys())}")
+    if out_of_scope_lanes:
+        print(f"[sf_query_compiler] NOTE: found {len(out_of_scope_lanes)} lane subsection(s) "
+              f"in §4 outside the registered compiler lanes, each verified to carry ZERO "
+              f"'- Q<n>' Boolean query lines, so excluded from compilation without loss: "
+              f"{out_of_scope_lanes}")
+
+    # base records first (strict original order/content), then A3-8 additions,
+    # then C4-6 lane additions — the 51-row prefix must stay byte-identical
+    records = (compile_records(base_queries) + compile_records(addition_queries)
+               + compile_records(lane_addition_queries))
+
+    results, all_ok = run_validations(records)
+    _print_validation_report(results, all_ok)
+    if not all_ok:
+        return 1
+
+    rendered = render_records(records)
+    if args.check:
+        try:
+            expected = args.check_against.read_bytes()
+        except OSError as exc:
+            print(
+                f"[sf_query_compiler] CHECK FAIL: cannot read {args.check_against}: {exc}",
+                file=sys.stderr,
+            )
+            return 1
+        if rendered != expected:
+            print(
+                "[sf_query_compiler] CHECK FAIL: byte difference against "
+                f"{args.check_against} (compiled={len(rendered)} bytes, "
+                f"expected={len(expected)} bytes)",
+                file=sys.stderr,
+            )
+            return 1
+        print(f"[sf_query_compiler] PASS ({len(records)} byte-identical records)")
+        return 0
+
+    atomic_write_bytes(args.out, rendered)
+    print(f"[sf_query_compiler] wrote {len(records)} records -> {args.out}")
+    return 0
 
 
 if __name__ == "__main__":
