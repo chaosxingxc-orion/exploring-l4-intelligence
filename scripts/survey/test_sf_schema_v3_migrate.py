@@ -797,6 +797,49 @@ class SchemaV3IntegrationTest(unittest.TestCase):
                     ):
                         build_outputs(source_dir)
 
+    def test_invalid_utf8_is_controlled_and_cli_preserves_destination(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_dir = Path(temp_dir) / "source"
+            output_dir = Path(temp_dir) / "destination"
+            self.copy_pinned_sources(source_dir)
+            write_outputs(build_outputs(source_dir), output_dir)
+            before = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.glob("*.sidecar.json"))
+            }
+            target = sorted(source_dir.glob("*.sidecar.json"))[0]
+            target.write_bytes(b"\xffnot-utf8-json\n")
+
+            try:
+                migration._load_sidecar(target)
+            except Exception as error:
+                self.assertIsInstance(error, MigrationError)
+                self.assertIn("cannot read", str(error))
+            else:
+                self.fail("invalid UTF-8 source was accepted")
+
+            for mode in ("--check", "--write"):
+                with self.subTest(mode=mode):
+                    stdout = io.StringIO()
+                    stderr = io.StringIO()
+                    try:
+                        with redirect_stdout(stdout), redirect_stderr(stderr):
+                            exit_code = main(
+                                [mode], source_dir=source_dir, output_dir=output_dir
+                            )
+                    except Exception as error:
+                        self.fail(f"invalid UTF-8 escaped CLI control: {error!r}")
+                    self.assertNotEqual(exit_code, 0)
+                    self.assertEqual(stdout.getvalue(), "")
+                    self.assertTrue(
+                        stderr.getvalue().startswith("schema-v3 migration: ERROR:")
+                    )
+                    after = {
+                        path.name: path.read_bytes()
+                        for path in sorted(output_dir.glob("*.sidecar.json"))
+                    }
+                    self.assertEqual(after, before)
+
     def test_check_and_write_reject_nonportable_input_without_destination_drift(self):
         malformed_values = ("overflow-number", "unpaired-surrogate")
         for case in malformed_values:
@@ -918,6 +961,118 @@ class SchemaV3IntegrationTest(unittest.TestCase):
                     write_outputs(outputs, output_dir)
 
             self.assertEqual(list(output_dir.glob("*.tmp")), [])
+
+    def test_directory_publish_failure_restores_existing_set_without_debris(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            parent = Path(temp_dir)
+            output_dir = parent / "sidecars"
+            write_outputs(outputs, output_dir)
+            first = output_dir / outputs[0][0].name
+            first.write_bytes(b"original directory bytes\n")
+            before = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.iterdir())
+            }
+            real_replace = os.replace
+            state = {"backed_up": False, "failed_publish": False}
+
+            def fail_after_backup(source, destination):
+                source = Path(source)
+                destination = Path(destination)
+                if source == output_dir and destination.parent == parent:
+                    state["backed_up"] = True
+                    return real_replace(source, destination)
+                if (
+                    state["backed_up"]
+                    and not state["failed_publish"]
+                    and destination == output_dir
+                    and source.is_dir()
+                ):
+                    state["failed_publish"] = True
+                    raise OSError("forced staged-directory publish failure")
+                return real_replace(source, destination)
+
+            with mock.patch(
+                "sf_schema_v3_migrate.os.replace", side_effect=fail_after_backup
+            ):
+                with self.assertRaisesRegex(
+                    OSError, "staged-directory publish failure"
+                ):
+                    write_outputs(outputs, output_dir)
+
+            self.assertTrue(state["backed_up"])
+            self.assertTrue(state["failed_publish"])
+            after = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.iterdir())
+            }
+            self.assertEqual(after, before)
+            self.assertEqual(list(parent.iterdir()), [output_dir])
+
+    def test_fresh_directory_publish_failure_leaves_no_partial_destination(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            parent = Path(temp_dir)
+            output_dir = parent / "sidecars"
+            real_replace = os.replace
+            state = {"failed": False}
+
+            def fail_fresh_publish(source, destination):
+                source = Path(source)
+                destination = Path(destination)
+                if (
+                    not state["failed"]
+                    and destination == output_dir
+                    and source.is_dir()
+                ):
+                    state["failed"] = True
+                    raise OSError("forced fresh-directory publish failure")
+                return real_replace(source, destination)
+
+            with mock.patch(
+                "sf_schema_v3_migrate.os.replace", side_effect=fail_fresh_publish
+            ):
+                with self.assertRaisesRegex(
+                    OSError, "fresh-directory publish failure"
+                ):
+                    write_outputs(outputs, output_dir)
+
+            self.assertTrue(state["failed"])
+            self.assertFalse(output_dir.exists())
+            self.assertEqual(list(parent.iterdir()), [])
+
+    def test_remediation_overrides_reject_value_evidence_and_coupled_edge_drift(self):
+        cases = []
+
+        value_drift = migration._load_sidecar(
+            SOURCE_DIR / "2026.findings-acl.511.sidecar.json"
+        )
+        value_drift["method_paths"][0]["selection_object"] = "candidate_output"
+        cases.append(("value", value_drift))
+
+        evidence_drift = migration._load_sidecar(
+            SOURCE_DIR / "2026.findings-acl.511.sidecar.json"
+        )
+        evidence_drift["method_paths"][0]["claim_evidence"]["selection_policy"][
+            "quote"
+        ] += " drift"
+        cases.append(("evidence", evidence_drift))
+
+        coupled_edge_drift = migration._load_sidecar(
+            SOURCE_DIR / "2602.16485.sidecar.json"
+        )
+        coupled_edge_drift["method_paths"][0]["control_edges"][1][
+            "edge_semantics"
+        ] += " drift"
+        cases.append(("coupled-edge", coupled_edge_drift))
+
+        for label, source in cases:
+            with self.subTest(label=label):
+                with self.assertRaisesRegex(
+                    MigrationError, "override precondition.*drift"
+                ):
+                    migrate_sidecar(source)
 
     def test_build_and_temp_write_leave_pinned_source_bytes_unchanged(self):
         source_paths = sorted(SOURCE_DIR.glob("*.sidecar.json"))

@@ -3,12 +3,16 @@
 
 from __future__ import annotations
 
+import ast
 import copy
 import hashlib
+import importlib
+import importlib.util
 import inspect
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -36,6 +40,36 @@ def row_by_id(outputs, method_path_id):
     return next(
         row for row in all_rows(outputs) if row["method_path_id"] == method_path_id
     )
+
+
+def _resolved_gitdir(dot_git, platform=os.name):
+    """Resolve a worktree .git pointer for native Windows or WSL POSIX."""
+    pointer = dot_git.read_text(encoding="utf-8").strip()
+    prefix = "gitdir: "
+    if not pointer.startswith(prefix):
+        raise AssertionError(f"malformed worktree git pointer: {dot_git}")
+    raw = pointer[len(prefix) :]
+    windows_absolute = re.fullmatch(r"([A-Za-z]):[\\/](.*)", raw)
+    if platform == "posix" and windows_absolute:
+        drive, remainder = windows_absolute.groups()
+        remainder = remainder.replace("\\", "/")
+        return Path(f"/mnt/{drive.lower()}/{remainder}")
+    candidate = Path(raw)
+    return candidate if candidate.is_absolute() else (dot_git.parent / candidate)
+
+
+def _git_show_bytes(commit, relative_path):
+    command = ["git"]
+    dot_git = finalizer.REPO_ROOT / ".git"
+    if dot_git.is_file():
+        command.append(f"--git-dir={_resolved_gitdir(dot_git)}")
+    command.extend(["show", f"{commit}:{relative_path}"])
+    return subprocess.run(
+        command,
+        cwd=finalizer.REPO_ROOT,
+        capture_output=True,
+        check=True,
+    ).stdout
 
 
 class SchemaV3FinalizerTest(unittest.TestCase):
@@ -272,17 +306,10 @@ class SchemaV3FinalizerTest(unittest.TestCase):
                 / "sidecars"
                 / name
             ).as_posix()
-            result = subprocess.run(
-                [
-                    "git",
-                    "show",
-                    f"{finalizer.SOURCE_HEAD}:{relative_path}",
-                ],
-                cwd=finalizer.REPO_ROOT,
-                capture_output=True,
-                check=True,
+            commit_bytes[name] = _git_show_bytes(
+                finalizer.SOURCE_HEAD,
+                relative_path,
             )
-            commit_bytes[name] = result.stdout
 
         commit_hashes = {
             name: hashlib.sha256(data).hexdigest()
@@ -305,13 +332,114 @@ class SchemaV3FinalizerTest(unittest.TestCase):
         self.assertEqual(len(finalized), 8)
 
     def test_finalizer_uses_the_canonical_row_hash_implementation_for_all_rows(self):
+        shared_spec = importlib.util.find_spec("sf_row_hash")
+        self.assertIsNotNone(shared_spec, "side-effect-free row hash module is missing")
+        shared = importlib.import_module("sf_row_hash")
+        identity_v5 = importlib.import_module("sf_identity_taxonomy_v5_test")
         rows = all_rows(migration.build_outputs(migration.SOURCE_DIR))
         self.assertEqual(len(rows), 11)
+        self.assertIs(finalizer.row_hash, shared.row_hash)
+        self.assertIs(identity_v5.row_hash, shared.row_hash)
         self.assertIs(finalizer.row_hash, canonical_row_hash)
+        expected_digests = {
+            "2026.findings-acl.1243#closed-prompt-only": (
+                "861e2e71e3213d8558a0ac9c790a7a32393253c48583807db019e5d634f7beaf"
+            ),
+            "2026.findings-acl.1243#open-sft-variant": (
+                "11ff35c2ebc3f90032cb544d30092a71249b17a6eed262801abfda681440d4f1"
+            ),
+            "2026.findings-acl.1724#pipeline": (
+                "a018dfe8b6f81af83b52d8ad0ade7020e89d640850fe839fcd26cc4db1dbfcf4"
+            ),
+            "2026.findings-acl.511#prm-guided-search": (
+                "ff8cb1d0ec5ac12ed3e8ed0b01bc5d1986d92434dab0bc82d239af73a5583ac8"
+            ),
+            "2602.16485#calibrated-orchestration": (
+                "46ee311b44713aa4781a2575c6dd205c670cc5af03d845c83259d2cc7d3b3b03"
+            ),
+            "2604.16529#rtv": (
+                "eb9f8eb39b2a5df369210b74a653b9954b3c4c9b882f02db528fcdb71a05a975"
+            ),
+            "2604.16529#pdr-random-k": (
+                "1b11061d06cdd4de1e3f980ed60e5cb7968197fd55227f887f349368ce150bae"
+            ),
+            "2604.16529#rtv-pdr-pipeline": (
+                "272a1bc8ad895f61f8e77bcf34f20e2132deefbea29377facb365e9477deac99"
+            ),
+            "2605.08083#discovered-controller": (
+                "58e4b6627a4dc326f2fd4d3131856d9dd4381a9fb71bdeae491a53ee9eb7c63f"
+            ),
+            "2606.01667#agentic-orchestration": (
+                "0164a61c969de0cba079337d17b1aad3088d7f924c8561307cbd26703bb9e7fc"
+            ),
+            "2606.03054#trained-gate": (
+                "57858a5223c1a9138329507a9bda9673a0fdd7eb2e993b83887ff68d2c09f5cc"
+            ),
+        }
+        self.assertEqual(
+            {row["method_path_id"]: shared.row_hash(row) for row in rows},
+            expected_digests,
+        )
         self.assertEqual(
             [finalizer.row_hash(row) for row in rows],
             [canonical_row_hash(row) for row in rows],
         )
+
+        source_path = Path(shared.__file__)
+        tree = ast.parse(source_path.read_text(encoding="utf-8"))
+        imports = {
+            alias.name
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Import)
+            for alias in node.names
+        }
+        self.assertLessEqual(imports, {"hashlib", "json"})
+        file_calls = [
+            node
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
+            and (
+                isinstance(node.func, ast.Name)
+                and node.func.id == "open"
+                or isinstance(node.func, ast.Attribute)
+                and node.func.attr in {"open", "read_text", "read_bytes"}
+            )
+        ]
+        self.assertEqual(file_calls, [])
+
+        sample = {"b": 1, "a": "x"}
+        sample_blob = json.dumps(
+            sample, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+        expected_sample = hashlib.sha256(sample_blob).hexdigest()
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-W",
+                "error",
+                "-c",
+                "from sf_row_hash import row_hash; "
+                "print(row_hash({'b': 1, 'a': 'x'}))",
+            ],
+            cwd=Path(__file__).parent,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stderr, "")
+        self.assertEqual(result.stdout, expected_sample + "\n")
+
+    def test_gitdir_pointer_translation_is_wsl_safe(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            dot_git = Path(temp_dir) / ".git"
+            dot_git.write_text(
+                "gitdir: D:/repo/.git/worktrees/review\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                _resolved_gitdir(dot_git, platform="posix"),
+                Path("/mnt/d/repo/.git/worktrees/review"),
+            )
 
     def test_importing_finalizer_does_not_leak_resource_warnings(self):
         result = subprocess.run(

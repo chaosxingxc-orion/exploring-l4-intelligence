@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import math
 import os
 import re
+import shutil
 import sys
 import tempfile
 from collections import Counter
@@ -144,6 +146,68 @@ BINDING_OVERRIDES = {
         "kind": "pdf_page",
         "page": 11,
         "anchor": "logistic regression classifier we train with l2",
+    },
+}
+BINDING_OVERRIDE_PRECONDITIONS = {
+    (
+        "2026.findings-acl.511#prm-guided-search",
+        "row",
+        "selection_object",
+    ): {
+        "value": "trajectory",
+        "row_sha256": "3cbe47a4136693202aa49f3433a25de3fb572889bfd4d2972a7d3e09833d8fc5",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "signal:s_profile",
+        "source",
+    ): {
+        "value": "llm_judge",
+        "row_sha256": "87656952432d5ff2482e1e40702511c1ec6b6bb2f67ba635d22c824121a423f7",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "edge:1",
+        "signal_use",
+    ): {
+        "value": "synthesize_input",
+        "row_sha256": "f497ba60c76f3b0f57adf7bc33d1a722eb9cce7bf78430788c4b05a2b5101b77",
+    },
+    ("2604.16529#rtv", "row", "selection_object"): {
+        "value": "trajectory",
+        "row_sha256": "65517ccbdc2f9d468a714ca00c1b4a1c90f62310f11126b206c09d3fa5456f26",
+    },
+    (
+        "2604.16529#rtv-pdr-pipeline",
+        "row",
+        "explicit_candidate_pool_selection",
+    ): {
+        "value": True,
+        "row_sha256": "7d5273b10d9818ff79070f562e656d6b41c2e14472b2d2451670d6fe2e7f3dca",
+    },
+    ("2604.16529#rtv-pdr-pipeline", "row", "selection_object"): {
+        "value": "trajectory",
+        "row_sha256": "570bcaf75ebbd245a4f4eddb67375cbcac85f62d3056719a83fc922984ef8cbb",
+    },
+    ("2604.16529#rtv-pdr-pipeline", "edge:1", "decision_right"): {
+        "value": "supply",
+        "row_sha256": "e83a22e7b6ab080d1aad4a921ec424f406e82cb06a216279c730839efc3c6d1f",
+    },
+    ("2605.08083#discovered-controller", "row", "selection_object"): {
+        "value": "trajectory",
+        "row_sha256": "e86de882489434345bff344d8ccb17bbbe4a79aec5a5da02eccc9e9c97b61346",
+    },
+    ("2606.01667#agentic-orchestration", "row", "selection_object"): {
+        "value": "candidate_output",
+        "row_sha256": "f1bdd4b46f11f64304434d04d3e2de8a3c49e9c6b9456b6d76368da217b218b3",
+    },
+    ("2606.01667#agentic-orchestration", "edge:2", "signal_use"): {
+        "value": "synthesize_input",
+        "row_sha256": "5047cc2d5490a254747f4d1d6e74e5268309197977759c0df685aa0e5b50bd75",
+    },
+    ("2606.03054#trained-gate", "signal:s_gate", "source"): {
+        "value": "trained_classifier",
+        "row_sha256": "3c13cb005ac6113d0cc4359280cb6c69d95719d2e97b59d769aeb12f2129680a",
     },
 }
 
@@ -509,6 +573,49 @@ def _set_override_binding(row, owner, field, binding):
     evidence[field] = replacement
 
 
+def _canonical_sha256(value):
+    try:
+        encoded = json.dumps(
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    except (TypeError, ValueError, UnicodeEncodeError) as error:
+        raise MigrationError(
+            "override precondition cannot canonically encode the migrated row"
+        ) from error
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _assert_override_precondition(row, key):
+    method_path_id, owner, field = key
+    precondition = BINDING_OVERRIDE_PRECONDITIONS.get(key)
+    if precondition is None:
+        raise MigrationError(f"override precondition is missing for {key!r}")
+    target = _resolve_override_owner(row, owner)
+    if field not in target:
+        raise MigrationError(
+            f"override precondition drift for {key!r}: encoded field is missing"
+        )
+    actual_value = target[field]
+    expected_value = precondition["value"]
+    if type(actual_value) is not type(expected_value) or actual_value != expected_value:
+        raise MigrationError(
+            f"override precondition value drift for {key!r}: "
+            f"expected {expected_value!r}, found {actual_value!r}"
+        )
+    actual_row_sha256 = _canonical_sha256(row)
+    expected_row_sha256 = precondition["row_sha256"]
+    if actual_row_sha256 != expected_row_sha256:
+        raise MigrationError(
+            f"override precondition row drift for {method_path_id!r} before "
+            f"{owner}:{field}: expected {expected_row_sha256}, "
+            f"found {actual_row_sha256}"
+        )
+
+
 def _apply_binding_overrides(row, used_overrides=None):
     pid = row.get("method_path_id", "?")
     for key, binding in BINDING_OVERRIDES.items():
@@ -517,6 +624,7 @@ def _apply_binding_overrides(row, used_overrides=None):
             continue
         if used_overrides is not None and key in used_overrides:
             raise MigrationError(f"binding override used more than once: {key!r}")
+        _assert_override_precondition(row, key)
         _set_override_binding(row, owner, field, binding)
         coupled = COUPLED_OVERRIDES.get(key, {})
         for (coupled_owner, coupled_field), coupled_binding in coupled.get(
@@ -541,14 +649,25 @@ def _apply_binding_overrides(row, used_overrides=None):
 def _validate_binding_override_coverage(used_overrides):
     expected = set(BINDING_OVERRIDES)
     used = set(used_overrides)
+    preconditions = set(BINDING_OVERRIDE_PRECONDITIONS)
     unknown_coupled = sorted(set(COUPLED_OVERRIDES) - expected)
+    missing_preconditions = sorted(expected - preconditions)
+    unexpected_preconditions = sorted(preconditions - expected)
     missing = sorted(expected - used)
     unexpected = sorted(used - expected)
-    if unknown_coupled or missing or unexpected:
+    if (
+        unknown_coupled
+        or missing_preconditions
+        or unexpected_preconditions
+        or missing
+        or unexpected
+    ):
         raise MigrationError(
             "binding overrides must cover every adjudication disagreement exactly once "
-            f"(unknown_coupled={unknown_coupled}, missing={missing}, "
-            f"unexpected={unexpected})"
+            f"(unknown_coupled={unknown_coupled}, "
+            f"missing_preconditions={missing_preconditions}, "
+            f"unexpected_preconditions={unexpected_preconditions}, "
+            f"missing={missing}, unexpected={unexpected})"
         )
 
 
@@ -655,7 +774,12 @@ def _load_sidecar(path):
         )
         _validate_loaded_json(loaded)
         return loaded
-    except (OSError, json.JSONDecodeError, MigrationError) as error:
+    except (
+        OSError,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+        MigrationError,
+    ) as error:
         raise MigrationError(f"cannot read {path}: {error}") from error
 
 
@@ -746,13 +870,44 @@ def _render_outputs(outputs):
     return rendered
 
 
+def _verify_rendered_directory(directory, rendered, label):
+    expected_names = {name for name, _ in rendered}
+    actual_names = {path.name for path in directory.iterdir()}
+    if actual_names != expected_names:
+        raise MigrationError(
+            f"{label} sidecar names mismatch: expected {sorted(expected_names)}, "
+            f"found {sorted(actual_names)}"
+        )
+    for name, expected_bytes in rendered:
+        path = directory / name
+        if not path.is_file():
+            raise MigrationError(f"{label} entry is not a regular file: {path}")
+        actual_bytes = path.read_bytes()
+        if actual_bytes != expected_bytes:
+            raise MigrationError(f"{label} sidecar bytes mismatch: {path}")
+
+
+def _remove_transaction_directory(path, parent, prefix):
+    if path.parent.resolve() != parent.resolve() or not path.name.startswith(prefix):
+        raise MigrationError(f"refusing to remove non-transaction directory: {path}")
+    if path.exists():
+        shutil.rmtree(path)
+
+
 def _write_rendered_outputs(rendered, output_dir):
+    """Publish a verified set with process-error rollback via directory renames.
+
+    Publication changes the destination with one directory-pointer rename.  If an
+    existing destination was first moved aside and that publication rename fails,
+    the old directory is renamed back.  This is process-error rollback, not a
+    claim of crash-proof durability across power loss or operating-system failure.
+    """
     output_dir = Path(output_dir)
     expected_names = {name for name, _ in rendered}
     if output_dir.exists() and not output_dir.is_dir():
         raise MigrationError(f"output destination is not a directory: {output_dir}")
     existing_names = (
-        {path.name for path in output_dir.glob("*.sidecar.json")}
+        {path.name for path in output_dir.iterdir()}
         if output_dir.exists()
         else set()
     )
@@ -762,39 +917,48 @@ def _write_rendered_outputs(rendered, output_dir):
             f"unexpected old destination sidecars in {output_dir}: {unexpected}"
         )
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    temporary_paths = {}
+    parent = output_dir.parent
+    parent.mkdir(parents=True, exist_ok=True)
+    staging_prefix = f".{output_dir.name}.staging."
+    backup_prefix = f".{output_dir.name}.backup."
+    staging_dir = Path(
+        tempfile.mkdtemp(prefix=staging_prefix, dir=parent)
+    )
     try:
         for name, data in rendered:
-            descriptor, temp_name = tempfile.mkstemp(
-                prefix=f".{name}.", suffix=".tmp", dir=output_dir
-            )
-            temp_path = Path(temp_name)
-            temporary_paths[name] = temp_path
-            with os.fdopen(descriptor, "wb") as handle:
+            with (staging_dir / name).open("wb") as handle:
                 handle.write(data)
                 handle.flush()
                 os.fsync(handle.fileno())
-        for name, _ in rendered:
-            os.replace(temporary_paths[name], output_dir / name)
-            del temporary_paths[name]
-    finally:
-        for temp_path in temporary_paths.values():
-            try:
-                temp_path.unlink()
-            except FileNotFoundError:
-                pass
+        _verify_rendered_directory(staging_dir, rendered, "staging")
 
-    actual_names = {path.name for path in output_dir.glob("*.sidecar.json")}
-    if actual_names != expected_names:
-        raise MigrationError(
-            f"destination sidecar names mismatch after write: expected "
-            f"{sorted(expected_names)}, found {sorted(actual_names)}"
-        )
+        if output_dir.exists():
+            backup_dir = Path(
+                tempfile.mkdtemp(prefix=backup_prefix, dir=parent)
+            )
+            backup_dir.rmdir()
+            os.replace(output_dir, backup_dir)
+            try:
+                os.replace(staging_dir, output_dir)
+            except OSError as publish_error:
+                try:
+                    os.replace(backup_dir, output_dir)
+                except OSError as rollback_error:
+                    raise MigrationError(
+                        "staged-directory publication and rollback both failed; "
+                        f"the prior destination remains at {backup_dir}: "
+                        f"publish={publish_error}; rollback={rollback_error}"
+                    ) from rollback_error
+                raise
+            _remove_transaction_directory(backup_dir, parent, backup_prefix)
+        else:
+            os.replace(staging_dir, output_dir)
+    finally:
+        _remove_transaction_directory(staging_dir, parent, staging_prefix)
 
 
 def write_outputs(outputs, output_dir=OUTPUT_DIR):
-    """Render and write outputs as deterministic UTF-8 LF JSON; remove nothing."""
+    """Render deterministic UTF-8 LF JSON and publish one verified directory set."""
     _write_rendered_outputs(_render_outputs(outputs), output_dir)
 
 

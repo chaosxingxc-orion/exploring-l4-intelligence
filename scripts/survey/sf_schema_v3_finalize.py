@@ -8,15 +8,11 @@ import copy
 import hashlib
 import json
 import sys
-import warnings
 from collections.abc import Mapping
 from pathlib import Path
 
 import sf_schema_v3_migrate as migration
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore", ResourceWarning)
-    from sf_identity_taxonomy_v5_test import row_hash
+from sf_row_hash import row_hash
 
 
 ARTIFACT_ID = "SF-SCHEMA-V3-ADJUDICATION-2026-07-19-01"

@@ -29,7 +29,6 @@ Persists docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json
 import copy
 import glob
 import gzip
-import hashlib
 import io
 import json
 import os
@@ -41,6 +40,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sf_coding_generator import render  # noqa: E402
 from sf_asset_path import resolve_asset_path  # noqa: E402
+from sf_row_hash import ADJ_EXCLUDE, row_hash  # noqa: E402
 
 TAX = os.path.join(REPO, "wiki", "survey", "2026-07-19-sf-identity-taxonomy-v5.json")
 CODING = os.path.join(REPO, "wiki", "survey", "2026-07-19-sf-known-item-coding-v6.json")
@@ -74,8 +74,6 @@ REQ_FIELDS = STRICT_BITS + ["internal_visibility", "core_topology", "core_native
                             "selection_policy"]
 LINEAGE = ["paper_work_id", "fulltext_ref", "canonical_record_id", "source_locator", "coder",
            "semantic_adjudicator"]
-ADJ_EXCLUDE = {"semantic_adjudicator", "adjudication_status", "adjudication_row_sha256",
-               "adjudication_provenance"}
 TERMINAL_EDGE_RIGHTS = {"synthesize", "stop"}
 QUOTE_PAT = re.compile(r"(canon|tex):\s*'([^']+)'")
 PAGE_TOKEN = re.compile(r"p(\d+)(?:\s+([A-Za-z][A-Za-z0-9_-]{2,}))?")
@@ -207,12 +205,6 @@ def fx_edge(u, d, lc=None):
     if lc:
         e["signal_lifecycle"] = lc
     return e
-
-
-def row_hash(mp):
-    core = {k: v for k, v in mp.items() if k not in ADJ_EXCLUDE}
-    blob = json.dumps(core, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
 def validate(rows):
