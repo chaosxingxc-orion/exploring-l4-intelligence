@@ -197,6 +197,28 @@ class ManifestConsumerContractTests(unittest.TestCase):
         control["prose_scan_paths"] = [control["files"][-1]["path"]]
         cases.append((control, "not canonical"))
 
+        for unsafe in (
+            "wiki/survey/current/sta\x7ftus.md",
+            "wiki/survey/current/sta\x85tus.md",
+            "wiki/survey/current/name:stream.md",
+            "wiki/survey/current/trailing-space .md ",
+            "wiki/survey/current/trailing-dot.",
+            "wiki/survey/current/CON",
+            "wiki/survey/current/con.txt",
+            "wiki/survey/current/PrN.md",
+            "wiki/survey/current/AUX.json",
+            "wiki/survey/current/nul.log",
+            "wiki/survey/current/COM1.md",
+            "wiki/survey/current/com9.any",
+            "wiki/survey/current/LPT1",
+            "wiki/survey/current/lpt9.txt",
+        ):
+            document = fixture.manifest_document()
+            document["files"][-1] = dict(document["files"][-1])
+            document["files"][-1]["path"] = unsafe
+            document["prose_scan_paths"] = [unsafe]
+            cases.append((document, "not portable"))
+
         archive_path = "wiki/archive/system-first/old.md"
         fixture.write_text(archive_path, "old\n")
         archive = fixture.manifest_document()
@@ -270,6 +292,7 @@ class ManifestConsumerContractTests(unittest.TestCase):
         fixture = self.fixture()
         code, output = self.run_main(self.release, [], fixture.root)
         self.assertEqual(0, code, output)
+        self.assertIn("mode=current-manifest", output)
         self.assertNotIn("[skip]", output)
 
         fixture.target(fixture.release_path).unlink()
@@ -326,10 +349,98 @@ class ManifestConsumerContractTests(unittest.TestCase):
         self.assertEqual(1, code, output)
         self.assertIn("duplicate key", output)
 
+    def test_current_release_artifact_has_closed_exact_syntax(self):
+        mutations = {
+            "source-only-no-headline": lambda text, fixture: (
+                "<!-- release_binding: "
+                + json.dumps({"source": fixture.report_path})
+                + " -->\n"
+            ),
+            "two-bindings-second-stale": lambda text, fixture: text.replace(
+                "<!-- generated_headline_begin -->",
+                "<!-- release_binding: "
+                + json.dumps(
+                    {
+                        "source": fixture.report_path,
+                        "reward_guided": "999/11",
+                        "rq_sys_compatible": "5/11",
+                        "method_candidate": "0/11",
+                        "reward_guided_selection": "4/11",
+                        "trajectory_pool": "2/11",
+                    }
+                )
+                + " -->\n<!-- generated_headline_begin -->",
+                1,
+            ),
+            "two-headlines": lambda text, fixture: text
+            + "<!-- generated_headline_begin -->\n"
+            + self.release.render_headline(fixture.report)
+            + "\n<!-- generated_headline_end -->\n",
+            "dangling-marker": lambda text, fixture: text
+            + "<!-- generated_headline_begin -->\n",
+            "leading-body-space": lambda text, fixture: text.replace(
+                "<!-- generated_headline_begin -->\n",
+                "<!-- generated_headline_begin -->\n ",
+                1,
+            ),
+            "trailing-body-space": lambda text, fixture: text.replace(
+                "\n<!-- generated_headline_end -->",
+                " \n<!-- generated_headline_end -->",
+                1,
+            ),
+        }
+        for name, mutate in mutations.items():
+            with self.subTest(name=name):
+                fixture = self.fixture()
+                artifact = fixture.target(fixture.release_path)
+                artifact.write_text(
+                    mutate(artifact.read_text(encoding="utf-8"), fixture),
+                    encoding="utf-8",
+                )
+                fixture.write_manifest()
+                code, output = self.run_main(self.release, [], fixture.root)
+                self.assertEqual(1, code, output)
+                self.assertRegex(
+                    output,
+                    r"release_binding.*exact|generated headline.*exact|marker",
+                )
+
+    def test_legacy_compat_allows_zero_headline_but_keeps_exact_binding(self):
+        fixture = self.fixture()
+        text = fixture.target(fixture.release_path).read_text(encoding="utf-8")
+        text = text.split("<!-- generated_headline_begin -->", 1)[0]
+        cache = {fixture.report_path: fixture.report}
+        self.assertEqual(
+            [],
+            self.release.check_artifact(
+                text,
+                "<legacy>",
+                cache,
+                mode="legacy-compat",
+            ),
+        )
+        current_failures = self.release.check_artifact(
+            text,
+            "<current>",
+            cache,
+            mode="current-manifest",
+        )
+        self.assertTrue(
+            any("generated headline" in failure for failure in current_failures)
+        )
+
+    def test_release_cli_rejects_manifest_and_legacy_conflict(self):
+        with self.assertRaises(SystemExit) as raised:
+            self.release.main(
+                ["--manifest", "wiki/survey/current/manifest.json", "--legacy-regression"]
+            )
+        self.assertNotEqual(0, raised.exception.code)
+
     def test_quantifier_defaults_to_manifest_and_positionals_remain_focused(self):
         fixture = self.fixture()
         code, output = self.run_main(self.quantifier, [], fixture.root)
         self.assertEqual(0, code, output)
+        self.assertIn("scope=current-manifest", output)
         self.assertNotIn("[skip]", output)
 
         fixture.target(fixture.prose_path).unlink()
@@ -345,12 +456,22 @@ class ManifestConsumerContractTests(unittest.TestCase):
         code, output = self.run_main(self.quantifier, [focused], fixture.root)
         self.assertEqual(0, code, output)
         self.assertIn("PASS", output)
+        self.assertIn("scope=focused-positional", output)
 
         missing = "notes/missing.md"
         code, output = self.run_main(self.quantifier, [missing], fixture.root)
         self.assertEqual(1, code, output)
         self.assertIn("missing", output)
         self.assertNotIn("[skip]", output)
+
+    def test_quantifier_cli_rejects_explicit_manifest_with_positionals(self):
+        fixture = self.fixture()
+        with self.assertRaises(SystemExit) as raised:
+            self.quantifier.main(
+                ["--manifest", fixture.manifest_path, fixture.prose_path],
+                repo=fixture.root,
+            )
+        self.assertNotEqual(0, raised.exception.code)
 
     def test_quantifier_accepts_explicit_per_query_category_and_review_scope(self):
         scoped_lines = (

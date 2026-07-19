@@ -10,6 +10,7 @@ import os
 import re
 import subprocess
 import sys
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -238,18 +239,25 @@ def canonical_consumer_path(value: object, *, label: str = "manifest path") -> s
         raise CurrentManifestError(f"{label} is not a nonempty string")
     if (
         "\\" in value
+        or ":" in value
         or value.startswith("/")
         or re.match(r"^[A-Za-z]:", value)
-        or any(ord(character) < 32 for character in value)
+        or any(unicodedata.category(character) == "Cc" for character in value)
     ):
         raise CurrentManifestError(
-            f"{label} is not canonical repo-relative POSIX: {value!r}"
+            f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
         )
     parts = value.split("/")
     if any(part in ("", ".", "..") for part in parts):
         raise CurrentManifestError(
-            f"{label} is not canonical repo-relative POSIX: {value!r}"
+            f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
         )
+    reserved = re.compile(r"(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])", re.IGNORECASE)
+    for part in parts:
+        if part.endswith((" ", ".")) or reserved.fullmatch(part.split(".", 1)[0]):
+            raise CurrentManifestError(
+                f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
+            )
     return value
 
 

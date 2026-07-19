@@ -53,7 +53,7 @@ def scan_text(name, text):
 
 def _parser():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
+    parser.add_argument("--manifest")
     parser.add_argument("files", nargs="*")
     return parser
 
@@ -61,7 +61,10 @@ def _parser():
 def main(argv=None, *, repo=REPO):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    args = _parser().parse_args(argv)
+    parser = _parser()
+    args = parser.parse_args(argv)
+    if args.manifest is not None and args.files:
+        parser.error("--manifest cannot be combined with focused positional files")
     if not scan_text("<fixture>", NEG_FIXTURE):
         print("[FAIL] negative fixture NOT flagged — scanner oracle broken")
         return 1
@@ -77,10 +80,12 @@ def main(argv=None, *, repo=REPO):
                 for path in args.files
             )
             read_bytes = reader.read_bytes
+            scope = "focused-positional"
         else:
-            view = load_consumer_manifest(repo, args.manifest)
+            view = load_consumer_manifest(repo, args.manifest or DEFAULT_MANIFEST)
             files = view.paths("prose_scan_paths")
             read_bytes = view.read_bytes
+            scope = "current-manifest"
     except (CurrentManifestError, OSError, ValueError) as error:
         print(f"[QUANTIFIER] manifest/path load failed: {error}")
         print("quantifier scan: FAIL (1 input failures, 0 unscoped)")
@@ -102,7 +107,8 @@ def main(argv=None, *, repo=REPO):
     failed = bool(input_failures or all_hits)
     print(
         f"quantifier scan: {'FAIL' if failed else 'PASS'} "
-        f"({len(input_failures)} input failures, {len(all_hits)} unscoped)"
+        f"({len(input_failures)} input failures, {len(all_hits)} unscoped; "
+        f"scope={scope})"
     )
     return 1 if failed else 0
 

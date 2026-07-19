@@ -41,7 +41,14 @@ LEGACY_BOUND = (
     "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
 )
 BLOCK = re.compile(r"<!--\s*release_binding:\s*(\{.*?\})\s*-->", re.S)
-GEN_BLOCK = re.compile(r"<!--\s*generated_headline_begin\s*-->(.*?)<!--\s*generated_headline_end\s*-->", re.S)
+BINDING_MARKER = re.compile(r"<!--\s*release_binding\b")
+HEADLINE_BEGIN = "<!-- generated_headline_begin -->"
+HEADLINE_END = "<!-- generated_headline_end -->"
+HEADLINE_BEGIN_COMMENT = re.compile(r"<!--\s*generated_headline_begin\b")
+HEADLINE_END_COMMENT = re.compile(r"<!--\s*generated_headline_end\b")
+GEN_BLOCK = re.compile(
+    re.escape(HEADLINE_BEGIN) + r"(.*?)" + re.escape(HEADLINE_END), re.S
+)
 
 
 def render_headline(report):
@@ -75,6 +82,7 @@ KEYMAP = {
         "strict_AND_reward_AND_pool_BY_selection_object(mechanism)"].get(
         "trajectory", {}).get("n_paths", "0/?"),
 }
+BINDING_KEYS = {"source", *KEYMAP}
 
 
 def _read_report(src, cache, read_bytes, allowed_paths):
@@ -106,11 +114,19 @@ def check_artifact(
     *,
     read_bytes=None,
     allowed_paths=None,
+    mode="current-manifest",
 ):
     fails = []
-    m = BLOCK.search(text)
-    if not m:
-        return [f"{name}: release_binding block missing"]
+    if mode not in {"current-manifest", "legacy-compat"}:
+        return [f"{name}: unknown release validation mode {mode!r}"]
+    markers = list(BINDING_MARKER.finditer(text))
+    blocks = list(BLOCK.finditer(text))
+    if len(markers) != 1 or len(blocks) != 1:
+        return [
+            f"{name}: release_binding must be exactly one strict JSON comment "
+            f"(markers={len(markers)}, strict_blocks={len(blocks)})"
+        ]
+    m = blocks[0]
     try:
         binding = strict_json_loads(
             m.group(1).encode("utf-8"), f"{name} release_binding"
@@ -119,6 +135,11 @@ def check_artifact(
         return [f"{name}: release_binding unparsable: {e}"]
     if not isinstance(binding, dict):
         return [f"{name}: release_binding must be an object"]
+    if set(binding) != BINDING_KEYS:
+        fails.append(
+            f"{name}: release_binding keys must be exact: "
+            f"expected {sorted(BINDING_KEYS)}, found {sorted(binding)}"
+        )
     src = binding.get("source")
     if not isinstance(src, str) or not src:
         return [f"{name}: release_binding lacks source"]
@@ -145,18 +166,38 @@ def check_artifact(
             continue
         if actual != v:
             fails.append(f"{name}: {k} declared {v} but generated output says {actual}")
-    # v9-review P0-C: if the artifact carries a generated headline block, the
-    # reader-visible table must byte-match a fresh render from the bound source.
-    for gm in GEN_BLOCK.finditer(text):
+    begin_comments = list(HEADLINE_BEGIN_COMMENT.finditer(text))
+    end_comments = list(HEADLINE_END_COMMENT.finditer(text))
+    headline_blocks = list(GEN_BLOCK.finditer(text))
+    expected_counts = {1} if mode == "current-manifest" else {0, 1}
+    marker_count_valid = (
+        len(begin_comments) == len(end_comments)
+        and len(begin_comments) in expected_counts
+        and len(headline_blocks) == len(begin_comments)
+        and text.count(HEADLINE_BEGIN) == len(begin_comments)
+        and text.count(HEADLINE_END) == len(end_comments)
+    )
+    if not marker_count_valid:
+        fails.append(
+            f"{name}: generated headline markers must form an exact complete pair "
+            f"for mode={mode} (begin={len(begin_comments)}, end={len(end_comments)}, "
+            f"pairs={len(headline_blocks)})"
+        )
+        return fails
+
+    for gm in headline_blocks:
         try:
-            want = render_headline(report).strip()
+            want = "\n" + render_headline(report) + "\n"
         except (KeyError, TypeError, AttributeError) as error:
             fails.append(f"{name}: cannot render generated headline: {error}")
             continue
-        got = gm.group(1).strip()
+        got = gm.group(1)
         if got != want:
-            fails.append(f"{name}: generated headline block differs from fresh render "
-                         f"(reader-visible numbers are stale or hand-edited)")
+            fails.append(
+                f"{name}: generated headline block differs; body must exact-byte-match "
+                f"fresh render "
+                f"(reader-visible numbers are stale, hand-edited, or whitespace-drifted)"
+            )
     return fails
 
 
@@ -213,8 +254,9 @@ def _run_oracle_fixtures():
 
 def _parser():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
-    parser.add_argument("--legacy-regression", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--manifest")
+    mode.add_argument("--legacy-regression", action="store_true")
     return parser
 
 
@@ -237,11 +279,13 @@ def main(argv=None, *, repo=REPO):
             paths = LEGACY_BOUND
             read_bytes = reader.read_bytes
             allowed_paths = None
+            validation_mode = "legacy-compat"
         else:
-            view = load_consumer_manifest(repo, args.manifest)
+            view = load_consumer_manifest(repo, args.manifest or DEFAULT_MANIFEST)
             paths = view.paths("release_bound_artifacts")
             read_bytes = view.read_bytes
             allowed_paths = set(view.artifacts)
+            validation_mode = "current-manifest"
     except (CurrentManifestError, OSError, ValueError) as error:
         print(f"[BINDING] manifest load failed: {error}")
         print("release binding: FAIL (1 failures)")
@@ -261,10 +305,14 @@ def main(argv=None, *, repo=REPO):
             cache,
             read_bytes=read_bytes,
             allowed_paths=allowed_paths,
+            mode=validation_mode,
         )
     for f in all_fails:
         print(f"[BINDING] {f}")
-    print(f"release binding: {'FAIL' if all_fails else 'PASS'} ({len(all_fails)} failures)")
+    print(
+        f"release binding: {'FAIL' if all_fails else 'PASS'} "
+        f"({len(all_fails)} failures; mode={validation_mode})"
+    )
     return 1 if all_fails else 0
 
 
