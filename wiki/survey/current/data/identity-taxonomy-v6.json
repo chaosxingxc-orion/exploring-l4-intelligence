@@ -1,8 +1,8 @@
 {
  "artifact_id": "SF-IDENTITY-TAXONOMY-V6-2026-07-19-01",
- "title": "identity taxonomy v5 \u2014 signal-instance identity + load-bearing evidence contract + cross-platform replay (v8 doctoral review Gate MAJOR-1/-2/-3 remediation)",
+ "title": "identity taxonomy v6 \u2014 frozen derivation semantics with schema-v3 evidence contract",
  "date": "2026-07-19",
- "supersession": "v5 supersedes v4 (dated supersession; v4 file retained). Root causes fixed: (1) MAJOR-1 \u2014 the flat per-row signal fields conflated multiple signals, letting a reward property and a control edge from DIFFERENT signals be conjoined into a fabricated causal chain; v5 makes signal INSTANCES first-class (signals[].signal_id), every control edge references a signal_id, and every derivation is an existential over the SAME signal instance; (2) MAJOR-2 \u2014 reconciliation checked consistency of whatever evidence existed, never completeness; v5 adds a required-evidence contract per derived claim (positive quote / structured metadata / absence adjudication), tri-state unknown that never defaults to False inside strict conjunctions, adjudication row-hash binding (any post-adjudication row change invalidates the adjudication), true locator resolution (PDF page range + anchors via pypdf), and release binding of headline numbers; (3) MAJOR-3 \u2014 canonical asset-path resolver so the WSL2 canonical environment replays identically to Windows.",
+ "supersession": "v6 supersedes v5 for active release discovery; derivation semantics unchanged, evidence contract upgraded to schema-v3 row16 + signal4 + edge2 bindings and discriminative PDF anchors.",
  "enums": {
   "core_topology": [
    "single_core",

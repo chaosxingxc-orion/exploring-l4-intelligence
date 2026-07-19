@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
 import unittest
 
 
@@ -56,6 +57,16 @@ RELEASE_RULE = (
     "available through explicit legacy regression."
 )
 
+EXPECTED_ADDED_KEYS = {"schema", "derivation_semantics"}
+EXPECTED_CHANGED_EXISTING_KEYS = {
+    "artifact_id",
+    "title",
+    "supersession",
+    "required_evidence_contract",
+    "release_binding",
+}
+EXPECTED_UNION_DELTA = EXPECTED_ADDED_KEYS | EXPECTED_CHANGED_EXISTING_KEYS
+
 
 def _unique_object(pairs):
     obj = {}
@@ -107,6 +118,33 @@ class TaxonomyV6ContractTest(unittest.TestCase):
             "UNCHANGED_FROM_TAXONOMY_V5",
             self.v6["derivation_semantics"],
         )
+        self.assertEqual(
+            "identity taxonomy v6 — frozen derivation semantics with "
+            "schema-v3 evidence contract",
+            self.v6["title"],
+        )
+        self.assertEqual(
+            "v6 supersedes v5 for active release discovery; derivation "
+            "semantics unchanged, evidence contract upgraded to schema-v3 "
+            "row16 + signal4 + edge2 bindings and discriminative PDF anchors.",
+            self.v6["supersession"],
+        )
+
+    def test_top_level_delta_is_exhaustively_classified(self):
+        v5_keys = set(self.v5)
+        v6_keys = set(self.v6)
+        added_keys = v6_keys - v5_keys
+        removed_keys = v5_keys - v6_keys
+        changed_existing = {
+            key for key in v5_keys & v6_keys if self.v5[key] != self.v6[key]
+        }
+        self.assertEqual(EXPECTED_ADDED_KEYS, added_keys)
+        self.assertEqual(set(), removed_keys)
+        self.assertEqual(EXPECTED_CHANGED_EXISTING_KEYS, changed_existing)
+        self.assertEqual(
+            EXPECTED_UNION_DELTA,
+            added_keys | removed_keys | changed_existing,
+        )
 
     def test_required_evidence_contract_is_exact(self):
         contract = self.v6["required_evidence_contract"]
@@ -131,6 +169,23 @@ class TaxonomyV6ContractTest(unittest.TestCase):
     def test_release_discovery_uses_current_manifest_and_legacy_regression(self):
         self.assertEqual(RELEASE_RULE, self.v6["release_binding"]["rule"])
         self.assertEqual({"rule"}, set(self.v6["release_binding"]))
+
+    def test_strict_loader_rejects_malformed_json_classes(self):
+        cases = [
+            ("duplicate-key", b'{"x": 1, "x": 2}', ValueError),
+            ("non-finite", b'{"x": NaN}', ValueError),
+            ("invalid-utf8", b'{"x": "\xff"}', UnicodeDecodeError),
+            ("trailing-junk", b'{} trailing', json.JSONDecodeError),
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            for name, payload, expected_error in cases:
+                with self.subTest(name=name):
+                    path = os.path.join(temporary, f"{name}.json")
+                    with open(path, "wb") as handle:
+                        handle.write(payload)
+                    with self.assertRaises(expected_error) as raised:
+                        load_strict(path)
+                    self.assertIs(expected_error, type(raised.exception))
 
 
 if __name__ == "__main__":
