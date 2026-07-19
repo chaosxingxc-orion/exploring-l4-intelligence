@@ -27,6 +27,13 @@ class Contract:
     clause: str
 
 
+@dataclass(frozen=True)
+class OrderedContract:
+    name: str
+    section: str
+    clauses: tuple[str, ...]
+
+
 def normalize_clause(text: str) -> str:
     """Remove presentation-only Markdown and normalize wrapping and case."""
     return " ".join(text.casefold().replace("*", "").replace("`", "").split())
@@ -171,18 +178,50 @@ CONTRACTS = (
 )
 
 
+ORDERED_CONTRACTS = (
+    OrderedContract(
+        "stage1b-execution-sequence",
+        "§8",
+        (
+            "When and only when §0's three authorizations are present, Stage-1B proceeds in this order:",
+            "1. record the execution commit, frozen protocol/query hashes, current registries, platform, "
+            "actor, and exposure declaration;",
+            "2. run the first-step interface and phrase-behavior checks without a research model;",
+            "3. execute each frozen query with pagination and deterministic overflow splitting, "
+            "logging every page;",
+            "4. scan registered T1 routes and resolve candidates without discarding duplicate provenance;",
+            "5. create REC-0 rows, screen BFS, then run the triggered DFS and citation-closure procedure "
+            "in §5;",
+            "6. fetch and register PDF + e-print for included, core, sentinel, or claim-bearing work—FETCH "
+            "is registered immediately and an unregistered fetch does not count as read;",
+            "7. create per-paper sidecars during coding—the locator is recorded during coding, never "
+            "appended after interpretation; a row without a locator does not enter an occupancy denominator;",
+            "8. generate coding, reconcile evidence, complete independent adjudication, and only then "
+            "derive tables;",
+            "9. rerun E1/E2/E3, release binding, immutability, context, and dual-platform gates before "
+            "synthesis.",
+        ),
+    ),
+)
+
+
 def _extract_numbered_sections(text: str) -> tuple[dict[str, str], list[str]]:
+    # A numbered section ends at *any* following H2, including §4bis and
+    # Appendix headings.  Otherwise §10 could incorrectly borrow a required
+    # clause moved into a cold appendix at EOF.
     headings = list(
-        re.finditer(
-            r"^## (§(?:10|[0-9]))(?:[ \t]+[^\r\n]*)?$",
-            text,
-            flags=re.MULTILINE,
-        )
+        re.finditer(r"^##(?:[ \t]+[^\r\n]*)?$", text, flags=re.MULTILINE)
     )
     sections: dict[str, str] = {}
     errors: list[str] = []
     for index, heading in enumerate(headings):
-        section_id = heading.group(1)
+        numbered = re.fullmatch(
+            r"##[ \t]+(§(?:10|[0-9]))(?:[ \t]+[^\r\n]*)?",
+            heading.group(0),
+        )
+        if numbered is None:
+            continue
+        section_id = numbered.group(1)
         end = headings[index + 1].start() if index + 1 < len(headings) else len(text)
         if section_id in sections:
             errors.append(f"duplicate-section:{section_id}")
@@ -211,6 +250,32 @@ def validate_protocol_contracts(text: str) -> list[str]:
         pattern = rf"(?<![\w]){re.escape(needle)}(?![\w])"
         if not re.search(pattern, haystack):
             errors.append(f"missing-contract:{contract.name}:{contract.section}")
+    for contract in ORDERED_CONTRACTS:
+        haystack = normalized.get(contract.section, "")
+        cursor = 0
+        ordered = True
+        for clause in contract.clauses:
+            needle = normalize_clause(clause)
+            pattern = rf"(?<![\w]){re.escape(needle)}(?![\w])"
+            match = re.search(pattern, haystack[cursor:])
+            if match is None:
+                ordered = False
+                break
+            cursor += match.end()
+        if not ordered:
+            errors.append(f"ordered-contract:{contract.name}:{contract.section}")
+        if contract.name == "stage1b-execution-sequence":
+            observed_indices = [
+                int(match.group(1))
+                for match in re.finditer(
+                    r"^(\d+)\.[ \t]",
+                    sections.get(contract.section, ""),
+                    flags=re.MULTILINE,
+                )
+            ]
+            failure = f"ordered-contract:{contract.name}:{contract.section}"
+            if observed_indices != list(range(1, 10)) and failure not in errors:
+                errors.append(failure)
     return errors
 
 
@@ -229,7 +294,10 @@ def main(argv: list[str] | None = None) -> int:
         for failure in failures:
             print(f"[sf_protocol_contract] FAIL: {failure}", file=sys.stderr)
         return 1
-    print(f"[sf_protocol_contract] PASS ({len(CONTRACTS)} exact normalized contracts)")
+    print(
+        f"[sf_protocol_contract] PASS ({len(CONTRACTS)} exact normalized + "
+        f"{len(ORDERED_CONTRACTS)} ordered contracts)"
+    )
     return 0
 
 

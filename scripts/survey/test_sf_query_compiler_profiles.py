@@ -12,6 +12,7 @@ import contextlib
 import io
 import os
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -409,6 +410,48 @@ class ProtocolStructureTests(unittest.TestCase):
                 mutated = self.text.replace(old, new, 1)
                 self.assertTrue(validate_protocol_contracts(mutated), name)
 
+    def test_section_contracts_stop_before_appendix_h2(self) -> None:
+        from sf_protocol_contract import validate_protocol_contracts
+
+        lifecycle = re.search(
+            r"Consolidation is mandatory when a third correction.*?"
+            r"A fourth amendment is forbidden before consolidation\.",
+            self.text,
+            flags=re.DOTALL,
+        )
+        self.assertIsNotNone(lifecycle)
+        appendix = "## Appendix A — Legacy disposition routing (not an interpretive dependency)"
+        self.assertIn(appendix, self.text)
+        moved = self.text.replace(lifecycle.group(0), "", 1).replace(
+            appendix,
+            appendix + "\n\n" + lifecycle.group(0),
+            1,
+        )
+        failures = validate_protocol_contracts(moved)
+        self.assertIn(
+            "missing-contract:third-correction-and-fourth-amendment-lifecycle:§10",
+            failures,
+        )
+
+    def test_section_8_execution_steps_are_exact_and_strictly_ordered(self) -> None:
+        from sf_protocol_contract import validate_protocol_contracts
+
+        step_2 = (
+            "2. run the first-step interface and phrase-behavior checks without a "
+            "research model;"
+        )
+        step_3 = (
+            "3. execute each frozen query with pagination and deterministic overflow "
+            "splitting, logging every page;"
+        )
+        for step in (step_2, step_3):
+            self.assertIn(step, _normalize_prose(self.text))
+        marker = "2. __ORDER_SWAP_SENTINEL__;"
+        mutated = self.text.replace(step_2, marker, 1)
+        mutated = mutated.replace(step_3, step_2, 1).replace(marker, step_3, 1)
+        failures = validate_protocol_contracts(mutated)
+        self.assertIn("ordered-contract:stage1b-execution-sequence:§8", failures)
+
     def test_non_normative_section_4_narrative_mutations_do_not_change_contract(self) -> None:
         from sf_protocol_contract import validate_protocol_contracts
 
@@ -606,6 +649,112 @@ class CompilerCliTests(unittest.TestCase):
             ):
                 compiler.fsync_parent_directory(parent)
             open_mock.assert_not_called()
+
+    def test_successful_publish_keeps_parent_fsync_and_leaves_no_debris(self) -> None:
+        for existing_target, expected_fsyncs in ((False, 1), (True, 2)):
+            with self.subTest(existing_target=existing_target), tempfile.TemporaryDirectory() as td:
+                parent = Path(td)
+                destination = parent / "queries.jsonl"
+                if existing_target:
+                    destination.write_bytes(b"old\n")
+                with mock.patch.object(
+                    compiler, "fsync_parent_directory"
+                ) as fsync_mock:
+                    compiler.atomic_write_bytes(destination, b"new\n")
+                self.assertEqual(fsync_mock.call_count, expected_fsyncs)
+                self.assertEqual(destination.read_bytes(), b"new\n")
+                self.assertEqual([path.name for path in parent.iterdir()], ["queries.jsonl"])
+
+    def test_parent_fsync_failure_restores_existing_target_bytes_and_mode(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            destination = Path(td) / "queries.jsonl"
+            destination.write_bytes(b"old\n")
+            destination.chmod(0o640)
+            old_mode = stat.S_IMODE(destination.stat().st_mode)
+            with mock.patch.object(
+                compiler,
+                "fsync_parent_directory",
+                side_effect=[None, OSError("publish-fsync"), None],
+            ) as fsync_mock:
+                with self.assertRaisesRegex(OSError, "publish-fsync"):
+                    compiler.atomic_write_bytes(destination, b"new\n")
+            self.assertEqual(destination.read_bytes(), b"old\n")
+            self.assertEqual(stat.S_IMODE(destination.stat().st_mode), old_mode)
+            self.assertEqual(fsync_mock.call_count, 3)
+            self.assertEqual([path.name for path in Path(td).iterdir()], ["queries.jsonl"])
+
+    def test_parent_fsync_failure_removes_fresh_target_and_new_parent_chain(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            existing = Path(td) / "existing"
+            existing.mkdir()
+            destination = existing / "new" / "deep" / "queries.jsonl"
+            with mock.patch.object(
+                compiler,
+                "fsync_parent_directory",
+                side_effect=[OSError("publish-fsync"), None],
+            ) as fsync_mock:
+                with self.assertRaisesRegex(OSError, "publish-fsync"):
+                    compiler.atomic_write_bytes(destination, b"new\n")
+            self.assertEqual(fsync_mock.call_count, 2)
+            self.assertTrue(existing.is_dir())
+            self.assertFalse((existing / "new").exists())
+
+    def test_rollback_replace_failure_is_composite_and_keeps_recovery_backup(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            parent = Path(td)
+            destination = parent / "queries.jsonl"
+            destination.write_bytes(b"old\n")
+            real_replace = compiler.os.replace
+            replace_calls = 0
+
+            def fail_second_replace(source, target):
+                nonlocal replace_calls
+                replace_calls += 1
+                if replace_calls == 2:
+                    raise OSError("rollback-replace")
+                return real_replace(source, target)
+
+            with (
+                mock.patch.object(compiler.os, "replace", side_effect=fail_second_replace),
+                mock.patch.object(
+                    compiler,
+                    "fsync_parent_directory",
+                    side_effect=[None, OSError("publish-fsync")],
+                ),
+            ):
+                with self.assertRaises(compiler.AtomicPublishRollbackError) as caught:
+                    compiler.atomic_write_bytes(destination, b"new\n")
+
+            message = str(caught.exception)
+            self.assertIn("publish-fsync", message)
+            self.assertIn("rollback-replace", message)
+            self.assertEqual(destination.read_bytes(), b"new\n")
+            backups = list(parent.glob(".queries.jsonl.*.bak"))
+            self.assertEqual(len(backups), 1)
+            self.assertEqual(backups[0].read_bytes(), b"old\n")
+            self.assertEqual(list(parent.glob("*.tmp")), [])
+
+    def test_rollback_fsync_failure_is_composite_without_backup_debris(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            parent = Path(td)
+            destination = parent / "queries.jsonl"
+            destination.write_bytes(b"old\n")
+            with mock.patch.object(
+                compiler,
+                "fsync_parent_directory",
+                side_effect=[
+                    None,
+                    OSError("publish-fsync"),
+                    OSError("rollback-fsync"),
+                ],
+            ):
+                with self.assertRaises(compiler.AtomicPublishRollbackError) as caught:
+                    compiler.atomic_write_bytes(destination, b"new\n")
+            message = str(caught.exception)
+            self.assertIn("publish-fsync", message)
+            self.assertIn("rollback-fsync", message)
+            self.assertEqual(destination.read_bytes(), b"old\n")
+            self.assertEqual([path.name for path in parent.iterdir()], ["queries.jsonl"])
 
     def test_main_turns_atomic_oserror_into_controlled_failure(self) -> None:
         with tempfile.TemporaryDirectory() as td:
