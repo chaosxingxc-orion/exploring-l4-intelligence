@@ -1,0 +1,414 @@
+{
+ "artifact_id": "SF-IDENTITY-TAXONOMY-V6-TEST-2026-07-19-01",
+ "inputs": {
+  "taxonomy": "wiki/survey/current/data/identity-taxonomy-v6.json",
+  "coding": "wiki/survey/current/data/known-item-coding-v7.json",
+  "sidecars": [
+   "2026.findings-acl.1243.sidecar.json",
+   "2026.findings-acl.1724.sidecar.json",
+   "2026.findings-acl.511.sidecar.json",
+   "2602.16485.sidecar.json",
+   "2604.16529.sidecar.json",
+   "2605.08083.sidecar.json",
+   "2606.01667.sidecar.json",
+   "2606.03054.sidecar.json"
+  ]
+ },
+ "platform": {
+  "os": "nt",
+  "python": "3.14.3"
+ },
+ "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
+ "checks": [
+  {
+   "id": "V1",
+   "check": "ordered structure -> row16/signal4/edge2 binding -> source contract",
+   "result": "PASS",
+   "detail": "{'structure': [], 'bindings': [], 'source': []}"
+  },
+  {
+   "id": "V2",
+   "check": "unknown never satisfies topology or strict access bits",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V3",
+   "check": "frozen killers K1-K7",
+   "result": "PASS",
+   "detail": "{'k1': False, 'k2': True, 'k3': True, 'k4': False, 'k5': False, 'k6': False, 'k7': False}"
+  },
+  {
+   "id": "V3a",
+   "check": "frozen acceptance A1-A7",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V3b",
+   "check": "frozen author expectations including multi-signal A5",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V4",
+   "check": "frozen author negative controls",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V5",
+   "check": "independent counterexamples x16, including A8",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V5b",
+   "check": "topology sensitivity is non-vacuous",
+   "result": "PASS",
+   "detail": "A=True strict=False"
+  },
+  {
+   "id": "V6",
+   "check": "frozen occupancy recomputes deterministically with dynamic denominators",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "V7",
+   "check": "active single-write, ledger/hash/canon/TeX/PDF, actors, and status reconcile",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "V8",
+   "check": "frozen and schema-v3 mutations all fail closed with legitimate rehash",
+   "result": "PASS",
+   "detail": "{'baseline': {'structure': [], 'bindings': [], 'source': []}, 'cases': 26}"
+  },
+  {
+   "id": "V9",
+   "check": "generic twelfth row passes and generic value/missing-binding mutations fail",
+   "result": "PASS",
+   "detail": "{'good_structure': [], 'good_bindings': [], 'source': ['__fx12__#path:signal:s1:source:evidence-value-mismatch'], 'use': ['__fx12__#path:edge:0:signal_use:evidence-value-mismatch'], 'selection': ['__fx12__#path:row:selection_object:evidence-value-mismatch'], 'missing': ['__fx12__#path:edge:0:decision_right:required-evidence-missing']}"
+  },
+  {
+   "id": "V10",
+   "check": "taxonomy-v6 occupancy equals the frozen taxonomy-v5 baseline",
+   "result": "PASS",
+   "detail": "{'reward_guided': '6/11', 'rq_sys_compatible': '5/11', 'method_candidate': '0/11', 'reward_guided_selection': '4/11', 'trajectory_pool': '2/11'}"
+  }
+ ],
+ "occupancy": {
+  "policy_A": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "reward_guided_selection": {
+    "method_paths": [
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "4/11",
+    "unique_works": [
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "3/8"
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  },
+  "sensitivity_strict_topology": {
+   "n_method_paths": 11,
+   "n_unique_works": 8,
+   "is_reward_guided": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "6/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_rq_sys_control_compatible": {
+    "method_paths": [
+     "2026.findings-acl.1243#closed-prompt-only",
+     "2026.findings-acl.1243#open-sft-variant",
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "5/11",
+    "unique_works": [
+     "2026.findings-acl.1243",
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "4/8"
+   },
+   "is_s0_core_compatible": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "is_project_method_candidate": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   },
+   "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+    "trajectory": {
+     "method_paths": [
+      "2604.16529#rtv",
+      "2604.16529#rtv-pdr-pipeline"
+     ],
+     "n_paths": "2/11",
+     "unique_works": [
+      "2604.16529"
+     ],
+     "n_works": "1/8"
+    }
+   },
+   "reward_guided_selection": {
+    "method_paths": [
+     "2026.findings-acl.1724#pipeline",
+     "2026.findings-acl.511#prm-guided-search",
+     "2604.16529#rtv",
+     "2604.16529#rtv-pdr-pipeline"
+    ],
+    "n_paths": "4/11",
+    "unique_works": [
+     "2026.findings-acl.1724",
+     "2026.findings-acl.511",
+     "2604.16529"
+    ],
+    "n_works": "3/8"
+   },
+   "learned_rm_prm_AND_pool": {
+    "method_paths": [
+     "2026.findings-acl.511#prm-guided-search"
+    ],
+    "n_paths": "1/11",
+    "unique_works": [
+     "2026.findings-acl.511"
+    ],
+    "n_works": "1/8"
+   },
+   "core_native_audio_or_omni": {
+    "method_paths": [],
+    "n_paths": "0/11",
+    "unique_works": [],
+    "n_works": "0/8"
+   }
+  }
+ },
+ "mutation_results": {
+  "E1_edge_use_flip": [
+   "2026.findings-acl.1724#pipeline:edge-binding:0:signal_use:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:edge-use-not-in-signal:s_stage_judge:select",
+   "2026.findings-acl.1724#pipeline:edge:0:signal_use:evidence-value-mismatch"
+  ],
+  "E2_signal_evidence_p9999": [
+   "2606.01667#agentic-orchestration:signal:s_consensus:page-token-without-anchor:p9999"
+  ],
+  "E3_bare_in_range_page": [
+   "2606.01667#agentic-orchestration:row-locator:page-token-without-anchor:p1"
+  ],
+  "E3b_generic_anchor_the": [
+   "2606.01667#agentic-orchestration:row-locator:page-anchor-too-weak:p1:the"
+  ],
+  "E3c_frequent_phrase": [
+   "2606.01667#agentic-orchestration:row-locator:page-anchor-not-discriminative:p1:the orchestrator:51"
+  ],
+  "E4_signal_form_flip": [
+   "2026.findings-acl.1724#pipeline:signal-binding:s_stage_judge:form:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:signal:s_stage_judge:form:evidence-value-mismatch"
+  ],
+  "E6_signal_source_flip": [
+   "2026.findings-acl.1724#pipeline:signal-binding:s_stage_judge:source:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:signal:s_stage_judge:source:evidence-value-mismatch"
+  ],
+  "E7_edge_use_coherent_flip": [
+   "2026.findings-acl.1724#pipeline:edge-binding:0:signal_use:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:edge:0:signal_use:evidence-value-mismatch"
+  ],
+  "E8_edge_right_coherent_flip": [
+   "2026.findings-acl.1724#pipeline:edge-binding:0:decision_right:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:edge:0:decision_right:evidence-value-mismatch"
+  ],
+  "E9_selection_object_flip": [
+   "2026.findings-acl.1724#pipeline:row-binding:selection_object:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:row:selection_object:evidence-value-mismatch"
+  ],
+  "E10_explicit_selection_flip": [
+   "2026.findings-acl.1724#pipeline:pool-consistency",
+   "2026.findings-acl.1724#pipeline:row-binding:explicit_candidate_pool_selection:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:row:explicit_candidate_pool_selection:evidence-value-mismatch"
+  ],
+  "E11_missing_signal_source_binding": [
+   "2026.findings-acl.1724#pipeline:signal:s_stage_judge:source:required-evidence-missing"
+  ],
+  "E12_missing_edge_right_binding": [
+   "2026.findings-acl.1724#pipeline:edge:0:decision_right:required-evidence-missing"
+  ],
+  "wrong_horizon": [
+   "2026.findings-acl.1243#open-sft-variant:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2026.findings-acl.1243#open-sft-variant:row-binding:control_horizon:evidence-value-mismatch",
+   "2026.findings-acl.1243#open-sft-variant:row:control_horizon:evidence-value-mismatch"
+  ],
+  "double_flip_horizon_plus_evidence": [
+   "2026.findings-acl.1243#open-sft-variant:adjudication-row-hash-mismatch (post-adjudication change)"
+  ],
+  "fake_page_p9999": [
+   "2606.01667#agentic-orchestration:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2606.01667#agentic-orchestration:row-locator:page-out-of-range:p9999/29"
+  ],
+  "edge_signal_lifecycle_mismatch": [
+   "2026.findings-acl.1243#open-sft-variant:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2026.findings-acl.1243#open-sft-variant:edge-signal-lifecycle-mismatch:s_judge"
+  ],
+  "edge_signal_identity_mismatch": [
+   "2026.findings-acl.511#prm-guided-search:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2026.findings-acl.511#prm-guided-search:edge-references-unknown-signal:s_ghost",
+   "2026.findings-acl.511#prm-guided-search:edge-unknown-signal:s_ghost"
+  ],
+  "wrong_decision_right": [
+   "2026.findings-acl.1724#pipeline:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2026.findings-acl.1724#pipeline:edge-right-not-in-row:branch",
+   "2026.findings-acl.1724#pipeline:row-binding:decision_rights:evidence-value-mismatch",
+   "2026.findings-acl.1724#pipeline:row:decision_rights:evidence-value-mismatch"
+  ],
+  "wrong_selection_policy": [
+   "2604.16529#pdr-random-k:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2604.16529#pdr-random-k:row-binding:selection_policy:evidence-value-mismatch",
+   "2604.16529#pdr-random-k:row:selection_policy:evidence-value-mismatch"
+  ],
+  "wrong_work": [
+   "2606.01667#agentic-orchestration:edge-binding:2:signal_use:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:edge-locator:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:method-path-prefix-vs-work-id:bogus-work",
+   "2606.01667#agentic-orchestration:row-binding:selection_object:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:row-locator:pdf-unreadable-for-page-check",
+   "bogus-work:anchor-vs-work-id:2606.01667",
+   "bogus-work:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "wrong_modality": [
+   "2606.01667#agentic-orchestration:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2606.01667#agentic-orchestration:row-binding:core_native_modality:evidence-value-mismatch",
+   "2606.01667#agentic-orchestration:row:core_native_modality:evidence-value-mismatch"
+  ],
+  "wrong_sha": [
+   "2606.01667#agentic-orchestration:edge-binding:2:signal_use:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:edge-locator:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:row-binding:selection_object:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:row-locator:pdf-unreadable-for-page-check",
+   "2606.01667:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "wrong_kind": [
+   "2606.01667#agentic-orchestration:edge-binding:2:signal_use:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:edge-locator:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:row-binding:selection_object:pdf-unreadable-for-page-check",
+   "2606.01667#agentic-orchestration:row-locator:pdf-unreadable-for-page-check",
+   "2606.01667:ledger-row-binding-failed:id+kind+sha256"
+  ],
+  "nonsense_locator": [
+   "2606.01667#agentic-orchestration:adjudication-row-hash-mismatch (post-adjudication change)",
+   "2606.01667#agentic-orchestration:row-locator:locator-unverifiable:'nonsense'"
+  ],
+  "E5_coding_hand_edit": [
+   "2026.findings-acl.1243#closed-prompt-only:row:control_horizon:evidence-value-mismatch",
+   "single-write:coding-not-byte-identical-to-generator-output"
+  ]
+ },
+ "summary": "13/13 PASS",
+ "verdict": "PASS"
+}
