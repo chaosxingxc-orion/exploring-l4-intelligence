@@ -212,6 +212,22 @@ class ManifestConsumerContractTests(unittest.TestCase):
             "wiki/survey/current/com9.any",
             "wiki/survey/current/LPT1",
             "wiki/survey/current/lpt9.txt",
+            "wiki/survey/current/CONIN$",
+            "wiki/survey/current/conout$.txt",
+            "wiki/survey/current/COM¹.md",
+            "wiki/survey/current/lpt³.log",
+            "wiki/survey/current/less<than.md",
+            "wiki/survey/current/greater>than.md",
+            'wiki/survey/current/double"quote.md',
+            "wiki/survey/current/pipe|name.md",
+            "wiki/survey/current/question?.md",
+            "wiki/survey/current/star*.md",
+            "wiki/survey/current/right-to-left-\u202e.md",
+            "wiki/survey/current/line-\u2028separator.md",
+            "wiki/survey/current/paragraph-\u2029separator.md",
+            "wiki/survey/current/private-\ue000.md",
+            "wiki/survey/current/unassigned-\u0378.md",
+            "wiki/survey/current/e\u0301.md",
         ):
             document = fixture.manifest_document()
             document["files"][-1] = dict(document["files"][-1])
@@ -256,6 +272,31 @@ class ManifestConsumerContractTests(unittest.TestCase):
             self.current_manifest.load_consumer_manifest(
                 fixture.root, fixture.manifest_path
             )
+
+    def test_portable_path_accepts_safe_nfc_names(self):
+        safe_paths = (
+            "wiki/survey/current/com10.md",
+            "wiki/survey/current/lpt10.json",
+            "wiki/survey/current/conifer.md",
+            "wiki/survey/current/auxiliary.md",
+            "wiki/survey/current/普通NFC中文路径.md",
+            "wiki/survey/current/é.md",
+        )
+        for path in safe_paths:
+            with self.subTest(path=path):
+                self.assertEqual(
+                    path, self.current_manifest.canonical_consumer_path(path)
+                )
+
+        for path in (
+            "wiki/survey/current/surrogate-\ud800.md",
+            "wiki/survey/current/   ",
+        ):
+            with self.subTest(path=repr(path)):
+                with self.assertRaisesRegex(
+                    self.current_manifest.CurrentManifestError, "not portable"
+                ):
+                    self.current_manifest.canonical_consumer_path(path)
 
     @unittest.skipUnless(hasattr(os, "symlink"), "symlink unavailable")
     def test_manifest_and_artifact_symlinks_are_not_followed(self):
@@ -436,6 +477,16 @@ class ManifestConsumerContractTests(unittest.TestCase):
             )
         self.assertNotEqual(0, raised.exception.code)
 
+    def test_release_cli_does_not_default_explicit_empty_manifest(self):
+        fixture = self.fixture()
+        for value in ("", "   "):
+            with self.subTest(value=repr(value)):
+                code, output = self.run_main(
+                    self.release, ["--manifest", value], fixture.root
+                )
+                self.assertNotEqual(0, code, output)
+                self.assertRegex(output, r"nonempty|not portable")
+
     def test_quantifier_defaults_to_manifest_and_positionals_remain_focused(self):
         fixture = self.fixture()
         code, output = self.run_main(self.quantifier, [], fixture.root)
@@ -472,6 +523,16 @@ class ManifestConsumerContractTests(unittest.TestCase):
                 repo=fixture.root,
             )
         self.assertNotEqual(0, raised.exception.code)
+
+    def test_quantifier_cli_does_not_default_explicit_empty_manifest(self):
+        fixture = self.fixture()
+        for value in ("", "   "):
+            with self.subTest(value=repr(value)):
+                code, output = self.run_main(
+                    self.quantifier, ["--manifest", value], fixture.root
+                )
+                self.assertNotEqual(0, code, output)
+                self.assertRegex(output, r"nonempty|not portable")
 
     def test_quantifier_accepts_explicit_per_query_category_and_review_scope(self):
         scoped_lines = (

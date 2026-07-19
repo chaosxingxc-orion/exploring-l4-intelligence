@@ -281,7 +281,10 @@ def main(argv=None, *, repo=REPO):
             allowed_paths = None
             validation_mode = "legacy-compat"
         else:
-            view = load_consumer_manifest(repo, args.manifest or DEFAULT_MANIFEST)
+            manifest_path = (
+                DEFAULT_MANIFEST if args.manifest is None else args.manifest
+            )
+            view = load_consumer_manifest(repo, manifest_path)
             paths = view.paths("release_bound_artifacts")
             read_bytes = view.read_bytes
             allowed_paths = set(view.artifacts)

@@ -239,10 +239,15 @@ def canonical_consumer_path(value: object, *, label: str = "manifest path") -> s
         raise CurrentManifestError(f"{label} is not a nonempty string")
     if (
         "\\" in value
-        or ":" in value
+        or any(character in '<>:"|?*' for character in value)
         or value.startswith("/")
         or re.match(r"^[A-Za-z]:", value)
-        or any(unicodedata.category(character) == "Cc" for character in value)
+        or unicodedata.normalize("NFC", value) != value
+        or any(
+            unicodedata.category(character).startswith("C")
+            or unicodedata.category(character) in {"Zl", "Zp"}
+            for character in value
+        )
     ):
         raise CurrentManifestError(
             f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
@@ -252,7 +257,10 @@ def canonical_consumer_path(value: object, *, label: str = "manifest path") -> s
         raise CurrentManifestError(
             f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
         )
-    reserved = re.compile(r"(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])", re.IGNORECASE)
+    reserved = re.compile(
+        r"(?:CON|PRN|AUX|NUL|CONIN\$|CONOUT\$|COM[1-9¹²³]|LPT[1-9¹²³])",
+        re.IGNORECASE,
+    )
     for part in parts:
         if part.endswith((" ", ".")) or reserved.fullmatch(part.split(".", 1)[0]):
             raise CurrentManifestError(

@@ -82,7 +82,10 @@ def main(argv=None, *, repo=REPO):
             read_bytes = reader.read_bytes
             scope = "focused-positional"
         else:
-            view = load_consumer_manifest(repo, args.manifest or DEFAULT_MANIFEST)
+            manifest_path = (
+                DEFAULT_MANIFEST if args.manifest is None else args.manifest
+            )
+            view = load_consumer_manifest(repo, manifest_path)
             files = view.paths("prose_scan_paths")
             read_bytes = view.read_bytes
             scope = "current-manifest"
