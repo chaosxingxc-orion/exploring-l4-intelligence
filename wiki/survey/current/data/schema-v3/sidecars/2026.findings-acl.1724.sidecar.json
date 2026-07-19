@@ -1,0 +1,228 @@
+{
+ "sidecar_id": "SF-SIDECAR-2026.findings-acl.1724-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2026.findings-acl.1724",
+ "work_title": "Scaling Unverifiable Rewards (Selective TTS)",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+  "id": "2026.findings-acl.1724",
+  "kind": "pdf",
+  "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": true,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2026.findings-acl.1724#pipeline",
+   "core_topology": "multi_model_federation",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_stage_judge",
+     "form": "scalar_score",
+     "source": "llm_judge",
+     "lifecycle": "online_step",
+     "uses": [
+      "prune"
+     ],
+     "evidence": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      },
+      "uses": {
+       "value": [
+        "prune"
+       ],
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      }
+     }
+    },
+    {
+     "signal_id": "s_final_judger",
+     "form": "scalar_score",
+     "source": "llm_judge",
+     "lifecycle": "terminal",
+     "uses": [
+      "select"
+     ],
+     "evidence": "canon: 'judger 排序最高者,选优非融合'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "LLM-as-Judge（不可验证奖励,无 rule/gold）"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "judger 排序最高者,选优非融合"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "judger 排序最高者,选优非融合"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_stage_judge",
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "source_locator": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选'",
+     "edge_semantics": "stage-local scores decide which candidates advance to the next pipeline stage",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "prune",
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      },
+      "decision_right": {
+       "value": "branch",
+       "kind": "canon",
+       "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+      }
+     }
+    }
+   ],
+   "selection_object": "candidate_output",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "scored_select",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "权重全不动"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全系统零训练"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "canon",
+     "quote": "所有 agent 与 judge 均 prompt-based frozen"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "选 judger（选择非训练）"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "部署 label-free"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "根本无 gold 可泄"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "absence",
+     "note": "绘图代码执行+报错回溯=任务环境,无外部新信息获取",
+     "scope": "DFS 轴7/轴12 已检视"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "text/API"
+    },
+    "core_topology": {
+     "value": "multi_model_federation",
+     "kind": "canon",
+     "quote": "多智能体异构双主干"
+    },
+    "core_native_modality": {
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "图表/数据科学视觉"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "多阶段流水线+固定预算多轮"
+    },
+    "decision_rights": {
+     "value": [
+      "branch"
+     ],
+     "kind": "canon",
+     "quote": "stage-local 评估器决定逐阶段剪枝"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "显式 K 池"
+    },
+    "selection_policy": {
+     "value": "scored_select",
+     "kind": "canon",
+     "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+    },
+    "selection_object": {
+     "value": "candidate_output",
+     "kind": "canon",
+     "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选"
+    }
+   },
+   "source_locator": "canon: '每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选' (α 剪枝/固定预算)",
+   "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 rights=['branch'] dated correction 正确(固定预算非信号控制,stop 权撤回);v5-schema 迁移:双信号拆分(stage 在线/final 终态)——A5 多信号身份样例;〔iso-adj-B2 再裁决 AGREE:双 judge 拆分被判「强佐证忠实」——α=0.8 未对齐负结果直接断言两评估器为可失配的独立实体;在线边落在线信号、终态 judger 无边=MAJOR-1 拼接的精确拆除;rights=['branch'] 在拆分下维持正确〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "STTS:在线 stage scalar 驱动候选晋级;终态 judger 选优为独立 terminal 信号无前向边",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "26398838ae228ee7cdce6ed9247b5fa05bcc25b116ba1532e8fe0db89d65d6b0"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

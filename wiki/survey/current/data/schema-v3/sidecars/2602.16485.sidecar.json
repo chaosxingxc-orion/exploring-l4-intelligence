@@ -1,0 +1,218 @@
+{
+ "sidecar_id": "SF-SIDECAR-2602.16485-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2602.16485",
+ "work_title": "Team of Thoughts: Efficient Test-time Scaling through Orchestrated Tool Calling",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2602.16485",
+  "kind": "pdf",
+  "sha256": "92e1329334fe3ff98fa30d0235f365bedd02cec4f23c1ba1c6b6415aa0a58d32",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": true,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2602.16485#calibrated-orchestration",
+   "core_topology": "multi_model_federation",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_profile",
+     "form": "text_critique",
+     "source": "llm_judge",
+     "lifecycle": "inference_pre_context",
+     "uses": [
+      "route",
+      "synthesize_input"
+     ],
+     "evidence": "canon: '推理时画像喂 orchestrator'",
+     "claim_evidence": {
+      "form": {
+       "value": "text_critique",
+       "kind": "canon",
+       "quote": "推理时画像喂 orchestrator"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "推理时画像喂 orchestrator"
+      },
+      "lifecycle": {
+       "value": "inference_pre_context",
+       "kind": "canon",
+       "quote": "推理时画像喂 orchestrator"
+      },
+      "uses": {
+       "value": [
+        "route",
+        "synthesize_input"
+       ],
+       "kind": "canon",
+       "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+      }
+     }
+    }
+   ],
+   "control_horizon": "terminal",
+   "decision_rights": [
+    "route",
+    "tool_call",
+    "synthesize"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_profile",
+     "signal_use": "route",
+     "decision_right": "route",
+     "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合'",
+     "edge_semantics": "offline-calibrated capability profiles condition which tool agents are activated (pre-context)",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "route",
+       "kind": "canon",
+       "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+      },
+      "decision_right": {
+       "value": "route",
+       "kind": "canon",
+       "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+      }
+     }
+    },
+    {
+     "signal_id": "s_profile",
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "source_locator": "canon: 'orchestrator 聚合/合成'",
+     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "synthesize_input",
+       "kind": "canon",
+       "quote": "orchestrator 聚合/合成"
+      },
+      "decision_right": {
+       "value": "synthesize",
+       "kind": "canon",
+       "quote": "orchestrator 聚合/合成"
+      }
+     }
+    }
+   ],
+   "selection_object": "tool_agent",
+   "terminal_operator": "synthesize",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "profile_route",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结、无梯度"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无梯度训练"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "带标签校准集"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "calibration 与 self-assessment 用 ground truth"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理时靠画像匹配"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "50% of AIME2025 serves as the calibration set for AIME2024"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "工具=其它 LLM"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本"
+    },
+    "core_topology": {
+     "value": "multi_model_federation",
+     "kind": "canon",
+     "quote": "7 个不同后训练模型族"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "数学+代码"
+    },
+    "control_horizon": {
+     "value": "terminal",
+     "kind": "canon",
+     "quote": "单响应为主"
+    },
+    "decision_rights": {
+     "value": [
+      "route",
+      "tool_call",
+      "synthesize"
+     ],
+     "kind": "canon",
+     "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=激活的 k 个工具候选"
+    },
+    "selection_policy": {
+     "value": "profile_route",
+     "kind": "canon",
+     "quote": "推理时画像喂 orchestrator"
+    },
+    "selection_object": {
+     "value": "tool_agent",
+     "kind": "canon",
+     "quote": "K 池=激活的 k 个工具候选"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=激活的 k 个工具候选"
+    }
+   },
+   "source_locator": "canon: 'orchestrator 凭画像+校准决定激活哪些工具/评估/聚合' (Eq 校准分离线)",
+   "adjudication_provenance": "v6 复审 P1-1 裁决+CE-1a+iso-adj-A AGREE(缺文档边观察已于 v4 世代补);v5-schema 迁移:单信号 pre-context;〔iso-adj-A2 再裁决 AGREE,观察:lifecycle 编 offline_calibration 亦可辩(画像离线 gold 构造)——两值下边均非 LIVE、gold 依赖已由两 strict 位显著承载,inference_pre_context(画像作静态先验入上下文)被判 defensible,维持〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "ToT:profile-conditioned orchestration boundary;pre-context 边不计入 rq",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "5d721ea22f4d388566f927b3752b2977a46f65602a7250fb03abe65007fd5d2b"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

@@ -1,0 +1,424 @@
+{
+ "sidecar_id": "SF-SIDECAR-2026.findings-acl.1243-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2026.findings-acl.1243",
+ "work_title": "DeepVerifier (Inference-Time Scaling of Verification)",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-18-sf-access-log-v4-review.jsonl",
+  "id": "2026.findings-acl.1243",
+  "kind": "pdf",
+  "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_judge",
+     "form": "scalar_score",
+     "source": "llm_judge",
+     "lifecycle": "online_step",
+     "uses": [
+      "revise",
+      "stop_budget"
+     ],
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_judge",
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "judge score <=2 rejects the answer and feeds corrective feedback into another attempt",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "revise",
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      },
+      "decision_right": {
+       "value": "retry",
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
+    },
+    {
+     "signal_id": "s_judge",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "stop_budget",
+       "kind": "canon",
+       "quote": "循环至接受或上限"
+      },
+      "decision_right": {
+       "value": "stop",
+       "kind": "canon",
+       "quote": "循环至接受或上限"
+      }
+     }
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "整系统 frozen/prompt-only"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "整系统 frozen/prompt-only"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "分类法由人工标注 555 error points 离线构建"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "无按标签人工选模型步骤;rubric 为人工分类法非模型选择",
+     "scope": "DFS 轴3 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期不用 test gold"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期不用 test gold"
+    },
+    "inference_external_new_information": {
+     "value": true,
+     "kind": "canon",
+     "quote": "检索新外部证据（web = new-info 获取）"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API 文本"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "策略 DRA+分解/验证/judge 三子 agent"
+    },
+    "core_native_modality": {
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "主实验 Claude-3.7-Sonnet"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "多步轨迹+跨轮迭代"
+    },
+    "decision_rights": {
+     "value": [
+      "retry",
+      "stop",
+      "tool_call"
+     ],
+     "kind": "canon",
+     "quote": "reject→反馈驱动 retry"
+    },
+    "candidate_pool_exists": {
+     "value": false,
+     "kind": "canon",
+     "quote": "序贯精修非 K 池"
+    },
+    "selection_policy": {
+     "value": "none",
+     "kind": "canon",
+     "quote": "序贯精修非 K 池"
+    },
+    "selection_object": {
+     "value": "none",
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    },
+    "explicit_candidate_pool_selection": {
+     "value": false,
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    }
+   },
+   "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮)",
+   "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "1814209d35c58a0ef44c8147f7c0b0b2e1033793f559a180690a9bcd2ebac2bf"
+  },
+  {
+   "core_weight_update": true,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": true,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_judge",
+     "form": "scalar_score",
+     "source": "llm_judge",
+     "lifecycle": "online_step",
+     "uses": [
+      "revise",
+      "stop_budget"
+     ],
+     "evidence": "canon: 'judge 综合打 1–4 分'",
+     "claim_evidence": {
+      "form": {
+       "value": "scalar_score",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "judge 综合打 1–4 分"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "多步轨迹+跨轮迭代"
+      },
+      "uses": {
+       "value": [
+        "revise",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "retry",
+    "stop",
+    "tool_call"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_judge",
+     "signal_use": "revise",
+     "decision_right": "retry",
+     "source_locator": "canon: '≤2 判错→纠错反馈回喂重试'",
+     "edge_semantics": "same loop as closed variant; policy backbone SFT-tuned",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "revise",
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      },
+      "decision_right": {
+       "value": "retry",
+       "kind": "canon",
+       "quote": "≤2 判错→纠错反馈回喂重试"
+      }
+     }
+    },
+    {
+     "signal_id": "s_judge",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: '循环至接受或上限'",
+     "edge_semantics": "verifier acceptance (or round cap) terminates the loop",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "stop_budget",
+       "kind": "canon",
+       "quote": "循环至接受或上限"
+      },
+      "decision_right": {
+       "value": "stop",
+       "kind": "canon",
+       "quote": "循环至接受或上限"
+      }
+     }
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "accept_reject",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": true,
+     "kind": "canon",
+     "quote": "开源变体对策略主干 SFT"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "absence",
+     "note": "SFT 作用于策略主干;验证侧组件未见另行训练",
+     "scope": "DFS 轴3 已检视"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "分类法由人工标注 555 error points 离线构建"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "无按标签人工选模型步骤",
+     "scope": "DFS 轴3 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期不用 test gold"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理期不用 test gold"
+    },
+    "inference_external_new_information": {
+     "value": true,
+     "kind": "canon",
+     "quote": "检索新外部证据（web = new-info 获取）"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API 文本"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "策略 DRA+分解/验证/judge 三子 agent"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "微调 Qwen3-8B"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "多步轨迹+跨轮迭代"
+    },
+    "decision_rights": {
+     "value": [
+      "retry",
+      "stop",
+      "tool_call"
+     ],
+     "kind": "canon",
+     "quote": "reject→反馈驱动 retry"
+    },
+    "candidate_pool_exists": {
+     "value": false,
+     "kind": "canon",
+     "quote": "序贯精修非 K 池"
+    },
+    "selection_policy": {
+     "value": "none",
+     "kind": "canon",
+     "quote": "序贯精修非 K 池"
+    },
+    "selection_object": {
+     "value": "none",
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    },
+    "explicit_candidate_pool_selection": {
+     "value": false,
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    }
+   },
+   "source_locator": "canon: '开源变体对策略主干 SFT'",
+   "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "cd6113bedbdc3aca67a72ace24817475132c65be537f8369cb4b3e0d2c241683"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

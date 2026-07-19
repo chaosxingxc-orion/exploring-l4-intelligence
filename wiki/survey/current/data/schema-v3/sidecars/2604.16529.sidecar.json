@@ -1,0 +1,493 @@
+{
+ "sidecar_id": "SF-SIDECAR-2604.16529-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2604.16529",
+ "work_title": "Scaling Test-Time Compute for Agentic Coding",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2604.16529",
+  "kind": "eprint",
+  "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2604.16529#rtv",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_judge",
+     "form": "pairwise_comparison",
+     "source": "llm_judge",
+     "lifecycle": "terminal",
+     "uses": [
+      "select"
+     ],
+     "evidence": "canon: 'LLM 对摘要的比较投票'",
+     "claim_evidence": {
+      "form": {
+       "value": "pairwise_comparison",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "final RTV 返回 top-1 原样"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      }
+     }
+    }
+   ],
+   "control_horizon": "terminal",
+   "decision_rights": [],
+   "control_edges": [],
+   "selection_object": "trajectory",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "tournament_select",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结零训练"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无 reward model"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择显式 label-free"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "调度为固定常数(N=16,T=2,K=4,G=2,V=8),无按标签的人工/开发者选择",
+     "scope": "DFS 轴4/轴5 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "pass/fail 仅评估 oracle 不入方法"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "without access to any ground-truth outcomes, test cases or test samples"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择全程无 gold/测例/测样"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "同一模型兼 rollout/摘要/比较投票三角色"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    "control_horizon": {
+     "value": "terminal",
+     "kind": "canon",
+     "quote": "final RTV 返回 top-1 原样"
+    },
+    "decision_rights": {
+     "value": [],
+     "kind": "absence",
+     "note": "RTV 单独使用时选出 final top-1 后无任何下游决策权",
+     "scope": "DFS 轴5/轴11 已检视"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=16 并行 rollout"
+    },
+    "selection_policy": {
+     "value": "tournament_select",
+     "kind": "canon",
+     "quote": "投票锦标赛递归淘汰"
+    },
+    "selection_object": {
+     "value": "trajectory",
+     "kind": "canon",
+     "quote": "投票锦标赛递归淘汰"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "投票锦标赛递归淘汰"
+    }
+   },
+   "source_locator": "canon: '投票锦标赛递归淘汰'",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal;〔iso-adj-A2 再裁决 AGREE:rights=[] absence 条目判 honest;reward-guided-but-not-rq 区分被判精确捕获〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "并行维:锦标赛比较选 top-1;终态退化路径",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "e42a9cec2668bf40d6a8f4a35ab9a24ac5770b43a4569f586a4c46fd6f7f6463"
+  },
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2604.16529#pdr-random-k",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "supply"
+   ],
+   "control_edges": [],
+   "selection_object": "none",
+   "terminal_operator": "none",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": true,
+   "selection_policy": "random_sample",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结零训练"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无 reward model"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择显式 label-free"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "random-K 为无参随机采样,无按标签选择",
+     "scope": "DFS 轴5 已检视+TeX 一手"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "pass/fail 仅评估 oracle 不入方法"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "without access to any ground-truth outcomes, test cases or test samples"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择全程无 gold/测例/测样"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "同一模型兼 rollout/摘要/比较投票三角色"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "顺序=Parallel-Distill-Refine"
+    },
+    "decision_rights": {
+     "value": [
+      "supply"
+     ],
+     "kind": "canon",
+     "quote": "iter-1 新 rollout 条件于 iter-0 蒸馏选出的 K 摘要"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "tex",
+     "quote": "randomly sample K previous summaries"
+    },
+    "selection_policy": {
+     "value": "random_sample",
+     "kind": "tex",
+     "quote": "For random-K, we follow PDR and randomly sample K previous summaries"
+    },
+    "selection_object": {
+     "value": "none",
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    },
+    "explicit_candidate_pool_selection": {
+     "value": false,
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    }
+   },
+   "source_locator": "tex: 'For random-K, we follow PDR and randomly sample K previous summaries'",
+   "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制);〔iso-adj-A2 再裁决 AGREE:零信号编码判 CORRECT——rights 带 supply 而无边=「供给发生但非信号控制」的诚实表达〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无信号;池事实经 candidate_pool_exists/random_sample 保留",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "bdc2943d4cc528b19ac2be061a0b7f913fd2c8a844aedf485ad4139e39d57998"
+  },
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2604.16529#rtv-pdr-pipeline",
+   "component_path_ids": [
+    "2604.16529#rtv",
+    "2604.16529#pdr-random-k"
+   ],
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_judge",
+     "form": "pairwise_comparison",
+     "source": "llm_judge",
+     "lifecycle": "online_step",
+     "uses": [
+      "select",
+      "prune"
+     ],
+     "evidence": "canon: 'LLM 对摘要的比较投票'",
+     "claim_evidence": {
+      "form": {
+       "value": "pairwise_comparison",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "source": {
+       "value": "llm_judge",
+       "kind": "canon",
+       "quote": "LLM 对摘要的比较投票"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "跨迭代状态=选中 K 摘要作精炼上下文"
+      },
+      "uses": {
+       "value": [
+        "select",
+        "prune"
+       ],
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "supply"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_judge",
+     "signal_use": "select",
+     "decision_right": "supply",
+     "source_locator": "canon: '跨迭代状态=选中 K 摘要作精炼上下文'",
+     "edge_semantics": "RTV selection determines which summaries condition the next iteration's refinement context",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "select",
+       "kind": "canon",
+       "quote": "跨迭代状态=选中 K 摘要作精炼上下文"
+      },
+      "decision_right": {
+       "value": "supply",
+       "kind": "canon",
+       "quote": "跨迭代状态=选中 K 摘要作精炼上下文"
+      }
+     }
+    },
+    {
+     "signal_id": "s_judge",
+     "signal_use": "prune",
+     "decision_right": "supply",
+     "source_locator": "canon: '投票锦标赛递归淘汰'",
+     "edge_semantics": "tournament elimination narrows the summary set that supplies the next iteration",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "prune",
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      },
+      "decision_right": {
+       "value": "supply",
+       "kind": "canon",
+       "quote": "投票锦标赛递归淘汰"
+      }
+     }
+    }
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "select_one",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "tournament_select",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结零训练"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无 reward model"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择显式 label-free"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "调度为固定常数,无按标签选择",
+     "scope": "DFS 轴4/轴5 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "pass/fail 仅评估 oracle 不入方法"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "without access to any ground-truth outcomes, test cases or test samples"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "选择全程无 gold/测例/测样"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "同一模型兼 rollout/摘要/比较投票三角色"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "编码单域"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "跨迭代状态=选中 K 摘要作精炼上下文"
+    },
+    "decision_rights": {
+     "value": [
+      "supply"
+     ],
+     "kind": "canon",
+     "quote": "iter-1 新 rollout 条件于 iter-0 蒸馏选出的 K 摘要"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=16 并行 rollout"
+    },
+    "selection_policy": {
+     "value": "tournament_select",
+     "kind": "tex",
+     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+    },
+    "selection_object": {
+     "value": "trajectory",
+     "kind": "tex",
+     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "tex",
+     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+    }
+   },
+   "source_locator": "tex: 'apply RTV to obtain a high-quality subset of K summaries'",
+   "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "1155dac0700ead9f906eee75f0492ff8d5b95885925c317043ed204437a59d3e"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

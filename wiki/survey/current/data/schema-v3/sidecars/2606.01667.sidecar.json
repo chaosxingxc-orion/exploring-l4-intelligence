@@ -1,0 +1,237 @@
+{
+ "sidecar_id": "SF-SIDECAR-2606.01667-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2606.01667",
+ "work_title": "ATLAS: Agentic Test-time Learning-to-Allocate Scaling",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2606.01667",
+  "kind": "pdf",
+  "sha256": "9455e5e590048308f744a8fb113a45743ea468363f727c6be398e310c1e013b4",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": false,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2606.01667#agentic-orchestration",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_consensus",
+     "form": "consensus_vote",
+     "source": "consensus",
+     "lifecycle": "online_step",
+     "uses": [
+      "stop_budget",
+      "synthesize_input"
+     ],
+     "evidence": "canon: 'label-free,共识+自报 confidence'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "label-free,共识+自报 confidence"
+      },
+      "source": {
+       "value": "consensus",
+       "kind": "canon",
+       "quote": "label-free,共识+自报 confidence"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "凭 in-context 候选池评估独占 explore/stop 决策"
+      },
+      "uses": {
+       "value": [
+        "stop_budget",
+        "synthesize_input"
+       ],
+       "kind": "canon",
+       "quote": "独占 explore/stop 决策"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "tool_call",
+    "stop",
+    "synthesize"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_consensus",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: '88.9% 轨迹恰在收敛点停机' (p8 anchor='natural stop time aligns with correct majority emergence')",
+     "edge_semantics": "candidate-pool convergence assessment triggers termination",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "stop_budget",
+       "kind": "canon",
+       "quote": "88.9% 轨迹恰在收敛点停机"
+      },
+      "decision_right": {
+       "value": "stop",
+       "kind": "canon",
+       "quote": "88.9% 轨迹恰在收敛点停机"
+      }
+     }
+    },
+    {
+     "signal_id": "s_consensus",
+     "signal_use": "stop_budget",
+     "decision_right": "tool_call",
+     "source_locator": "canon: '独占 explore/stop 决策' (p4 anchor='decides every explore and stop action')",
+     "edge_semantics": "the same assessment controls whether another explore solver call is dispatched (one decision)",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "stop_budget",
+       "kind": "canon",
+       "quote": "独占 explore/stop 决策"
+      },
+      "decision_right": {
+       "value": "tool_call",
+       "kind": "canon",
+       "quote": "独占 explore/stop 决策"
+      }
+     }
+    },
+    {
+     "signal_id": "s_consensus",
+     "signal_use": "synthesize_input",
+     "decision_right": "synthesize",
+     "source_locator": "canon: '直接合成终答'",
+     "edge_semantics": "the accumulated candidate evidence pool is what the orchestrator synthesizes the final answer from",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "synthesize_input",
+       "kind": "canon",
+       "quote": "直接合成终答"
+      },
+      "decision_right": {
+       "value": "synthesize",
+       "kind": "canon",
+       "quote": "直接合成终答"
+      }
+     }
+    }
+   ],
+   "selection_object": "candidate_output",
+   "terminal_operator": "synthesize",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "synthesize_all",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "权重/结构均不改"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "no external rule, scoring function, or learned controller in the loop"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": false,
+     "kind": "canon",
+     "quote": "全冻结、零训练"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "canon",
+     "quote": "label-free,共识+自报 confidence"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "Grading 用 gold 但仅评估、排除于回路"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "explorer 仅见题面,test gold 隔离"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "canon",
+     "quote": "唯一工具 `explore`=派发新 solver"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "API-only 文本/结构化输出"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "delegated controller with two roles: an orchestrator and an explorer"
+    },
+    "core_native_modality": {
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "BabyVision(视觉)"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "多步轨迹级(explore-or-stop 循环"
+    },
+    "decision_rights": {
+     "value": [
+      "tool_call",
+      "stop",
+      "synthesize"
+     ],
+     "kind": "canon",
+     "quote": "独占 explore/stop 决策"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "K 池=N 独立候选"
+    },
+    "selection_policy": {
+     "value": "synthesize_all",
+     "kind": "canon",
+     "quote": "selector=orchestrator 直接合成(非打分器)"
+    },
+    "selection_object": {
+     "value": "candidate_output",
+     "kind": "canon",
+     "quote": "selector=orchestrator 直接合成(非打分器)"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "selector=orchestrator 直接合成(非打分器)"
+    }
+   },
+   "source_locator": "canon: '独占 explore/stop 决策' (p3 anchor='every decision auditable'/p8 anchor='natural stop time aligns with correct majority emergence'/p14 anchor='asymmetric delegated architecture')",
+   "adjudication_provenance": "v4/v5 轮次+iso-adj-A AGREE(池位张力观察在案);v5-schema 迁移:单信号 s_consensus,边全部同源;〔iso-adj-A2 再裁决 AGREE,两观察在案:①decision_rights 证据引文覆盖 tool_call/stop 两权,synthesize 权由行内 terminal_operator+边3 locator 交叉举证(值忠实,单条目欠覆盖登记);②s_consensus 为共识+自报 confidence+reasoning-quality 复合机制的简化编码——三形式均非 reward,派生不受影响〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "ATLAS:共识收敛驱动停机,终态生成式合成;consensus 非 reward 形式,边不升格",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "20b2075a99328dfb10be13779df7d2f33c850f5625658f8a7eb537f4429ee354"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

@@ -1,0 +1,197 @@
+{
+ "sidecar_id": "SF-SIDECAR-2606.03054-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2606.03054",
+ "work_title": "ToolGate: Token-Efficient Pre-Call Control for Tool-Augmented Vision-Language Agents",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2606.03054",
+  "kind": "pdf",
+  "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": true,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2606.03054#trained-gate",
+   "core_topology": "single_core",
+   "core_native_modality": "vision_native",
+   "core_io_modality": "multimodal_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_gate",
+     "form": "binary_gate",
+     "source": "trained_classifier",
+     "lifecycle": "online_step",
+     "uses": [
+      "execute_skip_gate"
+     ],
+     "evidence": "canon: '输出 execute/skip'",
+     "claim_evidence": {
+      "form": {
+       "value": "binary_gate",
+       "kind": "canon",
+       "quote": "输出 execute/skip"
+      },
+      "source": {
+       "value": "trained_classifier",
+       "kind": "canon",
+       "quote": "输出 execute/skip"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "轨迹内逐工具调用级"
+      },
+      "uses": {
+       "value": [
+        "execute_skip_gate"
+       ],
+       "kind": "canon",
+       "quote": "门决定是否执行"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "execute_skip"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_gate",
+     "signal_use": "execute_skip_gate",
+     "decision_right": "execute_skip",
+     "source_locator": "canon: '门决定是否执行'",
+     "edge_semantics": "the trained classifier reads trajectory prefix + proposed call and gates whether that tool call executes",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "execute_skip_gate",
+       "kind": "canon",
+       "quote": "门决定是否执行"
+      },
+      "decision_right": {
+       "value": "execute_skip",
+       "kind": "canon",
+       "quote": "门决定是否执行"
+      }
+     }
+    }
+   ],
+   "selection_object": "none",
+   "terminal_operator": "none",
+   "explicit_candidate_pool_selection": false,
+   "candidate_pool_exists": false,
+   "selection_policy": "none",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "冻结 ReAct 式 VLM"
+    },
+    "external_component_weight_update": {
+     "value": true,
+     "kind": "canon",
+     "quote": "supervised-trained"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "标签源=forced-answer 探针+终局正确性"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "门控训练为自动代理标签流程,无按标签人工选模型",
+     "scope": "DFS 轴3 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "部署期无 test gold（干净）"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "gold 仅离线标签/诊断"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "absence",
+     "note": "六感知工具作用于给定图像=任务环境,无外部新信息获取",
+     "scope": "DFS 轴7/轴12 已检视"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "does not access hidden states, image features, decoding log probabilities, or tool outputs"
+    },
+    "core_topology": {
+     "value": "single_core",
+     "kind": "canon",
+     "quote": "单一冻结 VLM 核"
+    },
+    "core_native_modality": {
+     "value": "vision_native",
+     "kind": "canon",
+     "quote": "视觉 VQA 多基准"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "轨迹内逐工具调用级"
+    },
+    "decision_rights": {
+     "value": [
+      "execute_skip"
+     ],
+     "kind": "canon",
+     "quote": "仅对已提议调用 execute/skip"
+    },
+    "candidate_pool_exists": {
+     "value": false,
+     "kind": "canon",
+     "quote": "无 K 池无终答 selector"
+    },
+    "selection_policy": {
+     "value": "none",
+     "kind": "canon",
+     "quote": "无 K 池无终答 selector"
+    },
+    "selection_object": {
+     "value": "none",
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    },
+    "explicit_candidate_pool_selection": {
+     "value": false,
+     "kind": "absence",
+     "scope": "complete pinned method path",
+     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+    }
+   },
+   "source_locator": "canon: '门决定是否执行'",
+   "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "f0e8ee62ec62db53305a49b2efa49c53a988cd58c482021c187e362516adf29e"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

@@ -1,0 +1,252 @@
+{
+ "sidecar_id": "SF-SIDECAR-2605.08083-2026-07-19-02",
+ "schema": "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; strong PDF anchors)",
+ "date": "2026-07-19",
+ "paper_work_id": "2605.08083",
+ "work_title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling (AutoTTS)",
+ "coder": "claude-fable-main:s-ea4f0926",
+ "fulltext": {
+  "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+  "id": "2605.08083",
+  "kind": "pdf",
+  "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c",
+  "version_binding": "byte-level sha256 (stronger than arXiv vN tag)"
+ },
+ "canonical_record_id": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083",
+ "method_paths": [
+  {
+   "core_weight_update": false,
+   "external_component_weight_update": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": false,
+   "deployment_label_access": false,
+   "test_item_gold_access": false,
+   "inference_external_new_information": false,
+   "internal_visibility": "api_only",
+   "includes_speech_audio": false,
+   "adjudication_required": false,
+   "load_bearing": true,
+   "method_path_id": "2605.08083#discovered-controller",
+   "core_topology": "single_core_multi_call",
+   "core_native_modality": "text_only",
+   "core_io_modality": "text_in_text_out",
+   "signals": [
+    {
+     "signal_id": "s_state",
+     "form": "none",
+     "source": "state_observation",
+     "lifecycle": "online_step",
+     "uses": [
+      "prune",
+      "stop_budget"
+     ],
+     "evidence": "canon: 'controller 观测=活跃分支/深度/probe 中间答案/剩余预算'",
+     "claim_evidence": {
+      "form": {
+       "value": "none",
+       "kind": "canon",
+       "quote": "controller 观测=活跃分支/深度/probe 中间答案/剩余预算"
+      },
+      "source": {
+       "value": "state_observation",
+       "kind": "canon",
+       "quote": "controller 观测=活跃分支/深度/probe 中间答案/剩余预算"
+      },
+      "lifecycle": {
+       "value": "online_step",
+       "kind": "canon",
+       "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+      },
+      "uses": {
+       "value": [
+        "prune",
+        "stop_budget"
+       ],
+       "kind": "canon",
+       "quote": "controller 自适应 width×depth 分配+停/剪"
+      }
+     }
+    },
+    {
+     "signal_id": "s_consensus",
+     "form": "consensus_vote",
+     "source": "consensus",
+     "lifecycle": "terminal",
+     "uses": [
+      "select"
+     ],
+     "evidence": "canon: 'selector=controller 终态共识型 Agg'",
+     "claim_evidence": {
+      "form": {
+       "value": "consensus_vote",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "source": {
+       "value": "consensus",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "lifecycle": {
+       "value": "terminal",
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      },
+      "uses": {
+       "value": [
+        "select"
+       ],
+       "kind": "canon",
+       "quote": "selector=controller 终态共识型 Agg"
+      }
+     }
+    }
+   ],
+   "control_horizon": "sequential",
+   "decision_rights": [
+    "branch",
+    "stop"
+   ],
+   "control_edges": [
+    {
+     "signal_id": "s_state",
+     "signal_use": "prune",
+     "decision_right": "branch",
+     "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 anchor='create extend probe and prune branches')",
+     "edge_semantics": "the discovered code controller's state-conditioned pruning decides which branches continue",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "prune",
+       "kind": "canon",
+       "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+      },
+      "decision_right": {
+       "value": "branch",
+       "kind": "canon",
+       "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+      }
+     }
+    },
+    {
+     "signal_id": "s_state",
+     "signal_use": "stop_budget",
+     "decision_right": "stop",
+     "source_locator": "canon: 'controller 自适应 width×depth 分配+停/剪' (p5 anchor='accuracy cost trade off')",
+     "edge_semantics": "beta-parameterized budget signal stops sampling",
+     "claim_evidence": {
+      "signal_use": {
+       "value": "stop_budget",
+       "kind": "canon",
+       "quote": "controller 自适应 width×depth 分配+停/剪"
+      },
+      "decision_right": {
+       "value": "stop",
+       "kind": "canon",
+       "quote": "controller 自适应 width×depth 分配+停/剪"
+      }
+     }
+    }
+   ],
+   "selection_object": "trajectory",
+   "terminal_operator": "vote",
+   "explicit_candidate_pool_selection": true,
+   "candidate_pool_exists": true,
+   "selection_policy": "consensus_vote",
+   "claim_evidence": {
+    "core_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "权重全不改"
+    },
+    "external_component_weight_update": {
+     "value": false,
+     "kind": "canon",
+     "quote": "产物=代码非权重"
+    },
+    "controller_program_or_config_optimized_on_labels": {
+     "value": true,
+     "kind": "canon",
+     "quote": "标签监督的离线发现"
+    },
+    "human_or_dev_label_model_selection": {
+     "value": false,
+     "kind": "absence",
+     "note": "发现循环为代码搜索自动化,无人工按标签选模型步骤",
+     "scope": "DFS 轴3/轴8 已检视"
+    },
+    "deployment_label_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "推理时 controller label-free"
+    },
+    "test_item_gold_access": {
+     "value": false,
+     "kind": "canon",
+     "quote": "never used during discovery or selection"
+    },
+    "inference_external_new_information": {
+     "value": false,
+     "kind": "absence",
+     "note": "controller 观测限于内部状态(分支/深度/probe/预算),无外部信息获取",
+     "scope": "DFS 轴2/轴7/轴12 已检视"
+    },
+    "internal_visibility": {
+     "value": "api_only",
+     "kind": "canon",
+     "quote": "文本/答案级"
+    },
+    "core_topology": {
+     "value": "single_core_multi_call",
+     "kind": "canon",
+     "quote": "预采 128 轨迹"
+    },
+    "core_native_modality": {
+     "value": "text_only",
+     "kind": "canon",
+     "quote": "数学(AIME/HMMT)+GPQA 泛化"
+    },
+    "control_horizon": {
+     "value": "sequential",
+     "kind": "canon",
+     "quote": "推理时分支级管理(branch/continue/probe/prune/stop)"
+    },
+    "decision_rights": {
+     "value": [
+      "branch",
+      "stop"
+     ],
+     "kind": "canon",
+     "quote": "controller 自适应 width×depth 分配+停/剪"
+    },
+    "candidate_pool_exists": {
+     "value": true,
+     "kind": "canon",
+     "quote": "预采 128 轨迹"
+    },
+    "selection_policy": {
+     "value": "consensus_vote",
+     "kind": "canon",
+     "quote": "selector=controller 终态共识型 Agg"
+    },
+    "selection_object": {
+     "value": "trajectory",
+     "kind": "canon",
+     "quote": "selector=controller 终态共识型 Agg"
+    },
+    "explicit_candidate_pool_selection": {
+     "value": true,
+     "kind": "canon",
+     "quote": "selector=controller 终态共识型 Agg"
+    }
+   },
+   "source_locator": "canon: '推理时分支级管理(branch/continue/probe/prune/stop)' (p4 anchor='create extend probe and prune branches')",
+   "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
+   "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴",
+   "coder": "claude-fable-main:s-ea4f0926",
+   "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
+   "adjudication_status": "adjudicated_agree",
+   "adjudication_row_sha256": "23a4177a85fa9f095467857741505bfb8b5394a0051cb6b77f0e400fa1ee3103"
+  }
+ ],
+ "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+}

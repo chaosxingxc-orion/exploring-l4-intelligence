@@ -100,6 +100,11 @@ CLAUDE-FABLE-5.md
 # dataset-registry module from git. Keep the source; still ignore its pycache.
 !common/src/speechrl_common/data/
 !common/src/speechrl_common/data/**
+
+# Re-include durable survey artifacts; this `data/` tree is publication evidence,
+# not a local dataset cache.
+!wiki/survey/current/data/
+!wiki/survey/current/data/**
 common/src/speechrl_common/data/__pycache__/
 scripts/data/__pycache__/
 
