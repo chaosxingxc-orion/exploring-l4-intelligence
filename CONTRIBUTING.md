@@ -46,9 +46,28 @@ All training runs in **WSL2** (see [docs/setup.md](docs/setup.md)). Use the shar
 - `gh` resolves to `C:\Program Files\GitHub CLI\gh.exe`; on Windows Python the `PYTHONPATH` separator
   is `;`.
 
-## Knowledge & memory
+## Documentation routing
 
-Record durable decisions/learnings in the Wiki's `wiki/Decision-Log.md`, update
-`wiki/Per-Work-Status.md` when a work's state changes, and publish with `bash scripts/wiki-sync.sh`.
-See the Wiki's [Working-Mode](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki/Working-Mode)
-and [AI-Collaboration](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki/AI-Collaboration).
+Choose the document role before creating the file:
+
+| New material | Put it in |
+|---|---|
+| current survey protocol, status, table, schema, or manifest | `wiki/survey/current/` |
+| long-lived paper census, claim, or evidence record | `wiki/survey/registry/` |
+| reviewer submission/report/response/correction/sign-off | `wiki/audit/<campaign>/<round-id>/` (permanent path from first commit) |
+| superseded, unregistered working artifact | `wiki/archive/<knowledge-layer>/<campaign>/` after the safe-move gate |
+| mutable campaign exploration or dossier | `wiki/survey/workbench/<campaign>/` |
+| engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
+| release-scoped reproducibility report | `docs/checks/<campaign>/<release-id>/` |
+| executable policy or validation | `scripts/` with tests |
+| temporary reasoning or scratch | do not commit; promote only distilled conclusions |
+
+Current truth uses stable HOT/CURRENT files; audit and archive files are cold. Consolidate before a
+fourth amendment and at the lifecycle triggers defined in `wiki/AI-Collaboration.md`. Before moving a
+file, prove it is absent from the audit registry/current manifest, has no live inbound dependency,
+and preserves its stage-0 Git blob and mode with `git mv`. The complete placement and lifecycle policy
+is canonical in `wiki/AI-Collaboration.md`; this table is only a route summary.
+
+Record durable decisions with rationale in the repository Wiki. Run the applicable checks before
+commit. `scripts/wiki-sync.sh` publishes the repository source to the web mirror only when publication
+is authorized.

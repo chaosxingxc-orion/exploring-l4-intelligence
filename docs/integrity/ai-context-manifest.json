@@ -1,0 +1,794 @@
+{
+  "schema": "ai-context-manifest-v1",
+  "active_entries": [
+    {
+      "path": "AGENTS.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "Codex repository operating guidance",
+      "sha256": "c93afd90a975ae86183031b0daef5566a8bb38c1fdf506fcda65ba2182904eb2"
+    },
+    {
+      "path": "wiki/Research-Objective.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "single current research-state entry",
+      "sha256": "11e88ea224c792054db1ce095a13e6c2a5b4b3e40c116738cf51a073ec9b4270"
+    },
+    {
+      "path": "wiki/Project-Thesis.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "program north star",
+      "sha256": "5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623"
+    },
+    {
+      "path": "wiki/Per-Work-Status.md",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "current W1-W4 state",
+      "sha256": "a6eae76364a7adca734f52fc19a1ab5af2dd78a1d7ca9e15ed9c1c2cd77d3907"
+    },
+    {
+      "path": "wiki/survey/current/README.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "current survey router",
+      "sha256": "b2e7dda362f53aaf5897330d17b6b853af5e3dddc06f9559660b16d43d20d95d"
+    },
+    {
+      "path": "wiki/survey/current/protocol.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "effective protocol v2",
+      "sha256": "ea27eda19221afac0de309c418e1d6e4a79334fcde0f79548b72358044082d9f"
+    },
+    {
+      "path": "wiki/survey/current/status.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "short current survey gate",
+      "sha256": "df3e09a5ce88516348f06d5eeec17f5b96490bd6b1bdb5567ef8edd8e9fd6c5b"
+    },
+    {
+      "path": "wiki/survey/current/manifest.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "machine current-survey asset router",
+      "sha256": "a21983ebb2b2a0b7a26bd491e26b4353b73d9a4443101477a50dbc6b67a295cd"
+    },
+    {
+      "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "current identity taxonomy",
+      "sha256": "976d46358263af6d0bd9f9d48a249aa23e39552aa66d5df501a1ce118cce8893"
+    },
+    {
+      "path": "wiki/survey/current/data/known-item-coding-v7.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "generated schema-v3 known-item coding",
+      "sha256": "bbbfe8988b4df37e5870739aa015fb23c62168991120c4fbdaec3c8c3406bc27"
+    },
+    {
+      "path": "wiki/survey/current/data/schema-v3-adjudication.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "independent schema-v3 adjudication record",
+      "sha256": "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "frozen 65-query bytes",
+      "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab"
+    },
+    {
+      "path": "wiki/survey/current/tables/opening-guarantees.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "generated current opening guarantees",
+      "sha256": "8c4088fdbb8ada60f24e953e112122f01539ce8afb94a24a84640585dfc9e6ef"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "canonical v6 evidence report",
+      "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "Windows v6 evidence report",
+      "sha256": "f3953b6edd57307430d04e152619b2daf2dfc335e5bd962cd29f9f806657cbcc"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "WSL/POSIX v6 evidence report",
+      "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd"
+    },
+    {
+      "path": "docs/integrity/ai-context-manifest.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "AI context manifest metadata (self-hash intentionally omitted)"
+    }
+  ],
+  "budgets_bytes": {
+    "AGENTS.md": 12288,
+    "CLAUDE.md": 12288,
+    "wiki/Per-Work-Status.md": 8192,
+    "wiki/Research-Objective.md": 5120,
+    "wiki/survey/README.md": 4096,
+    "wiki/survey/current/README.md": 4096
+  },
+  "legacy_cold_paths": [
+    {
+      "path": "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.nt.json",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.posix.json",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-06-23-omni-embed-speech-disentanglement-1.2.1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-03-omni-agentic-tfrl-go-no-go-decision.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-04-stage1-problem-definition.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-04-stage1-semantic-tfrl-survey.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-W4-fresh-proposal-draft.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-adversarial-review-of-stage1-audit-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-group-split-statistics-design.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-overnight-remediation-report.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-proposal-R-prereg-draft.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-response-to-reviewer-stage1-audit.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-response-v2-erratum-and-forensic-reply.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-stage1-audit-response-and-rulings.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-step1-completion-forensic-integrity-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-11-survey-full-verification.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-omni-hotword-biasing-survey.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-omni-lm-rescoring-survey.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-research-proposal-v41-external-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-research-proposal-v42-external-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v3-to-forensic-completion-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v4-and-v41-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v4-to-adversarial-integrity-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-response-v5-to-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-12-retrieve-discover-use-analysis.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-precheck-provenance-correction.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-remediation-report-v42-for-reviewer-signoff.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-correction.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-stage1-recalibrated-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-to-signoff-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-reviewer-precheck-survey-design-and-record-closure-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-reviewer-precheck-survey-design-and-record-closure.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-stage1a-position-and-recalibration-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-stage2-proposal-ASEL-v0.1-for-reviewer-verification.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-v42-doctoral-adversarial-integrity-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-1b-probe-protocol-v1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-identity-contracts-amendment-1.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-identity-contracts-v1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-progress-review-submission.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-progress-submission-doctoral-adversarial-rereview.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-p0r-response-to-remediation-rereview.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-resp04-gate-a-execution.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-knowledge-stack-evaluation.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-precheck-doctoral-review-adversarial-reassessment.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-precheck-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-response-v2-to-reassessment.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-round2-search-protocol-v1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-stage1c-decision-package.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-response-replayability-template.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-and-stage1c-decision-package-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-p0-remediation-response-doctoral-adversarial-rereview.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-14-survey-v2-response-and-p0-remediation.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-record-system-denoise-and-rationale-survey-proposal.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-replayability-template-token-overlay.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-s0-program-identity-signoff.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-doctoral-adversarial-review-v2-owner-clarified.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-for-reviewer.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1-stage1a-recalibrated-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v1.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v2-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v2.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-16-c4-prep-owner-rulings-and-coding-depth-proposal.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-p0r8-rereview-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-gate-s1-correction-4b-stage1a-doctoral-adversarial-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-gate-s1-v5-response-stage1a-doctoral-rereview.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-inherited-prior-exposure-union.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v6-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v6-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v7-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-18-system-first-research-proposal-v7-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v8-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v8-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v9-stage1a-doctoral-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/Omni-Embed-Model-Dossier.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/Paralinguistic-Suppression-Survey.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/Research-Proposal-Template.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/Research-Proposal-Template_CN.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/Speech-Semantic-Task-Datasets.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/Theory-Convergence-and-Constraints.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/W4-Research-Plan.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/W4-Training-Free-RL-Feasibility.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-3w-crossdomain-comparisons.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-L1-asr-st.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-L2-slu.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-L3-sqa-reasoning.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-L4-speech-agentic.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-X1-prompt-space-quantification.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-X2-paralinguistic-delta.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-X3-llm-vlm-testtime-map.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-rereview.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-review.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-07-multimodal-knowledge-systems-alignment.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-08-speech2vec-dims-1-4.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-08-speech2vec-dims-5-8.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-09-datasets-lock-first14.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-09-datasets-lock-second14.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-09-embedder-selection-matrix-full.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-09-theory-scheme-coverage-appendix.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-09-verifier-backbones-beyond-local.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-canonical-census-v2/census_report_v2.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-canonical-census/census_report.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-claim-ledger-v1/ledger_report.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-claim-ledger-v2/ledger_v2_report.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-coverage-and-kill-matrix-v2.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-neighbor-matrix-v2.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-14-sota-cards-v2.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-gate-s1-own-library-sweep.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-blank-templates.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-bundle-manifest.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-protocol-amendment-1.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-secondary-routes.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-seed-manifest-report.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-system-first-survey-protocol-v1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4a-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-p0r8-rereview-application.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-rereview-application.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-3.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-4.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-5.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-sf-t1-proceedings-routes.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-17-gate-s1-correction-4b-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-17-sf-protocol-amendment-6.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-17-sf-protocol-amendment-7.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-correction-4c-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v4-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-rereview-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v6-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-heldout-l12-prereg-c4c.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-p0r9-seven-papers-dfs.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-press-query-review-c4c.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-protocol-amendment-8.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-stage1b-opening-tables.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v7-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v8-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v9-response.md",
+      "class": "AUDIT_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-bibliography-v1.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-known-item-coding-v6.json",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-stage1b-opening-tables-v2.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-stage1b-opening-tables-v3.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-sf-stage1b-opening-tables-v4.md",
+      "class": "REGISTRY_LEGACY"
+    },
+    {
+      "path": "wiki/survey/replay/SURVEY-RESP-2026-07-14-01/README.md",
+      "class": "REGISTRY_LEGACY"
+    }
+  ],
+  "active_review_transaction": null
+}

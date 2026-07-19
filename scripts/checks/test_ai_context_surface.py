@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import stat
 import sys
 import tempfile
@@ -1048,8 +1049,8 @@ class AiContextSurfaceTests(unittest.TestCase):
         agents = (real_repo / "AGENTS.md").read_text(encoding="utf-8")
         claude = (real_repo / "CLAUDE.md").read_text(encoding="utf-8")
         claude = claude.replace(
-            "Umbrella repo for a four-part research series",
-            "Umbrella repo for a changed research series",
+            "Umbrella repo for four studies",
+            "Umbrella repo for changed studies",
             1,
         )
         self.write("AGENTS.md", agents.encode("utf-8"))
@@ -1066,6 +1067,209 @@ class AiContextSurfaceTests(unittest.TestCase):
         )
 
         self.assert_failure(failures, "agent-guides-not-mirrored")
+
+
+class AiContextRepositoryPolicyTests(unittest.TestCase):
+    """Acceptance contract for the real Task-7 documentation surface."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.repo = Path(__file__).resolve().parents[2]
+
+    @classmethod
+    def read_text(cls, relative_path: str) -> str:
+        return cls.repo.joinpath(*PurePosixPath(relative_path).parts).read_text(
+            encoding="utf-8"
+        )
+
+    @classmethod
+    def read_bytes(cls, relative_path: str) -> bytes:
+        return cls.repo.joinpath(*PurePosixPath(relative_path).parts).read_bytes()
+
+    def test_collaboration_policy_declares_every_document_role_and_route(self) -> None:
+        policy = self.read_text("wiki/AI-Collaboration.md")
+        required_roles = (
+            "HOT",
+            "CURRENT",
+            "REGISTRY",
+            "AUDIT",
+            "ARCHIVE",
+            "WORKBENCH",
+            "Engineering spec",
+            "Engineering plan",
+            "Check report",
+            "Executable rule",
+            "Ephemeral scratch",
+        )
+        required_routes = (
+            "wiki/Research-Objective.md",
+            "wiki/survey/current/",
+            "wiki/survey/registry/",
+            "wiki/audit/<campaign>/<round-id>/",
+            "wiki/archive/<knowledge-layer>/<campaign>/",
+            "wiki/survey/workbench/<campaign>/",
+            "docs/superpowers/specs/",
+            "docs/superpowers/plans/",
+            "docs/checks/<campaign>/<release-id>/",
+            "scripts/",
+            "Not committed",
+        )
+
+        for token in (*required_roles, *required_routes):
+            with self.subTest(token=token):
+                self.assertIn(token, policy)
+        for column in ("谁读取", "默认加载", "权威性", "进入条件", "搬运/退出条件"):
+            with self.subTest(column=column):
+                self.assertIn(column, policy)
+
+    def test_collaboration_policy_defines_six_step_lifecycle_and_move_gate(self) -> None:
+        policy = self.read_text("wiki/AI-Collaboration.md")
+        lifecycle = (
+            "Capture",
+            "Classify",
+            "Work",
+            "Consolidate",
+            "Release / Audit",
+            "Archive / Expire",
+        )
+        positions = [policy.index(f"**{step}**") for step in lifecycle]
+        self.assertEqual(sorted(positions), positions)
+
+        required_meanings = (
+            "第三次 amendment 或 correction",
+            "超过 context budget",
+            "reviewer Gate MAJOR",
+            "handoff",
+            "stage/release boundary",
+            "competing active claims",
+            "第三次修正必须立即折叠",
+            "第四次修正",
+            "禁止",
+            "stage-0",
+            "current manifest",
+            "audit registry",
+            "inbound reference",
+            "Git blob",
+            "git mv",
+            "补丁链",
+            "active truth",
+        )
+        for token in required_meanings:
+            with self.subTest(token=token):
+                self.assertIn(token, policy)
+
+    def test_agent_guides_and_contributing_route_without_copying_full_policy(self) -> None:
+        agents_raw = self.read_bytes("AGENTS.md")
+        claude_raw = self.read_bytes("CLAUDE.md")
+        agents = agents_raw.decode("utf-8")
+        claude = claude_raw.decode("utf-8")
+
+        self.assertLessEqual(len(agents_raw), 12288)
+        self.assertLessEqual(len(claude_raw), 12288)
+        self.assertEqual(normalize_agent_guide(agents), normalize_agent_guide(claude))
+        for guide in (agents, claude):
+            self.assertIn("wiki/Research-Objective.md", guide)
+            self.assertIn("wiki/Project-Thesis.md", guide)
+            self.assertIn("wiki/AI-Collaboration.md", guide)
+            self.assertIn("Research-Objective.md ≤5KB", guide)
+            self.assertIn("Per-Work-Status.md ≤8KB", guide)
+            self.assertIn("survey/README.md ≤4KB", guide)
+            self.assertNotIn("搬运/退出条件", guide)
+
+        contributing = self.read_text("CONTRIBUTING.md")
+        for route in (
+            "wiki/survey/current/",
+            "wiki/survey/registry/",
+            "wiki/audit/<campaign>/<round-id>/",
+            "wiki/archive/<knowledge-layer>/<campaign>/",
+            "wiki/survey/workbench/<campaign>/",
+            "docs/superpowers/specs/",
+            "docs/superpowers/plans/",
+            "docs/checks/<campaign>/<release-id>/",
+            "scripts/",
+        ):
+            with self.subTest(route=route):
+                self.assertIn(route, contributing)
+        self.assertIn("wiki/AI-Collaboration.md", contributing)
+
+    def test_research_objective_is_bounded_current_truth(self) -> None:
+        path = "wiki/Research-Objective.md"
+        raw = self.read_bytes(path)
+        text = raw.decode("utf-8")
+
+        self.assertLessEqual(len(raw), 5120)
+        self.assertIn('last_refresh: "2026-07-19', text)
+        self.assertNotIn("2026-07-20", text)
+        required_truth = (
+            "Stage-1A",
+            "不构成 Stage-1B",
+            "外部 reward-guided 控制平面",
+            "E6–E12",
+            "anchor",
+            "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
+            "独立复审",
+            "owner",
+            "discovery queries = 0",
+            "model/smoke runs = 0",
+            "INHERITED_PRIOR_EXPOSURE",
+            "wiki/survey/current/README.md",
+            "wiki/audit/system-first-stage1a/INDEX.md",
+            "下一授权动作",
+            "失效条件",
+        )
+        for token in required_truth:
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+        self.assertNotIn("ready for sign-off", text)
+
+    def test_secondary_status_and_survey_router_are_compact(self) -> None:
+        per_work_raw = self.read_bytes("wiki/Per-Work-Status.md")
+        per_work = per_work_raw.decode("utf-8")
+        self.assertLessEqual(len(per_work_raw), 8192)
+        self.assertIn("Last refreshed 2026-07-19", per_work)
+        self.assertNotIn("2026-07-20", per_work)
+        for work in ("W1", "W2", "W3", "W4"):
+            with self.subTest(work=work):
+                self.assertEqual(
+                    1,
+                    len(re.findall(rf"^## {work}(?:\s|$)", per_work, flags=re.MULTILINE)),
+                )
+        self.assertIn("wiki/archive/", per_work)
+        self.assertIn("wiki/survey/current/README.md", per_work)
+
+        router_raw = self.read_bytes("wiki/survey/README.md")
+        router = router_raw.decode("utf-8")
+        self.assertLessEqual(len(router_raw), 4096)
+        for route in (
+            "current/",
+            "registry/",
+            "workbench/",
+            "../audit/",
+            "../archive/",
+        ):
+            with self.subTest(route=route):
+                self.assertIn(route, router)
+        self.assertNotIn("protocol_version", router)
+        self.assertNotRegex(router, r"\b\d+/11\b")
+
+    def test_real_manifest_is_generated_bounded_and_keeps_task8_inactive(self) -> None:
+        relative_path = "docs/integrity/ai-context-manifest.json"
+        document = load_json_strict(
+            self.repo.joinpath(*PurePosixPath(relative_path).parts)
+        )
+        active = document["active_entries"]
+        self.assertLessEqual(len(active), 30)
+        defaults = {
+            entry["path"] for entry in active if entry["load_policy"] == "default"
+        }
+        self.assertEqual(
+            {"AGENTS.md", "wiki/Research-Objective.md", "wiki/Project-Thesis.md"},
+            defaults,
+        )
+        self.assertTrue(
+            all(entry["class"] not in {"AUDIT", "ARCHIVE", "WORKBENCH"} for entry in active)
+        )
+        self.assertIsNone(document["active_review_transaction"])
 
 
 class AiContextManifestBuilderTests(unittest.TestCase):

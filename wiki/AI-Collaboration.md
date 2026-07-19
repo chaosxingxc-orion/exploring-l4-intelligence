@@ -1,132 +1,103 @@
 # AI Collaboration
 
-How AI assistants (Claude Code, Codex, …) and humans stay on **one consistent understanding** of this
-project. The goal: an AI picking up the repo cold should reach the same mental model a teammate has.
+本页是 AI 与人类协作者的**文档放置、加载、整编与搬运唯一完整规范**。目标是让新会话只读很小的
+当前层即可行动，同时让历史证据保持可审计。其他文件只保留短路由，不复制本页整套规则。
 
-**The knowledge layering.**
+## 1. 默认加载与基本原则
 
-1. **Root README** (`README.md` / `README_CN.md`) — canonical onboarding; read first.
-1.5. **[[Project-Thesis]]** — the canonical statement of the project's purpose, the three core terms,
-   and the flagship claim. The "why" behind every work; read right after the README. For the flagship,
-   [[W4-Training-Free-RL-Feasibility]] is the *math* and [[W4-Research-Plan]] is the *plan*.
-2. **`CLAUDE.md` / `AGENTS.md`** — per-tool operating guides (commands, gotchas, discipline). Kept
-   byte-for-byte equivalent so Claude Code and Codex behave the same.
-3. **This Wiki** (source in `wiki/`) — **shared, durable, team-visible memory.** Decisions, status,
-   conventions, learnings. Edited as normal files, published with `scripts/wiki-sync.sh`.
-4. **mem0 MCP** — **local, personal** scratch memory for one user's tooling. Never a substitute for
-   the Wiki; anything the team needs must be promoted to the Wiki.
+默认加载面严格只有三项：客户端指南（`AGENTS.md` 或 `CLAUDE.md`）→
+`wiki/Research-Objective.md` → `wiki/Project-Thesis.md`。`wiki/Per-Work-Status.md`、
+`wiki/survey/current/` 与机器报告仅在任务需要时定向加载。
 
-**Protocol for AI assistants.**
+- 不整篇读取 `wiki/Decision-Log.md`，也不广泛加载 `wiki/20*.md`、历史 proposal/review/response/
+  amendment、`wiki/audit/` 或 `wiki/archive/`；找出处时先走 campaign index，再 `rg` 精确条目。
+- 当前真理只能存在于 HOT/CURRENT 的稳定文件。AUDIT 保存发生过什么，ARCHIVE 保存已退出的工作件；
+  **不得用补丁链、回应信或 amendment chain 充当 active truth**。
+- 数字、哈希与状态以 current manifest、台账或 release-scoped check report 为正典；散文引用正典，
+  不手抄一份平行数字。
+- 团队知识必须进入仓内文件。个人记忆或临时 AI 推理不是团队正典。
 
-- **Before starting:** read [[Research-Objective]] FIRST (the single hot current-state entry), then
-  [[Project-Thesis]]; [[Decision-Log]] is the cold audit layer — **grep a single 续NN entry only**,
-  never read it whole. Skim [[Working-Mode]] and the relevant work's README as needed.
-- **While working:** follow [[Working-Mode]] — commit changes to the *correct* repo (umbrella vs a
-  `projects/<work>` repo), preserve lazy-import discipline, keep data out of git.
-- **After a decision or learning:** append a dated **ADR-shaped** entry to [[Decision-Log]] (see
-  §记录规约 below), reflect the delta into [[Research-Objective]] (and [[Per-Work-Status]] if a
-  work's maturity/plan changed), run the archive sweep (战役收官即归档), then
-  `bash scripts/wiki-sync.sh` to publish.
-- **Source of truth:** edit `wiki/*.md` in the repo, never only the web Wiki — the web copy is a
-  mirror that `wiki-sync.sh` overwrites.
+## 2. 文档类型与唯一位置
 
-**Why this works.** Per-tool files (CLAUDE.md/AGENTS.md) keep each AI runnable; the Wiki keeps all
-humans and all their AIs reading from the same evolving memory instead of re-deriving context or
-drifting apart.
+每个持久文档必须且只能声明一个角色；同一文件不能同时承担“当前有效规范”和“规范如何演变的审计史”。
 
----
+| 类型 | 必须位置 | 谁读取 | 默认加载 | 权威性/可变性 | 进入条件 | 搬运/退出条件 |
+|---|---|---|---|---|---|---|
+| **HOT** | `AGENTS.md` / `CLAUDE.md`; `wiki/Research-Objective.md`; `wiki/Project-Thesis.md`; `wiki/Per-Work-Status.md` | 每个新会话读前三项；Per-Work 按需 | 仅前三项 | 当前事实，supersede-in-place | owner 裁决、当前阶段、阻塞项或跨工作状态必须立即可见 | 原位替换旧状态并留一个冷索引指针；不得日期版本化或堆限定语 |
+| **CURRENT** | `wiki/survey/current/`（router、effective protocol、status、manifest、`tables/`、`data/`） | 正在执行该 campaign 的人/AI | 否，按任务定向 | 当前有效工作规范；稳定文件名，版本写入内容 | 工作规则被接受为当前可执行合同 | 新版原位取代；旧版若未注册且不再被 manifest 引用则进 ARCHIVE |
+| **REGISTRY** | `wiki/survey/registry/`（历史兼容路径 `wiki/survey/sidecars/` 由 manifest 管理） | 做论文核验、编码或写作的人/AI | 否 | 长期 census/claim/证据登记；本体 append-only，判决显式 supersede | 论文 FETCH/精读、canonical ID 或承重 claim 被采用 | 跨 campaign 保留；不得复制进协议散文，失效判决带 token 而非删记录 |
+| **AUDIT** | `wiki/audit/<campaign>/<round-id>/`; index=`wiki/audit/<campaign>/INDEX.md` | reviewer、审计者；AI 仅精确取证 | 否 | round 件首个 commit 起 immutable；index append-only | reviewer submission/report/response/correction/sign-off 在产生时直接写永久路径并登记 | 已注册件永不移动/改写；退出活跃路由后仅由 campaign index 访问 |
+| **ARCHIVE** | `wiki/archive/<knowledge-layer>/<campaign>/` | 仅历史/复现问题 | 否 | 搬入后 immutable | 未注册工作件已被 CURRENT 取代且不再有活跃依赖 | 永久冷存；只有新的审计更正能解释其历史含义，不回迁成 current |
+| **WORKBENCH** | `wiki/survey/workbench/<campaign>/` | 当前探索者 | 否 | 可变工作知识，不得承载完成声明 | 问题尚在探索、规则未被接受 | 有用结论整编进 CURRENT/REGISTRY；保留 dossier 归档；无价值 scratch 不提交 |
+| **Engineering spec** | `docs/superpowers/specs/` | 实现者与 reviewer | 否 | 有界工程设计，经 Git review 版本化 | 多步骤工程改动需要先锁范围/约束 | 完成后由 Git 历史保留；research current page 不依赖 plan/spec 才能解释 |
+| **Engineering plan** | `docs/superpowers/plans/` | 实现者 | 否 | 执行中 checkbox 可变 | 已批准设计需要分解执行 | 完成后停止作为 current research pointer；历史由 Git 保存 |
+| **Check report** | `docs/checks/<campaign>/<release-id>/` | 门禁工具与核验者 | 否 | 被 release 引用后 immutable | 可重复检查产生平台/版本特定结果 | 新 release 新目录；禁止跨平台共用 last-writer-wins 文件名 |
+| **Executable rule** | `scripts/` | CI、操作者、reviewer | 否（执行而非通读） | 正常代码生命周期，测试先行 | 散文规则可机械验证时 | 修改规则必须同步测试；散文只指向检查器，不维护第二套实现 |
+| **Ephemeral scratch** | **Not committed** | 当前会话 | 否 | 无权威性 | 临时推理、草稿、一次性输出 | 交接前提炼有价值结论并附 provenance；其余删除/过期 |
 
-## 中文
+新文档先按上表归类再创建，不能先扔进 `wiki/` 根目录后等未来清理。现有 path-pinned legacy
+文件是兼容例外：保留原路径不等于 active；它们必须在 AI context manifest 的 cold inventory 中。
 
-让 AI 协作者（Claude Code、Codex……）和人对本项目保持**一致理解**的方式。目标：一个冷启动接手仓库的 AI
-应当得到和团队成员一样的心智模型。
+## 3. 六步生命周期
 
-**知识分层：**（1）根 README（`README.md` / `README_CN.md`）——权威上手，先读。（2）`CLAUDE.md` /
-`AGENTS.md`——逐工具操作手册（命令、坑、纪律），两者保持逐字节一致，让 Claude Code 与 Codex 行为相同。
-（3）本 Wiki（源在 `wiki/`）——**团队共享、持久、可见的记忆**：决策、状态、约定、经验；当普通文件编辑，
-用 `scripts/wiki-sync.sh` 发布。（4）mem0 MCP——**本地、个人**的临时记忆，不能替代 Wiki；团队需要的东西
-必须升级进 Wiki。
+所有 campaign 使用同一条流水线：
 
-**AI 协作协议：** 开工前读 [[Project-Thesis]]、[[Home]] 和 [[Per-Work-Status]]，浏览 [[Working-Mode]] 与对应工作的 README；
-工作中遵循 [[Working-Mode]]（把改动提交到**正确**的仓库——伞仓还是 `projects/<work>`，保持惰性导入纪律，
-数据不进 git）；产生决策/经验后，在 [[Decision-Log]] 追加带日期的条目（成熟度/计划变了就更新
-[[Per-Work-Status]]），再 `bash scripts/wiki-sync.sh` 发布；**真源**是仓库里的 `wiki/*.md`，不要只改网页版
-（网页是镜像，会被 `wiki-sync.sh` 覆盖）。
+1. **Capture** — 捕获结论、推理摘要、目的链、provenance、失效条件；未稳定内容只在
+   Ephemeral scratch，必要时进入新 campaign 的 WORKBENCH。
+2. **Classify** — 提交前指定唯一角色、权威来源、读者与退出条件。Reviewer transaction 在此即被
+   分类为 AUDIT，不能先建在活跃目录再搬。
+3. **Work** — Draft 在 WORKBENCH 演化；已接受的 Effective 规则只在 CURRENT 稳定文件中
+   supersede-in-place。当前文件必须自包含，不能依赖 workbench/archive 才能解释。
+4. **Consolidate** — 把日志/修正提炼为一个有效规范与短状态，更新 current manifest，并删除 active
+   层的重复说法。设计中的 Correction = 新增 AUDIT 更正 + CURRENT 原位修复，绝不改旧 audit bytes。
+5. **Release / Audit** — Review freeze、submission、report、response、correction、sign-off 直接进入
+   AUDIT 永久路径并登记；检查输出进入独立 Check report 目录。Release 只引用已钉 hash 的输出。
+6. **Archive / Expire** — Campaign close 时先提炼、再清 manifest/引用、最后搬运合格工作件；无价值
+   scratch 过期不提交。Next campaign 使用新 WORKBENCH/AUDIT namespace，不复用旧文件名。
 
-**为什么有效：** 逐工具文件让每个 AI 都能跑；Wiki 让所有人和他们的 AI 都从同一份不断演进的记忆出发，
-而不是各自重建上下文、逐渐走偏。
+对应旧称谓：Draft→Work，Effective→Consolidate 后的 CURRENT，Review freeze→Release / Audit，
+Correction→AUDIT 新记录加 CURRENT 原位修复，Campaign close→Archive / Expire，Next campaign→
+新一轮 Capture。这个映射不改变 audit immutability。
 
----
+## 4. 强制整编与搬运时点
 
-## 记录规约（2026-07-15 整改动作 A：三模板 + 分层规则）
+以下任一事件先发生就立即 Consolidate：
 
-**为什么有这一节**：2026-07-15 owner 确诊两类记录失效——①只记事实结论不记推理（跨会话意图
-丢失 → 目标置换无从察觉，selector 漂移事故的根因）；②append-only 堆叠成噪音（加载即淹没）。
-业内调研与选型分析：`wiki/2026-07-15-record-system-denoise-and-rationale-survey-proposal.md`
-（25 条 claim 三票对抗核验；核心依据：推理必须作为一等记忆类型在任何压缩之前落盘；context
-rot 实证为真；自动遗忘不可信——修剪必须人工治理、可逆）。
+- 将出现**第三次 amendment 或 correction**；
+- protocol、router 或 HOT 文件**超过 context budget**；
+- reviewer Gate MAJOR 关闭，或 **reviewer Gate MAJOR 改变 executable contract**；
+- **handoff ambiguity**：只读 current protocol + status 仍无法确定下一动作；
+- 到达 **stage/release boundary**、campaign verdict、sign-off request 或 publication release；
+- 存在 **competing active claims**：两个 active 文件对同一当前字段给出竞争说法。
 
-### 模板一：持久记忆五字段（Claude 侧 memory/*.md 及同类个人记忆）
+第三份 audit correction 可以保存历史，但**第三次修正必须立即折叠**进 effective spec；在 Consolidate
+完成前，**第四次修正禁止新增**。整编不是再加一层解释，而是把 CURRENT 原位重写为单一、完整、
+无补丁依赖的规范。
 
-1. **结论**（锁了什么/学到什么）；2. **推理摘要**（为什么：当时的备选项与取舍逻辑，3–5 句）；
-3. **目的链**（服务于哪个上级目标——链到北极星或阶段目标；写不出目的链 = 写入时的红旗）；
-4. **Provenance**（源自哪次讨论/续NN/commit）；5. **失效条件**（什么情况须重审本条）。
+ARCHIVE 搬运在工作件“已被取代且不在 current manifest”时触发；安全时与替代件同一 commit 完成。
+不安全时记录明确 closeout blocker，签署前解决，绝不强搬。已注册 AUDIT 是例外：永不搬运，只从
+active routing 移除。
 
-### 模板二：Decision-Log「续NN」ADR 骨架
+### 搬运前安全门（强制）
 
-**Context**（什么触发了这个决定）/ **Decision**（裁决内容）/ **Rationale**（为什么——含
-被否掉的备选与否掉理由）/ **Consequences**（代价、新约束、影响面）/ **Supersedes**（取代
-哪条旧决定，无则写 none）。已接受条目**不改写**，变更走新条目——与 append-only 纪律同构。
+1. 从 **stage-0** Git index 读取 regular-file path、mode 与 Git blob；worktree bytes 必须等于该 blob，
+   禁止对脏文件或未绑定快照做搬运判断。
+2. 源路径不得在 **audit registry** 或 **current manifest**；注册 AUDIT 永不移动。
+3. 对 stage-0 图检查所有 HOT/CURRENT 与已注册 AUDIT 的 **inbound reference**，并确认 active script
+   无旧路径依赖；引用、plain text、相对/根路径、编码变体都纳入检查。
+4. 先更新所有 live pointer 与 manifest/hash，保存 source/destination/mode/Git blob 的确定性计划；
+   只接受“全在源端”或“全在目标端”，partial/both-path 状态 fail closed。
+5. 使用 `git mv`，不得为加 archive banner 改内容。搬后证明 source absent、destination present、
+   mode/blob 相同，且无 active old-path reference。
 
-### 模板三：热层目的链
+## 5. 记录、哈希与发布
 
-[[Research-Objective]] 每条「锁」带一句目的链（「为了 X 所以锁 Y」）；**每次战役收官/评审
-接受前跑目的一致性检查**：逐条活跃锁问「它服务的上级目标还在吗、还对吗」——目标置换靠这个
-机制变成可检出事件。
-
-### 分层与归档规则
-
-- **工作层**（热层三件 / CLAUDE.md / 记忆索引）：supersede-in-place（原位改写 + 一行墓碑
-  指针），**禁止限定语堆叠**；加载面预算（试运行）：CLAUDE.md ≤10KB、Research-Objective
-  ≤5KB、记忆索引 ≤30 行。
-- **审计层**（Decision-Log / wiki/archive/ / 历史评审件）：append-only，绝不进默认加载面；
-  日期件当日提交入库。
-- **数据层**（wiki/survey/ 台账与回放包）：按需检索；数字正典在台账，散文只引行号不复制。
-- **战役收官即归档**：不被正典四件（Research-Objective / Project-Thesis / Per-Work-Status /
-  CLAUDE.md）引用的日期件 → `wiki/archive/`（git mv；旧 (commit, path) 证据锚经
-  `git show <commit>:<path>` 永远可解析，归档零损失）。
-- **整编批次**：人工治理、计划性、可逆——绝不自动垃圾回收正典记录。
-
-## 知识四层与晋升管线（2026-07-15 owner 裁决，续47；上文三模板归入下表继续有效）
-
-**四层定义与读写协议：**
-
-| 层 | 内容 | 读 | 写/改 | 保鲜 |
-|---|---|---|---|---|
-| **事实层** | 锚定工作空间的基础事实（目的/架构/身份/规约）= 默认加载面（CLAUDE.md + Research-Objective + Project-Thesis + S0/合同） | **每会话第一步** | owner 裁决/签署后 supersede-in-place | 事件驱动（裁决/签署即改） |
-| **工作知识** | 双态：**日志**（续NN/日期件——按时间、审计用）+ **提炼条**（memory 五字段/常青页——按主题、行动用） | 日志 grep 按需；提炼条按索引 | 日志 append-only；提炼条 in-place | 失效条件 + 整编批次 + 用即改 |
-| **探索知识** | 论文库：census（canonical ID+版本钉）+ claim-ledger（claim×work×span+五级证据等级）+ SOTA cards | survey/写作时检索 | **本体只增**；判决层可修订（带伴随 token） | 论文不腐；会腐的是判决——判决带 token 重估 |
-| **程序知识** | 脚本/校验器/模板/checklist/runbook（`scripts/**`、三模板、敌意内审环、wsl-ops 类 runbook、ars 工具） | **调用/执行**，非阅读 | 改代码即改；**规约优先做成可执行检查**（散文规约拦不住的，机器门拦得住——P0-R8 经验） | **可测性**——坏了显形；复跑即体检 |
-
-**知识 vs 日志判别**：三个月后一个不在场的新会话要用它，是「grep 出处」（日志）还是「直接照着
-做」（知识）？同一事件**双写**：日志行入审计层，知识条入提炼层。
-
-**L2 提炼步**（挂「战役收官」钩子，先于归档扫描）：从本战役日志提出 0–N 条知识条目，每条过
-三问——①不在场的人能直接照着做吗？②目的链写得出吗？③与既有条目重复吗（重复则并入不新增）。
-敌意内审环带此三问。**提炼是压缩理解，不是压缩文本**（owner 2026-07-13）。
-
-**L3 登记规约（从严，owner 2026-07-15）**：**凡 FETCH/精读过的论文必须按 census/ledger schema
-登记（canonical ID、版本钉、承重 claim+span、证据等级）——不登记不算读过。** 与 survey 并行
-执行（每篇随手 2–5 分钟，不阻塞主流程）；存量 census v2（95 works）+ ledger v2（62 行）= 库的
-种子；人读标记/核验缓存用 ars 工具（`/ars-mark-read` 等）。库入口：`wiki/survey/README.md`。
-嵌入检索/LLMWiki 编译 = 库到规模且检索痛点真实后再议（轻路径，尊重续37 四门）。
-
-**晋升管线**：日志 →（提炼步）→ 工作知识 →（选拔判据：**反复被用 + 已稳定 + 足够小**）→
-事实层锚点；探索知识的判决 → 事实层。降级同理：事实层条目失去承重 → 墓碑。
-
-**会话逃逸协议**：会话（工作记忆）结束/清空前必落盘——①目的层/北极星层讨论结论（当天入
-memory/日志）；②承重中间结论（入日志）；③未完成意图（入 Research-Objective open items 或票）。
-**没落盘的讨论 = 不存在**（2026-07-15 /clear 遗忘事故的教训）。
-
-**负清单（刻意不采纳的主流做法）**：自动遗忘/自动 consolidation（未解问题——人工可逆整编）；
-嵌入检索先行（续37）；参数化记忆（记录系统与研究主线同为 training-free：改进只发生在外部结构）。
+- 持久知识五字段：**结论 / 推理摘要 / 目的链 / Provenance / 失效条件**。写不出目的链是停止信号；
+  只记结论不记为什么不合格。
+- Decision Log 新条目使用 ADR：Context / Decision / Rationale / Consequences / Supersedes。旧条目
+  append-only；变更写新 ADR。
+- 热层的每个承重状态都说明“为了哪个上级目标所以锁什么”。会话结束前，目的层结论、承重中间
+  结论与未完成意图必须落盘到正确层。
+- 证据哈希以 `(commit, sha256)` 的 **git blob bytes** 为正典；工作树 CRLF 只是一种变体。
+- 发布前完成敌意内审、目的链检查、context/manifest/check gates 与 archive scan。Wiki 真源是仓内
+  `wiki/*.md`；`scripts/wiki-sync.sh` 只在明确授权后发布，网页版只是镜像。
