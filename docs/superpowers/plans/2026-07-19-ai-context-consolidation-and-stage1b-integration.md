@@ -683,13 +683,21 @@ verdict/disposition, original path, pinned blob, supersession target, and the cu
 that carries surviving rules. The current layer links only to this index and the active round-12
 transaction.
 
+The round-12 fixed correction is intentionally unnumbered, so it remains at the ordinary
+`wiki/audit/<campaign>/<round-id>/` path and needs no consolidation-epoch stub. If its design changes
+to a numbered amendment/correction, stop and add `epoch-<N>` path metadata plus the exact immutable
+`epoch-<N>/consolidation-receipt.json` bound to the staged CURRENT effective-spec version and SHA;
+never infer or create that receipt early.
+
 - [ ] **Step 3: Refresh current manifests and run pre-registration checks**
 
-Pre-stage the exact new audit pair plus every changed file enumerated by the current manifest before
-either manifest is refreshed. For this task the complete source set is exactly the following three
-paths: the campaign index, the round-12 correction, and `wiki/survey/current/status.md`. This lets
+Pre-stage the exact new audit pair plus every changed file enumerated by the current manifest, as well
+as every other changed AI-manifest/current-manifest input, before either manifest is refreshed. For
+this task the complete initial source set is exactly the following
+three paths: the campaign index, the round-12 correction, and `wiki/survey/current/status.md`. This lets
 `git ls-files -s` provide trusted stage-0 blobs that exactly match the worktree bytes; it is not
 permission to commit a failed check run. Build in source -> current manifest -> AI manifest order.
+This set includes all changed current-manifest inputs.
 
 ```powershell
 git add wiki/audit/system-first-stage1a/INDEX.md wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md wiki/survey/current/status.md
@@ -697,6 +705,7 @@ python scripts/survey/sf_current_tables.py --check
 python scripts/survey/sf_current_manifest.py --write
 git add wiki/survey/current/manifest.json
 python scripts/checks/build_ai_context_manifest.py --write
+git add docs/integrity/ai-context-manifest.json
 python scripts/survey/sf_current_manifest.py --check
 python scripts/checks/build_ai_context_manifest.py --check
 python scripts/survey/sf_release_binding_check.py
@@ -705,9 +714,10 @@ python scripts/checks/ai_context_surface_check.py
 ```
 
 Expected: all pass; the correction is the only allowed direct active-review transaction. If any
-check fails, do not commit. After repairing it, if any of the three source paths changed, re-stage
-all three; also re-stage all changed current-manifest inputs. Then rebuild and re-stage the current
-manifest before rebuilding the AI manifest, and rerun the complete Step 3 check sequence.
+check fails, do not commit. After repairing it, if the audit pair, status, current manifest, or any
+other AI-manifest input changed, re-stage every changed input first. Re-stage the regenerated current
+manifest before rebuilding the AI manifest; then re-stage the regenerated AI manifest and rerun the
+complete Step 3 check sequence. Any post-stage byte change invalidates the run.
 
 - [ ] **Step 4: Commit the immutable artifact before registering its blob**
 
@@ -775,24 +785,29 @@ has started or is owner-approved.
 
 - [ ] **Step 3: Regenerate manifests and verify hashes**
 
-Pre-stage `wiki/survey/current/status.md` plus all changed current-manifest inputs before generating
-the current manifest; status is the only such changed input expected in this task. Generate and
-stage the current manifest before generating the AI manifest so the order remains source -> current
-manifest -> AI manifest.
+Pre-stage every changed AI-manifest input (`wiki/Research-Objective.md`,
+`wiki/Per-Work-Status.md`, and `wiki/survey/current/status.md` in this task) plus all changed current-manifest inputs
+before generating the current manifest. `wiki/Decision-Log.md` may be staged
+with the durable commit set, but it is not an AI-manifest input. Generate and stage the current
+manifest before generating the AI manifest so the order remains source -> current manifest -> AI
+manifest.
 
 ```powershell
+git add wiki/Decision-Log.md wiki/Research-Objective.md wiki/Per-Work-Status.md
 git add wiki/survey/current/status.md
 python scripts/survey/sf_current_manifest.py --write
 git add wiki/survey/current/manifest.json
 python scripts/checks/build_ai_context_manifest.py --write
+git add docs/integrity/ai-context-manifest.json
 python scripts/survey/sf_current_manifest.py --check
 python scripts/checks/build_ai_context_manifest.py --check
 python scripts/checks/ai_context_surface_check.py
 ```
 
-If a repair changes status or any other current-manifest input, re-stage all changed
-current-manifest inputs and rerun this complete sequence from the current-manifest write. If the
-generated current manifest changes, re-stage it before rebuilding and checking the AI manifest.
+If a repair changes any active/current-manifest input, re-stage every changed input and rerun this
+complete sequence from the current-manifest write. Re-stage each generated manifest before building
+its dependent manifest. Any post-stage edit requires re-stage and rebuild; never keep a manifest
+generated from an older index graph.
 
 - [ ] **Step 4: Commit durable state**
 

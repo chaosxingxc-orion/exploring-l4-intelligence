@@ -54,7 +54,7 @@ Choose the document role before creating the file:
 |---|---|
 | current survey protocol, status, table, schema, or manifest | `wiki/survey/current/` |
 | long-lived paper census, claim, or evidence record | `wiki/survey/registry/` |
-| reviewer submission/report/response/correction/sign-off | `wiki/audit/<campaign>/<round-id>/` (permanent path from first commit) |
+| reviewer submission/report/response/correction/sign-off | ordinary transaction: `wiki/audit/<campaign>/<round-id>/`; numbered amendment/correction: `wiki/audit/<campaign>/epoch-<N>/<round-id>/` plus `epoch-<N>/consolidation-receipt.json` |
 | superseded, unregistered working artifact | `wiki/archive/<knowledge-layer>/<campaign>/` after the safe-move gate |
 | mutable campaign exploration or dossier | `wiki/survey/workbench/<campaign>/` |
 | engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
@@ -63,7 +63,10 @@ Choose the document role before creating the file:
 | temporary reasoning or scratch | do not commit; promote only distilled conclusions |
 
 Current truth uses stable HOT/CURRENT files; audit and archive files are cold. Consolidate before a
-fourth amendment and at the lifecycle triggers defined in `wiki/AI-Collaboration.md`. Before moving a
+fourth numbered amendment/correction: ordinal 4 is invalid, so a completed consolidation starts the
+next epoch at ordinal 1. Epoch receipts are immutable, non-default AUDIT records bound to the current
+effective-spec version and staged SHA. The full lifecycle triggers are in `wiki/AI-Collaboration.md`.
+Before moving a
 file, prove it is absent from the audit registry/current manifest, has no live inbound dependency,
 and preserves its stage-0 Git blob and mode with `git mv`. The complete placement and lifecycle policy
 is canonical in `wiki/AI-Collaboration.md`; this table is only a route summary.

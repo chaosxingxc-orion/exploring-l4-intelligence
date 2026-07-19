@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-19 — Stage-1A repair and context consolidation"
+last_refresh: "2026-07-20 — Stage-1A repair and context consolidation"
 ---
 
 # Research Objective & Current State

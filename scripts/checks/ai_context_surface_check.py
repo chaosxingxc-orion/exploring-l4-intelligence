@@ -85,6 +85,20 @@ AMENDMENT_RE = re.compile(r"(?:^|[-_.])amendment(?:[-_.]|$)", re.IGNORECASE)
 AMENDMENT_NUMBER_RE = re.compile(
     r"(?:^|[-_.])amendment[-_.]?(\d+)(?:[-_.]|$)", re.IGNORECASE
 )
+NUMBERED_ITERATION_RE = re.compile(
+    r"(?:^|[-_.])(?:amendment|correction)[-_.]?(\d+)(?:[-_.]|$)",
+    re.IGNORECASE,
+)
+EPOCH_DIRECTORY_RE = re.compile(r"epoch-([1-9]\d*)\Z")
+CONSOLIDATION_RECEIPT_SCHEMA = "ai-context-consolidation-receipt-v1"
+CONSOLIDATION_RECEIPT_KEYS = {
+    "schema",
+    "campaign",
+    "epoch",
+    "effective_spec",
+    "effective_spec_version",
+    "effective_spec_sha256",
+}
 INLINE_LINK_RE = re.compile(
     r"!?\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+[^)]*)?\s*\)"
 )
@@ -140,6 +154,28 @@ CLIENT_NORMALIZATIONS = (
         "Installed via the Windows CLIENT plugin marketplace (see `docs/setup.md`):",
     ),
 )
+AGENT_GUIDE_CLIENTS = {
+    "AGENTS": {
+        "h1": "# AGENTS.md",
+        "description": (
+            "This file provides guidance to Codex (Codex.ai/code) "
+            "when working with code in this repository."
+        ),
+        "marketplace": (
+            "Installed via the Windows Codex plugin marketplace (see `docs/setup.md`):"
+        ),
+    },
+    "CLAUDE": {
+        "h1": "# CLAUDE.md",
+        "description": (
+            "This file provides guidance to Claude Code (claude.ai/code) "
+            "when working with code in this repository."
+        ),
+        "marketplace": (
+            "Installed via the Windows Claude Code plugin marketplace (see `docs/setup.md`):"
+        ),
+    },
+}
 
 
 class ContextSurfaceError(ValueError):
@@ -329,6 +365,69 @@ def normalize_agent_guide(text):
 
     if not isinstance(text, str):
         raise TypeError("agent guide must be text")
+    plain_lines = text.splitlines()
+    if not plain_lines:
+        raise ContextSurfaceError(_failure("agent-guide-shape-invalid", "empty guide"))
+    matching_clients = [
+        name
+        for name, shape in AGENT_GUIDE_CLIENTS.items()
+        if plain_lines[0] == shape["h1"]
+    ]
+    if len(matching_clients) != 1:
+        raise ContextSurfaceError(
+            _failure("agent-guide-shape-invalid", "client H1 must be exact on line 1")
+        )
+    client = matching_clients[0]
+    shape = AGENT_GUIDE_CLIENTS[client]
+    for field in ("h1", "description", "marketplace"):
+        if plain_lines.count(shape[field]) != 1:
+            raise ContextSurfaceError(
+                _failure(
+                    "agent-guide-shape-invalid",
+                    f"{client} {field} must occur exactly once",
+                )
+            )
+    first_paragraph_line = next(
+        (line for line in plain_lines[1:] if line.strip()), None
+    )
+    if first_paragraph_line != shape["description"]:
+        raise ContextSurfaceError(
+            _failure(
+                "agent-guide-shape-invalid",
+                f"{client} description must be the first paragraph",
+            )
+        )
+    if plain_lines.count("## Research skills") != 1:
+        raise ContextSurfaceError(
+            _failure(
+                "agent-guide-shape-invalid",
+                "Research skills heading must occur exactly once",
+            )
+        )
+    research_index = plain_lines.index("## Research skills")
+    next_heading = next(
+        (
+            index
+            for index in range(research_index + 1, len(plain_lines))
+            if plain_lines[index].startswith("## ")
+        ),
+        len(plain_lines),
+    )
+    first_research_line = next(
+        (
+            line
+            for line in plain_lines[research_index + 1 : next_heading]
+            if line.strip()
+        ),
+        None,
+    )
+    if first_research_line != shape["marketplace"]:
+        raise ContextSurfaceError(
+            _failure(
+                "agent-guide-shape-invalid",
+                f"{client} marketplace line must open Research skills",
+            )
+        )
     lines = text.splitlines(keepends=True)
     normalized: list[str] = []
     for line in lines:
@@ -344,6 +443,287 @@ def normalize_agent_guide(text):
                 break
         normalized.append(body + ending)
     return "".join(normalized)
+
+
+POLICY_TABLE_HEADERS = (
+    "类型",
+    "必须位置",
+    "谁读取",
+    "默认加载",
+    "权威性/可变性",
+    "进入条件",
+    "搬运/退出条件",
+)
+POLICY_ROLE_ORDER = (
+    "HOT",
+    "CURRENT",
+    "REGISTRY",
+    "AUDIT",
+    "ARCHIVE",
+    "WORKBENCH",
+    "Engineering spec",
+    "Engineering plan",
+    "Check report",
+    "Executable rule",
+    "Ephemeral scratch",
+)
+POLICY_ROLE_SEMANTICS = {
+    "HOT": (
+        ("AGENTS.md", "wiki/Research-Objective.md", "wiki/Project-Thesis.md"),
+        ("每个新会话", "前三项", "按需"),
+        ("仅前三项",),
+        ("当前事实", "supersede-in-place"),
+        ("owner 裁决", "当前阶段", "阻塞项"),
+        ("原位替换", "冷索引", "不得日期版本化"),
+    ),
+    "CURRENT": (
+        ("wiki/survey/current/",),
+        ("campaign",),
+        ("否", "按任务定向"),
+        ("当前有效工作规范", "稳定文件名"),
+        ("当前可执行合同",),
+        ("新版原位取代", "ARCHIVE"),
+    ),
+    "REGISTRY": (
+        ("wiki/survey/registry/", "wiki/survey/sidecars/"),
+        ("论文核验", "编码", "写作"),
+        ("否",),
+        ("append-only", "supersede"),
+        ("FETCH", "精读", "canonical ID", "claim"),
+        ("跨 campaign 保留", "不得复制", "不删记录"),
+    ),
+    "AUDIT": (
+        ("wiki/audit/<campaign>/<round-id>/", "INDEX.md"),
+        ("reviewer", "审计者", "精确取证"),
+        ("否",),
+        ("immutable", "append-only"),
+        ("submission", "report", "response", "correction", "sign-off"),
+        ("永不移动/改写", "campaign index"),
+    ),
+    "ARCHIVE": (
+        ("wiki/archive/<knowledge-layer>/<campaign>/",),
+        ("历史", "复现"),
+        ("否",),
+        ("immutable",),
+        ("CURRENT 取代", "不再有活跃依赖"),
+        ("永久冷存", "不回迁"),
+    ),
+    "WORKBENCH": (
+        ("wiki/survey/workbench/<campaign>/",),
+        ("当前探索者",),
+        ("否",),
+        ("可变工作知识", "不得承载完成声明"),
+        ("探索", "未被接受"),
+        ("整编进 CURRENT/REGISTRY", "归档", "scratch 不提交"),
+    ),
+    "Engineering spec": (
+        ("docs/superpowers/specs/",),
+        ("实现者", "reviewer"),
+        ("否",),
+        ("工程设计", "Git review"),
+        ("多步骤工程改动",),
+        ("Git 历史保留", "research current page 不依赖"),
+    ),
+    "Engineering plan": (
+        ("docs/superpowers/plans/",),
+        ("实现者",),
+        ("否",),
+        ("checkbox 可变",),
+        ("已批准设计",),
+        ("停止作为 current research pointer", "Git 保存"),
+    ),
+    "Check report": (
+        ("docs/checks/<campaign>/<release-id>/",),
+        ("门禁工具", "核验者"),
+        ("否",),
+        ("release 引用后 immutable",),
+        ("可重复检查", "平台/版本"),
+        ("新 release 新目录", "禁止跨平台"),
+    ),
+    "Executable rule": (
+        ("scripts/",),
+        ("CI", "操作者", "reviewer"),
+        ("否", "执行而非通读"),
+        ("代码生命周期", "测试先行"),
+        ("机械验证",),
+        ("同步测试", "不维护第二套实现"),
+    ),
+    "Ephemeral scratch": (
+        ("Not committed",),
+        ("当前会话",),
+        ("否",),
+        ("无权威性",),
+        ("临时推理", "草稿", "一次性输出"),
+        ("提炼", "provenance", "删除/过期"),
+    ),
+}
+
+
+def _markdown_table_cells(line: str) -> list[str] | None:
+    stripped = line.strip()
+    if not stripped.startswith("|") or not stripped.endswith("|"):
+        return None
+    return [cell.strip() for cell in stripped[1:-1].split("|")]
+
+
+def _policy_invalid(detail: str) -> str:
+    return _failure("collaboration-policy-invalid", detail)
+
+
+def validate_collaboration_policy(text: str) -> list[str]:
+    """Validate the canonical policy structurally and semantically."""
+
+    failures: list[str] = []
+    if not isinstance(text, str):
+        return [_policy_invalid("policy must be UTF-8 text")]
+    section_match = re.search(
+        r"^## 2\. 文档类型与唯一位置\s*$([\s\S]*?)(?=^## 3\.)",
+        text,
+        re.MULTILINE,
+    )
+    if section_match is None:
+        return [_policy_invalid("missing exact §2 placement section")]
+    table_lines = [
+        line for line in section_match.group(1).splitlines() if line.strip().startswith("|")
+    ]
+    parsed = [_markdown_table_cells(line) for line in table_lines]
+    if len(parsed) != 13 or any(row is None for row in parsed):
+        failures.append(_policy_invalid("§2 must contain one header, divider, and 11 rows"))
+    else:
+        header = tuple(parsed[0])
+        if header != POLICY_TABLE_HEADERS:
+            failures.append(_policy_invalid(f"§2 headers differ: {header!r}"))
+        divider = parsed[1]
+        if len(divider) != 7 or any(re.fullmatch(r":?-{3,}:?", cell) is None for cell in divider):
+            failures.append(_policy_invalid("§2 divider must have seven Markdown columns"))
+        rows = parsed[2:]
+        roles = tuple(re.sub(r"^\*\*|\*\*$", "", row[0]) for row in rows)
+        if roles != POLICY_ROLE_ORDER:
+            failures.append(_policy_invalid(f"§2 role order differs: {roles!r}"))
+        for role, row in zip(roles, rows):
+            if len(row) != 7:
+                failures.append(_policy_invalid(f"{role}: expected seven columns"))
+                continue
+            semantics = POLICY_ROLE_SEMANTICS.get(role)
+            if semantics is None:
+                continue
+            for column_offset, tokens in enumerate(semantics, start=1):
+                cell = row[column_offset]
+                missing = [token for token in tokens if token not in cell]
+                if missing:
+                    failures.append(
+                        _policy_invalid(
+                            f"{role}/{POLICY_TABLE_HEADERS[column_offset]} missing {missing!r}"
+                        )
+                    )
+    if any(token in section_match.group(1) for token in ("允许覆写", "可改写", "可以移动并覆盖")):
+        failures.append(_policy_invalid("§2 reverses immutable/exit semantics"))
+
+    lifecycle_match = re.search(
+        r"^## 3\. 六步生命周期\s*$([\s\S]*?)(?=^## 4\.)",
+        text,
+        re.MULTILINE,
+    )
+    if lifecycle_match is None:
+        failures.append(_policy_invalid("missing exact §3 lifecycle"))
+    else:
+        lifecycle = re.findall(
+            r"^(\d+)\. \*\*([^*]+)\*\* — ",
+            lifecycle_match.group(1),
+            re.MULTILINE,
+        )
+        expected = tuple(
+            (str(index), name)
+            for index, name in enumerate(
+                (
+                    "Capture",
+                    "Classify",
+                    "Work",
+                    "Consolidate",
+                    "Release / Audit",
+                    "Archive / Expire",
+                ),
+                start=1,
+            )
+        )
+        if tuple(lifecycle) != expected:
+            failures.append(_policy_invalid(f"lifecycle order differs: {lifecycle!r}"))
+        lifecycle_tokens = (
+            "结论、推理摘要、目的链、provenance、失效条件",
+            "指定唯一角色",
+            "CURRENT 稳定文件中",
+            "更新 current manifest",
+            "AUDIT 永久路径",
+            "先提炼、再清 manifest/引用、最后搬运",
+        )
+        for token in lifecycle_tokens:
+            if token not in lifecycle_match.group(1):
+                failures.append(_policy_invalid(f"lifecycle missing semantic {token!r}"))
+
+    trigger_match = re.search(
+        r"^## 4\. 强制整编与搬运时点\s*$([\s\S]*?)(?=^### 搬运前安全门)",
+        text,
+        re.MULTILINE,
+    )
+    if trigger_match is None:
+        failures.append(_policy_invalid("missing exact §4 trigger section"))
+    else:
+        trigger_text = trigger_match.group(1)
+        if "以下任一事件先发生就立即 Consolidate：" not in trigger_text:
+            failures.append(_policy_invalid("triggers must direct immediate Consolidate"))
+        bullets = [
+            line[2:].strip()
+            for line in trigger_text.splitlines()
+            if line.startswith("- ")
+        ]
+        if len(bullets) != 6:
+            failures.append(_policy_invalid(f"expected exactly six triggers, found {len(bullets)}"))
+        trigger_semantics = (
+            ("第三次", "amendment", "correction"),
+            ("超过 context budget",),
+            ("reviewer Gate MAJOR", "executable contract"),
+            ("handoff ambiguity",),
+            ("stage/release boundary",),
+            ("competing active claims",),
+        )
+        for index, tokens in enumerate(trigger_semantics):
+            if index >= len(bullets) or any(token not in bullets[index] for token in tokens):
+                failures.append(_policy_invalid(f"trigger {index + 1} semantics differ"))
+        for token in (
+            "第三次修正必须立即折叠",
+            "第四次修正禁止新增",
+            "ordinal",
+            "consolidation epoch",
+            "consolidation-receipt.json",
+        ):
+            if token not in trigger_text:
+                failures.append(_policy_invalid(f"consolidation rule missing {token!r}"))
+
+    move_match = re.search(
+        r"^### 搬运前安全门（强制）\s*$([\s\S]*?)(?=^## 5\.)",
+        text,
+        re.MULTILINE,
+    )
+    if move_match is None:
+        failures.append(_policy_invalid("missing exact stage-0 move gate"))
+    else:
+        move_items = re.findall(r"^([1-5])\. (.+)$", move_match.group(1), re.MULTILINE)
+        if tuple(number for number, _ in move_items) != ("1", "2", "3", "4", "5"):
+            failures.append(_policy_invalid("move gate must contain five ordered items"))
+        for token in (
+            "stage-0",
+            "regular-file path、mode 与 Git blob",
+            "audit registry",
+            "current manifest",
+            "inbound reference",
+            "active script",
+            "partial/both-path 状态 fail closed",
+            "git mv",
+            "mode/blob 相同",
+        ):
+            if token not in move_match.group(1):
+                failures.append(_policy_invalid(f"move gate missing {token!r}"))
+    return failures
 
 
 def _strict_json_object(pairs):
@@ -663,6 +1043,114 @@ def _validate_manifest_shape(manifest: object, failures: list[str]):
     return manifest, active, budgets, legacy, active_review
 
 
+def _front_matter_protocol_version(raw: bytes, path: str) -> int | None:
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return None
+    match = re.search(
+        r"^protocol_version:\s*(?:\"([1-9]\d*)\"|([1-9]\d*))\s*$",
+        text,
+        re.MULTILINE,
+    )
+    if match is None:
+        return None
+    return int(match.group(1) or match.group(2))
+
+
+def _validate_numbered_audit_iteration(
+    path: str,
+    ordinal: int,
+    tracked: set[str],
+    read_repo_path,
+    failures: list[str],
+) -> None:
+    """Bind a numbered audit iteration to one immutable consolidation epoch."""
+
+    if ordinal >= 4:
+        failures.append(_failure("unconsolidated-amendment-forbidden", path))
+        return
+    parts = PurePosixPath(path).parts
+    if len(parts) < 6 or parts[:2] != ("wiki", "audit"):
+        failures.append(_failure("consolidation-epoch-invalid", f"{path}: path shape"))
+        return
+    campaign = parts[2]
+    epoch_match = EPOCH_DIRECTORY_RE.fullmatch(parts[3])
+    if epoch_match is None:
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{path}: missing epoch-<N>")
+        )
+        return
+    epoch = int(epoch_match.group(1))
+    receipt_path = f"wiki/audit/{campaign}/epoch-{epoch}/consolidation-receipt.json"
+    if receipt_path not in tracked:
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{path}: missing {receipt_path}")
+        )
+        return
+    receipt_raw = read_repo_path(receipt_path, "consolidation-receipt-missing")
+    if receipt_raw is None:
+        failures.append(_failure("consolidation-epoch-invalid", receipt_path))
+        return
+    try:
+        receipt = loads_json_strict(receipt_raw, receipt_path)
+    except ContextSurfaceError as exc:
+        failures.append(_failure("consolidation-epoch-invalid", str(exc)))
+        return
+    if not isinstance(receipt, dict) or set(receipt) != CONSOLIDATION_RECEIPT_KEYS:
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{receipt_path}: exact schema fields")
+        )
+        return
+    if (
+        receipt.get("schema") != CONSOLIDATION_RECEIPT_SCHEMA
+        or receipt.get("campaign") != campaign
+        or receipt.get("epoch") != epoch
+    ):
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{receipt_path}: campaign/epoch")
+        )
+        return
+    try:
+        effective_spec = _canonical_path(
+            receipt.get("effective_spec"), f"{receipt_path}.effective_spec"
+        )
+    except ContextSurfaceError as exc:
+        failures.append(_failure("consolidation-epoch-invalid", str(exc)))
+        return
+    if not effective_spec.startswith("wiki/survey/current/") or effective_spec not in tracked:
+        failures.append(
+            _failure(
+                "consolidation-epoch-invalid",
+                f"{receipt_path}: effective spec must be tracked CURRENT",
+            )
+        )
+        return
+    spec_raw = read_repo_path(effective_spec, "consolidation-effective-spec-missing")
+    if spec_raw is None:
+        failures.append(_failure("consolidation-epoch-invalid", effective_spec))
+        return
+    version = receipt.get("effective_spec_version")
+    if (
+        isinstance(version, bool)
+        or not isinstance(version, int)
+        or version <= 0
+        or _front_matter_protocol_version(spec_raw, effective_spec) != version
+    ):
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{receipt_path}: spec version")
+        )
+    expected_hash = receipt.get("effective_spec_sha256")
+    if (
+        not isinstance(expected_hash, str)
+        or SHA256_RE.fullmatch(expected_hash) is None
+        or hashlib.sha256(spec_raw).hexdigest() != expected_hash
+    ):
+        failures.append(
+            _failure("consolidation-epoch-invalid", f"{receipt_path}: spec sha256")
+        )
+
+
 def evaluate_manifest(repo, manifest, tracked_paths):
     """Evaluate a parsed manifest against an explicit tracked-path inventory."""
 
@@ -873,15 +1361,22 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             and not is_legacy
         ):
             failures.append(_failure("new-audit-artifact-outside-audit-root", path))
-        if (
-            path.startswith("wiki/")
-            and path.lower().endswith(".md")
-            and AMENDMENT_RE.search(basename)
-            and not path.startswith(("wiki/audit/", "wiki/archive/"))
-            and not is_legacy
-        ):
-            numbered = AMENDMENT_NUMBER_RE.search(basename)
-            if numbered and int(numbered.group(1)) >= 4:
+        numbered_iteration = (
+            NUMBERED_ITERATION_RE.search(basename)
+            if path.startswith("wiki/") and path.lower().endswith(".md")
+            else None
+        )
+        if numbered_iteration and not path.startswith("wiki/archive/") and not is_legacy:
+            ordinal = int(numbered_iteration.group(1))
+            if path.startswith("wiki/audit/"):
+                _validate_numbered_audit_iteration(
+                    path,
+                    ordinal,
+                    tracked_seen,
+                    read_repo_path,
+                    failures,
+                )
+            elif ordinal >= 4:
                 failures.append(_failure("unconsolidated-amendment-forbidden", path))
         if path_class not in {"HOT", "CURRENT"} or not path.lower().endswith(".md"):
             continue
@@ -923,8 +1418,19 @@ def evaluate_manifest(repo, manifest, tracked_paths):
                         "shared guidance differs beyond 3 client lines",
                     )
                 )
-        except UnicodeDecodeError as exc:
+        except (UnicodeDecodeError, ContextSurfaceError, TypeError) as exc:
             failures.append(_failure("agent-guides-not-mirrored", str(exc)))
+
+    policy_path = "wiki/AI-Collaboration.md"
+    if policy_path in tracked_seen:
+        policy_raw = read_repo_path(policy_path, "collaboration-policy-missing")
+        if policy_raw is not None:
+            try:
+                policy_text = policy_raw.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                failures.append(_policy_invalid(f"invalid UTF-8: {exc}"))
+            else:
+                failures.extend(validate_collaboration_policy(policy_text))
 
     return failures
 

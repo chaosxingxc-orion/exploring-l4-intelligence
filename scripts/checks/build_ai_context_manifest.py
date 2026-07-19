@@ -78,6 +78,12 @@ ACTIVE_ENTRY_SPECS = (
     ),
     _entry("wiki/Project-Thesis.md", "HOT", "default", "program north star"),
     _entry("wiki/Per-Work-Status.md", "HOT", "targeted", "current W1-W4 state"),
+    _entry(
+        "wiki/AI-Collaboration.md",
+        "HOT",
+        "targeted",
+        "canonical AI document placement and lifecycle policy",
+    ),
     _entry("wiki/survey/current/README.md", "CURRENT", "targeted", "current survey router"),
     _entry("wiki/survey/current/protocol.md", "CURRENT", "targeted", "effective protocol v2"),
     _entry("wiki/survey/current/status.md", "CURRENT", "targeted", "short current survey gate"),
@@ -296,6 +302,7 @@ EXACT_PREEXISTING_LEGACY_DOCS = tuple(
 )
 
 BLOB_RE = re.compile(r"[0-9a-f]{40}\Z")
+REGULAR_INDEX_MODES = {"100644", "100755"}
 DEFAULT_PATHS = {
     "AGENTS.md",
     "wiki/Research-Objective.md",
@@ -326,15 +333,12 @@ AUDIT_REGISTRY_RELATIVE_PATH = "wiki/survey/sf-audit-artifact-registry.json"
 
 
 def _load_audit_inventory(
-    reader: TrustedRepoReader,
+    graph: Stage0Graph,
     registry_path: str,
-    tracked_paths: set[str],
-    blob_inventory: dict[str, str],
 ) -> list[dict[str, str]]:
-    if registry_path not in tracked_paths:
-        _fail("audit-registry-untracked", registry_path)
     try:
-        registry = loads_json_strict(reader.read_bytes(registry_path), registry_path)
+        registry_raw = graph.raw(registry_path, "audit-registry-untracked")
+        registry = loads_json_strict(registry_raw, registry_path)
     except ContextSurfaceError as exc:
         _fail("audit-registry-invalid", str(exc))
     if not isinstance(registry, dict) or not isinstance(registry.get("artifacts"), list):
@@ -373,16 +377,11 @@ def _load_audit_inventory(
 
     legacy: list[dict[str, str]] = []
     for path, blob in validated:
-        if path not in tracked_paths:
-            _fail("audit-registry-path-untracked", path)
-        try:
-            reader.read_bytes(path)
-        except ContextSurfaceError as exc:
-            _fail("audit-registry-path-invalid", str(exc))
-        if blob_inventory.get(path) != blob:
+        graph.raw(path, "audit-registry-path-untracked")
+        if graph.blobs.get(path) != blob:
             _fail(
                 "audit-registry-blob-mismatch",
-                f"{path}: inventory {blob_inventory.get(path)!r} != pinned {blob!r}",
+                f"{path}: inventory {graph.blobs.get(path)!r} != pinned {blob!r}",
             )
         if not path.startswith("wiki/audit/"):
             legacy.append(_legacy(path, "AUDIT_LEGACY"))
@@ -475,38 +474,101 @@ def _validate_constants(specs, *legacy_groups, budgets, active_review):
             _fail("active-review-constant-invalid", f"{path}: wildcard forbidden")
 
 
-def _canonical_inventory(tracked_paths, blob_inventory):
-    if not isinstance(tracked_paths, (list, tuple, set, frozenset)):
-        _fail("tracked-inventory-invalid", "tracked_paths must be an explicit collection")
-    tracked: set[str] = set()
-    for index, value in enumerate(tracked_paths):
-        path = _canonical_path(value, f"tracked_paths[{index}]")
-        if path in tracked:
-            _fail("duplicate-path", f"tracked path {path}")
-        tracked.add(path)
-    if not isinstance(blob_inventory, dict):
-        _fail("blob-inventory-invalid", "blob_inventory must be an object")
-    blobs: dict[str, str] = {}
-    for raw_path, blob in blob_inventory.items():
-        path = _canonical_path(raw_path, "blob_inventory key")
-        if path not in tracked:
-            _fail("blob-inventory-invalid", f"untracked blob row {path}")
-        if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
-            _fail("blob-inventory-invalid", f"invalid blob id for {path}")
-        blobs[path] = blob
-    missing_blobs = sorted(tracked - set(blobs))
-    if missing_blobs:
-        _fail("blob-inventory-invalid", f"missing blob for {missing_blobs[0]}")
-    return tracked, blobs
+def _git_blob_id(raw: bytes) -> str:
+    header = f"blob {len(raw)}\0".encode("ascii")
+    return hashlib.sha1(header + raw).hexdigest()
 
 
-def _audit_activation(reader: TrustedRepoReader, tracked: set[str]):
+class Stage0Graph:
+    """Trusted stage-0 graph whose relevant blobs equal trusted worktree bytes."""
+
+    def __init__(self, repo: Path, index_inventory, read_blob):
+        if not isinstance(index_inventory, dict):
+            _fail("index-inventory-invalid", "index_inventory must be an object")
+        if not callable(read_blob):
+            _fail("index-blob-reader-invalid", "read_blob must be callable")
+        try:
+            self.reader = TrustedRepoReader(repo)
+        except ContextSurfaceError as exc:
+            _fail("repo-root-invalid", str(exc))
+        self.index: dict[str, dict[str, object]] = {}
+        for raw_path, entry in index_inventory.items():
+            path = _canonical_path(raw_path, "index_inventory key")
+            if path in self.index:
+                _fail("duplicate-path", f"index path {path}")
+            if not isinstance(entry, dict) or set(entry) != {"mode", "blob", "stage"}:
+                _fail(
+                    "index-entry-invalid",
+                    f"{path}: expected exact mode/blob/stage fields",
+                )
+            mode = entry["mode"]
+            blob = entry["blob"]
+            stage = entry["stage"]
+            if stage != 0:
+                _fail("index-entry-not-stage-0", f"{path}: stage={stage!r}")
+            if mode not in REGULAR_INDEX_MODES:
+                _fail("index-entry-not-regular", f"{path}: mode={mode!r}")
+            if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+                _fail("index-entry-invalid", f"{path}: invalid blob {blob!r}")
+            self.index[path] = {"mode": mode, "blob": blob, "stage": 0}
+        self._read_blob = read_blob
+        self._blob_cache: dict[str, bytes] = {}
+        self._path_cache: dict[str, bytes] = {}
+
+    @property
+    def tracked(self) -> set[str]:
+        return set(self.index)
+
+    @property
+    def blobs(self) -> dict[str, str]:
+        return {path: str(entry["blob"]) for path, entry in self.index.items()}
+
+    def raw(self, path: str, untracked_code: str) -> bytes:
+        path = _canonical_path(path, "stage-0 graph path")
+        if path in self._path_cache:
+            return self._path_cache[path]
+        entry = self.index.get(path)
+        if entry is None:
+            _fail(untracked_code, path)
+        blob = str(entry["blob"])
+        if blob not in self._blob_cache:
+            try:
+                raw = self._read_blob(blob)
+            except Exception as exc:
+                _fail("index-blob-read-failed", f"{path}: {blob}: {exc}")
+            if not isinstance(raw, bytes):
+                _fail("index-blob-invalid", f"{path}: read_blob did not return bytes")
+            actual_blob = _git_blob_id(raw)
+            if actual_blob != blob:
+                _fail(
+                    "index-blob-id-mismatch",
+                    f"{path}: cat-file bytes hash {actual_blob} != {blob}",
+                )
+            self._blob_cache[blob] = raw
+        staged_raw = self._blob_cache[blob]
+        try:
+            worktree_raw = self.reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            if str(exc).startswith("repo-path-missing:"):
+                _fail("index-worktree-missing", path)
+            _fail("index-worktree-invalid", str(exc))
+        if worktree_raw != staged_raw:
+            _fail(
+                "index-worktree-mismatch",
+                f"{path}: staged {hashlib.sha256(staged_raw).hexdigest()} != "
+                f"worktree {hashlib.sha256(worktree_raw).hexdigest()}",
+            )
+        self._path_cache[path] = staged_raw
+        return staged_raw
+
+
+def _audit_activation(graph: Stage0Graph):
     """Activate the audit pointer only from the complete tracked path pair."""
 
     if ACTIVE_REVIEW_TRANSACTION is None:
         return (), None
-    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in tracked
-    correction_tracked = ACTIVE_REVIEW_TRANSACTION in tracked
+    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in graph.tracked
+    correction_tracked = ACTIVE_REVIEW_TRANSACTION in graph.tracked
     if index_tracked != correction_tracked:
         _fail(
             "audit-activation-incomplete",
@@ -514,18 +576,13 @@ def _audit_activation(reader: TrustedRepoReader, tracked: set[str]):
         )
     if not index_tracked:
         return (), None
-    for path in (AUDIT_CAMPAIGN_INDEX_PATH, ACTIVE_REVIEW_TRANSACTION):
-        try:
-            reader.read_bytes(path)
-        except ContextSurfaceError as exc:
-            _fail("audit-activation-invalid", str(exc))
+    graph.raw(AUDIT_CAMPAIGN_INDEX_PATH, "audit-activation-untracked")
+    graph.raw(ACTIVE_REVIEW_TRANSACTION, "audit-activation-untracked")
     return (AUDIT_CAMPAIGN_ENTRY_SPEC,), ACTIVE_REVIEW_TRANSACTION
 
 
 def _archive_transition(
-    reader: TrustedRepoReader,
-    tracked: set[str],
-    blob_inventory: dict[str, str],
+    graph: Stage0Graph,
 ):
     """Resolve the seven-file archive lifecycle from one complete Git state."""
 
@@ -563,8 +620,8 @@ def _archive_transition(
         sources.add(source)
         destinations.add(destination)
 
-    tracked_sources = sources & tracked
-    tracked_destinations = destinations & tracked
+    tracked_sources = sources & graph.tracked
+    tracked_destinations = destinations & graph.tracked
     prearchive = tracked_sources == sources and not tracked_destinations
     archived = not tracked_sources and tracked_destinations == destinations
     if not (prearchive or archived):
@@ -577,15 +634,12 @@ def _archive_transition(
     for transition in ARCHIVE_TRANSITIONS:
         path = transition[selected_key]
         expected_blob = transition["git_blob"]
-        if blob_inventory.get(path) != expected_blob:
+        if graph.blobs.get(path) != expected_blob:
             _fail(
                 "archive-transition-blob-mismatch",
-                f"{path}: {blob_inventory.get(path)!r} != {expected_blob!r}",
+                f"{path}: {graph.blobs.get(path)!r} != {expected_blob!r}",
             )
-        try:
-            reader.read_bytes(path)
-        except ContextSurfaceError as exc:
-            _fail("archive-transition-path-invalid", str(exc))
+        graph.raw(path, "archive-transition-path-untracked")
 
     if archived:
         return ()
@@ -639,19 +693,15 @@ def _manifest_target(repo: Path, target: Path) -> Path:
 
 def build_manifest(
     repo: Path,
-    tracked_paths,
-    blob_inventory,
+    index_inventory,
+    read_blob,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
     *,
     allow_untracked_self: bool = False,
 ) -> dict:
-    try:
-        reader = TrustedRepoReader(repo)
-    except ContextSurfaceError as exc:
-        _fail("repo-root-invalid", str(exc))
-    tracked, blobs = _canonical_inventory(tracked_paths, blob_inventory)
-    audit_specs, active_review_transaction = _audit_activation(reader, tracked)
-    archive_legacy = _archive_transition(reader, tracked, blobs)
+    graph = Stage0Graph(Path(repo), index_inventory, read_blob)
+    audit_specs, active_review_transaction = _audit_activation(graph)
+    archive_legacy = _archive_transition(graph)
     _validate_constants(
         (*ACTIVE_ENTRY_SPECS, AUDIT_CAMPAIGN_ENTRY_SPEC),
         RETAINED_LEGACY_PATHS,
@@ -662,10 +712,8 @@ def build_manifest(
         active_review=ACTIVE_REVIEW_TRANSACTION,
     )
     registry_legacy = _load_audit_inventory(
-        reader,
+        graph,
         _canonical_path(registry_path, "registry_path"),
-        tracked,
-        blobs,
     )
     legacy_by_path: dict[str, dict[str, str]] = {}
     for entry in (
@@ -678,12 +726,7 @@ def build_manifest(
         path = entry["path"]
         if path in legacy_by_path:
             _fail("duplicate-path", f"legacy inventory overlap {path}")
-        if path not in tracked:
-            _fail("legacy-path-untracked", path)
-        try:
-            reader.read_bytes(path)
-        except ContextSurfaceError as exc:
-            _fail("legacy-path-invalid", str(exc))
+        graph.raw(path, "legacy-path-untracked")
         legacy_by_path[path] = {"path": path, "class": entry["class"]}
     legacy = [legacy_by_path[path] for path in sorted(legacy_by_path)]
     effective_specs = (*ACTIVE_ENTRY_SPECS, *audit_specs)
@@ -712,33 +755,26 @@ def build_manifest(
                 "active-class-mismatch",
                 f"{path}: declared {entry['class']}, classified {actual_class}",
             )
-        is_untracked_self = path == MANIFEST_RELATIVE_PATH and path not in tracked
+        is_untracked_self = path == MANIFEST_RELATIVE_PATH and path not in graph.tracked
         if is_untracked_self and not allow_untracked_self:
             _fail("active-path-untracked", path)
         if path != MANIFEST_RELATIVE_PATH:
-            if path not in tracked:
-                _fail("active-path-untracked", path)
-            try:
-                raw = reader.read_bytes(path)
-            except ContextSurfaceError as exc:
-                if str(exc).startswith("repo-path-missing:"):
-                    _fail("active-path-missing", path)
-                _fail("active-path-invalid", str(exc))
+            raw = graph.raw(path, "active-path-untracked")
             entry["sha256"] = hashlib.sha256(raw).hexdigest()
-        elif path in tracked:
+        elif path in graph.tracked:
             try:
-                reader.read_bytes(path)
+                graph.reader.read_bytes(path)
             except ContextSurfaceError as exc:
                 _fail("active-path-invalid", str(exc))
         entries.append(entry)
 
     for path in BUDGETS_BYTES:
-        if path not in tracked:
-            _fail("budget-path-untracked", path)
-        try:
-            reader.read_bytes(path)
-        except ContextSurfaceError as exc:
-            _fail("budget-path-invalid", str(exc))
+        graph.raw(path, "budget-path-untracked")
+
+    # Both guides affect the normalized client surface even though only the
+    # current client's guide is a default manifest entry.
+    for path in ("AGENTS.md", "CLAUDE.md"):
+        graph.raw(path, "agent-guide-untracked")
 
     document = {
         "schema": MANIFEST_SCHEMA,
@@ -752,16 +788,16 @@ def build_manifest(
 
 def render_manifest(
     repo: Path,
-    tracked_paths,
-    blob_inventory,
+    index_inventory,
+    read_blob,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
     *,
     allow_untracked_self: bool = False,
 ) -> bytes:
     document = build_manifest(
         Path(repo),
-        tracked_paths,
-        blob_inventory,
+        index_inventory,
+        read_blob,
         registry_path,
         allow_untracked_self=allow_untracked_self,
     )
@@ -774,15 +810,15 @@ def render_manifest(
 def write_manifest(
     repo: Path,
     target: Path,
-    tracked_paths,
-    blob_inventory,
+    index_inventory,
+    read_blob,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> None:
     target = _manifest_target(Path(repo), Path(target))
     raw = render_manifest(
         repo,
-        tracked_paths,
-        blob_inventory,
+        index_inventory,
+        read_blob,
         registry_path,
         # Bootstrap only: the builder is about to create the exact self file
         # before the caller can add it to the Git index.
@@ -839,15 +875,15 @@ def write_manifest(
 def check_manifest(
     repo: Path,
     target: Path,
-    tracked_paths,
-    blob_inventory,
+    index_inventory,
+    read_blob,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> list[str]:
     target = _manifest_target(Path(repo), Path(target))
     expected = render_manifest(
         repo,
-        tracked_paths,
-        blob_inventory,
+        index_inventory,
+        read_blob,
         registry_path,
         # Bootstrap only: the exact target was validated above and the trusted
         # read below proves it is a regular non-symlink before comparison.
@@ -888,33 +924,63 @@ def _git_inventory(repo: Path):
     if completed.returncode != 0:
         detail = completed.stderr.decode("utf-8", errors="replace").strip()
         _fail("git-inventory-failed", detail)
-    tracked = []
-    blobs = {}
+    inventory = {}
     try:
         records = [record for record in completed.stdout.split(b"\0") if record]
         for record in records:
             metadata, raw_path = record.split(b"\t", 1)
             mode, raw_blob, stage = metadata.split(b" ", 2)
-            if stage != b"0":
-                _fail("git-inventory-failed", "non-stage-0 index entry")
             path = raw_path.decode("utf-8")
             blob = raw_blob.decode("ascii")
-            tracked.append(path)
-            blobs[path] = blob
+            try:
+                stage_number = int(stage.decode("ascii"))
+                mode_text = mode.decode("ascii")
+            except (ValueError, UnicodeDecodeError) as exc:
+                _fail("git-inventory-failed", f"malformed metadata for {path}: {exc}")
+            if path in inventory:
+                _fail("git-inventory-failed", f"duplicate index path {path}")
+            inventory[path] = {
+                "mode": mode_text,
+                "blob": blob,
+                "stage": stage_number,
+            }
     except (ValueError, UnicodeDecodeError) as exc:
         _fail("git-inventory-failed", f"malformed git index output: {exc}")
-    return tracked, blobs
+    return inventory
+
+
+def _git_read_blob(repo: Path, blob: str) -> bytes:
+    if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+        _fail("index-blob-read-failed", f"invalid blob id {blob!r}")
+    try:
+        completed = subprocess.run(
+            ["git", "cat-file", "blob", blob],
+            cwd=repo,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+    except OSError as exc:
+        _fail("index-blob-read-failed", str(exc))
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        _fail("index-blob-read-failed", f"{blob}: {detail}")
+    return completed.stdout
 
 
 def main(argv=None) -> int:
     args = _parser().parse_args(argv)
     try:
-        tracked, blobs = _git_inventory(REPO_ROOT)
+        inventory = _git_inventory(REPO_ROOT)
+
+        def read_blob(blob: str) -> bytes:
+            return _git_read_blob(REPO_ROOT, blob)
+
         if args.write:
-            write_manifest(REPO_ROOT, MANIFEST_PATH, tracked, blobs)
+            write_manifest(REPO_ROOT, MANIFEST_PATH, inventory, read_blob)
             print(f"wrote {MANIFEST_RELATIVE_PATH}")
             return 0
-        failures = check_manifest(REPO_ROOT, MANIFEST_PATH, tracked, blobs)
+        failures = check_manifest(REPO_ROOT, MANIFEST_PATH, inventory, read_blob)
     except ManifestBuildError as exc:
         failures = [str(exc)]
     for failure in failures:

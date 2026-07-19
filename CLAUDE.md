@@ -31,7 +31,7 @@ Load `wiki/Per-Work-Status.md` and `wiki/survey/current/` only for a named task.
 `wiki/20*.md`, historical proposal/review/response/amendment files, `wiki/archive/`, or the full
 `wiki/Decision-Log.md`. For provenance, use a campaign index and targeted `rg` only.
 
-Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md ≤5KB`;
+Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md` ≤5KB;
 `Per-Work-Status.md ≤8KB`; `survey/README.md ≤4KB`; `survey/current/README.md ≤4KB`; AI context
 manifest ≤30 active entries. The three default entries are fixed.
 

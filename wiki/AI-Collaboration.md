@@ -25,8 +25,8 @@
 |---|---|---|---|---|---|---|
 | **HOT** | `AGENTS.md` / `CLAUDE.md`; `wiki/Research-Objective.md`; `wiki/Project-Thesis.md`; `wiki/Per-Work-Status.md` | 每个新会话读前三项；Per-Work 按需 | 仅前三项 | 当前事实，supersede-in-place | owner 裁决、当前阶段、阻塞项或跨工作状态必须立即可见 | 原位替换旧状态并留一个冷索引指针；不得日期版本化或堆限定语 |
 | **CURRENT** | `wiki/survey/current/`（router、effective protocol、status、manifest、`tables/`、`data/`） | 正在执行该 campaign 的人/AI | 否，按任务定向 | 当前有效工作规范；稳定文件名，版本写入内容 | 工作规则被接受为当前可执行合同 | 新版原位取代；旧版若未注册且不再被 manifest 引用则进 ARCHIVE |
-| **REGISTRY** | `wiki/survey/registry/`（历史兼容路径 `wiki/survey/sidecars/` 由 manifest 管理） | 做论文核验、编码或写作的人/AI | 否 | 长期 census/claim/证据登记；本体 append-only，判决显式 supersede | 论文 FETCH/精读、canonical ID 或承重 claim 被采用 | 跨 campaign 保留；不得复制进协议散文，失效判决带 token 而非删记录 |
-| **AUDIT** | `wiki/audit/<campaign>/<round-id>/`; index=`wiki/audit/<campaign>/INDEX.md` | reviewer、审计者；AI 仅精确取证 | 否 | round 件首个 commit 起 immutable；index append-only | reviewer submission/report/response/correction/sign-off 在产生时直接写永久路径并登记 | 已注册件永不移动/改写；退出活跃路由后仅由 campaign index 访问 |
+| **REGISTRY** | `wiki/survey/registry/`（历史兼容路径 `wiki/survey/sidecars/` 由 manifest 管理） | 做论文核验、编码或写作的人/AI | 否 | 长期 census/claim/证据登记；本体 append-only，判决显式 supersede | 论文 FETCH/精读、canonical ID 或承重 claim 被采用 | 跨 campaign 保留；不得复制进协议散文，失效判决带 token，不删记录 |
+| **AUDIT** | 普通 transaction：`wiki/audit/<campaign>/<round-id>/`；带 ordinal 的迭代修正：`wiki/audit/<campaign>/epoch-<N>/<round-id>/`; index=`wiki/audit/<campaign>/INDEX.md` | reviewer、审计者；AI 仅精确取证 | 否 | round 件与 `consolidation-receipt.json` 首个 commit 起 immutable；index append-only | reviewer submission/report/response/correction/sign-off 在产生时直接写永久路径并登记；带 ordinal 件须有 epoch receipt | 已注册件永不移动/改写；退出活跃路由后仅由 campaign index 访问 |
 | **ARCHIVE** | `wiki/archive/<knowledge-layer>/<campaign>/` | 仅历史/复现问题 | 否 | 搬入后 immutable | 未注册工作件已被 CURRENT 取代且不再有活跃依赖 | 永久冷存；只有新的审计更正能解释其历史含义，不回迁成 current |
 | **WORKBENCH** | `wiki/survey/workbench/<campaign>/` | 当前探索者 | 否 | 可变工作知识，不得承载完成声明 | 问题尚在探索、规则未被接受 | 有用结论整编进 CURRENT/REGISTRY；保留 dossier 归档；无价值 scratch 不提交 |
 | **Engineering spec** | `docs/superpowers/specs/` | 实现者与 reviewer | 否 | 有界工程设计，经 Git review 版本化 | 多步骤工程改动需要先锁范围/约束 | 完成后由 Git 历史保留；research current page 不依赖 plan/spec 才能解释 |
@@ -70,8 +70,18 @@ Correction→AUDIT 新记录加 CURRENT 原位修复，Campaign close→Archive 
 - 到达 **stage/release boundary**、campaign verdict、sign-off request 或 publication release；
 - 存在 **competing active claims**：两个 active 文件对同一当前字段给出竞争说法。
 
-第三份 audit correction 可以保存历史，但**第三次修正必须立即折叠**进 effective spec；在 Consolidate
-完成前，**第四次修正禁止新增**。整编不是再加一层解释，而是把 CURRENT 原位重写为单一、完整、
+第三份 audit correction 可以保存历史，但**第三次修正必须立即折叠**进 effective spec。修正 ordinal
+只在一个 **consolidation epoch** 内计数，合法值只有 1–3；同一 epoch 的**第四次修正禁止新增**，ordinal
+4 永不合法。需要继续修正时必须先 Consolidate，然后创建下一个 `epoch-<N>`，ordinal 从 1 重启。
+
+普通 review transaction 与无编号 fixed correction 仍使用
+`wiki/audit/<campaign>/<round-id>/`。只有文件名带编号的 amendment/correction 使用
+`wiki/audit/<campaign>/epoch-<N>/<round-id>/`，并要求同目录上层存在
+`epoch-<N>/consolidation-receipt.json`。Receipt 是非默认加载、首个 commit 起 immutable 的 AUDIT 件，
+exact schema 为 `schema/campaign/epoch/effective_spec/effective_spec_version/effective_spec_sha256`；其中
+schema=`ai-context-consolidation-receipt-v1`，effective spec 必须是 tracked CURRENT 文件，version 必须等于
+其 front matter，sha256 必须等于该文件经 stage-0 Git blob 与可信 worktree 一致性验证后的 bytes。伪造
+epoch、version 或 hash 均 fail closed。整编不是再加一层解释，而是把 CURRENT 原位重写为单一、完整、
 无补丁依赖的规范。
 
 ARCHIVE 搬运在工作件“已被取代且不在 current manifest”时触发；安全时与替代件同一 commit 完成。

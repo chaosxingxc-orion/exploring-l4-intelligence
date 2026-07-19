@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-19. Historical narration is cold: start from the campaign index or `wiki/archive/`, then use
+> Last refreshed 2026-07-20. Historical narration is cold: start from the campaign index or `wiki/archive/`, then use
 > targeted search. Survey detail routes through `wiki/survey/current/README.md`.
 
 ## W1
