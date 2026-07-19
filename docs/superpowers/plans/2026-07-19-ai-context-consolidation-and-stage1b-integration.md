@@ -447,7 +447,12 @@ git commit -m "refactor(survey): route active prose checks through manifest"
 
 - Reuse: `scripts/checks/ai_context_inventory.py`
 - Create: `scripts/survey/sf_archive_candidates.py`
+- Test: `scripts/survey/test_sf_archive_candidates.py`
 - Create: `wiki/archive/working/system-first-stage1a/INDEX.md`
+- Create: `wiki/archive/working/system-first-stage1a/archive-plan.json`
+- Modify: `wiki/survey/current/protocol.md`
+- Modify: `wiki/survey/current/manifest.json`
+- Modify: `scripts/survey/test_sf_query_compiler_profiles.py`
 - Move: amendments 9-15 listed below.
 
 - [ ] **Step 1: Implement the archive safety oracle**
@@ -470,9 +475,34 @@ sources, zero destinations) or complete archived state (zero sources, all seven 
 Any partial or both-path state must fail `archive-transition-incomplete` in both workflows.
 
 After a move it requires source absence, destination presence, identical blob hash, and no active old
-path reference. The oracle scans tracked files with `git grep`; it does not rewrite references.
+path reference. The oracle scans tracked files with `git grep`; it does not rewrite references. The
+protocol coverage suite resolves amendments 9-15 through that same transition inventory and accepts
+only one complete pre-archive or archived state; partial and both-path states fail closed.
 
-- [ ] **Step 2: Generate and inspect the exact safe plan**
+- [ ] **Step 2: Remove active physical-path exposure and restamp the current manifest**
+
+Before generating a safe plan, replace Appendix A's physical legacy paths with cold index route
+labels. Amendments 1 and 3-8 route as `campaign audit index / A#`; amendments 9-15 route as
+`working archive index / A#`. Keep every disposition and sufficient-v2-carrier field, state that
+exact paths are resolved only from the cold index on demand, and do not expose a legacy path to the
+default context. Do not change the byte-locked protocol-v1 `## §4` block.
+
+Stage the protocol first so the current manifest hashes the intended index bytes, then regenerate and
+stage the manifest:
+
+```powershell
+git add wiki/survey/current/protocol.md scripts/survey/test_sf_query_compiler_profiles.py
+python scripts/survey/sf_current_manifest.py --write
+git add wiki/survey/current/manifest.json
+python scripts/survey/sf_current_manifest.py --check
+python -m unittest scripts/survey/test_sf_query_compiler_profiles.py
+```
+
+The archive oracle treats stage-0 index bytes as the trusted transaction input and rejects any
+worktree/index drift. A staged current manifest is allowed only when its worktree bytes exactly match
+the index.
+
+- [ ] **Step 3: Generate and inspect the exact safe plan**
 
 The only planned sources are:
 
@@ -501,7 +531,7 @@ Expected: seven safe candidates and zero registry/current/audit inbound blockers
 not safe at execution time, remove it from the physical-move batch and record the exact blocker in
 the archive index; never force the move.
 
-- [ ] **Step 3: Move with Git and prove byte preservation**
+- [ ] **Step 4: Move with Git and prove byte preservation**
 
 Create the destination directory, then use one `git mv` per explicit source/destination. Do not edit
 the moved bytes. Run:
@@ -514,15 +544,18 @@ git diff --summary
 
 Expected: seven renames, identical hashes, and immutability `PASS`.
 
-- [ ] **Step 4: Write the archive index**
+- [ ] **Step 5: Write the archive index**
 
 For each moved file record source, destination, blob, superseding `current/protocol.md` section, and
 move commit intent. Also list the retained cold legacy exceptions and why path movement is unsafe.
 
-- [ ] **Step 5: Commit physical cleanup**
+- [ ] **Step 6: Commit physical cleanup**
 
 ```powershell
-git add scripts/survey/sf_archive_candidates.py wiki/archive/working/system-first-stage1a
+git add docs/superpowers/plans/2026-07-19-ai-context-consolidation-and-stage1b-integration.md `
+  scripts/survey/sf_archive_candidates.py scripts/survey/test_sf_archive_candidates.py `
+  scripts/survey/test_sf_query_compiler_profiles.py wiki/survey/current/protocol.md `
+  wiki/survey/current/manifest.json wiki/archive/working/system-first-stage1a
 git commit -m "chore(wiki): archive safe legacy amendments"
 ```
 

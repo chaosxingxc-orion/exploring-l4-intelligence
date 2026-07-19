@@ -1,0 +1,40 @@
+{
+  "schema": "sf-archive-plan-v1",
+  "transitions": [
+    {
+      "source": "wiki/survey/2026-07-18-sf-protocol-amendment-9.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-18-sf-protocol-amendment-9.md",
+      "pre_move_git_blob": "c786137a5628d963156229b6407cb8eb955e3a4c"
+    },
+    {
+      "source": "wiki/survey/2026-07-18-sf-protocol-amendment-10.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-18-sf-protocol-amendment-10.md",
+      "pre_move_git_blob": "8c6df6a092e327b2327242a1b2a47ad4f6b941e2"
+    },
+    {
+      "source": "wiki/survey/2026-07-18-sf-protocol-amendment-11.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-18-sf-protocol-amendment-11.md",
+      "pre_move_git_blob": "31c714d582f6188440da4397df05d6950aa9ba33"
+    },
+    {
+      "source": "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-18-sf-protocol-amendment-12.md",
+      "pre_move_git_blob": "73c96fc47c05941d76532b3e46fa47b659004cf5"
+    },
+    {
+      "source": "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-19-sf-protocol-amendment-13.md",
+      "pre_move_git_blob": "126c4dc93d1f323ba0ca5e9d3de86cc44e513045"
+    },
+    {
+      "source": "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-19-sf-protocol-amendment-14.md",
+      "pre_move_git_blob": "f4c4f6490e8cc03d9103e7c4d212cd5d1dd61834"
+    },
+    {
+      "source": "wiki/survey/2026-07-19-sf-protocol-amendment-15.md",
+      "destination": "wiki/archive/working/system-first-stage1a/amendments/2026-07-19-sf-protocol-amendment-15.md",
+      "pre_move_git_blob": "5586d6f840927f975e18a500cef74a11d9e3a48a"
+    }
+  ]
+}

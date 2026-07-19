@@ -27,6 +27,10 @@ REPO = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
 import sf_query_compiler as compiler  # noqa: E402
+from sf_archive_candidates import (  # noqa: E402
+    ARCHIVE_TRANSITIONS,
+    resolve_transition_read_paths,
+)
 
 
 LEGACY_PROTOCOL = REPO / "wiki/survey/2026-07-15-system-first-survey-protocol-v1.md"
@@ -46,6 +50,12 @@ EXPECTED_FRONTMATTER = (
 ).encode("utf-8")
 
 AMENDMENT_NUMBERS = (1, *range(3, 16))
+_TRANSITION_READ_PATHS = resolve_transition_read_paths(REPO, ARCHIVE_TRANSITIONS)
+_ARCHIVED_AMENDMENT_PATHS = {
+    int(re.search(r"amendment-(\d+)\.md$", path).group(1)): REPO / path
+    for path in _TRANSITION_READ_PATHS
+}
+
 AMENDMENT_PATHS = {
     1: REPO / "wiki/survey/2026-07-15-sf-protocol-amendment-1.md",
     3: REPO / "wiki/survey/2026-07-16-sf-protocol-amendment-3.md",
@@ -54,13 +64,7 @@ AMENDMENT_PATHS = {
     6: REPO / "wiki/survey/2026-07-17-sf-protocol-amendment-6.md",
     7: REPO / "wiki/survey/2026-07-17-sf-protocol-amendment-7.md",
     8: REPO / "wiki/survey/2026-07-18-sf-protocol-amendment-8.md",
-    9: REPO / "wiki/survey/2026-07-18-sf-protocol-amendment-9.md",
-    10: REPO / "wiki/survey/2026-07-18-sf-protocol-amendment-10.md",
-    11: REPO / "wiki/survey/2026-07-18-sf-protocol-amendment-11.md",
-    12: REPO / "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
-    13: REPO / "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
-    14: REPO / "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
-    15: REPO / "wiki/survey/2026-07-19-sf-protocol-amendment-15.md",
+    **_ARCHIVED_AMENDMENT_PATHS,
 }
 
 
@@ -270,6 +274,30 @@ class ProtocolStructureTests(unittest.TestCase):
             if re.match(r"^\|\s*Amendment\s+\d+\s*\|", row):
                 self.assertIn("legacy", row.lower())
                 self.assertRegex(row, r"§(?:[0-9]|10)")
+
+    def test_appendix_routes_through_cold_indexes_without_physical_paths(self) -> None:
+        appendix = _section_text(self.text, "Appendix")
+        self.assertNotRegex(
+            appendix,
+            r"wiki/survey/[^`|\s]*protocol-amendment-[0-9]+\.md",
+        )
+        self.assertIn(
+            "Exact physical paths are resolved only through the named cold index on demand; "
+            "neither index nor any legacy artifact is part of default context.",
+            appendix,
+        )
+        rows = {
+            int(match.group(1)): match.group(2)
+            for match in re.finditer(
+                r"^\|\s*Amendment\s+(\d+)\s*\|\s*([^|]+?)\s*\|",
+                appendix,
+                flags=re.MULTILINE,
+            )
+        }
+        for number in (1, *range(3, 9)):
+            self.assertEqual(f"campaign audit index / A{number}", rows[number])
+        for number in range(9, 16):
+            self.assertEqual(f"working archive index / A{number}", rows[number])
 
     def test_protocol_is_self_contained_not_amendment_dependent(self) -> None:
         normative = self.text[: self.text.index("## Appendix A")]

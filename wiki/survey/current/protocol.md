@@ -679,22 +679,23 @@ implied by search-design sign-off.
 
 ## Appendix A — Legacy disposition routing (not an interpretive dependency)
 
-Each row routes a cold transaction to the self-sufficient normative section(s) above. Status means the
-legacy file is superseded as an effective instruction but retained unchanged for audit provenance.
+Each row routes a cold transaction identifier to the self-sufficient normative section(s) above.
+Status means the legacy file is superseded as an effective instruction but retained unchanged for
+audit provenance. Exact physical paths are resolved only through the named cold index on demand; neither index nor any legacy artifact is part of default context.
 
-| Legacy transaction | Legacy path | Status | Sufficient v2 carrier |
+| Legacy transaction | Cold index route | Status | Sufficient v2 carrier |
 |---|---|---|---|
-| Amendment 1 | `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §1, §3, §4, §5, §6, §9 |
-| Amendment 3 | `wiki/survey/2026-07-16-sf-protocol-amendment-3.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §3, §4, §6, §8, §10 |
-| Amendment 4 | `wiki/survey/2026-07-16-sf-protocol-amendment-4.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §6, §8, §9 |
-| Amendment 5 | `wiki/survey/2026-07-16-sf-protocol-amendment-5.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §6, §8, §9 |
-| Amendment 6 | `wiki/survey/2026-07-17-sf-protocol-amendment-6.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §6, §7, §9 |
-| Amendment 7 | `wiki/survey/2026-07-17-sf-protocol-amendment-7.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §7, §8 |
-| Amendment 8 | `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §4, §5, §8, §10 |
-| Amendment 9 | `wiki/survey/2026-07-18-sf-protocol-amendment-9.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
-| Amendment 10 | `wiki/survey/2026-07-18-sf-protocol-amendment-10.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
-| Amendment 11 | `wiki/survey/2026-07-18-sf-protocol-amendment-11.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §9 |
-| Amendment 12 | `wiki/survey/2026-07-18-sf-protocol-amendment-12.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §6, §7, §9 |
-| Amendment 13 | `wiki/survey/2026-07-19-sf-protocol-amendment-13.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §10 |
-| Amendment 14 | `wiki/survey/2026-07-19-sf-protocol-amendment-14.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §8, §9 |
-| Amendment 15 | `wiki/survey/2026-07-19-sf-protocol-amendment-15.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §8, §9 |
+| Amendment 1 | campaign audit index / A1 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §1, §3, §4, §5, §6, §9 |
+| Amendment 3 | campaign audit index / A3 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §3, §4, §6, §8, §10 |
+| Amendment 4 | campaign audit index / A4 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §6, §8, §9 |
+| Amendment 5 | campaign audit index / A5 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §6, §8, §9 |
+| Amendment 6 | campaign audit index / A6 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §6, §7, §9 |
+| Amendment 7 | campaign audit index / A7 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §7, §8 |
+| Amendment 8 | campaign audit index / A8 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §4, §5, §8, §10 |
+| Amendment 9 | working archive index / A9 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
+| Amendment 10 | working archive index / A10 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
+| Amendment 11 | working archive index / A11 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §9 |
+| Amendment 12 | working archive index / A12 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §6, §7, §9 |
+| Amendment 13 | working archive index / A13 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §10 |
+| Amendment 14 | working archive index / A14 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §8, §9 |
+| Amendment 15 | working archive index / A15 | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §8, §9 |
