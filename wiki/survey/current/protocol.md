@@ -129,6 +129,11 @@ is:
 - SF-L12: `cs.CV`, `cs.AI`; SF-L13: `cs.LG`, `stat.ML`, `cs.NE`;
 - SF-L14/L15: the full frozen union of 13 categories.
 
+Date coverage is incremental and replayable. **First execution searches through the execution date.**
+**Before synthesis freeze, scan from the first-execution date through the freeze date.** If Stage-1A
+spans more than one period, **cross-period incremental batches are append-only** and carry their own
+dates and source provenance; **old decisions change only by dated supersession**.
+
 The ten-conference **T1 proceedings** title scan has **50 routes**. Each machine route has a stable
 `route_id`, exact or explicitly unresolved entry point, frozen **wordlist**, status, and replay fields.
 Venue tier is discovery metadata and a queue tie-break only; it has zero evidence weight. The T1/T2/T3
@@ -380,6 +385,13 @@ The saturation report records per round new hits, new included works, closure ed
 removed-unobtainable counts, and conflict counts. A new counterexample after closure is classified by
 the same contract and corrected by dated supersession; it does not silently alter an old round.
 
+E2 identifier resolution is an **OPEN** precondition until its report closes. **Before any E2 claim,
+resolve every entry by DOI, ACL ID, OpenReview ID, or normalized title.** The report gives the four
+work-level counts **total / resolved / ambiguous / unresolved**, includes a **DOI-only mutation
+fixture**, and freezes a **pre-registered unresolved ceiling** before resolution results are inspected.
+**K=2 zero growth on the resolved subgraph is not closure exhaustion** and cannot be described as
+closure dryness or a complete citation graph.
+
 ## §6 Coding schema, signal and edge identity, and information boundary
 
 Coding depth is **code-on-use**:
@@ -434,6 +446,34 @@ already supplied to the frozen core; `new-info` injects answer-bearing informati
 strict identity. Dev-gold method selection is exposure, not test leakage, and must be isolated and
 reported. Trained reward instruments remain comparators or measurement tools and never enter the
 all-components-weight-frozen occupancy.
+
+The final derivations use the following frozen names and semantics. `seven_strict_bits_all_false`
+means that each of `core_weight_update`, `external_component_weight_update`,
+`controller_program_or_config_optimized_on_labels`, `human_or_dev_label_model_selection`,
+`deployment_label_access`, `test_item_gold_access`, and `inference_external_new_information` is exactly
+false. Topology policy A admits `single_core` and `single_core_multi_call`. Native speech is represented
+by `audio_native`; the native speech/audio/omni set is therefore `{audio_native, omni_native}`.
+For a signal, `s.reward_uses` is the intersection of `s.uses` with the frozen reward-use set. A
+`qualifying_reward_signal(s)` has lifecycle in `{online_step, terminal}`, form in `reward_forms`, and a
+nonempty `s.reward_uses`. A valid LIVE edge passes the structural, allowed-relation, locator, lifecycle,
+terminal-right, signal-identity, signal-use, and declared-right checks above.
+
+```text
+data_access_strict_bits = seven_strict_bits_all_false AND internal_visibility == api_only
+is_s0_core_compatible = data_access_strict_bits AND core_topology IN {single_core, single_core_multi_call} AND core_native_modality IN {audio_native, omni_native}
+is_reward_guided = EXISTS qualifying_reward_signal(s)
+is_rq_sys_control_compatible = control_horizon == sequential AND EXISTS valid LIVE edge e driven by the same qualifying reward signal s AND e.signal_use IN s.reward_uses
+is_project_method_candidate = is_s0_core_compatible AND is_rq_sys_control_compatible
+reward_guided_selection = candidate_pool_exists == true AND selection_policy IN {scored_select, tournament_select} AND selection_object != none AND EXISTS qualifying reward signal s used for select or prune
+```
+
+The canonical policy label is `tournament_select`; “tournament” is only a noncanonical shorthand.
+**offline_calibration signals never qualify** for `is_reward_guided`, RQ-SYS control, or
+reward-guided selection.
+
+`DIRECT_THREAT` requires `threat_dual_coding`, **two distinct extractors**, and a resolvable
+`rec5_ref`; **disagreements > 0 requires a nonempty adjudicator**. A missing actor, duplicate extractor,
+missing REC-5 link, or unresolved disagreement fails before the row can support a claim.
 
 ## §7 Schema-v3 evidence, adjudication, and strong PDF anchors
 
@@ -581,6 +621,12 @@ Reports may make a no-direct-match statement only after E1/E2/E3, independent ag
 denominator disclosure. Negative results and conflicting evidence are first-class outputs, not filtered
 exceptions. Persistent evidence is the only basis for a completion claim.
 
+Every reviewer-facing artifact has a self-contained reference appendix with **author, year, and stable
+link**. **Numeric claims require a page, table, or figure locator.** A **non-contiguous quotation is
+explicitly marked as stitched** rather than presented as one continuous span. **Consistent, dominant,
+or ceiling claims are limited to the model, task, and setting reported by the paper**; evidence from one
+reported setting cannot silently become a universal statement.
+
 ## §10 Document lifecycle, correction, re-review, and sign-off authority
 
 The effective protocol lives at this stable path and is superseded in place with a version change. A
@@ -635,7 +681,7 @@ legacy file is superseded as an effective instruction but retained unchanged for
 | Amendment 5 | `wiki/survey/2026-07-16-sf-protocol-amendment-5.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §6, §8, §9 |
 | Amendment 6 | `wiki/survey/2026-07-17-sf-protocol-amendment-6.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §6, §7, §9 |
 | Amendment 7 | `wiki/survey/2026-07-17-sf-protocol-amendment-7.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §5, §7, §8 |
-| Amendment 8 | `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §4, §8, §10 |
+| Amendment 8 | `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §3, §4, §5, §8, §10 |
 | Amendment 9 | `wiki/survey/2026-07-18-sf-protocol-amendment-9.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
 | Amendment 10 | `wiki/survey/2026-07-18-sf-protocol-amendment-10.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §0, §5, §6, §8, §9 |
 | Amendment 11 | `wiki/survey/2026-07-18-sf-protocol-amendment-11.md` | LEGACY / SUPERSEDED_EFFECTIVE_CHAIN_COLD | §6, §7, §9 |

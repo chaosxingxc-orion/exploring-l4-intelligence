@@ -113,6 +113,7 @@ AMENDMENT_COVERAGE = (
     CoverageItem(5, "P0-R1", "§9", ("machine-derived", "missing evidence fails")),
     CoverageItem(5, "P0-R2", "§8", ("parent_from_frozen_row", "record_sha256", "query_sha256")),
     CoverageItem(5, "P0-R3", "§6", ("INCLUDED REC-0 ↔ REC-2", "DIRECT_THREAT", "flow counts")),
+    CoverageItem(5, "V13", "§6", ("threat_dual_coding", "rec5_ref", "two distinct extractors", "disagreements > 0")),
     CoverageItem(5, "P0-R5", "§3", ("SF-L11", "cs.MM", "cs.MA", "held-out")),
     CoverageItem(5, "P0-R6", "§8", ("discovery_queries_executed", "id_dereference_accesses", "access class")),
     CoverageItem(5, "P0-R8", "§9", ("completion claims", "persistent evidence")),
@@ -138,6 +139,7 @@ AMENDMENT_COVERAGE = (
     CoverageItem(8, "PRESS", "§10", ("independent query review", "term freeze", "sign-off application")),
     CoverageItem(8, "fresh L12 held-out", "§3", ("pre-registered held-out", "used in query design")),
     CoverageItem(8, "债务表", "§10", ("owner", "deadline gate", "OPEN")),
+    CoverageItem(8, "D-1", "§5", ("DOI", "ACL", "OpenReview", "total", "resolved", "ambiguous", "unresolved")),
     CoverageItem(8, "可回放性矩阵", "§8", ("bundle-only", "local-data", "network-dependent")),
 
     # Amendment 9.
@@ -148,6 +150,7 @@ AMENDMENT_COVERAGE = (
     CoverageItem(9, "known-item", "§5", ("REVIEWER_KNOWN_ITEM", "carry-forward ledger")),
     CoverageItem(9, "Stage-2A", "§0", ("Stage-2A reproduction-first", "no present execution force")),
     CoverageItem(9, "双向证据", "§9", ("supporting evidence", "contradicting evidence", "kill criterion")),
+    CoverageItem(9, "引用自包含", "§9", ("author", "year", "stable link", "page, table, or figure", "non-contiguous quotation")),
 
     # Amendment 10.
     CoverageItem(10, "exposure union v2", "§8", ("four-repository scoped", "held-out", "exposure")),
@@ -165,6 +168,7 @@ AMENDMENT_COVERAGE = (
 
     # Amendment 12.
     CoverageItem(12, "taxonomy v3", "§2", ("same frozen core", "strict-topology sensitivity", "terminal selector")),
+    CoverageItem(12, "三分派生", "§6", ("is_s0_core_compatible =", "is_rq_sys_control_compatible =", "is_project_method_candidate =")),
     CoverageItem(12, "coding v4", "§6", ("random-K", "no selection signal", "component_path_ids")),
     CoverageItem(12, "lineage 最小实现", "§7", ("paper_work_id", "fulltext_ref", "canonical_record_id")),
     CoverageItem(12, "单写原则", "§7", ("per-paper sidecar", "generated", "coder ≠ semantic_adjudicator")),
@@ -293,6 +297,67 @@ class ProtocolStructureTests(unittest.TestCase):
                     f"uncovered amendment topic: {item}",
                 )
         self.assertEqual(seen_amendments, set(AMENDMENT_NUMBERS))
+
+    def test_exact_final_derivation_formulas(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§6"))
+        formulas = (
+            "data_access_strict_bits = seven_strict_bits_all_false AND internal_visibility == api_only",
+            "is_s0_core_compatible = data_access_strict_bits AND core_topology IN {single_core, single_core_multi_call} AND core_native_modality IN {audio_native, omni_native}",
+            "is_reward_guided = EXISTS qualifying_reward_signal(s)",
+            "is_rq_sys_control_compatible = control_horizon == sequential AND EXISTS valid LIVE edge e driven by the same qualifying reward signal s AND e.signal_use IN s.reward_uses",
+            "is_project_method_candidate = is_s0_core_compatible AND is_rq_sys_control_compatible",
+            "reward_guided_selection = candidate_pool_exists == true AND selection_policy IN {scored_select, tournament_select} AND selection_object != none AND EXISTS qualifying reward signal s used for select or prune",
+            "offline_calibration signals never qualify",
+        )
+        for formula in formulas:
+            self.assertIn(_normalize_prose(formula), section, formula)
+
+    def test_e2_requires_complete_identifier_resolution_contract(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§5"))
+        required = (
+            "before any E2 claim, resolve every entry by DOI, ACL ID, OpenReview ID, or normalized title",
+            "total / resolved / ambiguous / unresolved",
+            "DOI-only mutation fixture",
+            "pre-registered unresolved ceiling",
+            "K=2 zero growth on the resolved subgraph is not closure exhaustion",
+        )
+        for phrase in required:
+            self.assertIn(_normalize_prose(phrase), section, phrase)
+
+    def test_direct_threat_requires_exact_dual_coding_contract(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§6"))
+        required = (
+            "DIRECT_THREAT requires threat_dual_coding",
+            "two distinct extractors",
+            "rec5_ref",
+            "disagreements > 0 requires a nonempty adjudicator",
+        )
+        for phrase in required:
+            self.assertIn(_normalize_prose(phrase), section, phrase)
+
+    def test_reviewer_facing_reference_contract_is_explicit(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§9"))
+        required = (
+            "author, year, and stable link",
+            "numeric claims require a page, table, or figure locator",
+            "non-contiguous quotation is explicitly marked as stitched",
+            "consistent, dominant, or ceiling claims are limited to the model, task, and setting reported by the paper",
+        )
+        for phrase in required:
+            self.assertIn(_normalize_prose(phrase), section, phrase)
+
+    def test_incremental_scan_contract_covers_both_execution_boundaries(self) -> None:
+        sources = _normalize_prose(
+            _section_text(self.text, "§3") + "\n" + _section_text(self.text, "§8")
+        )
+        required = (
+            "first execution searches through the execution date",
+            "before synthesis freeze, scan from the first-execution date through the freeze date",
+            "cross-period incremental batches are append-only",
+            "old decisions change only by dated supersession",
+        )
+        for phrase in required:
+            self.assertIn(_normalize_prose(phrase), sources, phrase)
 
 
 class CompilerProfileTests(unittest.TestCase):
