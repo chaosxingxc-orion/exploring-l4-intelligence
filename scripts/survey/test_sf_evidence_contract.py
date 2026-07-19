@@ -3,6 +3,7 @@
 import os
 import sys
 import unittest
+from copy import deepcopy
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -10,7 +11,61 @@ from sf_evidence_contract import (  # noqa: E402
     ROW_REQUIRED_FIELDS,
     check_page_locator,
     normalized_tokens,
+    validate_bound_values,
 )
+
+
+def binding(value):
+    return {"kind": "canon", "value": value, "quote": "claim-bearing quote"}
+
+
+def generic_row():
+    row = {
+        "method_path_id": "__fx12__#path",
+        "core_weight_update": False,
+        "external_component_weight_update": False,
+        "controller_program_or_config_optimized_on_labels": False,
+        "human_or_dev_label_model_selection": False,
+        "deployment_label_access": False,
+        "test_item_gold_access": False,
+        "inference_external_new_information": False,
+        "internal_visibility": "api_only",
+        "core_topology": "single_core",
+        "core_native_modality": "omni_native",
+        "control_horizon": "sequential",
+        "decision_rights": ["branch"],
+        "candidate_pool_exists": True,
+        "selection_policy": "scored_select",
+        "selection_object": "candidate_output",
+        "explicit_candidate_pool_selection": True,
+    }
+    row["claim_evidence"] = {
+        field: binding(row[field]) for field in ROW_REQUIRED_FIELDS
+    }
+    signal = {
+        "signal_id": "s1",
+        "form": "scalar_score",
+        "source": "llm_judge",
+        "lifecycle": "online_step",
+        "uses": ["prune"],
+        "claim_evidence": {},
+    }
+    signal["claim_evidence"] = {
+        field: binding(signal[field])
+        for field in ("form", "source", "lifecycle", "uses")
+    }
+    edge = {
+        "signal_id": "s1",
+        "signal_use": "prune",
+        "decision_right": "branch",
+        "claim_evidence": {},
+    }
+    edge["claim_evidence"] = {
+        field: binding(edge[field]) for field in ("signal_use", "decision_right")
+    }
+    row["signals"] = [signal]
+    row["control_edges"] = [edge]
+    return row
 
 
 class FakePage:
@@ -209,6 +264,83 @@ class AnchorPolicyTest(unittest.TestCase):
         )
         self.assertEqual(out, [])
         self.assertEqual([page.calls for page in pages], [1, 1])
+
+
+class BoundValueTest(unittest.TestCase):
+    def failures(self, row):
+        return validate_bound_values(row)
+
+    def test_complete_generic_row_passes(self):
+        self.assertEqual(self.failures(generic_row()), [])
+
+    def test_signal_source_must_match_its_evidence_value(self):
+        row = deepcopy(generic_row())
+        row["signals"][0]["source"] = "learned_rm_prm"
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "signal:s1:source:evidence-value-mismatch" in failure
+                for failure in failures
+            )
+        )
+
+    def test_edge_signal_use_must_match_its_evidence_value(self):
+        row = deepcopy(generic_row())
+        row["signals"][0]["uses"] = ["select"]
+        row["signals"][0]["claim_evidence"]["uses"]["value"] = ["select"]
+        row["control_edges"][0]["signal_use"] = "select"
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "edge:0:signal_use:evidence-value-mismatch" in failure
+                for failure in failures
+            )
+        )
+
+    def test_edge_decision_right_must_match_its_evidence_value(self):
+        row = deepcopy(generic_row())
+        row["control_edges"][0]["decision_right"] = "supply"
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "edge:0:decision_right:evidence-value-mismatch" in failure
+                for failure in failures
+            )
+        )
+
+    def test_selection_object_must_match_its_evidence_value(self):
+        row = deepcopy(generic_row())
+        row["selection_object"] = "trajectory"
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "row:selection_object:evidence-value-mismatch" in failure
+                for failure in failures
+            )
+        )
+
+    def test_explicit_pool_selection_must_match_its_evidence_value(self):
+        row = deepcopy(generic_row())
+        row["explicit_candidate_pool_selection"] = False
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "row:explicit_candidate_pool_selection:evidence-value-mismatch"
+                in failure
+                for failure in failures
+            )
+        )
+
+    def test_edge_decision_right_requires_evidence(self):
+        row = deepcopy(generic_row())
+        del row["control_edges"][0]["claim_evidence"]["decision_right"]
+        failures = self.failures(row)
+        self.assertTrue(
+            any(
+                "edge:0:decision_right:required-evidence-missing" in failure
+                for failure in failures
+            )
+        )
 
 
 if __name__ == "__main__":
