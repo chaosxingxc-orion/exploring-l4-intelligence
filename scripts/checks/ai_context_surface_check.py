@@ -69,6 +69,13 @@ REFERENCE_DEFINITION_RE = re.compile(
     r"(?:<([^>\n]*)>|([^ \t\n]+))"
     r"(?:[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\)\n]*\)))?[ \t]*$"
 )
+REFERENCE_DEFINITION_HEAD_RE = re.compile(
+    r"^[ ]{0,3}\[((?:\\.|[^\[\]\n])+)\]:[ \t]*$"
+)
+REFERENCE_DESTINATION_RE = re.compile(
+    r"^[ ]{1,3}(?:<([^>\n]*)>|([^ \t\n]+))"
+    r"(?:[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\)\n]*\)))?[ \t]*$"
+)
 FENCE_OPEN_RE = re.compile(r"^[ ]{0,3}(?:(`{3,})[^`\n]*|(~{3,})[^\n]*)$")
 SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 CLIENT_NORMALIZATIONS = (
@@ -282,46 +289,125 @@ def _is_direct_audit_round_link(path: str) -> bool:
     return not (len(parts) == 4 and parts[-1] == "INDEX.md")
 
 
-def _reference_definition_targets(text: str):
-    """Yield valid single-line Markdown reference-definition destinations.
+def _blank_except_newlines(text: str) -> str:
+    return "".join(character if character in "\r\n" else " " for character in text)
 
-    Definitions are scanned even when no usage is present.  That conservative
-    choice prevents a later reference usage from silently activating a cold
-    audit dependency.  Footnote definitions and fenced/indented examples are
-    not Markdown link definitions for this policy and are ignored.
-    """
 
+def _backtick_is_escaped(text: str, position: int) -> bool:
+    backslashes = 0
+    cursor = position - 1
+    while cursor >= 0 and text[cursor] == "\\":
+        backslashes += 1
+        cursor -= 1
+    return backslashes % 2 == 1
+
+
+def _mask_inline_code_spans(text: str) -> str:
+    characters = list(text)
+    cursor = 0
+    while cursor < len(text):
+        opening = text.find("`", cursor)
+        if opening < 0:
+            break
+        if _backtick_is_escaped(text, opening):
+            cursor = opening + 1
+            continue
+        opening_end = opening
+        while opening_end < len(text) and text[opening_end] == "`":
+            opening_end += 1
+        delimiter_length = opening_end - opening
+        search = opening_end
+        closing_end = None
+        while search < len(text):
+            closing = text.find("`", search)
+            if closing < 0:
+                break
+            if _backtick_is_escaped(text, closing):
+                search = closing + 1
+                continue
+            run_end = closing
+            while run_end < len(text) and text[run_end] == "`":
+                run_end += 1
+            if run_end - closing == delimiter_length:
+                closing_end = run_end
+                break
+            search = run_end
+        if closing_end is None:
+            cursor = opening_end
+            continue
+        for index in range(opening, closing_end):
+            if characters[index] not in "\r\n":
+                characters[index] = " "
+        cursor = closing_end
+    return "".join(characters)
+
+
+def _mask_markdown_code(text: str) -> str:
+    """Mask block and inline Markdown code while preserving line structure."""
+
+    masked_lines: list[str] = []
     fence_character: str | None = None
     fence_length = 0
-    for line in text.splitlines():
+    for line in text.splitlines(keepends=True):
+        content = line.rstrip("\r\n")
         if fence_character is not None:
             close = re.match(
                 rf"^[ ]{{0,3}}{re.escape(fence_character)}{{{fence_length},}}[ \t]*$",
-                line,
+                content,
             )
+            masked_lines.append(_blank_except_newlines(line))
             if close:
                 fence_character = None
                 fence_length = 0
             continue
-        opener = FENCE_OPEN_RE.match(line)
+        opener = FENCE_OPEN_RE.match(content)
         if opener:
             marker = opener.group(1) or opener.group(2)
             fence_character = marker[0]
             fence_length = len(marker)
+            masked_lines.append(_blank_except_newlines(line))
             continue
-        if line.startswith(("    ", "\t")):
+        if re.match(r"^(?: {4}| {0,3}\t)", content):
+            masked_lines.append(_blank_except_newlines(line))
             continue
+        masked_lines.append(line)
+    return _mask_inline_code_spans("".join(masked_lines))
+
+
+def _reference_definition_targets(text: str):
+    """Yield valid one- or two-line Markdown reference destinations.
+
+    Definitions are scanned even when no usage is present.  That conservative
+    choice prevents a later reference usage from silently activating a cold
+    audit dependency.  The caller supplies shared code-masked text; footnote
+    definitions are not link definitions for this policy and are ignored.
+    """
+
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
         definition = REFERENCE_DEFINITION_RE.match(line)
-        if not definition:
+        if definition:
+            raw_label = definition.group(1)
+            if raw_label.strip() and not raw_label.startswith("^"):
+                yield (
+                    definition.group(2)
+                    if definition.group(2) is not None
+                    else definition.group(3)
+                )
             continue
-        raw_label = definition.group(1)
+        head = REFERENCE_DEFINITION_HEAD_RE.match(line)
+        if not head or index + 1 >= len(lines):
+            continue
+        raw_label = head.group(1)
         if not raw_label.strip() or raw_label.startswith("^"):
             continue
-        yield (
-            definition.group(2)
-            if definition.group(2) is not None
-            else definition.group(3)
-        )
+        destination = REFERENCE_DESTINATION_RE.match(lines[index + 1])
+        if destination:
+            yield (
+                destination.group(1)
+                if destination.group(1) is not None
+                else destination.group(2)
+            )
 
 
 def _validate_manifest_shape(manifest: object, failures: list[str]):
@@ -553,10 +639,12 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         except UnicodeDecodeError as exc:
             failures.append(_failure("active-file-invalid-utf8", f"{path}: {exc}"))
             continue
+        link_text = _mask_markdown_code(text)
         inline_targets = (
-            match.group(1) or match.group(2) for match in INLINE_LINK_RE.finditer(text)
+            match.group(1) or match.group(2)
+            for match in INLINE_LINK_RE.finditer(link_text)
         )
-        reference_targets = _reference_definition_targets(text)
+        reference_targets = _reference_definition_targets(link_text)
         for raw_target in chain(inline_targets, reference_targets):
             try:
                 target = _normalize_link_target(path, raw_target)
