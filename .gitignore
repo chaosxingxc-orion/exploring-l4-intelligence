@@ -62,6 +62,9 @@ Thumbs.db
 # ── Wiki working clone (scripts/wiki-sync.sh) — transient, never tracked ─
 .wiki-tmp/
 
+# Isolated implementation worktrees created by agentic workflows
+.worktrees/
+
 # ── Data root: never commit models/datasets (≈410 GB; fetch via scripts/data/) ─
 # This is the single most important guard: speechrl-data/ holds all model weights,
 # datasets, reference repos and logs. It must never reach GitHub.
