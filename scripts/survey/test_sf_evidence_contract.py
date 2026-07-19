@@ -6,7 +6,11 @@ import unittest
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sf_evidence_contract import check_page_locator  # noqa: E402
+from sf_evidence_contract import (  # noqa: E402
+    ROW_REQUIRED_FIELDS,
+    check_page_locator,
+    normalized_tokens,
+)
 
 
 class FakePage:
@@ -67,6 +71,63 @@ class AnchorPolicyTest(unittest.TestCase):
     def test_missing_anchor_fails(self):
         failures = self.failures("p2 anchor='candidate majority controls termination'")
         self.assertTrue(any("page-anchor-missing" in failure for failure in failures))
+
+    def test_row_required_fields_are_ordered_contract_list(self):
+        self.assertEqual(
+            ROW_REQUIRED_FIELDS,
+            [
+                "core_weight_update",
+                "external_component_weight_update",
+                "controller_program_or_config_optimized_on_labels",
+                "human_or_dev_label_model_selection",
+                "deployment_label_access",
+                "test_item_gold_access",
+                "inference_external_new_information",
+                "internal_visibility",
+                "core_topology",
+                "core_native_modality",
+                "control_horizon",
+                "decision_rights",
+                "candidate_pool_exists",
+                "selection_policy",
+                "selection_object",
+                "explicit_candidate_pool_selection",
+            ],
+        )
+
+    def test_normalized_tokens_accepts_none(self):
+        self.assertEqual(normalized_tokens(None), [])
+
+    def test_none_locator_is_empty(self):
+        self.assertEqual(self.failures(None), [])
+
+    def test_leading_zero_page_errors_use_canonical_page_number(self):
+        self.assertEqual(
+            self.failures("p01"),
+            ["fx#row:row-locator:page-token-without-anchor:p1"],
+        )
+        self.assertEqual(
+            self.failures("p01 anchor='the'"),
+            ["fx#row:row-locator:page-anchor-too-weak:p1:the"],
+        )
+
+    def test_anchor_cannot_match_across_page_boundary(self):
+        reader = FakeReader(["distinctive orchestrator", "controls"])
+        out = []
+        check_page_locator(
+            "p1 anchor='distinctive orchestrator controls'",
+            reader,
+            "fx#row",
+            "row-locator",
+            out,
+        )
+        self.assertEqual(
+            out,
+            [
+                "fx#row:row-locator:page-anchor-missing:"
+                "p1:distinctive orchestrator controls"
+            ],
+        )
 
 
 if __name__ == "__main__":

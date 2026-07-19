@@ -10,7 +10,7 @@ from collections import Counter
 PAGE_NUMBER_RE = re.compile(r"\bp(?P<page>\d+)\b")
 STRONG_PAGE_RE = re.compile(r"\bp(?P<page>\d+)\s+anchor='(?P<anchor>[^']+)'")
 EVIDENCE_KINDS = {"canon", "tex", "pdf_page", "absence"}
-ROW_REQUIRED_FIELDS = {
+ROW_REQUIRED_FIELDS = [
     "core_weight_update",
     "external_component_weight_update",
     "controller_program_or_config_optimized_on_labels",
@@ -27,14 +27,14 @@ ROW_REQUIRED_FIELDS = {
     "selection_policy",
     "selection_object",
     "explicit_candidate_pool_selection",
-}
+]
 SIGNAL_REQUIRED_FIELDS = ["form", "source", "lifecycle", "uses"]
 EDGE_REQUIRED_FIELDS = ["signal_use", "decision_right"]
 
 
 def normalized_tokens(text):
     """Return Unicode lexical tokens after case-insensitive normalization."""
-    folded = unicodedata.normalize("NFKC", text).casefold()
+    folded = unicodedata.normalize("NFKC", text or "").casefold()
     return re.findall(r"[^\W_]+", folded, flags=re.UNICODE)
 
 
@@ -59,28 +59,30 @@ def _page_text(reader, index):
 
 def check_page_locator(locator, reader, pid, what, failures):
     """Append evidence-contract failures for each PDF page locator in *locator*."""
+    locator = locator or ""
     strong_locators = {
         match.start(): match for match in STRONG_PAGE_RE.finditer(locator)
     }
 
     for page_match in PAGE_NUMBER_RE.finditer(locator):
         strong_match = strong_locators.get(page_match.start())
-        page = page_match.group("page")
+        page_number = int(page_match.group("page"))
         if strong_match is None:
-            failures.append(f"{pid}:{what}:page-token-without-anchor:p{page}")
+            failures.append(f"{pid}:{what}:page-token-without-anchor:p{page_number}")
             continue
 
         anchor = strong_match.group("anchor")
         strength_failure = _anchor_strength_failure(anchor)
         if strength_failure is not None:
-            failures.append(f"{pid}:{what}:{strength_failure}:p{page}:{anchor}")
+            failures.append(
+                f"{pid}:{what}:{strength_failure}:p{page_number}:{anchor}"
+            )
             continue
 
         if reader is None:
             failures.append(f"{pid}:{what}:pdf-unreadable-for-page-check")
             continue
 
-        page_number = int(page)
         page_count = len(reader.pages)
         if not 1 <= page_number <= page_count:
             failures.append(
@@ -88,11 +90,9 @@ def check_page_locator(locator, reader, pid, what, failures):
             )
             continue
 
-        normalized_anchor = normalized_phrase(anchor)
-        document_text = " ".join(
-            _page_text(reader, index) for index in range(page_count)
-        )
-        occurrences = document_text.count(normalized_anchor)
+        needle = normalized_phrase(anchor)
+        document = [_page_text(reader, index) for index in range(page_count)]
+        occurrences = sum(text.count(needle) for text in document)
         if occurrences > 3:
             failures.append(
                 f"{pid}:{what}:page-anchor-not-discriminative:"
@@ -102,10 +102,8 @@ def check_page_locator(locator, reader, pid, what, failures):
 
         window_start = max(0, page_number - 2)
         window_end = min(page_count, page_number + 1)
-        window_text = " ".join(
-            _page_text(reader, index) for index in range(window_start, window_end)
-        )
-        if normalized_anchor not in window_text:
+        window = document[window_start:window_end]
+        if not any(needle in text for text in window):
             failures.append(
                 f"{pid}:{what}:page-anchor-missing:p{page_number}:{anchor}"
             )
