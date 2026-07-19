@@ -590,8 +590,14 @@ class AiContextSurfaceTests(unittest.TestCase):
 
     def test_exact_active_review_transaction_is_the_only_round_exception(self) -> None:
         relative_path = "wiki/survey/current/status.md"
-        active_review = "wiki/audit/campaign/round-12/correction.md"
-        raw = b"[correction](../../audit/campaign/round-12/correction.md#result)\n"
+        active_review = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        raw = (
+            b"[correction](../../audit/system-first-stage1a/round-12/"
+            b"stage1a-readiness-correction.md#result)\n"
+        )
         self.write(relative_path, raw)
         self.write(active_review, b"correction\n")
 
@@ -605,6 +611,18 @@ class AiContextSurfaceTests(unittest.TestCase):
         )
 
         self.assertEqual([], failures)
+
+    def test_active_review_pointer_does_not_create_a_new_unnumbered_exception(self) -> None:
+        path = "wiki/audit/campaign/round-12/correction.md"
+        self.write(path, b"correction\n")
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([], active_review=path),
+            tracked_paths=[path],
+        )
+
+        self.assert_failure(failures, "audit-epoch-state-invalid")
 
     def test_percent_encoded_relative_audit_link_cannot_bypass_routing(self) -> None:
         relative_path = "wiki/survey/current/status.md"
@@ -666,10 +684,14 @@ class AiContextSurfaceTests(unittest.TestCase):
 
     def test_reference_to_exact_active_review_transaction_passes(self) -> None:
         relative_path = "wiki/survey/current/status.md"
-        active_review = "wiki/audit/campaign/round-12/correction.md"
+        active_review = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
         raw = (
             b"See [correction][ROUND].\n\n"
-            b"[round]: <../../audit/campaign/round-12/correction.md#result>\n"
+            b"[round]: <../../audit/system-first-stage1a/round-12/"
+            b"stage1a-readiness-correction.md#result>\n"
         )
         self.write(relative_path, raw)
         self.write(active_review, b"correction\n")
@@ -799,11 +821,15 @@ class AiContextSurfaceTests(unittest.TestCase):
 
     def test_multiline_reference_destination_to_active_review_passes(self) -> None:
         relative_path = "wiki/survey/current/status.md"
-        active_review = "wiki/audit/campaign/round-12/correction.md"
+        active_review = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
         raw = (
             b"See [correction][r].\n\n"
             b"[r]:\n"
-            b"  <../../audit/campaign/round-12/correction.md#result>\n"
+            b"  <../../audit/system-first-stage1a/round-12/"
+            b"stage1a-readiness-correction.md#result>\n"
         )
         self.write(relative_path, raw)
         self.write(active_review, b"correction\n")
@@ -1060,6 +1086,216 @@ class AiContextSurfaceTests(unittest.TestCase):
                 )
                 self.assert_failure(failures, "consolidation-epoch-invalid")
 
+    @staticmethod
+    def iteration_raw(
+        *,
+        campaign: str,
+        epoch: int,
+        ordinal: int,
+        kind: str,
+        spec_path: str,
+        spec_version: int,
+        spec_sha256: str,
+    ) -> bytes:
+        return (
+            "---\n"
+            "schema: ai-context-audit-iteration-v1\n"
+            f"campaign: {campaign}\n"
+            f"epoch: {epoch}\n"
+            f"ordinal: {ordinal}\n"
+            f"kind: {kind}\n"
+            f"effective_spec: {spec_path}\n"
+            f"effective_spec_version: {spec_version}\n"
+            f"effective_spec_sha256: {spec_sha256}\n"
+            "---\n\n"
+            "# Registered audit iteration\n"
+        ).encode("utf-8")
+
+    def registered_epoch_state(
+        self,
+        layout=((1, (1, 2)), (2, (1,))),
+        *,
+        campaign: str = "campaign",
+    ):
+        spec_path = "wiki/survey/current/protocol.md"
+        spec_raw = (
+            "---\nprotocol_id: TEST\nprotocol_version: 2\n---\n\n"
+            "# Effective protocol\n"
+        ).encode("utf-8")
+        spec_sha = raw_sha256(spec_raw)
+        docs = {spec_path: spec_raw}
+        for epoch, ordinals in layout:
+            receipt_path = (
+                f"wiki/audit/{campaign}/epoch-{epoch}/consolidation-receipt.json"
+            )
+            receipt = {
+                "schema": "ai-context-consolidation-receipt-v1",
+                "campaign": campaign,
+                "epoch": epoch,
+                "effective_spec": spec_path,
+                "effective_spec_version": 2,
+                "effective_spec_sha256": spec_sha,
+            }
+            docs[receipt_path] = (
+                json.dumps(receipt, sort_keys=True) + "\n"
+            ).encode("utf-8")
+            for ordinal in ordinals:
+                path = (
+                    f"wiki/audit/{campaign}/epoch-{epoch}/round-{ordinal}/"
+                    f"protocol-amendment-{ordinal}.md"
+                )
+                docs[path] = self.iteration_raw(
+                    campaign=campaign,
+                    epoch=epoch,
+                    ordinal=ordinal,
+                    kind="amendment",
+                    spec_path=spec_path,
+                    spec_version=2,
+                    spec_sha256=spec_sha,
+                )
+        registered = {
+            path: git_blob_id(raw)
+            for path, raw in docs.items()
+            if path.startswith("wiki/audit/")
+        }
+        document = manifest(
+            [self.active_entry(spec_path, spec_raw, "CURRENT")]
+        )
+        return document, sorted(docs), registered, docs
+
+    def validate_epoch_state(self, document, tracked, registered, docs):
+        return surface.validate_audit_epoch_state(
+            document,
+            tracked,
+            registered,
+            lambda path: docs.get(path),
+        )
+
+    def test_registered_epoch_state_machine_accepts_contiguous_chain(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state()
+
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+
+        self.assertEqual([], failures)
+
+    def test_epoch_state_machine_allows_early_consolidation_before_ordinal_three(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)), (2, (1,)))
+        )
+
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+
+        self.assertEqual([], failures)
+
+    def test_epoch_state_machine_rejects_unnumbered_duplicate_gap_and_fourth(self) -> None:
+        cases = {
+            "gap": ((1, (1, 3)),),
+            "fourth": ((1, (1, 2, 3, 4)),),
+        }
+        for label, layout in cases.items():
+            with self.subTest(label=label):
+                document, tracked, registered, docs = self.registered_epoch_state(
+                    layout=layout
+                )
+                failures = self.validate_epoch_state(
+                    document, tracked, registered, docs
+                )
+                self.assert_failure(failures, "audit-epoch-state-invalid")
+
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)),)
+        )
+        original = next(path for path in docs if path.endswith("amendment-1.md"))
+        for round_id in ("duplicate-a", "duplicate-b", "duplicate-c"):
+            duplicate = original.replace("round-1", f"round-{round_id}")
+            docs[duplicate] = docs[original]
+            tracked.append(duplicate)
+            registered[duplicate] = git_blob_id(docs[duplicate])
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+        self.assert_failure(failures, "audit-epoch-state-invalid")
+
+        original_raw = docs.pop(original)
+        original_pin = registered.pop(original)
+        tracked.remove(original)
+        for round_id in range(1, 5):
+            unnumbered = (
+                f"wiki/audit/campaign/epoch-1/round-unnumbered-{round_id}/"
+                "protocol-correction.md"
+            )
+            docs[unnumbered] = original_raw
+            tracked.append(unnumbered)
+            registered[unnumbered] = original_pin
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+        self.assert_failure(failures, "audit-epoch-state-invalid")
+
+    def test_epoch_state_machine_rejects_skipped_epoch_and_missing_registration(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)), (3, (1,)))
+        )
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+        self.assert_failure(failures, "audit-epoch-state-invalid")
+
+        for label, suffix in (
+            ("artifact", "amendment-1.md"),
+            ("receipt", "consolidation-receipt.json"),
+        ):
+            with self.subTest(label=label):
+                document, tracked, registered, docs = self.registered_epoch_state(
+                    layout=((1, (1,)),)
+                )
+                target = next(path for path in registered if path.endswith(suffix))
+                registered.pop(target)
+                failures = self.validate_epoch_state(
+                    document, tracked, registered, docs
+                )
+                self.assert_failure(failures, "audit-artifact-unregistered")
+
+    def test_epoch_state_machine_rejects_repin_and_forged_spec_binding(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)),)
+        )
+        artifact = next(path for path in registered if path.endswith("amendment-1.md"))
+        registered[artifact] = "0" * 40
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+        self.assert_failure(failures, "audit-registry-blob-mismatch")
+
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)),)
+        )
+        receipt = next(
+            path for path in registered if path.endswith("consolidation-receipt.json")
+        )
+        receipt_document = json.loads(docs[receipt])
+        receipt_document["effective_spec_sha256"] = "0" * 64
+        docs[receipt] = (
+            json.dumps(receipt_document, sort_keys=True) + "\n"
+        ).encode("utf-8")
+        registered[receipt] = git_blob_id(docs[receipt])
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+        self.assert_failure(failures, "consolidation-epoch-invalid")
+
+    def test_epoch_state_machine_requires_metadata_path_and_receipt_identity(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)),)
+        )
+        artifact = next(path for path in registered if path.endswith("amendment-1.md"))
+        docs[artifact] = docs[artifact].replace(b"ordinal: 1\n", b"ordinal: 2\n")
+        registered[artifact] = git_blob_id(docs[artifact])
+
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+
+        self.assert_failure(failures, "audit-iteration-metadata-invalid")
+
+    def test_highest_epoch_receipt_requires_exact_current_manifest_binding(self) -> None:
+        document, tracked, registered, docs = self.registered_epoch_state(
+            layout=((1, (1,)),)
+        )
+        document["active_entries"][0]["sha256"] = "0" * 64
+
+        failures = self.validate_epoch_state(document, tracked, registered, docs)
+
+        self.assert_failure(failures, "consolidation-epoch-invalid")
+
     def test_unnumbered_fixed_correction_remains_legal_without_epoch_stub(self) -> None:
         path = (
             "wiki/audit/system-first-stage1a/round-12/"
@@ -1165,6 +1401,38 @@ class AiContextSurfaceTests(unittest.TestCase):
         for label, mutated in mutations.items():
             with self.subTest(label=label), self.assertRaises(ContextSurfaceError):
                 normalize_agent_guide(mutated)
+
+    def test_agent_guide_rejects_every_foreign_client_identity_line(self) -> None:
+        agents = "\n".join(
+            [
+                "# AGENTS.md",
+                "",
+                "This file provides guidance to Codex (Codex.ai/code) "
+                "when working with code in this repository.",
+                "",
+                "shared",
+                "",
+                "## Research skills",
+                "",
+                "Installed via the Windows Codex plugin marketplace (see `docs/setup.md`):",
+                "skills",
+                "",
+            ]
+        )
+        claude = agents.replace("# AGENTS.md", "# CLAUDE.md").replace(
+            "Codex (Codex.ai/code)", "Claude Code (claude.ai/code)"
+        ).replace("Windows Codex plugin", "Windows Claude Code plugin")
+        guides = {"AGENTS": agents, "CLAUDE": claude}
+
+        for client, valid in guides.items():
+            foreign_client = "CLAUDE" if client == "AGENTS" else "AGENTS"
+            for field in ("h1", "description", "marketplace"):
+                foreign = surface.AGENT_GUIDE_CLIENTS[foreign_client][field]
+                with (
+                    self.subTest(client=client, field=field),
+                    self.assertRaises(ContextSurfaceError),
+                ):
+                    normalize_agent_guide(valid + foreign + "\n")
 
     def test_fourth_agent_guide_difference_is_not_normalized(self) -> None:
         real_repo = Path(__file__).resolve().parents[2]
@@ -1320,6 +1588,16 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                 1,
             ),
             "step-reordered": step_reordered,
+            "receipt-order-removed": policy.replace(
+                "先 commit receipt、append 注册",
+                "稍后再处理 receipt",
+                1,
+            ),
+            "epoch-continuity-removed": policy.replace(
+                "epoch 从 1 连续递增",
+                "epoch 可任意编号",
+                1,
+            ),
         }
 
         for label, mutated in mutations.items():
@@ -1562,6 +1840,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 {"path": entry["path"], "git_blob": entry["git_blob"]}
                 for entry in self.artifacts
             ]
+            settings["REGISTRY_BASELINE_COUNT"] = len(canonical)
             settings["REGISTRY_BASELINE_PREFIX_SHA256"] = hashlib.sha256(
                 json.dumps(
                     canonical, ensure_ascii=False, separators=(",", ":")
@@ -1637,6 +1916,93 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             return raw_by_blob[blob]
 
         return inventory, read_blob
+
+    def add_registered_epoch(
+        self,
+        *,
+        ordinal: int = 1,
+        register_artifact: bool = True,
+        register_receipt: bool = True,
+        forged_spec_hash: bool = False,
+    ) -> tuple[str, str, str]:
+        spec_path = "wiki/survey/current/protocol.md"
+        spec_raw = (
+            "---\nprotocol_id: TEST\nprotocol_version: 2\n---\n\n"
+            "# Effective protocol\n"
+        ).encode("utf-8")
+        spec_sha = raw_sha256(spec_raw)
+        effective_sha = "0" * 64 if forged_spec_hash else spec_sha
+        artifact = (
+            "wiki/audit/campaign/epoch-1/round-1/"
+            f"protocol-amendment-{ordinal}.md"
+        )
+        receipt = "wiki/audit/campaign/epoch-1/consolidation-receipt.json"
+        docs = {
+            spec_path: spec_raw,
+            artifact: AiContextSurfaceTests.iteration_raw(
+                campaign="campaign",
+                epoch=1,
+                ordinal=ordinal,
+                kind="amendment",
+                spec_path=spec_path,
+                spec_version=2,
+                spec_sha256=effective_sha,
+            ),
+            receipt: (
+                json.dumps(
+                    {
+                        "schema": "ai-context-consolidation-receipt-v1",
+                        "campaign": "campaign",
+                        "epoch": 1,
+                        "effective_spec": spec_path,
+                        "effective_spec_version": 2,
+                        "effective_spec_sha256": effective_sha,
+                    },
+                    sort_keys=True,
+                )
+                + "\n"
+            ).encode("utf-8"),
+        }
+        for path, raw in docs.items():
+            target = self.repo.joinpath(*PurePosixPath(path).parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
+        for path, should_register in (
+            (artifact, register_artifact),
+            (receipt, register_receipt),
+        ):
+            if should_register:
+                self.artifacts.append(
+                    {"path": path, "git_blob": git_blob_id(docs[path])}
+                )
+        self.registry.write_text(
+            json.dumps({"artifacts": self.artifacts}), encoding="utf-8"
+        )
+        self.specs = (
+            *self.specs[:-1],
+            {
+                "path": spec_path,
+                "class": "CURRENT",
+                "load_policy": "targeted",
+                "purpose": "effective protocol",
+            },
+            self.specs[-1],
+        )
+        self.tracked.extend((spec_path, artifact, receipt))
+        self.blobs.update(
+            {
+                path: git_blob_id(
+                    self.repo.joinpath(*PurePosixPath(path).parts).read_bytes()
+                )
+                for path in (
+                    "wiki/survey/sf-audit-artifact-registry.json",
+                    spec_path,
+                    artifact,
+                    receipt,
+                )
+            }
+        )
+        return spec_path, artifact, receipt
 
     def test_builder_requires_stage_bound_raw_for_every_influencing_input(self) -> None:
         inventory, read_blob = self.staged_graph()
@@ -1790,6 +2156,111 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             )
 
         self.assertIn("index-worktree-mismatch", str(raised.exception))
+
+    def test_builder_accepts_registered_epoch_state(self) -> None:
+        self.add_registered_epoch()
+        inventory, read_blob = self.staged_graph()
+
+        with self.patched_builder():
+            document = builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+
+        self.assertIn(
+            "wiki/survey/current/protocol.md",
+            {entry["path"] for entry in document["active_entries"]},
+        )
+
+    def test_builder_rejects_unregistered_epoch_artifact_or_receipt(self) -> None:
+        for label, options in (
+            ("artifact", {"register_artifact": False}),
+            ("receipt", {"register_receipt": False}),
+        ):
+            with self.subTest(label=label):
+                self.setUp()
+                self.add_registered_epoch(**options)
+                inventory, read_blob = self.staged_graph()
+                with self.patched_builder(), self.assertRaises(
+                    builder.ManifestBuildError
+                ) as raised:
+                    builder.build_manifest(
+                        self.repo, inventory, read_blob, allow_untracked_self=True
+                    )
+                self.assertIn("audit-artifact-unregistered", str(raised.exception))
+
+    def test_builder_rejects_dirty_registered_epoch_artifact_and_receipt(self) -> None:
+        _spec, artifact, receipt = self.add_registered_epoch()
+        inventory, read_blob = self.staged_graph()
+        for label, path in (("artifact", artifact), ("receipt", receipt)):
+            with self.subTest(label=label):
+                target = self.repo.joinpath(*PurePosixPath(path).parts)
+                original = target.read_bytes()
+                target.write_bytes(original + b"dirty\n")
+                try:
+                    with self.patched_builder(), self.assertRaises(
+                        builder.ManifestBuildError
+                    ) as raised:
+                        builder.build_manifest(
+                            self.repo,
+                            inventory,
+                            read_blob,
+                            allow_untracked_self=True,
+                        )
+                    self.assertIn("index-worktree-mismatch", str(raised.exception))
+                finally:
+                    target.write_bytes(original)
+
+    def test_builder_rejects_forged_epoch_spec_binding(self) -> None:
+        self.add_registered_epoch(forged_spec_hash=True)
+        inventory, read_blob = self.staged_graph()
+
+        with self.patched_builder(), self.assertRaises(
+            builder.ManifestBuildError
+        ) as raised:
+            builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+
+        self.assertIn("consolidation-epoch-invalid", str(raised.exception))
+
+    def test_builder_rejects_registered_prefix_repin(self) -> None:
+        _spec, artifact, _receipt = self.add_registered_epoch()
+        anchored_count = len(self.artifacts)
+        anchored_sha = hashlib.sha256(
+            json.dumps(
+                [
+                    {"path": entry["path"], "git_blob": entry["git_blob"]}
+                    for entry in self.artifacts
+                ],
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+        target = self.repo.joinpath(*PurePosixPath(artifact).parts)
+        target.write_bytes(target.read_bytes() + b"repinned rewrite\n")
+        self.artifacts[-2]["git_blob"] = git_blob_id(target.read_bytes())
+        self.registry.write_text(
+            json.dumps({"artifacts": self.artifacts}), encoding="utf-8"
+        )
+        self.blobs[artifact] = git_blob_id(target.read_bytes())
+        self.blobs["wiki/survey/sf-audit-artifact-registry.json"] = git_blob_id(
+            self.registry.read_bytes()
+        )
+        inventory, read_blob = self.staged_graph()
+
+        with (
+            self.patched_builder(),
+            mock.patch.object(builder, "REGISTRY_BASELINE_COUNT", anchored_count),
+            mock.patch.object(
+                builder, "REGISTRY_BASELINE_PREFIX_SHA256", anchored_sha
+            ),
+            self.assertRaises(builder.ManifestBuildError) as raised,
+        ):
+            builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+
+        self.assertIn("audit-registry-prefix-mismatch", str(raised.exception))
 
     def test_archive_transition_constants_pin_exact_sources_destinations_and_blobs(self) -> None:
         actual = tuple(
@@ -1955,6 +2426,78 @@ class AiContextManifestBuilderTests(unittest.TestCase):
 
         self.assertIn("manifest-byte-mismatch", failure_codes(failures))
 
+    def test_manifest_check_rejects_tracked_old_self_with_generated_worktree(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        inventory, read_blob = self.staged_graph()
+        with self.patched_builder():
+            expected = builder.render_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+        target.parent.mkdir(parents=True)
+        target.write_bytes(expected)
+        old_raw = b'{"old":"staged manifest"}\n'
+        old_blob = git_blob_id(old_raw)
+        tracked_inventory = dict(inventory)
+        tracked_inventory[builder.MANIFEST_RELATIVE_PATH] = {
+            "mode": "100644",
+            "blob": old_blob,
+            "stage": 0,
+        }
+
+        def tracked_reader(blob: str) -> bytes:
+            return old_raw if blob == old_blob else read_blob(blob)
+
+        with self.patched_builder(), self.assertRaises(
+            builder.ManifestBuildError
+        ) as raised:
+            builder.check_manifest(
+                self.repo, target, tracked_inventory, tracked_reader
+            )
+
+        self.assertIn("index-worktree-mismatch", str(raised.exception))
+
+    def test_manifest_check_rejects_post_stage_rewrite_and_crlf_self(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        inventory, read_blob = self.staged_graph()
+        with self.patched_builder():
+            builder.write_manifest(self.repo, target, inventory, read_blob)
+        staged_inventory, staged_reader = self.staged_graph(
+            extra_paths=(builder.MANIFEST_RELATIVE_PATH,)
+        )
+        staged_raw = target.read_bytes()
+        mutations = {
+            "post-stage-rewrite": staged_raw + b" ",
+            "crlf": staged_raw.replace(b"\n", b"\r\n"),
+        }
+        for label, mutated in mutations.items():
+            with self.subTest(label=label):
+                target.write_bytes(mutated)
+                with self.patched_builder(), self.assertRaises(
+                    builder.ManifestBuildError
+                ) as raised:
+                    builder.check_manifest(
+                        self.repo, target, staged_inventory, staged_reader
+                    )
+                self.assertIn("index-worktree-mismatch", str(raised.exception))
+        target.write_bytes(staged_raw)
+
+    def test_manifest_write_allows_dirty_tracked_self_then_requires_restage(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b'{"old":"staged"}\n')
+        inventory, read_blob = self.staged_graph(
+            extra_paths=(builder.MANIFEST_RELATIVE_PATH,)
+        )
+        target.write_bytes(b'{"dirty":"worktree"}\n')
+
+        with self.patched_builder():
+            builder.write_manifest(self.repo, target, inventory, read_blob)
+            with self.assertRaises(builder.ManifestBuildError) as raised:
+                builder.check_manifest(self.repo, target, inventory, read_blob)
+
+        self.assertIn("index-worktree-mismatch", str(raised.exception))
+        self.assertTrue(target.read_bytes().endswith(b"\n"))
+
     def test_manifest_bootstrap_rejects_wrong_target(self) -> None:
         wrong_target = self.repo / "docs/integrity/not-the-manifest.json"
         inventory, read_blob = self.staged_graph()
@@ -2041,7 +2584,6 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             target = self.repo.joinpath(*PurePosixPath(path).parts)
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((path + "\n").encode("utf-8"))
-        tracked = [*self.tracked, index_path, correction]
         inventory, read_blob = self.staged_graph(
             extra_paths=(index_path, correction)
         )
@@ -2071,7 +2613,6 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 target = self.repo.joinpath(*PurePosixPath(present).parts)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes((present + "\n").encode("utf-8"))
-                tracked = [*self.tracked, present]
                 inventory, read_blob = self.staged_graph(extra_paths=(present,))
                 with (
                     self.patched_builder(),
@@ -2198,7 +2739,6 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         for label in ("reorder", "changed_blob"):
             with self.subTest(label=label):
                 document = json.loads(json.dumps(original))
-                blobs = dict(self.blobs)
                 if label == "reorder":
                     document["artifacts"][0], document["artifacts"][1] = (
                         document["artifacts"][1],
@@ -2219,7 +2759,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                     )
                 self.assertIn("audit-registry-prefix-mismatch", str(raised.exception))
 
-    def test_registry_allows_tracked_audit_root_append_without_legacy_inflation(self) -> None:
+    def test_registry_allows_anchored_audit_root_append_without_legacy_inflation(self) -> None:
         index_path = "wiki/audit/system-first-stage1a/INDEX.md"
         correction = (
             "wiki/audit/system-first-stage1a/round-12/"
@@ -2234,8 +2774,8 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             self.repo.joinpath(*PurePosixPath(correction).parts).read_bytes()
         )
         document["artifacts"].append({"path": correction, "git_blob": correction_blob})
+        self.artifacts.append({"path": correction, "git_blob": correction_blob})
         self.registry.write_text(json.dumps(document), encoding="utf-8")
-        tracked = [*self.tracked, index_path, correction]
         inventory, read_blob = self.staged_graph(
             extra_paths=(index_path, correction)
         )
@@ -2260,6 +2800,27 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         self.assertNotIn(correction, legacy_paths)
         self.assertEqual(78, len(legacy_paths))
 
+    def test_registry_rejects_an_unanchored_appended_tail(self) -> None:
+        path = "wiki/audit/campaign/round-1/review.md"
+        target = self.repo.joinpath(*PurePosixPath(path).parts)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b"review\n")
+        document = json.loads(self.registry.read_text(encoding="utf-8"))
+        document["artifacts"].append(
+            {"path": path, "git_blob": git_blob_id(target.read_bytes())}
+        )
+        self.registry.write_text(json.dumps(document), encoding="utf-8")
+        inventory, read_blob = self.staged_graph(extra_paths=(path,))
+
+        with self.patched_builder(), self.assertRaises(
+            builder.ManifestBuildError
+        ) as raised:
+            builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+
+        self.assertIn("audit-registry-unanchored-append", str(raised.exception))
+
     def test_registry_rejects_extra_outside_audit_root(self) -> None:
         extra_path = "wiki/2026-07-20-extra-review.md"
         target = self.repo.joinpath(*PurePosixPath(extra_path).parts)
@@ -2270,7 +2831,6 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             {"path": extra_path, "git_blob": git_blob_id(target.read_bytes())}
         )
         self.registry.write_text(json.dumps(document), encoding="utf-8")
-        tracked = [*self.tracked, extra_path]
         inventory, read_blob = self.staged_graph(extra_paths=(extra_path,))
 
         with self.patched_builder(), self.assertRaises(

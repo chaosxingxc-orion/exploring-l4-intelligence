@@ -54,7 +54,8 @@ Choose the document role before creating the file:
 |---|---|
 | current survey protocol, status, table, schema, or manifest | `wiki/survey/current/` |
 | long-lived paper census, claim, or evidence record | `wiki/survey/registry/` |
-| reviewer submission/report/response/correction/sign-off | ordinary transaction: `wiki/audit/<campaign>/<round-id>/`; numbered amendment/correction: `wiki/audit/<campaign>/epoch-<N>/<round-id>/` plus `epoch-<N>/consolidation-receipt.json` |
+| reviewer submission/report/response/sign-off | `wiki/audit/<campaign>/<round-id>/` |
+| new amendment/correction | `wiki/audit/<campaign>/epoch-<N>/<round-id>/<name>-<ordinal>.md` plus registered `epoch-<N>/consolidation-receipt.json`; the path-pinned B8 correction is the only unnumbered exception |
 | superseded, unregistered working artifact | `wiki/archive/<knowledge-layer>/<campaign>/` after the safe-move gate |
 | mutable campaign exploration or dossier | `wiki/survey/workbench/<campaign>/` |
 | engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
@@ -64,8 +65,11 @@ Choose the document role before creating the file:
 
 Current truth uses stable HOT/CURRENT files; audit and archive files are cold. Consolidate before a
 fourth numbered amendment/correction: ordinal 4 is invalid, so a completed consolidation starts the
-next epoch at ordinal 1. Epoch receipts are immutable, non-default AUDIT records bound to the current
-effective-spec version and staged SHA. The full lifecycle triggers are in `wiki/AI-Collaboration.md`.
+next epoch at ordinal 1. Epochs and ordinals are unique and continuous. Artifact front matter and the
+receipt use the exact schemas in `wiki/AI-Collaboration.md`; both are registered, blob-pinned AUDIT
+records. Commit and append-register the immutable receipt, and advance the reviewed registry-prefix
+count/hash anchor, before opening a new epoch. The highest receipt binds the current-manifest protocol
+version and staged SHA. The full lifecycle triggers are in `wiki/AI-Collaboration.md`.
 Before moving a
 file, prove it is absent from the audit registry/current manifest, has no live inbound dependency,
 and preserves its stage-0 Git blob and mode with `git mv`. The complete placement and lifecycle policy

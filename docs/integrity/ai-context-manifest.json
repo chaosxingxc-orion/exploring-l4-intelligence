@@ -34,7 +34,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "canonical AI document placement and lifecycle policy",
-      "sha256": "83ca7c5ac36012475e2ade83afa4b5bd83df197eb86f25937022409861a0f8d6"
+      "sha256": "0191d10ccd904477a13168a0a49b9f9847b2cecaa747c534f20a634148048cbc"
     },
     {
       "path": "wiki/survey/current/README.md",

@@ -90,6 +90,39 @@ NUMBERED_ITERATION_RE = re.compile(
     re.IGNORECASE,
 )
 EPOCH_DIRECTORY_RE = re.compile(r"epoch-([1-9]\d*)\Z")
+AUDIT_ITERATION_KIND_RE = re.compile(
+    r"(?:^|[-_.])(?P<kind>amendment|correction)(?:[-_.]|$)", re.IGNORECASE
+)
+AUDIT_ITERATION_PATH_RE = re.compile(
+    r"\Awiki/audit/(?P<campaign>[A-Za-z0-9][A-Za-z0-9._-]*)/"
+    r"epoch-(?P<epoch>[1-9]\d*)/"
+    r"(?P<round>[A-Za-z0-9][A-Za-z0-9._-]*)/"
+    r"(?:[A-Za-z0-9][A-Za-z0-9._-]*[-_.])?"
+    r"(?P<kind>amendment|correction)-(?P<ordinal>[1-9]\d*)\.md\Z",
+    re.IGNORECASE,
+)
+CONSOLIDATION_RECEIPT_PATH_RE = re.compile(
+    r"\Awiki/audit/(?P<campaign>[A-Za-z0-9][A-Za-z0-9._-]*)/"
+    r"epoch-(?P<epoch>[1-9]\d*)/consolidation-receipt\.json\Z"
+)
+FIXED_AUDIT_ITERATION_EXCEPTIONS = frozenset(
+    {
+        "wiki/audit/system-first-stage1a/round-12/"
+        "stage1a-readiness-correction.md"
+    }
+)
+AUDIT_ITERATION_SCHEMA = "ai-context-audit-iteration-v1"
+AUDIT_ITERATION_KEYS = {
+    "schema",
+    "campaign",
+    "epoch",
+    "ordinal",
+    "kind",
+    "effective_spec",
+    "effective_spec_version",
+    "effective_spec_sha256",
+}
+EFFECTIVE_PROTOCOL_PATH = "wiki/survey/current/protocol.md"
 CONSOLIDATION_RECEIPT_SCHEMA = "ai-context-consolidation-receipt-v1"
 CONSOLIDATION_RECEIPT_KEYS = {
     "schema",
@@ -379,6 +412,17 @@ def normalize_agent_guide(text):
         )
     client = matching_clients[0]
     shape = AGENT_GUIDE_CLIENTS[client]
+    for foreign_client, foreign_shape in AGENT_GUIDE_CLIENTS.items():
+        if foreign_client == client:
+            continue
+        for field in ("h1", "description", "marketplace"):
+            if foreign_shape[field] in plain_lines:
+                raise ContextSurfaceError(
+                    _failure(
+                        "agent-guide-shape-invalid",
+                        f"{client} guide contains foreign {foreign_client} {field}",
+                    )
+                )
     for field in ("h1", "description", "marketplace"):
         if plain_lines.count(shape[field]) != 1:
             raise ContextSurfaceError(
@@ -695,6 +739,13 @@ def validate_collaboration_policy(text: str) -> list[str]:
             "ordinal",
             "consolidation epoch",
             "consolidation-receipt.json",
+            "schema=`ai-context-audit-iteration-v1`",
+            "Artifact 与 receipt 都必须进入 audit registry",
+            "epoch 从 1 连续递增",
+            "ordinal 唯一且连续",
+            "先 commit receipt、append 注册",
+            "registry prefix count/hash anchor",
+            "wiki/survey/current/protocol.md",
         ):
             if token not in trigger_text:
                 failures.append(_policy_invalid(f"consolidation rule missing {token!r}"))
@@ -1058,6 +1109,395 @@ def _front_matter_protocol_version(raw: bytes, path: str) -> int | None:
     return int(match.group(1) or match.group(2))
 
 
+def _parse_audit_iteration_front_matter(raw: bytes, path: str) -> dict[str, object]:
+    """Parse the exact flat front matter for one registered epoch iteration."""
+
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ContextSurfaceError(
+            _failure("audit-iteration-metadata-invalid", f"{path}: invalid UTF-8: {exc}")
+        ) from exc
+    if "\r" in text or not text.startswith("---\n"):
+        raise ContextSurfaceError(
+            _failure(
+                "audit-iteration-metadata-invalid",
+                f"{path}: front matter must start with LF-only ---",
+            )
+        )
+    end = text.find("\n---\n", 4)
+    if end < 0:
+        raise ContextSurfaceError(
+            _failure("audit-iteration-metadata-invalid", f"{path}: unclosed front matter")
+        )
+    values: dict[str, str] = {}
+    for line in text[4:end].split("\n"):
+        if not line or ": " not in line:
+            raise ContextSurfaceError(
+                _failure(
+                    "audit-iteration-metadata-invalid",
+                    f"{path}: front matter must use one 'key: value' per line",
+                )
+            )
+        key, value = line.split(": ", 1)
+        if not key or not value or key in values:
+            raise ContextSurfaceError(
+                _failure(
+                    "audit-iteration-metadata-invalid",
+                    f"{path}: empty or duplicate front-matter field {key!r}",
+                )
+            )
+        values[key] = value
+    if set(values) != AUDIT_ITERATION_KEYS:
+        raise ContextSurfaceError(
+            _failure(
+                "audit-iteration-metadata-invalid",
+                f"{path}: exact fields must be {sorted(AUDIT_ITERATION_KEYS)}",
+            )
+        )
+    if values["schema"] != AUDIT_ITERATION_SCHEMA:
+        raise ContextSurfaceError(
+            _failure(
+                "audit-iteration-metadata-invalid",
+                f"{path}: schema must be {AUDIT_ITERATION_SCHEMA}",
+            )
+        )
+    parsed: dict[str, object] = dict(values)
+    for field in ("epoch", "ordinal", "effective_spec_version"):
+        value = values[field]
+        if re.fullmatch(r"[1-9]\d*", value) is None:
+            raise ContextSurfaceError(
+                _failure(
+                    "audit-iteration-metadata-invalid",
+                    f"{path}: {field} must be a positive canonical integer",
+                )
+            )
+        parsed[field] = int(value)
+    if values["kind"] not in {"amendment", "correction"}:
+        raise ContextSurfaceError(
+            _failure(
+                "audit-iteration-metadata-invalid",
+                f"{path}: kind must be amendment or correction",
+            )
+        )
+    try:
+        parsed["effective_spec"] = _canonical_path(
+            values["effective_spec"], f"{path}.effective_spec"
+        )
+    except ContextSurfaceError as exc:
+        raise ContextSurfaceError(
+            _failure("audit-iteration-metadata-invalid", str(exc))
+        ) from exc
+    if SHA256_RE.fullmatch(values["effective_spec_sha256"]) is None:
+        raise ContextSurfaceError(
+            _failure(
+                "audit-iteration-metadata-invalid",
+                f"{path}: effective_spec_sha256 must be lowercase SHA-256",
+            )
+        )
+    return parsed
+
+
+def _git_blob_sha1(raw: bytes) -> str:
+    return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
+
+
+def validate_audit_epoch_state(
+    manifest: object,
+    tracked_paths: object,
+    registered_blobs: object,
+    read_bytes,
+) -> list[str]:
+    """Pure registered-graph validator for numbered audit iteration epochs."""
+
+    failures: list[str] = []
+    if not isinstance(tracked_paths, (list, tuple, set, frozenset)):
+        return [_failure("audit-epoch-state-invalid", "tracked_paths must be explicit")]
+    if not isinstance(registered_blobs, dict):
+        return [_failure("audit-epoch-state-invalid", "registered_blobs must be a map")]
+    if not callable(read_bytes):
+        return [_failure("audit-epoch-state-invalid", "read_bytes must be callable")]
+
+    tracked: set[str] = set()
+    for index, raw_path in enumerate(tracked_paths):
+        try:
+            path = _canonical_path(raw_path, f"tracked_paths[{index}]")
+        except ContextSurfaceError as exc:
+            failures.append(str(exc))
+            continue
+        if path in tracked:
+            failures.append(_failure("duplicate-path", f"tracked path {path}"))
+        tracked.add(path)
+
+    registered: dict[str, str] = {}
+    for raw_path, blob in registered_blobs.items():
+        try:
+            path = _canonical_path(raw_path, "registered audit path")
+        except ContextSurfaceError as exc:
+            failures.append(str(exc))
+            continue
+        if path in registered:
+            failures.append(_failure("duplicate-path", f"registered audit path {path}"))
+            continue
+        if not isinstance(blob, str) or re.fullmatch(r"[0-9a-f]{40}", blob) is None:
+            failures.append(
+                _failure("audit-registry-entry", f"{path}: invalid Git blob pin")
+            )
+            continue
+        registered[path] = blob
+
+    candidates = tracked | set(registered)
+    iteration_paths = sorted(
+        path
+        for path in candidates
+        if path.startswith("wiki/audit/")
+        and path.lower().endswith(".md")
+        and AUDIT_ITERATION_KIND_RE.search(PurePosixPath(path).name)
+        and path not in FIXED_AUDIT_ITERATION_EXCEPTIONS
+    )
+    receipt_paths = sorted(
+        path for path in candidates if CONSOLIDATION_RECEIPT_PATH_RE.fullmatch(path)
+    )
+    state_paths = (*iteration_paths, *receipt_paths)
+    raw_cache: dict[str, bytes] = {}
+
+    def state_raw(path: str) -> bytes | None:
+        if path in raw_cache:
+            return raw_cache[path]
+        if path not in tracked:
+            failures.append(_failure("audit-epoch-state-invalid", f"{path}: not stage-0"))
+            return None
+        if path not in registered:
+            failures.append(_failure("audit-artifact-unregistered", path))
+        try:
+            raw = read_bytes(path)
+        except Exception as exc:
+            failures.append(_failure("audit-artifact-missing", f"{path}: {exc}"))
+            return None
+        if not isinstance(raw, bytes):
+            failures.append(_failure("audit-artifact-missing", f"{path}: bytes required"))
+            return None
+        raw_cache[path] = raw
+        pin = registered.get(path)
+        if pin is not None:
+            actual_blob = _git_blob_sha1(raw)
+            if actual_blob != pin:
+                failures.append(
+                    _failure(
+                        "audit-registry-blob-mismatch",
+                        f"{path}: raw {actual_blob} != pinned {pin}",
+                    )
+                )
+        return raw
+
+    for path in state_paths:
+        state_raw(path)
+
+    receipts: dict[tuple[str, int], dict[str, object]] = {}
+    for path in receipt_paths:
+        match = CONSOLIDATION_RECEIPT_PATH_RE.fullmatch(path)
+        assert match is not None
+        key = (match.group("campaign"), int(match.group("epoch")))
+        raw = raw_cache.get(path)
+        if raw is None:
+            continue
+        try:
+            receipt = loads_json_strict(raw, path)
+        except ContextSurfaceError as exc:
+            failures.append(_failure("consolidation-epoch-invalid", str(exc)))
+            continue
+        if not isinstance(receipt, dict) or set(receipt) != CONSOLIDATION_RECEIPT_KEYS:
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{path}: exact receipt schema")
+            )
+            continue
+        campaign, epoch = key
+        if (
+            receipt.get("schema") != CONSOLIDATION_RECEIPT_SCHEMA
+            or receipt.get("campaign") != campaign
+            or receipt.get("epoch") != epoch
+        ):
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{path}: path identity mismatch")
+            )
+            continue
+        effective_spec = receipt.get("effective_spec")
+        try:
+            effective_spec = _canonical_path(
+                effective_spec, f"{path}.effective_spec"
+            )
+        except ContextSurfaceError as exc:
+            failures.append(_failure("consolidation-epoch-invalid", str(exc)))
+            continue
+        version = receipt.get("effective_spec_version")
+        sha256 = receipt.get("effective_spec_sha256")
+        if (
+            not effective_spec.startswith("wiki/survey/current/")
+            or isinstance(version, bool)
+            or not isinstance(version, int)
+            or version <= 0
+            or not isinstance(sha256, str)
+            or SHA256_RE.fullmatch(sha256) is None
+        ):
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{path}: spec binding fields")
+            )
+            continue
+        if effective_spec not in tracked:
+            failures.append(
+                _failure(
+                    "consolidation-epoch-invalid",
+                    f"{path}: effective spec is not stage-0",
+                )
+            )
+            continue
+        try:
+            spec_raw = read_bytes(effective_spec)
+        except Exception as exc:
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{effective_spec}: {exc}")
+            )
+            continue
+        if not isinstance(spec_raw, bytes):
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{effective_spec}: bytes required")
+            )
+            continue
+        if (
+            _front_matter_protocol_version(spec_raw, effective_spec) != version
+            or hashlib.sha256(spec_raw).hexdigest() != sha256
+        ):
+            failures.append(
+                _failure("consolidation-epoch-invalid", f"{path}: forged spec binding")
+            )
+        receipts[key] = {
+            "path": path,
+            "effective_spec": effective_spec,
+            "effective_spec_version": version,
+            "effective_spec_sha256": sha256,
+        }
+
+    iterations: dict[tuple[str, int], list[tuple[int, str, dict[str, object]]]] = {}
+    for path in iteration_paths:
+        match = AUDIT_ITERATION_PATH_RE.fullmatch(path)
+        if match is None:
+            failures.append(_failure("audit-epoch-state-invalid", f"{path}: path shape"))
+            continue
+        campaign = match.group("campaign")
+        epoch = int(match.group("epoch"))
+        ordinal = int(match.group("ordinal"))
+        kind = match.group("kind").lower()
+        if ordinal >= 4:
+            failures.append(_failure("unconsolidated-amendment-forbidden", path))
+        raw = raw_cache.get(path)
+        if raw is None:
+            continue
+        try:
+            metadata = _parse_audit_iteration_front_matter(raw, path)
+        except ContextSurfaceError as exc:
+            failures.append(str(exc))
+            continue
+        if (
+            metadata.get("campaign") != campaign
+            or metadata.get("epoch") != epoch
+            or metadata.get("ordinal") != ordinal
+            or metadata.get("kind") != kind
+        ):
+            failures.append(
+                _failure("audit-iteration-metadata-invalid", f"{path}: path identity")
+            )
+        iterations.setdefault((campaign, epoch), []).append(
+            (ordinal, path, metadata)
+        )
+
+    epoch_keys = set(receipts) | set(iterations)
+    campaigns = sorted({campaign for campaign, _epoch in epoch_keys})
+    for campaign in campaigns:
+        epochs = sorted(epoch for owner, epoch in epoch_keys if owner == campaign)
+        if epochs != list(range(1, max(epochs) + 1)):
+            failures.append(
+                _failure(
+                    "audit-epoch-state-invalid",
+                    f"{campaign}: epochs must be continuous from 1, found {epochs}",
+                )
+            )
+        for epoch in epochs:
+            key = (campaign, epoch)
+            receipt = receipts.get(key)
+            if receipt is None:
+                failures.append(
+                    _failure(
+                        "consolidation-epoch-invalid",
+                        f"{campaign}/epoch-{epoch}: registered receipt required",
+                    )
+                )
+            rows = iterations.get(key, [])
+            ordinals = [ordinal for ordinal, _path, _metadata in rows]
+            if len(ordinals) != len(set(ordinals)):
+                failures.append(
+                    _failure(
+                        "audit-epoch-state-invalid",
+                        f"{campaign}/epoch-{epoch}: duplicate ordinals {ordinals}",
+                    )
+                )
+            if ordinals:
+                unique = sorted(set(ordinals))
+                if unique[-1] > 3 or unique != list(range(1, unique[-1] + 1)):
+                    failures.append(
+                        _failure(
+                            "audit-epoch-state-invalid",
+                            f"{campaign}/epoch-{epoch}: ordinals must be continuous 1..3",
+                        )
+                    )
+            if receipt is not None:
+                for _ordinal, path, metadata in rows:
+                    for field in (
+                        "effective_spec",
+                        "effective_spec_version",
+                        "effective_spec_sha256",
+                    ):
+                        if metadata.get(field) != receipt.get(field):
+                            failures.append(
+                                _failure(
+                                    "audit-iteration-metadata-invalid",
+                                    f"{path}: {field} differs from epoch receipt",
+                                )
+                            )
+
+        highest = epochs[-1]
+        receipt = receipts.get((campaign, highest))
+        if receipt is None:
+            continue
+        if receipt.get("effective_spec") != EFFECTIVE_PROTOCOL_PATH:
+            failures.append(
+                _failure(
+                    "consolidation-epoch-invalid",
+                    f"{campaign}/epoch-{highest}: highest receipt must bind "
+                    f"{EFFECTIVE_PROTOCOL_PATH}",
+                )
+            )
+            continue
+        active = manifest.get("active_entries") if isinstance(manifest, dict) else None
+        matching = (
+            [entry for entry in active if isinstance(entry, dict) and entry.get("path") == EFFECTIVE_PROTOCOL_PATH]
+            if isinstance(active, list)
+            else []
+        )
+        if (
+            len(matching) != 1
+            or matching[0].get("class") != "CURRENT"
+            or matching[0].get("sha256") != receipt.get("effective_spec_sha256")
+        ):
+            failures.append(
+                _failure(
+                    "consolidation-epoch-invalid",
+                    f"{campaign}/epoch-{highest}: current manifest protocol binding",
+                )
+            )
+
+    return failures
+
+
 def _validate_numbered_audit_iteration(
     path: str,
     ordinal: int,
@@ -1366,6 +1806,14 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             if path.startswith("wiki/") and path.lower().endswith(".md")
             else None
         )
+        is_new_audit_iteration = (
+            path.startswith("wiki/audit/")
+            and path.lower().endswith(".md")
+            and AUDIT_ITERATION_KIND_RE.search(basename) is not None
+            and path not in FIXED_AUDIT_ITERATION_EXCEPTIONS
+        )
+        if is_new_audit_iteration and AUDIT_ITERATION_PATH_RE.fullmatch(path) is None:
+            failures.append(_failure("audit-epoch-state-invalid", f"{path}: path shape"))
         if numbered_iteration and not path.startswith("wiki/archive/") and not is_legacy:
             ordinal = int(numbered_iteration.group(1))
             if path.startswith("wiki/audit/"):

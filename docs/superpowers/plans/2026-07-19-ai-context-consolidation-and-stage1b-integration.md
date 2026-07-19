@@ -683,11 +683,13 @@ verdict/disposition, original path, pinned blob, supersession target, and the cu
 that carries surviving rules. The current layer links only to this index and the active round-12
 transaction.
 
-The round-12 fixed correction is intentionally unnumbered, so it remains at the ordinary
-`wiki/audit/<campaign>/<round-id>/` path and needs no consolidation-epoch stub. If its design changes
-to a numbered amendment/correction, stop and add `epoch-<N>` path metadata plus the exact immutable
-`epoch-<N>/consolidation-receipt.json` bound to the staged CURRENT effective-spec version and SHA;
-never infer or create that receipt early.
+The exact round-12 fixed correction path is the sole unnumbered B8 exception, so it remains at
+`wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md` and needs no
+consolidation-epoch stub. If its design changes to a numbered amendment/correction, stop: first commit
+and append-register the exact immutable `epoch-<N>/consolidation-receipt.json` bound to the staged
+CURRENT effective-spec version and SHA, advancing the reviewed registry-prefix count/hash anchor;
+then open the continuous epoch with exact iteration front matter and register/pin the artifact. Never
+infer or create that receipt early.
 
 - [ ] **Step 3: Refresh current manifests and run pre-registration checks**
 
