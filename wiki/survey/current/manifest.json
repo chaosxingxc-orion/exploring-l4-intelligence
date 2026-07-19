@@ -30,6 +30,20 @@
       "load_policy": "machine-only"
     },
     {
+      "role": "campaign_audit_index",
+      "path": "wiki/audit/system-first-stage1a/INDEX.md",
+      "sha256": "6655d19b0e2d767a59938dc5a8179958b6072847dcd62e8c014d6dba20796078",
+      "mutability": "append-only",
+      "load_policy": "cold-audit"
+    },
+    {
+      "role": "active_review_transaction",
+      "path": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md",
+      "sha256": "02b211cad2e5d781eb9b42520b36e482aca1650a499acfafa33c48b8e4028cfa",
+      "mutability": "immutable-after-first-commit",
+      "load_policy": "targeted"
+    },
+    {
       "role": "frozen_queries",
       "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
       "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab",
@@ -151,7 +165,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "df3e09a5ce88516348f06d5eeec17f5b96490bd6b1bdb5567ef8edd8e9fd6c5b",
+      "sha256": "54db2ca5fc4f427ccd989dcdca5b8c0a27773d50c24ecf7a65f87ec2354007b8",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -164,12 +178,14 @@
     }
   ],
   "release_bound_artifacts": [
-    "wiki/survey/current/tables/opening-guarantees.md"
+    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ],
   "prose_scan_paths": [
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
-    "wiki/survey/current/tables/opening-guarantees.md"
+    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ]
 }

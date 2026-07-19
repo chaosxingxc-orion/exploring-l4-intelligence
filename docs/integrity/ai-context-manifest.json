@@ -55,14 +55,14 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "df3e09a5ce88516348f06d5eeec17f5b96490bd6b1bdb5567ef8edd8e9fd6c5b"
+      "sha256": "54db2ca5fc4f427ccd989dcdca5b8c0a27773d50c24ecf7a65f87ec2354007b8"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "a21983ebb2b2a0b7a26bd491e26b4353b73d9a4443101477a50dbc6b67a295cd"
+      "sha256": "46d25bd168945273b96e05404ba4a86f76150342a3db9e5a8c8b8870f0db3c19"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
@@ -125,6 +125,13 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "AI context manifest metadata (self-hash intentionally omitted)"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1a/INDEX.md",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "append-only campaign audit index",
+      "sha256": "6655d19b0e2d767a59938dc5a8179958b6072847dcd62e8c014d6dba20796078"
     }
   ],
   "budgets_bytes": {
@@ -797,5 +804,5 @@
       "class": "REGISTRY_LEGACY"
     }
   ],
-  "active_review_transaction": null
+  "active_review_transaction": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
 }
