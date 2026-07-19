@@ -643,23 +643,29 @@ transaction.
 
 - [ ] **Step 3: Refresh current manifests and run pre-registration checks**
 
-Pre-stage exactly the new audit pair before either manifest is refreshed. This lets
-`git ls-files -s` provide the trusted blob inventory required to activate the pair; it is not
-permission to commit a failed check run.
+Pre-stage the exact new audit pair plus every changed file enumerated by the current manifest before
+either manifest is refreshed. For this task the complete source set is exactly the following three
+paths: the campaign index, the round-12 correction, and `wiki/survey/current/status.md`. This lets
+`git ls-files -s` provide trusted stage-0 blobs that exactly match the worktree bytes; it is not
+permission to commit a failed check run. Build in source -> current manifest -> AI manifest order.
 
 ```powershell
-git add wiki/audit/system-first-stage1a/INDEX.md wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md
+git add wiki/audit/system-first-stage1a/INDEX.md wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md wiki/survey/current/status.md
 python scripts/survey/sf_current_tables.py --check
 python scripts/survey/sf_current_manifest.py --write
+git add wiki/survey/current/manifest.json
 python scripts/checks/build_ai_context_manifest.py --write
+python scripts/survey/sf_current_manifest.py --check
+python scripts/checks/build_ai_context_manifest.py --check
 python scripts/survey/sf_release_binding_check.py
 python scripts/survey/sf_quantifier_scan.py
 python scripts/checks/ai_context_surface_check.py
 ```
 
 Expected: all pass; the correction is the only allowed direct active-review transaction. If any
-check fails, do not commit: repair the failure, pre-stage the exact audit pair again if its bytes
-changed, and rerun the complete Step 3 check sequence.
+check fails, do not commit. After repairing it, if any of the three source paths changed, re-stage
+all three; also re-stage all changed current-manifest inputs. Then rebuild and re-stage the current
+manifest before rebuilding the AI manifest, and rerun the complete Step 3 check sequence.
 
 - [ ] **Step 4: Commit the immutable artifact before registering its blob**
 
@@ -669,8 +675,9 @@ git commit -m "docs(audit): issue stage1a readiness correction"
 git rev-parse HEAD:wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md
 ```
 
-Step 4 stages the remaining generated files; the commit then includes them together with the audit
-pair already staged in Step 3. Capture the returned 40-character blob id from Git itself.
+Step 4 stages the AI manifest and any remaining current-layer files; the commit then includes them
+together with the source files and current manifest already staged in Step 3. Capture the returned
+40-character blob id from Git itself.
 
 - [ ] **Step 5: Append the exact committed blob to the audit registry**
 
@@ -726,13 +733,24 @@ has started or is owner-approved.
 
 - [ ] **Step 3: Regenerate manifests and verify hashes**
 
+Pre-stage `wiki/survey/current/status.md` plus all changed current-manifest inputs before generating
+the current manifest; status is the only such changed input expected in this task. Generate and
+stage the current manifest before generating the AI manifest so the order remains source -> current
+manifest -> AI manifest.
+
 ```powershell
+git add wiki/survey/current/status.md
 python scripts/survey/sf_current_manifest.py --write
+git add wiki/survey/current/manifest.json
 python scripts/checks/build_ai_context_manifest.py --write
 python scripts/survey/sf_current_manifest.py --check
 python scripts/checks/build_ai_context_manifest.py --check
 python scripts/checks/ai_context_surface_check.py
 ```
+
+If a repair changes status or any other current-manifest input, re-stage all changed
+current-manifest inputs and rerun this complete sequence from the current-manifest write. If the
+generated current manifest changes, re-stage it before rebuilding and checking the AI manifest.
 
 - [ ] **Step 4: Commit durable state**
 

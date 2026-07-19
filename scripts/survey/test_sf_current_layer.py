@@ -18,6 +18,10 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 SURVEY_SCRIPTS = REPO / "scripts" / "survey"
 CURRENT = REPO / "wiki" / "survey" / "current"
+INTEGRATION_PLAN = REPO / (
+    "docs/superpowers/plans/"
+    "2026-07-19-ai-context-consolidation-and-stage1b-integration.md"
+)
 REPORT_PATH = (
     "docs/checks/system-first-stage1a/evidence-v6/"
     "identity-taxonomy-v6-test.json"
@@ -44,6 +48,18 @@ def current_report():
 
 def git_blob_oid(raw: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+
+
+def plan_task_section(task_number: int) -> str:
+    text = INTEGRATION_PLAN.read_text(encoding="utf-8")
+    match = re.search(
+        rf"^### Task {task_number}:.*?(?=^### Task \d+:|\Z)",
+        text,
+        flags=re.MULTILINE | re.DOTALL,
+    )
+    if match is None:
+        raise AssertionError(f"Task {task_number} missing from integration plan")
+    return match.group(0)
 
 
 class OpeningTableContractTests(unittest.TestCase):
@@ -617,6 +633,53 @@ class RouterContentContractTests(unittest.TestCase):
             self.assertIn(required, text)
         self.assertNotRegex(text, r"Stage-1B (?:has )?(?:begun|started|approved)")
         self.assertLessEqual(len(text.splitlines()), 16)
+
+
+class ManifestRefreshPlanContractTests(unittest.TestCase):
+    def assert_ordered(self, text: str, commands: tuple[str, ...]):
+        cursor = -1
+        for command in commands:
+            position = text.find(command, cursor + 1)
+            self.assertGreater(
+                position,
+                cursor,
+                f"missing or out-of-order plan command: {command}",
+            )
+            cursor = position
+
+    def test_task8_stages_all_changed_sources_before_manifest_chain(self):
+        task = plan_task_section(8)
+        source_stage = (
+            "git add wiki/audit/system-first-stage1a/INDEX.md "
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md wiki/survey/current/status.md"
+        )
+        self.assertIn("every changed file enumerated by the current manifest", task)
+        self.assertIn("all changed current-manifest inputs", task)
+        self.assertIn("re-stage", task)
+        self.assert_ordered(
+            task,
+            (
+                source_stage,
+                "python scripts/survey/sf_current_manifest.py --write",
+                "git add wiki/survey/current/manifest.json",
+                "python scripts/checks/build_ai_context_manifest.py --write",
+            ),
+        )
+
+    def test_task9_stages_status_before_source_to_manifest_chain(self):
+        task = plan_task_section(9)
+        self.assertIn("all changed current-manifest inputs", task)
+        self.assertIn("re-stage", task)
+        self.assert_ordered(
+            task,
+            (
+                "git add wiki/survey/current/status.md",
+                "python scripts/survey/sf_current_manifest.py --write",
+                "git add wiki/survey/current/manifest.json",
+                "python scripts/checks/build_ai_context_manifest.py --write",
+            ),
+        )
 
 
 if __name__ == "__main__":
