@@ -139,12 +139,15 @@ The ten-conference **T1 proceedings** title scan has **50 routes**. Each machine
 Venue tier is discovery metadata and a queue tie-break only; it has zero evidence weight. The T1/T2/T3
 label never overrides `publication_status` or per-study quality.
 
-The current frozen query artifact is `wiki/survey/2026-07-15-sf-queries.jsonl`: 65 ordered records with
-decoded and encoded strings, categories, windows, pagination settings, compiler version, and
-`record_sha256`. §4 is its exact human declaration. Compiler output is append-prefix stable and raw
-byte equality, not semantic JSON equality, is the release condition.
-Legacy amendment names embedded inside the byte-locked §4 text are provenance annotations only; they
-do not add an interpretive dependency or override any effective rule in §§0–3 and §§5–10.
+Only the frozen compiler profile's ordered lane declarations and backtick query literal declarations
+in §4 are normative compiler input. The canonical compiled result is exactly the current frozen
+JSONL's 65 ordered records and their `record_sha256` values; compiler output is append-prefix stable,
+and raw byte equality, not semantic JSON equality, is the release condition.
+
+All other byte-preserved §4 narrative is **NON-NORMATIVE** historical annotation, including old
+55/61/other counts, dated JSONL canonical claims, amendment/batch labels, and Decision-Log references.
+It does not override §§0–3 or §§5–10, create an external dependency, or require opening a legacy file.
+The interpretation fence and §§0–3 and §§5–10 have priority over non-normative §4 narrative.
 
 `max_results` is a page size, never a result cap. Every page records `totalResults`; overflow is split
 deterministically **year → month → day** with `parent_query_sha256`, child window, ordinal, decoded and
@@ -527,6 +530,13 @@ complete PDF. Required failures are `page-token-without-anchor`, `page-anchor-to
 `page-anchor-missing`, `page-anchor-not-discriminative`, `page-out-of-range`, and
 `pdf-unreadable-for-page-check`. A `pdf_page` claim separately checks page range and anchor presence.
 
+```text
+anchor_lexical_tokens >= 2
+anchor_alphanumeric_characters >= 12
+anchor_page_window = N-1..N+1
+complete_pdf_occurrences <= 3
+```
+
 The mutation suite is derived from the **derived-formula sensitive surface**, not merely the last
 review's examples. It starts from a **clean stamped baseline**, legitimately recomputes row hashes for
 new-row tests, and proves each bad mutation creates a named failure. It covers row, signal, edge,
@@ -584,9 +594,8 @@ release requires **two platform-stamped reports** and **both PASS**.
 
 All completion claims are **machine-derived** from committed evidence. Missing evidence fails and
 checks **fail closed**; a green state cannot inherit from an absent artifact. Every deterministic
-**producer replay** runs in isolation and compares raw bytes. It
-cannot inherit a prior green status. Deterministic producers replay in isolation and must be
-**byte-identical** to persisted outputs. A claim states its evidence mode:
+**producer replay** runs in isolation, compares raw bytes, must be **byte-identical** to persisted
+outputs, and cannot inherit a prior green status. A claim states its evidence mode:
 `MACHINE_RECOMPUTED_LOCAL`, `MACHINE_REPLAYED_STRUCTURE`, `SOURCE_REPORTED_TRACEABLE`,
 `REVIEWER_INFERENCE`, or `TEAM_ATTESTATION`. Machine structural replay never upgrades a paper's
 reported number to local recomputation.

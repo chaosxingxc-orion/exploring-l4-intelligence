@@ -8,6 +8,8 @@ normative section, so an appendix disposition row can never satisfy coverage.
 
 from __future__ import annotations
 
+import contextlib
+import io
 import os
 import re
 import subprocess
@@ -359,6 +361,83 @@ class ProtocolStructureTests(unittest.TestCase):
         for phrase in required:
             self.assertIn(_normalize_prose(phrase), sources, phrase)
 
+    def test_section_4_has_an_explicit_normative_interpretation_fence(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§3"))
+        required = (
+            "only the frozen compiler profile's ordered lane declarations and backtick query literal declarations in §4 are normative compiler input",
+            "the canonical compiled result is exactly the current frozen JSONL's 65 ordered records and their record_sha256 values",
+            "all other byte-preserved §4 narrative is NON-NORMATIVE historical annotation",
+            "does not override §§0–3 or §§5–10, create an external dependency, or require opening a legacy file",
+            "the interpretation fence and §§0–3 and §§5–10 have priority over non-normative §4 narrative",
+        )
+        for phrase in required:
+            self.assertIn(_normalize_prose(phrase), section, phrase)
+
+    def test_structured_protocol_contract_oracle_accepts_current_protocol(self) -> None:
+        from sf_protocol_contract import validate_protocol_contracts
+
+        self.assertEqual(validate_protocol_contracts(self.text), [])
+
+    def test_structured_protocol_contract_oracle_rejects_semantic_mutations(self) -> None:
+        from sf_protocol_contract import validate_protocol_contracts
+
+        mutations = {
+            "anchor-total-3-to-30": (
+                "complete_pdf_occurrences <= 3",
+                "complete_pdf_occurrences <= 30",
+            ),
+            "offline-negation-removed": (
+                "offline_calibration signals never qualify",
+                "offline_calibration signals qualify",
+            ),
+            "native-set-member-changed": (
+                "{audio_native, omni_native}",
+                "{audio_native, vision_native}",
+            ),
+            "incremental-append-only-negated": (
+                "cross-period incremental batches are append-only",
+                "cross-period incremental batches are not append-only",
+            ),
+            "fourth-amendment-negation-removed": (
+                "A fourth amendment is forbidden before consolidation",
+                "A fourth amendment is allowed before consolidation",
+            ),
+        }
+        for name, (old, new) in mutations.items():
+            with self.subTest(name=name):
+                self.assertIn(old, self.text)
+                mutated = self.text.replace(old, new, 1)
+                self.assertTrue(validate_protocol_contracts(mutated), name)
+
+    def test_non_normative_section_4_narrative_mutations_do_not_change_contract(self) -> None:
+        from sf_protocol_contract import validate_protocol_contracts
+
+        baseline_records, baseline_bytes = _compile(CURRENT_PROTOCOL)
+        mutations = (
+            ("55 条查询", "550 条历史叙事查询"),
+            ("Decision-Log 续59", "legacy://cold-audit-pointer"),
+        )
+        for old, new in mutations:
+            with self.subTest(old=old):
+                self.assertIn(old, self.text)
+                mutated = self.text.replace(old, new, 1)
+                self.assertEqual(validate_protocol_contracts(mutated), [])
+                base, additions, lanes, _ = compiler.parse_all_queries(mutated)
+                records = (
+                    compiler.compile_records(base)
+                    + compiler.compile_records(additions)
+                    + compiler.compile_records(lanes)
+                )
+                self.assertEqual(len(records), len(baseline_records))
+                self.assertEqual(compiler.render_records(records), baseline_bytes)
+
+    def test_producer_replay_contract_appears_once(self) -> None:
+        section = _normalize_prose(_section_text(self.text, "§9"))
+        self.assertEqual(
+            len(re.findall(r"deterministic producers? replay", section)),
+            1,
+        )
+
 
 class CompilerProfileTests(unittest.TestCase):
     def test_legacy_current_and_frozen_bytes_are_identical(self) -> None:
@@ -388,6 +467,24 @@ class CompilerProfileTests(unittest.TestCase):
             _, baseline = _compile(LEGACY_PROTOCOL)
             _, changed = _compile(path)
         self.assertNotEqual(changed, baseline)
+
+    def test_section_4_extraction_requires_exactly_one_exact_h2(self) -> None:
+        text = compiler.load_protocol_text(LEGACY_PROTOCOL)
+        block = compiler.extract_section_4(text)
+        self.assertNotIn("## §4bis", block)
+        with self.assertRaisesRegex(ValueError, "exactly one"):
+            compiler.extract_section_4(text + "\n" + block)
+        missing = text.replace("## §4 ", "## §X ", 1)
+        with self.assertRaisesRegex(ValueError, "exactly one"):
+            compiler.extract_section_4(missing)
+
+    def test_hash_and_render_reject_nan_and_infinity(self) -> None:
+        for value in (float("nan"), float("inf"), float("-inf")):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    compiler.compute_record_hash({"value": value})
+                with self.assertRaises(ValueError):
+                    compiler.render_records([{"value": value}])
 
 
 class CompilerCliTests(unittest.TestCase):
@@ -422,6 +519,35 @@ class CompilerCliTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("--check-against", result.stderr + result.stdout)
 
+    def test_check_against_requires_check_and_never_writes(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            out = Path(td) / "must-not-exist.jsonl"
+            result = self._run(
+                "--protocol", str(CURRENT_PROTOCOL),
+                "--out", str(out),
+                "--check-against", str(FROZEN_QUERIES),
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("--check", result.stderr + result.stdout)
+            self.assertFalse(out.exists())
+
+    def test_missing_and_duplicate_section_4_are_controlled_cli_failures(self) -> None:
+        text = compiler.load_protocol_text(CURRENT_PROTOCOL)
+        variants = {
+            "duplicate": text + "\n" + compiler.extract_section_4(text),
+            "missing": text.replace("## §4 ", "## §X ", 1),
+        }
+        for name, variant in variants.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as td:
+                protocol = Path(td) / f"{name}.md"
+                protocol.write_text(variant, encoding="utf-8", newline="\n")
+                result = self._run(
+                    "--protocol", str(protocol),
+                    "--check", "--check-against", str(FROZEN_QUERIES),
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("PARSE FAILURE", result.stderr + result.stdout)
+
     def test_check_rejects_crlf_even_when_json_records_are_equivalent(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             baseline = Path(td) / "crlf.jsonl"
@@ -442,6 +568,62 @@ class CompilerCliTests(unittest.TestCase):
                     compiler.atomic_write_bytes(destination, b"new\n")
             self.assertEqual(destination.read_bytes(), b"old\n")
             self.assertEqual([path.name for path in Path(td).iterdir()], ["queries.jsonl"])
+
+    def test_atomic_write_cleans_only_new_empty_parent_chain_on_failures(self) -> None:
+        failure_patches = (
+            mock.patch.object(compiler.tempfile, "mkstemp", side_effect=OSError("stage")),
+            mock.patch.object(compiler.os, "fsync", side_effect=OSError("write")),
+            mock.patch.object(compiler.os, "replace", side_effect=OSError("replace")),
+        )
+        for index, failure_patch in enumerate(failure_patches):
+            with self.subTest(index=index), tempfile.TemporaryDirectory() as td:
+                existing = Path(td) / "existing"
+                existing.mkdir()
+                destination = existing / "new" / "deep" / "queries.jsonl"
+                with failure_patch:
+                    with self.assertRaises(OSError):
+                        compiler.atomic_write_bytes(destination, b"new\n")
+                self.assertTrue(existing.is_dir())
+                self.assertFalse((existing / "new").exists())
+
+    def test_parent_directory_fsync_is_posix_only(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            parent = Path(td)
+            with (
+                mock.patch.object(compiler.os, "name", "posix"),
+                mock.patch.object(compiler.os, "open", return_value=91) as open_mock,
+                mock.patch.object(compiler.os, "fsync") as fsync_mock,
+                mock.patch.object(compiler.os, "close") as close_mock,
+            ):
+                compiler.fsync_parent_directory(parent)
+            open_mock.assert_called_once()
+            fsync_mock.assert_called_once_with(91)
+            close_mock.assert_called_once_with(91)
+
+            with (
+                mock.patch.object(compiler.os, "name", "nt"),
+                mock.patch.object(compiler.os, "open") as open_mock,
+            ):
+                compiler.fsync_parent_directory(parent)
+            open_mock.assert_not_called()
+
+    def test_main_turns_atomic_oserror_into_controlled_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            out = Path(td) / "queries.jsonl"
+            stderr = io.StringIO()
+            with (
+                mock.patch.object(
+                    compiler, "atomic_write_bytes", side_effect=OSError("injected")
+                ),
+                contextlib.redirect_stderr(stderr),
+                contextlib.redirect_stdout(io.StringIO()),
+            ):
+                result = compiler.main(
+                    ["--protocol", str(CURRENT_PROTOCOL), "--out", str(out)]
+                )
+            self.assertEqual(result, 1)
+            self.assertIn("WRITE FAIL", stderr.getvalue())
+            self.assertFalse(out.exists())
 
 
 if __name__ == "__main__":

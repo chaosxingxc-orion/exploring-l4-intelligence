@@ -210,9 +210,8 @@ SORT_ORDER = "descending"
 DATE_FMT = "%Y%m%d%H%M"
 
 
-class ParseError(SystemExit):
-    """Raised (as SystemExit) on any structural parse failure — never
-    silently skip a malformed line."""
+class ParseError(ValueError):
+    """Raised on any structural parse failure — never skip malformed input."""
 
     def __init__(self, message: str):
         super().__init__(f"[sf_query_compiler] PARSE FAILURE: {message}")
@@ -234,13 +233,20 @@ def load_protocol_text(path: Path = PROTOCOL_MD) -> str:
 
 
 def extract_section_4(full_text: str) -> str:
-    # §4bis is a peer H2, not part of the exact compiled-query declaration.
-    # Stop at the next H2 so protocol-v1 and protocol-v2 can be byte-locked on
-    # precisely the query block while preserving the 65-query assembly.
-    m = re.search(r"^## §4(?:\s|$).*?(?=^## |\Z)", full_text, flags=re.MULTILINE | re.DOTALL)
-    if not m:
-        raise ParseError("could not locate an H2-bounded '## §4' section in protocol md")
-    return m.group(0)
+    # §4bis is a peer H2, not an exact §4 heading.  Require one and only one
+    # exact H2 so a duplicate declaration cannot be silently ignored.
+    headings = list(
+        re.finditer(r"^## §4(?:[ \t]+[^\r\n]*)?$", full_text, flags=re.MULTILINE)
+    )
+    if len(headings) != 1:
+        raise ParseError(
+            "expected exactly one exact H2 '## §4 ...' section; "
+            f"found {len(headings)}"
+        )
+    start = headings[0].start()
+    next_h2 = re.search(r"^## ", full_text[headings[0].end():], flags=re.MULTILINE)
+    end = headings[0].end() + next_h2.start() if next_h2 else len(full_text)
+    return full_text[start:end]
 
 
 LANE_HEADER_RE = re.compile(r"^### (SF-L\d+)\b", flags=re.MULTILINE)
@@ -406,7 +412,13 @@ def lane_of(query_id: str) -> str:
 
 
 def compute_record_hash(record_wo_hash: dict) -> str:
-    compact = json.dumps(record_wo_hash, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    compact = json.dumps(
+        record_wo_hash,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        allow_nan=False,
+    )
     return hashlib.sha256(compact.encode("utf-8")).hexdigest()
 
 
@@ -451,19 +463,69 @@ def compile_records(queries: "OrderedDict[str, str]") -> list:
 def render_records(records: list) -> bytes:
     """Render the frozen JSONL format exactly, including the final LF."""
     return "".join(
-        json.dumps(record, ensure_ascii=False) + "\n" for record in records
+        json.dumps(record, ensure_ascii=False, allow_nan=False) + "\n"
+        for record in records
     ).encode("utf-8")
+
+
+def _cleanup_created_directories(created: list[Path]) -> None:
+    """Remove only empty directories created by this invocation."""
+    for directory in reversed(created):
+        try:
+            directory.rmdir()
+        except OSError:
+            # A concurrent writer may have populated it.  Never recurse and
+            # never remove anything that is no longer empty.
+            pass
+
+
+def _create_parent_chain(parent: Path) -> list[Path]:
+    """Create missing parents and return exactly the directories we created."""
+    missing: list[Path] = []
+    cursor = parent
+    while not cursor.exists():
+        missing.append(cursor)
+        cursor = cursor.parent
+
+    created: list[Path] = []
+    try:
+        for directory in reversed(missing):
+            try:
+                directory.mkdir()
+            except FileExistsError:
+                if not directory.is_dir():
+                    raise
+            else:
+                created.append(directory)
+    except BaseException:
+        _cleanup_created_directories(created)
+        raise
+    return created
+
+
+def fsync_parent_directory(parent: Path) -> None:
+    """Durably publish a rename on POSIX; Windows has no directory fsync API."""
+    if os.name != "posix":
+        return
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+    fd = os.open(str(parent), flags)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
 
 
 def atomic_write_bytes(destination: Path, payload: bytes) -> None:
     """Publish bytes with one same-directory replace or leave the old file intact."""
     destination = Path(destination)
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    fd, raw_temp = tempfile.mkstemp(
-        prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
-    )
-    temp_path = Path(raw_temp)
+    created = _create_parent_chain(destination.parent)
+    temp_path = None
+    published = False
     try:
+        fd, raw_temp = tempfile.mkstemp(
+            prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
+        )
+        temp_path = Path(raw_temp)
         with os.fdopen(fd, "wb") as handle:
             handle.write(payload)
             handle.flush()
@@ -471,9 +533,14 @@ def atomic_write_bytes(destination: Path, payload: bytes) -> None:
         if temp_path.read_bytes() != payload:
             raise OSError(f"staged output verification failed: {temp_path}")
         os.replace(temp_path, destination)
+        published = True
+        fsync_parent_directory(destination.parent)
     except BaseException:
         try:
-            temp_path.unlink(missing_ok=True)
+            if temp_path is not None:
+                temp_path.unlink(missing_ok=True)
+            if not published:
+                _cleanup_created_directories(created)
         finally:
             raise
 
@@ -728,13 +795,17 @@ def _print_validation_report(results: list, all_ok: bool) -> None:
 def main(argv=None) -> int:
     parser = _argument_parser()
     args = parser.parse_args(argv)
-    if args.check and args.check_against is None:
-        parser.error("--check requires --check-against PATH")
+    if args.check != (args.check_against is not None):
+        parser.error("--check and --check-against PATH must be used together")
 
-    full_text = load_protocol_text(args.protocol)
-    base_queries, addition_queries, lane_addition_queries, out_of_scope_lanes = (
-        parse_all_queries(full_text)
-    )
+    try:
+        full_text = load_protocol_text(args.protocol)
+        base_queries, addition_queries, lane_addition_queries, out_of_scope_lanes = (
+            parse_all_queries(full_text)
+        )
+    except ParseError as exc:
+        print(exc, file=sys.stderr)
+        return 1
 
     print(f"[sf_query_compiler] parsed {len(base_queries)} base Q fragments from §4 "
           f"({len(EXPECTED_LANES)} lanes x {len(EXPECTED_Q_NUMS)} each) + "
@@ -778,7 +849,11 @@ def main(argv=None) -> int:
         print(f"[sf_query_compiler] PASS ({len(records)} byte-identical records)")
         return 0
 
-    atomic_write_bytes(args.out, rendered)
+    try:
+        atomic_write_bytes(args.out, rendered)
+    except OSError as exc:
+        print(f"[sf_query_compiler] WRITE FAIL: {args.out}: {exc}", file=sys.stderr)
+        return 1
     print(f"[sf_query_compiler] wrote {len(records)} records -> {args.out}")
     return 0
 
