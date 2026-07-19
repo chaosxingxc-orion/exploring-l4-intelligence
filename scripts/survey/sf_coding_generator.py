@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Single-write coding generator (v7 doctoral review Gate MAJOR-2, contract A).
+"""Deterministic single-write coding generator for legacy and active profiles.
 
-Projects the canonical per-paper sidecars (wiki/survey/sidecars/*.sidecar.json)
-into the flat coding table wiki/survey/2026-07-19-sf-known-item-coding-v5.json.
+Projects canonical per-paper sidecars into a flat coding table.  The public
+``render(sidecars)`` call remains the byte-stable legacy-v6 projection; the
+command-line interface defaults to the active schema-v3/v7 projection.
 
 The sidecars are the ONLY hand-authored source; the coding file is a GENERATED
 projection — hand edits to it are a reconciliation failure (taxonomy v4
@@ -13,9 +14,10 @@ zero diff. No derived fields are emitted — derivation happens only in the
 contract test (sf_identity_taxonomy_v4_test.py).
 
 Usage (from repo root):
-  python scripts/survey/sf_coding_generator.py            # write coding v5
+  python scripts/survey/sf_coding_generator.py            # write active coding v7
   python scripts/survey/sf_coding_generator.py --check    # verify zero diff, no write
 """
+import argparse
 import glob
 import io
 import json
@@ -23,8 +25,22 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SIDECAR_DIR = os.path.join(REPO, "wiki", "survey", "sidecars")
-OUT = os.path.join(REPO, "wiki", "survey", "2026-07-19-sf-known-item-coding-v6.json")
+LEGACY_SIDECAR_DIR = os.path.join(REPO, "wiki", "survey", "sidecars")
+LEGACY_OUT = os.path.join(
+    REPO, "wiki", "survey", "2026-07-19-sf-known-item-coding-v6.json"
+)
+LEGACY_TAXONOMY = "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json"
+ACTIVE_SIDECAR_DIR = os.path.join(
+    REPO, "wiki", "survey", "current", "data", "schema-v3", "sidecars"
+)
+ACTIVE_OUT = os.path.join(
+    REPO, "wiki", "survey", "current", "data", "known-item-coding-v7.json"
+)
+ACTIVE_TAXONOMY = "wiki/survey/current/data/identity-taxonomy-v6.json"
+
+# Compatibility names for consumers that imported the old module constants.
+SIDECAR_DIR = LEGACY_SIDECAR_DIR
+OUT = LEGACY_OUT
 
 ROW_KEY_ORDER = [
     "method_path_id", "paper_work_id", "component_path_ids", "core_topology",
@@ -42,11 +58,15 @@ ROW_KEY_ORDER = [
 ]
 
 
-def load_sidecars():
-    paths = sorted(glob.glob(os.path.join(SIDECAR_DIR, "*.sidecar.json")))
+def load_sidecars(sidecar_dir=LEGACY_SIDECAR_DIR):
+    paths = sorted(glob.glob(os.path.join(sidecar_dir, "*.sidecar.json")))
     if not paths:
-        raise SystemExit(f"no sidecars under {SIDECAR_DIR}")
-    return [(os.path.basename(p), json.load(io.open(p, encoding="utf-8"))) for p in paths]
+        raise SystemExit(f"no sidecars under {sidecar_dir}")
+    sidecars = []
+    for path in paths:
+        with io.open(path, encoding="utf-8") as handle:
+            sidecars.append((os.path.basename(path), json.load(handle)))
+    return sidecars
 
 
 def project(sidecars):
@@ -71,33 +91,92 @@ def project(sidecars):
     return rows
 
 
-def render(sidecars):
+def render(sidecars, taxonomy=LEGACY_TAXONOMY, profile="v6"):
     rows = project(sidecars)
+    if profile == "v6":
+        artifact_id = "SF-KNOWN-ITEM-CODING-V6-2026-07-19-01"
+        title = (
+            "known-item coding v6 — GENERATED single-write projection of schema-v2 "
+            "sidecars (taxonomy v5; v8 doctoral review Gate MAJOR-1/-2/-3 remediation)"
+        )
+        supersession = (
+            "v6 supersedes coding-v5 (dated supersession; v5 retained in git for audit "
+            "of the v4-era claims). Deltas per taxonomy v5: flat signal fields replaced "
+            "by signals[] instances (AutoTTS state/consensus phase split; Selective TTS "
+            "stage/final judge split); control_edges reference signal_id; claim_evidence "
+            "covers every load-bearing field (positive/tex/absence kinds); "
+            "adjudication_row_sha256 binds adjudication to row content."
+        )
+    elif profile == "v7":
+        artifact_id = "SF-KNOWN-ITEM-CODING-V7-2026-07-19-01"
+        title = "known-item coding v7 — GENERATED projection of schema-v3 sidecars"
+        supersession = (
+            "v7 supersedes coding-v6 as the active projection; coding-v6 remains the "
+            "byte-stable legacy regression artifact. Schema-v3 adds adjudicated "
+            "row16 + signal4 + edge2 field-bound evidence and strong PDF anchors "
+            "without changing frozen derivation semantics."
+        )
+    else:
+        raise ValueError(f"unsupported coding profile: {profile}")
     doc = {
-        "artifact_id": "SF-KNOWN-ITEM-CODING-V6-2026-07-19-01",
-        "title": "known-item coding v6 — GENERATED single-write projection of schema-v2 sidecars (taxonomy v5; v8 doctoral review Gate MAJOR-1/-2/-3 remediation)",
-        "taxonomy": "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json",
+        "artifact_id": artifact_id,
+        "title": title,
+        "taxonomy": taxonomy,
         "generated_by": "scripts/survey/sf_coding_generator.py — DO NOT HAND-EDIT; edit the sidecar and regenerate",
         "generated_from": [name for name, _ in sorted(sidecars, key=lambda t: t[1]["paper_work_id"])],
-        "supersession": "v6 supersedes coding-v5 (dated supersession; v5 retained in git for audit of the v4-era claims). Deltas per taxonomy v5: flat signal fields replaced by signals[] instances (AutoTTS state/consensus phase split; Selective TTS stage/final judge split); control_edges reference signal_id; claim_evidence covers every load-bearing field (positive/tex/absence kinds); adjudication_row_sha256 binds adjudication to row content.",
+        "supersession": supersession,
         "rows": rows,
     }
     return json.dumps(doc, ensure_ascii=False, indent=1) + "\n"
 
 
-def main():
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--profile", choices=("v6", "v7"), default="v7")
+    parser.add_argument("--sidecar-dir", default=ACTIVE_SIDECAR_DIR)
+    parser.add_argument("--out", default=ACTIVE_OUT)
+    parser.add_argument("--taxonomy", default=ACTIVE_TAXONOMY)
+    parser.add_argument("--check", action="store_true")
+    return parser.parse_args(argv)
+
+
+def _repo_path(path):
+    return path if os.path.isabs(path) else os.path.join(REPO, path)
+
+
+def _display_path(path):
+    try:
+        return os.path.relpath(path, REPO)
+    except ValueError:  # Different Windows drive.
+        return path
+
+
+def main(argv=None):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    text = render(load_sidecars())
-    if "--check" in sys.argv:
-        current = io.open(OUT, encoding="utf-8").read() if os.path.exists(OUT) else None
+    args = parse_args(argv)
+    sidecar_dir = _repo_path(args.sidecar_dir)
+    out = _repo_path(args.out)
+    text = render(
+        load_sidecars(sidecar_dir),
+        taxonomy=args.taxonomy,
+        profile=args.profile,
+    )
+    if args.check:
+        if os.path.exists(out):
+            with io.open(out, encoding="utf-8") as handle:
+                current = handle.read()
+        else:
+            current = None
         if current != text:
             print("[FAIL] coding is NOT byte-identical to generator output (hand edit or stale)")
             return 1
         print("[OK] coding byte-identical to generator output")
         return 0
-    io.open(OUT, "w", encoding="utf-8", newline="\n").write(text)
-    print(f"wrote {os.path.relpath(OUT, REPO)} ({text.count(chr(10))} lines)")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with io.open(out, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
+    print(f"wrote {_display_path(out)} ({text.count(chr(10))} lines)")
     return 0
 
 
