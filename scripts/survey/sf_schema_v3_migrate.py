@@ -321,12 +321,12 @@ def parse_args(argv=None):
     return parser.parse_args(argv)
 
 
-def main(argv=None):
+def main(argv=None, source_dir=SOURCE_DIR, output_dir=OUTPUT_DIR):
     args = parse_args(argv)
     try:
-        outputs = build_outputs()
+        outputs = build_outputs(source_dir)
         if args.write:
-            write_outputs(outputs)
+            write_outputs(outputs, output_dir)
     except (MigrationError, OSError) as error:
         print(f"schema-v3 migration: ERROR: {error}", file=sys.stderr)
         return 1

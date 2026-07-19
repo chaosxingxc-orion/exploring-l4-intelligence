@@ -4,9 +4,15 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import io
+import json
 import os
 import sys
+import tempfile
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
+from pathlib import Path
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +26,16 @@ from sf_evidence_contract import (  # noqa: E402
 from sf_schema_v3_migrate import (  # noqa: E402
     ABSENCE_SELECTION_NOTE,
     ANCHOR_REPLACEMENTS,
+    OUTPUT_DIR,
     SCHEMA_TEXT,
     SCHEMA_V3_BINDING_STATUS,
+    SOURCE_DIR,
+    SUCCESS_LINE,
+    build_outputs,
+    main,
     migrate_sidecar,
     replace_anchors,
+    write_outputs,
 )
 
 
@@ -212,6 +224,126 @@ class SchemaV3MigrationTest(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "extract.*canon.*tex.*quote"):
             migrate_sidecar(source)
+
+
+class SchemaV3IntegrationTest(unittest.TestCase):
+    def test_pinned_corpus_has_exact_counts_and_complete_bindings(self):
+        outputs = build_outputs(SOURCE_DIR)
+        sidecars = [sidecar for _, sidecar in outputs]
+        rows = [row for sidecar in sidecars for row in sidecar["method_paths"]]
+        signals = [signal for row in rows for signal in row["signals"]]
+        edges = [edge for row in rows for edge in row["control_edges"]]
+
+        self.assertEqual(len(sidecars), 8)
+        self.assertEqual(len(rows), 11)
+        self.assertEqual(len(signals), 12)
+        self.assertEqual(len(edges), 18)
+        for sidecar in sidecars:
+            self.assertEqual(sidecar["schema"], SCHEMA_TEXT)
+            self.assertEqual(
+                sidecar["schema_v3_binding_status"], SCHEMA_V3_BINDING_STATUS
+            )
+        for row in rows:
+            self.assertEqual(validate_bound_values(row), [])
+
+    def test_all_pinned_anchor_occurrences_are_replaced_and_conserved(self):
+        outputs = build_outputs(SOURCE_DIR)
+        source_text = "".join(
+            path.read_text(encoding="utf-8")
+            for path in sorted(SOURCE_DIR.glob("*.sidecar.json"))
+        )
+        generated_text = "".join(
+            json.dumps(sidecar, ensure_ascii=False) for _, sidecar in outputs
+        )
+        expected_counts = {
+            "p4 probe": 2,
+            "p5 cost": 1,
+            "p3 Algorithm": 1,
+            "p8 Fig": 2,
+            "p14 delegated": 1,
+            "p4 explore": 1,
+        }
+
+        self.assertEqual(set(expected_counts), set(ANCHOR_REPLACEMENTS))
+        for source, expected_count in expected_counts.items():
+            replacement = ANCHOR_REPLACEMENTS[source]
+            self.assertEqual(source_text.count(source), expected_count)
+            self.assertEqual(generated_text.count(source), 0)
+            self.assertEqual(generated_text.count(replacement), expected_count)
+
+    def test_write_outputs_is_stable_lf_utf8_and_matches_committed_outputs(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "sidecars"
+            write_outputs(outputs, output_dir)
+            first = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.glob("*.sidecar.json"))
+            }
+
+            self.assertEqual(len(first), 8)
+            for name, data in first.items():
+                self.assertNotIn(b"\r", data, name)
+                self.assertTrue(data.endswith(b"\n"), name)
+                data.decode("utf-8")
+                self.assertEqual(
+                    data, (OUTPUT_DIR / name).read_bytes(), f"committed drift: {name}"
+                )
+
+            write_outputs(outputs, output_dir)
+            second = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.glob("*.sidecar.json"))
+            }
+            self.assertEqual(second, first)
+
+    def test_build_and_temp_write_leave_pinned_source_bytes_unchanged(self):
+        source_paths = sorted(SOURCE_DIR.glob("*.sidecar.json"))
+        before_bytes = {path.name: path.read_bytes() for path in source_paths}
+        before_hashes = {
+            name: hashlib.sha256(data).hexdigest()
+            for name, data in before_bytes.items()
+        }
+
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            write_outputs(outputs, Path(temp_dir) / "sidecars")
+
+        after_bytes = {path.name: path.read_bytes() for path in source_paths}
+        after_hashes = {
+            name: hashlib.sha256(data).hexdigest()
+            for name, data in after_bytes.items()
+        }
+        self.assertEqual(after_bytes, before_bytes)
+        self.assertEqual(after_hashes, before_hashes)
+
+    def test_cli_check_is_injectable_exact_and_writes_nothing(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "must-not-exist"
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+            with redirect_stdout(stdout), redirect_stderr(stderr):
+                exit_code = main(
+                    ["--check"], source_dir=SOURCE_DIR, output_dir=output_dir
+                )
+
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(stdout.getvalue(), SUCCESS_LINE + "\n")
+            self.assertEqual(stderr.getvalue(), "")
+            self.assertFalse(output_dir.exists())
+
+    def test_cli_rejects_both_modes_nonzero(self):
+        stdout = io.StringIO()
+        stderr = io.StringIO()
+        with redirect_stdout(stdout), redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                main(
+                    ["--check", "--write"],
+                    source_dir=SOURCE_DIR,
+                    output_dir=OUTPUT_DIR,
+                )
+        self.assertNotEqual(raised.exception.code, 0)
+        self.assertIn("not allowed with argument --check", stderr.getvalue())
 
 
 if __name__ == "__main__":
