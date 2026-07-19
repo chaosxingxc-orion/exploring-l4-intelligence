@@ -18,6 +18,12 @@ import sys
 import tempfile
 from pathlib import Path, PurePosixPath
 
+from ai_context_inventory import (
+    ARCHIVE_TRANSITIONS,
+    REGISTRY_BASELINE_COUNT,
+    REGISTRY_BASELINE_PREFIX_SHA256,
+    registry_prefix_sha256,
+)
 from ai_context_surface_check import (
     MANIFEST_RELATIVE_PATH,
     MANIFEST_SCHEMA,
@@ -289,15 +295,6 @@ EXACT_PREEXISTING_LEGACY_DOCS = tuple(
     for path in _PREEXISTING_REGISTRY_DOC_PATHS
 )
 
-PENDING_ARCHIVE_LEGACY_DOCS = tuple(
-    {
-        "path": path,
-        "class": "PENDING_ARCHIVE",
-        "reason": "Task 6 exact amendment move candidate; remove after byte-preserving archive move",
-    }
-    for path in sorted(PENDING_ARCHIVE_PATHS)
-)
-
 BLOB_RE = re.compile(r"[0-9a-f]{40}\Z")
 DEFAULT_PATHS = {
     "AGENTS.md",
@@ -343,10 +340,13 @@ def _load_audit_inventory(
     if not isinstance(registry, dict) or not isinstance(registry.get("artifacts"), list):
         _fail("audit-registry-invalid", "artifacts must be a list")
     artifacts = registry["artifacts"]
-    if len(artifacts) != 77:
-        _fail("audit-registry-count", f"expected 77 artifacts, found {len(artifacts)}")
+    if len(artifacts) < REGISTRY_BASELINE_COUNT:
+        _fail(
+            "audit-registry-baseline-short",
+            f"expected at least {REGISTRY_BASELINE_COUNT} artifacts, found {len(artifacts)}",
+        )
     seen: set[str] = set()
-    legacy: list[dict[str, str]] = []
+    validated: list[tuple[str, str]] = []
     for index, artifact in enumerate(artifacts):
         if not isinstance(artifact, dict) or set(artifact) != {"path", "git_blob"}:
             _fail(
@@ -359,6 +359,20 @@ def _load_audit_inventory(
             _fail("audit-registry-entry", f"artifacts[{index}].git_blob is not a Git blob id")
         if path in seen:
             _fail("duplicate-path", f"audit registry path {path}")
+        if index >= REGISTRY_BASELINE_COUNT and not path.startswith("wiki/audit/"):
+            _fail("audit-registry-extra-path", path)
+        seen.add(path)
+        validated.append((path, blob))
+
+    actual_prefix_hash = registry_prefix_sha256(artifacts)
+    if actual_prefix_hash != REGISTRY_BASELINE_PREFIX_SHA256:
+        _fail(
+            "audit-registry-prefix-mismatch",
+            f"{actual_prefix_hash} != {REGISTRY_BASELINE_PREFIX_SHA256}",
+        )
+
+    legacy: list[dict[str, str]] = []
+    for path, blob in validated:
         if path not in tracked_paths:
             _fail("audit-registry-path-untracked", path)
         try:
@@ -370,8 +384,8 @@ def _load_audit_inventory(
                 "audit-registry-blob-mismatch",
                 f"{path}: inventory {blob_inventory.get(path)!r} != pinned {blob!r}",
             )
-        seen.add(path)
-        legacy.append(_legacy(path, "AUDIT_LEGACY"))
+        if not path.startswith("wiki/audit/"):
+            legacy.append(_legacy(path, "AUDIT_LEGACY"))
     return legacy
 
 
@@ -508,6 +522,86 @@ def _audit_activation(reader: TrustedRepoReader, tracked: set[str]):
     return (AUDIT_CAMPAIGN_ENTRY_SPEC,), ACTIVE_REVIEW_TRANSACTION
 
 
+def _archive_transition(
+    reader: TrustedRepoReader,
+    tracked: set[str],
+    blob_inventory: dict[str, str],
+):
+    """Resolve the seven-file archive lifecycle from one complete Git state."""
+
+    if not ARCHIVE_TRANSITIONS:
+        return ()
+    if len(ARCHIVE_TRANSITIONS) != 7:
+        _fail("archive-transition-constant-invalid", "expected exactly seven transitions")
+    sources: set[str] = set()
+    destinations: set[str] = set()
+    for index, transition in enumerate(ARCHIVE_TRANSITIONS):
+        if not isinstance(transition, dict) or set(transition) != {
+            "source",
+            "destination",
+            "git_blob",
+        }:
+            _fail("archive-transition-constant-invalid", f"transition[{index}] fields")
+        source = _canonical_path(transition["source"], f"transition[{index}].source")
+        destination = _canonical_path(
+            transition["destination"], f"transition[{index}].destination"
+        )
+        blob = transition["git_blob"]
+        if source not in PENDING_ARCHIVE_PATHS:
+            _fail("archive-transition-constant-invalid", f"unexpected source {source}")
+        if not destination.startswith(
+            "wiki/archive/working/system-first-stage1a/amendments/"
+        ):
+            _fail(
+                "archive-transition-constant-invalid",
+                f"unexpected destination {destination}",
+            )
+        if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+            _fail("archive-transition-constant-invalid", f"invalid blob for {source}")
+        if source in sources or destination in destinations:
+            _fail("archive-transition-constant-invalid", "duplicate source/destination")
+        sources.add(source)
+        destinations.add(destination)
+
+    tracked_sources = sources & tracked
+    tracked_destinations = destinations & tracked
+    prearchive = tracked_sources == sources and not tracked_destinations
+    archived = not tracked_sources and tracked_destinations == destinations
+    if not (prearchive or archived):
+        _fail(
+            "archive-transition-incomplete",
+            f"sources={len(tracked_sources)}/7, destinations={len(tracked_destinations)}/7",
+        )
+
+    selected_key = "source" if prearchive else "destination"
+    for transition in ARCHIVE_TRANSITIONS:
+        path = transition[selected_key]
+        expected_blob = transition["git_blob"]
+        if blob_inventory.get(path) != expected_blob:
+            _fail(
+                "archive-transition-blob-mismatch",
+                f"{path}: {blob_inventory.get(path)!r} != {expected_blob!r}",
+            )
+        try:
+            reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            _fail("archive-transition-path-invalid", str(exc))
+
+    if archived:
+        return ()
+    return tuple(
+        {
+            "path": transition["source"],
+            "class": "PENDING_ARCHIVE",
+            "reason": (
+                "Task 6 exact amendment move candidate; remove after byte-preserving "
+                "archive move"
+            ),
+        }
+        for transition in ARCHIVE_TRANSITIONS
+    )
+
+
 def _manifest_target(repo: Path, target: Path) -> Path:
     """Require the one canonical manifest target; never follow a target symlink."""
 
@@ -557,12 +651,13 @@ def build_manifest(
         _fail("repo-root-invalid", str(exc))
     tracked, blobs = _canonical_inventory(tracked_paths, blob_inventory)
     audit_specs, active_review_transaction = _audit_activation(reader, tracked)
+    archive_legacy = _archive_transition(reader, tracked, blobs)
     _validate_constants(
         (*ACTIVE_ENTRY_SPECS, AUDIT_CAMPAIGN_ENTRY_SPEC),
         RETAINED_LEGACY_PATHS,
         EXACT_NAMED_LEGACY_EXCEPTIONS,
         EXACT_PREEXISTING_LEGACY_DOCS,
-        PENDING_ARCHIVE_LEGACY_DOCS,
+        archive_legacy,
         budgets=BUDGETS_BYTES,
         active_review=ACTIVE_REVIEW_TRANSACTION,
     )
@@ -578,7 +673,7 @@ def build_manifest(
         *RETAINED_LEGACY_PATHS,
         *EXACT_NAMED_LEGACY_EXCEPTIONS,
         *EXACT_PREEXISTING_LEGACY_DOCS,
-        *PENDING_ARCHIVE_LEGACY_DOCS,
+        *archive_legacy,
     ):
         path = entry["path"]
         if path in legacy_by_path:

@@ -58,6 +58,52 @@ def failure_codes(failures) -> list[str]:
     return [failure_code(failure) for failure in failures]
 
 
+EXPECTED_ARCHIVE_TRANSITIONS = (
+    (
+        "wiki/survey/2026-07-18-sf-protocol-amendment-9.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-18-sf-protocol-amendment-9.md",
+        "c786137a5628d963156229b6407cb8eb955e3a4c",
+    ),
+    (
+        "wiki/survey/2026-07-18-sf-protocol-amendment-10.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-18-sf-protocol-amendment-10.md",
+        "8c6df6a092e327b2327242a1b2a47ad4f6b941e2",
+    ),
+    (
+        "wiki/survey/2026-07-18-sf-protocol-amendment-11.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-18-sf-protocol-amendment-11.md",
+        "31c714d582f6188440da4397df05d6950aa9ba33",
+    ),
+    (
+        "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-18-sf-protocol-amendment-12.md",
+        "73c96fc47c05941d76532b3e46fa47b659004cf5",
+    ),
+    (
+        "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-19-sf-protocol-amendment-13.md",
+        "126c4dc93d1f323ba0ca5e9d3de86cc44e513045",
+    ),
+    (
+        "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-19-sf-protocol-amendment-14.md",
+        "f4c4f6490e8cc03d9103e7c4d212cd5d1dd61834",
+    ),
+    (
+        "wiki/survey/2026-07-19-sf-protocol-amendment-15.md",
+        "wiki/archive/working/system-first-stage1a/amendments/"
+        "2026-07-19-sf-protocol-amendment-15.md",
+        "5586d6f840927f975e18a500cef74a11d9e3a48a",
+    ),
+)
+
+
 class AiContextSurfaceTests(unittest.TestCase):
     def setUp(self) -> None:
         temporary = tempfile.TemporaryDirectory()
@@ -828,12 +874,13 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assertEqual([], failures)
 
-    def test_html_comments_pre_and_code_are_masked(self) -> None:
+    def test_html_comments_pre_and_backticks_are_masked_but_inline_code_is_parsed(self) -> None:
         relative_path = "wiki/Research-Objective.md"
         raw = (
             b"<!-- [comment](wiki/audit/campaign/round-1/review.md) -->\n"
             b"<pre><a href='/wiki/audit/campaign/round-1/review.md'>x</a></pre>\n"
-            b"<code>[code](wiki/audit/campaign/round-1/review.md)</code>\n"
+            b"`[backtick](wiki/audit/campaign/round-1/review.md)`\n"
+            b"<code>[parsed](wiki/audit/campaign/round-1/review.md)</code>\n"
         )
         self.write(relative_path, raw)
 
@@ -843,7 +890,28 @@ class AiContextSurfaceTests(unittest.TestCase):
             tracked_paths=[relative_path],
         )
 
-        self.assertEqual([], failures)
+        self.assertEqual(1, failure_codes(failures).count("direct-audit-round-link"))
+
+    def test_nested_absolute_audit_urls_fail_in_markdown_raw_and_html(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        base = "https://github.example/repo/blob/master/wiki/audit/campaign/round-1/review.md"
+        raw = (
+            f"[markdown]({base})\n"
+            f"{base}\n"
+            f"<a href='{base}'>html</a>\n"
+            "https://example.test/docs/wiki-audit-overview\n"
+            f"`{base}`\n"
+            f"<pre>{base}</pre>\n"
+        ).encode("utf-8")
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual(3, failure_codes(failures).count("direct-audit-round-link"))
 
     def test_four_space_list_continuation_is_not_masked_as_code(self) -> None:
         relative_path = "wiki/Research-Objective.md"
@@ -1014,6 +1082,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             }
             for index in range(77)
         ]
+        self.artifacts = artifacts
         self.registry.write_text(
             json.dumps({"artifacts": artifacts}), encoding="utf-8"
         )
@@ -1065,21 +1134,140 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             self.blobs[artifact["path"]] = artifact["git_blob"]
 
     def patched_builder(self):
-        return mock.patch.multiple(
-            builder,
-            ACTIVE_ENTRY_SPECS=self.specs,
-            ACTIVE_REVIEW_TRANSACTION=None,
-            BUDGETS_BYTES={"AGENTS.md": 12288},
-            EXACT_NAMED_LEGACY_EXCEPTIONS=(),
-            EXACT_PREEXISTING_LEGACY_DOCS=(),
-            PENDING_ARCHIVE_LEGACY_DOCS=(),
-            RETAINED_LEGACY_PATHS=(
+        settings = {
+            "ACTIVE_ENTRY_SPECS": self.specs,
+            "ACTIVE_REVIEW_TRANSACTION": None,
+            "BUDGETS_BYTES": {"AGENTS.md": 12288},
+            "EXACT_NAMED_LEGACY_EXCEPTIONS": (),
+            "EXACT_PREEXISTING_LEGACY_DOCS": (),
+            "RETAINED_LEGACY_PATHS": (
                 {
                     "path": "wiki/survey/legacy-protocol.md",
                     "class": "REGISTRY_LEGACY",
                 },
             ),
+        }
+        if hasattr(builder, "ARCHIVE_TRANSITIONS"):
+            settings["ARCHIVE_TRANSITIONS"] = ()
+        if hasattr(builder, "REGISTRY_BASELINE_PREFIX_SHA256"):
+            canonical = [
+                {"path": entry["path"], "git_blob": entry["git_blob"]}
+                for entry in self.artifacts
+            ]
+            settings["REGISTRY_BASELINE_PREFIX_SHA256"] = hashlib.sha256(
+                json.dumps(
+                    canonical, ensure_ascii=False, separators=(",", ":")
+                ).encode("utf-8")
+            ).hexdigest()
+        return mock.patch.multiple(builder, **settings)
+
+    @staticmethod
+    def archive_transitions():
+        return tuple(
+            {"source": source, "destination": destination, "git_blob": blob}
+            for source, destination, blob in EXPECTED_ARCHIVE_TRANSITIONS
         )
+
+    def archive_inventory(self, destination_indices=()):
+        destination_indices = set(destination_indices)
+        tracked = list(self.tracked)
+        blobs = dict(self.blobs)
+        for index, transition in enumerate(self.archive_transitions()):
+            path = (
+                transition["destination"]
+                if index in destination_indices
+                else transition["source"]
+            )
+            target = self.repo.joinpath(*PurePosixPath(path).parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(f"archive fixture {index}\n".encode("utf-8"))
+            tracked.append(path)
+            blobs[path] = transition["git_blob"]
+        return tracked, blobs
+
+    def test_archive_transition_constants_pin_exact_sources_destinations_and_blobs(self) -> None:
+        actual = tuple(
+            (entry["source"], entry["destination"], entry["git_blob"])
+            for entry in getattr(builder, "ARCHIVE_TRANSITIONS", ())
+        )
+
+        self.assertEqual(EXPECTED_ARCHIVE_TRANSITIONS, actual)
+
+    def test_archive_transition_accepts_all_sources_then_all_destinations(self) -> None:
+        transitions = self.archive_transitions()
+        tracked, blobs = self.archive_inventory()
+        with self.patched_builder(), mock.patch.object(
+            builder, "ARCHIVE_TRANSITIONS", transitions, create=True
+        ):
+            prearchive = builder.build_manifest(
+                self.repo, tracked, blobs, allow_untracked_self=True
+            )
+        pending = {
+            entry["path"]
+            for entry in prearchive["legacy_cold_paths"]
+            if entry["class"] == "PENDING_ARCHIVE"
+        }
+        self.assertEqual({entry["source"] for entry in transitions}, pending)
+
+        tracked, blobs = self.archive_inventory(range(7))
+        with self.patched_builder(), mock.patch.object(
+            builder, "ARCHIVE_TRANSITIONS", transitions, create=True
+        ):
+            archived = builder.build_manifest(
+                self.repo, tracked, blobs, allow_untracked_self=True
+            )
+        legacy_paths = {entry["path"] for entry in archived["legacy_cold_paths"]}
+        self.assertTrue(all(entry["source"] not in legacy_paths for entry in transitions))
+        self.assertTrue(
+            all(classify_path(entry["destination"], []) == "ARCHIVE" for entry in transitions)
+        )
+
+    def test_archive_transition_rejects_partial_and_both_states(self) -> None:
+        transitions = self.archive_transitions()
+        cases = {
+            "one_moved": ({0}, None),
+            "both_source_and_destination": (set(), 0),
+        }
+        for label, (destination_indices, duplicate_index) in cases.items():
+            with self.subTest(label=label):
+                tracked, blobs = self.archive_inventory(destination_indices)
+                if duplicate_index is not None:
+                    transition = transitions[duplicate_index]
+                    destination = transition["destination"]
+                    target = self.repo.joinpath(*PurePosixPath(destination).parts)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(b"duplicate state\n")
+                    tracked.append(destination)
+                    blobs[destination] = transition["git_blob"]
+                with (
+                    self.patched_builder(),
+                    mock.patch.object(
+                        builder, "ARCHIVE_TRANSITIONS", transitions, create=True
+                    ),
+                    self.assertRaises(builder.ManifestBuildError) as raised,
+                ):
+                    builder.build_manifest(
+                        self.repo, tracked, blobs, allow_untracked_self=True
+                    )
+                self.assertIn("archive-transition-incomplete", str(raised.exception))
+
+    def test_archive_transition_rejects_wrong_destination_blob(self) -> None:
+        transitions = self.archive_transitions()
+        tracked, blobs = self.archive_inventory(range(7))
+        blobs[transitions[0]["destination"]] = "0" * 40
+
+        with (
+            self.patched_builder(),
+            mock.patch.object(
+                builder, "ARCHIVE_TRANSITIONS", transitions, create=True
+            ),
+            self.assertRaises(builder.ManifestBuildError) as raised,
+        ):
+            builder.build_manifest(
+                self.repo, tracked, blobs, allow_untracked_self=True
+            )
+
+        self.assertIn("archive-transition-blob-mismatch", str(raised.exception))
 
     def test_real_retained_constants_are_exact_existing_paths(self) -> None:
         real_repo = Path(__file__).resolve().parents[2]
@@ -1089,7 +1277,6 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 *builder.RETAINED_LEGACY_PATHS,
                 *builder.EXACT_NAMED_LEGACY_EXCEPTIONS,
                 *builder.EXACT_PREEXISTING_LEGACY_DOCS,
-                *builder.PENDING_ARCHIVE_LEGACY_DOCS,
             )
         ]
 
@@ -1383,7 +1570,93 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 self.repo, self.tracked, self.blobs, allow_untracked_self=True
             )
 
-        self.assertIn("audit-registry-count", str(raised.exception))
+        self.assertIn("audit-registry-baseline-short", str(raised.exception))
+
+    def test_registry_baseline_prefix_rejects_reorder_and_changed_blob(self) -> None:
+        original = json.loads(self.registry.read_text(encoding="utf-8"))
+        for label in ("reorder", "changed_blob"):
+            with self.subTest(label=label):
+                document = json.loads(json.dumps(original))
+                blobs = dict(self.blobs)
+                if label == "reorder":
+                    document["artifacts"][0], document["artifacts"][1] = (
+                        document["artifacts"][1],
+                        document["artifacts"][0],
+                    )
+                else:
+                    document["artifacts"][0]["git_blob"] = "a" * 40
+                    blobs[document["artifacts"][0]["path"]] = "a" * 40
+                self.registry.write_text(json.dumps(document), encoding="utf-8")
+                with self.patched_builder(), self.assertRaises(
+                    builder.ManifestBuildError
+                ) as raised:
+                    builder.render_manifest(
+                        self.repo,
+                        self.tracked,
+                        blobs,
+                        allow_untracked_self=True,
+                    )
+                self.assertIn("audit-registry-prefix-mismatch", str(raised.exception))
+
+    def test_registry_allows_tracked_audit_root_append_without_legacy_inflation(self) -> None:
+        index_path = "wiki/audit/system-first-stage1a/INDEX.md"
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        for path in (index_path, correction):
+            target = self.repo.joinpath(*PurePosixPath(path).parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((path + "\n").encode("utf-8"))
+        document = json.loads(self.registry.read_text(encoding="utf-8"))
+        document["artifacts"].append(
+            {"path": correction, "git_blob": "c" * 40}
+        )
+        self.registry.write_text(json.dumps(document), encoding="utf-8")
+        tracked = [*self.tracked, index_path, correction]
+        blobs = {**self.blobs, index_path: "d" * 40, correction: "c" * 40}
+
+        with self.patched_builder(), mock.patch.object(
+            builder, "ACTIVE_REVIEW_TRANSACTION", correction
+        ):
+            try:
+                manifest_document = builder.build_manifest(
+                    self.repo, tracked, blobs, allow_untracked_self=True
+                )
+            except builder.ManifestBuildError as exc:
+                self.fail(f"valid registry append was rejected: {exc}")
+
+        active_paths = {entry["path"] for entry in manifest_document["active_entries"]}
+        legacy_paths = {
+            entry["path"] for entry in manifest_document["legacy_cold_paths"]
+        }
+        self.assertEqual(78, len(document["artifacts"]))
+        self.assertIn(index_path, active_paths)
+        self.assertEqual(correction, manifest_document["active_review_transaction"])
+        self.assertNotIn(correction, legacy_paths)
+        self.assertEqual(78, len(legacy_paths))
+
+    def test_registry_rejects_extra_outside_audit_root(self) -> None:
+        extra_path = "wiki/2026-07-20-extra-review.md"
+        target = self.repo.joinpath(*PurePosixPath(extra_path).parts)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b"extra review\n")
+        document = json.loads(self.registry.read_text(encoding="utf-8"))
+        document["artifacts"].append(
+            {"path": extra_path, "git_blob": "b" * 40}
+        )
+        self.registry.write_text(json.dumps(document), encoding="utf-8")
+        tracked = [*self.tracked, extra_path]
+        blobs = {**self.blobs, extra_path: "b" * 40}
+
+        with self.patched_builder(), self.assertRaises(
+            builder.ManifestBuildError
+        ) as raised:
+            builder.build_manifest(
+                self.repo, tracked, blobs, allow_untracked_self=True
+            )
+
+        self.assertIn("audit-registry-extra-path", str(raised.exception))
 
     def test_builder_fails_closed_when_an_active_artifact_is_missing(self) -> None:
         missing = self.repo / "wiki/Project-Thesis.md"

@@ -445,6 +445,7 @@ git commit -m "refactor(survey): route active prose checks through manifest"
 
 **Files:**
 
+- Reuse: `scripts/checks/ai_context_inventory.py`
 - Create: `scripts/survey/sf_archive_candidates.py`
 - Create: `wiki/archive/working/system-first-stage1a/INDEX.md`
 - Move: amendments 9-15 listed below.
@@ -461,6 +462,12 @@ has an inbound reference from a HOT/CURRENT file
 has an inbound reference from a registered audit artifact
 is missing or already dirty
 ```
+
+Import the seven exact source/destination/blob transitions from
+`scripts/checks/ai_context_inventory.py`; do not duplicate that inventory. The context-manifest
+builder consumes the same transition set and accepts only the complete pre-archive state (all seven
+sources, zero destinations) or complete archived state (zero sources, all seven destinations).
+Any partial or both-path state must fail `archive-transition-incomplete` in both workflows.
 
 After a move it requires source absence, destination presence, identical blob hash, and no active old
 path reference. The oracle scans tracked files with `git grep`; it does not rewrite references.

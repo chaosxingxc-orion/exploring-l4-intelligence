@@ -17,6 +17,8 @@ import sys
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urlsplit
 
+from ai_context_inventory import ARCHIVE_TRANSITIONS
+
 
 MANIFEST_RELATIVE_PATH = "docs/integrity/ai-context-manifest.json"
 MANIFEST_SCHEMA = "ai-context-manifest-v1"
@@ -71,15 +73,7 @@ HOT_FILES = frozenset(
     }
 )
 PENDING_ARCHIVE_PATHS = frozenset(
-    {
-        "wiki/survey/2026-07-18-sf-protocol-amendment-9.md",
-        "wiki/survey/2026-07-18-sf-protocol-amendment-10.md",
-        "wiki/survey/2026-07-18-sf-protocol-amendment-11.md",
-        "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
-        "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
-        "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
-        "wiki/survey/2026-07-19-sf-protocol-amendment-15.md",
-    }
+    entry["source"] for entry in ARCHIVE_TRANSITIONS
 )
 AUDIT_NAME_RE = re.compile(
     r"(?:^|[-_.])(?:reviewer[-_.](?:submission|report)|submission|report|"
@@ -113,8 +107,8 @@ HTML_ATTRIBUTE_RE = re.compile(
     re.IGNORECASE,
 )
 HTML_COMMENT_RE = re.compile(r"<!--[\s\S]*?(?:-->|\Z)")
-HTML_CODE_BLOCK_RE = re.compile(
-    r"<(pre|code)\b[^>]*>[\s\S]*?(?:</\1[ \t]*>|\Z)", re.IGNORECASE
+HTML_PRE_BLOCK_RE = re.compile(
+    r"<pre\b[^>]*>[\s\S]*?(?:</pre[ \t]*>|\Z)", re.IGNORECASE
 )
 RAW_AUDIT_URL_RE = re.compile(
     r"(?<![A-Za-z0-9_])(?:https?://[^\s<>\[\]{}\"']+|"
@@ -431,7 +425,10 @@ def _normalize_link_target(source_path: str, raw_target: str) -> str | None:
     if target.startswith("/wiki/"):
         target = target[1:]
     elif absolute_url:
-        return None
+        audit_segment = re.search(r"/wiki/audit(?:/|$)", target)
+        if audit_segment is None:
+            return None
+        target = target[audit_segment.start() + 1 :]
     if not target:
         return None
     if "\\" in target or target.startswith("/") or re.match(r"^[A-Za-z]:", target):
@@ -562,7 +559,7 @@ def _mask_markdown_code(text: str) -> str:
         masked_lines.append(line)
     masked = "".join(masked_lines)
     masked = HTML_COMMENT_RE.sub(lambda match: _blank_except_newlines(match.group()), masked)
-    masked = HTML_CODE_BLOCK_RE.sub(
+    masked = HTML_PRE_BLOCK_RE.sub(
         lambda match: _blank_except_newlines(match.group()), masked
     )
     return _mask_inline_code_spans(masked)
