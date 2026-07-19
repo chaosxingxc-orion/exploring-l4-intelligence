@@ -79,7 +79,7 @@ The active surface will be rooted at:
 - `wiki/Project-Thesis.md` — unchanged north star;
 - `wiki/Per-Work-Status.md` — current per-work status only;
 - `wiki/survey/current/README.md` — survey-current routing page;
-- `wiki/survey/current/system-first-survey-protocol-v2.md` — complete effective protocol;
+- `wiki/survey/current/protocol.md` — complete effective protocol with `protocol_version: 2`;
 - `wiki/survey/current/manifest.json` — current machine assets and hashes; and
 - `docs/integrity/ai-context-manifest.json` — the files an AI may load by default.
 
@@ -90,7 +90,7 @@ without reading protocol v1, amendments 1-15, proposals, reviews, or responses.
 
 Registered dated artifacts remain at their current paths because the existing immutability oracle
 pins both path and blob. A new cold index at
-`wiki/archive/survey/gate-s1-stage1a/INDEX.md` records, per round:
+`wiki/audit/system-first-stage1a/INDEX.md` records, per round:
 
 - verdict and disposition;
 - supersession target;
@@ -134,7 +134,7 @@ an exact pointer or targeted search.
 Historical round-11 evidence remains unchanged. The repaired chain is versioned as:
 
 - identity taxonomy v6;
-- schema-v3 sidecars in a new versioned directory;
+- schema-v3 sidecars in `wiki/survey/current/data/schema-v3/sidecars/`;
 - generated known-item coding v7;
 - the v6 contract test and platform-stamped reports; and
 - a new compact dated correction bound to the v6 report.
@@ -331,7 +331,100 @@ After implementation, durable records are updated in repository order:
 5. run the archive scan and all checks; and
 6. publish through wiki-sync.
 
-## 11. Success criteria
+## 11. Document placement and lifecycle policy
+
+### 11.1 Placement rules
+
+Every persistent document must have exactly one declared role. A file may not act as both the current
+effective specification and the audit history of how that specification evolved.
+
+| Document type | Required location | Mutability | Registration and movement rule |
+|---|---|---|---|
+| Program north star and hot status | `wiki/Project-Thesis.md`, `wiki/Research-Objective.md`, `wiki/Per-Work-Status.md` | Supersede in place | Never date-version these files. Keep only current truth and archive pointers. |
+| Cross-project methodology and collaboration rules | `wiki/Research-Methodology.md`, `wiki/AI-Collaboration.md` | Supersede in place with dated tombstones for changed rules | Do not copy their rules into campaign documents. |
+| Current survey router | `wiki/survey/current/README.md` | Supersede in place | Contains only current stage, effective assets, and cold-index pointers. |
+| Current effective protocol | `wiki/survey/current/protocol.md` | Supersede in place until a release freeze | Stable filename; `protocol_version` lives in frontmatter. It must be self-contained. |
+| Current survey status | `wiki/survey/current/status.md` | Supersede in place | Short operational state only: gate, blockers, execution counts, and next action. |
+| Current machine manifest | `wiki/survey/current/manifest.json` | Generated/supersede in place | The sole machine entry to active schemas, queries, ledgers, reports, and hashes. |
+| Current opening guarantees and human-readable tables | `wiki/survey/current/tables/` | Generated or supersede in place | One active version per table; old versions do not remain beside the current one. |
+| Current survey schemas, coding, query sets, and ledgers | `wiki/survey/current/data/` | Generated or controlled append-only according to schema | Must be enumerated by the current manifest; AI reads them only for a named task. |
+| Long-lived paper census and claim registry | `wiki/survey/registry/` | Append-only plus explicit supersession fields | Shared across campaigns; never copied into protocol prose. |
+| Reviewer submission, reviewer report, response, correction, or sign-off snapshot | `wiki/audit/<campaign>/<round-id>/` | Immutable from first commit | Create directly at its permanent path, register its blob, and never move or edit it. Active state links to it temporarily; the file itself is always cold. |
+| Audit round index | `wiki/audit/<campaign>/INDEX.md` | Append-only | One row per round with verdict, supersession, paths, blobs, and surviving-rule pointer. |
+| Superseded working protocol, table, schema, or unregistered intermediate | `wiki/archive/<knowledge-layer>/<campaign>/` | Immutable after archival move | Move with `git mv` only after the current manifest has stopped referencing it and link checks pass. |
+| Exploratory survey notes and paper dossiers | `wiki/survey/workbench/<campaign>/` while active | Mutable working knowledge | Distill at campaign close; retained dossiers move to `wiki/archive/survey/<campaign>/`, disposable scratch is not committed. |
+| Engineering design specification | `docs/superpowers/specs/` | Versioned through Git review | One design per bounded project; it does not become research canon. |
+| Engineering implementation plan | `docs/superpowers/plans/` | Checkboxes may change during execution | Archive by Git history after completion; current research pages link only to delivered artifacts, not plans. |
+| Reproducibility and validation report | `docs/checks/<campaign>/<release-id>/` | Immutable after a release references it | Generate directly into a release-scoped directory; never use one last-writer-wins filename for multiple platforms. |
+| Executable policy or validation logic | `scripts/` | Normal code lifecycle | A prose rule that can be checked must point to its executable check; do not maintain a second prose-only implementation. |
+| Temporary AI reasoning or scratch notes | Not committed | Ephemeral | Promote only distilled conclusions with provenance; otherwise discard before handoff. |
+
+For this design's first consolidation release, the current-context routing page is
+`wiki/survey/current/README.md`; machine assets are placed under `wiki/survey/current/data/` or
+referenced there through the current manifest when a path cannot yet move safely; and the legacy
+Gate-S1 index is created at
+  `wiki/audit/system-first-stage1a/INDEX.md`, while the 77 already registered legacy paths remain
+  exceptional path-pinned entries referenced by that index.
+
+### 11.2 Document lifecycle
+
+Every campaign follows this sequence:
+
+1. **Draft:** mutable working material lives under `wiki/survey/workbench/<campaign>/`. It is absent
+   from the audit registry and cannot carry a completion claim.
+2. **Effective:** accepted working rules are distilled into stable files under `wiki/survey/current/`.
+   The current manifest is updated in the same commit; active documents cannot require a workbench or
+   archive file to be interpreted.
+3. **Review freeze:** anything sent to, received from, or signed by a reviewer is copied once into
+   `wiki/audit/<campaign>/<round-id>/`, registered, and immutable from that commit onward. It is not
+   first created in an active directory and moved later.
+4. **Correction:** the current effective files are corrected in place, while the historical claim is
+   superseded by a new audit correction. Historical audit bytes are never edited.
+5. **Campaign close:** after the final verdict or stage transition, run the distillation and archive
+   scan in the same closeout batch. Remove individual audit-round links from current pages, retain one
+   audit-index pointer, move eligible unregistered intermediates with `git mv`, and prove that the
+   current manifest and active scripts have no old-path dependency.
+6. **Next campaign:** create a new workbench and audit namespace. Do not reuse the prior campaign's
+   response, amendment, or check-output filenames.
+
+### 11.3 Mandatory consolidation and archive triggers
+
+Consolidation is required at the earliest of these events:
+
+- a third amendment or correction would otherwise be added to one effective document;
+- the protocol, router, or hot-state file exceeds its context budget;
+- a reviewer round closes a Gate MAJOR or changes an executable contract;
+- an AI or human handoff requires more than the current protocol and status page to determine the next
+  action;
+- a stage boundary, campaign verdict, sign-off request, or publication release is reached; or
+- two active files make competing claims about the same current field.
+
+The third amendment may be preserved as an audit artifact, but its effective rules must be folded
+into the current specification immediately. A fourth amendment is forbidden until consolidation has
+completed.
+
+Archive movement is required when a working or generated document is both superseded and absent from
+the current manifest. The move occurs in the same commit as the replacement when safe; otherwise it
+is a named closeout blocker and must complete before sign-off. Registered audit documents are the
+exception: they never move under the current registry contract and become cold solely by removing
+them from active routing.
+
+### 11.4 Routing enforcement
+
+The context-surface checker will classify every persistent document as `HOT`, `CURRENT`, `REGISTRY`,
+`AUDIT`, `ARCHIVE`, or `WORKBENCH`. It fails when:
+
+- a document is unclassified;
+- a hot/current file points to an individual audit round instead of the campaign index, except for an
+  explicitly active review transaction;
+- an archived or workbench file appears in the default AI context manifest;
+- multiple current versions of the same protocol, table, schema, or status document exist;
+- a new review artifact is created outside `wiki/audit/`;
+- an audit artifact is modified or moved after registration;
+- an eligible superseded unregistered file remains in an active directory after campaign close; or
+- a fourth unconsolidated amendment appears.
+
+## 12. Success criteria
 
 The remediation is complete only when:
 
