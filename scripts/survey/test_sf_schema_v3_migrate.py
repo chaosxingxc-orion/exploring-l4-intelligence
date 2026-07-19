@@ -749,7 +749,9 @@ class SchemaV3IntegrationTest(unittest.TestCase):
             import sf_schema_v3_finalize as finalizer
 
             committed_outputs = finalizer.finalize_outputs(
-                outputs, finalizer.load_adjudication(adjudication_path)
+                outputs,
+                finalizer.load_adjudication(adjudication_path),
+                adjudication_path.read_bytes(),
             )
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir) / "sidecars"

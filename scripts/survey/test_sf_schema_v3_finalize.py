@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import io
 import json
 import os
@@ -30,6 +31,12 @@ def all_rows(outputs):
     ]
 
 
+def row_by_id(outputs, method_path_id):
+    return next(
+        row for row in all_rows(outputs) if row["method_path_id"] == method_path_id
+    )
+
+
 class SchemaV3FinalizerTest(unittest.TestCase):
     def load_artifact(self):
         return json.loads(finalizer.ADJUDICATION_PATH.read_text(encoding="utf-8"))
@@ -46,16 +53,50 @@ class SchemaV3FinalizerTest(unittest.TestCase):
     def assert_rejected(self, artifact, pattern):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = self.write_artifact(temp_dir, artifact)
+            raw_bytes = path.read_bytes()
             with self.assertRaisesRegex(finalizer.FinalizationError, pattern):
+                finalizer.finalize_outputs(
+                    migration.build_outputs(migration.SOURCE_DIR),
+                    artifact,
+                    raw_bytes,
+                    expected_artifact_sha256=hashlib.sha256(raw_bytes).hexdigest(),
+                )
+
+    def assert_release_artifact_rejected(self, artifact):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = self.write_artifact(temp_dir, artifact)
+            with self.assertRaisesRegex(
+                finalizer.FinalizationError, "artifact.*SHA-256.*mismatch"
+            ):
                 finalizer.build_finalized_outputs(
                     migration.SOURCE_DIR,
                     path,
                 )
 
+    def snapshot_validator(self):
+        validator = getattr(finalizer, "validate_reviewed_snapshot", None)
+        self.assertTrue(
+            callable(validator), "reviewed snapshot validator is not implemented"
+        )
+        return validator
+
+    def assert_pending_snapshot_rejected(self, rendered):
+        with self.assertRaisesRegex(
+            finalizer.FinalizationError, "pending.*snapshot.*(mismatch|names)"
+        ):
+            self.snapshot_validator()(
+                rendered,
+                finalizer.ADJUDICATION_PATH.read_bytes(),
+            )
+
     def test_all_agree_artifact_stamps_every_sidecar_and_canonical_row_hash(self):
         pending = migration.build_outputs(migration.SOURCE_DIR)
         artifact = finalizer.load_adjudication()
-        finalized = finalizer.finalize_outputs(pending, artifact)
+        finalized = finalizer.finalize_outputs(
+            pending,
+            artifact,
+            finalizer.ADJUDICATION_PATH.read_bytes(),
+        )
 
         self.assertEqual(len(finalized), 8)
         self.assertEqual(len(all_rows(finalized)), 11)
@@ -80,6 +121,159 @@ class SchemaV3FinalizerTest(unittest.TestCase):
                 self.assertEqual(
                     row["adjudication_row_sha256"], canonical_row_hash(row)
                 )
+
+    def test_release_artifact_sha_rejects_any_reviewer_record_mutation(self):
+        cases = []
+
+        binding_tuple = self.load_artifact()
+        binding_tuple["resolution_log"][0]["tuple"]["method_path_id"] += "-drift"
+        cases.append(("binding-resolution-tuple", binding_tuple))
+
+        anchor_locator = self.load_artifact()
+        anchor_locator["resolution_log"][11]["locator"][
+            "repaired_locator"
+        ] += " drift"
+        cases.append(("anchor-repaired-locator", anchor_locator))
+
+        anchor_occurrence = self.load_artifact()
+        anchor_occurrence["resolution_log"][11]["locator"]["occurrences"] = 2
+        cases.append(("anchor-occurrence", anchor_occurrence))
+
+        coupled_uses = self.load_artifact()
+        coupled_uses["resolution_log"][12]["review_scope"][0][
+            "encoded_value"
+        ] = ["route", "synthesize_input"]
+        cases.append(("coupled-uses", coupled_uses))
+
+        original_issue = self.load_artifact()
+        original_issue["resolution_log"][0]["original_issue"] += " prose drift"
+        cases.append(("original-issue-prose", original_issue))
+
+        reason = self.load_artifact()
+        reason["binding_verdicts"][0]["reason"] += " prose drift"
+        cases.append(("reason-prose", reason))
+
+        reversed_resolutions = self.load_artifact()
+        reversed_resolutions["resolution_log"].reverse()
+        cases.append(("resolution-order", reversed_resolutions))
+
+        for label, artifact in cases:
+            with self.subTest(label=label):
+                self.assert_release_artifact_rejected(artifact)
+
+    def test_reviewed_pending_snapshot_rejects_unreviewed_content_drift(self):
+        mutation_cases = []
+
+        edge_semantics = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        all_rows(edge_semantics)[0]["control_edges"][0]["edge_semantics"] += " drift"
+        mutation_cases.append(("edge-semantics", edge_semantics))
+
+        pdf_anchor = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        row_by_id(pdf_anchor, "2026.findings-acl.511#prm-guided-search")[
+            "claim_evidence"
+        ]["selection_object"]["anchor"] += " drift"
+        mutation_cases.append(("pdf-anchor", pdf_anchor))
+
+        canon_quote = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        row_by_id(canon_quote, "2026.findings-acl.1243#closed-prompt-only")[
+            "claim_evidence"
+        ]["selection_policy"]["quote"] += " drift"
+        mutation_cases.append(("canon-quote", canon_quote))
+
+        tex_quote = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        row_by_id(tex_quote, "2604.16529#rtv")["claim_evidence"][
+            "selection_object"
+        ]["quote"] += " drift"
+        mutation_cases.append(("tex-quote", tex_quote))
+
+        absence_scope = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        row_by_id(absence_scope, "2026.findings-acl.1243#closed-prompt-only")[
+            "claim_evidence"
+        ]["selection_object"]["scope"] += " drift"
+        mutation_cases.append(("absence-scope", absence_scope))
+
+        absence_note = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        row_by_id(absence_note, "2026.findings-acl.1243#closed-prompt-only")[
+            "claim_evidence"
+        ]["selection_object"]["note"] += " drift"
+        mutation_cases.append(("absence-note", absence_note))
+
+        metadata = copy.deepcopy(migration.build_outputs(migration.SOURCE_DIR))
+        metadata[0][1]["work_title"] += " drift"
+        mutation_cases.append(("top-level-metadata", metadata))
+
+        for label, outputs in mutation_cases:
+            with self.subTest(label=label):
+                self.assert_pending_snapshot_rejected(
+                    migration._render_outputs(outputs)
+                )
+
+    def test_reviewed_pending_snapshot_rejects_missing_extra_and_renamed_sidecars(self):
+        rendered = migration._render_outputs(
+            migration.build_outputs(migration.SOURCE_DIR)
+        )
+        cases = (
+            ("missing", rendered[:-1]),
+            ("extra", [*rendered, ("extra.sidecar.json", b"{}\n")]),
+            (
+                "renamed",
+                [("renamed.sidecar.json", rendered[0][1]), *rendered[1:]],
+            ),
+        )
+        for label, mutated in cases:
+            with self.subTest(label=label):
+                self.assert_pending_snapshot_rejected(mutated)
+
+    def test_reviewed_snapshot_constants_match_remediation_commit_and_migration(self):
+        expected = getattr(finalizer, "REVIEWED_PENDING_SHA256", None)
+        self.assertIsInstance(expected, dict)
+        self.assertEqual(len(expected), 8)
+        self.assertEqual(
+            finalizer.REVIEWED_ADJUDICATION_SHA256,
+            "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f",
+        )
+
+        commit_bytes = {}
+        for name in sorted(expected):
+            relative_path = (
+                Path("wiki")
+                / "survey"
+                / "current"
+                / "data"
+                / "schema-v3"
+                / "sidecars"
+                / name
+            ).as_posix()
+            result = subprocess.run(
+                [
+                    "git",
+                    "show",
+                    f"{finalizer.SOURCE_HEAD}:{relative_path}",
+                ],
+                cwd=finalizer.REPO_ROOT,
+                capture_output=True,
+                check=True,
+            )
+            commit_bytes[name] = result.stdout
+
+        commit_hashes = {
+            name: hashlib.sha256(data).hexdigest()
+            for name, data in commit_bytes.items()
+        }
+        fresh_rendered = dict(
+            migration._render_outputs(migration.build_outputs(migration.SOURCE_DIR))
+        )
+        fresh_hashes = {
+            name: hashlib.sha256(data).hexdigest()
+            for name, data in fresh_rendered.items()
+        }
+        self.assertEqual(expected, commit_hashes)
+        self.assertEqual(expected, fresh_hashes)
+        self.assertEqual(fresh_rendered, commit_bytes)
+        self.snapshot_validator()(
+            list(fresh_rendered.items()),
+            finalizer.ADJUDICATION_PATH.read_bytes(),
+        )
 
     def test_finalizer_uses_the_canonical_row_hash_implementation_for_all_rows(self):
         rows = all_rows(migration.build_outputs(migration.SOURCE_DIR))

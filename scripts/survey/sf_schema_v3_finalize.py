@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
+import json
 import sys
 import warnings
 from collections.abc import Mapping
@@ -22,6 +24,35 @@ ARTIFACT_SCHEMA = "schema-v3-binding-delta-adjudication-v1"
 ADJUDICATOR = "/root/a6_adjudicator"
 SOURCE_HEAD = "418c738a721c69bcd827f8dadee8526e6dfbff87"
 FINAL_STATUS = "ADJUDICATED_AGREE"
+REVIEWED_ADJUDICATION_SHA256 = (
+    "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
+)
+REVIEWED_PENDING_SHA256 = {
+    "2026.findings-acl.1243.sidecar.json": (
+        "fd1046f64d9595ddb6c1a51f5cc152493225aeaea38894a8b3d357730cc98352"
+    ),
+    "2026.findings-acl.1724.sidecar.json": (
+        "5dbc6ff0d719254c87f9ed9501087a68d381489d859a49a9d3bffecd53eedce7"
+    ),
+    "2026.findings-acl.511.sidecar.json": (
+        "6054a24fab51e64e7d82a0e454dcfad37f7d46ce5ab5d16c185a6a1f0a8121be"
+    ),
+    "2602.16485.sidecar.json": (
+        "70e582a807b358e5f1d38d0435f30f6c21a5deec7ff5b2654446131a00085f9e"
+    ),
+    "2604.16529.sidecar.json": (
+        "ff32795433a1e522d9b1bcd4c64e8e7e96e1762e841d12c330d20e85fa85a13d"
+    ),
+    "2605.08083.sidecar.json": (
+        "59a75b060dd04e4c59bcbf509a7dab91744d91b41a733b3bd5e7805e1b73f162"
+    ),
+    "2606.01667.sidecar.json": (
+        "e13bd5dba37096e0e9ea55d83d29ff55ce8adeb9faa12774e2d9cf77e2d53c1f"
+    ),
+    "2606.03054.sidecar.json": (
+        "32c082a77241697150f1b31b33c92cd36f7d1a951a1694ebf8d0e621533326f7"
+    ),
+}
 EXPECTED_BINDINGS = 70
 EXPECTED_ANCHOR_RULES = 6
 EXPECTED_ANCHOR_OCCURRENCES = 8
@@ -112,6 +143,75 @@ _RESOLUTION_IDS = frozenset(
 
 class FinalizationError(ValueError):
     """Raised when adjudication or finalized destinations fail closed."""
+
+
+def validate_reviewed_snapshot(
+    rendered_pending_bytes,
+    artifact_raw_bytes,
+    *,
+    expected_pending_sha256=REVIEWED_PENDING_SHA256,
+    expected_artifact_sha256=REVIEWED_ADJUDICATION_SHA256,
+):
+    """Fail closed unless both reviewed raw-byte snapshots match exactly."""
+    if not isinstance(artifact_raw_bytes, bytes):
+        raise FinalizationError("reviewer artifact raw bytes are required")
+    artifact_sha256 = hashlib.sha256(artifact_raw_bytes).hexdigest()
+    if artifact_sha256 != expected_artifact_sha256:
+        raise FinalizationError(
+            "reviewer artifact SHA-256 mismatch "
+            f"(expected={expected_artifact_sha256}, found={artifact_sha256})"
+        )
+
+    if not isinstance(expected_pending_sha256, Mapping):
+        raise FinalizationError("expected pending snapshot hashes must be a mapping")
+    expected_names = set(expected_pending_sha256)
+    rendered = {}
+    try:
+        entries = list(rendered_pending_bytes)
+    except TypeError as error:
+        raise FinalizationError(
+            "reviewed pending snapshot must be an iterable of name/bytes pairs"
+        ) from error
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, (tuple, list)) or len(entry) != 2:
+            raise FinalizationError(
+                f"reviewed pending snapshot entry {index} is malformed"
+            )
+        name, data = entry
+        if (
+            not isinstance(name, str)
+            or not name
+            or Path(name).name != name
+            or not isinstance(data, bytes)
+        ):
+            raise FinalizationError(
+                f"reviewed pending snapshot entry {index} is malformed"
+            )
+        if name in rendered:
+            raise FinalizationError(
+                f"reviewed pending snapshot duplicate name: {name}"
+            )
+        rendered[name] = data
+
+    actual_names = set(rendered)
+    if actual_names != expected_names:
+        raise FinalizationError(
+            "reviewed pending snapshot names mismatch "
+            f"(missing={sorted(expected_names - actual_names)}, "
+            f"extra={sorted(actual_names - expected_names)})"
+        )
+    mismatches = []
+    for name in sorted(expected_names):
+        expected_hash = expected_pending_sha256[name]
+        actual_hash = hashlib.sha256(rendered[name]).hexdigest()
+        if actual_hash != expected_hash:
+            mismatches.append(
+                f"{name}:expected={expected_hash},found={actual_hash}"
+            )
+    if mismatches:
+        raise FinalizationError(
+            "reviewed pending snapshot SHA-256 mismatch: " + "; ".join(mismatches)
+        )
 
 
 def _require_mapping(value, owner):
@@ -430,13 +530,60 @@ def _validate_adjudication(artifact, outputs):
     _validate_resolution_log(artifact["resolution_log"])
 
 
-def load_adjudication(path=ADJUDICATION_PATH):
-    """Strict-load the reviewer-owned adjudication artifact."""
-    return migration._load_sidecar(Path(path))
+def _parse_adjudication_bytes(raw_bytes, path):
+    try:
+        text = raw_bytes.decode("utf-8")
+        artifact = json.loads(
+            text,
+            object_pairs_hook=migration._reject_duplicate_pairs,
+            parse_constant=migration._reject_json_constant,
+        )
+        migration._validate_loaded_json(artifact)
+        return artifact
+    except (
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+        migration.MigrationError,
+    ) as error:
+        raise FinalizationError(f"cannot read {path}: {error}") from error
 
 
-def finalize_outputs(pending, artifact):
+def load_adjudication(
+    path=ADJUDICATION_PATH,
+    *,
+    expected_artifact_sha256=REVIEWED_ADJUDICATION_SHA256,
+):
+    """Hash-bind and strict-load the reviewer-owned adjudication artifact."""
+    path = Path(path)
+    try:
+        raw_bytes = path.read_bytes()
+    except OSError as error:
+        raise FinalizationError(f"cannot read {path}: {error}") from error
+    actual_sha256 = hashlib.sha256(raw_bytes).hexdigest()
+    if actual_sha256 != expected_artifact_sha256:
+        raise FinalizationError(
+            "reviewer artifact SHA-256 mismatch "
+            f"(expected={expected_artifact_sha256}, found={actual_sha256})"
+        )
+    return _parse_adjudication_bytes(raw_bytes, path)
+
+
+def finalize_outputs(
+    pending,
+    artifact,
+    artifact_raw_bytes,
+    *,
+    expected_pending_sha256=REVIEWED_PENDING_SHA256,
+    expected_artifact_sha256=REVIEWED_ADJUDICATION_SHA256,
+):
     """Validate *artifact* and stamp deep copies of fresh pending outputs."""
+    rendered_pending = migration._render_outputs(pending)
+    validate_reviewed_snapshot(
+        rendered_pending,
+        artifact_raw_bytes,
+        expected_pending_sha256=expected_pending_sha256,
+        expected_artifact_sha256=expected_artifact_sha256,
+    )
     _validate_adjudication(artifact, pending)
     finalized = copy.deepcopy(pending)
     for _, sidecar in finalized:
@@ -460,8 +607,17 @@ def build_finalized_outputs(
 ):
     """Build fresh pending outputs, validate ALL_AGREE, and stamp deep copies."""
     pending = migration.build_outputs(source_dir)
-    artifact = load_adjudication(adjudication_path)
-    return finalize_outputs(pending, artifact)
+    rendered_pending = migration._render_outputs(pending)
+    adjudication_path = Path(adjudication_path)
+    try:
+        artifact_raw_bytes = adjudication_path.read_bytes()
+    except OSError as error:
+        raise FinalizationError(
+            f"cannot read {adjudication_path}: {error}"
+        ) from error
+    validate_reviewed_snapshot(rendered_pending, artifact_raw_bytes)
+    artifact = _parse_adjudication_bytes(artifact_raw_bytes, adjudication_path)
+    return finalize_outputs(pending, artifact, artifact_raw_bytes)
 
 
 def _render_finalized_outputs(outputs):
