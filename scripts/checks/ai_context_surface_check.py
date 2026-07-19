@@ -1883,10 +1883,55 @@ def evaluate_manifest(repo, manifest, tracked_paths):
     return failures
 
 
+def _resolved_gitdir(
+    dot_git: Path, platform: str = os.name
+) -> Path | PurePosixPath:
+    """Resolve a native-Windows linked-worktree pointer on Windows or WSL."""
+
+    try:
+        pointer = dot_git.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        raise ContextSurfaceError(
+            _failure("git-worktree-pointer-invalid", str(exc))
+        ) from exc
+    prefix = "gitdir: "
+    if not pointer.startswith(prefix) or "\n" in pointer or "\r" in pointer:
+        raise ContextSurfaceError(
+            _failure("git-worktree-pointer-invalid", str(dot_git))
+        )
+    raw = pointer[len(prefix) :]
+    windows_absolute = re.fullmatch(r"([A-Za-z]):[\\/](.*)", raw)
+    if windows_absolute:
+        if platform == "posix":
+            drive, remainder = windows_absolute.groups()
+            return PurePosixPath(
+                f"/mnt/{drive.lower()}/{remainder.replace('\\', '/')}"
+            )
+        return Path(raw)
+    candidate = Path(raw)
+    return candidate if candidate.is_absolute() else dot_git.parent / candidate
+
+
+def git_command_prefix(repo: Path, platform: str = os.name) -> list[str]:
+    """Return a Git command prefix that works for native linked worktrees in WSL."""
+
+    repo = Path(repo)
+    command = ["git"]
+    dot_git = repo / ".git"
+    if dot_git.is_file():
+        command.extend(
+            [
+                f"--git-dir={_resolved_gitdir(dot_git, platform)}",
+                f"--work-tree={repo}",
+            ]
+        )
+    return command
+
+
 def _git_tracked_paths(repo: Path) -> list[str]:
     try:
         completed = subprocess.run(
-            ["git", "ls-files", "-z"],
+            [*git_command_prefix(repo), "ls-files", "-z"],
             cwd=repo,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

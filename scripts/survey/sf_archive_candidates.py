@@ -426,13 +426,20 @@ def _load_registry(
             "stage artifacts must preserve the complete HEAD artifact list as an exact prefix",
         )
     if require_shared_baseline:
-        if REGISTRY_BASELINE_COUNT != 77 or len(staged_artifacts) < REGISTRY_BASELINE_COUNT:
+        if (
+            isinstance(REGISTRY_BASELINE_COUNT, bool)
+            or not isinstance(REGISTRY_BASELINE_COUNT, int)
+            or REGISTRY_BASELINE_COUNT <= 0
+            or len(staged_artifacts) < REGISTRY_BASELINE_COUNT
+        ):
             _fail(
                 "archive-registry-lineage-invalid",
                 f"invalid production baseline count: constant={REGISTRY_BASELINE_COUNT}, "
                 f"artifacts={len(staged_artifacts)}",
             )
-        actual_prefix = registry_prefix_sha256(staged_artifacts)
+        actual_prefix = registry_prefix_sha256(
+            staged_artifacts, REGISTRY_BASELINE_COUNT
+        )
         if actual_prefix != REGISTRY_BASELINE_PREFIX_SHA256:
             _fail(
                 "archive-registry-lineage-invalid",

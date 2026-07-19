@@ -32,6 +32,7 @@ from ai_context_surface_check import (
     ContextSurfaceError,
     TrustedRepoReader,
     classify_path,
+    git_command_prefix,
     loads_json_strict,
     validate_audit_epoch_state,
 )
@@ -984,13 +985,13 @@ def _parser() -> argparse.ArgumentParser:
 def _git_inventory(repo: Path):
     try:
         completed = subprocess.run(
-            ["git", "ls-files", "-s", "-z"],
+            [*git_command_prefix(repo), "ls-files", "-s", "-z"],
             cwd=repo,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=False,
         )
-    except OSError as exc:
+    except (OSError, ContextSurfaceError) as exc:
         _fail("git-inventory-failed", str(exc))
     if completed.returncode != 0:
         detail = completed.stderr.decode("utf-8", errors="replace").strip()
@@ -1025,13 +1026,13 @@ def _git_read_blob(repo: Path, blob: str) -> bytes:
         _fail("index-blob-read-failed", f"invalid blob id {blob!r}")
     try:
         completed = subprocess.run(
-            ["git", "cat-file", "blob", blob],
+            [*git_command_prefix(repo), "cat-file", "blob", blob],
             cwd=repo,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=False,
         )
-    except OSError as exc:
+    except (OSError, ContextSurfaceError) as exc:
         _fail("index-blob-read-failed", str(exc))
     if completed.returncode != 0:
         detail = completed.stderr.decode("utf-8", errors="replace").strip()

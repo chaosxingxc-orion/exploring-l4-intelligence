@@ -138,6 +138,20 @@ class ArchiveInventoryTests(unittest.TestCase):
 
 
 class RepositoryArchiveIndexTests(unittest.TestCase):
+    def test_production_archive_accepts_the_current_registered_prefix_anchor(self) -> None:
+        repo = SCRIPT_DIR.parents[1]
+        registry = json.loads(
+            (repo / archive.REGISTRY_RELATIVE_PATH).read_text(encoding="utf-8")
+        )["artifacts"]
+        self.assertEqual(archive.REGISTRY_BASELINE_COUNT, len(registry))
+        self.assertEqual(
+            archive.REGISTRY_BASELINE_PREFIX_SHA256,
+            archive.registry_prefix_sha256(
+                registry, archive.REGISTRY_BASELINE_COUNT
+            ),
+        )
+        self.assertEqual("post", archive.inspect_applied(repo).state)
+
     def test_cold_index_records_every_move_and_retained_exception(self) -> None:
         repo = SCRIPT_DIR.parents[1]
         index = (

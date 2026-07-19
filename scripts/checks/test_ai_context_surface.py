@@ -1710,13 +1710,13 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertNotIn("protocol_version", router)
         self.assertNotRegex(router, r"\b\d+/11\b")
 
-    def test_real_manifest_is_generated_bounded_and_keeps_task8_inactive(self) -> None:
+    def test_real_manifest_is_generated_bounded_and_activates_only_task8_pair(self) -> None:
         relative_path = "docs/integrity/ai-context-manifest.json"
         document = load_json_strict(
             self.repo.joinpath(*PurePosixPath(relative_path).parts)
         )
         active = document["active_entries"]
-        self.assertEqual(18, len(active))
+        self.assertEqual(19, len(active))
         defaults = {
             entry["path"] for entry in active if entry["load_policy"] == "default"
         }
@@ -1731,7 +1731,21 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             entry for entry in active if entry["path"] == "wiki/AI-Collaboration.md"
         )
         self.assertEqual("targeted", policy_entry["load_policy"])
-        self.assertIsNone(document["active_review_transaction"])
+        audit_index = next(
+            entry
+            for entry in active
+            if entry["path"] == "wiki/audit/system-first-stage1a/INDEX.md"
+        )
+        self.assertEqual(
+            ("HOT", "targeted"),
+            (audit_index["class"], audit_index["load_policy"]),
+        )
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        self.assertNotIn(correction, {entry["path"] for entry in active})
+        self.assertEqual(correction, document["active_review_transaction"])
 
 
 class AiContextManifestBuilderTests(unittest.TestCase):
@@ -2750,6 +2764,41 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         ), self.assertRaises(ContextSurfaceError) as oracle_raised:
             _git_tracked_paths(self.repo)
         self.assertIn("git-ls-files-failed", str(oracle_raised.exception))
+
+    def test_windows_worktree_gitdir_is_portable_to_wsl_for_all_git_readers(self) -> None:
+        pointer_repo = self.repo / "linked-worktree"
+        pointer_repo.mkdir()
+        (pointer_repo / ".git").write_text(
+            "gitdir: D:/repo/.git/worktrees/linked\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        prefix = surface.git_command_prefix(pointer_repo, platform="posix")
+        self.assertEqual(
+            [
+                "git",
+                "--git-dir=/mnt/d/repo/.git/worktrees/linked",
+                f"--work-tree={pointer_repo}",
+            ],
+            prefix,
+        )
+
+        completed = mock.Mock(returncode=0, stdout=b"", stderr=b"")
+        with (
+            mock.patch.object(builder, "git_command_prefix", return_value=prefix),
+            mock.patch.object(
+                builder.subprocess, "run", return_value=completed
+            ) as run,
+        ):
+            self.assertEqual({}, builder._git_inventory(pointer_repo))
+        self.assertEqual(prefix + ["ls-files", "-s", "-z"], run.call_args.args[0])
+
+        with (
+            mock.patch.object(surface, "git_command_prefix", return_value=prefix),
+            mock.patch.object(surface.subprocess, "run", return_value=completed) as run,
+        ):
+            self.assertEqual([], surface._git_tracked_paths(pointer_repo))
+        self.assertEqual(prefix + ["ls-files", "-z"], run.call_args.args[0])
 
     def test_builder_validates_exact_registry_inventory(self) -> None:
         registry = json.loads(self.registry.read_text(encoding="utf-8"))
