@@ -58,6 +58,7 @@ from sf_row_hash import row_hash  # noqa: E402
 from sf_schema_v3_release_contract import (  # noqa: E402
     ADJUDICATION_RELATIVE_PATH,
     load_active_release,
+    resolve_trusted_repo_path,
     validate_canonical_record_id,
     validate_coding_lineage,
     validate_repo_relative_path,
@@ -71,20 +72,23 @@ from sf_taxonomy_v6_contract import (  # noqa: E402
 logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 
+TAX_RELATIVE_PATH = "wiki/survey/current/data/identity-taxonomy-v6.json"
+TAX_V5_RELATIVE_PATH = "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json"
+CODING_RELATIVE_PATH = "wiki/survey/current/data/known-item-coding-v7.json"
 TAX = os.path.join(
-    REPO, "wiki", "survey", "current", "data", "identity-taxonomy-v6.json"
+    REPO, *TAX_RELATIVE_PATH.split("/")
 )
 TAX_V5 = os.path.join(
-    REPO, "wiki", "survey", "2026-07-19-sf-identity-taxonomy-v5.json"
+    REPO, *TAX_V5_RELATIVE_PATH.split("/")
 )
 CODING = os.path.join(
-    REPO, "wiki", "survey", "current", "data", "known-item-coding-v7.json"
+    REPO, *CODING_RELATIVE_PATH.split("/")
 )
 SIDECAR_DIR = os.path.join(
     REPO, "wiki", "survey", "current", "data", "schema-v3", "sidecars"
 )
 ADJUDICATION = os.path.join(REPO, *ADJUDICATION_RELATIVE_PATH.split("/"))
-ACTIVE_TAXONOMY = "wiki/survey/current/data/identity-taxonomy-v6.json"
+ACTIVE_TAXONOMY = TAX_RELATIVE_PATH
 INDEP = os.path.join(
     REPO, "wiki", "survey", "2026-07-18-sf-independent-counterexamples-v1.json"
 )
@@ -115,15 +119,20 @@ def _provenance_entry(path, raw_bytes):
     }
 
 
-def _read_snapshot_json(path):
-    path = Path(path)
-    if path.is_symlink():
-        raise ValueError(f"active JSON input may not be a symlink: {path}")
-    return read_strict_json(path)
+def _read_snapshot_json(path, expected_relative):
+    resolved = resolve_trusted_repo_path(
+        REPO,
+        path,
+        expected_relative=expected_relative,
+        expected_kind="file",
+    )
+    return read_strict_json(resolved)
 
 
 def _load_input_snapshot():
-    taxonomy_v5, taxonomy_v5_raw = _read_snapshot_json(TAX_V5)
+    taxonomy_v5, taxonomy_v5_raw = _read_snapshot_json(
+        TAX_V5, TAX_V5_RELATIVE_PATH
+    )
     taxonomy_v5_sha256 = hashlib.sha256(taxonomy_v5_raw).hexdigest()
     if taxonomy_v5_sha256 != FROZEN_TAXONOMY_V5_SHA256:
         raise ValueError(
@@ -131,8 +140,10 @@ def _load_input_snapshot():
             f"(expected={FROZEN_TAXONOMY_V5_SHA256}, "
             f"found={taxonomy_v5_sha256})"
         )
-    taxonomy_v6, taxonomy_v6_raw = _read_snapshot_json(TAX)
-    coding, coding_raw = _read_snapshot_json(CODING)
+    taxonomy_v6, taxonomy_v6_raw = _read_snapshot_json(
+        TAX, TAX_RELATIVE_PATH
+    )
+    coding, coding_raw = _read_snapshot_json(CODING, CODING_RELATIVE_PATH)
     try:
         coding_text = coding_raw.decode("utf-8")
     except UnicodeDecodeError as error:  # Defensive; strict loader already checked.
@@ -257,25 +268,39 @@ class EvidenceCache:
         self.tex = {}
 
 
-def _asset_cache_key(asset_path, ledger_sha256, kind, extractor_identity):
+class AssetContractError(ValueError):
+    """Raised when source asset bytes do not match their ledger contract."""
+
+
+def _asset_cache_key(asset_path, actual_sha256, kind, extractor_identity):
     asset_path = Path(asset_path).resolve(strict=True)
-    stat = asset_path.stat()
     return (
         os.path.normcase(str(asset_path)),
-        ledger_sha256,
+        actual_sha256,
         kind,
         extractor_identity,
-        stat.st_size,
-        stat.st_mtime_ns,
-        getattr(stat, "st_ino", None),
-        getattr(stat, "st_dev", None),
     )
 
 
-def _open_pdf_reader(path):
+def _read_verified_asset(stored_at, ledger_sha256):
+    try:
+        asset_path = Path(resolve_asset_path(stored_at)).resolve(strict=True)
+        raw = asset_path.read_bytes()
+    except (OSError, ValueError) as error:
+        raise AssetContractError(f"asset-unreadable:{stored_at}:{error}") from error
+    actual_sha256 = hashlib.sha256(raw).hexdigest()
+    if actual_sha256 != ledger_sha256:
+        raise AssetContractError(
+            "asset-sha256-mismatch:"
+            f"expected={ledger_sha256}:actual={actual_sha256}:path={asset_path}"
+        )
+    return asset_path, raw, actual_sha256
+
+
+def _open_pdf_reader(source):
     import pypdf
 
-    return pypdf.PdfReader(path)
+    return pypdf.PdfReader(source)
 
 
 def _pdf_extractor_identity():
@@ -285,21 +310,20 @@ def _pdf_extractor_identity():
 
 
 def _cached_pdf_reader(stored_at, ledger_sha256, kind, cache):
-    """Cache page extraction only under path+hash+kind+extractor+stat identity."""
-    try:
-        asset_path = Path(resolve_asset_path(stored_at)).resolve(strict=True)
-        key = _asset_cache_key(
-            asset_path,
-            ledger_sha256,
-            kind,
-            _pdf_extractor_identity(),
-        )
-    except (OSError, ValueError):
-        return None
+    """Hash one byte snapshot, then parse that same snapshot through BytesIO."""
+    asset_path, raw, actual_sha256 = _read_verified_asset(
+        stored_at, ledger_sha256
+    )
+    key = _asset_cache_key(
+        asset_path,
+        actual_sha256,
+        kind,
+        _pdf_extractor_identity(),
+    )
     if key in cache.pdf:
         return cache.pdf[key]
     try:
-        raw_reader = _open_pdf_reader(asset_path)
+        raw_reader = _open_pdf_reader(io.BytesIO(raw))
     except Exception:
         cache.pdf[key] = None
         return None
@@ -320,21 +344,20 @@ def _norm_tex(text):
 
 
 def _cached_tex_text(stored_at, ledger_sha256, kind, cache):
-    try:
-        asset_path = Path(resolve_asset_path(stored_at)).resolve(strict=True)
-        key = _asset_cache_key(
-            asset_path,
-            ledger_sha256,
-            kind,
-            "tarfile+gzip.tex-normalize:v1",
-        )
-    except (OSError, ValueError):
-        return ""
+    asset_path, raw, actual_sha256 = _read_verified_asset(
+        stored_at, ledger_sha256
+    )
+    key = _asset_cache_key(
+        asset_path,
+        actual_sha256,
+        kind,
+        "tarfile+gzip.tex-normalize:v1",
+    )
     if key in cache.tex:
         return cache.tex[key]
     text = ""
     try:
-        with tarfile.open(asset_path, "r:gz") as archive:
+        with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as archive:
             for member in archive.getmembers():
                 if member.name.endswith(".tex"):
                     extracted = archive.extractfile(member)
@@ -342,7 +365,7 @@ def _cached_tex_text(stored_at, ledger_sha256, kind, cache):
                         text += extracted.read().decode("utf-8", errors="replace")
     except tarfile.ReadError:
         try:
-            with gzip.open(asset_path, "rb") as handle:
+            with gzip.GzipFile(fileobj=io.BytesIO(raw), mode="rb") as handle:
                 text = handle.read().decode("utf-8", errors="replace")
         except OSError:
             text = ""
@@ -474,23 +497,35 @@ def reconcile_v6(sidecars, coding_text, evidence_cache=None):
         reader = None
         if ledger_row and ledger_row.get("stored_at"):
             if fulltext.get("kind") == "eprint":
-                tex_norm = _cached_tex_text(
-                    ledger_row["stored_at"],
-                    ledger_row["sha256"],
-                    fulltext.get("kind"),
-                    evidence_cache,
-                )
-                if not tex_norm:
-                    failures.append(
-                        f"{work_id}:eprint-unreadable:{ledger_row['stored_at']}"
+                try:
+                    tex_norm = _cached_tex_text(
+                        ledger_row["stored_at"],
+                        ledger_row["sha256"],
+                        fulltext.get("kind"),
+                        evidence_cache,
                     )
+                except AssetContractError as error:
+                    failures.append(f"{work_id}:{error}")
+                else:
+                    if tex_norm:
+                        pass
+                    else:
+                        failures.append(
+                            f"{work_id}:eprint-unreadable:"
+                            f"{ledger_row['stored_at']}"
+                        )
             elif fulltext.get("kind") == "pdf":
-                reader = _cached_pdf_reader(
-                    ledger_row["stored_at"],
-                    ledger_row["sha256"],
-                    fulltext.get("kind"),
-                    evidence_cache,
-                )
+                try:
+                    reader = _cached_pdf_reader(
+                        ledger_row["stored_at"],
+                        ledger_row["sha256"],
+                        fulltext.get("kind"),
+                        evidence_cache,
+                    )
+                except AssetContractError as error:
+                    failures.append(
+                        f"{work_id}:{error}"
+                    )
 
         for method_path in sidecar.get("method_paths", []):
             pid = method_path.get("method_path_id", "?")

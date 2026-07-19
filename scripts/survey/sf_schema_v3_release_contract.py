@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import re
+import stat
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
@@ -71,6 +73,9 @@ EXPECTED_METHOD_PATH_IDS = (
 ADJUDICATION_RELATIVE_PATH = (
     "wiki/survey/current/data/schema-v3-adjudication.json"
 )
+SIDECAR_DIRECTORY_RELATIVE_PATH = (
+    "wiki/survey/current/data/schema-v3/sidecars"
+)
 ADJUDICATION_SHA256 = (
     "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
 )
@@ -96,6 +101,99 @@ def _within(path, root):
         return False
 
 
+def _portable_relative(value, label):
+    if isinstance(value, PurePosixPath):
+        value = value.as_posix()
+    elif isinstance(value, Path):
+        value = value.as_posix()
+    if not isinstance(value, str) or not value:
+        raise ReleaseContractError(f"{label} must be a non-empty string")
+    if "\\" in value or re.match(r"^[A-Za-z]:", value):
+        raise ReleaseContractError(f"{label} is not portable POSIX: {value!r}")
+    parts = value.split("/")
+    if any(part in ("", ".", "..") for part in parts):
+        raise ReleaseContractError(f"{label} contains unsafe component: {value!r}")
+    pure = PurePosixPath(value)
+    if pure.is_absolute():
+        raise ReleaseContractError(f"{label} must be repo-relative: {value!r}")
+    return pure
+
+
+def resolve_trusted_repo_path(
+    repo_root,
+    target,
+    *,
+    expected_relative,
+    expected_kind="file",
+):
+    """Resolve one prescribed path below a trusted root without following links.
+
+    The root itself is trusted by the caller.  Every component below it is
+    inspected with lstat before resolution; the resolved result must still be
+    the exact prescribed repo-relative path below the trusted root.
+    """
+    expected = _portable_relative(expected_relative, "expected repo path")
+    root = Path(repo_root)
+    try:
+        root_resolved = root.resolve(strict=True)
+    except OSError as error:
+        raise ReleaseContractError(
+            f"trusted repo root does not resolve: {repo_root}: {error}"
+        ) from error
+    if not root_resolved.is_dir():
+        raise ReleaseContractError(f"trusted repo root is not a directory: {repo_root}")
+
+    root_lexical = Path(os.path.abspath(root))
+    requested = Path(target)
+    requested_parts = requested.parts
+    if any(part in (".", "..") for part in requested_parts):
+        raise ReleaseContractError(f"target path contains unsafe component: {target}")
+    if not requested.is_absolute():
+        requested = root_lexical / requested
+    requested_lexical = Path(os.path.abspath(requested))
+    prescribed_lexical = root_lexical.joinpath(*expected.parts)
+    if os.path.normcase(str(requested_lexical)) != os.path.normcase(
+        str(prescribed_lexical)
+    ):
+        raise ReleaseContractError(
+            "target is not the prescribed repo-relative path "
+            f"{expected.as_posix()}: {target}"
+        )
+
+    candidate = root
+    for part in expected.parts:
+        candidate = candidate / part
+        try:
+            mode = candidate.lstat().st_mode
+        except OSError as error:
+            raise ReleaseContractError(
+                f"repo path component is unavailable: {candidate}: {error}"
+            ) from error
+        if stat.S_ISLNK(mode):
+            raise ReleaseContractError(
+                f"repo path contains symlink component: {expected.as_posix()}"
+            )
+
+    try:
+        resolved = candidate.resolve(strict=True)
+    except OSError as error:
+        raise ReleaseContractError(
+            f"repo path does not resolve: {expected.as_posix()}: {error}"
+        ) from error
+    prescribed_resolved = root_resolved.joinpath(*expected.parts)
+    if resolved != prescribed_resolved or not _within(resolved, root_resolved):
+        raise ReleaseContractError(
+            f"repo path escapes or resolves away from prescribed path: {expected.as_posix()}"
+        )
+    if expected_kind == "file" and not resolved.is_file():
+        raise ReleaseContractError(f"repo path is not a file: {expected.as_posix()}")
+    if expected_kind == "dir" and not resolved.is_dir():
+        raise ReleaseContractError(f"repo path is not a directory: {expected.as_posix()}")
+    if expected_kind not in ("file", "dir"):
+        raise ReleaseContractError(f"unknown expected path kind: {expected_kind}")
+    return resolved
+
+
 def validate_repo_relative_path(
     value,
     repo_root,
@@ -103,18 +201,8 @@ def validate_repo_relative_path(
     allowed_root=Path("wiki/survey"),
 ):
     """Resolve one POSIX repo-relative, existing, non-symlink file path."""
-    if not isinstance(value, str) or not value:
-        raise ReleaseContractError("lineage path must be a non-empty string")
-    if "\\" in value or re.match(r"^[A-Za-z]:", value):
-        raise ReleaseContractError(f"lineage path is not portable POSIX: {value!r}")
-    raw_parts = value.split("/")
-    if any(part in ("", ".", "..") for part in raw_parts):
-        raise ReleaseContractError(f"lineage path contains unsafe component: {value!r}")
-    pure = PurePosixPath(value)
-    if pure.is_absolute():
-        raise ReleaseContractError(f"lineage path must be repo-relative: {value!r}")
-
-    allowed_pure = PurePosixPath(allowed_root.as_posix())
+    pure = _portable_relative(value, "lineage path")
+    allowed_pure = _portable_relative(allowed_root, "allowed lineage root")
     try:
         pure.relative_to(allowed_pure)
     except ValueError as error:
@@ -122,26 +210,12 @@ def validate_repo_relative_path(
             f"lineage path is outside allowed root {allowed_pure}: {value!r}"
         ) from error
 
-    repo_root = Path(repo_root).resolve()
-    candidate = repo_root
-    for part in pure.parts:
-        candidate = candidate / part
-        if candidate.is_symlink():
-            raise ReleaseContractError(
-                f"lineage path contains symlink component: {value!r}"
-            )
-    try:
-        resolved = candidate.resolve(strict=True)
-        allowed_resolved = (repo_root / Path(*allowed_pure.parts)).resolve(strict=True)
-    except OSError as error:
-        raise ReleaseContractError(
-            f"lineage path does not resolve to an existing file: {value!r}: {error}"
-        ) from error
-    if not _within(resolved, allowed_resolved) or not resolved.is_file():
-        raise ReleaseContractError(
-            f"lineage path escapes allowed root or is not a file: {value!r}"
-        )
-    return resolved
+    return resolve_trusted_repo_path(
+        repo_root,
+        Path(repo_root).joinpath(*pure.parts),
+        expected_relative=pure,
+        expected_kind="file",
+    )
 
 
 def validate_canonical_record_id(value, repo_root):
@@ -180,10 +254,15 @@ def validate_coding_lineage(coding, repo_root):
         validate_canonical_record_id(row.get("canonical_record_id"), repo_root)
 
 
-def _read_exact_json(path, expected_sha256, label):
-    path = Path(path)
-    if path.is_symlink():
-        raise ReleaseContractError(f"{label}: symlink input is forbidden: {path}")
+def _read_exact_json(
+    repo_root, path, expected_relative, expected_sha256, label
+):
+    path = resolve_trusted_repo_path(
+        repo_root,
+        path,
+        expected_relative=expected_relative,
+        expected_kind="file",
+    )
     try:
         raw = path.read_bytes()
     except OSError as error:
@@ -202,11 +281,12 @@ def _read_exact_json(path, expected_sha256, label):
 def load_active_release(repo_root, sidecar_dir, adjudication_path):
     """Strict-load the exact eight final sidecars and fixed adjudication bytes."""
     repo_root = Path(repo_root)
-    sidecar_dir = Path(sidecar_dir)
-    if sidecar_dir.is_symlink() or not sidecar_dir.is_dir():
-        raise ReleaseContractError(
-            f"active sidecar directory invalid or symlinked: {sidecar_dir}"
-        )
+    sidecar_dir = resolve_trusted_repo_path(
+        repo_root,
+        sidecar_dir,
+        expected_relative=SIDECAR_DIRECTORY_RELATIVE_PATH,
+        expected_kind="dir",
+    )
     actual_names = tuple(sorted(path.name for path in sidecar_dir.iterdir()))
     if actual_names != FINAL_SIDECAR_NAMES:
         raise ReleaseContractError(
@@ -220,8 +300,11 @@ def load_active_release(repo_root, sidecar_dir, adjudication_path):
     for name, expected_work_id in zip(
         FINAL_SIDECAR_NAMES, EXPECTED_WORK_IDS, strict=True
     ):
+        sidecar_relative = f"{SIDECAR_DIRECTORY_RELATIVE_PATH}/{name}"
         document, raw = _read_exact_json(
+            repo_root,
             sidecar_dir / name,
+            sidecar_relative,
             FINAL_SIDECAR_SHA256[name],
             f"active sidecar {name}",
         )
@@ -246,7 +329,9 @@ def load_active_release(repo_root, sidecar_dir, adjudication_path):
         raise ReleaseContractError("active method-path inventory mismatch or duplicate")
 
     adjudication, adjudication_raw = _read_exact_json(
+        repo_root,
         adjudication_path,
+        ADJUDICATION_RELATIVE_PATH,
         ADJUDICATION_SHA256,
         "active adjudication",
     )
