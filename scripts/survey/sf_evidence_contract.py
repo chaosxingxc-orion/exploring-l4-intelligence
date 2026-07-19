@@ -57,14 +57,36 @@ def _page_text(reader, index):
         return ""
 
 
+def _document_text(reader):
+    """Return normalized pages and whether every extraction succeeded."""
+    document = []
+    for index in range(len(reader.pages)):
+        try:
+            document.append(normalized_phrase(reader.pages[index].extract_text()))
+        except Exception:
+            return document, False
+    return document, True
+
+
+def _phrase_pattern(needle):
+    return re.compile(r"(?:^| )" + re.escape(needle) + r"(?= |$)")
+
+
 def check_page_locator(locator, reader, pid, what, failures):
     """Append evidence-contract failures for each PDF page locator in *locator*."""
     locator = locator or ""
     strong_locators = {
         match.start(): match for match in STRONG_PAGE_RE.finditer(locator)
     }
+    document = None
+    document_readable = None
 
     for page_match in PAGE_NUMBER_RE.finditer(locator):
+        if any(
+            match.start() < page_match.start() < match.end()
+            for match in strong_locators.values()
+        ):
+            continue
         strong_match = strong_locators.get(page_match.start())
         page_number = int(page_match.group("page"))
         if strong_match is None:
@@ -90,9 +112,17 @@ def check_page_locator(locator, reader, pid, what, failures):
             )
             continue
 
+        if document is None:
+            document, document_readable = _document_text(reader)
+        if not document_readable:
+            failures.append(f"{pid}:{what}:pdf-unreadable-for-page-check")
+            continue
+
         needle = normalized_phrase(anchor)
-        document = [_page_text(reader, index) for index in range(page_count)]
-        occurrences = sum(text.count(needle) for text in document)
+        pattern = _phrase_pattern(needle)
+        occurrences = sum(
+            sum(1 for _ in pattern.finditer(text)) for text in document
+        )
         if occurrences > 3:
             failures.append(
                 f"{pid}:{what}:page-anchor-not-discriminative:"
@@ -103,7 +133,7 @@ def check_page_locator(locator, reader, pid, what, failures):
         window_start = max(0, page_number - 2)
         window_end = min(page_count, page_number + 1)
         window = document[window_start:window_end]
-        if not any(needle in text for text in window):
+        if not any(pattern.search(text) for text in window):
             failures.append(
                 f"{pid}:{what}:page-anchor-missing:p{page_number}:{anchor}"
             )

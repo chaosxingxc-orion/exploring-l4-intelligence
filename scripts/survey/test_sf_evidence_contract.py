@@ -26,6 +26,21 @@ class FakeReader:
         self.pages = [FakePage(text) for text in page_texts]
 
 
+class RaisingPage:
+    def extract_text(self):
+        raise RuntimeError("unreadable PDF page")
+
+
+class CountingPage(FakePage):
+    def __init__(self, text):
+        super().__init__(text)
+        self.calls = 0
+
+    def extract_text(self):
+        self.calls += 1
+        return super().extract_text()
+
+
 class AnchorPolicyTest(unittest.TestCase):
     def setUp(self):
         self.reader = FakeReader(
@@ -128,6 +143,72 @@ class AnchorPolicyTest(unittest.TestCase):
                 "p1:distinctive orchestrator controls"
             ],
         )
+
+    def test_anchor_requires_exact_token_sequence_at_suffix_and_prefix(self):
+        for page_text in (
+            "candidate majority controls terminations",
+            "uncandidate majority controls termination",
+        ):
+            reader = FakeReader([page_text])
+            out = []
+            check_page_locator(
+                "p1 anchor='candidate majority controls termination'",
+                reader,
+                "fx#row",
+                "row-locator",
+                out,
+            )
+            self.assertEqual(
+                out,
+                [
+                    "fx#row:row-locator:page-anchor-missing:"
+                    "p1:candidate majority controls termination"
+                ],
+            )
+
+    def test_page_tokens_inside_strong_anchor_are_not_extra_locators(self):
+        reader = FakeReader(["method compares p2 outcome"])
+        out = []
+        check_page_locator(
+            "p1 anchor='method compares p2 outcome'",
+            reader,
+            "fx#row",
+            "row-locator",
+            out,
+        )
+        self.assertEqual(out, [])
+
+    def test_extraction_error_fails_closed(self):
+        reader = FakeReader([])
+        reader.pages = [FakePage("decides every explore and stop action"), RaisingPage()]
+        out = []
+        check_page_locator(
+            "p1 anchor='decides every explore and stop action'",
+            reader,
+            "fx#row",
+            "row-locator",
+            out,
+        )
+        self.assertEqual(out, ["fx#row:row-locator:pdf-unreadable-for-page-check"])
+
+    def test_document_is_extracted_once_for_multiple_strong_locators(self):
+        pages = [
+            CountingPage("decides every explore and stop action"),
+            CountingPage("candidate majority controls termination"),
+        ]
+        reader = FakeReader([])
+        reader.pages = pages
+        out = []
+        check_page_locator(
+            "p1 anchor='decides every explore and stop action'; "
+            "p2 anchor='candidate majority controls termination'",
+            reader,
+            "fx#row",
+            "row-locator",
+            out,
+        )
+        self.assertEqual(out, [])
+        self.assertEqual([page.calls for page in pages], [1, 1])
 
 
 if __name__ == "__main__":
