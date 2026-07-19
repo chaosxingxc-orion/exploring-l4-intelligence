@@ -636,7 +636,12 @@ transaction.
 
 - [ ] **Step 3: Refresh current manifests and run pre-registration checks**
 
+Pre-stage exactly the new audit pair before either manifest is refreshed. This lets
+`git ls-files -s` provide the trusted blob inventory required to activate the pair; it is not
+permission to commit a failed check run.
+
 ```powershell
+git add wiki/audit/system-first-stage1a/INDEX.md wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md
 python scripts/survey/sf_current_tables.py --check
 python scripts/survey/sf_current_manifest.py --write
 python scripts/checks/build_ai_context_manifest.py --write
@@ -645,17 +650,20 @@ python scripts/survey/sf_quantifier_scan.py
 python scripts/checks/ai_context_surface_check.py
 ```
 
-Expected: all pass; the correction is the only allowed direct active-review transaction.
+Expected: all pass; the correction is the only allowed direct active-review transaction. If any
+check fails, do not commit: repair the failure, pre-stage the exact audit pair again if its bytes
+changed, and rerun the complete Step 3 check sequence.
 
 - [ ] **Step 4: Commit the immutable artifact before registering its blob**
 
 ```powershell
-git add wiki/audit/system-first-stage1a wiki/survey/current docs/integrity/ai-context-manifest.json
+git add wiki/survey/current docs/integrity/ai-context-manifest.json
 git commit -m "docs(audit): issue stage1a readiness correction"
 git rev-parse HEAD:wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md
 ```
 
-Capture the returned 40-character blob id from Git itself.
+Step 4 stages the remaining generated files; the commit then includes them together with the audit
+pair already staged in Step 3. Capture the returned 40-character blob id from Git itself.
 
 - [ ] **Step 5: Append the exact committed blob to the audit registry**
 
