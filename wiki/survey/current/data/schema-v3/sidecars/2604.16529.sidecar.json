@@ -164,7 +164,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "e42a9cec2668bf40d6a8f4a35ab9a24ac5770b43a4569f586a4c46fd6f7f6463"
+   "adjudication_row_sha256": "eb9f8eb39b2a5df369210b74a653b9954b3c4c9b882f02db528fcdb71a05a975"
   },
   {
    "core_weight_update": false,
@@ -286,7 +286,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "bdc2943d4cc528b19ac2be061a0b7f913fd2c8a844aedf485ad4139e39d57998"
+   "adjudication_row_sha256": "1b11061d06cdd4de1e3f980ed60e5cb7968197fd55227f887f349368ce150bae"
   },
   {
    "core_weight_update": false,
@@ -486,8 +486,9 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1155dac0700ead9f906eee75f0492ff8d5b95885925c317043ed204437a59d3e"
+   "adjudication_row_sha256": "272a1bc8ad895f61f8e77bcf34f20e2132deefbea29377facb365e9477deac99"
   }
  ],
- "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+ "schema_v3_binding_status": "ADJUDICATED_AGREE",
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
 }

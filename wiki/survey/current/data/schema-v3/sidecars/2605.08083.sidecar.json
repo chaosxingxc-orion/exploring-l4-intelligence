@@ -245,8 +245,9 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "23a4177a85fa9f095467857741505bfb8b5394a0051cb6b77f0e400fa1ee3103"
+   "adjudication_row_sha256": "58e4b6627a4dc326f2fd4d3131856d9dd4381a9fb71bdeae491a53ee9eb7c63f"
   }
  ],
- "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+ "schema_v3_binding_status": "ADJUDICATED_AGREE",
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
 }

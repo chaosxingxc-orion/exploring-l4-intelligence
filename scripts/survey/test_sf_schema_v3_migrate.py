@@ -736,9 +736,24 @@ class SchemaV3IntegrationTest(unittest.TestCase):
 
     def test_write_outputs_is_stable_lf_utf8_and_matches_committed_outputs(self):
         outputs = build_outputs(SOURCE_DIR)
+        committed_outputs = outputs
+        adjudication_path = (
+            Path(__file__).resolve().parents[2]
+            / "wiki"
+            / "survey"
+            / "current"
+            / "data"
+            / "schema-v3-adjudication.json"
+        )
+        if adjudication_path.is_file():
+            import sf_schema_v3_finalize as finalizer
+
+            committed_outputs = finalizer.finalize_outputs(
+                outputs, finalizer.load_adjudication(adjudication_path)
+            )
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir) / "sidecars"
-            write_outputs(outputs, output_dir)
+            write_outputs(committed_outputs, output_dir)
             first = {
                 path.name: path.read_bytes()
                 for path in sorted(output_dir.glob("*.sidecar.json"))
@@ -746,7 +761,7 @@ class SchemaV3IntegrationTest(unittest.TestCase):
 
             self.assertEqual(len(first), 8)
             self.assertEqual(
-                set(first), {source_path.name for source_path, _ in outputs}
+                set(first), {source_path.name for source_path, _ in committed_outputs}
             )
             for name, data in first.items():
                 self.assertNotIn(b"\r", data, name)
@@ -756,7 +771,7 @@ class SchemaV3IntegrationTest(unittest.TestCase):
                     data, (OUTPUT_DIR / name).read_bytes(), f"committed drift: {name}"
                 )
 
-            write_outputs(outputs, output_dir)
+            write_outputs(committed_outputs, output_dir)
             second = {
                 path.name: path.read_bytes()
                 for path in sorted(output_dir.glob("*.sidecar.json"))

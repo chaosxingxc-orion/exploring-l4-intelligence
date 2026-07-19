@@ -1,0 +1,983 @@
+{
+  "artifact_id": "SF-SCHEMA-V3-ADJUDICATION-2026-07-19-01",
+  "schema": "schema-v3-binding-delta-adjudication-v1",
+  "reviewer_id": "/root/a6_adjudicator",
+  "reviewer_role": "fresh non-implementer",
+  "source_head": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+  "initial_review": {
+    "source_head": "ca00b0dd5a050be61f96423326366a5cf1053030",
+    "artifact_sha256": "ed03597a9b92baf15116d3e0471854e9eeb3f5969b10f39cc263397eced352a8",
+    "binding_counts": {
+      "agree": 59,
+      "disagree": 11
+    },
+    "anchor_counts": {
+      "agree": 5,
+      "disagree": 1
+    },
+    "status": "DISAGREEMENTS_FOUND"
+  },
+  "scope": {
+    "method_paths": 11,
+    "signals": 12,
+    "edges": 18,
+    "binding_verdicts": 70,
+    "anchor_rules": 6,
+    "anchor_occurrences": 8
+  },
+  "binding_verdicts": [
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": false,
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate-pool selector; the negative binding is not inferred merely from candidate-pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "none",
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate selector, so selection_object=none is supported rather than inferred from pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "signal:s_judge",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"judge 综合打 1–4 分\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"judge 综合打 1–4 分\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "retry",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≤2 判错→纠错反馈回喂重试\") semantically supports decision_right=\"retry\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"≤2 判错→纠错反馈回喂重试\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "revise",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≤2 判错→纠错反馈回喂重试\") semantically supports signal_use=\"revise\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"≤2 判错→纠错反馈回喂重试\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "stop",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"循环至接受或上限\") semantically supports decision_right=\"stop\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"循环至接受或上限\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"循环至接受或上限\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"循环至接受或上限\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": false,
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate-pool selector; the negative binding is not inferred merely from candidate-pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "none",
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate selector, so selection_object=none is supported rather than inferred from pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "signal:s_judge",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"judge 综合打 1–4 分\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"judge 综合打 1–4 分\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "retry",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≤2 判错→纠错反馈回喂重试\") semantically supports decision_right=\"retry\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"≤2 判错→纠错反馈回喂重试\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "revise",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≤2 判错→纠错反馈回喂重试\") semantically supports signal_use=\"revise\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"≤2 判错→纠错反馈回喂重试\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "stop",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"循环至接受或上限\") semantically supports decision_right=\"stop\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"循环至接受或上限\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"循环至接受或上限\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1243; quote=\"循环至接受或上限\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "candidate_output",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\") semantically supports selection_object=\"candidate_output\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "signal:s_final_judger",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"LLM-as-Judge（不可验证奖励,无 rule/gold）\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"LLM-as-Judge（不可验证奖励,无 rule/gold）\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "signal:s_stage_judge",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"LLM-as-Judge（不可验证奖励,无 rule/gold）\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"LLM-as-Judge（不可验证奖励,无 rule/gold）\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "branch",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\") semantically supports decision_right=\"branch\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.1724#pipeline",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "prune",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\") semantically supports signal_use=\"prune\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.1724; quote=\"每阶段 stage-local LLM 评估器排序、按剪枝比 α 裁候选\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"PRM 打分留 top-n\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"PRM 打分留 top-n\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "trajectory",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF anchor names the returned object as the path with highest reward, directly supporting selection_object=\"trajectory\"; the locator passes the page-window and document-discriminativeness checks.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-backups/2026.findings-acl.511/2026.findings-acl.511.pdf p15 anchor='return path with highest reward'"
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "signal:s_prm",
+      "field": "source",
+      "encoded_value": "learned_rm_prm",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"奖励模型是微调件\") semantically supports source=\"learned_rm_prm\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"奖励模型是微调件\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "branch",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"各采 N 候选、PRM 打分留 top-n\") semantically supports decision_right=\"branch\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"各采 N 候选、PRM 打分留 top-n\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "prune",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"各采 N 候选、PRM 打分留 top-n\") semantically supports signal_use=\"prune\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"各采 N 候选、PRM 打分留 top-n\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "stop",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≥n 候选超高阈值提前停\") semantically supports decision_right=\"stop\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"≥n 候选超高阈值提前停\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"≥n 候选超高阈值提前停\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"≥n 候选超高阈值提前停\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:2",
+      "field": "decision_right",
+      "encoded_value": "branch",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"全低于低阈值补采 m\") semantically supports decision_right=\"branch\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"全低于低阈值补采 m\""
+    },
+    {
+      "method_path_id": "2026.findings-acl.511#prm-guided-search",
+      "owner": "edge:2",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"全低于低阈值补采 m\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2026.findings-acl.511; quote=\"全低于低阈值补采 m\""
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"K 池=激活的 k 个工具候选\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485; quote=\"K 池=激活的 k 个工具候选\""
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "tool_agent",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"K 池=激活的 k 个工具候选\") semantically supports selection_object=\"tool_agent\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485; quote=\"K 池=激活的 k 个工具候选\""
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "signal:s_profile",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF states that each tool agent performs a self-audit over its own reasoning and ground truth, directly establishing the LLM self-judge source of the capability profile.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.16485/2602.16485.pdf p7 anchor='each tool agent performs a self audit'"
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "route",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"orchestrator 凭画像+校准决定激活哪些工具/评估/聚合\") semantically supports decision_right=\"route\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485; quote=\"orchestrator 凭画像+校准决定激活哪些工具/评估/聚合\""
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "route",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"orchestrator 凭画像+校准决定激活哪些工具/评估/聚合\") semantically supports signal_use=\"route\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2602.16485; quote=\"orchestrator 凭画像+校准决定激活哪些工具/评估/聚合\""
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "tool_call",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF says profiles select compatible tools and bypass irrelevant agents, so the same route decision controls which tool-agent calls are dispatched; decision_right=\"tool_call\" is supported.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.16485/2602.16485.pdf p5 anchor='agents profiles to select only the most compatible tools'"
+    },
+    {
+      "method_path_id": "2602.16485#calibrated-orchestration",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "route",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF says the orchestrator evaluates queries against agent profiles to select compatible tools, so the profile signal is used for route rather than synthesis input.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.16485/2602.16485.pdf p5 anchor='agents profiles to select only the most compatible tools'"
+    },
+    {
+      "method_path_id": "2604.16529#pdr-random-k",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": false,
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate-pool selector; the negative binding is not inferred merely from candidate-pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2604.16529#pdr-random-k",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "none",
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate selector, so selection_object=none is supported rather than inferred from pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2604.16529#rtv",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"投票锦标赛递归淘汰\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"投票锦标赛递归淘汰\""
+    },
+    {
+      "method_path_id": "2604.16529#rtv",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "trajectory",
+      "evidence_kind": "tex",
+      "verdict": "AGREE",
+      "reason": "The exact pinned TeX sentence explicitly describes a population of rollouts and selection of a rollout from each group, directly supporting trajectory as the selected object.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.16529/2604.16529.eprint::paper.tex; exact quote='where each round reduces a population of rollouts into a subset by dividing the population into groups of size $G$ and selecting a rollout from each group.'"
+    },
+    {
+      "method_path_id": "2604.16529#rtv",
+      "owner": "signal:s_judge",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"LLM 对摘要的比较投票\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"LLM 对摘要的比较投票\""
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "tex",
+      "verdict": "AGREE",
+      "reason": "The exact pinned TeX quote states that RTV obtains a high-quality subset of K summaries, directly establishing explicit candidate-pool selection.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.16529/2604.16529.eprint::paper.tex; exact quote='apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;'"
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "trajectory",
+      "evidence_kind": "tex",
+      "verdict": "AGREE",
+      "reason": "The exact pinned TeX quote states that final RTV is applied to refined rollouts and returns the top-1 rollout, directly supporting trajectory as the selected object.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.16529/2604.16529.eprint::paper.tex; exact quote='apply \\textbf{RTV} to the refined rollouts and return the final top-$1$ rollout.'"
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "signal:s_judge",
+      "field": "source",
+      "encoded_value": "llm_judge",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"LLM 对摘要的比较投票\") semantically supports source=\"llm_judge\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"LLM 对摘要的比较投票\""
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "supply",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"跨迭代状态=选中 K 摘要作精炼上下文\") semantically supports decision_right=\"supply\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"跨迭代状态=选中 K 摘要作精炼上下文\""
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "select",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"跨迭代状态=选中 K 摘要作精炼上下文\") semantically supports signal_use=\"select\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"跨迭代状态=选中 K 摘要作精炼上下文\""
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "supply",
+      "evidence_kind": "tex",
+      "verdict": "AGREE",
+      "reason": "The exact pinned TeX quote says the selected top-K summaries define the next iteration's refinement context, directly establishing the supply decision right.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.16529/2604.16529.eprint::paper.tex; exact quote='\\textbf{RTV} is then applied to these summaries to select the top-$K$ summaries, which define the refinement context for the next iteration.'"
+    },
+    {
+      "method_path_id": "2604.16529#rtv-pdr-pipeline",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "prune",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"投票锦标赛递归淘汰\") semantically supports signal_use=\"prune\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2604.16529; quote=\"投票锦标赛递归淘汰\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"selector=controller 终态共识型 Agg\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"selector=controller 终态共识型 Agg\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "trajectory",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The exact canonical quote jointly names the 128 pre-sampled trajectories and the terminal controller aggregation, directly identifying trajectories as the selected pool objects.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; exact quote='每(model,problem)预采 128 轨迹;selector=controller 终态共识型 Agg'"
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "signal:s_consensus",
+      "field": "source",
+      "encoded_value": "consensus",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"selector=controller 终态共识型 Agg\") semantically supports source=\"consensus\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"selector=controller 终态共识型 Agg\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "signal:s_state",
+      "field": "source",
+      "encoded_value": "state_observation",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"controller 观测=活跃分支/深度/probe 中间答案/剩余预算\") semantically supports source=\"state_observation\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"controller 观测=活跃分支/深度/probe 中间答案/剩余预算\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "branch",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"推理时分支级管理(branch/continue/probe/prune/stop)\") semantically supports decision_right=\"branch\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"推理时分支级管理(branch/continue/probe/prune/stop)\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "prune",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"推理时分支级管理(branch/continue/probe/prune/stop)\") semantically supports signal_use=\"prune\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"推理时分支级管理(branch/continue/probe/prune/stop)\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "stop",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"controller 自适应 width×depth 分配+停/剪\") semantically supports decision_right=\"stop\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"controller 自适应 width×depth 分配+停/剪\""
+    },
+    {
+      "method_path_id": "2605.08083#discovered-controller",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"controller 自适应 width×depth 分配+停/剪\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2605.08083; quote=\"controller 自适应 width×depth 分配+停/剪\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": true,
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"selector=orchestrator 直接合成(非打分器)\") semantically supports explicit_candidate_pool_selection=true in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"selector=orchestrator 直接合成(非打分器)\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "candidate_output",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF explicitly defines each returned candidate as answer, reasoning, approach, and confidence fields, directly supporting candidate_output as the selected object.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p3 anchor='returned candidate ct answer reasoning approach confidence'"
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "signal:s_consensus",
+      "field": "source",
+      "encoded_value": "consensus",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"label-free,共识+自报 confidence\") semantically supports source=\"consensus\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"label-free,共识+自报 confidence\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "stop",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"88.9% 轨迹恰在收敛点停机\") semantically supports decision_right=\"stop\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"88.9% 轨迹恰在收敛点停机\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"88.9% 轨迹恰在收敛点停机\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"88.9% 轨迹恰在收敛点停机\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:1",
+      "field": "decision_right",
+      "encoded_value": "tool_call",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"独占 explore/stop 决策\") semantically supports decision_right=\"tool_call\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"独占 explore/stop 决策\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:1",
+      "field": "signal_use",
+      "encoded_value": "stop_budget",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"独占 explore/stop 决策\") semantically supports signal_use=\"stop_budget\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"独占 explore/stop 决策\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:2",
+      "field": "decision_right",
+      "encoded_value": "synthesize",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"直接合成终答\") semantically supports decision_right=\"synthesize\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.01667; quote=\"直接合成终答\""
+    },
+    {
+      "method_path_id": "2606.01667#agentic-orchestration",
+      "owner": "edge:2",
+      "field": "signal_use",
+      "encoded_value": "synthesize_input",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF states that stop and synthesis decisions both rest on the single accumulated stateful in-context view, directly supporting use of accumulated candidate evidence as synthesis input.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p2 anchor='stop and synthesis decisions both rest on this single stateful in context view'"
+    },
+    {
+      "method_path_id": "2606.03054#trained-gate",
+      "owner": "row",
+      "field": "explicit_candidate_pool_selection",
+      "encoded_value": false,
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate-pool selector; the negative binding is not inferred merely from candidate-pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2606.03054#trained-gate",
+      "owner": "row",
+      "field": "selection_object",
+      "encoded_value": "none",
+      "evidence_kind": "absence",
+      "verdict": "AGREE",
+      "reason": "Inspection of the declared complete pinned method path supports no explicit quality-based candidate selector, so selection_object=none is supported rather than inferred from pool existence.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054; absence scope=complete pinned method path"
+    },
+    {
+      "method_path_id": "2606.03054#trained-gate",
+      "owner": "signal:s_gate",
+      "field": "source",
+      "encoded_value": "trained_classifier",
+      "evidence_kind": "pdf_page",
+      "verdict": "AGREE",
+      "reason": "The pinned PDF identifies a logistic-regression classifier and explicitly states that it is trained with L2 regularization, directly supporting trained_classifier as the signal source.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.03054/2606.03054.pdf p11 anchor='logistic regression classifier we train with l2'"
+    },
+    {
+      "method_path_id": "2606.03054#trained-gate",
+      "owner": "edge:0",
+      "field": "decision_right",
+      "encoded_value": "execute_skip",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"门决定是否执行\") semantically supports decision_right=\"execute_skip\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054; quote=\"门决定是否执行\""
+    },
+    {
+      "method_path_id": "2606.03054#trained-gate",
+      "owner": "edge:0",
+      "field": "signal_use",
+      "encoded_value": "execute_skip_gate",
+      "evidence_kind": "canon",
+      "verdict": "AGREE",
+      "reason": "The cited canon evidence (\"门决定是否执行\") semantically supports signal_use=\"execute_skip_gate\" in the pinned method path.",
+      "source_pointer": "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md#2606.03054; quote=\"门决定是否执行\""
+    }
+  ],
+  "anchor_verdicts": [
+    {
+      "old_locator": "p4",
+      "new_locator": "p4 anchor='create extend probe and prune branches'",
+      "occurrences": 2,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs once in the complete PDF on extracted page 3, inside the declared p4 page-minus-one/page-plus-one window, and directly states the controller's branch create/extend/probe/prune rights; one occurrence is discriminative (at most 3). Both sidecar replacements were accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.08083/2605.08083.pdf p3; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    },
+    {
+      "old_locator": "p5",
+      "new_locator": "p5 anchor='accuracy cost trade off'",
+      "occurrences": 1,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs twice in the complete PDF (pages 4 and 8); page 4 lies in the declared p5 page-minus-one/page-plus-one window and the method sentence ties the discovered code policy to its accuracy-cost objective. The total remains discriminative (at most 3), and the one sidecar replacement was accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.08083/2605.08083.pdf p4, p8; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    },
+    {
+      "old_locator": "p3",
+      "new_locator": "p3 anchor='every decision auditable'",
+      "occurrences": 1,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs once on page 3, within the declared p3 page-minus-one/page-plus-one window, and is claim-bearing for the orchestrator's explicit action decisions; it is discriminative. The one sidecar replacement was accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p3; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    },
+    {
+      "old_locator": "p8",
+      "new_locator": "p8 anchor='natural stop time aligns with correct majority emergence'",
+      "occurrences": 2,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs once on page 9, inside the declared p8 page-minus-one/page-plus-one window, and directly supports convergence-aligned stopping; it is discriminative. Both sidecar replacements were accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p9; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    },
+    {
+      "old_locator": "p14",
+      "new_locator": "p14 anchor='asymmetric delegated architecture'",
+      "occurrences": 1,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs once on page 14, inside the declared p14 page-minus-one/page-plus-one window, and directly supports the delegated orchestrator/explorer architecture; it is discriminative. The one sidecar replacement was accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p14; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    },
+    {
+      "old_locator": "p4",
+      "new_locator": "p4 anchor='repeatedly decides whether to call explore or to stop and synthesize'",
+      "occurrences": 1,
+      "verdict": "AGREE",
+      "reason": "The normalized phrase occurs once on extracted PDF page 3, inside the declared p4 page-minus-one/page-plus-one window, and directly states the orchestrator's explore-or-stop-and-synthesize decision. It is claim-bearing and discriminative; the one sidecar occurrence is accounted for.",
+      "source_pointer": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01667/2606.01667.pdf p3; scripts/survey/sf_evidence_contract.py::check_page_locator"
+    }
+  ],
+  "resolution_log": [
+    {
+      "resolution_id": "binding-01",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2026.findings-acl.511#prm-guided-search",
+        "owner": "row",
+        "field": "selection_object"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited PRM top-n retention quote establishes scored retention but does not identify the selected object as a trajectory. The pinned paper supports trajectory/path candidates elsewhere; rebind this field to evidence naming planning/execution paths or the final highest-reward trajectory.",
+      "actual_repair": "Replaced the generic PRM top-n canon quote with a p15 PDF binding that explicitly names the returned highest-reward path.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF anchor names the returned object as the path with highest reward, directly supporting selection_object=\"trajectory\"; the locator passes the page-window and document-discriminativeness checks."
+    },
+    {
+      "resolution_id": "binding-02",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2602.16485#calibrated-orchestration",
+        "owner": "signal:s_profile",
+        "field": "source"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote says only that the profile is fed to the orchestrator at inference; it does not establish source=llm_judge. The pinned paper identifies an LLM agent self-assessment over labeled calibration performance as the producer; rebind to that source-bearing passage.",
+      "actual_repair": "Rebound source to a p7 PDF passage identifying each LLM tool agent's self-audit as the profile producer.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF states that each tool agent performs a self-audit over its own reasoning and ground truth, directly establishing the LLM self-judge source of the capability profile."
+    },
+    {
+      "resolution_id": "binding-03",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2602.16485#calibrated-orchestration",
+        "owner": "edge:1",
+        "field": "signal_use"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote establishes that the orchestrator aggregates/synthesizes, but it does not show that the capability-profile signal is a synthesis input. The paper says profiles guide tool-agent activation, while activated tool outputs are synthesized; keep the profile route edge and bind synthesize_input to a tool-output signal if represented.",
+      "actual_repair": "Changed edge:1 signal_use from synthesize_input to route, removed synthesize_input from signal uses, and bound routing to the p5 compatible-tools passage.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF says the orchestrator evaluates queries against agent profiles to select compatible tools, so the profile signal is used for route rather than synthesis input."
+    },
+    {
+      "resolution_id": "binding-04",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2604.16529#rtv",
+        "owner": "row",
+        "field": "selection_object"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote '投票锦标赛递归淘汰' establishes tournament elimination but does not identify the selected object as a trajectory. Rebind to the pinned TeX passage that explicitly says RTV selects within a population of rollouts.",
+      "actual_repair": "Replaced the object-ambiguous canon phrase with an exact TeX quote naming rollout populations and selected rollouts.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The exact pinned TeX sentence explicitly describes a population of rollouts and selection of a rollout from each group, directly supporting trajectory as the selected object."
+    },
+    {
+      "resolution_id": "binding-05",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2604.16529#rtv-pdr-pipeline",
+        "owner": "row",
+        "field": "explicit_candidate_pool_selection"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The declared tex quote is not present verbatim in pinned paper.tex because the source contains LaTeX markup around RTV and K. TeX locators retain exact-quote semantics; replace the evidence quote with the exact source text.",
+      "actual_repair": "Replaced the non-verbatim TeX text with the exact markup-bearing select-K sentence and applied it consistently to the coupled selection-policy binding.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The exact pinned TeX quote states that RTV obtains a high-quality subset of K summaries, directly establishing explicit candidate-pool selection."
+    },
+    {
+      "resolution_id": "binding-06",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2604.16529#rtv-pdr-pipeline",
+        "owner": "row",
+        "field": "selection_object"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The declared tex quote is absent verbatim and, as encoded, names a subset of summaries rather than establishing selection_object=trajectory. Rebind to exact TeX evidence that explicitly identifies rollout selection, or explicitly justify the summary-as-trajectory representation.",
+      "actual_repair": "Rebound the field to an exact TeX sentence naming refined rollouts and the returned top-1 rollout.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The exact pinned TeX quote states that final RTV is applied to refined rollouts and returns the top-1 rollout, directly supporting trajectory as the selected object."
+    },
+    {
+      "resolution_id": "binding-07",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2604.16529#rtv-pdr-pipeline",
+        "owner": "edge:1",
+        "field": "decision_right"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote establishes recursive pruning, but it does not establish decision_right=supply. Rebind this field to the pinned passage stating that the selected top-K summaries define the next iteration's refinement context.",
+      "actual_repair": "Replaced the pruning-only quote with the exact sentence tying selected summaries to the supplied refinement context.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The exact pinned TeX quote says the selected top-K summaries define the next iteration's refinement context, directly establishing the supply decision right."
+    },
+    {
+      "resolution_id": "binding-08",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2605.08083#discovered-controller",
+        "owner": "row",
+        "field": "selection_object"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote establishes a terminal consensus aggregation operator but does not identify its selection object as a trajectory. Rebind to evidence naming the pre-sampled reasoning trajectories together with the terminal aggregation.",
+      "actual_repair": "Expanded the canonical binding to jointly name the pre-sampled trajectories and terminal consensus aggregation.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The exact canonical quote jointly names the 128 pre-sampled trajectories and the terminal controller aggregation, directly identifying trajectories as the selected pool objects."
+    },
+    {
+      "resolution_id": "binding-09",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2606.01667#agentic-orchestration",
+        "owner": "row",
+        "field": "selection_object"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited quote establishes direct orchestrator synthesis but does not identify selection_object=candidate_output. Rebind to evidence that names the independent structured candidate pool consumed by the orchestrator.",
+      "actual_repair": "Replaced the synthesis-only quote with a p3 PDF binding that explicitly defines the structured returned candidate.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF explicitly defines each returned candidate as answer, reasoning, approach, and confidence fields, directly supporting candidate_output as the selected object."
+    },
+    {
+      "resolution_id": "binding-10",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2606.01667#agentic-orchestration",
+        "owner": "edge:2",
+        "field": "signal_use"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited direct-final-synthesis quote supports decision_right=synthesize but does not establish that the consensus/evidence signal is used as synthesis input. Rebind to the pinned sentence stating that stop and synthesis decisions both rest on the single accumulated stateful in-context view.",
+      "actual_repair": "Rebound signal_use to the p2 sentence explicitly tying synthesis to the accumulated stateful evidence view.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF states that stop and synthesis decisions both rest on the single accumulated stateful in-context view, directly supporting use of accumulated candidate evidence as synthesis input."
+    },
+    {
+      "resolution_id": "binding-11",
+      "resolution_type": "original_binding_disagreement",
+      "tuple": {
+        "method_path_id": "2606.03054#trained-gate",
+        "owner": "signal:s_gate",
+        "field": "source"
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "The cited execute/skip-output quote establishes signal form, not source=trained_classifier. Rebind to the pinned classifier passage identifying the L2-regularized logistic-regression gate and its training.",
+      "actual_repair": "Replaced the execute/skip form quote with a p11 PDF binding explicitly identifying and training the logistic-regression classifier.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The pinned PDF identifies a logistic-regression classifier and explicitly states that it is trained with L2 regularization, directly supporting trained_classifier as the signal source."
+    },
+    {
+      "resolution_id": "anchor-01",
+      "resolution_type": "original_anchor_disagreement",
+      "locator": {
+        "old_locator": "p4",
+        "rejected_locator": "p4 anchor='decides every explore and stop action'",
+        "repaired_locator": "p4 anchor='repeatedly decides whether to call explore or to stop and synthesize'",
+        "occurrences": 1
+      },
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "Independent validation finds zero normalized phrase occurrences: PDF extraction joins the source as 'actionin', so the required token-boundary phrase is missing even though the prose is semantically relevant. Replace it with the claim-bearing, validator-passing p4 anchor='repeatedly decides whether to call explore or to stop and synthesize'. The one sidecar occurrence was accounted for.",
+      "actual_repair": "Replaced the extraction-broken phrase with a claim-bearing p4 anchor whose normalized token sequence occurs once on PDF page 3.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The normalized phrase occurs once on extracted PDF page 3, inside the declared p4 page-minus-one/page-plus-one window, and directly states the orchestrator's explore-or-stop-and-synthesize decision. It is claim-bearing and discriminative; the one sidecar occurrence is accounted for."
+    },
+    {
+      "resolution_id": "coupled-01",
+      "resolution_type": "coupled_semantic_review",
+      "review_scope": [
+        {
+          "method_path_id": "2602.16485#calibrated-orchestration",
+          "owner": "signal:s_profile",
+          "field": "uses",
+          "encoded_value": [
+            "route"
+          ]
+        },
+        {
+          "method_path_id": "2602.16485#calibrated-orchestration",
+          "owner": "edge:1",
+          "field": "decision_right",
+          "encoded_value": "tool_call"
+        }
+      ],
+      "remediation_commit": "418c738a721c69bcd827f8dadee8526e6dfbff87",
+      "original_issue": "Repairing edge:1 signal_use exposed coupled overreach: the profile had unsupported synthesize_input use and the edge's old synthesize right described tool outputs rather than the profile signal.",
+      "actual_repair": "Narrowed s_profile uses to [route], changed edge:1 to route -> tool_call, and bound signal uses plus both edge fields to the p5 profile-driven compatible-tool selection passage.",
+      "re_review_verdict": "AGREE",
+      "re_review_reason": "The p5 source states that agent profiles select compatible tools, prioritize proficient agents, and bypass irrelevant agents. This supports profile use=[route] and the resulting control over which tool-agent calls are dispatched."
+    }
+  ],
+  "summary": {
+    "agree": 70,
+    "disagree": 0,
+    "anchor_agree": 6,
+    "anchor_disagree": 0,
+    "status": "ALL_AGREE"
+  }
+}

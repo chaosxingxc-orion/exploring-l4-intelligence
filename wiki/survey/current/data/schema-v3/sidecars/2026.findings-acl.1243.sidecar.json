@@ -214,7 +214,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1814209d35c58a0ef44c8147f7c0b0b2e1033793f559a180690a9bcd2ebac2bf"
+   "adjudication_row_sha256": "861e2e71e3213d8558a0ac9c790a7a32393253c48583807db019e5d634f7beaf"
   },
   {
    "core_weight_update": true,
@@ -417,8 +417,9 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "cd6113bedbdc3aca67a72ace24817475132c65be537f8369cb4b3e0d2c241683"
+   "adjudication_row_sha256": "11ff35c2ebc3f90032cb544d30092a71249b17a6eed262801abfda681440d4f1"
   }
  ],
- "schema_v3_binding_status": "PENDING_INDEPENDENT_ADJUDICATION"
+ "schema_v3_binding_status": "ADJUDICATED_AGREE",
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
 }
