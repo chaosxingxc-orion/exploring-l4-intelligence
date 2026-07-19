@@ -1136,17 +1136,148 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         target = self.repo / "docs/integrity/ai-context-manifest.json"
         with self.patched_builder():
             builder.write_manifest(self.repo, target, self.tracked, self.blobs)
-            tracked = [*self.tracked, "docs/integrity/ai-context-manifest.json"]
-            blobs = {**self.blobs, "docs/integrity/ai-context-manifest.json": "e" * 40}
-            self.assertEqual(
-                [], builder.check_manifest(self.repo, target, tracked, blobs)
-            )
+            try:
+                failures = builder.check_manifest(
+                    self.repo, target, self.tracked, self.blobs
+                )
+            except builder.ManifestBuildError as exc:
+                self.fail(f"pre-git-add bootstrap check raised: {exc}")
+            self.assertEqual([], failures)
             document = load_json_strict(target)
-            self.assertEqual([], evaluate_manifest(self.repo, document, tracked))
+            self.assertEqual(
+                [], evaluate_manifest(self.repo, document, self.tracked)
+            )
             target.write_bytes(target.read_bytes() + b" ")
-            failures = builder.check_manifest(self.repo, target, tracked, blobs)
+            failures = builder.check_manifest(
+                self.repo, target, self.tracked, self.blobs
+            )
 
         self.assertIn("manifest-byte-mismatch", failure_codes(failures))
+
+    def test_manifest_bootstrap_rejects_wrong_target(self) -> None:
+        wrong_target = self.repo / "docs/integrity/not-the-manifest.json"
+        with self.patched_builder(), self.assertRaises(
+            builder.ManifestBuildError
+        ) as raised:
+            builder.write_manifest(
+                self.repo, wrong_target, self.tracked, self.blobs
+            )
+
+        self.assertIn("manifest-target-invalid", str(raised.exception))
+        self.assertFalse(wrong_target.exists())
+
+    @unittest.skipIf(os.name == "nt", "real self symlink check runs in WSL/POSIX")
+    def test_manifest_bootstrap_rejects_self_symlink(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        target.parent.mkdir(parents=True)
+        os.symlink(self.repo / "AGENTS.md", target)
+        document = {
+            "schema": "ai-context-manifest-v1",
+            "active_entries": [dict(self.specs[-1])],
+            "budgets_bytes": {},
+            "legacy_cold_paths": [],
+            "active_review_transaction": None,
+        }
+
+        failures = evaluate_manifest(self.repo, document, self.tracked)
+
+        self.assertIn("untrusted-repo-path", failure_codes(failures))
+
+    def test_manifest_bootstrap_does_not_excuse_another_untracked_active(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        extra_path = "wiki/survey/current/extra.md"
+        extra_raw = b"extra\n"
+        extra = {
+            "path": extra_path,
+            "class": "CURRENT",
+            "load_policy": "targeted",
+            "purpose": "must remain tracked",
+            "sha256": raw_sha256(extra_raw),
+        }
+        with self.patched_builder():
+            builder.write_manifest(self.repo, target, self.tracked, self.blobs)
+        extra_file = self.repo.joinpath(*PurePosixPath(extra_path).parts)
+        extra_file.parent.mkdir(parents=True, exist_ok=True)
+        extra_file.write_bytes(extra_raw)
+        document = load_json_strict(target)
+        document["active_entries"].append(extra)
+
+        failures = evaluate_manifest(self.repo, document, self.tracked)
+
+        self.assertEqual(1, failure_codes(failures).count("active-path-untracked"))
+
+    def test_audit_lifecycle_absent_is_a_valid_task7_manifest(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        with self.patched_builder(), mock.patch.object(
+            builder, "ACTIVE_REVIEW_TRANSACTION", correction
+        ):
+            try:
+                builder.write_manifest(
+                    self.repo, target, self.tracked, self.blobs
+                )
+                document = load_json_strict(target)
+            except builder.ManifestBuildError as exc:
+                self.fail(f"absent audit lifecycle should be valid: {exc}")
+
+        active_paths = {entry["path"] for entry in document["active_entries"]}
+        self.assertNotIn("wiki/audit/system-first-stage1a/INDEX.md", active_paths)
+        self.assertIsNone(document["active_review_transaction"])
+
+    def test_audit_lifecycle_activates_only_when_both_paths_are_tracked(self) -> None:
+        index_path = "wiki/audit/system-first-stage1a/INDEX.md"
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        for path in (index_path, correction):
+            target = self.repo.joinpath(*PurePosixPath(path).parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((path + "\n").encode("utf-8"))
+        tracked = [*self.tracked, index_path, correction]
+        blobs = {**self.blobs, index_path: "d" * 40, correction: "c" * 40}
+
+        with self.patched_builder(), mock.patch.object(
+            builder, "ACTIVE_REVIEW_TRANSACTION", correction
+        ):
+            document = builder.build_manifest(
+                self.repo, tracked, blobs, allow_untracked_self=True
+            )
+
+        index_entries = [
+            entry for entry in document["active_entries"] if entry["path"] == index_path
+        ]
+        self.assertEqual(1, len(index_entries))
+        self.assertEqual("targeted", index_entries[0]["load_policy"])
+        self.assertEqual(correction, document["active_review_transaction"])
+
+    def test_audit_lifecycle_half_present_fails_closed(self) -> None:
+        index_path = "wiki/audit/system-first-stage1a/INDEX.md"
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        for present in (index_path, correction):
+            with self.subTest(present=present):
+                target = self.repo.joinpath(*PurePosixPath(present).parts)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((present + "\n").encode("utf-8"))
+                tracked = [*self.tracked, present]
+                blobs = {**self.blobs, present: "d" * 40}
+                with (
+                    self.patched_builder(),
+                    mock.patch.object(
+                        builder, "ACTIVE_REVIEW_TRANSACTION", correction
+                    ),
+                    self.assertRaises(builder.ManifestBuildError) as raised,
+                ):
+                    builder.build_manifest(
+                        self.repo, tracked, blobs, allow_untracked_self=True
+                    )
+                self.assertIn("audit-activation-incomplete", str(raised.exception))
 
     def test_builder_check_rejects_crlf_and_performs_zero_writes(self) -> None:
         target = self.repo / "docs/integrity/ai-context-manifest.json"
@@ -1213,7 +1344,9 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             ),
         }
         for label, operation in scenarios.items():
-            target = self.repo / label / "ai-context-manifest.json"
+            target = self.repo / "docs/integrity/ai-context-manifest.json"
+            if target.exists():
+                target.unlink()
             with (
                 self.subTest(label=label),
                 self.patched_builder(),

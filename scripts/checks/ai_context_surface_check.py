@@ -777,7 +777,11 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         active_seen.add(path)
         if path in legacy:
             failures.append(_failure("active-legacy-overlap", path))
-        if path not in tracked_seen:
+        # The only pre-git-add bootstrap exception: the exact manifest self
+        # metadata may be untracked after the builder has written it.  The
+        # trusted read below still requires a regular non-symlink at that path.
+        bootstrap_self = is_self and path not in tracked_seen
+        if path not in tracked_seen and not bootstrap_self:
             failures.append(_failure("active-path-untracked", path))
         try:
             actual_class = classify_path(path, legacy_entries)

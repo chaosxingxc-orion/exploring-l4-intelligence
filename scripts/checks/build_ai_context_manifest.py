@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -30,6 +31,7 @@ from ai_context_surface_check import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = REPO_ROOT / MANIFEST_RELATIVE_PATH
+AUDIT_CAMPAIGN_INDEX_PATH = "wiki/audit/system-first-stage1a/INDEX.md"
 ACTIVE_REVIEW_TRANSACTION = (
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
 )
@@ -50,6 +52,14 @@ def _entry(path: str, path_class: str, load_policy: str, purpose: str):
         "load_policy": load_policy,
         "purpose": purpose,
     }
+
+
+AUDIT_CAMPAIGN_ENTRY_SPEC = _entry(
+    AUDIT_CAMPAIGN_INDEX_PATH,
+    "HOT",
+    "targeted",
+    "append-only campaign audit index",
+)
 
 
 ACTIVE_ENTRY_SPECS = (
@@ -118,12 +128,6 @@ ACTIVE_ENTRY_SPECS = (
         "HOT",
         "targeted",
         "WSL/POSIX v6 evidence report",
-    ),
-    _entry(
-        "wiki/audit/system-first-stage1a/INDEX.md",
-        "HOT",
-        "targeted",
-        "append-only campaign audit index",
     ),
     _entry(
         MANIFEST_RELATIVE_PATH,
@@ -482,6 +486,63 @@ def _canonical_inventory(tracked_paths, blob_inventory):
     return tracked, blobs
 
 
+def _audit_activation(reader: TrustedRepoReader, tracked: set[str]):
+    """Activate the audit pointer only from the complete tracked path pair."""
+
+    if ACTIVE_REVIEW_TRANSACTION is None:
+        return (), None
+    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in tracked
+    correction_tracked = ACTIVE_REVIEW_TRANSACTION in tracked
+    if index_tracked != correction_tracked:
+        _fail(
+            "audit-activation-incomplete",
+            f"index tracked={index_tracked}, correction tracked={correction_tracked}",
+        )
+    if not index_tracked:
+        return (), None
+    for path in (AUDIT_CAMPAIGN_INDEX_PATH, ACTIVE_REVIEW_TRANSACTION):
+        try:
+            reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            _fail("audit-activation-invalid", str(exc))
+    return (AUDIT_CAMPAIGN_ENTRY_SPEC,), ACTIVE_REVIEW_TRANSACTION
+
+
+def _manifest_target(repo: Path, target: Path) -> Path:
+    """Require the one canonical manifest target; never follow a target symlink."""
+
+    try:
+        root = Path(repo).resolve(strict=True)
+    except OSError as exc:
+        _fail("manifest-target-invalid", str(exc))
+    candidate = Path(target)
+    if not candidate.is_absolute():
+        candidate = root / candidate
+    candidate = Path(os.path.abspath(candidate))
+    expected = root.joinpath(*PurePosixPath(MANIFEST_RELATIVE_PATH).parts)
+    if os.path.normcase(str(candidate)) != os.path.normcase(str(expected)):
+        _fail("manifest-target-invalid", f"expected {expected}, found {candidate}")
+    current = root
+    try:
+        for part in PurePosixPath(MANIFEST_RELATIVE_PATH).parts[:-1]:
+            current /= part
+            metadata = os.lstat(current)
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+                _fail("manifest-target-invalid", f"untrusted parent {current}")
+        try:
+            metadata = os.lstat(expected)
+        except FileNotFoundError:
+            pass
+        else:
+            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
+                _fail("manifest-target-invalid", f"untrusted target {expected}")
+    except FileNotFoundError:
+        pass
+    except OSError as exc:
+        _fail("manifest-target-invalid", str(exc))
+    return expected
+
+
 def build_manifest(
     repo: Path,
     tracked_paths,
@@ -495,8 +556,9 @@ def build_manifest(
     except ContextSurfaceError as exc:
         _fail("repo-root-invalid", str(exc))
     tracked, blobs = _canonical_inventory(tracked_paths, blob_inventory)
+    audit_specs, active_review_transaction = _audit_activation(reader, tracked)
     _validate_constants(
-        ACTIVE_ENTRY_SPECS,
+        (*ACTIVE_ENTRY_SPECS, AUDIT_CAMPAIGN_ENTRY_SPEC),
         RETAINED_LEGACY_PATHS,
         EXACT_NAMED_LEGACY_EXCEPTIONS,
         EXACT_PREEXISTING_LEGACY_DOCS,
@@ -529,7 +591,8 @@ def build_manifest(
             _fail("legacy-path-invalid", str(exc))
         legacy_by_path[path] = {"path": path, "class": entry["class"]}
     legacy = [legacy_by_path[path] for path in sorted(legacy_by_path)]
-    active_paths = {entry["path"] for entry in ACTIVE_ENTRY_SPECS}
+    effective_specs = (*ACTIVE_ENTRY_SPECS, *audit_specs)
+    active_paths = {entry["path"] for entry in effective_specs}
     overlap = sorted(active_paths & set(legacy_by_path))
     if overlap:
         _fail("active-legacy-overlap", overlap[0])
@@ -545,7 +608,7 @@ def build_manifest(
             )
 
     entries: list[dict] = []
-    for spec in ACTIVE_ENTRY_SPECS:
+    for spec in effective_specs:
         entry = dict(spec)
         path = entry["path"]
         actual_class = classify_path(path, legacy)
@@ -582,20 +645,12 @@ def build_manifest(
         except ContextSurfaceError as exc:
             _fail("budget-path-invalid", str(exc))
 
-    if ACTIVE_REVIEW_TRANSACTION is not None:
-        if ACTIVE_REVIEW_TRANSACTION not in tracked:
-            _fail("active-review-transaction-untracked", ACTIVE_REVIEW_TRANSACTION)
-        try:
-            reader.read_bytes(ACTIVE_REVIEW_TRANSACTION)
-        except ContextSurfaceError as exc:
-            _fail("active-review-transaction-invalid", str(exc))
-
     document = {
         "schema": MANIFEST_SCHEMA,
         "active_entries": entries,
         "budgets_bytes": dict(sorted(BUDGETS_BYTES.items())),
         "legacy_cold_paths": legacy,
-        "active_review_transaction": ACTIVE_REVIEW_TRANSACTION,
+        "active_review_transaction": active_review_transaction,
     }
     return document
 
@@ -628,14 +683,16 @@ def write_manifest(
     blob_inventory,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> None:
+    target = _manifest_target(Path(repo), Path(target))
     raw = render_manifest(
         repo,
         tracked_paths,
         blob_inventory,
         registry_path,
+        # Bootstrap only: the builder is about to create the exact self file
+        # before the caller can add it to the Git index.
         allow_untracked_self=True,
     )
-    target = Path(target)
     file_descriptor: int | None = None
     temporary_name: str | None = None
     failure: OSError | None = None
@@ -678,6 +735,10 @@ def write_manifest(
             _fail("manifest-write-failed", detail)
         if cleanup_failure is not None:
             _fail("manifest-write-failed", f"{target}: cleanup failed: {cleanup_failure}")
+    try:
+        TrustedRepoReader(repo).read_bytes(MANIFEST_RELATIVE_PATH)
+    except ContextSurfaceError as exc:
+        _fail("manifest-write-failed", str(exc))
 
 
 def check_manifest(
@@ -687,11 +748,19 @@ def check_manifest(
     blob_inventory,
     registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> list[str]:
-    expected = render_manifest(repo, tracked_paths, blob_inventory, registry_path)
+    target = _manifest_target(Path(repo), Path(target))
+    expected = render_manifest(
+        repo,
+        tracked_paths,
+        blob_inventory,
+        registry_path,
+        # Bootstrap only: the exact target was validated above and the trusted
+        # read below proves it is a regular non-symlink before comparison.
+        allow_untracked_self=True,
+    )
     try:
-        target_relative = Path(target).resolve().relative_to(Path(repo).resolve()).as_posix()
-        actual = TrustedRepoReader(repo).read_bytes(target_relative)
-    except (OSError, ValueError, ContextSurfaceError) as exc:
+        actual = TrustedRepoReader(repo).read_bytes(MANIFEST_RELATIVE_PATH)
+    except ContextSurfaceError as exc:
         return [f"manifest-missing: {target}: {exc}"]
     if actual != expected:
         return [
