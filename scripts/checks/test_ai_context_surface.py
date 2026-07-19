@@ -1760,6 +1760,10 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         self.registry.write_text(
             json.dumps({"artifacts": artifacts}), encoding="utf-8"
         )
+        self.anchor_relative_path = "scripts/checks/ai_context_inventory.py"
+        self.anchor = self.repo / self.anchor_relative_path
+        self.anchor.parent.mkdir(parents=True)
+        self.write_anchor_fixture()
         self.specs = (
             {
                 "path": "AGENTS.md",
@@ -1806,6 +1810,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         retained_path.parent.mkdir(parents=True, exist_ok=True)
         retained_path.write_bytes(b"legacy protocol\n")
         self.tracked = [
+            self.anchor_relative_path,
             "wiki/survey/sf-audit-artifact-registry.json",
             "wiki/survey/legacy-protocol.md",
             "CLAUDE.md",
@@ -1818,6 +1823,35 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             )
             for path in self.tracked
         }
+
+    def registry_anchor(self) -> tuple[int, str]:
+        canonical = [
+            {"path": entry["path"], "git_blob": entry["git_blob"]}
+            for entry in self.artifacts
+        ]
+        return len(canonical), hashlib.sha256(
+            json.dumps(
+                canonical, ensure_ascii=False, separators=(",", ":")
+            ).encode("utf-8")
+        ).hexdigest()
+
+    def write_anchor_fixture(
+        self,
+        *,
+        count: int | None = None,
+        prefix_sha256: str | None = None,
+    ) -> None:
+        actual_count, actual_sha = self.registry_anchor()
+        count = actual_count if count is None else count
+        prefix_sha256 = actual_sha if prefix_sha256 is None else prefix_sha256
+        self.anchor.write_text(
+            "REGISTRY_BASELINE_COUNT = " + str(count) + "\n"
+            "REGISTRY_BASELINE_PREFIX_SHA256 = (\n"
+            f'    "{prefix_sha256}"\n'
+            ")\n",
+            encoding="utf-8",
+            newline="\n",
+        )
 
     def patched_builder(self):
         settings = {
@@ -1836,16 +1870,9 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         if hasattr(builder, "ARCHIVE_TRANSITIONS"):
             settings["ARCHIVE_TRANSITIONS"] = ()
         if hasattr(builder, "REGISTRY_BASELINE_PREFIX_SHA256"):
-            canonical = [
-                {"path": entry["path"], "git_blob": entry["git_blob"]}
-                for entry in self.artifacts
-            ]
-            settings["REGISTRY_BASELINE_COUNT"] = len(canonical)
-            settings["REGISTRY_BASELINE_PREFIX_SHA256"] = hashlib.sha256(
-                json.dumps(
-                    canonical, ensure_ascii=False, separators=(",", ":")
-                ).encode("utf-8")
-            ).hexdigest()
+            count, prefix_sha256 = self.registry_anchor()
+            settings["REGISTRY_BASELINE_COUNT"] = count
+            settings["REGISTRY_BASELINE_PREFIX_SHA256"] = prefix_sha256
         return mock.patch.multiple(builder, **settings)
 
     @staticmethod
@@ -1978,6 +2005,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         self.registry.write_text(
             json.dumps({"artifacts": self.artifacts}), encoding="utf-8"
         )
+        self.write_anchor_fixture()
         self.specs = (
             *self.specs[:-1],
             {
@@ -1995,6 +2023,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                     self.repo.joinpath(*PurePosixPath(path).parts).read_bytes()
                 )
                 for path in (
+                    self.anchor_relative_path,
                     "wiki/survey/sf-audit-artifact-registry.json",
                     spec_path,
                     artifact,
@@ -2011,6 +2040,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             "budget": "AGENTS.md",
             "other-agent-guide": "CLAUDE.md",
             "registry": "wiki/survey/sf-audit-artifact-registry.json",
+            "inventory-anchor": self.anchor_relative_path,
             "legacy": "wiki/survey/legacy-protocol.md",
         }
         for label, relative_path in paths.items():
@@ -2776,6 +2806,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         document["artifacts"].append({"path": correction, "git_blob": correction_blob})
         self.artifacts.append({"path": correction, "git_blob": correction_blob})
         self.registry.write_text(json.dumps(document), encoding="utf-8")
+        self.write_anchor_fixture()
         inventory, read_blob = self.staged_graph(
             extra_paths=(index_path, correction)
         )
@@ -2820,6 +2851,113 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             )
 
         self.assertIn("audit-registry-unanchored-append", str(raised.exception))
+
+    def test_b8_registry_anchor_growth_is_atomic_and_stage_bound(self) -> None:
+        index_path = "wiki/audit/system-first-stage1a/INDEX.md"
+        correction = (
+            "wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        for path in (index_path, correction):
+            target = self.repo.joinpath(*PurePosixPath(path).parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((path + "\n").encode("utf-8"))
+        base_registry_raw = self.registry.read_bytes()
+        base_count, base_sha = self.registry_anchor()
+        row = {
+            "path": correction,
+            "git_blob": git_blob_id(
+                self.repo.joinpath(*PurePosixPath(correction).parts).read_bytes()
+            ),
+        }
+        appended = json.loads(base_registry_raw)
+        appended["artifacts"].append(row)
+        appended_raw = json.dumps(appended).encode("utf-8")
+        self.registry.write_bytes(appended_raw)
+        inventory, read_blob = self.staged_graph(
+            extra_paths=(index_path, correction)
+        )
+
+        with (
+            self.patched_builder(),
+            mock.patch.object(builder, "ACTIVE_REVIEW_TRANSACTION", correction),
+            self.assertRaises(builder.ManifestBuildError) as unanchored,
+        ):
+            builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+        self.assertIn("audit-registry-unanchored-append", str(unanchored.exception))
+
+        self.artifacts.append(row)
+        correct_count, correct_sha = self.registry_anchor()
+        self.assertEqual(78, correct_count)
+        self.write_anchor_fixture()
+        inventory, read_blob = self.staged_graph(
+            extra_paths=(index_path, correction)
+        )
+        with self.patched_builder(), mock.patch.object(
+            builder, "ACTIVE_REVIEW_TRANSACTION", correction
+        ):
+            document = builder.build_manifest(
+                self.repo, inventory, read_blob, allow_untracked_self=True
+            )
+        self.assertEqual(correction, document["active_review_transaction"])
+
+        bad_anchors = {
+            "wrong-count": (correct_count + 1, correct_sha),
+            "wrong-hash": (correct_count, "0" * 64),
+        }
+        for label, (count, prefix_sha256) in bad_anchors.items():
+            with (
+                self.subTest(label=label),
+                self.patched_builder(),
+                mock.patch.object(builder, "ACTIVE_REVIEW_TRANSACTION", correction),
+                mock.patch.object(builder, "REGISTRY_BASELINE_COUNT", count),
+                mock.patch.object(
+                    builder, "REGISTRY_BASELINE_PREFIX_SHA256", prefix_sha256
+                ),
+                self.assertRaises(builder.ManifestBuildError),
+            ):
+                builder.build_manifest(
+                    self.repo, inventory, read_blob, allow_untracked_self=True
+                )
+
+        self.registry.write_bytes(base_registry_raw)
+        self.write_anchor_fixture()
+        old_inventory, old_reader = self.staged_graph(
+            extra_paths=(index_path, correction)
+        )
+        self.registry.write_bytes(appended_raw)
+        with (
+            self.patched_builder(),
+            mock.patch.object(builder, "ACTIVE_REVIEW_TRANSACTION", correction),
+            self.assertRaises(builder.ManifestBuildError) as unstaged_registry,
+        ):
+            builder.build_manifest(
+                self.repo,
+                old_inventory,
+                old_reader,
+                allow_untracked_self=True,
+            )
+        self.assertIn("index-worktree-mismatch", str(unstaged_registry.exception))
+
+        self.write_anchor_fixture(count=base_count, prefix_sha256=base_sha)
+        old_anchor_inventory, old_anchor_reader = self.staged_graph(
+            extra_paths=(index_path, correction)
+        )
+        self.write_anchor_fixture()
+        with (
+            self.patched_builder(),
+            mock.patch.object(builder, "ACTIVE_REVIEW_TRANSACTION", correction),
+            self.assertRaises(builder.ManifestBuildError) as unstaged_anchor,
+        ):
+            builder.build_manifest(
+                self.repo,
+                old_anchor_inventory,
+                old_anchor_reader,
+                allow_untracked_self=True,
+            )
+        self.assertIn("index-worktree-mismatch", str(unstaged_anchor.exception))
 
     def test_registry_rejects_extra_outside_audit_root(self) -> None:
         extra_path = "wiki/2026-07-20-extra-review.md"

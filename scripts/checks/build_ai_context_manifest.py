@@ -8,6 +8,7 @@ grandfathering mechanism: additions require a reviewed constant change.
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -331,6 +332,50 @@ def _canonical_path(value, label: str) -> str:
 
 
 AUDIT_REGISTRY_RELATIVE_PATH = "wiki/survey/sf-audit-artifact-registry.json"
+INVENTORY_ANCHOR_RELATIVE_PATH = "scripts/checks/ai_context_inventory.py"
+
+
+def _validate_inventory_anchor(graph: Stage0Graph) -> None:
+    """Bind the imported registry constants to the exact staged source bytes."""
+
+    raw = graph.raw(INVENTORY_ANCHOR_RELATIVE_PATH, "inventory-anchor-untracked")
+    try:
+        text = raw.decode("utf-8")
+        module = ast.parse(text, filename=INVENTORY_ANCHOR_RELATIVE_PATH)
+    except (UnicodeDecodeError, SyntaxError) as exc:
+        _fail("inventory-anchor-invalid", str(exc))
+    names = {
+        "REGISTRY_BASELINE_COUNT",
+        "REGISTRY_BASELINE_PREFIX_SHA256",
+    }
+    values: dict[str, object] = {}
+    for node in module.body:
+        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if not isinstance(target, ast.Name) or target.id not in names:
+            continue
+        if target.id in values or not isinstance(node.value, ast.Constant):
+            _fail("inventory-anchor-invalid", f"{target.id}: one literal assignment required")
+        values[target.id] = node.value.value
+    if set(values) != names:
+        _fail("inventory-anchor-invalid", f"missing exact constants: {sorted(names - set(values))}")
+    count = values["REGISTRY_BASELINE_COUNT"]
+    prefix_sha256 = values["REGISTRY_BASELINE_PREFIX_SHA256"]
+    if (
+        isinstance(count, bool)
+        or not isinstance(count, int)
+        or count <= 0
+        or not isinstance(prefix_sha256, str)
+        or re.fullmatch(r"[0-9a-f]{64}", prefix_sha256) is None
+    ):
+        _fail("inventory-anchor-invalid", "count/hash literal types or values")
+    if count != REGISTRY_BASELINE_COUNT or prefix_sha256 != REGISTRY_BASELINE_PREFIX_SHA256:
+        _fail(
+            "inventory-anchor-constant-mismatch",
+            f"staged source ({count}, {prefix_sha256}) != imported "
+            f"({REGISTRY_BASELINE_COUNT}, {REGISTRY_BASELINE_PREFIX_SHA256})",
+        )
 
 
 def _load_audit_inventory(
@@ -708,6 +753,7 @@ def build_manifest(
     verify_tracked_self: bool = True,
 ) -> dict:
     graph = Stage0Graph(Path(repo), index_inventory, read_blob)
+    _validate_inventory_anchor(graph)
     audit_specs, active_review_transaction = _audit_activation(graph)
     archive_legacy = _archive_transition(graph)
     _validate_constants(

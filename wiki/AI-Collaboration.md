@@ -94,6 +94,10 @@ ordinal 唯一且连续为 1..max，max≤3。最高 epoch receipt 必须绑定 
 未注册、repin 或 dirty bytes 均 fail closed。整编不是再加一层解释，而是把 CURRENT 原位重写为单一、
 完整、无补丁依赖的规范。
 
+任何 audit registry append 都必须与 `scripts/checks/ai_context_inventory.py` 的完整 prefix count/hash
+anchor 及新 immutability report 处于同一 transaction；registry/anchor 先 stage，report 生成后再 stage，
+然后运行 builder `--check` 与 zero-write 断言。只追加 registry 尾部、留旧 anchor 给下一任务修复是非法状态。
+
 ARCHIVE 搬运在工作件“已被取代且不在 current manifest”时触发；安全时与替代件同一 commit 完成。
 不安全时记录明确 closeout blocker，签署前解决，绝不强搬。已注册 AUDIT 是例外：永不搬运，只从
 active routing 移除。

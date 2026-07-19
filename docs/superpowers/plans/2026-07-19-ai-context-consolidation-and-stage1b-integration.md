@@ -653,7 +653,9 @@ git commit -m "docs(wiki): consolidate AI working context"
 - Modify: `wiki/survey/current/status.md`
 - Modify: `wiki/survey/current/manifest.json` through `scripts/survey/sf_current_manifest.py`
 - Modify: `docs/integrity/ai-context-manifest.json` through `scripts/checks/build_ai_context_manifest.py`
-- Modify: `wiki/survey/sf-audit-artifact-registry.json` in a second commit
+- Modify: `wiki/survey/sf-audit-artifact-registry.json` in a second transaction
+- Modify: `scripts/checks/ai_context_inventory.py` count/hash anchor in that same transaction
+- Regenerate: `docs/checks/2026-07-19-sf-audit-immutability-check.json` in that same transaction
 
 - [ ] **Step 1: Write the bounded correction**
 
@@ -737,15 +739,30 @@ together with the source files and current manifest already staged in Step 3. Ca
 
 Append one artifact object with the permanent correction path and captured `git_blob`. Do not
 register `INDEX.md`, because that index is intentionally append-only across future rounds rather than
-immutable after this round.
+immutable after this round. This registry append and its executable anchor are one atomic change:
+derive the new count and **78-row prefix SHA-256** from the complete registry whose last row contains
+the correction blob read from the Step-4 commit. Update `REGISTRY_BASELINE_COUNT` to 78 and
+`REGISTRY_BASELINE_PREFIX_SHA256` to that computed digest; never type either value from prose.
 
 ```powershell
+$correctionBlob = git rev-parse HEAD:wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md
+python -c "import json,sys; p='wiki/survey/sf-audit-artifact-registry.json'; rows=json.load(open(p,encoding='utf-8'))['artifacts']; expected={'path':'wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md','git_blob':sys.argv[1]}; assert len(rows)==78 and rows[-1]==expected; sys.path.insert(0,'scripts/checks'); from ai_context_inventory import registry_prefix_sha256; print('REGISTRY_BASELINE_COUNT=78'); print('REGISTRY_BASELINE_PREFIX_SHA256='+registry_prefix_sha256(rows, len(rows)))" $correctionBlob
+# Copy only the two printed literals into scripts/checks/ai_context_inventory.py.
+python -c "import json,sys; sys.path.insert(0,'scripts/checks'); from ai_context_inventory import REGISTRY_BASELINE_COUNT,REGISTRY_BASELINE_PREFIX_SHA256,registry_prefix_sha256; rows=json.load(open('wiki/survey/sf-audit-artifact-registry.json',encoding='utf-8'))['artifacts']; assert len(rows)==REGISTRY_BASELINE_COUNT==78; assert registry_prefix_sha256(rows, len(rows))==REGISTRY_BASELINE_PREFIX_SHA256; assert rows[-1]['git_blob']==sys.argv[1]" $correctionBlob
+git add wiki/survey/sf-audit-artifact-registry.json scripts/checks/ai_context_inventory.py
 python scripts/survey/sf_audit_immutability_check.py
-git add wiki/survey/sf-audit-artifact-registry.json docs/checks/2026-07-19-sf-audit-immutability-check.json
+git add docs/checks/2026-07-19-sf-audit-immutability-check.json
+python scripts/checks/build_ai_context_manifest.py --check
+python scripts/checks/ai_context_surface_check.py
+git diff --exit-code -- docs/integrity/ai-context-manifest.json
+git diff --exit-code -- wiki/survey/sf-audit-artifact-registry.json scripts/checks/ai_context_inventory.py docs/checks/2026-07-19-sf-audit-immutability-check.json
 git commit -m "audit(wiki): register round12 correction blob"
 ```
 
-Expected: registry count 78 and immutability `PASS`.
+Expected: registry count 78, the full 78-row prefix matches the staged anchor, immutability `PASS`,
+builder/surface `PASS`, and the AI manifest zero-write assertion passes. If the registry, anchor, or
+report changes after staging, re-stage the changed file and repeat the checks; do not enter Task 9
+with an unanchored registry tail.
 
 ---
 

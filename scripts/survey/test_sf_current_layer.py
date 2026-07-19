@@ -667,6 +667,42 @@ class ManifestRefreshPlanContractTests(unittest.TestCase):
             ),
         )
 
+    def test_task8_grows_registry_anchor_atomically_before_b9(self):
+        task = plan_task_section(8)
+        correction_blob = (
+            "git rev-parse HEAD:wiki/audit/system-first-stage1a/round-12/"
+            "stage1a-readiness-correction.md"
+        )
+        registry_anchor_stage = (
+            "git add wiki/survey/sf-audit-artifact-registry.json "
+            "scripts/checks/ai_context_inventory.py"
+        )
+        report_stage = (
+            "git add docs/checks/2026-07-19-sf-audit-immutability-check.json"
+        )
+        for required in (
+            "scripts/checks/ai_context_inventory.py",
+            "docs/checks/2026-07-19-sf-audit-immutability-check.json",
+            "78-row prefix SHA-256",
+            "REGISTRY_BASELINE_COUNT",
+            "REGISTRY_BASELINE_PREFIX_SHA256",
+            "registry_prefix_sha256(rows, len(rows))",
+            "zero-write",
+        ):
+            self.assertIn(required, task)
+        self.assert_ordered(
+            task,
+            (
+                correction_blob,
+                registry_anchor_stage,
+                "python scripts/survey/sf_audit_immutability_check.py",
+                report_stage,
+                "python scripts/checks/build_ai_context_manifest.py --check",
+                "git diff --exit-code -- docs/integrity/ai-context-manifest.json",
+                'git commit -m "audit(wiki): register round12 correction blob"',
+            ),
+        )
+
     def test_task9_stages_status_before_source_to_manifest_chain(self):
         task = plan_task_section(9)
         self.assertIn("all changed current-manifest inputs", task)
