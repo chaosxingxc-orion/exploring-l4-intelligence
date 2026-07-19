@@ -50,31 +50,32 @@ from sf_identity_taxonomy_v5_test import (  # noqa: E402
 )
 from sf_json_contract import (  # noqa: E402
     JsonContractError,
-    canonical_bytes,
     read as read_strict_json,
     read_jsonl,
 )
 from sf_row_hash import row_hash  # noqa: E402
 from sf_schema_v3_release_contract import (  # noqa: E402
-    ADJUDICATION_RELATIVE_PATH,
-    load_active_release,
-    resolve_trusted_repo_path,
     validate_canonical_record_id,
-    validate_coding_lineage,
     validate_repo_relative_path,
 )
-from sf_taxonomy_v6_contract import (  # noqa: E402
-    FROZEN_TAXONOMY_V5_SHA256,
-    validate_taxonomy_v6,
+from sf_taxonomy_v6_contract import validate_taxonomy_v6  # noqa: E402
+from sf_v6_snapshot_contract import (  # noqa: E402
+    ADJUDICATION_RELATIVE_PATH,
+    CODING_V7_RELATIVE_PATH,
+    SIDECAR_DIRECTORY_RELATIVE_PATH,
+    TAXONOMY_V5_RELATIVE_PATH,
+    TAXONOMY_V6_RELATIVE_PATH,
+    load_v6_input_snapshot,
+    read_snapshot_json,
 )
 
 
 logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 
-TAX_RELATIVE_PATH = "wiki/survey/current/data/identity-taxonomy-v6.json"
-TAX_V5_RELATIVE_PATH = "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json"
-CODING_RELATIVE_PATH = "wiki/survey/current/data/known-item-coding-v7.json"
+TAX_RELATIVE_PATH = TAXONOMY_V6_RELATIVE_PATH
+TAX_V5_RELATIVE_PATH = TAXONOMY_V5_RELATIVE_PATH
+CODING_RELATIVE_PATH = CODING_V7_RELATIVE_PATH
 TAX = os.path.join(
     REPO, *TAX_RELATIVE_PATH.split("/")
 )
@@ -85,7 +86,7 @@ CODING = os.path.join(
     REPO, *CODING_RELATIVE_PATH.split("/")
 )
 SIDECAR_DIR = os.path.join(
-    REPO, "wiki", "survey", "current", "data", "schema-v3", "sidecars"
+    REPO, *SIDECAR_DIRECTORY_RELATIVE_PATH.split("/")
 )
 ADJUDICATION = os.path.join(REPO, *ADJUDICATION_RELATIVE_PATH.split("/"))
 ACTIVE_TAXONOMY = TAX_RELATIVE_PATH
@@ -104,84 +105,12 @@ OUT_DIR = os.path.join(
 OUT = os.path.join(OUT_DIR, "identity-taxonomy-v6-test.json")
 
 
-def _repo_display_path(path):
-    path = Path(path).resolve()
-    try:
-        return path.relative_to(Path(REPO).resolve()).as_posix()
-    except ValueError:
-        return str(path)
-
-
-def _provenance_entry(path, raw_bytes):
-    return {
-        "path": _repo_display_path(path),
-        "sha256": hashlib.sha256(raw_bytes).hexdigest(),
-    }
-
-
 def _read_snapshot_json(path, expected_relative):
-    resolved = resolve_trusted_repo_path(
-        REPO,
-        path,
-        expected_relative=expected_relative,
-        expected_kind="file",
-    )
-    return read_strict_json(resolved)
+    return read_snapshot_json(REPO, path, expected_relative)
 
 
 def _load_input_snapshot():
-    taxonomy_v5, taxonomy_v5_raw = _read_snapshot_json(
-        TAX_V5, TAX_V5_RELATIVE_PATH
-    )
-    taxonomy_v5_sha256 = hashlib.sha256(taxonomy_v5_raw).hexdigest()
-    if taxonomy_v5_sha256 != FROZEN_TAXONOMY_V5_SHA256:
-        raise ValueError(
-            "frozen taxonomy-v5 SHA-256 mismatch "
-            f"(expected={FROZEN_TAXONOMY_V5_SHA256}, "
-            f"found={taxonomy_v5_sha256})"
-        )
-    taxonomy_v6, taxonomy_v6_raw = _read_snapshot_json(
-        TAX, TAX_RELATIVE_PATH
-    )
-    coding, coding_raw = _read_snapshot_json(CODING, CODING_RELATIVE_PATH)
-    try:
-        coding_text = coding_raw.decode("utf-8")
-    except UnicodeDecodeError as error:  # Defensive; strict loader already checked.
-        raise JsonContractError(f"{CODING}: {error}") from error
-    release = load_active_release(REPO, SIDECAR_DIR, ADJUDICATION)
-    validate_coding_lineage(coding, REPO)
-    rows = coding.get("rows") if isinstance(coding, dict) else None
-    if not isinstance(rows, list):
-        raise ValueError("active coding rows container invalid")
-    sidecars = [(name, document) for name, document, _ in release.sidecars]
-    provenance = {
-        "taxonomy_v5": _provenance_entry(TAX_V5, taxonomy_v5_raw),
-        "taxonomy": _provenance_entry(TAX, taxonomy_v6_raw),
-        "coding": _provenance_entry(CODING, coding_raw),
-        "adjudication": _provenance_entry(
-            ADJUDICATION, release.adjudication_raw
-        ),
-        "sidecars": [
-            {
-                "path": _repo_display_path(Path(SIDECAR_DIR) / name),
-                "sha256": hashlib.sha256(raw).hexdigest(),
-            }
-            for name, _, raw in release.sidecars
-        ],
-    }
-    return {
-        "taxonomy_v5": taxonomy_v5,
-        "taxonomy_v6": taxonomy_v6,
-        "coding": coding,
-        "coding_text": coding_text,
-        "rows": rows,
-        "sidecars": sidecars,
-        "adjudication": release.adjudication,
-        "input_provenance": provenance,
-        "input_snapshot_sha256": hashlib.sha256(
-            canonical_bytes(provenance)
-        ).hexdigest(),
-    }
+    return load_v6_input_snapshot(REPO, read_snapshot=_read_snapshot_json)
 
 
 def load_sidecar_docs():

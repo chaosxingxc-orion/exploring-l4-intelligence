@@ -404,6 +404,46 @@ class ProvenanceAndPublicationTest(unittest.TestCase):
             report["input_snapshot_sha256"], hashlib.sha256(canonical).hexdigest()
         )
 
+    def test_harness_and_shared_contract_load_the_same_current_raw_snapshot(self):
+        shared = importlib.import_module("sf_v6_snapshot_contract")
+        harness_snapshot = harness._load_input_snapshot()
+        shared_snapshot = shared.load_v6_input_snapshot(REPO)
+        self.assertEqual(
+            harness_snapshot["input_provenance"],
+            shared_snapshot["input_provenance"],
+        )
+        self.assertEqual(
+            harness_snapshot["input_snapshot_sha256"],
+            shared_snapshot["input_snapshot_sha256"],
+        )
+        self.assertEqual(
+            shared_snapshot["input_snapshot_sha256"],
+            shared.CURRENT_INPUT_SNAPSHOT_SHA256,
+        )
+        enforced = shared.load_v6_input_snapshot(
+            REPO,
+            expected_snapshot_sha256=shared.CURRENT_INPUT_SNAPSHOT_SHA256,
+        )
+        self.assertEqual(
+            enforced["input_provenance"],
+            shared_snapshot["input_provenance"],
+        )
+
+        def changed_reader(path, expected_relative):
+            document, raw = shared.read_snapshot_json(
+                REPO, path, expected_relative
+            )
+            if expected_relative == shared.TAXONOMY_V6_RELATIVE_PATH:
+                raw += b" \n"
+            return document, raw
+
+        with self.assertRaisesRegex(ValueError, "input snapshot SHA-256 mismatch"):
+            shared.load_v6_input_snapshot(
+                REPO,
+                read_snapshot=changed_reader,
+                expected_snapshot_sha256=shared.CURRENT_INPUT_SNAPSHOT_SHA256,
+            )
+
     def test_any_valid_input_byte_change_changes_snapshot(self):
         baseline = harness._load_input_snapshot()["input_snapshot_sha256"]
         real_reader = harness._read_snapshot_json
@@ -529,7 +569,11 @@ class ProvenanceAndPublicationTest(unittest.TestCase):
                 return real_write(report, destination)
 
             with (
-                mock.patch.object(harness, "build_report", return_value=self.passing_report()),
+                mock.patch.object(
+                    harness,
+                    "build_report",
+                    return_value=self.passing_report(),
+                ),
                 mock.patch.object(harness, "write_report", side_effect=fail_stamp),
                 self.assertRaisesRegex(OSError, "stamp failure"),
             ):
