@@ -458,7 +458,8 @@ git commit -m "refactor(survey): route active prose checks through manifest"
 - [ ] **Step 1: Implement the archive safety oracle**
 
 The tool accepts `--write-plan`, `--check-plan`, and `--check-applied`. The plan contains exact source,
-destination, and pre-move `git hash-object` for each file. Before a move it fails if a source:
+destination, pre-move Git blob, and pre-move stage-0 Git mode for each file. Before a move it fails if
+a source:
 
 ```text
 is in sf-audit-artifact-registry.json
@@ -474,10 +475,14 @@ builder consumes the same transition set and accepts only the complete pre-archi
 sources, zero destinations) or complete archived state (zero sources, all seven destinations).
 Any partial or both-path state must fail `archive-transition-incomplete` in both workflows.
 
-After a move it requires source absence, destination presence, identical blob hash, and no active old
-path reference. The oracle scans tracked files with `git grep`; it does not rewrite references. The
-protocol coverage suite resolves amendments 9-15 through that same transition inventory and accepts
-only one complete pre-archive or archived state; partial and both-path states fail closed.
+After a move it requires source absence, destination presence, identical blob hash and mode, and no
+active old-path reference. The oracle takes each HOT/CURRENT or registered-audit carrier from the
+stage-0 graph, requires its worktree bytes to match the index blob, and then scans both Markdown links
+and plain text, including relative/root paths, slash variants, percent encoding, inline/fenced code,
+reference links, and HTML links. It never scans an unbound worktree snapshot and does not rewrite
+references. The protocol coverage suite resolves amendments 9-15 through that same transition
+inventory and accepts only one complete pre-archive or archived state; partial and both-path states
+fail closed.
 
 - [ ] **Step 2: Remove active physical-path exposure and restamp the current manifest**
 
@@ -500,7 +505,8 @@ python -m unittest scripts/survey/test_sf_query_compiler_profiles.py
 
 The archive oracle treats stage-0 index bytes as the trusted transaction input and rejects any
 worktree/index drift. A staged current manifest is allowed only when its worktree bytes exactly match
-the index.
+the index, exactly regenerates from the complete B4 stage-0 file graph, and satisfies the strict
+consumer schema/hash closure.
 
 - [ ] **Step 3: Generate and inspect the exact safe plan**
 
@@ -524,12 +530,15 @@ Run:
 
 ```powershell
 python scripts/survey/sf_archive_candidates.py --write-plan
+git add wiki/archive/working/system-first-stage1a/archive-plan.json
 python scripts/survey/sf_archive_candidates.py --check-plan
 ```
 
-Expected: seven safe candidates and zero registry/current/audit inbound blockers. If any candidate is
-not safe at execution time, remove it from the physical-move batch and record the exact blocker in
-the archive index; never force the move.
+`--check-plan` trusts only the stage-0 regular-file entry: the worktree bytes must equal its Git blob,
+the strict schema must equal the shared transition graph, and each row freezes the source Git mode as
+well as its blob. Expected: seven safe candidates and zero registry/current/audit inbound blockers.
+If any candidate is not safe at execution time, remove it from the physical-move batch and record the
+exact blocker in the archive index; never force the move.
 
 - [ ] **Step 4: Move with Git and prove byte preservation**
 

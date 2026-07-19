@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import os
+import posixpath
 import re
 import stat
 import subprocess
@@ -19,6 +20,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable, Sequence
+from urllib.parse import unquote
 
 
 REPO = Path(__file__).resolve().parents[2]
@@ -31,11 +33,20 @@ from ai_context_surface_check import (  # noqa: E402
     ContextSurfaceError,
     TrustedRepoReader,
     _canonical_path,
+    _link_targets,
+    _mask_markdown_code,
+    _normalize_link_target,
     classify_path,
     loads_json_strict,
 )
 from sf_query_compiler import atomic_write_bytes  # noqa: E402
-from sf_current_manifest import _git_command_prefix as git_command_prefix  # noqa: E402
+from sf_current_manifest import (  # noqa: E402
+    CurrentManifestError,
+    GitIndexEntry as CurrentGitIndexEntry,
+    _git_command_prefix as git_command_prefix,
+    load_consumer_manifest,
+    render_manifest as render_current_manifest,
+)
 
 
 PLAN_RELATIVE_PATH = (
@@ -43,9 +54,25 @@ PLAN_RELATIVE_PATH = (
 )
 REGISTRY_RELATIVE_PATH = "wiki/survey/sf-audit-artifact-registry.json"
 CURRENT_MANIFEST_RELATIVE_PATH = "wiki/survey/current/manifest.json"
+ARCHIVE_INDEX_RELATIVE_PATH = "wiki/archive/working/system-first-stage1a/INDEX.md"
 PLAN_SCHEMA = "sf-archive-plan-v1"
 BLOB_RE = re.compile(r"[0-9a-f]{40}\Z")
 REGULAR_GIT_MODES = {"100644", "100755"}
+PRE_MOVE_GIT_MODE = "100644"
+PLAN_GIT_MODE = "100644"
+ARCHIVE_INDEX_GIT_MODE = "100644"
+INVALID_PERCENT_RE = re.compile(r"%(?=[A-Za-z0-9])(?![0-9A-Fa-f]{2})")
+RESIDUAL_PERCENT_RE = re.compile(r"%[0-9A-Fa-f]{2}")
+CONTROL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
+ARCHIVE_CARRIERS = {
+    9: "§0, §5, §6, §8, §9",
+    10: "§0, §5, §6, §8, §9",
+    11: "§6, §7, §9",
+    12: "§0, §6, §7, §9",
+    13: "§6, §7, §10",
+    14: "§6, §7, §8, §9",
+    15: "§6, §7, §8, §9",
+}
 
 
 @dataclass(frozen=True)
@@ -266,6 +293,12 @@ def _hash_object(repo: Path, relative: str) -> str:
     return blob
 
 
+def _read_blob(repo: Path, blob: str) -> bytes:
+    if BLOB_RE.fullmatch(blob) is None:
+        _fail("archive-git-failed", f"invalid staged blob: {blob!r}")
+    return _git(repo, ["cat-file", "blob", blob])
+
+
 def _secure_path_state(repo: Path, relative: str) -> str:
     """Return file/missing while rejecting every symlink or non-directory ancestor."""
 
@@ -306,18 +339,22 @@ def _assert_input_clean(
     head: dict[str, GitEntry],
     *,
     code: str = "archive-input-dirty",
-    require_head_match: bool = False,
+    required_mode: str | None = None,
 ) -> bytes:
     index_entry = index.get(relative)
-    head_entry = head.get(relative)
     if index_entry is None:
         _fail(code, f"critical input is not tracked at stage 0: {relative}")
-    if require_head_match and index_entry != head_entry:
-        _fail(code, f"immutable critical input differs from HEAD: {relative}")
+    if required_mode is not None and index_entry.mode != required_mode:
+        _fail(code, f"unexpected stage-0 mode {index_entry.mode}: {relative}")
+    staged = _read_blob(repo, index_entry.blob)
     raw = _read_trusted(reader, relative, "archive-path-untrusted")
-    actual = _hash_object(repo, relative)
-    if actual != index_entry.blob:
-        _fail(code, f"critical input has working-tree drift: {relative}")
+    if raw != staged:
+        _fail(
+            code,
+            f"stage/worktree byte mismatch: {relative}: "
+            f"stage={hashlib.sha256(staged).hexdigest()}, "
+            f"worktree={hashlib.sha256(raw).hexdigest()}",
+        )
     return raw
 
 
@@ -333,7 +370,7 @@ def _load_registry(
         REGISTRY_RELATIVE_PATH,
         index,
         head,
-        require_head_match=True,
+        required_mode="100644",
     )
     try:
         document = loads_json_strict(raw, REGISTRY_RELATIVE_PATH)
@@ -355,9 +392,7 @@ def _load_registry(
         paths.add(path)
         pins[path] = blob
     for path, pin in pins.items():
-        _assert_input_clean(
-            repo, reader, path, index, head, require_head_match=True
-        )
+        _assert_input_clean(repo, reader, path, index, head)
         if index[path].blob != pin:
             _fail(
                 "archive-registry-invalid",
@@ -373,38 +408,87 @@ def _load_current_manifest_paths(
     head: dict[str, GitEntry],
 ) -> set[str]:
     raw = _assert_input_clean(
-        repo, reader, CURRENT_MANIFEST_RELATIVE_PATH, index, head
-    )
-    try:
-        document = loads_json_strict(raw, CURRENT_MANIFEST_RELATIVE_PATH)
-    except ContextSurfaceError as error:
-        _fail("archive-current-manifest-invalid", str(error))
-    if not isinstance(document, dict) or not isinstance(document.get("files"), list):
-        _fail("archive-current-manifest-invalid", "files must be a list")
-    paths: set[str] = set()
-    for position, entry in enumerate(document["files"]):
-        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
-            _fail("archive-current-manifest-invalid", f"files[{position}].path")
-        path = _canonical(entry["path"], f"files[{position}].path")
-        if path in paths:
-            _fail("archive-current-manifest-invalid", f"duplicate path: {path}")
-        paths.add(path)
-    return paths
-
-
-def _reference_paths(repo: Path, needle: str) -> tuple[str, ...]:
-    raw = _git(
         repo,
-        ["grep", "-l", "-z", "-F", "--", needle, "--"],
-        allow_no_match=True,
+        reader,
+        CURRENT_MANIFEST_RELATIVE_PATH,
+        index,
+        head,
+        required_mode="100644",
     )
-    paths: list[str] = []
     try:
-        for encoded in (item for item in raw.split(b"\0") if item):
-            paths.append(_canonical_path(encoded.decode("utf-8"), "git grep path"))
-    except (UnicodeDecodeError, ContextSurfaceError) as error:
-        _fail("archive-git-grep-invalid", str(error))
-    return tuple(sorted(set(paths)))
+        current_index = {
+            path: CurrentGitIndexEntry(entry.mode, entry.blob)
+            for path, entry in index.items()
+        }
+        expected = render_current_manifest(
+            reader.read_bytes,
+            current_index,
+            lambda blob: _read_blob(repo, blob),
+        )
+        if raw != expected:
+            raise CurrentManifestError(
+                "manifest bytes differ from deterministic B4 rebuild"
+            )
+        consumer = load_consumer_manifest(repo, CURRENT_MANIFEST_RELATIVE_PATH)
+    except (CurrentManifestError, ContextSurfaceError, OSError, ValueError) as error:
+        _fail("archive-current-manifest-invalid", str(error))
+    return {entry["path"] for entry in consumer.document["files"]}
+
+
+def _decode_reference_text(text: str, referrer: str, source: str) -> str:
+    if CONTROL_RE.search(text):
+        _fail("archive-reference-invalid", f"control character in {referrer}")
+    decoded = text
+    invalid_percent = False
+    for _ in range(5):
+        invalid_percent = invalid_percent or INVALID_PERCENT_RE.search(decoded) is not None
+        try:
+            next_value = unquote(decoded, errors="strict")
+        except UnicodeDecodeError as error:
+            _fail("archive-reference-invalid", f"invalid percent encoding in {referrer}: {error}")
+        if next_value == decoded:
+            break
+        decoded = next_value
+    normalized = decoded.replace("\\", "/").casefold()
+    basename = PurePosixPath(source).name.casefold()
+    if basename in normalized and (
+        invalid_percent or RESIDUAL_PERCENT_RE.search(decoded) is not None
+    ):
+        _fail("archive-reference-invalid", f"invalid candidate encoding in {referrer}")
+    return normalized
+
+
+def _candidate_spellings(referrer: str, source: str) -> tuple[str, ...]:
+    parent = PurePosixPath(referrer).parent.as_posix()
+    relative = posixpath.relpath(source, "." if parent == "." else parent)
+    return tuple(
+        spelling.casefold()
+        for spelling in (source, f"/{source}", relative)
+    )
+
+
+def _contains_candidate_reference(text: str, referrer: str, source: str) -> bool:
+    normalized = _decode_reference_text(text, referrer, source)
+    if any(spelling in normalized for spelling in _candidate_spellings(referrer, source)):
+        return True
+    if not referrer.lower().endswith(".md"):
+        return False
+    masked = _mask_markdown_code(text)
+    try:
+        for raw_target in _link_targets(masked):
+            # Reject malformed percent escapes before the shared normalizer;
+            # urllib intentionally leaves malformed sequences untouched.
+            if INVALID_PERCENT_RE.search(raw_target):
+                _fail(
+                    "archive-reference-invalid",
+                    f"invalid link encoding: {referrer} -> {raw_target}",
+                )
+            target = _normalize_link_target(referrer, raw_target)
+            if target is not None and target.casefold() == source.casefold():
+                return True
+    except ContextSurfaceError as error:
+        _fail("archive-reference-invalid", str(error))
+    return False
 
 
 def _critical_references(
@@ -416,22 +500,23 @@ def _critical_references(
     head: dict[str, GitEntry],
 ) -> list[Failure]:
     failures: list[Failure] = []
-    verified: set[str] = set()
-    for transition in transitions:
-        source = transition["source"]
-        for referrer in _reference_paths(repo, source):
-            path_class = classify_path(referrer, [])
-            critical_code = None
-            if path_class in {"HOT", "CURRENT"}:
-                critical_code = "archive-inbound-active"
-            elif referrer in registered_paths:
-                critical_code = "archive-inbound-registered-audit"
-            if critical_code is None:
-                continue
-            if referrer not in verified:
-                _assert_input_clean(repo, reader, referrer, index, head)
-                verified.add(referrer)
-            failures.append(Failure(critical_code, f"{source} <- {referrer}"))
+    critical: list[tuple[str, str]] = []
+    for path in sorted(index):
+        path_class = classify_path(path, [])
+        if path_class in {"HOT", "CURRENT"}:
+            critical.append((path, "archive-inbound-active"))
+        elif path in registered_paths:
+            critical.append((path, "archive-inbound-registered-audit"))
+    for referrer, failure_code in critical:
+        raw = _assert_input_clean(repo, reader, referrer, index, head)
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError as error:
+            _fail("archive-reference-invalid", f"invalid UTF-8 in {referrer}: {error}")
+        for transition in transitions:
+            source = transition["source"]
+            if _contains_candidate_reference(text, referrer, source):
+                failures.append(Failure(failure_code, f"{source} <- {referrer}"))
     return failures
 
 
@@ -474,6 +559,15 @@ def _inspect(
             if _secure_path_state(repo, destination) != "missing":
                 failures.append(Failure("archive-destination-present", destination))
             head_entry = head.get(source)
+            index_entry = index.get(source)
+            if index_entry is None or index_entry.mode != PRE_MOVE_GIT_MODE:
+                failures.append(
+                    Failure(
+                        "archive-source-mode-mismatch",
+                        f"{source}: {None if index_entry is None else index_entry.mode} "
+                        f"!= {PRE_MOVE_GIT_MODE}",
+                    )
+                )
             if head_entry is None or head_entry.blob != expected_blob:
                 failures.append(
                     Failure("archive-source-dirty", f"HEAD blob changed: {source}")
@@ -500,6 +594,14 @@ def _inspect(
             if index_entry is None or index_entry.blob != expected_blob:
                 failures.append(
                     Failure("archive-destination-dirty", f"index blob changed: {destination}")
+                )
+            if index_entry is None or index_entry.mode != PRE_MOVE_GIT_MODE:
+                failures.append(
+                    Failure(
+                        "archive-destination-mode-mismatch",
+                        f"{destination}: {None if index_entry is None else index_entry.mode} "
+                        f"!= {PRE_MOVE_GIT_MODE}",
+                    )
                 )
 
     try:
@@ -560,6 +662,11 @@ def resolve_transition_read_paths(
     paths: list[str] = []
     for transition in normalized:
         path = transition[selected]
+        if index[path].mode != PRE_MOVE_GIT_MODE:
+            _fail(
+                "archive-transition-mode-mismatch",
+                f"{path}: {index[path].mode} != {PRE_MOVE_GIT_MODE}",
+            )
         if _secure_path_state(repo, path) != "file":
             _fail("archive-path-untrusted", f"selected content path missing: {path}")
         if _hash_object(repo, path) != transition["git_blob"]:
@@ -577,6 +684,7 @@ def render_plan(transitions: Sequence[dict[str, str]]) -> bytes:
                 "source": entry["source"],
                 "destination": entry["destination"],
                 "pre_move_git_blob": entry["git_blob"],
+                "pre_move_git_mode": PRE_MOVE_GIT_MODE,
             }
             for entry in normalized
         ],
@@ -595,6 +703,73 @@ def _plan_target(repo: Path) -> Path:
     return target
 
 
+def validate_archive_index(
+    raw: bytes,
+    transitions: Sequence[dict[str, str]] = ARCHIVE_TRANSITIONS,
+) -> None:
+    """Validate the cold A9-A15 routing table as an exact transaction map."""
+
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        _fail("archive-index-invalid", f"invalid UTF-8: {error}")
+    if CONTROL_RE.search(text):
+        _fail("archive-index-invalid", "control character")
+    row_re = re.compile(
+        r"^\| A(\d+) \| `([^`]+)` \| `([^`]+)` \| `([0-9a-f]{40})` \| "
+        r"`current/protocol\.md` ([^|]+?) \|$",
+        flags=re.MULTILINE,
+    )
+    actual: dict[int, tuple[str, str, str, str]] = {}
+    for match in row_re.finditer(text):
+        number = int(match.group(1))
+        if number in actual:
+            _fail("archive-index-invalid", f"duplicate A{number}")
+        actual[number] = tuple(match.group(index) for index in range(2, 6))
+    expected: dict[int, tuple[str, str, str, str]] = {}
+    for transition in validate_transitions(transitions):
+        match = re.search(r"amendment-(\d+)\.md\Z", transition["source"])
+        if match is None:
+            _fail("archive-index-invalid", f"cannot derive amendment: {transition['source']}")
+        number = int(match.group(1))
+        carrier = ARCHIVE_CARRIERS.get(number)
+        if carrier is None:
+            _fail("archive-index-invalid", f"missing carrier for A{number}")
+        expected[number] = (
+            transition["source"],
+            transition["destination"],
+            transition["git_blob"],
+            carrier,
+        )
+    if actual != expected:
+        _fail(
+            "archive-index-invalid",
+            f"move table differs: expected A{sorted(expected)}, found A{sorted(actual)}",
+        )
+
+
+def _check_archive_index(
+    repo: Path,
+    transitions: Sequence[dict[str, str]],
+) -> None:
+    # Custom one-row unit fixtures do not own the repository's seven-row cold
+    # index. Production always reaches this branch with the shared object.
+    if transitions is not ARCHIVE_TRANSITIONS:
+        return
+    index, _ = _git_inventory(repo)
+    reader = TrustedRepoReader(repo)
+    raw = _assert_input_clean(
+        repo,
+        reader,
+        ARCHIVE_INDEX_RELATIVE_PATH,
+        index,
+        {},
+        code="archive-index-dirty",
+        required_mode=ARCHIVE_INDEX_GIT_MODE,
+    )
+    validate_archive_index(raw, transitions)
+
+
 def write_plan(
     repo: Path = REPO,
     transitions: Sequence[dict[str, str]] = ARCHIVE_TRANSITIONS,
@@ -604,14 +779,53 @@ def write_plan(
     atomic_write_bytes(target, render_plan(inspection.transitions))
 
 
-def _read_plan(repo: Path) -> bytes:
+def _read_plan(
+    repo: Path,
+    transitions: Sequence[dict[str, str]],
+) -> bytes:
     target = _plan_target(repo)
     if not target.is_file():
         _fail("archive-plan-missing", PLAN_RELATIVE_PATH)
+    index, _ = _git_inventory(repo)
+    entry = index.get(PLAN_RELATIVE_PATH)
+    if entry is None:
+        _fail("archive-plan-untracked", PLAN_RELATIVE_PATH)
+    if entry.mode != PLAN_GIT_MODE:
+        _fail(
+            "archive-plan-mode-invalid",
+            f"{entry.mode} != {PLAN_GIT_MODE}",
+        )
+    reader = TrustedRepoReader(repo)
+    raw = _assert_input_clean(
+        repo,
+        reader,
+        PLAN_RELATIVE_PATH,
+        index,
+        {},
+        code="archive-plan-dirty",
+        required_mode=PLAN_GIT_MODE,
+    )
     try:
-        return TrustedRepoReader(repo).read_bytes(PLAN_RELATIVE_PATH)
+        document = loads_json_strict(raw, PLAN_RELATIVE_PATH)
     except ContextSurfaceError as error:
-        _fail("archive-plan-path-untrusted", str(error))
+        _fail("archive-plan-schema-invalid", str(error))
+    if not isinstance(document, dict) or set(document) != {"schema", "transitions"}:
+        _fail("archive-plan-schema-invalid", "root keys")
+    if document.get("schema") != PLAN_SCHEMA or not isinstance(
+        document.get("transitions"), list
+    ):
+        _fail("archive-plan-schema-invalid", "schema or transitions")
+    expected_document = json.loads(render_plan(transitions).decode("utf-8"))
+    if document != expected_document:
+        _fail("archive-plan-schema-invalid", "transition graph differs from shared inventory")
+    expected = render_plan(transitions)
+    if raw != expected:
+        _fail(
+            "archive-plan-mismatch",
+            f"expected {hashlib.sha256(expected).hexdigest()}, "
+            f"found {hashlib.sha256(raw).hexdigest()}",
+        )
+    return raw
 
 
 def check_plan(
@@ -619,25 +833,16 @@ def check_plan(
     transitions: Sequence[dict[str, str]] = ARCHIVE_TRANSITIONS,
 ) -> None:
     inspection = inspect_pre_move(repo, transitions)
-    expected = render_plan(inspection.transitions)
-    actual = _read_plan(repo)
-    if actual != expected:
-        _fail(
-            "archive-plan-mismatch",
-            f"expected {hashlib.sha256(expected).hexdigest()}, "
-            f"found {hashlib.sha256(actual).hexdigest()}",
-        )
+    _read_plan(repo, inspection.transitions)
 
 
 def check_applied(
     repo: Path = REPO,
     transitions: Sequence[dict[str, str]] = ARCHIVE_TRANSITIONS,
 ) -> None:
-    expected = render_plan(transitions)
-    actual = _read_plan(repo)
-    if actual != expected:
-        _fail("archive-plan-mismatch", "applied transition differs from frozen plan")
+    _read_plan(repo, transitions)
     inspect_applied(repo, transitions)
+    _check_archive_index(repo, transitions)
 
 
 def _parser() -> argparse.ArgumentParser:
