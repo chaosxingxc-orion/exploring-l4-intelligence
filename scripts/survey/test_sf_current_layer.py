@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import inspect
 import json
 import re
+import shutil
 import sys
 import tempfile
 import unittest
@@ -38,6 +40,10 @@ def load_module(name: str):
 def current_report():
     raw = (REPO / REPORT_PATH).read_bytes()
     return json.loads(raw), raw
+
+
+def git_blob_oid(raw: bytes) -> str:
+    return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
 
 
 class OpeningTableContractTests(unittest.TestCase):
@@ -95,6 +101,86 @@ class OpeningTableContractTests(unittest.TestCase):
         self.assertNotEqual(first, changed)
 
 
+class ReportReleaseContractTests(unittest.TestCase):
+    def setUp(self):
+        self.tables = load_module("sf_current_tables")
+        self.assertTrue(
+            hasattr(self.tables, "parse_validated_report"),
+            "strict frozen report parser is missing",
+        )
+        self.report, self.raw = current_report()
+        self.snapshot = {
+            "input_provenance": self.report["input_provenance"],
+            "input_snapshot_sha256": self.report["input_snapshot_sha256"],
+        }
+
+    def parse(self, raw=None, snapshot=None):
+        return self.tables.parse_validated_report(
+            self.raw if raw is None else raw,
+            self.snapshot if snapshot is None else snapshot,
+        )
+
+    def mutated_raw(self, mutate):
+        document = json.loads(self.raw)
+        mutate(document)
+        return (json.dumps(document, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
+
+    def test_strict_json_rejects_duplicate_root_and_nested_keys(self):
+        duplicate_root = self.raw.replace(b"{\n", b'{\n "verdict": "PASS",\n', 1)
+        duplicate_nested = self.raw.replace(
+            b' "platform": {\n  "os":',
+            b' "platform": {\n  "os": "posix",\n  "os":',
+            1,
+        )
+        for raw in (duplicate_root, duplicate_nested):
+            with self.subTest(raw=raw[:80]):
+                with self.assertRaisesRegex(
+                    self.tables.CurrentTableError, "duplicate key"
+                ):
+                    self.parse(raw=raw)
+
+    def test_strict_json_rejects_nan_and_infinity(self):
+        for token in (b"NaN", b"Infinity", b"-Infinity"):
+            raw = self.raw.replace(b'"3.12.3"', token, 1)
+            with self.subTest(token=token):
+                with self.assertRaisesRegex(
+                    self.tables.CurrentTableError, "non-finite JSON constant"
+                ):
+                    self.parse(raw=raw)
+
+    def test_bool_denominator_and_frozen_occupancy_drift_fail(self):
+        bool_raw = self.mutated_raw(
+            lambda report: report["occupancy"]["policy_A"].__setitem__(
+                "n_method_paths", True
+            )
+        )
+        stale_raw = self.mutated_raw(
+            lambda report: report["occupancy"]["policy_A"][
+                "is_reward_guided"
+            ].__setitem__("n_paths", "999/11")
+        )
+        for raw in (bool_raw, stale_raw):
+            with self.subTest(raw=raw[:80]):
+                with self.assertRaises(self.tables.CurrentTableError):
+                    self.parse(raw=raw)
+
+    def test_provenance_and_snapshot_tampering_fail(self):
+        provenance_raw = self.mutated_raw(
+            lambda report: report["input_provenance"]["taxonomy"].__setitem__(
+                "sha256", "0" * 64
+            )
+        )
+        snapshot_raw = self.mutated_raw(
+            lambda report: report.__setitem__("input_snapshot_sha256", "0" * 64)
+        )
+        for raw in (provenance_raw, snapshot_raw):
+            with self.subTest(raw=raw[:80]):
+                with self.assertRaisesRegex(
+                    self.tables.CurrentTableError, "current release snapshot"
+                ):
+                    self.parse(raw=raw)
+
+
 class CurrentManifestContractTests(unittest.TestCase):
     def setUp(self):
         self.manifest = load_module("sf_current_manifest")
@@ -102,6 +188,12 @@ class CurrentManifestContractTests(unittest.TestCase):
             spec.path: f"payload:{spec.path}\n".encode("utf-8")
             for spec in self.manifest.BASE_FILE_SPECS
         }
+        self.blobs = {}
+        self.base_index = {}
+        for path, raw in self.payloads.items():
+            blob = git_blob_oid(raw)
+            self.blobs[blob] = raw
+            self.base_index[path] = self.manifest.GitIndexEntry("100644", blob)
 
     def read_bytes(self, path: str) -> bytes:
         try:
@@ -109,8 +201,24 @@ class CurrentManifestContractTests(unittest.TestCase):
         except KeyError as error:
             raise FileNotFoundError(path) from error
 
+    def read_blob(self, blob: str) -> bytes:
+        return self.blobs[blob]
+
+    def inventory(self, extra_paths=()):
+        inventory = dict(self.base_index)
+        for path in extra_paths:
+            raw = self.payloads.get(path, f"placeholder:{path}\n".encode("utf-8"))
+            blob = git_blob_oid(raw)
+            self.blobs[blob] = raw
+            inventory[path] = self.manifest.GitIndexEntry("100644", blob)
+        return inventory
+
     def build(self, tracked=()):
-        return self.manifest.build_manifest(self.read_bytes, set(tracked))
+        return self.manifest.build_manifest(
+            self.read_bytes,
+            self.inventory(tracked),
+            self.read_blob,
+        )
 
     def test_manifest_entries_have_exact_contract_and_real_dual_checker(self):
         document = self.build()
@@ -187,8 +295,13 @@ class CurrentManifestContractTests(unittest.TestCase):
         self.assertIn(correction, after["prose_scan_paths"])
 
     def test_manifest_render_is_deterministic_canonical_and_timestamp_free(self):
-        first = self.manifest.render_manifest(self.read_bytes, set())
-        second = self.manifest.render_manifest(self.read_bytes, set())
+        inventory = self.inventory()
+        first = self.manifest.render_manifest(
+            self.read_bytes, inventory, self.read_blob
+        )
+        second = self.manifest.render_manifest(
+            self.read_bytes, inventory, self.read_blob
+        )
         self.assertEqual(first, second)
         self.assertTrue(first.endswith(b"\n"))
         self.assertNotIn(b"generated_at", first)
@@ -209,7 +322,12 @@ class CurrentManifestContractTests(unittest.TestCase):
             b"wiki/audit/system-first-stage1a/INDEX.md\0"
         )
         self.assertEqual(
-            {"wiki/audit/system-first-stage1a/INDEX.md"},
+            {
+                "wiki/audit/system-first-stage1a/INDEX.md":
+                    self.manifest.GitIndexEntry(
+                        "100644", "0123456789012345678901234567890123456789"
+                    )
+            },
             self.manifest._parse_git_index(good),
         )
         bad = good.replace(b" 0\t", b" 1\t")
@@ -236,6 +354,228 @@ class CurrentManifestContractTests(unittest.TestCase):
                 Path("D:/repo/.git/worktrees/review"),
                 self.manifest._resolved_gitdir(dot_git, platform="nt"),
             )
+
+
+class ManifestGitBindingContractTests(unittest.TestCase):
+    def setUp(self):
+        self.manifest = load_module("sf_current_manifest")
+        signature = inspect.signature(self.manifest.build_manifest)
+        self.assertIn(
+            "read_blob",
+            signature.parameters,
+            "manifest builder lacks staged-blob reader",
+        )
+        self.payloads = {
+            spec.path: f"payload:{spec.path}\n".encode("utf-8")
+            for spec in self.manifest.BASE_FILE_SPECS
+        }
+        self.blobs = {}
+        self.index = {}
+        for path, raw in self.payloads.items():
+            blob = git_blob_oid(raw)
+            self.blobs[blob] = raw
+            self.index[path] = self.manifest.GitIndexEntry("100644", blob)
+
+    def read_bytes(self, path):
+        return self.payloads[path]
+
+    def read_blob(self, blob):
+        return self.blobs[blob]
+
+    def build(self, index=None):
+        return self.manifest.build_manifest(
+            self.read_bytes,
+            self.index if index is None else index,
+            self.read_blob,
+        )
+
+    def test_every_base_entry_must_be_tracked(self):
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "manifest-input-untracked"
+        ):
+            self.build({})
+
+    def test_wrong_mode_and_malformed_blob_are_rejected(self):
+        self.assertTrue(
+            hasattr(self.manifest, "_validate_index_entry"),
+            "injected Git index entries are not validated",
+        )
+        path = next(iter(self.index))
+        wrong_mode = dict(self.index)
+        wrong_mode[path] = self.manifest.GitIndexEntry(
+            "120000", wrong_mode[path].blob
+        )
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "not a regular Git mode"
+        ):
+            self.build(wrong_mode)
+
+        wrong_blob = dict(self.index)
+        wrong_blob[path] = self.manifest.GitIndexEntry("100644", "not-a-blob")
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "malformed blob"
+        ):
+            self.build(wrong_blob)
+
+        malformed = (
+            b"100644 not-a-blob 0\t"
+            + path.encode("utf-8")
+            + b"\0"
+        )
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "malformed blob"
+        ):
+            self.manifest._parse_git_index(malformed)
+
+    def test_staged_blob_must_match_exact_worktree_bytes(self):
+        path = next(iter(self.index))
+        self.payloads[path] += b"changed-after-stage\n"
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
+        ):
+            self.build()
+
+    def test_crlf_worktree_variant_does_not_match_staged_lf_blob(self):
+        path = next(
+            path for path, raw in self.payloads.items() if b"\n" in raw
+        )
+        self.payloads[path] = self.payloads[path].replace(b"\n", b"\r\n")
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
+        ):
+            self.build()
+
+    def test_audit_pair_requires_complete_freshly_staged_bytes(self):
+        index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
+        correction = self.manifest.ACTIVE_REVIEW_TRANSACTION
+        index = dict(self.index)
+        raw = b"audit index\n"
+        blob = git_blob_oid(raw)
+        self.payloads[index_path] = raw
+        self.blobs[blob] = raw
+        index[index_path] = self.manifest.GitIndexEntry("100644", blob)
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "audit-activation-incomplete"
+        ):
+            self.build(index)
+
+        correction_raw = b"correction\n"
+        correction_blob = git_blob_oid(correction_raw)
+        self.payloads[correction] = correction_raw + b"edited-after-stage\n"
+        self.blobs[correction_blob] = correction_raw
+        index[correction] = self.manifest.GitIndexEntry(
+            "100644", correction_blob
+        )
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
+        ):
+            self.build(index)
+
+
+class TrustedCurrentPathContractTests(unittest.TestCase):
+    def setUp(self):
+        path = SURVEY_SCRIPTS / "sf_current_path_contract.py"
+        self.assertTrue(path.is_file(), f"trusted path helper missing: {path}")
+        self.paths = load_module("sf_current_path_contract")
+        self.tables = load_module("sf_current_tables")
+        self.manifest = load_module("sf_current_manifest")
+
+    def symlink_or_skip(self, target: Path, link: Path, *, directory=False):
+        try:
+            link.symlink_to(target, target_is_directory=directory)
+        except OSError as error:
+            self.skipTest(f"symlink unavailable: {error}")
+
+    def test_fixed_input_rejects_leaf_and_ancestor_symlinks(self):
+        self.assertTrue(
+            hasattr(self.tables, "_read_report_bytes"),
+            "table report fixed-path reader is missing",
+        )
+        relative = REPORT_PATH
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = Path(temp_dir) / "repo"
+            outside = Path(temp_dir) / "outside"
+            outside.mkdir()
+            outside_file = outside / "report.json"
+            outside_file.write_bytes(b"{}\n")
+
+            leaf = repo.joinpath(*relative.split("/"))
+            leaf.parent.mkdir(parents=True)
+            self.symlink_or_skip(outside_file, leaf)
+            with self.assertRaises(self.paths.TrustedCurrentPathError):
+                self.tables._read_report_bytes(repo, leaf)
+
+            leaf.unlink()
+            for child in sorted(repo.iterdir(), reverse=True):
+                if child.is_dir():
+                    shutil.rmtree(child)
+            docs_target = outside / "docs"
+            report = docs_target / (
+                "checks/system-first-stage1a/evidence-v6/"
+                "identity-taxonomy-v6-test.json"
+            )
+            report.parent.mkdir(parents=True)
+            report.write_bytes(b"{}\n")
+            self.symlink_or_skip(docs_target, repo / "docs", directory=True)
+            with self.assertRaises(self.paths.TrustedCurrentPathError):
+                self.tables._read_report_bytes(repo, repo / relative)
+
+    def test_table_and_manifest_outputs_reject_leaf_and_ancestor_symlinks(self):
+        cases = (
+            (
+                "wiki/survey/current/tables/opening-guarantees.md",
+                self.tables._resolve_output_path,
+            ),
+            (
+                "wiki/survey/current/manifest.json",
+                self.manifest._resolve_output_path,
+            ),
+        )
+        for relative, resolver in cases:
+            with self.subTest(relative=relative), tempfile.TemporaryDirectory() as temp_dir:
+                repo = Path(temp_dir) / "repo"
+                outside = Path(temp_dir) / "outside"
+                outside.mkdir()
+                outside_file = outside / "output"
+                outside_file.write_bytes(b"outside\n")
+                leaf = repo.joinpath(*relative.split("/"))
+                leaf.parent.mkdir(parents=True)
+                self.symlink_or_skip(outside_file, leaf)
+                for allow_missing in (False, True):
+                    with self.assertRaises(self.paths.TrustedCurrentPathError):
+                        resolver(
+                            repo, leaf, allow_missing_leaf=allow_missing
+                        )
+
+                leaf.unlink()
+                current = repo / "wiki/survey/current"
+                shutil.rmtree(current)
+                current_target = outside / "current"
+                current_target.mkdir()
+                self.symlink_or_skip(current_target, current, directory=True)
+                for allow_missing in (False, True):
+                    with self.assertRaises(self.paths.TrustedCurrentPathError):
+                        resolver(
+                            repo, repo / relative,
+                            allow_missing_leaf=allow_missing,
+                        )
+
+    def test_write_allows_only_a_missing_leaf_under_safe_existing_parents(self):
+        relative = "wiki/survey/current/manifest.json"
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = Path(temp_dir) / "repo"
+            target = repo.joinpath(*relative.split("/"))
+            target.parent.mkdir(parents=True)
+            self.assertEqual(
+                target,
+                self.paths.resolve_fixed_output(
+                    repo, target, relative, allow_missing_leaf=True
+                ),
+            )
+            with self.assertRaises(self.paths.TrustedCurrentPathError):
+                self.paths.resolve_fixed_output(
+                    repo, target, relative, allow_missing_leaf=False
+                )
 
 
 class RouterContentContractTests(unittest.TestCase):

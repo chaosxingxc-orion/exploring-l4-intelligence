@@ -25,6 +25,11 @@ from build_ai_context_manifest import (  # noqa: E402
     ACTIVE_REVIEW_TRANSACTION,
     AUDIT_CAMPAIGN_INDEX_PATH,
 )
+from sf_current_path_contract import (  # noqa: E402
+    TrustedCurrentPathError,
+    read_fixed_bytes,
+    resolve_fixed_output,
+)
 from sf_query_compiler import atomic_write_bytes  # noqa: E402
 
 
@@ -42,6 +47,12 @@ class FileSpec:
     path: str
     mutability: str
     load_policy: str
+
+
+@dataclass(frozen=True)
+class GitIndexEntry:
+    mode: str
+    blob: str
 
 
 _SIDECAR_NAMES = (
@@ -185,11 +196,9 @@ _BASE_PROSE_SCAN = (
 )
 
 
-def _active_audit_specs(
-    read_bytes: Callable[[str], bytes], tracked_paths: set[str]
-) -> tuple[FileSpec, ...]:
-    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in tracked_paths
-    correction_tracked = ACTIVE_REVIEW_TRANSACTION in tracked_paths
+def _active_audit_specs(index_inventory: dict[str, GitIndexEntry]) -> tuple[FileSpec, ...]:
+    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in index_inventory
+    correction_tracked = ACTIVE_REVIEW_TRANSACTION in index_inventory
     if index_tracked != correction_tracked:
         raise CurrentManifestError(
             "audit-activation-incomplete: "
@@ -197,23 +206,54 @@ def _active_audit_specs(
         )
     if not index_tracked:
         return ()
-    for spec in _AUDIT_FILE_SPECS:
-        try:
-            read_bytes(spec.path)
-        except (OSError, ContextSurfaceError) as error:
-            raise CurrentManifestError(
-                f"audit-activation-invalid: {spec.path}: {error}"
-            ) from error
     return _AUDIT_FILE_SPECS
 
 
-def _file_entry(spec: FileSpec, read_bytes: Callable[[str], bytes]) -> dict:
+def _validate_index_entry(path: str, entry: GitIndexEntry) -> GitIndexEntry:
+    if not isinstance(entry, GitIndexEntry):
+        raise CurrentManifestError(f"manifest index entry malformed: {path}")
+    if entry.mode not in {"100644", "100755"}:
+        raise CurrentManifestError(
+            f"manifest input is not a regular Git mode: {path}: {entry.mode}"
+        )
+    if re.fullmatch(r"[0-9a-f]{40}", entry.blob) is None:
+        raise CurrentManifestError(
+            f"manifest input has malformed blob: {path}: {entry.blob!r}"
+        )
+    return entry
+
+
+def _file_entry(
+    spec: FileSpec,
+    read_bytes: Callable[[str], bytes],
+    index_inventory: dict[str, GitIndexEntry],
+    read_blob: Callable[[str], bytes],
+) -> dict:
+    index_entry = index_inventory.get(spec.path)
+    if index_entry is None:
+        raise CurrentManifestError(f"manifest-input-untracked: {spec.path}")
+    index_entry = _validate_index_entry(spec.path, index_entry)
     try:
         raw = read_bytes(spec.path)
     except (OSError, ContextSurfaceError) as error:
         raise CurrentManifestError(f"manifest input missing: {spec.path}: {error}") from error
     if not isinstance(raw, bytes):
         raise CurrentManifestError(f"manifest reader returned non-bytes: {spec.path}")
+    try:
+        staged_raw = read_blob(index_entry.blob)
+    except (OSError, CurrentManifestError) as error:
+        raise CurrentManifestError(
+            f"manifest staged blob unavailable: {spec.path}: {error}"
+        ) from error
+    if not isinstance(staged_raw, bytes):
+        raise CurrentManifestError(f"Git blob reader returned non-bytes: {spec.path}")
+    if raw != staged_raw:
+        raise CurrentManifestError(
+            "staged-worktree-byte-mismatch: "
+            f"{spec.path}: index={index_entry.blob}, "
+            f"staged_sha256={hashlib.sha256(staged_raw).hexdigest()}, "
+            f"worktree_sha256={hashlib.sha256(raw).hexdigest()}"
+        )
     return {
         "role": spec.role,
         "path": spec.path,
@@ -224,9 +264,13 @@ def _file_entry(spec: FileSpec, read_bytes: Callable[[str], bytes]) -> dict:
 
 
 def build_manifest(
-    read_bytes: Callable[[str], bytes], tracked_paths: set[str]
+    read_bytes: Callable[[str], bytes],
+    index_inventory: dict[str, GitIndexEntry],
+    read_blob: Callable[[str], bytes],
 ) -> dict:
-    audit_specs = _active_audit_specs(read_bytes, set(tracked_paths))
+    if not isinstance(index_inventory, dict):
+        raise CurrentManifestError("Git index inventory must be a path map")
+    audit_specs = _active_audit_specs(index_inventory)
     specs = (*BASE_FILE_SPECS, *audit_specs)
     paths = [spec.path for spec in specs]
     roles = [spec.role for spec in specs]
@@ -236,7 +280,10 @@ def build_manifest(
         raise CurrentManifestError("current manifest must not hash itself")
 
     entries = sorted(
-        (_file_entry(spec, read_bytes) for spec in specs),
+        (
+            _file_entry(spec, read_bytes, index_inventory, read_blob)
+            for spec in specs
+        ),
         key=lambda entry: entry["path"],
     )
     release_bound = list(_BASE_RELEASE_BOUND)
@@ -253,9 +300,11 @@ def build_manifest(
 
 
 def render_manifest(
-    read_bytes: Callable[[str], bytes], tracked_paths: set[str]
+    read_bytes: Callable[[str], bytes],
+    index_inventory: dict[str, GitIndexEntry],
+    read_blob: Callable[[str], bytes],
 ) -> bytes:
-    document = build_manifest(read_bytes, tracked_paths)
+    document = build_manifest(read_bytes, index_inventory, read_blob)
     return (
         json.dumps(
             document,
@@ -267,21 +316,41 @@ def render_manifest(
     ).encode("utf-8")
 
 
-def _parse_git_index(raw: bytes) -> set[str]:
-    paths: set[str] = set()
+def _canonical_git_path(path: str) -> str:
+    if (
+        not path
+        or "\\" in path
+        or path.startswith("/")
+        or re.match(r"^[A-Za-z]:", path)
+    ):
+        raise CurrentManifestError(f"Git index path is not canonical: {path!r}")
+    parts = path.split("/")
+    if any(part in ("", ".", "..") for part in parts):
+        raise CurrentManifestError(f"Git index path has unsafe component: {path!r}")
+    return path
+
+
+def _parse_git_index(raw: bytes) -> dict[str, GitIndexEntry]:
+    inventory: dict[str, GitIndexEntry] = {}
     try:
         for record in (item for item in raw.split(b"\0") if item):
             metadata, raw_path = record.split(b"\t", 1)
-            _mode, _blob, stage = metadata.split(b" ", 2)
+            raw_mode, raw_blob, stage = metadata.split(b" ", 2)
             if stage != b"0":
                 raise CurrentManifestError("git inventory contains non-stage-0 entry")
-            path = raw_path.decode("utf-8")
-            if path in paths:
+            mode = raw_mode.decode("ascii")
+            blob = raw_blob.decode("ascii")
+            if re.fullmatch(r"[0-7]{6}", mode) is None:
+                raise CurrentManifestError(f"git inventory contains malformed mode: {mode!r}")
+            if re.fullmatch(r"[0-9a-f]{40}", blob) is None:
+                raise CurrentManifestError(f"git inventory contains malformed blob: {blob!r}")
+            path = _canonical_git_path(raw_path.decode("utf-8"))
+            if path in inventory:
                 raise CurrentManifestError(f"git inventory duplicates path: {path}")
-            paths.add(path)
-    except (ValueError, UnicodeDecodeError) as error:
+            inventory[path] = GitIndexEntry(mode, blob)
+    except (ValueError, UnicodeDecodeError, UnicodeEncodeError) as error:
         raise CurrentManifestError(f"git inventory output is malformed: {error}") from error
-    return paths
+    return inventory
 
 
 def _resolved_gitdir(dot_git: Path, platform: str = os.name) -> Path:
@@ -305,7 +374,7 @@ def _resolved_gitdir(dot_git: Path, platform: str = os.name) -> Path:
     return candidate if candidate.is_absolute() else dot_git.parent / candidate
 
 
-def _tracked_paths(repo: Path) -> set[str]:
+def _git_command_prefix(repo: Path) -> list[str]:
     command = ["git"]
     dot_git = repo / ".git"
     if dot_git.is_file():
@@ -315,7 +384,11 @@ def _tracked_paths(repo: Path) -> set[str]:
                 f"--work-tree={repo}",
             ]
         )
-    command.extend(["ls-files", "-s", "-z"])
+    return command
+
+
+def _run_git(repo: Path, arguments: list[str], *, label: str) -> bytes:
+    command = [*_git_command_prefix(repo), *arguments]
     try:
         result = subprocess.run(
             command,
@@ -328,20 +401,52 @@ def _tracked_paths(repo: Path) -> set[str]:
         raise CurrentManifestError(f"git inventory failed: {error}") from error
     if result.returncode != 0:
         detail = result.stderr.decode("utf-8", errors="replace").strip()
-        raise CurrentManifestError(f"git inventory failed: {detail}")
-    return _parse_git_index(result.stdout)
+        raise CurrentManifestError(f"{label} failed: {detail}")
+    return result.stdout
 
 
-def _repo_reader() -> Callable[[str], bytes]:
+def _git_release_context(
+    repo: Path,
+) -> tuple[dict[str, GitIndexEntry], Callable[[str], bytes]]:
+    inventory = _parse_git_index(
+        _run_git(repo, ["ls-files", "-s", "-z"], label="git inventory")
+    )
+    cache: dict[str, bytes] = {}
+
+    def read_blob(blob: str) -> bytes:
+        if re.fullmatch(r"[0-9a-f]{40}", blob) is None:
+            raise CurrentManifestError(f"malformed staged blob id: {blob!r}")
+        if blob not in cache:
+            cache[blob] = _run_git(
+                repo, ["cat-file", "blob", blob], label=f"git cat-file {blob}"
+            )
+        return cache[blob]
+
+    return inventory, read_blob
+
+
+def _repo_reader(repo: Path = REPO) -> Callable[[str], bytes]:
     try:
-        reader = TrustedRepoReader(REPO)
+        reader = TrustedRepoReader(repo)
     except ContextSurfaceError as error:
         raise CurrentManifestError(f"repository root is untrusted: {error}") from error
     return reader.read_bytes
 
 
 def expected_bytes() -> bytes:
-    return render_manifest(_repo_reader(), _tracked_paths(REPO))
+    inventory, read_blob = _git_release_context(REPO)
+    return render_manifest(_repo_reader(), inventory, read_blob)
+
+
+def _resolve_output_path(
+    repo: Path, target: Path, *, allow_missing_leaf: bool
+) -> Path:
+    return resolve_fixed_output(
+        repo,
+        target,
+        OUTPUT_RELATIVE_PATH,
+        allow_missing_leaf=allow_missing_leaf,
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -357,12 +462,14 @@ def main(argv=None) -> int:
     try:
         expected = expected_bytes()
         if args.write:
-            atomic_write_bytes(OUTPUT_PATH, expected)
+            output = _resolve_output_path(REPO, OUTPUT_PATH, allow_missing_leaf=True)
+            atomic_write_bytes(output, expected)
             print(f"wrote {OUTPUT_RELATIVE_PATH}")
             return 0
         try:
-            actual = OUTPUT_PATH.read_bytes()
-        except OSError as error:
+            _resolve_output_path(REPO, OUTPUT_PATH, allow_missing_leaf=False)
+            actual = read_fixed_bytes(REPO, OUTPUT_PATH, OUTPUT_RELATIVE_PATH)
+        except (OSError, TrustedCurrentPathError) as error:
             raise CurrentManifestError(f"current manifest missing: {error}") from error
         if actual != expected:
             raise CurrentManifestError(
@@ -370,7 +477,13 @@ def main(argv=None) -> int:
                 f"expected {hashlib.sha256(expected).hexdigest()}, "
                 f"found {hashlib.sha256(actual).hexdigest()}"
             )
-    except (CurrentManifestError, OSError) as error:
+    except (
+        CurrentManifestError,
+        TrustedCurrentPathError,
+        ContextSurfaceError,
+        OSError,
+        ValueError,
+    ) as error:
         print(f"[CURRENT-MANIFEST] {error}")
         print("current survey manifest: FAIL")
         return 1
