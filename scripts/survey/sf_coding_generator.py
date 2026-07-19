@@ -23,6 +23,7 @@ import io
 import json
 import os
 import sys
+import tempfile
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LEGACY_SIDECAR_DIR = os.path.join(REPO, "wiki", "survey", "sidecars")
@@ -151,6 +152,50 @@ def _display_path(path):
         return path
 
 
+def _write_all(handle, payload):
+    view = memoryview(payload)
+    offset = 0
+    while offset < len(view):
+        written = handle.write(view[offset:])
+        if written is None or written <= 0:
+            raise OSError("staging write made no progress")
+        offset += written
+
+
+def _publish_bytes(out, payload):
+    """Atomically publish exact bytes without exposing a partial destination."""
+    directory = os.path.dirname(out)
+    os.makedirs(directory, exist_ok=True)
+    descriptor, staging = tempfile.mkstemp(
+        prefix=f".{os.path.basename(out)}.", suffix=".tmp", dir=directory
+    )
+    descriptor_owned = True
+    try:
+        handle = os.fdopen(descriptor, "wb")
+        descriptor_owned = False
+        with handle:
+            _write_all(handle, payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        with io.open(staging, "rb") as handle:
+            staged = handle.read()
+        if staged != payload:
+            raise OSError("staging verification failed: bytes differ from projection")
+        os.replace(staging, out)
+        staging = None
+    finally:
+        if descriptor_owned:
+            try:
+                os.close(descriptor)
+            except OSError:
+                pass
+        if staging is not None:
+            try:
+                os.unlink(staging)
+            except FileNotFoundError:
+                pass
+
+
 def main(argv=None):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -162,20 +207,19 @@ def main(argv=None):
         taxonomy=args.taxonomy,
         profile=args.profile,
     )
+    payload = text.encode("utf-8")
     if args.check:
         if os.path.exists(out):
-            with io.open(out, encoding="utf-8") as handle:
+            with io.open(out, "rb") as handle:
                 current = handle.read()
         else:
             current = None
-        if current != text:
+        if current != payload:
             print("[FAIL] coding is NOT byte-identical to generator output (hand edit or stale)")
             return 1
         print("[OK] coding byte-identical to generator output")
         return 0
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with io.open(out, "w", encoding="utf-8", newline="\n") as handle:
-        handle.write(text)
+    _publish_bytes(out, payload)
     print(f"wrote {_display_path(out)} ({text.count(chr(10))} lines)")
     return 0
 
