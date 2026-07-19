@@ -2,13 +2,23 @@
 """Focused contract checks for the taxonomy-v6 declaration artifact."""
 from __future__ import annotations
 
-import json
 import os
+import sys
 import tempfile
 import unittest
 
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sf_json_contract import JsonContractError, read as read_strict_json  # noqa: E402
+from sf_taxonomy_v6_contract import (  # noqa: E402
+    EXPECTED_ADDED_KEYS,
+    EXPECTED_CHANGED_KEYS,
+    RELEASE_RULE,
+    ROW_CLAIMS,
+    SEMANTIC_KEYS,
+    validate_taxonomy_v6,
+)
 V5_PATH = os.path.join(
     REPO, "wiki", "survey", "2026-07-19-sf-identity-taxonomy-v5.json"
 )
@@ -16,79 +26,12 @@ V6_PATH = os.path.join(
     REPO, "wiki", "survey", "current", "data", "identity-taxonomy-v6.json"
 )
 
-SEMANTIC_KEYS = [
-    "enums",
-    "signal_schema",
-    "control_edge_schema",
-    "signal_use",
-    "decision_rights",
-    "reward_forms",
-    "allowed_relations",
-    "allowed_relations_provenance",
-    "derived_v5",
-    "adjudication_binding",
-    "cross_platform_contract",
-    "killer_and_acceptance_contract",
-    "single_write_pipeline",
-]
-
-ROW_CLAIMS = [
-    "core_weight_update",
-    "external_component_weight_update",
-    "controller_program_or_config_optimized_on_labels",
-    "human_or_dev_label_model_selection",
-    "deployment_label_access",
-    "test_item_gold_access",
-    "inference_external_new_information",
-    "internal_visibility",
-    "core_topology",
-    "core_native_modality",
-    "control_horizon",
-    "decision_rights",
-    "candidate_pool_exists",
-    "selection_policy",
-    "selection_object",
-    "explicit_candidate_pool_selection",
-]
-
-RELEASE_RULE = (
-    "active release discovery resolves through "
-    "wiki/survey/current/manifest.json; historical bound artifacts remain "
-    "available through explicit legacy regression."
-)
-
-EXPECTED_ADDED_KEYS = {"schema", "derivation_semantics"}
-EXPECTED_CHANGED_EXISTING_KEYS = {
-    "artifact_id",
-    "title",
-    "supersession",
-    "required_evidence_contract",
-    "release_binding",
-}
+EXPECTED_CHANGED_EXISTING_KEYS = set(EXPECTED_CHANGED_KEYS)
 EXPECTED_UNION_DELTA = EXPECTED_ADDED_KEYS | EXPECTED_CHANGED_EXISTING_KEYS
 
 
-def _unique_object(pairs):
-    obj = {}
-    for key, value in pairs:
-        if key in obj:
-            raise ValueError(f"duplicate JSON key: {key}")
-        obj[key] = value
-    return obj
-
-
-def _reject_nonfinite(value):
-    raise ValueError(f"non-finite JSON number: {value}")
-
-
 def load_strict(path):
-    with open(path, "rb") as handle:
-        text = handle.read().decode("utf-8")
-    return json.loads(
-        text,
-        object_pairs_hook=_unique_object,
-        parse_constant=_reject_nonfinite,
-    )
+    return read_strict_json(path)[0]
 
 
 class TaxonomyV6ContractTest(unittest.TestCase):
@@ -103,6 +46,9 @@ class TaxonomyV6ContractTest(unittest.TestCase):
                 self.assertEqual(self.v5[key], self.v6[key])
         self.assertIn("derived_v5", self.v6)
         self.assertNotIn("derived_v6", self.v6)
+
+    def test_reusable_taxonomy_contract_is_clean(self):
+        self.assertEqual(validate_taxonomy_v6(self.v5, self.v6), [])
 
     def test_metadata_declares_only_the_schema_v3_contract_delta(self):
         self.assertEqual(
@@ -155,7 +101,7 @@ class TaxonomyV6ContractTest(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "row": ROW_CLAIMS,
+                "row": list(ROW_CLAIMS),
                 "signal": ["form", "source", "lifecycle", "uses"],
                 "edge": ["signal_use", "decision_right"],
             },
@@ -172,20 +118,19 @@ class TaxonomyV6ContractTest(unittest.TestCase):
 
     def test_strict_loader_rejects_malformed_json_classes(self):
         cases = [
-            ("duplicate-key", b'{"x": 1, "x": 2}', ValueError),
-            ("non-finite", b'{"x": NaN}', ValueError),
-            ("invalid-utf8", b'{"x": "\xff"}', UnicodeDecodeError),
-            ("trailing-junk", b'{} trailing', json.JSONDecodeError),
+            ("duplicate-key", b'{"x": 1, "x": 2}'),
+            ("non-finite", b'{"x": NaN}'),
+            ("invalid-utf8", b'{"x": "\xff"}'),
+            ("trailing-junk", b'{} trailing'),
         ]
         with tempfile.TemporaryDirectory() as temporary:
-            for name, payload, expected_error in cases:
+            for name, payload in cases:
                 with self.subTest(name=name):
                     path = os.path.join(temporary, f"{name}.json")
                     with open(path, "wb") as handle:
                         handle.write(payload)
-                    with self.assertRaises(expected_error) as raised:
+                    with self.assertRaises(JsonContractError):
                         load_strict(path)
-                    self.assertIs(expected_error, type(raised.exception))
 
 
 if __name__ == "__main__":

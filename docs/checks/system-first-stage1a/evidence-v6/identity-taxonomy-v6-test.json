@@ -3,6 +3,7 @@
  "inputs": {
   "taxonomy": "wiki/survey/current/data/identity-taxonomy-v6.json",
   "coding": "wiki/survey/current/data/known-item-coding-v7.json",
+  "adjudication": "wiki/survey/current/data/schema-v3-adjudication.json",
   "sidecars": [
    "2026.findings-acl.1243.sidecar.json",
    "2026.findings-acl.1724.sidecar.json",
@@ -14,12 +15,71 @@
    "2606.03054.sidecar.json"
   ]
  },
+ "input_provenance": {
+  "taxonomy_v5": {
+   "path": "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json",
+   "sha256": "9f6407266a808fb012ae63811821c3c1cd950996b8bf733fd4711812d896b106"
+  },
+  "taxonomy": {
+   "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
+   "sha256": "976d46358263af6d0bd9f9d48a249aa23e39552aa66d5df501a1ce118cce8893"
+  },
+  "coding": {
+   "path": "wiki/survey/current/data/known-item-coding-v7.json",
+   "sha256": "bbbfe8988b4df37e5870739aa015fb23c62168991120c4fbdaec3c8c3406bc27"
+  },
+  "adjudication": {
+   "path": "wiki/survey/current/data/schema-v3-adjudication.json",
+   "sha256": "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
+  },
+  "sidecars": [
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+    "sha256": "9d60a55dffc0112a4c8eb38aeebe7ea5daf3815d035aaa558812fc86e57911bb"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+    "sha256": "eb96a83e2eadea96db2af2b1690feb1cfd2792354758adb127649892689839f9"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+    "sha256": "2d97b5ca3d441189d8d8c57eb43b47c09b36c7860f16e54dae6daac2dc957404"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2602.16485.sidecar.json",
+    "sha256": "b4201e535f7dbea0cee9f92d506c9e8ecd80b031d7f9aa3608e8e5085a68950f"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+    "sha256": "f946ebd1c50bb117bd787641679e0031a468b8c4c6a46712fd735360e0ce3de9"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+    "sha256": "c9afb44081e80182c00194f18ffda8c79706075043c711aa8d1219145367bc6e"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2606.01667.sidecar.json",
+    "sha256": "82056e0957c85d95c1bf4d772af82a2db3ba3d2017f607ae9309bd7c83099d69"
+   },
+   {
+    "path": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+    "sha256": "f5ba2c5c68e72b4f1737fc79d63f0a61423ae5cd2a4886d54e79f1d8a00c1e1b"
+   }
+  ]
+ },
+ "input_snapshot_sha256": "8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d",
  "platform": {
   "os": "nt",
   "python": "3.14.3"
  },
  "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
  "checks": [
+  {
+   "id": "V0",
+   "check": "taxonomy v6 exact delta over frozen taxonomy-v5 semantics",
+   "result": "PASS",
+   "detail": "[]"
+  },
   {
    "id": "V1",
    "check": "ordered structure -> row16/signal4/edge2 binding -> source contract",
@@ -409,6 +469,6 @@
    "single-write:coding-not-byte-identical-to-generator-output"
   ]
  },
- "summary": "13/13 PASS",
+ "summary": "14/14 PASS",
  "verdict": "PASS"
 }

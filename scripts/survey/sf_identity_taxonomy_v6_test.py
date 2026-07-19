@@ -11,13 +11,15 @@ artifact paths, and adjudicated schema-v3 sidecars.
 from __future__ import annotations
 
 import copy
-import glob
+import gzip
+import hashlib
 import io
 import json
 import logging
 import os
 import re
 import sys
+import tarfile
 import tempfile
 from pathlib import Path
 
@@ -27,6 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 from sf_coding_generator import render  # noqa: E402
+from sf_asset_path import resolve_asset_path  # noqa: E402
 from sf_evidence_contract import (  # noqa: E402
     EDGE_REQUIRED_FIELDS,
     ROW_REQUIRED_FIELDS,
@@ -42,12 +45,27 @@ from sf_identity_taxonomy_v5_test import (  # noqa: E402
     check_quotes,
     derive,
     fx_edge,
-    pdf_reader,
     run_expectations,
-    tex_text,
     validate,
 )
+from sf_json_contract import (  # noqa: E402
+    JsonContractError,
+    canonical_bytes,
+    read as read_strict_json,
+    read_jsonl,
+)
 from sf_row_hash import row_hash  # noqa: E402
+from sf_schema_v3_release_contract import (  # noqa: E402
+    ADJUDICATION_RELATIVE_PATH,
+    load_active_release,
+    validate_canonical_record_id,
+    validate_coding_lineage,
+    validate_repo_relative_path,
+)
+from sf_taxonomy_v6_contract import (  # noqa: E402
+    FROZEN_TAXONOMY_V5_SHA256,
+    validate_taxonomy_v6,
+)
 
 
 logging.getLogger("pypdf").setLevel(logging.ERROR)
@@ -56,12 +74,16 @@ logging.getLogger("pypdf").setLevel(logging.ERROR)
 TAX = os.path.join(
     REPO, "wiki", "survey", "current", "data", "identity-taxonomy-v6.json"
 )
+TAX_V5 = os.path.join(
+    REPO, "wiki", "survey", "2026-07-19-sf-identity-taxonomy-v5.json"
+)
 CODING = os.path.join(
     REPO, "wiki", "survey", "current", "data", "known-item-coding-v7.json"
 )
 SIDECAR_DIR = os.path.join(
     REPO, "wiki", "survey", "current", "data", "schema-v3", "sidecars"
 )
+ADJUDICATION = os.path.join(REPO, *ADJUDICATION_RELATIVE_PATH.split("/"))
 ACTIVE_TAXONOMY = "wiki/survey/current/data/identity-taxonomy-v6.json"
 INDEP = os.path.join(
     REPO, "wiki", "survey", "2026-07-18-sf-independent-counterexamples-v1.json"
@@ -78,24 +100,86 @@ OUT_DIR = os.path.join(
 OUT = os.path.join(OUT_DIR, "identity-taxonomy-v6-test.json")
 
 
+def _repo_display_path(path):
+    path = Path(path).resolve()
+    try:
+        return path.relative_to(Path(REPO).resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def _provenance_entry(path, raw_bytes):
+    return {
+        "path": _repo_display_path(path),
+        "sha256": hashlib.sha256(raw_bytes).hexdigest(),
+    }
+
+
+def _read_snapshot_json(path):
+    path = Path(path)
+    if path.is_symlink():
+        raise ValueError(f"active JSON input may not be a symlink: {path}")
+    return read_strict_json(path)
+
+
+def _load_input_snapshot():
+    taxonomy_v5, taxonomy_v5_raw = _read_snapshot_json(TAX_V5)
+    taxonomy_v5_sha256 = hashlib.sha256(taxonomy_v5_raw).hexdigest()
+    if taxonomy_v5_sha256 != FROZEN_TAXONOMY_V5_SHA256:
+        raise ValueError(
+            "frozen taxonomy-v5 SHA-256 mismatch "
+            f"(expected={FROZEN_TAXONOMY_V5_SHA256}, "
+            f"found={taxonomy_v5_sha256})"
+        )
+    taxonomy_v6, taxonomy_v6_raw = _read_snapshot_json(TAX)
+    coding, coding_raw = _read_snapshot_json(CODING)
+    try:
+        coding_text = coding_raw.decode("utf-8")
+    except UnicodeDecodeError as error:  # Defensive; strict loader already checked.
+        raise JsonContractError(f"{CODING}: {error}") from error
+    release = load_active_release(REPO, SIDECAR_DIR, ADJUDICATION)
+    validate_coding_lineage(coding, REPO)
+    rows = coding.get("rows") if isinstance(coding, dict) else None
+    if not isinstance(rows, list):
+        raise ValueError("active coding rows container invalid")
+    sidecars = [(name, document) for name, document, _ in release.sidecars]
+    provenance = {
+        "taxonomy_v5": _provenance_entry(TAX_V5, taxonomy_v5_raw),
+        "taxonomy": _provenance_entry(TAX, taxonomy_v6_raw),
+        "coding": _provenance_entry(CODING, coding_raw),
+        "adjudication": _provenance_entry(
+            ADJUDICATION, release.adjudication_raw
+        ),
+        "sidecars": [
+            {
+                "path": _repo_display_path(Path(SIDECAR_DIR) / name),
+                "sha256": hashlib.sha256(raw).hexdigest(),
+            }
+            for name, _, raw in release.sidecars
+        ],
+    }
+    return {
+        "taxonomy_v5": taxonomy_v5,
+        "taxonomy_v6": taxonomy_v6,
+        "coding": coding,
+        "coding_text": coding_text,
+        "rows": rows,
+        "sidecars": sidecars,
+        "adjudication": release.adjudication,
+        "input_provenance": provenance,
+        "input_snapshot_sha256": hashlib.sha256(
+            canonical_bytes(provenance)
+        ).hexdigest(),
+    }
+
+
 def load_sidecar_docs():
-    paths = sorted(glob.glob(os.path.join(SIDECAR_DIR, "*.sidecar.json")))
-    sidecars = []
-    for path in paths:
-        with io.open(path, encoding="utf-8") as handle:
-            sidecars.append((os.path.basename(path), json.load(handle)))
-    return sidecars
+    return _load_input_snapshot()["sidecars"]
 
 
 def load_current_inputs():
-    with io.open(TAX, encoding="utf-8") as handle:
-        taxonomy = json.load(handle)
-    if taxonomy.get("artifact_id") != "SF-IDENTITY-TAXONOMY-V6-2026-07-19-01":
-        raise ValueError("active taxonomy-v6 artifact_id mismatch")
-    with io.open(CODING, encoding="utf-8") as handle:
-        coding_text = handle.read()
-    rows = json.loads(coding_text)["rows"]
-    return load_sidecar_docs(), coding_text, rows
+    snapshot = _load_input_snapshot()
+    return snapshot["sidecars"], snapshot["coding_text"], snapshot["rows"]
 
 
 def render_v7(sidecars):
@@ -104,33 +188,33 @@ def render_v7(sidecars):
 
 def ledger_index(relative_path):
     """Copy of v5 ledger resolution with deterministic handle ownership."""
-    path = os.path.join(REPO, relative_path.replace("/", os.sep))
-    if not os.path.exists(path):
+    try:
+        path = validate_repo_relative_path(relative_path, REPO)
+        entries, _ = read_jsonl(path)
+    except (ValueError, JsonContractError):
         return None
     index = []
-    with io.open(path, encoding="utf-8") as handle:
-        for line in handle:
-            if not line.strip():
-                continue
-            entry = json.loads(line)
-            entry_id = entry.get("arxiv_id") or entry.get("id")
-            kind = entry.get("kind") or (
-                "pdf" if str(entry.get("url", "")).endswith(".pdf") else None
-            )
-            index.append(
-                {
-                    "id": entry_id,
-                    "kind": kind,
-                    "sha256": entry.get("sha256"),
-                    "stored_at": entry.get("stored_at"),
-                }
-            )
+    for entry in entries:
+        if not isinstance(entry, dict):
+            return None
+        entry_id = entry.get("arxiv_id") or entry.get("id")
+        kind = entry.get("kind") or (
+            "pdf" if str(entry.get("url", "")).endswith(".pdf") else None
+        )
+        index.append(
+            {
+                "id": entry_id,
+                "kind": kind,
+                "sha256": entry.get("sha256"),
+                "stored_at": entry.get("stored_at"),
+            }
+        )
     return index
 
 
 def canon_sections(relative_path):
     """Copy of v5 canonical-section resolution with owned file handles."""
-    path = os.path.join(REPO, relative_path.replace("/", os.sep))
+    path = validate_repo_relative_path(relative_path, REPO)
     with io.open(path, encoding="utf-8") as handle:
         text = handle.read()
     sections = {}
@@ -165,16 +249,59 @@ class _CachedReader:
         self.pages = pages
 
 
-_resolved_pdf_cache = {}
+class EvidenceCache:
+    """One explicit input-snapshot/run cache; never shared implicitly."""
+
+    def __init__(self):
+        self.pdf = {}
+        self.tex = {}
 
 
-def _cached_pdf_reader(stored_at):
-    """Extract each pinned PDF page once without changing locator semantics."""
-    if stored_at in _resolved_pdf_cache:
-        return _resolved_pdf_cache[stored_at]
-    raw_reader = pdf_reader(stored_at)
-    if raw_reader is None:
-        _resolved_pdf_cache[stored_at] = None
+def _asset_cache_key(asset_path, ledger_sha256, kind, extractor_identity):
+    asset_path = Path(asset_path).resolve(strict=True)
+    stat = asset_path.stat()
+    return (
+        os.path.normcase(str(asset_path)),
+        ledger_sha256,
+        kind,
+        extractor_identity,
+        stat.st_size,
+        stat.st_mtime_ns,
+        getattr(stat, "st_ino", None),
+        getattr(stat, "st_dev", None),
+    )
+
+
+def _open_pdf_reader(path):
+    import pypdf
+
+    return pypdf.PdfReader(path)
+
+
+def _pdf_extractor_identity():
+    import pypdf
+
+    return f"pypdf:{pypdf.__version__}:PdfReader.extract_text:v1"
+
+
+def _cached_pdf_reader(stored_at, ledger_sha256, kind, cache):
+    """Cache page extraction only under path+hash+kind+extractor+stat identity."""
+    try:
+        asset_path = Path(resolve_asset_path(stored_at)).resolve(strict=True)
+        key = _asset_cache_key(
+            asset_path,
+            ledger_sha256,
+            kind,
+            _pdf_extractor_identity(),
+        )
+    except (OSError, ValueError):
+        return None
+    if key in cache.pdf:
+        return cache.pdf[key]
+    try:
+        raw_reader = _open_pdf_reader(asset_path)
+    except Exception:
+        cache.pdf[key] = None
         return None
     pages = []
     for page in raw_reader.pages:
@@ -183,8 +310,44 @@ def _cached_pdf_reader(stored_at):
         except Exception as error:  # check_page_locator must still fail closed.
             pages.append(_CachedPage(error=error))
     reader = _CachedReader(pages)
-    _resolved_pdf_cache[stored_at] = reader
+    cache.pdf[key] = reader
     return reader
+
+
+def _norm_tex(text):
+    text = re.sub(r"\\[a-zA-Z]+", " ", text)
+    return re.sub(r"\s+", " ", re.sub(r"[\\${}~]", "", text)).strip().lower()
+
+
+def _cached_tex_text(stored_at, ledger_sha256, kind, cache):
+    try:
+        asset_path = Path(resolve_asset_path(stored_at)).resolve(strict=True)
+        key = _asset_cache_key(
+            asset_path,
+            ledger_sha256,
+            kind,
+            "tarfile+gzip.tex-normalize:v1",
+        )
+    except (OSError, ValueError):
+        return ""
+    if key in cache.tex:
+        return cache.tex[key]
+    text = ""
+    try:
+        with tarfile.open(asset_path, "r:gz") as archive:
+            for member in archive.getmembers():
+                if member.name.endswith(".tex"):
+                    extracted = archive.extractfile(member)
+                    if extracted is not None:
+                        text += extracted.read().decode("utf-8", errors="replace")
+    except tarfile.ReadError:
+        try:
+            with gzip.open(asset_path, "rb") as handle:
+                text = handle.read().decode("utf-8", errors="replace")
+        except OSError:
+            text = ""
+    cache.tex[key] = _norm_tex(text)
+    return cache.tex[key]
 
 
 def _check_evidence_entry_v6(
@@ -237,9 +400,10 @@ def _check_evidence_entry_v6(
         failures.append(f"{pid}:{what}:evidence-kind-invalid")
 
 
-def reconcile_v6(sidecars, coding_text):
+def reconcile_v6(sidecars, coding_text, evidence_cache=None):
     """Reconcile active schema-v3 sidecars against pinned source material."""
     failures = []
+    evidence_cache = evidence_cache or EvidenceCache()
     try:
         expected = render(
             sidecars, taxonomy=ACTIVE_TAXONOMY, profile="v7"
@@ -284,13 +448,16 @@ def reconcile_v6(sidecars, coding_text):
         if fulltext.get("id") != work_id:
             failures.append(f"{work_id}:fulltext-id-mismatch:{fulltext.get('id')}")
 
-        canonical_file, _, anchor = (
-            sidecar.get("canonical_record_id") or ""
-        ).partition("#")
+        canonical_id = sidecar.get("canonical_record_id") or ""
+        canonical_file, _, anchor = canonical_id.partition("#")
+        try:
+            validate_canonical_record_id(canonical_id, REPO)
+        except ValueError as error:
+            failures.append(f"{work_id}:canonical-record-id-invalid:{error}")
         if canonical_file not in sections_cache:
             try:
                 sections_cache[canonical_file] = canon_sections(canonical_file)
-            except FileNotFoundError:
+            except (OSError, ValueError):
                 sections_cache[canonical_file] = None
         sections = sections_cache[canonical_file]
         section_text = None
@@ -307,13 +474,23 @@ def reconcile_v6(sidecars, coding_text):
         reader = None
         if ledger_row and ledger_row.get("stored_at"):
             if fulltext.get("kind") == "eprint":
-                tex_norm = tex_text(ledger_row["stored_at"])
+                tex_norm = _cached_tex_text(
+                    ledger_row["stored_at"],
+                    ledger_row["sha256"],
+                    fulltext.get("kind"),
+                    evidence_cache,
+                )
                 if not tex_norm:
                     failures.append(
                         f"{work_id}:eprint-unreadable:{ledger_row['stored_at']}"
                     )
             elif fulltext.get("kind") == "pdf":
-                reader = _cached_pdf_reader(ledger_row["stored_at"])
+                reader = _cached_pdf_reader(
+                    ledger_row["stored_at"],
+                    ledger_row["sha256"],
+                    fulltext.get("kind"),
+                    evidence_cache,
+                )
 
         for method_path in sidecar.get("method_paths", []):
             pid = method_path.get("method_path_id", "?")
@@ -463,13 +640,18 @@ def reconcile_v6(sidecars, coding_text):
     return failures
 
 
-def validate_load_bearing_contract(rows, sidecars, coding_text):
+def validate_load_bearing_contract(
+    rows, sidecars, coding_text, evidence_cache=None
+):
     """Run the three contract layers in their required fail-closed order."""
     structure_failures = validate(rows)
     binding_failures = sum(
         (validate_bound_values(row) for row in rows), []
     )
-    source_failures = reconcile_v6(sidecars, coding_text)
+    if evidence_cache is None:
+        source_failures = reconcile_v6(sidecars, coding_text)
+    else:
+        source_failures = reconcile_v6(sidecars, coding_text, evidence_cache)
     return {
         "structure": structure_failures,
         "bindings": binding_failures,
@@ -659,8 +841,12 @@ def run_mutation_suite(sidecars, coding_text):
             row["adjudication_status"] = "adjudicated_agree"
             row["adjudication_row_sha256"] = row_hash(row)
     stamped_coding = render_v7(stamped)
+    evidence_cache = EvidenceCache()
     clean_contract = validate_load_bearing_contract(
-        json.loads(stamped_coding)["rows"], stamped, stamped_coding
+        json.loads(stamped_coding)["rows"],
+        stamped,
+        stamped_coding,
+        evidence_cache,
     )
     baseline = {key: set(value) for key, value in clean_contract.items()}
     results = {}
@@ -676,7 +862,9 @@ def run_mutation_suite(sidecars, coding_text):
         if mutate_coding is not None:
             current_coding = mutate_coding(current_coding)
         rows = json.loads(current_coding)["rows"]
-        contract = validate_load_bearing_contract(rows, mutated, current_coding)
+        contract = validate_load_bearing_contract(
+            rows, mutated, current_coding, evidence_cache
+        )
         new_failures = set()
         for layer, failures in contract.items():
             new_failures.update(set(failures) - baseline[layer])
@@ -1226,8 +1414,7 @@ def _frozen_fixture_checks(rows):
     n_cases = 0
     for path in (INDEP, INDEP2, INDEP3):
         if os.path.exists(path):
-            with io.open(path, encoding="utf-8") as handle:
-                independent = json.load(handle)
+            independent, _ = read_strict_json(path)
             independent_failures.extend(
                 run_expectations(
                     independent["cases"], rows, os.path.basename(path)
@@ -1294,7 +1481,10 @@ def _generic_row_check():
 
 
 def build_report():
-    sidecars, coding_text, rows = load_current_inputs()
+    snapshot = _load_input_snapshot()
+    sidecars = snapshot["sidecars"]
+    coding_text = snapshot["coding_text"]
+    rows = snapshot["rows"]
     checks = []
 
     def add(check_id, description, ok, detail=""):
@@ -1307,7 +1497,18 @@ def build_report():
             }
         )
 
-    contract = validate_load_bearing_contract(rows, sidecars, coding_text)
+    taxonomy_failures = validate_taxonomy_v6(
+        snapshot["taxonomy_v5"], snapshot["taxonomy_v6"]
+    )
+    add(
+        "V0",
+        "taxonomy v6 exact delta over frozen taxonomy-v5 semantics",
+        not taxonomy_failures,
+        taxonomy_failures,
+    )
+    contract = validate_load_bearing_contract(
+        rows, sidecars, coding_text, EvidenceCache()
+    )
     add(
         "V1",
         "ordered structure -> row16/signal4/edge2 binding -> source contract",
@@ -1383,10 +1584,15 @@ def build_report():
     return {
         "artifact_id": "SF-IDENTITY-TAXONOMY-V6-TEST-2026-07-19-01",
         "inputs": {
-            "taxonomy": os.path.relpath(TAX, REPO).replace("\\", "/"),
-            "coding": os.path.relpath(CODING, REPO).replace("\\", "/"),
+            "taxonomy": snapshot["input_provenance"]["taxonomy"]["path"],
+            "coding": snapshot["input_provenance"]["coding"]["path"],
+            "adjudication": snapshot["input_provenance"]["adjudication"][
+                "path"
+            ],
             "sidecars": [name for name, _ in sidecars],
         },
+        "input_provenance": snapshot["input_provenance"],
+        "input_snapshot_sha256": snapshot["input_snapshot_sha256"],
         "platform": {"os": os.name, "python": sys.version.split()[0]},
         "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
         "checks": checks,
@@ -1417,26 +1623,78 @@ def write_report(report, output=Path(OUT)):
         prefix=f".{output.name}.", suffix=".tmp", dir=output.parent
     )
     staging = Path(staging_name)
+    descriptor_owned = True
     try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
+        handle = os.fdopen(descriptor, "wb")
+        descriptor_owned = False
+        with handle:
+            view = memoryview(payload)
+            offset = 0
+            while offset < len(view):
+                written = handle.write(view[offset:])
+                if written is None or written <= 0:
+                    raise OSError("staged report write made no progress")
+                offset += written
             handle.flush()
             os.fsync(handle.fileno())
         if staging.read_bytes() != payload:
             raise OSError("staged report bytes differ from deterministic payload")
         os.replace(staging, output)
     finally:
+        if descriptor_owned:
+            try:
+                os.close(descriptor)
+            except OSError:
+                pass
         try:
             staging.unlink()
         except FileNotFoundError:
             pass
 
 
-def main():
+def _failure_report(error):
+    return {
+        "artifact_id": "SF-IDENTITY-TAXONOMY-V6-TEST-2026-07-19-01",
+        "platform": {"os": os.name, "python": sys.version.split()[0]},
+        "checks": [
+            {
+                "id": "INPUT",
+                "check": "strict active input snapshot",
+                "result": "FAIL",
+                "detail": f"{type(error).__name__}: {error}",
+            }
+        ],
+        "summary": "0/1 PASS",
+        "verdict": "FAIL",
+        "failure": {
+            "type": type(error).__name__,
+            "message": str(error),
+        },
+    }
+
+
+def main(output=Path(OUT)):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    report = build_report()
-    write_report(report)
+    try:
+        report = build_report()
+    except Exception as error:
+        report = _failure_report(error)
+    write_report(report, output)
+    if report["verdict"] != "PASS" or "occupancy" not in report:
+        print(
+            json.dumps(
+                {
+                    "summary": report["summary"],
+                    "verdict": report["verdict"],
+                    "platform": report["platform"],
+                    "failure": report.get("failure"),
+                },
+                ensure_ascii=False,
+                indent=1,
+            )
+        )
+        return 1
     policy = report["occupancy"]["policy_A"]
     mechanism = policy[
         "strict_AND_reward_AND_pool_BY_selection_object(mechanism)"

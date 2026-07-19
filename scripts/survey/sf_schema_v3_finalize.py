@@ -6,13 +6,19 @@ from __future__ import annotations
 import argparse
 import copy
 import hashlib
-import json
 import sys
 from collections.abc import Mapping
 from pathlib import Path
 
 import sf_schema_v3_migrate as migration
+from sf_json_contract import JsonContractError, loads as strict_json_loads
 from sf_row_hash import row_hash
+from sf_schema_v3_release_contract import (
+    ADJUDICATION_RELATIVE_PATH,
+    ADJUDICATION_SHA256,
+    FINAL_SIDECAR_NAMES,
+    FINAL_SIDECAR_SHA256,
+)
 
 
 ARTIFACT_ID = "SF-SCHEMA-V3-ADJUDICATION-2026-07-19-01"
@@ -20,9 +26,8 @@ ARTIFACT_SCHEMA = "schema-v3-binding-delta-adjudication-v1"
 ADJUDICATOR = "/root/a6_adjudicator"
 SOURCE_HEAD = "418c738a721c69bcd827f8dadee8526e6dfbff87"
 FINAL_STATUS = "ADJUDICATED_AGREE"
-EXPECTED_ADJUDICATION_SHA256 = (
-    "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
-)
+EXPECTED_ADJUDICATION_SHA256 = ADJUDICATION_SHA256
+EXPECTED_FINAL_SIDECAR_SHA256 = FINAL_SIDECAR_SHA256
 EXPECTED_PENDING_SIDECAR_SHA256 = {
     "2026.findings-acl.1243.sidecar.json": (
         "fd1046f64d9595ddb6c1a51f5cc152493225aeaea38894a8b3d357730cc98352"
@@ -59,23 +64,9 @@ SUCCESS_LINE = (
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-ADJUDICATION_PATH = (
-    REPO_ROOT / "wiki" / "survey" / "current" / "data" /
-    "schema-v3-adjudication.json"
-)
+ADJUDICATION_PATH = REPO_ROOT.joinpath(*ADJUDICATION_RELATIVE_PATH.split("/"))
 OUTPUT_DIR = migration.OUTPUT_DIR
-EXPECTED_DESTINATION_NAMES = frozenset(
-    {
-        "2026.findings-acl.1243.sidecar.json",
-        "2026.findings-acl.1724.sidecar.json",
-        "2026.findings-acl.511.sidecar.json",
-        "2602.16485.sidecar.json",
-        "2604.16529.sidecar.json",
-        "2605.08083.sidecar.json",
-        "2606.01667.sidecar.json",
-        "2606.03054.sidecar.json",
-    }
-)
+EXPECTED_DESTINATION_NAMES = frozenset(FINAL_SIDECAR_NAMES)
 
 _TOP_LEVEL_KEYS = {
     "artifact_id",
@@ -512,19 +503,8 @@ def _validate_adjudication(artifact, outputs):
 
 def _parse_adjudication_bytes(raw_bytes, path):
     try:
-        text = raw_bytes.decode("utf-8")
-        artifact = json.loads(
-            text,
-            object_pairs_hook=migration._reject_duplicate_pairs,
-            parse_constant=migration._reject_json_constant,
-        )
-        migration._validate_loaded_json(artifact)
-        return artifact
-    except (
-        UnicodeDecodeError,
-        json.JSONDecodeError,
-        migration.MigrationError,
-    ) as error:
+        return strict_json_loads(raw_bytes, str(path))
+    except JsonContractError as error:
         raise FinalizationError(f"cannot read {path}: {error}") from error
 
 

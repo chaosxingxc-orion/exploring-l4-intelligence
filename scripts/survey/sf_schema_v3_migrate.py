@@ -7,7 +7,6 @@ import argparse
 import copy
 import hashlib
 import json
-import math
 import os
 import re
 import shutil
@@ -24,6 +23,7 @@ from sf_evidence_contract import (
     SIGNAL_REQUIRED_FIELDS,
     validate_bound_values,
 )
+from sf_json_contract import JsonContractError, loads as strict_json_loads
 
 
 ANCHOR_REPLACEMENTS = {
@@ -736,49 +736,12 @@ def _validate_policy_maps(method_ids):
         )
 
 
-def _reject_duplicate_pairs(pairs):
-    result = {}
-    for key, value in pairs:
-        if key in result:
-            raise MigrationError(f"duplicate key {key!r}")
-        result[key] = value
-    return result
-
-
-def _reject_json_constant(value):
-    raise MigrationError(f"non-finite JSON constant {value}")
-
-
-def _validate_loaded_json(value):
-    if isinstance(value, float) and not math.isfinite(value):
-        raise MigrationError("non-finite JSON number decoded from numeric token")
-    if isinstance(value, str) and any(
-        0xD800 <= ord(character) <= 0xDFFF for character in value
-    ):
-        raise MigrationError("unpaired surrogate code point in JSON string")
-    if isinstance(value, Mapping):
-        for key, child in value.items():
-            _validate_loaded_json(key)
-            _validate_loaded_json(child)
-    elif isinstance(value, list):
-        for child in value:
-            _validate_loaded_json(child)
-
-
 def _load_sidecar(path):
     try:
-        loaded = json.loads(
-            path.read_text(encoding="utf-8"),
-            object_pairs_hook=_reject_duplicate_pairs,
-            parse_constant=_reject_json_constant,
-        )
-        _validate_loaded_json(loaded)
-        return loaded
+        return strict_json_loads(path.read_bytes(), str(path))
     except (
         OSError,
-        UnicodeDecodeError,
-        json.JSONDecodeError,
-        MigrationError,
+        JsonContractError,
     ) as error:
         raise MigrationError(f"cannot read {path}: {error}") from error
 
