@@ -12,6 +12,7 @@ import json
 import re
 import subprocess
 import sys
+from itertools import chain
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote
 
@@ -63,6 +64,12 @@ AMENDMENT_RE = re.compile(r"(?:^|[-_.])amendment(?:[-_.]|$)", re.IGNORECASE)
 INLINE_LINK_RE = re.compile(
     r"(?<!!)\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+[^)]*)?\s*\)"
 )
+REFERENCE_DEFINITION_RE = re.compile(
+    r"^[ ]{0,3}\[((?:\\.|[^\[\]\n])+)\]:[ \t]*"
+    r"(?:<([^>\n]*)>|([^ \t\n]+))"
+    r"(?:[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\)\n]*\)))?[ \t]*$"
+)
+FENCE_OPEN_RE = re.compile(r"^[ ]{0,3}(?:(`{3,})[^`\n]*|(~{3,})[^\n]*)$")
 SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 CLIENT_NORMALIZATIONS = (
     ("# AGENTS.md", "# CLIENT-GUIDE.md"),
@@ -273,6 +280,48 @@ def _is_direct_audit_round_link(path: str) -> bool:
     if len(parts) < 4 or parts[:2] != ("wiki", "audit"):
         return False
     return not (len(parts) == 4 and parts[-1] == "INDEX.md")
+
+
+def _reference_definition_targets(text: str):
+    """Yield valid single-line Markdown reference-definition destinations.
+
+    Definitions are scanned even when no usage is present.  That conservative
+    choice prevents a later reference usage from silently activating a cold
+    audit dependency.  Footnote definitions and fenced/indented examples are
+    not Markdown link definitions for this policy and are ignored.
+    """
+
+    fence_character: str | None = None
+    fence_length = 0
+    for line in text.splitlines():
+        if fence_character is not None:
+            close = re.match(
+                rf"^[ ]{{0,3}}{re.escape(fence_character)}{{{fence_length},}}[ \t]*$",
+                line,
+            )
+            if close:
+                fence_character = None
+                fence_length = 0
+            continue
+        opener = FENCE_OPEN_RE.match(line)
+        if opener:
+            marker = opener.group(1) or opener.group(2)
+            fence_character = marker[0]
+            fence_length = len(marker)
+            continue
+        if line.startswith(("    ", "\t")):
+            continue
+        definition = REFERENCE_DEFINITION_RE.match(line)
+        if not definition:
+            continue
+        raw_label = definition.group(1)
+        if not raw_label.strip() or raw_label.startswith("^"):
+            continue
+        yield (
+            definition.group(2)
+            if definition.group(2) is not None
+            else definition.group(3)
+        )
 
 
 def _validate_manifest_shape(manifest: object, failures: list[str]):
@@ -504,8 +553,11 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         except UnicodeDecodeError as exc:
             failures.append(_failure("active-file-invalid-utf8", f"{path}: {exc}"))
             continue
-        for match in INLINE_LINK_RE.finditer(text):
-            raw_target = match.group(1) or match.group(2)
+        inline_targets = (
+            match.group(1) or match.group(2) for match in INLINE_LINK_RE.finditer(text)
+        )
+        reference_targets = _reference_definition_targets(text)
+        for raw_target in chain(inline_targets, reference_targets):
             try:
                 target = _normalize_link_target(path, raw_target)
             except ContextSurfaceError as exc:

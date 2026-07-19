@@ -462,6 +462,106 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assert_failure(failures, "direct-audit-round-link")
 
+    def test_reference_style_audit_round_link_is_rejected_case_insensitively(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"See [review][R].\n\n"
+            b"[r]: wiki/audit/campaign/round-1/review.md\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assert_failure(failures, "direct-audit-round-link")
+
+    def test_unused_reference_definition_is_scanned_fail_closed(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = b"[future review]: <wiki/audit/campaign/round-1/review.md>\n"
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assert_failure(failures, "direct-audit-round-link")
+
+    def test_collapsed_reference_to_campaign_index_passes(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"See [audit index][].\n\n"
+            b"[audit index]: <wiki/audit/campaign/INDEX.md#round-12>\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual([], failures)
+
+    def test_reference_to_exact_active_review_transaction_passes(self) -> None:
+        relative_path = "wiki/survey/current/status.md"
+        active_review = "wiki/audit/campaign/round-12/correction.md"
+        raw = (
+            b"See [correction][ROUND].\n\n"
+            b"[round]: <../../audit/campaign/round-12/correction.md#result>\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest(
+                [self.active_entry(relative_path, raw, "CURRENT")],
+                active_review=active_review,
+            ),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual([], failures)
+
+    def test_percent_encoded_reference_destination_cannot_bypass_routing(self) -> None:
+        relative_path = "wiki/survey/current/status.md"
+        raw = (
+            b"See [review][r].\n\n"
+            b"[r]: ..%2F..%2Faudit%2Fcampaign%2Fround-1%2Freview.md\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "CURRENT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assert_failure(failures, "direct-audit-round-link")
+
+    def test_footnote_and_fenced_reference_examples_are_not_links(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"A note.[^1]\n\n"
+            b"[^1]: wiki/audit/campaign/round-1/review.md\n\n"
+            b"```markdown\n"
+            b"[example]: wiki/audit/campaign/round-1/review.md\n"
+            b"```\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual([], failures)
+
     def test_review_name_cannot_escape_with_case_or_percent_encoding(self) -> None:
         paths = [
             "wiki/New-Doctoral-REVIEW.md",
