@@ -9,12 +9,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import stat
 import subprocess
 import sys
-from itertools import chain
 from pathlib import Path, PurePosixPath
-from urllib.parse import unquote
+from urllib.parse import unquote, urlsplit
 
 
 MANIFEST_RELATIVE_PATH = "docs/integrity/ai-context-manifest.json"
@@ -29,13 +30,14 @@ MANIFEST_KEYS = {
 ENTRY_KEYS = {"path", "class", "load_policy", "purpose", "sha256"}
 SELF_ENTRY_KEYS = ENTRY_KEYS - {"sha256"}
 LEGACY_KEYS = {"path", "class"}
-LEGACY_CLASSES = {"AUDIT_LEGACY", "REGISTRY_LEGACY"}
+LEGACY_CLASSES = {"AUDIT_LEGACY", "REGISTRY_LEGACY", "PENDING_ARCHIVE"}
 COLD_ACTIVE_CLASSES = {
     "AUDIT",
     "ARCHIVE",
     "WORKBENCH",
     "AUDIT_LEGACY",
     "REGISTRY_LEGACY",
+    "PENDING_ARCHIVE",
 }
 HOT_FILES = frozenset(
     {
@@ -43,11 +45,23 @@ HOT_FILES = frozenset(
         "CLAUDE.md",
         "CONTRIBUTING.md",
         MANIFEST_RELATIVE_PATH,
+        "wiki/Architecture.md",
         "wiki/AI-Collaboration.md",
+        "wiki/Data-and-Assets.md",
+        "wiki/Decision-Log.md",
+        "wiki/Environment-and-Setup.md",
+        "wiki/Home.md",
+        "wiki/Inference-Engine-Choice.md",
+        "wiki/Information-Boundary-Guard.md",
+        "wiki/Onboarding.md",
         "wiki/Per-Work-Status.md",
         "wiki/Project-Thesis.md",
+        "wiki/README.md",
         "wiki/Research-Methodology.md",
         "wiki/Research-Objective.md",
+        "wiki/Working-Mode.md",
+        "wiki/_Footer.md",
+        "wiki/_Sidebar.md",
         "wiki/audit/system-first-stage1a/INDEX.md",
         "wiki/survey/2026-07-15-sf-queries.jsonl",
         "wiki/survey/README.md",
@@ -56,13 +70,29 @@ HOT_FILES = frozenset(
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
     }
 )
+PENDING_ARCHIVE_PATHS = frozenset(
+    {
+        "wiki/survey/2026-07-18-sf-protocol-amendment-9.md",
+        "wiki/survey/2026-07-18-sf-protocol-amendment-10.md",
+        "wiki/survey/2026-07-18-sf-protocol-amendment-11.md",
+        "wiki/survey/2026-07-18-sf-protocol-amendment-12.md",
+        "wiki/survey/2026-07-19-sf-protocol-amendment-13.md",
+        "wiki/survey/2026-07-19-sf-protocol-amendment-14.md",
+        "wiki/survey/2026-07-19-sf-protocol-amendment-15.md",
+    }
+)
 AUDIT_NAME_RE = re.compile(
-    r"(?:^|[-_.])(?:(?:re)?review(?:er)?|response|proposal|amendment)(?:[-_.]|$)",
+    r"(?:^|[-_.])(?:reviewer[-_.](?:submission|report)|submission|report|"
+    r"(?:re)?review(?:er)?|response|correction|sign(?:[-_.]?off)|adjudication|"
+    r"release[-_.]decision|proposal|amendment)(?:[-_.]|$)",
     re.IGNORECASE,
 )
 AMENDMENT_RE = re.compile(r"(?:^|[-_.])amendment(?:[-_.]|$)", re.IGNORECASE)
+AMENDMENT_NUMBER_RE = re.compile(
+    r"(?:^|[-_.])amendment[-_.]?(\d+)(?:[-_.]|$)", re.IGNORECASE
+)
 INLINE_LINK_RE = re.compile(
-    r"(?<!!)\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+[^)]*)?\s*\)"
+    r"!?\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+[^)]*)?\s*\)"
 )
 REFERENCE_DEFINITION_RE = re.compile(
     r"^[ ]{0,3}\[((?:\\.|[^\[\]\n])+)\]:[ \t]*"
@@ -77,6 +107,22 @@ REFERENCE_DESTINATION_RE = re.compile(
     r"(?:[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\)\n]*\)))?[ \t]*$"
 )
 FENCE_OPEN_RE = re.compile(r"^[ ]{0,3}(?:(`{3,})[^`\n]*|(~{3,})[^\n]*)$")
+HTML_TAG_RE = re.compile(r"<[A-Za-z][^<>\n]*>")
+HTML_ATTRIBUTE_RE = re.compile(
+    r"\b(?:href|src)[ \t]*=[ \t]*(?:\"([^\"\n]*)\"|'([^'\n]*)'|([^\s\"'=<>`]+))",
+    re.IGNORECASE,
+)
+HTML_COMMENT_RE = re.compile(r"<!--[\s\S]*?(?:-->|\Z)")
+HTML_CODE_BLOCK_RE = re.compile(
+    r"<(pre|code)\b[^>]*>[\s\S]*?(?:</\1[ \t]*>|\Z)", re.IGNORECASE
+)
+RAW_AUDIT_URL_RE = re.compile(
+    r"(?<![A-Za-z0-9_])(?:https?://[^\s<>\[\]{}\"']+|"
+    r"//[^\s<>\[\]{}\"']+|/wiki/audit/[^\s<>\[\]{}\"']+)",
+    re.IGNORECASE,
+)
+LIST_MARKER_RE = re.compile(r"^[ ]{0,3}(?:[-+*]|\d+[.)])[ \t]+")
+RESIDUAL_PERCENT_ENCODING_RE = re.compile(r"%[0-9A-Fa-f]{2}")
 SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 CLIENT_NORMALIZATIONS = (
     ("# AGENTS.md", "# CLIENT-GUIDE.md"),
@@ -104,6 +150,88 @@ CLIENT_NORMALIZATIONS = (
 
 class ContextSurfaceError(ValueError):
     """Controlled policy/schema error."""
+
+
+class TrustedRepoReader:
+    """Read regular repository files without following in-tree symlinks."""
+
+    def __init__(self, repo):
+        try:
+            self.root = Path(repo).resolve(strict=True)
+        except OSError as exc:
+            raise ContextSurfaceError(_failure("repo-root-invalid", str(exc))) from exc
+        if not self.root.is_dir():
+            raise ContextSurfaceError(
+                _failure("repo-root-invalid", f"not a directory: {self.root}")
+            )
+
+    @staticmethod
+    def _identity(metadata):
+        return (metadata.st_dev, metadata.st_ino, stat.S_IFMT(metadata.st_mode))
+
+    def read_bytes(self, relative_path: str) -> bytes:
+        path = _canonical_path(relative_path, "repository read path")
+        candidate = self.root.joinpath(*PurePosixPath(path).parts)
+        component_metadata = []
+        current = self.root
+        try:
+            for part in PurePosixPath(path).parts:
+                current = current / part
+                metadata = os.lstat(current)
+                if stat.S_ISLNK(metadata.st_mode):
+                    raise ContextSurfaceError(
+                        _failure("untrusted-repo-path", f"{path}: symlink component {part}")
+                    )
+                component_metadata.append((current, metadata))
+            resolved = candidate.resolve(strict=True)
+            try:
+                resolved.relative_to(self.root)
+            except ValueError as exc:
+                raise ContextSurfaceError(
+                    _failure("untrusted-repo-path", f"{path}: resolves outside repository")
+                ) from exc
+            flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+            descriptor = os.open(candidate, flags)
+            try:
+                before = os.fstat(descriptor)
+                if not stat.S_ISREG(before.st_mode):
+                    raise ContextSurfaceError(
+                        _failure("untrusted-repo-path", f"{path}: not a regular file")
+                    )
+                with os.fdopen(descriptor, "rb", closefd=False) as stream:
+                    raw = stream.read()
+                after = os.fstat(descriptor)
+            finally:
+                os.close(descriptor)
+            if (
+                self._identity(before) != self._identity(after)
+                or before.st_size != after.st_size
+                or getattr(before, "st_mtime_ns", None) != getattr(after, "st_mtime_ns", None)
+            ):
+                raise ContextSurfaceError(
+                    _failure("repo-read-raced", f"{path}: file changed while being read")
+                )
+            for component, original in component_metadata:
+                current_metadata = os.lstat(component)
+                if stat.S_ISLNK(current_metadata.st_mode) or self._identity(
+                    original
+                ) != self._identity(current_metadata):
+                    raise ContextSurfaceError(
+                        _failure("repo-read-raced", f"{path}: path changed while being read")
+                    )
+            if len(raw) != after.st_size:
+                raise ContextSurfaceError(
+                    _failure("repo-read-raced", f"{path}: short or expanding read")
+                )
+            return raw
+        except ContextSurfaceError:
+            raise
+        except FileNotFoundError as exc:
+            raise ContextSurfaceError(_failure("repo-path-missing", path)) from exc
+        except OSError as exc:
+            raise ContextSurfaceError(
+                _failure("repo-read-failed", f"{path}: {exc}")
+            ) from exc
 
 
 def _failure(code: str, detail: str) -> str:
@@ -155,6 +283,14 @@ def _legacy_map(legacy_cold_paths: object) -> dict[str, str]:
                     f"legacy_cold_paths[{index}].class is invalid: {path_class!r}",
                 )
             )
+        expected_class = _expected_legacy_class(path)
+        if path_class != expected_class:
+            raise ContextSurfaceError(
+                _failure(
+                    "legacy-class-mismatch",
+                    f"{path}: declared {path_class!r}, expected {expected_class!r}",
+                )
+            )
         if path in result:
             raise ContextSurfaceError(_failure("duplicate-path", f"legacy path {path}"))
         result[path] = path_class
@@ -183,6 +319,15 @@ def classify_path(path, legacy_cold_paths):
     if canonical in legacy:
         return legacy[canonical]
     return "UNCLASSIFIED"
+
+
+def _expected_legacy_class(path: str) -> str:
+    if path in PENDING_ARCHIVE_PATHS:
+        return "PENDING_ARCHIVE"
+    basename = PurePosixPath(path).name
+    if path.lower().endswith(".md") and AUDIT_NAME_RE.search(basename):
+        return "AUDIT_LEGACY"
+    return "REGISTRY_LEGACY"
 
 
 def normalize_agent_guide(text):
@@ -220,11 +365,7 @@ def _reject_nonfinite(value: str):
     raise ContextSurfaceError(_failure("manifest-json-invalid", f"non-finite number {value}"))
 
 
-def load_json_strict(path: Path):
-    try:
-        raw = path.read_bytes()
-    except OSError as exc:
-        raise ContextSurfaceError(_failure("manifest-missing", f"{path}: {exc}")) from exc
+def loads_json_strict(raw: bytes, label: str = "JSON"):
     try:
         text = raw.decode("utf-8")
     except UnicodeDecodeError as exc:
@@ -243,17 +384,54 @@ def load_json_strict(path: Path):
         raise ContextSurfaceError(_failure("manifest-json-invalid", str(exc))) from exc
 
 
+def load_json_strict(path: Path):
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        raise ContextSurfaceError(_failure("manifest-missing", f"{path}: {exc}")) from exc
+    return loads_json_strict(raw, str(path))
+
+
 def _join_repo(repo: Path, relative_path: str) -> Path:
     return repo.joinpath(*PurePosixPath(relative_path).parts)
 
 
 def _normalize_link_target(source_path: str, raw_target: str) -> str | None:
-    target = unquote(raw_target).strip()
+    target = raw_target.strip()
+    for _ in range(5):
+        try:
+            decoded = unquote(target, errors="strict")
+        except UnicodeDecodeError as exc:
+            raise ContextSurfaceError(
+                _failure(
+                    "invalid-link-path",
+                    f"invalid percent encoding: {source_path} -> {raw_target}",
+                )
+            ) from exc
+        if decoded == target:
+            break
+        target = decoded
+    if RESIDUAL_PERCENT_ENCODING_RE.search(target):
+        raise ContextSurfaceError(
+            _failure("invalid-link-path", f"residual encoding: {source_path} -> {raw_target}")
+        )
     if not target or target.startswith("#"):
         return None
-    if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", target) or target.startswith("//"):
+    absolute_url = False
+    if target.startswith("//"):
+        absolute_url = True
+        target = urlsplit(f"https:{target}").path
+    elif re.match(r"^https?://", target, re.IGNORECASE):
+        absolute_url = True
+        target = urlsplit(target).path
+    elif re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", target):
         return None
-    target = target.split("#", 1)[0].split("?", 1)[0]
+    else:
+        target = target.split("#", 1)[0].split("?", 1)[0]
+    if target.startswith("/wiki/"):
+        target = target[1:]
+    elif absolute_url:
+        return None
     if not target:
         return None
     if "\\" in target or target.startswith("/") or re.match(r"^[A-Za-z]:", target):
@@ -343,11 +521,12 @@ def _mask_inline_code_spans(text: str) -> str:
 
 
 def _mask_markdown_code(text: str) -> str:
-    """Mask block and inline Markdown code while preserving line structure."""
+    """Mask Markdown/HTML code and comments while preserving line structure."""
 
     masked_lines: list[str] = []
     fence_character: str | None = None
     fence_length = 0
+    in_list = False
     for line in text.splitlines(keepends=True):
         content = line.rstrip("\r\n")
         if fence_character is not None:
@@ -367,11 +546,55 @@ def _mask_markdown_code(text: str) -> str:
             fence_length = len(marker)
             masked_lines.append(_blank_except_newlines(line))
             continue
-        if re.match(r"^(?: {4}| {0,3}\t)", content):
-            masked_lines.append(_blank_except_newlines(line))
+        if LIST_MARKER_RE.match(content):
+            in_list = True
+            masked_lines.append(line)
             continue
+        if re.match(r"^(?: {4}| {0,3}\t)", content):
+            spaces = len(content) - len(content.lstrip(" "))
+            if in_list and 4 <= spaces < 8 and not content.startswith("\t"):
+                masked_lines.append(line)
+            else:
+                masked_lines.append(_blank_except_newlines(line))
+            continue
+        if content.strip():
+            in_list = False
         masked_lines.append(line)
-    return _mask_inline_code_spans("".join(masked_lines))
+    masked = "".join(masked_lines)
+    masked = HTML_COMMENT_RE.sub(lambda match: _blank_except_newlines(match.group()), masked)
+    masked = HTML_CODE_BLOCK_RE.sub(
+        lambda match: _blank_except_newlines(match.group()), masked
+    )
+    return _mask_inline_code_spans(masked)
+
+
+def _mask_spans(text: str, spans) -> str:
+    characters = list(text)
+    for start, end in spans:
+        for index in range(start, end):
+            if characters[index] not in "\r\n":
+                characters[index] = " "
+    return "".join(characters)
+
+
+def _link_targets(text: str):
+    """Yield Markdown, finite HTML-attribute, and standalone URL destinations."""
+
+    masked_spans: list[tuple[int, int]] = []
+    for match in INLINE_LINK_RE.finditer(text):
+        masked_spans.append(match.span())
+        yield match.group(1) or match.group(2)
+
+    yield from _reference_definition_targets(text)
+
+    for tag in HTML_TAG_RE.finditer(text):
+        masked_spans.append(tag.span())
+        for attribute in HTML_ATTRIBUTE_RE.finditer(tag.group()):
+            yield attribute.group(1) or attribute.group(2) or attribute.group(3)
+
+    raw_scan = _mask_spans(text, masked_spans)
+    for match in RAW_AUDIT_URL_RE.finditer(raw_scan):
+        yield match.group().rstrip(".,;:!?")
 
 
 def _reference_definition_targets(text: str):
@@ -446,8 +669,11 @@ def _validate_manifest_shape(manifest: object, failures: list[str]):
 def evaluate_manifest(repo, manifest, tracked_paths):
     """Evaluate a parsed manifest against an explicit tracked-path inventory."""
 
-    repo = Path(repo)
     failures: list[str] = []
+    try:
+        reader = TrustedRepoReader(repo)
+    except ContextSurfaceError as exc:
+        return [str(exc)]
     _, active, budgets, legacy_entries, active_review = _validate_manifest_shape(manifest, failures)
 
     try:
@@ -456,22 +682,6 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         failures.append(str(exc))
         legacy = {}
         legacy_entries = []
-
-    canonical_review: str | None = None
-    if active_review is not None:
-        try:
-            canonical_review = _canonical_path(active_review, "active_review_transaction")
-            if not canonical_review.startswith(
-                "wiki/audit/"
-            ) or canonical_review.endswith("/INDEX.md"):
-                failures.append(
-                    _failure(
-                        "manifest-schema-invalid",
-                        "active_review_transaction must be one exact audit-round artifact",
-                    )
-                )
-        except ContextSurfaceError as exc:
-            failures.append(str(exc))
 
     canonical_tracked: list[str] = []
     tracked_seen: set[str] = set()
@@ -491,6 +701,48 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             continue
         tracked_seen.add(canonical)
         canonical_tracked.append(canonical)
+
+    raw_cache: dict[str, bytes] = {}
+
+    def read_repo_path(path: str, missing_code: str):
+        if path in raw_cache:
+            return raw_cache[path]
+        try:
+            raw = reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            if str(exc).startswith("repo-path-missing:"):
+                failures.append(_failure(missing_code, path))
+            else:
+                failures.append(str(exc))
+            return None
+        raw_cache[path] = raw
+        return raw
+
+    for path in legacy:
+        if path not in tracked_seen:
+            failures.append(_failure("legacy-path-untracked", path))
+        read_repo_path(path, "legacy-path-missing")
+
+    canonical_review: str | None = None
+    if active_review is not None:
+        try:
+            canonical_review = _canonical_path(active_review, "active_review_transaction")
+            if not canonical_review.startswith(
+                "wiki/audit/"
+            ) or canonical_review.endswith("/INDEX.md"):
+                failures.append(
+                    _failure(
+                        "manifest-schema-invalid",
+                        "active_review_transaction must be one exact audit-round artifact",
+                    )
+                )
+            if canonical_review not in tracked_seen:
+                failures.append(
+                    _failure("active-review-transaction-untracked", canonical_review)
+                )
+            read_repo_path(canonical_review, "active-review-transaction-missing")
+        except ContextSurfaceError as exc:
+            failures.append(str(exc))
 
     if len(active) > 30:
         failures.append(
@@ -523,6 +775,10 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             failures.append(_failure("duplicate-path", f"active path {path}"))
             continue
         active_seen.add(path)
+        if path in legacy:
+            failures.append(_failure("active-legacy-overlap", path))
+        if path not in tracked_seen:
+            failures.append(_failure("active-path-untracked", path))
         try:
             actual_class = classify_path(path, legacy_entries)
         except ContextSurfaceError as exc:
@@ -558,14 +814,8 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         sha256 = entry.get("sha256")
         if not is_self and (not isinstance(sha256, str) or SHA256_RE.fullmatch(sha256) is None):
             failures.append(_failure("manifest-entry-invalid", f"{path}: invalid sha256"))
-        disk_path = _join_repo(repo, path)
-        if not disk_path.is_file():
-            failures.append(_failure("active-path-missing", path))
-            continue
-        try:
-            raw = disk_path.read_bytes()
-        except OSError as exc:
-            failures.append(_failure("active-path-missing", f"{path}: {exc}"))
+        raw = read_repo_path(path, "active-path-missing")
+        if raw is None:
             continue
         if not is_self and isinstance(sha256, str) and SHA256_RE.fullmatch(sha256):
             actual_hash = hashlib.sha256(raw).hexdigest()
@@ -585,6 +835,8 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             failures.append(_failure("duplicate-path", f"budget path {path}"))
             continue
         budget_seen.add(path)
+        if path not in tracked_seen:
+            failures.append(_failure("budget-path-untracked", path))
         if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
             failures.append(
                 _failure(
@@ -593,17 +845,11 @@ def evaluate_manifest(repo, manifest, tracked_paths):
                 )
             )
             continue
-        disk_path = _join_repo(repo, path)
-        if disk_path.is_file():
-            try:
-                actual_size = len(disk_path.read_bytes())
-            except OSError as exc:
-                failures.append(_failure("active-path-missing", f"{path}: {exc}"))
-                continue
-            if actual_size > limit:
-                failures.append(
-                    _failure("file-budget-exceeded", f"{path}: {actual_size} > {limit} raw bytes")
-                )
+        raw = read_repo_path(path, "budget-path-missing")
+        if raw is not None and len(raw) > limit:
+            failures.append(
+                _failure("file-budget-exceeded", f"{path}: {len(raw)} > {limit} raw bytes")
+            )
 
     for path in canonical_tracked:
         path_class = (
@@ -613,6 +859,11 @@ def evaluate_manifest(repo, manifest, tracked_paths):
         )
         basename = PurePosixPath(path).name
         is_legacy = path in legacy
+        if (
+            (path.startswith("wiki/") and path.lower().endswith(".md"))
+            or path in {"AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md"}
+        ) and path_class == "UNCLASSIFIED":
+            failures.append(_failure("unclassified-persistent-document", path))
         if (
             path.startswith("wiki/")
             and path.lower().endswith(".md")
@@ -625,27 +876,24 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             path.startswith("wiki/")
             and path.lower().endswith(".md")
             and AMENDMENT_RE.search(basename)
-            and not path.startswith("wiki/archive/")
+            and not path.startswith(("wiki/audit/", "wiki/archive/"))
             and not is_legacy
         ):
-            failures.append(_failure("unconsolidated-amendment-forbidden", path))
+            numbered = AMENDMENT_NUMBER_RE.search(basename)
+            if numbered and int(numbered.group(1)) >= 4:
+                failures.append(_failure("unconsolidated-amendment-forbidden", path))
         if path_class not in {"HOT", "CURRENT"} or not path.lower().endswith(".md"):
             continue
-        disk_path = _join_repo(repo, path)
-        if not disk_path.is_file():
+        raw = read_repo_path(path, "persistent-path-missing")
+        if raw is None:
             continue
         try:
-            text = disk_path.read_bytes().decode("utf-8")
+            text = raw.decode("utf-8")
         except UnicodeDecodeError as exc:
             failures.append(_failure("active-file-invalid-utf8", f"{path}: {exc}"))
             continue
         link_text = _mask_markdown_code(text)
-        inline_targets = (
-            match.group(1) or match.group(2)
-            for match in INLINE_LINK_RE.finditer(link_text)
-        )
-        reference_targets = _reference_definition_targets(link_text)
-        for raw_target in chain(inline_targets, reference_targets):
+        for raw_target in _link_targets(link_text):
             try:
                 target = _normalize_link_target(path, raw_target)
             except ContextSurfaceError as exc:
@@ -661,8 +909,12 @@ def evaluate_manifest(repo, manifest, tracked_paths):
     guide_paths = {"AGENTS.md", "CLAUDE.md"}
     if guide_paths.issubset(tracked_seen):
         try:
-            agents = _join_repo(repo, "AGENTS.md").read_bytes().decode("utf-8")
-            claude = _join_repo(repo, "CLAUDE.md").read_bytes().decode("utf-8")
+            agents_raw = read_repo_path("AGENTS.md", "agent-guide-missing")
+            claude_raw = read_repo_path("CLAUDE.md", "agent-guide-missing")
+            if agents_raw is None or claude_raw is None:
+                return failures
+            agents = agents_raw.decode("utf-8")
+            claude = claude_raw.decode("utf-8")
             if normalize_agent_guide(agents) != normalize_agent_guide(claude):
                 failures.append(
                     _failure(
@@ -670,20 +922,23 @@ def evaluate_manifest(repo, manifest, tracked_paths):
                         "shared guidance differs beyond 3 client lines",
                     )
                 )
-        except (OSError, UnicodeDecodeError) as exc:
+        except UnicodeDecodeError as exc:
             failures.append(_failure("agent-guides-not-mirrored", str(exc)))
 
     return failures
 
 
 def _git_tracked_paths(repo: Path) -> list[str]:
-    completed = subprocess.run(
-        ["git", "ls-files", "-z"],
-        cwd=repo,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=repo,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+    except OSError as exc:
+        raise ContextSurfaceError(_failure("git-ls-files-failed", str(exc))) from exc
     if completed.returncode != 0:
         detail = completed.stderr.decode("utf-8", errors="replace").strip()
         raise ContextSurfaceError(_failure("git-ls-files-failed", detail))
@@ -698,8 +953,12 @@ def _git_tracked_paths(repo: Path) -> list[str]:
 def main() -> int:
     repo = Path(__file__).resolve().parents[2]
     try:
-        document = load_json_strict(_join_repo(repo, MANIFEST_RELATIVE_PATH))
-        failures = evaluate_manifest(repo, document, _git_tracked_paths(repo))
+        tracked = _git_tracked_paths(repo)
+        document = loads_json_strict(
+            TrustedRepoReader(repo).read_bytes(MANIFEST_RELATIVE_PATH),
+            MANIFEST_RELATIVE_PATH,
+        )
+        failures = evaluate_manifest(repo, document, tracked)
     except ContextSurfaceError as exc:
         failures = [str(exc)]
     for failure in failures:

@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 import tempfile
 from pathlib import Path, PurePosixPath
@@ -19,15 +20,16 @@ from pathlib import Path, PurePosixPath
 from ai_context_surface_check import (
     MANIFEST_RELATIVE_PATH,
     MANIFEST_SCHEMA,
+    PENDING_ARCHIVE_PATHS,
     ContextSurfaceError,
+    TrustedRepoReader,
     classify_path,
-    load_json_strict,
+    loads_json_strict,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = REPO_ROOT / MANIFEST_RELATIVE_PATH
-AUDIT_REGISTRY_PATH = REPO_ROOT / "wiki/survey/sf-audit-artifact-registry.json"
 ACTIVE_REVIEW_TRANSACTION = (
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
 )
@@ -197,6 +199,101 @@ RETAINED_LEGACY_PATHS = (
     ),
 )
 
+
+_PREEXISTING_AUDIT_DOC_PATHS = (
+    "wiki/2026-07-11-overnight-remediation-report.md",
+    "wiki/2026-07-13-precheck-provenance-correction.md",
+    "wiki/2026-07-15-s0-program-identity-signoff.md",
+    "wiki/survey/2026-07-14-canonical-census-v2/census_report_v2.md",
+    "wiki/survey/2026-07-14-canonical-census/census_report.md",
+    "wiki/survey/2026-07-14-claim-ledger-v1/ledger_report.md",
+    "wiki/survey/2026-07-14-claim-ledger-v2/ledger_v2_report.md",
+    "wiki/survey/2026-07-15-sf-seed-manifest-report.md",
+)
+
+_PREEXISTING_REGISTRY_DOC_PATHS = (
+    "wiki/2026-06-23-omni-embed-speech-disentanglement-1.2.1.md",
+    "wiki/2026-07-03-omni-agentic-tfrl-go-no-go-decision.md",
+    "wiki/2026-07-04-stage1-problem-definition.md",
+    "wiki/2026-07-04-stage1-semantic-tfrl-survey.md",
+    "wiki/2026-07-11-group-split-statistics-design.md",
+    "wiki/2026-07-11-survey-full-verification.md",
+    "wiki/2026-07-12-omni-hotword-biasing-survey.md",
+    "wiki/2026-07-12-omni-lm-rescoring-survey.md",
+    "wiki/2026-07-12-retrieve-discover-use-analysis.md",
+    "wiki/2026-07-14-1b-probe-protocol-v1.md",
+    "wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md",
+    "wiki/2026-07-14-identity-contracts-v1.md",
+    "wiki/2026-07-14-resp04-gate-a-execution.md",
+    "wiki/2026-07-14-round2-search-protocol-v1.md",
+    "wiki/2026-07-14-stage1c-decision-package.md",
+    "wiki/2026-07-15-replayability-template-token-overlay.md",
+    "wiki/2026-07-18-inherited-prior-exposure-union.md",
+    "wiki/Omni-Embed-Model-Dossier.md",
+    "wiki/Paralinguistic-Suppression-Survey.md",
+    "wiki/Speech-Semantic-Task-Datasets.md",
+    "wiki/Theory-Convergence-and-Constraints.md",
+    "wiki/W4-Research-Plan.md",
+    "wiki/W4-Training-Free-RL-Feasibility.md",
+    "wiki/survey/2026-07-04-stage1-3w-crossdomain-comparisons.md",
+    "wiki/survey/2026-07-04-stage1-L1-asr-st.md",
+    "wiki/survey/2026-07-04-stage1-L2-slu.md",
+    "wiki/survey/2026-07-04-stage1-L3-sqa-reasoning.md",
+    "wiki/survey/2026-07-04-stage1-L4-speech-agentic.md",
+    "wiki/survey/2026-07-04-stage1-X1-prompt-space-quantification.md",
+    "wiki/survey/2026-07-04-stage1-X2-paralinguistic-delta.md",
+    "wiki/survey/2026-07-04-stage1-X3-llm-vlm-testtime-map.md",
+    "wiki/survey/2026-07-07-multimodal-knowledge-systems-alignment.md",
+    "wiki/survey/2026-07-08-speech2vec-dims-1-4.md",
+    "wiki/survey/2026-07-08-speech2vec-dims-5-8.md",
+    "wiki/survey/2026-07-09-datasets-lock-first14.md",
+    "wiki/survey/2026-07-09-datasets-lock-second14.md",
+    "wiki/survey/2026-07-09-embedder-selection-matrix-full.md",
+    "wiki/survey/2026-07-09-theory-scheme-coverage-appendix.md",
+    "wiki/survey/2026-07-09-verifier-backbones-beyond-local.md",
+    "wiki/survey/2026-07-14-coverage-and-kill-matrix-v2.md",
+    "wiki/survey/2026-07-14-neighbor-matrix-v2.md",
+    "wiki/survey/2026-07-14-sota-cards-v2.md",
+    "wiki/survey/2026-07-15-gate-s1-own-library-sweep.md",
+    "wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md",
+    "wiki/survey/2026-07-15-sf-blank-templates.md",
+    "wiki/survey/2026-07-15-sf-secondary-routes.md",
+    "wiki/survey/2026-07-16-sf-t1-proceedings-routes.md",
+    "wiki/survey/2026-07-18-sf-heldout-l12-prereg-c4c.md",
+    "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md",
+    "wiki/survey/2026-07-18-sf-p0r9-seven-papers-dfs.md",
+    "wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md",
+    "wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md",
+    "wiki/survey/2026-07-19-sf-bibliography-v1.md",
+    "wiki/survey/replay/SURVEY-RESP-2026-07-14-01/README.md",
+)
+
+# Fixed inventory only: no filesystem scan contributes paths to this tuple.
+EXACT_PREEXISTING_LEGACY_DOCS = tuple(
+    {
+        "path": path,
+        "class": "AUDIT_LEGACY",
+        "reason": "pre-routing dated audit/report document retained cold at its tracked path",
+    }
+    for path in _PREEXISTING_AUDIT_DOC_PATHS
+) + tuple(
+    {
+        "path": path,
+        "class": "REGISTRY_LEGACY",
+        "reason": "pre-routing research/survey document retained cold pending lifecycle cleanup",
+    }
+    for path in _PREEXISTING_REGISTRY_DOC_PATHS
+)
+
+PENDING_ARCHIVE_LEGACY_DOCS = tuple(
+    {
+        "path": path,
+        "class": "PENDING_ARCHIVE",
+        "reason": "Task 6 exact amendment move candidate; remove after byte-preserving archive move",
+    }
+    for path in sorted(PENDING_ARCHIVE_PATHS)
+)
+
 BLOB_RE = re.compile(r"[0-9a-f]{40}\Z")
 DEFAULT_PATHS = {
     "AGENTS.md",
@@ -224,13 +321,19 @@ def _canonical_path(value, label: str) -> str:
     return value
 
 
-def _repo_file(repo: Path, path: str) -> Path:
-    return repo.joinpath(*PurePosixPath(path).parts)
+AUDIT_REGISTRY_RELATIVE_PATH = "wiki/survey/sf-audit-artifact-registry.json"
 
 
-def _load_audit_inventory(registry_path: Path) -> list[dict[str, str]]:
+def _load_audit_inventory(
+    reader: TrustedRepoReader,
+    registry_path: str,
+    tracked_paths: set[str],
+    blob_inventory: dict[str, str],
+) -> list[dict[str, str]]:
+    if registry_path not in tracked_paths:
+        _fail("audit-registry-untracked", registry_path)
     try:
-        registry = load_json_strict(registry_path)
+        registry = loads_json_strict(reader.read_bytes(registry_path), registry_path)
     except ContextSurfaceError as exc:
         _fail("audit-registry-invalid", str(exc))
     if not isinstance(registry, dict) or not isinstance(registry.get("artifacts"), list):
@@ -252,12 +355,23 @@ def _load_audit_inventory(registry_path: Path) -> list[dict[str, str]]:
             _fail("audit-registry-entry", f"artifacts[{index}].git_blob is not a Git blob id")
         if path in seen:
             _fail("duplicate-path", f"audit registry path {path}")
+        if path not in tracked_paths:
+            _fail("audit-registry-path-untracked", path)
+        try:
+            reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            _fail("audit-registry-path-invalid", str(exc))
+        if blob_inventory.get(path) != blob:
+            _fail(
+                "audit-registry-blob-mismatch",
+                f"{path}: inventory {blob_inventory.get(path)!r} != pinned {blob!r}",
+            )
         seen.add(path)
         legacy.append(_legacy(path, "AUDIT_LEGACY"))
     return legacy
 
 
-def _validate_constants(specs, retained, named_exceptions):
+def _validate_constants(specs, *legacy_groups, budgets, active_review):
     if len(specs) > 30:
         _fail("active-entry-budget-exceeded", f"{len(specs)} active entries exceeds 30")
     active_seen: set[str] = set()
@@ -271,6 +385,8 @@ def _validate_constants(specs, retained, named_exceptions):
         }:
             _fail("manifest-entry-invalid", f"ACTIVE_ENTRY_SPECS[{index}] has wrong keys")
         path = _canonical_path(spec["path"], f"ACTIVE_ENTRY_SPECS[{index}].path")
+        if any(token in path for token in "*?["):
+            _fail("manifest-entry-invalid", f"{path}: wildcard forbidden")
         if path in active_seen:
             _fail("duplicate-path", f"active constant {path}")
         active_seen.add(path)
@@ -287,36 +403,146 @@ def _validate_constants(specs, retained, named_exceptions):
         )
 
     retained_seen: set[str] = set()
-    for index, entry in enumerate((*retained, *named_exceptions)):
-        if not isinstance(entry, dict) or set(entry) != {"path", "class"}:
+    legacy_entries = [entry for group in legacy_groups for entry in group]
+    for index, entry in enumerate(legacy_entries):
+        if not isinstance(entry, dict):
+            _fail("legacy-entry-invalid", f"legacy constant [{index}] must be an object")
+        allowed_keys = (
+            {"path", "class", "reason"} if "reason" in entry else {"path", "class"}
+        )
+        if not isinstance(entry, dict) or set(entry) != allowed_keys:
             _fail("legacy-entry-invalid", f"legacy constant [{index}] has wrong keys")
         path = _canonical_path(entry["path"], f"legacy constant [{index}].path")
-        if entry["class"] not in {"AUDIT_LEGACY", "REGISTRY_LEGACY"}:
+        if entry["class"] not in {
+            "AUDIT_LEGACY",
+            "REGISTRY_LEGACY",
+            "PENDING_ARCHIVE",
+        }:
             _fail("legacy-entry-invalid", f"{path}: invalid class")
+        if "reason" in entry and (
+            not isinstance(entry["reason"], str) or not entry["reason"].strip()
+        ):
+            _fail("legacy-entry-invalid", f"{path}: empty reason")
+        if any(token in path for token in "*?["):
+            _fail("legacy-entry-invalid", f"{path}: wildcard forbidden")
+        if path in active_seen:
+            _fail("active-legacy-overlap", path)
+        try:
+            actual_class = classify_path(
+                path, [{"path": path, "class": entry["class"]}]
+            )
+        except ContextSurfaceError as exc:
+            _fail("legacy-class-mismatch", str(exc))
+        if actual_class != entry["class"]:
+            _fail(
+                "legacy-class-mismatch",
+                f"{path}: declared {entry['class']}, classified {actual_class}",
+            )
         if path in retained_seen:
             _fail("duplicate-path", f"retained legacy constant {path}")
         retained_seen.add(path)
 
+    if not isinstance(budgets, dict):
+        _fail("budget-constant-invalid", "BUDGETS_BYTES must be an object")
+    for raw_path, limit in budgets.items():
+        path = _canonical_path(raw_path, "BUDGETS_BYTES path")
+        if any(token in path for token in "*?["):
+            _fail("budget-constant-invalid", f"{path}: wildcard forbidden")
+        if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+            _fail("budget-constant-invalid", f"{path}: limit must be a positive integer")
 
-def build_manifest(repo: Path, registry_path: Path) -> dict:
-    repo = Path(repo)
+    if active_review is not None:
+        path = _canonical_path(active_review, "ACTIVE_REVIEW_TRANSACTION")
+        if any(token in path for token in "*?["):
+            _fail("active-review-constant-invalid", f"{path}: wildcard forbidden")
+
+
+def _canonical_inventory(tracked_paths, blob_inventory):
+    if not isinstance(tracked_paths, (list, tuple, set, frozenset)):
+        _fail("tracked-inventory-invalid", "tracked_paths must be an explicit collection")
+    tracked: set[str] = set()
+    for index, value in enumerate(tracked_paths):
+        path = _canonical_path(value, f"tracked_paths[{index}]")
+        if path in tracked:
+            _fail("duplicate-path", f"tracked path {path}")
+        tracked.add(path)
+    if not isinstance(blob_inventory, dict):
+        _fail("blob-inventory-invalid", "blob_inventory must be an object")
+    blobs: dict[str, str] = {}
+    for raw_path, blob in blob_inventory.items():
+        path = _canonical_path(raw_path, "blob_inventory key")
+        if path not in tracked:
+            _fail("blob-inventory-invalid", f"untracked blob row {path}")
+        if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+            _fail("blob-inventory-invalid", f"invalid blob id for {path}")
+        blobs[path] = blob
+    missing_blobs = sorted(tracked - set(blobs))
+    if missing_blobs:
+        _fail("blob-inventory-invalid", f"missing blob for {missing_blobs[0]}")
+    return tracked, blobs
+
+
+def build_manifest(
+    repo: Path,
+    tracked_paths,
+    blob_inventory,
+    registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
+    *,
+    allow_untracked_self: bool = False,
+) -> dict:
+    try:
+        reader = TrustedRepoReader(repo)
+    except ContextSurfaceError as exc:
+        _fail("repo-root-invalid", str(exc))
+    tracked, blobs = _canonical_inventory(tracked_paths, blob_inventory)
     _validate_constants(
         ACTIVE_ENTRY_SPECS,
         RETAINED_LEGACY_PATHS,
         EXACT_NAMED_LEGACY_EXCEPTIONS,
+        EXACT_PREEXISTING_LEGACY_DOCS,
+        PENDING_ARCHIVE_LEGACY_DOCS,
+        budgets=BUDGETS_BYTES,
+        active_review=ACTIVE_REVIEW_TRANSACTION,
     )
-    registry_legacy = _load_audit_inventory(Path(registry_path))
+    registry_legacy = _load_audit_inventory(
+        reader,
+        _canonical_path(registry_path, "registry_path"),
+        tracked,
+        blobs,
+    )
     legacy_by_path: dict[str, dict[str, str]] = {}
     for entry in (
         *registry_legacy,
         *RETAINED_LEGACY_PATHS,
         *EXACT_NAMED_LEGACY_EXCEPTIONS,
+        *EXACT_PREEXISTING_LEGACY_DOCS,
+        *PENDING_ARCHIVE_LEGACY_DOCS,
     ):
         path = entry["path"]
         if path in legacy_by_path:
             _fail("duplicate-path", f"legacy inventory overlap {path}")
-        legacy_by_path[path] = dict(entry)
+        if path not in tracked:
+            _fail("legacy-path-untracked", path)
+        try:
+            reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            _fail("legacy-path-invalid", str(exc))
+        legacy_by_path[path] = {"path": path, "class": entry["class"]}
     legacy = [legacy_by_path[path] for path in sorted(legacy_by_path)]
+    active_paths = {entry["path"] for entry in ACTIVE_ENTRY_SPECS}
+    overlap = sorted(active_paths & set(legacy_by_path))
+    if overlap:
+        _fail("active-legacy-overlap", overlap[0])
+    for entry in legacy:
+        try:
+            actual_class = classify_path(entry["path"], [entry])
+        except ContextSurfaceError as exc:
+            _fail("legacy-class-mismatch", str(exc))
+        if actual_class != entry["class"]:
+            _fail(
+                "legacy-class-mismatch",
+                f"{entry['path']}: declared {entry['class']}, classified {actual_class}",
+            )
 
     entries: list[dict] = []
     for spec in ACTIVE_ENTRY_SPECS:
@@ -328,16 +554,41 @@ def build_manifest(repo: Path, registry_path: Path) -> dict:
                 "active-class-mismatch",
                 f"{path}: declared {entry['class']}, classified {actual_class}",
             )
+        is_untracked_self = path == MANIFEST_RELATIVE_PATH and path not in tracked
+        if is_untracked_self and not allow_untracked_self:
+            _fail("active-path-untracked", path)
         if path != MANIFEST_RELATIVE_PATH:
-            disk_path = _repo_file(repo, path)
-            if not disk_path.is_file():
-                _fail("active-path-missing", path)
+            if path not in tracked:
+                _fail("active-path-untracked", path)
             try:
-                raw = disk_path.read_bytes()
-            except OSError as exc:
-                _fail("active-path-missing", f"{path}: {exc}")
+                raw = reader.read_bytes(path)
+            except ContextSurfaceError as exc:
+                if str(exc).startswith("repo-path-missing:"):
+                    _fail("active-path-missing", path)
+                _fail("active-path-invalid", str(exc))
             entry["sha256"] = hashlib.sha256(raw).hexdigest()
+        elif path in tracked:
+            try:
+                reader.read_bytes(path)
+            except ContextSurfaceError as exc:
+                _fail("active-path-invalid", str(exc))
         entries.append(entry)
+
+    for path in BUDGETS_BYTES:
+        if path not in tracked:
+            _fail("budget-path-untracked", path)
+        try:
+            reader.read_bytes(path)
+        except ContextSurfaceError as exc:
+            _fail("budget-path-invalid", str(exc))
+
+    if ACTIVE_REVIEW_TRANSACTION is not None:
+        if ACTIVE_REVIEW_TRANSACTION not in tracked:
+            _fail("active-review-transaction-untracked", ACTIVE_REVIEW_TRANSACTION)
+        try:
+            reader.read_bytes(ACTIVE_REVIEW_TRANSACTION)
+        except ContextSurfaceError as exc:
+            _fail("active-review-transaction-invalid", str(exc))
 
     document = {
         "schema": MANIFEST_SCHEMA,
@@ -349,8 +600,21 @@ def build_manifest(repo: Path, registry_path: Path) -> dict:
     return document
 
 
-def render_manifest(repo: Path = REPO_ROOT, registry_path: Path = AUDIT_REGISTRY_PATH) -> bytes:
-    document = build_manifest(Path(repo), Path(registry_path))
+def render_manifest(
+    repo: Path,
+    tracked_paths,
+    blob_inventory,
+    registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
+    *,
+    allow_untracked_self: bool = False,
+) -> bytes:
+    document = build_manifest(
+        Path(repo),
+        tracked_paths,
+        blob_inventory,
+        registry_path,
+        allow_untracked_self=allow_untracked_self,
+    )
     raw = (json.dumps(document, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     if b"\\" in raw:
         _fail("manifest-render-invalid", "backslash found in rendered bytes")
@@ -358,41 +622,76 @@ def render_manifest(repo: Path = REPO_ROOT, registry_path: Path = AUDIT_REGISTRY
 
 
 def write_manifest(
-    repo: Path = REPO_ROOT,
-    target: Path = MANIFEST_PATH,
-    registry_path: Path = AUDIT_REGISTRY_PATH,
+    repo: Path,
+    target: Path,
+    tracked_paths,
+    blob_inventory,
+    registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> None:
-    raw = render_manifest(repo, registry_path)
+    raw = render_manifest(
+        repo,
+        tracked_paths,
+        blob_inventory,
+        registry_path,
+        allow_untracked_self=True,
+    )
     target = Path(target)
-    target.parent.mkdir(parents=True, exist_ok=True)
+    file_descriptor: int | None = None
     temporary_name: str | None = None
+    failure: OSError | None = None
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="wb", dir=target.parent, prefix=f".{target.name}.", delete=False
-        ) as temporary:
-            temporary.write(raw)
-            temporary.flush()
-            os.fsync(temporary.fileno())
-            temporary_name = temporary.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        file_descriptor, temporary_name = tempfile.mkstemp(
+            dir=target.parent, prefix=f".{target.name}."
+        )
+        remaining = memoryview(raw)
+        while remaining:
+            written = os.write(file_descriptor, remaining)
+            if written <= 0:
+                raise OSError("short temporary manifest write")
+            remaining = remaining[written:]
+        os.fsync(file_descriptor)
+        os.close(file_descriptor)
+        file_descriptor = None
         os.replace(temporary_name, target)
         temporary_name = None
+    except OSError as exc:
+        failure = exc
     finally:
+        cleanup_failure: OSError | None = None
+        if file_descriptor is not None:
+            try:
+                os.close(file_descriptor)
+            except OSError as exc:
+                cleanup_failure = exc
         if temporary_name is not None:
             try:
                 os.unlink(temporary_name)
             except FileNotFoundError:
                 pass
+            except OSError as exc:
+                cleanup_failure = cleanup_failure or exc
+        if failure is not None:
+            detail = f"{target}: {failure}"
+            if cleanup_failure is not None:
+                detail += f"; cleanup failed: {cleanup_failure}"
+            _fail("manifest-write-failed", detail)
+        if cleanup_failure is not None:
+            _fail("manifest-write-failed", f"{target}: cleanup failed: {cleanup_failure}")
 
 
 def check_manifest(
-    repo: Path = REPO_ROOT,
-    target: Path = MANIFEST_PATH,
-    registry_path: Path = AUDIT_REGISTRY_PATH,
+    repo: Path,
+    target: Path,
+    tracked_paths,
+    blob_inventory,
+    registry_path: str = AUDIT_REGISTRY_RELATIVE_PATH,
 ) -> list[str]:
-    expected = render_manifest(repo, registry_path)
+    expected = render_manifest(repo, tracked_paths, blob_inventory, registry_path)
     try:
-        actual = Path(target).read_bytes()
-    except OSError as exc:
+        target_relative = Path(target).resolve().relative_to(Path(repo).resolve()).as_posix()
+        actual = TrustedRepoReader(repo).read_bytes(target_relative)
+    except (OSError, ValueError, ContextSurfaceError) as exc:
         return [f"manifest-missing: {target}: {exc}"]
     if actual != expected:
         return [
@@ -411,14 +710,47 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _git_inventory(repo: Path):
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "-s", "-z"],
+            cwd=repo,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+    except OSError as exc:
+        _fail("git-inventory-failed", str(exc))
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        _fail("git-inventory-failed", detail)
+    tracked = []
+    blobs = {}
+    try:
+        records = [record for record in completed.stdout.split(b"\0") if record]
+        for record in records:
+            metadata, raw_path = record.split(b"\t", 1)
+            mode, raw_blob, stage = metadata.split(b" ", 2)
+            if stage != b"0":
+                _fail("git-inventory-failed", "non-stage-0 index entry")
+            path = raw_path.decode("utf-8")
+            blob = raw_blob.decode("ascii")
+            tracked.append(path)
+            blobs[path] = blob
+    except (ValueError, UnicodeDecodeError) as exc:
+        _fail("git-inventory-failed", f"malformed git index output: {exc}")
+    return tracked, blobs
+
+
 def main(argv=None) -> int:
     args = _parser().parse_args(argv)
     try:
+        tracked, blobs = _git_inventory(REPO_ROOT)
         if args.write:
-            write_manifest()
+            write_manifest(REPO_ROOT, MANIFEST_PATH, tracked, blobs)
             print(f"wrote {MANIFEST_RELATIVE_PATH}")
             return 0
-        failures = check_manifest()
+        failures = check_manifest(REPO_ROOT, MANIFEST_PATH, tracked, blobs)
     except ManifestBuildError as exc:
         failures = [str(exc)]
     for failure in failures:

@@ -5,10 +5,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import stat
 import sys
 import tempfile
 import unittest
 from pathlib import Path, PurePosixPath
+from urllib.parse import quote
 from unittest import mock
 
 
@@ -16,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from ai_context_surface_check import (
     ContextSurfaceError,
+    TrustedRepoReader,
+    _git_tracked_paths,
     classify_path,
     evaluate_manifest,
     load_json_strict,
@@ -263,7 +268,7 @@ class AiContextSurfaceTests(unittest.TestCase):
 
     def test_classification_precedence_is_exact(self) -> None:
         legacy = [
-            {"path": "wiki/survey/current/legacy.md", "class": "AUDIT_LEGACY"},
+            {"path": "wiki/survey/current/legacy.md", "class": "REGISTRY_LEGACY"},
             {"path": "wiki/old-review.md", "class": "AUDIT_LEGACY"},
         ]
 
@@ -314,6 +319,103 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assert_failure(tracked_failures, "duplicate-path")
         self.assert_failure(entry_failures, "duplicate-path")
+
+    def test_tracked_inventory_is_authoritative_for_all_manifest_surfaces(self) -> None:
+        active_path = "wiki/Project-Thesis.md"
+        legacy_path = "wiki/old-review.md"
+        review_path = "wiki/audit/campaign/round-12/correction.md"
+        active_raw = b"thesis\n"
+        self.write(active_path, active_raw)
+        self.write(legacy_path, b"legacy\n")
+        self.write(review_path, b"review\n")
+        failures = evaluate_manifest(
+            self.repo,
+            manifest(
+                [self.active_entry(active_path, active_raw, "HOT")],
+                budgets={active_path: 1024},
+                legacy=[{"path": legacy_path, "class": "AUDIT_LEGACY"}],
+                active_review=review_path,
+            ),
+            tracked_paths=[],
+        )
+
+        self.assert_failure(failures, "active-path-untracked")
+        self.assert_failure(failures, "legacy-path-untracked")
+        self.assert_failure(failures, "budget-path-untracked")
+        self.assert_failure(failures, "active-review-transaction-untracked")
+
+    def test_legacy_class_cannot_be_forged_and_active_cannot_overlap_legacy(self) -> None:
+        forged_path = "wiki/old-review.md"
+        self.write(forged_path, b"legacy\n")
+        forged = evaluate_manifest(
+            self.repo,
+            manifest(
+                [],
+                legacy=[{"path": forged_path, "class": "REGISTRY_LEGACY"}],
+            ),
+            tracked_paths=[forged_path],
+        )
+        self.assert_failure(forged, "legacy-class-mismatch")
+
+        overlap_path = "wiki/Project-Thesis.md"
+        raw = b"thesis\n"
+        self.write(overlap_path, raw)
+        overlap = evaluate_manifest(
+            self.repo,
+            manifest(
+                [self.active_entry(overlap_path, raw, "HOT")],
+                legacy=[{"path": overlap_path, "class": "REGISTRY_LEGACY"}],
+            ),
+            tracked_paths=[overlap_path],
+        )
+        self.assert_failure(overlap, "active-legacy-overlap")
+
+    def test_unclassified_tracked_wiki_markdown_fails(self) -> None:
+        path = "wiki/future-working-note.md"
+        self.write(path, b"future\n")
+
+        failures = evaluate_manifest(self.repo, manifest([]), tracked_paths=[path])
+
+        self.assert_failure(failures, "unclassified-persistent-document")
+
+    def test_trusted_reader_rejects_mocked_windows_symlink_leaf(self) -> None:
+        path = "wiki/Project-Thesis.md"
+        self.write(path, b"thesis\n")
+        real_lstat = os.lstat
+
+        def mocked_lstat(candidate):
+            if Path(candidate).name == "Project-Thesis.md":
+                return mock.Mock(st_mode=stat.S_IFLNK)
+            return real_lstat(candidate)
+
+        with mock.patch(
+            "ai_context_surface_check.os.lstat", side_effect=mocked_lstat
+        ), self.assertRaises(ContextSurfaceError) as raised:
+            TrustedRepoReader(self.repo).read_bytes(path)
+
+        self.assertIn("untrusted-repo-path", str(raised.exception))
+
+    @unittest.skipIf(os.name == "nt", "real symlink attack runs in WSL/POSIX")
+    def test_trusted_reader_rejects_real_leaf_and_ancestor_symlinks(self) -> None:
+        with tempfile.TemporaryDirectory() as outside_name:
+            outside = Path(outside_name)
+            outside_file = outside / "outside.md"
+            outside_file.write_bytes(b"outside\n")
+            (self.repo / "wiki").mkdir()
+            os.symlink(outside_file, self.repo / "wiki/Project-Thesis.md")
+            with self.assertRaises(ContextSurfaceError) as leaf:
+                TrustedRepoReader(self.repo).read_bytes("wiki/Project-Thesis.md")
+            self.assertIn("untrusted-repo-path", str(leaf.exception))
+
+        with tempfile.TemporaryDirectory() as repo_name, tempfile.TemporaryDirectory() as outside_name:
+            repo = Path(repo_name)
+            outside = Path(outside_name)
+            (outside / "wiki").mkdir()
+            (outside / "wiki/Project-Thesis.md").write_bytes(b"outside\n")
+            os.symlink(outside / "wiki", repo / "wiki")
+            with self.assertRaises(ContextSurfaceError) as ancestor:
+                TrustedRepoReader(repo).read_bytes("wiki/Project-Thesis.md")
+            self.assertIn("untrusted-repo-path", str(ancestor.exception))
 
     def test_manifest_schema_and_entry_keys_are_strict(self) -> None:
         relative_path = "wiki/Project-Thesis.md"
@@ -437,6 +539,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         active_review = "wiki/audit/campaign/round-12/correction.md"
         raw = b"[correction](../../audit/campaign/round-12/correction.md#result)\n"
         self.write(relative_path, raw)
+        self.write(active_review, b"correction\n")
 
         failures = evaluate_manifest(
             self.repo,
@@ -444,7 +547,7 @@ class AiContextSurfaceTests(unittest.TestCase):
                 [self.active_entry(relative_path, raw, "CURRENT")],
                 active_review=active_review,
             ),
-            tracked_paths=[relative_path],
+            tracked_paths=[relative_path, active_review],
         )
 
         self.assertEqual([], failures)
@@ -515,6 +618,7 @@ class AiContextSurfaceTests(unittest.TestCase):
             b"[round]: <../../audit/campaign/round-12/correction.md#result>\n"
         )
         self.write(relative_path, raw)
+        self.write(active_review, b"correction\n")
 
         failures = evaluate_manifest(
             self.repo,
@@ -522,7 +626,7 @@ class AiContextSurfaceTests(unittest.TestCase):
                 [self.active_entry(relative_path, raw, "CURRENT")],
                 active_review=active_review,
             ),
-            tracked_paths=[relative_path],
+            tracked_paths=[relative_path, active_review],
         )
 
         self.assertEqual([], failures)
@@ -648,6 +752,7 @@ class AiContextSurfaceTests(unittest.TestCase):
             b"  <../../audit/campaign/round-12/correction.md#result>\n"
         )
         self.write(relative_path, raw)
+        self.write(active_review, b"correction\n")
 
         failures = evaluate_manifest(
             self.repo,
@@ -655,10 +760,106 @@ class AiContextSurfaceTests(unittest.TestCase):
                 [self.active_entry(relative_path, raw, "CURRENT")],
                 active_review=active_review,
             ),
+            tracked_paths=[relative_path, active_review],
+        )
+
+        self.assertEqual([], failures)
+
+    def test_image_html_and_raw_url_audit_destinations_are_rejected(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"![image](wiki/audit/campaign/round-1/image.png)\n"
+            b"<a href=\"/wiki/audit/campaign/round-1/review.md\">review</a>\n"
+            b"<img src='https://example.test/wiki/audit/campaign/round-1/image.png'>\n"
+            b"https://example.test/wiki/audit/campaign/round-1/review.md\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual(4, failure_codes(failures).count("direct-audit-round-link"))
+
+    def test_double_encoded_audit_destination_is_rejected(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = b"[review](wiki%252Faudit%252Fcampaign%252Fround-1%252Freview.md)\n"
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assert_failure(failures, "direct-audit-round-link")
+
+    def test_residual_or_invalid_percent_encoding_fails_closed(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        target = "wiki/audit/campaign/round-1/review.md"
+        for _ in range(6):
+            target = quote(target, safe="")
+        raw = f"[review]({target})\n[bad](wiki/%FF.md)\n".encode("ascii")
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual(2, failure_codes(failures).count("invalid-link-path"))
+
+    def test_external_absolute_urls_outside_wiki_are_ignored(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"[paper](https://arxiv.org/abs/2501.00001)\n"
+            b"https://example.test/project/wiki/Research-Objective\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
             tracked_paths=[relative_path],
         )
 
         self.assertEqual([], failures)
+
+    def test_html_comments_pre_and_code_are_masked(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"<!-- [comment](wiki/audit/campaign/round-1/review.md) -->\n"
+            b"<pre><a href='/wiki/audit/campaign/round-1/review.md'>x</a></pre>\n"
+            b"<code>[code](wiki/audit/campaign/round-1/review.md)</code>\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assertEqual([], failures)
+
+    def test_four_space_list_continuation_is_not_masked_as_code(self) -> None:
+        relative_path = "wiki/Research-Objective.md"
+        raw = (
+            b"- current pointer\n"
+            b"    [review](wiki/audit/campaign/round-1/review.md)\n"
+        )
+        self.write(relative_path, raw)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
+            tracked_paths=[relative_path],
+        )
+
+        self.assert_failure(failures, "direct-audit-round-link")
 
     def test_review_name_cannot_escape_with_case_or_percent_encoding(self) -> None:
         paths = [
@@ -677,13 +878,47 @@ class AiContextSurfaceTests(unittest.TestCase):
             failures,
         )
 
-    def test_new_amendment_inside_audit_root_still_requires_consolidation(self) -> None:
+    def test_expanded_audit_transaction_names_require_audit_root(self) -> None:
+        names = [
+            "reviewer-submission",
+            "reviewer-report",
+            "correction",
+            "sign-off",
+            "adjudication",
+            "release-decision",
+        ]
+        paths = [f"wiki/2026-07-19-{name}.md" for name in names]
+        for path in paths:
+            self.write(path, b"audit\n")
+
+        failures = evaluate_manifest(self.repo, manifest([]), tracked_paths=paths)
+
+        self.assertEqual(
+            len(paths),
+            failure_codes(failures).count("new-audit-artifact-outside-audit-root"),
+        )
+
+    def test_amendment_number_controls_only_the_consolidation_failure(self) -> None:
+        first = "wiki/campaign-protocol-amendment-1.md"
+        fourth = "wiki/campaign-protocol-amendment-4.md"
+        self.write(first, b"first\n")
+        self.write(fourth, b"fourth\n")
+
+        failures = evaluate_manifest(
+            self.repo, manifest([]), tracked_paths=[first, fourth]
+        )
+        codes = failure_codes(failures)
+
+        self.assertEqual(2, codes.count("new-audit-artifact-outside-audit-root"))
+        self.assertEqual(1, codes.count("unconsolidated-amendment-forbidden"))
+
+    def test_amendment_created_inside_audit_root_is_allowed(self) -> None:
         path = "wiki/audit/campaign/round-12/protocol-amendment-4.md"
         self.write(path, b"amendment\n")
 
         failures = evaluate_manifest(self.repo, manifest([]), tracked_paths=[path])
 
-        self.assert_failure(failures, "unconsolidated-amendment-forbidden")
+        self.assertEqual([], failures)
 
     def test_exact_named_markdown_legacy_exceptions_pass_but_new_peer_fails(self) -> None:
         legacy = list(builder.EXACT_NAMED_LEGACY_EXCEPTIONS)
@@ -703,7 +938,12 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assertEqual(8, len(legacy))
         self.assertEqual(
-            ["new-audit-artifact-outside-audit-root"], failure_codes(failures), failures
+            {
+                "unclassified-persistent-document",
+                "new-audit-artifact-outside-audit-root",
+            },
+            set(failure_codes(failures)),
+            failures,
         )
 
     def test_review_named_machine_log_is_not_a_document_placement_violation(self) -> None:
@@ -777,6 +1017,10 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         self.registry.write_text(
             json.dumps({"artifacts": artifacts}), encoding="utf-8"
         )
+        for artifact in artifacts:
+            path = self.repo.joinpath(*PurePosixPath(artifact["path"]).parts)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"registered audit\n")
         self.specs = (
             {
                 "path": "AGENTS.md",
@@ -807,12 +1051,28 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             path = self.repo.joinpath(*PurePosixPath(spec["path"]).parts)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((spec["path"] + "\n").encode("utf-8"))
+        retained_path = self.repo / "wiki/survey/legacy-protocol.md"
+        retained_path.parent.mkdir(parents=True, exist_ok=True)
+        retained_path.write_bytes(b"legacy protocol\n")
+        self.tracked = [
+            "wiki/survey/sf-audit-artifact-registry.json",
+            "wiki/survey/legacy-protocol.md",
+            *(artifact["path"] for artifact in artifacts),
+            *(spec["path"] for spec in self.specs[:-1]),
+        ]
+        self.blobs = {path: "f" * 40 for path in self.tracked}
+        for artifact in artifacts:
+            self.blobs[artifact["path"]] = artifact["git_blob"]
 
     def patched_builder(self):
         return mock.patch.multiple(
             builder,
             ACTIVE_ENTRY_SPECS=self.specs,
+            ACTIVE_REVIEW_TRANSACTION=None,
+            BUDGETS_BYTES={"AGENTS.md": 12288},
             EXACT_NAMED_LEGACY_EXCEPTIONS=(),
+            EXACT_PREEXISTING_LEGACY_DOCS=(),
+            PENDING_ARCHIVE_LEGACY_DOCS=(),
             RETAINED_LEGACY_PATHS=(
                 {
                     "path": "wiki/survey/legacy-protocol.md",
@@ -828,6 +1088,8 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             for entry in (
                 *builder.RETAINED_LEGACY_PATHS,
                 *builder.EXACT_NAMED_LEGACY_EXCEPTIONS,
+                *builder.EXACT_PREEXISTING_LEGACY_DOCS,
+                *builder.PENDING_ARCHIVE_LEGACY_DOCS,
             )
         ]
 
@@ -844,8 +1106,18 @@ class AiContextManifestBuilderTests(unittest.TestCase):
 
     def test_builder_is_deterministic_and_self_hash_free(self) -> None:
         with self.patched_builder():
-            first = builder.render_manifest(self.repo, self.registry)
-            second = builder.render_manifest(self.repo, self.registry)
+            first = builder.render_manifest(
+                self.repo,
+                self.tracked,
+                self.blobs,
+                allow_untracked_self=True,
+            )
+            second = builder.render_manifest(
+                self.repo,
+                self.tracked,
+                self.blobs,
+                allow_untracked_self=True,
+            )
 
         self.assertEqual(first, second)
         self.assertNotIn(str(self.repo).encode("utf-8"), first)
@@ -863,15 +1135,110 @@ class AiContextManifestBuilderTests(unittest.TestCase):
     def test_builder_write_and_check_are_byte_exact(self) -> None:
         target = self.repo / "docs/integrity/ai-context-manifest.json"
         with self.patched_builder():
-            builder.write_manifest(self.repo, target, self.registry)
-            self.assertEqual([], builder.check_manifest(self.repo, target, self.registry))
+            builder.write_manifest(self.repo, target, self.tracked, self.blobs)
+            tracked = [*self.tracked, "docs/integrity/ai-context-manifest.json"]
+            blobs = {**self.blobs, "docs/integrity/ai-context-manifest.json": "e" * 40}
+            self.assertEqual(
+                [], builder.check_manifest(self.repo, target, tracked, blobs)
+            )
             document = load_json_strict(target)
-            tracked = [entry["path"] for entry in document["active_entries"]]
             self.assertEqual([], evaluate_manifest(self.repo, document, tracked))
             target.write_bytes(target.read_bytes() + b" ")
-            failures = builder.check_manifest(self.repo, target, self.registry)
+            failures = builder.check_manifest(self.repo, target, tracked, blobs)
 
         self.assertIn("manifest-byte-mismatch", failure_codes(failures))
+
+    def test_builder_check_rejects_crlf_and_performs_zero_writes(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        with self.patched_builder():
+            builder.write_manifest(self.repo, target, self.tracked, self.blobs)
+            target.write_bytes(target.read_bytes().replace(b"\n", b"\r\n"))
+            tracked = [*self.tracked, "docs/integrity/ai-context-manifest.json"]
+            blobs = {**self.blobs, "docs/integrity/ai-context-manifest.json": "e" * 40}
+            with (
+                mock.patch.object(Path, "mkdir") as mkdir,
+                mock.patch.object(builder.tempfile, "mkstemp") as mkstemp,
+                mock.patch.object(builder.os, "replace") as replace,
+            ):
+                failures = builder.check_manifest(
+                    self.repo, target, tracked, blobs
+                )
+
+        self.assertIn("manifest-byte-mismatch", failure_codes(failures))
+        mkdir.assert_not_called()
+        mkstemp.assert_not_called()
+        replace.assert_not_called()
+
+    def test_atomic_write_failures_are_controlled_and_leave_no_debris(self) -> None:
+        target = self.repo / "docs/integrity/ai-context-manifest.json"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"previous manifest\n")
+        scenarios = {
+            "mkdir": mock.patch.object(
+                Path, "mkdir", side_effect=OSError("mkdir denied")
+            ),
+            "mkstemp": mock.patch.object(
+                builder.tempfile, "mkstemp", side_effect=OSError("mkstemp denied")
+            ),
+            "write": mock.patch.object(
+                builder.os, "write", side_effect=OSError("write denied")
+            ),
+            "fsync": mock.patch.object(
+                builder.os, "fsync", side_effect=OSError("fsync denied")
+            ),
+            "replace": mock.patch.object(
+                builder.os, "replace", side_effect=OSError("replace denied")
+            ),
+        }
+        for label, operation in scenarios.items():
+            with self.subTest(label=label), self.patched_builder(), operation:
+                with self.assertRaises(builder.ManifestBuildError) as raised:
+                    builder.write_manifest(
+                        self.repo, target, self.tracked, self.blobs
+                    )
+                self.assertIn("manifest-write-failed", str(raised.exception))
+                self.assertEqual(b"previous manifest\n", target.read_bytes())
+                self.assertEqual([], list(target.parent.glob(f".{target.name}.*")))
+
+    def test_write_fsync_replace_failures_leave_fresh_target_absent(self) -> None:
+        scenarios = {
+            "write": mock.patch.object(
+                builder.os, "write", side_effect=OSError("write denied")
+            ),
+            "fsync": mock.patch.object(
+                builder.os, "fsync", side_effect=OSError("fsync denied")
+            ),
+            "replace": mock.patch.object(
+                builder.os, "replace", side_effect=OSError("replace denied")
+            ),
+        }
+        for label, operation in scenarios.items():
+            target = self.repo / label / "ai-context-manifest.json"
+            with (
+                self.subTest(label=label),
+                self.patched_builder(),
+                operation,
+                self.assertRaises(builder.ManifestBuildError) as raised,
+            ):
+                builder.write_manifest(self.repo, target, self.tracked, self.blobs)
+
+            self.assertIn("manifest-write-failed", str(raised.exception))
+            self.assertFalse(target.exists())
+            self.assertEqual([], list(target.parent.glob(f".{target.name}.*")))
+
+    def test_git_inventory_os_errors_are_controlled(self) -> None:
+        with mock.patch.object(
+            builder.subprocess, "run", side_effect=OSError("git unavailable")
+        ), self.assertRaises(builder.ManifestBuildError) as builder_raised:
+            builder._git_inventory(self.repo)
+        self.assertIn("git-inventory-failed", str(builder_raised.exception))
+
+        with mock.patch(
+            "ai_context_surface_check.subprocess.run",
+            side_effect=OSError("git unavailable"),
+        ), self.assertRaises(ContextSurfaceError) as oracle_raised:
+            _git_tracked_paths(self.repo)
+        self.assertIn("git-ls-files-failed", str(oracle_raised.exception))
 
     def test_builder_validates_exact_registry_inventory(self) -> None:
         registry = json.loads(self.registry.read_text(encoding="utf-8"))
@@ -879,7 +1246,9 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         self.registry.write_text(json.dumps(registry), encoding="utf-8")
 
         with self.patched_builder(), self.assertRaises(builder.ManifestBuildError) as raised:
-            builder.render_manifest(self.repo, self.registry)
+            builder.render_manifest(
+                self.repo, self.tracked, self.blobs, allow_untracked_self=True
+            )
 
         self.assertIn("audit-registry-count", str(raised.exception))
 
@@ -888,7 +1257,9 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         missing.unlink()
 
         with self.patched_builder(), self.assertRaises(builder.ManifestBuildError) as raised:
-            builder.render_manifest(self.repo, self.registry)
+            builder.render_manifest(
+                self.repo, self.tracked, self.blobs, allow_untracked_self=True
+            )
 
         self.assertIn("active-path-missing", str(raised.exception))
 
@@ -910,9 +1281,68 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 with self.patched_builder(), self.assertRaises(
                     builder.ManifestBuildError
                 ) as raised:
-                    builder.render_manifest(self.repo, self.registry)
+                    builder.render_manifest(
+                        self.repo,
+                        self.tracked,
+                        self.blobs,
+                        allow_untracked_self=True,
+                    )
                 expected = "duplicate-path" if label == "duplicate" else "audit-registry-entry"
                 self.assertIn(expected, str(raised.exception))
+
+    def test_builder_rejects_forged_legacy_class_and_active_overlap(self) -> None:
+        mutations = {
+            "forged_class": (
+                {
+                    "path": "wiki/survey/legacy-protocol.md",
+                    "class": "AUDIT_LEGACY",
+                },
+                "legacy-class-mismatch",
+            ),
+            "active_overlap": (
+                {"path": "AGENTS.md", "class": "REGISTRY_LEGACY"},
+                "active-legacy-overlap",
+            ),
+        }
+        for label, (entry, expected) in mutations.items():
+            with (
+                self.subTest(label=label),
+                self.patched_builder(),
+                mock.patch.object(builder, "RETAINED_LEGACY_PATHS", (entry,)),
+                self.assertRaises(builder.ManifestBuildError) as raised,
+            ):
+                builder.render_manifest(
+                    self.repo,
+                    self.tracked,
+                    self.blobs,
+                    allow_untracked_self=True,
+                )
+            self.assertIn(expected, str(raised.exception))
+
+    def test_builder_rejects_wildcards_in_all_policy_constants(self) -> None:
+        wildcard_specs = tuple(
+            ({**spec, "path": "wiki/*.md"} if index == 0 else spec)
+            for index, spec in enumerate(self.specs)
+        )
+        mutations = {
+            "active": {"ACTIVE_ENTRY_SPECS": wildcard_specs},
+            "budget": {"BUDGETS_BYTES": {"wiki/*.md": 1}},
+            "review": {"ACTIVE_REVIEW_TRANSACTION": "wiki/audit/*/review.md"},
+        }
+        for label, mutation in mutations.items():
+            with (
+                self.subTest(label=label),
+                self.patched_builder(),
+                mock.patch.multiple(builder, **mutation),
+                self.assertRaises(builder.ManifestBuildError) as raised,
+            ):
+                builder.render_manifest(
+                    self.repo,
+                    self.tracked,
+                    self.blobs,
+                    allow_untracked_self=True,
+                )
+            self.assertIn("wildcard", str(raised.exception))
 
 
 if __name__ == "__main__":
