@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import inspect
 import io
 import json
 import os
@@ -51,16 +52,11 @@ class SchemaV3FinalizerTest(unittest.TestCase):
         return path
 
     def assert_rejected(self, artifact, pattern):
-        with tempfile.TemporaryDirectory() as temp_dir:
-            path = self.write_artifact(temp_dir, artifact)
-            raw_bytes = path.read_bytes()
-            with self.assertRaisesRegex(finalizer.FinalizationError, pattern):
-                finalizer.finalize_outputs(
-                    migration.build_outputs(migration.SOURCE_DIR),
-                    artifact,
-                    raw_bytes,
-                    expected_artifact_sha256=hashlib.sha256(raw_bytes).hexdigest(),
-                )
+        with self.assertRaisesRegex(finalizer.FinalizationError, pattern):
+            finalizer._validate_adjudication(
+                artifact,
+                migration.build_outputs(migration.SOURCE_DIR),
+            )
 
     def assert_release_artifact_rejected(self, artifact):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -73,28 +69,19 @@ class SchemaV3FinalizerTest(unittest.TestCase):
                     path,
                 )
 
-    def snapshot_validator(self):
-        validator = getattr(finalizer, "validate_reviewed_snapshot", None)
-        self.assertTrue(
-            callable(validator), "reviewed snapshot validator is not implemented"
-        )
-        return validator
-
-    def assert_pending_snapshot_rejected(self, rendered):
+    def assert_pending_snapshot_rejected(self, pending):
         with self.assertRaisesRegex(
             finalizer.FinalizationError, "pending.*snapshot.*(mismatch|names)"
         ):
-            self.snapshot_validator()(
-                rendered,
+            finalizer.finalize_outputs(
+                pending,
                 finalizer.ADJUDICATION_PATH.read_bytes(),
             )
 
     def test_all_agree_artifact_stamps_every_sidecar_and_canonical_row_hash(self):
         pending = migration.build_outputs(migration.SOURCE_DIR)
-        artifact = finalizer.load_adjudication()
         finalized = finalizer.finalize_outputs(
             pending,
-            artifact,
             finalizer.ADJUDICATION_PATH.read_bytes(),
         )
 
@@ -121,6 +108,42 @@ class SchemaV3FinalizerTest(unittest.TestCase):
                 self.assertEqual(
                     row["adjudication_row_sha256"], canonical_row_hash(row)
                 )
+
+    def test_public_finalization_api_accepts_only_pending_and_raw_artifact_bytes(self):
+        signature = inspect.signature(finalizer.finalize_outputs)
+        self.assertEqual(
+            list(signature.parameters), ["pending", "artifact_raw_bytes"]
+        )
+
+        pending = migration.build_outputs(migration.SOURCE_DIR)
+        raw_bytes = finalizer.ADJUDICATION_PATH.read_bytes()
+        mutated_artifact = self.load_artifact()
+        mutated_artifact["binding_verdicts"][0]["reason"] += " split-root drift"
+        with self.assertRaises(TypeError):
+            finalizer.finalize_outputs(pending, mutated_artifact, raw_bytes)
+
+        finalized = finalizer.finalize_outputs(pending, raw_bytes)
+        self.assertEqual(len(finalized), 8)
+
+    def test_public_finalization_api_rejects_artifact_hash_override(self):
+        signature = inspect.signature(finalizer.finalize_outputs)
+        self.assertNotIn("expected_artifact_sha256", signature.parameters)
+        with self.assertRaises(TypeError):
+            finalizer.finalize_outputs(
+                migration.build_outputs(migration.SOURCE_DIR),
+                finalizer.ADJUDICATION_PATH.read_bytes(),
+                expected_artifact_sha256="0" * 64,
+            )
+
+    def test_public_finalization_api_rejects_pending_hash_override(self):
+        signature = inspect.signature(finalizer.finalize_outputs)
+        self.assertNotIn("expected_pending_sha256", signature.parameters)
+        with self.assertRaises(TypeError):
+            finalizer.finalize_outputs(
+                migration.build_outputs(migration.SOURCE_DIR),
+                finalizer.ADJUDICATION_PATH.read_bytes(),
+                expected_pending_sha256={},
+            )
 
     def test_release_artifact_sha_rejects_any_reviewer_record_mutation(self):
         cases = []
@@ -204,20 +227,25 @@ class SchemaV3FinalizerTest(unittest.TestCase):
 
         for label, outputs in mutation_cases:
             with self.subTest(label=label):
-                self.assert_pending_snapshot_rejected(
-                    migration._render_outputs(outputs)
-                )
+                self.assert_pending_snapshot_rejected(outputs)
 
     def test_reviewed_pending_snapshot_rejects_missing_extra_and_renamed_sidecars(self):
-        rendered = migration._render_outputs(
-            migration.build_outputs(migration.SOURCE_DIR)
-        )
+        pending = migration.build_outputs(migration.SOURCE_DIR)
         cases = (
-            ("missing", rendered[:-1]),
-            ("extra", [*rendered, ("extra.sidecar.json", b"{}\n")]),
+            ("missing", pending[:-1]),
+            (
+                "extra",
+                [
+                    *pending,
+                    (Path("extra.sidecar.json"), copy.deepcopy(pending[0][1])),
+                ],
+            ),
             (
                 "renamed",
-                [("renamed.sidecar.json", rendered[0][1]), *rendered[1:]],
+                [
+                    (pending[0][0].with_name("renamed.sidecar.json"), pending[0][1]),
+                    *pending[1:],
+                ],
             ),
         )
         for label, mutated in cases:
@@ -225,11 +253,11 @@ class SchemaV3FinalizerTest(unittest.TestCase):
                 self.assert_pending_snapshot_rejected(mutated)
 
     def test_reviewed_snapshot_constants_match_remediation_commit_and_migration(self):
-        expected = getattr(finalizer, "REVIEWED_PENDING_SHA256", None)
+        expected = getattr(finalizer, "EXPECTED_PENDING_SIDECAR_SHA256", None)
         self.assertIsInstance(expected, dict)
         self.assertEqual(len(expected), 8)
         self.assertEqual(
-            finalizer.REVIEWED_ADJUDICATION_SHA256,
+            finalizer.EXPECTED_ADJUDICATION_SHA256,
             "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f",
         )
 
@@ -270,10 +298,11 @@ class SchemaV3FinalizerTest(unittest.TestCase):
         self.assertEqual(expected, commit_hashes)
         self.assertEqual(expected, fresh_hashes)
         self.assertEqual(fresh_rendered, commit_bytes)
-        self.snapshot_validator()(
-            list(fresh_rendered.items()),
+        finalized = finalizer.finalize_outputs(
+            migration.build_outputs(migration.SOURCE_DIR),
             finalizer.ADJUDICATION_PATH.read_bytes(),
         )
+        self.assertEqual(len(finalized), 8)
 
     def test_finalizer_uses_the_canonical_row_hash_implementation_for_all_rows(self):
         rows = all_rows(migration.build_outputs(migration.SOURCE_DIR))

@@ -750,7 +750,6 @@ class SchemaV3IntegrationTest(unittest.TestCase):
 
             committed_outputs = finalizer.finalize_outputs(
                 outputs,
-                finalizer.load_adjudication(adjudication_path),
                 adjudication_path.read_bytes(),
             )
         with tempfile.TemporaryDirectory() as temp_dir:
