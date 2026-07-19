@@ -240,6 +240,69 @@ class ArchivePreMoveTests(ArchiveRepoFixture):
                 self.assertFalse((self.repo / archive.PLAN_RELATIVE_PATH).exists())
                 git(self.repo, "reset", "--hard", self.base_commit)
 
+    def test_staged_registry_cannot_shorten_reorder_repath_or_repin_head(self) -> None:
+        entries = []
+        for name in ("first", "second"):
+            path = f"wiki/audit/campaign/{name}.md"
+            self.write(path, f"{name} audit\n".encode())
+            git(self.repo, "add", "--", path)
+            blob = git(self.repo, "hash-object", "--", path).stdout.decode().strip()
+            entries.append({"path": path, "git_blob": blob})
+        registry_path = "wiki/survey/sf-audit-artifact-registry.json"
+        self.write(registry_path, self.registry_bytes(entries))
+        git(self.repo, "add", "--", registry_path)
+        git(self.repo, "commit", "-qm", "seed registry lineage")
+        seeded_head = git(self.repo, "rev-parse", "HEAD").stdout.decode().strip()
+
+        mutations = {
+            "shorten": entries[:1],
+            "reorder": list(reversed(entries)),
+            "repath": [{**entries[0], "path": "wiki/audit/campaign/renamed.md"}, entries[1]],
+            "repin": [{**entries[0], "git_blob": "0" * 40}, entries[1]],
+        }
+        for label, mutated in mutations.items():
+            with self.subTest(label=label):
+                git(self.repo, "reset", "--hard", seeded_head)
+                self.write(registry_path, self.registry_bytes(mutated))
+                git(self.repo, "add", "--", registry_path)
+                self.assert_code(
+                    "archive-registry-lineage-invalid",
+                    lambda: archive.inspect_pre_move(self.repo, self.transitions),
+                )
+
+    def test_staged_registry_allows_exact_append_but_not_mode_drift(self) -> None:
+        registry_path = "wiki/survey/sf-audit-artifact-registry.json"
+        first = "wiki/audit/campaign/first.md"
+        self.write(first, b"first audit\n")
+        git(self.repo, "add", "--", first)
+        first_blob = git(self.repo, "hash-object", "--", first).stdout.decode().strip()
+        head_entries = [{"path": first, "git_blob": first_blob}]
+        self.write(registry_path, self.registry_bytes(head_entries))
+        git(self.repo, "add", "--", registry_path)
+        git(self.repo, "commit", "-qm", "seed registry lineage")
+
+        appended = "wiki/audit/campaign/appended.md"
+        self.write(appended, b"appended audit\n")
+        git(self.repo, "add", "--", appended)
+        appended_blob = git(self.repo, "hash-object", "--", appended).stdout.decode().strip()
+        self.write(
+            registry_path,
+            self.registry_bytes(
+                [*head_entries, {"path": appended, "git_blob": appended_blob}]
+            ),
+        )
+        git(self.repo, "add", "--", registry_path)
+        self.assertEqual(
+            "pre",
+            archive.inspect_pre_move(self.repo, self.transitions).state,
+        )
+
+        git(self.repo, "update-index", "--chmod=+x", "--", registry_path)
+        self.assert_code(
+            "archive-registry-lineage-invalid",
+            lambda: archive.inspect_pre_move(self.repo, self.transitions),
+        )
+
     def test_hot_current_and_registered_audit_inbound_references_fail(self) -> None:
         registered = "wiki/audit/campaign/review.md"
         cases = (

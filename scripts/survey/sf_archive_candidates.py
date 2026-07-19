@@ -28,7 +28,12 @@ CHECKS_DIR = REPO / "scripts" / "checks"
 if str(CHECKS_DIR) not in sys.path:
     sys.path.insert(0, str(CHECKS_DIR))
 
-from ai_context_inventory import ARCHIVE_TRANSITIONS  # noqa: E402
+from ai_context_inventory import (  # noqa: E402
+    ARCHIVE_TRANSITIONS,
+    REGISTRY_BASELINE_COUNT,
+    REGISTRY_BASELINE_PREFIX_SHA256,
+    registry_prefix_sha256,
+)
 from ai_context_surface_check import (  # noqa: E402
     ContextSurfaceError,
     TrustedRepoReader,
@@ -358,28 +363,15 @@ def _assert_input_clean(
     return raw
 
 
-def _load_registry(
-    repo: Path,
-    reader: TrustedRepoReader,
-    index: dict[str, GitEntry],
-    head: dict[str, GitEntry],
-) -> tuple[set[str], dict[str, str]]:
-    raw = _assert_input_clean(
-        repo,
-        reader,
-        REGISTRY_RELATIVE_PATH,
-        index,
-        head,
-        required_mode="100644",
-    )
+def _parse_registry_artifacts(raw: bytes, label: str) -> list[dict[str, str]]:
     try:
-        document = loads_json_strict(raw, REGISTRY_RELATIVE_PATH)
+        document = loads_json_strict(raw, label)
     except ContextSurfaceError as error:
         _fail("archive-registry-invalid", str(error))
     if not isinstance(document, dict) or not isinstance(document.get("artifacts"), list):
         _fail("archive-registry-invalid", "artifacts must be a list")
     paths: set[str] = set()
-    pins: dict[str, str] = {}
+    artifacts: list[dict[str, str]] = []
     for position, entry in enumerate(document["artifacts"]):
         if not isinstance(entry, dict) or set(entry) != {"path", "git_blob"}:
             _fail("archive-registry-invalid", f"artifacts[{position}] schema")
@@ -390,7 +382,64 @@ def _load_registry(
         if path in paths:
             _fail("archive-registry-invalid", f"duplicate path: {path}")
         paths.add(path)
-        pins[path] = blob
+        artifacts.append({"path": path, "git_blob": blob})
+    return artifacts
+
+
+def _load_registry(
+    repo: Path,
+    reader: TrustedRepoReader,
+    index: dict[str, GitEntry],
+    head: dict[str, GitEntry],
+    *,
+    require_shared_baseline: bool,
+) -> tuple[set[str], dict[str, str]]:
+    index_entry = index.get(REGISTRY_RELATIVE_PATH)
+    head_entry = head.get(REGISTRY_RELATIVE_PATH)
+    if head_entry is None:
+        _fail("archive-registry-lineage-invalid", "registry is absent from HEAD")
+    if index_entry is not None and index_entry.mode != head_entry.mode:
+        _fail(
+            "archive-registry-lineage-invalid",
+            f"registry mode drift: HEAD={head_entry.mode}, stage={index_entry.mode}",
+        )
+    raw = _assert_input_clean(
+        repo,
+        reader,
+        REGISTRY_RELATIVE_PATH,
+        index,
+        head,
+        code="archive-registry-invalid",
+        required_mode="100644",
+    )
+    staged_artifacts = _parse_registry_artifacts(raw, REGISTRY_RELATIVE_PATH)
+    head_artifacts = _parse_registry_artifacts(
+        _read_blob(repo, head_entry.blob),
+        f"HEAD:{REGISTRY_RELATIVE_PATH}",
+    )
+    if (
+        len(staged_artifacts) < len(head_artifacts)
+        or staged_artifacts[: len(head_artifacts)] != head_artifacts
+    ):
+        _fail(
+            "archive-registry-lineage-invalid",
+            "stage artifacts must preserve the complete HEAD artifact list as an exact prefix",
+        )
+    if require_shared_baseline:
+        if REGISTRY_BASELINE_COUNT != 77 or len(staged_artifacts) < REGISTRY_BASELINE_COUNT:
+            _fail(
+                "archive-registry-lineage-invalid",
+                f"invalid production baseline count: constant={REGISTRY_BASELINE_COUNT}, "
+                f"artifacts={len(staged_artifacts)}",
+            )
+        actual_prefix = registry_prefix_sha256(staged_artifacts)
+        if actual_prefix != REGISTRY_BASELINE_PREFIX_SHA256:
+            _fail(
+                "archive-registry-lineage-invalid",
+                f"production baseline prefix changed: {actual_prefix}",
+            )
+    paths = {entry["path"] for entry in staged_artifacts}
+    pins = {entry["path"]: entry["git_blob"] for entry in staged_artifacts}
     for path, pin in pins.items():
         _assert_input_clean(repo, reader, path, index, head)
         if index[path].blob != pin:
@@ -544,7 +593,13 @@ def _inspect(
             f"expected {required_state}, found {state}",
         )
 
-    registered_paths, _ = _load_registry(repo, reader, index, head)
+    registered_paths, _ = _load_registry(
+        repo,
+        reader,
+        index,
+        head,
+        require_shared_baseline=require_shared_exact,
+    )
     current_paths = _load_current_manifest_paths(repo, reader, index, head)
 
     failures: list[Failure] = []
