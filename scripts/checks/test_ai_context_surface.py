@@ -29,6 +29,21 @@ def raw_sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def failure_code(failure) -> str:
+    if isinstance(failure, str):
+        return failure.split(":", 1)[0].strip()
+    if isinstance(failure, dict) and "code" in failure:
+        return str(failure["code"])
+    code = getattr(failure, "code", None)
+    if code is not None:
+        return str(code)
+    raise AssertionError(f"failure has no structured code: {failure!r}")
+
+
+def failure_codes(failures) -> list[str]:
+    return [failure_code(failure) for failure in failures]
+
+
 class AiContextSurfaceTests(unittest.TestCase):
     def setUp(self) -> None:
         temporary = tempfile.TemporaryDirectory()
@@ -50,16 +65,17 @@ class AiContextSurfaceTests(unittest.TestCase):
             "sha256": raw_sha256(raw),
         }
 
-    @staticmethod
-    def failure_text(failures) -> str:
-        return "\n".join(str(failure) for failure in failures)
-
     def assert_failure(self, failures, expected_code: str) -> None:
-        self.assertIn(expected_code, self.failure_text(failures), failures)
+        self.assertIn(expected_code, failure_codes(failures), failures)
+
+    def test_failure_codes_do_not_match_by_substring(self) -> None:
+        failures = ["not-active-hash-mismatch-disabled: fixture"]
+
+        self.assertNotIn("active-hash-mismatch", failure_codes(failures))
 
     def test_one_hot_file_within_budget_passes(self) -> None:
         relative_path = "wiki/Project-Thesis.md"
-        raw = b"# Project thesis\n"
+        raw = "# 项目论文\r\n".encode("utf-8")
         self.write(relative_path, raw)
 
         failures = evaluate_manifest(
@@ -69,6 +85,24 @@ class AiContextSurfaceTests(unittest.TestCase):
                 budgets={relative_path: len(raw)},
             ),
             tracked_paths=[relative_path],
+        )
+
+        self.assertEqual([], failures)
+
+    def test_thirty_active_entries_are_within_budget(self) -> None:
+        active = []
+        tracked_paths = []
+        for index in range(30):
+            relative_path = f"wiki/survey/current/item-{index:02d}.md"
+            raw = f"item {index}\n".encode("utf-8")
+            self.write(relative_path, raw)
+            active.append(self.active_entry(relative_path, raw, "CURRENT"))
+            tracked_paths.append(relative_path)
+
+        failures = evaluate_manifest(
+            self.repo,
+            manifest(active),
+            tracked_paths=tracked_paths,
         )
 
         self.assertEqual([], failures)
