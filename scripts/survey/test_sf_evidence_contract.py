@@ -12,6 +12,7 @@ from sf_evidence_contract import (  # noqa: E402
     check_page_locator,
     normalized_tokens,
     validate_bound_values,
+    values_equal,
 )
 
 
@@ -340,6 +341,82 @@ class BoundValueTest(unittest.TestCase):
                 "edge:0:decision_right:required-evidence-missing" in failure
                 for failure in failures
             )
+        )
+
+    def test_boolean_evidence_integer_value_is_a_mismatch(self):
+        row = deepcopy(generic_row())
+        row["claim_evidence"]["core_weight_update"]["value"] = 1
+        self.assertIn(
+            "__fx12__#path:row:core_weight_update:evidence-value-mismatch",
+            self.failures(row),
+        )
+
+    def test_values_equal_requires_identical_concrete_types(self):
+        self.assertFalse(values_equal(True, 1))
+        self.assertFalse(values_equal(1, True))
+
+    def test_absent_row_field_with_null_evidence_is_encoded_field_missing(self):
+        row = deepcopy(generic_row())
+        del row["selection_object"]
+        row["claim_evidence"]["selection_object"]["value"] = None
+        self.assertIn(
+            "__fx12__#path:row:selection_object:encoded-field-missing",
+            self.failures(row),
+        )
+
+    def test_list_claim_evidence_is_invalid_container(self):
+        row = deepcopy(generic_row())
+        row["claim_evidence"] = []
+        self.assertIn(
+            "__fx12__#path:row:core_weight_update:evidence-container-invalid",
+            self.failures(row),
+        )
+
+    def test_string_evidence_entry_is_invalid(self):
+        row = deepcopy(generic_row())
+        row["claim_evidence"]["selection_object"] = "not a mapping"
+        self.assertIn(
+            "__fx12__#path:row:selection_object:evidence-entry-invalid",
+            self.failures(row),
+        )
+
+    def test_none_signals_is_invalid_container(self):
+        row = deepcopy(generic_row())
+        row["signals"] = None
+        self.assertIn(
+            "__fx12__#path:signals:container-invalid", self.failures(row)
+        )
+
+    def test_invalid_evidence_kind_fails(self):
+        row = deepcopy(generic_row())
+        row["claim_evidence"]["selection_object"]["kind"] = "unsupported"
+        self.assertIn(
+            "__fx12__#path:row:selection_object:evidence-kind-invalid",
+            self.failures(row),
+        )
+
+    def test_unhashable_list_items_mismatch_without_exception(self):
+        row = deepcopy(generic_row())
+        row["decision_rights"] = [{"branch": True}]
+        row["claim_evidence"]["decision_rights"]["value"] = [{"branch": True}]
+        self.assertIn(
+            "__fx12__#path:row:decision_rights:evidence-value-mismatch",
+            self.failures(row),
+        )
+
+    def test_non_mapping_row_is_invalid_container(self):
+        self.assertEqual(self.failures([]), ["?:row:container-invalid"])
+
+    def test_non_mapping_signal_and_edge_entries_are_invalid(self):
+        row = deepcopy(generic_row())
+        row["signals"] = [None]
+        row["control_edges"] = [None]
+        self.assertEqual(
+            self.failures(row),
+            [
+                "__fx12__#path:signal:0:entry-invalid",
+                "__fx12__#path:edge:0:entry-invalid",
+            ],
         )
 
 

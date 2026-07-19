@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from collections import Counter
+from collections.abc import Mapping
 
 
 PAGE_NUMBER_RE = re.compile(r"\bp(?P<page>\d+)\b")
@@ -30,6 +31,7 @@ ROW_REQUIRED_FIELDS = [
 ]
 SIGNAL_REQUIRED_FIELDS = ["form", "source", "lifecycle", "uses"]
 EDGE_REQUIRED_FIELDS = ["signal_use", "decision_right"]
+_MISSING = object()
 
 
 def normalized_tokens(text):
@@ -141,52 +143,88 @@ def check_page_locator(locator, reader, pid, what, failures):
 
 def values_equal(expected, declared):
     """Compare lists as multisets and all other values normally."""
+    if type(expected) is not type(declared):
+        return False
     if isinstance(expected, list) and isinstance(declared, list):
-        return Counter(expected) == Counter(declared)
+        try:
+            return Counter(expected) == Counter(declared)
+        except TypeError:
+            return False
     return expected == declared
 
 
 def _validate_binding(owner, field, expected, evidence, failures):
     """Append failures when a required claim-evidence binding is invalid."""
-    entry = (evidence or {}).get(field)
-    if entry is None:
+    field_missing = expected is _MISSING
+    if field_missing:
+        failures.append(f"{owner}:{field}:encoded-field-missing")
+    if not isinstance(evidence, Mapping):
+        failures.append(f"{owner}:{field}:evidence-container-invalid")
+        return
+
+    entry = evidence.get(field, _MISSING)
+    if entry is _MISSING:
         failures.append(f"{owner}:{field}:required-evidence-missing")
+        return
+    if not isinstance(entry, Mapping):
+        failures.append(f"{owner}:{field}:evidence-entry-invalid")
         return
     if entry.get("kind") not in EVIDENCE_KINDS:
         failures.append(f"{owner}:{field}:evidence-kind-invalid")
-    if not values_equal(expected, entry.get("value")):
+    if not field_missing and not values_equal(expected, entry.get("value")):
         failures.append(f"{owner}:{field}:evidence-value-mismatch")
 
 
 def validate_bound_values(row):
     """Validate that required row, signal, and edge claims bind their values."""
+    if not isinstance(row, Mapping):
+        return ["?:row:container-invalid"]
+
     pid = row.get("method_path_id", "?")
     failures = []
 
     for field in ROW_REQUIRED_FIELDS:
         _validate_binding(
-            f"{pid}:row", field, row.get(field), row.get("claim_evidence"), failures
+            f"{pid}:row",
+            field,
+            row.get(field, _MISSING),
+            row.get("claim_evidence"),
+            failures,
         )
 
-    for signal in row.get("signals", []):
-        sid = signal.get("signal_id", "?")
-        for field in SIGNAL_REQUIRED_FIELDS:
-            _validate_binding(
-                f"{pid}:signal:{sid}",
-                field,
-                signal.get(field),
-                signal.get("claim_evidence"),
-                failures,
-            )
+    signals = row.get("signals", [])
+    if not isinstance(signals, list):
+        failures.append(f"{pid}:signals:container-invalid")
+    else:
+        for index, signal in enumerate(signals):
+            if not isinstance(signal, Mapping):
+                failures.append(f"{pid}:signal:{index}:entry-invalid")
+                continue
+            sid = signal.get("signal_id", "?")
+            for field in SIGNAL_REQUIRED_FIELDS:
+                _validate_binding(
+                    f"{pid}:signal:{sid}",
+                    field,
+                    signal.get(field, _MISSING),
+                    signal.get("claim_evidence"),
+                    failures,
+                )
 
-    for index, edge in enumerate(row.get("control_edges", [])):
-        for field in EDGE_REQUIRED_FIELDS:
-            _validate_binding(
-                f"{pid}:edge:{index}",
-                field,
-                edge.get(field),
-                edge.get("claim_evidence"),
-                failures,
-            )
+    control_edges = row.get("control_edges", [])
+    if not isinstance(control_edges, list):
+        failures.append(f"{pid}:control_edges:container-invalid")
+    else:
+        for index, edge in enumerate(control_edges):
+            if not isinstance(edge, Mapping):
+                failures.append(f"{pid}:edge:{index}:entry-invalid")
+                continue
+            for field in EDGE_REQUIRED_FIELDS:
+                _validate_binding(
+                    f"{pid}:edge:{index}",
+                    field,
+                    edge.get(field, _MISSING),
+                    edge.get("claim_evidence"),
+                    failures,
+                )
 
     return failures
