@@ -13,6 +13,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +27,7 @@ from sf_evidence_contract import (  # noqa: E402
 from sf_schema_v3_migrate import (  # noqa: E402
     ABSENCE_SELECTION_NOTE,
     ANCHOR_REPLACEMENTS,
+    MigrationError,
     OUTPUT_DIR,
     SCHEMA_TEXT,
     SCHEMA_V3_BINDING_STATUS,
@@ -122,6 +124,18 @@ class SchemaV3MigrationTest(unittest.TestCase):
         self.assertEqual(
             migrated["schema_v3_binding_status"], SCHEMA_V3_BINDING_STATUS
         )
+        self.assertNotIn("schema_v3_adjudicator", migrated)
+
+    def test_pending_migration_removes_both_adjudicator_field_names(self):
+        source = fixture_sidecar()
+        source["schema_v3_binding_adjudicator"] = "must-also-not-survive"
+
+        migrated = migrate_sidecar(source)
+
+        self.assertEqual(
+            migrated["schema_v3_binding_status"], SCHEMA_V3_BINDING_STATUS
+        )
+        self.assertNotIn("schema_v3_binding_adjudicator", migrated)
         self.assertNotIn("schema_v3_adjudicator", migrated)
 
     def test_migration_does_not_mutate_source(self):
@@ -225,8 +239,158 @@ class SchemaV3MigrationTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "extract.*canon.*tex.*quote"):
             migrate_sidecar(source)
 
+    def test_source_binding_must_be_mapping_with_supported_kind(self):
+        cases = {
+            "not-mapping": "malformed binding",
+            "unsupported-kind": {
+                "value": "scored_select",
+                "kind": "unsupported",
+                "quote": "claim-bearing quote",
+            },
+            "non-string-kind": {
+                "value": "scored_select",
+                "kind": [],
+                "quote": "claim-bearing quote",
+            },
+        }
+        for label, malformed in cases.items():
+            with self.subTest(label=label):
+                source = fixture_sidecar()
+                source["method_paths"][0]["claim_evidence"][
+                    "selection_policy"
+                ] = malformed
+                with self.assertRaisesRegex(
+                    MigrationError, "selection_policy.*(binding|kind)"
+                ):
+                    migrate_sidecar(source)
+
+    def test_kind_specific_source_binding_shapes_fail_closed(self):
+        cases = {
+            "canon-blank-quote": {
+                "value": False,
+                "kind": "canon",
+                "quote": "   ",
+            },
+            "absence-missing-note": {
+                "value": False,
+                "kind": "absence",
+                "scope": "complete pinned method path",
+            },
+            "pdf-page-bad-page": {
+                "value": False,
+                "kind": "pdf_page",
+                "page": 0,
+                "anchor": "distinctive source phrase",
+            },
+            "pdf-page-blank-anchor": {
+                "value": False,
+                "kind": "pdf_page",
+                "page": 4,
+                "anchor": " ",
+            },
+        }
+        for label, malformed in cases.items():
+            with self.subTest(label=label):
+                source = fixture_sidecar()
+                source["method_paths"][0]["claim_evidence"][
+                    "core_weight_update"
+                ] = malformed
+                with self.assertRaisesRegex(MigrationError, "core_weight_update"):
+                    migrate_sidecar(source)
+
+    def test_valid_pdf_page_binding_retains_page_and_anchor(self):
+        source = fixture_sidecar()
+        source["method_paths"][0]["claim_evidence"]["selection_policy"] = {
+            "value": "scored_select",
+            "kind": "pdf_page",
+            "page": 4,
+            "anchor": "distinctive source phrase",
+        }
+
+        migrated = migrate_sidecar(source)
+        cloned = migrated["method_paths"][0]["claim_evidence"]["selection_object"]
+
+        self.assertEqual(cloned["kind"], "pdf_page")
+        self.assertEqual(cloned["page"], 4)
+        self.assertEqual(cloned["anchor"], "distinctive source phrase")
+
+    def test_signal_source_binding_is_validated_before_cloning(self):
+        source = fixture_sidecar()
+        source["method_paths"][0]["signals"][0]["claim_evidence"]["form"][
+            "quote"
+        ] = ""
+
+        with self.assertRaisesRegex(MigrationError, "signal.*form.*quote"):
+            migrate_sidecar(source)
+
+    def test_edge_locator_rejects_malformed_truncated_or_ambiguous_quotes(self):
+        malformed_locators = (
+            "canon: 'agent's decision controls branch'",
+            "canon: 'first claim'; tex: 'second claim'",
+            "canon: 'unterminated claim",
+            "canon: ''",
+            "unknown: 'claim text'",
+            "unknown-canon: 'claim text'",
+            "unknown: canon: 'claim text'",
+            "junk canon: 'claim text'",
+            "canon: 'claim text' unknown-anchor='other text'",
+            "canon: 'complete claim' trailing '",
+        )
+        for locator in malformed_locators:
+            with self.subTest(locator=locator):
+                with self.assertRaisesRegex(
+                    MigrationError, "edge:0:.*canon.*tex.*quote"
+                ):
+                    migrate_sidecar(fixture_sidecar(edge_locator=locator))
+
+    def test_no_explicit_selection_rows_reject_value_drift(self):
+        drift = (
+            {"selection_object": "candidate_output"},
+            {"explicit_selection": True},
+        )
+        for override in drift:
+            with self.subTest(override=override):
+                kwargs = {
+                    "method_path_id": "2604.16529#pdr-random-k",
+                    "selection_policy": "random_sample",
+                    "selection_object": "none",
+                    "explicit_selection": False,
+                    **override,
+                }
+                with self.assertRaisesRegex(
+                    MigrationError, "NO_EXPLICIT_SELECTION.*selection"
+                ):
+                    migrate_sidecar(fixture_sidecar(**kwargs))
+
+    def test_positive_selection_rows_reject_value_drift(self):
+        drift = (
+            {"selection_object": "none"},
+            {"selection_object": None},
+            {"selection_object": ""},
+            {"selection_object": 0},
+            {"selection_object": []},
+            {"selection_object": {}},
+            {"explicit_selection": False},
+        )
+        for override in drift:
+            with self.subTest(override=override):
+                kwargs = {
+                    "selection_object": "candidate_output",
+                    "explicit_selection": True,
+                    **override,
+                }
+                with self.assertRaisesRegex(
+                    MigrationError, "POSITIVE_SELECTION_EVIDENCE.*selection"
+                ):
+                    migrate_sidecar(fixture_sidecar(**kwargs))
+
 
 class SchemaV3IntegrationTest(unittest.TestCase):
+    def copy_pinned_sources(self, destination):
+        destination.mkdir(parents=True)
+        for source_path in sorted(SOURCE_DIR.glob("*.sidecar.json")):
+            (destination / source_path.name).write_bytes(source_path.read_bytes())
+
     def test_pinned_corpus_has_exact_counts_and_complete_bindings(self):
         outputs = build_outputs(SOURCE_DIR)
         sidecars = [sidecar for _, sidecar in outputs]
@@ -282,6 +446,9 @@ class SchemaV3IntegrationTest(unittest.TestCase):
             }
 
             self.assertEqual(len(first), 8)
+            self.assertEqual(
+                set(first), {source_path.name for source_path, _ in outputs}
+            )
             for name, data in first.items():
                 self.assertNotIn(b"\r", data, name)
                 self.assertTrue(data.endswith(b"\n"), name)
@@ -296,6 +463,88 @@ class SchemaV3IntegrationTest(unittest.TestCase):
                 for path in sorted(output_dir.glob("*.sidecar.json"))
             }
             self.assertEqual(second, first)
+
+    def test_loader_rejects_duplicate_keys_and_nonfinite_constants(self):
+        malformed_cases = {
+            "duplicate key": '{"method_paths": [], "method_paths": []}\n',
+            "non-finite JSON constant NaN": '{"method_paths": [], "x": NaN}\n',
+        }
+        for expected_error, malformed_json in malformed_cases.items():
+            with self.subTest(expected_error=expected_error):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    source_dir = Path(temp_dir) / "sidecars"
+                    self.copy_pinned_sources(source_dir)
+                    target = sorted(source_dir.glob("*.sidecar.json"))[0]
+                    target.write_text(malformed_json, encoding="utf-8", newline="\n")
+
+                    with self.assertRaisesRegex(
+                        MigrationError, rf"{target.name}.*{expected_error}"
+                    ):
+                        build_outputs(source_dir)
+
+    def test_renderer_rejects_nan_before_touching_destination(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "sidecars"
+            write_outputs(outputs, output_dir)
+            before = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.glob("*.sidecar.json"))
+            }
+            outputs[0][1]["not_json"] = float("nan")
+
+            with self.assertRaisesRegex(MigrationError, "render.*not JSON|render.*nan"):
+                write_outputs(outputs, output_dir)
+
+            after = {
+                path.name: path.read_bytes()
+                for path in sorted(output_dir.glob("*.sidecar.json"))
+            }
+            self.assertEqual(after, before)
+
+    def test_destination_rejects_stale_sidecar_without_deleting_or_writing(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "sidecars"
+            output_dir.mkdir()
+            stale = output_dir / "stale.sidecar.json"
+            stale.write_bytes(b"stale bytes\n")
+
+            with self.assertRaisesRegex(MigrationError, "unexpected.*stale"):
+                write_outputs(outputs, output_dir)
+
+            self.assertEqual(stale.read_bytes(), b"stale bytes\n")
+            self.assertEqual(list(output_dir.iterdir()), [stale])
+
+    def test_source_rename_rejects_old_destination_name_without_deleting_it(self):
+        outputs = build_outputs(SOURCE_DIR)
+        old_source, first_sidecar = outputs[0]
+        renamed_source = old_source.with_name("renamed.sidecar.json")
+        renamed_outputs = [(renamed_source, first_sidecar), *outputs[1:]]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "sidecars"
+            output_dir.mkdir()
+            old_destination = output_dir / old_source.name
+            old_destination.write_bytes(b"old destination bytes\n")
+
+            with self.assertRaisesRegex(MigrationError, "unexpected.*old destination"):
+                write_outputs(renamed_outputs, output_dir)
+
+            self.assertEqual(old_destination.read_bytes(), b"old destination bytes\n")
+            self.assertEqual(list(output_dir.iterdir()), [old_destination])
+
+    def test_replace_failure_cleans_every_temporary_sibling(self):
+        outputs = build_outputs(SOURCE_DIR)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "sidecars"
+            with mock.patch(
+                "sf_schema_v3_migrate.os.replace",
+                side_effect=OSError("forced replacement failure"),
+            ):
+                with self.assertRaisesRegex(OSError, "forced replacement failure"):
+                    write_outputs(outputs, output_dir)
+
+            self.assertEqual(list(output_dir.glob("*.tmp")), [])
 
     def test_build_and_temp_write_leave_pinned_source_bytes_unchanged(self):
         source_paths = sorted(SOURCE_DIR.glob("*.sidecar.json"))

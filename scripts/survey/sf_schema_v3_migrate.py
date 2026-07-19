@@ -6,13 +6,17 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import os
 import re
 import sys
+import tempfile
 from collections import Counter
+from collections.abc import Mapping
 from pathlib import Path
 
 from sf_evidence_contract import (
     EDGE_REQUIRED_FIELDS,
+    EVIDENCE_KINDS,
     ROW_REQUIRED_FIELDS,
     SIGNAL_REQUIRED_FIELDS,
     validate_bound_values,
@@ -66,7 +70,11 @@ SOURCE_DIR = REPO_ROOT / "wiki" / "survey" / "sidecars"
 OUTPUT_DIR = (
     REPO_ROOT / "wiki" / "survey" / "current" / "data" / "schema-v3" / "sidecars"
 )
-EDGE_QUOTE_RE = re.compile(r"\b(?P<kind>canon|tex):\s*'(?P<quote>[^']+)'", re.DOTALL)
+EDGE_QUOTE_RE = re.compile(
+    r"^\s*(?P<kind>canon|tex):\s*'(?P<quote>[^']+)'", re.DOTALL
+)
+EDGE_LABEL_RE = re.compile(r"(?<!\S)(?:canon|tex)\s*:")
+ANCHOR_QUOTE_RE = re.compile(r"(?<!\S)anchor\s*=\s*'[^']+'", re.DOTALL)
 
 
 class MigrationError(ValueError):
@@ -91,9 +99,41 @@ def replace_anchors(value, counts):
 
 
 def _require_mapping(value, owner):
-    if not isinstance(value, dict):
+    if not isinstance(value, Mapping):
         raise MigrationError(f"{owner}: expected JSON object")
     return value
+
+
+def _validate_binding_shape(binding, owner):
+    """Fail closed unless an evidence binding has its kind-specific structure."""
+    if not isinstance(binding, Mapping):
+        raise MigrationError(f"{owner}: binding must be a JSON object")
+    kind = binding.get("kind")
+    if not isinstance(kind, str) or kind not in EVIDENCE_KINDS:
+        raise MigrationError(f"{owner}: binding kind {kind!r} is unsupported")
+    if kind in {"canon", "tex"}:
+        quote = binding.get("quote")
+        if not isinstance(quote, str) or not quote.strip():
+            raise MigrationError(f"{owner}: {kind} binding quote must be non-empty")
+    elif kind == "absence":
+        for field in ("scope", "note"):
+            value = binding.get(field)
+            if not isinstance(value, str) or not value.strip():
+                raise MigrationError(
+                    f"{owner}: absence binding {field} must be non-empty"
+                )
+    elif kind == "pdf_page":
+        page = binding.get("page")
+        anchor = binding.get("anchor")
+        if type(page) is not int or page < 1:
+            raise MigrationError(
+                f"{owner}: pdf_page binding page must be a positive integer"
+            )
+        if not isinstance(anchor, str) or not anchor.strip():
+            raise MigrationError(
+                f"{owner}: pdf_page binding anchor must be non-empty"
+            )
+    return binding
 
 
 def _migrate_row_evidence(row):
@@ -107,8 +147,21 @@ def _migrate_row_evidence(row):
             f"{pid}: legacy row evidence is not exact row14 "
             f"(missing={missing}, extra={extra})"
         )
+    for field in legacy_fields:
+        _validate_binding_shape(evidence[field], f"{pid}:row:{field}")
 
     if pid in POSITIVE_SELECTION_EVIDENCE:
+        selection_object_value = row.get("selection_object")
+        if (
+            not isinstance(selection_object_value, str)
+            or not selection_object_value.strip()
+            or selection_object_value.strip() == "none"
+            or row.get("explicit_candidate_pool_selection") is not True
+        ):
+            raise MigrationError(
+                f"{pid}: POSITIVE_SELECTION_EVIDENCE requires selection_object "
+                "other than 'none' and explicit candidate selection"
+            )
         clone_field = POSITIVE_SELECTION_EVIDENCE[pid]
         if clone_field not in evidence:
             raise MigrationError(
@@ -121,6 +174,14 @@ def _migrate_row_evidence(row):
             row.get("explicit_candidate_pool_selection")
         )
     elif pid in NO_EXPLICIT_SELECTION:
+        if (
+            row.get("selection_object") != "none"
+            or row.get("explicit_candidate_pool_selection") is not False
+        ):
+            raise MigrationError(
+                f"{pid}: NO_EXPLICIT_SELECTION requires selection_object='none' "
+                "and no explicit candidate selection"
+            )
         selection_object = {
             "value": copy.deepcopy(row.get("selection_object")),
             "kind": "absence",
@@ -162,6 +223,10 @@ def _migrate_signal_evidence(row):
                 f"{pid}:signal:{sid}: legacy evidence is not exact signal3 "
                 f"(missing={missing}, extra={extra})"
             )
+        for field in legacy_fields:
+            _validate_binding_shape(
+                evidence[field], f"{pid}:signal:{sid}:{field}"
+            )
         source = copy.deepcopy(evidence["form"])
         source["value"] = copy.deepcopy(signal.get("source"))
         signal["claim_evidence"] = {
@@ -173,18 +238,28 @@ def _migrate_signal_evidence(row):
 
 
 def _extract_edge_quote(locator, pid, index):
+    failure = (
+        f"{pid}:edge:{index}: cannot extract exactly one complete canon or tex "
+        "single-quoted quote from source_locator"
+    )
     if not isinstance(locator, str):
-        raise MigrationError(
-            f"{pid}:edge:{index}: cannot extract canon/tex quoted evidence from "
-            "non-string source_locator"
-        )
-    match = EDGE_QUOTE_RE.search(locator)
-    if match is None:
-        raise MigrationError(
-            f"{pid}:edge:{index}: cannot extract an existing canon or tex quote "
-            "from source_locator"
-        )
-    return match.group("kind"), match.group("quote")
+        raise MigrationError(failure)
+    if len(EDGE_LABEL_RE.findall(locator)) != 1:
+        raise MigrationError(failure)
+    matches = list(EDGE_QUOTE_RE.finditer(locator))
+    if len(matches) != 1 or not matches[0].group("quote").strip():
+        raise MigrationError(failure)
+    quoted_spans = [*matches, *ANCHOR_QUOTE_RE.finditer(locator)]
+    consumed_quotes = {
+        position
+        for match in quoted_spans
+        for position in range(match.start(), match.end())
+        if locator[position] == "'"
+    }
+    all_quotes = {position for position, char in enumerate(locator) if char == "'"}
+    if consumed_quotes != all_quotes:
+        raise MigrationError(failure)
+    return matches[0].group("kind"), matches[0].group("quote")
 
 
 def _migrate_edge_evidence(row):
@@ -205,6 +280,23 @@ def _migrate_edge_evidence(row):
         }
 
 
+def _validate_generated_binding_shapes(row):
+    pid = row.get("method_path_id", "?")
+    for field in ROW_REQUIRED_FIELDS:
+        _validate_binding_shape(row["claim_evidence"][field], f"{pid}:row:{field}")
+    for index, signal in enumerate(row["signals"]):
+        sid = signal.get("signal_id", index)
+        for field in SIGNAL_REQUIRED_FIELDS:
+            _validate_binding_shape(
+                signal["claim_evidence"][field], f"{pid}:signal:{sid}:{field}"
+            )
+    for index, edge in enumerate(row["control_edges"]):
+        for field in EDGE_REQUIRED_FIELDS:
+            _validate_binding_shape(
+                edge["claim_evidence"][field], f"{pid}:edge:{index}:{field}"
+            )
+
+
 def migrate_sidecar(source, anchor_counts=None):
     """Return one independently migrated sidecar without mutating *source*."""
     source = _require_mapping(source, "sidecar")
@@ -212,6 +304,7 @@ def migrate_sidecar(source, anchor_counts=None):
     migrated = replace_anchors(source, counts)
     migrated["schema"] = SCHEMA_TEXT
     migrated["schema_v3_binding_status"] = SCHEMA_V3_BINDING_STATUS
+    migrated.pop("schema_v3_binding_adjudicator", None)
     migrated.pop("schema_v3_adjudicator", None)
 
     rows = migrated.get("method_paths")
@@ -222,6 +315,7 @@ def migrate_sidecar(source, anchor_counts=None):
         _migrate_row_evidence(row)
         _migrate_signal_evidence(row)
         _migrate_edge_evidence(row)
+        _validate_generated_binding_shapes(row)
         failures = validate_bound_values(row)
         if failures:
             raise MigrationError(
@@ -250,6 +344,30 @@ def _validate_policy_maps(method_ids):
         )
 
 
+def _reject_duplicate_pairs(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise MigrationError(f"duplicate key {key!r}")
+        result[key] = value
+    return result
+
+
+def _reject_json_constant(value):
+    raise MigrationError(f"non-finite JSON constant {value}")
+
+
+def _load_sidecar(path):
+    try:
+        return json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=_reject_duplicate_pairs,
+            parse_constant=_reject_json_constant,
+        )
+    except (OSError, json.JSONDecodeError, MigrationError) as error:
+        raise MigrationError(f"cannot read {path}: {error}") from error
+
+
 def build_outputs(source_dir=SOURCE_DIR):
     """Read, migrate, and fully validate all pinned inputs in memory."""
     paths = sorted(source_dir.glob("*.sidecar.json"), key=lambda path: path.name)
@@ -261,10 +379,7 @@ def build_outputs(source_dir=SOURCE_DIR):
 
     sources = []
     for path in paths:
-        try:
-            sources.append(json.loads(path.read_text(encoding="utf-8")))
-        except (OSError, json.JSONDecodeError) as error:
-            raise MigrationError(f"cannot read {path}: {error}") from error
+        sources.append(_load_sidecar(path))
 
     anchor_counts = Counter()
     outputs = [migrate_sidecar(source, anchor_counts) for source in sources]
@@ -305,12 +420,73 @@ def build_outputs(source_dir=SOURCE_DIR):
     return list(zip(paths, outputs, strict=True))
 
 
+def _render_outputs(outputs):
+    rendered = []
+    names = []
+    for source_path, sidecar in outputs:
+        name = source_path.name
+        names.append(name)
+        try:
+            text = (
+                json.dumps(sidecar, ensure_ascii=False, indent=1, allow_nan=False)
+                + "\n"
+            )
+        except (TypeError, ValueError) as error:
+            raise MigrationError(f"cannot render {name} as strict JSON: {error}") from error
+        rendered.append((name, text.encode("utf-8")))
+    duplicates = sorted(name for name, count in Counter(names).items() if count > 1)
+    if duplicates:
+        raise MigrationError(f"duplicate output sidecar names: {duplicates}")
+    return rendered
+
+
 def write_outputs(outputs, output_dir=OUTPUT_DIR):
     """Write validated outputs as deterministic UTF-8 LF JSON; remove nothing."""
+    output_dir = Path(output_dir)
+    rendered = _render_outputs(outputs)
+    expected_names = {name for name, _ in rendered}
+    if output_dir.exists() and not output_dir.is_dir():
+        raise MigrationError(f"output destination is not a directory: {output_dir}")
+    existing_names = (
+        {path.name for path in output_dir.glob("*.sidecar.json")}
+        if output_dir.exists()
+        else set()
+    )
+    unexpected = sorted(existing_names - expected_names)
+    if unexpected:
+        raise MigrationError(
+            f"unexpected old destination sidecars in {output_dir}: {unexpected}"
+        )
+
     output_dir.mkdir(parents=True, exist_ok=True)
-    for source_path, sidecar in outputs:
-        rendered = json.dumps(sidecar, ensure_ascii=False, indent=1) + "\n"
-        (output_dir / source_path.name).write_bytes(rendered.encode("utf-8"))
+    temporary_paths = {}
+    try:
+        for name, data in rendered:
+            descriptor, temp_name = tempfile.mkstemp(
+                prefix=f".{name}.", suffix=".tmp", dir=output_dir
+            )
+            temp_path = Path(temp_name)
+            temporary_paths[name] = temp_path
+            with os.fdopen(descriptor, "wb") as handle:
+                handle.write(data)
+                handle.flush()
+                os.fsync(handle.fileno())
+        for name, _ in rendered:
+            os.replace(temporary_paths[name], output_dir / name)
+            del temporary_paths[name]
+    finally:
+        for temp_path in temporary_paths.values():
+            try:
+                temp_path.unlink()
+            except FileNotFoundError:
+                pass
+
+    actual_names = {path.name for path in output_dir.glob("*.sidecar.json")}
+    if actual_names != expected_names:
+        raise MigrationError(
+            f"destination sidecar names mismatch after write: expected "
+            f"{sorted(expected_names)}, found {sorted(actual_names)}"
+        )
 
 
 def parse_args(argv=None):
