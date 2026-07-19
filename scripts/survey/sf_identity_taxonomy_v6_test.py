@@ -1687,6 +1687,37 @@ def write_report(report, output=Path(OUT)):
             pass
 
 
+def platform_snapshot_path(output=Path(OUT), platform=None):
+    """Return the predictable sibling snapshot path for one platform run."""
+    output = Path(output)
+    platform = platform or os.name
+    return output.with_name(f"{output.stem}.{platform}{output.suffix}")
+
+
+def write_report_with_platform_snapshot(report, output=Path(OUT)):
+    """Publish a base report and identical platform snapshot, failing closed.
+
+    Two independent directory entries cannot be switched atomically.  Remove
+    the old platform snapshot before either publication and remove it again on
+    any error.  Thus a failed run may leave the base report newer than before,
+    but can never leave a stale platform PASS for the aggregator to accept.
+    """
+    output = Path(output)
+    snapshot = platform_snapshot_path(output)
+    try:
+        snapshot.unlink(missing_ok=True)
+        write_report(report, output)
+        write_report(report, snapshot)
+        if output.read_bytes() != snapshot.read_bytes():
+            raise OSError("base report and platform snapshot bytes differ")
+    except BaseException:
+        try:
+            snapshot.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+
+
 def _failure_report(error):
     return {
         "artifact_id": "SF-IDENTITY-TAXONOMY-V6-TEST-2026-07-19-01",
@@ -1715,7 +1746,7 @@ def main(output=Path(OUT)):
         report = build_report()
     except Exception as error:
         report = _failure_report(error)
-    write_report(report, output)
+    write_report_with_platform_snapshot(report, output)
     if report["verdict"] != "PASS" or "occupancy" not in report:
         print(
             json.dumps(

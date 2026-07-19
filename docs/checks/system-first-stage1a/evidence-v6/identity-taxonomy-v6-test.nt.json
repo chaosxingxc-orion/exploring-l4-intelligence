@@ -69,8 +69,8 @@
  },
  "input_snapshot_sha256": "8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d",
  "platform": {
-  "os": "posix",
-  "python": "3.12.3"
+  "os": "nt",
+  "python": "3.14.3"
  },
  "topology_policy": "A(frozen) + strict-topology sensitivity dual-computed",
  "checks": [

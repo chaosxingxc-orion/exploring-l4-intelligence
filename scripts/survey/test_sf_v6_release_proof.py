@@ -357,6 +357,26 @@ class LineagePathTest(unittest.TestCase):
 
 
 class ProvenanceAndPublicationTest(unittest.TestCase):
+    def passing_report(self, platform=None):
+        policy = {
+            "is_reward_guided": {"n_paths": "6/11"},
+            "is_rq_sys_control_compatible": {"n_paths": "5/11"},
+            "is_project_method_candidate": {"n_paths": "0/11"},
+            "reward_guided_selection": {"n_paths": "4/11"},
+            "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+                "trajectory": {"n_paths": "2/11"},
+            },
+        }
+        return {
+            "summary": "1/1 PASS",
+            "verdict": "PASS",
+            "platform": {
+                "os": platform or os.name,
+                "python": sys.version.split()[0],
+            },
+            "occupancy": {"policy_A": policy},
+        }
+
     def test_snapshot_json_reader_rejects_exact_bytes_at_unprescribed_path(self):
         with tempfile.TemporaryDirectory() as temporary:
             redirected = Path(temporary) / "identity-taxonomy-v6.json"
@@ -466,6 +486,58 @@ class ProvenanceAndPublicationTest(unittest.TestCase):
                     harness.write_report({"verdict": "FAIL"}, output)
             self.assertEqual(output.read_bytes(), old)
             self.assertEqual(list(Path(temporary).iterdir()), [output])
+
+    def test_main_writes_platform_stamp_identical_to_base_for_custom_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "custom.json"
+            with mock.patch.object(
+                harness, "build_report", return_value=self.passing_report()
+            ):
+                self.assertEqual(harness.main(output=output), 0)
+            stamp = output.with_name(f"custom.{os.name}.json")
+            self.assertEqual(stamp.read_bytes(), output.read_bytes())
+            self.assertEqual(
+                json.loads(stamp.read_text(encoding="utf-8"))["platform"]["os"],
+                os.name,
+            )
+
+    def test_main_failure_replaces_platform_stamp_with_fail(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "custom.json"
+            stamp = output.with_name(f"custom.{os.name}.json")
+            stamp.write_bytes(b'{"verdict":"PASS"}\n')
+            with mock.patch.object(
+                harness, "build_report", side_effect=ValueError("invalid input")
+            ):
+                self.assertNotEqual(harness.main(output=output), 0)
+            self.assertEqual(output.read_bytes(), stamp.read_bytes())
+            self.assertEqual(
+                json.loads(stamp.read_text(encoding="utf-8"))["verdict"], "FAIL"
+            )
+
+    def test_mid_publication_failure_removes_old_stamp_fail_closed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "custom.json"
+            stamp = output.with_name(f"custom.{os.name}.json")
+            output.write_bytes(b'{"verdict":"PASS"}\n')
+            stamp.write_bytes(b'{"verdict":"PASS"}\n')
+            real_write = harness.write_report
+
+            def fail_stamp(report, destination):
+                if Path(destination) == stamp:
+                    raise OSError("injected stamp failure")
+                return real_write(report, destination)
+
+            with (
+                mock.patch.object(harness, "build_report", return_value=self.passing_report()),
+                mock.patch.object(harness, "write_report", side_effect=fail_stamp),
+                self.assertRaisesRegex(OSError, "stamp failure"),
+            ):
+                harness.main(output=output)
+            self.assertFalse(stamp.exists())
+            self.assertEqual(
+                json.loads(output.read_text(encoding="utf-8"))["verdict"], "PASS"
+            )
 
 
 class CacheIsolationTest(unittest.TestCase):
