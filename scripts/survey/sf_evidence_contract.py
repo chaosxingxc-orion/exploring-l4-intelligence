@@ -144,3 +144,49 @@ def values_equal(expected, declared):
     if isinstance(expected, list) and isinstance(declared, list):
         return Counter(expected) == Counter(declared)
     return expected == declared
+
+
+def _validate_binding(owner, field, expected, evidence, failures):
+    """Append failures when a required claim-evidence binding is invalid."""
+    entry = (evidence or {}).get(field)
+    if entry is None:
+        failures.append(f"{owner}:{field}:required-evidence-missing")
+        return
+    if entry.get("kind") not in EVIDENCE_KINDS:
+        failures.append(f"{owner}:{field}:evidence-kind-invalid")
+    if not values_equal(expected, entry.get("value")):
+        failures.append(f"{owner}:{field}:evidence-value-mismatch")
+
+
+def validate_bound_values(row):
+    """Validate that required row, signal, and edge claims bind their values."""
+    pid = row.get("method_path_id", "?")
+    failures = []
+
+    for field in ROW_REQUIRED_FIELDS:
+        _validate_binding(
+            f"{pid}:row", field, row.get(field), row.get("claim_evidence"), failures
+        )
+
+    for signal in row.get("signals", []):
+        sid = signal.get("signal_id", "?")
+        for field in SIGNAL_REQUIRED_FIELDS:
+            _validate_binding(
+                f"{pid}:signal:{sid}",
+                field,
+                signal.get(field),
+                signal.get("claim_evidence"),
+                failures,
+            )
+
+    for index, edge in enumerate(row.get("control_edges", [])):
+        for field in EDGE_REQUIRED_FIELDS:
+            _validate_binding(
+                f"{pid}:edge:{index}",
+                field,
+                edge.get(field),
+                edge.get("claim_evidence"),
+                failures,
+            )
+
+    return failures
