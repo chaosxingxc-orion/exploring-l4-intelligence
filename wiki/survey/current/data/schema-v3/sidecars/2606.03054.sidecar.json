@@ -48,8 +48,9 @@
       },
       "source": {
        "value": "trained_classifier",
-       "kind": "canon",
-       "quote": "输出 execute/skip"
+       "kind": "pdf_page",
+       "page": 11,
+       "anchor": "logistic regression classifier we train with l2"
       },
       "lifecycle": {
        "value": "online_step",

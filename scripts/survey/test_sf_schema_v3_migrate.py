@@ -7,13 +7,18 @@ import copy
 import hashlib
 import io
 import json
+import logging
 import os
 import sys
+import tarfile
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest import mock
+
+
+logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -22,8 +27,10 @@ from sf_evidence_contract import (  # noqa: E402
     EDGE_REQUIRED_FIELDS,
     ROW_REQUIRED_FIELDS,
     SIGNAL_REQUIRED_FIELDS,
+    check_page_locator,
     validate_bound_values,
 )
+import sf_schema_v3_migrate as migration  # noqa: E402
 from sf_schema_v3_migrate import (  # noqa: E402
     ABSENCE_SELECTION_NOTE,
     ANCHOR_REPLACEMENTS,
@@ -42,6 +49,142 @@ from sf_schema_v3_migrate import (  # noqa: E402
 
 
 ROW14_FIELDS = ROW_REQUIRED_FIELDS[:-2]
+
+ADJUDICATION_REPAIR_BINDINGS = {
+    (
+        "2026.findings-acl.511#prm-guided-search",
+        "row",
+        "selection_object",
+    ): {
+        "value": "trajectory",
+        "kind": "pdf_page",
+        "page": 15,
+        "anchor": "return path with highest reward",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "signal:s_profile",
+        "source",
+    ): {
+        "value": "llm_judge",
+        "kind": "pdf_page",
+        "page": 7,
+        "anchor": "each tool agent performs a self audit",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "edge:1",
+        "signal_use",
+    ): {
+        "value": "route",
+        "kind": "pdf_page",
+        "page": 5,
+        "anchor": "agents profiles to select only the most compatible tools",
+    },
+    ("2604.16529#rtv", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "tex",
+        "quote": (
+            "where each round reduces a population of rollouts into a subset by "
+            "dividing the population into groups of size $G$ and selecting a rollout "
+            "from each group."
+        ),
+    },
+    (
+        "2604.16529#rtv-pdr-pipeline",
+        "row",
+        "explicit_candidate_pool_selection",
+    ): {
+        "value": True,
+        "kind": "tex",
+        "quote": (
+            "apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;"
+        ),
+    },
+    ("2604.16529#rtv-pdr-pipeline", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "tex",
+        "quote": (
+            "apply \\textbf{RTV} to the refined rollouts and return the final "
+            "top-$1$ rollout."
+        ),
+    },
+    ("2604.16529#rtv-pdr-pipeline", "edge:1", "decision_right"): {
+        "value": "supply",
+        "kind": "tex",
+        "quote": (
+            "\\textbf{RTV} is then applied to these summaries to select the top-$K$ "
+            "summaries, which define the refinement context for the next iteration."
+        ),
+    },
+    ("2605.08083#discovered-controller", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "canon",
+        "quote": (
+            "每(model,problem)预采 128 轨迹;selector=controller 终态共识型 Agg"
+        ),
+    },
+    ("2606.01667#agentic-orchestration", "row", "selection_object"): {
+        "value": "candidate_output",
+        "kind": "pdf_page",
+        "page": 3,
+        "anchor": "returned candidate ct answer reasoning approach confidence",
+    },
+    ("2606.01667#agentic-orchestration", "edge:2", "signal_use"): {
+        "value": "synthesize_input",
+        "kind": "pdf_page",
+        "page": 2,
+        "anchor": (
+            "stop and synthesis decisions both rest on this single stateful in "
+            "context view"
+        ),
+    },
+    ("2606.03054#trained-gate", "signal:s_gate", "source"): {
+        "value": "trained_classifier",
+        "kind": "pdf_page",
+        "page": 11,
+        "anchor": "logistic regression classifier we train with l2",
+    },
+}
+
+
+def pinned_data_root():
+    candidates = []
+    configured = os.environ.get("SPEECHRL_DATA_DIR")
+    if configured:
+        candidates.append(Path(configured))
+    candidates.extend(
+        [
+            Path("E:/chao_workspace/exploring-l4-intelligence/speechrl-data"),
+            Path("/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data"),
+        ]
+    )
+    for candidate in candidates:
+        if candidate.is_dir():
+            return candidate
+    raise AssertionError("pinned speechrl-data root is unavailable")
+
+
+def rows_by_method_path(outputs):
+    return {
+        row["method_path_id"]: row
+        for _, sidecar in outputs
+        for row in sidecar["method_paths"]
+    }
+
+
+def bound_field(row, owner, field):
+    if owner == "row":
+        return row["claim_evidence"][field]
+    owner_kind, owner_id = owner.split(":", 1)
+    if owner_kind == "signal":
+        signal = next(
+            signal for signal in row["signals"] if signal["signal_id"] == owner_id
+        )
+        return signal["claim_evidence"][field]
+    if owner_kind == "edge":
+        return row["control_edges"][int(owner_id)]["claim_evidence"][field]
+    raise AssertionError(f"unsupported binding owner {owner!r}")
 
 
 def binding(value, kind="canon", quote="claim-bearing quote"):
@@ -409,6 +552,162 @@ class SchemaV3IntegrationTest(unittest.TestCase):
             )
         for row in rows:
             self.assertEqual(validate_bound_values(row), [])
+
+    def test_build_outputs_rejects_control_edge_count_drift(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_dir = Path(temp_dir) / "sidecars"
+            self.copy_pinned_sources(source_dir)
+            target = source_dir / "2026.findings-acl.1243.sidecar.json"
+            sidecar = json.loads(target.read_text(encoding="utf-8"))
+            sidecar["method_paths"][0]["control_edges"].pop()
+            target.write_text(
+                json.dumps(sidecar, ensure_ascii=False, indent=1) + "\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+
+            with self.assertRaisesRegex(
+                MigrationError, "expected 18 control edges, found 17"
+            ):
+                build_outputs(source_dir)
+
+    def test_adjudication_override_table_covers_exact_disagreement_tuples(self):
+        overrides = getattr(migration, "BINDING_OVERRIDES", {})
+
+        self.assertEqual(set(overrides), set(ADJUDICATION_REPAIR_BINDINGS))
+
+    def test_pinned_corpus_has_exact_adjudication_repair_bindings(self):
+        rows = rows_by_method_path(build_outputs(SOURCE_DIR))
+
+        for key, expected in ADJUDICATION_REPAIR_BINDINGS.items():
+            pid, owner, field = key
+            with self.subTest(method_path_id=pid, owner=owner, field=field):
+                self.assertEqual(bound_field(rows[pid], owner, field), expected)
+
+        calibrated = rows["2602.16485#calibrated-orchestration"]
+        profile = calibrated["signals"][0]
+        repaired_edge = calibrated["control_edges"][1]
+        route_binding = {
+            "value": "route",
+            "kind": "pdf_page",
+            "page": 5,
+            "anchor": "agents profiles to select only the most compatible tools",
+        }
+        self.assertEqual(profile["uses"], ["route"])
+        self.assertEqual(
+            profile["claim_evidence"]["uses"],
+            {
+                **route_binding,
+                "value": ["route"],
+            },
+        )
+        self.assertEqual(repaired_edge["signal_use"], "route")
+        self.assertEqual(repaired_edge["decision_right"], "tool_call")
+        self.assertEqual(
+            repaired_edge["claim_evidence"]["decision_right"],
+            {**route_binding, "value": "tool_call"},
+        )
+
+        pipeline = rows["2604.16529#rtv-pdr-pipeline"]
+        exact_select_k = ADJUDICATION_REPAIR_BINDINGS[
+            (
+                "2604.16529#rtv-pdr-pipeline",
+                "row",
+                "explicit_candidate_pool_selection",
+            )
+        ]
+        self.assertEqual(
+            pipeline["claim_evidence"]["selection_policy"],
+            {**exact_select_k, "value": "tournament_select"},
+        )
+
+    def test_adjudication_repair_evidence_resolves_in_pinned_sources(self):
+        from pypdf import PdfReader
+
+        data_root = pinned_data_root()
+        pdf_paths = {
+            "2026.findings-acl.511#prm-guided-search": (
+                data_root
+                / "survey-backups"
+                / "2026.findings-acl.511"
+                / "2026.findings-acl.511.pdf"
+            ),
+            "2602.16485#calibrated-orchestration": (
+                data_root / "survey-fulltext" / "2602.16485" / "2602.16485.pdf"
+            ),
+            "2606.01667#agentic-orchestration": (
+                data_root / "survey-fulltext" / "2606.01667" / "2606.01667.pdf"
+            ),
+            "2606.03054#trained-gate": (
+                data_root / "survey-fulltext" / "2606.03054" / "2606.03054.pdf"
+            ),
+        }
+        eprint_path = (
+            data_root
+            / "survey-fulltext"
+            / "2604.16529"
+            / "2604.16529.eprint"
+        )
+        with tarfile.open(eprint_path, "r:*") as archive:
+            paper_member = archive.extractfile("paper.tex")
+            self.assertIsNotNone(paper_member)
+            paper_tex = paper_member.read().decode("utf-8")
+        canon_text = (
+            Path(__file__).resolve().parents[2]
+            / "wiki"
+            / "survey"
+            / "2026-07-18-sf-known-item-dfs-systemcontrol.md"
+        ).read_text(encoding="utf-8")
+        readers = {}
+
+        for key, binding_entry in ADJUDICATION_REPAIR_BINDINGS.items():
+            pid, owner, field = key
+            with self.subTest(method_path_id=pid, owner=owner, field=field):
+                if binding_entry["kind"] == "pdf_page":
+                    reader = readers.setdefault(pid, PdfReader(pdf_paths[pid]))
+                    failures = []
+                    locator = (
+                        f"p{binding_entry['page']} "
+                        f"anchor='{binding_entry['anchor']}'"
+                    )
+                    check_page_locator(
+                        locator,
+                        reader,
+                        pid,
+                        f"{owner}:{field}",
+                        failures,
+                    )
+                    self.assertEqual(failures, [])
+                elif binding_entry["kind"] == "tex":
+                    self.assertIn(binding_entry["quote"], paper_tex)
+                else:
+                    self.assertEqual(binding_entry["kind"], "canon")
+                    self.assertIn(binding_entry["quote"], canon_text)
+
+    def test_replacement_explore_anchor_passes_real_pdf_locator_contract(self):
+        from pypdf import PdfReader
+
+        replacement = (
+            "p4 anchor='repeatedly decides whether to call explore or to stop and "
+            "synthesize'"
+        )
+        pdf_path = (
+            pinned_data_root()
+            / "survey-fulltext"
+            / "2606.01667"
+            / "2606.01667.pdf"
+        )
+        failures = []
+        check_page_locator(
+            replacement,
+            PdfReader(pdf_path),
+            "2606.01667#agentic-orchestration",
+            "source_locator",
+            failures,
+        )
+
+        self.assertEqual(failures, [])
+        self.assertEqual(ANCHOR_REPLACEMENTS["p4 explore"], replacement)
 
     def test_all_pinned_anchor_occurrences_are_replaced_and_conserved(self):
         outputs = build_outputs(SOURCE_DIR)

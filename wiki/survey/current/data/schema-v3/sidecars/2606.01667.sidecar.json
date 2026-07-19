@@ -98,7 +98,7 @@
      "signal_id": "s_consensus",
      "signal_use": "stop_budget",
      "decision_right": "tool_call",
-     "source_locator": "canon: '独占 explore/stop 决策' (p4 anchor='decides every explore and stop action')",
+     "source_locator": "canon: '独占 explore/stop 决策' (p4 anchor='repeatedly decides whether to call explore or to stop and synthesize')",
      "edge_semantics": "the same assessment controls whether another explore solver call is dispatched (one decision)",
      "claim_evidence": {
       "signal_use": {
@@ -117,13 +117,14 @@
      "signal_id": "s_consensus",
      "signal_use": "synthesize_input",
      "decision_right": "synthesize",
-     "source_locator": "canon: '直接合成终答'",
+     "source_locator": "canon: '直接合成终答' (p2 anchor='stop and synthesis decisions both rest on this single stateful in context view')",
      "edge_semantics": "the accumulated candidate evidence pool is what the orchestrator synthesizes the final answer from",
      "claim_evidence": {
       "signal_use": {
        "value": "synthesize_input",
-       "kind": "canon",
-       "quote": "直接合成终答"
+       "kind": "pdf_page",
+       "page": 2,
+       "anchor": "stop and synthesis decisions both rest on this single stateful in context view"
       },
       "decision_right": {
        "value": "synthesize",
@@ -215,8 +216,9 @@
     },
     "selection_object": {
      "value": "candidate_output",
-     "kind": "canon",
-     "quote": "selector=orchestrator 直接合成(非打分器)"
+     "kind": "pdf_page",
+     "page": 3,
+     "anchor": "returned candidate ct answer reasoning approach confidence"
     },
     "explicit_candidate_pool_selection": {
      "value": true,

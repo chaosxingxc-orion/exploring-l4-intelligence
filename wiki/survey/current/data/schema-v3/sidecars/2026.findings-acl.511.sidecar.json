@@ -217,8 +217,9 @@
     },
     "selection_object": {
      "value": "trajectory",
-     "kind": "canon",
-     "quote": "PRM 打分留 top-n"
+     "kind": "pdf_page",
+     "page": 15,
+     "anchor": "return path with highest reward"
     },
     "explicit_candidate_pool_selection": {
      "value": true,

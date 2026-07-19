@@ -231,7 +231,7 @@
     "selection_object": {
      "value": "trajectory",
      "kind": "canon",
-     "quote": "selector=controller 终态共识型 Agg"
+     "quote": "每(model,problem)预采 128 轨迹;selector=controller 终态共识型 Agg"
     },
     "explicit_candidate_pool_selection": {
      "value": true,

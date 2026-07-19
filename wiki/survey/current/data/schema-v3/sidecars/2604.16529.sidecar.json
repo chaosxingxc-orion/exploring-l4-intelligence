@@ -149,8 +149,8 @@
     },
     "selection_object": {
      "value": "trajectory",
-     "kind": "canon",
-     "quote": "投票锦标赛递归淘汰"
+     "kind": "tex",
+     "quote": "where each round reduces a population of rollouts into a subset by dividing the population into groups of size $G$ and selecting a rollout from each group."
     },
     "explicit_candidate_pool_selection": {
      "value": true,
@@ -374,8 +374,8 @@
      "signal_id": "s_judge",
      "signal_use": "prune",
      "decision_right": "supply",
-     "source_locator": "canon: '投票锦标赛递归淘汰'",
-     "edge_semantics": "tournament elimination narrows the summary set that supplies the next iteration",
+     "source_locator": "tex: '\\textbf{RTV} is then applied to these summaries to select the top-$K$ summaries, which define the refinement context for the next iteration.'",
+     "edge_semantics": "the selected top-K summaries define the refinement context supplied to the next iteration",
      "claim_evidence": {
       "signal_use": {
        "value": "prune",
@@ -384,8 +384,8 @@
       },
       "decision_right": {
        "value": "supply",
-       "kind": "canon",
-       "quote": "投票锦标赛递归淘汰"
+       "kind": "tex",
+       "quote": "\\textbf{RTV} is then applied to these summaries to select the top-$K$ summaries, which define the refinement context for the next iteration."
       }
      }
     }
@@ -467,20 +467,20 @@
     "selection_policy": {
      "value": "tournament_select",
      "kind": "tex",
-     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+     "quote": "apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;"
     },
     "selection_object": {
      "value": "trajectory",
      "kind": "tex",
-     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+     "quote": "apply \\textbf{RTV} to the refined rollouts and return the final top-$1$ rollout."
     },
     "explicit_candidate_pool_selection": {
      "value": true,
      "kind": "tex",
-     "quote": "apply RTV to obtain a high-quality subset of K summaries"
+     "quote": "apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;"
     }
    },
-   "source_locator": "tex: 'apply RTV to obtain a high-quality subset of K summaries'",
+   "source_locator": "tex: 'apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;'",
    "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借",
    "coder": "claude-fable-main:s-ea4f0926",

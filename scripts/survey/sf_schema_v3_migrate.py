@@ -30,7 +30,10 @@ ANCHOR_REPLACEMENTS = {
     "p3 Algorithm": "p3 anchor='every decision auditable'",
     "p8 Fig": "p8 anchor='natural stop time aligns with correct majority emergence'",
     "p14 delegated": "p14 anchor='asymmetric delegated architecture'",
-    "p4 explore": "p4 anchor='decides every explore and stop action'",
+    "p4 explore": (
+        "p4 anchor='repeatedly decides whether to call explore or to stop and "
+        "synthesize'"
+    ),
 }
 POSITIVE_SELECTION_EVIDENCE = {
     "2026.findings-acl.1724#pipeline": "selection_policy",
@@ -47,6 +50,184 @@ NO_EXPLICIT_SELECTION = {
     "2604.16529#pdr-random-k",
     "2606.03054#trained-gate",
 }
+BINDING_OVERRIDES = {
+    (
+        "2026.findings-acl.511#prm-guided-search",
+        "row",
+        "selection_object",
+    ): {
+        "value": "trajectory",
+        "kind": "pdf_page",
+        "page": 15,
+        "anchor": "return path with highest reward",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "signal:s_profile",
+        "source",
+    ): {
+        "value": "llm_judge",
+        "kind": "pdf_page",
+        "page": 7,
+        "anchor": "each tool agent performs a self audit",
+    },
+    (
+        "2602.16485#calibrated-orchestration",
+        "edge:1",
+        "signal_use",
+    ): {
+        "value": "route",
+        "kind": "pdf_page",
+        "page": 5,
+        "anchor": "agents profiles to select only the most compatible tools",
+    },
+    ("2604.16529#rtv", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "tex",
+        "quote": (
+            "where each round reduces a population of rollouts into a subset by "
+            "dividing the population into groups of size $G$ and selecting a rollout "
+            "from each group."
+        ),
+    },
+    (
+        "2604.16529#rtv-pdr-pipeline",
+        "row",
+        "explicit_candidate_pool_selection",
+    ): {
+        "value": True,
+        "kind": "tex",
+        "quote": (
+            "apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;"
+        ),
+    },
+    ("2604.16529#rtv-pdr-pipeline", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "tex",
+        "quote": (
+            "apply \\textbf{RTV} to the refined rollouts and return the final "
+            "top-$1$ rollout."
+        ),
+    },
+    ("2604.16529#rtv-pdr-pipeline", "edge:1", "decision_right"): {
+        "value": "supply",
+        "kind": "tex",
+        "quote": (
+            "\\textbf{RTV} is then applied to these summaries to select the top-$K$ "
+            "summaries, which define the refinement context for the next iteration."
+        ),
+    },
+    ("2605.08083#discovered-controller", "row", "selection_object"): {
+        "value": "trajectory",
+        "kind": "canon",
+        "quote": (
+            "每(model,problem)预采 128 轨迹;selector=controller 终态共识型 Agg"
+        ),
+    },
+    ("2606.01667#agentic-orchestration", "row", "selection_object"): {
+        "value": "candidate_output",
+        "kind": "pdf_page",
+        "page": 3,
+        "anchor": "returned candidate ct answer reasoning approach confidence",
+    },
+    ("2606.01667#agentic-orchestration", "edge:2", "signal_use"): {
+        "value": "synthesize_input",
+        "kind": "pdf_page",
+        "page": 2,
+        "anchor": (
+            "stop and synthesis decisions both rest on this single stateful in "
+            "context view"
+        ),
+    },
+    ("2606.03054#trained-gate", "signal:s_gate", "source"): {
+        "value": "trained_classifier",
+        "kind": "pdf_page",
+        "page": 11,
+        "anchor": "logistic regression classifier we train with l2",
+    },
+}
+
+_PROFILE_ROUTE_BINDING = {
+    "kind": "pdf_page",
+    "page": 5,
+    "anchor": "agents profiles to select only the most compatible tools",
+}
+_PIPELINE_SELECT_K_QUOTE = (
+    "apply \\textbf{RTV} to obtain a high-quality subset of $K$ summaries;"
+)
+_PIPELINE_REFINEMENT_QUOTE = (
+    "\\textbf{RTV} is then applied to these summaries to select the top-$K$ "
+    "summaries, which define the refinement context for the next iteration."
+)
+_ATLAS_SYNTHESIS_ANCHOR = (
+    "stop and synthesis decisions both rest on this single stateful in context view"
+)
+COUPLED_OVERRIDES = {
+    (
+        "2602.16485#calibrated-orchestration",
+        "edge:1",
+        "signal_use",
+    ): {
+        "bindings": {
+            ("signal:s_profile", "uses"): {
+                "value": ["route"],
+                **_PROFILE_ROUTE_BINDING,
+            },
+            ("edge:1", "decision_right"): {
+                "value": "tool_call",
+                **_PROFILE_ROUTE_BINDING,
+            },
+        },
+        "fields": {
+            ("edge:1", "source_locator"): (
+                "p5 anchor='agents profiles to select only the most compatible tools'"
+            ),
+            ("edge:1", "edge_semantics"): (
+                "capability profiles route the query to compatible tool agents and "
+                "thereby control which tool calls are dispatched"
+            ),
+        },
+    },
+    (
+        "2604.16529#rtv-pdr-pipeline",
+        "row",
+        "explicit_candidate_pool_selection",
+    ): {
+        "bindings": {
+            ("row", "selection_policy"): {
+                "value": "tournament_select",
+                "kind": "tex",
+                "quote": _PIPELINE_SELECT_K_QUOTE,
+            },
+        },
+        "fields": {
+            ("row", "source_locator"): (
+                f"tex: '{_PIPELINE_SELECT_K_QUOTE}'"
+            ),
+        },
+    },
+    ("2604.16529#rtv-pdr-pipeline", "edge:1", "decision_right"): {
+        "bindings": {},
+        "fields": {
+            ("edge:1", "source_locator"): (
+                f"tex: '{_PIPELINE_REFINEMENT_QUOTE}'"
+            ),
+            ("edge:1", "edge_semantics"): (
+                "the selected top-K summaries define the refinement context supplied "
+                "to the next iteration"
+            ),
+        },
+    },
+    ("2606.01667#agentic-orchestration", "edge:2", "signal_use"): {
+        "bindings": {},
+        "fields": {
+            ("edge:2", "source_locator"): (
+                "canon: '直接合成终答' "
+                f"(p2 anchor='{_ATLAS_SYNTHESIS_ANCHOR}')"
+            ),
+        },
+    },
+}
 
 SCHEMA_TEXT = (
     "v3 (taxonomy v6: row16 + signal4 + edge2 field-bound evidence; "
@@ -61,6 +242,7 @@ ABSENCE_SELECTION_SCOPE = "complete pinned method path"
 EXPECTED_SIDECARS = 8
 EXPECTED_ROWS = 11
 EXPECTED_SIGNALS = 12
+EXPECTED_EDGES = 18
 SUCCESS_LINE = (
     "schema-v3 migration: PASS (8 sidecars, 11 rows, 12 signals; "
     "pending adjudication)"
@@ -281,6 +463,95 @@ def _migrate_edge_evidence(row):
         }
 
 
+def _resolve_override_owner(row, owner):
+    pid = row.get("method_path_id", "?")
+    if owner == "row":
+        return row
+    owner_kind, separator, owner_id = owner.partition(":")
+    if not separator or not owner_id:
+        raise MigrationError(f"{pid}:{owner}: malformed binding override owner")
+    if owner_kind == "signal":
+        matches = [
+            signal
+            for signal in row.get("signals", [])
+            if signal.get("signal_id") == owner_id
+        ]
+        if len(matches) != 1:
+            raise MigrationError(
+                f"{pid}:{owner}: binding override requires exactly one signal owner"
+            )
+        return matches[0]
+    if owner_kind == "edge" and owner_id.isdigit():
+        edges = row.get("control_edges", [])
+        index = int(owner_id)
+        if 0 <= index < len(edges):
+            return edges[index]
+    raise MigrationError(f"{pid}:{owner}: binding override owner does not exist")
+
+
+def _set_override_binding(row, owner, field, binding):
+    pid = row.get("method_path_id", "?")
+    target = _resolve_override_owner(row, owner)
+    if field not in target:
+        raise MigrationError(
+            f"{pid}:{owner}:{field}: encoded override field is missing"
+        )
+    evidence = _require_mapping(
+        target.get("claim_evidence"), f"{pid}:{owner}:claim_evidence"
+    )
+    if field not in evidence:
+        raise MigrationError(
+            f"{pid}:{owner}:{field}: override evidence field is missing"
+        )
+    replacement = copy.deepcopy(binding)
+    _validate_binding_shape(replacement, f"{pid}:{owner}:{field}:override")
+    target[field] = copy.deepcopy(replacement["value"])
+    evidence[field] = replacement
+
+
+def _apply_binding_overrides(row, used_overrides=None):
+    pid = row.get("method_path_id", "?")
+    for key, binding in BINDING_OVERRIDES.items():
+        method_path_id, owner, field = key
+        if method_path_id != pid:
+            continue
+        if used_overrides is not None and key in used_overrides:
+            raise MigrationError(f"binding override used more than once: {key!r}")
+        _set_override_binding(row, owner, field, binding)
+        coupled = COUPLED_OVERRIDES.get(key, {})
+        for (coupled_owner, coupled_field), coupled_binding in coupled.get(
+            "bindings", {}
+        ).items():
+            _set_override_binding(
+                row, coupled_owner, coupled_field, coupled_binding
+            )
+        for (coupled_owner, coupled_field), coupled_value in coupled.get(
+            "fields", {}
+        ).items():
+            target = _resolve_override_owner(row, coupled_owner)
+            if coupled_field not in target:
+                raise MigrationError(
+                    f"{pid}:{coupled_owner}:{coupled_field}: coupled field is missing"
+                )
+            target[coupled_field] = copy.deepcopy(coupled_value)
+        if used_overrides is not None:
+            used_overrides.add(key)
+
+
+def _validate_binding_override_coverage(used_overrides):
+    expected = set(BINDING_OVERRIDES)
+    used = set(used_overrides)
+    unknown_coupled = sorted(set(COUPLED_OVERRIDES) - expected)
+    missing = sorted(expected - used)
+    unexpected = sorted(used - expected)
+    if unknown_coupled or missing or unexpected:
+        raise MigrationError(
+            "binding overrides must cover every adjudication disagreement exactly once "
+            f"(unknown_coupled={unknown_coupled}, missing={missing}, "
+            f"unexpected={unexpected})"
+        )
+
+
 def _validate_generated_binding_shapes(row):
     pid = row.get("method_path_id", "?")
     for field in ROW_REQUIRED_FIELDS:
@@ -298,7 +569,7 @@ def _validate_generated_binding_shapes(row):
             )
 
 
-def migrate_sidecar(source, anchor_counts=None):
+def migrate_sidecar(source, anchor_counts=None, used_overrides=None):
     """Return one independently migrated sidecar without mutating *source*."""
     source = _require_mapping(source, "sidecar")
     counts = anchor_counts if anchor_counts is not None else Counter()
@@ -316,6 +587,7 @@ def migrate_sidecar(source, anchor_counts=None):
         _migrate_row_evidence(row)
         _migrate_signal_evidence(row)
         _migrate_edge_evidence(row)
+        _apply_binding_overrides(row, used_overrides)
         _validate_generated_binding_shapes(row)
         failures = validate_bound_values(row)
         if failures:
@@ -401,15 +673,22 @@ def build_outputs(source_dir=SOURCE_DIR):
         sources.append(_load_sidecar(path))
 
     anchor_counts = Counter()
-    outputs = [migrate_sidecar(source, anchor_counts) for source in sources]
+    used_overrides = set()
+    outputs = [
+        migrate_sidecar(source, anchor_counts, used_overrides) for source in sources
+    ]
+    _validate_binding_override_coverage(used_overrides)
     rows = [row for sidecar in outputs for row in sidecar.get("method_paths", [])]
     signals = [signal for row in rows for signal in row.get("signals", [])]
+    edges = [edge for row in rows for edge in row.get("control_edges", [])]
     if len(outputs) != EXPECTED_SIDECARS:
         raise MigrationError(f"output sidecar count mismatch: {len(outputs)}")
     if len(rows) != EXPECTED_ROWS:
         raise MigrationError(f"expected {EXPECTED_ROWS} method paths, found {len(rows)}")
     if len(signals) != EXPECTED_SIGNALS:
         raise MigrationError(f"expected {EXPECTED_SIGNALS} signals, found {len(signals)}")
+    if len(edges) != EXPECTED_EDGES:
+        raise MigrationError(f"expected {EXPECTED_EDGES} control edges, found {len(edges)}")
 
     method_ids = [row.get("method_path_id") for row in rows]
     if len(set(method_ids)) != len(method_ids):

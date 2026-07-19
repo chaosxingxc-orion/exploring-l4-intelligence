@@ -37,8 +37,7 @@
      "source": "llm_judge",
      "lifecycle": "inference_pre_context",
      "uses": [
-      "route",
-      "synthesize_input"
+      "route"
      ],
      "evidence": "canon: '推理时画像喂 orchestrator'",
      "claim_evidence": {
@@ -49,8 +48,9 @@
       },
       "source": {
        "value": "llm_judge",
-       "kind": "canon",
-       "quote": "推理时画像喂 orchestrator"
+       "kind": "pdf_page",
+       "page": 7,
+       "anchor": "each tool agent performs a self audit"
       },
       "lifecycle": {
        "value": "inference_pre_context",
@@ -59,11 +59,11 @@
       },
       "uses": {
        "value": [
-        "route",
-        "synthesize_input"
+        "route"
        ],
-       "kind": "canon",
-       "quote": "orchestrator 凭画像+校准决定激活哪些工具/评估/聚合"
+       "kind": "pdf_page",
+       "page": 5,
+       "anchor": "agents profiles to select only the most compatible tools"
       }
      }
     }
@@ -96,20 +96,22 @@
     },
     {
      "signal_id": "s_profile",
-     "signal_use": "synthesize_input",
-     "decision_right": "synthesize",
-     "source_locator": "canon: 'orchestrator 聚合/合成'",
-     "edge_semantics": "activated tool outputs are what the orchestrator aggregates into the final answer",
+     "signal_use": "route",
+     "decision_right": "tool_call",
+     "source_locator": "p5 anchor='agents profiles to select only the most compatible tools'",
+     "edge_semantics": "capability profiles route the query to compatible tool agents and thereby control which tool calls are dispatched",
      "claim_evidence": {
       "signal_use": {
-       "value": "synthesize_input",
-       "kind": "canon",
-       "quote": "orchestrator 聚合/合成"
+       "value": "route",
+       "kind": "pdf_page",
+       "page": 5,
+       "anchor": "agents profiles to select only the most compatible tools"
       },
       "decision_right": {
-       "value": "synthesize",
-       "kind": "canon",
-       "quote": "orchestrator 聚合/合成"
+       "value": "tool_call",
+       "kind": "pdf_page",
+       "page": 5,
+       "anchor": "agents profiles to select only the most compatible tools"
       }
      }
     }
