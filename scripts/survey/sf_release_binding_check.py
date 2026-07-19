@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Release-binding check (v8 doctoral review Gate MAJOR-2, §5.5 last paragraph).
+"""Release-binding check for manifest-selected current artifacts.
 
 A dated reviewer-facing artifact that quotes headline occupancy numbers must
 carry a machine-readable binding block:
@@ -16,22 +16,30 @@ value against the referenced persisted test output. Stale prose numbers fail
 headlines. Self-test: an in-memory fixture with a wrong value must be
 flagged (oracle-can-fail), else exit 1.
 
-Bound artifacts are listed in BOUND (update when a new dated submission or
-response letter is published).
+The default active set comes only from ``wiki/survey/current/manifest.json``.
+The historical hard-coded set is available only through ``--legacy-regression``.
 """
-import io
+import argparse
 import json
-import os
 import re
 import sys
+from pathlib import Path
 
-REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-BOUND = [
+from sf_current_manifest import (
+    CurrentManifestError,
+    canonical_consumer_path,
+    load_consumer_manifest,
+)
+from sf_json_contract import JsonContractError, loads as strict_json_loads
+
+REPO = Path(__file__).resolve().parents[2]
+DEFAULT_MANIFEST = "wiki/survey/current/manifest.json"
+LEGACY_BOUND = (
     "wiki/survey/2026-07-19-gate-s1-v8-response.md",
     "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
     "wiki/survey/2026-07-19-gate-s1-v9-response.md",
     "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
-]
+)
 BLOCK = re.compile(r"<!--\s*release_binding:\s*(\{.*?\})\s*-->", re.S)
 GEN_BLOCK = re.compile(r"<!--\s*generated_headline_begin\s*-->(.*?)<!--\s*generated_headline_end\s*-->", re.S)
 
@@ -69,24 +77,57 @@ KEYMAP = {
 }
 
 
-def check_artifact(text, name, cache):
+def _read_report(src, cache, read_bytes, allowed_paths):
+    if src in cache:
+        return cache[src], None
+    try:
+        canonical_consumer_path(src, label="release_binding source")
+    except CurrentManifestError as error:
+        return None, str(error)
+    if src.startswith("wiki/archive/"):
+        return None, f"bound source points to archive path: {src}"
+    if allowed_paths is not None and src not in allowed_paths:
+        return None, f"bound source is absent from current manifest files: {src}"
+    try:
+        raw = read_bytes(src)
+        report = strict_json_loads(raw, src)
+    except (CurrentManifestError, JsonContractError, OSError, KeyError) as error:
+        return None, f"bound source missing, invalid, or untrusted: {src}: {error}"
+    if not isinstance(report, dict):
+        return None, f"bound source root is not an object: {src}"
+    cache[src] = report
+    return report, None
+
+
+def check_artifact(
+    text,
+    name,
+    cache,
+    *,
+    read_bytes=None,
+    allowed_paths=None,
+):
     fails = []
     m = BLOCK.search(text)
     if not m:
         return [f"{name}: release_binding block missing"]
     try:
-        binding = json.loads(m.group(1))
-    except json.JSONDecodeError as e:
+        binding = strict_json_loads(
+            m.group(1).encode("utf-8"), f"{name} release_binding"
+        )
+    except (JsonContractError, UnicodeEncodeError) as e:
         return [f"{name}: release_binding unparsable: {e}"]
+    if not isinstance(binding, dict):
+        return [f"{name}: release_binding must be an object"]
     src = binding.get("source")
-    if not src:
+    if not isinstance(src, str) or not src:
         return [f"{name}: release_binding lacks source"]
-    if src not in cache:
-        p = os.path.join(REPO, src.replace("/", os.sep))
-        cache[src] = json.load(io.open(p, encoding="utf-8")) if os.path.exists(p) else None
-    report = cache[src]
-    if report is None:
-        return [f"{name}: bound source missing: {src}"]
+    if read_bytes is None:
+        def read_bytes(path):
+            return REPO.joinpath(*path.split("/")).read_bytes()
+    report, report_error = _read_report(src, cache, read_bytes, allowed_paths)
+    if report_error:
+        return [f"{name}: {report_error}"]
     occ = report.get("occupancy", {})
     if report.get("verdict") != "PASS":
         fails.append(f"{name}: bound test output verdict is {report.get('verdict')} (must be PASS)")
@@ -97,13 +138,21 @@ def check_artifact(text, name, cache):
         if fn is None:
             fails.append(f"{name}: unknown binding key {k}")
             continue
-        actual = fn(occ)
+        try:
+            actual = fn(occ)
+        except (KeyError, TypeError, AttributeError) as error:
+            fails.append(f"{name}: bound occupancy contract incomplete for {k}: {error}")
+            continue
         if actual != v:
             fails.append(f"{name}: {k} declared {v} but generated output says {actual}")
     # v9-review P0-C: if the artifact carries a generated headline block, the
     # reader-visible table must byte-match a fresh render from the bound source.
     for gm in GEN_BLOCK.finditer(text):
-        want = render_headline(report).strip()
+        try:
+            want = render_headline(report).strip()
+        except (KeyError, TypeError, AttributeError) as error:
+            fails.append(f"{name}: cannot render generated headline: {error}")
+            continue
         got = gm.group(1).strip()
         if got != want:
             fails.append(f"{name}: generated headline block differs from fresh render "
@@ -111,32 +160,108 @@ def check_artifact(text, name, cache):
     return fails
 
 
-def main():
+def _oracle_report():
+    return {
+        "verdict": "PASS",
+        "occupancy": {
+            "policy_A": {
+                "is_reward_guided": {"n_paths": "6/11", "n_works": "5/8"},
+                "is_rq_sys_control_compatible": {
+                    "n_paths": "5/11", "n_works": "4/8"
+                },
+                "is_project_method_candidate": {
+                    "n_paths": "0/11", "n_works": "0/8"
+                },
+                "reward_guided_selection": {
+                    "n_paths": "4/11", "n_works": "3/8"
+                },
+                "strict_AND_reward_AND_pool_BY_selection_object(mechanism)": {
+                    "trajectory": {"n_paths": "2/11", "n_works": "1/8"}
+                },
+            }
+        },
+    }
+
+
+def _run_oracle_fixtures():
+    src = "docs/checks/oracle-fixture.json"
+    cache = {src: _oracle_report()}
+    fixture = "<!-- release_binding: " + json.dumps(
+        {"source": src, "reward_guided": "999/11"},
+        separators=(",", ":"),
+    ) + " -->"
+    if not any(
+        "declared 999/11" in failure
+        for failure in check_artifact(fixture, "<fixture>", cache)
+    ):
+        return "negative occupancy fixture NOT flagged - release-binding oracle broken"
+    edited = render_headline(cache[src]).replace("6/11", "99/11", 1)
+    fixture2 = (
+        "<!-- release_binding: "
+        + json.dumps({"source": src}, separators=(",", ":"))
+        + " -->\n<!-- generated_headline_begin -->\n"
+        + edited
+        + "\n<!-- generated_headline_end -->"
+    )
+    if not any(
+        "generated headline block differs" in failure
+        for failure in check_artifact(fixture2, "<fixture2>", cache)
+    ):
+        return "edited-headline fixture NOT flagged - release-binding oracle broken"
+    return None
+
+
+def _parser():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
+    parser.add_argument("--legacy-regression", action="store_true")
+    return parser
+
+
+def main(argv=None, *, repo=REPO):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-    cache = {}
-    # oracle-can-fail proofs: wrong declared value AND a hand-edited generated
-    # block must both be flagged
-    src = "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json"
-    fixture = (f'<!-- release_binding: {{"source": "{src}", "reward_guided": "999/11"}} -->')
-    if not any("declared 999/11" in f for f in check_artifact(fixture, "<fixture>", cache)):
-        print("[FAIL] negative fixture NOT flagged — release-binding oracle broken")
+    args = _parser().parse_args(argv)
+    oracle_error = _run_oracle_fixtures()
+    if oracle_error:
+        print(f"[FAIL] {oracle_error}")
         return 1
-    if cache.get(src):
-        good = render_headline(cache[src]).replace("6/11", "99/11", 1)
-        fixture2 = (f'<!-- release_binding: {{"source": "{src}"}} -->\n'
-                    f"<!-- generated_headline_begin -->\n{good}\n<!-- generated_headline_end -->")
-        if not any("generated headline block differs" in f
-                   for f in check_artifact(fixture2, "<fixture2>", cache)):
-            print("[FAIL] prose-block fixture NOT flagged — E5 oracle broken")
-            return 1
+
+    repo = Path(repo)
+    cache = {}
+    try:
+        if args.legacy_regression:
+            from ai_context_surface_check import TrustedRepoReader
+
+            reader = TrustedRepoReader(repo)
+            paths = LEGACY_BOUND
+            read_bytes = reader.read_bytes
+            allowed_paths = None
+        else:
+            view = load_consumer_manifest(repo, args.manifest)
+            paths = view.paths("release_bound_artifacts")
+            read_bytes = view.read_bytes
+            allowed_paths = set(view.artifacts)
+    except (CurrentManifestError, OSError, ValueError) as error:
+        print(f"[BINDING] manifest load failed: {error}")
+        print("release binding: FAIL (1 failures)")
+        return 1
+
     all_fails = []
-    for rel in BOUND:
-        p = os.path.join(REPO, rel.replace("/", os.sep))
-        if not os.path.exists(p):
-            print(f"[skip] {rel} (missing)")
+    for rel in paths:
+        try:
+            raw = read_bytes(rel)
+            text = raw.decode("utf-8")
+        except (CurrentManifestError, OSError, UnicodeDecodeError, ValueError) as error:
+            all_fails.append(f"{rel}: artifact missing, invalid, or untrusted: {error}")
             continue
-        all_fails += check_artifact(io.open(p, encoding="utf-8").read(), rel, cache)
+        all_fails += check_artifact(
+            text,
+            rel,
+            cache,
+            read_bytes=read_bytes,
+            allowed_paths=allowed_paths,
+        )
     for f in all_fails:
         print(f"[BINDING] {f}")
     print(f"release binding: {'FAIL' if all_fails else 'PASS'} ({len(all_fails)} failures)")

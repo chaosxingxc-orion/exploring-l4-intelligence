@@ -30,6 +30,7 @@ from sf_current_path_contract import (  # noqa: E402
     read_fixed_bytes,
     resolve_fixed_output,
 )
+from sf_json_contract import JsonContractError, loads as strict_json_loads  # noqa: E402
 from sf_query_compiler import atomic_write_bytes  # noqa: E402
 
 
@@ -53,6 +54,25 @@ class FileSpec:
 class GitIndexEntry:
     mode: str
     blob: str
+
+
+@dataclass(frozen=True)
+class ConsumerManifest:
+    """One strict manifest plus the exact hash-verified bytes it names."""
+
+    document: dict
+    artifacts: dict[str, bytes]
+
+    def paths(self, key: str) -> tuple[str, ...]:
+        return tuple(self.document[key])
+
+    def read_bytes(self, path: str) -> bytes:
+        try:
+            return self.artifacts[path]
+        except KeyError as error:
+            raise CurrentManifestError(
+                f"manifest artifact is not available: {path}"
+            ) from error
 
 
 _SIDECAR_NAMES = (
@@ -194,6 +214,155 @@ _BASE_PROSE_SCAN = (
     "wiki/survey/current/status.md",
     "wiki/survey/current/tables/opening-guarantees.md",
 )
+
+_CONSUMER_MANIFEST_KEYS = {
+    "schema",
+    "files",
+    "release_bound_artifacts",
+    "prose_scan_paths",
+}
+_CONSUMER_FILE_KEYS = {
+    "role",
+    "path",
+    "sha256",
+    "mutability",
+    "load_policy",
+}
+_CONSUMER_ARRAY_KEYS = ("release_bound_artifacts", "prose_scan_paths")
+
+
+def canonical_consumer_path(value: object, *, label: str = "manifest path") -> str:
+    """Return one portable repository-relative path or fail closed."""
+
+    if not isinstance(value, str) or not value:
+        raise CurrentManifestError(f"{label} is not a nonempty string")
+    if (
+        "\\" in value
+        or value.startswith("/")
+        or re.match(r"^[A-Za-z]:", value)
+        or any(ord(character) < 32 for character in value)
+    ):
+        raise CurrentManifestError(
+            f"{label} is not canonical repo-relative POSIX: {value!r}"
+        )
+    parts = value.split("/")
+    if any(part in ("", ".", "..") for part in parts):
+        raise CurrentManifestError(
+            f"{label} is not canonical repo-relative POSIX: {value!r}"
+        )
+    return value
+
+
+def _consumer_string(entry: dict, key: str, *, label: str) -> str:
+    value = entry.get(key)
+    if not isinstance(value, str) or not value:
+        raise CurrentManifestError(f"{label}.{key} must be a nonempty string")
+    return value
+
+
+def _validate_consumer_document(document: object) -> dict[str, dict]:
+    if not isinstance(document, dict):
+        raise CurrentManifestError("current manifest root must be an object")
+    if set(document) != _CONSUMER_MANIFEST_KEYS:
+        raise CurrentManifestError(
+            "current manifest schema keys mismatch: "
+            f"expected {sorted(_CONSUMER_MANIFEST_KEYS)}, found {sorted(document)}"
+        )
+    if document.get("schema") != "sf-current-manifest-v1":
+        raise CurrentManifestError(
+            "current manifest schema must be sf-current-manifest-v1"
+        )
+    files = document.get("files")
+    if not isinstance(files, list) or not files:
+        raise CurrentManifestError("current manifest files must be a nonempty array")
+
+    files_by_path: dict[str, dict] = {}
+    roles: set[str] = set()
+    for index, entry in enumerate(files):
+        label = f"files[{index}]"
+        if not isinstance(entry, dict) or set(entry) != _CONSUMER_FILE_KEYS:
+            keys = sorted(entry) if isinstance(entry, dict) else type(entry).__name__
+            raise CurrentManifestError(
+                f"{label} schema keys mismatch: {keys}"
+            )
+        role = _consumer_string(entry, "role", label=label)
+        path = canonical_consumer_path(
+            _consumer_string(entry, "path", label=label),
+            label=f"{label}.path",
+        )
+        digest = _consumer_string(entry, "sha256", label=label)
+        _consumer_string(entry, "mutability", label=label)
+        _consumer_string(entry, "load_policy", label=label)
+        if re.fullmatch(r"[0-9a-f]{64}", digest) is None:
+            raise CurrentManifestError(f"{label}.sha256 is not lowercase SHA-256")
+        if path.startswith("wiki/archive/"):
+            raise CurrentManifestError(f"current manifest contains archive path: {path}")
+        if path in files_by_path:
+            raise CurrentManifestError(f"current manifest files duplicates path: {path}")
+        if role in roles:
+            raise CurrentManifestError(f"current manifest files duplicates role: {role}")
+        files_by_path[path] = entry
+        roles.add(role)
+
+    for key in _CONSUMER_ARRAY_KEYS:
+        values = document.get(key)
+        if not isinstance(values, list) or not values:
+            raise CurrentManifestError(
+                f"current manifest {key} must be a nonempty array"
+            )
+        seen: set[str] = set()
+        for index, value in enumerate(values):
+            path = canonical_consumer_path(value, label=f"{key}[{index}]")
+            if path.startswith("wiki/archive/"):
+                raise CurrentManifestError(f"{key} contains archive path: {path}")
+            if path in seen:
+                raise CurrentManifestError(f"{key} duplicates path: {path}")
+            if path not in files_by_path:
+                raise CurrentManifestError(
+                    f"{key} path is not present in files: {path}"
+                )
+            seen.add(path)
+    return files_by_path
+
+
+def load_consumer_manifest(
+    repo: Path, manifest_relative_path: str = OUTPUT_RELATIVE_PATH
+) -> ConsumerManifest:
+    """Strict-load a manifest and freeze every named file at its declared hash."""
+
+    manifest_path = canonical_consumer_path(
+        manifest_relative_path, label="current manifest path"
+    )
+    if manifest_path.startswith("wiki/archive/"):
+        raise CurrentManifestError(
+            f"current manifest path points to archive path: {manifest_path}"
+        )
+    try:
+        reader = TrustedRepoReader(Path(repo))
+        raw = reader.read_bytes(manifest_path)
+        document = strict_json_loads(raw, manifest_path)
+    except (ContextSurfaceError, JsonContractError, OSError) as error:
+        raise CurrentManifestError(
+            f"current manifest missing, invalid, or untrusted: {manifest_path}: {error}"
+        ) from error
+
+    files_by_path = _validate_consumer_document(document)
+    artifacts: dict[str, bytes] = {}
+    for path, entry in files_by_path.items():
+        try:
+            artifact = reader.read_bytes(path)
+        except (ContextSurfaceError, OSError) as error:
+            raise CurrentManifestError(
+                f"manifest artifact missing or untrusted: {path}: {error}"
+            ) from error
+        actual = hashlib.sha256(artifact).hexdigest()
+        if actual != entry["sha256"]:
+            raise CurrentManifestError(
+                f"manifest artifact SHA-256 mismatch: {path}: "
+                f"declared {entry['sha256']}, found {actual}"
+            )
+        artifacts[path] = artifact
+    return ConsumerManifest(document=document, artifacts=artifacts)
 
 
 def _active_audit_specs(index_inventory: dict[str, GitIndexEntry]) -> tuple[FileSpec, ...]:
