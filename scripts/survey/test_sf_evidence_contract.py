@@ -355,6 +355,19 @@ class BoundValueTest(unittest.TestCase):
         self.assertFalse(values_equal(True, 1))
         self.assertFalse(values_equal(1, True))
 
+    def test_values_equal_rejects_boolean_integer_list_elements(self):
+        self.assertFalse(values_equal([True], [1]))
+        self.assertFalse(values_equal([1], [True]))
+
+    def test_signal_uses_boolean_integer_list_elements_mismatch(self):
+        row = deepcopy(generic_row())
+        row["signals"][0]["uses"] = [True]
+        row["signals"][0]["claim_evidence"]["uses"]["value"] = [1]
+        self.assertIn(
+            "__fx12__#path:signal:s1:uses:evidence-value-mismatch",
+            self.failures(row),
+        )
+
     def test_absent_row_field_with_null_evidence_is_encoded_field_missing(self):
         row = deepcopy(generic_row())
         del row["selection_object"]

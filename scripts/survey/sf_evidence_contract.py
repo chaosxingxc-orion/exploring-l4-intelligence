@@ -147,7 +147,9 @@ def values_equal(expected, declared):
         return False
     if isinstance(expected, list) and isinstance(declared, list):
         try:
-            return Counter(expected) == Counter(declared)
+            return Counter((type(item), item) for item in expected) == Counter(
+                (type(item), item) for item in declared
+            )
         except TypeError:
             return False
     return expected == declared
