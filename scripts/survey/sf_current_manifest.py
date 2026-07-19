@@ -262,7 +262,8 @@ def canonical_consumer_path(value: object, *, label: str = "manifest path") -> s
         re.IGNORECASE,
     )
     for part in parts:
-        if part.endswith((" ", ".")) or reserved.fullmatch(part.split(".", 1)[0]):
+        device_stem = part.partition(".")[0].rstrip(" ")
+        if part.endswith((" ", ".")) or reserved.fullmatch(device_stem):
             raise CurrentManifestError(
                 f"{label} is not canonical; not portable repo-relative POSIX: {value!r}"
             )
