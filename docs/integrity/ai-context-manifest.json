@@ -55,14 +55,14 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "6d645c83ae34b9735048ed3457bccf3de193f6077060b6bb477d31ad0d6a92ed"
+      "sha256": "da938335363a56326278571ddd8f0979db68afd18d6f7f967548d0520d010084"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "7bcd481c9eea58d20f7fcda50d460016511fb306fb5a4d6c790b8153050b33cc"
+      "sha256": "5075ff56f3559a1c74a39782f35da2e368af589e6faddeb5f6f40f298cb2ee22"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",

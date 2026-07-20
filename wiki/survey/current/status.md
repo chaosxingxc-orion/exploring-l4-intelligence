@@ -13,5 +13,4 @@
 - Current blockers: those four stable gates, formal doctoral review, reviewer sign-off, and owner
   Stage-1B execution authorization.
 - Next action: run the four stable gates without predicting their result; only then submit the round-12
-  package for formal doctoral review. Formal review and owner approval remain pending. Do not execute
-  Stage-1B.
+  package for formal doctoral review; formal review and owner approval remain pending. Stage-1B remains unstarted and unauthorized.
