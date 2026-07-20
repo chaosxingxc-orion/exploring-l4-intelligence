@@ -6,6 +6,7 @@ from __future__ import annotations
 import importlib.util
 import os
 import shutil
+import stat
 import subprocess
 import tempfile
 import unittest
@@ -36,6 +37,11 @@ EXPECTED_COMMANDS = (
     "python scripts/checks/build_ai_context_manifest.py --check",
     "python scripts/checks/ai_context_surface_check.py",
 )
+TEST_GRAPH = {
+    "policy": "fixture-stage0-code-graph",
+    "nodes": [],
+    "sha256": "0" * 64,
+}
 
 
 class CurrentPackageReportTests(unittest.TestCase):
@@ -55,7 +61,8 @@ class CurrentPackageReportTests(unittest.TestCase):
             )
 
         raw, report = package_check.build_report(
-            Path.cwd(), commands=("python one.py", "python two.py", "python three.py"),
+            Path.cwd(), code_graph=TEST_GRAPH,
+            commands=("python one.py", "python two.py", "python three.py"),
             command_runner=runner,
         )
 
@@ -76,10 +83,12 @@ class CurrentPackageReportTests(unittest.TestCase):
             )
 
         first, _ = package_check.build_report(
-            repo, commands=("python check.py",), command_runner=runner
+            repo, code_graph=TEST_GRAPH,
+            commands=("python check.py",), command_runner=runner
         )
         second, _ = package_check.build_report(
-            repo, commands=("python check.py",), command_runner=runner
+            repo, code_graph=TEST_GRAPH,
+            commands=("python check.py",), command_runner=runner
         )
         self.assertEqual(first, second)
         self.assertTrue(first.endswith(b"\n"))
@@ -90,6 +99,8 @@ class CurrentPackageReportTests(unittest.TestCase):
 
 
 class CurrentPackageTransactionTests(unittest.TestCase):
+    FIXTURE_COMMAND = "python scripts/survey/checker.py"
+
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
         self.repo = Path(self.temp.name) / "repo"
@@ -97,8 +108,23 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.git("init", "-q")
         self.git("config", "user.email", "test@example.invalid")
         self.git("config", "user.name", "Current Package Test")
+        self.git("config", "core.autocrlf", "false")
         (self.repo / "README.md").write_text("fixture\n", encoding="utf-8")
-        self.git("add", "README.md")
+        (self.repo / "scripts/survey").mkdir(parents=True)
+        (self.repo / "scripts/checks").mkdir(parents=True)
+        (self.repo / "scripts/survey/checker.py").write_text(
+            "print('PASS')\n", encoding="utf-8"
+        )
+        (self.repo / "scripts/checks/helper.py").write_text(
+            "VALUE = 'trusted'\n", encoding="utf-8"
+        )
+        (self.repo / "scripts/wiki-sync.sh").write_text(
+            "#!/bin/sh\nexit 0\n", encoding="utf-8"
+        )
+        self.git(
+            "add", "README.md", "scripts/survey/checker.py",
+            "scripts/checks/helper.py", "scripts/wiki-sync.sh",
+        )
         self.git("commit", "-qm", "fixture")
         (self.repo / package_check.REPORT_RELATIVE).parent.mkdir(parents=True)
 
@@ -117,7 +143,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
 
     def write_stage_commit(self) -> Path:
         result = package_check.run(
-            "write", repo=self.repo, commands=("python fixture.py",),
+            "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
             command_runner=self.passing_runner,
         )
         self.assertEqual(0, result)
@@ -134,7 +160,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             0,
             package_check.run(
-                "write", repo=self.repo, commands=("python fixture.py",),
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=self.passing_runner,
             ),
         )
@@ -143,7 +169,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             0,
             package_check.run(
-                "check", repo=self.repo, commands=("python fixture.py",),
+                "check", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=self.passing_runner,
             ),
         )
@@ -161,15 +187,178 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             1,
             package_check.run(
-                "check", repo=self.repo, commands=("python fixture.py",),
+                "check", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=changed_runner,
             ),
         )
         self.assertEqual(before, report.read_bytes())
 
+    def test_dirty_checker_fails_before_identical_pass_runner(self) -> None:
+        checker = self.repo / "scripts/survey/checker.py"
+        checker.write_text("print('PASS')\n# dirty no-op\n", encoding="utf-8")
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "check", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+
+    def test_staged_checker_change_fails_check_but_write_may_run(self) -> None:
+        checker = self.repo / "scripts/survey/checker.py"
+        checker.write_text("print('PASS')\n# staged implementation\n", encoding="utf-8")
+        self.git("add", "scripts/survey/checker.py")
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "check", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+        self.assertEqual(
+            0,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([self.FIXTURE_COMMAND], calls)
+
+    def test_untracked_shadow_fails_before_subprocess(self) -> None:
+        (self.repo / "scripts/survey/json.py").write_text(
+            "raise RuntimeError('shadow')\n", encoding="utf-8"
+        )
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+
+    def test_untracked_checks_module_fails_before_subprocess(self) -> None:
+        (self.repo / "scripts/checks/local_module.py").write_text(
+            "VALUE = 'untracked'\n", encoding="utf-8"
+        )
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+
+    @unittest.skipUnless(os.name == "posix", "real code symlink contract")
+    def test_symlinked_code_fails_before_subprocess(self) -> None:
+        outside = Path(self.temp.name) / "outside.py"
+        outside.write_text("raise RuntimeError('outside')\n", encoding="utf-8")
+        (self.repo / "scripts/survey/link.py").symlink_to(outside)
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+
+    def test_report_git_mode_must_be_100644_before_subprocess(self) -> None:
+        self.write_stage_commit()
+        self.git("update-index", "--chmod=+x", package_check.REPORT_RELATIVE)
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "check", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
+
+    @unittest.skipUnless(os.name == "posix", "POSIX mode contract")
+    def test_write_fixes_report_mode_to_0644(self) -> None:
+        report = self.write_stage_commit()
+        report.chmod(0o600)
+
+        self.assertEqual(
+            0,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=self.passing_runner,
+            ),
+        )
+        self.assertEqual(0o644, stat.S_IMODE(report.stat().st_mode))
+
+    def test_mountinfo_identifies_drvfs_without_metadata_as_mode_incapable(self) -> None:
+        mountinfo = (
+            "10 1 8:1 / / rw,relatime - ext4 /dev/sda rw\n"
+            "11 10 0:42 / /mnt/d rw,noatime - 9p D:\\\\ rw,"
+            "aname=drvfs;path=D:\\\\;uid=1000\n"
+        )
+        self.assertFalse(
+            package_check._mountinfo_exposes_posix_mode(
+                "/mnt/d/repo/report.json", mountinfo
+            )
+        )
+        self.assertTrue(
+            package_check._mountinfo_exposes_posix_mode(
+                "/repo/report.json", mountinfo
+            )
+        )
+
+    def test_mountinfo_accepts_drvfs_when_metadata_is_enabled(self) -> None:
+        mountinfo = (
+            "11 10 0:42 / /mnt/d rw,noatime,metadata - 9p D:\\\\ rw,"
+            "aname=drvfs;path=D:\\\\;uid=1000\n"
+        )
+        self.assertTrue(
+            package_check._mountinfo_exposes_posix_mode(
+                "/mnt/d/repo/report.json", mountinfo
+            )
+        )
+
     def test_known_mutating_v6_command_runs_only_in_staged_sandbox(self) -> None:
         script = self.repo / "scripts/survey/sf_identity_taxonomy_v6_test.py"
-        script.parent.mkdir(parents=True)
+        script.parent.mkdir(parents=True, exist_ok=True)
         script.write_text(
             "from pathlib import Path\n"
             "Path('mutated.txt').write_text('bad', encoding='utf-8')\n"
@@ -193,7 +382,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             1,
             package_check.run(
-                "write", repo=self.repo, commands=("python fixture.py",),
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=self.passing_runner,
             ),
         )
@@ -207,7 +396,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             1,
             package_check.run(
-                "write", repo=self.repo, commands=("python fixture.py",),
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=self.passing_runner,
             ),
         )
@@ -228,7 +417,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(
             1,
             package_check.run(
-                "write", repo=self.repo, commands=("python fixture.py",),
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
                 command_runner=self.passing_runner,
             ),
         )
