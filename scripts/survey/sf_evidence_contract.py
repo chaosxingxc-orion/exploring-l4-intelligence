@@ -7,10 +7,150 @@ import unicodedata
 from collections import Counter
 from collections.abc import Mapping
 
+from sf_row_hash import row_hash
+
 
 PAGE_NUMBER_RE = re.compile(r"\bp(?P<page>\d+)\b")
 STRONG_PAGE_RE = re.compile(r"\bp(?P<page>\d+)\s+anchor='(?P<anchor>[^']+)'")
 EVIDENCE_KINDS = {"canon", "tex", "pdf_page", "absence"}
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+ABSENCE_ALLOWED_VALUES = {
+    "human_or_dev_label_model_selection": (False,),
+    "selection_object": ("none",),
+    "explicit_candidate_pool_selection": (False,),
+    "inference_external_new_information": (False,),
+    "external_component_weight_update": (False,),
+    "controller_program_or_config_optimized_on_labels": (False,),
+    "decision_rights": ([],),
+}
+ABSENCE_PROOF_OBLIGATIONS = {
+    "human_or_dev_label_model_selection": {
+        "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+        "required_inspection_targets": (
+            "model/checkpoint selection procedure",
+            "development and evaluation protocol",
+        ),
+        "search_terms_or_tables": (
+            "human selection, manual selection, dev set, validation set",
+            "checkpoint selection, model selection, best-of-run",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit fixed-model statement or exhaustive selection procedure "
+            "showing no human/dev-label choice",
+        ),
+        "force_unresolved_if": (
+            "selection procedure, appendix, or referenced implementation is "
+            "unavailable or ambiguous",
+        ),
+    },
+    "selection_object": {
+        "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+        "required_inspection_targets": (
+            "method algorithm",
+            "inference/decoding procedure",
+        ),
+        "search_terms_or_tables": (
+            "candidate, sample, output, trajectory, select, rank, rerank, choose",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit single-output/direct-return procedure or exhaustive "
+            "algorithm showing no candidate-object selection",
+        ),
+        "force_unresolved_if": (
+            "candidate construction or terminal decision procedure is missing "
+            "or ambiguous",
+        ),
+    },
+    "explicit_candidate_pool_selection": {
+        "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+        "required_inspection_targets": (
+            "candidate generation procedure",
+            "terminal selection/ranking procedure",
+        ),
+        "search_terms_or_tables": (
+            "best-of-N, sample, beam, pool, rank, rerank, majority, MBR, select",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit direct-return procedure or exhaustive algorithm showing "
+            "no scored/tournament choice among generated candidates",
+        ),
+        "force_unresolved_if": (
+            "multiple candidates may exist but their terminal handling cannot be "
+            "resolved",
+        ),
+    },
+    "inference_external_new_information": {
+        "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+        "required_inspection_targets": (
+            "inference inputs and tool/retrieval interfaces",
+            "environment-observation procedure",
+        ),
+        "search_terms_or_tables": (
+            "retrieve, search, browse, tool, database, environment, observation",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "closed-input inference declaration or exhaustive interface list "
+            "showing no external new-information channel",
+        ),
+        "force_unresolved_if": (
+            "tool, retrieval, environment, or referenced runtime behavior is "
+            "unavailable or ambiguous",
+        ),
+    },
+    "external_component_weight_update": {
+        "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+        "required_inspection_targets": (
+            "training/setup section for every external component",
+            "implementation or checkpoint provenance",
+        ),
+        "search_terms_or_tables": (
+            "train, finetune, update, optimize, learned, checkpoint, frozen",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit frozen/off-the-shelf declaration covering every external "
+            "component or a complete no-external-component architecture",
+        ),
+        "force_unresolved_if": (
+            "any external component has unknown training or checkpoint provenance",
+        ),
+    },
+    "controller_program_or_config_optimized_on_labels": {
+        "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+        "required_inspection_targets": (
+            "controller construction and tuning procedure",
+            "development/evaluation protocol",
+        ),
+        "search_terms_or_tables": (
+            "tune, optimize, search, sweep, validation, dev, label, reward",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit fixed controller/configuration declaration with provenance "
+            "or exhaustive construction procedure showing no label optimization",
+        ),
+        "force_unresolved_if": (
+            "controller/configuration selection provenance is unavailable or "
+            "ambiguous",
+        ),
+    },
+    "decision_rights": {
+        "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+        "required_inspection_targets": (
+            "complete inference/control algorithm",
+            "all signal consumers and termination rules",
+        ),
+        "search_terms_or_tables": (
+            "retry, revise, branch, route, stop, select, tool, prompt, memory",
+        ),
+        "acceptable_explicit_negative_evidence": (
+            "explicit observational-only role or exhaustive algorithm showing no "
+            "control action owned by the external component",
+        ),
+        "force_unresolved_if": (
+            "a signal exists whose consumer or downstream action is unavailable "
+            "or ambiguous",
+        ),
+    },
+}
 ROW_REQUIRED_FIELDS = [
     "core_weight_update",
     "external_component_weight_update",
@@ -175,6 +315,221 @@ def _validate_binding(owner, field, expected, evidence, failures):
         failures.append(f"{owner}:{field}:evidence-kind-invalid")
     if not field_missing and not values_equal(expected, entry.get("value")):
         failures.append(f"{owner}:{field}:evidence-value-mismatch")
+    if entry.get("kind") == "absence":
+        _validate_absence_entry(owner, field, entry, failures)
+
+
+def _nonempty_string(value):
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _valid_sha256(value):
+    return isinstance(value, str) and SHA256_RE.fullmatch(value) is not None
+
+
+def _validate_absence_entry(owner, field, entry, failures):
+    """Validate local shape and field/value compatibility of one absence."""
+    allowed = ABSENCE_ALLOWED_VALUES.get(field, ())
+    if not any(values_equal(entry.get("value"), value) for value in allowed):
+        failures.append(f"{owner}:{field}:absence-field-value-not-allowed")
+
+    obligation = ABSENCE_PROOF_OBLIGATIONS.get(field)
+    expected_obligation = obligation and obligation["proof_obligation_id"]
+    if entry.get("proof_obligation_id") != expected_obligation:
+        failures.append(f"{owner}:{field}:absence-proof-obligation-mismatch")
+
+    locators = entry.get("inspected_locators")
+    if not (
+        isinstance(locators, list)
+        and locators
+        and all(_nonempty_string(locator) for locator in locators)
+    ):
+        failures.append(f"{owner}:{field}:absence-locators-invalid")
+
+    reason = entry.get("reason")
+    weak_phrases = ("not contradicted", "not seen")
+    if not _nonempty_string(reason) or any(
+        phrase in normalized_phrase(reason) for phrase in weak_phrases
+    ):
+        failures.append(f"{owner}:{field}:absence-reason-weak")
+
+    fulltext = entry.get("fulltext")
+    if not isinstance(fulltext, Mapping):
+        failures.append(f"{owner}:{field}:absence-fulltext-invalid")
+    else:
+        if not _nonempty_string(fulltext.get("id")) or not _nonempty_string(
+            fulltext.get("kind")
+        ):
+            failures.append(f"{owner}:{field}:absence-fulltext-identity-invalid")
+        if not _valid_sha256(fulltext.get("sha256")):
+            failures.append(f"{owner}:{field}:absence-fulltext-sha256-invalid")
+
+    required_strings = {
+        "owner_method_path_id": "absence-owner-row-invalid",
+        "owner_sidecar": "absence-owner-sidecar-invalid",
+        "coder_identity": "absence-coder-identity-invalid",
+        "adjudication_row_id": "absence-adjudication-row-id-invalid",
+    }
+    for key, failure in required_strings.items():
+        if not _nonempty_string(entry.get(key)):
+            failures.append(f"{owner}:{field}:{failure}")
+    if not _valid_sha256(entry.get("owner_row_sha256")):
+        failures.append(f"{owner}:{field}:absence-owner-row-hash-invalid")
+
+
+def _normalized_path(value):
+    return value.replace("\\", "/") if isinstance(value, str) else value
+
+
+def _fulltext_identity(fulltext):
+    if not isinstance(fulltext, Mapping):
+        return None
+    return {
+        "id": fulltext.get("id"),
+        "kind": fulltext.get("kind"),
+        "sha256": fulltext.get("sha256"),
+    }
+
+
+def _absence_entries(row):
+    evidence = row.get("claim_evidence", {})
+    if isinstance(evidence, Mapping):
+        for field, entry in evidence.items():
+            if isinstance(entry, Mapping) and entry.get("kind") == "absence":
+                yield "row", field, entry
+    signals = row.get("signals", [])
+    if isinstance(signals, list):
+        for signal in signals:
+            if not isinstance(signal, Mapping):
+                continue
+            evidence = signal.get("claim_evidence", {})
+            if isinstance(evidence, Mapping):
+                for field, entry in evidence.items():
+                    if isinstance(entry, Mapping) and entry.get("kind") == "absence":
+                        yield f"signal:{signal.get('signal_id', '?')}", field, entry
+    edges = row.get("control_edges", [])
+    if isinstance(edges, list):
+        for index, edge in enumerate(edges):
+            if not isinstance(edge, Mapping):
+                continue
+            evidence = edge.get("claim_evidence", {})
+            if isinstance(evidence, Mapping):
+                for field, entry in evidence.items():
+                    if isinstance(entry, Mapping) and entry.get("kind") == "absence":
+                        yield f"edge:{index}", field, entry
+
+
+def validate_absence_cross_bindings(row, sidecar_path, sidecar, adjudication):
+    """Cross-check absence entries against their owner sidecar and review rows.
+
+    The function verifies bindings. Human nonparticipation remains a named
+    ``TEAM_ATTESTATION`` supplied by the review artifact, not a machine proof.
+    """
+    if not isinstance(row, Mapping):
+        return ["?:row:container-invalid"]
+    pid = row.get("method_path_id", "?")
+    failures = []
+    actual_path = _normalized_path(sidecar_path)
+    if not isinstance(sidecar, Mapping):
+        return [f"{pid}:sidecar:container-invalid"]
+    sidecar_fulltext = _fulltext_identity(sidecar.get("fulltext"))
+    sidecar_coder = sidecar.get("coder")
+    sidecar_rows = sidecar.get("method_paths", [])
+    owner_row = next(
+        (
+            candidate
+            for candidate in sidecar_rows
+            if isinstance(candidate, Mapping)
+            and candidate.get("method_path_id") == pid
+        ),
+        None,
+    ) if isinstance(sidecar_rows, list) else None
+    actual_row_hash = row_hash(row)
+
+    adjudication_rows = (
+        adjudication.get("rows") if isinstance(adjudication, Mapping) else None
+    )
+    if not isinstance(adjudication_rows, list):
+        adjudication_rows = []
+
+    for owner_kind, field, entry in _absence_entries(row):
+        owner = f"{pid}:{owner_kind}"
+        if entry.get("owner_method_path_id") != pid:
+            failures.append(f"{owner}:{field}:absence-owner-row-mismatch")
+        if _normalized_path(entry.get("owner_sidecar")) != actual_path:
+            failures.append(f"{owner}:{field}:absence-owner-sidecar-mismatch")
+        if entry.get("coder_identity") != sidecar_coder or (
+            row.get("coder") is not None
+            and entry.get("coder_identity") != row.get("coder")
+        ):
+            failures.append(f"{owner}:{field}:absence-coder-binding-mismatch")
+        if _fulltext_identity(entry.get("fulltext")) != sidecar_fulltext:
+            failures.append(f"{owner}:{field}:absence-fulltext-binding-mismatch")
+        if owner_row is None or row_hash(owner_row) != actual_row_hash:
+            failures.append(f"{owner}:{field}:absence-owner-sidecar-row-mismatch")
+        if entry.get("owner_row_sha256") != actual_row_hash:
+            failures.append(f"{owner}:{field}:absence-owner-row-hash-mismatch")
+
+        row_id = entry.get("adjudication_row_id")
+        review = next(
+            (
+                candidate
+                for candidate in adjudication_rows
+                if isinstance(candidate, Mapping)
+                and candidate.get("adjudication_row_id") == row_id
+            ),
+            None,
+        )
+        if review is None:
+            failures.append(f"{owner}:{field}:absence-adjudication-row-missing")
+            continue
+
+        expected_review_bindings = {
+            "method_path_id": pid,
+            "owner_kind": owner_kind,
+            "field": field,
+            "proof_obligation_id": entry.get("proof_obligation_id"),
+            "owner_sidecar": entry.get("owner_sidecar"),
+            "fulltext": _fulltext_identity(entry.get("fulltext")),
+            "coder_identity": entry.get("coder_identity"),
+            "owner_row_sha256": actual_row_hash,
+        }
+        actual_review_bindings = {
+            "method_path_id": review.get("method_path_id"),
+            "owner_kind": review.get("owner_kind"),
+            "field": review.get("field"),
+            "proof_obligation_id": review.get("proof_obligation_id"),
+            "owner_sidecar": review.get("owner_sidecar"),
+            "fulltext": _fulltext_identity(review.get("fulltext")),
+            "coder_identity": review.get("coder_identity"),
+            "owner_row_sha256": review.get("owner_row_sha256"),
+        }
+        if actual_review_bindings != expected_review_bindings:
+            failures.append(f"{owner}:{field}:absence-adjudication-binding-mismatch")
+        if review.get("verdict") != "AGREE":
+            failures.append(f"{owner}:{field}:absence-verdict-not-agree")
+        adjudicator = review.get("adjudicator_identity")
+        if not _nonempty_string(adjudicator):
+            failures.append(f"{owner}:{field}:absence-adjudicator-identity-invalid")
+        elif adjudicator == entry.get("coder_identity"):
+            failures.append(f"{owner}:{field}:absence-actor-collision")
+
+        independence = review.get("independence")
+        attestation_fields = (
+            "nonparticipation_scope",
+            "conflict_declaration",
+            "timestamp",
+        )
+        if not (
+            isinstance(independence, Mapping)
+            and independence.get("classification") == "TEAM_ATTESTATION"
+            and all(_nonempty_string(independence.get(key)) for key in attestation_fields)
+        ):
+            failures.append(
+                f"{owner}:{field}:absence-independence-attestation-invalid"
+            )
+
+    return failures
 
 
 def validate_bound_values(row):

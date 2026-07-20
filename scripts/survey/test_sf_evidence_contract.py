@@ -8,12 +8,16 @@ from copy import deepcopy
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sf_evidence_contract import (  # noqa: E402
+    ABSENCE_ALLOWED_VALUES,
+    ABSENCE_PROOF_OBLIGATIONS,
     ROW_REQUIRED_FIELDS,
     check_page_locator,
     normalized_tokens,
+    validate_absence_cross_bindings,
     validate_bound_values,
     values_equal,
 )
+from sf_row_hash import row_hash  # noqa: E402
 
 
 def binding(value):
@@ -67,6 +71,74 @@ def generic_row():
     row["signals"] = [signal]
     row["control_edges"] = [edge]
     return row
+
+
+def absence_context():
+    """Return one internally consistent negative-evidence fixture."""
+    row = generic_row()
+    pid = row["method_path_id"]
+    field = "selection_object"
+    sidecar_path = "wiki/survey/current/data/schema-v3/sidecars/__fx12__.sidecar.json"
+    fulltext = {
+        "id": "__fx12__",
+        "kind": "pdf",
+        "sha256": "a" * 64,
+    }
+    evidence = {
+        "kind": "absence",
+        "value": "none",
+        "reason": (
+            "The method defines no candidate-output comparison or selector after "
+            "inspection of the method and inference procedure."
+        ),
+        "proof_obligation_id": ABSENCE_PROOF_OBLIGATIONS[field][
+            "proof_obligation_id"
+        ],
+        "inspected_locators": [
+            "section: Method / Inference procedure",
+            "p7 anchor='single response is returned directly'",
+        ],
+        "owner_method_path_id": pid,
+        "owner_sidecar": sidecar_path,
+        "fulltext": deepcopy(fulltext),
+        "coder_identity": "coder:fixture",
+        "owner_row_sha256": "pending",
+        "adjudication_row_id": "ABS-__fx12__-selection-object",
+    }
+    row["selection_object"] = "none"
+    row["claim_evidence"][field] = evidence
+    row["coder"] = "coder:fixture"
+    evidence["owner_row_sha256"] = row_hash(row)
+    sidecar = {
+        "paper_work_id": "__fx12__",
+        "coder": "coder:fixture",
+        "fulltext": deepcopy(fulltext),
+        "method_paths": [deepcopy(row)],
+    }
+    adjudication_row = {
+        "adjudication_row_id": evidence["adjudication_row_id"],
+        "method_path_id": pid,
+        "owner_kind": "row",
+        "field": field,
+        "proof_obligation_id": evidence["proof_obligation_id"],
+        "owner_sidecar": sidecar_path,
+        "fulltext": deepcopy(fulltext),
+        "coder_identity": "coder:fixture",
+        "owner_row_sha256": evidence["owner_row_sha256"],
+        "adjudicator_identity": "reviewer:fixture",
+        "verdict": "AGREE",
+        "independence": {
+            "classification": "TEAM_ATTESTATION",
+            "nonparticipation_scope": "Did not code or migrate this row.",
+            "conflict_declaration": "No conflict declared.",
+            "timestamp": "2026-07-20T12:00:00+08:00",
+        },
+    }
+    adjudication = {
+        "artifact_id": "ABSENCE-ADJUDICATION-FIXTURE",
+        "rows": [adjudication_row],
+    }
+    return row, sidecar_path, sidecar, adjudication
 
 
 class FakePage:
@@ -430,6 +502,182 @@ class BoundValueTest(unittest.TestCase):
                 "__fx12__#path:signal:0:entry-invalid",
                 "__fx12__#path:edge:0:entry-invalid",
             ],
+        )
+
+
+class AbsenceEvidenceContractTest(unittest.TestCase):
+    def failures(self, row):
+        return validate_bound_values(row)
+
+    def test_allowed_pairs_are_exact_and_field_specific(self):
+        self.assertEqual(
+            ABSENCE_ALLOWED_VALUES,
+            {
+                "human_or_dev_label_model_selection": (False,),
+                "selection_object": ("none",),
+                "explicit_candidate_pool_selection": (False,),
+                "inference_external_new_information": (False,),
+                "external_component_weight_update": (False,),
+                "controller_program_or_config_optimized_on_labels": (False,),
+                "decision_rights": ([],),
+            },
+        )
+
+    def test_each_allowed_field_has_a_complete_proof_obligation(self):
+        self.assertEqual(set(ABSENCE_ALLOWED_VALUES), set(ABSENCE_PROOF_OBLIGATIONS))
+        required = {
+            "proof_obligation_id",
+            "required_inspection_targets",
+            "search_terms_or_tables",
+            "acceptable_explicit_negative_evidence",
+            "force_unresolved_if",
+        }
+        for field, obligation in ABSENCE_PROOF_OBLIGATIONS.items():
+            with self.subTest(field=field):
+                self.assertEqual(required, set(obligation))
+                self.assertTrue(all(obligation[key] for key in required))
+
+    def test_complete_allowed_absence_passes_local_contract(self):
+        row, _, _, _ = absence_context()
+        self.assertEqual(self.failures(row), [])
+
+    def test_positive_categorical_absence_fails(self):
+        row, _, _, _ = absence_context()
+        entry = deepcopy(row["claim_evidence"]["selection_object"])
+        entry["value"] = "api_only"
+        entry["proof_obligation_id"] = "NEG-INTERNAL-VISIBILITY"
+        row["internal_visibility"] = "api_only"
+        row["claim_evidence"]["internal_visibility"] = entry
+        self.assertIn(
+            "__fx12__#path:row:internal_visibility:absence-field-value-not-allowed",
+            self.failures(row),
+        )
+
+    def test_unknown_none_and_empty_absence_values_fail(self):
+        for value in ("unknown", None, ""):
+            with self.subTest(value=value):
+                row, _, _, _ = absence_context()
+                row["selection_object"] = value
+                row["claim_evidence"]["selection_object"]["value"] = value
+                self.assertIn(
+                    "__fx12__#path:row:selection_object:"
+                    "absence-field-value-not-allowed",
+                    self.failures(row),
+                )
+
+    def test_url_or_locator_cannot_substitute_for_fulltext_hash(self):
+        for invalid in (
+            "https://arxiv.org/pdf/1234.56789",
+            "p7 anchor='candidate selection'",
+        ):
+            with self.subTest(invalid=invalid):
+                row, _, _, _ = absence_context()
+                row["claim_evidence"]["selection_object"]["fulltext"][
+                    "sha256"
+                ] = invalid
+                self.assertIn(
+                    "__fx12__#path:row:selection_object:"
+                    "absence-fulltext-sha256-invalid",
+                    self.failures(row),
+                )
+
+    def test_weak_not_contradicted_reason_fails(self):
+        row, _, _, _ = absence_context()
+        row["claim_evidence"]["selection_object"]["reason"] = "not contradicted"
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-reason-weak",
+            self.failures(row),
+        )
+
+    def test_empty_inspected_locators_fail(self):
+        row, _, _, _ = absence_context()
+        row["claim_evidence"]["selection_object"]["inspected_locators"] = []
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-locators-invalid",
+            self.failures(row),
+        )
+
+    def test_wrong_proof_obligation_for_field_fails(self):
+        row, _, _, _ = absence_context()
+        row["claim_evidence"]["selection_object"]["proof_obligation_id"] = (
+            "NEG-HUMAN-MODEL-SELECTION"
+        )
+        self.assertIn(
+            "__fx12__#path:row:selection_object:"
+            "absence-proof-obligation-mismatch",
+            self.failures(row),
+        )
+
+
+class AbsenceCrossBindingTest(unittest.TestCase):
+    def failures(self, row, sidecar_path, sidecar, adjudication):
+        return validate_absence_cross_bindings(
+            row, sidecar_path, sidecar, adjudication
+        )
+
+    def test_complete_cross_binding_passes(self):
+        args = absence_context()
+        self.assertEqual(self.failures(*args), [])
+
+    def test_wrong_fulltext_hash_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        row["claim_evidence"]["selection_object"]["fulltext"]["sha256"] = "b" * 64
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-fulltext-binding-mismatch",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_wrong_sidecar_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        row["claim_evidence"]["selection_object"]["owner_sidecar"] = (
+            "wiki/survey/current/data/schema-v3/sidecars/wrong.sidecar.json"
+        )
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-owner-sidecar-mismatch",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_wrong_row_hash_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        row["claim_evidence"]["selection_object"]["owner_row_sha256"] = "0" * 64
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-owner-row-hash-mismatch",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_adjudication_artifact_missing_row_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        adjudication["rows"] = []
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-adjudication-row-missing",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_verdict_other_than_agree_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        adjudication["rows"][0]["verdict"] = "DISAGREE"
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-verdict-not-agree",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_coder_and_adjudicator_collision_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        adjudication["rows"][0]["adjudicator_identity"] = "coder:fixture"
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-actor-collision",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_independence_is_team_attestation_not_machine_proof(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        adjudication["rows"][0]["independence"]["classification"] = (
+            "MACHINE_PROVED"
+        )
+        self.assertIn(
+            "__fx12__#path:row:selection_object:"
+            "absence-independence-attestation-invalid",
+            self.failures(row, sidecar_path, sidecar, adjudication),
         )
 
 

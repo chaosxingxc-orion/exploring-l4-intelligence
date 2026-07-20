@@ -14,13 +14,31 @@ ADJ_EXCLUDE = {
 }
 
 
+def _without_self_hash(value):
+    """Remove only nested absence-row self hashes before canonical hashing.
+
+    An absence record carries the hash of its owner row. Including that scalar in
+    the row hash would create an impossible fixed-point requirement. Every other
+    evidence and adjudication-reference field remains hash-bearing.
+    """
+    if isinstance(value, dict):
+        return {
+            key: _without_self_hash(item)
+            for key, item in value.items()
+            if key != "owner_row_sha256"
+        }
+    if isinstance(value, list):
+        return [_without_self_hash(item) for item in value]
+    return value
+
+
 def row_hash(method_path):
     """Return the canonical SHA-256 for a method-path adjudication row."""
-    core = {
+    core = _without_self_hash({
         key: value
         for key, value in method_path.items()
         if key not in ADJ_EXCLUDE
-    }
+    })
     blob = json.dumps(
         core,
         ensure_ascii=False,
