@@ -2,283 +2,188 @@
 
 **Date:** 2026-07-20
 
-**Status:** Owner-approved bounded revision after independent design review
+**Status:** Owner-approved bounded revision after two independent pre-proposal reviews
 
-**Approved by:** repository owner
+**Authority:** The owner authorized a reviewer-facing research proposal, merge/push to the repository default branch, selected the dual-decision scope, and replied “好，继续吧” after receiving the final-gates plan review. This authority covers only Stage-1A remediation, proposal submission, repository merge, and `origin/master` push. It excludes systematic-query execution, research-model or smoke calls, metrics, prototypes, Stage-1B authorization, and GitHub Wiki publication.
 
-**Approval time:** 2026-07-20, Asia/Taipei
+**Frozen review objects:**
 
-**Authority reference:** this Codex task conversation. The owner instructed “merge to remote main，
-并且写一份research proposal给reviewers”, approved the three design sections, selected the
-dual-decision scope, and replied “Go” to the bounded remediation route after the doctoral review.
+- design reviewed at `55e283c6f53459657b88e1586a999bd7d580cf81`, blob `607a2d931e3e34a397813734b6cb4f0b9f275cae`;
+- first implementation plan reviewed at `17e230f673ee27efb5e74f6fbfab15c7061d22da`, blob `8081134013e5e47f2bb5b9cdf1e770a1276fd972`;
+- design review registered in round 13;
+- plan review registered in round 14.
 
-**Approved scope:** repair the three verified Stage-1A gates below; produce and register one
-reviewer-facing proposal; merge the verified remediation to the repository default branch
-`origin/master`. The approval excludes GitHub Wiki publication, Stage-1B query execution,
-research-model or smoke calls, dataset experiments, and prototypes.
+The commit containing this revised design and revised plan becomes `IMPLEMENTATION_FREEZE`. It is distinct from the evidence-v6 release anchor, the reviewed-plan anchor, the fetched pre-merge master, and the final merge commit.
 
-**Frozen reviewed design:** branch `codex/stage1b-readiness-remediation`, commit
-`55e283c6f53459657b88e1586a999bd7d580cf81`, Git blob
-`607a2d931e3e34a397813734b6cb4f0b9f275cae`.
+## 1. Objective and authority boundary
 
-**Observed release baseline:** `origin/master=bb3a1200d1813547979ef62bb02c7125292b8f2e`,
-merge base `4af90521e935bae5285edc322ca94cedde810174`. Implementation must fetch again and
-record the actual source head, fetched remote head, merge base, merge result, gate report, registry
-anchor, and remote read-back. Relevant divergence or a failed gate stops release.
+Produce one self-contained proposal that lets an independent reviewer answer two separate questions:
 
-## 1. Objective and success criteria
+1. Is the scientific rationale adequate to continue systematic mapping?
+2. Is the Stage-1A search design ready for Stage-1B execution?
 
-Produce one self-contained reviewer-facing proposal that supports two independent decisions:
+The implementation transaction ends at:
 
-1. whether the scientific rationale is adequate to continue systematic mapping; and
-2. whether the Stage-1A search design is ready for Stage-1B execution.
+```text
+FOUR_IMPLEMENTATION_FINDINGS_REMEDIATED
+FORMAL_INDEPENDENT_REVIEW_PENDING
+SUBMITTED_FOR_INDEPENDENT_REVIEW
+```
 
-The implementation transaction succeeds at `SUBMITTED_FOR_INDEPENDENT_REVIEW`, not at Stage-1B.
-It must close the locally verifiable gates, register the proposal as immutable audit evidence,
-publish the repository state to `origin/master`, and leave the stage explicitly unstarted and
-unauthorized.
+It does not end at formal gate closure or Stage-1B readiness. Stage-1B begins only after a later independent report gives search-design `SIGN`, the owner separately authorizes the exact reviewed package, the committed package records `execution_authorized=true`, and the final package gate passes. Stage-1B remains systematic mapping only and still forbids research-model/smoke execution.
 
-Stage-1B begins only in a later same-package transaction after all of the following exist:
+Speed is binding. Do not add a query lane, run a frozen query, bulk-reread the corpus, or upgrade non-load-bearing P2 items merely to make the package look comprehensive.
 
-1. a separate independent reviewer report with `SEARCH_DESIGN_SIGNOFF=SIGN`;
-2. a separate owner record authorizing Stage-1B execution against that exact reviewed package;
-3. a final committed package with `execution_authorized: true`; and
-4. a fresh P0-R8/current-package PASS on that package.
+## 2. Four verified implementation gates
 
-Speed is binding. Do not add optional searches, a new query lane, a research-model or smoke run,
-prototype work, bulk full-text rereading, or another amendment chain.
+### GM-1 — lossless existing-corpus disposition
 
-## 2. Verified design-review gates
+The legacy bridge is a canonical-work union graph, not one flat record per census work. It covers every source row exactly once across:
 
-The 2026-07-20 doctoral design review is preserved byte-for-byte at first commit under the round-13
-audit namespace. It targets the frozen design above and identified three gates.
+- 95 census rows;
+- 92 seed rows;
+- 65 bibliography rows;
+- 62 claim rows;
+- 30 version-pin rows;
+- 129 fulltext-ledger events; and
+- the exact frozen reviewer-known-item artifact.
 
-### G1 — evidence-kind/value compatibility
+Each canonical node has an identity list, source-row memberships, screening decision, reference role, per-claim evidence list, and current disposition. Claim grades/statuses remain per claim; no “best”, “worst”, or arbitrary work-level scalar replaces them.
 
-The current source validator admits `absence` for any required field when `note` and `scope`
-are nonempty. A legitimate new-row restamp can therefore bind positive
-`signal.form=text_critique` to “not contradicted” absence evidence, pass all three contract layers,
-and change RQ-SYS from 5/11 to 4/11.
+Canonical reference roles are exactly `DEEPLY_READ`, `KNOWN_QUEUE`, `MEASUREMENT_INSTRUMENT`, and `BOUNDARY_COMPARATOR`. `EXCLUDE` requires a REC-0 reason and null role. `INCLUDE` requires a canonical role. `UNRESOLVED` carries source, reason, owner, deadline gate, and next action; any load-bearing unresolved blocks submission.
 
-The repair adds an explicit `evidence kind × field × encoded value` compatibility contract:
+Exact ID, explicit alias, and unresolved identity remain distinct. `unexplained_orphans=0` means only that every source row has an explicit destination; it does not mean every paper is verified, included, or deeply read.
 
-- positive categorical values require `canon|tex|pdf_page`;
-- `absence` is allowed only for semantically negative, empty, `none`, or permitted `unknown`
-  values;
-- an allowed absence carries encoded value, inspected scope, reason, source version, coder, and
-  adjudicator provenance;
-- positive signal form/source plus absence fails before derivation;
-- a legitimate negative absence remains a passing positive control.
+### GM-2 — field-specific negative-evidence contract
 
-Existing signal/edge identity, strong PDF anchors, and generated headline binding stay closed and
-must not be redesigned.
+There is no global absence value whitelist. Only the seven observed `(field, encoded value)` pairs may use absence evidence:
 
-### G2 — review object, authority, and independence
+- `human_or_dev_label_model_selection=false`;
+- `selection_object=none`;
+- `explicit_candidate_pool_selection=false`;
+- `inference_external_new_information=false`;
+- `external_component_weight_update=false`;
+- `controller_program_or_config_optimized_on_labels=false`;
+- `decision_rights=[]`.
 
-The engineering design is not the scientific proposal and cannot be used as a verdict. The final
-proposal is a new immutable audit artifact. It contains requested-response schema only:
+Each field has an explicit proof obligation naming inspected sections/pages, terms/tables, acceptable explicit-negative evidence, immutable fulltext SHA-256, and conditions forcing `UNRESOLVED`. `unknown`, missing, empty, not-fetched, unreachable, not-coded, and not-applicable cannot support a load-bearing scientific absence.
 
-- `REQUESTED_SCIENTIFIC_RATIONALE_FOR_CONTINUING_MAPPING`
-  with response values `ADEQUATE|REVISE|INADEQUATE`;
-- `REQUESTED_SEARCH_DESIGN_SIGNOFF`
-  with response values `SIGN|WITHHOLD`.
+Every absence entry binds the owner row, owner sidecar, immutable fulltext identity/hash, coder, proof obligation, exact inspected locators, row hash, adjudication row, and `AGREE` verdict. The validator cross-checks these objects rather than checking nonempty strings. Actor independence is a named team attestation with identity, nonparticipation scope, timestamp, and conflict declaration; it is not labelled machine-proved.
 
-`ADEQUATE` means only that the problem and hypotheses justify continued systematic mapping. It does
-not establish novelty, effectiveness, SOTA, a surviving Stage-1C candidate, or a doctoral
-contribution.
+The 22 current absence rows require fresh per-row semantic review under the new obligation. A hash-delta-only review is insufficient. Weak “not contradicted” or “not seen” prose cannot automatically support a load-bearing negative.
 
-The actual values exist only in the later independent reviewer report. That report must state:
+### GM-3 — cross-platform Git preflight and evidence DAG
 
-- reviewer stable identity and role;
-- no participation in schema, generator, fixture, proposal, or remediation implementation;
-- conflict-of-interest declaration;
-- exact reviewed commit, proposal blob, reports, manifests, and query bytes;
-- additional reviewer-side web accesses and `REVIEWER_KNOWN_ITEM` disposition;
-- replay commands and observed results;
-- the two bounded verdicts and rationale.
+Before any WSL gate, native Windows and WSL2 must directly resolve the primary repository and linked worktree to the correct root, HEAD, selected blobs, and status. The shared `core.worktree` redirect is removed, and the linked-worktree gitfile uses a cross-platform relative gitdir. Local Git metadata is not uploaded as scientific evidence; the committed preflight receipt records only resolved results and named anchors.
 
-The planned report path is
-`wiki/audit/system-first-stage1a/round-15/research-proposal-independent-doctoral-review.md`.
-The implementation agent must not manufacture that report or its signature.
+Evidence-v7 has this topology:
 
-### G3 — existing-corpus disposition and current routing
+```text
+same frozen inputs
+  ├─ Windows runner -> NT leaf
+  └─ WSL2 runner    -> POSIX leaf
+                         ↓
+separate final aggregator consumes both exact leaf bytes
+  -> compares input hashes, runner/contract version, platform stamp,
+     named failures, occupancy, and output semantics
+  -> canonical aggregate
+```
 
-The final package adds one generated CURRENT bridge instead of loading all legacy assets into AI
-context. The bridge crosswalks:
+Platform runners never claim cross-platform equality. The aggregate is generated last. Current manifest binds aggregate and both leaves. Deleting/replacing a leaf or changing an input hash, platform stamp, named failure, or occupancy fails closed.
 
-- 95 canonical census works;
-- 92 current seed rows;
-- 65 existing bibliography rows;
-- 62 legacy claim-ledger rows and their version-pin overlay;
-- the current full-text ledger; and
-- reviewer-known items from the two latest reviews.
+### GM-4 — independent metadata receipts and system-first citation closure
 
-Each census work appears exactly once. Each seed and bibliography row has a source identity and
-destination. Exact IDs, cross-ID aliases, and unresolved identities are separate. No silent merge is
-allowed. Each disposition records stable ID, version, source campaign, inherited evidence grade,
-protocol-defined role, relevant RQ/proposal section, inclusion or REC-0 exclusion reason, next-stage
-action, available locator, conflict status, and invalidating condition.
+Bibliography metadata comes from saved official arXiv/ACL payloads and normalized receipts, not duplicate constants in generator and test. Each receipt records official URL, access time, access class, source version, raw response SHA-256, stable identity, title, and authors. Tests recompute output from the receipt.
 
-Allowed roles reuse protocol language: `DEEPLY_READ`, `KNOWN_QUEUE`,
-`MEASUREMENT_INSTRUMENT`, and `BOUNDARY/NEGATIVE_PRIOR`. An irrelevant work receives a REC-0
-exclusion reason rather than a new taxonomy label. Legacy MATERIAL, CRITICAL, UNVERIFIED, and
-double-review-pending claims never become load-bearing merely by appearing in the crosswalk.
+Known-ID accesses are registered as `ID_DEREFERENCE`, `PROVENANCE_FETCH`, or `REVIEW_CLAIM_VERIFICATION`. They are not systematic discovery and receive no frozen-query recall credit, but they are not silently described as zero network access.
 
-The checker proves census 95/95 dispositions, seed 92/92 destinations, bibliography 65/65 provenance
-roles, and zero unexplained orphans. The generated artifact binds input paths, Git blobs, generator
-version, and output hash. The proposal uses only a load-bearing minimum subset; the full disposition
-remains machine data.
+Reviewer-visible closure presents three evidence chains:
 
-This is a metadata/evidence-routing preflight. It executes zero new discovery queries, performs zero
-research-model or smoke calls, and does not require bulk full-text rereading.
+1. system-first speech/omni agent neighbors;
+2. reward and verification mechanisms;
+3. training-free and trained boundary comparators.
 
-## 3. Literature carry-forward boundary
+Existing direct neighbors that must be routed include AudioToolAgent, Audio-Mind, Agent-Omni, EChO-Agent, AuTAgent, Speech-Copilot, VoxMind, WavReward, and GSRM. The earlier P1/P2 set remains. `2508.16665` enters the verification/taxonomy chain; `2510.18982` and `2509.25845` are nonblocking P2 reviewer-known items. Only a source used for a load-bearing round-15 gap/boundary claim must reach D2 before submission.
 
-P1 is a submission condition: carry forward the four v9 required boundary/measurement works, bind the
-Reinforced Agent ACL/arXiv identity, and remove all eight “author on official page” placeholders from
-the reviewer-facing bibliography.
+## 3. Proposal architecture
 
-The design review's four additional P1-high works enter as `REVIEWER_KNOWN_ITEM` with official
-metadata, route, role, and boundary hypothesis:
+Create:
 
-- arXiv:2605.04531 — reward-guided training-free VLM boundary comparator;
-- ACL 2025 `2025.acl-long.775` — trained agentic reward/best-of-N boundary;
-- ACL 2026 `2026.acl-industry.87` — trajectory/proxy-state measurement instrument;
-- arXiv:2605.23261 — trained speech reward-model measurement boundary.
+`wiki/audit/system-first-stage1a/round-15/research-proposal-and-stage1b-signoff-request.md`
 
-P2 is explicitly nonblocking. Existing TangramSR, OrchRM, ToolRM, Agent-RRM, DuplexPO, and
-Multi-Faceted Interactivity Alignment rows plus arXiv:2602.01381 and ACL 2026
-`2026.acl-srw.1` enter the Stage-1B priority queue. They need correct metadata and provenance but no
-Stage-1A full-text coding.
+Track A states the north-star question, theoretical motivation, scoped gap, research questions, contribution hypotheses, staged methodology, falsifiers, risks, limitations, and doctoral value. Contributions remain hypotheses until Stage-1B mapping and later empirical stages. No first-ever, SOTA, established novelty, or established effectiveness claim is permitted.
 
-Reviewer-known items cannot alter the frozen 65-query terms or be counted as frozen-query recall.
+Track B maps v9 E1–E5 and P0-A/B/C plus the round-13/14 findings to exact contracts, negative tests, machine artifacts, Windows/WSL replay, context consolidation, frozen execution boundary, and wiki dry-run incident.
 
-## 4. Proposal architecture
+The proposal exposes response schemas only:
 
-Create the submission as the next event after the design review:
+```text
+REQUESTED_SCIENTIFIC_RATIONALE_FOR_CONTINUING_MAPPING = ADEQUATE|REVISE|INADEQUATE
+REQUESTED_SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
+```
 
-`wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md`
+Actual values exist only in the future independent report:
 
-The proposal has two separated tracks.
+`wiki/audit/system-first-stage1a/round-16/research-proposal-independent-doctoral-review.md`
 
-### Track A — scientific rationale for continuing mapping
+The v9 claim diff records claim ID/section, `UNCHANGED|CORRECTED|WITHDRAWN|NEW`, rationale, canonical evidence path plus hash/locator, and `hypothesis_only|readiness_only`. Reader-visible numbers are generated from persisted reports or cited through exact bindings; the proposal does not create a second numeric canon.
 
-Track A states the north-star question, theoretical motivation, scoped research gap, research
-questions, contribution hypotheses, staged methodology, falsifiers, risks, limitations, and doctoral
-research value. Contributions remain hypotheses until Stage-1B mapping and later empirical stages.
-No first-ever claim is permitted.
+Load-bearing citations must bind claim ID, evidence grade, immutable version, and locator. Non-load-bearing P2 items may remain queued.
 
-### Track B — Stage-1B search-design readiness request
+## 4. Evidence and exposure flow
 
-Track B maps v9 E1-E5 and P0-A/B/C to repaired contracts, demonstrated negative tests, exact machine
-artifacts, Windows/WSL replay, context consolidation, frozen execution boundary, and the disclosed wiki
-dry-run incident. P1 is closed before submission; P2 is shown only as a nonblocking queue.
+The proposal binds Project-Thesis, Research-Objective, current protocol/status, v9 proposal/review/response, round-12 correction, round-13/14 reviews, evidence-v7 aggregate and leaves, context-v2 package report, context-v1 incident, lossless union graph and receipt, official metadata receipts, complete bibliography/opening roles, frozen query bytes, campaign audit index, and named Git anchors.
 
-The proposal contains a claim-diff against v9 with exact fields:
+The exposure statement is scoped and typed:
 
-- v9 claim ID and section;
-- `UNCHANGED|CORRECTED|WITHDRAWN|NEW`;
-- rationale;
-- canonical evidence path plus hash/locator;
-- `hypothesis_only|readiness_only` stage force.
+- systematic discovery queries executed in this repair: zero;
+- research-model calls: zero;
+- smoke runs: zero;
+- known-ID metadata/provenance accesses: reported by access class and receipt;
+- inherited prior exposure: unchanged and nonzero.
 
-The proposal does not maintain a second numeric canon. Reader-visible numbers are generated from
-persisted reports or cited through exact source bindings.
+## 5. Audit transaction and current routing
 
-## 5. Evidence and claim flow
+Registered events are immutable and each registry-growth commit appends exactly one artifact:
 
-The proposal binds:
+- round 13: design review;
+- round 14: implementation-plan review;
+- round 15: proposal submission and active review transaction;
+- round 16: future independent proposal review.
 
-- purpose and program identity: `wiki/Project-Thesis.md`;
-- current stage and authority: `wiki/Research-Objective.md`;
-- executable mapping design: `wiki/survey/current/protocol.md`;
-- v9 review and the immutable round-12 correction;
-- schema-v3 evidence and Windows/WSL reports;
-- integrated current-package report;
-- wiki dry-run incident report;
-- generated existing-corpus disposition and its source receipt;
-- complete generated reviewer bibliography and opening roles;
-- campaign audit index.
+The campaign checker is extended narrowly so one later proposal/application may be the active review transaction. Round 15 is committed with its registry row, campaign event, and prefix anchors; the immutability report is regenerated only after the registered artifact exists at HEAD, as required by the current checker.
 
-The repair exposure statement remains scoped: discovery queries, research-model calls, and smoke runs
-are zero within this repair. Nonzero `INHERITED_PRIOR_EXPOSURE` remains unchanged.
+After proposal registration, Research-Objective and current status say only that four implementation findings were remediated and formal independent review is pending. Active review routing points to round 15. Stage-1B remains unstarted and unauthorized.
 
-## 6. Audit and current-state transaction
+## 6. Release verification and merge
 
-The user-provided design review is currently untracked in the primary worktree. Before first commit,
-preserve its bytes and place it directly at:
+Five named anchors have separate meanings: evidence-v6 release, reviewed plan, implementation freeze, pre-merge master, and merge head. Every receipt binds the implementation freeze. Release-range checks use explicit commit ranges; a clean worktree alone is insufficient.
 
-`wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md`
+Before merge:
 
-Do not create a committed root-level legacy path. Register its exact blob as the immutable round-13
-design-review event in the append-only audit registry and campaign index.
+- Windows and WSL preflight pass;
+- four gate checkers pass;
+- hostile review records every finding/repair and completes one zero-new-finding round;
+- evidence-v6/context-v1/query/attempt bytes are unchanged;
+- audit and campaign indexes pass;
+- round-16 review and owner authorization are absent;
+- both worktrees are clean.
 
-The final proposal is the following round-14 submission, not an amendment. Its bytes become immutable
-at first commit. Existing registered audit rows, including round 13, are never changed. The campaign
-contract is extended narrowly so one proposal or application may be the active review transaction;
-the AI manifest points to the exact round-14 proposal. A later independent report is a new round-15
-event rather than an append into round 14. Generated index, current manifest, AI context manifest,
-audit immutability report, and integrated package report are refreshed through their executable
-contracts.
+Fetch `origin`, record actual default branch and remote head, stop on relevant divergence, merge with a normal merge commit, rerun headline gates on the merged tree, run `git diff --check PRE_MERGE_MASTER..MERGE_HEAD`, push `master` without force, and prove remote readback equals the merge commit. GitHub Wiki remains untouched.
 
-After registration:
+Remote push changes repository availability only. It does not create reviewer `SIGN`, owner authorization, or Stage-1B start.
 
-- `wiki/Research-Objective.md` says the three local remediation gates are closed and formal review
-  is submitted, while both requested reviewer judgements remain pending;
-- `wiki/survey/current/status.md` carries the same short state;
-- active-review routing points to the round-14 proposal;
-- Stage-1B remains unstarted and unauthorized.
+## 7. Rejected expansions and invalidating conditions
 
-## 7. Release states and merge flow
+Rejected:
 
-State is represented by four non-equivalent labels:
+- new query lanes or reverse-engineering query terms from reviewer-known papers;
+- systematic query execution;
+- model/smoke/metric/prototype work;
+- bulk fulltext rereading;
+- requiring all P2 items to reach D2;
+- self-authored round-16 verdict;
+- force push, audit rewrite, or GitHub Wiki publication;
+- another amendment chain.
 
-1. `PACKAGE_READY_FOR_REVIEW`;
-2. `SUBMITTED_FOR_INDEPENDENT_REVIEW`;
-3. `REVIEWED_SIGN_OR_WITHHOLD`;
-4. `OWNER_AUTHORIZED_STAGE1B`.
-
-Remote push success changes repository availability, not scientific or reviewer verdicts.
-
-Before merging, remove the erroneous shared `core.worktree` setting that points the primary
-repository at the linked remediation worktree. Record its prior value and removal command, then prove
-both worktrees resolve to their own roots and are clean.
-
-Run on the proposal commit:
-
-- integrated current-package gate on Windows and WSL2;
-- evidence-contract, current-layer, AI-context, and current-package focused tests on both platforms;
-- audit immutability and AI context surface checks;
-- frozen-query and experiment-attempt-registry zero-difference checks;
-- `git diff --check` and clean-status checks.
-
-Then use WSL2 for remote operations:
-
-1. fetch `origin` and record the actual default branch and remote head;
-2. compare source head, remote head, merge base, and affected paths with the approved baseline;
-3. stop on relevant divergence or reconcile benign divergence and rerun the package;
-4. merge the remediation branch to local `master` with a normal merge commit;
-5. rerun headline gates on the merged tree;
-6. push `master` to `origin/master` without force;
-7. read the remote ref and prove it equals the local merge commit.
-
-This authorization does not include GitHub Wiki publication. A test, merge, or push failure preserves
-the branch and evidence and stops the release.
-
-## 8. Rejected expansions
-
-- No new query lane or reverse engineering of query terms from reviewer-known papers.
-- No Stage-1A full-text coding of the nonblocking P2 queue.
-- No bulk rereading of the 95-work census.
-- No self-authored “independent” reviewer report.
-- No new macro proposal target without the v9 claim-diff.
-- No amendment chain; the engineering spec is revised in place and the effective research state is
-  consolidated in CURRENT.
-
-## 9. Invalidating conditions
-
-Stop and return to the relevant gate if the absence counterexample remains green, the crosswalk has an
-unexplained orphan, a bibliography placeholder remains, a canonical report/hash changes unexpectedly,
-Windows/WSL occupancy diverges, frozen query or attempt-registry bytes change, audit registration is
-non-append-only, remote divergence affects the reviewed package, a reviewer identifies a new blocker,
-or the owner changes the stage or authority ruling.
+Stop if cross-platform Git fails, absence proof is weak or misbound, a load-bearing row is unresolved, platform leaves diverge, the union graph loses/duplicates a source row, metadata lacks official receipt, system-first closure silently omits a direct neighbor, a load-bearing citation lacks grade/version/locator, a frozen execution surface changes, an audit append violates its one-row transaction, local PASS is phrased as formal sign-off, or relevant remote divergence appears.

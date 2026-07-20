@@ -2,13 +2,35 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Close the three reviewer-named Stage-1A gate majors, publish one immutable dual-track research proposal for independent review, and merge the verified package to `origin/master` without starting or authorizing Stage-1B.
+**Goal:** Remediate the four independently reproduced implementation findings, submit one immutable dual-track proposal for independent review, and publish the verified Stage-1A package to `origin/master` without claiming formal sign-off or starting Stage-1B.
 
-**Architecture:** Preserve every released audit artifact and evidence-v6 report byte-for-byte. Add a fail-closed evidence kind/value compatibility layer and structured absence provenance to the mutable CURRENT evidence data, issue a new evidence-v7 report, generate one machine-readable bridge from the legacy corpus into the current claim flow, and generate the reviewer bibliography and proposal from bound sources. Register the supplied design review as round 13 and the proposal as the round-14 active review transaction; reserve round 15 for a genuinely independent reviewer report. A fresh non-implementer must adjudicate the changed absence-row hashes before the proposal package may report `PACKAGE_READY_FOR_REVIEW`.
+**Architecture:** Repair the execution substrate first. Current evidence remains row-bound but gains a field-specific negative-evidence contract and cross-artifact validation. Legacy survey assets are connected through a lossless canonical-work union graph whose source rows and per-claim evidence remain explicit. Platform runners produce two leaf reports; a separate final aggregator alone may claim cross-platform consistency. Bibliography is generated from frozen official metadata receipts and exposes system-first, reward/verification, and training-free-boundary chains. Registered evidence-v6/context-v1 artifacts remain byte-identical.
 
-**Tech Stack:** Python standard library, JSON/JSONL and Markdown artifacts, `unittest`, existing survey/check scripts, Git blob immutability, Windows Python plus WSL2 Ubuntu-24.04 Python 3.12, GitHub CLI/Git over WSL2.
+**Tech Stack:** Python standard library, JSON/JSONL/Markdown, `unittest`, Git blob immutability, native Windows Git/Python, WSL2 Ubuntu-24.04 Python 3.12, official arXiv/ACL metadata endpoints.
 
 **Design spec:** `docs/superpowers/specs/2026-07-20-reviewer-proposal-and-master-release-design.md`
+
+---
+
+## Frozen identities and authority
+
+- `EVIDENCE_V6_RELEASE_ANCHOR=2f16b23`: used only to prove evidence-v6 and frozen-query/attempt bytes remain unchanged.
+- `PLAN_REVIEW_ANCHOR=17e230f673ee27efb5e74f6fbfab15c7061d22da`: exact plan reviewed in round 14.
+- `IMPLEMENTATION_FREEZE`: the commit containing this revised plan and revised design; Task 0 records its exact value and every generated receipt binds it.
+- `PRE_MERGE_MASTER`: fetched `origin/master` immediately before merge.
+- `MERGE_HEAD`: local merge commit verified before push.
+- Round 13: `wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md`.
+- Round 14: `wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md`.
+- Round 15: future proposal submission.
+- Round 16: future independent proposal review; the implementation actor must not create it.
+
+The package may say only:
+
+```text
+FOUR_IMPLEMENTATION_FINDINGS_REMEDIATED
+FORMAL_INDEPENDENT_REVIEW_PENDING
+STAGE_1B_UNSTARTED_AND_UNAUTHORIZED
+```
 
 ---
 
@@ -16,407 +38,180 @@
 
 **Create**
 
-- `scripts/survey/sf_absence_provenance_migrate.py` — deterministic, checkable enrichment of the 22 current absence bindings.
-- `scripts/survey/test_sf_absence_provenance_migrate.py` — migration idempotence, provenance, and semantic-equivalence tests.
-- `scripts/survey/sf_identity_taxonomy_v7_test.py` — evidence-v7 integration and mutation harness; taxonomy derivation remains v6.
-- `scripts/survey/test_sf_identity_taxonomy_v7_harness.py` — counterexample, occupancy, input-binding, and report tests.
-- `wiki/survey/current/data/absence-evidence-adjudication-v2.json` — fresh non-implementer verdicts for all changed row hashes.
-- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.json` — canonical aggregate evidence-v7 result.
-- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json` — Windows result.
-- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json` — WSL2 result.
-- `scripts/survey/sf_existing_corpus_disposition.py` — deterministic census/seed/bibliography/claim/full-text crosswalk generator and checker.
-- `scripts/survey/test_sf_existing_corpus_disposition.py` — denominator, alias, orphan, grade-preservation, and no-query tests.
-- `wiki/survey/current/data/existing-corpus-disposition-v1.json` — the only CURRENT bridge to legacy survey assets.
-- `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json` — bound source receipt and crosswalk verdict.
-- `scripts/survey/test_sf_bibliography_generator.py` — official metadata, placeholder, role, and frozen-query separation tests.
-- `wiki/survey/current/bibliography.md` — generated reviewer-visible bibliography with no author placeholders.
-- `scripts/survey/sf_reviewer_proposal_check.py` — proposal structure, source-binding, claim-diff, authority, and forbidden-claim checker.
-- `scripts/survey/test_sf_reviewer_proposal_check.py` — negative and positive proposal contract tests.
-- `wiki/survey/current/data/reviewer-proposal-source-manifest-v1.json` — exact proposal inputs with Git blobs/SHA-256/locators.
-- `docs/checks/system-first-stage1a/context-v2/reviewer-proposal-check.json` — proposal checker receipt.
-- `wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md` — byte-preserved user-supplied design review.
-- `wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md` — immutable dual-track submission.
-- `docs/checks/system-first-stage1a/context-v2/current-package-check.json` — integrated release gate.
+- `scripts/checks/sf_cross_platform_git_preflight.py`
+- `scripts/checks/test_sf_cross_platform_git_preflight.py`
+- `docs/checks/system-first-stage1a/context-v2/git-anchor-receipt.json`
+- `scripts/survey/sf_absence_provenance_migrate.py`
+- `scripts/survey/test_sf_absence_provenance_migrate.py`
+- `wiki/survey/current/data/absence-evidence-adjudication-v2.json`
+- `scripts/survey/sf_identity_taxonomy_v7_test.py`
+- `scripts/survey/test_sf_identity_taxonomy_v7_harness.py`
+- `scripts/survey/sf_evidence_v7_aggregate.py`
+- `scripts/survey/test_sf_evidence_v7_aggregate.py`
+- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json`
+- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json`
+- `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.json`
+- `scripts/survey/sf_existing_corpus_disposition.py`
+- `scripts/survey/test_sf_existing_corpus_disposition.py`
+- `wiki/survey/current/data/existing-corpus-disposition-v1.json`
+- `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json`
+- `wiki/survey/current/data/reviewer-known-items-v2.json`
+- `wiki/survey/current/data/official-metadata-receipts-v1.jsonl`
+- `wiki/survey/current/data/official-metadata/*`
+- `scripts/survey/test_sf_bibliography_generator.py`
+- `wiki/survey/current/bibliography.md`
+- `scripts/survey/sf_reviewer_proposal_check.py`
+- `scripts/survey/test_sf_reviewer_proposal_check.py`
+- `wiki/survey/current/data/reviewer-proposal-source-manifest-v1.json`
+- `docs/checks/system-first-stage1a/context-v2/reviewer-proposal-check.json`
+- `wiki/audit/system-first-stage1a/round-15/research-proposal-and-stage1b-signoff-request.md`
+- `docs/checks/system-first-stage1a/context-v2/current-package-check.json`
+- `docs/checks/system-first-stage1a/context-v2/hostile-review-ledger.json`
 
 **Modify**
 
-- `scripts/survey/sf_evidence_contract.py`
-- `scripts/survey/test_sf_evidence_contract.py`
-- `scripts/survey/sf_identity_taxonomy_v6_test.py` only if a reusable entry point must be factored without changing v6 output.
-- `wiki/survey/current/data/schema-v3/sidecars/*.sidecar.json`
-- `wiki/survey/current/data/known-item-coding-v7.json`
-- `scripts/survey/sf_bibliography_generator.py`
-- `scripts/survey/sf_campaign_audit_index.py`
-- `scripts/survey/test_sf_campaign_audit_index.py`
-- `wiki/survey/sf-audit-artifact-registry.json`
-- `wiki/audit/system-first-stage1a/campaign-index.json`
-- `wiki/audit/system-first-stage1a/INDEX.md`
-- `scripts/checks/ai_context_inventory.py`
-- `scripts/checks/build_ai_context_manifest.py`
-- `scripts/checks/test_ai_context_surface.py`
-- `scripts/survey/sf_current_manifest.py`
-- `scripts/survey/sf_current_package_check.py`
-- `scripts/survey/test_sf_current_layer.py`
-- `scripts/survey/test_sf_current_package_check.py`
-- `scripts/survey/test_sf_manifest_consumers.py`
-- `docs/checks/2026-07-19-sf-audit-immutability-check.json`
-- `wiki/survey/current/manifest.json`
-- `wiki/survey/current/README.md`
-- `wiki/survey/current/status.md`
-- `wiki/Research-Objective.md`
-- generated AI context and current-package reports selected by the existing builders.
+- `scripts/survey/sf_evidence_contract.py` and its tests.
+- current schema-v3 sidecars and generated coding projection.
+- `scripts/survey/sf_bibliography_generator.py`.
+- campaign/current/AI manifest builders and tests.
+- audit registry/index/anchors and generated receipts.
+- `wiki/survey/current/{manifest.json,README.md,status.md,tables/opening-guarantees.md}`.
+- `wiki/Research-Objective.md`.
 
-**Do not modify or create**
+**Never modify**
 
-- Any file already registered as an immutable audit artifact, including `wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md`.
-- `docs/checks/system-first-stage1a/evidence-v6/*` or `docs/checks/system-first-stage1a/context-v1/*`.
-- `wiki/audit/system-first-stage1a/round-15/research-proposal-independent-doctoral-review.md`; only the independent reviewer may create it.
-- `wiki/survey/2026-07-15-sf-queries.jsonl`, its 65 frozen query terms, or query compiler semantics.
-- `docs/integrity/experiment_attempt_registry.jsonl` and every research-model, smoke, prototype, or Stage-1B execution surface.
-- The remote GitHub Wiki.
+- registered audit artifact bytes, evidence-v6, or context-v1;
+- `wiki/survey/2026-07-15-sf-queries.jsonl` or its compiler semantics;
+- `docs/integrity/experiment_attempt_registry.jsonl`;
+- any research-model, smoke, metric, headroom, prototype, or Stage-1B execution surface;
+- GitHub Wiki;
+- the round-16 independent review path.
 
 ---
 
-### Task 1: Make the evidence-kind/value counterexample fail closed
+### Task 0: Repair and freeze the cross-platform Git substrate
 
-**Files:**
+**User journey:** As a reviewer, I can resolve the same repository, commit, blob, and clean status from Windows and WSL before trusting any platform receipt.
 
-- Modify: `scripts/survey/test_sf_evidence_contract.py`
-- Modify: `scripts/survey/sf_evidence_contract.py`
-- Test: `scripts/survey/test_sf_identity_taxonomy_v6_contract.py`
-
-- [ ] **Step 1: Add red unit tests for the compatibility matrix**
-
-Add tests that call `validate_bound_values` with otherwise-valid fixtures and assert:
-
-```python
-self.assertIn(
-    "paper#path:signal:s:form:absence-incompatible-positive-value",
-    validate_bound_values(row_with_signal_form("text_critique", "absence")),
-)
-self.assertIn(
-    "paper#path:signal:s:source:absence-incompatible-positive-value",
-    validate_bound_values(row_with_signal_source("llm_judge", "absence")),
-)
-for value in (False, None, "", "none", "unknown", []):
-    self.assertNotIn(
-        "absence-incompatible-positive-value",
-        "\n".join(validate_bound_values(row_with_negative_absence(value))),
-    )
-```
-
-Add one subtest for each required absence field: `value`, `inspected_scope`, `reason`, `source_version`, `coder`, and `adjudicator_provenance`. Missing, empty, or malformed provenance must fail.
-
-- [ ] **Step 2: Reproduce the exact green mutation before the fix**
-
-Run:
+- [ ] Add `test_sf_cross_platform_git_preflight.py` first. It must fail when a linked-worktree gitfile contains a Windows absolute `gitdir`, when shared `core.worktree` redirects the primary repository, when either platform resolves a different HEAD/blob, or when required anchor names are missing.
+- [ ] Run the red test:
 
 ```powershell
-python -m unittest scripts.survey.test_sf_evidence_contract -v
+python -m unittest scripts.checks.test_sf_cross_platform_git_preflight -v
 ```
 
-Expected before implementation: the positive `form`/`source` absence tests fail because the validator returns no compatibility error.
+- [ ] Record the current `.git` gitfile and shared `core.worktree` only in a local before/after diagnostic; do not publish raw local Git metadata as research evidence.
+- [ ] Unset the erroneous shared `core.worktree`. Use `apply_patch` to replace the linked-worktree gitfile with the relative path `../../.git/worktrees/stage1b-readiness-remediation`, then verify native Windows and WSL direct Git commands; do not rely on a hidden one-off shell wrapper.
+- [ ] Implement the read-only preflight. Its committed receipt records platform, resolved root, HEAD, selected blob, clean status, and the five named anchor values; it does not record machine-specific `.git` bytes.
+- [ ] Verify both platforms:
 
-- [ ] **Step 3: Implement the shared compatibility policy**
+```powershell
+python scripts/checks/sf_cross_platform_git_preflight.py --check
+wsl -d Ubuntu-24.04 bash -lc "source ~/.venvs/speechrl/bin/activate && cd /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation && python scripts/checks/sf_cross_platform_git_preflight.py --check"
+```
 
-Add these public constants/helpers to `sf_evidence_contract.py` and call `_validate_absence_entry` from `_validate_binding` after value equality:
+Expected: both direct Git contexts resolve the feature worktree and the same `IMPLEMENTATION_FREEZE`. No later WSL task runs until this passes.
+
+---
+
+### Task 1: Implement field-specific absence compatibility and cross-binding
+
+**User journey:** As a coder, I cannot use missing, unknown, weak, or unrelated evidence to support a load-bearing negative field.
+
+- [ ] Add red unit tests to `test_sf_evidence_contract.py` for positive categorical absence, `unknown`, `None`, empty string, wrong fulltext hash, wrong sidecar, wrong row hash, adjudication artifact missing the row, verdict other than `AGREE`, URL/locator used instead of content hash, weak `not contradicted`, and coder/adjudicator actor collision.
+- [ ] Define only these currently observed allowed pairs; no global fallback set exists:
 
 ```python
-ABSENCE_REQUIRED_FIELDS = {
-    "value",
-    "inspected_scope",
-    "reason",
-    "source_version",
-    "coder",
-    "adjudicator_provenance",
+ABSENCE_ALLOWED_VALUES = {
+    "human_or_dev_label_model_selection": (False,),
+    "selection_object": ("none",),
+    "explicit_candidate_pool_selection": (False,),
+    "inference_external_new_information": (False,),
+    "external_component_weight_update": (False,),
+    "controller_program_or_config_optimized_on_labels": (False,),
+    "decision_rights": ([],),
 }
-
-
-def absence_value_allowed(value):
-    return (
-        value is False
-        or value is None
-        or value == ""
-        or value == "none"
-        or value == "unknown"
-        or value == []
-    )
-
-
-def _nonempty_mapping(value, required):
-    return (
-        isinstance(value, Mapping)
-        and all(isinstance(value.get(key), str) and value[key].strip()
-                for key in required)
-    )
-
-
-def _validate_absence_entry(owner, field, expected, entry, failures):
-    if entry.get("kind") != "absence":
-        return
-    if not absence_value_allowed(expected):
-        failures.append(
-            f"{owner}:{field}:absence-incompatible-positive-value"
-        )
-    for key in ABSENCE_REQUIRED_FIELDS:
-        if key not in entry:
-            failures.append(f"{owner}:{field}:absence-{key}-missing")
-    if not isinstance(entry.get("inspected_scope"), str) or not entry["inspected_scope"].strip():
-        failures.append(f"{owner}:{field}:absence-inspected_scope-invalid")
-    if not isinstance(entry.get("reason"), str) or not entry["reason"].strip():
-        failures.append(f"{owner}:{field}:absence-reason-invalid")
-    if not _nonempty_mapping(entry.get("source_version"), {"source_id", "version_binding"}):
-        failures.append(f"{owner}:{field}:absence-source_version-invalid")
-    if not _nonempty_mapping(entry.get("coder"), {"identity", "source_sidecar"}):
-        failures.append(f"{owner}:{field}:absence-coder-invalid")
-    if not _nonempty_mapping(
-        entry.get("adjudicator_provenance"),
-        {"identity", "artifact", "verdict"},
-    ):
-        failures.append(f"{owner}:{field}:absence-adjudicator_provenance-invalid")
 ```
 
-Keep list-vs-scalar type equality in `values_equal`; compatibility never replaces encoded-value equality.
-
-- [ ] **Step 4: Run the focused suite green**
+- [ ] Define a proof obligation for each field. Each obligation names required inspected sections/pages, search terms or tables, acceptable explicit-negative evidence, immutable fulltext SHA-256, and the condition that forces `UNRESOLVED`. `unknown`, not-fetched, unreachable, not-coded, and not-applicable never support load-bearing absence.
+- [ ] Require every absence entry to bind `proof_obligation_id`, exact inspected locators, immutable fulltext identity/hash, owner sidecar path, coder identity, row hash, and adjudication row ID.
+- [ ] Make the validator load the owner sidecar and adjudication artifact and prove all bindings. It may prove binding consistency; actor independence is labelled `TEAM_ATTESTATION`, not machine proof.
+- [ ] Run red, implement minimally, then green:
 
 ```powershell
 python -m unittest scripts.survey.test_sf_evidence_contract scripts.survey.test_sf_identity_taxonomy_v6_contract -v
 ```
 
-Expected: all tests pass; positive absence fails before derivation and legitimate negative absence passes.
-
-- [ ] **Step 5: Commit the generic contract before data migration**
-
-```powershell
-git add scripts/survey/sf_evidence_contract.py scripts/survey/test_sf_evidence_contract.py scripts/survey/test_sf_identity_taxonomy_v6_contract.py
-git commit -m "fix(survey): reject incompatible absence evidence"
-```
+- [ ] Commit the contract and tests before migrating data.
 
 ---
 
-### Task 2: Migrate current absence evidence and obtain independent delta adjudication
+### Task 2: Prepare 22 proofs and obtain fresh semantic adjudication
 
-**Files:**
+**User journey:** As an independent semantic reviewer, I inspect the actual negative-evidence obligation and source for every changed row, not merely a hash delta.
 
-- Create: `scripts/survey/sf_absence_provenance_migrate.py`
-- Create: `scripts/survey/test_sf_absence_provenance_migrate.py`
-- Modify: `wiki/survey/current/data/schema-v3/sidecars/*.sidecar.json`
-- Modify: `wiki/survey/current/data/known-item-coding-v7.json`
-- Create: `wiki/survey/current/data/absence-evidence-adjudication-v2.json`
-
-- [ ] **Step 1: Add red migration tests**
-
-The tests must prove all of the following:
-
-```python
-self.assertEqual(22, report["absence_entries"])
-self.assertEqual(0, report["positive_absence_entries"])
-self.assertEqual(0, report["missing_provenance_entries"])
-self.assertEqual(0, report["semantic_tuple_changes"])
-self.assertEqual(first_render, second_render)
-```
-
-For every entry compare the tuple `(method_path_id, owner, field, kind, value)` before and after. Only `note -> reason`, `scope -> inspected_scope`, and provenance enrichment are allowed. Assert that `wiki/survey/2026-07-19-sf-queries.jsonl` is neither read nor written by the migration module.
-
-- [ ] **Step 2: Implement a deterministic `--check`/`--write` migration**
-
-For each absence entry derive:
-
-```json
-{
-  "kind": "absence",
-  "value": false,
-  "inspected_scope": "the exact former scope text",
-  "reason": "the exact former note text",
-  "source_version": {
-    "source_id": "the sidecar fulltext.id",
-    "version_binding": "the sidecar fulltext.sha256 or canonical record locator"
-  },
-  "coder": {
-    "identity": "the sidecar coder",
-    "source_sidecar": "the repository-relative source sidecar path"
-  },
-  "adjudicator_provenance": {
-    "identity": "/root/a6_adjudicator",
-    "artifact": "wiki/survey/current/data/schema-v3-adjudication.json",
-    "verdict": "AGREE"
-  }
-}
-```
-
-The renderer must preserve UTF-8 and stable key ordering. It must reject any absence tuple not found with `AGREE` in the prior adjudication artifact. Restamp rows with `sf_row_hash.py`, regenerate `known-item-coding-v7.json`, and emit a machine summary including old/new hashes.
-
-- [ ] **Step 3: Run migration tests, write once, and prove idempotence**
+- [ ] Add migration tests proving exactly 22 source entries, seven allowed field/value pairs, zero positive/unknown/missing absence, stable `(method_path_id, owner, field, kind, value)` tuples, deterministic output, and no frozen-query access.
+- [ ] Implement `sf_absence_provenance_migrate.py --check|--write`. It may prepare proof records and restamp rows but must not assign a new semantic verdict.
+- [ ] For each entry, bind the sidecar `fulltext.sha256`; a canonical locator alone is insufficient. If the immutable fulltext is unavailable or the field obligation cannot be completed, mark the row non-load-bearing/`UNRESOLVED` and make the proposal package fail if it would support a load-bearing claim.
+- [ ] A fresh non-implementer reviews all 22 records against the field-specific obligation and source. Their artifact contains stable identity, reviewed commits/blobs, nonparticipation scope, conflict declaration, timestamp, per-row reason, `AGREE|DISAGREE`, and `TEAM_ATTESTATION` independence classification.
+- [ ] Validation must reject incomplete coverage, actor collision, wrong hash/path, weak proof, or any `DISAGREE`.
+- [ ] Run:
 
 ```powershell
 python -m unittest scripts.survey.test_sf_absence_provenance_migrate -v
-python scripts/survey/sf_absence_provenance_migrate.py --write
 python scripts/survey/sf_absence_provenance_migrate.py --check
 python scripts/survey/sf_coding_generator.py --check
-git diff --check
 ```
 
-Expected: 22 enriched absence entries, zero semantic tuple changes, zero second-pass diff.
-
-- [ ] **Step 4: Commit the mechanically reviewable delta**
-
-```powershell
-git add scripts/survey/sf_absence_provenance_migrate.py scripts/survey/test_sf_absence_provenance_migrate.py wiki/survey/current/data/schema-v3/sidecars wiki/survey/current/data/known-item-coding-v7.json
-git commit -m "data(survey): bind absence evidence provenance"
-```
-
-- [ ] **Step 5: Stop for a fresh non-implementer delta review**
-
-The reviewer receives the pre-migration commit, migration commit, 22 old/new tuples, old/new row hashes, the prior adjudication artifact, and the replay commands. The reviewer—not the implementer—creates `absence-evidence-adjudication-v2.json` with stable identity, nonparticipation and conflict declarations, exact reviewed commits/blobs, 22 per-entry `AGREE|DISAGREE` verdicts, and a summary. Any disagreement stops the release and returns to Step 2.
-
-- [ ] **Step 6: Validate and commit the independent adjudication**
-
-Add a test that requires 22/22 entries, exact new row hashes, stable reviewer identity, nonparticipation, conflict declaration, and `ALL_AGREE`. Run:
-
-```powershell
-python -m unittest scripts.survey.test_sf_absence_provenance_migrate -v
-python scripts/survey/sf_absence_provenance_migrate.py --check
-git add wiki/survey/current/data/absence-evidence-adjudication-v2.json scripts/survey/test_sf_absence_provenance_migrate.py
-git commit -m "audit(survey): record absence evidence adjudication"
-```
-
-Expected: the adjudication is independently authored and every changed hash is covered. Do not continue if the file is absent, self-authored, incomplete, or contains `DISAGREE`.
+Do not continue to proposal construction until all load-bearing rows are independently `AGREE` or conservatively downgraded.
 
 ---
 
-### Task 3: Issue evidence-v7 without rewriting evidence-v6
+### Task 3: Build evidence-v7 as a real two-leaf DAG
 
-**Files:**
+**User journey:** As a reviewer, the canonical evidence report proves equality of two exact platform leaf reports rather than relabelling a Windows rerun.
 
-- Create: `scripts/survey/sf_identity_taxonomy_v7_test.py`
-- Create: `scripts/survey/test_sf_identity_taxonomy_v7_harness.py`
-- Create: `docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test*.json`
-
-- [ ] **Step 1: Add red end-to-end counterexample tests**
-
-Copy only reusable fixture construction from the v6 harness. Add the exact reviewer mutation:
-
-```python
-row = find_row("2026.findings-acl.1724#pipeline")
-signal = find_signal(row, "s_stage_judge")
-signal["form"] = "text_critique"
-signal["claim_evidence"]["form"] = {
-    "kind": "absence",
-    "value": "text_critique",
-    "inspected_scope": "paper full text",
-    "reason": "not contradicted",
-    "source_version": {"source_id": "2026.findings-acl.1724", "version_binding": "fixture"},
-    "coder": {"identity": "fixture", "source_sidecar": "fixture.json"},
-    "adjudicator_provenance": {"identity": "fixture", "artifact": "fixture.json", "verdict": "AGREE"},
-}
-```
-
-Restamp the row, then assert structure/binding/source validation is nonzero before occupancy derivation. Add a positive control using `value=False` and complete provenance.
-
-- [ ] **Step 2: Implement the v7 harness as a release wrapper**
-
-The harness must consume the current v6 taxonomy and schema-v3 sidecars, plus `absence-evidence-adjudication-v2.json`; keep the scientific derivation unchanged. Emit:
-
-```json
-{
-  "schema": "sf-identity-taxonomy-evidence-v7-test",
-  "verdict": "PASS",
-  "absence_contract": {
-    "entries": 22,
-    "positive_entries": 0,
-    "provenance_failures": 0,
-    "independent_adjudication": "ALL_AGREE"
-  },
-  "counterexample": "REJECTED_BEFORE_DERIVATION",
-  "occupancy_equal_to_v6": true
-}
-```
-
-Bind every input path, Git blob or working-tree SHA-256, and output hash. The expected occupancy remains `RQ-SYS 5/11`, `reward_guided_selection 4/11`, and `trajectory_pool 2/11`.
-
-- [ ] **Step 3: Run focused and platform-specific evidence checks**
+- [ ] Add v7 harness tests for the reviewer’s positive-absence mutation and a legitimate field-specific negative control.
+- [ ] Add aggregator tests before implementation. Deleting or replacing either leaf, altering input hash, runner/contract version, platform stamp, named failures, occupancy, or output semantics must fail.
+- [ ] Each platform runner writes only its leaf. Both leaves bind the same frozen inputs, runner blob, contract version, adjudication artifact, and `IMPLEMENTATION_FREEZE`.
+- [ ] Generate leaves in this order:
 
 ```powershell
-python -m unittest scripts.survey.test_sf_identity_taxonomy_v7_harness -v
-python scripts/survey/sf_identity_taxonomy_v7_test.py --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json
-python scripts/survey/sf_identity_taxonomy_v7_test.py --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.json
-wsl -d Ubuntu-24.04 bash -lc "source ~/.venvs/speechrl/bin/activate && cd /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation && python scripts/survey/sf_identity_taxonomy_v7_test.py --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json"
+python scripts/survey/sf_identity_taxonomy_v7_test.py --leaf --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json
+wsl -d Ubuntu-24.04 bash -lc "source ~/.venvs/speechrl/bin/activate && cd /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation && python scripts/survey/sf_identity_taxonomy_v7_test.py --leaf --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json"
+python scripts/survey/sf_evidence_v7_aggregate.py --write
+python scripts/survey/sf_evidence_v7_aggregate.py --check
 ```
 
-Expected: all three reports say `PASS`, exact occupancy is identical, and the reviewer mutation is red.
-
-- [ ] **Step 4: Prove evidence-v6 bytes were untouched and commit**
-
-```powershell
-git diff 2f16b23 -- docs/checks/system-first-stage1a/evidence-v6
-git diff --check
-git add scripts/survey/sf_identity_taxonomy_v7_test.py scripts/survey/test_sf_identity_taxonomy_v7_harness.py docs/checks/system-first-stage1a/evidence-v7
-git commit -m "test(survey): issue fail-closed evidence v7"
-```
-
-Expected: first command has no output.
+- [ ] The aggregator runs last and consumes the exact two leaf bytes. Current manifest binds all three reports. Expected scientific occupancy remains `RQ-SYS 5/11`, `reward_guided_selection 4/11`, `trajectory_pool 2/11`; equality is proved NT=POSIX and each leaf=v6 occupancy.
+- [ ] Prove `git diff EVIDENCE_V6_RELEASE_ANCHOR..HEAD -- docs/checks/system-first-stage1a/evidence-v6` is empty.
 
 ---
 
-### Task 4: Generate the legacy-corpus disposition bridge
+### Task 4: Generate a lossless existing-corpus union graph
 
-**Files:**
+**User journey:** As a researcher, every inherited source row has exactly one explicit destination without collapsing heterogeneous claims, grades, or conflicts.
 
-- Create: `scripts/survey/sf_existing_corpus_disposition.py`
-- Create: `scripts/survey/test_sf_existing_corpus_disposition.py`
-- Create: `wiki/survey/current/data/existing-corpus-disposition-v1.json`
-- Create: `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json`
-
-- [ ] **Step 1: Add red tests for exact denominators and orphan handling**
-
-Assert these frozen observations from the current repository:
-
-```python
-self.assertEqual(95, report["census"]["total"])
-self.assertEqual(92, report["seeds"]["total"])
-self.assertEqual(65, report["bibliography"]["total"])
-self.assertEqual(62, report["claim_ledger"]["rows"])
-self.assertEqual(44, report["claim_ledger"]["unique_sources"])
-self.assertEqual(31, report["claim_ledger"]["census_clusters"])
-self.assertEqual(0, report["unexplained_orphans"])
-```
-
-Add failure tests for duplicate census disposition, unexplained seed/bibliography destination, silent exact-ID/alias merge, evidence-grade upgrade, and a query-file write attempt.
-
-- [ ] **Step 2: Implement explicit identity and disposition records**
-
-The generator reads the canonical census, seed records, bibliography v1, claim ledger/version pins, full-text ledger, and reviewer-known-item input. Each census work appears once. Each record contains:
+- [ ] Add red tests using real heterogeneous cases including `P-0031`, `P-0005`, `P-0071`, and `P-0080`. A flat best/worst grade, lost claim row, generic unresolved bucket, excluded item with a positive role, or duplicated source membership must fail.
+- [ ] Freeze `reviewer-known-items-v2.json` with schema, exact path, generation rule, source provenance, SHA-256, access class, and `query_recall_credit=false` where applicable.
+- [ ] Implement canonical nodes with this shape:
 
 ```json
 {
-  "stable_id": "source-native stable identity",
-  "version": "pinned source version or IDENTITY_UNRESOLVED",
-  "source_campaign": "originating census/seed/bibliography/claim campaign",
-  "inherited_evidence_grade": "original grade, never upgraded",
-  "role": "DEEPLY_READ",
-  "relevant_section": "the exact RQ or proposal section",
-  "disposition_reason": "inclusion reason or REC-0 exclusion reason",
-  "next_stage_action": "carry, verify, queue, or exclude",
-  "locator": "available exact locator or empty string",
-  "conflict_status": "NONE, MATERIAL, CRITICAL, UNVERIFIED, or IDENTITY_UNRESOLVED",
-  "invalidating_condition": "condition that invalidates this routing"
+  "canonical_work_id": "stable graph node",
+  "identities": [{"source_id": "...", "relation": "EXACT_ID|EXPLICIT_ALIAS|UNRESOLVED", "provenance": "..."}],
+  "source_memberships": [{"campaign": "census|seed|bibliography|claim|version_pin|fulltext|reviewer_known", "source_row_id": "..."}],
+  "screening_decision": "INCLUDE|EXCLUDE|UNRESOLVED",
+  "reference_role": "DEEPLY_READ|KNOWN_QUEUE|MEASUREMENT_INSTRUMENT|BOUNDARY_COMPARATOR|null",
+  "claim_evidence": [{"claim_id": "...", "evidence_grade": "...", "discrepancy_status": "...", "locator": "...", "version": "..."}],
+  "current_disposition": {"reason": "...", "next_action": "...", "invalidating_condition": "..."}
 }
 ```
 
-Allowed roles are exactly `DEEPLY_READ`, `KNOWN_QUEUE`, `MEASUREMENT_INSTRUMENT`, and `BOUNDARY/NEGATIVE_PRIOR`. Identity links must state `EXACT_ID`, `EXPLICIT_ALIAS`, or `UNRESOLVED`; aliases carry both source IDs and provenance.
-
-- [ ] **Step 3: Bind inputs and emit the check report**
-
-The output records input path, `git hash-object` blob, SHA-256, generator version, and output SHA-256. It must reproduce and disclose:
-
-- census: 95 total, 94 resolved, 1 unresolved, 83 arXiv/version-pinned;
-- claim ledger: 62 rows, 44 unique sources, 31 census clusters, all 62 double-review-pending;
-- census→seed 13/95, census→bibliography 3/95, seed→bibliography 9/92;
-- seed arXiv→full text 19/88, bibliography arXiv→full text 16/47, census arXiv→full text 0/83;
-- 15 MATERIAL, 2 CRITICAL, 6 UNVERIFIED, 19 MINOR, and 20 NONE discrepancies.
-
-Run:
+- [ ] Require every nonblank source row exactly once: census 95, seed 92, bibliography 65, claim 62, version pin 30, fulltext ledger 129, plus the exact frozen reviewer-known denominator. These are source-row denominators, not assumed identical work sets.
+- [ ] `EXCLUDE` requires REC-0 reason and `reference_role=null`; `INCLUDE` requires a canonical role. Unresolved records carry count, source, reason, owner, deadline gate, and next action. Any load-bearing unresolved fails the package.
+- [ ] Report `arXiv identity count` and `version-pinned count` separately and test set equality before ever combining them.
+- [ ] Emit the graph plus a source receipt with Git blobs/SHA-256 and run:
 
 ```powershell
 python -m unittest scripts.survey.test_sf_existing_corpus_disposition -v
@@ -424,409 +219,120 @@ python scripts/survey/sf_existing_corpus_disposition.py --write
 python scripts/survey/sf_existing_corpus_disposition.py --check
 ```
 
-Expected: `census=95/95 seeds=92/92 bibliography=65/65 unexplained_orphans=0 verdict=PASS`.
-
-- [ ] **Step 4: Commit the generated bridge**
-
-```powershell
-git add scripts/survey/sf_existing_corpus_disposition.py scripts/survey/test_sf_existing_corpus_disposition.py wiki/survey/current/data/existing-corpus-disposition-v1.json docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json
-git commit -m "data(survey): route existing corpus into current claims"
-```
+`unexplained_orphans=0` means only that every source row has an explanation; it never means every paper is verified or deeply read.
 
 ---
 
-### Task 5: Complete the reviewer bibliography without changing frozen recall
+### Task 5: Generate bibliography from official receipts and restore system-first balance
 
-**Files:**
+**User journey:** As a reviewer, citation metadata is independently reproducible and the proposal’s system thesis is situated against direct speech/omni agent systems as well as reward methods.
 
-- Modify: `scripts/survey/sf_bibliography_generator.py`
-- Create: `scripts/survey/test_sf_bibliography_generator.py`
-- Create: `wiki/survey/current/bibliography.md`
-- Modify: `wiki/survey/current/tables/opening-guarantees.md`
-
-- [ ] **Step 1: Add failing metadata and separation tests**
-
-Tests require zero occurrences of `authors on official page` and exact official identities for:
-
-```python
-P1_HIGH = {
-    "arXiv:2605.04531",
-    "ACL:2025.acl-long.775",
-    "ACL:2026.acl-industry.87",
-    "arXiv:2605.23261",
-}
-P2_ADDITIONS = {"arXiv:2602.01381", "ACL:2026.acl-srw.1"}
-```
-
-Require the six existing P2 items, the four v9 boundary/measurement items, the ACL/arXiv Reinforced Agent identity binding, correct provenance and role for each reviewer-known item, and a statement that these items are not frozen-query recall.
-
-- [ ] **Step 2: Replace placeholders with official metadata in the generator**
-
-Keep one structured record per work: stable ID, title, full official author list, official URL, role, provenance (`V9_REQUIRED` or `REVIEWER_KNOWN_ITEM`), boundary hypothesis, and `query_recall_credit=false` for reviewer-known items. Do not change the 65-query file or compiler.
-
-- [ ] **Step 3: Generate and verify the bibliography and opening roles**
+- [ ] Add tests that fail when generator constants are used as the metadata oracle, a raw official payload/response hash is absent, an official identity does not round-trip, a placeholder remains, or a reviewer-known item receives query recall credit.
+- [ ] Fetch only known IDs from official arXiv export/Atom or ACL Anthology BibTeX/pages. Store raw payload snapshots and normalized receipts with URL, access timestamp, access class (`ID_DEREFERENCE|PROVENANCE_FETCH|REVIEW_CLAIM_VERIFICATION`), source version, raw SHA-256, title, authors, and identity. These accesses are not discovery queries and are not reported as zero network exposure.
+- [ ] Route the existing direct neighbors AudioToolAgent, Audio-Mind, Agent-Omni, EChO-Agent, AuTAgent, Speech-Copilot, VoxMind, WavReward, and GSRM into the graph and reviewer bibliography.
+- [ ] Retain prior P1/P2 items. Add Trust but Verify (`2508.16665`) to the verification/taxonomy chain; add `2510.18982` and `2509.25845` as nonblocking P2 reviewer-known items. None alters the 65 frozen queries.
+- [ ] Opening roles visibly cover three chains: system-first direct neighbors, reward/verification mechanisms, and training-free/trained boundary comparators.
+- [ ] Only works used by round-15 load-bearing gap/boundary claims must reach D2 before submission. Other P2 items remain `KNOWN_QUEUE` or `BOUNDARY_COMPARATOR` with an explicit next action.
+- [ ] Generate and verify:
 
 ```powershell
 python -m unittest scripts.survey.test_sf_bibliography_generator -v
-python scripts/survey/sf_bibliography_generator.py --output wiki/survey/current/bibliography.md
+python scripts/survey/sf_bibliography_generator.py --write --output wiki/survey/current/bibliography.md
 python scripts/survey/sf_bibliography_generator.py --check --output wiki/survey/current/bibliography.md
-rg -n -i "author(s)? on official page|placeholder|unknown author" wiki/survey/current/bibliography.md
-git diff 2f16b23 -- wiki/survey/2026-07-15-sf-queries.jsonl
-```
-
-Expected: tests pass; placeholder scan and frozen-query diff have no output. P1 is complete; P2 is visibly nonblocking.
-
-- [ ] **Step 4: Commit bibliography closure**
-
-```powershell
-git add scripts/survey/sf_bibliography_generator.py scripts/survey/test_sf_bibliography_generator.py wiki/survey/current/bibliography.md wiki/survey/current/tables/opening-guarantees.md
-git commit -m "docs(survey): complete reviewer bibliography metadata"
 ```
 
 ---
 
-### Task 6: Build and validate the dual-track proposal
+### Task 6: Build the dual-track proposal and source manifest
 
-**Files:**
+**User journey:** As an independent reviewer, I can separately judge the scientific rationale for continuing mapping and the Stage-1B search design without encountering a prefilled verdict.
 
-- Create: `scripts/survey/sf_reviewer_proposal_check.py`
-- Create: `scripts/survey/test_sf_reviewer_proposal_check.py`
-- Create: `wiki/survey/current/data/reviewer-proposal-source-manifest-v1.json`
-- Create: `docs/checks/system-first-stage1a/context-v2/reviewer-proposal-check.json`
-- Create later in this task: `wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md`
-
-- [ ] **Step 1: Add red proposal-contract tests**
-
-Tests must reject a proposal that:
-
-- omits either Track A or Track B;
-- contains actual values for either requested verdict;
-- claims Stage-1B is authorized, started, or signed;
-- lacks the independence contract or owner-authorization provenance;
-- lacks a complete v9 claim-diff row;
-- uses an unbound numeric claim;
-- includes `first-ever`, `novelty established`, `SOTA`, or contribution-as-result wording;
-- credits reviewer-known items to frozen-query recall;
-- omits the wiki dry-run incident or inherited prior exposure.
-
-The positive fixture must expose only:
+- [ ] Add proposal checker tests first. Reject missing Track A/B, actual reviewer verdicts, Stage-1B authorization/start claims, missing owner provenance, incomplete v9 claim diff, unbound number, unsupported novelty/SOTA language, low-grade load-bearing citation, reviewer-known recall credit, or omitted incident/exposure statement.
+- [ ] Build a source manifest binding Project-Thesis, Research-Objective, current protocol/status, v9 proposal/review/response, round-12 correction, round-13/14 reviews, evidence-v7 aggregate and leaves, union graph/receipt, official metadata receipts, bibliography/opening roles, context-v1 incident, frozen query bytes, campaign index, and named Git anchors.
+- [ ] Write `wiki/audit/system-first-stage1a/round-15/research-proposal-and-stage1b-signoff-request.md` with:
 
 ```text
 REQUESTED_SCIENTIFIC_RATIONALE_FOR_CONTINUING_MAPPING = ADEQUATE|REVISE|INADEQUATE
 REQUESTED_SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 ```
 
-- [ ] **Step 2: Implement the source manifest builder/checker**
-
-Bind `Project-Thesis`, `Research-Objective`, current protocol/status, v9 proposal/review/response, round-12 correction, evidence-v7 reports, context-v2 corpus receipt, current bibliography/opening roles, context-v1 wiki incident, frozen query bytes, campaign index, and the design spec. For each input record repository-relative path, Git blob when tracked, SHA-256, purpose, and locator. Reject dirty mismatch between manifest bytes and proposal source references.
-
-- [ ] **Step 3: Write the self-contained proposal**
-
-Track A contains the north-star question, motivation, scoped gap, RQs, contribution hypotheses, staged method, falsifiers, risks, limitations, and doctoral value. Track B maps v9 E1–E5 and P0-A/B/C to contracts, negative tests, exact artifacts, Windows/WSL replay, context consolidation, frozen execution boundary, incident disclosure, P1 closure, and nonblocking P2 queue.
-
-The v9 claim-diff table has exact columns:
-
-```text
-v9 claim ID and section | UNCHANGED|CORRECTED|WITHDRAWN|NEW | rationale | canonical evidence path + hash/locator | hypothesis_only|readiness_only
-```
-
-State only `PACKAGE_READY_FOR_REVIEW` / `SUBMITTED_FOR_INDEPENDENT_REVIEW`; explicitly keep `REVIEWED_SIGN_OR_WITHHOLD` and `OWNER_AUTHORIZED_STAGE1B` pending. State repair exposure as zero new discovery queries, zero research-model calls, and zero smoke runs within this repair, plus unchanged `INHERITED_PRIOR_EXPOSURE`.
-
-- [ ] **Step 4: Run the proposal checker and hostile string scan**
-
-```powershell
-python -m unittest scripts.survey.test_sf_reviewer_proposal_check -v
-python scripts/survey/sf_reviewer_proposal_check.py --write-report
-rg -n -i "first[- ]ever|novelty (is )?established|state[- ]of[- ]the[- ]art|stage-1b (is )?(authorized|started|signed)" wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md
-```
-
-Expected: checker `PASS`; hostile scan has no unauthorized assertion. Requested response values may appear only as schemas, never as filled verdicts.
-
-- [ ] **Step 5: Keep the proposal uncommitted until the audit transaction is assembled**
-
-Do not commit round 14 alone. Its first committed bytes must be registered and campaign-routed in Task 7 in the same commit.
+These are response schemas only. Actual values exist only in round 16.
+- [ ] Track A contains question, motivation, scoped gap, RQs, hypotheses, staged method, falsifiers, risks, limitations, and doctoral value. Track B maps v9 E1–E5 and P0-A/B/C plus round-13/14 findings to exact contracts and replay evidence.
+- [ ] The v9 claim-diff columns are exact claim ID/section, `UNCHANGED|CORRECTED|WITHDRAWN|NEW`, rationale, evidence path+hash/locator, and `hypothesis_only|readiness_only`.
+- [ ] The exposure statement says zero systematic discovery-query execution and zero research-model/smoke calls in this repair, while listing nonzero metadata/provenance accesses and unchanged `INHERITED_PRIOR_EXPOSURE`.
+- [ ] Run proposal tests/checker. Keep the proposal uncommitted until the audit registration transaction.
 
 ---
 
-### Task 7: Register rounds 13–14 and route the active review transaction
+### Task 7: Register round 15 and publish context-v2
 
-**Files:**
+**User journey:** As a maintainer, the proposal becomes immutable at first commit and current state points to exactly that submission while reviewer and owner decisions remain pending.
 
-- Create: round-13 review and round-14 proposal paths.
-- Modify: `scripts/survey/sf_campaign_audit_index.py`
-- Modify: `scripts/survey/test_sf_campaign_audit_index.py`
-- Modify: `wiki/survey/sf-audit-artifact-registry.json`
-- Modify: `wiki/audit/system-first-stage1a/campaign-index.json`
-- Modify: `wiki/audit/system-first-stage1a/INDEX.md`
-- Modify: `scripts/checks/ai_context_inventory.py`
+- [ ] Add campaign tests proving one proposal/application may become the later `ACTIVE_REVIEW_TRANSACTION`, a review cannot, and round 16 must be a new event.
+- [ ] Compute the proposal Git blob before commit, append exactly one registry row, append round 15 to campaign index, and advance anchors from the committed 80/43 prefix to 81/44. Do not extend round 14.
+- [ ] First commit proposal+registry+campaign+anchors atomically. Then regenerate and commit the immutability report after the registered artifact exists at HEAD, matching the checker’s one-row transaction contract.
+- [ ] Point current/AI manifests to the round-15 proposal, evidence-v7 aggregate+both leaves, union graph/receipt, official metadata receipts, bibliography, and context-v2 package report. Legacy source assets remain outside default AI load; the union graph is their CURRENT bridge.
+- [ ] Set current state to:
 
-- [ ] **Step 1: Preserve the supplied review bytes at the final audit path**
-
-Before editing, record the source SHA-256. Read the source, then use `apply_patch` to add the final
-round-13 file with the exact same bytes; do not create or stage a root-level legacy path. Compare the
-two SHA-256 values before continuing:
-
-```powershell
-Get-FileHash 'D:/chao_workspace/exploring-l4-intelligence/wiki/2026-07-20-reviewer-proposal-and-master-release-design-stage1a-doctoral-review.md' -Algorithm SHA256
-Get-FileHash 'wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md' -Algorithm SHA256
+```text
+FOUR_IMPLEMENTATION_FINDINGS_REMEDIATED; FORMAL_INDEPENDENT_REVIEW_PENDING.
+The round-15 proposal is submitted. Stage-1B is unstarted and unauthorized.
+The first systematic query remains forbidden until round-16 SIGN and separate owner authorization of the exact reviewed package.
 ```
 
-Expected: hashes match. The untracked root source is never staged.
-
-- [ ] **Step 2: Add red campaign tests for an active proposal**
-
-Add tests proving one `proposal` or `application` may be `ACTIVE_REVIEW_TRANSACTION`, that a `review` cannot be active, that two active transactions fail, and that a later review event cannot be appended into the same round. Preserve existing amendment/correction behavior.
-
-- [ ] **Step 3: Narrowly extend campaign validation**
-
-Replace the active-type assertion with:
-
-```python
-ACTIVE_REVIEW_TYPES = {"amendment", "correction", "proposal", "application"}
-```
-
-Keep exact-one-active, monotonic round, append-only prefix, carrier, verdict, and registered-blob checks. Route round 13 as a historical design review with the existing withholding semantics, and round 14 as a proposal with `PENDING_INDEPENDENT_REREVIEW` and `ACTIVE_REVIEW_TRANSACTION`.
-
-- [ ] **Step 4: Pin both artifacts without a circular commit dependency**
-
-Compute Git blobs from working-tree bytes:
-
-```powershell
-git hash-object wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md
-git hash-object wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md
-```
-
-Append both path/blob pairs to `sf-audit-artifact-registry.json`; append round 13 and 14 semantic events to `campaign-index.json`; regenerate `INDEX.md`. Advance the registry baseline from 78 to 80 and the campaign baseline from 41 to 43 only after calculating and testing the exact new prefix SHA-256 values with `ai_context_inventory.py` helpers.
-
-- [ ] **Step 5: Run audit contract checks**
-
-```powershell
-python -m unittest scripts.survey.test_sf_campaign_audit_index scripts.survey.test_sf_audit_immutability_check -v
-python scripts/survey/sf_campaign_audit_index.py --write
-python scripts/survey/sf_campaign_audit_index.py --check
-python scripts/survey/sf_audit_immutability_check.py --write
-python scripts/survey/sf_audit_immutability_check.py --check
-```
-
-Expected: registry `80 artifacts / 0 failures`; one active review transaction at round 14; no historical artifact changed.
-
-- [ ] **Step 6: Commit the atomic audit transaction**
-
-```powershell
-git add wiki/audit/system-first-stage1a/round-13 wiki/audit/system-first-stage1a/round-14 wiki/survey/sf-audit-artifact-registry.json wiki/audit/system-first-stage1a/campaign-index.json wiki/audit/system-first-stage1a/INDEX.md scripts/survey/sf_campaign_audit_index.py scripts/survey/test_sf_campaign_audit_index.py scripts/checks/ai_context_inventory.py wiki/survey/current/data/reviewer-proposal-source-manifest-v1.json scripts/survey/sf_reviewer_proposal_check.py scripts/survey/test_sf_reviewer_proposal_check.py docs/checks/system-first-stage1a/context-v2/reviewer-proposal-check.json docs/checks/2026-07-19-sf-audit-immutability-check.json
-git commit -m "docs(research): submit stage1b reviewer proposal"
-```
-
-Immediately rerun immutability against committed Git blobs. If any pinned blob differs, add a new later corrective audit event; never amend a committed audit artifact.
-
-After that committed check succeeds, use `apply_patch` to delete the original untracked primary-worktree
-copy at `wiki/2026-07-20-reviewer-proposal-and-master-release-design-stage1a-doctoral-review.md`.
-Before deletion, prove its SHA-256 equals the registered round-13 bytes. After deletion, prove the
-round-13 file remains tracked and hash-identical. This cleanup is safe because the exact review is now
-recoverable from the immutable Git blob and removes the root-level duplicate from the AI browsing surface.
+- [ ] Generate current/AI manifests and `context-v2/current-package-check.json`. Keep Research-Objective ≤5120 bytes, current status ≤16 lines, and default AI load exactly three files.
 
 ---
 
-### Task 8: Publish context-v2 and honest current state
+### Task 8: Run adversarial release verification
 
-**Files:**
+**User journey:** As the owner, I receive evidence over the entire implementation range, not merely a clean working tree.
 
-- Modify: `scripts/checks/build_ai_context_manifest.py`
-- Modify: `scripts/checks/test_ai_context_surface.py`
-- Modify: `scripts/survey/sf_current_manifest.py`
-- Modify: `scripts/survey/sf_current_package_check.py`
-- Modify: related current-layer/package/consumer tests.
-- Modify: `wiki/survey/current/manifest.json`, `README.md`, `status.md`, `wiki/Research-Objective.md`
-- Create: `docs/checks/system-first-stage1a/context-v2/current-package-check.json`
-
-- [ ] **Step 1: Add red routing/version tests**
-
-Require:
-
-```python
-self.assertEqual(
-    "wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md",
-    manifest.ACTIVE_REVIEW_TRANSACTION,
-)
-self.assertEqual(
-    "docs/checks/system-first-stage1a/context-v2/current-package-check.json",
-    manifest.CURRENT_PACKAGE_REPORT,
-)
-```
-
-Require evidence-v7, the corpus bridge, reviewer bibliography, proposal source manifest, proposal check, and round-14 proposal in the release graph. Require context-v1 incident as historical evidence, but do not mutate it. Assert the AI default load surface remains exactly AGENTS/CLAUDE → Research-Objective → Project-Thesis.
-
-- [ ] **Step 2: Update builders and mutable current manifests**
-
-Point active review to round 14 and current package to context-v2. Add all new CURRENT/gate sources with unique roles. Remove evidence-v6 from active release bindings while retaining it as cold historical evidence. Keep legacy census/seed/claim/bibliography assets outside the default AI load; only `existing-corpus-disposition-v1.json` bridges them.
-
-- [ ] **Step 3: Write the state once, without amendment prose**
-
-`Research-Objective.md` and `current/status.md` must state:
-
-```text
-The three locally verifiable remediation gates are closed and the round-14 proposal is submitted for independent review. Both requested reviewer judgments remain pending. Stage-1B is unstarted and unauthorized; the first systematic query remains forbidden until independent search-design SIGN and separate owner authorization of the exact execution package.
-```
-
-Do not say the scientific rationale is adequate, the search design is signed, or Stage-1B is ready to execute.
-
-- [ ] **Step 4: Generate context-v2 and run focused tests**
+- [ ] Run focused Windows tests/checks and equivalent WSL headline gates after Task 0. No relevant skip is allowed.
+- [ ] Generate `hostile-review-ledger.json` containing every new finding, disposition, failing test, repair commit, and recheck result. Repeat until a full review round yields zero new findings; do not retain only the final PASS.
+- [ ] Use explicit ranges:
 
 ```powershell
-python -m unittest scripts.survey.test_sf_current_layer scripts.survey.test_sf_current_package_check scripts.survey.test_sf_manifest_consumers scripts.checks.test_ai_context_surface -v
-python scripts/checks/build_ai_context_manifest.py --write
-python scripts/survey/sf_current_manifest.py --write
-python scripts/survey/sf_current_package_check.py --write
+git diff --check IMPLEMENTATION_FREEZE..HEAD
+git diff --name-status IMPLEMENTATION_FREEZE..HEAD
+git diff EVIDENCE_V6_RELEASE_ANCHOR..HEAD -- docs/checks/system-first-stage1a/evidence-v6 docs/checks/system-first-stage1a/context-v1 wiki/survey/2026-07-15-sf-queries.jsonl docs/integrity/experiment_attempt_registry.jsonl
+```
+
+Expected: first command clean; second reviewed; third empty.
+- [ ] Run audit immutability, campaign index, union graph, bibliography receipt, proposal, current package, and AI context checks. Verify round-16 path is absent and no actual SIGN/authorization value is present.
+
+---
+
+### Task 9: Merge verified package and push `origin/master`
+
+- [ ] Fetch remote in WSL after Task 0. Record `PRE_MERGE_MASTER`, source HEAD, merge base, default branch, and affected paths. Stop on relevant divergence.
+- [ ] Prove primary and feature worktrees clean. Delete the two original untracked root review copies only after their SHA-256 values match committed round-13/14 audit blobs; report this recoverable cleanup.
+- [ ] Merge with a normal merge commit, set `MERGE_HEAD`, and verify:
+
+```bash
+git diff --check PRE_MERGE_MASTER..MERGE_HEAD
 python scripts/survey/sf_current_package_check.py --check
+python scripts/survey/sf_audit_immutability_check.py --check
 python scripts/checks/ai_context_surface_check.py --check
 ```
 
-Expected: current package `PASS`, AI context surface `PASS`, default context count exactly 3, no active amendment chain.
-
-- [ ] **Step 5: Check budgets and commit current state**
-
-```powershell
-python -c "from pathlib import Path; p=Path('wiki/Research-Objective.md'); print(len(p.read_bytes()))"
-python -c "from pathlib import Path; p=Path('wiki/survey/current/status.md'); print(len(p.read_text(encoding='utf-8').splitlines()))"
-git diff --check
-```
-
-Expected: Research-Objective ≤5120 bytes; status ≤16 lines.
-
-```powershell
-git add scripts/checks scripts/survey wiki/survey/current wiki/Research-Objective.md docs/checks/system-first-stage1a/context-v2
-git commit -m "docs(research): publish stage1a review package state"
-```
-
----
-
-### Task 9: Perform adversarial release verification
-
-**Files:**
-
-- Verify all modified and generated files; do not change audit artifacts.
-
-- [ ] **Step 1: Use the required verification skill and inspect the full diff**
-
-Invoke `superpowers:verification-before-completion`, then run:
-
-```powershell
-git diff 2f16b23..HEAD --stat
-git diff 2f16b23..HEAD -- . ':(exclude)wiki/audit/system-first-stage1a/round-13/reviewer-proposal-design-stage1a-doctoral-review.md'
-git diff --check
-```
-
-Check for duplicated numeric canon, actual reviewer verdicts in the proposal, stale context-v1 active references, and any mutation outside the approved scope.
-
-- [ ] **Step 2: Run all focused Windows checks fresh**
-
-```powershell
-python -m unittest discover -s scripts/survey -p 'test_sf_*.py' -v
-python -m unittest scripts.checks.test_ai_context_surface -v
-python scripts/survey/sf_absence_provenance_migrate.py --check
-python scripts/survey/sf_identity_taxonomy_v7_test.py --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json
-python scripts/survey/sf_existing_corpus_disposition.py --check
-python scripts/survey/sf_bibliography_generator.py --check --output wiki/survey/current/bibliography.md
-python scripts/survey/sf_reviewer_proposal_check.py --check
-python scripts/survey/sf_campaign_audit_index.py --check
-python scripts/survey/sf_audit_immutability_check.py --check
-python scripts/survey/sf_current_package_check.py --check
-python scripts/checks/ai_context_surface_check.py --check
-```
-
-Expected: zero failures and every release verdict `PASS`.
-
-- [ ] **Step 3: Run the same headline gates in WSL2**
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "source ~/.venvs/speechrl/bin/activate && cd /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation && python -m unittest discover -s scripts/survey -p 'test_sf_*.py' && python -m unittest scripts.checks.test_ai_context_surface && python scripts/survey/sf_identity_taxonomy_v7_test.py --output docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json && python scripts/survey/sf_current_package_check.py --check && python scripts/survey/sf_audit_immutability_check.py --check && python scripts/checks/ai_context_surface_check.py --check"
-```
-
-Expected: zero failures/skips relevant to contract behavior; evidence occupancy identical to Windows.
-
-- [ ] **Step 4: Prove the execution boundary**
-
-```powershell
-git diff 2f16b23..HEAD -- wiki/survey/2026-07-15-sf-queries.jsonl docs/integrity/experiment_attempt_registry.jsonl
-git log --all --oneline -- wiki/audit/system-first-stage1a/round-15/research-proposal-independent-doctoral-review.md
-rg -n "Stage-1B.*(authorized|started)|OWNER_AUTHORIZED_STAGE1B.*(true|complete)|REQUESTED_SEARCH_DESIGN_SIGNOFF\s*=\s*SIGN$" wiki/Research-Objective.md wiki/survey/current/status.md wiki/audit/system-first-stage1a/round-14/research-proposal-and-stage1b-signoff-request.md
-```
-
-Expected: all commands have no output except explicitly negated/pending statements inspected manually.
-
-- [ ] **Step 5: Run one hostile self-review round to zero new findings**
-
-Review G1, G2, G3, authority separation, audit immutability, context routing, legacy corpus orphans, P1 metadata, P2 nonblocking status, query immutability, and Windows/WSL parity. If any finding appears, fix it with a failing test and repeat until one full pass yields zero new findings.
-
----
-
-### Task 10: Repair Git worktree metadata, merge, verify, and push `master`
-
-**Files:**
-
-- Git metadata and branch history only; no GitHub Wiki publication.
-
-- [ ] **Step 1: Record and remove the erroneous shared `core.worktree`**
-
-Run in WSL2 against the primary repository:
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "git --git-dir=/mnt/d/chao_workspace/exploring-l4-intelligence/.git config --get core.worktree; git --git-dir=/mnt/d/chao_workspace/exploring-l4-intelligence/.git config --unset core.worktree"
-wsl -d Ubuntu-24.04 bash -lc "git -C /mnt/d/chao_workspace/exploring-l4-intelligence rev-parse --show-toplevel && git -C /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation rev-parse --show-toplevel"
-```
-
-Expected: old value is `/mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation`; afterward each command reports its own correct root.
-
-- [ ] **Step 2: Prove both worktrees are clean and fetch remote state**
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "git -C /mnt/d/chao_workspace/exploring-l4-intelligence status --short && git -C /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation status --short && git -C /mnt/d/chao_workspace/exploring-l4-intelligence fetch origin --prune && git -C /mnt/d/chao_workspace/exploring-l4-intelligence symbolic-ref refs/remotes/origin/HEAD && git -C /mnt/d/chao_workspace/exploring-l4-intelligence rev-parse origin/master && git -C /mnt/d/chao_workspace/exploring-l4-intelligence/.worktrees/stage1b-readiness-remediation rev-parse HEAD"
-```
-
-Expected: both status outputs empty; default remote is `origin/master`. Stop on relevant remote divergence.
-
-- [ ] **Step 3: Merge with a normal merge commit**
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "git -C /mnt/d/chao_workspace/exploring-l4-intelligence switch master && git -C /mnt/d/chao_workspace/exploring-l4-intelligence merge --no-ff codex/stage1b-readiness-remediation -m 'merge: stage1a reviewer proposal readiness'"
-```
-
-No force, reset, rebase, or audit-artifact rewrite is allowed.
-
-- [ ] **Step 4: Re-run headline gates on the merged tree**
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "source ~/.venvs/speechrl/bin/activate && cd /mnt/d/chao_workspace/exploring-l4-intelligence && python scripts/survey/sf_current_package_check.py --check && python scripts/survey/sf_audit_immutability_check.py --check && python scripts/checks/ai_context_surface_check.py --check && git diff --check && git status --short"
-```
-
-Expected: all PASS and clean status.
-
-- [ ] **Step 5: Push and prove remote readback**
-
-```powershell
-wsl -d Ubuntu-24.04 bash -lc "git -C /mnt/d/chao_workspace/exploring-l4-intelligence push origin master && local_head=$(git -C /mnt/d/chao_workspace/exploring-l4-intelligence rev-parse master) && remote_head=$(git -C /mnt/d/chao_workspace/exploring-l4-intelligence ls-remote origin refs/heads/master | cut -f1) && test \"$local_head\" = \"$remote_head\" && printf '%s\n' \"$local_head\""
-```
-
-Expected: non-force push succeeds and remote `master` exactly equals the local merge commit.
-
-- [ ] **Step 6: Report the bounded outcome**
-
-Report the proposal path, merge commit, remote branch, verification results, and state `SUBMITTED_FOR_INDEPENDENT_REVIEW`. Explicitly state that no Stage-1B query/model/smoke execution occurred, the requested reviewer verdicts remain pending, owner authorization remains pending, and GitHub Wiki was not published.
+- [ ] Push `master` to `origin/master` without force and prove `ls-remote` equals `MERGE_HEAD`. Do not publish GitHub Wiki.
+- [ ] Report `SUBMITTED_FOR_INDEPENDENT_REVIEW`, not Stage‑1B readiness. State that systematic queries, models, smoke, metrics, and prototypes were not executed.
 
 ---
 
 ## Mandatory stop conditions
 
-Stop without merge/push if any of these is true:
+Stop before proposal registration or merge if any condition holds:
 
-- positive absence evidence can still reach derivation;
-- any of the 22 changed row hashes lacks independent `AGREE` adjudication;
-- the corpus bridge has an unexplained orphan or silently merged identity;
-- any author placeholder remains in reviewer-visible bibliography;
-- proposal checker finds an actual verdict, unsupported contribution claim, or missing source binding;
-- audit registry, campaign index, current manifest, or AI manifest is inconsistent;
-- frozen queries or experiment attempts changed;
-- Windows/WSL headline results disagree;
-- the primary or feature worktree is dirty at merge time;
-- remote `master` has relevant unexpected divergence;
-- any command would require force push, audit rewrite, GitHub Wiki publication, or Stage-1B execution.
+- cross-platform Git preflight fails;
+- an absence field/value lacks an explicit obligation or immutable fulltext binding;
+- any load-bearing absence lacks fresh semantic `AGREE` or remains unresolved;
+- either platform leaf is missing or the final aggregator does not bind both exact bytes;
+- any source row is missing/duplicated, heterogeneous claim evidence is collapsed, or load-bearing identity is unresolved;
+- metadata is not reproducible from official receipts or system-first closure has a silent omission;
+- a load-bearing proposal citation is below its required evidence grade;
+- a frozen query/compiler or attempt registry changes;
+- an audit transaction rewrites history or appends more than one registry row per commit;
+- current/package language claims formal sign-off from local PASS;
+- remote divergence is relevant, a force push would be required, or any Stage-1B/model/smoke action would occur.
