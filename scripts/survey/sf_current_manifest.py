@@ -635,8 +635,8 @@ def _validate_campaign_gate(
             registry,
             contract,
             carrier_documents,
-            baseline_count=staged_count,
-            baseline_prefix_sha256=staged_prefix,
+            baseline_count=head_count,
+            baseline_prefix_sha256=head_prefix,
         )
     except (JsonContractError, campaign_audit_index.CampaignIndexError) as error:
         raise CurrentManifestError(f"campaign-audit-index-invalid: {error}") from error

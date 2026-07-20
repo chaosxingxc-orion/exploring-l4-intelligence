@@ -97,6 +97,10 @@ EPOCH_ITERATION_RE = re.compile(
     r"(amendment|correction)-([1-9]\d*)\.md\Z",
     re.IGNORECASE,
 )
+B8_CORRECTION_PATH = (
+    "wiki/audit/system-first-stage1a/round-12/"
+    "stage1a-readiness-correction.md"
+)
 
 
 class CampaignIndexError(RuntimeError):
@@ -180,7 +184,12 @@ def _markdown_headings(raw: object, carrier: str) -> dict[str, int]:
     return headings
 
 
-def _epoch_artifact_identity(path: str, artifact_type: str) -> tuple[str, int] | None:
+def _epoch_artifact_identity(
+    path: str,
+    artifact_type: str,
+    *,
+    require_iteration_shape: bool = False,
+) -> tuple[str, int] | None:
     receipt = EPOCH_RECEIPT_RE.fullmatch(path)
     iteration = EPOCH_ITERATION_RE.fullmatch(path)
     if receipt is not None:
@@ -196,9 +205,17 @@ def _epoch_artifact_identity(path: str, artifact_type: str) -> tuple[str, int] |
                 f"epoch artifact path/type mismatch: {path} must be {kind}"
             )
         return kind, int(iteration.group(1))
+    if (
+        require_iteration_shape
+        and artifact_type == "correction"
+        and path == B8_CORRECTION_PATH
+    ):
+        return None
+    if require_iteration_shape and artifact_type in {"amendment", "correction"}:
+        raise CampaignIndexError(
+            f"epoch artifact path/type mismatch: {path} has invalid {artifact_type} shape"
+        )
     if path.startswith(AUDIT_ROOT + "epoch-") and artifact_type in {
-        "amendment",
-        "correction",
         "consolidation-receipt",
     }:
         raise CampaignIndexError(
@@ -247,6 +264,14 @@ def validate_contract(
         raise CampaignIndexError(
             "disposition must be declared immutable at-issue with derived current state"
         )
+    if (
+        isinstance(baseline_count, bool)
+        or not isinstance(baseline_count, int)
+        or baseline_count <= 0
+    ):
+        raise CampaignIndexError(
+            f"invalid campaign baseline count: {baseline_count}"
+        )
     if contract["current_carriers"] != EXPECTED_CARRIERS:
         raise CampaignIndexError("current_carriers must equal the canonical rules/state paths")
     if not isinstance(carrier_documents, dict):
@@ -289,6 +314,7 @@ def validate_contract(
     rows_by_round: dict[int, dict] = {}
     receipt_rounds: dict[int, int] = {}
     active_epoch_events: list[tuple[str, int, int, str]] = []
+    semantic_position = 0
     for raw_row in rounds:
         round_number = raw_row["round"]
         row = _require_keys(raw_row, ROUND_KEYS, f"round {round_number}")
@@ -328,7 +354,14 @@ def validate_contract(
                 raise CampaignIndexError(f"round {round_number} artifact has invalid blob")
             if artifact["type"] not in ALLOWED_TYPES:
                 raise CampaignIndexError(f"round {round_number} artifact has invalid type")
-            epoch_identity = _epoch_artifact_identity(path, artifact["type"])
+            epoch_identity = _epoch_artifact_identity(
+                path,
+                artifact["type"],
+                require_iteration_shape=(
+                    row["disposition"] == "ACTIVE_REVIEW_TRANSACTION"
+                    or semantic_position >= baseline_count
+                ),
+            )
             if epoch_identity is not None:
                 kind, epoch = epoch_identity
                 if kind == "consolidation-receipt":
@@ -345,6 +378,7 @@ def validate_contract(
                 raise CampaignIndexError(f"duplicate campaign path in contract: {path}")
             contract_campaign[path] = (pin, round_number)
             artifact_round[path] = round_number
+            semantic_position += 1
 
     for kind, epoch, active_round, path in active_epoch_events:
         receipt_round = receipt_rounds.get(epoch)
@@ -426,12 +460,7 @@ def validate_contract(
             raise CampaignIndexError(f"round {number} has invalid supersession mode")
 
     entries = semantic_entries(rounds)
-    if (
-        isinstance(baseline_count, bool)
-        or not isinstance(baseline_count, int)
-        or baseline_count <= 0
-        or baseline_count > len(entries)
-    ):
+    if baseline_count > len(entries):
         raise CampaignIndexError(
             f"invalid campaign baseline count: {baseline_count} for {len(entries)} entries"
         )

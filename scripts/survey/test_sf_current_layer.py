@@ -679,6 +679,83 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             [entry["path"] for entry in document["files"]],
         )
 
+    def test_gate_rejects_post_head_non_active_opaque_active_type(self):
+        index = dict(self.index)
+        self.add_audit_contract(index)
+        registry_path = "wiki/survey/sf-audit-artifact-registry.json"
+        contract_path = self.manifest.campaign_audit_index.CONTRACT_PATH.relative_to(
+            REPO
+        ).as_posix()
+        index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
+        registry = json.loads(self.payloads[registry_path])
+        contract = json.loads(self.payloads[contract_path])
+
+        opaque_path = "wiki/audit/system-first-stage1a/round-13/opaque-note.md"
+        opaque_raw = b"opaque amendment\n"
+        opaque_blob = git_blob_oid(opaque_raw)
+        registry["artifacts"].append(
+            {"path": opaque_path, "git_blob": opaque_blob}
+        )
+        contract["rounds"].append(
+            {
+                "round": 13,
+                "verdict": "PENDING_INDEPENDENT_REREVIEW",
+                "disposition": "HISTORICAL_COLD",
+                "supersession": {
+                    "mode": "current-carrier",
+                    "target": "wiki/survey/current/status.md",
+                    "target_current_carrier": "wiki/survey/current/status.md",
+                    "target_current_carrier_section": "Current Survey Status",
+                    "transfer_rule": "same-carrier-section",
+                },
+                "current_carrier": "wiki/survey/current/status.md",
+                "current_carrier_section": "Current Survey Status",
+                "artifacts": [
+                    {
+                        "path": opaque_path,
+                        "git_blob": opaque_blob,
+                        "type": "amendment",
+                    }
+                ],
+            }
+        )
+        count = len(
+            self.manifest.campaign_audit_index.semantic_entries(contract["rounds"])
+        )
+        prefix = self.manifest.campaign_audit_index.semantic_prefix_sha256(
+            contract["rounds"], count
+        )
+        self.stage_raw(
+            index,
+            registry_path,
+            (json.dumps(registry, ensure_ascii=False, indent=2) + "\n").encode(
+                "utf-8"
+            ),
+        )
+        self.stage_raw(
+            index,
+            contract_path,
+            (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode(
+                "utf-8"
+            ),
+        )
+        self.stage_raw(
+            index,
+            index_path,
+            self.manifest.campaign_audit_index.render_index(contract),
+        )
+        self.stage_raw(
+            index,
+            self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH,
+            self.anchor_raw(count, prefix),
+        )
+        self.stage_raw(index, opaque_path, opaque_raw)
+
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "path/type"
+        ):
+            self.build(index)
+
     def test_coordinated_allowed_semantic_restamps_fail_against_head_anchor(self):
         raw = self.head_payloads[self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH]
         head_count, head_prefix = self.manifest._campaign_semantic_anchor_from_source(raw)

@@ -22,6 +22,10 @@ STATE = "wiki/survey/current/status.md"
 RULES_SECTION = "Rules Section"
 STATE_SECTION = "Current State"
 DISPOSITION_SEMANTICS = "immutable-at-issue; derived-current-by-event-order-and-type"
+B8_CORRECTION = (
+    "wiki/audit/system-first-stage1a/round-12/"
+    "stage1a-readiness-correction.md"
+)
 
 
 def blob(number: int) -> str:
@@ -40,7 +44,7 @@ def same_carrier_supersession(mode: str, target: str) -> dict:
 
 def fixture_documents() -> tuple[dict, dict, dict[str, bytes]]:
     proposal = "wiki/2026-07-15-system-first-research-proposal-v1.md"
-    correction = "wiki/audit/system-first-stage1a/round-2/correction.md"
+    correction = B8_CORRECTION
     registry = {
         "artifacts": [
             {"path": "wiki/unrelated-review.md", "git_blob": blob(9)},
@@ -96,6 +100,16 @@ def fixture_documents() -> tuple[dict, dict, dict[str, bytes]]:
 def baseline_for(contract: dict) -> tuple[int, str]:
     count = sum(len(row["artifacts"]) for row in contract["rounds"])
     return count, campaign.semantic_prefix_sha256(contract["rounds"], count)
+
+
+def repath_active_event(registry: dict, contract: dict, path: str, active_type: str) -> None:
+    old_path = contract["rounds"][-1]["artifacts"][0]["path"]
+    registry_row = next(row for row in registry["artifacts"] if row["path"] == old_path)
+    registry_row["path"] = path
+    artifact = contract["rounds"][-1]["artifacts"][0]
+    artifact["path"] = path
+    artifact["type"] = active_type
+    contract["rounds"][0]["supersession"]["target"] = path
 
 
 def append_receipt_event(registry: dict, contract: dict, *, round_number: int) -> str:
@@ -566,6 +580,72 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
             with self.subTest(event=append_event.__name__, type=swapped_type):
                 with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
                     validate(registry, contract, carriers)
+
+    def test_active_types_reject_ordinary_round_and_opaque_paths(self) -> None:
+        cases = (
+            (
+                "amendment",
+                "wiki/audit/system-first-stage1a/round-13/review-note.md",
+            ),
+            (
+                "correction",
+                "wiki/audit/system-first-stage1a/round-13/correction.md",
+            ),
+        )
+        for active_type, path in cases:
+            registry, contract, carriers = fixture_documents()
+            repath_active_event(registry, contract, path, active_type)
+            with self.subTest(type=active_type, path=path):
+                with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+                    validate(registry, contract, carriers)
+
+    def test_post_baseline_non_active_types_reject_opaque_paths(self) -> None:
+        for active_type, basename in (
+            ("amendment", "artifact-a.md"),
+            ("correction", "artifact-b.md"),
+        ):
+            registry, contract, carriers = fixture_documents()
+            baseline_count, baseline_prefix = baseline_for(contract)
+            path = f"wiki/audit/system-first-stage1a/round-3/{basename}"
+            registry["artifacts"].append({"path": path, "git_blob": blob(3)})
+            contract["rounds"].append(
+                {
+                    "round": 3,
+                    "verdict": "PENDING_INDEPENDENT_REREVIEW",
+                    "disposition": "HISTORICAL_COLD",
+                    "supersession": same_carrier_supersession(
+                        "current-carrier", STATE
+                    ),
+                    "current_carrier": STATE,
+                    "current_carrier_section": STATE_SECTION,
+                    "artifacts": [
+                        {
+                            "path": path,
+                            "git_blob": blob(3),
+                            "type": active_type,
+                        }
+                    ],
+                }
+            )
+            with self.subTest(type=active_type, path=path):
+                with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+                    campaign.validate_contract(
+                        registry,
+                        contract,
+                        carriers,
+                        baseline_count=baseline_count,
+                        baseline_prefix_sha256=baseline_prefix,
+                    )
+
+    def test_exact_b8_correction_is_the_only_non_epoch_active_exception(self) -> None:
+        registry, contract, carriers = fixture_documents()
+        self.assertEqual(B8_CORRECTION, contract["rounds"][-1]["artifacts"][0]["path"])
+        validate(registry, contract, carriers)
+
+        near_b8 = B8_CORRECTION.removesuffix(".md") + "-v2.md"
+        repath_active_event(registry, contract, near_b8, "correction")
+        with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+            validate(registry, contract, carriers)
 
     def test_epoch_active_events_require_an_earlier_same_epoch_receipt(self) -> None:
         for append_active in (append_amendment_event, append_correction_event):
