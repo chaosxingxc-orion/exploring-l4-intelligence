@@ -6,6 +6,72 @@
 
 ---
 
+### 2026-07-20（续72）· Stage-1A 当前真理整编为 protocol-v2 + 永久审计路由；schema-v3 修复进入独立复审前状态
+
+#### Context
+
+此前的有效规则散落在 proposal、response 与 amendment 链中，有限上下文的 AI 必须反复追补丁才能
+还原当前合同；同时，round-12 更正已经撤回 v10 对 E1–E5“完全关闭”及 readiness/signature 的过度
+表述，并把两个合法首编路径的 false-green 固化为需由证据合同直接拒绝的问题。当前需要同时保住
+审计可追溯性与一个无需历史补丁即可执行的 active truth。
+
+#### Decision
+
+以 `wiki/survey/current/protocol.md` 的 protocol-v2 作为唯一有效 survey 合同；其 §4 继续编译为与
+冻结 65-query JSONL 逐字节一致的记录。今后的 reviewer transaction 直接进入
+`wiki/audit/<campaign>/` 永久路径并由 campaign index 路由；新 amendment/correction 采用
+consolidation epoch，第三次修正必须立即折叠回 effective spec，同一 epoch 第四次修正禁止新增。
+已被 protocol-v2 取代且通过安全门的 A9–A15 七份未注册工作件，以 Git blob 不变的重命名进入
+`wiki/archive/working/system-first-stage1a/`；A1、A3–A8 及其他已注册或 path-pinned 件保留原路径，
+只作为 cold evidence。schema-v3 的 row/signal/edge 值—证据绑定与强 anchor 合同，作为本轮
+Stage-1A 独立复审的技术证据，不作为 reviewer 或 owner 裁决。
+
+#### Rationale
+
+单一稳定 CURRENT 能让人和 AI 从有限上下文确定下一动作，避免把历史修正链误当当前规范；永久
+AUDIT 与 byte-preserving ARCHIVE 又保留“发生过什么”和精确 provenance。第三次修正触发整编，
+使审计增长不会再次演化成 active patch stack；schema-v3 则让合法新行首次编码也必须通过字段值与
+证据的独立合同，而非依赖旧行哈希提供虚假的一般保证。
+
+#### Consequences
+
+默认加载面保持三项，当前 survey 从 stable router/manifest 定向加载，历史只经 campaign/archive
+index 精确取证。schema-v3 v6 报告、Windows/WSL occupancy equality、protocol-v2 byte equivalence、
+current/AI manifest、audit immutability 与 archive safety 的现有机器门均通过；本次实现的内部敌意
+复审为 0 Critical / 0 Important。该结论只说明修复包可提交正式独立复审：doctoral re-review、
+reviewer signature 与 owner Stage-1B execution approval 仍未取得，Stage-1B 未开始。
+
+#### Purpose chain
+
+为了可信地研究冻结黑盒 omni model 的外部 reward-guided 控制平面，必须先用无执行污染的
+systematic mapping 确认问题与证据边界；为了让 mapping 可复核，Stage-1A 必须有自包含协议、可回放
+证据和明确权限门；所以把 active truth 整编进 CURRENT，把历史分别固化进 AUDIT/ARCHIVE，并在
+正式复审前继续禁止 Stage-1B 执行。
+
+#### Provenance
+
+有效协议由 `(9cc36da, ea27eda19221afac0de309c418e1d6e4a79334fcde0f79548b72358044082d9f)`
+钉定。round-12 更正的证据对是
+`(98f4a78, 02b211cad2e5d781eb9b42520b36e482aca1650a499acfafa33c48b8e4028cfa)`，注册提交为
+`3a221d5`，registry 所钉 Git blob 为 `dc1e32ed6993e3e5d2fd21027eabb78f8c968b9f`。schema-v3
+机器正典的证据对是
+`(c81380d, 3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd)`；七项物理归档
+由提交 `9cc36da` 及 `wiki/archive/working/system-first-stage1a/INDEX.md` / `archive-plan.json`
+所钉的原 Git blobs 与 SHA-256 清单证明。
+本 repair scope 的 discovery query / research-model / smoke 均为 0，
+`INHERITED_PRIOR_EXPOSURE` 保持原账不变。
+
+#### Invalidation conditions
+
+v6 report/hash 或跨平台 occupancy equality 失配、protocol-v2 偏离冻结 65-query bytes、任一
+current/context/audit/archive 门失败、exposure 变化、独立复审发现新 blocker，或 reviewer/owner
+给出新阶段裁决时，必须原位更新 HOT/CURRENT；新增第三次修正时必须立即重新 Consolidate。
+
+#### Supersedes
+
+本条取代续71及 v10 中“E1–E5 已完全关闭、可立即签署”的 active 解读，也取代以旧 protocol/
+amendment 链作为当前操作说明的做法；不改写这些记录的历史审计含义，不移动任何已注册 AUDIT。
+
 ### 2026-07-19（续71）· v9 复审裁窄幅 WITHHOLD（MAJOR-1/-3 正式 CLOSED;MAJOR-2 尾项=E1–E5 五精确反例;连续第三轮零实质异议）+ owner「Go」→ 窄整改批:validator 边合同/信号字段绑定/生成块 release binding/P1 四篇 carry-forward——按评审 §10-10 立即申请签署
 
 **Context.** v9 复审（審 @bb3e2c3,blob 80bd820722）裁 `WITHHOLD_STAGE1B_NARROW_REMEDIATION`:

@@ -186,7 +186,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "54db2ca5fc4f427ccd989dcdca5b8c0a27773d50c24ecf7a65f87ec2354007b8",
+      "sha256": "437d1ad177f6eb25022d5560d990bae5f24c6a3202ae0d49159736f51fce6c70",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

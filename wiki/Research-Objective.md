@@ -25,6 +25,7 @@ Stage-1B systematic mapping 尚未获准开始；不得运行 discovery query、
 
 ## 3. 本批已证实的修复结果
 
+已提交并注册的 round-12 更正撤回了 v10 对 E1–E5 完全关闭与 readiness/signature 的过度表述。
 Plan-A schema-v3 已完成 E6–E12 与 anchor 合同修复：row 16 字段、每个 signal 的 4 字段、每条
 edge 的 2 字段均显式绑定编码值与证据；`p1`、`p1 the`、高频 anchor 和越界页 fail closed；通用
 第 12 行不依赖既有 ID；合法重签后的 source/use/right/selection/missing-binding 变异均由指定合同
@@ -35,7 +36,9 @@ edge 的 2 字段均显式绑定编码值与证据；`p1`、`p1 the`、高频 an
 summary `14/14 PASS`，input snapshot
 `8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d`）。平台报告在同一
 `evidence-v6/` release 目录；只以报告字段和 manifest hash 为准，不从本页复制 occupancy 数字。
-这是技术检查结果，不是签署或就绪声明。
+protocol-v2 与冻结 65-query bytes 等价，current/AI manifest、campaign index、audit immutability
+与 archive safety 门均通过；修复实现的内部敌意复审为 **0 Critical / 0 Important**。这些是机器门
+与工程内审结果，不是独立 doctoral verdict、签署或就绪声明。
 
 ## 4. 剩余阻塞
 
@@ -56,16 +59,16 @@ prototype 或 Stage-1B mapping execution。此零值只描述本次修复，不�
 
 - Survey 当前入口：`wiki/survey/current/README.md`；有效协议、短状态、表和机器资产只从该 router
   与 `wiki/survey/current/manifest.json` 定向加载。
-- Campaign cold audit index：`wiki/audit/system-first-stage1a/INDEX.md`。Task-8 的完整 index +
-  correction 对尚未发布时，AI context manifest 必须保持 `active_review_transaction: null`；不得提前
-  创建 stub。激活后 current 层只链接 campaign index，不枚举 round/amendment 物理路径。
+- Campaign cold audit index：`wiki/audit/system-first-stage1a/INDEX.md`。已注册的 round-12 correction
+  是 current manifest 中唯一 active review transaction；更早 round 仅经 index 定向取证，current
+  层不枚举历史 amendment 的物理路径。
 - 已归档与 path-pinned legacy 都是 cold evidence，不进入默认加载面。
 
 ## 7. 下一授权动作
 
-**下一授权动作**仅是：完成 context consolidation，随后把一份 bounded correction 直接写入永久
-AUDIT 路径并登记，运行无网络 integrated gate，再提交独立复审。等待 reviewer 与 owner 的显式
-裁决；在此之前不执行 Stage-1B。
+**下一授权动作**仅是：运行无网络 integrated gate，然后把已注册的 round-12 correction 与当前
+证据包提交独立复审。等待 reviewer 正式结论/signature 与 owner 的显式执行裁决；在此之前不执行
+Stage-1B。
 
 ## 8. 失效条件
 
