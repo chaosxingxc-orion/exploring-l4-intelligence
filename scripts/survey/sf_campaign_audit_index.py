@@ -215,9 +215,7 @@ def _epoch_artifact_identity(
         raise CampaignIndexError(
             f"epoch artifact path/type mismatch: {path} has invalid {artifact_type} shape"
         )
-    if path.startswith(AUDIT_ROOT + "epoch-") and artifact_type in {
-        "consolidation-receipt",
-    }:
+    if artifact_type == "consolidation-receipt":
         raise CampaignIndexError(
             f"epoch artifact path/type mismatch: {path} has invalid {artifact_type} shape"
         )

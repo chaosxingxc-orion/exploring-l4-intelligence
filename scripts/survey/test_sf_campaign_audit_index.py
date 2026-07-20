@@ -112,8 +112,13 @@ def repath_active_event(registry: dict, contract: dict, path: str, active_type: 
     contract["rounds"][0]["supersession"]["target"] = path
 
 
-def append_receipt_event(registry: dict, contract: dict, *, round_number: int) -> str:
-    path = "wiki/audit/system-first-stage1a/epoch-3/consolidation-receipt.json"
+def append_receipt_event(
+    registry: dict,
+    contract: dict,
+    *,
+    round_number: int,
+    path: str = "wiki/audit/system-first-stage1a/epoch-3/consolidation-receipt.json",
+) -> str:
     registry["artifacts"].append({"path": path, "git_blob": blob(round_number)})
     contract["rounds"].append(
         {
@@ -628,6 +633,44 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
                 }
             )
             with self.subTest(type=active_type, path=path):
+                with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+                    campaign.validate_contract(
+                        registry,
+                        contract,
+                        carriers,
+                        baseline_count=baseline_count,
+                        baseline_prefix_sha256=baseline_prefix,
+                    )
+
+    def test_receipt_type_requires_the_exact_epoch_receipt_shape(self) -> None:
+        registry, contract, carriers = fixture_documents()
+        baseline_count, baseline_prefix = baseline_for(contract)
+        append_receipt_event(registry, contract, round_number=3)
+        campaign.validate_contract(
+            registry,
+            contract,
+            carriers,
+            baseline_count=baseline_count,
+            baseline_prefix_sha256=baseline_prefix,
+        )
+
+        invalid_paths = (
+            "wiki/audit/system-first-stage1a/round-3/receipt.json",
+            (
+                "wiki/audit/system-first-stage1a/epoch-3/"
+                "consolidation-receipt-v2.json"
+            ),
+        )
+        for path in invalid_paths:
+            registry, contract, carriers = fixture_documents()
+            baseline_count, baseline_prefix = baseline_for(contract)
+            append_receipt_event(
+                registry,
+                contract,
+                round_number=3,
+                path=path,
+            )
+            with self.subTest(path=path):
                 with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
                     campaign.validate_contract(
                         registry,

@@ -679,7 +679,13 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             [entry["path"] for entry in document["files"]],
         )
 
-    def test_gate_rejects_post_head_non_active_opaque_active_type(self):
+    def assert_gate_rejects_post_head_opaque_type(
+        self,
+        *,
+        artifact_type,
+        disposition,
+        basename,
+    ):
         index = dict(self.index)
         self.add_audit_contract(index)
         registry_path = "wiki/survey/sf-audit-artifact-registry.json"
@@ -690,8 +696,8 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         registry = json.loads(self.payloads[registry_path])
         contract = json.loads(self.payloads[contract_path])
 
-        opaque_path = "wiki/audit/system-first-stage1a/round-13/opaque-note.md"
-        opaque_raw = b"opaque amendment\n"
+        opaque_path = f"wiki/audit/system-first-stage1a/round-13/{basename}"
+        opaque_raw = f"opaque {artifact_type}\n".encode("utf-8")
         opaque_blob = git_blob_oid(opaque_raw)
         registry["artifacts"].append(
             {"path": opaque_path, "git_blob": opaque_blob}
@@ -700,7 +706,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             {
                 "round": 13,
                 "verdict": "PENDING_INDEPENDENT_REREVIEW",
-                "disposition": "HISTORICAL_COLD",
+                "disposition": disposition,
                 "supersession": {
                     "mode": "current-carrier",
                     "target": "wiki/survey/current/status.md",
@@ -714,7 +720,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
                     {
                         "path": opaque_path,
                         "git_blob": opaque_blob,
-                        "type": "amendment",
+                        "type": artifact_type,
                     }
                 ],
             }
@@ -755,6 +761,20 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             self.manifest.CurrentManifestError, "path/type"
         ):
             self.build(index)
+
+    def test_gate_rejects_post_head_non_active_opaque_active_type(self):
+        self.assert_gate_rejects_post_head_opaque_type(
+            artifact_type="amendment",
+            disposition="HISTORICAL_COLD",
+            basename="opaque-note.md",
+        )
+
+    def test_gate_rejects_post_head_opaque_receipt_type(self):
+        self.assert_gate_rejects_post_head_opaque_type(
+            artifact_type="consolidation-receipt",
+            disposition="NON_ACTIVE_PREREQUISITE",
+            basename="receipt.json",
+        )
 
     def test_coordinated_allowed_semantic_restamps_fail_against_head_anchor(self):
         raw = self.head_payloads[self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH]

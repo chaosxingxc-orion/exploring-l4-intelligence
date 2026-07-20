@@ -32,7 +32,7 @@
     {
       "role": "campaign_audit_index_checker",
       "path": "scripts/survey/sf_campaign_audit_index.py",
-      "sha256": "f5ebb791b6b861311bc7c9900feec3b625a0dd141edb678905fcf909bb80eabb",
+      "sha256": "6658320cadb5623cbcd8d71ffef57e40e44d50cbd3925d462006788c17e2c2d1",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
