@@ -114,10 +114,25 @@
      "quote": "标签源=forced-answer 探针+终局正确性"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "门控训练为自动代理标签流程,无按标签人工选模型",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "Training labels and diagnostic annotations are generated automatically from forced-answer probes, episode correctness, and a VLM judge; no human or developer label-based model or checkpoint selection step is described.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p6 anchor='each proposed tool call in a logged trajectory becomes one training instance'",
+      "p6 anchor='the label is derived from forced answer probes before and after tool execution'",
+      "p9 anchor='the diagnostic annotation of tool correctness is automatic and noisy'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-e9b7f915e84ac3072514"
     },
     "deployment_label_access": {
      "value": false,
@@ -130,10 +145,24 @@
      "quote": "gold 仅离线标签/诊断"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "六感知工具作用于给定图像=任务环境,无外部新信息获取",
-     "scope": "DFS 轴7/轴12 已检视"
+     "value": false,
+     "reason": "The system's tools only read out the task-provided image and the gate sees the existing trajectory plus pending call before execution; no retrieval, browsing, database, or information source external to the task input is introduced.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p5 anchor='it does not see image pixels hidden states system prompts decoding log probabilities internal uncertainty estimates or the future tool output'",
+      "p6 anchor='the tool suite includes six perceptual tools ocr'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-94932b7d979683355098"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -173,16 +202,44 @@
      "quote": "无 K 池无终答 selector"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "ToolGate receives one already-proposed call and makes a binary execute-or-skip action; it constructs no candidate output, trajectory, plan, tool-agent, or other pool object for terminal selection.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+      "p5 anchor='decides whether to execute the tool call'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The complete gate interface evaluates a single pending tool call and exposes no scored, ranked, voted, or tournament choice among an explicit pool of candidate outputs.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+      "p5 anchor='decides whether to execute the tool call'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-481b25ff36e49a4d2088"
     }
    },
    "source_locator": "canon: '门决定是否执行'",
@@ -191,9 +248,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "57858a5223c1a9138329507a9bda9673a0fdd7eb2e993b83887ff68d2c09f5cc"
+   "adjudication_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

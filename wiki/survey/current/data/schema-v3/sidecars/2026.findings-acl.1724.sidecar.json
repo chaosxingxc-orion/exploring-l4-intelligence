@@ -162,10 +162,25 @@
      "quote": "根本无 gold 可泄"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "绘图代码执行+报错回溯=任务环境,无外部新信息获取",
-     "scope": "DFS 轴7/轴12 已检视"
+     "value": false,
+     "reason": "The complete pipeline transforms the provided raw dataset into profiles, charts, insights, and reports; code execution and judging operate on those task-provided artifacts and no retrieval, browsing, or external evidence channel is described.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p2 anchor='the pipeline takes raw data and produces a final report with curated charts'",
+      "p4 anchor='the data profiling stage produces multiple metadata reports'",
+      "p4 anchor='evaluator ranks candidates and discards a fixed'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1724#pipeline",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1724",
+      "kind": "pdf",
+      "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+     "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -221,9 +236,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "a018dfe8b6f81af83b52d8ad0ade7020e89d640850fe839fcd26cc4db1dbfcf4"
+   "adjudication_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

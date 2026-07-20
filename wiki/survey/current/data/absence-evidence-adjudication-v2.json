@@ -1,0 +1,834 @@
+{
+ "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-20-01",
+ "schema": "v2: generated proof_rows plus externally authored review rows",
+ "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
+ "status": "PENDING_INDEPENDENT_REVIEW",
+ "independence_requirement": "A non-implementer must review frozen fulltext for every proof row and supply TEAM_ATTESTATION identity, nonparticipation scope, timestamp, conflict declaration, per-row reason, and AGREE or DISAGREE.",
+ "proof_obligation_catalog": {
+  "human_or_dev_label_model_selection": {
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "required_inspection_targets": [
+    "model/checkpoint selection procedure",
+    "development and evaluation protocol"
+   ],
+   "search_terms_or_tables": [
+    "human selection, manual selection, dev set, validation set",
+    "checkpoint selection, model selection, best-of-run"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit fixed-model statement or exhaustive selection procedure showing no human/dev-label choice"
+   ],
+   "force_unresolved_if": [
+    "selection procedure, appendix, or referenced implementation is unavailable or ambiguous"
+   ]
+  },
+  "selection_object": {
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "required_inspection_targets": [
+    "method algorithm",
+    "inference/decoding procedure"
+   ],
+   "search_terms_or_tables": [
+    "candidate, sample, output, trajectory, select, rank, rerank, choose"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit single-output/direct-return procedure or exhaustive algorithm showing no candidate-object selection"
+   ],
+   "force_unresolved_if": [
+    "candidate construction or terminal decision procedure is missing or ambiguous"
+   ]
+  },
+  "explicit_candidate_pool_selection": {
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "required_inspection_targets": [
+    "candidate generation procedure",
+    "terminal selection/ranking procedure"
+   ],
+   "search_terms_or_tables": [
+    "best-of-N, sample, beam, pool, rank, rerank, majority, MBR, select"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit direct-return procedure or exhaustive algorithm showing no scored/tournament choice among generated candidates"
+   ],
+   "force_unresolved_if": [
+    "multiple candidates may exist but their terminal handling cannot be resolved"
+   ]
+  },
+  "inference_external_new_information": {
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "required_inspection_targets": [
+    "inference inputs and tool/retrieval interfaces",
+    "environment-observation procedure"
+   ],
+   "search_terms_or_tables": [
+    "retrieve, search, browse, tool, database, environment, observation"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "closed-input inference declaration or exhaustive interface list showing no external new-information channel"
+   ],
+   "force_unresolved_if": [
+    "tool, retrieval, environment, or referenced runtime behavior is unavailable or ambiguous"
+   ]
+  },
+  "external_component_weight_update": {
+   "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+   "required_inspection_targets": [
+    "training/setup section for every external component",
+    "implementation or checkpoint provenance"
+   ],
+   "search_terms_or_tables": [
+    "train, finetune, update, optimize, learned, checkpoint, frozen"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit frozen/off-the-shelf declaration covering every external component or a complete no-external-component architecture"
+   ],
+   "force_unresolved_if": [
+    "any external component has unknown training or checkpoint provenance"
+   ]
+  },
+  "controller_program_or_config_optimized_on_labels": {
+   "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+   "required_inspection_targets": [
+    "controller construction and tuning procedure",
+    "development/evaluation protocol"
+   ],
+   "search_terms_or_tables": [
+    "tune, optimize, search, sweep, validation, dev, label, reward"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit fixed controller/configuration declaration with provenance or exhaustive construction procedure showing no label optimization"
+   ],
+   "force_unresolved_if": [
+    "controller/configuration selection provenance is unavailable or ambiguous"
+   ]
+  },
+  "decision_rights": {
+   "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+   "required_inspection_targets": [
+    "complete inference/control algorithm",
+    "all signal consumers and termination rules"
+   ],
+   "search_terms_or_tables": [
+    "retry, revise, branch, route, stop, select, tool, prompt, memory"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit observational-only role or exhaustive algorithm showing no control action owned by the external component"
+   ],
+   "force_unresolved_if": [
+    "a signal exists whose consumer or downstream action is unavailable or ambiguous"
+   ]
+  }
+ },
+ "proof_rows": [
+  {
+   "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e",
+   "source_tuple": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The exhaustive inference loop revises a single current answer sequentially and exposes no scored, ranked, voted, or tournament candidate pool selection operation.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-216d90876d8397734c37",
+   "source_tuple": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p4 anchor='framework consists of a decomposition agent a verification agent and a judge agent'",
+    "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+    "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'"
+   ],
+   "reason": "The inspected deployed workflow exhaustively names automated decomposition, verification, judging, retry, and stopping operations; it contains no human or developer choice among model checkpoints based on labeled development outcomes.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-49b8c920cf44c2045df6",
+   "source_tuple": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The complete test-time procedure carries one current answer through verify-feedback-retry and returns on acceptance or the retry cap; it defines no simultaneously constructed objects from which a selector chooses.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-1392014ff32270df1e5e",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The open variant's exhaustive inference procedure is sequential revision of one answer and specifies no scored, ranked, voted, or tournament choice over an explicit candidate pool.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-cc432879fce4af753778",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "external_component_weight_update",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "external_component_weight_update",
+   "value": false,
+   "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+   "inspected_locators": [
+    "p5 anchor='the agent can review and evaluate its previous'",
+    "p6 anchor='we fine tune qwen3 8b on a mixture'"
+   ],
+   "reason": "The source explicitly assigns fine-tuning to the Qwen3-8B policy backbone while describing the DeepVerifier modules as the data-generation and verification machinery; no separate deployed external component update is specified.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "implementer_assessment": {
+    "status": "IMPLEMENTER_CONCERN",
+    "concern": "The paper does not state the open deployment boundary as explicitly as the coding row; an independent reviewer must confirm that Qwen3-8B is the core rather than an external component before accepting this negative."
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-58b7d1b9a43299821296",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+    "p6 anchor='we fine tune qwen3 8b on a mixture'"
+   ],
+   "reason": "The inspected open-model construction specifies automated trajectory filtering, a fixed Qwen3-8B fine-tuning target, and an automated feedback loop; it gives no human or developer labeled checkpoint-selection step.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-cf6ae4d082096066fee4",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The open variant retains the same single-answer verify-feedback-retry loop; the complete described inference path contains no candidate object compared by a selector.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc",
+   "source_tuple": [
+    "2026.findings-acl.1724#pipeline",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1724#pipeline",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p2 anchor='the pipeline takes raw data and produces a final report with curated charts'",
+    "p4 anchor='the data profiling stage produces multiple metadata reports'",
+    "p4 anchor='evaluator ranks candidates and discards a fixed'"
+   ],
+   "reason": "The complete pipeline transforms the provided raw dataset into profiles, charts, insights, and reports; code execution and judging operate on those task-provided artifacts and no retrieval, browsing, or external evidence channel is described.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1724",
+    "kind": "pdf",
+    "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",
+   "source_tuple": [
+    "2026.findings-acl.511#prm-guided-search",
+    "row",
+    "controller_program_or_config_optimized_on_labels",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "owner_kind": "row",
+   "field": "controller_program_or_config_optimized_on_labels",
+   "value": false,
+   "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+   "inspected_locators": [
+    "p14 anchor='settings of threshold and budgets'",
+    "p18 anchor='ablation studies on the thresholds'",
+    "p19 anchor='performance of dream in gsm8k'"
+   ],
+   "reason": "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "implementer_assessment": {
+    "status": "IMPLEMENTER_CONCERN",
+    "concern": "Dataset-specific thresholds and a labeled threshold ablation are reported; this may mean the controller configuration was optimized on labels and may require recoding rather than an AGREE verdict."
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-c5351c607c4f37690a34",
+   "source_tuple": [
+    "2026.findings-acl.511#prm-guided-search",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='phases follows a two threshold rule'",
+    "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
+    "p8 anchor='we study the reward model size for math reasoning'"
+   ],
+   "reason": "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "implementer_assessment": {
+    "status": "IMPLEMENTER_CONCERN",
+    "concern": "The source compares 7B and 32B reward models and uses the stronger 32B model; the timing and role of that comparison relative to model selection are not explicit enough for the implementer to certify this negative."
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-359542ede39fa005cfea",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+    "tex: 'for select-K, we run RTV on the N parallel rollouts via tournament voting'"
+   ],
+   "reason": "The paper explicitly contrasts Random-K sampling with Select-K tournament voting; this method path uses the former and therefore has no scored or tournament candidate-pool selection.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+    "tex: 'using K randomly sampled summaries from previous iteration rollouts'"
+   ],
+   "reason": "Random-K forms refinement context by parameter-free random sampling from prior summaries; no human or developer uses labels to choose a model, checkpoint, or sampled summary.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-f431a625273dfcd73698",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries into the previous-iteration rollouts'",
+    "tex: 'provide as refinement context for executing each next-iteration rollout'"
+   ],
+   "reason": "The operation randomly samples summaries solely as context supply and does not compare, score, rank, vote on, or select a winning candidate object under the taxonomy's explicit selector semantics.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-9cf174bd899f3a803b87",
+   "source_tuple": [
+    "2604.16529#rtv",
+    "row",
+    "decision_rights",
+    "absence",
+    "[]"
+   ],
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "decision_rights",
+   "value": [],
+   "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+   "inspected_locators": [
+    "tex: 'RTV selects the final remaining rollout as its output'",
+    "tex: 'repeating the process in a tournament-like manner until one rollout remains from the entire population'"
+   ],
+   "reason": "The isolated RTV method path terminates by returning the final remaining rollout; after that terminal selection the source specifies no downstream route, retry, branch, tool, memory, supply, stop, synthesis, or execute-skip control action.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-527adf4083786f6bb14b",
+   "source_tuple": [
+    "2604.16529#rtv",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'to select the strongest attempt from a population of rollouts without access to ground-truth outcomes'",
+    "tex: 'RTV selects the final remaining rollout as its output'"
+   ],
+   "reason": "The complete RTV procedure is an automated tournament over rollout summaries and explicitly operates without ground-truth outcomes; it contains no human or developer labeled model-selection step.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0",
+   "source_tuple": [
+    "2604.16529#rtv-pdr-pipeline",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#rtv-pdr-pipeline",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'RTV is then applied to these summaries to select the top-K summaries'",
+    "tex: 'without access to ground-truth outcomes'"
+   ],
+   "reason": "The combined pipeline uses automated RTV to select summaries without ground-truth outcomes and supplies them to the next iteration; no human or developer label-based model choice appears in the complete recipe.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-69fabfb31c97e102af00",
+   "source_tuple": [
+    "2605.08083#discovered-controller",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p4 anchor='the discovery loop searches over code defined controllers'",
+    "p5 anchor='value that achieves the highest accuracy'"
+   ],
+   "reason": "Controller and beta selection is an automated accuracy-based operation inside the discovery loop; the source describes no human or developer manually choosing among model checkpoints using labeled outcomes.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-6bbe536f564a90af9deb",
+   "source_tuple": [
+    "2605.08083#discovered-controller",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p4 anchor='the resulting execution histories are stored in memory'",
+    "p5 anchor='fixed and evaluated on held out environments'"
+   ],
+   "reason": "After discovery, the fixed controller observes only branch state, probe answers, depth, and budget from the current task execution; the deployed inference procedure adds no retrieval, browsing, database, or external evidence source.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-481b25ff36e49a4d2088",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+    "p5 anchor='decides whether to execute the tool call'"
+   ],
+   "reason": "The complete gate interface evaluates a single pending tool call and exposes no scored, ranked, voted, or tournament choice among an explicit pool of candidate outputs.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-e9b7f915e84ac3072514",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p6 anchor='each proposed tool call in a logged trajectory becomes one training instance'",
+    "p6 anchor='the label is derived from forced answer probes before and after tool execution'",
+    "p9 anchor='the diagnostic annotation of tool correctness is automatic and noisy'"
+   ],
+   "reason": "Training labels and diagnostic annotations are generated automatically from forced-answer probes, episode correctness, and a VLM judge; no human or developer label-based model or checkpoint selection step is described.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-94932b7d979683355098",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p5 anchor='it does not see image pixels hidden states system prompts decoding log probabilities internal uncertainty estimates or the future tool output'",
+    "p6 anchor='the tool suite includes six perceptual tools ocr'"
+   ],
+   "reason": "The system's tools only read out the task-provided image and the gate sees the existing trajectory plus pending call before execution; no retrieval, browsing, database, or information source external to the task input is introduced.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+    "p5 anchor='decides whether to execute the tool call'"
+   ],
+   "reason": "ToolGate receives one already-proposed call and makes a binary execute-or-skip action; it constructs no candidate output, trajectory, plan, tool-agent, or other pool object for terminal selection.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  }
+ ],
+ "rows": []
+}

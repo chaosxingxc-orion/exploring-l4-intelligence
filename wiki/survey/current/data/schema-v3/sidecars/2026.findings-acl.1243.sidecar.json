@@ -136,10 +136,25 @@
      "quote": "分类法由人工标注 555 error points 离线构建"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤;rubric 为人工分类法非模型选择",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The inspected deployed workflow exhaustively names automated decomposition, verification, judging, retry, and stopping operations; it contains no human or developer choice among model checkpoints based on labeled development outcomes.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p4 anchor='framework consists of a decomposition agent a verification agent and a judge agent'",
+      "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+      "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-216d90876d8397734c37"
     },
     "deployment_label_access": {
      "value": false,
@@ -196,16 +211,44 @@
      "quote": "序贯精修非 K 池"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The complete test-time procedure carries one current answer through verify-feedback-retry and returns on acceptance or the retry cap; it defines no simultaneously constructed objects from which a selector chooses.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-49b8c920cf44c2045df6"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The exhaustive inference loop revises a single current answer sequentially and exposes no scored, ranked, voted, or tournament candidate pool selection operation.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e"
     }
    },
    "source_locator": "canon: '≤2 判错→纠错反馈回喂重试' (rubric 1–4 分/≤10 轮)",
@@ -214,7 +257,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "861e2e71e3213d8558a0ac9c790a7a32393253c48583807db019e5d634f7beaf"
+   "adjudication_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "core_weight_update": true,
@@ -328,10 +372,24 @@
      "quote": "开源变体对策略主干 SFT"
     },
     "external_component_weight_update": {
-     "value": false,
      "kind": "absence",
-     "note": "SFT 作用于策略主干;验证侧组件未见另行训练",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The source explicitly assigns fine-tuning to the Qwen3-8B policy backbone while describing the DeepVerifier modules as the data-generation and verification machinery; no separate deployed external component update is specified.",
+     "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+     "inspected_locators": [
+      "p5 anchor='the agent can review and evaluate its previous'",
+      "p6 anchor='we fine tune qwen3 8b on a mixture'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-cc432879fce4af753778"
     },
     "controller_program_or_config_optimized_on_labels": {
      "value": true,
@@ -339,10 +397,24 @@
      "quote": "分类法由人工标注 555 error points 离线构建"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The inspected open-model construction specifies automated trajectory filtering, a fixed Qwen3-8B fine-tuning target, and an automated feedback loop; it gives no human or developer labeled checkpoint-selection step.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+      "p6 anchor='we fine tune qwen3 8b on a mixture'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-58b7d1b9a43299821296"
     },
     "deployment_label_access": {
      "value": false,
@@ -399,16 +471,44 @@
      "quote": "序贯精修非 K 池"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The open variant retains the same single-answer verify-feedback-retry loop; the complete described inference path contains no candidate object compared by a selector.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-cf6ae4d082096066fee4"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The open variant's exhaustive inference procedure is sequential revision of one answer and specifies no scored, ranked, voted, or tournament choice over an explicit candidate pool.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-1392014ff32270df1e5e"
     }
    },
    "source_locator": "canon: '开源变体对策略主干 SFT'",
@@ -417,9 +517,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "11ff35c2ebc3f90032cb544d30092a71249b17a6eed262801abfda681440d4f1"
+   "adjudication_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

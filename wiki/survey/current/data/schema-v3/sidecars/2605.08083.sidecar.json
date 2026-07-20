@@ -169,10 +169,24 @@
      "quote": "标签监督的离线发现"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "发现循环为代码搜索自动化,无人工按标签选模型步骤",
-     "scope": "DFS 轴3/轴8 已检视"
+     "value": false,
+     "reason": "Controller and beta selection is an automated accuracy-based operation inside the discovery loop; the source describes no human or developer manually choosing among model checkpoints using labeled outcomes.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p4 anchor='the discovery loop searches over code defined controllers'",
+      "p5 anchor='value that achieves the highest accuracy'"
+     ],
+     "owner_method_path_id": "2605.08083#discovered-controller",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+     "fulltext": {
+      "id": "2605.08083",
+      "kind": "pdf",
+      "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "adjudication_row_id": "ABS2-69fabfb31c97e102af00"
     },
     "deployment_label_access": {
      "value": false,
@@ -185,10 +199,24 @@
      "quote": "never used during discovery or selection"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "controller 观测限于内部状态(分支/深度/probe/预算),无外部信息获取",
-     "scope": "DFS 轴2/轴7/轴12 已检视"
+     "value": false,
+     "reason": "After discovery, the fixed controller observes only branch state, probe answers, depth, and budget from the current task execution; the deployed inference procedure adds no retrieval, browsing, database, or external evidence source.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p4 anchor='the resulting execution histories are stored in memory'",
+      "p5 anchor='fixed and evaluated on held out environments'"
+     ],
+     "owner_method_path_id": "2605.08083#discovered-controller",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+     "fulltext": {
+      "id": "2605.08083",
+      "kind": "pdf",
+      "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "adjudication_row_id": "ABS2-6bbe536f564a90af9deb"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -245,9 +273,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "58e4b6627a4dc326f2fd4d3131856d9dd4381a9fb71bdeae491a53ee9eb7c63f"
+   "adjudication_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

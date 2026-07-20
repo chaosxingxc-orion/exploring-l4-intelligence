@@ -91,10 +91,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "调度为固定常数(N=16,T=2,K=4,G=2,V=8),无按标签的人工/开发者选择",
-     "scope": "DFS 轴4/轴5 已检视"
+     "value": false,
+     "reason": "The complete RTV procedure is an automated tournament over rollout summaries and explicitly operates without ground-truth outcomes; it contains no human or developer labeled model-selection step.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'to select the strongest attempt from a population of rollouts without access to ground-truth outcomes'",
+      "tex: 'RTV selects the final remaining rollout as its output'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "adjudication_row_id": "ABS2-527adf4083786f6bb14b"
     },
     "deployment_label_access": {
      "value": false,
@@ -132,10 +146,24 @@
      "quote": "final RTV 返回 top-1 原样"
     },
     "decision_rights": {
-     "value": [],
      "kind": "absence",
-     "note": "RTV 单独使用时选出 final top-1 后无任何下游决策权",
-     "scope": "DFS 轴5/轴11 已检视"
+     "value": [],
+     "reason": "The isolated RTV method path terminates by returning the final remaining rollout; after that terminal selection the source specifies no downstream route, retry, branch, tool, memory, supply, stop, synthesis, or execute-skip control action.",
+     "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+     "inspected_locators": [
+      "tex: 'RTV selects the final remaining rollout as its output'",
+      "tex: 'repeating the process in a tournament-like manner until one rollout remains from the entire population'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "adjudication_row_id": "ABS2-9cf174bd899f3a803b87"
     },
     "candidate_pool_exists": {
      "value": true,
@@ -164,7 +192,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "eb9f8eb39b2a5df369210b74a653b9954b3c4c9b882f02db528fcdb71a05a975"
+   "adjudication_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "core_weight_update": false,
@@ -210,10 +239,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "random-K 为无参随机采样,无按标签选择",
-     "scope": "DFS 轴5 已检视+TeX 一手"
+     "value": false,
+     "reason": "Random-K forms refinement context by parameter-free random sampling from prior summaries; no human or developer uses labels to choose a model, checkpoint, or sampled summary.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+      "tex: 'using K randomly sampled summaries from previous iteration rollouts'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c"
     },
     "deployment_label_access": {
      "value": false,
@@ -268,16 +311,44 @@
      "quote": "For random-K, we follow PDR and randomly sample K previous summaries"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The operation randomly samples summaries solely as context supply and does not compare, score, rank, vote on, or select a winning candidate object under the taxonomy's explicit selector semantics.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries into the previous-iteration rollouts'",
+      "tex: 'provide as refinement context for executing each next-iteration rollout'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-f431a625273dfcd73698"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The paper explicitly contrasts Random-K sampling with Select-K tournament voting; this method path uses the former and therefore has no scored or tournament candidate-pool selection.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+      "tex: 'for select-K, we run RTV on the N parallel rollouts via tournament voting'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-359542ede39fa005cfea"
     }
    },
    "source_locator": "tex: 'For random-K, we follow PDR and randomly sample K previous summaries'",
@@ -286,7 +357,8 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1b11061d06cdd4de1e3f980ed60e5cb7968197fd55227f887f349368ce150bae"
+   "adjudication_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "core_weight_update": false,
@@ -412,10 +484,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "调度为固定常数,无按标签选择",
-     "scope": "DFS 轴4/轴5 已检视"
+     "value": false,
+     "reason": "The combined pipeline uses automated RTV to select summaries without ground-truth outcomes and supplies them to the next iteration; no human or developer label-based model choice appears in the complete recipe.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'RTV is then applied to these summaries to select the top-K summaries'",
+      "tex: 'without access to ground-truth outcomes'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv-pdr-pipeline",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+     "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0"
     },
     "deployment_label_access": {
      "value": false,
@@ -486,9 +572,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "272a1bc8ad895f61f8e77bcf34f20e2132deefbea29377facb365e9477deac99"
+   "adjudication_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

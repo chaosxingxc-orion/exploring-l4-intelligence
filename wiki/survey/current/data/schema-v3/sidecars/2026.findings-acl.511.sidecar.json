@@ -151,16 +151,46 @@
      "quote": "奖励模型是微调件"
     },
     "controller_program_or_config_optimized_on_labels": {
-     "value": false,
      "kind": "absence",
-     "note": "搜索算法/阈值为固定设计;标签训练发生在 PRM(ext_wu 轴)而非 controller 配置",
-     "scope": "DFS 轴3/轴5 已检视"
+     "value": false,
+     "reason": "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
+     "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+     "inspected_locators": [
+      "p14 anchor='settings of threshold and budgets'",
+      "p18 anchor='ablation studies on the thresholds'",
+      "p19 anchor='performance of dream in gsm8k'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.511",
+      "kind": "pdf",
+      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+     "adjudication_row_id": "ABS2-7f79a2888c7d031e5e74"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='phases follows a two threshold rule'",
+      "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
+      "p8 anchor='we study the reward model size for math reasoning'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.511",
+      "kind": "pdf",
+      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+     "adjudication_row_id": "ABS2-c5351c607c4f37690a34"
     },
     "deployment_label_access": {
      "value": false,
@@ -233,9 +263,11 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "ff8cb1d0ec5ac12ed3e8ed0b01bc5d1986d92434dab0bc82d239af73a5583ac8"
+   "adjudication_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
- "schema_v3_binding_adjudicator": "/root/a6_adjudicator"
+ "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
+ "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
 }

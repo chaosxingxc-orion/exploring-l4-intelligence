@@ -138,10 +138,25 @@
      "quote": "分类法由人工标注 555 error points 离线构建"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤;rubric 为人工分类法非模型选择",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The inspected deployed workflow exhaustively names automated decomposition, verification, judging, retry, and stopping operations; it contains no human or developer choice among model checkpoints based on labeled development outcomes.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p4 anchor='framework consists of a decomposition agent a verification agent and a judge agent'",
+      "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+      "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-216d90876d8397734c37"
     },
     "deployment_label_access": {
      "value": false,
@@ -198,16 +213,44 @@
      "quote": "序贯精修非 K 池"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The complete test-time procedure carries one current answer through verify-feedback-retry and returns on acceptance or the retry cap; it defines no simultaneously constructed objects from which a selector chooses.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-49b8c920cf44c2045df6"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The exhaustive inference loop revises a single current answer sequentially and exposes no scored, ranked, voted, or tournament candidate pool selection operation.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e"
     }
    },
    "fulltext_ref": {
@@ -221,9 +264,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "861e2e71e3213d8558a0ac9c790a7a32393253c48583807db019e5d634f7beaf",
+   "adjudication_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
    "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)"
+   "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2026.findings-acl.1243#open-sft-variant",
@@ -338,10 +382,24 @@
      "quote": "开源变体对策略主干 SFT"
     },
     "external_component_weight_update": {
-     "value": false,
      "kind": "absence",
-     "note": "SFT 作用于策略主干;验证侧组件未见另行训练",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The source explicitly assigns fine-tuning to the Qwen3-8B policy backbone while describing the DeepVerifier modules as the data-generation and verification machinery; no separate deployed external component update is specified.",
+     "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+     "inspected_locators": [
+      "p5 anchor='the agent can review and evaluate its previous'",
+      "p6 anchor='we fine tune qwen3 8b on a mixture'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-cc432879fce4af753778"
     },
     "controller_program_or_config_optimized_on_labels": {
      "value": true,
@@ -349,10 +407,24 @@
      "quote": "分类法由人工标注 555 error points 离线构建"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The inspected open-model construction specifies automated trajectory filtering, a fixed Qwen3-8B fine-tuning target, and an automated feedback loop; it gives no human or developer labeled checkpoint-selection step.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+      "p6 anchor='we fine tune qwen3 8b on a mixture'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-58b7d1b9a43299821296"
     },
     "deployment_label_access": {
      "value": false,
@@ -409,16 +481,44 @@
      "quote": "序贯精修非 K 池"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The open variant retains the same single-answer verify-feedback-retry loop; the complete described inference path contains no candidate object compared by a selector.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-cf6ae4d082096066fee4"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The open variant's exhaustive inference procedure is sequential revision of one answer and specifies no scored, ranked, voted, or tournament choice over an explicit candidate pool.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='uses it to guide further retries'",
+      "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1243",
+      "kind": "pdf",
+      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+     "adjudication_row_id": "ABS2-1392014ff32270df1e5e"
     }
    },
    "fulltext_ref": {
@@ -432,9 +532,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "11ff35c2ebc3f90032cb544d30092a71249b17a6eed262801abfda681440d4f1",
+   "adjudication_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
    "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)"
+   "note": "SFT 变体独立行;核=Qwen3-8B(text-only)",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2026.findings-acl.1724#pipeline",
@@ -585,10 +686,25 @@
      "quote": "根本无 gold 可泄"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "绘图代码执行+报错回溯=任务环境,无外部新信息获取",
-     "scope": "DFS 轴7/轴12 已检视"
+     "value": false,
+     "reason": "The complete pipeline transforms the provided raw dataset into profiles, charts, insights, and reports; code execution and judging operate on those task-provided artifacts and no retrieval, browsing, or external evidence channel is described.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p2 anchor='the pipeline takes raw data and produces a final report with curated charts'",
+      "p4 anchor='the data profiling stage produces multiple metadata reports'",
+      "p4 anchor='evaluator ranks candidates and discards a fixed'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.1724#pipeline",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.1724",
+      "kind": "pdf",
+      "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+     "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -649,9 +765,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "a018dfe8b6f81af83b52d8ad0ade7020e89d640850fe839fcd26cc4db1dbfcf4",
+   "adjudication_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
    "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 rights=['branch'] dated correction 正确(固定预算非信号控制,stop 权撤回);v5-schema 迁移:双信号拆分(stage 在线/final 终态)——A5 多信号身份样例;〔iso-adj-B2 再裁决 AGREE:双 judge 拆分被判「强佐证忠实」——α=0.8 未对齐负结果直接断言两评估器为可失配的独立实体;在线边落在线信号、终态 judger 无边=MAJOR-1 拼接的精确拆除;rights=['branch'] 在拆分下维持正确〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "STTS:在线 stage scalar 驱动候选晋级;终态 judger 选优为独立 terminal 信号无前向边"
+   "note": "STTS:在线 stage scalar 驱动候选晋级;终态 judger 选优为独立 terminal 信号无前向边",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2026.findings-acl.511#prm-guided-search",
@@ -791,16 +908,46 @@
      "quote": "奖励模型是微调件"
     },
     "controller_program_or_config_optimized_on_labels": {
-     "value": false,
      "kind": "absence",
-     "note": "搜索算法/阈值为固定设计;标签训练发生在 PRM(ext_wu 轴)而非 controller 配置",
-     "scope": "DFS 轴3/轴5 已检视"
+     "value": false,
+     "reason": "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
+     "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+     "inspected_locators": [
+      "p14 anchor='settings of threshold and budgets'",
+      "p18 anchor='ablation studies on the thresholds'",
+      "p19 anchor='performance of dream in gsm8k'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.511",
+      "kind": "pdf",
+      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+     "adjudication_row_id": "ABS2-7f79a2888c7d031e5e74"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "无按标签人工选模型步骤",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p5 anchor='phases follows a two threshold rule'",
+      "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
+      "p8 anchor='we study the reward model size for math reasoning'"
+     ],
+     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+     "fulltext": {
+      "id": "2026.findings-acl.511",
+      "kind": "pdf",
+      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+     "adjudication_row_id": "ABS2-c5351c607c4f37690a34"
     },
     "deployment_label_access": {
      "value": false,
@@ -878,9 +1025,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "ff8cb1d0ec5ac12ed3e8ed0b01bc5d1986d92434dab0bc82d239af73a5583ac8",
+   "adjudication_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
    "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足"
+   "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2602.16485#calibrated-orchestration",
@@ -1136,10 +1284,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "random-K 为无参随机采样,无按标签选择",
-     "scope": "DFS 轴5 已检视+TeX 一手"
+     "value": false,
+     "reason": "Random-K forms refinement context by parameter-free random sampling from prior summaries; no human or developer uses labels to choose a model, checkpoint, or sampled summary.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+      "tex: 'using K randomly sampled summaries from previous iteration rollouts'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c"
     },
     "deployment_label_access": {
      "value": false,
@@ -1194,16 +1356,44 @@
      "quote": "For random-K, we follow PDR and randomly sample K previous summaries"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "The operation randomly samples summaries solely as context supply and does not compare, score, rank, vote on, or select a winning candidate object under the taxonomy's explicit selector semantics.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries into the previous-iteration rollouts'",
+      "tex: 'provide as refinement context for executing each next-iteration rollout'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-f431a625273dfcd73698"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The paper explicitly contrasts Random-K sampling with Select-K tournament voting; this method path uses the former and therefore has no scored or tournament candidate-pool selection.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+      "tex: 'for select-K, we run RTV on the N parallel rollouts via tournament voting'"
+     ],
+     "owner_method_path_id": "2604.16529#pdr-random-k",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "adjudication_row_id": "ABS2-359542ede39fa005cfea"
     }
    },
    "fulltext_ref": {
@@ -1217,9 +1407,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "1b11061d06cdd4de1e3f980ed60e5cb7968197fd55227f887f349368ce150bae",
+   "adjudication_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
    "adjudication_provenance": "v6 复审 Gate MAJOR-2 源文裁定+iso-adj-A AGREE;v5-schema 迁移:零信号行(随机供给非信号控制);〔iso-adj-A2 再裁决 AGREE:零信号编码判 CORRECT——rights 带 supply 而无边=「供给发生但非信号控制」的诚实表达〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无信号;池事实经 candidate_pool_exists/random_sample 保留"
+   "note": "vanilla PDR:随机抽 K 摘要作精炼上下文——无信号;池事实经 candidate_pool_exists/random_sample 保留",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2604.16529#rtv",
@@ -1299,10 +1490,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "调度为固定常数(N=16,T=2,K=4,G=2,V=8),无按标签的人工/开发者选择",
-     "scope": "DFS 轴4/轴5 已检视"
+     "value": false,
+     "reason": "The complete RTV procedure is an automated tournament over rollout summaries and explicitly operates without ground-truth outcomes; it contains no human or developer labeled model-selection step.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'to select the strongest attempt from a population of rollouts without access to ground-truth outcomes'",
+      "tex: 'RTV selects the final remaining rollout as its output'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "adjudication_row_id": "ABS2-527adf4083786f6bb14b"
     },
     "deployment_label_access": {
      "value": false,
@@ -1340,10 +1545,24 @@
      "quote": "final RTV 返回 top-1 原样"
     },
     "decision_rights": {
-     "value": [],
      "kind": "absence",
-     "note": "RTV 单独使用时选出 final top-1 后无任何下游决策权",
-     "scope": "DFS 轴5/轴11 已检视"
+     "value": [],
+     "reason": "The isolated RTV method path terminates by returning the final remaining rollout; after that terminal selection the source specifies no downstream route, retry, branch, tool, memory, supply, stop, synthesis, or execute-skip control action.",
+     "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+     "inspected_locators": [
+      "tex: 'RTV selects the final remaining rollout as its output'",
+      "tex: 'repeating the process in a tournament-like manner until one rollout remains from the entire population'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "adjudication_row_id": "ABS2-9cf174bd899f3a803b87"
     },
     "candidate_pool_exists": {
      "value": true,
@@ -1377,9 +1596,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "eb9f8eb39b2a5df369210b74a653b9954b3c4c9b882f02db528fcdb71a05a975",
+   "adjudication_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
    "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(真实 K6 样例确认);v5-schema 迁移:单信号 terminal;〔iso-adj-A2 再裁决 AGREE:rights=[] absence 条目判 honest;reward-guided-but-not-rq 区分被判精确捕获〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "并行维:锦标赛比较选 top-1;终态退化路径"
+   "note": "并行维:锦标赛比较选 top-1;终态退化路径",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2604.16529#rtv-pdr-pipeline",
@@ -1506,10 +1726,24 @@
      "quote": "选择显式 label-free"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "调度为固定常数,无按标签选择",
-     "scope": "DFS 轴4/轴5 已检视"
+     "value": false,
+     "reason": "The combined pipeline uses automated RTV to select summaries without ground-truth outcomes and supplies them to the next iteration; no human or developer label-based model choice appears in the complete recipe.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "tex: 'RTV is then applied to these summaries to select the top-K summaries'",
+      "tex: 'without access to ground-truth outcomes'"
+     ],
+     "owner_method_path_id": "2604.16529#rtv-pdr-pipeline",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+     "fulltext": {
+      "id": "2604.16529",
+      "kind": "eprint",
+      "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+     "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0"
     },
     "deployment_label_access": {
      "value": false,
@@ -1585,9 +1819,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "272a1bc8ad895f61f8e77bcf34f20e2132deefbea29377facb365e9477deac99",
+   "adjudication_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
    "adjudication_provenance": "v6 复审 Round D+iso-adj-A AGREE(select/prune→supply 双视角冗余确认无 over-claim);v5-schema 迁移:单信号在线;〔iso-adj-A2 再裁决 AGREE:全 11 行内仅有的 rq=True 于本批 A 侧,被判同信号合法非拼接;与 #rtv 的 lifecycle 差异(online vs terminal)被判角色情境性忠实——中程选择条件化下轮供给 vs 终答选择〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借"
+   "note": "组合路径:RTV 选 K→条件化 iter1→final RTV;component_path_ids 防变体优点互借",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2605.08083#discovered-controller",
@@ -1745,10 +1980,24 @@
      "quote": "标签监督的离线发现"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "发现循环为代码搜索自动化,无人工按标签选模型步骤",
-     "scope": "DFS 轴3/轴8 已检视"
+     "value": false,
+     "reason": "Controller and beta selection is an automated accuracy-based operation inside the discovery loop; the source describes no human or developer manually choosing among model checkpoints using labeled outcomes.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p4 anchor='the discovery loop searches over code defined controllers'",
+      "p5 anchor='value that achieves the highest accuracy'"
+     ],
+     "owner_method_path_id": "2605.08083#discovered-controller",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+     "fulltext": {
+      "id": "2605.08083",
+      "kind": "pdf",
+      "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "adjudication_row_id": "ABS2-69fabfb31c97e102af00"
     },
     "deployment_label_access": {
      "value": false,
@@ -1761,10 +2010,24 @@
      "quote": "never used during discovery or selection"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "controller 观测限于内部状态(分支/深度/probe/预算),无外部信息获取",
-     "scope": "DFS 轴2/轴7/轴12 已检视"
+     "value": false,
+     "reason": "After discovery, the fixed controller observes only branch state, probe answers, depth, and budget from the current task execution; the deployed inference procedure adds no retrieval, browsing, database, or external evidence source.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p4 anchor='the resulting execution histories are stored in memory'",
+      "p5 anchor='fixed and evaluated on held out environments'"
+     ],
+     "owner_method_path_id": "2605.08083#discovered-controller",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+     "fulltext": {
+      "id": "2605.08083",
+      "kind": "pdf",
+      "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "adjudication_row_id": "ABS2-6bbe536f564a90af9deb"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -1826,9 +2089,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "58e4b6627a4dc326f2fd4d3131856d9dd4381a9fb71bdeae491a53ee9eb7c63f",
+   "adjudication_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
    "adjudication_provenance": "v4/v5 轮次;iso-adj-A DISAGREE(拓扑)已采纳;v5-schema 迁移:相位合并问题按其观察拆双信号(s_state 在线状态驱动/s_consensus 终态 Agg)——原行级 consensus_vote+online_step 的合并如实分解;〔iso-adj-A2 再裁决 AGREE:双信号拆分被判定为忠实且正是所求修复;观察:admissible 动作集含 probe 而 s_state.uses 保守省略之(非 reward 信号,加边不改任何派生)——欠表示而非虚增,登记不改〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴"
+   "note": "AutoTTS:在线边=状态驱动(form=none 非 reward),终态=共识 Agg;发现期 gold=dev-label 轴",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
    "method_path_id": "2606.01667#agentic-orchestration",
@@ -2159,10 +2423,25 @@
      "quote": "标签源=forced-answer 探针+终局正确性"
     },
     "human_or_dev_label_model_selection": {
-     "value": false,
      "kind": "absence",
-     "note": "门控训练为自动代理标签流程,无按标签人工选模型",
-     "scope": "DFS 轴3 已检视"
+     "value": false,
+     "reason": "Training labels and diagnostic annotations are generated automatically from forced-answer probes, episode correctness, and a VLM judge; no human or developer label-based model or checkpoint selection step is described.",
+     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+     "inspected_locators": [
+      "p6 anchor='each proposed tool call in a logged trajectory becomes one training instance'",
+      "p6 anchor='the label is derived from forced answer probes before and after tool execution'",
+      "p9 anchor='the diagnostic annotation of tool correctness is automatic and noisy'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-e9b7f915e84ac3072514"
     },
     "deployment_label_access": {
      "value": false,
@@ -2175,10 +2454,24 @@
      "quote": "gold 仅离线标签/诊断"
     },
     "inference_external_new_information": {
-     "value": false,
      "kind": "absence",
-     "note": "六感知工具作用于给定图像=任务环境,无外部新信息获取",
-     "scope": "DFS 轴7/轴12 已检视"
+     "value": false,
+     "reason": "The system's tools only read out the task-provided image and the gate sees the existing trajectory plus pending call before execution; no retrieval, browsing, database, or information source external to the task input is introduced.",
+     "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+     "inspected_locators": [
+      "p5 anchor='it does not see image pixels hidden states system prompts decoding log probabilities internal uncertainty estimates or the future tool output'",
+      "p6 anchor='the tool suite includes six perceptual tools ocr'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-94932b7d979683355098"
     },
     "internal_visibility": {
      "value": "api_only",
@@ -2218,16 +2511,44 @@
      "quote": "无 K 池无终答 selector"
     },
     "selection_object": {
-     "value": "none",
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": "none",
+     "reason": "ToolGate receives one already-proposed call and makes a binary execute-or-skip action; it constructs no candidate output, trajectory, plan, tool-agent, or other pool object for terminal selection.",
+     "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+     "inspected_locators": [
+      "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+      "p5 anchor='decides whether to execute the tool call'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9"
     },
     "explicit_candidate_pool_selection": {
-     "value": false,
      "kind": "absence",
-     "scope": "complete pinned method path",
-     "note": "No explicit scored/tournament candidate selection is encoded for this method path; candidate-pool existence alone is not explicit selection."
+     "value": false,
+     "reason": "The complete gate interface evaluates a single pending tool call and exposes no scored, ranked, voted, or tournament choice among an explicit pool of candidate outputs.",
+     "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+     "inspected_locators": [
+      "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+      "p5 anchor='decides whether to execute the tool call'"
+     ],
+     "owner_method_path_id": "2606.03054#trained-gate",
+     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+     "fulltext": {
+      "id": "2606.03054",
+      "kind": "pdf",
+      "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+     },
+     "coder_identity": "claude-fable-main:s-ea4f0926",
+     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "adjudication_row_id": "ABS2-481b25ff36e49a4d2088"
     }
    },
    "fulltext_ref": {
@@ -2241,9 +2562,10 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "57858a5223c1a9138329507a9bda9673a0fdd7eb2e993b83887ff68d2c09f5cc",
+   "adjudication_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
    "adjudication_provenance": "CE-3+iso-adj-B AGREE;v5-schema 迁移:单信号在线门;〔iso-adj-B2 再裁决 AGREE:15 条 claim_evidence 逐字抽验通过,两 absence 条目 scope 判 honest〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
-   "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False"
+   "note": "trained binary gate ≠ reward;边有效但 form 非 reward → rq False",
+   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ]
 }
