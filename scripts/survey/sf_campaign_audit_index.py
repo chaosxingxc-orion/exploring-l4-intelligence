@@ -72,6 +72,7 @@ ALLOWED_TYPES = {
     "response",
     "application",
     "query-review",
+    "amendment",
     "correction",
     "consolidation-receipt",
 }
@@ -196,6 +197,7 @@ def _epoch_artifact_identity(path: str, artifact_type: str) -> tuple[str, int] |
             )
         return kind, int(iteration.group(1))
     if path.startswith(AUDIT_ROOT + "epoch-") and artifact_type in {
+        "amendment",
         "correction",
         "consolidation-receipt",
     }:
@@ -212,9 +214,10 @@ def derived_current_round(rounds: list[dict]) -> int | None:
     for row in rounds:
         types = [artifact["type"] for artifact in row["artifacts"]]
         if row["disposition"] == "ACTIVE_REVIEW_TRANSACTION":
-            if types != ["correction"]:
+            if types not in (["amendment"], ["correction"]):
                 raise CampaignIndexError(
-                    f"round {row['round']} active at-issue event must be one correction"
+                    f"round {row['round']} active at-issue event must be exactly "
+                    "one amendment or correction"
                 )
             current = row["round"]
         elif row["disposition"] == "NON_ACTIVE_PREREQUISITE":
@@ -285,7 +288,7 @@ def validate_contract(
     artifact_round: dict[str, int] = {}
     rows_by_round: dict[int, dict] = {}
     receipt_rounds: dict[int, int] = {}
-    correction_epochs: list[tuple[int, int, str]] = []
+    active_epoch_events: list[tuple[str, int, int, str]] = []
     for raw_row in rounds:
         round_number = raw_row["round"]
         row = _require_keys(raw_row, ROUND_KEYS, f"round {round_number}")
@@ -334,8 +337,8 @@ def validate_contract(
                             f"epoch {epoch} has duplicate consolidation receipts"
                         )
                     receipt_rounds[epoch] = round_number
-                elif kind == "correction":
-                    correction_epochs.append((epoch, round_number, path))
+                elif kind in {"amendment", "correction"}:
+                    active_epoch_events.append((kind, epoch, round_number, path))
             if not is_campaign_artifact(path):
                 raise CampaignIndexError(f"non-campaign artifact appears in contract: {path}")
             if path in contract_campaign:
@@ -343,11 +346,11 @@ def validate_contract(
             contract_campaign[path] = (pin, round_number)
             artifact_round[path] = round_number
 
-    for epoch, correction_round, path in correction_epochs:
+    for kind, epoch, active_round, path in active_epoch_events:
         receipt_round = receipt_rounds.get(epoch)
-        if receipt_round is None or receipt_round >= correction_round:
+        if receipt_round is None or receipt_round >= active_round:
             raise CampaignIndexError(
-                f"epoch correction requires an earlier receipt prerequisite: {path}"
+                f"epoch {kind} requires an earlier receipt prerequisite: {path}"
             )
 
     if set(registry_campaign) != set(contract_campaign):

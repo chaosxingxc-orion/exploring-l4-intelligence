@@ -144,6 +144,29 @@ def append_correction_event(registry: dict, contract: dict, *, round_number: int
     return path
 
 
+def append_amendment_event(registry: dict, contract: dict, *, round_number: int) -> str:
+    path = "wiki/audit/system-first-stage1a/epoch-3/round-3/amendment-3.md"
+    registry["artifacts"].append({"path": path, "git_blob": blob(round_number)})
+    contract["rounds"].append(
+        {
+            "round": round_number,
+            "verdict": "PENDING_INDEPENDENT_REREVIEW",
+            "disposition": "ACTIVE_REVIEW_TRANSACTION",
+            "supersession": same_carrier_supersession("current-carrier", STATE),
+            "current_carrier": STATE,
+            "current_carrier_section": STATE_SECTION,
+            "artifacts": [
+                {
+                    "path": path,
+                    "git_blob": blob(round_number),
+                    "type": "amendment",
+                }
+            ],
+        }
+    )
+    return path
+
+
 def validate(
     registry: dict,
     contract: dict,
@@ -388,24 +411,68 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
         self.assertEqual(1, rendered.count("`CURRENT_ACTIVE`"))
         self.assertIn("`FORMER_CURRENT`", rendered)
 
-    def test_receipt_and_correction_cannot_share_one_anchor_transaction(self) -> None:
+    def test_receipt_then_amendment_are_two_anchor_commit_boundaries(self) -> None:
         registry, initial, carriers = fixture_documents()
         head_count, head_prefix = baseline_for(initial)
-        changed_registry = copy.deepcopy(registry)
-        changed_contract = copy.deepcopy(initial)
-        append_receipt_event(changed_registry, changed_contract, round_number=3)
-        append_correction_event(changed_registry, changed_contract, round_number=4)
-        staged_count, staged_prefix = baseline_for(changed_contract)
-        with self.assertRaisesRegex(
-            current_manifest.CurrentManifestError, "exactly one semantic event"
-        ):
-            current_manifest._validate_campaign_anchor_lineage(
-                changed_contract["rounds"],
-                head_count,
-                head_prefix,
-                staged_count,
-                staged_prefix,
-            )
+
+        receipt_registry = copy.deepcopy(registry)
+        receipt_contract = copy.deepcopy(initial)
+        append_receipt_event(receipt_registry, receipt_contract, round_number=3)
+        receipt_count, receipt_prefix = baseline_for(receipt_contract)
+        campaign.validate_contract(
+            receipt_registry,
+            receipt_contract,
+            carriers,
+            baseline_count=receipt_count,
+            baseline_prefix_sha256=receipt_prefix,
+        )
+        current_manifest._validate_campaign_anchor_lineage(
+            receipt_contract["rounds"],
+            head_count,
+            head_prefix,
+            receipt_count,
+            receipt_prefix,
+        )
+
+        amendment_registry = copy.deepcopy(receipt_registry)
+        amendment_contract = copy.deepcopy(receipt_contract)
+        append_amendment_event(amendment_registry, amendment_contract, round_number=4)
+        amendment_count, amendment_prefix = baseline_for(amendment_contract)
+        campaign.validate_contract(
+            amendment_registry,
+            amendment_contract,
+            carriers,
+            baseline_count=amendment_count,
+            baseline_prefix_sha256=amendment_prefix,
+        )
+        current_manifest._validate_campaign_anchor_lineage(
+            amendment_contract["rounds"],
+            receipt_count,
+            receipt_prefix,
+            amendment_count,
+            amendment_prefix,
+        )
+        self.assertEqual(4, campaign.derived_current_round(amendment_contract["rounds"]))
+
+    def test_receipt_and_active_event_cannot_share_one_anchor_transaction(self) -> None:
+        for append_active in (append_amendment_event, append_correction_event):
+            registry, initial, _carriers = fixture_documents()
+            head_count, head_prefix = baseline_for(initial)
+            append_receipt_event(registry, initial, round_number=3)
+            append_active(registry, initial, round_number=4)
+            staged_count, staged_prefix = baseline_for(initial)
+            with self.subTest(active=append_active.__name__):
+                with self.assertRaisesRegex(
+                    current_manifest.CurrentManifestError,
+                    "exactly one semantic event",
+                ):
+                    current_manifest._validate_campaign_anchor_lineage(
+                        initial["rounds"],
+                        head_count,
+                        head_prefix,
+                        staged_count,
+                        staged_prefix,
+                    )
 
     def test_anchor_growth_must_append_a_new_round_not_extend_prior_active(self) -> None:
         _registry, initial, _carriers = fixture_documents()
@@ -486,21 +553,41 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
                 head_prefix,
             )
 
-    def test_epoch_path_shapes_enforce_types_and_receipt_prerequisite(self) -> None:
-        registry, contract, carriers = fixture_documents()
-        append_receipt_event(registry, contract, round_number=3)
-        contract["rounds"][-1]["artifacts"][0]["type"] = "correction"
-        with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
-            validate(registry, contract, carriers)
+    def test_epoch_path_shapes_enforce_each_type(self) -> None:
+        cases = (
+            (append_receipt_event, "amendment"),
+            (append_amendment_event, "correction"),
+            (append_correction_event, "amendment"),
+        )
+        for append_event, swapped_type in cases:
+            registry, contract, carriers = fixture_documents()
+            append_event(registry, contract, round_number=3)
+            contract["rounds"][-1]["artifacts"][0]["type"] = swapped_type
+            with self.subTest(event=append_event.__name__, type=swapped_type):
+                with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+                    validate(registry, contract, carriers)
 
-        registry, contract, carriers = fixture_documents()
-        append_correction_event(registry, contract, round_number=3)
-        with self.assertRaisesRegex(campaign.CampaignIndexError, "receipt prerequisite"):
-            validate(registry, contract, carriers)
+    def test_epoch_active_events_require_an_earlier_same_epoch_receipt(self) -> None:
+        for append_active in (append_amendment_event, append_correction_event):
+            registry, contract, carriers = fixture_documents()
+            append_active(registry, contract, round_number=3)
+            with self.subTest(active=append_active.__name__, receipt="missing"):
+                with self.assertRaisesRegex(
+                    campaign.CampaignIndexError, "receipt prerequisite"
+                ):
+                    validate(registry, contract, carriers)
 
-        contract["rounds"][-1]["artifacts"][0]["type"] = "review"
-        with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
-            validate(registry, contract, carriers)
+            registry, contract, carriers = fixture_documents()
+            append_receipt_event(registry, contract, round_number=3)
+            active_path = append_active(registry, contract, round_number=4)
+            wrong_epoch_path = active_path.replace("epoch-3/", "epoch-4/")
+            registry["artifacts"][-1]["path"] = wrong_epoch_path
+            contract["rounds"][-1]["artifacts"][0]["path"] = wrong_epoch_path
+            with self.subTest(active=append_active.__name__, receipt="wrong-epoch"):
+                with self.assertRaisesRegex(
+                    campaign.CampaignIndexError, "receipt prerequisite"
+                ):
+                    validate(registry, contract, carriers)
 
     def test_epoch_correction_and_receipt_are_campaign_artifacts_but_generators_are_not(self) -> None:
         correction = (
