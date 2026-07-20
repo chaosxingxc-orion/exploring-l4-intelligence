@@ -236,6 +236,14 @@ class CurrentManifestContractTests(unittest.TestCase):
             self.read_blob,
         )
 
+    def audit_paths(self):
+        paths = set()
+        for spec in self.manifest._AUDIT_FILE_SPECS:
+            raw = REPO.joinpath(*spec.path.split("/")).read_bytes()
+            self.payloads[spec.path] = raw
+            paths.add(spec.path)
+        return paths
+
     def test_manifest_entries_have_exact_contract_and_real_dual_checker(self):
         document = self.build()
         entries = document["files"]
@@ -287,23 +295,22 @@ class CurrentManifestContractTests(unittest.TestCase):
             self.assertTrue(path.startswith("wiki/survey/current/"))
             self.assertNotRegex(path, r"amendment|review|response")
 
-    def test_audit_pair_lifecycle_is_absent_complete_or_fail_closed(self):
+    def test_audit_contract_lifecycle_is_absent_complete_or_fail_closed(self):
         index = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
         correction = self.manifest.ACTIVE_REVIEW_TRANSACTION
         before = self.build()
         self.assertNotIn(index, [entry["path"] for entry in before["files"]])
         self.assertNotIn(correction, before["release_bound_artifacts"])
 
-        for half in ({index}, {correction}):
+        audit_paths = self.audit_paths()
+        for missing in audit_paths:
             with self.assertRaisesRegex(
                 self.manifest.CurrentManifestError,
                 "audit-activation-incomplete",
             ):
-                self.build(half)
+                self.build(audit_paths - {missing})
 
-        self.payloads[index] = b"audit index\n"
-        self.payloads[correction] = b"correction\n"
-        after = self.build({index, correction})
+        after = self.build(audit_paths)
         paths = [entry["path"] for entry in after["files"]]
         self.assertIn(index, paths)
         self.assertIn(correction, paths)
@@ -405,6 +412,14 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             self.read_blob,
         )
 
+    def add_audit_contract(self, index):
+        for spec in self.manifest._AUDIT_FILE_SPECS:
+            raw = REPO.joinpath(*spec.path.split("/")).read_bytes()
+            self.payloads[spec.path] = raw
+            blob = git_blob_oid(raw)
+            self.blobs[blob] = raw
+            index[spec.path] = self.manifest.GitIndexEntry("100644", blob)
+
     def test_every_base_entry_must_be_tracked(self):
         with self.assertRaisesRegex(
             self.manifest.CurrentManifestError, "manifest-input-untracked"
@@ -461,11 +476,11 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         ):
             self.build()
 
-    def test_audit_pair_requires_complete_freshly_staged_bytes(self):
+    def test_audit_contract_requires_complete_freshly_staged_bytes(self):
         index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
         correction = self.manifest.ACTIVE_REVIEW_TRANSACTION
         index = dict(self.index)
-        raw = b"audit index\n"
+        raw = REPO.joinpath(*index_path.split("/")).read_bytes()
         blob = git_blob_oid(raw)
         self.payloads[index_path] = raw
         self.blobs[blob] = raw
@@ -475,15 +490,26 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         ):
             self.build(index)
 
-        correction_raw = b"correction\n"
-        correction_blob = git_blob_oid(correction_raw)
+        self.add_audit_contract(index)
+        correction_raw = self.blobs[index[correction].blob]
+        correction_blob = index[correction].blob
         self.payloads[correction] = correction_raw + b"edited-after-stage\n"
-        self.blobs[correction_blob] = correction_raw
-        index[correction] = self.manifest.GitIndexEntry(
-            "100644", correction_blob
-        )
         with self.assertRaisesRegex(
             self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
+        ):
+            self.build(index)
+
+    def test_staged_campaign_index_must_match_staged_semantic_contract(self):
+        index = dict(self.index)
+        self.add_audit_contract(index)
+        index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
+        stale = self.payloads[index_path] + b"stale\n"
+        stale_blob = git_blob_oid(stale)
+        self.payloads[index_path] = stale
+        self.blobs[stale_blob] = stale
+        index[index_path] = self.manifest.GitIndexEntry("100644", stale_blob)
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "campaign-audit-index-stale"
         ):
             self.build(index)
 

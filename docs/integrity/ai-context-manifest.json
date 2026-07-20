@@ -62,7 +62,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "46d25bd168945273b96e05404ba4a86f76150342a3db9e5a8c8b8870f0db3c19"
+      "sha256": "50a66210830dc5dade668fc1f65619146a6986645dde7e8ac42d134b078a536d"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
@@ -131,7 +131,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "append-only campaign audit index",
-      "sha256": "6655d19b0e2d767a59938dc5a8179958b6072847dcd62e8c014d6dba20796078"
+      "sha256": "36f9d317b1294eb2ad5ef8a7c13de1f76df389100ef7f0c7071d569e88622462"
     }
   ],
   "budgets_bytes": {

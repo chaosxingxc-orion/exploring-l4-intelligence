@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -23,13 +24,70 @@ from ai_context_surface_check import TrustedRepoReader
 
 
 def git(repo: Path, *arguments: str, check: bool = True) -> subprocess.CompletedProcess:
+    environment = {
+        name: value
+        for name, value in os.environ.items()
+        if not name.upper().startswith("GIT_")
+    }
+    environment.update(
+        {
+            "GIT_CONFIG_GLOBAL": os.devnull,
+            "GIT_CONFIG_SYSTEM": os.devnull,
+            "GIT_CONFIG_NOSYSTEM": "1",
+        }
+    )
     return subprocess.run(
         ["git", *arguments],
         cwd=repo,
+        env=environment,
         check=check,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
+
+
+class GitFixtureIsolationTests(unittest.TestCase):
+    def test_fixture_git_preserves_shared_config_when_git_environment_leaks(self) -> None:
+        with (
+            tempfile.TemporaryDirectory() as shared_directory,
+            tempfile.TemporaryDirectory() as fixture_directory,
+        ):
+            shared_repo = Path(shared_directory)
+            fixture_repo = Path(fixture_directory)
+            clean_environment = os.environ.copy()
+            for name in ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR"):
+                clean_environment.pop(name, None)
+            subprocess.run(
+                ["git", "init", "-q"],
+                cwd=shared_repo,
+                env=clean_environment,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "config", "--local", "user.name", "Charmer"],
+                cwd=shared_repo,
+                env=clean_environment,
+                check=True,
+            )
+            shared_config = shared_repo / ".git" / "config"
+            before = shared_config.read_bytes()
+
+            with mock.patch.dict(
+                os.environ,
+                {
+                    "GIT_DIR": str(shared_repo / ".git"),
+                    "GIT_WORK_TREE": str(shared_repo),
+                },
+            ):
+                git(fixture_repo, "init", "-q")
+                git(fixture_repo, "config", "user.name", "Archive Test")
+
+            self.assertEqual(before, shared_config.read_bytes())
+            self.assertTrue((fixture_repo / ".git").is_dir())
+            self.assertEqual(
+                b"Archive Test\n",
+                git(fixture_repo, "config", "--local", "user.name").stdout,
+            )
 
 
 class ArchiveRepoFixture(unittest.TestCase):
@@ -37,10 +95,16 @@ class ArchiveRepoFixture(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.repo = Path(self.temporary.name)
         git(self.repo, "init", "-q")
-        git(self.repo, "config", "user.email", "archive-test@example.invalid")
-        git(self.repo, "config", "user.name", "Archive Test")
-        git(self.repo, "config", "core.autocrlf", "false")
-        git(self.repo, "config", "core.eol", "lf")
+        git(
+            self.repo,
+            "config",
+            "--local",
+            "user.email",
+            "archive-test@example.invalid",
+        )
+        git(self.repo, "config", "--local", "user.name", "Archive Test")
+        git(self.repo, "config", "--local", "core.autocrlf", "false")
+        git(self.repo, "config", "--local", "core.eol", "lf")
 
         self.source = "wiki/survey/candidate.md"
         self.destination = "wiki/archive/working/campaign/candidate.md"

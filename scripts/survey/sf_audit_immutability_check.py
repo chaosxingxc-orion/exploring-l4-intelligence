@@ -24,15 +24,31 @@ import json
 import os
 import subprocess
 import sys
+from pathlib import Path
 
-REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-REGISTRY = os.path.join(REPO, "wiki", "survey", "sf-audit-artifact-registry.json")
-OUT = os.path.join(REPO, "docs", "checks", "2026-07-19-sf-audit-immutability-check.json")
+REPO = Path(__file__).resolve().parents[2]
+CHECKS_DIR = REPO / "scripts" / "checks"
+if str(CHECKS_DIR) not in sys.path:
+    sys.path.insert(0, str(CHECKS_DIR))
+
+from ai_context_surface_check import git_command_prefix  # noqa: E402
+
+
+REGISTRY = REPO / "wiki" / "survey" / "sf-audit-artifact-registry.json"
+OUT = REPO / "docs" / "checks" / "2026-07-19-sf-audit-immutability-check.json"
 
 
 def git(*args):
-    return subprocess.run(["git", *args], cwd=REPO, capture_output=True,
-                          text=True, encoding="utf-8", errors="replace")
+    completed = subprocess.run(
+        [*git_command_prefix(REPO), *args],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    completed.check_returncode()
+    return completed
 
 
 def head_blobs():
@@ -81,13 +97,13 @@ def main():
     failures = evaluate(reg["artifacts"], blobs, dirty)
     result = {
         "check": "sf-audit-immutability",
-        "registry": os.path.relpath(REGISTRY, REPO).replace(os.sep, "/"),
+        "registry": REGISTRY.relative_to(REPO).as_posix(),
         "registered": len(reg["artifacts"]),
         "head": git("rev-parse", "HEAD").stdout.strip(),
         "failures": failures,
         "status": "FAIL" if failures else "PASS",
     }
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     io.open(OUT, "w", encoding="utf-8", newline="\n").write(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     for f in failures:

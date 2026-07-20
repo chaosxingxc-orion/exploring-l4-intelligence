@@ -33,6 +33,7 @@ from sf_current_path_contract import (  # noqa: E402
 )
 from sf_json_contract import JsonContractError, loads as strict_json_loads  # noqa: E402
 from sf_query_compiler import atomic_write_bytes  # noqa: E402
+import sf_campaign_audit_index as campaign_audit_index  # noqa: E402
 
 
 OUTPUT_RELATIVE_PATH = "wiki/survey/current/manifest.json"
@@ -110,6 +111,12 @@ BASE_FILE_SPECS = (
     FileSpec(
         "dual_platform_aggregate_checker",
         "scripts/survey/sf_dual_platform_check.py",
+        "normal-code-lifecycle",
+        "machine-only",
+    ),
+    FileSpec(
+        "campaign_audit_index_checker",
+        "scripts/survey/sf_campaign_audit_index.py",
         "normal-code-lifecycle",
         "machine-only",
     ),
@@ -192,6 +199,18 @@ BASE_FILE_SPECS = (
 
 
 _AUDIT_FILE_SPECS = (
+    FileSpec(
+        "audit_artifact_registry",
+        "wiki/survey/sf-audit-artifact-registry.json",
+        "append-only",
+        "machine-only",
+    ),
+    FileSpec(
+        "campaign_audit_contract",
+        campaign_audit_index.CONTRACT_PATH.relative_to(REPO).as_posix(),
+        "append-only",
+        "cold-audit",
+    ),
     FileSpec(
         "campaign_audit_index",
         AUDIT_CAMPAIGN_INDEX_PATH,
@@ -383,16 +402,74 @@ def load_consumer_manifest(
 
 
 def _active_audit_specs(index_inventory: dict[str, GitIndexEntry]) -> tuple[FileSpec, ...]:
-    index_tracked = AUDIT_CAMPAIGN_INDEX_PATH in index_inventory
-    correction_tracked = ACTIVE_REVIEW_TRANSACTION in index_inventory
-    if index_tracked != correction_tracked:
+    tracked = {
+        spec.path: spec.path in index_inventory for spec in _AUDIT_FILE_SPECS
+    }
+    active = tracked[AUDIT_CAMPAIGN_INDEX_PATH]
+    if active and not all(tracked.values()):
         raise CurrentManifestError(
             "audit-activation-incomplete: "
-            f"index tracked={index_tracked}, correction tracked={correction_tracked}"
+            + ", ".join(f"{path} tracked={present}" for path, present in tracked.items())
         )
-    if not index_tracked:
+    if not active:
+        unexpected = {
+            path: present
+            for path, present in tracked.items()
+            if path != "wiki/survey/sf-audit-artifact-registry.json" and present
+        }
+        if unexpected:
+            raise CurrentManifestError(
+                "audit-activation-incomplete: "
+                + ", ".join(
+                    f"{path} tracked={present}" for path, present in tracked.items()
+                )
+            )
         return ()
     return _AUDIT_FILE_SPECS
+
+
+def _staged_bytes(
+    path: str,
+    index_inventory: dict[str, GitIndexEntry],
+    read_blob: Callable[[str], bytes],
+) -> bytes:
+    entry = index_inventory.get(path)
+    if entry is None:
+        raise CurrentManifestError(f"campaign gate input is untracked: {path}")
+    entry = _validate_index_entry(path, entry)
+    try:
+        raw = read_blob(entry.blob)
+    except (OSError, CurrentManifestError) as error:
+        raise CurrentManifestError(f"campaign gate cannot read {path}: {error}") from error
+    if not isinstance(raw, bytes):
+        raise CurrentManifestError(f"campaign gate blob reader returned non-bytes: {path}")
+    return raw
+
+
+def _validate_campaign_gate(
+    index_inventory: dict[str, GitIndexEntry],
+    read_blob: Callable[[str], bytes],
+) -> None:
+    registry_path = "wiki/survey/sf-audit-artifact-registry.json"
+    contract_path = campaign_audit_index.CONTRACT_PATH.relative_to(REPO).as_posix()
+    try:
+        registry = strict_json_loads(
+            _staged_bytes(registry_path, index_inventory, read_blob), registry_path
+        )
+        contract = strict_json_loads(
+            _staged_bytes(contract_path, index_inventory, read_blob), contract_path
+        )
+        campaign_audit_index.validate_contract(registry, contract)
+    except (JsonContractError, campaign_audit_index.CampaignIndexError) as error:
+        raise CurrentManifestError(f"campaign-audit-index-invalid: {error}") from error
+    actual_index = _staged_bytes(
+        AUDIT_CAMPAIGN_INDEX_PATH, index_inventory, read_blob
+    )
+    expected_index = campaign_audit_index.render_index(contract)
+    if actual_index != expected_index:
+        raise CurrentManifestError(
+            "campaign-audit-index-stale: staged INDEX does not match staged contract"
+        )
 
 
 def _validate_index_entry(path: str, entry: GitIndexEntry) -> GitIndexEntry:
@@ -472,6 +549,8 @@ def build_manifest(
         ),
         key=lambda entry: entry["path"],
     )
+    if audit_specs:
+        _validate_campaign_gate(index_inventory, read_blob)
     release_bound = list(_BASE_RELEASE_BOUND)
     prose_scan = list(_BASE_PROSE_SCAN)
     if audit_specs:

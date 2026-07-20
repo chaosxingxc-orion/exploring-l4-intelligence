@@ -1,0 +1,359 @@
+{
+  "schema": "sf-campaign-audit-index-v1",
+  "campaign": "system-first-stage1a",
+  "current_carriers": {
+    "rules": "wiki/survey/current/protocol.md",
+    "state": "wiki/survey/current/status.md"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "verdict": "STAGE1A_PROTOCOLIZATION_ONLY",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v1.md",
+          "git_blob": "d60aa6692c395cc353d4ad5d8fb2f6e4d31c3910",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v1-doctoral-adversarial-review.md",
+          "git_blob": "72c5f7104826281780e87ebb049b4249de7ce05d",
+          "type": "review"
+        },
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v1-stage1a-recalibrated-review.md",
+          "git_blob": "c677b47494e35a564360a0a503c97a124daae728",
+          "type": "review"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v2.md",
+          "git_blob": "36ad2d63642fb13643fc1ebaf54a0b97bb342fb3",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v2-stage1a-doctoral-review.md",
+          "git_blob": "9f7fe3622f5241421130c659cae44c32ea5393e1",
+          "type": "review"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md",
+          "git_blob": "30e50c048a2c0fed80a5fe90e2fd02ca229c943b",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-doctoral-review.md",
+          "git_blob": "5f6942d47ed65c2498323c7ecc82f7becf4e6a8e",
+          "type": "review"
+        },
+        {
+          "path": "wiki/2026-07-15-system-first-research-proposal-v3-stage1a-closeout-readiness-review.md",
+          "git_blob": "7bf0f83654e2bfe6ef3eab0420a9302a6f014a52",
+          "type": "review"
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/survey/2026-07-16-gate-s1-rereview-application.md",
+          "git_blob": "a81a01c03dac7e306a05e6629629b85a139e5822",
+          "type": "application"
+        },
+        {
+          "path": "wiki/2026-07-16-gate-s1-rereview-application-stage1a-doctoral-review.md",
+          "git_blob": "092e389e4e07bd6666b9ea742878be24a7ceae68",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-16-gate-s1-correction-4-response.md",
+          "git_blob": "300225e906b531e1488ac57f518ac6b8363497d4",
+          "type": "correction"
+        },
+        {
+          "path": "wiki/2026-07-16-gate-s1-correction-4-prelaunch-doctoral-review.md",
+          "git_blob": "028dfc1b20a32125da38cfe09d86630d24c7e49c",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-16-gate-s1-correction-4a-response.md",
+          "git_blob": "96886f96c8f30f1a1ea48b37d658d44f894c4810",
+          "type": "correction"
+        },
+        {
+          "path": "wiki/survey/2026-07-16-gate-s1-p0r8-rereview-application.md",
+          "git_blob": "fe005fa38015d00bb5a67c9dc9d8df96f0cf0529",
+          "type": "application"
+        },
+        {
+          "path": "wiki/2026-07-16-gate-s1-p0r8-rereview-doctoral-review.md",
+          "git_blob": "f512936145fc862549e6149b904728c89321a790",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-17-gate-s1-correction-4b-response.md",
+          "git_blob": "f80e70a66f9fd553c529eeee317111a2a37fab88",
+          "type": "correction"
+        },
+        {
+          "path": "wiki/2026-07-18-gate-s1-correction-4b-stage1a-doctoral-adversarial-review.md",
+          "git_blob": "ea9048c95676c1f9bde5d66ca2d6df37a6506620",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-gate-s1-correction-4c-response.md",
+          "git_blob": "c920b4fef8110b80403c3b4281fd2a7364963a4a",
+          "type": "correction"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-sf-press-query-review-c4c.md",
+          "git_blob": "92f2f653c57e60327a57991902947e118b6ade28",
+          "type": "query-review"
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence.md",
+          "git_blob": "c91e001c00e4e2aa72298de11ca9b69ad1342ad0",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence-doctoral-review.md",
+          "git_blob": "240200f024ce9bac0604250476ffb632486f8242",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-gate-s1-v4-response.md",
+          "git_blob": "e4b888403d5f302b7442d76905b9e98da3970a98",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated.md",
+          "git_blob": "c028bd14f42400b1b40795f97172c31ebef9dbfe",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated-doctoral-review.md",
+          "git_blob": "83fedb2e5542c5284655cd6d6853a62af6e71419",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-gate-s1-v5-response.md",
+          "git_blob": "b35681d0ed7ceff9be1b8b531f70b937be720e92",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-18-gate-s1-v5-response-stage1a-doctoral-rereview.md",
+          "git_blob": "6900b268626329d934c0d101011bf3572e6daafb",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-gate-s1-v5-rereview-response.md",
+          "git_blob": "bd2e94294638dd9e10248a484615f76065a9f996",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v6-consolidated.md",
+          "git_blob": "2af5131830e2a50a579658c8163f96b87524bb81",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v6-stage1a-doctoral-review.md",
+          "git_blob": "fac45ededd1f8af8495e6ae1cef001b67921d9b4",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-18-gate-s1-v6-response.md",
+          "git_blob": "c2348f198e7eba97d02f1fedcfcf48661ce5afb0",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v7-consolidated.md",
+          "git_blob": "e2d0d7b949431a095290e88ec02300a505a25cb2",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-18-system-first-research-proposal-v7-stage1a-doctoral-review.md",
+          "git_blob": "7f91624d3e0d04b3121f6a519f2cd2f8540c3945",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-19-gate-s1-v7-response.md",
+          "git_blob": "3fe2eb970e2d752ef02238054cb0397c5b34b655",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/protocol.md"
+      },
+      "current_carrier": "wiki/survey/current/protocol.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-19-system-first-research-proposal-v8-consolidated.md",
+          "git_blob": "87619149711f4541441210dc2689977ca0a0df8b",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-19-system-first-research-proposal-v8-stage1a-doctoral-review.md",
+          "git_blob": "e193a23cdba555a89451788838ccfae4c6bd6ce1",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-19-gate-s1-v8-response.md",
+          "git_blob": "9d4abf0d00900b6dea44cddf326f4f7bcdf11820",
+          "type": "response"
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "verdict": "WITHHOLD_STAGE1B_NARROW_REMEDIATION",
+      "disposition": "SUPERSEDED_BY_LATER_ROUND",
+      "supersession": {
+        "mode": "later-round-artifact",
+        "target": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
+      },
+      "current_carrier": "wiki/survey/current/status.md",
+      "artifacts": [
+        {
+          "path": "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
+          "git_blob": "80bd82072289387be9d2a4391fa2026fe36b3522",
+          "type": "proposal"
+        },
+        {
+          "path": "wiki/2026-07-19-system-first-research-proposal-v9-stage1a-doctoral-review.md",
+          "git_blob": "c4c8d082289a720959781a85c0a596d04f6ca150",
+          "type": "review"
+        },
+        {
+          "path": "wiki/survey/2026-07-19-gate-s1-v9-response.md",
+          "git_blob": "df1b4737449d2b8a500cbfd38dd6d5e2bdb51b6a",
+          "type": "response"
+        },
+        {
+          "path": "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
+          "git_blob": "686129ee41cdf08c294114fc29c93a9c63408dc5",
+          "type": "proposal"
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "verdict": "PENDING_INDEPENDENT_REREVIEW",
+      "disposition": "ACTIVE_REVIEW_TRANSACTION",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/status.md"
+      },
+      "current_carrier": "wiki/survey/current/status.md",
+      "artifacts": [
+        {
+          "path": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md",
+          "git_blob": "dc1e32ed6993e3e5d2fd21027eabb78f8c968b9f",
+          "type": "correction"
+        }
+      ]
+    }
+  ]
+}
