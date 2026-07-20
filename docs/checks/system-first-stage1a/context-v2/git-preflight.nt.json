@@ -1,0 +1,13 @@
+{
+  "schema": "sf-cross-platform-git-preflight-leaf-v1",
+  "platform": "nt",
+  "implementation_freeze": "d4ec803417e1e9cfe9120afbce97c676cebbe6ee",
+  "resolved_head": "3fdd1d5092c36630e1cb09c275c834f8f8f25534",
+  "plan_blob": "a3ba7e862cac559fcce70d92b935745a662bbdc8",
+  "primary_root_identity": "exploring-l4-intelligence",
+  "worktree_root_identity": "stage1b-readiness-remediation",
+  "primary_clean": true,
+  "worktree_clean": true,
+  "shared_core_worktree": null,
+  "gitfile_policy": "RELATIVE"
+}
