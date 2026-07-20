@@ -112,7 +112,7 @@
       {
         "path": "scripts/survey/sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "25ff6af7eb47e2b6c0a5d6fb1859bd4fbe6ceed4"
+        "git_blob": "cd1c20323aae4e85a011eeafaa7568f0b98ff143"
       },
       {
         "path": "scripts/survey/sf_current_path_contract.py",
@@ -317,7 +317,7 @@
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "1396119365914cd1e65aa37ad0358655657a086e"
+        "git_blob": "3eff65477561d08526be48c27f119a16f560660c"
       },
       {
         "path": "scripts/survey/test_sf_dual_platform_check.py",
@@ -370,7 +370,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "f2d4a4820b8b46cedff7b8385bd30c296072d113967c14efd5dcfc841220414b"
+    "sha256": "759bdfe8b56bfd668c086caba69c27ccf3664bfe3e6e91ba3e05c8ac523093b2"
   },
   "commands": [
     {

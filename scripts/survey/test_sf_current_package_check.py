@@ -8,9 +8,11 @@ import os
 import shutil
 import stat
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 SCRIPT = Path(__file__).with_name("sf_current_package_check.py")
@@ -112,6 +114,21 @@ class CurrentPackageReportTests(unittest.TestCase):
         self.assertIn('"os": "<OS>"', normalized_windows)
         self.assertIn('"python": "<PYTHON>"', normalized_windows)
 
+    def test_module_import_preserves_callers_sys_path_zero(self) -> None:
+        marker = str(SCRIPT.parent)
+        sys.path.insert(0, marker)
+        try:
+            spec = importlib.util.spec_from_file_location(
+                "sf_current_package_check_import_contract", SCRIPT
+            )
+            assert spec and spec.loader
+            imported = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(imported)
+            self.assertEqual(marker, sys.path[0])
+        finally:
+            if sys.path and sys.path[0] == marker:
+                del sys.path[0]
+
 
 class CurrentPackageTransactionTests(unittest.TestCase):
     FIXTURE_COMMAND = "python scripts/survey/checker.py"
@@ -130,6 +147,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         (self.repo / "scripts/survey/checker.py").write_text(
             "print('PASS')\n", encoding="utf-8"
         )
+        shutil.copy2(SCRIPT, self.repo / "scripts/survey/sf_current_package_check.py")
         (self.repo / "scripts/checks/helper.py").write_text(
             "VALUE = 'trusted'\n", encoding="utf-8"
         )
@@ -138,6 +156,7 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         )
         self.git(
             "add", "README.md", "scripts/survey/checker.py",
+            "scripts/survey/sf_current_package_check.py",
             "scripts/checks/helper.py", "scripts/wiki-sync.sh",
         )
         self.git("commit", "-qm", "fixture")
@@ -155,6 +174,36 @@ class CurrentPackageTransactionTests(unittest.TestCase):
     @staticmethod
     def passing_runner(command: str, _repo: Path):
         return package_check.CommandExecution(0, f"{command}: PASS\n", "")
+
+    def assert_shadow_safe_cli(self, script: Path) -> None:
+        sentinel = self.repo / "shadow-sentinel.txt"
+        environment = os.environ.copy()
+        environment["SF_PACKAGE_SHADOW_SENTINEL"] = str(sentinel)
+        completed = subprocess.run(
+            [sys.executable, str(script), "--check"],
+            cwd=self.repo,
+            env=environment,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        combined = completed.stdout + completed.stderr
+        self.assertEqual(1, completed.returncode, combined)
+        self.assertFalse(sentinel.exists(), combined)
+        self.assertNotIn("SHADOW_SENTINEL_EXECUTED", combined)
+        self.assertIn("untracked local code is forbidden: scripts/survey/json.py", combined)
+
+    def install_shadow_sentinel(self, directory: Path) -> None:
+        (directory / "json.py").write_text(
+            "import os\n"
+            "with open(os.environ['SF_PACKAGE_SHADOW_SENTINEL'], 'w', "
+            "encoding='utf-8') as handle:\n"
+            "    handle.write('SHADOW_SENTINEL_EXECUTED')\n"
+            "print('SHADOW_SENTINEL_EXECUTED')\n",
+            encoding="utf-8",
+        )
 
     def write_stage_commit(self) -> Path:
         result = package_check.run(
@@ -191,6 +240,77 @@ class CurrentPackageTransactionTests(unittest.TestCase):
         self.assertEqual(expected, report.read_bytes())
         self.assertEqual(before_status, self.git("status", "--porcelain=v1").stdout)
         self.assertEqual(before_check_mtime, report.stat().st_mtime_ns)
+        self.assertEqual([], list(report.parent.glob(f".{report.name}.*.bak")))
+
+    def test_postpublish_failure_rolls_back_without_backup_debris(self) -> None:
+        report = self.write_stage_commit()
+        old_bytes = report.read_bytes()
+        old_mode = stat.S_IMODE(report.stat().st_mode)
+
+        with mock.patch.object(
+            package_check, "_trusted_bytes", return_value=b"injected mismatch"
+        ):
+            with self.assertRaisesRegex(
+                package_check.CurrentPackageError,
+                "published report bytes failed verification",
+            ):
+                package_check._atomic_write_report(
+                    self.repo, report, b"replacement report\n"
+                )
+
+        self.assertEqual(old_bytes, report.read_bytes())
+        if os.name == "posix":
+            self.assertEqual(old_mode, stat.S_IMODE(report.stat().st_mode))
+        self.assertEqual([], list(report.parent.glob(f".{report.name}.*.bak")))
+
+    def test_failed_restore_preserves_the_only_recovery_backup(self) -> None:
+        report = self.write_stage_commit()
+        old_bytes = report.read_bytes()
+        old_mode = stat.S_IMODE(report.stat().st_mode)
+        real_replace = os.replace
+        replace_count = 0
+
+        def fail_restore(source: str | os.PathLike[str], target: str | os.PathLike[str]):
+            nonlocal replace_count
+            replace_count += 1
+            if replace_count == 2:
+                raise OSError("injected restore failure")
+            return real_replace(source, target)
+
+        with mock.patch.object(package_check.os, "replace", side_effect=fail_restore):
+            with mock.patch.object(
+                package_check, "_trusted_bytes", return_value=b"injected mismatch"
+            ):
+                with self.assertRaises(package_check.CurrentPackageError) as raised:
+                    package_check._atomic_write_report(
+                        self.repo, report, b"replacement report\n"
+                    )
+
+        backups = list(report.parent.glob(f".{report.name}.*.bak"))
+        self.assertEqual(1, len(backups))
+        backup = backups[0]
+        self.assertEqual(old_bytes, backup.read_bytes())
+        if os.name == "posix":
+            self.assertEqual(old_mode, stat.S_IMODE(backup.stat().st_mode))
+        self.assertEqual(b"replacement report\n", report.read_bytes())
+        message = str(raised.exception)
+        self.assertIn(backup.name, message)
+        self.assertNotIn(str(report.parent), message)
+
+        calls: list[str] = []
+
+        def runner(command: str, _repo: Path):
+            calls.append(command)
+            return package_check.CommandExecution(0, "PASS\n", "")
+
+        self.assertEqual(
+            1,
+            package_check.run(
+                "write", repo=self.repo, commands=(self.FIXTURE_COMMAND,),
+                command_runner=runner,
+            ),
+        )
+        self.assertEqual([], calls)
 
     def test_stale_staged_report_fails_without_rewriting_it(self) -> None:
         report = self.write_stage_commit()
@@ -271,6 +391,31 @@ class CurrentPackageTransactionTests(unittest.TestCase):
             ),
         )
         self.assertEqual([], calls)
+
+    def test_cli_bootstrap_direct_path_does_not_import_untracked_json(self) -> None:
+        self.install_shadow_sentinel(self.repo / "scripts/survey")
+        self.assert_shadow_safe_cli(
+            self.repo / "scripts/survey/sf_current_package_check.py"
+        )
+
+    def test_cli_bootstrap_mixed_case_path_does_not_import_untracked_json(self) -> None:
+        self.install_shadow_sentinel(self.repo / "scripts/survey")
+        if os.name == "nt":
+            script = self.repo / "ScRiPtS/SuRvEy/sf_current_package_check.py"
+        else:
+            mixed = self.repo / "ScRiPtS/SuRvEy"
+            mixed.mkdir(parents=True)
+            shutil.copy2(SCRIPT, mixed / "sf_current_package_check.py")
+            self.install_shadow_sentinel(mixed)
+            script = mixed / "sf_current_package_check.py"
+        self.assert_shadow_safe_cli(script)
+
+    @unittest.skipUnless(os.name == "posix", "symlink alias launch contract")
+    def test_cli_bootstrap_symlink_alias_does_not_import_untracked_json(self) -> None:
+        self.install_shadow_sentinel(self.repo / "scripts/survey")
+        alias = self.repo / "bootstrap-alias"
+        alias.symlink_to(self.repo / "scripts/survey", target_is_directory=True)
+        self.assert_shadow_safe_cli(alias / "sf_current_package_check.py")
 
     def test_untracked_checks_module_fails_before_subprocess(self) -> None:
         (self.repo / "scripts/checks/local_module.py").write_text(

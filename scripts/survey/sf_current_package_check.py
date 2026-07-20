@@ -11,10 +11,10 @@ from __future__ import annotations
 
 import sys
 
-# When invoked as ``python scripts/survey/...``, prevent that directory from
-# shadowing the standard library before the trusted code graph is checked.
-_INITIAL_IMPORT_PATH = sys.path[0].replace("\\", "/").rstrip("/") if sys.path else ""
-if _INITIAL_IMPORT_PATH.endswith("/scripts/survey"):
+# Direct script execution always places an attacker-controllable script directory
+# at sys.path[0]. Remove it before importing anything except built-in ``sys``;
+# module imports retain their caller-managed import path unchanged.
+if __name__ == "__main__" and sys.path:
     del sys.path[0]
 sys.dont_write_bytecode = True
 
@@ -620,6 +620,7 @@ def _atomic_write_report(repo: Path, output: Path, payload: bytes) -> None:
     temporary: Path | None = None
     backup: Path | None = None
     published = False
+    preserve_backup = False
     try:
         descriptor, temporary_name = tempfile.mkstemp(
             prefix=f".{output.name}.", suffix=".tmp", dir=output.parent
@@ -666,14 +667,20 @@ def _atomic_write_report(repo: Path, output: Path, payload: bytes) -> None:
                     output.unlink(missing_ok=True)
                 _fsync_parent(output.parent)
             except OSError as rollback_error:
+                preserve_backup = backup is not None and backup.exists()
+                if preserve_backup:
+                    raise CurrentPackageError(
+                        "report publish rollback failed; recovery backup preserved as "
+                        f"{backup.name}"
+                    ) from rollback_error
                 raise CurrentPackageError(
-                    f"report publish rollback failed: {rollback_error}"
-                )
+                    "report publish rollback failed; recovery backup unavailable"
+                ) from rollback_error
         raise
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
-        if backup is not None:
+        if backup is not None and not preserve_backup:
             backup.unlink(missing_ok=True)
 
 
