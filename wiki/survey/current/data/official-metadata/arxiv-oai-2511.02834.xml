@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:21Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2511.02834" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2511.02834</identifier>
+        <datestamp>2025-11-06</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2511.02834</id>
+        <created>2025-11-05</created>
+            <updated>2025-11-06</updated>
+        <authors>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Huawei</forenames>
+                </author>
+                <author>
+                    <keyname>Shi</keyname>
+                        <forenames>Yunzhi</forenames>
+                </author>
+                <author>
+                    <keyname>Geng</keyname>
+                        <forenames>Tong</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Weijie</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Wei</forenames>
+                </author>
+                <author>
+                    <keyname>Singh</keyname>
+                        <forenames>Ravender Pal</forenames>
+                </author>
+        </authors>
+        <title>Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything</title>
+            <categories>cs.AI cs.CL cs.LG</categories>
+            <comments>16 pages, 7 figures, 14 tables. Under Review</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Multimodal large language models (MLLMs) have shown strong capabilities but remain limited to fixed modality pairs and require costly fine-tuning with large aligned datasets. Building fully omni-capable models that can integrate text, images, audio, and video remains impractical and lacks robust reasoning support. In this paper, we propose an Agent-Omni framework that coordinates existing foundation models through a master-agent system, enabling flexible multimodal reasoning without retraining. The master agent interprets user intent, delegates subtasks to modality-specific agents, and integrates their outputs into coherent responses. Extensive experiments across text, image, audio, video, and omni benchmarks show that Agent-Omni consistently achieves state-of-the-art performance, particularly on tasks requiring complex cross-modal reasoning. Its agent-based design enables seamless integration of specialized foundation models, ensuring adaptability to diverse inputs while maintaining transparency and interpretability. In addition, the framework is modular and easily extensible, allowing future improvements as stronger models become available.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

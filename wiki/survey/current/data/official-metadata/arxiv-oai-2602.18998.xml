@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:37Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2602.18998" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.18998</identifier>
+        <datestamp>2026-02-24</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.18998</id>
+        <created>2026-02-22</created>
+            <updated>2026-02-24</updated>
+        <authors>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Xiaochuan</forenames>
+                </author>
+                <author>
+                    <keyname>Ming</keyname>
+                        <forenames>Ryan</forenames>
+                </author>
+                <author>
+                    <keyname>Setlur</keyname>
+                        <forenames>Pranav</forenames>
+                </author>
+                <author>
+                    <keyname>Paladugu</keyname>
+                        <forenames>Abhijay</forenames>
+                </author>
+                <author>
+                    <keyname>Tang</keyname>
+                        <forenames>Andy</forenames>
+                </author>
+                <author>
+                    <keyname>Kang</keyname>
+                        <forenames>Hao</forenames>
+                </author>
+                <author>
+                    <keyname>Shao</keyname>
+                        <forenames>Shuai</forenames>
+                </author>
+                <author>
+                    <keyname>Jin</keyname>
+                        <forenames>Rong</forenames>
+                </author>
+                <author>
+                    <keyname>Xiong</keyname>
+                        <forenames>Chenyan</forenames>
+                </author>
+        </authors>
+        <title>Benchmark Test-Time Scaling of General LLM Agents</title>
+            <categories>cs.AI cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>LLM agents are increasingly expected to function as general-purpose systems capable of resolving open-ended user requests. While existing benchmarks focus on domain-aware environments for developing specialized agents, evaluating general-purpose agents requires more realistic settings that challenge them to operate across multiple skills and tools within a unified environment. We introduce General AgentBench, a benchmark that provides such a unified framework for evaluating general LLM agents across search, coding, reasoning, and tool-use domains. Using General AgentBench, we systematically study test-time scaling behaviors under sequential scaling (iterative interaction) and parallel scaling (sampling multiple trajectories). Evaluation of ten leading LLM agents reveals a substantial performance degradation when moving from domain-specific evaluations to this general-agent setting. Moreover, we find that neither scaling methodology yields effective performance improvements in practice, due to two fundamental limitations: context ceiling in sequential scaling and verification gap in parallel scaling. Code is publicly available at https://github.com/cxcscmu/General-AgentBench.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

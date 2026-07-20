@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:56Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2604.16456" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2604.16456</identifier>
+        <datestamp>2026-04-21</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2604.16456</id>
+        <created>2026-04-08</created>
+            <updated>2026-04-21</updated>
+        <authors>
+                <author>
+                    <keyname>Modi</keyname>
+                        <forenames>Smit Nautambhai</forenames>
+                </author>
+                <author>
+                    <keyname>Mahajan</keyname>
+                        <forenames>Gandharv</forenames>
+                </author>
+                <author>
+                    <keyname>Wetter</keyname>
+                        <forenames>Marc</forenames>
+                </author>
+                <author>
+                    <keyname>Welles</keyname>
+                        <forenames>Randall</forenames>
+                </author>
+        </authors>
+        <title>EchoChain: A Full-Duplex Benchmark for State-Update Reasoning Under Interruptions</title>
+            <categories>cs.CL cs.AI cs.LG cs.SD</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Real-time voice assistants must revise task state when users interrupt mid-response, but existing spoken-dialog benchmarks largely evaluate turn-based interaction and miss this failure mode. We introduce EchoChain, a controlled benchmark for evaluating full-duplex state-update reasoning under mid-speech interruptions. EchoChain identifies three recurring failure patterns in post-interruption continuations: contextual inertia, interruption amnesia, and objective displacement. The benchmark generates scenario-driven conversations and injects interruptions at a standardized point relative to assistant speech onset, enabling controlled cross-model comparison. In a paired half-duplex control, total failures drop by 40.2% relative to interrupted runs, indicating that many errors are driven by state-update reasoning under interruption rather than task difficulty alone. Across evaluated real-time voice models, no system exceeds a 50% pass rate, showing substantial room for improvement in mid-generation state revision. EchoChain provides a reproducible benchmark for diagnosing state-update reasoning failures in full-duplex voice interaction.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

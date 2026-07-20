@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:10:55Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2506.12928" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2506.12928</identifier>
+        <datestamp>2025-06-17</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2506.12928</id>
+        <created>2025-06-15</created>
+            <updated>2025-06-17</updated>
+        <authors>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>King</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Hanhao</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Siwei</forenames>
+                </author>
+                <author>
+                    <keyname>Xing</keyname>
+                        <forenames>Tianshun</forenames>
+                </author>
+                <author>
+                    <keyname>Ma</keyname>
+                        <forenames>Dehua</forenames>
+                </author>
+                <author>
+                    <keyname>Tang</keyname>
+                        <forenames>Xiangru</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Minghao</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Jian</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Jiaheng</forenames>
+                </author>
+                <author>
+                    <keyname>Jiang</keyname>
+                        <forenames>Yuchen Eleanor</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Changwang</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Chenghua</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Jun</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Ge</forenames>
+                </author>
+                <author>
+                    <keyname>Zhou</keyname>
+                        <forenames>Wangchunshu</forenames>
+                </author>
+        </authors>
+        <title>Scaling Test-time Compute for LLM Agents</title>
+            <categories>cs.AI</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Scaling test time compute has shown remarkable success in improving the reasoning abilities of large language models (LLMs). In this work, we conduct the first systematic exploration of applying test-time scaling methods to language agents and investigate the extent to which it improves their effectiveness. Specifically, we explore different test-time scaling strategies, including: (1) parallel sampling algorithms; (2) sequential revision strategies; (3) verifiers and merging methods; (4)strategies for diversifying rollouts.We carefully analyze and ablate the impact of different design strategies on applying test-time scaling on language agents, and have follow findings: 1. Scaling test time compute could improve the performance of agents. 2. Knowing when to reflect is important for agents. 3. Among different verification and result merging approaches, the list-wise method performs best. 4. Increasing diversified rollouts exerts a positive effect on the agent&#39;s task performance.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

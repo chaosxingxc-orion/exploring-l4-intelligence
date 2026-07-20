@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:08Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2509.25845" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2509.25845</identifier>
+        <datestamp>2026-05-01</datestamp>
+            <setSpec>cs:cs:CV</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2509.25845</id>
+        <created>2026-04-30</created>
+            <updated>2026-05-01</updated>
+        <authors>
+                <author>
+                    <keyname>Chang</keyname>
+                        <forenames>Jinho</forenames>
+                </author>
+                <author>
+                    <keyname>Kim</keyname>
+                        <forenames>Jaemin</forenames>
+                </author>
+                <author>
+                    <keyname>Ye</keyname>
+                        <forenames>Jong Chul</forenames>
+                </author>
+        </authors>
+        <title>Training-Free Reward-Guided Image Editing via Trajectory Optimal Control</title>
+            <categories>cs.CV cs.AI</categories>
+            <comments>Poster in ICLR 2026; 22 pages, 9 figures. The code is available at https://github.com/jinhojsk515/ITOC</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Recent advancements in diffusion and flow-matching models have demonstrated remarkable capabilities in high-fidelity image synthesis. A prominent line of research involves reward-guided guidance, which steers the generation process during inference to align with specific objectives. However, leveraging this reward-guided approach to the task of image editing, which requires preserving the semantic content of the source image while enhancing a target reward, is largely unexplored. In this work, we introduce a novel framework for training-free, reward-guided image editing. We formulate the editing process as a trajectory optimal control problem where the reverse process of a diffusion model is treated as a controllable trajectory originating from the source image, and the adjoint states are iteratively updated to steer the editing process. Through extensive experiments across distinct editing tasks, we demonstrate that our approach significantly outperforms existing inversion-based training-free guidance baselines, achieving a superior balance between reward maximization and fidelity to the source image without reward hacking.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

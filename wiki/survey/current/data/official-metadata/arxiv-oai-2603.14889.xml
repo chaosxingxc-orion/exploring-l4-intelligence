@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:43Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2603.14889" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2603.14889</identifier>
+        <datestamp>2026-05-12</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2603.14889</id>
+        <created>2026-05-11</created>
+            <updated>2026-05-12</updated>
+        <authors>
+                <author>
+                    <keyname>Lu</keyname>
+                        <forenames>Jingyu</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuhan</forenames>
+                </author>
+                <author>
+                    <keyname>Zhuo</keyname>
+                        <forenames>Fan</forenames>
+                </author>
+                <author>
+                    <keyname>Cheng</keyname>
+                        <forenames>Xize</forenames>
+                </author>
+                <author>
+                    <keyname>Pan</keyname>
+                        <forenames>Changhao</forenames>
+                </author>
+                <author>
+                    <keyname>Pu</keyname>
+                        <forenames>Xueyi</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Yifu</forenames>
+                </author>
+                <author>
+                    <keyname>Wen</keyname>
+                        <forenames>Chenyuhao</forenames>
+                </author>
+                <author>
+                    <keyname>Liang</keyname>
+                        <forenames>Tianle</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Zhou</forenames>
+                </author>
+        </authors>
+        <title>SDiaReward: Modeling and Benchmarking Spoken Dialogue Rewards with Modality and Colloquialness</title>
+            <categories>eess.AS cs.CL cs.LG</categories>
+            <comments>Accepted to ACL 2026 Main Conference</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>The rapid evolution of end-to-end spoken dialogue systems demands transcending mere textual semantics to incorporate paralinguistic nuances and the spontaneous nature of human conversation. However, current methods struggle with two critical gaps: the modality gap, involving prosody and emotion, and the colloquialness gap, distinguishing written scripts from natural speech. To address these challenges, we introduce SDiaReward, an end-to-end multi-turn reward model trained on SDiaReward-Dataset, a novel collection of episode-level preference pairs explicitly targeting these gaps. It operates directly on full multi-turn speech episodes and is optimized with pairwise preference supervision, enabling joint assessment of modality and colloquialness in a single evaluator. We further establish ESDR-Bench, a stratified benchmark for robust episode-level evaluation. Experiments demonstrate that SDiaReward achieves state-of-the-art pairwise preference accuracy, significantly outperforming general-purpose audio LLMs. Further analysis suggests that SDiaReward captures relative conversational expressiveness beyond superficial synthesis cues, improving generalization across domains and recording conditions. Code, data, and demos are available at https://github.com/MM-Speech/SDiaReward/.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

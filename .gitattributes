@@ -31,3 +31,7 @@
 *.pth  binary
 *.ckpt binary
 *.safetensors binary
+
+# Official provenance payloads are hash-bound evidence; preserve source bytes
+# and do not treat source-owned whitespace as a repository formatting defect.
+wiki/survey/current/data/official-metadata/** -text -whitespace

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:12:15Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.13598" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.13598</identifier>
+        <datestamp>2026-06-12</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:MA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.13598</id>
+        <created>2026-06-11</created>
+            <updated>2026-06-12</updated>
+        <authors>
+                <author>
+                    <keyname>Tsang</keyname>
+                        <forenames>King Yeung</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Zihao</forenames>
+                </author>
+                <author>
+                    <keyname>Venkataramani</keyname>
+                        <forenames>Vishal</forenames>
+                </author>
+                <author>
+                    <keyname>Shi</keyname>
+                        <forenames>Haizhou</forenames>
+                </author>
+                <author>
+                    <keyname>Ke</keyname>
+                        <forenames>Zixuan</forenames>
+                </author>
+                <author>
+                    <keyname>Yavuz</keyname>
+                        <forenames>Semih</forenames>
+                </author>
+                <author>
+                    <keyname>Joty</keyname>
+                        <forenames>Shafiq</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Hao</forenames>
+                </author>
+        </authors>
+        <title>Reward Modeling for Multi-Agent Orchestration</title>
+            <categories>cs.AI cs.CL cs.LG cs.MA</categories>
+            <comments>Preprint; work in progress</comments>
+            <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>
+            <abstract>Multi-Agent Systems (MAS) built on Large Language Models (LLMs) require effective orchestration to coordinate specialized agents, yet training such orchestrators is hindered by limited supervision and high computational cost. We propose Orchestration Reward Modeling (OrchRM), a self-supervised framework for evaluating orchestration quality without human annotations. OrchRM leverages intermediate artifacts from multi-agent executions to construct win-lose pairs for Bradley-Terry reward model training. Unlike existing MAS test-time scaling and orchestrator training frameworks that rely on costly sub-agent rollouts, OrchRM operates directly at the orchestration level, enabling efficient and high-performing reward-guided orchestrator training and MAS test-time scaling. OrchRM improves training efficiency by up to 10x in token usage while improving MAS test-time scaling performance by up to 8% in accuracy. These gains consistently transfer across multiple domains, including mathematical reasoning, web-based question answering, and multi-hop reasoning, demonstrating orchestration-level reward modeling as a scalable direction for robust multi-agent orchestration. Code will be available at https://github.com/Wang-ML-Lab/OrchRM.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

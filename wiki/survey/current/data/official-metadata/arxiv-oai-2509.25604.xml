@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:04Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2509.25604" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2509.25604</identifier>
+        <datestamp>2025-10-01</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2509.25604</id>
+        <created>2025-09-29</created>
+            <updated>2025-10-01</updated>
+        <authors>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Tianlang</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Minkai</forenames>
+                </author>
+                <author>
+                    <keyname>Leskovec</keyname>
+                        <forenames>Jure</forenames>
+                </author>
+                <author>
+                    <keyname>Ermon</keyname>
+                        <forenames>Stefano</forenames>
+                </author>
+        </authors>
+        <title>RFG: Test-Time Scaling for Diffusion Large Language Model Reasoning with Reward-Free Guidance</title>
+            <categories>cs.CL cs.LG</categories>
+            <comments>27 pages, 3 figures, 2 tables</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Diffusion large language models (dLLMs) have shown great potential in large-scale language modeling, and there is an increasing interest in further improving the capacity to solve complex problems by guiding the reasoning process step by step. Common practice for autoregressive language models typically learns a process reward model with dense annotation for each intermediate step. However, this is challenging for dLLMs where the generation is in an any-order fashion and intermediate states are partially masked sentences. To this end, in this paper, we propose reward-free guidance (RFG), a principled method for guiding the reasoning trajectory of dLLMs without explicit process reward. The key idea of RFG is to parameterize the process reward by log-likelihood ratios of the enhanced and reference dLLMs, where the enhanced model can be easily obtained by any off-the-shelf dLLM that has been post-trained with reinforcement learning (RL) or supervised fine-tuning (SFT). We provide theoretical justification that RFG induces the reward-guided sampling distribution with no additional reward. We conduct comprehensive experiments on four challenging mathematical reasoning and code generation benchmarks using a diverse suite of dLLMs enhanced with various post-training methods. RFG consistently yields significant improvements across all tasks and model types, achieving accuracy gains of up to 9.2%. These findings establish RFG as a general training-free framework that scales test-time reasoning without reliance on external reward models.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

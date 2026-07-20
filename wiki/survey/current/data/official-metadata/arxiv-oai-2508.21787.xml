@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-18T04:46:32Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2508.21787" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2508.21787</identifier>
+        <datestamp>2026-07-14</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2508.21787</id>
+        <created>2026-07-13</created>
+            <updated>2026-07-14</updated>
+        <authors>
+                <author>
+                    <keyname>Leang</keyname>
+                        <forenames>Joshua Ong Jun</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Zheng</forenames>
+                </author>
+                <author>
+                    <keyname>Gema</keyname>
+                        <forenames>Aryo Pradipta</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Sohee</forenames>
+                </author>
+                <author>
+                    <keyname>Kwan</keyname>
+                        <forenames>Wai-Chung</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Xuanli</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Wenda</forenames>
+                </author>
+                <author>
+                    <keyname>Minervini</keyname>
+                        <forenames>Pasquale</forenames>
+                </author>
+                <author>
+                    <keyname>Giunchiglia</keyname>
+                        <forenames>Eleonora</forenames>
+                </author>
+                <author>
+                    <keyname>Cohen</keyname>
+                        <forenames>Shay B.</forenames>
+                </author>
+        </authors>
+        <title>PiCSAR: Probabilistic Confidence Selection And Ranking for Reasoning Chains</title>
+            <categories>cs.CL cs.AI</categories>
+            <journal-ref>Findings of the Association for Computational Linguistics: ACL 2026</journal-ref>
+            <doi>10.18653/v1/2026.findings-acl.1577</doi>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Best-of-n sampling improves the accuracy of large language models (LLMs) and large reasoning models (LRMs) by generating multiple candidate solutions and selecting the one with the highest reward. The key challenge for reasoning tasks is designing a scoring function that can identify correct reasoning chains without access to ground-truth answers. We propose Probabilistic Confidence Selection And Ranking (PiCSAR): a simple, training-free method that scores each candidate generation using the joint log-likelihood of the reasoning and final answer. The joint log-likelihood of the reasoning and final answer naturally decomposes into reasoning confidence and answer confidence. PiCSAR achieves substantial gains across diverse benchmarks (+10.18 on MATH500, +9.81 on AIME2025), outperforming baselines with at least 2x fewer samples in 16 out of 20 comparisons. Our analysis reveals that correct reasoning chains exhibit significantly higher reasoning and answer confidence, justifying the effectiveness of PiCSAR.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

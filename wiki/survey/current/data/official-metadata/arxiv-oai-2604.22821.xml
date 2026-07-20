@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:59Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2604.22821" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2604.22821</identifier>
+        <datestamp>2026-04-29</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2604.22821</id>
+        <created>2026-04-28</created>
+            <updated>2026-04-29</updated>
+        <authors>
+                <author>
+                    <keyname>Pahwa</keyname>
+                        <forenames>Ramit</forenames>
+                </author>
+                <author>
+                    <keyname>Beedu</keyname>
+                        <forenames>Apoorva</forenames>
+                </author>
+                <author>
+                    <keyname>Priye</keyname>
+                        <forenames>Parivesh</forenames>
+                </author>
+                <author>
+                    <keyname>Gandhi</keyname>
+                        <forenames>Rutu</forenames>
+                </author>
+                <author>
+                    <keyname>Takawale</keyname>
+                        <forenames>Saloni</forenames>
+                </author>
+                <author>
+                    <keyname>Baijal</keyname>
+                        <forenames>Aruna</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Zengli</forenames>
+                </author>
+        </authors>
+        <title>Audio2Tool: Speak, Call, Act -- A Dataset for Benchmarking Speech Tool Use</title>
+            <categories>cs.SD cs.LG eess.AS</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Voice assistants increasingly rely on Speech Language Models (SpeechLMs) to interpret spoken queries and execute complex tasks, yet existing benchmarks lack domain breadth, acoustic diversity, and compositional reasoning complexity to evaluate tool-calling performance. We introduce Audio2Tool, a large-scale dataset comprising approximately 30,000 queries designed to assess tool-calling capabilities of SpeechLMs across three primary domains: Smart Car, Smart Home, and Wearables. Our benchmark features a multi-tier complexity hierarchy, ranging from simple direct commands to complex multi-intent and needle-in-a-haystack extraction to isolate distinct failure modes. To ensure realism, we employ zero-shot voice cloning text-to-speech synthesis and diverse noise profiles to simulate in-the-wild conditions. Evaluations of state-of-the-art SpeechLMs and ASR-LLM pipelines show strong performance on simple commands but significant degradation under compositional and acoustic challenges. Code and dataset are publicly available on the project page: https://audio2tool.github.io/.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

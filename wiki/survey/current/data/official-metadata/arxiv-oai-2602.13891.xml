@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:35Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2602.13891" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.13891</identifier>
+        <datestamp>2026-02-17</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.13891</id>
+        <created>2026-02-14</created>
+            <updated>2026-02-17</updated>
+        <authors>
+                <author>
+                    <keyname>Shen</keyname>
+                        <forenames>Maohao</forenames>
+                </author>
+                <author>
+                    <keyname>Jayashankar</keyname>
+                        <forenames>Tejas</forenames>
+                </author>
+                <author>
+                    <keyname>Hanna</keyname>
+                        <forenames>Osama</forenames>
+                </author>
+                <author>
+                    <keyname>Kanda</keyname>
+                        <forenames>Naoyuki</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yancheng</forenames>
+                </author>
+                <author>
+                    <keyname>Žmolíková</keyname>
+                        <forenames>Kateřina</forenames>
+                </author>
+                <author>
+                    <keyname>Xie</keyname>
+                        <forenames>Ruiming</forenames>
+                </author>
+                <author>
+                    <keyname>Moritz</keyname>
+                        <forenames>Niko</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Anfeng</forenames>
+                </author>
+                <author>
+                    <keyname>Gaur</keyname>
+                        <forenames>Yashesh</forenames>
+                </author>
+                <author>
+                    <keyname>Wornell</keyname>
+                        <forenames>Gregory</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Qing</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Jilong</forenames>
+                </author>
+        </authors>
+        <title>GSRM: Generative Speech Reward Model for Speech RLHF</title>
+            <categories>cs.SD cs.AI</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Recent advances in speech language models, such as GPT-4o Voice Mode and Gemini Live, have demonstrated promising speech generation capabilities. Nevertheless, the aesthetic naturalness of the synthesized audio still lags behind that of human speech. Enhancing generation quality requires a reliable evaluator of speech naturalness. However, existing naturalness evaluators typically regress raw audio to scalar scores, offering limited interpretability of the evaluation and moreover fail to generalize to speech across different taxonomies. Inspired by recent advances in generative reward modeling, we propose the Generative Speech Reward Model (GSRM), a reasoning-centric reward model tailored for speech. The GSRM is trained to decompose speech naturalness evaluation into an interpretable acoustic feature extraction stage followed by feature-grounded chain-of-thought reasoning, enabling explainable judgments. To achieve this, we curated a large-scale human feedback dataset comprising 31k expert ratings and an out-of-domain benchmark of real-world user-assistant speech interactions. Experiments show that GSRM substantially outperforms existing speech naturalness predictors, achieving model-human correlation of naturalness score prediction that approaches human inter-rater consistency. We further show how GSRM can improve the naturalness of speech LLM generations by serving as an effective verifier for online RLHF.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

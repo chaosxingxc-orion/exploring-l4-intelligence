@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:10:45Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2310.04406" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2310.04406</identifier>
+        <datestamp>2024-06-07</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:CV</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2310.04406</id>
+        <created>2024-06-06</created>
+            <updated>2024-06-07</updated>
+        <authors>
+                <author>
+                    <keyname>Zhou</keyname>
+                        <forenames>Andy</forenames>
+                </author>
+                <author>
+                    <keyname>Yan</keyname>
+                        <forenames>Kai</forenames>
+                </author>
+                <author>
+                    <keyname>Shlapentokh-Rothman</keyname>
+                        <forenames>Michal</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Haohan</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yu-Xiong</forenames>
+                </author>
+        </authors>
+        <title>Language Agent Tree Search Unifies Reasoning Acting and Planning in Language Models</title>
+            <categories>cs.AI cs.CL cs.CV cs.LG</categories>
+            <comments>Code at https://github.com/lapisrocks/LanguageAgentTreeSearch</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>While language models (LMs) have shown potential across a range of decision-making tasks, their reliance on simple acting processes limits their broad deployment as autonomous agents. In this paper, we introduce Language Agent Tree Search (LATS) -- the first general framework that synergizes the capabilities of LMs in reasoning, acting, and planning. By leveraging the in-context learning ability of LMs, we integrate Monte Carlo Tree Search into LATS to enable LMs as agents, along with LM-powered value functions and self-reflections for proficient exploration and enhanced decision-making. A key feature of our approach is the incorporation of an environment for external feedback, which offers a more deliberate and adaptive problem-solving mechanism that surpasses the constraints of existing techniques. Our experimental evaluation across diverse domains, including programming, interactive question-answering (QA), web navigation, and math, validates the effectiveness and generality of LATS in decision-making while maintaining competitive or improved reasoning performance. Notably, LATS achieves state-of-the-art pass@1 accuracy (92.7%) for programming on HumanEval with GPT-4 and demonstrates gradient-free performance (average score of 75.9) comparable to gradient-based fine-tuning for web navigation on WebShop with GPT-3.5. Code can be found at https://github.com/lapisrocks/LanguageAgentTreeSearch</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

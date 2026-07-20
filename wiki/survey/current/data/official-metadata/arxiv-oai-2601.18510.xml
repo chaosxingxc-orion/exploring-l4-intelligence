@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-15T07:25:57Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2601.18510" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2601.18510</identifier>
+        <datestamp>2026-06-09</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2601.18510</id>
+        <created>2026-06-08</created>
+            <updated>2026-06-09</updated>
+        <authors>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Yibo</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Zijie</forenames>
+                </author>
+                <author>
+                    <keyname>Deng</keyname>
+                        <forenames>Ailin</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Xuan</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Yufei</forenames>
+                </author>
+                <author>
+                    <keyname>Ji</keyname>
+                        <forenames>Shuo</forenames>
+                </author>
+                <author>
+                    <keyname>Cao</keyname>
+                        <forenames>Tri</forenames>
+                </author>
+                <author>
+                    <keyname>Hooi</keyname>
+                        <forenames>Bryan</forenames>
+                </author>
+        </authors>
+        <title>Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates</title>
+            <categories>cs.LG cs.AI</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>While Large Language Model (LLM) agents excel at general tasks, they inherently struggle with continual adaptation due to the frozen weights after deployment. Conventional reinforcement learning (RL) offers a solution but incurs prohibitive computational costs and the risk of catastrophic forgetting. We introduce Just-In-Time Reinforcement Learning (JitRL), a training-free framework that enables test-time policy optimization without any gradient updates. JitRL maintains a dynamic, non-parametric memory of experiences and retrieves relevant trajectories to estimate action advantages on-the-fly. These estimates are then used to directly modulate the LLM&#39;s output logits. We theoretically prove that this additive update rule is the exact closed-form solution to the KL-constrained policy optimization objective. Extensive experiments on WebArena and Jericho demonstrate that JitRL establishes a new state-of-the-art among training-free methods. Crucially, JitRL outperforms the performance of computationally expensive fine-tuning methods (e.g., WebRL) while reducing monetary costs by over 30 times, offering a scalable path for continual learning agents. The code is available at https://github.com/liushiliushi/JitRL.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

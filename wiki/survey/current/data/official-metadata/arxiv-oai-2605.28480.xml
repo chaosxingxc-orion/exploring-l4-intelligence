@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:12:10Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2605.28480" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.28480</identifier>
+        <datestamp>2026-05-28</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.28480</id>
+        <created>2026-05-27</created>
+            <updated>2026-05-28</updated>
+        <authors>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yucheng</forenames>
+                </author>
+                <author>
+                    <keyname>Peng</keyname>
+                        <forenames>Jing</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Hanqi</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Chenghao</forenames>
+                </author>
+                <author>
+                    <keyname>Tu</keyname>
+                        <forenames>Wenming</forenames>
+                </author>
+                <author>
+                    <keyname>Xi</keyname>
+                        <forenames>Yu</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Zhaokai</forenames>
+                </author>
+                <author>
+                    <keyname>Yu</keyname>
+                        <forenames>Kai</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Shuai</forenames>
+                </author>
+        </authors>
+        <title>Audio-Mind: An Auditable Agentic Framework for Audio Understanding</title>
+            <categories>eess.AS cs.SD</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Audio agents extend large audio-language models (LALMs) by decomposing audio questions into tool calls, intermediate evidence, and iterative reasoning steps. However, as LALMs become stronger, the key challenge shifts from enabling tool use to determining when agentic evidence acquisition genuinely benefits audio understanding. We propose Audio-Mind, an auditable and pluggable framework for conditional evidence acquisition in audio understanding. Audio-Mind dynamically combines a strong frontend with planner-guided tool use, preserving frontend judgment when initial evidence is sufficient while acquiring bounded external evidence for questions with unresolved evidence gaps. Experiments on MMAR and MSU-Bench show that Audio-Mind outperforms prior audio-agent baselines, reaching 80.4% accuracy on MMAR and 82.8% accuracy on MSU-Bench. A matched-backbone comparison highlights why this design matters: under strong audio frontends, agentic decomposition can become an orchestration bottleneck when the workflow does not preserve the frontend&#39;s holistic audio-grounded judgment. Beyond accuracy, Audio-Mind produces higher-quality, auditable reasoning traces that expose uncertainty, tool evidence, and answer rationales, offering a potential basis for more reliable audio-QA annotation and error analysis.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:10:47Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2406.12045" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2406.12045</identifier>
+        <datestamp>2024-06-19</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2406.12045</id>
+        <created>2024-06-17</created>
+            <updated>2024-06-19</updated>
+        <authors>
+                <author>
+                    <keyname>Yao</keyname>
+                        <forenames>Shunyu</forenames>
+                </author>
+                <author>
+                    <keyname>Shinn</keyname>
+                        <forenames>Noah</forenames>
+                </author>
+                <author>
+                    <keyname>Razavi</keyname>
+                        <forenames>Pedram</forenames>
+                </author>
+                <author>
+                    <keyname>Narasimhan</keyname>
+                        <forenames>Karthik</forenames>
+                </author>
+        </authors>
+        <title>$τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</title>
+            <categories>cs.AI cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Existing benchmarks do not test language agents on their interaction with human users or ability to follow domain-specific rules, both of which are vital for deploying them in real world applications. We propose $τ$-bench, a benchmark emulating dynamic conversations between a user (simulated by language models) and a language agent provided with domain-specific API tools and policy guidelines. We employ an efficient and faithful evaluation process that compares the database state at the end of a conversation with the annotated goal state. We also propose a new metric (pass^k) to evaluate the reliability of agent behavior over multiple trials. Our experiments show that even state-of-the-art function calling agents (like gpt-4o) succeed on &lt;50% of the tasks, and are quite inconsistent (pass^8 &lt;25% in retail). Our findings point to the need for methods that can improve the ability of agents to act consistently and follow rules reliably.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

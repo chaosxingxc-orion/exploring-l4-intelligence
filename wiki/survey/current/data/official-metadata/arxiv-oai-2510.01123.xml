@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:11Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2510.01123" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2510.01123</identifier>
+        <datestamp>2025-10-02</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2510.01123</id>
+        <created>2025-10-01</created>
+            <updated>2025-10-02</updated>
+        <authors>
+                <author>
+                    <keyname>Madaan</keyname>
+                        <forenames>Lovish</forenames>
+                </author>
+                <author>
+                    <keyname>Didolkar</keyname>
+                        <forenames>Aniket</forenames>
+                </author>
+                <author>
+                    <keyname>Gururangan</keyname>
+                        <forenames>Suchin</forenames>
+                </author>
+                <author>
+                    <keyname>Quan</keyname>
+                        <forenames>John</forenames>
+                </author>
+                <author>
+                    <keyname>Silva</keyname>
+                        <forenames>Ruan</forenames>
+                </author>
+                <author>
+                    <keyname>Salakhutdinov</keyname>
+                        <forenames>Ruslan</forenames>
+                </author>
+                <author>
+                    <keyname>Zaheer</keyname>
+                        <forenames>Manzil</forenames>
+                </author>
+                <author>
+                    <keyname>Arora</keyname>
+                        <forenames>Sanjeev</forenames>
+                </author>
+                <author>
+                    <keyname>Goyal</keyname>
+                        <forenames>Anirudh</forenames>
+                </author>
+        </authors>
+        <title>Rethinking Thinking Tokens: LLMs as Improvement Operators</title>
+            <categories>cs.LG cs.AI</categories>
+            <comments>21 pages</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Reasoning training incentivizes LLMs to produce long chains of thought (long CoT), which among other things, allows them to explore solution strategies with self-checking. This results in higher accuracy, but inflates context length, token/compute cost, and answer latency. We ask: Can current models leverage their metacognition to provide other combinations on this Pareto frontier, e.g., better accuracy with lower context length and/or latency? Abstractly, we view the model as an improvement operator on its own &#34;thoughts&#34; with a continuum of possible strategies. We identify an interesting inference family Parallel-Distill-Refine (PDR), which performs the following: (i) generate diverse drafts in parallel; (ii) distill them into a bounded, textual workspace; and (iii) refine conditioned on this workspace, producing an output that seeds the next round. Importantly, context length (hence compute cost) is controllable via degree of parallelism, and is no longer conflated with the total number of generated tokens. We report PDR instantiations of current models that give better accuracy than long CoT while incurring lower latency. Setting degree of parallelism to 1 yields an interesting subcase, Sequential Refinement (SR) (iteratively improve a single candidate answer) which provides performance superior to long CoT. Success of such model orchestrations raises the question whether further training could shift the Pareto frontier. To this end, we train an 8B thinking model with Reinforcement Learning (RL) to make it consistent with PDR as the inference method. On math tasks with verifiable answers, iterative pipelines surpass single-pass baselines at matched sequential budgets, with PDR delivering the largest gains (e.g., +11% on AIME 2024 and +9% on AIME 2025).</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

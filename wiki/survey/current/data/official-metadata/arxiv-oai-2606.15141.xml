@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:12:17Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.15141" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.15141</identifier>
+        <datestamp>2026-06-16</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.15141</id>
+        <created>2026-06-13</created>
+            <updated>2026-06-16</updated>
+        <authors>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Siyuan</forenames>
+                </author>
+                <author>
+                    <keyname>Zong</keyname>
+                        <forenames>Jian</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Junyu</forenames>
+                </author>
+                <author>
+                    <keyname>Jiang</keyname>
+                        <forenames>Peiyuan</forenames>
+                </author>
+                <author>
+                    <keyname>Yan</keyname>
+                        <forenames>Jiahao</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Jingyu</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Tianrui</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Xiaobao</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Longbiao</forenames>
+                </author>
+                <author>
+                    <keyname>Dang</keyname>
+                        <forenames>Jianwu</forenames>
+                </author>
+        </authors>
+        <title>EChO-Agent: Evidence Chain Orchestration Agent for Audio Reasoning</title>
+            <categories>eess.AS cs.AI cs.SD</categories>
+            <comments>5 pages, 2 figures. Accepted by Interspeech 2026</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>While LALMs show promise on audio question answering, they fail to focus on question-relevant segments of audio and provide a clear, checkable reasoning process when dealing with complex audio reasoning. Reinforcement learning and tool-augmented prompting can help models better relate questions to audio but lack a reliable way to understand, integrate, and self-verify audio segments. To address this gap, we present EChO-Agent, a modular agent framework that reformulates complex audio QA as a planning, tool execution, evidence integration, and answer verification workflow. Experiments on MMAR benchmark show EChO-Agent improves both accuracy and rubric scores over baseline and ablation studies show evidence integration is the key factor.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

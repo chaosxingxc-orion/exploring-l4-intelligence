@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:17Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2510.08191" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2510.08191</identifier>
+        <datestamp>2025-10-10</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2510.08191</id>
+        <created>2025-10-09</created>
+            <updated>2025-10-10</updated>
+        <authors>
+                <author>
+                    <keyname>Cai</keyname>
+                        <forenames>Yuzheng</forenames>
+                </author>
+                <author>
+                    <keyname>Cai</keyname>
+                        <forenames>Siqi</forenames>
+                </author>
+                <author>
+                    <keyname>Shi</keyname>
+                        <forenames>Yuchen</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Zihan</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Lichao</forenames>
+                </author>
+                <author>
+                    <keyname>Qin</keyname>
+                        <forenames>Yulei</forenames>
+                </author>
+                <author>
+                    <keyname>Tan</keyname>
+                        <forenames>Xiaoyu</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Gang</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Zongyi</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Haojia</forenames>
+                </author>
+                <author>
+                    <keyname>Mao</keyname>
+                        <forenames>Yong</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Ke</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Xing</forenames>
+                </author>
+        </authors>
+        <title>Training-Free Group Relative Policy Optimization</title>
+            <categories>cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Recent advances in Large Language Model (LLM) agents have demonstrated their promising general capabilities. However, their performance in specialized real-world domains often degrades due to challenges in effectively integrating external tools and specific prompting strategies. While methods like agentic reinforcement learning have been proposed to address this, they typically rely on costly parameter updates, for example, through a process that uses Supervised Fine-Tuning (SFT) followed by a Reinforcement Learning (RL) phase with Group Relative Policy Optimization (GRPO) to alter the output distribution. However, we argue that LLMs can achieve a similar effect on the output distribution by learning experiential knowledge as a token prior, which is a far more lightweight approach that not only addresses practical data scarcity but also avoids the common issue of overfitting. To this end, we propose Training-Free Group Relative Policy Optimization (Training-Free GRPO), a cost-effective solution that enhances LLM agent performance without any parameter updates. Our method leverages the group relative semantic advantage instead of numerical ones within each group of rollouts, iteratively distilling high-quality experiential knowledge during multi-epoch learning on a minimal ground-truth data. Such knowledge serves as the learned token prior, which is seamlessly integrated during LLM API calls to guide model behavior. Experiments on mathematical reasoning and web searching tasks demonstrate that Training-Free GRPO, when applied to DeepSeek-V3.1-Terminus, significantly improves out-of-domain performance. With just a few dozen training samples, Training-Free GRPO outperforms fine-tuned small LLMs with marginal training data and cost.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

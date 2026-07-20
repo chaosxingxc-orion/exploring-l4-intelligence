@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:31Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2602.12276" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.12276</identifier>
+        <datestamp>2026-02-13</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.12276</id>
+        <created>2026-02-12</created>
+            <updated>2026-02-13</updated>
+        <authors>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Nicholas</forenames>
+                </author>
+                <author>
+                    <keyname>Erdogan</keyname>
+                        <forenames>Lutfi Eren</forenames>
+                </author>
+                <author>
+                    <keyname>John</keyname>
+                        <forenames>Chris Joseph</forenames>
+                </author>
+                <author>
+                    <keyname>Krishnapillai</keyname>
+                        <forenames>Surya</forenames>
+                </author>
+                <author>
+                    <keyname>Mahoney</keyname>
+                        <forenames>Michael W.</forenames>
+                </author>
+                <author>
+                    <keyname>Keutzer</keyname>
+                        <forenames>Kurt</forenames>
+                </author>
+                <author>
+                    <keyname>Gholami</keyname>
+                        <forenames>Amir</forenames>
+                </author>
+        </authors>
+        <title>Agentic Test-Time Scaling for WebAgents</title>
+            <categories>cs.AI cs.CL</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Test-time scaling has become a standard way to improve performance and boost reliability of neural network models. However, its behavior on agentic, multi-step tasks remains less well-understood: small per-step errors can compound over long horizons; and we find that naive policies that uniformly increase sampling show diminishing returns. In this work, we present CATTS, a simple technique for dynamically allocating compute for multi-step agents. We first conduct an empirical study of inference-time scaling for web agents. We find that uniformly increasing per-step compute quickly saturates in long-horizon environments. We then investigate stronger aggregation strategies, including an LLM-based Arbiter that can outperform naive voting, but that can overrule high-consensus decisions. We show that uncertainty statistics derived from the agent&#39;s own vote distribution (entropy and top-1/top-2 margin) correlate with downstream success and provide a practical signal for dynamic compute allocation. Based on these findings, we introduce Confidence-Aware Test-Time Scaling (CATTS), which uses vote-derived uncertainty to allocate compute only when decisions are genuinely contentious. CATTS improves performance on WebArena-Lite and GoBrowse by up to 9.1% over React while using up to 2.3x fewer tokens than uniform scaling, providing both efficiency gains and an interpretable decision rule.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

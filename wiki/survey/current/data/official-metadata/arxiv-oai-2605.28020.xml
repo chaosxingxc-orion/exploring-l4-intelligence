@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:12:08Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2605.28020" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.28020</identifier>
+        <datestamp>2026-05-28</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.28020</id>
+        <created>2026-05-27</created>
+            <updated>2026-05-28</updated>
+        <authors>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Shaobo</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Guo</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Ziyue</forenames>
+                </author>
+                <author>
+                    <keyname>Tang</keyname>
+                        <forenames>Zhengyang</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Qingyang</forenames>
+                </author>
+                <author>
+                    <keyname>Ren</keyname>
+                        <forenames>Xingzhang</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Dayiheng</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Linfeng</forenames>
+                </author>
+        </authors>
+        <title>The Missing Piece in Pre-trained Model Evaluation: Reward-Guided Decoding Unlocks Task-Oriented Behavior Without Parameter Updates</title>
+            <categories>cs.CL</categories>
+            <comments>26 pages, 5 figures, 8 tables</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>With the rapid progress of large language models (LLMs), reliably evaluating the capabilities of pre-trained LLMs has become increasingly important. The challenge is that base pre-trained models are optimized for next-token prediction and often fail to follow instructions or produce well-formed answers under standard prompting and direct decoding. As a result, benchmark performance can conflate model capability with decoding-induced failures to produce task-oriented outputs, while exposing such behavior often relies on costly post-training. Recent decodingonly approaches attempt to reshape output distributions, but such methods can be inefficient and brittle across open-ended tasks. To address these limitations, we propose Energy-Based Decoding (EBD), a training-free, reward-guided framework for activating task-oriented behaviors from frozen pre-trained LLMs across both open-ended and objective tasks. EBD augments decoding with an external lightweight reward model, steering generations toward high-utility responses while anchoring them to the pre-trained model prior through a reward-tilted target distribution. We show that EBD shifts base-model outputs toward more instructionfollowing behavior, increasing behavioral similarity to post-trained counterparts and enabling a fairer inference-time evaluation of accessible pre-trained-model behavior. Empirically, EBD outperforms baselines across five models and six benchmarks, improving Qwen3-8B-Base on AlpacaEval2.0 from 8.8 to 44.5, reducing Mistral-7B Math500 latency by 18.9x relative to prior decoding work, and remaining robust to reward-model size.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

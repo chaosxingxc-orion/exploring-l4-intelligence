@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-12T15:06:17Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2607.07148" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2607.07148</identifier>
+        <datestamp>2026-07-09</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2607.07148</id>
+        <created>2026-07-08</created>
+            <updated>2026-07-09</updated>
+        <authors>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Yuxin</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Donghang</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Guan-Ting</forenames>
+                </author>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Hung-yi</forenames>
+                </author>
+                <author>
+                    <keyname>Qin</keyname>
+                        <forenames>Chengwei</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Zhehuai</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Chen</forenames>
+                </author>
+        </authors>
+        <title>Decoupling Conversational Dynamics in Full-Duplex Spoken Models through Reinforcement Learning</title>
+            <categories>eess.AS</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Recent full-duplex spoken dialogue models have demonstrated compelling progress toward human-like interaction, enabling agents to respond with low latency, produce backchannels, and handle user barge-ins. Yet these improvements in conversational dynamics often come with weaker reasoning and instruction-following abilities, revealing a potential tension between interactive dynamics and intelligence capability. In this paper, we argue that such an intelligence--dynamics trade-off is not fundamental: conversational dynamics can instead be learned as a separate real-time decision policy from human dialogue data. To this end, we propose DuplexPO, a reinforcement learning (RL) framework that decouples when to speak from what to say. It preserves the semantic response capability of an instruction-tuned assistant, while optimizing its temporal interaction behavior over selected high-impact windows from long human conversations. To quantitatively optimize these dynamics, we formulate the Factorized Conversational Dynamics Reward (FCDR) to enable fine-grained temporal credit assignment for turn initiation, backchanneling, yielding, and regularized participation. The policy is then optimized with a GRPO-style objective. Experiments show that DuplexPO substantially improves full-duplex behaviors, including timely backchannels, smooth turn-taking, and barge-in handling, while maintaining strong reasoning and instruction-following performance. Moreover, improvements in dynamics-oriented metrics are reflected in better user experience, suggesting that optimizing conversational timing as a standalone objective can promote more natural full-duplex interaction.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

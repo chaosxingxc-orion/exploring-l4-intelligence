@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:51Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2604.15710" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2604.15710</identifier>
+        <datestamp>2026-04-20</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2604.15710</id>
+        <created>2026-04-17</created>
+            <updated>2026-04-20</updated>
+        <authors>
+                <author>
+                    <keyname>Liang</keyname>
+                        <forenames>Tianle</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Yifu</forenames>
+                </author>
+                <author>
+                    <keyname>Ji</keyname>
+                        <forenames>Shengpeng</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Yijun</forenames>
+                </author>
+                <author>
+                    <keyname>Jia</keyname>
+                        <forenames>Zhiyang</forenames>
+                </author>
+                <author>
+                    <keyname>Lu</keyname>
+                        <forenames>Jingyu</forenames>
+                </author>
+                <author>
+                    <keyname>Zhuo</keyname>
+                        <forenames>Fan</forenames>
+                </author>
+                <author>
+                    <keyname>Pu</keyname>
+                        <forenames>Xueyi</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Yangzhuo</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Zhou</forenames>
+                </author>
+        </authors>
+        <title>VoxMind: An End-to-End Agentic Spoken Dialogue System</title>
+            <categories>cs.SD</categories>
+            <comments>Accepted to ACL 2026 Main Conference.Code and data available at https://github.com/MM-Speech/VoxMind</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Recent end-to-end spoken dialogue models enable natural interaction. However, as user demands become increasingly complex, models that rely solely on conversational abilities often struggle to cope. Incorporating agentic capabilities is therefore essential: by enabling tool use, these models can extend their knowledge boundaries and better solve real-world tasks. Yet, existing research has largely concentrated on core perception and generation, with comparatively limited exploration of such tool-augmented extensions. To bridge this gap, we present VoxMind, an integrated framework designed to equip end-to-end spoken dialogue models with comprehensive agentic abilities. Leveraging our curated 470-hour AgentChat dataset, we incorporate a &#34;Think-before-Speak&#34; mechanism, enabling the model to internalize structured reasoning as a critical prerequisite for planning and response generation. Furthermore, to mitigate latency bottlenecks caused by large-scale tool integration, we propose a Multi-Agent Dynamic Tool Management architecture. By asynchronously delegating retrieval tasks to an auxiliary agent aligned with the main model&#39;s reasoning trajectory, this system effectively decouples inference latency from toolset size. Experimental results confirm that VoxMind achieves significant improvements in agent performance: compared with strong baselines, the task completion rate increases from 34.88% to 74.57%, outperforming Gemini-2.5-Pro on spoken agent tasks while preserving general conversational quality. The source code and associated data are publicly available at https://github.com/MM-Speech/VoxMind.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

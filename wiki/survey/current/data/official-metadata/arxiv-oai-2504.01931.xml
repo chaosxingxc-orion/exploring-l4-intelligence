@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:10:51Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2504.01931" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2504.01931</identifier>
+        <datestamp>2025-07-09</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2504.01931</id>
+        <created>2025-07-08</created>
+            <updated>2025-07-09</updated>
+        <authors>
+                <author>
+                    <keyname>Chakraborty</keyname>
+                        <forenames>Souradip</forenames>
+                </author>
+                <author>
+                    <keyname>Pourreza</keyname>
+                        <forenames>Mohammadreza</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Ruoxi</forenames>
+                </author>
+                <author>
+                    <keyname>Song</keyname>
+                        <forenames>Yiwen</forenames>
+                </author>
+                <author>
+                    <keyname>Scherrer</keyname>
+                        <forenames>Nino</forenames>
+                </author>
+                <author>
+                    <keyname>Huang</keyname>
+                        <forenames>Furong</forenames>
+                </author>
+                <author>
+                    <keyname>Bedi</keyname>
+                        <forenames>Amrit Singh</forenames>
+                </author>
+                <author>
+                    <keyname>Beirami</keyname>
+                        <forenames>Ahmad</forenames>
+                </author>
+                <author>
+                    <keyname>Gu</keyname>
+                        <forenames>Jindong</forenames>
+                </author>
+                <author>
+                    <keyname>Palangi</keyname>
+                        <forenames>Hamid</forenames>
+                </author>
+                <author>
+                    <keyname>Pfister</keyname>
+                        <forenames>Tomas</forenames>
+                </author>
+        </authors>
+        <title>On the Role of Feedback in Test-Time Scaling of Agentic AI Workflows</title>
+            <categories>cs.CL</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Agentic AI workflows (systems that autonomously plan and act) are becoming widespread, yet their task success rate on complex tasks remains low. A promising solution is inference-time alignment, which uses extra compute at test time to improve performance. Inference-time alignment relies on three components: sampling, evaluation, and feedback. While most prior work studies sampling and automatic evaluation, feedback remains underexplored. To study the role of feedback, we introduce Iterative Agent Decoding (IAD), a procedure that repeatedly inserts feedback extracted from different forms of critiques (reward models or AI-generated textual feedback) between decoding steps. Through IAD, we analyze feedback along four dimensions: (1) its role in the accuracy-compute trade-offs with limited inference budget, (2) quantifying the gains over diversity-only baselines such as best-of-N sampling, (3) effectiveness of composing feedback from reward models versus textual critique, and (4) robustness to noisy or low-quality feedback. Across Sketch2Code, Text2SQL, Intercode, and WebShop, we show that IAD with proper integration of high fidelity feedback leads to consistent gains up to 10 percent absolute performance improvement over various baselines such as best-of-N. Our findings underscore feedback as a crucial knob for inference-time alignment of agentic AI workflows with limited inference budget.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

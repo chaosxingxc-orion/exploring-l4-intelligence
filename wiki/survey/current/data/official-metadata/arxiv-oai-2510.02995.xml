@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:04:17Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2510.02995" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2510.02995</identifier>
+        <datestamp>2026-02-16</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2510.02995</id>
+        <created>2026-02-13</created>
+            <updated>2026-02-16</updated>
+        <authors>
+                <author>
+                    <keyname>Wijngaard</keyname>
+                        <forenames>Gijs</forenames>
+                </author>
+                <author>
+                    <keyname>Formisano</keyname>
+                        <forenames>Elia</forenames>
+                </author>
+                <author>
+                    <keyname>Dumontier</keyname>
+                        <forenames>Michel</forenames>
+                </author>
+                <author>
+                    <keyname>Jitsev</keyname>
+                        <forenames>Jenia</forenames>
+                </author>
+        </authors>
+        <title>AudioToolAgent: An Agentic Framework for Audio-Language Models</title>
+            <categories>cs.SD</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Large Audio-Language Models (LALMs) perform well on audio understanding tasks but lack multistep reasoning and tool-calling found in recent Large Language Models (LLMs). This paper presents AudioToolAgent, a framework that coordinates audio-language models as tools via a central LLM agent that accesses tool adapters for audio question answering and speech-to-text. The agent reasons about which tools to invoke, how to formulate follow-up queries, and how to arbitrate conflicting tool outputs, without accessing the audio. Experiments with MMAU, MMAR, and MMAU-Pro show state-of-the-art accuracy: up to 77.50% in MMAU, 77.00% in MMAR, and 61.90% in MMAU-Pro. Shapley-based analysis identifies effective agent-tool combinations. The code and reproduction materials are available at https://github.com/GLJS/AudioToolAgent.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

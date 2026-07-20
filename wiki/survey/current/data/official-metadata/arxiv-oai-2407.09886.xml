@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:10:49Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2407.09886" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2407.09886</identifier>
+        <datestamp>2024-09-24</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2407.09886</id>
+        <created>2024-09-23</created>
+            <updated>2024-09-24</updated>
+        <authors>
+                <author>
+                    <keyname>Kuan</keyname>
+                        <forenames>Chun-Yi</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Chih-Kai</forenames>
+                </author>
+                <author>
+                    <keyname>Huang</keyname>
+                        <forenames>Wei-Ping</forenames>
+                </author>
+                <author>
+                    <keyname>Lu</keyname>
+                        <forenames>Ke-Han</forenames>
+                </author>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Hung-yi</forenames>
+                </author>
+        </authors>
+        <title>Speech-Copilot: Leveraging Large Language Models for Speech Processing via Task Decomposition, Modularization, and Program Generation</title>
+            <categories>eess.AS cs.CL cs.SD</categories>
+            <comments>Accepted to SLT 2024</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>In this work, we introduce Speech-Copilot, a modular framework for instruction-oriented speech-processing tasks that minimizes human effort in toolset construction. Unlike end-to-end methods using large audio-language models, Speech-Copilot builds speech processing-specific toolsets by analyzing pre-collected task instructions and breaking tasks into manageable sub-tasks. It features a flexible agent based on large language models that performs tasks through program generation. Our approach achieves state-of-the-art performance on the Dynamic-SUPERB benchmark, demonstrating its effectiveness across diverse speech-processing tasks. Key contributions include: 1) developing an innovative framework for speech processing-specific toolset construction, 2) establishing a high-performing agent based on large language models, and 3) offering a new perspective on addressing challenging instruction-oriented speech-processing tasks. Without additional training processes required by end-to-end approaches, our method provides a flexible and extendable solution for a wide range of speech-processing applications.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:54Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2604.16453" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2604.16453</identifier>
+        <datestamp>2026-04-21</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>stat:stat:ML</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2604.16453</id>
+        <created>2026-04-07</created>
+            <updated>2026-04-21</updated>
+        <authors>
+                <author>
+                    <keyname>Markovic-Voronov</keyname>
+                        <forenames>Jelena</forenames>
+                </author>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>Wenhui</forenames>
+                </author>
+                <author>
+                    <keyname>Long</keyname>
+                        <forenames>Bo</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Zhipeng</forenames>
+                </author>
+                <author>
+                    <keyname>Gupta</keyname>
+                        <forenames>Suyash</forenames>
+                </author>
+                <author>
+                    <keyname>Behdin</keyname>
+                        <forenames>Kayhan</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Bee-Chung</forenames>
+                </author>
+                <author>
+                    <keyname>Agarwal</keyname>
+                        <forenames>Deepak</forenames>
+                </author>
+        </authors>
+        <title>Sampling for Quality: Training-Free Reward-Guided LLM Decoding via Sequential Monte Carlo</title>
+            <categories>cs.LG cs.AI stat.ML</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>We introduce a principled probabilistic framework for reward-guided decoding in large language models, addressing the limitations of standard decoding methods that optimize token-level likelihood rather than sequence-level quality. Our method defines a reward-augmented target distribution over complete sequences by combining model transition probabilities with prefix-dependent reward potentials. Importantly, the approach is training-free: it leaves model weights unchanged and instead modifies the inference distribution via reward potentials, with all gains arising purely from inference-time sampling. To sample from this distribution, we develop Sequential Monte Carlo algorithms, including a computationally efficient prefix-only variant and a lookahead variant whose intermediate targets match the exact marginals of the full sequence distribution. The framework also integrates resample-move updates with Metropolis-Hastings rejuvenation and supports block-wise generation, subsuming common decoding strategies such as temperature sampling and power-tempered objectives. Empirical results across three 7B models show significant gains. On code generation (HumanEval), our method improves base performance by up to 54.9% and surpasses the strongest sampling baselines by 9.1%-15.3%. On mathematical reasoning (MATH500), it achieves gains of up to 8.8%. Notably, it reaches 87.8% on HumanEval and 78.4% on MATH500 with Qwen2.5-7B, consistently outperforming the reinforcement learning method GRPO.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

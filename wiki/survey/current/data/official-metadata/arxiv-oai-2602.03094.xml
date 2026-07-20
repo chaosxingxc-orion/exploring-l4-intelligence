@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-20T16:11:27Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2602.03094" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.03094</identifier>
+        <datestamp>2026-02-04</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.03094</id>
+        <created>2026-02-03</created>
+            <updated>2026-02-04</updated>
+        <authors>
+                <author>
+                    <keyname>Zhuang</keyname>
+                        <forenames>Yufan</forenames>
+                </author>
+                <author>
+                    <keyname>Singh</keyname>
+                        <forenames>Chandan</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Liyuan</forenames>
+                </author>
+                <author>
+                    <keyname>Shen</keyname>
+                        <forenames>Yelong</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Dinghuai</forenames>
+                </author>
+                <author>
+                    <keyname>Shang</keyname>
+                        <forenames>Jingbo</forenames>
+                </author>
+                <author>
+                    <keyname>Gao</keyname>
+                        <forenames>Jianfeng</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Weizhu</forenames>
+                </author>
+        </authors>
+        <title>Test-time Recursive Thinking: Self-Improvement without External Feedback</title>
+            <categories>cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Modern Large Language Models (LLMs) have shown rapid improvements in reasoning capabilities, driven largely by reinforcement learning (RL) with verifiable rewards. Here, we ask whether these LLMs can self-improve without the need for additional training. We identify two core challenges for such systems: (i) efficiently generating diverse, high-quality candidate solutions, and (ii) reliably selecting correct answers in the absence of ground-truth supervision. To address these challenges, we propose Test-time Recursive Thinking (TRT), an iterative self-improvement framework that conditions generation on rollout-specific strategies, accumulated knowledge, and self-generated verification signals. Using TRT, open-source models reach 100% accuracy on AIME-25/24, and on LiveCodeBench&#39;s most difficult problems, closed-source models improve by 10.4-14.8 percentage points without external feedback.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

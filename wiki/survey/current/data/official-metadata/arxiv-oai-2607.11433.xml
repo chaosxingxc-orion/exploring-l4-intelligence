@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-16T07:38:31Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2607.11433" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2607.11433</identifier>
+        <datestamp>2026-07-14</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2607.11433</id>
+        <created>2026-07-13</created>
+            <updated>2026-07-14</updated>
+        <authors>
+                <author>
+                    <keyname>Ma</keyname>
+                        <forenames>Ming</forenames>
+                </author>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>Yi</forenames>
+                </author>
+                <author>
+                    <keyname>Zhong</keyname>
+                        <forenames>Yiran</forenames>
+                </author>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>Feida</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Weigao</forenames>
+                </author>
+                <author>
+                    <keyname>Shi</keyname>
+                        <forenames>Junhan</forenames>
+                </author>
+                <author>
+                    <keyname>Mei</keyname>
+                        <forenames>Lingrui</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Tianming</forenames>
+                </author>
+                <author>
+                    <keyname>Hoi</keyname>
+                        <forenames>Steven</forenames>
+                </author>
+        </authors>
+        <title>Omni-Decision: A Progressive Evidence-State Agent System for Omni-Modal QA</title>
+            <categories>cs.AI</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Omni-modal evidence-seeking QA requires agents to answer questions whose evidence is sparsely distributed across videos, audio, images, web pages, and computation results. Existing agentic multimodal systems often leave evidence in scratchpads, tool trajectories, or free-form histories, making it difficult to track what has been grounded, what remains missing, and when the evidence is sufficient to answer. We propose Omni-Decision, a training-free evidence-state system that turns omni-modal QA into a query-scoped evidence-closure process. For each query, Omni-Decision maintains a structured evidence state containing confirmed evidence, unresolved conflicts, fact and computation dependencies, and open evidence needs. A shared state view conditions planning, evidence acquisition, validation, repair, and finalization. Heterogeneous observations from media, web, computation, and verification modules are normalized, judged, and committed through deterministic state updates. This design enables targeted evidence acquisition, preserves sparse cross-modal cues, and provides inspectable control over repair and stopping. Omni-Decision achieves 45.6% accuracy on OmniGAIA and 58.3% on WorldSense, improving over the baselines by +27.3 and +30.2 percentage points, respectively. No-state ablations and trajectory audits further support the role of explicit evidence-state control in multi-step omni-modal evidence seeking.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>
