@@ -424,6 +424,27 @@
           "type": "review"
         }
       ]
+    },
+    {
+      "round": 14,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/status.md",
+        "target_current_carrier": "wiki/survey/current/status.md",
+        "target_current_carrier_section": "Current Survey Status",
+        "transfer_rule": "same-carrier-section"
+      },
+      "current_carrier": "wiki/survey/current/status.md",
+      "current_carrier_section": "Current Survey Status",
+      "artifacts": [
+        {
+          "path": "wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md",
+          "git_blob": "dde66b8c50a8100eff24a2117e04966651bde3bc",
+          "type": "review"
+        }
+      ]
     }
   ]
 }

@@ -33,6 +33,12 @@ ROUND13_REVIEW = {
         "reviewer-proposal-design-stage1a-doctoral-review.md"
     ): "6018bc73748383daf4b593b987c2a4bb0ff826d6",
 }
+ROUND14_REVIEW = {
+    (
+        "wiki/audit/system-first-stage1a/round-14/"
+        "stage1a-final-gates-plan-doctoral-adversarial-review.md"
+    ): "dde66b8c50a8100eff24a2117e04966651bde3bc",
+}
 
 
 def blob(number: int) -> str:
@@ -235,6 +241,30 @@ class CampaignAuditIndexRepositoryTests(unittest.TestCase):
         self.assertEqual(ROUND13_REVIEW, registry_pins)
         self.assertEqual("WITHHOLD_STAGE1B", round13["verdict"])
         self.assertEqual("HISTORICAL_COLD", round13["disposition"])
+
+    def test_round14_preserves_plan_review(self) -> None:
+        contract = json.loads(
+            (REPO / "wiki/audit/system-first-stage1a/campaign-index.json")
+            .read_text(encoding="utf-8")
+        )
+        registry = json.loads(
+            (REPO / "wiki/survey/sf-audit-artifact-registry.json")
+            .read_text(encoding="utf-8")
+        )
+        round14 = next(row for row in contract["rounds"] if row["round"] == 14)
+        actual = {
+            artifact["path"]: artifact["git_blob"]
+            for artifact in round14["artifacts"]
+        }
+        self.assertEqual(ROUND14_REVIEW, actual)
+        registry_pins = {
+            artifact["path"]: artifact["git_blob"]
+            for artifact in registry["artifacts"]
+            if artifact["path"] in ROUND14_REVIEW
+        }
+        self.assertEqual(ROUND14_REVIEW, registry_pins)
+        self.assertEqual("WITHHOLD_STAGE1B", round14["verdict"])
+        self.assertEqual("HISTORICAL_COLD", round14["disposition"])
 
     def test_repository_contract_and_generated_index_agree(self) -> None:
         completed = subprocess.run(
