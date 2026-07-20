@@ -11,14 +11,15 @@
   the external reward-guided control-plane program.
 - **Current state:** Stage-1A only. The round-12 correction is committed and registered; schema-v3,
   protocol-v2, context/audit routing, and safe archive have passed their individual/component checks.
-  B9 quality remediation addresses only its identified zero-write and state-wording gaps; Task10
-  integration and B10/B11 final review remain pending. Canonical evidence is
+  The zero-network integration gate, `wiki-sync` dry-run, final adversarial review, and verification
+  before completion remain pending. Canonical evidence is
   `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; none of this is an
-  integrated verdict, independent doctoral verdict, reviewer sign-off, readiness decision, or owner
+  integrated verdict, formal doctoral verdict, reviewer sign-off, readiness decision, or owner
   Stage-1B approval.
-- **Next authorized work:** run Task10's no-network integrated gate and complete B10/B11 final review;
-  only then decide whether to submit the current package for independent re-review. No discovery query,
-  research-model smoke, mapping execution, or prototype before explicit approval.
+- **Next authorized work:** run the zero-network integration gate, `wiki-sync` dry-run, final adversarial
+  review, and verification before completion; only then submit the current package for formal doctoral
+  review. Formal review and owner approval remain pending. No discovery query, research-model smoke,
+  mapping execution, or prototype before explicit approval.
 
 ## W2
 

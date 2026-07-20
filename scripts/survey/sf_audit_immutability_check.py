@@ -20,7 +20,9 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import os
 import re
+import stat
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -175,11 +177,11 @@ def _require_regular(
     return entry
 
 
-def _anchor_values(raw: bytes) -> tuple[int, str]:
+def _anchor_values(raw: bytes, label: str = "staged anchor") -> tuple[int, str]:
     try:
         tree = ast.parse(raw.decode("utf-8"), filename=ANCHOR_RELATIVE)
     except (UnicodeDecodeError, SyntaxError) as error:
-        raise AuditCheckError(f"invalid staged anchor source: {error}") from error
+        raise AuditCheckError(f"invalid {label} source: {error}") from error
     values: dict[str, object] = {}
     wanted = {"REGISTRY_BASELINE_COUNT", "REGISTRY_BASELINE_PREFIX_SHA256"}
     for node in tree.body:
@@ -190,16 +192,16 @@ def _anchor_values(raw: bytes) -> tuple[int, str]:
         for target in targets:
             if isinstance(target, ast.Name) and target.id in wanted:
                 if target.id in values:
-                    raise AuditCheckError(f"duplicate staged anchor {target.id}")
+                    raise AuditCheckError(f"duplicate {label} {target.id}")
                 try:
                     values[target.id] = ast.literal_eval(value_node)
                 except (ValueError, TypeError) as error:
                     raise AuditCheckError(
-                        f"staged anchor {target.id} must be a literal"
+                        f"{label} {target.id} must be a literal"
                     ) from error
     if set(values) != wanted:
         raise AuditCheckError(
-            f"staged anchor must define exactly the required literals; found {sorted(values)}"
+            f"{label} must define exactly the required literals; found {sorted(values)}"
         )
     count = values["REGISTRY_BASELINE_COUNT"]
     prefix = values["REGISTRY_BASELINE_PREFIX_SHA256"]
@@ -210,23 +212,27 @@ def _anchor_values(raw: bytes) -> tuple[int, str]:
     return count, prefix
 
 
-def _registry_artifacts(raw: bytes) -> list[dict[str, str]]:
+def _registry_artifacts(
+    raw: bytes, label: str = "staged registry"
+) -> list[dict[str, str]]:
     try:
         document = loads_json_strict(raw, REGISTRY_RELATIVE)
     except ContextSurfaceError as error:
         raise AuditCheckError(str(error)) from error
     if not isinstance(document, dict) or not isinstance(document.get("artifacts"), list):
-        raise AuditCheckError("registry must be an object containing an artifacts list")
+        raise AuditCheckError(f"{label} must be an object containing an artifacts list")
     artifacts: list[dict[str, str]] = []
     for index, artifact in enumerate(document["artifacts"]):
         if not isinstance(artifact, dict) or set(artifact) != {"path", "git_blob"}:
             raise AuditCheckError(
-                f"registry artifacts[{index}] must contain exactly path/git_blob"
+                f"{label} artifacts[{index}] must contain exactly path/git_blob"
             )
-        path = _canonical_path(artifact["path"], f"registry artifacts[{index}].path")
+        path = _canonical_path(
+            artifact["path"], f"{label} artifacts[{index}].path"
+        )
         pin = artifact["git_blob"]
         if not isinstance(pin, str) or HEX40.fullmatch(pin) is None:
-            raise AuditCheckError(f"registry artifacts[{index}] has invalid Git blob")
+            raise AuditCheckError(f"{label} artifacts[{index}] has invalid Git blob")
         artifacts.append({"path": path, "git_blob": pin})
     return artifacts
 
@@ -290,7 +296,7 @@ def _render_report(
     anchor_relative: str,
 ) -> bytes:
     result = {
-        "schema": "sf-audit-immutability-report-v2",
+        "schema": "sf-audit-immutability-report-v3",
         "check": "sf-audit-immutability",
         "registry": registry_relative,
         "registry_stage0": {
@@ -307,6 +313,7 @@ def _render_report(
             "count": prefix_count,
             "sha256": prefix_sha256,
         },
+        "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
         "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
         "failures": failures,
         "status": "FAIL" if failures else "PASS",
@@ -327,14 +334,30 @@ def expected_report(
     reader = TrustedRepoReader(repo)
     registry_entry = _require_regular(staged, registry_relative, "registry")
     anchor_entry = _require_regular(staged, anchor_relative, "anchor")
+    head_registry_entry = _require_regular(head, registry_relative, "HEAD registry")
+    head_anchor_entry = _require_regular(head, anchor_relative, "HEAD anchor")
     registry_raw = read_blob(registry_entry.blob)
     anchor_raw = read_blob(anchor_entry.blob)
+    head_registry_raw = read_blob(head_registry_entry.blob)
+    head_anchor_raw = read_blob(head_anchor_entry.blob)
     if reader.read_bytes(registry_relative) != registry_raw:
         raise AuditCheckError("registry worktree bytes differ from stage-0 Git blob")
     if reader.read_bytes(anchor_relative) != anchor_raw:
         raise AuditCheckError("anchor worktree bytes differ from stage-0 Git blob")
     artifacts = _registry_artifacts(registry_raw)
     count, expected_prefix = _anchor_values(anchor_raw)
+    head_artifacts = _registry_artifacts(head_registry_raw, "HEAD registry")
+    head_count, head_expected_prefix = _anchor_values(head_anchor_raw, "HEAD anchor")
+    if len(head_artifacts) != head_count:
+        raise AuditCheckError(
+            "HEAD registry/anchor count mismatch: "
+            f"registry={len(head_artifacts)}, anchor={head_count}"
+        )
+    head_actual_prefix = registry_prefix_sha256(head_artifacts, head_count)
+    if head_actual_prefix != head_expected_prefix:
+        raise AuditCheckError(
+            f"HEAD registry prefix mismatch: {head_actual_prefix} != {head_expected_prefix}"
+        )
     if len(artifacts) != count:
         raise AuditCheckError(
             f"registry/anchor count mismatch: registry={len(artifacts)}, anchor={count}"
@@ -344,7 +367,19 @@ def expected_report(
         raise AuditCheckError(
             f"registry prefix mismatch: {actual_prefix} != {expected_prefix}"
         )
-    failures = evaluate(artifacts, head, staged, read_blob, reader.read_bytes)
+    failures: list[str] = []
+    if len(artifacts) not in {head_count, head_count + 1}:
+        failures.append(
+            "registry transaction must preserve the exact HEAD count or append exactly "
+            f"one row: HEAD={head_count}, stage0={len(artifacts)}"
+        )
+    if artifacts[:head_count] != head_artifacts:
+        failures.append("stage-0 registry does not preserve the complete HEAD artifact prefix")
+    if len(artifacts) == head_count and (
+        count != head_count or actual_prefix != head_actual_prefix
+    ):
+        failures.append("unchanged registry transaction does not preserve the HEAD anchor")
+    failures.extend(evaluate(artifacts, head, staged, read_blob, reader.read_bytes))
 
     # Oracle-can-fail proof uses the same binding evaluator.
     wrong = [{"path": artifacts[0]["path"], "git_blob": "0" * 40}]
@@ -364,20 +399,85 @@ def expected_report(
     return report, failures, len(artifacts)
 
 
+def _is_link_or_reparse(metadata: os.stat_result) -> bool:
+    reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+    attributes = getattr(metadata, "st_file_attributes", 0)
+    return stat.S_ISLNK(metadata.st_mode) or bool(attributes & reparse_flag)
+
+
+def _validate_report_path(repo: Path, output_relative: str) -> Path:
+    """Reject a report path containing a symlink/reparse point or escaping repo."""
+
+    try:
+        root = Path(repo).resolve(strict=True)
+        candidate = root.joinpath(*PurePosixPath(output_relative).parts)
+        current = root
+        for part in PurePosixPath(output_relative).parts:
+            current = current / part
+            metadata = os.lstat(current)
+            if _is_link_or_reparse(metadata):
+                raise AuditCheckError(
+                    f"untrusted report path: symlink/reparse component {part}"
+                )
+        resolved = candidate.resolve(strict=True)
+        try:
+            resolved.relative_to(root)
+        except ValueError as error:
+            raise AuditCheckError("report path resolves outside repository") from error
+        metadata = os.lstat(candidate)
+        if _is_link_or_reparse(metadata) or not stat.S_ISREG(metadata.st_mode):
+            raise AuditCheckError("report path is not a trusted regular file")
+        return candidate
+    except AuditCheckError:
+        raise
+    except OSError as error:
+        raise AuditCheckError(f"untrusted report path: {error}") from error
+
+
+def _write_preflight(repo: Path, output_relative: str) -> Path:
+    staged, read_blob = _stage_graph(repo)
+    head = _parse_head(_git_bytes(repo, "ls-tree", "-r", "-z", "HEAD", "--"))
+    report_entry = _require_regular(staged, output_relative, "stage-0 report")
+    head_report_entry = _require_regular(head, output_relative, "HEAD report")
+    if report_entry != head_report_entry:
+        raise AuditCheckError(
+            "report has an uncommitted stage-0 change; commit it before --write"
+        )
+    output = _validate_report_path(repo, output_relative)
+    try:
+        worktree_report = TrustedRepoReader(repo).read_bytes(output_relative)
+    except ContextSurfaceError as error:
+        raise AuditCheckError(str(error)) from error
+    if worktree_report != read_blob(report_entry.blob):
+        raise AuditCheckError(
+            "report worktree bytes differ from clean HEAD/stage-0 report; refusing overwrite"
+        )
+    return output
+
+
+def _verify_written_report(repo: Path, output_relative: str, expected: bytes) -> None:
+    _validate_report_path(repo, output_relative)
+    try:
+        actual = TrustedRepoReader(repo).read_bytes(output_relative)
+    except ContextSurfaceError as error:
+        raise AuditCheckError(str(error)) from error
+    if actual != expected:
+        raise AuditCheckError("written report failed post-write byte verification")
+
+
 def run(
     mode: str,
     *,
     repo: Path = REPO,
     registry_relative: str = REGISTRY_RELATIVE,
     anchor_relative: str = ANCHOR_RELATIVE,
-    output_relative: str = OUT_RELATIVE,
 ) -> int:
     """Run deterministic write or zero-write check mode."""
 
     if mode not in {"check", "write"}:
         raise ValueError(f"unsupported mode: {mode}")
     repo = Path(repo)
-    output_relative = _canonical_path(output_relative, "report path")
+    output_relative = OUT_RELATIVE
     expected, failures, registered = expected_report(
         repo=repo,
         registry_relative=registry_relative,
@@ -386,7 +486,13 @@ def run(
     output = repo.joinpath(*output_relative.split("/"))
     report_failure: str | None = None
     if mode == "write":
-        atomic_write_bytes(output, expected)
+        if not failures:
+            try:
+                output = _write_preflight(repo, output_relative)
+                atomic_write_bytes(output, expected)
+                _verify_written_report(repo, output_relative, expected)
+            except AuditCheckError as error:
+                report_failure = str(error)
     else:
         staged, read_blob = _stage_graph(repo)
         report_entry = _require_regular(staged, output_relative, "tracked report")

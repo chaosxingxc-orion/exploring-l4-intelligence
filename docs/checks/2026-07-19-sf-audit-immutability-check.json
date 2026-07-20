@@ -1,5 +1,5 @@
 {
-  "schema": "sf-audit-immutability-report-v2",
+  "schema": "sf-audit-immutability-report-v3",
   "check": "sf-audit-immutability",
   "registry": "wiki/survey/sf-audit-artifact-registry.json",
   "registry_stage0": {
@@ -16,6 +16,7 @@
     "count": 78,
     "sha256": "7f6091334de33bceccb7d566812723f2b2d90f6ec126746a24cf855f520b9f02"
   },
+  "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
   "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
   "failures": [],
   "status": "PASS"

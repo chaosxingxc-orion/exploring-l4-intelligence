@@ -6,6 +6,63 @@
 
 ---
 
+### 2026-07-20（续73）· Stage-1A readiness 恢复 OPEN；稳定集成与终审门完成后方可提交正式复审
+
+#### Context
+
+续72 在同一条记录中既确立 protocol-v2 与永久审计路由，又依据内部敌意复审“0 Critical /
+0 Important”推导修复包“可提交正式独立复审”。后续核验表明，组件级通过不能代替整包集成、
+同步与终审证据，因此该状态结论过早。续72 对物理归档 provenance 的表述也把 Git blob 与
+SHA-256 清单并列为归档证明，而实际归档清单以 source、destination、Git mode 与 Git blob 记录
+迁移，Git blob 才是条目字节身份正典。
+
+#### Decision
+
+Stage-1A readiness 恢复为 **OPEN**。正式提交博士级复审前，必须依次完成 zero-network
+integration gate、`wiki-sync` dry-run、final adversarial review 与 verification before
+completion；现有组件级机器结果不得聚合改写为整包 ready。正式博士级复审与 owner 批准均仍
+待取得，Stage-1B 未开始且未获授权。protocol-v2、永久 AUDIT 路由与 ARCHIVE 冷证据结构继续有效。
+
+#### Rationale
+
+ready 是跨组件、跨平台、同步与审查结论共同支撑的状态，不是若干局部 PASS 的同义词。把状态维持
+OPEN，能阻止内部自检被误读为外部签署，也能让有限上下文的 AI 从 HOT/CURRENT 直接识别剩余稳定
+门禁。归档 provenance 同时回到 Git 对象语义：迁移身份由路径转换、mode 与 blob 共同说明，不把
+未列入归档计划的 SHA-256 说成条目身份。
+
+#### Consequences
+
+HOT/CURRENT 只能报告上述四项稳定门禁的真实完成情况；在全部通过前，不得出现“可提交”“就绪”或
+Stage-1B 已放行的状态措辞。门禁完成也只允许提交正式复审，不自动产生博士级签署或 owner 阶段授权。
+归档审计引用 `archive-plan.json` 与 archive index 中逐项记录的 source、destination、Git mode 与
+Git blob，并以移动前后 mode/blob 相同证明 byte-preserving move。
+
+#### Purpose chain
+
+为了可信地开展不触碰研究模型的 systematic mapping，Stage-1A 必须先给出可复核、可同步、可终审
+的完整执行边界；为了不让局部证据越权升级为阶段状态，readiness 必须由稳定集成门与正式权限门
+分层产生；所以当前保持 OPEN，先完成零网络集成、同步演练、最终敌意复审与完成前验证，再申请正式
+博士级复审与 owner 授权。
+
+#### Provenance
+
+续72 的提交态证据为 `(401954c, 111b3aabb9d8c97f530f028b483f7d26276a4adf)`；归档计划与
+archive index 在当前基线的 Git blobs 分别为 `87cd0e890f874eafb314c525102223c3366cae06` 与
+`5783fe4bccf903d885b4c1eecb8f3d414e852332`。本 correction scope 的 discovery query / research
+model / smoke 均为 0，`INHERITED_PRIOR_EXPOSURE` 账本保持不变；这里不生成新的科学证据等级。
+
+#### Invalidation conditions
+
+若四项稳定门禁任一失败或 exposure 变化，readiness 继续为 OPEN 并原位修复 HOT/CURRENT；只有四项
+全部通过后，才可把状态更新为“可提交正式博士级复审”。只有正式博士级复审与 owner 明示授权到达后，
+才可另行更新 Stage-1B 权限状态；任一新 blocker 或新裁决均触发再次校正。
+
+#### Supersedes
+
+本条仅取代续72 Consequences 中“内部敌意复审为 0 Critical / 0 Important”足以支撑“修复包可提交
+正式独立复审”的当前状态结论；不改写续72，不取代其中 protocol-v2、AUDIT/ARCHIVE 路由及其他历史
+决定。归档 provenance 的 Git blob 身份口径由本条校正。
+
 ### 2026-07-20（续72）· Stage-1A 当前真理整编为 protocol-v2 + 永久审计路由；schema-v3 修复进入独立复审前状态
 
 #### Context
@@ -37,10 +94,9 @@ AUDIT 与 byte-preserving ARCHIVE 又保留“发生过什么”和精确 proven
 
 默认加载面保持三项，当前 survey 从 stable router/manifest 定向加载，历史只经 campaign/archive
 index 精确取证。schema-v3 v6 报告、Windows/WSL occupancy equality、protocol-v2 byte equivalence、
-current/AI manifest、audit immutability 与 archive safety 目前只分别完成了单项门/组件级检查；
-B9 质量复审所指出的 zero-write 与状态闭合缺口是本次更正的范围，但这不把单项结果聚合为 readiness。
-Task10 integrated gate 与 B10/B11 final review 仍未完成；在它们完成前不得声称修复包可提交或已就绪。
-doctoral re-review、reviewer signature 与 owner Stage-1B execution approval 仍未取得，Stage-1B 未开始。
+current/AI manifest、audit immutability 与 archive safety 的现有机器门均通过；本次实现的内部敌意
+复审为 0 Critical / 0 Important。该结论只说明修复包可提交正式独立复审：doctoral re-review、
+reviewer signature 与 owner Stage-1B execution approval 仍未取得，Stage-1B 未开始。
 
 #### Purpose chain
 
@@ -58,8 +114,7 @@ systematic mapping 确认问题与证据边界；为了让 mapping 可复核，S
 机器正典的证据对是
 `(c81380d, 3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd)`；七项物理归档
 由提交 `9cc36da` 及 `wiki/archive/working/system-first-stage1a/INDEX.md` / `archive-plan.json`
-中逐项列出的 source、destination、Git mode 与 Git blob 清单证明；移动前后 mode/blob 相同，
-不以 SHA-256 充当归档条目身份。
+所钉的原 Git blobs 与 SHA-256 清单证明。
 本 repair scope 的 discovery query / research-model / smoke 均为 0，
 `INHERITED_PRIOR_EXPOSURE` 保持原账不变。
 

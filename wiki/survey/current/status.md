@@ -6,11 +6,12 @@
   `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; Windows/WSL occupancy,
   protocol-v2 frozen-query bytes, current/context manifests, campaign/audit immutability, and archive
   safety have each passed their individual checks.
-- Package status: B9 quality remediation addresses only its identified component gaps; Task10 integrated
-  gate and B10/B11 final review remain pending. No integrated readiness verdict exists.
+- Package status: the zero-network integration gate, `wiki-sync` dry-run, final adversarial review, and
+  verification before completion remain pending. No integrated readiness verdict exists.
 - Active review transaction: `wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md`;
   older rounds are cold-routed by `wiki/audit/system-first-stage1a/INDEX.md`.
-- Current blockers: Task10/B10/B11, independent doctoral re-review, reviewer sign-off, and owner
+- Current blockers: those four stable gates, formal doctoral review, reviewer sign-off, and owner
   Stage-1B execution authorization.
-- Next action: run Task10 and B10/B11 without predicting their result; only then decide whether to seek
-  the independent round-12 verdict. Do not execute Stage-1B.
+- Next action: run the four stable gates without predicting their result; only then submit the round-12
+  package for formal doctoral review. Formal review and owner approval remain pending. Do not execute
+  Stage-1B.

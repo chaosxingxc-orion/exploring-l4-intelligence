@@ -37,16 +37,18 @@ summary `14/14 PASS`，input snapshot
 `8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d`）。平台报告在同一
 `evidence-v6/` release 目录；只以报告字段和 manifest hash 为准，不从本页复制 occupancy 数字。
 protocol-v2 与冻结 65-query bytes 等价，current/AI manifest、campaign index、audit immutability
-与 archive safety 目前分别完成单项门/组件级检查。当前更正仅针对 B9 质量复审的 zero-write 与
-状态闭合缺口，但 Task10 integrated gate 和 B10/B11 final review 尚未完成；不得把单项通过聚合为
-readiness。这些技术结果不是独立 doctoral verdict、签署或就绪声明。
+与 archive safety 目前分别完成单项门/组件级检查；不得把这些单项通过聚合为 readiness。zero-network
+integration gate、`wiki-sync` dry-run、final adversarial review 与 verification before completion
+仍待完成。这些技术结果不是正式 doctoral verdict、owner 授权、签署或就绪声明。
 
 ## 4. 剩余阻塞
 
-1. Task10 无网络 integrated gate 与 B10/B11 final review 尚未完成；
-2. 独立复审必须核对本批修复、protocol-v2 等价性、context manifest 与归档结果，并给出正式结论；
+1. zero-network integration gate、`wiki-sync` dry-run、final adversarial review 与 verification before
+   completion 尚未完成；
+2. 正式 doctoral review 必须核对本批修复、protocol-v2 等价性、context manifest 与归档结果，
+   并给出正式结论；
 3. reviewer sign-off 尚不存在；
-4. reviewer 放行后仍需 owner 明确给出 Stage-1B execution approval。
+4. 正式复审放行后仍需 owner 明确给出 Stage-1B execution approval。
 
 任一项未闭合都维持 Stage-1A。自动检查通过不能代签。
 
@@ -68,9 +70,10 @@ prototype 或 Stage-1B mapping execution。此零值只描述本次修复，不�
 
 ## 7. 下一授权动作
 
-**下一授权动作**仅是：运行 Task10 无网络 integrated gate，并完成 B10/B11 final review；只有这些
-门实际通过后，才重新判断是否把已注册的 round-12 correction 与当前证据包提交独立复审。不得预言
-这些门的结果；等待 reviewer 正式结论/signature 与 owner 的显式执行裁决，在此之前不执行 Stage-1B。
+**下一授权动作**仅是：依次运行 zero-network integration gate、`wiki-sync` dry-run、final
+adversarial review 与 verification before completion；只有这些门实际通过后，才可把已注册的
+round-12 correction 与当前证据包提交正式 doctoral review。不得预言这些门的结果；等待正式复审
+结论/signature 与 owner 的显式执行裁决，在此之前不执行 Stage-1B。
 
 ## 8. 失效条件
 
