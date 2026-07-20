@@ -1,0 +1,78 @@
+{
+  "schema": "b8-history-identity-rewrite-v1",
+  "scope": "B8 identity correction only; no Stage-1B authorization",
+  "base_commit": "0f21a26adcf2e73be2897f7a3b8f0f4a8cef2ef6",
+  "correct_identity": {
+    "name": "Charmer",
+    "email": "Charmerfms@songwriter.net"
+  },
+  "backup_refs": {
+    "refs/backup/b8-pre-identity-rewrite-82bee4c": "82bee4c36220716f87187f450e7a58db3ab1056d",
+    "refs/backup/b8-pre-identity-rewrite-with-fixes-ac5ec7c": "ac5ec7c637baa66067f7193256d04c74a1c36f27",
+    "refs/original/refs/heads/codex/stage1b-readiness-remediation": "ac5ec7c637baa66067f7193256d04c74a1c36f27"
+  },
+  "rewritten_commits": [
+    {
+      "old": "e4c40d58194c7c80b928bc73db17b95fcf3eb28c",
+      "new": "71eb85d08e0e56f9de04387f069bb7a447e82b08",
+      "tree": "6cc5f4b74144c8ee1de996a9b405feba4662be6d",
+      "message": "fix(docs): enforce staged context lifecycle contract",
+      "author_date": "2026-07-20T06:13:21+08:00",
+      "committer_date": "2026-07-20T06:13:21+08:00"
+    },
+    {
+      "old": "0355f6142eba203f0101a13f3a95f7de21cb488e",
+      "new": "2ed22c0d5457addc24bddf70940fab0e937c4365",
+      "tree": "c7369903942762a7239c317b8829b2591c14a66c",
+      "message": "fix(docs): close context transaction identity gaps",
+      "author_date": "2026-07-20T06:44:09+08:00",
+      "committer_date": "2026-07-20T06:44:09+08:00"
+    },
+    {
+      "old": "9900fecea6c9b80d7e6e2341d0e6944d518ea456",
+      "new": "2a3ecc05e08ea99ee1a2c9b10538e8217a5d2dfd",
+      "tree": "067b0898e42c63426e1ab1846d3bb20b92febd87",
+      "message": "fix(docs): make audit anchor growth atomic",
+      "author_date": "2026-07-20T07:00:14+08:00",
+      "committer_date": "2026-07-20T07:00:14+08:00"
+    },
+    {
+      "old": "0fd85f0a920f0120cc86000bf5f54cd42cdc0cf4",
+      "new": "98f4a78ca0f189fd8c1371027b9a5bf96ec88626",
+      "tree": "cd3a42342275b97b69f7a97baf0d044a7775a3b1",
+      "message": "docs(audit): issue stage1a readiness correction",
+      "author_date": "2026-07-20T07:14:17+08:00",
+      "committer_date": "2026-07-20T07:14:17+08:00"
+    },
+    {
+      "old": "d28c4417d41b78be9ff1dcc8b02fb1021f966628",
+      "new": "3a221d50e28cd8ad3019f3f21abe5bc8f1a01f84",
+      "tree": "2f6c7b93027e6e7e5532f2ed03151e0fd5291b45",
+      "message": "audit(wiki): register round12 correction blob",
+      "author_date": "2026-07-20T07:15:25+08:00",
+      "committer_date": "2026-07-20T07:15:25+08:00"
+    },
+    {
+      "old": "82bee4c36220716f87187f450e7a58db3ab1056d",
+      "new": "b2cc0d752edf48fd7ce59448a039e4ec315a811a",
+      "tree": "3b78890cbffec95126bbc2b9782accc03e766c3e",
+      "message": "fix(docs): keep audit gates portable after registry growth",
+      "author_date": "2026-07-20T07:31:25+08:00",
+      "committer_date": "2026-07-20T07:31:25+08:00"
+    }
+  ],
+  "unchanged_identity_descendant": {
+    "old": "ac5ec7c637baa66067f7193256d04c74a1c36f27",
+    "new": "ac1f51b79565298035ba0dfe8dcae5c192b684a4",
+    "tree": "87294f9fcd6adb332dd9ced016977a279251f452",
+    "message": "fix(audit): close b8 rereview blockers",
+    "author_date": "2026-07-20T08:02:05+08:00",
+    "committer_date": "2026-07-20T08:02:05+08:00"
+  },
+  "correction_artifact": {
+    "path": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md",
+    "git_blob_before": "dc1e32ed6993e3e5d2fd21027eabb78f8c968b9f",
+    "git_blob_after": "dc1e32ed6993e3e5d2fd21027eabb78f8c968b9f",
+    "registry_pin_unchanged": true
+  }
+}
