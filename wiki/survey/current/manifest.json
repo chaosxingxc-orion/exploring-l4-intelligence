@@ -23,9 +23,16 @@
       "load_policy": "targeted"
     },
     {
+      "role": "campaign_audit_semantic_anchor",
+      "path": "scripts/checks/ai_context_inventory.py",
+      "sha256": "aed53c3e836c19079bd0c3b567fd1a88ee7a7549639945e30ec99a661681e5e5",
+      "mutability": "normal-code-lifecycle",
+      "load_policy": "machine-only"
+    },
+    {
       "role": "campaign_audit_index_checker",
       "path": "scripts/survey/sf_campaign_audit_index.py",
-      "sha256": "d7ab389cff720aa48b44475f15d492f9916ff8abc62c71f209d7f69f7bd0b728",
+      "sha256": "19fbe207d8e61f35d3cbf9ed498840701d45e267d5f0572a8c5ceba0c50bc673",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
@@ -39,14 +46,14 @@
     {
       "role": "campaign_audit_index",
       "path": "wiki/audit/system-first-stage1a/INDEX.md",
-      "sha256": "36f9d317b1294eb2ad5ef8a7c13de1f76df389100ef7f0c7071d569e88622462",
+      "sha256": "70414d4d7afd218e6fc9c920b6903bfa3bf29cca280f8195ce7dc7c84d26e968",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },
     {
       "role": "campaign_audit_contract",
       "path": "wiki/audit/system-first-stage1a/campaign-index.json",
-      "sha256": "43070cb07d8cd41e5b5c4c7940340ce84872ceec83165d59ff3db2bc629fdc4c",
+      "sha256": "213444106ec83160c55c37246a9ffdaaa8e65879fa2bd7cc23eaa534a4f51540",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },

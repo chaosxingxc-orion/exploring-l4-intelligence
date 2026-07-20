@@ -204,6 +204,16 @@ class CurrentManifestContractTests(unittest.TestCase):
             spec.path: f"payload:{spec.path}\n".encode("utf-8")
             for spec in self.manifest.BASE_FILE_SPECS
         }
+        anchor_path = "scripts/checks/ai_context_inventory.py"
+        if anchor_path in self.payloads:
+            self.payloads[anchor_path] = REPO.joinpath(*anchor_path.split("/")).read_bytes()
+        for carrier_path in (
+            "wiki/survey/current/protocol.md",
+            "wiki/survey/current/status.md",
+        ):
+            self.payloads[carrier_path] = REPO.joinpath(
+                *carrier_path.split("/")
+            ).read_bytes()
         self.blobs = {}
         self.base_index = {}
         for path, raw in self.payloads.items():
@@ -392,6 +402,16 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             spec.path: f"payload:{spec.path}\n".encode("utf-8")
             for spec in self.manifest.BASE_FILE_SPECS
         }
+        anchor_path = "scripts/checks/ai_context_inventory.py"
+        if anchor_path in self.payloads:
+            self.payloads[anchor_path] = REPO.joinpath(*anchor_path.split("/")).read_bytes()
+        for carrier_path in (
+            "wiki/survey/current/protocol.md",
+            "wiki/survey/current/status.md",
+        ):
+            self.payloads[carrier_path] = REPO.joinpath(
+                *carrier_path.split("/")
+            ).read_bytes()
         self.blobs = {}
         self.index = {}
         for path, raw in self.payloads.items():
@@ -510,6 +530,33 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         index[index_path] = self.manifest.GitIndexEntry("100644", stale_blob)
         with self.assertRaisesRegex(
             self.manifest.CurrentManifestError, "campaign-audit-index-stale"
+        ):
+            self.build(index)
+
+    def test_campaign_semantic_anchor_is_unique_literal_and_stage_bound(self):
+        anchor_path = "scripts/checks/ai_context_inventory.py"
+        self.assertIn(anchor_path, self.index)
+        raw = self.payloads[anchor_path]
+        count, prefix = self.manifest._campaign_semantic_anchor_from_source(raw)
+        self.assertEqual(41, count)
+        self.assertRegex(prefix, r"^[0-9a-f]{64}$")
+
+        duplicate = raw + b"\nCAMPAIGN_INDEX_BASELINE_COUNT = 41\n"
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "campaign-anchor-invalid"
+        ):
+            self.manifest._campaign_semantic_anchor_from_source(duplicate)
+
+        index = dict(self.index)
+        self.add_audit_contract(index)
+        tampered = raw.replace(prefix.encode("ascii"), b"0" * 64)
+        self.assertNotEqual(raw, tampered)
+        tampered_blob = git_blob_oid(tampered)
+        self.payloads[anchor_path] = tampered
+        self.blobs[tampered_blob] = tampered
+        index[anchor_path] = self.manifest.GitIndexEntry("100644", tampered_blob)
+        with self.assertRaisesRegex(
+            self.manifest.CurrentManifestError, "campaign baseline prefix"
         ):
             self.build(index)
 

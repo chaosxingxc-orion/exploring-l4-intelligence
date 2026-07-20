@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -38,6 +39,7 @@ import sf_campaign_audit_index as campaign_audit_index  # noqa: E402
 
 OUTPUT_RELATIVE_PATH = "wiki/survey/current/manifest.json"
 OUTPUT_PATH = REPO.joinpath(*OUTPUT_RELATIVE_PATH.split("/"))
+CAMPAIGN_SEMANTIC_ANCHOR_PATH = "scripts/checks/ai_context_inventory.py"
 
 
 class CurrentManifestError(RuntimeError):
@@ -111,6 +113,12 @@ BASE_FILE_SPECS = (
     FileSpec(
         "dual_platform_aggregate_checker",
         "scripts/survey/sf_dual_platform_check.py",
+        "normal-code-lifecycle",
+        "machine-only",
+    ),
+    FileSpec(
+        "campaign_audit_semantic_anchor",
+        CAMPAIGN_SEMANTIC_ANCHOR_PATH,
         "normal-code-lifecycle",
         "machine-only",
     ),
@@ -446,6 +454,59 @@ def _staged_bytes(
     return raw
 
 
+def _campaign_semantic_anchor_from_source(raw: bytes) -> tuple[int, str]:
+    """Extract one module-level literal baseline pair from exact staged source."""
+
+    try:
+        source = raw.decode("utf-8")
+        tree = ast.parse(source, filename=CAMPAIGN_SEMANTIC_ANCHOR_PATH)
+    except (UnicodeDecodeError, SyntaxError) as error:
+        raise CurrentManifestError(f"campaign-anchor-invalid: {error}") from error
+
+    names = {
+        "CAMPAIGN_INDEX_BASELINE_COUNT": [],
+        "CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256": [],
+    }
+    module_nodes = set(tree.body)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            targets = [target.id for target in node.targets if isinstance(target, ast.Name)]
+            value = node.value
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            targets = [node.target.id]
+            value = node.value
+        else:
+            continue
+        for name in targets:
+            if name in names:
+                names[name].append((node, value))
+
+    values: dict[str, object] = {}
+    for name, assignments in names.items():
+        if len(assignments) != 1:
+            raise CurrentManifestError(
+                f"campaign-anchor-invalid: {name} must have exactly one assignment"
+            )
+        node, value_node = assignments[0]
+        if node not in module_nodes or not isinstance(value_node, ast.Constant):
+            raise CurrentManifestError(
+                f"campaign-anchor-invalid: {name} must be one module-level literal"
+            )
+        values[name] = value_node.value
+
+    count = values["CAMPAIGN_INDEX_BASELINE_COUNT"]
+    prefix = values["CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256"]
+    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        raise CurrentManifestError(
+            "campaign-anchor-invalid: baseline count must be a positive integer"
+        )
+    if not isinstance(prefix, str) or re.fullmatch(r"[0-9a-f]{64}", prefix) is None:
+        raise CurrentManifestError(
+            "campaign-anchor-invalid: baseline prefix must be lowercase SHA-256"
+        )
+    return count, prefix
+
+
 def _validate_campaign_gate(
     index_inventory: dict[str, GitIndexEntry],
     read_blob: Callable[[str], bytes],
@@ -459,7 +520,22 @@ def _validate_campaign_gate(
         contract = strict_json_loads(
             _staged_bytes(contract_path, index_inventory, read_blob), contract_path
         )
-        campaign_audit_index.validate_contract(registry, contract)
+        baseline_count, baseline_prefix = _campaign_semantic_anchor_from_source(
+            _staged_bytes(
+                CAMPAIGN_SEMANTIC_ANCHOR_PATH, index_inventory, read_blob
+            )
+        )
+        carrier_documents = {
+            path: _staged_bytes(path, index_inventory, read_blob)
+            for path in campaign_audit_index.EXPECTED_CARRIERS.values()
+        }
+        campaign_audit_index.validate_contract(
+            registry,
+            contract,
+            carrier_documents,
+            baseline_count=baseline_count,
+            baseline_prefix_sha256=baseline_prefix,
+        )
     except (JsonContractError, campaign_audit_index.CampaignIndexError) as error:
         raise CurrentManifestError(f"campaign-audit-index-invalid: {error}") from error
     actual_index = _staged_bytes(

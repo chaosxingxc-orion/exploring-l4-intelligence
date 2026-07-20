@@ -11,6 +11,17 @@ from pathlib import Path, PurePosixPath
 
 
 REPO = Path(__file__).resolve().parents[2]
+CHECKS_DIR = REPO / "scripts" / "checks"
+if str(CHECKS_DIR) not in sys.path:
+    sys.path.insert(0, str(CHECKS_DIR))
+
+from ai_context_inventory import (  # noqa: E402
+    CAMPAIGN_INDEX_BASELINE_COUNT,
+    CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256,
+    campaign_index_prefix_sha256,
+)
+
+
 REGISTRY_PATH = REPO / "wiki" / "survey" / "sf-audit-artifact-registry.json"
 CONTRACT_PATH = REPO / "wiki" / "audit" / "system-first-stage1a" / "campaign-index.json"
 OUTPUT_PATH = REPO / "wiki" / "audit" / "system-first-stage1a" / "INDEX.md"
@@ -22,10 +33,17 @@ ROUND_KEYS = {
     "disposition",
     "supersession",
     "current_carrier",
+    "current_carrier_section",
     "artifacts",
 }
 ARTIFACT_KEYS = {"path", "git_blob", "type"}
-SUPERSESSION_KEYS = {"mode", "target"}
+SUPERSESSION_KEYS = {
+    "mode",
+    "target",
+    "target_current_carrier",
+    "target_current_carrier_section",
+    "transfer_rule",
+}
 EXPECTED_CARRIERS = {
     "rules": "wiki/survey/current/protocol.md",
     "state": "wiki/survey/current/status.md",
@@ -48,9 +66,15 @@ ALLOWED_TYPES = {
     "application",
     "query-review",
     "correction",
+    "receipt",
 }
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 PRESS_QUERY_REVIEW = "wiki/survey/2026-07-18-sf-press-query-review-c4c.md"
+AUDIT_ROOT = "wiki/audit/system-first-stage1a/"
+GENERATED_AUDIT_PATHS = {
+    f"{AUDIT_ROOT}INDEX.md",
+    f"{AUDIT_ROOT}campaign-index.json",
+}
 
 
 class CampaignIndexError(RuntimeError):
@@ -88,23 +112,74 @@ def is_campaign_artifact(path: str) -> bool:
         path == PRESS_QUERY_REVIEW
         or "system-first-research-proposal-" in name
         or "gate-s1-" in name
-        or (
-            path.startswith("wiki/audit/system-first-stage1a/round-")
-            and path.endswith(".md")
-        )
+        or (path.startswith(AUDIT_ROOT) and path not in GENERATED_AUDIT_PATHS)
     )
 
 
-def validate_contract(registry: object, contract: object) -> None:
+def semantic_entries(rounds: list[dict]) -> list[dict]:
+    """Flatten round semantics so an independent prefix hash can freeze every field."""
+
+    entries = []
+    for row in rounds:
+        for artifact in row["artifacts"]:
+            entries.append(
+                {
+                    "path": artifact["path"],
+                    "git_blob": artifact["git_blob"],
+                    "round": row["round"],
+                    "type": artifact["type"],
+                    "verdict": row["verdict"],
+                    "disposition": row["disposition"],
+                    "supersession": dict(row["supersession"]),
+                    "current_carrier": row["current_carrier"],
+                    "current_carrier_section": row["current_carrier_section"],
+                }
+            )
+    return entries
+
+
+def semantic_prefix_sha256(rounds: list[dict], count: int) -> str:
+    return campaign_index_prefix_sha256(semantic_entries(rounds), count)
+
+
+def _markdown_headings(raw: object, carrier: str) -> set[str]:
+    if not isinstance(raw, bytes):
+        raise CampaignIndexError(f"carrier {carrier} must be supplied as exact bytes")
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise CampaignIndexError(f"carrier {carrier} is not UTF-8: {error}") from error
+    headings = set()
+    for line in text.splitlines():
+        match = re.fullmatch(r"#{1,6}[ \t]+(.+?)(?:[ \t]+#+)?", line)
+        if match:
+            headings.add(match.group(1).strip())
+    return headings
+
+
+def validate_contract(
+    registry: object,
+    contract: object,
+    carrier_documents: object,
+    *,
+    baseline_count: int = CAMPAIGN_INDEX_BASELINE_COUNT,
+    baseline_prefix_sha256: str = CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256,
+) -> None:
     if not isinstance(registry, dict) or "artifacts" not in registry:
         raise CampaignIndexError("registry must be an object containing artifacts")
     contract = _require_keys(contract, ROOT_KEYS, "contract")
-    if contract["schema"] != "sf-campaign-audit-index-v1":
+    if contract["schema"] != "sf-campaign-audit-index-v2":
         raise CampaignIndexError("unsupported campaign contract schema")
     if contract["campaign"] != "system-first-stage1a":
         raise CampaignIndexError("unexpected campaign id")
     if contract["current_carriers"] != EXPECTED_CARRIERS:
         raise CampaignIndexError("current_carriers must equal the canonical rules/state paths")
+    if not isinstance(carrier_documents, dict):
+        raise CampaignIndexError("carrier documents must be an exact path/bytes map")
+    carrier_headings = {
+        path: _markdown_headings(carrier_documents.get(path), path)
+        for path in EXPECTED_CARRIERS.values()
+    }
 
     registry_rows = registry["artifacts"]
     if not isinstance(registry_rows, list):
@@ -136,15 +211,28 @@ def validate_contract(registry: object, contract: object) -> None:
 
     contract_campaign: dict[str, tuple[str, int]] = {}
     artifact_round: dict[str, int] = {}
-    for row in rounds:
-        round_number = row["round"]
-        row = _require_keys(row, ROUND_KEYS, f"round {round_number}")
+    rows_by_round: dict[int, dict] = {}
+    for raw_row in rounds:
+        round_number = raw_row["round"]
+        row = _require_keys(raw_row, ROUND_KEYS, f"round {round_number}")
+        rows_by_round[round_number] = row
         if row["verdict"] not in ALLOWED_VERDICTS:
             raise CampaignIndexError(f"round {round_number} has invalid verdict")
         if row["disposition"] not in ALLOWED_DISPOSITIONS:
             raise CampaignIndexError(f"round {round_number} has invalid disposition")
-        if row["current_carrier"] not in EXPECTED_CARRIERS.values():
+        carrier = row["current_carrier"]
+        if carrier not in EXPECTED_CARRIERS.values():
             raise CampaignIndexError(f"round {round_number} has invalid current carrier")
+        section = row["current_carrier_section"]
+        if not isinstance(section, str) or not section.strip():
+            raise CampaignIndexError(
+                f"round {round_number} current_carrier_section must be nonempty"
+            )
+        if section not in carrier_headings[carrier]:
+            raise CampaignIndexError(
+                f"round {round_number} carrier section does not exist: "
+                f"{carrier}#{section}"
+            )
         artifacts = row["artifacts"]
         if not isinstance(artifacts, list) or not artifacts:
             raise CampaignIndexError(f"round {round_number} must contain artifacts")
@@ -183,7 +271,8 @@ def validate_contract(registry: object, contract: object) -> None:
                 f"registry={registry_pin}, contract={contract_pin}"
             )
 
-    last_round = len(rounds)
+    if rounds[-1]["disposition"] != "ACTIVE_REVIEW_TRANSACTION":
+        raise CampaignIndexError("latest round must be the active review transaction")
     for row in rounds:
         number = row["round"]
         disposition = row["disposition"]
@@ -194,24 +283,45 @@ def validate_contract(registry: object, contract: object) -> None:
         target = _canonical_path(
             supersession["target"], f"round {number} supersession target"
         )
-        if number == last_round and disposition != "ACTIVE_REVIEW_TRANSACTION":
-            raise CampaignIndexError("latest round must be the active review transaction")
-        if number < last_round and disposition == "ACTIVE_REVIEW_TRANSACTION":
-            raise CampaignIndexError("only the latest round may be active")
+        target_carrier = supersession["target_current_carrier"]
+        target_section = supersession["target_current_carrier_section"]
+        if supersession["transfer_rule"] != "same-carrier-section":
+            raise CampaignIndexError(
+                f"round {number} has unsupported carrier-section transfer rule"
+            )
         if mode == "later-round-artifact":
             target_round = artifact_round.get(target)
             if target_round is None or target_round <= number:
                 raise CampaignIndexError(
                     f"round {number} supersession must target an artifact in a later round"
                 )
+            target_row = rows_by_round[target_round]
+            if (
+                target_carrier != target_row["current_carrier"]
+                or target_section != target_row["current_carrier_section"]
+            ):
+                raise CampaignIndexError(
+                    f"round {number} later target carrier/section does not match target round"
+                )
+            if (
+                row["current_carrier"] != target_carrier
+                or row["current_carrier_section"] != target_section
+            ):
+                raise CampaignIndexError(
+                    f"round {number} same-carrier-section rule does not preserve row carrier"
+                )
             if disposition != "SUPERSEDED_BY_LATER_ROUND":
                 raise CampaignIndexError(
                     f"round {number} later-round supersession has wrong disposition"
                 )
         elif mode == "current-carrier":
-            if target not in EXPECTED_CARRIERS.values():
+            if (
+                target != row["current_carrier"]
+                or target_carrier != row["current_carrier"]
+                or target_section != row["current_carrier_section"]
+            ):
                 raise CampaignIndexError(
-                    f"round {number} supersession must target a current carrier"
+                    f"round {number} current supersession target must equal row carrier+section"
                 )
             if disposition == "SUPERSEDED_BY_LATER_ROUND":
                 raise CampaignIndexError(
@@ -220,6 +330,32 @@ def validate_contract(registry: object, contract: object) -> None:
         else:
             raise CampaignIndexError(f"round {number} has invalid supersession mode")
 
+    entries = semantic_entries(rounds)
+    if (
+        isinstance(baseline_count, bool)
+        or not isinstance(baseline_count, int)
+        or baseline_count <= 0
+        or baseline_count > len(entries)
+    ):
+        raise CampaignIndexError(
+            f"invalid campaign baseline count: {baseline_count} for {len(entries)} entries"
+        )
+    if not isinstance(baseline_prefix_sha256, str) or not re.fullmatch(
+        r"[0-9a-f]{64}", baseline_prefix_sha256
+    ):
+        raise CampaignIndexError("invalid campaign baseline prefix SHA-256")
+    actual_prefix = campaign_index_prefix_sha256(entries, baseline_count)
+    if actual_prefix != baseline_prefix_sha256:
+        raise CampaignIndexError(
+            "campaign baseline prefix mismatch: "
+            f"expected {baseline_prefix_sha256}, found {actual_prefix}"
+        )
+    baseline_last_round = entries[baseline_count - 1]["round"]
+    if any(entry["round"] <= baseline_last_round for entry in entries[baseline_count:]):
+        raise CampaignIndexError(
+            "campaign baseline may grow only by appending a new round/epoch"
+        )
+
 
 def render_index(contract: dict) -> bytes:
     lines = [
@@ -227,11 +363,11 @@ def render_index(contract: dict) -> bytes:
         "",
         "This cold audit router is generated from `campaign-index.json`; do not edit it by hand.",
         "Every registered campaign artifact is mapped exactly once to its round, type, verdict,",
-        "disposition, supersession target, and current surviving-rule/state carrier. Presence here",
-        "does not authorize Stage-1B and does not make a historical artifact active context.",
+        "disposition, supersession target, and exact current surviving-rule/state carrier section.",
+        "Presence here does not authorize Stage-1B and does not make a historical artifact active context.",
         "",
-        "| Round | Artifact bindings (`type`: `path` @ `git_blob`) | Verdict | Disposition | Supersession | Current carrier |",
-        "|---:|---|---|---|---|---|",
+        "| Round | Artifact bindings (`type`: `path` @ `git_blob`) | Verdict | Disposition | Supersession | Current carrier | Current carrier section |",
+        "|---:|---|---|---|---|---|---|",
     ]
     for row in contract["rounds"]:
         artifacts = "<br>".join(
@@ -239,10 +375,16 @@ def render_index(contract: dict) -> bytes:
             for artifact in row["artifacts"]
         )
         supersession = row["supersession"]
+        supersession_binding = (
+            f"`{supersession['mode']}` -> `{supersession['target']}`; "
+            f"carrier=`{supersession['target_current_carrier']}`; "
+            f"section=`{supersession['target_current_carrier_section']}`; "
+            f"rule=`{supersession['transfer_rule']}`"
+        )
         lines.append(
             f"| {row['round']} | {artifacts} | `{row['verdict']}` | "
-            f"`{row['disposition']}` | `{supersession['mode']}` → "
-            f"`{supersession['target']}` | `{row['current_carrier']}` |"
+            f"`{row['disposition']}` | {supersession_binding} | "
+            f"`{row['current_carrier']}` | `{row['current_carrier_section']}` |"
         )
     lines.extend(
         [
@@ -273,7 +415,14 @@ def _load_json(path: Path) -> dict:
 def check_repository(*, write: bool) -> None:
     registry = _load_json(REGISTRY_PATH)
     contract = _load_json(CONTRACT_PATH)
-    validate_contract(registry, contract)
+    try:
+        carrier_documents = {
+            path: REPO.joinpath(*path.split("/")).read_bytes()
+            for path in EXPECTED_CARRIERS.values()
+        }
+    except OSError as error:
+        raise CampaignIndexError(f"cannot read current carrier: {error}") from error
+    validate_contract(registry, contract, carrier_documents)
     expected = render_index(contract)
     if write:
         OUTPUT_PATH.write_bytes(expected)

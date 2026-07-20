@@ -1,5 +1,5 @@
 {
-  "schema": "sf-campaign-audit-index-v1",
+  "schema": "sf-campaign-audit-index-v2",
   "campaign": "system-first-stage1a",
   "current_carriers": {
     "rules": "wiki/survey/current/protocol.md",
@@ -12,9 +12,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§0 Authority, current gate, and prohibited execution",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§0 Authority, current gate, and prohibited execution",
       "artifacts": [
         {
           "path": "wiki/2026-07-15-system-first-research-proposal-v1.md",
@@ -39,9 +43,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§0 Authority, current gate, and prohibited execution",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§0 Authority, current gate, and prohibited execution",
       "artifacts": [
         {
           "path": "wiki/2026-07-15-system-first-research-proposal-v2.md",
@@ -61,9 +69,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§0 Authority, current gate, and prohibited execution",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§0 Authority, current gate, and prohibited execution",
       "artifacts": [
         {
           "path": "wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md",
@@ -88,9 +100,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§4 检索 lanes 与 65 条编译冻结查询（48 原批 + 3 条 A3-8 增补 + 2 条 C4-6 受控类目道 + 2 条 C4A 受控类目道 + 6 条 C4B 受控类目道,append-only）",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§4 检索 lanes 与 65 条编译冻结查询（48 原批 + 3 条 A3-8 增补 + 2 条 C4-6 受控类目道 + 2 条 C4A 受控类目道 + 6 条 C4B 受控类目道,append-only）",
       "artifacts": [
         {
           "path": "wiki/survey/2026-07-16-gate-s1-rereview-application.md",
@@ -155,9 +171,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§9 Outputs, denominators, occupancy, negative results, and release binding",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§9 Outputs, denominators, occupancy, negative results, and release binding",
       "artifacts": [
         {
           "path": "wiki/2026-07-18-system-first-research-proposal-v4-survey-evidence.md",
@@ -182,9 +202,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
       "artifacts": [
         {
           "path": "wiki/2026-07-18-system-first-research-proposal-v5-consolidated.md",
@@ -209,9 +233,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
       "artifacts": [
         {
           "path": "wiki/2026-07-18-gate-s1-v5-response-stage1a-doctoral-rereview.md",
@@ -231,9 +259,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§7 Schema-v3 evidence, adjudication, and strong PDF anchors",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§7 Schema-v3 evidence, adjudication, and strong PDF anchors",
       "artifacts": [
         {
           "path": "wiki/2026-07-18-system-first-research-proposal-v6-consolidated.md",
@@ -258,9 +290,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§2 Unit of analysis and method-path identity",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§2 Unit of analysis and method-path identity",
       "artifacts": [
         {
           "path": "wiki/2026-07-18-system-first-research-proposal-v7-consolidated.md",
@@ -285,9 +321,13 @@
       "disposition": "HISTORICAL_COLD",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/protocol.md"
+        "target": "wiki/survey/current/protocol.md",
+        "target_current_carrier": "wiki/survey/current/protocol.md",
+        "target_current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/protocol.md",
+      "current_carrier_section": "§6 Coding schema, signal and edge identity, and information boundary",
       "artifacts": [
         {
           "path": "wiki/2026-07-19-system-first-research-proposal-v8-consolidated.md",
@@ -312,9 +352,13 @@
       "disposition": "SUPERSEDED_BY_LATER_ROUND",
       "supersession": {
         "mode": "later-round-artifact",
-        "target": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
+        "target": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md",
+        "target_current_carrier": "wiki/survey/current/status.md",
+        "target_current_carrier_section": "Current Survey Status",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/status.md",
+      "current_carrier_section": "Current Survey Status",
       "artifacts": [
         {
           "path": "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
@@ -344,9 +388,13 @@
       "disposition": "ACTIVE_REVIEW_TRANSACTION",
       "supersession": {
         "mode": "current-carrier",
-        "target": "wiki/survey/current/status.md"
+        "target": "wiki/survey/current/status.md",
+        "target_current_carrier": "wiki/survey/current/status.md",
+        "target_current_carrier_section": "Current Survey Status",
+        "transfer_rule": "same-carrier-section"
       },
       "current_carrier": "wiki/survey/current/status.md",
+      "current_carrier_section": "Current Survey Status",
       "artifacts": [
         {
           "path": "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md",

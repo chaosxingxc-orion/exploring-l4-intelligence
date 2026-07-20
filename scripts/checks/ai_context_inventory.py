@@ -10,6 +10,8 @@ REGISTRY_BASELINE_COUNT = 78
 REGISTRY_BASELINE_PREFIX_SHA256 = (
     "7f6091334de33bceccb7d566812723f2b2d90f6ec126746a24cf855f520b9f02"
 )
+CAMPAIGN_INDEX_BASELINE_COUNT = 41
+CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256 = "aa67de7d9d4f235f7c160c45b6c71e33e084de25b0dbcac5e3a336f85c0f2b5d"
 
 
 def registry_prefix_sha256(artifacts, count: int = REGISTRY_BASELINE_COUNT) -> str:
@@ -19,6 +21,42 @@ def registry_prefix_sha256(artifacts, count: int = REGISTRY_BASELINE_COUNT) -> s
         {"path": entry["path"], "git_blob": entry["git_blob"]}
         for entry in artifacts[:count]
     ]
+    raw = json.dumps(
+        canonical, ensure_ascii=False, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def campaign_index_prefix_sha256(
+    semantic_entries, count: int = CAMPAIGN_INDEX_BASELINE_COUNT
+) -> str:
+    """Hash the exact immutable campaign-semantic prefix."""
+
+    canonical = []
+    for entry in semantic_entries[:count]:
+        canonical.append(
+            {
+                "path": entry["path"],
+                "git_blob": entry["git_blob"],
+                "round": entry["round"],
+                "type": entry["type"],
+                "verdict": entry["verdict"],
+                "disposition": entry["disposition"],
+                "supersession": {
+                    "mode": entry["supersession"]["mode"],
+                    "target": entry["supersession"]["target"],
+                    "target_current_carrier": entry["supersession"][
+                        "target_current_carrier"
+                    ],
+                    "target_current_carrier_section": entry["supersession"][
+                        "target_current_carrier_section"
+                    ],
+                    "transfer_rule": entry["supersession"]["transfer_rule"],
+                },
+                "current_carrier": entry["current_carrier"],
+                "current_carrier_section": entry["current_carrier_section"],
+            }
+        )
     raw = json.dumps(
         canonical, ensure_ascii=False, separators=(",", ":")
     ).encode("utf-8")
