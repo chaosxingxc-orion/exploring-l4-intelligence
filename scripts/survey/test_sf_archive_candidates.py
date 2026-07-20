@@ -156,6 +156,7 @@ class ArchiveRepoFixture(unittest.TestCase):
             TrustedRepoReader(self.repo).read_bytes,
             inventory,
             read_blob,
+            sf_current_manifest._git_head_path_reader(self.repo),
         )
         self.write(sf_current_manifest.OUTPUT_RELATIVE_PATH, raw)
         git(self.repo, "add", "--", sf_current_manifest.OUTPUT_RELATIVE_PATH)

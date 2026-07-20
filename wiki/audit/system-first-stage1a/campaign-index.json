@@ -1,6 +1,7 @@
 {
-  "schema": "sf-campaign-audit-index-v2",
+  "schema": "sf-campaign-audit-index-v3",
   "campaign": "system-first-stage1a",
+  "disposition_semantics": "immutable-at-issue; derived-current-by-event-order-and-type",
   "current_carriers": {
     "rules": "wiki/survey/current/protocol.md",
     "state": "wiki/survey/current/status.md"

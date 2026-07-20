@@ -32,7 +32,7 @@
     {
       "role": "campaign_audit_index_checker",
       "path": "scripts/survey/sf_campaign_audit_index.py",
-      "sha256": "19fbe207d8e61f35d3cbf9ed498840701d45e267d5f0572a8c5ceba0c50bc673",
+      "sha256": "b884d59f4731d9d89ef2a5db789df9d41408c2b230300a33814aeb655b897516",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
@@ -46,14 +46,14 @@
     {
       "role": "campaign_audit_index",
       "path": "wiki/audit/system-first-stage1a/INDEX.md",
-      "sha256": "70414d4d7afd218e6fc9c920b6903bfa3bf29cca280f8195ce7dc7c84d26e968",
+      "sha256": "30f0d996c028af531d788b7595a07ff0ead58826b89081b5569c435c9cf65649",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },
     {
       "role": "campaign_audit_contract",
       "path": "wiki/audit/system-first-stage1a/campaign-index.json",
-      "sha256": "213444106ec83160c55c37246a9ffdaaa8e65879fa2bd7cc23eaa534a4f51540",
+      "sha256": "ca5668e017f3115d4e214e203d253565bf54d133403b3294ed2852103a5c73be",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },

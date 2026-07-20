@@ -8,6 +8,7 @@ import importlib.util
 import inspect
 import json
 import re
+import copy
 import shutil
 import sys
 import tempfile
@@ -207,6 +208,7 @@ class CurrentManifestContractTests(unittest.TestCase):
         anchor_path = "scripts/checks/ai_context_inventory.py"
         if anchor_path in self.payloads:
             self.payloads[anchor_path] = REPO.joinpath(*anchor_path.split("/")).read_bytes()
+        self.head_payloads = {anchor_path: self.payloads[anchor_path]}
         for carrier_path in (
             "wiki/survey/current/protocol.md",
             "wiki/survey/current/status.md",
@@ -230,6 +232,9 @@ class CurrentManifestContractTests(unittest.TestCase):
     def read_blob(self, blob: str) -> bytes:
         return self.blobs[blob]
 
+    def read_head_path(self, path: str) -> bytes:
+        return self.head_payloads[path]
+
     def inventory(self, extra_paths=()):
         inventory = dict(self.base_index)
         for path in extra_paths:
@@ -244,6 +249,7 @@ class CurrentManifestContractTests(unittest.TestCase):
             self.read_bytes,
             self.inventory(tracked),
             self.read_blob,
+            self.read_head_path,
         )
 
     def audit_paths(self):
@@ -330,10 +336,10 @@ class CurrentManifestContractTests(unittest.TestCase):
     def test_manifest_render_is_deterministic_canonical_and_timestamp_free(self):
         inventory = self.inventory()
         first = self.manifest.render_manifest(
-            self.read_bytes, inventory, self.read_blob
+            self.read_bytes, inventory, self.read_blob, self.read_head_path
         )
         second = self.manifest.render_manifest(
-            self.read_bytes, inventory, self.read_blob
+            self.read_bytes, inventory, self.read_blob, self.read_head_path
         )
         self.assertEqual(first, second)
         self.assertTrue(first.endswith(b"\n"))
@@ -398,6 +404,11 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             signature.parameters,
             "manifest builder lacks staged-blob reader",
         )
+        self.assertIn(
+            "read_head_path",
+            signature.parameters,
+            "manifest builder lacks HEAD-path reader for anchor lineage",
+        )
         self.payloads = {
             spec.path: f"payload:{spec.path}\n".encode("utf-8")
             for spec in self.manifest.BASE_FILE_SPECS
@@ -405,6 +416,8 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         anchor_path = "scripts/checks/ai_context_inventory.py"
         if anchor_path in self.payloads:
             self.payloads[anchor_path] = REPO.joinpath(*anchor_path.split("/")).read_bytes()
+        self.head_payloads = {anchor_path: self.payloads[anchor_path]}
+        self.head_reads = []
         for carrier_path in (
             "wiki/survey/current/protocol.md",
             "wiki/survey/current/status.md",
@@ -425,11 +438,16 @@ class ManifestGitBindingContractTests(unittest.TestCase):
     def read_blob(self, blob):
         return self.blobs[blob]
 
+    def read_head_path(self, path):
+        self.head_reads.append(path)
+        return self.head_payloads[path]
+
     def build(self, index=None):
         return self.manifest.build_manifest(
             self.read_bytes,
             self.index if index is None else index,
             self.read_blob,
+            self.read_head_path,
         )
 
     def add_audit_contract(self, index):
@@ -439,6 +457,29 @@ class ManifestGitBindingContractTests(unittest.TestCase):
             blob = git_blob_oid(raw)
             self.blobs[blob] = raw
             index[spec.path] = self.manifest.GitIndexEntry("100644", blob)
+
+    def stage_raw(self, index, path, raw):
+        self.payloads[path] = raw
+        staged_blob = git_blob_oid(raw)
+        self.blobs[staged_blob] = raw
+        index[path] = self.manifest.GitIndexEntry("100644", staged_blob)
+
+    def anchor_raw(self, count, prefix):
+        raw = self.head_payloads[self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH]
+        text = raw.decode("utf-8")
+        text = re.sub(
+            r"^CAMPAIGN_INDEX_BASELINE_COUNT = \d+$",
+            f"CAMPAIGN_INDEX_BASELINE_COUNT = {count}",
+            text,
+            flags=re.MULTILINE,
+        )
+        text = re.sub(
+            r'^CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256 = "[0-9a-f]{64}"$',
+            f'CAMPAIGN_INDEX_BASELINE_PREFIX_SHA256 = "{prefix}"',
+            text,
+            flags=re.MULTILINE,
+        )
+        return text.encode("utf-8")
 
     def test_every_base_entry_must_be_tracked(self):
         with self.assertRaisesRegex(
@@ -556,9 +597,129 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         self.blobs[tampered_blob] = tampered
         index[anchor_path] = self.manifest.GitIndexEntry("100644", tampered_blob)
         with self.assertRaisesRegex(
-            self.manifest.CurrentManifestError, "campaign baseline prefix"
+            self.manifest.CurrentManifestError, "same-count anchor restamp"
         ):
             self.build(index)
+        self.assertIn(anchor_path, self.head_reads)
+
+    def test_gate_accepts_one_standalone_receipt_with_atomic_anchor_growth(self):
+        index = dict(self.index)
+        self.add_audit_contract(index)
+        registry_path = "wiki/survey/sf-audit-artifact-registry.json"
+        contract_path = self.manifest.campaign_audit_index.CONTRACT_PATH.relative_to(
+            REPO
+        ).as_posix()
+        index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
+        registry = json.loads(self.payloads[registry_path])
+        contract = json.loads(self.payloads[contract_path])
+
+        receipt_path = (
+            "wiki/audit/system-first-stage1a/epoch-13/consolidation-receipt.json"
+        )
+        receipt_raw = b'{"campaign":"system-first-stage1a","epoch":13}\n'
+        receipt_blob = git_blob_oid(receipt_raw)
+        registry["artifacts"].append(
+            {"path": receipt_path, "git_blob": receipt_blob}
+        )
+        contract["rounds"].append(
+            {
+                "round": 13,
+                "verdict": "PENDING_INDEPENDENT_REREVIEW",
+                "disposition": "NON_ACTIVE_PREREQUISITE",
+                "supersession": {
+                    "mode": "current-carrier",
+                    "target": "wiki/survey/current/status.md",
+                    "target_current_carrier": "wiki/survey/current/status.md",
+                    "target_current_carrier_section": "Current Survey Status",
+                    "transfer_rule": "same-carrier-section",
+                },
+                "current_carrier": "wiki/survey/current/status.md",
+                "current_carrier_section": "Current Survey Status",
+                "artifacts": [
+                    {
+                        "path": receipt_path,
+                        "git_blob": receipt_blob,
+                        "type": "consolidation-receipt",
+                    }
+                ],
+            }
+        )
+        count = len(
+            self.manifest.campaign_audit_index.semantic_entries(contract["rounds"])
+        )
+        prefix = self.manifest.campaign_audit_index.semantic_prefix_sha256(
+            contract["rounds"], count
+        )
+        registry_raw = (
+            json.dumps(registry, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        contract_raw = (
+            json.dumps(contract, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        index_raw = self.manifest.campaign_audit_index.render_index(contract)
+        self.stage_raw(index, registry_path, registry_raw)
+        self.stage_raw(index, contract_path, contract_raw)
+        self.stage_raw(index, index_path, index_raw)
+        self.stage_raw(
+            index,
+            self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH,
+            self.anchor_raw(count, prefix),
+        )
+        self.stage_raw(index, receipt_path, receipt_raw)
+
+        document = self.build(index)
+        self.assertEqual(
+            12,
+            self.manifest.campaign_audit_index.derived_current_round(
+                contract["rounds"]
+            ),
+        )
+        self.assertIn(
+            self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH,
+            [entry["path"] for entry in document["files"]],
+        )
+
+    def test_coordinated_allowed_semantic_restamps_fail_against_head_anchor(self):
+        raw = self.head_payloads[self.manifest.CAMPAIGN_SEMANTIC_ANCHOR_PATH]
+        head_count, head_prefix = self.manifest._campaign_semantic_anchor_from_source(raw)
+        contract = json.loads(
+            REPO.joinpath(
+                *self.manifest.campaign_audit_index.CONTRACT_PATH.relative_to(REPO).parts
+            ).read_bytes()
+        )
+        mutations = {}
+
+        verdict = copy.deepcopy(contract)
+        verdict["rounds"][0]["verdict"] = "WITHHOLD_STAGE1B"
+        mutations["allowed-value"] = verdict
+
+        artifact_type = copy.deepcopy(contract)
+        artifact_type["rounds"][0]["artifacts"][0]["type"] = "review"
+        mutations["allowed-type"] = artifact_type
+
+        artifact_round = copy.deepcopy(contract)
+        first = artifact_round["rounds"][0]["artifacts"][0]
+        second = artifact_round["rounds"][1]["artifacts"][0]
+        artifact_round["rounds"][0]["artifacts"][0] = second
+        artifact_round["rounds"][1]["artifacts"][0] = first
+        mutations["allowed-round"] = artifact_round
+
+        for label, changed in mutations.items():
+            staged_prefix = self.manifest.campaign_audit_index.semantic_prefix_sha256(
+                changed["rounds"], head_count
+            )
+            with self.subTest(label=label):
+                with self.assertRaisesRegex(
+                    self.manifest.CurrentManifestError,
+                    "same-count anchor restamp",
+                ):
+                    self.manifest._validate_campaign_anchor_lineage(
+                        changed["rounds"],
+                        head_count,
+                        head_prefix,
+                        head_count,
+                        staged_prefix,
+                    )
 
 
 class TrustedCurrentPathContractTests(unittest.TestCase):

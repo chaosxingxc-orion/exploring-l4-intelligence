@@ -21,6 +21,7 @@ RULES = "wiki/survey/current/protocol.md"
 STATE = "wiki/survey/current/status.md"
 RULES_SECTION = "Rules Section"
 STATE_SECTION = "Current State"
+DISPOSITION_SEMANTICS = "immutable-at-issue; derived-current-by-event-order-and-type"
 
 
 def blob(number: int) -> str:
@@ -48,8 +49,9 @@ def fixture_documents() -> tuple[dict, dict, dict[str, bytes]]:
         ]
     }
     contract = {
-        "schema": "sf-campaign-audit-index-v2",
+        "schema": "sf-campaign-audit-index-v3",
         "campaign": "system-first-stage1a",
+        "disposition_semantics": DISPOSITION_SEMANTICS,
         "current_carriers": {"rules": RULES, "state": STATE},
         "rounds": [
             {
@@ -94,6 +96,52 @@ def fixture_documents() -> tuple[dict, dict, dict[str, bytes]]:
 def baseline_for(contract: dict) -> tuple[int, str]:
     count = sum(len(row["artifacts"]) for row in contract["rounds"])
     return count, campaign.semantic_prefix_sha256(contract["rounds"], count)
+
+
+def append_receipt_event(registry: dict, contract: dict, *, round_number: int) -> str:
+    path = "wiki/audit/system-first-stage1a/epoch-3/consolidation-receipt.json"
+    registry["artifacts"].append({"path": path, "git_blob": blob(round_number)})
+    contract["rounds"].append(
+        {
+            "round": round_number,
+            "verdict": "PENDING_INDEPENDENT_REREVIEW",
+            "disposition": "NON_ACTIVE_PREREQUISITE",
+            "supersession": same_carrier_supersession("current-carrier", STATE),
+            "current_carrier": STATE,
+            "current_carrier_section": STATE_SECTION,
+            "artifacts": [
+                {
+                    "path": path,
+                    "git_blob": blob(round_number),
+                    "type": "consolidation-receipt",
+                }
+            ],
+        }
+    )
+    return path
+
+
+def append_correction_event(registry: dict, contract: dict, *, round_number: int) -> str:
+    path = "wiki/audit/system-first-stage1a/epoch-3/round-3/correction-3.md"
+    registry["artifacts"].append({"path": path, "git_blob": blob(round_number)})
+    contract["rounds"].append(
+        {
+            "round": round_number,
+            "verdict": "PENDING_INDEPENDENT_REREVIEW",
+            "disposition": "ACTIVE_REVIEW_TRANSACTION",
+            "supersession": same_carrier_supersession("current-carrier", STATE),
+            "current_carrier": STATE,
+            "current_carrier_section": STATE_SECTION,
+            "artifacts": [
+                {
+                    "path": path,
+                    "git_blob": blob(round_number),
+                    "type": "correction",
+                }
+            ],
+        }
+    )
+    return path
 
 
 def validate(
@@ -146,6 +194,9 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
         registry, contract, carriers = fixture_documents()
         validate(registry, contract, carriers)
         rendered = campaign.render_index(contract).decode("utf-8")
+        self.assertIn("At-issue disposition", rendered)
+        self.assertIn("Derived current", rendered)
+        self.assertEqual(1, rendered.count("`CURRENT_ACTIVE`"))
         for round_entry in contract["rounds"]:
             self.assertIn(f"| {round_entry['round']} |", rendered)
             self.assertIn(round_entry["verdict"], rendered)
@@ -158,7 +209,7 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
                 self.assertIn(artifact["git_blob"], rendered)
                 self.assertIn(artifact["type"], rendered)
 
-    def test_empty_or_missing_real_carrier_section_fails(self) -> None:
+    def test_empty_missing_or_duplicate_real_carrier_section_fails(self) -> None:
         registry, contract, carriers = fixture_documents()
         for section in ("", "Missing Section"):
             changed = copy.deepcopy(contract)
@@ -174,6 +225,10 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
                         carriers,
                         baseline_contract=contract,
                     )
+        duplicate = dict(carriers)
+        duplicate[STATE] += b"\n## Current State\n"
+        with self.assertRaisesRegex(campaign.CampaignIndexError, "exactly once"):
+            validate(registry, contract, duplicate)
 
     def test_added_deleted_wrong_blob_or_duplicate_mapping_fails(self) -> None:
         registry, contract, carriers = fixture_documents()
@@ -235,14 +290,6 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
                 row["supersession"]["target"] = RULES
         mutations["allowed-carrier-swap"] = carrier_swap
 
-        round_swap = copy.deepcopy(contract)
-        first_artifact = round_swap["rounds"][0]["artifacts"][0]
-        second_artifact = round_swap["rounds"][1]["artifacts"][0]
-        round_swap["rounds"][0]["artifacts"] = [second_artifact]
-        round_swap["rounds"][1]["artifacts"] = [first_artifact]
-        round_swap["rounds"][0]["supersession"]["target"] = first_artifact["path"]
-        mutations["round-reassignment"] = round_swap
-
         type_swap = copy.deepcopy(contract)
         type_swap["rounds"][0]["artifacts"][0]["type"] = "review"
         mutations["type-reassignment"] = type_swap
@@ -294,51 +341,166 @@ class CampaignAuditIndexContractTests(unittest.TestCase):
         with self.assertRaisesRegex(campaign.CampaignIndexError, "later round"):
             validate(registry, contract, carriers)
 
-    def test_legal_append_is_pure_new_round_and_preserves_frozen_prefix(self) -> None:
-        registry, contract, carriers = fixture_documents()
-        original_rounds = copy.deepcopy(contract["rounds"])
-        count, prefix_sha256 = baseline_for(contract)
-        correction = (
-            "wiki/audit/system-first-stage1a/epoch-3/round-3/correction-3.md"
+    def test_receipt_then_correction_are_two_anchor_commit_boundaries(self) -> None:
+        registry, initial, carriers = fixture_documents()
+        head_count, head_prefix = baseline_for(initial)
+
+        receipt_registry = copy.deepcopy(registry)
+        receipt_contract = copy.deepcopy(initial)
+        append_receipt_event(receipt_registry, receipt_contract, round_number=3)
+        receipt_count, receipt_prefix = baseline_for(receipt_contract)
+        campaign.validate_contract(
+            receipt_registry,
+            receipt_contract,
+            carriers,
+            baseline_count=receipt_count,
+            baseline_prefix_sha256=receipt_prefix,
         )
-        receipt = (
-            "wiki/audit/system-first-stage1a/epoch-3/consolidation-receipt.json"
+        current_manifest._validate_campaign_anchor_lineage(
+            receipt_contract["rounds"],
+            head_count,
+            head_prefix,
+            receipt_count,
+            receipt_prefix,
         )
-        registry["artifacts"].extend(
-            [
-                {"path": correction, "git_blob": blob(3)},
-                {"path": receipt, "git_blob": blob(4)},
-            ]
+        self.assertEqual(2, campaign.derived_current_round(receipt_contract["rounds"]))
+
+        correction_registry = copy.deepcopy(receipt_registry)
+        correction_contract = copy.deepcopy(receipt_contract)
+        append_correction_event(correction_registry, correction_contract, round_number=4)
+        correction_count, correction_prefix = baseline_for(correction_contract)
+        campaign.validate_contract(
+            correction_registry,
+            correction_contract,
+            carriers,
+            baseline_count=correction_count,
+            baseline_prefix_sha256=correction_prefix,
         )
-        contract["rounds"].append(
+        current_manifest._validate_campaign_anchor_lineage(
+            correction_contract["rounds"],
+            receipt_count,
+            receipt_prefix,
+            correction_count,
+            correction_prefix,
+        )
+        self.assertEqual(4, campaign.derived_current_round(correction_contract["rounds"]))
+        rendered = campaign.render_index(correction_contract).decode("utf-8")
+        self.assertEqual(1, rendered.count("`CURRENT_ACTIVE`"))
+        self.assertIn("`FORMER_CURRENT`", rendered)
+
+    def test_receipt_and_correction_cannot_share_one_anchor_transaction(self) -> None:
+        registry, initial, carriers = fixture_documents()
+        head_count, head_prefix = baseline_for(initial)
+        changed_registry = copy.deepcopy(registry)
+        changed_contract = copy.deepcopy(initial)
+        append_receipt_event(changed_registry, changed_contract, round_number=3)
+        append_correction_event(changed_registry, changed_contract, round_number=4)
+        staged_count, staged_prefix = baseline_for(changed_contract)
+        with self.assertRaisesRegex(
+            current_manifest.CurrentManifestError, "exactly one semantic event"
+        ):
+            current_manifest._validate_campaign_anchor_lineage(
+                changed_contract["rounds"],
+                head_count,
+                head_prefix,
+                staged_count,
+                staged_prefix,
+            )
+
+    def test_anchor_growth_must_append_a_new_round_not_extend_prior_active(self) -> None:
+        _registry, initial, _carriers = fixture_documents()
+        head_count, head_prefix = baseline_for(initial)
+        changed = copy.deepcopy(initial)
+        changed["rounds"][-1]["artifacts"].append(
             {
-                "round": 3,
-                "verdict": "PENDING_INDEPENDENT_REREVIEW",
-                "disposition": "ACTIVE_REVIEW_TRANSACTION",
-                "supersession": same_carrier_supersession(
-                    "current-carrier", STATE
+                "path": (
+                    "wiki/audit/system-first-stage1a/epoch-3/"
+                    "consolidation-receipt.json"
                 ),
-                "current_carrier": STATE,
-                "current_carrier_section": STATE_SECTION,
-                "artifacts": [
-                    {"path": correction, "git_blob": blob(3), "type": "correction"},
-                    {"path": receipt, "git_blob": blob(4), "type": "receipt"},
-                ],
+                "git_blob": blob(3),
+                "type": "consolidation-receipt",
             }
         )
+        staged_count, staged_prefix = baseline_for(changed)
+        with self.assertRaisesRegex(
+            current_manifest.CurrentManifestError, "new round"
+        ):
+            current_manifest._validate_campaign_anchor_lineage(
+                changed["rounds"],
+                head_count,
+                head_prefix,
+                staged_count,
+                staged_prefix,
+            )
 
-        self.assertEqual(original_rounds, contract["rounds"][:2])
-        campaign.validate_contract(
-            registry,
-            contract,
-            carriers,
-            baseline_count=count,
-            baseline_prefix_sha256=prefix_sha256,
+    def test_anchor_count_cannot_roll_back_from_head(self) -> None:
+        _registry, initial, _carriers = fixture_documents()
+        head_count, head_prefix = baseline_for(initial)
+        staged_count = head_count - 1
+        staged_prefix = campaign.semantic_prefix_sha256(
+            initial["rounds"], staged_count
         )
-        self.assertEqual(
-            prefix_sha256,
-            campaign.semantic_prefix_sha256(contract["rounds"], count),
-        )
+        with self.assertRaisesRegex(
+            current_manifest.CurrentManifestError, "count rollback"
+        ):
+            current_manifest._validate_campaign_anchor_lineage(
+                initial["rounds"],
+                head_count,
+                head_prefix,
+                staged_count,
+                staged_prefix,
+            )
+
+    def test_committed_receipt_tail_cannot_be_restamped_or_left_unanchored(self) -> None:
+        registry, initial, carriers = fixture_documents()
+        receipt_registry = copy.deepcopy(registry)
+        receipt_contract = copy.deepcopy(initial)
+        append_receipt_event(receipt_registry, receipt_contract, round_number=3)
+        head_count, head_prefix = baseline_for(receipt_contract)
+
+        restamped = copy.deepcopy(receipt_contract)
+        restamped["rounds"][-1]["verdict"] = "WITHHOLD_STAGE1B"
+        staged_count, staged_prefix = baseline_for(restamped)
+        with self.assertRaisesRegex(
+            current_manifest.CurrentManifestError, "same-count anchor restamp"
+        ):
+            current_manifest._validate_campaign_anchor_lineage(
+                restamped["rounds"],
+                head_count,
+                head_prefix,
+                staged_count,
+                staged_prefix,
+            )
+
+        unanchored_registry = copy.deepcopy(receipt_registry)
+        unanchored_contract = copy.deepcopy(receipt_contract)
+        append_correction_event(unanchored_registry, unanchored_contract, round_number=4)
+        with self.assertRaisesRegex(
+            current_manifest.CurrentManifestError, "unanchored semantic tail"
+        ):
+            current_manifest._validate_campaign_anchor_lineage(
+                unanchored_contract["rounds"],
+                head_count,
+                head_prefix,
+                head_count,
+                head_prefix,
+            )
+
+    def test_epoch_path_shapes_enforce_types_and_receipt_prerequisite(self) -> None:
+        registry, contract, carriers = fixture_documents()
+        append_receipt_event(registry, contract, round_number=3)
+        contract["rounds"][-1]["artifacts"][0]["type"] = "correction"
+        with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+            validate(registry, contract, carriers)
+
+        registry, contract, carriers = fixture_documents()
+        append_correction_event(registry, contract, round_number=3)
+        with self.assertRaisesRegex(campaign.CampaignIndexError, "receipt prerequisite"):
+            validate(registry, contract, carriers)
+
+        contract["rounds"][-1]["artifacts"][0]["type"] = "review"
+        with self.assertRaisesRegex(campaign.CampaignIndexError, "path/type"):
+            validate(registry, contract, carriers)
 
     def test_epoch_correction_and_receipt_are_campaign_artifacts_but_generators_are_not(self) -> None:
         correction = (

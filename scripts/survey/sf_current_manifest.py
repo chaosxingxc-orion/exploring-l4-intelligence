@@ -507,9 +507,103 @@ def _campaign_semantic_anchor_from_source(raw: bytes) -> tuple[int, str]:
     return count, prefix
 
 
+def _validate_campaign_anchor_lineage(
+    rounds: list[dict],
+    head_count: int,
+    head_prefix: str,
+    staged_count: int,
+    staged_prefix: str,
+) -> None:
+    """Allow either an unchanged HEAD anchor or one fully anchored appended event."""
+
+    for label, count, prefix in (
+        ("HEAD", head_count, head_prefix),
+        ("staged", staged_count, staged_prefix),
+    ):
+        if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+            raise CurrentManifestError(
+                f"campaign-anchor-lineage-invalid: {label} count"
+            )
+        if not isinstance(prefix, str) or re.fullmatch(r"[0-9a-f]{64}", prefix) is None:
+            raise CurrentManifestError(
+                f"campaign-anchor-lineage-invalid: {label} prefix"
+            )
+
+    try:
+        entries = campaign_audit_index.semantic_entries(rounds)
+    except (KeyError, TypeError) as error:
+        raise CurrentManifestError(
+            f"campaign contract cannot form semantic entries: {error}"
+        ) from error
+    total = len(entries)
+    if staged_count < head_count:
+        raise CurrentManifestError("campaign anchor count rollback is forbidden")
+    if head_count > total:
+        raise CurrentManifestError(
+            f"campaign contract is shorter than HEAD anchor: {total} < {head_count}"
+        )
+
+    if staged_count == head_count:
+        if staged_prefix != head_prefix:
+            raise CurrentManifestError(
+                "campaign same-count anchor restamp is forbidden"
+            )
+        if total != staged_count:
+            raise CurrentManifestError(
+                f"campaign unanchored semantic tail: {total} rows, anchor {staged_count}"
+            )
+    else:
+        old_actual = campaign_audit_index.semantic_prefix_sha256(rounds, head_count)
+        if old_actual != head_prefix:
+            raise CurrentManifestError(
+                "campaign contract HEAD-anchored prefix changed before append"
+            )
+        if staged_count != head_count + 1:
+            raise CurrentManifestError(
+                "campaign anchor growth must add exactly one semantic event per transaction"
+            )
+        if staged_count != total:
+            raise CurrentManifestError(
+                f"campaign unanchored semantic tail: {total} rows, anchor {staged_count}"
+            )
+        if entries[head_count]["round"] <= entries[head_count - 1]["round"]:
+            raise CurrentManifestError(
+                "campaign anchor growth must append its semantic event in a new round"
+            )
+
+    staged_actual = campaign_audit_index.semantic_prefix_sha256(rounds, staged_count)
+    if staged_actual != staged_prefix:
+        raise CurrentManifestError(
+            "campaign staged anchor SHA does not match its protected prefix"
+        )
+    head_actual = campaign_audit_index.semantic_prefix_sha256(rounds, head_count)
+    if head_actual != head_prefix:
+        raise CurrentManifestError("campaign contract does not preserve the HEAD anchor")
+
+
+def _head_bytes(
+    path: str,
+    read_head_path: Callable[[str], bytes],
+) -> bytes:
+    if not callable(read_head_path):
+        raise CurrentManifestError("campaign HEAD-path reader is required")
+    try:
+        raw = read_head_path(path)
+    except (OSError, CurrentManifestError, KeyError) as error:
+        raise CurrentManifestError(
+            f"campaign gate cannot read HEAD:{path}: {error}"
+        ) from error
+    if not isinstance(raw, bytes):
+        raise CurrentManifestError(
+            f"campaign HEAD-path reader returned non-bytes: {path}"
+        )
+    return raw
+
+
 def _validate_campaign_gate(
     index_inventory: dict[str, GitIndexEntry],
     read_blob: Callable[[str], bytes],
+    read_head_path: Callable[[str], bytes],
 ) -> None:
     registry_path = "wiki/survey/sf-audit-artifact-registry.json"
     contract_path = campaign_audit_index.CONTRACT_PATH.relative_to(REPO).as_posix()
@@ -520,10 +614,18 @@ def _validate_campaign_gate(
         contract = strict_json_loads(
             _staged_bytes(contract_path, index_inventory, read_blob), contract_path
         )
-        baseline_count, baseline_prefix = _campaign_semantic_anchor_from_source(
-            _staged_bytes(
-                CAMPAIGN_SEMANTIC_ANCHOR_PATH, index_inventory, read_blob
-            )
+        staged_count, staged_prefix = _campaign_semantic_anchor_from_source(
+            _staged_bytes(CAMPAIGN_SEMANTIC_ANCHOR_PATH, index_inventory, read_blob)
+        )
+        head_count, head_prefix = _campaign_semantic_anchor_from_source(
+            _head_bytes(CAMPAIGN_SEMANTIC_ANCHOR_PATH, read_head_path)
+        )
+        _validate_campaign_anchor_lineage(
+            contract["rounds"],
+            head_count,
+            head_prefix,
+            staged_count,
+            staged_prefix,
         )
         carrier_documents = {
             path: _staged_bytes(path, index_inventory, read_blob)
@@ -533,8 +635,8 @@ def _validate_campaign_gate(
             registry,
             contract,
             carrier_documents,
-            baseline_count=baseline_count,
-            baseline_prefix_sha256=baseline_prefix,
+            baseline_count=staged_count,
+            baseline_prefix_sha256=staged_prefix,
         )
     except (JsonContractError, campaign_audit_index.CampaignIndexError) as error:
         raise CurrentManifestError(f"campaign-audit-index-invalid: {error}") from error
@@ -606,6 +708,7 @@ def build_manifest(
     read_bytes: Callable[[str], bytes],
     index_inventory: dict[str, GitIndexEntry],
     read_blob: Callable[[str], bytes],
+    read_head_path: Callable[[str], bytes],
 ) -> dict:
     if not isinstance(index_inventory, dict):
         raise CurrentManifestError("Git index inventory must be a path map")
@@ -626,7 +729,7 @@ def build_manifest(
         key=lambda entry: entry["path"],
     )
     if audit_specs:
-        _validate_campaign_gate(index_inventory, read_blob)
+        _validate_campaign_gate(index_inventory, read_blob, read_head_path)
     release_bound = list(_BASE_RELEASE_BOUND)
     prose_scan = list(_BASE_PROSE_SCAN)
     if audit_specs:
@@ -644,8 +747,11 @@ def render_manifest(
     read_bytes: Callable[[str], bytes],
     index_inventory: dict[str, GitIndexEntry],
     read_blob: Callable[[str], bytes],
+    read_head_path: Callable[[str], bytes],
 ) -> bytes:
-    document = build_manifest(read_bytes, index_inventory, read_blob)
+    document = build_manifest(
+        read_bytes, index_inventory, read_blob, read_head_path
+    )
     return (
         json.dumps(
             document,
@@ -766,6 +872,22 @@ def _git_release_context(
     return inventory, read_blob
 
 
+def _git_head_path_reader(repo: Path) -> Callable[[str], bytes]:
+    cache: dict[str, bytes] = {}
+
+    def read_head_path(path: str) -> bytes:
+        canonical = _canonical_git_path(path)
+        if canonical not in cache:
+            cache[canonical] = _run_git(
+                repo,
+                ["show", f"HEAD:{canonical}"],
+                label=f"git show HEAD:{canonical}",
+            )
+        return cache[canonical]
+
+    return read_head_path
+
+
 def _repo_reader(repo: Path = REPO) -> Callable[[str], bytes]:
     try:
         reader = TrustedRepoReader(repo)
@@ -776,7 +898,12 @@ def _repo_reader(repo: Path = REPO) -> Callable[[str], bytes]:
 
 def expected_bytes() -> bytes:
     inventory, read_blob = _git_release_context(REPO)
-    return render_manifest(_repo_reader(), inventory, read_blob)
+    return render_manifest(
+        _repo_reader(),
+        inventory,
+        read_blob,
+        _git_head_path_reader(REPO),
+    )
 
 
 def _resolve_output_path(

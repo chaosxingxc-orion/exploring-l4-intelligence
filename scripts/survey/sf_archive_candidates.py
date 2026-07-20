@@ -49,6 +49,7 @@ from sf_current_manifest import (  # noqa: E402
     CurrentManifestError,
     GitIndexEntry as CurrentGitIndexEntry,
     _git_command_prefix as git_command_prefix,
+    _git_head_path_reader,
     load_consumer_manifest,
     render_manifest as render_current_manifest,
 )
@@ -480,6 +481,7 @@ def _load_current_manifest_paths(
             reader.read_bytes,
             current_index,
             lambda blob: _read_blob(repo, blob),
+            _git_head_path_reader(repo),
         )
         if raw != expected:
             raise CurrentManifestError(
