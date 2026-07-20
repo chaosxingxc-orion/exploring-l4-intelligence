@@ -1,47 +1,73 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Audit-artifact immutability check (v7 doctoral review Gate MAJOR-3).
+"""Deterministic, zero-write audit-artifact immutability check.
 
-Asserts that every audit-layer dated artifact registered in
-wiki/survey/sf-audit-artifact-registry.json still has its pinned git blob
-at HEAD, and has no uncommitted working-tree drift. Any change to a
-registered path FAILS: corrections must be NEW dated supersession files,
-appended to the registry — never in-place rewrites.
+Default mode and explicit ``--check`` recompute the report from the stage-0
+registry/anchor graph and compare it byte-for-byte with the tracked report.
+They never write.  ``--write`` is reserved for an explicit transaction that
+has already staged a legal registry/anchor change; after writing, callers must
+stage the report and run ``--check``.
 
-Scope note: this guards the correct-workflow audit semantics only; it does
-not defend against malicious metadata tampering (out of scope per review
-§6.3). The registry itself is append-only: duplicate path rows fail.
-
-Self-test: an in-memory fixture with a wrong pinned blob must be detected,
-else exit 1 (oracle-can-fail proof).
-
-Run from anywhere:
-  python scripts/survey/sf_audit_immutability_check.py
-Writes docs/checks/2026-07-19-sf-audit-immutability-check.json.
+Registered artifacts must simultaneously match their pinned Git blob at HEAD,
+their stage-0 blob, and their trusted worktree bytes.  The deterministic report
+binds the stage-0 registry and anchor modes/blobs plus the complete registry
+prefix count/hash.  It deliberately contains no current-HEAD or self hash, so a
+later unrelated commit cannot make a clean check dirty or stale.
 """
-import io
+
+from __future__ import annotations
+
+import argparse
+import ast
 import json
-import os
+import re
 import subprocess
 import sys
-from pathlib import Path
+from dataclasses import dataclass
+from pathlib import Path, PurePosixPath
+from typing import Callable
+
 
 REPO = Path(__file__).resolve().parents[2]
 CHECKS_DIR = REPO / "scripts" / "checks"
 if str(CHECKS_DIR) not in sys.path:
     sys.path.insert(0, str(CHECKS_DIR))
 
-from ai_context_surface_check import git_command_prefix  # noqa: E402
+from ai_context_inventory import registry_prefix_sha256  # noqa: E402
+from ai_context_surface_check import (  # noqa: E402
+    ContextSurfaceError,
+    TrustedRepoReader,
+    git_command_prefix,
+    loads_json_strict,
+)
+from sf_query_compiler import atomic_write_bytes  # noqa: E402
 
 
-REGISTRY = REPO / "wiki" / "survey" / "sf-audit-artifact-registry.json"
-OUT = REPO / "docs" / "checks" / "2026-07-19-sf-audit-immutability-check.json"
+REGISTRY_RELATIVE = "wiki/survey/sf-audit-artifact-registry.json"
+ANCHOR_RELATIVE = "scripts/checks/ai_context_inventory.py"
+OUT_RELATIVE = "docs/checks/2026-07-19-sf-audit-immutability-check.json"
+OUT = REPO.joinpath(*OUT_RELATIVE.split("/"))
+REGULAR_MODES = {"100644", "100755"}
+HEX40 = re.compile(r"[0-9a-f]{40}\Z")
+HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 
 
-def git(*args):
+class AuditCheckError(RuntimeError):
+    """The Git graph or deterministic report contract is malformed."""
+
+
+@dataclass(frozen=True)
+class GitEntry:
+    mode: str
+    blob: str
+
+
+def git(*args: str, repo: Path = REPO) -> subprocess.CompletedProcess:
+    """Run one UTF-8 Git command, including linked-worktree translation."""
+
     completed = subprocess.run(
-        [*git_command_prefix(REPO), *args],
-        cwd=REPO,
+        [*git_command_prefix(repo), *args],
+        cwd=repo,
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -51,66 +77,359 @@ def git(*args):
     return completed
 
 
-def head_blobs():
-    out = git("ls-tree", "-r", "HEAD", "--", "wiki/").stdout
-    blobs = {}
-    for line in out.splitlines():
-        meta, path = line.split("\t", 1)
-        blobs[path] = meta.split()[2]
-    return blobs
+def _git_bytes(repo: Path, *args: str) -> bytes:
+    completed = subprocess.run(
+        [*git_command_prefix(repo), *args],
+        cwd=repo,
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise AuditCheckError(f"git {' '.join(args)} failed: {detail}")
+    return completed.stdout
 
 
-def evaluate(artifacts, blobs, dirty_paths):
-    """Pure evaluation so the negative fixture can reuse the real oracle."""
-    failures = []
-    seen = set()
-    for a in artifacts:
-        p, pin = a["path"], a["git_blob"]
-        if p in seen:
-            failures.append(f"{p}: duplicate registry row (append-only violated)")
-        seen.add(p)
-        actual = blobs.get(p)
-        if actual is None:
-            failures.append(f"{p}: missing at HEAD (registered artifact deleted)")
-        elif actual != pin:
-            failures.append(f"{p}: blob {actual[:12]} != pinned {pin[:12]} — "
-                            f"in-place rewrite; use a NEW dated supersession file")
-        if p in dirty_paths:
-            failures.append(f"{p}: uncommitted working-tree drift")
+def _canonical_path(value: object, label: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise AuditCheckError(f"{label} must be a nonempty repository path")
+    path = PurePosixPath(value)
+    if (
+        "\\" in value
+        or path.is_absolute()
+        or value != path.as_posix()
+        or any(part in ("", ".", "..") for part in path.parts)
+    ):
+        raise AuditCheckError(f"{label} is not canonical: {value!r}")
+    return value
+
+
+def _parse_stage0(raw: bytes) -> dict[str, GitEntry]:
+    entries: dict[str, GitEntry] = {}
+    try:
+        for record in (item for item in raw.split(b"\0") if item):
+            metadata, raw_path = record.split(b"\t", 1)
+            raw_mode, raw_blob, raw_stage = metadata.split(b" ", 2)
+            path = _canonical_path(raw_path.decode("utf-8"), "Git index path")
+            mode = raw_mode.decode("ascii")
+            blob = raw_blob.decode("ascii")
+            stage = raw_stage.decode("ascii")
+            if stage != "0":
+                raise AuditCheckError(f"non-stage-0 Git index entry: {path}")
+            if path in entries:
+                raise AuditCheckError(f"duplicate Git index path: {path}")
+            if HEX40.fullmatch(blob) is None:
+                raise AuditCheckError(f"invalid staged Git blob for {path}")
+            entries[path] = GitEntry(mode, blob)
+    except AuditCheckError:
+        raise
+    except (UnicodeDecodeError, ValueError) as error:
+        raise AuditCheckError(f"malformed stage-0 Git inventory: {error}") from error
+    return entries
+
+
+def _parse_head(raw: bytes) -> dict[str, GitEntry]:
+    entries: dict[str, GitEntry] = {}
+    try:
+        for record in (item for item in raw.split(b"\0") if item):
+            metadata, raw_path = record.split(b"\t", 1)
+            raw_mode, raw_type, raw_blob = metadata.split(b" ", 2)
+            if raw_type != b"blob":
+                continue
+            path = _canonical_path(raw_path.decode("utf-8"), "HEAD path")
+            mode = raw_mode.decode("ascii")
+            blob = raw_blob.decode("ascii")
+            if path in entries:
+                raise AuditCheckError(f"duplicate HEAD path: {path}")
+            if HEX40.fullmatch(blob) is None:
+                raise AuditCheckError(f"invalid HEAD Git blob for {path}")
+            entries[path] = GitEntry(mode, blob)
+    except AuditCheckError:
+        raise
+    except (UnicodeDecodeError, ValueError) as error:
+        raise AuditCheckError(f"malformed HEAD Git inventory: {error}") from error
+    return entries
+
+
+def _stage_graph(repo: Path) -> tuple[dict[str, GitEntry], Callable[[str], bytes]]:
+    inventory = _parse_stage0(_git_bytes(repo, "ls-files", "-s", "-z"))
+    cache: dict[str, bytes] = {}
+
+    def read_blob(blob: str) -> bytes:
+        if HEX40.fullmatch(blob) is None:
+            raise AuditCheckError(f"invalid Git blob request: {blob!r}")
+        if blob not in cache:
+            cache[blob] = _git_bytes(repo, "cat-file", "blob", blob)
+        return cache[blob]
+
+    return inventory, read_blob
+
+
+def _require_regular(
+    inventory: dict[str, GitEntry], path: str, label: str
+) -> GitEntry:
+    entry = inventory.get(path)
+    if entry is None:
+        raise AuditCheckError(f"{label} is not tracked at stage 0: {path}")
+    if entry.mode not in REGULAR_MODES:
+        raise AuditCheckError(f"{label} has non-regular Git mode {entry.mode}: {path}")
+    return entry
+
+
+def _anchor_values(raw: bytes) -> tuple[int, str]:
+    try:
+        tree = ast.parse(raw.decode("utf-8"), filename=ANCHOR_RELATIVE)
+    except (UnicodeDecodeError, SyntaxError) as error:
+        raise AuditCheckError(f"invalid staged anchor source: {error}") from error
+    values: dict[str, object] = {}
+    wanted = {"REGISTRY_BASELINE_COUNT", "REGISTRY_BASELINE_PREFIX_SHA256"}
+    for node in tree.body:
+        if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+            continue
+        targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+        value_node = node.value
+        for target in targets:
+            if isinstance(target, ast.Name) and target.id in wanted:
+                if target.id in values:
+                    raise AuditCheckError(f"duplicate staged anchor {target.id}")
+                try:
+                    values[target.id] = ast.literal_eval(value_node)
+                except (ValueError, TypeError) as error:
+                    raise AuditCheckError(
+                        f"staged anchor {target.id} must be a literal"
+                    ) from error
+    if set(values) != wanted:
+        raise AuditCheckError(
+            f"staged anchor must define exactly the required literals; found {sorted(values)}"
+        )
+    count = values["REGISTRY_BASELINE_COUNT"]
+    prefix = values["REGISTRY_BASELINE_PREFIX_SHA256"]
+    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        raise AuditCheckError("REGISTRY_BASELINE_COUNT must be a positive integer")
+    if not isinstance(prefix, str) or HEX64.fullmatch(prefix) is None:
+        raise AuditCheckError("REGISTRY_BASELINE_PREFIX_SHA256 must be 64 lowercase hex")
+    return count, prefix
+
+
+def _registry_artifacts(raw: bytes) -> list[dict[str, str]]:
+    try:
+        document = loads_json_strict(raw, REGISTRY_RELATIVE)
+    except ContextSurfaceError as error:
+        raise AuditCheckError(str(error)) from error
+    if not isinstance(document, dict) or not isinstance(document.get("artifacts"), list):
+        raise AuditCheckError("registry must be an object containing an artifacts list")
+    artifacts: list[dict[str, str]] = []
+    for index, artifact in enumerate(document["artifacts"]):
+        if not isinstance(artifact, dict) or set(artifact) != {"path", "git_blob"}:
+            raise AuditCheckError(
+                f"registry artifacts[{index}] must contain exactly path/git_blob"
+            )
+        path = _canonical_path(artifact["path"], f"registry artifacts[{index}].path")
+        pin = artifact["git_blob"]
+        if not isinstance(pin, str) or HEX40.fullmatch(pin) is None:
+            raise AuditCheckError(f"registry artifacts[{index}] has invalid Git blob")
+        artifacts.append({"path": path, "git_blob": pin})
+    return artifacts
+
+
+def evaluate(
+    artifacts: list[dict[str, str]],
+    head: dict[str, GitEntry],
+    staged: dict[str, GitEntry],
+    read_blob: Callable[[str], bytes],
+    read_worktree: Callable[[str], bytes],
+) -> list[str]:
+    """Evaluate HEAD, stage-0, and worktree identity for every registered row."""
+
+    failures: list[str] = []
+    seen: set[str] = set()
+    for artifact in artifacts:
+        path, pin = artifact["path"], artifact["git_blob"]
+        if path in seen:
+            failures.append(f"{path}: duplicate registry row (append-only violated)")
+        seen.add(path)
+        head_entry = head.get(path)
+        staged_entry = staged.get(path)
+        if head_entry is None:
+            failures.append(f"{path}: missing at HEAD (registered artifact not committed)")
+        elif head_entry.mode not in REGULAR_MODES:
+            failures.append(f"{path}: non-regular HEAD mode {head_entry.mode}")
+        elif head_entry.blob != pin:
+            failures.append(
+                f"{path}: HEAD blob {head_entry.blob[:12]} != pinned {pin[:12]}"
+            )
+        if staged_entry is None:
+            failures.append(f"{path}: missing at stage 0")
+            continue
+        if staged_entry.mode not in REGULAR_MODES:
+            failures.append(f"{path}: non-regular stage-0 mode {staged_entry.mode}")
+            continue
+        if staged_entry.blob != pin:
+            failures.append(
+                f"{path}: stage-0 blob {staged_entry.blob[:12]} != pinned {pin[:12]}"
+            )
+        try:
+            staged_raw = read_blob(staged_entry.blob)
+            worktree_raw = read_worktree(path)
+        except (AuditCheckError, ContextSurfaceError, OSError) as error:
+            failures.append(f"{path}: trusted byte read failed: {error}")
+            continue
+        if worktree_raw != staged_raw:
+            failures.append(f"{path}: worktree bytes differ from stage-0 Git blob")
     return failures
 
 
-def main():
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    reg = json.load(io.open(REGISTRY, encoding="utf-8"))
-    blobs = head_blobs()
-    status = git("status", "--porcelain", "--", "wiki/").stdout
-    dirty = {l[3:].strip().strip('"') for l in status.splitlines() if l.strip()}
-
-    # oracle-can-fail proof: a wrong pin MUST be flagged by the same oracle
-    fx = [{"path": reg["artifacts"][0]["path"], "git_blob": "0" * 40}]
-    if not evaluate(fx, blobs, set()):
-        print("[FAIL] negative fixture NOT flagged — immutability oracle broken")
-        return 1
-
-    failures = evaluate(reg["artifacts"], blobs, dirty)
+def _render_report(
+    *,
+    registry_entry: GitEntry,
+    anchor_entry: GitEntry,
+    registered: int,
+    prefix_count: int,
+    prefix_sha256: str,
+    failures: list[str],
+    registry_relative: str,
+    anchor_relative: str,
+) -> bytes:
     result = {
+        "schema": "sf-audit-immutability-report-v2",
         "check": "sf-audit-immutability",
-        "registry": REGISTRY.relative_to(REPO).as_posix(),
-        "registered": len(reg["artifacts"]),
-        "head": git("rev-parse", "HEAD").stdout.strip(),
+        "registry": registry_relative,
+        "registry_stage0": {
+            "mode": registry_entry.mode,
+            "git_blob": registry_entry.blob,
+        },
+        "anchor_stage0": {
+            "path": anchor_relative,
+            "mode": anchor_entry.mode,
+            "git_blob": anchor_entry.blob,
+        },
+        "registered": registered,
+        "registry_prefix": {
+            "count": prefix_count,
+            "sha256": prefix_sha256,
+        },
+        "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
         "failures": failures,
         "status": "FAIL" if failures else "PASS",
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    io.open(OUT, "w", encoding="utf-8", newline="\n").write(
-        json.dumps(result, ensure_ascii=False, indent=2) + "\n")
-    for f in failures:
-        print(f"[IMMUTABILITY] {f}")
-    print(f"audit immutability: {result['status']} "
-          f"({len(reg['artifacts'])} registered, {len(failures)} failures)")
-    return 1 if failures else 0
+    return (json.dumps(result, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def expected_report(
+    *,
+    repo: Path,
+    registry_relative: str,
+    anchor_relative: str,
+) -> tuple[bytes, list[str], int]:
+    registry_relative = _canonical_path(registry_relative, "registry path")
+    anchor_relative = _canonical_path(anchor_relative, "anchor path")
+    staged, read_blob = _stage_graph(repo)
+    head = _parse_head(_git_bytes(repo, "ls-tree", "-r", "-z", "HEAD", "--"))
+    reader = TrustedRepoReader(repo)
+    registry_entry = _require_regular(staged, registry_relative, "registry")
+    anchor_entry = _require_regular(staged, anchor_relative, "anchor")
+    registry_raw = read_blob(registry_entry.blob)
+    anchor_raw = read_blob(anchor_entry.blob)
+    if reader.read_bytes(registry_relative) != registry_raw:
+        raise AuditCheckError("registry worktree bytes differ from stage-0 Git blob")
+    if reader.read_bytes(anchor_relative) != anchor_raw:
+        raise AuditCheckError("anchor worktree bytes differ from stage-0 Git blob")
+    artifacts = _registry_artifacts(registry_raw)
+    count, expected_prefix = _anchor_values(anchor_raw)
+    if len(artifacts) != count:
+        raise AuditCheckError(
+            f"registry/anchor count mismatch: registry={len(artifacts)}, anchor={count}"
+        )
+    actual_prefix = registry_prefix_sha256(artifacts, count)
+    if actual_prefix != expected_prefix:
+        raise AuditCheckError(
+            f"registry prefix mismatch: {actual_prefix} != {expected_prefix}"
+        )
+    failures = evaluate(artifacts, head, staged, read_blob, reader.read_bytes)
+
+    # Oracle-can-fail proof uses the same binding evaluator.
+    wrong = [{"path": artifacts[0]["path"], "git_blob": "0" * 40}]
+    if not evaluate(wrong, head, staged, read_blob, reader.read_bytes):
+        raise AuditCheckError("negative fixture was not rejected")
+
+    report = _render_report(
+        registry_entry=registry_entry,
+        anchor_entry=anchor_entry,
+        registered=len(artifacts),
+        prefix_count=count,
+        prefix_sha256=actual_prefix,
+        failures=failures,
+        registry_relative=registry_relative,
+        anchor_relative=anchor_relative,
+    )
+    return report, failures, len(artifacts)
+
+
+def run(
+    mode: str,
+    *,
+    repo: Path = REPO,
+    registry_relative: str = REGISTRY_RELATIVE,
+    anchor_relative: str = ANCHOR_RELATIVE,
+    output_relative: str = OUT_RELATIVE,
+) -> int:
+    """Run deterministic write or zero-write check mode."""
+
+    if mode not in {"check", "write"}:
+        raise ValueError(f"unsupported mode: {mode}")
+    repo = Path(repo)
+    output_relative = _canonical_path(output_relative, "report path")
+    expected, failures, registered = expected_report(
+        repo=repo,
+        registry_relative=registry_relative,
+        anchor_relative=anchor_relative,
+    )
+    output = repo.joinpath(*output_relative.split("/"))
+    report_failure: str | None = None
+    if mode == "write":
+        atomic_write_bytes(output, expected)
+    else:
+        staged, read_blob = _stage_graph(repo)
+        report_entry = _require_regular(staged, output_relative, "tracked report")
+        staged_report = read_blob(report_entry.blob)
+        try:
+            worktree_report = TrustedRepoReader(repo).read_bytes(output_relative)
+        except ContextSurfaceError as error:
+            raise AuditCheckError(str(error)) from error
+        if staged_report != expected:
+            report_failure = "tracked stage-0 report is stale"
+        elif worktree_report != staged_report:
+            report_failure = "report worktree bytes differ from tracked stage-0 report"
+
+    for failure in failures:
+        print(f"[IMMUTABILITY] {failure}")
+    if report_failure is not None:
+        print(f"[IMMUTABILITY] {report_failure}")
+    status = "PASS" if not failures and report_failure is None else "FAIL"
+    print(
+        f"audit immutability: {status} "
+        f"({registered} registered, {len(failures)} artifact failures)"
+    )
+    return 0 if status == "PASS" else 1
+
+
+def _parse_args(argv: list[str] | None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--check", action="store_true", help="zero-write check (default)")
+    modes.add_argument("--write", action="store_true", help="write deterministic report")
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    arguments = _parse_args(argv)
+    mode = "write" if arguments.write else "check"
+    try:
+        return run(mode)
+    except (AuditCheckError, ContextSurfaceError, OSError, subprocess.CalledProcessError) as error:
+        print(f"[IMMUTABILITY] {error}")
+        return 1
 
 
 if __name__ == "__main__":

@@ -933,7 +933,7 @@ dual-platform check: PASS (0 failures)
 - [ ] **Step 5: Confirm historical audit files are untouched**
 
 ```powershell
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --check
 git status --short
 ```
 
@@ -962,7 +962,7 @@ python scripts/survey/sf_schema_v3_migrate.py --check
 python scripts/survey/sf_coding_generator.py --check
 python scripts/survey/sf_identity_taxonomy_v6_test.py
 python scripts/survey/sf_dual_platform_check.py
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --check
 ```
 
 Expected: every command exits zero.

@@ -1019,6 +1019,8 @@ class ManifestRefreshPlanContractTests(unittest.TestCase):
             "REGISTRY_BASELINE_PREFIX_SHA256",
             "registry_prefix_sha256(rows, len(rows))",
             "zero-write",
+            "python scripts/survey/sf_audit_immutability_check.py --write",
+            "python scripts/survey/sf_audit_immutability_check.py --check",
         ):
             self.assertIn(required, task)
         self.assert_ordered(
@@ -1026,8 +1028,9 @@ class ManifestRefreshPlanContractTests(unittest.TestCase):
             (
                 correction_blob,
                 registry_anchor_stage,
-                "python scripts/survey/sf_audit_immutability_check.py",
+                "python scripts/survey/sf_audit_immutability_check.py --write",
                 report_stage,
+                "python scripts/survey/sf_audit_immutability_check.py --check",
                 "python scripts/checks/build_ai_context_manifest.py --check",
                 "git diff --exit-code -- docs/integrity/ai-context-manifest.json",
                 'git commit -m "audit(wiki): register round12 correction blob"',

@@ -547,7 +547,7 @@ the moved bytes. Run:
 
 ```powershell
 python scripts/survey/sf_archive_candidates.py --check-applied
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --check
 git diff --summary
 ```
 
@@ -750,8 +750,9 @@ python -c "import json,sys; p='wiki/survey/sf-audit-artifact-registry.json'; row
 # Copy only the two printed literals into scripts/checks/ai_context_inventory.py.
 python -c "import json,sys; sys.path.insert(0,'scripts/checks'); from ai_context_inventory import REGISTRY_BASELINE_COUNT,REGISTRY_BASELINE_PREFIX_SHA256,registry_prefix_sha256; rows=json.load(open('wiki/survey/sf-audit-artifact-registry.json',encoding='utf-8'))['artifacts']; assert len(rows)==REGISTRY_BASELINE_COUNT==78; assert registry_prefix_sha256(rows, len(rows))==REGISTRY_BASELINE_PREFIX_SHA256; assert rows[-1]['git_blob']==sys.argv[1]" $correctionBlob
 git add wiki/survey/sf-audit-artifact-registry.json scripts/checks/ai_context_inventory.py
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --write
 git add docs/checks/2026-07-19-sf-audit-immutability-check.json
+python scripts/survey/sf_audit_immutability_check.py --check
 python scripts/checks/build_ai_context_manifest.py --check
 python scripts/checks/ai_context_surface_check.py
 git diff --exit-code -- docs/integrity/ai-context-manifest.json
@@ -759,10 +760,11 @@ git diff --exit-code -- wiki/survey/sf-audit-artifact-registry.json scripts/chec
 git commit -m "audit(wiki): register round12 correction blob"
 ```
 
-Expected: registry count 78, the full 78-row prefix matches the staged anchor, immutability `PASS`,
-builder/surface `PASS`, and the AI manifest zero-write assertion passes. If the registry, anchor, or
-report changes after staging, re-stage the changed file and repeat the checks; do not enter Task 9
-with an unanchored registry tail.
+Expected: registry count 78, the full 78-row prefix matches the staged anchor, the explicit write is
+staged and then accepted by zero-write `--check`, immutability is `PASS`, builder/surface are `PASS`,
+and the AI manifest zero-write assertion passes. Normal gates never invoke `--write`. If the registry,
+anchor, or report changes after staging, re-stage the changed file and repeat the checks; do not enter
+Task 9 with an unanchored registry tail.
 
 ---
 
@@ -861,7 +863,7 @@ python scripts/survey/sf_current_manifest.py --check
 python scripts/survey/sf_release_binding_check.py
 python scripts/survey/sf_quantifier_scan.py
 python scripts/survey/sf_archive_candidates.py --check-applied
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --check
 python scripts/checks/build_ai_context_manifest.py --check
 python scripts/checks/ai_context_surface_check.py
 ```
@@ -927,7 +929,7 @@ discovery output, model rollout, smoke result, or work-repo code change exists.
 
 ```powershell
 python scripts/survey/sf_current_package_check.py
-python scripts/survey/sf_audit_immutability_check.py
+python scripts/survey/sf_audit_immutability_check.py --check
 python scripts/checks/ai_context_surface_check.py
 git diff --check
 git status --short

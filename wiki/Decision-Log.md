@@ -37,9 +37,10 @@ AUDIT 与 byte-preserving ARCHIVE 又保留“发生过什么”和精确 proven
 
 默认加载面保持三项，当前 survey 从 stable router/manifest 定向加载，历史只经 campaign/archive
 index 精确取证。schema-v3 v6 报告、Windows/WSL occupancy equality、protocol-v2 byte equivalence、
-current/AI manifest、audit immutability 与 archive safety 的现有机器门均通过；本次实现的内部敌意
-复审为 0 Critical / 0 Important。该结论只说明修复包可提交正式独立复审：doctoral re-review、
-reviewer signature 与 owner Stage-1B execution approval 仍未取得，Stage-1B 未开始。
+current/AI manifest、audit immutability 与 archive safety 目前只分别完成了单项门/组件级检查；
+B9 质量复审所指出的 zero-write 与状态闭合缺口是本次更正的范围，但这不把单项结果聚合为 readiness。
+Task10 integrated gate 与 B10/B11 final review 仍未完成；在它们完成前不得声称修复包可提交或已就绪。
+doctoral re-review、reviewer signature 与 owner Stage-1B execution approval 仍未取得，Stage-1B 未开始。
 
 #### Purpose chain
 
@@ -57,7 +58,8 @@ systematic mapping 确认问题与证据边界；为了让 mapping 可复核，S
 机器正典的证据对是
 `(c81380d, 3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd)`；七项物理归档
 由提交 `9cc36da` 及 `wiki/archive/working/system-first-stage1a/INDEX.md` / `archive-plan.json`
-所钉的原 Git blobs 与 SHA-256 清单证明。
+中逐项列出的 source、destination、Git mode 与 Git blob 清单证明；移动前后 mode/blob 相同，
+不以 SHA-256 充当归档条目身份。
 本 repair scope 的 discovery query / research-model / smoke 均为 0，
 `INHERITED_PRIOR_EXPOSURE` 保持原账不变。
 

@@ -1,8 +1,22 @@
 {
+  "schema": "sf-audit-immutability-report-v2",
   "check": "sf-audit-immutability",
   "registry": "wiki/survey/sf-audit-artifact-registry.json",
+  "registry_stage0": {
+    "mode": "100644",
+    "git_blob": "f5f01fe9b349f37f13b4cc0f4885862f6ae77bd9"
+  },
+  "anchor_stage0": {
+    "path": "scripts/checks/ai_context_inventory.py",
+    "mode": "100644",
+    "git_blob": "ede08e6ab7c740d9e9a9e530591a3f4ac8ce6846"
+  },
   "registered": 78,
-  "head": "ac1f51b79565298035ba0dfe8dcae5c192b684a4",
+  "registry_prefix": {
+    "count": 78,
+    "sha256": "7f6091334de33bceccb7d566812723f2b2d90f6ec126746a24cf855f520b9f02"
+  },
+  "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
   "failures": [],
   "status": "PASS"
 }

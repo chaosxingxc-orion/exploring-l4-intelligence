@@ -262,7 +262,11 @@ change is allowed in this task.
 - Current-context files that reference individual amendments or archived operational files fail the
   context-surface check.
 - A missing current-manifest path or hash mismatch fails the package check.
-- A registered artifact with path or byte drift continues to fail the existing immutability check.
+- A registered artifact with HEAD, stage-0, or worktree byte drift continues to fail the
+  immutability check. Its default/`--check` mode is strictly zero-write and compares a deterministic
+  tracked report; only an explicit registry/anchor transaction may use `--write`, then stage the
+  report and prove it with `--check`. The report binds registry/anchor Git mode and blob plus the
+  complete registry prefix count/hash, and contains no current-HEAD or self-hash field.
 - Any failed gate leaves the canonical stage at Stage-1A and forbids a "ready for sign-off" statement.
 
 ## 9. Verification design
