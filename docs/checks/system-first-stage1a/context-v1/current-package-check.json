@@ -1,0 +1,97 @@
+{
+  "schema": "sf-current-package-check-v1",
+  "check": "sf-current-package",
+  "commands": [
+    {
+      "command": "python scripts/survey/test_sf_evidence_contract.py",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": ".................................\n----------------------------------------------------------------------\nRan 33 tests\n\nOK"
+    },
+    {
+      "command": "python scripts/survey/sf_schema_v3_migrate.py --check",
+      "exit_code": 0,
+      "stdout_tail": "schema-v3 migration: PASS (8 sidecars, 11 rows, 12 signals; pending adjudication)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_coding_generator.py --check",
+      "exit_code": 0,
+      "stdout_tail": "[OK] coding byte-identical to generator output",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_identity_taxonomy_v6_test.py",
+      "exit_code": 0,
+      "stdout_tail": "{\n \"summary\": \"14/14 PASS\",\n \"verdict\": \"PASS\",\n \"platform\": {\n  \"os\": \"nt\",\n  \"python\": \"3.14.3\"\n },\n \"policy_A_key_numbers\": {\n  \"reward_guided\": \"6/11\",\n  \"rq_sys_compatible\": \"5/11\",\n  \"method_candidate\": \"0/11\",\n  \"reward_guided_selection\": \"4/11\",\n  \"trajectory_pool\": \"2/11\"\n }\n}",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_dual_platform_check.py",
+      "exit_code": 0,
+      "stdout_tail": "current release binding: CONFIRMED\nfrozen report semantics: CONFIRMED\ninput snapshot equality: CONFIRMED\ninput provenance equality: CONFIRMED\nnt: {'os': 'nt', 'python': '3.14.3'}  posix: {'os': 'posix', 'python': '3.12.3'}\noccupancy equality: CONFIRMED\ndual-platform check: PASS (0 failures)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/test_sf_query_compiler_profiles.py",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "failure_restores_existing_target_bytes_and_mode) ... ok\ntest_rollback_fsync_failure_is_composite_without_backup_debris (__main__.CompilerCliTests.test_rollback_fsync_failure_is_composite_without_backup_debris) ... ok\ntest_rollback_replace_failure_is_composite_and_keeps_recovery_backup (__main__.CompilerCliTests.test_rollback_replace_failure_is_composite_and_keeps_recovery_backup) ... ok\ntest_successful_publish_keeps_parent_fsync_and_leaves_no_debris (__main__.CompilerCliTests.test_successful_publish_keeps_parent_fsync_and_leaves_no_debris) ... ok\ntest_all_record_hashes_recompute (__main__.CompilerProfileTests.test_all_record_hashes_recompute) ... ok\ntest_hash_and_render_reject_nan_and_infinity (__main__.CompilerProfileTests.test_hash_and_render_reject_nan_and_infinity) ... ok\ntest_legacy_current_and_frozen_bytes_are_identical (__main__.CompilerProfileTests.test_legacy_current_and_frozen_bytes_are_identical) ... ok\ntest_one_section_4_term_change_changes_compiled_bytes (__main__.CompilerProfileTests.test_one_section_4_term_change_changes_compiled_bytes) ... ok\ntest_section_4_extraction_requires_exactly_one_exact_h2 (__main__.CompilerProfileTests.test_section_4_extraction_requires_exactly_one_exact_h2) ... ok\ntest_appendix_has_exactly_the_14_explicit_dispositions (__main__.ProtocolStructureTests.test_appendix_has_exactly_the_14_explicit_dispositions) ... ok\ntest_appendix_routes_through_cold_indexes_without_physical_paths (__main__.ProtocolStructureTests.test_appendix_routes_through_cold_indexes_without_physical_paths) ... ok\ntest_coverage_matrix_sources_exist_and_normative_targets_carry_rules (__main__.ProtocolStructureTests.test_coverage_matrix_sources_exist_and_normative_targets_carry_rules) ... ok\ntest_direct_threat_requires_exact_dual_coding_contract (__main__.ProtocolStructureTests.test_direct_threat_requires_exact_dual_coding_contract) ... ok\ntest_e2_requires_complete_identifier_resolution_contract (__main__.ProtocolStructureTests.test_e2_requires_complete_identifier_resolution_contract) ... ok\ntest_exact_final_derivation_formulas (__main__.ProtocolStructureTests.test_exact_final_derivation_formulas) ... ok\ntest_exact_frontmatter_and_fixed_section_map (__main__.ProtocolStructureTests.test_exact_frontmatter_and_fixed_section_map) ... ok\ntest_incremental_scan_contract_covers_both_execution_boundaries (__main__.ProtocolStructureTests.test_incremental_scan_contract_covers_both_execution_boundaries) ... ok\ntest_non_normative_section_4_narrative_mutations_do_not_change_contract (__main__.ProtocolStructureTests.test_non_normative_section_4_narrative_mutations_do_not_change_contract) ... ok\ntest_producer_replay_contract_appears_once (__main__.ProtocolStructureTests.test_producer_replay_contract_appears_once) ... ok\ntest_protocol_is_self_contained_not_amendment_dependent (__main__.ProtocolStructureTests.test_protocol_is_self_contained_not_amendment_dependent) ... ok\ntest_reviewer_facing_reference_contract_is_explicit (__main__.ProtocolStructureTests.test_reviewer_facing_reference_contract_is_explicit) ... ok\ntest_section_4_has_an_explicit_normative_interpretation_fence (__main__.ProtocolStructureTests.test_section_4_has_an_explicit_normative_interpretation_fence) ... ok\ntest_section_4_is_exact_raw_lf_copy_to_next_h2 (__main__.ProtocolStructureTests.test_section_4_is_exact_raw_lf_copy_to_next_h2) ... ok\ntest_section_8_execution_steps_are_exact_and_strictly_ordered (__main__.ProtocolStructureTests.test_section_8_execution_steps_are_exact_and_strictly_ordered) ... ok\ntest_section_contracts_stop_before_appendix_h2 (__main__.ProtocolStructureTests.test_section_contracts_stop_before_appendix_h2) ... ok\ntest_structured_protocol_contract_oracle_accepts_current_protocol (__main__.ProtocolStructureTests.test_structured_protocol_contract_oracle_accepts_current_protocol) ... ok\ntest_structured_protocol_contract_oracle_rejects_semantic_mutations (__main__.ProtocolStructureTests.test_structured_protocol_contract_oracle_rejects_semantic_mutations) ... ok\n\n----------------------------------------------------------------------\nRan 37 tests\n\nOK"
+    },
+    {
+      "command": "python scripts/survey/sf_query_compiler.py --check --check-against wiki/survey/2026-07-15-sf-queries.jsonl",
+      "exit_code": 0,
+      "stdout_tail": "[sf_query_compiler] parsed 48 base Q fragments from §4 (8 lanes x 6 each) + 3 A3-8 registered addition(s) ['SF-L1-Q7', 'SF-L1-Q8', 'SF-L3-Q7'] + 14 registered lane addition(s) ['SF-L10-Q1', 'SF-L10-Q2', 'SF-L11-Q1', 'SF-L11-Q2', 'SF-L12-Q1', 'SF-L12-Q2', 'SF-L12-Q3', 'SF-L13-Q1', 'SF-L13-Q2', 'SF-L13-Q3', 'SF-L14-Q1', 'SF-L14-Q2', 'SF-L15-Q1', 'SF-L15-Q2']\n[sf_query_compiler] NOTE: found 1 lane subsection(s) in §4 outside the registered compiler lanes, each verified to carry ZERO '- Q<n>' Boolean query lines, so excluded from compilation without loss: ['SF-L9']\n\n[sf_query_compiler] static validation report\n========================================================================\n  [PASS] row_count_equals_expected_total :: got 65, expected 65\n  [PASS] query_id_unique :: n_unique=65\n  [PASS] no_placeholder_or_ellipsis_or_angle_bracket_residue :: clean\n  [PASS] no_stray_brackets_outside_submittedDate :: clean\n  [PASS] balanced_parens_and_quotes :: clean\n  [PASS] boolean_operators_fully_uppercase :: clean\n  [PASS] dates_well_formed_and_ordered :: clean\n  [PASS] each_lane_has_expected_query_count :: all lanes match {'SF-L1': 8, 'SF-L2': 6, 'SF-L3': 7, 'SF-L4': 6, 'SF-L5': 6, 'SF-L6': 6, 'SF-L7': 6, 'SF-L8': 6, 'SF-L10': 2, 'SF-L11': 2, 'SF-L12': 3, 'SF-L13': 3, 'SF-L14': 2, 'SF-L15': 2}\n  [PASS] bonus_categories_match_frozen_mapping :: clean\n  [PASS] bonus_exceptions_applied_correctly :: clean\n  [PASS] bonus_record_sha256_recomputes_identically :: clean\n  [PASS] bonus_compiler_version_tiered_correctly :: clean\n  [PASS] bonus_output_order_is_base_prefix_then_additions_appended :: clean\n========================================================================\nOVERALL: PASS\n[sf_query_compiler] PASS (65 byte-identical records)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_current_tables.py --check",
+      "exit_code": 0,
+      "stdout_tail": "current opening table: PASS",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_current_manifest.py --check",
+      "exit_code": 0,
+      "stdout_tail": "current survey manifest: PASS",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_release_binding_check.py",
+      "exit_code": 0,
+      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_quantifier_scan.py",
+      "exit_code": 0,
+      "stdout_tail": "quantifier scan: PASS (0 input failures, 0 unscoped; scope=current-manifest)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_archive_candidates.py --check-applied",
+      "exit_code": 0,
+      "stdout_tail": "archive applied: PASS (7 byte-identical moves; check-only)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_audit_immutability_check.py --check",
+      "exit_code": 0,
+      "stdout_tail": "audit immutability: PASS (78 registered, 0 artifact failures)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/checks/build_ai_context_manifest.py --check",
+      "exit_code": 0,
+      "stdout_tail": "AI context manifest: PASS",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/checks/ai_context_surface_check.py",
+      "exit_code": 0,
+      "stdout_tail": "AI context surface: PASS (0 failures)",
+      "stderr_tail": ""
+    }
+  ],
+  "verdict": "PASS"
+}

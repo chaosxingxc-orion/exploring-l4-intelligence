@@ -1,0 +1,78 @@
+{
+  "schema": "wiki-sync-dry-run-incident-v1",
+  "incident_id": "SF-STAGE1A-WIKI-SYNC-2026-07-20-01",
+  "date": "2026-07-20",
+  "scope": "Task 10 publication simulation only",
+  "summary": "A PowerShell-to-WSL stdin retry contaminated the intended --dry-run argument with CR. The legacy permissive argument parser treated the unknown argument as publish mode, created one commit in the gitignored temporary wiki clone, and attempted a push. The push exited nonzero and the remote ref did not change.",
+  "events": [
+    {
+      "sequence": 1,
+      "action": "exact dry-run from the linked worktree",
+      "exit_code": 128,
+      "effect": "stopped before clone, commit, or push",
+      "output_tail": "fatal: not a git repository: <worktree>/D:/chao_workspace/exploring-l4-intelligence/.git/worktrees/stage1b-readiness-remediation"
+    },
+    {
+      "sequence": 2,
+      "action": "stdin wrapper retry intended as dry-run",
+      "argument_observed": "--dry-run followed by CR",
+      "exit_code": 1,
+      "temporary_local_commit": "4506900",
+      "push_attempted": true,
+      "push_succeeded": false,
+      "output_tail": "fatal: unable to access 'https://github.com/chaosxingxc-orion/exploring-l4-intelligence.wiki.git/': gnutls_handshake() failed: The TLS connection was non-properly terminated."
+    },
+    {
+      "sequence": 3,
+      "action": "LF/base64 wrapper dry-run completed before the pause instruction arrived",
+      "exit_code": 0,
+      "push_attempted": false,
+      "output_tail": "[dry-run] not committing or pushing."
+    }
+  ],
+  "read_only_containment_evidence": {
+    "real_worktree_head": "c518cda35b326a9f3f8a6f66506e8627223f2878",
+    "real_branch": "codex/stage1b-readiness-remediation",
+    "real_worktree_new_commit": false,
+    "temporary_clone_relative_path": ".wiki-tmp",
+    "temporary_clone_ignore_rule": ".gitignore:63:.wiki-tmp/",
+    "fresh_temporary_clone_head": "91734b679689b19dae54b17d858828e28658d52c",
+    "remote_ref_command": "git ls-remote https://github.com/chaosxingxc-orion/exploring-l4-intelligence.wiki.git refs/heads/master",
+    "remote_ref_exit_code": 0,
+    "remote_master_after_attempt": "91734b679689b19dae54b17d858828e28658d52c",
+    "remote_changed_by_attempt": false,
+    "reason": "The fresh clone and independent ls-remote agree on 91734b6; neither equals temporary local commit 4506900."
+  },
+  "root_causes": [
+    "wiki-sync.sh did not translate a native-Windows linked-worktree gitdir pointer when run inside WSL.",
+    "wiki-sync.sh accepted every argument other than exact --dry-run as implicit publish mode instead of failing closed.",
+    "The stdin wrapper transport introduced CR into the intended dry-run argument."
+  ],
+  "corrective_actions": [
+    "Reject CR-suffixed, unknown, and multiple arguments before any Git command; accept only zero arguments or exact --dry-run.",
+    "Resolve linked-worktree .git pointers and translate drive-letter gitdirs under WSL before umbrella Git queries.",
+    "Run offline tests with a local bare wiki remote and Git invocation log proving exact dry-run contains no commit or push.",
+    "Remove the verified gitignored .wiki-tmp clone after preserving this evidence, then rerun the native WSL dry-run without a wrapper."
+  ],
+  "post_fix_verification": {
+    "invocation": "wsl -d Ubuntu-24.04 bash -lc cd <worktree> && bash scripts/wiki-sync.sh --dry-run",
+    "wrapper_used": false,
+    "exit_code": 0,
+    "output_tail": "[dry-run] not committing or pushing.",
+    "real_worktree_head_after": "c518cda35b326a9f3f8a6f66506e8627223f2878",
+    "remote_master_after": "91734b679689b19dae54b17d858828e28658d52c",
+    "subsequent_remote_recheck": {
+      "exit_code": 128,
+      "result": "network verification unavailable on this later repeat",
+      "output_tail": "fatal: unable to access the wiki remote: TLS connect error; unexpected EOF while reading",
+      "interpretation": "This does not replace the earlier successful ls-remote evidence."
+    },
+    "temporary_clone_exists_after": false,
+    "commit_or_push_performed_by_post_fix_dry_run": false
+  },
+  "research_execution_boundary": {
+    "discovery_query_executed": false,
+    "model_or_smoke_executed": false,
+    "wiki_push_succeeded": false
+  }
+}

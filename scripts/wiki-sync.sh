@@ -26,21 +26,84 @@
 set -euo pipefail
 
 DRY_RUN=0
-[[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
+case "$#" in
+  0) ;;
+  1)
+    if [[ "$1" == "--dry-run" ]]; then
+      DRY_RUN=1
+    else
+      echo "ERROR: unsupported argument; expected no arguments or exact --dry-run" >&2
+      exit 2
+    fi
+    ;;
+  *)
+    echo "ERROR: unsupported arguments; expected no arguments or exact --dry-run" >&2
+    exit 2
+    ;;
+esac
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC_DIR="$REPO_ROOT/wiki"
 WORK_DIR="$REPO_ROOT/.wiki-tmp"   # gitignored working clone of the wiki repo
 
+[[ "$WORK_DIR" == "$REPO_ROOT/.wiki-tmp" && "$REPO_ROOT" == /* ]] || {
+  echo "ERROR: unsafe wiki temporary path: $WORK_DIR" >&2
+  exit 1
+}
+
+cleanup_work_dir() {
+  rm -rf -- "$WORK_DIR"
+}
+
+if [[ "$DRY_RUN" == "1" ]]; then
+  trap cleanup_work_dir EXIT
+fi
+
 [[ -d "$SRC_DIR" ]] || { echo "ERROR: wiki source dir not found: $SRC_DIR" >&2; exit 1; }
 
-ORIGIN="$(git -C "$REPO_ROOT" remote get-url origin)"
+REPO_GIT_ARGS=()
+DOT_GIT="$REPO_ROOT/.git"
+if [[ -d "$DOT_GIT" ]]; then
+  REPO_GIT_ARGS=(-C "$REPO_ROOT")
+elif [[ -f "$DOT_GIT" ]]; then
+  mapfile -t GIT_POINTER_LINES < "$DOT_GIT"
+  [[ "${#GIT_POINTER_LINES[@]}" == "1" ]] || {
+    echo "ERROR: malformed linked-worktree .git pointer" >&2
+    exit 1
+  }
+  GIT_POINTER="${GIT_POINTER_LINES[0]%$'\r'}"
+  [[ "$GIT_POINTER" == "gitdir: "* ]] || {
+    echo "ERROR: malformed linked-worktree .git pointer" >&2
+    exit 1
+  }
+  GIT_DIR_PATH="${GIT_POINTER#gitdir: }"
+  if [[ "$GIT_DIR_PATH" =~ ^([A-Za-z]):[\\/](.*)$ && -d "/mnt/${BASH_REMATCH[1],,}" ]]; then
+    GIT_DIR_PATH="/mnt/${BASH_REMATCH[1],,}/${BASH_REMATCH[2]//\\//}"
+  elif [[ "$GIT_DIR_PATH" != /* && ! "$GIT_DIR_PATH" =~ ^[A-Za-z]:[\\/] ]]; then
+    GIT_DIR_PATH="$REPO_ROOT/$GIT_DIR_PATH"
+  fi
+  [[ -d "$GIT_DIR_PATH" ]] || {
+    echo "ERROR: linked-worktree gitdir not found: $GIT_DIR_PATH" >&2
+    exit 1
+  }
+  GIT_DIR_PATH="$(cd "$GIT_DIR_PATH" && pwd -P)"
+  REPO_GIT_ARGS=(--git-dir="$GIT_DIR_PATH" --work-tree="$REPO_ROOT")
+else
+  echo "ERROR: repository metadata not found: $DOT_GIT" >&2
+  exit 1
+fi
+
+repo_git() {
+  command git "${REPO_GIT_ARGS[@]}" "$@"
+}
+
+ORIGIN="$(repo_git remote get-url origin)"
 WIKI_URL="${ORIGIN%.git}.wiki.git"
 echo "Wiki remote: $WIKI_URL"
 
 # Always start from a clean working clone (avoids stale-state wedging across runs).
-rm -rf "$WORK_DIR"
+cleanup_work_dir
 FRESH=0
 CLONE_ERR=""
 if CLONE_ERR="$(git clone "$WIKI_URL" "$WORK_DIR" 2>&1)"; then
@@ -80,12 +143,15 @@ done < <(find "$SRC_DIR" -name '*.md' -print0)
 cd "$WORK_DIR"
 # This is a throwaway clone: borrow the umbrella's commit identity and pin line endings
 # (the wiki repo has no .gitattributes, so avoid LF->CRLF churn).
-git config user.name  "$(git -C "$REPO_ROOT" config user.name  2>/dev/null || echo 'wiki-sync')"
-git config user.email "$(git -C "$REPO_ROOT" config user.email 2>/dev/null || echo 'wiki-sync@local')"
+git config user.name  "$(repo_git config user.name  2>/dev/null || echo 'wiki-sync')"
+git config user.email "$(repo_git config user.email 2>/dev/null || echo 'wiki-sync@local')"
 git config core.autocrlf false
 
 if [[ -z "$(git status --porcelain)" ]]; then
   echo "Wiki already up to date — nothing to sync."
+  if [[ "$DRY_RUN" == "1" ]]; then
+    echo "[dry-run] not committing or pushing."
+  fi
   exit 0
 fi
 
@@ -99,7 +165,7 @@ if [[ "$DRY_RUN" == "1" ]]; then
 fi
 
 git add -A
-git commit -m "Sync wiki from repo wiki/ ($(git -C "$REPO_ROOT" rev-parse --short HEAD))"
+git commit -m "Sync wiki from repo wiki/ ($(repo_git rev-parse --short HEAD))"
 if [[ "$FRESH" == "1" ]]; then
   git push -u origin master
 else
