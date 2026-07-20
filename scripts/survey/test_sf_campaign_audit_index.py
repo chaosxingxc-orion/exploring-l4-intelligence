@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import subprocess
 import sys
 import unittest
@@ -26,6 +27,12 @@ B8_CORRECTION = (
     "wiki/audit/system-first-stage1a/round-12/"
     "stage1a-readiness-correction.md"
 )
+ROUND13_REVIEW = {
+    (
+        "wiki/audit/system-first-stage1a/round-13/"
+        "reviewer-proposal-design-stage1a-doctoral-review.md"
+    ): "6018bc73748383daf4b593b987c2a4bb0ff826d6",
+}
 
 
 def blob(number: int) -> str:
@@ -205,6 +212,30 @@ def validate(
 
 
 class CampaignAuditIndexRepositoryTests(unittest.TestCase):
+    def test_round13_preserves_design_review(self) -> None:
+        contract = json.loads(
+            (REPO / "wiki/audit/system-first-stage1a/campaign-index.json")
+            .read_text(encoding="utf-8")
+        )
+        registry = json.loads(
+            (REPO / "wiki/survey/sf-audit-artifact-registry.json")
+            .read_text(encoding="utf-8")
+        )
+        round13 = next(row for row in contract["rounds"] if row["round"] == 13)
+        actual = {
+            artifact["path"]: artifact["git_blob"]
+            for artifact in round13["artifacts"]
+        }
+        self.assertEqual(ROUND13_REVIEW, actual)
+        registry_pins = {
+            artifact["path"]: artifact["git_blob"]
+            for artifact in registry["artifacts"]
+            if artifact["path"] in ROUND13_REVIEW
+        }
+        self.assertEqual(ROUND13_REVIEW, registry_pins)
+        self.assertEqual("WITHHOLD_STAGE1B", round13["verdict"])
+        self.assertEqual("HISTORICAL_COLD", round13["disposition"])
+
     def test_repository_contract_and_generated_index_agree(self) -> None:
         completed = subprocess.run(
             [sys.executable, str(SCRIPT), "--check"],
