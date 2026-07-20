@@ -10,14 +10,16 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1A only. At verified technical baseline `2225c48`, the zero-network
-  integration gate, `wiki-sync` dry-run, final adversarial review, and verification before completion
-  are complete. Schema-v3, protocol-v2, context/audit routing, safe archive, and the integrated package
-  gate pass. The package may be submitted for formal independent Stage-1A doctoral re-review, but no
-  formal verdict, reviewer sign-off, readiness decision, owner approval, or Stage-1B authority exists.
-- **Next authorized work:** submit the technical repair package for formal independent re-review and
-  wait for its verdict/signature. Even after a favorable review, Stage-1B needs explicit owner execution
-  approval. Do not run discovery queries, research-model smoke, mapping execution, or prototypes.
+- **Current state:** Stage-1A only. Technical baseline `2225c48` binds only the passing integrated
+  zero-network package gate and native `wiki-sync` dry-run. Final adversarial review and verification
+  before completion remain pending, so the package cannot yet enter formal independent doctoral
+  re-review. No formal verdict, reviewer sign-off, owner approval, or Stage-1B authority exists.
+- **Publication incident:** a malformed wrapper entered publish path, created `.wiki-tmp` local commit
+  `4506900`, and attempted push. Push exited nonzero; successful read-only verification found remote
+  master unchanged. Root cause is fixed; the subsequent native dry-run performed no commit/push.
+- **Next authorized work:** complete final adversarial review and verification before completion; only
+  after both pass may the package enter formal independent Stage-1A re-review. A favorable review still
+  needs explicit owner execution approval. No query, model/smoke, mapping execution, or prototype.
 
 ## W2
 

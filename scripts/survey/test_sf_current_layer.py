@@ -27,6 +27,12 @@ REPORT_PATH = (
     "docs/checks/system-first-stage1a/evidence-v6/"
     "identity-taxonomy-v6-test.json"
 )
+CURRENT_PACKAGE_REPORT_PATH = (
+    "docs/checks/system-first-stage1a/context-v1/current-package-check.json"
+)
+WIKI_SYNC_INCIDENT_PATH = (
+    "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json"
+)
 
 
 def load_module(name: str):
@@ -212,10 +218,13 @@ class CurrentManifestContractTests(unittest.TestCase):
         for carrier_path in (
             "wiki/survey/current/protocol.md",
             "wiki/survey/current/status.md",
+            CURRENT_PACKAGE_REPORT_PATH,
+            WIKI_SYNC_INCIDENT_PATH,
         ):
-            self.payloads[carrier_path] = REPO.joinpath(
-                *carrier_path.split("/")
-            ).read_bytes()
+            if carrier_path in self.payloads:
+                self.payloads[carrier_path] = REPO.joinpath(
+                    *carrier_path.split("/")
+                ).read_bytes()
         self.blobs = {}
         self.base_index = {}
         for path, raw in self.payloads.items():
@@ -278,6 +287,113 @@ class CurrentManifestContractTests(unittest.TestCase):
         ]
         self.assertEqual(1, len(dual))
         self.assertEqual("scripts/survey/sf_dual_platform_check.py", dual[0]["path"])
+
+    def test_integration_evidence_has_exact_targeted_routes(self):
+        document = self.build()
+        by_path = {entry["path"]: entry for entry in document["files"]}
+        expected = {
+            CURRENT_PACKAGE_REPORT_PATH: (
+                "current_package_gate_report",
+                "generated",
+            ),
+            WIKI_SYNC_INCIDENT_PATH: (
+                "wiki_sync_dry_run_incident",
+                "immutable-after-first-commit",
+            ),
+        }
+        for path, (role, mutability) in expected.items():
+            with self.subTest(path=path):
+                self.assertIn(path, by_path)
+                self.assertEqual(
+                    (role, mutability, "targeted"),
+                    (
+                        by_path[path]["role"],
+                        by_path[path]["mutability"],
+                        by_path[path]["load_policy"],
+                    ),
+                )
+                self.assertNotIn(path, document["release_bound_artifacts"])
+                self.assertNotIn(path, document["prose_scan_paths"])
+
+    def _integration_spec(self, path, role, mutability):
+        return self.manifest.FileSpec(role, path, mutability, "targeted")
+
+    def test_integration_evidence_missing_and_hash_mismatch_fail_closed(self):
+        specs = (
+            self._integration_spec(
+                CURRENT_PACKAGE_REPORT_PATH,
+                "current_package_gate_report",
+                "generated",
+            ),
+            self._integration_spec(
+                WIKI_SYNC_INCIDENT_PATH,
+                "wiki_sync_dry_run_incident",
+                "immutable-after-first-commit",
+            ),
+        )
+        for spec in specs:
+            raw = REPO.joinpath(*spec.path.split("/")).read_bytes()
+            blob = git_blob_oid(raw)
+            index = {spec.path: self.manifest.GitIndexEntry("100644", blob)}
+            with self.subTest(path=spec.path, failure="missing"):
+                with self.assertRaisesRegex(
+                    self.manifest.CurrentManifestError,
+                    "manifest input missing",
+                ):
+                    self.manifest._file_entry(
+                        spec,
+                        lambda _path: (_ for _ in ()).throw(FileNotFoundError(spec.path)),
+                        index,
+                        lambda _blob: raw,
+                    )
+            with self.subTest(path=spec.path, failure="hash"):
+                with self.assertRaisesRegex(
+                    self.manifest.CurrentManifestError,
+                    "staged-worktree-byte-mismatch",
+                ):
+                    self.manifest._file_entry(
+                        spec,
+                        lambda _path: raw + b" ",
+                        index,
+                        lambda _blob: raw,
+                    )
+
+    def test_integration_evidence_rejects_wrong_schema(self):
+        specs = (
+            (
+                self._integration_spec(
+                    CURRENT_PACKAGE_REPORT_PATH,
+                    "current_package_gate_report",
+                    "generated",
+                ),
+                "sf-current-package-check-v1",
+            ),
+            (
+                self._integration_spec(
+                    WIKI_SYNC_INCIDENT_PATH,
+                    "wiki_sync_dry_run_incident",
+                    "immutable-after-first-commit",
+                ),
+                "wiki-sync-dry-run-incident-v1",
+            ),
+        )
+        for spec, expected_schema in specs:
+            document = json.loads(REPO.joinpath(*spec.path.split("/")).read_bytes())
+            self.assertEqual(expected_schema, document["schema"])
+            document["schema"] = "wrong-schema"
+            raw = (json.dumps(document, separators=(",", ":")) + "\n").encode("utf-8")
+            blob = git_blob_oid(raw)
+            with self.subTest(path=spec.path):
+                with self.assertRaisesRegex(
+                    self.manifest.CurrentManifestError,
+                    "integration-evidence-schema-invalid",
+                ):
+                    self.manifest._file_entry(
+                        spec,
+                        lambda _path: raw,
+                        {spec.path: self.manifest.GitIndexEntry("100644", blob)},
+                        lambda _blob: raw,
+                    )
 
     def test_manifest_expands_exactly_eight_sidecars(self):
         sidecars = [
@@ -421,10 +537,13 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         for carrier_path in (
             "wiki/survey/current/protocol.md",
             "wiki/survey/current/status.md",
+            CURRENT_PACKAGE_REPORT_PATH,
+            WIKI_SYNC_INCIDENT_PATH,
         ):
-            self.payloads[carrier_path] = REPO.joinpath(
-                *carrier_path.split("/")
-            ).read_bytes()
+            if carrier_path in self.payloads:
+                self.payloads[carrier_path] = REPO.joinpath(
+                    *carrier_path.split("/")
+                ).read_bytes()
         self.blobs = {}
         self.index = {}
         for path, raw in self.payloads.items():

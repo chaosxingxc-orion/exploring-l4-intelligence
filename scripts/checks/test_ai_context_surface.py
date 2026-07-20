@@ -111,6 +111,11 @@ EXPECTED_ARCHIVE_TRANSITIONS = (
     ),
 )
 
+INTEGRATION_EVIDENCE_PATHS = (
+    "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
+    "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+)
+
 
 class AiContextSurfaceTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -319,6 +324,28 @@ class AiContextSurfaceTests(unittest.TestCase):
         )
 
         self.assert_failure(failures, "active-hash-mismatch")
+
+    def test_integration_evidence_is_exact_hot_targeted_and_hash_checked(self) -> None:
+        for relative_path in INTEGRATION_EVIDENCE_PATHS:
+            with self.subTest(path=relative_path, condition="classification"):
+                self.assertEqual("HOT", classify_path(relative_path, []))
+
+            expected_raw = b"expected evidence\n"
+            entry = self.active_entry(relative_path, expected_raw, "HOT")
+            failures = evaluate_manifest(
+                self.repo,
+                manifest([entry]),
+                tracked_paths=[relative_path],
+            )
+            self.assert_failure(failures, "active-path-missing")
+
+            self.write(relative_path, b"different evidence\n")
+            failures = evaluate_manifest(
+                self.repo,
+                manifest([entry]),
+                tracked_paths=[relative_path],
+            )
+            self.assert_failure(failures, "active-hash-mismatch")
 
     def test_classification_precedence_is_exact(self) -> None:
         legacy = [
@@ -1672,6 +1699,34 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                 self.assertIn(token, text)
         self.assertNotIn("ready for sign-off", text)
 
+    def test_hot_state_keeps_review_open_and_discloses_publish_incident(self) -> None:
+        for path in (
+            "wiki/Research-Objective.md",
+            "wiki/Per-Work-Status.md",
+            "wiki/survey/current/status.md",
+        ):
+            text = self.read_text(path)
+            with self.subTest(path=path):
+                for token in (
+                    "2225c48",
+                    "final adversarial review",
+                    "verification before completion",
+                    ".wiki-tmp",
+                    "4506900",
+                    "push",
+                ):
+                    self.assertIn(token, text)
+                self.assertRegex(
+                    text,
+                    r"(?i)final adversarial review[\s\S]{0,120}(?:pending|待)",
+                )
+                self.assertRegex(
+                    text,
+                    r"(?i)verification\s+before\s+completion[\s\S]{0,120}(?:pending|待)",
+                )
+                self.assertNotRegex(text, r"(?:B11|Task 11|Task-11)")
+                self.assertNotIn("may be submitted for formal independent", text)
+
     def test_secondary_status_and_survey_router_are_compact(self) -> None:
         per_work_raw = self.read_bytes("wiki/Per-Work-Status.md")
         per_work = per_work_raw.decode("utf-8")
@@ -1716,7 +1771,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.repo.joinpath(*PurePosixPath(relative_path).parts)
         )
         active = document["active_entries"]
-        self.assertEqual(19, len(active))
+        self.assertEqual(21, len(active))
         defaults = {
             entry["path"] for entry in active if entry["load_policy"] == "default"
         }
@@ -1746,6 +1801,14 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         )
         self.assertNotIn(correction, {entry["path"] for entry in active})
         self.assertEqual(correction, document["active_review_transaction"])
+        by_path = {entry["path"]: entry for entry in active}
+        for path in INTEGRATION_EVIDENCE_PATHS:
+            with self.subTest(path=path):
+                self.assertIn(path, by_path)
+                self.assertEqual(
+                    ("HOT", "targeted"),
+                    (by_path[path]["class"], by_path[path]["load_policy"]),
+                )
 
 
 class AiContextManifestBuilderTests(unittest.TestCase):

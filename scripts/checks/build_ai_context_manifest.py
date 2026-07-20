@@ -145,6 +145,18 @@ ACTIVE_ENTRY_SPECS = (
         "WSL/POSIX v6 evidence report",
     ),
     _entry(
+        "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
+        "HOT",
+        "targeted",
+        "integrated Stage-1A package gate report",
+    ),
+    _entry(
+        "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+        "HOT",
+        "targeted",
+        "wiki dry-run publication incident and containment evidence",
+    ),
+    _entry(
         MANIFEST_RELATIVE_PATH,
         "HOT",
         "targeted",

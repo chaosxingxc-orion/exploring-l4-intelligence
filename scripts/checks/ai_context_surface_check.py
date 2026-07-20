@@ -70,6 +70,8 @@ HOT_FILES = frozenset(
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
+        "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
+        "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
     }
 )
 PENDING_ARCHIVE_PATHS = frozenset(

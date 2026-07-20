@@ -2,6 +2,20 @@
   "schema": "sf-current-manifest-v1",
   "files": [
     {
+      "role": "current_package_gate_report",
+      "path": "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
+      "sha256": "e0c908198833b0d32c1e97a891b0a09e2e177ddee1d43a9823830bac32e093a2",
+      "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "wiki_sync_dry_run_incident",
+      "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+      "sha256": "297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393",
+      "mutability": "immutable-after-first-commit",
+      "load_policy": "targeted"
+    },
+    {
       "role": "v6_opening_report",
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
       "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd",
@@ -186,7 +200,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "83cedaa672fa43e0e0a340b9926006244f338a1ec8871f2ae16d580a950f4ded",
+      "sha256": "205c1c2a4003317929fe46f12dc826d76999b38919e953a9f49ae0c4daf93cab",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

@@ -40,6 +40,16 @@ import sf_campaign_audit_index as campaign_audit_index  # noqa: E402
 OUTPUT_RELATIVE_PATH = "wiki/survey/current/manifest.json"
 OUTPUT_PATH = REPO.joinpath(*OUTPUT_RELATIVE_PATH.split("/"))
 CAMPAIGN_SEMANTIC_ANCHOR_PATH = "scripts/checks/ai_context_inventory.py"
+CURRENT_PACKAGE_REPORT_PATH = (
+    "docs/checks/system-first-stage1a/context-v1/current-package-check.json"
+)
+WIKI_SYNC_INCIDENT_PATH = (
+    "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json"
+)
+_INTEGRATION_EVIDENCE_SCHEMAS = {
+    CURRENT_PACKAGE_REPORT_PATH: "sf-current-package-check-v1",
+    WIKI_SYNC_INCIDENT_PATH: "wiki-sync-dry-run-incident-v1",
+}
 
 
 class CurrentManifestError(RuntimeError):
@@ -108,6 +118,18 @@ BASE_FILE_SPECS = (
         "v6_report_wsl",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
         "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "current_package_gate_report",
+        CURRENT_PACKAGE_REPORT_PATH,
+        "generated",
+        "targeted",
+    ),
+    FileSpec(
+        "wiki_sync_dry_run_incident",
+        WIKI_SYNC_INCIDENT_PATH,
+        "immutable-after-first-commit",
         "targeted",
     ),
     FileSpec(
@@ -695,6 +717,20 @@ def _file_entry(
             f"staged_sha256={hashlib.sha256(staged_raw).hexdigest()}, "
             f"worktree_sha256={hashlib.sha256(raw).hexdigest()}"
         )
+    expected_schema = _INTEGRATION_EVIDENCE_SCHEMAS.get(spec.path)
+    if expected_schema is not None:
+        try:
+            document = strict_json_loads(raw, spec.path)
+        except JsonContractError as error:
+            raise CurrentManifestError(
+                f"integration-evidence-schema-invalid: {spec.path}: {error}"
+            ) from error
+        if not isinstance(document, dict) or document.get("schema") != expected_schema:
+            actual_schema = document.get("schema") if isinstance(document, dict) else None
+            raise CurrentManifestError(
+                "integration-evidence-schema-invalid: "
+                f"{spec.path}: expected {expected_schema!r}, found {actual_schema!r}"
+            )
     return {
         "role": spec.role,
         "path": spec.path,

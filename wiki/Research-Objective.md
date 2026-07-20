@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-20 — verified Stage-1A technical baseline"
+last_refresh: "2026-07-20 — open Stage-1A technical review"
 ---
 
 # Research Objective & Current State
@@ -11,19 +11,18 @@ last_refresh: "2026-07-20 — verified Stage-1A technical baseline"
 
 ## 1. 当前门与权限边界
 
-当前是 **Stage-1A**。修复包已在技术基线 `2225c48` 完成四项稳定本地门：zero-network
-integration gate、`wiki-sync` dry-run、final adversarial review 与 verification before completion。
-因此本包可提交正式独立 Stage-1A doctoral re-review；这只是技术修复状态，**不构成 Stage-1B**
-执行批准，也不是 formal verdict、reviewer signature、owner approval 或 readiness verdict。
-Stage-1B systematic mapping 仍未开始且未经授权；不得运行 discovery query、研究模型（含 smoke）、
-数据集实验或方向性 prototype。
+当前是 **Stage-1A**。`2225c48` 只定义 integrated zero-network package gate 与原生
+`wiki-sync` dry-run 的技术基线；final adversarial review 与 verification before completion 仍 pending，
+所以本包尚不可提交正式独立 Stage-1A doctoral re-review。该基线**不构成 Stage-1B** 执行批准，
+也不是 formal verdict、reviewer signature、owner approval 或 readiness verdict。Stage-1B systematic
+mapping 仍未开始且未经授权；不得运行 discovery query、研究模型（含 smoke）、数据集实验或 prototype。
 
 ## 2. 目的链
 
 北极星是研究围绕冻结黑盒 omni foundation model 的**外部 reward-guided 控制平面**，以供给、
 状态/记忆、工具、候选生成、评估、选择、预算与停止来激活预训练知识，同时不改变核心权重与内部
-架构。先确认问题和证据边界，再执行 systematic mapping；所以 Stage-1A 必须让协议自包含、证据
-可回放、信息边界可审计，且不得用工程自测代替研究门裁决。
+架构。先确认问题和证据边界，再执行 systematic mapping；Stage-1A 因而要求协议自包含、证据
+可回放、边界可审计，且工程自测不能代替研究门裁决。
 
 ## 3. 已验证的技术基线
 
@@ -31,21 +30,24 @@ Stage-1B systematic mapping 仍未开始且未经授权；不得运行 discovery
 Plan-A schema-v3 已修复 E6–E12 与 anchor 合同：row、signal、edge 的必要字段显式绑定编码值与证据；
 `p1`、`p1 the`、高频 anchor、越界页和合法重签后的关键变异均按合同 fail closed。精确机器正典是
 `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`（verdict `PASS`，summary
-`14/14 PASS`，input snapshot
-`8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d`）；Windows/WSL occupancy
-相等，protocol-v2 与冻结 65-query bytes 等价。
+`14/14 PASS`）；Windows/WSL occupancy 相等，protocol-v2 与冻结 65-query bytes 等价。
 
-在 `2225c48` 上重新验证：Windows 与 WSL current-package gate 均为 `PASS`；audit registry 为
-78 artifacts / 0 failures；AI context surface 为 0 failures；尝试台账与冻结 query 相对基线无差异；
-原生 `wiki-sync` dry-run 成功，远端前后保持 `91734b6` 且临时树不存在。current/AI manifest、campaign
-index、audit immutability 与 archive safety 已纳入整包门。final adversarial review 和 verification
-before completion 也已完成。以上仅证明技术修复包可提交正式独立复审，不产生研究裁决或执行权限。
+在 `2225c48` 上，Windows/WSL current-package gate 均为 `PASS`；audit registry 为 78 artifacts /
+0 failures；AI context surface 为 0 failures；尝试台账与冻结 query 相对基线无差异。整包与事故
+报告由
+`docs/checks/system-first-stage1a/context-v1/current-package-check.json` 和
+`docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json` 定向取证。
+
+发布模拟曾因 malformed wrapper 进入 publish path，在 `.wiki-tmp` 生成 local commit `4506900` 并
+attempt push；push 非零失败，随后成功的 read-only 核验确认 remote master 未变。root cause 已修复，
+后续原生 dry-run 未执行 commit/push。此事故不等于发布成功，但必须与技术基线一同审查。
 
 ## 4. 剩余阻塞
 
-1. 正式独立 Stage-1A doctoral re-review 尚未给出 verdict；
-2. independent reviewer sign-off 尚不存在；
-3. 即使正式复审放行，仍需 owner 明确给出 Stage-1B execution approval。
+1. final adversarial review 仍 pending；
+2. verification before completion 仍 pending；
+3. 正式独立 Stage-1A doctoral re-review 尚未提交，verdict/signature 尚不存在；
+4. 即使正式复审放行，仍需 owner 明确给出 Stage-1B execution approval。
 
 任一项未闭合都维持 Stage-1A；自动检查通过不能代签。
 
@@ -65,9 +67,9 @@ prototype 或 Stage-1B mapping execution。此零值不覆盖历史；`INHERITED
 
 ## 7. 下一授权动作
 
-**下一授权动作**仅是把当前技术修复包提交正式独立 Stage-1A doctoral re-review，等待 reviewer
-verdict/signature；若复审放行，再等待 owner 的显式 Stage-1B execution approval。在两项治理裁决
-完成前，Stage-1B 保持未开始、未经授权。
+**下一授权动作**仅是完成 final adversarial review 与 verification before completion；两项均通过后
+才可提交正式独立 Stage-1A doctoral re-review。随后等待 verdict/signature，并在复审放行后等待
+owner 的显式 Stage-1B execution approval；在治理裁决完成前，Stage-1B 保持未开始、未经授权。
 
 ## 8. 失效条件
 

@@ -13,7 +13,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "764dd755ce4e3ee1c4af8076e882f55a45f2319ba754cc67c5a15ced9b1045d8"
+      "sha256": "6fc6afa07277c00b7d540760466a311e9fa916cefe84c749a1070ccd703f3430"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current W1-W4 state",
-      "sha256": "deee47cfcda37f01226c65eb629d1dc52edb68b93b53a2d36d8f54ae7f40631b"
+      "sha256": "946715903f24286a6f993e85ef7ba40c28b303d105b9508d98a94bbf08ae5a96"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -55,14 +55,14 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "83cedaa672fa43e0e0a340b9926006244f338a1ec8871f2ae16d580a950f4ded"
+      "sha256": "205c1c2a4003317929fe46f12dc826d76999b38919e953a9f49ae0c4daf93cab"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "b47042052516024a815b2b21bce06d557678d3606132818dd534a7f98a954bdd"
+      "sha256": "58b29fa0373a3fcf2ae804dd561b571f6eecc6ea96736dd6395b32726f2f93db"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
@@ -119,6 +119,20 @@
       "load_policy": "targeted",
       "purpose": "WSL/POSIX v6 evidence report",
       "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "integrated Stage-1A package gate report",
+      "sha256": "e0c908198833b0d32c1e97a891b0a09e2e177ddee1d43a9823830bac32e093a2"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "wiki dry-run publication incident and containment evidence",
+      "sha256": "297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393"
     },
     {
       "path": "docs/integrity/ai-context-manifest.json",
