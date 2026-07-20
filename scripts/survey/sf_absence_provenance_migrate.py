@@ -396,6 +396,21 @@ def review_artifact(proof_rows, reviewer_rows):
             "supply TEAM_ATTESTATION identity, nonparticipation scope, timestamp, "
             "conflict declaration, per-row reason, and AGREE or DISAGREE."
         ),
+        "review_row_required_fields": [
+            "adjudication_row_id",
+            "method_path_id",
+            "owner_kind",
+            "field",
+            "proof_obligation_id",
+            "owner_sidecar",
+            "fulltext",
+            "coder_identity",
+            "owner_row_sha256",
+            "adjudicator_identity",
+            "verdict",
+            "review_reason",
+            "independence",
+        ],
         "proof_obligation_catalog": deepcopy(ABSENCE_PROOF_OBLIGATIONS),
         "proof_rows": deepcopy(proof_rows),
         "rows": deepcopy(reviewer_rows),

@@ -109,6 +109,7 @@ class AbsenceMigrationTest(unittest.TestCase):
         artifact = migrate.review_artifact(proof_rows, reviewer_rows=[])
         self.assertEqual("PENDING_INDEPENDENT_REVIEW", artifact["status"])
         self.assertEqual([], artifact["rows"])
+        self.assertIn("review_reason", artifact["review_row_required_fields"])
 
     def test_pending_artifact_blocks_all_22_absence_bindings(self):
         migrated, proof_rows = migrate.prepare_migration(deepcopy(self.sidecars))

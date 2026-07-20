@@ -127,6 +127,10 @@ def absence_context():
         "owner_row_sha256": evidence["owner_row_sha256"],
         "adjudicator_identity": "reviewer:fixture",
         "verdict": "AGREE",
+        "review_reason": (
+            "The frozen fulltext and every required locator were inspected against "
+            "the field-specific proof obligation."
+        ),
         "independence": {
             "classification": "TEAM_ATTESTATION",
             "nonparticipation_scope": "Did not code or migrate this row.",
@@ -658,6 +662,14 @@ class AbsenceCrossBindingTest(unittest.TestCase):
         adjudication["rows"][0]["verdict"] = "DISAGREE"
         self.assertIn(
             "__fx12__#path:row:selection_object:absence-verdict-not-agree",
+            self.failures(row, sidecar_path, sidecar, adjudication),
+        )
+
+    def test_missing_per_row_review_reason_fails(self):
+        row, sidecar_path, sidecar, adjudication = absence_context()
+        del adjudication["rows"][0]["review_reason"]
+        self.assertIn(
+            "__fx12__#path:row:selection_object:absence-review-reason-invalid",
             self.failures(row, sidecar_path, sidecar, adjudication),
         )
 

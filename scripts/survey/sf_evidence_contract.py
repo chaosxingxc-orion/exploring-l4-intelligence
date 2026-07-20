@@ -508,6 +508,8 @@ def validate_absence_cross_bindings(row, sidecar_path, sidecar, adjudication):
             failures.append(f"{owner}:{field}:absence-adjudication-binding-mismatch")
         if review.get("verdict") != "AGREE":
             failures.append(f"{owner}:{field}:absence-verdict-not-agree")
+        if not _nonempty_string(review.get("review_reason")):
+            failures.append(f"{owner}:{field}:absence-review-reason-invalid")
         adjudicator = review.get("adjudicator_identity")
         if not _nonempty_string(adjudicator):
             failures.append(f"{owner}:{field}:absence-adjudicator-identity-invalid")

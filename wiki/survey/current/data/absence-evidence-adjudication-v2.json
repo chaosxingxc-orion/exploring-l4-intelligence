@@ -4,6 +4,21 @@
  "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
  "status": "PENDING_INDEPENDENT_REVIEW",
  "independence_requirement": "A non-implementer must review frozen fulltext for every proof row and supply TEAM_ATTESTATION identity, nonparticipation scope, timestamp, conflict declaration, per-row reason, and AGREE or DISAGREE.",
+ "review_row_required_fields": [
+  "adjudication_row_id",
+  "method_path_id",
+  "owner_kind",
+  "field",
+  "proof_obligation_id",
+  "owner_sidecar",
+  "fulltext",
+  "coder_identity",
+  "owner_row_sha256",
+  "adjudicator_identity",
+  "verdict",
+  "review_reason",
+  "independence"
+ ],
  "proof_obligation_catalog": {
   "human_or_dev_label_model_selection": {
    "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",

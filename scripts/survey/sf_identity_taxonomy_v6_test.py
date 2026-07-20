@@ -346,7 +346,17 @@ def _check_evidence_entry_v6(
                 f"p{page} anchor='{anchor}'", reader, pid, what, failures
             )
     elif kind == "absence":
-        if not entry.get("note") or not entry.get("scope"):
+        legacy_shape = entry.get("note") and entry.get("scope")
+        negative_contract_shape = (
+            entry.get("reason")
+            and entry.get("proof_obligation_id")
+            and entry.get("inspected_locators")
+            and entry.get("fulltext")
+            and entry.get("owner_sidecar")
+            and entry.get("owner_row_sha256")
+            and entry.get("adjudication_row_id")
+        )
+        if not legacy_shape and not negative_contract_shape:
             failures.append(f"{pid}:{what}:absence-entry-incomplete")
     else:
         failures.append(f"{pid}:{what}:evidence-kind-invalid")
