@@ -1,59 +1,54 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-20. Historical narration is cold: start from the campaign index or `wiki/archive/`, then use
-> targeted search. Survey detail routes through `wiki/survey/current/README.md`.
+> Last refreshed 2026-07-20. Historical narration is cold: start from the campaign index or
+> `wiki/archive/`, then use targeted search. Survey detail routes through
+> `wiki/survey/current/README.md`.
 
 ## W1
 
 - **Repo:** `projects/speech-mllm-training-free-rl`
-- **Role:** primary-program carrier; the mature selector/evaluator work is a component dossier inside
-  the external reward-guided control-plane program.
-- **Current state:** Stage-1A only. The round-12 correction is committed and registered; schema-v3,
-  protocol-v2, context/audit routing, and safe archive have passed their individual/component checks.
-  The zero-network integration gate, `wiki-sync` dry-run, final adversarial review, and verification
-  before completion remain pending. Canonical evidence is
-  `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; none of this is an
-  integrated verdict, formal doctoral verdict, reviewer sign-off, readiness decision, or owner
-  Stage-1B approval.
-- **Next authorized work:** run the zero-network integration gate, `wiki-sync` dry-run, final adversarial
-  review, and verification before completion; only then submit the current package for formal doctoral
-  review. Formal review and owner approval remain pending. No discovery query, research-model smoke,
-  mapping execution, or prototype before explicit approval.
+- **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
+  reward-guided control-plane program.
+- **Current state:** Stage-1A only. At verified technical baseline `2225c48`, the zero-network
+  integration gate, `wiki-sync` dry-run, final adversarial review, and verification before completion
+  are complete. Schema-v3, protocol-v2, context/audit routing, safe archive, and the integrated package
+  gate pass. The package may be submitted for formal independent Stage-1A doctoral re-review, but no
+  formal verdict, reviewer sign-off, readiness decision, owner approval, or Stage-1B authority exists.
+- **Next authorized work:** submit the technical repair package for formal independent re-review and
+  wait for its verdict/signature. Even after a favorable review, Stage-1B needs explicit owner execution
+  approval. Do not run discovery queries, research-model smoke, mapping execution, or prototypes.
 
 ## W2
 
 - **Repo:** `projects/speech-mllm-efficient-rl-alignment`
 - **Role:** supporting study for efficient GRPO/DPO speech-language alignment.
-- **Current state:** Hydra/shared-library skeleton; no new implementation or experiment is authorized by
-  the Stage-1A documentation repair.
-- **Next authorized work:** remain parked while W1 closes its research gate; any later activation needs
-  its own current protocol and evidence boundary.
+- **Current state:** Hydra/shared-library skeleton; the Stage-1A documentation repair authorizes no new
+  implementation or experiment.
+- **Next authorized work:** remain parked while W1 closes its research gate; later activation needs its
+  own current protocol and evidence boundary.
 
 ## W3
 
 - **Repo:** `projects/speech-mllm-multitask-rl`
 - **Role:** supporting study for one policy across ASR/ST/SID/SER with task-specific verifiable rewards.
-- **Current state:** Hydra/shared-library skeleton; no new implementation or experiment is authorized by
-  the Stage-1A documentation repair.
-- **Next authorized work:** remain parked while W1 closes its research gate; later work must reuse the
-  shared reward/evaluation contracts without inheriting W1 execution authority.
+- **Current state:** Hydra/shared-library skeleton; the Stage-1A documentation repair authorizes no new
+  implementation or experiment.
+- **Next authorized work:** remain parked; later work may reuse shared contracts but cannot inherit W1
+  execution authority.
 
 ## W4
 
 - **Repo:** `projects/speech-mllm-omni-embedding-rl`
-- **Role:** separate repositioned work on L0/L1 embedding-utility/readout limits, not the program
-  flagship.
-- **Current state:** prior probes and corrections remain historical evidence; they are not upgraded by
-  the W1 Stage-1A repair. A fresh proposal remains pending ticket #29.
-- **Next authorized work:** keep parked until that proposal is independently reviewed and owner-approved;
-  do not treat prior exploratory results as permission for a new run.
+- **Role:** separate repositioned work on L0/L1 embedding-utility/readout limits, not the flagship.
+- **Current state:** prior probes and corrections remain historical evidence and are not upgraded by the
+  W1 repair. A fresh proposal remains pending ticket #29.
+- **Next authorized work:** remain parked until that proposal is independently reviewed and owner-approved;
+  prior exploratory results are not permission for a new run.
 
 ## Shared boundaries
 
-- The north star is `wiki/Project-Thesis.md`; current stage and blockers are only in
-  `wiki/Research-Objective.md`.
-- Work-repo code/config/README changes commit inside that work repo; umbrella documentation, common
-  code, checks, and records commit here.
-- Historical per-work detail is not repeated on this board. Resolve it from the relevant cold campaign
-  index or `wiki/archive/` only when a named provenance question requires it.
+- North star: `wiki/Project-Thesis.md`; current stage and blockers: `wiki/Research-Objective.md`.
+- Work-repo code/config/README changes belong in that work repo; umbrella records belong here.
+- Historical per-work detail is not repeated. Resolve it from its cold campaign index or `wiki/archive/`
+  only for a named provenance question.

@@ -1,16 +1,10 @@
 # Current Survey Status
 
-- Gate: **Stage-1A**; owner authorization and independent reviewer sign-off remain unresolved.
+- Gate: **Stage-1A**; formal doctoral verdict, independent reviewer sign-off, and owner authorization remain pending.
 - Execution: **zero Stage-1B executions in this repair**; query/model/smoke = 0; inherited exposure unchanged.
-- Component evidence: schema-v3 v6 is **14/14 PASS** at
-  `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; Windows/WSL occupancy,
-  protocol-v2 frozen-query bytes, current/context manifests, campaign/audit immutability, and archive
-  safety have each passed their individual checks.
-- Package status: the zero-network integration gate, `wiki-sync` dry-run, final adversarial review, and
-  verification before completion remain pending. No integrated readiness verdict exists.
-- Active review transaction: `wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md`;
-  older rounds are cold-routed by `wiki/audit/system-first-stage1a/INDEX.md`.
-- Current blockers: those four stable gates, formal doctoral review, reviewer sign-off, and owner
-  Stage-1B execution authorization.
-- Next action: run the four stable gates without predicting their result; only then submit the round-12
-  package for formal doctoral review; formal review and owner approval remain pending. Stage-1B remains unstarted and unauthorized.
+- Evidence: schema-v3 v6 is **14/14 PASS** at `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; protocol-v2 remains byte-equivalent to the frozen query set.
+- Verified technical baseline: `2225c48`; Windows/WSL package gates PASS, audit registry is 78/0, context failures are 0, frozen inputs are unchanged, and the dry-run preserved the remote.
+- Package status: zero-network integration, `wiki-sync` dry-run, final adversarial review, and verification before completion are complete; the technical repair package may be submitted for formal independent Stage-1A re-review.
+- Active review transaction: `wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md`; older rounds are cold-routed by `wiki/audit/system-first-stage1a/INDEX.md`.
+- Current blockers: formal doctoral verdict, independent reviewer sign-off, then explicit owner Stage-1B execution authorization.
+- Next action: submit for formal independent Stage-1A re-review and await governance decisions; Stage-1B remains unstarted and unauthorized.
