@@ -1,0 +1,108 @@
+{
+  "access_class": "REVIEW_CLAIM_VERIFICATION",
+  "artifact_id": "SF-REVIEWER-KNOWN-ITEMS-V2-2026-07-20-01",
+  "artifact_path": "wiki/survey/current/data/reviewer-known-items-v2.json",
+  "generation_rule": "Transcribe the six linked works in round-14 section 7.4 exactly once; split the compound WavReward/GSRM bullet into two work rows; retain reviewer provenance; perform no discovery query; grant no frozen-query recall credit.",
+  "items": [
+    {
+      "arxiv_id": "2508.16665",
+      "current_disposition": {
+        "invalidating_condition": "Official identity or the Track-A taxonomy use is contradicted during Stage-1B coding.",
+        "next_action": "Fetch and code only when Track-A calibration is scheduled under the frozen protocol.",
+        "reason": "Reviewer-known verification-design survey; calibration source, not a frozen-query hit."
+      },
+      "item_id": "RK-001",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "KNOWN_QUEUE",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 290",
+      "title": "Trust but Verify! A Survey on Verification Design for Test-time Scaling"
+    },
+    {
+      "arxiv_id": "2510.18982",
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or the work is later found outside the protocol's comparator boundary.",
+        "next_action": "Stage-1B fetch/code as P2; promote to D2 first only if a proposal claim relies on its theory.",
+        "reason": "Reviewer-known theory comparator separating generator coverage, verifier ROC, and sampling sub-optimality."
+      },
+      "item_id": "RK-002",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "KNOWN_QUEUE",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 291",
+      "title": "Test-time Verification via Optimal Transport: Coverage, ROC, & Sub-optimality"
+    },
+    {
+      "arxiv_id": "2604.15710",
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows the system is not a trained-system boundary comparator.",
+        "next_action": "Preserve as a trained spoken-agent boundary and code if used by a load-bearing boundary claim.",
+        "reason": "Existing archive asset reintroduced by the reviewer; it is not an external discovery or frozen-query hit."
+      },
+      "item_id": "RK-003",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 292",
+      "title": "VoxMind: An End-to-End Agentic Spoken Dialogue System"
+    },
+    {
+      "arxiv_id": "2505.09558",
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows it cannot serve as a trained speech-reward measurement boundary.",
+        "next_action": "Route into the trained reward/evaluator boundary; reach D2 only if cited by a load-bearing claim.",
+        "reason": "Existing survey/archive work explicitly named by the reviewer for disposition."
+      },
+      "item_id": "RK-004",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 293 (compound bullet, first work)",
+      "title": "WavReward: Spoken Dialogue Models With Generalist Reward Evaluators"
+    },
+    {
+      "arxiv_id": "2602.13891",
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows it cannot serve as a trained speech reward-model boundary.",
+        "next_action": "Route and deduplicate in the trained reward/evaluator boundary; reach D2 only if load-bearing.",
+        "reason": "Existing archive work explicitly named by the reviewer for disposition."
+      },
+      "item_id": "RK-005",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 293 (compound bullet, second work)",
+      "title": "GSRM: Generative Speech Reward Model for Speech RLHF"
+    },
+    {
+      "arxiv_id": "2509.25845",
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows no useful element-level relationship to reward-guided frozen inference.",
+        "next_action": "Keep as nonblocking P2 boundary comparator; do not add a query lane.",
+        "reason": "Reviewer-known cross-modal element comparator, explicitly nonblocking for Stage-1B opening."
+      },
+      "item_id": "RK-006",
+      "load_bearing": false,
+      "query_recall_credit": false,
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "screening_decision": "INCLUDE",
+      "source_locator": "round-14 §7.4 line 294",
+      "title": "Training-Free Reward-Guided Image Editing via Trajectory Optimal Control"
+    }
+  ],
+  "items_sha256": "d8ba520c424077831278ebfbae2cca9214c301fed9b8d09e9a15194485df0182",
+  "schema": "sf-reviewer-known-items-v2",
+  "source_provenance": {
+    "git_blob": "e7b52ab5541d31c79de5d416a48b8e691df01cf5",
+    "line_range": "290-294",
+    "path": "wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md",
+    "sha256": "6434ee4e8a385da1f68e9a9212e615b6f0ddb41f83a06047d78060c571fe3abe",
+    "source_commit": "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
+  },
+  "query_recall_credit": false
+}
