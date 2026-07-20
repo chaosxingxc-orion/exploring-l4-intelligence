@@ -112,7 +112,7 @@
       {
         "path": "scripts/survey/sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "09d64e6bcf6a114c8f2af11f525ce707b5a7802d"
+        "git_blob": "25ff6af7eb47e2b6c0a5d6fb1859bd4fbe6ceed4"
       },
       {
         "path": "scripts/survey/sf_current_path_contract.py",
@@ -317,7 +317,7 @@
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "072b7ca4bac9976f17b86b1c1c05862a1191776d"
+        "git_blob": "1396119365914cd1e65aa37ad0358655657a086e"
       },
       {
         "path": "scripts/survey/test_sf_dual_platform_check.py",
@@ -370,7 +370,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "37e6c15fdcb914c0d3f19bb83ad5a98ba82d5f1e03635033a1153f3f94219de8"
+    "sha256": "f2d4a4820b8b46cedff7b8385bd30c296072d113967c14efd5dcfc841220414b"
   },
   "commands": [
     {
@@ -394,7 +394,7 @@
     {
       "command": "python scripts/survey/sf_identity_taxonomy_v6_test.py",
       "exit_code": 0,
-      "stdout_tail": "{\n \"summary\": \"14/14 PASS\",\n \"verdict\": \"PASS\",\n \"platform\": {\n  \"os\": \"nt\",\n  \"python\": \"3.14.3\"\n },\n \"policy_A_key_numbers\": {\n  \"reward_guided\": \"6/11\",\n  \"rq_sys_compatible\": \"5/11\",\n  \"method_candidate\": \"0/11\",\n  \"reward_guided_selection\": \"4/11\",\n  \"trajectory_pool\": \"2/11\"\n }\n}",
+      "stdout_tail": "{\n \"summary\": \"14/14 PASS\",\n \"verdict\": \"PASS\",\n \"platform\": {\n  \"os\": \"<OS>\",\n  \"python\": \"<PYTHON>\"\n },\n \"policy_A_key_numbers\": {\n  \"reward_guided\": \"6/11\",\n  \"rq_sys_compatible\": \"5/11\",\n  \"method_candidate\": \"0/11\",\n  \"reward_guided_selection\": \"4/11\",\n  \"trajectory_pool\": \"2/11\"\n }\n}",
       "stderr_tail": ""
     },
     {

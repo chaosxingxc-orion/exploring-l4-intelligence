@@ -97,6 +97,21 @@ class CurrentPackageReportTests(unittest.TestCase):
         for forbidden in (b"generated_at", b"duration", b"head", b"self_sha"):
             self.assertNotIn(forbidden, first.lower())
 
+    def test_runtime_platform_json_is_normalized_across_windows_and_posix(self) -> None:
+        windows = (
+            '{\n "verdict": "PASS",\n "platform": {\n'
+            '  "os": "nt",\n  "python": "3.14.3"\n }\n}\n'
+        )
+        posix = (
+            '{\n "verdict": "PASS",\n "platform": {\n'
+            '  "os": "posix",\n  "python": "3.12.3"\n }\n}\n'
+        )
+        normalized_windows = package_check._normalized_tail(windows, Path.cwd())
+        normalized_posix = package_check._normalized_tail(posix, Path.cwd())
+        self.assertEqual(normalized_windows, normalized_posix)
+        self.assertIn('"os": "<OS>"', normalized_windows)
+        self.assertIn('"python": "<PYTHON>"', normalized_windows)
+
 
 class CurrentPackageTransactionTests(unittest.TestCase):
     FIXTURE_COMMAND = "python scripts/survey/checker.py"

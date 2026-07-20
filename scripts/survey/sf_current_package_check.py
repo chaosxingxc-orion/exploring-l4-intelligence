@@ -169,6 +169,15 @@ def _normalized_tail(value: str, repo: Path) -> str:
         if variant:
             text = re.sub(re.escape(variant), "<REPO>", text, flags=re.IGNORECASE)
     text = re.sub(
+        r'("platform"\s*:\s*\{\s*"os"\s*:\s*)"(?:nt|posix)"'
+        r'(\s*,\s*"python"\s*:\s*)"[^"\r\n]+"(\s*\})',
+        lambda match: (
+            f'{match.group(1)}"<OS>"{match.group(2)}'
+            f'"<PYTHON>"{match.group(3)}'
+        ),
+        text,
+    )
+    text = re.sub(
         r"(Ran\s+\d+\s+tests?)\s+in\s+\d+(?:\.\d+)?s\b",
         r"\1",
         text,
