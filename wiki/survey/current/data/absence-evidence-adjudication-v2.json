@@ -1,7 +1,11 @@
 {
- "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-20-01",
- "schema": "v2: generated proof_rows plus externally authored review rows",
+ "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-21-02",
+ "schema": "v2: 19 active generated proof_rows plus externally authored review rows; three retired negatives bind to the semantic-correction artifact",
  "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
+ "original_proof_inventory_count": 22,
+ "retired_by_semantic_correction_count": 3,
+ "active_proof_inventory_count": 19,
+ "semantic_correction_artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
  "status": "PENDING_INDEPENDENT_REVIEW",
  "independence_requirement": "A non-implementer must review frozen fulltext for every proof row and supply TEAM_ATTESTATION identity, nonparticipation scope, timestamp, conflict declaration, per-row reason, and AGREE or DISAGREE.",
  "review_row_required_fields": [
@@ -258,42 +262,10 @@
     "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
    },
    "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
    "implementer_assessment": {
     "status": "READY_FOR_REVIEW",
     "concern": ""
-   }
-  },
-  {
-   "adjudication_row_id": "ABS2-cc432879fce4af753778",
-   "source_tuple": [
-    "2026.findings-acl.1243#open-sft-variant",
-    "row",
-    "external_component_weight_update",
-    "absence",
-    "false"
-   ],
-   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
-   "owner_kind": "row",
-   "field": "external_component_weight_update",
-   "value": false,
-   "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
-   "inspected_locators": [
-    "p5 anchor='the agent can review and evaluate its previous'",
-    "p6 anchor='we fine tune qwen3 8b on a mixture'"
-   ],
-   "reason": "The source explicitly assigns fine-tuning to the Qwen3-8B policy backbone while describing the DeepVerifier modules as the data-generation and verification machinery; no separate deployed external component update is specified.",
-   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
-   "fulltext": {
-    "id": "2026.findings-acl.1243",
-    "kind": "pdf",
-    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
-   },
-   "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
-   "implementer_assessment": {
-    "status": "IMPLEMENTER_CONCERN",
-    "concern": "The paper does not state the open deployment boundary as explicitly as the coding row; an independent reviewer must confirm that Qwen3-8B is the core rather than an external component before accepting this negative."
    }
   },
   {
@@ -322,7 +294,7 @@
     "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
    },
    "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
    "implementer_assessment": {
     "status": "READY_FOR_REVIEW",
     "concern": ""
@@ -354,7 +326,7 @@
     "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
    },
    "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
    "implementer_assessment": {
     "status": "READY_FOR_REVIEW",
     "concern": ""
@@ -391,72 +363,6 @@
    "implementer_assessment": {
     "status": "READY_FOR_REVIEW",
     "concern": ""
-   }
-  },
-  {
-   "adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",
-   "source_tuple": [
-    "2026.findings-acl.511#prm-guided-search",
-    "row",
-    "controller_program_or_config_optimized_on_labels",
-    "absence",
-    "false"
-   ],
-   "method_path_id": "2026.findings-acl.511#prm-guided-search",
-   "owner_kind": "row",
-   "field": "controller_program_or_config_optimized_on_labels",
-   "value": false,
-   "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
-   "inspected_locators": [
-    "p14 anchor='settings of threshold and budgets'",
-    "p18 anchor='ablation studies on the thresholds'",
-    "p19 anchor='performance of dream in gsm8k'"
-   ],
-   "reason": "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
-   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
-   "fulltext": {
-    "id": "2026.findings-acl.511",
-    "kind": "pdf",
-    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
-   },
-   "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
-   "implementer_assessment": {
-    "status": "IMPLEMENTER_CONCERN",
-    "concern": "Dataset-specific thresholds and a labeled threshold ablation are reported; this may mean the controller configuration was optimized on labels and may require recoding rather than an AGREE verdict."
-   }
-  },
-  {
-   "adjudication_row_id": "ABS2-c5351c607c4f37690a34",
-   "source_tuple": [
-    "2026.findings-acl.511#prm-guided-search",
-    "row",
-    "human_or_dev_label_model_selection",
-    "absence",
-    "false"
-   ],
-   "method_path_id": "2026.findings-acl.511#prm-guided-search",
-   "owner_kind": "row",
-   "field": "human_or_dev_label_model_selection",
-   "value": false,
-   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
-   "inspected_locators": [
-    "p5 anchor='phases follows a two threshold rule'",
-    "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
-    "p8 anchor='we study the reward model size for math reasoning'"
-   ],
-   "reason": "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
-   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
-   "fulltext": {
-    "id": "2026.findings-acl.511",
-    "kind": "pdf",
-    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
-   },
-   "coder_identity": "claude-fable-main:s-ea4f0926",
-   "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
-   "implementer_assessment": {
-    "status": "IMPLEMENTER_CONCERN",
-    "concern": "The source compares 7B and 32B reward models and uses the stronger 32B model; the timing and role of that comparison relative to model selection are not explicit enough for the implementer to certify this negative."
    }
   },
   {

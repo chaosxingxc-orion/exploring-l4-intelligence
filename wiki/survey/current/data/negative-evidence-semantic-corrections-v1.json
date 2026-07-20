@@ -1,0 +1,75 @@
+{
+ "artifact_id": "SF-NEGATIVE-EVIDENCE-SEMANTIC-CORRECTIONS-V1-2026-07-21-01",
+ "schema": "v1: independent-review-triggered corrections to previously encoded negative claims",
+ "date": "2026-07-21",
+ "review_artifact": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+ "reviewed_target": {
+  "commit": "5d6e67abaff19ff40acc93a57f97fe7c4dbe80bc",
+  "proposal_git_blob": "f4d07c473007643ab6212dae38514d65affd8d4f",
+  "proposal_git_blob_sha256": "a686dee87e0e0ddc9d2188432766224ae46f862167b1d8f528f16d99f0daa295"
+ },
+ "inventory_reconciliation": {
+  "original_negative_claims": 22,
+  "retired_by_correction": 3,
+  "active_negative_claims": 19,
+  "identity": "22 = 3 + 19"
+ },
+ "reviewer_rows_created": 0,
+ "reason_reviewer_rows_are_zero": "The report identified contradictions and unresolved topology but did not provide the complete per-row adjudication contract. The implementation therefore corrects or marks unknown without manufacturing AGREE/DISAGREE reviewer rows.",
+ "corrections": [
+  {
+   "retired_adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "field": "controller_program_or_config_optimized_on_labels",
+   "prior_value": false,
+   "corrected_value": true,
+   "disposition": "POSITIVE_RECODE",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "evidence": "p19 anchor='performance of dream with different values of thresholds'",
+   "rationale": "The paper reports label-bearing accuracy comparisons across controller thresholds; a load-bearing false value is untenable.",
+   "prior_owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "corrected_owner_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
+   "load_bearing_after_correction": false
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-c5351c607c4f37690a34",
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "field": "human_or_dev_label_model_selection",
+   "prior_value": false,
+   "corrected_value": "unknown",
+   "disposition": "UNRESOLVED_TRI_STATE",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "evidence": "p8 anchor='32b reward model consistently outperforms the 7b version'",
+   "rationale": "The main experiment uses 32B and the paper reports that 32B outperforms 7B, but the temporal selection procedure is not explicit enough to assert true; false is therefore retired and unknown is required.",
+   "prior_owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "corrected_owner_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
+   "load_bearing_after_correction": false
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-cc432879fce4af753778",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "field": "external_component_weight_update",
+   "prior_value": false,
+   "corrected_value": "unknown",
+   "disposition": "UNRESOLVED_TRI_STATE",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "evidence": "p8 anchor='we fine tune qwen3 8b on a mixture'",
+   "rationale": "The fine-tuned Qwen3-8B is explicit, but whether another deployed DeepVerifier component is external depends on a core/peripheral topology boundary that is not frozen. False is therefore retired and unknown is required.",
+   "prior_owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "corrected_owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+   "load_bearing_after_correction": false
+  }
+ ]
+}

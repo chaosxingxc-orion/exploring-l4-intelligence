@@ -40,7 +40,7 @@ class V7HarnessTest(unittest.TestCase):
         bundle = self.bundle
         self.assertEqual(8, len(bundle["sidecars"]))
         self.assertEqual(11, len(bundle["rows"]))
-        self.assertEqual(22, len(bundle["absence_adjudication"]["proof_rows"]))
+        self.assertEqual(19, len(bundle["absence_adjudication"]["proof_rows"]))
         self.assertEqual([], bundle["absence_adjudication"]["rows"])
         paths = {
             entry["path"]
@@ -62,13 +62,13 @@ class V7HarnessTest(unittest.TestCase):
             results,
         )
 
-    def test_current_pending_review_blocks_all_22_cross_bindings(self):
+    def test_current_pending_review_blocks_all_19_cross_bindings(self):
         failures = harness.validate_absence_review(self.bundle)
         self.assertIn(
-            "absence-review-coverage-mismatch:expected=22:found=0", failures
+            "absence-review-coverage-mismatch:expected=19:found=0", failures
         )
         self.assertEqual(
-            22,
+            19,
             sum("absence-adjudication-row-missing" in failure for failure in failures),
         )
 

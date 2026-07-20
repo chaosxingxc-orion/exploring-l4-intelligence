@@ -17,15 +17,15 @@
   {
    "core_weight_update": false,
    "external_component_weight_update": true,
-   "controller_program_or_config_optimized_on_labels": false,
-   "human_or_dev_label_model_selection": false,
+   "controller_program_or_config_optimized_on_labels": true,
+   "human_or_dev_label_model_selection": "unknown",
    "deployment_label_access": false,
    "test_item_gold_access": false,
    "inference_external_new_information": false,
    "internal_visibility": "api_only",
    "includes_speech_audio": false,
-   "adjudication_required": false,
-   "load_bearing": true,
+   "adjudication_required": true,
+   "load_bearing": false,
    "method_path_id": "2026.findings-acl.511#prm-guided-search",
    "core_topology": "single_core",
    "core_native_modality": "text_only",
@@ -151,46 +151,16 @@
      "quote": "奖励模型是微调件"
     },
     "controller_program_or_config_optimized_on_labels": {
-     "kind": "absence",
-     "value": false,
-     "reason": "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
-     "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
-     "inspected_locators": [
-      "p14 anchor='settings of threshold and budgets'",
-      "p18 anchor='ablation studies on the thresholds'",
-      "p19 anchor='performance of dream in gsm8k'"
-     ],
-     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
-     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
-     "fulltext": {
-      "id": "2026.findings-acl.511",
-      "kind": "pdf",
-      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
-     },
-     "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
-     "adjudication_row_id": "ABS2-7f79a2888c7d031e5e74"
+     "value": true,
+     "kind": "pdf_page",
+     "page": 19,
+     "anchor": "performance of dream with different values of thresholds"
     },
     "human_or_dev_label_model_selection": {
-     "kind": "absence",
-     "value": false,
-     "reason": "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
-     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
-     "inspected_locators": [
-      "p5 anchor='phases follows a two threshold rule'",
-      "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
-      "p8 anchor='we study the reward model size for math reasoning'"
-     ],
-     "owner_method_path_id": "2026.findings-acl.511#prm-guided-search",
-     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
-     "fulltext": {
-      "id": "2026.findings-acl.511",
-      "kind": "pdf",
-      "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
-     },
-     "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
-     "adjudication_row_id": "ABS2-c5351c607c4f37690a34"
+     "value": "unknown",
+     "kind": "pdf_page",
+     "page": 8,
+     "anchor": "32b reward model consistently outperforms the 7b version"
     },
     "deployment_label_access": {
      "value": false,
@@ -261,13 +231,23 @@
    "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
-   "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
-   "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
+   "semantic_adjudicator": "PENDING_POST_CORRECTION_REVIEW",
+   "adjudication_status": "conflict_queue",
+   "adjudication_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
+   "semantic_correction": {
+    "date": "2026-07-21",
+    "review_artifact": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+    "frozen_target_commit": "5d6e67abaff19ff40acc93a57f97fe7c4dbe80bc",
+    "disposition": "one positive recode plus one unresolved tri-state; old absence IDs retired",
+    "retired_absence_ids": [
+     "ABS2-7f79a2888c7d031e5e74",
+     "ABS2-c5351c607c4f37690a34"
+    ]
+   },
+   "absence_review_status": "NO_ACTIVE_ABSENCE_CLAIMS_AFTER_SEMANTIC_CORRECTION"
   }
  ],
  "schema_v3_binding_status": "ADJUDICATED_AGREE",
  "schema_v3_binding_adjudicator": "/root/a6_adjudicator",
- "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
+ "absence_review_status": "NO_ACTIVE_ABSENCE_CLAIMS_AFTER_SEMANTIC_CORRECTION"
 }

@@ -65,19 +65,6 @@ PROOF_PREPARATIONS = {
         ],
         "The exhaustive inference loop revises a single current answer sequentially and exposes no scored, ranked, voted, or tournament candidate pool selection operation.",
     ),
-    ("2026.findings-acl.1243#open-sft-variant", "external_component_weight_update"): _proof(
-        [
-            "p5 anchor='the agent can review and evaluate its previous'",
-            "p6 anchor='we fine tune qwen3 8b on a mixture'",
-        ],
-        "The source explicitly assigns fine-tuning to the Qwen3-8B policy backbone while describing the DeepVerifier modules as the data-generation and verification machinery; no separate deployed external component update is specified.",
-        status="IMPLEMENTER_CONCERN",
-        concern=(
-            "The paper does not state the open deployment boundary as explicitly as the "
-            "coding row; an independent reviewer must confirm that Qwen3-8B is the core "
-            "rather than an external component before accepting this negative."
-        ),
-    ),
     ("2026.findings-acl.1243#open-sft-variant", "human_or_dev_label_model_selection"): _proof(
         [
             "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
@@ -106,34 +93,6 @@ PROOF_PREPARATIONS = {
             "p4 anchor='evaluator ranks candidates and discards a fixed'",
         ],
         "The complete pipeline transforms the provided raw dataset into profiles, charts, insights, and reports; code execution and judging operate on those task-provided artifacts and no retrieval, browsing, or external evidence channel is described.",
-    ),
-    ("2026.findings-acl.511#prm-guided-search", "controller_program_or_config_optimized_on_labels"): _proof(
-        [
-            "p14 anchor='settings of threshold and budgets'",
-            "p18 anchor='ablation studies on the thresholds'",
-            "p19 anchor='performance of dream in gsm8k'",
-        ],
-        "The online algorithm uses fixed dataset-level thresholds and does not access test-item labels, but the paper also reports labeled threshold comparisons; therefore the existing encoded negative cannot support a resolved load-bearing claim without independent adjudication.",
-        status="IMPLEMENTER_CONCERN",
-        concern=(
-            "Dataset-specific thresholds and a labeled threshold ablation are reported; "
-            "this may mean the controller configuration was optimized on labels and may "
-            "require recoding rather than an AGREE verdict."
-        ),
-    ),
-    ("2026.findings-acl.511#prm-guided-search", "human_or_dev_label_model_selection"): _proof(
-        [
-            "p5 anchor='phases follows a two threshold rule'",
-            "p6 anchor='we adopt a unified reward model shared across both phases in our main experiments'",
-            "p8 anchor='we study the reward model size for math reasoning'",
-        ],
-        "The deployed branch and stopping choices are made automatically from PRM scores, but the paper compares reward-model sizes; the record needs reviewer confirmation that no labeled development result selected the deployed reward-model checkpoint.",
-        status="IMPLEMENTER_CONCERN",
-        concern=(
-            "The source compares 7B and 32B reward models and uses the stronger 32B model; "
-            "the timing and role of that comparison relative to model selection are not "
-            "explicit enough for the implementer to certify this negative."
-        ),
     ),
     ("2604.16529#rtv", "human_or_dev_label_model_selection"): _proof(
         [
@@ -276,8 +235,8 @@ def _adjudication_row_id(source_tuple):
 
 
 def _assert_inventory(records):
-    if len(records) != 22:
-        raise ValueError(f"expected 22 absence records, found {len(records)}")
+    if len(records) != 19:
+        raise ValueError(f"expected 19 active absence records, found {len(records)}")
     preparation_keys = set(PROOF_PREPARATIONS)
     record_keys = {
         (record["method_path_id"], record["field"]) for record in records
@@ -387,9 +346,13 @@ def review_artifact(proof_rows, reviewer_rows):
         else PENDING_STATUS
     )
     return {
-        "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-20-01",
-        "schema": "v2: generated proof_rows plus externally authored review rows",
+        "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-21-02",
+        "schema": "v2: 19 active generated proof_rows plus externally authored review rows; three retired negatives bind to the semantic-correction artifact",
         "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
+        "original_proof_inventory_count": 22,
+        "retired_by_semantic_correction_count": 3,
+        "active_proof_inventory_count": len(proof_rows),
+        "semantic_correction_artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
         "status": status,
         "independence_requirement": (
             "A non-implementer must review frozen fulltext for every proof row and "
