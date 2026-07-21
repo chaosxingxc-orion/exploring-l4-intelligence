@@ -88,6 +88,15 @@ class ReviewerProposalCheckTest(unittest.TestCase):
         ):
             self.assertIn(token, self.proposal)
 
+    def test_proposal_names_the_exact_source_manifest_and_honest_package_report(self):
+        for token in (
+            "proposal-source-manifest-v1.json",
+            "proposal-package-check.json",
+            "construction=PASS",
+            "release=BLOCKED",
+        ):
+            self.assertIn(token, self.proposal)
+
     def test_release_fails_until_independent_review_and_v7_exist(self):
         failures = checker.validate_release(self.proposal, self.inputs)
         self.assertIn("ABSENCE_REVIEW_PENDING", failures)

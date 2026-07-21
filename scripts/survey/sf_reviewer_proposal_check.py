@@ -150,6 +150,8 @@ def _required_structure_failures(text: str) -> list[str]:
         "BIBLIOGRAPHY_SELECTION_MISSING": "reviewer-bibliography-selection-v1.json",
         "YEAR_POLICY_MISSING": "year_basis",
         "ACTIVE_CORPUS_SCOPE_MISSING": "seven registered active corpora",
+        "PROPOSAL_SOURCE_PACKAGE_MISSING": "proposal-source-manifest-v1.json",
+        "PROPOSAL_PACKAGE_REPORT_MISSING": "proposal-package-check.json",
     }
     failures = [code for code, token in required.items() if token not in text]
     response_lines = (

@@ -42,7 +42,7 @@ systematic mapping；工程自测不能代替研究裁决。
 2. 同一独立性合同下完成 19 条 active absence adjudication，当前 `0/19`；
 3. 任何 `DISAGREE` 先回到 owner sidecar 修正/降级，再重新绑定；
 4. `3/3 + 19/19` 闭合后生成 fresh NT/POSIX v7 leaves 和 aggregate；
-5. 生成 exact proposal source manifest/package report，完成零新发现的敌意内审；
+5. 预审 source manifest/package 已 construction PASS；语义门后在 fresh v7 同一 commit 重建 final 包；
 6. 将 proposal 提升为 immutable round-16，由独立 reviewer 给出科学理由与 search-design 裁决；
 7. reviewer 放行后，owner 对同一 exact package 单独授权 Stage-1B。
 
@@ -65,8 +65,7 @@ metric/prototype = 0**。此零值不覆盖历史；`INHERITED_PRIOR_EXPOSURE` �
 - 机器数据：`wiki/survey/current/data/`。数字正典在 union/correction/adjudication/receipt/selection
   artifacts；提案散文只解释，不复制为第二正典。
 - 审计入口：`wiki/audit/system-first-stage1a/INDEX.md`；最新 WITHHOLD 报告登记为 round 15。
-- `wiki/survey/current/manifest.json` 仍是上一 released current package，不得冒充未来 proposal
-  source manifest。
+- `current/manifest.json` 是上一 release；本提案改由 `data/proposal-source-manifest-v1.json` 绑定。
 
 ## 7. 下一授权动作
 

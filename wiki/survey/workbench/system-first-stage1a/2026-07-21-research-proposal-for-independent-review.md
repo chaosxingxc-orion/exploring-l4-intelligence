@@ -11,7 +11,7 @@ formal_review_status: "NOT_YET_SUBMITTED_AS_IMMUTABLE_ROUND_16"
 stage1b_status: "UNSTARTED_AND_UNAUTHORIZED"
 systematic_discovery_queries_in_this_repair: 0
 research_model_or_smoke_calls_in_this_repair: 0
-implementation_head_at_draft: "035cd196a8329449ea57b62238dc168003691c06"
+remediation_evidence_commit: "044bb557c6174ec4600c9cd47f69a5ba9529eb2c"
 ---
 
 # 给独立评审人的研究提案与整改说明
@@ -287,7 +287,7 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 | GM-3 v7 code/DAG tests | PASS | leaf/aggregate 架构和 fail-closed 反例已实现 |
 | GM-3 formal NT/POSIX leaves + aggregate | **WITHHELD** | 等待 3/3 corrections + 19/19 active reviewer rows 后生成 |
 | GM-4 official-receipt bibliography | PASS | 85 unique works，可完全离线重建；245-node selection complement 已记账 |
-| proposal source manifest/package gate | PRE-REVIEW BUILD PENDING | 将绑定本提案、协议、compiler/routes/templates、账本和 gate outputs；不得以旧 current manifest 代替 |
+| proposal source manifest/package gate | **construction=PASS / release=BLOCKED** | `proposal-source-manifest-v1.json` 绑定本提案、协议、compiler/routes/templates 与账本；`proposal-package-check.json` 只证明预审包内部一致，明确保留四个 release blockers |
 | formal immutable round-16 proposal | NOT YET | round-15 已登记当前 WITHHOLD review；本文件仍是 workbench draft |
 | independent search-design signoff | NOT YET | 实现者不得创建或预填 |
 | owner same-package authorization | NOT YET | 必须在 reviewer SIGN 后单独发生 |
@@ -300,7 +300,7 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 1. 在 `negative-evidence-semantic-corrections-v1.json` 的独立确认 schema 中核对三条退役修正，逐条给出 `AGREE|DISAGREE`；
 2. 对 `absence-evidence-adjudication-v2.json` 的 19 条 active proof rows 做逐条 semantic adjudication；
 3. 若存在 `DISAGREE`，先退回更正或将相关 row 降级，不评估旧 occupancy 是否“好看”；
-4. `3/3 + 19/19` 闭合后，由团队生成 NT/POSIX leaves 和 final aggregate，并提供 exact commit/source manifest；
+4. `3/3 + 19/19` 闭合后，由团队生成 NT/POSIX leaves 和 final aggregate，并在同一 commit 上重建 final source manifest/package report；
 5. 评估 Track A 是否提供了继续 systematic mapping 的充分科学理由；
 6. 评估同一冻结包的 search design 是否可以签署；
 7. reviewer SIGN 之后，owner 再对 exact package 单独决定是否授权 Stage-1B。
@@ -345,6 +345,8 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | wiki dry-run incident | `a7f4619e8ee9de7a69dd7e37740e64f9fc5eb9d2` | `297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393` |
 
 完整书目由 `wiki/survey/current/bibliography.md` 提供，选择账本为 `wiki/survey/current/data/reviewer-bibliography-selection-v1.json`。它们是 receipt-derived artifacts；本文件不复制 85 条引用，以避免形成第二份书目正典。
+
+本提案的完整输入集合由 `wiki/survey/current/data/proposal-source-manifest-v1.json` 精确绑定；预审包报告为 `docs/checks/system-first-stage1a/context-v3/proposal-package-check.json`。当前报告的 `construction=PASS` 只表示输入、生成器和诚实红门可复现；`release=BLOCKED` 才是 Stage-1B 权限语义。两者不得合并为一个含糊 PASS。
 
 ## 20. 本次请求的最小结论
 

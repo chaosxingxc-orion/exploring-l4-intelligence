@@ -8,5 +8,6 @@
 - GM-4: **PASS** — 85 official-receipt works rebuild offline; the 245-node visibility disposition and `year_basis` policy are explicit.
 - Mapping design: mapping/empirical RQs, Stage-1B/1C ownership, systematic-mapping methods adaptation, and seven-field speech/omni codebook are current.
 - Integrity: no fabrication/falsification/plagiarism evidence was found; the detected biased-coding and selective-bibliography risks have been corrected without manufacturing reviewer rows.
-- Remaining release blockers: independent `3/3 + 19/19` review, fresh v7 dual-platform evidence, exact proposal source manifest/package report, formal immutable round-16 review/signoff, then explicit owner authorization.
+- Proposal package: pre-review source manifest and package report are **construction PASS / release BLOCKED**; after semantic review they must be regenerated on the same commit as fresh v7.
+- Remaining release blockers: independent `3/3 + 19/19` review, fresh v7 dual-platform evidence, formal immutable round-16 review/signoff, then explicit owner authorization.
 - Next action: obtain the independent 22 decisions against the frozen local fulltext packet. Any `DISAGREE` returns to correction before v7 generation.
