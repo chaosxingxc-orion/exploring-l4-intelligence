@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PROPOSAL_PATH = (
     ROOT
     / "wiki/survey/workbench/system-first-stage1a/"
-    "2026-07-21-stage1a-reviewer-brief.md"
+    "2026-07-21-stage1a-working-brief.md"
 )
 ROUND16_PATH = (
     ROOT
