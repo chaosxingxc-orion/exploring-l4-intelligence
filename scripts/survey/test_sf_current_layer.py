@@ -803,7 +803,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         registry = json.loads(self.payloads[registry_path])
         contract = json.loads(self.payloads[contract_path])
 
-        opaque_path = f"wiki/audit/system-first-stage1a/round-13/{basename}"
+        opaque_path = f"wiki/audit/system-first-stage1a/round-16/{basename}"
         opaque_raw = f"opaque {artifact_type}\n".encode("utf-8")
         opaque_blob = git_blob_oid(opaque_raw)
         registry["artifacts"].append(
@@ -811,7 +811,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         )
         contract["rounds"].append(
             {
-                "round": 13,
+                "round": 16,
                 "verdict": "PENDING_INDEPENDENT_REREVIEW",
                 "disposition": disposition,
                 "supersession": {
@@ -1063,9 +1063,9 @@ class RouterContentContractTests(unittest.TestCase):
             "owner authorization",
             "independent reviewer sign-off",
             "zero Stage-1B executions in this repair",
-            REPORT_PATH,
-            "PASS",
-            "Current blockers",
+            "`H5_CALIBRATION`",
+            "construction PASS / release BLOCKED",
+            "Remaining release blockers",
             "Next action",
         ):
             self.assertIn(required, text)

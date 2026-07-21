@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "37b4da2b7a29626fd08374a7123c495f5e3495da"
+        "git_blob": "5262bebf07f476353056d3e60ea083362c431cdd"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -382,7 +382,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "3354f974c3cd497d24bbba568a39c7a5cb2ee7eb"
+        "git_blob": "faaa1aa1460430c3c6b49a1fa93a8fa83dec49e9"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -485,7 +485,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "5a896e39cf5d26dc37559090d5b06204ae9fa2f29ccde085ed40c42717fddce6"
+    "sha256": "e99a57921d2e0afba8c9f7f5c548e5a9a08b8b24696d4b8dbc4a9c6eeb7638f7"
   },
   "commands": [
     {

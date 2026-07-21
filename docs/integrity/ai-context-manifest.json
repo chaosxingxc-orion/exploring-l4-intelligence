@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current W1-W4 state",
-      "sha256": "946715903f24286a6f993e85ef7ba40c28b303d105b9508d98a94bbf08ae5a96"
+      "sha256": "751defeffc3d2916be88b1be1eb071865783641178837adeea1d8b9d711fd9e5"
     },
     {
       "path": "wiki/AI-Collaboration.md",

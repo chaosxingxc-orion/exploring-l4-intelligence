@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-20. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-07-21. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
 
@@ -10,16 +10,16 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1A only. Technical baseline `2225c48` binds only the passing integrated
-  zero-network package gate and native `wiki-sync` dry-run. Final adversarial review and verification
-  before completion remain pending, so the package cannot yet enter formal independent doctoral
-  re-review. No formal verdict, reviewer sign-off, owner approval, or Stage-1B authority exists.
-- **Publication incident:** a malformed wrapper entered publish path, created `.wiki-tmp` local commit
-  `4506900`, and attempted push. Push exited nonzero; successful read-only verification found remote
-  master unchanged. Root cause is fixed; the subsequent native dry-run performed no commit/push.
-- **Next authorized work:** complete final adversarial review and verification before completion; only
-  after both pass may the package enter formal independent Stage-1A re-review. A favorable review still
-  needs explicit owner execution approval. No query, model/smoke, mapping execution, or prototype.
+- **Current state:** Stage-1A final remediation only. Round-16 precheck found Track A adequate but kept
+  search design at `WITHHOLD`. Negative evidence is now `22 = 4 + 18`; the pre-review proposal package
+  is construction PASS / release BLOCKED. No reviewer sign-off, owner authorization, or Stage-1B
+  authority exists.
+- **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; the blind
+  second coder and third-party disagreement adjudication are **PENDING**. Formal v7 NT/POSIX leaves,
+  aggregate, and immutable round-16 submission remain withheld.
+- **Next authorized work:** complete H5 coder B and adjudication, then generate fresh v7 evidence and
+  submit the exact immutable package for independent sign-off. No query, model/smoke, mapping
+  execution, or prototype is authorized before sign-off and explicit owner authorization.
 
 ## W2
 
