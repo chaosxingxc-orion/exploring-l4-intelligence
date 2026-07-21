@@ -1,0 +1,57 @@
+{
+ "artifact_id": "SF-PROPOSAL-PACKAGE-CHECK-2026-07-21-01",
+ "schema": "sf-proposal-package-check-v1",
+ "package_kind": "PRE_REVIEW_FAIL_CLOSED_PACKAGE",
+ "source_manifest": {
+  "path": "wiki/survey/current/data/proposal-source-manifest-v1.json",
+  "source_commit": "be8ae3320737581175e34f4e869aade8c9848b46",
+  "sha256": "779319514cd728ba7d10d83af22361c722e4379c517d5a04d7ed21b386a0541c"
+ },
+ "components": [
+  {
+   "id": "PROPOSAL_SOURCE_MANIFEST",
+   "result": "PASS",
+   "failure_codes": []
+  },
+  {
+   "id": "REVIEWER_PROPOSAL_DRAFT",
+   "result": "PASS",
+   "failure_codes": []
+  },
+  {
+   "id": "FORMAL_RELEASE_GUARD",
+   "result": "PASS",
+   "failure_codes": []
+  },
+  {
+   "id": "ACTIVE_CORPUS_UNION",
+   "result": "PASS",
+   "failure_codes": []
+  },
+  {
+   "id": "BIBLIOGRAPHY_AND_SELECTION",
+   "result": "PASS",
+   "failure_codes": []
+  },
+  {
+   "id": "V7_EXPECTED_PRE_REVIEW_RED_GATE",
+   "result": "PASS",
+   "failure_codes": []
+  }
+ ],
+ "construction_failure_codes": [],
+ "construction_verdict": "PASS",
+ "v7_expected_pre_review_failures": [
+  "ABSENCE_REVIEW",
+  "SEMANTIC_CORRECTION_REVIEW"
+ ],
+ "release_blockers": [
+  "ABSENCE_REVIEW_PENDING",
+  "EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING",
+  "PROPOSAL_NOT_PROMOTED_TO_ROUND16",
+  "SEMANTIC_CORRECTION_REVIEW_PENDING"
+ ],
+ "release_eligible": false,
+ "release_verdict": "BLOCKED",
+ "interpretation_guard": "Construction PASS means the frozen pre-review package is internally consistent and honestly blocked. It is not reviewer sign-off, owner authorization, or Stage-1B readiness."
+}

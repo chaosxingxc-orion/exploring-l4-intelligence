@@ -1,0 +1,380 @@
+{
+ "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-01",
+ "schema": "sf-proposal-source-manifest-v1",
+ "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
+ "source_commit": "be8ae3320737581175e34f4e869aade8c9848b46",
+ "scope": "Exact committed inputs for the round-16 reviewer proposal; this is not the legacy current manifest and is not a Stage-1B authorization.",
+ "files": [
+  {
+   "role": "project_thesis",
+   "path": "wiki/Project-Thesis.md",
+   "surface": "north_star",
+   "git_blob": "64e847f566c83b4b0f1ec9c2a6032afb8dc1a020",
+   "sha256": "5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623"
+  },
+  {
+   "role": "current_research_state",
+   "path": "wiki/Research-Objective.md",
+   "surface": "current_state",
+   "git_blob": "9ab2dece520fdcd2e52e041d00cb4a97c4da5bfd",
+   "sha256": "94754dbd13e565efc150d5699fe8fb3010e9a0d77662830bf2bba17b01a80275"
+  },
+  {
+   "role": "current_router",
+   "path": "wiki/survey/current/README.md",
+   "surface": "search_design",
+   "git_blob": "581de5a6f431f2e06e81bede029a69bec726cfd3",
+   "sha256": "8d12d42576ff1549fa4cda47a671c16b0b20928e873056c7b86d6d2943f4b1bd"
+  },
+  {
+   "role": "current_status",
+   "path": "wiki/survey/current/status.md",
+   "surface": "search_design",
+   "git_blob": "7c9bc36209545d35e486083ede2ee871792b3f4b",
+   "sha256": "6c6e566dd705909e71f0bab1c630e5833ff6e430a010c3a5eaf92e911efc70e9"
+  },
+  {
+   "role": "current_protocol",
+   "path": "wiki/survey/current/protocol.md",
+   "surface": "search_design",
+   "git_blob": "788622b909e31e785a142fcfea51cd9d163c6970",
+   "sha256": "0e23c262375c24cb71b2bd7aacfc5edb175ff40ab1a9900205f766fa39f3f78a"
+  },
+  {
+   "role": "legacy_current_manifest",
+   "path": "wiki/survey/current/manifest.json",
+   "surface": "legacy_release_context",
+   "git_blob": "55b7deb53d70990c7330dc5e47d4a65e3550ec90",
+   "sha256": "58b29fa0373a3fcf2ae804dd561b571f6eecc6ea96736dd6395b32726f2f93db"
+  },
+  {
+   "role": "mapping_methods_adaptation",
+   "path": "wiki/survey/current/mapping-methods-adaptation.md",
+   "surface": "methods",
+   "git_blob": "786c579113cf318e3a0ea254cd5cce233b5c96a3",
+   "sha256": "86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827"
+  },
+  {
+   "role": "modality_specificity_codebook",
+   "path": "wiki/survey/current/modality-specificity-codebook.md",
+   "surface": "codebook",
+   "git_blob": "b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019",
+   "sha256": "48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769"
+  },
+  {
+   "role": "query_compiler",
+   "path": "scripts/survey/sf_query_compiler.py",
+   "surface": "search_execution",
+   "git_blob": "ba22131a7c160394f1926b5e69225891defcc6d4",
+   "sha256": "ac14272b5d8468ce1ac87e95891dd68819e9ddc89fd9f4bbfd4cd223f8a03051"
+  },
+  {
+   "role": "query_compiler_profile_test",
+   "path": "scripts/survey/test_sf_query_compiler_profiles.py",
+   "surface": "search_execution",
+   "git_blob": "39ac78ca7aa835a2047eb2df75fccd799fd90420",
+   "sha256": "0ff2cc4654a5685a5204906742aaa43239e591014fda5e161d6587899aebfade"
+  },
+  {
+   "role": "frozen_queries",
+   "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
+   "surface": "search_execution",
+   "git_blob": "9e143e5b0054fbba9ddd65a835880bb4b66bad6d",
+   "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab"
+  },
+  {
+   "role": "t1_routes",
+   "path": "wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl",
+   "surface": "search_execution",
+   "git_blob": "dae803b277433676499d035fce712d72458f705a",
+   "sha256": "41bbe80042718a19a0ca36f0348cd9d2adeb1f23f801f3bd703c2c1bd09df70a"
+  },
+  {
+   "role": "t1_wordlist",
+   "path": "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json",
+   "surface": "search_execution",
+   "git_blob": "ee4e2d9750c2e47efe31d688b0fddded1819bda8",
+   "sha256": "a1c13c57fca361968cd7dfc98364a1ca81ab9124b1acde02bcb9df8df80dfaf5"
+  },
+  {
+   "role": "t1_route_design",
+   "path": "wiki/survey/2026-07-16-sf-t1-proceedings-routes.md",
+   "surface": "search_execution",
+   "git_blob": "9bb2f3d3a8acba91e00cf172335f8165adc480d8",
+   "sha256": "e8b1af69d0c027745feb3316368f13b855c0a752fa9f819569ad66fb265aaba6"
+  },
+  {
+   "role": "t1_route_validator",
+   "path": "scripts/survey/sf_t1_routes_validate.py",
+   "surface": "search_execution",
+   "git_blob": "e34e8d5a62fd05f1750278e84722498d46f43c61",
+   "sha256": "408262ab29a095aa399d331248f3e12e172e932a33e43dd7931d3a27d02a4b6f"
+  },
+  {
+   "role": "rec_templates",
+   "path": "wiki/survey/2026-07-15-sf-blank-templates.md",
+   "surface": "screening_and_coding",
+   "git_blob": "4334a7ef72ea5b0260b305fc8b75fceda52fa191",
+   "sha256": "bbdc420d95743b6bd3c5840ec24efe5b23d4ad39fa5036425eb3f4b6fdcb2a41"
+  },
+  {
+   "role": "record_validator",
+   "path": "scripts/survey/sf_record_validator.py",
+   "surface": "screening_and_coding",
+   "git_blob": "e2670e780ecbcaedf698c3b6006c0e459f9d3658",
+   "sha256": "ffd4012fa039785b72ab856693a5e72c0514140061eede707c1782079abf1fd2"
+  },
+  {
+   "role": "record_validator_test",
+   "path": "scripts/survey/sf_record_validator_test.py",
+   "surface": "screening_and_coding",
+   "git_blob": "47a642fc31f7d1b7eb3c2d88b5c3f0232e023f60",
+   "sha256": "6b74d3bf66ff28dd7db064446e03035e4e034af051f919baa56bed78c4115c4d"
+  },
+  {
+   "role": "schema_adjudication",
+   "path": "wiki/survey/current/data/schema-v3-adjudication.json",
+   "surface": "adjudication",
+   "git_blob": "805f279c549ac2e24cfd8994d5aa19e560d355da",
+   "sha256": "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
+  },
+  {
+   "role": "known_item_coding",
+   "path": "wiki/survey/current/data/known-item-coding-v7.json",
+   "surface": "adjudication",
+   "git_blob": "ed5fd675e1050585c4712a735787016986dc808e",
+   "sha256": "64470e7c04d382ef3b19639cd5db0b96ffc5c207792b33fd02b18c32a57705c7"
+  },
+  {
+   "role": "sidecar_deepverifier",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "4d9572ec8357466eaba9d18ab9a2f2502b165014",
+   "sha256": "8bf46ff01022bf5ba8aab4133df88004f05ba3c99a4c522c91754a9ebd40c10c"
+  },
+  {
+   "role": "sidecar_coder_1724",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "62f17cb29bd30fff96273ba1178488500a1c3712",
+   "sha256": "a30764fc0a774a1c04009fc91c00e984b92ab4b5740ff59349cef28f8d1c8195"
+  },
+  {
+   "role": "sidecar_dream",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "7547dd1f6f88a1f498bc3417fe58702aa7d0e763",
+   "sha256": "a94f241689147a9ebb1f219d54fa64bd450d50f01df288f07fa7bb1e65152605"
+  },
+  {
+   "role": "sidecar_2602_16485",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2602.16485.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "98f12c7ef9d4be5cd4055cbe6196641308ebcae8",
+   "sha256": "b4201e535f7dbea0cee9f92d506c9e8ecd80b031d7f9aa3608e8e5085a68950f"
+  },
+  {
+   "role": "sidecar_2604_16529",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "c1db21bf473e29d2d28822086f683db2bc80a46f",
+   "sha256": "b74e81a7819a68ff9b0441211d20778f2ef0be27868d1d04aff920f00cb9bd67"
+  },
+  {
+   "role": "sidecar_2605_08083",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "7eebd72f2d41b4e8a1e4802525d042e2252aa979",
+   "sha256": "a084cbfe1c4d52b53ec42fcdf57bb623688eb79b00163f889718e9b259742811"
+  },
+  {
+   "role": "sidecar_2606_01667",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2606.01667.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "422aee43af4ca7b6f7d6fd94eb58dbc65b14e98e",
+   "sha256": "82056e0957c85d95c1bf4d772af82a2db3ba3d2017f607ae9309bd7c83099d69"
+  },
+  {
+   "role": "sidecar_2606_03054",
+   "path": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "surface": "adjudication",
+   "git_blob": "9ed19f5a578ebeb3c09dbd41c0825dd386f92a95",
+   "sha256": "124d0eb70e82c87bf5755411f35f0232ae086ff0417e691ff6e5bfc1296c6557"
+  },
+  {
+   "role": "absence_adjudication",
+   "path": "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
+   "surface": "adjudication",
+   "git_blob": "815f0f78924d7814c0ae0611fdf8e56a234e94ce",
+   "sha256": "c62ce59a3047269fdc22e85b0bad60b3d71454cb82a9cadb2a9d7b57bfc8391f"
+  },
+  {
+   "role": "semantic_corrections",
+   "path": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+   "surface": "adjudication",
+   "git_blob": "b0d4fafb7ed4b5fa1f7f6e34607646168f160ca6",
+   "sha256": "37b862ade5f3b278c52bcd1cb11f760e5d20aea8d8124ac1b1a8d21798fbcc8f"
+  },
+  {
+   "role": "v7_leaf_runner",
+   "path": "scripts/survey/sf_identity_taxonomy_v7_test.py",
+   "surface": "release_gate",
+   "git_blob": "d8a7215e8393248090174540d8de4a731297491d",
+   "sha256": "0f2ce1c25895cf095b81d1a79bbf5c5766bd4b8359f24689ad13312da895fbb1"
+  },
+  {
+   "role": "v7_aggregator",
+   "path": "scripts/survey/sf_evidence_v7_aggregate.py",
+   "surface": "release_gate",
+   "git_blob": "e87a2f02fdbba44767fc91bf848ef1886f4c3c9d",
+   "sha256": "8d8a9ed2c75c1029a6a43fe201f709ee62802f695b79dc377ed2ec1a7943d36d"
+  },
+  {
+   "role": "dual_platform_checker",
+   "path": "scripts/survey/sf_dual_platform_check.py",
+   "surface": "release_gate",
+   "git_blob": "9c094f1e98925cbbf3115e7655149b0ce3da07d9",
+   "sha256": "f5828f8bf565f1278efe1dc6c771a95fcf5682e34ac8c1a51bf9bb205db8e5ba"
+  },
+  {
+   "role": "active_union",
+   "path": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
+   "surface": "corpus",
+   "git_blob": "ad7626092f6929890f3dbbb5b6e898e9002831e2",
+   "sha256": "8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866"
+  },
+  {
+   "role": "active_union_check",
+   "path": "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json",
+   "surface": "corpus",
+   "git_blob": "c2960fafe1a9b7818b5ca105a7d1f8f29a9c668e",
+   "sha256": "a9dbe83115ce6ee371552764f71942767804f5de2e8ee0c9c23e77622624cfa6"
+  },
+  {
+   "role": "reviewer_known_items",
+   "path": "wiki/survey/current/data/reviewer-known-items-v2.json",
+   "surface": "corpus",
+   "git_blob": "2ca7c917aab1aff4bb84417276b94b54d7033f42",
+   "sha256": "c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2"
+  },
+  {
+   "role": "seed_manifest",
+   "path": "wiki/survey/2026-07-15-sf-seed-manifest.jsonl",
+   "surface": "corpus",
+   "git_blob": "7cf761347223e89c1598c2bb731bbb3b7801bc53",
+   "sha256": "4837f062362d5b472d9d3cd594ce6b3809380910d63ac7cd337b31a23f40adcc"
+  },
+  {
+   "role": "fulltext_ledger",
+   "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+   "surface": "corpus",
+   "git_blob": "08e493acab209dc34d89bc90bf21b2634de0304a",
+   "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56"
+  },
+  {
+   "role": "official_metadata_receipts",
+   "path": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
+   "surface": "bibliography",
+   "git_blob": "f34dec9703c1f11e813bbd27ab711f8d22cd4b95",
+   "sha256": "b218bdcd13215c5b37173cca30fe5a20a4a20175035089ca1f3d84b554642778"
+  },
+  {
+   "role": "reviewer_bibliography",
+   "path": "wiki/survey/current/bibliography.md",
+   "surface": "bibliography",
+   "git_blob": "32ab190a72f0265397757377c4e6c070481a8f97",
+   "sha256": "17670aebf8d3c80a43a3ee213bcc1169f094722efc9d1967b4e55c80f84771f6"
+  },
+  {
+   "role": "bibliography_selection",
+   "path": "wiki/survey/current/data/reviewer-bibliography-selection-v1.json",
+   "surface": "bibliography",
+   "git_blob": "87de00a3e4d8527226b1b05bd3ead330c564b974",
+   "sha256": "deaf913d73bfe77721c651b132859c4faeead4440090bfadabfcbc14beaed1c8"
+  },
+  {
+   "role": "bibliography_generator",
+   "path": "scripts/survey/sf_bibliography_generator.py",
+   "surface": "bibliography",
+   "git_blob": "dc9d8c8e446eb2d1ae690f4170fd11ca189924ce",
+   "sha256": "788aa8308e059a914b919ace2bbc37ea97b1511612cad1274e8542a50017c913"
+  },
+  {
+   "role": "metadata_fetcher",
+   "path": "scripts/survey/sf_official_metadata_fetch.py",
+   "surface": "bibliography",
+   "git_blob": "821450c00561982160733aea78679eccc839f348",
+   "sha256": "01e44b634167f1408a8baa7442bbd88e655de96cb18f2d433959e6755ffb05ca"
+  },
+  {
+   "role": "attempt_registry",
+   "path": "docs/integrity/experiment_attempt_registry.jsonl",
+   "surface": "integrity",
+   "git_blob": "9bcac7ce3681d82fd1479589d126cccc761c340e",
+   "sha256": "f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe"
+  },
+  {
+   "role": "round15_review",
+   "path": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+   "surface": "review",
+   "git_blob": "d7901f85c7804bd2176aa76a0ea05bc2d79729c2",
+   "sha256": "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e"
+  },
+  {
+   "role": "proposal_draft",
+   "path": "wiki/survey/workbench/system-first-stage1a/2026-07-21-research-proposal-for-independent-review.md",
+   "surface": "proposal",
+   "git_blob": "ee57080666f07060adb87919a02303fe92895219",
+   "sha256": "403573ced1d63d1ecea65c170cf10aab408bbb82c9970b9e13cbe71d3f9d0be3"
+  },
+  {
+   "role": "proposal_checker",
+   "path": "scripts/survey/sf_reviewer_proposal_check.py",
+   "surface": "proposal",
+   "git_blob": "892267ce35247a0c5a16e50905404cdb07db895a",
+   "sha256": "becd872d352c52502b05bd54ca0ace8e04d04d0ca4bd069a44ef42ed6b25b400"
+  }
+ ],
+ "semantic_gate": {
+  "inventory_identity": "22 = 3 + 19",
+  "correction_inventory": 3,
+  "correction_reviews_recorded": 0,
+  "active_absence_inventory": 19,
+  "active_absence_reviews_recorded": 0
+ },
+ "deferred_release_artifacts": [
+  {
+   "role": "evidence_v7_windows_leaf",
+   "path": "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json",
+   "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
+   "trigger": "3/3 correction reviews and 19/19 active absence reviews"
+  },
+  {
+   "role": "evidence_v7_wsl_leaf",
+   "path": "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json",
+   "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
+   "trigger": "3/3 correction reviews and 19/19 active absence reviews"
+  },
+  {
+   "role": "evidence_v7_aggregate",
+   "path": "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.json",
+   "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
+   "trigger": "both platform leaves PASS on identical inputs"
+  },
+  {
+   "role": "formal_round16_proposal",
+   "path": "wiki/audit/system-first-stage1a/round-16/research-proposal-and-stage1b-signoff-request.md",
+   "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
+   "trigger": "fresh v7 aggregate PASS and hostile pre-release review"
+  }
+ ],
+ "release_eligible": false,
+ "release_blockers": [
+  "SEMANTIC_CORRECTION_REVIEW_PENDING_0_OF_3",
+  "ACTIVE_ABSENCE_REVIEW_PENDING_0_OF_19",
+  "FRESH_V7_DUAL_PLATFORM_EVIDENCE_MISSING",
+  "FORMAL_ROUND16_PROPOSAL_NOT_CREATED",
+  "INDEPENDENT_SEARCH_DESIGN_SIGNOFF_MISSING",
+  "OWNER_SAME_PACKAGE_AUTHORIZATION_MISSING"
+ ]
+}
