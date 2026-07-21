@@ -2,7 +2,7 @@
  "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-01",
  "schema": "sf-proposal-source-manifest-v1",
  "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
- "source_commit": "d8e5b90bd7df89163fef43e9a2db40365945c057",
+ "source_commit": "23129f4f500ffc39cea241060e321a3c69f67257",
  "scope": "Exact committed inputs for the round-16 reviewer proposal; this is not the legacy current manifest and is not a Stage-1B authorization.",
  "files": [
   {
@@ -44,8 +44,8 @@
    "role": "legacy_current_manifest",
    "path": "wiki/survey/current/manifest.json",
    "surface": "legacy_release_context",
-   "git_blob": "55b7deb53d70990c7330dc5e47d4a65e3550ec90",
-   "sha256": "58b29fa0373a3fcf2ae804dd561b571f6eecc6ea96736dd6395b32726f2f93db"
+   "git_blob": "378720b3312cd6fc6d8589d89df9cf0ae395f303",
+   "sha256": "11fdeb36869e89a1567920a6ffa20270d3bae6f1daa6d0c49a9f7cfd18abdaaf"
   },
   {
    "role": "mapping_methods_adaptation",

@@ -22,7 +22,7 @@
       {
         "path": "scripts/checks/build_ai_context_manifest.py",
         "mode": "100644",
-        "git_blob": "139284604f1e29ba31b05ab5baee35af32673550"
+        "git_blob": "be34d99381df72ae64c99adecede8e50c95a985e"
       },
       {
         "path": "scripts/checks/build_registers.py",
@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "bb2a9f242ee56fe3b4f8ae36c491c6774d1e89e7"
+        "git_blob": "37b4da2b7a29626fd08374a7123c495f5e3495da"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -122,7 +122,7 @@
       {
         "path": "scripts/survey/sf_current_manifest.py",
         "mode": "100644",
-        "git_blob": "8063b7e3e968f6099da30c6a1e895031eb550c18"
+        "git_blob": "a8864b4cc08b968b6921154ec3edd6913cd36639"
       },
       {
         "path": "scripts/survey/sf_current_package_check.py",
@@ -382,7 +382,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "be890f711bcb68060663301d896118c3de3d5719"
+        "git_blob": "3354f974c3cd497d24bbba568a39c7a5cb2ee7eb"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -485,7 +485,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "bdf2854d707d710131acccada882ecf2c6734346b8ac571aa5896ae96ad09aea"
+    "sha256": "5a896e39cf5d26dc37559090d5b06204ae9fa2f29ccde085ed40c42717fddce6"
   },
   "commands": [
     {
