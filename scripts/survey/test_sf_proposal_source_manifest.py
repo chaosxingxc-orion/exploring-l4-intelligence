@@ -69,6 +69,9 @@ class ProposalSourceManifestTest(unittest.TestCase):
             output.write_text("{}\n", encoding="utf-8")
             self.assertEqual(["PROPOSAL_SOURCE_MANIFEST_DRIFT"], manifest.check_manifest(document, output))
 
+    def test_cli_check_validates_the_frozen_commit_instead_of_rebasing_to_head(self):
+        self.assertEqual(0, manifest.main(["--check"]))
+
 
 if __name__ == "__main__":
     unittest.main()

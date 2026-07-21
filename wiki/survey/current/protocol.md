@@ -637,7 +637,7 @@ SOTA/method cards, updated census and ledger, saturation/flow report, direct-pri
 reproduction-readiness evidence, and **eligible Stage-1C inputs**. Stage-1B does not create or rank the
 final candidate cards and does not freeze a reproduction list. Stage-1C owns the final 3–5 candidate
 cards, ranking, owner selection, and reproduction-list freeze. Each eligible input supplies the
-supporting and contradicting evidence, a single-observation kill criterion, unresolved alternatives,
+supporting evidence and contradicting evidence, a single-observation kill criterion, unresolved alternatives,
 method limitations, improvement space, and value needed for that later synthesis. “Not found” is
 always scoped to the inspected set and carries removal and unresolved counts.
 

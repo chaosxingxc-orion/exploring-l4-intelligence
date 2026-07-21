@@ -223,7 +223,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args(argv)
     output = args.output if args.output.is_absolute() else ROOT / args.output
-    document = build_manifest()
+    document = build_manifest() if args.write else load_manifest(output)
     failures = validate_manifest(document)
     if failures:
         print(json.dumps({"verdict": "FAIL", "failure_codes": failures}, indent=2))
