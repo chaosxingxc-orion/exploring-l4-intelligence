@@ -11,7 +11,7 @@ formal_review_status: "NOT_YET_SUBMITTED_AS_IMMUTABLE_ROUND_16"
 stage1b_status: "UNSTARTED_AND_UNAUTHORIZED"
 systematic_discovery_queries_in_this_repair: 0
 research_model_or_smoke_calls_in_this_repair: 0
-remediation_evidence_commit: "32e4c52689f3e458d46c13f9c0cf249ba87e83bf"
+remediation_evidence_commit: "eea03330f626c9979841ae60eef82a022ab01d9b"
 ---
 
 # 给独立评审人的研究提案与整改说明
@@ -216,7 +216,10 @@ Stage-1A 的 known-item evidence 仍是 hypothesis-grade，不是完整 mapping�
 | `763bfcd` | 将 census/seed/bibliography/claim/version/fulltext/reviewer-known 合并为无损 canonical-work union graph | PASS；不再为 claim 或 seed 生成重复 work |
 | `035cd19` | 从官方 raw receipt 生成 77-work bibliography，恢复 system-first/reward/boundary 三条链 | PASS；Windows/WSL 可离线重建，known-ID recall credit=false |
 | `c2739d4` | 撤下 3 条与全文冲突或证据不足的负结论，建立 `22 = 3 + 19` 修正台账 | PASS；一条改 `true`、两条改 `unknown`，均退出承重 absence |
-| round-16 precheck remediation（本工作树） | 接受第四条 reviewer `DISAGREE`、迁移为 `22 = 4 + 18`、增加 counterevidence 合同、H5 三篇校准与双平台 extractor contract、处置 5 条 reviewer-known works | 语义审查和环境合同 PASS；H5 仅 coder A 完成，正式 v7/round-16 仍阻塞 |
+| `f3923c1`, `32e4c52` | 接受第四条 reviewer `DISAGREE`、迁移为 `22 = 4 + 18`、增加 counterevidence 合同、H5 三篇校准与双平台 extractor contract、处置 5 条 reviewer-known works，并修复审计登记表的原子追加 | 语义审查、环境合同与 82-row audit immutability PASS；H5 仅 coder A 完成 |
+| `3e42565`, `d8e5b90` | 将可编辑 reviewer brief 与 immutable audit artifact 分离；workbench 文件名不再冒充 proposal/review 审计件 | AI 默认加载面不再把工作稿误判为冻结评审产物 |
+| `23129f4`, `2060109` | 切断 current-package report → current/AI manifest → current-package report 的 SHA 自引用，并按无环依赖顺序重冻 source/package/current reports | deterministic current-package `--check` PASS；不再以无法存在的哈希固定点制造假绿 |
+| `eea0333` | 移除热层中的旧 v6 commit 与事故叙事，更新 Per-Work 到 round-16 precheck 的 H5/v7/authorization 真相 | AI context manifest 与 122 项加载面政策测试 PASS；事故细节仍在冷审计证据中 |
 
 ## 11. GM-1：claim/work 去重和旧库无损桥接
 
@@ -256,7 +259,17 @@ cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong ro
 
 全文采用本地优先：当前 ledger 有 41 个成功 arXiv ID、41 份 PDF 与 39 份 e-print，均由 SHA 绑定；H5 三篇校准论文的 PDF/eprint 已一次性缓存到 E: 数据层。后续 D2 优先解析本地 e-print/LaTeX，源不可用或需要页码证据时才用本地 PDF。网络只在精读队列 cache miss 时访问，不为书目元数据批量下载论文，也不反复访问官网。
 
-## 15. 相对 v10 的 claim diff
+## 15. 记录层与总包验证修复
+
+precheck 之后的回归暴露了两处与研究结论无关、却会污染发布证据的工具链错误。第一处是 audit registry 虽声明允许 `HEAD+1`，实际却要求新增 review 已经存在于 HEAD，导致 review、registry 和 anchor 无法在同一提交原子落地。现在只有在完整保留 HEAD prefix、只追加一个 suffix、且该 suffix 的 stage-0 blob 与工作树字节精确一致时，新增 review 才可 staged-only；旧行改写、重排、删行、一次增长两行和 pin mutation 仍全部 fail closed。
+
+第二处更严重：`current-package-check.json` 曾同时被 current manifest 和 AI manifest 当作输入，而 current-package 自己又运行这两个 manifest 的检查。这构成 cryptographic self-reference——报告哈希改变 manifest，manifest 改变报告，因而不存在可验证固定点。继续“重刷哈希”只能得到暂时假绿。修复后，总包报告不再作为自身命令图的输入；它仍由 deterministic `sf_current_package_check.py --check` 对 exact code graph 与命令输出独立验证。current manifest、AI manifest、proposal source manifest 和 proposal package report 按有向无环顺序生成并在提交后只读重放。
+
+总包命令也已从会覆盖冻结 v6 输出的 legacy runner 升级为只读 v7/H5/PDF、active-union、bibliography 与当前 manifest tests。最终 Windows current package、proposal source manifest、proposal construction、AI context、current manifest 与 audit immutability 全部 PASS；WSL2 Ubuntu-24.04 在 Python 3.12.3 / pypdf 6.14.2 下的 PDF、H5 和 v7 harness 共 21 项测试 PASS。v7 probe 的唯一 named failure 仍是 `H5_CALIBRATION`，这正是预期的诚实红门。
+
+记录层同时完成语义清理：可编辑文件保留在 `wiki/survey/workbench/`，只有冻结且登记的正式评审件进入 `wiki/audit/`；旧 commit、旧 v6 gate 和 publication-incident 细节不再占用默认热层，但对应 evidence 未被删除。该清理减少 AI 上下文中的限定语堆叠，不改变任何历史事实。
+
+## 16. 相对 v10 的 claim diff
 
 | v10 claim/section | Disposition | 原因 | 当前证据 | Stage force |
 |---|---|---|---|---|
@@ -269,7 +282,7 @@ cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong ro
 | §5 Stage-1B 只做 systematic mapping、禁模型/smoke | `UNCHANGED` | 阶段边界没有被技术整改改变 | current protocol/status | readiness only |
 | 本文件 RQ-SUPPLY/RQ-VERIFY 的 generator-verifier-selector 分解 | `NEW` | 将 reviewer-known verification work 提出的归因风险纳入待检验问题，不改变 frozen query | bibliography roles；不计 recall | hypothesis only |
 
-## 16. Exposure 与事故披露
+## 17. Exposure 与事故披露
 
 本次 narrow repair 的 systematic discovery-query execution 为 0，research-model calls 为 0，smoke 为 0，dataset metric/headroom/prototype 为 0。`INHERITED_PRIOR_EXPOSURE` 保持非零，不因本轮 scoped zero 被覆盖。
 
@@ -277,7 +290,7 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 
 此前 `wiki-sync` malformed wrapper 曾进入 publish path，在临时 wiki clone 中创建 local commit 并尝试 push；push 非零失败，后续 read-only verification 证明 remote master 未改变。root cause 已修复，原生 dry-run 不再 commit/push。事故证据保存在 context-v1，不能因后续工具 PASS 被删除。
 
-## 17. 当前 gate 状态
+## 18. 当前 gate 状态
 
 | Gate | 状态 | 解释 |
 |---|---|---|
@@ -292,13 +305,15 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 | GM-3 v7 contract-4 code/DAG tests | PASS | 当前单平台 probe 仅 H5 红；leaf/aggregate fail-closed 反例已实现 |
 | GM-3 formal NT/POSIX leaves + aggregate | **WITHHELD** | 等待 H5 dual coding 完整后在同一 commit 生成 |
 | GM-4 official-receipt bibliography | PASS | 90 unique works，可完全离线重建；250-node selection complement 已记账 |
+| audit/context lifecycle | PASS | 82-row registry 原子追加、workbench/audit 分流、AI context surface 0 failures |
+| deterministic current package | PASS | 自引用已切断；提交后 Windows `--check` 可只读重放 |
 | proposal source manifest/package gate | **construction=PASS / release=BLOCKED** | `proposal-source-manifest-v1.json` 绑定本提案、协议、compiler/routes/templates、H5、extractor 与账本；`proposal-package-check.json` 只证明预审包内部一致，不替代 H5、formal review 或 owner authorization |
-| formal immutable round-16 proposal | NOT YET | round-15 已登记当前 WITHHOLD review；本文件仍是 workbench draft |
+| formal immutable round-16 proposal | NOT YET | round-16 precheck 是外部输入；本文件仍是 workbench brief，不冒充同包正式 review |
 | independent search-design signoff | NOT YET | 实现者不得创建或预填 |
 | owner same-package authorization | NOT YET | 必须在 reviewer SIGN 后单独发生 |
 | Stage-1B | UNSTARTED / UNAUTHORIZED | 第一条 query 仍禁止 |
 
-## 18. 给 reviewer 的明确请求
+## 19. 给 reviewer 的明确请求
 
 剩余动作必须按以下顺序完成：
 
@@ -318,7 +333,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 
 本 proposal 不预填答案。
 
-## 19. 证据索引（Git blob 字节）
+## 20. 证据索引（Git blob 字节）
 
 下列 SHA-256 都按 `git show HEAD:<path>` 的 blob bytes 计算，不使用 Windows 工作树 CRLF 变体：
 
@@ -355,7 +370,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 
 本提案的完整输入集合由 `wiki/survey/current/data/proposal-source-manifest-v1.json` 精确绑定；预审包报告为 `docs/checks/system-first-stage1a/context-v3/proposal-package-check.json`。当前报告的 `construction=PASS` 只表示输入、生成器和诚实红门可复现；`release=BLOCKED` 才是 Stage-1B 权限语义。两者不得合并为一个含糊 PASS。
 
-## 20. 本次请求的最小结论
+## 21. 本次请求的最小结论
 
 precheck 已判断继续 systematic mapping 的科学理由充分；当前请求不是重复评审 Track A，而是完成唯一尚缺的 H5 coder-B／adjudication，生成精确 v7 双平台证据，再让独立 reviewer 对同一 immutable package 作最终 search-design SIGN/WITHHOLD。任何一步都不能由实现者自签替代。
 
