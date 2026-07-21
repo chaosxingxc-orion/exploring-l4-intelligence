@@ -342,7 +342,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | Evidence | Git blob | SHA-256 |
 |---|---|---|
 | `wiki/Project-Thesis.md` | `64e847f566c83b4b0f1ec9c2a6032afb8dc1a020` | `5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623` |
-| `wiki/Research-Objective.md` | `4ae23baec5f8a51672fdfc60329972df0e99a27e` | `aa836540d210ca406c69eacb2f7b7b6490ff2aca85c516892174a4bd3369badc` |
+| `wiki/Research-Objective.md` | `a7cd966dad4027256f1d286e19761dd848275357` | `c58836bcfce8f216a2c19d379251d309eb4d3190c4fa563f4cdc0cca70396e2d` |
 | v10 proposal | `686129ee41cdf08c294114fc29c93a9c63408dc5` | `94ddfd282950ae10ca113e32e9a4ccfc702a6fa74dcd13572662e4f717b66085` |
 | round-14 adversarial review | `dde66b8c50a8100eff24a2117e04966651bde3bc` | `ac61d727878d9c90ec173c4c2e12cbc6cc9ed13b60f5b8478f6d01e8fbfa28b9` |
 | round-15 independent review | `d7901f85c7804bd2176aa76a0ea05bc2d79729c2` | `4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e` |
@@ -351,18 +351,18 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | revised implementation plan | `a3ba7e862cac559fcce70d92b935745a662bbdc8` | `985949e178f5cef9e0e94b96629a5d9828bee70c3c82ac2074740dbde81fe840` |
 | negative-evidence review artifact | `372cb60c3936cdf9ba40452d749fb31c88b735fc` | `4f96dc55f4e7c8cd6eef4df700e0e73807f6d25748fc23479b24cf11bf8bf264` |
 | semantic-correction artifact | `a5c963098cd8a7ef8a8e60febd9a231da45fa7e0` | `6b48a26212a0593abfc8e7b0a762826676ee6118f6313c47626f5f876bd349a3` |
-| lossless union graph | `f4c97f2264bb180f51cc952e5fa88d3f135883f4` | `2e562049f8589aedb38a881b041b42e19278d77f4d0614e6ac830f84bce76024` |
-| union machine check | `1c19671f3b731946f34670ad94cbbb2b1e043716` | `67d6795e3ce0e851a320e6f85ba50ab05c6a2f8ddd98128d4d28ce711054cab4` |
-| reviewer-known items | `44e5bc36db70d0de551934e02fc8e9ff5bea222b` | `7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24` |
-| official metadata receipts | `af93661d7abc640de68a7fa5c81b533aac5c6c50` | `9c3ca6f466940e964fe05961d06d55ed45630b3c44bba441289424e18f4e3468` |
-| generated reviewer bibliography | `1adab73af8f80efd9db7f7559d00e6e606f12b4c` | `23ab2bf25e4e11607ddf8475862d96849729c5643ba347e2e3379b01cd3e92c9` |
-| bibliography selection receipt | `93edab407964d2d478dad1b33bab4f1114034d1c` | `faf78d691cfc1200571a60b526d767c0975b7538b487b28f4fecd1320fd7f032` |
+| lossless union graph | `aff63783885a4bf9889fb880400a7564b7dc2dd9` | `bf82ea237b13b974f5fd278ce42dbe801de84dcc35f58800a3b0901a9ba4bd79` |
+| union machine check | `27b97e5f1021fbcad19a6dabf6d3b71090d2f04b` | `c98c071dc3ec05625bf6ea4a030265eddf9e6ddd73ff56e5d4609bed811a3304` |
+| reviewer-known items | `b7f0936492114fa75a28d48324baa1ce196b4c93` | `602e549ad3f655d9f6fad65c155c0afef2b62388e0310427750def269ba96176` |
+| official metadata receipts | `5cd9e1d94aa8165feeccfbf9c6101c9653f42caa` | `470c029d934f784d72f6d534cdfc6cb3db862d457e26141f1f6faf4442e019da` |
+| generated reviewer bibliography | `28ed56cd89ff7cdfa97e9853abe2f3c069fa2048` | `f045d1d1284616b273d068794a7e3bb94cbf118753bae1c4a5e16f9cbe21113a` |
+| bibliography selection receipt | `02e35422d3cb65f17c7aa13193f1f66c5214c19c` | `f5cbf569781df81437d25836f4f90365417f884a12243430794b51f0595fdcf4` |
 | mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
-| speech/omni specificity codebook | `9bda0d76328de360b9b0851d0f50b579af79a7b1` | `db860023cb42a9deb6dc789b8cb3a93e7a10bc791568bc0c8bc8a70880018999` |
-| H5 calibration artifact | `4e699b9565e9ed88e4400cc78725fa1dfb8eda11` | `72f70bccf23287a62bda43f3b386effcaecf439e5a8a4a0225f75a534bbee361` |
+| speech/omni specificity codebook | `656520cee58551a2e6c93c79f72c4b0e9c15be76` | `c17bea8ed81c5205fb5b3ba197ce8715087e8f8d69a2a4e02a5af22551b24c44` |
+| H5 calibration artifact | `ee442778c03898c0d23459991159b5c52c52fccf` | `547cface34e25aa34cace332c67f8681246f4bbaf9f2ad4a6bbefb4c32ed1ac6` |
 | PDF extractor environment | `0bfe53b1a72268e315630c4050809c1bb9e10987` | `d982a22e2702cc670ac9a3b90d3dfeaab33e1cde2df3518dc98f1a55b9845a19` |
-| current protocol | `bca3c0a661d69ee53625d73797c90d969d5cdc95` | `e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585` |
-| current status | `fc461f1d649f177c8cd6b3cd5b6056270fbcb660` | `7a9af855bb1b374a978b9564d69ea3791d6fea14b2daf0ec654904fb4ac19499` |
+| current protocol | `bd9e58284720f81e43042de1363fcd45d948dcd1` | `53caa1e30af1a3dbf258d4171b848a1bb6d0f7ec4fa04aba683c36b5deaf51b9` |
+| current status | `f40417f31c9607778797f4825bb3d673f5b4b842` | `e734783871e2780b683bdb8b7b065db8b55e0b2f5682448366764e8d1b2aebf2` |
 | frozen evidence-v6 aggregate | `d3b1c67018fa9ce99dfff56af3b9404747504936` | `3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd` |
 | frozen query bytes | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` | `645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab` |
 | attempt registry | `9bcac7ce3681d82fd1479589d126cccc761c340e` | `f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe` |
