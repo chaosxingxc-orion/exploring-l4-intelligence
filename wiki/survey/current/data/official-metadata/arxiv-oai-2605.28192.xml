@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T07:19:32Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2605.28192" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.28192</identifier>
+        <datestamp>2026-05-28</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.28192</id>
+        <created>2026-05-27</created>
+            <updated>2026-05-28</updated>
+        <authors>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Ke</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuhao</forenames>
+                </author>
+                <author>
+                    <keyname>Cheng</keyname>
+                        <forenames>Ziyang</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Hongcheng</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yanfeng</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yu</forenames>
+                </author>
+        </authors>
+        <title>Agentic Active Omni-Modal Perception for Multi-Hop Audio-Visual Reasoning</title>
+            <categories>cs.AI</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Multi-hop audio-visual reasoning remains challenging for Omni-LLMs, as relevant evidence is often sparse, temporally dispersed, and distributed across both audio and visual streams. Existing benchmarks provide limited investigation of this setting, typically involving only a limited number of modalities, relevant temporal segments, or reasoning steps. In this work, we introduce MOV-Bench, a benchmark containing 519 carefully curated questions that require multi-hop reasoning over temporally dispersed audio-visual evidence. Evaluations on MOV-Bench reveal that current Omni-LLMs still struggle with multi-hop cross-modal reasoning. To address this challenge, we further propose AOP-Agent, an efficient agentic framework built on open-source Omni-LLMs for active omni-modal perception. By combining a hierarchical omni-modal memory with a collaborative observe-reflect-replan loop, AOP-Agent enables open-source Omni-LLMs to perform active perception without additional training or proprietary models. Experiments on MOV-Bench and OmniVideoBench demonstrate that AOP-Agent consistently improves reasoning performance, with particularly notable gains on long videos and reasoning-intensive questions.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

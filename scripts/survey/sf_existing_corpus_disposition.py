@@ -17,6 +17,7 @@ IMPLEMENTATION_FREEZE = "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
 REVIEW_SOURCE_SHA256 = "6434ee4e8a385da1f68e9a9212e615b6f0ddb41f83a06047d78060c571fe3abe"
 REVIEW_2026_07_21_SOURCE_SHA256 = "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e"
 ROUND16_PRECHECK_SOURCE_SHA256 = "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+ROUND17_WORKING_BRIEF_SOURCE_SHA256 = "77f31259080bd262f864595ff77790095aa2f53329d7b8c04a20614bbb30eaaa"
 
 CENSUS_PATH = ROOT / "wiki/survey/2026-07-14-canonical-census-v2/paper_works.jsonl"
 SEED_PATH = ROOT / "wiki/survey/2026-07-15-sf-seed-manifest.jsonl"
@@ -174,6 +175,11 @@ def load_reviewer_known(path: Path) -> list[dict[str, Any]]:
         != ROUND16_PRECHECK_SOURCE_SHA256
     ):
         raise ValueError("round-16 precheck reviewer-known provenance mismatch")
+    if (
+        artifact.get("round17_working_brief_source_provenance", {}).get("sha256")
+        != ROUND17_WORKING_BRIEF_SOURCE_SHA256
+    ):
+        raise ValueError("round-17 working-brief reviewer-known provenance mismatch")
     expected_items_hash = hashlib.sha256(canonical_json_bytes(artifact["items"])).hexdigest()
     if artifact.get("items_sha256") != expected_items_hash:
         raise ValueError("reviewer-known item payload hash mismatch")
@@ -547,6 +553,9 @@ class UnionBuilder:
         provenance = f"reviewer_known:{row['source_row_id']}"
         self.add_identity(node, p["arxiv_id"], "EXACT_ID", provenance)
         self.add_identity(node, p["title"], "EXPLICIT_ALIAS", provenance)
+        if p.get("supersedes_previous_role"):
+            node["superseded_role_assertions"] = list(node["role_assertions"])
+            node["role_assertions"] = []
         self.assert_role(node, p["reference_role"], provenance)
         node["current_disposition"] = {
             "reason_code": None,
@@ -570,6 +579,9 @@ class UnionBuilder:
                 key=lambda row: (CAMPAIGN_ORDER.index(row["campaign"]), row["source_row_id"])
             )
             node["role_assertions"].sort(key=lambda row: (row["role"], row["provenance"]))
+            node.get("superseded_role_assertions", []).sort(
+                key=lambda row: (row["role"], row["provenance"])
+            )
             node["claim_evidence"].sort(key=lambda row: row["claim_id"])
             node["version_pins"].sort(key=lambda row: row["source_row_id"])
             node["fulltext_events"].sort(key=lambda row: row["source_row_id"])
@@ -642,7 +654,7 @@ def build_union(sources: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if len({row["discrepancy_status"] for row in node["claim_evidence"]}) > 1
     ]
     artifact = {
-        "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-V1-2026-07-20-01",
+        "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-V2-2026-07-21-01",
         "schema": "sf-existing-corpus-union-v1",
         "implementation_freeze": IMPLEMENTATION_FREEZE,
         "scope_statement": (

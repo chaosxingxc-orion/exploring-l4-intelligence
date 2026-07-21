@@ -1,9 +1,10 @@
 {
- "artifact_id": "SF-MODALITY-SPECIFICITY-CALIBRATION-V1-2026-07-21-01",
+ "artifact_id": "SF-MODALITY-SPECIFICITY-CALIBRATION-V2-2026-07-21-01",
  "schema": "sf-modality-specificity-calibration-v1",
- "status": "PENDING_SECOND_INDEPENDENT_CODER",
+ "status": "PENDING_BLIND_CODER_B",
  "load_bearing": false,
  "codebook": "wiki/survey/current/modality-specificity-codebook.md",
+ "codebook_sha256": "c17bea8ed81c5205fb5b3ba197ce8715087e8f8d69a2a4e02a5af22551b24c44",
  "purpose": "Pre-Stage-1B calibration of the seven H5 modality-specificity fields. These rows cannot support occupancy or findings until two independent coders and disagreement adjudication complete.",
  "source_review": {
   "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
@@ -43,34 +44,34 @@
  ],
  "coders": [
   {
-   "coder_id": "codex-primary-round16-remediation",
+   "coder_id": "codex-primary-round17-v2-recode",
    "coding_date": "2026-07-21",
    "independent_of_implementer": false,
    "role": "implementer coder A; non-load-bearing calibration only",
    "assignments": [
-    {"paper_id":"2510.02995","field":"modality_topology","value":"text_only","locators":[{"kind":"pdf_page","page":2,"anchor":"current work differs by using a text-only agent that delegates audio understanding to specialized tools"}]},
-    {"paper_id":"2510.02995","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","page":2,"anchor":"the agent makes 5-10 calls depending on the configuration"}]},
-    {"paper_id":"2510.02995","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","page":2,"anchor":"after receiving tool responses the agent decides whether to make additional tool calls"}]},
-    {"paper_id":"2510.02995","field":"acoustic_evidence_provenance","value":"task_provided_audio_tool_readout","locators":[{"kind":"pdf_page","page":2,"anchor":"the agent accesses audio signals only through the tools"}]},
-    {"paper_id":"2510.02995","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","page":2,"anchor":"issue follow-up tool calls when outputs conflict or remain ambiguous"}]},
-    {"paper_id":"2510.02995","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","page":2,"anchor":"structured tags to initiate a request and to conclude it"}]},
-    {"paper_id":"2510.02995","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","page":2,"anchor":"answer the question with the information already gathered"}]},
+    {"paper_id":"2510.02995","field":"modality_topology","value":"text_only","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"current work differs by using a text-only agent that delegates audio understanding to specialized tools"}]},
+    {"paper_id":"2510.02995","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"the agent makes 5-10 calls depending on the configuration"}]},
+    {"paper_id":"2510.02995","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"after receiving tool responses the agent decides whether to make additional tool calls"}]},
+    {"paper_id":"2510.02995","field":"acoustic_evidence_provenance","value":"task_provided_audio_tool_readout","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"the agent accesses audio signals only through the tools"}]},
+    {"paper_id":"2510.02995","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"issue follow-up tool calls when outputs conflict"}]},
+    {"paper_id":"2510.02995","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"invokes them through structured tags"},{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"format answers within answer tags for parsing"}]},
+    {"paper_id":"2510.02995","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"answer the question with the information already gathered"}]},
 
-    {"paper_id":"2509.19676","field":"modality_topology","value":"audio_native_single","locators":[{"kind":"pdf_page","page":2,"anchor":"front end and positional encoding"}]},
-    {"paper_id":"2509.19676","field":"temporal_regime","value":"offline_batch","locators":[{"kind":"pdf_page","page":2,"anchor":"during inference and the audio is fixed"}]},
-    {"paper_id":"2509.19676","field":"observation_granularity","value":"segment_or_chunk","locators":[{"kind":"pdf_page","page":3,"anchor":"audio is segmented into 500ms chunks"}]},
-    {"paper_id":"2509.19676","field":"acoustic_evidence_provenance","value":"learned_audio_representation","locators":[{"kind":"pdf_page","page":2,"anchor":"transformer decoder blocks front end positional encoding"}]},
-    {"paper_id":"2509.19676","field":"latency_action_timing","value":"post_utterance","locators":[{"kind":"pdf_page","page":2,"anchor":"testing audio and model fixed reason over sampled patch level category traces"}]},
-    {"paper_id":"2509.19676","field":"output_action_modality","value":"text","locators":[{"kind":"pdf_page","page":3,"anchor":"give the output category"}]},
-    {"paper_id":"2509.19676","field":"state_persistence","value":"within_utterance","locators":[{"kind":"pdf_page","page":2,"anchor":"concatenating them to increase the context for every output"}]},
+    {"paper_id":"2509.19676","field":"modality_topology","value":"audio_native_single","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"audio understanding models developed"}]},
+    {"paper_id":"2509.19676","field":"temporal_regime","value":"offline_batch","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"during inference and the audio is fixed"}]},
+    {"paper_id":"2509.19676","field":"observation_granularity","value":"segment_or_chunk","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"audio into 500ms patches"}]},
+    {"paper_id":"2509.19676","field":"acoustic_evidence_provenance","value":"learned_audio_representation","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"posterior probability category distribution of each patch"}]},
+    {"paper_id":"2509.19676","field":"latency_action_timing","value":"post_utterance","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":3,"anchor":"the per-chunk predictions form a reasoning trace that is aggregated into a final prediction"}]},
+    {"paper_id":"2509.19676","field":"output_action_modality","value":"text","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":3,"anchor":"pick only one category most likely to be the audio"}]},
+    {"paper_id":"2509.19676","field":"state_persistence","value":"within_utterance","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"concatenating them to increase the context for every output"}]},
 
-    {"paper_id":"2606.19341","field":"modality_topology","value":"omni_native_joint","locators":[{"kind":"pdf_page","page":2,"anchor":"omniagent is a single native omni model"}]},
-    {"paper_id":"2606.19341","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","page":4,"anchor":"iterative observation thought action cycle"}]},
-    {"paper_id":"2606.19341","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","page":4,"anchor":"resolving action into new percept"}]},
-    {"paper_id":"2606.19341","field":"acoustic_evidence_provenance","value":"raw_waveform","locators":[{"kind":"pdf_page","page":4,"anchor":"environment performs only raw media extraction"}]},
-    {"paper_id":"2606.19341","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","page":4,"anchor":"at each turn the agent generates the ota triplet autoregressively"}]},
-    {"paper_id":"2606.19341","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","page":4,"anchor":"symbolic operator sampled from actions frames audio clip answer"}]},
-    {"paper_id":"2606.19341","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","page":4,"anchor":"persistent memory and the transient percept"}]}
+    {"paper_id":"2606.19341","field":"modality_topology","value":"omni_native_joint","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":2,"anchor":"single native omni model"}]},
+    {"paper_id":"2606.19341","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"observation thought action ota cycle algorithm"}]},
+    {"paper_id":"2606.19341","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"facilitates turn-level transitions"}]},
+    {"paper_id":"2606.19341","field":"acoustic_evidence_provenance","value":"raw_waveform","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"performs only raw media extraction"}]},
+    {"paper_id":"2606.19341","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"the agent generates the ota triplet autoregressively"}]},
+    {"paper_id":"2606.19341","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"the symbolic operator sampled from"},{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"emits the final answer"}]},
+    {"paper_id":"2606.19341","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","mode":"exact_text_anchor","page":4,"anchor":"persistent memory and the transient percept"}]}
    ]
   }
  ],
@@ -81,7 +82,7 @@
   "exact_agreement_numerator": 0,
   "exact_agreement_rate": null,
   "disagreements": [],
-  "reason_not_computable": "Only implementer coder A is recorded. The second independent coder must code the same frozen fulltext without seeing coder A values before comparison."
+  "reason_not_computable": "Coder A has been recoded under codebook v2. A sealed blind coder-B pass is still required before comparison."
  },
  "invalidating_conditions": [
   "Any frozen PDF or eprint identity changes.",

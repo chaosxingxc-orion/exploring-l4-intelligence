@@ -28,6 +28,8 @@ DIRECT_NEIGHBORS = {
     "2604.15710",
     "2505.09558",
     "2602.13891",
+    "2607.11433",
+    "2605.28192",
 }
 REVIEWER_ADDITIONS = {
     "2508.16665",
@@ -46,6 +48,9 @@ REVIEWER_ADDITIONS = {
     "2502.19328",
     "2605.10344",
     "2508.00890",
+    "2605.28192",
+    "2607.05511",
+    "2605.22012",
 }
 
 
@@ -54,10 +59,10 @@ class BibliographyGeneratorTest(unittest.TestCase):
     def setUpClass(cls):
         cls.receipts = bibliography.load_receipts()
 
-    def test_exact_90_unique_work_receipts_retain_65_and_add_25(self):
-        self.assertEqual(90, len(self.receipts))
+    def test_exact_93_unique_work_receipts_retain_65_and_add_28(self):
+        self.assertEqual(93, len(self.receipts))
         identities = [row["identity"]["id"] for row in self.receipts]
-        self.assertEqual(90, len(set(identities)))
+        self.assertEqual(93, len(set(identities)))
         legacy = bibliography.legacy_bibliography_policies()
         self.assertEqual(65, len(legacy))
         self.assertTrue(set(legacy) <= set(identities))
@@ -80,16 +85,16 @@ class BibliographyGeneratorTest(unittest.TestCase):
 
     def test_selection_receipt_accounts_for_all_union_nodes_and_visible_works(self):
         selection = bibliography.load_selection_receipt()
-        self.assertEqual(250, selection["union_population"])
-        self.assertEqual(250, len(selection["union_dispositions"]))
-        self.assertEqual(90, selection["reviewer_visible_total"])
+        self.assertEqual(253, selection["union_population"])
+        self.assertEqual(253, len(selection["union_dispositions"]))
+        self.assertEqual(93, selection["reviewer_visible_total"])
         self.assertEqual(
-            90,
+            93,
             selection["selected_from_union"]
             + selection["reviewer_directed_outside_union"],
         )
         self.assertEqual(
-            250,
+            253,
             sum(selection["union_reason_code_counts"].values()),
         )
         self.assertNotIn(
@@ -158,6 +163,17 @@ class BibliographyGeneratorTest(unittest.TestCase):
         by_id = {receipt["identity"]["id"]: receipt for receipt in self.receipts}
         for identity in DIRECT_NEIGHBORS:
             self.assertTrue(by_id[identity]["bibliography"]["direct_neighbor"])
+        for identity in {"2607.11433", "2605.28192"}:
+            self.assertEqual("DEEPLY_READ", by_id[identity]["bibliography"]["reference_role"])
+            self.assertTrue(by_id[identity]["bibliography"]["load_bearing"])
+        self.assertEqual(
+            "BOUNDARY_COMPARATOR",
+            by_id["2607.05511"]["bibliography"]["reference_role"],
+        )
+        self.assertEqual(
+            "BOUNDARY_COMPARATOR",
+            by_id["2605.22012"]["bibliography"]["reference_role"],
+        )
 
     def test_generator_metadata_comes_from_receipts_not_constants(self):
         mutated = copy.deepcopy(self.receipts[:1])

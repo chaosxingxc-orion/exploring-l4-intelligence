@@ -63,7 +63,7 @@ EVIDENCE_BINDINGS = {
     "union machine check": "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json",
     "reviewer-known items": "wiki/survey/current/data/reviewer-known-items-v3.json",
     "official metadata receipts": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
-    "generated 90-work bibliography": "wiki/survey/current/bibliography.md",
+    "generated reviewer bibliography": "wiki/survey/current/bibliography.md",
     "bibliography selection receipt": "wiki/survey/current/data/reviewer-bibliography-selection-v1.json",
     "mapping methods adaptation": "wiki/survey/current/mapping-methods-adaptation.md",
     "speech/omni specificity codebook": "wiki/survey/current/modality-specificity-codebook.md",
@@ -96,6 +96,10 @@ DIRECT_NEIGHBORS = (
     "Agentic Reward Modeling",
     "TMAS",
     "AgentTTS",
+    "Omni-Decision",
+    "AOP-Agent",
+    "Light-Omni",
+    "LatentOmni",
 )
 
 

@@ -1,8 +1,8 @@
 {
  "access_class": "REVIEW_CLAIM_VERIFICATION",
- "artifact_id": "SF-REVIEWER-KNOWN-ITEMS-V3-2026-07-21-01",
+ "artifact_id": "SF-REVIEWER-KNOWN-ITEMS-V4-2026-07-21-01",
  "artifact_path": "wiki/survey/current/data/reviewer-known-items-v3.json",
- "generation_rule": "Retain the ten v2 reviewer-known rows and append the five exact known-ID works named in the bound round-16 precheck exactly once; perform no discovery query and grant no frozen-query recall credit.",
+ "generation_rule": "Retain the fifteen v3 rows; add the four exact known-ID works named in the bound round-17 working-brief review exactly once; reroute the already-present Omni-Decision node rather than creating a duplicate; perform no discovery query and grant no frozen-query recall credit.",
  "items": [
   {
    "arxiv_id": "2508.16665",
@@ -228,9 +228,70 @@
     "invalidating_condition": "Official identity is contradicted or no test-time compute allocation/control relationship remains."
    },
    "source_locator": "round-16 precheck lines 203-205"
+  },
+  {
+   "item_id": "RK-016",
+   "arxiv_id": "2607.11433",
+   "title": "Omni-Decision: A Progressive Evidence-State Agent System for Omni-Modal QA",
+   "screening_decision": "INCLUDE",
+   "reference_role": "DEEPLY_READ",
+   "supersedes_previous_role": true,
+   "load_bearing": true,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Already-present training-free omni evidence-state system; direct external-control-plane prior that invalidates the previous non-direct KNOWN_QUEUE routing.",
+    "next_action": "Bind D2 routing evidence and map method-path proximity in Stage-1B; do not make a Stage-1A novelty judgment.",
+    "invalidating_condition": "Hash-bound fulltext contradicts the training-free state-conditioned planning, validation, repair, or stopping path."
+   },
+   "source_locator": "round-17 working-brief review lines 256-275"
+  },
+  {
+   "item_id": "RK-017",
+   "arxiv_id": "2605.28192",
+   "title": "Agentic Active Omni-Modal Perception for Multi-Hop Audio-Visual Reasoning",
+   "screening_decision": "INCLUDE",
+   "reference_role": "DEEPLY_READ",
+   "load_bearing": true,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Reviewer-known direct training-free omni-agent threat with hierarchical memory and an observe-reflect-replan loop.",
+    "next_action": "Bind D2 routing evidence and map method-path proximity in Stage-1B; do not make a Stage-1A novelty judgment.",
+    "invalidating_condition": "Hash-bound fulltext contradicts the no-additional-training active omni-perception path."
+   },
+   "source_locator": "round-17 working-brief review line 277"
+  },
+  {
+   "item_id": "RK-018",
+   "arxiv_id": "2607.05511",
+   "title": "Light-Omni: Reflex over Reasoning in Agentic Video Understanding with Long-Term Memory",
+   "screening_decision": "INCLUDE",
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Fulltext triage shows a trained soft-prompt/multi-LoRA system with backbone and retrieval optimization; retain only as an H5 trained/white-box boundary comparator.",
+    "next_action": "Keep in the nonblocking P2 boundary queue; no additional Stage-1A D2 or novelty comparison is required.",
+    "invalidating_condition": "Fulltext shows no relevant long-term state, autonomous action, or low-latency method path."
+   },
+   "source_locator": "round-17 working-brief review line 278"
+  },
+  {
+   "item_id": "RK-019",
+   "arxiv_id": "2605.22012",
+   "title": "LatentOmni: Rethinking Omni-Modal Understanding via Unified Audio-Visual Latent Reasoning",
+   "screening_decision": "INCLUDE",
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "P2 trained/white-box boundary comparator using feature-level supervision and supervised latent-reasoning trajectories.",
+    "next_action": "Keep in the nonblocking Stage-1B boundary queue; do not require D2 for opening.",
+    "invalidating_condition": "Fulltext shows no trained latent-state or feature-supervision dependency."
+   },
+   "source_locator": "round-17 working-brief review line 279"
   }
  ],
- "items_sha256": "408c097a4b07b9de1254abf54899bb9ff12eae03a8b37683752bb17d279c5760",
+  "items_sha256": "3c6a5bd0d7a3d63b6ccd639b0b2f9e07a2972454660259d608007f56d4b2297b",
  "schema": "sf-reviewer-known-items-v3",
  "source_provenance": {
   "git_blob": "e7b52ab5541d31c79de5d416a48b8e691df01cf5",
@@ -253,5 +314,11 @@
   "reviewed_target_commit": "55aea3a13a8315e51c70a0aed9633e61a66c8fe4",
   "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
   "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+ },
+ "round17_working_brief_source_provenance": {
+  "path": "wiki/audit/external-reviews/2026-07-21-independent-doctoral-review-of-stage1a-working-brief.md",
+  "line_range": "256-281",
+  "reviewed_target_commit": "9e708c50be0efae61ef47216b772cc5a6634abd3",
+  "sha256": "77f31259080bd262f864595ff77790095aa2f53329d7b8c04a20614bbb30eaaa"
  }
 }

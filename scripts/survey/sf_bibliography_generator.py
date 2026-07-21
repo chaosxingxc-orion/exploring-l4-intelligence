@@ -90,12 +90,48 @@ ROUND16_PRECHECK_POLICIES = {
     "2605.10344": ("KNOWN_QUEUE", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 199),
     "2508.00890": ("KNOWN_QUEUE", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 203),
 }
+ROUND17_REVIEW_PATH = "wiki/audit/external-reviews/2026-07-21-independent-doctoral-review-of-stage1a-working-brief.md"
+ROUND17_NEW_POLICIES = {
+    "2605.28192": {
+        "reference_role": "DEEPLY_READ",
+        "chain": "SYSTEM_FIRST_DIRECT_NEIGHBORS",
+        "direct_neighbor": True,
+        "source_line": 277,
+        "next_action": "Maintain the D2 routing evidence; map method-path proximity in Stage-1B without a Stage-1A novelty judgment.",
+        "load_bearing": True,
+        "selection_basis": [
+            "DIRECT_SYSTEM_NEIGHBOR",
+            "LOAD_BEARING_OR_D2",
+            "P1_OR_REVIEWER_KNOWN_THREAT",
+        ],
+    },
+    "2607.05511": {
+        "reference_role": "BOUNDARY_COMPARATOR",
+        "chain": "TRAINING_FREE_AND_TRAINED_BOUNDARIES",
+        "direct_neighbor": False,
+        "source_line": 278,
+        "next_action": "Fulltext triage identifies a trained soft-prompt/multi-LoRA system; retain as a nonblocking P2 H5 boundary comparator.",
+        "load_bearing": False,
+        "selection_basis": ["P1_OR_REVIEWER_KNOWN_THREAT"],
+    },
+    "2605.22012": {
+        "reference_role": "BOUNDARY_COMPARATOR",
+        "chain": "TRAINING_FREE_AND_TRAINED_BOUNDARIES",
+        "direct_neighbor": False,
+        "source_line": 279,
+        "next_action": "Keep as a nonblocking P2 trained/white-box boundary comparator for Stage-1B.",
+        "load_bearing": False,
+        "selection_basis": ["P1_OR_REVIEWER_KNOWN_THREAT"],
+    },
+}
 NEW_DIRECT_NEIGHBORS = {
     "2509.19676",
     "2606.19341",
     "2502.04128",
     "2602.22897",
     "2606.00579",
+    "2607.11433",
+    "2605.28192",
 }
 VISIBLE_SELECTION_BASES = {
     "LOAD_BEARING_OR_D2",
@@ -184,6 +220,22 @@ def legacy_bibliography_policies() -> dict[str, dict[str, Any]]:
                 }
             ),
         }
+    policies["2607.11433"].update(
+        {
+            "reference_role": "DEEPLY_READ",
+            "chain": "SYSTEM_FIRST_DIRECT_NEIGHBORS",
+            "direct_neighbor": True,
+            "source_locator": f"{ROUND17_REVIEW_PATH}:256-275",
+            "next_action": "Maintain the D2 routing evidence; map method-path proximity in Stage-1B without a Stage-1A novelty judgment.",
+            "load_bearing": True,
+            "access_class": "REVIEW_CLAIM_VERIFICATION",
+            "selection_basis": [
+                "DIRECT_SYSTEM_NEIGHBOR",
+                "LOAD_BEARING_OR_D2",
+                "P1_OR_REVIEWER_KNOWN_THREAT",
+            ],
+        }
+    )
     return policies
 
 
@@ -236,6 +288,18 @@ def additional_policies() -> dict[str, dict[str, Any]]:
                     }
                 ),
             }
+    for identity_id, details in ROUND17_NEW_POLICIES.items():
+        policies[identity_id] = {
+            "identity": {"kind": "arxiv", "id": identity_id},
+            "reference_role": details["reference_role"],
+            "chain": details["chain"],
+            "direct_neighbor": details["direct_neighbor"],
+            "source_locator": f"{ROUND17_REVIEW_PATH}:{details['source_line']}",
+            "next_action": details["next_action"],
+            "load_bearing": details["load_bearing"],
+            "access_class": "REVIEW_CLAIM_VERIFICATION",
+            "selection_basis": sorted(details["selection_basis"]),
+        }
     return policies
 
 
@@ -246,8 +310,8 @@ def all_policies() -> dict[str, dict[str, Any]]:
     if overlap:
         raise ValueError(f"additions duplicate retained bibliography identities: {sorted(overlap)}")
     policies.update(additions)
-    if len(policies) != 90:
-        raise ValueError(f"expected 90 bibliography policies, got {len(policies)}")
+    if len(policies) != 93:
+        raise ValueError(f"expected 93 bibliography policies, got {len(policies)}")
     return policies
 
 
@@ -544,7 +608,7 @@ def render_bibliography(receipts: list[dict[str, Any]]) -> str:
         groups[receipt["bibliography"]["chain"]].append(receipt)
     lines = [
         "---",
-        'artifact_id: "SF-REVIEWER-BIBLIOGRAPHY-V3-2026-07-21-01"',
+        'artifact_id: "SF-REVIEWER-BIBLIOGRAPHY-V4-2026-07-21-01"',
         'metadata_source: "wiki/survey/current/data/official-metadata-receipts-v1.jsonl"',
         'selection_source: "wiki/survey/current/data/reviewer-bibliography-selection-v1.json"',
         'discipline: "official raw payload -> normalized receipt -> rendered row; known-ID accesses have zero query recall credit"',
@@ -598,7 +662,7 @@ def render_bibliography(receipts: list[dict[str, Any]]) -> str:
         lines.append("")
     lines.extend(
         [
-            f"**Total: {len(receipts)} unique works (65 retained + 20 reviewer-directed additions).**",
+            f"**Total: {len(receipts)} unique works (65 retained identities, including reviewed overrides; {len(additional_policies())} reviewer-directed additions).**",
             "",
             "Exposure note: these are persisted known-ID metadata/provenance accesses, not systematic discovery queries; query recall credit is false for every receipt.",
             "",

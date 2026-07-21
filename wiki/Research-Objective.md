@@ -1,13 +1,12 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-21 — round-16 precheck remediation"
+last_refresh: "2026-07-21 — H5 contract repair and Stage-1A novelty-boundary correction"
 ---
 
 # Research Objective & Current State
 
-> 默认加载顺序：客户端指南 → 本页 → `wiki/Project-Thesis.md`。完整记录规约见
-> `wiki/AI-Collaboration.md`；历史只经 cold index 定向取证。
+> 默认加载：客户端指南 → 本页 → `wiki/Project-Thesis.md`；历史只经 cold index 定向取证。
 
 ## 1. 当前门与权限边界
 
@@ -24,19 +23,19 @@ systematic mapping；工程自测不能代替研究裁决。
 
 ## 3. 已闭合的实施地基
 
-- **GM-1**：七类 active sources 的 494 rows 恰好路由至 250 canonical works；claim 只作 hyperedge，
-  不生成重复 seed/work。该 PASS 不外推为 archive/全部历史语料完备。
-- **GM-2**：precheck 对旧 22 条 negative claims 给出 3 条 correction `AGREE`、18 条 active 肯定
-  和 1 条 `DISAGREE`；后者已按要求从 `false` 改 `unknown`。版本化正典为 `22 = 4 + 18`，4/4
-  correction decisions 与 18/18 active decisions 已绑定，且每条 active proof 含 counterevidence 字段。
-- **H5 / extractor**：三篇 PDF/eprint 已本地冻结；coder A 完成 21/21 非承重赋值，coder B 尚缺。
-  PDF 环境冻结为 NT pypdf 6.14.0 / POSIX 6.14.2，并强制双叶重放 ToolGate p11。
+- **GM-1**：508 source rows 恰好路由至 253 canonical works；claim 只作 hyperedge，不生成重复
+  seed/work。该 PASS 不外推为 archive 完备。
+- **GM-2**：负证据正典为 `22 = 4 + 18`；4/4 correction 与 18/18 active reviewer decisions 已绑定，
+  `DISAGREE` 行已从 `false` 改 `unknown`，active proofs 均含 counterevidence。
+- **H5 / extractor**：V2 codebook、三篇 hash-bound 全文、coder-A 21/21 可重放 exact anchors 与无答案
+  盲包已就位；validator 会拒绝自报 agreement、非法 adjudicator/final value。独立 coder B/裁决仍缺。
+  PDF 环境为 NT pypdf 6.14.0 / POSIX 6.14.2，双叶须重放 ToolGate p11。
 - **GM-3**：v7 contract-4 leaf/aggregate 与反例合同已实现；当前 probe 仅 `H5_CALIBRATION` 红，
   所以正式 NT/POSIX leaves 尚未生成。
-- **GM-4**：90 个 official-receipt works（72 arXiv / 17 ACL / 1 GitHub）可离线重建；250-node
-  complement、五条新 reviewer-known disposition、`year_basis` 与 `query_recall_credit=false` 均机器化。
-- **研究设计**：mapping RQ 与 Stage-2 empirical test 已分离；Stage-1B 只交 evidence/eligible
-  inputs，Stage-1C 才拥有最终 cards/排序/选题；methods adaptation 与 H5 七字段 codebook 已就位。
+- **GM-4**：93 official-receipt works 可离线重建；253-node complement 与 19 条 reviewer-known routes
+  已机器化。Omni-Decision/AOP-Agent 为唯一 P1 direct，Light-Omni/LatentOmni 为非阻塞 P2 boundary。
+- **研究设计**：1A 不判创新差异；1B 映射方法路径/邻近事实；1C 形成缺口假设并选题；2A 在最近
+  prior 复现后收敛技术创新。mapping/empirical RQ、methods adaptation 与 H5 codebook 已分离就位。
 
 上述均是 implementation/readiness evidence，不是 novelty、effectiveness 或 scientific sign-off。
 
@@ -58,17 +57,14 @@ metric/prototype = 0**。此零值不覆盖历史；`INHERITED_PRIOR_EXPOSURE` �
 和本地全文核验为非零，但不得获得 query recall credit。早期 arXiv 429 与 wiki dry-run push-attempt
 事故继续保留，不因后续离线 PASS 删除。
 
-未发现 fabrication/falsification/plagiarism 事实；已发现的 biased-coding 与 selective-citation
-风险通过撤下承重负结论、显式 complement 和年份规则整改，但独立判断仍不能由实现者制造。
+未发现 fabrication/falsification/plagiarism；biased-coding/selective-citation 风险已整改，但独立
+判断仍不能由实现者制造。
 
 ## 6. 当前路由
 
-- 当前入口：`wiki/survey/current/README.md` → `status.md` → `protocol.md`；methods/H5 按需读对应
-  adaptation/codebook。
-- 机器数据：`wiki/survey/current/data/`。数字正典在 union/correction/adjudication/receipt/selection
-  artifacts；提案散文只解释，不复制为第二正典。
-- 审计入口：正式 campaign 仍在 `wiki/audit/system-first-stage1a/INDEX.md`；round-16 precheck 输入在
-  `wiki/audit/external-reviews/`，不会冒充 immutable round-16 package review。
+- 当前入口：`current/README.md` → `status.md` → `protocol.md`；methods/H5/prior 按需读 adaptation、
+  codebook、`core-prior-routing.md`。数字正典在 `current/data/`，散文不复制。
+- 审计入口：`wiki/audit/system-first-stage1a/INDEX.md`；external reviews 不冒充 immutable round-16。
 - `current/manifest.json` 是上一 release；本提案改由 `data/proposal-source-manifest-v1.json` 绑定。
 
 ## 7. 下一授权动作

@@ -87,7 +87,7 @@
       {
         "path": "scripts/survey/sf_bibliography_generator.py",
         "mode": "100644",
-        "git_blob": "889e720a609110d77347d53248f45b3b7582231a"
+        "git_blob": "c3fcd73729ee8df4870af5f3f2233ad40900bf72"
       },
       {
         "path": "scripts/survey/sf_campaign_audit_index.py",
@@ -157,7 +157,7 @@
       {
         "path": "scripts/survey/sf_existing_corpus_disposition.py",
         "mode": "100644",
-        "git_blob": "ebbfa0df4046f90d7af62fbcd8614532c5bd2a22"
+        "git_blob": "e841134ffe9cb099bdfd0abf5eefc26d1662b74a"
       },
       {
         "path": "scripts/survey/sf_fixtures_c4b_gen.py",
@@ -177,7 +177,7 @@
       {
         "path": "scripts/survey/sf_h5_calibration_contract.py",
         "mode": "100644",
-        "git_blob": "bfec08230250f2efa3122e815e737f23f9909379"
+        "git_blob": "67f38915e6420af929925bb3f80570bfc8031a4a"
       },
       {
         "path": "scripts/survey/sf_identity_taxonomy_test.py",
@@ -247,7 +247,7 @@
       {
         "path": "scripts/survey/sf_proposal_source_manifest.py",
         "mode": "100644",
-        "git_blob": "c6305302c0a0c5e24ebcea71a63670c5a86e6d0c"
+        "git_blob": "e4b6d45cc43f7662c350d364d68dedba7f3d73a1"
       },
       {
         "path": "scripts/survey/sf_protocol_contract.py",
@@ -282,7 +282,7 @@
       {
         "path": "scripts/survey/sf_reviewer_proposal_check.py",
         "mode": "100644",
-        "git_blob": "288050a46d06689b5e0e640fe6b04f6cad4a9cdc"
+        "git_blob": "34bfcc11a228d854556359a5e269c5e3854de475"
       },
       {
         "path": "scripts/survey/sf_row_hash.py",
@@ -367,7 +367,7 @@
       {
         "path": "scripts/survey/test_sf_bibliography_generator.py",
         "mode": "100644",
-        "git_blob": "9333c309915ce49278d49c7cd955df006871a92e"
+        "git_blob": "08fe1b8bbe18e53d813688d9379591f80b83f663"
       },
       {
         "path": "scripts/survey/test_sf_campaign_audit_index.py",
@@ -407,12 +407,12 @@
       {
         "path": "scripts/survey/test_sf_existing_corpus_disposition.py",
         "mode": "100644",
-        "git_blob": "0f33bccb5d91b5e59d071ffd1504de6c7d2c8e11"
+        "git_blob": "cf5d5385b910fe06cc6df37a5ff79b00612bd72a"
       },
       {
         "path": "scripts/survey/test_sf_h5_calibration_contract.py",
         "mode": "100644",
-        "git_blob": "d07f0552e71a328d5428e8e0af3cc5b94305c204"
+        "git_blob": "14f222fbc6e84704aa3c37752f804a3e93dde337"
       },
       {
         "path": "scripts/survey/test_sf_identity_taxonomy_v6_contract.py",
@@ -437,7 +437,7 @@
       {
         "path": "scripts/survey/test_sf_official_metadata_fetch.py",
         "mode": "100644",
-        "git_blob": "e8cd9b3642c2f997366791b44bbc265a75610458"
+        "git_blob": "576449386bf17260c40a05440d7b8f9b9c72f3b2"
       },
       {
         "path": "scripts/survey/test_sf_pdf_extractor_contract.py",
@@ -452,7 +452,7 @@
       {
         "path": "scripts/survey/test_sf_proposal_source_manifest.py",
         "mode": "100644",
-        "git_blob": "e921326d1db092a8b4bc3938db91617ac98e3a89"
+        "git_blob": "c523e5ef6cb042aad2b4608b3e184f2fc4f99458"
       },
       {
         "path": "scripts/survey/test_sf_query_compiler_profiles.py",
@@ -462,7 +462,7 @@
       {
         "path": "scripts/survey/test_sf_reviewer_proposal_check.py",
         "mode": "100644",
-        "git_blob": "1ac4bf66895d82212f9d923da96f3c15c1c5f6d0"
+        "git_blob": "5ab6577700cda763c719e5a54ecfe78d9a09b0a3"
       },
       {
         "path": "scripts/survey/test_sf_schema_v3_finalize.py",
@@ -485,7 +485,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "e99a57921d2e0afba8c9f7f5c548e5a9a08b8b24696d4b8dbc4a9c6eeb7638f7"
+    "sha256": "43e5f632bc52816ef953676425acfc5e3a86522a51a35352647814620ebe0bf4"
   },
   "commands": [
     {
@@ -516,7 +516,7 @@
       "command": "python scripts/survey/test_sf_h5_calibration_contract.py",
       "exit_code": 0,
       "stdout_tail": "",
-      "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests\n\nOK"
+      "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/test_sf_pdf_extractor_contract.py",
@@ -546,7 +546,7 @@
       "command": "python scripts/survey/test_sf_existing_corpus_disposition.py",
       "exit_code": 0,
       "stdout_tail": "",
-      "stderr_tail": ".....................\n----------------------------------------------------------------------\nRan 21 tests\n\nOK"
+      "stderr_tail": "......................\n----------------------------------------------------------------------\nRan 22 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/test_sf_bibliography_generator.py",

@@ -17,6 +17,7 @@ OUTPUT_PATH = ROOT / "wiki/survey/current/data/proposal-source-manifest-v1.json"
 SOURCE_SPECS = (
     ("project_thesis", "wiki/Project-Thesis.md", "north_star"),
     ("current_research_state", "wiki/Research-Objective.md", "current_state"),
+    ("research_methodology", "wiki/Research-Methodology.md", "research_boundary"),
     ("current_router", "wiki/survey/current/README.md", "search_design"),
     ("current_status", "wiki/survey/current/status.md", "search_design"),
     ("current_protocol", "wiki/survey/current/protocol.md", "search_design"),
@@ -24,7 +25,9 @@ SOURCE_SPECS = (
     ("mapping_methods_adaptation", "wiki/survey/current/mapping-methods-adaptation.md", "methods"),
     ("modality_specificity_codebook", "wiki/survey/current/modality-specificity-codebook.md", "codebook"),
     ("h5_calibration", "wiki/survey/current/data/modality-specificity-calibration-v1.json", "calibration"),
+    ("h5_blind_packet", "wiki/survey/current/data/modality-specificity-blind-packet-v1.json", "calibration"),
     ("h5_calibration_validator", "scripts/survey/sf_h5_calibration_contract.py", "release_gate"),
+    ("core_prior_routing", "wiki/survey/current/core-prior-routing.md", "corpus"),
     ("pdf_extractor_environment", "wiki/survey/current/data/pdf-extractor-environment-v1.json", "environment"),
     ("pdf_extractor_validator", "scripts/survey/sf_pdf_extractor_contract.py", "release_gate"),
     ("query_compiler", "scripts/survey/sf_query_compiler.py", "search_execution"),
@@ -65,6 +68,7 @@ SOURCE_SPECS = (
     ("attempt_registry", "docs/integrity/experiment_attempt_registry.jsonl", "integrity"),
     ("round15_review", "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md", "review"),
     ("round16_precheck_review", "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md", "review"),
+    ("round17_working_brief_review", "wiki/audit/external-reviews/2026-07-21-independent-doctoral-review-of-stage1a-working-brief.md", "review"),
     ("proposal_draft", "wiki/survey/workbench/system-first-stage1a/2026-07-21-stage1a-working-brief.md", "proposal"),
     ("proposal_checker", "scripts/survey/sf_reviewer_proposal_check.py", "proposal"),
 )
@@ -132,7 +136,7 @@ def build_manifest(commit: str | None = None) -> dict[str, Any]:
         )
     )
     return {
-        "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-01",
+        "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-02",
         "schema": "sf-proposal-source-manifest-v1",
         "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
         "source_commit": commit,
@@ -159,8 +163,8 @@ def build_manifest(commit: str | None = None) -> dict[str, Any]:
         },
         "reviewer_known_gate": {
             "item_inventory": len(reviewer_known.get("items", [])),
-            "round16_new_item_ids": [
-                row.get("arxiv_id") for row in reviewer_known.get("items", [])[-5:]
+            "latest_core_item_ids": [
+                row.get("arxiv_id") for row in reviewer_known.get("items", [])[-4:]
             ],
             "query_recall_credit": reviewer_known.get("query_recall_credit"),
         },
@@ -232,7 +236,7 @@ def validate_manifest(document: dict[str, Any]) -> list[str]:
     }:
         failures.add("SEMANTIC_GATE_STATE_MISMATCH")
     if document.get("h5_gate") != {
-        "status": "PENDING_SECOND_INDEPENDENT_CODER",
+        "status": "PENDING_BLIND_CODER_B",
         "paper_inventory": 3,
         "coder_inventory": 1,
         "planned_denominator": 21,
@@ -247,9 +251,9 @@ def validate_manifest(document: dict[str, Any]) -> list[str]:
         failures.add("PDF_EXTRACTOR_GATE_STATE_MISMATCH")
     reviewer_known = document.get("reviewer_known_gate", {})
     if (
-        reviewer_known.get("item_inventory") != 15
-        or reviewer_known.get("round16_new_item_ids")
-        != ["2606.00579", "2606.03183", "2502.19328", "2605.10344", "2508.00890"]
+        reviewer_known.get("item_inventory") != 19
+        or reviewer_known.get("latest_core_item_ids")
+        != ["2607.11433", "2605.28192", "2607.05511", "2605.22012"]
         or reviewer_known.get("query_recall_credit") is not False
     ):
         failures.add("REVIEWER_KNOWN_GATE_STATE_MISMATCH")

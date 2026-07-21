@@ -21,11 +21,12 @@ class H5CalibrationContractTest(unittest.TestCase):
 
     def test_current_scaffold_is_structurally_bound_but_not_complete(self):
         self.assertEqual([], contract.validate_structure(self.document))
+        self.assertEqual([], contract.validate_locators(self.document))
         failures = contract.validate_completion(self.document)
         self.assertIn("H5_SECOND_INDEPENDENT_CODER_MISSING", failures)
         self.assertIn("H5_PAIRWISE_AGREEMENT_INCOMPLETE", failures)
         self.assertEqual(
-            "PENDING_SECOND_INDEPENDENT_CODER", self.document["status"]
+            "PENDING_BLIND_CODER_B", self.document["status"]
         )
 
     def test_exact_three_paper_and_twenty_one_field_denominators(self):
@@ -70,7 +71,7 @@ class H5CalibrationContractTest(unittest.TestCase):
                         "paper_id": "2510.02995",
                         "field": "modality_topology",
                         "coder_values": {
-                            "codex-primary-round16-remediation": "text_only",
+                            "codex-primary-round17-v2-recode": "text_only",
                             "independent-coder-b": "audio_native_single",
                         },
                         "adjudication": None,
@@ -81,6 +82,74 @@ class H5CalibrationContractTest(unittest.TestCase):
         self.assertIn(
             "H5_DISAGREEMENT_UNADJUDICATED:2510.02995:modality_topology",
             contract.validate_completion(mutated),
+        )
+
+    def _completed_pair(self):
+        mutated = copy.deepcopy(self.document)
+        second = copy.deepcopy(mutated["coders"][0])
+        second["coder_id"] = "independent-coder-b"
+        second["independent_of_implementer"] = True
+        mutated["coders"].append(second)
+        mutated["status"] = "COMPLETE"
+        mutated["agreement_report"].update(
+            {
+                "observed_comparable_denominator": 21,
+                "exact_agreement_numerator": 21,
+                "exact_agreement_rate": 1.0,
+                "disagreements": [],
+            }
+        )
+        return mutated
+
+    def test_reported_full_agreement_is_rejected_when_all_values_disagree(self):
+        mutated = self._completed_pair()
+        for assignment in mutated["coders"][1]["assignments"]:
+            current = assignment["value"]
+            assignment["value"] = next(
+                value
+                for value in sorted(contract.FIELD_VALUES[assignment["field"]])
+                if value != current
+            )
+
+        self.assertIn(
+            "H5_AGREEMENT_DERIVATION_MISMATCH",
+            contract.validate_completion(mutated),
+        )
+
+    def test_illegal_adjudication_is_rejected(self):
+        mutated = self._completed_pair()
+        second_assignment = mutated["coders"][1]["assignments"][0]
+        second_assignment["value"] = "audio_native_single"
+        mutated["agreement_report"].update(
+            {
+                "exact_agreement_numerator": 20,
+                "exact_agreement_rate": 20 / 21,
+                "disagreements": [
+                    {
+                        "paper_id": "2510.02995",
+                        "field": "modality_topology",
+                        "coder_values": {
+                            "codex-primary-round16-remediation": "text_only",
+                            "independent-coder-b": "audio_native_single",
+                        },
+                        "adjudication": {
+                            "adjudicator_id": "independent-coder-b",
+                            "final_value": "not-an-allowed-value",
+                            "rationale": "invalid mutation",
+                        },
+                    }
+                ],
+            }
+        )
+
+        failures = contract.validate_completion(mutated)
+        self.assertIn(
+            "H5_ADJUDICATOR_NOT_INDEPENDENT:2510.02995:modality_topology",
+            failures,
+        )
+        self.assertIn(
+            "H5_ADJUDICATION_VALUE_INVALID:2510.02995:modality_topology",
+            failures,
         )
 
 
