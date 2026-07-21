@@ -65,7 +65,7 @@ SOURCE_SPECS = (
     ("attempt_registry", "docs/integrity/experiment_attempt_registry.jsonl", "integrity"),
     ("round15_review", "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md", "review"),
     ("round16_precheck_review", "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md", "review"),
-    ("proposal_draft", "wiki/survey/workbench/system-first-stage1a/2026-07-21-research-proposal-for-independent-review.md", "proposal"),
+    ("proposal_draft", "wiki/survey/workbench/system-first-stage1a/2026-07-21-stage1a-reviewer-brief.md", "proposal"),
     ("proposal_checker", "scripts/survey/sf_reviewer_proposal_check.py", "proposal"),
 )
 

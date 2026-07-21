@@ -30,15 +30,14 @@ class ProposalPackageCheckTest(unittest.TestCase):
     def test_release_blockers_are_exact_and_honest(self):
         self.assertEqual(
             {
-                "ABSENCE_REVIEW_PENDING",
-                "SEMANTIC_CORRECTION_REVIEW_PENDING",
                 "EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING",
+                "H5_CALIBRATION_PENDING",
                 "PROPOSAL_NOT_PROMOTED_TO_ROUND16",
             },
             set(self.report["release_blockers"]),
         )
         self.assertEqual(
-            {"ABSENCE_REVIEW", "SEMANTIC_CORRECTION_REVIEW"},
+            {"H5_CALIBRATION"},
             set(self.report["v7_expected_pre_review_failures"]),
         )
 
