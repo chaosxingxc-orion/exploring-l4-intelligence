@@ -321,16 +321,24 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | Evidence | Git blob | SHA-256 |
 |---|---|---|
 | `wiki/Project-Thesis.md` | `64e847f566c83b4b0f1ec9c2a6032afb8dc1a020` | `5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623` |
-| `wiki/Research-Objective.md` | `52bc515f6ad5628bf2b25fa75b5e34546d8471b2` | `6fc6afa07277c00b7d540760466a311e9fa916cefe84c749a1070ccd703f3430` |
+| `wiki/Research-Objective.md` | `6b608c1b22b200a67376ba0cd95eadaa27c5c0ef` | `e6746c3666bbc6d8b56368d89ba0fa7710c40fa25df88a4a832c52ed64da5d95` |
 | v10 proposal | `686129ee41cdf08c294114fc29c93a9c63408dc5` | `94ddfd282950ae10ca113e32e9a4ccfc702a6fa74dcd13572662e4f717b66085` |
 | round-14 adversarial review | `dde66b8c50a8100eff24a2117e04966651bde3bc` | `ac61d727878d9c90ec173c4c2e12cbc6cc9ed13b60f5b8478f6d01e8fbfa28b9` |
+| round-15 independent review | `d7901f85c7804bd2176aa76a0ea05bc2d79729c2` | `4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e` |
 | revised release design | `67ec749bd5fe7c50b9f0151d1cbb7689ccd40516` | `be2d20900093ccd070211c6083714d53e7331d05c0baa9e9e77c3899a5b23b68` |
 | revised implementation plan | `a3ba7e862cac559fcce70d92b935745a662bbdc8` | `985949e178f5cef9e0e94b96629a5d9828bee70c3c82ac2074740dbde81fe840` |
-| negative-evidence review artifact | `d3aa370359569cde23a49b852d2e4e0adcbc77d0` | `6ad3a6d45c9e385346f6105b49e1d573a4e18a2e8cf732bac298d1036c49b20b` |
-| lossless union graph | `1e401b21485e2c5b1db5461e9db0e6559f800dad` | `0a5ed20b181f9dbd317e9db32bf2fa3a506e92750c9acec558824021dd16f110` |
-| union machine check | `72c356ec676daa683bebff5d233070ba9bbce886` | `a1cda4765422e16d7812eae3ec3b5eb6d8bbf47f75b6cd5896e50ad92bf77a7f` |
-| official metadata receipts | `00b9af321b96250c600c2022e74cea57abdce9d1` | `a3b8473dbe4d54bac21be25ab0ec03bfa931841078ce9280408ae257da2ef4ee` |
-| generated 77-work bibliography | `7bb2506b060775398de356203b94b6b47cbbd16f` | `84b601e96b9078b02bcb0b0db7c7f10c5a6e382f03372fa1c8f8f54775b6071b` |
+| negative-evidence review artifact | `815f0f78924d7814c0ae0611fdf8e56a234e94ce` | `c62ce59a3047269fdc22e85b0bad60b3d71454cb82a9cadb2a9d7b57bfc8391f` |
+| semantic-correction artifact | `b0d4fafb7ed4b5fa1f7f6e34607646168f160ca6` | `37b862ade5f3b278c52bcd1cb11f760e5d20aea8d8124ac1b1a8d21798fbcc8f` |
+| lossless union graph | `ad7626092f6929890f3dbbb5b6e898e9002831e2` | `8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866` |
+| union machine check | `c2960fafe1a9b7818b5ca105a7d1f8f29a9c668e` | `a9dbe83115ce6ee371552764f71942767804f5de2e8ee0c9c23e77622624cfa6` |
+| reviewer-known items | `2ca7c917aab1aff4bb84417276b94b54d7033f42` | `c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2` |
+| official metadata receipts | `f34dec9703c1f11e813bbd27ab711f8d22cd4b95` | `b218bdcd13215c5b37173cca30fe5a20a4a20175035089ca1f3d84b554642778` |
+| generated 85-work bibliography | `32ab190a72f0265397757377c4e6c070481a8f97` | `17670aebf8d3c80a43a3ee213bcc1169f094722efc9d1967b4e55c80f84771f6` |
+| bibliography selection receipt | `87de00a3e4d8527226b1b05bd3ead330c564b974` | `deaf913d73bfe77721c651b132859c4faeead4440090bfadabfcbc14beaed1c8` |
+| mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
+| speech/omni specificity codebook | `b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019` | `48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769` |
+| current protocol | `788622b909e31e785a142fcfea51cd9d163c6970` | `0e23c262375c24cb71b2bd7aacfc5edb175ff40ab1a9900205f766fa39f3f78a` |
+| current status | `cc5eff1dc12090e2ebad71479b81f18bce538f3c` | `6d3d062b45a95774c82ba588eb0a7fb08a4a7e4a8f22de43051e1d89bdda133f` |
 | frozen evidence-v6 aggregate | `d3b1c67018fa9ce99dfff56af3b9404747504936` | `3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd` |
 | frozen query bytes | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` | `645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab` |
 | attempt registry | `9bcac7ce3681d82fd1479589d126cccc761c340e` | `f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe` |
