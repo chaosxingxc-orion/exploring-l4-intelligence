@@ -47,7 +47,6 @@ WIKI_SYNC_INCIDENT_PATH = (
     "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json"
 )
 _INTEGRATION_EVIDENCE_SCHEMAS = {
-    CURRENT_PACKAGE_REPORT_PATH: "sf-current-package-check-v1",
     WIKI_SYNC_INCIDENT_PATH: "wiki-sync-dry-run-incident-v1",
 }
 
@@ -118,12 +117,6 @@ BASE_FILE_SPECS = (
         "v6_report_wsl",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
         "release-scoped-immutable",
-        "targeted",
-    ),
-    FileSpec(
-        "current_package_gate_report",
-        CURRENT_PACKAGE_REPORT_PATH,
-        "generated",
         "targeted",
     ),
     FileSpec(

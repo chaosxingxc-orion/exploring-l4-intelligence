@@ -112,8 +112,10 @@ EXPECTED_ARCHIVE_TRANSITIONS = (
 )
 
 INTEGRATION_EVIDENCE_PATHS = (
-    "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
     "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+)
+SELF_REFERENTIAL_PACKAGE_REPORT = (
+    "docs/checks/system-first-stage1a/context-v1/current-package-check.json"
 )
 
 
@@ -1771,7 +1773,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.repo.joinpath(*PurePosixPath(relative_path).parts)
         )
         active = document["active_entries"]
-        self.assertEqual(21, len(active))
+        self.assertEqual(20, len(active))
         defaults = {
             entry["path"] for entry in active if entry["load_policy"] == "default"
         }
@@ -1802,6 +1804,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertNotIn(correction, {entry["path"] for entry in active})
         self.assertEqual(correction, document["active_review_transaction"])
         by_path = {entry["path"]: entry for entry in active}
+        self.assertNotIn(SELF_REFERENTIAL_PACKAGE_REPORT, by_path)
         for path in INTEGRATION_EVIDENCE_PATHS:
             with self.subTest(path=path):
                 self.assertIn(path, by_path)

@@ -62,7 +62,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "ae2e30895d793dc87619c13e90696f8c693e1efe691bbb88ca0ca582f62698ee"
+      "sha256": "11fdeb36869e89a1567920a6ffa20270d3bae6f1daa6d0c49a9f7cfd18abdaaf"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
@@ -119,13 +119,6 @@
       "load_policy": "targeted",
       "purpose": "WSL/POSIX v6 evidence report",
       "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd"
-    },
-    {
-      "path": "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
-      "class": "HOT",
-      "load_policy": "targeted",
-      "purpose": "integrated Stage-1A package gate report",
-      "sha256": "e0c908198833b0d32c1e97a891b0a09e2e177ddee1d43a9823830bac32e093a2"
     },
     {
       "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",

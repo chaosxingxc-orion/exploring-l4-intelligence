@@ -2,13 +2,6 @@
   "schema": "sf-current-manifest-v1",
   "files": [
     {
-      "role": "current_package_gate_report",
-      "path": "docs/checks/system-first-stage1a/context-v1/current-package-check.json",
-      "sha256": "e0c908198833b0d32c1e97a891b0a09e2e177ddee1d43a9823830bac32e093a2",
-      "mutability": "generated",
-      "load_policy": "targeted"
-    },
-    {
       "role": "wiki_sync_dry_run_incident",
       "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
       "sha256": "297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393",

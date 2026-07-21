@@ -292,15 +292,16 @@ class CurrentManifestContractTests(unittest.TestCase):
         document = self.build()
         by_path = {entry["path"]: entry for entry in document["files"]}
         expected = {
-            CURRENT_PACKAGE_REPORT_PATH: (
-                "current_package_gate_report",
-                "generated",
-            ),
             WIKI_SYNC_INCIDENT_PATH: (
                 "wiki_sync_dry_run_incident",
                 "immutable-after-first-commit",
             ),
         }
+        self.assertNotIn(
+            CURRENT_PACKAGE_REPORT_PATH,
+            by_path,
+            "the package report must not be an input to its own command graph",
+        )
         for path, (role, mutability) in expected.items():
             with self.subTest(path=path):
                 self.assertIn(path, by_path)
@@ -320,11 +321,6 @@ class CurrentManifestContractTests(unittest.TestCase):
 
     def test_integration_evidence_missing_and_hash_mismatch_fail_closed(self):
         specs = (
-            self._integration_spec(
-                CURRENT_PACKAGE_REPORT_PATH,
-                "current_package_gate_report",
-                "generated",
-            ),
             self._integration_spec(
                 WIKI_SYNC_INCIDENT_PATH,
                 "wiki_sync_dry_run_incident",
@@ -360,14 +356,6 @@ class CurrentManifestContractTests(unittest.TestCase):
 
     def test_integration_evidence_rejects_wrong_schema(self):
         specs = (
-            (
-                self._integration_spec(
-                    CURRENT_PACKAGE_REPORT_PATH,
-                    "current_package_gate_report",
-                    "generated",
-                ),
-                "sf-current-package-check-v1",
-            ),
             (
                 self._integration_spec(
                     WIKI_SYNC_INCIDENT_PATH,
