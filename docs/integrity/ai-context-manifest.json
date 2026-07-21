@@ -13,7 +13,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "6fc6afa07277c00b7d540760466a311e9fa916cefe84c749a1070ccd703f3430"
+      "sha256": "aa836540d210ca406c69eacb2f7b7b6490ff2aca85c516892174a4bd3369badc"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -41,28 +41,28 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "current survey router",
-      "sha256": "b2e7dda362f53aaf5897330d17b6b853af5e3dddc06f9559660b16d43d20d95d"
+      "sha256": "8d12d42576ff1549fa4cda47a671c16b0b20928e873056c7b86d6d2943f4b1bd"
     },
     {
       "path": "wiki/survey/current/protocol.md",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "effective protocol v2",
-      "sha256": "ea27eda19221afac0de309c418e1d6e4a79334fcde0f79548b72358044082d9f"
+      "sha256": "e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585"
     },
     {
       "path": "wiki/survey/current/status.md",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "205c1c2a4003317929fe46f12dc826d76999b38919e953a9f49ae0c4daf93cab"
+      "sha256": "7a9af855bb1b374a978b9564d69ea3791d6fea14b2daf0ec654904fb4ac19499"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "58b29fa0373a3fcf2ae804dd561b571f6eecc6ea96736dd6395b32726f2f93db"
+      "sha256": "ae2e30895d793dc87619c13e90696f8c693e1efe691bbb88ca0ca582f62698ee"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
@@ -76,7 +76,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "generated schema-v3 known-item coding",
-      "sha256": "bbbfe8988b4df37e5870739aa015fb23c62168991120c4fbdaec3c8c3406bc27"
+      "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6"
     },
     {
       "path": "wiki/survey/current/data/schema-v3-adjudication.json",
@@ -145,7 +145,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "append-only campaign audit index",
-      "sha256": "30f0d996c028af531d788b7595a07ff0ead58826b89081b5569c435c9cf65649"
+      "sha256": "8f6974aa73bc0dc418f42313f3007c5f09d95a480051756ddda1f4a3bfa74cf3"
     }
   ],
   "budgets_bytes": {

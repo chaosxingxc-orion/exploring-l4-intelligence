@@ -4,8 +4,8 @@
  "package_kind": "PRE_REVIEW_FAIL_CLOSED_PACKAGE",
  "source_manifest": {
   "path": "wiki/survey/current/data/proposal-source-manifest-v1.json",
-  "source_commit": "c62564dafb22af9ea6da78f1858e3ef62118fd3f",
-  "sha256": "e132c26e06f03522c262d27eb8888f3d55fa40e2507c39619acd0648aa3e2de7"
+  "source_commit": "d8e5b90bd7df89163fef43e9a2db40365945c057",
+  "sha256": "26bdd845a163b80cef8c95540229315cbd5d8b71f4470229d9732d800cbc47bf"
  },
  "components": [
   {
@@ -42,14 +42,12 @@
  "construction_failure_codes": [],
  "construction_verdict": "PASS",
  "v7_expected_pre_review_failures": [
-  "ABSENCE_REVIEW",
-  "SEMANTIC_CORRECTION_REVIEW"
+  "H5_CALIBRATION"
  ],
  "release_blockers": [
-  "ABSENCE_REVIEW_PENDING",
   "EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING",
-  "PROPOSAL_NOT_PROMOTED_TO_ROUND16",
-  "SEMANTIC_CORRECTION_REVIEW_PENDING"
+  "H5_CALIBRATION_PENDING",
+  "PROPOSAL_NOT_PROMOTED_TO_ROUND16"
  ],
  "release_eligible": false,
  "release_verdict": "BLOCKED",

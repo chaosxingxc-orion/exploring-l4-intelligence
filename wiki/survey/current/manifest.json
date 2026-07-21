@@ -39,7 +39,7 @@
     {
       "role": "campaign_audit_semantic_anchor",
       "path": "scripts/checks/ai_context_inventory.py",
-      "sha256": "aed53c3e836c19079bd0c3b567fd1a88ee7a7549639945e30ec99a661681e5e5",
+      "sha256": "19704519b93f3b429156f69416a255f019640c30cb26962ca521c33ff1d8c184",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
@@ -60,14 +60,14 @@
     {
       "role": "campaign_audit_index",
       "path": "wiki/audit/system-first-stage1a/INDEX.md",
-      "sha256": "30f0d996c028af531d788b7595a07ff0ead58826b89081b5569c435c9cf65649",
+      "sha256": "8f6974aa73bc0dc418f42313f3007c5f09d95a480051756ddda1f4a3bfa74cf3",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },
     {
       "role": "campaign_audit_contract",
       "path": "wiki/audit/system-first-stage1a/campaign-index.json",
-      "sha256": "ca5668e017f3115d4e214e203d253565bf54d133403b3294ed2852103a5c73be",
+      "sha256": "2427b6cc7d91e66393b0ddecaf686b97a4267f7545f4250e9511f12f0099a06b",
       "mutability": "append-only",
       "load_policy": "cold-audit"
     },
@@ -102,14 +102,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56",
+      "sha256": "36b96a6eec9a87baf24649dc6f18ffbbd9601ba7904d8685d208521cbaa9da94",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "b2e7dda362f53aaf5897330d17b6b853af5e3dddc06f9559660b16d43d20d95d",
+      "sha256": "8d12d42576ff1549fa4cda47a671c16b0b20928e873056c7b86d6d2943f4b1bd",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -123,7 +123,7 @@
     {
       "role": "known_item_coding_v7",
       "path": "wiki/survey/current/data/known-item-coding-v7.json",
-      "sha256": "bbbfe8988b4df37e5870739aa015fb23c62168991120c4fbdaec3c8c3406bc27",
+      "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6",
       "mutability": "generated",
       "load_policy": "targeted"
     },
@@ -137,21 +137,21 @@
     {
       "role": "schema_v3_sidecar:2026.findings-acl.1243.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
-      "sha256": "9d60a55dffc0112a4c8eb38aeebe7ea5daf3815d035aaa558812fc86e57911bb",
+      "sha256": "d246b46102c9ed4256046cd1ec7476defd349826cee151171f19a954a5933064",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
     {
       "role": "schema_v3_sidecar:2026.findings-acl.1724.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
-      "sha256": "eb96a83e2eadea96db2af2b1690feb1cfd2792354758adb127649892689839f9",
+      "sha256": "f8527bf82b35681e7747de1ffb333c745b6f61ad71744a98b80d2f40cf835653",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
     {
       "role": "schema_v3_sidecar:2026.findings-acl.511.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
-      "sha256": "2d97b5ca3d441189d8d8c57eb43b47c09b36c7860f16e54dae6daac2dc957404",
+      "sha256": "7b4c5951abbb1840ba55df2fee0cac6ff44eed331e94f83b403c0ee5e4d04cbc",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
@@ -165,14 +165,14 @@
     {
       "role": "schema_v3_sidecar:2604.16529.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
-      "sha256": "f946ebd1c50bb117bd787641679e0031a468b8c4c6a46712fd735360e0ce3de9",
+      "sha256": "5644117d98d79f2ce114ad85eb96e5c5bda3d9a3102d45ce0c57fde275a818e5",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
     {
       "role": "schema_v3_sidecar:2605.08083.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
-      "sha256": "c9afb44081e80182c00194f18ffda8c79706075043c711aa8d1219145367bc6e",
+      "sha256": "be8245101d06dd8d881381dabda719259264e3ab5e031fd1057e5ba3c156d602",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
@@ -186,21 +186,21 @@
     {
       "role": "schema_v3_sidecar:2606.03054.sidecar.json",
       "path": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
-      "sha256": "f5ba2c5c68e72b4f1737fc79d63f0a61423ae5cd2a4886d54e79f1d8a00c1e1b",
+      "sha256": "49e25753ed7e8ef8b35cf1dd6ebe90a5d2915ae4f1f8e70fbc6d034b052ff616",
       "mutability": "generated",
       "load_policy": "machine-only"
     },
     {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
-      "sha256": "ea27eda19221afac0de309c418e1d6e4a79334fcde0f79548b72358044082d9f",
+      "sha256": "e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "205c1c2a4003317929fe46f12dc826d76999b38919e953a9f49ae0c4daf93cab",
+      "sha256": "7a9af855bb1b374a978b9564d69ea3791d6fea14b2daf0ec654904fb4ac19499",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -214,7 +214,7 @@
     {
       "role": "audit_artifact_registry",
       "path": "wiki/survey/sf-audit-artifact-registry.json",
-      "sha256": "a935fef91f3fc6bac4575afb4c6913ec263a126d90acb6c3a1e3d0e80af0c913",
+      "sha256": "5bb61f23307ff840381f1db680a0b3b113431220999d3b2ba1c60220a4d39b9a",
       "mutability": "append-only",
       "load_policy": "machine-only"
     }

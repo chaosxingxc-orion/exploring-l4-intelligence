@@ -2,7 +2,7 @@
  "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-01",
  "schema": "sf-proposal-source-manifest-v1",
  "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
- "source_commit": "c62564dafb22af9ea6da78f1858e3ef62118fd3f",
+ "source_commit": "d8e5b90bd7df89163fef43e9a2db40365945c057",
  "scope": "Exact committed inputs for the round-16 reviewer proposal; this is not the legacy current manifest and is not a Stage-1B authorization.",
  "files": [
   {
@@ -16,8 +16,8 @@
    "role": "current_research_state",
    "path": "wiki/Research-Objective.md",
    "surface": "current_state",
-   "git_blob": "9ab2dece520fdcd2e52e041d00cb4a97c4da5bfd",
-   "sha256": "94754dbd13e565efc150d5699fe8fb3010e9a0d77662830bf2bba17b01a80275"
+   "git_blob": "4ae23baec5f8a51672fdfc60329972df0e99a27e",
+   "sha256": "aa836540d210ca406c69eacb2f7b7b6490ff2aca85c516892174a4bd3369badc"
   },
   {
    "role": "current_router",
@@ -30,8 +30,8 @@
    "role": "current_status",
    "path": "wiki/survey/current/status.md",
    "surface": "search_design",
-   "git_blob": "7c9bc36209545d35e486083ede2ee871792b3f4b",
-   "sha256": "6c6e566dd705909e71f0bab1c630e5833ff6e430a010c3a5eaf92e911efc70e9"
+   "git_blob": "fc461f1d649f177c8cd6b3cd5b6056270fbcb660",
+   "sha256": "7a9af855bb1b374a978b9564d69ea3791d6fea14b2daf0ec654904fb4ac19499"
   },
   {
    "role": "current_protocol",
@@ -58,8 +58,36 @@
    "role": "modality_specificity_codebook",
    "path": "wiki/survey/current/modality-specificity-codebook.md",
    "surface": "codebook",
-   "git_blob": "b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019",
-   "sha256": "48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769"
+   "git_blob": "9bda0d76328de360b9b0851d0f50b579af79a7b1",
+   "sha256": "db860023cb42a9deb6dc789b8cb3a93e7a10bc791568bc0c8bc8a70880018999"
+  },
+  {
+   "role": "h5_calibration",
+   "path": "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+   "surface": "calibration",
+   "git_blob": "4e699b9565e9ed88e4400cc78725fa1dfb8eda11",
+   "sha256": "72f70bccf23287a62bda43f3b386effcaecf439e5a8a4a0225f75a534bbee361"
+  },
+  {
+   "role": "h5_calibration_validator",
+   "path": "scripts/survey/sf_h5_calibration_contract.py",
+   "surface": "release_gate",
+   "git_blob": "bfec08230250f2efa3122e815e737f23f9909379",
+   "sha256": "c8dd6cc601e7c767ab9092a24034a12fe4bc33f96d07aa605a33beaa97aa9a47"
+  },
+  {
+   "role": "pdf_extractor_environment",
+   "path": "wiki/survey/current/data/pdf-extractor-environment-v1.json",
+   "surface": "environment",
+   "git_blob": "0bfe53b1a72268e315630c4050809c1bb9e10987",
+   "sha256": "d982a22e2702cc670ac9a3b90d3dfeaab33e1cde2df3518dc98f1a55b9845a19"
+  },
+  {
+   "role": "pdf_extractor_validator",
+   "path": "scripts/survey/sf_pdf_extractor_contract.py",
+   "surface": "release_gate",
+   "git_blob": "072048b60049a663b2998cf34594923e19a63e1e",
+   "sha256": "0b7ddfdaec3411140ab07643d160f560b6fc63875dfda3c874e5c33e89365592"
   },
   {
    "role": "query_compiler",
@@ -142,29 +170,29 @@
    "role": "known_item_coding",
    "path": "wiki/survey/current/data/known-item-coding-v7.json",
    "surface": "adjudication",
-   "git_blob": "ed5fd675e1050585c4712a735787016986dc808e",
-   "sha256": "64470e7c04d382ef3b19639cd5db0b96ffc5c207792b33fd02b18c32a57705c7"
+   "git_blob": "b7ad0cf9c4f53f153d852a4d95002c461713a245",
+   "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6"
   },
   {
    "role": "sidecar_deepverifier",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "4d9572ec8357466eaba9d18ab9a2f2502b165014",
-   "sha256": "8bf46ff01022bf5ba8aab4133df88004f05ba3c99a4c522c91754a9ebd40c10c"
+   "git_blob": "e7afc4822ec625d779bfbecd90d312daf5c73e2d",
+   "sha256": "d246b46102c9ed4256046cd1ec7476defd349826cee151171f19a954a5933064"
   },
   {
    "role": "sidecar_coder_1724",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "62f17cb29bd30fff96273ba1178488500a1c3712",
-   "sha256": "a30764fc0a774a1c04009fc91c00e984b92ab4b5740ff59349cef28f8d1c8195"
+   "git_blob": "130657b44f11553e57c36fbb56bca43a1ef25611",
+   "sha256": "f8527bf82b35681e7747de1ffb333c745b6f61ad71744a98b80d2f40cf835653"
   },
   {
    "role": "sidecar_dream",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "7547dd1f6f88a1f498bc3417fe58702aa7d0e763",
-   "sha256": "a94f241689147a9ebb1f219d54fa64bd450d50f01df288f07fa7bb1e65152605"
+   "git_blob": "a509f76ce8a44b484d80f104454cf08b2a80a5bd",
+   "sha256": "7b4c5951abbb1840ba55df2fee0cac6ff44eed331e94f83b403c0ee5e4d04cbc"
   },
   {
    "role": "sidecar_2602_16485",
@@ -177,15 +205,15 @@
    "role": "sidecar_2604_16529",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "c1db21bf473e29d2d28822086f683db2bc80a46f",
-   "sha256": "b74e81a7819a68ff9b0441211d20778f2ef0be27868d1d04aff920f00cb9bd67"
+   "git_blob": "c68220134248881b34346b2a221f6995569590f9",
+   "sha256": "5644117d98d79f2ce114ad85eb96e5c5bda3d9a3102d45ce0c57fde275a818e5"
   },
   {
    "role": "sidecar_2605_08083",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "7eebd72f2d41b4e8a1e4802525d042e2252aa979",
-   "sha256": "a084cbfe1c4d52b53ec42fcdf57bb623688eb79b00163f889718e9b259742811"
+   "git_blob": "9c820b8ce07e1ddf4d74a3ea8bf140923ba538a5",
+   "sha256": "be8245101d06dd8d881381dabda719259264e3ab5e031fd1057e5ba3c156d602"
   },
   {
    "role": "sidecar_2606_01667",
@@ -198,29 +226,29 @@
    "role": "sidecar_2606_03054",
    "path": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
    "surface": "adjudication",
-   "git_blob": "9ed19f5a578ebeb3c09dbd41c0825dd386f92a95",
-   "sha256": "124d0eb70e82c87bf5755411f35f0232ae086ff0417e691ff6e5bfc1296c6557"
+   "git_blob": "3381a4bc098b671734c41545614880309f2309ac",
+   "sha256": "49e25753ed7e8ef8b35cf1dd6ebe90a5d2915ae4f1f8e70fbc6d034b052ff616"
   },
   {
    "role": "absence_adjudication",
-   "path": "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
+   "path": "wiki/survey/current/data/absence-evidence-adjudication-v3.json",
    "surface": "adjudication",
-   "git_blob": "815f0f78924d7814c0ae0611fdf8e56a234e94ce",
-   "sha256": "c62ce59a3047269fdc22e85b0bad60b3d71454cb82a9cadb2a9d7b57bfc8391f"
+   "git_blob": "372cb60c3936cdf9ba40452d749fb31c88b735fc",
+   "sha256": "4f96dc55f4e7c8cd6eef4df700e0e73807f6d25748fc23479b24cf11bf8bf264"
   },
   {
    "role": "semantic_corrections",
-   "path": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+   "path": "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
    "surface": "adjudication",
-   "git_blob": "b0d4fafb7ed4b5fa1f7f6e34607646168f160ca6",
-   "sha256": "37b862ade5f3b278c52bcd1cb11f760e5d20aea8d8124ac1b1a8d21798fbcc8f"
+   "git_blob": "a5c963098cd8a7ef8a8e60febd9a231da45fa7e0",
+   "sha256": "6b48a26212a0593abfc8e7b0a762826676ee6118f6313c47626f5f876bd349a3"
   },
   {
    "role": "v7_leaf_runner",
    "path": "scripts/survey/sf_identity_taxonomy_v7_test.py",
    "surface": "release_gate",
-   "git_blob": "d8a7215e8393248090174540d8de4a731297491d",
-   "sha256": "0f2ce1c25895cf095b81d1a79bbf5c5766bd4b8359f24689ad13312da895fbb1"
+   "git_blob": "823a3dddbd34467d3c07a101d2716e3c8611dc21",
+   "sha256": "2b70f01d332cfa477591cb973ddf9c55a025a0c9418a66caf04d8eca16dc790b"
   },
   {
    "role": "v7_aggregator",
@@ -240,22 +268,22 @@
    "role": "active_union",
    "path": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
    "surface": "corpus",
-   "git_blob": "ad7626092f6929890f3dbbb5b6e898e9002831e2",
-   "sha256": "8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866"
+   "git_blob": "f4c97f2264bb180f51cc952e5fa88d3f135883f4",
+   "sha256": "2e562049f8589aedb38a881b041b42e19278d77f4d0614e6ac830f84bce76024"
   },
   {
    "role": "active_union_check",
    "path": "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json",
    "surface": "corpus",
-   "git_blob": "c2960fafe1a9b7818b5ca105a7d1f8f29a9c668e",
-   "sha256": "a9dbe83115ce6ee371552764f71942767804f5de2e8ee0c9c23e77622624cfa6"
+   "git_blob": "1c19671f3b731946f34670ad94cbbb2b1e043716",
+   "sha256": "67d6795e3ce0e851a320e6f85ba50ab05c6a2f8ddd98128d4d28ce711054cab4"
   },
   {
    "role": "reviewer_known_items",
-   "path": "wiki/survey/current/data/reviewer-known-items-v2.json",
+   "path": "wiki/survey/current/data/reviewer-known-items-v3.json",
    "surface": "corpus",
-   "git_blob": "2ca7c917aab1aff4bb84417276b94b54d7033f42",
-   "sha256": "c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2"
+   "git_blob": "44e5bc36db70d0de551934e02fc8e9ff5bea222b",
+   "sha256": "7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24"
   },
   {
    "role": "seed_manifest",
@@ -268,36 +296,36 @@
    "role": "fulltext_ledger",
    "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
    "surface": "corpus",
-   "git_blob": "08e493acab209dc34d89bc90bf21b2634de0304a",
-   "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56"
+   "git_blob": "4db01b96d0f84bdea0a6b25dd1b55ea16da46df7",
+   "sha256": "36b96a6eec9a87baf24649dc6f18ffbbd9601ba7904d8685d208521cbaa9da94"
   },
   {
    "role": "official_metadata_receipts",
    "path": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
    "surface": "bibliography",
-   "git_blob": "f34dec9703c1f11e813bbd27ab711f8d22cd4b95",
-   "sha256": "b218bdcd13215c5b37173cca30fe5a20a4a20175035089ca1f3d84b554642778"
+   "git_blob": "af93661d7abc640de68a7fa5c81b533aac5c6c50",
+   "sha256": "9c3ca6f466940e964fe05961d06d55ed45630b3c44bba441289424e18f4e3468"
   },
   {
    "role": "reviewer_bibliography",
    "path": "wiki/survey/current/bibliography.md",
    "surface": "bibliography",
-   "git_blob": "32ab190a72f0265397757377c4e6c070481a8f97",
-   "sha256": "17670aebf8d3c80a43a3ee213bcc1169f094722efc9d1967b4e55c80f84771f6"
+   "git_blob": "1adab73af8f80efd9db7f7559d00e6e606f12b4c",
+   "sha256": "23ab2bf25e4e11607ddf8475862d96849729c5643ba347e2e3379b01cd3e92c9"
   },
   {
    "role": "bibliography_selection",
    "path": "wiki/survey/current/data/reviewer-bibliography-selection-v1.json",
    "surface": "bibliography",
-   "git_blob": "87de00a3e4d8527226b1b05bd3ead330c564b974",
-   "sha256": "deaf913d73bfe77721c651b132859c4faeead4440090bfadabfcbc14beaed1c8"
+   "git_blob": "93edab407964d2d478dad1b33bab4f1114034d1c",
+   "sha256": "faf78d691cfc1200571a60b526d767c0975b7538b487b28f4fecd1320fd7f032"
   },
   {
    "role": "bibliography_generator",
    "path": "scripts/survey/sf_bibliography_generator.py",
    "surface": "bibliography",
-   "git_blob": "dc9d8c8e446eb2d1ae690f4170fd11ca189924ce",
-   "sha256": "788aa8308e059a914b919ace2bbc37ea97b1511612cad1274e8542a50017c913"
+   "git_blob": "889e720a609110d77347d53248f45b3b7582231a",
+   "sha256": "bc65f02b1694de379ed9a7efa57872749bc95b42fb24f928ebc15f1a6aab7143"
   },
   {
    "role": "metadata_fetcher",
@@ -321,39 +349,72 @@
    "sha256": "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e"
   },
   {
+   "role": "round16_precheck_review",
+   "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+   "surface": "review",
+   "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+   "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+  },
+  {
    "role": "proposal_draft",
-   "path": "wiki/survey/workbench/system-first-stage1a/2026-07-21-research-proposal-for-independent-review.md",
+   "path": "wiki/survey/workbench/system-first-stage1a/2026-07-21-stage1a-working-brief.md",
    "surface": "proposal",
-   "git_blob": "464965ff85a7d4a8446a6419023c689fd6aa9308",
-   "sha256": "5293c9c8eca499dc6e110f8da9a295ea625450056a787db3e65364aad45f4671"
+   "git_blob": "d17e5b08029510391d2c5d2985ffcdf9a3ff9632",
+   "sha256": "6acc1d95a70aacf3fd87ebd1d499f108a9eea9b94a04f08e1dde097d85af217b"
   },
   {
    "role": "proposal_checker",
    "path": "scripts/survey/sf_reviewer_proposal_check.py",
    "surface": "proposal",
-   "git_blob": "892267ce35247a0c5a16e50905404cdb07db895a",
-   "sha256": "becd872d352c52502b05bd54ca0ace8e04d04d0ca4bd069a44ef42ed6b25b400"
+   "git_blob": "288050a46d06689b5e0e640fe6b04f6cad4a9cdc",
+   "sha256": "ba33ae5c0c785055dfbe431a785e4dd2930fcb059ba66d7aef4f056a0310d7b7"
   }
  ],
  "semantic_gate": {
-  "inventory_identity": "22 = 3 + 19",
-  "correction_inventory": 3,
-  "correction_reviews_recorded": 0,
-  "active_absence_inventory": 19,
-  "active_absence_reviews_recorded": 0
+  "inventory_identity": "22 = 4 + 18",
+  "correction_inventory": 4,
+  "correction_reviews_recorded": 4,
+  "active_absence_inventory": 18,
+  "active_absence_reviews_recorded": 18
+ },
+ "h5_gate": {
+  "status": "PENDING_SECOND_INDEPENDENT_CODER",
+  "paper_inventory": 3,
+  "coder_inventory": 1,
+  "planned_denominator": 21,
+  "observed_comparable_denominator": 0
+ },
+ "pdf_extractor_gate": {
+  "version_policy": "EXACT_MATCH_FAIL_CLOSED",
+  "platform_roles": [
+   "nt",
+   "posix"
+  ],
+  "toolgate_probe_page": 11
+ },
+ "reviewer_known_gate": {
+  "item_inventory": 15,
+  "round16_new_item_ids": [
+   "2606.00579",
+   "2606.03183",
+   "2502.19328",
+   "2605.10344",
+   "2508.00890"
+  ],
+  "query_recall_credit": false
  },
  "deferred_release_artifacts": [
   {
    "role": "evidence_v7_windows_leaf",
    "path": "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json",
    "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
-   "trigger": "3/3 correction reviews and 19/19 active absence reviews"
+   "trigger": "H5 dual-coder calibration complete, 4/4 correction decisions, 18/18 active absence decisions, and exact NT extractor match"
   },
   {
    "role": "evidence_v7_wsl_leaf",
    "path": "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json",
    "state": "REQUIRED_AFTER_INDEPENDENT_REVIEW",
-   "trigger": "3/3 correction reviews and 19/19 active absence reviews"
+   "trigger": "H5 dual-coder calibration complete, 4/4 correction decisions, 18/18 active absence decisions, and exact POSIX extractor match"
   },
   {
    "role": "evidence_v7_aggregate",
@@ -370,8 +431,7 @@
  ],
  "release_eligible": false,
  "release_blockers": [
-  "SEMANTIC_CORRECTION_REVIEW_PENDING_0_OF_3",
-  "ACTIVE_ABSENCE_REVIEW_PENDING_0_OF_19",
+  "H5_SECOND_INDEPENDENT_CODER_AND_ADJUDICATION_PENDING",
   "FRESH_V7_DUAL_PLATFORM_EVIDENCE_MISSING",
   "FORMAL_ROUND16_PROPOSAL_NOT_CREATED",
   "INDEPENDENT_SEARCH_DESIGN_SIGNOFF_MISSING",

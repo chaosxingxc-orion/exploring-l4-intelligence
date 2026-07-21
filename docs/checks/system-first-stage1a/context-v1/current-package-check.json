@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "ede08e6ab7c740d9e9a9e530591a3f4ac8ce6846"
+        "git_blob": "418905762e1f152122be1968e98d9d93ae856c68"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -35,9 +35,19 @@
         "git_blob": "18d28cfe5aab4ebd1aeb7f6f1d58f425d5a0ca24"
       },
       {
+        "path": "scripts/checks/sf_cross_platform_git_preflight.py",
+        "mode": "100644",
+        "git_blob": "9aec6cd49749bd632e967bc1b116517bb76c06e6"
+      },
+      {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
         "git_blob": "bb2a9f242ee56fe3b4f8ae36c491c6774d1e89e7"
+      },
+      {
+        "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
+        "mode": "100644",
+        "git_blob": "21f07cf16402c9933b88e71e9f492c63bb221f1d"
       },
       {
         "path": "scripts/checks/v42_conformance.py",
@@ -48,6 +58,11 @@
         "path": "scripts/survey/probe_hosts_c4a.sh",
         "mode": "100644",
         "git_blob": "aae93eff0a6f80088ce93a297ac622165bc7038c"
+      },
+      {
+        "path": "scripts/survey/sf_absence_provenance_migrate.py",
+        "mode": "100644",
+        "git_blob": "0bd1c370d244261e4a42e163d6105472b845d72e"
       },
       {
         "path": "scripts/survey/sf_archive_candidates.py",
@@ -67,12 +82,12 @@
       {
         "path": "scripts/survey/sf_audit_immutability_check.py",
         "mode": "100644",
-        "git_blob": "8faa535f2c202adb91280fab16291e149c9ba6c9"
+        "git_blob": "a2a844aa19b4992d33f23c8abc40444fdcee19ac"
       },
       {
         "path": "scripts/survey/sf_bibliography_generator.py",
         "mode": "100644",
-        "git_blob": "0a3e227db99ddc061c8a821bb65c11da9eb43634"
+        "git_blob": "889e720a609110d77347d53248f45b3b7582231a"
       },
       {
         "path": "scripts/survey/sf_campaign_audit_index.py",
@@ -112,7 +127,7 @@
       {
         "path": "scripts/survey/sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "cd1c20323aae4e85a011eeafaa7568f0b98ff143"
+        "git_blob": "963281c0bd3662541e806a82ab8f6841b59b5f74"
       },
       {
         "path": "scripts/survey/sf_current_path_contract.py",
@@ -132,7 +147,17 @@
       {
         "path": "scripts/survey/sf_evidence_contract.py",
         "mode": "100644",
-        "git_blob": "1c15260de7b1eca934cfa90ba13df3a500ecf9c5"
+        "git_blob": "5c919eba8f370c8879a36e6cad56293b1995bbbb"
+      },
+      {
+        "path": "scripts/survey/sf_evidence_v7_aggregate.py",
+        "mode": "100644",
+        "git_blob": "e87a2f02fdbba44767fc91bf848ef1886f4c3c9d"
+      },
+      {
+        "path": "scripts/survey/sf_existing_corpus_disposition.py",
+        "mode": "100644",
+        "git_blob": "ebbfa0df4046f90d7af62fbcd8614532c5bd2a22"
       },
       {
         "path": "scripts/survey/sf_fixtures_c4b_gen.py",
@@ -148,6 +173,11 @@
         "path": "scripts/survey/sf_fulltext_ledger_status.py",
         "mode": "100644",
         "git_blob": "5bfc3d85ec9b7f9bb59fcc674cb68a642bfe3b38"
+      },
+      {
+        "path": "scripts/survey/sf_h5_calibration_contract.py",
+        "mode": "100644",
+        "git_blob": "bfec08230250f2efa3122e815e737f23f9909379"
       },
       {
         "path": "scripts/survey/sf_identity_taxonomy_test.py",
@@ -177,12 +207,22 @@
       {
         "path": "scripts/survey/sf_identity_taxonomy_v6_test.py",
         "mode": "100644",
-        "git_blob": "def5069bf8d129e357c22213cc2c52954a9cefd1"
+        "git_blob": "ccde4a7fc4a0a215c124f832f0ac17a7022ec402"
+      },
+      {
+        "path": "scripts/survey/sf_identity_taxonomy_v7_test.py",
+        "mode": "100644",
+        "git_blob": "823a3dddbd34467d3c07a101d2716e3c8611dc21"
       },
       {
         "path": "scripts/survey/sf_json_contract.py",
         "mode": "100644",
         "git_blob": "0f8801c20170b5c4d77d707cb5873b54811a047a"
+      },
+      {
+        "path": "scripts/survey/sf_official_metadata_fetch.py",
+        "mode": "100644",
+        "git_blob": "821450c00561982160733aea78679eccc839f348"
       },
       {
         "path": "scripts/survey/sf_package_summary.py",
@@ -193,6 +233,21 @@
         "path": "scripts/survey/sf_package_summary_test.py",
         "mode": "100644",
         "git_blob": "88cdf5c1338f05b2583c1fbc7a7cf028d583fcd9"
+      },
+      {
+        "path": "scripts/survey/sf_pdf_extractor_contract.py",
+        "mode": "100644",
+        "git_blob": "072048b60049a663b2998cf34594923e19a63e1e"
+      },
+      {
+        "path": "scripts/survey/sf_proposal_package_check.py",
+        "mode": "100644",
+        "git_blob": "4fdaa2491d90f067dd270c973ac02b513716eda3"
+      },
+      {
+        "path": "scripts/survey/sf_proposal_source_manifest.py",
+        "mode": "100644",
+        "git_blob": "c6305302c0a0c5e24ebcea71a63670c5a86e6d0c"
       },
       {
         "path": "scripts/survey/sf_protocol_contract.py",
@@ -225,9 +280,14 @@
         "git_blob": "8035ca40a9dc83359007618c45cb8ebab66ef851"
       },
       {
+        "path": "scripts/survey/sf_reviewer_proposal_check.py",
+        "mode": "100644",
+        "git_blob": "288050a46d06689b5e0e640fe6b04f6cad4a9cdc"
+      },
+      {
         "path": "scripts/survey/sf_row_hash.py",
         "mode": "100644",
-        "git_blob": "b741b5037a31a8ff3c861c70403ab4ec460f2a9f"
+        "git_blob": "0d75c506c591652b95b5e47e7dfef7770b496d3a"
       },
       {
         "path": "scripts/survey/sf_schema_v3_finalize.py",
@@ -242,7 +302,7 @@
       {
         "path": "scripts/survey/sf_schema_v3_release_contract.py",
         "mode": "100644",
-        "git_blob": "8c7a46b86147c64393fa91a1f6b1a7e6e543f2ca"
+        "git_blob": "52f142b7fa71105edc6e61074e5b293808fd9f23"
       },
       {
         "path": "scripts/survey/sf_sentinel_recall_test.py",
@@ -287,7 +347,12 @@
       {
         "path": "scripts/survey/sf_v6_snapshot_contract.py",
         "mode": "100644",
-        "git_blob": "66b373e7e00de508cd6f84ae06abaffee60f35e5"
+        "git_blob": "efe547f9599057cd854085781ba67f2896f8d738"
+      },
+      {
+        "path": "scripts/survey/test_sf_absence_provenance_migrate.py",
+        "mode": "100644",
+        "git_blob": "1d10bea5345997b7622a002b4b367ad0fa605ea3"
       },
       {
         "path": "scripts/survey/test_sf_archive_candidates.py",
@@ -297,12 +362,17 @@
       {
         "path": "scripts/survey/test_sf_audit_immutability_check.py",
         "mode": "100644",
-        "git_blob": "ff909a47337f385b3af13dc8a753fd340378b0dd"
+        "git_blob": "c881833564d496779a3092020203da33e21789f5"
+      },
+      {
+        "path": "scripts/survey/test_sf_bibliography_generator.py",
+        "mode": "100644",
+        "git_blob": "9333c309915ce49278d49c7cd955df006871a92e"
       },
       {
         "path": "scripts/survey/test_sf_campaign_audit_index.py",
         "mode": "100644",
-        "git_blob": "626a2f1a936c28ffb0eb2042a3843b25ef426071"
+        "git_blob": "eaac498ca3de57ea49a69869f5473ae2dd008480"
       },
       {
         "path": "scripts/survey/test_sf_coding_generator.py",
@@ -312,12 +382,12 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "18d257a9e90e134bebd2dad1f132bc8158759392"
+        "git_blob": "be890f711bcb68060663301d896118c3de3d5719"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "3eff65477561d08526be48c27f119a16f560660c"
+        "git_blob": "12cafcbb359006baecaa31fd57de24111f8547c8"
       },
       {
         "path": "scripts/survey/test_sf_dual_platform_check.py",
@@ -327,7 +397,22 @@
       {
         "path": "scripts/survey/test_sf_evidence_contract.py",
         "mode": "100644",
-        "git_blob": "ba8788b9671d9ec649aa64b7a904be377f584165"
+        "git_blob": "ad71a8bd54fecab8cb186bf568a9cb8e8d0ba463"
+      },
+      {
+        "path": "scripts/survey/test_sf_evidence_v7_aggregate.py",
+        "mode": "100644",
+        "git_blob": "c8866e8bb6b54f72183a2848fba080b4ebf0e8bd"
+      },
+      {
+        "path": "scripts/survey/test_sf_existing_corpus_disposition.py",
+        "mode": "100644",
+        "git_blob": "0f33bccb5d91b5e59d071ffd1504de6c7d2c8e11"
+      },
+      {
+        "path": "scripts/survey/test_sf_h5_calibration_contract.py",
+        "mode": "100644",
+        "git_blob": "d07f0552e71a328d5428e8e0af3cc5b94305c204"
       },
       {
         "path": "scripts/survey/test_sf_identity_taxonomy_v6_contract.py",
@@ -340,14 +425,44 @@
         "git_blob": "7a9a8746eeec287b8d0ab92645a69766c2271af1"
       },
       {
+        "path": "scripts/survey/test_sf_identity_taxonomy_v7_harness.py",
+        "mode": "100644",
+        "git_blob": "579704dfdc7d0515c79cfc0b03178c04aa9b3082"
+      },
+      {
         "path": "scripts/survey/test_sf_manifest_consumers.py",
         "mode": "100644",
         "git_blob": "8e7b58498d50cb970f0da992cf7ef7254110ba3a"
       },
       {
+        "path": "scripts/survey/test_sf_official_metadata_fetch.py",
+        "mode": "100644",
+        "git_blob": "e8cd9b3642c2f997366791b44bbc265a75610458"
+      },
+      {
+        "path": "scripts/survey/test_sf_pdf_extractor_contract.py",
+        "mode": "100644",
+        "git_blob": "2ea736ddd1482c593ddd38b85df3f60581f2f2be"
+      },
+      {
+        "path": "scripts/survey/test_sf_proposal_package_check.py",
+        "mode": "100644",
+        "git_blob": "a571715a2c0b0f45b0e124b562ff181bee44773a"
+      },
+      {
+        "path": "scripts/survey/test_sf_proposal_source_manifest.py",
+        "mode": "100644",
+        "git_blob": "e921326d1db092a8b4bc3938db91617ac98e3a89"
+      },
+      {
         "path": "scripts/survey/test_sf_query_compiler_profiles.py",
         "mode": "100644",
         "git_blob": "39ac78ca7aa835a2047eb2df75fccd799fd90420"
+      },
+      {
+        "path": "scripts/survey/test_sf_reviewer_proposal_check.py",
+        "mode": "100644",
+        "git_blob": "1ac4bf66895d82212f9d923da96f3c15c1c5f6d0"
       },
       {
         "path": "scripts/survey/test_sf_schema_v3_finalize.py",
@@ -370,19 +485,19 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "b70758aa29109901b2d9f9f1c9743dbf36815c92926c1df9a5591b7104272558"
+    "sha256": "bdf2854d707d710131acccada882ecf2c6734346b8ac571aa5896ae96ad09aea"
   },
   "commands": [
     {
       "command": "python scripts/survey/test_sf_evidence_contract.py",
       "exit_code": 0,
       "stdout_tail": "",
-      "stderr_tail": ".................................\n----------------------------------------------------------------------\nRan 33 tests\n\nOK"
+      "stderr_tail": "...................................................\n----------------------------------------------------------------------\nRan 51 tests\n\nOK"
     },
     {
-      "command": "python scripts/survey/sf_schema_v3_migrate.py --check",
+      "command": "python scripts/survey/sf_absence_provenance_migrate.py --check",
       "exit_code": 0,
-      "stdout_tail": "schema-v3 migration: PASS (8 sidecars, 11 rows, 12 signals; pending adjudication)",
+      "stdout_tail": "[OK] absence migration exact: 18 proof rows; review rows=18",
       "stderr_tail": ""
     },
     {
@@ -392,16 +507,28 @@
       "stderr_tail": ""
     },
     {
-      "command": "python scripts/survey/sf_identity_taxonomy_v6_test.py",
+      "command": "python scripts/survey/test_sf_identity_taxonomy_v7_harness.py",
       "exit_code": 0,
-      "stdout_tail": "{\n \"summary\": \"14/14 PASS\",\n \"verdict\": \"PASS\",\n \"platform\": {\n  \"os\": \"<OS>\",\n  \"python\": \"<PYTHON>\"\n },\n \"policy_A_key_numbers\": {\n  \"reward_guided\": \"6/11\",\n  \"rq_sys_compatible\": \"5/11\",\n  \"method_candidate\": \"0/11\",\n  \"reward_guided_selection\": \"4/11\",\n  \"trajectory_pool\": \"2/11\"\n }\n}",
-      "stderr_tail": ""
+      "stdout_tail": "",
+      "stderr_tail": "............\n----------------------------------------------------------------------\nRan 12 tests\n\nOK"
     },
     {
-      "command": "python scripts/survey/sf_dual_platform_check.py",
+      "command": "python scripts/survey/test_sf_h5_calibration_contract.py",
       "exit_code": 0,
-      "stdout_tail": "current release binding: CONFIRMED\nfrozen report semantics: CONFIRMED\ninput snapshot equality: CONFIRMED\ninput provenance equality: CONFIRMED\nnt: {'os': 'nt', 'python': '3.14.3'}  posix: {'os': 'posix', 'python': '3.12.3'}\noccupancy equality: CONFIRMED\ndual-platform check: PASS (0 failures)",
-      "stderr_tail": ""
+      "stdout_tail": "",
+      "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests\n\nOK"
+    },
+    {
+      "command": "python scripts/survey/test_sf_pdf_extractor_contract.py",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests\n\nOK"
+    },
+    {
+      "command": "python scripts/survey/test_sf_evidence_v7_aggregate.py",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "........\n----------------------------------------------------------------------\nRan 8 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/test_sf_query_compiler_profiles.py",
@@ -416,10 +543,16 @@
       "stderr_tail": ""
     },
     {
-      "command": "python scripts/survey/sf_current_tables.py --check",
+      "command": "python scripts/survey/test_sf_existing_corpus_disposition.py",
       "exit_code": 0,
-      "stdout_tail": "current opening table: PASS",
-      "stderr_tail": ""
+      "stdout_tail": "",
+      "stderr_tail": ".....................\n----------------------------------------------------------------------\nRan 21 tests\n\nOK"
+    },
+    {
+      "command": "python scripts/survey/test_sf_bibliography_generator.py",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "..............\n----------------------------------------------------------------------\nRan 14 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/sf_current_manifest.py --check",
@@ -448,7 +581,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (78 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (82 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {
