@@ -84,7 +84,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
                     self.assertEqual(policy["identity"], row["identity"])
                     self.assertTrue((bibliography.ROOT / row["raw"]["path"]).is_file())
 
-    def test_offline_rebuild_resolves_all_77_without_network(self):
+    def test_offline_rebuild_resolves_all_85_without_network(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "receipts.jsonl"
             with mock.patch.object(
@@ -100,10 +100,10 @@ class OfficialMetadataFetchTest(unittest.TestCase):
                 for line in output.read_text(encoding="utf-8").splitlines()
                 if line.strip()
             ]
-            self.assertEqual(77, len(rows))
+            self.assertEqual(85, len(rows))
             self.assertEqual([], bibliography.validate_receipts(rows))
 
-    def test_cached_raw_inventory_is_17_reused_plus_60_current(self):
+    def test_cached_raw_inventory_is_17_reused_plus_68_current(self):
         rows = bibliography.load_receipts()
         legacy = {
             row["raw"]["path"]
@@ -118,7 +118,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
             )
         }
         self.assertEqual(17, len(legacy))
-        self.assertEqual(60, len(current))
+        self.assertEqual(68, len(current))
 
     def test_current_raw_payloads_are_exempt_from_git_text_normalization(self):
         representative = next(

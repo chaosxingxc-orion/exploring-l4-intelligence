@@ -64,7 +64,14 @@ The research-question frame is:
 - `RQ-OMNI`: where modality-native observation, action, tool I/O, and causal grounding matter;
 - `RQ-SAFE`: where Goodhart effects, judge drift, abstention, stopping, and reward hacking constrain
   inference-time control;
-- `RQ-MEASURE`: how headroom, selection, budget, system occupancy, and modality coverage are measured.
+- `RQ-MEASURE-MAP`: which papers report candidate-supply conditions, pool construction, verifier
+  evidence, selector baselines, budgets, and modality coverage, and at what evidence grade. Stage-1B
+  maps these reported constructs; it does not measure new headroom or run attribution experiments.
+
+The empirical questions—whether a fixed supply has oracle headroom, whether a label-free selector
+beats equal-K MBR, and how gain decomposes across generator/verifier/selector—are Stage-2 questions.
+They may be recorded as future falsifiers in Stage-1B evidence bundles but cannot be answered by this
+mapping or presented as Stage-1B outputs.
 
 Each included method path records `most_threatened_rq` as one or more of those identifiers; `none`
 requires a reason. Mapping reports must separate system-level occupancy, component priors, measurement
@@ -107,7 +114,20 @@ information access, topology, modality, and causal control edges. A terminal sel
 control mechanism, not evidence of sequential control by itself. Unknown values never satisfy a
 strict conjunction.
 
+Speech/omni specificity uses the separate current codebook
+`wiki/survey/current/modality-specificity-codebook.md`. Its seven mandatory fields are modality
+topology, temporal regime, observation granularity, acoustic evidence provenance, latency/action
+timing, output/action modality, and state persistence. Each has explicit `UNKNOWN` and
+`NOT_APPLICABLE` handling, field-level dual coding, and disagreement adjudication. A generic
+`core_native_modality` value cannot substitute for this H5-specific coding.
+
 ## §3 Sources, dates, coverage lanes, and access logging
+
+The methodological adaptation is frozen in
+`wiki/survey/current/mapping-methods-adaptation.md`: Petersen supplies mapping/classification
+discipline, Wohlin supplies snowballing and stop logic, PRISMA 2020 supplies flow transparency, PRESS
+2015 supplies pre-execution search peer review, and PRISMA-S supplies reproducible search reporting.
+The adaptation table states every adopted element, AI/CS/arXiv/T1 deviation, rationale, and artifact.
 
 The discovery universe is an **arXiv-primary systematic mapping** with **free official source rescue**.
 The 65 frozen Boolean requests use arXiv API metadata. T1 proceedings and citation indexes are
@@ -613,11 +633,13 @@ hand-edited visible number. The release manifest binds protocol, queries, taxono
 adjudication, platform reports, current tables, and reviewer-facing artifacts by raw hash.
 
 Mapping outputs are the coverage/kill matrix, system-control occupancy and sensitivity tables,
-SOTA/method cards, updated census and ledger, saturation/flow report, and 3–5 candidate problems for
-Stage-1C. Candidate cards separately state **supporting evidence**, **contradicting evidence**, a
-single-observation **kill criterion**, unresolved alternative explanations, method limitations,
-improvement space, and value. “Not found” is always scoped to the inspected set and carries removal and
-unresolved counts.
+SOTA/method cards, updated census and ledger, saturation/flow report, direct-prior proximity and
+reproduction-readiness evidence, and **eligible Stage-1C inputs**. Stage-1B does not create or rank the
+final candidate cards and does not freeze a reproduction list. Stage-1C owns the final 3–5 candidate
+cards, ranking, owner selection, and reproduction-list freeze. Each eligible input supplies the
+supporting and contradicting evidence, a single-observation kill criterion, unresolved alternatives,
+method limitations, improvement space, and value needed for that later synthesis. “Not found” is
+always scoped to the inspected set and carries removal and unresolved counts.
 
 The opening package keeps separate tables for **method paths**, speech/omni **measurement instruments**,
 evaluator/reward **negative-result priors**, and boundary/comparator work. A **trained reward

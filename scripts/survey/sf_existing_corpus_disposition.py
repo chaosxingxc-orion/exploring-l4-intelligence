@@ -15,6 +15,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 IMPLEMENTATION_FREEZE = "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
 REVIEW_SOURCE_SHA256 = "6434ee4e8a385da1f68e9a9212e615b6f0ddb41f83a06047d78060c571fe3abe"
+REVIEW_2026_07_21_SOURCE_SHA256 = "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e"
 
 CENSUS_PATH = ROOT / "wiki/survey/2026-07-14-canonical-census-v2/paper_works.jsonl"
 SEED_PATH = ROOT / "wiki/survey/2026-07-15-sf-seed-manifest.jsonl"
@@ -162,6 +163,11 @@ def load_reviewer_known(path: Path) -> list[dict[str, Any]]:
         raise ValueError("reviewer-known items cannot receive query recall credit")
     if artifact.get("source_provenance", {}).get("sha256") != REVIEW_SOURCE_SHA256:
         raise ValueError("reviewer-known source provenance mismatch")
+    if (
+        artifact.get("additional_source_provenance", {}).get("sha256")
+        != REVIEW_2026_07_21_SOURCE_SHA256
+    ):
+        raise ValueError("additional reviewer-known source provenance mismatch")
     expected_items_hash = hashlib.sha256(canonical_json_bytes(artifact["items"])).hexdigest()
     if artifact.get("items_sha256") != expected_items_hash:
         raise ValueError("reviewer-known item payload hash mismatch")

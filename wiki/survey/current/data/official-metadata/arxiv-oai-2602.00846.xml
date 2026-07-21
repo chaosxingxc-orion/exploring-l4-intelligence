@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T00:10:04Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2602.00846" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.00846</identifier>
+        <datestamp>2026-07-08</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.00846</id>
+        <created>2026-07-07</created>
+            <updated>2026-07-08</updated>
+        <authors>
+                <author>
+                    <keyname>Kong</keyname>
+                        <forenames>Zicheng</forenames>
+                </author>
+                <author>
+                    <keyname>Ma</keyname>
+                        <forenames>Dehua</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Zhenbo</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Alven</forenames>
+                </author>
+                <author>
+                    <keyname>Ru</keyname>
+                        <forenames>Yiwei</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Haoran</forenames>
+                </author>
+                <author>
+                    <keyname>Zhou</keyname>
+                        <forenames>Zixuan</forenames>
+                </author>
+                <author>
+                    <keyname>Bie</keyname>
+                        <forenames>Fuqing</forenames>
+                </author>
+                <author>
+                    <keyname>Xiang</keyname>
+                        <forenames>Liuyu</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Huijia</forenames>
+                </author>
+                <author>
+                    <keyname>Zhao</keyname>
+                        <forenames>Jian</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Zhaofeng</forenames>
+                </author>
+        </authors>
+        <title>Omni-RRM: Advancing Omni Reward Modeling via Automatic Rubric-Grounded Preference Synthesis</title>
+            <categories>cs.CL</categories>
+            <comments>ECCV 2026</comments>
+            <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>
+            <abstract>Multimodal large language models (MLLMs) struggle with alignment due to the limitations of existing reward models (RMs), which are predominantly vision-centric, dependent on costly human labels, and provide opaque scalar scores that fail to capture nuanced reasoning, leading to brittle alignment. We present Omni-RRM, an \textbf{Omni}-modal \textbf{R}ubric-grounded \textbf{R}eward \textbf{M}odel that generates multi-dimensional reward signals across text, image, video, and audio. To overcome the high cost and inherent inconsistency of human-centric evaluation in multi-dimensional reasoning, we introduce \textbf{Omni-Preference}, a high-quality dataset constructed via automatic rubric-grounded preference synthesis. In this pipeline, teacher models reconcile raw preferences into explicit justifications, ensuring that the synthesized supervision is both high-fidelity and interpretable. Omni-RRM is trained using a progressive SFT + GRPO regimen, specifically optimized to sharpen reward discrimination on low-margin, hard preference pairs. It achieves state-of-the-art accuracy on video (80.2\% on ShareGPT-Video) and audio benchmarks (66.8\% on Audio-HH-RLHF and 65.0\% on TA2T), yielding a five-benchmark Overall accuracy of 70.4\% and a +17.0\% relative gain over its backbone. Furthermore, Omni-RRM effectively guides Best-of-$N$ selection and exhibits robust transfer to text-only alignment. All resources, including the dataset, training and inference code, and model checkpoints are available at https://tmfk418.github.io/Omni-RRM.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

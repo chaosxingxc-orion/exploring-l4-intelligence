@@ -25,7 +25,7 @@ EXPECTED_DENOMINATORS = {
     "claim": 62,
     "version_pin": 30,
     "fulltext": 129,
-    "reviewer_known": 6,
+    "reviewer_known": 10,
 }
 
 
@@ -286,7 +286,7 @@ class ExistingCorpusDispositionTest(unittest.TestCase):
 
     def test_reviewer_known_artifact_is_frozen_and_has_no_query_recall_credit(self):
         artifact = json.loads(disposition.REVIEWER_KNOWN_PATH.read_text(encoding="utf-8"))
-        self.assertEqual(6, len(artifact["items"]))
+        self.assertEqual(10, len(artifact["items"]))
         self.assertEqual("REVIEW_CLAIM_VERIFICATION", artifact["access_class"])
         self.assertFalse(artifact["query_recall_credit"])
         self.assertEqual(
@@ -296,6 +296,22 @@ class ExistingCorpusDispositionTest(unittest.TestCase):
         self.assertEqual(
             disposition.REVIEW_SOURCE_SHA256,
             artifact["source_provenance"]["sha256"],
+        )
+        self.assertEqual(
+            disposition.REVIEW_2026_07_21_SOURCE_SHA256,
+            artifact["additional_source_provenance"]["sha256"],
+        )
+        by_id = {item["arxiv_id"]: item for item in artifact["items"]}
+        self.assertEqual(
+            {"2502.04128", "2602.22897", "2602.00846", "2512.16899"},
+            {identity for identity in by_id if identity in {
+                "2502.04128", "2602.22897", "2602.00846", "2512.16899"
+            }},
+        )
+        self.assertTrue(
+            all(by_id[identity]["query_recall_credit"] is False for identity in {
+                "2502.04128", "2602.22897", "2602.00846", "2512.16899"
+            })
         )
 
     def test_build_is_deterministic_and_never_loads_query_or_attempt_registries(self):

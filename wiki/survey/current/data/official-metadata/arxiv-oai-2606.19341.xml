@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T00:10:08Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.19341" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.19341</identifier>
+        <datestamp>2026-07-21</datestamp>
+            <setSpec>cs:cs:CV</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.19341</id>
+        <created>2026-07-17</created>
+            <updated>2026-07-21</updated>
+        <authors>
+                <author>
+                    <keyname>Xing</keyname>
+                        <forenames>Zhenghao</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Ruiyang</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuxuan</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Jinzheng</forenames>
+                </author>
+                <author>
+                    <keyname>Ma</keyname>
+                        <forenames>Ziyang</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Qize</forenames>
+                </author>
+                <author>
+                    <keyname>Chu</keyname>
+                        <forenames>Yunfei</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Jin</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Junyang</forenames>
+                </author>
+                <author>
+                    <keyname>Fu</keyname>
+                        <forenames>Chi-Wing</forenames>
+                </author>
+                <author>
+                    <keyname>Heng</keyname>
+                        <forenames>Pheng-Ann</forenames>
+                </author>
+        </authors>
+        <title>Native Active Perception as Reasoning for Omni-Modal Understanding</title>
+            <categories>cs.CV cs.CL cs.SD</categories>
+            <comments>Accepted at ICML 2026. Code and models: https://github.com/harryhsing/omniagent</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Passive models for long video understanding typically rely on a &#34;watch-it-all&#34; paradigm, processing frames uniformly regardless of query difficulty, causing computational cost to grow with video duration. Although interactive frameworks have emerged, they often rely on global pre-scanning, and their context cost still scales with video length. We propose OmniAgent, the first native omni-modal agent that formulates video understanding as a POMDP-based iterative Observation-Thought-Action cycle. OmniAgent executes on-demand actions to selectively distill audio-visual cues into a persistent textual memory, effectively decoupling reasoning complexity from raw video duration. To operationalize this, we introduce (1) Agentic Supervised Fine-Tuning to bootstrap native active perception via best-of-N trajectory synthesis with dual-stage quality control, and (2) Agentic Reinforcement Learning with TAURA (Turn-aware Adaptive Uncertainty Rescaled Advantage), which leverages turn-level entropy to steer credit assignment toward pivotal discovery turns. Crucially, OmniAgent exhibits positive test-time scaling, where performance improves as the number of reasoning turns increases, validating the efficacy of active perception. Empirical results across ten benchmarks (e.g., VideoMME, LVBench) demonstrate that OmniAgent achieves state-of-the-art performance among open-source models. Notably, on LVBench, our 7B agent outperforms the 10$\times$ larger Qwen2.5-VL-72B (50.5% vs. 47.3%).</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

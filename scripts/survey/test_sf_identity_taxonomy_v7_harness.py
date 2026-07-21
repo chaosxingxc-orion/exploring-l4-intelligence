@@ -26,7 +26,7 @@ class V7HarnessTest(unittest.TestCase):
         cls.bundle = harness.load_current_inputs()
 
     def test_contract_names_the_new_absence_artifact_and_freeze(self):
-        self.assertEqual("SF-EVIDENCE-V7-CONTRACT-1", harness.CONTRACT_VERSION)
+        self.assertEqual("SF-EVIDENCE-V7-CONTRACT-2", harness.CONTRACT_VERSION)
         self.assertEqual(
             "d4ec803417e1e9cfe9120afbce97c676cebbe6ee",
             harness.IMPLEMENTATION_FREEZE,
@@ -35,6 +35,10 @@ class V7HarnessTest(unittest.TestCase):
             "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
             harness.ABSENCE_ADJUDICATION_RELATIVE_PATH,
         )
+        self.assertEqual(
+            "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+            harness.SEMANTIC_CORRECTIONS_RELATIVE_PATH,
+        )
 
     def test_current_input_bundle_binds_sidecars_coding_and_absence_review(self):
         bundle = self.bundle
@@ -42,12 +46,22 @@ class V7HarnessTest(unittest.TestCase):
         self.assertEqual(11, len(bundle["rows"]))
         self.assertEqual(19, len(bundle["absence_adjudication"]["proof_rows"]))
         self.assertEqual([], bundle["absence_adjudication"]["rows"])
+        self.assertEqual(3, len(bundle["semantic_corrections"]["corrections"]))
+        self.assertEqual([], bundle["semantic_corrections"]["review_rows"])
         paths = {
             entry["path"]
             for value in bundle["input_provenance"].values()
             for entry in (value if isinstance(value, list) else [value])
         }
         self.assertIn(harness.ABSENCE_ADJUDICATION_RELATIVE_PATH, paths)
+        self.assertIn(harness.SEMANTIC_CORRECTIONS_RELATIVE_PATH, paths)
+
+    def test_current_pending_review_blocks_all_three_semantic_corrections(self):
+        failures = harness.validate_semantic_correction_review(self.bundle)
+        self.assertIn(
+            "semantic-correction-review-coverage-mismatch:expected=3:found=0",
+            failures,
+        )
 
     def test_positive_absence_mutation_is_red_and_legitimate_negative_is_clean(self):
         results = harness.run_absence_mutation_suite(self.bundle["rows"])
@@ -92,6 +106,7 @@ class V7HarnessTest(unittest.TestCase):
         report = harness.build_report(bundle=self.bundle, platform_os="nt")
         self.assertEqual("FAIL", report["verdict"])
         self.assertIn("ABSENCE_REVIEW", report["failure_codes"])
+        self.assertIn("SEMANTIC_CORRECTION_REVIEW", report["failure_codes"])
         self.assertEqual(harness.CONTRACT_VERSION, report["contract_version"])
         self.assertEqual(harness.IMPLEMENTATION_FREEZE, report["implementation_freeze"])
         self.assertRegex(report["runner"]["sha256"], r"^[0-9a-f]{64}$")

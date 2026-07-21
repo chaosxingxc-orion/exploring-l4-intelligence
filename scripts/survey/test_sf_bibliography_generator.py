@@ -29,7 +29,19 @@ DIRECT_NEIGHBORS = {
     "2505.09558",
     "2602.13891",
 }
-REVIEWER_ADDITIONS = {"2508.16665", "2510.18982", "2509.25845"}
+REVIEWER_ADDITIONS = {
+    "2508.16665",
+    "2510.18982",
+    "2509.25845",
+    "2502.20379",
+    "2509.19676",
+    "2510.23451",
+    "2606.19341",
+    "2502.04128",
+    "2602.22897",
+    "2602.00846",
+    "2512.16899",
+}
 
 
 class BibliographyGeneratorTest(unittest.TestCase):
@@ -37,15 +49,58 @@ class BibliographyGeneratorTest(unittest.TestCase):
     def setUpClass(cls):
         cls.receipts = bibliography.load_receipts()
 
-    def test_exact_77_unique_work_receipts_retain_65_and_add_12(self):
-        self.assertEqual(77, len(self.receipts))
+    def test_exact_85_unique_work_receipts_retain_65_and_add_20(self):
+        self.assertEqual(85, len(self.receipts))
         identities = [row["identity"]["id"] for row in self.receipts]
-        self.assertEqual(77, len(set(identities)))
+        self.assertEqual(85, len(set(identities)))
         legacy = bibliography.legacy_bibliography_policies()
         self.assertEqual(65, len(legacy))
         self.assertTrue(set(legacy) <= set(identities))
         self.assertTrue(DIRECT_NEIGHBORS <= set(identities))
         self.assertTrue(REVIEWER_ADDITIONS <= set(identities))
+
+    def test_arxiv_year_uses_initial_preprint_not_oai_datestamp(self):
+        by_id = {row["identity"]["id"]: row for row in self.receipts}
+        expected = {
+            "2510.02995": 2025,
+            "2510.07978": 2025,
+            "2310.04406": 2023,
+            "2508.21787": 2025,
+            "2509.25845": 2025,
+        }
+        for identity, year in expected.items():
+            with self.subTest(identity=identity):
+                self.assertEqual(year, by_id[identity]["normalized"]["year"])
+                self.assertEqual("initial_preprint", by_id[identity]["year_basis"])
+
+    def test_selection_receipt_accounts_for_all_union_nodes_and_visible_works(self):
+        selection = bibliography.load_selection_receipt()
+        self.assertEqual(245, selection["union_population"])
+        self.assertEqual(245, len(selection["union_dispositions"]))
+        self.assertEqual(85, selection["reviewer_visible_total"])
+        self.assertEqual(
+            85,
+            selection["selected_from_union"]
+            + selection["reviewer_directed_outside_union"],
+        )
+        self.assertEqual(
+            245,
+            sum(selection["union_reason_code_counts"].values()),
+        )
+        self.assertNotIn(
+            "NOT_SELECTED_REVIEWER_VISIBLE_SCOPE",
+            selection["union_reason_code_counts"],
+        )
+        selected = [row for row in selection["union_dispositions"] if row["selected"]]
+        self.assertTrue(all(row["selection_basis"] for row in selected))
+        self.assertEqual(
+            bibliography.VISIBLE_SELECTION_BASES,
+            {
+                basis
+                for row in selected
+                for basis in row["selection_basis"]
+            },
+        )
 
     def test_raw_official_payload_hash_and_identity_round_trip(self):
         for receipt in self.receipts:
@@ -62,6 +117,7 @@ class BibliographyGeneratorTest(unittest.TestCase):
                 self.assertEqual(receipt["normalized"]["title"], reparsed["title"])
                 self.assertEqual(receipt["normalized"]["authors"], reparsed["authors"])
                 self.assertEqual(receipt["normalized"]["year"], reparsed["year"])
+                self.assertEqual(receipt["year_basis"], reparsed["year_basis"])
 
     def test_receipts_are_typed_nonquery_accesses_with_no_recall_credit(self):
         allowed = {
@@ -143,19 +199,44 @@ class BibliographyGeneratorTest(unittest.TestCase):
     def test_cli_write_check_and_drift_paths(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "bibliography.md"
+            selection = Path(temporary) / "selection.json"
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(
                     0,
-                    bibliography.main(["--write", "--output", str(output)]),
+                    bibliography.main(
+                        [
+                            "--write",
+                            "--output",
+                            str(output),
+                            "--selection-output",
+                            str(selection),
+                        ]
+                    ),
                 )
                 self.assertEqual(
                     0,
-                    bibliography.main(["--check", "--output", str(output)]),
+                    bibliography.main(
+                        [
+                            "--check",
+                            "--output",
+                            str(output),
+                            "--selection-output",
+                            str(selection),
+                        ]
+                    ),
                 )
                 output.write_text("drift\n", encoding="utf-8")
                 self.assertEqual(
                     1,
-                    bibliography.main(["--check", "--output", str(output)]),
+                    bibliography.main(
+                        [
+                            "--check",
+                            "--output",
+                            str(output),
+                            "--selection-output",
+                            str(selection),
+                        ]
+                    ),
                 )
 
 

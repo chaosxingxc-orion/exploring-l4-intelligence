@@ -33,8 +33,8 @@ from sf_schema_v3_release_contract import (
 
 
 REPO = Path(__file__).resolve().parents[2]
-ARTIFACT_ID = "SF-IDENTITY-TAXONOMY-V7-TEST-2026-07-20-01"
-CONTRACT_VERSION = "SF-EVIDENCE-V7-CONTRACT-1"
+ARTIFACT_ID = "SF-IDENTITY-TAXONOMY-V7-TEST-2026-07-21-02"
+CONTRACT_VERSION = "SF-EVIDENCE-V7-CONTRACT-2"
 IMPLEMENTATION_FREEZE = "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
 RUNNER_RELATIVE_PATH = "scripts/survey/sf_identity_taxonomy_v7_test.py"
 TAXONOMY_V5_RELATIVE_PATH = "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json"
@@ -45,6 +45,9 @@ SCHEMA_V3_ADJUDICATION_RELATIVE_PATH = (
 )
 ABSENCE_ADJUDICATION_RELATIVE_PATH = (
     "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
+)
+SEMANTIC_CORRECTIONS_RELATIVE_PATH = (
+    "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json"
 )
 ACTIVE_TAXONOMY = TAXONOMY_V6_RELATIVE_PATH
 
@@ -77,6 +80,9 @@ def load_current_inputs():
     )
     absence_adjudication, absence_adjudication_raw = _read_repo_json(
         ABSENCE_ADJUDICATION_RELATIVE_PATH
+    )
+    semantic_corrections, semantic_corrections_raw = _read_repo_json(
+        SEMANTIC_CORRECTIONS_RELATIVE_PATH
     )
 
     sidecar_dir = resolve_trusted_repo_path(
@@ -123,6 +129,9 @@ def load_current_inputs():
         "absence_adjudication": _provenance(
             ABSENCE_ADJUDICATION_RELATIVE_PATH, absence_adjudication_raw
         ),
+        "semantic_corrections": _provenance(
+            SEMANTIC_CORRECTIONS_RELATIVE_PATH, semantic_corrections_raw
+        ),
         "sidecars": sidecar_provenance,
     }
     return {
@@ -134,6 +143,7 @@ def load_current_inputs():
         "sidecars": sidecars,
         "schema_v3_adjudication": schema_adjudication,
         "absence_adjudication": absence_adjudication,
+        "semantic_corrections": semantic_corrections,
         "input_provenance": provenance,
         "input_snapshot_sha256": hashlib.sha256(
             canonical_bytes(provenance)
@@ -293,6 +303,78 @@ def validate_absence_review(bundle):
     return failures
 
 
+def validate_semantic_correction_review(bundle):
+    """Require independent confirmation of all three retired negative claims."""
+    artifact = bundle.get("semantic_corrections")
+    if not isinstance(artifact, dict):
+        return ["semantic-correction-artifact-invalid"]
+    corrections = artifact.get("corrections")
+    review_rows = artifact.get("review_rows")
+    failures = []
+    if not isinstance(corrections, list):
+        corrections = []
+        failures.append("semantic-correction-inventory-invalid")
+    if not isinstance(review_rows, list):
+        review_rows = []
+        failures.append("semantic-correction-review-rows-invalid")
+    reconciliation = artifact.get("inventory_reconciliation", {})
+    if reconciliation != {
+        "original_negative_claims": 22,
+        "retired_by_correction": 3,
+        "active_negative_claims": 19,
+        "identity": "22 = 3 + 19",
+    }:
+        failures.append("semantic-correction-reconciliation-mismatch")
+    correction_ids = [
+        row.get("retired_adjudication_row_id")
+        for row in corrections
+        if isinstance(row, dict)
+    ]
+    if len(corrections) != 3 or len(set(correction_ids)) != 3 or None in correction_ids:
+        failures.append("semantic-correction-inventory-mismatch")
+    review_ids = [
+        row.get("retired_adjudication_row_id")
+        for row in review_rows
+        if isinstance(row, dict)
+    ]
+    if len(review_ids) != len(set(review_ids)):
+        failures.append("semantic-correction-duplicate-review-id")
+    if len(review_rows) != len(corrections) or set(review_ids) != set(correction_ids):
+        failures.append(
+            "semantic-correction-review-coverage-mismatch:"
+            f"expected={len(corrections)}:found={len(review_rows)}"
+        )
+    required_independence = {
+        "nonparticipation_scope",
+        "timestamp_utc",
+        "conflict_declaration",
+    }
+    for row in review_rows:
+        if not isinstance(row, dict):
+            failures.append("semantic-correction-review-row-invalid")
+            continue
+        row_id = row.get("retired_adjudication_row_id")
+        if row.get("verdict") != "AGREE":
+            failures.append(f"semantic-correction-review-not-agree:{row_id}")
+        if not row.get("reviewer_identity") or not row.get("review_reason"):
+            failures.append(f"semantic-correction-review-attribution-missing:{row_id}")
+        independence = row.get("independence")
+        if not isinstance(independence, dict) or any(
+            not independence.get(field) for field in required_independence
+        ):
+            failures.append(f"semantic-correction-review-independence-missing:{row_id}")
+    expected_status = (
+        "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
+        if review_rows
+        else "PENDING_INDEPENDENT_REVIEW"
+    )
+    if artifact.get("review_status") != expected_status:
+        failures.append("semantic-correction-review-status-mismatch")
+    if artifact.get("reviewer_rows_created") != len(review_rows):
+        failures.append("semantic-correction-review-count-mismatch")
+    return failures
+
+
 def _platform_stamp(platform_os=None):
     role = platform_os or os.name
     if platform_os is None:
@@ -334,6 +416,7 @@ def build_report(bundle=None, platform_os=None):
         sidecars, coding_text, evidence_cache=EvidenceCache()
     )
     absence_failures = validate_absence_review(bundle)
+    semantic_correction_failures = validate_semantic_correction_review(bundle)
     mutation_results = run_absence_mutation_suite(rows)
     mutation_ok = (
         not mutation_results["legitimate_field_specific_negative_control"]
@@ -365,6 +448,12 @@ def build_report(bundle=None, platform_os=None):
             "check": "all absence rows cross-bind to independent AGREE review rows",
             "result": "PASS" if not absence_failures else "FAIL",
             "detail": absence_failures[:24],
+        },
+        {
+            "id": "SEMANTIC_CORRECTION_REVIEW",
+            "check": "all retired negative claims cross-bind to independent AGREE correction reviews",
+            "result": "PASS" if not semantic_correction_failures else "FAIL",
+            "detail": semantic_correction_failures[:24],
         },
         {
             "id": "ABSENCE_MUTATIONS",

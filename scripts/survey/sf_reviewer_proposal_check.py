@@ -19,18 +19,22 @@ PROPOSAL_PATH = (
     / "wiki/survey/workbench/system-first-stage1a/"
     "2026-07-21-research-proposal-for-independent-review.md"
 )
-ROUND15_PATH = (
+ROUND16_PATH = (
     ROOT
-    / "wiki/audit/system-first-stage1a/round-15/"
+    / "wiki/audit/system-first-stage1a/round-16/"
     "research-proposal-and-stage1b-signoff-request.md"
 )
 ABSENCE_PATH = ROOT / "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
+CORRECTIONS_PATH = ROOT / "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json"
+MAPPING_METHODS_PATH = ROOT / "wiki/survey/current/mapping-methods-adaptation.md"
+MODALITY_CODEBOOK_PATH = ROOT / "wiki/survey/current/modality-specificity-codebook.md"
 UNION_CHECK_PATH = (
     ROOT
     / "docs/checks/system-first-stage1a/context-v2/"
     "existing-corpus-disposition-check.json"
 )
 RECEIPTS_PATH = ROOT / "wiki/survey/current/data/official-metadata-receipts-v1.jsonl"
+SELECTION_PATH = ROOT / "wiki/survey/current/data/reviewer-bibliography-selection-v1.json"
 V7_DIRECTORY = ROOT / "docs/checks/system-first-stage1a/evidence-v7"
 V7_NAMES = (
     "identity-taxonomy-v7-test.nt.json",
@@ -49,7 +53,7 @@ EVIDENCE_BINDINGS = {
     "lossless union graph": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
     "union machine check": "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json",
     "official metadata receipts": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
-    "generated 77-work bibliography": "wiki/survey/current/bibliography.md",
+    "generated 85-work bibliography": "wiki/survey/current/bibliography.md",
     "frozen evidence-v6 aggregate": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
     "frozen query bytes": "wiki/survey/2026-07-15-sf-queries.jsonl",
     "attempt registry": "docs/integrity/experiment_attempt_registry.jsonl",
@@ -66,6 +70,10 @@ DIRECT_NEIGHBORS = (
     "VoxMind",
     "WavReward",
     "GSRM",
+    "Thinking While Listening",
+    "Native Active Perception",
+    "Llasa",
+    "OmniGAIA",
 )
 
 
@@ -77,8 +85,10 @@ def load_inputs() -> dict[str, Any]:
     ]
     return {
         "absence": json.loads(ABSENCE_PATH.read_text(encoding="utf-8")),
+        "corrections": json.loads(CORRECTIONS_PATH.read_text(encoding="utf-8")),
         "union": json.loads(UNION_CHECK_PATH.read_text(encoding="utf-8")),
         "receipts": receipts,
+        "selection": json.loads(SELECTION_PATH.read_text(encoding="utf-8")),
     }
 
 
@@ -125,6 +135,13 @@ def _required_structure_failures(text: str) -> list[str]:
         "TRACK_B_MISSING": "## Track B",
         "FALSIFIERS_MISSING": "## 8. 证伪条件",
         "RISKS_AND_LIMITATIONS_MISSING": "## 9. 风险、限制与博士价值",
+        "RQ_STAGE_MATRIX_MISSING": "answering_stage",
+        "METHODS_ADAPTATION_MISSING": "mapping-methods-adaptation.md",
+        "MODALITY_CODEBOOK_MISSING": "modality-specificity-codebook.md",
+        "STAGE1C_OWNERSHIP_MISSING": "Stage-1C owns the final 3–5 candidate cards",
+        "BIBLIOGRAPHY_SELECTION_MISSING": "reviewer-bibliography-selection-v1.json",
+        "YEAR_POLICY_MISSING": "year_basis",
+        "ACTIVE_CORPUS_SCOPE_MISSING": "seven registered active corpora",
     }
     failures = [code for code, token in required.items() if token not in text]
     response_lines = (
@@ -177,6 +194,15 @@ def _numeric_failures(text: str, inputs: dict[str, Any]) -> list[str]:
     )
     if any(phrase not in text for phrase in bibliography_phrases):
         failures.append("BIBLIOGRAPHY_NUMERIC_DRIFT")
+    selection = inputs["selection"]
+    selection_phrases = (
+        f"{selection['union_population']} 个 active-union nodes",
+        f"{selection['selected_from_union']} 个 selected",
+        f"{selection['union_reason_code_counts']['NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE']} 个 `NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE`",
+        f"{selection['union_reason_code_counts']['NOT_SELECTED_UNRESOLVED_IDENTITY']} 个 `NOT_SELECTED_UNRESOLVED_IDENTITY`",
+    )
+    if any(phrase not in text for phrase in selection_phrases):
+        failures.append("BIBLIOGRAPHY_SELECTION_NUMERIC_DRIFT")
 
     absence = inputs["absence"]
     proof_count = len(absence.get("proof_rows", []))
@@ -225,15 +251,35 @@ def validate_release(text: str, inputs: dict[str, Any] | None = None) -> list[st
     }
     if (
         absence.get("status") != "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
-        or len(proof_ids) != 22
+        or len(proof_ids) != 19
         or review_ids != proof_ids
         or any(row.get("verdict") != "AGREE" for row in absence.get("rows", []))
     ):
         failures.append("ABSENCE_REVIEW_PENDING")
+    corrections = inputs["corrections"]
+    correction_ids = {
+        row.get("retired_adjudication_row_id")
+        for row in corrections.get("corrections", [])
+    }
+    correction_review_ids = {
+        row.get("retired_adjudication_row_id")
+        for row in corrections.get("review_rows", [])
+    }
+    if (
+        corrections.get("inventory_reconciliation", {}).get("identity")
+        != "22 = 3 + 19"
+        or len(correction_ids) != 3
+        or correction_review_ids != correction_ids
+        or any(
+            row.get("verdict") != "AGREE"
+            for row in corrections.get("review_rows", [])
+        )
+    ):
+        failures.append("SEMANTIC_CORRECTION_REVIEW_PENDING")
     if any(not (V7_DIRECTORY / name).is_file() for name in V7_NAMES):
         failures.append("EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING")
-    if not ROUND15_PATH.is_file() or PROPOSAL_PATH == ROUND15_PATH:
-        failures.append("PROPOSAL_NOT_PROMOTED_TO_ROUND15")
+    if not ROUND16_PATH.is_file() or PROPOSAL_PATH == ROUND16_PATH:
+        failures.append("PROPOSAL_NOT_PROMOTED_TO_ROUND16")
     return sorted(set(failures))
 
 

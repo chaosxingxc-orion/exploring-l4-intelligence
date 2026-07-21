@@ -16,6 +16,16 @@
  },
  "reviewer_rows_created": 0,
  "reason_reviewer_rows_are_zero": "The report identified contradictions and unresolved topology but did not provide the complete per-row adjudication contract. The implementation therefore corrects or marks unknown without manufacturing AGREE/DISAGREE reviewer rows.",
+ "review_status": "PENDING_INDEPENDENT_REVIEW",
+ "review_requirement": "A non-implementer must inspect the frozen fulltext locator and before/after owner-row binding for each retired negative, then record AGREE or DISAGREE with identity, nonparticipation scope, timestamp, conflict declaration, and reason.",
+ "review_row_required_fields": [
+  "retired_adjudication_row_id",
+  "reviewer_identity",
+  "verdict",
+  "review_reason",
+  "independence"
+ ],
+ "review_rows": [],
  "corrections": [
   {
    "retired_adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T00:09:54Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2502.04128" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2502.04128</identifier>
+        <datestamp>2025-02-25</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:MM</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2502.04128</id>
+        <created>2025-02-22</created>
+            <updated>2025-02-25</updated>
+        <authors>
+                <author>
+                    <keyname>Ye</keyname>
+                        <forenames>Zhen</forenames>
+                </author>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>Xinfa</forenames>
+                </author>
+                <author>
+                    <keyname>Chan</keyname>
+                        <forenames>Chi-Min</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Xinsheng</forenames>
+                </author>
+                <author>
+                    <keyname>Tan</keyname>
+                        <forenames>Xu</forenames>
+                </author>
+                <author>
+                    <keyname>Lei</keyname>
+                        <forenames>Jiahe</forenames>
+                </author>
+                <author>
+                    <keyname>Peng</keyname>
+                        <forenames>Yi</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Haohe</forenames>
+                </author>
+                <author>
+                    <keyname>Jin</keyname>
+                        <forenames>Yizhu</forenames>
+                </author>
+                <author>
+                    <keyname>Dai</keyname>
+                        <forenames>Zheqi</forenames>
+                </author>
+                <author>
+                    <keyname>Lin</keyname>
+                        <forenames>Hongzhan</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Jianyi</forenames>
+                </author>
+                <author>
+                    <keyname>Du</keyname>
+                        <forenames>Xingjian</forenames>
+                </author>
+                <author>
+                    <keyname>Xue</keyname>
+                        <forenames>Liumeng</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Yunlin</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Zhifei</forenames>
+                </author>
+                <author>
+                    <keyname>Xie</keyname>
+                        <forenames>Lei</forenames>
+                </author>
+                <author>
+                    <keyname>Kong</keyname>
+                        <forenames>Qiuqiang</forenames>
+                </author>
+                <author>
+                    <keyname>Guo</keyname>
+                        <forenames>Yike</forenames>
+                </author>
+                <author>
+                    <keyname>Xue</keyname>
+                        <forenames>Wei</forenames>
+                </author>
+        </authors>
+        <title>Llasa: Scaling Train-Time and Inference-Time Compute for Llama-based Speech Synthesis</title>
+            <categories>eess.AS cs.AI cs.CL cs.MM cs.SD</categories>
+            <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>
+            <abstract>Recent advances in text-based large language models (LLMs), particularly in the GPT series and the o1 model, have demonstrated the effectiveness of scaling both training-time and inference-time compute. However, current state-of-the-art TTS systems leveraging LLMs are often multi-stage, requiring separate models (e.g., diffusion models after LLM), complicating the decision of whether to scale a particular model during training or testing. This work makes the following contributions: First, we explore the scaling of train-time and inference-time compute for speech synthesis. Second, we propose a simple framework Llasa for speech synthesis that employs a single-layer vector quantizer (VQ) codec and a single Transformer architecture to fully align with standard LLMs such as Llama. Our experiments reveal that scaling train-time compute for Llasa consistently improves the naturalness of synthesized speech and enables the generation of more complex and accurate prosody patterns. Furthermore, from the perspective of scaling inference-time compute, we employ speech understanding models as verifiers during the search, finding that scaling inference-time compute shifts the sampling modes toward the preferences of specific verifiers, thereby improving emotional expressiveness, timbre consistency, and content accuracy. In addition, we released the checkpoint and training code for our TTS model (1B, 3B, 8B) and codec model publicly available.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

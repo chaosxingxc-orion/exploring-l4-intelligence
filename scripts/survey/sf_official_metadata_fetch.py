@@ -83,6 +83,7 @@ def receipt(
         "access_class": policy["access_class"],
         "query_recall_credit": False,
         "source_version": parsed["source_version"],
+        "year_basis": parsed["year_basis"],
         "raw": raw,
         "normalized": {
             key: parsed[key] for key in ("title", "authors", "year", "stable_url")

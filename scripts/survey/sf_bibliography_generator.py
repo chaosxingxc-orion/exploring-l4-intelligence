@@ -18,6 +18,8 @@ LEGACY_BIBLIOGRAPHY_PATH = ROOT / "wiki/survey/2026-07-19-sf-bibliography-v1.md"
 RECEIPTS_PATH = ROOT / "wiki/survey/current/data/official-metadata-receipts-v1.jsonl"
 RAW_DIR = ROOT / "wiki/survey/current/data/official-metadata"
 OUTPUT_PATH = ROOT / "wiki/survey/current/bibliography.md"
+UNION_PATH = ROOT / "wiki/survey/current/data/existing-corpus-disposition-v1.json"
+SELECTION_PATH = ROOT / "wiki/survey/current/data/reviewer-bibliography-selection-v1.json"
 
 CANONICAL_ROLES = {
     "DEEPLY_READ",
@@ -69,6 +71,25 @@ REVIEWER_P2_POLICIES = {
     "2509.25845": ("BOUNDARY_COMPARATOR", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 294),
 }
 REVIEW_PATH = "wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md"
+REVIEW_2026_07_21_PATH = "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md"
+REVIEWER_2026_07_21_POLICIES = {
+    "2502.20379": ("KNOWN_QUEUE", "REWARD_AND_VERIFICATION_MECHANISMS", 201),
+    "2509.19676": ("KNOWN_QUEUE", "SYSTEM_FIRST_DIRECT_NEIGHBORS", 202),
+    "2510.23451": ("MEASUREMENT_INSTRUMENT", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 203),
+    "2606.19341": ("BOUNDARY_COMPARATOR", "SYSTEM_FIRST_DIRECT_NEIGHBORS", 204),
+    "2502.04128": ("BOUNDARY_COMPARATOR", "SYSTEM_FIRST_DIRECT_NEIGHBORS", 223),
+    "2602.22897": ("KNOWN_QUEUE", "SYSTEM_FIRST_DIRECT_NEIGHBORS", 229),
+    "2602.00846": ("MEASUREMENT_INSTRUMENT", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 230),
+    "2512.16899": ("MEASUREMENT_INSTRUMENT", "REWARD_AND_VERIFICATION_MECHANISMS", 231),
+}
+NEW_DIRECT_NEIGHBORS = {"2509.19676", "2606.19341", "2502.04128", "2602.22897"}
+VISIBLE_SELECTION_BASES = {
+    "LOAD_BEARING_OR_D2",
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT",
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+}
 
 
 def normalize_heading(line: str) -> str | None:
@@ -133,30 +154,67 @@ def legacy_bibliography_policies() -> dict[str, dict[str, Any]]:
             ),
             "load_bearing": role == "DEEPLY_READ",
             "access_class": "PROVENANCE_FETCH",
+            "selection_basis": sorted(
+                {
+                    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+                    *(
+                        ["LOAD_BEARING_OR_D2"]
+                        if role == "DEEPLY_READ"
+                        else []
+                    ),
+                    *(
+                        ["SPEECH_OMNI_MEASUREMENT_INSTRUMENT"]
+                        if role == "MEASUREMENT_INSTRUMENT"
+                        else []
+                    ),
+                }
+            ),
         }
     return policies
 
 
 def additional_policies() -> dict[str, dict[str, Any]]:
     policies = {}
-    for identity_id, (role, chain, line_number) in {
-        **DIRECT_NEIGHBOR_POLICIES,
-        **REVIEWER_P2_POLICIES,
-    }.items():
-        policies[identity_id] = {
-            "identity": {"kind": "arxiv", "id": identity_id},
-            "reference_role": role,
-            "chain": chain,
-            "direct_neighbor": identity_id in DIRECT_NEIGHBOR_POLICIES,
-            "source_locator": f"{REVIEW_PATH}:{line_number}",
-            "next_action": (
-                "Keep as a nonblocking P2 comparator; fetch/code in Stage-1B if prioritized."
-                if identity_id in REVIEWER_P2_POLICIES
-                else "Route as an existing direct neighbor; reach D2 only before supporting a load-bearing claim."
-            ),
-            "load_bearing": False,
-            "access_class": "REVIEW_CLAIM_VERIFICATION",
-        }
+    sources = (
+        ({**DIRECT_NEIGHBOR_POLICIES, **REVIEWER_P2_POLICIES}, REVIEW_PATH),
+        (REVIEWER_2026_07_21_POLICIES, REVIEW_2026_07_21_PATH),
+    )
+    for source_policies, source_path in sources:
+        for identity_id, (role, chain, line_number) in source_policies.items():
+            direct_neighbor = (
+                identity_id in DIRECT_NEIGHBOR_POLICIES
+                or identity_id in NEW_DIRECT_NEIGHBORS
+            )
+            policies[identity_id] = {
+                "identity": {"kind": "arxiv", "id": identity_id},
+                "reference_role": role,
+                "chain": chain,
+                "direct_neighbor": direct_neighbor,
+                "source_locator": f"{source_path}:{line_number}",
+                "next_action": (
+                    "Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing."
+                    if identity_id in REVIEWER_P2_POLICIES
+                    or identity_id in {"2602.22897", "2602.00846", "2512.16899"}
+                    else "Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim."
+                ),
+                "load_bearing": False,
+                "access_class": "REVIEW_CLAIM_VERIFICATION",
+                "selection_basis": sorted(
+                    {
+                        "P1_OR_REVIEWER_KNOWN_THREAT",
+                        *(
+                            ["DIRECT_SYSTEM_NEIGHBOR"]
+                            if direct_neighbor
+                            else []
+                        ),
+                        *(
+                            ["SPEECH_OMNI_MEASUREMENT_INSTRUMENT"]
+                            if role == "MEASUREMENT_INSTRUMENT"
+                            else []
+                        ),
+                    }
+                ),
+            }
     return policies
 
 
@@ -167,9 +225,16 @@ def all_policies() -> dict[str, dict[str, Any]]:
     if overlap:
         raise ValueError(f"additions duplicate retained bibliography identities: {sorted(overlap)}")
     policies.update(additions)
-    if len(policies) != 77:
-        raise ValueError(f"expected 77 bibliography policies, got {len(policies)}")
+    if len(policies) != 85:
+        raise ValueError(f"expected 85 bibliography policies, got {len(policies)}")
     return policies
+
+
+def initial_preprint_year(identity_id: str) -> int:
+    match = re.fullmatch(r"(\d{2})(\d{2})\.\d{4,5}", identity_id)
+    if not match:
+        raise ValueError(f"arXiv identity has no modern submission-year prefix: {identity_id}")
+    return 2000 + int(match.group(1))
 
 
 def collapse_space(value: str) -> str:
@@ -198,7 +263,8 @@ def parse_arxiv(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
         "identity": identity,
         "title": collapse_space(entry.findtext(f"{ATOM_NS}title", default="")),
         "authors": authors,
-        "year": int(published[:4]),
+        "year": initial_preprint_year(identity["id"]),
+        "year_basis": "initial_preprint",
         "stable_url": f"https://arxiv.org/abs/{identity['id']}",
         "source_version": version.group(1) if version and version.group(1) else "unversioned-entry-id",
     }
@@ -235,7 +301,8 @@ def parse_arxiv_oai(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
         "identity": identity,
         "title": collapse_space(metadata.findtext(f"{ARXIV_OAI_NS}title", default="")),
         "authors": authors,
-        "year": int(created[:4]),
+        "year": initial_preprint_year(identity["id"]),
+        "year_basis": "initial_preprint",
         "stable_url": f"https://arxiv.org/abs/{identity['id']}",
         "source_version": f"oai-datestamp:{datestamp}",
     }
@@ -320,6 +387,7 @@ def parse_acl(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
         "title": clean_bibtex_text(fields.get("title", "")),
         "authors": authors,
         "year": int(fields.get("year", "0")),
+        "year_basis": "formal_venue",
         "stable_url": fields.get("url", f"https://aclanthology.org/{identity['id']}/"),
         "source_version": citation_key,
     }
@@ -335,6 +403,7 @@ def parse_github(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
         "title": payload.get("name") or payload["full_name"],
         "authors": [payload.get("owner", {}).get("login") or identity["id"].split("/", 1)[0]],
         "year": int(created[:4]),
+        "year_basis": "current_version",
         "stable_url": payload.get("html_url", f"https://github.com/{identity['id']}"),
         "source_version": str(payload.get("id")),
     }
@@ -401,6 +470,8 @@ def validate_receipts(receipts: list[dict[str, Any]]) -> list[str]:
         for field in ("title", "authors", "year", "stable_url"):
             if normalized.get(field) != parsed.get(field):
                 failures.add("NORMALIZED_METADATA_MISMATCH")
+        if receipt.get("year_basis") != parsed.get("year_basis"):
+            failures.add("YEAR_BASIS_MISMATCH")
         if receipt.get("source_version") != parsed.get("source_version"):
             failures.add("SOURCE_VERSION_MISMATCH")
         if receipt.get("query_recall_credit") is not False:
@@ -452,8 +523,9 @@ def render_bibliography(receipts: list[dict[str, Any]]) -> str:
         groups[receipt["bibliography"]["chain"]].append(receipt)
     lines = [
         "---",
-        'artifact_id: "SF-REVIEWER-BIBLIOGRAPHY-V2-2026-07-20-01"',
+        'artifact_id: "SF-REVIEWER-BIBLIOGRAPHY-V3-2026-07-21-01"',
         'metadata_source: "wiki/survey/current/data/official-metadata-receipts-v1.jsonl"',
+        'selection_source: "wiki/survey/current/data/reviewer-bibliography-selection-v1.json"',
         'discipline: "official raw payload -> normalized receipt -> rendered row; known-ID accesses have zero query recall credit"',
         "---",
         "",
@@ -492,7 +564,10 @@ def render_bibliography(receipts: list[dict[str, Any]]) -> str:
                 + " | ".join(
                     [
                         citation,
-                        markdown_escape(f"{authors}, {normalized['year']}"),
+                        markdown_escape(
+                            f"{authors}, {normalized['year']} "
+                            f"[{receipt['year_basis']}]"
+                        ),
                         receipt["bibliography"]["reference_role"],
                         markdown_escape(receipt["bibliography"]["next_action"]),
                     ]
@@ -502,13 +577,115 @@ def render_bibliography(receipts: list[dict[str, Any]]) -> str:
         lines.append("")
     lines.extend(
         [
-            f"**Total: {len(receipts)} unique works (65 retained + 12 reviewer-directed additions).**",
+            f"**Total: {len(receipts)} unique works (65 retained + 20 reviewer-directed additions).**",
             "",
             "Exposure note: these are persisted known-ID metadata/provenance accesses, not systematic discovery queries; query recall credit is false for every receipt.",
             "",
         ]
     )
     return "\n".join(lines)
+
+
+def build_selection_receipt(
+    union: dict[str, Any], policies: dict[str, dict[str, Any]] | None = None
+) -> dict[str, Any]:
+    policies = policies or all_policies()
+    policy_ids = set(policies)
+    selected_ids = set()
+    dispositions = []
+    for node in union["canonical_work_nodes"]:
+        node_ids = set()
+        for identity in node.get("identities", []):
+            source_id = str(identity.get("source_id", "")).rstrip("/").casefold()
+            node_ids.add(source_id)
+            arxiv = ARXIV_RE.search(source_id)
+            acl = ACL_RE.search(source_id)
+            github = GITHUB_RE.search(source_id)
+            if arxiv:
+                node_ids.add(arxiv.group(1).casefold())
+            if acl:
+                node_ids.add(acl.group(1).rstrip("/").casefold())
+            if github:
+                node_ids.add(github.group(1).rstrip("/").casefold())
+        matches = sorted(
+            identity for identity in policy_ids if identity.casefold() in node_ids
+        )
+        if len(matches) > 1:
+            raise ValueError(
+                "union node maps to multiple bibliography policies: "
+                f"{node['canonical_work_id']} {matches}"
+            )
+        selected = bool(matches)
+        if selected:
+            selected_ids.add(matches[0])
+            selection_basis = policies[matches[0]]["selection_basis"]
+            reason_code = "SELECTED_" + selection_basis[0]
+        else:
+            selection_basis = []
+            decision = node.get("screening_decision")
+            role = node.get("reference_role")
+            if decision == "UNRESOLVED":
+                reason_code = "NOT_SELECTED_UNRESOLVED_IDENTITY"
+            elif decision == "EXCLUDE":
+                reason_code = "NOT_SELECTED_REC_0_EXCLUDED"
+            elif role == "KNOWN_QUEUE":
+                reason_code = "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+            elif role == "BOUNDARY_COMPARATOR":
+                reason_code = "NOT_SELECTED_NONPRIORITY_BOUNDARY_COMPARATOR"
+            elif role in {"DEEPLY_READ", "MEASUREMENT_INSTRUMENT"}:
+                raise ValueError(
+                    f"mandatory visible role omitted: {node['canonical_work_id']} {role}"
+                )
+            else:
+                reason_code = "NOT_SELECTED_OUTSIDE_VISIBLE_PREDICATE"
+        dispositions.append(
+            {
+                "canonical_work_id": node["canonical_work_id"],
+                "selected": selected,
+                "selected_identity": matches[0] if selected else None,
+                "selection_basis": selection_basis,
+                "reason_code": reason_code,
+            }
+        )
+    outside = sorted(policy_ids - selected_ids)
+    reason_counts: dict[str, int] = {}
+    for row in dispositions:
+        reason = row["reason_code"]
+        reason_counts[reason] = reason_counts.get(reason, 0) + 1
+    basis_counts = {
+        basis: sum(basis in row["selection_basis"] for row in dispositions)
+        for basis in sorted(VISIBLE_SELECTION_BASES)
+    }
+    return {
+        "artifact_id": "SF-REVIEWER-BIBLIOGRAPHY-SELECTION-V1-2026-07-21-01",
+        "schema": "one disposition per active union node plus explicit reviewer-directed overlay",
+        "union_artifact": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
+        "predicate": "select every load-bearing/D2 work, registered direct system neighbor, speech/omni measurement instrument, P1 or reviewer-known threat, and the frozen registered reviewer-bibliography carry-forward; separately list any exact known-ID policy not yet in the active union",
+        "scope_note": "This reviewer-orientation subset is not the Stage-1B evidence-map denominator and does not imply that unselected active-union or historical/archive works were screened out of the systematic map. Methods references are governed by mapping-methods-adaptation.md rather than mixed into the work union.",
+        "union_population": len(dispositions),
+        "selected_from_union": len(selected_ids),
+        "reviewer_directed_outside_union": len(outside),
+        "reviewer_visible_total": len(policies),
+        "union_reason_code_counts": dict(sorted(reason_counts.items())),
+        "selection_basis_counts": basis_counts,
+        "reviewer_directed_outside_union_ids": outside,
+        "union_dispositions": dispositions,
+    }
+
+
+def load_selection_receipt(path: Path = SELECTION_PATH) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_selection_receipt(
+    selection: dict[str, Any], path: Path = SELECTION_PATH
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(render_selection_bytes(selection))
+
+
+def render_selection_bytes(selection: dict[str, Any]) -> bytes:
+    return (json.dumps(selection, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
 
 
 def write_output(receipts: list[dict[str, Any]], output: Path = OUTPUT_PATH) -> None:
@@ -529,22 +706,43 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check", action="store_true")
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
+    parser.add_argument("--selection-output", type=Path, default=SELECTION_PATH)
     args = parser.parse_args(argv)
     output = args.output if args.output.is_absolute() else ROOT / args.output
+    selection_output = (
+        args.selection_output
+        if args.selection_output.is_absolute()
+        else ROOT / args.selection_output
+    )
     receipts = load_receipts()
     failures = validate_receipts(receipts)
     if failures:
         print(json.dumps({"verdict": "FAIL", "failure_codes": failures}, indent=2))
         return 1
+    union = json.loads(UNION_PATH.read_text(encoding="utf-8"))
+    selection = build_selection_receipt(union)
     if args.write:
         write_output(receipts, output)
+        write_selection_receipt(selection, selection_output)
         try:
             output_label = output.relative_to(ROOT).as_posix()
         except ValueError:
             output_label = str(output)
-        print(f"PASS wrote {output_label} with {len(receipts)} unique works")
+        try:
+            selection_label = selection_output.relative_to(ROOT).as_posix()
+        except ValueError:
+            selection_label = str(selection_output)
+        print(
+            f"PASS wrote {output_label} and {selection_label} "
+            f"with {len(receipts)} unique works"
+        )
         return 0
     drift = check_output(receipts, output)
+    if (
+        not selection_output.is_file()
+        or selection_output.read_bytes() != render_selection_bytes(selection)
+    ):
+        drift.append("BIBLIOGRAPHY_SELECTION_DRIFT")
     if drift:
         print(json.dumps({"verdict": "FAIL", "failure_codes": drift}, indent=2))
         return 1

@@ -25,11 +25,98 @@ class ReviewerProposalCheckTest(unittest.TestCase):
     def test_current_workbench_draft_is_complete_and_honest(self):
         self.assertEqual([], checker.validate_draft(self.proposal, self.inputs))
 
+    def test_rqs_separate_mapping_products_from_later_empirical_tests(self):
+        required = (
+            "answering_stage",
+            "Stage-1B evidence product",
+            "later empirical test",
+            "falsifier",
+            "Stage-1B eligible inputs",
+            "Stage-1C owns the final 3–5 candidate cards",
+        )
+        for token in required:
+            with self.subTest(token=token):
+                self.assertIn(token, self.proposal)
+
+    def test_proposal_discloses_exact_negative_inventory_reconciliation(self):
+        for token in (
+            "exactly 3/22 implementer concerns",
+            "19 个 proof rows、0 个 reviewer rows",
+            "22 = 3 + 19",
+            "negative-evidence-semantic-corrections-v1.json",
+        ):
+            self.assertIn(token, self.proposal)
+
+    def test_methods_and_speech_omni_codebooks_are_current_inputs(self):
+        methods = checker.MAPPING_METHODS_PATH.read_text(encoding="utf-8")
+        modality = checker.MODALITY_CODEBOOK_PATH.read_text(encoding="utf-8")
+        for token in (
+            "Petersen",
+            "Wohlin",
+            "PRISMA 2020",
+            "PRESS 2015",
+            "adopted element",
+            "deviation/rationale",
+        ):
+            self.assertIn(token, methods)
+        for token in (
+            "modality topology",
+            "temporal regime",
+            "observation granularity",
+            "acoustic evidence provenance",
+            "latency/action timing",
+            "output/action modality",
+            "state persistence",
+            "UNKNOWN",
+            "NOT_APPLICABLE",
+            "dual disagreement",
+        ):
+            self.assertIn(token, modality)
+
+    def test_bibliography_scope_selection_and_year_policy_are_explicit(self):
+        for token in (
+            "seven registered active corpora",
+            "reviewer-bibliography-selection-v1.json",
+            "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE",
+            "initial_preprint",
+            "formal_venue",
+            "current_version",
+            "Llasa",
+            "OmniGAIA",
+            "Omni-RRM",
+            "Multimodal RewardBench 2",
+        ):
+            self.assertIn(token, self.proposal)
+
     def test_release_fails_until_independent_review_and_v7_exist(self):
         failures = checker.validate_release(self.proposal, self.inputs)
         self.assertIn("ABSENCE_REVIEW_PENDING", failures)
+        self.assertIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
         self.assertIn("EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING", failures)
-        self.assertIn("PROPOSAL_NOT_PROMOTED_TO_ROUND15", failures)
+        self.assertIn("PROPOSAL_NOT_PROMOTED_TO_ROUND16", failures)
+
+    def test_release_requires_19_active_plus_3_correction_reviews(self):
+        mutated_inputs = copy.deepcopy(self.inputs)
+        absence = mutated_inputs["absence"]
+        absence["status"] = "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
+        absence["rows"] = [
+            {
+                "adjudication_row_id": row["adjudication_row_id"],
+                "verdict": "AGREE",
+            }
+            for row in absence["proof_rows"]
+        ]
+        corrections = mutated_inputs["corrections"]
+        corrections["review_rows"] = [
+            {
+                "retired_adjudication_row_id": row["retired_adjudication_row_id"],
+                "verdict": "AGREE",
+            }
+            for row in corrections["corrections"]
+        ]
+        failures = checker.validate_release(self.proposal, mutated_inputs)
+        self.assertNotIn("ABSENCE_REVIEW_PENDING", failures)
+        self.assertNotIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
 
     def test_missing_track_response_schema_or_falsifier_fails(self):
         for token, code in (
@@ -81,9 +168,9 @@ class ReviewerProposalCheckTest(unittest.TestCase):
 
     def test_union_and_bibliography_numbers_are_derived(self):
         for old, code in (
-            ("479 个物理 source rows", "UNION_NUMERIC_DRIFT"),
-            ("241 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
-            ("77 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
+            ("483 个物理 source rows", "UNION_NUMERIC_DRIFT"),
+            ("245 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
+            ("85 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
         ):
             with self.subTest(old=old):
                 mutated = self.proposal.replace(old, old.replace(old.split()[0], "999"), 1)

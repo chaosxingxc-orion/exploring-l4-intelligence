@@ -2,7 +2,7 @@
   "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-CHECK-2026-07-20-01",
   "checked_artifact": {
     "path": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
-    "sha256": "0a5ed20b181f9dbd317e9db32bf2fa3a506e92750c9acec558824021dd16f110"
+    "sha256": "8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866"
   },
   "deduplication_accounting": {
     "census_source_rows": 95,
@@ -20,7 +20,7 @@
   },
   "failure_codes": [],
   "identity_accounting": {
-    "all_arxiv_identity_count": 207,
+    "all_arxiv_identity_count": 211,
     "all_arxiv_identity_work_ids": [
       "CW-ARXIV-1610.02424",
       "CW-ARXIV-1805.04604",
@@ -106,6 +106,7 @@
       "CW-ARXIV-2501.07246",
       "CW-ARXIV-2501.12895",
       "CW-ARXIV-2502.01839",
+      "CW-ARXIV-2502.04128",
       "CW-ARXIV-2502.06884",
       "CW-ARXIV-2502.11027",
       "CW-ARXIV-2502.14727",
@@ -152,12 +153,14 @@
       "CW-ARXIV-2512.10170",
       "CW-ARXIV-2512.10403",
       "CW-ARXIV-2512.11109",
+      "CW-ARXIV-2512.16899",
       "CW-ARXIV-2512.19433",
       "CW-ARXIV-2512.21828",
       "CW-ARXIV-2601.04029",
       "CW-ARXIV-2601.09667",
       "CW-ARXIV-2601.18510",
       "CW-ARXIV-2601.22129",
+      "CW-ARXIV-2602.00846",
       "CW-ARXIV-2602.01983",
       "CW-ARXIV-2602.03094",
       "CW-ARXIV-2602.03873",
@@ -170,6 +173,7 @@
       "CW-ARXIV-2602.16485",
       "CW-ARXIV-2602.18998",
       "CW-ARXIV-2602.21497",
+      "CW-ARXIV-2602.22897",
       "CW-ARXIV-2602.23306",
       "CW-ARXIV-2603.05231",
       "CW-ARXIV-2603.09714",
@@ -275,12 +279,12 @@
     "census": 95,
     "claim": 62,
     "fulltext": 129,
-    "reviewer_known": 6,
+    "reviewer_known": 10,
     "seed": 92,
     "version_pin": 30
   },
   "summary": {
-    "canonical_work_nodes": 241,
+    "canonical_work_nodes": 245,
     "claim_edges": 62,
     "load_bearing_unresolved": 0,
     "multi_claim_work_count": 16,
@@ -288,7 +292,7 @@
     "multi_evidence_grade_work_count": 15,
     "multi_target_claim_edges": 5,
     "source_metadata_rows": 2,
-    "source_rows": 479,
+    "source_rows": 483,
     "unexplained_orphans": 0,
     "unresolved_records": 1
   },

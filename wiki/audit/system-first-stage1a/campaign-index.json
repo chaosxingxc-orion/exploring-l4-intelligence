@@ -445,6 +445,27 @@
           "type": "review"
         }
       ]
+    },
+    {
+      "round": 15,
+      "verdict": "WITHHOLD_STAGE1B",
+      "disposition": "HISTORICAL_COLD",
+      "supersession": {
+        "mode": "current-carrier",
+        "target": "wiki/survey/current/status.md",
+        "target_current_carrier": "wiki/survey/current/status.md",
+        "target_current_carrier_section": "Current Survey Status",
+        "transfer_rule": "same-carrier-section"
+      },
+      "current_carrier": "wiki/survey/current/status.md",
+      "current_carrier_section": "Current Survey Status",
+      "artifacts": [
+        {
+          "path": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+          "git_blob": "d7901f85c7804bd2176aa76a0ea05bc2d79729c2",
+          "type": "review"
+        }
+      ]
     }
   ]
 }

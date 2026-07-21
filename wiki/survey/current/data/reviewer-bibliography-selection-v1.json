@@ -1,0 +1,1957 @@
+{
+ "artifact_id": "SF-REVIEWER-BIBLIOGRAPHY-SELECTION-V1-2026-07-21-01",
+ "schema": "one disposition per active union node plus explicit reviewer-directed overlay",
+ "union_artifact": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
+ "predicate": "select every load-bearing/D2 work, registered direct system neighbor, speech/omni measurement instrument, P1 or reviewer-known threat, and the frozen registered reviewer-bibliography carry-forward; separately list any exact known-ID policy not yet in the active union",
+ "scope_note": "This reviewer-orientation subset is not the Stage-1B evidence-map denominator and does not imply that unselected active-union or historical/archive works were screened out of the systematic map. Methods references are governed by mapping-methods-adaptation.md rather than mixed into the work union.",
+ "union_population": 245,
+ "selected_from_union": 85,
+ "reviewer_directed_outside_union": 0,
+ "reviewer_visible_total": 85,
+ "union_reason_code_counts": {
+  "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE": 159,
+  "NOT_SELECTED_UNRESOLVED_IDENTITY": 1,
+  "SELECTED_DIRECT_SYSTEM_NEIGHBOR": 13,
+  "SELECTED_LOAD_BEARING_OR_D2": 15,
+  "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT": 7,
+  "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 50
+ },
+ "selection_basis_counts": {
+  "DIRECT_SYSTEM_NEIGHBOR": 13,
+  "LOAD_BEARING_OR_D2": 15,
+  "P1_OR_REVIEWER_KNOWN_THREAT": 20,
+  "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 65,
+  "SPEECH_OMNI_MEASUREMENT_INSTRUMENT": 15
+ },
+ "reviewer_directed_outside_union_ids": [],
+ "union_dispositions": [
+  {
+   "canonical_work_id": "CW-ACL-2020.ACL-MAIN.503",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2020.COLING-INDUSTRY.11",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2025.EMNLP-INDUSTRY.75",
+   "selected": true,
+   "selected_identity": "2025.emnlp-industry.75",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2025.EMNLP-MAIN.931",
+   "selected": true,
+   "selected_identity": "2025.emnlp-main.931",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2025.NLLP-1.15",
+   "selected": true,
+   "selected_identity": "2025.nllp-1.15",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.ACL-LONG.211",
+   "selected": true,
+   "selected_identity": "2026.acl-long.211",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.ACL-LONG.288",
+   "selected": true,
+   "selected_identity": "2026.acl-long.288",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.ACL-LONG.6",
+   "selected": true,
+   "selected_identity": "2026.acl-long.6",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.ACL-LONG.697",
+   "selected": true,
+   "selected_identity": "2026.acl-long.697",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.EACL-SHORT.50",
+   "selected": true,
+   "selected_identity": "2026.eacl-short.50",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.1156",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.1156",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.1243",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.1243",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.1724",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.1724",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.21",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.21",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.419",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.419",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.511",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.511",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.651",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.651",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-ACL.95",
+   "selected": true,
+   "selected_identity": "2026.findings-acl.95",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ACL-2026.FINDINGS-EACL.153",
+   "selected": true,
+   "selected_identity": "2026.findings-eacl.153",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-1610.02424",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-1805.04604",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2001.05284",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2109.12451",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2110.14168",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2111.09388",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2203.11171",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2204.00598",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2205.00978",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2210.03629",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2210.10668",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2210.10760",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.08128",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.11366",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.11381",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.16857",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.17580",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2303.17651",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2304.09842",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2304.12995",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.09860",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.10601",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.11738",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.14992",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.16291",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2305.20050",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2306.08129",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2306.10193",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2306.12577",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2307.09254",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2308.08155",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2308.10144",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.03409",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.05950",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.07124",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.15649",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.15701",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2309.17352",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2310.01798",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2310.03714",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2310.04406",
+   "selected": true,
+   "selected_identity": "2310.04406",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2310.16427",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2311.04155",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.01694",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.01828",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.08115",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.10978",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.11359",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2402.16823",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2403.03868",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2403.08978",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2403.18973",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2405.13009",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2405.16334",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2406.07496",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2406.09403",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2406.12045",
+   "selected": true,
+   "selected_identity": "2406.12045",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.01143",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.01476",
+   "selected": true,
+   "selected_identity": "2407.01476",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.01502",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.09886",
+   "selected": true,
+   "selected_identity": "2407.09886",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.21414",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2407.21787",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2408.03314",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2408.08435",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2408.15240",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.00217",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.01160",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.01201",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.07429",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.08597",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.09554",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2409.16654",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2410.08164",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2410.09503",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2410.10762",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2410.13825",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2410.21485",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2411.00321",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2411.03524",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2411.04468",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2501.07246",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2501.12895",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.01839",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.04128",
+   "selected": true,
+   "selected_identity": "2502.04128",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.06884",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.11027",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.14727",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2502.20379",
+   "selected": true,
+   "selected_identity": "2502.20379",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2503.12434",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2503.22712",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2503.23395",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2504.01931",
+   "selected": true,
+   "selected_identity": "2504.01931",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2504.16084",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2505.09558",
+   "selected": true,
+   "selected_identity": "2505.09558",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2505.18079",
+   "selected": true,
+   "selected_identity": "2505.18079",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2505.19179",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2506.05984",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2506.07976",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2506.12928",
+   "selected": true,
+   "selected_identity": "2506.12928",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2506.17828",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2506.19248",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2507.12705",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2507.19457",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2508.01186",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2508.10016",
+   "selected": true,
+   "selected_identity": "2508.10016",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2508.16665",
+   "selected": true,
+   "selected_identity": "2508.16665",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2508.21787",
+   "selected": true,
+   "selected_identity": "2508.21787",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.14749",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.19567",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.19676",
+   "selected": true,
+   "selected_identity": "2509.19676",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.25495",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.25604",
+   "selected": true,
+   "selected_identity": "2509.25604",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2509.25845",
+   "selected": true,
+   "selected_identity": "2509.25845",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.01123",
+   "selected": true,
+   "selected_identity": "2510.01123",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.02611",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.02995",
+   "selected": true,
+   "selected_identity": "2510.02995",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.04618",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.05478",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.07978",
+   "selected": true,
+   "selected_identity": "2510.07978",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.08191",
+   "selected": true,
+   "selected_identity": "2510.08191",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.08870",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.14900",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.18982",
+   "selected": true,
+   "selected_identity": "2510.18982",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.19471",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2510.23451",
+   "selected": true,
+   "selected_identity": "2510.23451",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2511.02834",
+   "selected": true,
+   "selected_identity": "2511.02834",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.03438",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.10170",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.10403",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.11109",
+   "selected": true,
+   "selected_identity": "2512.11109",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.16899",
+   "selected": true,
+   "selected_identity": "2512.16899",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.19433",
+   "selected": true,
+   "selected_identity": "2512.19433",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2512.21828",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2601.04029",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2601.09667",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2601.18510",
+   "selected": true,
+   "selected_identity": "2601.18510",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2601.22129",
+   "selected": true,
+   "selected_identity": "2601.22129",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.00846",
+   "selected": true,
+   "selected_identity": "2602.00846",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.01983",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.03094",
+   "selected": true,
+   "selected_identity": "2602.03094",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.03873",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.05570",
+   "selected": true,
+   "selected_identity": "2602.05570",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.12276",
+   "selected": true,
+   "selected_identity": "2602.12276",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.12281",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.13263",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.13685",
+   "selected": true,
+   "selected_identity": "2602.13685",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.13891",
+   "selected": true,
+   "selected_identity": "2602.13891",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.16485",
+   "selected": true,
+   "selected_identity": "2602.16485",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.18998",
+   "selected": true,
+   "selected_identity": "2602.18998",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.21497",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.22897",
+   "selected": true,
+   "selected_identity": "2602.22897",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2602.23306",
+   "selected": true,
+   "selected_identity": "2602.23306",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.05231",
+   "selected": true,
+   "selected_identity": "2603.05231",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.09714",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.12310",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.12520",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.13686",
+   "selected": true,
+   "selected_identity": "2603.13686",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.14889",
+   "selected": true,
+   "selected_identity": "2603.14889",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.19615",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.24257",
+   "selected": true,
+   "selected_identity": "2603.24257",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2603.27706",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.04847",
+   "selected": true,
+   "selected_identity": "2604.04847",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.13552",
+   "selected": true,
+   "selected_identity": "2604.13552",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.15710",
+   "selected": true,
+   "selected_identity": "2604.15710",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.16453",
+   "selected": true,
+   "selected_identity": "2604.16453",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.16456",
+   "selected": true,
+   "selected_identity": "2604.16456",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.16529",
+   "selected": true,
+   "selected_identity": "2604.16529",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.18245",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.22821",
+   "selected": true,
+   "selected_identity": "2604.22821",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.24278",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.25591",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2604.27233",
+   "selected": true,
+   "selected_identity": "2604.27233",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.00663",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.08083",
+   "selected": true,
+   "selected_identity": "2605.08083",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.11374",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.12620",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.12953",
+   "selected": true,
+   "selected_identity": "2605.12953",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.12978",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.14477",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.15104",
+   "selected": true,
+   "selected_identity": "2605.15104",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.27366",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.28020",
+   "selected": true,
+   "selected_identity": "2605.28020",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.28480",
+   "selected": true,
+   "selected_identity": "2605.28480",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.29682",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.00660",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.01631",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.01667",
+   "selected": true,
+   "selected_identity": "2606.01667",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.03054",
+   "selected": true,
+   "selected_identity": "2606.03054",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.04680",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.04730",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.05296",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.08231",
+   "selected": true,
+   "selected_identity": "2606.08231",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.08702",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.08748",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.11167",
+   "selected": true,
+   "selected_identity": "2606.11167",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.13598",
+   "selected": true,
+   "selected_identity": "2606.13598",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.15141",
+   "selected": true,
+   "selected_identity": "2606.15141",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.19341",
+   "selected": true,
+   "selected_identity": "2606.19341",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.23306",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.23327",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.24648",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.28864",
+   "selected": true,
+   "selected_identity": "2606.28864",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2606.29947",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.05391",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.06873",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.07148",
+   "selected": true,
+   "selected_identity": "2607.07148",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.08497",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.09438",
+   "selected": true,
+   "selected_identity": "2607.09438",
+   "selection_basis": [
+    "LOAD_BEARING_OR_D2",
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_LOAD_BEARING_OR_D2"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.09693",
+   "selected": true,
+   "selected_identity": "2607.09693",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2607.11433",
+   "selected": true,
+   "selected_identity": "2607.11433",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-BIB-tau2-bench-voice-arXiv",
+   "selected": true,
+   "selected_identity": "sierra-research/tau2-bench",
+   "selection_basis": [
+    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-SEED-doi-10.1007-11871842-29",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-SEED-doi-10.1016-0004-3702-91-90015-C",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-SEED-doi-10.1016-S0004-3702-98-00023-X",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-SEED-doi-10.1016-S0004-3702-99-00052-1",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0001",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0002",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0007",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0010",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0014",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_UNRESOLVED_IDENTITY"
+  },
+  {
+   "canonical_work_id": "CW-W-0015",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0016",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0017",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0055",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  },
+  {
+   "canonical_work_id": "CW-W-0063",
+   "selected": false,
+   "selected_identity": null,
+   "selection_basis": [],
+   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+  }
+ ]
+}

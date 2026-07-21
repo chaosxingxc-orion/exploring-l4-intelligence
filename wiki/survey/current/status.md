@@ -1,11 +1,12 @@
 # Current Survey Status
 
-- Gate: **Stage-1A**; formal doctoral verdict, independent reviewer sign-off, and owner authorization remain pending.
-- Execution: **zero Stage-1B executions in this repair**; query/model/smoke = 0; inherited exposure unchanged.
-- Evidence: schema-v3 v6 is **14/14 PASS** at `docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json`; protocol-v2 remains byte-equivalent to the frozen query set.
-- Verified technical baseline: `2225c48` binds only the passing integrated package gate and native `wiki-sync` dry-run; it does not close review.
-- Publication incident: a malformed wrapper entered publish path, created `.wiki-tmp` local commit `4506900`, and attempted push; push exited nonzero, successful read-only verification found remote master unchanged, root cause is fixed, and the later native dry-run performed no commit/push.
-- Package status: final adversarial review remains pending; verification before completion remains pending; the package is not yet eligible for formal independent Stage-1A re-review.
-- Active review transaction: `wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md`; older rounds are cold-routed by `wiki/audit/system-first-stage1a/INDEX.md`.
-- Current blockers: those two local reviews, then formal doctoral verdict, independent reviewer sign-off, and explicit owner Stage-1B execution authorization.
-- Next action: complete the two pending reviews; only then submit for formal independent Stage-1A re-review. Stage-1B remains unstarted and unauthorized.
+- Gate: **Stage-1A final remediation**; Stage-1B remains unstarted and unauthorized.
+- Execution in this repair: systematic discovery query = 0; research model/smoke = 0; dataset metric/prototype = 0; inherited exposure remains nonzero.
+- GM-1: **PASS** for the seven registered active corpora only — 483 source rows route exactly once to 245 canonical work nodes; archive-wide completeness is not claimed.
+- GM-2: three contradicted/unsupported negatives are corrected and retired (`22 = 3 + 19`); independent decisions remain **0/3 correction confirmations + 0/19 active absence reviews**.
+- GM-3: v7 runner/DAG and fail-closed tests exist, but formal NT/POSIX leaves and aggregate are withheld until all 22 independent decisions close.
+- GM-4: **PASS** — 85 official-receipt works rebuild offline; the 245-node visibility disposition and `year_basis` policy are explicit.
+- Mapping design: mapping/empirical RQs, Stage-1B/1C ownership, systematic-mapping methods adaptation, and seven-field speech/omni codebook are current.
+- Integrity: no fabrication/falsification/plagiarism evidence was found; the detected biased-coding and selective-bibliography risks have been corrected without manufacturing reviewer rows.
+- Remaining release blockers: independent `3/3 + 19/19` review, fresh v7 dual-platform evidence, exact proposal source manifest/package report, formal immutable round-16 review/signoff, then explicit owner authorization.
+- Next action: obtain the independent 22 decisions against the frozen local fulltext packet. Any `DISAGREE` returns to correction before v7 generation.

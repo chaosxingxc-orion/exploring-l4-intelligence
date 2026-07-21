@@ -5329,6 +5329,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2502.04128",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows no speech-verifier-inference-time-search relationship within the protocol boundary.",
+        "load_bearing": false,
+        "next_action": "Stage-1B P1 fetch and code as a speech/system boundary neighbor; reach D2 before any load-bearing use.",
+        "query_recall_credit": false,
+        "reason": "Independent-reviewer-known speech synthesis work spanning inference-time search and speech-understanding verification; not a frozen-query hit.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-007",
+          "relation": "EXACT_ID",
+          "source_id": "2502.04128"
+        },
+        {
+          "provenance": "reviewer_known:RK-007",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Llasa: Scaling Train-Time and Inference-Time Compute for Llama-based Speech Synthesis"
+        }
+      ],
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-007",
+          "role": "BOUNDARY_COMPARATOR"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-007"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2502.06884",
       "claim_evidence": [],
       "current_disposition": {
@@ -8960,6 +9000,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2512.16899",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows no useful evidence about multimodal reward-model measurement validity or judge failure.",
+        "load_bearing": false,
+        "next_action": "Carry forward as a nonblocking Stage-1B measurement instrument for RQ-VERIFY-MAP and RQ-BOUND.",
+        "query_recall_credit": false,
+        "reason": "Independent-reviewer-known multimodal reward benchmark; measurement evidence only, not a frozen-query hit.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-010",
+          "relation": "EXACT_ID",
+          "source_id": "2512.16899"
+        },
+        {
+          "provenance": "reviewer_known:RK-010",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Multimodal RewardBench 2: A Benchmark for Multimodal Reward Models"
+        }
+      ],
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-010",
+          "role": "MEASUREMENT_INSTRUMENT"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-010"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2512.19433",
       "claim_evidence": [],
       "current_disposition": {
@@ -9483,6 +9563,46 @@
         {
           "campaign": "bibliography",
           "source_row_id": "line:0062|2601.22129"
+        }
+      ],
+      "version_pins": []
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2602.00846",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows it cannot inform the trained omni reward-model measurement boundary.",
+        "load_bearing": false,
+        "next_action": "Carry forward as a nonblocking Stage-1B measurement instrument; reach D2 only before load-bearing use.",
+        "query_recall_credit": false,
+        "reason": "Independent-reviewer-known trained omni reward-model work; a boundary/measurement item, not query recall.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-009",
+          "relation": "EXACT_ID",
+          "source_id": "2602.00846"
+        },
+        {
+          "provenance": "reviewer_known:RK-009",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Omni-RRM: Towards a Generalist Omni Reward Model"
+        }
+      ],
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-009",
+          "role": "MEASUREMENT_INSTRUMENT"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-009"
         }
       ],
       "version_pins": []
@@ -10296,6 +10416,46 @@
         {
           "campaign": "fulltext",
           "source_row_id": "line:0038|2602.21497|eprint"
+        }
+      ],
+      "version_pins": []
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2602.22897",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Full-text coding shows no native omni-modal agent or benchmark relationship relevant to the mapping topology.",
+        "load_bearing": false,
+        "next_action": "Carry forward into the nonblocking Stage-1B first-batch queue and deduplicate by arXiv identity.",
+        "query_recall_credit": false,
+        "reason": "Independent-reviewer-known native omni-modal agent benchmark/system neighbor previously present only in historical archive.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-008",
+          "relation": "EXACT_ID",
+          "source_id": "2602.22897"
+        },
+        {
+          "provenance": "reviewer_known:RK-008",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "OmniGAIA: Towards Native Omni-Modal AI Agents"
+        }
+      ],
+      "reference_role": "KNOWN_QUEUE",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-008",
+          "role": "KNOWN_QUEUE"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-008"
         }
       ],
       "version_pins": []
@@ -15605,7 +15765,7 @@
     "unique_seed_works": 92
   },
   "identity_accounting": {
-    "all_arxiv_identity_count": 207,
+    "all_arxiv_identity_count": 211,
     "all_arxiv_identity_work_ids": [
       "CW-ARXIV-1610.02424",
       "CW-ARXIV-1805.04604",
@@ -15691,6 +15851,7 @@
       "CW-ARXIV-2501.07246",
       "CW-ARXIV-2501.12895",
       "CW-ARXIV-2502.01839",
+      "CW-ARXIV-2502.04128",
       "CW-ARXIV-2502.06884",
       "CW-ARXIV-2502.11027",
       "CW-ARXIV-2502.14727",
@@ -15737,12 +15898,14 @@
       "CW-ARXIV-2512.10170",
       "CW-ARXIV-2512.10403",
       "CW-ARXIV-2512.11109",
+      "CW-ARXIV-2512.16899",
       "CW-ARXIV-2512.19433",
       "CW-ARXIV-2512.21828",
       "CW-ARXIV-2601.04029",
       "CW-ARXIV-2601.09667",
       "CW-ARXIV-2601.18510",
       "CW-ARXIV-2601.22129",
+      "CW-ARXIV-2602.00846",
       "CW-ARXIV-2602.01983",
       "CW-ARXIV-2602.03094",
       "CW-ARXIV-2602.03873",
@@ -15755,6 +15918,7 @@
       "CW-ARXIV-2602.16485",
       "CW-ARXIV-2602.18998",
       "CW-ARXIV-2602.21497",
+      "CW-ARXIV-2602.22897",
       "CW-ARXIV-2602.23306",
       "CW-ARXIV-2603.05231",
       "CW-ARXIV-2603.09714",
@@ -15861,7 +16025,7 @@
     "census": 95,
     "claim": 62,
     "fulltext": 129,
-    "reviewer_known": 6,
+    "reviewer_known": 10,
     "seed": 92,
     "version_pin": 30
   },
@@ -19002,6 +19166,30 @@
       "canonical_work_id": "CW-ARXIV-2509.25845",
       "destination_type": "CANONICAL_WORK",
       "source_row_id": "RK-006"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2502.04128",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-007"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2602.22897",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-008"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2602.00846",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-009"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2512.16899",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-010"
     }
   ],
   "source_receipts": [
@@ -19042,14 +19230,14 @@
       "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56"
     },
     {
-      "bytes": 5536,
-      "git_blob": "e31c8e2541ea995d88ea0696d3c935e3db3ae411",
+      "bytes": 9218,
+      "git_blob": "2ca7c917aab1aff4bb84417276b94b54d7033f42",
       "path": "wiki/survey/current/data/reviewer-known-items-v2.json",
-      "sha256": "0e8eb3355cc2c88da3e35f85f983cbfdbd5de6f9f87d4b444b9445e08e4c8786"
+      "sha256": "c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2"
     }
   ],
   "summary": {
-    "canonical_work_nodes": 241,
+    "canonical_work_nodes": 245,
     "claim_edges": 62,
     "load_bearing_unresolved": 0,
     "multi_claim_work_count": 16,
@@ -19057,7 +19245,7 @@
     "multi_evidence_grade_work_count": 15,
     "multi_target_claim_edges": 5,
     "source_metadata_rows": 2,
-    "source_rows": 479,
+    "source_rows": 483,
     "unexplained_orphans": 0,
     "unresolved_records": 1
   },
