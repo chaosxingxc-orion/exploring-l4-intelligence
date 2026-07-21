@@ -24,8 +24,8 @@ EXPECTED_DENOMINATORS = {
     "bibliography": 65,
     "claim": 62,
     "version_pin": 30,
-    "fulltext": 135,
-    "reviewer_known": 15,
+    "fulltext": 145,
+    "reviewer_known": 19,
 }
 
 
@@ -286,7 +286,7 @@ class ExistingCorpusDispositionTest(unittest.TestCase):
 
     def test_reviewer_known_artifact_is_frozen_and_has_no_query_recall_credit(self):
         artifact = json.loads(disposition.REVIEWER_KNOWN_PATH.read_text(encoding="utf-8"))
-        self.assertEqual(15, len(artifact["items"]))
+        self.assertEqual(19, len(artifact["items"]))
         self.assertEqual("REVIEW_CLAIM_VERIFICATION", artifact["access_class"])
         self.assertFalse(artifact["query_recall_credit"])
         self.assertEqual(
@@ -304,6 +304,10 @@ class ExistingCorpusDispositionTest(unittest.TestCase):
         self.assertEqual(
             disposition.ROUND16_PRECHECK_SOURCE_SHA256,
             artifact["round16_precheck_source_provenance"]["sha256"],
+        )
+        self.assertEqual(
+            disposition.ROUND17_WORKING_BRIEF_SOURCE_SHA256,
+            artifact["round17_working_brief_source_provenance"]["sha256"],
         )
         by_id = {item["arxiv_id"]: item for item in artifact["items"]}
         self.assertEqual(
@@ -328,6 +332,27 @@ class ExistingCorpusDispositionTest(unittest.TestCase):
                 "2606.00579", "2606.03183", "2502.19328", "2605.10344", "2508.00890"
             })
         )
+        self.assertEqual(
+            {"2607.11433", "2605.28192", "2607.05511", "2605.22012"},
+            {identity for identity in by_id if identity in {
+                "2607.11433", "2605.28192", "2607.05511", "2605.22012"
+            }},
+        )
+
+    def test_round17_core_priors_are_unique_and_rerouted(self):
+        by_identity = {
+            identity["source_id"]: node
+            for node in self.artifact["canonical_work_nodes"]
+            for identity in node["identities"]
+            if identity["source_id"] in {
+                "2607.11433", "2605.28192", "2607.05511", "2605.22012"
+            }
+        }
+        self.assertEqual(4, len(by_identity))
+        self.assertEqual("DEEPLY_READ", by_identity["2607.11433"]["reference_role"])
+        self.assertEqual("DEEPLY_READ", by_identity["2605.28192"]["reference_role"])
+        self.assertEqual("BOUNDARY_COMPARATOR", by_identity["2607.05511"]["reference_role"])
+        self.assertEqual("BOUNDARY_COMPARATOR", by_identity["2605.22012"]["reference_role"])
 
     def test_build_is_deterministic_and_never_loads_query_or_attempt_registries(self):
         self.assertEqual(self.artifact, disposition.build_union(self.sources))

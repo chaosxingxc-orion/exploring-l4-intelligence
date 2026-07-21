@@ -1,5 +1,5 @@
 {
-  "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-V1-2026-07-20-01",
+  "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-V2-2026-07-21-01",
   "canonical_reference_roles": [
     "BOUNDARY_COMPARATOR",
     "DEEPLY_READ",
@@ -12447,6 +12447,98 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2605.22012",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Fulltext shows no trained latent-state or feature-supervision dependency.",
+        "load_bearing": false,
+        "next_action": "Keep in the nonblocking Stage-1B boundary queue; do not require D2 for opening.",
+        "query_recall_credit": false,
+        "reason": "P2 trained/white-box boundary comparator using feature-level supervision and supervised latent-reasoning trajectories.",
+        "reason_code": null
+      },
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "4cac09b2f7d06796a2d397fbfb903b583e8da7e1c89da6e70be6e9297f9da033",
+          "source_row_id": "line:0142|2605.22012|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "cecc35f9f078a79805f62a06e055ad026acd9ad55dd3e40cf94e017b659e7a6a",
+          "source_row_id": "line:0144|2605.22012|eprint"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "cecc35f9f078a79805f62a06e055ad026acd9ad55dd3e40cf94e017b659e7a6a",
+          "source_row_id": "line:0145|2605.22012|eprint"
+        }
+      ],
+      "identities": [
+        {
+          "provenance": "fulltext:line:0142|2605.22012|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2605.22012"
+        },
+        {
+          "provenance": "fulltext:line:0144|2605.22012|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2605.22012"
+        },
+        {
+          "provenance": "fulltext:line:0145|2605.22012|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2605.22012"
+        },
+        {
+          "provenance": "reviewer_known:RK-019",
+          "relation": "EXACT_ID",
+          "source_id": "2605.22012"
+        },
+        {
+          "provenance": "reviewer_known:RK-019",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "LatentOmni: Rethinking Omni-Modal Understanding via Unified Audio-Visual Latent Reasoning"
+        }
+      ],
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-019",
+          "role": "BOUNDARY_COMPARATOR"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0142|2605.22012|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0144|2605.22012|eprint"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0145|2605.22012|eprint"
+        },
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-019"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2605.27366",
       "claim_evidence": [],
       "current_disposition": {
@@ -12515,6 +12607,81 @@
         {
           "campaign": "bibliography",
           "source_row_id": "line:0049|2605.28020"
+        }
+      ],
+      "version_pins": []
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2605.28192",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Hash-bound fulltext contradicts the no-additional-training active omni-perception path.",
+        "load_bearing": true,
+        "next_action": "Bind D2 routing evidence and map method-path proximity in Stage-1B; do not make a Stage-1A novelty judgment.",
+        "query_recall_credit": false,
+        "reason": "Reviewer-known direct training-free omni-agent threat with hierarchical memory and an observe-reflect-replan loop.",
+        "reason_code": null
+      },
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "bc09e0b8df4fe0e81dced64c71491ab5e1e748346ffc6d8f6b1a04659b85b9e3",
+          "source_row_id": "line:0138|2605.28192|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "9bb03eee1129f0330ef0c2457966ae899a55d7772ae346fc2653b89bb9a1be4c",
+          "source_row_id": "line:0139|2605.28192|eprint"
+        }
+      ],
+      "identities": [
+        {
+          "provenance": "fulltext:line:0138|2605.28192|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2605.28192"
+        },
+        {
+          "provenance": "fulltext:line:0139|2605.28192|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2605.28192"
+        },
+        {
+          "provenance": "reviewer_known:RK-017",
+          "relation": "EXACT_ID",
+          "source_id": "2605.28192"
+        },
+        {
+          "provenance": "reviewer_known:RK-017",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Agentic Active Omni-Modal Perception for Multi-Hop Audio-Visual Reasoning"
+        }
+      ],
+      "reference_role": "DEEPLY_READ",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-017",
+          "role": "DEEPLY_READ"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0138|2605.28192|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0139|2605.28192|eprint"
+        },
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-017"
         }
       ],
       "version_pins": []
@@ -14267,6 +14434,98 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2607.05511",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Fulltext shows no relevant long-term state, autonomous action, or low-latency method path.",
+        "load_bearing": false,
+        "next_action": "Keep in the nonblocking P2 boundary queue; no additional Stage-1A D2 or novelty comparison is required.",
+        "query_recall_credit": false,
+        "reason": "Fulltext triage shows a trained soft-prompt/multi-LoRA system with backbone and retrieval optimization; retain only as an H5 trained/white-box boundary comparator.",
+        "reason_code": null
+      },
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "676c77f205d6fee07350283679bcb3ca54712d45d590b67fa20b53442a62d257",
+          "source_row_id": "line:0140|2607.05511|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "d71ec53d5075491c80d032cc73f91bef6c807359a09008414be4f0df0f9ecccb",
+          "source_row_id": "line:0141|2607.05511|eprint"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "d71ec53d5075491c80d032cc73f91bef6c807359a09008414be4f0df0f9ecccb",
+          "source_row_id": "line:0143|2607.05511|eprint"
+        }
+      ],
+      "identities": [
+        {
+          "provenance": "fulltext:line:0140|2607.05511|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2607.05511"
+        },
+        {
+          "provenance": "fulltext:line:0141|2607.05511|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2607.05511"
+        },
+        {
+          "provenance": "fulltext:line:0143|2607.05511|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2607.05511"
+        },
+        {
+          "provenance": "reviewer_known:RK-018",
+          "relation": "EXACT_ID",
+          "source_id": "2607.05511"
+        },
+        {
+          "provenance": "reviewer_known:RK-018",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Light-Omni: Reflex over Reasoning in Agentic Video Understanding with Long-Term Memory"
+        }
+      ],
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-018",
+          "role": "BOUNDARY_COMPARATOR"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0140|2607.05511|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0141|2607.05511|eprint"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0143|2607.05511|eprint"
+        },
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-018"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2607.06873",
       "claim_evidence": [],
       "current_disposition": {
@@ -14542,16 +14801,49 @@
       "canonical_work_id": "CW-ARXIV-2607.11433",
       "claim_evidence": [],
       "current_disposition": {
-        "invalidating_condition": "The bibliography source is superseded by an adjudicated identity or role correction.",
-        "load_bearing": false,
-        "next_action": "Retain this role and fetch/code under the frozen protocol when scheduled.",
-        "reason": "Explicit current-bibliography routing from section KNOWN_QUEUE; canonical role is KNOWN_QUEUE.",
+        "invalidating_condition": "Hash-bound fulltext contradicts the training-free state-conditioned planning, validation, repair, or stopping path.",
+        "load_bearing": true,
+        "next_action": "Bind D2 routing evidence and map method-path proximity in Stage-1B; do not make a Stage-1A novelty judgment.",
+        "query_recall_credit": false,
+        "reason": "Already-present training-free omni evidence-state system; direct external-control-plane prior that invalidates the previous non-direct KNOWN_QUEUE routing.",
         "reason_code": null
       },
-      "fulltext_events": [],
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "132a11f78e1b85bda53af8edc24c9c9a4100a75644b7ce4f42f72ece4d1f374b",
+          "source_row_id": "line:0136|2607.11433|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "75e3b9e94ffafdaa3433f6d6c3b6d3a7e9c9bdd0d849e436d28987e5e358ff2c",
+          "source_row_id": "line:0137|2607.11433|eprint"
+        }
+      ],
       "identities": [
         {
           "provenance": "bibliography:line:0060|2607.11433",
+          "relation": "EXACT_ID",
+          "source_id": "2607.11433"
+        },
+        {
+          "provenance": "fulltext:line:0136|2607.11433|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2607.11433"
+        },
+        {
+          "provenance": "fulltext:line:0137|2607.11433|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2607.11433"
+        },
+        {
+          "provenance": "reviewer_known:RK-016",
           "relation": "EXACT_ID",
           "source_id": "2607.11433"
         },
@@ -14566,16 +14858,21 @@
           "source_id": "Omni-Decision"
         },
         {
+          "provenance": "reviewer_known:RK-016",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Omni-Decision: A Progressive Evidence-State Agent System for Omni-Modal QA"
+        },
+        {
           "provenance": "bibliography:line:0060|2607.11433",
           "relation": "EXPLICIT_ALIAS",
           "source_id": "Omni-Decision: Progressive Evidence-State Agent System"
         }
       ],
-      "reference_role": "KNOWN_QUEUE",
+      "reference_role": "DEEPLY_READ",
       "role_assertions": [
         {
-          "provenance": "bibliography:line:0060|2607.11433",
-          "role": "KNOWN_QUEUE"
+          "provenance": "reviewer_known:RK-016",
+          "role": "DEEPLY_READ"
         }
       ],
       "screening_decision": "INCLUDE",
@@ -14587,6 +14884,24 @@
         {
           "campaign": "bibliography",
           "source_row_id": "line:0060|2607.11433"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0136|2607.11433|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0137|2607.11433|eprint"
+        },
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-016"
+        }
+      ],
+      "superseded_role_assertions": [
+        {
+          "provenance": "bibliography:line:0060|2607.11433",
+          "role": "KNOWN_QUEUE"
         }
       ],
       "version_pins": []
@@ -16070,7 +16385,7 @@
     "unique_seed_works": 92
   },
   "identity_accounting": {
-    "all_arxiv_identity_count": 216,
+    "all_arxiv_identity_count": 219,
     "all_arxiv_identity_work_ids": [
       "CW-ARXIV-1610.02424",
       "CW-ARXIV-1805.04604",
@@ -16256,8 +16571,10 @@
       "CW-ARXIV-2605.12978",
       "CW-ARXIV-2605.14477",
       "CW-ARXIV-2605.15104",
+      "CW-ARXIV-2605.22012",
       "CW-ARXIV-2605.27366",
       "CW-ARXIV-2605.28020",
+      "CW-ARXIV-2605.28192",
       "CW-ARXIV-2605.28480",
       "CW-ARXIV-2605.29682",
       "CW-ARXIV-2606.00579",
@@ -16282,6 +16599,7 @@
       "CW-ARXIV-2606.28864",
       "CW-ARXIV-2606.29947",
       "CW-ARXIV-2607.05391",
+      "CW-ARXIV-2607.05511",
       "CW-ARXIV-2607.06873",
       "CW-ARXIV-2607.07148",
       "CW-ARXIV-2607.08497",
@@ -16334,8 +16652,8 @@
     "bibliography": 65,
     "census": 95,
     "claim": 62,
-    "fulltext": 135,
-    "reviewer_known": 15,
+    "fulltext": 145,
+    "reviewer_known": 19,
     "seed": 92,
     "version_pin": 30
   },
@@ -19478,6 +19796,66 @@
       "source_row_id": "line:0135|2606.19341|eprint"
     },
     {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2607.11433",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0136|2607.11433|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2607.11433",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0137|2607.11433|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2605.28192",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0138|2605.28192|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2605.28192",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0139|2605.28192|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2607.05511",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0140|2607.05511|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2607.05511",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0141|2607.05511|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2605.22012",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0142|2605.22012|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2607.05511",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0143|2607.05511|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2605.22012",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0144|2605.22012|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2605.22012",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0145|2605.22012|eprint"
+    },
+    {
       "campaign": "reviewer_known",
       "canonical_work_id": "CW-ARXIV-2508.16665",
       "destination_type": "CANONICAL_WORK",
@@ -19566,6 +19944,30 @@
       "canonical_work_id": "CW-ARXIV-2508.00890",
       "destination_type": "CANONICAL_WORK",
       "source_row_id": "RK-015"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2607.11433",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-016"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2605.28192",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-017"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2607.05511",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-018"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2605.22012",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-019"
     }
   ],
   "source_receipts": [
@@ -19600,20 +20002,20 @@
       "sha256": "2dd8927fe7e30a50051e1fedd95fc0e9457da0ce64f175ee9480f54a0016725a"
     },
     {
-      "bytes": 62042,
-      "git_blob": "4db01b96d0f84bdea0a6b25dd1b55ea16da46df7",
+      "bytes": 66490,
+      "git_blob": "c8866e9f680b7f13c6fec3031dc07dbae07f71d8",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "36b96a6eec9a87baf24649dc6f18ffbbd9601ba7904d8685d208521cbaa9da94"
+      "sha256": "17648d2e3a87e51ca650ee4a8825aebdb1456c76a75453199ca0c7b4019d0236"
     },
     {
-      "bytes": 12712,
-      "git_blob": "44e5bc36db70d0de551934e02fc8e9ff5bea222b",
+      "bytes": 16332,
+      "git_blob": "b7f0936492114fa75a28d48324baa1ce196b4c93",
       "path": "wiki/survey/current/data/reviewer-known-items-v3.json",
-      "sha256": "7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24"
+      "sha256": "602e549ad3f655d9f6fad65c155c0afef2b62388e0310427750def269ba96176"
     }
   ],
   "summary": {
-    "canonical_work_nodes": 250,
+    "canonical_work_nodes": 253,
     "claim_edges": 62,
     "load_bearing_unresolved": 0,
     "multi_claim_work_count": 16,
@@ -19621,7 +20023,7 @@
     "multi_evidence_grade_work_count": 15,
     "multi_target_claim_edges": 5,
     "source_metadata_rows": 2,
-    "source_rows": 494,
+    "source_rows": 508,
     "unexplained_orphans": 0,
     "unresolved_records": 1
   },

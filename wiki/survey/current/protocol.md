@@ -37,8 +37,11 @@ owner explicitly changes it after reviewer sign-off. Internal convergence is not
 
 The historical Stage-1B meaning of directional prototyping is retired. Directional prototype work is
 **Stage-2A reproduction-first** work and this protocol gives it **no present execution force**.
-Innovation selection remains a Stage-1C owner decision. Current work must not claim an innovation has
-survived, been proved, or been killed before that decision and the mapping evidence.
+Stage-1C owns problem selection and candidate gap hypotheses, not technical-innovation convergence.
+Stage-1A performs identity, routing, and protocol-coverage checks; Stage-1B maps method-path facts and
+proximity. Neither stage may turn those facts into an innovation verdict or require a technical-
+difference matrix. Technical-approach innovation converges only after nearest-prior reproduction and
+exploration in Stage-2A, and is validated in Stage-2B.
 
 The package attestation at this gate is `discovery_queries_executed = 0` and
 `research_model_or_smoke_executions = 0` for this remediation. Those scoped counts do not erase the
@@ -633,10 +636,12 @@ hand-edited visible number. The release manifest binds protocol, queries, taxono
 adjudication, platform reports, current tables, and reviewer-facing artifacts by raw hash.
 
 Mapping outputs are the coverage/kill matrix, system-control occupancy and sensitivity tables,
-SOTA/method cards, updated census and ledger, saturation/flow report, direct-prior proximity and
-reproduction-readiness evidence, and **eligible Stage-1C inputs**. Stage-1B does not create or rank the
+SOTA/method cards, updated census and ledger, saturation/flow report, factual direct-prior proximity
+and reproduction-readiness evidence, and **eligible Stage-1C inputs**. This proximity map is not an
+innovation-difference matrix or verdict. Stage-1B does not create or rank the
 final candidate cards and does not freeze a reproduction list. Stage-1C owns the final 3–5 candidate
-cards, ranking, owner selection, and reproduction-list freeze. Each eligible input supplies the
+problem/gap-hypothesis cards, ranking, owner problem selection, and reproduction-list freeze; it does
+not freeze a technical innovation. Each eligible input supplies the
 supporting evidence and contradicting evidence, a single-observation kill criterion, unresolved alternatives,
 method limitations, improvement space, and value needed for that later synthesis. “Not found” is
 always scoped to the inspected set and carries removal and unresolved counts.

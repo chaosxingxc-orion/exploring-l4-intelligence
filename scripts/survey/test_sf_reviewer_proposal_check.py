@@ -38,6 +38,17 @@ class ReviewerProposalCheckTest(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, self.proposal)
 
+    def test_novelty_is_not_a_stage1a_or_stage1b_gate(self):
+        for token in (
+            "Stage-1A 不判定技术创新性",
+            "Stage-1B 只映射方法路径、覆盖与邻近事实",
+            "Stage-1C 形成候选问题／缺口假设并选题",
+            "Stage-2A 才在最近 prior 复现后收敛技术创新",
+            "不制作技术创新差异矩阵",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, self.proposal)
+
     def test_proposal_discloses_exact_negative_inventory_reconciliation(self):
         for token in (
             "exactly 4/22 semantic corrections",
@@ -70,7 +81,7 @@ class ReviewerProposalCheckTest(unittest.TestCase):
             "state persistence",
             "UNKNOWN",
             "NOT_APPLICABLE",
-            "dual disagreement",
+            "Blind dual coding and adjudication",
         ):
             self.assertIn(token, modality)
 
@@ -91,6 +102,11 @@ class ReviewerProposalCheckTest(unittest.TestCase):
             "Agentic Reward Modeling",
             "TMAS",
             "AgentTTS",
+            "Omni-Decision",
+            "AOP-Agent",
+            "Light-Omni",
+            "LatentOmni",
+            "core-prior-routing.md",
         ):
             self.assertIn(token, self.proposal)
 
@@ -180,9 +196,9 @@ class ReviewerProposalCheckTest(unittest.TestCase):
 
     def test_union_and_bibliography_numbers_are_derived(self):
         for old, code in (
-            ("494 个物理 source rows", "UNION_NUMERIC_DRIFT"),
-            ("250 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
-            ("90 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
+            ("508 个物理 source rows", "UNION_NUMERIC_DRIFT"),
+            ("253 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
+            ("93 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
         ):
             with self.subTest(old=old):
                 mutated = self.proposal.replace(old, old.replace(old.split()[0], "999"), 1)

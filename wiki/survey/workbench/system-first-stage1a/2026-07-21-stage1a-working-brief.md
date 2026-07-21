@@ -29,7 +29,7 @@ remediation_evidence_commit: "eea03330f626c9979841ae60eef82a022ab01d9b"
 
 round-16 precheck 对 Track A 给出 `ADEQUATE`，但对 Track B 给出 major revision，并明确维持 search-design `WITHHOLD`。该报告对前三条修正给出 `AGREE`，对原 19 条 active negatives 给出 18 条肯定判断（16 `AGREE`、2 `AGREE_WITH_CAUTION`），同时对 DeepVerifier closed path 的 `human_or_dev_label_model_selection=false` 给出 `DISAGREE`。我们已接受该反例，把该字段改为 `unknown`，形成 **exactly 4/22 semantic corrections**。版本化库存现在是 **`22 = 4 + 18`**：`negative-evidence-semantic-corrections-v2.json` 有 4 个 correction rows、4 个 reviewer rows；`absence-evidence-adjudication-v3.json` 有 18 个 proof rows、18 个 reviewer rows，coverage 18/18。语义门在当前工作树中闭合，但这不是对未来 exact package 的 reviewer SIGN。
 
-precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现性。三篇校准全文已按 SHA 本地冻结，implementer coder A 完成 21 个字段赋值；**H5 calibration status=PENDING_SECOND_INDEPENDENT_CODER**，planned denominator=21，observed comparable denominator=0。第二位独立 coder 未完成前，任何 H5 值都不承重。PDF 提取契约已冻结为 NT Python 3.14.3 / pypdf 6.14.0 与 POSIX Python 3.12.3 / pypdf 6.14.2，并要求两端重放 ToolGate p11。因 H5 仍为红门，正式 v7 leaves/aggregate、immutable round-16 包、同包独立签署和 owner 授权均尚未发生。
+precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现性。三篇校准全文已按 SHA 本地冻结，V2 codebook 已操作化七字段与 tie-breaker，implementer coder A 的 21 个字段均有可从冻结 PDF 重放的 exact anchor；**H5 calibration status=PENDING_BLIND_CODER_B**，planned denominator=21，observed comparable denominator=0。validator 现从两位 coder 的实际 row 派生 agreement，并会拒绝“21 项全不一致却自报全同”、非法 adjudicator 和非法 final value。无 coder-A 答案的 blind packet 已封存；第二位独立 coder 未完成前，任何 H5 值都不承重。PDF 提取契约已冻结为 NT Python 3.14.3 / pypdf 6.14.0 与 POSIX Python 3.12.3 / pypdf 6.14.2，并要求两端重放 ToolGate p11。因 H5 仍为红门，正式 v7 leaves/aggregate、immutable round-16 包、同包独立签署和 owner 授权均尚未发生。
 
 ## Track A — 科学提案
 
@@ -43,7 +43,9 @@ precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现�
 
 ## 2. 为什么要先做 system-first mapping
 
-直接相邻的 speech/omni agent、工具编排和 trained speech reward 工作已经存在。当前 reviewer bibliography 已显式路由 AudioToolAgent、Audio-Mind、Agent-Omni、EChO-Agent、AuTAgent、Speech-Copilot、VoxMind、Thinking While Listening、Native Active Perception、Llasa、OmniGAIA、WavReward、GSRM、Omni-RRM 和 Multimodal RewardBench 2；本轮又处置了 Sandboxed Coding Agents are Competitive Omni-modal Task Solvers、Inference-Time Scaling for Joint Audio-Video Generation、Agentic Reward Modeling、TMAS 与 AgentTTS。reward/verification 与 training-free/trained boundary 也分别形成可见链条。它们证明这一问题空间并不空白，也因此使任何 “first-ever” 或已确立 novelty 的说法都不成立。
+直接相邻的 speech/omni agent、工具编排和 trained speech reward 工作已经存在。当前 reviewer bibliography 已显式路由 AudioToolAgent、Audio-Mind、Agent-Omni、EChO-Agent、AuTAgent、Speech-Copilot、VoxMind、Thinking While Listening、Native Active Perception、Llasa、OmniGAIA、WavReward、GSRM、Omni-RRM 和 Multimodal RewardBench 2；此前又处置了 Sandboxed Coding Agents are Competitive Omni-modal Task Solvers、Inference-Time Scaling for Joint Audio-Video Generation、Agentic Reward Modeling、TMAS 与 AgentTTS。本轮进一步把 Omni-Decision 与 AOP-Agent 唯一化为 P1 直接邻近深读，把含训练的 Light-Omni 与 LatentOmni 路由为非阻塞 P2 boundary comparator。hash-bound 事实见 `wiki/survey/current/core-prior-routing.md`。
+
+这些论文在 Stage-1A 的作用只是校验 identity、去重、路由和协议覆盖。**Stage-1A 不判定技术创新性**，也不因少数已知论文提前得出 “first-ever”、已占满或方向死亡；**Stage-1B 只映射方法路径、覆盖与邻近事实**。因此本轮不制作技术创新差异矩阵，也不要求在 survey 之前设计一个刻意不同的方案。
 
 仍值得继续 mapping 的理由不是“没有人做过 agent”，而是现有工作横跨了不同的研究边界：
 
@@ -72,10 +74,10 @@ precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现�
 
 ### 3.2 阶段边界
 
-- Stage-1A：冻结研究问题、系统综述设计、纳排/编码/证据合同和放行机制；
-- Stage-1B：只执行 systematic mapping，全程禁止研究模型与 smoke；
-- Stage-1C：综合证据、形成候选问题卡并由 owner 选题；
-- Stage-2A：先复现最接近且公开可复现的 prior，再做方向性原型；
+- Stage-1A：冻结研究问题、系统综述设计、纳排/编码/证据合同和放行机制；不判技术创新差异；
+- Stage-1B：只执行 systematic mapping，映射方法路径/覆盖/邻近事实，全程禁止研究模型与 smoke；
+- Stage-1C：形成候选问题／缺口假设并选题，冻结复现清单与探索约束，不冻结创新方案；
+- Stage-2A：先复现最接近且公开可复现的 prior，再探索方案并收敛技术创新；
 - Stage-2B：冻结假设、SESOI、指标和信息边界后做方案验证；
 - Stage-3：投稿与发布。
 
@@ -114,7 +116,7 @@ precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现�
 
 这里的 mapping 与 empirical 答案不可互换。Stage-1B 可以记录论文报告过的 headroom/ablation，但新 headroom、WER、EM、selector 与因果归因结果只能从 Stage-2 产生。
 
-## 5. 贡献假设，而不是预先写好的结论
+## 5. 研究假设，而不是预先写好的创新结论
 
 H1 — **System hypothesis**：相比把生成、reward 和选择视为孤立模块，用显式状态、动作权和停止规则描述 external control plane，能够揭示已有方法之间被最终指标掩盖的结构差异。
 
@@ -134,7 +136,7 @@ H5 — **Speech/omni specificity hypothesis**：speech/omni 系统的实时性�
 
 执行只使用现已冻结的 query/compiler、T1 route、seed/citation-chaining 入口、REC-0 至 REC-7 模板和 current protocol。方法适配由 `wiki/survey/current/mapping-methods-adaptation.md` 冻结；H5 编码由 `wiki/survey/current/modality-specificity-codebook.md` 冻结，校准状态由 `wiki/survey/current/data/modality-specificity-calibration-v1.json` 单独承载；PDF 解析环境由 `wiki/survey/current/data/pdf-extractor-environment-v1.json` 精确约束。现有 query 文件保持在 `wiki/survey/2026-07-15-sf-queries.jsonl`；本轮整改没有增加 lane、改写 query term 或执行任何一条 query。
 
-当前共登记 15 reviewer-known items。已知论文、reviewer-known items 和历史 corpus 只能作为带 provenance 的入口或 comparator，`query_recall_credit=false`；它们不得被反向计作 frozen query 的召回结果。
+当前共登记 19 reviewer-known items。已知论文、reviewer-known items 和历史 corpus 只能作为带 provenance 的入口或 comparator，`query_recall_credit=false`；它们不得被反向计作 frozen query 的召回结果。Omni-Decision/AOP-Agent/Light-Omni/LatentOmni 的本地全文与路由已闭合，但不获得 systematic-discovery 完备性或创新性 credit。
 
 正式执行所用 search design 可压缩为下表；细则仍以 current protocol、compiler/profile 与模板字节为准：
 
@@ -180,15 +182,15 @@ Stage-1B 不产生模型效果、headroom、WER、EM 或 prototype 结果。
 
 ## 7. Stage-1C 与 Stage-2 方法预告
 
-**Stage-1C owns the final 3–5 candidate cards**、候选排名、owner 选题和 reproduction-list freeze；这些不再写成 Stage-1B 产出。Stage-1C 依据映射结果选择研究问题，而不是选择最容易实现的模块。每张最终候选问题卡必须包含最近 direct prior、尚未占据的最小差异、可证伪假设、信息边界、最小复现、资源需求与终止条件。
+**Stage-1C owns the final 3–5 candidate cards**、候选排名、owner 选题和 reproduction-list freeze；这些不再写成 Stage-1B 产出。Stage-1C 形成候选问题／缺口假设并选题，而不是冻结一个技术创新方案。每张最终候选问题卡必须包含最近 direct prior、尚待验证的问题/改进空间、可证伪假设、信息边界、最小复现、资源需求与终止条件。
 
-Stage-2A 的第一动作是复现最接近公开 prior。只有复现可用后才允许方向性原型。若进入 selector/headroom 路线，报告必须 cellwise 同列：`delta_mbr`、`regret`、`rho_greedy`、`rho_pool`；分母过小时标 `HEADROOM_TOO_SMALL`，不报告误导性比率。部署代理 `S` 与 gold utility `U` 严格分开。
+**Stage-2A 才在最近 prior 复现后收敛技术创新**。只有复现可用后才允许方向性原型；技术差异由复现与探索证据塑造，不在 Stage-1A 预写。若进入 selector/headroom 路线，报告必须 cellwise 同列：`delta_mbr`、`regret`、`rho_greedy`、`rho_pool`；分母过小时标 `HEADROOM_TOO_SMALL`，不报告误导性比率。部署代理 `S` 与 gold utility `U` 严格分开。
 
 ## 8. 证伪条件
 
 以下任何结果都应改变或终止对应假设，而不是通过换名词继续保留：
 
-- systematic mapping 找到与拟议系统在核心边界、信号、动作权和用途上等价的 direct prior：撤回或缩窄 novelty hypothesis；
+- systematic mapping 找到与某候选问题在核心边界、信号、动作权和用途上等价的 direct prior：Stage-1C 撤回或缩窄该候选问题／缺口假设；不在 Stage-1A 抢先裁决技术创新；
 - 在合理且预注册的供给族中重复观察不到 oracle headroom：停止该任务/供给路线；
 - 有稳定 headroom，但 label-free selector 无法超过等 K MBR：否定当前 selector hypothesis；
 - 增益只在 test gold、new-info、核心/外围训练或 white-box state 可用时出现：结论移出 TF-Strict；
@@ -223,7 +225,7 @@ Stage-1A 的 known-item evidence 仍是 hypothesis-grade，不是完整 mapping�
 
 ## 11. GM-1：claim/work 去重和旧库无损桥接
 
-机器报告 `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json` 当前为 PASS：494 个物理 source rows 被恰好路由到 250 个 canonical work nodes；其中 census 95、seed 92、bibliography 65、claim 62、version-pin 30、fulltext events 135、reviewer-known 15。相对 precheck 冻结点只增加 5 条 reviewer-known source rows、6 条三篇校准论文的 PDF/eprint 本地访问事件和 5 个 canonical nodes。两条 source-metadata row 仍保留为 source metadata，不伪装成 work。GM-1 的语义严格限于 **seven registered active corpora 的 lossless union**，不是 archive 或全部历史语料已经完备利用的声明。
+机器报告 `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json` 当前为 PASS：508 个物理 source rows 被恰好路由到 253 个 canonical work nodes；其中 census 95、seed 92、bibliography 65、claim 62、version-pin 30、fulltext events 145、reviewer-known 19。新增四篇核心 known items 复用/建立唯一 canonical identity，没有重复种子；两条 source-metadata row 仍保留为 source metadata，不伪装成 work。GM-1 的语义严格限于 **seven registered active corpora 的 lossless union**，不是 archive 或全部历史语料已经完备利用的声明。
 
 claim 去重采用“work node + claim hyperedge”，不是“每个 claim 复制一个种子”：62 条 claim row 保留 75 个 work references，去重后为 44 个 work references、31 个 unique claim works，且没有 claim target 游离在 census 之外。92 条 seed 是 92 个 unique works，没有 duplicate seed source row；其中 13 条复用已经存在的 census canonical work，generated seed rows 为 0。
 
@@ -249,15 +251,15 @@ cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong ro
 
 旧 bibliography 的 title/authors 常量同时充当 generator 输入和 test oracle，存在一起写错却全绿的循环。现在每一条由官方 raw payload、SHA-256、access time/class、source version 和 normalized receipt 生成。
 
-当前共有 90 个 unique works：72 个 arXiv、17 个 ACL、1 个 GitHub identity。相对上一版只为 5 个 reviewer 明示 arXiv ID 获取小型 OAI metadata；其余 85 个 receipt 全部复用本地缓存。随后全部 90 项在 `network=0` 下重建，receipt SHA 与 raw bytes 一致。
+当前共有 93 个 unique works：75 个 arXiv、17 个 ACL、1 个 GitHub identity。新增 known-ID raw metadata 缓存后，全部 93 项已在 `network=0` 下重建，receipt SHA 与 raw bytes 一致；这些 exact-ID access 全部 `query_recall_credit=false`。
 
-`reviewer-bibliography-selection-v1.json` 对 250 个 active-union nodes 逐项执行可见谓词，结果为 90 个 selected：15 个 `SELECTED_LOAD_BEARING_OR_D2`、14 个 `SELECTED_DIRECT_SYSTEM_NEIGHBOR`、11 个 `SELECTED_P1_OR_REVIEWER_KNOWN_THREAT` 与 50 个冻结 carry-forward；另有 159 个 `NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE`、1 个 `NOT_SELECTED_UNRESOLVED_IDENTITY`。书目只是 reviewer orientation subset，不是 Stage-1B map denominator。新增五项中，Sandboxed Coding Agents 完成 D1 direct/H5 threat 路由；Inference-Time Scaling for Joint Audio-Video Generation 与 Agentic Reward Modeling 作为 measurement/reward comparators；TMAS 与 AgentTTS 为非阻塞 P2 queue，且五项全部 `query_recall_credit=false`。
+`reviewer-bibliography-selection-v1.json` 对 253 个 active-union nodes 逐项执行可见谓词，结果为 93 个 selected：15 个 `SELECTED_LOAD_BEARING_OR_D2`、16 个 `SELECTED_DIRECT_SYSTEM_NEIGHBOR`、13 个 `SELECTED_P1_OR_REVIEWER_KNOWN_THREAT` 与 49 个冻结 carry-forward；另有 159 个 `NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE`、1 个 `NOT_SELECTED_UNRESOLVED_IDENTITY`。书目只是 reviewer orientation subset，不是 Stage-1B map denominator。Omni-Decision 与 AOP-Agent 是 direct/deep-read；Light-Omni 与 LatentOmni 是 trained boundary，四项均 `query_recall_credit=false`，不承载 Stage-1A 创新性结论。
 
 `year_basis` 年份规则也已冻结：仅有 arXiv identity 时用首次提交年 `initial_preprint`；绑定正式 venue identity 时用 `formal_venue`；GitHub 等滚动资源用 `current_version`。AudioToolAgent、VoiceAgentBench、LATS、PiCSAR 与 Trajectory Optimal Control 的已知年份错配已由 receipt 重建纠正。
 
 这一过程不是零网络：最初一次 20-ID arXiv Atom batch 在三次尝试后收到 429；之后 endpoint probe 发现 OAI exact-ID 可用，累计只获取 50 份 arXiv OAI、17 份 ACL BibTeX 和 1 份 GitHub JSON。所有成功 known-ID access 的 `query_recall_credit=false`。失败的 429/probe 也必须进入最终 hostile ledger，不得被“离线重放成功”覆盖。
 
-全文采用本地优先：当前 ledger 有 41 个成功 arXiv ID、41 份 PDF 与 39 份 e-print，均由 SHA 绑定；H5 三篇校准论文的 PDF/eprint 已一次性缓存到 E: 数据层。后续 D2 优先解析本地 e-print/LaTeX，源不可用或需要页码证据时才用本地 PDF。网络只在精读队列 cache miss 时访问，不为书目元数据批量下载论文，也不反复访问官网。
+全文采用本地优先：当前 ledger 覆盖 45 个成功 arXiv ID、45 份唯一 PDF 与 43 份唯一 e-print，均由 SHA 绑定；H5 三篇校准论文与四篇核心 known items 的 PDF/eprint 已一次性缓存到 E: 数据层。append-only ledger 中的重试事件保留为访问审计，不产生重复 work/seed。后续 D2 优先解析本地 e-print/LaTeX，源不可用或需要页码证据时才用本地 PDF。网络只在精读队列 cache miss 时访问，不反复访问官网。
 
 ## 15. 记录层与总包验证修复
 
@@ -276,9 +278,9 @@ precheck 之后的回归暴露了两处与研究结论无关、却会污染发�
 | §0/§7 “E1–E5 全部关闭，可签署 Stage-1B” | `WITHDRAWN` | 后续作者外反例证明 evidence-kind compatibility、旧库 union、双平台 aggregate 和 metadata oracle 仍有假绿 | round-13/14 reviews；本表 §11–14 | readiness only |
 | §2.2 absence 可由结构化字段闭合 | `CORRECTED` | 非空字段不足以证明 field-specific negative semantics；新增七字段 obligation 与 cross-binding | `sf_evidence_contract.py`; absence artifact | readiness only |
 | §2.2 双平台一致 | `CORRECTED` | Windows rerun 不能代表 NT/POSIX DAG；改为两 leaf 后聚合 | preflight receipt；v7 runner/aggregator | readiness only |
-| §3/§4 旧 corpus 已被当前 proposal 充分利用 | `CORRECTED` | 数量存在不等于逐 source-row routing；现改为 494-row、250-node active-corpora union，并显式否认 archive 完备性 | union graph + machine check | readiness only |
-| §5.2 65-entry bibliography 足以自包含 | `CORRECTED` | 旧书目缺 direct neighbors、selection oracle 与 metadata/year oracle；现为 90-work receipt bibliography + 250-node selection disposition | receipts + bibliography + selection receipt | readiness only |
-| §1 系统本身是第一创新假设 | `UNCHANGED` | 仍是待 mapping 验证的 founding hypothesis，不是 novelty claim | Project-Thesis；三条 citation chain | hypothesis only |
+| §3/§4 旧 corpus 已被当前 proposal 充分利用 | `CORRECTED` | 数量存在不等于逐 source-row routing；现为 508-row、253-node active-corpora union，并显式否认 archive 完备性 | union graph + machine check | readiness only |
+| §5.2 65-entry bibliography 足以自包含 | `CORRECTED` | 旧书目缺 direct neighbors、selection oracle 与 metadata/year oracle；现为 93-work receipt bibliography + 253-node selection disposition | receipts + bibliography + selection receipt | readiness only |
+| §1 系统本身是第一创新假设 | `CORRECTED` | Stage-1A 不负责技术创新性裁决；只保留为待 mapping 的研究问题，技术贡献到 Stage-2A prior 复现后收敛 | Project-Thesis；续74；core-prior routing | hypothesis only |
 | §5 Stage-1B 只做 systematic mapping、禁模型/smoke | `UNCHANGED` | 阶段边界没有被技术整改改变 | current protocol/status | readiness only |
 | 本文件 RQ-SUPPLY/RQ-VERIFY 的 generator-verifier-selector 分解 | `NEW` | 将 reviewer-known verification work 提出的归因风险纳入待检验问题，不改变 frozen query | bibliography roles；不计 recall | hypothesis only |
 
@@ -296,15 +298,15 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 |---|---|---|
 | cross-platform Git substrate | PASS | Windows/WSL root、HEAD、blob 和 gitfile policy 已对齐 |
 | GM-2 field-specific contract | PASS | 结构、binding 与 mutation tests 已实现 |
-| GM-1 lossless corpus union | PASS | 494 source rows / 250 nodes exactly-once；claim/work 去重且异质性保留 |
+| GM-1 lossless corpus union | PASS | 508 source rows / 253 nodes exactly-once；claim/work 去重且异质性保留 |
 | GM-2 contradicted negatives | CORRECTED 4/4 | 一条改 `true`、三条改 `unknown`；全部退出 active absence |
 | GM-2 correction decisions | PRECHECK RECORDED 4/4 | 三条 `AGREE`、一条 `DISAGREE_RECODE_REQUIRED` 已原样绑定；正式同包核验仍待未来 reviewer |
 | GM-2 active semantic review | PRECHECK RECORDED 18/18 | 16 `AGREE`、2 `AGREE_WITH_CAUTION`；counterevidence 字段已加入合同 |
-| H5 three-paper calibration | **PENDING CODER B** | coder A 21/21；第二位独立 coder、agreement 21-field denominator 与分歧裁决尚缺 |
+| H5 three-paper calibration | **PENDING CODER B** | V2 codebook、coder A 21/21 exact-anchor replay 与 answer-free blind packet 已就位；第二位独立 coder、agreement 21-field denominator 与分歧裁决尚缺 |
 | PDF extractor replay contract | PASS | NT pypdf 6.14.0 / POSIX pypdf 6.14.2 exact-match；ToolGate p11 为双叶强制 probe |
 | GM-3 v7 contract-4 code/DAG tests | PASS | 当前单平台 probe 仅 H5 红；leaf/aggregate fail-closed 反例已实现 |
 | GM-3 formal NT/POSIX leaves + aggregate | **WITHHELD** | 等待 H5 dual coding 完整后在同一 commit 生成 |
-| GM-4 official-receipt bibliography | PASS | 90 unique works，可完全离线重建；250-node selection complement 已记账 |
+| GM-4 official-receipt bibliography | PASS | 93 unique works，可完全离线重建；253-node selection complement 已记账；四篇核心 known items 已唯一化路由 |
 | audit/context lifecycle | PASS | 82-row registry 原子追加、workbench/audit 分流、AI context surface 0 failures |
 | deterministic current package | PASS | 自引用已切断；提交后 Windows `--check` 可只读重放 |
 | proposal source manifest/package gate | **construction=PASS / release=BLOCKED** | `proposal-source-manifest-v1.json` 绑定本提案、协议、compiler/routes/templates、H5、extractor 与账本；`proposal-package-check.json` 只证明预审包内部一致，不替代 H5、formal review 或 owner authorization |
@@ -321,7 +323,7 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 2. 计算 exact field agreement；每个 disagreement 由不属于两位 coder 的 adjudicator 给出 final value、理由和 locator；
 3. H5 完成后，由团队在冻结同一 commit 上分别生成 NT/POSIX contract-4 leaves；两端必须精确匹配各自 extractor contract 并重放 ToolGate p11，再生成 aggregate；
 4. 重建 source manifest/package report，通过敌意内审后才晋升为 immutable round-16 proposal；
-5. final exact-package reviewer 复核第四条 recode、18 条 active decisions、五条 reviewer-known dispositions、H5 和双平台 receipts，再决定 search design 是否可以签署；
+5. final exact-package reviewer 复核第四条 recode、18 条 active decisions、19 条 reviewer-known dispositions（重点含本轮四篇核心项）、H5 和双平台 receipts，再决定 search design 是否可以签署；
 6. reviewer SIGN 之后，owner 才对 exact package 单独决定是否授权 Stage-1B。
 
 正式独立报告只应在未来 round-16 写入以下实际值：
@@ -353,7 +355,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | union machine check | `1c19671f3b731946f34670ad94cbbb2b1e043716` | `67d6795e3ce0e851a320e6f85ba50ab05c6a2f8ddd98128d4d28ce711054cab4` |
 | reviewer-known items | `44e5bc36db70d0de551934e02fc8e9ff5bea222b` | `7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24` |
 | official metadata receipts | `af93661d7abc640de68a7fa5c81b533aac5c6c50` | `9c3ca6f466940e964fe05961d06d55ed45630b3c44bba441289424e18f4e3468` |
-| generated 90-work bibliography | `1adab73af8f80efd9db7f7559d00e6e606f12b4c` | `23ab2bf25e4e11607ddf8475862d96849729c5643ba347e2e3379b01cd3e92c9` |
+| generated reviewer bibliography | `1adab73af8f80efd9db7f7559d00e6e606f12b4c` | `23ab2bf25e4e11607ddf8475862d96849729c5643ba347e2e3379b01cd3e92c9` |
 | bibliography selection receipt | `93edab407964d2d478dad1b33bab4f1114034d1c` | `faf78d691cfc1200571a60b526d767c0975b7538b487b28f4fecd1320fd7f032` |
 | mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
 | speech/omni specificity codebook | `9bda0d76328de360b9b0851d0f50b579af79a7b1` | `db860023cb42a9deb6dc789b8cb3a93e7a10bc791568bc0c8bc8a70880018999` |
@@ -366,7 +368,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | attempt registry | `9bcac7ce3681d82fd1479589d126cccc761c340e` | `f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe` |
 | wiki dry-run incident | `a7f4619e8ee9de7a69dd7e37740e64f9fc5eb9d2` | `297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393` |
 
-完整书目由 `wiki/survey/current/bibliography.md` 提供，选择账本为 `wiki/survey/current/data/reviewer-bibliography-selection-v1.json`。它们是 receipt-derived artifacts；本文件不复制 90 条引用，以避免形成第二份书目正典。
+完整书目由 `wiki/survey/current/bibliography.md` 提供，选择账本为 `wiki/survey/current/data/reviewer-bibliography-selection-v1.json`。它们是 receipt-derived artifacts；本文件不复制 93 条引用，以避免形成第二份书目正典。
 
 本提案的完整输入集合由 `wiki/survey/current/data/proposal-source-manifest-v1.json` 精确绑定；预审包报告为 `docs/checks/system-first-stage1a/context-v3/proposal-package-check.json`。当前报告的 `construction=PASS` 只表示输入、生成器和诚实红门可复现；`release=BLOCKED` 才是 Stage-1B 权限语义。两者不得合并为一个含糊 PASS。
 

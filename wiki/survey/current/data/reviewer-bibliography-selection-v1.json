@@ -4,23 +4,23 @@
  "union_artifact": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
  "predicate": "select every load-bearing/D2 work, registered direct system neighbor, speech/omni measurement instrument, P1 or reviewer-known threat, and the frozen registered reviewer-bibliography carry-forward; separately list any exact known-ID policy not yet in the active union",
  "scope_note": "This reviewer-orientation subset is not the Stage-1B evidence-map denominator and does not imply that unselected active-union or historical/archive works were screened out of the systematic map. Methods references are governed by mapping-methods-adaptation.md rather than mixed into the work union.",
- "union_population": 250,
- "selected_from_union": 90,
+ "union_population": 253,
+ "selected_from_union": 93,
  "reviewer_directed_outside_union": 0,
- "reviewer_visible_total": 90,
+ "reviewer_visible_total": 93,
  "union_reason_code_counts": {
   "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE": 159,
   "NOT_SELECTED_UNRESOLVED_IDENTITY": 1,
-  "SELECTED_DIRECT_SYSTEM_NEIGHBOR": 14,
+  "SELECTED_DIRECT_SYSTEM_NEIGHBOR": 16,
   "SELECTED_LOAD_BEARING_OR_D2": 15,
-  "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT": 11,
-  "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 50
+  "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT": 13,
+  "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 49
  },
  "selection_basis_counts": {
-  "DIRECT_SYSTEM_NEIGHBOR": 14,
-  "LOAD_BEARING_OR_D2": 15,
-  "P1_OR_REVIEWER_KNOWN_THREAT": 25,
-  "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 65,
+  "DIRECT_SYSTEM_NEIGHBOR": 16,
+  "LOAD_BEARING_OR_D2": 17,
+  "P1_OR_REVIEWER_KNOWN_THREAT": 29,
+  "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 64,
   "SPEECH_OMNI_MEASUREMENT_INSTRUMENT": 17
  },
  "reviewer_directed_outside_union_ids": [],
@@ -1628,6 +1628,15 @@
    "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
   },
   {
+   "canonical_work_id": "CW-ARXIV-2605.22012",
+   "selected": true,
+   "selected_identity": "2605.22012",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
    "canonical_work_id": "CW-ARXIV-2605.27366",
    "selected": false,
    "selected_identity": null,
@@ -1642,6 +1651,17 @@
     "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
    ],
    "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+  },
+  {
+   "canonical_work_id": "CW-ARXIV-2605.28192",
+   "selected": true,
+   "selected_identity": "2605.28192",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "LOAD_BEARING_OR_D2",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
   },
   {
    "canonical_work_id": "CW-ARXIV-2605.28480",
@@ -1843,6 +1863,15 @@
    "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
   },
   {
+   "canonical_work_id": "CW-ARXIV-2607.05511",
+   "selected": true,
+   "selected_identity": "2607.05511",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
+  },
+  {
    "canonical_work_id": "CW-ARXIV-2607.06873",
    "selected": false,
    "selected_identity": null,
@@ -1889,9 +1918,11 @@
    "selected": true,
    "selected_identity": "2607.11433",
    "selection_basis": [
-    "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "LOAD_BEARING_OR_D2",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
    ],
-   "reason_code": "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD"
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
   },
   {
    "canonical_work_id": "CW-BIB-tau2-bench-voice-arXiv",

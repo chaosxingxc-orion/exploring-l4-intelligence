@@ -106,6 +106,11 @@ A documentation/check repair does not authorize discovery queries, model calls, 
 experiments, prototypes, reviewer signatures, or owner Stage-1B execution approval. Exposure claims
 must state their scope and retain inherited prior exposure.
 
+Stage-1A checks identity, routing, protocol coverage, and gate correctness; it does not judge technical
+novelty or require a prior-difference matrix. Stage-1B maps method paths and proximity without a novelty
+verdict. Stage-1C selects a problem from candidate gap hypotheses; technical-approach innovation
+converges only in reproduction-first Stage-2A and is validated in Stage-2B.
+
 After a durable decision, follow `wiki/AI-Collaboration.md`: write rationale before context is lost,
 update the current layer in place, keep audit records append-only, run the relevant executable checks,
 and archive eligible superseded work. Wiki source is the repository; the web wiki is a mirror.

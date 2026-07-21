@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-21 — round-16 precheck remediation"
+last_refresh: "2026-07-21 — H5 contract repair and Stage-1A novelty-boundary correction"
 ---
 
 # Research Objective & Current State
@@ -24,19 +24,25 @@ systematic mapping；工程自测不能代替研究裁决。
 
 ## 3. 已闭合的实施地基
 
-- **GM-1**：七类 active sources 的 494 rows 恰好路由至 250 canonical works；claim 只作 hyperedge，
+- **GM-1**：七类 active sources 加 reviewer-known/full-text receipts 的 508 rows 恰好路由至 253 canonical works；claim 只作 hyperedge，
   不生成重复 seed/work。该 PASS 不外推为 archive/全部历史语料完备。
 - **GM-2**：precheck 对旧 22 条 negative claims 给出 3 条 correction `AGREE`、18 条 active 肯定
   和 1 条 `DISAGREE`；后者已按要求从 `false` 改 `unknown`。版本化正典为 `22 = 4 + 18`，4/4
   correction decisions 与 18/18 active decisions 已绑定，且每条 active proof 含 counterevidence 字段。
-- **H5 / extractor**：三篇 PDF/eprint 已本地冻结；coder A 完成 21/21 非承重赋值，coder B 尚缺。
-  PDF 环境冻结为 NT pypdf 6.14.0 / POSIX 6.14.2，并强制双叶重放 ToolGate p11。
+- **H5 / extractor**：三篇 PDF/eprint 已本地冻结；V2 codebook 已把七字段定义、冲突裁决与定位合同
+  操作化，coder A 的 21/21 exact anchors 均可从 hash-bound PDF 重放。validator 已拒绝“21 项全
+  不同却自报全同”和非法 adjudicator/final value 两类 false-green；不含 coder-A 答案的盲包已封存，
+  但独立 coder B 与分歧裁决仍缺。PDF 环境冻结为 NT pypdf 6.14.0 / POSIX 6.14.2，并强制双叶重放
+  ToolGate p11。
 - **GM-3**：v7 contract-4 leaf/aggregate 与反例合同已实现；当前 probe 仅 `H5_CALIBRATION` 红，
   所以正式 NT/POSIX leaves 尚未生成。
-- **GM-4**：90 个 official-receipt works（72 arXiv / 17 ACL / 1 GitHub）可离线重建；250-node
-  complement、五条新 reviewer-known disposition、`year_basis` 与 `query_recall_credit=false` 均机器化。
-- **研究设计**：mapping RQ 与 Stage-2 empirical test 已分离；Stage-1B 只交 evidence/eligible
-  inputs，Stage-1C 才拥有最终 cards/排序/选题；methods adaptation 与 H5 七字段 codebook 已就位。
+- **GM-4**：93 个 official-receipt works（75 arXiv / 17 ACL / 1 GitHub）可离线重建；253-node
+  complement、19 条 reviewer-known disposition、`year_basis` 与 `query_recall_credit=false` 均机器化。
+  Omni-Decision/AOP-Agent 已唯一化为 P1 直接邻近深读，Light-Omni/LatentOmni 为非阻塞 P2 trained
+  boundary；未新增重复种子。
+- **研究设计**：mapping RQ 与 Stage-2 empirical test 已分离；Stage-1A 不判技术创新差异，Stage-1B
+  只映射方法路径/覆盖/邻近事实并交付 evidence/eligible inputs，Stage-1C 形成候选缺口假设并选题，
+  Stage-2A 才在最近 prior 复现后收敛技术创新。methods adaptation 与 H5 七字段 codebook 已就位。
 
 上述均是 implementation/readiness evidence，不是 novelty、effectiveness 或 scientific sign-off。
 
@@ -63,8 +69,8 @@ metric/prototype = 0**。此零值不覆盖历史；`INHERITED_PRIOR_EXPOSURE` �
 
 ## 6. 当前路由
 
-- 当前入口：`wiki/survey/current/README.md` → `status.md` → `protocol.md`；methods/H5 按需读对应
-  adaptation/codebook。
+- 当前入口：`wiki/survey/current/README.md` → `status.md` → `protocol.md`；methods/H5/核心 prior 按需读
+  adaptation/codebook/`core-prior-routing.md`。
 - 机器数据：`wiki/survey/current/data/`。数字正典在 union/correction/adjudication/receipt/selection
   artifacts；提案散文只解释，不复制为第二正典。
 - 审计入口：正式 campaign 仍在 `wiki/audit/system-first-stage1a/INDEX.md`；round-16 precheck 输入在

@@ -6,6 +6,64 @@
 
 ---
 
+### 2026-07-21（续74）· 创新性判断退出 Stage-1A/1B；Stage-2A 在 prior 复现后收敛技术贡献
+
+#### Context
+
+连续的 Stage-1A 复审修复开始把 reviewer-known 直接邻近论文转写成“我们的方案与它有何创新
+差异”，并准备在 survey 执行前制作技术差异矩阵。这会把问题与检索设计门误当成方案选型门：此时
+系统性证据尚未执行，候选问题尚未综合，最近 prior 也尚未复现，因而任何技术创新性胜负都缺少
+完整分母和经验基础，并会继续延迟 Stage-1B survey。
+
+#### Decision
+
+Stage-1A 只关闭问题定义、canonical identity、去重、直接/边界路由、编码协议覆盖和执行权限门，
+不要求技术方案创新性结论或 prior 差异矩阵。Stage-1B 系统映射方法路径、占位、覆盖和邻近关系，
+但不裁决创新性。Stage-1C 基于完整 mapping 形成候选问题/缺口假设并由 owner 选题，同时冻结
+Stage-2A 的 prior 复现清单和探索约束；候选缺口不得写成已成立贡献。Stage-2A 先复现最近且最强的
+公开 prior，再通过方向性方案探索收敛技术创新；Stage-2B 才验证冻结方案。
+
+#### Rationale
+
+创新性是相对于完整 prior 图谱、明确问题和可复现基线的关系量，而不是由少数已知论文标题或摘要
+提前决定的属性。把 1A/1B 限于事实路由与证据映射，既能如实吸收 Omni-Decision、AOP-Agent 等
+核心邻近论文，又不会因为“看起来很接近”而提前杀死方向或凭空设计差异；把技术收敛放在 2A，则
+能用复现结果约束创新主张并让当前工作尽快进入 survey。
+
+#### Consequences
+
+当前四篇 reviewer-known 核心论文只产生 hash-bound full-text、唯一 work identity、P1/P2 路由与
+Stage-1B 编码义务；`query_recall_credit=false`，不产生 systematic-discovery 完备性或创新性结论。
+Omni-Decision 与 AOP-Agent 作为直接邻近方法进入开局深读，Light-Omni 与 LatentOmni 作为 trained
+boundary comparators；不得为 Stage-1A 另建创新差异矩阵。现有 H5 独立 coder-B 红门、正式 reviewer
+签署和 owner Stage-1B 授权均不因此被绕过。
+
+#### Purpose chain
+
+为了研究冻结 omni 核心之外的 reward-guided control plane，需要先获得完整且去重的系统证据图谱；
+为了让技术创新建立在真实邻近方法而非零散已知项上，必须先执行 Stage-1B mapping、再在 Stage-1C
+选定问题；所以 Stage-1A 立即停止创新性论证，只修 survey gate，并把 prior 复现与技术贡献收敛留给
+Stage-2A。
+
+#### Provenance
+
+Owner 于 2026-07-21 明示：“在 stage1A 阶段，为什么要考虑某个技术方案带来的创新性差异……差不多
+是在 stage2 的阶段才会去收敛创新性”。本轮只做 reviewer-known ID dereference、local full-text
+核验、台账/协议/校准修复；systematic discovery query、research model/smoke、dataset metric/
+prototype 均为 0，`INHERITED_PRIOR_EXPOSURE` 保持非零历史账。
+
+#### Invalidation conditions
+
+若 owner 重新定义阶段、Stage-1B mapping 发现当前编码 schema 无法表达直接 prior，或 Stage-1C
+证据显示候选问题不可复现/不可判别，则原位更新 CURRENT/HOT；这只改变问题、复现清单或探索边界，
+不得倒推把未经复现的技术创新性结论塞回 Stage-1A。
+
+#### Supersedes
+
+本条取代任何把 Stage-1A reviewer-known 补录等同于“技术创新差异必须闭合”，或把 Stage-1C 的选题
+权限描述为冻结具体创新方案的 active 解读；不改写历史 review/audit，也不改变 Stage-1B 禁研究模型
+和 Stage-2A reproduction-first 的既有裁决。
+
 ### 2026-07-20（续73）· Stage-1A readiness 恢复 OPEN；稳定集成与终审门完成后方可提交正式复审
 
 #### Context
