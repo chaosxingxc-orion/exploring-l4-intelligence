@@ -321,7 +321,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | Evidence | Git blob | SHA-256 |
 |---|---|---|
 | `wiki/Project-Thesis.md` | `64e847f566c83b4b0f1ec9c2a6032afb8dc1a020` | `5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623` |
-| `wiki/Research-Objective.md` | `6b608c1b22b200a67376ba0cd95eadaa27c5c0ef` | `e6746c3666bbc6d8b56368d89ba0fa7710c40fa25df88a4a832c52ed64da5d95` |
+| `wiki/Research-Objective.md` | `9ab2dece520fdcd2e52e041d00cb4a97c4da5bfd` | `94754dbd13e565efc150d5699fe8fb3010e9a0d77662830bf2bba17b01a80275` |
 | v10 proposal | `686129ee41cdf08c294114fc29c93a9c63408dc5` | `94ddfd282950ae10ca113e32e9a4ccfc702a6fa74dcd13572662e4f717b66085` |
 | round-14 adversarial review | `dde66b8c50a8100eff24a2117e04966651bde3bc` | `ac61d727878d9c90ec173c4c2e12cbc6cc9ed13b60f5b8478f6d01e8fbfa28b9` |
 | round-15 independent review | `d7901f85c7804bd2176aa76a0ea05bc2d79729c2` | `4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e` |
@@ -338,7 +338,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
 | speech/omni specificity codebook | `b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019` | `48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769` |
 | current protocol | `788622b909e31e785a142fcfea51cd9d163c6970` | `0e23c262375c24cb71b2bd7aacfc5edb175ff40ab1a9900205f766fa39f3f78a` |
-| current status | `cc5eff1dc12090e2ebad71479b81f18bce538f3c` | `6d3d062b45a95774c82ba588eb0a7fb08a4a7e4a8f22de43051e1d89bdda133f` |
+| current status | `7c9bc36209545d35e486083ede2ee871792b3f4b` | `6c6e566dd705909e71f0bab1c630e5833ff6e430a010c3a5eaf92e911efc70e9` |
 | frozen evidence-v6 aggregate | `d3b1c67018fa9ce99dfff56af3b9404747504936` | `3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd` |
 | frozen query bytes | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` | `645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab` |
 | attempt registry | `9bcac7ce3681d82fd1479589d126cccc761c340e` | `f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe` |
