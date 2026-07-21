@@ -2,7 +2,7 @@
  "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-02",
  "schema": "sf-proposal-source-manifest-v1",
  "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
- "source_commit": "e68c8497637a7728ef81e4504f25508c0c2d323e",
+ "source_commit": "01f0f3a26b4d24a6776767b966882db93265e588",
  "scope": "Exact committed inputs for the round-16 reviewer proposal; this is not the legacy current manifest and is not a Stage-1B authorization.",
  "files": [
   {
@@ -387,8 +387,8 @@
    "role": "proposal_draft",
    "path": "wiki/survey/workbench/system-first-stage1a/2026-07-21-stage1a-working-brief.md",
    "surface": "proposal",
-   "git_blob": "8c5b3b1e4668c3aca1aa808275c246788e522623",
-   "sha256": "3b41e04e022a26ecc08e9984d0730f30d92b889c19ce9da6b2a2a65c9aa29f8d"
+   "git_blob": "c6bf1dcd8fbd009f6596d0bf8a057de83c5d962e",
+   "sha256": "bff3e6031eeec73cfd5f8d262e6fc8c325a75ec4178e0f7a28b0c0f111a20d5f"
   },
   {
    "role": "proposal_checker",
