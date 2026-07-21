@@ -337,7 +337,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | bibliography selection receipt | `87de00a3e4d8527226b1b05bd3ead330c564b974` | `deaf913d73bfe77721c651b132859c4faeead4440090bfadabfcbc14beaed1c8` |
 | mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
 | speech/omni specificity codebook | `b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019` | `48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769` |
-| current protocol | `788622b909e31e785a142fcfea51cd9d163c6970` | `0e23c262375c24cb71b2bd7aacfc5edb175ff40ab1a9900205f766fa39f3f78a` |
+| current protocol | `bca3c0a661d69ee53625d73797c90d969d5cdc95` | `e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585` |
 | current status | `7c9bc36209545d35e486083ede2ee871792b3f4b` | `6c6e566dd705909e71f0bab1c630e5833ff6e430a010c3a5eaf92e911efc70e9` |
 | frozen evidence-v6 aggregate | `d3b1c67018fa9ce99dfff56af3b9404747504936` | `3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd` |
 | frozen query bytes | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` | `645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab` |
