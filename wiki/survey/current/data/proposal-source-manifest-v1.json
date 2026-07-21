@@ -2,7 +2,7 @@
  "artifact_id": "SF-PROPOSAL-SOURCE-MANIFEST-V1-2026-07-21-01",
  "schema": "sf-proposal-source-manifest-v1",
  "lifecycle": "PRE_REVIEW_FROZEN_SOURCE_SET",
- "source_commit": "be8ae3320737581175e34f4e869aade8c9848b46",
+ "source_commit": "c62564dafb22af9ea6da78f1858e3ef62118fd3f",
  "scope": "Exact committed inputs for the round-16 reviewer proposal; this is not the legacy current manifest and is not a Stage-1B authorization.",
  "files": [
   {
@@ -37,8 +37,8 @@
    "role": "current_protocol",
    "path": "wiki/survey/current/protocol.md",
    "surface": "search_design",
-   "git_blob": "788622b909e31e785a142fcfea51cd9d163c6970",
-   "sha256": "0e23c262375c24cb71b2bd7aacfc5edb175ff40ab1a9900205f766fa39f3f78a"
+   "git_blob": "bca3c0a661d69ee53625d73797c90d969d5cdc95",
+   "sha256": "e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585"
   },
   {
    "role": "legacy_current_manifest",
@@ -324,8 +324,8 @@
    "role": "proposal_draft",
    "path": "wiki/survey/workbench/system-first-stage1a/2026-07-21-research-proposal-for-independent-review.md",
    "surface": "proposal",
-   "git_blob": "ee57080666f07060adb87919a02303fe92895219",
-   "sha256": "403573ced1d63d1ecea65c170cf10aab408bbb82c9970b9e13cbe71d3f9d0be3"
+   "git_blob": "464965ff85a7d4a8446a6419023c689fd6aa9308",
+   "sha256": "5293c9c8eca499dc6e110f8da9a295ea625450056a787db3e65364aad45f4671"
   },
   {
    "role": "proposal_checker",
