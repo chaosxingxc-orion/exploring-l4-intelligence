@@ -1,0 +1,180 @@
+{
+ "artifact_id": "SF-NEGATIVE-EVIDENCE-SEMANTIC-CORRECTIONS-V2-2026-07-21-01",
+ "schema": "v2: versioned corrections and author-external semantic decisions transcribed from the bound round-16 precheck",
+ "date": "2026-07-21",
+ "review_artifact": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+ "reviewed_target": {
+  "commit": "55aea3a13a8315e51c70a0aed9633e61a66c8fe4",
+  "proposal_git_blob": "464965ff85a7d4a8446a6419023c689fd6aa9308",
+  "proposal_git_blob_sha256": "5293c9c8eca499dc6e110f8da9a295ea625450056a787db3e65364aad45f4671"
+ },
+ "inventory_reconciliation": {
+  "original_negative_claims": 22,
+  "retired_by_correction": 4,
+  "active_negative_claims": 18,
+  "identity": "22 = 4 + 18"
+ },
+ "reviewer_rows_created": 4,
+ "reason_reviewer_rows_are_zero": null,
+ "review_status": "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED",
+ "review_requirement": "The final exact-package reviewer must verify that the mandated DISAGREE recode and all bindings survive unchanged; no implementer may convert this precheck into package SIGN.",
+ "review_row_required_fields": [
+  "retired_adjudication_row_id",
+  "reviewer_identity",
+  "verdict",
+  "review_reason",
+  "independence",
+  "source_binding"
+ ],
+ "review_rows": [
+  {
+   "retired_adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",
+   "reviewer_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "review_reason": "AGREE: label-bearing threshold accuracy is sufficient to overturn the negative controller/config claim.",
+   "independence": {
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "review_date": "2026-07-21",
+    "timestamp_precision": "DATE_ONLY",
+    "conflict_declaration": "No implementation participation declared in the bound report."
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+   }
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-c5351c607c4f37690a34",
+   "reviewer_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "review_reason": "AGREE: the 32B/7B comparison makes false load-bearing, while temporal order remains insufficient for true.",
+   "independence": {
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "review_date": "2026-07-21",
+    "timestamp_precision": "DATE_ONLY",
+    "conflict_declaration": "No implementation participation declared in the bound report."
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+   }
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-cc432879fce4af753778",
+   "reviewer_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "review_reason": "AGREE: Qwen3-8B fine-tuning is explicit and unresolved core/peripheral topology requires unknown.",
+   "independence": {
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "review_date": "2026-07-21",
+    "timestamp_precision": "DATE_ONLY",
+    "conflict_declaration": "No implementation participation declared in the bound report."
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+   }
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-216d90876d8397734c37",
+   "reviewer_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "DISAGREE_RECODE_REQUIRED",
+   "required_recode": "unknown",
+   "review_reason": "Performance-based Claude-3.7-Sonnet choice and labeled backbone comparisons overturn false; temporal order is insufficient for true, so unknown is required.",
+   "independence": {
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "review_date": "2026-07-21",
+    "timestamp_precision": "DATE_ONLY",
+    "conflict_declaration": "No implementation participation declared in the bound report."
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+   }
+  }
+ ],
+ "corrections": [
+  {
+   "retired_adjudication_row_id": "ABS2-7f79a2888c7d031e5e74",
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "field": "controller_program_or_config_optimized_on_labels",
+   "prior_value": false,
+   "corrected_value": true,
+   "disposition": "POSITIVE_RECODE",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "evidence": "p19 anchor='performance of dream with different values of thresholds'",
+   "rationale": "The paper reports label-bearing accuracy comparisons across controller thresholds; a load-bearing false value is untenable.",
+   "prior_owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "corrected_owner_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
+   "load_bearing_after_correction": false
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-c5351c607c4f37690a34",
+   "method_path_id": "2026.findings-acl.511#prm-guided-search",
+   "field": "human_or_dev_label_model_selection",
+   "prior_value": false,
+   "corrected_value": "unknown",
+   "disposition": "UNRESOLVED_TRI_STATE",
+   "fulltext": {
+    "id": "2026.findings-acl.511",
+    "kind": "pdf",
+    "sha256": "ce1d0a443428ebffb3914e9580fee5f3dc9a6d8c88c9452efebdc874675f06ce"
+   },
+   "evidence": "p8 anchor='32b reward model consistently outperforms the 7b version'",
+   "rationale": "The main experiment uses 32B and the paper reports that 32B outperforms 7B, but the temporal selection procedure is not explicit enough to assert true; false is therefore retired and unknown is required.",
+   "prior_owner_row_sha256": "f1feb43cf4222f1d5afb1e2c1da49717d12e4d26794adb7a888d9e07e256a796",
+   "corrected_owner_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
+   "load_bearing_after_correction": false
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-cc432879fce4af753778",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "field": "external_component_weight_update",
+   "prior_value": false,
+   "corrected_value": "unknown",
+   "disposition": "UNRESOLVED_TRI_STATE",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "evidence": "p8 anchor='we fine tune qwen3 8b on a mixture'",
+   "rationale": "The fine-tuned Qwen3-8B is explicit, but whether another deployed DeepVerifier component is external depends on a core/peripheral topology boundary that is not frozen. False is therefore retired and unknown is required.",
+   "prior_owner_row_sha256": "b1744146028c719ee10d1ece2658656b1493dff62f76d35e4afe334a52c3bc43",
+   "corrected_owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+   "load_bearing_after_correction": false
+  },
+  {
+   "retired_adjudication_row_id": "ABS2-216d90876d8397734c37",
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "field": "human_or_dev_label_model_selection",
+   "prior_value": false,
+   "corrected_value": "unknown",
+   "disposition": "UNRESOLVED_TRI_STATE_AFTER_REVIEWER_DISAGREE",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "evidence": [
+    "p4 anchor='due to its strong performance in this setting'",
+    "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'",
+    "p8 labeled accuracy comparison across backbone models"
+   ],
+   "rationale": "The positive performance-based choice and labeled comparisons refute false, but the paper does not resolve whether labeled development outcomes selected the deployed backbone before freeze; unknown is the conservative value mandated by the external reviewer.",
+   "prior_owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "corrected_owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
+   "load_bearing_after_correction": false,
+   "originating_review_verdict": "DISAGREE_RECODE_REQUIRED"
+  }
+ ],
+ "supersedes": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json"
+}

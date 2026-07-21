@@ -243,11 +243,13 @@ def evaluate(
     staged: dict[str, GitEntry],
     read_blob: Callable[[str], bytes],
     read_worktree: Callable[[str], bytes],
+    allow_staged_only_paths: set[str] | None = None,
 ) -> list[str]:
-    """Evaluate HEAD, stage-0, and worktree identity for every registered row."""
+    """Evaluate committed rows and an explicitly allowed atomic staged append."""
 
     failures: list[str] = []
     seen: set[str] = set()
+    allowed_staged_only = allow_staged_only_paths or set()
     for artifact in artifacts:
         path, pin = artifact["path"], artifact["git_blob"]
         if path in seen:
@@ -255,11 +257,11 @@ def evaluate(
         seen.add(path)
         head_entry = head.get(path)
         staged_entry = staged.get(path)
-        if head_entry is None:
+        if head_entry is None and path not in allowed_staged_only:
             failures.append(f"{path}: missing at HEAD (registered artifact not committed)")
-        elif head_entry.mode not in REGULAR_MODES:
+        elif head_entry is not None and head_entry.mode not in REGULAR_MODES:
             failures.append(f"{path}: non-regular HEAD mode {head_entry.mode}")
-        elif head_entry.blob != pin:
+        elif head_entry is not None and head_entry.blob != pin:
             failures.append(
                 f"{path}: HEAD blob {head_entry.blob[:12]} != pinned {pin[:12]}"
             )
@@ -379,7 +381,19 @@ def expected_report(
         count != head_count or actual_prefix != head_actual_prefix
     ):
         failures.append("unchanged registry transaction does not preserve the HEAD anchor")
-    failures.extend(evaluate(artifacts, head, staged, read_blob, reader.read_bytes))
+    staged_only_paths: set[str] = set()
+    if len(artifacts) == head_count + 1 and artifacts[:head_count] == head_artifacts:
+        staged_only_paths.add(artifacts[-1]["path"])
+    failures.extend(
+        evaluate(
+            artifacts,
+            head,
+            staged,
+            read_blob,
+            reader.read_bytes,
+            allow_staged_only_paths=staged_only_paths,
+        )
+    )
 
     # Oracle-can-fail proof uses the same binding evaluator.
     wrong = [{"path": artifacts[0]["path"], "git_blob": "0" * 40}]

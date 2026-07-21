@@ -1,0 +1,92 @@
+{
+ "artifact_id": "SF-MODALITY-SPECIFICITY-CALIBRATION-V1-2026-07-21-01",
+ "schema": "sf-modality-specificity-calibration-v1",
+ "status": "PENDING_SECOND_INDEPENDENT_CODER",
+ "load_bearing": false,
+ "codebook": "wiki/survey/current/modality-specificity-codebook.md",
+ "purpose": "Pre-Stage-1B calibration of the seven H5 modality-specificity fields. These rows cannot support occupancy or findings until two independent coders and disagreement adjudication complete.",
+ "source_review": {
+  "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+  "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+ },
+ "papers": [
+  {
+   "identity": {"kind": "arxiv", "id": "2510.02995"},
+   "title": "AudioToolAgent: An Agentic Framework for Audio-Language Models",
+   "calibration_role": "speech/omni tool-agent positive calibration",
+   "fulltext": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "pdf_sha256": "aa0fce22c4efd4dbae6cb13f35c956e0a62124d1ac129d483324145a2528d866",
+    "eprint_sha256": "734a25199b63327ae94d640b4a555ad1df25c45efc767df82127b23c26481a15"
+   }
+  },
+  {
+   "identity": {"kind": "arxiv", "id": "2509.19676"},
+   "title": "Thinking While Listening: Simple Test Time Scaling For Audio Classification",
+   "calibration_role": "audio test-time-scaling boundary calibration",
+   "fulltext": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "pdf_sha256": "e3f568e82199823c127cab0afdca9910883225925b6d26f4e01e7d4559dda511",
+    "eprint_sha256": "b30dc0a6eb7ed509437c5214147c9951a112323f046110a56f46ccbd5df579e2"
+   }
+  },
+  {
+   "identity": {"kind": "arxiv", "id": "2606.19341"},
+   "title": "Native Active Perception as Reasoning for Omni-Modal Understanding",
+   "calibration_role": "native omni sequential-control calibration",
+   "fulltext": {
+    "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+    "pdf_sha256": "cc3e5c14132e27f7b30df4f11f323223321c2b9dee3a6eb342ebabdd240bd2de",
+    "eprint_sha256": "1bebd8884c2dbbf5c1193a18a4ae8465fdc92112387dfba43bdace08d63b146f"
+   }
+  }
+ ],
+ "coders": [
+  {
+   "coder_id": "codex-primary-round16-remediation",
+   "coding_date": "2026-07-21",
+   "independent_of_implementer": false,
+   "role": "implementer coder A; non-load-bearing calibration only",
+   "assignments": [
+    {"paper_id":"2510.02995","field":"modality_topology","value":"text_only","locators":[{"kind":"pdf_page","page":2,"anchor":"current work differs by using a text-only agent that delegates audio understanding to specialized tools"}]},
+    {"paper_id":"2510.02995","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","page":2,"anchor":"the agent makes 5-10 calls depending on the configuration"}]},
+    {"paper_id":"2510.02995","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","page":2,"anchor":"after receiving tool responses the agent decides whether to make additional tool calls"}]},
+    {"paper_id":"2510.02995","field":"acoustic_evidence_provenance","value":"task_provided_audio_tool_readout","locators":[{"kind":"pdf_page","page":2,"anchor":"the agent accesses audio signals only through the tools"}]},
+    {"paper_id":"2510.02995","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","page":2,"anchor":"issue follow-up tool calls when outputs conflict or remain ambiguous"}]},
+    {"paper_id":"2510.02995","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","page":2,"anchor":"structured tags to initiate a request and to conclude it"}]},
+    {"paper_id":"2510.02995","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","page":2,"anchor":"answer the question with the information already gathered"}]},
+
+    {"paper_id":"2509.19676","field":"modality_topology","value":"audio_native_single","locators":[{"kind":"pdf_page","page":2,"anchor":"front end and positional encoding"}]},
+    {"paper_id":"2509.19676","field":"temporal_regime","value":"offline_batch","locators":[{"kind":"pdf_page","page":2,"anchor":"during inference and the audio is fixed"}]},
+    {"paper_id":"2509.19676","field":"observation_granularity","value":"segment_or_chunk","locators":[{"kind":"pdf_page","page":3,"anchor":"audio is segmented into 500ms chunks"}]},
+    {"paper_id":"2509.19676","field":"acoustic_evidence_provenance","value":"learned_audio_representation","locators":[{"kind":"pdf_page","page":2,"anchor":"transformer decoder blocks front end positional encoding"}]},
+    {"paper_id":"2509.19676","field":"latency_action_timing","value":"post_utterance","locators":[{"kind":"pdf_page","page":2,"anchor":"testing audio and model fixed reason over sampled patch level category traces"}]},
+    {"paper_id":"2509.19676","field":"output_action_modality","value":"text","locators":[{"kind":"pdf_page","page":3,"anchor":"give the output category"}]},
+    {"paper_id":"2509.19676","field":"state_persistence","value":"within_utterance","locators":[{"kind":"pdf_page","page":2,"anchor":"concatenating them to increase the context for every output"}]},
+
+    {"paper_id":"2606.19341","field":"modality_topology","value":"omni_native_joint","locators":[{"kind":"pdf_page","page":2,"anchor":"omniagent is a single native omni model"}]},
+    {"paper_id":"2606.19341","field":"temporal_regime","value":"turn_based","locators":[{"kind":"pdf_page","page":4,"anchor":"iterative observation thought action cycle"}]},
+    {"paper_id":"2606.19341","field":"observation_granularity","value":"tool_or_environment_event","locators":[{"kind":"pdf_page","page":4,"anchor":"resolving action into new percept"}]},
+    {"paper_id":"2606.19341","field":"acoustic_evidence_provenance","value":"raw_waveform","locators":[{"kind":"pdf_page","page":4,"anchor":"environment performs only raw media extraction"}]},
+    {"paper_id":"2606.19341","field":"latency_action_timing","value":"inter_turn","locators":[{"kind":"pdf_page","page":4,"anchor":"at each turn the agent generates the ota triplet autoregressively"}]},
+    {"paper_id":"2606.19341","field":"output_action_modality","value":"composite","locators":[{"kind":"pdf_page","page":4,"anchor":"symbolic operator sampled from actions frames audio clip answer"}]},
+    {"paper_id":"2606.19341","field":"state_persistence","value":"cross_turn_session","locators":[{"kind":"pdf_page","page":4,"anchor":"persistent memory and the transient percept"}]}
+   ]
+  }
+ ],
+ "agreement_report": {
+  "unit": "paper-by-field assignment",
+  "planned_denominator": 21,
+  "observed_comparable_denominator": 0,
+  "exact_agreement_numerator": 0,
+  "exact_agreement_rate": null,
+  "disagreements": [],
+  "reason_not_computable": "Only implementer coder A is recorded. The second independent coder must code the same frozen fulltext without seeing coder A values before comparison."
+ },
+ "invalidating_conditions": [
+  "Any frozen PDF or eprint identity changes.",
+  "The codebook field definitions or allowed values change.",
+  "Coder B is not independent or sees coder A values before completing the blind pass.",
+  "Any disagreement remains without independent adjudication."
+ ]
+}

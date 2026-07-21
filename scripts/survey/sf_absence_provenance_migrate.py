@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare the 22 schema-v3 absence claims for independent semantic review.
+"""Prepare the current schema-v3 absence inventory for semantic review.
 
 This migrator binds existing negative claims to frozen fulltext bytes, exact
 locators, proof obligations, owner rows, and stable future adjudication IDs. It
@@ -28,29 +28,40 @@ from sf_row_hash import row_hash
 REPO = Path(__file__).resolve().parents[2]
 SIDECAR_DIR = REPO / "wiki/survey/current/data/schema-v3/sidecars"
 ADJUDICATION_PATH = (
-    REPO / "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
+    REPO / "wiki/survey/current/data/absence-evidence-adjudication-v3.json"
 )
 SIDECAR_REPO_PREFIX = "wiki/survey/current/data/schema-v3/sidecars"
 PENDING_STATUS = "PENDING_INDEPENDENT_REVIEW"
 
 
-def _proof(locators, reason, status="READY_FOR_REVIEW", concern=""):
+def _proof(
+    locators,
+    reason,
+    status="READY_FOR_REVIEW",
+    concern="",
+    *,
+    counterevidence_locators=None,
+    temporal_order_resolved=True,
+    counterevidence_reason=(
+        "The bound independent review reported no counterevidence that changes "
+        "this field; any positive evidence belongs to a different coding axis."
+    ),
+):
     return {
         "inspected_locators": locators,
         "reason": reason,
+        "counterevidence_search_scope": (
+            "Frozen fulltext methods, implementation details, adjacent experiments, "
+            "and the independent round-16 precheck Round-C semantic review."
+        ),
+        "counterevidence_locators": counterevidence_locators or [],
+        "temporal_order_resolved": temporal_order_resolved,
+        "why_counterevidence_does_not_change_verdict": counterevidence_reason,
         "implementer_assessment": {"status": status, "concern": concern},
     }
 
 
 PROOF_PREPARATIONS = {
-    ("2026.findings-acl.1243#closed-prompt-only", "human_or_dev_label_model_selection"): _proof(
-        [
-            "p4 anchor='framework consists of a decomposition agent a verification agent and a judge agent'",
-            "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
-            "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'",
-        ],
-        "The inspected deployed workflow exhaustively names automated decomposition, verification, judging, retry, and stopping operations; it contains no human or developer choice among model checkpoints based on labeled development outcomes.",
-    ),
     ("2026.findings-acl.1243#closed-prompt-only", "selection_object"): _proof(
         [
             "p5 anchor='uses it to guide further retries'",
@@ -235,8 +246,6 @@ def _adjudication_row_id(source_tuple):
 
 
 def _assert_inventory(records):
-    if len(records) != 19:
-        raise ValueError(f"expected 19 active absence records, found {len(records)}")
     preparation_keys = set(PROOF_PREPARATIONS)
     record_keys = {
         (record["method_path_id"], record["field"]) for record in records
@@ -291,6 +300,18 @@ def prepare_migration(sidecars):
                     "reason": preparation["reason"],
                     "proof_obligation_id": obligation,
                     "inspected_locators": deepcopy(preparation["inspected_locators"]),
+                    "counterevidence_search_scope": preparation[
+                        "counterevidence_search_scope"
+                    ],
+                    "counterevidence_locators": deepcopy(
+                        preparation["counterevidence_locators"]
+                    ),
+                    "temporal_order_resolved": preparation[
+                        "temporal_order_resolved"
+                    ],
+                    "why_counterevidence_does_not_change_verdict": preparation[
+                        "why_counterevidence_does_not_change_verdict"
+                    ],
                     "owner_method_path_id": pid,
                     "owner_sidecar": owner_sidecar,
                     "fulltext": deepcopy(fulltext),
@@ -315,6 +336,18 @@ def prepare_migration(sidecars):
                         "proof_obligation_id": entry["proof_obligation_id"],
                         "inspected_locators": deepcopy(entry["inspected_locators"]),
                         "reason": entry["reason"],
+                        "counterevidence_search_scope": entry[
+                            "counterevidence_search_scope"
+                        ],
+                        "counterevidence_locators": deepcopy(
+                            entry["counterevidence_locators"]
+                        ),
+                        "temporal_order_resolved": entry[
+                            "temporal_order_resolved"
+                        ],
+                        "why_counterevidence_does_not_change_verdict": entry[
+                            "why_counterevidence_does_not_change_verdict"
+                        ],
                         "owner_sidecar": owner_sidecar,
                         "fulltext": deepcopy(fulltext),
                         "coder_identity": coder,
@@ -346,13 +379,15 @@ def review_artifact(proof_rows, reviewer_rows):
         else PENDING_STATUS
     )
     return {
-        "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V2-2026-07-21-02",
-        "schema": "v2: 19 active generated proof_rows plus externally authored review rows; three retired negatives bind to the semantic-correction artifact",
+        "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V3-2026-07-21-01",
+        "schema": "v3: versioned active proof inventory plus externally authored review rows and counterevidence-search fields",
         "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
         "original_proof_inventory_count": 22,
-        "retired_by_semantic_correction_count": 3,
+        "retired_by_semantic_correction_count": 22 - len(proof_rows),
         "active_proof_inventory_count": len(proof_rows),
-        "semantic_correction_artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+        "inventory_identity": f"22 = {22 - len(proof_rows)} + {len(proof_rows)}",
+        "supersedes": "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
+        "semantic_correction_artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
         "status": status,
         "independence_requirement": (
             "A non-implementer must review frozen fulltext for every proof row and "

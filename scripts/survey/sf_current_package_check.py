@@ -46,13 +46,13 @@ TAIL_CHARACTERS = 4096
 
 COMMANDS = (
     "python scripts/survey/test_sf_evidence_contract.py",
-    "python scripts/survey/sf_schema_v3_migrate.py --check",
+    "python scripts/survey/sf_absence_provenance_migrate.py --check",
     "python scripts/survey/sf_coding_generator.py --check",
-    "python scripts/survey/sf_identity_taxonomy_v6_test.py",
-    "python scripts/survey/sf_dual_platform_check.py",
+    "python -m unittest scripts.survey.test_sf_identity_taxonomy_v7_harness scripts.survey.test_sf_h5_calibration_contract scripts.survey.test_sf_pdf_extractor_contract",
+    "python -m unittest scripts.survey.test_sf_evidence_v7_aggregate",
     "python scripts/survey/test_sf_query_compiler_profiles.py",
     "python scripts/survey/sf_query_compiler.py --check --check-against wiki/survey/2026-07-15-sf-queries.jsonl",
-    "python scripts/survey/sf_current_tables.py --check",
+    "python -m unittest scripts.survey.test_sf_existing_corpus_disposition scripts.survey.test_sf_bibliography_generator",
     "python scripts/survey/sf_current_manifest.py --check",
     "python scripts/survey/sf_release_binding_check.py",
     "python scripts/survey/sf_quantifier_scan.py",
@@ -61,7 +61,7 @@ COMMANDS = (
     "python scripts/checks/build_ai_context_manifest.py --check",
     "python scripts/checks/ai_context_surface_check.py",
 )
-STAGED_SANDBOX_COMMANDS = {COMMANDS[3]}
+STAGED_SANDBOX_COMMANDS: set[str] = set()
 
 
 class CurrentPackageError(RuntimeError):
@@ -129,7 +129,7 @@ def _replace_sandbox_path(value: str, sandbox: Path, repo: Path) -> str:
 
 
 def _default_command_runner(command: str, repo: Path) -> CommandExecution:
-    """Execute one fixed command; isolate its one legacy writing harness."""
+    """Execute one fixed command, with sandbox support for any future writer."""
 
     if command not in STAGED_SANDBOX_COMMANDS:
         return _execute_python_command(command, repo)

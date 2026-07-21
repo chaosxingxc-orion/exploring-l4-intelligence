@@ -177,6 +177,10 @@
       "p4 anchor='the discovery loop searches over code defined controllers'",
       "p5 anchor='value that achieves the highest accuracy'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2605.08083#discovered-controller",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
      "fulltext": {
@@ -185,7 +189,7 @@
       "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
      "adjudication_row_id": "ABS2-69fabfb31c97e102af00"
     },
     "deployment_label_access": {
@@ -207,6 +211,10 @@
       "p4 anchor='the resulting execution histories are stored in memory'",
       "p5 anchor='fixed and evaluated on held out environments'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2605.08083#discovered-controller",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
      "fulltext": {
@@ -215,7 +223,7 @@
       "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+     "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
      "adjudication_row_id": "ABS2-6bbe536f564a90af9deb"
     },
     "internal_visibility": {
@@ -273,7 +281,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "b1fbf711cb07bc629ba1d5b2a2277db609e685bdbb4566e5a9b86e63c394de2e",
+   "adjudication_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Contracts for the corrected 19-row negative-evidence review preparation."""
+"""Contracts for versioned negative-evidence review preparation."""
 from __future__ import annotations
 
 import contextlib
@@ -29,7 +29,6 @@ from sf_row_hash import row_hash  # noqa: E402
 
 EXPECTED_SOURCE_TUPLES = [
     ("2026.findings-acl.1243#closed-prompt-only", "row", "explicit_candidate_pool_selection", "absence", "false"),
-    ("2026.findings-acl.1243#closed-prompt-only", "row", "human_or_dev_label_model_selection", "absence", "false"),
     ("2026.findings-acl.1243#closed-prompt-only", "row", "selection_object", "absence", '"none"'),
     ("2026.findings-acl.1243#open-sft-variant", "row", "explicit_candidate_pool_selection", "absence", "false"),
     ("2026.findings-acl.1243#open-sft-variant", "row", "human_or_dev_label_model_selection", "absence", "false"),
@@ -55,9 +54,9 @@ class AbsenceMigrationTest(unittest.TestCase):
     def setUpClass(cls):
         cls.sidecars = migrate.load_sidecars(migrate.SIDECAR_DIR)
 
-    def test_source_inventory_is_exactly_19_stable_tuples(self):
+    def test_source_inventory_is_exactly_18_stable_tuples_after_review_recode(self):
         records = migrate.collect_absence_records(self.sidecars)
-        self.assertEqual(19, len(records))
+        self.assertEqual(18, len(records))
         self.assertEqual(EXPECTED_SOURCE_TUPLES, migrate.source_tuples(records))
 
     def test_source_inventory_is_a_subset_of_allowed_negative_pairs(self):
@@ -96,8 +95,8 @@ class AbsenceMigrationTest(unittest.TestCase):
         second = migrate.prepare_migration(deepcopy(self.sidecars))
         self.assertEqual(first, second)
         migrated, proof_rows = first
-        self.assertEqual(19, len(proof_rows))
-        self.assertEqual(19, len({row["adjudication_row_id"] for row in proof_rows}))
+        self.assertEqual(18, len(proof_rows))
+        self.assertEqual(18, len({row["adjudication_row_id"] for row in proof_rows}))
         self.assertEqual(
             EXPECTED_SOURCE_TUPLES,
             sorted(tuple(row["source_tuple"]) for row in proof_rows),
@@ -115,10 +114,11 @@ class AbsenceMigrationTest(unittest.TestCase):
         self.assertEqual([], artifact["rows"])
         self.assertIn("review_reason", artifact["review_row_required_fields"])
         self.assertEqual(22, artifact["original_proof_inventory_count"])
-        self.assertEqual(3, artifact["retired_by_semantic_correction_count"])
-        self.assertEqual(19, artifact["active_proof_inventory_count"])
+        self.assertEqual(4, artifact["retired_by_semantic_correction_count"])
+        self.assertEqual(18, artifact["active_proof_inventory_count"])
+        self.assertEqual("22 = 4 + 18", artifact["inventory_identity"])
 
-    def test_pending_artifact_blocks_all_19_absence_bindings(self):
+    def test_pending_artifact_blocks_all_18_absence_bindings(self):
         migrated, proof_rows = migrate.prepare_migration(deepcopy(self.sidecars))
         artifact = migrate.review_artifact(proof_rows, reviewer_rows=[])
         failures = []
@@ -138,10 +138,32 @@ class AbsenceMigrationTest(unittest.TestCase):
                         row, sidecar_path, sidecar, artifact
                     )
                 )
-        self.assertEqual(19, absence_count)
+        self.assertEqual(18, absence_count)
         self.assertEqual(
-            19,
+            18,
             sum("absence-adjudication-row-missing" in failure for failure in failures),
+        )
+
+    def test_bound_external_reviews_accept_two_explicit_cautions_as_affirmative(self):
+        migrated, _ = migrate.prepare_migration(deepcopy(self.sidecars))
+        artifact = json.loads(migrate.ADJUDICATION_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(18, len(artifact["rows"]))
+        self.assertEqual(
+            2,
+            sum(row["verdict"] == "AGREE_WITH_CAUTION" for row in artifact["rows"]),
+        )
+        failures = []
+        for filename, sidecar in migrated:
+            sidecar_path = f"{migrate.SIDECAR_REPO_PREFIX}/{filename}"
+            for row in sidecar["method_paths"]:
+                failures.extend(
+                    validate_absence_cross_bindings(
+                        row, sidecar_path, sidecar, artifact
+                    )
+                )
+        self.assertFalse(
+            any("absence-verdict-not-agree" in failure for failure in failures),
+            failures,
         )
 
     def test_migrated_rows_pass_local_contract_and_bind_non_circular_hash(self):
@@ -167,7 +189,7 @@ class AbsenceMigrationTest(unittest.TestCase):
                 self.assertEqual(
                     "PENDING_INDEPENDENT_REVIEW", row["absence_review_status"]
                 )
-        self.assertEqual(19, count)
+        self.assertEqual(18, count)
 
     def test_each_proof_has_exact_locators_reason_and_fulltext_binding(self):
         _, proof_rows = migrate.prepare_migration(deepcopy(self.sidecars))
@@ -181,8 +203,12 @@ class AbsenceMigrationTest(unittest.TestCase):
                     proof["implementer_assessment"]["status"],
                     {"READY_FOR_REVIEW", "IMPLEMENTER_CONCERN"},
                 )
+                self.assertTrue(proof["counterevidence_search_scope"])
+                self.assertIsInstance(proof["counterevidence_locators"], list)
+                self.assertIsInstance(proof["temporal_order_resolved"], bool)
+                self.assertTrue(proof["why_counterevidence_does_not_change_verdict"])
 
-    def test_three_review_challenged_negatives_are_removed_not_force_agreed(self):
+    def test_four_review_challenged_negatives_are_removed_not_force_agreed(self):
         rows = {
             row["method_path_id"]: row
             for _, sidecar in self.sidecars
@@ -190,6 +216,7 @@ class AbsenceMigrationTest(unittest.TestCase):
         }
         dream = rows["2026.findings-acl.511#prm-guided-search"]
         deepverifier = rows["2026.findings-acl.1243#open-sft-variant"]
+        deepverifier_closed = rows["2026.findings-acl.1243#closed-prompt-only"]
 
         self.assertIs(
             True, dream["controller_program_or_config_optimized_on_labels"]
@@ -210,9 +237,27 @@ class AbsenceMigrationTest(unittest.TestCase):
             "pdf_page",
             deepverifier["claim_evidence"]["external_component_weight_update"]["kind"],
         )
+        self.assertEqual(
+            "unknown", deepverifier_closed["human_or_dev_label_model_selection"]
+        )
+        self.assertEqual(
+            "pdf_page",
+            deepverifier_closed["claim_evidence"][
+                "human_or_dev_label_model_selection"
+            ]["kind"],
+        )
+        self.assertIn(
+            "ABS2-216d90876d8397734c37",
+            deepverifier_closed["semantic_correction"]["retired_absence_ids"],
+        )
+        for row in (dream, deepverifier, deepverifier_closed):
+            self.assertEqual("adjudicated_agree", row["adjudication_status"])
+            self.assertEqual(
+                "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+                row["semantic_adjudicator"],
+            )
         for row in (dream, deepverifier):
             self.assertFalse(row["load_bearing"])
-            self.assertEqual("conflict_queue", row["adjudication_status"])
 
     def test_review_artifact_preserves_external_reviewer_rows_but_never_creates_them(self):
         _, proof_rows = migrate.prepare_migration(deepcopy(self.sidecars))

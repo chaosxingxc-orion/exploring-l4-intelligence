@@ -1,0 +1,1355 @@
+{
+ "artifact_id": "SF-ABSENCE-EVIDENCE-ADJUDICATION-V3-2026-07-21-01",
+ "schema": "v3: versioned active proof inventory plus externally authored review rows and counterevidence-search fields",
+ "generated_by": "scripts/survey/sf_absence_provenance_migrate.py",
+ "original_proof_inventory_count": 22,
+ "retired_by_semantic_correction_count": 4,
+ "active_proof_inventory_count": 18,
+ "inventory_identity": "22 = 4 + 18",
+ "supersedes": "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
+ "semantic_correction_artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
+ "status": "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED",
+ "independence_requirement": "A non-implementer must review frozen fulltext for every proof row and supply TEAM_ATTESTATION identity, nonparticipation scope, timestamp, conflict declaration, per-row reason, and AGREE or DISAGREE.",
+ "review_row_required_fields": [
+  "adjudication_row_id",
+  "method_path_id",
+  "owner_kind",
+  "field",
+  "proof_obligation_id",
+  "owner_sidecar",
+  "fulltext",
+  "coder_identity",
+  "owner_row_sha256",
+  "adjudicator_identity",
+  "verdict",
+  "review_reason",
+  "independence"
+ ],
+ "proof_obligation_catalog": {
+  "human_or_dev_label_model_selection": {
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "required_inspection_targets": [
+    "model/checkpoint selection procedure",
+    "development and evaluation protocol"
+   ],
+   "search_terms_or_tables": [
+    "human selection, manual selection, dev set, validation set",
+    "checkpoint selection, model selection, best-of-run"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit fixed-model statement or exhaustive selection procedure showing no human/dev-label choice"
+   ],
+   "force_unresolved_if": [
+    "selection procedure, appendix, or referenced implementation is unavailable or ambiguous"
+   ]
+  },
+  "selection_object": {
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "required_inspection_targets": [
+    "method algorithm",
+    "inference/decoding procedure"
+   ],
+   "search_terms_or_tables": [
+    "candidate, sample, output, trajectory, select, rank, rerank, choose"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit single-output/direct-return procedure or exhaustive algorithm showing no candidate-object selection"
+   ],
+   "force_unresolved_if": [
+    "candidate construction or terminal decision procedure is missing or ambiguous"
+   ]
+  },
+  "explicit_candidate_pool_selection": {
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "required_inspection_targets": [
+    "candidate generation procedure",
+    "terminal selection/ranking procedure"
+   ],
+   "search_terms_or_tables": [
+    "best-of-N, sample, beam, pool, rank, rerank, majority, MBR, select"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit direct-return procedure or exhaustive algorithm showing no scored/tournament choice among generated candidates"
+   ],
+   "force_unresolved_if": [
+    "multiple candidates may exist but their terminal handling cannot be resolved"
+   ]
+  },
+  "inference_external_new_information": {
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "required_inspection_targets": [
+    "inference inputs and tool/retrieval interfaces",
+    "environment-observation procedure"
+   ],
+   "search_terms_or_tables": [
+    "retrieve, search, browse, tool, database, environment, observation"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "closed-input inference declaration or exhaustive interface list showing no external new-information channel"
+   ],
+   "force_unresolved_if": [
+    "tool, retrieval, environment, or referenced runtime behavior is unavailable or ambiguous"
+   ]
+  },
+  "external_component_weight_update": {
+   "proof_obligation_id": "NEG-EXTERNAL-COMPONENT-WEIGHT-UPDATE",
+   "required_inspection_targets": [
+    "training/setup section for every external component",
+    "implementation or checkpoint provenance"
+   ],
+   "search_terms_or_tables": [
+    "train, finetune, update, optimize, learned, checkpoint, frozen"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit frozen/off-the-shelf declaration covering every external component or a complete no-external-component architecture"
+   ],
+   "force_unresolved_if": [
+    "any external component has unknown training or checkpoint provenance"
+   ]
+  },
+  "controller_program_or_config_optimized_on_labels": {
+   "proof_obligation_id": "NEG-CONTROLLER-OPTIMIZED-ON-LABELS",
+   "required_inspection_targets": [
+    "controller construction and tuning procedure",
+    "development/evaluation protocol"
+   ],
+   "search_terms_or_tables": [
+    "tune, optimize, search, sweep, validation, dev, label, reward"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit fixed controller/configuration declaration with provenance or exhaustive construction procedure showing no label optimization"
+   ],
+   "force_unresolved_if": [
+    "controller/configuration selection provenance is unavailable or ambiguous"
+   ]
+  },
+  "decision_rights": {
+   "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+   "required_inspection_targets": [
+    "complete inference/control algorithm",
+    "all signal consumers and termination rules"
+   ],
+   "search_terms_or_tables": [
+    "retry, revise, branch, route, stop, select, tool, prompt, memory"
+   ],
+   "acceptable_explicit_negative_evidence": [
+    "explicit observational-only role or exhaustive algorithm showing no control action owned by the external component"
+   ],
+   "force_unresolved_if": [
+    "a signal exists whose consumer or downstream action is unavailable or ambiguous"
+   ]
+  }
+ },
+ "proof_rows": [
+  {
+   "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e",
+   "source_tuple": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The exhaustive inference loop revises a single current answer sequentially and exposes no scored, ranked, voted, or tournament candidate pool selection operation.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-49b8c920cf44c2045df6",
+   "source_tuple": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The complete test-time procedure carries one current answer through verify-feedback-retry and returns on acceptance or the retry cap; it defines no simultaneously constructed objects from which a selector chooses.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-1392014ff32270df1e5e",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The open variant's exhaustive inference procedure is sequential revision of one answer and specifies no scored, ranked, voted, or tournament choice over an explicit candidate pool.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-58b7d1b9a43299821296",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
+    "p6 anchor='we fine tune qwen3 8b on a mixture'"
+   ],
+   "reason": "The inspected open-model construction specifies automated trajectory filtering, a fixed Qwen3-8B fine-tuning target, and an automated feedback loop; it gives no human or developer labeled checkpoint-selection step.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-cf6ae4d082096066fee4",
+   "source_tuple": [
+    "2026.findings-acl.1243#open-sft-variant",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p5 anchor='uses it to guide further retries'",
+    "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
+   ],
+   "reason": "The open variant retains the same single-answer verify-feedback-retry loop; the complete described inference path contains no candidate object compared by a selector.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc",
+   "source_tuple": [
+    "2026.findings-acl.1724#pipeline",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2026.findings-acl.1724#pipeline",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p2 anchor='the pipeline takes raw data and produces a final report with curated charts'",
+    "p4 anchor='the data profiling stage produces multiple metadata reports'",
+    "p4 anchor='evaluator ranks candidates and discards a fixed'"
+   ],
+   "reason": "The complete pipeline transforms the provided raw dataset into profiles, charts, insights, and reports; code execution and judging operate on those task-provided artifacts and no retrieval, browsing, or external evidence channel is described.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1724",
+    "kind": "pdf",
+    "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "7ec253f18e6466163189c91aeda69e529e416161b66776e31743fdafe933226a",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-359542ede39fa005cfea",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+    "tex: 'for select-K, we run RTV on the N parallel rollouts via tournament voting'"
+   ],
+   "reason": "The paper explicitly contrasts Random-K sampling with Select-K tournament voting; this method path uses the former and therefore has no scored or tournament candidate-pool selection.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
+    "tex: 'using K randomly sampled summaries from previous iteration rollouts'"
+   ],
+   "reason": "Random-K forms refinement context by parameter-free random sampling from prior summaries; no human or developer uses labels to choose a model, checkpoint, or sampled summary.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-f431a625273dfcd73698",
+   "source_tuple": [
+    "2604.16529#pdr-random-k",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "tex: 'for random-K, we follow PDR and randomly sample K previous summaries into the previous-iteration rollouts'",
+    "tex: 'provide as refinement context for executing each next-iteration rollout'"
+   ],
+   "reason": "The operation randomly samples summaries solely as context supply and does not compare, score, rank, vote on, or select a winning candidate object under the taxonomy's explicit selector semantics.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-9cf174bd899f3a803b87",
+   "source_tuple": [
+    "2604.16529#rtv",
+    "row",
+    "decision_rights",
+    "absence",
+    "[]"
+   ],
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "decision_rights",
+   "value": [],
+   "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+   "inspected_locators": [
+    "tex: 'RTV selects the final remaining rollout as its output'",
+    "tex: 'repeating the process in a tournament-like manner until one rollout remains from the entire population'"
+   ],
+   "reason": "The isolated RTV method path terminates by returning the final remaining rollout; after that terminal selection the source specifies no downstream route, retry, branch, tool, memory, supply, stop, synthesis, or execute-skip control action.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-527adf4083786f6bb14b",
+   "source_tuple": [
+    "2604.16529#rtv",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'to select the strongest attempt from a population of rollouts without access to ground-truth outcomes'",
+    "tex: 'RTV selects the final remaining rollout as its output'"
+   ],
+   "reason": "The complete RTV procedure is an automated tournament over rollout summaries and explicitly operates without ground-truth outcomes; it contains no human or developer labeled model-selection step.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0",
+   "source_tuple": [
+    "2604.16529#rtv-pdr-pipeline",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2604.16529#rtv-pdr-pipeline",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "tex: 'RTV is then applied to these summaries to select the top-K summaries'",
+    "tex: 'without access to ground-truth outcomes'"
+   ],
+   "reason": "The combined pipeline uses automated RTV to select summaries without ground-truth outcomes and supplies them to the next iteration; no human or developer label-based model choice appears in the complete recipe.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f1dc8ad6b771de5f21f52f6b9d9ecd64235dcb1db8df8f17e1a593cefa64d8e5",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-69fabfb31c97e102af00",
+   "source_tuple": [
+    "2605.08083#discovered-controller",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p4 anchor='the discovery loop searches over code defined controllers'",
+    "p5 anchor='value that achieves the highest accuracy'"
+   ],
+   "reason": "Controller and beta selection is an automated accuracy-based operation inside the discovery loop; the source describes no human or developer manually choosing among model checkpoints using labeled outcomes.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-6bbe536f564a90af9deb",
+   "source_tuple": [
+    "2605.08083#discovered-controller",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p4 anchor='the resulting execution histories are stored in memory'",
+    "p5 anchor='fixed and evaluated on held out environments'"
+   ],
+   "reason": "After discovery, the fixed controller observes only branch state, probe answers, depth, and budget from the current task execution; the deployed inference procedure adds no retrieval, browsing, database, or external evidence source.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-481b25ff36e49a4d2088",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "explicit_candidate_pool_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "inspected_locators": [
+    "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+    "p5 anchor='decides whether to execute the tool call'"
+   ],
+   "reason": "The complete gate interface evaluates a single pending tool call and exposes no scored, ranked, voted, or tournament choice among an explicit pool of candidate outputs.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-e9b7f915e84ac3072514",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "human_or_dev_label_model_selection",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "value": false,
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "inspected_locators": [
+    "p6 anchor='each proposed tool call in a logged trajectory becomes one training instance'",
+    "p6 anchor='the label is derived from forced answer probes before and after tool execution'",
+    "p9 anchor='the diagnostic annotation of tool correctness is automatic and noisy'"
+   ],
+   "reason": "Training labels and diagnostic annotations are generated automatically from forced-answer probes, episode correctness, and a VLM judge; no human or developer label-based model or checkpoint selection step is described.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-94932b7d979683355098",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "inference_external_new_information",
+    "absence",
+    "false"
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "value": false,
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "inspected_locators": [
+    "p5 anchor='it does not see image pixels hidden states system prompts decoding log probabilities internal uncertainty estimates or the future tool output'",
+    "p6 anchor='the tool suite includes six perceptual tools ocr'"
+   ],
+   "reason": "The system's tools only read out the task-provided image and the gate sees the existing trajectory plus pending call before execution; no retrieval, browsing, database, or information source external to the task input is introduced.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9",
+   "source_tuple": [
+    "2606.03054#trained-gate",
+    "row",
+    "selection_object",
+    "absence",
+    "\"none\""
+   ],
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "value": "none",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "inspected_locators": [
+    "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
+    "p5 anchor='decides whether to execute the tool call'"
+   ],
+   "reason": "ToolGate receives one already-proposed call and makes a binary execute-or-skip action; it constructs no candidate output, trajectory, plan, tool-agent, or other pool object for terminal selection.",
+   "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+   "counterevidence_locators": [],
+   "temporal_order_resolved": true,
+   "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "implementer_assessment": {
+    "status": "READY_FOR_REVIEW",
+    "concern": ""
+   }
+  }
+ ],
+ "rows": [
+  {
+   "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e",
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the closed path is sequential revision of one current answer with no scored, ranked, or voted pool.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-49b8c920cf44c2045df6",
+   "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the closed path exposes no parallel candidate object; its terminal action is accept or retry.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-1392014ff32270df1e5e",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the open-SFT inference path is likewise single-answer sequential revision.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-58b7d1b9a43299821296",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE_WITH_CAUTION",
+   "qualification": "CAUTION",
+   "review_reason": "the open variant fixes Qwen3-8B and no labeled-outcome checkpoint choice was found; preserve the counterevidence scope.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-cf6ae4d082096066fee4",
+   "method_path_id": "2026.findings-acl.1243#open-sft-variant",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1243",
+    "kind": "pdf",
+    "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the open variant contains no candidate object compared by a selector.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc",
+   "method_path_id": "2026.findings-acl.1724#pipeline",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
+   "fulltext": {
+    "id": "2026.findings-acl.1724",
+    "kind": "pdf",
+    "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "7ec253f18e6466163189c91aeda69e529e416161b66776e31743fdafe933226a",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the data-analysis pipeline processes task-provided datasets and artifacts with no external new-information channel.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-359542ede39fa005cfea",
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "Random-K is supply-side random sampling, not score/rank/vote selection.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c",
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "Random-K contains no human or developer labeled model selection.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-f431a625273dfcd73698",
+   "method_path_id": "2604.16529#pdr-random-k",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "sampled summaries are refinement supply, not a winning selection object.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-9cf174bd899f3a803b87",
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "decision_rights",
+   "proof_obligation_id": "NEG-DECISION-RIGHTS-EMPTY",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "isolated RTV terminates at selection with no downstream decision right; terminal operator and rights remain separate.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-527adf4083786f6bb14b",
+   "method_path_id": "2604.16529#rtv",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "RTV explicitly avoids ground-truth outcomes and no human/developer model choice is reported.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0",
+   "method_path_id": "2604.16529#rtv-pdr-pipeline",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
+   "fulltext": {
+    "id": "2604.16529",
+    "kind": "eprint",
+    "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f1dc8ad6b771de5f21f52f6b9d9ecd64235dcb1db8df8f17e1a593cefa64d8e5",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the combined RTV-PDR recipe reports no labeled model choice.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-69fabfb31c97e102af00",
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "AutoTTS controller/beta accuracy optimization is controller-label optimization, not human model selection.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-6bbe536f564a90af9deb",
+   "method_path_id": "2605.08083#discovered-controller",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json",
+   "fulltext": {
+    "id": "2605.08083",
+    "kind": "pdf",
+    "sha256": "c6fb097f71fdd150410b1399d7bbbbe66960d5fdc7cd1f75c33060734fcf640c"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "de2e405953e0e6178bd713c06124f5528dd72c05ab2649a6e5e6831120b8ca38",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the deployed controller reads current task state, probes, and budget, with no retrieval/database new-information source.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-481b25ff36e49a4d2088",
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "explicit_candidate_pool_selection",
+   "proof_obligation_id": "NEG-EXPLICIT-CANDIDATE-POOL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "ToolGate makes execute/skip on one pending call and constructs no candidate pool.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-e9b7f915e84ac3072514",
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "human_or_dev_label_model_selection",
+   "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE_WITH_CAUTION",
+   "qualification": "CAUTION",
+   "review_reason": "labels are automatic and no human/developer checkpoint selection was found; model/regularization search scope remains disclosed.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-94932b7d979683355098",
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "inference_external_new_information",
+   "proof_obligation_id": "NEG-INFERENCE-EXTERNAL-NEW-INFORMATION",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "tools read the task-provided image, which is read-out rather than external new information.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  },
+  {
+   "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9",
+   "method_path_id": "2606.03054#trained-gate",
+   "owner_kind": "row",
+   "field": "selection_object",
+   "proof_obligation_id": "NEG-SELECTION-OBJECT-NONE",
+   "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
+   "fulltext": {
+    "id": "2606.03054",
+    "kind": "pdf",
+    "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
+   },
+   "coder_identity": "claude-fable-main:s-ea4f0926",
+   "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
+   "adjudicator_identity": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "verdict": "AGREE",
+   "qualification": "NONE",
+   "review_reason": "the execute/skip gate has no taxonomy-defined pool selection object.",
+   "independence": {
+    "classification": "TEAM_ATTESTATION",
+    "nonparticipation_scope": "Reviewer states they did not participate in this implementation and do not replace owner authorization.",
+    "conflict_declaration": "No implementation participation declared in the bound report.",
+    "timestamp": "2026-07-21 (date-only; exact UTC time unavailable)"
+   },
+   "source_binding": {
+    "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+    "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a",
+    "line_range": "272-292"
+   }
+  }
+ ]
+}

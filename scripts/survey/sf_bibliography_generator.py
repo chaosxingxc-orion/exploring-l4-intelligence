@@ -82,7 +82,21 @@ REVIEWER_2026_07_21_POLICIES = {
     "2602.00846": ("MEASUREMENT_INSTRUMENT", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 230),
     "2512.16899": ("MEASUREMENT_INSTRUMENT", "REWARD_AND_VERIFICATION_MECHANISMS", 231),
 }
-NEW_DIRECT_NEIGHBORS = {"2509.19676", "2606.19341", "2502.04128", "2602.22897"}
+ROUND16_PRECHECK_PATH = "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md"
+ROUND16_PRECHECK_POLICIES = {
+    "2606.00579": ("BOUNDARY_COMPARATOR", "SYSTEM_FIRST_DIRECT_NEIGHBORS", 181),
+    "2606.03183": ("MEASUREMENT_INSTRUMENT", "REWARD_AND_VERIFICATION_MECHANISMS", 187),
+    "2502.19328": ("MEASUREMENT_INSTRUMENT", "REWARD_AND_VERIFICATION_MECHANISMS", 192),
+    "2605.10344": ("KNOWN_QUEUE", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 199),
+    "2508.00890": ("KNOWN_QUEUE", "TRAINING_FREE_AND_TRAINED_BOUNDARIES", 203),
+}
+NEW_DIRECT_NEIGHBORS = {
+    "2509.19676",
+    "2606.19341",
+    "2502.04128",
+    "2602.22897",
+    "2606.00579",
+}
 VISIBLE_SELECTION_BASES = {
     "LOAD_BEARING_OR_D2",
     "DIRECT_SYSTEM_NEIGHBOR",
@@ -178,6 +192,7 @@ def additional_policies() -> dict[str, dict[str, Any]]:
     sources = (
         ({**DIRECT_NEIGHBOR_POLICIES, **REVIEWER_P2_POLICIES}, REVIEW_PATH),
         (REVIEWER_2026_07_21_POLICIES, REVIEW_2026_07_21_PATH),
+        (ROUND16_PRECHECK_POLICIES, ROUND16_PRECHECK_PATH),
     )
     for source_policies, source_path in sources:
         for identity_id, (role, chain, line_number) in source_policies.items():
@@ -194,7 +209,13 @@ def additional_policies() -> dict[str, dict[str, Any]]:
                 "next_action": (
                     "Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing."
                     if identity_id in REVIEWER_P2_POLICIES
-                    or identity_id in {"2602.22897", "2602.00846", "2512.16899"}
+                    or identity_id in {
+                        "2602.22897",
+                        "2602.00846",
+                        "2512.16899",
+                        "2605.10344",
+                        "2508.00890",
+                    }
                     else "Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim."
                 ),
                 "load_bearing": False,
@@ -225,8 +246,8 @@ def all_policies() -> dict[str, dict[str, Any]]:
     if overlap:
         raise ValueError(f"additions duplicate retained bibliography identities: {sorted(overlap)}")
     policies.update(additions)
-    if len(policies) != 85:
-        raise ValueError(f"expected 85 bibliography policies, got {len(policies)}")
+    if len(policies) != 90:
+        raise ValueError(f"expected 90 bibliography policies, got {len(policies)}")
     return policies
 
 

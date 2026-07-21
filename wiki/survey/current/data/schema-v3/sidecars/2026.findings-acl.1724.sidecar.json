@@ -171,6 +171,10 @@
       "p4 anchor='the data profiling stage produces multiple metadata reports'",
       "p4 anchor='evaluator ranks candidates and discards a fixed'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1724#pipeline",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json",
      "fulltext": {
@@ -179,7 +183,7 @@
       "sha256": "f255c43fcdbe9e68cf5f961aa9887dc28a33d11bc7ee03c0a591cf07387b0087"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+     "owner_row_sha256": "7ec253f18e6466163189c91aeda69e529e416161b66776e31743fdafe933226a",
      "adjudication_row_id": "ABS2-42aa814a2dfee7a92dbc"
     },
     "internal_visibility": {
@@ -236,7 +240,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "df6d0381389635ceb91e1f0cd96382bbbf0718809c546aea62b4352c3a873b74",
+   "adjudication_row_sha256": "7ec253f18e6466163189c91aeda69e529e416161b66776e31743fdafe933226a",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],

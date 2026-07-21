@@ -231,8 +231,8 @@
    "adjudication_provenance": "v4 复审 DFS 批B;iso-adj-B 专项确认 stop_budget→branch(补采)非 retry;v5-schema 迁移:单信号在线多用途;〔iso-adj-B2 再裁决 AGREE:不拆分被判正确——同一 PRM 真实承担三用途(与 STTS 双 judge 相反方向的正确处理);select 用途无边正确(终选由 terminal_operator/policy 承载);ctrl_label=false absence 条目判「诚实定位标签训练于 PRM 轴,避免重复计」〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DREAM:trained PRM 在线逐步引导;ext_wu 使 strict 不满足",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING_POST_CORRECTION_REVIEW",
-   "adjudication_status": "conflict_queue",
+   "semantic_adjudicator": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "adjudication_status": "adjudicated_agree",
    "adjudication_row_sha256": "d8e03c11a82db46c91c16886eed23f736c0d61fd05dc61b7fd436f6bfafdcecb",
    "semantic_correction": {
     "date": "2026-07-21",

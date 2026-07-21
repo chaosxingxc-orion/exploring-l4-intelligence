@@ -5521,6 +5521,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2502.19328",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or fulltext does not combine preference and verifiable reward signals.",
+        "load_bearing": false,
+        "next_action": "Route as a reward-system comparator; reach D2 before any exclusivity or mechanism-equivalence claim relies on it.",
+        "query_recall_credit": false,
+        "reason": "Reward/verifier-system and inference-time best-of-N comparator spanning trained and inference-time boundaries.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-013",
+          "relation": "EXACT_ID",
+          "source_id": "2502.19328"
+        },
+        {
+          "provenance": "reviewer_known:RK-013",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems"
+        }
+      ],
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-013",
+          "role": "MEASUREMENT_INSTRUMENT"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-013"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2502.20379",
       "claim_evidence": [],
       "current_disposition": {
@@ -6902,6 +6942,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2508.00890",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or no test-time compute allocation/control relationship remains.",
+        "load_bearing": false,
+        "next_action": "Keep in the Stage-1B known queue; promote only if later mapping makes it load-bearing.",
+        "query_recall_credit": false,
+        "reason": "Nonblocking P2 text-domain budget/control comparator.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-015",
+          "relation": "EXACT_ID",
+          "source_id": "2508.00890"
+        },
+        {
+          "provenance": "reviewer_known:RK-015",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks"
+        }
+      ],
+      "reference_role": "KNOWN_QUEUE",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-015",
+          "role": "KNOWN_QUEUE"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-015"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2508.01186",
       "claim_evidence": [],
       "current_disposition": {
@@ -7361,10 +7441,37 @@
         "reason": "Inherited source row retained in the explicit existing-corpus queue; no deep-read or inclusion-result claim is implied.",
         "reason_code": null
       },
-      "fulltext_events": [],
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "e3f568e82199823c127cab0afdca9910883225925b6d26f4e01e7d4559dda511",
+          "source_row_id": "line:0132|2509.19676|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "b30dc0a6eb7ed509437c5214147c9951a112323f046110a56f46ccbd5df579e2",
+          "source_row_id": "line:0133|2509.19676|eprint"
+        }
+      ],
       "identities": [
         {
           "provenance": "census:line:0074|W-0074",
+          "relation": "EXACT_ID",
+          "source_id": "2509.19676"
+        },
+        {
+          "provenance": "fulltext:line:0132|2509.19676|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2509.19676"
+        },
+        {
+          "provenance": "fulltext:line:0133|2509.19676|eprint",
           "relation": "EXACT_ID",
           "source_id": "2509.19676"
         },
@@ -7396,6 +7503,14 @@
         {
           "campaign": "census",
           "source_row_id": "line:0074|W-0074"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0132|2509.19676|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0133|2509.19676|eprint"
         }
       ],
       "version_pins": []
@@ -7699,7 +7814,24 @@
         "reason": "Inherited source row retained in the explicit existing-corpus queue; no deep-read or inclusion-result claim is implied.",
         "reason_code": null
       },
-      "fulltext_events": [],
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "aa0fce22c4efd4dbae6cb13f35c956e0a62124d1ac129d483324145a2528d866",
+          "source_row_id": "line:0130|2510.02995|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "734a25199b63327ae94d640b4a555ad1df25c45efc767df82127b23c26481a15",
+          "source_row_id": "line:0131|2510.02995|eprint"
+        }
+      ],
       "identities": [
         {
           "provenance": "census:line:0065|W-0065",
@@ -7733,6 +7865,16 @@
         },
         {
           "provenance": "claim:line:0058|CL2-0058",
+          "relation": "EXACT_ID",
+          "source_id": "2510.02995"
+        },
+        {
+          "provenance": "fulltext:line:0130|2510.02995|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2510.02995"
+        },
+        {
+          "provenance": "fulltext:line:0131|2510.02995|eprint",
           "relation": "EXACT_ID",
           "source_id": "2510.02995"
         },
@@ -7878,6 +8020,14 @@
         {
           "campaign": "version_pin",
           "source_row_id": "line:0029|CL2-0058"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0130|2510.02995|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0131|2510.02995|eprint"
         }
       ],
       "version_pins": [
@@ -11897,6 +12047,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2605.10344",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or the system lacks the described trained multi-agent topology.",
+        "load_bearing": false,
+        "next_action": "Keep in the Stage-1B known queue; do not require D2 for opening.",
+        "query_recall_credit": false,
+        "reason": "Nonblocking P2 trained-system comparator for multi-trajectory topology and memory.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-014",
+          "relation": "EXACT_ID",
+          "source_id": "2605.10344"
+        },
+        {
+          "provenance": "reviewer_known:RK-014",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "TMAS: Scaling Test-Time Compute via Multi-Agent Synergy"
+        }
+      ],
+      "reference_role": "KNOWN_QUEUE",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-014",
+          "role": "KNOWN_QUEUE"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-014"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2605.11374",
       "claim_evidence": [],
       "current_disposition": {
@@ -12450,6 +12640,46 @@
       "version_pins": []
     },
     {
+      "canonical_work_id": "CW-ARXIV-2606.00579",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or fulltext shows no direct omni-system/H5 relationship.",
+        "load_bearing": false,
+        "next_action": "D1 routing is complete as a direct H5 boundary comparator; reach D2 only before using it to support or falsify H5.",
+        "query_recall_credit": false,
+        "reason": "Author-external reviewer-known direct system neighbor and H5 threat; not a frozen-query hit.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-011",
+          "relation": "EXACT_ID",
+          "source_id": "2606.00579"
+        },
+        {
+          "provenance": "reviewer_known:RK-011",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Sandboxed Coding Agents are Competitive Omni-modal Task Solvers"
+        }
+      ],
+      "reference_role": "BOUNDARY_COMPARATOR",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-011",
+          "role": "BOUNDARY_COMPARATOR"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-011"
+        }
+      ],
+      "version_pins": []
+    },
+    {
       "canonical_work_id": "CW-ARXIV-2606.00660",
       "claim_evidence": [],
       "current_disposition": {
@@ -12699,6 +12929,46 @@
         {
           "campaign": "fulltext",
           "source_row_id": "line:0125|2606.03054|eprint"
+        }
+      ],
+      "version_pins": []
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2606.03183",
+      "claim_evidence": [],
+      "current_disposition": {
+        "invalidating_condition": "Official identity is contradicted or the work lacks multimodal ITS/reward aggregation relevance.",
+        "load_bearing": false,
+        "next_action": "Route as measurement/multi-verifier threat; reach D2 only if a load-bearing RQ-MECH or H4 claim cites it.",
+        "query_recall_credit": false,
+        "reason": "Multimodal training-free ITS and multi-verifier boundary comparator; it does not occupy the agent-system core cell.",
+        "reason_code": null
+      },
+      "fulltext_events": [],
+      "identities": [
+        {
+          "provenance": "reviewer_known:RK-012",
+          "relation": "EXACT_ID",
+          "source_id": "2606.03183"
+        },
+        {
+          "provenance": "reviewer_known:RK-012",
+          "relation": "EXPLICIT_ALIAS",
+          "source_id": "Inference-Time Scaling for Joint Audio-Video Generation"
+        }
+      ],
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "role_assertions": [
+        {
+          "provenance": "reviewer_known:RK-012",
+          "role": "MEASUREMENT_INSTRUMENT"
+        }
+      ],
+      "screening_decision": "INCLUDE",
+      "source_memberships": [
+        {
+          "campaign": "reviewer_known",
+          "source_row_id": "RK-012"
         }
       ],
       "version_pins": []
@@ -13472,8 +13742,35 @@
         "reason": "Inherited source row retained in the explicit existing-corpus queue; no deep-read or inclusion-result claim is implied.",
         "reason_code": null
       },
-      "fulltext_events": [],
+      "fulltext_events": [
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "pdf",
+          "sha256": "cc3e5c14132e27f7b30df4f11f323223321c2b9dee3a6eb342ebabdd240bd2de",
+          "source_row_id": "line:0134|2606.19341|pdf"
+        },
+        {
+          "access_class": "ID_DEREFERENCE/FULLTEXT_FETCH",
+          "error": null,
+          "http_status": 200,
+          "kind": "eprint",
+          "sha256": "1bebd8884c2dbbf5c1193a18a4ae8465fdc92112387dfba43bdace08d63b146f",
+          "source_row_id": "line:0135|2606.19341|eprint"
+        }
+      ],
       "identities": [
+        {
+          "provenance": "fulltext:line:0134|2606.19341|pdf",
+          "relation": "EXACT_ID",
+          "source_id": "2606.19341"
+        },
+        {
+          "provenance": "fulltext:line:0135|2606.19341|eprint",
+          "relation": "EXACT_ID",
+          "source_id": "2606.19341"
+        },
         {
           "provenance": "seed:line:0052|2606.19341",
           "relation": "EXACT_ID",
@@ -13492,6 +13789,14 @@
         {
           "campaign": "seed",
           "source_row_id": "line:0052|2606.19341"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0134|2606.19341|pdf"
+        },
+        {
+          "campaign": "fulltext",
+          "source_row_id": "line:0135|2606.19341|eprint"
         }
       ],
       "version_pins": []
@@ -15765,7 +16070,7 @@
     "unique_seed_works": 92
   },
   "identity_accounting": {
-    "all_arxiv_identity_count": 211,
+    "all_arxiv_identity_count": 216,
     "all_arxiv_identity_work_ids": [
       "CW-ARXIV-1610.02424",
       "CW-ARXIV-1805.04604",
@@ -15855,6 +16160,7 @@
       "CW-ARXIV-2502.06884",
       "CW-ARXIV-2502.11027",
       "CW-ARXIV-2502.14727",
+      "CW-ARXIV-2502.19328",
       "CW-ARXIV-2502.20379",
       "CW-ARXIV-2503.12434",
       "CW-ARXIV-2503.22712",
@@ -15871,6 +16177,7 @@
       "CW-ARXIV-2506.19248",
       "CW-ARXIV-2507.12705",
       "CW-ARXIV-2507.19457",
+      "CW-ARXIV-2508.00890",
       "CW-ARXIV-2508.01186",
       "CW-ARXIV-2508.10016",
       "CW-ARXIV-2508.16665",
@@ -15942,6 +16249,7 @@
       "CW-ARXIV-2604.27233",
       "CW-ARXIV-2605.00663",
       "CW-ARXIV-2605.08083",
+      "CW-ARXIV-2605.10344",
       "CW-ARXIV-2605.11374",
       "CW-ARXIV-2605.12620",
       "CW-ARXIV-2605.12953",
@@ -15952,10 +16260,12 @@
       "CW-ARXIV-2605.28020",
       "CW-ARXIV-2605.28480",
       "CW-ARXIV-2605.29682",
+      "CW-ARXIV-2606.00579",
       "CW-ARXIV-2606.00660",
       "CW-ARXIV-2606.01631",
       "CW-ARXIV-2606.01667",
       "CW-ARXIV-2606.03054",
+      "CW-ARXIV-2606.03183",
       "CW-ARXIV-2606.04680",
       "CW-ARXIV-2606.04730",
       "CW-ARXIV-2606.05296",
@@ -16024,8 +16334,8 @@
     "bibliography": 65,
     "census": 95,
     "claim": 62,
-    "fulltext": 129,
-    "reviewer_known": 10,
+    "fulltext": 135,
+    "reviewer_known": 15,
     "seed": 92,
     "version_pin": 30
   },
@@ -19132,6 +19442,42 @@
       "source_row_id": "line:0129|2602.16485|eprint"
     },
     {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2510.02995",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0130|2510.02995|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2510.02995",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0131|2510.02995|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2509.19676",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0132|2509.19676|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2509.19676",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0133|2509.19676|eprint"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2606.19341",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0134|2606.19341|pdf"
+    },
+    {
+      "campaign": "fulltext",
+      "canonical_work_id": "CW-ARXIV-2606.19341",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "line:0135|2606.19341|eprint"
+    },
+    {
       "campaign": "reviewer_known",
       "canonical_work_id": "CW-ARXIV-2508.16665",
       "destination_type": "CANONICAL_WORK",
@@ -19190,6 +19536,36 @@
       "canonical_work_id": "CW-ARXIV-2512.16899",
       "destination_type": "CANONICAL_WORK",
       "source_row_id": "RK-010"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2606.00579",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-011"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2606.03183",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-012"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2502.19328",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-013"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2605.10344",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-014"
+    },
+    {
+      "campaign": "reviewer_known",
+      "canonical_work_id": "CW-ARXIV-2508.00890",
+      "destination_type": "CANONICAL_WORK",
+      "source_row_id": "RK-015"
     }
   ],
   "source_receipts": [
@@ -19224,20 +19600,20 @@
       "sha256": "2dd8927fe7e30a50051e1fedd95fc0e9457da0ce64f175ee9480f54a0016725a"
     },
     {
-      "bytes": 59380,
-      "git_blob": "08e493acab209dc34d89bc90bf21b2634de0304a",
+      "bytes": 62042,
+      "git_blob": "4db01b96d0f84bdea0a6b25dd1b55ea16da46df7",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "6cd1bf3f55f18f5047e663a573c91de92d3d3bb1d896b4679c6dcb8312e0df56"
+      "sha256": "36b96a6eec9a87baf24649dc6f18ffbbd9601ba7904d8685d208521cbaa9da94"
     },
     {
-      "bytes": 9218,
-      "git_blob": "2ca7c917aab1aff4bb84417276b94b54d7033f42",
-      "path": "wiki/survey/current/data/reviewer-known-items-v2.json",
-      "sha256": "c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2"
+      "bytes": 12712,
+      "git_blob": "44e5bc36db70d0de551934e02fc8e9ff5bea222b",
+      "path": "wiki/survey/current/data/reviewer-known-items-v3.json",
+      "sha256": "7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24"
     }
   ],
   "summary": {
-    "canonical_work_nodes": 245,
+    "canonical_work_nodes": 250,
     "claim_edges": 62,
     "load_bearing_unresolved": 0,
     "multi_claim_work_count": 16,
@@ -19245,7 +19621,7 @@
     "multi_evidence_grade_work_count": 15,
     "multi_target_claim_edges": 5,
     "source_metadata_rows": 2,
-    "source_rows": 483,
+    "source_rows": 494,
     "unexplained_orphans": 0,
     "unresolved_records": 1
   },

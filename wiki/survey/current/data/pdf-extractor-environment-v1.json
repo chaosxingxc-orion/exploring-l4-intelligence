@@ -1,0 +1,35 @@
+{
+ "artifact_id": "SF-PDF-EXTRACTOR-ENVIRONMENT-V1-2026-07-21-01",
+ "schema": "sf-pdf-extractor-environment-v1",
+ "purpose": "Freeze the exact PDF text-extraction environments used by the evidence-v7 Windows and WSL2 leaves and replay one discriminative ToolGate page locator on each leaf.",
+ "version_policy": "EXACT_MATCH_FAIL_CLOSED",
+ "canonical_environments": {
+  "nt": {
+   "os": "nt",
+   "sys_platform": "win32",
+   "python_version": "3.14.3",
+   "pypdf_version": "6.14.0",
+   "extractor_identity": "pypdf:6.14.0:PdfReader.extract_text:v1"
+  },
+  "posix": {
+   "os": "posix",
+   "sys_platform": "linux",
+   "python_version": "3.12.3",
+   "pypdf_version": "6.14.2",
+   "extractor_identity": "pypdf:6.14.2:PdfReader.extract_text:v1"
+  }
+ },
+ "toolgate_probe": {
+  "paper_id": "2606.03054",
+  "kind": "pdf",
+  "pdf_sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857",
+  "page": 11,
+  "anchor": "logistic regression classifier we train with l2",
+  "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json"
+ },
+ "invalidating_conditions": [
+  "Either platform runs a different Python or pypdf version.",
+  "The extractor implementation identity changes.",
+  "The frozen ToolGate PDF bytes, page numbering, or bound page-11 anchor changes."
+ ]
+}

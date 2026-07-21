@@ -1,0 +1,257 @@
+{
+ "access_class": "REVIEW_CLAIM_VERIFICATION",
+ "artifact_id": "SF-REVIEWER-KNOWN-ITEMS-V3-2026-07-21-01",
+ "artifact_path": "wiki/survey/current/data/reviewer-known-items-v3.json",
+ "generation_rule": "Retain the ten v2 reviewer-known rows and append the five exact known-ID works named in the bound round-16 precheck exactly once; perform no discovery query and grant no frozen-query recall credit.",
+ "items": [
+  {
+   "arxiv_id": "2508.16665",
+   "current_disposition": {
+    "invalidating_condition": "Official identity or the Track-A taxonomy use is contradicted during Stage-1B coding.",
+    "next_action": "Fetch and code only when Track-A calibration is scheduled under the frozen protocol.",
+    "reason": "Reviewer-known verification-design survey; calibration source, not a frozen-query hit."
+   },
+   "item_id": "RK-001",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "KNOWN_QUEUE",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 290",
+   "title": "Trust but Verify! A Survey on Verification Design for Test-time Scaling"
+  },
+  {
+   "arxiv_id": "2510.18982",
+   "current_disposition": {
+    "invalidating_condition": "Official identity is contradicted or the work is later found outside the protocol's comparator boundary.",
+    "next_action": "Stage-1B fetch/code as P2; promote to D2 first only if a proposal claim relies on its theory.",
+    "reason": "Reviewer-known theory comparator separating generator coverage, verifier ROC, and sampling sub-optimality."
+   },
+   "item_id": "RK-002",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "KNOWN_QUEUE",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 291",
+   "title": "Test-time Verification via Optimal Transport: Coverage, ROC, & Sub-optimality"
+  },
+  {
+   "arxiv_id": "2604.15710",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows the system is not a trained-system boundary comparator.",
+    "next_action": "Preserve as a trained spoken-agent boundary and code if used by a load-bearing boundary claim.",
+    "reason": "Existing archive asset reintroduced by the reviewer; it is not an external discovery or frozen-query hit."
+   },
+   "item_id": "RK-003",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 292",
+   "title": "VoxMind: An End-to-End Agentic Spoken Dialogue System"
+  },
+  {
+   "arxiv_id": "2505.09558",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows it cannot serve as a trained speech-reward measurement boundary.",
+    "next_action": "Route into the trained reward/evaluator boundary; reach D2 only if cited by a load-bearing claim.",
+    "reason": "Existing survey/archive work explicitly named by the reviewer for disposition."
+   },
+   "item_id": "RK-004",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 293 (compound bullet, first work)",
+   "title": "WavReward: Spoken Dialogue Models With Generalist Reward Evaluators"
+  },
+  {
+   "arxiv_id": "2602.13891",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows it cannot serve as a trained speech reward-model boundary.",
+    "next_action": "Route and deduplicate in the trained reward/evaluator boundary; reach D2 only if load-bearing.",
+    "reason": "Existing archive work explicitly named by the reviewer for disposition."
+   },
+   "item_id": "RK-005",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 293 (compound bullet, second work)",
+   "title": "GSRM: Generative Speech Reward Model for Speech RLHF"
+  },
+  {
+   "arxiv_id": "2509.25845",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows no useful element-level relationship to reward-guided frozen inference.",
+    "next_action": "Keep as nonblocking P2 boundary comparator; do not add a query lane.",
+    "reason": "Reviewer-known cross-modal element comparator, explicitly nonblocking for Stage-1B opening."
+   },
+   "item_id": "RK-006",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "screening_decision": "INCLUDE",
+   "source_locator": "round-14 §7.4 line 294",
+   "title": "Training-Free Reward-Guided Image Editing via Trajectory Optimal Control"
+  },
+  {
+   "arxiv_id": "2502.04128",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows no speech-verifier-inference-time-search relationship within the protocol boundary.",
+    "next_action": "Stage-1B P1 fetch and code as a speech/system boundary neighbor; reach D2 before any load-bearing use.",
+    "reason": "Independent-reviewer-known speech synthesis work spanning inference-time search and speech-understanding verification; not a frozen-query hit."
+   },
+   "item_id": "RK-007",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "screening_decision": "INCLUDE",
+   "source_locator": "pre-round-15 lines 221-225",
+   "title": "Llasa: Scaling Train-Time and Inference-Time Compute for Llama-based Speech Synthesis"
+  },
+  {
+   "arxiv_id": "2602.22897",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows no native omni-modal agent or benchmark relationship relevant to the mapping topology.",
+    "next_action": "Carry forward into the nonblocking Stage-1B first-batch queue and deduplicate by arXiv identity.",
+    "reason": "Independent-reviewer-known native omni-modal agent benchmark/system neighbor previously present only in historical archive."
+   },
+   "item_id": "RK-008",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "KNOWN_QUEUE",
+   "screening_decision": "INCLUDE",
+   "source_locator": "pre-round-15 line 229",
+   "title": "OmniGAIA: Towards Native Omni-Modal AI Agents"
+  },
+  {
+   "arxiv_id": "2602.00846",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows it cannot inform the trained omni reward-model measurement boundary.",
+    "next_action": "Carry forward as a nonblocking Stage-1B measurement instrument; reach D2 only before load-bearing use.",
+    "reason": "Independent-reviewer-known trained omni reward-model work; a boundary/measurement item, not query recall."
+   },
+   "item_id": "RK-009",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "screening_decision": "INCLUDE",
+   "source_locator": "pre-round-15 line 230",
+   "title": "Omni-RRM: Towards a Generalist Omni Reward Model"
+  },
+  {
+   "arxiv_id": "2512.16899",
+   "current_disposition": {
+    "invalidating_condition": "Full-text coding shows no useful evidence about multimodal reward-model measurement validity or judge failure.",
+    "next_action": "Carry forward as a nonblocking Stage-1B measurement instrument for RQ-VERIFY-MAP and RQ-BOUND.",
+    "reason": "Independent-reviewer-known multimodal reward benchmark; measurement evidence only, not a frozen-query hit."
+   },
+   "item_id": "RK-010",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "screening_decision": "INCLUDE",
+   "source_locator": "pre-round-15 line 231",
+   "title": "Multimodal RewardBench 2: A Benchmark for Multimodal Reward Models"
+  },
+  {
+   "item_id": "RK-011",
+   "arxiv_id": "2606.00579",
+   "title": "Sandboxed Coding Agents are Competitive Omni-modal Task Solvers",
+   "screening_decision": "INCLUDE",
+   "reference_role": "BOUNDARY_COMPARATOR",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Author-external reviewer-known direct system neighbor and H5 threat; not a frozen-query hit.",
+    "next_action": "D1 routing is complete as a direct H5 boundary comparator; reach D2 only before using it to support or falsify H5.",
+    "invalidating_condition": "Official identity is contradicted or fulltext shows no direct omni-system/H5 relationship."
+   },
+   "source_locator": "round-16 precheck lines 181-185"
+  },
+  {
+   "item_id": "RK-012",
+   "arxiv_id": "2606.03183",
+   "title": "Inference-Time Scaling for Joint Audio-Video Generation",
+   "screening_decision": "INCLUDE",
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Multimodal training-free ITS and multi-verifier boundary comparator; it does not occupy the agent-system core cell.",
+    "next_action": "Route as measurement/multi-verifier threat; reach D2 only if a load-bearing RQ-MECH or H4 claim cites it.",
+    "invalidating_condition": "Official identity is contradicted or the work lacks multimodal ITS/reward aggregation relevance."
+   },
+   "source_locator": "round-16 precheck lines 187-190"
+  },
+  {
+   "item_id": "RK-013",
+   "arxiv_id": "2502.19328",
+   "title": "Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems",
+   "screening_decision": "INCLUDE",
+   "reference_role": "MEASUREMENT_INSTRUMENT",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Reward/verifier-system and inference-time best-of-N comparator spanning trained and inference-time boundaries.",
+    "next_action": "Route as a reward-system comparator; reach D2 before any exclusivity or mechanism-equivalence claim relies on it.",
+    "invalidating_condition": "Official identity is contradicted or fulltext does not combine preference and verifiable reward signals."
+   },
+   "source_locator": "round-16 precheck lines 192-195"
+  },
+  {
+   "item_id": "RK-014",
+   "arxiv_id": "2605.10344",
+   "title": "TMAS: Scaling Test-Time Compute via Multi-Agent Synergy",
+   "screening_decision": "INCLUDE",
+   "reference_role": "KNOWN_QUEUE",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Nonblocking P2 trained-system comparator for multi-trajectory topology and memory.",
+    "next_action": "Keep in the Stage-1B known queue; do not require D2 for opening.",
+    "invalidating_condition": "Official identity is contradicted or the system lacks the described trained multi-agent topology."
+   },
+   "source_locator": "round-16 precheck lines 199-201"
+  },
+  {
+   "item_id": "RK-015",
+   "arxiv_id": "2508.00890",
+   "title": "AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks",
+   "screening_decision": "INCLUDE",
+   "reference_role": "KNOWN_QUEUE",
+   "load_bearing": false,
+   "query_recall_credit": false,
+   "current_disposition": {
+    "reason": "Nonblocking P2 text-domain budget/control comparator.",
+    "next_action": "Keep in the Stage-1B known queue; promote only if later mapping makes it load-bearing.",
+    "invalidating_condition": "Official identity is contradicted or no test-time compute allocation/control relationship remains."
+   },
+   "source_locator": "round-16 precheck lines 203-205"
+  }
+ ],
+ "items_sha256": "408c097a4b07b9de1254abf54899bb9ff12eae03a8b37683752bb17d279c5760",
+ "schema": "sf-reviewer-known-items-v3",
+ "source_provenance": {
+  "git_blob": "e7b52ab5541d31c79de5d416a48b8e691df01cf5",
+  "line_range": "290-294",
+  "path": "wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md",
+  "sha256": "6434ee4e8a385da1f68e9a9212e615b6f0ddb41f83a06047d78060c571fe3abe",
+  "source_commit": "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
+ },
+ "additional_source_provenance": {
+  "git_blob": "d7901f85c7804bd2176aa76a0ea05bc2d79729c2",
+  "line_range": "221-231",
+  "path": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+  "sha256": "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e",
+  "source_commit": "c2739d48c7da0836812a28620a05634b4594140c"
+ },
+ "query_recall_credit": false,
+ "round16_precheck_source_provenance": {
+  "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+  "line_range": "181-205",
+  "reviewed_target_commit": "55aea3a13a8315e51c70a0aed9633e61a66c8fe4",
+  "git_blob": "f8b173afba280fb97220bd29c66cb5418022e3db",
+  "sha256": "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
+ }
+}

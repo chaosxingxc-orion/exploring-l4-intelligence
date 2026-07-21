@@ -32,19 +32,17 @@ adjudicator; it is never averaged, majority-voted, or silently converted to `UNK
 itself is ambiguous after adjudication, the final value is `UNKNOWN` with the competing readings and
 locators preserved. A true non-applicability uses `NOT_APPLICABLE` plus a construct-specific reason.
 
-## Calibration examples before Stage-1B execution
+## Calibration before Stage-1B execution
 
-These rows are calibration exercises, not final paper codings and not occupancy evidence. Their purpose
-is to expose ambiguous fields before systematic execution. They must be dual-coded again from frozen
-full text before any value becomes load-bearing.
+The only current calibration state is
+`wiki/survey/current/data/modality-specificity-calibration-v1.json`. It binds AudioToolAgent
+(`2510.02995`), Thinking While Listening (`2509.19676`), and Native Active Perception
+(`2606.19341`) to locally cached PDF/eprint hashes. Implementer coder A has completed all 21
+paper-by-field assignments with page locators. Those values are deliberately non-load-bearing; in
+particular, the full text makes AudioToolAgent's text-only core plus audio-tool readouts a useful test of
+whether a coder mistakes system input modality for native core modality.
 
-| Paper | Calibration role | Provisional seven-field pattern | Known ambiguity / expected disagreement |
-|---|---|---|---|
-| AudioToolAgent (`2510.02995`) | speech/omni tool-agent positive calibration | `audio_native_single`; remaining six fields initially `UNKNOWN` until D2 | whether tools only read task-provided audio or inject new information; whether action timing is post-utterance or inter-turn |
-| Thinking While Listening (`2509.19676`) | audio test-time-scaling boundary calibration | `audio_native_single`; `offline_batch`; `whole_clip`; other fields `UNKNOWN` until D2 | whether the relevant evidence path consumes raw waveform or a learned representation and whether any state persists across samples |
-| OmniAgent / Native Active Perception (`2606.19341`) | native omni sequential-control calibration | `omni_native_joint`; `mixed`; remaining fields `UNKNOWN` until D2 | observation granularity, persistent textual memory, on-demand perception timing, and trained-system boundary must be resolved separately |
-
-The calibration acceptance condition is three completed dual-coded rows with a field-level agreement
-report and adjudication of every disagreement. Until then, H5 remains a mapping hypothesis rather than a
-finding.
-
+The calibration acceptance condition is exactly two independent 21-field passes, an exact field-level
+agreement report with denominator 21, and independent adjudication of every disagreement. The second
+blind pass has not occurred, so the artifact status is `PENDING_SECOND_INDEPENDENT_CODER` and H5 remains
+a mapping hypothesis rather than a finding.

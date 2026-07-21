@@ -2,7 +2,7 @@
   "artifact_id": "SF-EXISTING-CORPUS-DISPOSITION-CHECK-2026-07-20-01",
   "checked_artifact": {
     "path": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
-    "sha256": "8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866"
+    "sha256": "2e562049f8589aedb38a881b041b42e19278d77f4d0614e6ac830f84bce76024"
   },
   "deduplication_accounting": {
     "census_source_rows": 95,
@@ -20,7 +20,7 @@
   },
   "failure_codes": [],
   "identity_accounting": {
-    "all_arxiv_identity_count": 211,
+    "all_arxiv_identity_count": 216,
     "all_arxiv_identity_work_ids": [
       "CW-ARXIV-1610.02424",
       "CW-ARXIV-1805.04604",
@@ -110,6 +110,7 @@
       "CW-ARXIV-2502.06884",
       "CW-ARXIV-2502.11027",
       "CW-ARXIV-2502.14727",
+      "CW-ARXIV-2502.19328",
       "CW-ARXIV-2502.20379",
       "CW-ARXIV-2503.12434",
       "CW-ARXIV-2503.22712",
@@ -126,6 +127,7 @@
       "CW-ARXIV-2506.19248",
       "CW-ARXIV-2507.12705",
       "CW-ARXIV-2507.19457",
+      "CW-ARXIV-2508.00890",
       "CW-ARXIV-2508.01186",
       "CW-ARXIV-2508.10016",
       "CW-ARXIV-2508.16665",
@@ -197,6 +199,7 @@
       "CW-ARXIV-2604.27233",
       "CW-ARXIV-2605.00663",
       "CW-ARXIV-2605.08083",
+      "CW-ARXIV-2605.10344",
       "CW-ARXIV-2605.11374",
       "CW-ARXIV-2605.12620",
       "CW-ARXIV-2605.12953",
@@ -207,10 +210,12 @@
       "CW-ARXIV-2605.28020",
       "CW-ARXIV-2605.28480",
       "CW-ARXIV-2605.29682",
+      "CW-ARXIV-2606.00579",
       "CW-ARXIV-2606.00660",
       "CW-ARXIV-2606.01631",
       "CW-ARXIV-2606.01667",
       "CW-ARXIV-2606.03054",
+      "CW-ARXIV-2606.03183",
       "CW-ARXIV-2606.04680",
       "CW-ARXIV-2606.04730",
       "CW-ARXIV-2606.05296",
@@ -278,13 +283,13 @@
     "bibliography": 65,
     "census": 95,
     "claim": 62,
-    "fulltext": 129,
-    "reviewer_known": 10,
+    "fulltext": 135,
+    "reviewer_known": 15,
     "seed": 92,
     "version_pin": 30
   },
   "summary": {
-    "canonical_work_nodes": 245,
+    "canonical_work_nodes": 250,
     "claim_edges": 62,
     "load_bearing_unresolved": 0,
     "multi_claim_work_count": 16,
@@ -292,7 +297,7 @@
     "multi_evidence_grade_work_count": 15,
     "multi_target_claim_edges": 5,
     "source_metadata_rows": 2,
-    "source_rows": 483,
+    "source_rows": 494,
     "unexplained_orphans": 0,
     "unresolved_records": 1
   },

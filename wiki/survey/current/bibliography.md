@@ -9,7 +9,7 @@ discipline: "official raw payload -> normalized receipt -> rendered row; known-I
 
 Each work appears once. Roles are the four current protocol roles; chain placement does not change mapping denominators or evidence grade.
 
-## System-first speech/omni agent neighbors (19)
+## System-first speech/omni agent neighbors (20)
 
 | Official citation | Authors / year | Protocol role | Disposition |
 |---|---|---|---|
@@ -18,6 +18,7 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [EChO-Agent: Evidence Chain Orchestration Agent for Audio Reasoning](https://arxiv.org/abs/2606.15141) | Siyuan Zhang; Jian Zong; Junyu Wang; Peiyuan Jiang; Jiahao Yan; Jingyu Zhang; Tianrui Wang; Xiaobao Wang; Longbiao Wang; Jianwu Dang, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Llasa: Scaling Train-Time and Inference-Time Compute for Llama-based Speech Synthesis](https://arxiv.org/abs/2502.04128) | Zhen Ye; Xinfa Zhu; Chi-Min Chan; Xinsheng Wang; Xu Tan; Jiahe Lei; Yi Peng; Haohe Liu; Yizhu Jin; Zheqi Dai; Hongzhan Lin; Jianyi Chen; Xingjian Du; Liumeng Xue; Yunlin Chen; Zhifei Li; Lei Xie; Qiuqiang Kong; Yike Guo; Wei Xue, 2025 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Native Active Perception as Reasoning for Omni-Modal Understanding](https://arxiv.org/abs/2606.19341) | Zhenghao Xing; Ruiyang Xu; Yuxuan Wang; Jinzheng He; Ziyang Ma; Qize Yang; Yunfei Chu; Jin Xu; Junyang Lin; Chi-Wing Fu; Pheng-Ann Heng, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
+| [Sandboxed Coding Agents are Competitive Omni-modal Task Solvers](https://arxiv.org/abs/2606.00579) | Dongping Chen; Xuanao Huang; Zhihan Hu; Qingyuan Shi; Dianqi Li; Tianyi Zhou, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [VoxMind: An End-to-End Agentic Spoken Dialogue System](https://arxiv.org/abs/2604.15710) | Tianle Liang; Yifu Chen; Shengpeng Ji; Yijun Chen; Zhiyang Jia; Jingyu Lu; Fan Zhuo; Xueyi Pu; Yangzhuo Li; Zhou Zhao, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Audio-Mind: An Auditable Agentic Framework for Audio Understanding](https://arxiv.org/abs/2605.28480) | Yucheng Wang; Jing Peng; Hanqi Li; Chenghao Wang; Wenming Tu; Yu Xi; Zhaokai Sun; Kai Yu; Shuai Wang, 2026 [initial_preprint] | KNOWN_QUEUE | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [AudioToolAgent: An Agentic Framework for Audio-Language Models](https://arxiv.org/abs/2510.02995) | Gijs Wijngaard; Elia Formisano; Michel Dumontier; Jenia Jitsev, 2025 [initial_preprint] | KNOWN_QUEUE | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
@@ -33,7 +34,7 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [tau2-bench](https://github.com/sierra-research/tau2-bench) | sierra-research, 2025 [current_version] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [VoiceAgentBench: Are Voice Assistants ready for agentic tasks?](https://arxiv.org/abs/2510.07978) | Dhruv Jain; Harshit Shukla; Gautam Rajeev; Ashish Kulkarni; Chandra Khatri; Shubham Agarwal, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 
-## Reward and verification mechanisms (53)
+## Reward and verification mechanisms (55)
 
 | Official citation | Authors / year | Protocol role | Disposition |
 |---|---|---|---|
@@ -89,9 +90,11 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [Training-Free Test-Time Contrastive Learning for Large Language Models](https://arxiv.org/abs/2604.13552) | Kaiwen Zheng; Kai Zhou; Jinwu Hu; Te Gu; Mingkai Peng; Fei Liu, 2026 [initial_preprint] | KNOWN_QUEUE | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Tree Search for Language Model Agents](https://arxiv.org/abs/2407.01476) | Jing Yu Koh; Stephen McAleer; Daniel Fried; Ruslan Salakhutdinov, 2024 [initial_preprint] | KNOWN_QUEUE | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Trust but Verify! A Survey on Verification Design for Test-time Scaling](https://arxiv.org/abs/2508.16665) | V Venktesh; Mandeep Rathee; Avishek Anand, 2025 [initial_preprint] | KNOWN_QUEUE | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
+| [Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems](https://arxiv.org/abs/2502.19328) | Hao Peng; Yunjia Qi; Xiaozhi Wang; Zijun Yao; Bin Xu; Lei Hou; Juanzi Li, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
+| [Inference-Time Scaling for Joint Audio-Video Generation](https://arxiv.org/abs/2606.03183) | Jaemin Jung; Kyeongha Rho; Inkyu Shin; Joon Son Chung, 2026 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Multimodal RewardBench 2: Evaluating Omni Reward Models for Interleaved Text and Image](https://arxiv.org/abs/2512.16899) | Yushi Hu; Reyhane Askari-Hemmat; Melissa Hall; Emily Dinan; Luke Zettlemoyer; Marjan Ghazvininejad, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
 
-## Training-free and trained boundary comparators (13)
+## Training-free and trained boundary comparators (15)
 
 | Official citation | Authors / year | Protocol role | Disposition |
 |---|---|---|---|
@@ -102,6 +105,8 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [RFG: Test-Time Scaling for Diffusion Large Language Model Reasoning with Reward-Free Guidance](https://arxiv.org/abs/2509.25604) | Tianlang Chen; Minkai Xu; Jure Leskovec; Stefano Ermon, 2025 [initial_preprint] | BOUNDARY_COMPARATOR | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Training-Free Group Relative Policy Optimization](https://arxiv.org/abs/2510.08191) | Yuzheng Cai; Siqi Cai; Yuchen Shi; Zihan Xu; Lichao Chen; Yulei Qin; Xiaoyu Tan; Gang Li; Zongyi Li; Haojia Lin; Yong Mao; Ke Li; Xing Sun, 2025 [initial_preprint] | BOUNDARY_COMPARATOR | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Training-Free Reward-Guided Image Editing via Trajectory Optimal Control](https://arxiv.org/abs/2509.25845) | Jinho Chang; Jaemin Kim; Jong Chul Ye, 2025 [initial_preprint] | BOUNDARY_COMPARATOR | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
+| [AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks](https://arxiv.org/abs/2508.00890) | Fali Wang; Hui Liu; Zhenwei Dai; Jingying Zeng; Zhiwei Zhang; Zongyu Wu; Chen Luo; Zhen Li; Xianfeng Tang; Qi He; Suhang Wang, 2025 [initial_preprint] | KNOWN_QUEUE | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
+| [TMAS: Scaling Test-Time Compute via Multi-Agent Synergy](https://arxiv.org/abs/2605.10344) | George Wu; Nan Jing; Qing Yi; Chuan Hao; Ming Yang; Feng Chang; Yuan Wei; Jian Yang; Ran Tao; Bryan Dai, 2026 [initial_preprint] | KNOWN_QUEUE | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
 | [Dual-Axis Generative Reward Model Toward Semantic and Turn-taking Robustness in Interactive Spoken Dialogue Models](https://aclanthology.org/2026.acl-long.6/) | Chen, Yifu; Ji, Shengpeng; Liu, Zhengqing; Chen, Qian; Wang, Wen; Wang, Ziqing; Li, Yangzhuo; Liang, Tianle; Zhao, Zhou, 2026 [formal_venue] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [GSRM: Generative Speech Reward Model for Speech RLHF](https://arxiv.org/abs/2602.13891) | Maohao Shen; Tejas Jayashankar; Osama Hanna; Naoyuki Kanda; Yancheng Wang; Kateřina Žmolíková; Ruiming Xie; Niko Moritz; Anfeng Xu; Yashesh Gaur; Gregory Wornell; Qing He; Jilong Wu, 2026 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Omni-Reward: Towards Generalist Omni-Modal Reward Modeling with Free-Form Preferences](https://arxiv.org/abs/2510.23451) | Zhuoran Jin; Hongbang Yuan; Kejian Zhu; Jiachun Li; Pengfei Cao; Yubo Chen; Kang Liu; Jun Zhao, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
@@ -109,6 +114,6 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [SDiaReward: Modeling and Benchmarking Spoken Dialogue Rewards with Modality and Colloquialness](https://arxiv.org/abs/2603.14889) | Jingyu Lu; Yuhan Wang; Fan Zhuo; Xize Cheng; Changhao Pan; Xueyi Pu; Yifu Chen; Chenyuhao Wen; Tianle Liang; Zhou Zhao, 2026 [initial_preprint] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [WavReward: Spoken Dialogue Models With Generalist Reward Evaluators](https://arxiv.org/abs/2505.09558) | Shengpeng Ji; Tianle Liang; Yangzhuo Li; Jialong Zuo; Minghui Fang; Jinzheng He; Yifu Chen; Zhengqing Liu; Ziyue Jiang; Xize Cheng; Siqi Zheng; Jin Xu; Junyang Lin; Zhou Zhao, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 
-**Total: 85 unique works (65 retained + 20 reviewer-directed additions).**
+**Total: 90 unique works (65 retained + 20 reviewer-directed additions).**
 
 Exposure note: these are persisted known-ID metadata/provenance accesses, not systematic discovery queries; query recall credit is false for every receipt.

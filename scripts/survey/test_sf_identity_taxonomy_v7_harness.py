@@ -26,28 +26,36 @@ class V7HarnessTest(unittest.TestCase):
         cls.bundle = harness.load_current_inputs()
 
     def test_contract_names_the_new_absence_artifact_and_freeze(self):
-        self.assertEqual("SF-EVIDENCE-V7-CONTRACT-2", harness.CONTRACT_VERSION)
+        self.assertEqual("SF-EVIDENCE-V7-CONTRACT-4", harness.CONTRACT_VERSION)
         self.assertEqual(
             "d4ec803417e1e9cfe9120afbce97c676cebbe6ee",
             harness.IMPLEMENTATION_FREEZE,
         )
         self.assertEqual(
-            "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
+            "wiki/survey/current/data/absence-evidence-adjudication-v3.json",
             harness.ABSENCE_ADJUDICATION_RELATIVE_PATH,
         )
         self.assertEqual(
-            "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+            "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
             harness.SEMANTIC_CORRECTIONS_RELATIVE_PATH,
+        )
+        self.assertEqual(
+            "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+            harness.H5_CALIBRATION_RELATIVE_PATH,
+        )
+        self.assertEqual(
+            "wiki/survey/current/data/pdf-extractor-environment-v1.json",
+            harness.PDF_EXTRACTOR_CONTRACT_RELATIVE_PATH,
         )
 
     def test_current_input_bundle_binds_sidecars_coding_and_absence_review(self):
         bundle = self.bundle
         self.assertEqual(8, len(bundle["sidecars"]))
         self.assertEqual(11, len(bundle["rows"]))
-        self.assertEqual(19, len(bundle["absence_adjudication"]["proof_rows"]))
-        self.assertEqual([], bundle["absence_adjudication"]["rows"])
-        self.assertEqual(3, len(bundle["semantic_corrections"]["corrections"]))
-        self.assertEqual([], bundle["semantic_corrections"]["review_rows"])
+        self.assertEqual(18, len(bundle["absence_adjudication"]["proof_rows"]))
+        self.assertEqual(18, len(bundle["absence_adjudication"]["rows"]))
+        self.assertEqual(4, len(bundle["semantic_corrections"]["corrections"]))
+        self.assertEqual(4, len(bundle["semantic_corrections"]["review_rows"]))
         paths = {
             entry["path"]
             for value in bundle["input_provenance"].values()
@@ -55,13 +63,12 @@ class V7HarnessTest(unittest.TestCase):
         }
         self.assertIn(harness.ABSENCE_ADJUDICATION_RELATIVE_PATH, paths)
         self.assertIn(harness.SEMANTIC_CORRECTIONS_RELATIVE_PATH, paths)
+        self.assertIn(harness.H5_CALIBRATION_RELATIVE_PATH, paths)
+        self.assertIn(harness.PDF_EXTRACTOR_CONTRACT_RELATIVE_PATH, paths)
 
-    def test_current_pending_review_blocks_all_three_semantic_corrections(self):
+    def test_bound_precheck_decisions_close_semantic_correction_review(self):
         failures = harness.validate_semantic_correction_review(self.bundle)
-        self.assertIn(
-            "semantic-correction-review-coverage-mismatch:expected=3:found=0",
-            failures,
-        )
+        self.assertEqual([], failures)
 
     def test_positive_absence_mutation_is_red_and_legitimate_negative_is_clean(self):
         results = harness.run_absence_mutation_suite(self.bundle["rows"])
@@ -76,15 +83,9 @@ class V7HarnessTest(unittest.TestCase):
             results,
         )
 
-    def test_current_pending_review_blocks_all_19_cross_bindings(self):
+    def test_bound_precheck_decisions_close_all_18_active_cross_bindings(self):
         failures = harness.validate_absence_review(self.bundle)
-        self.assertIn(
-            "absence-review-coverage-mismatch:expected=19:found=0", failures
-        )
-        self.assertEqual(
-            19,
-            sum("absence-adjudication-row-missing" in failure for failure in failures),
-        )
+        self.assertEqual([], failures)
 
     def test_duplicate_review_ids_and_tampered_proof_rows_fail_inventory(self):
         bundle = copy.deepcopy(self.bundle)
@@ -102,15 +103,33 @@ class V7HarnessTest(unittest.TestCase):
         self.assertTrue(any("duplicate-review-id" in failure for failure in failures))
         self.assertTrue(any("proof-row-binding-mismatch" in failure for failure in failures))
 
-    def test_current_report_is_honest_fail_with_full_binding_metadata(self):
-        report = harness.build_report(bundle=self.bundle, platform_os="nt")
-        self.assertEqual("FAIL", report["verdict"])
-        self.assertIn("ABSENCE_REVIEW", report["failure_codes"])
-        self.assertIn("SEMANTIC_CORRECTION_REVIEW", report["failure_codes"])
+    def test_current_report_does_not_fail_closed_semantic_reviews(self):
+        report = harness.build_report(bundle=self.bundle, platform_os=os.name)
+        self.assertNotIn("ABSENCE_REVIEW", report["failure_codes"])
+        self.assertNotIn("SEMANTIC_CORRECTION_REVIEW", report["failure_codes"])
+        self.assertIn("H5_CALIBRATION", report["failure_codes"])
+        self.assertNotIn("PDF_EXTRACTOR_ENVIRONMENT", report["failure_codes"])
+        self.assertNotIn("TOOLGATE_P11_REPLAY", report["failure_codes"])
         self.assertEqual(harness.CONTRACT_VERSION, report["contract_version"])
         self.assertEqual(harness.IMPLEMENTATION_FREEZE, report["implementation_freeze"])
         self.assertRegex(report["runner"]["sha256"], r"^[0-9a-f]{64}$")
-        self.assertEqual("nt", report["platform"]["os"])
+        self.assertEqual(os.name, report["platform"]["os"])
+        expected_pypdf = "6.14.0" if os.name == "nt" else "6.14.2"
+        self.assertEqual(expected_pypdf, report["platform"]["pypdf_version"])
+        self.assertEqual("PASS", report["toolgate_p11_replay"]["result"])
+
+    def test_h5_gate_rejects_missing_second_coder(self):
+        failures = harness.validate_h5_calibration(self.bundle)
+        self.assertIn("H5_SECOND_INDEPENDENT_CODER_MISSING", failures)
+
+    def test_extractor_gate_rejects_unfrozen_minor_version(self):
+        mutated = copy.deepcopy(self.bundle)
+        role = os.name
+        mutated["pdf_extractor_contract"]["canonical_environments"][role][
+            "pypdf_version"
+        ] = "0.0.0"
+        failures, _ = harness.validate_pdf_extractor(mutated, platform_os=role)
+        self.assertTrue(failures)
 
     def test_leaf_writer_writes_only_the_requested_output(self):
         report = {
@@ -149,7 +168,7 @@ class V7HarnessTest(unittest.TestCase):
                 harness.parse_args(["--leaf"])
 
     def test_report_encoding_is_deterministic_strict_utf8_lf(self):
-        report = harness.build_report(bundle=self.bundle, platform_os="nt")
+        report = harness.build_report(bundle=self.bundle, platform_os=os.name)
         first = harness.encode_report(report)
         second = harness.encode_report(copy.deepcopy(report))
         self.assertEqual(first, second)

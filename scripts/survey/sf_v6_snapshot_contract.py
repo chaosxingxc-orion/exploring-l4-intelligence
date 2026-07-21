@@ -25,7 +25,7 @@ CODING_V7_RELATIVE_PATH = (
     "wiki/survey/current/data/known-item-coding-v7.json"
 )
 CURRENT_INPUT_SNAPSHOT_SHA256 = (
-    "8bcfefd4504bd65efa146b5772ab351f239cdeb803892bcd5fa64374ca78f61d"
+    "7db14cdd7c842bd284d8bb3015627da8e6cb7e296a78fecc19f90425861751e0"
 )
 
 

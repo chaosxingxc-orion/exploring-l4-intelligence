@@ -40,10 +40,11 @@ class ReviewerProposalCheckTest(unittest.TestCase):
 
     def test_proposal_discloses_exact_negative_inventory_reconciliation(self):
         for token in (
-            "exactly 3/22 implementer concerns",
-            "19 个 proof rows、0 个 reviewer rows",
-            "22 = 3 + 19",
-            "negative-evidence-semantic-corrections-v1.json",
+            "exactly 4/22 semantic corrections",
+            "18 个 proof rows、18 个 reviewer rows",
+            "coverage 18/18",
+            "22 = 4 + 18",
+            "negative-evidence-semantic-corrections-v2.json",
         ):
             self.assertIn(token, self.proposal)
 
@@ -85,6 +86,11 @@ class ReviewerProposalCheckTest(unittest.TestCase):
             "OmniGAIA",
             "Omni-RRM",
             "Multimodal RewardBench 2",
+            "Sandboxed Coding Agents are Competitive Omni-modal Task Solvers",
+            "Inference-Time Scaling for Joint Audio-Video Generation",
+            "Agentic Reward Modeling",
+            "TMAS",
+            "AgentTTS",
         ):
             self.assertIn(token, self.proposal)
 
@@ -99,33 +105,33 @@ class ReviewerProposalCheckTest(unittest.TestCase):
 
     def test_release_fails_until_independent_review_and_v7_exist(self):
         failures = checker.validate_release(self.proposal, self.inputs)
-        self.assertIn("ABSENCE_REVIEW_PENDING", failures)
-        self.assertIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
+        self.assertNotIn("ABSENCE_REVIEW_PENDING", failures)
+        self.assertNotIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
+        self.assertNotIn("PDF_EXTRACTOR_ENVIRONMENT_UNFROZEN", failures)
+        self.assertNotIn("REVIEWER_KNOWN_ITEMS_UNDISPOSITIONED", failures)
+        self.assertIn("H5_CALIBRATION_PENDING", failures)
         self.assertIn("EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING", failures)
         self.assertIn("PROPOSAL_NOT_PROMOTED_TO_ROUND16", failures)
 
-    def test_release_requires_19_active_plus_3_correction_reviews(self):
+    def test_release_requires_versioned_active_and_correction_reviews(self):
         mutated_inputs = copy.deepcopy(self.inputs)
         absence = mutated_inputs["absence"]
-        absence["status"] = "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
-        absence["rows"] = [
-            {
-                "adjudication_row_id": row["adjudication_row_id"],
-                "verdict": "AGREE",
-            }
-            for row in absence["proof_rows"]
-        ]
+        absence["rows"] = absence["rows"][:-1]
         corrections = mutated_inputs["corrections"]
-        corrections["review_rows"] = [
-            {
-                "retired_adjudication_row_id": row["retired_adjudication_row_id"],
-                "verdict": "AGREE",
-            }
-            for row in corrections["corrections"]
-        ]
+        corrections["inventory_reconciliation"]["identity"] = "22 = 3 + 19"
         failures = checker.validate_release(self.proposal, mutated_inputs)
-        self.assertNotIn("ABSENCE_REVIEW_PENDING", failures)
-        self.assertNotIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
+        self.assertIn("ABSENCE_REVIEW_PENDING", failures)
+        self.assertIn("SEMANTIC_CORRECTION_REVIEW_PENDING", failures)
+
+    def test_h5_requires_second_independent_coder_and_adjudication(self):
+        failures = checker.validate_release(self.proposal, self.inputs)
+        self.assertIn("H5_CALIBRATION_PENDING", failures)
+        mutated_inputs = copy.deepcopy(self.inputs)
+        mutated_inputs["h5"]["status"] = "COMPLETE"
+        self.assertIn(
+            "H5_CALIBRATION_PENDING",
+            checker.validate_release(self.proposal, mutated_inputs),
+        )
 
     def test_missing_track_response_schema_or_falsifier_fails(self):
         for token, code in (
@@ -150,10 +156,7 @@ class ReviewerProposalCheckTest(unittest.TestCase):
             ("\nSEARCH_DESIGN_SIGNOFF = SIGN\n", "ACTUAL_REVIEWER_VERDICT_FORBIDDEN"),
             ("\nexecution_authorized=true\n", "STAGE1B_AUTHORIZATION_FORBIDDEN"),
             ("\nSTAGE1B_READY\n", "STAGE1B_AUTHORIZATION_FORBIDDEN"),
-            (
-                "\nFOUR_IMPLEMENTATION_FINDINGS_REMEDIATED\n",
-                "FOUR_FINDINGS_CLOSURE_FORBIDDEN_WHILE_PENDING",
-            ),
+            ("\nEXACT_PACKAGE_SIGNED=true\n", "EXACT_PACKAGE_SIGNOFF_FORBIDDEN"),
         ):
             with self.subTest(injected=injected.strip()):
                 self.assertIn(
@@ -177,17 +180,18 @@ class ReviewerProposalCheckTest(unittest.TestCase):
 
     def test_union_and_bibliography_numbers_are_derived(self):
         for old, code in (
-            ("483 个物理 source rows", "UNION_NUMERIC_DRIFT"),
-            ("245 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
-            ("85 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
+            ("494 个物理 source rows", "UNION_NUMERIC_DRIFT"),
+            ("250 个 canonical work nodes", "UNION_NUMERIC_DRIFT"),
+            ("90 个 unique works", "BIBLIOGRAPHY_NUMERIC_DRIFT"),
         ):
             with self.subTest(old=old):
                 mutated = self.proposal.replace(old, old.replace(old.split()[0], "999"), 1)
                 self.assertIn(code, checker.validate_draft(mutated, self.inputs))
 
     def test_git_blob_evidence_table_rejects_wrong_hash(self):
+        _, current_sha = checker._git_blob_binding("wiki/Project-Thesis.md")
         mutated = self.proposal.replace(
-            "5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623",
+            current_sha,
             "0" * 64,
             1,
         )

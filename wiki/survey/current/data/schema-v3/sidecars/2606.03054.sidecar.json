@@ -123,6 +123,10 @@
       "p6 anchor='the label is derived from forced answer probes before and after tool execution'",
       "p9 anchor='the diagnostic annotation of tool correctness is automatic and noisy'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2606.03054#trained-gate",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
      "fulltext": {
@@ -131,7 +135,7 @@
       "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
      "adjudication_row_id": "ABS2-e9b7f915e84ac3072514"
     },
     "deployment_label_access": {
@@ -153,6 +157,10 @@
       "p5 anchor='it does not see image pixels hidden states system prompts decoding log probabilities internal uncertainty estimates or the future tool output'",
       "p6 anchor='the tool suite includes six perceptual tools ocr'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2606.03054#trained-gate",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
      "fulltext": {
@@ -161,7 +169,7 @@
       "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
      "adjudication_row_id": "ABS2-94932b7d979683355098"
     },
     "internal_visibility": {
@@ -210,6 +218,10 @@
       "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
       "p5 anchor='decides whether to execute the tool call'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2606.03054#trained-gate",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
      "fulltext": {
@@ -218,7 +230,7 @@
       "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
      "adjudication_row_id": "ABS2-eade5e5123c0eecf41e9"
     },
     "explicit_candidate_pool_selection": {
@@ -230,6 +242,10 @@
       "p2 anchor='toolgate does not choose which tool to call given a call already proposed'",
       "p5 anchor='decides whether to execute the tool call'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2606.03054#trained-gate",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json",
      "fulltext": {
@@ -238,7 +254,7 @@
       "sha256": "8025d9126a14e6a07dab30fa93183bf1aa25fa9df2b753d18653549b50caa857"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+     "owner_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
      "adjudication_row_id": "ABS2-481b25ff36e49a4d2088"
     }
    },
@@ -248,7 +264,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "aca0238e9910ef70642585551cb34560593a17dd0e3d5e365a7b995ac9f9bf39",
+   "adjudication_row_sha256": "f7cdb361c2a8d619b7a2cebc6f2c2a94610f51f09d516c432a5e7354d911aae7",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],

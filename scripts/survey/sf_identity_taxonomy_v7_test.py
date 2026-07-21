@@ -24,6 +24,13 @@ from sf_identity_taxonomy_v6_test import (
     validate,
 )
 from sf_json_contract import canonical_bytes, read as read_strict_json
+from sf_h5_calibration_contract import validate_completion as validate_h5_completion
+from sf_pdf_extractor_contract import (
+    replay_toolgate_probe,
+    runtime_stamp as pdf_runtime_stamp,
+    validate_contract as validate_pdf_contract,
+    validate_runtime as validate_pdf_runtime,
+)
 from sf_schema_v3_release_contract import (
     FINAL_SIDECAR_NAMES,
     SIDECAR_DIRECTORY_RELATIVE_PATH,
@@ -33,8 +40,8 @@ from sf_schema_v3_release_contract import (
 
 
 REPO = Path(__file__).resolve().parents[2]
-ARTIFACT_ID = "SF-IDENTITY-TAXONOMY-V7-TEST-2026-07-21-02"
-CONTRACT_VERSION = "SF-EVIDENCE-V7-CONTRACT-2"
+ARTIFACT_ID = "SF-IDENTITY-TAXONOMY-V7-TEST-2026-07-21-03"
+CONTRACT_VERSION = "SF-EVIDENCE-V7-CONTRACT-4"
 IMPLEMENTATION_FREEZE = "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
 RUNNER_RELATIVE_PATH = "scripts/survey/sf_identity_taxonomy_v7_test.py"
 TAXONOMY_V5_RELATIVE_PATH = "wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json"
@@ -44,10 +51,16 @@ SCHEMA_V3_ADJUDICATION_RELATIVE_PATH = (
     "wiki/survey/current/data/schema-v3-adjudication.json"
 )
 ABSENCE_ADJUDICATION_RELATIVE_PATH = (
-    "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
+    "wiki/survey/current/data/absence-evidence-adjudication-v3.json"
 )
 SEMANTIC_CORRECTIONS_RELATIVE_PATH = (
-    "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json"
+    "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json"
+)
+H5_CALIBRATION_RELATIVE_PATH = (
+    "wiki/survey/current/data/modality-specificity-calibration-v1.json"
+)
+PDF_EXTRACTOR_CONTRACT_RELATIVE_PATH = (
+    "wiki/survey/current/data/pdf-extractor-environment-v1.json"
 )
 ACTIVE_TAXONOMY = TAXONOMY_V6_RELATIVE_PATH
 
@@ -83,6 +96,12 @@ def load_current_inputs():
     )
     semantic_corrections, semantic_corrections_raw = _read_repo_json(
         SEMANTIC_CORRECTIONS_RELATIVE_PATH
+    )
+    h5_calibration, h5_calibration_raw = _read_repo_json(
+        H5_CALIBRATION_RELATIVE_PATH
+    )
+    pdf_extractor_contract, pdf_extractor_contract_raw = _read_repo_json(
+        PDF_EXTRACTOR_CONTRACT_RELATIVE_PATH
     )
 
     sidecar_dir = resolve_trusted_repo_path(
@@ -132,6 +151,12 @@ def load_current_inputs():
         "semantic_corrections": _provenance(
             SEMANTIC_CORRECTIONS_RELATIVE_PATH, semantic_corrections_raw
         ),
+        "h5_calibration": _provenance(
+            H5_CALIBRATION_RELATIVE_PATH, h5_calibration_raw
+        ),
+        "pdf_extractor_contract": _provenance(
+            PDF_EXTRACTOR_CONTRACT_RELATIVE_PATH, pdf_extractor_contract_raw
+        ),
         "sidecars": sidecar_provenance,
     }
     return {
@@ -144,6 +169,8 @@ def load_current_inputs():
         "schema_v3_adjudication": schema_adjudication,
         "absence_adjudication": absence_adjudication,
         "semantic_corrections": semantic_corrections,
+        "h5_calibration": h5_calibration,
+        "pdf_extractor_contract": pdf_extractor_contract,
         "input_provenance": provenance,
         "input_snapshot_sha256": hashlib.sha256(
             canonical_bytes(provenance)
@@ -202,6 +229,18 @@ def _expected_proof_rows(bundle):
                     "proof_obligation_id": entry.get("proof_obligation_id"),
                     "inspected_locators": entry.get("inspected_locators"),
                     "reason": entry.get("reason"),
+                    "counterevidence_search_scope": entry.get(
+                        "counterevidence_search_scope"
+                    ),
+                    "counterevidence_locators": entry.get(
+                        "counterevidence_locators"
+                    ),
+                    "temporal_order_resolved": entry.get(
+                        "temporal_order_resolved"
+                    ),
+                    "why_counterevidence_does_not_change_verdict": entry.get(
+                        "why_counterevidence_does_not_change_verdict"
+                    ),
                     "owner_sidecar": sidecar_path,
                     "fulltext": entry.get("fulltext"),
                     "coder_identity": entry.get("coder_identity"),
@@ -226,6 +265,16 @@ def validate_review_inventory(bundle):
         review_rows = []
 
     expected = _expected_proof_rows(bundle)
+    corrections = bundle.get("semantic_corrections", {}).get("corrections", [])
+    if (
+        artifact.get("original_proof_inventory_count") != 22
+        or artifact.get("retired_by_semantic_correction_count") != len(corrections)
+        or artifact.get("active_proof_inventory_count") != len(expected)
+        or artifact.get("inventory_identity")
+        != f"22 = {len(corrections)} + {len(expected)}"
+        or len(corrections) + len(expected) != 22
+    ):
+        failures.append("absence-review-versioned-inventory-reconciliation-mismatch")
     proof_ids = [
         row.get("adjudication_row_id")
         for row in proof_rows
@@ -304,7 +353,7 @@ def validate_absence_review(bundle):
 
 
 def validate_semantic_correction_review(bundle):
-    """Require independent confirmation of all three retired negative claims."""
+    """Validate confirmed corrections and reviewer-mandated recodes."""
     artifact = bundle.get("semantic_corrections")
     if not isinstance(artifact, dict):
         return ["semantic-correction-artifact-invalid"]
@@ -317,20 +366,21 @@ def validate_semantic_correction_review(bundle):
     if not isinstance(review_rows, list):
         review_rows = []
         failures.append("semantic-correction-review-rows-invalid")
+    active_count = len(bundle.get("absence_adjudication", {}).get("proof_rows", []))
     reconciliation = artifact.get("inventory_reconciliation", {})
     if reconciliation != {
         "original_negative_claims": 22,
-        "retired_by_correction": 3,
-        "active_negative_claims": 19,
-        "identity": "22 = 3 + 19",
-    }:
+        "retired_by_correction": len(corrections),
+        "active_negative_claims": active_count,
+        "identity": f"22 = {len(corrections)} + {active_count}",
+    } or len(corrections) + active_count != 22:
         failures.append("semantic-correction-reconciliation-mismatch")
     correction_ids = [
         row.get("retired_adjudication_row_id")
         for row in corrections
         if isinstance(row, dict)
     ]
-    if len(corrections) != 3 or len(set(correction_ids)) != 3 or None in correction_ids:
+    if len(corrections) != 4 or len(set(correction_ids)) != 4 or None in correction_ids:
         failures.append("semantic-correction-inventory-mismatch")
     review_ids = [
         row.get("retired_adjudication_row_id")
@@ -344,24 +394,33 @@ def validate_semantic_correction_review(bundle):
             "semantic-correction-review-coverage-mismatch:"
             f"expected={len(corrections)}:found={len(review_rows)}"
         )
-    required_independence = {
-        "nonparticipation_scope",
-        "timestamp_utc",
-        "conflict_declaration",
+    correction_index = {
+        row.get("retired_adjudication_row_id"): row
+        for row in corrections
+        if isinstance(row, dict)
     }
     for row in review_rows:
         if not isinstance(row, dict):
             failures.append("semantic-correction-review-row-invalid")
             continue
         row_id = row.get("retired_adjudication_row_id")
-        if row.get("verdict") != "AGREE":
+        verdict = row.get("verdict")
+        correction = correction_index.get(row_id, {})
+        if verdict == "DISAGREE_RECODE_REQUIRED":
+            if (
+                row.get("required_recode") != correction.get("corrected_value")
+                or correction.get("originating_review_verdict") != verdict
+            ):
+                failures.append(f"semantic-correction-required-recode-mismatch:{row_id}")
+        elif verdict != "AGREE":
             failures.append(f"semantic-correction-review-not-agree:{row_id}")
         if not row.get("reviewer_identity") or not row.get("review_reason"):
             failures.append(f"semantic-correction-review-attribution-missing:{row_id}")
         independence = row.get("independence")
-        if not isinstance(independence, dict) or any(
-            not independence.get(field) for field in required_independence
-        ):
+        if not isinstance(independence, dict) or not all(
+            independence.get(field)
+            for field in ("nonparticipation_scope", "conflict_declaration")
+        ) or not (independence.get("timestamp_utc") or independence.get("review_date")):
             failures.append(f"semantic-correction-review-independence-missing:{row_id}")
     expected_status = (
         "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
@@ -376,16 +435,35 @@ def validate_semantic_correction_review(bundle):
 
 
 def _platform_stamp(platform_os=None):
-    role = platform_os or os.name
-    if platform_os is None:
-        platform_name = sys.platform
-    else:
-        platform_name = "win32" if role == "nt" else "linux"
-    return {
-        "os": role,
-        "sys_platform": platform_name,
-        "python": sys.version.split()[0],
+    stamp = pdf_runtime_stamp()
+    role = platform_os or stamp["os"]
+    if role != stamp["os"]:
+        return {
+            "os": role,
+            "sys_platform": "win32" if role == "nt" else "linux",
+            "python_version": stamp["python_version"],
+            "pypdf_version": stamp["pypdf_version"],
+            "extractor_identity": stamp["extractor_identity"],
+        }
+    return stamp
+
+
+def validate_h5_calibration(bundle):
+    return validate_h5_completion(bundle.get("h5_calibration", {}))
+
+
+def validate_pdf_extractor(bundle, platform_os=None):
+    document = bundle.get("pdf_extractor_contract", {})
+    stamp = _platform_stamp(platform_os)
+    failures = validate_pdf_contract(document)
+    failures.extend(validate_pdf_runtime(document, stamp))
+    replay = replay_toolgate_probe(document) if not failures else {
+        "result": "FAIL",
+        "anchor_found": False,
+        "runtime": stamp,
+        "failure": "environment contract failed before replay",
     }
+    return sorted(set(failures)), replay
 
 
 def _exact_occupancy(occupancy_block):
@@ -417,6 +495,10 @@ def build_report(bundle=None, platform_os=None):
     )
     absence_failures = validate_absence_review(bundle)
     semantic_correction_failures = validate_semantic_correction_review(bundle)
+    h5_failures = validate_h5_calibration(bundle)
+    pdf_extractor_failures, toolgate_probe = validate_pdf_extractor(
+        bundle, platform_os=platform_os
+    )
     mutation_results = run_absence_mutation_suite(rows)
     mutation_ok = (
         not mutation_results["legitimate_field_specific_negative_control"]
@@ -456,6 +538,24 @@ def build_report(bundle=None, platform_os=None):
             "detail": semantic_correction_failures[:24],
         },
         {
+            "id": "H5_CALIBRATION",
+            "check": "three frozen papers have two independent seven-field codings and complete disagreement adjudication",
+            "result": "PASS" if not h5_failures else "FAIL",
+            "detail": h5_failures[:24],
+        },
+        {
+            "id": "PDF_EXTRACTOR_ENVIRONMENT",
+            "check": "runtime exactly matches the frozen platform-specific Python and pypdf identity",
+            "result": "PASS" if not pdf_extractor_failures else "FAIL",
+            "detail": pdf_extractor_failures,
+        },
+        {
+            "id": "TOOLGATE_P11_REPLAY",
+            "check": "the frozen ToolGate PDF page-11 discriminative anchor resolves under this exact extractor",
+            "result": "PASS" if toolgate_probe.get("result") == "PASS" else "FAIL",
+            "detail": toolgate_probe,
+        },
+        {
             "id": "ABSENCE_MUTATIONS",
             "check": "positive categorical absence is red and allowed negative is clean",
             "result": "PASS" if mutation_ok else "FAIL",
@@ -484,6 +584,7 @@ def build_report(bundle=None, platform_os=None):
         "input_provenance": bundle["input_provenance"],
         "input_snapshot_sha256": bundle["input_snapshot_sha256"],
         "platform": _platform_stamp(platform_os),
+        "toolgate_p11_replay": toolgate_probe,
         "checks": checks,
         "occupancy": occupancy_block,
         "mutation_results": mutation_results,

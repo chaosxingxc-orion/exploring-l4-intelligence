@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T02:56:55Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2508.00890" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2508.00890</identifier>
+        <datestamp>2025-10-23</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2508.00890</id>
+        <created>2025-10-21</created>
+            <updated>2025-10-23</updated>
+        <authors>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Fali</forenames>
+                </author>
+                <author>
+                    <keyname>Liu</keyname>
+                        <forenames>Hui</forenames>
+                </author>
+                <author>
+                    <keyname>Dai</keyname>
+                        <forenames>Zhenwei</forenames>
+                </author>
+                <author>
+                    <keyname>Zeng</keyname>
+                        <forenames>Jingying</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Zhiwei</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Zongyu</forenames>
+                </author>
+                <author>
+                    <keyname>Luo</keyname>
+                        <forenames>Chen</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Zhen</forenames>
+                </author>
+                <author>
+                    <keyname>Tang</keyname>
+                        <forenames>Xianfeng</forenames>
+                </author>
+                <author>
+                    <keyname>He</keyname>
+                        <forenames>Qi</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Suhang</forenames>
+                </author>
+        </authors>
+        <title>AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks</title>
+            <categories>cs.AI cs.CL cs.LG</categories>
+            <comments>Accepted by NeurIPS 2025</comments>
+            <acm-class>None</acm-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Test-time scaling (TTS) enhances the performance of large language models (LLMs) by allocating additional compute resources during inference. However, existing research primarily investigates TTS in single-stage tasks; while many real-world problems are multi-stage complex tasks, composed of a sequence of heterogeneous subtasks with each subtask requires LLM of specific capability. Therefore, we study a novel problem: the test-time compute-optimal scaling in multi-stage complex tasks, aiming to select suitable models and allocate budgets per subtask to maximize overall performance. TTS in multi-stage tasks introduces two fundamental challenges: (i) The combinatorial search space of model and budget allocations, combined with the high cost of inference, makes brute-force search impractical. (ii) The optimal model and budget allocations across subtasks are interdependent, increasing the complexity of the compute-optimal search. To address this gap, we conduct extensive pilot experiments on four tasks across six datasets, deriving three empirical insights characterizing the behavior of LLMs in multi-stage complex tasks. Informed by these insights, we propose AgentTTS, an LLM-agent-based framework that autonomously searches for compute-optimal allocations through iterative feedback-driven interactions with the execution environment. Experimental results demonstrate that AgentTTS significantly outperforms traditional and other LLM-based baselines in search efficiency, and shows improved robustness to varying training set sizes and enhanced interpretability.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

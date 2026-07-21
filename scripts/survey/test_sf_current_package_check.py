@@ -24,13 +24,13 @@ SPEC.loader.exec_module(package_check)
 
 EXPECTED_COMMANDS = (
     "python scripts/survey/test_sf_evidence_contract.py",
-    "python scripts/survey/sf_schema_v3_migrate.py --check",
+    "python scripts/survey/sf_absence_provenance_migrate.py --check",
     "python scripts/survey/sf_coding_generator.py --check",
-    "python scripts/survey/sf_identity_taxonomy_v6_test.py",
-    "python scripts/survey/sf_dual_platform_check.py",
+    "python -m unittest scripts.survey.test_sf_identity_taxonomy_v7_harness scripts.survey.test_sf_h5_calibration_contract scripts.survey.test_sf_pdf_extractor_contract",
+    "python -m unittest scripts.survey.test_sf_evidence_v7_aggregate",
     "python scripts/survey/test_sf_query_compiler_profiles.py",
     "python scripts/survey/sf_query_compiler.py --check --check-against wiki/survey/2026-07-15-sf-queries.jsonl",
-    "python scripts/survey/sf_current_tables.py --check",
+    "python -m unittest scripts.survey.test_sf_existing_corpus_disposition scripts.survey.test_sf_bibliography_generator",
     "python scripts/survey/sf_current_manifest.py --check",
     "python scripts/survey/sf_release_binding_check.py",
     "python scripts/survey/sf_quantifier_scan.py",
@@ -516,25 +516,11 @@ class CurrentPackageTransactionTests(unittest.TestCase):
             )
         )
 
-    def test_known_mutating_v6_command_runs_only_in_staged_sandbox(self) -> None:
-        script = self.repo / "scripts/survey/sf_identity_taxonomy_v6_test.py"
-        script.parent.mkdir(parents=True, exist_ok=True)
-        script.write_text(
-            "from pathlib import Path\n"
-            "Path('mutated.txt').write_text('bad', encoding='utf-8')\n"
-            "print(Path.cwd())\n",
-            encoding="utf-8",
+    def test_current_commands_have_no_legacy_writing_harness(self) -> None:
+        self.assertEqual(set(), package_check.STAGED_SANDBOX_COMMANDS)
+        self.assertFalse(
+            any("sf_identity_taxonomy_v6_test.py" in row for row in package_check.COMMANDS)
         )
-        self.git("add", "scripts/survey/sf_identity_taxonomy_v6_test.py")
-        self.git("commit", "-qm", "mutating fixture")
-
-        execution = package_check._default_command_runner(
-            package_check.COMMANDS[3], self.repo
-        )
-
-        self.assertEqual(0, execution.exit_code)
-        self.assertFalse((self.repo / "mutated.txt").exists())
-        self.assertIn(str(self.repo), execution.stdout)
 
     def test_write_refuses_dirty_or_untracked_existing_report(self) -> None:
         report = self.write_stage_commit()

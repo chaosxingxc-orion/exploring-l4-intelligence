@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 IMPLEMENTATION_FREEZE = "d4ec803417e1e9cfe9120afbce97c676cebbe6ee"
 REVIEW_SOURCE_SHA256 = "6434ee4e8a385da1f68e9a9212e615b6f0ddb41f83a06047d78060c571fe3abe"
 REVIEW_2026_07_21_SOURCE_SHA256 = "4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e"
+ROUND16_PRECHECK_SOURCE_SHA256 = "7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a"
 
 CENSUS_PATH = ROOT / "wiki/survey/2026-07-14-canonical-census-v2/paper_works.jsonl"
 SEED_PATH = ROOT / "wiki/survey/2026-07-15-sf-seed-manifest.jsonl"
@@ -23,7 +24,7 @@ BIBLIOGRAPHY_PATH = ROOT / "wiki/survey/2026-07-19-sf-bibliography-v1.md"
 CLAIM_PATH = ROOT / "wiki/survey/2026-07-14-claim-ledger-v2/claim_ledger_v2.jsonl"
 VERSION_PIN_PATH = ROOT / "wiki/survey/2026-07-14-claim-ledger-v2/version_pins.jsonl"
 FULLTEXT_PATH = ROOT / "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl"
-REVIEWER_KNOWN_PATH = ROOT / "wiki/survey/current/data/reviewer-known-items-v2.json"
+REVIEWER_KNOWN_PATH = ROOT / "wiki/survey/current/data/reviewer-known-items-v3.json"
 
 ARTIFACT_PATH = ROOT / "wiki/survey/current/data/existing-corpus-disposition-v1.json"
 REPORT_PATH = ROOT / "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json"
@@ -155,7 +156,7 @@ def parse_bibliography(path: Path) -> list[dict[str, Any]]:
 
 def load_reviewer_known(path: Path) -> list[dict[str, Any]]:
     artifact = json.loads(path.read_text(encoding="utf-8"))
-    if artifact.get("schema") != "sf-reviewer-known-items-v2":
+    if artifact.get("schema") != "sf-reviewer-known-items-v3":
         raise ValueError("reviewer-known schema mismatch")
     if artifact.get("access_class") != "REVIEW_CLAIM_VERIFICATION":
         raise ValueError("reviewer-known access class mismatch")
@@ -168,6 +169,11 @@ def load_reviewer_known(path: Path) -> list[dict[str, Any]]:
         != REVIEW_2026_07_21_SOURCE_SHA256
     ):
         raise ValueError("additional reviewer-known source provenance mismatch")
+    if (
+        artifact.get("round16_precheck_source_provenance", {}).get("sha256")
+        != ROUND16_PRECHECK_SOURCE_SHA256
+    ):
+        raise ValueError("round-16 precheck reviewer-known provenance mismatch")
     expected_items_hash = hashlib.sha256(canonical_json_bytes(artifact["items"])).hexdigest()
     if artifact.get("items_sha256") != expected_items_hash:
         raise ValueError("reviewer-known item payload hash mismatch")

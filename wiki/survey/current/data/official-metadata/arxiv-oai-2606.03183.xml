@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T02:57:02Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.03183" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.03183</identifier>
+        <datestamp>2026-06-03</datestamp>
+            <setSpec>cs:cs:MM</setSpec>
+            <setSpec>cs:cs:CV</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.03183</id>
+        <created>2026-06-02</created>
+            <updated>2026-06-03</updated>
+        <authors>
+                <author>
+                    <keyname>Jung</keyname>
+                        <forenames>Jaemin</forenames>
+                </author>
+                <author>
+                    <keyname>Rho</keyname>
+                        <forenames>Kyeongha</forenames>
+                </author>
+                <author>
+                    <keyname>Shin</keyname>
+                        <forenames>Inkyu</forenames>
+                </author>
+                <author>
+                    <keyname>Chung</keyname>
+                        <forenames>Joon Son</forenames>
+                </author>
+        </authors>
+        <title>Inference-Time Scaling for Joint Audio-Video Generation</title>
+            <categories>cs.MM cs.CV cs.SD eess.AS</categories>
+            <comments>Accepted by Transactions on Machine Learning Research (TMLR). Project page: https://jung-jaemin.github.io/ITS-AVGen-Proj/</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Joint audio-video generation aims to synthesize realistic audio-video pairs that are both semantically aligned with text prompts and precisely synchronized. While existing joint audio-video generation models often require substantial training resources to improve fidelity, Inference-Time Scaling (ITS) has recently emerged as a promising training-free alternative in single-modality domains. However, extending ITS from a single modality to multimodal domains is non-trivial, as it requires balancing multiple heterogeneous objectives. In this paper, we present the first comprehensive study of ITS for joint audio-video generation. We first demonstrate that a multi-verifier framework is essential to address the limitations of single-objective guidance, including asymmetric performance trade-offs and verifier hacking. Through systematic analysis, we then identify an optimal multi-verifier combination that yields balanced improvements across all quality dimensions. Finally, to effectively aggregate diverse reward signals, we propose Adaptive Reward Weighting (ARW), a novel test-time optimization algorithm. ARW treats reward aggregation as an online optimization problem, utilizing learnable parameters to calibrate reward variances without requiring prior knowledge of reward distributions, thereby ensuring robust multi-objective selection. Experimental results on VGGSound and JavisBench-mini benchmarks demonstrate that our framework significantly enhances semantic alignment, perceptual quality, and audio-visual synchronization of generated outputs. Synthesized samples and code are available on the project page: https://jung-jaemin.github.io/ITS-AVGen-Proj.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

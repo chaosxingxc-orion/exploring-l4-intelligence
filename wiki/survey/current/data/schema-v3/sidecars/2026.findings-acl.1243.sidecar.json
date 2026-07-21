@@ -18,13 +18,13 @@
    "core_weight_update": false,
    "external_component_weight_update": false,
    "controller_program_or_config_optimized_on_labels": true,
-   "human_or_dev_label_model_selection": false,
+   "human_or_dev_label_model_selection": "unknown",
    "deployment_label_access": false,
    "test_item_gold_access": false,
    "inference_external_new_information": true,
    "internal_visibility": "api_only",
    "includes_speech_audio": false,
-   "adjudication_required": false,
+   "adjudication_required": true,
    "load_bearing": true,
    "method_path_id": "2026.findings-acl.1243#closed-prompt-only",
    "core_topology": "single_core_multi_call",
@@ -136,25 +136,10 @@
      "quote": "分类法由人工标注 555 error points 离线构建"
     },
     "human_or_dev_label_model_selection": {
-     "kind": "absence",
-     "value": false,
-     "reason": "The inspected deployed workflow exhaustively names automated decomposition, verification, judging, retry, and stopping operations; it contains no human or developer choice among model checkpoints based on labeled development outcomes.",
-     "proof_obligation_id": "NEG-HUMAN-OR-DEV-LABEL-MODEL-SELECTION",
-     "inspected_locators": [
-      "p4 anchor='framework consists of a decomposition agent a verification agent and a judge agent'",
-      "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
-      "p6 anchor='we mainly use claude 3 7 sonnet as the backbone model of deep verifier'"
-     ],
-     "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
-     "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
-     "fulltext": {
-      "id": "2026.findings-acl.1243",
-      "kind": "pdf",
-      "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
-     },
-     "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
-     "adjudication_row_id": "ABS2-216d90876d8397734c37"
+     "value": "unknown",
+     "kind": "pdf_page",
+     "page": 4,
+     "anchor": "due to its strong performance in this setting"
     },
     "deployment_label_access": {
      "value": false,
@@ -219,6 +204,10 @@
       "p5 anchor='uses it to guide further retries'",
       "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
      "fulltext": {
@@ -227,7 +216,7 @@
       "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
      "adjudication_row_id": "ABS2-49b8c920cf44c2045df6"
     },
     "explicit_candidate_pool_selection": {
@@ -239,6 +228,10 @@
       "p5 anchor='uses it to guide further retries'",
       "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1243#closed-prompt-only",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
      "fulltext": {
@@ -247,7 +240,7 @@
       "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+     "owner_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
      "adjudication_row_id": "ABS2-2d2291b9ba06d002e93e"
     }
    },
@@ -255,9 +248,18 @@
    "adjudication_provenance": "v4 复审 DFS 批B+iso-adj-B AGREE(tool_call 无边=正确 fail-closed 编码专项确认);v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:tool_call 无边被判「刻意的诚实非拼接」——stop_budget→tool_call 虽在白名单但 judge 分不决定查询,拒画该边正确;观察:拓扑/模态接地依单核多角色惯例(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "DeepVerifier 主路径:judge scalar 驱动 retry/stop;tool_call 权无 signal 边(分解 agent 决定查什么)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "claude-opus-iso-adj-B2:task-a8cda5b",
+   "semantic_adjudicator": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "118d492dd1b331acf355cb6d3b7fd5bcbd802f48b119035d2ca1f8c7dea31e36",
+   "semantic_correction": {
+    "date": "2026-07-21",
+    "review_artifact": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
+    "frozen_target_commit": "55aea3a13a8315e51c70a0aed9633e61a66c8fe4",
+    "disposition": "reviewer DISAGREE accepted; false retired and recoded unknown because performance-based backbone choice and labeled comparisons do not resolve pre-freeze temporal selection",
+    "retired_absence_ids": [
+     "ABS2-216d90876d8397734c37"
+    ]
+   },
+   "adjudication_row_sha256": "5f3b0834b7bc03c6cf65e7a1604708a87cb698cbd298b8c9f09e764a55831bd0",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
@@ -391,6 +393,10 @@
       "p5 anchor='after completing each task the agent verifies its own outputs using deepverifier'",
       "p6 anchor='we fine tune qwen3 8b on a mixture'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
      "fulltext": {
@@ -399,7 +405,7 @@
       "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+     "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
      "adjudication_row_id": "ABS2-58b7d1b9a43299821296"
     },
     "deployment_label_access": {
@@ -465,6 +471,10 @@
       "p5 anchor='uses it to guide further retries'",
       "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
      "fulltext": {
@@ -473,7 +483,7 @@
       "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+     "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
      "adjudication_row_id": "ABS2-cf6ae4d082096066fee4"
     },
     "explicit_candidate_pool_selection": {
@@ -485,6 +495,10 @@
       "p5 anchor='uses it to guide further retries'",
       "p6 anchor='a satisfactory answer is reached or a predefined retry limit is exceeded'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2026.findings-acl.1243#open-sft-variant",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json",
      "fulltext": {
@@ -493,7 +507,7 @@
       "sha256": "b0a5c8b518d6dc6c7f4357dd0a3e1dfd7edd08528fe589821386c559c9613f26"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+     "owner_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
      "adjudication_row_id": "ABS2-1392014ff32270df1e5e"
     }
    },
@@ -501,8 +515,8 @@
    "adjudication_provenance": "iso-adj-B DISAGREE(模态)已采纳;v5-schema 迁移:单信号在线;〔iso-adj-B2 再裁决 AGREE:ext_wu=false absence 条目判忠实(SFT 局部于策略主干,不与 core_weight_update 重复计);观察:api_only 引文出处为闭源主实验行文,开源核按方法用途 defensible(非致改,已登记)〕;〔iso-adj-D 增量裁决(task-a22aa0c,2026-07-19):信号字段绑定 12/12 AGREE——soft 注记:ATLAS uses 绑定引文窄(synthesize_input 由边3交叉举证)/DV·DREAM stop_budget 由停止边 locator 补覆盖/ATLAS p8 anchor『Fig』源自 loadbearing_facts Fig7a;值全部 canon-faithful,不改动〕",
    "note": "SFT 变体独立行;核=Qwen3-8B(text-only)",
    "coder": "claude-fable-main:s-ea4f0926",
-   "semantic_adjudicator": "PENDING_POST_CORRECTION_REVIEW",
-   "adjudication_status": "conflict_queue",
+   "semantic_adjudicator": "EXTERNAL_DOCTORAL_REVIEWER_BOUND_TO_ROUND16_PRECHECK",
+   "adjudication_status": "adjudicated_agree",
    "semantic_correction": {
     "date": "2026-07-21",
     "review_artifact": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
@@ -512,7 +526,7 @@
      "ABS2-cc432879fce4af753778"
     ]
    },
-   "adjudication_row_sha256": "90505bea43ea1c7fdd91e0f684f5e54b1dd4a9807b3b2828e8a1112ae915b23e",
+   "adjudication_row_sha256": "adf3186756e9959b248c2a4506a03aafde87f0d6244ccb2c7c5137669661d29c",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],

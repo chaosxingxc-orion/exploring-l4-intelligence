@@ -23,6 +23,10 @@ SOURCE_SPECS = (
     ("legacy_current_manifest", "wiki/survey/current/manifest.json", "legacy_release_context"),
     ("mapping_methods_adaptation", "wiki/survey/current/mapping-methods-adaptation.md", "methods"),
     ("modality_specificity_codebook", "wiki/survey/current/modality-specificity-codebook.md", "codebook"),
+    ("h5_calibration", "wiki/survey/current/data/modality-specificity-calibration-v1.json", "calibration"),
+    ("h5_calibration_validator", "scripts/survey/sf_h5_calibration_contract.py", "release_gate"),
+    ("pdf_extractor_environment", "wiki/survey/current/data/pdf-extractor-environment-v1.json", "environment"),
+    ("pdf_extractor_validator", "scripts/survey/sf_pdf_extractor_contract.py", "release_gate"),
     ("query_compiler", "scripts/survey/sf_query_compiler.py", "search_execution"),
     ("query_compiler_profile_test", "scripts/survey/test_sf_query_compiler_profiles.py", "search_execution"),
     ("frozen_queries", "wiki/survey/2026-07-15-sf-queries.jsonl", "search_execution"),
@@ -43,14 +47,14 @@ SOURCE_SPECS = (
     ("sidecar_2605_08083", "wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json", "adjudication"),
     ("sidecar_2606_01667", "wiki/survey/current/data/schema-v3/sidecars/2606.01667.sidecar.json", "adjudication"),
     ("sidecar_2606_03054", "wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json", "adjudication"),
-    ("absence_adjudication", "wiki/survey/current/data/absence-evidence-adjudication-v2.json", "adjudication"),
-    ("semantic_corrections", "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json", "adjudication"),
+    ("absence_adjudication", "wiki/survey/current/data/absence-evidence-adjudication-v3.json", "adjudication"),
+    ("semantic_corrections", "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json", "adjudication"),
     ("v7_leaf_runner", "scripts/survey/sf_identity_taxonomy_v7_test.py", "release_gate"),
     ("v7_aggregator", "scripts/survey/sf_evidence_v7_aggregate.py", "release_gate"),
     ("dual_platform_checker", "scripts/survey/sf_dual_platform_check.py", "release_gate"),
     ("active_union", "wiki/survey/current/data/existing-corpus-disposition-v1.json", "corpus"),
     ("active_union_check", "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json", "corpus"),
-    ("reviewer_known_items", "wiki/survey/current/data/reviewer-known-items-v2.json", "corpus"),
+    ("reviewer_known_items", "wiki/survey/current/data/reviewer-known-items-v3.json", "corpus"),
     ("seed_manifest", "wiki/survey/2026-07-15-sf-seed-manifest.jsonl", "corpus"),
     ("fulltext_ledger", "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl", "corpus"),
     ("official_metadata_receipts", "wiki/survey/current/data/official-metadata-receipts-v1.jsonl", "bibliography"),
@@ -60,13 +64,14 @@ SOURCE_SPECS = (
     ("metadata_fetcher", "scripts/survey/sf_official_metadata_fetch.py", "bibliography"),
     ("attempt_registry", "docs/integrity/experiment_attempt_registry.jsonl", "integrity"),
     ("round15_review", "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md", "review"),
+    ("round16_precheck_review", "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md", "review"),
     ("proposal_draft", "wiki/survey/workbench/system-first-stage1a/2026-07-21-research-proposal-for-independent-review.md", "proposal"),
     ("proposal_checker", "scripts/survey/sf_reviewer_proposal_check.py", "proposal"),
 )
 
 DEFERRED_RELEASE_ARTIFACTS = (
-    ("evidence_v7_windows_leaf", "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json", "3/3 correction reviews and 19/19 active absence reviews"),
-    ("evidence_v7_wsl_leaf", "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json", "3/3 correction reviews and 19/19 active absence reviews"),
+    ("evidence_v7_windows_leaf", "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.nt.json", "H5 dual-coder calibration complete, 4/4 correction decisions, 18/18 active absence decisions, and exact NT extractor match"),
+    ("evidence_v7_wsl_leaf", "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.posix.json", "H5 dual-coder calibration complete, 4/4 correction decisions, 18/18 active absence decisions, and exact POSIX extractor match"),
     ("evidence_v7_aggregate", "docs/checks/system-first-stage1a/evidence-v7/identity-taxonomy-v7-test.json", "both platform leaves PASS on identical inputs"),
     ("formal_round16_proposal", "wiki/audit/system-first-stage1a/round-16/research-proposal-and-stage1b-signoff-request.md", "fresh v7 aggregate PASS and hostile pre-release review"),
 )
@@ -102,13 +107,28 @@ def build_manifest(commit: str | None = None) -> dict[str, Any]:
     commit = commit or str(git("rev-parse", "HEAD"))
     absence = json.loads(
         committed_bytes(
-            commit, "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
+            commit, "wiki/survey/current/data/absence-evidence-adjudication-v3.json"
         )
     )
     corrections = json.loads(
         committed_bytes(
             commit,
-            "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+            "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
+        )
+    )
+    h5 = json.loads(
+        committed_bytes(
+            commit, "wiki/survey/current/data/modality-specificity-calibration-v1.json"
+        )
+    )
+    pdf_extractor = json.loads(
+        committed_bytes(
+            commit, "wiki/survey/current/data/pdf-extractor-environment-v1.json"
+        )
+    )
+    reviewer_known = json.loads(
+        committed_bytes(
+            commit, "wiki/survey/current/data/reviewer-known-items-v3.json"
         )
     )
     return {
@@ -125,6 +145,25 @@ def build_manifest(commit: str | None = None) -> dict[str, Any]:
             "active_absence_inventory": len(absence["proof_rows"]),
             "active_absence_reviews_recorded": len(absence["rows"]),
         },
+        "h5_gate": {
+            "status": h5.get("status"),
+            "paper_inventory": len(h5.get("papers", [])),
+            "coder_inventory": len(h5.get("coders", [])),
+            "planned_denominator": h5.get("agreement_report", {}).get("planned_denominator"),
+            "observed_comparable_denominator": h5.get("agreement_report", {}).get("observed_comparable_denominator"),
+        },
+        "pdf_extractor_gate": {
+            "version_policy": pdf_extractor.get("version_policy"),
+            "platform_roles": sorted(pdf_extractor.get("canonical_environments", {})),
+            "toolgate_probe_page": pdf_extractor.get("toolgate_probe", {}).get("page"),
+        },
+        "reviewer_known_gate": {
+            "item_inventory": len(reviewer_known.get("items", [])),
+            "round16_new_item_ids": [
+                row.get("arxiv_id") for row in reviewer_known.get("items", [])[-5:]
+            ],
+            "query_recall_credit": reviewer_known.get("query_recall_credit"),
+        },
         "deferred_release_artifacts": [
             {
                 "role": role,
@@ -136,8 +175,7 @@ def build_manifest(commit: str | None = None) -> dict[str, Any]:
         ],
         "release_eligible": False,
         "release_blockers": [
-            "SEMANTIC_CORRECTION_REVIEW_PENDING_0_OF_3",
-            "ACTIVE_ABSENCE_REVIEW_PENDING_0_OF_19",
+            "H5_SECOND_INDEPENDENT_CODER_AND_ADJUDICATION_PENDING",
             "FRESH_V7_DUAL_PLATFORM_EVIDENCE_MISSING",
             "FORMAL_ROUND16_PROPOSAL_NOT_CREATED",
             "INDEPENDENT_SEARCH_DESIGN_SIGNOFF_MISSING",
@@ -186,13 +224,35 @@ def validate_manifest(document: dict[str, Any]) -> list[str]:
         failures.add("PRE_REVIEW_RELEASE_ELIGIBILITY_FORBIDDEN")
     semantic = document.get("semantic_gate", {})
     if semantic != {
-        "inventory_identity": "22 = 3 + 19",
-        "correction_inventory": 3,
-        "correction_reviews_recorded": 0,
-        "active_absence_inventory": 19,
-        "active_absence_reviews_recorded": 0,
+        "inventory_identity": "22 = 4 + 18",
+        "correction_inventory": 4,
+        "correction_reviews_recorded": 4,
+        "active_absence_inventory": 18,
+        "active_absence_reviews_recorded": 18,
     }:
         failures.add("SEMANTIC_GATE_STATE_MISMATCH")
+    if document.get("h5_gate") != {
+        "status": "PENDING_SECOND_INDEPENDENT_CODER",
+        "paper_inventory": 3,
+        "coder_inventory": 1,
+        "planned_denominator": 21,
+        "observed_comparable_denominator": 0,
+    }:
+        failures.add("H5_GATE_STATE_MISMATCH")
+    if document.get("pdf_extractor_gate") != {
+        "version_policy": "EXACT_MATCH_FAIL_CLOSED",
+        "platform_roles": ["nt", "posix"],
+        "toolgate_probe_page": 11,
+    }:
+        failures.add("PDF_EXTRACTOR_GATE_STATE_MISMATCH")
+    reviewer_known = document.get("reviewer_known_gate", {})
+    if (
+        reviewer_known.get("item_inventory") != 15
+        or reviewer_known.get("round16_new_item_ids")
+        != ["2606.00579", "2606.03183", "2502.19328", "2605.10344", "2508.00890"]
+        or reviewer_known.get("query_recall_credit") is not False
+    ):
+        failures.add("REVIEWER_KNOWN_GATE_STATE_MISMATCH")
     return sorted(failures)
 
 

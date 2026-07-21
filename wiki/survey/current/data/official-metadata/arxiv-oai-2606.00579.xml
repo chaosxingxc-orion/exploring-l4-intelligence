@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T02:57:00Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.00579" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.00579</identifier>
+        <datestamp>2026-06-02</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:CV</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.00579</id>
+        <created>2026-05-30</created>
+            <updated>2026-06-02</updated>
+        <authors>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Dongping</forenames>
+                </author>
+                <author>
+                    <keyname>Huang</keyname>
+                        <forenames>Xuanao</forenames>
+                </author>
+                <author>
+                    <keyname>Hu</keyname>
+                        <forenames>Zhihan</forenames>
+                </author>
+                <author>
+                    <keyname>Shi</keyname>
+                        <forenames>Qingyuan</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Dianqi</forenames>
+                </author>
+                <author>
+                    <keyname>Zhou</keyname>
+                        <forenames>Tianyi</forenames>
+                </author>
+        </authors>
+        <title>Sandboxed Coding Agents are Competitive Omni-modal Task Solvers</title>
+            <categories>cs.CL cs.CV</categories>
+            <comments>Paper under review</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>As multimodal LLMs increasingly target video and audio, it is often assumed that such tasks require native omnimodal models. We show that this is not always the case: coding agents with only text+image access and a sandboxed tool-use interface can match, and in several settings outperform, SOTA native omnimodal models and predefined multimodal agent scaffolds across multiple audio-video benchmarks. Our trajectory analysis suggests that their strength comes from writing code and orchestrating tools to extract relevant evidence from transcripts, frames, and other modality signals, thereby converting omnimodal tasks into retrieval and information-processing problems rather than ingesting entire media streams. We further characterize their limitations through a failure taxonomy and process-level trace analysis, and show that simple skill injection, including human-written and self-distilled skills, substantially improves performance. To explore open-source elicitation, we introduce Code-X, a training recipe with the OmniCoding trajectory dataset and verifiable reward, and provide baselines on Qwen-3.5-9B and Qwen-3.6-27B. Finally, we argue that the next frontier is many-modality processing, and introduce TerminalBench-O, a process-level benchmark for real-world omnimodal processing tasks. Code will be available at https://github.com/Dongping-Chen/OmniCoding.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

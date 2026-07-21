@@ -12,6 +12,9 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from sf_h5_calibration_contract import validate_completion as validate_h5_completion
+from sf_pdf_extractor_contract import validate_contract as validate_pdf_contract
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PROPOSAL_PATH = (
@@ -24,8 +27,11 @@ ROUND16_PATH = (
     / "wiki/audit/system-first-stage1a/round-16/"
     "research-proposal-and-stage1b-signoff-request.md"
 )
-ABSENCE_PATH = ROOT / "wiki/survey/current/data/absence-evidence-adjudication-v2.json"
-CORRECTIONS_PATH = ROOT / "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json"
+ABSENCE_PATH = ROOT / "wiki/survey/current/data/absence-evidence-adjudication-v3.json"
+CORRECTIONS_PATH = ROOT / "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json"
+H5_PATH = ROOT / "wiki/survey/current/data/modality-specificity-calibration-v1.json"
+PDF_EXTRACTOR_PATH = ROOT / "wiki/survey/current/data/pdf-extractor-environment-v1.json"
+REVIEWER_KNOWN_PATH = ROOT / "wiki/survey/current/data/reviewer-known-items-v3.json"
 MAPPING_METHODS_PATH = ROOT / "wiki/survey/current/mapping-methods-adaptation.md"
 MODALITY_CODEBOOK_PATH = ROOT / "wiki/survey/current/modality-specificity-codebook.md"
 UNION_CHECK_PATH = (
@@ -48,18 +54,21 @@ EVIDENCE_BINDINGS = {
     "v10 proposal": "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
     "round-14 adversarial review": "wiki/audit/system-first-stage1a/round-14/stage1a-final-gates-plan-doctoral-adversarial-review.md",
     "round-15 independent review": "wiki/audit/system-first-stage1a/pre-round-15/2026-07-21-independent-doctoral-review-of-stage1a-research-proposal.md",
+    "round-16 precheck rereview": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
     "revised release design": "docs/superpowers/specs/2026-07-20-reviewer-proposal-and-master-release-design.md",
     "revised implementation plan": "docs/superpowers/plans/2026-07-20-stage1a-final-gates-and-reviewer-proposal.md",
-    "negative-evidence review artifact": "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
-    "semantic-correction artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+    "negative-evidence review artifact": "wiki/survey/current/data/absence-evidence-adjudication-v3.json",
+    "semantic-correction artifact": "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
     "lossless union graph": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
     "union machine check": "docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json",
-    "reviewer-known items": "wiki/survey/current/data/reviewer-known-items-v2.json",
+    "reviewer-known items": "wiki/survey/current/data/reviewer-known-items-v3.json",
     "official metadata receipts": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
-    "generated 85-work bibliography": "wiki/survey/current/bibliography.md",
+    "generated 90-work bibliography": "wiki/survey/current/bibliography.md",
     "bibliography selection receipt": "wiki/survey/current/data/reviewer-bibliography-selection-v1.json",
     "mapping methods adaptation": "wiki/survey/current/mapping-methods-adaptation.md",
     "speech/omni specificity codebook": "wiki/survey/current/modality-specificity-codebook.md",
+    "H5 calibration artifact": "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+    "PDF extractor environment": "wiki/survey/current/data/pdf-extractor-environment-v1.json",
     "current protocol": "wiki/survey/current/protocol.md",
     "current status": "wiki/survey/current/status.md",
     "frozen evidence-v6 aggregate": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
@@ -82,6 +91,11 @@ DIRECT_NEIGHBORS = (
     "Native Active Perception",
     "Llasa",
     "OmniGAIA",
+    "Sandboxed Coding Agents are Competitive Omni-modal Task Solvers",
+    "Inference-Time Scaling for Joint Audio-Video Generation",
+    "Agentic Reward Modeling",
+    "TMAS",
+    "AgentTTS",
 )
 
 
@@ -97,6 +111,9 @@ def load_inputs() -> dict[str, Any]:
         "union": json.loads(UNION_CHECK_PATH.read_text(encoding="utf-8")),
         "receipts": receipts,
         "selection": json.loads(SELECTION_PATH.read_text(encoding="utf-8")),
+        "h5": json.loads(H5_PATH.read_text(encoding="utf-8")),
+        "pdf_extractor": json.loads(PDF_EXTRACTOR_PATH.read_text(encoding="utf-8")),
+        "reviewer_known": json.loads(REVIEWER_KNOWN_PATH.read_text(encoding="utf-8")),
     }
 
 
@@ -146,6 +163,8 @@ def _required_structure_failures(text: str) -> list[str]:
         "RQ_STAGE_MATRIX_MISSING": "answering_stage",
         "METHODS_ADAPTATION_MISSING": "mapping-methods-adaptation.md",
         "MODALITY_CODEBOOK_MISSING": "modality-specificity-codebook.md",
+        "H5_CALIBRATION_ARTIFACT_MISSING": "modality-specificity-calibration-v1.json",
+        "PDF_EXTRACTOR_CONTRACT_MISSING": "pdf-extractor-environment-v1.json",
         "STAGE1C_OWNERSHIP_MISSING": "Stage-1C owns the final 3–5 candidate cards",
         "BIBLIOGRAPHY_SELECTION_MISSING": "reviewer-bibliography-selection-v1.json",
         "YEAR_POLICY_MISSING": "year_basis",
@@ -175,9 +194,8 @@ def _forbidden_claim_failures(text: str, inputs: dict[str, Any]) -> list[str]:
         failures.append("ACTUAL_REVIEWER_VERDICT_FORBIDDEN")
     if "execution_authorized=true" in text or "STAGE1B_READY" in text:
         failures.append("STAGE1B_AUTHORIZATION_FORBIDDEN")
-    absence = inputs["absence"]
-    if absence.get("rows") == [] and "FOUR_IMPLEMENTATION_FINDINGS_REMEDIATED" in text:
-        failures.append("FOUR_FINDINGS_CLOSURE_FORBIDDEN_WHILE_PENDING")
+    if "EXACT_PACKAGE_SIGNED=true" in text:
+        failures.append("EXACT_PACKAGE_SIGNOFF_FORBIDDEN")
     if "SUBMITTED_FOR_INDEPENDENT_REVIEW" in text:
         failures.append("FORMAL_SUBMISSION_CLAIM_FORBIDDEN_IN_DRAFT")
     return failures
@@ -219,10 +237,35 @@ def _numeric_failures(text: str, inputs: dict[str, Any]) -> list[str]:
     review_count = len(absence.get("rows", []))
     absence_phrases = (
         f"{proof_count} 个 proof rows、{review_count} 个 reviewer rows",
-        f"PENDING {review_count}/{proof_count}",
+        f"coverage {review_count}/{proof_count}",
+        absence.get("inventory_identity", ""),
     )
     if any(phrase not in text for phrase in absence_phrases):
         failures.append("ABSENCE_COUNT_DRIFT")
+    corrections = inputs["corrections"]
+    correction_phrases = (
+        f"exactly {len(corrections.get('corrections', []))}/22 semantic corrections",
+        f"{len(corrections.get('corrections', []))} 个 correction rows、{len(corrections.get('review_rows', []))} 个 reviewer rows",
+        corrections.get("inventory_reconciliation", {}).get("identity", ""),
+    )
+    if any(phrase not in text for phrase in correction_phrases):
+        failures.append("CORRECTION_COUNT_DRIFT")
+    h5 = inputs["h5"]
+    h5_phrases = (
+        f"H5 calibration status={h5.get('status')}",
+        f"planned denominator={h5.get('agreement_report', {}).get('planned_denominator')}",
+        f"observed comparable denominator={h5.get('agreement_report', {}).get('observed_comparable_denominator')}",
+    )
+    if any(phrase not in text for phrase in h5_phrases):
+        failures.append("H5_CALIBRATION_STATE_DRIFT")
+    reviewer_known = inputs["reviewer_known"]
+    if f"{len(reviewer_known.get('items', []))} reviewer-known items" not in text:
+        failures.append("REVIEWER_KNOWN_COUNT_DRIFT")
+    environments = inputs["pdf_extractor"].get("canonical_environments", {})
+    for role in ("nt", "posix"):
+        version = environments.get(role, {}).get("pypdf_version")
+        if f"pypdf {version}" not in text:
+            failures.append("PDF_EXTRACTOR_VERSION_DRIFT")
     return failures
 
 
@@ -261,9 +304,12 @@ def validate_release(text: str, inputs: dict[str, Any] | None = None) -> list[st
     }
     if (
         absence.get("status") != "INDEPENDENT_REVIEW_RECORDED_UNVALIDATED"
-        or len(proof_ids) != 19
+        or len(proof_ids) != inputs["absence"].get("active_proof_inventory_count")
         or review_ids != proof_ids
-        or any(row.get("verdict") != "AGREE" for row in absence.get("rows", []))
+        or any(
+            row.get("verdict") not in {"AGREE", "AGREE_WITH_CAUTION"}
+            for row in absence.get("rows", [])
+        )
     ):
         failures.append("ABSENCE_REVIEW_PENDING")
     corrections = inputs["corrections"]
@@ -277,15 +323,46 @@ def validate_release(text: str, inputs: dict[str, Any] | None = None) -> list[st
     }
     if (
         corrections.get("inventory_reconciliation", {}).get("identity")
-        != "22 = 3 + 19"
-        or len(correction_ids) != 3
+        != f"22 = {len(correction_ids)} + {len(proof_ids)}"
+        or len(correction_ids) + len(proof_ids) != 22
         or correction_review_ids != correction_ids
         or any(
-            row.get("verdict") != "AGREE"
+            row.get("verdict") not in {"AGREE", "DISAGREE_RECODE_REQUIRED"}
             for row in corrections.get("review_rows", [])
         )
     ):
         failures.append("SEMANTIC_CORRECTION_REVIEW_PENDING")
+    correction_index = {
+        row.get("retired_adjudication_row_id"): row
+        for row in corrections.get("corrections", [])
+    }
+    for row in corrections.get("review_rows", []):
+        if row.get("verdict") == "DISAGREE_RECODE_REQUIRED" and row.get(
+            "required_recode"
+        ) != correction_index.get(row.get("retired_adjudication_row_id"), {}).get(
+            "corrected_value"
+        ):
+            failures.append("SEMANTIC_CORRECTION_REVIEW_PENDING")
+    if validate_h5_completion(inputs.get("h5", {})):
+        failures.append("H5_CALIBRATION_PENDING")
+    if validate_pdf_contract(inputs.get("pdf_extractor", {})):
+        failures.append("PDF_EXTRACTOR_ENVIRONMENT_UNFROZEN")
+    reviewer_known = inputs.get("reviewer_known", {})
+    required_known_ids = {
+        "2606.00579", "2606.03183", "2502.19328", "2605.10344", "2508.00890"
+    }
+    known_rows = {
+        row.get("arxiv_id"): row
+        for row in reviewer_known.get("items", [])
+        if isinstance(row, dict)
+    }
+    if not required_known_ids <= set(known_rows) or any(
+        not known_rows[item_id].get("current_disposition", {}).get("reason")
+        or not known_rows[item_id].get("current_disposition", {}).get("next_action")
+        or known_rows[item_id].get("query_recall_credit") is not False
+        for item_id in required_known_ids
+    ):
+        failures.append("REVIEWER_KNOWN_ITEMS_UNDISPOSITIONED")
     if any(not (V7_DIRECTORY / name).is_file() for name in V7_NAMES):
         failures.append("EVIDENCE_V7_LEAVES_OR_AGGREGATE_MISSING")
     if not ROUND16_PATH.is_file() or PROPOSAL_PATH == ROUND16_PATH:

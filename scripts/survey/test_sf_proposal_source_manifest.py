@@ -38,10 +38,14 @@ class ProposalSourceManifestTest(unittest.TestCase):
             "wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl",
             "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json",
             "wiki/survey/2026-07-15-sf-blank-templates.md",
-            "wiki/survey/current/data/absence-evidence-adjudication-v2.json",
-            "wiki/survey/current/data/negative-evidence-semantic-corrections-v1.json",
+            "wiki/survey/current/data/absence-evidence-adjudication-v3.json",
+            "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
             "wiki/survey/current/mapping-methods-adaptation.md",
             "wiki/survey/current/modality-specificity-codebook.md",
+            "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+            "wiki/survey/current/data/pdf-extractor-environment-v1.json",
+            "wiki/survey/current/data/reviewer-known-items-v3.json",
+            "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",
         }
         self.assertTrue(required <= paths)
 
@@ -50,7 +54,12 @@ class ProposalSourceManifestTest(unittest.TestCase):
         self.assertEqual(4, len(deferred))
         self.assertTrue(all(row["state"] == "REQUIRED_AFTER_INDEPENDENT_REVIEW" for row in deferred))
         self.assertFalse(self.document["release_eligible"])
-        self.assertEqual("22 = 3 + 19", self.document["semantic_gate"]["inventory_identity"])
+        self.assertEqual("22 = 4 + 18", self.document["semantic_gate"]["inventory_identity"])
+        self.assertEqual(18, self.document["semantic_gate"]["active_absence_reviews_recorded"])
+        self.assertEqual(
+            "PENDING_SECOND_INDEPENDENT_CODER", self.document["h5_gate"]["status"]
+        )
+        self.assertEqual("EXACT_MATCH_FAIL_CLOSED", self.document["pdf_extractor_gate"]["version_policy"])
 
     def test_tampered_hash_or_duplicate_role_fails_closed(self):
         mutated = copy.deepcopy(self.document)

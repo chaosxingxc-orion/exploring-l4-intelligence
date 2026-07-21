@@ -23,28 +23,28 @@ FINAL_SIDECAR_NAMES = (
 )
 FINAL_SIDECAR_SHA256 = {
     "2026.findings-acl.1243.sidecar.json": (
-        "9d60a55dffc0112a4c8eb38aeebe7ea5daf3815d035aaa558812fc86e57911bb"
+        "d246b46102c9ed4256046cd1ec7476defd349826cee151171f19a954a5933064"
     ),
     "2026.findings-acl.1724.sidecar.json": (
-        "eb96a83e2eadea96db2af2b1690feb1cfd2792354758adb127649892689839f9"
+        "f8527bf82b35681e7747de1ffb333c745b6f61ad71744a98b80d2f40cf835653"
     ),
     "2026.findings-acl.511.sidecar.json": (
-        "2d97b5ca3d441189d8d8c57eb43b47c09b36c7860f16e54dae6daac2dc957404"
+        "7b4c5951abbb1840ba55df2fee0cac6ff44eed331e94f83b403c0ee5e4d04cbc"
     ),
     "2602.16485.sidecar.json": (
         "b4201e535f7dbea0cee9f92d506c9e8ecd80b031d7f9aa3608e8e5085a68950f"
     ),
     "2604.16529.sidecar.json": (
-        "f946ebd1c50bb117bd787641679e0031a468b8c4c6a46712fd735360e0ce3de9"
+        "5644117d98d79f2ce114ad85eb96e5c5bda3d9a3102d45ce0c57fde275a818e5"
     ),
     "2605.08083.sidecar.json": (
-        "c9afb44081e80182c00194f18ffda8c79706075043c711aa8d1219145367bc6e"
+        "be8245101d06dd8d881381dabda719259264e3ab5e031fd1057e5ba3c156d602"
     ),
     "2606.01667.sidecar.json": (
         "82056e0957c85d95c1bf4d772af82a2db3ba3d2017f607ae9309bd7c83099d69"
     ),
     "2606.03054.sidecar.json": (
-        "f5ba2c5c68e72b4f1737fc79d63f0a61423ae5cd2a4886d54e79f1d8a00c1e1b"
+        "49e25753ed7e8ef8b35cf1dd6ebe90a5d2915ae4f1f8e70fbc6d034b052ff616"
     ),
 }
 EXPECTED_WORK_IDS = (

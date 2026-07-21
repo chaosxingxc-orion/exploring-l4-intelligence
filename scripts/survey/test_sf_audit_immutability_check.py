@@ -319,6 +319,39 @@ class AuditImmutabilityModeTests(unittest.TestCase):
                     anchor_relative=anchor,
                 ),
             )
+
+    def test_registry_accepts_staged_artifact_in_same_atomic_append(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            registry, anchor, report, rows, _ = self.make_lineage_fixture(root)
+            relative = "wiki/audit/example/staged-only-review.md"
+            (root / relative).write_bytes(b"staged immutable review\n")
+            run_git(root, "add", relative)
+            addition = {
+                "path": relative,
+                "git_blob": run_git(root, "hash-object", relative).stdout.strip(),
+            }
+            self.stage_registry_transaction(root, registry, anchor, rows + [addition])
+
+            self.assertEqual(
+                0,
+                audit.run(
+                    "write",
+                    repo=root,
+                    registry_relative=registry,
+                    anchor_relative=anchor,
+                ),
+            )
+            run_git(root, "add", report)
+            self.assertEqual(
+                0,
+                audit.run(
+                    "check",
+                    repo=root,
+                    registry_relative=registry,
+                    anchor_relative=anchor,
+                ),
+            )
             run_git(
                 root,
                 "-c",

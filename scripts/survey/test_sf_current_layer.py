@@ -698,10 +698,10 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         self.assertIn(anchor_path, self.index)
         raw = self.payloads[anchor_path]
         count, prefix = self.manifest._campaign_semantic_anchor_from_source(raw)
-        self.assertEqual(41, count)
+        self.assertEqual(44, count)
         self.assertRegex(prefix, r"^[0-9a-f]{64}$")
 
-        duplicate = raw + b"\nCAMPAIGN_INDEX_BASELINE_COUNT = 41\n"
+        duplicate = raw + f"\nCAMPAIGN_INDEX_BASELINE_COUNT = {count}\n".encode()
         with self.assertRaisesRegex(
             self.manifest.CurrentManifestError, "campaign-anchor-invalid"
         ):
@@ -733,7 +733,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         contract = json.loads(self.payloads[contract_path])
 
         receipt_path = (
-            "wiki/audit/system-first-stage1a/epoch-13/consolidation-receipt.json"
+            "wiki/audit/system-first-stage1a/epoch-16/consolidation-receipt.json"
         )
         receipt_raw = b'{"campaign":"system-first-stage1a","epoch":13}\n'
         receipt_blob = git_blob_oid(receipt_raw)
@@ -742,7 +742,7 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         )
         contract["rounds"].append(
             {
-                "round": 13,
+                "round": 16,
                 "verdict": "PENDING_INDEPENDENT_REREVIEW",
                 "disposition": "NON_ACTIVE_PREREQUISITE",
                 "supersession": {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T02:56:52Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2502.19328" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2502.19328</identifier>
+        <datestamp>2025-02-27</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2502.19328</id>
+        <created>2025-02-26</created>
+            <updated>2025-02-27</updated>
+        <authors>
+                <author>
+                    <keyname>Peng</keyname>
+                        <forenames>Hao</forenames>
+                </author>
+                <author>
+                    <keyname>Qi</keyname>
+                        <forenames>Yunjia</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Xiaozhi</forenames>
+                </author>
+                <author>
+                    <keyname>Yao</keyname>
+                        <forenames>Zijun</forenames>
+                </author>
+                <author>
+                    <keyname>Xu</keyname>
+                        <forenames>Bin</forenames>
+                </author>
+                <author>
+                    <keyname>Hou</keyname>
+                        <forenames>Lei</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Juanzi</forenames>
+                </author>
+        </authors>
+        <title>Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems</title>
+            <categories>cs.CL cs.AI</categories>
+            <comments>16 pages, 5 figures</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Reward models (RMs) are crucial for the training and inference-time scaling up of large language models (LLMs). However, existing reward models primarily focus on human preferences, neglecting verifiable correctness signals which have shown strong potential in training LLMs. In this paper, we propose agentic reward modeling, a reward system that combines reward models with verifiable correctness signals from different aspects to provide reliable rewards. We empirically implement a reward agent, named RewardAgent, that combines human preference rewards with two verifiable signals: factuality and instruction following, to provide more reliable rewards. We conduct comprehensive experiments on existing reward model benchmarks and inference time best-of-n searches on real-world downstream tasks. RewardAgent significantly outperforms vanilla reward models, demonstrating its effectiveness. We further construct training preference pairs using RewardAgent and train an LLM with the DPO objective, achieving superior performance on various NLP benchmarks compared to conventional reward models. Our codes are publicly released to facilitate further research (https://github.com/THU-KEG/Agentic-Reward-Modeling).</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

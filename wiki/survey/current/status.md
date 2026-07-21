@@ -1,13 +1,16 @@
 # Current Survey Status
 
 - Gate: **Stage-1A final remediation**; Stage-1B remains unstarted and unauthorized.
-- Execution in this repair: systematic discovery query = 0; research model/smoke = 0; dataset metric/prototype = 0; inherited exposure remains nonzero.
-- GM-1: **PASS** for the seven registered active corpora only — 483 source rows route exactly once to 245 canonical work nodes; archive-wide completeness is not claimed.
-- GM-2: three contradicted/unsupported negatives are corrected and retired (`22 = 3 + 19`); independent decisions remain **0/3 correction confirmations + 0/19 active absence reviews**.
-- GM-3: v7 runner/DAG and fail-closed tests exist, but formal NT/POSIX leaves and aggregate are withheld until all 22 independent decisions close.
-- GM-4: **PASS** — 85 official-receipt works rebuild offline; the 245-node visibility disposition and `year_basis` policy are explicit.
+- Execution in this repair: zero Stage-1B executions in this repair; systematic discovery query = 0; research model/smoke = 0; dataset metric/prototype = 0; inherited exposure remains nonzero.
+- Precheck verdict: Track A scientific rationale **ADEQUATE**; Track B major revision and search-design **WITHHOLD**. This is not exact-package signoff.
+- GM-1: **PASS** for the seven registered active corpora only — 494 source rows route exactly once to 250 canonical work nodes; archive-wide completeness is not claimed.
+- GM-2: four negatives are corrected and retired; the versioned inventory is `22 = 4 + 18`. Precheck decisions bind 4/4 corrections and 18/18 active proofs, including two `AGREE_WITH_CAUTION` rows.
+- H5: three frozen fulltexts and implementer coder A's 21/21 assignments exist; second blind coder and disagreement adjudication are **PENDING**. No calibration value is load-bearing.
+- PDF extraction: exact NT Python 3.14.3 / pypdf 6.14.0 and POSIX Python 3.12.3 / pypdf 6.14.2 identities are frozen; ToolGate page 11 is a mandatory leaf replay.
+- GM-3: v7 contract-4 runner/DAG and fail-closed tests exist; current local probe fails only `H5_CALIBRATION`, so formal leaves and aggregate remain withheld.
+- GM-4: **PASS** — 90 official-receipt works rebuild offline; the 250-node disposition, five new reviewer-known routes, and `year_basis` policy are explicit.
 - Mapping design: mapping/empirical RQs, Stage-1B/1C ownership, systematic-mapping methods adaptation, and seven-field speech/omni codebook are current.
 - Integrity: no fabrication/falsification/plagiarism evidence was found; the detected biased-coding and selective-bibliography risks have been corrected without manufacturing reviewer rows.
-- Proposal package: pre-review source manifest and package report are **construction PASS / release BLOCKED**; after semantic review they must be regenerated on the same commit as fresh v7.
-- Remaining release blockers: independent `3/3 + 19/19` review, fresh v7 dual-platform evidence, formal immutable round-16 review/signoff, then explicit owner authorization.
-- Next action: obtain the independent 22 decisions against the frozen local fulltext packet. Any `DISAGREE` returns to correction before v7 generation.
+- Proposal package: pre-review source manifest and package report remain **construction PASS / release BLOCKED** and must be regenerated on the fresh-v7 commit.
+- Remaining release blockers: H5 coder B + adjudication, fresh v7 dual-platform evidence, formal immutable round-16 exact-package independent reviewer sign-off, then explicit owner authorization.
+- Next action: complete the independent H5 blind pass against the frozen three-paper packet; then adjudicate disagreements before v7 generation.

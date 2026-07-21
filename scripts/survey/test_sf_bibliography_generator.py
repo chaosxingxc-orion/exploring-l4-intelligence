@@ -41,6 +41,11 @@ REVIEWER_ADDITIONS = {
     "2602.22897",
     "2602.00846",
     "2512.16899",
+    "2606.00579",
+    "2606.03183",
+    "2502.19328",
+    "2605.10344",
+    "2508.00890",
 }
 
 
@@ -49,10 +54,10 @@ class BibliographyGeneratorTest(unittest.TestCase):
     def setUpClass(cls):
         cls.receipts = bibliography.load_receipts()
 
-    def test_exact_85_unique_work_receipts_retain_65_and_add_20(self):
-        self.assertEqual(85, len(self.receipts))
+    def test_exact_90_unique_work_receipts_retain_65_and_add_25(self):
+        self.assertEqual(90, len(self.receipts))
         identities = [row["identity"]["id"] for row in self.receipts]
-        self.assertEqual(85, len(set(identities)))
+        self.assertEqual(90, len(set(identities)))
         legacy = bibliography.legacy_bibliography_policies()
         self.assertEqual(65, len(legacy))
         self.assertTrue(set(legacy) <= set(identities))
@@ -75,16 +80,16 @@ class BibliographyGeneratorTest(unittest.TestCase):
 
     def test_selection_receipt_accounts_for_all_union_nodes_and_visible_works(self):
         selection = bibliography.load_selection_receipt()
-        self.assertEqual(245, selection["union_population"])
-        self.assertEqual(245, len(selection["union_dispositions"]))
-        self.assertEqual(85, selection["reviewer_visible_total"])
+        self.assertEqual(250, selection["union_population"])
+        self.assertEqual(250, len(selection["union_dispositions"]))
+        self.assertEqual(90, selection["reviewer_visible_total"])
         self.assertEqual(
-            85,
+            90,
             selection["selected_from_union"]
             + selection["reviewer_directed_outside_union"],
         )
         self.assertEqual(
-            245,
+            250,
             sum(selection["union_reason_code_counts"].values()),
         )
         self.assertNotIn(

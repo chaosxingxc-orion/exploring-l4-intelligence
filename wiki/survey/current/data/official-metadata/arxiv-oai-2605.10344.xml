@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-21T02:56:57Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2605.10344" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.10344</identifier>
+        <datestamp>2026-05-20</datestamp>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.10344</id>
+        <created>2026-05-19</created>
+            <updated>2026-05-20</updated>
+        <authors>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>George</forenames>
+                </author>
+                <author>
+                    <keyname>Jing</keyname>
+                        <forenames>Nan</forenames>
+                </author>
+                <author>
+                    <keyname>Yi</keyname>
+                        <forenames>Qing</forenames>
+                </author>
+                <author>
+                    <keyname>Hao</keyname>
+                        <forenames>Chuan</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Ming</forenames>
+                </author>
+                <author>
+                    <keyname>Chang</keyname>
+                        <forenames>Feng</forenames>
+                </author>
+                <author>
+                    <keyname>Wei</keyname>
+                        <forenames>Yuan</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Jian</forenames>
+                </author>
+                <author>
+                    <keyname>Tao</keyname>
+                        <forenames>Ran</forenames>
+                </author>
+                <author>
+                    <keyname>Dai</keyname>
+                        <forenames>Bryan</forenames>
+                </author>
+        </authors>
+        <title>TMAS: Scaling Test-Time Compute via Multi-Agent Synergy</title>
+            <categories>cs.AI</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Test-time scaling has become an effective paradigm for improving the reasoning ability of large language models by allocating additional computation during inference. Recent structured approaches have further advanced this paradigm by organizing inference across multiple trajectories, refinement rounds, and verification-based feedback. However, existing structured test-time scaling methods either weakly coordinate parallel reasoning trajectories or rely on noisy historical information without explicitly deciding what should be retained and reused, limiting their ability to balance exploration and exploitation. In this work, we propose TMAS, a framework for scaling test-time compute via multi-agent synergy. TMAS organizes inference as a collaborative process among specialized agents, enabling structured information flow across agents, trajectories, and refinement iterations. To support effective cross-trajectory collaboration, TMAS introduces hierarchical memories: the experience bank reuses low-level reliable intermediate conclusions and local feedback, while the guideline bank records previously explored high-level strategies to steer subsequent rollouts away from redundant reasoning patterns. Furthermore, we design a hybrid reward reinforcement learning scheme tailored to TMAS, which jointly preserves basic reasoning capability, enhances experience utilization, and encourages exploration beyond previously attempted solution strategies. Extensive experiments on challenging reasoning benchmarks show that TMAS achieves stronger iterative scaling than existing test-time scaling baselines, with hybrid reward training further improving scaling effectiveness and stability across iterations. Code and data are available at https://github.com/IQuestLab/tmas.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

@@ -99,6 +99,10 @@
       "tex: 'to select the strongest attempt from a population of rollouts without access to ground-truth outcomes'",
       "tex: 'RTV selects the final remaining rollout as its output'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#rtv",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -107,7 +111,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
      "adjudication_row_id": "ABS2-527adf4083786f6bb14b"
     },
     "deployment_label_access": {
@@ -154,6 +158,10 @@
       "tex: 'RTV selects the final remaining rollout as its output'",
       "tex: 'repeating the process in a tournament-like manner until one rollout remains from the entire population'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#rtv",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -162,7 +170,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+     "owner_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
      "adjudication_row_id": "ABS2-9cf174bd899f3a803b87"
     },
     "candidate_pool_exists": {
@@ -192,7 +200,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "71a2052727c0f822cffffd3c61109940602ffb6c5d8e22fc5bbc4daf23adda07",
+   "adjudication_row_sha256": "de780b7203bf32ea8402404befc4d9ba0baa0213a8a57611bc26910ae4d5d7b8",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
@@ -247,6 +255,10 @@
       "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
       "tex: 'using K randomly sampled summaries from previous iteration rollouts'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#pdr-random-k",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -255,7 +267,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
      "adjudication_row_id": "ABS2-c7939c7436a6a9d9419c"
     },
     "deployment_label_access": {
@@ -319,6 +331,10 @@
       "tex: 'for random-K, we follow PDR and randomly sample K previous summaries into the previous-iteration rollouts'",
       "tex: 'provide as refinement context for executing each next-iteration rollout'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#pdr-random-k",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -327,7 +343,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
      "adjudication_row_id": "ABS2-f431a625273dfcd73698"
     },
     "explicit_candidate_pool_selection": {
@@ -339,6 +355,10 @@
       "tex: 'for random-K, we follow PDR and randomly sample K previous summaries'",
       "tex: 'for select-K, we run RTV on the N parallel rollouts via tournament voting'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#pdr-random-k",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -347,7 +367,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+     "owner_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
      "adjudication_row_id": "ABS2-359542ede39fa005cfea"
     }
    },
@@ -357,7 +377,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "c8fe62ee29a73a8d361e862aa9328a73e0cce39ff7c728add59d865d9f44861d",
+   "adjudication_row_sha256": "c649116e0b151b9c475248c3225193bbec025d4668dfb37cd0a3a6e2f4eef68a",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   },
   {
@@ -492,6 +512,10 @@
       "tex: 'RTV is then applied to these summaries to select the top-K summaries'",
       "tex: 'without access to ground-truth outcomes'"
      ],
+     "counterevidence_search_scope": "Frozen fulltext methods, implementation details, adjacent experiments, and the independent round-16 precheck Round-C semantic review.",
+     "counterevidence_locators": [],
+     "temporal_order_resolved": true,
+     "why_counterevidence_does_not_change_verdict": "The bound independent review reported no counterevidence that changes this field; any positive evidence belongs to a different coding axis.",
      "owner_method_path_id": "2604.16529#rtv-pdr-pipeline",
      "owner_sidecar": "wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json",
      "fulltext": {
@@ -500,7 +524,7 @@
       "sha256": "137d5a936deea31ad2b62e9e830119ecc6f2c3405f4cd2e44b7e6190d7a543ad"
      },
      "coder_identity": "claude-fable-main:s-ea4f0926",
-     "owner_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+     "owner_row_sha256": "f1dc8ad6b771de5f21f52f6b9d9ecd64235dcb1db8df8f17e1a593cefa64d8e5",
      "adjudication_row_id": "ABS2-7df15f9b05eaddde17f0"
     },
     "deployment_label_access": {
@@ -572,7 +596,7 @@
    "coder": "claude-fable-main:s-ea4f0926",
    "semantic_adjudicator": "claude-opus-iso-adj-A2:task-aa6c576",
    "adjudication_status": "adjudicated_agree",
-   "adjudication_row_sha256": "db3bbb8f28b3d783e10f8608dd7a9c3375bb2affe81b3ef10dd924bf945d5c81",
+   "adjudication_row_sha256": "f1dc8ad6b771de5f21f52f6b9d9ecd64235dcb1db8df8f17e1a593cefa64d8e5",
    "absence_review_status": "PENDING_INDEPENDENT_REVIEW"
   }
  ],
