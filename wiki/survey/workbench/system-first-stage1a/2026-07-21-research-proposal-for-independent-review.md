@@ -1,17 +1,17 @@
 ---
-artifact_id: "SF-STAGE1A-REVIEWER-PROPOSAL-DRAFT-2026-07-21-01"
+artifact_id: "SF-STAGE1A-REVIEWER-PROPOSAL-DRAFT-2026-07-21-02"
 title: "System-first research proposal and Stage-1A remediation disclosure"
 date: 2026-07-21
 audience: "independent doctoral reviewer and research owner"
 lifecycle: "WORKBENCH_REVIEW_DRAFT"
 promotion_target: "wiki/audit/system-first-stage1a/round-16/research-proposal-and-stage1b-signoff-request.md"
-promotion_trigger: "3/3 semantic-correction reviews and 19/19 active negative-evidence adjudications recorded; evidence-v7 NT/POSIX leaves and aggregate PASS; proposal source manifest and package gate PASS"
+promotion_trigger: "H5 second independent seven-field coding and disagreement adjudication complete; evidence-v7 contract-4 NT/POSIX leaves and aggregate PASS; exact proposal source manifest and package gate PASS"
 current_stage: "STAGE_1A_FINAL_REMEDIATION"
 formal_review_status: "NOT_YET_SUBMITTED_AS_IMMUTABLE_ROUND_16"
 stage1b_status: "UNSTARTED_AND_UNAUTHORIZED"
 systematic_discovery_queries_in_this_repair: 0
 research_model_or_smoke_calls_in_this_repair: 0
-remediation_evidence_commit: "044bb557c6174ec4600c9cd47f69a5ba9529eb2c"
+remediation_evidence_commit: "32e4c52689f3e458d46c13f9c0cf249ba87e83bf"
 ---
 
 # 给独立评审人的研究提案与整改说明
@@ -27,7 +27,9 @@ remediation_evidence_commit: "044bb557c6174ec4600c9cd47f69a5ba9529eb2c"
 
 本文件不是 reviewer verdict，也不是 Stage-1B 启动令。当前仍是 Stage-1A。第一条 systematic discovery query、任何研究模型调用、任何 smoke、指标实验或 prototype 都尚未执行且仍被禁止。
 
-目前四项 implementation gate 中，GM-1、GM-3 的执行地基和 GM-4 已经由本地机器证据闭合。评审冻结点不是含糊的“至少一个 concern”，而是 **exactly 3/22 implementer concerns**、`0/22 independent decisions`。原文复核后，这三条负证据已退出 active absence 库：DREAM 的 controller-label 字段改为 `true`，DREAM 的 human/dev model-selection 与 DeepVerifier 的外围更新字段改为 `unknown`，相关 method path 均降为非承重 conflict queue。当前库存恒等式为 **`22 = 3 + 19`**：3 条修正各需一个独立确认，19 条 active absence 各需一个独立语义裁决；当前分别为 `0/3` 与 `0/19`。因此 evidence-v7 会同时返回 `SEMANTIC_CORRECTION_REVIEW` 与 `ABSENCE_REVIEW`，没有生成伪造的双平台 PASS aggregate。
+round-16 precheck 对 Track A 给出 `ADEQUATE`，但对 Track B 给出 major revision，并明确维持 search-design `WITHHOLD`。该报告对前三条修正给出 `AGREE`，对原 19 条 active negatives 给出 18 条肯定判断（16 `AGREE`、2 `AGREE_WITH_CAUTION`），同时对 DeepVerifier closed path 的 `human_or_dev_label_model_selection=false` 给出 `DISAGREE`。我们已接受该反例，把该字段改为 `unknown`，形成 **exactly 4/22 semantic corrections**。版本化库存现在是 **`22 = 4 + 18`**：`negative-evidence-semantic-corrections-v2.json` 有 4 个 correction rows、4 个 reviewer rows；`absence-evidence-adjudication-v3.json` 有 18 个 proof rows、18 个 reviewer rows，coverage 18/18。语义门在当前工作树中闭合，但这不是对未来 exact package 的 reviewer SIGN。
+
+precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现性。三篇校准全文已按 SHA 本地冻结，implementer coder A 完成 21 个字段赋值；**H5 calibration status=PENDING_SECOND_INDEPENDENT_CODER**，planned denominator=21，observed comparable denominator=0。第二位独立 coder 未完成前，任何 H5 值都不承重。PDF 提取契约已冻结为 NT Python 3.14.3 / pypdf 6.14.0 与 POSIX Python 3.12.3 / pypdf 6.14.2，并要求两端重放 ToolGate p11。因 H5 仍为红门，正式 v7 leaves/aggregate、immutable round-16 包、同包独立签署和 owner 授权均尚未发生。
 
 ## Track A — 科学提案
 
@@ -41,7 +43,7 @@ remediation_evidence_commit: "044bb557c6174ec4600c9cd47f69a5ba9529eb2c"
 
 ## 2. 为什么要先做 system-first mapping
 
-直接相邻的 speech/omni agent、工具编排和 trained speech reward 工作已经存在。当前 reviewer bibliography 已显式路由 AudioToolAgent、Audio-Mind、Agent-Omni、EChO-Agent、AuTAgent、Speech-Copilot、VoxMind、Thinking While Listening、Native Active Perception、Llasa、OmniGAIA、WavReward 和 GSRM；reward/verification 与 training-free/trained boundary 也分别形成可见链条。它们证明这一问题空间并不空白，也因此使任何 “first-ever” 或已确立 novelty 的说法都不成立。
+直接相邻的 speech/omni agent、工具编排和 trained speech reward 工作已经存在。当前 reviewer bibliography 已显式路由 AudioToolAgent、Audio-Mind、Agent-Omni、EChO-Agent、AuTAgent、Speech-Copilot、VoxMind、Thinking While Listening、Native Active Perception、Llasa、OmniGAIA、WavReward、GSRM、Omni-RRM 和 Multimodal RewardBench 2；本轮又处置了 Sandboxed Coding Agents are Competitive Omni-modal Task Solvers、Inference-Time Scaling for Joint Audio-Video Generation、Agentic Reward Modeling、TMAS 与 AgentTTS。reward/verification 与 training-free/trained boundary 也分别形成可见链条。它们证明这一问题空间并不空白，也因此使任何 “first-ever” 或已确立 novelty 的说法都不成立。
 
 仍值得继续 mapping 的理由不是“没有人做过 agent”，而是现有工作横跨了不同的研究边界：
 
@@ -130,9 +132,9 @@ H5 — **Speech/omni specificity hypothesis**：speech/omni 系统的实时性�
 
 ### 6.1 冻结输入
 
-执行只使用现已冻结的 query/compiler、T1 route、seed/citation-chaining 入口、REC-0 至 REC-7 模板和 current protocol。方法适配由 `wiki/survey/current/mapping-methods-adaptation.md` 冻结；H5 编码由 `wiki/survey/current/modality-specificity-codebook.md` 冻结。现有 query 文件保持在 `wiki/survey/2026-07-15-sf-queries.jsonl`；本轮整改没有增加 lane、改写 query term 或执行任何一条 query。
+执行只使用现已冻结的 query/compiler、T1 route、seed/citation-chaining 入口、REC-0 至 REC-7 模板和 current protocol。方法适配由 `wiki/survey/current/mapping-methods-adaptation.md` 冻结；H5 编码由 `wiki/survey/current/modality-specificity-codebook.md` 冻结，校准状态由 `wiki/survey/current/data/modality-specificity-calibration-v1.json` 单独承载；PDF 解析环境由 `wiki/survey/current/data/pdf-extractor-environment-v1.json` 精确约束。现有 query 文件保持在 `wiki/survey/2026-07-15-sf-queries.jsonl`；本轮整改没有增加 lane、改写 query term 或执行任何一条 query。
 
-已知论文、reviewer-known items 和历史 corpus 只能作为带 provenance 的入口或 comparator，`query_recall_credit=false`；它们不得被反向计作 frozen query 的召回结果。
+当前共登记 15 reviewer-known items。已知论文、reviewer-known items 和历史 corpus 只能作为带 provenance 的入口或 comparator，`query_recall_credit=false`；它们不得被反向计作 frozen query 的召回结果。
 
 正式执行所用 search design 可压缩为下表；细则仍以 current protocol、compiler/profile 与模板字节为准：
 
@@ -214,10 +216,11 @@ Stage-1A 的 known-item evidence 仍是 hypothesis-grade，不是完整 mapping�
 | `763bfcd` | 将 census/seed/bibliography/claim/version/fulltext/reviewer-known 合并为无损 canonical-work union graph | PASS；不再为 claim 或 seed 生成重复 work |
 | `035cd19` | 从官方 raw receipt 生成 77-work bibliography，恢复 system-first/reward/boundary 三条链 | PASS；Windows/WSL 可离线重建，known-ID recall credit=false |
 | `c2739d4` | 撤下 3 条与全文冲突或证据不足的负结论，建立 `22 = 3 + 19` 修正台账 | PASS；一条改 `true`、两条改 `unknown`，均退出承重 absence |
+| round-16 precheck remediation（本工作树） | 接受第四条 reviewer `DISAGREE`、迁移为 `22 = 4 + 18`、增加 counterevidence 合同、H5 三篇校准与双平台 extractor contract、处置 5 条 reviewer-known works | 语义审查和环境合同 PASS；H5 仅 coder A 完成，正式 v7/round-16 仍阻塞 |
 
 ## 11. GM-1：claim/work 去重和旧库无损桥接
 
-机器报告 `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json` 当前为 PASS：483 个物理 source rows 被恰好路由到 245 个 canonical work nodes；其中 census 95、seed 92、bibliography 65、claim 62、version-pin 30、fulltext events 129、reviewer-known 10。两条 source-metadata row 仍保留为 source metadata，不伪装成 work。GM-1 的语义严格限于 **seven registered active corpora 的 lossless union**，不是 archive 或全部历史语料已经完备利用的声明。
+机器报告 `docs/checks/system-first-stage1a/context-v2/existing-corpus-disposition-check.json` 当前为 PASS：494 个物理 source rows 被恰好路由到 250 个 canonical work nodes；其中 census 95、seed 92、bibliography 65、claim 62、version-pin 30、fulltext events 135、reviewer-known 15。相对 precheck 冻结点只增加 5 条 reviewer-known source rows、6 条三篇校准论文的 PDF/eprint 本地访问事件和 5 个 canonical nodes。两条 source-metadata row 仍保留为 source metadata，不伪装成 work。GM-1 的语义严格限于 **seven registered active corpora 的 lossless union**，不是 archive 或全部历史语料已经完备利用的声明。
 
 claim 去重采用“work node + claim hyperedge”，不是“每个 claim 复制一个种子”：62 条 claim row 保留 75 个 work references，去重后为 44 个 work references、31 个 unique claim works，且没有 claim target 游离在 census 之外。92 条 seed 是 92 个 unique works，没有 duplicate seed source row；其中 13 条复用已经存在的 census canonical work，generated seed rows 为 0。
 
@@ -227,31 +230,31 @@ claim 去重采用“work node + claim hyperedge”，不是“每个 claim 复�
 
 旧实现允许 `absence` 与任意字段值组合，理论上能让正向类别依靠“未见反证”通过。现合同只允许七个实际观察到的负值组合，并强制：proof obligation、检查位置、reason、全文 identity/SHA、owner method path、owner sidecar、coder、owner row SHA 和 adjudication row ID。
 
-cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong row hash、artifact 缺 row、非 `AGREE` verdict、URL 代替全文版本、弱 `not contradicted`、空缺/unknown 冒充 absence，以及 coder/adjudicator actor collision。
+cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong row hash、artifact 缺 row、非肯定 verdict、URL 代替全文版本、弱 `not contradicted`、空缺/unknown 冒充 absence，以及 coder/adjudicator actor collision。每条 negative proof 现在还必须登记 counterevidence search scope、counterevidence locators、时间顺序是否解析，以及反证为何不改变结论；`AGREE_WITH_CAUTION` 被保留为肯定但带限制的独立判断，不被静默改写成无条件 `AGREE`。
 
-但是机器只能证明绑定一致，不能证明语义负结论或人员独立。独立报告在旧 22 条库存中识别出 exactly 3/22 implementer concerns；团队没有把它们强行 `AGREE`，而是依照冻结全文立即修正。`negative-evidence-semantic-corrections-v1.json` 逐条绑定旧 ID、旧/新 row hash、全文 SHA、证据 locator 与退役原因，并为三条修正保留独立确认槽。active absence artifact 仍为 19 个 proof rows、0 个 reviewer rows，且明确登记 `22 = 3 + 19`。当前 v7 probe 因此诚实返回 `SEMANTIC_CORRECTION_REVIEW` 与 `ABSENCE_REVIEW`。
+机器只能证明绑定一致，不能自行制造人员独立性。round-16 precheck 已对前三条修正给出 `AGREE`，并对原 19 条 active proof rows 给出 18 条肯定与 1 条 `DISAGREE`。我们没有把该 `DISAGREE` 强行转成同意：DeepVerifier closed path 的旧 `false` 被退役并按 reviewer 要求改为 `unknown`。`negative-evidence-semantic-corrections-v2.json` 逐条绑定四个旧 ID、旧/新 row hash、全文 SHA、证据 locator、退役原因和作者外决定；`absence-evidence-adjudication-v3.json` 只保留 18 条 active proofs 与对应 18 条 review rows。当前恒等式为 `22 = 4 + 18`，两边 coverage 均完整，v7 的 `SEMANTIC_CORRECTION_REVIEW` 与 `ABSENCE_REVIEW` 已关闭。
 
-请独立 reviewer 先对三条修正逐条确认 `AGREE|DISAGREE`，再对剩余 19 条 active proof rows 逐条检查冻结全文和 obligation；两类判断都必须给出具体理由、身份、未参与范围、时间和 conflict declaration。修正确认行与 active absence adjudication 行分属两个 schema，不得把退役负命题重新塞回 active absence 库。任何 `DISAGREE` 都应触发字段更正或 row 降级；不能为了保持旧 occupancy 强行同意。
+这些决定绑定的是 precheck 冻结对象，不等于未来正式发布包的 search-design SIGN。final exact-package reviewer 仍须验证 recode、row hash、counterevidence 字段和 reviewer decisions 在正式 commit 中未漂移，但不得要求把第四条退役命题重新放回 active absence 库。
 
 ## 13. GM-3：真实双平台证据 DAG
 
 旧流程在 POSIX 输出前生成所谓 aggregate，实际上只是第二次 Windows 运行。现在两端 runner 只能各写自己的 leaf，独立 aggregator 必须最后读取两份 exact bytes，并核对 input snapshot、runner hash、contract version、platform stamp、named failures、occupancy 和 output semantics。删除或替换任何 leaf、改变输入 hash、平台角色或 occupancy 都会 fail closed。
 
-跨平台 Git preflight 已证明 Windows 与 WSL2 Ubuntu-24.04 能直接解析同一 linked worktree；不再依靠临时 wrapper。正式 v7 leaves 尚未生成，因为 GM-2 未通过。先生成一个带 FAIL 的 aggregate 再称为“跨平台一致”没有研究价值，因此流程选择等待真实 reviewer input。
+跨平台 Git preflight 已证明 Windows 与 WSL2 Ubuntu-24.04 能直接解析同一 linked worktree；不再依靠临时 wrapper。v7 已升级为 contract-4，输入快照纳入 H5 calibration 与 extractor contract；平台 stamp 记录精确 Python、pypdf 和 extractor identity，并在每片 leaf 显式重放 ToolGate p11。当前本地 probe 除 `H5_CALIBRATION` 外为 7/8 PASS。正式 leaves 尚未生成，因为第二位 H5 独立 coder 和分歧裁决未完成；我们不会把带 FAIL 的运行包装成双平台发布证据。
 
 ## 14. GM-4：书目证据、系统主线和本地优先
 
 旧 bibliography 的 title/authors 常量同时充当 generator 输入和 test oracle，存在一起写错却全绿的循环。现在每一条由官方 raw payload、SHA-256、access time/class、source version 和 normalized receipt 生成。
 
-当前共有 85 个 unique works：65 条历史保留项和 20 条 reviewer-directed additions。67 个 arXiv、17 个 ACL、1 个 GitHub identity；17 个既有 Atom raw 被复用，68 个 current raw payload 可从本地精确重放。新增 8 项只按明确 arXiv ID 获取官方 OAI 元数据，没有 discovery query；随后全部 85 项在 `network=0` 下重建，receipt SHA 与 raw bytes 一致。
+当前共有 90 个 unique works：72 个 arXiv、17 个 ACL、1 个 GitHub identity。相对上一版只为 5 个 reviewer 明示 arXiv ID 获取小型 OAI metadata；其余 85 个 receipt 全部复用本地缓存。随后全部 90 项在 `network=0` 下重建，receipt SHA 与 raw bytes 一致。
 
-`reviewer-bibliography-selection-v1.json` 对 245 个 active-union nodes 逐项执行可见谓词：所有 15 个 load-bearing/D2 works、13 个 direct system neighbors、15 个 speech/omni measurement instruments、20 个 P1/reviewer-known threats，以及 65 个冻结 carry-forward 项均有 selection basis（类别可重叠）。结果为 85 个 selected、159 个 `NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE`、1 个 `NOT_SELECTED_UNRESOLVED_IDENTITY`；书目只是 reviewer orientation subset，不是 Stage-1B map denominator。此前遗漏的 Multi-Agent Verification、Thinking While Listening、Omni-Reward、Native Active Perception 已显式入书目；Llasa 进入 P1 reviewer-known，OmniGAIA、Omni-RRM、Multimodal RewardBench 2 进入不阻塞队列。
+`reviewer-bibliography-selection-v1.json` 对 250 个 active-union nodes 逐项执行可见谓词，结果为 90 个 selected：15 个 `SELECTED_LOAD_BEARING_OR_D2`、14 个 `SELECTED_DIRECT_SYSTEM_NEIGHBOR`、11 个 `SELECTED_P1_OR_REVIEWER_KNOWN_THREAT` 与 50 个冻结 carry-forward；另有 159 个 `NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE`、1 个 `NOT_SELECTED_UNRESOLVED_IDENTITY`。书目只是 reviewer orientation subset，不是 Stage-1B map denominator。新增五项中，Sandboxed Coding Agents 完成 D1 direct/H5 threat 路由；Inference-Time Scaling for Joint Audio-Video Generation 与 Agentic Reward Modeling 作为 measurement/reward comparators；TMAS 与 AgentTTS 为非阻塞 P2 queue，且五项全部 `query_recall_credit=false`。
 
 `year_basis` 年份规则也已冻结：仅有 arXiv identity 时用首次提交年 `initial_preprint`；绑定正式 venue identity 时用 `formal_venue`；GitHub 等滚动资源用 `current_version`。AudioToolAgent、VoiceAgentBench、LATS、PiCSAR 与 Trajectory Optimal Control 的已知年份错配已由 receipt 重建纠正。
 
 这一过程不是零网络：最初一次 20-ID arXiv Atom batch 在三次尝试后收到 429；之后 endpoint probe 发现 OAI exact-ID 可用，累计只获取 50 份 arXiv OAI、17 份 ACL BibTeX 和 1 份 GitHub JSON。所有成功 known-ID access 的 `query_recall_credit=false`。失败的 429/probe 也必须进入最终 hostile ledger，不得被“离线重放成功”覆盖。
 
-全文采用本地优先：当前已有 38 个 arXiv ID 的 38 份 PDF 与 36 份 e-print，均由 ledger SHA 绑定；后续 D2 优先解析本地 e-print/LaTeX，源不可用或需要页码证据时才用本地 PDF。网络只在精读队列 cache miss 时访问，不为书目元数据批量下载论文，也不反复访问官网。
+全文采用本地优先：当前 ledger 有 41 个成功 arXiv ID、41 份 PDF 与 39 份 e-print，均由 SHA 绑定；H5 三篇校准论文的 PDF/eprint 已一次性缓存到 E: 数据层。后续 D2 优先解析本地 e-print/LaTeX，源不可用或需要页码证据时才用本地 PDF。网络只在精读队列 cache miss 时访问，不为书目元数据批量下载论文，也不反复访问官网。
 
 ## 15. 相对 v10 的 claim diff
 
@@ -260,8 +263,8 @@ cross-binding validator 会拒绝 wrong fulltext hash、wrong sidecar、wrong ro
 | §0/§7 “E1–E5 全部关闭，可签署 Stage-1B” | `WITHDRAWN` | 后续作者外反例证明 evidence-kind compatibility、旧库 union、双平台 aggregate 和 metadata oracle 仍有假绿 | round-13/14 reviews；本表 §11–14 | readiness only |
 | §2.2 absence 可由结构化字段闭合 | `CORRECTED` | 非空字段不足以证明 field-specific negative semantics；新增七字段 obligation 与 cross-binding | `sf_evidence_contract.py`; absence artifact | readiness only |
 | §2.2 双平台一致 | `CORRECTED` | Windows rerun 不能代表 NT/POSIX DAG；改为两 leaf 后聚合 | preflight receipt；v7 runner/aggregator | readiness only |
-| §3/§4 旧 corpus 已被当前 proposal 充分利用 | `CORRECTED` | 数量存在不等于逐 source-row routing；现改为 483-row、245-node active-corpora union，并显式否认 archive 完备性 | union graph + machine check | readiness only |
-| §5.2 65-entry bibliography 足以自包含 | `CORRECTED` | 旧书目缺 direct neighbors、selection oracle 与 metadata/year oracle；现为 85-work receipt bibliography + 245-node selection disposition | receipts + bibliography + selection receipt | readiness only |
+| §3/§4 旧 corpus 已被当前 proposal 充分利用 | `CORRECTED` | 数量存在不等于逐 source-row routing；现改为 494-row、250-node active-corpora union，并显式否认 archive 完备性 | union graph + machine check | readiness only |
+| §5.2 65-entry bibliography 足以自包含 | `CORRECTED` | 旧书目缺 direct neighbors、selection oracle 与 metadata/year oracle；现为 90-work receipt bibliography + 250-node selection disposition | receipts + bibliography + selection receipt | readiness only |
 | §1 系统本身是第一创新假设 | `UNCHANGED` | 仍是待 mapping 验证的 founding hypothesis，不是 novelty claim | Project-Thesis；三条 citation chain | hypothesis only |
 | §5 Stage-1B 只做 systematic mapping、禁模型/smoke | `UNCHANGED` | 阶段边界没有被技术整改改变 | current protocol/status | readiness only |
 | 本文件 RQ-SUPPLY/RQ-VERIFY 的 generator-verifier-selector 分解 | `NEW` | 将 reviewer-known verification work 提出的归因风险纳入待检验问题，不改变 frozen query | bibliography roles；不计 recall | hypothesis only |
@@ -279,15 +282,17 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 | Gate | 状态 | 解释 |
 |---|---|---|
 | cross-platform Git substrate | PASS | Windows/WSL root、HEAD、blob 和 gitfile policy 已对齐 |
-| GM-1 lossless corpus union | PASS | 483 source rows / 245 nodes exactly-once；claim/work 去重且异质性保留 |
 | GM-2 field-specific contract | PASS | 结构、binding 与 mutation tests 已实现 |
-| GM-2 contradicted negatives | CORRECTED 3/3 | 一条改 `true`、两条改 `unknown`；均非承重且有修正台账 |
-| GM-2 correction confirmation | **PENDING 0/3** | 必须由 non-implementer 核对全文 locator 与 before/after binding |
-| GM-2 fresh semantic review | **PENDING 0/19 active** | 必须由 non-implementer 完成，当前阻塞 |
-| GM-3 v7 code/DAG tests | PASS | leaf/aggregate 架构和 fail-closed 反例已实现 |
-| GM-3 formal NT/POSIX leaves + aggregate | **WITHHELD** | 等待 3/3 corrections + 19/19 active reviewer rows 后生成 |
-| GM-4 official-receipt bibliography | PASS | 85 unique works，可完全离线重建；245-node selection complement 已记账 |
-| proposal source manifest/package gate | **construction=PASS / release=BLOCKED** | `proposal-source-manifest-v1.json` 绑定本提案、协议、compiler/routes/templates 与账本；`proposal-package-check.json` 只证明预审包内部一致，明确保留四个 release blockers |
+| GM-1 lossless corpus union | PASS | 494 source rows / 250 nodes exactly-once；claim/work 去重且异质性保留 |
+| GM-2 contradicted negatives | CORRECTED 4/4 | 一条改 `true`、三条改 `unknown`；全部退出 active absence |
+| GM-2 correction decisions | PRECHECK RECORDED 4/4 | 三条 `AGREE`、一条 `DISAGREE_RECODE_REQUIRED` 已原样绑定；正式同包核验仍待未来 reviewer |
+| GM-2 active semantic review | PRECHECK RECORDED 18/18 | 16 `AGREE`、2 `AGREE_WITH_CAUTION`；counterevidence 字段已加入合同 |
+| H5 three-paper calibration | **PENDING CODER B** | coder A 21/21；第二位独立 coder、agreement 21-field denominator 与分歧裁决尚缺 |
+| PDF extractor replay contract | PASS | NT pypdf 6.14.0 / POSIX pypdf 6.14.2 exact-match；ToolGate p11 为双叶强制 probe |
+| GM-3 v7 contract-4 code/DAG tests | PASS | 当前单平台 probe 仅 H5 红；leaf/aggregate fail-closed 反例已实现 |
+| GM-3 formal NT/POSIX leaves + aggregate | **WITHHELD** | 等待 H5 dual coding 完整后在同一 commit 生成 |
+| GM-4 official-receipt bibliography | PASS | 90 unique works，可完全离线重建；250-node selection complement 已记账 |
+| proposal source manifest/package gate | **construction=PASS / release=BLOCKED** | `proposal-source-manifest-v1.json` 绑定本提案、协议、compiler/routes/templates、H5、extractor 与账本；`proposal-package-check.json` 只证明预审包内部一致，不替代 H5、formal review 或 owner authorization |
 | formal immutable round-16 proposal | NOT YET | round-15 已登记当前 WITHHOLD review；本文件仍是 workbench draft |
 | independent search-design signoff | NOT YET | 实现者不得创建或预填 |
 | owner same-package authorization | NOT YET | 必须在 reviewer SIGN 后单独发生 |
@@ -295,15 +300,14 @@ known-ID metadata/provenance access 非零，详见 §14；这些访问用于身
 
 ## 18. 给 reviewer 的明确请求
 
-请按下列顺序作出作者外判断：
+剩余动作必须按以下顺序完成：
 
-1. 在 `negative-evidence-semantic-corrections-v1.json` 的独立确认 schema 中核对三条退役修正，逐条给出 `AGREE|DISAGREE`；
-2. 对 `absence-evidence-adjudication-v2.json` 的 19 条 active proof rows 做逐条 semantic adjudication；
-3. 若存在 `DISAGREE`，先退回更正或将相关 row 降级，不评估旧 occupancy 是否“好看”；
-4. `3/3 + 19/19` 闭合后，由团队生成 NT/POSIX leaves 和 final aggregate，并在同一 commit 上重建 final source manifest/package report；
-5. 评估 Track A 是否提供了继续 systematic mapping 的充分科学理由；
-6. 评估同一冻结包的 search design 是否可以签署；
-7. reviewer SIGN 之后，owner 再对 exact package 单独决定是否授权 Stage-1B。
+1. 第二位独立 coder 在看不到 coder A 值的条件下，对 `modality-specificity-calibration-v1.json` 绑定的三篇冻结全文完成 3×7 字段编码；
+2. 计算 exact field agreement；每个 disagreement 由不属于两位 coder 的 adjudicator 给出 final value、理由和 locator；
+3. H5 完成后，由团队在冻结同一 commit 上分别生成 NT/POSIX contract-4 leaves；两端必须精确匹配各自 extractor contract 并重放 ToolGate p11，再生成 aggregate；
+4. 重建 source manifest/package report，通过敌意内审后才晋升为 immutable round-16 proposal；
+5. final exact-package reviewer 复核第四条 recode、18 条 active decisions、五条 reviewer-known dispositions、H5 和双平台 receipts，再决定 search design 是否可以签署；
+6. reviewer SIGN 之后，owner 才对 exact package 单独决定是否授权 Stage-1B。
 
 正式独立报告只应在未来 round-16 写入以下实际值：
 
@@ -321,45 +325,50 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | Evidence | Git blob | SHA-256 |
 |---|---|---|
 | `wiki/Project-Thesis.md` | `64e847f566c83b4b0f1ec9c2a6032afb8dc1a020` | `5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623` |
-| `wiki/Research-Objective.md` | `9ab2dece520fdcd2e52e041d00cb4a97c4da5bfd` | `94754dbd13e565efc150d5699fe8fb3010e9a0d77662830bf2bba17b01a80275` |
+| `wiki/Research-Objective.md` | `4ae23baec5f8a51672fdfc60329972df0e99a27e` | `aa836540d210ca406c69eacb2f7b7b6490ff2aca85c516892174a4bd3369badc` |
 | v10 proposal | `686129ee41cdf08c294114fc29c93a9c63408dc5` | `94ddfd282950ae10ca113e32e9a4ccfc702a6fa74dcd13572662e4f717b66085` |
 | round-14 adversarial review | `dde66b8c50a8100eff24a2117e04966651bde3bc` | `ac61d727878d9c90ec173c4c2e12cbc6cc9ed13b60f5b8478f6d01e8fbfa28b9` |
 | round-15 independent review | `d7901f85c7804bd2176aa76a0ea05bc2d79729c2` | `4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e` |
+| round-16 precheck rereview | `f8b173afba280fb97220bd29c66cb5418022e3db` | `7aec58152c3d57826d230551eab3d0c409f49394a660fd268a6ba58c826fcc1a` |
 | revised release design | `67ec749bd5fe7c50b9f0151d1cbb7689ccd40516` | `be2d20900093ccd070211c6083714d53e7331d05c0baa9e9e77c3899a5b23b68` |
 | revised implementation plan | `a3ba7e862cac559fcce70d92b935745a662bbdc8` | `985949e178f5cef9e0e94b96629a5d9828bee70c3c82ac2074740dbde81fe840` |
-| negative-evidence review artifact | `815f0f78924d7814c0ae0611fdf8e56a234e94ce` | `c62ce59a3047269fdc22e85b0bad60b3d71454cb82a9cadb2a9d7b57bfc8391f` |
-| semantic-correction artifact | `b0d4fafb7ed4b5fa1f7f6e34607646168f160ca6` | `37b862ade5f3b278c52bcd1cb11f760e5d20aea8d8124ac1b1a8d21798fbcc8f` |
-| lossless union graph | `ad7626092f6929890f3dbbb5b6e898e9002831e2` | `8c02bff4c4d6ec2a9c3aa096a68fd50904e94bdb7ab3da7821a4559e3db22866` |
-| union machine check | `c2960fafe1a9b7818b5ca105a7d1f8f29a9c668e` | `a9dbe83115ce6ee371552764f71942767804f5de2e8ee0c9c23e77622624cfa6` |
-| reviewer-known items | `2ca7c917aab1aff4bb84417276b94b54d7033f42` | `c31e924554c26be854ff469fd9a830068568bc75990721669f6e9442cdf04fd2` |
-| official metadata receipts | `f34dec9703c1f11e813bbd27ab711f8d22cd4b95` | `b218bdcd13215c5b37173cca30fe5a20a4a20175035089ca1f3d84b554642778` |
-| generated 85-work bibliography | `32ab190a72f0265397757377c4e6c070481a8f97` | `17670aebf8d3c80a43a3ee213bcc1169f094722efc9d1967b4e55c80f84771f6` |
-| bibliography selection receipt | `87de00a3e4d8527226b1b05bd3ead330c564b974` | `deaf913d73bfe77721c651b132859c4faeead4440090bfadabfcbc14beaed1c8` |
+| negative-evidence review artifact | `372cb60c3936cdf9ba40452d749fb31c88b735fc` | `4f96dc55f4e7c8cd6eef4df700e0e73807f6d25748fc23479b24cf11bf8bf264` |
+| semantic-correction artifact | `a5c963098cd8a7ef8a8e60febd9a231da45fa7e0` | `6b48a26212a0593abfc8e7b0a762826676ee6118f6313c47626f5f876bd349a3` |
+| lossless union graph | `f4c97f2264bb180f51cc952e5fa88d3f135883f4` | `2e562049f8589aedb38a881b041b42e19278d77f4d0614e6ac830f84bce76024` |
+| union machine check | `1c19671f3b731946f34670ad94cbbb2b1e043716` | `67d6795e3ce0e851a320e6f85ba50ab05c6a2f8ddd98128d4d28ce711054cab4` |
+| reviewer-known items | `44e5bc36db70d0de551934e02fc8e9ff5bea222b` | `7439bc0bd6f9e4bb834f27fac0939535c499f5f6755d57964d6d369a8c6f5a24` |
+| official metadata receipts | `af93661d7abc640de68a7fa5c81b533aac5c6c50` | `9c3ca6f466940e964fe05961d06d55ed45630b3c44bba441289424e18f4e3468` |
+| generated 90-work bibliography | `1adab73af8f80efd9db7f7559d00e6e606f12b4c` | `23ab2bf25e4e11607ddf8475862d96849729c5643ba347e2e3379b01cd3e92c9` |
+| bibliography selection receipt | `93edab407964d2d478dad1b33bab4f1114034d1c` | `faf78d691cfc1200571a60b526d767c0975b7538b487b28f4fecd1320fd7f032` |
 | mapping methods adaptation | `786c579113cf318e3a0ea254cd5cce233b5c96a3` | `86325cffecad237fb772d1e3a456494ada3e90635e6f370af3ac8189864d2827` |
-| speech/omni specificity codebook | `b2dcd16c08bfc53b4d7fbb5ec216a6d1c2fd1019` | `48250720ebd670156baf644cef1562ee58028d7aeb48c3d3dc7344866fa5e769` |
+| speech/omni specificity codebook | `9bda0d76328de360b9b0851d0f50b579af79a7b1` | `db860023cb42a9deb6dc789b8cb3a93e7a10bc791568bc0c8bc8a70880018999` |
+| H5 calibration artifact | `4e699b9565e9ed88e4400cc78725fa1dfb8eda11` | `72f70bccf23287a62bda43f3b386effcaecf439e5a8a4a0225f75a534bbee361` |
+| PDF extractor environment | `0bfe53b1a72268e315630c4050809c1bb9e10987` | `d982a22e2702cc670ac9a3b90d3dfeaab33e1cde2df3518dc98f1a55b9845a19` |
 | current protocol | `bca3c0a661d69ee53625d73797c90d969d5cdc95` | `e5ee5c7f47ca881a1d1a66a48b9bd0f72b93631016526fb8164fde997e8a2585` |
-| current status | `7c9bc36209545d35e486083ede2ee871792b3f4b` | `6c6e566dd705909e71f0bab1c630e5833ff6e430a010c3a5eaf92e911efc70e9` |
+| current status | `fc461f1d649f177c8cd6b3cd5b6056270fbcb660` | `7a9af855bb1b374a978b9564d69ea3791d6fea14b2daf0ec654904fb4ac19499` |
 | frozen evidence-v6 aggregate | `d3b1c67018fa9ce99dfff56af3b9404747504936` | `3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd` |
 | frozen query bytes | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` | `645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab` |
 | attempt registry | `9bcac7ce3681d82fd1479589d126cccc761c340e` | `f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe` |
 | wiki dry-run incident | `a7f4619e8ee9de7a69dd7e37740e64f9fc5eb9d2` | `297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393` |
 
-完整书目由 `wiki/survey/current/bibliography.md` 提供，选择账本为 `wiki/survey/current/data/reviewer-bibliography-selection-v1.json`。它们是 receipt-derived artifacts；本文件不复制 85 条引用，以避免形成第二份书目正典。
+完整书目由 `wiki/survey/current/bibliography.md` 提供，选择账本为 `wiki/survey/current/data/reviewer-bibliography-selection-v1.json`。它们是 receipt-derived artifacts；本文件不复制 90 条引用，以避免形成第二份书目正典。
 
 本提案的完整输入集合由 `wiki/survey/current/data/proposal-source-manifest-v1.json` 精确绑定；预审包报告为 `docs/checks/system-first-stage1a/context-v3/proposal-package-check.json`。当前报告的 `construction=PASS` 只表示输入、生成器和诚实红门可复现；`release=BLOCKED` 才是 Stage-1B 权限语义。两者不得合并为一个含糊 PASS。
 
 ## 20. 本次请求的最小结论
 
-请不要因为技术包尚有一个诚实红门，就把研究问题本身与证据门混为同一裁决。我们请求的是：先判断继续 systematic mapping 的科学理由是否充分；核对三条语义修正并完成剩余 19 条独立 negative-evidence adjudication；再在同一冻结包上决定 search-design SIGN/WITHHOLD。
+precheck 已判断继续 systematic mapping 的科学理由充分；当前请求不是重复评审 Track A，而是完成唯一尚缺的 H5 coder-B／adjudication，生成精确 v7 双平台证据，再让独立 reviewer 对同一 immutable package 作最终 search-design SIGN/WITHHOLD。任何一步都不能由实现者自签替代。
 
 在此之前，正确状态只有：
 
 ```text
 STAGE_1A_FINAL_REMEDIATION
-THREE_IMPLEMENTATION_FOUNDATIONS_VERIFIED
-NEGATIVE_EVIDENCE_CORRECTIONS_3_OF_3_RECORDED
-NEGATIVE_EVIDENCE_CORRECTION_REVIEW_PENDING_0_OF_3
-NEGATIVE_EVIDENCE_SEMANTIC_REVIEW_PENDING_0_OF_19_ACTIVE
+ROUND16_PRECHECK_TRACK_A_ADEQUATE_TRACK_B_MAJOR_REVISION
+NEGATIVE_EVIDENCE_VERSIONED_INVENTORY_22_EQUALS_4_PLUS_18
+NEGATIVE_EVIDENCE_PRECHECK_DECISIONS_RECORDED_4_PLUS_18
+H5_CALIBRATION_CODER_A_COMPLETE_CODER_B_PENDING
+PDF_EXTRACTOR_ENVIRONMENT_FROZEN
+FRESH_V7_DUAL_PLATFORM_RELEASE_EVIDENCE_PENDING
 FORMAL_ROUND_16_SUBMISSION_NOT_YET_REGISTERED
 STAGE_1B_UNSTARTED_AND_UNAUTHORIZED
 ```
