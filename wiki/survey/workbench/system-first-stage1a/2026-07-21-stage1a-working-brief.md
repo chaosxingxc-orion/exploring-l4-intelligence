@@ -11,7 +11,7 @@ formal_review_status: "NOT_YET_SUBMITTED_AS_IMMUTABLE_ROUND_16"
 stage1b_status: "UNSTARTED_AND_UNAUTHORIZED"
 systematic_discovery_queries_in_this_repair: 0
 research_model_or_smoke_calls_in_this_repair: 0
-remediation_evidence_commit: "eea03330f626c9979841ae60eef82a022ab01d9b"
+remediation_evidence_commit: "aa5d3fe798f523ec246966375e0685c0abc634a6"
 ---
 
 # 给独立评审人的研究提案与整改说明
@@ -30,6 +30,29 @@ remediation_evidence_commit: "eea03330f626c9979841ae60eef82a022ab01d9b"
 round-16 precheck 对 Track A 给出 `ADEQUATE`，但对 Track B 给出 major revision，并明确维持 search-design `WITHHOLD`。该报告对前三条修正给出 `AGREE`，对原 19 条 active negatives 给出 18 条肯定判断（16 `AGREE`、2 `AGREE_WITH_CAUTION`），同时对 DeepVerifier closed path 的 `human_or_dev_label_model_selection=false` 给出 `DISAGREE`。我们已接受该反例，把该字段改为 `unknown`，形成 **exactly 4/22 semantic corrections**。版本化库存现在是 **`22 = 4 + 18`**：`negative-evidence-semantic-corrections-v2.json` 有 4 个 correction rows、4 个 reviewer rows；`absence-evidence-adjudication-v3.json` 有 18 个 proof rows、18 个 reviewer rows，coverage 18/18。语义门在当前工作树中闭合，但这不是对未来 exact package 的 reviewer SIGN。
 
 precheck 新识别的真实发布阻塞项是 H5 校准和提取环境可复现性。三篇校准全文已按 SHA 本地冻结，V2 codebook 已操作化七字段与 tie-breaker，implementer coder A 的 21 个字段均有可从冻结 PDF 重放的 exact anchor；**H5 calibration status=PENDING_BLIND_CODER_B**，planned denominator=21，observed comparable denominator=0。validator 现从两位 coder 的实际 row 派生 agreement，并会拒绝“21 项全不一致却自报全同”、非法 adjudicator 和非法 final value。无 coder-A 答案的 blind packet 已封存；第二位独立 coder 未完成前，任何 H5 值都不承重。PDF 提取契约已冻结为 NT Python 3.14.3 / pypdf 6.14.0 与 POSIX Python 3.12.3 / pypdf 6.14.2，并要求两端重放 ToolGate p11。因 H5 仍为红门，正式 v7 leaves/aggregate、immutable round-16 包、同包独立签署和 owner 授权均尚未发生。
+
+## 0.1 本轮整改增量：给 reviewer 的集中核验表
+
+以下是相对 2026-07-21 working-brief 独立复审的逐项修复，不要求 reviewer 从历史 amendment 链中
+自行拼接现状：
+
+| 复审问题 | 已完成修复 | 当前证据／边界 |
+|---|---|---|
+| H5 七字段定义不足、tie-breaker 不可执行 | codebook V2 明确 method path 分析单元、字段层级、`mixed/UNKNOWN/NOT_APPLICABLE`、`post_utterance/inter_turn`、`tool_action/composite` 与 raw/learned evidence 决策顺序 | `modality-specificity-codebook.md`；仍属 non-load-bearing calibration |
+| coder-A locator 只验“非空”，不能证明可回放 | 21/21 assignments 改为 typed locator；exact anchor 在 hash-bound local PDF 上逐页重放 | Windows/WSL H5 locator tests 均 PASS；PDF hash 不变才有效 |
+| completion validator 可接受伪造 agreement | agreement numerator、rate、disagreement inventory 和 coder values 全部由两份 assignment map 派生；非法 coder-as-adjudicator 与非法 final value fail closed | 两个 reviewer false-green regression cases 已固化；实现者不能因此生成 coder B |
+| coder B 盲态只是口头要求 | 生成不含 coder-A value 的 sealed blind packet 与 SHA sidecar，限制输入为 V2 codebook、三篇冻结 PDF 和 blank response rows，并要求 no-access attestation | `PENDING_BLIND_CODER_B`；必须由未见 coder-A/完整仓库的人完成 |
+| Omni-Decision 与 AOP-Agent 被低估或漏路由 | 两篇均取得 PDF+eprint 本地哈希，唯一化为 P1 `DEEPLY_READ` direct neighbors；Stage-1B 必须编码 state/action/verification/stopping 与 memory/observe-reflect-replan | 只关闭 D2 identity/routing，不声称 gap 或 novelty 已成立 |
+| Light-Omni、LatentOmni 的边界不清 | 全文确认 soft-prompt/multi-LoRA 或 supervised fine-tuning/latent supervision，路由为非阻塞 P2 trained boundary comparators | 不进入 training-free direct-method denominator |
+| claim/seed 可能重复制造 work | active union 重建为 508 source rows → 253 canonical works；四篇核心项各一个 work node，claim 继续只作 hyperedge | `unexplained_orphans=0` 不外推为 archive-wide completeness |
+| Stage-1A 过早追逐创新差异 | owner 裁决已写入 methodology/protocol/HOT：1A 只做身份、路由、协议与门禁；1B 映射事实；1C 选问题；2A 复现 prior 后才收敛技术创新 | 本提案不制作 Stage-1A innovation-difference matrix，不预先杀死或保活任何技术方案 |
+| reviewer bibliography 与本地复用不足 | 93 official receipts 可离线重建；四篇新增全文一次性缓存到 E: 数据层，后续本地 eprint/LaTeX 优先 | known-ID access 非零、systematic discovery query=0、`query_recall_credit=false` |
+
+本轮 Windows 针对性门为 67/67；WSL2 关键回放为 H5 7/7、PDF 4/4、corpus 22/22、bibliography
+14/14。确定性 current package、proposal source manifest 与 proposal construction 均 PASS；release
+仍明确为 `BLOCKED`，原因只沿真实依赖链保留：H5 blind coder-B/adjudication → fresh v7 dual-platform
+leaves/aggregate → immutable round-16 promotion 与 exact-package independent sign-off。任何内部 PASS
+均不替代 reviewer 或 owner 权限。
 
 ## Track A — 科学提案
 
