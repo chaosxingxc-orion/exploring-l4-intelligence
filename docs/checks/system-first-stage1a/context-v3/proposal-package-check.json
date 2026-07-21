@@ -4,8 +4,8 @@
  "package_kind": "PRE_REVIEW_FAIL_CLOSED_PACKAGE",
  "source_manifest": {
   "path": "wiki/survey/current/data/proposal-source-manifest-v1.json",
-  "source_commit": "23129f4f500ffc39cea241060e321a3c69f67257",
-  "sha256": "b161162aeb725bd6da8d7461b663cbbfa5b8d790151ccf30881efc64ea6c48be"
+  "source_commit": "6746c8d917f29c968fbc17815eaab39c0681e8fa",
+  "sha256": "cd93d2a3e307ca29dee1243e4dc54a23e4f42b515073887f8b3f783e237fcac9"
  },
  "components": [
   {
