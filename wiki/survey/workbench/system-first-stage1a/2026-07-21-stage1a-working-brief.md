@@ -342,7 +342,7 @@ SEARCH_DESIGN_SIGNOFF = SIGN|WITHHOLD
 | Evidence | Git blob | SHA-256 |
 |---|---|---|
 | `wiki/Project-Thesis.md` | `64e847f566c83b4b0f1ec9c2a6032afb8dc1a020` | `5aafddb9d32d085462f619e739cb3d1f8b47740d39d88b0cfc6b38f99e7f9623` |
-| `wiki/Research-Objective.md` | `a7cd966dad4027256f1d286e19761dd848275357` | `c58836bcfce8f216a2c19d379251d309eb4d3190c4fa563f4cdc0cca70396e2d` |
+| `wiki/Research-Objective.md` | `56df736a6616fd4496166bb3b580bba7cef1b5d3` | `5d72f16604189b6cec9d4425ce60876275185b04ddb46727aad32126b5dfaef2` |
 | v10 proposal | `686129ee41cdf08c294114fc29c93a9c63408dc5` | `94ddfd282950ae10ca113e32e9a4ccfc702a6fa74dcd13572662e4f717b66085` |
 | round-14 adversarial review | `dde66b8c50a8100eff24a2117e04966651bde3bc` | `ac61d727878d9c90ec173c4c2e12cbc6cc9ed13b60f5b8478f6d01e8fbfa28b9` |
 | round-15 independent review | `d7901f85c7804bd2176aa76a0ea05bc2d79729c2` | `4068b8e5fe5590d894db93d8cf5dc7a93c827bef9c9c9aac1072873ae0a9a98e` |
