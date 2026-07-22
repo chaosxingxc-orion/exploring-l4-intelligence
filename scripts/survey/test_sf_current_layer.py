@@ -293,11 +293,15 @@ class CurrentManifestContractTests(unittest.TestCase):
         by_path = {entry["path"]: entry for entry in document["files"]}
         expected = {
             "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
-            "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+            "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
+            "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+            "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
             "wiki/survey/current/stage1b-transition-reference-appendix.md",
             "wiki/survey/current/tables/stage1b-mapping-release.md",
             "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-            "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
+            "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
+            "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
+            "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
         }
         self.assertTrue(expected <= set(by_path))
         self.assertTrue(expected <= set(document["release_bound_artifacts"]))
@@ -333,7 +337,7 @@ class CurrentManifestContractTests(unittest.TestCase):
     def _integration_spec(self, path, role, mutability):
         return self.manifest.FileSpec(role, path, mutability, "targeted")
 
-    def test_integration_evidence_missing_and_hash_mismatch_fail_closed(self):
+    def test_integration_evidence_uses_staged_blob_as_hash_authority(self):
         specs = (
             self._integration_spec(
                 WIKI_SYNC_INCIDENT_PATH,
@@ -345,28 +349,21 @@ class CurrentManifestContractTests(unittest.TestCase):
             raw = REPO.joinpath(*spec.path.split("/")).read_bytes()
             blob = git_blob_oid(raw)
             index = {spec.path: self.manifest.GitIndexEntry("100644", blob)}
-            with self.subTest(path=spec.path, failure="missing"):
-                with self.assertRaisesRegex(
-                    self.manifest.CurrentManifestError,
-                    "manifest input missing",
-                ):
-                    self.manifest._file_entry(
+            for label, worktree_reader in (
+                (
+                    "missing-worktree",
+                    lambda _path: (_ for _ in ()).throw(FileNotFoundError(spec.path)),
+                ),
+                ("crlf-or-dirty-worktree", lambda _path: raw + b" "),
+            ):
+                with self.subTest(path=spec.path, case=label):
+                    entry = self.manifest._file_entry(
                         spec,
-                        lambda _path: (_ for _ in ()).throw(FileNotFoundError(spec.path)),
+                        worktree_reader,
                         index,
                         lambda _blob: raw,
                     )
-            with self.subTest(path=spec.path, failure="hash"):
-                with self.assertRaisesRegex(
-                    self.manifest.CurrentManifestError,
-                    "staged-worktree-byte-mismatch",
-                ):
-                    self.manifest._file_entry(
-                        spec,
-                        lambda _path: raw + b" ",
-                        index,
-                        lambda _blob: raw,
-                    )
+                    self.assertEqual(hashlib.sha256(raw).hexdigest(), entry["sha256"])
 
     def test_integration_evidence_rejects_wrong_schema(self):
         specs = (
@@ -413,11 +410,15 @@ class CurrentManifestContractTests(unittest.TestCase):
         self.assertEqual(
             [
                 "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
-                "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+                "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
+                "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+                "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
                 "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-                "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
+                "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
+                "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
+                "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
             ],
             document["release_bound_artifacts"],
         )
@@ -437,7 +438,7 @@ class CurrentManifestContractTests(unittest.TestCase):
         ):
             self.assertTrue(
                 path.startswith("wiki/survey/current/")
-                or path == "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json"
+                or path.startswith("docs/checks/stage1b-closeout/2026-07-22-v4/")
             )
             self.assertNotRegex(path, r"amendment|review|response")
 
@@ -652,23 +653,19 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         ):
             self.manifest._parse_git_index(malformed)
 
-    def test_staged_blob_must_match_exact_worktree_bytes(self):
+    def test_staged_blob_remains_authority_when_worktree_differs(self):
+        before = self.build()
         path = next(iter(self.index))
         self.payloads[path] += b"changed-after-stage\n"
-        with self.assertRaisesRegex(
-            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
-        ):
-            self.build()
+        self.assertEqual(before, self.build())
 
-    def test_crlf_worktree_variant_does_not_match_staged_lf_blob(self):
+    def test_crlf_worktree_variant_preserves_staged_lf_identity(self):
+        before = self.build()
         path = next(
             path for path, raw in self.payloads.items() if b"\n" in raw
         )
         self.payloads[path] = self.payloads[path].replace(b"\n", b"\r\n")
-        with self.assertRaisesRegex(
-            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
-        ):
-            self.build()
+        self.assertEqual(before, self.build())
 
     def test_audit_contract_requires_complete_freshly_staged_bytes(self):
         index_path = self.manifest.AUDIT_CAMPAIGN_INDEX_PATH
@@ -688,10 +685,15 @@ class ManifestGitBindingContractTests(unittest.TestCase):
         correction_raw = self.blobs[index[correction].blob]
         correction_blob = index[correction].blob
         self.payloads[correction] = correction_raw + b"edited-after-stage\n"
-        with self.assertRaisesRegex(
-            self.manifest.CurrentManifestError, "staged-worktree-byte-mismatch"
-        ):
-            self.build(index)
+        document = self.build(index)
+        correction_entry = next(
+            entry for entry in document["files"] if entry["path"] == correction
+        )
+        self.assertEqual(
+            hashlib.sha256(correction_raw).hexdigest(),
+            correction_entry["sha256"],
+        )
+        self.assertEqual(correction_blob, index[correction].blob)
 
     def test_staged_campaign_index_must_match_staged_semantic_contract(self):
         index = dict(self.index)
@@ -1066,7 +1068,7 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v3 release frozen",
+            "Stage-1B v4 P0 repair frozen",
             "status.md",
             "stage1b-mapping-release.md",
             "stage1c-eligible-inputs.md",
@@ -1074,12 +1076,12 @@ class RouterContentContractTests(unittest.TestCase):
             "manifest.json",
             "targeted",
             "wiki/audit/system-first-stage1b/INDEX.md",
-            "H5 hold",
-            "Legacy files are not default context",
+            "H5 remains withheld",
+            "Legacy proposals, reviews, responses and amendments are not default context",
         ):
             self.assertIn(required, text)
         self.assertNotRegex(text, r"sf-protocol-amendment-\d+|gate-s1-v\d+-response")
-        self.assertLessEqual(len(text.splitlines()), 24)
+        self.assertLessEqual(len(text.splitlines()), 32)
 
     def test_status_is_short_and_preserves_stage1b_execution_boundary(self):
         path = CURRENT / "status.md"
@@ -1088,14 +1090,13 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v3 release frozen / transition review pending",
-            "formal Stage-1C start",
-            "research model/smoke = 0",
-            "50/50 route dispositions",
+            "Stage-1B v4 P0 repair frozen",
+            "Stage-1C has not started",
+            "no broad discovery, model/API call, metric run, reproduction",
+            "70 `FULLTEXT_ROUTED`",
             "ELIGIBLE_NON_H5",
-            "INELIGIBLE_FOR_STAGE_1C_SELECTION",
-            "H5 contributes zero",
-            "PROVISIONAL_INPUT",
+            "H5 is withheld",
+            "never committed",
             "Next action",
         ):
             self.assertIn(required, text)

@@ -1,0 +1,12 @@
+{
+  "declared_full_sha": "f11a2b1fd0b6d81b08caefc5d576fe13ed579883",
+  "external_artifacts": 8,
+  "failures": [],
+  "git_artifacts": 52,
+  "release_id": "system-first-stage1b-2026-07-22-v4",
+  "resolved_full_sha": "f11a2b1fd0b6d81b08caefc5d576fe13ed579883",
+  "schema": "sf-stage1b-release-replay-v1",
+  "status": "PASS",
+  "total_artifacts": 60,
+  "verified": 60
+}

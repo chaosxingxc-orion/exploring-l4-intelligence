@@ -1,31 +1,30 @@
 # Current Survey Status
 
-- Gate: **Stage-1B v3 release frozen / transition review pending**. Scientific release commit is
-  `626914a963637354642116b938eb9ab745a099c8`; formal Stage-1C start requires an independent signature.
-- Exposure: 65 frozen arXiv rows and 65/65 bounded delta rows executed; research model/smoke = 0;
-  dataset metric/reproduction/prototype = 0. Broad D0 scanning remains closed.
-- Frozen D0: 20,727/20,727 abstracts, 319 D2 full texts and 226 retained works; 0 dispositions
-  unresolved. This is D0 exhaustion, not literature-universe closure.
-- Delta: 193 unique candidates for 2026-07-16..2026-07-21; 12 selected once at REC-0 and acquired as
-  PDF+e-print+D2; 181 excluded only from this release's load-bearing map; duplicate seeds = 0.
-- T1: 50/50 route dispositions = 28 executed + 3 not held + 19 `WAIVED_UNAVAILABLE`; 2,633 identities
-  remain title-only. Citation closure leaves 232 backward IDs outside frozen sets and all forward
-  routes waived. These surfaces cannot support zero-hit, `NO_DIRECT_MATCH` or universe closure.
-- Speech/omni omission repair: four bounded existing sources yield 81 named identities, all routed
-  exactly once: 23 direct methods + 19 instruments + 27 boundaries + 11 trained/model exclusions +
-  1 H5-held row. The strict supplement contains 32 comparable rows: all 23 direct methods, eight
-  load-bearing instruments and one boundary. This is bounded candidate coverage, not universe closure.
-- Mapping denominators remain separate: 226 retained works; legacy 8-work/11-path strict set;
-  32-row speech supplement with 23 direct paths; 12 delta D2 works. Combined direct count = 9 legacy
-  + 23 speech paths. The speech paths are API-only and speech-bearing, but their core modalities vary.
-- Eligible inputs: `tables/stage1c-eligible-inputs.md` is unranked. Budget/stop/repair, evaluator
-  reliability and interactive/full-duplex are `ELIGIBLE_NON_H5`; evidence-state and tool/agent
-  arbitration are `INELIGIBLE_FOR_STAGE_1C_SELECTION` pending H5.
-- H5 contributes zero load-bearing rows while coder-B/adjudication remain pending. Existing reproduction
-  notes remain `PROVISIONAL_INPUT / NOT_STAGE_FROZEN`; Stage-1B neither ranks problems nor authorizes execution.
-- Release verification: v3 binds 45 artifacts = 37 Git + 8 external; materialization replay and the
-  speech evidence contract pass. Mutable HOT/status/router files are excluded from the scientific
-  release, eliminating the v2 self-pointer inconsistency.
-- Next action: request one independent Stage-1C transition re-review against commit `626914a`.
-  Reviewer scope is the bounded speech-prior correction and scientific-release consistency; no model,
-  smoke, ranking, selection, reproduction or innovation convergence is next.
+- Gate: **Stage-1B v4 P0 repair frozen / narrow Stage-1C transition rereview pending**. The fixed
+  scientific release is commit `f11a2b1fd0b6d81b08caefc5d576fe13ed579883`; Stage-1C has not started.
+- Release identity: the v4 manifest binds 60 artifacts (52 Git, eight external). Commit-bound replay
+  verifies 60/60 with zero missing, byte or SHA-256 mismatches.
+- Evidence depth: the 81-work coverage ledger contains 70 `FULLTEXT_ROUTED` and 11
+  `ABSTRACT_ROUTED` rows. All 70 full-text rows now have a successful full-text ledger record, local
+  bytes and matching SHA-256. The seven v3 false-full-text defects are closed.
+- Known priors: nine already-known works were reconciled to existing canonical work IDs. All nine use
+  `REUSE_CANONICAL_WORK_ID`; no duplicate claim work or seed was created.
+- Comparable surface: the v2 supplement has 39 rows—25 direct, 13 instruments and one boundary. The
+  25 direct methods classify as nine external orchestration, nine state/event gated and seven
+  evaluator/verifier gated; zero are coded as reward-guided selection.
+- Eligible inputs remain unranked: budget/stop/repair, evaluator reliability and
+  interactive/full-duplex are `ELIGIBLE_NON_H5`. Evidence-state and tool/agent arbitration remain
+  ineligible while H5 is withheld.
+- Asset facts are layered, not represented by one misleading whole-disk lock. The 31-entry frozen
+  baseline is fully present. Stage-1C candidate assets and auxiliary assets are inventoried separately.
+  Public VoiceAgentBench, Full-Duplex-Bench v3, Audio2Tool, Omni-DeepSearch and IHBench data are local
+  and identity-pinned outside Git; related public repositories are commit-pinned where available.
+- Known unavailable or unresolved assets remain explicit: exact tau-Voice data, LALM recordings,
+  EchoChain code/data and the generated From Text to Voice corpus. Nearby datasets are not substituted.
+- Data policy: dataset/checkpoint/output bytes stay under `SPEECHRL_DATA_DIR` and are never committed.
+  Git retains only source URLs, immutable revisions/hashes, acquisition scripts and inventory receipts.
+- Execution boundary: this repair issued no broad discovery, model/API call, metric run, reproduction,
+  prototype, ranking, problem selection or novelty verdict.
+- Next action: one independent rereview of commit `f11a2b1fd0b6d81b08caefc5d576fe13ed579883`
+  against P0-R1 through P0-R4. A positive verdict may authorize Stage-1C common-rubric comparison only;
+  model/reproduction execution remains separately withheld.

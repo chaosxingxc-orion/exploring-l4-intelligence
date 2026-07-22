@@ -198,8 +198,20 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
-        "stage1b_speech_direct_prior_supplement_v1",
-        "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+        "stage1b_known_prior_reconciliation_v1",
+        "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1b_speech_direct_prior_supplement_v2",
+        "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1b_direct_control_basis_v1",
+        "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
         "release-scoped-immutable",
         "targeted",
     ),
@@ -250,7 +262,25 @@ BASE_FILE_SPECS = (
     ),
     FileSpec(
         "stage1b_release_manifest",
-        "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
+        "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1b_release_replay_receipt",
+        "docs/checks/stage1b-closeout/2026-07-22-v4/release-replay.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1c_asset_acquisition_matrix",
+        "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "speechrl_data_layered_inventory",
+        "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
         "release-scoped-immutable",
         "targeted",
     ),
@@ -286,11 +316,15 @@ _AUDIT_FILE_SPECS = (
 
 _BASE_RELEASE_BOUND = (
     "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
-    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+    "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
+    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+    "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
     "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-    "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
+    "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
+    "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
+    "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
 )
 _BASE_PROSE_SCAN = (
     "wiki/survey/current/README.md",
@@ -732,27 +766,18 @@ def _file_entry(
     if index_entry is None:
         raise CurrentManifestError(f"manifest-input-untracked: {spec.path}")
     index_entry = _validate_index_entry(spec.path, index_entry)
+    # Git blob bytes are the durable release authority.  A Windows checkout may
+    # legitimately expose CRLF-smudged worktree bytes for an LF-normalized blob,
+    # so binding the worktree would make the same staged commit platform-dependent.
+    _ = read_bytes
     try:
-        raw = read_bytes(spec.path)
-    except (OSError, ContextSurfaceError) as error:
-        raise CurrentManifestError(f"manifest input missing: {spec.path}: {error}") from error
-    if not isinstance(raw, bytes):
-        raise CurrentManifestError(f"manifest reader returned non-bytes: {spec.path}")
-    try:
-        staged_raw = read_blob(index_entry.blob)
+        raw = read_blob(index_entry.blob)
     except (OSError, CurrentManifestError) as error:
         raise CurrentManifestError(
             f"manifest staged blob unavailable: {spec.path}: {error}"
         ) from error
-    if not isinstance(staged_raw, bytes):
+    if not isinstance(raw, bytes):
         raise CurrentManifestError(f"Git blob reader returned non-bytes: {spec.path}")
-    if raw != staged_raw:
-        raise CurrentManifestError(
-            "staged-worktree-byte-mismatch: "
-            f"{spec.path}: index={index_entry.blob}, "
-            f"staged_sha256={hashlib.sha256(staged_raw).hexdigest()}, "
-            f"worktree_sha256={hashlib.sha256(raw).hexdigest()}"
-        )
     expected_schema = _INTEGRATION_EVIDENCE_SCHEMAS.get(spec.path)
     if expected_schema is not None:
         try:
