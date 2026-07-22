@@ -1,7 +1,7 @@
 ---
-artifact_id: "SF-STAGE1B-MAPPING-RELEASE-V1-2026-07-22"
+artifact_id: "SF-STAGE1B-MAPPING-RELEASE-V2-2026-07-22"
 stage: "STAGE_1B_LATE_EXECUTION_AND_CLOSEOUT"
-status: "READY_FOR_RELEASE_FREEZE; INDEPENDENT_TRANSITION_REVIEW_REQUIRED"
+status: "V3_RELEASE_CANDIDATE; REPLAY_AND_INDEPENDENT_TRANSITION_REVIEW_REQUIRED"
 h5_load_bearing_use: "WITHHOLD"
 novelty_verdict: "NOT_PERMITTED_IN_STAGE_1B"
 ---
@@ -16,7 +16,9 @@ list, or claim technical novelty. Counts use three deliberately separate denomin
 |---|---:|---|---|
 | frozen arXiv D0 | 20,727 work identities | discovery-flow accounting | 0 without an abstract disposition inside D0; not a literature-universe denominator |
 | retained registry | 226 unique works | portfolio roles, task and broad speech/non-speech strata | 0 duplicate IDs; 215 works have no strict schema-v7 method-path row |
-| strict occupancy | 8 works / 11 method paths | mechanism, access and decision-right occupancy | 9 load-bearing paths; 2 boundary paths; speech-native path count = 0 |
+| legacy strict schema-v7 occupancy | 8 works / 11 method paths | text/vision mechanism, access and decision-right occupancy | 9 load-bearing paths; 2 boundary paths; speech/audio-bearing path count = 0 in this legacy set only |
+| bounded speech/omni identity audit | 81 named works | explicit `DIRECT / INSTRUMENT / BOUNDARY / EXCLUDE / H5_HELD` routing | 81/81 routed exactly once: 23 direct methods, 19 instruments, 27 boundaries, 11 trained/model exclusions and 1 H5-held row |
+| speech/omni strict supplement | 32 works / 32 evidence rows | comparable speech-bearing method, measurement and boundary evidence | 23 direct methods enter the supplement method denominator; 8 instruments and 1 boundary are load-bearing only for synthesis |
 | bounded delta supplement | 193 work identities / 12 D2 full texts | new support, contradiction and boundary evidence | 181 excluded from this release's load-bearing map; 12 stay outside the frozen 226 denominator |
 
 One work may expose several facets, but it contributes once to the 226-work portfolio. Occupancy uses
@@ -31,21 +33,22 @@ residual-gap hypothesis in Stage-1C.
 
 | unranked family | direct/system evidence | transfer/component evidence | strongest contradiction or boundary | current coverage | single-observation kill |
 |---|---|---|---|---|---|
-| Evidence-state control | Omni-Decision: explicit evidence state, critic, repair/readiness and exhaustion; EChO-Agent: structured audio evidence, verifier and repair/select | AOP-Agent observe-reflect-replan; VTM-Nav persistent visual-topological memory; MSCE evidence-grounded memory/skill governance | The direct omni loop is already occupied; ActiveVision shows that tool use can merely move failure into verification | `DIRECT_OCCUPIED`, speech-specific strict occupancy unknown | On a frozen voice-agent task, an existing registered direct prior exposes the same auditable state/action interface and removes the residual failure without any added controller mechanism |
-| Tool/agent arbitration | AudioToolAgent prompt-guided audio-tool routing; EChO-Agent dual-path selection | MoBE optimization-free expert routing; test-time UAV candidate scoring; schema/tool-gating priors in the registry | Existing routers and candidate selectors may already cover the proposed decision right; learned gates are a training-dependent boundary | `DIRECT_OCCUPIED`, reward/credit semantics partial | A static or already-registered router matches the proposed arbitration policy on success, calibration and harm under the same frozen access contract |
-| Budget/stop/repair | Omni-Decision readiness/exhaustion; EChO retry caps and repair; VRR-Stop noisy verify-repair stopping | confidence stopping, budget forcing, Best-of-N/MCTS and execution guards in retained transfer paths | Repair can damage correct outputs; verifier discrimination and decision margin can reverse the stop decision | `OCCUPIED_WITH_RELIABILITY_GAP` | A preregistered existing stop/repair rule dominates the proposed policy on true task validity and cost across the target noise range |
-| Evaluator/reward reliability | speech/omni benchmark and judge instruments in the 43-instrument stratum | Oracle Gap decomposes recoverable mass, coverage, fidelity and harm; HALLMARK isolates false-positive deployment risk | 126 negative/boundary works; LLM selection can be negative and high reported acceptance can coexist with lower true validity | `MEASUREMENT_RICH`, cross-task calibration incomplete | One locally runnable evaluator retains prespecified calibration, ranking agreement and low harm across every target slice, leaving no evaluator-reliability deficit |
-| Interactive/full-duplex objective | tau-Voice, VoiceAgentBench and EVA-Bench define voice task success; JarvisBench measures spoken mediation | AnovaX supplies a voice-planner/executor/recovery topology; cascade and voice-tool benchmarks supply comparators | These are mainly instruments or prototypes, not evidence that an external reward controller succeeds; static QA gains need not transfer to interruption and long-horizon interaction | `INSTRUMENT_OCCUPIED`, control method sparse | An existing frozen voice-agent controller, evaluated on the same interactive contract, closes the task-success and interaction-quality deficit without the hypothesized control plane |
+| Evidence-state control | Omni-Decision (`DP-2607.11433`), EChO-Agent (`DP-2606.15141`), AudioGenie-Reasoner (`DP-2509.16971`) and Audio-Mind (`DP-2605.28480`) expose explicit evidence, sufficiency, repair or acquisition state | AOP-Agent (`DP-2605.28192`) and Active Perception Agent (`DP-2512.23646`) supply observe-reflect-replan paths; VTM-Nav and MSCE remain non-speech transfer | The direct omni/audio loop is already occupied; the residual must be narrower than “speech agents lack evidence state” | `DIRECT_OCCUPIED_IN_BOUNDED_SPEECH_SET` | On the same frozen speech task, a coded direct prior exposes the same auditable state/action interface and removes the residual failure without any added controller mechanism |
+| Tool/agent arbitration | AudioToolAgent (`DP-2510.02995`), Audio-Maestro (`DP-2510.11454`), VISA (`DP-2606.07264`), Agent-Omni (`DP-2511.02834`) and i-Code Studio (`DP-2305.13738`) explicitly route tools or agents | FAM-HRI (`DP-2503.16492`) and Langbar (`DP-2510.06223`) supply speech-bearing fusion and typed-tool boundaries; MoBE remains non-speech transfer | Routing itself is heavily occupied; learned gates remain a training-dependent boundary and reward/credit semantics are not uniformly present | `DIRECT_OCCUPIED_IN_BOUNDED_SPEECH_SET`, credit semantics partial | A static or already-coded router matches the proposed arbitration policy on success, calibration and harm under the same frozen access contract |
+| Budget/stop/repair | AudioGenie-Reasoner (`DP-2509.16971`), Thinking with Sound (`DP-2509.21749`), LongShOTAgent (`DP-2512.16978`), Interactive ASR (`DP-2604.09121`), Agentic ASR (`DP-2605.29430`), EChO-Agent (`DP-2606.15141`) and Omni-Decision (`DP-2607.11433`) expose continue/repair/select/stop edges | confidence stopping, budget forcing, Best-of-N/MCTS and execution guards remain component comparators | Repair can damage correct outputs; verifier discrimination and decision margin can reverse the stop decision | `OCCUPIED_WITH_RELIABILITY_GAP` | A preregistered existing stop/repair rule dominates the proposed policy on true task validity and cost across the target noise range |
+| Evaluator/reward reliability | LALM audio-judge reliability (`DP-2607.07985`), Omni-DeepSearch (`DP-2605.08762`) and EVA-Bench (`DP-2605.13841`) provide speech/audio measurement routes | Oracle Gap decomposes recoverable mass, coverage, fidelity and harm; HALLMARK isolates false-positive deployment risk | Audio-judge calibration is not universal; high proxy acceptance can coexist with lower true validity | `MEASUREMENT_RICH`, cross-task calibration incomplete | One locally feasible evaluator retains prespecified calibration, ranking agreement and low harm across every target slice, leaving no evaluator-reliability deficit |
+| Interactive/full-duplex objective | VoiceAgentRAG (`DP-2603.02206`), Enterprise Realtime Voice Agent (`DP-2603.05413`), Pepper (`DP-2603.21013`), Unit-Based Agent (`DP-2601.20230`) and AURA (`DP-2506.23049`) provide direct system paths; tau-Voice (`DP-2603.13686`), VoiceAgentBench (`DP-2510.07978`), Full-Duplex-Bench v3 (`DP-2604.04847`), Audio2Tool (`DP-2604.22821`), EVA-Bench (`DP-2605.13841`) and IHBench (`DP-2606.19595`) provide instruments | JarvisBench (`DP-2607.16610`) is a spoken-mediation boundary, not a speech-native method | Direct systems now exist, but their objectives differ; static audio-QA gains still need not transfer to interruption, latency and long-horizon task success | `DIRECT_AND_INSTRUMENT_OCCUPIED_IN_BOUNDED_SPEECH_SET` | An existing frozen voice-agent controller on the identical interaction contract closes both task-success and interaction-quality deficits without the hypothesized policy |
 
-Evidence locators for Omni-Decision, AOP-Agent, AudioToolAgent and EChO-Agent are in
-`wiki/survey/workbench/system-first-stage1b/2026-07-21-opening-d2-method-path-notes.md`.
-Delta PDF hashes and page locators remain in the external D2 ledger identified by the closeout
-manifest; paper-reported metrics have not been reproduced by this project.
+All `DP-*` identities resolve through the self-contained reference appendix and the hash-pinned
+32-row supplement. The wider 81-work candidate universe, including explicit exclusions and routed-only
+papers, is bound by the coverage ledger. Paper-reported metrics have not been reproduced by this
+project.
 
 ## 2. Strict system-control occupancy
 
-Source: `wiki/survey/current/data/known-item-coding-v7.json`. Population is 11 paths from 8 works,
-not the 226-work roster. Every value below is path-level.
+The release preserves two comparable layers rather than silently rewriting the legacy denominator.
+The first source is `wiki/survey/current/data/known-item-coding-v7.json`: 11 paths from 8 works, not
+the 226-work roster. Every value below is path-level.
 
 | facet | occupancy | denominator | missing / conflict |
 |---|---|---:|---|
@@ -64,23 +67,42 @@ supply 2, synthesize 2, retry 2, route 1 and execute/skip 1. One path has no exp
 Signal sources likewise are multi-label: LLM judge 7, consensus 2, learned RM/PRM 1, trained
 classifier 1 and state observation 1.
 
+The second source is the speech/omni supplement. Its 32 rows have a different analytical role and
+must not be folded into the legacy 11-path counts without disclosure:
+
+| supplement role | rows | enters direct-method occupancy | use |
+|---|---:|---:|---|
+| `DIRECT_CONTROL_METHOD` | 23 | 23 | speech/audio-bearing external control paths |
+| `MEASUREMENT_INSTRUMENT` | 8 | 0 | evaluator and interactive-task support |
+| `BOUNDARY_COMPARATOR` | 1 | 0 | spoken mediation over text-dominant worker tasks |
+
+All 23 direct rows use API-only external control and preserve the coded core weights. They all include
+load-bearing speech/audio, but the decision core may be audio-native, omni-native, a text coordinator
+over audio tools, or a cascade. Therefore “speech/audio-bearing path” must not be rewritten as
+“speech-native core.” Across the two strict layers, the disclosed direct-method count is 32
+load-bearing paths (9 legacy plus 23 supplement); this is a bounded inspected-evidence count, not a
+literature prevalence estimate.
+
 ## 3. Sensitivity by task, modality and access contract
 
 | stratum | core | instrument | transfer | negative/boundary | total | interpretation |
 |---|---:|---:|---:|---:|---:|---|
-| speech/omni-primary works | 12 | 38 | 0 | 26 | 76 | strong instruments and negatives; transfer was intentionally routed outside the speech-primary role logic |
+| retained-registry speech/omni-primary works | 12 | 38 | 0 | 26 | 76 | registry role counts only; does not include every rescued local/frozen-D0 identity |
+| bounded named speech/omni audit | 23 | 19 | 0 | 38 | 80 + 1 held | 27 boundaries + 11 trained/model exclusions form the 38; Daily-Omni is the additional H5-held row |
 | non-speech works | 0 | 5 | 45 | 100 | mechanism transfer and falsifiers dominate |
 | strict text-native paths | — | — | — | — | 7 | all API-only; path-level, not role-level |
 | strict vision-native paths | — | — | — | — | 4 | all API-only; path-level, not role-level |
-| strict speech/audio-native paths | — | — | — | — | 0 | missing strict coding, not proof of an empty method cell |
+| legacy strict speech/audio-bearing paths | — | — | — | — | 0 | legacy schema-v7 set only |
+| supplement speech/audio-bearing direct paths | — | — | — | — | 23 | all include load-bearing speech/audio; core-native modality varies |
 
-The 76 speech/omni works are distributed across ASR (26 tags), TTS (12), spoken agent (6), spoken
+The 76 retained-registry speech/omni works are distributed across ASR (26 tags), TTS (12), spoken agent (6), spoken
 QA/reasoning (5), SER (5), audio generation (4), speaker tasks (4), ST (4), and smaller strata.
 Tags are multi-label. Access sensitivity can be stated only for the 11 strict paths: all are API-only;
 no headline result may extrapolate from them to hidden-state or gradient-access systems. Nine of the
 12 delta full texts contain a training/no-update wording conflict requiring human interpretation;
-six contain strong no-update evidence and ten contain a page-local control path. These delta facts are
-supplementary and do not change the strict denominator.
+six contain strong no-update evidence and ten contain a page-local control path. The separate 32-row
+speech/omni supplement now changes the release's speech-specific evidence surface, but not the frozen
+226-work registry denominator or the legacy schema-v7 counts.
 
 ## 4. Instruments, negative priors and boundary comparators
 
@@ -116,15 +138,17 @@ the broad D0 campaign. Future resolution must be targeted by a Stage-1C input or
 
 This table is unranked and is not a frozen reproduction list.
 
-| work | proximity fact | local evidence | readiness statement |
-|---|---|---|---|
-| Omni-Decision (2607.11433) | closest inspected evidence-state → critic → action/readiness/repair path | PDF + e-print + D2 page locators | direct comparator; repository/execution status does not authorize reproduction |
-| AOP-Agent (2605.28192) | hierarchical omni memory and observe-reflect-replan | PDF + e-print + D2 page locators | direct comparator; non-streaming limitation retained |
-| AudioToolAgent (2510.02995) | audio tools coordinated by a text-only central LLM; conflict-triggered follow-up | PDF + e-print + D2 page locators | direct system comparator; no separate explicit reward located |
-| EChO-Agent (2606.15141) | structured audio evidence, diagnostic feedback, verifier repair and dual-path selection | PDF + e-print + D2 page locators | direct evidence-chain comparator; training-free wording remains unclear |
-| Oracle Gap and Signal Fidelity (2607.17531) | fixed-pool recoverable mass, signal fidelity and harm diagnostic | PDF + e-print + delta D2 locator ledger | measurement/negative prior; project has not reproduced reported values |
-| VRR-Stop (2607.17641) | noisy verifier/repairer model with a stopping rule and guard | PDF + e-print + delta D2 locator ledger | close stop/repair comparator; transfer to speech is untested |
-| tau-Voice (2603.13686) | full-duplex grounded voice-agent task-success instrument | existing local corpus route | instrument, not a successful control mechanism |
+| role / cluster | explicitly routed works | proximity and readiness statement |
+|---|---|---|
+| direct audio evidence acquisition and repair | AudioGenie-Reasoner (`DP-2509.16971`), Thinking with Sound (`DP-2509.21749`), Audio-Maestro (`DP-2510.11454`), LongShOTAgent (`DP-2512.16978`), Active Perception Agent (`DP-2512.23646`), AudioRAG (`DP-2602.10656`), Interactive ASR (`DP-2604.09121`), AOP-Agent (`DP-2605.28192`), Audio-Mind (`DP-2605.28480`), Agentic ASR (`DP-2605.29430`), VISA (`DP-2606.07264`), EChO-Agent (`DP-2606.15141`) and Omni-Decision (`DP-2607.11433`) | The bounded inspected set already contains acquisition, transformation, routing, verification, repair and stop paths. Reproduction readiness varies and no execution is authorized. |
+| direct speech/omni system orchestration | i-Code Studio (`DP-2305.13738`), FAM-HRI (`DP-2503.16492`), AURA (`DP-2506.23049`), AudioToolAgent (`DP-2510.02995`), Langbar (`DP-2510.06223`), Agent-Omni (`DP-2511.02834`), Unit-Based Agent (`DP-2601.20230`), VoiceAgentRAG (`DP-2603.02206`), Enterprise Realtime Voice Agent (`DP-2603.05413`) and Pepper Realtime AI Assistant (`DP-2603.21013`) | These occupy typed-tool, multi-agent, streaming, retrieval, interruption and listen/speak control surfaces. They differ materially in core modality and task contract, so they are mapped rather than ranked. |
+| speech/voice measurement instruments | VoiceAgentBench (`DP-2510.07978`), tau-Voice (`DP-2603.13686`), Full-Duplex-Bench v3 (`DP-2604.04847`), Audio2Tool (`DP-2604.22821`), Omni-DeepSearch (`DP-2605.08762`), EVA-Bench (`DP-2605.13841`), IHBench (`DP-2606.19595`) and LALM audio-judge reliability (`DP-2607.07985`) | These support task, tool, interruption, search and evaluator-reliability bundles but enter zero method-occupancy rows. |
+| spoken-mediation boundary | JarvisBench (`DP-2607.16610`) | Useful long-horizon mediation instrument, but its worker tasks are text-dominant; it cannot establish a speech-native control method. |
+| non-speech close comparators retained from v2 | Oracle Gap and Signal Fidelity (2607.17531); VRR-Stop (2607.17641) | Retain recoverable-mass, signal-fidelity, harm and noisy verify/repair-stop diagnostics; speech transfer remains untested. |
+
+The broader candidate account also names 49 routed-only instruments/boundaries, 11 trained/model
+exclusions and Daily-Omni as `H5_HELD`. Their absence from the strict 32-row table is an explicit role
+decision, not an omission.
 
 ## 7. H5 and release boundary
 
@@ -133,6 +157,6 @@ adjudication remain absent. Therefore `H5_LOAD_BEARING_USE=WITHHOLD`: H5 contrib
 occupancy, headline or gap selection. Eligible inputs that require modality-specificity inference are
 marked ineligible in the companion Stage-1C input file. Non-H5 path mapping above remains usable.
 
-The formal state after this table is `READY_FOR_RELEASE_FREEZE`, not `STAGE_1C_SIGNED`. A fixed commit
+The formal state after this table is `V3_RELEASE_CANDIDATE`, not `STAGE_1C_SIGNED`. A fixed commit
 and manifest must precede an independent transition review. Corrections after the freeze enter only
 through a dated superseding release.
