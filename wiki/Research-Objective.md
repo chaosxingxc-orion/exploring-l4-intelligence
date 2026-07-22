@@ -13,7 +13,7 @@ last_refresh: "2026-07-22 — Stage-1B release frozen; transition review pending
 当前是 **Stage-1B late execution and closeout**。Stage-1A search design 已签字，owner 已授权
 Stage-1B survey 执行。冻结 D0、date-bounded delta、T1 route disposition、non-H5 method-path
 mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 commit
-`8101320a1a25c3628a5d5c196b2efceb83abe829`，尚待独立 reviewer 对该固定 commit 签字。
+`51b527b88e1f9993f1c2bd9d826f86c73a6a938c`，尚待独立 reviewer 对该固定 commit 签字。
 
 允许检索记录闭合、去重、citation traversal、non-H5 编码、D2 全文映射与 release 检查。
 研究模型加载/smoke、数据集 metric/headroom、复现、prototype、候选问题排序与 owner 选题均未
@@ -59,8 +59,10 @@ mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 c
 
 ## 5. 下一动作
 
-只请求一次针对 release commit `8101320a1a25c3628a5d5c196b2efceb83abe829` 的独立
-Stage-1C transition review。35 项 manifest 输入已重放，Git/外部资产 hash/bytes 差异为 0。
+只请求一次针对 release commit `51b527b88e1f9993f1c2bd9d826f86c73a6a938c` 的独立
+Stage-1C transition review。37 项 manifest 输入已重放，Git/外部资产 hash/bytes 差异为 0。
+该 v2 release 明确取代 `8101320`：仅修复 H5 codebook 哈希绑定并把校准包及 companion hash
+纳入清单，研究角色、计数、mapping 结论与 H5 `WITHHOLD` 状态均未改变。
 reviewer `SIGN` 前不正式启动 Stage-1C；即使签字，模型/复现仍留待后续执行门。
 
 ## 6. 失效条件

@@ -1,7 +1,7 @@
 # Current Survey Status
 
 - Gate: **Stage-1B release frozen / transition review pending**. Release commit is
-  `8101320a1a25c3628a5d5c196b2efceb83abe829`; formal Stage-1C start requires an independent signature.
+  `51b527b88e1f9993f1c2bd9d826f86c73a6a938c`; formal Stage-1C start requires an independent signature.
 - Exposure: 65 frozen arXiv rows and 65/65 bounded delta rows executed; research model/smoke = 0;
   dataset metric/reproduction/prototype = 0. Broad D0 scanning remains closed.
 - Frozen D0: 20,727/20,727 abstract identities, 319 D2 full texts, 226 retained works = 12 core +
@@ -34,7 +34,7 @@
 - Integrity correction: eight historical invalid `--help` request rows remain append-only in the
   full-text ledger and are excluded from paper/rendition denominators. The CLI now rejects invalid IDs
   before network access; no source rows were deleted.
-- Release verification: 35 manifest artifacts = 29 Git + 6 external; commit/external byte and SHA-256
-  replay reports zero mismatches; the release commit adds no PDF/e-print.
-- Next action: request one independent Stage-1C transition review against commit `8101320`; no model,
+- Release verification: 37 artifacts = 31 Git + 6 external; byte/hash replay has zero mismatches.
+  V2 repairs v1's H5 hash binding only; roles, counts, conclusions and H5 `WITHHOLD` are unchanged.
+- Next action: request one independent Stage-1C transition review against commit `51b527b`; no model,
   smoke, ranking, selection or reproduction action is next.
