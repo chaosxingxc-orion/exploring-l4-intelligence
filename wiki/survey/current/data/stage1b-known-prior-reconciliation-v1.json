@@ -1,0 +1,122 @@
+{
+  "schema": "sf-stage1b-known-prior-reconciliation-v1",
+  "artifact_id": "SF-STAGE1B-KNOWN-PRIOR-RECONCILIATION-V1",
+  "scope": "BOUNDED_RECONCILIATION_ACROSS_SEED_MANIFEST_CURRENT_BIBLIOGRAPHY_AND_STAGE1B_REGISTRY",
+  "identity_policy": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_SEED_OR_CLAIM_WORK",
+  "source_surfaces": [
+    "wiki/survey/2026-07-15-sf-seed-manifest.jsonl",
+    "wiki/survey/current/bibliography.md",
+    "wiki/survey/registry/stage1b-bounded-2026-07-22-papers.jsonl"
+  ],
+  "coverage_limit": "This is the nine-work reconciliation required by the 2026-07-22 independent rereview. It does not enlarge or relabel the original four-source 81-work universe.",
+  "rows": [
+    {
+      "paper_work_id": "2407.09886",
+      "title": "Speech-Copilot: Leveraging Large Language Models for Speech Processing via Task Decomposition, Modularization, and Program Generation",
+      "analysis_role": "DIRECT_CONTROL_METHOD",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["seed_manifest", "current_bibliography"],
+      "bundle_impacts": ["tool_agent_arbitration", "interactive_full_duplex"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "364044abf7644e32e18ec3606a03da50ff7c61e8dbfd6aadeeb0ee598d483483"},
+      "route_reason": "Training-free program generation over modular speech tools is a direct historical orchestration prior.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2304.12995",
+      "title": "AudioGPT: Understanding and Generating Speech, Music, Sound, and Talking Head",
+      "analysis_role": "DIRECT_CONTROL_METHOD",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["seed_manifest"],
+      "bundle_impacts": ["tool_agent_arbitration"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "5bac5d915b43943ff301bb601583821c541fb94e1ed3c4833c1935720ba2296e"},
+      "route_reason": "The task-planning and model-selection cascade is an early audio foundation-model orchestration prior.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2303.11381",
+      "title": "MM-ReAct: Prompting ChatGPT for Multimodal Reasoning and Action",
+      "analysis_role": "BOUNDARY_COMPARATOR",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "ROUTED_ONLY",
+      "source_surfaces": ["seed_manifest"],
+      "bundle_impacts": ["tool_agent_arbitration"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "3cb0f947c0ac50aaf3990e8027738354ee6ffeb0c5207310e7a9940aa9e7925d"},
+      "route_reason": "This is the non-speech origin-domain boundary for central-LLM multimodal expert orchestration.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2604.16456",
+      "title": "EchoChain: A Full-Duplex Benchmark for State-Update Reasoning Under Interruptions",
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["current_bibliography"],
+      "bundle_impacts": ["interactive_full_duplex"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "4d0df21eeea17f1567224f5f2fc8b29dce043580a995c76ebc217f10c83156de"},
+      "route_reason": "Interruption-conditioned state-update reasoning and its paired half-duplex control change the failure taxonomy.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2605.15104",
+      "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["current_bibliography"],
+      "bundle_impacts": ["evaluator_reward_reliability", "interactive_full_duplex"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "e0638bda7ae0dbd8f14f342829c358c1bfb4252558468aad03aaa29a32049e47"},
+      "route_reason": "Paired text-audio tool tasks preserve gold annotations and offer a lower-cost verifiable voice evaluation route.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2602.13685",
+      "title": "AuTAgent: A Reinforcement Learning Framework for Tool-Augmented Audio Reasoning",
+      "analysis_role": "TRAINED_BOUNDARY",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "ROUTED_ONLY",
+      "source_surfaces": ["current_bibliography", "stage1b_registry"],
+      "bundle_impacts": ["tool_agent_arbitration"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "2a17d60f53b4c845d223268441001cb5d544aa773bfd61963c07e4b8c07bb747"},
+      "route_reason": "Its learned tool gate is a training-dependent close boundary, not a training-free direct method.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2505.09558",
+      "title": "WavReward: Spoken Dialogue Models With Generalist Reward Evaluators",
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["current_bibliography"],
+      "bundle_impacts": ["evaluator_reward_reliability"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "3584f57899303eebb4689611077b9bddd65f5617c6affc72a229228b3ac4a599"},
+      "route_reason": "A trained speech-input IQ/EQ reward evaluator is an evaluator boundary and potential signal source, not a TF-Strict controller.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2603.14889",
+      "title": "SDiaReward: Modeling and Benchmarking Spoken Dialogue Rewards with Modality and Colloquialness",
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["current_bibliography"],
+      "bundle_impacts": ["evaluator_reward_reliability"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "1e538783eb3f211e6d6b5679f83f21fb1a4eb3c8b6f935f0b8df7fed46205d5a"},
+      "route_reason": "The trained multi-turn spoken-dialogue reward model exposes modality, colloquialness, preference and shift boundaries.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    },
+    {
+      "paper_work_id": "2602.13891",
+      "title": "GSRM: Generative Speech Reward Model for Speech RLHF",
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "depth": "FULLTEXT_ROUTED",
+      "supplement_status": "INCLUDED",
+      "source_surfaces": ["current_bibliography"],
+      "bundle_impacts": ["evaluator_reward_reliability"],
+      "fulltext_ref": {"kind": "pdf", "sha256": "9b5e9e5e747544e70a6c095c251735736304fea7bef38b61774a947653f9840f"},
+      "route_reason": "A human-rated reasoning-centric speech reward model is a trained evaluator boundary and naturalness comparator.",
+      "seed_action": "REUSE_CANONICAL_WORK_ID"
+    }
+  ]
+}

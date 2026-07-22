@@ -1,0 +1,50 @@
+{
+  "schema": "sf-stage1b-v4-evidence-contract-receipt-v1",
+  "checked_at": "2026-07-22",
+  "status": "PASS",
+  "commands": [
+    "python scripts/survey/sf_stage1b_v4_evidence_contract.py --require-local --data-root ${SPEECHRL_DATA_DIR}",
+    "coverage run/append over the eight focused test modules listed in this receipt"
+  ],
+  "evidence_depth": {
+    "original_coverage_rows": 81,
+    "fulltext_routed_rows": 70,
+    "successful_pdf_ledger_required": true,
+    "stored_local_path_required": true,
+    "local_bytes_and_sha256_required": true,
+    "failures": []
+  },
+  "known_prior_reconciliation": {
+    "rows": 9,
+    "duplicate_seed_policy": "REUSE_CANONICAL_WORK_ID",
+    "failures": []
+  },
+  "strict_supplement": {
+    "rows": 39,
+    "direct_control_methods": 25,
+    "measurement_instruments": 13,
+    "boundary_comparators": 1
+  },
+  "control_basis": {
+    "EXTERNAL_ORCHESTRATION_ONLY": 9,
+    "STATE_OR_EVENT_GATED": 9,
+    "EVALUATOR_OR_VERIFIER_GATED": 7,
+    "REWARD_GUIDED_SELECTION": 0
+  },
+  "asset_layers": {
+    "frozen_baseline_entries": 31,
+    "frozen_baseline_missing": 0,
+    "local_candidate_unfrozen_entries": 33,
+    "local_candidate_datasets": 16,
+    "local_candidate_models": 17,
+    "auxiliary_paths": 5
+  },
+  "focused_tests": {
+    "modules": 8,
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "combined_statement_branch_coverage_percent": 80
+  },
+  "claim_limit": "PASS is a documentation, identity, local-byte and reproducibility-script result. It is not a model, metric, benchmark, reproduction, novelty or Stage-1C selection result."
+}

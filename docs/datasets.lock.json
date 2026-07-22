@@ -1,6 +1,9 @@
 {
-  "_comment": "FROZEN dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Datasets are not in git; this records the exact local snapshot. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md.",
+  "_comment": "FROZEN_BASELINE dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Dataset/model bytes are not in Git. This records the June/July 2026 baseline only, not the complete current disk inventory. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md and the layered inventory referenced below.",
   "frozen": true,
+  "scope": "FROZEN_BASELINE",
+  "complete_current_disk_inventory": false,
+  "layered_inventory": "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
   "generated": "2026-06-24 (amended 2026-07-03: + qwen3-omni-30b-a3b-instruct-gguf; amended 2026-07-09: - qwen3-omni-30b-a3b-instruct [HF int4, GGUF twin retained]; amended 2026-07-09: - minicpm-o-4_5, - moss-audio-8b-instruct [llama.cpp-stack unusable, deferred])",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
   "totals": {

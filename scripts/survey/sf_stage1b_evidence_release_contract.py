@@ -15,6 +15,9 @@ COVERAGE_SCHEMA = "sf-stage1b-speech-omni-prior-coverage-v1"
 SUPPLEMENT_PATH = Path(
     "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json"
 )
+CURRENT_SUPPLEMENT_V2_PATH = Path(
+    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json"
+)
 COVERAGE_PATH = Path(
     "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json"
 )
@@ -553,7 +556,13 @@ def validate_repository(repo: Path) -> list[str]:
     failures.extend(validate_supplement(supplement))
     failures.extend(validate_coverage_supplement_link(coverage, supplement))
     failures.extend(validate_reference_appendix(references, supplement))
-    failures.extend(validate_reference_tokens([mapping, eligible], supplement))
+    token_document = supplement
+    if repo.joinpath(CURRENT_SUPPLEMENT_V2_PATH).is_file():
+        try:
+            token_document = _load_json(repo / CURRENT_SUPPLEMENT_V2_PATH)
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            failures.append(f"REPOSITORY_JSON_INVALID:{error}")
+    failures.extend(validate_reference_tokens([mapping, eligible], token_document))
     failures.extend(validate_release_spec(release_spec))
     return failures
 

@@ -1,0 +1,543 @@
+{
+  "schema": "sf-stage1b-direct-control-basis-v1",
+  "artifact_id": "SF-STAGE1B-DIRECT-CONTROL-BASIS-V1",
+  "source_supplement": "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+  "classification_axis": [
+    "EVALUATOR_OR_VERIFIER_GATED",
+    "EXTERNAL_ORCHESTRATION_ONLY",
+    "MEASUREMENT_ONLY",
+    "REWARD_GUIDED_SELECTION",
+    "STATE_OR_EVENT_GATED",
+    "TRAINED_POLICY_BOUNDARY"
+  ],
+  "claim_limit": "A control-basis class is a mechanism-path description, not a novelty or effectiveness verdict.",
+  "rows": [
+    {
+      "paper_work_id": "2304.12995",
+      "evidence_id": "DP-2304.12995",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "ChatGPT coordinator and audio foundation models"
+      ],
+      "signal_forms": [
+        "task plan and model outputs"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "tool_call",
+        "synthesize"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2305.13738",
+      "evidence_id": "DP-2305.13738",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "external skill graph"
+      ],
+      "signal_forms": [
+        "typed skill output"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "tool_call",
+        "synthesize"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2407.09886",
+      "evidence_id": "DP-2407.09886",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "LLM agent and modular speech tools"
+      ],
+      "signal_forms": [
+        "generated program and module observations"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "tool_call",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2503.16492",
+      "evidence_id": "DP-2503.16492",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "speech and gaze foundation models"
+      ],
+      "signal_forms": [
+        "multimodal intent state"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "execute"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2506.23049",
+      "evidence_id": "DP-2506.23049",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "ASR, user and tools"
+      ],
+      "signal_forms": [
+        "transcript and tool observation"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2509.16971",
+      "evidence_id": "DP-2509.16971",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "planner over current audio evidence"
+      ],
+      "signal_forms": [
+        "Sufficient or Insufficient verdict"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2509.21749",
+      "evidence_id": "DP-2509.21749",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "frozen LALM and audio operators"
+      ],
+      "signal_forms": [
+        "reasoning trace and transformed-audio observation"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2510.02995",
+      "evidence_id": "DP-2510.02995",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "audio QA and speech-to-text adapters"
+      ],
+      "signal_forms": [
+        "tool outputs and disagreement"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2510.06223",
+      "evidence_id": "DP-2510.06223",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "GUI ViewModels and MCP"
+      ],
+      "signal_forms": [
+        "typed current-view and application-global tool state"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "tool_call",
+        "execute"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2510.11454",
+      "evidence_id": "DP-2510.11454",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "external audio tools"
+      ],
+      "signal_forms": [
+        "timestamped audio-tool output"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "synthesize",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2511.02834",
+      "evidence_id": "DP-2511.02834",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "text, image, audio and video agents"
+      ],
+      "signal_forms": [
+        "structured modality-agent responses"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "retry",
+        "synthesize"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2512.16978",
+      "evidence_id": "DP-2512.16978",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "search, refine and verify tools"
+      ],
+      "signal_forms": [
+        "retrieved segment and verification result"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2512.23646",
+      "evidence_id": "DP-2512.23646",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "tool observations and planner"
+      ],
+      "signal_forms": [
+        "memory and reflection state"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2601.20230",
+      "evidence_id": "DP-2601.20230",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "frozen MLLM and voice modules"
+      ],
+      "signal_forms": [
+        "listen or speak state and asynchronous ASR context"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "continue",
+        "stop",
+        "route"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2602.10656",
+      "evidence_id": "DP-2602.10656",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "audio model and external retrieval"
+      ],
+      "signal_forms": [
+        "audio clue and web evidence"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "synthesize",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2603.02206",
+      "evidence_id": "DP-2603.02206",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "fast talker, slow thinker and semantic cache"
+      ],
+      "signal_forms": [
+        "event stream and predicted retrieval need"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "retrieve",
+        "interrupt",
+        "synthesize"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2603.05413",
+      "evidence_id": "DP-2603.05413",
+      "control_basis": "EXTERNAL_ORCHESTRATION_ONLY",
+      "reward_or_evaluator_identity": [
+        "streaming STT, LLM and TTS pipeline"
+      ],
+      "signal_forms": [
+        "VAD, transcript, tool and latency events"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "interrupt",
+        "synthesize"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2603.21013",
+      "evidence_id": "DP-2603.21013",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "speech, touch, vision and robot sensors"
+      ],
+      "signal_forms": [
+        "interrupt, append-and-respond or silent context event"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "interrupt",
+        "tool_call",
+        "execute"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2604.09121",
+      "evidence_id": "DP-2604.09121",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "LLM judge and interaction state"
+      ],
+      "signal_forms": [
+        "semantic judge verdict and user correction"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "retry",
+        "repair",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2605.28192",
+      "evidence_id": "DP-2605.28192",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "observe-reflect-replan agents"
+      ],
+      "signal_forms": [
+        "need-more-observation judgment over hierarchical memory"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2605.28480",
+      "evidence_id": "DP-2605.28480",
+      "control_basis": "STATE_OR_EVENT_GATED",
+      "reward_or_evaluator_identity": [
+        "planner over native audio judgment"
+      ],
+      "signal_forms": [
+        "bounded task-relevant evidence need"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2605.29430",
+      "evidence_id": "DP-2605.29430",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "external LLM judge and dialogue state"
+      ],
+      "signal_forms": [
+        "intent-aware semantic judgment and user correction"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "repair",
+        "retry",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2606.07264",
+      "evidence_id": "DP-2606.07264",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "pretrained audio and vision experts"
+      ],
+      "signal_forms": [
+        "consistency and category-aware routing signal"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "route",
+        "select",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2606.15141",
+      "evidence_id": "DP-2606.15141",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "verifier over structured audio evidence"
+      ],
+      "signal_forms": [
+        "evidence and answer verification result"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "repair",
+        "select",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    },
+    {
+      "paper_work_id": "2607.11433",
+      "evidence_id": "DP-2607.11433",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "reward_or_evaluator_identity": [
+        "shared external state and critic"
+      ],
+      "signal_forms": [
+        "confirmed evidence, conflicts, dependencies and open needs"
+      ],
+      "signal_changes_next_action": true,
+      "next_action_effect": [
+        "tool_call",
+        "repair",
+        "stop"
+      ],
+      "controller_program_or_config_optimized_on_labels": false,
+      "core_weight_update": false,
+      "external_component_weight_update": false,
+      "boundary_note": "Classification describes the load-bearing inference path only; DIRECT_CONTROL_METHOD does not imply reward-guided selection."
+    }
+  ]
+}

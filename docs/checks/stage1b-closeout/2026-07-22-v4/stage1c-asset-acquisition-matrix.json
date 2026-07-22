@@ -1,0 +1,148 @@
+{
+  "schema": "sf-stage1c-asset-acquisition-matrix-v1",
+  "artifact_id": "SF-STAGE1C-ASSET-ACQUISITION-MATRIX-2026-07-22-V1",
+  "stage": "STAGE_1B_ASSET_PREPARATION_ONLY",
+  "execution_authority": "NO_MODEL_METRIC_REPRODUCTION_OR_PROTOTYPE_EXECUTION",
+  "data_policy": "Dataset bytes stay under ${SPEECHRL_DATA_DIR} and are never committed. Git stores source URLs, immutable revisions/content fingerprints and download/check scripts only.",
+  "status_vocabulary": [
+    "LOCAL_BASELINE_LOCKED",
+    "LOCAL_REVISION_PINNED_COMPLETE",
+    "LOCAL_CONTENT_PINNED_COMPLETE",
+    "LOCAL_COMMIT_PINNED",
+    "REMOTE_VERIFIED",
+    "PRIVATE_OR_PENDING",
+    "UNAVAILABLE_OR_UNVERIFIED"
+  ],
+  "assets": [
+    {
+      "asset_id": "voiceagentbench",
+      "paper_work_ids": ["2510.07978"],
+      "bundles": ["evaluator_reward_reliability", "interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "d9a6310f274080b586c83722791da432e73059c0ba63757c61fe0fde8c63bc14"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/krutrim-ai-labs/VoiceAgentBench", "commit": "d1efb7d4b71bed85534ce171460f8f2fb133a456", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/VoiceAgentBench"},
+      "dataset_status": {"status": "LOCAL_REVISION_PINNED_COMPLETE", "source": "https://huggingface.co/datasets/krutrim-ai-labs/VoiceAgentBench", "revision": "5ec6b7fcdaf25a1ffd5f538214d91dcf653c9ea4", "local_path": "${SPEECHRL_DATA_DIR}/datasets/voiceagentbench", "content_files": 7663, "content_bytes": 5833663134, "missing_files": 0, "download_route": "bash scripts/data/fetch-candidates.sh voiceagentbench", "identity_warning": "lmms-lab/voicebench is a different dataset and is not interchangeable."},
+      "license_access": "PUBLIC; Krutrim AI Labs Community License; downstream-use review required",
+      "stage2_reproduction_blocker": "Select and freeze the exact task slice and evaluate license compatibility before Stage-2A."
+    },
+    {
+      "asset_id": "tau-voice",
+      "paper_work_ids": ["2603.13686"],
+      "bundles": ["interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "4656c70efc086472102e735f346613ac66db40ff705bd91e8590d1be15670c3e"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/sierra-research/tau2-bench", "commit": "f0927a4b9cdfa7b374269efaa29ff7fdac90d8fc", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/tau2-bench-local"},
+      "dataset_status": {"status": "UNAVAILABLE_OR_UNVERIFIED", "source": "author repository voice extension", "revision": "EXACT_TAU_VOICE_DATASET_CONTRACT_NOT_SEPARATELY_LOCKED", "local_path": null, "content_files": null, "content_bytes": null, "missing_files": null, "download_route": null, "identity_warning": "The frozen tau2-bench base directory is not by itself proof that the exact tau-Voice extension is locally locked."},
+      "license_access": "PUBLIC REPOSITORY; exact voice-task data and domain-license review required",
+      "stage2_reproduction_blocker": "Resolve the exact tau-Voice branch/task assets and pin its domain split; do not substitute generic tau2-bench."
+    },
+    {
+      "asset_id": "full-duplex-bench-v3",
+      "paper_work_ids": ["2604.04847"],
+      "bundles": ["interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "bb3c9143ac444f766aaa57a29f92bfe3294181b1d5f1c0426383489356cb8bc6"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/DanielLin94144/Full-Duplex-Bench", "commit": "3e799c45a045256f47d5f1c9cda90157e2d2ec9e", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/Full-Duplex-Bench-v3-sparse"},
+      "dataset_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "source": "https://drive.google.com/file/d/1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz/view", "revision": "sha256:37545bd896f81718136598cf5be25d42ea9aa22efcd91f58370938d05d7d672f", "local_path": "${SPEECHRL_DATA_DIR}/datasets/full-duplex-bench-v3", "archive_bytes": 736136419, "archive_entries": 304, "content_files": 203, "content_bytes": 947535966, "missing_files": 0, "download_route": "bash scripts/data/fetch-candidates.sh full-duplex-bench-v3"},
+      "license_access": "PUBLIC GOOGLE DRIVE RELEASE; dataset license not stated in the acquisition route and requires review",
+      "stage2_reproduction_blocker": "Freeze the evaluator configuration and confirm dataset license before Stage-2A."
+    },
+    {
+      "asset_id": "audio2tool",
+      "paper_work_ids": ["2604.22821"],
+      "bundles": ["evaluator_reward_reliability", "interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "c3365e5474f0da450a3d4acaccd985bb8c5a3c169c5bb98dceb96a135669f4c0"},
+      "author_repo_status": {"status": "REMOTE_VERIFIED", "url": "https://audio2tool.github.io/", "commit": null, "local_path": null},
+      "dataset_status": {"status": "LOCAL_REVISION_PINNED_COMPLETE", "source": "https://huggingface.co/datasets/RVtech/Audio2Tool", "revision": "f1388da9a3189541ab82adac88824a0661670c43", "local_path": "${SPEECHRL_DATA_DIR}/datasets/audio2tool", "content_files": 71441, "content_bytes": 10410773494, "missing_files": 0, "verification_evidence": "${SPEECHRL_DATA_DIR}/datasets/audio2tool/.hfd/missing_xetsafe.txt", "download_route": "bash scripts/data/fetch-candidates.sh audio2tool"},
+      "license_access": "PUBLIC; CC-BY-NC-4.0",
+      "stage2_reproduction_blocker": "Non-commercial license and the chosen tier/task contract must be reviewed before Stage-2A."
+    },
+    {
+      "asset_id": "omni-deepsearch",
+      "paper_work_ids": ["2605.08762"],
+      "bundles": ["evaluator_reward_reliability"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "35f0d95c10442ac5ef1af653591d5943e0499057b9a143bd5687e1a97baa0d74"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/Kirito-Lab/Omni-DeepSearch", "commit": "0fbbcb443ad2162e3a1ee676a1af79c23af2958d", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/Omni-DeepSearch"},
+      "dataset_status": {"status": "LOCAL_REVISION_PINNED_COMPLETE", "source": "https://huggingface.co/datasets/Kirito-Lab/Omni-DeepSearch", "revision": "f6fafcd1ee9e5d370379b684bee3957c27dc25ac", "local_path": "${SPEECHRL_DATA_DIR}/datasets/omni-deepsearch", "content_files": 911, "content_bytes": 632178405, "missing_files": 0, "download_route": "bash scripts/data/fetch-candidates.sh omni-deepsearch"},
+      "license_access": "PUBLIC; dataset card did not declare a license at acquisition time",
+      "stage2_reproduction_blocker": "Resolve license and freeze the audio-first search environment before Stage-2A."
+    },
+    {
+      "asset_id": "eva-bench",
+      "paper_work_ids": ["2605.13841"],
+      "bundles": ["evaluator_reward_reliability", "interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "bde63827170556b1d37edfe306c5c74da27f38ab224dc7a1904fbb3bc6b00b3b"},
+      "author_repo_status": {"status": "REMOTE_VERIFIED", "url": "https://github.com/ServiceNow/eva", "commit": null, "local_path": null},
+      "dataset_status": {"status": "LOCAL_BASELINE_LOCKED", "source": "https://huggingface.co/datasets/ServiceNow-AI/eva", "revision": "566525430d942873f149273f0fa90fcaeba1f975", "local_path": "${SPEECHRL_DATA_DIR}/datasets/eva-bench", "content_files": 5, "content_bytes": 263383, "missing_files": 0, "download_route": "bash scripts/data/fetch-data.sh"},
+      "license_access": "PUBLIC; MIT",
+      "stage2_reproduction_blocker": "Confirm the selected airline split/task contract and pin the evaluator code commit."
+    },
+    {
+      "asset_id": "ihbench",
+      "paper_work_ids": ["2606.19595"],
+      "bundles": ["interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "604da0359aaf591597b908a594227c55858f16f944daa22d63a2f52485f767f3"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/boson-ai/ihbench", "commit": "46cfbd243e0deb018a66915883f8b6d88f01707c", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/ihbench"},
+      "dataset_status": {"status": "LOCAL_REVISION_PINNED_COMPLETE", "source": "https://huggingface.co/datasets/bosonai/IHBench", "revision": "cbd8280ab59bc4a50c48cbe0511a307fba9945cf", "local_path": "${SPEECHRL_DATA_DIR}/datasets/ihbench", "content_files": 4, "content_bytes": 216559546, "missing_files": 0, "download_route": "bash scripts/data/fetch-candidates.sh ihbench"},
+      "license_access": "PUBLIC; CC-BY-4.0",
+      "stage2_reproduction_blocker": "Freeze the exact model adapter and interruption workflow configuration before Stage-2A."
+    },
+    {
+      "asset_id": "lalm-audio-judge-reliability",
+      "paper_work_ids": ["2607.07985"],
+      "bundles": ["evaluator_reward_reliability"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "03c1f88e081ee289812db33532bb65713c97cb646189337994a3e645687c07fe"},
+      "author_repo_status": {"status": "UNAVAILABLE_OR_UNVERIFIED", "url": null, "commit": null, "local_path": null},
+      "dataset_status": {"status": "PRIVATE_OR_PENDING", "source": "paper-described production recordings and adversarial audio", "revision": null, "local_path": null, "content_files": null, "content_bytes": null, "missing_files": null, "download_route": null},
+      "license_access": "Production recordings private; part of the adversarial audio release is pending",
+      "stage2_reproduction_blocker": "Cannot claim exact reproduction; use only as a measurement warning unless authors release the assets."
+    },
+    {
+      "asset_id": "mmar",
+      "paper_work_ids": ["2509.16971", "2510.02995", "2606.07264", "2606.15141"],
+      "bundles": ["budget_stop_repair", "tool_agent_arbitration"],
+      "paper_pdf_status": {"status": "NOT_APPLICABLE_MULTI_PAPER_SUPPORT_ASSET", "sha256": null},
+      "author_repo_status": {"status": "NOT_APPLICABLE_DATASET_ONLY", "url": null, "commit": null, "local_path": null},
+      "dataset_status": {"status": "LOCAL_BASELINE_LOCKED", "source": "https://huggingface.co/datasets/BoJack/MMAR", "revision": "3bd051123480e80d273ae9e8e9f1653f49010ac7", "local_path": "${SPEECHRL_DATA_DIR}/datasets/mmar", "content_files": 13, "content_bytes": 2994099985, "missing_files": 0, "download_route": "bash scripts/data/fetch-data.sh"},
+      "license_access": "PUBLIC; CC-BY-NC-4.0",
+      "stage2_reproduction_blocker": "Freeze one compatible split and matched backbone after Stage-1C selection."
+    },
+    {
+      "asset_id": "mmau-mini",
+      "paper_work_ids": ["2509.16971", "2510.02995", "2602.13685"],
+      "bundles": ["budget_stop_repair", "tool_agent_arbitration"],
+      "paper_pdf_status": {"status": "NOT_APPLICABLE_MULTI_PAPER_SUPPORT_ASSET", "sha256": null},
+      "author_repo_status": {"status": "NOT_APPLICABLE_DATASET_ONLY", "url": null, "commit": null, "local_path": null},
+      "dataset_status": {"status": "LOCAL_BASELINE_LOCKED", "source": "https://huggingface.co/datasets/TwinkStart/MMAU", "revision": "42bd874593a0beed966e505411e896a808f9931f", "local_path": "${SPEECHRL_DATA_DIR}/datasets/mmau-mini", "content_files": 24, "content_bytes": 2843372907, "missing_files": 0, "download_route": "bash scripts/data/fetch-data.sh"},
+      "license_access": "PUBLIC; dataset-card license requires review",
+      "stage2_reproduction_blocker": "Confirm that the local mini split matches the selected prior's evaluation contract."
+    },
+    {
+      "asset_id": "soulx-duplug",
+      "paper_work_ids": [],
+      "bundles": ["interactive_full_duplex"],
+      "paper_pdf_status": {"status": "NOT_APPLICABLE_SUPPORT_ASSET", "sha256": null},
+      "author_repo_status": {"status": "NOT_APPLICABLE_DATASET_ONLY", "url": null, "commit": null, "local_path": null},
+      "dataset_status": {"status": "LOCAL_BASELINE_LOCKED", "source": "https://huggingface.co/datasets/Soul-AILab/SoulX-Duplug-Eval", "revision": "f6e50e8f07f3d33d8b2e77b14df986d14c817ef2", "local_path": "${SPEECHRL_DATA_DIR}/datasets/soulx-duplug", "content_files": 7, "content_bytes": 332118583, "missing_files": 0, "download_route": "bash scripts/data/fetch-data.sh", "identity_warning": "Turn-taking adjacency does not make this a substitute for tau-Voice or Full-Duplex-Bench v3."},
+      "license_access": "PUBLIC; Apache-2.0",
+      "stage2_reproduction_blocker": "Use only for turn-taking-adjacent measurement, not as an exact benchmark substitute."
+    },
+    {
+      "asset_id": "echochain",
+      "paper_work_ids": ["2604.16456"],
+      "bundles": ["interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "4d0df21eeea17f1567224f5f2fc8b29dce043580a995c76ebc217f10c83156de"},
+      "author_repo_status": {"status": "UNAVAILABLE_OR_UNVERIFIED", "url": null, "commit": null, "local_path": null},
+      "dataset_status": {"status": "UNAVAILABLE_OR_UNVERIFIED", "source": "no public author dataset route verified", "revision": null, "local_path": null, "content_files": null, "content_bytes": null, "missing_files": null, "download_route": null},
+      "license_access": "NO PUBLIC CODE/DATA RELEASE VERIFIED",
+      "stage2_reproduction_blocker": "Treat as a failure-taxonomy instrument only unless authors publish code and paired audio."
+    },
+    {
+      "asset_id": "from-text-to-voice",
+      "paper_work_ids": ["2605.15104"],
+      "bundles": ["evaluator_reward_reliability", "interactive_full_duplex"],
+      "paper_pdf_status": {"status": "LOCAL_CONTENT_PINNED_COMPLETE", "sha256": "e0638bda7ae0dbd8f14f342829c358c1bfb4252558468aad03aaa29a32049e47"},
+      "author_repo_status": {"status": "LOCAL_COMMIT_PINNED", "url": "https://github.com/talkiq/dialpad-ai-research/tree/main/toolvoice", "commit": "7602b6c602c96bcdb2fd7fa1acd25ab2349dc4a6", "local_path": "${SPEECHRL_DATA_DIR}/repos/stage1c/dialpad-ai-research"},
+      "dataset_status": {"status": "UNAVAILABLE_OR_UNVERIFIED", "source": "repository-provided dataset construction workflow", "revision": "GENERATOR_CODE_PINNED_EXACT_GENERATED_AUDIO_NOT_PACKAGED", "local_path": null, "content_files": null, "content_bytes": null, "missing_files": null, "download_route": null},
+      "license_access": "PUBLIC CODE; generated corpus inherits source-task and TTS/provider terms",
+      "stage2_reproduction_blocker": "Generate and content-pin a bounded paired-audio slice only after Stage-1C selects this route."
+    }
+  ]
+}

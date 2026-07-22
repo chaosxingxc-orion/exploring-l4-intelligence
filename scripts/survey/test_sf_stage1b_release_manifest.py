@@ -1,4 +1,5 @@
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,6 +9,33 @@ import sf_stage1b_release_manifest as target
 
 
 class Stage1BReleaseManifestTests(unittest.TestCase):
+    def test_git_artifacts_hash_index_blob_bytes_after_clean_filters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            (root / ".gitattributes").write_text("*.txt text eol=lf\n", encoding="utf-8")
+            (root / "a.txt").write_bytes(b"a\r\n")
+            subprocess.run(["git", "-C", str(root), "add", ".gitattributes", "a.txt"], check=True)
+            manifest = target.materialize(
+                {
+                    "release_id": "r",
+                    "artifacts": [{"role": "a", "path": "a.txt", "location": "git"}],
+                },
+                root,
+            )
+            self.assertEqual(2, manifest["artifacts"][0]["bytes"])
+            self.assertEqual(target.hashlib.sha256(b"a\n").hexdigest(), manifest["artifacts"][0]["sha256"])
+
+    def test_windows_external_path_translates_under_wsl(self):
+        self.assertEqual(
+            Path("/mnt/e/chao/data.bin"),
+            target.normalize_external_path("E:/chao/data.bin", is_wsl=True),
+        )
+        self.assertEqual(
+            Path("E:/chao/data.bin"),
+            target.normalize_external_path("E:/chao/data.bin", is_wsl=False),
+        )
+
     def test_materializes_hashes_and_declared_counts(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

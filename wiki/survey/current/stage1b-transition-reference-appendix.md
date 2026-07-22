@@ -1,6 +1,6 @@
 ---
-artifact_id: "SF-STAGE1B-TRANSITION-REFERENCE-APPENDIX-V1"
-scope: "32 load-bearing Stage-1B speech/omni supplement rows"
+artifact_id: "SF-STAGE1B-TRANSITION-REFERENCE-APPENDIX-V2"
+scope: "39 load-bearing Stage-1B speech/omni supplement rows after bounded known-prior reconciliation"
 novelty_verdict: "NOT_PERMITTED_IN_STAGE_1B"
 ---
 
@@ -46,7 +46,17 @@ reproduced by this project.
 | DP-2607.07985 | LALM audio-judge reliability | A. Sayyad et al., 2026 | [arXiv](https://arxiv.org/abs/2607.07985) | Measurement instrument | `p4 anchor='10 baselines by 6 DSP defects'` |
 | DP-2607.11433 | Omni-Decision | Ming Ma et al., 2026 | [arXiv](https://arxiv.org/abs/2607.11433) | Direct control method | `p1 anchor='structured evidence state containing confirmed evidence, unresolved conflicts'` |
 | DP-2607.16610 | JarvisBench | Chen Chen et al., 2026 | [arXiv](https://arxiv.org/abs/2607.16610) | Boundary comparator | `p1 anchor='JarvisBench, a benchmark for measuring the dual value of mediation'` |
+| DP-2304.12995 | AudioGPT | Rongjie Huang et al., 2023 | [arXiv](https://arxiv.org/abs/2304.12995) | Direct control method | `p2 anchor='whole process of AudioGPT can be divided into four stages'` |
+| DP-2407.09886 | Speech-Copilot | Chun-Yi Kuan et al., 2024 | [arXiv](https://arxiv.org/abs/2407.09886) | Direct control method | `p1 anchor='flexible agent that performs tasks through program generation'` |
+| DP-2505.09558 | WavReward | Shengpeng Ji et al., 2025 | [arXiv](https://arxiv.org/abs/2505.09558) | Measurement instrument | `p1 anchor='evaluate both the IQ and EQ of spoken dialogue systems with speech input'` |
+| DP-2602.13891 | GSRM | Maohao Shen et al., 2026 | [arXiv](https://arxiv.org/abs/2602.13891) | Measurement instrument | `p1 anchor='reasoning-centric reward model tailored for speech'` |
+| DP-2603.14889 | SDiaReward | Jingyu Lu et al., 2026 | [arXiv](https://arxiv.org/abs/2603.14889) | Measurement instrument | `p1 anchor='end-to-end multi-turn reward model trained on SDiaReward-Dataset'` |
+| DP-2604.16456 | EchoChain | Smit Nautambhai Modi et al., 2026 | [arXiv](https://arxiv.org/abs/2604.16456) | Measurement instrument | `p1 anchor='controlled benchmark for evaluating full-duplex state-update reasoning'` |
+| DP-2605.15104 | From Text to Voice | Md Tahmid Rahman Laskar et al., 2026 | [arXiv](https://arxiv.org/abs/2605.15104) | Measurement instrument | `p1 anchor='paired text-audio instances while preserving the original dataset annotations'` |
 
 The broader 81-work identity account, including trained exclusions, routed-only instruments,
 non-speech task boundaries and the H5-held Daily-Omni row, is in
 `wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json`.
+The separate nine-work reconciliation is in
+`wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json`; it reuses canonical work IDs
+and does not silently redefine the original 81-work denominator.

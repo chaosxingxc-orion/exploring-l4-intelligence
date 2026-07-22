@@ -1,10 +1,11 @@
 # Data & models (not included in git)
 
-Model weights and datasets are **deliberately kept out of this repository** (~650 GB total on disk).
-GitHub only ever holds code, docs, and the download scripts. The dataset set is now **FROZEN** to the
-local snapshot recorded in [`datasets.lock.json`](datasets.lock.json) (see *Frozen set* below) — we no
-longer download new datasets. The `.gitignore` blocks `speechrl-data/` plus all weight/dataset/archive
-formats, so a stray `git add -A` can never push data.
+Model weights and datasets are **deliberately kept out of this repository**. GitHub holds only code,
+source URLs, immutable revisions/content fingerprints, documentation and download/check scripts.
+[`datasets.lock.json`](datasets.lock.json) is the reproducible `FROZEN_BASELINE`; later local assets
+are tracked separately as `LOCAL_CANDIDATE_UNFROZEN`, and survey/reproduction material is
+`SURVEY_AND_REPRO_AUXILIARY`. The layered inventory is
+[`speechrl-data-layered-inventory.json`](checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json).
 
 ## Where it lives
 
@@ -15,13 +16,14 @@ from WSL (moved off D: on 2026-07-09). Reached via `${SPEECHRL_DATA_DIR:-<repo>/
 (`mlruns`). Layout: `models/`, `datasets/`, `repos/`
 (reference clones; SLURP audio lives here too), `manifests/`.
 
-## Frozen set & unified downloader
+## Frozen baseline, candidate acquisition and inventory
 
-[`datasets.lock.json`](datasets.lock.json) is the **single manifest** and source of truth. Per asset it
+[`datasets.lock.json`](datasets.lock.json) is the baseline manifest, not a complete statement about
+the current disk. Per baseline asset it
 records the local subdir, source id, **pinned revision** (the HF or git commit sha where the local
 snapshot recorded one; ModelScope tracks `master`; metadata-less entries are content-fingerprinted by
 `size_bytes` + `files`), size, and status. The set is **FROZEN**: `scripts/data/fetch-data.sh` is a
-self-contained, lockfile-driven downloader that fetches *exactly* this set and nothing else, so every
+self-contained, lockfile-driven downloader that fetches *exactly* this baseline and nothing else, so every
 collaborating team reproduces identical data. HF datasets pull the recorded commit (cross-team
 reproducible); the W1 `wave0_fetch.sh` engine was retired in favour of this one script.
 
@@ -32,10 +34,13 @@ bash scripts/data/fetch-data.sh                 # fetch everything missing (skip
 bash scripts/data/fetch-data.sh meld slurp      # fetch only named assets
 bash scripts/data/fetch-data.sh --dry-run       # print the commands without downloading
 bash scripts/data/inventory.sh                  # audit the on-disk snapshot vs the lock
+bash scripts/data/fetch-candidates.sh --list   # list non-baseline public candidates
+bash scripts/data/fetch-candidates.sh NAME     # revision/size-verified candidate download
 ```
 
-China-mainland mirrors (hf-mirror.com + ModelScope) are the default. To **change** the set, regenerate
-the lockfile + update the registry, then re-fetch — it is never an accident.
+China-mainland mirrors (hf-mirror.com + ModelScope) are the default. Candidate acquisition does not
+silently mutate the frozen baseline. Promote a candidate only through an explicit future baseline
+release; until then its exact status is recorded in the Stage-1C acquisition matrix.
 
 ### Dependencies
 
@@ -49,7 +54,15 @@ bash scripts/env-setup.sh                       # full stack (torch/verl + downl
 bash scripts/data/fetch-data.sh --install-deps  # lightweight: download deps only (modelscope, aria2, jq, hf), no torch
 ```
 
-## Models (6 local, ~122 GB)
+## Models: current routing
+
+The frozen baseline contains exactly three model directories:
+`qwen3-omni-30b-a3b-instruct-gguf`, `nemotron3-nano-omni-nvfp4`, and
+`omni-embed-nemotron-3b`. The other observed model directories are
+`LOCAL_CANDIDATE_UNFROZEN`; their presence does not expand the baseline or authorize execution. Use
+the layered inventory for current counts, bytes and provenance status.
+
+### Superseded historical roster (do not use as current inventory)
 
 The **flagship (W4) backbone is `omni-embed-nemotron-3b`** — a *frozen* omni encoder whose embeddings
 W4 disentangles via training-free RL (never fine-tuned). The generation models are W1's
@@ -67,7 +80,7 @@ reward-guided-RL bases / comparators.
 > Not in the frozen set: optional `baichuan-omni-1d5` / `kimi-audio-7b-instruct` were never downloaded.
 > A stale `minicpm-o-4_5-gguf` symlink (pointed outside `speechrl-data/`) was removed — use `minicpm-o-4_5`.
 
-## Datasets (28 locked, ~320 GB)
+## Datasets (28-entry frozen baseline)
 
 Grouped by the **W4 factor family** / eval role each exercises. Exact sizes, sources, and pinned
 revisions are in [`datasets.lock.json`](datasets.lock.json).
@@ -139,4 +152,5 @@ commit sha in [`datasets.lock.json`](datasets.lock.json).
 
 `SPEECHRL_DATA_DIR`, `SPEECHRL_WORKSPACE`, `SPEECHRL_VENV`, `SPEECHRL_LOCKFILE` (manifest path),
 `SPEECHRL_HF_ENDPOINT` (default hf-mirror.com), `SPEECHRL_MS_WORKERS`, `SPEECHRL_PYTHON`.
-The downloader fetches only what the lockfile records, so there is no separate freeze toggle.
+`fetch-data.sh` fetches only the frozen baseline. `fetch-candidates.sh` is an explicit, separately
+verified acquisition path and never edits the baseline lock automatically.

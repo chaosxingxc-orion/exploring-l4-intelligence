@@ -105,7 +105,8 @@ fetch_hf(){ # id dest
   while [ "$round" -lt 4 ]; do
     round=$((round + 1))
     python -u "$DIFFER" "$id" "$dest" "$list" || { warn "$id: repo listing failed (bad id? gated?)"; return 1; }
-    nmiss="$(grep -c '^http' "$list" 2>/dev/null || echo 0)"
+    nmiss="$(grep -c '^http' "$list" 2>/dev/null || true)"
+    nmiss="${nmiss:-0}"
     [ "$nmiss" -eq 0 ] && { log "$id: ✅ 100% complete"; return 0; }
     log "$id: round $round — $nmiss file(s) missing/short; fetching -j$HFD_JOBS single-connection"
     find "$dest" -name '*.aria2' -delete 2>/dev/null   # stale partials would trigger a 403-prone range resume
@@ -115,20 +116,68 @@ fetch_hf(){ # id dest
         --max-tries=10 --retry-wait=3 --connect-timeout=30 --timeout=90 )
   done
   python -u "$DIFFER" "$id" "$dest" "$list" 2>/dev/null || true
-  nmiss="$(grep -c '^http' "$list" 2>/dev/null || echo 0)"
+  nmiss="$(grep -c '^http' "$list" 2>/dev/null || true)"
+  nmiss="${nmiss:-0}"
   [ "$nmiss" -eq 0 ] && { log "$id: ✅ 100% complete"; return 0; }
   warn "$id: still $nmiss file(s) missing after $round rounds — re-run to continue"
   return 1
 }
 
-# name | method | note      (method = hf:<id> | git:<owner/repo> | gated:<url>)
+# Google Drive public-file downloads use the stable usercontent endpoint so aria2 can
+# resume and split the released archive. The expected byte count is a hard integrity
+# floor; a SHA-256 is recorded separately in the Stage-1C asset inventory after fetch.
+fetch_gdrive(){ # id dest filename expected_bytes
+  local id="$1" dest="$2" filename="$3" expected_bytes="$4"
+  local output="$dest/$filename"
+  local connections="${SPEECHRL_GDRIVE_CONNECTIONS:-8}"
+  case "$connections" in ''|*[!0-9]*) connections=8;; esac
+  [ "$connections" -lt 1 ] && connections=1
+  mkdir -p "$dest"
+  if [ -f "$output" ] && [ "$(stat -c %s "$output")" = "$expected_bytes" ]; then
+    log "$filename: complete ($expected_bytes bytes)"
+    return 0
+  fi
+  local url="https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t"
+  if command -v aria2c >/dev/null 2>&1; then
+    log "$filename: Google Drive public archive via aria2c -x$connections -s$connections"
+    if aria2c "$url" -d "$dest" -o "$filename" -c \
+      -x "$connections" -s "$connections" -k 1M \
+      --auto-file-renaming=false --allow-overwrite=true --file-allocation=none; then
+      :
+    elif command -v curl >/dev/null 2>&1; then
+      warn "$filename: aria2c TLS/range path failed -> curl resume fallback"
+      find "$dest" -maxdepth 1 -name "${filename}.aria2" -delete 2>/dev/null || true
+      retry curl -fL --retry 5 --retry-all-errors -C - -o "$output" "$url"
+    else
+      return 1
+    fi
+  elif command -v curl >/dev/null 2>&1; then
+    warn "$filename: aria2c missing -> curl resume fallback"
+    retry curl -fL --retry 5 --retry-all-errors -C - -o "$output" "$url"
+  else
+    warn "$filename: neither aria2c nor curl is available"
+    return 1
+  fi
+  local actual_bytes
+  actual_bytes="$(stat -c %s "$output" 2>/dev/null || echo 0)"
+  if [ "$actual_bytes" != "$expected_bytes" ]; then
+    warn "$filename: size mismatch expected=$expected_bytes actual=$actual_bytes"
+    return 1
+  fi
+  log "$filename: complete ($actual_bytes bytes)"
+}
+
+# name | method | note
+# method = hf:<id> | git:<owner/repo> | gdrive:<id>:<filename>:<bytes> | gated:<url>
 CANDS=(
   "audiocaps-qa|hf:AudioLLMs/audiocaps_qa_test|AudioCaps-QA AQA (AudioBench; VAT-KG/M3KG-RAG borrow it), 313 rows, not gated"
   "audio2tool|hf:RVtech/Audio2Tool|audio-native function-calling ~30k, 8 tiers, CC-BY-NC-4.0, not gated"
   "auditorybench-plusplus|hf:HJOK/AuditoryBenchpp|auditory-knowledge probe (text-only, ~527kB), CC-BY-4.0, not gated"
   "squtr|hf:SLLMCommunity/SQuTR|spoken-query retrieval robustness, 21.1GB(!), 6 configs, CC-BY-SA-4.0, not gated"
-  # DROPPED 2026-07-08 (owner): full-duplex-bench-v3 (git+GoogleDrive) and mlc-slm (gated) removed from
-  # the comparison set — not worth the manual-fetch friction. Local fdb-v3 clone was deleted.
+  "voiceagentbench|hf:krutrim-ai-labs/VoiceAgentBench|exact VoiceAgentBench asset for arXiv:2510.07978, 5.83GB, Krutrim community license"
+  "omni-deepsearch|hf:Kirito-Lab/Omni-DeepSearch|exact Omni-DeepSearch asset for arXiv:2605.08762, 640 rows, public"
+  "ihbench|hf:bosonai/IHBench|exact IHBench asset for arXiv:2606.19595, CC-BY-4.0"
+  "full-duplex-bench-v3|gdrive:1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz:fdb_v3_data_released.zip:736136419|official Full-Duplex-Bench v3 public archive, 736136419 bytes"
 )
 
 LIST_ONLY=0; ARGS=()
@@ -144,20 +193,34 @@ if [ -z "$HF_TOKEN" ]; then
 fi
 
 echo "== WS-D download candidates -> $DS =="
+FAILURES=0
 for row in "${CANDS[@]}"; do
   IFS='|' read -r name method note <<< "$row"
   sel "$name" || continue
   case "$method" in
     hf:*)    echo "  [HF   ] $name <- ${method#hf:}   ($note)";;
     git:*)   echo "  [GIT  ] $name <- github:${method#git:}   ($note)";;
+    gdrive:*) echo "  [GDRIVE] $name <- ${method#gdrive:}   ($note)";;
     gated:*) echo "  [GATED] $name : ${method#gated:}   ($note)";;
   esac
   [ "$LIST_ONLY" -eq 1 ] && continue
   case "$method" in
-    hf:*)    fetch_hf "${method#hf:}" "$DS/$name";;
-    git:*)   clone_git "${method#git:}" "$DS/$name" \
-               && log "$name cloned; download the v3 data from the Google Drive link in $DS/$name/README (manual)";;
+    hf:*)    fetch_hf "${method#hf:}" "$DS/$name" \
+               || { warn "$name: download failed"; FAILURES=$((FAILURES + 1)); };;
+    git:*)   if clone_git "${method#git:}" "$DS/$name"; then
+               log "$name cloned; download any separately hosted data named in $DS/$name/README"
+             else
+               warn "$name: clone failed"; FAILURES=$((FAILURES + 1))
+             fi;;
+    gdrive:*) payload="${method#gdrive:}"; id="${payload%%:*}"; payload="${payload#*:}"; \
+               filename="${payload%%:*}"; expected_bytes="${payload##*:}"; \
+               fetch_gdrive "$id" "$DS/$name" "$filename" "$expected_bytes" \
+               || { warn "$name: download failed"; FAILURES=$((FAILURES + 1)); };;
     gated:*) log "GATED $name: open ${method#gated:} , register + sign the DUA; the download link is emailed (cannot automate).";;
   esac
 done
 echo "== done =="
+if [ "$FAILURES" -ne 0 ]; then
+  warn "$FAILURES download failure(s)"
+  exit 1
+fi

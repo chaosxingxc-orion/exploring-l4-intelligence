@@ -6,8 +6,26 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import platform
+import re
+import subprocess
 from pathlib import Path
 from typing import Any
+
+
+WINDOWS_DRIVE_RE = re.compile(r"^([A-Za-z]):[\\/](.*)$")
+
+
+def normalize_external_path(raw: str | Path, *, is_wsl: bool | None = None) -> Path:
+    text = str(raw)
+    if is_wsl is None:
+        is_wsl = bool(os.environ.get("WSL_DISTRO_NAME")) or "microsoft" in platform.release().casefold()
+    match = WINDOWS_DRIVE_RE.match(text)
+    if is_wsl and match:
+        drive, remainder = match.groups()
+        return Path("/mnt") / drive.casefold() / remainder.replace("\\", "/")
+    return Path(text)
 
 
 def _artifact_path(entry: dict[str, Any], root: Path) -> Path:
@@ -23,8 +41,22 @@ def _artifact_path(entry: dict[str, Any], root: Path) -> Path:
             raise ValueError(f"Git artifact escapes repository: {raw}") from exc
         return path
     if location == "external":
-        return raw
+        return normalize_external_path(str(entry["path"]))
     raise ValueError(f"invalid artifact location: {location!r}")
+
+
+def _artifact_bytes(entry: dict[str, Any], root: Path, path: Path) -> bytes:
+    if entry.get("location") == "git":
+        relative = str(entry["path"]).replace("\\", "/")
+        indexed = subprocess.run(
+            ["git", "-C", str(root), "show", f":{relative}"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        if indexed.returncode == 0:
+            return indexed.stdout
+    return path.read_bytes()
 
 
 def materialize(spec: dict[str, Any], root: Path) -> dict[str, Any]:
@@ -40,7 +72,7 @@ def materialize(spec: dict[str, Any], root: Path) -> dict[str, Any]:
         path = _artifact_path(entry, root)
         if not path.is_file():
             raise FileNotFoundError(path)
-        raw = path.read_bytes()
+        raw = _artifact_bytes(entry, root, path)
         artifacts.append({
             **entry,
             "bytes": len(raw),

@@ -1,0 +1,502 @@
+{
+  "artifacts": [
+    {
+      "bytes": 55080637,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-21/bfs-arxiv-candidates-2026-07-21.jsonl",
+      "producer": "sf_bfs_candidate_builder.py",
+      "role": "external_frozen_d0",
+      "sha256": "afc3d85eab383f81c96d293b13d053767500baec485c89ce03aeff32f3425883"
+    },
+    {
+      "bytes": 5561,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-bounded-sampling-batch4-exhaustive-v6-final/bounded-sampling-summary.json",
+      "producer": "sf_stage1b_bounded_sampling.py",
+      "role": "external_final_sampling_summary",
+      "sha256": "545d2b802dc60c773cdadb4893bf58b4a6114a95b01def529f2e99cba545f52b"
+    },
+    {
+      "bytes": 123464,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-bounded-sampling-batch4-exhaustive-v6-final/handled-ids.txt",
+      "producer": "sf_stage1b_bounded_sampling.py",
+      "role": "external_prior_handled_ids",
+      "sha256": "18da767f90e3232cbf956f44fe7b51c833b126bbe71a8d2c879dd0c518422047"
+    },
+    {
+      "bytes": 550552,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-closeout/delta-candidates.jsonl",
+      "producer": "sf_bfs_candidate_builder.py",
+      "role": "external_delta_candidates",
+      "sha256": "3cdc068b4a514f78abaf6035a908a6078e6efdee548fd8b41d0fa98f935ef697"
+    },
+    {
+      "bytes": 135622,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-closeout/delta-rec0-decisions.jsonl",
+      "producer": "sf_delta_rec0_closeout.py",
+      "role": "external_delta_decisions",
+      "sha256": "f50d495cc6b7c2bb00f5534a6356fbf2bddd2a04fb3fa8a4b0a8de7b6b61346e"
+    },
+    {
+      "bytes": 1258316,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext-secondary-analysis/2026-07-22-d0-rescue-v1/rescue-audit.jsonl",
+      "producer": "bounded root-aware retrospective audit",
+      "role": "external_frozen_d0_speech_rescue",
+      "sha256": "63992b1e141fa0170675b2fab5243710d375bbda4c79923a33bc752a7a48fe02"
+    },
+    {
+      "bytes": 2405083,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext-secondary-analysis/2026-07-22-v4/paper-analysis.jsonl",
+      "producer": "sf_post_stage1b_corpus_refinement.py",
+      "role": "external_local_451_analysis",
+      "sha256": "55b24547e58d19ec3190802da3d944ab682b4f1c7ed71f0caa432cd33666d172"
+    },
+    {
+      "bytes": 62146,
+      "location": "external",
+      "path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-triage/stage1b-2026-07-22-delta/fulltext-triage.jsonl",
+      "producer": "sf_stage1b_fulltext_triage.py",
+      "role": "external_delta_d2_ledger",
+      "sha256": "32054187b7697cbd90a468d4a9b0a18ba7826962cd0eb4f3cf547bf20a6a5ce9"
+    },
+    {
+      "bytes": 54604,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
+      "producer": "scripts/data/stage1c-asset-inventory.ps1",
+      "role": "layered_asset_inventory",
+      "sha256": "9ef8eb63b8872189f76321b3c6d38f15fa38d3913d27d072d09ccdf9c438167d"
+    },
+    {
+      "bytes": 1585,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/stage1b-v4-evidence-contract.json",
+      "producer": "local fulltext, reconciliation, control-basis and asset-layer contract receipt",
+      "role": "v4_evidence_contract_receipt",
+      "sha256": "31d1261a76019a8c9c9d49dd581e0b3f391174580c1ef7f0f51c80f5657d93b1"
+    },
+    {
+      "bytes": 14544,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
+      "producer": "exact paper/code/data acquisition audit",
+      "role": "stage1c_asset_matrix",
+      "sha256": "88516cd9d6dc8c39dc8dd511fe2c3dba8512592b7cdaefbe48b4bd3ded58fcb8"
+    },
+    {
+      "bytes": 546,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/delta-bfs-stats.json",
+      "producer": "sf_bfs_candidate_builder.py",
+      "role": "delta_bfs_receipt",
+      "sha256": "30d96c0c3698835b0f0b0fa010412174c1cdf2a445322aa2e03b18f7aeb297f2"
+    },
+    {
+      "bytes": 1028,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/delta-rec0-summary.json",
+      "producer": "sf_delta_rec0_closeout.py",
+      "role": "delta_rec0_receipt",
+      "sha256": "f1cb1ebdb4de7a37ddcda57edfd11b9e834bc3ed68a732d918ff433d3cbf70d3"
+    },
+    {
+      "bytes": 19280,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/direct-core-citation-closure.jsonl",
+      "producer": "sf_citation_closure.py",
+      "role": "citation_ledger",
+      "sha256": "6fe11381ebadbf1db21d4df0a0acb8d6901bcb6166ce7442de3535beeb8e8e79"
+    },
+    {
+      "bytes": 654,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/direct-core-citation-summary.json",
+      "producer": "sf_citation_closure.py",
+      "role": "citation_summary",
+      "sha256": "f56c21aa5adc7c4c5952b2801f6a35e1fc72fcee1dd759fe24a03000760bd7cb"
+    },
+    {
+      "bytes": 1489921,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/t1-rec7-closeout.json",
+      "producer": "sf_t1_route_runner.py",
+      "role": "t1_route_receipt",
+      "sha256": "9848c513e89305ff4b2258b653898160f88b50f8a085a2a316d89f427cd31fc2"
+    },
+    {
+      "bytes": 1396412,
+      "location": "git",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/t1-title-reconciliation.json",
+      "producer": "sf_t1_title_reconcile.py",
+      "role": "t1_reconciliation",
+      "sha256": "b9f2c096aa7d72a10a66ab83a35579c9756cefe817c47f221f608c151b08a279"
+    },
+    {
+      "bytes": 23669,
+      "location": "git",
+      "path": "docs/datasets.lock.json",
+      "producer": "baseline-scope correction; asset rows unchanged",
+      "role": "frozen_baseline_lock",
+      "sha256": "233bcf6fd1abbeafd5a046088fc182e4a445737cbfaca33f6aeb406b8500d6e0"
+    },
+    {
+      "bytes": 11603,
+      "location": "git",
+      "path": "scripts/data/fetch-candidates.sh",
+      "producer": "revision/size verified public candidate downloader",
+      "role": "stage1c_candidate_downloader",
+      "sha256": "05ba9df35fa8729f03847798907e90ea72f304444486af1f2d725bff7e86efd9"
+    },
+    {
+      "bytes": 5751,
+      "location": "git",
+      "path": "scripts/data/hf_complete.py",
+      "producer": "resolved-revision remote/local file checker",
+      "role": "hf_completeness_checker",
+      "sha256": "280a61703a4c124db9dd32e15394981cb94e42a216c0983fcdf048221c65e749"
+    },
+    {
+      "bytes": 7115,
+      "location": "git",
+      "path": "scripts/data/stage1c-asset-inventory.ps1",
+      "producer": "native NTFS layered inventory implementation",
+      "role": "layered_inventory_windows",
+      "sha256": "9de8f0c92211d2b72a29031f036061d2b9c2fcd5e11dd36da76b5dc66110c682"
+    },
+    {
+      "bytes": 7510,
+      "location": "git",
+      "path": "scripts/data/stage1c_asset_inventory.py",
+      "producer": "portable layered inventory implementation",
+      "role": "layered_inventory_python",
+      "sha256": "f2bc2d872700c8980a7367fac1fe5a1c3fd91038f7ca0aee31724e73679ce0b8"
+    },
+    {
+      "bytes": 22539,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_evidence_release_contract.py",
+      "producer": "forward-compatible validation of original v3 coverage and supplement",
+      "role": "v3_compatibility_contract",
+      "sha256": "e77cb4f90fac1b45bfa7a11af02195c8c1948d737d43f0ab85fbd67c6ae43f23"
+    },
+    {
+      "bytes": 4629,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_release_manifest.py",
+      "producer": "cross-platform deterministic release-manifest materializer",
+      "role": "release_manifest_materializer",
+      "sha256": "dfdcba0281839dd4ca648a5fff98a633810e855cb214fd45c6b8bcf8166ebb5b"
+    },
+    {
+      "bytes": 3562,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_release_replay.py",
+      "producer": "commit-bound Git blob and external-asset replay checker",
+      "role": "release_replay_checker",
+      "sha256": "89dc4ee9a13a82ea5ae6dcc24285799a1f3876cd529d8c0912c566f78a837399"
+    },
+    {
+      "bytes": 17197,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_v4_evidence_contract.py",
+      "producer": "Stage-1B v4 executable evidence-depth and reconciliation contract",
+      "role": "speech_evidence_contract_checker",
+      "sha256": "06bd1b18f1e0a16f3abc51d5cbe2b07b6584650391d12d1a91571f14cc28d7f6"
+    },
+    {
+      "bytes": 18223,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_v4_materialize.py",
+      "producer": "deterministic supplement/control-basis materializer",
+      "role": "v4_supplement_materializer",
+      "sha256": "516fc6d041b712be85227c1acf872154b29a9fa60e95bdd0f974be0a7d2ab168"
+    },
+    {
+      "bytes": 4844,
+      "location": "git",
+      "path": "scripts/survey/sf_stage1b_v4_spec_materialize.py",
+      "producer": "self-contained v4 spec materialized from the registered v3 release",
+      "role": "v4_release_spec_materializer",
+      "sha256": "86aaf5b7a3e2973797aa389c7cb2186f59123f8e4012ec5536f76a176487b240"
+    },
+    {
+      "bytes": 68838,
+      "location": "git",
+      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
+      "producer": "frozen query compiler",
+      "role": "frozen_queries",
+      "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab"
+    },
+    {
+      "bytes": 82925,
+      "location": "git",
+      "path": "wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl",
+      "producer": "registered REC-7 routes",
+      "role": "t1_routes",
+      "sha256": "a967c97a8c2ae60362c0e82a84520c84381e21be03273337978e5e1d951dfeff"
+    },
+    {
+      "bytes": 2765,
+      "location": "git",
+      "path": "wiki/survey/2026-07-16-sf-t1-wordlist-v1.json",
+      "producer": "registered dual-normalization wordlist",
+      "role": "t1_wordlist",
+      "sha256": "a1c13c57fca361968cd7dfc98364a1ca81ab9124b1acde02bcb9df8df80dfaf5"
+    },
+    {
+      "bytes": 424312,
+      "location": "git",
+      "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+      "producer": "append-only known-ID fulltext fetcher",
+      "role": "fulltext_access_ledger",
+      "sha256": "a3618897d7d51b92ad460913d51498bc4a72c08a56c64331ac5d4c3030482631"
+    },
+    {
+      "bytes": 103007,
+      "location": "git",
+      "path": "wiki/survey/current/data/known-item-coding-v7.json",
+      "producer": "schema-v3 consolidation",
+      "role": "strict_method_path_coding",
+      "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6"
+    },
+    {
+      "bytes": 4457,
+      "location": "git",
+      "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json",
+      "producer": "sealed coder-B input",
+      "role": "h5_blind_packet",
+      "sha256": "501f2521be9fb64128a561c87c18ea589e02aa956f80df377e0d8787b7ab1b5e"
+    },
+    {
+      "bytes": 108,
+      "location": "git",
+      "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json.sha256",
+      "producer": "companion hash for sealed coder-B input",
+      "role": "h5_blind_packet_sha256",
+      "sha256": "f7c5026c1340bd0ad8045cd7674798e39ba074a6244a6cee7a8587cf8f1bafb9"
+    },
+    {
+      "bytes": 7944,
+      "location": "git",
+      "path": "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+      "producer": "hash-bound H5 calibration scaffold; coder B pending",
+      "role": "h5_calibration",
+      "sha256": "603a2e0c6772cf6ae7353678635512783d2a348f3cd6b420e4aa31d36108e5fd"
+    },
+    {
+      "bytes": 19324,
+      "location": "git",
+      "path": "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
+      "producer": "scripts/survey/sf_stage1b_v4_materialize.py",
+      "role": "direct_control_basis",
+      "sha256": "894788cd47bdb3da975a14a88c8fbe9954e0122e5677cb60f4524f2c72ef55c5"
+    },
+    {
+      "bytes": 6859,
+      "location": "git",
+      "path": "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
+      "producer": "bounded nine-work seed/bibliography/registry reconciliation",
+      "role": "known_prior_reconciliation",
+      "sha256": "8f00793dd9c2ea7567c6cdd14e81a8514f2b02872f54a6e400ae39957b9121e9"
+    },
+    {
+      "bytes": 75390,
+      "location": "git",
+      "path": "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
+      "producer": "scripts/survey/sf_stage1b_v4_materialize.py",
+      "role": "speech_direct_prior_supplement",
+      "sha256": "749bc669a0a3de393b13a1f97d6a5aaa5dec87be9cbcbf5c8c6c8d5f4b96bd3d"
+    },
+    {
+      "bytes": 28843,
+      "location": "git",
+      "path": "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+      "producer": "bounded existing-pool identity audit",
+      "role": "speech_prior_coverage",
+      "sha256": "048d9b3677756e5c57735b6c2aece5b510aa9e2e43b54900b7cfd5ff66128695"
+    },
+    {
+      "bytes": 4320,
+      "location": "git",
+      "path": "wiki/survey/current/mapping-methods-adaptation.md",
+      "producer": "methods adaptation v1",
+      "role": "mapping_methods",
+      "sha256": "8c8cedc0b8f91459d858d0c7686f4c72c97cd04753771b439fb62511ecba3478"
+    },
+    {
+      "bytes": 7030,
+      "location": "git",
+      "path": "wiki/survey/current/modality-specificity-codebook.md",
+      "producer": "H5 v2; withheld",
+      "role": "h5_codebook",
+      "sha256": "ee887fed134170d14b312da8f3a2121cbabf350513c9047e17cf7df64e88f3c6"
+    },
+    {
+      "bytes": 63244,
+      "location": "git",
+      "path": "wiki/survey/current/protocol.md",
+      "producer": "registered Stage-1B protocol",
+      "role": "protocol",
+      "sha256": "16d04d0b83cf4bf667e6418b5e3edd1a42c51809358c66696a009ffa5f002bda"
+    },
+    {
+      "bytes": 9733,
+      "location": "git",
+      "path": "wiki/survey/current/stage1b-transition-reference-appendix.md",
+      "producer": "self-contained reviewer references",
+      "role": "transition_reference_appendix",
+      "sha256": "a94f3dd63d78da0f941b2ea02348f29a72419942001ef86736929cf962018049"
+    },
+    {
+      "bytes": 18021,
+      "location": "git",
+      "path": "wiki/survey/current/tables/stage1b-mapping-release.md",
+      "producer": "Stage-1B v3 synthesis",
+      "role": "mapping_release",
+      "sha256": "fefb276df10e65e2572af65e62f4c59204df9fa042eb8d3ecd633dcbdd5a27a9"
+    },
+    {
+      "bytes": 17057,
+      "location": "git",
+      "path": "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+      "producer": "unranked Stage-1B v3 synthesis",
+      "role": "eligible_inputs",
+      "sha256": "696a3ecece8936cf85bab0dafa424c34edff6a750d22a52fedc56d779cde5010"
+    },
+    {
+      "bytes": 424030,
+      "location": "git",
+      "path": "wiki/survey/registry/stage1b-bounded-2026-07-22-papers.jsonl",
+      "producer": "sf_stage1b_registry_export.py",
+      "role": "registry_shard_1",
+      "sha256": "363f953e20a0100512ce12cf70b8a43081b693a767062ab820e1787f5762aee5"
+    },
+    {
+      "bytes": 77082,
+      "location": "git",
+      "path": "wiki/survey/registry/stage1b-bounded-batch2-2026-07-22-papers.jsonl",
+      "producer": "sf_stage1b_registry_export.py",
+      "role": "registry_shard_2",
+      "sha256": "90256eae28f53bd6ab536936fa7ee940ccb58e5b3f3dc555bab21f51137bb75a"
+    },
+    {
+      "bytes": 64804,
+      "location": "git",
+      "path": "wiki/survey/registry/stage1b-bounded-batch3-2026-07-22-papers.jsonl",
+      "producer": "sf_stage1b_registry_export.py",
+      "role": "registry_shard_3",
+      "sha256": "9e3d530170920f887fdab0aa7292662ba8acb9b9e34ba74adfcbb32fcf11015d"
+    },
+    {
+      "bytes": 65684,
+      "location": "git",
+      "path": "wiki/survey/registry/stage1b-bounded-batch4-exhaustive-2026-07-22-papers.jsonl",
+      "producer": "sf_stage1b_registry_export.py",
+      "role": "registry_shard_4",
+      "sha256": "16f1289f56c7f4414902ea66d0030fc19fe2d38021b0c5502e226029c8c4a0c7"
+    },
+    {
+      "bytes": 144993,
+      "location": "git",
+      "path": "wiki/survey/registry/views/stage1b-bounded-exhaustive-2026-07-22.json",
+      "producer": "sf_stage1b_registry_views.py",
+      "role": "registry_view",
+      "sha256": "8e3fcc5348afc4ff3425afac0da5fc6abb11aa33306fa74943c4d82ed4ed9e59"
+    },
+    {
+      "bytes": 24350,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b-refinement/2026-07-22-frozen-d0-speech-agent-rescue-v4.md",
+      "producer": "bounded frozen-D0 retrospective audit",
+      "role": "frozen_d0_speech_rescue_report",
+      "sha256": "3309dd734073c317185a050b2590b6cc884e824c1b8a3ccece5e8b69257bfc2a"
+    },
+    {
+      "bytes": 18089,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b-refinement/2026-07-22-local-451-speech-agent-rescue-v3.md",
+      "producer": "bounded local-PDF audit",
+      "role": "local_451_rescue_report",
+      "sha256": "ef8480d9a34d3102801b0f2762840ce2366a3673ac018374a6b4f92b0e2f6fdb"
+    },
+    {
+      "bytes": 5685,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b-refinement/2026-07-22-local-fulltext-secondary-filter-v4.md",
+      "producer": "local corpus refinement",
+      "role": "local_fulltext_filter_report",
+      "sha256": "e63c3d066d5f54832ca0d15b58ccd2a6c4a45f31dd912bc7619282d1ad342987"
+    },
+    {
+      "bytes": 3406,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b-refinement/screening-contract-v2-speech-omni-agent-root.md",
+      "producer": "speech/omni root contract",
+      "role": "speech_root_contract",
+      "sha256": "34cd1af1a2aa6f5a17fbf0316c06cb1a9d0844ec85b7b983ef9d8913eca9b741"
+    },
+    {
+      "bytes": 79074,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b/2026-07-21-arxiv-delta-queries.jsonl",
+      "producer": "sf_arxiv_delta_queries.py",
+      "role": "delta_queries",
+      "sha256": "86200b3a13f7fcf804dc960c0f5a3db852561dfb6db3523c884be783748edf4e"
+    },
+    {
+      "bytes": 31669,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b/2026-07-21-opening-d2-method-path-notes.md",
+      "producer": "opening D2 coding",
+      "role": "opening_d2_method_notes",
+      "sha256": "f7bec0ba494526aaa2046b334b777038a3e4e1f26b9dd9b48e7b10ae97f02045"
+    },
+    {
+      "bytes": 3461,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b/2026-07-22-delta-d2-audit.md",
+      "producer": "manual D2 role audit",
+      "role": "delta_d2_audit",
+      "sha256": "8014a561a53c795f78bf6376a67f15ff8ff5fbee81accd7c2aa41b4dbcf8b04e"
+    },
+    {
+      "bytes": 3261,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b/2026-07-22-delta-rec0-selections.json",
+      "producer": "manual bounded REC-0 audit",
+      "role": "delta_rec0_selection_config",
+      "sha256": "c3e4cc89da923ba88d9913e0dd3dbfa4acdadc4d388e58d5a6fa6b0a5bbe1ef4"
+    },
+    {
+      "bytes": 8371,
+      "location": "git",
+      "path": "wiki/survey/workbench/system-first-stage1b/2026-07-22-frozen-d0-exhaustion-closeout.md",
+      "producer": "bounded sampling closeout",
+      "role": "frozen_d0_closeout",
+      "sha256": "4126d3102ab2769f14b70b4d26f444b99a0f9cd83aecc08be3a96867f5e254a6"
+    }
+  ],
+  "claim_limit": "Bounded method-path, known-prior, evidence-depth and asset-feasibility release; no ranking, novelty verdict, model execution or reproduction authority.",
+  "commit_binding": {
+    "correction_policy": "DATED_SUPERSEDING_RELEASE_ONLY",
+    "mode": "CONTAINING_GIT_COMMIT",
+    "resolution": "Use the Git commit containing this manifest; verify every location=git entry with git show <commit>:<path> and the recorded SHA-256."
+  },
+  "denominators": {
+    "direct_control_paths_in_supplement": 25,
+    "known_prior_reconciliation": 9,
+    "legacy_schema_v7_paths": 11,
+    "original_four_source_identity_audit": 81,
+    "strict_speech_omni_supplement": 39
+  },
+  "release_id": "system-first-stage1b-2026-07-22-v4",
+  "schema": "sf-stage1b-release-manifest-v1",
+  "scientific_release_scope": "EXCLUDES_MUTABLE_HOT_AND_STATUS_ROUTERS",
+  "stage": "STAGE_1B_LATE_CLOSEOUT",
+  "supersedes_release_id": "system-first-stage1b-2026-07-22-v3"
+}
