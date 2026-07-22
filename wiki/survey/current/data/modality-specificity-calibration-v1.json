@@ -4,7 +4,7 @@
  "status": "PENDING_BLIND_CODER_B",
  "load_bearing": false,
  "codebook": "wiki/survey/current/modality-specificity-codebook.md",
- "codebook_sha256": "c17bea8ed81c5205fb5b3ba197ce8715087e8f8d69a2a4e02a5af22551b24c44",
+ "codebook_sha256": "ee887fed134170d14b312da8f3a2121cbabf350513c9047e17cf7df64e88f3c6",
  "purpose": "Pre-Stage-1B calibration of the seven H5 modality-specificity fields. These rows cannot support occupancy or findings until two independent coders and disagreement adjudication complete.",
  "source_review": {
   "path": "wiki/audit/external-reviews/2026-07-21-round16-precheck-rereview-of-stage1a-research-proposal.md",

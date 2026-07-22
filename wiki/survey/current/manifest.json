@@ -4,7 +4,7 @@
     {
       "role": "stage1b_release_manifest",
       "path": "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
-      "sha256": "ea4722f0ab983aa71a2fa5d00f9d585916e795c72cc3fd7f43545aa3597d2e48",
+      "sha256": "51e3229352354c3f20ffa4496536cbf6f6bedd7c715c4e9aadc779439cb84492",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },

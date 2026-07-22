@@ -97,12 +97,12 @@
       "sha256": "b9f2c096aa7d72a10a66ab83a35579c9756cefe817c47f221f608c151b08a279"
     },
     {
-      "bytes": 4508,
+      "bytes": 4404,
       "location": "git",
       "path": "wiki/Research-Objective.md",
       "producer": "supersede-in-place",
       "role": "hot_state",
-      "sha256": "f90483a003c7f809862f2ce5b49867cc3a7c04d53d7aa98e111a2fceec97f25c"
+      "sha256": "ef7164449c14b7c742d0b6db0f22982fc958c4bc4717b28fa6a2114103825918"
     },
     {
       "bytes": 68838,
@@ -158,7 +158,23 @@
       "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json",
       "producer": "sealed coder-B input",
       "role": "h5_blind_packet",
-      "sha256": "9b449713790ffc7c87338b4d7dbf717dd71278332e0c90eab32ffae9de85578e"
+      "sha256": "501f2521be9fb64128a561c87c18ea589e02aa956f80df377e0d8787b7ab1b5e"
+    },
+    {
+      "bytes": 108,
+      "location": "git",
+      "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json.sha256",
+      "producer": "companion hash for sealed coder-B input",
+      "role": "h5_blind_packet_sha256",
+      "sha256": "f7c5026c1340bd0ad8045cd7674798e39ba074a6244a6cee7a8587cf8f1bafb9"
+    },
+    {
+      "bytes": 7944,
+      "location": "git",
+      "path": "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+      "producer": "hash-bound H5 calibration scaffold; coder B pending",
+      "role": "h5_calibration",
+      "sha256": "603a2e0c6772cf6ae7353678635512783d2a348f3cd6b420e4aa31d36108e5fd"
     },
     {
       "bytes": 4320,
@@ -185,12 +201,12 @@
       "sha256": "16d04d0b83cf4bf667e6418b5e3edd1a42c51809358c66696a009ffa5f002bda"
     },
     {
-      "bytes": 3237,
+      "bytes": 3378,
       "location": "git",
       "path": "wiki/survey/current/status.md",
       "producer": "supersede-in-place",
       "role": "current_status",
-      "sha256": "fb3fd5b8c4683461f0c2db7bbbe18520109e0e40c4d616698107315619f09df0"
+      "sha256": "9dd5937120cbe13cf1813fc0640a07825fe4c8fa8f42c602dbe9aeca0be02233"
     },
     {
       "bytes": 13134,
@@ -323,8 +339,10 @@
     "H5 is non-load-bearing; H5-dependent eligible inputs are ineligible for Stage-1C selection.",
     "Paper-reported metrics were not reproduced by this project."
   ],
-  "release_id": "system-first-stage1b-2026-07-22-v1",
+  "release_id": "system-first-stage1b-2026-07-22-v2",
   "release_state": "COMMIT_CONTAINMENT_REQUIRED_BEFORE_INDEPENDENT_REVIEW",
   "schema": "sf-stage1b-release-manifest-v1",
-  "stage": "STAGE_1B_LATE_EXECUTION_AND_CLOSEOUT"
+  "stage": "STAGE_1B_LATE_EXECUTION_AND_CLOSEOUT",
+  "supersedes_release_commit": "8101320a1a25c3628a5d5c196b2efceb83abe829",
+  "supersession_reason": "Repair the stale H5 codebook hash binding in the calibration and sealed blind-coder packet; scientific roles, counts, mapping conclusions, and the H5 WITHHOLD state are unchanged."
 }

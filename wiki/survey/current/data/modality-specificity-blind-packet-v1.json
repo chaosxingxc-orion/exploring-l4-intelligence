@@ -8,7 +8,7 @@
  "purpose": "Independent coder-B calibration of the seven H5 fields before Stage-1B. This is a blank input packet, not a coding result.",
  "codebook": {
   "path": "wiki/survey/current/modality-specificity-codebook.md",
-  "sha256": "c17bea8ed81c5205fb5b3ba197ce8715087e8f8d69a2a4e02a5af22551b24c44"
+  "sha256": "ee887fed134170d14b312da8f3a2121cbabf350513c9047e17cf7df64e88f3c6"
  },
  "papers": [
   {

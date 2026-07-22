@@ -1,7 +1,9 @@
 {
-  "release_id": "system-first-stage1b-2026-07-22-v1",
+  "release_id": "system-first-stage1b-2026-07-22-v2",
   "stage": "STAGE_1B_LATE_EXECUTION_AND_CLOSEOUT",
   "release_state": "COMMIT_CONTAINMENT_REQUIRED_BEFORE_INDEPENDENT_REVIEW",
+  "supersedes_release_commit": "8101320a1a25c3628a5d5c196b2efceb83abe829",
+  "supersession_reason": "Repair the stale H5 codebook hash binding in the calibration and sealed blind-coder packet; scientific roles, counts, mapping conclusions, and the H5 WITHHOLD state are unchanged.",
   "declared_counts": {
     "frozen_d0_unique_works": 20727,
     "frozen_d0_abstract_dispositions": 20727,
@@ -41,7 +43,9 @@
     {"role": "protocol", "path": "wiki/survey/current/protocol.md", "location": "git", "producer": "registered Stage-1B protocol"},
     {"role": "mapping_methods", "path": "wiki/survey/current/mapping-methods-adaptation.md", "location": "git", "producer": "methods adaptation v1"},
     {"role": "h5_codebook", "path": "wiki/survey/current/modality-specificity-codebook.md", "location": "git", "producer": "H5 v2; withheld"},
+    {"role": "h5_calibration", "path": "wiki/survey/current/data/modality-specificity-calibration-v1.json", "location": "git", "producer": "hash-bound H5 calibration scaffold; coder B pending"},
     {"role": "h5_blind_packet", "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json", "location": "git", "producer": "sealed coder-B input"},
+    {"role": "h5_blind_packet_sha256", "path": "wiki/survey/current/data/modality-specificity-blind-packet-v1.json.sha256", "location": "git", "producer": "companion hash for sealed coder-B input"},
     {"role": "strict_method_path_coding", "path": "wiki/survey/current/data/known-item-coding-v7.json", "location": "git", "producer": "schema-v3 consolidation"},
     {"role": "frozen_queries", "path": "wiki/survey/2026-07-15-sf-queries.jsonl", "location": "git", "producer": "frozen query compiler"},
     {"role": "t1_routes", "path": "wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl", "location": "git", "producer": "registered REC-7 routes"},
