@@ -1,0 +1,20 @@
+{
+  "candidate_ledger": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-closeout/delta-candidates.jsonl",
+  "candidate_rows": 193,
+  "decision_counts": {
+    "EXCLUDE_STAGE1B_LOAD_BEARING": 181,
+    "SELECT_FULLTEXT": 12
+  },
+  "decision_ledger": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-bfs/stage1b-2026-07-22-closeout/delta-rec0-decisions.jsonl",
+  "decision_ledger_bytes": 135622,
+  "decision_ledger_sha256": "f50d495cc6b7c2bb00f5534a6356fbf2bddd2a04fb3fa8a4b0a8de7b6b61346e",
+  "duplicate_known_work": 0,
+  "duplicate_seed_creation": 0,
+  "excluded_load_bearing": 181,
+  "schema": "sf-stage1b-delta-rec0-summary-v1",
+  "scope_statement": "Bounded 2026-07-16..2026-07-21 arXiv delta only; exclusion means no current Stage-1B load-bearing map change, not literature irrelevance.",
+  "selected_fulltext": 12,
+  "selection_config": "wiki/survey/workbench/system-first-stage1b/2026-07-22-delta-rec0-selections.json",
+  "unique_work_ids": 193,
+  "unresolved": 0
+}

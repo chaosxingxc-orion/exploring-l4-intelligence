@@ -1,0 +1,13 @@
+{
+  "backward_executed": 12,
+  "forward_waived": 12,
+  "ledger": "docs/checks/stage1b-closeout/2026-07-22/direct-core-citation-closure.jsonl",
+  "ledger_bytes": 19280,
+  "ledger_sha256": "6fe11381ebadbf1db21d4df0a0acb8d6901bcb6166ce7442de3535beeb8e8e79",
+  "limitation": "Backward closure covers regex-resolvable arXiv IDs in local e-print bibliography members. DOI/title-only edges and all forward edges are not closed; those omissions prohibit a universal no-neighbor claim.",
+  "schema": "sf-stage1b-citation-closure-summary-v1",
+  "targets": 12,
+  "unique_backward_arxiv_ids": 266,
+  "unique_new_backward_arxiv_ids": 232,
+  "unresolved_targets": 0
+}

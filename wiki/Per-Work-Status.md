@@ -10,16 +10,15 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1A final remediation only. Round-16 precheck found Track A adequate but kept
-  search design at `WITHHOLD`. Negative evidence is now `22 = 4 + 18`; the pre-review proposal package
-  is construction PASS / release BLOCKED. No reviewer sign-off, owner authorization, or Stage-1B
-  authority exists.
-- **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; the blind
-  second coder and third-party disagreement adjudication are **PENDING**. Formal v7 NT/POSIX leaves,
-  aggregate, and immutable round-16 submission remain withheld.
-- **Next authorized work:** complete H5 coder B and adjudication, then generate fresh v7 evidence and
-  submit the exact immutable package for independent sign-off. No query, model/smoke, mapping
-  execution, or prototype is authorized before sign-off and explicit owner authorization.
+- **Current state:** Stage-1B systematic mapping is at bounded closeout. Frozen D0 is exhausted;
+  delta and all 50 T1 routes have dispositions; the required map and unranked Stage-1C inputs exist.
+  A commit-bound release and independent stage-transition signature remain before formal Stage-1C.
+- **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
+  and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
+  screening, non-H5 coding, or D2 full-text mapping.
+- **Next authorized work:** freeze the exact Stage-1B release bytes, run release checks, and request
+  one independent transition review. H5-dependent inputs remain ineligible; research models, smoke,
+  dataset metrics, reproduction, candidate ranking and prototypes remain prohibited in Stage-1B.
 
 ## W2
 

@@ -2,6 +2,13 @@
   "schema": "sf-current-manifest-v1",
   "files": [
     {
+      "role": "stage1b_release_manifest",
+      "path": "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+      "sha256": "ea4722f0ab983aa71a2fa5d00f9d585916e795c72cc3fd7f43545aa3597d2e48",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
       "role": "wiki_sync_dry_run_incident",
       "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
       "sha256": "297325a2471d3d20e4a000cf88ab02122b460ae6ca6e3528fc807d929a018393",
@@ -95,14 +102,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "17648d2e3a87e51ca650ee4a8825aebdb1456c76a75453199ca0c7b4019d0236",
+      "sha256": "15a7be1fd0516d1634a992fb228c0e5a71663fdb4c48003d5c5d1af9459b338a",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "f3c647965751972a3ea533125efad01cc0833ca172ca938a6ede643d083d55c6",
+      "sha256": "3df5cd82062e5990dad1a78a59db558cf1da4447230dbce3d578195fc0f06a33",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -186,14 +193,14 @@
     {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
-      "sha256": "53caa1e30af1a3dbf258d4171b848a1bb6d0f7ec4fa04aba683c36b5deaf51b9",
+      "sha256": "16d04d0b83cf4bf667e6418b5e3edd1a42c51809358c66696a009ffa5f002bda",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "e734783871e2780b683bdb8b7b065db8b55e0b2f5682448366764e8d1b2aebf2",
+      "sha256": "fb3fd5b8c4683461f0c2db7bbbe18520109e0e40c4d616698107315619f09df0",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -202,6 +209,20 @@
       "path": "wiki/survey/current/tables/opening-guarantees.md",
       "sha256": "8c4088fdbb8ada60f24e953e112122f01539ce8afb94a24a84640585dfc9e6ef",
       "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "stage1b_mapping_release",
+      "path": "wiki/survey/current/tables/stage1b-mapping-release.md",
+      "sha256": "a7ebcb7d910f46486ca540b25f6722b7d07418e05f43130b7413818e15d8fb94",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "stage1c_eligible_inputs",
+      "path": "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+      "sha256": "afe4a7a25c470e22bfd574cab3fcf4a62b394a5a1614b219714cc2014407d6f7",
+      "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
@@ -214,6 +235,9 @@
   ],
   "release_bound_artifacts": [
     "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/tables/stage1b-mapping-release.md",
+    "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+    "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ],
   "prose_scan_paths": [
@@ -221,6 +245,8 @@
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
     "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/tables/stage1b-mapping-release.md",
+    "wiki/survey/current/tables/stage1c-eligible-inputs.md",
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ]
 }

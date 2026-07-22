@@ -40,10 +40,12 @@ FROZEN_QUERIES = REPO / "wiki/survey/2026-07-15-sf-queries.jsonl"
 EXPECTED_FRONTMATTER = (
     "---\n"
     "protocol_id: SF-SYSTEM-FIRST-STAGE1B\n"
-    "protocol_version: 2\n"
-    "effective_date: 2026-07-19\n"
-    "stage: Stage-1A survey-ready gate\n"
-    "execution_authorized: false\n"
+    "protocol_version: 3\n"
+    "effective_date: 2026-07-21\n"
+    "stage: Stage-1B systematic mapping\n"
+    "execution_authorized: true\n"
+    "authorization_commit: c01fba751b56588ed2f62cb6d01f6c25f3e95539\n"
+    "h5_load_bearing_use: WITHHOLD\n"
     "supersedes_effective_chain: protocol-v1 plus amendments 1 and 3-15\n"
     "audit_index: wiki/audit/system-first-stage1a/INDEX.md\n"
     "---\n"
@@ -105,7 +107,12 @@ AMENDMENT_COVERAGE = (
     CoverageItem(3, "A3-5", "§6", ("source_axes", "omni_axes", "rl_identity", "evidence_axes")),
     CoverageItem(3, "A3-6", "§3", ("API_LIMIT_SINGLE_DAY_OVER_2000", "parent_query_sha256")),
     CoverageItem(3, "A3-10", "§10", ("object-and-anchor-qualified", "internal convergence is not sign-off")),
-    CoverageItem(3, "A3-11", "§0", ("Stage-1A survey-ready gate", "not Stage-1A close")),
+    CoverageItem(
+        3,
+        "A3-11",
+        "§0",
+        ("Stage-1B systematic-mapping execution", "Stage-1A performs identity, routing"),
+    ),
     CoverageItem(3, "A3-12", "§10", ("LATE_RECONSTRUCTED_REVIEW_SUMMARY",)),
 
     # Amendment 4.
@@ -150,7 +157,7 @@ AMENDMENT_COVERAGE = (
     CoverageItem(8, "可回放性矩阵", "§8", ("bundle-only", "local-data", "network-dependent")),
 
     # Amendment 9.
-    CoverageItem(9, "阶段正典", "§0", ("Stage-1B", "no research-model", "no smoke")),
+    CoverageItem(9, "阶段正典", "§0", ("Stage-1B", "no research-model", "model smoke")),
     CoverageItem(9, "exposure", "§8", ("current_activity_stage", "new_model_touches_since_gate_freeze", "INHERITED_PRIOR_EXPOSURE")),
     CoverageItem(9, "claim-evidence", "§9", ("MACHINE_RECOMPUTED_LOCAL", "SOURCE_REPORTED_TRACEABLE", "TEAM_ATTESTATION")),
     CoverageItem(9, "system-control", "§6", ("13-axis", "decision rights", "information boundary")),

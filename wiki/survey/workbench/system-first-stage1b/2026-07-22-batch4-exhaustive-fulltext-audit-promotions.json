@@ -1,0 +1,205 @@
+[
+  {
+    "arxiv_id": "2509.15666",
+    "sample_round": 1,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "TISDiSS exposes inference depth as a speed/performance control for speech source separation without retraining an additional model, making it a direct acoustic inference-scaling comparator.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY",
+    "repository_url": "https://github.com/WingSingFung/TISDiSS"
+  },
+  {
+    "arxiv_id": "2606.16137",
+    "sample_round": 1,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "The paper combines frozen multimodal LLMs with XAI evidence to generate training-free, decision-grounded explanations for speech deepfake detection; page-level review must resolve the evidence interface and PartialSpoof dependency.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2408.03047",
+    "sample_round": 1,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "OpenOmni is an end-to-end speech, emotion, retrieval and LLM integration harness with latency and accuracy benchmarking, useful as an experiment-environment instrument despite unresolved repository licensing.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY",
+    "repository_url": "https://github.com/AI4WA/OpenOmniFramework"
+  },
+  {
+    "arxiv_id": "2407.18521",
+    "sample_round": 1,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "Patched MOA directly compares Best-of-N, mixture aggregation and MCTS as model-agnostic inference optimizers without fine-tuning, providing an executable transfer baseline for candidate generation and selection.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/codelion/optillm"
+  },
+  {
+    "arxiv_id": "2411.12736",
+    "sample_round": 1,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "ACING uses actor-critic feedback to optimize instructions against black-box models and can clarify which external reward-optimization mechanisms transfer without updating the frozen target model.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/salmakh1/ACING"
+  },
+  {
+    "arxiv_id": "2605.03937",
+    "sample_round": 2,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "MiniMind-O supplies a small inspectable speech-native omni stack with frozen speech/image encoders, streaming speech output, released checkpoints and training data; it is a candidate low-cost environment carrier.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2601.15016",
+    "sample_round": 2,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "LiViBench is an omnimodal benchmark whose interactive livestream inputs explicitly combine audio, speech, video and real-time comments, potentially extending local evaluation coverage beyond static audio tasks.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2604.21816",
+    "sample_round": 2,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "Tool Attention performs dynamic tool gating and lazy schema loading at runtime, a transferable budget-allocation mechanism for selectively exposing expensive evaluators or tools.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/asadani/tool-attention"
+  },
+  {
+    "arxiv_id": "2604.25256",
+    "sample_round": 2,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_INSTRUMENT",
+    "reason": "AutoResearchBench provides an open environment for evaluating complex scientific literature discovery and is directly relevant to validating the planned research knowledge layer.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/CherYou/AutoResearchBench"
+  },
+  {
+    "arxiv_id": "2503.01163",
+    "sample_round": 2,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "OPTS uses explicit bandit selection among prompt-design strategies, supplying a compact reward-guided policy-selection analogue with released experimental code.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/shiralab/OPTS"
+  },
+  {
+    "arxiv_id": "2509.20410",
+    "sample_round": 3,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "Phoenix-VAD isolates streaming semantic endpoint detection as a plug-and-play stopping controller for full-duplex speech interaction, directly informing stop/continue actions.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2501.11721",
+    "sample_round": 3,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "Explain-Query-Test turns explanation/comprehension discrepancy into an inference-time self-evaluation signal and provides an open comparator for self-verification reliability.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/asgsaeid/EQT"
+  },
+  {
+    "arxiv_id": "2503.14443",
+    "sample_round": 3,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_INSTRUMENT",
+    "reason": "EnvBench evaluates automated environment setup and exposes reproducible environment failures, directly supporting the reproduction-first experiment phase.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/JetBrains-Research/EnvBench"
+  },
+  {
+    "arxiv_id": "2601.05777",
+    "sample_round": 4,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_TRANSFER",
+    "reason": "EET converts prior execution traces into early-termination decisions with measured cost savings and negligible task loss, a direct stopping-policy transfer reference.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/IanWalls/EET"
+  },
+  {
+    "arxiv_id": "2501.19393",
+    "sample_round": 4,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_NEGATIVE",
+    "reason": "s1 couples supervised fine-tuning with runtime budget forcing. It is useful boundary evidence for separating a reusable test-time controller from the training investment that enabled it.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/simplescaling/s1"
+  },
+  {
+    "arxiv_id": "2601.19956",
+    "sample_round": 5,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "VoxPrivacy contributes a speaker-aware speech-language-model safety benchmark and reports a broad conditional-privacy failure, useful negative evidence for verifier and identity-aware control.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2502.16069",
+    "sample_round": 5,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_INSTRUMENT",
+    "reason": "Curie supplies an open system for rigorous automated scientific experimentation, relevant to experiment planning, execution evidence and reproducibility boundaries in Stage 2.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/Just-Curieous/Curie"
+  },
+  {
+    "arxiv_id": "2601.05808",
+    "sample_round": 5,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "NON_SPEECH_INSTRUMENT",
+    "reason": "EnvScaler programmatically synthesizes tool-interactive environments for agents and can inform scalable construction of bounded evaluation environments.",
+    "repository_gate": "OPEN_SOURCE_VERIFIED",
+    "repository_url": "https://github.com/RUC-NLPIR/EnvScaler"
+  },
+  {
+    "arxiv_id": "2604.10123",
+    "sample_round": 7,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "The paper derives a training-free dysarthria-severity measurement from frozen HuBERT phonological subspaces across ten corpora, a candidate acoustic reward or diagnostic instrument.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  },
+  {
+    "arxiv_id": "2508.02013",
+    "sample_round": 7,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "SpeechRole provides direct speech-to-speech evaluation of interaction, expressiveness and role fidelity and documents gaps between open and closed speech agents.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY",
+    "repository_url": "https://github.com/yuhui1038/SpeechRole"
+  },
+  {
+    "arxiv_id": "2506.00832",
+    "sample_round": 7,
+    "from_disposition": "EXCLUDE_ABSTRACT",
+    "to_disposition": "AUDIT_SELECT_FULLTEXT",
+    "task_class": "SPEECH_PRIMARY",
+    "reason": "Counterfactual Activation Editing applies post-hoc inference-time interventions to correct prosody and pronunciation in a pretrained TTS model without retraining.",
+    "repository_gate": "NOT_REQUIRED_FOR_SPEECH_PRIMARY"
+  }
+]

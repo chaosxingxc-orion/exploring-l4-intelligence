@@ -1,80 +1,71 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-21 — H5 contract repair and Stage-1A novelty-boundary correction"
+last_refresh: "2026-07-22 — Stage-1B mapping synthesis ready for release freeze"
 ---
 
 # Research Objective & Current State
 
 > 默认加载：客户端指南 → 本页 → `wiki/Project-Thesis.md`；历史只经 cold index 定向取证。
 
-## 1. 当前门与权限边界
+## 1. 当前门与权限
 
-当前是 **Stage-1A final remediation**。Stage-1B 未开始且未经授权；不得运行 discovery query、
-研究模型（含 smoke）、数据集实验或 prototype。precheck 判 Track A 科学理由 `ADEQUATE`，
-但 Track B 为 major revision、search-design `WITHHOLD`。语义负证据已整改；当前首要红门是 H5
-第二位独立 coder 与分歧裁决。
+当前是 **Stage-1B late execution and closeout**。Stage-1A search design 已签字，owner 已授权
+Stage-1B survey 执行。冻结 D0、date-bounded delta、T1 route disposition、non-H5 method-path
+mapping 与 Stage-1C eligible-input synthesis 已完成；尚待把当前字节冻结成 commit/manifest-bound
+release，并由独立 reviewer 对固定 commit 作阶段转换签字。
+
+允许检索记录闭合、去重、citation traversal、non-H5 编码、D2 全文映射与 release 检查。
+研究模型加载/smoke、数据集 metric/headroom、复现、prototype、候选问题排序与 owner 选题均未
+获本阶段授权。H5 在独立 coder B、agreement 与第三方裁决前不得进入承重统计或选题。
 
 ## 2. 目的链
 
-北极星是冻结黑盒 omni foundation model 的**外部 reward-guided control plane**：以供给、状态、
-工具、候选、评估、选择与停止激活预训练知识，不改核心权重/结构。先确认问题和证据边界，再执行
-systematic mapping；工程自测不能代替研究裁决。
+北极星是冻结黑盒 omni foundation model 的外部 reward-guided control plane：控制候选、工具、
+评估、选择、路由、预算与停止，不修改核心权重。Stage-1B 只映射方法路径、接近度、反证与
+可测性，不判创新；Stage-1C 从未排序的合格 gap hypotheses 中选题；Stage-2A 先复现最近 prior
+再收敛技术方案，Stage-2B 验证。
 
-## 3. 已闭合的实施地基
+## 3. 当前证据
 
-- **GM-1**：508 source rows 恰好路由至 253 canonical works；claim 只作 hyperedge，不生成重复
-  seed/work。该 PASS 不外推为 archive 完备。
-- **GM-2**：负证据正典为 `22 = 4 + 18`；4/4 correction 与 18/18 active reviewer decisions 已绑定，
-  `DISAGREE` 行已从 `false` 改 `unknown`，active proofs 均含 counterevidence。
-- **H5 / extractor**：V2 codebook、三篇 hash-bound 全文、coder-A 21/21 可重放 exact anchors 与无答案
-  盲包已就位；validator 会拒绝自报 agreement、非法 adjudicator/final value。独立 coder B/裁决仍缺。
-  PDF 环境为 NT pypdf 6.14.0 / POSIX 6.14.2，双叶须重放 ToolGate p11。
-- **GM-3**：v7 contract-4 leaf/aggregate 与反例合同已实现；当前 probe 仅 `H5_CALIBRATION` 红，
-  所以正式 NT/POSIX leaves 尚未生成。
-- **GM-4**：93 official-receipt works 可离线重建；253-node complement 与 19 条 reviewer-known routes
-  已机器化。Omni-Decision/AOP-Agent 为唯一 P1 direct，Light-Omni/LatentOmni 为非阻塞 P2 boundary。
-- **研究设计**：1A 不判创新差异；1B 映射方法路径/邻近事实；1C 形成缺口假设并选题；2A 在最近
-  prior 复现后收敛技术创新。mapping/empirical RQ、methods adaptation 与 H5 codebook 已分离就位。
+- 冻结 D0 为 20,727 个唯一 arXiv ID，20,727/20,727 有摘要处置；319 篇达到全文深度，
+  226 篇保留（12 core、43 instrument、45 transfer、126 negative），93 drop。该闭合只对
+  frozen D0 成立，不是全领域零遗漏声明。
+- 65/65 条 date-bounded delta 查询均已处置，活动失败为 0；得到 193 个唯一 work，人工
+  REC-0 后 12 篇进入 PDF+e-print+D2，181 篇只从本轮承重 map 排除，重复种子为 0。
+- 50/50 条 T1 route 均有 disposition：28 executed、3 not held、19 `WAIVED_UNAVAILABLE`。
+  已执行 route 共扫描 71,254 个标题，宽词表命中 3,310；677 可与已知 work 合并，2,633
+  仍是 title-only identity，不能被写成 zero hit 或用于 `NO_DIRECT_MATCH`。
+- 12/12 个 frozen registry core work 已从本地 e-print 执行后向 arXiv-ID 子集闭合，得到
+  266 个唯一引用 ID；其中 232 个位于 D0/delta/registry 外。DOI/title-only edge 未解析；
+  前向公共索引返回 HTTP 429，12 项显式豁免，故不作全引文或文献宇宙闭合声明。
+- 当前 map 明确分开三个分母：226-work portfolio、8-work/11-path strict occupancy、12 篇
+  delta supplement。strict set 中 9 路径承重、2 路径为 boundary，11/11 均 API-only，
+  speech-native strict path 为 0（未测，不是空文献结论）。
+- Stage-1C 输入保持未排序：budget/stop/repair、evaluator reliability、interactive/full-duplex
+  三类为 `ELIGIBLE_NON_H5`；evidence-state 与 tool/agent arbitration 因 H5 依赖暂为
+  `INELIGIBLE_FOR_STAGE_1C_SELECTION`。
+- 本轮 research model/smoke、dataset metric、reproduction、prototype 均为 0。既有 ASR/omni
+  复现材料已降级为 `PROVISIONAL_INPUT / NOT_STAGE_FROZEN`。
 
-上述均是 implementation/readiness evidence，不是 novelty、effectiveness 或 scientific sign-off。
+## 4. 当前路由
 
-## 4. 剩余阻塞
+- CURRENT：`wiki/survey/current/README.md` → `status.md`。
+- Stage-1B map：`wiki/survey/current/tables/stage1b-mapping-release.md`。
+- Stage-1C 未排序输入：`wiki/survey/current/tables/stage1c-eligible-inputs.md`。
+- frozen-D0 收口：`wiki/survey/workbench/system-first-stage1b/2026-07-22-frozen-d0-exhaustion-closeout.md`。
+- 长期记录：`wiki/survey/registry/README.md`；PDF/e-print/提取文本仍在 `SPEECHRL_DATA_DIR`。
+- 本轮 checks：`docs/checks/stage1b-closeout/2026-07-22/`。
 
-1. 第二位独立 coder 对三篇冻结全文做盲态 3×7 H5 编码；
-2. 计算 21-field agreement，并由第三方裁决全部 disagreement；
-3. 在同一 commit 生成 fresh NT/POSIX v7 leaves 与 aggregate，精确核验 extractor/p11；
-4. 重建 source manifest/package，经零新发现敌意内审后晋升 immutable round-16；
-5. 独立 reviewer 对 exact package 给出 search-design SIGN/WITHHOLD；
-6. SIGN 后 owner 才能对同一包授权 Stage-1B。
+## 5. 下一动作
 
-任一项未闭合都维持 Stage-1A；自动 PASS、实现者文字或 draft response schema 不能代签。
+生成 Stage-1B release manifest，绑定 protocol、D0/delta/T1、226 roster、strict coding、D2
+sidecars、mapping tables、eligible inputs、H5 与 unresolved counts；运行可重放检查并冻结 commit。
+随后只请求一次针对该固定 commit 的独立 Stage-1C transition review。reviewer `SIGN` 前不正式
+启动 Stage-1C；即使签字，模型/复现仍留待后续执行门。
 
-## 5. Exposure 与诚信记账
+## 6. 失效条件
 
-本次 repair scope 内：**systematic discovery queries = 0；research model/smoke = 0；dataset
-metric/prototype = 0**。此零值不覆盖历史；`INHERITED_PRIOR_EXPOSURE` 保持非零。known-ID metadata
-和本地全文核验为非零，但不得获得 query recall credit。早期 arXiv 429 与 wiki dry-run push-attempt
-事故继续保留，不因后续离线 PASS 删除。
-
-未发现 fabrication/falsification/plagiarism；biased-coding/selective-citation 风险已整改，但独立
-判断仍不能由实现者制造。
-
-## 6. 当前路由
-
-- 当前入口：`current/README.md` → `status.md` → `protocol.md`；methods/H5/prior 按需读 adaptation、
-  codebook、`core-prior-routing.md`。数字正典在 `current/data/`，散文不复制。
-- 审计入口：`wiki/audit/system-first-stage1a/INDEX.md`；external reviews 不冒充 immutable round-16。
-- `current/manifest.json` 是上一 release；本提案改由 `data/proposal-source-manifest-v1.json` 绑定。
-
-## 7. 下一授权动作
-
-下一动作是在冻结三篇全文上取得 H5 coder-B 盲态编码并完成分歧裁决。闭合后才允许生成 v7
-双平台证据和 immutable round-16 包。Stage-1B 第一条 query 仍必须等待 exact-package reviewer
-sign-off 与 owner same-package authorization。
-
-## 8. 失效条件
-
-任一事件触发本页 supersede-in-place：union/receipt/selection 漂移；review `DISAGREE`；v7
-输入/平台/occupancy 不一致；protocol/query bytes 或 exposure 变化；新增 blocker 或 reviewer/owner
-新裁决。旧叙述只留 audit/archive，不向热层叠加 amendment。
+union/receipt/selection 漂移、review `DISAGREE`、source/lock bytes 或 exposure 改变、新 blocker
+或 owner/reviewer 新裁决，均触发本页 supersede-in-place。旧叙述只留 audit/archive，不叠加
+amendment 到热层。

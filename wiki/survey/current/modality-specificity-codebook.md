@@ -1,7 +1,8 @@
 ---
 artifact_id: "SF-MODALITY-SPECIFICITY-CODEBOOK-V2-2026-07-21-01"
 role: "current Stage-1B coding input for H5; calibration rows are non-load-bearing"
-stage1b_execution_authorized: false
+stage1b_execution_authorized: true
+h5_load_bearing_use: "WITHHOLD_UNTIL_BLIND_CODER_B_AND_ADJUDICATION"
 supersedes: "SF-MODALITY-SPECIFICITY-CODEBOOK-V1-2026-07-21-01"
 ---
 

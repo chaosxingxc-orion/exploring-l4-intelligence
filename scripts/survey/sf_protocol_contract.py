@@ -41,18 +41,18 @@ def normalize_clause(text: str) -> str:
 
 CONTRACTS = (
     Contract(
-        "stage1a-no-execution",
+        "stage1b-scoped-mapping-authorization",
         "§0",
-        "Work authorized by this file is limited to protocol consolidation, static compilation, "
-        "schema/data repair, local validation, packaging, and independent re-review. It does not "
-        "authorize a discovery query, a paper-discovery crawl, a research-model call, a model smoke, "
-        "a dataset experiment, or a directional prototype.",
+        "frozen discovery queries, T1 routes, identity/deduplication, REC-0 screening, citation "
+        "traversal, non-H5 method-path coding, "
+        "D2 full-text work, and ordinary mapping synthesis are authorized;",
     ),
     Contract(
-        "stage1b-no-model-or-smoke",
+        "stage1b-no-model-dataset-or-prototype",
         "§0",
         "Stage-1B means systematic-mapping execution. Stage-1B runs no research model or smoke and, "
-        "more explicitly, Stage-1B runs no research-model call and no smoke throughout the stage.",
+        "more explicitly, no research-model call, model smoke, dataset inference/metric experiment, "
+        "headroom test, or directional prototype may run anywhere in this stage.",
     ),
     Contract(
         "incremental-boundaries-and-append-only",

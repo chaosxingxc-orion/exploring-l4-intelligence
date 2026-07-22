@@ -1,0 +1,4949 @@
+{
+  "instruments": [
+    {
+      "abstract_url": "https://arxiv.org/abs/2210.07677",
+      "actions": [
+        "decoding",
+        "memory",
+        "select"
+      ],
+      "arxiv_id": "2210.07677",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "TransFusion: Transcribing Speech with Multinomial Diffusion"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2212.13378",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "arxiv_id": "2212.13378",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Don't Be So Sure! Boosting ASR Decoding via Confidence Relaxation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2402.17735",
+      "actions": [
+        "search"
+      ],
+      "arxiv_id": "2402.17735",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "High-Fidelity Neural Phonetic Posteriorgrams"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2407.11010",
+      "actions": [
+        "decoding",
+        "memory",
+        "search",
+        "select",
+        "stop"
+      ],
+      "arxiv_id": "2407.11010",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "feedback",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "st"
+      ],
+      "title": "Navigating the Minefield of MT Beam Search in Cascaded Streaming Speech Translation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.05146",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2410.05146",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "st"
+      ],
+      "title": "CTC-GMM: CTC guided modality matching for fast and accurate streaming speech translation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.22846",
+      "actions": [
+        "decoding",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2506.22846",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Boosting CTC-Based ASR Using LLM-Based Intermediate Loss Regularization"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.16622",
+      "actions": [
+        "decoding",
+        "refine",
+        "search",
+        "select",
+        "selection",
+        "stopping"
+      ],
+      "arxiv_id": "2509.16622",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Audio-Conditioned Diffusion LLMs for ASR and Deliberation Processing"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.05478",
+      "actions": [
+        "fallback",
+        "majority voting",
+        "memory",
+        "search"
+      ],
+      "arxiv_id": "2510.05478",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "consensus",
+        "reward",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "spoken_qa_reasoning"
+      ],
+      "title": "AQA-TTRL: Self-Adaptation in Audio Question Answering with Test-Time Reinforcement Learning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.12720",
+      "actions": [
+        "refine",
+        "revise",
+        "tool calling"
+      ],
+      "arxiv_id": "2510.12720",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "judge",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Omni-Captioner: Data Pipeline, Models, and Benchmark for Omni Detailed Perception"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.12995",
+      "actions": [
+        "decoding",
+        "select",
+        "stopping"
+      ],
+      "arxiv_id": "2510.12995",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "Continuous-Token Diffusion for Speaker-Referenced TTS in Multimodal LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.14304",
+      "actions": [
+        "allocate",
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "majority voting",
+        "memory",
+        "planning",
+        "prune",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2601.14304",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "critic",
+        "reward",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "audio_generation"
+      ],
+      "title": "Guided by the Plan: Enhancing Faithful Autoregressive Text-to-Audio Generation with Guided Decoding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.17902",
+      "actions": [
+        "decoding",
+        "fallback",
+        "prune",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2601.17902",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "dLLM-ASR: A Faster Diffusion LLM-based Framework for Speech Recognition"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.13685",
+      "actions": [
+        "select",
+        "selection",
+        "tool calling"
+      ],
+      "arxiv_id": "2602.13685",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "feedback",
+        "reward",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "spoken_qa_reasoning"
+      ],
+      "title": "AuTAgent: A Reinforcement Learning Framework for Tool-Augmented Audio Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.16606",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "route",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2603.16606",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "similarity"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.23463",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "route",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2605.23463",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "consensus",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "similarity",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "tts"
+      ],
+      "title": "StepAudio 2.5 Technical Report"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.25179",
+      "actions": [
+        "decoding",
+        "memory",
+        "selection"
+      ],
+      "arxiv_id": "2605.25179",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "spoken_qa_reasoning"
+      ],
+      "title": "Locality Matters for Training-Free Audio Token Compression in Audio-Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.28456",
+      "actions": [
+        "decoding",
+        "refine",
+        "revise",
+        "search",
+        "select"
+      ],
+      "arxiv_id": "2605.28456",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Diffusion Large Language Models for Visual Speech Recognition"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.30899",
+      "actions": [
+        "selection"
+      ],
+      "arxiv_id": "2605.30899",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser",
+        "slu",
+        "st"
+      ],
+      "title": "A Unified and Reproducible Experimentation Framework for Speech Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.02548",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "arxiv_id": "2606.02548",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "SN-WER: Script-Normalized WER for Multi-Script Indic ASR Evaluation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.07397",
+      "actions": [
+        "planning",
+        "refine",
+        "revise",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2606.07397",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "critic",
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection"
+      ],
+      "speech_task_tags": [
+        "audio_generation",
+        "tts"
+      ],
+      "title": "Audio-Oscar: A Multi-Agent System for Complex Audio Scene Generation, Orchestration, and Refinement"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.09366",
+      "actions": [
+        "decoding",
+        "route",
+        "routing",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2606.09366",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser"
+      ],
+      "title": "Is Text All You Need? Text as a Universal Information Bottleneck for Speech LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.09837",
+      "actions": [
+        "decoding",
+        "planning",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "arxiv_id": "2606.09837",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "reward",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection",
+        "uncertainty",
+        "value function",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "Self-EmoQ: Plutchik-Guided Value-based Planning to Drive Streaming Emotional TTS"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.20457",
+      "actions": [
+        "memory"
+      ],
+      "arxiv_id": "2606.20457",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "Repurposing a Speech Classifier for Guided Diffusion-Based Speech Generation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.21215",
+      "actions": [
+        "routing",
+        "search"
+      ],
+      "arxiv_id": "2606.21215",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "speaker",
+        "tts"
+      ],
+      "title": "Speaker Identity in Non-Verbal Vocalizations: Conditional Distillation and Mixture of Experts Approach"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.28732",
+      "actions": [
+        "decoding",
+        "refine"
+      ],
+      "arxiv_id": "2606.28732",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "CTC-Seeded Token Edit Refinement for Non-Autoregressive Speech Recognition"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.06027",
+      "actions": [
+        "decoding",
+        "memory",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "arxiv_id": "2607.06027",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "judge",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "Fréchet Distance Loss on Speech Representations for Text-to-Speech Synthesis"
+    }
+  ],
+  "local_speech_task_match": [
+    {
+      "abstract_url": "https://arxiv.org/abs/2210.07677",
+      "actions": [
+        "decoding",
+        "memory",
+        "select"
+      ],
+      "arxiv_id": "2210.07677",
+      "dataset": "librispeech",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "TransFusion: Transcribing Speech with Multinomial Diffusion"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2212.13378",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "arxiv_id": "2212.13378",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Don't Be So Sure! Boosting ASR Decoding via Confidence Relaxation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.05146",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2410.05146",
+      "dataset": "covost2",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "st"
+      ],
+      "task": "st",
+      "task_suitability": "TASK_MATCH",
+      "title": "CTC-GMM: CTC guided modality matching for fast and accurate streaming speech translation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.05146",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2410.05146",
+      "dataset": "fleurs-r",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [
+        "st"
+      ],
+      "task": "st",
+      "task_suitability": "TASK_MATCH",
+      "title": "CTC-GMM: CTC guided modality matching for fast and accurate streaming speech translation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.05435",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "arxiv_id": "2502.05435",
+      "dataset": "mmau-mini",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score"
+      ],
+      "speech_task_tags": [
+        "audio_generation",
+        "spoken_qa_reasoning"
+      ],
+      "task": "audio_generation",
+      "task_suitability": "TASK_MATCH",
+      "title": "Unbiased Sliced Wasserstein Kernels for High-Quality Audio Captioning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.22846",
+      "actions": [
+        "decoding",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2506.22846",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Boosting CTC-Based ASR Using LLM-Based Intermediate Loss Regularization"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.16622",
+      "actions": [
+        "decoding",
+        "refine",
+        "search",
+        "select",
+        "selection",
+        "stopping"
+      ],
+      "arxiv_id": "2509.16622",
+      "dataset": "librispeech",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Audio-Conditioned Diffusion LLMs for ASR and Deliberation Processing"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.09085",
+      "actions": [
+        "decoding",
+        "memory",
+        "prune",
+        "search",
+        "selection"
+      ],
+      "arxiv_id": "2510.09085",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "FLToP CTC: Frame-Level Token Pruning via Relative Threshold for Efficient and Memory-Saving Decoding on Diverse Platforms"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.14304",
+      "actions": [
+        "allocate",
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "majority voting",
+        "memory",
+        "planning",
+        "prune",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2601.14304",
+      "dataset": "mmau-mini",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "critic",
+        "reward",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "audio_generation"
+      ],
+      "task": "audio_generation",
+      "task_suitability": "TASK_MATCH",
+      "title": "Guided by the Plan: Enhancing Faithful Autoregressive Text-to-Audio Generation with Guided Decoding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.17902",
+      "actions": [
+        "decoding",
+        "fallback",
+        "prune",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2601.17902",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "dLLM-ASR: A Faster Diffusion LLM-based Framework for Speech Recognition"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.05231",
+      "actions": [
+        "decoding",
+        "revise",
+        "search",
+        "steering"
+      ],
+      "arxiv_id": "2603.05231",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Boosting ASR Robustness via Test-Time Reinforcement Learning with Audio-Text Semantic Rewards"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.16606",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "route",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2603.16606",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "similarity"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.23463",
+      "actions": [
+        "decoding",
+        "memory",
+        "refine",
+        "route",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2605.23463",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "consensus",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "similarity",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "tts"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "StepAudio 2.5 Technical Report"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.30899",
+      "actions": [
+        "selection"
+      ],
+      "arxiv_id": "2605.30899",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser",
+        "slu",
+        "st"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "A Unified and Reproducible Experimentation Framework for Speech Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.30899",
+      "actions": [
+        "selection"
+      ],
+      "arxiv_id": "2605.30899",
+      "dataset": "meld",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser",
+        "slu",
+        "st"
+      ],
+      "task": "ser",
+      "task_suitability": "TASK_MATCH",
+      "title": "A Unified and Reproducible Experimentation Framework for Speech Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.30899",
+      "actions": [
+        "selection"
+      ],
+      "arxiv_id": "2605.30899",
+      "dataset": "covost2",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser",
+        "slu",
+        "st"
+      ],
+      "task": "st",
+      "task_suitability": "TASK_MATCH",
+      "title": "A Unified and Reproducible Experimentation Framework for Speech Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.09366",
+      "actions": [
+        "decoding",
+        "route",
+        "routing",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2606.09366",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr",
+        "ser"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "Is Text All You Need? Text as a Universal Information Bottleneck for Speech LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.28732",
+      "actions": [
+        "decoding",
+        "refine"
+      ],
+      "arxiv_id": "2606.28732",
+      "dataset": "librispeech",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "task": "asr",
+      "task_suitability": "TASK_MATCH",
+      "title": "CTC-Seeded Token Edit Refinement for Non-Autoregressive Speech Recognition"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.06027",
+      "actions": [
+        "decoding",
+        "memory",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "arxiv_id": "2607.06027",
+      "dataset": "seed-tts-eval",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_INSTRUMENT",
+      "signals": [
+        "confidence",
+        "judge",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "task": "tts",
+      "task_suitability": "TASK_MATCH",
+      "title": "Fréchet Distance Loss on Speech Representations for Text-to-Speech Synthesis"
+    }
+  ],
+  "negative_falsifiers": [
+    {
+      "abstract_url": "https://arxiv.org/abs/2302.01560",
+      "actions": [
+        "decoding",
+        "planning",
+        "refine",
+        "route",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2302.01560",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward"
+      ],
+      "speech_task_tags": [],
+      "title": "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2309.07925",
+      "actions": [
+        "decoding"
+      ],
+      "adverse_evidence": [
+        "bias"
+      ],
+      "arxiv_id": "2309.07925",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "ser"
+      ],
+      "title": "Hierarchical Audio-Visual Information Fusion with Multi-label Joint Decoding for MER 2023"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2310.16029",
+      "actions": [
+        "planning",
+        "search",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2310.16029",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty",
+        "value function"
+      ],
+      "speech_task_tags": [],
+      "title": "Finetuning Offline World Models in the Real World"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2406.12814",
+      "actions": [
+        "search",
+        "select",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "upper bound"
+      ],
+      "arxiv_id": "2406.12814",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "value function",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Dissecting Adversarial Robustness of Multimodal LM Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2407.00092",
+      "actions": [
+        "planning",
+        "refine",
+        "route",
+        "routing",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2407.00092",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "Visual Reasoning and Multi-Agent Approach in Multimodal Large Language Models (MLLMs): Solving TSP and mTSP Combinatorial Challenges"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.00467",
+      "actions": [
+        "planning",
+        "refine",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "fails"
+      ],
+      "arxiv_id": "2410.00467",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Dynamic Planning for LLM-based Graphical User Interface Automation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.20027",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias"
+      ],
+      "arxiv_id": "2410.20027",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "Agentic Feedback Loop Modeling Improves Recommendation and User Simulation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2410.23230",
+      "actions": [
+        "planning",
+        "refine",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade"
+      ],
+      "arxiv_id": "2410.23230",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Aligning Audio-Visual Joint Representations with an Agentic Workflow"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2411.10440",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "majority voting",
+        "regenerate",
+        "revise",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation",
+        "plateau"
+      ],
+      "arxiv_id": "2411.10440",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "LLaVA-CoT: Let Vision Language Models Reason Step-by-Step"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2411.17451",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "majority voting",
+        "planning",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "oracle"
+      ],
+      "arxiv_id": "2411.17451",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "VL-RewardBench: A Challenging Benchmark for Vision-Language Generative Reward Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2412.03704",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "mcts",
+        "planning",
+        "search",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2412.03704",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "reward",
+        "score",
+        "value function",
+        "value model"
+      ],
+      "speech_task_tags": [],
+      "title": "Scaling Inference-Time Search with Vision Value Model for Improved Visual Comprehension"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2412.06474",
+      "actions": [
+        "decoding",
+        "majority voting",
+        "memory",
+        "search",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "unreliable"
+      ],
+      "arxiv_id": "2412.06474",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Enhancing Vision-Language Model Reliability with Uncertainty-Guided Dropout Decoding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2501.05755",
+      "actions": [
+        "majority voting",
+        "memory"
+      ],
+      "adverse_evidence": [
+        "bias"
+      ],
+      "arxiv_id": "2501.05755",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "CognoSpeak: an automatic, remote assessment of early cognitive decline in real-world conversational speech"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.05435",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "limitation",
+        "upper bound"
+      ],
+      "arxiv_id": "2502.05435",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score"
+      ],
+      "speech_task_tags": [
+        "audio_generation",
+        "spoken_qa_reasoning"
+      ],
+      "title": "Unbiased Sliced Wasserstein Kernels for High-Quality Audio Captioning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.06589",
+      "actions": [
+        "planning",
+        "refine",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails"
+      ],
+      "arxiv_id": "2502.06589",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Hephaestus: Improving Fundamental Agent Capabilities of Large Language Models through Continual Pre-Training"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.18770",
+      "actions": [
+        "select",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "reward hacking",
+        "unreliable",
+        "upper bound"
+      ],
+      "arxiv_id": "2502.18770",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "value function"
+      ],
+      "speech_task_tags": [],
+      "title": "Reward Shaping to Mitigate Reward Hacking in RLHF"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.19328",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2502.19328",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2503.09349",
+      "actions": [
+        "decoding",
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias"
+      ],
+      "arxiv_id": "2503.09349",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Performance Modeling for Correlation-based Neural Decoding of Auditory Attention to Speech"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2504.08687",
+      "actions": [
+        "allocate",
+        "refine",
+        "revise",
+        "revision"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "limitation"
+      ],
+      "arxiv_id": "2504.08687",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback"
+      ],
+      "speech_task_tags": [],
+      "title": "Voice Interaction With Conversational AI Could Facilitate Thoughtful Reflection and Substantive Revision in Writing"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2504.16728",
+      "actions": [
+        "mcts",
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "select",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "reward hacking"
+      ],
+      "arxiv_id": "2504.16728",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "IRIS: Interactive Research Ideation System for Accelerating Scientific Discovery"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2505.14996",
+      "actions": [
+        "memory",
+        "prune",
+        "refine",
+        "revision",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation",
+        "no improvement",
+        "oracle",
+        "unreliable"
+      ],
+      "arxiv_id": "2505.14996",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "scoring",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "MAS-ZERO: Designing Multi-Agent Systems with Zero Supervision"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2505.22453",
+      "actions": [
+        "majority voting",
+        "select"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2505.22453",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "value model",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "First SFT, Second RL, Third UPT: Continual Improving Multi-Modal LLM Reasoning via Unsupervised Post-Training"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.04625",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "unreliable"
+      ],
+      "arxiv_id": "2506.04625",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Advancing Tool-Augmented Large Language Models via Meta-Verification and Reflection Learning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.05294",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "memory",
+        "planning",
+        "search",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "reward hacking"
+      ],
+      "arxiv_id": "2506.05294",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "A Smooth Sea Never Made a Skilled SAILOR: Robust Imitation via Learning to Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.18959",
+      "actions": [
+        "allocate",
+        "decoding",
+        "planning",
+        "refine",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2506.18959",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "From Web Search towards Agentic Deep Research: Incentivizing Search with Reasoning Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.23049",
+      "actions": [
+        "memory",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2506.23049",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "AURA: Agent for Understanding, Reasoning, and Automated Tool Use in Voice-Driven Tasks"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2507.02755",
+      "actions": [
+        "decoding",
+        "memory",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias"
+      ],
+      "arxiv_id": "2507.02755",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback"
+      ],
+      "speech_task_tags": [
+        "ser",
+        "speaker"
+      ],
+      "title": "Multi-agent Auditory Scene Analysis"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2507.07115",
+      "actions": [
+        "fallback",
+        "memory",
+        "planning",
+        "refine",
+        "revise",
+        "search"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2507.07115",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Autonomous Control Leveraging LLMs: An Agentic Framework for Next-Generation Industrial Automation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2508.02391",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "search",
+        "select",
+        "selection",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "oracle"
+      ],
+      "arxiv_id": "2508.02391",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verifier"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Inference-time Scaling for Diffusion-based Audio Super-resolution"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2508.11987",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "select",
+        "selection",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation",
+        "no improvement"
+      ],
+      "arxiv_id": "2508.11987",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "feedback",
+        "judge",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "FutureX: An Advanced Live Benchmark for LLM Agents in Future Prediction"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2508.21475",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2508.21475",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "judge",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "MMSearch-Plus: Benchmarking Provenance-Aware Search for Multimodal Browsing Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.09245",
+      "actions": [
+        "majority voting",
+        "mcts",
+        "search",
+        "select",
+        "selection",
+        "stopping",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2509.09245",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [],
+      "title": "Jupiter: Enhancing LLM Data Analysis Capabilities via Notebook and Inference-Time Value-Guided Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.11656",
+      "actions": [
+        "memory",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "limitation"
+      ],
+      "arxiv_id": "2509.11656",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "judge"
+      ],
+      "speech_task_tags": [],
+      "title": "MALLM: Multi-Agent Large Language Models Framework"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.13642",
+      "actions": [
+        "planning",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "reward hacking"
+      ],
+      "arxiv_id": "2509.13642",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "value model"
+      ],
+      "speech_task_tags": [],
+      "title": "LLM-I: LLMs are Naturally Interleaved Multimodal Creators"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.20502",
+      "actions": [
+        "majority voting",
+        "refine",
+        "revise",
+        "revision"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2509.20502",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "MARS: toward more efficient multi-agent collaboration for LLM reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.22644",
+      "actions": [
+        "memory",
+        "refine",
+        "select",
+        "selection",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2509.22644",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "WebGen-Agent: Enhancing Interactive Website Generation with Multi-Level Feedback and Step-Level Reinforcement Learning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.25370",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "memory",
+        "planning",
+        "refine",
+        "revise",
+        "revision",
+        "search",
+        "selection",
+        "stop",
+        "stopping",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2509.25370",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Where LLM Agents Fail and How They can Learn From Failures"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2509.26346",
+      "actions": [
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "failure",
+        "limitation",
+        "upper bound"
+      ],
+      "arxiv_id": "2509.26346",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.04618",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2510.04618",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge"
+      ],
+      "speech_task_tags": [],
+      "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.09085",
+      "actions": [
+        "decoding",
+        "memory",
+        "prune",
+        "search",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2510.09085",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "FLToP CTC: Frame-Level Token Pruning via Relative Threshold for Efficient and Memory-Saving Decoding on Diverse Platforms"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2510.18179",
+      "actions": [
+        "majority voting",
+        "planning",
+        "refine",
+        "search",
+        "selection",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2510.18179",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "reward",
+        "scoring",
+        "uncertainty",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Adaptive Coopetition: Leveraging Coarse Verifier Signals for Resilient Multi-Agent LLM Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.11005",
+      "actions": [
+        "refine",
+        "revise",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2511.11005",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Draft and Refine with Visual Experts"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.11373",
+      "actions": [
+        "decoding",
+        "refine",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "limitation"
+      ],
+      "arxiv_id": "2511.11373",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "MarsRL: Advancing Multi-Agent Reasoning System via Reinforcement Learning with Agentic Pipeline Parallelism"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.12710",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2511.12710",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "value function",
+        "verifier"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Evolve the Method, Not the Prompts: Evolutionary Synthesis of Jailbreak Attacks on LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.16972",
+      "actions": [
+        "decoding",
+        "mcts",
+        "memory",
+        "planning",
+        "refine",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2511.16972",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "ToC: Tree-of-Claims Search with Multi-Agent Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.18760",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "memory",
+        "refine",
+        "revise",
+        "search",
+        "select",
+        "selection",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2511.18760",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "HERMES: Towards Efficient and Verifiable Mathematical Reasoning in LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.21654",
+      "actions": [
+        "search"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "reward hacking"
+      ],
+      "arxiv_id": "2511.21654",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "judge",
+        "reward",
+        "score",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "EvilGenie: A Reward Hacking Benchmark"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2512.00831",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "memory",
+        "planning",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "limitation",
+        "overthinking"
+      ],
+      "arxiv_id": "2512.00831",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "ReJump: A Tree-Jump Representation for Analyzing and Improving LLM Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2512.02340",
+      "actions": [
+        "memory",
+        "planning",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure"
+      ],
+      "arxiv_id": "2512.02340",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "judge",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Reasoning Path and Latent State Analysis for Multi-view Visual Spatial Reasoning: A Cognitive Science Perspective"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2512.10170",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2512.10170",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Semantic-Aware Confidence Calibration for Automated Audio Captioning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2512.16250",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "select",
+        "selection",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "oracle",
+        "upper bound"
+      ],
+      "arxiv_id": "2512.16250",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "self evaluation",
+        "self reflection",
+        "self-evaluation",
+        "self-reflection",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "AMUSE: Audio-Visual Benchmark and Alignment Framework for Agentic Multi-Speaker Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2512.24952",
+      "actions": [
+        "memory",
+        "planning",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2512.24952",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "Beyond the Last Frame: Process-aware Evaluation for Generative Video Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.00290",
+      "actions": [
+        "memory",
+        "refine",
+        "search",
+        "selection",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2601.00290",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "ClinicalReTrial: Clinical Trial Redesign with Self-Evolving Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.01498",
+      "actions": [
+        "memory",
+        "refine",
+        "search",
+        "selection",
+        "steering",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2601.01498",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "self evaluation",
+        "self-evaluation",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "From Failure to Mastery: Generating Hard Samples for Tool-use Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.04500",
+      "actions": [
+        "memory",
+        "planning",
+        "revision",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "upper bound"
+      ],
+      "arxiv_id": "2601.04500",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "GUITester: Enabling GUI Agents for Exploratory Defect Discovery"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.06328",
+      "actions": [
+        "planning",
+        "revise",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2601.06328",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "C-World: A Computer Use Agent Environment Creator"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.22964",
+      "actions": [
+        "decoding",
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "selection",
+        "stop",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "failure",
+        "limitation",
+        "plateau"
+      ],
+      "arxiv_id": "2601.22964",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "EvoClinician: A Self-Evolving Agent for Multi-Turn Medical Diagnosis via Test-Time Evolutionary Learning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.01297",
+      "actions": [
+        "refine",
+        "revise",
+        "revision",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "limitation",
+        "unreliable"
+      ],
+      "arxiv_id": "2602.01297",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "feedback",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "RE-MCDF: Closed-Loop Multi-Expert LLM Reasoning for Knowledge-Grounded Clinical Diagnosis"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.05327",
+      "actions": [
+        "mcts",
+        "planning",
+        "refine",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2602.05327",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "value function"
+      ],
+      "speech_task_tags": [],
+      "title": "ProAct: Agentic Lookahead in Interactive Environments"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.07187",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "revise",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "unreliable"
+      ],
+      "arxiv_id": "2602.07187",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "PreFlect: From Retrospective to Prospective Reflection in Large Language Model Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.11757",
+      "actions": [
+        "planning",
+        "refine",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2602.11757",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection"
+      ],
+      "speech_task_tags": [],
+      "title": "Code2Worlds: Empowering Coding LLMs for 4D World Generation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.11931",
+      "actions": [
+        "decoding",
+        "planning",
+        "route",
+        "routing",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "upper bound"
+      ],
+      "arxiv_id": "2602.11931",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "AdaptEvolve: Improving Efficiency of Evolutionary AI Agents through Adaptive Model Selection"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.16493",
+      "actions": [
+        "abstain",
+        "memory",
+        "revision"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation",
+        "oracle",
+        "unreliable",
+        "upper bound"
+      ],
+      "arxiv_id": "2602.16493",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "MMA: Multimodal Memory Agent"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.16898",
+      "actions": [
+        "memory",
+        "planning",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure"
+      ],
+      "arxiv_id": "2602.16898",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "MALLVI: A Multi-Agent Framework for Integrated Generalized Robotics Manipulation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.18998",
+      "actions": [
+        "decoding",
+        "mcts",
+        "planning",
+        "search",
+        "select",
+        "selection",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "failure",
+        "oracle",
+        "upper bound"
+      ],
+      "arxiv_id": "2602.18998",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Benchmark Test-Time Scaling of General LLM Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.19633",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "planning",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure",
+        "oracle",
+        "upper bound"
+      ],
+      "arxiv_id": "2602.19633",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "TAPE: Tool-Guided Adaptive Planning and Constrained Execution in Language Model Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.23681",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "fallback",
+        "memory",
+        "route",
+        "routing",
+        "search",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "failure",
+        "overthinking",
+        "plateau"
+      ],
+      "arxiv_id": "2602.23681",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "ODAR: Principled Adaptive Routing for LLM Reasoning via Active Inference"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.02510",
+      "actions": [
+        "mcts",
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure",
+        "limitation",
+        "oracle",
+        "unreliable"
+      ],
+      "arxiv_id": "2603.02510",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "ParEVO: Synthesizing Code for Irregular Data: High-Performance Parallelism through Agentic Evolution"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.05231",
+      "actions": [
+        "decoding",
+        "revise",
+        "search",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "unreliable"
+      ],
+      "arxiv_id": "2603.05231",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Boosting ASR Robustness via Test-Time Reinforcement Learning with Audio-Text Semantic Rewards"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.09232",
+      "actions": [
+        "decoding",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2603.09232",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "How Contrastive Decoding Enhances Large Audio Language Models?"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.11397",
+      "actions": [
+        "allocate",
+        "decoding",
+        "memory"
+      ],
+      "adverse_evidence": [
+        "limitation",
+        "unreliable"
+      ],
+      "arxiv_id": "2603.11397",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [
+        "ser"
+      ],
+      "title": "Edge-Cloud Collaborative Speech Emotion Captioning via Token-Level Speculative Decoding in Audio-Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.13017",
+      "actions": [
+        "memory",
+        "search"
+      ],
+      "adverse_evidence": [
+        "degrade"
+      ],
+      "arxiv_id": "2603.13017",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus"
+      ],
+      "speech_task_tags": [],
+      "title": "Structured Distillation for Personalized Agent Memory: 11x Token Reduction with Retrieval Preservation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.13258",
+      "actions": [
+        "memory",
+        "refine",
+        "search",
+        "selection",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "limitation",
+        "plateau"
+      ],
+      "arxiv_id": "2603.13258",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Your Code Agent Can Grow Alongside You with Structured Memory"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.15401",
+      "actions": [
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "degrade"
+      ],
+      "arxiv_id": "2603.15401",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "SWE-Skills-Bench: Do Agent Skills Actually Help in Real-World Software Engineering?"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.17455",
+      "actions": [
+        "memory",
+        "route",
+        "routing",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2603.17455",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "FACE-net: Factual Calibration and Emotion Augmentation for Retrieval-enhanced Emotional Video Captioning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.21357",
+      "actions": [
+        "decoding",
+        "fallback",
+        "memory",
+        "planning",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "oracle",
+        "unreliable",
+        "upper bound"
+      ],
+      "arxiv_id": "2603.21357",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "critic",
+        "judge",
+        "reward",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "AgentHER: Hindsight Experience Replay for LLM Agent Trajectory Relabeling"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.28488",
+      "actions": [
+        "majority voting",
+        "refine",
+        "search",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "oracle",
+        "plateau",
+        "unreliable"
+      ],
+      "arxiv_id": "2603.28488",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "critic",
+        "feedback",
+        "judge",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Courtroom-Style Multi-Agent Debate with Progressive RAG and Role-Switching for Controversial Claim Verification"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.01212",
+      "actions": [
+        "allocate",
+        "memory",
+        "planning",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "unreliable"
+      ],
+      "arxiv_id": "2604.01212",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "$\\texttt{YC-Bench}$: Benchmarking AI Agents for Long-Term Planning and Consistent Execution"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.02869",
+      "actions": [
+        "decoding",
+        "search",
+        "selection",
+        "stop",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure"
+      ],
+      "arxiv_id": "2604.02869",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "reward"
+      ],
+      "speech_task_tags": [],
+      "title": "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.10493",
+      "actions": [
+        "mcts",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "limitation"
+      ],
+      "arxiv_id": "2604.10493",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "SWE-Shepherd: Advancing PRMs for Reinforcing Code Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.12867",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "route",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "reward hacking",
+        "upper bound"
+      ],
+      "arxiv_id": "2604.12867",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "QuarkMedSearch: A Long-Horizon Deep Search Agent for Exploring Medical Intelligence"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.14799",
+      "actions": [
+        "abstain",
+        "decoding",
+        "fallback",
+        "majority voting",
+        "revision",
+        "routing",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "failure",
+        "limitation",
+        "oracle",
+        "upper bound"
+      ],
+      "arxiv_id": "2604.14799",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "feedback",
+        "judge",
+        "score",
+        "self evaluation",
+        "self-evaluation",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Knowing When Not to Answer: Evaluating Abstention in Multimodal Reasoning Systems"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.19797",
+      "actions": [
+        "decoding",
+        "refine",
+        "selection",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "degrade"
+      ],
+      "arxiv_id": "2604.19797",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Enhancing ASR Performance in the Medical Domain for Dravidian Languages"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.27283",
+      "actions": [
+        "abstain",
+        "fallback",
+        "memory",
+        "search",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure",
+        "limitation",
+        "negative result",
+        "oracle",
+        "unreliable",
+        "upper bound"
+      ],
+      "arxiv_id": "2604.27283",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "critic",
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Learning When to Remember: Risk-Sensitive Contextual Bandits for Abstention-Aware Memory Retrieval in LLM-Based Coding Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.00034",
+      "actions": [
+        "allocate",
+        "fallback",
+        "memory",
+        "planning",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2605.00034",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Symbolic Execution Meets Multi-LLM Orchestration: Detecting Memory Vulnerabilities in Incomplete Rust CVE Snippets"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.02289",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "route",
+        "routing",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2605.02289",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "EngiAgent: Fully Connected Coordination of LLM Agents for Solving Open-ended Engineering Problems with Feasible Solutions"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.03042",
+      "actions": [
+        "fallback",
+        "memory",
+        "refine",
+        "revise",
+        "revision",
+        "route",
+        "routing",
+        "search",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure",
+        "oracle",
+        "plateau",
+        "unreliable"
+      ],
+      "arxiv_id": "2605.03042",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "ARIS: Autonomous Research via Adversarial Multi-Agent Collaboration"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.05185",
+      "actions": [
+        "decoding",
+        "search",
+        "select",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "failure",
+        "unreliable"
+      ],
+      "arxiv_id": "2605.05185",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.06607",
+      "actions": [
+        "memory",
+        "planning",
+        "revise",
+        "search",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2605.06607",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "AI CFD Scientist: Toward Open-Ended Computational Fluid Dynamics Discovery with Physics-Aware AI Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.08083",
+      "actions": [
+        "allocate",
+        "best of n",
+        "best-of-n",
+        "majority voting",
+        "memory",
+        "prune",
+        "refine",
+        "search",
+        "select",
+        "selection",
+        "stop",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2605.08083",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "feedback",
+        "score",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.08638",
+      "actions": [
+        "memory",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "failure",
+        "plateau"
+      ],
+      "arxiv_id": "2605.08638",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "consensus",
+        "judge",
+        "reward",
+        "score",
+        "value function",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Geometry Guided Self-Consistency for Physical AI"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.08762",
+      "actions": [
+        "refine",
+        "search",
+        "select",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2605.08762",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Omni-DeepSearch: A Benchmark for Audio-Driven Omni-Modal Deep Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.08904",
+      "actions": [
+        "decoding",
+        "memory",
+        "planning",
+        "refine",
+        "revise",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure",
+        "limitation",
+        "plateau",
+        "upper bound"
+      ],
+      "arxiv_id": "2605.08904",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "self reflection",
+        "self-reflection"
+      ],
+      "speech_task_tags": [],
+      "title": "OPT-BENCH: Evaluating the Iterative Self-Optimization of LLM Agents in Large-Scale Search Spaces"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.11866",
+      "actions": [
+        "planning",
+        "refine",
+        "regenerate",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails"
+      ],
+      "arxiv_id": "2605.11866",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection"
+      ],
+      "speech_task_tags": [
+        "tts"
+      ],
+      "title": "AuDirector: A Self-Reflective Closed-Loop Framework for Immersive Audio Storytelling"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.13414",
+      "actions": [
+        "abstain",
+        "allocate",
+        "planning",
+        "revise",
+        "route",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "failure",
+        "oracle",
+        "unreliable"
+      ],
+      "arxiv_id": "2605.13414",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "TRIAGE: Evaluating Prospective Metacognitive Control in LLMs under Resource Constraints"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.15226",
+      "actions": [
+        "memory",
+        "planning",
+        "route",
+        "search",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "oracle"
+      ],
+      "arxiv_id": "2605.15226",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Is Agentic AI Ready for Real-World Hardware Engineering? A Deep Dive with Phoenix-bench"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.17444",
+      "actions": [
+        "memory",
+        "refine",
+        "regenerate",
+        "revise",
+        "search",
+        "select"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2605.17444",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "MemRepair: Hierarchical Memory for Agentic Repository-Level Vulnerability Repair"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.18641",
+      "actions": [
+        "decoding",
+        "routing",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "reward hacking"
+      ],
+      "arxiv_id": "2605.18641",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "reward",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Leveraging Latent Visual Reasoning in Silence"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.19265",
+      "actions": [
+        "refine",
+        "revise",
+        "search",
+        "select",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2605.19265",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "MuMuTestUp: Mutation-based Multi-Agent Test Case Update"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.20306",
+      "actions": [
+        "decoding",
+        "memory",
+        "route",
+        "search",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure",
+        "oracle",
+        "plateau",
+        "unreliable"
+      ],
+      "arxiv_id": "2605.20306",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "WildRoadBench: A Wild Aerial Road-Damage Grounding Benchmark for Vision-Language Models and Autonomous Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.23590",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "memory",
+        "refine",
+        "search",
+        "select",
+        "selection",
+        "stop",
+        "tool calling"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure",
+        "unreliable"
+      ],
+      "arxiv_id": "2605.23590",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "self evaluation",
+        "self-evaluation",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Co-ReAct: Rubrics as Step-Level Collaborators for ReAct Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.24755",
+      "actions": [
+        "fallback",
+        "majority voting",
+        "refine",
+        "revise",
+        "search"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2605.24755",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "judge",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Automated Detection and Classification of Delusion-related Content in Naturalistic Audio Diaries Using Multi-Agent Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.26195",
+      "actions": [
+        "fallback",
+        "memory",
+        "planning",
+        "refine",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "stop",
+        "stopping",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "oracle"
+      ],
+      "arxiv_id": "2605.26195",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "CyberEvolver: Structured Self-Evolution for Cybersecurity Agents On the Fly"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.27466",
+      "actions": [
+        "memory",
+        "planning",
+        "routing",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "plateau",
+        "reward hacking"
+      ],
+      "arxiv_id": "2605.27466",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "AgensFlow: A Coordination-Policy Substrate for Multi-Agent Systems"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.28480",
+      "actions": [
+        "planning",
+        "selection",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "failure"
+      ],
+      "arxiv_id": "2605.28480",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "self reflection",
+        "self-reflection",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "spoken_qa_reasoning"
+      ],
+      "title": "Audio-Mind: An Auditable Agentic Framework for Audio Understanding"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.28814",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "refine",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "limitation",
+        "no improvement",
+        "reward hacking"
+      ],
+      "arxiv_id": "2605.28814",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Self-Improving Language Models with Bidirectional Evolutionary Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.29430",
+      "actions": [
+        "decoding",
+        "majority voting",
+        "refine",
+        "revise",
+        "revision",
+        "routing",
+        "selection",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2605.29430",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Towards Human-Like Interactive Speech Recognition With Agentic Correction and Semantic Evaluation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.04874",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "stop",
+        "stopping",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2606.04874",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "critic",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Agent Planning Benchmark: A Diagnostic Framework for Planning Capabilities in LLM Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.08340",
+      "actions": [
+        "allocate",
+        "memory",
+        "planning",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "degrade",
+        "failure"
+      ],
+      "arxiv_id": "2606.08340",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "reward"
+      ],
+      "speech_task_tags": [],
+      "title": "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.09169",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "memory",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2606.09169",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "IMUG-Bench: Benchmarking Unified Multimodal Models on Interleaved Understanding and Generation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.17281",
+      "actions": [
+        "decoding",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "limitation",
+        "oracle"
+      ],
+      "arxiv_id": "2606.17281",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Are you speaking my languages? On spoken language adherence in multimodal LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.19927",
+      "actions": [
+        "allocate",
+        "decoding",
+        "revise",
+        "route",
+        "routing",
+        "stopping"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2606.19927",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "CARE: Competence-Aware Reward Shaping for Adaptive Reasoning Length in Video-MLLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.20470",
+      "actions": [
+        "memory",
+        "refine",
+        "search",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "failure",
+        "limitation",
+        "upper bound"
+      ],
+      "arxiv_id": "2606.20470",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "score",
+        "uncertainty",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [
+        "asr"
+      ],
+      "title": "Analyzing Defensive Misdirection Against Model-Guided Automated Attacks on Agentic AI Systems"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.20625",
+      "actions": [
+        "memory",
+        "prune",
+        "refine",
+        "search",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "unreliable"
+      ],
+      "arxiv_id": "2606.20625",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "confidence",
+        "feedback",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "AlphaMemo: Structured Search-Process Memory for Self-Evolving Alpha Mining Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.21963",
+      "actions": [
+        "memory",
+        "search"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2606.21963",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Holmes: Multimodal Agentic Diagnosis for Mixed-Language Mobile Crashes at Industrial Scale"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.24428",
+      "actions": [
+        "memory",
+        "route",
+        "search",
+        "select",
+        "selection"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure"
+      ],
+      "arxiv_id": "2606.24428",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "feedback",
+        "judge",
+        "score",
+        "self evaluation",
+        "self reflection",
+        "self-evaluation",
+        "self-reflection",
+        "verification",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Escaping the Self-Confirmation Trap: An Execute-Distill-Verify Paradigm for Agentic Experience Learning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.25198",
+      "actions": [
+        "allocate",
+        "decoding",
+        "memory",
+        "planning",
+        "regenerate",
+        "route",
+        "routing",
+        "search",
+        "selection",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "fails",
+        "failure",
+        "limitation",
+        "reward hacking"
+      ],
+      "arxiv_id": "2606.25198",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Heuresis: Search Strategies for Autonomous AI Research Agents Across Quality, Diversity and Novelty"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.05682",
+      "actions": [
+        "memory",
+        "planning",
+        "revision",
+        "routing",
+        "search"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "failure",
+        "negative result"
+      ],
+      "arxiv_id": "2607.05682",
+      "repository_status": "PAPER_LINKED_REPO_UNVERIFIED",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "judge",
+        "score",
+        "scoring"
+      ],
+      "speech_task_tags": [],
+      "title": "FirstResearch: Auditable Question Formation for LLM Scientific Discovery Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.09101",
+      "actions": [
+        "planning",
+        "refine",
+        "search",
+        "select",
+        "steering"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure"
+      ],
+      "arxiv_id": "2607.09101",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Multi-Agent LLM Collaboration for Unit Test Generation via Human-Testing-Inspired Workflows"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.14275",
+      "actions": [
+        "memory",
+        "revise",
+        "search",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "fails",
+        "failure",
+        "limitation"
+      ],
+      "arxiv_id": "2607.14275",
+      "repository_status": "NO_REPOSITORY_EVIDENCE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "consensus",
+        "feedback",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "AI Agents Do Not Fail Alone:The Context Fails First"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2607.16204",
+      "actions": [
+        "decoding",
+        "memory",
+        "planning",
+        "search",
+        "select",
+        "selection",
+        "steering",
+        "tool calling",
+        "tool use",
+        "tool-use"
+      ],
+      "adverse_evidence": [
+        "bias",
+        "degrade",
+        "failure",
+        "limitation",
+        "reward hacking",
+        "upper bound"
+      ],
+      "arxiv_id": "2607.16204",
+      "repository_status": "REPOSITORY_UNREACHABLE",
+      "role": "KEEP_NEGATIVE",
+      "signals": [
+        "feedback",
+        "reward"
+      ],
+      "speech_task_tags": [],
+      "title": "Masked Diffusion Language Models are Strong and Steerable Text-Based World Models for Agentic RL"
+    }
+  ],
+  "open_transfer": [
+    {
+      "abstract_url": "https://arxiv.org/abs/2305.17444",
+      "actions": [
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2305.17444",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Query-Efficient Black-Box Red Teaming via Bayesian Optimization"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2401.10061",
+      "actions": [
+        "routing",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2401.10061",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "consensus",
+        "feedback",
+        "judge",
+        "reward",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "DiffusionAgent: Navigating Expert Models for Agentic Image Generation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.03628",
+      "actions": [
+        "decoding",
+        "revision",
+        "search",
+        "select",
+        "steering",
+        "stop"
+      ],
+      "arxiv_id": "2502.03628",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "The Hidden Life of Tokens: Reducing Hallucination of Large Vision-Language Models via Visual Information Steering"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2502.12110",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "selection"
+      ],
+      "arxiv_id": "2502.12110",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "similarity"
+      ],
+      "speech_task_tags": [],
+      "title": "A-MEM: Agentic Memory for LLM Agents"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2504.15133",
+      "actions": [
+        "decoding",
+        "search",
+        "selection",
+        "steering"
+      ],
+      "arxiv_id": "2504.15133",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "EasyEdit2: An Easy-to-use Steering Framework for Editing Large Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.11077",
+      "actions": [
+        "allocate",
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "mcts",
+        "search",
+        "select"
+      ],
+      "arxiv_id": "2506.11077",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "CyclicReflex: Improving Reasoning Models via Cyclical Reflection Token Scheduling"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2506.17629",
+      "actions": [
+        "memory",
+        "planning",
+        "refine",
+        "search"
+      ],
+      "arxiv_id": "2506.17629",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "CLiViS: Unleashing Cognitive Map through Linguistic-Visual Synergy for Embodied Visual Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2508.16153",
+      "actions": [
+        "fallback",
+        "memory",
+        "planning",
+        "revise",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2508.16153",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "value function"
+      ],
+      "speech_task_tags": [],
+      "title": "Memento: Fine-tuning LLM Agents without Fine-tuning LLMs"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2511.19314",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "memory",
+        "search",
+        "select",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2511.19314",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "confidence",
+        "feedback",
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "PRInTS: Reward Modeling for Long-Horizon Information Seeking"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.08955",
+      "actions": [
+        "planning",
+        "refine",
+        "revision",
+        "search",
+        "select",
+        "selection",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2601.08955",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "critic",
+        "feedback",
+        "reward",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "Imagine-then-Plan: Agent Learning from Adaptive Lookahead with World Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2601.22674",
+      "actions": [
+        "decoding",
+        "memory",
+        "prune",
+        "refine",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2601.22674",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "scoring",
+        "similarity"
+      ],
+      "speech_task_tags": [],
+      "title": "VisionTrim: Unified Vision Token Compression for Training-Free MLLM Acceleration"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.07833",
+      "actions": [
+        "decoding",
+        "refine",
+        "routing",
+        "select"
+      ],
+      "arxiv_id": "2602.07833",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "reward",
+        "similarity",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "SPD-Faith Bench: Diagnosing and Improving Faithfulness in Chain-of-Thought for Multimodal Large Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2602.14534",
+      "actions": [
+        "decoding",
+        "planning",
+        "refine",
+        "select"
+      ],
+      "arxiv_id": "2602.14534",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "confidence",
+        "consensus",
+        "reward",
+        "score"
+      ],
+      "speech_task_tags": [],
+      "title": "MoRL: Reinforced Reasoning for Unified Motion Understanding and Generation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2603.01692",
+      "actions": [
+        "mcts",
+        "memory",
+        "refine",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2603.01692",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "feedback",
+        "reward",
+        "score",
+        "scoring",
+        "similarity",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Reasoning as Gradient: Scaling MLE Agents Beyond Tree Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.10734",
+      "actions": [
+        "decoding",
+        "mcts",
+        "memory",
+        "planning",
+        "prune",
+        "refine",
+        "routing",
+        "search",
+        "select",
+        "selection"
+      ],
+      "arxiv_id": "2604.10734",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "reward",
+        "score",
+        "scoring",
+        "self reflection",
+        "self-reflection",
+        "similarity",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Self-Correcting RAG: Enhancing Faithfulness via MMKP Context Selection and NLI-Guided MCTS"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2604.24357",
+      "actions": [
+        "decoding",
+        "search"
+      ],
+      "arxiv_id": "2604.24357",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "confidence",
+        "reward",
+        "score",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "DPRM: A Plug-in Doob h transform-induced Token-Ordering Module for Diffusion Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.08271",
+      "actions": [
+        "memory",
+        "routing",
+        "search",
+        "select",
+        "stop"
+      ],
+      "arxiv_id": "2605.08271",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "judge",
+        "reward",
+        "score",
+        "scoring",
+        "similarity"
+      ],
+      "speech_task_tags": [],
+      "title": "Bridging Modalities, Spanning Time: Structured Memory for Ultra-Long Agentic Video Reasoning"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.12571",
+      "actions": [
+        "memory",
+        "planning",
+        "prune",
+        "route",
+        "search",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2605.12571",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "feedback",
+        "judge",
+        "reward",
+        "uncertainty",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupling Answer Authority"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.15215",
+      "actions": [
+        "planning",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2605.15215",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [],
+      "speech_task_tags": [],
+      "title": "SkillSmith: Compiling Agent Skills into Boundary-Guided Runtime Interfaces"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.16481",
+      "actions": [
+        "decoding",
+        "memory",
+        "planning",
+        "refine",
+        "search",
+        "selection",
+        "stop",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2605.16481",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "feedback",
+        "scoring",
+        "similarity",
+        "verification"
+      ],
+      "speech_task_tags": [],
+      "title": "Visual Agentic Memory: Enabling Online Long Video Understanding via Online Indexing, Hierarchical Memory, and Agentic Retrieval"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.18740",
+      "actions": [
+        "decoding",
+        "memory",
+        "tool use",
+        "tool-use"
+      ],
+      "arxiv_id": "2605.18740",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "consensus",
+        "feedback",
+        "reward",
+        "verifier"
+      ],
+      "speech_task_tags": [],
+      "title": "Vision-OPD: Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2605.25820",
+      "actions": [
+        "decoding",
+        "refine",
+        "search",
+        "selection"
+      ],
+      "arxiv_id": "2605.25820",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "confidence",
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Visual-Redundancy-Controlled Parallel Decoding for Diffusion-Based Multimodal Large Language Models"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.04323",
+      "actions": [
+        "decoding",
+        "select"
+      ],
+      "arxiv_id": "2606.04323",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "Answer Self-Consistency with Margin-Triggered Question Re-Arbitration for the CVPR 2026 VidLLMs Challenge"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.17209",
+      "actions": [
+        "best of n",
+        "best-of-n",
+        "decoding",
+        "search",
+        "select",
+        "selection",
+        "stop"
+      ],
+      "arxiv_id": "2606.17209",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "reward",
+        "similarity"
+      ],
+      "speech_task_tags": [],
+      "title": "Beyond Parallel Sampling: Diverse Query Initialization for Agentic Search"
+    },
+    {
+      "abstract_url": "https://arxiv.org/abs/2606.29847",
+      "actions": [
+        "decoding",
+        "memory",
+        "search"
+      ],
+      "arxiv_id": "2606.29847",
+      "repository_status": "OPEN_SOURCE_VERIFIED",
+      "role": "KEEP_TRANSFER",
+      "signals": [
+        "score",
+        "uncertainty"
+      ],
+      "speech_task_tags": [],
+      "title": "See Only When Needed: Context-Aware Attention Intervention for Mitigating Hallucinations in LVLMs"
+    }
+  ],
+  "schema": "sf-stage1b-registry-views-v1",
+  "summary": {
+    "instrument_records": 26,
+    "local_task_match_facets": 19,
+    "negative_falsifier_records": 121,
+    "open_transfer_records": 25,
+    "records": 184,
+    "role_counts": {
+      "KEEP_CORE": 12,
+      "KEEP_INSTRUMENT": 26,
+      "KEEP_NEGATIVE": 121,
+      "KEEP_TRANSFER": 25
+    }
+  }
+}

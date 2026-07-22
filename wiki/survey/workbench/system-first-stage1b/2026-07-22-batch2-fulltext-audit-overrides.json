@@ -1,0 +1,116 @@
+[
+  {
+    "arxiv_id": "2402.17735",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "The PPG network and synthesizer are trained, so this is not a frozen-control core paper. Retain the MIT-licensed implementation, acoustic pronunciation distance, and pitch/pronunciation disentanglement as a speech representation/control instrument.",
+    "evidence_pages": [1, 2, 3],
+    "speech_task_tags": ["tts"]
+  },
+  {
+    "arxiv_id": "2502.12110",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "A-MEM supplies an open, runtime memory organization mechanism with note generation, dynamic linking, similarity retrieval, and memory evolution. Its value is knowledge-base architecture transfer, not speech-task evidence.",
+    "evidence_pages": [1, 4, 5, 6]
+  },
+  {
+    "arxiv_id": "2506.11077",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "The load-bearing contribution is a training-free triangular schedule over reflection-token logits with no extra inference compute. Adverse-language matches describe the over/under-reflection motivation rather than invalidating the method.",
+    "evidence_pages": [1, 5, 6, 7]
+  },
+  {
+    "arxiv_id": "2506.17629",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "CLiViS is explicitly training-free and separates high-level planning, pretrained perception, iterative cognitive-map updates, and evidence memory. This is a reproducible orchestration analogue for frozen multimodal control.",
+    "evidence_pages": [1, 2, 7, 11]
+  },
+  {
+    "arxiv_id": "2601.22674",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "VisionTrim is an open, training-free, plug-and-play token-budget controller. DVTS combines global and local saliency while TGVC restores text-relevant context, which is transferable to acoustic-token retention experiments.",
+    "evidence_pages": [1, 4, 5, 10]
+  },
+  {
+    "arxiv_id": "2603.16606",
+    "from_decision": "KEEP_CORE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "OmniSONAR is built through progressive multilingual training and speech-encoder distillation. Frozen/zero-shot downstream use does not make the method itself training-free; retain it as a cross-modal embedding and multilingual speech comparator with local FLEURS/LibriSpeech coverage.",
+    "evidence_pages": [1, 5, 6, 10]
+  },
+  {
+    "arxiv_id": "2605.15215",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "SkillSmith's compiler/runtime split, minimal executable interfaces, provenance records, and explicit reproduction checklist are directly useful for constructing a bounded executable knowledge base. This is infrastructure transfer, not a model-control claim.",
+    "evidence_pages": [1, 9, 18]
+  },
+  {
+    "arxiv_id": "2605.23463",
+    "from_decision": "KEEP_CORE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "StepAudio 2.5 relies on large-scale foundation training, supervised fine-tuning, RLHF, trained reward models, and task-specific decoding. Retain it as a speech/omni architecture, reward, and evaluation comparator; it is not a training-free method path.",
+    "evidence_pages": [1, 2, 3, 6, 8]
+  },
+  {
+    "arxiv_id": "2605.30899",
+    "from_decision": "KEEP_INSTRUMENT",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "The automatic task tagger left this broad speech-understanding framework unclassified. Full-text tables explicitly cover ASR, speech-to-text translation, speech emotion recognition, and spoken language understanding; retain the instrument decision and correct its task facets.",
+    "evidence_pages": [1, 3, 4, 5],
+    "speech_task_tags": ["asr", "ser", "slu", "st"]
+  },
+  {
+    "arxiv_id": "2605.31432",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_CORE",
+    "reason": "DOA derives a read/write streaming policy directly from decoder-only SpeechLLM self-attention and runs off-the-shelf Phi-4 Multimodal and Qwen3-Omni without task-specific retraining. It is a direct frozen speech-model control path; lack of an abstract repository does not exclude speech-primary evidence.",
+    "evidence_pages": [1, 2, 4, 5]
+  },
+  {
+    "arxiv_id": "2305.17444",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Bayesian Red Teaming is a black-box, query-budgeted optimizer that selects new tests from past classifier evaluations and explicitly balances failure discovery with diversity. The open implementation and classifier limitation make it a transferable falsifier-search path.",
+    "evidence_pages": [2, 4, 5, 9]
+  },
+  {
+    "arxiv_id": "2504.15133",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "EasyEdit2's primary contribution is parameter-preserving test-time steering-vector generation and application. Limitation/adverse terms do not outweigh the direct, open implementation path for activation and decoding interventions.",
+    "evidence_pages": [1, 2, 3, 6]
+  },
+  {
+    "arxiv_id": "2602.07833",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "SAGE is explicitly train-free and recalibrates visual evidence routing based on attention and residual-stream diagnostics. Retain the benchmark's failure modes as boundary evidence inside a primarily transferable steering record.",
+    "evidence_pages": [1, 2, 6, 9]
+  },
+  {
+    "arxiv_id": "2603.01692",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Gome preserves rich execution feedback as structured update directions, accumulates successful hypotheses as momentum, and shares them across parallel traces. This is a runtime optimizer-design transfer path rather than merely adverse evidence about tree search.",
+    "evidence_pages": [1, 2, 3, 4, 5]
+  },
+  {
+    "arxiv_id": "2604.10734",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "The paper provides an open, explicit control loop: budgeted context selection followed by NLI-rewarded MCTS generation and validation. It is retained as a joint evidence/search allocation reference; its training boundary must still be checked before any reproduction claim.",
+    "evidence_pages": [2, 4, 17]
+  },
+  {
+    "arxiv_id": "2604.24357",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "DPRM leaves the host model, loss, data, and token sampler fixed and changes only the reveal-order controller using online reward estimates and Soft-BoN reweighting. This is a direct reward-guided inference ordering path despite surrounding boundary-case language.",
+    "evidence_pages": [1, 2, 3, 20]
+  }
+]

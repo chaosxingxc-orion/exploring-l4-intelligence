@@ -1,0 +1,15 @@
+{
+  "active_failures": 0,
+  "failed_rows_retained": 5,
+  "first_rec1_timestamp": "2026-07-21T15:52:20.640750Z",
+  "last_rec1_timestamp": "2026-07-22T10:20:16.931168Z",
+  "ledger_rows": 71,
+  "raw_bytes_verified": 880878,
+  "rec1": "/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-query-raw/stage1b-2026-07-21-delta/rec1-delta.jsonl",
+  "schema": "sf-stage1b-bfs-snapshot-v1",
+  "screening_state": "D0_PENDING",
+  "source_events": 309,
+  "split_count_probes_skipped": 0,
+  "successful_pages": 66,
+  "unique_candidates": 193
+}

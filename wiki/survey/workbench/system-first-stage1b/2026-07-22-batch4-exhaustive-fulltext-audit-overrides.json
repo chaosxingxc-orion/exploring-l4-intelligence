@@ -1,0 +1,179 @@
+[
+  {
+    "arxiv_id": "2407.18521",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Patched MOA is a model-agnostic inference controller that instantiates Best-of-N, mixture aggregation and MCTS, including same-model response scoring and UCB selection. It does not require target-model fine-tuning and its open optillm implementation makes the mechanism directly reusable.",
+    "evidence_pages": [1, 2, 3, 6]
+  },
+  {
+    "arxiv_id": "2408.03047",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "OpenOmni is a genuine end-to-end speech conversational harness spanning ASR, emotion detection, retrieval, LLM response and TTS, with latency, WER, MOS and human-evaluation hooks. Its paper-linked repository lacks a resolved license, so it is retained as a design/evaluation instrument rather than a reproducibility claim.",
+    "evidence_pages": [1, 2, 4, 6],
+    "speech_primary_object": true,
+    "speech_task_tags": ["asr", "tts", "spoken_agent"],
+    "dataset_local_status": "NOT_STATED_IN_FULLTEXT"
+  },
+  {
+    "arxiv_id": "2411.12736",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "ACING keeps the black-box target model fixed while learning a lightweight continuous actor-critic prompt controller from task scores. The controller itself is trained, so this is an external reward-optimization transfer mechanism rather than frozen inference-only evidence.",
+    "evidence_pages": [1, 2, 3, 7]
+  },
+  {
+    "arxiv_id": "2501.11721",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "Explain-Query-Test turns explanation/comprehension discrepancy, answer consistency and stability across paraphrases into a self-evaluation signal without changing the evaluated model. It is an open verifier-calibration instrument, although it does not itself choose a downstream action.",
+    "evidence_pages": [1, 4, 6, 8]
+  },
+  {
+    "arxiv_id": "2501.19393",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_NEGATIVE",
+    "reason": "s1 demonstrates a useful runtime budget-forcing action—terminate reasoning or append Wait to extend it—but the reported capability depends on supervised fine-tuning over s1K. It is retained as a clean boundary showing that a training-free runtime knob does not make the full technical path training-free.",
+    "evidence_pages": [1, 4, 8, 9]
+  },
+  {
+    "arxiv_id": "2502.16069",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "Curie decomposes scientific experimentation into design, implementation, execution, error feedback, repeated reproducibility checks and evidence-backed reporting. Retain the open execution contract and failure checks as an experiment-environment instrument, not as an inference-control method.",
+    "evidence_pages": [1, 3, 5, 9]
+  },
+  {
+    "arxiv_id": "2503.01163",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "OPTS treats prompt-design strategies as arms, uses explicit selection including Thompson sampling, scores candidates on a development set and returns the highest-reward prompt. This is a compact open analogue for reward-guided selection of control policies around a fixed task model.",
+    "evidence_pages": [1, 3, 4, 8]
+  },
+  {
+    "arxiv_id": "2503.14443",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "EnvBench isolates repository environment setup, pins repository revisions, executes generated setup scripts and tests, and records that repeated generation with error feedback materially improves success. It is directly useful for the reproduction-first environment contract.",
+    "evidence_pages": [1, 2, 4, 8]
+  },
+  {
+    "arxiv_id": "2506.00832",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "Counterfactual Activation Editing changes selected Tacotron-2 encoder activations at inference to correct prosody and pronunciation without retraining the target TTS model. Auxiliary probes and autoencoder/codebook components are trained, and evaluation uses non-local LJSpeech, so it is a speech intervention instrument rather than a core frozen-control result.",
+    "evidence_pages": [1, 2, 3, 4],
+    "speech_primary_object": true,
+    "speech_task_tags": ["tts"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2508.02013",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "SpeechRole supplies 111k speech-to-speech role-playing conversations and a direct generated-speech evaluation over interaction, expressiveness and role fidelity, with human validation of LLM scoring. Its new dataset is not in the local lock and the repository license is unresolved, so it remains an evaluation instrument.",
+    "evidence_pages": [1, 3, 5, 8],
+    "speech_primary_object": true,
+    "speech_task_tags": ["spoken_agent", "speech_generation"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2509.15666",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "TISDiSS exposes the number of shared Reconstructor repetitions as an inference-depth knob on one trained speech-separation model, producing a speed/performance curve without training a separate model for each depth. Its architecture is purpose-trained and the WSJ0-2mix, Libri2Mix and WHAMR! evaluation corpora are not in the local lock, so it is a direct acoustic control instrument rather than a training-free core method.",
+    "evidence_pages": [1, 2, 3, 5],
+    "speech_primary_object": true,
+    "speech_task_tags": ["speech_separation"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2509.20410",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "Phoenix-VAD turns streaming speech into explicit Continue/Stop actions and reports separate complete/incomplete-speech error profiles. The audio encoder is frozen but its adapter and LLM are trained with LoRA on internal ASR and endpoint data, so the stopping rule is valuable while the full path is not training-free or locally reproducible.",
+    "evidence_pages": [1, 2, 3, 4],
+    "speech_primary_object": true,
+    "speech_task_tags": ["spoken_agent", "semantic_endpoint_detection"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2601.05777",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "EET retrieves prior execution experience, converts current patches and test feedback into calibrated confidence, and uses upper/lower thresholds to stop, continue or discard. The open runtime controller directly informs evidence-based early termination and budget control.",
+    "evidence_pages": [1, 4, 5, 8]
+  },
+  {
+    "arxiv_id": "2601.05808",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "EnvScaler constructs executable tool-interaction environments, stateful scenarios and rule-based terminal validators, then uses execution feedback to close the test loop. Although its main use is SFT/RL environment scaling rather than frozen inference, the open generator and validation contract are useful for bounded experiment construction.",
+    "evidence_pages": [1, 2, 4, 9]
+  },
+  {
+    "arxiv_id": "2601.15016",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "LiViBench evaluates interactive livestream understanding across audio, speech/ASR, video and real-time comments, exposing an omnimodal test surface absent from static audio suites. Construction depends partly on proprietary models and the benchmark/model assets are not in the local lock, so it is retained only as an omni evaluation reference.",
+    "evidence_pages": [1, 3, 5, 7],
+    "speech_primary_object": true,
+    "speech_task_tags": ["omni_audio_video_understanding"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2601.19956",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_NEGATIVE",
+    "reason": "VoxPrivacy demonstrates that speech language models frequently fail conditional and proactive privacy decisions, including speaker-as-biometric access control, and validates synthetic findings on human-recorded speech. Core VoxPrivacy/AISHELL-2/WenetSpeech assets are not in the local lock; retain it as a speech verifier and identity-control falsifier.",
+    "evidence_pages": [1, 4, 6, 10],
+    "speech_primary_object": true,
+    "speech_task_tags": ["speaker", "spoken_agent", "privacy"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2604.10123",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "The method measures degradation of phonological subspaces in frozen HuBERT representations without labelled dysarthric training data and reports robust within-corpus severity correlations across languages. Local LibriSpeech can supply one healthy-control reference, but the ten clinical/pathological corpora and cross-corpus calibration remain non-local requirements.",
+    "evidence_pages": [1, 6, 18, 29],
+    "speech_primary_object": true,
+    "speech_task_tags": ["speech_pathology"],
+    "dataset_local_status": "LOCAL_MATCH"
+  },
+  {
+    "arxiv_id": "2604.21816",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Tool Attention is a model-agnostic runtime gate: sentence-embedding overlap, execution-state preconditions and top-k selection determine which schemas are loaded, reducing context and exposure without target-model updates. Retain the open selective-routing and lazy-loading mechanism.",
+    "evidence_pages": [1, 2, 6, 13]
+  },
+  {
+    "arxiv_id": "2604.25256",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "AutoResearchBench provides a controlled full-text corpus, exact-answer sets, iterative search/verification tasks, abstention and stopping requirements, and human-audited construction. It is an open benchmark for validating the literature knowledge layer, not evidence for the speech control method itself.",
+    "evidence_pages": [1, 3, 5, 9]
+  },
+  {
+    "arxiv_id": "2605.03937",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "MiniMind-O is a small inspectable speech-native omni carrier with frozen SenseVoice/SigLIP encoders, streaming speech output, speaker-token/reference-code conditioning, released checkpoints and multimodal sequence data. It requires its own non-local training assets and is retained as a low-cost model/environment candidate, not a training-free method claim.",
+    "evidence_pages": [1, 2, 3, 9],
+    "speech_primary_object": true,
+    "speech_task_tags": ["asr", "tts", "spoken_agent"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  },
+  {
+    "arxiv_id": "2606.16137",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "The paper uses XAI evidence to ground training-free multimodal-LLM explanations for speech deepfake decisions and releases a PartialSpoof-derived explanation set. The detector and an auxiliary acoustic-feature MLP are trained and PartialSpoof is not local, so retain the evidence-to-explanation interface as an instrument rather than a frozen end-to-end controller.",
+    "evidence_pages": [1, 2, 3, 5],
+    "speech_primary_object": true,
+    "speech_task_tags": ["speech_deepfake_detection"],
+    "dataset_local_status": "NAMED_DATASET_NOT_IN_LOCK"
+  }
+]

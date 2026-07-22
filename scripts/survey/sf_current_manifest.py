@@ -218,6 +218,24 @@ BASE_FILE_SPECS = (
         "generated",
         "targeted",
     ),
+    FileSpec(
+        "stage1b_mapping_release",
+        "wiki/survey/current/tables/stage1b-mapping-release.md",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1c_eligible_inputs",
+        "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1b_release_manifest",
+        "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
 )
 
 
@@ -250,12 +268,17 @@ _AUDIT_FILE_SPECS = (
 
 _BASE_RELEASE_BOUND = (
     "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/tables/stage1b-mapping-release.md",
+    "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+    "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
 )
 _BASE_PROSE_SCAN = (
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
     "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/tables/stage1b-mapping-release.md",
+    "wiki/survey/current/tables/stage1c-eligible-inputs.md",
 )
 
 _CONSUMER_MANIFEST_KEYS = {

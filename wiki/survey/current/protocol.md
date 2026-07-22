@@ -1,14 +1,16 @@
 ---
 protocol_id: SF-SYSTEM-FIRST-STAGE1B
-protocol_version: 2
-effective_date: 2026-07-19
-stage: Stage-1A survey-ready gate
-execution_authorized: false
+protocol_version: 3
+effective_date: 2026-07-21
+stage: Stage-1B systematic mapping
+execution_authorized: true
+authorization_commit: c01fba751b56588ed2f62cb6d01f6c25f3e95539
+h5_load_bearing_use: WITHHOLD
 supersedes_effective_chain: protocol-v1 plus amendments 1 and 3-15
 audit_index: wiki/audit/system-first-stage1a/INDEX.md
 ---
 
-# System-first systematic-mapping protocol v2
+# System-first systematic-mapping protocol v3
 
 This file is the complete effective specification for the system-first mapping campaign. Historical
 transactions are provenance, not operating prerequisites. The rules below are sufficient to decide
@@ -17,23 +19,33 @@ correct errors, and determine who may authorize execution or sign-off.
 
 ## §0 Authority, current gate, and prohibited execution
 
-The current state is the **Stage-1A survey-ready gate**, not Stage-1A close and not Stage-1B
-execution. Work authorized by this file is limited to protocol consolidation, static compilation,
-schema/data repair, local validation, packaging, and independent re-review. It does not authorize a
-discovery query, a paper-discovery crawl, a research-model call, a model smoke, a dataset experiment,
-or a directional prototype.
+The current state is **Stage-1B systematic-mapping execution**. The independent 2026-07-21 fast-
+convergence review signed the search design against commit
+`c01fba751b56588ed2f62cb6d01f6c25f3e95539`; the owner then explicitly directed Stage-1B planning and
+research execution on 2026-07-21. The authorization is deliberately split:
+
+- frozen discovery queries, T1 routes, identity/deduplication, REC-0 screening, citation traversal,
+  non-H5 method-path coding, D2 full-text work, and ordinary mapping synthesis are authorized;
+- H5 calibration may continue in parallel, but `H5_LOAD_BEARING_USE=WITHHOLD` until the independent
+  blind coder-B pass and third-party adjudication finish;
+- the older fresh-v7/package-promotion work remains a record-layer closeout and does not block the
+  authorized non-H5 mapping operations.
+
+This v3 authority rule supersedes the v2 requirement that the full H5/package-release chain pass
+before the first query. It implements the independent review's scoped sign-off rather than treating
+a non-load-bearing calibration as a global search-recall gate. It does not weaken any H5 conclusion:
+before calibration closes, H5 values may not enter an occupancy denominator, headline, gap claim, or
+Stage-1C input.
 
 Stage-1B means systematic-mapping execution. **Stage-1B runs no research model or smoke** and, more
-explicitly, Stage-1B runs no research-model call and no smoke throughout the stage. A first discovery
-query may run only after all three independent conditions hold on the same committed package:
+explicitly, no research-model call, model smoke, dataset inference/metric experiment, headroom test,
+or directional prototype may run anywhere in this stage. The execution receipt must bind the
+authorization commit, frozen protocol/query hashes, actor, platform, exposure declaration, and
+`H5_LOAD_BEARING_USE=WITHHOLD` before the first discovery request.
 
-1. an independent reviewer gives search-design sign-off;
-2. the owner gives explicit execution approval; and
-3. the current P0-R8/package gate is rerun and records PASS.
-
-No document, generated PASS, correction, re-review request, internal review, or protocol consolidation
-may self-grant any of those authorities. `execution_authorized: false` remains effective until the
-owner explicitly changes it after reviewer sign-off. Internal convergence is not sign-off.
+No document, generated PASS, correction, internal review, or protocol consolidation may self-grant
+execution authority. The authority here comes from the independent search-design `SIGN` plus the
+owner's subsequent execution direction; internal convergence and machine PASS remain non-authority.
 
 The historical Stage-1B meaning of directional prototyping is retired. Directional prototype work is
 **Stage-2A reproduction-first** work and this protocol gives it **no present execution force**.

@@ -1,0 +1,165 @@
+[
+  {
+    "arxiv_id": "2407.06426",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "DebUnc is an inference-time confidence controller: sampling- or prompt-derived uncertainty is communicated through prompts or token reweighting between debate rounds. References to trained base models do not make this runtime aggregation rule a trained intervention.",
+    "evidence_pages": [1, 2, 3, 6]
+  },
+  {
+    "arxiv_id": "2408.10945",
+    "from_decision": "DROP",
+    "to_decision": "DROP",
+    "reason": "HiRED is open and technically valid, but its attention-guided fixed-budget token dropping adds no material method family beyond the already retained VisionTrim token-budget record. Full-text review therefore resolves it as a deliberate redundancy drop.",
+    "evidence_pages": [1, 3, 5, 7]
+  },
+  {
+    "arxiv_id": "2410.16670",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "CoPS supplies a provable pessimism-based selector for reusing experiences only when their trial distributions match the current task. This is directly transferable to choosing prior traces under dataset or task shift.",
+    "evidence_pages": [1, 3, 7, 20]
+  },
+  {
+    "arxiv_id": "2501.05803",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "DAS is explicitly training-free and uses tempered sequential Monte Carlo to sample from a reward-aligned target while controlling reward over-optimization and diversity loss. It is a high-value non-speech reference for Goodhart-aware reward-guided inference.",
+    "evidence_pages": [1, 3, 4, 10]
+  },
+  {
+    "arxiv_id": "2502.13681",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Repo2Run converts build/test feedback into a replayable Dockerfile and reports successful executable environments for 361 of 420 repositories. Retain it as an open environment-construction mechanism, with the residual failures treated as expected boundary evidence.",
+    "evidence_pages": [1, 2, 4, 9]
+  },
+  {
+    "arxiv_id": "2504.01848",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "PaperBench provides author-approved hierarchical reproduction rubrics, executable submissions, and a separately evaluated judge. Its 21% best-agent result is useful negative evidence inside a primarily transferable reproduction-evaluation contract.",
+    "evidence_pages": [1, 2, 6, 9]
+  },
+  {
+    "arxiv_id": "2506.11127",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "UITron-Speech is a genuine end-to-end speech-instruction GUI task. The backbone is trained on synthetic speech and mixed-modality data, while the two-step crop-and-refine grounding correction is training-free at inference. Retain it as a speech/agent experiment and decoding instrument, not a frozen-control core method.",
+    "evidence_pages": [1, 4, 5, 7],
+    "speech_primary_object": true,
+    "speech_task_tags": ["slu"],
+    "dataset_local_status": "NOT_STATED_IN_FULLTEXT"
+  },
+  {
+    "arxiv_id": "2509.06382",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "CAFA combines ambient audio, an audiogram, conversational feedback, information-gain questioning, structured tuning commands, an ethical regulator, and an independent judge without domain-specific LLM fine-tuning. Its small English/Chinese prototype data and proprietary LLM dependency keep it at instrument rather than core status.",
+    "evidence_pages": [1, 2, 3, 4],
+    "speech_primary_object": true,
+    "speech_task_tags": ["spoken_agent"],
+    "dataset_local_status": "NOT_STATED_IN_FULLTEXT"
+  },
+  {
+    "arxiv_id": "2511.21730",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "The benchmark isolates procedural retrieval from execution and shows that embedding methods lose temporal structure under cross-context vocabulary changes. Retain it as a test contract for retrieving executable experiment procedures.",
+    "evidence_pages": [1, 3, 5, 15]
+  },
+  {
+    "arxiv_id": "2511.23473",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_NEGATIVE",
+    "reason": "ThetaEvolve's strongest path performs GRPO at test time and persists learned checkpoints. It is an open and useful boundary comparator, but it changes model weights and therefore cannot evidence training-free inference control.",
+    "evidence_pages": [1, 3, 5, 10]
+  },
+  {
+    "arxiv_id": "2601.05930",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "FOREAGENT trains a pairwise execution-preference model, so it is not a training-free controller. Retain the predict-then-verify allocation pattern and calibrated preference corpus as an open transfer mechanism for reducing expensive candidate executions.",
+    "evidence_pages": [1, 3, 4, 8]
+  },
+  {
+    "arxiv_id": "2602.01331",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "A-MapReduce provides a runtime decomposition-map-aggregation architecture for broad searches, with experiential task allocation and explicit cost/latency measurements. It is directly reusable for future survey, candidate-generation, and falsifier-search orchestration.",
+    "evidence_pages": [1, 3, 4, 8]
+  },
+  {
+    "arxiv_id": "2602.10063",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Chain of Mindset is explicitly training-free: a meta-agent selects a cognitive mode at each step and a bidirectional context gate controls inter-module information. This is a direct runtime routing analogue for action-policy control.",
+    "evidence_pages": [1, 4, 6, 10]
+  },
+  {
+    "arxiv_id": "2603.03296",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "PlugMem represents propositional and prescriptive knowledge as compact memory units rather than raw traces and is attached unchanged across heterogeneous tasks. It is a strong open design for the executable research knowledge base.",
+    "evidence_pages": [1, 3, 4, 9]
+  },
+  {
+    "arxiv_id": "2603.09821",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "One-Eval resolves evaluation intent into benchmark IDs, dataset acquisition and schema normalization, metric selection, evidence trails, human checkpoints, and rollback. It closely matches the required traceable experiment-environment interface.",
+    "evidence_pages": [1, 3, 4, 6]
+  },
+  {
+    "arxiv_id": "2603.24224",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "RVLM runs a no-fine-tuning generate-execute loop while RRouter predicts a reasoning budget, monitors progress, and terminates stalls. Retain its open adaptive-depth and stopping mechanism; its proprietary Gemini dependency remains an implementation boundary.",
+    "evidence_pages": [1, 4, 8, 15]
+  },
+  {
+    "arxiv_id": "2604.16706",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_NEGATIVE",
+    "reason": "AgentProp-Bench demonstrates that automatic judges can be weakly aligned with humans, separates parameter rejection from downstream recovery, and shows that a parallel interceptor helps one model but not another. Retain it as verifier and mitigation falsifier evidence.",
+    "evidence_pages": [1, 3, 7, 8]
+  },
+  {
+    "arxiv_id": "2604.21706",
+    "from_decision": "DROP",
+    "to_decision": "KEEP_INSTRUMENT",
+    "reason": "This is a training-free analysis over frozen speech SSL backbones with open code and a direct d-prime severity measure. Local LibriSpeech is an exact corpus occurrence but supplies only healthy controls, so the dysarthria task still requires non-local clinical corpora and cross-corpus severity calibration.",
+    "evidence_pages": [1, 5, 18, 21],
+    "speech_primary_object": true,
+    "speech_task_tags": ["speech_pathology"],
+    "dataset_local_status": "LOCAL_MATCH"
+  },
+  {
+    "arxiv_id": "2605.08374",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "MemQ propagates runtime success credit backward through the provenance DAG that links retrieved memories to derived memories. This is a direct open mechanism for reward-guided online memory and evidence provenance.",
+    "evidence_pages": [1, 2, 4, 11]
+  },
+  {
+    "arxiv_id": "2605.10848",
+    "from_decision": "KEEP_NEGATIVE",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "Pi-Serini shows that tuned BM25 plus sufficient retrieval depth can expose high evidence recall in an agent loop. Retain the open retrieval/browse/read baseline for the literature knowledge base while treating its frontier-model dependence as a cost boundary.",
+    "evidence_pages": [1, 3, 5, 8]
+  },
+  {
+    "arxiv_id": "2605.14906",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_TRANSFER",
+    "reason": "MemLens provides a multimodal memory falsifier: long-context systems degrade with length while memory agents remain length-stable but lose visual fidelity during storage-time compression. The open benchmark can test evidence-preserving memory choices.",
+    "evidence_pages": [1, 5, 8, 10]
+  },
+  {
+    "arxiv_id": "2607.01071",
+    "from_decision": "KEEP_TRANSFER",
+    "to_decision": "KEEP_NEGATIVE",
+    "reason": "MemSyco-Bench tests whether an agent rejects memory as evidence, limits its scope, resolves memory/evidence conflicts, tracks updates, and personalizes only when valid. Retain it primarily as negative/falsifier coverage for memory-induced sycophancy.",
+    "evidence_pages": [1, 3, 7, 9]
+  }
+]

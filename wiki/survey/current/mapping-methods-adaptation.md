@@ -1,7 +1,8 @@
 ---
 artifact_id: "SF-MAPPING-METHODS-ADAPTATION-V1-2026-07-21-01"
-role: "current Stage-1A methods basis; protocol input, not a review verdict"
-stage1b_execution_authorized: false
+role: "current Stage-1B methods basis; protocol input, not a review verdict"
+stage1b_execution_authorized: true
+h5_load_bearing_use: "WITHHOLD"
 ---
 
 # Systematic-mapping methods basis and adaptation
@@ -42,4 +43,3 @@ stated explicitly.
 Stage-1B may execute the frozen mapping and produce evidence bundles. It may not run research models,
 smoke tests, task metrics, headroom experiments, prototypes, candidate-card ranking, owner selection, or
 reproduction-list freeze. Stage-1C owns the latter synthesis decisions; Stage-2 owns empirical tests.
-

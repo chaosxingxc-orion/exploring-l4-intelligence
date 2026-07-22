@@ -288,6 +288,17 @@ class CurrentManifestContractTests(unittest.TestCase):
         self.assertEqual(1, len(dual))
         self.assertEqual("scripts/survey/sf_dual_platform_check.py", dual[0]["path"])
 
+    def test_stage1b_release_products_are_current_and_release_bound(self):
+        document = self.build()
+        by_path = {entry["path"]: entry for entry in document["files"]}
+        expected = {
+            "wiki/survey/current/tables/stage1b-mapping-release.md",
+            "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+            "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+        }
+        self.assertTrue(expected <= set(by_path))
+        self.assertTrue(expected <= set(document["release_bound_artifacts"]))
+
     def test_integration_evidence_has_exact_targeted_routes(self):
         document = self.build()
         by_path = {entry["path"]: entry for entry in document["files"]}
@@ -397,7 +408,12 @@ class CurrentManifestContractTests(unittest.TestCase):
     def test_release_and_prose_arrays_are_current_only(self):
         document = self.build()
         self.assertEqual(
-            ["wiki/survey/current/tables/opening-guarantees.md"],
+            [
+                "wiki/survey/current/tables/opening-guarantees.md",
+                "wiki/survey/current/tables/stage1b-mapping-release.md",
+                "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+                "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+            ],
             document["release_bound_artifacts"],
         )
         self.assertEqual(
@@ -406,13 +422,18 @@ class CurrentManifestContractTests(unittest.TestCase):
                 "wiki/survey/current/protocol.md",
                 "wiki/survey/current/status.md",
                 "wiki/survey/current/tables/opening-guarantees.md",
+                "wiki/survey/current/tables/stage1b-mapping-release.md",
+                "wiki/survey/current/tables/stage1c-eligible-inputs.md",
             ],
             document["prose_scan_paths"],
         )
         for path in (
             document["release_bound_artifacts"] + document["prose_scan_paths"]
         ):
-            self.assertTrue(path.startswith("wiki/survey/current/"))
+            self.assertTrue(
+                path.startswith("wiki/survey/current/")
+                or path == "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json"
+            )
             self.assertNotRegex(path, r"amendment|review|response")
 
     def test_audit_contract_lifecycle_is_absent_complete_or_fail_closed(self):
@@ -1040,37 +1061,42 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1A",
+            "Stage-1B late execution and closeout",
             "status.md",
+            "stage1b-mapping-release.md",
+            "stage1c-eligible-inputs.md",
             "protocol.md",
             "manifest.json",
             "targeted",
             "wiki/audit/system-first-stage1a/INDEX.md",
+            "H5 hold",
             "Legacy files are not default context",
         ):
             self.assertIn(required, text)
         self.assertNotRegex(text, r"sf-protocol-amendment-\d+|gate-s1-v\d+-response")
-        self.assertLessEqual(len(text.splitlines()), 14)
+        self.assertLessEqual(len(text.splitlines()), 24)
 
-    def test_status_is_short_and_preserves_no_execution_boundary(self):
+    def test_status_is_short_and_preserves_stage1b_execution_boundary(self):
         path = CURRENT / "status.md"
         self.assertTrue(path.is_file(), f"missing status: {path}")
         raw = path.read_bytes()
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1A",
-            "owner authorization",
-            "independent reviewer sign-off",
-            "zero Stage-1B executions in this repair",
-            "`H5_CALIBRATION`",
-            "construction PASS / release BLOCKED",
-            "Remaining release blockers",
+            "Stage-1B late execution and closeout",
+            "formal Stage-1C start",
+            "research model/smoke = 0",
+            "50/50 route dispositions",
+            "ELIGIBLE_NON_H5",
+            "INELIGIBLE_FOR_STAGE_1C_SELECTION",
+            "H5 contributes zero",
+            "PROVISIONAL_INPUT",
             "Next action",
         ):
             self.assertIn(required, text)
-        self.assertNotRegex(text, r"Stage-1B (?:has )?(?:begun|started|approved)")
-        self.assertLessEqual(len(text.splitlines()), 16)
+        self.assertNotRegex(text, r"Stage-1B.*(?:unstarted|unauthorized)")
+        self.assertNotIn("execution_authorized: false", text)
+        self.assertLessEqual(len(text.splitlines()), 40)
 
 
 class ManifestRefreshPlanContractTests(unittest.TestCase):

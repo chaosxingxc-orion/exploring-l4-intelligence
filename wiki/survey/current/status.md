@@ -1,16 +1,38 @@
 # Current Survey Status
 
-- Gate: **Stage-1A final remediation**; Stage-1B remains unstarted and unauthorized.
-- Execution in this repair: zero Stage-1B executions in this repair; systematic discovery query = 0; research model/smoke = 0; dataset metric/prototype = 0; inherited exposure remains nonzero.
-- Precheck verdict: Track A scientific rationale **ADEQUATE**; Track B major revision and search-design **WITHHOLD**. This is not exact-package signoff.
-- GM-1: **PASS** for the registered active inputs only — 508 source rows route exactly once to 253 canonical work nodes; archive-wide completeness is not claimed and claims do not create duplicate seeds.
-- GM-2: four negatives are corrected and retired; the versioned inventory is `22 = 4 + 18`. Precheck decisions bind 4/4 corrections and 18/18 active proofs, including two `AGREE_WITH_CAUTION` rows.
-- H5: the V2 operational codebook, 21/21 replayable coder-A exact anchors, and sealed answer-free blind packet exist. The validator now derives agreement from coder rows and rejects self-reported false-green cases. A genuinely independent second blind coder and third-party disagreement adjudication are **PENDING**; no calibration value is load-bearing.
-- PDF extraction: exact NT Python 3.14.3 / pypdf 6.14.0 and POSIX Python 3.12.3 / pypdf 6.14.2 identities are frozen; ToolGate page 11 is a mandatory leaf replay.
-- GM-3: v7 contract-4 runner/DAG and fail-closed tests exist; current local probe fails only `H5_CALIBRATION`, so formal leaves and aggregate remain withheld.
-- GM-4: **PASS** — 93 official-receipt works rebuild offline; the 253-node disposition, 19 reviewer-known routes, and `year_basis` policy are explicit. Omni-Decision/AOP-Agent are unique P1 direct neighbors; Light-Omni/LatentOmni are nonblocking P2 trained boundaries.
-- Mapping design: mapping/empirical RQs, Stage-1B/1C ownership, systematic-mapping methods adaptation, and seven-field speech/omni codebook are current. Stage-1A makes no technical-novelty verdict; Stage-1B maps proximity, Stage-1C selects a problem from gap hypotheses, and Stage-2A converges technical innovation after prior reproduction.
-- Integrity: no fabrication/falsification/plagiarism evidence was found; the detected biased-coding and selective-bibliography risks have been corrected without manufacturing reviewer rows.
-- Proposal package: pre-review source manifest and package report remain **construction PASS / release BLOCKED** and must be regenerated on the fresh-v7 commit.
-- Remaining release blockers: H5 coder B + adjudication, fresh v7 dual-platform evidence, formal immutable round-16 exact-package independent reviewer sign-off, then explicit owner authorization.
-- Next action: complete the independent H5 blind pass against the frozen three-paper packet; then adjudicate disagreements before v7 generation.
+- Gate: **Stage-1B late execution and closeout**. Scientific synthesis is ready for release freeze;
+  formal Stage-1C start still requires an independent signature against the fixed release commit.
+- Exposure: 65 frozen arXiv rows and 65/65 bounded delta rows executed; research model/smoke = 0;
+  dataset metric/reproduction/prototype = 0. Broad D0 scanning remains closed.
+- Frozen D0: 20,727/20,727 abstract identities, 319 D2 full texts, 226 retained works = 12 core +
+  43 instrument + 45 transfer + 126 negative; 93 drop, 0 disposition unresolved. This is D0
+  exhaustion, not literature-universe closure.
+- Delta: 193 unique candidates for 2026-07-16..2026-07-21; 12 selected once at REC-0 and acquired as
+  PDF+e-print+D2; 181 excluded only from this release's load-bearing map; duplicate seeds = 0.
+- T1: 50/50 route dispositions = 28 executed + 3 not held + 19 `WAIVED_UNAVAILABLE`. Executed routes
+  contain 71,254 titles and 3,310 wordlist matches; 677 reconcile to known works and 2,633 remain
+  title-only. Waived/title-only items do not support zero-hit or `NO_DIRECT_MATCH` claims.
+- Citation closure: all 12 frozen registry core works have local e-print backward extraction;
+  266 unique arXiv-ID edges, 232 outside D0/delta/registry. DOI/title-only edges remain unresolved.
+  Forward index access returned HTTP 429, so 12/12 forward routes are explicitly waived and no
+  full-citation-closure claim is made.
+- Mapping denominators: 226 unique portfolio works; strict occupancy = 8 works / 11 paths (9
+  load-bearing, 2 boundary); delta supplement = 12 D2 works outside the frozen 226 denominator.
+  The same work is not duplicated across role facets.
+- Strict sensitivity: 11/11 paths are API-only; 7 text-native, 4 vision-native, 0 speech-native;
+  the speech count is unmeasured strict coding, not evidence that the literature cell is empty.
+- Required products: coverage/kill, occupancy, task/modality/access sensitivity, instrument/negative,
+  saturation/flow, proximity/readiness and limitations are in `tables/stage1b-mapping-release.md`.
+- Eligible inputs: `tables/stage1c-eligible-inputs.md` is unranked. Budget/stop/repair, evaluator
+  reliability and interactive/full-duplex are `ELIGIBLE_NON_H5`; evidence-state and tool/agent
+  arbitration are `INELIGIBLE_FOR_STAGE_1C_SELECTION` pending H5.
+- H5: coder-A 21/21 anchors and blind packet exist; independent coder-B, agreement and third-party
+  adjudication are pending. H5 contributes zero load-bearing occupancy/headline/selection rows.
+- Reproduction boundary: existing ASR/omni feasibility documents are `PROVISIONAL_INPUT /
+  NOT_STAGE_FROZEN`. Stage-1B does not rank problems or freeze a reproduction list; Stage-2A owns
+  execution after Stage-1C selection and a separate authority gate.
+- Integrity correction: eight historical invalid `--help` request rows remain append-only in the
+  full-text ledger and are excluded from paper/rendition denominators. The CLI now rejects invalid IDs
+  before network access; no source rows were deleted.
+- Next action: build and verify a commit-bound Stage-1B release manifest, freeze the bytes, then
+  request one independent Stage-1C transition review. No model or smoke action is next.

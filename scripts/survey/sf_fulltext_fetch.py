@@ -4,8 +4,8 @@
 2026-07-16: 承重阅读对象 = 论文全文,不是 abs 摘要页).
 
 Per arXiv ID fetches BOTH renditions and persists them OUTSIDE git (data drive):
-  <data-dir>/<id>/<id>.pdf      — PDF rendition   (export.arxiv.org/pdf/<id>)
-  <data-dir>/<id>/<id>.eprint   — e-print source  (export.arxiv.org/e-print/<id>;
+  <data-dir>/<id>/<id>.pdf      — PDF rendition   (arxiv.org/pdf/<id>)
+  <data-dir>/<id>/<id>.eprint   — e-print source  (arxiv.org/e-print/<id>;
                                    tar.gz or gzipped TeX — the bibliography source
                                    for offline citation-closure checks, exit
                                    mechanism E2 backward edges)
@@ -21,6 +21,7 @@ Politeness: >=3s spacing, exponential backoff, max 4 attempts.
 
 Usage (repo root):
   python scripts/survey/sf_fulltext_fetch.py <id> [<id> ...]
+  python scripts/survey/sf_fulltext_fetch.py --rendition pdf <id> [<id> ...]
   python scripts/survey/sf_fulltext_fetch.py --sentinel-data
 Exit 0 iff every requested (id, rendition) persisted.
 """
@@ -28,6 +29,8 @@ import hashlib
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
 import urllib.request
@@ -48,15 +51,29 @@ def _normalize_data_root(p):
 DEFAULT_DATA_DIR = _normalize_data_root(os.environ.get(
     "SPEECHRL_DATA_DIR",
     "E:/chao_workspace/exploring-l4-intelligence/speechrl-data"))
-RENDITIONS = (("pdf", "https://export.arxiv.org/pdf/{aid}"),
-              ("eprint", "https://export.arxiv.org/e-print/{aid}"))
+RENDITIONS = (("pdf", "https://arxiv.org/pdf/{aid}"),
+              ("eprint", "https://arxiv.org/e-print/{aid}"))
 UA = "speech-mllm-training-free-rl survey fulltext fetcher (stdlib urllib)"
 SPACING_S = 3.0
 MAX_ATTEMPTS = 4
+ARXIV_ID = re.compile(r"^(?:\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Za-z]{2})?/\d{7})$")
+USAGE = (
+    "usage: sf_fulltext_fetch.py [--data-dir DIR] [--rendition pdf|eprint|both] "
+    "<arxiv-id>... | --sentinel-data"
+)
+
+
+def valid_body(kind, body):
+    if len(body) <= 1024:
+        return False
+    if kind == "pdf":
+        return body.startswith(b"%PDF-")
+    return True
 
 
 def fetch(url):
     last_err = None
+    curl_tried = False
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -64,30 +81,73 @@ def fetch(url):
                 return resp.status, resp.read(), attempt, None
         except Exception as e:  # noqa: BLE001 — retried, then reported in ledger
             last_err = f"{type(e).__name__}: {e}"
+            curl = shutil.which("curl")
+            if curl and not curl_tried:
+                curl_tried = True
+                completed = subprocess.run(
+                    [curl, "-L", "--fail", "--silent", "--show-error", "--max-time", "120", "-A", UA, url],
+                    check=False,
+                    capture_output=True,
+                    timeout=135,
+                )
+                if completed.returncode == 0:
+                    return 200, completed.stdout, attempt + 1, None
+                last_err = (
+                    f"curl exit {completed.returncode}: "
+                    f"{completed.stderr.decode('utf-8', 'replace').strip()}"
+                )
             time.sleep(SPACING_S * (2 ** (attempt - 1)))
     return None, b"", MAX_ATTEMPTS, last_err
 
 
-def main(argv):
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
+def parse_cli(argv):
     args = [a for a in argv[1:]]
     data_dir = os.path.join(DEFAULT_DATA_DIR, "survey-fulltext")
     if "--data-dir" in args:
         i = args.index("--data-dir")
         data_dir = args[i + 1]
         del args[i:i + 2]
+    rendition = "both"
+    if "--rendition" in args:
+        i = args.index("--rendition")
+        if i + 1 >= len(args):
+            raise ValueError("--rendition requires pdf, eprint, or both")
+        rendition = args[i + 1]
+        del args[i:i + 2]
+    if rendition not in {"pdf", "eprint", "both"}:
+        raise ValueError("rendition must be pdf, eprint, or both")
+    renditions = RENDITIONS if rendition == "both" else tuple(row for row in RENDITIONS if row[0] == rendition)
     if args == ["--sentinel-data"]:
         with open(SENTINEL_DATA, encoding="utf-8") as f:
             args = sorted(json.load(f)["papers"].keys())
+    invalid = [value for value in args if not ARXIV_ID.fullmatch(value)]
+    if invalid:
+        raise ValueError(f"invalid arXiv ID: {invalid}")
+    return {"ids": args, "data_dir": data_dir, "renditions": renditions}
+
+
+def main(argv):
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    if argv[1:] in (["--help"], ["-h"]):
+        print(USAGE)
+        return 0
+    try:
+        parsed = parse_cli(argv)
+    except (ValueError, IndexError) as exc:
+        print(f"error: {exc}")
+        return 2
+    args = parsed["ids"]
+    data_dir = parsed["data_dir"]
+    renditions = parsed["renditions"]
     if not args:
-        print("usage: sf_fulltext_fetch.py [--data-dir DIR] <arxiv-id>... | --sentinel-data")
+        print(USAGE)
         return 2
 
     failures = []
     first = True
     for aid in args:
-        for kind, tpl in RENDITIONS:
+        for kind, tpl in renditions:
             dest = os.path.join(data_dir, aid, f"{aid}.{'pdf' if kind == 'pdf' else 'eprint'}")
             if os.path.exists(dest) and os.path.getsize(dest) > 0:
                 print(f"  [SKIP] {aid} {kind} already present")
@@ -98,7 +158,7 @@ def main(argv):
             url = tpl.format(aid=aid)
             status, body, attempts, err = fetch(url)
             utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            ok = err is None and status == 200 and len(body) > 1024
+            ok = err is None and status == 200 and valid_body(kind, body)
             row = {"arxiv_id": aid, "kind": kind, "url": url, "time_utc": utc,
                    "http_status": status, "attempts": attempts, "bytes": len(body),
                    "sha256": hashlib.sha256(body).hexdigest() if body else None,
