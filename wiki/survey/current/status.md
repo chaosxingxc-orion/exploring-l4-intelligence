@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1B late execution and closeout**. Scientific synthesis is ready for release freeze;
-  formal Stage-1C start still requires an independent signature against the fixed release commit.
+- Gate: **Stage-1B release frozen / transition review pending**. Release commit is
+  `8101320a1a25c3628a5d5c196b2efceb83abe829`; formal Stage-1C start requires an independent signature.
 - Exposure: 65 frozen arXiv rows and 65/65 bounded delta rows executed; research model/smoke = 0;
   dataset metric/reproduction/prototype = 0. Broad D0 scanning remains closed.
 - Frozen D0: 20,727/20,727 abstract identities, 319 D2 full texts, 226 retained works = 12 core +
@@ -34,5 +34,7 @@
 - Integrity correction: eight historical invalid `--help` request rows remain append-only in the
   full-text ledger and are excluded from paper/rendition denominators. The CLI now rejects invalid IDs
   before network access; no source rows were deleted.
-- Next action: build and verify a commit-bound Stage-1B release manifest, freeze the bytes, then
-  request one independent Stage-1C transition review. No model or smoke action is next.
+- Release verification: 35 manifest artifacts = 29 Git + 6 external; commit/external byte and SHA-256
+  replay reports zero mismatches; the release commit adds no PDF/e-print.
+- Next action: request one independent Stage-1C transition review against commit `8101320`; no model,
+  smoke, ranking, selection or reproduction action is next.

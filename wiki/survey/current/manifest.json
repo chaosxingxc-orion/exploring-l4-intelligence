@@ -200,7 +200,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "fb3fd5b8c4683461f0c2db7bbbe18520109e0e40c4d616698107315619f09df0",
+      "sha256": "9dd5937120cbe13cf1813fc0640a07825fe4c8fa8f42c602dbe9aeca0be02233",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

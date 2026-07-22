@@ -1083,7 +1083,7 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B late execution and closeout",
+            "Stage-1B release frozen / transition review pending",
             "formal Stage-1C start",
             "research model/smoke = 0",
             "50/50 route dispositions",

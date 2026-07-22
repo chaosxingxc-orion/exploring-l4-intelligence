@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-22 — Stage-1B mapping synthesis ready for release freeze"
+last_refresh: "2026-07-22 — Stage-1B release frozen; transition review pending"
 ---
 
 # Research Objective & Current State
@@ -12,8 +12,8 @@ last_refresh: "2026-07-22 — Stage-1B mapping synthesis ready for release freez
 
 当前是 **Stage-1B late execution and closeout**。Stage-1A search design 已签字，owner 已授权
 Stage-1B survey 执行。冻结 D0、date-bounded delta、T1 route disposition、non-H5 method-path
-mapping 与 Stage-1C eligible-input synthesis 已完成；尚待把当前字节冻结成 commit/manifest-bound
-release，并由独立 reviewer 对固定 commit 作阶段转换签字。
+mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 commit
+`8101320a1a25c3628a5d5c196b2efceb83abe829`，尚待独立 reviewer 对该固定 commit 签字。
 
 允许检索记录闭合、去重、citation traversal、non-H5 编码、D2 全文映射与 release 检查。
 研究模型加载/smoke、数据集 metric/headroom、复现、prototype、候选问题排序与 owner 选题均未
@@ -59,10 +59,9 @@ release，并由独立 reviewer 对固定 commit 作阶段转换签字。
 
 ## 5. 下一动作
 
-生成 Stage-1B release manifest，绑定 protocol、D0/delta/T1、226 roster、strict coding、D2
-sidecars、mapping tables、eligible inputs、H5 与 unresolved counts；运行可重放检查并冻结 commit。
-随后只请求一次针对该固定 commit 的独立 Stage-1C transition review。reviewer `SIGN` 前不正式
-启动 Stage-1C；即使签字，模型/复现仍留待后续执行门。
+只请求一次针对 release commit `8101320a1a25c3628a5d5c196b2efceb83abe829` 的独立
+Stage-1C transition review。35 项 manifest 输入已重放，Git/外部资产 hash/bytes 差异为 0。
+reviewer `SIGN` 前不正式启动 Stage-1C；即使签字，模型/复现仍留待后续执行门。
 
 ## 6. 失效条件
 
