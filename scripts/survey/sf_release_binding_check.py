@@ -10,8 +10,10 @@ carry a machine-readable binding block:
        "method_candidate": "0/11", "reward_guided_selection": "4/11",
        "trajectory_pool": "2/11"} -->
 
-This script parses the block from every bound artifact and compares each
-value against the referenced persisted test output. Stale prose numbers fail
+This script parses the block from every applicable bound artifact and compares
+each value against the referenced persisted test output. Current scientific
+artifacts that carry no legacy occupancy binding/headline token are explicitly
+not applicable; malformed or partial binding tokens still fail. Stale prose numbers fail
 — data can no longer change while a dated artifact keeps quoting old
 headlines. Self-test: an in-memory fixture with a wrong value must be
 flagged (oracle-can-fail), else exit 1.
@@ -271,6 +273,7 @@ def main(argv=None, *, repo=REPO):
 
     repo = Path(repo)
     cache = {}
+    required_binding_paths = set()
     try:
         if args.legacy_regression:
             from ai_context_surface_check import TrustedRepoReader
@@ -289,12 +292,19 @@ def main(argv=None, *, repo=REPO):
             read_bytes = view.read_bytes
             allowed_paths = set(view.artifacts)
             validation_mode = "current-manifest"
+            required_binding_paths = {
+                entry["path"]
+                for entry in view.document["files"]
+                if entry["role"] == "active_review_transaction"
+            }
     except (CurrentManifestError, OSError, ValueError) as error:
         print(f"[BINDING] manifest load failed: {error}")
         print("release binding: FAIL (1 failures)")
         return 1
 
     all_fails = []
+    validated = 0
+    not_applicable = 0
     for rel in paths:
         try:
             raw = read_bytes(rel)
@@ -302,6 +312,18 @@ def main(argv=None, *, repo=REPO):
         except (CurrentManifestError, OSError, UnicodeDecodeError, ValueError) as error:
             all_fails.append(f"{rel}: artifact missing, invalid, or untrusted: {error}")
             continue
+        has_binding_surface = rel in required_binding_paths or any(
+            token in text
+            for token in (
+                "release_binding",
+                "generated_headline_begin",
+                "generated_headline_end",
+            )
+        )
+        if validation_mode == "current-manifest" and not has_binding_surface:
+            not_applicable += 1
+            continue
+        validated += 1
         all_fails += check_artifact(
             text,
             rel,
@@ -314,7 +336,8 @@ def main(argv=None, *, repo=REPO):
         print(f"[BINDING] {f}")
     print(
         f"release binding: {'FAIL' if all_fails else 'PASS'} "
-        f"({len(all_fails)} failures; mode={validation_mode})"
+        f"({len(all_fails)} failures; mode={validation_mode}; "
+        f"validated={validated}; not-applicable={not_applicable})"
     )
     return 1 if all_fails else 0
 

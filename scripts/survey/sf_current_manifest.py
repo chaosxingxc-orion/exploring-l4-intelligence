@@ -464,7 +464,12 @@ def _validate_consumer_document(document: object) -> dict[str, dict]:
 def load_consumer_manifest(
     repo: Path, manifest_relative_path: str = OUTPUT_RELATIVE_PATH
 ) -> ConsumerManifest:
-    """Strict-load a manifest and freeze every named file at its declared hash."""
+    """Strict-load a manifest and freeze every named file at its declared hash.
+
+    In a Git worktree, stage-0 blob bytes are authoritative so line-ending
+    smudge filters cannot change the identity seen by different platforms.
+    Non-Git fixtures retain the trusted-filesystem path for isolated tests.
+    """
 
     manifest_path = canonical_consumer_path(
         manifest_relative_path, label="current manifest path"
@@ -473,11 +478,31 @@ def load_consumer_manifest(
         raise CurrentManifestError(
             f"current manifest path points to archive path: {manifest_path}"
         )
+    repo = Path(repo)
     try:
-        reader = TrustedRepoReader(Path(repo))
-        raw = reader.read_bytes(manifest_path)
+        if (repo / ".git").exists():
+            inventory, read_blob = _git_release_context(repo)
+
+            def read_authority(path: str) -> bytes:
+                entry = inventory.get(path)
+                if entry is None:
+                    raise CurrentManifestError(
+                        f"manifest-input-untracked: {path}"
+                    )
+                return read_blob(_validate_index_entry(path, entry).blob)
+
+        else:
+            reader = TrustedRepoReader(repo)
+            read_authority = reader.read_bytes
+
+        raw = read_authority(manifest_path)
         document = strict_json_loads(raw, manifest_path)
-    except (ContextSurfaceError, JsonContractError, OSError) as error:
+    except (
+        ContextSurfaceError,
+        CurrentManifestError,
+        JsonContractError,
+        OSError,
+    ) as error:
         raise CurrentManifestError(
             f"current manifest missing, invalid, or untrusted: {manifest_path}: {error}"
         ) from error
@@ -486,8 +511,8 @@ def load_consumer_manifest(
     artifacts: dict[str, bytes] = {}
     for path, entry in files_by_path.items():
         try:
-            artifact = reader.read_bytes(path)
-        except (ContextSurfaceError, OSError) as error:
+            artifact = read_authority(path)
+        except (ContextSurfaceError, CurrentManifestError, OSError) as error:
             raise CurrentManifestError(
                 f"manifest artifact missing or untrusted: {path}: {error}"
             ) from error

@@ -9,6 +9,7 @@ import importlib.util
 import io
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -138,6 +139,48 @@ class ManifestConsumerContractTests(unittest.TestCase):
         with contextlib.redirect_stdout(output):
             code = module.main(argv, repo=repo)
         return code, output.getvalue()
+
+    def test_git_repo_consumers_bind_stage0_blobs_not_crlf_worktree_bytes(self):
+        fixture = self.fixture()
+        for arguments in (
+            ["init", "-q"],
+            ["config", "user.email", "test@example.invalid"],
+            ["config", "user.name", "Current Manifest Test"],
+            ["config", "core.autocrlf", "false"],
+            ["add", "."],
+            ["commit", "-q", "-m", "fixture"],
+        ):
+            subprocess.run(
+                ["git", *arguments],
+                cwd=fixture.root,
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+
+        prose = fixture.target(fixture.prose_path)
+        prose.write_bytes(prose.read_bytes().replace(b"\n", b"\r\n"))
+        loaded = self.current_manifest.load_consumer_manifest(
+            fixture.root, fixture.manifest_path
+        )
+        self.assertEqual(
+            b"Stage-1A scoped current state.\n",
+            loaded.read_bytes(fixture.prose_path),
+        )
+
+        subprocess.run(
+            ["git", "add", fixture.prose_path],
+            cwd=fixture.root,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        with self.assertRaisesRegex(
+            self.current_manifest.CurrentManifestError, "SHA-256 mismatch"
+        ):
+            self.current_manifest.load_consumer_manifest(
+                fixture.root, fixture.manifest_path
+            )
 
     def test_strict_manifest_schema_and_duplicate_paths_fail_closed(self):
         fixture = self.fixture()
@@ -355,6 +398,17 @@ class ManifestConsumerContractTests(unittest.TestCase):
         self.assertEqual(1, code, output)
         self.assertIn("manifest", output)
         self.assertNotIn("[skip]", output)
+
+    def test_release_binding_ignores_current_artifacts_without_legacy_occupancy_claims(self):
+        fixture = self.fixture()
+        document = fixture.manifest_document()
+        document["release_bound_artifacts"].append(fixture.prose_path)
+        fixture.write_manifest(document)
+
+        code, output = self.run_main(self.release, [], fixture.root)
+        self.assertEqual(0, code, output)
+        self.assertIn("validated=1", output)
+        self.assertIn("not-applicable=1", output)
 
     def test_release_rejects_stale_occupancy_and_hand_edited_headline(self):
         fixture = self.fixture()
