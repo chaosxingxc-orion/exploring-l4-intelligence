@@ -292,9 +292,12 @@ class CurrentManifestContractTests(unittest.TestCase):
         document = self.build()
         by_path = {entry["path"]: entry for entry in document["files"]}
         expected = {
+            "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+            "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+            "wiki/survey/current/stage1b-transition-reference-appendix.md",
             "wiki/survey/current/tables/stage1b-mapping-release.md",
             "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-            "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+            "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
         }
         self.assertTrue(expected <= set(by_path))
         self.assertTrue(expected <= set(document["release_bound_artifacts"]))
@@ -409,10 +412,12 @@ class CurrentManifestContractTests(unittest.TestCase):
         document = self.build()
         self.assertEqual(
             [
-                "wiki/survey/current/tables/opening-guarantees.md",
+                "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+                "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+                "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-                "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+                "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
             ],
             document["release_bound_artifacts"],
         )
@@ -421,7 +426,7 @@ class CurrentManifestContractTests(unittest.TestCase):
                 "wiki/survey/current/README.md",
                 "wiki/survey/current/protocol.md",
                 "wiki/survey/current/status.md",
-                "wiki/survey/current/tables/opening-guarantees.md",
+                "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
             ],
@@ -432,7 +437,7 @@ class CurrentManifestContractTests(unittest.TestCase):
         ):
             self.assertTrue(
                 path.startswith("wiki/survey/current/")
-                or path == "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json"
+                or path == "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json"
             )
             self.assertNotRegex(path, r"amendment|review|response")
 
@@ -1061,14 +1066,14 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B late execution and closeout",
+            "Stage-1B v3 release frozen",
             "status.md",
             "stage1b-mapping-release.md",
             "stage1c-eligible-inputs.md",
             "protocol.md",
             "manifest.json",
             "targeted",
-            "wiki/audit/system-first-stage1a/INDEX.md",
+            "wiki/audit/system-first-stage1b/INDEX.md",
             "H5 hold",
             "Legacy files are not default context",
         ):
@@ -1083,7 +1088,7 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B release frozen / transition review pending",
+            "Stage-1B v3 release frozen / transition review pending",
             "formal Stage-1C start",
             "research model/smoke = 0",
             "50/50 route dispositions",

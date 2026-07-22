@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-22 — Stage-1B release frozen; transition review pending"
+last_refresh: "2026-07-22 — Stage-1B v3 speech-prior repair frozen; transition re-review pending"
 ---
 
 # Research Objective & Current State
@@ -12,8 +12,9 @@ last_refresh: "2026-07-22 — Stage-1B release frozen; transition review pending
 
 当前是 **Stage-1B late execution and closeout**。Stage-1A search design 已签字，owner 已授权
 Stage-1B survey 执行。冻结 D0、date-bounded delta、T1 route disposition、non-H5 method-path
-mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 commit
-`51b527b88e1f9993f1c2bd9d826f86c73a6a938c`，尚待独立 reviewer 对该固定 commit 签字。
+mapping 与 Stage-1C eligible-input synthesis 已完成。针对评委指出的典型语音论文遗漏，现有
+本地/冻结证据池已完成有界身份审计与严格补充；v3 科学 release 已冻结在 commit
+`626914a963637354642116b938eb9ab745a099c8`，尚待独立 reviewer 对该固定 commit 复审。
 
 允许检索记录闭合、去重、citation traversal、non-H5 编码、D2 全文映射与 release 检查。
 研究模型加载/smoke、数据集 metric/headroom、复现、prototype、候选问题排序与 owner 选题均未
@@ -31,17 +32,15 @@ mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 c
 - 冻结 D0 为 20,727 个唯一 arXiv ID，20,727/20,727 有摘要处置；319 篇达到全文深度，
   226 篇保留（12 core、43 instrument、45 transfer、126 negative），93 drop。该闭合只对
   frozen D0 成立，不是全领域零遗漏声明。
-- 65/65 条 date-bounded delta 查询均已处置，活动失败为 0；得到 193 个唯一 work，人工
-  REC-0 后 12 篇进入 PDF+e-print+D2，181 篇只从本轮承重 map 排除，重复种子为 0。
-- 50/50 条 T1 route 均有 disposition：28 executed、3 not held、19 `WAIVED_UNAVAILABLE`。
-  已执行 route 共扫描 71,254 个标题，宽词表命中 3,310；677 可与已知 work 合并，2,633
-  仍是 title-only identity，不能被写成 zero hit 或用于 `NO_DIRECT_MATCH`。
-- 12/12 个 frozen registry core work 已从本地 e-print 执行后向 arXiv-ID 子集闭合，得到
-  266 个唯一引用 ID；其中 232 个位于 D0/delta/registry 外。DOI/title-only edge 未解析；
-  前向公共索引返回 HTTP 429，12 项显式豁免，故不作全引文或文献宇宙闭合声明。
-- 当前 map 明确分开三个分母：226-work portfolio、8-work/11-path strict occupancy、12 篇
-  delta supplement。strict set 中 9 路径承重、2 路径为 boundary，11/11 均 API-only，
-  speech-native strict path 为 0（未测，不是空文献结论）。
+- Delta 65/65 已处置：193 个唯一 work，12 篇进入 PDF+e-print+D2，重复种子为 0。T1
+  50/50 有 disposition；2,633 个 title-only identity 及 232 个集合外 backward arXiv ID
+  继续作为显式遗漏面，不能支持 zero-hit、`NO_DIRECT_MATCH` 或文献宇宙闭合声明。
+- 当前 map 明确分开五个分母：226-work portfolio、legacy 8-work/11-path strict occupancy、
+  81-work speech/omni identity audit、32-row speech/omni strict supplement 与 12 篇 delta D2。
+  81 个命名身份已全部唯一落位：23 direct、19 instrument、27 boundary、11 trained/model
+  exclusion、1 H5-held；32 行严格表含全部 23 个直接方法、8 个承重测量工具与 1 个边界。
+  语音补充的 23 个直接路径均有 load-bearing speech/audio 与 API-only 外部控制，但其决策核心
+  可为 audio-native、omni-native、text coordinator 或 cascade，不能混写为同一核心模态。
 - Stage-1C 输入保持未排序：budget/stop/repair、evaluator reliability、interactive/full-duplex
   三类为 `ELIGIBLE_NON_H5`；evidence-state 与 tool/agent arbitration 因 H5 依赖暂为
   `INELIGIBLE_FOR_STAGE_1C_SELECTION`。
@@ -53,16 +52,20 @@ mapping 与 Stage-1C eligible-input synthesis 已完成；release 已冻结在 c
 - CURRENT：`wiki/survey/current/README.md` → `status.md`。
 - Stage-1B map：`wiki/survey/current/tables/stage1b-mapping-release.md`。
 - Stage-1C 未排序输入：`wiki/survey/current/tables/stage1c-eligible-inputs.md`。
+- 语音/omni 完整性：`wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json`；
+  严格补充：`wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json`；
+  自包含引用：`wiki/survey/current/stage1b-transition-reference-appendix.md`。
 - frozen-D0 收口：`wiki/survey/workbench/system-first-stage1b/2026-07-22-frozen-d0-exhaustion-closeout.md`。
 - 长期记录：`wiki/survey/registry/README.md`；PDF/e-print/提取文本仍在 `SPEECHRL_DATA_DIR`。
-- 本轮 checks：`docs/checks/stage1b-closeout/2026-07-22/`。
+- v3 checks：`docs/checks/stage1b-closeout/2026-07-22-v3/`。
 
 ## 5. 下一动作
 
-只请求一次针对 release commit `51b527b88e1f9993f1c2bd9d826f86c73a6a938c` 的独立
-Stage-1C transition review。37 项 manifest 输入已重放，Git/外部资产 hash/bytes 差异为 0。
-该 v2 release 明确取代 `8101320`：仅修复 H5 codebook 哈希绑定并把校准包及 companion hash
-纳入清单，研究角色、计数、mapping 结论与 H5 `WITHHOLD` 状态均未改变。
+只请求一次针对 release commit `626914a963637354642116b938eb9ab745a099c8` 的独立
+Stage-1C transition re-review。v3 的 45 项 manifest 输入（37 Git + 8 external）已重放；新增
+检查保证 81 个命名语音/omni 身份无静默遗漏、23 个直接方法全部进入严格表、32 个承重引用
+均有本地全文哈希与页码锚点。v3 取代 `51b527b`，修复的是科学证据覆盖与 release 自洽性，
+不改变 H5 `WITHHOLD`，也不提前讨论创新性。
 reviewer `SIGN` 前不正式启动 Stage-1C；即使签字，模型/复现仍留待后续执行门。
 
 ## 6. 失效条件

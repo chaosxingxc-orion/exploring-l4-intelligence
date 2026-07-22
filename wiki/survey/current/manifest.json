@@ -3,8 +3,8 @@
   "files": [
     {
       "role": "stage1b_release_manifest",
-      "path": "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
-      "sha256": "51e3229352354c3f20ffa4496536cbf6f6bedd7c715c4e9aadc779439cb84492",
+      "path": "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
+      "sha256": "91effc684bfda4a9cbdea79dd78476ebf7f9e225f9a67a025379826d8893af2c",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -102,14 +102,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "15a7be1fd0516d1634a992fb228c0e5a71663fdb4c48003d5c5d1af9459b338a",
+      "sha256": "201b63628e36fd9a179ddccf3291f31a6d0a0bb6e94124dc0abd24cc5f366f2c",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "3df5cd82062e5990dad1a78a59db558cf1da4447230dbce3d578195fc0f06a33",
+      "sha256": "3007bdd74b4bf75fe97bf7e72557467521b48c384144f95f0e3ffcb78eec49f0",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -191,6 +191,20 @@
       "load_policy": "machine-only"
     },
     {
+      "role": "stage1b_speech_direct_prior_supplement_v1",
+      "path": "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+      "sha256": "9383f93ae776e970b1509050533351dc9ec111b8ff1dcf062d941ec6d6ff7d63",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "stage1b_speech_omni_prior_coverage_v1",
+      "path": "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+      "sha256": "048d9b3677756e5c57735b6c2aece5b510aa9e2e43b54900b7cfd5ff66128695",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
       "sha256": "16d04d0b83cf4bf667e6418b5e3edd1a42c51809358c66696a009ffa5f002bda",
@@ -198,9 +212,16 @@
       "load_policy": "targeted"
     },
     {
+      "role": "stage1b_transition_reference_appendix",
+      "path": "wiki/survey/current/stage1b-transition-reference-appendix.md",
+      "sha256": "0e33b48dd458940d3448569315dc774ab4467de2722e920d5380bda9a8f83111",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "10079bd341618f082b6f0dcf0db8290a64c058dcde4fe224c65052e440360f14",
+      "sha256": "081c80b812fa16946149f0c01f6cd89225d2c4d38000944df6e565eeba6bd8d8",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -214,14 +235,14 @@
     {
       "role": "stage1b_mapping_release",
       "path": "wiki/survey/current/tables/stage1b-mapping-release.md",
-      "sha256": "a7ebcb7d910f46486ca540b25f6722b7d07418e05f43130b7413818e15d8fb94",
+      "sha256": "5ed6ca37506063f011814b5fb8169cd908ac28ee0f12e3c8ff6f7fe9db248b50",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
       "role": "stage1c_eligible_inputs",
       "path": "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-      "sha256": "afe4a7a25c470e22bfd574cab3fcf4a62b394a5a1614b219714cc2014407d6f7",
+      "sha256": "5fe33b9b6053f6bbaff808ea27112584dd214d06d9350c93201423ac34f4ac30",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -234,17 +255,19 @@
     }
   ],
   "release_bound_artifacts": [
-    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+    "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-    "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+    "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ],
   "prose_scan_paths": [
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
-    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"

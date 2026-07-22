@@ -192,6 +192,18 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
+        "stage1b_speech_omni_prior_coverage_v1",
+        "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1b_speech_direct_prior_supplement_v1",
+        "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
         "schema_v3_adjudication",
         "wiki/survey/current/data/schema-v3-adjudication.json",
         "controlled-append-only",
@@ -225,6 +237,12 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
+        "stage1b_transition_reference_appendix",
+        "wiki/survey/current/stage1b-transition-reference-appendix.md",
+        "release-scoped-immutable",
+        "targeted",
+    ),
+    FileSpec(
         "stage1c_eligible_inputs",
         "wiki/survey/current/tables/stage1c-eligible-inputs.md",
         "release-scoped-immutable",
@@ -232,7 +250,7 @@ BASE_FILE_SPECS = (
     ),
     FileSpec(
         "stage1b_release_manifest",
-        "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+        "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
         "release-scoped-immutable",
         "targeted",
     ),
@@ -267,16 +285,18 @@ _AUDIT_FILE_SPECS = (
 )
 
 _BASE_RELEASE_BOUND = (
-    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
+    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v1.json",
+    "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-    "docs/checks/stage1b-closeout/2026-07-22/release-manifest.json",
+    "docs/checks/stage1b-closeout/2026-07-22-v3/release-manifest.json",
 )
 _BASE_PROSE_SCAN = (
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
-    "wiki/survey/current/tables/opening-guarantees.md",
+    "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
 )
