@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-21. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-07-22. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
 
@@ -12,12 +12,13 @@
   reward-guided control-plane program.
 - **Current state:** Stage-1B systematic mapping is at bounded closeout. Frozen D0 is exhausted;
   delta and all 50 T1 routes have dispositions; the required map and unranked Stage-1C inputs exist.
-  A commit-bound release and independent stage-transition signature remain before formal Stage-1C.
+  Release v2 is frozen at `51b527b`; only an independent stage-transition signature remains before
+  formal Stage-1C.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** freeze the exact Stage-1B release bytes, run release checks, and request
-  one independent transition review. H5-dependent inputs remain ineligible; research models, smoke,
+- **Next authorized work:** request one independent transition review against `51b527b`.
+  H5-dependent inputs remain ineligible; research models, smoke,
   dataset metrics, reproduction, candidate ranking and prototypes remain prohibited in Stage-1B.
 
 ## W2

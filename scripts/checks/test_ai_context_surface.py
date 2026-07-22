@@ -1677,24 +1677,32 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 21), refresh_date)
+        self.assertEqual(date(2026, 7, 22), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage-1A",
-            "Stage-1B 未开始且未经授权",
+            "Stage-1B late execution and closeout",
             "外部 reward-guided control plane",
-            "22 = 4 + 18",
+            "20,727",
+            "319",
+            "226",
+            "65/65",
+            "193",
+            "50/50",
+            "2,633",
+            "12/12",
+            "266",
+            "232",
+            "8-work/11-path",
+            "ELIGIBLE_NON_H5",
             "H5",
-            "pypdf 6.14.0",
-            "v7 contract-4",
-            "494 rows",
-            "90 个 official-receipt works",
             "owner",
-            "systematic discovery queries = 0",
-            "INHERITED_PRIOR_EXPOSURE",
+            "research model/smoke",
             "wiki/survey/current/README.md",
-            "wiki/audit/system-first-stage1a/INDEX.md",
-            "下一授权动作",
+            "stage1b-mapping-release.md",
+            "stage1c-eligible-inputs.md",
+            "51b527b",
+            "下一动作",
             "失效条件",
         )
         for token in required_truth:
@@ -1702,7 +1710,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                 self.assertIn(token, text)
         self.assertNotIn("ready for sign-off", text)
 
-    def test_hot_state_keeps_round16_release_gate_open(self) -> None:
+    def test_hot_state_keeps_stage1c_transition_gate_open(self) -> None:
         for path in (
             "wiki/Research-Objective.md",
             "wiki/Per-Work-Status.md",
@@ -1711,15 +1719,14 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             text = self.read_text(path)
             with self.subTest(path=path):
                 for token in (
-                    "Stage-1A",
                     "Stage-1B",
+                    "Stage-1C",
                     "H5",
-                    "owner",
                 ):
                     self.assertIn(token, text)
                 self.assertRegex(
                     text,
-                    r"(?i)H5[\s\S]{0,180}(?:pending|待|尚缺)",
+                    r"(?i)H5[\s\S]{0,220}(?:pending|待|尚缺|不得进入)",
                 )
                 for stale in ("2225c48", ".wiki-tmp", "4506900"):
                     self.assertNotIn(stale, text)
@@ -1735,7 +1742,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 21), per_work_date)
+        self.assertEqual(date(2026, 7, 22), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):
