@@ -39,7 +39,7 @@
     {
       "role": "campaign_audit_semantic_anchor",
       "path": "scripts/checks/ai_context_inventory.py",
-      "sha256": "b30e7177f5f853908fb6bb438cd32b744c30eb25678317594d35605a804db7b6",
+      "sha256": "ee4c7fd520251303339716e88108ed67ef3ca52c3d2e63ea1b8afe9454442819",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
@@ -228,7 +228,7 @@
     {
       "role": "audit_artifact_registry",
       "path": "wiki/survey/sf-audit-artifact-registry.json",
-      "sha256": "97bb34a4870986e0c9dddaad7530d3fb1fafc44a696209168e0ab8fa253ff7b8",
+      "sha256": "9312f68144fc0d29a3ca385929a7af60b5ad834eef32d67155a7907865bb122e",
       "mutability": "append-only",
       "load_policy": "machine-only"
     }
