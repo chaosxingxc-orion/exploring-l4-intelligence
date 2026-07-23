@@ -1,0 +1,57 @@
+{
+  "schema": "sf-stage1b-capability-delta-seed-targets-v1",
+  "campaign": "system-first-stage1b-capability-delta",
+  "authorization_token": "AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING",
+  "authorization_date": "2026-07-23",
+  "frozen_stage1b_v5_commit": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "targets": [
+    {
+      "arxiv_id": "2405.20834",
+      "title": "Retrieval Meets Reasoning: Even High-school Textbook Knowledge Benefits Multimodal Reasoning",
+      "seed_reason": "D1 multimodal-knowledge protocol analogue",
+      "role": "COMPONENT_PATH"
+    },
+    {
+      "arxiv_id": "2602.07624",
+      "title": "M2A: Multimodal Memory Agent with Dual-Layer Hybrid Memory for Long-Term Personalized Interactions",
+      "seed_reason": "D3 multimodal-memory direct path",
+      "role": "DIRECT_PATH"
+    },
+    {
+      "arxiv_id": "2603.12056",
+      "title": "XSkill: Continual Learning from Experience and Skills in Multimodal Agents",
+      "seed_reason": "D2 multimodal-skill and D3 persistence path",
+      "role": "DIRECT_PATH"
+    },
+    {
+      "arxiv_id": "2603.28088",
+      "title": "GEMS: Agent-Native Multimodal Generation with Memory and Skills",
+      "seed_reason": "D0 system bundle with D2/D3 components",
+      "role": "COMPONENT_PATH"
+    },
+    {
+      "arxiv_id": "2604.24594",
+      "title": "Skill Retrieval Augmentation for Agentic AI",
+      "seed_reason": "D2 skill retrieval/incorporation instrument and falsifier",
+      "role": "INSTRUMENT"
+    },
+    {
+      "arxiv_id": "2605.13527",
+      "title": "MMSkills: Towards Multimodal Skills for General Visual Agents",
+      "seed_reason": "D2 causally testable multimodal-skill direct path",
+      "role": "DIRECT_PATH"
+    },
+    {
+      "arxiv_id": "2606.09316",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "seed_reason": "D1-to-D2 knowledge-to-skill compilation edge",
+      "role": "COMPONENT_PATH"
+    },
+    {
+      "arxiv_id": "2606.29538",
+      "title": "RESOURCE2SKILL: Distilling Executable Agent Skills from Human-Created Multimodal Resources",
+      "seed_reason": "D2 multimodal-resource skill construction direct path",
+      "role": "DIRECT_PATH"
+    }
+  ]
+}

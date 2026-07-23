@@ -137,14 +137,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "528eea5c5625abc5d3289cbaba8c45a275c71b337e69bb6496546bbb2a3d583c",
+      "sha256": "298159ce2a4242116273d49d2536b84632351086106c9212fcffec894a37f569",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "74949da9b3e3433515ff4b6ce816eb6aa9c882f118cf4373139d0c673281df26",
+      "sha256": "647bd9d9311e51b7bb91f37ee75582c5f3878524e73646a5977aa0fd45feca39",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -284,7 +284,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "e29208da715ffc31309e8c425943b537328eca942774ac3bbc48f6c20e1603c6",
+      "sha256": "ecac0a02724faa986ac58c80d02c00183a0cdc699c823eeab86c997ace618685",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

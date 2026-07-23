@@ -1,8 +1,9 @@
 # Current Survey Router
 
-- Current gate: **Stage-1C common-rubric comparison started** under independent verdict
-  `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`. The frozen Stage-1B v5 scientific commit remains
-  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`. Ranking, selection and execution remain unauthorized.
+- Current gate: **Stage-1B capability-delta release candidate awaiting independent review** under
+  owner token `AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING`. The frozen Stage-1B v5 scientific commit
+  remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; the candidate does not rewrite it. Stage-1C
+  common-rubric authority is preserved but paused. Ranking, selection and execution remain unauthorized.
 - Read in this order: [`status.md`](status.md) →
   [`tables/stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
   [`tables/stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → targeted data/reference
@@ -24,6 +25,11 @@
   restart. Do not infer literature-universe closure.
 - Stage-1C corrections and the four-paper priority intake are canonical in
   [`data/stage1c-common-rubric-comparison-v1.json`](data/stage1c-common-rubric-comparison-v1.json).
+- Capability-delta RC: [`../workbench/system-first-stage1b-capability-delta/README.md`](../workbench/system-first-stage1b-capability-delta/README.md).
+  It locks 8 seeds plus 6 citation promotions, recomputes a 296-work candidate surface, and requests
+  independent `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`. The unsigned 14-work delta is not yet a
+  Stage-1C input.
 - H5 remains withheld; H5-dependent bundles cannot enter Stage-1C selection.
-- Audit pointer: `wiki/audit/system-first-stage1b/INDEX.md`. Load individual proposals and reviews only
+- Audit pointers: `wiki/audit/system-first-stage1b/INDEX.md` and
+  `wiki/audit/system-first-stage1b-capability-delta/INDEX.md`. Load individual proposals and reviews only
   through targeted search. Historical proposals, reviews, responses and amendments are cold audit.

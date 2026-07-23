@@ -1,0 +1,80 @@
+{
+  "schema": "sf-stage1b-capability-delta-contract-report-v1",
+  "artifact_id": "SF-STAGE1B-CAPABILITY-DELTA-CONTRACT-REPORT-RC1",
+  "as_of": "2026-07-23",
+  "authorization": "AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING",
+  "status": "RELEASE_CANDIDATE_AWAITING_INDEPENDENT_REVIEW",
+  "requested_review_verdict": "SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE",
+  "self_signed": false,
+  "stage1b_v5": {
+    "release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+    "mutated": false
+  },
+  "surface": {
+    "delta_records": 14,
+    "role_counts": {
+      "BOUNDARY": 1,
+      "COMPONENT_PATH": 5,
+      "DIRECT_PATH": 4,
+      "INSTRUMENT": 3,
+      "NEGATIVE_OR_FALSIFIER": 1
+    },
+    "primary_direction_counts": {
+      "KNOWLEDGE": 1,
+      "MEMORY": 3,
+      "SKILL": 9,
+      "SYSTEM": 1
+    },
+    "project_use_relation_counts": {
+      "BORROWED_PROTOCOL_ANALOGUE": 10,
+      "REFERENCE_CONTEXT": 4
+    },
+    "reproduction_anchors_in_delta": 0,
+    "release_candidate_canonical_surface": 296
+  },
+  "external_bindings": {
+    "verified": 42,
+    "expected": 42,
+    "ledger": {
+      "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+      "ledger_sha256": "298159ce2a4242116273d49d2536b84632351086106c9212fcffec894a37f569",
+      "target_renditions_verified": 28,
+      "conflicting_hashes": 0,
+      "identical_duplicate_events_retained": {
+        "2405.20834:eprint": 2,
+        "2602.07624:eprint": 2
+      },
+      "append_only_rows_mutated_or_removed": false
+    }
+  },
+  "citation_expansion": {
+    "backward_targets": 8,
+    "backward_executed": 8,
+    "forward_waived": 8,
+    "seen_unique_arxiv_ids": 303,
+    "promoted": 6,
+    "seen_not_promoted": 297,
+    "citation_ledger_sha256": "091d2a4e422e096439f7e5c40c6599ee7eca737f45ea707117081f807b23a444",
+    "scope_limitation": "Backward closure covers regex-resolvable arXiv IDs in local e-print bibliography members. DOI/title-only edges and all forward edges are not closed; those omissions prohibit a universal no-neighbor claim."
+  },
+  "acceptance_checks": {
+    "exact_8_seed_plus_6_promotion_surface": true,
+    "all_pdf_eprint_and_extracted_text_hashes_verified": true,
+    "citation_promotions_have_parent_edges": true,
+    "seen_not_promoted_does_not_inflate_denominator": true,
+    "reference_borrow_reproduce_contract_complete": true,
+    "no_false_reproduction_anchor": true,
+    "canonical_surface_296": true,
+    "frozen_stage1b_v5_preserved": true,
+    "no_stage1c_activation": true,
+    "no_model_benchmark_reproduction_or_prototype_run": true,
+    "no_project_novelty_verdict": true,
+    "independent_signature_pending": true
+  },
+  "limitations": [
+    "Backward citation expansion covers only regex-resolvable arXiv IDs in the eight local eprints.",
+    "Forward citation checks were waived after public unauthenticated index requests were rate-limited.",
+    "No promoted delta work is sufficiently task-matched to be a speech/omni reproduction anchor.",
+    "Paper-reported numbers remain within-paper evidence and are not cross-paper aggregates or project results."
+  ]
+}

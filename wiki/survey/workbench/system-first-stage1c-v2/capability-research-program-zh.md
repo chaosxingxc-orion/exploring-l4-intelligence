@@ -2,10 +2,12 @@
 title: "Stage-1B 能力导向增量映射与 Stage-1C v2 研究方案"
 artifact_id: "SF-STAGE1B-DELTA-STAGE1C-V2-CAPABILITY-PROGRAM-2026-07-23"
 date: "2026-07-23"
-status: "OWNER_REVIEW_DRAFT"
+status: "OWNER_AUTHORIZED_INPUT_SUPERSEDED_BY_STAGE1B_DELTA_RC1"
 authority_effect: "NONE"
-requested_owner_verdict: "AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING"
+requested_owner_verdict: "GRANTED_AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING"
 supersedes_owner_review_draft_commit: "ddef229"
+authorization_recorded_at: "2026-07-23"
+superseded_by: "wiki/survey/workbench/system-first-stage1b-capability-delta/stage1c-v2-capability-research-program-zh.md"
 stage1b_v5_mutation_requested: false
 current_activation_requested: false
 experiment_execution_requested: false
@@ -14,11 +16,16 @@ novelty_verdict_requested: false
 
 # Stage-1B 能力导向增量映射与 Stage-1C v2 研究方案
 
-## 0. 提请 owner 决策
+## 0. Owner 决策（已登记）
 
-本方案请求 owner 审阅并决定是否授予：
+Owner 已于 2026-07-23 授予：
 
 `AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING`
+
+授权后的 Stage-1B delta 已形成 release candidate；当前机器 census 为 296 个 canonical works，详细证据、
+校验与更新后的中文 proposal 位于
+`wiki/survey/workbench/system-first-stage1b-capability-delta/`。本文件保留为授权输入与设计 provenance，
+不再作为最新 proposal。
 
 该授权只允许对本方案列明的新增论文和有界引用邻域启动一个 Stage-1B delta campaign：锁定 canonical
 identity、版本、全文与代码/数据 locator，映射研究路径、邻近性、边界、反证和论文已有实验设置，并据此
@@ -105,12 +112,12 @@ Stage-1C v2 不回答“哪个新算法最创新”或“哪个 branch 已经获
   (`2606.09316`)、MMSkills (`2605.13527`)、XSkill (`2603.12056`)、RESOURCE2SKILL
   (`2606.29538`)、GEMS (`2603.28088`)、Skill Retrieval Augmentation (`2604.24594`)、RMR
   (`2405.20834`) 和 M2A (`2602.07624`)；
-- 因此 proposal 时点的已知最小下界更新为 `290`。该数字只表示八个 exact IDs 与既有 282 无本地命中，
-  不表示 Stage-1B delta 已经完成 canonical lock 或文献空间闭合。
+- proposal 时点的已知最小下界为 `290`；授权执行后又从有界一跳引用中提升 6 个 exact-ID works，且机器
+  去重确认它们均不在既有 282 中，因此 release-candidate surface 为 `296`。
 
-`290` 仍是 proposal 阶段的初步 census，不是新的冻结事实。实施时必须由 checker 从 manifest、registry、
-reference appendix、priority intake、delta ledger 和 canonical alias table 重算；只有无重复、无 unresolved
-identity 且通过独立 review 的 `STAGE1B_DELTA_SURFACE_<n>` 才能进入 Stage-1C denominator。
+`296` 是当前 release-candidate census，不是签署后的冻结事实，也不是文献宇宙闭合。checker 已从 registry、
+reference appendix、priority intake、delta records 与 citation ledger 重算；只有通过独立
+`SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE` 后才可进入 Stage-1C denominator。
 
 所有 surface records 都需要一次 paper-level disposition；只有承重 empirical works 才要求进行有界但完整的
 experiment extraction。非承重、理论、negative 或 boundary works 可作为 non-cell evidence node。

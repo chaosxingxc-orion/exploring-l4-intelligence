@@ -1,0 +1,100 @@
+{
+  "schema": "sf-stage1b-capability-delta-review-package-manifest-v1",
+  "artifact_id": "SF-STAGE1B-CAPABILITY-DELTA-REVIEW-PACKAGE-RC1",
+  "as_of": "2026-07-23",
+  "status": "RELEASE_CANDIDATE_AWAITING_INDEPENDENT_REVIEW",
+  "authorization": "AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING",
+  "requested_review_verdict": "SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE",
+  "self_signed": false,
+  "frozen_stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "frozen_stage1b_v5_mutated": false,
+  "artifact_count": 15,
+  "artifacts": [
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/README.md",
+      "bytes": 2568,
+      "sha256": "ab643d9a8d17fe0f27d42445d2b48caf90c12df7e74e1209bc7a5d367c5913bd"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/capability-delta-contract.md",
+      "bytes": 6039,
+      "sha256": "65c468de80abc392f92ecda73367f94ad90d0e661ce474712cb9841e54600f55"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/capability-path-map.md",
+      "bytes": 8051,
+      "sha256": "c3fc8bd73f1f3e7e12227ec186ea0ba3e3a073d702f1d8eafe3a09538f4a7e78"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/stage1c-v2-capability-research-program-zh.md",
+      "bytes": 34068,
+      "sha256": "bdf2b62de1495e7b8380052990d1b268e5e8c6b1343dd2950313f48589846c51"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/seed-targets-v1.json",
+      "bytes": 2217,
+      "sha256": "3a313bd92a49d102f0b7f153c7c9046d6d313c13dbd9848b75b4554db1f2604b"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/capability-delta-records-v1.json",
+      "bytes": 45329,
+      "sha256": "fcd860ac1804d691760ff1f5b89a4b45b9341520a3b63c15fab3374dc76688a0"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/one-hop-promotions-v1.json",
+      "bytes": 2383,
+      "sha256": "5a1d5b1b744d5f5418facc294375a9a32fd930bd44a36515fe07ab6b8189f098"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/backward-citation-ledger-v1.jsonl",
+      "bytes": 17421,
+      "sha256": "091d2a4e422e096439f7e5c40c6599ee7eca737f45ea707117081f807b23a444"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/backward-citation-summary-v1.json",
+      "bytes": 675,
+      "sha256": "3c108b5a0d38bac712a33dd3b3832786f0b10eda59d720682638ddab1a46897d"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/canonical-census-v1.json",
+      "bytes": 2457,
+      "sha256": "7a18445ed65c2838a0b2b2b8808755d493412ffa68e336aa158b41c42d460e96"
+    },
+    {
+      "path": "scripts/survey/sf_stage1b_capability_delta.py",
+      "bytes": 28215,
+      "sha256": "64664e24291132f3de4f218c63c679f522b3319d9113655bcfb00c71e58fe266"
+    },
+    {
+      "path": "scripts/survey/test_sf_stage1b_capability_delta.py",
+      "bytes": 4245,
+      "sha256": "d0e0b012d5a97c3bac7ccc5f86dd516c6cadc92f2850246fc06f3470bed62a70"
+    },
+    {
+      "path": "docs/checks/stage1b-capability-delta/2026-07-23-rc1/canonical-census.json",
+      "bytes": 2457,
+      "sha256": "7a18445ed65c2838a0b2b2b8808755d493412ffa68e336aa158b41c42d460e96"
+    },
+    {
+      "path": "docs/checks/stage1b-capability-delta/2026-07-23-rc1/external-fulltext-bindings.json",
+      "bytes": 16665,
+      "sha256": "bac1e32a67afb485d788aa8d6c9427ac687b951e8789babb84a17320b0f9d91b"
+    },
+    {
+      "path": "docs/checks/stage1b-capability-delta/2026-07-23-rc1/contract-report.json",
+      "bytes": 3070,
+      "sha256": "c333de216bc8cc4c6c797278eb5955ce0d9768b6a4887e29f4ce1c64c834d6cb"
+    }
+  ],
+  "external_binding_report": "docs/checks/stage1b-capability-delta/2026-07-23-rc1/external-fulltext-bindings.json",
+  "authority_withheld": [
+    "stage1c_activation_or_scaleout",
+    "research_model_or_api_execution",
+    "benchmark_metric_run",
+    "paper_reproduction",
+    "prototype",
+    "ranking_or_selection",
+    "project_novelty_verdict",
+    "stage2a"
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "schema": "sf-stage1b-capability-delta-external-bindings-v1",
+  "artifact_id": "SF-STAGE1B-CAPABILITY-DELTA-EXTERNAL-BINDINGS-RC1",
+  "as_of": "2026-07-23",
+  "data_root_source": "SPEECHRL_DATA_DIR_OR_PINNED_WORKSPACE_DEFAULT",
+  "binding_count": 42,
+  "bindings": [
+    {
+      "primary_identity": "2402.17753",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2402.17753/2402.17753.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2402.17753/2402.17753.eprint",
+      "bytes": 1105707,
+      "sha256": "7f8a482611aeacf17be5d2bbed831f118665e8b89f46228ef1b2a4a635566192"
+    },
+    {
+      "primary_identity": "2402.17753",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2402.17753/paper.txt",
+      "bytes": 109645,
+      "sha256": "e53900170048cdcb6ad5534ea3c76f56d873554308ede9dbd224d2d38d2cd2be"
+    },
+    {
+      "primary_identity": "2402.17753",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2402.17753/2402.17753.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2402.17753/2402.17753.pdf",
+      "bytes": 1608560,
+      "sha256": "218188e1d66a553afe324491e3e5e5d0af107196c9ff32c65bb3640ebf638539"
+    },
+    {
+      "primary_identity": "2405.20834",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2405.20834/2405.20834.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2405.20834/2405.20834.eprint",
+      "bytes": 939015,
+      "sha256": "9b8fb121243bb69baca0b891744506e8f04a13ddfcf550432d0cf1df8d028eb2"
+    },
+    {
+      "primary_identity": "2405.20834",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2405.20834/paper.txt",
+      "bytes": 93672,
+      "sha256": "0f8cf7c8a16ed870899c1a8b1192a3b860705e8ffb194b4c3ee40a1af2636a33"
+    },
+    {
+      "primary_identity": "2405.20834",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2405.20834/2405.20834.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2405.20834/2405.20834.pdf",
+      "bytes": 1297070,
+      "sha256": "1cceda9e711a4e512d13a9f7ffbd123f49ef56c55e9924aa396e751d73da6847"
+    },
+    {
+      "primary_identity": "2508.19828",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.19828/2508.19828.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2508.19828/2508.19828.eprint",
+      "bytes": 5021786,
+      "sha256": "e6769c8e5dfa656f49dc5549d2bd3d9d611ee2b505f9c9bba4373c9e16d7e5c2"
+    },
+    {
+      "primary_identity": "2508.19828",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2508.19828/paper.txt",
+      "bytes": 103051,
+      "sha256": "ba6d806f696f8d462b3f7f830ca2a4cbac42666b8235402fc2edd6b973161cbe"
+    },
+    {
+      "primary_identity": "2508.19828",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.19828/2508.19828.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2508.19828/2508.19828.pdf",
+      "bytes": 3472962,
+      "sha256": "c206af4e792e9550f2aaec8a6c4d9b141d1ddcb587e781d7866870c8f3e4dd4f"
+    },
+    {
+      "primary_identity": "2602.07624",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.07624/2602.07624.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.07624/2602.07624.eprint",
+      "bytes": 1500742,
+      "sha256": "484d1dc8d8e2b8dd5b8c356eb2fc7dd8cd8a2b024181a1fef7f501e6699bf284"
+    },
+    {
+      "primary_identity": "2602.07624",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2602.07624/paper.txt",
+      "bytes": 86007,
+      "sha256": "e67807d0e6305b5914e36a1d4a687bb9775c0955311ded6ba479214fa3582bcb"
+    },
+    {
+      "primary_identity": "2602.07624",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.07624/2602.07624.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.07624/2602.07624.pdf",
+      "bytes": 1929486,
+      "sha256": "59bf30845bb5d4666dcb686dbd1a95d6b4a9e2f9ffa0663ecb0a4afc27934f4f"
+    },
+    {
+      "primary_identity": "2602.12670",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.12670/2602.12670.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.12670/2602.12670.eprint",
+      "bytes": 1111432,
+      "sha256": "38f1e5332605b84c14f10a3da6b8a8b964a3a2719446b81a0c168b123aaea33c"
+    },
+    {
+      "primary_identity": "2602.12670",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2602.12670/paper.txt",
+      "bytes": 220200,
+      "sha256": "658c67a0c44985250cbed3dbc63c3cff3e7c887b871bdaeb4b469ae0b2ae0a8d"
+    },
+    {
+      "primary_identity": "2602.12670",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.12670/2602.12670.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.12670/2602.12670.pdf",
+      "bytes": 1769852,
+      "sha256": "e987ebc3f0084a1ffc8acbca58259e33120b95fcef3876abfad060e169cf210b"
+    },
+    {
+      "primary_identity": "2603.01145",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.01145/2603.01145.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.01145/2603.01145.eprint",
+      "bytes": 295393,
+      "sha256": "e082232d897ffd636fdf26717195d6efa3df44cc1b4ae06daca52099626f62bc"
+    },
+    {
+      "primary_identity": "2603.01145",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2603.01145/paper.txt",
+      "bytes": 89131,
+      "sha256": "44b76bf036a110b2daec1be2f01a0cf4543c9d1c242d491fcd75321a6e370b17"
+    },
+    {
+      "primary_identity": "2603.01145",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.01145/2603.01145.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.01145/2603.01145.pdf",
+      "bytes": 1204737,
+      "sha256": "fc5158e61bf7a551987a51818d2b3d41c88c5c44dc27eb696e8e597ec8ed2413"
+    },
+    {
+      "primary_identity": "2603.12056",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.12056/2603.12056.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.12056/2603.12056.eprint",
+      "bytes": 2423874,
+      "sha256": "4ec6815ee6bc62169127dead634805f2288913877c8df35afdd66a0b692df9ea"
+    },
+    {
+      "primary_identity": "2603.12056",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2603.12056/paper.txt",
+      "bytes": 165422,
+      "sha256": "2dde52555dd09f49c4c4761d7c9e48a312ad749a55ca1adb6e59e578beeaf0ae"
+    },
+    {
+      "primary_identity": "2603.12056",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.12056/2603.12056.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.12056/2603.12056.pdf",
+      "bytes": 3048153,
+      "sha256": "27ed2d53ad426ebd7d9c8dcfeceb4f8babb452c4a32d17ff925bb85f3c7def2d"
+    },
+    {
+      "primary_identity": "2603.28088",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.28088/2603.28088.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.28088/2603.28088.eprint",
+      "bytes": 15480543,
+      "sha256": "c38ac550f961119a87dca9954a8c3e244a3ed4b81a98cc5aaef39d011e1ebc0f"
+    },
+    {
+      "primary_identity": "2603.28088",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2603.28088/paper.txt",
+      "bytes": 107967,
+      "sha256": "92e825214907e41fcfc5eb22a7842bc0f09605487b1224ce0279c6bff45017fc"
+    },
+    {
+      "primary_identity": "2603.28088",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.28088/2603.28088.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.28088/2603.28088.pdf",
+      "bytes": 16033943,
+      "sha256": "e34c537c488e9b0f59bec630e7c6fada034311221a8ef8da59f9e083b1c7be3f"
+    },
+    {
+      "primary_identity": "2604.03964",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.03964/2604.03964.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.03964/2604.03964.eprint",
+      "bytes": 12997660,
+      "sha256": "6e21b9cf8d02af9e113793af6e2fe0f5b39cc427755120a025702ace313cf849"
+    },
+    {
+      "primary_identity": "2604.03964",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2604.03964/paper.txt",
+      "bytes": 76619,
+      "sha256": "9cc1d781b7843573b7e62a7d78c54b90d036aad4da022d5e40e1b349d7d32030"
+    },
+    {
+      "primary_identity": "2604.03964",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.03964/2604.03964.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.03964/2604.03964.pdf",
+      "bytes": 11683263,
+      "sha256": "45c1e8660b10021ff7efe80ec5dc69a0f658c43465117feceef699ce2b601b98"
+    },
+    {
+      "primary_identity": "2604.17308",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.17308/2604.17308.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.17308/2604.17308.eprint",
+      "bytes": 7619977,
+      "sha256": "e83c8c892e8447e18f4022d10a1e587ba2067956348022d4e0ad98bd95a38245"
+    },
+    {
+      "primary_identity": "2604.17308",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/one-hop/2604.17308/paper.txt",
+      "bytes": 197582,
+      "sha256": "309e5be3838677ad15cd963aaa6c57b530ce3243e5dd157331f8bfbad5174019"
+    },
+    {
+      "primary_identity": "2604.17308",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.17308/2604.17308.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.17308/2604.17308.pdf",
+      "bytes": 8149339,
+      "sha256": "aa76d6f4b4343416d6de7639b7cd05f10022aef9576cf9cb6214410c07c798a4"
+    },
+    {
+      "primary_identity": "2604.24594",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.24594/2604.24594.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.24594/2604.24594.eprint",
+      "bytes": 300415,
+      "sha256": "deb0c17510587602b3aeca84757e1bf7fd09bf94068b748327b2f231cd6923c8"
+    },
+    {
+      "primary_identity": "2604.24594",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2604.24594/paper.txt",
+      "bytes": 194280,
+      "sha256": "f1b10185cfc7db77944c5bf2776c6816ab6c31c93175b2cd6892026a86339f43"
+    },
+    {
+      "primary_identity": "2604.24594",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.24594/2604.24594.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.24594/2604.24594.pdf",
+      "bytes": 864312,
+      "sha256": "cb1b2aaba98991b5d4a47ba0d3c0921c3dde51d83c250b26f5b729b1b0a3b03f"
+    },
+    {
+      "primary_identity": "2605.13527",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.13527/2605.13527.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13527/2605.13527.eprint",
+      "bytes": 18192720,
+      "sha256": "c6238d1c4527f5e8a9d8ec8b4b981f7d9d44a828afb5dc996f0ec99a652f22d5"
+    },
+    {
+      "primary_identity": "2605.13527",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2605.13527/paper.txt",
+      "bytes": 140396,
+      "sha256": "9dc4a17e0b83104b2eca5044bcc669fa58ed113ea99d7041bcf523b973afab37"
+    },
+    {
+      "primary_identity": "2605.13527",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.13527/2605.13527.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13527/2605.13527.pdf",
+      "bytes": 7983592,
+      "sha256": "40610b5ae03b38e65af0711a8fb8302202a32a84c08dac71545cfcfc9a775ad7"
+    },
+    {
+      "primary_identity": "2606.09316",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.09316/2606.09316.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.09316/2606.09316.eprint",
+      "bytes": 1647158,
+      "sha256": "b4a1387cd2ef7bf0937ef694d9ad61c2222a45da6b4311879a06a028c0429b2f"
+    },
+    {
+      "primary_identity": "2606.09316",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2606.09316/paper.txt",
+      "bytes": 61641,
+      "sha256": "7c0c1c8e7027dea6524662b4e6e1774345e79a9d88a7d9fbc89d00bc9befd782"
+    },
+    {
+      "primary_identity": "2606.09316",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.09316/2606.09316.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.09316/2606.09316.pdf",
+      "bytes": 1956238,
+      "sha256": "4fc9a0b0d5b14ba35cec22e8b116bef8bffb0b1a780d522807067357771c0048"
+    },
+    {
+      "primary_identity": "2606.29538",
+      "kind": "eprint",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.29538/2606.29538.eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.29538/2606.29538.eprint",
+      "bytes": 15524038,
+      "sha256": "d5c984a80fea535f5990c23e8d45eb04032550aed83fb55a293426a6c957c23f"
+    },
+    {
+      "primary_identity": "2606.29538",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-capability-delta/stage1b-2026-07-23/seeds/2606.29538/paper.txt",
+      "bytes": 91687,
+      "sha256": "72071acb4e9a4993e0027efbb8f1f064be6ab8a940fd210e281e92530ea2ec09"
+    },
+    {
+      "primary_identity": "2606.29538",
+      "kind": "pdf",
+      "path_template": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.29538/2606.29538.pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.29538/2606.29538.pdf",
+      "bytes": 14439929,
+      "sha256": "f328560aefd38ff1034a1cf06640581b30ed37a47dad48c851e7a54498d60aa5"
+    }
+  ]
+}

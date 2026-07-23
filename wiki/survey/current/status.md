@@ -1,8 +1,16 @@
 # Current Survey Status
 
-- Gate: **Stage-1C common-rubric comparison started**. Independent v5 rereview signed
-  `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; the fixed Stage-1B scientific release remains commit
-  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`.
+- Gate: **Stage-1B capability-delta release candidate awaiting independent review**. Owner token
+  `AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING` is active; the fixed Stage-1B scientific release remains
+  commit `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and was not mutated. The signed Stage-1C common-rubric
+  comparison is preserved but paused until the delta is independently released.
+- Capability-delta census: 8 approved seeds plus 6 promoted one-hop works; 226 frozen → 282 inherited
+  union → 296 release-candidate works. Of 303 regex-resolvable backward-citation IDs, 297 remain
+  seen-not-promoted and do not enter the denominator; forward citation closure remains waived after
+  public-index rate limiting.
+- Capability contract: knowledge and skill are content assets, memory is persistence/update, the agent
+  system is the carrier and training-free RL is a control principle. The 14 new records contain no
+  task-matched speech/omni reproduction anchor; all are reference or borrowed-protocol evidence.
 - Release identity: the v5 manifest binds 108 artifacts (64 Git, 44 external). Commit-bound replay
   verifies 108/108 with zero missing, byte or SHA-256 mismatches.
 - Closed promotion: 13 union identities are reused and five reviewer-directed outside-union identities
@@ -30,6 +38,7 @@
 - Data policy: dataset/checkpoint/output bytes remain under `SPEECHRL_DATA_DIR` and are never committed.
   Git retains source URLs, immutable revisions, acquisition scripts and evidence receipts.
 - Execution boundary: no broad discovery, research model/API call, metric run, reproduction, prototype,
-  ranking, problem selection or novelty verdict is authorized.
-- Next action: complete evidence-only comparison and prepare an unexecuted owner dossier. Model and
-  reproduction execution remain separately withheld.
+  296-paper Stage-1C scale-out, branch formation, ranking, problem selection or novelty verdict is authorized.
+- Next action: independent review of the capability-delta RC and possible
+  `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`. The detailed Chinese Stage-1C v2 proposal is owner-facing,
+  but its experiment mapping remains separately gated.
