@@ -436,6 +436,7 @@ class CurrentManifestContractTests(unittest.TestCase):
                 "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+                "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
             ],
             document["prose_scan_paths"],
         )
@@ -1075,9 +1076,10 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v5 evidence repair frozen",
+            "Stage-1C common-rubric comparison started",
+            "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON",
             "status.md",
-            "stage1b-mapping-release.md",
+            "stage1c-common-rubric-comparison.md",
             "stage1c-eligible-inputs.md",
             "protocol.md",
             "manifest.json",
@@ -1090,19 +1092,19 @@ class RouterContentContractTests(unittest.TestCase):
         self.assertNotRegex(text, r"sf-protocol-amendment-\d+|gate-s1-v\d+-response")
         self.assertLessEqual(len(text.splitlines()), 32)
 
-    def test_status_is_short_and_preserves_stage1b_execution_boundary(self):
+    def test_status_is_short_and_preserves_stage1c_execution_boundary(self):
         path = CURRENT / "status.md"
         self.assertTrue(path.is_file(), f"missing status: {path}")
         raw = path.read_bytes()
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v5 evidence repair frozen",
-            "Stage-1C has not started",
-            "no broad discovery, model/API call, metric run, reproduction",
-            "All 18 have official metadata",
-            "ELIGIBLE_NON_H5",
-            "H5 is withheld",
+            "Stage-1C common-rubric comparison started",
+            "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON",
+            "no broad discovery, research model/API call, metric run, reproduction",
+            "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+            "problem ranking and selection remain withheld",
+            "H5 remains withheld",
             "never committed",
             "Next action",
         ):

@@ -37,7 +37,7 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [tau2-bench](https://github.com/sierra-research/tau2-bench) | sierra-research, 2025 [current_version] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [VoiceAgentBench: Are Voice Assistants ready for agentic tasks?](https://arxiv.org/abs/2510.07978) | Dhruv Jain; Harshit Shukla; Gautam Rajeev; Ashish Kulkarni; Chandra Khatri; Shubham Agarwal, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Retain this role; fetch/code under the frozen protocol when prioritized. |
 
-## Reward and verification mechanisms (54)
+## Reward and verification mechanisms (53)
 
 | Official citation | Authors / year | Protocol role | Disposition |
 |---|---|---|---|
@@ -93,16 +93,16 @@ Each work appears once. Roles are the four current protocol roles; chain placeme
 | [Tree Search for Language Model Agents](https://arxiv.org/abs/2407.01476) | Jing Yu Koh; Stephen McAleer; Daniel Fried; Ruslan Salakhutdinov, 2024 [initial_preprint] | KNOWN_QUEUE | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Trust but Verify! A Survey on Verification Design for Test-time Scaling](https://arxiv.org/abs/2508.16665) | V Venktesh; Mandeep Rathee; Avishek Anand, 2025 [initial_preprint] | KNOWN_QUEUE | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
 | [Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems](https://arxiv.org/abs/2502.19328) | Hao Peng; Yunjia Qi; Xiaozhi Wang; Zijun Yao; Bin Xu; Lei Hou; Juanzi Li, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
-| [Inference-Time Scaling for Joint Audio-Video Generation](https://arxiv.org/abs/2606.03183) | Jaemin Jung; Kyeongha Rho; Inkyu Shin; Joon Son Chung, 2026 [initial_preprint] | MEASUREMENT_INSTRUMENT | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Multimodal RewardBench 2: Evaluating Omni Reward Models for Interleaved Text and Image](https://arxiv.org/abs/2512.16899) | Yushi Hu; Reyhane Askari-Hemmat; Melissa Hall; Emily Dinan; Luke Zettlemoyer; Marjan Ghazvininejad, 2025 [initial_preprint] | MEASUREMENT_INSTRUMENT | Keep as a nonblocking Stage-1B queue/comparator; reach D2 only if it becomes load-bearing. |
 
-## Training-free and trained boundary comparators (58)
+## Training-free and trained boundary comparators (59)
 
 | Official citation | Authors / year | Protocol role | Disposition |
 |---|---|---|---|
 | [Boosting ASR Robustness via Test-Time Reinforcement Learning with Audio-Text Semantic Rewards](https://arxiv.org/abs/2603.05231) | Linghan Fang; Tianxin Xie; Li Liu, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Depth-Entropy Guided Sampling for Training-Free LLM Reasoning](https://arxiv.org/abs/2607.09693) | Zibin Meng; Peng Xie; Kani Chen, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Retain this role; fetch/code under the frozen protocol when prioritized. |
 | [Evaluating the Role of Verifiers in Test-Time Scaling for Legal Reasoning Tasks](https://aclanthology.org/2025.nllp-1.15/) | Romano, Davide; Schwarz, Jonathan Richard; Giofrè, Daniele, 2025 [formal_venue] | BOUNDARY_COMPARATOR | Retain this role; fetch/code under the frozen protocol when prioritized. |
+| [Inference-Time Scaling for Joint Audio-Video Generation](https://arxiv.org/abs/2606.03183) | Jaemin Jung; Kyeongha Rho; Inkyu Shin; Joon Son Chung, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Route as reviewer-visible prior; reach D2 before supporting a load-bearing claim. |
 | [Just A Rather Very Intelligent Spoken Agent](https://arxiv.org/abs/2607.16610) | Chen, Chen; Chen, Zhehuai, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Retain the explicit evaluator, reward, calibration, or multimodal-boundary route in the Stage-1C comparison input. |
 | [LatentOmni: Rethinking Omni-Modal Understanding via Unified Audio-Visual Latent Reasoning](https://arxiv.org/abs/2605.22012) | Yifan Dai; Zhenhua Wu; Bohan Zeng; Daili Hua; Jialing Liu; Bozhou Li; Yuran Wang; Chengzhuo Tong; Hao Liang; Xiaochen Ma; Junbo Niu; Tianyu Guo; Yang Shi; Yue Ding; Yiyan Ji; Bingyin Mei; Yushuo Guan; Yuanxing Zhang; Pengfei Wan; Fangcheng Fu; Wentao Zhang, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Keep as a nonblocking P2 trained/white-box boundary comparator for Stage-1B. |
 | [Light-Omni: Reflex over Reasoning in Agentic Video Understanding with Long-Term Memory](https://arxiv.org/abs/2607.05511) | Chang Nie; Jiaju Wei; Junlan Feng; Chaoyou Fu; Caifeng Shan, 2026 [initial_preprint] | BOUNDARY_COMPARATOR | Fulltext triage identifies a trained soft-prompt/multi-LoRA system; retain as a nonblocking P2 H5 boundary comparator. |

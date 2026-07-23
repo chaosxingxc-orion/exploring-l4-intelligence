@@ -1,10 +1,10 @@
 # Current Survey Router
 
-- Current gate: **Stage-1B v5 evidence repair frozen / independent Stage-1C transition rereview
-  pending**. Scientific commit: `38fb9435d0c35e226ad62b16015a6dbee054e6c2`. Selection and
-  experimental execution remain unauthorized.
+- Current gate: **Stage-1C common-rubric comparison started** under independent verdict
+  `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`. The frozen Stage-1B v5 scientific commit remains
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`. Ranking, selection and execution remain unauthorized.
 - Read in this order: [`status.md`](status.md) →
-  [`tables/stage1b-mapping-release.md`](tables/stage1b-mapping-release.md) →
+  [`tables/stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
   [`tables/stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → targeted data/reference
   records → [`protocol.md`](protocol.md) → [`manifest.json`](manifest.json).
 - Speech/omni evidence: the
@@ -22,6 +22,8 @@
   outside Git under `SPEECHRL_DATA_DIR`; only acquisition recipes and exact identities are versioned.
 - Frozen D0 remains closed. This was targeted promotion and exact-ID acquisition, not a broad discovery
   restart. Do not infer literature-universe closure.
+- Stage-1C corrections and the four-paper priority intake are canonical in
+  [`data/stage1c-common-rubric-comparison-v1.json`](data/stage1c-common-rubric-comparison-v1.json).
 - H5 remains withheld; H5-dependent bundles cannot enter Stage-1C selection.
 - Audit pointer: `wiki/audit/system-first-stage1b/INDEX.md`. Load individual proposals and reviews only
   through targeted search. Historical proposals, reviews, responses and amendments are cold audit.

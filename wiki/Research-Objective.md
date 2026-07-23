@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-23 — Stage-1B v5 evidence repair frozen; narrow transition rereview pending"
+last_refresh: "2026-07-23 — Stage-1C common-rubric comparison started"
 ---
 
 # Research Objective & Current State
@@ -10,15 +10,15 @@ last_refresh: "2026-07-23 — Stage-1B v5 evidence repair frozen; narrow transit
 
 ## Current gate and authority
 
-The project is in **late Stage-1B closeout**. The fixed Stage-1B v5 scientific release is commit
-`38fb9435d0c35e226ad62b16015a6dbee054e6c2`. Its 108-artifact manifest replays 108/108: 64 Git blobs
-and 44 external hash-bound files, with zero missing or mismatched entries.
+The project is in **Stage-1C common-rubric comparison**. Independent v5 rereview verdict
+`SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON` is registered at commit
+`84941e63dc965f84daf63fa7b297ce3d37e06ef3`. It authorizes evidence-only comparison of three
+unranked problem bundles. The fixed Stage-1B v5 scientific release remains commit
+`38fb9435d0c35e226ad62b16015a6dbee054e6c2`; it is not rewritten by Stage-1C corrections.
 
-Formal Stage-1C problem comparison still requires an independent reviewer signature. Model/API use,
-dataset metrics, smoke tests, reproduction, prototypes, problem ranking, owner selection and technical
-implementation remain unauthorized. Stage-1B maps method paths, proximity, contradictions,
-instruments and feasibility; it does not decide novelty. Technical-approach innovation remains deferred
-to reproduction-first Stage-2A and validation in Stage-2B.
+Model/API execution, dataset or benchmark metrics, paper reproduction, prototypes, problem ranking or
+selection, owner selection and novelty verdicts remain unauthorized. Stage-2A remains
+reproduction-first.
 
 ## Research north star
 
@@ -30,18 +30,22 @@ changing core model weights.
 
 - Frozen D0 remains exhausted at 20,727/20,727 abstracts, 319 D2 full texts and 226 retained works.
   This is closure of the declared frozen surface, not closure of the literature universe.
-- A closed six-gate plus 12-route repair reuses 18 canonical work IDs. All 18 have official metadata,
-  local PDF/e-print bytes and matching PDF hashes. No duplicate claim work or new duplicate seed was
-  created; broad discovery was not reopened.
+- A closed six-gate plus 12-route repair contains 13 reused union identities and five
+  reviewer-directed outside-union canonical identities. The latter are now explicitly recorded as
+  `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; no duplicate claim work was created.
 - The strict speech/omni supplement now has 46 rows: 26 direct methods, 18 measurement instruments and
   two boundaries. The direct control basis separates nine external-orchestration, nine state/event-gated
   and eight evaluator/verifier-gated systems; **zero are coded as reward-guided selection**.
-- The reference appendix has 59 unique routes and distinguishes prompted frozen judges, trained reward
-  models, benchmark instruments and direct controllers. MUGEN adds one direct consensus-selection path;
-  the other promoted works mainly strengthen evaluator reliability and decision-utility evidence.
-- Stage-1C inputs remain unranked. Budget/stop/repair, evaluator reliability and
-  interactive/full-duplex are `ELIGIBLE_NON_H5`. Evidence-state and tool/agent arbitration remain
-  `INELIGIBLE_FOR_STAGE_1C_SELECTION` while H5 is withheld.
+- The reference appendix has 59 unique routes. Stage-1C separates MUGEN's
+  `SELF_CONSISTENCY_CONSENSUS` from external evaluator/verifier signals, while preserving the frozen v5
+  taxonomy as historical provenance. Joint AV ITS is a `TRANSFER_BOUNDARY_DIRECT_CONTROL` prior, not
+  strict speech-agent occupancy or a mere measurement instrument.
+- Budget/stop/repair, evaluator reliability and interactive/full-duplex are being compared without a
+  score or ordering on one nine-dimension rubric. Evidence-state and tool/agent arbitration remain
+  ineligible while H5 is withheld.
+- TRACE, S2S-Arena, MTalk-Bench and SimulU now have one current canonical route each. Their official
+  PDFs are local; the two arXiv works also have local e-print sources. SimulU remains a model-internal
+  boundary because it consumes cross-attention.
 - Native Python and PowerShell inventories agree at 31 frozen baseline, 33 candidate-unfrozen, five
   auxiliary and zero missing entries. Audio2Tool's 71,441 revision-bound files are separated from 11
   downloader-auxiliary and 610 retained extraneous files; Stage-2 must use the revision allowlist.
@@ -57,16 +61,16 @@ changing core model weights.
 - Short gate: `wiki/survey/current/status.md`
 - Stage-1B map: `wiki/survey/current/tables/stage1b-mapping-release.md`
 - Unranked Stage-1C inputs: `wiki/survey/current/tables/stage1c-eligible-inputs.md`
+- Active common-rubric comparison: `wiki/survey/current/tables/stage1c-common-rubric-comparison.md`
 - v5 release and replay: `docs/checks/stage1b-closeout/2026-07-23-v5/`
 - Reviewer transaction index: `wiki/audit/system-first-stage1b/INDEX.md`
 - Long-lived records: `wiki/survey/registry/README.md`
 
 ## Next action
 
-Request one narrow independent rereview of commit `38fb9435d0c35e226ad62b16015a6dbee054e6c2`.
-The reviewer should decide whether P0-A, P0-B, P1-C and P1-D are repaired and whether Stage-1C may
-begin common-rubric comparison only. Do not reopen broad D0, create duplicate claim seeds, discuss
-technical novelty, rank/select a problem or begin experimental execution while this signature is pending.
+Complete the evidence-only common-rubric comparison and prepare an unexecuted problem-selection
+dossier for the owner. Do not reopen broad Stage-1B discovery, create duplicate claim seeds, aggregate
+the bundles into a ranking, select a winner, discuss technical novelty or begin experimental execution.
 
 ## Supersession rule
 

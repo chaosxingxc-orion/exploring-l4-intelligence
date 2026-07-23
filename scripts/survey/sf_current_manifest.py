@@ -267,6 +267,18 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
+        "stage1c_common_rubric_data",
+        "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
+        "supersede-in-place",
+        "targeted",
+    ),
+    FileSpec(
+        "stage1c_common_rubric_table",
+        "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
+        "supersede-in-place",
+        "targeted",
+    ),
+    FileSpec(
         "stage1b_release_manifest",
         "docs/checks/stage1b-closeout/2026-07-23-v5/release-manifest.json",
         "release-scoped-immutable",
@@ -354,6 +366,7 @@ _BASE_PROSE_SCAN = (
     "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
+    "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
 )
 
 _CONSUMER_MANIFEST_KEYS = {

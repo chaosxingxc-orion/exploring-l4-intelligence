@@ -1,18 +1,23 @@
 # Current Survey Status
 
-- Gate: **Stage-1B v5 evidence repair frozen / narrow Stage-1C transition rereview pending**. The
-  scientific release is commit `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; Stage-1C has not started.
+- Gate: **Stage-1C common-rubric comparison started**. Independent v5 rereview signed
+  `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; the fixed Stage-1B scientific release remains commit
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`.
 - Release identity: the v5 manifest binds 108 artifacts (64 Git, 44 external). Commit-bound replay
   verifies 108/108 with zero missing, byte or SHA-256 mismatches.
-- Closed promotion: six reviewer-gate works plus 12 reliability/decision routes reuse canonical work
-  IDs. All 18 have official metadata and matching local PDF hashes; no duplicate claim work or seed was
-  created. The reference appendix contains 59 unique routes.
+- Closed promotion: 13 union identities are reused and five reviewer-directed outside-union identities
+  are registered under one canonical ID each. The corrected action is
+  `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; no duplicate claim work was created.
 - Comparable surface: supplement v3 has 46 rows—26 direct, 18 instruments and two boundaries. The
   direct rows classify as nine external orchestration, nine state/event gated and eight
   evaluator/verifier gated; zero are coded as reward-guided selection.
-- Eligible inputs remain unranked: budget/stop/repair, evaluator reliability and
-  interactive/full-duplex are `ELIGIBLE_NON_H5`. Evidence-state and tool/agent arbitration remain
-  ineligible while H5 is withheld.
+- Eligible inputs remain unranked: `BUDGET_STOP_REPAIR`, `EVALUATOR_REWARD_RELIABILITY` and
+  `INTERACTIVE_FULL_DUPLEX_OBJECTIVES` share one nine-dimension rubric; problem ranking and selection remain withheld.
+- Stage-1C routing: Joint AV ITS is `BOUNDARY / TRANSFER_BOUNDARY_DIRECT_CONTROL`; MUGEN uses
+  `SELF_CONSISTENCY_CONSENSUS`. TRACE, S2S-Arena and MTalk-Bench are measurement instruments; SimulU
+  is a model-internal boundary. All four priority PDFs are local, with arXiv e-prints for the latter two.
+- H5 remains withheld; evidence-state and tool/agent arbitration remain ineligible for Stage-1C
+  selection, and no cross-modal generalization may be inferred from the three active bundles.
 - Inventory parity: native Python and PowerShell outputs are semantically equal at 31 frozen baseline,
   33 candidate-unfrozen, five auxiliary and zero missing entries. Nonstandard lock paths are preserved.
 - Audio2Tool: the revision manifest contains 71,441 files / 10,410,773,494 bytes with zero missing;
@@ -24,8 +29,7 @@
   endpoint; ParaPair SVC audio needs manual access review; VideoFDB data needs terms/password access.
 - Data policy: dataset/checkpoint/output bytes remain under `SPEECHRL_DATA_DIR` and are never committed.
   Git retains source URLs, immutable revisions, acquisition scripts and evidence receipts.
-- Execution boundary: this repair issued no broad discovery, model/API call, metric run, reproduction,
-  prototype, ranking, problem selection or novelty verdict.
-- Next action: independent rereview of commit `38fb9435d0c35e226ad62b16015a6dbee054e6c2` against
-  P0-A/P0-B/P1-C/P1-D. A positive verdict may authorize Stage-1C common-rubric comparison only;
-  model/reproduction execution remains separately withheld.
+- Execution boundary: no broad discovery, research model/API call, metric run, reproduction, prototype,
+  ranking, problem selection or novelty verdict is authorized.
+- Next action: complete evidence-only comparison and prepare an unexecuted owner dossier. Model and
+  reproduction execution remain separately withheld.

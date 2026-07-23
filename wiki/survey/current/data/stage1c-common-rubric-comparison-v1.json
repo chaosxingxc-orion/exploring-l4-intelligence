@@ -1,0 +1,325 @@
+{
+  "schema": "sf-stage1c-common-rubric-comparison-v1",
+  "artifact_id": "SF-STAGE1C-COMMON-RUBRIC-COMPARISON-V1",
+  "stage": "STAGE_1C_COMMON_RUBRIC_COMPARISON",
+  "as_of": "2026-07-23",
+  "source_review": {
+    "path": "wiki/audit/system-first-stage1b/stage1c-transition-rereview-v5-independent-review/2026-07-23-stage1b-v5-independent-doctoral-rereview.md",
+    "git_blob": "3a60fb97446dcbfa0aea4487aa9fb4c755e6b658",
+    "registered_commit": "84941e63dc965f84daf63fa7b297ce3d37e06ef3",
+    "verdict": "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON"
+  },
+  "authority": {
+    "granted": "COMMON_RUBRIC_PROBLEM_COMPARISON_ONLY",
+    "withheld": [
+      "model_or_api_execution",
+      "dataset_or_benchmark_metrics",
+      "paper_reproduction",
+      "prototype_implementation",
+      "problem_ranking_or_selection",
+      "novelty_verdict"
+    ]
+  },
+  "stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "stage1b_v5_taxonomy": "PRESERVED_AS_HISTORICAL_RELEASE",
+  "literature_universe_closed": false,
+  "routing_corrections": [
+    {
+      "correction_type": "OUTSIDE_UNION_ACTION",
+      "canonical_work_id": "CW-ARXIV-2510.00743",
+      "source_artifact": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "prior_value": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK",
+      "corrected_value": "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+      "current_disposition": "INCLUDE",
+      "reuses_single_canonical_work": true
+    },
+    {
+      "correction_type": "OUTSIDE_UNION_ACTION",
+      "canonical_work_id": "CW-ARXIV-2510.14664",
+      "source_artifact": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "prior_value": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK",
+      "corrected_value": "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+      "current_disposition": "INCLUDE",
+      "reuses_single_canonical_work": true
+    },
+    {
+      "correction_type": "OUTSIDE_UNION_ACTION",
+      "canonical_work_id": "CW-ARXIV-2511.07931",
+      "source_artifact": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "prior_value": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK",
+      "corrected_value": "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+      "current_disposition": "INCLUDE",
+      "reuses_single_canonical_work": true
+    },
+    {
+      "correction_type": "OUTSIDE_UNION_ACTION",
+      "canonical_work_id": "CW-ARXIV-2605.23261",
+      "source_artifact": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "prior_value": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK",
+      "corrected_value": "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+      "current_disposition": "INCLUDE",
+      "reuses_single_canonical_work": true
+    },
+    {
+      "correction_type": "OUTSIDE_UNION_ACTION",
+      "canonical_work_id": "CW-ARXIV-2605.30256",
+      "source_artifact": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "prior_value": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK",
+      "corrected_value": "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
+      "current_disposition": "BOUNDARY",
+      "reuses_single_canonical_work": true
+    },
+    {
+      "correction_type": "ROLE_DRIFT",
+      "canonical_work_id": "CW-ARXIV-2606.03183",
+      "title": "Inference-Time Scaling for Joint Audio-Video Generation",
+      "field": "reference_role",
+      "prior_values": [
+        "KEEP_CORE",
+        "transfer-only",
+        "MEASUREMENT_INSTRUMENT"
+      ],
+      "corrected_value": "TRANSFER_BOUNDARY_DIRECT_CONTROL",
+      "current_disposition": "BOUNDARY",
+      "reason": "Reward aggregation changes test-time selection, but the task is joint audio-video generation rather than strict speech/omni agentic control."
+    },
+    {
+      "correction_type": "DECISION_SIGNAL_ORIGIN",
+      "canonical_work_id": "CW-ARXIV-2603.09714",
+      "title": "MUGEN: Evaluating and Improving Multi-audio Understanding of Large Audio-Language Models",
+      "field": "decision_signal_origin",
+      "prior_value": "EVALUATOR_OR_VERIFIER_GATED",
+      "corrected_value": "SELF_CONSISTENCY_CONSENSUS",
+      "current_disposition": "INCLUDE",
+      "reason": "Audio-permutational majority aggregation changes the final answer but is neither an external evaluator nor a scalar reward."
+    }
+  ],
+  "priority_intake": [
+    {
+      "canonical_work_id": "CW-ACL-2026.findings-eacl.151",
+      "primary_identity": "2026.findings-eacl.151",
+      "title": "Hearing Between the Lines: Unlocking the Reasoning Power of LLMs for Speech Evaluation",
+      "official_url": "https://aclanthology.org/2026.findings-eacl.151/",
+      "current_disposition": "INCLUDE",
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "active_bundles": [
+        "EVALUATOR_REWARD_RELIABILITY"
+      ],
+      "route_reason": "TRACE separates content, voice quality and paralinguistics, then applies deterministic fusion; if later wired to action, controller role must be reassessed.",
+      "evidence_maturity": "OFFICIAL_METADATA_AND_LOCAL_FULLTEXT_PARSED",
+      "local_pdf": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2026.findings-eacl.151/2026.findings-eacl.151.pdf",
+        "bytes": 1270881,
+        "sha256": "da6a78305f6f62dcf38a88b4f2d3a9be93001c3d5591ee621dae6463cffc153c"
+      }
+    },
+    {
+      "canonical_work_id": "CW-ACL-2026.acl-long.1615",
+      "primary_identity": "2026.acl-long.1615",
+      "title": "S2S-Arena: Evaluating Paralinguistic Instruction Following in Speech-to-Speech Models",
+      "official_url": "https://aclanthology.org/2026.acl-long.1615/",
+      "current_disposition": "INCLUDE",
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "active_bundles": [
+        "EVALUATOR_REWARD_RELIABILITY",
+        "INTERACTIVE_FULL_DUPLEX_OBJECTIVES"
+      ],
+      "route_reason": "Speech-native pairwise comparison makes paralinguistic instruction following visible without converting the benchmark into a controller.",
+      "evidence_maturity": "OFFICIAL_METADATA_AND_LOCAL_FULLTEXT_PARSED",
+      "local_pdf": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2026.acl-long.1615/2026.acl-long.1615.pdf",
+        "bytes": 577349,
+        "sha256": "081805a63ca2ef8fa04b1378d6aa2cda86b904d3cf9ccd5f0d496593df86a6b1"
+      }
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2508.18240",
+      "primary_identity": "2508.18240",
+      "title": "MTalk-Bench: Evaluating Speech-to-Speech Models in Multi-Turn Dialogues via Arena-style and Rubrics Protocols",
+      "official_url": "https://arxiv.org/abs/2508.18240",
+      "current_disposition": "INCLUDE",
+      "reference_role": "MEASUREMENT_INSTRUMENT",
+      "active_bundles": [
+        "EVALUATOR_REWARD_RELIABILITY",
+        "INTERACTIVE_FULL_DUPLEX_OBJECTIVES"
+      ],
+      "route_reason": "Multi-turn S2S arena and rubric protocols expose position, length and nonverbal judge limitations.",
+      "evidence_maturity": "OFFICIAL_METADATA_AND_LOCAL_PDF_EPRINT_PARSED",
+      "local_pdf": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.18240/2508.18240.pdf",
+        "bytes": 12427253,
+        "sha256": "e5f0b89106fc1471cb0cd96e3c0a5d93067eb4a857558484b74bd1b9231b3e95"
+      },
+      "local_eprint": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.18240/2508.18240.eprint",
+        "bytes": 30048575,
+        "sha256": "b1b7446ab39129154a027d92c8238be359ad0941bdae9af466576117c01ad7c7"
+      }
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2603.16924",
+      "primary_identity": "2603.16924",
+      "title": "SimulU: Training-free Policy for Long-form Simultaneous Speech-to-Speech Translation",
+      "official_url": "https://arxiv.org/abs/2603.16924",
+      "current_disposition": "BOUNDARY",
+      "reference_role": "MODEL_INTERNAL_BOUNDARY",
+      "active_bundles": [
+        "BUDGET_STOP_REPAIR",
+        "INTERACTIVE_FULL_DUPLEX_OBJECTIVES"
+      ],
+      "route_reason": "The policy manages history and output selection through model cross-attention, which violates the project's external black-box access constraint.",
+      "evidence_maturity": "OFFICIAL_METADATA_AND_LOCAL_PDF_EPRINT_PARSED",
+      "local_pdf": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.16924/2603.16924.pdf",
+        "bytes": 813769,
+        "sha256": "66421173cd988f1e83c49a395cbb37ec186b779c30171976c566e698c2c0480b"
+      },
+      "local_eprint": {
+        "path": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.16924/2603.16924.eprint",
+        "bytes": 608477,
+        "sha256": "157982078e822089cd7c5f279b0dbd1cd9038df3f38ff9de053bbb3297db53fd"
+      }
+    }
+  ],
+  "rubric_dimensions": [
+    "problem_distinctness",
+    "decision_causality",
+    "measurement_validity",
+    "modality_necessity",
+    "failure_severity",
+    "feasibility",
+    "reproduction_anchor",
+    "scope_compatibility",
+    "evidence_maturity"
+  ],
+  "bundles": [
+    {
+      "bundle_id": "BUDGET_STOP_REPAIR",
+      "selection_status": "UNRANKED_NOT_SELECTED",
+      "rubric": {
+        "problem_distinctness": {
+          "assessment": "A distinct external-control problem remains only when scoped to continue, stop, retry, repair or rollback under noisy evaluators and finite budget; generic stopping and repair are already occupied.",
+          "uncertainty": "The residual may collapse to an existing rule once one task, access contract and noise regime are fixed."
+        },
+        "decision_causality": {
+          "assessment": "The candidate signals are causal only when they change the next call, stop decision, selected candidate or repair action; MUGEN is consensus selection, not evaluator gating.",
+          "uncertainty": "Several current priors expose control edges without isolating the value of the signal from extra sampling."
+        },
+        "measurement_validity": {
+          "assessment": "Comparison must separate oracle headroom, realized gain, regret, harm and unnecessary calls from proxy acceptance.",
+          "uncertainty": "No target task or trustworthy terminal oracle has been selected."
+        },
+        "modality_necessity": {
+          "assessment": "Audio is load-bearing only if acoustics, speaker state or interaction timing changes the optimal stop or repair decision beyond transcript evidence.",
+          "uncertainty": "Part of the control problem may transfer unchanged from text or vision."
+        },
+        "failure_severity": {
+          "assessment": "Failure includes early stop, wasted calls, rejection of a correct answer, harmful repair and latency or cost overruns.",
+          "uncertainty": "Severity cannot be aggregated before task-specific harm and cost units are fixed."
+        },
+        "feasibility": {
+          "assessment": "Multiple speech priors and local assets exist, and the comparison can proceed without model execution.",
+          "uncertainty": "Exact Stage-2A task, evaluator and asset licence have not been chosen."
+        },
+        "reproduction_anchor": {
+          "assessment": "Candidate anchors include a task-matched speech stop or repair method, MUGEN as consensus aggregation and VRR-Stop as a noisy verification transfer comparator.",
+          "uncertainty": "No reproduction anchor is frozen or authorized."
+        },
+        "scope_compatibility": {
+          "assessment": "External call, selection, budget and rollback actions fit the frozen API-visible control plane.",
+          "uncertainty": "Model-internal policies such as SimulU remain boundaries and cannot silently become eligible anchors."
+        },
+        "evidence_maturity": {
+          "assessment": "The claim is supported by routed full texts and mechanism coding, not by project reproduction.",
+          "uncertainty": "No project outcome, benchmark or prototype evidence exists."
+        }
+      }
+    },
+    {
+      "bundle_id": "EVALUATOR_REWARD_RELIABILITY",
+      "selection_status": "UNRANKED_NOT_SELECTED",
+      "rubric": {
+        "problem_distinctness": {
+          "assessment": "Reliability is distinct when an external proxy must support selection or repair and deterministic task success is unavailable; it is not a generic claim that audio judges are missing.",
+          "uncertainty": "A task with a sufficient deterministic oracle could remove most of this problem."
+        },
+        "decision_causality": {
+          "assessment": "A judge or metric becomes control evidence only when its output changes selection, stopping or repair; measurement instruments remain separate until that link is demonstrated.",
+          "uncertainty": "Most current evidence measures agreement rather than downstream decision utility."
+        },
+        "measurement_validity": {
+          "assessment": "Pointwise, pairwise, listwise and tie or abstention protocols must be separated, along with calibration, bias, human agreement and selection utility.",
+          "uncertainty": "Cross-protocol and cross-task comparability is not established."
+        },
+        "modality_necessity": {
+          "assessment": "TRACE, S2S-Arena and MTalk-Bench provide direct reasons to preserve voice quality, prosody, speaker and nonverbal evidence beyond transcripts.",
+          "uncertainty": "Some dimensions can be approximated by annotations or engineered features rather than raw-audio judges."
+        },
+        "failure_severity": {
+          "assessment": "An unreliable reward can systematically mis-rank candidates, stop incorrectly, amplify bias or trigger harmful repair across all downstream decisions.",
+          "uncertainty": "The frequency and task-level harm of each failure mode remain unmeasured by this project."
+        },
+        "feasibility": {
+          "assessment": "Several papers, PDFs, e-prints and repositories are local; exact unavailable or terms-gated assets retain their recorded status.",
+          "uncertainty": "A single feasible instrument and data contract has not been selected."
+        },
+        "reproduction_anchor": {
+          "assessment": "TRACE offers deterministic feature fusion, while speech-native pairwise instruments and existing reward or judge studies offer contrasting anchors.",
+          "uncertainty": "No anchor is frozen and trained reward models remain boundary evidence."
+        },
+        "scope_compatibility": {
+          "assessment": "Prompted or frozen external evaluators fit black-box control; trained reward models and model-internal scores are comparison boundaries.",
+          "uncertainty": "API availability and cost may exclude otherwise relevant evaluators."
+        },
+        "evidence_maturity": {
+          "assessment": "The bundle is measurement-rich and the four reviewer-directed works now have current routes and local full texts.",
+          "uncertainty": "No evaluator has been reproduced or shown to improve project decision utility."
+        }
+      }
+    },
+    {
+      "bundle_id": "INTERACTIVE_FULL_DUPLEX_OBJECTIVES",
+      "selection_status": "UNRANKED_NOT_SELECTED",
+      "rubric": {
+        "problem_distinctness": {
+          "assessment": "The residual is the divergence between terminal task success and interaction quality under interruption, timing, state update, recovery and tool use, not generic voice naturalness.",
+          "uncertainty": "Observed failures may be dominated by ASR, VAD, latency or base-model capability rather than external control."
+        },
+        "decision_causality": {
+          "assessment": "Signals are causal only when they change turn-taking, tool calls, recovery, state update or response timing; benchmarks alone are measurement instruments.",
+          "uncertainty": "Current direct systems have heterogeneous and not yet normalized action contracts."
+        },
+        "measurement_validity": {
+          "assessment": "Terminal success, tool correctness, interruption or barge-in handling, resume quality, latency and interaction quality must remain separate axes.",
+          "uncertainty": "User simulators and judge protocols may bias both task and interaction scores."
+        },
+        "modality_necessity": {
+          "assessment": "Speech timing, prosody and nonverbal cues are load-bearing; audio-only and AV2AV claims remain stratified, with VideoFDB as a boundary.",
+          "uncertainty": "The operational omni scope does not establish GUI, robotics or universal multimodal transfer."
+        },
+        "failure_severity": {
+          "assessment": "Failures include missed interruption, stale state, incorrect tool action, unsafe recovery, excessive latency and superficially natural but unsuccessful interaction.",
+          "uncertainty": "Task-specific harm thresholds and reproducible live-interaction conditions are not fixed."
+        },
+        "feasibility": {
+          "assessment": "Several voice-agent benchmarks and assets are local or revision-pinned; S2S-Arena and MTalk-Bench now add locally parsed speech-native evidence.",
+          "uncertainty": "Some exact datasets remain unavailable, terms-gated or generator-only."
+        },
+        "reproduction_anchor": {
+          "assessment": "A task-matched choice among VoiceAgentBench, Full-Duplex-Bench, Audio2Tool, IHBench, S2S-Arena or MTalk-Bench could anchor Stage-2A.",
+          "uncertainty": "No benchmark or baseline has been selected or executed."
+        },
+        "scope_compatibility": {
+          "assessment": "Frozen speech or omni APIs with observable tool and environment state fit the project; SimulU remains model-internal boundary evidence.",
+          "uncertainty": "Some systems may require hidden streaming states or unavailable serving interfaces."
+        },
+        "evidence_maturity": {
+          "assessment": "The bounded corpus contains direct systems, instruments and an explicit AV comparator, with locally available paper evidence.",
+          "uncertainty": "No project reproduction, simulator validation or live-user evidence exists."
+        }
+      }
+    }
+  ],
+  "dossier_state": "COMMON_RUBRIC_COMPARISON_IN_PROGRESS_UNEXECUTED",
+  "next_decision": "Complete evidence-only comparison, then submit an unexecuted problem-selection dossier to the owner without ranking or selecting a winner."
+}

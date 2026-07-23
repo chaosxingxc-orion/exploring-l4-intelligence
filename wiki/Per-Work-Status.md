@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-22. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-07-23. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
 
@@ -10,16 +10,15 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1B systematic mapping is at bounded closeout. Frozen D0 is exhausted;
-  delta and all 50 T1 routes have dispositions; the required map and unranked Stage-1C inputs exist.
-  Release v2 is frozen at `51b527b`; only an independent stage-transition signature remains before
-  formal Stage-1C.
+- **Current state:** independent v5 rereview signed Stage-1C common-rubric comparison. The frozen
+  Stage-1B release remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; budget/stop/repair,
+  evaluator reliability and interactive/full-duplex remain unranked and unselected.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** request one independent transition review against `51b527b`.
-  H5-dependent inputs remain ineligible; research models, smoke,
-  dataset metrics, reproduction, candidate ranking and prototypes remain prohibited in Stage-1B.
+- **Next authorized work:** compare the three non-H5 bundles on the common evidence rubric and prepare
+  an unexecuted owner dossier. Research models/APIs, benchmark metrics, reproduction, prototypes,
+  candidate ranking, owner selection and novelty verdicts remain prohibited.
 
 ## W2
 
