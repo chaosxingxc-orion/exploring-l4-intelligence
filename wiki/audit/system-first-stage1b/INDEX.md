@@ -13,6 +13,7 @@ The current superseding scientific release is fixed at commit
 | `stage1c-transition-rereview-request` | remediation proposal and re-review request | `wiki/audit/system-first-stage1b/stage1c-transition-rereview-request/2026-07-22-stage1b-v3-speech-prior-remediation-and-stage1c-rereview-proposal.md` @ `c1b2388f447604aa1d1ba39608a304ce068ad542` | `SUBMITTED_FOR_INDEPENDENT_REREVIEW` |
 | `stage1c-transition-rereview-independent-review` | independent v3 rereview | `wiki/audit/system-first-stage1b/stage1c-transition-rereview-independent-review/2026-07-22-stage1b-v3-independent-doctoral-rereview.md` @ `7395f8222284b4512319eb5933bb9c6efc4e4118` | `WITHHOLD_WITH_BOUNDED_DEFECTS` |
 | `stage1c-transition-rereview-v4-repair-request` | v4 targeted repair and transition rereview proposal | `wiki/audit/system-first-stage1b/stage1c-transition-rereview-v4-repair-request/2026-07-22-stage1b-v4-targeted-repair-and-stage1c-transition-rereview-proposal.md` @ `7c049a54a2cf5b3968f322799ce81dfb1346e680` | `REREVIEW_REQUESTED` |
+| `stage1c-transition-rereview-v4-independent-review` | independent v4 rereview | `wiki/audit/system-first-stage1b/stage1c-transition-rereview-v4-independent-review/2026-07-23-stage1b-v4-independent-doctoral-rereview.md` @ `36bc1f71f588201f5d679272a4116ccc4962a938` | `WITHHOLD_WITH_BOUNDED_DEFECTS` |
 
 Registered transaction artifacts are immutable at the exact paths and blobs above. A reviewer report,
 sign-off or correction must be added as a new dated artifact; it must not rewrite these submissions.
