@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "7032c6b7c2c0986e7ec9f1af2366c1bba65316f7"
+        "git_blob": "78460af494c2a445964d0147cd176e40213f2c9e"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -420,6 +420,11 @@
         "git_blob": "38f57dd518d47f172f6718826ef11ea860a0ba24"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_experiment_mapping.py",
+        "mode": "100644",
+        "git_blob": "2c1f6ef65b04ab56a94892e0abab74c64ff25020"
+      },
+      {
         "path": "scripts/survey/sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "2333e64e320eb5b44e435fe0112ba928764394ad"
@@ -710,6 +715,11 @@
         "git_blob": "e087d7993d0035e43ca5472a103a501474d5d506"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_experiment_mapping.py",
+        "mode": "100644",
+        "git_blob": "7f68ed355c7ed3fadec61926064a7750eb0ba869"
+      },
+      {
         "path": "scripts/survey/test_sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "6c48a1a2aef14596d4941430438ef894048562cf"
@@ -730,7 +740,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "7c9335d9f2ded5b252e52ed60506b3467ff1c85eecdcf3b4e2d47a215b0f50fe"
+    "sha256": "6ec49ee3b816538373aeb73821a87b52a6a8e256fcbcf84e8b10387c0fe9b523"
   },
   "commands": [
     {
@@ -826,7 +836,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (86 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (87 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {

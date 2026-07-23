@@ -355,6 +355,10 @@
     {
       "path": "wiki/audit/system-first-stage1b/stage1c-transition-rereview-request/2026-07-22-stage1b-v3-speech-prior-remediation-and-stage1c-rereview-proposal.md",
       "git_blob": "c1b2388f447604aa1d1ba39608a304ce068ad542"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2/round-01/2026-07-23-stage1c-v2-experiment-mapping-review-request.md",
+      "git_blob": "df94b7db4deec36457763ce04a724d442248fedb"
     }
   ]
 }

@@ -1,0 +1,191 @@
+{
+  "schema": "sf-stage1c-v2-experiment-mapping-contract-v1",
+  "artifact_id": "SF-STAGE1C-V2-EXPERIMENT-MAPPING-CONTRACT-2026-07-23",
+  "stage": "STAGE_1C_V2_PRE_SIGN",
+  "authority": {
+    "state": "AWAITING_INDEPENDENT_SIGNATURE",
+    "requested_verdict": "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
+    "granted_before_signature": [
+      "METADATA_BOOTSTRAP",
+      "SCHEMA_IMPLEMENTATION",
+      "MACHINE_CONTRACT_TESTS",
+      "INDEPENDENT_REVIEW_PREPARATION"
+    ],
+    "withheld_before_signature": [
+      "EXPERIMENT_LEVEL_RECODING",
+      "FAMILY_ADJUDICATION",
+      "BRANCH_FORMATION",
+      "CURRENT_ACTIVATION",
+      "MODEL_OR_API_EXECUTION",
+      "DATASET_OR_BENCHMARK_METRICS",
+      "PAPER_REPRODUCTION",
+      "PROTOTYPE_IMPLEMENTATION",
+      "NOVELTY_VERDICT"
+    ],
+    "claim_limit": "This pre-sign contract prepares a reviewable Stage-1C v2 mapping protocol. It grants no research recoding, CURRENT activation, empirical execution or novelty authority."
+  },
+  "frozen_stage1b_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "source_registry": {
+    "unit": "canonical paper record",
+    "expected_unique_records": 226,
+    "mutation_policy": "READ_ONLY_DERIVATION"
+  },
+  "controlled_vocabularies": {
+    "dataset_lineage": [
+      "AUDIO_RENDERING_OF",
+      "DERIVED_FROM",
+      "REANNOTATED_FROM",
+      "SAME_REVISION",
+      "SPLIT_OF",
+      "SUBSET_OF",
+      "TRANSLATED_FROM"
+    ],
+    "dataset_relation": [
+      "CROSS_DATASET_VALIDATION",
+      "DISTRIBUTION_SHIFT_TEST",
+      "INDEPENDENT_SAME_TASK",
+      "PROTOCOL_ANALOGUE"
+    ],
+    "family_membership": [
+      "CORE_MEMBER",
+      "FALSIFIER",
+      "INSTRUMENT_SUPPORT",
+      "TRANSFER_ANALOGUE",
+      "VALIDATION_MEMBER"
+    ],
+    "family_evidence_state": [
+      "CONSISTENT_SUPPORT",
+      "INSUFFICIENT_EVIDENCE",
+      "MIXED",
+      "NULL_OR_NEGATIVE"
+    ],
+    "local_readiness": [
+      "BLOCKED_ASSET_OR_TERMS",
+      "LOCAL_ADAPTABLE",
+      "LOCAL_READY",
+      "TRANSFER_ONLY"
+    ],
+    "task_family": [
+      "INTERACTIVE_DIALOGUE",
+      "META_EVALUATION",
+      "PERCEPTION_RECOGNITION",
+      "SEMANTIC_UNDERSTANDING_REASONING",
+      "TOOL_ENVIRONMENT_ACTION",
+      "TRANSFORMATION_GENERATION"
+    ],
+    "capability_tag": [
+      "BUDGET_STOP",
+      "CANDIDATE_SUPPLY",
+      "EVALUATOR_SIGNAL",
+      "INTERACTION_RECOVERY",
+      "OBSERVATION_EVIDENCE",
+      "REPAIR_ROLLBACK",
+      "SELECTION_ROUTING",
+      "STATE_MEMORY",
+      "TOOL_ENVIRONMENT"
+    ]
+  },
+  "paper_audit_contract": {
+    "coverage": "226/226 exactly once",
+    "required_fields": [
+      "paper_work_id",
+      "stage1b_role",
+      "source_domain",
+      "fulltext_evidence_locators",
+      "empirical_status",
+      "experiment_cell_ids",
+      "load_bearing_status",
+      "disposition_reason",
+      "coder",
+      "reviewer",
+      "adjudication_status"
+    ],
+    "non_empirical_rule": "A non-empirical work becomes an evidence node; no conceptual experiment cell may be fabricated."
+  },
+  "experiment_cell_contract": {
+    "identity_fields": [
+      "paper_work_id",
+      "dataset.canonical_name",
+      "dataset.revision",
+      "dataset.split",
+      "core.model_id",
+      "core.revision",
+      "core.access_protocol",
+      "input_condition",
+      "intervention",
+      "budget_horizon"
+    ],
+    "observation_fields": [
+      "metric",
+      "baseline_value",
+      "method_value",
+      "within_cell_delta",
+      "uncertainty_if_reported",
+      "source_locator"
+    ],
+    "metric_rule": "Multiple metrics from one run configuration are observations on one cell, not duplicate cells.",
+    "comparison_rule": "Cross-paper numeric comparison requires an exact comparability key over dataset revision, split, core model and revision, access protocol, input condition, metric and budget horizon."
+  },
+  "dataset_graph_contract": {
+    "lineage_rule": "Every lineage edge requires traceable source evidence; semantic similarity alone is never lineage.",
+    "relation_rule": "Every non-lineage relation requires a bounded rationale and evidence mode."
+  },
+  "experiment_family_contract": {
+    "core_signature": [
+      "problem_id",
+      "evaluation_object",
+      "outcome_semantics",
+      "environment_mode",
+      "access_protocol",
+      "comparison_interpretability"
+    ],
+    "core_rule": "CORE_MEMBER cells match the complete core signature. Dataset lineage may differ but remains a visible result stratum.",
+    "related_rule": "Validation, transfer, falsifier and instrument evidence attach by typed edges and do not inherit direct comparability.",
+    "result_synthesis": "Results are stratified by dataset lineage and access before assigning one controlled family evidence state.",
+    "innovation_semantics": "Separate author-claimed contribution, within-paper experimental support and project residual hypothesis; project novelty verdict remains prohibited."
+  },
+  "local_protocol_contract": {
+    "generation_rule": "Every LOCAL_READY family and every locally closable LOCAL_ADAPTABLE family receives an unexecuted protocol.",
+    "required_fields": [
+      "dataset_and_revision",
+      "loader_or_adapter",
+      "frozen_core_access",
+      "baselines",
+      "metrics",
+      "budget",
+      "failure_and_harm_axes",
+      "reproduction_anchor",
+      "kill_criterion"
+    ]
+  },
+  "branch_contract": {
+    "readiness_gates": [
+      "LOCAL_READY_OR_CLOSABLE_LOCAL_ADAPTABLE",
+      "FALSIFIABLE_RESIDUAL",
+      "TASK_MATCHED_NEAREST_PRIOR",
+      "OBSERVABLE_OUTCOME_OR_EVALUATOR",
+      "STRONGEST_FALSIFIER_AND_KILL_CRITERION"
+    ],
+    "required_arms": [
+      "FROZEN_BASELINE",
+      "NEAREST_PRIOR_REPRODUCTION",
+      "CANDIDATE_STRATEGY",
+      "ORACLE_UPPER_BOUND_OR_NOT_DEFINABLE_REASON"
+    ],
+    "count_policy": "EVIDENCE_GATE_DETERMINED_NO_QUOTA",
+    "ready_state": "READY_FOR_FUNNEL",
+    "nonready_state": "REFERENCE_ONLY",
+    "candidate_strategy_limit": "Freeze inputs, state, signals, decision rights, actions and expected causal path only; do not freeze or claim a novel algorithm."
+  },
+  "review_contract": {
+    "primary_coding": "226/226",
+    "blind_review": "at least 20 percent stratified by role, data and task",
+    "mandatory_full_review": [
+      "CORE_MEMBER",
+      "LOAD_BEARING_RELATION",
+      "FAMILY_CONCLUSION",
+      "BRANCH_CARD"
+    ],
+    "second_gate": "SIGN_STAGE1C_V2_FAMILY_BRANCH_PORTFOLIO"
+  }
+}

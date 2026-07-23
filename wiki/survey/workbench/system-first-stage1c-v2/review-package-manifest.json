@@ -1,0 +1,59 @@
+{
+  "schema": "sf-stage1c-v2-pre-sign-review-manifest-v1",
+  "artifact_id": "SF-STAGE1C-V2-PRE-SIGN-REVIEW-PACKAGE-2026-07-23",
+  "status": "READY_FOR_INDEPENDENT_REVIEW_SUBMISSION",
+  "authority_effect": "NONE",
+  "requested_verdict": "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
+  "frozen_stage1b_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "artifacts": [
+    {
+      "role": "protocol",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2/protocol-v2.md",
+      "bytes": 7372,
+      "sha256": "8910ff9664fdc90211e5538a6d3d978103c5f725dd1482b1282e6db3029b9c5c"
+    },
+    {
+      "role": "machine_contract",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2/experiment-mapping-contract-v2.json",
+      "bytes": 6394,
+      "sha256": "f588063f31a1af881c96e9c1cd35db51e11c98a1c465cf24ea28cc41758172ad"
+    },
+    {
+      "role": "paper_audit_bootstrap",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2/paper-audit-bootstrap-v2.json",
+      "bytes": 205010,
+      "sha256": "b0f9bdcf3a56144d6672363dcc6588d0f9e00a80b02c1cc2d7dd2ebd2a5c25ec"
+    },
+    {
+      "role": "reviewer_brief",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2/package-guide.md",
+      "bytes": 3374,
+      "sha256": "0173dd9d948dff7524ad879d31e86a9a1a6c806143960e56242d0e06681e30cf"
+    },
+    {
+      "role": "generator_checker",
+      "path": "scripts/survey/sf_stage1c_v2_experiment_mapping.py",
+      "bytes": 21543,
+      "sha256": "8f176411136a4f6432cddac128140d9e8ba618198e99bd852c55d1923e8cfff1"
+    },
+    {
+      "role": "contract_tests",
+      "path": "scripts/survey/test_sf_stage1c_v2_experiment_mapping.py",
+      "bytes": 20153,
+      "sha256": "a2c39d2d68ccaaba7984aaa7c73e6ec25e1ebba6a04509615e025bc91eca7aac"
+    },
+    {
+      "role": "pre_sign_report",
+      "path": "docs/checks/stage1c-v2/pre-sign-2026-07-23/contract-report.json",
+      "bytes": 550,
+      "sha256": "cc5bb9234f2a941fc0699a5398b3837ca3448c09c949423eeb71b29eaf28c188"
+    }
+  ],
+  "exclusions": [
+    "wiki/survey/current/",
+    "wiki/Research-Objective.md",
+    "research model/API outputs",
+    "dataset or benchmark metrics",
+    "reproduction or prototype outputs"
+  ]
+}

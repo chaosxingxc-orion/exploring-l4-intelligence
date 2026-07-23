@@ -1,0 +1,16 @@
+{
+  "schema": "sf-stage1c-v2-pre-sign-contract-report-v1",
+  "status": "PASS_PRE_SIGN_CONTRACT_ONLY",
+  "authority_effect": "NONE",
+  "requested_verdict": "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
+  "frozen_stage1b_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "checks": {
+    "paper_census_226_unique": true,
+    "experiment_cells_claimed": 0,
+    "family_memberships_claimed": 0,
+    "branches_claimed": 0,
+    "current_activation_withheld": true,
+    "model_or_metric_execution": 0
+  },
+  "next_gate": "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING"
+}
