@@ -3,29 +3,36 @@
   "files": [
     {
       "role": "stage1b_release_manifest",
-      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
-      "sha256": "458150815673ce13ce31ea55214234e226ba512a19a209dca1dee9b457c59ecf",
+      "path": "docs/checks/stage1b-closeout/2026-07-23-v5/release-manifest.json",
+      "sha256": "20a289487c846b45891488ee038a4321f80e20ed772a76837ce2954ff0b5a8e9",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
       "role": "stage1b_release_replay_receipt",
-      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/release-replay.json",
-      "sha256": "738b0b24f06e246709255c683bf629fa16051e4e72b4d0d095493e29e81c8131",
+      "path": "docs/checks/stage1b-closeout/2026-07-23-v5/release-replay.json",
+      "sha256": "a865ff0fa3e68eab35463d2d4c3a86e199cbd4863cb609413784221022c8b37a",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
-      "role": "speechrl_data_layered_inventory",
-      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
-      "sha256": "9ef8eb63b8872189f76321b3c6d38f15fa38d3913d27d072d09ccdf9c438167d",
+      "role": "speechrl_data_content_accounting",
+      "path": "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-content-accounting.json",
+      "sha256": "08f962359d01624a79170dc7e6d9c089968df8a0d1ce458c7fac326ba7a76c7a",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
-      "role": "stage1c_asset_acquisition_matrix",
-      "path": "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
-      "sha256": "88516cd9d6dc8c39dc8dd511fe2c3dba8512592b7cdaefbe48b4bd3ded58fcb8",
+      "role": "speechrl_data_layered_inventory_powershell",
+      "path": "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-powershell.json",
+      "sha256": "b5a6bd5b27225eb427210847ec3a049ee0d50f55161726a145de2718ff35a602",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "speechrl_data_layered_inventory_python",
+      "path": "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json",
+      "sha256": "ef9e2364482357b616ff83b43d9b269bf4a5c176e9fc95ff894c9bd6542b4388",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -54,6 +61,13 @@
       "role": "v6_report_wsl",
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
       "sha256": "3a3d95cf596fbe42a763e0ba11f5e8301ddf4fb3da599d93c8c12eaadaf0a1cd",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "stage1b_v5_gate_assets_lock",
+      "path": "docs/stage1b-v5-gate-assets.lock.json",
+      "sha256": "4692c4172c716655ea0933fb3206dc81f747d19357fa5db13932183e17e4af1a",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -123,14 +137,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "a3618897d7d51b92ad460913d51498bc4a72c08a56c64331ac5d4c3030482631",
+      "sha256": "7f6e4018299493a918235746736b32d8bfa3c475f481ff895da3c033bf170e23",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "6fa4ed435b34b46571a28f58615a964607e68a9be24c8739906fa5b46b22fa3f",
+      "sha256": "d660fd04c36b6f5b7682d2bdfe4e586f75d3fbb594c59ac2df65dee66026233d",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -212,9 +226,16 @@
       "load_policy": "machine-only"
     },
     {
-      "role": "stage1b_direct_control_basis_v1",
-      "path": "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
-      "sha256": "894788cd47bdb3da975a14a88c8fbe9954e0122e5677cb60f4524f2c72ef55c5",
+      "role": "stage1b_direct_control_basis_v2",
+      "path": "wiki/survey/current/data/stage1b-direct-control-basis-v2.json",
+      "sha256": "2eee3fdba5182f0710eac7e962d9c98e0a6d4f5d9bbd067bca46d13eefdec07a",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "stage1b_eligible_bundle_reconciliation_v1",
+      "path": "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+      "sha256": "96226d5fdfd9c46ee558589596665fbe67c54082960edacd0050897bf577e12d",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -226,9 +247,9 @@
       "load_policy": "targeted"
     },
     {
-      "role": "stage1b_speech_direct_prior_supplement_v2",
-      "path": "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
-      "sha256": "749bc669a0a3de393b13a1f97d6a5aaa5dec87be9cbcbf5c8c6c8d5f4b96bd3d",
+      "role": "stage1b_speech_direct_prior_supplement_v3",
+      "path": "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v3.json",
+      "sha256": "42e44072f3900a976b2805a33a11067855c34316e12a843f8c6f92a5ba2e6c44",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -249,14 +270,14 @@
     {
       "role": "stage1b_transition_reference_appendix",
       "path": "wiki/survey/current/stage1b-transition-reference-appendix.md",
-      "sha256": "a94f3dd63d78da0f941b2ea02348f29a72419942001ef86736929cf962018049",
+      "sha256": "07dfde6ba3dcbee4e753c59ca0eab9b39e6b911e2a316825589b23a77b69b84d",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "3e581701b822ada1c8b4b83b45834b293118b5e9c5ebf743b219115d176e089b",
+      "sha256": "43ea9f4425c15d0f6a771c3fa45584fd6364f232d5dbc47540b590bf0316d595",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -270,14 +291,14 @@
     {
       "role": "stage1b_mapping_release",
       "path": "wiki/survey/current/tables/stage1b-mapping-release.md",
-      "sha256": "fefb276df10e65e2572af65e62f4c59204df9fa042eb8d3ecd633dcbdd5a27a9",
+      "sha256": "743c9bd6a39ec722fa4d03076b6fa46e25c32f7ced68dd920be3a56afc962318",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
       "role": "stage1c_eligible_inputs",
       "path": "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-      "sha256": "696a3ecece8936cf85bab0dafa424c34edff6a750d22a52fedc56d779cde5010",
+      "sha256": "e4fb560dc3176963c88361e158320ebbcf075f778844dbe6f05b0ee672f1cc6a",
       "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
@@ -292,14 +313,17 @@
   "release_bound_artifacts": [
     "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
     "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
-    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
-    "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
+    "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+    "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v3.json",
+    "wiki/survey/current/data/stage1b-direct-control-basis-v2.json",
     "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-    "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
-    "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
-    "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
+    "docs/stage1b-v5-gate-assets.lock.json",
+    "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json",
+    "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-powershell.json",
+    "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-content-accounting.json",
+    "docs/checks/stage1b-closeout/2026-07-23-v5/release-manifest.json",
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
   ],
   "prose_scan_paths": [

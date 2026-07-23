@@ -294,14 +294,17 @@ class CurrentManifestContractTests(unittest.TestCase):
         expected = {
             "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
             "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
-            "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
-            "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
+            "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+            "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v3.json",
+            "wiki/survey/current/data/stage1b-direct-control-basis-v2.json",
             "wiki/survey/current/stage1b-transition-reference-appendix.md",
             "wiki/survey/current/tables/stage1b-mapping-release.md",
             "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-            "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
-            "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
-            "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
+            "docs/stage1b-v5-gate-assets.lock.json",
+            "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json",
+            "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-powershell.json",
+            "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-content-accounting.json",
+            "docs/checks/stage1b-closeout/2026-07-23-v5/release-manifest.json",
         }
         self.assertTrue(expected <= set(by_path))
         self.assertTrue(expected <= set(document["release_bound_artifacts"]))
@@ -411,14 +414,17 @@ class CurrentManifestContractTests(unittest.TestCase):
             [
                 "wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json",
                 "wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json",
-                "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v2.json",
-                "wiki/survey/current/data/stage1b-direct-control-basis-v1.json",
+                "wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json",
+                "wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v3.json",
+                "wiki/survey/current/data/stage1b-direct-control-basis-v2.json",
                 "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
-                "docs/checks/stage1b-closeout/2026-07-22-v4/stage1c-asset-acquisition-matrix.json",
-                "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
-                "docs/checks/stage1b-closeout/2026-07-22-v4/release-manifest.json",
+                "docs/stage1b-v5-gate-assets.lock.json",
+                "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json",
+                "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-powershell.json",
+                "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-content-accounting.json",
+                "docs/checks/stage1b-closeout/2026-07-23-v5/release-manifest.json",
             ],
             document["release_bound_artifacts"],
         )
@@ -438,7 +444,8 @@ class CurrentManifestContractTests(unittest.TestCase):
         ):
             self.assertTrue(
                 path.startswith("wiki/survey/current/")
-                or path.startswith("docs/checks/stage1b-closeout/2026-07-22-v4/")
+                or path.startswith("docs/checks/stage1b-closeout/2026-07-23-v5/")
+                or path == "docs/stage1b-v5-gate-assets.lock.json"
             )
             self.assertNotRegex(path, r"amendment|review|response")
 
@@ -1068,7 +1075,7 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v4 P0 repair frozen",
+            "Stage-1B v5 evidence repair frozen",
             "status.md",
             "stage1b-mapping-release.md",
             "stage1c-eligible-inputs.md",
@@ -1077,7 +1084,7 @@ class RouterContentContractTests(unittest.TestCase):
             "targeted",
             "wiki/audit/system-first-stage1b/INDEX.md",
             "H5 remains withheld",
-            "Legacy proposals, reviews, responses and amendments are not default context",
+            "Historical proposals, reviews, responses and amendments are cold audit",
         ):
             self.assertIn(required, text)
         self.assertNotRegex(text, r"sf-protocol-amendment-\d+|gate-s1-v\d+-response")
@@ -1090,10 +1097,10 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1B v4 P0 repair frozen",
+            "Stage-1B v5 evidence repair frozen",
             "Stage-1C has not started",
             "no broad discovery, model/API call, metric run, reproduction",
-            "70 `FULLTEXT_ROUTED`",
+            "All 18 have official metadata",
             "ELIGIBLE_NON_H5",
             "H5 is withheld",
             "never committed",
