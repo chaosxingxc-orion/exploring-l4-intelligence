@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "d2b979259e456ae8458aeb473da53c77e1f0ca8a"
+        "git_blob": "4c877df46c9ef2b7242613db908e87f5ec7d6e12"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -102,7 +102,7 @@
       {
         "path": "scripts/survey/sf_bibliography_generator.py",
         "mode": "100644",
-        "git_blob": "c3fcd73729ee8df4870af5f3f2233ad40900bf72"
+        "git_blob": "f86bf96a56d1c71bffc343daa2acde34d6998008"
       },
       {
         "path": "scripts/survey/sf_campaign_audit_index.py",
@@ -142,7 +142,7 @@
       {
         "path": "scripts/survey/sf_current_manifest.py",
         "mode": "100644",
-        "git_blob": "e364aa6d35360c578f02583ee7f9718f05212244"
+        "git_blob": "d051e307f348f37aa3ea27cc35fb6f6bcae2d2b5"
       },
       {
         "path": "scripts/survey/sf_current_package_check.py",
@@ -192,7 +192,7 @@
       {
         "path": "scripts/survey/sf_fulltext_fetch.py",
         "mode": "100644",
-        "git_blob": "e21478e01d3a4c1e0baf0fcac88beada9b80c268"
+        "git_blob": "bda05b490db5eae86d5482c51011ea5e49d52f0d"
       },
       {
         "path": "scripts/survey/sf_fulltext_ledger_status.py",
@@ -247,7 +247,7 @@
       {
         "path": "scripts/survey/sf_official_metadata_fetch.py",
         "mode": "100644",
-        "git_blob": "821450c00561982160733aea78679eccc839f348"
+        "git_blob": "24b71b2ec17c419ae4c2cf48b6c440e2c93e9abb"
       },
       {
         "path": "scripts/survey/sf_package_summary.py",
@@ -405,6 +405,21 @@
         "git_blob": "4de566737dd4b717442aa792c5ce90af737df9b1"
       },
       {
+        "path": "scripts/survey/sf_stage1b_v5_evidence_contract.py",
+        "mode": "100644",
+        "git_blob": "99b2bb1a589b940a9bb0b3ffd4dd54d558189abd"
+      },
+      {
+        "path": "scripts/survey/sf_stage1b_v5_materialize.py",
+        "mode": "100644",
+        "git_blob": "ecbe8a8a0aefb4d1db75f18919d0aa045adc0143"
+      },
+      {
+        "path": "scripts/survey/sf_stage1b_v5_spec_materialize.py",
+        "mode": "100644",
+        "git_blob": "38f57dd518d47f172f6718826ef11ea860a0ba24"
+      },
+      {
         "path": "scripts/survey/sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "2333e64e320eb5b44e435fe0112ba928764394ad"
@@ -487,7 +502,7 @@
       {
         "path": "scripts/survey/test_sf_bibliography_generator.py",
         "mode": "100644",
-        "git_blob": "08fe1b8bbe18e53d813688d9379591f80b83f663"
+        "git_blob": "e003bf906f50c3eaca3975f05a009d5032e3a21e"
       },
       {
         "path": "scripts/survey/test_sf_campaign_audit_index.py",
@@ -507,7 +522,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "bd1bd3dfa42b12035aca3502ea5bad92f2cfe190"
+        "git_blob": "505628e3ea5138a4cf2dfa4285bee9cec6104f5e"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -537,12 +552,12 @@
       {
         "path": "scripts/survey/test_sf_existing_corpus_disposition.py",
         "mode": "100644",
-        "git_blob": "edaed98ffce563c30ae9e6f8741f968be6917d88"
+        "git_blob": "55a68f7803932e6d63e4fef2f068634bfb8c3ae3"
       },
       {
         "path": "scripts/survey/test_sf_fulltext_fetch.py",
         "mode": "100644",
-        "git_blob": "a665fe237604889250df57c1df6019ee4e7a640f"
+        "git_blob": "a8cf6a639bd58379bdbbc5a9306bcdda0b811d9a"
       },
       {
         "path": "scripts/survey/test_sf_h5_calibration_contract.py",
@@ -572,7 +587,7 @@
       {
         "path": "scripts/survey/test_sf_official_metadata_fetch.py",
         "mode": "100644",
-        "git_blob": "576449386bf17260c40a05440d7b8f9b9c72f3b2"
+        "git_blob": "6b0cc247a475768cb00da82a70a3c3b1e7f2dd21"
       },
       {
         "path": "scripts/survey/test_sf_pdf_extractor_contract.py",
@@ -675,6 +690,26 @@
         "git_blob": "655e0313cd08ce2976e9c4f40c168b497758342c"
       },
       {
+        "path": "scripts/survey/test_sf_stage1b_v5_evidence_contract.py",
+        "mode": "100644",
+        "git_blob": "759885fcf0a7335ee8c8c56f5f218a11c4ce10cb"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1b_v5_materialize.py",
+        "mode": "100644",
+        "git_blob": "45c4ef4ef66acdaeb871f04168fc61524120f992"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1b_v5_spec_materialize.py",
+        "mode": "100644",
+        "git_blob": "849a62b5a1d0276af3f364d6fd35c965de00c26a"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1c_common_rubric.py",
+        "mode": "100644",
+        "git_blob": "e087d7993d0035e43ca5472a103a501474d5d506"
+      },
+      {
         "path": "scripts/survey/test_sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "6c48a1a2aef14596d4941430438ef894048562cf"
@@ -695,7 +730,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "692443a131be97e44c12b9e177009b80a6c0b454f508c79fea6f5465c48a5fb7"
+    "sha256": "7c9335d9f2ded5b252e52ed60506b3467ff1c85eecdcf3b4e2d47a215b0f50fe"
   },
   "commands": [
     {
@@ -773,7 +808,7 @@
     {
       "command": "python scripts/survey/sf_release_binding_check.py",
       "exit_code": 0,
-      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest; validated=1; not-applicable=10)",
+      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest; validated=1; not-applicable=13)",
       "stderr_tail": ""
     },
     {
