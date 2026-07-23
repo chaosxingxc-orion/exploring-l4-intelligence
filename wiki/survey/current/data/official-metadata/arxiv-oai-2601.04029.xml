@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:13Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2601.04029" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2601.04029</identifier>
+        <datestamp>2026-04-21</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2601.04029</id>
+        <created>2026-04-20</created>
+            <updated>2026-04-21</updated>
+        <authors>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Jonggeun</forenames>
+                </author>
+                <author>
+                    <keyname>Pyo</keyname>
+                        <forenames>Junseong</forenames>
+                </author>
+                <author>
+                    <keyname>Seo</keyname>
+                        <forenames>Gyuhyeon</forenames>
+                </author>
+                <author>
+                    <keyname>Jo</keyname>
+                        <forenames>Yohan</forenames>
+                </author>
+        </authors>
+        <title>SpeakerSleuth: Can Large Audio-Language Models Judge Speaker Consistency across Multi-turn Dialogues?</title>
+            <categories>cs.CL</categories>
+            <comments>Accepted at ACL 2026 (Main)</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Large Audio-Language Models (LALMs) as judges have emerged as a prominent approach for evaluating speech generation quality, yet their ability to assess speaker consistency across multi-turn dialogues remains unexplored. We present \textbf{SpeakerSleuth}, a benchmark evaluating whether LALMs can reliably judge speaker consistency across multi-turn dialogues through three tasks reflecting real-world requirements. We construct 1,818 human-verified evaluation instances across four diverse datasets spanning synthetic and real speech, with controlled acoustic difficulty. Evaluating twelve widely-used LALMs, we find that models struggle to reliably detect acoustic inconsistencies. For instance, given audio samples of the same speaker&#39;s turns, some models overpredict inconsistency, whereas others are overly lenient. Models further struggle to identify the exact turns that are problematic. When other interlocutors&#39; turns are provided as textual context, performance degrades dramatically as models prioritize textual coherence over acoustic cues, failing to detect even obvious gender switches for a speaker. On the other hand, models perform substantially better in comparing and ranking acoustic variants, demonstrating inherent acoustic discrimination capabilities. These findings expose a significant bias in LALMs: they tend to prioritize text over acoustics, revealing fundamental modality imbalances that need to be addressed to build reliable audio-language judges. Our code and data are available at https://github.com/holi-lab/SpeakerSleuth.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

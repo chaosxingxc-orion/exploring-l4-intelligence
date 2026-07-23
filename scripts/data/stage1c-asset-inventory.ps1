@@ -134,10 +134,11 @@ $document = [ordered]@{
     )
 }
 
-$outputParent = Split-Path -Parent $OutputPath
+$resolvedOutput = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputPath)
+$outputParent = Split-Path -Parent $resolvedOutput
 if ($outputParent) { New-Item -ItemType Directory -Force -Path $outputParent | Out-Null }
 $json = $document | ConvertTo-Json -Depth 12
-[IO.File]::WriteAllText((Join-Path (Get-Location) $OutputPath), $json + [Environment]::NewLine, [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText($resolvedOutput, $json + [Environment]::NewLine, [Text.UTF8Encoding]::new($false))
 Write-Output "FROZEN_BASELINE: $($baselineEntries.Count) entries"
 Write-Output "LOCAL_CANDIDATE_UNFROZEN: $($candidateEntries.Count) entries"
 Write-Output "SURVEY_AND_REPRO_AUXILIARY: $($auxiliaryEntries.Count) entries"

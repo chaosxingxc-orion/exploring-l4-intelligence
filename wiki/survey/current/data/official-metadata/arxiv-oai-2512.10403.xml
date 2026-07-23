@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:11Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2512.10403" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2512.10403</identifier>
+        <datestamp>2025-12-12</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2512.10403</id>
+        <created>2025-12-11</created>
+            <updated>2025-12-12</updated>
+        <authors>
+                <author>
+                    <keyname>Guo</keyname>
+                        <forenames>Tianyu</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Hongyu</forenames>
+                </author>
+                <author>
+                    <keyname>Liang</keyname>
+                        <forenames>Hao</forenames>
+                </author>
+                <author>
+                    <keyname>Qiang</keyname>
+                        <forenames>Meiyi</forenames>
+                </author>
+                <author>
+                    <keyname>Zeng</keyname>
+                        <forenames>Bohan</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Linzhuang</forenames>
+                </author>
+                <author>
+                    <keyname>Cui</keyname>
+                        <forenames>Bin</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Wentao</forenames>
+                </author>
+        </authors>
+        <title>BRACE: A Benchmark for Robust Audio Caption Quality Evaluation</title>
+            <categories>cs.SD cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Automatic audio captioning is essential for audio understanding, enabling applications such as accessibility and content indexing. However, evaluating the quality of audio captions remains a major challenge, especially in reference-free settings where high-quality ground-truth captions are unavailable. While CLAPScore is currently the most widely used reference-free Audio Caption Evaluation Metric(ACEM), its robustness under diverse conditions has not been systematically validated.
+  To address this gap, we introduce BRACE, a new benchmark designed to evaluate audio caption alignment quality in a reference-free setting. BRACE is primarily designed for assessing ACEMs, and can also be extended to measure the modality alignment abilities of Large Audio Language Model(LALM). BRACE consists of two sub-benchmarks: BRACE-Main for fine-grained caption comparison and BRACE-Hallucination for detecting subtle hallucinated content. We construct these datasets through high-quality filtering, LLM-based corruption, and human annotation.
+  Given the widespread adoption of CLAPScore as a reference-free ACEM and the increasing application of LALMs in audio-language tasks, we evaluate both approaches using the BRACE benchmark, testing CLAPScore across various CLAP model variants and assessing multiple LALMs.
+  Notably, even the best-performing CLAP-based ACEM achieves only a 70.01 F1-score on the BRACE-Main benchmark, while the best LALM reaches just 63.19.
+  By revealing the limitations of CLAP models and LALMs, our BRACE benchmark offers valuable insights into the direction of future research.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

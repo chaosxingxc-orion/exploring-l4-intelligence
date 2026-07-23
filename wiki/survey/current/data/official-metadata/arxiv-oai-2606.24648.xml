@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:34Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2606.24648" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2606.24648</identifier>
+        <datestamp>2026-06-24</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2606.24648</id>
+        <created>2026-06-23</created>
+            <updated>2026-06-24</updated>
+        <authors>
+                <author>
+                    <keyname>Jeon</keyname>
+                        <forenames>Jisu</forenames>
+                </author>
+                <author>
+                    <keyname>Jwa</keyname>
+                        <forenames>Seungyeon</forenames>
+                </author>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Joosung</forenames>
+                </author>
+                <author>
+                    <keyname>Kim</keyname>
+                        <forenames>Jinhyeon</forenames>
+                </author>
+                <author>
+                    <keyname>Chung</keyname>
+                        <forenames>Woojin</forenames>
+                </author>
+                <author>
+                    <keyname>Jo</keyname>
+                        <forenames>Hwiyeol</forenames>
+                </author>
+                <author>
+                    <keyname>Kim</keyname>
+                        <forenames>Jeonghoon</forenames>
+                </author>
+                <author>
+                    <keyname>Choi</keyname>
+                        <forenames>Jonghyun</forenames>
+                </author>
+                <author>
+                    <keyname>Kim</keyname>
+                        <forenames>Soyoon</forenames>
+                </author>
+        </authors>
+        <title>ParaPairAudioBench: Paralinguistic Pairwise Audio Benchmark for LALM-as-a-Judge</title>
+            <categories>cs.SD cs.CL eess.AS</categories>
+            <comments>Accepted to Interspeech 2026</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Large Audio-Language Models (LALMs) have been widely used as judge models for the automatic evaluation of generated speech. However, prior approaches predominantly focus on holistic naturalness, leaving fine-grained paralinguistic distinctions underexplored. We introduce ParaPairAudioBench, a pairwise benchmark of 5,175 audio pairs across five paralinguistic dimensions: Style, Rate, Emphasis, Age, and Gender. Our experiments show that current LALM judges still lag behind human judgments by 32%p on average and exhibit severe calibration failures, particularly in Tie cases where the correct decision is to abstain. To further analyze lexical versus acoustic reliance, the benchmark includes both same-transcript and cross-transcript conditions. ParaPairAudioBench enables multi-dimensional, calibration-aware assessment of the reliability of LALM-as-a-Judge for paralinguistic speech evaluation.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

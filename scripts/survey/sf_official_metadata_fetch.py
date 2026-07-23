@@ -159,6 +159,25 @@ def fetch_arxiv_oai(policy: dict[str, Any], raw_dir: Path) -> dict[str, Any]:
     )
 
 
+def fetch_arxiv_html(policy: dict[str, Any], raw_dir: Path) -> dict[str, Any]:
+    identity_id = policy["identity"]["id"]
+    url = f"https://arxiv.org/abs/{identity_id}"
+    body, accessed = fetch(url, pause_seconds=1.0)
+    path = raw_dir / f"arxiv-abs-{identity_id}.html"
+    path.write_bytes(body)
+    parsed = bibliography.parse_official_payload(
+        policy["identity"], body, "text/html"
+    )
+    print(f"[arXiv:abs] {identity_id}: {len(body)} bytes")
+    return receipt(
+        policy,
+        official_url=url,
+        accessed=accessed,
+        raw=raw_binding(path, body, "text/html"),
+        parsed=parsed,
+    )
+
+
 def reusable_current_receipt(
     policy: dict[str, Any],
     cached: dict[str, dict[str, Any]],
@@ -198,6 +217,10 @@ def recover_current_raw(policy: dict[str, Any], raw_dir: Path) -> dict[str, Any]
             "https://export.arxiv.org/oai2?verb=GetRecord&identifier="
             f"oai:arXiv.org:{identity['id']}&metadataPrefix=arXiv"
         )
+        if not path.is_file():
+            path = raw_dir / f"arxiv-abs-{identity['id']}.html"
+            media_type = "text/html"
+            official_url = f"https://arxiv.org/abs/{identity['id']}"
     elif identity["kind"] == "acl":
         path = raw_dir / f"acl-{identity['id']}.bib"
         media_type = "application/x-bibtex"
@@ -324,7 +347,7 @@ def main(argv: list[str] | None = None) -> int:
             missing.append(policy["identity"]["id"])
             continue
         if policy["identity"]["kind"] == "arxiv":
-            rows.append(fetch_arxiv_oai(policy, raw_dir))
+            rows.append(fetch_arxiv_html(policy, raw_dir))
         elif policy["identity"]["kind"] == "acl":
             rows.append(fetch_acl(policy, raw_dir))
         else:

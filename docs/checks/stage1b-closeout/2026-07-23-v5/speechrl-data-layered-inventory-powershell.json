@@ -1,0 +1,755 @@
+{
+    "schema":  "speechrl-data-layered-inventory-v1",
+    "data_root":  "${SPEECHRL_DATA_DIR}",
+    "snapshot_date":  "2026-07-23",
+    "claim_limit":  "Directory presence, file counts and byte totals only. FROZEN_BASELINE semantics come from docs/datasets.lock.json; no whole-disk content hash was recomputed.",
+    "layers":  [
+                   {
+                       "layer_id":  "FROZEN_BASELINE",
+                       "manifest":  "docs/datasets.lock.json",
+                       "locked_entries":  31,
+                       "observed_entries":  31,
+                       "missing_locked_paths":  [
+
+                                                ],
+                       "entries":  [
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "librispeech",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/librispeech",
+                                           "files":  262,
+                                           "bytes":  123675394690,
+                                           "source_identity":  "openslr/librispeech_asr",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "covost2",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/covost2",
+                                           "files":  17,
+                                           "bytes":  296658986,
+                                           "source_identity":  "facebook/covost2",
+                                           "revision_or_fingerprint":  "unknown (no local metadata -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "fleurs-r",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/fleurs-r",
+                                           "files":  78,
+                                           "bytes":  18584952953,
+                                           "source_identity":  "google/fleurs-r",
+                                           "revision_or_fingerprint":  "c621c0b7b569dcebcd50273a187a35d1a1fc895f",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "crema-d",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/crema-d",
+                                           "files":  7448,
+                                           "bytes":  606478314,
+                                           "source_identity":  "MahiA/CREMA-D",
+                                           "revision_or_fingerprint":  "ac5b65fb890f1db0d2f7d6268d13994f481e5567",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "meld",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/meld",
+                                           "files":  13890,
+                                           "bytes":  34755683864,
+                                           "source_identity":  "declare-lab/MELD",
+                                           "revision_or_fingerprint":  "9abc51ee7903424ffb971297608aa6d3d0de3bfa",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "minds14",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/minds14",
+                                           "files":  35,
+                                           "bytes":  1133280761,
+                                           "source_identity":  "PolyAI/minds14",
+                                           "revision_or_fingerprint":  "unknown (no local metadata -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "audio",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/repos/slurp/scripts/audio",
+                                           "files":  141656,
+                                           "bytes":  13507477690,
+                                           "source_identity":  "LOCK_SOURCE_UNRECORDED",
+                                           "revision_or_fingerprint":  "8eb16545762be97ace75334109d73824217311f1",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "speech-massive",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/speech-massive",
+                                           "files":  97,
+                                           "bytes":  32498335745,
+                                           "source_identity":  "FBK-MT/Speech-MASSIVE",
+                                           "revision_or_fingerprint":  "ff792febc16187a21e5bca38fb02a55daf91dc05",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "mmau-mini",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/mmau-mini",
+                                           "files":  24,
+                                           "bytes":  2843372907,
+                                           "source_identity":  "TwinkStart/MMAU",
+                                           "revision_or_fingerprint":  "42bd874593a0beed966e505411e896a808f9931f",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "mmar",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/mmar",
+                                           "files":  13,
+                                           "bytes":  2994099985,
+                                           "source_identity":  "BoJack/MMAR",
+                                           "revision_or_fingerprint":  "3bd051123480e80d273ae9e8e9f1653f49010ac7",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "air-bench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/air-bench",
+                                           "files":  13574,
+                                           "bytes":  43849433944,
+                                           "source_identity":  "qfq/AIR-Bench_24.09",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "mmsu",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/mmsu",
+                                           "files":  4956,
+                                           "bytes":  1664329065,
+                                           "source_identity":  "ddwang2000/MMSU",
+                                           "revision_or_fingerprint":  "548e2283105825bf908a7db5c09c00dbcf42bd4c",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "big-bench-audio",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/big-bench-audio",
+                                           "files":  1005,
+                                           "bytes":  319411819,
+                                           "source_identity":  "ArtificialAnalysis/big_bench_audio",
+                                           "revision_or_fingerprint":  "af7bb9c25b015792583ca4da3ee27ec62cb79fe6",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "voicebench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/voicebench",
+                                           "files":  75,
+                                           "bytes":  11200121285,
+                                           "source_identity":  "lmms-lab/voicebench",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "heysquad",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/heysquad",
+                                           "files":  38,
+                                           "bytes":  14616760066,
+                                           "source_identity":  "yijingwu/HeySQuAD_human",
+                                           "revision_or_fingerprint":  "2a9aff6032a76185b98eff703144a2a896313e49",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "spoken-squad",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/spoken-squad",
+                                           "files":  25,
+                                           "bytes":  3403615926,
+                                           "source_identity":  "AudioLLMs/spoken_squad_test",
+                                           "revision_or_fingerprint":  "b55aab98726d0eab95eeef1ee9992a0532b3226e",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "uro-bench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/uro-bench",
+                                           "files":  46,
+                                           "bytes":  12131704910,
+                                           "source_identity":  "Honggao/URO-Bench",
+                                           "revision_or_fingerprint":  "ae7ebe43bc601df5e893942ca1e09e95ab9562aa",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "vocalbench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/vocalbench",
+                                           "files":  9437,
+                                           "bytes":  4972235750,
+                                           "source_identity":  "VocalNet/VocalBench",
+                                           "revision_or_fingerprint":  "23c7a2876f01c798764236d3682df4cf31849023",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "vocalbench-zh",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/vocalbench-zh",
+                                           "files":  15,
+                                           "bytes":  3995816230,
+                                           "source_identity":  "VocalNet/VocalBench-zh",
+                                           "revision_or_fingerprint":  "8ee76e027f2023161820c0fe70aeb7605e15f934",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "voiceassistant-eval",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/voiceassistant-eval",
+                                           "files":  17,
+                                           "bytes":  9491293809,
+                                           "source_identity":  "MathLLMs/VoiceAssistant-Eval",
+                                           "revision_or_fingerprint":  "5b6260bc6fe2f90cb857befca73ac9916399da5a",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "audiomc",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/audiomc",
+                                           "files":  6,
+                                           "bytes":  5283221784,
+                                           "source_identity":  "ScaleAI/audiomc",
+                                           "revision_or_fingerprint":  "90ea11040fd05f41cf433b90f97ada45d847c500",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "soulx-duplug",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/soulx-duplug",
+                                           "files":  7,
+                                           "bytes":  332118583,
+                                           "source_identity":  "Soul-AILab/SoulX-Duplug-Eval",
+                                           "revision_or_fingerprint":  "f6e50e8f07f3d33d8b2e77b14df986d14c817ef2",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "eva-bench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/eva-bench",
+                                           "files":  5,
+                                           "bytes":  263383,
+                                           "source_identity":  "ServiceNow-AI/eva",
+                                           "revision_or_fingerprint":  "566525430d942873f149273f0fa90fcaeba1f975",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "tau2-bench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/tau2-bench",
+                                           "files":  33,
+                                           "bytes":  26257026,
+                                           "source_identity":  "evalscope/tau2-bench-data",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "seed-tts-eval",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/seed-tts-eval",
+                                           "files":  9,
+                                           "bytes":  374790004,
+                                           "source_identity":  "evalscope (id not recorded; fetch manually)",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "aime24",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/aime24",
+                                           "files":  2,
+                                           "bytes":  16243,
+                                           "source_identity":  "evalscope (id not recorded; fetch manually)",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "aime25",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/aime25",
+                                           "files":  3,
+                                           "bytes":  32121,
+                                           "source_identity":  "evalscope (id not recorded; fetch manually)",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "aime26",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/aime26",
+                                           "files":  2,
+                                           "bytes":  18005,
+                                           "source_identity":  "evalscope (id not recorded; fetch manually)",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "qwen3-omni-30b-a3b-instruct-gguf",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/qwen3-omni-30b-a3b-instruct-gguf",
+                                           "files":  2,
+                                           "bytes":  34691959904,
+                                           "source_identity":  "ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF",
+                                           "revision_or_fingerprint":  "unknown (no local metadata -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "nemotron3-nano-omni-nvfp4",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/nemotron3-nano-omni-nvfp4",
+                                           "files":  26,
+                                           "bytes":  22431648317,
+                                           "source_identity":  "nv-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "omni-embed-nemotron-3b",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/omni-embed-nemotron-3b",
+                                           "files":  22,
+                                           "bytes":  9423120627,
+                                           "source_identity":  "nv-community/omni-embed-nemotron-3b",
+                                           "revision_or_fingerprint":  "master (modelscope; unpinned -- content-fingerprinted)",
+                                           "source_status":  "FROZEN_LOCK_RECORD",
+                                           "layer_status":  "LOCAL_BASELINE_LOCKED"
+                                       }
+                                   ]
+                   },
+                   {
+                       "layer_id":  "LOCAL_CANDIDATE_UNFROZEN",
+                       "observed_entries":  33,
+                       "entries":  [
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "aishell-1",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/aishell-1",
+                                           "files":  47,
+                                           "bytes":  20301961842,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "audio2tool",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/audio2tool",
+                                           "files":  72062,
+                                           "bytes":  10474543420,
+                                           "source_identity":  "hf:RVtech/Audio2Tool",
+                                           "revision_or_fingerprint":  "f1388da9a3189541ab82adac88824a0661670c43",
+                                           "source_status":  "EXACT_CATALOG_ENTRY",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "audiocaps-qa",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/audiocaps-qa",
+                                           "files":  11,
+                                           "bytes":  92246909,
+                                           "source_identity":  "hf:AudioLLMs/audiocaps_qa_test",
+                                           "revision_or_fingerprint":  "LOCAL_REVISION_UNRESOLVED",
+                                           "source_status":  "SOURCE_ID_KNOWN_REVISION_UNRESOLVED",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "auditorybench-plusplus",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/auditorybench-plusplus",
+                                           "files":  23,
+                                           "bytes":  1056591,
+                                           "source_identity":  "hf:HJOK/AuditoryBenchpp",
+                                           "revision_or_fingerprint":  "LOCAL_REVISION_UNRESOLVED",
+                                           "source_status":  "SOURCE_ID_KNOWN_REVISION_UNRESOLVED",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "cn-celeb1",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/cn-celeb1",
+                                           "files":  144514,
+                                           "bytes":  44689206960,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "cn-celeb2",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/cn-celeb2",
+                                           "files":  524796,
+                                           "bytes":  155097180456,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "csemotions",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/csemotions",
+                                           "files":  12,
+                                           "bytes":  3077440433,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "esd",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/esd",
+                                           "files":  35023,
+                                           "bytes":  5802733440,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "full-duplex-bench-v3",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/full-duplex-bench-v3",
+                                           "files":  204,
+                                           "bytes":  1683672385,
+                                           "source_identity":  "gdrive:1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz",
+                                           "revision_or_fingerprint":  "sha256:37545bd896f81718136598cf5be25d42ea9aa22efcd91f58370938d05d7d672f",
+                                           "source_status":  "EXACT_CATALOG_ENTRY",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "ihbench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/ihbench",
+                                           "files":  8,
+                                           "bytes":  216559738,
+                                           "source_identity":  "hf:bosonai/IHBench",
+                                           "revision_or_fingerprint":  "cbd8280ab59bc4a50c48cbe0511a307fba9945cf",
+                                           "source_status":  "EXACT_CATALOG_ENTRY",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "omni-deepsearch",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/omni-deepsearch",
+                                           "files":  913,
+                                           "bytes":  632178405,
+                                           "source_identity":  "hf:Kirito-Lab/Omni-DeepSearch",
+                                           "revision_or_fingerprint":  "f6fafcd1ee9e5d370379b684bee3957c27dc25ac",
+                                           "source_status":  "EXACT_CATALOG_ENTRY",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "slurp",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/slurp",
+                                           "files":  283312,
+                                           "bytes":  27014955380,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "squtr",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/squtr",
+                                           "files":  8,
+                                           "bytes":  21069849460,
+                                           "source_identity":  "hf:SLLMCommunity/SQuTR",
+                                           "revision_or_fingerprint":  "LOCAL_REVISION_UNRESOLVED",
+                                           "source_status":  "SOURCE_ID_KNOWN_REVISION_UNRESOLVED",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "thchs-30",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/thchs-30",
+                                           "files":  53562,
+                                           "bytes":  16431473109,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "voiceagentbench",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/voiceagentbench",
+                                           "files":  7665,
+                                           "bytes":  5833663134,
+                                           "source_identity":  "hf:krutrim-ai-labs/VoiceAgentBench",
+                                           "revision_or_fingerprint":  "5ec6b7fcdaf25a1ffd5f538214d91dcf653c9ea4",
+                                           "source_status":  "EXACT_CATALOG_ENTRY",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "dataset",
+                                           "name":  "voxceleb1-test-split",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/datasets/voxceleb1-test-split",
+                                           "files":  6,
+                                           "bytes":  1288185030,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "campplus-zh",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/campplus-zh",
+                                           "files":  6,
+                                           "bytes":  28044541,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "clap-htsat-unfused",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/clap-htsat-unfused",
+                                           "files":  10,
+                                           "bytes":  617896085,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "clsp",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/clsp",
+                                           "files":  9,
+                                           "bytes":  2897287869,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "dasheng",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/dasheng",
+                                           "files":  9,
+                                           "bytes":  4536274528,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "emotion2vec-plus-large",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/emotion2vec-plus-large",
+                                           "files":  7,
+                                           "bytes":  1945802619,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "emotion2vec-s",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/emotion2vec-s",
+                                           "files":  4,
+                                           "bytes":  1132767014,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "eres2netv2-zh",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/eres2netv2-zh",
+                                           "files":  5,
+                                           "bytes":  71773687,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "glap",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/glap",
+                                           "files":  9,
+                                           "bytes":  3426926767,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "lco-embedding-omni-3b-gguf",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/lco-embedding-omni-3b-gguf",
+                                           "files":  5,
+                                           "bytes":  6238572624,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "lco-embedding-omni-7b-gguf",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/lco-embedding-omni-7b-gguf",
+                                           "files":  5,
+                                           "bytes":  10740684621,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "meralion-2-gguf",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/meralion-2-gguf",
+                                           "files":  4,
+                                           "bytes":  4502513715,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "meralion-speech-encoder-2",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/meralion-speech-encoder-2",
+                                           "files":  10,
+                                           "bytes":  2537168545,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "redimnet-b6",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/redimnet-b6",
+                                           "files":  1,
+                                           "bytes":  60663214,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "sense",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/sense",
+                                           "files":  12,
+                                           "bytes":  2322301004,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "sensevoice-small",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/sensevoice-small",
+                                           "files":  8,
+                                           "bytes":  936697563,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "wavlm-base-plus",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/wavlm-base-plus",
+                                           "files":  5,
+                                           "bytes":  377620136,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       },
+                                       {
+                                           "kind":  "model",
+                                           "name":  "wavlm-large",
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/models/wavlm-large",
+                                           "files":  5,
+                                           "bytes":  1261992949,
+                                           "source_identity":  "UNRESOLVED_LOCAL_SOURCE",
+                                           "revision_or_fingerprint":  "UNRESOLVED_LOCAL_REVISION",
+                                           "source_status":  "UNRESOLVED_LOCAL_PROVENANCE",
+                                           "layer_status":  "LOCAL_CANDIDATE_UNFROZEN"
+                                       }
+                                   ]
+                   },
+                   {
+                       "layer_id":  "SURVEY_AND_REPRO_AUXILIARY",
+                       "counting_rule":  "Kept outside dataset/model totals; presence only in this inventory.",
+                       "entries":  [
+                                       {
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/survey-fulltext",
+                                           "present":  true
+                                       },
+                                       {
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/repos",
+                                           "present":  true
+                                       },
+                                       {
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/logs",
+                                           "present":  true
+                                       },
+                                       {
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/mlruns",
+                                           "present":  false
+                                       },
+                                       {
+                                           "local_path":  "${SPEECHRL_DATA_DIR}/outputs",
+                                           "present":  false
+                                       }
+                                   ]
+                   }
+               ]
+}

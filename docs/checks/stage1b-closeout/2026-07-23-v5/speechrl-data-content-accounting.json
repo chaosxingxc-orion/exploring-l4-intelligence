@@ -1,0 +1,27 @@
+{
+  "schema": "speechrl-stage1c-asset-content-accounting-v1",
+  "snapshot_date": "2026-07-23",
+  "entries": [
+    {
+      "asset_id": "audio2tool",
+      "revision": "f1388da9a3189541ab82adac88824a0661670c43",
+      "local_path": "${SPEECHRL_DATA_DIR}/datasets/audio2tool",
+      "remote_manifest": "${SPEECHRL_DATA_DIR}/datasets/audio2tool/.hfd/manifest",
+      "remote_content": {
+        "files": 71441,
+        "bytes": 10410773494,
+        "missing": 0
+      },
+      "auxiliary_content": {
+        "files": 11,
+        "bytes": 62611468
+      },
+      "extraneous_content": {
+        "files": 610,
+        "bytes": 1158458
+      },
+      "hygiene_action": "DO_NOT_DELETE; STAGE2_LOADER_MUST_USE_REVISION_BOUND_ALLOWLIST",
+      "claim_limit": "Counts only. Extraneous files remain user assets and are not treated as remote dataset content."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:24Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2604.24278" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2604.24278</identifier>
+        <datestamp>2026-06-09</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2604.24278</id>
+        <created>2026-06-08</created>
+            <updated>2026-06-09</updated>
+        <authors>
+                <author>
+                    <keyname>Huang</keyname>
+                        <forenames>Wenbin</forenames>
+                </author>
+                <author>
+                    <keyname>Qiu</keyname>
+                        <forenames>Yuhang</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Bohan</forenames>
+                </author>
+                <author>
+                    <keyname>Guo</keyname>
+                        <forenames>Yiwei</forenames>
+                </author>
+                <author>
+                    <keyname>Peng</keyname>
+                        <forenames>Jing</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Hankun</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Xie</forenames>
+                </author>
+                <author>
+                    <keyname>Yu</keyname>
+                        <forenames>Kai</forenames>
+                </author>
+        </authors>
+        <title>RAS: a Reliability Oriented Metric for Automatic Speech Recognition</title>
+            <categories>cs.SD cs.AI</categories>
+            <comments>5 pages, 4 figures; Accepted at InterSpeech 2026</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Automatic speech recognition systems often produce confident yet incorrect transcriptions under noisy or ambiguous conditions, which can be misleading for both users and downstream applications. Standard evaluation based on Word Error Rate focuses solely on accuracy and fails to capture transcription reliability. We introduce an abstention-aware transcription framework that enables ASR models to explicitly abstain from uncertain segments. To evaluate reliability under abstention, we propose RAS, a reliability-oriented metric that balances transcription informativeness and error aversion, with its trade-off parameter calibrated by human preference. We then train an abstention-aware ASR model through supervised bootstrapping followed by reinforcement learning. Our experiments demonstrate substantial improvements in transcription reliability while maintaining competitive accuracy.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

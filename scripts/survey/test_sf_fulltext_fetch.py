@@ -15,6 +15,14 @@ import sf_fulltext_fetch as fetcher
 
 
 class FulltextFetchTests(unittest.TestCase):
+    def test_data_root_normalization_preserves_wsl_mount_and_translates_only_on_windows(self):
+        wsl_path = "/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data"
+        self.assertEqual(wsl_path, fetcher._normalize_data_root(wsl_path, platform="posix"))
+        self.assertEqual(
+            "E:/chao_workspace/exploring-l4-intelligence/speechrl-data",
+            fetcher._normalize_data_root(wsl_path, platform="nt"),
+        )
+
     def test_pdf_validation_rejects_html_error_pages(self):
         self.assertTrue(fetcher.valid_body("pdf", b"%PDF-1.7\n" + b"x" * 2048))
         self.assertFalse(fetcher.valid_body("pdf", b"<html>error</html>" + b"x" * 2048))

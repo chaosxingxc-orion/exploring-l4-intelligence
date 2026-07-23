@@ -23,6 +23,35 @@ import sf_official_metadata_fetch as fetcher  # noqa: E402
 
 
 class OfficialMetadataFetchTest(unittest.TestCase):
+    def test_arxiv_https_abs_fallback_parses_official_citation_metadata(self):
+        raw = b"""<!doctype html><html><head>
+        <meta name="citation_title" content="Fallback Title">
+        <meta name="citation_author" content="First Author">
+        <meta name="citation_author" content="Second Author">
+        <meta name="citation_date" content="2025/10/01">
+        <meta name="citation_arxiv_id" content="2510.00743">
+        </head></html>"""
+        policy = {
+            "identity": {"kind": "arxiv", "id": "2510.00743"},
+            "reference_role": "MEASUREMENT_INSTRUMENT",
+            "chain": "TRAINING_FREE_AND_TRAINED_BOUNDARIES",
+            "direct_neighbor": False,
+            "next_action": "retain",
+            "load_bearing": True,
+            "access_class": "REVIEW_CLAIM_VERIFICATION",
+            "source_locator": "review:200",
+        }
+        with tempfile.TemporaryDirectory(dir=bibliography.ROOT) as temporary, mock.patch.object(
+            fetcher,
+            "fetch",
+            return_value=(raw, "2026-07-23T00:00:00Z"),
+        ):
+            row = fetcher.fetch_arxiv_html(policy, Path(temporary))
+        self.assertEqual("Fallback Title", row["normalized"]["title"])
+        self.assertEqual(["First Author", "Second Author"], row["normalized"]["authors"])
+        self.assertEqual("https://arxiv.org/abs/2510.00743", row["normalized"]["stable_url"])
+        self.assertEqual("https://arxiv.org/abs/2510.00743", row["official_url"])
+
     def test_fetch_success_and_bounded_failure(self):
         class Response:
             status = 200
@@ -84,7 +113,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
                     self.assertEqual(policy["identity"], row["identity"])
                     self.assertTrue((bibliography.ROOT / row["raw"]["path"]).is_file())
 
-    def test_offline_rebuild_resolves_all_93_without_network(self):
+    def test_offline_rebuild_resolves_all_135_without_network(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "receipts.jsonl"
             with mock.patch.object(
@@ -100,10 +129,10 @@ class OfficialMetadataFetchTest(unittest.TestCase):
                 for line in output.read_text(encoding="utf-8").splitlines()
                 if line.strip()
             ]
-            self.assertEqual(93, len(rows))
+            self.assertEqual(135, len(rows))
             self.assertEqual([], bibliography.validate_receipts(rows))
 
-    def test_cached_raw_inventory_is_17_reused_plus_76_current(self):
+    def test_cached_raw_inventory_is_17_reused_plus_118_current(self):
         rows = bibliography.load_receipts()
         legacy = {
             row["raw"]["path"]
@@ -118,7 +147,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
             )
         }
         self.assertEqual(17, len(legacy))
-        self.assertEqual(76, len(current))
+        self.assertEqual(118, len(current))
 
     def test_current_raw_payloads_are_exempt_from_git_text_normalization(self):
         representative = next(

@@ -39,11 +39,14 @@ from datetime import datetime, timezone
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LEDGER = os.path.join(REPO, "wiki", "survey", "2026-07-17-sf-fulltext-ledger.jsonl")
 SENTINEL_DATA = os.path.join(REPO, "wiki", "survey", "2026-07-16-sf-sentinel-data.json")
-def _normalize_data_root(p):
+def _normalize_data_root(p, platform=None):
     """SPEECHRL_DATA_DIR is persisted as a WSL path (/mnt/e/...); under Windows
     Python it arrives either verbatim or MSYS-mangled to <git-root>/mnt/e/...
     (caught 2026-07-17, see fulltext-ledger NOTE row) — translate any
     .../mnt/<drive>/ tail to <DRIVE>:/ instead."""
+    platform = os.name if platform is None else platform
+    if platform != "nt":
+        return p
     m = re.search(r"[/\\]mnt[/\\]([a-z])[/\\](.*)$", p or "")
     return f"{m.group(1).upper()}:/{m.group(2)}" if m else p
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:04Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2510.00743" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2510.00743</identifier>
+        <datestamp>2025-10-02</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2510.00743</id>
+        <created>2025-10-01</created>
+            <updated>2025-10-02</updated>
+        <authors>
+                <author>
+                    <keyname>Cao</keyname>
+                        <forenames>Yifei</forenames>
+                </author>
+                <author>
+                    <keyname>Jiang</keyname>
+                        <forenames>Changhao</forenames>
+                </author>
+                <author>
+                    <keyname>Zhuang</keyname>
+                        <forenames>Jiabao</forenames>
+                </author>
+                <author>
+                    <keyname>Sun</keyname>
+                        <forenames>Jiajun</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Ming</forenames>
+                </author>
+                <author>
+                    <keyname>Xi</keyname>
+                        <forenames>Zhiheng</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Hui</forenames>
+                </author>
+                <author>
+                    <keyname>Dou</keyname>
+                        <forenames>Shihan</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuran</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Yunke</forenames>
+                </author>
+                <author>
+                    <keyname>Ji</keyname>
+                        <forenames>Tao</forenames>
+                </author>
+                <author>
+                    <keyname>Gui</keyname>
+                        <forenames>Tao</forenames>
+                </author>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Qi</forenames>
+                </author>
+                <author>
+                    <keyname>Huang</keyname>
+                        <forenames>Xuanjing</forenames>
+                </author>
+        </authors>
+        <title>From Scores to Preferences: Redefining MOS Benchmarking for Speech Quality Reward Modeling</title>
+            <categories>cs.SD cs.AI cs.CL eess.AS</categories>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Assessing the perceptual quality of synthetic speech is crucial for guiding the development and refinement of speech generation models. However, it has traditionally relied on human subjective ratings such as the Mean Opinion Score (MOS), which depend on manual annotations and often suffer from inconsistent rating standards and poor reproducibility. To address these limitations, we introduce MOS-RMBench, a unified benchmark that reformulates diverse MOS datasets into a preference-comparison setting, enabling rigorous evaluation across different datasets. Building on MOS-RMBench, we systematically construct and evaluate three paradigms for reward modeling: scalar reward models, semi-scalar reward models, and generative reward models (GRMs). Our experiments reveal three key findings: (1) scalar models achieve the strongest overall performance, consistently exceeding 74% accuracy; (2) most models perform considerably worse on synthetic speech than on human speech; and (3) all models struggle on pairs with very small MOS differences. To improve performance on these challenging pairs, we propose a MOS-aware GRM that incorporates an MOS-difference-based reward function, enabling the model to adaptively scale rewards according to the difficulty of each sample pair. Experimental results show that the MOS-aware GRM significantly improves fine-grained quality discrimination and narrows the gap with scalar models on the most challenging cases. We hope this work will establish both a benchmark and a methodological framework to foster more rigorous and scalable research in automatic speech quality assessment.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

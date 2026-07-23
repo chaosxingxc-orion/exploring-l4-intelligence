@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:18Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2603.12520" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2603.12520</identifier>
+        <datestamp>2026-03-16</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2603.12520</id>
+        <created>2026-03-12</created>
+            <updated>2026-03-16</updated>
+        <authors>
+                <author>
+                    <keyname>Landesberg</keyname>
+                        <forenames>Eddie</forenames>
+                </author>
+        </authors>
+        <title>When LLM Judge Scores Look Good but Best-of-N Decisions Fail</title>
+            <categories>cs.LG cs.AI cs.CL</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Large language models are often used as judges to score candidate responses, then validated with a single global metric such as correlation with reference labels. This can be misleading when the real deployment task is best-of-n selection within a prompt.
+  In a 5,000-prompt best-of-4 benchmark from Chatbot Arena, a judge with moderate global correlation (r = 0.47) captures only 21.0% of the improvement that perfect selection would achieve over random choice. The gap arises because global agreement is driven largely by prompt-level baseline effects, while selection depends on within-prompt ranking: within-prompt correlation is only r_within = 0.27, and coarse pointwise scoring creates ties in 67% of pairwise comparisons.
+  In a matched-pair best-of-2 audit, explicit pairwise judging recovers much of this lost signal, raising recovery from 21.1% to 61.2%. For judge-based selection, the relevant audit should report within-prompt signal, tie rates, and recovery/top-1 accuracy, not global agreement alone.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

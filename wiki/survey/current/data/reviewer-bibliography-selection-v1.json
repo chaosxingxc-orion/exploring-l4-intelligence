@@ -5,25 +5,53 @@
  "predicate": "select every load-bearing/D2 work, registered direct system neighbor, speech/omni measurement instrument, P1 or reviewer-known threat, and the frozen registered reviewer-bibliography carry-forward; separately list any exact known-ID policy not yet in the active union",
  "scope_note": "This reviewer-orientation subset is not the Stage-1B evidence-map denominator and does not imply that unselected active-union or historical/archive works were screened out of the systematic map. Methods references are governed by mapping-methods-adaptation.md rather than mixed into the work union.",
  "union_population": 253,
- "selected_from_union": 93,
- "reviewer_directed_outside_union": 0,
- "reviewer_visible_total": 93,
+ "selected_from_union": 108,
+ "reviewer_directed_outside_union": 27,
+ "reviewer_visible_total": 135,
  "union_reason_code_counts": {
-  "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE": 159,
+  "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE": 144,
   "NOT_SELECTED_UNRESOLVED_IDENTITY": 1,
-  "SELECTED_DIRECT_SYSTEM_NEIGHBOR": 16,
+  "SELECTED_DIRECT_SYSTEM_NEIGHBOR": 17,
   "SELECTED_LOAD_BEARING_OR_D2": 15,
-  "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT": 13,
+  "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT": 27,
   "SELECTED_REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 49
  },
  "selection_basis_counts": {
-  "DIRECT_SYSTEM_NEIGHBOR": 16,
-  "LOAD_BEARING_OR_D2": 17,
-  "P1_OR_REVIEWER_KNOWN_THREAT": 29,
+  "DIRECT_SYSTEM_NEIGHBOR": 17,
+  "LOAD_BEARING_OR_D2": 18,
+  "P1_OR_REVIEWER_KNOWN_THREAT": 44,
   "REGISTERED_REVIEWER_BIBLIOGRAPHY_CARRY_FORWARD": 64,
-  "SPEECH_OMNI_MEASUREMENT_INSTRUMENT": 17
+  "SPEECH_OMNI_MEASUREMENT_INSTRUMENT": 31
  },
- "reviewer_directed_outside_union_ids": [],
+ "reviewer_directed_outside_union_ids": [
+  "2305.13738",
+  "2503.16492",
+  "2506.23049",
+  "2509.16971",
+  "2509.21749",
+  "2510.00743",
+  "2510.06223",
+  "2510.11454",
+  "2510.14664",
+  "2511.07931",
+  "2512.16978",
+  "2512.23646",
+  "2601.20230",
+  "2602.10656",
+  "2603.02206",
+  "2603.05413",
+  "2603.21013",
+  "2604.09121",
+  "2605.08762",
+  "2605.13841",
+  "2605.23261",
+  "2605.29430",
+  "2605.30256",
+  "2606.07264",
+  "2606.19595",
+  "2607.07985",
+  "2607.16610"
+ ],
  "union_dispositions": [
   {
    "canonical_work_id": "CW-ACL-2020.ACL-MAIN.503",
@@ -296,10 +324,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2303.11381",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2303.11381",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2303.16857",
@@ -331,10 +362,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2304.12995",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2304.12995",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2305.09860",
@@ -394,10 +428,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2306.12577",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2306.12577",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2307.09254",
@@ -747,17 +784,23 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2410.21485",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2410.21485",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2411.00321",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2411.00321",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2411.03524",
@@ -910,10 +953,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2506.05984",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2506.05984",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2506.07976",
@@ -947,10 +993,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2507.12705",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2507.12705",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2507.19457",
@@ -1170,17 +1219,23 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2512.10170",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2512.10170",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2512.10403",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2512.10403",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2512.11109",
@@ -1221,10 +1276,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2601.04029",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2601.04029",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2601.09667",
@@ -1394,10 +1452,14 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.09714",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2603.09714",
+   "selection_basis": [
+    "DIRECT_SYSTEM_NEIGHBOR",
+    "LOAD_BEARING_OR_D2",
+    "P1_OR_REVIEWER_KNOWN_THREAT"
+   ],
+   "reason_code": "SELECTED_DIRECT_SYSTEM_NEIGHBOR"
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.12310",
@@ -1408,10 +1470,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.12520",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2603.12520",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.13686",
@@ -1435,10 +1500,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.19615",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2603.19615",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2603.24257",
@@ -1533,10 +1601,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2604.24278",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2604.24278",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2604.25591",
@@ -1833,10 +1904,13 @@
   },
   {
    "canonical_work_id": "CW-ARXIV-2606.24648",
-   "selected": false,
-   "selected_identity": null,
-   "selection_basis": [],
-   "reason_code": "NOT_SELECTED_NONPRIORITY_KNOWN_QUEUE"
+   "selected": true,
+   "selected_identity": "2606.24648",
+   "selection_basis": [
+    "P1_OR_REVIEWER_KNOWN_THREAT",
+    "SPEECH_OMNI_MEASUREMENT_INSTRUMENT"
+   ],
+   "reason_code": "SELECTED_P1_OR_REVIEWER_KNOWN_THREAT"
   },
   {
    "canonical_work_id": "CW-ARXIV-2606.28864",

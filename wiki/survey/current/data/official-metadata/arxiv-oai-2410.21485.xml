@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:10:07Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2410.21485" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2410.21485</identifier>
+        <datestamp>2024-10-30</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2410.21485</id>
+        <created>2024-10-28</created>
+            <updated>2024-10-30</updated>
+        <authors>
+                <author>
+                    <keyname>Han</keyname>
+                        <forenames>HyoJung</forenames>
+                </author>
+                <author>
+                    <keyname>Duh</keyname>
+                        <forenames>Kevin</forenames>
+                </author>
+                <author>
+                    <keyname>Carpuat</keyname>
+                        <forenames>Marine</forenames>
+                </author>
+        </authors>
+        <title>SpeechQE: Estimating the Quality of Direct Speech Translation</title>
+            <categories>cs.CL</categories>
+            <comments>EMNLP2024</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Recent advances in automatic quality estimation for machine translation have exclusively focused on written language, leaving the speech modality underexplored. In this work, we formulate the task of quality estimation for speech translation (SpeechQE), construct a benchmark, and evaluate a family of systems based on cascaded and end-to-end architectures. In this process, we introduce a novel end-to-end system leveraging pre-trained text LLM. Results suggest that end-to-end approaches are better suited to estimating the quality of direct speech translation than using quality estimation systems designed for text in cascaded systems. More broadly, we argue that quality estimation of speech translation needs to be studied as a separate problem from that of text, and release our data and models to guide further research in this space.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

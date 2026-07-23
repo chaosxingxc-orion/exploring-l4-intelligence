@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:07Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2511.07931" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2511.07931</identifier>
+        <datestamp>2025-12-02</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2511.07931</id>
+        <created>2025-11-30</created>
+            <updated>2025-12-02</updated>
+        <authors>
+                <author>
+                    <keyname>Zhang</keyname>
+                        <forenames>Xueyao</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Chaoren</forenames>
+                </author>
+                <author>
+                    <keyname>Liao</keyname>
+                        <forenames>Huan</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Ziniu</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuancheng</forenames>
+                </author>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Li</forenames>
+                </author>
+                <author>
+                    <keyname>Jia</keyname>
+                        <forenames>Dongya</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Yuanzhe</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Xiulin</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Zhuo</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Zhizheng</forenames>
+                </author>
+        </authors>
+        <title>SpeechJudge: Towards Human-Level Judgment for Speech Naturalness</title>
+            <categories>cs.SD cs.AI cs.CL</categories>
+            <comments>Dataset, Model, and Code: https://github.com/AmphionTeam/SpeechJudge</comments>
+            <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>
+            <abstract>Aligning large generative models with human feedback is a critical challenge. In speech synthesis, this is particularly pronounced due to the lack of a large-scale human preference dataset, which hinders the development of models that truly align with human perception. To address this, we introduce SpeechJudge, a comprehensive suite comprising a dataset, a benchmark, and a reward model centered on naturalness--one of the most fundamental subjective metrics for speech synthesis. First, we present SpeechJudge-Data, a large-scale human feedback corpus of 99K speech pairs. The dataset is constructed using a diverse set of advanced zero-shot text-to-speech (TTS) models across diverse speech styles and multiple languages, with human annotations for both intelligibility and naturalness preference. From this, we establish SpeechJudge-Eval, a challenging benchmark for speech naturalness judgment. Our evaluation reveals that existing metrics and AudioLLMs struggle with this task; the leading model, Gemini-2.5-Flash, achieves less than 70% agreement with human judgment, highlighting a significant gap for improvement. To bridge this gap, we develop SpeechJudge-GRM, a generative reward model (GRM) based on Qwen2.5-Omni-7B. It is trained on SpeechJudge-Data via a two-stage post-training process: Supervised Fine-Tuning (SFT) with Chain-of-Thought rationales followed by Reinforcement Learning (RL) with GRPO on challenging cases. On the SpeechJudge-Eval benchmark, the proposed SpeechJudge-GRM demonstrates superior performance, achieving 77.2% accuracy (and 79.4% after inference-time scaling @10) compared to a classic Bradley-Terry reward model (72.7%). Furthermore, SpeechJudge-GRM can be also employed as a reward function during the post-training of speech generation models to facilitate their alignment with human preferences.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

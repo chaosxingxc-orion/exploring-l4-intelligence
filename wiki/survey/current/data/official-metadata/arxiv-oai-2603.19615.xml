@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:22Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2603.19615" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2603.19615</identifier>
+        <datestamp>2026-03-23</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2603.19615</id>
+        <created>2026-03-20</created>
+            <updated>2026-03-23</updated>
+        <authors>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Insung</forenames>
+                </author>
+                <author>
+                    <keyname>Jeong</keyname>
+                        <forenames>Taeyoung</forenames>
+                </author>
+                <author>
+                    <keyname>Yoo</keyname>
+                        <forenames>Haejun</forenames>
+                </author>
+                <author>
+                    <keyname>Chang</keyname>
+                        <forenames>Du-Seong</forenames>
+                </author>
+                <author>
+                    <keyname>Koo</keyname>
+                        <forenames>Myoung-Wan</forenames>
+                </author>
+        </authors>
+        <title>CAF-Score: Calibrating CLAP with LALMs for Reference-free Audio Captioning Evaluation</title>
+            <categories>cs.SD cs.AI cs.CL</categories>
+            <comments>A condensed version of this work has been submitted to Interspeech 2026. Section 10 is an extended analysis added in this version</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>While Large Audio-Language Models (LALMs) have advanced audio captioning, robust evaluation remains difficult. Reference-based metrics are expensive and often fail to assess acoustic fidelity, while Contrastive Language-Audio Pretraining (CLAP)-based approaches frequently overlook syntactic errors and fine-grained details. We propose CAF-Score, a reference-free metric that calibrates CLAP&#39;s coarse-grained semantic alignment with the fine-grained comprehension and syntactic awareness of LALMs. By combining contrastive audio-text embeddings with LALM reasoning, CAF-Score effectively detects syntactic inconsistencies and subtle hallucinations. Experiments on the BRACE benchmark demonstrate that our approach achieves the highest correlation with human judgments, even outperforming reference-based baselines in challenging scenarios. These results highlight the efficacy of CAF-Score for reference-free audio captioning evaluation. Code and results are available at https://github.com/inseong00/CAF-Score.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

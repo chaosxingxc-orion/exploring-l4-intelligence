@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:26Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2605.23261" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.23261</identifier>
+        <datestamp>2026-05-25</datestamp>
+            <setSpec>eess:eess:AS</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.23261</id>
+        <created>2026-05-22</created>
+            <updated>2026-05-25</updated>
+        <authors>
+                <author>
+                    <keyname>Wang</keyname>
+                        <forenames>Yuanyuan</forenames>
+                </author>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Dongchao</forenames>
+                </author>
+                <author>
+                    <keyname>Deng</keyname>
+                        <forenames>Yayue</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Zhiyong</forenames>
+                </author>
+                <author>
+                    <keyname>Guo</keyname>
+                        <forenames>Yiwen</forenames>
+                </author>
+                <author>
+                    <keyname>Meng</keyname>
+                        <forenames>Helen</forenames>
+                </author>
+                <author>
+                    <keyname>Wu</keyname>
+                        <forenames>Xixin</forenames>
+                </author>
+        </authors>
+        <title>UniSRM: A Unified Speech Reward Model for Reasoning-Based Fine-grained Assessment</title>
+            <categories>eess.AS cs.SD</categories>
+            <comments>Accepted by ACL 2026(Main)</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Evaluating speech generation still relies heavily on human judgments, such as Mean Opinion Score (MOS), which are expensive, subjective, and difficult to reproduce at scale. While a few recent studies have begun to explore AudioLLM-based judge models, existing efforts typically target only a narrow set of scenarios (e.g., utterance-level quality or single-turn dialogue) and provide limited coverage of diverse speech generation tasks and evaluation dimensions. In this work, we propose UniSRM, a unified speech reward model that can support multi-dimensional, interpretable reward signals with reliable reasoning. To support training and evaluation, we introduce UniSRM-Data and UniSRM-Bench, covering speech evaluation tasks from utterance-level quality to context-level coherence. Based on this dataset, we present the unified speech reward model, UniSRM, with a two-stage pipeline that enables reasoning-based fine-grained assessment. Furthermore, we introduce Reasoning-Consistent Rewards to improve the reliability of the reasoning process. Experiments show that UniSRM delivers more reliable and human-aligned judgments across a broad range of speech evaluation tasks, offering a practical foundation for scalable and unified evaluation of speech quality.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

@@ -52,6 +52,33 @@ REVIEWER_ADDITIONS = {
     "2607.05511",
     "2605.22012",
 }
+V5_RECONCILIATION_IDS = {
+    "2306.12577",
+    "2410.21485",
+    "2411.00321",
+    "2506.05984",
+    "2507.12705",
+    "2510.00743",
+    "2510.14664",
+    "2511.07931",
+    "2512.10170",
+    "2512.10403",
+    "2601.04029",
+    "2603.09714",
+    "2603.12520",
+    "2603.19615",
+    "2604.24278",
+    "2605.23261",
+    "2605.30256",
+    "2606.24648",
+}
+V5_APPENDIX_CLOSURE_IDS = {
+    "2303.11381", "2304.12995", "2305.13738", "2503.16492", "2506.23049",
+    "2509.16971", "2509.21749", "2510.06223", "2510.11454", "2512.16978",
+    "2512.23646", "2601.20230", "2602.10656", "2603.02206", "2603.05413",
+    "2603.21013", "2604.09121", "2605.08762", "2605.13841", "2605.29430",
+    "2606.07264", "2606.19595", "2607.07985", "2607.16610",
+}
 
 
 class BibliographyGeneratorTest(unittest.TestCase):
@@ -59,15 +86,17 @@ class BibliographyGeneratorTest(unittest.TestCase):
     def setUpClass(cls):
         cls.receipts = bibliography.load_receipts()
 
-    def test_exact_93_unique_work_receipts_retain_65_and_add_28(self):
-        self.assertEqual(93, len(self.receipts))
+    def test_exact_135_unique_work_receipts_include_closed_v5_reconciliation(self):
+        self.assertEqual(135, len(self.receipts))
         identities = [row["identity"]["id"] for row in self.receipts]
-        self.assertEqual(93, len(set(identities)))
+        self.assertEqual(135, len(set(identities)))
         legacy = bibliography.legacy_bibliography_policies()
         self.assertEqual(65, len(legacy))
         self.assertTrue(set(legacy) <= set(identities))
         self.assertTrue(DIRECT_NEIGHBORS <= set(identities))
         self.assertTrue(REVIEWER_ADDITIONS <= set(identities))
+        self.assertTrue(V5_RECONCILIATION_IDS <= set(identities))
+        self.assertTrue(V5_APPENDIX_CLOSURE_IDS <= set(identities))
 
     def test_arxiv_year_uses_initial_preprint_not_oai_datestamp(self):
         by_id = {row["identity"]["id"]: row for row in self.receipts}
@@ -87,9 +116,9 @@ class BibliographyGeneratorTest(unittest.TestCase):
         selection = bibliography.load_selection_receipt()
         self.assertEqual(253, selection["union_population"])
         self.assertEqual(253, len(selection["union_dispositions"]))
-        self.assertEqual(93, selection["reviewer_visible_total"])
+        self.assertEqual(135, selection["reviewer_visible_total"])
         self.assertEqual(
-            93,
+            135,
             selection["selected_from_union"]
             + selection["reviewer_directed_outside_union"],
         )

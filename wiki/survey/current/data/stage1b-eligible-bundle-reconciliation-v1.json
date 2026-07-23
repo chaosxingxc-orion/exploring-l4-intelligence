@@ -1,0 +1,833 @@
+{
+  "schema": "sf-stage1b-eligible-bundle-reconciliation-v1",
+  "artifact_id": "SF-STAGE1B-ELIGIBLE-BUNDLE-RECONCILIATION-V1",
+  "scope": "CLOSED_6_GATE_PLUS_12_ROUTE_CORPUS_TO_CURRENT_RECONCILIATION",
+  "source_surfaces": [
+    "wiki/survey/current/data/existing-corpus-disposition-v1.json",
+    "wiki/survey/replay/SURVEY-RESP-2026-07-14-01/search_events.jsonl",
+    "wiki/audit/system-first-stage1b/stage1c-transition-rereview-v4-independent-review/2026-07-23-stage1b-v4-independent-doctoral-rereview.md"
+  ],
+  "closure_rule": "Six reviewer gate identities, nine reviewer-named route identities, and three same-lane canonical reliability/decision-utility identities; no discovery query expansion.",
+  "claim_limit": "Route closure for Stage-1C inputs, not literature-universe closure, novelty, effectiveness, or reproduction evidence.",
+  "rows": [
+    {
+      "paper_work_id": "2306.12577",
+      "canonical_work_id": "CW-ARXIV-2306.12577",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Kamer Ali Yuksel",
+          "Thiago Ferreira",
+          "Golara Javadi",
+          "Mohamed El-Badrashiny",
+          "Ahmet Gunduz"
+        ],
+        "stable_url": "https://arxiv.org/abs/2306.12577",
+        "title": "NoRefER: a Referenceless Quality Metric for Automatic Speech Recognition via Semi-Supervised Language Model Fine-Tuning with Contrastive Learning",
+        "year": 2023
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_QUALITY_METRIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability",
+        "budget_stop_repair"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "NoRefER is a trained reference-free ASR quality metric and reranking boundary; it is not a frozen audio-native judge.",
+      "source_locator": "abstract: referenceless ASR quality metric with contrastive learning",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2306.12577",
+        "kind": "pdf",
+        "bytes": 259883,
+        "sha256": "11605c68500c0570601878ace67d45418a5da11567bc597c0f02a79ba79b68e2",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2306.12577/2306.12577.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2410.21485",
+      "canonical_work_id": "CW-ARXIV-2410.21485",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "HyoJung Han",
+          "Kevin Duh",
+          "Marine Carpuat"
+        ],
+        "stable_url": "https://arxiv.org/abs/2410.21485",
+        "title": "SpeechQE: Estimating the Quality of Direct Speech Translation",
+        "year": 2024
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_QUALITY_METRIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "SpeechQE provides audio-grounded direct-speech-translation quality estimation but does not itself implement selection.",
+      "source_locator": "abstract: estimating quality of direct speech translation",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2410.21485",
+        "kind": "pdf",
+        "bytes": 647095,
+        "sha256": "e516e40eb9ca32d3e0d5420e0a6f33f2120e72bacf185d11b89b2e469a3ea868",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2410.21485/2410.21485.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2411.00321",
+      "canonical_work_id": "CW-ARXIV-2411.00321",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Satvik Dixit",
+          "Soham Deshmukh",
+          "Bhiksha Raj"
+        ],
+        "stable_url": "https://arxiv.org/abs/2411.00321",
+        "title": "MACE: Leveraging Audio for Evaluating Audio Captioning Systems",
+        "year": 2024
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "FROZEN_AUDIO_TEXT_METRIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "MACE uses audio in reference-free caption evaluation and supplies a metric boundary rather than an action controller.",
+      "source_locator": "abstract: leveraging audio for evaluating audio captioning systems",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2411.00321",
+        "kind": "pdf",
+        "bytes": 1000351,
+        "sha256": "30b777c9ac87fef341a073bf395a3830b89693991bd6d53e2d42c4dd325352a4",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2411.00321/2411.00321.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2506.05984",
+      "canonical_work_id": "CW-ARXIV-2506.05984",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Cheng-Han Chiang",
+          "Xiaofei Wang",
+          "Chung-Ching Lin",
+          "Kevin Lin",
+          "Linjie Li",
+          "Radu Kopetz",
+          "Yao Qian",
+          "Zhendong Wang",
+          "Zhengyuan Yang",
+          "Hung-yi Lee",
+          "Lijuan Wang"
+        ],
+        "stable_url": "https://arxiv.org/abs/2506.05984",
+        "title": "Audio-Aware Large Language Models as Judges for Speaking Styles",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "PROMPTED_FROZEN_JUDGE_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "Human-machine agreement on speaking style supplies a paralinguistic judge axis absent from the prior current layer.",
+      "source_locator": "abstract: audio-aware LLMs judge speaking styles and role-playing speech",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "STYLESET_ANNOUNCED_FOR_MIT_RELEASE_NO_VERIFIED_ENDPOINT",
+        "exact_asset_ref": "docs/stage1b-v5-gate-assets.lock.json#audio-aware-styleset",
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2506.05984",
+        "kind": "pdf",
+        "bytes": 11445778,
+        "sha256": "2baac3946ddad799dc61510d1a59dac97febb87d80e915daa28a3a6267486d0c",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2506.05984/2506.05984.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2507.12705",
+      "canonical_work_id": "CW-ARXIV-2507.12705",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Potsawee Manakul",
+          "Woody Haosheng Gan",
+          "Michael J. Ryan",
+          "Ali Sartaz Khan",
+          "Warit Sirichotedumrong",
+          "Kunat Pipatanakul",
+          "William Held",
+          "Diyi Yang"
+        ],
+        "stable_url": "https://arxiv.org/abs/2507.12705",
+        "title": "AudioJudge: Understanding What Works in Large Audio Model Based Speech Evaluation",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "PROMPTED_FROZEN_JUDGE_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "Prompted frozen audio judges expose pairwise-versus-pointwise reliability plus position and verbosity bias; no judge score is wired to a next action here.",
+      "source_locator": "abstract and full text: pairwise evaluation is more reliable than pointwise scoring",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NO_DEDICATED_PUBLIC_RELEASE_VERIFIED; PAPER_USES_EXISTING_DATASETS",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2507.12705",
+        "kind": "pdf",
+        "bytes": 1698706,
+        "sha256": "bfae37edf89419cfe0fcbbc26e7774a39bc9dc513b1298070739e188a280a89f",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2507.12705/2507.12705.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2510.00743",
+      "canonical_work_id": "CW-ARXIV-2510.00743",
+      "canonical_union_status": "REVIEWER_DIRECTED_OUTSIDE_UNION_IDENTITY",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Yifei Cao",
+          "Changhao Jiang",
+          "Jiabao Zhuang",
+          "Jiajun Sun",
+          "Ming Zhang",
+          "Zhiheng Xi",
+          "Hui Li",
+          "Shihan Dou",
+          "Yuran Wang",
+          "Yunke Zhang",
+          "Tao Ji",
+          "Tao Gui",
+          "Qi Zhang",
+          "Xuanjing Huang"
+        ],
+        "stable_url": "https://arxiv.org/abs/2510.00743",
+        "title": "From Scores to Preferences: Redefining MOS Benchmarking for Speech Quality Reward Modeling",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_REWARD_MODEL_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "MOS-RMBench turns scalar scores into preference comparisons and exposes small-difference failure for speech reward models.",
+      "source_locator": "abstract: scalar, semi-scalar, and generative reward models on MOS-RMBench",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2510.00743",
+        "kind": "pdf",
+        "bytes": 2450238,
+        "sha256": "0e614857b534ac21e698474776eec379228d10077f79ca8b2ee2401afe19ccf7",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.00743/2510.00743.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2510.14664",
+      "canonical_work_id": "CW-ARXIV-2510.14664",
+      "canonical_union_status": "REVIEWER_DIRECTED_OUTSIDE_UNION_IDENTITY",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Hui Wang",
+          "Jinghua Zhao",
+          "Yifan Yang",
+          "Shujie Liu",
+          "Junyang Chen",
+          "Yanzhe Zhang",
+          "Shiwan Zhao",
+          "Jinyu Li",
+          "Jiaming Zhou",
+          "Haoqin Sun",
+          "Yan Lu",
+          "Yong Qin"
+        ],
+        "stable_url": "https://arxiv.org/abs/2510.14664",
+        "title": "SpeechLLM-as-Judges: Towards General and Interpretable Speech Quality Evaluation",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_REWARD_MODEL_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "SpeechLLM-as-Judges supplies structured speech-quality evaluation and a trained judge boundary.",
+      "source_locator": "abstract: quality, pairwise comparison, improvement suggestion, and deepfake detection",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2510.14664",
+        "kind": "pdf",
+        "bytes": 1744860,
+        "sha256": "c800ed8f65b4e02ffb57c61904aafcc16bd8c7c24625b103d6aa2ef8b7650568",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.14664/2510.14664.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2511.07931",
+      "canonical_work_id": "CW-ARXIV-2511.07931",
+      "canonical_union_status": "REVIEWER_DIRECTED_OUTSIDE_UNION_IDENTITY",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Xueyao Zhang",
+          "Chaoren Wang",
+          "Huan Liao",
+          "Ziniu Li",
+          "Yuancheng Wang",
+          "Li Wang",
+          "Dongya Jia",
+          "Yuanzhe Chen",
+          "Xiulin Li",
+          "Zhuo Chen",
+          "Zhizheng Wu"
+        ],
+        "stable_url": "https://arxiv.org/abs/2511.07931",
+        "title": "SpeechJudge: Towards Human-Level Judgment for Speech Naturalness",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_REWARD_MODEL_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "SpeechJudge provides a trained naturalness preference benchmark and reward-model boundary, not a frozen direct controller.",
+      "source_locator": "abstract: SpeechJudge-Data, SpeechJudge-Eval, and trained SpeechJudge-GRM",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2511.07931",
+        "kind": "pdf",
+        "bytes": 6184305,
+        "sha256": "63a38bbeea2e23add97ce8d7bd9b1a4dea595042c8aca80dbbb3677e5bb6ac33",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2511.07931/2511.07931.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2512.10170",
+      "canonical_work_id": "CW-ARXIV-2512.10170",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "CANONICAL_SAME_LANE_CLOSURE",
+      "official_metadata": {
+        "authors": [
+          "Lucas Dunker",
+          "Sai Akshay Menta",
+          "Snigdha Mohana Addepalli",
+          "Venkata Krishna Rayalu Garapati"
+        ],
+        "stable_url": "https://arxiv.org/abs/2512.10170",
+        "title": "Semantic-Aware Confidence Calibration for Automated Audio Captioning",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "CALIBRATION_METHOD_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "Semantic-aware confidence calibration is a same-lane captioning reliability comparator retained to prevent silent queue loss.",
+      "source_locator": "abstract: semantic-aware confidence calibration for automated audio captioning",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2512.10170",
+        "kind": "pdf",
+        "bytes": 553233,
+        "sha256": "d8fe9bf9ec3c30266aef632d44bb8063677f1dd36d4cdd234cdc564134506b86",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.10170/2512.10170.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2512.10403",
+      "canonical_work_id": "CW-ARXIV-2512.10403",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Tianyu Guo",
+          "Hongyu Chen",
+          "Hao Liang",
+          "Meiyi Qiang",
+          "Bohan Zeng",
+          "Linzhuang Sun",
+          "Bin Cui",
+          "Wentao Zhang"
+        ],
+        "stable_url": "https://arxiv.org/abs/2512.10403",
+        "title": "BRACE: A Benchmark for Robust Audio Caption Quality Evaluation",
+        "year": 2025
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "BENCHMARK_INSTRUMENT_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "BRACE is the robust audio-caption quality benchmark needed to audit reference-free metric behavior.",
+      "source_locator": "abstract: benchmark for robust audio caption quality evaluation",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2512.10403",
+        "kind": "pdf",
+        "bytes": 1691387,
+        "sha256": "49a19b8dcdd2adc7d386bde6ab8529bae62e4a0a22887e6f450bdf2d4c8072d3",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.10403/2512.10403.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2601.04029",
+      "canonical_work_id": "CW-ARXIV-2601.04029",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Jonggeun Lee",
+          "Junseong Pyo",
+          "Gyuhyeon Seo",
+          "Yohan Jo"
+        ],
+        "stable_url": "https://arxiv.org/abs/2601.04029",
+        "title": "SpeakerSleuth: Can Large Audio-Language Models Judge Speaker Consistency across Multi-turn Dialogues?",
+        "year": 2026
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "PROMPTED_FROZEN_JUDGE_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "Multi-turn speaker consistency and K-variant discrimination expose text-over-acoustics bias in frozen LALM judges.",
+      "source_locator": "full text: Discrimination task uses K=3 acoustic variants",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "PINNED_REPOSITORY_IS_PROJECT_PAGE_ONLY; CLAIMED_CODE_DATA_NOT_PRESENT",
+        "exact_asset_ref": "docs/stage1b-v5-gate-assets.lock.json#speakersleuth",
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2601.04029",
+        "kind": "pdf",
+        "bytes": 3017224,
+        "sha256": "3741a8d3bbfaed70911beb5ae403e034a2fe7551d2b35b1dc6b95c16ac3ce25b",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.04029/2601.04029.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2603.09714",
+      "canonical_work_id": "CW-ARXIV-2603.09714",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Chih-Kai Yang",
+          "Yun-Shao Tsai",
+          "Yu-Kai Guo",
+          "Ping-Le Tsai",
+          "Yen-Ting Piao",
+          "Hung-Wei Chen",
+          "Ting-Lin Hsiao",
+          "Yun-Man Hsu",
+          "Ke-Han Lu",
+          "Hung-yi Lee"
+        ],
+        "stable_url": "https://arxiv.org/abs/2603.09714",
+        "title": "MUGEN: Evaluating and Improving Multi-audio Understanding of Large Audio-Language Models",
+        "year": 2026
+      },
+      "analysis_role": "DIRECT_CONTROL_METHOD",
+      "control_basis": "EVALUATOR_OR_VERIFIER_GATED",
+      "bundle_impacts": [
+        "budget_stop_repair",
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "MUGEN's training-free audio-permutational self-consistency aggregates K reordered inferences to change the final answer, so it enters direct occupancy without becoming reward-guided selection.",
+      "source_locator": "full text: K=10 Audio-Permutational Self-Consistency aggregation",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2603.09714",
+        "kind": "pdf",
+        "bytes": 1383886,
+        "sha256": "42fbac7ab5c6604daa741f368892b072f8078d316b7075e2e6647d88757ffcca",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.09714/2603.09714.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2603.12520",
+      "canonical_work_id": "CW-ARXIV-2603.12520",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "CANONICAL_SAME_LANE_CLOSURE",
+      "official_metadata": {
+        "authors": [
+          "Eddie Landesberg"
+        ],
+        "stable_url": "https://arxiv.org/abs/2603.12520",
+        "title": "When LLM Judge Scores Look Good but Best-of-N Decisions Fail",
+        "year": 2026
+      },
+      "analysis_role": "BOUNDARY_COMPARATOR",
+      "control_basis": "DECISION_UTILITY_DIAGNOSTIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability",
+        "budget_stop_repair"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "This diagnostic separates attractive judge scores from Best-of-N decision utility and blocks correlation-to-control inference.",
+      "source_locator": "abstract: judge scores can look good while Best-of-N decisions fail",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2603.12520",
+        "kind": "pdf",
+        "bytes": 984179,
+        "sha256": "69ae40ce13792a03c4824c62684583d47814c5812760b4247c7123015f89e117",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.12520/2603.12520.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2603.19615",
+      "canonical_work_id": "CW-ARXIV-2603.19615",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "REVIEW_NAMED_ROUTE_SET",
+      "official_metadata": {
+        "authors": [
+          "Insung Lee",
+          "Taeyoung Jeong",
+          "Haejun Yoo",
+          "Du-Seong Chang",
+          "Myoung-Wan Koo"
+        ],
+        "stable_url": "https://arxiv.org/abs/2603.19615",
+        "title": "CAF-Score: Calibrating CLAP with LALMs for Reference-free Audio Captioning Evaluation",
+        "year": 2026
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "FROZEN_AUDIO_TEXT_METRIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "CAF-Score calibrates frozen CLAP with LALM judgments for reference-free caption evaluation; it remains a metric path.",
+      "source_locator": "abstract: calibrating CLAP with LALMs for reference-free evaluation",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2603.19615",
+        "kind": "pdf",
+        "bytes": 2685905,
+        "sha256": "404105423f058bd10edb75e5f3054f5a8c672045bde2330102bcd3a18ff7bc2f",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2603.19615/2603.19615.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2604.24278",
+      "canonical_work_id": "CW-ARXIV-2604.24278",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": false,
+      "selection_source": "CANONICAL_SAME_LANE_CLOSURE",
+      "official_metadata": {
+        "authors": [
+          "Wenbin Huang",
+          "Yuhang Qiu",
+          "Bohan Li",
+          "Yiwei Guo",
+          "Jing Peng",
+          "Hankun Wang",
+          "Xie Chen",
+          "Kai Yu"
+        ],
+        "stable_url": "https://arxiv.org/abs/2604.24278",
+        "title": "RAS: a Reliability Oriented Metric for Automatic Speech Recognition",
+        "year": 2026
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "RELIABILITY_METRIC_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "ROUTED_ONLY",
+      "route_reason": "RAS is a same-lane ASR reliability metric retained as an explicit measurement route rather than a controller.",
+      "source_locator": "abstract: reliability-oriented metric for automatic speech recognition",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "NOT_PINNED_BY_THIS_LITERATURE_GATE",
+        "exact_asset_ref": null,
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2604.24278",
+        "kind": "pdf",
+        "bytes": 914237,
+        "sha256": "b614e31f451ee3a32d2af14f4938c33c046346cb4bb73e7f7c63d984ab6d2399",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.24278/2604.24278.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2605.23261",
+      "canonical_work_id": "CW-ARXIV-2605.23261",
+      "canonical_union_status": "REVIEWER_DIRECTED_OUTSIDE_UNION_IDENTITY",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Yuanyuan Wang",
+          "Dongchao Yang",
+          "Yayue Deng",
+          "Zhiyong Wu",
+          "Yiwen Guo",
+          "Helen Meng",
+          "Xixin Wu"
+        ],
+        "stable_url": "https://arxiv.org/abs/2605.23261",
+        "title": "UniSRM: A Unified Speech Reward Model for Reasoning-Based Fine-grained Assessment",
+        "year": 2026
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "TRAINED_REWARD_MODEL_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "UniSRM is a trained multidimensional speech-reward boundary; prior omission came from promotion loss, not a relevance exclusion.",
+      "source_locator": "abstract: unified multidimensional speech reward modeling and reasoning consistency",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "PUBLIC_REPO_AND_UNISRM_BENCH_REVISION_PINNED",
+        "exact_asset_ref": "docs/stage1b-v5-gate-assets.lock.json#unisrm-bench",
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2605.23261",
+        "kind": "pdf",
+        "bytes": 8300816,
+        "sha256": "e73414b2c34fc6a165797ae63d220ab0ca612326f2247306b462e4cfa06c9f31",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.23261/2605.23261.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2605.30256",
+      "canonical_work_id": "CW-ARXIV-2605.30256",
+      "canonical_union_status": "REVIEWER_DIRECTED_OUTSIDE_UNION_IDENTITY",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Amrita Mazumdar",
+          "Seonwook Park",
+          "Rajarshi Roy",
+          "Nikhil Srihari",
+          "Shengze Wang",
+          "Yuhao Zhou",
+          "Julia Wang",
+          "Koki Nagano",
+          "Shalini De Mello"
+        ],
+        "stable_url": "https://arxiv.org/abs/2605.30256",
+        "title": "VideoFDB: Evaluating Full-Duplex Vision-Speech Capabilities in Conversational Agents",
+        "year": 2026
+      },
+      "analysis_role": "BOUNDARY_COMPARATOR",
+      "control_basis": "MULTIMODAL_BENCHMARK_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "interactive_full_duplex"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "VideoFDB supplies the AV2AV full-duplex boundary while operational Stage-1 scope remains speech/audio/text/tool plus this explicit visual comparator.",
+      "source_locator": "abstract: full-duplex audio-visual-to-audio-visual benchmark",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "TERMS_ACCEPTANCE_AND_ACCESS_PASSWORD_REQUIRED; NOT_DOWNLOADED",
+        "exact_asset_ref": "docs/stage1b-v5-gate-assets.lock.json#videofdb-evaluation-data",
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2605.30256",
+        "kind": "pdf",
+        "bytes": 2126122,
+        "sha256": "f27acedc76c97401ccd7fac7a520b9281c0505532c4807319da481f85439eb49",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.30256/2605.30256.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    },
+    {
+      "paper_work_id": "2606.24648",
+      "canonical_work_id": "CW-ARXIV-2606.24648",
+      "canonical_union_status": "REUSED_EXISTING_CANONICAL_ID",
+      "gate_work": true,
+      "selection_source": "REVIEW_GATE_SET",
+      "official_metadata": {
+        "authors": [
+          "Jisu Jeon",
+          "Seungyeon Jwa",
+          "Joosung Lee",
+          "Jinhyeon Kim",
+          "Woojin Chung",
+          "Hwiyeol Jo",
+          "Jeonghoon Kim",
+          "Jonghyun Choi",
+          "Soyoon Kim"
+        ],
+        "stable_url": "https://arxiv.org/abs/2606.24648",
+        "title": "ParaPairAudioBench: Paralinguistic Pairwise Audio Benchmark for LALM-as-a-Judge",
+        "year": 2026
+      },
+      "analysis_role": "MEASUREMENT_INSTRUMENT",
+      "control_basis": "BENCHMARK_INSTRUMENT_NO_NEXT_ACTION",
+      "bundle_impacts": [
+        "evaluator_reward_reliability"
+      ],
+      "supplement_status": "INCLUDED",
+      "route_reason": "Pairwise and tie cases directly constrain calibration and abstention assumptions for audio judges.",
+      "source_locator": "abstract: 5,175 pairs, five paralinguistic dimensions, and severe Tie-case calibration failures",
+      "asset_availability": {
+        "status": "PAPER_FULLTEXT_LOCAL",
+        "pdf_and_eprint_requested": true,
+        "code_data_status": "PUBLIC_REPO_AND_THREE_BENCHMARK_METADATA_ROUTES_PINNED; SVC_AUDIO_MANUAL_REVIEW_REQUIRED",
+        "exact_asset_ref": "docs/stage1b-v5-gate-assets.lock.json#parapair-audio-bench",
+        "stage1c_effect": "NONBLOCKING_FOR_LITERATURE_COMPARISON; NO_STAGE2_EXECUTION_AUTHORITY"
+      },
+      "fulltext_ref": {
+        "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+        "id": "2606.24648",
+        "kind": "pdf",
+        "bytes": 1084066,
+        "sha256": "987876e57f6e21f0ce5013a3353a39b24251dd76fb6a7ca427ddb7144b321df1",
+        "stored_at": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.24648/2606.24648.pdf"
+      },
+      "seed_action": "REUSE_CANONICAL_WORK_ID_NO_DUPLICATE_CLAIM_WORK"
+    }
+  ]
+}

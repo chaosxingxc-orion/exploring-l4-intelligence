@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:16Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2603.09714" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2603.09714</identifier>
+        <datestamp>2026-07-14</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2603.09714</id>
+        <created>2026-07-12</created>
+            <updated>2026-07-14</updated>
+        <authors>
+                <author>
+                    <keyname>Yang</keyname>
+                        <forenames>Chih-Kai</forenames>
+                </author>
+                <author>
+                    <keyname>Tsai</keyname>
+                        <forenames>Yun-Shao</forenames>
+                </author>
+                <author>
+                    <keyname>Guo</keyname>
+                        <forenames>Yu-Kai</forenames>
+                </author>
+                <author>
+                    <keyname>Tsai</keyname>
+                        <forenames>Ping-Le</forenames>
+                </author>
+                <author>
+                    <keyname>Piao</keyname>
+                        <forenames>Yen-Ting</forenames>
+                </author>
+                <author>
+                    <keyname>Chen</keyname>
+                        <forenames>Hung-Wei</forenames>
+                </author>
+                <author>
+                    <keyname>Hsiao</keyname>
+                        <forenames>Ting-Lin</forenames>
+                </author>
+                <author>
+                    <keyname>Hsu</keyname>
+                        <forenames>Yun-Man</forenames>
+                </author>
+                <author>
+                    <keyname>Lu</keyname>
+                        <forenames>Ke-Han</forenames>
+                </author>
+                <author>
+                    <keyname>Lee</keyname>
+                        <forenames>Hung-yi</forenames>
+                </author>
+        </authors>
+        <title>MUGEN: Evaluating and Improving Multi-audio Understanding of Large Audio-Language Models</title>
+            <categories>cs.SD cs.AI cs.CL eess.AS</categories>
+            <comments>Interspeech 2026. Project page: https://github.com/danielqwer/MUGEN</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>While multi-audio understanding is critical for large audio-language models (LALMs), it remains underexplored. We introduce MUGEN, a comprehensive benchmark evaluating this capability across speech, general audio, and music. Our experiments reveal consistent weaknesses in multi-audio settings, and performance degrades sharply as the number of concurrent audio inputs increases, identifying input scaling as a fundamental bottleneck. We further investigate training-free strategies and observe that Audio-Permutational Self-Consistency, which diversifies the order of audio candidates, helps models form more robust aggregated predictions, yielding up to 6.28% accuracy gains. Combining this permutation strategy with Chain-of-Thought further improves performance to 6.74%. These results expose blind spots in current LALMs and provide a foundation for evaluating complex auditory comprehension.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

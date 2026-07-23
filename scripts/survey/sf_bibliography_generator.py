@@ -9,6 +9,7 @@ import re
 import sys
 import unicodedata
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
@@ -123,6 +124,56 @@ ROUND17_NEW_POLICIES = {
         "load_bearing": False,
         "selection_basis": ["P1_OR_REVIEWER_KNOWN_THREAT"],
     },
+}
+V5_RECONCILIATION_REVIEW_PATH = (
+    "wiki/audit/system-first-stage1b/stage1c-transition-rereview-v4-independent-review/"
+    "2026-07-23-stage1b-v4-independent-doctoral-rereview.md"
+)
+V5_RECONCILIATION_POLICIES = {
+    "2306.12577": "MEASUREMENT_INSTRUMENT",
+    "2410.21485": "MEASUREMENT_INSTRUMENT",
+    "2411.00321": "MEASUREMENT_INSTRUMENT",
+    "2506.05984": "MEASUREMENT_INSTRUMENT",
+    "2507.12705": "MEASUREMENT_INSTRUMENT",
+    "2510.00743": "MEASUREMENT_INSTRUMENT",
+    "2510.14664": "MEASUREMENT_INSTRUMENT",
+    "2511.07931": "MEASUREMENT_INSTRUMENT",
+    "2512.10170": "MEASUREMENT_INSTRUMENT",
+    "2512.10403": "MEASUREMENT_INSTRUMENT",
+    "2601.04029": "MEASUREMENT_INSTRUMENT",
+    "2603.09714": "DEEPLY_READ",
+    "2603.12520": "BOUNDARY_COMPARATOR",
+    "2603.19615": "MEASUREMENT_INSTRUMENT",
+    "2604.24278": "MEASUREMENT_INSTRUMENT",
+    "2605.23261": "MEASUREMENT_INSTRUMENT",
+    "2605.30256": "BOUNDARY_COMPARATOR",
+    "2606.24648": "MEASUREMENT_INSTRUMENT",
+}
+V5_APPENDIX_CLOSURE_POLICIES = {
+    "2303.11381": "BOUNDARY_COMPARATOR",
+    "2304.12995": "DEEPLY_READ",
+    "2305.13738": "DEEPLY_READ",
+    "2503.16492": "DEEPLY_READ",
+    "2506.23049": "DEEPLY_READ",
+    "2509.16971": "DEEPLY_READ",
+    "2509.21749": "DEEPLY_READ",
+    "2510.06223": "DEEPLY_READ",
+    "2510.11454": "DEEPLY_READ",
+    "2512.16978": "DEEPLY_READ",
+    "2512.23646": "DEEPLY_READ",
+    "2601.20230": "DEEPLY_READ",
+    "2602.10656": "DEEPLY_READ",
+    "2603.02206": "DEEPLY_READ",
+    "2603.05413": "DEEPLY_READ",
+    "2603.21013": "DEEPLY_READ",
+    "2604.09121": "DEEPLY_READ",
+    "2605.08762": "MEASUREMENT_INSTRUMENT",
+    "2605.13841": "MEASUREMENT_INSTRUMENT",
+    "2605.29430": "DEEPLY_READ",
+    "2606.07264": "DEEPLY_READ",
+    "2606.19595": "MEASUREMENT_INSTRUMENT",
+    "2607.07985": "MEASUREMENT_INSTRUMENT",
+    "2607.16610": "BOUNDARY_COMPARATOR",
 }
 NEW_DIRECT_NEIGHBORS = {
     "2509.19676",
@@ -300,6 +351,39 @@ def additional_policies() -> dict[str, dict[str, Any]]:
             "access_class": "REVIEW_CLAIM_VERIFICATION",
             "selection_basis": sorted(details["selection_basis"]),
         }
+    for identity_id, role in {
+        **V5_RECONCILIATION_POLICIES,
+        **V5_APPENDIX_CLOSURE_POLICIES,
+    }.items():
+        direct_neighbor = identity_id == "2603.09714"
+        policies[identity_id] = {
+            "identity": {"kind": "arxiv", "id": identity_id},
+            "reference_role": role,
+            "chain": (
+                "SYSTEM_FIRST_DIRECT_NEIGHBORS"
+                if direct_neighbor
+                else "TRAINING_FREE_AND_TRAINED_BOUNDARIES"
+            ),
+            "direct_neighbor": direct_neighbor,
+            "source_locator": f"{V5_RECONCILIATION_REVIEW_PATH}:187-203",
+            "next_action": (
+                "Carry the fulltext-coded training-free aggregation path into Stage-1C inputs without a novelty verdict."
+                if direct_neighbor
+                else "Retain the explicit evaluator, reward, calibration, or multimodal-boundary route in the Stage-1C comparison input."
+            ),
+            "load_bearing": True,
+            "access_class": "REVIEW_CLAIM_VERIFICATION",
+            "selection_basis": sorted(
+                {
+                    "P1_OR_REVIEWER_KNOWN_THREAT",
+                    *(
+                        ["DIRECT_SYSTEM_NEIGHBOR", "LOAD_BEARING_OR_D2"]
+                        if direct_neighbor
+                        else ["SPEECH_OMNI_MEASUREMENT_INSTRUMENT"]
+                    ),
+                }
+            ),
+        }
     return policies
 
 
@@ -310,8 +394,8 @@ def all_policies() -> dict[str, dict[str, Any]]:
     if overlap:
         raise ValueError(f"additions duplicate retained bibliography identities: {sorted(overlap)}")
     policies.update(additions)
-    if len(policies) != 93:
-        raise ValueError(f"expected 93 bibliography policies, got {len(policies)}")
+    if len(policies) != 135:
+        raise ValueError(f"expected 135 bibliography policies, got {len(policies)}")
     return policies
 
 
@@ -390,6 +474,42 @@ def parse_arxiv_oai(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
         "year_basis": "initial_preprint",
         "stable_url": f"https://arxiv.org/abs/{identity['id']}",
         "source_version": f"oai-datestamp:{datestamp}",
+    }
+
+
+class _CitationMetaParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.values: dict[str, list[str]] = {}
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.casefold() != "meta":
+            return
+        fields = {key.casefold(): value or "" for key, value in attrs}
+        name = fields.get("name", "").casefold()
+        if name.startswith("citation_") and fields.get("content"):
+            self.values.setdefault(name, []).append(collapse_space(fields["content"]))
+
+
+def parse_arxiv_html(identity: dict[str, str], raw: bytes) -> dict[str, Any]:
+    parser = _CitationMetaParser()
+    parser.feed(raw.decode("utf-8"))
+    metadata = parser.values
+    ids = metadata.get("citation_arxiv_id", [])
+    if ids != [identity["id"]]:
+        raise ValueError(f"arXiv abs-page identity {ids!r} does not match {identity['id']!r}")
+    titles = metadata.get("citation_title", [])
+    authors = metadata.get("citation_author", [])
+    if len(titles) != 1 or not authors:
+        raise ValueError("official arXiv abs page lacks citation title or authors")
+    return {
+        "identity": identity,
+        "title": titles[0],
+        "authors": authors,
+        "year": initial_preprint_year(identity["id"]),
+        "year_basis": "initial_preprint",
+        "stable_url": f"https://arxiv.org/abs/{identity['id']}",
+        "source_version": "abs-page-current",
     }
 
 
@@ -503,6 +623,8 @@ def parse_official_payload(
         return parse_arxiv(identity, raw)
     if identity["kind"] == "arxiv" and media_type == "application/xml":
         return parse_arxiv_oai(identity, raw)
+    if identity["kind"] == "arxiv" and media_type == "text/html":
+        return parse_arxiv_html(identity, raw)
     if identity["kind"] == "acl" and media_type == "application/x-bibtex":
         return parse_acl(identity, raw)
     if identity["kind"] == "github" and media_type == "application/json":

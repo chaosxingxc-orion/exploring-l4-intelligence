@@ -37,11 +37,23 @@ def _locked_paths(lock: dict[str, Any]) -> set[str]:
     }
 
 
+def _observed_relative_path(row: dict[str, Any]) -> str:
+    """Return the recorded path identity without reconstructing it from the leaf name."""
+    explicit = row.get("relative_path")
+    if explicit:
+        return str(explicit).replace("\\", "/").strip("/")
+    local_path = str(row.get("local_path", "")).replace("\\", "/")
+    prefix = "${SPEECHRL_DATA_DIR}/"
+    if local_path.startswith(prefix):
+        return local_path[len(prefix) :].strip("/")
+    return f"{row['kind']}s/{row['name']}"
+
+
 def build_inventory(
     lock: dict[str, Any], observed: list[dict[str, Any]], *, data_root: str
 ) -> dict[str, Any]:
     locked = _locked_paths(lock)
-    by_path = {f"{row['kind']}s/{row['name']}": row for row in observed}
+    by_path = {_observed_relative_path(row): row for row in observed}
     baseline_entries = [
         {**by_path[path], "layer_status": "LOCAL_BASELINE_LOCKED"}
         for path in sorted(locked & set(by_path))

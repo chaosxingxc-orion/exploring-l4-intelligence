@@ -1,0 +1,46 @@
+{
+  "schema": "sf-stage1b-v5-evidence-contract-v1",
+  "scope": "BOUNDED_STAGE1B_V5_TRANSITION_REPAIR",
+  "facts": {
+    "closed_reconciliation_works": 18,
+    "gate_works": 6,
+    "route_works": 12,
+    "fulltext_hashes_verified": 18,
+    "official_metadata_receipts": 135,
+    "appendix_unique_routes": 59,
+    "supplement_roles": {
+      "direct": 26,
+      "instrument": 18,
+      "boundary": 2
+    },
+    "control_basis": {
+      "orchestration": 9,
+      "state_event": 9,
+      "evaluator_verifier": 8,
+      "reward_guided": 0
+    },
+    "inventory_semantic_parity": true,
+    "inventory_counts": {
+      "baseline": 31,
+      "candidate": 33,
+      "auxiliary": 5,
+      "missing": 0
+    },
+    "audio2tool_remote_files": 71441,
+    "audio2tool_extraneous_files_retained": 610,
+    "unisrm_bench": {
+      "files": 1463,
+      "bytes": 325920409,
+      "missing": 0,
+      "revision": "b96b356e2aa2db1fb3b14883c90acafb653958ca"
+    },
+    "reference_repo_revisions": {
+      "speakersleuth": "5e1bbffe07235de51bfdd571a2c396da77a744a1",
+      "parapair-audio-bench": "f2058333edac404ff7524beb6d543d0a67f05554",
+      "unisrm": "8b72922ae38ad7c3e46d618f6c29d00689b7c45c"
+    }
+  },
+  "claim_limit": "Literature and asset gate repair only; no model run, metric result, reproduction, ranking, novelty verdict, or Stage-2 authority.",
+  "failures": [],
+  "status": "PASS"
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "speechrl-stage1b-v5-gate-assets-lock-v1",
+  "scope": "CANDIDATE_RESEARCH_ASSETS_NOT_FROZEN_BASELINE",
+  "generated": "2026-07-23",
+  "data_root": "${SPEECHRL_DATA_DIR}",
+  "claim_limit": "Exact acquisition identities for the bounded Stage-1B v5 literature gate. Presence does not authorize Stage-2 execution or make these assets part of docs/datasets.lock.json.",
+  "datasets": [
+    {
+      "name": "unisrm-bench",
+      "kind": "dataset",
+      "local_subdir": "repos/unisrm-bench",
+      "source": {
+        "kind": "hf",
+        "id": "lavendery/UniSRM-Bench",
+        "url": "https://huggingface.co/datasets/lavendery/UniSRM-Bench"
+      },
+      "revision": "b96b356e2aa2db1fb3b14883c90acafb653958ca",
+      "expected_files": 1463,
+      "expected_bytes": 325920409,
+      "access": "PUBLIC_NON_GATED"
+    }
+  ],
+  "models": [],
+  "ref_repos": [
+    {
+      "name": "speakersleuth",
+      "kind": "ref-repo",
+      "local_subdir": "repos/speakersleuth",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/holi-lab/SpeakerSleuth.git"
+      },
+      "revision": "5e1bbffe07235de51bfdd571a2c396da77a744a1"
+    },
+    {
+      "name": "parapair-audio-bench",
+      "kind": "ref-repo",
+      "local_subdir": "repos/parapair-audio-bench",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/jsujeon/ParaPairAudioBench.git"
+      },
+      "revision": "f2058333edac404ff7524beb6d543d0a67f05554"
+    },
+    {
+      "name": "unisrm",
+      "kind": "ref-repo",
+      "local_subdir": "repos/unisrm",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/lavendery/UniSRM.git"
+      },
+      "revision": "8b72922ae38ad7c3e46d618f6c29d00689b7c45c"
+    }
+  ],
+  "unavailable_assets": [
+    {
+      "asset_id": "speakersleuth-code-data",
+      "official_url": "https://github.com/holi-lab/SpeakerSleuth",
+      "status": "ANNOUNCED_IN_PAPER_NOT_PRESENT_IN_CURRENT_REPOSITORY",
+      "reason": "The pinned repository contains the project page only; no benchmark code or data release is present.",
+      "substitute": null,
+      "stage1c_effect": "NONBLOCKING"
+    },
+    {
+      "asset_id": "parapair-svc-audio",
+      "official_url": "https://github.com/sonos/svc-demographic-bias-assessment",
+      "status": "MANUAL_ACCESS_REVIEW_REQUIRED",
+      "reason": "The age/gender source audio requires a manually reviewed access request; the public ParaPair metadata and ready rate/emphasis/style routes are pinned separately.",
+      "substitute": null,
+      "stage1c_effect": "NONBLOCKING"
+    },
+    {
+      "asset_id": "audio-aware-styleset",
+      "official_url": "https://arxiv.org/abs/2506.05984",
+      "status": "ANNOUNCED_FOR_RELEASE_NO_VERIFIED_DOWNLOAD_ROUTE",
+      "reason": "The paper states that StyleSet will be released under MIT but supplies no verified public dataset endpoint in the pinned version.",
+      "substitute": null,
+      "stage1c_effect": "NONBLOCKING"
+    },
+    {
+      "asset_id": "videofdb-evaluation-data",
+      "official_url": "https://anonvfdb.github.io/",
+      "status": "TERMS_ACCEPTANCE_AND_ACCESS_PASSWORD_REQUIRED",
+      "reason": "Automated acquisition would require accepting terms on the user's behalf; no such consent is inferred.",
+      "substitute": null,
+      "stage1c_effect": "NONBLOCKING"
+    }
+  ]
+}

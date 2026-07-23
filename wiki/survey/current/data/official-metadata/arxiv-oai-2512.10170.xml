@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:20:09Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2512.10170" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2512.10170</identifier>
+        <datestamp>2025-12-12</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2512.10170</id>
+        <created>2025-12-11</created>
+            <updated>2025-12-12</updated>
+        <authors>
+                <author>
+                    <keyname>Dunker</keyname>
+                        <forenames>Lucas</forenames>
+                </author>
+                <author>
+                    <keyname>Menta</keyname>
+                        <forenames>Sai Akshay</forenames>
+                </author>
+                <author>
+                    <keyname>Addepalli</keyname>
+                        <forenames>Snigdha Mohana</forenames>
+                </author>
+                <author>
+                    <keyname>Garapati</keyname>
+                        <forenames>Venkata Krishna Rayalu</forenames>
+                </author>
+        </authors>
+        <title>Semantic-Aware Confidence Calibration for Automated Audio Captioning</title>
+            <categories>cs.SD cs.LG</categories>
+            <comments>5 pages, 2 figures</comments>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Automated audio captioning models frequently produce overconfident predictions regardless of semantic accuracy, limiting their reliability in deployment. This deficiency stems from two factors: evaluation metrics based on n-gram overlap that fail to capture semantic correctness, and the absence of calibrated confidence estimation. We present a framework that addresses both limitations by integrating confidence prediction into audio captioning and redefining correctness through semantic similarity. Our approach augments a Whisper-based audio captioning model with a learned confidence prediction head that estimates uncertainty from decoder hidden states. We employ CLAP audio-text embeddings and sentence transformer similarities (FENSE) to define semantic correctness, enabling Expected Calibration Error (ECE) computation that reflects true caption quality rather than surface-level text overlap. Experiments on Clotho v2 demonstrate that confidence-guided beam search with semantic evaluation achieves dramatically improved calibration (CLAP-based ECE of 0.071) compared to greedy decoding baselines (ECE of 0.488), while simultaneously improving caption quality across standard metrics. Our results establish that semantic similarity provides a more meaningful foundation for confidence calibration in audio captioning than traditional n-gram metrics.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

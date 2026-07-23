@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:08:18Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2306.12577" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2306.12577</identifier>
+        <datestamp>2023-06-23</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2306.12577</id>
+        <created>2023-06-21</created>
+            <updated>2023-06-23</updated>
+        <authors>
+                <author>
+                    <keyname>Yuksel</keyname>
+                        <forenames>Kamer Ali</forenames>
+                </author>
+                <author>
+                    <keyname>Ferreira</keyname>
+                        <forenames>Thiago</forenames>
+                </author>
+                <author>
+                    <keyname>Javadi</keyname>
+                        <forenames>Golara</forenames>
+                </author>
+                <author>
+                    <keyname>El-Badrashiny</keyname>
+                        <forenames>Mohamed</forenames>
+                </author>
+                <author>
+                    <keyname>Gunduz</keyname>
+                        <forenames>Ahmet</forenames>
+                </author>
+        </authors>
+        <title>NoRefER: a Referenceless Quality Metric for Automatic Speech Recognition via Semi-Supervised Language Model Fine-Tuning with Contrastive Learning</title>
+            <categories>cs.CL cs.SD eess.AS</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>This paper introduces NoRefER, a novel referenceless quality metric for automatic speech recognition (ASR) systems. Traditional reference-based metrics for evaluating ASR systems require costly ground-truth transcripts. NoRefER overcomes this limitation by fine-tuning a multilingual language model for pair-wise ranking ASR hypotheses using contrastive learning with Siamese network architecture. The self-supervised NoRefER exploits the known quality relationships between hypotheses from multiple compression levels of an ASR for learning to rank intra-sample hypotheses by quality, which is essential for model comparisons. The semi-supervised version also uses a referenced dataset to improve its inter-sample quality ranking, which is crucial for selecting potentially erroneous samples. The results indicate that NoRefER correlates highly with reference-based metrics and their intra-sample ranks, indicating a high potential for referenceless ASR evaluation or a/b testing.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>

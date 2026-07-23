@@ -76,6 +76,23 @@ PY
 
 want_match(){ [ ${#WANT[@]} -eq 0 ] && return 0; local n; for n in "${WANT[@]}"; do [ "$n" = "$1" ] && return 0; done; return 1; }
 has_data(){ local d="$1"; [ -d "$d" ] && [ "$(find -L "$d" -type f ! -name '.*' 2>/dev/null | head -5 | wc -l)" -gt 3 ]; }
+hf_completion_marker_matches(){
+  local d="$1" rev="$2" marker="$1/.hfd/speechrl-complete-revision"
+  [ -s "$marker" ] && [ "$(tr -d '\r\n' < "$marker")" = "$rev" ]
+}
+hfd_manifest_complete(){
+  local d="$1" manifest="$1/.hfd/manifest" size relative
+  [ -s "$manifest" ] || return 1
+  while IFS=$'\t' read -r size relative; do
+    [ -n "$size" ] && [ -n "$relative" ] && [ -f "$d/$relative" ] || return 1
+  done < "$manifest"
+}
+mark_hf_complete(){
+  local d="$1" rev="$2"
+  hfd_manifest_complete "$d" || { warn "HF manifest is incomplete; refusing completion marker: $d"; return 1; }
+  mkdir -p "$d/.hfd"
+  printf '%s\n' "$rev" > "$d/.hfd/speechrl-complete-revision"
+}
 is_sha(){ printf '%s' "$1" | grep -Eq '^[0-9a-f]{7,40}$'; }
 retry(){ local n=1; while [ $n -le 3 ]; do "$@" && return 0; warn "attempt $n/3 failed; retry in $((n*5))s"; sleep $((n*5)); n=$((n+1)); done; warn "gave up: $*"; return 1; }
 
@@ -211,13 +228,15 @@ while IFS=$'\x1f' read -r kind name subdir method id rev url zen; do
     fi
   elif [ "$method" = git ]; then
     [ -d "$dest/.git" ] && { log "skip complete: $name"; SKIP=$((SKIP+1)); continue; }
+  elif [ "$method" = hf ]; then
+    hf_completion_marker_matches "$dest" "$rev" && { log "skip pinned complete: $name"; SKIP=$((SKIP+1)); continue; }
   else
     has_data "$dest" && { log "skip complete: $name"; SKIP=$((SKIP+1)); continue; }
   fi
   log "fetch $name  [$method ${id:-$url}]  -> $subdir"
   rt=dataset; [ "$kind" = model ] && rt=model
   case "$method" in
-    hf)                 fetch_hf "$id" "$dest" "$rev" "$rt"  && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
+    hf)                 fetch_hf "$id" "$dest" "$rev" "$rt" && mark_hf_complete "$dest" "$rev" && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
     modelscope)         fetch_ms "$id" "$dest" "$rt"         && COUNT=$((COUNT+1)) || FAIL=$((FAIL+1)) ;;
     modelscope-manual)  warn "$name: optional evalscope set, id not recorded — fetch manually (skipping)" ;;
     hf-manual)          warn "$name: file-selective GGUF — run scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull deliberately avoided; skipping)" ;;

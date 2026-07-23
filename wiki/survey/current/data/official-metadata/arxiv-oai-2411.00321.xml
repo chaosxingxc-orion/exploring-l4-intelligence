@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-07-23T03:10:08Z</responseDate>
+                <request verb="GetRecord" identifier="oai:arXiv.org:2411.00321" metadataPrefix="arXiv">http://oaipmh.arxiv.org/oai</request>
+
+
+    <GetRecord>
+                <record>
+                <header>
+        <identifier>oai:arXiv.org:2411.00321</identifier>
+        <datestamp>2024-11-06</datestamp>
+            <setSpec>cs:cs:SD</setSpec>
+            <setSpec>eess:eess:AS</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2411.00321</id>
+        <created>2024-11-05</created>
+            <updated>2024-11-06</updated>
+        <authors>
+                <author>
+                    <keyname>Dixit</keyname>
+                        <forenames>Satvik</forenames>
+                </author>
+                <author>
+                    <keyname>Deshmukh</keyname>
+                        <forenames>Soham</forenames>
+                </author>
+                <author>
+                    <keyname>Raj</keyname>
+                        <forenames>Bhiksha</forenames>
+                </author>
+        </authors>
+        <title>MACE: Leveraging Audio for Evaluating Audio Captioning Systems</title>
+            <categories>cs.SD eess.AS</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>The Automated Audio Captioning (AAC) task aims to describe an audio signal using natural language. To evaluate machine-generated captions, the metrics should take into account audio events, acoustic scenes, paralinguistics, signal characteristics, and other audio information. Traditional AAC evaluation relies on natural language generation metrics like ROUGE and BLEU, image captioning metrics such as SPICE and CIDEr, or Sentence-BERT embedding similarity. However, these metrics only compare generated captions to human references, overlooking the audio signal itself. In this work, we propose MACE (Multimodal Audio-Caption Evaluation), a novel metric that integrates both audio and reference captions for comprehensive audio caption evaluation. MACE incorporates audio information from audio as well as predicted and reference captions and weights it with a fluency penalty. Our experiments demonstrate MACE&#39;s superior performance in predicting human quality judgments compared to traditional metrics. Specifically, MACE achieves a 3.28% and 4.36% relative accuracy improvement over the FENSE metric on the AudioCaps-Eval and Clotho-Eval datasets respectively. Moreover, it significantly outperforms all the previous metrics on the audio captioning evaluation task. The metric is opensourced at https://github.com/satvik-dixit/mace</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </GetRecord>
+</OAI-PMH>
