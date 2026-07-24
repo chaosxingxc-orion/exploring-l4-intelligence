@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R3 coder-ready, independent review pending"
+last_refresh: "2026-07-24 — Agentic RC2R3 accepted for isolated calibration intake"
 ---
 
 # Research Objective & Current State
@@ -10,8 +10,8 @@ last_refresh: "2026-07-24 — Agentic RC2R3 coder-ready, independent review pend
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic RC2R3 commit-bound independent review**. Endpoint:
-`AGENTIC_RC2R3_CODER_READY_NOT_DISTRIBUTED`.
+The gate is **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration distribution**. Endpoint:
+`AGENTIC_RC2R3_ACCEPTED_CALIBRATION_DISTRIBUTION_AUTHORIZED_NOT_YET_DISTRIBUTED`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its 320-work calibration
 union, and committed RC2/RC2R1/RC2R2 transactions are immutable. RC2R2 was frozen locally at
@@ -21,8 +21,8 @@ reproduction and branch selection.
 
 The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`. It authorizes only
 the immutable-successor threshold, receiver-byte receipt and typed-path repair, its local no-push
-commit, and fresh commit-bound review. It does not supply
-`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`.
+commit, and fresh commit-bound review. That no-fork review has now supplied the exact
+`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`, opening only the authorized N=56 intake.
 
 No coder was distributed and no agreement/adjudication, research models/APIs, benchmark metric,
 paper reproduction, prototype, anchor promotion, novelty verdict, full mapping, Stage-2A or push is
@@ -51,6 +51,8 @@ compatibility.
   uses typed key/index paths plus strict blind-packet keys. Eighteen adversarial tests and 73
   RC2-through-RC2R3 regression tests pass; branch-aware agreement/builder/combined coverage is
   88%/84%/86%, and Windows/WSL replay yields the same frozen hash.
+- The fresh reviewer verified 30/30 commit-bound artifacts and returned the exact coder-intake
+  ACCEPT. It did not claim human signature, owner authority, mapping authority or research execution.
 - AudioGenie-Reasoner remains a direct-method candidate; AudioToolAgent a nearest prior; Audio2Tool
   an instrument; MMAU-mini/MMAR validation carriers. All are fail closed and none is an anchor.
 - K/S/M non-speech works remain transfer analogues requiring source→target translation and a
@@ -62,8 +64,8 @@ Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`; RC2R3 contract:
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md`.
 
-Freeze one local no-push RC2R3 commit and obtain a fresh no-fork independent review over the exact
-commit-bound manifest. Distribution remains closed unless that review returns the exact RC2R3 ACCEPT.
+Materialize the two isolated receiver-side byte receipts and distribute the byte-identical N=56
+packet to the frozen Sol/Terra coder slots. Both raw outputs must freeze before agreement is computed.
 Mapping still requires a signed calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`;
 Stage-2A remains separately gated.
 

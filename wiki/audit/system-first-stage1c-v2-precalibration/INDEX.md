@@ -14,6 +14,7 @@ Current authority remains in `wiki/Research-Objective.md` and `wiki/survey/curre
 | `owner-rc2r2-provenance-repair-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r2-provenance-repair-authorization/2026-07-24-owner-rc2r2-provenance-repair-authorization.md` @ `00f8ccc989644c7c93d8c64957c9dc6e5f2d3a49` | `AUTHORIZE_BOUNDED_RC2R2_PROVENANCE_REPAIR_AND_REREVIEW; DISTRIBUTION_REMAINS_CONDITIONAL` |
 | `agentic-rc2r2-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r2-independent-method-review.md` @ `764e17bd8c7b2fc3eb232fa6cbe7a316738b82b2` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
 | `owner-rc2r3-runtime-integrity-repair-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r3-runtime-integrity-repair-authorization/2026-07-24-owner-rc2r3-runtime-integrity-repair-authorization.md` @ `b7f414069daedf0eb0816a0d425f66b29034cfb3` | `AUTHORIZE_BOUNDED_RC2R3_RUNTIME_INTEGRITY_REPAIR_AND_REREVIEW; DISTRIBUTION_REMAINS_CONDITIONAL` |
+| `agentic-rc2r3-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r3-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r3-independent-method-review.md` @ `8659b6b0710ff6dcbbb3ffcdf22f9630478debec` | `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE; CONDITIONAL_N56_INTAKE_OPEN` |
 
 This token authorizes only bounded consolidation, schema/codebook construction, known-candidate
 official-source closure and calibration preparation under the recorded prerequisites. It excludes
@@ -58,3 +59,9 @@ The owner subsequently supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTE
 The bounded immutable successor freezes the critical threshold, hashes actual receiver-side bytes
 and eliminates structural path aliases. Distribution remains conditional on the exact fresh-review
 ACCEPT; all later owner and mapping gates remain intact.
+
+The fresh no-fork RC2R3 reviewer independently verified 30/30 commit-bound artifacts, predecessor
+immutability, the frozen 0.85 threshold, receiver-side actual-byte receipt path and typed structural
+paths. It returned the exact ACCEPT for coder intake. Under the recorded continuation authorization,
+this opens only N=56 isolated calibration distribution; agreement still requires two frozen raw
+outputs, owner adjudication remains mandatory, and mapping/push/research execution remain closed.
