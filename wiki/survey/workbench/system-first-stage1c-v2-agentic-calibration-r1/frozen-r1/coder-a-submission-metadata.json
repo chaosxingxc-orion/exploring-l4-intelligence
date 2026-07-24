@@ -1,0 +1,35 @@
+{
+  "schema": "sf-stage1c-v2-coder-submission-metadata-v1",
+  "status": "COMPLETED",
+  "model": "gpt-5.6-sol",
+  "canonical_task": "/root/stage1c_coder_a_r1",
+  "process_id": "CODEX-SUBAGENT-/root/stage1c_coder_a_r1",
+  "coder_id": "STAGE1C-RC2R3-CODER-A-R1",
+  "coder_transaction_id": "STAGE1C-RC2R3-TX-A-R1",
+  "receipt_sha256": "631747d9f61f67c32f0b1f9e7081abc053dc1bcf3ae609a9338054ab40c67bf3",
+  "response_count": 56,
+  "response_file": {
+    "path": "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\coder-a\\output\\responses.json",
+    "bytes": 354559,
+    "sha256": "154c091a4727f2461a70dda4b1b3179bb004a14cee6ab1a04c3859dc495389b5"
+  },
+  "started_at": "2026-07-25T00:44:24+08:00",
+  "submitted_at": "2026-07-24T17:02:44.773Z",
+  "schema_validation": {
+    "status": "PASSED",
+    "schema_id": "sf-stage1c-v2-calibration-response-schema-v4",
+    "validator": "jsonschema Draft202012Validator 4.26.0 plus exact semantic invariant checks",
+    "objects_validated": 56,
+    "schema_error_count": 0,
+    "semantic_checks_status": "PASSED"
+  },
+  "exposure_declaration": {
+    "read_scope": [
+      "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\coder-a\\input\\*.json",
+      "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\coder-a\\delivery\\delivery-receipt.json",
+      "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\shared-source\\** (frozen source bytes only)"
+    ],
+    "declaration": "Exposure was limited to the eight authorized input JSON files, the authorized delivery receipt, and frozen source bytes under shared-source. No repository, git metadata/history, network source, readiness/label artifact outside the input bundle, prior discussion, or coder-b path/output was inspected."
+  },
+  "note": "SPECIALIZED_SCOPE_INVARIANT_REPAIR_AFTER_FAIL_CLOSED_VALIDATION"
+}

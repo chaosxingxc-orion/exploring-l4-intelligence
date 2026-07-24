@@ -35,3 +35,7 @@
 # Official provenance payloads are hash-bound evidence; preserve source bytes
 # and do not treat source-owned whitespace as a repository formatting defect.
 wiki/survey/current/data/official-metadata/** -text -whitespace
+
+# Calibration raw outputs and freeze artifacts are byte-hash evidence. Their
+# Git blobs must preserve the exact validated/frozen byte streams.
+wiki/survey/workbench/system-first-stage1c-v2-agentic-calibration-r1/frozen-r1/** -text -whitespace

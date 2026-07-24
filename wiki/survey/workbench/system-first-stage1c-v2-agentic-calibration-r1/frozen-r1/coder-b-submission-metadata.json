@@ -1,0 +1,16 @@
+{
+    "model":  "gpt-5.6-terra",
+    "canonical_task":  "/root/stage1c_coder_b_r1",
+    "process_id":  "CODEX-SUBAGENT-/root/stage1c_coder_b_r1",
+    "receipt_hash":  "228767d27211017f19cdb241c0ca2de2cdf00fa3414be4a80b5b0046d9403680",
+    "response_count":  56,
+    "response_file":  "output/responses.json",
+    "response_file_bytes":  716610,
+    "response_file_sha256":  "ff922386cdf89617604209d30e63834151efb94941404b85a32a0da420f1e0c2",
+    "started_at":  "2026-07-25T00:51:15.0187425+08:00",
+    "submitted_at":  "2026-07-25T00:59:33.9659922+08:00",
+    "schema_validation_status":  "VALID_JSON_SCHEMA_DRAFT_2020_12_AND_SEMANTIC_COMPLETENESS",
+    "semantic_completeness_validation_status":  "PASS_56_OF_56_LOCATORS_RUN_CELLS_OBSERVATIONS_DATASET_NODES_CLAIMS",
+    "exposure_declaration":  "Read only coder-b/input/*.json, coder-b/delivery/delivery-receipt.json, and frozen source bytes under shared-source; no repository, network, labels, readiness artifacts, or other coder output was accessed.",
+    "resubmission_note":  "SUBSTANTIVE_SOURCE_EVIDENCE_RECODE_AFTER_FAIL_CLOSED_VALIDATION"
+}

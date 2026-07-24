@@ -431,6 +431,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-calibration/round-01-distribution/2026-07-24-stage1c-v2-agentic-calibration-r1-distribution.md",
       "git_blob": "0148768e690d29d6fd5e9cd5d9ebeb95eceff37a"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-calibration/round-02-pre-adjudication/2026-07-25-stage1c-v2-agentic-calibration-r1-pre-adjudication.md",
+      "git_blob": "fe2dcb97608ba2d6c4711000d7a5179f30ea2e4f"
     }
   ]
 }

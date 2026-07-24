@@ -102,6 +102,130 @@ def _public_record(record: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in record.items() if not key.startswith("_")}
 
 
+def _nested_value(value: dict[str, Any], path: str) -> Any:
+    current: Any = value
+    for part in path.split("."):
+        if not isinstance(current, dict) or part not in current:
+            raise CalibrationRunError(f"disagreement input lacks critical path: {path}")
+        current = current[part]
+    return current
+
+
+def _object_map(row: dict[str, Any], array_name: str) -> dict[str, dict[str, Any]]:
+    indexed: dict[str, dict[str, Any]] = {}
+    objects = row.get(array_name, [])
+    if not isinstance(objects, list):
+        raise CalibrationRunError(f"{array_name} must be an array")
+    for obj in objects:
+        if not isinstance(obj, dict):
+            raise CalibrationRunError(f"{array_name} contains a non-object")
+        key = obj.get("object_match_key")
+        if not isinstance(key, str) or not key:
+            raise CalibrationRunError(f"{array_name} object lacks object_match_key")
+        if key in indexed:
+            raise CalibrationRunError(f"duplicate {array_name} object_match_key: {key}")
+        indexed[key] = obj
+    return indexed
+
+
+def build_disagreement_package(
+    coder_a: list[dict[str, Any]], coder_b: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Preserve exact pre-adjudication paper and object disagreements.
+
+    This is an evidence export, not an adjudicator.  Values from both coders
+    remain visible so an owner can distinguish label disagreement from object
+    segmentation or match-key failure.
+    """
+    if len(coder_a) != len(coder_b):
+        raise CalibrationRunError("disagreement inputs must have equal paper counts")
+    left_by_id = {row.get("paper_id"): row for row in coder_a}
+    right_by_id = {row.get("paper_id"): row for row in coder_b}
+    if (
+        None in left_by_id or None in right_by_id
+        or len(left_by_id) != len(coder_a) or len(right_by_id) != len(coder_b)
+        or set(left_by_id) != set(right_by_id)
+    ):
+        raise CalibrationRunError("disagreement inputs must bind the same unique paper IDs")
+
+    paper_disagreements: list[dict[str, Any]] = []
+    for paper_id in left_by_id:
+        left_labels = left_by_id[paper_id]["paper_labels"]
+        right_labels = right_by_id[paper_id]["paper_labels"]
+        for field in (*agreement_v5.SINGLE_LABEL_FIELDS, *agreement_v5.MULTILABEL_FIELDS):
+            left_value = _nested_value(left_labels, field)
+            right_value = _nested_value(right_labels, field)
+            if left_value != right_value:
+                paper_disagreements.append({
+                    "paper_id": paper_id,
+                    "field": field,
+                    "coder_a": left_value,
+                    "coder_b": right_value,
+                })
+
+    object_types: dict[str, Any] = {}
+    for array_name in agreement_v5.OBJECT_ARRAYS:
+        left_objects: dict[str, dict[str, Any]] = {}
+        right_objects: dict[str, dict[str, Any]] = {}
+        left_key_papers: dict[str, str] = {}
+        right_key_papers: dict[str, str] = {}
+        for paper_id in left_by_id:
+            for key, obj in _object_map(left_by_id[paper_id], array_name).items():
+                if key in left_objects:
+                    raise CalibrationRunError(f"duplicate cross-paper {array_name} key: {key}")
+                left_objects[key] = obj
+                left_key_papers[key] = paper_id
+            for key, obj in _object_map(right_by_id[paper_id], array_name).items():
+                if key in right_objects:
+                    raise CalibrationRunError(f"duplicate cross-paper {array_name} key: {key}")
+                right_objects[key] = obj
+                right_key_papers[key] = paper_id
+        left_keys = sorted(left_objects)
+        right_keys = sorted(right_objects)
+        matched_keys = sorted(set(left_keys) & set(right_keys))
+        field_disagreements: list[dict[str, Any]] = []
+        for key in matched_keys:
+            for field in agreement_v5.CRITICAL_OBJECT_FIELDS[array_name]:
+                left_value = _nested_value(left_objects[key], field)
+                right_value = _nested_value(right_objects[key], field)
+                if left_value != right_value:
+                    field_disagreements.append({
+                        "object_match_key": key,
+                        "paper_id": left_key_papers[key],
+                        "field": field,
+                        "coder_a": left_value,
+                        "coder_b": right_value,
+                    })
+        only_a = sorted(set(left_keys) - set(right_keys))
+        only_b = sorted(set(right_keys) - set(left_keys))
+        object_types[array_name] = {
+            "coder_a_objects": len(left_keys),
+            "coder_b_objects": len(right_keys),
+            "matched_objects": len(matched_keys),
+            "matched_keys": matched_keys,
+            "coder_a_keys": left_keys,
+            "coder_b_keys": right_keys,
+            "coder_a_only": [
+                {"paper_id": left_key_papers[key], "object_match_key": key,
+                 "object": left_objects[key]}
+                for key in only_a
+            ],
+            "coder_b_only": [
+                {"paper_id": right_key_papers[key], "object_match_key": key,
+                 "object": right_objects[key]}
+                for key in only_b
+            ],
+            "matched_field_disagreements": field_disagreements,
+        }
+    return {
+        "schema": "sf-stage1c-v2-calibration-disagreement-package-v1",
+        "adjudication_applied": False,
+        "paper_count": len(coder_a),
+        "paper_disagreements": paper_disagreements,
+        "object_types": object_types,
+    }
+
+
 def freeze_and_compute(
     package: dict[str, Any], inspection: dict[str, Any], *,
     runtime_intake: dict[str, Any], delivery_receipts: list[dict[str, Any]],

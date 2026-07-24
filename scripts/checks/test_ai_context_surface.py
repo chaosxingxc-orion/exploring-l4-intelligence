@@ -1677,10 +1677,10 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 24), refresh_date)
+        self.assertEqual(date(2026, 7, 25), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic RC2R3 N=56 isolated calibration coding",
+            "Stage-1C v2 Agentic calibration R1 owner consolidation decision",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,9 +1688,10 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_RC2R3_N56_CODERS_DISTRIBUTED_RESPONSES_PENDING",
+            "AGENTIC_CALIBRATION_R1_AGREEMENT_FAILED_OWNER_DECISION_REQUIRED",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR",
             "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
+            "AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION",
             "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
             "WITHHOLD_WITH_BOUNDED_DEFECTS",
             "H5 remains withheld",
@@ -1743,7 +1744,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 24), per_work_date)
+        self.assertEqual(date(2026, 7, 25), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

@@ -1,0 +1,29 @@
+{
+  "schema": "sf-stage1c-v2-calibration-raw-output-freeze-v1",
+  "status": "BOTH_RAW_OUTPUTS_FROZEN_AGREEMENT_COMPUTED",
+  "coder_outputs": {
+    "A": {
+      "path": "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\coder-a\\output\\responses.json",
+      "bytes": 354559,
+      "sha256": "154c091a4727f2461a70dda4b1b3179bb004a14cee6ab1a04c3859dc495389b5",
+      "response_count": 56,
+      "coder_id": "STAGE1C-RC2R3-CODER-A-R1",
+      "coder_transaction_id": "STAGE1C-RC2R3-TX-A-R1",
+      "schema_valid": true,
+      "frozen_path": "D:\\chao_workspace\\exploring-l4-intelligence\\wiki\\survey\\workbench\\system-first-stage1c-v2-agentic-calibration-r1\\frozen-r1\\coder-a-responses.json"
+    },
+    "B": {
+      "path": "D:\\chao_workspace\\stage1c-calibration\\rc2r3-20260724-r1\\coder-b\\output\\responses.json",
+      "bytes": 716610,
+      "sha256": "ff922386cdf89617604209d30e63834151efb94941404b85a32a0da420f1e0c2",
+      "response_count": 56,
+      "coder_id": "STAGE1C-RC2R3-CODER-B-R1",
+      "coder_transaction_id": "STAGE1C-RC2R3-TX-B-R1",
+      "schema_valid": true,
+      "frozen_path": "D:\\chao_workspace\\exploring-l4-intelligence\\wiki\\survey\\workbench\\system-first-stage1c-v2-agentic-calibration-r1\\frozen-r1\\coder-b-responses.json"
+    }
+  },
+  "agreement_path": "D:\\chao_workspace\\exploring-l4-intelligence\\wiki\\survey\\workbench\\system-first-stage1c-v2-agentic-calibration-r1\\frozen-r1\\pre-adjudication-agreement.json",
+  "agreement_bytes": 18884,
+  "agreement_sha256": "9e3f0a6afc969236c68590c0bf5372d7ecaea5f62adae8bc8acfdaf7cdf45d92"
+}

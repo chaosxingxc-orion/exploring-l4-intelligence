@@ -1,41 +1,34 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration coding**.
-  Endpoint: `AGENTIC_RC2R3_N56_CODERS_DISTRIBUTED_RESPONSES_PENDING`.
-- Compatibility provenance: `Stage-1C common-rubric comparison started` under
+- Gate: **Stage-1C v2 Agentic calibration R1 owner consolidation decision**.
+  Endpoint: `AGENTIC_CALIBRATION_R1_AGREEMENT_FAILED_OWNER_DECISION_REQUIRED`.
+- Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
-  282 inherited and 320 calibration-union identities. RC2, RC2R1 and RC2R2 are immutable commits.
+  282 inherited and 320 calibration-union identities. RC2 through RC2R3 are immutable commits.
 - Scope: specialized Duplex tasks are excluded. N=56 is 38 overlays + 18 sentinels; FDB-v3 is absent,
-  Active Perception Agent (`2512.23646`) replaces it, and FDB-v2 is one out-of-scope boundary.
-- Agentic schema: direct scope requires decide + act/tool and a generic frozen core. Scope, loop,
-  dependency, K/S/M, control and single primary cell intervention are agreement-critical.
+  Active Perception Agent (`2512.23646`) replaces it, and FDB-v2 is one boundary.
+- RC2R3: 0.85 is compiled/non-overridable; receipts consume receiver-side bytes; typed paths reject
+  bracket/dot/slash aliases. Its exact method contract passed independent coder-intake review.
+- Calibration: Sol/Terra used distinct no-fork tasks, byte-identical input bundles and 135 verified
+  source renditions. Both exact N=56 outputs passed intake and froze before agreement.
+- Agreement: overall `FAIL`; 5/13 paper-level paths pass and 8 fail. Nine object types have zero
+  shared exact match keys, so object fields are `NOT_CALIBRATED`; 232 paper-field disagreements and
+  all unmatched objects are preserved. No adjudication was applied.
+- Root cause: free-form object key construction made semantically corresponding objects structurally
+  incomparable; paper-role/access/scope/dependency/intervention decision rules also remain unstable.
+- Recommended next action: owner authorizes one bounded codebook consolidation, compiler-owned keys,
+  extraction triggers and decision tables, followed by fresh independent review and complete N=56
+  recoding by two new isolated contexts. Replacing sentinels requires separate authority.
 - Candidates: AudioGenie-Reasoner direct candidate; AudioToolAgent nearest prior; Audio2Tool
-  instrument; MMAU-mini/MMAR validation carriers. No primary/fallback reproduction anchor exists.
-- Transfer: non-speech K/S/M works require source→target translation and rejection conditions.
-  Audio MultiChallenge is instrument support only; H5 remains withheld from modality conclusions.
-- RC2R2 commit `9652d98eade798903be6c5d007591d2602a2f5c3` binds a compiled package
-  root, exact N=56 static intake, schema/source/distribution bytes and paper-scoped renditions.
-- Verification: Windows/WSL deterministic replay passes; 17 new tests pass; branch-aware agreement,
-  builder and combined coverage are 89%, 88% and 88%.
-- Independent review: 30/30 RC2R2 and 26/26 predecessor artifacts pass. Verdict is
-  `WITHHOLD_WITH_BOUNDED_DEFECTS` because the 0.85 threshold is caller-overridable, receipt creation
-  observes expected values rather than actual received bytes, and string paths admit key aliases.
-- RC2R3: agreement threshold `0.85` is compiled and non-overridable; receipt construction consumes
-  actual receiver-side bytes; typed structural paths reject bracket/dot/slash aliases. Verification
-  passes 18/18 adversarial and 73/73 predecessor-regression tests, 88%/84%/86% branch-aware
-  agreement/builder/combined coverage and deterministic Windows/WSL replay.
-- Fresh independent review verified 30/30 commit-bound artifacts and returned the exact RC2R3 coder-
-  intake ACCEPT. It grants no owner adjudication, mapping, research execution, Stage-2A or push.
-- Distribution: Sol/Terra have distinct fresh no-fork tasks and validated actual-byte receipts over
-  the same eight-artifact bundle. All 135 source renditions verify; both raw responses remain pending.
-- Execution: coder distribution is complete; no agreement/adjudication, research model/API, metric, reproduction,
-  prototype, family/branch selection, novelty verdict, mapping, Stage-2A or push is authorized or
-  recorded. No independent ACCEPT exists.
-- Scope provenance is `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
-  no broad discovery, research model/API call, metric run, reproduction or prototype.
-  The problem ranking and selection remain withheld. RC2R2 is committed; no transaction is described as never committed.
-- Authority: `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR` authorizes a new
-  immutable successor, its local no-push commit and fresh review. It does not itself open distribution.
-- Next action: receive, validate and freeze both raw N=56 outputs; only then compute pre-adjudication
-  agreement and prepare the mandatory owner adjudication package.
+  instrument; MMAU-mini/MMAR validation carriers. No reproduction anchor exists.
+- Transfer: non-speech K/S/M works require source→target translation and rejection conditions;
+  H5 remains withheld from modality conclusions.
+- Scope provenance remains `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`: there was
+  no broad discovery, research model/API call, metric run, reproduction or prototype. RC2R2 is committed;
+  problem ranking and selection remain withheld.
+- Execution: literature coding and raw agreement occurred. Owner adjudication, calibration release,
+  full mapping, research model/API, benchmark metric, reproduction, prototype, family/branch
+  selection, novelty verdict, Stage-2A and push remain absent.
+- Next action: owner decides the one bounded consolidation; mapping still requires
+  `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING` after a valid calibration release.

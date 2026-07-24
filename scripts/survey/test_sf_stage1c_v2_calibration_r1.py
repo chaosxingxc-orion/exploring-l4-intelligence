@@ -128,6 +128,24 @@ class Stage1cV2CalibrationR1Tests(unittest.TestCase):
                     delivery_receipts=receipts, destination=destination,
                 )
 
+    def test_disagreement_package_preserves_paper_and_object_evidence(self) -> None:
+        left = self.fixture.submitted_rows("CODER-A", "TX-A")
+        right = self.fixture.submitted_rows("CODER-B", "TX-B")
+        right[0]["paper_labels"]["paper_role"] = "INSTRUMENT"
+        node = {
+            "object_match_key": "dataset:key-a", "dataset_node_id": "DS-A",
+            "name": "Fixture", "revision": "v1", "split": "test",
+            "source_locator_ids": [left[0]["source_locators"][0]["locator_id"]],
+        }
+        left[0]["dataset_nodes"] = [node]
+        right_node = dict(node)
+        right_node["object_match_key"] = "dataset:key-b"
+        right[0]["dataset_nodes"] = [right_node]
+        package = run_r1.build_disagreement_package(left, right)
+        self.assertEqual("paper_role", package["paper_disagreements"][0]["field"])
+        self.assertEqual(0, package["object_types"]["dataset_nodes"]["matched_objects"])
+        self.assertEqual("dataset:key-a", package["object_types"]["dataset_nodes"]["coder_a_keys"][0])
+
 
 if __name__ == "__main__":
     unittest.main()
