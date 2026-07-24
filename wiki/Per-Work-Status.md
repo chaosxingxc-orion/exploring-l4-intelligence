@@ -10,16 +10,18 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1C v2 methods are prepared and both Stage-1B overlays are independently
-  signed. The fixed release remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; the 320-work union is
-  activated only as the calibration input, not for full mapping.
+- **Current state:** Stage-1C v2 Agentic calibration R1 completed exact N=56 dual-model coding and
+  froze both raw outputs before agreement. The raw agreement is `FAIL`: 5/13 paper-level paths pass,
+  while nine object types share zero exact match keys. The fixed Stage-1B release remains
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is not yet activated for mapping.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** receive and validate the two distributed Sol/Terra N=56 outputs, freeze
-  both raw bytes, and only then compute pre-adjudication agreement.
-  Owner adjudication remains mandatory. Research models/APIs, metrics, reproduction,
-  prototypes, full mapping, ranking, selection and novelty verdicts remain prohibited.
+- **Next authorized work:** retain R1 raw bytes/agreement unchanged and wait for the exact owner
+  `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` before one bounded method
+  consolidation and fresh full N=56 recode. Full mapping still requires a valid calibration release
+  and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models/APIs, metrics, reproduction, prototypes,
+  ranking, selection and novelty verdicts remain prohibited.
 
 ## W2
 
