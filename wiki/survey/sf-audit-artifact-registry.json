@@ -427,6 +427,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r3-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r3-independent-method-review.md",
       "git_blob": "8659b6b0710ff6dcbbb3ffcdf22f9630478debec"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-calibration/round-01-distribution/2026-07-24-stage1c-v2-agentic-calibration-r1-distribution.md",
+      "git_blob": "0148768e690d29d6fd5e9cd5d9ebeb95eceff37a"
     }
   ]
 }

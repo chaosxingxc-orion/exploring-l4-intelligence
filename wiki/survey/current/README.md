@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Gate: **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration distribution**; endpoint
-  `AGENTIC_RC2R3_ACCEPTED_CALIBRATION_DISTRIBUTION_AUTHORIZED_NOT_YET_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration coding**; endpoint
+  `AGENTIC_RC2R3_N56_CODERS_DISTRIBUTED_RESPONSES_PENDING`.
 - Specialized Duplex-model tasks are outside the research, reproduction and branch route.
 - Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
@@ -27,6 +27,9 @@
 - Fresh no-fork review verified 30/30 exact artifacts and returned
   `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. This opens only the already authorized
   isolated N=56 intake; both raw outputs, agreement ordering and owner adjudication remain gated.
+- Sol/Terra were distributed byte-identical bundles after actual-byte receipts validated. Their two
+  raw N=56 outputs are pending; agreement has not been computed.
+- Active calibration run: [R1](../workbench/system-first-stage1c-v2-agentic-calibration-r1/README.md).
 - Coder distribution, agreement, mapping, ranking, branch selection, novelty verdict, research
   execution, Stage-2A and push remain closed. Distribution requires the exact RC2R3 ACCEPT.
 - Audit: `wiki/audit/system-first-stage1b/INDEX.md` and

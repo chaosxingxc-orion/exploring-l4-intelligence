@@ -16,8 +16,8 @@
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** distribute the accepted frozen 56-work packet to the isolated Sol/Terra
-  coder slots using receiver-side actual-byte receipts, then freeze both raw outputs before agreement.
+- **Next authorized work:** receive and validate the two distributed Sol/Terra N=56 outputs, freeze
+  both raw bytes, and only then compute pre-adjudication agreement.
   Owner adjudication remains mandatory. Research models/APIs, metrics, reproduction,
   prototypes, full mapping, ranking, selection and novelty verdicts remain prohibited.
 

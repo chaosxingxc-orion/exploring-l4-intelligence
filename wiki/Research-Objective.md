@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R3 accepted for isolated calibration intake"
+last_refresh: "2026-07-24 — Agentic RC2R3 N=56 isolated coders distributed"
 ---
 
 # Research Objective & Current State
@@ -10,8 +10,8 @@ last_refresh: "2026-07-24 — Agentic RC2R3 accepted for isolated calibration in
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration distribution**. Endpoint:
-`AGENTIC_RC2R3_ACCEPTED_CALIBRATION_DISTRIBUTION_AUTHORIZED_NOT_YET_DISTRIBUTED`.
+The gate is **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration coding**. Endpoint:
+`AGENTIC_RC2R3_N56_CODERS_DISTRIBUTED_RESPONSES_PENDING`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its 320-work calibration
 union, and committed RC2/RC2R1/RC2R2 transactions are immutable. RC2R2 was frozen locally at
@@ -24,9 +24,9 @@ the immutable-successor threshold, receiver-byte receipt and typed-path repair, 
 commit, and fresh commit-bound review. That no-fork review has now supplied the exact
 `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`, opening only the authorized N=56 intake.
 
-No coder was distributed and no agreement/adjudication, research models/APIs, benchmark metric,
-paper reproduction, prototype, anchor promotion, novelty verdict, full mapping, Stage-2A or push is
-authorized or recorded.
+Both isolated literature-coding model slots are now distributed; their raw responses are pending.
+No agreement/adjudication, research models/APIs, benchmark metric, paper reproduction, prototype,
+anchor promotion, novelty verdict, full mapping, Stage-2A or push is authorized or recorded.
 
 ## Research north star
 
@@ -53,6 +53,8 @@ compatibility.
   88%/84%/86%, and Windows/WSL replay yields the same frozen hash.
 - The fresh reviewer verified 30/30 commit-bound artifacts and returned the exact coder-intake
   ACCEPT. It did not claim human signature, owner authority, mapping authority or research execution.
+- Sol/Terra received byte-identical eight-artifact bundles under distinct no-fork tasks. Both actual-
+  byte receipts validate, 135 source renditions match the source manifest, and responses remain pending.
 - AudioGenie-Reasoner remains a direct-method candidate; AudioToolAgent a nearest prior; Audio2Tool
   an instrument; MMAU-mini/MMAR validation carriers. All are fail closed and none is an anchor.
 - K/S/M non-speech works remain transfer analogues requiring source→target translation and a
@@ -64,8 +66,8 @@ Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`; RC2R3 contract:
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md`.
 
-Materialize the two isolated receiver-side byte receipts and distribute the byte-identical N=56
-packet to the frozen Sol/Terra coder slots. Both raw outputs must freeze before agreement is computed.
+Wait for both exact N=56 response files, validate and freeze their raw bytes, then compute raw pre-
+adjudication agreement. Owner adjudication remains the next mandatory human stop.
 Mapping still requires a signed calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`;
 Stage-2A remains separately gated.
 

@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration distribution**.
-  Endpoint: `AGENTIC_RC2R3_ACCEPTED_CALIBRATION_DISTRIBUTION_AUTHORIZED_NOT_YET_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 N=56 isolated calibration coding**.
+  Endpoint: `AGENTIC_RC2R3_N56_CODERS_DISTRIBUTED_RESPONSES_PENDING`.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
@@ -27,7 +27,9 @@
   agreement/builder/combined coverage and deterministic Windows/WSL replay.
 - Fresh independent review verified 30/30 commit-bound artifacts and returned the exact RC2R3 coder-
   intake ACCEPT. It grants no owner adjudication, mapping, research execution, Stage-2A or push.
-- Execution: no coder distribution yet, agreement/adjudication, research model/API, metric, reproduction,
+- Distribution: Sol/Terra have distinct fresh no-fork tasks and validated actual-byte receipts over
+  the same eight-artifact bundle. All 135 source renditions verify; both raw responses remain pending.
+- Execution: coder distribution is complete; no agreement/adjudication, research model/API, metric, reproduction,
   prototype, family/branch selection, novelty verdict, mapping, Stage-2A or push is authorized or
   recorded. No independent ACCEPT exists.
 - Scope provenance is `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
@@ -35,5 +37,5 @@
   The problem ranking and selection remain withheld. RC2R2 is committed; no transaction is described as never committed.
 - Authority: `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR` authorizes a new
   immutable successor, its local no-push commit and fresh review. It does not itself open distribution.
-- Next action: generate actual-byte receipts in two no-git isolated workspaces, distribute byte-
-  identical content to Sol/Terra, and freeze both raw N=56 outputs before any agreement computation.
+- Next action: receive, validate and freeze both raw N=56 outputs; only then compute pre-adjudication
+  agreement and prepare the mandatory owner adjudication package.

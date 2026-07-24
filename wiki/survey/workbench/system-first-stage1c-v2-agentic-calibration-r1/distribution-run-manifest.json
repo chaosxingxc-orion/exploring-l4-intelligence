@@ -1,0 +1,55 @@
+{
+  "schema": "sf-stage1c-v2-agentic-calibration-distribution-run-v1",
+  "artifact_id": "SF-STAGE1C-V2-AGENTIC-CALIBRATION-R1-DISTRIBUTION",
+  "status": "N56_TWO_CODERS_DISTRIBUTED_RESPONSES_PENDING",
+  "method_contract_commit": "ee12a3a79bd578df996c44c4bdb2dbc709e2f616",
+  "method_review_verdict": "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
+  "distribution_timestamp": "2026-07-25T00:44:23+08:00",
+  "N": 56,
+  "coder_visible_artifact_count": 8,
+  "source_rendition_count": 135,
+  "source_renditions_bytes_verified": true,
+  "content_bundle_sha256": "03674710223ad3c457e6568bdc83b66c1491abd84dd4e6d2c16495065e3ead64",
+  "prompt_sha256": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e",
+  "delivery_receipts_artifact_sha256": "75b9d1ac07d7da1ad93955cb98758e8650dec68b4566ac7f1689d8544ede8eb7",
+  "runtime_intake_artifact_sha256": "3d55d56bff24f08b229b90c4d416f3b4b7be79c7d4585929c28c4a49eb4205ef",
+  "isolation_root": "D:/chao_workspace/stage1c-calibration/rc2r3-20260724-r1",
+  "shared_source_root": "D:/chao_workspace/stage1c-calibration/rc2r3-20260724-r1/shared-source",
+  "git_metadata_present_in_isolation": false,
+  "coders": [
+    {
+      "coder_slot": "A",
+      "coder_id": "STAGE1C-RC2R3-CODER-A-R1",
+      "transaction_id": "STAGE1C-RC2R3-TX-A-R1",
+      "model": "gpt-5.6-sol",
+      "task_id": "/root/stage1c_coder_a_r1",
+      "process_id": "CODEX-SUBAGENT-/root/stage1c_coder_a_r1",
+      "delivery_receipt_sha256": "631747d9f61f67c32f0b1f9e7081abc053dc1bcf3ae609a9338054ab40c67bf3",
+      "response_status": "PENDING"
+    },
+    {
+      "coder_slot": "B",
+      "coder_id": "STAGE1C-RC2R3-CODER-B-R1",
+      "transaction_id": "STAGE1C-RC2R3-TX-B-R1",
+      "model": "gpt-5.6-terra",
+      "task_id": "/root/stage1c_coder_b_r1",
+      "process_id": "CODEX-SUBAGENT-/root/stage1c_coder_b_r1",
+      "delivery_receipt_sha256": "228767d27211017f19cdb241c0ca2de2cdf00fa3414be4a80b5b0046d9403680",
+      "response_status": "PENDING"
+    }
+  ],
+  "independence_claim": "TWO_FRESH_NO_FORK_ISOLATED_MODEL_CODERS_NOT_PROVIDER_INDEPENDENT_NOT_HUMAN_INTER_RATER",
+  "execution": {
+    "literature_coding_model_calls_started": true,
+    "coder_distributed": true,
+    "both_raw_outputs_frozen": false,
+    "agreement_computed": false,
+    "owner_adjudication_completed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "full_mapping_signed": false,
+    "push_authorized": false
+  }
+}
