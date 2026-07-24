@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2 bounded method repair authorization**.
-  Endpoint: `AGENTIC_RC2_REVIEW_WITHHELD_BOUNDED_DEFECTS`.
+- Gate: **Stage-1C v2 Agentic RC2R1 bounded method repair**.
+  Endpoint: `AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 - Authority: owner excludes specialized Duplex-model tasks from research, reproduction and branch
   selection. This never committed RC2 transaction may repair scope and close known sources only.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
@@ -31,6 +31,8 @@
   no broad discovery, research model/API call, metric run, reproduction or prototype.
   The problem ranking and selection remain withheld.
 - H5 remains withheld; H5-dependent evidence cannot support modality conclusions.
-- Next action: owner reviews the bounded findings. Repair requires exact
-  `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR`; coder distribution remains closed. Full mapping
-  still requires a new post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
+- Authority: exact `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` plus the accepted continuation
+  plan permits RC2R1 repair and local no-push milestones. Distribution activates only after
+  `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; owner adjudication remains mandatory.
+- Next action: implement and independently review RC2R1. Full mapping still requires a new
+  post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.

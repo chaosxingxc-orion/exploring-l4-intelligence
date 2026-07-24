@@ -9,6 +9,7 @@ Current authority remains in `wiki/Research-Objective.md` and `wiki/survey/curre
 | `doctoral-supervisor-review` | reviewer-facing doctoral-supervisor assessment | `wiki/audit/system-first-stage1c-v2-precalibration/doctoral-supervisor-review/2026-07-24-stage1c-v2-precalibration-doctoral-supervisor-review.md` @ `6aee41c93a5543797be32af11690d49d2890ff02` | `WITHHOLD_CALIBRATION_EXECUTION_PENDING_BOUNDED_RC2_REPAIR; CONTINUE_BOUNDED_METHOD_REPAIR` |
 | `owner-rc2-direction` | owner direction record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2-direction/2026-07-24-owner-rc2-direction.md` @ `1adb456748e14f9c1ab4cf7407eedf50821ac752` | `EXECUTE_AGENTIC_RC2_SCOPE_CORRECTION; AUTHORIZE_ONE_LOCAL_NO_PUSH_COMMIT_AND_REVIEW_SUBMISSION; CALIBRATION_DISTRIBUTION_WITHHELD` |
 | `agentic-rc2-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2-independent-method-review.md` @ `69694515e65acb6355f390dc865e0ebc0d6d2c18` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
+| `owner-rc2r1-continuation-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r1-continuation-authorization/2026-07-24-owner-rc2r1-continuation-authorization.md` @ `f699528ab1d6bba7b2777f814e6f2bd53e76eb88` | `AUTHORIZE_RC2R1_BOUNDED_REPAIR; CONDITIONAL_CALIBRATION_AFTER_ACCEPT; LOCAL_NO_PUSH_MILESTONES` |
 
 This token authorizes only bounded consolidation, schema/codebook construction, known-candidate
 official-source closure and calibration preparation under the recorded prerequisites. It excludes
@@ -28,3 +29,8 @@ The commit-bound Agentic RC2 review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`. It
 method-contract classes: agreement intake/per-critical-field gates are fail open, and BORROW/
 REPRODUCE prerequisites are not machine-enforced. The advisory verdict has no authority effect;
 bounded repair now requires a new owner authorization.
+
+The owner subsequently supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` and approved the
+decision-complete continuation plan. This authorizes the bounded RC2R1 repair and, only after an
+independent ACCEPT, conditional calibration distribution. Owner adjudication, the post-calibration
+mapping signature and final family/branch portfolio signature remain mandatory.

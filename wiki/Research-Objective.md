@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2 review withheld with bounded defects"
+last_refresh: "2026-07-24 — Agentic RC2R1 bounded repair authorized"
 ---
 
 # Research Objective & Current State
@@ -10,19 +10,20 @@ last_refresh: "2026-07-24 — Agentic RC2 review withheld with bounded defects"
 
 ## Current gate and authority
 
-The active gate is **Stage-1C v2 Agentic RC2 bounded method repair authorization**.
+The active gate is **Stage-1C v2 Agentic RC2R1 bounded method repair**.
 The owner excluded specialized Duplex-model tasks from the research, reproduction and branch route.
-The current endpoint is `AGENTIC_RC2_REVIEW_WITHHELD_BOUNDED_DEFECTS`.
+The current endpoint is `AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 
 Stage-1B v5 at `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the signed 320-work
 calibration union remain immutable. The first RC2 submission is immutable; current work only appends
 its commit-bound review transaction and refreshes HOT/CURRENT truth.
 
 Commit `74cf8e4b565a9e53ff40f9dbc34961ede853dd57` froze the first Agentic RC2 submission without push.
-The independent advisory review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`; it grants no repair or
-execution authority.
-Coder distribution, agreement, 320-work mapping, research models/APIs, benchmark metrics, paper
-reproduction, prototypes, problem/branch selection and novelty verdicts remain unauthorized.
+The independent advisory review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`. The owner subsequently gave
+`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` for RC2R1 and local no-push milestones. Distribution is conditional
+on `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; full mapping remains separately signed.
+research models/APIs, benchmark metrics, paper reproduction, prototypes and novelty verdicts remain
+unauthorized.
 
 ## Research north star
 
@@ -66,11 +67,10 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 
 ## Next action
 
-Owner should review the bounded defects. If accepted, the next exact authorization is
-`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR`. Repair must remain limited to agreement intake and
-per-field gates, BORROW/REPRODUCE validation, two ACL receipts, leakage-scan coverage and their tests.
-Coder distribution still requires a later independent ACCEPT plus separate distribution authority;
-full mapping and Stage-2A remain separately gated.
+Implement the authorized RC2R1 repair, freeze it in a local no-push commit and obtain the exact
+independent acceptance `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`. Acceptance activates
+the authorized N=56 distribution route; owner adjudication remains mandatory. Full mapping still
+requires post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
 
 ## Supersession rule
 
