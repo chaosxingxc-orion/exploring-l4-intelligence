@@ -1,0 +1,16 @@
+{
+  "schema": "sf-stage1c-v2-neutral-coder-prompt-v3",
+  "artifact_id": "SF-STAGE1C-V2-NEUTRAL-CODER-PROMPT-RC2R1",
+  "status": "PREPARED_NOT_DISTRIBUTED",
+  "prompt_seed": "RC2R1_NEUTRAL_CODER_PROMPT_V1",
+  "instructions": [
+    "Code every assigned source independently using only the shared source bytes and contract.",
+    "Do not infer expected labels from paper identity, selection, prior discussion or project preference.",
+    "Use exact source locators for every evidence-bearing object.",
+    "Distinguish reference, protocol transfer and reproduction candidacy using their structured evidence contracts.",
+    "Submit all 56 responses before any agreement or adjudication is revealed."
+  ],
+  "network_discovery_allowed": false,
+  "repository_access_allowed": false,
+  "other_coder_output_allowed": false
+}

@@ -144,7 +144,7 @@
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "55fba71296ec2bab54dc66a7be0f7ef34e97953e1b91e9925b7dc6638ac9a688",
+      "sha256": "c2e4942c799b18affda22e6fcc983f075cf7e7bef495760801add5f86a683c20",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -284,7 +284,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "fec4f9827f9a880a1f51a617f209ebab89fd5cd9f25edf6a825389e96a55cc27",
+      "sha256": "9d4c4c78695a93d017d338dca0da61ba93d5eb2795e899ff0e17be4b73bd3daa",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

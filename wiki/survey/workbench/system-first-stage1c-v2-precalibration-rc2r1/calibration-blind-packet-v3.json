@@ -1,0 +1,3652 @@
+{
+  "schema": "sf-stage1c-v2-calibration-blind-packet-v3",
+  "artifact_id": "SF-STAGE1C-V2-LABEL-HIDDEN-PACKET-56-RC2R1",
+  "purpose": "LABEL_HIDDEN_PAPER_AND_OBJECT_LEVEL_CALIBRATION_INPUT",
+  "status": "PREPARED_NOT_DISTRIBUTED",
+  "contains_prior_labels": false,
+  "repository_access_should_be_withheld": true,
+  "calibration_response_schema_id": "sf-stage1c-v2-calibration-response-schema-v3",
+  "source_byte_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+  "items": [
+    {
+      "packet_item_id": "CAL-2026.acl-long.1615",
+      "canonical_id": "acl:2026.acl-long.1615",
+      "title": "S2S-Arena: Evaluating Paralinguistic Instruction Following in Speech-to-Speech Models",
+      "source_item_id": "SRC-2026.acl-long.1615",
+      "source_revision": "ACL_ANTHOLOGY_PUBLICATION_VERSION:2026.acl-long.1615",
+      "primary_rendition_sha256": "081805a63ca2ef8fa04b1378d6aa2cda86b904d3cf9ccd5f0d496593df86a6b1",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "acl:2026.acl-long.1615",
+        "packet_item_id": "CAL-2026.acl-long.1615",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2026.findings-eacl.151",
+      "canonical_id": "acl:2026.findings-eacl.151",
+      "title": "Hearing Between the Lines: Unlocking the Reasoning Power of LLMs for Speech Evaluation",
+      "source_item_id": "SRC-2026.findings-eacl.151",
+      "source_revision": "ACL_ANTHOLOGY_PUBLICATION_VERSION:2026.findings-eacl.151",
+      "primary_rendition_sha256": "da6a78305f6f62dcf38a88b4f2d3a9be93001c3d5591ee621dae6463cffc153c",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "acl:2026.findings-eacl.151",
+        "packet_item_id": "CAL-2026.findings-eacl.151",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2305.13738",
+      "canonical_id": "arxiv:2305.13738",
+      "title": "i-Code Studio: A Configurable and Composable Framework for Integrative AI",
+      "source_item_id": "SRC-2305.13738",
+      "source_revision": "arXiv:2305.13738v1",
+      "primary_rendition_sha256": "3c6dbf7105a849b62bf0a29268061eb11be1c9fd2aac883f3517a3d7ae002bde",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2305.13738",
+        "packet_item_id": "CAL-2305.13738",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2402.17753",
+      "canonical_id": "arxiv:2402.17753",
+      "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents",
+      "source_item_id": "SRC-2402.17753",
+      "source_revision": "arXiv:2402.17753v1",
+      "primary_rendition_sha256": "218188e1d66a553afe324491e3e5e5d0af107196c9ff32c65bb3640ebf638539",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2402.17753",
+        "packet_item_id": "CAL-2402.17753",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2405.20834",
+      "canonical_id": "arxiv:2405.20834",
+      "title": "Retrieval Meets Reasoning: Even High-school Textbook Knowledge Benefits Multimodal Reasoning",
+      "source_item_id": "SRC-2405.20834",
+      "source_revision": "arXiv:2405.20834v1",
+      "primary_rendition_sha256": "1cceda9e711a4e512d13a9f7ffbd123f49ef56c55e9924aa396e751d73da6847",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2405.20834",
+        "packet_item_id": "CAL-2405.20834",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2505.00684",
+      "canonical_id": "arxiv:2505.00684",
+      "title": "Visual Test-time Scaling for GUI Agent Grounding",
+      "source_item_id": "SRC-2505.00684",
+      "source_revision": "arXiv:2505.00684v2",
+      "primary_rendition_sha256": "f849eb04c61ff5ef7881022a3f24d6a1627e6912ae4135b7be0fd84e2258219c",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2505.00684",
+        "packet_item_id": "CAL-2505.00684",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2505.17862",
+      "canonical_id": "arxiv:2505.17862",
+      "title": "Daily-Omni: Towards Audio-Visual Reasoning with Temporal Alignment",
+      "source_item_id": "SRC-2505.17862",
+      "source_revision": "arXiv:2505.17862v2",
+      "primary_rendition_sha256": "f471c70a40368ca17ab83f33509e614af5cba2127debec963fa9c470d9eba904",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2505.17862",
+        "packet_item_id": "CAL-2505.17862",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2506.05984",
+      "canonical_id": "arxiv:2506.05984",
+      "title": "Audio-Aware Large Language Models as Judges for Speaking Styles",
+      "source_item_id": "SRC-2506.05984",
+      "source_revision": "arXiv:2506.05984v1",
+      "primary_rendition_sha256": "2baac3946ddad799dc61510d1a59dac97febb87d80e915daa28a3a6267486d0c",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2506.05984",
+        "packet_item_id": "CAL-2506.05984",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2506.23049",
+      "canonical_id": "arxiv:2506.23049",
+      "title": "AURA: Agent for Understanding, Reasoning, and Automated Tool Use in Voice-Driven Tasks",
+      "source_item_id": "SRC-2506.23049",
+      "source_revision": "arXiv:2506.23049v1",
+      "primary_rendition_sha256": "e8fb29bae673fb543291376cb6d19a2e8d139159b08019e2e2b150c6c5c96bc3",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2506.23049",
+        "packet_item_id": "CAL-2506.23049",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2507.10859",
+      "canonical_id": "arxiv:2507.10859",
+      "title": "MultiVox: A Benchmark for Evaluating Voice Assistants for Multimodal Interactions",
+      "source_item_id": "SRC-2507.10859",
+      "source_revision": "arXiv:2507.10859v2",
+      "primary_rendition_sha256": "4f802cd36fd6d3d7ad4dfeaa655c28367de5f0b535476a005433963bfce867da",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2507.10859",
+        "packet_item_id": "CAL-2507.10859",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2507.12705",
+      "canonical_id": "arxiv:2507.12705",
+      "title": "AudioJudge: Understanding What Works in Large Audio Model Based Speech Evaluation",
+      "source_item_id": "SRC-2507.12705",
+      "source_revision": "arXiv:2507.12705v1",
+      "primary_rendition_sha256": "bfae37edf89419cfe0fcbbc26e7774a39bc9dc513b1298070739e188a280a89f",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2507.12705",
+        "packet_item_id": "CAL-2507.12705",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.10015",
+      "canonical_id": "arxiv:2508.10015",
+      "title": "RealTalk-CN: A Realistic Chinese Speech-Text Dialogue Benchmark With Cross-Modal Interaction Analysis",
+      "source_item_id": "SRC-2508.10015",
+      "source_revision": "arXiv:2508.10015v1",
+      "primary_rendition_sha256": "5ccb0113ed100606d8bb534f27f39ef6755542c923b100ae52ea8e32fee313d7",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2508.10015",
+        "packet_item_id": "CAL-2508.10015",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.18240",
+      "canonical_id": "arxiv:2508.18240",
+      "title": "MTalk-Bench: Evaluating Speech-to-Speech Models in Multi-Turn Dialogues via Arena-style and Rubrics Protocols",
+      "source_item_id": "SRC-2508.18240",
+      "source_revision": "arXiv:2508.18240v2",
+      "primary_rendition_sha256": "e5f0b89106fc1471cb0cd96e3c0a5d93067eb4a857558484b74bd1b9231b3e95",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2508.18240",
+        "packet_item_id": "CAL-2508.18240",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.19828",
+      "canonical_id": "arxiv:2508.19828",
+      "title": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning",
+      "source_item_id": "SRC-2508.19828",
+      "source_revision": "arXiv:2508.19828v5",
+      "primary_rendition_sha256": "c206af4e792e9550f2aaec8a6c4d9b141d1ddcb587e781d7866870c8f3e4dd4f",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2508.19828",
+        "packet_item_id": "CAL-2508.19828",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2509.16971",
+      "canonical_id": "arxiv:2509.16971",
+      "title": "AudioGenie-Reasoner: A Training-Free Multi-Agent Framework for Coarse-to-Fine Audio Deep Reasoning",
+      "source_item_id": "SRC-2509.16971",
+      "source_revision": "arXiv:2509.16971v2",
+      "primary_rendition_sha256": "b5ae5e76ea4bc9c5e0f208e25b9ebc952d640e51a6ef0b3941d9785a96c89269",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2509.16971",
+        "packet_item_id": "CAL-2509.16971",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.02995",
+      "canonical_id": "arxiv:2510.02995",
+      "title": "AudioToolAgent: An Agentic Framework for Audio-Language Models",
+      "source_item_id": "SRC-2510.02995",
+      "source_revision": "arXiv:2510.02995v2",
+      "primary_rendition_sha256": "aa0fce22c4efd4dbae6cb13f35c956e0a62124d1ac129d483324145a2528d866",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.02995",
+        "packet_item_id": "CAL-2510.02995",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.07838",
+      "canonical_id": "arxiv:2510.07838",
+      "title": "Full-Duplex-Bench-v2: A Multi-Turn Evaluation Framework for Duplex Dialogue Systems with an Automated Examiner",
+      "source_item_id": "SRC-2510.07838",
+      "source_revision": "arXiv:2510.07838v2",
+      "primary_rendition_sha256": "689e2e73b3bbc47cd51a9bfade7c05a2c3035fe364e3a7a6eef57455e2d2a1c4",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.07838",
+        "packet_item_id": "CAL-2510.07838",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.07978",
+      "canonical_id": "arxiv:2510.07978",
+      "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
+      "source_item_id": "SRC-2510.07978",
+      "source_revision": "arXiv:2510.07978v3",
+      "primary_rendition_sha256": "d9a6310f274080b586c83722791da432e73059c0ba63757c61fe0fde8c63bc14",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.07978",
+        "packet_item_id": "CAL-2510.07978",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.11098",
+      "canonical_id": "arxiv:2510.11098",
+      "title": "VCB Bench: An Evaluation Benchmark for Audio-Grounded Large Language Model Conversational Agents",
+      "source_item_id": "SRC-2510.11098",
+      "source_revision": "arXiv:2510.11098v5",
+      "primary_rendition_sha256": "fbc38c4f5b8e99fb8de6795aaeea44fe01e36a3c492594459e685276cdc63f03",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.11098",
+        "packet_item_id": "CAL-2510.11098",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.15421",
+      "canonical_id": "arxiv:2510.15421",
+      "title": "When Seeing Is not Enough: Revealing the Limits of Active Reasoning in MLLMs",
+      "source_item_id": "SRC-2510.15421",
+      "source_revision": "arXiv:2510.15421v1",
+      "primary_rendition_sha256": "b5aa71af72c783098d83a7de0914682e70a6bf68c8b55ff2fb57bf78419bb187",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.15421",
+        "packet_item_id": "CAL-2510.15421",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.20867",
+      "canonical_id": "arxiv:2510.20867",
+      "title": "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
+      "source_item_id": "SRC-2510.20867",
+      "source_revision": "arXiv:2510.20867v1",
+      "primary_rendition_sha256": "684a808c3e0b7408f253c1d01470b2ba65d04a2244cbde72f3f18e325d08eedd",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2510.20867",
+        "packet_item_id": "CAL-2510.20867",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.11109",
+      "canonical_id": "arxiv:2512.11109",
+      "title": "Limits and Gains of Test-Time Scaling in Vision-Language Reasoning",
+      "source_item_id": "SRC-2512.11109",
+      "source_revision": "arXiv:2512.11109v1",
+      "primary_rendition_sha256": "9d4135c1eff2aa9c00584a45c0c05a96b9e78764df15a11eb71122d774abdf68",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2512.11109",
+        "packet_item_id": "CAL-2512.11109",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.14865",
+      "canonical_id": "arxiv:2512.14865",
+      "title": "Audio MultiChallenge: A Multi-Turn Evaluation of Spoken Dialogue Systems on Natural Human Interaction",
+      "source_item_id": "SRC-2512.14865",
+      "source_revision": "arXiv:2512.14865v1",
+      "primary_rendition_sha256": "d724dd047b476408bef588fac478984c0237e76a84c7e9096ff64f330d145e57",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2512.14865",
+        "packet_item_id": "CAL-2512.14865",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.16978",
+      "canonical_id": "arxiv:2512.16978",
+      "title": "A Benchmark for Omni-Modal Reasoning in Long Videos",
+      "source_item_id": "SRC-2512.16978",
+      "source_revision": "arXiv:2512.16978v2",
+      "primary_rendition_sha256": "8ffe64c4fd713b45599e502198597d38fbf7b9e56e7376456f43cde4c4b50dae",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2512.16978",
+        "packet_item_id": "CAL-2512.16978",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.01885",
+      "canonical_id": "arxiv:2601.01885",
+      "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents",
+      "source_item_id": "SRC-2601.01885",
+      "source_revision": "arXiv:2601.01885v2",
+      "primary_rendition_sha256": "73f24aaf8234d38eb96a27b465c7da4f370b91d71823cb518641015e0330382c",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2601.01885",
+        "packet_item_id": "CAL-2601.01885",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.03515",
+      "canonical_id": "arxiv:2601.03515",
+      "title": "Mem-Gallery: Benchmarking Multimodal Long-Term Conversational Memory for MLLM Agents",
+      "source_item_id": "SRC-2601.03515",
+      "source_revision": "arXiv:2601.03515v1",
+      "primary_rendition_sha256": "afb731ea1d9385e158565ef76f015762fd79ef300cbdb7659359ca77ff1884db",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2601.03515",
+        "packet_item_id": "CAL-2601.03515",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.09413",
+      "canonical_id": "arxiv:2601.09413",
+      "title": "Speech-Hands: A Self-Reflection Voice Agentic Approach to Speech Recognition and Audio Reasoning with Omni Perception",
+      "source_item_id": "SRC-2601.09413",
+      "source_revision": "arXiv:2601.09413v2",
+      "primary_rendition_sha256": "771464dd032d6df5d285cdd63050e4ceaebb01ae681599b7662bc2de335a1107",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2601.09413",
+        "packet_item_id": "CAL-2601.09413",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.19935",
+      "canonical_id": "arxiv:2601.19935",
+      "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents",
+      "source_item_id": "SRC-2601.19935",
+      "source_revision": "arXiv:2601.19935v1",
+      "primary_rendition_sha256": "c3901845afa60e74853d6e93686062da6a349cd828eb504d13fec287bdb46b91",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2601.19935",
+        "packet_item_id": "CAL-2601.19935",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.03707",
+      "canonical_id": "arxiv:2602.03707",
+      "title": "OmniRAG-Agent: Agentic Omnimodal Reasoning for Low-Resource Long Audio-Video Question Answering",
+      "source_item_id": "SRC-2602.03707",
+      "source_revision": "arXiv:2602.03707v4",
+      "primary_rendition_sha256": "7c58b6540b07a3bde7efa0600a08f8d934a95f939e3c2512032d9f6b98ea1a18",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2602.03707",
+        "packet_item_id": "CAL-2602.03707",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.07624",
+      "canonical_id": "arxiv:2602.07624",
+      "title": "M2A: Multimodal Memory Agent with Dual-Layer Hybrid Memory for Long-Term Personalized Interactions",
+      "source_item_id": "SRC-2602.07624",
+      "source_revision": "arXiv:2602.07624v1",
+      "primary_rendition_sha256": "59bf30845bb5d4666dcb686dbd1a95d6b4a9e2f9ffa0663ecb0a4afc27934f4f",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2602.07624",
+        "packet_item_id": "CAL-2602.07624",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.12670",
+      "canonical_id": "arxiv:2602.12670",
+      "title": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      "source_item_id": "SRC-2602.12670",
+      "source_revision": "arXiv:2602.12670v4",
+      "primary_rendition_sha256": "e987ebc3f0084a1ffc8acbca58259e33120b95fcef3876abfad060e169cf210b",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2602.12670",
+        "packet_item_id": "CAL-2602.12670",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.01145",
+      "canonical_id": "arxiv:2603.01145",
+      "title": "AutoSkill: Experience-Driven Lifelong Learning via Skill Self-Evolution",
+      "source_item_id": "SRC-2603.01145",
+      "source_revision": "arXiv:2603.01145v2",
+      "primary_rendition_sha256": "fc5158e61bf7a551987a51818d2b3d41c88c5c44dc27eb696e8e597ec8ed2413",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2603.01145",
+        "packet_item_id": "CAL-2603.01145",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.12056",
+      "canonical_id": "arxiv:2603.12056",
+      "title": "XSkill: Continual Learning from Experience and Skills in Multimodal Agents",
+      "source_item_id": "SRC-2603.12056",
+      "source_revision": "arXiv:2603.12056v3",
+      "primary_rendition_sha256": "27ed2d53ad426ebd7d9c8dcfeceb4f8babb452c4a32d17ff925bb85f3c7def2d",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2603.12056",
+        "packet_item_id": "CAL-2603.12056",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.16924",
+      "canonical_id": "arxiv:2603.16924",
+      "title": "SimulU: Training-free Policy for Long-form Simultaneous Speech-to-Speech Translation",
+      "source_item_id": "SRC-2603.16924",
+      "source_revision": "arXiv:2603.16924v1",
+      "primary_rendition_sha256": "66421173cd988f1e83c49a395cbb37ec186b779c30171976c566e698c2c0480b",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2603.16924",
+        "packet_item_id": "CAL-2603.16924",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.28088",
+      "canonical_id": "arxiv:2603.28088",
+      "title": "GEMS: Agent-Native Multimodal Generation with Memory and Skills",
+      "source_item_id": "SRC-2603.28088",
+      "source_revision": "arXiv:2603.28088v1",
+      "primary_rendition_sha256": "e34c537c488e9b0f59bec630e7c6fada034311221a8ef8da59f9e083b1c7be3f",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2603.28088",
+        "packet_item_id": "CAL-2603.28088",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.03964",
+      "canonical_id": "arxiv:2604.03964",
+      "title": "SKILLFOUNDRY: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources",
+      "source_item_id": "SRC-2604.03964",
+      "source_revision": "arXiv:2604.03964v1",
+      "primary_rendition_sha256": "45c1e8660b10021ff7efe80ec5dc69a0f658c43465117feceef699ce2b601b98",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.03964",
+        "packet_item_id": "CAL-2604.03964",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.23646",
+      "canonical_id": "arxiv:2512.23646",
+      "title": "Active Perception Agent for Omnimodal Audio-Video Understanding",
+      "source_item_id": "SRC-2512.23646",
+      "source_revision": "arXiv:2512.23646v2",
+      "primary_rendition_sha256": "ef35c9750d956e445f53d907408c23ef7afd7c07678520761b3ce0e2ae25c627",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2512.23646",
+        "packet_item_id": "CAL-2512.23646",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.08064",
+      "canonical_id": "arxiv:2604.08064",
+      "title": "ImplicitMemBench: Measuring Unconscious Behavioral Adaptation in Large Language Models",
+      "source_item_id": "SRC-2604.08064",
+      "source_revision": "arXiv:2604.08064v2",
+      "primary_rendition_sha256": "564a1fd910eac88c31feb77cdf0c2181969fcce55b166548e4793cdca05a8a13",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.08064",
+        "packet_item_id": "CAL-2604.08064",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.15383",
+      "canonical_id": "arxiv:2604.15383",
+      "title": "Temporal Contrastive Decoding: A Training-Free Method for Large Audio-Language Models",
+      "source_item_id": "SRC-2604.15383",
+      "source_revision": "arXiv:2604.15383v1",
+      "primary_rendition_sha256": "e3c32dabf8d029ce33f2a71da71e740ca9d5f9ce8c48e77051bf080d9351ecb9",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.15383",
+        "packet_item_id": "CAL-2604.15383",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.17308",
+      "canonical_id": "arxiv:2604.17308",
+      "title": "SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents",
+      "source_item_id": "SRC-2604.17308",
+      "source_revision": "arXiv:2604.17308v1",
+      "primary_rendition_sha256": "aa76d6f4b4343416d6de7639b7cd05f10022aef9576cf9cb6214410c07c798a4",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.17308",
+        "packet_item_id": "CAL-2604.17308",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.22821",
+      "canonical_id": "arxiv:2604.22821",
+      "title": "Audio2Tool: Speak, Call, Act -- A Dataset for Benchmarking Speech Tool Use",
+      "source_item_id": "SRC-2604.22821",
+      "source_revision": "arXiv:2604.22821v2",
+      "primary_rendition_sha256": "c3365e5474f0da450a3d4acaccd985bb8c5a3c169c5bb98dceb96a135669f4c0",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.22821",
+        "packet_item_id": "CAL-2604.22821",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.24594",
+      "canonical_id": "arxiv:2604.24594",
+      "title": "Skill Retrieval Augmentation for Agentic AI",
+      "source_item_id": "SRC-2604.24594",
+      "source_revision": "arXiv:2604.24594v3",
+      "primary_rendition_sha256": "cb1b2aaba98991b5d4a47ba0d3c0921c3dde51d83c250b26f5b729b1b0a3b03f",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.24594",
+        "packet_item_id": "CAL-2604.24594",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.25122",
+      "canonical_id": "arxiv:2604.25122",
+      "title": "M3-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering",
+      "source_item_id": "SRC-2604.25122",
+      "source_revision": "arXiv:2604.25122v1",
+      "primary_rendition_sha256": "d82d7a6349f754edfb366b982d2497df4f71e40815e04cd338e7c0f25e5089db",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2604.25122",
+        "packet_item_id": "CAL-2604.25122",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.08762",
+      "canonical_id": "arxiv:2605.08762",
+      "title": "Omni-DeepSearch: A Benchmark for Audio-Driven Omni-Modal Deep Search",
+      "source_item_id": "SRC-2605.08762",
+      "source_revision": "arXiv:2605.08762v1",
+      "primary_rendition_sha256": "35f0d95c10442ac5ef1af653591d5943e0499057b9a143bd5687e1a97baa0d74",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.08762",
+        "packet_item_id": "CAL-2605.08762",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13277",
+      "canonical_id": "arxiv:2605.13277",
+      "title": "Utility-Oriented Visual Evidence Selection for Multimodal Retrieval-Augmented Generation",
+      "source_item_id": "SRC-2605.13277",
+      "source_revision": "arXiv:2605.13277v1",
+      "primary_rendition_sha256": "790c687fab5628a93342704e6fed912e817a3954c80435e23fdf4c9831e22c16",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.13277",
+        "packet_item_id": "CAL-2605.13277",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13527",
+      "canonical_id": "arxiv:2605.13527",
+      "title": "MMSkills: Towards Multimodal Skills for General Visual Agents",
+      "source_item_id": "SRC-2605.13527",
+      "source_revision": "arXiv:2605.13527v3",
+      "primary_rendition_sha256": "40610b5ae03b38e65af0711a8fb8302202a32a84c08dac71545cfcfc9a775ad7",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.13527",
+        "packet_item_id": "CAL-2605.13527",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13716",
+      "canonical_id": "arxiv:2605.13716",
+      "title": "SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems",
+      "source_item_id": "SRC-2605.13716",
+      "source_revision": "arXiv:2605.13716v1",
+      "primary_rendition_sha256": "b56e5f031d1ee2a480e2b21d840755ad894cf7d10936d8bf0ac7f384cbdefbfc",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.13716",
+        "packet_item_id": "CAL-2605.13716",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.15019",
+      "canonical_id": "arxiv:2605.15019",
+      "title": "From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG",
+      "source_item_id": "SRC-2605.15019",
+      "source_revision": "arXiv:2605.15019v1",
+      "primary_rendition_sha256": "b2d70d39b2fe0759bfe5a66feac34189431afea07486f9075958cae0b7788b13",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.15019",
+        "packet_item_id": "CAL-2605.15019",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.28020",
+      "canonical_id": "arxiv:2605.28020",
+      "title": "The Missing Piece in Pre-trained Model Evaluation: Reward-Guided Decoding Unlocks Task-Oriented Behavior Without Parameter Updates",
+      "source_item_id": "SRC-2605.28020",
+      "source_revision": "arXiv:2605.28020v1",
+      "primary_rendition_sha256": "d1e026e7780474b9e4a40282e8674c5ecbc2e28637f85d33fb06a501ae2a91f7",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2605.28020",
+        "packet_item_id": "CAL-2605.28020",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.06915",
+      "canonical_id": "arxiv:2606.06915",
+      "title": "ThinkBooster: A Unified Framework for Seamless Test-Time Scaling of LLM Reasoning",
+      "source_item_id": "SRC-2606.06915",
+      "source_revision": "arXiv:2606.06915v2",
+      "primary_rendition_sha256": "f7dcc9023f481ee24f28ad3eaf355642045f9e9f61140bd44dc6c2dd4c7fc0ce",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.06915",
+        "packet_item_id": "CAL-2606.06915",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.09316",
+      "canonical_id": "arxiv:2606.09316",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "source_item_id": "SRC-2606.09316",
+      "source_revision": "arXiv:2606.09316v3",
+      "primary_rendition_sha256": "4fc9a0b0d5b14ba35cec22e8b116bef8bffb0b1a780d522807067357771c0048",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.09316",
+        "packet_item_id": "CAL-2606.09316",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.18448",
+      "canonical_id": "arxiv:2606.18448",
+      "title": "VISUALSKILL: Multimodal Skills for Computer-Use Agents",
+      "source_item_id": "SRC-2606.18448",
+      "source_revision": "arXiv:2606.18448v1",
+      "primary_rendition_sha256": "3a4492e3d6bd1c2def2f44b0ba0bb6a1e4671736598faf6510ff18356f53730a",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.18448",
+        "packet_item_id": "CAL-2606.18448",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.19341",
+      "canonical_id": "arxiv:2606.19341",
+      "title": "Native Active Perception as Reasoning for Omni-Modal Understanding",
+      "source_item_id": "SRC-2606.19341",
+      "source_revision": "arXiv:2606.19341v2",
+      "primary_rendition_sha256": "cc3e5c14132e27f7b30df4f11f323223321c2b9dee3a6eb342ebabdd240bd2de",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.19341",
+        "packet_item_id": "CAL-2606.19341",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.19595",
+      "canonical_id": "arxiv:2606.19595",
+      "title": "IHBench: Evaluating Post-Interruption Recovery in Voice Agents with Structured Workflows",
+      "source_item_id": "SRC-2606.19595",
+      "source_revision": "arXiv:2606.19595v1",
+      "primary_rendition_sha256": "604da0359aaf591597b908a594227c55858f16f944daa22d63a2f52485f767f3",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.19595",
+        "packet_item_id": "CAL-2606.19595",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.29538",
+      "canonical_id": "arxiv:2606.29538",
+      "title": "RESOURCE2SKILL: Distilling Executable Agent Skills from Human-Created Multimodal Resources",
+      "source_item_id": "SRC-2606.29538",
+      "source_revision": "arXiv:2606.29538v4",
+      "primary_rendition_sha256": "f328560aefd38ff1034a1cf06640581b30ed37a47dad48c851e7a54498d60aa5",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2606.29538",
+        "packet_item_id": "CAL-2606.29538",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2607.07985",
+      "canonical_id": "arxiv:2607.07985",
+      "title": "A Reliability Assessment of LALM Audio Judges for Full-Duplex Voice Agents",
+      "source_item_id": "SRC-2607.07985",
+      "source_revision": "arXiv:2607.07985v1",
+      "primary_rendition_sha256": "03c1f88e081ee289812db33532bb65713c97cb646189337994a3e645687c07fe",
+      "blank_response": {
+        "schema": "sf-stage1c-v2-calibration-response-v3",
+        "response_status": "BLANK_NOT_DISTRIBUTED",
+        "response_id": "PENDING",
+        "paper_id": "arxiv:2607.07985",
+        "packet_item_id": "CAL-2607.07985",
+        "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+        "coder_transaction_id": "PENDING",
+        "coder_id": "PENDING",
+        "paper_labels": {
+          "paper_disposition": "NOT_CODED",
+          "paper_role": "NOT_CODED",
+          "problem_nodes": [
+            "NOT_CODED"
+          ],
+          "intervention_axes": [
+            "NOT_CODED"
+          ],
+          "mm_level": "NOT_CODED",
+          "reference_borrow_reproduce": "NOT_CODED",
+          "access_regime": "NOT_CODED",
+          "empirical_experiment_present": null,
+          "agentic_scope": {
+            "scope_status": "NOT_CODED",
+            "loop_components": [
+              "NOT_CODED"
+            ],
+            "core_dependency": "NOT_CODED",
+            "capability_assets": [
+              "NOT_CODED"
+            ],
+            "control_role": "NOT_CODED",
+            "scope_reason": "PENDING"
+          }
+        },
+        "run_cells": [],
+        "observations": [],
+        "paired_comparisons": [],
+        "dataset_nodes": [],
+        "dataset_edges": [],
+        "claim_decisions": [],
+        "translation_or_compatibility_decisions": [],
+        "source_locators": [],
+        "object_absence_reasons": {
+          "run_cells": "NOT_CODED",
+          "observations": "NOT_CODED",
+          "paired_comparisons": "NOT_CODED",
+          "dataset_nodes": "NOT_CODED",
+          "dataset_edges": "NOT_CODED",
+          "claim_decisions": "NOT_CODED",
+          "translation_or_compatibility_decisions": "NOT_CODED"
+        },
+        "review_events": [],
+        "notes": [],
+        "protocol_transfer_evidence": [],
+        "reproduction_evidence": []
+      }
+    }
+  ]
+}

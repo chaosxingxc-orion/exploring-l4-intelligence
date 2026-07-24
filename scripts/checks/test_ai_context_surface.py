@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 24), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic RC2R1 bounded method repair",
+            "Stage-1C v2 Agentic RC2R1 independent method review",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,7 +1688,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED",
+            "AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR",
             "ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
@@ -1697,7 +1697,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "owner",
             "research models/APIs",
             "wiki/survey/current/README.md",
-            "system-first-stage1c-v2-precalibration/README.md",
+            "system-first-stage1c-v2-precalibration-rc2r1/README.md",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
             "Next action",
             "Supersession rule",

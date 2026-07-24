@@ -1,0 +1,598 @@
+{
+  "schema": "sf-stage1c-v2-reproduction-readiness-v3",
+  "artifact_id": "SF-STAGE1C-V2-REPRODUCTION-READINESS-RC2R1",
+  "status": "KNOWN_CANDIDATE_READ_ONLY_CLOSURE_NO_ANCHOR_SELECTED",
+  "shared_agent_protocol": [
+    "OBSERVATION",
+    "EXTERNAL_STATE",
+    "SIGNAL_OR_EVALUATOR",
+    "DECISION_RIGHT",
+    "ACTION_OR_TOOL",
+    "FEEDBACK",
+    "UPDATE_OR_REPAIR_OR_STOP"
+  ],
+  "primary_selection": "WITHHELD_PENDING_POST_CALIBRATION_ANCHOR_PROMOTION",
+  "fallback_selection": "WITHHELD_NO_FORCED_FALLBACK",
+  "candidate_priority": [
+    "CW-ARXIV-2509.16971",
+    "CW-ARXIV-2510.02995",
+    "CW-ARXIV-2604.22821"
+  ],
+  "validation_carriers": [
+    {
+      "asset_id": "MMAU-mini",
+      "role": "VALIDATION_CARRIER",
+      "revision": "42bd874593a0beed966e505411e896a808f9931f",
+      "license": "UNDECLARED_REQUIRES_REVIEW",
+      "local_state": "COMPLETE_2843372907_BYTES",
+      "task_split_evaluator_status": "TASK_AND_DATA_BOUND; EXACT_PROTOCOL_NOT_RUN"
+    },
+    {
+      "asset_id": "MMAR",
+      "role": "VALIDATION_CARRIER",
+      "revision": "3bd051123480e80d273ae9e8e9f1653f49010ac7",
+      "license": "CC-BY-NC-4.0",
+      "local_state": "COMPLETE_2994099985_BYTES",
+      "task_split_evaluator_status": "TASK_DATA_AND_ACCURACY_SCRIPT_BOUND; NOT_RUN"
+    }
+  ],
+  "selection_basis": "FAIL_CLOSED_UNTIL_TASK_MATCHED_METHOD_ENTRYPOINT_ACCESS_EVALUATOR_AND_LICENSE_ARE_ALL_CLOSED",
+  "selection_is_problem_or_branch_ranking": false,
+  "no_reproduction_executed": true,
+  "candidates": [
+    {
+      "closure_order": 1,
+      "canonical_work_id": "CW-ARXIV-2509.16971",
+      "title": "AudioGenie-Reasoner",
+      "status": "CANDIDATE_NOT_ANCHOR",
+      "project_relation": "DIRECT_METHOD_PRIMARY_CANDIDATE",
+      "capability_assets": [
+        "KNOWLEDGE",
+        "SKILL",
+        "MEMORY"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://github.com/ryysayhi/AudioGenie-Reasoner",
+        "https://arxiv.org/abs/2509.16971"
+      ],
+      "source_revision": "arXiv:2509.16971v2",
+      "official_repo_revision": "b80c9ce80b3f7f93241f4d8805ad84f8fbc76e73",
+      "license": "MIT",
+      "dataset_or_protocol": "MMAU-mini and MMAR audio reasoning",
+      "entrypoints": [
+        "scripts/run_reasoner.py",
+        "audio_reasoner/orchestration/orchestrator.py",
+        "audio_reasoner/augmentation/runner.py"
+      ],
+      "access_state": "LOCAL_PINNED_CODE; REMOTE_OPENAI_COMPATIBLE_PLANNER_AND_MODEL_ASSETS_REQUIRED",
+      "evaluator_contract": "TASK_ANSWER_EXACTNESS_OR_ACCURACY_PER_DATASET; NOT_RUN",
+      "local_state": "LOCAL_REPO_PINNED; MMAU_MINI_AND_MMAR_REVISION_PINNED",
+      "specialized_model_dependency": "NO_DUPLEX_CORE; AUDIO_CAPTIONER_WHISPER_AND_REMOTE_PLANNER_REQUIRED",
+      "strongest_blocker": "Dependency/model/tool revisions and remote planner endpoint are not fully locked; dataset adapters and evaluator invocation are not yet closed.",
+      "deviation_ledger": [
+        "Candidate closure is source inspection only.",
+        "Sufficiency/retry/stop is training-free non-reward control unless an explicit reward is coded.",
+        "A candidate is not an anchor and no reported result was reproduced."
+      ],
+      "source_to_target_translation": "DIRECT_SPEECH_AUDIO_METHOD; NO_CROSS_DOMAIN_TRANSLATION_REQUIRED",
+      "rejection_condition": "Reject as anchor if the task-matched entrypoint, frozen access, evaluator, or dependency lock cannot be closed without method redesign.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 2,
+      "canonical_work_id": "CW-ARXIV-2510.02995",
+      "title": "AudioToolAgent",
+      "status": "CANDIDATE_NOT_ANCHOR",
+      "project_relation": "TASK_MATCHED_NEAREST_PRIOR",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://github.com/GLJS/AudioToolAgent",
+        "https://arxiv.org/abs/2510.02995"
+      ],
+      "source_revision": "arXiv:2510.02995v2",
+      "official_repo_revision": "00e1bdcbd646202b42409cc4c1524ead2680dcb7",
+      "license": "NO_LICENSE_FILE_DETECTED_AT_OFFICIAL_HEAD",
+      "dataset_or_protocol": "MMAU, MMAR and MMAU-Pro; closed/open agent configurations",
+      "entrypoints": [
+        "main.py",
+        "scripts/launch_closed.sh",
+        "scripts/launch_open.sh",
+        "Evaluation/MMAR_Closed.py",
+        "Evaluation/MMAU_Closed.py",
+        "audiotoolagent/agent.py"
+      ],
+      "access_state": "PUBLIC_CODE; MIXED_LOCAL_MODELS_AND_VENDOR_APIS; CONFIG_SPECIFIC",
+      "evaluator_contract": "GROUND_TRUTH_OPTION_EXACTNESS_AND_ACCURACY_IN_EVALUATION_SCRIPTS; NOT_RUN",
+      "local_state": "OFFICIAL_REPO_REMOTE_INSPECTED_NOT_MATERIALIZED; DATA_CARRIERS_LOCAL",
+      "specialized_model_dependency": "NO_DUPLEX_CORE; EXTERNAL_TEXT_ORCHESTRATOR_OVER_AUDIO_TOOLS",
+      "strongest_blocker": "No repository license was detected, the repo is not locally pinned, and exact tool/API/model versions plus benchmark setup remain unclosed.",
+      "deviation_ledger": [
+        "Nearest prior is external orchestration, not automatically reward-guided control.",
+        "The text coordinator does not directly observe raw audio.",
+        "Official-source inspection did not execute an entrypoint or metric."
+      ],
+      "source_to_target_translation": "DIRECT_SPEECH_TOOL_ROUTING_PRIOR; COMPARE_ROUTING_AND_CONFLICT_ARBITRATION_ONLY",
+      "rejection_condition": "Reject as reproduction anchor if license, exact environment, benchmark entrypoint, or task-matched frozen-core access remains unresolved.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 3,
+      "canonical_work_id": "CW-ARXIV-2604.22821",
+      "title": "Audio2Tool",
+      "status": "INSTRUMENT_SUPPORT",
+      "project_relation": "LOCAL_SPEECH_TOOL_ACTION_EVALUATOR_CARRIER",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://audio2tool.github.io/",
+        "https://huggingface.co/datasets/RVtech/Audio2Tool",
+        "https://arxiv.org/abs/2604.22821"
+      ],
+      "source_revision": "arXiv:2604.22821v2",
+      "official_repo_revision": null,
+      "license": "CC-BY-NC-4.0",
+      "dataset_or_protocol": "16,843 queries, 36,421 audio files, 152 tools across eight tiers; expected_tool_call and parameters",
+      "entrypoints": [
+        "REVISION_BOUND_HF_ALLOWLIST_LOADER_REQUIRED"
+      ],
+      "access_state": "LOCAL_COMPLETE_DATA; TERMS_REVIEW_AND_ADAPTER_REQUIRED",
+      "evaluator_contract": "TOOL_NAME_AND_ARGUMENT_EXACTNESS_FROM_GOLD_FIELDS; NOT_RUN",
+      "local_state": "LOCAL_REVISION_f1388da9a3189541ab82adac88824a0661670c43; 71441_REMOTE_FILES; 10410773494_BYTES",
+      "specialized_model_dependency": "NONE_IN_DATASET; INSTRUMENT_ONLY",
+      "strongest_blocker": "The dataset is non-commercial, no project adapter is frozen, and 610 retained extras require a revision-bound allowlist.",
+      "deviation_ledger": [
+        "Measurement carrier only; never a method reproduction anchor.",
+        "Physical-directory enumeration is forbidden for the future loader.",
+        "No benchmark was run."
+      ],
+      "source_to_target_translation": "DIRECT_SPEECH_INSTRUMENT_FOR_TOOL_SELECTION_AND_ARGUMENT_FIDELITY",
+      "rejection_condition": "Reject a proposed arm if its outcome cannot be scored from revision-bound gold tool/argument fields without leakage.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 4,
+      "canonical_work_id": "CW-ARXIV-2510.07838",
+      "title": "Full-Duplex-Bench-v2",
+      "status": "REFERENCE_ONLY",
+      "project_relation": "REFERENCE_ONLY_OUT_OF_SCOPE_SPECIALIZED_SYSTEM",
+      "capability_assets": [
+        "NONE"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://github.com/DanielLin94144/Full-Duplex-Bench",
+        "https://arxiv.org/abs/2510.07838"
+      ],
+      "source_revision": "arXiv:2510.07838v2",
+      "official_repo_revision": "3e799c45a045256f47d5f1c9cda90157e2d2ec9e",
+      "license": "CC-BY-NC-4.0",
+      "dataset_or_protocol": "Specialized realtime duplex interaction benchmark",
+      "entrypoints": [
+        "REFERENCE_BOUNDARY_ONLY_NO_PROJECT_ENTRYPOINT"
+      ],
+      "access_state": "PUBLIC_REFERENCE; SPECIALIZED_REALTIME_SYSTEM_REQUIRED",
+      "evaluator_contract": "REFERENCE_ONLY; NO_PROJECT_EVALUATOR_ADOPTION",
+      "local_state": "SIGNED_OVERLAY_RETAINED_AS_ONE_BLIND_EXCLUSION_BOUNDARY",
+      "specialized_model_dependency": "REQUIRED",
+      "strongest_blocker": "The task requires a specialized duplex model/system and is outside the agentic research route.",
+      "deviation_ledger": [
+        "Retained only because it is a signed overlay and calibrates exclusion.",
+        "Cannot be reproduction candidate, CORE_MEMBER, or branch primary."
+      ],
+      "source_to_target_translation": "NONE_OUT_OF_SCOPE_SPECIALIZED_SYSTEM",
+      "rejection_condition": "Always reject from branch promotion under the owner scope ruling.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 5,
+      "canonical_work_id": "CW-ARXIV-2512.14865",
+      "title": "Audio MultiChallenge",
+      "status": "INSTRUMENT_SUPPORT_REFERENCE_ONLY",
+      "project_relation": "INSTRUMENT_SUPPORT_REFERENCE_ONLY",
+      "capability_assets": [
+        "MEMORY"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://huggingface.co/datasets/ScaleAI/audiomc",
+        "https://arxiv.org/abs/2512.14865"
+      ],
+      "source_revision": "arXiv:2512.14865v1",
+      "official_repo_revision": "90ea11040fd05f41cf433b90f97ada45d847c500",
+      "license": "MIT",
+      "dataset_or_protocol": "452 conversations, 47 speakers and 1,712 atomic rubrics",
+      "entrypoints": [
+        "HUGGINGFACE_PARQUET_LOADER",
+        "DATASET_CARD_CONVERSATION_HISTORY_BUILDER"
+      ],
+      "access_state": "LOCAL_DATA_COMPLETE; EXTERNAL_JUDGE_REQUIRED",
+      "evaluator_contract": "FIXED_CONTEXT_FINAL_TURN_ATOMIC_RUBRIC_JUDGE; NOT_RUN",
+      "local_state": "LOCAL_DATASET_PINNED_5283214702_BYTES",
+      "specialized_model_dependency": "NONE_IN_DATASET; INSTRUMENT_ONLY",
+      "strongest_blocker": "Fixed-context final-turn judging does not reproduce interactive recovery and depends on an external judge proxy.",
+      "deviation_ledger": [
+        "Fallback reproduction identity revoked.",
+        "May support memory measurement only after family compatibility review."
+      ],
+      "source_to_target_translation": "SPEECH_MEMORY_INSTRUMENT_ONLY",
+      "rejection_condition": "Reject if the proposed memory claim requires interactive repair or outcome-independent evaluation absent from this protocol.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 6,
+      "canonical_work_id": "CW-ARXIV-2512.16978",
+      "title": "LongShOTAgent",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "KNOWLEDGE_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "KNOWLEDGE"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2512.16978"
+      ],
+      "source_revision": "arXiv:2512.16978v2",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the knowledge decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 7,
+      "canonical_work_id": "CW-ARXIV-2512.23646",
+      "title": "Active Perception Agent",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "KNOWLEDGE_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "KNOWLEDGE"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2512.23646"
+      ],
+      "source_revision": "arXiv:2512.23646v2",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the knowledge decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 8,
+      "canonical_work_id": "CW-ARXIV-2606.18448",
+      "title": "VISUALSKILL",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "SKILL_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2606.18448"
+      ],
+      "source_revision": "arXiv:2606.18448v1",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the skill decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 9,
+      "canonical_work_id": "CW-ARXIV-2603.12056",
+      "title": "XSkill",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "SKILL_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2603.12056"
+      ],
+      "source_revision": "arXiv:2603.12056v3",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the skill decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 10,
+      "canonical_work_id": "CW-ARXIV-2605.13527",
+      "title": "MMSkills",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "SKILL_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2605.13527"
+      ],
+      "source_revision": "arXiv:2605.13527v3",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the skill decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 11,
+      "canonical_work_id": "CW-ARXIV-2606.09316",
+      "title": "Anything2Skill",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "SKILL_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2606.09316"
+      ],
+      "source_revision": "arXiv:2606.09316v3",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the skill decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 12,
+      "canonical_work_id": "CW-ARXIV-2606.29538",
+      "title": "RESOURCE2SKILL",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "SKILL_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "SKILL"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2606.29538"
+      ],
+      "source_revision": "arXiv:2606.29538v4",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the skill decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 13,
+      "canonical_work_id": "CW-ARXIV-2602.07624",
+      "title": "M2A",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "MEMORY_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "MEMORY"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2602.07624"
+      ],
+      "source_revision": "arXiv:2602.07624v1",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the memory decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 14,
+      "canonical_work_id": "CW-ARXIV-2601.03515",
+      "title": "Mem-Gallery",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "MEMORY_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "MEMORY"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2601.03515"
+      ],
+      "source_revision": "arXiv:2601.03515v1",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the memory decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    },
+    {
+      "closure_order": 15,
+      "canonical_work_id": "CW-ARXIV-2601.19935",
+      "title": "Mem2ActBench",
+      "status": "TRANSFER_ANALOGUE",
+      "project_relation": "MEMORY_CAPABILITY_FAMILY_ANALOGUE",
+      "capability_assets": [
+        "MEMORY"
+      ],
+      "read_only_closure_status": "EVIDENCE_BOUND_WITH_BLOCKERS",
+      "method_anchor_eligible": false,
+      "reproduction_eligible": false,
+      "official_sources": [
+        "https://arxiv.org/abs/2601.19935"
+      ],
+      "source_revision": "arXiv:2601.19935v1",
+      "official_repo_revision": null,
+      "license": "CODE_OR_ASSET_LICENSE_NOT_CLOSED_TRANSFER_REFERENCE_ONLY",
+      "dataset_or_protocol": "SOURCE_DOMAIN_PROTOCOL_REQUIRES_CELL_LEVEL_TRANSLATION_REVIEW",
+      "entrypoints": [
+        "NO_SPEECH_REPRODUCTION_ENTRYPOINT_CLAIMED"
+      ],
+      "access_state": "SOURCE_FULLTEXT_BOUND; TARGET_HARNESS_NOT_IMPLEMENTED",
+      "evaluator_contract": "SOURCE_EVALUATOR_REFERENCE_ONLY; TARGET_EVALUATOR_MUST_BE_REDEFINED",
+      "local_state": "LOCAL_FULLTEXT_BOUND_IN_STAGE1B_320_UNION",
+      "specialized_model_dependency": "NO_DUPLEX_DEPENDENCY_ASSERTED; SOURCE_DOMAIN_SYSTEM_MAY_DIFFER",
+      "strongest_blocker": "No speech/omni task-matched reproduction contract is closed; source-domain gains cannot be transferred numerically.",
+      "deviation_ledger": [
+        "Default role is TRANSFER_ANALOGUE, not reference-equivalent evidence.",
+        "Each future use requires source-to-target variable mapping and a rejection observation.",
+        "No code, model, metric, or prototype was run."
+      ],
+      "source_to_target_translation": "Translate only the memory decision structure into the shared observation-state-signal-decision-action-feedback-update-stop interface.",
+      "rejection_condition": "Reject transfer if the target speech variable is not interventionally corresponding, the outcome semantics differ, or the effect depends on source-only perception/training.",
+      "research_execution_performed": false
+    }
+  ]
+}

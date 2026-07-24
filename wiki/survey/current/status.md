@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R1 bounded method repair**.
-  Endpoint: `AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R1 independent method review**.
+  Endpoint: `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`.
 - Authority: owner excludes specialized Duplex-model tasks from research, reproduction and branch
   selection. This never committed RC2 transaction may repair scope and close known sources only.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
@@ -25,6 +25,9 @@
 - Review: commit `74cf8e4b565a9e53ff40f9dbc34961ede853dd57` was reviewed without push. Verdict is
   `WITHHOLD_WITH_BOUNDED_DEFECTS`: exact-N/completed-response agreement intake, per-critical-field
   object gates and BORROW/REPRODUCE semantic guards are P0; ACL receipts and value-scan breadth are P1.
+- RC2R1 closure: exact N=56/provenance-bound intake, per-path object gates, structured transfer and
+  reproduction evidence, two ACL official receipts and all-metadata leakage scanning pass Windows
+  and WSL checks. The new package remains undistributed pending independent ACCEPT.
 - Execution: coder not distributed; agreement/adjudication not computed; no research model/API,
   metric, reproduction, prototype, family/branch selection or novelty verdict.
 - Scope provenance remains `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
@@ -34,5 +37,5 @@
 - Authority: exact `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` plus the accepted continuation
   plan permits RC2R1 repair and local no-push milestones. Distribution activates only after
   `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; owner adjudication remains mandatory.
-- Next action: implement and independently review RC2R1. Full mapping still requires a new
-  post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
+- Next action: freeze and independently review the exact RC2R1 manifest. Full mapping still requires
+  a new post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.

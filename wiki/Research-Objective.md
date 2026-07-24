@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R1 bounded repair authorized"
+last_refresh: "2026-07-24 — Agentic RC2R1 coder-ready, independent review pending"
 ---
 
 # Research Objective & Current State
@@ -10,9 +10,9 @@ last_refresh: "2026-07-24 — Agentic RC2R1 bounded repair authorized"
 
 ## Current gate and authority
 
-The active gate is **Stage-1C v2 Agentic RC2R1 bounded method repair**.
+The active gate is **Stage-1C v2 Agentic RC2R1 independent method review**.
 The owner excluded specialized Duplex-model tasks from the research, reproduction and branch route.
-The current endpoint is `AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
+The current endpoint is `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`.
 
 Stage-1B v5 at `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the signed 320-work
 calibration union remain immutable. The first RC2 submission is immutable; current work only appends
@@ -45,9 +45,9 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 - Reviewer-only sampling rationale, prior claim links, readiness and named boundary guidance are now
   excluded from coder-visible inputs. A recursive leakage scanner and one identity-independent shared
   bundle hash enforce byte-identical content for both future coders.
-- The commit-bound reviewer found agreement intake fail open for exact N=56/completed responses,
-  object critical fields aggregated instead of gated separately, and BORROW/REPRODUCE prerequisites
-  not machine-enforced. Two ACL receipts and known-label value-scan coverage remain P1 defects.
+- RC2R1 now fails closed on exact N=56/completed/provenance-bound intake, gates every critical object
+  field separately, and machine-enforces REFERENCE/BORROW/REPRODUCE evidence. Two ACL official
+  receipts bind exact local PDF bytes; all coder-visible metadata receives key and value scanning.
 - Each experiment cell has exactly one primary intervention attribution. Capability labels may be
   multi-valued at paper level, but system gains cannot be counted multiple times.
 - AudioGenie-Reasoner is the direct-method lead candidate; AudioToolAgent is task-matched nearest
@@ -61,16 +61,16 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 ## Current route
 
 - Survey router and gate: `wiki/survey/current/README.md`, `wiki/survey/current/status.md`
-- Agentic RC2: `wiki/survey/workbench/system-first-stage1c-v2-precalibration/README.md`
+- Agentic RC2R1: `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r1/README.md`
 - Audit: `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`
 - Stage-1B v5 replay: `docs/checks/stage1b-closeout/2026-07-23-v5/`
 
 ## Next action
 
-Implement the authorized RC2R1 repair, freeze it in a local no-push commit and obtain the exact
-independent acceptance `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`. Acceptance activates
-the authorized N=56 distribution route; owner adjudication remains mandatory. Full mapping still
-requires post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
+Freeze the exact RC2R1 review manifest in a local no-push commit and obtain independent
+`ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`. Acceptance activates the authorized N=56
+distribution route; owner adjudication remains mandatory. Full mapping still requires
+post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
 
 ## Supersession rule
 

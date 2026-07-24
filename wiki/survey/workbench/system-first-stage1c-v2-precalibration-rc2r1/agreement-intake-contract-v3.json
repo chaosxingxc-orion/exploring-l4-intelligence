@@ -1,0 +1,326 @@
+{
+  "schema": "sf-stage1c-v2-agreement-intake-contract-v3",
+  "artifact_id": "SF-STAGE1C-V2-AGREEMENT-INTAKE-RC2R1",
+  "status": "PREPARED_NOT_DISTRIBUTED",
+  "calibration_manifest_id": "SF-STAGE1C-V2-CALIBRATION-PACKET-56-RC2R1",
+  "response_schema_id": "sf-stage1c-v2-calibration-response-schema-v3",
+  "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R1",
+  "distribution_manifest_id": "SF-STAGE1C-V2-CALIBRATION-DISTRIBUTION-RC2R1",
+  "content_bundle_sha256": "d187aafa4d6ae967698866d8d45ea6a6e52033729fe4c8351119127332bb2e04",
+  "prompt_hash": "88d2bda12cfe2147d20da5c384e3e7762471c5b449eb590f10a27db3ea9aac54",
+  "N": 56,
+  "canonical_paper_ids": [
+    "acl:2026.acl-long.1615",
+    "acl:2026.findings-eacl.151",
+    "arxiv:2305.13738",
+    "arxiv:2402.17753",
+    "arxiv:2405.20834",
+    "arxiv:2505.00684",
+    "arxiv:2505.17862",
+    "arxiv:2506.05984",
+    "arxiv:2506.23049",
+    "arxiv:2507.10859",
+    "arxiv:2507.12705",
+    "arxiv:2508.10015",
+    "arxiv:2508.18240",
+    "arxiv:2508.19828",
+    "arxiv:2509.16971",
+    "arxiv:2510.02995",
+    "arxiv:2510.07838",
+    "arxiv:2510.07978",
+    "arxiv:2510.11098",
+    "arxiv:2510.15421",
+    "arxiv:2510.20867",
+    "arxiv:2512.11109",
+    "arxiv:2512.14865",
+    "arxiv:2512.16978",
+    "arxiv:2601.01885",
+    "arxiv:2601.03515",
+    "arxiv:2601.09413",
+    "arxiv:2601.19935",
+    "arxiv:2602.03707",
+    "arxiv:2602.07624",
+    "arxiv:2602.12670",
+    "arxiv:2603.01145",
+    "arxiv:2603.12056",
+    "arxiv:2603.16924",
+    "arxiv:2603.28088",
+    "arxiv:2604.03964",
+    "arxiv:2512.23646",
+    "arxiv:2604.08064",
+    "arxiv:2604.15383",
+    "arxiv:2604.17308",
+    "arxiv:2604.22821",
+    "arxiv:2604.24594",
+    "arxiv:2604.25122",
+    "arxiv:2605.08762",
+    "arxiv:2605.13277",
+    "arxiv:2605.13527",
+    "arxiv:2605.13716",
+    "arxiv:2605.15019",
+    "arxiv:2605.28020",
+    "arxiv:2606.06915",
+    "arxiv:2606.09316",
+    "arxiv:2606.18448",
+    "arxiv:2606.19341",
+    "arxiv:2606.19595",
+    "arxiv:2606.29538",
+    "arxiv:2607.07985"
+  ],
+  "items": [
+    {
+      "paper_id": "acl:2026.acl-long.1615",
+      "packet_item_id": "CAL-2026.acl-long.1615"
+    },
+    {
+      "paper_id": "acl:2026.findings-eacl.151",
+      "packet_item_id": "CAL-2026.findings-eacl.151"
+    },
+    {
+      "paper_id": "arxiv:2305.13738",
+      "packet_item_id": "CAL-2305.13738"
+    },
+    {
+      "paper_id": "arxiv:2402.17753",
+      "packet_item_id": "CAL-2402.17753"
+    },
+    {
+      "paper_id": "arxiv:2405.20834",
+      "packet_item_id": "CAL-2405.20834"
+    },
+    {
+      "paper_id": "arxiv:2505.00684",
+      "packet_item_id": "CAL-2505.00684"
+    },
+    {
+      "paper_id": "arxiv:2505.17862",
+      "packet_item_id": "CAL-2505.17862"
+    },
+    {
+      "paper_id": "arxiv:2506.05984",
+      "packet_item_id": "CAL-2506.05984"
+    },
+    {
+      "paper_id": "arxiv:2506.23049",
+      "packet_item_id": "CAL-2506.23049"
+    },
+    {
+      "paper_id": "arxiv:2507.10859",
+      "packet_item_id": "CAL-2507.10859"
+    },
+    {
+      "paper_id": "arxiv:2507.12705",
+      "packet_item_id": "CAL-2507.12705"
+    },
+    {
+      "paper_id": "arxiv:2508.10015",
+      "packet_item_id": "CAL-2508.10015"
+    },
+    {
+      "paper_id": "arxiv:2508.18240",
+      "packet_item_id": "CAL-2508.18240"
+    },
+    {
+      "paper_id": "arxiv:2508.19828",
+      "packet_item_id": "CAL-2508.19828"
+    },
+    {
+      "paper_id": "arxiv:2509.16971",
+      "packet_item_id": "CAL-2509.16971"
+    },
+    {
+      "paper_id": "arxiv:2510.02995",
+      "packet_item_id": "CAL-2510.02995"
+    },
+    {
+      "paper_id": "arxiv:2510.07838",
+      "packet_item_id": "CAL-2510.07838"
+    },
+    {
+      "paper_id": "arxiv:2510.07978",
+      "packet_item_id": "CAL-2510.07978"
+    },
+    {
+      "paper_id": "arxiv:2510.11098",
+      "packet_item_id": "CAL-2510.11098"
+    },
+    {
+      "paper_id": "arxiv:2510.15421",
+      "packet_item_id": "CAL-2510.15421"
+    },
+    {
+      "paper_id": "arxiv:2510.20867",
+      "packet_item_id": "CAL-2510.20867"
+    },
+    {
+      "paper_id": "arxiv:2512.11109",
+      "packet_item_id": "CAL-2512.11109"
+    },
+    {
+      "paper_id": "arxiv:2512.14865",
+      "packet_item_id": "CAL-2512.14865"
+    },
+    {
+      "paper_id": "arxiv:2512.16978",
+      "packet_item_id": "CAL-2512.16978"
+    },
+    {
+      "paper_id": "arxiv:2601.01885",
+      "packet_item_id": "CAL-2601.01885"
+    },
+    {
+      "paper_id": "arxiv:2601.03515",
+      "packet_item_id": "CAL-2601.03515"
+    },
+    {
+      "paper_id": "arxiv:2601.09413",
+      "packet_item_id": "CAL-2601.09413"
+    },
+    {
+      "paper_id": "arxiv:2601.19935",
+      "packet_item_id": "CAL-2601.19935"
+    },
+    {
+      "paper_id": "arxiv:2602.03707",
+      "packet_item_id": "CAL-2602.03707"
+    },
+    {
+      "paper_id": "arxiv:2602.07624",
+      "packet_item_id": "CAL-2602.07624"
+    },
+    {
+      "paper_id": "arxiv:2602.12670",
+      "packet_item_id": "CAL-2602.12670"
+    },
+    {
+      "paper_id": "arxiv:2603.01145",
+      "packet_item_id": "CAL-2603.01145"
+    },
+    {
+      "paper_id": "arxiv:2603.12056",
+      "packet_item_id": "CAL-2603.12056"
+    },
+    {
+      "paper_id": "arxiv:2603.16924",
+      "packet_item_id": "CAL-2603.16924"
+    },
+    {
+      "paper_id": "arxiv:2603.28088",
+      "packet_item_id": "CAL-2603.28088"
+    },
+    {
+      "paper_id": "arxiv:2604.03964",
+      "packet_item_id": "CAL-2604.03964"
+    },
+    {
+      "paper_id": "arxiv:2512.23646",
+      "packet_item_id": "CAL-2512.23646"
+    },
+    {
+      "paper_id": "arxiv:2604.08064",
+      "packet_item_id": "CAL-2604.08064"
+    },
+    {
+      "paper_id": "arxiv:2604.15383",
+      "packet_item_id": "CAL-2604.15383"
+    },
+    {
+      "paper_id": "arxiv:2604.17308",
+      "packet_item_id": "CAL-2604.17308"
+    },
+    {
+      "paper_id": "arxiv:2604.22821",
+      "packet_item_id": "CAL-2604.22821"
+    },
+    {
+      "paper_id": "arxiv:2604.24594",
+      "packet_item_id": "CAL-2604.24594"
+    },
+    {
+      "paper_id": "arxiv:2604.25122",
+      "packet_item_id": "CAL-2604.25122"
+    },
+    {
+      "paper_id": "arxiv:2605.08762",
+      "packet_item_id": "CAL-2605.08762"
+    },
+    {
+      "paper_id": "arxiv:2605.13277",
+      "packet_item_id": "CAL-2605.13277"
+    },
+    {
+      "paper_id": "arxiv:2605.13527",
+      "packet_item_id": "CAL-2605.13527"
+    },
+    {
+      "paper_id": "arxiv:2605.13716",
+      "packet_item_id": "CAL-2605.13716"
+    },
+    {
+      "paper_id": "arxiv:2605.15019",
+      "packet_item_id": "CAL-2605.15019"
+    },
+    {
+      "paper_id": "arxiv:2605.28020",
+      "packet_item_id": "CAL-2605.28020"
+    },
+    {
+      "paper_id": "arxiv:2606.06915",
+      "packet_item_id": "CAL-2606.06915"
+    },
+    {
+      "paper_id": "arxiv:2606.09316",
+      "packet_item_id": "CAL-2606.09316"
+    },
+    {
+      "paper_id": "arxiv:2606.18448",
+      "packet_item_id": "CAL-2606.18448"
+    },
+    {
+      "paper_id": "arxiv:2606.19341",
+      "packet_item_id": "CAL-2606.19341"
+    },
+    {
+      "paper_id": "arxiv:2606.19595",
+      "packet_item_id": "CAL-2606.19595"
+    },
+    {
+      "paper_id": "arxiv:2606.29538",
+      "packet_item_id": "CAL-2606.29538"
+    },
+    {
+      "paper_id": "arxiv:2607.07985",
+      "packet_item_id": "CAL-2607.07985"
+    }
+  ],
+  "coder_slots": [
+    {
+      "coder_slot": "A",
+      "planned_model": "gpt-5.6-sol",
+      "model": null,
+      "coder_id": null,
+      "coder_transaction_id": null,
+      "process_id": null,
+      "assignment_status": "UNASSIGNED",
+      "distribution_receipt_id": null,
+      "submission_receipt_id": null,
+      "expected_content_bundle_sha256": "d187aafa4d6ae967698866d8d45ea6a6e52033729fe4c8351119127332bb2e04",
+      "expected_prompt_hash": "88d2bda12cfe2147d20da5c384e3e7762471c5b449eb590f10a27db3ea9aac54"
+    },
+    {
+      "coder_slot": "B",
+      "planned_model": "gpt-5.6-terra",
+      "model": null,
+      "coder_id": null,
+      "coder_transaction_id": null,
+      "process_id": null,
+      "assignment_status": "UNASSIGNED",
+      "distribution_receipt_id": null,
+      "submission_receipt_id": null,
+      "expected_content_bundle_sha256": "d187aafa4d6ae967698866d8d45ea6a6e52033729fe4c8351119127332bb2e04",
+      "expected_prompt_hash": "88d2bda12cfe2147d20da5c384e3e7762471c5b449eb590f10a27db3ea9aac54"
+    }
+  ],
+  "completed_response_validator_required": true,
+  "raw_outputs_frozen_before_agreement": true
+}

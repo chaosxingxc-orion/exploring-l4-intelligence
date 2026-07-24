@@ -1,0 +1,43 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v3",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-RC2R1",
+  "as_of": "2026-07-24",
+  "status": "AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED",
+  "predecessor": {
+    "release": "AGENTIC_RC2",
+    "commit": "74cf8e4b565a9e53ff40f9dbc34961ede853dd57",
+    "immutable_verified": true
+  },
+  "authority": {
+    "bounded_repair_authorized": true,
+    "post_accept_calibration_distribution_authorized": true,
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "full_mapping_signed": false,
+    "push_authorized": false
+  },
+  "bounded_defect_closure": {
+    "exact_n56_completed_provenance_bound_intake": true,
+    "per_critical_object_field_gates": true,
+    "borrow_protocol_semantic_guard": true,
+    "reproduction_candidate_semantic_guard": true,
+    "two_acl_official_receipts": true,
+    "all_coder_metadata_key_and_value_leakage_scanned": true
+  },
+  "surface": {
+    "calibration_N": 56,
+    "acl_receipts": 2,
+    "coder_visible_artifacts": 8,
+    "reproduction_anchors": 0
+  },
+  "remaining_before_distribution": [
+    "CREATE_LOCAL_COMMIT_WITHOUT_PUSH",
+    "OBTAIN_ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE",
+    "BIND_TWO_ISOLATED_CODER_TRANSACTIONS_AND_OWNER_ADJUDICATOR"
+  ]
+}

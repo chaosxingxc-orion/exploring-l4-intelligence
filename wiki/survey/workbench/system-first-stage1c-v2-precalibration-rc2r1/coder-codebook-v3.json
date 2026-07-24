@@ -1,0 +1,23 @@
+{
+  "schema": "sf-stage1c-v2-coder-codebook-v3",
+  "artifact_id": "SF-STAGE1C-V2-NEUTRAL-CODER-CODEBOOK-RC2R1",
+  "status": "DEIDENTIFIED_RULES_PREPARED_NOT_DISTRIBUTED",
+  "calibration_response_schema_id": "sf-stage1c-v2-calibration-response-schema-v3",
+  "rules": [
+    "Code only from the supplied source bytes and record an exact source locator.",
+    "DIRECT_AGENTIC requires both DECIDE and ACT_OR_TOOL in an observable loop using a GENERIC_FROZEN_CORE.",
+    "A specialized-model dependency is an out-of-scope specialized-system reference, not a direct method.",
+    "A trained controller cannot pass the direct training-free agentic gate.",
+    "Create a run cell only for an empirical run configuration; do not fabricate cells for non-empirical evidence.",
+    "Treat multiple metrics from one run as observations, not duplicate run cells.",
+    "Assert dataset lineage only with provenance evidence; otherwise use a non-lineage dataset relation.",
+    "REFERENCE transfers neither protocol nor result; BORROW_PROTOCOL requires translation and a rejection observation.",
+    "REPRODUCTION requires task, dataset revision, entrypoint, access, license, and evaluator closure.",
+    "Use final absence reasons for empty object arrays and retain UNKNOWN when the source does not resolve a field.",
+    "BORROW_PROTOCOL requires structured source-to-target variables, preserved decision structure, source locators, and a rejection condition with observable evidence.",
+    "REPRODUCTION_CANDIDATE requires one fully closed structured record for task, dataset revision and split, official repository revision, entrypoint, access, terms, evaluator, local state, and source locators.",
+    "REFERENCE responses must not carry transfer or reproduction evidence objects."
+  ],
+  "named_paper_expectations_included": false,
+  "prior_labels_included": false
+}

@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Current gate: **Stage-1C v2 Agentic RC2R1 bounded method repair**.
-  The endpoint is `AGENTIC_RC2R1_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`; specialized Duplex-model tasks are out
+- Current gate: **Stage-1C v2 Agentic RC2R1 independent method review**.
+  The endpoint is `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`; specialized Duplex-model tasks are out
   of the active research/reproduction/branch route.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it does not grant current mapping authority.
@@ -12,7 +12,7 @@
 - Frozen Stage-1B v5 remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; signed overlays form
   one immutable 320-work calibration-only union.
 - Active contract:
-  [`../workbench/system-first-stage1c-v2-precalibration/README.md`](../workbench/system-first-stage1c-v2-precalibration/README.md).
+  [`../workbench/system-first-stage1c-v2-precalibration-rc2r1/README.md`](../workbench/system-first-stage1c-v2-precalibration-rc2r1/README.md).
   It keeps N=56 at 38 overlays + 18 sentinels, replaces FDB-v3 with Active Perception Agent, retains
   FDB-v2 as one exclusion boundary, strongly types agentic scope plus cell-level attribution, and
   separates reviewer-only provenance/readiness from recursively scanned coder-visible inputs.
@@ -27,6 +27,9 @@
   `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`. The owner authorized bounded repair,
   conditional calibration distribution and local milestones without push; owner adjudication and
   post-calibration mapping signature remain mandatory.
+- RC2R1 closes exact-intake, per-critical-field agreement, BORROW/REPRODUCE, ACL receipt and
+  all-metadata leakage-scan defects. Its exact manifest is ready for commit-bound independent review;
+  no coder content has been distributed.
 - H5 remains withheld; H5-dependent evidence cannot support modality conclusions.
 - Audit routers: `wiki/audit/system-first-stage1b/INDEX.md` and
   `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`.

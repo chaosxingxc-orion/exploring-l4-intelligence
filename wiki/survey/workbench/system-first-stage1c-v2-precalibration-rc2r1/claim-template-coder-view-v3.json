@@ -1,0 +1,217 @@
+{
+  "schema": "sf-stage1c-v2-claim-template-coder-view-v3",
+  "artifact_id": "SF-STAGE1C-V2-CLAIM-TEMPLATE-CODER-VIEW-13-RC2R1",
+  "status": "NEUTRAL_TEMPLATE_VIEW_PREPARED_NOT_DISTRIBUTED",
+  "claim_templates": [
+    {
+      "claim_template_id": "CLM-ACCESS-BOUNDARY",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Black-box external control, gray-box decoding and parameter-trained policies are non-equivalent regimes.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-ACTIVE-EVIDENCE",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Active evidence acquisition requires an observable acquire/select/stop decision under budget.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-EVALUATOR-DISAGREEMENT",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Online reward, primary task outcome and diagnostic judge must be independently identified.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-INTERACTION-OBJECTIVES",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Turn-taking quality, content correctness and terminal task success are distinct outcomes.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-KNOWLEDGE-TO-SKILL",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Reusable skill value must be separated from raw-source retrieval and answer-bearing compression.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-MEMORY-UPDATE",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Memory update, conflict, deletion and refusal are distinct from stronger retrieval.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-MEMORY-USE",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Memory storage or retrieval does not establish that retrieved evidence changed the final action.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-MODALITY-NECESSITY",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Multimodal input presence does not establish that the non-text modality is causally necessary.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-RELEVANCE-UTILITY",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Evidence relevance and retrieval success do not guarantee decision utility or grounded use.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-SKILL-ACCESS",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Skill content, representation, retrieval, loading and use must be separated by matched controls.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-SKILL-LIFECYCLE",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Skill-library growth can create duplication, staleness and negative transfer unless maintenance is measured.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-SYSTEM-ATTRIBUTION",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Bundled system gains cannot be assigned to K/S/M or control without component-matched comparisons.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    },
+    {
+      "claim_template_id": "CLM-TTS-NONMONOTONIC",
+      "object_type": "CLAIM_TEMPLATE",
+      "synthesis_question": "Additional inference-time sampling or refinement budget does not guarantee task improvement.",
+      "template_scope": {
+        "problem_outcome": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "task": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "dataset_revision_split": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "model": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "access": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "input_condition": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "intervention": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "budget_horizon": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING",
+        "evaluator": "DECLARED_HETEROGENEOUS_STRATA_NO_NUMERIC_POOLING"
+      }
+    }
+  ],
+  "paper_links_included": false,
+  "prior_support_labels_included": false
+}
