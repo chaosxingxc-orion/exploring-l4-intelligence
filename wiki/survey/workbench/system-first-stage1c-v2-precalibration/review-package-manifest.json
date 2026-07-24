@@ -1,0 +1,136 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-review-manifest-v1",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-REVIEW-PACKAGE-RC1",
+  "status": "SIGNED_320_CALIBRATION_INPUT_AWAITING_INDEPENDENT_CODERS",
+  "owner_token": "AUTHORIZE_STAGE1C_V2_CALIBRATION_PREPARATION",
+  "artifact_count": 24,
+  "artifacts": [
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/README.md",
+      "bytes": 2501,
+      "sha256": "9eeebd7391020caf666eef11b198cef7a94c6399b62e8a4e4ec438e3a9ea98ee"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/stage1c-v2-precalibration-contract-zh.md",
+      "bytes": 7753,
+      "sha256": "c52ae92c83b56a7da1e62ff68c1c2cc2caec166bad8c2f07bb4f8f60772c99ec"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/codebook-v1.md",
+      "bytes": 3298,
+      "sha256": "7ac6480eb74d8527f019cf7fb0e61654c61ff8ae76228350414f98b1e9f8970d"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-precalibration/owner-authorization/2026-07-24-owner-authorization.md",
+      "bytes": 2953,
+      "sha256": "1e1e2e95e2c84a812b41331de0e24322c99ec2400a3df8c8e216d28c81cbd54f"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1b-capability-delta/release-signature/2026-07-24-stage1b-capability-delta-release-signature.md",
+      "bytes": 1376,
+      "sha256": "e272c8aa1f6c31c1fe94245a94f59a8749a6786f1668194c08f3332dc12f3de5"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1b-targeted-anchor-scan/release-signature/2026-07-24-stage1b-targeted-anchor-scan-release-signature.md",
+      "bytes": 1473,
+      "sha256": "d31c0ac2f61860be3b640922e7fce39b60c7b5cb35dbc6b11eb2a858b3e9fa00"
+    },
+    {
+      "path": "docs/checks/stage1b-capability-delta/2026-07-24-release/release-manifest.json",
+      "bytes": 1102,
+      "sha256": "831466c415ca5747ceac92a4dea26ad081c09f278ec7d0aeb72523d733e21452"
+    },
+    {
+      "path": "docs/checks/stage1b-targeted-anchor-scan/2026-07-24-release/release-manifest.json",
+      "bytes": 1118,
+      "sha256": "8be95bf2698e8cb60a57dd3b82fb9b936b7dee278be0d76b81d613ef91b31982"
+    },
+    {
+      "path": "scripts/survey/sf_stage1c_v2_precalibration.py",
+      "bytes": 51042,
+      "sha256": "7f0e04a6a07a65d681ee3e81c2907b45cf94888646da08b709f4aa9104dc354d"
+    },
+    {
+      "path": "scripts/survey/test_sf_stage1c_v2_precalibration.py",
+      "bytes": 9298,
+      "sha256": "c689b47cdd18ed97b98ade616b0cdf224cf51a46c22ccc1bfc18ad5dc25d2232"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/release-merge-manifest-v1.json",
+      "bytes": 69942,
+      "sha256": "a61f43eb9b983b54c5df857651fd1f036c6010bc791a8cf2ff99bac12b056acf"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/problem-intervention-crosswalk-v1.json",
+      "bytes": 2753,
+      "sha256": "259dceb6c0b4f441f9ef632ff5ed2680370a70e3805490ecfbd90cee04bd6981"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/pending-problem-routing-v1.json",
+      "bytes": 4296,
+      "sha256": "6c9956f66b17f45338c7e774e898c3a5c8a2ecd3e5ddd5c61fd619bccc1d99e6"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/claim-registry-v1.json",
+      "bytes": 31944,
+      "sha256": "216e598d4430cb1159201d2090ca402b1f0498ce5fefef8dc604cfa4213a973f"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/candidate-protocol-templates-v1.json",
+      "bytes": 2657,
+      "sha256": "a388306f0b0555acb5fdef2acdd2d348cd41f8852ffe17bbb2bc4b5342a92c39"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/translation-contract-queue-v1.json",
+      "bytes": 20872,
+      "sha256": "5a66d36d6628374d1201c0f49d132ae6ea19adf365c247a72fed79412027a969"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/schema-bundle-v1.json",
+      "bytes": 10072,
+      "sha256": "3487e055d0e6d2f83547b32b0fe25f516874247796e876e916b3501beac7051c"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/calibration-manifest-v1.json",
+      "bytes": 5163,
+      "sha256": "ac3d3175ef838102b89077b67e71682e74c8be6c4ea6f069f6c7a1dc73090bf0"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/calibration-blind-packet-v1.json",
+      "bytes": 39095,
+      "sha256": "6b379eae2aae715f7a501d6fa5957f8db4fae67ca0c258e7edf5c5eb9ab31814"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/agreement-contract-v1.json",
+      "bytes": 1195,
+      "sha256": "774a0878b1768dcc80951758053cc3eb36631e492a00dbd91cd4c64c57beb479"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/reproduction-readiness-v1.json",
+      "bytes": 2311,
+      "sha256": "b785bb7dc733987537cb38a719309f0d3cf7fc4b3b2e1d528556f3142bff15f6"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/discovery-provenance-v1.json",
+      "bytes": 1138,
+      "sha256": "1dce54ecdf148c27f29e3930746638b5e2f48eec880c84cda3933dc577297f32"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration/stage1b-overlay-release-receipts-v1.json",
+      "bytes": 2424,
+      "sha256": "23a43263f0f9fa0b76f4cb1f86e5e9989ac2b181720ae4a1b954a67c1e46bcb9"
+    },
+    {
+      "path": "docs/checks/stage1c-v2-precalibration/2026-07-24-rc1/contract-report.json",
+      "bytes": 1563,
+      "sha256": "625b7b3e5288bb23045d81770ec9de98cf7063424817a76c2e9482e54ba86d0d"
+    }
+  ],
+  "authority_withheld": [
+    "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
+    "320_paper_full_mapping",
+    "research_execution",
+    "problem_selection",
+    "novelty_verdict"
+  ]
+}

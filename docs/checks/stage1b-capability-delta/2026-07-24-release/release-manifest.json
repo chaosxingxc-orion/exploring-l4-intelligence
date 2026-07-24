@@ -1,0 +1,19 @@
+{
+  "schema": "sf-stage1b-overlay-signed-release-manifest-v1",
+  "artifact_id": "SF-STAGE1B-CAPABILITY_DELTA_14-SIGNED-RELEASE-R1",
+  "as_of": "2026-07-24",
+  "status": "SIGNED_STAGE1B_OVERLAY_RELEASE",
+  "layer": "CAPABILITY_DELTA_14",
+  "released_work_count": 14,
+  "frozen_stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "review_manifest": "wiki/survey/workbench/system-first-stage1b-capability-delta/review-package-manifest.json",
+  "review_manifest_sha256": "ee8f0564069475f58f9be313a7978db662665d1d379b213d3005507c59dea3a6",
+  "review_manifest_git_blob": "a1c40548dc72a6d94859ce43efbeca65a0cf9366",
+  "signature": "SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE",
+  "signature_artifact": "wiki/audit/system-first-stage1b-capability-delta/release-signature/2026-07-24-stage1b-capability-delta-release-signature.md",
+  "signature_artifact_git_blob": "a5af670aacbb5194f42947150440cd022b16c652",
+  "authority_effect": "RELEASE_OVERLAY_TO_STAGE1C_CALIBRATION_INPUT_ONLY",
+  "stage1c_full_mapping_authorized": false,
+  "research_execution_authorized": false,
+  "rc1_bytes_rewritten": false
+}

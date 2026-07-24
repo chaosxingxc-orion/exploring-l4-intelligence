@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Stage-1B targeted-anchor scan RC1 prepared"
+last_refresh: "2026-07-24 — two Stage-1B overlays signed for calibration input"
 ---
 
 # Research Objective & Current State
@@ -10,17 +10,18 @@ last_refresh: "2026-07-24 — Stage-1B targeted-anchor scan RC1 prepared"
 
 ## Current gate and authority
 
-The active gate is **review of two disjoint unsigned Stage-1B overlays**. Owner token
-`AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING` authorized the 14-work capability delta, which still
-awaits `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`. The later owner instruction to scan papers in detail
-and fill Stage-1B authorized a separate 26-work full-text scan: 24 works were retained and two were
-recorded as scanned-not-promoted. That targeted-anchor RC awaits an independent
-`SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`.
+The active gate is **Stage-1C v2 signed calibration input awaiting two independent coders**. Owner
+token `AUTHORIZE_STAGE1C_V2_CALIBRATION_PREPARATION` authorizes method consolidation,
+schema/codebook construction, read-only reproduction-candidate closure and bounded calibration. The
+14-work capability delta and 24-work targeted-anchor overlay now have separate release signatures.
 
-Both overlays preserve the fixed Stage-1B v5 scientific release at
-`38fb9435d0c35e226ad62b16015a6dbee054e6c2`; the targeted scan also preserves the reviewed
-capability-delta RC1 exact bytes. The previously signed Stage-1C common-rubric comparison remains
-provenance only and is paused. Neither unsigned overlay is a Stage-1C input.
+Both signed overlays preserve the fixed Stage-1B v5 release at
+`38fb9435d0c35e226ad62b16015a6dbee054e6c2` and bind one 320-work calibration input.
+
+The pre-calibration package binds the 320-work calibration input, routes the 15 pending problem labels,
+deduplicates the 38 overlay records into 13 canonical synthesis claims, demotes the old eight families
+to protocol templates and freezes an exact 56-work calibration packet. It neither treats either
+overlay as full-mapping authority nor executes calibration or activates the later full-mapping gate.
 
 Model/API execution, dataset or benchmark metrics, paper reproduction, prototypes, problem ranking or
 selection, owner selection and novelty verdicts remain unauthorized. Stage-2A remains
@@ -36,37 +37,36 @@ changing core model weights.
 
 - Frozen D0 remains exhausted at 20,727/20,727 abstracts, 319 D2 full texts and 226 retained works.
   This is closure of the declared frozen surface, not closure of the literature universe.
-- Two disjoint overlays remain unsigned: the capability delta has 8 seeds + 6 citation promotions;
-  the targeted scan read 26 full texts, retained 24 and bound 78 local artifacts. Census meanings are
-  226 frozen, 282 inherited, 296 with the 14-work delta alone, 306 with the targeted overlay alone and
-  320 combined. The 320 union is neither signed nor a Stage-1C denominator; 297 citation IDs remain
-  seen-not-promoted. Neither overlay contains a reproduction anchor.
+- Two disjoint overlays are signed: the capability delta has 8 seeds + 6 citation promotions;
+  the targeted scan retained 24 works. Census meanings are 226 frozen, 282 inherited, 296 with the
+  delta alone, 306 with the targeted overlay alone and 320 combined. The 320 union is signed only as
+  the calibration input, not for full mapping. Neither overlay contains a reproduction anchor.
 - The new ontology treats knowledge and skill as content assets, memory as persistence/update, the
   multimodal agent as carrier, and training-free RL as a control principle. Each record separately
   codes content, persistence, primary intervention and MM0-MM3 evidence to prevent double attribution.
-- Inherited CURRENT evidence remains intact: 26 direct methods, 18 instruments and two boundaries;
-  none is coded reward-guided selection. H5 remains withheld.
-- Local assets are revision/hash bound but still require loader, license, evaluator and task-slice
-  closure before `LOCAL_READY`; local bytes do not authorize execution.
-- Dataset/checkpoint/output bytes remain outside Git under `SPEECHRL_DATA_DIR`. This repair ran no
-  research model, API evaluation, dataset metric, reproduction or prototype.
+- The authorized pre-calibration RC contains six unranked problem nodes crosswalked to D0-D4, 13
+  canonical claims with 74 paper links, 23 withheld translation contracts, 12 whole-package schema
+  definitions, five non-anchor reproduction candidates and a blank 56-work coder packet. One H5
+  sentinel outside the 320 union is calibration-only and cannot expand the input denominator.
+- Inherited evidence remains intact: 26 direct methods, 18 instruments and two boundaries; none is
+  coded reward-guided selection. H5 remains withheld.
+- Local bytes do not authorize execution; readiness still requires loader, license, evaluator and
+  task-slice closure. No model, metric, reproduction or prototype ran.
 
 ## Current route
 
 - Survey router and short gate: `wiki/survey/current/README.md`, `wiki/survey/current/status.md`
-- Active capability-delta RC: `wiki/survey/workbench/system-first-stage1b-capability-delta/README.md`
-- Active targeted-anchor scan RC: `wiki/survey/workbench/system-first-stage1b-targeted-anchor-scan/README.md`
-- Detailed Chinese proposal: `wiki/survey/workbench/system-first-stage1b-capability-delta/stage1c-v2-capability-research-program-zh.md`
+- Active pre-calibration contract: `wiki/survey/workbench/system-first-stage1c-v2-precalibration/README.md`
 - Review indexes: `wiki/audit/system-first-stage1b-capability-delta/INDEX.md`,
   `wiki/audit/system-first-stage1b-targeted-anchor-scan/INDEX.md`
 - v5 replay and registry: `docs/checks/stage1b-closeout/2026-07-23-v5/`, `wiki/survey/registry/README.md`
 
 ## Next action
 
-Review the two Stage-1B overlays independently. Do not merge either overlay into Stage-1C, treat the
-320-work candidate union as signed, create branches, rank directions, claim novelty, run research
-models/metrics, reproduce papers or build prototypes before the required signatures and owner
-authorization.
+Assign the exact 56-work packet to two independent coders, then compute field-level agreement and
+complete adjudication. Do not treat the calibration-only 320 input as full-mapping authority, create
+branches, rank directions, claim novelty, run research models/metrics, reproduce papers or build
+prototypes before the later mapping signature and separate execution authority.
 
 ## Supersession rule
 

@@ -1,0 +1,25 @@
+{
+  "schema": "sf-stage1b-targeted-discovery-provenance-v1",
+  "status": "PARTIAL_RECONSTRUCTION_NOT_SYSTEMATIC_REVIEW",
+  "date_local": "2026-07-24",
+  "source_surfaces": [
+    "web search discovery",
+    "official arXiv abstract/PDF/e-print pages",
+    "existing corpus exact-ID dedupe"
+  ],
+  "query_families": [
+    "speech/omni multimodal agent memory benchmark",
+    "multimodal skill and visual skill agent",
+    "active multimodal evidence acquisition",
+    "training-free reward-guided decoding and test-time scaling",
+    "full-duplex voice-agent benchmark",
+    "memory retrieval-to-action agent benchmark"
+  ],
+  "exact_query_log_retained": false,
+  "candidate_pool_size_retained": false,
+  "auditable_surface": "26_EXACT_IDS_ONLY",
+  "promotion_rule": "TASK_MATCHED_ANCHOR_OR_PATH_CHANGING_METHOD_OR_PROTOCOL_INSTRUMENT_OR_MATERIAL_FALSIFIER",
+  "stop_rule": "STOP_BROAD_EXPANSION_AFTER_DIRECT_SPEECH_OMNI_AND_KSM_PROTOCOL_GAPS_BECAME_BOUNDED",
+  "future_trigger_rule": "SEARCH_ONLY_IF_NEW_WORK_CHANGES_METHOD_PATH_FALSIFIES_LOAD_BEARING_PREMISE_OR_CLOSES_DIRECT_REPRODUCTION_ANCHOR",
+  "literature_universe_closed": false
+}

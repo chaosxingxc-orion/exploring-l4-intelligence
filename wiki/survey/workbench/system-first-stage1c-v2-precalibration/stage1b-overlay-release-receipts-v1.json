@@ -1,0 +1,45 @@
+{
+  "schema": "sf-stage1b-overlay-release-receipts-v1",
+  "artifact_id": "SF-STAGE1B-TWO-OVERLAY-RELEASE-RECEIPTS-R1",
+  "as_of": "2026-07-24",
+  "status": "TWO_STAGE1B_OVERLAYS_SIGNED",
+  "frozen_stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "releases": [
+    {
+      "layer": "CAPABILITY_DELTA_14",
+      "released_work_count": 14,
+      "signature": "SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE",
+      "signature_artifact": "wiki/audit/system-first-stage1b-capability-delta/release-signature/2026-07-24-stage1b-capability-delta-release-signature.md",
+      "signature_artifact_git_blob": "a5af670aacbb5194f42947150440cd022b16c652",
+      "review_manifest": "wiki/survey/workbench/system-first-stage1b-capability-delta/review-package-manifest.json",
+      "review_manifest_sha256": "ee8f0564069475f58f9be313a7978db662665d1d379b213d3005507c59dea3a6",
+      "review_manifest_git_blob": "a1c40548dc72a6d94859ce43efbeca65a0cf9366",
+      "release_manifest": "docs/checks/stage1b-capability-delta/2026-07-24-release/release-manifest.json",
+      "signature_effective": true,
+      "release_scope": "STAGE1C_CALIBRATION_INPUT_ONLY",
+      "full_mapping_authorized": false,
+      "research_execution_authorized": false
+    },
+    {
+      "layer": "TARGETED_OVERLAY_24",
+      "released_work_count": 24,
+      "signature": "SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE",
+      "signature_artifact": "wiki/audit/system-first-stage1b-targeted-anchor-scan/release-signature/2026-07-24-stage1b-targeted-anchor-scan-release-signature.md",
+      "signature_artifact_git_blob": "e5a039a9297fac3ce84ed981449f085d6bb79378",
+      "review_manifest": "wiki/survey/workbench/system-first-stage1b-targeted-anchor-scan/review-package-manifest.json",
+      "review_manifest_sha256": "d70de83e36b4d2c07ae0ab02506b60269620bd5d5768d6ca7b8366d11818e0e6",
+      "review_manifest_git_blob": "af396aea51446c7cd7ac544aea5714090bdd5014",
+      "release_manifest": "docs/checks/stage1b-targeted-anchor-scan/2026-07-24-release/release-manifest.json",
+      "signature_effective": true,
+      "release_scope": "STAGE1C_CALIBRATION_INPUT_ONLY",
+      "full_mapping_authorized": false,
+      "research_execution_authorized": false
+    }
+  ],
+  "deterministic_merge": {
+    "combined_unique_works": 320,
+    "stage1c_calibration_input": true,
+    "stage1c_full_mapping_input": false,
+    "third_stage1b_scientific_signature_required": false
+  }
+}

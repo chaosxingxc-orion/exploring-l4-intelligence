@@ -1,0 +1,110 @@
+{
+  "schema": "sf-stage1c-v2-pending-problem-routing-v1",
+  "routes": [
+    {
+      "canonical_work_id": "CW-ARXIV-2507.10859",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2510.15421",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2512.14865",
+      "target_problem_id": "MEMORY_RETRIEVAL_TO_USE_AND_ACTION_GAP",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2601.01885",
+      "target_problem_id": "MEMORY_RETRIEVAL_TO_USE_AND_ACTION_GAP",
+      "route_disposition": "TRAINED_BOUNDARY_TO_CANDIDATE_PROBLEM",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2601.03515",
+      "target_problem_id": "MEMORY_RETRIEVAL_TO_USE_AND_ACTION_GAP",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2601.19935",
+      "target_problem_id": "MEMORY_RETRIEVAL_TO_USE_AND_ACTION_GAP",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2602.03707",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2604.08064",
+      "target_problem_id": "MEMORY_RETRIEVAL_TO_USE_AND_ACTION_GAP",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2604.15383",
+      "target_problem_id": "BUDGET_STOP_REPAIR",
+      "route_disposition": "BOUNDARY_TO_INHERITED_PROBLEM",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2604.25122",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2605.13277",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2605.13716",
+      "target_problem_id": "SKILL_ACCESS_MAINTENANCE_AND_NEGATIVE_TRANSFER",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2605.15019",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2606.18448",
+      "target_problem_id": "SKILL_ACCESS_MAINTENANCE_AND_NEGATIVE_TRANSFER",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    },
+    {
+      "canonical_work_id": "CW-ARXIV-2606.19341",
+      "target_problem_id": "ACTIVE_MULTIMODAL_EVIDENCE_ACQUISITION_UNDER_BUDGET",
+      "route_disposition": "CANDIDATE_PROBLEM_NODE",
+      "candidate_problem_promoted": false,
+      "ranking_or_selection_performed": false
+    }
+  ]
+}

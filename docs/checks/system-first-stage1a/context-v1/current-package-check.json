@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "b779b46548f081b0c232b2a8d1847f2200f6090d"
+        "git_blob": "fe764fff35be88b32103b2bb2ab01dd5b7a85829"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "4c877df46c9ef2b7242613db908e87f5ec7d6e12"
+        "git_blob": "f100cead58f8fac0bcf5e83bd967834e68ca55a0"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -435,6 +435,11 @@
         "git_blob": "2c1f6ef65b04ab56a94892e0abab74c64ff25020"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration.py",
+        "mode": "100644",
+        "git_blob": "f9d7085e84a871c226c06c863a3c2097e879e989"
+      },
+      {
         "path": "scripts/survey/sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "2333e64e320eb5b44e435fe0112ba928764394ad"
@@ -740,6 +745,11 @@
         "git_blob": "7f68ed355c7ed3fadec61926064a7750eb0ba869"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration.py",
+        "mode": "100644",
+        "git_blob": "a8e909863ef877a7b8cc6118042d38f6db8ecbe0"
+      },
+      {
         "path": "scripts/survey/test_sf_t1_route_runner.py",
         "mode": "100644",
         "git_blob": "6c48a1a2aef14596d4941430438ef894048562cf"
@@ -760,7 +770,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "f7d5bcdb36ab164815873a1d774d012e03ea4f07d0cd6ef4a32ba077262f1261"
+    "sha256": "c58c1c281e41a552b8d6ecf869089a8a6d396f662d7d3098449a408582dc27dc"
   },
   "commands": [
     {
@@ -856,7 +866,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (92 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (93 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {

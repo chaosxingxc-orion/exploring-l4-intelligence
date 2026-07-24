@@ -1,10 +1,8 @@
 # Current Survey Router
 
-- Current gate: **two disjoint unsigned Stage-1B overlays awaiting independent review**. The
-  capability-delta RC still awaits `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`; the later targeted-anchor
-  full-text scan RC awaits `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. The frozen Stage-1B v5
-  scientific commit remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; neither overlay rewrites
-  it or enters Stage-1C. Ranking, selection and execution remain unauthorized.
+- Current gate: **signed 320-work Stage-1C v2 calibration input awaiting two independent coders**.
+  Both Stage-1B overlays have separate byte-bound release signatures. The owner preparation token
+  permits the calibration workflow but does not authorize full mapping, ranking, selection or execution.
 - Read in this order: [`status.md`](status.md) →
   [`tables/stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
   [`tables/stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → targeted data/reference
@@ -27,14 +25,16 @@
 - Stage-1C corrections and the four-paper priority intake are canonical in
   [`data/stage1c-common-rubric-comparison-v1.json`](data/stage1c-common-rubric-comparison-v1.json).
 - Capability-delta RC: [`../workbench/system-first-stage1b-capability-delta/README.md`](../workbench/system-first-stage1b-capability-delta/README.md).
-  It locks 8 seeds plus 6 citation promotions, recomputes a 296-work candidate surface, and requests
-  independent `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`. The unsigned 14-work delta is not yet a
-  Stage-1C input.
+  Its frozen 14-work RC1 now has an independent release signature and enters calibration only.
 - Targeted-anchor scan RC: [`../workbench/system-first-stage1b-targeted-anchor-scan/README.md`](../workbench/system-first-stage1b-targeted-anchor-scan/README.md).
   It full-text-scans 26 new works, retains 24, explicitly records two non-promotions, and requests
-  independent `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. Its independent candidate surface is 306;
-  the union with the separate unsigned capability delta is 320. Neither count is a signed Stage-1C
-  denominator.
+  independent release. Its frozen 24-work RC1 now has a separate signature; the deterministic union
+  is 320 and is active only as the calibration input.
+- Active pre-calibration RC:
+  [`../workbench/system-first-stage1c-v2-precalibration/README.md`](../workbench/system-first-stage1c-v2-precalibration/README.md).
+  It binds the 320 signed calibration identities by source layer, routes 15 pending labels, claim-deduplicates
+  all 38 overlay records, demotes eight proposed families to protocol templates and freezes an exact
+  blank 56-work calibration packet. Calibration remains unexecuted pending two independent coders.
 - H5 remains withheld; H5-dependent bundles cannot enter Stage-1C selection.
 - Audit pointers: `wiki/audit/system-first-stage1b/INDEX.md`,
   `wiki/audit/system-first-stage1b-capability-delta/INDEX.md` and

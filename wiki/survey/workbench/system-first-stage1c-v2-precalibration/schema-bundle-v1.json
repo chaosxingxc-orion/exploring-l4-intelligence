@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sf-stage1c-v2-schema-bundle-v1",
+  "$defs": {
+    "paper_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paper_id",
+        "disposition",
+        "role",
+        "source_locators",
+        "coder_id",
+        "review_status"
+      ],
+      "properties": {
+        "paper_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locators": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "coder_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "run_cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_cell_id",
+        "paper_id",
+        "dataset_revision_split",
+        "model_access",
+        "input_condition",
+        "intervention",
+        "budget_horizon",
+        "source_locator"
+      ],
+      "properties": {
+        "run_cell_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "paper_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset_revision_split": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_access": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intervention": {
+          "type": "string",
+          "minLength": 1
+        },
+        "budget_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id",
+        "run_cell_id",
+        "metric_evaluator",
+        "raw_result",
+        "source_locator"
+      ],
+      "properties": {
+        "observation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_cell_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric_evaluator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raw_result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "paired_comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison_id",
+        "baseline_cell_id",
+        "intervention_cell_id",
+        "paired_status",
+        "comparability_key"
+      ],
+      "properties": {
+        "comparison_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline_cell_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intervention_cell_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "paired_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comparability_key": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataset_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset_id",
+        "name",
+        "revision",
+        "split",
+        "source_locator"
+      ],
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "split": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataset_lineage_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id",
+        "source_dataset_id",
+        "relation",
+        "target_dataset_id",
+        "source_locator"
+      ],
+      "properties": {
+        "edge_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataset_relation_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id",
+        "source_dataset_id",
+        "relation",
+        "target_dataset_id",
+        "reason"
+      ],
+      "properties": {
+        "edge_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "claim_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "claim_text",
+        "claim_origin",
+        "scope",
+        "evidence_level",
+        "transfer_status"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_origin": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "object"
+        },
+        "evidence_level": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transfer_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "family_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family_id",
+        "problem_statement",
+        "protocol_signature",
+        "evidence_state",
+        "strongest_contradiction",
+        "uncertainty"
+      ],
+      "properties": {
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "problem_statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol_signature": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strongest_contradiction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uncertainty": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "family_membership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "membership_id",
+        "family_id",
+        "evidence_object_id",
+        "membership_type",
+        "compatibility_decision"
+      ],
+      "properties": {
+        "membership_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "membership_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibility_decision": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "review_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "object_id",
+        "coder_id",
+        "event_type",
+        "timestamp",
+        "prior_event_id"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coder_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prior_event_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "translation_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "translation_id",
+        "source_work_id",
+        "borrowed_decision_structure",
+        "source_to_target_changes",
+        "speech_omni_corresponding_variable",
+        "strongest_transfer_failure",
+        "rejection_observation"
+      ],
+      "properties": {
+        "translation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_work_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "borrowed_decision_structure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_to_target_changes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "speech_omni_corresponding_variable": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strongest_transfer_failure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rejection_observation": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

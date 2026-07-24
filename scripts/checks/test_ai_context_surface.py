@@ -1677,27 +1677,25 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 23), refresh_date)
+        self.assertEqual(date(2026, 7, 24), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C common-rubric comparison",
-            "Stage-1B v5 scientific release",
+            "Stage-1C v2 signed calibration input awaiting two independent coders",
+            "Stage-1B v5 release",
             "external, reward-guided control plane",
             "20,727",
             "319",
             "226",
-            "13 reused union identities",
-            "46 rows",
-            "59 unique routes",
-            "SELF_CONSISTENCY_CONSENSUS",
-            "TRANSFER_BOUNDARY_DIRECT_CONTROL",
+            "320-work calibration input",
+            "15 pending problem labels",
+            "13 canonical synthesis claims",
+            "56-work calibration packet",
+            "separate release signatures",
             "H5",
             "owner",
             "Model/API execution",
             "wiki/survey/current/README.md",
-            "stage1b-mapping-release.md",
-            "stage1c-eligible-inputs.md",
-            "stage1c-common-rubric-comparison.md",
+            "system-first-stage1c-v2-precalibration/README.md",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
             "Next action",
             "Supersession rule",
@@ -1739,7 +1737,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 23), per_work_date)
+        self.assertEqual(date(2026, 7, 24), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

@@ -1,0 +1,1072 @@
+{
+  "schema": "sf-stage1c-v2-calibration-blind-packet-v1",
+  "purpose": "LABEL_HIDDEN_SECONDARY_CODER_INPUT",
+  "contains_prior_labels": false,
+  "repository_access_should_be_withheld": true,
+  "items": [
+    {
+      "packet_item_id": "CAL-2026.acl-long.1615",
+      "canonical_id": "acl:2026.acl-long.1615",
+      "title": "S2S-Arena: Evaluating Paralinguistic Instruction Following in Speech-to-Speech Models",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2026.acl-long.1615/2026.acl-long.1615.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2026.findings-eacl.151",
+      "canonical_id": "acl:2026.findings-eacl.151",
+      "title": "Hearing Between the Lines: Unlocking the Reasoning Power of LLMs for Speech Evaluation",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2026.findings-eacl.151/2026.findings-eacl.151.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2305.13738",
+      "canonical_id": "arxiv:2305.13738",
+      "title": "i-Code Studio: A Configurable and Composable Framework for Integrative AI",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2305.13738/2305.13738.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2402.17753",
+      "canonical_id": "arxiv:2402.17753",
+      "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2402.17753/2402.17753.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2405.20834",
+      "canonical_id": "arxiv:2405.20834",
+      "title": "Retrieval Meets Reasoning: Even High-school Textbook Knowledge Benefits Multimodal Reasoning",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2405.20834/2405.20834.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2505.00684",
+      "canonical_id": "arxiv:2505.00684",
+      "title": "Visual Test-time Scaling for GUI Agent Grounding",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2505.00684/2505.00684.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2505.17862",
+      "canonical_id": "arxiv:2505.17862",
+      "title": "Daily-Omni: Towards Audio-Visual Reasoning with Temporal Alignment",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2505.17862/2505.17862.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2506.05984",
+      "canonical_id": "arxiv:2506.05984",
+      "title": "Audio-Aware Large Language Models as Judges for Speaking Styles",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2506.05984/2506.05984.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2506.23049",
+      "canonical_id": "arxiv:2506.23049",
+      "title": "AURA: Agent for Understanding, Reasoning, and Automated Tool Use in Voice-Driven Tasks",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2506.23049/2506.23049.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2507.10859",
+      "canonical_id": "arxiv:2507.10859",
+      "title": "MultiVox: A Benchmark for Evaluating Voice Assistants for Multimodal Interactions",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2507.10859/2507.10859.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2507.12705",
+      "canonical_id": "arxiv:2507.12705",
+      "title": "AudioJudge: Understanding What Works in Large Audio Model Based Speech Evaluation",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2507.12705/2507.12705.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.10015",
+      "canonical_id": "arxiv:2508.10015",
+      "title": "RealTalk-CN: A Realistic Chinese Speech-Text Dialogue Benchmark With Cross-Modal Interaction Analysis",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.10015/2508.10015.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.18240",
+      "canonical_id": "arxiv:2508.18240",
+      "title": "MTalk-Bench: Evaluating Speech-to-Speech Models in Multi-Turn Dialogues via Arena-style and Rubrics Protocols",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.18240/2508.18240.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2508.19828",
+      "canonical_id": "arxiv:2508.19828",
+      "title": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2508.19828/2508.19828.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2509.16971",
+      "canonical_id": "arxiv:2509.16971",
+      "title": "AudioGenie-Reasoner: A Training-Free Multi-Agent Framework for Coarse-to-Fine Audio Deep Reasoning",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2509.16971/2509.16971.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.02995",
+      "canonical_id": "arxiv:2510.02995",
+      "title": "AudioToolAgent: An Agentic Framework for Audio-Language Models",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.02995/2510.02995.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.07838",
+      "canonical_id": "arxiv:2510.07838",
+      "title": "Full-Duplex-Bench-v2: A Multi-Turn Evaluation Framework for Duplex Dialogue Systems with an Automated Examiner",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.07838/2510.07838.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.07978",
+      "canonical_id": "arxiv:2510.07978",
+      "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.07978/2510.07978.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.11098",
+      "canonical_id": "arxiv:2510.11098",
+      "title": "VCB Bench: An Evaluation Benchmark for Audio-Grounded Large Language Model Conversational Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.11098/2510.11098.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.15421",
+      "canonical_id": "arxiv:2510.15421",
+      "title": "When Seeing Is not Enough: Revealing the Limits of Active Reasoning in MLLMs",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.15421/2510.15421.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2510.20867",
+      "canonical_id": "arxiv:2510.20867",
+      "title": "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2510.20867/2510.20867.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.11109",
+      "canonical_id": "arxiv:2512.11109",
+      "title": "Limits and Gains of Test-Time Scaling in Vision-Language Reasoning",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2512.11109/2512.11109.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.14865",
+      "canonical_id": "arxiv:2512.14865",
+      "title": "Audio MultiChallenge: A Multi-Turn Evaluation of Spoken Dialogue Systems on Natural Human Interaction",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2512.14865/2512.14865.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2512.16978",
+      "canonical_id": "arxiv:2512.16978",
+      "title": "A Benchmark for Omni-Modal Reasoning in Long Videos",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2512.16978/2512.16978.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.01885",
+      "canonical_id": "arxiv:2601.01885",
+      "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2601.01885/2601.01885.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.03515",
+      "canonical_id": "arxiv:2601.03515",
+      "title": "Mem-Gallery: Benchmarking Multimodal Long-Term Conversational Memory for MLLM Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2601.03515/2601.03515.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.09413",
+      "canonical_id": "arxiv:2601.09413",
+      "title": "Speech-Hands: A Self-Reflection Voice Agentic Approach to Speech Recognition and Audio Reasoning with Omni Perception",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2601.09413/2601.09413.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2601.19935",
+      "canonical_id": "arxiv:2601.19935",
+      "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2601.19935/2601.19935.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.03707",
+      "canonical_id": "arxiv:2602.03707",
+      "title": "OmniRAG-Agent: Agentic Omnimodal Reasoning for Low-Resource Long Audio-Video Question Answering",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.03707/2602.03707.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.07624",
+      "canonical_id": "arxiv:2602.07624",
+      "title": "M2A: Multimodal Memory Agent with Dual-Layer Hybrid Memory for Long-Term Personalized Interactions",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.07624/2602.07624.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2602.12670",
+      "canonical_id": "arxiv:2602.12670",
+      "title": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2602.12670/2602.12670.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.01145",
+      "canonical_id": "arxiv:2603.01145",
+      "title": "AutoSkill: Experience-Driven Lifelong Learning via Skill Self-Evolution",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.01145/2603.01145.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.12056",
+      "canonical_id": "arxiv:2603.12056",
+      "title": "XSkill: Continual Learning from Experience and Skills in Multimodal Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.12056/2603.12056.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.16924",
+      "canonical_id": "arxiv:2603.16924",
+      "title": "SimulU: Training-free Policy for Long-form Simultaneous Speech-to-Speech Translation",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.16924/2603.16924.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2603.28088",
+      "canonical_id": "arxiv:2603.28088",
+      "title": "GEMS: Agent-Native Multimodal Generation with Memory and Skills",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2603.28088/2603.28088.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.03964",
+      "canonical_id": "arxiv:2604.03964",
+      "title": "SKILLFOUNDRY: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.03964/2604.03964.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.04847",
+      "canonical_id": "arxiv:2604.04847",
+      "title": "Full-Duplex-Bench-v3: Benchmarking Tool Use for Full-Duplex Voice Agents Under Real-World Disfluency",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.04847/2604.04847.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.08064",
+      "canonical_id": "arxiv:2604.08064",
+      "title": "ImplicitMemBench: Measuring Unconscious Behavioral Adaptation in Large Language Models",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.08064/2604.08064.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.15383",
+      "canonical_id": "arxiv:2604.15383",
+      "title": "Temporal Contrastive Decoding: A Training-Free Method for Large Audio-Language Models",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.15383/2604.15383.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.17308",
+      "canonical_id": "arxiv:2604.17308",
+      "title": "SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.17308/2604.17308.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.22821",
+      "canonical_id": "arxiv:2604.22821",
+      "title": "Audio2Tool: Speak, Call, Act -- A Dataset for Benchmarking Speech Tool Use",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.22821/2604.22821.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.24594",
+      "canonical_id": "arxiv:2604.24594",
+      "title": "Skill Retrieval Augmentation for Agentic AI",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.24594/2604.24594.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2604.25122",
+      "canonical_id": "arxiv:2604.25122",
+      "title": "M3-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2604.25122/2604.25122.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.08762",
+      "canonical_id": "arxiv:2605.08762",
+      "title": "Omni-DeepSearch: A Benchmark for Audio-Driven Omni-Modal Deep Search",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.08762/2605.08762.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13277",
+      "canonical_id": "arxiv:2605.13277",
+      "title": "Utility-Oriented Visual Evidence Selection for Multimodal Retrieval-Augmented Generation",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.13277/2605.13277.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13527",
+      "canonical_id": "arxiv:2605.13527",
+      "title": "MMSkills: Towards Multimodal Skills for General Visual Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.13527/2605.13527.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.13716",
+      "canonical_id": "arxiv:2605.13716",
+      "title": "SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.13716/2605.13716.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.15019",
+      "canonical_id": "arxiv:2605.15019",
+      "title": "From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.15019/2605.15019.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2605.28020",
+      "canonical_id": "arxiv:2605.28020",
+      "title": "The Missing Piece in Pre-trained Model Evaluation: Reward-Guided Decoding Unlocks Task-Oriented Behavior Without Parameter Updates",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2605.28020/2605.28020.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.06915",
+      "canonical_id": "arxiv:2606.06915",
+      "title": "ThinkBooster: A Unified Framework for Seamless Test-Time Scaling of LLM Reasoning",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.06915/2606.06915.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.09316",
+      "canonical_id": "arxiv:2606.09316",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.09316/2606.09316.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.18448",
+      "canonical_id": "arxiv:2606.18448",
+      "title": "VISUALSKILL: Multimodal Skills for Computer-Use Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.18448/2606.18448.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.19341",
+      "canonical_id": "arxiv:2606.19341",
+      "title": "Native Active Perception as Reasoning for Omni-Modal Understanding",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.19341/2606.19341.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.19595",
+      "canonical_id": "arxiv:2606.19595",
+      "title": "IHBench: Evaluating Post-Interruption Recovery in Voice Agents with Structured Workflows",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.19595/2606.19595.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2606.29538",
+      "canonical_id": "arxiv:2606.29538",
+      "title": "RESOURCE2SKILL: Distilling Executable Agent Skills from Human-Created Multimodal Resources",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2606.29538/2606.29538.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    },
+    {
+      "packet_item_id": "CAL-2607.07985",
+      "canonical_id": "arxiv:2607.07985",
+      "title": "A Reliability Assessment of LALM Audio Judges for Full-Duplex Voice Agents",
+      "fulltext_locator": "${SPEECHRL_DATA_DIR}/survey-fulltext/2607.07985/2607.07985.pdf",
+      "blank_response": {
+        "paper_disposition": null,
+        "paper_role": null,
+        "problem_nodes": [],
+        "intervention_axes": [],
+        "mm_level": null,
+        "run_cell_boundary": null,
+        "paired_status": null,
+        "claim_links": [],
+        "protocol_template_links": [],
+        "reference_borrow_reproduce": null,
+        "notes_with_source_locators": []
+      }
+    }
+  ]
+}

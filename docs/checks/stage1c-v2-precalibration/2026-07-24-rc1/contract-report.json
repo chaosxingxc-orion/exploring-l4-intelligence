@@ -1,0 +1,39 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v1",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-RC1",
+  "as_of": "2026-07-24",
+  "status": "SIGNED_320_CALIBRATION_INPUT_AWAITING_INDEPENDENT_CODERS",
+  "authority": {
+    "owner_token": "AUTHORIZE_STAGE1C_V2_CALIBRATION_PREPARATION",
+    "owner_authorization_git_blob": "f3c93d8a8f117167e6e56855125ba615b0c9706f",
+    "capability_delta_signed": true,
+    "targeted_anchor_signed": true,
+    "full_mapping_signed": false,
+    "research_execution_authorized": false
+  },
+  "surface": {
+    "candidate_union": 320,
+    "claims": 13,
+    "claim_links": 74,
+    "translation_contracts_pending": 23,
+    "candidate_protocol_templates": 8,
+    "pending_problem_routes_closed": 15,
+    "calibration_N": 56,
+    "reproduction_anchors": 0
+  },
+  "acceptance_checks": {
+    "owner_authority_byte_bound": true,
+    "two_stage1b_release_signatures_byte_bound_and_effective": true,
+    "signed_320_limited_to_calibration_input": true,
+    "full_320_mapping_still_withheld": true,
+    "all_38_overlay_records_claim_linked": true,
+    "all_15_pending_problem_labels_routed_without_promotion": true,
+    "old_eight_families_demoted_to_templates": true,
+    "remote_analogues_withheld_pending_translation": true,
+    "whole_package_schemas_present": true,
+    "exact_56_work_calibration_packet_prepared": true,
+    "calibration_not_fabricated_or_executed": true,
+    "five_reproduction_candidates_remain_non_anchors": true,
+    "no_model_metric_reproduction_prototype_or_novelty_verdict": true
+  }
+}

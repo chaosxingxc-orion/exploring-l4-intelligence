@@ -1,0 +1,2301 @@
+{
+  "schema": "sf-stage1c-v2-release-merge-manifest-v1",
+  "artifact_id": "SF-STAGE1C-V2-SIGNED-CALIBRATION-INPUT-320-R1",
+  "as_of": "2026-07-24",
+  "status": "SIGNED_CALIBRATION_INPUT_AWAITING_INDEPENDENT_CODERS",
+  "stage1c_calibration_input": true,
+  "stage1c_mapping_input": false,
+  "counts": {
+    "frozen_base": 226,
+    "inherited_union": 282,
+    "capability_delta": 14,
+    "targeted_overlay": 24,
+    "candidate_union": 320
+  },
+  "release_layers": [
+    {
+      "layer": "FROZEN_226",
+      "identity": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+      "signed": true
+    },
+    {
+      "layer": "INHERITED_282",
+      "identity": "CURRENT_DEDUPLICATED_UNION",
+      "signed": true
+    },
+    {
+      "layer": "CAPABILITY_DELTA_14",
+      "manifest_sha256": "ee8f0564069475f58f9be313a7978db662665d1d379b213d3005507c59dea3a6",
+      "signature": "SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE",
+      "signature_artifact_git_blob": "a5af670aacbb5194f42947150440cd022b16c652",
+      "signed": true
+    },
+    {
+      "layer": "TARGETED_OVERLAY_24",
+      "manifest_sha256": "d70de83e36b4d2c07ae0ab02506b60269620bd5d5768d6ca7b8366d11818e0e6",
+      "signature": "SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE",
+      "signature_artifact_git_blob": "e5a039a9297fac3ce84ed981449f085d6bb79378",
+      "signed": true
+    }
+  ],
+  "merge_requires_third_stage1b_scientific_signature": false,
+  "checks": {
+    "frozen_226": true,
+    "appendix_59": true,
+    "base_appendix_overlap_7": true,
+    "priority_4_disjoint": true,
+    "inherited_282": true,
+    "capability_14_disjoint": true,
+    "targeted_24_disjoint": true,
+    "candidate_320": true
+  },
+  "works": [
+    {
+      "canonical_id": "acl:2026.acl-long.1615",
+      "title": "S2S-Arena: Evaluating Paralinguistic Instruction Following in Speech-to-Speech Models",
+      "source_layers": [
+        "CURRENT_PRIORITY_4"
+      ]
+    },
+    {
+      "canonical_id": "acl:2026.findings-eacl.151",
+      "title": "Hearing Between the Lines: Unlocking the Reasoning Power of LLMs for Speech Evaluation",
+      "source_layers": [
+        "CURRENT_PRIORITY_4"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2210.07677",
+      "title": "TransFusion: Transcribing Speech with Multinomial Diffusion",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2212.13378",
+      "title": "Don't Be So Sure! Boosting ASR Decoding via Confidence Relaxation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2302.01560",
+      "title": "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2303.11381",
+      "title": "MM-REACT: Prompting ChatGPT for Multimodal Reasoning and Action",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2304.12995",
+      "title": "AudioGPT: Understanding and Generating Speech, Music, Sound, and Talking Head",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2305.13738",
+      "title": "i-Code Studio: A Configurable and Composable Framework for Integrative AI",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2305.17444",
+      "title": "Query-Efficient Black-Box Red Teaming via Bayesian Optimization",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2306.12577",
+      "title": "NoRefER: a Referenceless Quality Metric for Automatic Speech Recognition via Semi-Supervised Language Model Fine-Tuning with Contrastive Learning",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2309.07925",
+      "title": "Hierarchical Audio-Visual Information Fusion with Multi-label Joint Decoding for MER 2023",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2310.16029",
+      "title": "Finetuning Offline World Models in the Real World",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2401.10061",
+      "title": "DiffusionAgent: Navigating Expert Models for Agentic Image Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2402.17735",
+      "title": "High-Fidelity Neural Phonetic Posteriorgrams",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2402.17753",
+      "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2405.20834",
+      "title": "Retrieval Meets Reasoning: Even High-school Textbook Knowledge Benefits Multimodal Reasoning",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2406.12814",
+      "title": "Dissecting Adversarial Robustness of Multimodal LM Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2407.00092",
+      "title": "Visual Reasoning and Multi-Agent Approach in Multimodal Large Language Models (MLLMs): Solving TSP and mTSP Combinatorial Challenges",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2407.06426",
+      "title": "DebUnc: Improving Large Language Model Agent Communication With Uncertainty Metrics",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2407.09886",
+      "title": "Speech-Copilot: Leveraging Large Language Models for Speech Processing via Task Decomposition, Modularization, and Program Generation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2407.11010",
+      "title": "Navigating the Minefield of MT Beam Search in Cascaded Streaming Speech Translation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2407.18521",
+      "title": "Patched MOA: optimizing inference for diverse software development tasks",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2408.03047",
+      "title": "OpenOmni: A Collaborative Open Source Tool for Building Future-Ready Multimodal Conversational Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.00467",
+      "title": "Dynamic Planning for LLM-based Graphical User Interface Automation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.05146",
+      "title": "CTC-GMM: CTC guided modality matching for fast and accurate streaming speech translation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.16670",
+      "title": "CoPS: Empowering LLM Agents with Provable Cross-Task Experience Sharing",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.20027",
+      "title": "Agentic Feedback Loop Modeling Improves Recommendation and User Simulation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.21485",
+      "title": "SpeechQE: Estimating the Quality of Direct Speech Translation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2410.23230",
+      "title": "Aligning Audio-Visual Joint Representations with an Agentic Workflow",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2411.00321",
+      "title": "MACE: Leveraging Audio for Evaluating Audio Captioning Systems",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2411.05679",
+      "title": "Tell What You Hear From What You See -- Video to Audio Generation Through Text",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2411.10440",
+      "title": "LLaVA-CoT: Let Vision Language Models Reason Step-by-Step",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2411.12736",
+      "title": "ACING: Actor-Critic for Instruction Learning in Black-Box LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2411.17451",
+      "title": "VL-RewardBench: A Challenging Benchmark for Vision-Language Generative Reward Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2412.03704",
+      "title": "Scaling Inference-Time Search with Vision Value Model for Improved Visual Comprehension",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2412.06474",
+      "title": "Enhancing Vision-Language Model Reliability with Uncertainty-Guided Dropout Decoding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2501.05755",
+      "title": "CognoSpeak: an automatic, remote assessment of early cognitive decline in real-world conversational speech",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2501.05803",
+      "title": "Test-time Alignment of Diffusion Models without Reward Over-optimization",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2501.11721",
+      "title": "Explain-Query-Test: Self-Evaluating LLMs Via Explanation and Comprehension Discrepancy",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2501.19393",
+      "title": "s1: Simple test-time scaling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.03628",
+      "title": "The Hidden Life of Tokens: Reducing Hallucination of Large Vision-Language Models via Visual Information Steering",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.05435",
+      "title": "Unbiased Sliced Wasserstein Kernels for High-Quality Audio Captioning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.06589",
+      "title": "Hephaestus: Improving Fundamental Agent Capabilities of Large Language Models through Continual Pre-Training",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.12110",
+      "title": "A-MEM: Agentic Memory for LLM Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.13681",
+      "title": "Repo2Run: Automated Building Executable Environment for Code Repository at Scale",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.16069",
+      "title": "Curie: Toward Rigorous and Automated Scientific Experimentation with AI Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.18770",
+      "title": "Reward Shaping to Mitigate Reward Hacking in RLHF",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2502.19328",
+      "title": "Agentic Reward Modeling: Integrating Human Preferences with Verifiable Correctness Signals for Reliable Reward Systems",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2503.01163",
+      "title": "Bandit-Based Prompt Design Strategy Selection Improves Prompt Optimizers",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2503.09349",
+      "title": "Performance Modeling for Correlation-based Neural Decoding of Auditory Attention to Speech",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2503.14443",
+      "title": "EnvBench: A Benchmark for Automated Environment Setup",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2503.16492",
+      "title": "FAM-HRI: Foundation-Model Assisted Multi-Modal Human-Robot Interaction Combining Gaze and Speech",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2504.01848",
+      "title": "PaperBench: Evaluating AI's Ability to Replicate AI Research",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2504.08687",
+      "title": "Voice Interaction With Conversational AI Could Facilitate Thoughtful Reflection and Substantive Revision in Writing",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2504.15133",
+      "title": "EasyEdit2: An Easy-to-use Steering Framework for Editing Large Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2504.16728",
+      "title": "IRIS: Interactive Research Ideation System for Accelerating Scientific Discovery",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2505.00684",
+      "title": "Visual Test-time Scaling for GUI Agent Grounding",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2505.09558",
+      "title": "WavReward: Spoken Dialogue Models With Generalist Reward Evaluators",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2505.14996",
+      "title": "MAS-ZERO: Designing Multi-Agent Systems with Zero Supervision",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2505.20862",
+      "title": "AVCD: Mitigating Hallucinations in Audio-Visual Large Language Models through Contrastive Decoding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2505.22453",
+      "title": "First SFT, Second RL, Third UPT: Continual Improving Multi-Modal LLM Reasoning via Unsupervised Post-Training",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.00832",
+      "title": "Counterfactual Activation Editing for Post-hoc Prosody and Mispronunciation Correction in TTS Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.04625",
+      "title": "Advancing Tool-Augmented Large Language Models via Meta-Verification and Reflection Learning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.05294",
+      "title": "A Smooth Sea Never Made a Skilled SAILOR: Robust Imitation via Learning to Search",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.05984",
+      "title": "Audio-Aware Large Language Models as Judges for Speaking Styles",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.11077",
+      "title": "CyclicReflex: Improving Reasoning Models via Cyclical Reflection Token Scheduling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.11127",
+      "title": "UITron-Speech: Towards Automated GUI Agents Based on Speech Instructions",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.17629",
+      "title": "CLiViS: Unleashing Cognitive Map through Linguistic-Visual Synergy for Embodied Visual Reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.18959",
+      "title": "From Web Search towards Agentic Deep Research: Incentivizing Search with Reasoning Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.22846",
+      "title": "Boosting CTC-Based ASR Using LLM-Based Intermediate Loss Regularization",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2506.23049",
+      "title": "AURA: Agent for Understanding, Reasoning, and Automated Tool Use in Voice-Driven Tasks",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2507.02755",
+      "title": "Multi-agent Auditory Scene Analysis",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2507.07115",
+      "title": "Autonomous Control Leveraging LLMs: An Agentic Framework for Next-Generation Industrial Automation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2507.10859",
+      "title": "MultiVox: A Benchmark for Evaluating Voice Assistants for Multimodal Interactions",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2507.12705",
+      "title": "AudioJudge: Understanding What Works in Large Audio Model Based Speech Evaluation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.02013",
+      "title": "SpeechRole: A Large-Scale Dataset and Benchmark for Evaluating Speech Role-Playing Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.02228",
+      "title": "Large Language Model Guided Decoding for Self-Supervised Speech Recognition",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.02391",
+      "title": "Inference-time Scaling for Diffusion-based Audio Super-resolution",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.10015",
+      "title": "RealTalk-CN: A Realistic Chinese Speech-Text Dialogue Benchmark With Cross-Modal Interaction Analysis",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.11987",
+      "title": "FutureX: An Advanced Live Benchmark for LLM Agents in Future Prediction",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.16153",
+      "title": "Memento: Fine-tuning LLM Agents without Fine-tuning LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.18240",
+      "title": "MTalk-Bench: Evaluating Speech-to-Speech Models in Multi-Turn Dialogues via Arena-style and Rubrics Protocols",
+      "source_layers": [
+        "CURRENT_PRIORITY_4"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.19828",
+      "title": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2508.21475",
+      "title": "MMSearch-Plus: Benchmarking Provenance-Aware Search for Multimodal Browsing Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.06382",
+      "title": "Context-Adaptive Hearing Aid Fitting Advisor through Multi-turn Multimodal LLM Conversation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.09245",
+      "title": "Jupiter: Enhancing LLM Data Analysis Capabilities via Notebook and Inference-Time Value-Guided Search",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.11656",
+      "title": "MALLM: Multi-Agent Large Language Models Framework",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.12591",
+      "title": "MAGIC-Enhanced Keyword Prompting for Zero-Shot Audio Captioning with CLIP Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.13642",
+      "title": "LLM-I: LLMs are Naturally Interleaved Multimodal Creators",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.15666",
+      "title": "TISDiSS: A Training-Time and Inference-Time Scalable Framework for Discriminative Source Separation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.16622",
+      "title": "Audio-Conditioned Diffusion LLMs for ASR and Deliberation Processing",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.16971",
+      "title": "AudioGenie-Reasoner: A Training-Free Multi-Agent Framework for Coarse-to-Fine Audio Deep Reasoning",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.20410",
+      "title": "Phoenix-VAD: Streaming Semantic Endpoint Detection for Full-Duplex Speech Interaction",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.20502",
+      "title": "MARS: toward more efficient multi-agent collaboration for LLM reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.21749",
+      "title": "Thinking with Sound: Audio Chain-of-Thought Enables Multimodal Reasoning in Large Audio-Language Models",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.22644",
+      "title": "WebGen-Agent: Enhancing Interactive Website Generation with Multi-Level Feedback and Step-Level Reinforcement Learning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.25370",
+      "title": "Where LLM Agents Fail and How They can Learn From Failures",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2509.26346",
+      "title": "EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.00743",
+      "title": "From Scores to Preferences: Redefining MOS Benchmarking for Speech Quality Reward Modeling",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.02995",
+      "title": "AudioToolAgent: An Agentic Framework for Audio-Language Models",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.04618",
+      "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.05478",
+      "title": "AQA-TTRL: Self-Adaptation in Audio Question Answering with Test-Time Reinforcement Learning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.06223",
+      "title": "A Multimodal GUI Architecture for Interfacing with LLM-Based Conversational Assistants",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.07838",
+      "title": "Full-Duplex-Bench-v2: A Multi-Turn Evaluation Framework for Duplex Dialogue Systems with an Automated Examiner",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.07978",
+      "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.09085",
+      "title": "FLToP CTC: Frame-Level Token Pruning via Relative Threshold for Efficient and Memory-Saving Decoding on Diverse Platforms",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.11098",
+      "title": "VCB Bench: An Evaluation Benchmark for Audio-Grounded Large Language Model Conversational Agents",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.11454",
+      "title": "Audio-Maestro: Enhancing Large Audio-Language Models with Tool-Augmented Reasoning",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.12720",
+      "title": "Omni-Captioner: Data Pipeline, Models, and Benchmark for Omni Detailed Perception",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.12995",
+      "title": "Continuous-Token Diffusion for Speaker-Referenced TTS in Multimodal LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.14664",
+      "title": "SpeechLLM-as-Judges: Towards General and Interpretable Speech Quality Evaluation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.15421",
+      "title": "When Seeing Is not Enough: Revealing the Limits of Active Reasoning in MLLMs",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.18179",
+      "title": "Adaptive Coopetition: Leveraging Coarse Verifier Signals for Resilient Multi-Agent LLM Reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2510.20867",
+      "title": "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.02834",
+      "title": "Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.07931",
+      "title": "SpeechJudge: Towards Human-Level Judgment for Speech Naturalness",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.11005",
+      "title": "Draft and Refine with Visual Experts",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.11373",
+      "title": "MarsRL: Advancing Multi-Agent Reasoning System via Reinforcement Learning with Agentic Pipeline Parallelism",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.12710",
+      "title": "Evolve the Method, Not the Prompts: Evolutionary Synthesis of Jailbreak Attacks on LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.16972",
+      "title": "ToC: Tree-of-Claims Search with Multi-Agent Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.18760",
+      "title": "HERMES: Towards Efficient and Verifiable Mathematical Reasoning in LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.19314",
+      "title": "PRInTS: Reward Modeling for Long-Horizon Information Seeking",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.21654",
+      "title": "EvilGenie: A Reward Hacking Benchmark",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.21730",
+      "title": "A Benchmark for Procedural Memory Retrieval in Language Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2511.23473",
+      "title": "ThetaEvolve: Test-time Learning on Open Problems",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.00831",
+      "title": "ReJump: A Tree-Jump Representation for Analyzing and Improving LLM Reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.02340",
+      "title": "Reasoning Path and Latent State Analysis for Multi-view Visual Spatial Reasoning: A Cognitive Science Perspective",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.10170",
+      "title": "Semantic-Aware Confidence Calibration for Automated Audio Captioning",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.10403",
+      "title": "BRACE: A Benchmark for Robust Audio Caption Quality Evaluation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.11109",
+      "title": "Limits and Gains of Test-Time Scaling in Vision-Language Reasoning",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.14865",
+      "title": "Audio MultiChallenge: A Multi-Turn Evaluation of Spoken Dialogue Systems on Natural Human Interaction",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.16250",
+      "title": "AMUSE: Audio-Visual Benchmark and Alignment Framework for Agentic Multi-Speaker Understanding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.16978",
+      "title": "A Benchmark for Omni-Modal Reasoning in Long Videos",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.23646",
+      "title": "Active Perception Agent for Omnimodal Audio-Video Understanding",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2512.24952",
+      "title": "Beyond the Last Frame: Process-aware Evaluation for Generative Video Reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.00290",
+      "title": "ClinicalReTrial: Clinical Trial Redesign with Self-Evolving Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.01498",
+      "title": "From Failure to Mastery: Generating Hard Samples for Tool-use Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.01885",
+      "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.03515",
+      "title": "Mem-Gallery: Benchmarking Multimodal Long-Term Conversational Memory for MLLM Agents",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.04029",
+      "title": "SpeakerSleuth: Can Large Audio-Language Models Judge Speaker Consistency across Multi-turn Dialogues?",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.04500",
+      "title": "GUITester: Enabling GUI Agents for Exploratory Defect Discovery",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.05777",
+      "title": "EET: Experience-Driven Early Termination for Cost-Efficient Software Engineering Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.05808",
+      "title": "EnvScaler: Scaling Tool-Interactive Environments for LLM Agent via Programmatic Synthesis",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.05930",
+      "title": "Can We Predict Before Executing Machine Learning Agents?",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.06328",
+      "title": "C-World: A Computer Use Agent Environment Creator",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.08955",
+      "title": "Imagine-then-Plan: Agent Learning from Adaptive Lookahead with World Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.09413",
+      "title": "Speech-Hands: A Self-Reflection Voice Agentic Approach to Speech Recognition and Audio Reasoning with Omni Perception",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.14304",
+      "title": "Guided by the Plan: Enhancing Faithful Autoregressive Text-to-Audio Generation with Guided Decoding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.15016",
+      "title": "LiViBench: An Omnimodal Benchmark for Interactive Livestream Video Understanding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.17902",
+      "title": "dLLM-ASR: A Faster Diffusion LLM-based Framework for Speech Recognition",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.19935",
+      "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.19956",
+      "title": "VoxPrivacy: A Benchmark for Evaluating Interactional Privacy of Speech Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.20230",
+      "title": "Unit-Based Agent for Semi-Cascaded Full-Duplex Dialogue Systems",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.22674",
+      "title": "VisionTrim: Unified Vision Token Compression for Training-Free MLLM Acceleration",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2601.22964",
+      "title": "EvoClinician: A Self-Evolving Agent for Multi-Turn Medical Diagnosis via Test-Time Evolutionary Learning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.01297",
+      "title": "RE-MCDF: Closed-Loop Multi-Expert LLM Reasoning for Knowledge-Grounded Clinical Diagnosis",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.01331",
+      "title": "A-MapReduce: Executing Wide Search via Agentic MapReduce",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.03707",
+      "title": "OmniRAG-Agent: Agentic Omnimodal Reasoning for Low-Resource Long Audio-Video Question Answering",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.05327",
+      "title": "ProAct: Agentic Lookahead in Interactive Environments",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.07187",
+      "title": "PreFlect: From Retrospective to Prospective Reflection in Large Language Model Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.07624",
+      "title": "M2A: Multimodal Memory Agent with Dual-Layer Hybrid Memory for Long-Term Personalized Interactions",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.07833",
+      "title": "SPD-Faith Bench: Diagnosing and Improving Faithfulness in Chain-of-Thought for Multimodal Large Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.10063",
+      "title": "Chain of Mindset: Reasoning with Adaptive Cognitive Modes",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.10656",
+      "title": "AudioRAG: A Challenging Benchmark for Audio Reasoning and Information Retrieval",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.11757",
+      "title": "Code2Worlds: Empowering Coding LLMs for 4D World Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.11931",
+      "title": "AdaptEvolve: Improving Efficiency of Evolutionary AI Agents through Adaptive Model Selection",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.12670",
+      "title": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.13685",
+      "title": "AuTAgent: A Reinforcement Learning Framework for Tool-Augmented Audio Reasoning",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.13891",
+      "title": "GSRM: Generative Speech Reward Model for Speech RLHF",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.14534",
+      "title": "MoRL: Reinforced Reasoning for Unified Motion Understanding and Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.16493",
+      "title": "MMA: Multimodal Memory Agent",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.16898",
+      "title": "MALLVI: A Multi-Agent Framework for Integrated Generalized Robotics Manipulation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.18998",
+      "title": "Benchmark Test-Time Scaling of General LLM Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.19633",
+      "title": "TAPE: Tool-Guided Adaptive Planning and Constrained Execution in Language Model Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2602.23681",
+      "title": "ODAR: Principled Adaptive Routing for LLM Reasoning via Active Inference",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.01145",
+      "title": "AutoSkill: Experience-Driven Lifelong Learning via Skill Self-Evolution",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.01692",
+      "title": "Reasoning as Gradient: Scaling MLE Agents Beyond Tree Search",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.02206",
+      "title": "VoiceAgentRAG: Solving the RAG Latency Bottleneck in Real-Time Voice Agents Using Dual-Agent Architectures",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.02510",
+      "title": "ParEVO: Synthesizing Code for Irregular Data: High-Performance Parallelism through Agentic Evolution",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.03296",
+      "title": "PlugMem: A Task-Agnostic Plugin Memory Module for LLM Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.05231",
+      "title": "Boosting ASR Robustness via Test-Time Reinforcement Learning with Audio-Text Semantic Rewards",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.05413",
+      "title": "Building Enterprise Realtime Voice Agents from Scratch: A Technical Tutorial",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.09232",
+      "title": "How Contrastive Decoding Enhances Large Audio Language Models?",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.09714",
+      "title": "MUGEN: Evaluating and Improving Multi-audio Understanding of Large Audio-Language Models",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.09821",
+      "title": "One-Eval: An Agentic System for Automated and Traceable LLM Evaluation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.11397",
+      "title": "Edge-Cloud Collaborative Speech Emotion Captioning via Token-Level Speculative Decoding in Audio-Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.12056",
+      "title": "XSkill: Continual Learning from Experience and Skills in Multimodal Agents",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.12520",
+      "title": "When LLM Judge Scores Look Good but Best-of-N Decisions Fail",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.13017",
+      "title": "Structured Distillation for Personalized Agent Memory: 11x Token Reduction with Retrieval Preservation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.13258",
+      "title": "Your Code Agent Can Grow Alongside You with Structured Memory",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.13686",
+      "title": "$τ$-Voice: Benchmarking Full-Duplex Voice Agents on Real-World Domains",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.14889",
+      "title": "SDiaReward: Modeling and Benchmarking Spoken Dialogue Rewards with Modality and Colloquialness",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.15401",
+      "title": "SWE-Skills-Bench: Do Agent Skills Actually Help in Real-World Software Engineering?",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.16606",
+      "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.16924",
+      "title": "SimulU: Training-free Policy for Long-form Simultaneous Speech-to-Speech Translation",
+      "source_layers": [
+        "CURRENT_PRIORITY_4"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.17455",
+      "title": "FACE-net: Factual Calibration and Emotion Augmentation for Retrieval-enhanced Emotional Video Captioning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.19615",
+      "title": "CAF-Score: Calibrating CLAP with LALMs for Reference-free Audio Captioning Evaluation",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.21013",
+      "title": "A Framework for Low-Latency, LLM-driven Multimodal Interaction on the Pepper Robot",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.21357",
+      "title": "AgentHER: Hindsight Experience Replay for LLM Agent Trajectory Relabeling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.24224",
+      "title": "RVLM: Recursive Vision-Language Models with Adaptive Depth",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.28088",
+      "title": "GEMS: Agent-Native Multimodal Generation with Memory and Skills",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2603.28488",
+      "title": "Courtroom-Style Multi-Agent Debate with Progressive RAG and Role-Switching for Controversial Claim Verification",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.01212",
+      "title": "$\\texttt{YC-Bench}$: Benchmarking AI Agents for Long-Term Planning and Consistent Execution",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.02869",
+      "title": "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.03964",
+      "title": "SKILLFOUNDRY: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.04847",
+      "title": "Full-Duplex-Bench-v3: Benchmarking Tool Use for Full-Duplex Voice Agents Under Real-World Disfluency",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.08064",
+      "title": "ImplicitMemBench: Measuring Unconscious Behavioral Adaptation in Large Language Models",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.09121",
+      "title": "Interactive ASR: Towards Human-Like Interaction and Semantic Coherence Evaluation for Agentic Speech Recognition",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.10123",
+      "title": "Training-Free Cross-Lingual Dysarthria Severity Assessment via Phonological Subspace Analysis in Self-Supervised Speech Representations",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.10493",
+      "title": "SWE-Shepherd: Advancing PRMs for Reinforcing Code Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.10734",
+      "title": "Self-Correcting RAG: Enhancing Faithfulness via MMKP Context Selection and NLI-Guided MCTS",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.12867",
+      "title": "QuarkMedSearch: A Long-Horizon Deep Search Agent for Exploring Medical Intelligence",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.14799",
+      "title": "Knowing When Not to Answer: Evaluating Abstention in Multimodal Reasoning Systems",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.15383",
+      "title": "Temporal Contrastive Decoding: A Training-Free Method for Large Audio-Language Models",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.16456",
+      "title": "EchoChain: A Full-Duplex Benchmark for State-Update Reasoning Under Interruptions",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.16706",
+      "title": "Evaluating Tool-Using Language Agents: Judge Reliability, Propagation Cascades, and Runtime Mitigation in AgentProp-Bench",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.17308",
+      "title": "SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.19797",
+      "title": "Enhancing ASR Performance in the Medical Domain for Dravidian Languages",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.21706",
+      "title": "Phonological Subspace Collapse Is Aetiology-Specific and Cross-Lingually Stable: Evidence from 3,374 Speakers",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.21816",
+      "title": "Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.22821",
+      "title": "Audio2Tool: Speak, Call, Act -- A Dataset for Benchmarking Speech Tool Use",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.24278",
+      "title": "RAS: a Reliability Oriented Metric for Automatic Speech Recognition",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.24357",
+      "title": "DPRM: A Plug-in Doob h transform-induced Token-Ordering Module for Diffusion Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.24594",
+      "title": "Skill Retrieval Augmentation for Agentic AI",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.25122",
+      "title": "M3-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.25256",
+      "title": "AutoResearchBench: Benchmarking AI Agents on Complex Scientific Literature Discovery",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2604.27283",
+      "title": "Learning When to Remember: Risk-Sensitive Contextual Bandits for Abstention-Aware Memory Retrieval in LLM-Based Coding Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.00034",
+      "title": "Symbolic Execution Meets Multi-LLM Orchestration: Detecting Memory Vulnerabilities in Incomplete Rust CVE Snippets",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.02289",
+      "title": "EngiAgent: Fully Connected Coordination of LLM Agents for Solving Open-ended Engineering Problems with Feasible Solutions",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.03042",
+      "title": "ARIS: Autonomous Research via Adversarial Multi-Agent Collaboration",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.03937",
+      "title": "MiniMind-O Technical Report: An Open Small-Scale Speech-Native Omni Model",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.05185",
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.06607",
+      "title": "AI CFD Scientist: Toward Open-Ended Computational Fluid Dynamics Discovery with Physics-Aware AI Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08083",
+      "title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08271",
+      "title": "Bridging Modalities, Spanning Time: Structured Memory for Ultra-Long Agentic Video Reasoning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08374",
+      "title": "MemQ: Integrating Q-Learning into Self-Evolving Memory Agents over Provenance DAGs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08638",
+      "title": "Geometry Guided Self-Consistency for Physical AI",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08762",
+      "title": "Omni-DeepSearch: A Benchmark for Audio-Driven Omni-Modal Deep Search",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.08904",
+      "title": "OPT-BENCH: Evaluating the Iterative Self-Optimization of LLM Agents in Large-Scale Search Spaces",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.10848",
+      "title": "Rethinking Agentic Search with Pi-Serini: Is Lexical Retrieval Sufficient?",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.11866",
+      "title": "AuDirector: A Self-Reflective Closed-Loop Framework for Immersive Audio Storytelling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.12571",
+      "title": "VideoSEAL: Mitigating Evidence Misalignment in Agentic Long Video Understanding by Decoupling Answer Authority",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.13277",
+      "title": "Utility-Oriented Visual Evidence Selection for Multimodal Retrieval-Augmented Generation",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.13414",
+      "title": "TRIAGE: Evaluating Prospective Metacognitive Control in LLMs under Resource Constraints",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.13527",
+      "title": "MMSkills: Towards Multimodal Skills for General Visual Agents",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.13716",
+      "title": "SkillOps: Managing LLM Agent Skill Libraries as Self-Maintaining Software Ecosystems",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.13841",
+      "title": "EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.14906",
+      "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.15019",
+      "title": "From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.15104",
+      "title": "From Text to Voice: A Reproducible and Verifiable Framework for Evaluating Tool Calling LLM Agents",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.15215",
+      "title": "SkillSmith: Compiling Agent Skills into Boundary-Guided Runtime Interfaces",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.15226",
+      "title": "Is Agentic AI Ready for Real-World Hardware Engineering? A Deep Dive with Phoenix-bench",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.16481",
+      "title": "Visual Agentic Memory: Enabling Online Long Video Understanding via Online Indexing, Hierarchical Memory, and Agentic Retrieval",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.17444",
+      "title": "MemRepair: Hierarchical Memory for Agentic Repository-Level Vulnerability Repair",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.18641",
+      "title": "Leveraging Latent Visual Reasoning in Silence",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.18740",
+      "title": "Vision-OPD: Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.19265",
+      "title": "MuMuTestUp: Mutation-based Multi-Agent Test Case Update",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.20306",
+      "title": "WildRoadBench: A Wild Aerial Road-Damage Grounding Benchmark for Vision-Language Models and Autonomous Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.23261",
+      "title": "UniSRM: A Unified Speech Reward Model for Reasoning-Based Fine-grained Assessment",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.23463",
+      "title": "StepAudio 2.5 Technical Report",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.23590",
+      "title": "Co-ReAct: Rubrics as Step-Level Collaborators for ReAct Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.24524",
+      "title": "What Are We Actually Decoding? Source Attribution for Non-Invasive Brain-to-Language Retrieval",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.24755",
+      "title": "Automated Detection and Classification of Delusion-related Content in Naturalistic Audio Diaries Using Multi-Agent Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.25179",
+      "title": "Locality Matters for Training-Free Audio Token Compression in Audio-Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.25820",
+      "title": "Visual-Redundancy-Controlled Parallel Decoding for Diffusion-Based Multimodal Large Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.26195",
+      "title": "CyberEvolver: Structured Self-Evolution for Cybersecurity Agents On the Fly",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.27466",
+      "title": "AgensFlow: A Coordination-Policy Substrate for Multi-Agent Systems",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.28020",
+      "title": "The Missing Piece in Pre-trained Model Evaluation: Reward-Guided Decoding Unlocks Task-Oriented Behavior Without Parameter Updates",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.28192",
+      "title": "Agentic Active Omni-Modal Perception for Multi-Hop Audio-Visual Reasoning",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.28456",
+      "title": "Diffusion Large Language Models for Visual Speech Recognition",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.28480",
+      "title": "Audio-Mind: An Auditable Agentic Framework for Audio Understanding",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.28814",
+      "title": "Self-Improving Language Models with Bidirectional Evolutionary Search",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.29430",
+      "title": "Towards Human-Like Interactive Speech Recognition With Agentic Correction and Semantic Evaluation",
+      "source_layers": [
+        "FROZEN_226",
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.30256",
+      "title": "VideoFDB: Evaluating Full-Duplex Vision-Speech Capabilities in Conversational Agents",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.30899",
+      "title": "A Unified and Reproducible Experimentation Framework for Speech Understanding",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2605.31432",
+      "title": "DOA: Training-Free Decoder-Only Attention Policy for Long-Form Simultaneous Translation with SpeechLLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.02548",
+      "title": "SN-WER: Script-Normalized WER for Multi-Script Indic ASR Evaluation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.03183",
+      "title": "Inference-Time Scaling for Joint Audio-Video Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.04323",
+      "title": "Answer Self-Consistency with Margin-Triggered Question Re-Arbitration for the CVPR 2026 VidLLMs Challenge",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.04874",
+      "title": "Agent Planning Benchmark: A Diagnostic Framework for Planning Capabilities in LLM Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.05161",
+      "title": "Beyond Text Following: Repairable Arbitration Reversals in Audio-Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.06915",
+      "title": "ThinkBooster: A Unified Framework for Seamless Test-Time Scaling of LLM Reasoning",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.07264",
+      "title": "VISA: A Visual Information Strengthened Audio-Reasoning System for the Interspeech 2026 ARC Agent Track",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.07397",
+      "title": "Audio-Oscar: A Multi-Agent System for Complex Audio Scene Generation, Orchestration, and Refinement",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.08340",
+      "title": "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.09169",
+      "title": "IMUG-Bench: Benchmarking Unified Multimodal Models on Interleaved Understanding and Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.09316",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.09366",
+      "title": "Is Text All You Need? Text as a Universal Information Bottleneck for Speech LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.09837",
+      "title": "Self-EmoQ: Plutchik-Guided Value-based Planning to Drive Streaming Emotional TTS",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.15141",
+      "title": "EChO-Agent: Evidence Chain Orchestration Agent for Audio Reasoning",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.16137",
+      "title": "XAI-Grounded Explanation Generation for Speech Deepfake Detection with Training-Free Multimodal Large Language Models",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.17006",
+      "title": "TuneJury: An Open Metric for Improving Music Generation Preference Alignment",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.17209",
+      "title": "Beyond Parallel Sampling: Diverse Query Initialization for Agentic Search",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.17281",
+      "title": "Are you speaking my languages? On spoken language adherence in multimodal LLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.18448",
+      "title": "VISUALSKILL: Multimodal Skills for Computer-Use Agents",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.19341",
+      "title": "Native Active Perception as Reasoning for Omni-Modal Understanding",
+      "source_layers": [
+        "TARGETED_OVERLAY_24_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.19595",
+      "title": "IHBench: Evaluating Post-Interruption Recovery in Voice Agents with Structured Workflows",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.19927",
+      "title": "CARE: Competence-Aware Reward Shaping for Adaptive Reasoning Length in Video-MLLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.20457",
+      "title": "Repurposing a Speech Classifier for Guided Diffusion-Based Speech Generation",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.20470",
+      "title": "Analyzing Defensive Misdirection Against Model-Guided Automated Attacks on Agentic AI Systems",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.20625",
+      "title": "AlphaMemo: Structured Search-Process Memory for Self-Evolving Alpha Mining Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.21215",
+      "title": "Speaker Identity in Non-Verbal Vocalizations: Conditional Distillation and Mixture of Experts Approach",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.21963",
+      "title": "Holmes: Multimodal Agentic Diagnosis for Mixed-Language Mobile Crashes at Industrial Scale",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.24428",
+      "title": "Escaping the Self-Confirmation Trap: An Execute-Distill-Verify Paradigm for Agentic Experience Learning",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.24648",
+      "title": "ParaPairAudioBench: Paralinguistic Pairwise Audio Benchmark for LALM-as-a-Judge",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.25198",
+      "title": "Heuresis: Search Strategies for Autonomous AI Research Agents Across Quality, Diversity and Novelty",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.28732",
+      "title": "CTC-Seeded Token Edit Refinement for Non-Autoregressive Speech Recognition",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.29538",
+      "title": "RESOURCE2SKILL: Distilling Executable Agent Skills from Human-Created Multimodal Resources",
+      "source_layers": [
+        "CAPABILITY_DELTA_14_SIGNED"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2606.29847",
+      "title": "See Only When Needed: Context-Aware Attention Intervention for Mitigating Hallucinations in LVLMs",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.01071",
+      "title": "MemSyco-Bench: Benchmarking Sycophancy in Agent Memory",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.05682",
+      "title": "FirstResearch: Auditable Question Formation for LLM Scientific Discovery Agents",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.06027",
+      "title": "Fréchet Distance Loss on Speech Representations for Text-to-Speech Synthesis",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.06088",
+      "title": "Flow Matching-Based Speech Source Separation with Best-of-N Biometric Sampling",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.07985",
+      "title": "A Reliability Assessment of LALM Audio Judges for Full-Duplex Voice Agents",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.09101",
+      "title": "Multi-Agent LLM Collaboration for Unit Test Generation via Human-Testing-Inspired Workflows",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.11433",
+      "title": "Omni-Decision: A Progressive Evidence-State Agent System for Omni-Modal QA",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.11798",
+      "title": "StoryTeller: Training-Free Narrative Grounding for Long-Form Audio Description",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.14275",
+      "title": "AI Agents Do Not Fail Alone:The Context Fails First",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.16204",
+      "title": "Masked Diffusion Language Models are Strong and Steerable Text-Based World Models for Agentic RL",
+      "source_layers": [
+        "FROZEN_226"
+      ]
+    },
+    {
+      "canonical_id": "arxiv:2607.16610",
+      "title": "Just A Rather Very Intelligent Spoken Agent",
+      "source_layers": [
+        "CURRENT_APPENDIX_59"
+      ]
+    }
+  ]
+}

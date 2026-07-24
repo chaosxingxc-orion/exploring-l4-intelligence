@@ -1,10 +1,9 @@
 # Current Survey Status
 
-- Gate: **two disjoint unsigned Stage-1B overlays awaiting independent review**. The fixed Stage-1B
-  scientific release remains commit `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and was not mutated.
-  The 14-work capability delta awaits `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`; the 24-work targeted
-  scan awaits `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. The signed Stage-1C common-rubric comparison
-  is preserved but paused.
+- Gate: **signed Stage-1C v2 calibration input awaiting two independent coders** under owner token
+  `AUTHORIZE_STAGE1C_V2_CALIBRATION_PREPARATION`. The fixed Stage-1B release remains
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`. The 14-work capability delta and 24-work targeted scan
+  have separate byte-bound release signatures and enter Stage-1C calibration only.
 - Capability-delta census: 8 approved seeds plus 6 promoted one-hop works; 226 frozen → 282 inherited
   union → 296 release-candidate works. Of 303 regex-resolvable backward-citation IDs, 297 remain
   seen-not-promoted and do not enter the denominator; forward citation closure remains waived after
@@ -16,8 +15,15 @@
   as scanned-not-promoted. All 78 PDF/e-print/extracted-text artifacts are SHA-256 bound. The 24
   records are also reference or borrowed-protocol evidence; reproduction anchors remain zero.
 - Census separation: 282 inherited CURRENT works; 306 after independently adding the targeted 24;
-  320 after also adding the separate unsigned capability delta. The last number is an unsigned
-  candidate union, not an activated Stage-1C surface.
+  320 after also adding the separate capability delta. The last number is the signed calibration
+  input, not full-mapping authority.
+- Pre-calibration package: 320 calibration identities are source-layer bound; 38 overlay records map to
+  13 canonical claims through 74 links; all 15 pending problem labels are routed without promoting a
+  new problem; 23 remote analogues remain withheld pending translation; the old eight families are
+  only protocol templates; five reproduction candidates remain non-anchors.
+- Calibration packet: exact N=56 = 38 overlay records + 18 CURRENT/inherited sentinels. The H5-held
+  `2505.17862` sentinel is calibration-only and outside the 320 union. Coder A/B, agreement and
+  adjudication remain incomplete; these 56 records are excluded from the later >=64-work blind sample.
 - Release identity: the v5 manifest binds 108 artifacts (64 Git, 44 external). Commit-bound replay
   verifies 108/108 with zero missing, byte or SHA-256 mismatches.
 - Closed promotion: 13 union identities are reused and five reviewer-directed outside-union identities
@@ -46,6 +52,6 @@
   Git retains source URLs, immutable revisions, acquisition scripts and evidence receipts.
 - Execution boundary: no research model/API call, metric run, reproduction, prototype, 320-paper
   Stage-1C scale-out, branch formation, ranking, problem selection or novelty verdict is authorized.
-- Next action: independent review of each Stage-1B overlay under its own signature. The targeted
-  Chinese evidence map is factual Stage-1B material; research-direction analysis remains a later,
-  separately authorized step.
+- Next action: provide the label-hidden 56-work packet to two independent coders and complete
+  field-level agreement/adjudication. Full 320-paper mapping
+  remains blocked until calibration passes and the independent full-mapping signature is issued.

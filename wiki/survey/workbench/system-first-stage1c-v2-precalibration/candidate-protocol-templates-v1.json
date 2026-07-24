@@ -1,0 +1,77 @@
+{
+  "schema": "sf-stage1c-v2-candidate-protocol-templates-v1",
+  "templates": [
+    {
+      "template_id": "F0",
+      "title": "Frozen-core system harness isolation",
+      "intervention_axis": "D0_SYSTEM_HARNESS",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FK1",
+      "title": "Speech/omni evidence necessity",
+      "intervention_axis": "D1_MULTIMODAL_KNOWLEDGE",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FK2",
+      "title": "Declarative knowledge to reusable skill compilation",
+      "intervention_axis": "D1_MULTIMODAL_KNOWLEDGE",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FS1",
+      "title": "Multimodal skill package factorial",
+      "intervention_axis": "D2_MULTIMODAL_SKILL",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FS2",
+      "title": "Skill lifecycle, repair and negative transfer",
+      "intervention_axis": "D2_MULTIMODAL_SKILL",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FM1",
+      "title": "Evidence-preserving multimodal memory carrier",
+      "intervention_axis": "D3_MULTIMODAL_MEMORY",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FM2",
+      "title": "Memory update, conflict, decay and refusal",
+      "intervention_axis": "D3_MULTIMODAL_MEMORY",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    },
+    {
+      "template_id": "FR1",
+      "title": "Training-free reward-guided K/S/M orchestration",
+      "intervention_axis": "D4_TF_RL_ORCHESTRATION",
+      "status": "CANDIDATE_PROTOCOL_TEMPLATE",
+      "branch_created": false,
+      "family_membership_claimed": false,
+      "may_merge_split_or_remain_unrouted": true
+    }
+  ]
+}
