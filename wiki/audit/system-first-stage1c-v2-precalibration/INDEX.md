@@ -11,6 +11,7 @@ Current authority remains in `wiki/Research-Objective.md` and `wiki/survey/curre
 | `agentic-rc2-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2-independent-method-review.md` @ `69694515e65acb6355f390dc865e0ebc0d6d2c18` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
 | `owner-rc2r1-continuation-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r1-continuation-authorization/2026-07-24-owner-rc2r1-continuation-authorization.md` @ `f699528ab1d6bba7b2777f814e6f2bd53e76eb88` | `AUTHORIZE_RC2R1_BOUNDED_REPAIR; CONDITIONAL_CALIBRATION_AFTER_ACCEPT; LOCAL_NO_PUSH_MILESTONES` |
 | `agentic-rc2r1-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r1-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r1-independent-method-review.md` @ `e7ddd0615780c4cb0455e7e9e86fbee9f45c0700` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
+| `owner-rc2r2-provenance-repair-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r2-provenance-repair-authorization/2026-07-24-owner-rc2r2-provenance-repair-authorization.md` @ `00f8ccc989644c7c93d8c64957c9dc6e5f2d3a49` | `AUTHORIZE_BOUNDED_RC2R2_PROVENANCE_REPAIR_AND_REREVIEW; DISTRIBUTION_REMAINS_CONDITIONAL` |
 
 This token authorizes only bounded consolidation, schema/codebook construction, known-candidate
 official-source closure and calibration preparation under the recorded prerequisites. It excludes
@@ -40,3 +41,7 @@ The commit-bound RC2R1 review verified all 26 review artifacts and all 22 predec
 withheld coder intake because runtime agreement proves internal consistency rather than the exact
 frozen package. Same-ID schema substitution, fake/cross-paper renditions, opaque delivery receipts
 and leaf-name leakage exceptions remain bounded defects. No coder was distributed.
+
+The owner subsequently authorized a bounded immutable-successor RC2R2 provenance repair. The repair
+is limited to frozen-package/schema/rendition/delivery-receipt binding, exact-path leakage exceptions
+and adversarial tests. Coder distribution remains conditional on fresh independent ACCEPT.

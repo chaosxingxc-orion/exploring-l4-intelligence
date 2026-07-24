@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R1 provenance repair authorization**.
-  Endpoint: `AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS`.
+- Gate: **Stage-1C v2 Agentic RC2R2 frozen-provenance repair**.
+  Endpoint: `AGENTIC_RC2R2_PROVENANCE_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 - Authority: owner excludes specialized Duplex-model tasks from research, reproduction and branch
   selection. This never committed RC2 transaction may repair scope and close known sources only.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
@@ -39,5 +39,6 @@
 - Authority: exact `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` plus the accepted continuation
   plan permits RC2R1 repair and local no-push milestones. Distribution activates only after
   `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; owner adjudication remains mandatory.
-- Next action: owner reviews the bounded provenance defects. Repair requires
-  `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR`; coder distribution remains closed.
+- Authority: `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR` is active as an immutable-successor
+  RC2R2 repair. It does not authorize coder distribution before fresh independent ACCEPT.
+- Next action: implement, freeze and independently review RC2R2; coder distribution remains closed.

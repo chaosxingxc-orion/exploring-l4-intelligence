@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R1 review withheld on provenance defects"
+last_refresh: "2026-07-24 — Agentic RC2R2 frozen-provenance repair authorized"
 ---
 
 # Research Objective & Current State
@@ -10,9 +10,9 @@ last_refresh: "2026-07-24 — Agentic RC2R1 review withheld on provenance defect
 
 ## Current gate and authority
 
-The active gate is **Stage-1C v2 Agentic RC2R1 provenance repair authorization**.
+The active gate is **Stage-1C v2 Agentic RC2R2 frozen-provenance repair**.
 The owner excluded specialized Duplex-model tasks from the research, reproduction and branch route.
-The current endpoint is `AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS`.
+The current endpoint is `AGENTIC_RC2R2_PROVENANCE_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 
 Stage-1B v5 at `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the signed 320-work
 calibration union remain immutable. The first RC2 submission is immutable; current work only appends
@@ -22,7 +22,8 @@ Commit `74cf8e4b565a9e53ff40f9dbc34961ede853dd57` froze the first Agentic RC2 su
 The independent advisory review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`. The owner subsequently gave
 `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` for RC2R1 and local no-push milestones. The RC2R1
 review withheld coder intake on frozen-provenance defects; distribution therefore remains closed.
-The required `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE` is absent.
+The owner authorized successor RC2R2. Distribution requires
+`ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE`.
 research models/APIs, benchmark metrics, paper reproduction, prototypes and novelty verdicts remain
 unauthorized.
 
@@ -69,10 +70,10 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 
 ## Next action
 
-Owner should review the bounded defects. Further repair requires
-`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR`. Coder distribution and agreement remain
-closed. Full mapping still requires post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A
-remains separately gated.
+Implement `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR` as RC2R2, freeze locally without
+push and obtain fresh independent acceptance. Distribution and agreement remain closed until ACCEPT.
+Full mapping still requires post-calibration
+`SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
 
 ## Supersession rule
 
