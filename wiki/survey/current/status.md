@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R1 independent method review**.
-  Endpoint: `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R1 provenance repair authorization**.
+  Endpoint: `AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS`.
 - Authority: owner excludes specialized Duplex-model tasks from research, reproduction and branch
   selection. This never committed RC2 transaction may repair scope and close known sources only.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
@@ -27,7 +27,9 @@
   object gates and BORROW/REPRODUCE semantic guards are P0; ACL receipts and value-scan breadth are P1.
 - RC2R1 closure: exact N=56/provenance-bound intake, per-path object gates, structured transfer and
   reproduction evidence, two ACL official receipts and all-metadata leakage scanning pass Windows
-  and WSL checks. The new package remains undistributed pending independent ACCEPT.
+  and WSL checks. Independent review nevertheless found that alternate frozen IDs, same-ID lax
+  schemas, fake/cross-paper renditions, opaque delivery receipts and leaf-name value-scan exceptions
+  remain fail-open. Verdict: `WITHHOLD_WITH_BOUNDED_DEFECTS`.
 - Execution: coder not distributed; agreement/adjudication not computed; no research model/API,
   metric, reproduction, prototype, family/branch selection or novelty verdict.
 - Scope provenance remains `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
@@ -37,5 +39,5 @@
 - Authority: exact `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` plus the accepted continuation
   plan permits RC2R1 repair and local no-push milestones. Distribution activates only after
   `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; owner adjudication remains mandatory.
-- Next action: freeze and independently review the exact RC2R1 manifest. Full mapping still requires
-  a new post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
+- Next action: owner reviews the bounded provenance defects. Repair requires
+  `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR`; coder distribution remains closed.

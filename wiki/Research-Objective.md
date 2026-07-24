@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R1 coder-ready, independent review pending"
+last_refresh: "2026-07-24 — Agentic RC2R1 review withheld on provenance defects"
 ---
 
 # Research Objective & Current State
@@ -10,9 +10,9 @@ last_refresh: "2026-07-24 — Agentic RC2R1 coder-ready, independent review pend
 
 ## Current gate and authority
 
-The active gate is **Stage-1C v2 Agentic RC2R1 independent method review**.
+The active gate is **Stage-1C v2 Agentic RC2R1 provenance repair authorization**.
 The owner excluded specialized Duplex-model tasks from the research, reproduction and branch route.
-The current endpoint is `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`.
+The current endpoint is `AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS`.
 
 Stage-1B v5 at `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the signed 320-work
 calibration union remain immutable. The first RC2 submission is immutable; current work only appends
@@ -20,8 +20,9 @@ its commit-bound review transaction and refreshes HOT/CURRENT truth.
 
 Commit `74cf8e4b565a9e53ff40f9dbc34961ede853dd57` froze the first Agentic RC2 submission without push.
 The independent advisory review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`. The owner subsequently gave
-`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` for RC2R1 and local no-push milestones. Distribution is conditional
-on `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`; full mapping remains separately signed.
+`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` for RC2R1 and local no-push milestones. The RC2R1
+review withheld coder intake on frozen-provenance defects; distribution therefore remains closed.
+The required `ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE` is absent.
 research models/APIs, benchmark metrics, paper reproduction, prototypes and novelty verdicts remain
 unauthorized.
 
@@ -45,9 +46,10 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 - Reviewer-only sampling rationale, prior claim links, readiness and named boundary guidance are now
   excluded from coder-visible inputs. A recursive leakage scanner and one identity-independent shared
   bundle hash enforce byte-identical content for both future coders.
-- RC2R1 now fails closed on exact N=56/completed/provenance-bound intake, gates every critical object
-  field separately, and machine-enforces REFERENCE/BORROW/REPRODUCE evidence. Two ACL official
-  receipts bind exact local PDF bytes; all coder-visible metadata receives key and value scanning.
+- RC2R1 closes exact-count/completed checks, per-critical-field gates and the structured
+  REFERENCE/BORROW/REPRODUCE contract. Review found that a self-consistent alternate 56/schema/source
+  universe, opaque delivery receipts and broad value-scan exceptions still bypass frozen provenance.
+  ACL receipts and predecessor immutability passed.
 - Each experiment cell has exactly one primary intervention attribution. Capability labels may be
   multi-valued at paper level, but system gains cannot be counted multiple times.
 - AudioGenie-Reasoner is the direct-method lead candidate; AudioToolAgent is task-matched nearest
@@ -67,10 +69,10 @@ agent systems are control/carrier dimensions, not substitutes for experiment-fam
 
 ## Next action
 
-Freeze the exact RC2R1 review manifest in a local no-push commit and obtain independent
-`ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE`. Acceptance activates the authorized N=56
-distribution route; owner adjudication remains mandatory. Full mapping still requires
-post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
+Owner should review the bounded defects. Further repair requires
+`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR`. Coder distribution and agreement remain
+closed. Full mapping still requires post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A
+remains separately gated.
 
 ## Supersession rule
 

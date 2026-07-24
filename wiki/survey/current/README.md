@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Current gate: **Stage-1C v2 Agentic RC2R1 independent method review**.
-  The endpoint is `AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED`; specialized Duplex-model tasks are out
+- Current gate: **Stage-1C v2 Agentic RC2R1 provenance repair authorization**.
+  The endpoint is `AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS`; specialized Duplex-model tasks are out
   of the active research/reproduction/branch route.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it does not grant current mapping authority.
@@ -28,8 +28,9 @@
   conditional calibration distribution and local milestones without push; owner adjudication and
   post-calibration mapping signature remain mandatory.
 - RC2R1 closes exact-intake, per-critical-field agreement, BORROW/REPRODUCE, ACL receipt and
-  all-metadata leakage-scan defects. Its exact manifest is ready for commit-bound independent review;
-  no coder content has been distributed.
+  all-metadata leakage-scan defects from RC2. Its independent review withheld intake because frozen
+  manifest/schema/rendition/delivery provenance and exact-path value exceptions remain incomplete.
+  No coder content has been distributed.
 - H5 remains withheld; H5-dependent evidence cannot support modality conclusions.
 - Audit routers: `wiki/audit/system-first-stage1b/INDEX.md` and
   `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`.

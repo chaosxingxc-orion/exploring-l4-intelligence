@@ -10,6 +10,7 @@ Current authority remains in `wiki/Research-Objective.md` and `wiki/survey/curre
 | `owner-rc2-direction` | owner direction record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2-direction/2026-07-24-owner-rc2-direction.md` @ `1adb456748e14f9c1ab4cf7407eedf50821ac752` | `EXECUTE_AGENTIC_RC2_SCOPE_CORRECTION; AUTHORIZE_ONE_LOCAL_NO_PUSH_COMMIT_AND_REVIEW_SUBMISSION; CALIBRATION_DISTRIBUTION_WITHHELD` |
 | `agentic-rc2-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2-independent-method-review.md` @ `69694515e65acb6355f390dc865e0ebc0d6d2c18` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
 | `owner-rc2r1-continuation-authorization` | owner authorization record | `wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r1-continuation-authorization/2026-07-24-owner-rc2r1-continuation-authorization.md` @ `f699528ab1d6bba7b2777f814e6f2bd53e76eb88` | `AUTHORIZE_RC2R1_BOUNDED_REPAIR; CONDITIONAL_CALIBRATION_AFTER_ACCEPT; LOCAL_NO_PUSH_MILESTONES` |
+| `agentic-rc2r1-independent-method-review` | independent AI doctoral-supervisor advisory review | `wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r1-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r1-independent-method-review.md` @ `e7ddd0615780c4cb0455e7e9e86fbee9f45c0700` | `WITHHOLD_WITH_BOUNDED_DEFECTS; CODER_DISTRIBUTION_WITHHELD` |
 
 This token authorizes only bounded consolidation, schema/codebook construction, known-candidate
 official-source closure and calibration preparation under the recorded prerequisites. It excludes
@@ -34,3 +35,8 @@ The owner subsequently supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR
 decision-complete continuation plan. This authorizes the bounded RC2R1 repair and, only after an
 independent ACCEPT, conditional calibration distribution. Owner adjudication, the post-calibration
 mapping signature and final family/branch portfolio signature remain mandatory.
+
+The commit-bound RC2R1 review verified all 26 review artifacts and all 22 predecessor blobs, but
+withheld coder intake because runtime agreement proves internal consistency rather than the exact
+frozen package. Same-ID schema substitution, fake/cross-paper renditions, opaque delivery receipts
+and leaf-name leakage exceptions remain bounded defects. No coder was distributed.

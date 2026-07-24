@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 24), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic RC2R1 independent method review",
+            "Stage-1C v2 Agentic RC2R1 provenance repair authorization",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,8 +1688,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_RC2R1_CODER_READY_NOT_DISTRIBUTED",
+            "AGENTIC_RC2R1_REVIEW_WITHHELD_PROVENANCE_DEFECTS",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR",
+            "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR",
             "ACCEPT_AGENTIC_RC2R1_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
             "WITHHOLD_WITH_BOUNDED_DEFECTS",
