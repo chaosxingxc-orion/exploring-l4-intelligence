@@ -383,6 +383,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-precalibration/owner-authorization/2026-07-24-owner-authorization.md",
       "git_blob": "f3c93d8a8f117167e6e56855125ba615b0c9706f"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1b-capability-delta/release-signature/2026-07-24-stage1b-capability-delta-release-signature.md",
+      "git_blob": "a5af670aacbb5194f42947150440cd022b16c652"
     }
   ]
 }
