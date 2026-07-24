@@ -387,6 +387,10 @@
     {
       "path": "wiki/audit/system-first-stage1b-capability-delta/release-signature/2026-07-24-stage1b-capability-delta-release-signature.md",
       "git_blob": "a5af670aacbb5194f42947150440cd022b16c652"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1b-targeted-anchor-scan/release-signature/2026-07-24-stage1b-targeted-anchor-scan-release-signature.md",
+      "git_blob": "e5a039a9297fac3ce84ed981449f085d6bb79378"
     }
   ]
 }
