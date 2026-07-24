@@ -162,13 +162,31 @@ B 为 0。这里既有匹配键问题，也有“何时必须建对象”的触�
 - 若 owner 希望在重编前保证正例覆盖，需要另行授权有界 positive-sentinel sample repair 和新的方法
   复审；当前授权不包含替换 N=56。
 
+### 6.5 R1 reviewer-only positive-support preflight
+
+在不修改 R1、N=56 或 coder packet 的前提下，新增的可重放检查得到三个确定结果：
+
+1. `dataset_edges` 并非真的没有正例。TRACE 第 3 页明确使用 S2S-Arena 的 English subset，并对
+   既有 SpeakBench/S2S-Arena 数据重新标注，分别支持 `SUBSET_OF` 与 `REANNOTATED_FROM`；A/B 均
+   抽取为 0，证明对象触发规则漏检；
+2. 当前 `reproduction_evidence` 要求 blind coder 填 `local_asset_state`，但 packet 同时明确禁止
+   repository access；字段在观测上不可获得；
+3. schema 又强制 `closure_status=CLOSED` 且 `blockers` 为空，因此“候选但尚有 blocker”无法表达，
+   使该 mandatory class 的正例覆盖结构性为零。
+
+因此不建议为了过门而替换 sentinel。更严格的修复是拆分：paper-visible
+`REPRODUCTION_CANDIDATE` 可以是 `OPEN_WITH_BLOCKERS`；reviewer-only local readiness 全闭合且经
+100% 复核后，才能晋升 `REPRODUCTION_ANCHOR`。R2 exact schema 冻结后必须重新运行 positive-support
+preflight；只有届时仍无 paper-visible 正例，才请求独立的 source/sentinel repair。
+
 ## 7. Owner 需要决定什么
 
 推荐授权：
 
 `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION`
 
-该授权仅允许：把上述有界规则编译进 codebook/schema/packet，先写失败测试，重新通过独立方法复审，
+该授权仅允许：把上述有界规则、candidate/anchor 可观测性拆分和 positive-support preflight 编译进
+codebook/schema/packet，先写失败测试，重新通过独立方法复审，
 然后由两个新的无 fork 隔离上下文全量重编同一 N=56。它不授权：
 
 - 对 R1 raw 输出或 agreement 做回写；

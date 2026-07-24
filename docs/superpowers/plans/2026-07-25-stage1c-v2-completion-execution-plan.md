@@ -133,10 +133,21 @@ Before R2 distribution, a reviewer-only coverage checker must prove at least one
 positive for every object class whose gate is required to pass. The coder-visible packet must not
 contain expected labels or selection rationales.
 
-If the unchanged N=56 source set cannot support a positive `dataset_edge` or
-`paper_reproduction_support`, distribution stops. Adding neutral official source renditions or
-replacing a sentinel requires a separately recorded bounded positive-support repair and a fresh
-method review; the checker may never manufacture a positive.
+The completed read-only R1 preflight establishes:
+
+- `dataset_edges` has two source-supported positives in TRACE page 3 (`SUBSET_OF` and
+  `REANNOTATED_FROM`), while both R1 coders emitted zero; this is an extraction-trigger failure;
+- the current `reproduction_evidence` contract has zero support because it requires blind coders to
+  report `local_asset_state`, forces `closure_status=CLOSED` and forbids blockers while repository
+  access is explicitly withheld; this is an observability contradiction, not evidence of absence.
+
+R2 therefore treats paper-visible reproduction candidacy as a typed record that may remain
+`OPEN_WITH_BLOCKERS`. Only reviewer-side local readiness can promote it to a closed reproduction
+anchor. After that semantic split, the positive-support checker must run again against the exact R2
+schema and source packet. If the unchanged N=56 still cannot support a mandatory positive,
+distribution stops. Adding neutral official source renditions or replacing a sentinel requires a
+separately recorded bounded repair and fresh method review; the checker may never manufacture a
+positive.
 
 ### 4.5 Paper decision tables
 

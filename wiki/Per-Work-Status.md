@@ -12,7 +12,9 @@
   reward-guided control-plane program.
 - **Current state:** Stage-1C v2 Agentic calibration R1 completed exact N=56 dual-model coding and
   froze both raw outputs before agreement. The raw agreement is `FAIL`: 5/13 paper-level paths pass,
-  while nine object types share zero exact match keys. The fixed Stage-1B release remains
+  while nine object types share zero exact match keys. A reviewer-only preflight additionally found
+  two source-backed dataset-edge positives missed by both coders and proved the blind reproduction
+  record structurally depends on withheld local state. The fixed Stage-1B release remains
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is not yet activated for mapping.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,

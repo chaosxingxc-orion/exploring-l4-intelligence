@@ -17,6 +17,9 @@
   all unmatched objects are preserved. No adjudication was applied.
 - Root cause: free-form object key construction made semantically corresponding objects structurally
   incomparable; paper-role/access/scope/dependency/intervention decision rules also remain unstable.
+- Positive-support preflight: TRACE page 3 supports two dataset edges missed by A/B; blind
+  reproduction evidence cannot close because `local_asset_state` is required while repository access
+  is withheld. Candidate paper support and reviewer-only anchor readiness must be split.
 - Recommended next action: owner authorizes one bounded codebook consolidation, compiler-owned keys,
   extraction triggers and decision tables, followed by fresh independent review and complete N=56
   recoding by two new isolated contexts. Replacing sentinels requires separate authority.

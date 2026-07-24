@@ -74,7 +74,7 @@
     {
       "role": "campaign_audit_semantic_anchor",
       "path": "scripts/checks/ai_context_inventory.py",
-      "sha256": "d4f88e2cf1218788901f4a77a361c6228de952595c24b3496b85b374238290e1",
+      "sha256": "31c39ea60d21d45a889d1e0c8e1d31d60e936d924a776297af54b28b8e5f613f",
       "mutability": "normal-code-lifecycle",
       "load_policy": "machine-only"
     },
@@ -144,7 +144,7 @@
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "3f6f984f16dfe11ec13b7df6b987e6b596083fe862b038c7fc9a3a1816b66fd0",
+      "sha256": "0458a60afcb0ea8070af42311b4d8853296e06e1b15ea686f91eb0e38ecbf278",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -284,7 +284,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "ad54ae7399b8a298ad9b3d43abda9b51f412ce02e3a8ee604fe1e33824a9fee5",
+      "sha256": "17d110efa9f2b99e5cac66d45d60d1c9eb1e6efdb53eaad3998cc099150d05fe",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -319,7 +319,7 @@
     {
       "role": "audit_artifact_registry",
       "path": "wiki/survey/sf-audit-artifact-registry.json",
-      "sha256": "621f48888afac11457ae61cdc351571b4d0762c4aaafb1ee1755433d7615257f",
+      "sha256": "01587b2502ee1618db69943a9924de7658d5cbf5b24654908456dc35bc3fac19",
       "mutability": "append-only",
       "load_policy": "machine-only"
     }

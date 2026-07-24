@@ -45,9 +45,8 @@ compatibility.
   overlays form the immutable 320-work calibration-only union; no reproduction anchor exists.
 - N=56 remains 38 overlays + 18 sentinels. Active Perception Agent (`2512.23646`) replaces FDB-v3;
   FDB-v2 remains one blind specialized-system exclusion boundary.
-- RC2R3 freezes 0.85, receiver-side byte receipts and typed structural paths. Eighteen adversarial
-  and 73 predecessor-regression tests pass; agreement/builder/combined branch coverage is
-  88%/84%/86%, with deterministic Windows/WSL replay.
+- RC2R3 freezes 0.85, receiver-side byte receipts and typed structural paths with deterministic
+  Windows/WSL replay.
 - Sol/Terra used byte-identical eight-artifact bundles, distinct no-fork tasks and 135 verified source
   renditions. They are isolated model coders, not provider-independent or human inter-rater evidence.
 - A froze 56 responses/354559 bytes at
@@ -56,6 +55,9 @@ compatibility.
 - Agreement has 99 critical paths and overall `FAIL`. Five of 13 paper-level paths pass; eight fail.
   Across nine object types the two coders share zero exact match keys, so object fields are
   `NOT_CALIBRATED`. Both also produced zero dataset edges and reproduction evidence.
+- Reviewer-only preflight found two source-backed TRACE dataset edges missed by both coders. It also
+  proved blind `reproduction_evidence` structurally impossible because repository state is withheld
+  while `local_asset_state`, closed status and zero blockers are required.
 - The complete package preserves 232 paper-field disagreements plus every unmatched object. No
   adjudication has changed raw outputs or scores.
 - AudioGenie-Reasoner remains a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument,
@@ -69,9 +71,9 @@ Read the detailed owner package at
 `wiki/survey/workbench/system-first-stage1c-v2-agentic-calibration-r1/stage1c-v2-calibration-r1-owner-decision-package-zh.md`.
 The recommended bounded token is
 `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION`: freeze compiler-owned object
-keys, extraction triggers and paper decision tables, independently review the consolidated contract,
-then let two new isolated contexts recode the complete same N=56 once. If the owner withholds it,
-close R1 as failed. Sentinel replacement is not implied and would require separate authority.
+keys and extraction triggers; split paper-visible reproduction candidate from reviewer-only local
+anchor readiness; independently review the contract; then let two new isolated contexts recode the
+same N=56 once. Sentinel replacement is not implied and would require separate authority.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

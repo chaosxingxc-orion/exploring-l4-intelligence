@@ -9,6 +9,8 @@
 - Active calibration [R1](../workbench/system-first-stage1c-v2-agentic-calibration-r1/README.md): Sol/Terra completed exact N=56; both raw outputs froze before agreement.
 - Raw agreement is `FAIL`: 5/13 paper-level paths pass, 8 fail; all nine object types have zero
   shared exact match keys, leaving object fields `NOT_CALIBRATED`. No adjudication has been applied.
+- Positive-support preflight found two missed TRACE dataset edges and proved the current blind/local-
+  readiness reproduction contract structurally impossible.
 - Read the [Chinese owner package](../workbench/system-first-stage1c-v2-agentic-calibration-r1/stage1c-v2-calibration-r1-owner-decision-package-zh.md)
   and the [exact disagreement artifact](../workbench/system-first-stage1c-v2-agentic-calibration-r1/frozen-r1/disagreement-package.json).
 - Recommended next token:
@@ -26,6 +28,5 @@
 - Full mapping remains closed until a valid calibration release and
   `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models, metrics, reproduction, prototype, novelty
   verdict, Stage-2A and push remain closed.
-- Audit: `wiki/audit/system-first-stage1b/INDEX.md` and
-  `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.
+- Audit: `wiki/audit/system-first-stage1b/INDEX.md` and `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.
   Historical proposals, reviews, responses and amendments are cold audit.
