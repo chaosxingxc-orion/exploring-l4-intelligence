@@ -4,17 +4,17 @@
   "registry": "wiki/survey/sf-audit-artifact-registry.json",
   "registry_stage0": {
     "mode": "100644",
-    "git_blob": "ae840e4adc137ef0c8ed04f7fdd112a95191ac07"
+    "git_blob": "0f701e0cbf857a1f177acc15c6bf5b4efdb236dc"
   },
   "anchor_stage0": {
     "path": "scripts/checks/ai_context_inventory.py",
     "mode": "100644",
-    "git_blob": "dba783f845eced2793800afe3521d966f4122283"
+    "git_blob": "5484cb28b79c0cc155776d2de73250677c1a190f"
   },
-  "registered": 95,
+  "registered": 96,
   "registry_prefix": {
-    "count": 95,
-    "sha256": "dc86293717b24410711801d4405e15e0d29d337bf13ff38b6f018a3bd34b93c4"
+    "count": 96,
+    "sha256": "99cf4ab35498ef302db81a3d4d29e4bca82c5b4aba1f2a39d6a6d8c5a6449459"
   },
   "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
   "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
