@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Current gate: **Stage-1C v2 Agentic RC2 independent method review before coder distribution**.
-  The endpoint is `AGENTIC_RC2_CODER_READY_NOT_DISTRIBUTED`; specialized Duplex-model tasks are out
+- Current gate: **Stage-1C v2 Agentic RC2 bounded method repair authorization**.
+  The endpoint is `AGENTIC_RC2_REVIEW_WITHHELD_BOUNDED_DEFECTS`; specialized Duplex-model tasks are out
   of the active research/reproduction/branch route.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it does not grant current mapping authority.
@@ -22,7 +22,8 @@
 - Coder distribution, agreement, full mapping, ranking, branch selection, novelty verdict and all
   research execution remain closed.
 - Exact `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_REVIEW_SUBMISSION` permits one local no-push commit and
-  commit-bound review submission; no review verdict or coder distribution is implied.
+  commit-bound review submission. That review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`; coder
+  distribution remains closed and bounded repair requires a new owner authorization.
 - H5 remains withheld; H5-dependent evidence cannot support modality conclusions.
 - Audit routers: `wiki/audit/system-first-stage1b/INDEX.md` and
   `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`.

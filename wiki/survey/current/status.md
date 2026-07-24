@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2 independent method review before coder distribution**.
-  Endpoint: `AGENTIC_RC2_CODER_READY_NOT_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2 bounded method repair authorization**.
+  Endpoint: `AGENTIC_RC2_REVIEW_WITHHELD_BOUNDED_DEFECTS`.
 - Authority: owner excludes specialized Duplex-model tasks from research, reproduction and branch
   selection. This never committed RC2 transaction may repair scope and close known sources only.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
@@ -22,14 +22,15 @@
   from coder-visible inputs; recursive leakage scanning and a shared-content hash enforce identical
   future coder bytes. The owner authorized one local no-push commit and commit-bound review submission;
   coder content remains undistributed.
-- Review: deterministic tests pass, but the independent RC2 verdict, two isolated model coders,
-  disclosed owner adjudicator, exposure declarations and prompt hash are pending.
+- Review: commit `74cf8e4b565a9e53ff40f9dbc34961ede853dd57` was reviewed without push. Verdict is
+  `WITHHOLD_WITH_BOUNDED_DEFECTS`: exact-N/completed-response agreement intake, per-critical-field
+  object gates and BORROW/REPRODUCE semantic guards are P0; ACL receipts and value-scan breadth are P1.
 - Execution: coder not distributed; agreement/adjudication not computed; no research model/API,
   metric, reproduction, prototype, family/branch selection or novelty verdict.
 - Scope provenance remains `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
   no broad discovery, research model/API call, metric run, reproduction or prototype.
   The problem ranking and selection remain withheld.
 - H5 remains withheld; H5-dependent evidence cannot support modality conclusions.
-- Next action: create the authorized local commit without push and submit its exact manifest for
-  independent method review. Full mapping requires a new post-calibration
-  `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; research execution remains separately gated.
+- Next action: owner reviews the bounded findings. Repair requires exact
+  `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR`; coder distribution remains closed. Full mapping
+  still requires a new post-calibration `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.

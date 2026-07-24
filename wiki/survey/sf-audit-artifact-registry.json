@@ -399,6 +399,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2-direction/2026-07-24-owner-rc2-direction.md",
       "git_blob": "1adb456748e14f9c1ab4cf7407eedf50821ac752"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2-independent-method-review.md",
+      "git_blob": "69694515e65acb6355f390dc865e0ebc0d6d2c18"
     }
   ]
 }
