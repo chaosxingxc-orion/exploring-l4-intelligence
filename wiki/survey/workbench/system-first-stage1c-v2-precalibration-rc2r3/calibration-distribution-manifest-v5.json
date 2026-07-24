@@ -1,0 +1,64 @@
+{
+  "schema": "sf-stage1c-v2-calibration-distribution-manifest-v5",
+  "artifact_id": "SF-STAGE1C-V2-CALIBRATION-DISTRIBUTION-RC2R3",
+  "status": "FROZEN_INPUT_BYTES_PREPARED_NOT_DISTRIBUTED",
+  "scope": "CODER_VISIBLE_SHARED_CONTENT",
+  "artifacts": [
+    {
+      "artifact_name": "response_schema",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/calibration-response-schema-v4-inherited.json",
+      "bytes": 30994,
+      "sha256": "d57be12b34b8529cd19438b2859a58c10345b5d836141be79062c81b9224256c"
+    },
+    {
+      "artifact_name": "source_manifest",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/calibration-source-byte-manifest-v4-inherited.json",
+      "bytes": 77520,
+      "sha256": "0361c8a9bddf200f4e37a35ece12505719abaf1a00e450e540175715f813e44e"
+    },
+    {
+      "artifact_name": "assignment_manifest",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/calibration-assignment-manifest-v4-inherited.json",
+      "bytes": 14094,
+      "sha256": "b35e0134e14f22915ce5933e6a1b20d1982ceac12c423fd516915c10a4927ea4"
+    },
+    {
+      "artifact_name": "blind_packet",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/calibration-blind-packet-v4-inherited.json",
+      "bytes": 131384,
+      "sha256": "130f9e0c7f9d34aff2b2634c80dd9e7ba308260e008832c8a104d34e86237677"
+    },
+    {
+      "artifact_name": "coder_codebook",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/coder-codebook-v4-inherited.json",
+      "bytes": 1954,
+      "sha256": "1d1b5b70c549920d80454045e5da42aec25ba7950ddbe4355aa1e2d78a3258d5"
+    },
+    {
+      "artifact_name": "claim_template_coder_view",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/claim-template-coder-view-v4-inherited.json",
+      "bytes": 12525,
+      "sha256": "b7a497222ecb6dc4038b553aa15984f8724f025a7628dfdd79bc5f71f0a30289"
+    },
+    {
+      "artifact_name": "agreement",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/agreement-contract-v5.json",
+      "bytes": 4236,
+      "sha256": "5b55b0839532da71ef103f971e8c6fb251591b1988eab00d8c8b80df19b1287b"
+    },
+    {
+      "artifact_name": "coder_prompt",
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/coder-prompt-v4-inherited.json",
+      "bytes": 929,
+      "sha256": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e"
+    }
+  ],
+  "content_bundle_sha256": "03674710223ad3c457e6568bdc83b66c1491abd84dd4e6d2c16495065e3ead64",
+  "coder_prompt_sha256": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e",
+  "receiver_must_hash_actual_artifact_bytes": true,
+  "receiver_must_hash_actual_prompt_bytes": true,
+  "both_coders_must_receive_byte_identical_content": true,
+  "typed_path_identity_allowlist_required": true,
+  "distribution_authorized": false,
+  "post_accept_owner_authorization_recorded": true
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v5",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-RC2R3",
+  "as_of": "2026-07-24",
+  "status": "AGENTIC_RC2R3_CODER_READY_NOT_DISTRIBUTED",
+  "predecessor": {
+    "release": "AGENTIC_RC2R2",
+    "commit": "9652d98eade798903be6c5d007591d2602a2f5c3",
+    "immutable_verified": true
+  },
+  "authority": {
+    "runtime_integrity_repair_authorized": true,
+    "post_accept_calibration_distribution_authorized": true,
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "full_mapping_signed": false,
+    "push_authorized": false
+  },
+  "bounded_defect_closure": {
+    "compiled_frozen_agreement_minimum_0_85": true,
+    "receiver_actual_artifact_bytes_hashed": true,
+    "receiver_actual_prompt_bytes_hashed": true,
+    "typed_structural_path_allowlist": true,
+    "structural_alias_attacks_rejected": true
+  },
+  "surface": {
+    "calibration_N": 56,
+    "coder_visible_artifacts": 8,
+    "agreement_minimum": 0.85,
+    "frozen_contract_sha256": "5c7b864adbde92c66d2230437fa5a09d1a6c5da5c9939afb4a7132279c2e8696",
+    "reproduction_anchors": 0
+  },
+  "remaining_before_distribution": [
+    "CREATE_LOCAL_COMMIT_WITHOUT_PUSH",
+    "OBTAIN_ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
+    "MATERIALIZE_TWO_ISOLATED_RECEIVER_SIDE_ACTUAL_BYTE_RECEIPTS"
+  ]
+}

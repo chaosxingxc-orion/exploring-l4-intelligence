@@ -16,8 +16,8 @@
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** complete the bounded Agentic RC2R3 runtime-integrity repair and fresh
-  independent method review. The frozen 56-work blind packet may be distributed only after the exact
+- **Next authorized work:** freeze the bounded Agentic RC2R3 runtime-integrity repair and complete a
+  fresh commit-bound independent method review. The frozen 56-work blind packet may be distributed only after the exact
   RC2R3 ACCEPT; owner adjudication then remains mandatory. Research models/APIs, metrics, reproduction,
   prototypes, full mapping, ranking, selection and novelty verdicts remain prohibited.
 

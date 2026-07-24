@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-24 — Agentic RC2R2 review withheld on bounded runtime-integrity defects"
+last_refresh: "2026-07-24 — Agentic RC2R3 coder-ready, independent review pending"
 ---
 
 # Research Objective & Current State
@@ -10,14 +10,14 @@ last_refresh: "2026-07-24 — Agentic RC2R2 review withheld on bounded runtime-i
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**. Endpoint:
-`AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
+The gate is **Stage-1C v2 Agentic RC2R3 commit-bound independent review**. Endpoint:
+`AGENTIC_RC2R3_CODER_READY_NOT_DISTRIBUTED`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its 320-work calibration
 union, and committed RC2/RC2R1/RC2R2 transactions are immutable. RC2R2 was frozen locally at
 `9652d98eade798903be6c5d007591d2602a2f5c3`; its fresh independent review returned
-`WITHHOLD_WITH_BOUNDED_DEFECTS`, so the required ACCEPT is absent. Specialized Duplex-model tasks
-remain outside research, reproduction and branch selection.
+`WITHHOLD_WITH_BOUNDED_DEFECTS`. Specialized Duplex-model tasks remain outside research,
+reproduction and branch selection.
 
 The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`. It authorizes only
 the immutable-successor threshold, receiver-byte receipt and typed-path repair, its local no-push
@@ -44,11 +44,13 @@ compatibility.
   FDB-v2 remains one blind `OUT_OF_SCOPE_SPECIALIZED_SYSTEM` boundary.
 - The schema strongly types agentic scope, loop, core dependency, K/S/M assets, control role,
   REFERENCE/BORROW/REPRODUCE evidence and a single primary intervention per cell.
-- RC2R2 binds a compiled frozen-package digest, exact N=56 static intake, schema/source/distribution
-  bytes and paper-scoped renditions. Seventeen new tests pass; combined branch-aware coverage is 88%.
-- Independent review verified 30/30 RC2R2 and 26/26 predecessor artifacts, but found three bounded
-  defects: caller-overridable 0.85 threshold; receipts built from expected manifest values without
-  actual received bytes; and string-built JSON paths vulnerable to structural-key aliases.
+- RC2R2 binds a compiled package, exact N=56 intake and paper-scoped renditions. Its independent
+  review found a caller-overridable threshold, receipts not based on actual received bytes, and
+  string paths vulnerable to structural-key aliases.
+- RC2R3 freezes 0.85 in the compiled contract, builds receipts only from receiver-side raw bytes and
+  uses typed key/index paths plus strict blind-packet keys. Eighteen adversarial tests and 73
+  RC2-through-RC2R3 regression tests pass; branch-aware agreement/builder/combined coverage is
+  88%/84%/86%, and Windows/WSL replay yields the same frozen hash.
 - AudioGenie-Reasoner remains a direct-method candidate; AudioToolAgent a nearest prior; Audio2Tool
   an instrument; MMAU-mini/MMAR validation carriers. All are fail closed and none is an anchor.
 - K/S/M non-speech works remain transfer analogues requiring source→target translation and a
@@ -57,13 +59,12 @@ compatibility.
 ## Next action
 
 Current router: `wiki/survey/current/README.md`; audit:
-`wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`; RC2R2 contract:
-`wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/README.md`.
+`wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`; RC2R3 contract:
+`wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md`.
 
-Implement RC2R3 red-first: freeze the 0.85 threshold, derive receiver receipts from actual bytes,
-and use typed structural paths with alias attacks. Freeze one local no-push commit and obtain a fresh
-independent review. Distribution remains closed unless that review returns the exact RC2R3 ACCEPT.
-Mapping still requires a later signed calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`;
+Freeze one local no-push RC2R3 commit and obtain a fresh no-fork independent review over the exact
+commit-bound manifest. Distribution remains closed unless that review returns the exact RC2R3 ACCEPT.
+Mapping still requires a signed calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`;
 Stage-2A remains separately gated.
 
 ## Supersession rule

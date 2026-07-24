@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Gate: **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**; endpoint
-  `AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 commit-bound independent review**; endpoint
+  `AGENTIC_RC2R3_CODER_READY_NOT_DISTRIBUTED`.
 - Specialized Duplex-model tasks are outside the research, reproduction and branch route.
 - Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
@@ -11,7 +11,7 @@
   [`protocol.md`](protocol.md) → [`manifest.json`](manifest.json).
 - Frozen Stage-1B v5 is `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; the signed 320-work
   calibration union is immutable.
-- Active contract: [Agentic RC2R2](../workbench/system-first-stage1c-v2-precalibration-rc2r2/README.md).
+- Active contract: [Agentic RC2R3](../workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md).
   N=56 remains 38 overlays + 18 sentinels; FDB-v2 is one exclusion boundary.
 - RC2R2 freezes the package root, static intake/schema/source/distribution, paper-scoped renditions,
   receipt structure and exact-path policy. It is committed locally and undistributed.
@@ -21,9 +21,9 @@
 - AudioGenie-Reasoner is a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument and
   MMAU-mini/MMAR validation carriers; none is a reproduction anchor.
 - K/S/M non-speech works are transfer analogues; H5 remains withheld from modality conclusions.
-- The owner authorized the bounded immutable-successor RC2R3 repair: frozen 0.85 threshold,
-  receiver-side actual-byte receipts and typed structural paths with alias tests. RC2R3 is not yet
-  frozen or accepted.
+- RC2R3 freezes the 0.85 threshold, receiver-side actual-byte receipts and typed structural paths.
+  Windows/WSL replay, 18 adversarial tests, 73 predecessor regression tests and 86% combined
+  branch-aware coverage pass. It is coder-ready but not distributed or independently accepted.
 - Coder distribution, agreement, mapping, ranking, branch selection, novelty verdict, research
   execution, Stage-2A and push remain closed. Distribution requires the exact RC2R3 ACCEPT.
 - Audit: `wiki/audit/system-first-stage1b/INDEX.md` and

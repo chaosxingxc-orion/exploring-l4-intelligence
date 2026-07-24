@@ -1,0 +1,103 @@
+{
+  "schema": "sf-stage1c-v2-coder-transaction-contract-v5",
+  "artifact_id": "SF-STAGE1C-V2-CODER-INTAKE-RC2R3",
+  "status": "PREPARED_NOT_DISTRIBUTED",
+  "distribution_authorized": false,
+  "distribution_manifest_id": "SF-STAGE1C-V2-CALIBRATION-DISTRIBUTION-RC2R3",
+  "calibration_response_schema_id": "sf-stage1c-v2-calibration-response-schema-v4",
+  "coder_slots": [
+    {
+      "coder_slot": "A",
+      "planned_model": "gpt-5.6-sol",
+      "planned_execution_mode": "INDEPENDENT_CODEX_PROCESS",
+      "planned_context": "FRESH_NO_FORK",
+      "planned_workspace": "CODER_ONLY_NO_GIT",
+      "assignment_status": "UNASSIGNED",
+      "actor_type": null,
+      "actor_identity": null,
+      "model_provider": null,
+      "model_name": null,
+      "model_version": null,
+      "sampling_configuration": null,
+      "prior_exposure_declaration": null,
+      "start_time": null,
+      "submit_time": null,
+      "process_or_task_id": null,
+      "expected_content_bundle_sha256": "03674710223ad3c457e6568bdc83b66c1491abd84dd4e6d2c16495065e3ead64",
+      "expected_prompt_hash": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e",
+      "task_id": null
+    },
+    {
+      "coder_slot": "B",
+      "planned_model": "gpt-5.6-terra",
+      "planned_execution_mode": "INDEPENDENT_CODEX_PROCESS",
+      "planned_context": "FRESH_NO_FORK",
+      "planned_workspace": "CODER_ONLY_NO_GIT",
+      "assignment_status": "UNASSIGNED",
+      "actor_type": null,
+      "actor_identity": null,
+      "model_provider": null,
+      "model_name": null,
+      "model_version": null,
+      "sampling_configuration": null,
+      "prior_exposure_declaration": null,
+      "start_time": null,
+      "submit_time": null,
+      "process_or_task_id": null,
+      "expected_content_bundle_sha256": "03674710223ad3c457e6568bdc83b66c1491abd84dd4e6d2c16495065e3ead64",
+      "expected_prompt_hash": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e",
+      "task_id": null
+    }
+  ],
+  "required_exposure_declaration": [
+    "prior_records",
+    "claim_links",
+    "problem_routes",
+    "repository",
+    "prior_discussion",
+    "foundation_model_training_corpus_unknown"
+  ],
+  "isolation": {
+    "same_label_hidden_packet": true,
+    "repository_access_withheld": true,
+    "network_discovery_withheld": true,
+    "prior_label_access_withheld": true,
+    "coder_communication_prohibited_from_distribution_until_both_submissions": true
+  },
+  "same_model_runs_are_not_automatically_independent": true,
+  "independence_acceptance_rule": "DISTINCT_PLANNED_MODEL_CONFIGS_PLUS_ISOLATED_CONTEXT_PROCESS_WORKSPACE_AND_EXPOSURE_DISCLOSURE",
+  "independence_claim_scope": "TWO_ISOLATED_MODEL_CODERS_NOT_PROVIDER_INDEPENDENT_OR_HUMAN_INTERRATER_INDEPENDENCE",
+  "provider_independent_claim": false,
+  "human_interrater_independence_claim": false,
+  "adjudicator": {
+    "requirement": "HUMAN_DOMAIN_EXPERT_REQUIRED",
+    "assignment_status": "UNASSIGNED",
+    "identity": null,
+    "planned_role": "OWNER_HUMAN_DOMAIN_EXPERT",
+    "blind_adjudication_claim_prohibited": true,
+    "full_prior_exposure_disclosure_required": true,
+    "visible_information_must_be_declared": true,
+    "load_bearing_disagreements": [
+      "REPRODUCTION",
+      "DATASET_LINEAGE",
+      "MM3",
+      "EXACT_PAIRED",
+      "TF_STRICT_ACCESS",
+      "CORE_MEMBER",
+      "CLAIM_MERGE_SPLIT",
+      "AGENTIC_SCOPE",
+      "PRIMARY_INTERVENTION_ATTRIBUTION"
+    ]
+  },
+  "distribution_preconditions": [
+    "TWO_CODER_SLOTS_ASSIGNED",
+    "HUMAN_DOMAIN_EXPERT_ADJUDICATOR_ASSIGNED",
+    "EXPOSURE_DECLARATIONS_COMPLETE",
+    "EXACT_DISTRIBUTION_MANIFEST_HASH_FROZEN",
+    "INDEPENDENT_RC2_REVIEW_ACCEPTS_METHOD_CONTRACT"
+  ],
+  "shared_content_bundle_sha256": "03674710223ad3c457e6568bdc83b66c1491abd84dd4e6d2c16495065e3ead64",
+  "post_accept_owner_distribution_authorization_recorded": true,
+  "delivery_receipt_schema_id": "sf-stage1c-v2-delivery-receipt-schema-v2",
+  "receiver_actual_bytes_required": true
+}

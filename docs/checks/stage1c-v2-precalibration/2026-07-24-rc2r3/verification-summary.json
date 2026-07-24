@@ -1,0 +1,43 @@
+{
+  "schema": "sf-stage1c-v2-rc2r3-verification-summary-v1",
+  "artifact_id": "SF-STAGE1C-V2-RC2R3-VERIFICATION-SUMMARY",
+  "status": "PASS",
+  "red_first_observed": true,
+  "tests": {
+    "rc2r3_adversarial": {"passed": 18, "failed": 0},
+    "rc2_through_rc2r3_regression": {"passed": 73, "failed": 0},
+    "wsl_discovery_regression": {"passed": 80, "failed": 0},
+    "governance_regression": {"passed": 200, "failed": 0, "skipped": 7},
+    "p0_p1_guard_families": {
+      "total": 3,
+      "directly_attacked": 3,
+      "coverage_percent": 100,
+      "families": [
+        "FROZEN_THRESHOLD_OVERRIDE",
+        "EXPECTED_VALUE_RECEIPT_SELF_ATTESTATION",
+        "STRUCTURAL_PATH_ALIAS"
+      ]
+    }
+  },
+  "coverage": {
+    "branch_aware": true,
+    "agreement_v5_percent": 88,
+    "builder_rc2r3_percent": 84,
+    "combined_percent": 86,
+    "minimum_required_percent": 80
+  },
+  "platforms": {
+    "windows_python_3_14": "PASS",
+    "wsl2_ubuntu_24_04_speechrl_python_3_12": "PASS",
+    "deterministic_frozen_contract_sha256": "5c7b864adbde92c66d2230437fa5a09d1a6c5da5c9939afb4a7132279c2e8696"
+  },
+  "execution_boundary": {
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "push_authorized": false
+  }
+}

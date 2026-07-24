@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**.
-  Endpoint: `AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 commit-bound independent review**.
+  Endpoint: `AGENTIC_RC2R3_CODER_READY_NOT_DISTRIBUTED`.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
@@ -21,6 +21,10 @@
 - Independent review: 30/30 RC2R2 and 26/26 predecessor artifacts pass. Verdict is
   `WITHHOLD_WITH_BOUNDED_DEFECTS` because the 0.85 threshold is caller-overridable, receipt creation
   observes expected values rather than actual received bytes, and string paths admit key aliases.
+- RC2R3: agreement threshold `0.85` is compiled and non-overridable; receipt construction consumes
+  actual receiver-side bytes; typed structural paths reject bracket/dot/slash aliases. Verification
+  passes 18/18 adversarial and 73/73 predecessor-regression tests, 88%/84%/86% branch-aware
+  agreement/builder/combined coverage and deterministic Windows/WSL replay.
 - Execution: no coder distribution, agreement/adjudication, research model/API, metric, reproduction,
   prototype, family/branch selection, novelty verdict, mapping, Stage-2A or push is authorized or
   recorded. No independent ACCEPT exists.
@@ -29,5 +33,5 @@
   The problem ranking and selection remain withheld. RC2R2 is committed; no transaction is described as never committed.
 - Authority: `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR` authorizes a new
   immutable successor, its local no-push commit and fresh review. It does not itself open distribution.
-- Next action: fix only the frozen threshold, receiver-side actual-byte receipts and typed structural
-  paths plus alias tests; then obtain the exact RC2R3 independent ACCEPT or remain stopped.
+- Next action: freeze the local no-push RC2R3 commit and submit its exact review manifest to a fresh
+  no-fork independent reviewer; obtain the exact RC2R3 ACCEPT or remain stopped.
