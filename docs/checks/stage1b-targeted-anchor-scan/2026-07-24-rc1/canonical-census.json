@@ -1,0 +1,75 @@
+{
+  "schema": "sf-stage1b-targeted-anchor-scan-canonical-census-v1",
+  "artifact_id": "SF-STAGE1B-TARGETED-ANCHOR-SCAN-CANONICAL-CENSUS-RC1",
+  "as_of": "2026-07-24",
+  "frozen_stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
+  "frozen_base": {
+    "count": 226,
+    "shards": [
+      {
+        "path": "wiki/survey/registry/stage1b-bounded-2026-07-22-papers.jsonl",
+        "rows": 159,
+        "sha256": "363f953e20a0100512ce12cf70b8a43081b693a767062ab820e1787f5762aee5"
+      },
+      {
+        "path": "wiki/survey/registry/stage1b-bounded-batch2-2026-07-22-papers.jsonl",
+        "rows": 25,
+        "sha256": "90256eae28f53bd6ab536936fa7ee940ccb58e5b3f3dc555bab21f51137bb75a"
+      },
+      {
+        "path": "wiki/survey/registry/stage1b-bounded-batch3-2026-07-22-papers.jsonl",
+        "rows": 21,
+        "sha256": "9e3d530170920f887fdab0aa7292662ba8acb9b9e34ba74adfcbb32fcf11015d"
+      },
+      {
+        "path": "wiki/survey/registry/stage1b-bounded-batch4-exhaustive-2026-07-22-papers.jsonl",
+        "rows": 21,
+        "sha256": "16f1289f56c7f4414902ea66d0030fc19fe2d38021b0c5502e226029c8c4a0c7"
+      }
+    ]
+  },
+  "inherited_current_union": 282,
+  "capability_delta_rc1": {
+    "count": 14,
+    "mutated": false,
+    "signed": false
+  },
+  "input_bindings": {
+    "current_reference_appendix": {
+      "path": "wiki/survey/current/stage1b-transition-reference-appendix.md",
+      "sha256": "07dfde6ba3dcbee4e753c59ca0eab9b39e6b911e2a316825589b23a77b69b84d"
+    },
+    "current_priority_intake": {
+      "path": "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
+      "sha256": "2a1223fdd65b3a54aab2ff6391a07bbdc686b053e25622517c251a0dd24b5c4e"
+    },
+    "capability_delta_records": {
+      "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/data/capability-delta-records-v1.json",
+      "sha256": "fcd860ac1804d691760ff1f5b89a4b45b9341520a3b63c15fab3374dc76688a0"
+    }
+  },
+  "targeted_anchor_scan": {
+    "fulltext_scanned": 26,
+    "promoted": 24,
+    "scanned_not_promoted": 2,
+    "overlap_with_inherited": 0,
+    "overlap_with_capability_delta": 0
+  },
+  "independent_targeted_overlay_surface": 306,
+  "combined_unsigned_candidate_union": 320,
+  "checks": {
+    "frozen_226": true,
+    "appendix_59": true,
+    "base_appendix_overlap_7": true,
+    "priority_4": true,
+    "inherited_union_282": true,
+    "capability_delta_14": true,
+    "targeted_overlay_24": true,
+    "targeted_disjoint_from_inherited": true,
+    "targeted_disjoint_from_capability_delta": true,
+    "independent_targeted_surface_306": true,
+    "combined_unsigned_candidate_union_320": true
+  },
+  "signed_release": false,
+  "stage1c_input": false
+}

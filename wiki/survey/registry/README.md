@@ -23,3 +23,10 @@ task-match facets, 45 open transfer records, 126 falsifiers, and 43 instruments)
 through-batch-3 view remains a replayable historical derivative, not current truth.
 Regenerate views with `scripts/survey/sf_stage1b_registry_views.py`; do not hand-edit or duplicate
 canonical paper rows across shards.
+
+`stage1b-targeted-anchor-scan-2026-07-24-papers.jsonl` is a separate 24-record, metadata-only
+projection of the unsigned targeted-anchor scan RC. It is disjoint from the frozen 226-work registry,
+the CURRENT appendix/priority union and the unsigned 14-work capability delta. It is not consumed by
+the frozen registry views and is not a Stage-1C input before independent
+`SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. Regenerate and verify this projection only with
+`scripts/survey/sf_stage1b_targeted_anchor_scan.py`; do not fold it into a frozen v5 shard.

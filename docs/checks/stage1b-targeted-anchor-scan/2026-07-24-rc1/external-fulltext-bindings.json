@@ -1,0 +1,632 @@
+{
+  "schema": "sf-stage1b-targeted-anchor-scan-external-bindings-v1",
+  "artifact_id": "SF-STAGE1B-TARGETED-ANCHOR-SCAN-EXTERNAL-BINDINGS-RC1",
+  "as_of": "2026-07-24",
+  "binding_count": 78,
+  "bindings": [
+    {
+      "primary_identity": "2505.00684",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2505.00684/2505.00684.eprint",
+      "bytes": 7469001,
+      "sha256": "cfeabf522a2d04b07d3ac1510054e15db12cbaf20ace5c94ecb796e83e96aae0"
+    },
+    {
+      "primary_identity": "2505.00684",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2505.00684/2505.00684.txt",
+      "bytes": 87909,
+      "sha256": "c47945ead3aefb361649d84e52372affb1bff6352fdd18e7d675d2fbdbf4844d"
+    },
+    {
+      "primary_identity": "2505.00684",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2505.00684/2505.00684.pdf",
+      "bytes": 8057373,
+      "sha256": "f849eb04c61ff5ef7881022a3f24d6a1627e6912ae4135b7be0fd84e2258219c"
+    },
+    {
+      "primary_identity": "2507.10859",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2507.10859/2507.10859.eprint",
+      "bytes": 4329617,
+      "sha256": "07b64c91a2dc634adffce5319dc637024551ffa02dda1b6102a47a4331902da7"
+    },
+    {
+      "primary_identity": "2507.10859",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2507.10859/2507.10859.txt",
+      "bytes": 77511,
+      "sha256": "7374e5891f4490c45c887cb1496e62d1c92275d5f424dab5b49ff426379630c6"
+    },
+    {
+      "primary_identity": "2507.10859",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2507.10859/2507.10859.pdf",
+      "bytes": 4527807,
+      "sha256": "4f802cd36fd6d3d7ad4dfeaa655c28367de5f0b535476a005433963bfce867da"
+    },
+    {
+      "primary_identity": "2508.10015",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2508.10015/2508.10015.eprint",
+      "bytes": 283889,
+      "sha256": "e5613f17ef8474dd76b84db9bb12464d3769f248ba6a93e94179c76989204b56"
+    },
+    {
+      "primary_identity": "2508.10015",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2508.10015/2508.10015.txt",
+      "bytes": 74000,
+      "sha256": "4e739740735f7f05c09250edbfbe429f82a48a4a0ab430d6fd5203685be5b26f"
+    },
+    {
+      "primary_identity": "2508.10015",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2508.10015/2508.10015.pdf",
+      "bytes": 483309,
+      "sha256": "5ccb0113ed100606d8bb534f27f39ef6755542c923b100ae52ea8e32fee313d7"
+    },
+    {
+      "primary_identity": "2510.07838",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.07838/2510.07838.eprint",
+      "bytes": 9729281,
+      "sha256": "f9529962f70db60eb6c4c3dc9d338cf8af937e237131d6b5304099621f4ac75a"
+    },
+    {
+      "primary_identity": "2510.07838",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.07838/2510.07838.txt",
+      "bytes": 59455,
+      "sha256": "1f5c18a6ec57cb7123164d76c8bfab2c0a201d4049096bda84735ca57a5ed26b"
+    },
+    {
+      "primary_identity": "2510.07838",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.07838/2510.07838.pdf",
+      "bytes": 11207063,
+      "sha256": "689e2e73b3bbc47cd51a9bfade7c05a2c3035fe364e3a7a6eef57455e2d2a1c4"
+    },
+    {
+      "primary_identity": "2510.11098",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.11098/2510.11098.eprint",
+      "bytes": 8784969,
+      "sha256": "1d1fc645e03f630a66164197a3dc86e93091970f461a13dac0277f105ed707fa"
+    },
+    {
+      "primary_identity": "2510.11098",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.11098/2510.11098.txt",
+      "bytes": 228738,
+      "sha256": "4806d540cc797b60895233fa55ddc1e00e0fc8da6ba17fff5a19ba653051a527"
+    },
+    {
+      "primary_identity": "2510.11098",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.11098/2510.11098.pdf",
+      "bytes": 1734400,
+      "sha256": "fbc38c4f5b8e99fb8de6795aaeea44fe01e36a3c492594459e685276cdc63f03"
+    },
+    {
+      "primary_identity": "2510.15421",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.15421/2510.15421.eprint",
+      "bytes": 12822685,
+      "sha256": "48ceb0531cfef2a055a7207a0c40456030ad4a302f767ce4f058dd3b50cd5fa9"
+    },
+    {
+      "primary_identity": "2510.15421",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.15421/2510.15421.txt",
+      "bytes": 103577,
+      "sha256": "9380969dad167f9237fdd401c225fe113d24fecbc6f071580ac7921d45ef4316"
+    },
+    {
+      "primary_identity": "2510.15421",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.15421/2510.15421.pdf",
+      "bytes": 13419921,
+      "sha256": "b5aa71af72c783098d83a7de0914682e70a6bf68c8b55ff2fb57bf78419bb187"
+    },
+    {
+      "primary_identity": "2510.20867",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.20867/2510.20867.eprint",
+      "bytes": 898763,
+      "sha256": "80a9b7cd20ac7344f3e6d496d3da301dcb78b3da4a671d0ebacadece2a00dcdf"
+    },
+    {
+      "primary_identity": "2510.20867",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.20867/2510.20867.txt",
+      "bytes": 184085,
+      "sha256": "9e0b982b1b2ae65e78234b5216a6281d5d671834c7f7922381e8f5ff499562a5"
+    },
+    {
+      "primary_identity": "2510.20867",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2510.20867/2510.20867.pdf",
+      "bytes": 1408293,
+      "sha256": "684a808c3e0b7408f253c1d01470b2ba65d04a2244cbde72f3f18e325d08eedd"
+    },
+    {
+      "primary_identity": "2512.11109",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.11109/2512.11109.eprint",
+      "bytes": 55963,
+      "sha256": "89199dd1b5bce535f6a4f1e1ef1a142595c38a635ecbb83b9a7d11c4d769765d"
+    },
+    {
+      "primary_identity": "2512.11109",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.11109/2512.11109.txt",
+      "bytes": 91036,
+      "sha256": "5cfce19b716db43e29a34ecc16ce55e130d9119970dc28a8ab8560cf1ce4a85c"
+    },
+    {
+      "primary_identity": "2512.11109",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.11109/2512.11109.pdf",
+      "bytes": 400099,
+      "sha256": "9d4135c1eff2aa9c00584a45c0c05a96b9e78764df15a11eb71122d774abdf68"
+    },
+    {
+      "primary_identity": "2512.14865",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.14865/2512.14865.eprint",
+      "bytes": 2069803,
+      "sha256": "4a3adf048e62dba294758f50b1d97f6ed9ab949e4894a61be81ff22b669247bf"
+    },
+    {
+      "primary_identity": "2512.14865",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.14865/2512.14865.txt",
+      "bytes": 134547,
+      "sha256": "9ca13b441b29850f1a70ed4cde201c59da792ce6d1265007c86bcf0a391cb9d5"
+    },
+    {
+      "primary_identity": "2512.14865",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2512.14865/2512.14865.pdf",
+      "bytes": 2393184,
+      "sha256": "d724dd047b476408bef588fac478984c0237e76a84c7e9096ff64f330d145e57"
+    },
+    {
+      "primary_identity": "2601.01885",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.01885/2601.01885.eprint",
+      "bytes": 502707,
+      "sha256": "6716719556972cf69099223a45bc258e15956121d119af9d8af55c1d9c0be71f"
+    },
+    {
+      "primary_identity": "2601.01885",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.01885/2601.01885.txt",
+      "bytes": 175706,
+      "sha256": "7037956d727f02e934ab7ce5c43643e426b79348dcc18c711afa9757ca95d40f"
+    },
+    {
+      "primary_identity": "2601.01885",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.01885/2601.01885.pdf",
+      "bytes": 1159291,
+      "sha256": "73f24aaf8234d38eb96a27b465c7da4f370b91d71823cb518641015e0330382c"
+    },
+    {
+      "primary_identity": "2601.03515",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.03515/2601.03515.eprint",
+      "bytes": 2404872,
+      "sha256": "4334098991950a0fcae50fcaec9860ecabd39061acad74174a1d5a9e3a4e84da"
+    },
+    {
+      "primary_identity": "2601.03515",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.03515/2601.03515.txt",
+      "bytes": 265932,
+      "sha256": "1f1d233198f4e15afb807e82433a6148b0cae6edad6c18f78d907bfdc1b08b9a"
+    },
+    {
+      "primary_identity": "2601.03515",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.03515/2601.03515.pdf",
+      "bytes": 3098382,
+      "sha256": "afb731ea1d9385e158565ef76f015762fd79ef300cbdb7659359ca77ff1884db"
+    },
+    {
+      "primary_identity": "2601.07470",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.07470/2601.07470.eprint",
+      "bytes": 9680951,
+      "sha256": "61e90e51540b30f3840a6c6727772eb7ef748861badfd756562a83686a2941f0"
+    },
+    {
+      "primary_identity": "2601.07470",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.07470/2601.07470.txt",
+      "bytes": 93273,
+      "sha256": "cf3e9ae23f4878e787fbdda0a0592f2a5734436dad96ff8562f7093d462f047c"
+    },
+    {
+      "primary_identity": "2601.07470",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.07470/2601.07470.pdf",
+      "bytes": 10183127,
+      "sha256": "48ef6797aba1a34ee05e61959c50e39cdce70caeaee6b0e3d919e6165feac81c"
+    },
+    {
+      "primary_identity": "2601.09413",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.09413/2601.09413.eprint",
+      "bytes": 9847907,
+      "sha256": "8b4a8374594856b3f35525412659d674f91efbc5e413e1dd19f01ee31a3f9949"
+    },
+    {
+      "primary_identity": "2601.09413",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.09413/2601.09413.txt",
+      "bytes": 100332,
+      "sha256": "05c6883651fcbf21d4692d0f90d566a65ebcc535e251f11489d1dd80a740ae56"
+    },
+    {
+      "primary_identity": "2601.09413",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.09413/2601.09413.pdf",
+      "bytes": 851325,
+      "sha256": "771464dd032d6df5d285cdd63050e4ceaebb01ae681599b7662bc2de335a1107"
+    },
+    {
+      "primary_identity": "2601.19935",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.19935/2601.19935.eprint",
+      "bytes": 1807879,
+      "sha256": "f5c31b694ea05615804a550c4ed4e5999c6e4576dd83bc59a8db53041aeda9f6"
+    },
+    {
+      "primary_identity": "2601.19935",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.19935/2601.19935.txt",
+      "bytes": 95357,
+      "sha256": "dfbc72fd7f083ae34de9e3dd48c5ce52f71d514b0340dc6410a00604667569db"
+    },
+    {
+      "primary_identity": "2601.19935",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2601.19935/2601.19935.pdf",
+      "bytes": 1005282,
+      "sha256": "c3901845afa60e74853d6e93686062da6a349cd828eb504d13fec287bdb46b91"
+    },
+    {
+      "primary_identity": "2602.03707",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.03707/2602.03707.eprint",
+      "bytes": 16103346,
+      "sha256": "9cc2da671e8d6a6ff53b5a86dc31db1b1ec59fa54c0cca275d58ddafbd2b5597"
+    },
+    {
+      "primary_identity": "2602.03707",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.03707/2602.03707.txt",
+      "bytes": 119543,
+      "sha256": "7b9394fe0cab7819fec2d4df35f4eab9aef453e3da0dbf09652a137c63aba708"
+    },
+    {
+      "primary_identity": "2602.03707",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2602.03707/2602.03707.pdf",
+      "bytes": 16703563,
+      "sha256": "7c58b6540b07a3bde7efa0600a08f8d934a95f939e3c2512032d9f6b98ea1a18"
+    },
+    {
+      "primary_identity": "2604.08064",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.08064/2604.08064.eprint",
+      "bytes": 1053852,
+      "sha256": "95f6c3d6cbf82b2911d3c54e8bdd1e75be9b9276ed9b80490606c5248c959b1e"
+    },
+    {
+      "primary_identity": "2604.08064",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.08064/2604.08064.txt",
+      "bytes": 186671,
+      "sha256": "38801d0883643937de8ccc38a210750ffa40c669e9b171e57f923f28b5581037"
+    },
+    {
+      "primary_identity": "2604.08064",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.08064/2604.08064.pdf",
+      "bytes": 921694,
+      "sha256": "564a1fd910eac88c31feb77cdf0c2181969fcce55b166548e4793cdca05a8a13"
+    },
+    {
+      "primary_identity": "2604.15383",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.15383/2604.15383.eprint",
+      "bytes": 406931,
+      "sha256": "172d2fb813753ed19bc25ff6776ab09a99f001cfa27ddf395d4ee8180a81fd86"
+    },
+    {
+      "primary_identity": "2604.15383",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.15383/2604.15383.txt",
+      "bytes": 75246,
+      "sha256": "833e78a8b25f453195ca952f45848c02c03a0741cc4fdbd59cd9879c9595c56a"
+    },
+    {
+      "primary_identity": "2604.15383",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.15383/2604.15383.pdf",
+      "bytes": 741319,
+      "sha256": "e3c32dabf8d029ce33f2a71da71e740ca9d5f9ce8c48e77051bf080d9351ecb9"
+    },
+    {
+      "primary_identity": "2604.25122",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.25122/2604.25122.eprint",
+      "bytes": 7368415,
+      "sha256": "5045279aca56662b54e32cb287215dd404075d9b918127bbeda0dab9c868423d"
+    },
+    {
+      "primary_identity": "2604.25122",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.25122/2604.25122.txt",
+      "bytes": 150818,
+      "sha256": "d477fff393bd65b98b9d6a5ddd373ac5a229eeafda6bdd2c6c770d49bae2b06c"
+    },
+    {
+      "primary_identity": "2604.25122",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2604.25122/2604.25122.pdf",
+      "bytes": 7836555,
+      "sha256": "d82d7a6349f754edfb366b982d2497df4f71e40815e04cd338e7c0f25e5089db"
+    },
+    {
+      "primary_identity": "2605.13277",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13277/2605.13277.eprint",
+      "bytes": 5814817,
+      "sha256": "4d5cbe00fff43eb293dbcbccc401d6bbec0156943ea164f04b972ae8586145c9"
+    },
+    {
+      "primary_identity": "2605.13277",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13277/2605.13277.txt",
+      "bytes": 204939,
+      "sha256": "c4d8d2663bf8b1cedb09d93658f4326065c883675d0b33faf473c9f7600163d1"
+    },
+    {
+      "primary_identity": "2605.13277",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13277/2605.13277.pdf",
+      "bytes": 7033696,
+      "sha256": "790c687fab5628a93342704e6fed912e817a3954c80435e23fdf4c9831e22c16"
+    },
+    {
+      "primary_identity": "2605.13716",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13716/2605.13716.eprint",
+      "bytes": 2493098,
+      "sha256": "6a26f11a4c70d25575dfb4e0bab81973bf1b1fb1d79d973b2f3140ef9fabe4aa"
+    },
+    {
+      "primary_identity": "2605.13716",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13716/2605.13716.txt",
+      "bytes": 109685,
+      "sha256": "17eedc388de7d275e58abb1f2cfc4cfc7688e71f48222562358712f3b367e88f"
+    },
+    {
+      "primary_identity": "2605.13716",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.13716/2605.13716.pdf",
+      "bytes": 1594213,
+      "sha256": "b56e5f031d1ee2a480e2b21d840755ad894cf7d10936d8bf0ac7f384cbdefbfc"
+    },
+    {
+      "primary_identity": "2605.15019",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.15019/2605.15019.eprint",
+      "bytes": 8801197,
+      "sha256": "11b41a848648833b9ec407b72eae14d5a60157ed040a2ef43415dea3dbfc7869"
+    },
+    {
+      "primary_identity": "2605.15019",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.15019/2605.15019.txt",
+      "bytes": 97713,
+      "sha256": "8bc07c18a6f949062a682b9fad980c3d886aef821720a249edb078ea87a2f983"
+    },
+    {
+      "primary_identity": "2605.15019",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.15019/2605.15019.pdf",
+      "bytes": 9242962,
+      "sha256": "b2d70d39b2fe0759bfe5a66feac34189431afea07486f9075958cae0b7788b13"
+    },
+    {
+      "primary_identity": "2605.28020",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.28020/2605.28020.eprint",
+      "bytes": 3979982,
+      "sha256": "b3ae1df0b7987d1c9b0442c944b5cce70fbd1dc15519db7976e4f55c7359e97a"
+    },
+    {
+      "primary_identity": "2605.28020",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.28020/2605.28020.txt",
+      "bytes": 113583,
+      "sha256": "b95e38a46d320e200b4380fd3d16c7f06815995090c021d504df75e50f582a56"
+    },
+    {
+      "primary_identity": "2605.28020",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2605.28020/2605.28020.pdf",
+      "bytes": 4581666,
+      "sha256": "d1e026e7780474b9e4a40282e8674c5ecbc2e28637f85d33fb06a501ae2a91f7"
+    },
+    {
+      "primary_identity": "2606.01414",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01414/2606.01414.eprint",
+      "bytes": 6014833,
+      "sha256": "d4fc0613e4508f93e52b4d650d5a4aeeb0d35371f9a05cf2408d64b45cd4605d"
+    },
+    {
+      "primary_identity": "2606.01414",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01414/2606.01414.txt",
+      "bytes": 86199,
+      "sha256": "f3cfaf53c5c87d144a8fd38558107a6a3d0be7b3d9a57be5aa75ef80d860b7a5"
+    },
+    {
+      "primary_identity": "2606.01414",
+      "disposition": "SCANNED_NOT_PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.01414/2606.01414.pdf",
+      "bytes": 4250086,
+      "sha256": "d6b443ab2dae06c30cb683ab7184a7e8774108663df552c41eaa088861a1e13f"
+    },
+    {
+      "primary_identity": "2606.06915",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.06915/2606.06915.eprint",
+      "bytes": 1208144,
+      "sha256": "0fccf7e92cc479bed122ca9092ef6acfef76f1606f48dfc807ced6a9390d84c7"
+    },
+    {
+      "primary_identity": "2606.06915",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.06915/2606.06915.txt",
+      "bytes": 124865,
+      "sha256": "2069c5d3bc04377a130c6d06b9fa7d5d03cd586a6df4a6c07c0e31b0d06c6ec3"
+    },
+    {
+      "primary_identity": "2606.06915",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.06915/2606.06915.pdf",
+      "bytes": 3433556,
+      "sha256": "f7dcc9023f481ee24f28ad3eaf355642045f9e9f61140bd44dc6c2dd4c7fc0ce"
+    },
+    {
+      "primary_identity": "2606.18448",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.18448/2606.18448.eprint",
+      "bytes": 6537957,
+      "sha256": "2c0cbf96bb443f55a73ce473c993e249190aee2b2faf7dc7b9a6193af32a7fa1"
+    },
+    {
+      "primary_identity": "2606.18448",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.18448/2606.18448.txt",
+      "bytes": 116846,
+      "sha256": "c52a7d235cb3f60e3a28f83ff441b2b3470fd292275fd66122a8b0b452a32547"
+    },
+    {
+      "primary_identity": "2606.18448",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.18448/2606.18448.pdf",
+      "bytes": 5929043,
+      "sha256": "3a4492e3d6bd1c2def2f44b0ba0bb6a1e4671736598faf6510ff18356f53730a"
+    },
+    {
+      "primary_identity": "2606.19341",
+      "disposition": "PROMOTED",
+      "kind": "eprint",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.19341/2606.19341.eprint",
+      "bytes": 8159337,
+      "sha256": "1bebd8884c2dbbf5c1193a18a4ae8465fdc92112387dfba43bdace08d63b146f"
+    },
+    {
+      "primary_identity": "2606.19341",
+      "disposition": "PROMOTED",
+      "kind": "extracted_text",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.19341/2606.19341.txt",
+      "bytes": 115324,
+      "sha256": "de7de76f6a6ac709799d49c71362f9960fa31dc5bc410b73c5ef3e71d4202ae7"
+    },
+    {
+      "primary_identity": "2606.19341",
+      "disposition": "PROMOTED",
+      "kind": "pdf",
+      "resolved_windows_path": "E:/chao_workspace/exploring-l4-intelligence/speechrl-data/survey-fulltext/2606.19341/2606.19341.pdf",
+      "bytes": 8829309,
+      "sha256": "cc3e5c14132e27f7b30df4f11f323223321c2b9dee3a6eb342ebabdd240bd2de"
+    }
+  ]
+}

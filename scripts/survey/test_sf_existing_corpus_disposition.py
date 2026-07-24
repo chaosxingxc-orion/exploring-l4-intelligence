@@ -24,7 +24,7 @@ EXPECTED_DENOMINATORS = {
     "bibliography": 65,
     "claim": 62,
     "version_pin": 30,
-    "fulltext": 1033,
+    "fulltext": 1072,
     "reviewer_known": 19,
 }
 

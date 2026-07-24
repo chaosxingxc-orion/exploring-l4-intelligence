@@ -1,0 +1,72 @@
+{
+  "schema": "sf-stage1b-targeted-anchor-scan-contract-report-v1",
+  "artifact_id": "SF-STAGE1B-TARGETED-ANCHOR-SCAN-CONTRACT-REPORT-RC1",
+  "as_of": "2026-07-24",
+  "status": "UNSIGNED_STAGE1B_OVERLAY_AWAITING_INDEPENDENT_REVIEW",
+  "requested_review_verdict": "SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE",
+  "self_signed": false,
+  "surface": {
+    "fulltext_scanned": 26,
+    "promoted_records": 24,
+    "scanned_not_promoted": 2,
+    "role_counts": {
+      "BOUNDARY": 7,
+      "COMPONENT_PATH": 4,
+      "DIRECT_PATH": 1,
+      "INSTRUMENT": 11,
+      "NEGATIVE_OR_FALSIFIER": 1
+    },
+    "primary_direction_counts": {
+      "CONTROL": 7,
+      "KNOWLEDGE": 5,
+      "MEMORY": 5,
+      "SKILL": 2,
+      "SYSTEM": 5
+    },
+    "use_relation_counts": {
+      "BORROWED_PROTOCOL_ANALOGUE": 18,
+      "REFERENCE_CONTEXT": 6
+    },
+    "reproduction_anchors": 0,
+    "independent_targeted_overlay_surface": 306,
+    "combined_unsigned_candidate_union": 320
+  },
+  "external_bindings": {
+    "verified": 78,
+    "expected": 78,
+    "ledger": {
+      "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+      "sha256": "0f239f52ddaf2929a468dfa9c622470b3c1b923a3d071ba6fbdc0b38fcc8378e",
+      "target_renditions_verified": 52,
+      "conflicting_hashes": 0,
+      "identical_retry_counts": {}
+    }
+  },
+  "preserved_capability_delta_rc1": {
+    "path": "wiki/survey/workbench/system-first-stage1b-capability-delta/review-package-manifest.json",
+    "sha256": "ee8f0564069475f58f9be313a7978db662665d1d379b213d3005507c59dea3a6",
+    "artifact_count": 15,
+    "all_manifest_artifacts_byte_verified": true
+  },
+  "acceptance_checks": {
+    "exact_26_scan_surface": true,
+    "exact_24_promoted_and_2_not_promoted": true,
+    "all_pdf_eprint_and_text_hashes_verified": true,
+    "all_pdf_eprint_ledger_bindings_verified": true,
+    "targeted_overlay_disjoint_from_inherited_and_capability_delta": true,
+    "reference_borrow_reproduce_contract_complete": true,
+    "no_false_reproduction_anchor": true,
+    "frozen_stage1b_v5_preserved": true,
+    "capability_delta_rc1_preserved": true,
+    "no_stage1c_activation": true,
+    "no_model_benchmark_reproduction_or_prototype_run": true,
+    "no_project_novelty_or_direction_selection": true,
+    "independent_signature_pending": true
+  },
+  "limitations": [
+    "This is a targeted primary-source scan, not closure of the literature universe.",
+    "Paper-reported results are retained within their original experiment strata and are not cross-paper aggregates.",
+    "REFERENCE_CONTEXT and BORROWED_PROTOCOL_ANALOGUE do not imply reproducibility, local readiness, or a reproduction anchor.",
+    "The 320-work number is a combined unsigned candidate union, not a signed Stage-1C denominator."
+  ]
+}

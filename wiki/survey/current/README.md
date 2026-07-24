@@ -1,9 +1,10 @@
 # Current Survey Router
 
-- Current gate: **Stage-1B capability-delta release candidate awaiting independent review** under
-  owner token `AUTHORIZE_STAGE1B_CAPABILITY_DELTA_MAPPING`. The frozen Stage-1B v5 scientific commit
-  remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; the candidate does not rewrite it. Stage-1C
-  common-rubric authority is preserved but paused. Ranking, selection and execution remain unauthorized.
+- Current gate: **two disjoint unsigned Stage-1B overlays awaiting independent review**. The
+  capability-delta RC still awaits `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`; the later targeted-anchor
+  full-text scan RC awaits `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. The frozen Stage-1B v5
+  scientific commit remains `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; neither overlay rewrites
+  it or enters Stage-1C. Ranking, selection and execution remain unauthorized.
 - Read in this order: [`status.md`](status.md) →
   [`tables/stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
   [`tables/stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → targeted data/reference
@@ -29,7 +30,13 @@
   It locks 8 seeds plus 6 citation promotions, recomputes a 296-work candidate surface, and requests
   independent `SIGN_STAGE1B_CAPABILITY_DELTA_RELEASE`. The unsigned 14-work delta is not yet a
   Stage-1C input.
+- Targeted-anchor scan RC: [`../workbench/system-first-stage1b-targeted-anchor-scan/README.md`](../workbench/system-first-stage1b-targeted-anchor-scan/README.md).
+  It full-text-scans 26 new works, retains 24, explicitly records two non-promotions, and requests
+  independent `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. Its independent candidate surface is 306;
+  the union with the separate unsigned capability delta is 320. Neither count is a signed Stage-1C
+  denominator.
 - H5 remains withheld; H5-dependent bundles cannot enter Stage-1C selection.
-- Audit pointers: `wiki/audit/system-first-stage1b/INDEX.md` and
-  `wiki/audit/system-first-stage1b-capability-delta/INDEX.md`. Load individual proposals and reviews only
+- Audit pointers: `wiki/audit/system-first-stage1b/INDEX.md`,
+  `wiki/audit/system-first-stage1b-capability-delta/INDEX.md` and
+  `wiki/audit/system-first-stage1b-targeted-anchor-scan/INDEX.md`. Load individual proposals and reviews only
   through targeted search. Historical proposals, reviews, responses and amendments are cold audit.
