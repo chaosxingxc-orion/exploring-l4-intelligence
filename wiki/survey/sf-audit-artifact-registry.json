@@ -415,6 +415,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r2-provenance-repair-authorization/2026-07-24-owner-rc2r2-provenance-repair-authorization.md",
       "git_blob": "00f8ccc989644c7c93d8c64957c9dc6e5f2d3a49"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r2-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r2-independent-method-review.md",
+      "git_blob": "764e17bd8c7b2fc3eb232fa6cbe7a316738b82b2"
     }
   ]
 }

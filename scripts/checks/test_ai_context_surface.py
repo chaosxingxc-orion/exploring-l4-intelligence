@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 24), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic RC2R2 frozen-provenance repair",
+            "Stage-1C v2 Agentic RC2R2 bounded-defect owner decision",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,7 +1688,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_RC2R2_PROVENANCE_REPAIR_AUTHORIZED_NOT_DISTRIBUTED",
+            "AGENTIC_RC2R2_REVIEW_WITHHELD_CODER_DISTRIBUTION_CLOSED",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR",
             "ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE",
@@ -1698,7 +1698,11 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "owner",
             "research models/APIs",
             "wiki/survey/current/README.md",
-            "system-first-stage1c-v2-precalibration-rc2r1/README.md",
+            "system-first-stage1c-v2-precalibration-rc2r2/README.md",
+            "9652d98eade798903be6c5d007591d2602a2f5c3",
+            "caller-overridable",
+            "actual received bytes",
+            "structural-key aliases",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
             "Next action",
             "Supersession rule",

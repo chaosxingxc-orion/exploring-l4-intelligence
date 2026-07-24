@@ -1105,7 +1105,7 @@ class RouterContentContractTests(unittest.TestCase):
             "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
             "problem ranking and selection remain withheld",
             "H5 remains withheld",
-            "never committed",
+            "RC2R2 is committed",
             "Next action",
         ):
             self.assertIn(required, text)
