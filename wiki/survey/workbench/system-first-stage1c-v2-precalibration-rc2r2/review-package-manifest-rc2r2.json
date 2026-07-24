@@ -1,0 +1,171 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-review-manifest-v4",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-REVIEW-PACKAGE-RC2R2",
+  "status": "AGENTIC_RC2R2_CODER_READY_NOT_DISTRIBUTED",
+  "artifact_count": 30,
+  "predecessor_rc2r1_commit": "8d0a7c62a99cc93ff394881f20ad793e308f3342",
+  "compiled_frozen_contract_sha256": "e039074f5897c43fb6a26dc2bdb58bb41e52426c87c7631adec54dbe461e262f",
+  "artifacts": [
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-precalibration/owner-rc2r2-provenance-repair-authorization/2026-07-24-owner-rc2r2-provenance-repair-authorization.md",
+      "bytes": 2226,
+      "sha256": "9df34b075e1f381ab3b3eb38d21132025fea61e92af0b9f0c88b702aa8213b07"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-precalibration/agentic-rc2r1-independent-method-review/2026-07-24-stage1c-v2-agentic-rc2r1-independent-method-review.md",
+      "bytes": 7492,
+      "sha256": "c5634a321b69e2f1edea0877b88e78266e118341ae2dfc9ff2df8c7877a0ee51"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r1/review-package-manifest-rc2r1.json",
+      "bytes": 6677,
+      "sha256": "436da1dc1d103fb8611fc75fe86a68a75ffbf6bf16908c7c3ea5441d051d73c2"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/README.md",
+      "bytes": 1855,
+      "sha256": "c57ded523d96fd7bc461ef63a68c4954bf929098da0a0dd44b33a2a0fb85f186"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/codebook-v4.md",
+      "bytes": 1238,
+      "sha256": "17cc150f4293e2f6530152da276c9c2c1c076afd0f49a89669864665a735c2c7"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/stage1c-v2-precalibration-contract-rc2r2-zh.md",
+      "bytes": 2738,
+      "sha256": "7049a3cb5f1be47c950f049c9b44f3d2d7740de295743039c8f346d0a3047584"
+    },
+    {
+      "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2r2.py",
+      "bytes": 36038,
+      "sha256": "f052975caf36b74af7d60086252965223cc06ff3c4b7d0e2e11b9f7bf632fb11"
+    },
+    {
+      "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v4.py",
+      "bytes": 16296,
+      "sha256": "a1c7461f6ef9fdabc9669ba5d6575cbe5ec242ba55bb049447bb469dcd9037ee"
+    },
+    {
+      "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2r2.py",
+      "bytes": 23004,
+      "sha256": "a4f647d3d6324ec028ec2bdf1183ee2ef354c093d4a4926d1c8573fb23295327"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-response-schema-v4.json",
+      "bytes": 30994,
+      "sha256": "d57be12b34b8529cd19438b2859a58c10345b5d836141be79062c81b9224256c"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/schema-bundle-v4.json",
+      "bytes": 31065,
+      "sha256": "932fc74c129a42d08d842cb810be91feee6bd247167b6eeff81d785372c8f54b"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-source-byte-manifest-v4.json",
+      "bytes": 77520,
+      "sha256": "0361c8a9bddf200f4e37a35ece12505719abaf1a00e450e540175715f813e44e"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/acl-acquisition-receipts-v2.json",
+      "bytes": 1988,
+      "sha256": "1755cc99bb2f354fc31de52f1780ea1626a2d5adcb756949550071367f9493d4"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-manifest-v4.json",
+      "bytes": 5718,
+      "sha256": "291b68ae4bfbe1e5b8d14c8280846f7d74a779a89acf422ffeae21bfd19e40e6"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-blind-packet-v4.json",
+      "bytes": 131384,
+      "sha256": "130f9e0c7f9d34aff2b2634c80dd9e7ba308260e008832c8a104d34e86237677"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-assignment-manifest-v4.json",
+      "bytes": 14094,
+      "sha256": "b35e0134e14f22915ce5933e6a1b20d1982ceac12c423fd516915c10a4927ea4"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/claim-template-registry-v4.json",
+      "bytes": 32035,
+      "sha256": "89a1dcb57edc6e18dcec93f0e249857b4a4e9d9c9d9eab49a922acfffc9b54c6"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/claim-template-coder-view-v4.json",
+      "bytes": 12525,
+      "sha256": "b7a497222ecb6dc4038b553aa15984f8724f025a7628dfdd79bc5f71f0a30289"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/coder-codebook-v4.json",
+      "bytes": 1954,
+      "sha256": "1d1b5b70c549920d80454045e5da42aec25ba7950ddbe4355aa1e2d78a3258d5"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/coder-prompt-v4.json",
+      "bytes": 929,
+      "sha256": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/agreement-contract-v4.json",
+      "bytes": 4072,
+      "sha256": "2a00cf6ea2c9f7202c53acb151b7c596f490db23af1b3d68f8e61fe784870bef"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/agreement-intake-contract-v4.json",
+      "bytes": 16851,
+      "sha256": "4d2e16dd3ea0d8ea4e05a7582699bc57f3c66e7e85095165427a6d89be858102"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/delivery-receipt-schema-v1.json",
+      "bytes": 2292,
+      "sha256": "196f4108fb7672547f69e8ca3d42da8ec5e3d7eff05d19d134daf81479618c8e"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/delivery-receipt-template-v1.json",
+      "bytes": 677,
+      "sha256": "065de93ddec7bfa3280ef58f6fabbd51e4bff9c14e484e59cb81c543f6a66807"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/frozen-package-contract-v1.json",
+      "bytes": 1575,
+      "sha256": "e039074f5897c43fb6a26dc2bdb58bb41e52426c87c7631adec54dbe461e262f"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/coder-transaction-contract-v4.json",
+      "bytes": 3894,
+      "sha256": "beb000361cf02bba15034279823ea0ae92b155679ff060f5aaf1340e3aa6f533"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/reproduction-readiness-v4.json",
+      "bytes": 31675,
+      "sha256": "9db8f8e7291eb2b074bfe7aa50f7fce60ecdcfd88f968f5f976c7e0a83609818"
+    },
+    {
+      "path": "wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/calibration-distribution-manifest-v4.json",
+      "bytes": 2988,
+      "sha256": "2cdeca12089efc97a1cbca036421f106ede8f81bba6419507e362aaa52bb3cd8"
+    },
+    {
+      "path": "docs/checks/stage1c-v2-precalibration/2026-07-24-rc2r2/contract-report.json",
+      "bytes": 1518,
+      "sha256": "010db8ffad5b96ed794bc6572bf786082464f768f15930b59abda698b76fa03a"
+    },
+    {
+      "path": "docs/checks/stage1c-v2-precalibration/2026-07-24-rc2r2/verification-summary.json",
+      "bytes": 1908,
+      "sha256": "004d89f0483640fc75c513b1d18c3a3a6d3e6c2983d952a52b0bf875be743723"
+    }
+  ],
+  "requested_review_verdict": "ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE_OR_WITHHOLD_WITH_BOUNDED_DEFECTS",
+  "authority_withheld": [
+    "AGREEMENT_BEFORE_TWO_RAW_OUTPUTS_FROZEN",
+    "HUMAN_ADJUDICATION",
+    "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
+    "320_PAPER_FULL_MAPPING",
+    "RESEARCH_EXECUTION",
+    "SIGN_STAGE1C_V2_FAMILY_BRANCH_PORTFOLIO",
+    "STAGE2A",
+    "PUSH"
+  ]
+}

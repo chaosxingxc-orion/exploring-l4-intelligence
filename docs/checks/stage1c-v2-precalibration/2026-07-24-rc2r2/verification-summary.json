@@ -1,0 +1,52 @@
+{
+  "schema": "sf-stage1c-v2-rc2r2-verification-summary-v1",
+  "artifact_id": "SF-STAGE1C-V2-RC2R2-VERIFICATION-SUMMARY",
+  "as_of": "2026-07-24",
+  "status": "PASS",
+  "tdd": {
+    "initial_red": "ImportError: sf_stage1c_v2_precalibration_rc2r2 did not exist",
+    "final_new_tests": 17,
+    "final_new_test_status": "PASS",
+    "bounded_attack_branches": {
+      "alternate_self_consistent_56_universe": "PASS_REJECTED",
+      "same_id_lax_schema": "PASS_REJECTED",
+      "fake_or_cross_paper_rendition": "PASS_REJECTED",
+      "forged_or_incomplete_delivery_receipt": "PASS_REJECTED",
+      "leaf_name_metadata_alias": "PASS_REJECTED"
+    }
+  },
+  "coverage": {
+    "command": "python -m coverage run --branch -m unittest scripts.survey.test_sf_stage1c_v2_precalibration_rc2r2",
+    "agreement_v4_percent": 89,
+    "precalibration_rc2r2_percent": 88,
+    "combined_percent": 88,
+    "minimum_required_percent": 80,
+    "bounded_p0_p1_attack_case_coverage_percent": 100
+  },
+  "windows": {
+    "python": "C:/Python314/python.exe",
+    "regression_tests": 62,
+    "status": "PASS",
+    "deterministic_regeneration": "PASS",
+    "current_manifest": "PASS"
+  },
+  "wsl": {
+    "distribution": "Ubuntu-24.04",
+    "python_environment": "~/.venvs/speechrl",
+    "regression_tests": 62,
+    "status": "PASS",
+    "deterministic_regeneration": "PASS",
+    "current_manifest": "PASS",
+    "diagnostic_note": "A discarded bare-python invocation lacked pypdf; the repository-required speechrl venv was then used without installing or changing dependencies."
+  },
+  "frozen_contract_sha256": "e039074f5897c43fb6a26dc2bdb58bb41e52426c87c7631adec54dbe461e262f",
+  "authority": {
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "push_authorized": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "sf-stage1c-v2-frozen-package-contract-v1",
+  "artifact_id": "SF-STAGE1C-V2-FROZEN-PACKAGE-CONTRACT-RC2R2",
+  "status": "COMPILED_ROOT_OF_TRUST_INPUT",
+  "calibration_manifest_id": "SF-STAGE1C-V2-CALIBRATION-PACKET-56-RC2R2",
+  "calibration_manifest_sha256": "291b68ae4bfbe1e5b8d14c8280846f7d74a779a89acf422ffeae21bfd19e40e6",
+  "source_manifest_id": "SF-STAGE1C-V2-CALIBRATION-SOURCE-BYTES-56-RC2R2",
+  "source_manifest_sha256": "0361c8a9bddf200f4e37a35ece12505719abaf1a00e450e540175715f813e44e",
+  "distribution_manifest_id": "SF-STAGE1C-V2-CALIBRATION-DISTRIBUTION-RC2R2",
+  "distribution_manifest_sha256": "2cdeca12089efc97a1cbca036421f106ede8f81bba6419507e362aaa52bb3cd8",
+  "response_schema_id": "sf-stage1c-v2-calibration-response-schema-v4",
+  "response_schema_sha256": "d57be12b34b8529cd19438b2859a58c10345b5d836141be79062c81b9224256c",
+  "delivery_receipt_schema_id": "sf-stage1c-v2-delivery-receipt-schema-v1",
+  "delivery_receipt_schema_sha256": "196f4108fb7672547f69e8ca3d42da8ec5e3d7eff05d19d134daf81479618c8e",
+  "base_intake_static_sha256": "b5f918b12837647f76f366b1e57423ef2ff022ace6ed6990ae0864cff39a19b3",
+  "paper_rendition_map_sha256": "38f8116d6a9d84275f5e75f6f3b22093e0be300ccf9765894f84263ec0e52908",
+  "content_bundle_sha256": "b4bfb18030a08e010fb32c5ceea7853e1f6b1dbf83c1bcc1d9de078b6f69cb04",
+  "prompt_sha256": "88fca5a601bc49b946e2c29fcac35ba212dec38af5625c312a964535201aaa8e",
+  "N": 56,
+  "canonical_paper_ids_sha256": "1e4bad7836d8312d2444f3847b10e6c928537ac7b60fe35df5c1a6cde81f1b0d",
+  "compiled_into_agreement_engine": true
+}

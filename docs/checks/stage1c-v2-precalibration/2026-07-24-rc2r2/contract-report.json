@@ -1,0 +1,43 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v4",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-RC2R2",
+  "as_of": "2026-07-24",
+  "status": "AGENTIC_RC2R2_CODER_READY_NOT_DISTRIBUTED",
+  "predecessor": {
+    "release": "AGENTIC_RC2R1",
+    "commit": "8d0a7c62a99cc93ff394881f20ad793e308f3342",
+    "immutable_verified": true
+  },
+  "authority": {
+    "provenance_repair_authorized": true,
+    "post_accept_calibration_distribution_authorized": true,
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "full_mapping_signed": false,
+    "push_authorized": false
+  },
+  "bounded_defect_closure": {
+    "compiled_frozen_package_root": true,
+    "exact_static_n56_runtime_projection": true,
+    "exact_response_schema_hash": true,
+    "paper_scoped_frozen_renditions": true,
+    "hashed_actual_delivery_receipts": true,
+    "exact_path_leakage_exceptions": true
+  },
+  "surface": {
+    "calibration_N": 56,
+    "coder_visible_artifacts": 8,
+    "frozen_contract_sha256": "e039074f5897c43fb6a26dc2bdb58bb41e52426c87c7631adec54dbe461e262f",
+    "reproduction_anchors": 0
+  },
+  "remaining_before_distribution": [
+    "CREATE_LOCAL_COMMIT_WITHOUT_PUSH",
+    "OBTAIN_ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE",
+    "BIND_TWO_ISOLATED_CODER_TRANSACTIONS_AND_HASHED_DELIVERY_RECEIPTS"
+  ]
+}
