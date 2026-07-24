@@ -1,0 +1,52 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v2",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-RC2",
+  "as_of": "2026-07-24",
+  "status": "AGENTIC_RC2_CODER_READY_NOT_DISTRIBUTED",
+  "authority": {
+    "owner_direction": "按你的建议执行",
+    "owner_agentic_scope_ruling": "Duplex这种任务需要专用模型，这类任务我们不考虑了，我们更多的聚焦在agentic的技术演进路径上，不要在无关方向上耗散自己的精力了。",
+    "specialized_duplex_route": "EXCLUDED_FROM_RESEARCH_REPRODUCTION_AND_BRANCH_ROUTE",
+    "governance": "INDEPENDENT_ADVISORY_REVIEW + OWNER_ACCEPTED_AUTHORIZATION",
+    "historical_mapping_token_interpretation": "DESIGN_AND_CALIBRATION_PREPARATION_ONLY",
+    "calibration_execution_started": false,
+    "coder_distributed": false,
+    "review_submission_authorized": true,
+    "local_commit_created": false,
+    "independent_review_submitted": false,
+    "agreement_computed": false,
+    "full_mapping_signed": false,
+    "research_execution_authorized": false
+  },
+  "reviewer_p0_closure": {
+    "response_agreement_isomorphic": true,
+    "object_level_mapping_in_response": true,
+    "source_bytes_version_and_hash_bound": true,
+    "claim_template_scoped_instance_separated": true,
+    "reviewer_and_coder_artifacts_separated": true,
+    "coder_visible_recursive_leakage_scan_passed": true,
+    "coder_identity_and_receipt_binding_separate": true,
+    "two_coder_content_bundle_byte_identity_bound": true
+  },
+  "reviewer_p1_closure": {
+    "full_mapping_schema_categorical_and_closed": true,
+    "claim_scope_nine_dimensions_required": true,
+    "known_agentic_candidate_assets_terms_protocols_evidence_bound": true,
+    "reference_borrow_reproduce_distinction_operationalized": true
+  },
+  "surface": {
+    "calibration_N": 56,
+    "claim_templates": 13,
+    "scoped_claim_instances": 0,
+    "known_candidate_records": 15,
+    "reproduction_anchors": 0
+  },
+  "remaining_before_distribution": [
+    "CREATE_LOCAL_COMMIT_WITHOUT_PUSH",
+    "OBTAIN_INDEPENDENT_RC2_METHOD_REVIEW_ACCEPT",
+    "OBTAIN_AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_DISTRIBUTION",
+    "ASSIGN_TWO_PROVENANCE_DISTINCT_ISOLATED_CODERS",
+    "ASSIGN_HUMAN_DOMAIN_EXPERT_ADJUDICATOR",
+    "HASH_CODER_PROMPT"
+  ]
+}

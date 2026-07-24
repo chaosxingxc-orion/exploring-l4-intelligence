@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -45,6 +46,7 @@ TARGETED_SIGNATURE = "SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE"
 CAPABILITY_SIGNATURE_BLOB = "a5af670aacbb5194f42947150440cd022b16c652"
 TARGETED_SIGNATURE_BLOB = "e5a039a9297fac3ce84ed981449f085d6bb79378"
 FULL_MAPPING_SIGNATURE = "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING"
+FROZEN_RC1_COMMIT = "4eecb37440ecdf096b8a5e66fbeb7b698f54b633"
 
 ARTIFACT_PATHS = {
     "bootstrap": WORKBENCH / "release-merge-manifest-v1.json",
@@ -905,6 +907,31 @@ def build_review_manifest(report: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def validate_superseded_rc1_review_manifest() -> None:
+    """Verify RC1 without making its historical manifest follow the mutable RC2 router.
+
+    RC1 included the workbench README in its exact review package.  Once RC2 supersedes the
+    active README, RC1 must verify that one path at its original commit rather than rewriting
+    the registered RC1 manifest.  All other RC1 artifact paths remain present and byte-stable.
+    """
+    manifest = load_json(REVIEW_MANIFEST_PATH)
+    for artifact in manifest["artifacts"]:
+        relative = artifact["path"]
+        path = REPO / relative
+        raw = path.read_bytes() if path.is_file() else b""
+        matches = len(raw) == artifact["bytes"] and hashlib.sha256(raw).hexdigest() == artifact["sha256"]
+        if not matches:
+            completed = subprocess.run(
+                ["git", "show", f"{FROZEN_RC1_COMMIT}:{relative}"], cwd=REPO,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+            )
+            if completed.returncode == 0:
+                raw = completed.stdout
+                matches = len(raw) == artifact["bytes"] and hashlib.sha256(raw).hexdigest() == artifact["sha256"]
+        if not matches:
+            raise ContractError(f"frozen RC1 review artifact cannot be reproduced: {relative}")
+
+
 def run(*, write: bool) -> dict[str, Any]:
     expected = build_package()
     validate_package(expected)
@@ -928,7 +955,9 @@ def run(*, write: bool) -> dict[str, Any]:
         for path, release_manifest in release_manifests.items():
             if load_json(path) != release_manifest:
                 raise ContractError(f"signed Stage-1B release manifest is stale: {path}")
-        if load_json(REVIEW_MANIFEST_PATH) != build_review_manifest(report):
+        if (WORKBENCH / "review-package-manifest-rc2.json").is_file():
+            validate_superseded_rc1_review_manifest()
+        elif load_json(REVIEW_MANIFEST_PATH) != build_review_manifest(report):
             raise ContractError("review-package manifest is stale")
     return report
 
