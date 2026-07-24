@@ -1,7 +1,7 @@
 # Current Survey Router
 
-- Gate: **Stage-1C v2 Agentic RC2R2 bounded-defect owner decision**; endpoint
-  `AGENTIC_RC2R2_REVIEW_WITHHELD_CODER_DISTRIBUTION_CLOSED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**; endpoint
+  `AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 - Specialized Duplex-model tasks are outside the research, reproduction and branch route.
 - Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
@@ -21,8 +21,11 @@
 - AudioGenie-Reasoner is a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument and
   MMAU-mini/MMAR validation carriers; none is a reproduction anchor.
 - K/S/M non-speech works are transfer analogues; H5 remains withheld from modality conclusions.
+- The owner authorized the bounded immutable-successor RC2R3 repair: frozen 0.85 threshold,
+  receiver-side actual-byte receipts and typed structural paths with alias tests. RC2R3 is not yet
+  frozen or accepted.
 - Coder distribution, agreement, mapping, ranking, branch selection, novelty verdict, research
-  execution, Stage-2A and push remain closed. A successor repair requires owner authorization.
+  execution, Stage-2A and push remain closed. Distribution requires the exact RC2R3 ACCEPT.
 - Audit: `wiki/audit/system-first-stage1b/INDEX.md` and
   `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`.
   Historical proposals, reviews, responses and amendments are cold audit.

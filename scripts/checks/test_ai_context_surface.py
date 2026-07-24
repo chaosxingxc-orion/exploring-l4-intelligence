@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 24), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic RC2R2 bounded-defect owner decision",
+            "Stage-1C v2 Agentic RC2R3 runtime-integrity repair",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,10 +1688,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_RC2R2_REVIEW_WITHHELD_CODER_DISTRIBUTION_CLOSED",
-            "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR",
-            "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR",
-            "ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE",
+            "AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED",
+            "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR",
+            "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "SIGN_STAGE1C_V2_EXPERIMENT_MAPPING",
             "WITHHOLD_WITH_BOUNDED_DEFECTS",
             "H5 remains withheld",

@@ -10,8 +10,8 @@ last_refresh: "2026-07-24 — Agentic RC2R2 review withheld on bounded runtime-i
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic RC2R2 bounded-defect owner decision**. Endpoint:
-`AGENTIC_RC2R2_REVIEW_WITHHELD_CODER_DISTRIBUTION_CLOSED`.
+The gate is **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**. Endpoint:
+`AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its 320-work calibration
 union, and committed RC2/RC2R1/RC2R2 transactions are immutable. RC2R2 was frozen locally at
@@ -19,9 +19,10 @@ union, and committed RC2/RC2R1/RC2R2 transactions are immutable. RC2R2 was froze
 `WITHHOLD_WITH_BOUNDED_DEFECTS`, so the required ACCEPT is absent. Specialized Duplex-model tasks
 remain outside research, reproduction and branch selection.
 
-Prior tokens `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2_BOUNDED_REPAIR` and
-`AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R1_PROVENANCE_REPAIR` authorized only their bounded transactions;
-neither supplies `ACCEPT_AGENTIC_RC2R2_METHOD_CONTRACT_FOR_CODER_INTAKE`.
+The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`. It authorizes only
+the immutable-successor threshold, receiver-byte receipt and typed-path repair, its local no-push
+commit, and fresh commit-bound review. It does not supply
+`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`.
 
 No coder was distributed and no agreement/adjudication, research models/APIs, benchmark metric,
 paper reproduction, prototype, anchor promotion, novelty verdict, full mapping, Stage-2A or push is
@@ -59,10 +60,11 @@ Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-precalibration/INDEX.md`; RC2R2 contract:
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r2/README.md`.
 
-Owner decision is required before any immutable-successor repair. Recommended bounded scope: freeze
-the 0.85 threshold, derive receiver receipts from actual bytes, and use typed/escaped paths with alias
-attacks. Distribution and agreement remain closed. Mapping still requires a later signed calibration
-release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`; Stage-2A remains separately gated.
+Implement RC2R3 red-first: freeze the 0.85 threshold, derive receiver receipts from actual bytes,
+and use typed structural paths with alias attacks. Freeze one local no-push commit and obtain a fresh
+independent review. Distribution remains closed unless that review returns the exact RC2R3 ACCEPT.
+Mapping still requires a later signed calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`;
+Stage-2A remains separately gated.
 
 ## Supersession rule
 

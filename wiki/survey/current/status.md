@@ -1,7 +1,7 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic RC2R2 bounded-defect owner decision**.
-  Endpoint: `AGENTIC_RC2R2_REVIEW_WITHHELD_CODER_DISTRIBUTION_CLOSED`.
+- Gate: **Stage-1C v2 Agentic RC2R3 runtime-integrity repair**.
+  Endpoint: `AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR_AUTHORIZED_NOT_DISTRIBUTED`.
 - Compatibility provenance: `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
@@ -27,7 +27,7 @@
 - Scope provenance is `REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED`; there was
   no broad discovery, research model/API call, metric run, reproduction or prototype.
   The problem ranking and selection remain withheld. RC2R2 is committed; no transaction is described as never committed.
-- Authority: the prior provenance-repair token is exhausted by committed RC2R2 and its rereview.
-  A new immutable-successor runtime-integrity repair requires owner authorization.
-- Next action: if authorized, fix only the frozen threshold, receiver-side byte receipts and typed/escaped
-  paths plus alias tests. Otherwise remain stopped at this gate.
+- Authority: `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR` authorizes a new
+  immutable successor, its local no-push commit and fresh review. It does not itself open distribution.
+- Next action: fix only the frozen threshold, receiver-side actual-byte receipts and typed structural
+  paths plus alias tests; then obtain the exact RC2R3 independent ACCEPT or remain stopped.
