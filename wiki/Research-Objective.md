@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Agentic calibration R1 agreement failed; owner decision required"
+last_refresh: "2026-07-25 — Agentic calibration R2 consolidation authorized; method review pending"
 ---
 
 # Research Objective & Current State
@@ -10,8 +10,8 @@ last_refresh: "2026-07-25 — Agentic calibration R1 agreement failed; owner dec
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic calibration R1 owner consolidation decision**. Endpoint:
-`AGENTIC_CALIBRATION_R1_AGREEMENT_FAILED_OWNER_DECISION_REQUIRED`.
+The gate is **Stage-1C v2 Agentic calibration R2 bounded consolidation**. Endpoint:
+`AGENTIC_CALIBRATION_R2_CONSOLIDATION_AUTHORIZED_NOT_REVIEWED`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work
 calibration union, and committed RC2/RC2R1/RC2R2/RC2R3 transactions are not rewritten. Specialized
@@ -25,7 +25,8 @@ The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`
 the caller-overridable threshold, actual received bytes and structural-key aliases; the fresh review
 returned `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. The authorized N=56 Sol/Terra
 literature coding is now complete. Both raw outputs froze before agreement. The raw result is `FAIL`;
-owner adjudication/consolidation is the mandatory stop.
+the owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` for one
+bounded R2 successor. R1 is immutable; fresh exact review must ACCEPT before coder distribution.
 
 No research models/APIs, benchmark metric, paper reproduction, prototype, novelty verdict, full
 mapping, Stage-2A or push is authorized or recorded. Mapping still requires a signed calibration
@@ -67,13 +68,12 @@ compatibility.
 
 ## Next action
 
-Read the detailed owner package at
-`wiki/survey/workbench/system-first-stage1c-v2-agentic-calibration-r1/stage1c-v2-calibration-r1-owner-decision-package-zh.md`.
-The recommended bounded token is
-`AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION`: freeze compiler-owned object
-keys and extraction triggers; split paper-visible reproduction candidate from reviewer-only local
-anchor readiness; independently review the contract; then let two new isolated contexts recode the
-same N=56 once. Sentinel replacement is not implied and would require separate authority.
+Implement the authorized R2 contract with failing tests first: compiler-owned object identities,
+unmatched-object field denominators, extraction triggers and paper decision tables; split
+paper-visible reproduction candidacy from reviewer-only local anchor readiness; and prove mandatory
+positive support against the unchanged source packet. Freeze an exact package for independent
+review. Only an exact ACCEPT can open the single fresh Sol/Terra N=56 recode. Sentinel replacement is
+not implied and would require separate authority.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

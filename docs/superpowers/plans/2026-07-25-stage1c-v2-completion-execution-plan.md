@@ -2,7 +2,7 @@
 
 Date: 2026-07-25
 
-State: `PLANNED_AT_OWNER_CONSOLIDATION_GATE`
+State: `R2_CONSOLIDATION_AUTHORIZED_IN_PROGRESS`
 
 Scope: finish calibration, 320-work evidence mapping, experiment-family synthesis, K/S/M × control
 analysis, local protocols, branch portfolio and the detailed Chinese research proposal. This plan
@@ -49,7 +49,7 @@ Open gates, in order:
 
 | Gate | Exact authority/evidence | Current state |
 |---|---|---|
-| G1 | `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` | required |
+| G1 | `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` | authorized 2026-07-25 |
 | G2 | independent ACCEPT of the consolidated R2 method package | not started |
 | G3 | owner adjudication of R2 carrying disagreements | not started |
 | G4 | independently reviewed calibration release | not started |

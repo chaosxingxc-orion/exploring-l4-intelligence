@@ -439,6 +439,10 @@
     {
       "path": "wiki/audit/system-first-stage1c-v2-calibration/round-03-positive-support-preflight/2026-07-25-stage1c-v2-agentic-calibration-r1-positive-support-preflight.md",
       "git_blob": "fc97a23082eef89bb916085565088a61af7f9187"
+    },
+    {
+      "path": "wiki/audit/system-first-stage1c-v2-calibration/round-04-owner-codebook-consolidation-authorization/2026-07-25-stage1c-v2-agentic-calibration-r1-codebook-consolidation-authorization.md",
+      "git_blob": "6a89be81bcce569961e8aff6ed27ea83ded27713"
     }
   ]
 }
