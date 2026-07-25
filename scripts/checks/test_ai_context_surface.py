@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 25), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic calibration R2 bounded consolidation",
+            "Stage-1C v2 Agentic calibration R2 independent method review",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,7 +1688,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_CALIBRATION_R2_CONSOLIDATION_AUTHORIZED_NOT_REVIEWED",
+            "AGENTIC_CALIBRATION_R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR",
             "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION",
@@ -1699,6 +1699,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "research models/APIs",
             "wiki/survey/current/README.md",
             "system-first-stage1c-v2-precalibration-rc2r3/README.md",
+            "system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json",
             "9652d98eade798903be6c5d007591d2602a2f5c3",
             "caller-overridable",
             "actual received bytes",

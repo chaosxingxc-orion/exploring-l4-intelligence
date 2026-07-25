@@ -2,7 +2,7 @@
 
 Date: 2026-07-25
 
-State: `R2_CONSOLIDATION_AUTHORIZED_IN_PROGRESS`
+State: `R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`
 
 Scope: finish calibration, 320-work evidence mapping, experiment-family synthesis, K/S/M × control
 analysis, local protocols, branch portfolio and the detailed Chinese research proposal. This plan

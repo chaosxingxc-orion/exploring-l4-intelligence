@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Agentic calibration R2 consolidation authorized; method review pending"
+last_refresh: "2026-07-25 — Agentic calibration R2 method frozen; independent review pending"
 ---
 
 # Research Objective & Current State
@@ -10,8 +10,8 @@ last_refresh: "2026-07-25 — Agentic calibration R2 consolidation authorized; m
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic calibration R2 bounded consolidation**. Endpoint:
-`AGENTIC_CALIBRATION_R2_CONSOLIDATION_AUTHORIZED_NOT_REVIEWED`.
+The gate is **Stage-1C v2 Agentic calibration R2 independent method review**. Endpoint:
+`AGENTIC_CALIBRATION_R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work
 calibration union, and committed RC2/RC2R1/RC2R2/RC2R3 transactions are not rewritten. Specialized
@@ -22,11 +22,13 @@ RC2R2 was frozen at `9652d98eade798903be6c5d007591d2602a2f5c3`; its independent 
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md`.
 
 The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`. RC2R3 repaired
-the caller-overridable threshold, actual received bytes and structural-key aliases; the fresh review
-returned `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. The authorized N=56 Sol/Terra
-literature coding is now complete. Both raw outputs froze before agreement. The raw result is `FAIL`;
+the caller-overridable threshold, actual received bytes and structural-key aliases; review returned
+`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. N=56 Sol/Terra coding completed and both
+raw outputs froze before agreement. The result is `FAIL`;
 the owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` for one
-bounded R2 successor. R1 is immutable; fresh exact review must ACCEPT before coder distribution.
+bounded R2 successor. R2 now has compiler-owned identities, union field denominators, paper/local
+reproduction separation, decision tables and a passing mandatory-positive preflight. R1 is immutable;
+fresh exact review must ACCEPT before coder distribution.
 
 No research models/APIs, benchmark metric, paper reproduction, prototype, novelty verdict, full
 mapping, Stage-2A or push is authorized or recorded. Mapping still requires a signed calibration
@@ -68,12 +70,11 @@ compatibility.
 
 ## Next action
 
-Implement the authorized R2 contract with failing tests first: compiler-owned object identities,
-unmatched-object field denominators, extraction triggers and paper decision tables; split
-paper-visible reproduction candidacy from reviewer-only local anchor readiness; and prove mandatory
-positive support against the unchanged source packet. Freeze an exact package for independent
-review. Only an exact ACCEPT can open the single fresh Sol/Terra N=56 recode. Sentinel replacement is
-not implied and would require separate authority.
+Submit the commit-bound R2 exact manifest at
+`wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json`
+to a fresh no-fork independent reviewer. Only
+`ACCEPT_AGENTIC_CALIBRATION_R2_METHOD_CONTRACT_FOR_CODER_INTAKE` can open the single fresh Sol/Terra
+N=56 recode. Sentinel replacement is not implied and would require separate authority.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

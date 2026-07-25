@@ -1,0 +1,71 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-verification-summary-v6",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-VERIFICATION-R2",
+  "as_of": "2026-07-25",
+  "status": "PASS_READY_FOR_INDEPENDENT_METHOD_REVIEW",
+  "commands": [
+    {
+      "platform": "WINDOWS_PYTHON_3_14",
+      "command": "python -m coverage run --branch -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_r2.py -q",
+      "result": "PASS",
+      "tests": 30,
+      "subtests": 42
+    },
+    {
+      "platform": "WINDOWS_PYTHON_3_14",
+      "command": "python -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_rc2r3.py scripts/survey/test_sf_stage1c_v2_calibration_r1.py scripts/survey/test_sf_stage1c_v2_positive_support_preflight.py -q",
+      "result": "PASS",
+      "tests": 48,
+      "subtests": 104
+    },
+    {
+      "platform": "WSL2_UBUNTU_24_04_SPEECHRL_PYTHON_3_12",
+      "command": "python -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_r2.py -q",
+      "result": "PASS",
+      "tests": 30,
+      "subtests": 42
+    },
+    {
+      "platform": "WINDOWS_POWERSHELL",
+      "command": "two consecutive sf_stage1c_v2_precalibration_r2.py --write runs plus exact SHA256 comparison",
+      "result": "PASS",
+      "files_compared": 22
+    },
+    {
+      "platform": "WINDOWS_GIT",
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "coverage": {
+    "modules_total": {
+      "line_percent": 84,
+      "branch_percent": 84,
+      "minimum_required_percent": 80,
+      "status": "PASS"
+    },
+    "p0_p1_guard_module": {
+      "path": "scripts/survey/sf_stage1c_v2_r2_guards.py",
+      "line_percent": 100,
+      "branch_percent": 100,
+      "status": "PASS"
+    }
+  },
+  "contract_facts": {
+    "N": 56,
+    "overlay_count": 38,
+    "sentinel_count": 18,
+    "coder_visible_artifact_count": 8,
+    "agreement_minimum": 0.85,
+    "mandatory_positive_classes": 2,
+    "reproduction_anchors": 0,
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "push_performed": false
+  }
+}

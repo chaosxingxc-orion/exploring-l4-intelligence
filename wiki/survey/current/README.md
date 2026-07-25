@@ -1,11 +1,11 @@
 # Current Survey Router
 
-- Gate: **Stage-1C v2 Agentic calibration R2 bounded consolidation**; endpoint `AGENTIC_CALIBRATION_R2_CONSOLIDATION_AUTHORIZED_NOT_REVIEWED`.
+- Gate: **Stage-1C v2 Agentic calibration R2 independent method review**; endpoint `AGENTIC_CALIBRATION_R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
 - Specialized Duplex-model tasks remain outside the research, reproduction and branch route.
 - Frozen Stage-1B v5 is `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is immutable.
-- Active method contract: [Agentic RC2R3](../workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md).
-  It freezes 0.85, receiver-side actual-byte receipts and typed structural paths; a fresh no-fork
-  review returned `ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`.
+- Active method contract: [Agentic calibration R2](../workbench/system-first-stage1c-v2-precalibration-r2/README.md).
+  It preserves RC2R3 runtime integrity while adding compiler-owned identities, union field
+  denominators, paper/local reproduction separation and mandatory-positive preflight.
 - Active calibration [R1](../workbench/system-first-stage1c-v2-agentic-calibration-r1/README.md): Sol/Terra completed exact N=56; both raw outputs froze before agreement.
 - Raw agreement is `FAIL`: 5/13 paper-level paths pass, 8 fail; all nine object types have zero
   shared exact match keys, leaving object fields `NOT_CALIBRATED`. No adjudication has been applied.
@@ -25,7 +25,7 @@
   [`stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
   [`stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → [`protocol.md`](protocol.md) →
   [`manifest.json`](manifest.json).
-- Current action: freeze compiler-owned identity, decision tables, reproduction observability and positive-support checks in R2; no R2 coder is distributed.
+- Current action: submit the R2 [exact review manifest](../workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json) to a fresh independent reviewer; no R2 coder is distributed.
 - Full mapping remains closed until a valid calibration release and
   `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models, metrics, reproduction, prototype, novelty
   verdict, Stage-2A and push remain closed.

@@ -19,8 +19,8 @@
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** retain R1 raw bytes/agreement unchanged and implement the owner-authorized
-  bounded R2 method consolidation. A fresh exact method review must ACCEPT before two new isolated
+- **Next authorized work:** retain R1 raw bytes/agreement unchanged and submit the frozen bounded R2
+  exact manifest to a fresh independent method review. The review must ACCEPT before two new isolated
   contexts perform the single full N=56 recode. Full mapping still requires a valid calibration
   release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models/APIs, metrics, reproduction,
   prototypes, ranking, selection and novelty verdicts remain prohibited.

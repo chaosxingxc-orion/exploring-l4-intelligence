@@ -1,0 +1,48 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-contract-report-v6",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-CONTRACT-REPORT-R2",
+  "as_of": "2026-07-25",
+  "status": "AGENTIC_CALIBRATION_R2_METHOD_READY_NOT_DISTRIBUTED",
+  "predecessor": {
+    "release": "AGENTIC_RC2R3_PLUS_FAILED_CALIBRATION_R1",
+    "r1_raw_outputs_immutable": true,
+    "sample_unchanged": true
+  },
+  "authority": {
+    "codebook_consolidation_authorized": true,
+    "independent_method_accept_obtained": false,
+    "coder_distributed": false,
+    "agreement_computed": false,
+    "owner_adjudication_applied": false,
+    "full_mapping_signed": false,
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "push_authorized": false
+  },
+  "bounded_defect_closure": {
+    "compiler_owned_object_identity": true,
+    "unmatched_union_field_denominators": true,
+    "paper_support_local_readiness_split": true,
+    "typed_extraction_triggers": true,
+    "mandatory_positive_support_preflight": true,
+    "paper_decision_tables": true
+  },
+  "surface": {
+    "calibration_N": 56,
+    "overlay_count": 38,
+    "sentinel_count": 18,
+    "coder_visible_artifacts": 8,
+    "agreement_minimum": 0.85,
+    "mandatory_positive_classes": 2,
+    "reproduction_anchors": 0,
+    "frozen_contract_sha256": "eaf2e3ca095a2d4fbe303e68c6fa273b73b26cd7a68476eaae9848ef16e1fa47"
+  },
+  "remaining_before_distribution": [
+    "FREEZE_EXACT_REVIEW_PACKAGE_IN_LOCAL_COMMIT",
+    "OBTAIN_ACCEPT_AGENTIC_CALIBRATION_R2_METHOD_CONTRACT_FOR_CODER_INTAKE",
+    "MATERIALIZE_TWO_NEW_ISOLATED_RECEIVER_SIDE_RECEIPTS"
+  ]
+}

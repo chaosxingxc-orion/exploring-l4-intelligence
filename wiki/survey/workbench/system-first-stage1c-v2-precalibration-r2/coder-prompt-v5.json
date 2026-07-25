@@ -1,0 +1,16 @@
+{
+  "schema": "sf-stage1c-v2-neutral-coder-prompt-v5",
+  "artifact_id": "SF-STAGE1C-V2-NEUTRAL-CODER-PROMPT-R2",
+  "status": "PREPARED_NOT_DISTRIBUTED",
+  "prompt_seed": "R2_CODEBOOK_CONSOLIDATION_NEUTRAL_V1",
+  "instructions": [
+    "Code every assigned source independently using only the supplied bytes and neutral contract.",
+    "Extract all material runs, observations and dataset objects; do not target one object per paper.",
+    "Use supplied rendition IDs and precise typed coordinates; never invent object agreement keys.",
+    "Record paper-visible reproduction support even when it remains open with source-stated blockers.",
+    "Submit all 56 responses before agreement, another coder output or adjudication is revealed."
+  ],
+  "network_discovery_allowed": false,
+  "repository_access_allowed": false,
+  "other_coder_output_allowed": false
+}
