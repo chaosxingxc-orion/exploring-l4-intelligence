@@ -37,6 +37,17 @@ RUBRIC = {
     "scope_compatibility",
     "evidence_maturity",
 }
+RUBRIC_HEADINGS = {
+    "Problem distinctness",
+    "Decision causality",
+    "Measurement validity",
+    "Modality necessity",
+    "Failure severity",
+    "Feasibility",
+    "Reproduction anchor",
+    "Scope compatibility",
+    "Evidence maturity",
+}
 BUNDLES = {
     "BUDGET_STOP_REPAIR",
     "EVALUATOR_REWARD_RELIABILITY",
@@ -49,18 +60,22 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.document = json.loads(DATA.read_text(encoding="utf-8"))
 
-    def test_authority_is_comparison_only_and_unranked(self) -> None:
+    def test_authority_closes_stage1c_without_opening_stage2a(self) -> None:
         authority = self.document["authority"]
-        self.assertEqual("STAGE_1C_COMMON_RUBRIC_COMPARISON", self.document["stage"])
-        self.assertEqual("COMMON_RUBRIC_PROBLEM_COMPARISON_ONLY", authority["granted"])
+        self.assertEqual("STAGE_1C_PROBLEM_SELECTION_COMPLETE", self.document["stage"])
+        self.assertEqual(
+            "LITERATURE_RESEARCH_PROBLEM_RANKING_SELECTION_AND_STAGE2A_HANDOFF_FREEZE",
+            authority["granted"],
+        )
         self.assertEqual(
             {
                 "model_or_api_execution",
                 "dataset_or_benchmark_metrics",
                 "paper_reproduction",
                 "prototype_implementation",
-                "problem_ranking_or_selection",
-                "novelty_verdict",
+                "technical_approach_novelty_verdict",
+                "stage2a_execution",
+                "push_or_wiki_publication",
             },
             set(authority["withheld"]),
         )
@@ -100,24 +115,48 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
             self.assertIn(row["current_disposition"], {"INCLUDE", "BOUNDARY", "EXCLUDE_WITH_REASON", "QUEUED"})
             self.assertTrue(row["official_url"].startswith("https://"))
 
-    def test_three_bundles_share_complete_rubric_without_ranking(self) -> None:
+    def test_three_bundles_share_complete_rubric_and_exact_ranking(self) -> None:
         rows = self.document["bundles"]
         self.assertEqual(BUNDLES, {row["bundle_id"] for row in rows})
+        expected_status = {
+            "BUDGET_STOP_REPAIR": "RANK_2_FALLBACK",
+            "EVALUATOR_REWARD_RELIABILITY": "RANK_1_SELECTED_PRIMARY",
+            "INTERACTIVE_FULL_DUPLEX_OBJECTIVES": "RANK_3_VALIDATION_ONLY",
+        }
         for row in rows:
-            self.assertEqual("UNRANKED_NOT_SELECTED", row["selection_status"])
+            self.assertEqual(expected_status[row["bundle_id"]], row["selection_status"])
             self.assertEqual(RUBRIC, set(row["rubric"]))
             for assessment in row["rubric"].values():
                 self.assertEqual({"assessment", "uncertainty"}, set(assessment))
                 self.assertTrue(assessment["assessment"])
                 self.assertTrue(assessment["uncertainty"])
 
+        ranking = self.document["ranking"]
+        self.assertEqual([1, 2, 3], [row["rank"] for row in ranking])
+        self.assertEqual(
+            "EVALUATOR_REWARD_RELIABILITY", ranking[0]["bundle_id"]
+        )
+
+    def test_selected_problem_is_falsifiable_and_reproduction_first(self) -> None:
+        selected = self.document["selected_problem"]
+        self.assertEqual("C1_DECISION_CALIBRATED_REWARD", selected["card_id"])
+        self.assertEqual(4, len(selected["research_questions"]))
+        self.assertGreaterEqual(len(selected["kill_criteria"]), 4)
+        self.assertGreaterEqual(len(selected["reproduction_first_handoff"]), 7)
+        self.assertIn("stage2a_entry_gate", selected)
+        self.assertEqual(
+            "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
+            self.document["legacy_closeout"]["r2r1_status"],
+        )
+
     def test_human_table_and_hot_status_expose_the_same_boundary(self) -> None:
         table = TABLE.read_text(encoding="utf-8")
         status = STATUS.read_text(encoding="utf-8")
-        for token in (*BUNDLES, *RUBRIC):
+        for token in (*BUNDLES, *RUBRIC_HEADINGS):
             self.assertIn(token, table)
-        self.assertIn("Stage-1C common-rubric comparison started", status)
-        self.assertIn("problem ranking and selection remain withheld", status)
+        self.assertIn("C1_DECISION_CALIBRATED_REWARD", table)
+        self.assertIn("Stage‑1C complete", status)
+        self.assertIn("Stage‑2A execution", status)
 
     def test_current_manifest_routes_the_new_machine_and_human_surfaces(self) -> None:
         source = MANIFEST_SCRIPT.read_text(encoding="utf-8")

@@ -1076,8 +1076,8 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1C common-rubric comparison started",
-            "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON",
+            "Stage‑1C complete",
+            "C1_DECISION_CALIBRATED_REWARD",
             "status.md",
             "stage1c-common-rubric-comparison.md",
             "stage1c-eligible-inputs.md",
@@ -1085,7 +1085,7 @@ class RouterContentContractTests(unittest.TestCase):
             "manifest.json",
             "targeted",
             "wiki/audit/system-first-stage1b/INDEX.md",
-            "H5 remains withheld",
+            "H5 remains withheld and non-load-bearing",
             "Historical proposals, reviews, responses and amendments are cold audit",
         ):
             self.assertIn(required, text)
@@ -1099,13 +1099,12 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage-1C common-rubric comparison started",
-            "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON",
-            "no broad discovery, research model/API call, metric run, reproduction",
-            "REGISTER_REVIEWER_DIRECTED_CANONICAL_ID_NO_DUPLICATE_SEED",
-            "problem ranking and selection remain withheld",
-            "H5 remains withheld",
-            "RC2R2 is committed",
+            "Stage‑1C complete",
+            "C1_DECISION_CALIBRATED_REWARD",
+            "no model/API execution, metric run, reproduction or prototype",
+            "R2R1 `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`",
+            "H5 remains withheld and non-load-bearing",
+            "Stage‑2A execution",
             "Next action",
         ):
             self.assertIn(required, text)
