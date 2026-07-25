@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Agentic calibration R2 withheld; bounded-repair authority required"
+last_refresh: "2026-07-25 — Agentic calibration R2R1 bounded method repair authorized"
 ---
 
 # Research Objective & Current State
@@ -10,12 +10,12 @@ last_refresh: "2026-07-25 — Agentic calibration R2 withheld; bounded-repair au
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic calibration R2 bounded-repair authorization**. Endpoint:
-`AGENTIC_CALIBRATION_R2_WITHHELD_BOUNDED_REPAIR_AUTHORITY_REQUIRED`.
+The gate is **Stage-1C v2 Agentic calibration R2R1 bounded method repair**. Endpoint:
+`AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR_AUTHORIZED_NOT_FROZEN`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work union and committed
-RC2/RC2R1/RC2R2/RC2R3 transactions are not rewritten. Specialized Duplex-model tasks stay outside
-research, reproduction and branch selection.
+RC2/RC2R1/RC2R2/RC2R3 are not rewritten. Duplex-model tasks stay outside research, reproduction and
+branch selection.
 
 RC2R2 was frozen at `9652d98eade798903be6c5d007591d2602a2f5c3`; its independent review returned
 `WITHHOLD_WITH_BOUNDED_DEFECTS`. Its successor contract remains at
@@ -28,7 +28,8 @@ the owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLI
 bounded R2 successor. R2 added compiler-owned identities, union field denominators, paper/local
 reproduction separation, decision tables and a passing mandatory-positive preflight. The fresh review
 at `round-05-r2-independent-method-review` returned `WITHHOLD_WITH_BOUNDED_DEFECTS`; R1 and R2 are
-immutable, and no R2 coder was distributed.
+immutable. `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR` was recorded in
+`round-06-owner-r2r1-bounded-method-repair-authorization`; no R2R1 coder was distributed.
 
 No research models/APIs, metric, reproduction, prototype, novelty verdict, mapping, Stage-2A or push
 is authorized. Mapping requires a valid calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
@@ -67,12 +68,10 @@ compatibility.
 
 ## Next action
 
-Owner authorization `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR` is required
-before creating an immutable R2R1 successor limited to the three reviewed defects. The frozen R2
-manifest remains at
+Implement an R2R1 successor limited to the three reviewed defects, freeze its
+manifest, and obtain a fresh independent method review. The frozen R2 predecessor remains at
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json`.
-After repair, a new exact independent ACCEPT is still required before the single fresh Sol/Terra N=56
-recode. Sample or sentinel replacement is not implied.
+Only an exact R2R1 ACCEPT can open the fresh Sol/Terra N=56 recode; no sample replacement is implied.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

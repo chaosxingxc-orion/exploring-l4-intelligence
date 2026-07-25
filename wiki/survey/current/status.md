@@ -1,6 +1,6 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic calibration R2 bounded-repair authorization**; endpoint `AGENTIC_CALIBRATION_R2_WITHHELD_BOUNDED_REPAIR_AUTHORITY_REQUIRED`.
+- Gate: **Stage-1C v2 Agentic calibration R2R1 bounded method repair**; endpoint `AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR_AUTHORIZED_NOT_FROZEN`.
 - Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
@@ -36,5 +36,5 @@
 - Execution: literature coding and raw agreement occurred. Owner adjudication, calibration release,
   full mapping, research model/API, benchmark metric, reproduction, prototype, family/branch
   selection, novelty verdict, Stage-2A and push remain absent.
-- Next action: request `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR`; mapping
+- Next action: implement and independently review the authorized three-defect R2R1 successor; mapping
   still requires `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING` after a valid calibration release.

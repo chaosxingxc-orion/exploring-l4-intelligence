@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 25), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic calibration R2 bounded-repair authorization",
+            "Stage-1C v2 Agentic calibration R2R1 bounded method repair",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,7 +1688,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_CALIBRATION_R2_WITHHELD_BOUNDED_REPAIR_AUTHORITY_REQUIRED",
+            "AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR_AUTHORIZED_NOT_FROZEN",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR",
             "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION",
@@ -1702,6 +1702,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "system-first-stage1c-v2-precalibration-rc2r3/README.md",
             "system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json",
             "round-05-r2-independent-method-review",
+            "round-06-owner-r2r1-bounded-method-repair-authorization",
             "9652d98eade798903be6c5d007591d2602a2f5c3",
             "caller-overridable",
             "actual received bytes",
