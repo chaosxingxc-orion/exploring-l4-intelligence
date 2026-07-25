@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Agentic calibration R2 method frozen; independent review pending"
+last_refresh: "2026-07-25 — Agentic calibration R2 withheld; bounded-repair authority required"
 ---
 
 # Research Objective & Current State
@@ -10,29 +10,28 @@ last_refresh: "2026-07-25 — Agentic calibration R2 method frozen; independent 
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic calibration R2 independent method review**. Endpoint:
-`AGENTIC_CALIBRATION_R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
+The gate is **Stage-1C v2 Agentic calibration R2 bounded-repair authorization**. Endpoint:
+`AGENTIC_CALIBRATION_R2_WITHHELD_BOUNDED_REPAIR_AUTHORITY_REQUIRED`.
 
-Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work
-calibration union, and committed RC2/RC2R1/RC2R2/RC2R3 transactions are not rewritten. Specialized
-Duplex-model tasks remain outside research, reproduction and branch selection.
+Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work union and committed
+RC2/RC2R1/RC2R2/RC2R3 transactions are not rewritten. Specialized Duplex-model tasks stay outside
+research, reproduction and branch selection.
 
 RC2R2 was frozen at `9652d98eade798903be6c5d007591d2602a2f5c3`; its independent review returned
 `WITHHOLD_WITH_BOUNDED_DEFECTS`. Its successor contract remains at
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-rc2r3/README.md`.
 
-The owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`. RC2R3 repaired
-the caller-overridable threshold, actual received bytes and structural-key aliases; review returned
-`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. N=56 Sol/Terra coding completed and both
-raw outputs froze before agreement. The result is `FAIL`;
+Under `AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR`, RC2R3 repaired the
+caller-overridable threshold, actual received bytes and structural-key aliases, then received
+`ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE`. N=56 coding froze before a `FAIL` agreement;
 the owner supplied `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` for one
-bounded R2 successor. R2 now has compiler-owned identities, union field denominators, paper/local
-reproduction separation, decision tables and a passing mandatory-positive preflight. R1 is immutable;
-fresh exact review must ACCEPT before coder distribution.
+bounded R2 successor. R2 added compiler-owned identities, union field denominators, paper/local
+reproduction separation, decision tables and a passing mandatory-positive preflight. The fresh review
+at `round-05-r2-independent-method-review` returned `WITHHOLD_WITH_BOUNDED_DEFECTS`; R1 and R2 are
+immutable, and no R2 coder was distributed.
 
-No research models/APIs, benchmark metric, paper reproduction, prototype, novelty verdict, full
-mapping, Stage-2A or push is authorized or recorded. Mapping still requires a signed calibration
-release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
+No research models/APIs, metric, reproduction, prototype, novelty verdict, mapping, Stage-2A or push
+is authorized. Mapping requires a valid calibration release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`.
 
 ## Research north star
 
@@ -48,21 +47,19 @@ compatibility.
   overlays form the immutable 320-work calibration-only union; no reproduction anchor exists.
 - N=56 remains 38 overlays + 18 sentinels. Active Perception Agent (`2512.23646`) replaces FDB-v3;
   FDB-v2 remains one blind specialized-system exclusion boundary.
-- RC2R3 freezes 0.85, receiver-side byte receipts and typed structural paths with deterministic
-  Windows/WSL replay.
-- Sol/Terra used byte-identical eight-artifact bundles, distinct no-fork tasks and 135 verified source
-  renditions. They are isolated model coders, not provider-independent or human inter-rater evidence.
-- A froze 56 responses/354559 bytes at
-  `154c091a4727f2461a70dda4b1b3179bb004a14cee6ab1a04c3859dc495389b5`; B froze 56/716610 at
-  `ff922386cdf89617604209d30e63834151efb94941404b85a32a0da420f1e0c2`.
+- RC2R3 freezes 0.85, receiver-side receipts and typed paths with Windows/WSL replay.
+- Sol/Terra used byte-identical bundles, distinct no-fork tasks and 135 verified source renditions.
+  They are isolated model coders, not provider-independent or human inter-rater evidence.
 - Agreement has 99 critical paths and overall `FAIL`. Five of 13 paper-level paths pass; eight fail.
   Across nine object types the two coders share zero exact match keys, so object fields are
   `NOT_CALIBRATED`. Both also produced zero dataset edges and reproduction evidence.
 - Reviewer-only preflight found two source-backed TRACE dataset edges missed by both coders. It also
   proved blind `reproduction_evidence` structurally impossible because repository state is withheld
   while `local_asset_state`, closed status and zero blockers are required.
-- The complete package preserves 232 paper-field disagreements plus every unmatched object. No
-  adjudication has changed raw outputs or scores.
+- R2 exact-manifest review reproduced three load-bearing defects: duplicate coder-local IDs can
+  redirect typed references; placeholders can masquerade as closed paper support; and agreement does
+  not bind the exact raw response bytes frozen before computation.
+- The package preserves 232 paper-field disagreements and every unmatched object; no adjudication occurred.
 - AudioGenie-Reasoner remains a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument,
   and MMAU-mini/MMAR validation carriers; none is a reproduction anchor.
 - K/S/M non-speech works remain transfer analogues requiring source→target translation and a
@@ -70,11 +67,12 @@ compatibility.
 
 ## Next action
 
-Submit the commit-bound R2 exact manifest at
-`wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json`
-to a fresh no-fork independent reviewer. Only
-`ACCEPT_AGENTIC_CALIBRATION_R2_METHOD_CONTRACT_FOR_CODER_INTAKE` can open the single fresh Sol/Terra
-N=56 recode. Sentinel replacement is not implied and would require separate authority.
+Owner authorization `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR` is required
+before creating an immutable R2R1 successor limited to the three reviewed defects. The frozen R2
+manifest remains at
+`wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json`.
+After repair, a new exact independent ACCEPT is still required before the single fresh Sol/Terra N=56
+recode. Sample or sentinel replacement is not implied.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

@@ -1,7 +1,6 @@
 # Current Survey Status
 
-- Gate: **Stage-1C v2 Agentic calibration R2 independent method review**.
-  Endpoint: `AGENTIC_CALIBRATION_R2_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
+- Gate: **Stage-1C v2 Agentic calibration R2 bounded-repair authorization**; endpoint `AGENTIC_CALIBRATION_R2_WITHHELD_BOUNDED_REPAIR_AUTHORITY_REQUIRED`.
 - Compatibility provenance remains `Stage-1C common-rubric comparison started` under
   `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
 - Immutable input: Stage-1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; 226 frozen,
@@ -24,6 +23,9 @@
   typed extraction/decision tables and paper/local reproduction separation are frozen. TRACE supplies
   two dataset-edge positives and AudioToolAgent one open paper-support positive; expected labels stay
   reviewer-only. Windows/WSL tests and deterministic regeneration pass.
+- R2 review: `WITHHOLD_WITH_BOUNDED_DEFECTS`. Duplicate local IDs can redirect references; missing
+  source facts can falsely close reproduction support; frozen intake does not bind exact response
+  bytes. No R2 coder was distributed.
 - Candidates: AudioGenie-Reasoner direct candidate; AudioToolAgent nearest prior; Audio2Tool
   instrument; MMAU-mini/MMAR validation carriers. No reproduction anchor exists.
 - Transfer: non-speech K/S/M works require source→target translation and rejection conditions;
@@ -34,5 +36,5 @@
 - Execution: literature coding and raw agreement occurred. Owner adjudication, calibration release,
   full mapping, research model/API, benchmark metric, reproduction, prototype, family/branch
   selection, novelty verdict, Stage-2A and push remain absent.
-- Next action: fresh independent review of the commit-bound exact R2 manifest; mapping still requires
-  `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING` after a valid calibration release.
+- Next action: request `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR`; mapping
+  still requires `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING` after a valid calibration release.

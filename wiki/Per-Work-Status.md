@@ -14,14 +14,16 @@
   froze both raw outputs before agreement. The raw agreement is `FAIL`: 5/13 paper-level paths pass,
   while nine object types share zero exact match keys. A reviewer-only preflight additionally found
   two source-backed dataset-edge positives missed by both coders and proved the blind reproduction
-  record structurally depends on withheld local state. The fixed Stage-1B release remains
+  record structurally depends on withheld local state. R2 repaired the planned codebook defects, but
+  its independent review returned `WITHHOLD_WITH_BOUNDED_DEFECTS` for ambiguous duplicate IDs, false
+  reproduction closure and missing raw-response byte binding. The fixed Stage-1B release remains
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is not yet activated for mapping.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** retain R1 raw bytes/agreement unchanged and submit the frozen bounded R2
-  exact manifest to a fresh independent method review. The review must ACCEPT before two new isolated
-  contexts perform the single full N=56 recode. Full mapping still requires a valid calibration
+- **Next authorized work:** retain R1 and R2 unchanged and wait for exact owner authority to create a
+  bounded R2R1 successor covering only the three reproduced defects. A fresh exact review must ACCEPT
+  before two new isolated contexts perform the single full N=56 recode. Full mapping still requires a valid calibration
   release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models/APIs, metrics, reproduction,
   prototypes, ranking, selection and novelty verdicts remain prohibited.
 

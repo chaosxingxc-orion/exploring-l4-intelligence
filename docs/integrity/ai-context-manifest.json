@@ -13,7 +13,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "d01932ec1f1d9947bd60a2c11c7f1cb6efd942604c5ccf58cdd5604d53b53191"
+      "sha256": "dcebf4e80a1b9688fc2dbef8e5f554bfd03649068b8657756e5fa5f42c52fd3b"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current W1-W4 state",
-      "sha256": "b277eabd32bd348b6ed2e0e55b90c9ca3f157f316cc298fcaa019d4a06f3619d"
+      "sha256": "e30e592251fcf8dfbf46dbb0b59ac5a0e88a28b265183d387bca6f999bcfcd14"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -41,7 +41,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "current survey router",
-      "sha256": "69a5814f8d788435231b745d0f347f03d0a0d5e62fe7b8a1276d49a0c6c0e0fd"
+      "sha256": "db1f9151462942d9b66004d0ae55c6ccf684b7f9573f93cd9bee4199d58e094c"
     },
     {
       "path": "wiki/survey/current/protocol.md",
@@ -55,14 +55,14 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "3609540dc96f30daaa59f367eeb284171022134a512d0e8221fe68be9bc8f608"
+      "sha256": "f88e05f335d90072f4a7b7c0a4369d492fdeb14f6075badbb0498d950fde00bf"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "f9c38510b0ae17bc9869822d20573982b7d313456fcbfbbd236e7889c6c4369a"
+      "sha256": "e806ace71bdbac296a42a51060266cc6083cfd06ac1e5734abce6d304b508303"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
