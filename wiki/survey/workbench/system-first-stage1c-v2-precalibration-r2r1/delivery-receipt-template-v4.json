@@ -1,0 +1,25 @@
+{
+  "schema": "sf-stage1c-v2-delivery-receipt-template-v4",
+  "artifact_id": "SF-STAGE1C-V2-DELIVERY-RECEIPT-TEMPLATE-R2R1",
+  "status": "TEMPLATE_ONLY_NOT_A_RECEIPT",
+  "delivery_receipt_schema_id": "sf-stage1c-v2-delivery-receipt-schema-v4",
+  "receipt_source": "RECEIVER_SIDE_ACTUAL_BYTES_ONLY",
+  "runtime_required_fields": [
+    "receipt_id",
+    "coder_slot",
+    "coder_id",
+    "coder_transaction_id",
+    "process_id",
+    "task_id",
+    "model",
+    "distribution_manifest_id",
+    "received_content_bundle_sha256",
+    "received_prompt_sha256",
+    "received_artifacts",
+    "delivered_at",
+    "submitted_at",
+    "status",
+    "receipt_sha256"
+  ],
+  "receipt_digest_rule": "SHA256_OF_CANONICAL_PRETTY_JSON_WITHOUT_RECEIPT_SHA256"
+}

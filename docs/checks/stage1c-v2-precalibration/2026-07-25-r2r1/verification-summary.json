@@ -1,0 +1,64 @@
+{
+  "schema": "sf-stage1c-v2-precalibration-verification-summary-v7",
+  "artifact_id": "SF-STAGE1C-V2-PRECALIBRATION-VERIFICATION-R2R1",
+  "as_of": "2026-07-25",
+  "status": "PASS",
+  "method_status": "AGENTIC_CALIBRATION_R2R1_METHOD_READY_NOT_DISTRIBUTED",
+  "compiled_frozen_contract_sha256": "a3ec30918d12cd4825a2bbd022316b0149045f35dc6b791f0bcc75da0f17cedd",
+  "windows": {
+    "interpreter": "Python 3.14.3",
+    "new_contract_tests": {
+      "command": "python -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_r2r1.py --cov=sf_stage1c_v2_precalibration_r2r1 --cov=sf_stage1c_v2_calibration_agreement_v7 --cov-branch --cov-report=term -q",
+      "tests_passed": 22,
+      "subtests_passed": 17,
+      "status": "PASS"
+    },
+    "historical_regression": {
+      "command": "python -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_r2.py scripts/survey/test_sf_stage1c_v2_precalibration_rc2r3.py -q",
+      "tests_passed": 48,
+      "subtests_passed": 94,
+      "status": "PASS"
+    }
+  },
+  "wsl2": {
+    "distribution": "Ubuntu-24.04",
+    "interpreter": "Python 3.12 speechrl venv",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest scripts/survey/test_sf_stage1c_v2_precalibration_r2r1.py -q -p no:cacheprovider",
+    "tests_passed": 22,
+    "subtests_passed": 17,
+    "status": "PASS"
+  },
+  "coverage": {
+    "measurement": "combined line and branch coverage",
+    "agreement_v7_percent": 83,
+    "precalibration_r2r1_percent": 82,
+    "combined_percent": 82,
+    "minimum_required_percent": 80,
+    "status": "PASS"
+  },
+  "deterministic_regeneration": {
+    "replays": 2,
+    "compared_files": 27,
+    "comparison": "SHA256 over every R2R1 workbench file except the not-yet-built review manifest plus the contract report",
+    "status": "PASS"
+  },
+  "contract_surface": {
+    "calibration_N": 56,
+    "overlay_count": 38,
+    "sentinel_count": 18,
+    "coder_visible_artifacts": 8,
+    "agreement_minimum": 0.85,
+    "reproduction_anchors": 0,
+    "coder_distributed": false,
+    "agreement_computed": false
+  },
+  "execution_boundary": {
+    "research_model_called": false,
+    "benchmark_metric_run": false,
+    "paper_reproduction_run": false,
+    "prototype_created": false,
+    "novelty_verdict_made": false,
+    "full_mapping_run": false,
+    "push_performed": false
+  }
+}

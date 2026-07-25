@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Agentic calibration R2R1 bounded method repair authorized"
+last_refresh: "2026-07-25 — Agentic calibration R2R1 frozen; independent review pending"
 ---
 
 # Research Objective & Current State
@@ -10,8 +10,8 @@ last_refresh: "2026-07-25 — Agentic calibration R2R1 bounded method repair aut
 
 ## Current gate and authority
 
-The gate is **Stage-1C v2 Agentic calibration R2R1 bounded method repair**. Endpoint:
-`AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR_AUTHORIZED_NOT_FROZEN`.
+The gate is **Stage-1C v2 Agentic calibration R2R1 independent method review**. Endpoint:
+`AGENTIC_CALIBRATION_R2R1_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
 
 Stage-1B v5 (`38fb9435d0c35e226ad62b16015a6dbee054e6c2`), its immutable 320-work union and committed
 RC2/RC2R1/RC2R2/RC2R3 are not rewritten. Duplex-model tasks stay outside research, reproduction and
@@ -57,10 +57,10 @@ compatibility.
 - Reviewer-only preflight found two source-backed TRACE dataset edges missed by both coders. It also
   proved blind `reproduction_evidence` structurally impossible because repository state is withheld
   while `local_asset_state`, closed status and zero blockers are required.
-- R2 exact-manifest review reproduced three load-bearing defects: duplicate coder-local IDs can
-  redirect typed references; placeholders can masquerade as closed paper support; and agreement does
-  not bind the exact raw response bytes frozen before computation.
-- The package preserves 232 paper-field disagreements and every unmatched object; no adjudication occurred.
+- R2R1 rejects duplicate coder-local IDs, requires affirmative closed paper support and binds exact
+  raw response bytes. Its frozen contract is
+  `a3ec30918d12cd4825a2bbd022316b0149045f35dc6b791f0bcc75da0f17cedd`; Windows/WSL and 82% combined
+  line+branch coverage pass, with no coder distribution.
 - AudioGenie-Reasoner remains a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument,
   and MMAU-mini/MMAR validation carriers; none is a reproduction anchor.
 - K/S/M non-speech works remain transfer analogues requiring source→target translation and a
@@ -68,10 +68,12 @@ compatibility.
 
 ## Next action
 
-Implement an R2R1 successor limited to the three reviewed defects, freeze its
-manifest, and obtain a fresh independent method review. The frozen R2 predecessor remains at
+Submit the exact R2R1 manifest at
+`wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2r1/review-package-manifest-r2r1.json`
+to a fresh independent reviewer. The frozen R2 predecessor remains at
 `wiki/survey/workbench/system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json`.
-Only an exact R2R1 ACCEPT can open the fresh Sol/Terra N=56 recode; no sample replacement is implied.
+Only `ACCEPT_AGENTIC_CALIBRATION_R2R1_METHOD_CONTRACT_FOR_CODER_INTAKE` can open the fresh N=56
+recode; no sample replacement is implied.
 
 Current router: `wiki/survey/current/README.md`; audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.

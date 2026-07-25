@@ -1680,7 +1680,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 25), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage-1C v2 Agentic calibration R2R1 bounded method repair",
+            "Stage-1C v2 Agentic calibration R2R1 independent method review",
             "Stage-1B v5",
             "external, reward-guided control plane",
             "20,727",
@@ -1688,7 +1688,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "226",
             "320-work",
             "N=56",
-            "AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR_AUTHORIZED_NOT_FROZEN",
+            "AGENTIC_CALIBRATION_R2R1_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_RC2R3_RUNTIME_INTEGRITY_REPAIR",
             "ACCEPT_AGENTIC_RC2R3_METHOD_CONTRACT_FOR_CODER_INTAKE",
             "AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION",
@@ -1701,6 +1701,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "wiki/survey/current/README.md",
             "system-first-stage1c-v2-precalibration-rc2r3/README.md",
             "system-first-stage1c-v2-precalibration-r2/review-package-manifest-r2.json",
+            "system-first-stage1c-v2-precalibration-r2r1/review-package-manifest-r2r1.json",
             "round-05-r2-independent-method-review",
             "round-06-owner-r2r1-bounded-method-repair-authorization",
             "9652d98eade798903be6c5d007591d2602a2f5c3",
@@ -1710,6 +1711,8 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "duplicate coder-local IDs",
             "closed paper support",
             "raw response bytes",
+            "ACCEPT_AGENTIC_CALIBRATION_R2R1_METHOD_CONTRACT_FOR_CODER_INTAKE",
+            "a3ec30918d12cd4825a2bbd022316b0149045f35dc6b791f0bcc75da0f17cedd",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
             "Next action",
             "Supersession rule",

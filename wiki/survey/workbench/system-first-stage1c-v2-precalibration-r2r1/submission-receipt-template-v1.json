@@ -1,0 +1,8 @@
+{
+  "schema": "sf-stage1c-v2-response-submission-receipt-template-v1",
+  "artifact_id": "SF-STAGE1C-V2-RESPONSE-SUBMISSION-RECEIPT-TEMPLATE-R2R1",
+  "submission_receipt_schema_id": "sf-stage1c-v2-response-submission-receipt-schema-v1",
+  "status": "TEMPLATE_NOT_A_SUBMISSION",
+  "exact_canonical_raw_bytes_required": true,
+  "freeze_before_agreement_required": true
+}

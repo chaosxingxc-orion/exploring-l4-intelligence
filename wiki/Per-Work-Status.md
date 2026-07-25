@@ -16,13 +16,14 @@
   two source-backed dataset-edge positives missed by both coders and proved the blind reproduction
   record structurally depends on withheld local state. R2 repaired the planned codebook defects, but
   its independent review returned `WITHHOLD_WITH_BOUNDED_DEFECTS` for ambiguous duplicate IDs, false
-  reproduction closure and missing raw-response byte binding. The fixed Stage-1B release remains
+  reproduction closure and missing raw-response byte binding. The bounded R2R1 successor now closes
+  those three defects and is frozen pending fresh independent review. The fixed Stage-1B release remains
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is not yet activated for mapping.
 - **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
   and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
   screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** retain R1 and R2 unchanged and implement the owner-authorized bounded
-  R2R1 successor covering only the three reproduced defects. A fresh exact review must ACCEPT
+- **Next authorized work:** retain R1/R2 unchanged and submit the commit-bound R2R1 exact manifest to
+  a fresh independent reviewer. The review must ACCEPT
   before two new isolated contexts perform the single full N=56 recode. Full mapping still requires a valid calibration
   release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models/APIs, metrics, reproduction,
   prototypes, ranking, selection and novelty verdicts remain prohibited.
