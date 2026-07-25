@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "0d684078c3c99b02ee9755f27e9ee39810cbb09a"
+        "git_blob": "7ff55a81abb8e54cdbcb5db13b615e65e5fe0988"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -617,7 +617,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "40917fdc7dd7f43e28f0cf9ce319fce51e7fe735"
+        "git_blob": "4ee55e3044d667a7a56b88017d4abda8e7442f5e"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -812,7 +812,7 @@
       {
         "path": "scripts/survey/test_sf_stage1c_common_rubric.py",
         "mode": "100644",
-        "git_blob": "e087d7993d0035e43ca5472a103a501474d5d506"
+        "git_blob": "dbd0b02bb3f697bc6f1ba0dc570e3246c19d17d3"
       },
       {
         "path": "scripts/survey/test_sf_stage1c_v2_calibration_r1.py",
@@ -885,7 +885,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "f182ae0ae55fcd975bc2c0d7f8d37ac7480b6d10c9cb07443e2e8ed5e5f57eef"
+    "sha256": "4073d1809a4bddf76a84dd9ea683daedb4afa7641a8b69ebc3f7384402c6cad5"
   },
   "commands": [
     {
