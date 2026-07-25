@@ -1,31 +1,27 @@
 # Current Survey Router
 
-- Gate: **Stage-1C v2 Agentic calibration R2R1 independent method review**; endpoint `AGENTIC_CALIBRATION_R2R1_METHOD_FROZEN_PENDING_INDEPENDENT_REVIEW`.
-- Specialized Duplex-model tasks remain outside the research, reproduction and branch route.
-- Frozen Stage-1B v5 is `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is immutable.
-- Active [Agentic calibration R2](../workbench/system-first-stage1c-v2-precalibration-r2/README.md) preserves RC2R3 integrity and adds compiler-owned identities, union denominators, paper/local reproduction separation and positive preflight.
-- Active calibration [R1](../workbench/system-first-stage1c-v2-agentic-calibration-r1/README.md): Sol/Terra completed exact N=56; both raw outputs froze before agreement.
-- Raw agreement is `FAIL`: 5/13 paper paths pass; nine object types share zero exact keys and remain `NOT_CALIBRATED`. No adjudication was applied.
-- Positive preflight found two missed TRACE dataset edges and a structurally impossible blind/local-readiness reproduction contract.
-- Read the [Chinese owner package](../workbench/system-first-stage1c-v2-agentic-calibration-r1/stage1c-v2-calibration-r1-owner-decision-package-zh.md)
-  and the [exact disagreement artifact](../workbench/system-first-stage1c-v2-agentic-calibration-r1/frozen-r1/disagreement-package.json).
-- `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R1_CODEBOOK_CONSOLIDATION` permits one bounded successor and, only after exact ACCEPT, one same-N=56 recode; no score rewrite or sample replacement.
-- The exact R2 review returned `WITHHOLD_WITH_BOUNDED_DEFECTS`: duplicate coder-local IDs can make
-  references ambiguous, paper-support placeholders can falsely close a reproduction candidate, and
-  runtime intake does not bind the exact frozen coder-response bytes. No R2 coder was distributed.
-- AudioGenie-Reasoner is a candidate, AudioToolAgent a nearest prior, Audio2Tool an instrument and
-  MMAU-mini/MMAR validation carriers; none is a reproduction anchor.
-- K/S/M non-speech works are transfer analogues; H5 remains withheld from modality conclusions.
-- Compatibility provenance remains `Stage-1C common-rubric comparison started` under
-  `SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON`; it is not mapping authority.
-- Read [`status.md`](status.md) → targeted
-  [`stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) →
-  [`stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → [`protocol.md`](protocol.md) →
-  [`manifest.json`](manifest.json).
-- `AUTHORIZE_STAGE1C_V2_AGENTIC_CALIBRATION_R2R1_BOUNDED_METHOD_REPAIR` produced one immutable
-  successor: typed IDs, affirmative closure and exact response-byte receipts/root now pass tests.
-- Current action: submit the R2R1 [exact manifest](../workbench/system-first-stage1c-v2-precalibration-r2r1/review-package-manifest-r2r1.json) to a fresh independent reviewer. No R2R1 coder is distributed.
-- Full mapping remains closed until a valid calibration release and
-  `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models, metrics, reproduction, prototype, novelty
-  verdict, Stage-2A and push remain closed.
-- Audit: `wiki/audit/system-first-stage1b/INDEX.md`, `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`. Historical proposals, reviews, responses and amendments are cold audit.
+- Gate: **Stage‑1C complete; Stage‑2A reproduction authorization pending**. Endpoint:
+  `STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING`.
+- Selected primary problem: `C1_DECISION_CALIBRATED_REWARD` — determine when imperfect external
+  speech/omni evaluator signals safely improve `select / repair / stop / abstain` decisions.
+- Ranking: evaluator/reward reliability first; noisy stop/repair is the fallback and policy slice;
+  interactive/full-duplex is validation-only, not a specialized-model branch.
+- Read [`status.md`](status.md) → selected
+  [`stage1c-common-rubric-comparison.md`](tables/stage1c-common-rubric-comparison.md) → immutable
+  [`stage1c-eligible-inputs.md`](tables/stage1c-eligible-inputs.md) → Stage‑1B evidence
+  [`protocol.md`](protocol.md) → [`manifest.json`](manifest.json).
+- Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and its 320-work calibration union remain fixed
+  evidence inputs; no novelty verdict follows from them.
+- The R1 agreement `FAIL` is preserved. R2R1 was tested but never independently accepted or
+  distributed and is retired without a calibration-validity claim.
+- H5 remains withheld and non-load-bearing; cross-modality conclusions remain prohibited.
+- Specialized Duplex-model development stays outside research, reproduction and branch selection.
+- Frozen Stage‑2A handoff: AudioJudge, JudgeBoN, AudioGenie-Reasoner, OracleGap, VRR-Stop,
+  MMAU-mini/MMAR and conditional TRACE. None has been executed.
+- Model/API calls, metrics, reproduction, prototypes, technical novelty, Stage‑2A execution, push and
+  wiki publication require separate authorization.
+- Next action: bind an exact Stage‑2A reproduction contract, then request
+  `AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION`.
+- targeted audit: `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`; Stage‑1B audit:
+  `wiki/audit/system-first-stage1b/INDEX.md`.
+  Historical proposals, reviews, responses and amendments are cold audit.

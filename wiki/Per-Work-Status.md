@@ -10,23 +10,20 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage-1C v2 Agentic calibration R1 completed exact N=56 dual-model coding and
-  froze both raw outputs before agreement. The raw agreement is `FAIL`: 5/13 paper-level paths pass,
-  while nine object types share zero exact match keys. A reviewer-only preflight additionally found
-  two source-backed dataset-edge positives missed by both coders and proved the blind reproduction
-  record structurally depends on withheld local state. R2 repaired the planned codebook defects, but
-  its independent review returned `WITHHOLD_WITH_BOUNDED_DEFECTS` for ambiguous duplicate IDs, false
-  reproduction closure and missing raw-response byte binding. The bounded R2R1 successor now closes
-  those three defects and is frozen pending fresh independent review. The fixed Stage-1B release remains
-  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work union is not yet activated for mapping.
-- **Current blocker:** H5 coder A is complete for the frozen three-paper, 21-field packet; blind coder B
-  and third-party adjudication remain **PENDING**. This blocks only H5 load-bearing use, not discovery,
-  screening, non-H5 coding, or D2 full-text mapping.
-- **Next authorized work:** retain R1/R2 unchanged and submit the commit-bound R2R1 exact manifest to
-  a fresh independent reviewer. The review must ACCEPT
-  before two new isolated contexts perform the single full N=56 recode. Full mapping still requires a valid calibration
-  release and `SIGN_STAGE1C_V2_EXPERIMENT_MAPPING`. Research models/APIs, metrics, reproduction,
-  prototypes, ranking, selection and novelty verdicts remain prohibited.
+- **Current state:** Stage‑1C problem selection is complete. `C1_DECISION_CALIBRATED_REWARD` is the
+  primary problem: determine when imperfect external evaluator signals safely improve
+  `select / repair / stop / abstain` decisions for an API-only frozen speech/omni core. No technical
+  mechanism or novelty claim is frozen. The fixed Stage‑1B v5 release remains
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is unchanged evidence.
+- **Legacy disposition:** R1 agreement remains `FAIL` with no adjudication. R2R1 passed 22 focused
+  implementation tests but was never independently accepted or distributed; it is
+  `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not a valid calibration release. H5 remains
+  withheld and non-load-bearing, so cross-modality conclusions are prohibited without blocking the
+  selected speech/API-only problem.
+- **Next authorized work:** planning and exact-contract preparation only. Freeze one core, task/split,
+  candidate supply, terminal truth, evaluator set, baselines, harm/cost measures, reproduction revisions
+  and abort rules, then request `AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION`. Model/API
+  calls, metrics, reproduction, prototypes, technical novelty, push and wiki publication remain closed.
 
 ## W2
 

@@ -144,7 +144,7 @@
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "72b35441c002ecf6c372058c39a364c35c79f382846345abfff2e9ad586d41ec",
+      "sha256": "dd3ba1155cbb85ea685416541af3229a197ebd03aaaf2d0ea764103a46867518",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -263,14 +263,14 @@
     {
       "role": "stage1c_common_rubric_data",
       "path": "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
-      "sha256": "2a1223fdd65b3a54aab2ff6391a07bbdc686b053e25622517c251a0dd24b5c4e",
+      "sha256": "d09b7bcecce98c3398b36fe44512db10d89d69e454946da505f00b4f300be913",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
     {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
-      "sha256": "16d04d0b83cf4bf667e6418b5e3edd1a42c51809358c66696a009ffa5f002bda",
+      "sha256": "f67c7aaaad0210652a4672b8c1ec7c8c2e2da0ff2e32a411994e73364b0ece7b",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -284,7 +284,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "64e8cb9ffe9ecc9d2a559b2a8d21d0156fec897a0ee3a86a1211aa8c266790fb",
+      "sha256": "32aad2b4eceee01cd3c72128d2b6cbb8c6e7d515d8a13ce4deafc6eada33d8c9",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -305,7 +305,7 @@
     {
       "role": "stage1c_common_rubric_table",
       "path": "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
-      "sha256": "94b7315a8a86a185d4b16f8abcc4eca0856d46878b121bce36d43dce7ab53b76",
+      "sha256": "ae9a2919ca33c4bb90f7401bab1cb4922d531e2eef95e9f1bdffaaa924d270d7",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

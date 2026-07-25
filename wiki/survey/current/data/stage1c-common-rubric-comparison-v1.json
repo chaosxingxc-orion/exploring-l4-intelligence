@@ -1,8 +1,8 @@
 {
   "schema": "sf-stage1c-common-rubric-comparison-v1",
   "artifact_id": "SF-STAGE1C-COMMON-RUBRIC-COMPARISON-V1",
-  "stage": "STAGE_1C_COMMON_RUBRIC_COMPARISON",
-  "as_of": "2026-07-23",
+  "stage": "STAGE_1C_PROBLEM_SELECTION_COMPLETE",
+  "as_of": "2026-07-25",
   "source_review": {
     "path": "wiki/audit/system-first-stage1b/stage1c-transition-rereview-v5-independent-review/2026-07-23-stage1b-v5-independent-doctoral-rereview.md",
     "git_blob": "3a60fb97446dcbfa0aea4487aa9fb4c755e6b658",
@@ -10,15 +10,21 @@
     "verdict": "SIGN_STAGE1C_COMMON_RUBRIC_COMPARISON"
   },
   "authority": {
-    "granted": "COMMON_RUBRIC_PROBLEM_COMPARISON_ONLY",
+    "granted": "LITERATURE_RESEARCH_PROBLEM_RANKING_SELECTION_AND_STAGE2A_HANDOFF_FREEZE",
     "withheld": [
       "model_or_api_execution",
       "dataset_or_benchmark_metrics",
       "paper_reproduction",
       "prototype_implementation",
-      "problem_ranking_or_selection",
-      "novelty_verdict"
+      "technical_approach_novelty_verdict",
+      "stage2a_execution",
+      "push_or_wiki_publication"
     ]
+  },
+  "owner_direction": {
+    "date": "2026-07-25",
+    "decision": "COMPLETE_STAGE1C_LITERATURE_FIRST_AND_REDUCE_NONESSENTIAL_ROBUSTNESS_WORK",
+    "effect": "The undistributed R2R1 calibration branch is retired without a validity claim; H5 remains non-load-bearing; literature research, problem ranking, owner selection and a reproduction-first handoff are authorized."
   },
   "stage1b_v5_release": "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
   "stage1b_v5_taxonomy": "PRESERVED_AS_HISTORICAL_RELEASE",
@@ -195,7 +201,7 @@
   "bundles": [
     {
       "bundle_id": "BUDGET_STOP_REPAIR",
-      "selection_status": "UNRANKED_NOT_SELECTED",
+      "selection_status": "RANK_2_FALLBACK",
       "rubric": {
         "problem_distinctness": {
           "assessment": "A distinct external-control problem remains only when scoped to continue, stop, retry, repair or rollback under noisy evaluators and finite budget; generic stopping and repair are already occupied.",
@@ -237,7 +243,7 @@
     },
     {
       "bundle_id": "EVALUATOR_REWARD_RELIABILITY",
-      "selection_status": "UNRANKED_NOT_SELECTED",
+      "selection_status": "RANK_1_SELECTED_PRIMARY",
       "rubric": {
         "problem_distinctness": {
           "assessment": "Reliability is distinct when an external proxy must support selection or repair and deterministic task success is unavailable; it is not a generic claim that audio judges are missing.",
@@ -279,7 +285,7 @@
     },
     {
       "bundle_id": "INTERACTIVE_FULL_DUPLEX_OBJECTIVES",
-      "selection_status": "UNRANKED_NOT_SELECTED",
+      "selection_status": "RANK_3_VALIDATION_ONLY",
       "rubric": {
         "problem_distinctness": {
           "assessment": "The residual is the divergence between terminal task success and interaction quality under interruption, timing, state update, recovery and tool use, not generic voice naturalness.",
@@ -320,6 +326,129 @@
       }
     }
   ],
-  "dossier_state": "COMMON_RUBRIC_COMPARISON_IN_PROGRESS_UNEXECUTED",
-  "next_decision": "Complete evidence-only comparison, then submit an unexecuted problem-selection dossier to the owner without ranking or selecting a winner."
+  "ranking_rule": [
+    "frozen_black_box_external_control_compatibility",
+    "residual_distinctness_after_nearest_priors",
+    "falsifiability_with_task_visible_truth_and_harm",
+    "local_reproduction_feasibility",
+    "explanatory_value_across_decision_rights_without_umbrella_vagueness"
+  ],
+  "ranking": [
+    {
+      "rank": 1,
+      "bundle_id": "EVALUATOR_REWARD_RELIABILITY",
+      "stage1c_card_id": "C1_DECISION_CALIBRATED_REWARD",
+      "disposition": "SELECT_PRIMARY_PROBLEM",
+      "reason": "Reward/evaluator quality is the load-bearing signal layer of the external control plane. The literature is measurement-rich but does not establish task-conditional decision utility for frozen speech/omni selection, repair, stopping and abstention."
+    },
+    {
+      "rank": 2,
+      "bundle_id": "BUDGET_STOP_REPAIR",
+      "stage1c_card_id": "C2_NOISY_STOP_REPAIR",
+      "disposition": "RETAIN_AS_FALLBACK_AND_PRIMARY_POLICY_SLICE",
+      "reason": "It is highly falsifiable and compatible, but generic stopping and repair are occupied. Its surviving contribution is a decision slice of C1 under evaluator noise, not a separate broad thesis."
+    },
+    {
+      "rank": 3,
+      "bundle_id": "INTERACTIVE_FULL_DUPLEX_OBJECTIVES",
+      "stage1c_card_id": "C3_INTERACTIVE_OUTCOME_CONTROL",
+      "disposition": "RETAIN_AS_VALIDATION_ROUTE_NOT_PRIMARY_BRANCH",
+      "reason": "Speech-native interaction is valuable validation, but specialized duplex-model development is outside scope and the observed gap can be dominated by ASR, VAD, latency or base-model capability."
+    }
+  ],
+  "selected_problem": {
+    "card_id": "C1_DECISION_CALIBRATED_REWARD",
+    "name": "Decision-calibrated reward-guided control under unreliable speech/omni evaluators",
+    "problem_statement": "For an API-only frozen speech/omni core, determine when an external, modality-aware but imperfect evaluator has enough within-instance signal to safely improve select, repair, stop or abstain decisions over the frozen baseline, and when the controller must fall back because oracle headroom, signal fidelity or decision margin is insufficient.",
+    "research_questions": [
+      "RQ1: How much task-conditional oracle headroom and recoverable mass exists in each frozen model-task-supply cell before an evaluator is introduced?",
+      "RQ2: Which pointwise, pairwise, listwise, decomposed and tie-or-abstain protocols preserve within-instance ranking signal across semantic, acoustic and paralinguistic slices?",
+      "RQ3: Does the evaluator improve true downstream decision utility for select, repair and stop after accounting for harm to already-correct outputs and extra calls?",
+      "RQ4: Under model, task and acoustic shift, when are calibration and the decision sign identifiable, and when should a conservative no-change fallback take over?"
+    ],
+    "control_contract": {
+      "observation": "speech/audio input, candidate outputs and task-visible external evidence",
+      "external_state": "candidate pool, evaluator protocol, evidence coverage, disagreement, cost and repair history",
+      "signal": "one or more frozen/deterministic evaluator verdicts with explicit scope and abstention",
+      "decision_rights": ["select", "repair", "stop", "abstain"],
+      "actions": "choose a candidate, request one bounded repair, terminate, or preserve the incumbent",
+      "terminal_truth": "task-specific gold, deterministic environment outcome, or preregistered human reference; evaluator score is never its own truth"
+    },
+    "required_measurements": [
+      "oracle_headroom_and_recoverable_mass",
+      "signal_coverage_and_candidate_level_fidelity",
+      "within_instance_ranking_and_tie_or_abstain_behavior",
+      "realized_gain_or_recovery",
+      "harm_to_already_correct_outputs",
+      "decision_margin_and_shift_stability",
+      "calls_latency_and_cost"
+    ],
+    "kill_criteria": [
+      "The selected frozen model-task-supply cells have negligible oracle headroom or candidate diversity.",
+      "A deterministic task rule or existing frozen evaluator dominates on true utility and harm across every target slice.",
+      "Evaluator signal is not decision-identifiable under the prespecified shift/noise range and the conservative fallback yields no useful action coverage.",
+      "Any apparent gain disappears after equal candidate supply and after separating generator, evaluator and controller effects."
+    ],
+    "reproduction_first_handoff": [
+      {
+        "work": "AudioJudge (2507.12705 / EACL 2026)",
+        "role": "PRIMARY_SPEECH_EVALUATOR_PROTOCOL",
+        "status": "FROZEN_FOR_STAGE2A_REPRODUCTION_LIST_NOT_EXECUTED",
+        "reason": "Direct speech-judge protocol with pointwise/pairwise and multi-aspect evidence plus documented position and verbosity bias."
+      },
+      {
+        "work": "When LLM Judge Scores Look Good but Best-of-N Decisions Fail (2603.12520)",
+        "role": "PRIMARY_DECISION_UTILITY_DIAGNOSTIC",
+        "status": "FROZEN_FOR_STAGE2A_REPRODUCTION_LIST_NOT_EXECUTED",
+        "reason": "Defines the required within-pool, tie-aware and recovery audit that separates aggregate agreement from selection utility."
+      },
+      {
+        "work": "AudioGenie-Reasoner (2509.16971)",
+        "role": "NEAREST_DIRECT_SPEECH_AGENT_PRIOR",
+        "status": "PINNED_CODE_AND_DATA_WITH_REMOTE_DEPENDENCY_BLOCKERS_NOT_EXECUTED",
+        "reason": "Closest training-free audio reasoning loop with evidence acquisition, iterative refinement and a sufficiency stop route."
+      },
+      {
+        "work": "Oracle Gap and Signal Fidelity (2607.17531)",
+        "role": "FIXED_POOL_TRANSFER_COMPARATOR",
+        "status": "FROZEN_COMPARATOR_NOT_SPEECH_REPRODUCTION_ANCHOR",
+        "reason": "Separates recoverable mass, signal coverage/fidelity, conditional selection and harm."
+      },
+      {
+        "work": "VRR-Stop (2607.17641)",
+        "role": "NOISY_REPAIR_STOP_TRANSFER_COMPARATOR",
+        "status": "FROZEN_COMPARATOR_NOT_SPEECH_REPRODUCTION_ANCHOR",
+        "reason": "Provides verifier-discrimination, decision-margin and conservative-fallback tests for repair/stop."
+      },
+      {
+        "work": "MMAU-mini and MMAR",
+        "role": "PRIMARY_LOCAL_VALIDATION_CARRIERS",
+        "status": "LOCAL_REVISION_PINNED_STAGE2A_EXECUTION_PENDING",
+        "reason": "Task answers support an external truth signal without requiring specialized duplex-model development."
+      },
+      {
+        "work": "TRACE (2026.findings-eacl.151)",
+        "role": "SPEECH_EVALUATOR_DECOMPOSITION_COMPARATOR",
+        "status": "PAPER_AND_LOCAL_FULLTEXT_PINNED_RELEASE_ASSETS_MUST_BE_RECHECKED",
+        "reason": "Dimension-first content, voice-quality and paralinguistic decomposition tests whether structured cues outperform opaque holistic judging."
+      }
+    ],
+    "exclusions": [
+      "trained reward-model optimization as a project method",
+      "hidden-state, attention or guaranteed-logprob dependence",
+      "specialized duplex-model development",
+      "technical-mechanism novelty or first-ever claims",
+      "cross-modality generalization while H5 is withheld"
+    ],
+    "stage2a_entry_gate": "A separate owner authorization must bind one frozen core, task/split, candidate-supply contract, terminal truth, evaluator set, baselines, harm/cost measures, exact reproduction items and abort rules before any model/API, metric, reproduction or prototype run."
+  },
+  "legacy_closeout": {
+    "r2r1_status": "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
+    "r2r1_evidence": "Twenty-two focused implementation tests passed; this supports preservation of the package, not calibration validity.",
+    "r1_agreement": "FAIL_PRESERVED_NO_ADJUDICATION",
+    "h5_status": "WITHHOLD_NON_LOAD_BEARING",
+    "scientific_effect": "No calibration, H5 or cross-modality claim is upgraded; the non-H5 three-card problem decision no longer waits on them."
+  },
+  "dossier_state": "STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING",
+  "next_decision": "Request a separate owner Stage-2A reproduction authorization for C1_DECISION_CALIBRATED_REWARD; do not execute models, metrics, reproduction or prototypes under this closeout."
 }

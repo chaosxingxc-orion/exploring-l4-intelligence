@@ -2914,3 +2914,32 @@ Qwen2-Audio（可换）；**先做 W1**（免训练 RL 最成熟，是 W2–W4 �
 **Rationale：** 负命题的分母会随反证而变化，永久硬编码“19”会让已退役错误继续污染 release；H5 与 PDF 解析若只存在于散文，机器无法阻止单人编码或版本漂移被误写成可复现 PASS。版本化库存和可执行门把 reviewer 的反例转成同包可审计条件，同时不让实现者冒充 final sign-off。
 **Consequences：** precheck 的 4/4 correction decisions 与 18/18 active decisions可绑定并关闭语义门；当前唯一内部证据红门变为 `H5_CALIBRATION`。完成 coder B/裁决后才生成正式 v7 双叶与 aggregate，再晋升 immutable round-16，随后依次取得 exact-package reviewer SIGN 与 owner authorization。
 **Supersedes：** 取代将 `22 = 3 + 19`、`0/3 + 0/19` 或“codebook 已存在”等同于当前发布状态的叙述；不改写历史 artifact，也不把 precheck 登记成正式 round-16 package review。失效条件：新反证改变 active/correction 分母，H5 codebook/全文身份变化，extractor 版本变化，或 final reviewer/owner 作出新裁决。
+
+**2026-07-25 · Stage‑1C 以 literature-first 完成问题选择，退役未分发 calibration 分支：**
+**Context：** Stage‑1C 已有三个 `ELIGIBLE_NON_H5` 问题包和 320-work calibration union，但工作连续转向
+R1→R2→R2R1 schema、receipt、mutation 与双平台防护。R1 两名 coder 的 object-level exact agreement
+失败；R2R1 虽关闭三个实现缺陷并通过 22 个定向测试，仍未获独立 ACCEPT、未分发，也没有证据表明再做
+一次 N=56 dual-model recode 会改变最终问题选择。Owner 要求清理遗留任务、详细规划并完成 Stage‑1C，
+减少代码健壮性保障，更多聚焦论文调研。
+**Decision：** 关闭 calibration campaign 为
+`RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`，保留 R1 `FAIL`、R2/R2R1 bytes 与全部 audit；
+H5 继续 `WITHHOLD_NON_LOAD_BEARING`。完成三卡排序并选择
+`C1_DECISION_CALIBRATED_REWARD`：研究 API-only frozen speech/omni core 下，不完美外部 evaluator 何时
+能以足够的 within-instance signal 安全改善 `select / repair / stop / abstain`，何时应保留 incumbent。
+`C2_NOISY_STOP_REPAIR` 作为 fallback/decision slice，`C3_INTERACTIVE_OUTCOME_CONTROL` 只作 speech-native
+validation route。
+**Rationale：** AudioJudge/TRACE/SpeakerSleuth/ParaPairAudioBench 等说明 speech evaluator 丰富但存在
+protocol、tie、text-over-acoustics 与 calibration 风险；JudgeBoN 证明 global correlation 不等于 pool 内
+decision utility；OracleGap 与 VRR-Stop 分别把 recoverable mass/signal fidelity/harm 和 verifier
+discrimination/decision margin/repair damage 操作化。AudioGenie-Reasoner、AudioToolAgent、MUGEN 已否定
+宽泛的“audio agent/judge/repair 不存在”缺口。故剩余博士问题是 signal→decision validity，而不是继续完善
+编码基础设施或先冻结技术创新。
+**Consequences：** Stage‑1C endpoint 为
+`STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING`。冻结但不执行的 handoff
+含 AudioJudge、JudgeBoN、AudioGenie-Reasoner、OracleGap、VRR-Stop、MMAU-mini/MMAR 与 conditional TRACE。
+任何 model/API、metric、reproduction、prototype、technical novelty、push 或 wiki publication 仍需新的
+`AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION`，并先绑定 core/task/supply/truth/evaluator/
+baseline/harm/cost/abort contract。
+**Supersedes：** 取代“R2R1 independent review → N=56 recode → calibration release 是 Stage‑1C 选题的唯一
+下一动作”；不把 calibration/H5/跨模态结论升级为完成。失效条件：新直接 prior 已在同一 frozen access、
+task、supply、truth 与 shift contract 上闭合 decision utility，或 Stage‑2A 发现无 oracle headroom/信号不可识别。

@@ -14,3 +14,12 @@ pre-adjudication agreement and owner adjudication as append-only transactions.
 
 This campaign never grants mapping, research execution, Stage-2A or push authority. Both raw outputs
 must freeze before agreement; owner adjudication remains a mandatory stop.
+
+## Campaign closeout disposition (2026-07-25)
+
+The owner redirected Stage‑1C to literature-first problem selection and ended nonessential robustness
+expansion. R1 remains `FAIL` with no adjudication; R2 and R2R1 remain immutable method artifacts.
+R2R1 was never independently accepted or distributed and is closed as
+`RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not as a valid calibration release. H5
+remains non-load-bearing. Current scientific authority and the selected problem are superseded in
+`wiki/Research-Objective.md` and `wiki/survey/current/tables/stage1c-common-rubric-comparison.md`.
