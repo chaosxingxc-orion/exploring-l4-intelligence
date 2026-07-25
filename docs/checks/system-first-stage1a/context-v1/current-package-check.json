@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "ee3912cf18dcdd06328f0b814a2a1cdcbe68ccb8"
+        "git_blob": "7c53877cf108c52e47cfd261b282507c94a58cef"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "8e0a256ab37a0078bc2686d2393ba7a7cc25d786"
+        "git_blob": "0196060cfd93fd4167d3956b18fbdc7700a45123"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -870,7 +870,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "cce939d183d420a34e72817079e0f998b94e021b682219c80a36da1415d3fdf3"
+    "sha256": "5f277c2b9dcc6f9633fbef727c2f129754216d6cee7475bd7b8d116b98bd87b7"
   },
   "commands": [
     {
@@ -966,7 +966,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (108 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (109 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {
