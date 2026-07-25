@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "5484cb28b79c0cc155776d2de73250677c1a190f"
+        "git_blob": "ee3912cf18dcdd06328f0b814a2a1cdcbe68ccb8"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "f100cead58f8fac0bcf5e83bd967834e68ca55a0"
+        "git_blob": "30a8956bd035d4af6b6f294f7bff90c1eedda163"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -430,14 +430,64 @@
         "git_blob": "38f57dd518d47f172f6718826ef11ea860a0ba24"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement.py",
+        "mode": "100644",
+        "git_blob": "f1bd4cf55d048aaf0942ed1f3e89d9a5caa7d7cd"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v3.py",
+        "mode": "100644",
+        "git_blob": "1165549193e873a729c5377ecbbdf2bfc3d221f8"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v4.py",
+        "mode": "100644",
+        "git_blob": "e60dd6387abe777e8368b31f103286de1467388f"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v5.py",
+        "mode": "100644",
+        "git_blob": "8ec08c35a71f0eba76d37376c005e347617e689c"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_r1.py",
+        "mode": "100644",
+        "git_blob": "c6f6335390e0a15f34bcf0b99826bae71e8128fe"
+      },
+      {
         "path": "scripts/survey/sf_stage1c_v2_experiment_mapping.py",
         "mode": "100644",
         "git_blob": "2c1f6ef65b04ab56a94892e0abab74c64ff25020"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_positive_support_preflight.py",
+        "mode": "100644",
+        "git_blob": "af8d4be24074adb7c28f90fb5f15d28c1b6a6b41"
+      },
+      {
         "path": "scripts/survey/sf_stage1c_v2_precalibration.py",
         "mode": "100644",
-        "git_blob": "f9d7085e84a871c226c06c863a3c2097e879e989"
+        "git_blob": "7f3d7c80c21ca0eeebc07e32ffabecbd740a907b"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2.py",
+        "mode": "100644",
+        "git_blob": "067ef2d5c6f31d803666fa3961044eb430ba81b7"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2r1.py",
+        "mode": "100644",
+        "git_blob": "265e8bebef02882a9b798c44e047fc03cc743eaa"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2r2.py",
+        "mode": "100644",
+        "git_blob": "336f954b1ac465f83555482effa76b27ab049ed2"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2r3.py",
+        "mode": "100644",
+        "git_blob": "9542f7b8c9ad53bc6837bb6a45ed4a1bfd5ebcd7"
       },
       {
         "path": "scripts/survey/sf_t1_route_runner.py",
@@ -542,7 +592,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "505628e3ea5138a4cf2dfa4285bee9cec6104f5e"
+        "git_blob": "40917fdc7dd7f43e28f0cf9ce319fce51e7fe735"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -740,14 +790,44 @@
         "git_blob": "e087d7993d0035e43ca5472a103a501474d5d506"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_calibration_r1.py",
+        "mode": "100644",
+        "git_blob": "44ca45402dc2cdf308a900af57d513e1bdac83bb"
+      },
+      {
         "path": "scripts/survey/test_sf_stage1c_v2_experiment_mapping.py",
         "mode": "100644",
         "git_blob": "7f68ed355c7ed3fadec61926064a7750eb0ba869"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_positive_support_preflight.py",
+        "mode": "100644",
+        "git_blob": "991c0b4d82af9dc06d3cacd7a8f7bd853284ba9b"
+      },
+      {
         "path": "scripts/survey/test_sf_stage1c_v2_precalibration.py",
         "mode": "100644",
         "git_blob": "a8e909863ef877a7b8cc6118042d38f6db8ecbe0"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2.py",
+        "mode": "100644",
+        "git_blob": "fff7b1f6b09be08b86a52473420565f4a42f4695"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2r1.py",
+        "mode": "100644",
+        "git_blob": "1c39c7d4fab2008e880d342ae4fd2606fd04ea26"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2r2.py",
+        "mode": "100644",
+        "git_blob": "b0adc3cf75cd89d9f2ea29733667ac4b1e461795"
+      },
+      {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2r3.py",
+        "mode": "100644",
+        "git_blob": "87625f95d48b311f324c7ef1a5ece76ae21d9540"
       },
       {
         "path": "scripts/survey/test_sf_t1_route_runner.py",
@@ -770,7 +850,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "b2bc8358cd5291f3b7b606349ade67c6de796493ae20e77215129236de4b9769"
+    "sha256": "c0369b746b3970b5065b196e70532534bf663433f21eeb79744d1f52c5664dac"
   },
   "commands": [
     {
@@ -866,7 +946,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (96 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (108 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {
