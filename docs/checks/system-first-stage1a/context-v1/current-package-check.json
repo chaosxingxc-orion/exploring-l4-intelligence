@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "30a8956bd035d4af6b6f294f7bff90c1eedda163"
+        "git_blob": "8e0a256ab37a0078bc2686d2393ba7a7cc25d786"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -450,6 +450,11 @@
         "git_blob": "8ec08c35a71f0eba76d37376c005e347617e689c"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v6.py",
+        "mode": "100644",
+        "git_blob": "b46e92204054a2ea9bafe75ba14de4ca0219e14b"
+      },
+      {
         "path": "scripts/survey/sf_stage1c_v2_calibration_r1.py",
         "mode": "100644",
         "git_blob": "c6f6335390e0a15f34bcf0b99826bae71e8128fe"
@@ -470,6 +475,11 @@
         "git_blob": "7f3d7c80c21ca0eeebc07e32ffabecbd740a907b"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_r2.py",
+        "mode": "100644",
+        "git_blob": "86d11a3387481795260e3965c991881c4f0cbf6f"
+      },
+      {
         "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2.py",
         "mode": "100644",
         "git_blob": "067ef2d5c6f31d803666fa3961044eb430ba81b7"
@@ -488,6 +498,11 @@
         "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2r3.py",
         "mode": "100644",
         "git_blob": "9542f7b8c9ad53bc6837bb6a45ed4a1bfd5ebcd7"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_r2_guards.py",
+        "mode": "100644",
+        "git_blob": "9dbfea32bbc5897d7032964f1ee12b38659c3940"
       },
       {
         "path": "scripts/survey/sf_t1_route_runner.py",
@@ -810,6 +825,11 @@
         "git_blob": "a8e909863ef877a7b8cc6118042d38f6db8ecbe0"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_r2.py",
+        "mode": "100644",
+        "git_blob": "7dbe1473b4d645f41b6407b8ec951f4b987b7e05"
+      },
+      {
         "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2.py",
         "mode": "100644",
         "git_blob": "fff7b1f6b09be08b86a52473420565f4a42f4695"
@@ -850,7 +870,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "c0369b746b3970b5065b196e70532534bf663433f21eeb79744d1f52c5664dac"
+    "sha256": "cce939d183d420a34e72817079e0f998b94e021b682219c80a36da1415d3fdf3"
   },
   "commands": [
     {
