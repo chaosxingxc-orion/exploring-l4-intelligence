@@ -42,7 +42,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "823e35cef027c8ba1759998f534cab3449db0139"
+        "git_blob": "0d684078c3c99b02ee9755f27e9ee39810cbb09a"
       },
       {
         "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
@@ -455,6 +455,11 @@
         "git_blob": "b46e92204054a2ea9bafe75ba14de4ca0219e14b"
       },
       {
+        "path": "scripts/survey/sf_stage1c_v2_calibration_agreement_v7.py",
+        "mode": "100644",
+        "git_blob": "8e36a98870d910c35fdaa86173570dd969379022"
+      },
+      {
         "path": "scripts/survey/sf_stage1c_v2_calibration_r1.py",
         "mode": "100644",
         "git_blob": "c6f6335390e0a15f34bcf0b99826bae71e8128fe"
@@ -478,6 +483,11 @@
         "path": "scripts/survey/sf_stage1c_v2_precalibration_r2.py",
         "mode": "100644",
         "git_blob": "86d11a3387481795260e3965c991881c4f0cbf6f"
+      },
+      {
+        "path": "scripts/survey/sf_stage1c_v2_precalibration_r2r1.py",
+        "mode": "100644",
+        "git_blob": "9666819ecf5ed95e71fe8ee0379736ff71ed7c4f"
       },
       {
         "path": "scripts/survey/sf_stage1c_v2_precalibration_rc2.py",
@@ -830,6 +840,11 @@
         "git_blob": "7dbe1473b4d645f41b6407b8ec951f4b987b7e05"
       },
       {
+        "path": "scripts/survey/test_sf_stage1c_v2_precalibration_r2r1.py",
+        "mode": "100644",
+        "git_blob": "760571c7f1b222f6ee8eacfeb47d23ce735aabdd"
+      },
+      {
         "path": "scripts/survey/test_sf_stage1c_v2_precalibration_rc2.py",
         "mode": "100644",
         "git_blob": "fff7b1f6b09be08b86a52473420565f4a42f4695"
@@ -870,7 +885,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "13ee8d558a82fe30835a50f611443463c7b10e80fb51252972eb6e84dfa8a929"
+    "sha256": "f182ae0ae55fcd975bc2c0d7f8d37ac7480b6d10c9cb07443e2e8ed5e5f57eef"
   },
   "commands": [
     {
