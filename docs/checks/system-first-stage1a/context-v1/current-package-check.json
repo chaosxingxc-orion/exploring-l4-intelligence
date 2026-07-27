@@ -12,7 +12,7 @@
       {
         "path": "scripts/checks/ai_context_inventory.py",
         "mode": "100644",
-        "git_blob": "28af67ea7c3566458f48278ec9cd82d5e5b9c163"
+        "git_blob": "83b7a345a0cf9119a5482574747d90969b958023"
       },
       {
         "path": "scripts/checks/ai_context_surface_check.py",
@@ -22,17 +22,17 @@
       {
         "path": "scripts/checks/build_ai_context_manifest.py",
         "mode": "100644",
-        "git_blob": "be34d99381df72ae64c99adecede8e50c95a985e"
+        "git_blob": "3228953406cc1160f4abf0d1256111434f1a9284"
       },
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "4a1830ce7a9d0c8e074c99e2de9e7e484d1a4271"
+        "git_blob": "e19bcd43f33a3d8c5c7924f89e8d52e97f281c41"
       },
       {
         "path": "scripts/survey/sf_archive_candidates.py",
         "mode": "100644",
-        "git_blob": "f2d8dfabce5a506b3ded77777c13b21f0483f8fc"
+        "git_blob": "12a4cafda8490fc83d67246fb9a637c5623fadd2"
       },
       {
         "path": "scripts/survey/sf_atom_provenance_fetch.py",
@@ -42,7 +42,7 @@
       {
         "path": "scripts/survey/sf_audit_immutability_check.py",
         "mode": "100644",
-        "git_blob": "a2a844aa19b4992d33f23c8abc40444fdcee19ac"
+        "git_blob": "4fdae79395aceeefe2eca1fd2efbbf28872ef743"
       },
       {
         "path": "scripts/survey/sf_bibliography_generator.py",
@@ -190,7 +190,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "abfb9596efdd91a3e287a629b10846e18a69b64edb5f3d170a48a0c7a1e8007e"
+    "sha256": "8d388d8ee48b5aae6be791c6a9537ac0116cefaed2a92202e81f3432bfc5310f"
   },
   "commands": [
     {
@@ -238,7 +238,7 @@
     {
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
-      "stdout_tail": "audit immutability: PASS (110 registered, 0 artifact failures)",
+      "stdout_tail": "audit immutability: PASS (111 registered, 0 artifact failures)",
       "stderr_tail": ""
     },
     {
