@@ -1,23 +1,25 @@
 {
-  "schema": "sf-audit-immutability-report-v3",
+  "schema": "sf-audit-immutability-report-v4",
   "check": "sf-audit-immutability",
   "registry": "wiki/survey/sf-audit-artifact-registry.json",
   "registry_stage0": {
     "mode": "100644",
-    "git_blob": "e06226c30b37dd608ce4240b73c4aed850e440a0"
+    "git_blob": "67828031a6b8917b472ae61878d5eceac6c33dd5"
   },
   "anchor_stage0": {
     "path": "scripts/checks/ai_context_inventory.py",
     "mode": "100644",
-    "git_blob": "28af67ea7c3566458f48278ec9cd82d5e5b9c163"
+    "git_blob": "83b7a345a0cf9119a5482574747d90969b958023"
   },
-  "registered": 110,
+  "registered": 111,
   "registry_prefix": {
-    "count": 110,
-    "sha256": "fac2fe39f70d41855a092f1869578014bc20359d8c84a06ccf9ff0eddcac14ec"
+    "count": 111,
+    "sha256": "881072cd336922f92f21e981107022ef98457b378ef25cce62f949cb25d05b67"
   },
+  "sunset_registered": 51,
   "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
-  "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
+  "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob; sunset-exempt: history(last_commit,path)=pin, HEAD/stage0/worktree presence not required",
+  "sunset_lineage_contract": "sunset is append-only: every HEAD sunset row must be preserved unchanged in stage0",
   "failures": [],
   "status": "PASS"
 }

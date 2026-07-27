@@ -237,6 +237,87 @@ def _registry_artifacts(
     return artifacts
 
 
+def _registry_sunset(
+    raw: bytes,
+    artifacts: list[dict[str, str]],
+    label: str = "staged registry",
+) -> dict[str, tuple[str, str]]:
+    """Parse append-only sunset exemptions bound to their registered pins.
+
+    A sunset row records that a registered artifact's working-tree bytes were
+    deleted, with `last_commit` naming the last commit whose tree still
+    contains that exact blob at that path (verified in ``evaluate`` via
+    ``git ls-tree``).  It never edits the original ``artifacts`` row.
+    """
+
+    try:
+        document = loads_json_strict(raw, REGISTRY_RELATIVE)
+    except ContextSurfaceError as error:
+        raise AuditCheckError(str(error)) from error
+    if not isinstance(document, dict):
+        raise AuditCheckError(f"{label} must be an object")
+    raw_sunset = document.get("sunset", [])
+    if not isinstance(raw_sunset, list):
+        raise AuditCheckError(f"{label} sunset must be a list")
+    pins = {entry["path"]: entry["git_blob"] for entry in artifacts}
+    sunset: dict[str, tuple[str, str]] = {}
+    for index, entry in enumerate(raw_sunset):
+        if not isinstance(entry, dict) or set(entry) != {
+            "path",
+            "git_blob",
+            "last_commit",
+        }:
+            raise AuditCheckError(
+                f"{label} sunset[{index}] must contain exactly "
+                "path/git_blob/last_commit"
+            )
+        path = _canonical_path(entry["path"], f"{label} sunset[{index}].path")
+        blob = entry["git_blob"]
+        commit = entry["last_commit"]
+        if not isinstance(blob, str) or HEX40.fullmatch(blob) is None:
+            raise AuditCheckError(f"{label} sunset[{index}] has invalid Git blob")
+        if not isinstance(commit, str) or HEX40.fullmatch(commit) is None:
+            raise AuditCheckError(f"{label} sunset[{index}] has invalid last_commit")
+        if path not in pins:
+            raise AuditCheckError(
+                f"{label} sunset[{index}] path is not a registered artifact: {path}"
+            )
+        if pins[path] != blob:
+            raise AuditCheckError(
+                f"{label} sunset[{index}] blob does not match registered pin: {path}"
+            )
+        if path in sunset:
+            raise AuditCheckError(f"{label} sunset[{index}] duplicate path: {path}")
+        sunset[path] = (blob, commit)
+    return sunset
+
+
+def _history_blob_matches(repo: Path, path: str, blob: str, commit: str) -> bool:
+    """Prove ``git show <commit>:<path>`` still resolves to exactly ``blob``."""
+
+    completed = subprocess.run(
+        [*git_command_prefix(repo), "ls-tree", commit, "--", path],
+        cwd=repo,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if completed.returncode != 0:
+        return False
+    line = completed.stdout.strip("\n")
+    if not line:
+        return False
+    meta, sep, tail = line.partition("\t")
+    if not sep or tail != path:
+        return False
+    parts = meta.split(" ")
+    if len(parts) != 3:
+        return False
+    _mode, object_type, sha = parts
+    return object_type == "blob" and sha == blob
+
+
 def evaluate(
     artifacts: list[dict[str, str]],
     head: dict[str, GitEntry],
@@ -244,17 +325,34 @@ def evaluate(
     read_blob: Callable[[str], bytes],
     read_worktree: Callable[[str], bytes],
     allow_staged_only_paths: set[str] | None = None,
+    sunset: dict[str, tuple[str, str]] | None = None,
+    verify_sunset_history: Callable[[str, str, str], bool] | None = None,
 ) -> list[str]:
     """Evaluate committed rows and an explicitly allowed atomic staged append."""
 
     failures: list[str] = []
     seen: set[str] = set()
     allowed_staged_only = allow_staged_only_paths or set()
+    sunset = sunset or {}
     for artifact in artifacts:
         path, pin = artifact["path"], artifact["git_blob"]
         if path in seen:
             failures.append(f"{path}: duplicate registry row (append-only violated)")
         seen.add(path)
+        if path in sunset:
+            sunset_blob, sunset_commit = sunset[path]
+            if sunset_blob != pin:
+                failures.append(
+                    f"{path}: sunset blob {sunset_blob[:12]} != pinned {pin[:12]}"
+                )
+            elif verify_sunset_history is None or not verify_sunset_history(
+                path, pin, sunset_commit
+            ):
+                failures.append(
+                    f"{path}: sunset record unrecoverable at "
+                    f"{sunset_commit[:12]}:{path}"
+                )
+            continue
         head_entry = head.get(path)
         staged_entry = staged.get(path)
         if head_entry is None and path not in allowed_staged_only:
@@ -293,12 +391,13 @@ def _render_report(
     registered: int,
     prefix_count: int,
     prefix_sha256: str,
+    sunset_registered: int,
     failures: list[str],
     registry_relative: str,
     anchor_relative: str,
 ) -> bytes:
     result = {
-        "schema": "sf-audit-immutability-report-v3",
+        "schema": "sf-audit-immutability-report-v4",
         "check": "sf-audit-immutability",
         "registry": registry_relative,
         "registry_stage0": {
@@ -315,8 +414,15 @@ def _render_report(
             "count": prefix_count,
             "sha256": prefix_sha256,
         },
+        "sunset_registered": sunset_registered,
         "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
-        "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob",
+        "artifact_binding_contract": (
+            "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob; sunset-exempt: "
+            "history(last_commit,path)=pin, HEAD/stage0/worktree presence not required"
+        ),
+        "sunset_lineage_contract": (
+            "sunset is append-only: every HEAD sunset row must be preserved unchanged in stage0"
+        ),
         "failures": failures,
         "status": "FAIL" if failures else "PASS",
     }
@@ -384,6 +490,21 @@ def expected_report(
     staged_only_paths: set[str] = set()
     if len(artifacts) == head_count + 1 and artifacts[:head_count] == head_artifacts:
         staged_only_paths.add(artifacts[-1]["path"])
+
+    # Sunset exemptions: append-only records that let a registered artifact's
+    # working-tree bytes be absent iff history still proves the exact pinned
+    # blob at its last committed path (evaluated below, not merely declared).
+    sunset = _registry_sunset(registry_raw, artifacts)
+    head_sunset = _registry_sunset(head_registry_raw, head_artifacts, "HEAD registry")
+    for sunset_path, sunset_value in head_sunset.items():
+        if sunset.get(sunset_path) != sunset_value:
+            failures.append(
+                f"{sunset_path}: sunset record must be preserved from HEAD (append-only)"
+            )
+
+    def _verify_sunset_history(path: str, blob: str, commit: str) -> bool:
+        return _history_blob_matches(repo, path, blob, commit)
+
     failures.extend(
         evaluate(
             artifacts,
@@ -392,6 +513,8 @@ def expected_report(
             read_blob,
             reader.read_bytes,
             allow_staged_only_paths=staged_only_paths,
+            sunset=sunset,
+            verify_sunset_history=_verify_sunset_history,
         )
     )
 
@@ -406,6 +529,7 @@ def expected_report(
         registered=len(artifacts),
         prefix_count=count,
         prefix_sha256=actual_prefix,
+        sunset_registered=len(sunset),
         failures=failures,
         registry_relative=registry_relative,
         anchor_relative=anchor_relative,

@@ -387,6 +387,52 @@ def _parse_registry_artifacts(raw: bytes, label: str) -> list[dict[str, str]]:
     return artifacts
 
 
+def _parse_registry_sunset(
+    raw: bytes, artifacts: list[dict[str, str]], label: str
+) -> dict[str, str]:
+    """Parse append-only sunset exemptions bound to their registered pins.
+
+    A sunset row records that a registered artifact's working-tree bytes
+    were deleted; ``sf_audit_immutability_check.py`` owns the git-history
+    reachability proof, this oracle only needs to know which registered
+    paths are legitimately absent so they are excluded from the presence
+    requirement below (they can never be a live inbound referrer either).
+    """
+
+    try:
+        document = loads_json_strict(raw, label)
+    except ContextSurfaceError as error:
+        _fail("archive-registry-invalid", str(error))
+    raw_sunset = document.get("sunset", []) if isinstance(document, dict) else None
+    if not isinstance(raw_sunset, list):
+        _fail("archive-registry-invalid", "sunset must be a list")
+    pins = {entry["path"]: entry["git_blob"] for entry in artifacts}
+    sunset: dict[str, str] = {}
+    for position, entry in enumerate(raw_sunset):
+        if not isinstance(entry, dict) or set(entry) != {
+            "path",
+            "git_blob",
+            "last_commit",
+        }:
+            _fail("archive-registry-invalid", f"sunset[{position}] schema")
+        path = _canonical(entry["path"], f"sunset[{position}].path")
+        blob = entry["git_blob"]
+        commit = entry["last_commit"]
+        if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+            _fail("archive-registry-invalid", f"sunset[{position}].git_blob")
+        if not isinstance(commit, str) or BLOB_RE.fullmatch(commit) is None:
+            _fail("archive-registry-invalid", f"sunset[{position}].last_commit")
+        if path not in pins or pins[path] != blob:
+            _fail(
+                "archive-registry-invalid",
+                f"sunset[{position}] path/blob is not a registered artifact: {path}",
+            )
+        if path in sunset:
+            _fail("archive-registry-invalid", f"duplicate sunset path: {path}")
+        sunset[path] = blob
+    return sunset
+
+
 def _load_registry(
     repo: Path,
     reader: TrustedRepoReader,
@@ -446,9 +492,15 @@ def _load_registry(
                 "archive-registry-lineage-invalid",
                 f"production baseline prefix changed: {actual_prefix}",
             )
+    sunset = _parse_registry_sunset(raw, staged_artifacts, REGISTRY_RELATIVE_PATH)
     paths = {entry["path"] for entry in staged_artifacts}
     pins = {entry["path"]: entry["git_blob"] for entry in staged_artifacts}
     for path, pin in pins.items():
+        if path in sunset:
+            # Sunset-recorded working-tree deletion: never a live inbound
+            # referrer, and its history-reachability is proven separately by
+            # sf_audit_immutability_check.py, not this safety oracle.
+            continue
         _assert_input_clean(repo, reader, path, index, head)
         if index[path].blob != pin:
             _fail(

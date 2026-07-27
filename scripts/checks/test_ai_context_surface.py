@@ -1352,7 +1352,7 @@ class AiContextSurfaceTests(unittest.TestCase):
             tracked_paths=tracked,
         )
 
-        self.assertEqual(8, len(legacy))
+        self.assertEqual(4, len(legacy))
         self.assertEqual(
             {
                 "unclassified-persistent-document",

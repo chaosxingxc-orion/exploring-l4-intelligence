@@ -166,23 +166,9 @@ def _legacy(path: str, path_class: str):
 EXACT_NAMED_LEGACY_EXCEPTIONS = (
     # Pre-routing W4 working proposal draft; retained at its historical path.
     _legacy("wiki/2026-07-11-W4-fresh-proposal-draft.md", "AUDIT_LEGACY"),
-    # Pre-routing R preregistration draft; retained at its historical path.
-    _legacy("wiki/2026-07-11-proposal-R-prereg-draft.md", "AUDIT_LEGACY"),
-    # Historical identity-contract amendment from a separate contract chain.
-    _legacy("wiki/2026-07-14-identity-contracts-amendment-1.md", "AUDIT_LEGACY"),
-    # Historical response-replay template predating permanent audit routing.
-    _legacy(
-        "wiki/2026-07-14-survey-response-replayability-template.md",
-        "AUDIT_LEGACY",
-    ),
     # Historical record-denoise survey proposal predating permanent routing.
     _legacy(
         "wiki/2026-07-15-record-system-denoise-and-rationale-survey-proposal.md",
-        "AUDIT_LEGACY",
-    ),
-    # Historical C4 preparation proposal predating permanent routing.
-    _legacy(
-        "wiki/2026-07-16-c4-prep-owner-rulings-and-coding-depth-proposal.md",
         "AUDIT_LEGACY",
     ),
     # Generic English proposal template retained as cold legacy documentation.
@@ -226,8 +212,6 @@ RETAINED_LEGACY_PATHS = (
 
 
 _PREEXISTING_AUDIT_DOC_PATHS = (
-    "wiki/2026-07-11-overnight-remediation-report.md",
-    "wiki/2026-07-13-precheck-provenance-correction.md",
     "wiki/2026-07-15-s0-program-identity-signoff.md",
     "wiki/survey/2026-07-14-canonical-census-v2/census_report_v2.md",
     "wiki/survey/2026-07-14-canonical-census/census_report.md",
@@ -237,22 +221,8 @@ _PREEXISTING_AUDIT_DOC_PATHS = (
 )
 
 _PREEXISTING_REGISTRY_DOC_PATHS = (
-    "wiki/2026-06-23-omni-embed-speech-disentanglement-1.2.1.md",
-    "wiki/2026-07-03-omni-agentic-tfrl-go-no-go-decision.md",
-    "wiki/2026-07-04-stage1-problem-definition.md",
-    "wiki/2026-07-04-stage1-semantic-tfrl-survey.md",
     "wiki/2026-07-11-group-split-statistics-design.md",
-    "wiki/2026-07-11-survey-full-verification.md",
-    "wiki/2026-07-12-omni-hotword-biasing-survey.md",
-    "wiki/2026-07-12-omni-lm-rescoring-survey.md",
-    "wiki/2026-07-12-retrieve-discover-use-analysis.md",
-    "wiki/2026-07-14-1b-probe-protocol-v1.md",
-    "wiki/2026-07-14-ai-assisted-survey-knowledge-stack-open-source-evaluation.md",
     "wiki/2026-07-14-identity-contracts-v1.md",
-    "wiki/2026-07-14-resp04-gate-a-execution.md",
-    "wiki/2026-07-14-round2-search-protocol-v1.md",
-    "wiki/2026-07-14-stage1c-decision-package.md",
-    "wiki/2026-07-15-replayability-template-token-overlay.md",
     "wiki/2026-07-18-inherited-prior-exposure-union.md",
     "wiki/Omni-Embed-Model-Dossier.md",
     "wiki/Paralinguistic-Suppression-Survey.md",
@@ -434,8 +404,16 @@ def _load_audit_inventory(
             f"{actual_prefix_hash} != {REGISTRY_BASELINE_PREFIX_SHA256}",
         )
 
+    sunset_map = _load_registry_sunset(registry, dict(validated), registry_path)
+
     legacy: list[dict[str, str]] = []
     for path, blob in validated:
+        if path in sunset_map:
+            # Working-tree deletion recorded by a sunset ledger row: the
+            # registered pin is intentionally no longer present at this path,
+            # so it is exempt from the presence check and does not surface as
+            # a legacy_cold_path (it is gone, not cold-retained).
+            continue
         graph.raw(path, "audit-registry-path-untracked")
         if graph.blobs.get(path) != blob:
             _fail(
@@ -445,6 +423,47 @@ def _load_audit_inventory(
         if not path.startswith("wiki/audit/"):
             legacy.append(_legacy(path, "AUDIT_LEGACY"))
     return legacy, dict(validated)
+
+
+def _load_registry_sunset(
+    registry: dict,
+    pins: dict[str, str],
+    registry_path: str,
+) -> dict[str, str]:
+    """Parse append-only sunset exemptions and bind each to its registered pin.
+
+    A sunset row records that a registered artifact's bytes were deleted from
+    the working tree with its history preserved (`git show <last_commit>:
+    <path>`).  It never mutates the original `artifacts` row; it only exempts
+    that path from the disk-presence requirement below.
+    """
+
+    raw_sunset = registry.get("sunset", [])
+    if not isinstance(raw_sunset, list):
+        _fail("audit-registry-sunset-invalid", f"{registry_path}: sunset must be a list")
+    sunset_map: dict[str, str] = {}
+    for index, entry in enumerate(raw_sunset):
+        label = f"{registry_path} sunset[{index}]"
+        if not isinstance(entry, dict) or set(entry) != {"path", "git_blob", "last_commit"}:
+            _fail(
+                "audit-registry-sunset-entry",
+                f"{label} must have exact path/git_blob/last_commit fields",
+            )
+        path = _canonical_path(entry["path"], f"{label}.path")
+        blob = entry["git_blob"]
+        commit = entry["last_commit"]
+        if not isinstance(blob, str) or BLOB_RE.fullmatch(blob) is None:
+            _fail("audit-registry-sunset-entry", f"{label}.git_blob is not a Git blob id")
+        if not isinstance(commit, str) or BLOB_RE.fullmatch(commit) is None:
+            _fail("audit-registry-sunset-entry", f"{label}.last_commit is not a Git commit id")
+        if path not in pins:
+            _fail("audit-registry-sunset-unregistered", f"{label}: {path}")
+        if pins[path] != blob:
+            _fail("audit-registry-sunset-blob-mismatch", f"{label}: {path}")
+        if path in sunset_map:
+            _fail("duplicate-path", f"sunset path {path}")
+        sunset_map[path] = blob
+    return sunset_map
 
 
 def _validate_constants(specs, *legacy_groups, budgets, active_review):
