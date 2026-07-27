@@ -102,6 +102,12 @@ ARCHIVE 搬运在工作件“已被取代且不在 current manifest”时触发�
 不安全时记录明确 closeout blocker，签署前解决，绝不强搬。已注册 AUDIT 是例外：永不搬运，只从
 active routing 移除。
 
+自 2026-07-28 起另设 **sunset 通道**（owner 裁决，Decision-Log 续75）：已被取代且无活跃引用的
+工作件可从工作树删除以代替搬运，历史字节由 Git 保存。前提与安全门与 ARCHIVE 相同；每个删除
+路径必须在当次 campaign 的 sunset ledger 登记 blob 哈希与找回命令，叙事类记录先蒸馏进 sunset
+digest；注册 AUDIT 件字节不变，其工作树条目仅当 immutability 检查以 git 历史可达性验证时方可
+删除。docs/checks 前公约散件与零引用报告、docs/superpowers/plans 零引用已完成计划适用本通道。
+
 ### 搬运前安全门（强制）
 
 1. 从 **stage-0** Git index 读取 regular-file path、mode 与 Git blob；worktree bytes 必须等于该 blob，

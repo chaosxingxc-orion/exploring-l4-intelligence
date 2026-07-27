@@ -6,7 +6,39 @@
 
 ---
 
-### 2026-07-21（续74）· 创新性判断退出 Stage-1A/1B；Stage-2A 在 prior 复现后收敛技术贡献
+### 2026-07-28（续75）· 工作空间清理战役：264 件日落删除 + 门禁 18→10 + 脚本零基退役；三步走整改（P0→R1 修正→R2-R9）与载体裁决 A/B 落账
+
+#### Context
+
+07-26/27 五维组合包交付后，owner 裁定 Stage-1C 处于约 70%：方向内容成立，证据绑定层未达验收
+（R1 参考文献/方法/锁定基线需重推导，R2-R9 无数值阈值）。同时半月内多轮方向修正积累了大量已
+被取代的历史记录与死战役脚本，owner 令在大规模分析与方向锁定前系统清理（"应删尽删"+先提炼后
+删除）。
+
+#### Decision
+
+① 三步走整改：P0 记录修复（完成度声明纠正为 `STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_
+REFINEMENT_PENDING`）→ step-2 R1 修正 → step-3 R2-R9 提到修正后 R1 标准。裁决 A：项目核心
+Qwen3-Omni-30B（本地 llama.cpp lane；Qwen2.5-Omni-7B 口径全部取代）；裁决 B：ASR 主线为通用
+ASR（MyST/RSR 儿童 ASR 降级）。② 清理战役：264 件从工作树日落删除（wiki 根 71/六代
+precalibration 链 151/current 层 8/零引用散件 34），16 个承重锚保留；叙事链先蒸馏为
+`wiki/audit/workspace-cleanup-2026-07/sunset-digest.md`（八条链：尝试/死因/终局判决/教训），
+逐路径 blob 与找回命令在同目录 `sunset-ledger.jsonl`（264 行）；脚本零基退役 204→61 文件
+（约 4.9 万行），真门禁命令 18→10。
+
+#### Rationale
+
+历史重写会毁掉 Stage-1B v5 提交哈希与全部 registry blob 锚，故"删"定义为工作树移除+历史可达；
+活跃声明的证据锚（B8 更正对象、exposure union、各链终端判决等）不删。门禁按"守活跃可变不变量"
+零基判据收缩：冻结工件的完整性已由 manifest sha 与 registry 前缀哈希统一覆盖，逐件合同检查是
+纯压舱。
+
+#### Consequences
+
+找回任何被删件：`git show <last_commit>:<path>`（台账每行给出确切命令）。registry 新增
+append-only sunset 数组，immutability/manifest/archive 检查对已删注册路径改用 git 历史可达性
+验证。后续 H/I/J 重构（fetch 收敛/canon-pins 配置化/合同引擎）与 AI-Collaboration sunset 通道
+条款随本战役收尾落地。Supersedes：无（新增通道，不改旧 ADR）。
 
 #### Context
 
