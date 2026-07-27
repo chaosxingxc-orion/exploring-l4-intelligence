@@ -367,6 +367,11 @@
     theorem count. The module's original docstring calling this "the FIRST operator-linked theorem"
     was a naming error and has been corrected (see the module docstring itself and
     wiki/Theory-Convergence-and-Constraints.md's T-coverage subsection, both retitled 2026-07-12).
+    2026-07-27 capability-portfolio addendum: InfoBoundary is a fixed-pool read-out bound only;
+    a finite-pool oracle miss does not establish an all-contexts ICL gap. RuntimeReliability adds
+    conditional 2-epsilon margin lemmas for incumbent non-regression/strict improvement, but the
+    uniform reward-error bound is an empirical hypothesis and the new lemmas remain unlinked to the
+    implemented controller. Operator-linked theorem count therefore remains 0.
 
 - claim_id: C-MINDS-V2
   claim_text: >

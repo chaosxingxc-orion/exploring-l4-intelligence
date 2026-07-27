@@ -201,7 +201,7 @@
   "bundles": [
     {
       "bundle_id": "BUDGET_STOP_REPAIR",
-      "selection_status": "RANK_2_FALLBACK",
+      "selection_status": "PRIOR_RANK_2_FALLBACK_SUPERSEDED",
       "rubric": {
         "problem_distinctness": {
           "assessment": "A distinct external-control problem remains only when scoped to continue, stop, retry, repair or rollback under noisy evaluators and finite budget; generic stopping and repair are already occupied.",
@@ -243,7 +243,7 @@
     },
     {
       "bundle_id": "EVALUATOR_REWARD_RELIABILITY",
-      "selection_status": "RANK_1_SELECTED_PRIMARY",
+      "selection_status": "PRIOR_RANK_1_SELECTED_PRIMARY_SUPERSEDED",
       "rubric": {
         "problem_distinctness": {
           "assessment": "Reliability is distinct when an external proxy must support selection or repair and deterministic task success is unavailable; it is not a generic claim that audio judges are missing.",
@@ -285,7 +285,7 @@
     },
     {
       "bundle_id": "INTERACTIVE_FULL_DUPLEX_OBJECTIVES",
-      "selection_status": "RANK_3_VALIDATION_ONLY",
+      "selection_status": "PRIOR_RANK_3_VALIDATION_ONLY_SUPERSEDED",
       "rubric": {
         "problem_distinctness": {
           "assessment": "The residual is the divergence between terminal task success and interaction quality under interruption, timing, state update, recovery and tool use, not generic voice naturalness.",
@@ -338,21 +338,21 @@
       "rank": 1,
       "bundle_id": "EVALUATOR_REWARD_RELIABILITY",
       "stage1c_card_id": "C1_DECISION_CALIBRATED_REWARD",
-      "disposition": "SELECT_PRIMARY_PROBLEM",
+      "disposition": "PRIOR_SELECT_PRIMARY_PROBLEM_SUPERSEDED",
       "reason": "Reward/evaluator quality is the load-bearing signal layer of the external control plane. The literature is measurement-rich but does not establish task-conditional decision utility for frozen speech/omni selection, repair, stopping and abstention."
     },
     {
       "rank": 2,
       "bundle_id": "BUDGET_STOP_REPAIR",
       "stage1c_card_id": "C2_NOISY_STOP_REPAIR",
-      "disposition": "RETAIN_AS_FALLBACK_AND_PRIMARY_POLICY_SLICE",
+      "disposition": "PRIOR_FALLBACK_NOW_RUNTIME_CONTROL_COMPONENT",
       "reason": "It is highly falsifiable and compatible, but generic stopping and repair are occupied. Its surviving contribution is a decision slice of C1 under evaluator noise, not a separate broad thesis."
     },
     {
       "rank": 3,
       "bundle_id": "INTERACTIVE_FULL_DUPLEX_OBJECTIVES",
       "stage1c_card_id": "C3_INTERACTIVE_OUTCOME_CONTROL",
-      "disposition": "RETAIN_AS_VALIDATION_ROUTE_NOT_PRIMARY_BRANCH",
+      "disposition": "VALIDATION_ROUTE_NOT_PRIMARY_BRANCH",
       "reason": "Speech-native interaction is valuable validation, but specialized duplex-model development is outside scope and the observed gap can be dominated by ASR, VAD, latency or base-model capability."
     }
   ],
@@ -449,6 +449,14 @@
     "h5_status": "WITHHOLD_NON_LOAD_BEARING",
     "scientific_effect": "No calibration, H5 or cross-modality claim is upgraded; the non-H5 three-card problem decision no longer waits on them."
   },
-  "dossier_state": "STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING",
-  "next_decision": "Request a separate owner Stage-2A reproduction authorization for C1_DECISION_CALIBRATED_REWARD; do not execute models, metrics, reproduction or prototypes under this closeout."
+  "portfolio_supersession": {
+    "effective_on": "2026-07-27",
+    "effective_spec": "wiki/survey/current/research-directions.md",
+    "c1_disposition": "SUPERSEDED_AS_PRIMARY_RETAINED_AS_CROSS_CUTTING_MEASUREMENT_COMPONENT",
+    "c2_disposition": "MERGED_INTO_RUNTIME_CAPABILITY_CONTROL",
+    "c3_disposition": "VALIDATION_ONLY_WHEN_CAPABILITY_ATTRIBUTION_IS_IDENTIFIABLE",
+    "surviving_evidence": "Paper facts, measurement contracts, reproduction anchors, Stage-1B v5, R1/R2R1 disposition and H5 boundary remain evidence inputs; prior ranking and primary-problem synthesis do not."
+  },
+  "dossier_state": "PRIOR_SELECTION_EVIDENCE_SUPERSEDED_BY_CAPABILITY_PORTFOLIO",
+  "next_decision": "Prepare the exact Stage-2A R5+R6+R8 vertical-slice contract and request AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE; do not execute models, metrics, reproduction or prototypes under this direction finalization."
 }

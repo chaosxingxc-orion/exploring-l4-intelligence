@@ -119,9 +119,9 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
         rows = self.document["bundles"]
         self.assertEqual(BUNDLES, {row["bundle_id"] for row in rows})
         expected_status = {
-            "BUDGET_STOP_REPAIR": "RANK_2_FALLBACK",
-            "EVALUATOR_REWARD_RELIABILITY": "RANK_1_SELECTED_PRIMARY",
-            "INTERACTIVE_FULL_DUPLEX_OBJECTIVES": "RANK_3_VALIDATION_ONLY",
+            "BUDGET_STOP_REPAIR": "PRIOR_RANK_2_FALLBACK_SUPERSEDED",
+            "EVALUATOR_REWARD_RELIABILITY": "PRIOR_RANK_1_SELECTED_PRIMARY_SUPERSEDED",
+            "INTERACTIVE_FULL_DUPLEX_OBJECTIVES": "PRIOR_RANK_3_VALIDATION_ONLY_SUPERSEDED",
         }
         for row in rows:
             self.assertEqual(expected_status[row["bundle_id"]], row["selection_status"])
@@ -137,7 +137,7 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
             "EVALUATOR_REWARD_RELIABILITY", ranking[0]["bundle_id"]
         )
 
-    def test_selected_problem_is_falsifiable_and_reproduction_first(self) -> None:
+    def test_prior_selected_problem_is_retained_as_component_evidence(self) -> None:
         selected = self.document["selected_problem"]
         self.assertEqual("C1_DECISION_CALIBRATED_REWARD", selected["card_id"])
         self.assertEqual(4, len(selected["research_questions"]))
@@ -148,6 +148,15 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
             "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
             self.document["legacy_closeout"]["r2r1_status"],
         )
+        supersession = self.document["portfolio_supersession"]
+        self.assertEqual(
+            "SUPERSEDED_AS_PRIMARY_RETAINED_AS_CROSS_CUTTING_MEASUREMENT_COMPONENT",
+            supersession["c1_disposition"],
+        )
+        self.assertEqual(
+            "wiki/survey/current/research-directions.md",
+            supersession["effective_spec"],
+        )
 
     def test_human_table_and_hot_status_expose_the_same_boundary(self) -> None:
         table = TABLE.read_text(encoding="utf-8")
@@ -155,6 +164,8 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
         for token in (*BUNDLES, *RUBRIC_HEADINGS):
             self.assertIn(token, table)
         self.assertIn("C1_DECISION_CALIBRATED_REWARD", table)
+        self.assertIn("不再是主研究问题", table)
+        self.assertIn("research-directions.md", table)
         self.assertIn("Stage‑1C complete", status)
         self.assertIn("Stage‑2A execution", status)
 
@@ -166,6 +177,10 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
         )
         self.assertIn(
             "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
+            source,
+        )
+        self.assertIn(
+            "wiki/survey/current/research-directions.md",
             source,
         )
 

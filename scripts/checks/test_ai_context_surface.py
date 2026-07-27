@@ -1677,30 +1677,29 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 25), refresh_date)
+        self.assertEqual(date(2026, 7, 27), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage‑1C problem selection is complete",
-            "STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING",
+            "Stage‑1C capability portfolio is complete",
+            "STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING",
             "Stage‑1B v5",
             "320-work",
-            "C1_DECISION_CALIBRATED_REWARD",
-            "select / repair / stop / abstain",
+            "API-only",
+            "nine finalized directions",
+            "reliable capability lift",
+            "system-level in-context control",
             "H5 remains `WITHHOLD_NON_LOAD_BEARING`",
             "owner direction",
             "model/API execution",
             "wiki/survey/current/README.md",
-            "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
+            "wiki/survey/current/research-directions.md",
             "wiki/audit/system-first-stage1c-v2-calibration/INDEX.md",
             "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
             "focused implementation tests",
-            "AudioJudge",
-            "JudgeBoN",
-            "AudioGenie-Reasoner",
-            "OracleGap",
-            "VRR-Stop",
+            "Lean",
+            "MMAU-mini/MMAR",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
-            "AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION",
+            "AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE",
             "Next action",
             "Supersession rule",
         )
@@ -1741,7 +1740,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 25), per_work_date)
+        self.assertEqual(date(2026, 7, 27), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

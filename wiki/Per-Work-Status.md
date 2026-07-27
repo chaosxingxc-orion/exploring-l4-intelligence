@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-25. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-07-27. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
 
@@ -10,20 +10,26 @@
 - **Repo:** `projects/speech-mllm-training-free-rl`
 - **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
   reward-guided control-plane program.
-- **Current state:** Stage‑1C problem selection is complete. `C1_DECISION_CALIBRATED_REWARD` is the
-  primary problem: determine when imperfect external evaluator signals safely improve
-  `select / repair / stop / abstain` decisions for an API-only frozen speech/omni core. No technical
-  mechanism or novelty claim is frozen. The fixed Stage‑1B v5 release remains
+- **Current state:** Stage‑1C has finalized a capability-first portfolio over multimodal knowledge,
+  memory, skills, agentic-system composition and agentic-system evolution. Nine directions are effective;
+  the primary object is reliable capability activation around an API-only frozen speech/omni core through
+  system-level in-context control. `C1_DECISION_CALIBRATED_REWARD` is retained only as a shared
+  measurement/reliability component. The fixed Stage‑1B v5 release remains
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is unchanged evidence.
+  R1's academic problem is owner-approved as a two-stage study of demonstration + query-view menu
+  ceiling/mechanism followed, only if warranted, by training-free adaptive context construction. Six
+  nearest-prior fulltexts are separately hash-registered; R2 is next for direction-definition refinement.
 - **Legacy disposition:** R1 agreement remains `FAIL` with no adjudication. R2R1 passed 22 focused
   implementation tests but was never independently accepted or distributed; it is
   `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not a valid calibration release. H5 remains
   withheld and non-load-bearing, so cross-modality conclusions are prohibited without blocking the
   selected speech/API-only problem.
-- **Next authorized work:** planning and exact-contract preparation only. Freeze one core, task/split,
-  candidate supply, terminal truth, evaluator set, baselines, harm/cost measures, reproduction revisions
-  and abort rules, then request `AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION`. Model/API
-  calls, metrics, reproduction, prototypes, technical novelty, push and wiki publication remain closed.
+- **Next authorized work:** R2 academic problem refinement plus planning and exact-contract preparation only
+  for the R5+R6+R8 vertical slice:
+  freeze one core/service, MMAU-mini/MMAR revisions/splits, action menu, runtime reward, gold fence,
+  equal-cost baselines, reliability/cost measures, SESOI and abort rules; then request
+  `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`. Model/API calls, metrics, dataset/model acquisition,
+  reproduction, prototypes, technical novelty, push and wiki publication remain closed.
 
 ## W2
 

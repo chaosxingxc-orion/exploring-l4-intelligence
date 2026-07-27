@@ -30,3 +30,10 @@ the CURRENT appendix/priority union and the unsigned 14-work capability delta. I
 the frozen registry views and is not a Stage-1C input before independent
 `SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. Regenerate and verify this projection only with
 `scripts/survey/sf_stage1b_targeted_anchor_scan.py`; do not fold it into a frozen v5 shard.
+
+`stage1c-r1-context-icl-2026-07-27-papers.jsonl` is a separate six-record, fulltext-hash-bound
+nearest-prior shard created for the owner-approved R1 academic problem definition. It registers
+Audio Flamingo, MiMo-Audio, MetaSICL, TICL, TICL+ and Bayesian Example Selection as occupancy,
+baseline or carrier evidence. It is not part of the frozen Stage-1B views and is not a technical
+novelty verdict. Its PDF/e-print hashes resolve through the shared fulltext ledger; scoped synthesis
+lives in `wiki/survey/workbench/stage1c-portfolio/2026-07-27-r1-context-icl-evidence-supplement.md`.

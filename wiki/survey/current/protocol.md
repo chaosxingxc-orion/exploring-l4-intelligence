@@ -10,11 +10,10 @@ supersedes_effective_chain: protocol-v1 plus amendments 1 and 3-15
 audit_index: wiki/audit/system-first-stage1a/INDEX.md
 ---
 
-> **Stage closeout note (2026-07-25):** Stage‑1B is closed and this protocol is retained as the
+> **Stage closeout note (2026-07-27):** Stage‑1B is closed and this protocol is retained as the
 > evidence/provenance basis for its fixed v5 release. Its historical execution authority does not
-> describe the current gate. Stage‑1C selected `C1_DECISION_CALIBRATED_REWARD`; current authority and
-> the Stage‑2A boundary are self-contained in `status.md` and
-> `tables/stage1c-common-rubric-comparison.md`.
+> describe the current gate. The Stage‑1C capability portfolio and Stage‑2A boundary are self-contained
+> in `status.md` and `research-directions.md`; the prior C1 ranking is component evidence only.
 
 # System-first systematic-mapping protocol v3
 

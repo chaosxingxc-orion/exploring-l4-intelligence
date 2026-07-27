@@ -7,6 +7,7 @@ import TfrlProofs.MBR
 import TfrlProofs.Regret
 import TfrlProofs.OptSpace
 import TfrlProofs.Realization
+import TfrlProofs.RuntimeReliability
 import TfrlProofs.BlindSpot
 import TfrlProofs.Reachability
 import TfrlProofs.InfoBoundary

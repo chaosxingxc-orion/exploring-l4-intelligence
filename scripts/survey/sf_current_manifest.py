@@ -243,6 +243,12 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
+        "current_research_directions",
+        "wiki/survey/current/research-directions.md",
+        "supersede-in-place",
+        "targeted",
+    ),
+    FileSpec(
         "current_opening_table",
         "wiki/survey/current/tables/opening-guarantees.md",
         "generated",
@@ -267,13 +273,13 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
-        "stage1c_common_rubric_data",
+        "prior_stage1c_problem_selection_data",
         "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
         "supersede-in-place",
         "targeted",
     ),
     FileSpec(
-        "stage1c_common_rubric_table",
+        "prior_stage1c_problem_selection_table",
         "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
         "supersede-in-place",
         "targeted",
@@ -363,6 +369,7 @@ _BASE_PROSE_SCAN = (
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
+    "wiki/survey/current/research-directions.md",
     "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",

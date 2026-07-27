@@ -1,14 +1,25 @@
 ---
 artifact_id: "SF-STAGE1C-PROBLEM-SELECTION-CLOSEOUT-V2"
 owner_stage: "STAGE_1C"
-ordering: "RANKED"
-selection_status: "C1_DECISION_CALIBRATED_REWARD_SELECTED"
+ordering: "PRIOR_RANKING_RETAINED_AS_COMPONENT_EVIDENCE"
+selection_status: "SUPERSEDED_BY_CAPABILITY_PORTFOLIO"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
-# Stage-1C problem selection closeout
+# Stage-1C C1/C2/C3 组件证据（原问题选择已被五维组合取代）
 
-## 结论
+## CURRENT supersession
+
+2026-07-27 owner 定稿后，`C1_DECISION_CALIBRATED_REWARD` **不再是主研究问题**。当前唯一有效方向
+合同是 [`../research-directions.md`](../research-directions.md)：研究对象是 API-only frozen core 外部的
+可靠能力激活系统，C1 降为所有方向共享的 evaluator/reward measurement component；C2 的
+stop/repair/rollback 并入运行时能力控制；C3 只在能隔离 task capability 归因时作为验证载体。
+
+下文保留 2026-07-25 的 facts、三张卡和 reproduction anchors，供追溯组件证据。其“rank 1 / selected /
+primary / handoff”以及“先测 headroom 再决定是否控制”的综合结论均已撤销，不具 CURRENT 决策效力。
+其中论文事实仍按原 scope 使用，Stage-1B v5、R1/R2R1 disposition 与 H5 不变。
+
+## 先前结论（已 superseded，仅作组件出处）
 
 Stage‑1C 已完成问题层选择。主问题是：
 
@@ -16,8 +27,8 @@ Stage‑1C 已完成问题层选择。主问题是：
 > 什么条件足以让它安全地改善 `select / repair / stop / abstain` 决策；什么条件下 controller 必须保留
 > incumbent 或停止，因为 oracle headroom、候选内 signal fidelity 或 decision margin 不足？
 
-正式标识为 `C1_DECISION_CALIBRATED_REWARD`，状态为
-`STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING`。
+当时将其标识为 `C1_DECISION_CALIBRATED_REWARD`；该问题选择 endpoint 已被 CURRENT
+capability portfolio 取代。
 
 这不是“再做一个 audio judge”，也不是技术方案或 novelty verdict。研究对象是 evaluator signal 到真实
 decision utility 的因果接口；音频 evaluator、修复/停止策略与 voice-agent benchmark 分别是信号、决策
@@ -62,7 +73,7 @@ decision utility 的因果接口；音频 evaluator、修复/停止策略与 voi
 - [JudgeBoN](https://arxiv.org/abs/2603.12520) 直接证明 global correlation 不能替代 within-prompt
   ranking、tie-aware top-1 与 recovery；这是 C1 的 decision-utility 祖先。
 - [Oracle Gap and Signal Fidelity](https://arxiv.org/abs/2607.17531) 将 fixed-pool gain 分解为 recoverable
-  mass、coverage、conditional selection quality 与 harm，支持“先测空间，再测信号，最后决定是否控制”。
+  mass、coverage、conditional selection quality 与 harm；该分解只解释已执行候选池，不对新 system context 构成开门门槛。
 - [VRR-Stop](https://arxiv.org/abs/2607.17641) 表明 repair 会损坏正确 incumbent，且 stop 的可靠性由
   verifier discrimination 与 decision margin 共同决定；低可识别区应使用 conservative fallback。
 - [AudioGenie-Reasoner](https://arxiv.org/abs/2509.16971)、
@@ -85,11 +96,11 @@ reproduction feasibility → system-first explanatory value`。
 
 | rank | bundle | Stage‑1C card | disposition | 核心理由 |
 |---:|---|---|---|---|
-| 1 | `EVALUATOR_REWARD_RELIABILITY` | `C1_DECISION_CALIBRATED_REWARD` | `SELECT_PRIMARY_PROBLEM` | evaluator 是 reward-guided control 的承重信号层；已有测量很多，但 speech/omni 下的 causal decision utility 仍未闭合 |
+| 1 | `EVALUATOR_REWARD_RELIABILITY` | `C1_DECISION_CALIBRATED_REWARD` | `PRIOR_SELECTED_NOW_SHARED_COMPONENT` | evaluator 是 reward-guided control 的承重信号层；该事实保留，但不再代表项目主问题 |
 | 2 | `BUDGET_STOP_REPAIR` | `C2_NOISY_STOP_REPAIR` | `FALLBACK_AND_C1_POLICY_SLICE` | 可证伪且兼容，但 generic stop/repair 已被占据；幸存问题是 noisy evaluator 下的一类 decision right |
 | 3 | `INTERACTIVE_FULL_DUPLEX_OBJECTIVES` | `C3_INTERACTIVE_OUTCOME_CONTROL` | `VALIDATION_ONLY` | speech-native 价值高，但容易被 ASR/VAD/latency/base capability 混淆，且 specialized duplex branch 已排除 |
 
-### Card 1 — `C1_DECISION_CALIBRATED_REWARD`（已选）
+### Card 1 — `C1_DECISION_CALIBRATED_REWARD`（先前已选，现为共享组件）
 
 - **Problem distinctness:** 不问 evaluator 是否与人“总体相关”，而问它能否在同一 instance 的候选、修复
   或 stop 决策中实现净收益。
@@ -199,5 +210,5 @@ reproduction branch。它们可在 Stage‑2A 后期作为 adversarial/validatio
 - 上表 reproduction items 的 exact revisions；
 - abort rules：无 headroom、signal 不可识别、harm 超阈或 asset/license 不闭合。
 
-建议请求 token：`AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION`。本 Stage‑1C closeout
-不自授该权限。
+先前的 C1-only 授权建议已撤回。当前建议 token 为
+`AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`；方向定稿不自授该权限。

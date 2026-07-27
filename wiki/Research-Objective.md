@@ -1,87 +1,84 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-25 — Stage-1C problem selected; Stage-2A reproduction authorization pending"
+last_refresh: "2026-07-27 — R1 academic problem definition approved and evidence-registered; R2 refinement next"
 ---
 
 # Research Objective & Current State
 
-> Default reading order: client guide → this page → `wiki/Project-Thesis.md`. Load campaign history only through a targeted index.
+> Default reading order: client guide → this page → `wiki/Project-Thesis.md`. Load campaign detail only through the CURRENT router.
 
 ## Current gate and authority
 
-Stage‑1C problem selection is complete. Endpoint:
-`STAGE1C_COMPLETE_PROBLEM_SELECTED_STAGE2A_REPRODUCTION_AUTHORIZATION_PENDING`.
+Stage‑1C capability portfolio is complete. Endpoint:
+`STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING`.
 
-The 2026-07-25 owner direction prioritizes paper research over nonessential checker hardening. It
-authorizes literature research, ranking, problem selection and a frozen reproduction-first handoff;
-it does not authorize model/API execution, metrics, reproduction, prototypes, a technical novelty
-verdict, Stage‑2A execution, push or wiki publication.
+The 2026-07-27 owner direction finalizes five dimensions and approves R1's academic rewrite, nearest-prior
+fulltext registration and document/formal checks. The authorization excludes model/API execution, datasets, metrics, reproduction,
+prototypes, novelty verdicts, Stage‑2A execution, push and wiki publication remain unauthorized.
 
-The fixed Stage‑1B v5 release remains
-`38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is evidence input, not a
-new denominator or novelty proof. Specialized Duplex-model development remains outside the research,
-reproduction and branch route. H5 remains `WITHHOLD_NON_LOAD_BEARING`, so no cross-modality conclusion
-is permitted.
+## Final research object
 
-## Selected problem
+For an API-only frozen speech/omni core, build an external reward-guided control plane that uses
+system-level in-context control to construct, select and update knowledge, memory, skills and evidence
+state, so that task capability improves reliably across runs and conditions without changing model
+parameters or internals.
 
-Primary card: `C1_DECISION_CALIBRATED_REWARD` — **decision-calibrated reward-guided control under
-unreliable speech/omni evaluators**.
+There are nine finalized directions: multi-source context ceiling and adaptive construction; audio-native external
+knowledge acquisition; acoustically keyed persistent memory; runtime skill lifecycle; incumbent-preserving
+evidence-state architecture; within-instance reward-guided context/trajectory control; cross-instance
+experience-driven evolution; condition-adaptive reliable capability lift; and five-dimension integration.
 
-For an API-only frozen speech/omni core, determine when an external, modality-aware but imperfect
-evaluator has enough within-instance signal to safely improve `select / repair / stop / abstain` over
-the frozen baseline, and when low oracle headroom, weak signal fidelity or an unidentifiable decision
-margin requires keeping the incumbent.
+The prior `C1_DECISION_CALIBRATED_REWARD` primary selection is superseded. Evaluator decision utility,
+headroom, stop/repair/abstain and reward-hacking tests remain shared measurement, control and stress-test
+components; they are not the program's primary research object. Fixed-pool headroom bounds only that
+executed pool and is not a gate on new contexts created by the system.
 
-Ranking:
+R1 first measures the menu-limited empirical ceiling, demonstration/query-view interaction and sample
+heterogeneity across ASR and audio understanding/reasoning. Only a nonzero best-fixed-to-oracle opportunity
+opens a training-free constructor study. Generic audio few-shot ICL/demo retrieval are occupied; cost is
+recorded but is not an R1 objective or gate.
 
-1. evaluator/reward reliability → selected primary problem;
-2. noisy budget/stop/repair → fallback and one policy slice of the primary problem;
-3. interactive/full-duplex objectives → speech-native validation route, not a specialized-model branch.
+## Formal and evidence boundary
 
-The decision is problem-level only. It makes no “first-ever” or technical-innovation claim.
+Lean is used to audit explicit assumptions and operator-level implications, not to prove empirical
+effectiveness. The old finite-pool read-out bound cannot be generalized to an all-contexts ICL limit.
+The new runtime-reliability lemma proves only that, if reward error is uniformly bounded by `ε`, an
+estimated selected-over-incumbent margin of at least `2ε` implies true non-regression; the error-bound
+hypothesis still requires empirical calibration and stress testing. Implementation-to-theorem conformance
+remains open.
 
-## Evidence basis
+Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and its 320-work union remain fixed. The portfolio adds
+35 speech/omni fulltexts, 73 cross-domain donors and T1/T2/T3; R1 separately registers six hash-bound ICL/
+example-selection neighbors. Donor effects do not cross modality boundaries.
 
-- Speech evaluator evidence is rich but role-separated: AudioJudge, TRACE, SpeakerSleuth,
-  ParaPairAudioBench and the LALM voice-agent reliability study expose pairwise/pointwise differences,
-  decomposition, text-over-acoustics bias, tie/abstain failure, model-swap calibration drift and rubric
-  validity limits. Instruments are not controllers until their outputs change an action.
-- JudgeBoN shows aggregate correlation can coexist with weak within-pool decision utility. OracleGap
-  separates recoverable mass, signal coverage/fidelity, conditional selection and harm. VRR-Stop shows
-  repair can damage correct incumbents and that verifier discrimination plus decision margin governs
-  safe stopping. These are transfer comparators, not speech effect claims.
-- AudioGenie-Reasoner, AudioToolAgent and MUGEN already occupy broad training-free audio-agent,
-  tool-routing and fixed-K consensus surfaces. The surviving gap is therefore signal-to-decision
-  validity, not the existence of an audio agent, judge, selector or repair loop.
-- VoiceAgentBench, tau-Voice, FDB-v3 and IHBench separate task/tool success from latency,
-  interruption and recovery, but those gaps may be caused by ASR, VAD, serving or base capability.
+## Stage-2A next action
 
-## Legacy closeout
+The first vertical slice is R5 + R6 + R8: an incumbent-preserving evidence-state controller over one
+frozen API core, with actions `keep / branch-context / acquire / repair / stop`, black-box runtime signals,
+equal-cost baselines and robust task-utility reporting. MMAU-mini/MMAR are the proposed carriers, but their
+CURRENT local-status discrepancy must be resolved before any run.
 
-R1 remains immutable with overall agreement `FAIL`, five of 13 paper paths passing, nine object types
-with zero shared exact keys and no adjudication. R2R1 repaired the bounded contract defects and 22
-focused implementation tests pass, but no R2R1 coder packet was distributed and no independent ACCEPT
-was obtained. The calibration branch is therefore retired as
-`RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; this is debt closure, not calibration success.
+Next action: bind the exact core/service revision, dataset revision/split/hash, prompt/decoding, action
+menu, runtime reward, gold fence, baselines, budget, SESOI, reliability thresholds and abort rules; then
+request `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`.
 
-## Stage-2A handoff and next action
+Immediate documentation action: define R2 with the same problem/occupancy/dataset/carrier/falsification
+standard; this does not pre-authorize Stage‑2A.
 
-Frozen reproduction-first list: AudioJudge protocol; JudgeBoN decision-utility audit;
-AudioGenie-Reasoner as nearest direct speech-agent prior; OracleGap and VRR-Stop as transfer
-comparators; MMAU-mini/MMAR as local validation carriers; TRACE as a conditional dimension-first
-comparator. None has been executed by this closeout.
+## Legacy and routing
 
-Next action: request `AUTHORIZE_STAGE2A_DECISION_CALIBRATED_REWARD_REPRODUCTION` only after binding one
-frozen core, task/split, candidate supply, terminal truth, evaluator set, baselines, harm/cost measures,
-exact revisions and abort rules.
+R1 agreement remains `FAIL`. R2R1 passed 22 focused implementation tests but was never distributed or
+independently accepted and remains `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; no calibration
+claim follows. H5 remains `WITHHOLD_NON_LOAD_BEARING`, so cross-modality effectiveness conclusions remain
+prohibited. Specialized Duplex-model development remains outside the primary branch.
 
-Current router: `wiki/survey/current/README.md`; selected dossier:
-`wiki/survey/current/tables/stage1c-common-rubric-comparison.md`; retired calibration audit:
+Current router: `wiki/survey/current/README.md`; effective direction contract:
+`wiki/survey/current/research-directions.md`; portfolio evidence:
+`wiki/survey/workbench/stage1c-portfolio/`; prior calibration audit:
 `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md`.
 
 ## Supersession rule
 
-Supersede this HOT page in place when Stage‑2A authority, reproduction identity, evidence depth or
-problem selection changes. Preserve historical transactions in cold audit.
+Supersede this HOT page in place when Stage‑2A authority, the five-dimension scope, API-only boundary,
+reliability objective, formal assumptions or direction priority changes. Preserve transactions in cold audit.

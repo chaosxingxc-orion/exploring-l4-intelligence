@@ -433,6 +433,7 @@ class CurrentManifestContractTests(unittest.TestCase):
                 "wiki/survey/current/README.md",
                 "wiki/survey/current/protocol.md",
                 "wiki/survey/current/status.md",
+                "wiki/survey/current/research-directions.md",
                 "wiki/survey/current/stage1b-transition-reference-appendix.md",
                 "wiki/survey/current/tables/stage1b-mapping-release.md",
                 "wiki/survey/current/tables/stage1c-eligible-inputs.md",
@@ -1077,9 +1078,9 @@ class RouterContentContractTests(unittest.TestCase):
         self.assertLessEqual(len(raw), 4096)
         for required in (
             "Stage‑1C complete",
-            "C1_DECISION_CALIBRATED_REWARD",
+            "capability-first portfolio",
             "status.md",
-            "stage1c-common-rubric-comparison.md",
+            "research-directions.md",
             "stage1c-eligible-inputs.md",
             "protocol.md",
             "manifest.json",
@@ -1100,7 +1101,9 @@ class RouterContentContractTests(unittest.TestCase):
         self.assertLessEqual(len(raw), 4096)
         for required in (
             "Stage‑1C complete",
-            "C1_DECISION_CALIBRATED_REWARD",
+            "nine finalized directions",
+            "API-only",
+            "reliable capability lift",
             "no model/API execution, metric run, reproduction or prototype",
             "R2R1 `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`",
             "H5 remains withheld and non-load-bearing",

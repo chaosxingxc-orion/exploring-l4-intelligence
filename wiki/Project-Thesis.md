@@ -26,6 +26,16 @@ ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is u
 - **Black-box contract**: core methods may not require weights, gradients, hidden states, attention,
   or guaranteed logprobs. The local llama.cpp deployment is a low-cost verification environment —
   gray-box diagnostics only, never load-bearing.
+- **System-level ICL posture**: knowledge supply, external memory, skills, tools, evidence state and
+  multi-call orchestration construct and update the context seen by the frozen API. A fixed-pool oracle
+  bounds only read-out from that pool; it is not a gate on whether a new system context can improve the
+  candidate distribution.
+- **Reliability objective**: optimize reliably realized task capability, including variance, tail
+  regression and condition shift. Evaluator calibration, headroom, abstention and reward-hacking checks
+  are component diagnostics or constraints, not the program's primary research object.
+- **Formal-analysis discipline**: Lean checks whether explicit assumptions imply a mathematical claim and
+  whether the claim matches the intended operator. It does not establish that empirical assumptions hold
+  for a real model/evaluator and does not replace capability experiments.
 - **Measurement**: concrete metrics bind to task × dataset and are defined/frozen per study
   protocol — **the identity level does not legislate a metric** (owner 2026-07-15). Where
   measurable, report against the frozen model's own ceiling (headroom accounting); the metric is

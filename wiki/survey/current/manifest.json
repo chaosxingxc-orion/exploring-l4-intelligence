@@ -137,14 +137,14 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "0f239f52ddaf2929a468dfa9c622470b3c1b923a3d071ba6fbdc0b38fcc8378e",
+      "sha256": "0c619dddf8d95661549a024ea00e2773c14b96c593eeff8e81e4fa02cd3a1a42",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "dd3ba1155cbb85ea685416541af3229a197ebd03aaaf2d0ea764103a46867518",
+      "sha256": "98589dbfed7baca97e73e8b4f1386d8835531e75bc2197a7596e1ecdbfbf77ad",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -261,16 +261,23 @@
       "load_policy": "targeted"
     },
     {
-      "role": "stage1c_common_rubric_data",
+      "role": "prior_stage1c_problem_selection_data",
       "path": "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
-      "sha256": "d09b7bcecce98c3398b36fe44512db10d89d69e454946da505f00b4f300be913",
+      "sha256": "8b9bb283f0317666273f7d831fad1bb5dda31476d64b2ac307fc2e9da9fa790b",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
     {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
-      "sha256": "f67c7aaaad0210652a4672b8c1ec7c8c2e2da0ff2e32a411994e73364b0ece7b",
+      "sha256": "55e26f999e4273cdd7d1a99846db35d558e0cb626f17d84ac8f6792fe1acb91d",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "current_research_directions",
+      "path": "wiki/survey/current/research-directions.md",
+      "sha256": "f6da17594579e507e0eb892861db26f85e2d3984cc5d7a1792f17687c647ca8c",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -284,7 +291,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "32aad2b4eceee01cd3c72128d2b6cbb8c6e7d515d8a13ce4deafc6eada33d8c9",
+      "sha256": "41ae7d3084c438b3a3432d5268b11e457062fc4bd5ffdcd277804f8405224f3c",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -303,9 +310,9 @@
       "load_policy": "targeted"
     },
     {
-      "role": "stage1c_common_rubric_table",
+      "role": "prior_stage1c_problem_selection_table",
       "path": "wiki/survey/current/tables/stage1c-common-rubric-comparison.md",
-      "sha256": "ae9a2919ca33c4bb90f7401bab1cb4922d531e2eef95e9f1bdffaaa924d270d7",
+      "sha256": "9a236a33e4ec9350fb29ae1458ad2191b0627294c4a74f7c3ec5dca56deac17e",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -344,6 +351,7 @@
     "wiki/survey/current/README.md",
     "wiki/survey/current/protocol.md",
     "wiki/survey/current/status.md",
+    "wiki/survey/current/research-directions.md",
     "wiki/survey/current/stage1b-transition-reference-appendix.md",
     "wiki/survey/current/tables/stage1b-mapping-release.md",
     "wiki/survey/current/tables/stage1c-eligible-inputs.md",

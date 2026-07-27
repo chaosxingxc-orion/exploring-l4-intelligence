@@ -4,41 +4,20 @@ set_option linter.style.header false
 set_option linter.style.longLine false
 
 /-!
-# T8 — The information boundary: read-out levers are ceilinged by their own samples; only a
-new-information lever can cross the knowledge gap
+# T8 — The fixed-pool information boundary
 
-This file formalizes the standing rule the owner's 2026-07-05 critique exposed (`[[Information-Boundary
--Guard]]`), and the read-out / new-info division of levers.
+This file proves a narrow but useful fact: a selector that must return one of a fixed set of sampled
+candidates cannot be correct unless that pool contains a correct candidate. Best-of-N, majority and MBR
+belong to this class only while the candidate pool is held fixed.
 
-**Read-out lever** — any selector that returns one of the model's own N sampled candidates:
-best-of-N, self-consistency majority, MBR, and the E10/E10b two-system verifier all qualify — their output
-is always some sample they drew. **New-info lever** — one that changes the *sampling distribution* by
-conditioning on external evidence `e` (retrieval / memory / a tool result): its candidate set is drawn from
-`M(·|audio, e)`, whose support can contain answers absent from `M(·|audio)`.
+The result is deliberately not a theorem about system-level in-context control. Any action that constructs
+a new context and generates again leaves the fixed-pool class, whether the new context carries external
+facts or reorganizes information already available to the frozen model. Consequently a finite-pool oracle
+gap cannot establish an under-all-contexts capability gap and cannot be used to rule out ICL gains.
 
-The results:
-- `readout_correct_imp_sample_correct` / `readout_fails_on_gap` — the deterministic wall: a read-out
-  selector is correct only if some sample is correct; on a **knowledge-gap** item (no sample correct) it
-  necessarily fails.
-- `readout_acc_le_oracle` — aggregate ceiling: over any item set, read-out correct-count `≤` oracle@N
-  hit-count. This is why E10/E10b (read-out) cannot exceed the oracle ceiling, and why the T5 "internal
-  -realization gap" is the *most* a read-out lever could realize.
-- `readout_error_ge_gap` — the **irreducible floor**: read-out error-count `≥` the knowledge-gap count
-  (items with no correct sample). The gap is a hard error floor for the *entire* read-out class — no
-  amount of cleverer selection removes it. (T5: this floor is 42.7% on vocalbench-zh knowledge-QA.)
-- `newinfo_can_cross_gap` — the escape: there exist configurations where every base sample misses yet an
-  info-augmented sampler hits. So the oracle ceiling is **class-dependent, not absolute**; crossing the
-  knowledge gap *requires* leaving the read-out class and adding new information (the Q1b path: an external
-  multimodal memory). This is the theorem behind "ICL/read-out insufficient ⇒ a new-info system is needed."
-
-**Dual track (code ⟷ theorem).** `readoutSelector` ⟷ the deployable label-free selectors we ran (E10
-majority / two-system verifier). `oracleHit` ⟷ P2's oracle@N indicator. The knowledge-gap floor ⟷ P2's
-`1 − oracle@N`. The new-info sampler `s'` ⟷ the memory-augmented conditioning `M(·|audio, retrieved-text)`
-(T6). Convergence half: with a nonzero gap fraction the read-out averaged regret is bounded *below* by that
-fraction (it cannot tend to 0), whereas the info-augmented process that covers the gap drives regret to 0 —
-this is exactly `TfrlProofs.BlindSpot.avg_regret_tendsto_zero` applied with `frac =` the gap fraction. So
-the UNCONSTRAINED (read-out-only) process provably fails to converge below the gap; the CONSTRAINED (new
--info) one converges.
+`newinfo_can_cross_gap` is a framing-only witness that a different sampler can hit when the original pool
+misses. It identifies no real retrieval, memory or tool mechanism and does not prove external information
+is the only way to alter reachability.
 -/
 
 namespace TfrlProofs.InfoBoundary
@@ -101,9 +80,8 @@ theorem readout_error_ge_gap
 
 /-- **The new-information escape.** There is a configuration where every base sample misses the target
 (`correct := (· = true)`) yet an info-augmented sampler hits. Hence the oracle ceiling is *class
--dependent*: a lever that changes the sampling distribution by conditioning on new information can cross a
-gap that is impassable for the entire read-out class. This is the formal content of "read-out/ICL
-insufficient ⇒ a new-info (memory) system is required" (Q1b).
+-dependent*: a lever that changes the sampling distribution can cross a gap that is impassable for that
+fixed read-out pool. No claim about all possible contexts or about ICL follows.
 
 ⚠ **FRAMING-ONLY (2026-07-07 WS-E re-grade).** The witness below is a trivial `∃` over `Fin 1 → Bool`
 (const-`false` vs const-`true`); it models NO retrieval/injection/memory mechanism. It proves only that

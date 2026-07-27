@@ -5,35 +5,19 @@ set_option linter.style.header false
 set_option linter.style.longLine false
 
 /-!
-# Agentic-level: a single-model USAGE PATTERN can't reach the under-all-contexts gap; only a new-info ELEMENT can
+# Agentic-level conditional bound under an explicit all-contexts gap
 
-This lifts the read-out/new-info theorem (`TfrlProofs.InfoBoundary`) to the **agent-system** level, giving
-the 2026-07-06 elements-vs-usage framework its machine-checked spine (D0
-`[[2026-07-06-omni-agent-elements-vs-usage-framework]]`).
+`single_model_gap_unreachable` says that a system output is wrong if it is produced by the frozen model
+under some context and the answer is wrong under every possible context. This is valid but conditional:
+the theorem does not establish that the all-contexts premise holds for a real benchmark item.
 
-**Modelling.** A **usage pattern over one frozen model** — a role assignment, a "critic/verifier" prompt, a
-multi-agent debate of the *same* weights, an orchestration/routing loop — ultimately emits an answer that
-the frozen model `M` can itself produce **under some context** `ctx` (the role/system-prompt/turn-history).
-Roles and prompts only *vary the context*; they add no information the model could not already emit under
-*some* context. Formally: the system's answer satisfies `∃ ctx, M_can_output input ctx answer`.
+The earlier commentary equating a finite-sample oracle miss with an all-contexts gap is withdrawn. A
+finite pool covers only the contexts and samples actually executed. System-level in-context control may
+reach an answer available under another context, so this module cannot support the claim that agentic
+leverage must come only from external new information.
 
-The load-bearing quantity is then the **under-all-contexts knowledge gap**: an item where `M` cannot emit a
-correct answer under **any** context. On such an item every single-model usage pattern necessarily fails —
-because its answer is an `M`-output under *some* context, and none of those is correct
-(`single_model_gap_unreachable`). This is the exact reason the E10/E10b two-system verifier (same weights,
-critic prompt) never beats plain sampling: it is a usage pattern, and the ∀-context quantifier is what
-prompt/role engineering cannot escape.
-
-A **new-info element** (a tool that computes/fetches new facts, external knowledge, a memory holding
-external content, or a genuinely complementary model) can emit an answer **not** of the form `M(input,·)`,
-so it can be correct where the under-all-contexts gap holds (`external_element_can_escape`). Hence the
-framework thesis: *for a frozen model, agentic leverage can only come from a new-info element, not a usage
-pattern over the same model.*
-
-**Dual track.** `M_can_output` ⟷ the frozen omni's context-conditioned generation; the ∀-context gap ⟷ the
-capability/knowledge gap of T5 (`1 − oracle@N`, ~43% on knowledge-QA), taken over *all* prompt/role
-contexts; `external_element_can_escape` ⟷ the audio-keyed memory / verifier-as-tool that supplies new info.
-The finite-pool corollary `single_model_system_fails_on_gap` bridges to `InfoBoundary.readout_fails_on_gap`.
+`external_element_can_escape` remains a framing-only logical witness. The finite-pool corollary
+`single_model_system_fails_on_gap` bridges only to `InfoBoundary.readout_fails_on_gap`.
 -/
 
 namespace TfrlProofs.AgenticElements
@@ -44,8 +28,8 @@ variable {Input Ctx α : Type*}
 
 /-- **The agentic wall.** A single-model usage pattern emits an answer the frozen model `M` can produce
 under *some* context (`hsys`). If the item is an **under-all-contexts knowledge gap** — `M` cannot emit a
-correct answer under *any* context (`hgap`) — then the system's answer is wrong. Roles, critic prompts,
-multi-agent debate of one model, orchestration: all only vary `ctx`, so none escapes the ∀-context gap. -/
+correct answer under *any* context (`hgap`) — then the system's answer is wrong. The theorem does not
+establish `hgap` and therefore does not rule out gains from prompts, memory state or orchestration. -/
 theorem single_model_gap_unreachable
     (M_can_output : Input → Ctx → α → Prop) (correct : α → Prop)
     (input : Input) (sys_out : α)
