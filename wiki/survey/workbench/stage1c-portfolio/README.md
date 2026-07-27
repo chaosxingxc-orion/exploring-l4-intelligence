@@ -1,11 +1,13 @@
 # Stage-1C portfolio campaign (workbench)
 
 This campaign originated in the 2026-07-26 five-dimension portfolio replan (knowledge / memory /
-skills / agentic system / TFRL). The 2026-07-27 owner consolidation is now effective: Stage-1C is
-complete, the capability-first nine-direction contract lives at
-`wiki/survey/current/research-directions.md`, and the owner-review proposal drafts live under
-`proposals/`. Direction-level research is fixed; innovation points, Stage-2A execution and novelty
-verdicts remain unfrozen/withheld. Historical execution plan:
+skills / agentic system / TFRL). The 2026-07-27 owner consolidation keeps the capability-first
+nine-direction contract at `wiki/survey/current/research-directions.md`; the same-day evening
+remediation ruling holds Stage‑1C at ~70%: R1's references/methods/locked baselines are under
+step-2 correction (ruling A: core = Qwen3-Omni-30B via the local llama.cpp lane; ruling B:
+general-ASR mainline), and the `proposals/` drafts (R2–R9) await step-3 refinement to the
+corrected-R1 standard. Direction-level research content is fixed; innovation points, Stage-2A
+execution and novelty verdicts remain unfrozen/withheld. Historical execution plan:
 `docs/superpowers/plans/2026-07-26-stage1c-portfolio-replan.md`.
 
 ## Files
@@ -42,7 +44,7 @@ compile+scout (`wf_b92b0fef-0f0`, 6 agents) → table review round 1 (`wf_246e76
 all applied `wf_1aab0211-536`) → donor readers (`wf_38a2b4f8-369`, 8×~9 papers) → Phase C closure
 lenses (`wf_40068490-968`, 3 lenses, 4 MAJOR + 16 MINOR + 13 NIT) → final patch (`wf_15ad6890-79f`,
 26/26 applied, rollup table appended, per-gap counts mechanically recomputed first-listed-primary:
-P9=23 P3=13 P1=11 P8=10 P10=7 stop/abstain=6 P5=2 of 73) → Fable personal re-read of all four MAJOR
+P9=23 P3=13 P1=11 P8=10 P10=7 stop/abstain=6 P5=2 P6=1 of 73【复核更正 2026-07-27 P0：原表遗漏 P6=1，各项合计仅 72】) → Fable personal re-read of all four MAJOR
 fix sites + final quantifier sweep (remaining "nobody" instances subset-scoped). Fetch-on-encounter
 closed: ledger 1094→1231 on 2026-07-26/27 (73 donor papers + 6 identifier-only benchmark/model
 papers + earlier batches), all SHA-256-registered before any entry was written; 14 name-only
@@ -54,10 +56,13 @@ facts and experiment menus. Effective contract: `wiki/survey/current/research-di
 portfolio is capability-first, contains nine directions, and treats C1/headroom/hacking/abstention as
 cross-cutting measurement/control rather than separate primary slots.
 
-R1 refinement status: **ACADEMIC PROBLEM DEFINITION OWNER-APPROVED 2026-07-27**. R1 now studies the
-menu-limited empirical ceiling, source interaction and sample heterogeneity of demonstration plus query-view
-context before any training-free adaptive constructor. The six-work supplement and registry shard supersede
-the old controller-first R1 framing; no model/dataset execution authority follows.
+R1 refinement status: **PROBLEM SHAPE OWNER-APPROVED 2026-07-27; EVIDENCE LAYER UNDER STEP-2
+CORRECTION (same-day evening ruling)**. R1 studies the menu-limited empirical ceiling, source
+interaction and sample heterogeneity of demonstration plus query-view context before any
+training-free adaptive constructor. The six-work supplement and registry shard supersede the old
+controller-first R1 framing; no model/dataset execution authority follows. Per rulings A/B the
+locked carriers (Qwen2.5-Omni-7B lane, MyST/RSR child-ASR mainline) and the TICL-lineage baseline
+anchors are being re-derived in step 2.
 
 1C-a status: CLOSED 2026-07-26. Adversarial internal review loop ran three rounds to convergence:
 round 1 (wf_5f1f5801, 5 hostile lenses) — 17 MAJOR + ~30 MINOR/NIT, all adjudicated valid; round 2

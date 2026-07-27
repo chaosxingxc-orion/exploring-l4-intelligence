@@ -36,7 +36,7 @@ R5 evidence-state architecture
 
 | ID | Proposal | 主维度 | 直接语音证据 | 跨域 donor 的角色 | 建议批次 |
 |---|---|---|---|---|---|
-| R1 | [多源上下文能力上界与自适应构造](R1-adaptive-evidence-supply.md) | D1 知识 | Audio Flamingo、MetaSICL、TICL/TICL+、ByCS、TwS、CoM | 视觉/文本 ICL 只作交互与异质性方法参照 | Stage-2B |
+| R1 | [多源上下文能力上界与自适应构造](R1-adaptive-evidence-supply.md) | D1 知识 | 六个 hash 登记邻居＝Audio Flamingo、MiMo-Audio、MetaSICL、TICL、TICL+、ByCS；TwS/CoM 为 supplement 级证据（D1／前期 registry）【复核更正 2026-07-27 P0】 | 视觉/文本 ICL 只作交互与异质性方法参照 | Stage-2B |
 | R2 | [音频原生外部知识获取与检索调度](R2-audio-native-knowledge-acquisition.md) | D1 知识 | AudioRAG、Omni-DeepSearch、VoiceAgentRAG | 借搜索停止、检索效用归因 | Stage-2D |
 | R3 | [声学条件键控的持久多模态记忆](R3-acoustic-keyed-memory.md) | D2 记忆 | AOP-Agent、audio uncertainty；直接跨实例语音工作薄 | 借 M2Note、MemRL、PhysMem、MemCollab 的 schema/门控 | Stage-2C |
 | R4 | [运行时多模态技能的信用、组合与生命周期](R4-runtime-skill-lifecycle.md) | D3 技能 | Speech-Copilot、Audio-Maestro、AuTAgent | 借 Trace2Skill、PANDO 的归纳/退役协议 | Stage-2B |
