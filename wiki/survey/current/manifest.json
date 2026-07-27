@@ -149,6 +149,34 @@
       "load_policy": "targeted"
     },
     {
+      "role": "current_bibliography",
+      "path": "wiki/survey/current/bibliography.md",
+      "sha256": "7f24ca1d9d96e6329d645861121f6a2900e5a9b97dae339f3d7e0b247100f510",
+      "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "core_prior_routing",
+      "path": "wiki/survey/current/core-prior-routing.md",
+      "sha256": "130468504dd1ad3f07e07e977adb20e8062b47b1a30c6d3750e329ab906d5587",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "absence_evidence_adjudication_v3",
+      "path": "wiki/survey/current/data/absence-evidence-adjudication-v3.json",
+      "sha256": "4f96dc55f4e7c8cd6eef4df700e0e73807f6d25748fc23479b24cf11bf8bf264",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "existing_corpus_disposition_v1",
+      "path": "wiki/survey/current/data/existing-corpus-disposition-v1.json",
+      "sha256": "553fed45e08b683a2b06e372d49d249599d614d920bea10da783b0e08df84c21",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
       "role": "identity_taxonomy_v6",
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
       "sha256": "976d46358263af6d0bd9f9d48a249aa23e39552aa66d5df501a1ce118cce8893",
@@ -160,6 +188,55 @@
       "path": "wiki/survey/current/data/known-item-coding-v7.json",
       "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6",
       "mutability": "generated",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "modality_specificity_calibration_v1",
+      "path": "wiki/survey/current/data/modality-specificity-calibration-v1.json",
+      "sha256": "603a2e0c6772cf6ae7353678635512783d2a348f3cd6b420e4aa31d36108e5fd",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "negative_evidence_semantic_corrections_v2",
+      "path": "wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json",
+      "sha256": "6b48a26212a0593abfc8e7b0a762826676ee6118f6313c47626f5f876bd349a3",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "official_metadata_receipts_v1",
+      "path": "wiki/survey/current/data/official-metadata-receipts-v1.jsonl",
+      "sha256": "8f6ebcd8df78aba70888b48e0b812050636739e8912a5cc5bef4cd3621a4a915",
+      "mutability": "controlled-append-only",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "pdf_extractor_environment_v1",
+      "path": "wiki/survey/current/data/pdf-extractor-environment-v1.json",
+      "sha256": "d982a22e2702cc670ac9a3b90d3dfeaab33e1cde2df3518dc98f1a55b9845a19",
+      "mutability": "frozen",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "proposal_source_manifest_v1",
+      "path": "wiki/survey/current/data/proposal-source-manifest-v1.json",
+      "sha256": "8a7cf512e6b6499626196ee240f031662bb5d26212d5d6c4971c257ffe913a5d",
+      "mutability": "frozen",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "reviewer_bibliography_selection_v1",
+      "path": "wiki/survey/current/data/reviewer-bibliography-selection-v1.json",
+      "sha256": "5487cdce8cdb91989ddfd9a91dcabd2c8cf563aaece44858810aa96f964b3ddd",
+      "mutability": "release-scoped-immutable",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "reviewer_known_items_v3",
+      "path": "wiki/survey/current/data/reviewer-known-items-v3.json",
+      "sha256": "602e549ad3f655d9f6fad65c155c0afef2b62388e0310427750def269ba96176",
+      "mutability": "release-scoped-immutable",
       "load_policy": "targeted"
     },
     {
@@ -265,6 +342,20 @@
       "path": "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json",
       "sha256": "8b9bb283f0317666273f7d831fad1bb5dda31476d64b2ac307fc2e9da9fa790b",
       "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "mapping_methods_adaptation",
+      "path": "wiki/survey/current/mapping-methods-adaptation.md",
+      "sha256": "8c8cedc0b8f91459d858d0c7686f4c72c97cd04753771b439fb62511ecba3478",
+      "mutability": "supersede-in-place",
+      "load_policy": "targeted"
+    },
+    {
+      "role": "modality_specificity_codebook",
+      "path": "wiki/survey/current/modality-specificity-codebook.md",
+      "sha256": "ee887fed134170d14b312da8f3a2121cbabf350513c9047e17cf7df64e88f3c6",
+      "mutability": "frozen",
       "load_policy": "targeted"
     },
     {
