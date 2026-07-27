@@ -562,7 +562,7 @@
       {
         "path": "scripts/survey/test_sf_existing_corpus_disposition.py",
         "mode": "100644",
-        "git_blob": "f983c3f6ff1fad7abc4bc15dc828e1074a6cbf16"
+        "git_blob": "d9828092b6f4fa85cc6ec1295eae806d3dbc4eb5"
       },
       {
         "path": "scripts/survey/test_sf_fulltext_fetch.py",
@@ -755,7 +755,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "ac0cd9e53ea73e97d7e5a93793cf547fba75d5b213fc76c725bd17a3a1b2c971"
+    "sha256": "9914a6424ffa5d946b59d3dfbe1561a6bc195d5c08ce09abfd72ad00f771ca5f"
   },
   "commands": [
     {
@@ -814,9 +814,9 @@
     },
     {
       "command": "python scripts/survey/test_sf_existing_corpus_disposition.py",
-      "exit_code": 1,
+      "exit_code": 0,
       "stdout_tail": "",
-      "stderr_tail": ".................F....\n======================================================================\nFAIL: test_source_denominators_are_real_rows_not_assumed_work_counts (__main__.ExistingCorpusDispositionTest.test_source_denominators_are_real_rows_not_assumed_work_counts)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<REPO>/scripts/survey/test_sf_existing_corpus_disposition.py\", line 39, in test_source_denominators_are_real_rows_not_assumed_work_counts\n    self.assertEqual(\nAssertionError: {'cen[50 chars] 62, 'version_pin': 30, 'fulltext': 1072, 'reviewer_known': 19} != {'cen[50 chars] 62, 'version_pin': 30, 'fulltext': 1243, 'reviewer_known': 19}\n  {'bibliography': 65,\n   'census': 95,\n   'claim': 62,\n-  'fulltext': 1072,\n?               --\n\n+  'fulltext': 1243,\n?                ++\n\n   'reviewer_known': 19,\n   'seed': 92,\n   'version_pin': 30}\n\n----------------------------------------------------------------------\nRan 22 tests\n\nFAILED (failures=1)"
+      "stderr_tail": "......................\n----------------------------------------------------------------------\nRan 22 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/test_sf_bibliography_generator.py",
@@ -838,8 +838,8 @@
     },
     {
       "command": "python scripts/survey/sf_quantifier_scan.py",
-      "exit_code": 1,
-      "stdout_tail": "[UNSCOPED] wiki/survey/current/research-directions.md:18: ## 1. 唯一研究问题\n[UNSCOPED] wiki/survey/current/research-directions.md:308: | `AgenticElements` | 若显式假定所有 context 均不可达，则同核输出不可达 | finite oracle miss 证明 all-contexts g\n[UNSCOPED] wiki/survey/current/research-directions.md:320: **结论。** 九条方向是五维组合的当前唯一有效研究 portfolio；C1 evaluator/reward reliability 降为所有\nquantifier scan: FAIL (0 input failures, 3 unscoped; scope=current-manifest)",
+      "exit_code": 0,
+      "stdout_tail": "quantifier scan: PASS (0 input failures, 0 unscoped; scope=current-manifest)",
       "stderr_tail": ""
     },
     {
@@ -856,16 +856,16 @@
     },
     {
       "command": "python scripts/checks/build_ai_context_manifest.py --check",
-      "exit_code": 1,
-      "stdout_tail": "manifest-byte-mismatch: expected 2745342c552c20cadc105eae9c0fc4facea26b81142b445b2ed047472462630a, found 874d7c1cfab9bf2f98d03be6bdacb3a9ec718cee8aa0bd523c45cfd8e33fe425\nAI context manifest: FAIL",
+      "exit_code": 0,
+      "stdout_tail": "AI context manifest: PASS",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/checks/ai_context_surface_check.py",
-      "exit_code": 1,
-      "stdout_tail": "active-hash-mismatch: wiki/Research-Objective.md: 472dc0aeac25645ce6d2a8ebcd13c103e5da1c6d22b3d391d6e67e34e02f34a7 != af7a6bb455afad4af8601f5e398a76353569d10543acd7ada3067f4d2a9e27b0\nactive-hash-mismatch: wiki/Per-Work-Status.md: 99b2979c6137d263365b03305ea0e8a8b37ba55acde20db27f23619f09c96962 != 35d359753596351714fa9905b01ca82478128a57b704dce3922c6ed7bcd42397\nactive-hash-mismatch: wiki/survey/current/README.md: 31180214d4afaf3cefa79adddbed87c0382947c62ec42555c5ce37056628aaca != 98589dbfed7baca97e73e8b4f1386d8835531e75bc2197a7596e1ecdbfbf77ad\nactive-hash-mismatch: wiki/survey/current/status.md: d0571266927c3d122c912ed7593cb3f96ebaae78811b03a2e8322bdd54eef398 != 41ae7d3084c438b3a3432d5268b11e457062fc4bd5ffdcd277804f8405224f3c\nactive-hash-mismatch: wiki/survey/current/manifest.json: 0ecc6e0356525044ad91ca1aea7bfd421c7916fca2ce82fb756027d6881cf56c != 9f6fa6ec007466098c6a2fcf6b567da9efdeee6969b27caeb3d7d10d277253ec\nnew-audit-artifact-outside-audit-root: wiki/survey/workbench/stage1c-portfolio/proposals/portfolio-review-and-stage2a-recommendation.md\nAI context surface: FAIL (6 failures)",
+      "exit_code": 0,
+      "stdout_tail": "AI context surface: PASS (0 failures)",
       "stderr_tail": ""
     }
   ],
-  "verdict": "FAIL"
+  "verdict": "PASS"
 }
