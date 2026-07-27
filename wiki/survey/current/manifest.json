@@ -144,7 +144,7 @@
     {
       "role": "current_router",
       "path": "wiki/survey/current/README.md",
-      "sha256": "98589dbfed7baca97e73e8b4f1386d8835531e75bc2197a7596e1ecdbfbf77ad",
+      "sha256": "31180214d4afaf3cefa79adddbed87c0382947c62ec42555c5ce37056628aaca",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -277,7 +277,7 @@
     {
       "role": "current_research_directions",
       "path": "wiki/survey/current/research-directions.md",
-      "sha256": "f6da17594579e507e0eb892861db26f85e2d3984cc5d7a1792f17687c647ca8c",
+      "sha256": "d769692a1826a67294cf03a20eafd2412106538ac12e8b624fa34ce60336392f",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
@@ -291,7 +291,7 @@
     {
       "role": "current_status",
       "path": "wiki/survey/current/status.md",
-      "sha256": "41ae7d3084c438b3a3432d5268b11e457062fc4bd5ffdcd277804f8405224f3c",
+      "sha256": "d0571266927c3d122c912ed7593cb3f96ebaae78811b03a2e8322bdd54eef398",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
