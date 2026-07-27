@@ -15,7 +15,7 @@ execution_authority: "STAGE2A_WITHHELD"
 > Stage‑2A 授权包冻结）；本文 §4-R1 验证与 §6 中"首选 Qwen2.5-Omni-7B"口径已被取代。**裁决 B**：ASR
 > 主线为通用 ASR，MyST/RSR 儿童 ASR 失去主线地位。上述两节的载体文字在 step-2 重写落地前视为过期。
 
-## 1. 唯一研究问题
+## 1. 主研究问题
 
 > 当 speech/omni 核心模型只能作为冻结的推理 API 调用时，外部系统能否通过持续构造、选择和更新
 > in-context 状态，可靠地激活模型已有的跨模态能力，并在不修改任何模型参数或内部结构的条件下提高
@@ -305,7 +305,7 @@ composition、full adaptive system。Full-duplex/interactive 只有在 task succ
 | 模块 | 可用结论 | 不得推出 |
 |---|---|---|
 | `InfoBoundary` | fixed candidate pool 的 read-out 不能超出该池 | ICL、不同 context 或 agent system 无提升空间 |
-| `AgenticElements` | 若显式假定所有 context 均不可达，则同核输出不可达 | finite oracle miss 证明 all-contexts gap；外部新信息是唯一杠杆 |
+| `AgenticElements` | 若显式假定所有 context 均不可达，则同核输出不可达 | finite oracle miss 证明 all-contexts gap；「外部新信息是唯一杠杆」——两者均禁止推出 |
 | `Reachability` | 在乘法 reweighting 与 bounded ratio 模型下的 mode-shift 条件 | 任意 prompt/ICL 都服从该模型或实际不可达 |
 | `Realization` | uniform reward error `τ` 下 argmax 与 oracle gap `≤ 2τ` | 真实 judge 已满足 uniform error |
 | `Iterate` | 显式逐步真实增益和有界假设下的终止/收敛性质 | 实际 reward-guided loop 单调或收敛 |
@@ -317,7 +317,7 @@ composition、full adaptive system。Full-duplex/interactive 只有在 task succ
 
 ## 8. Provenance、目的链与失效条件
 
-**结论。** 九条方向是五维组合的当前唯一有效研究 portfolio；C1 evaluator/reward reliability 降为所有
+**结论。** 九条方向是五维组合的现行有效研究 portfolio；C1 evaluator/reward reliability 降为所有
 方向共享的 measurement/reliability component，不再是 primary problem。
 
 **推理摘要。** 2026-07-26/27 的 35 篇 speech/omni 全文级条目、73 篇 text/vision donor 和 T1/T2/T3

@@ -4,10 +4,14 @@
 from __future__ import annotations
 
 import json
+import os
+import sys
 import unittest
 from unittest import mock
 
-from scripts.survey import sf_stage1b_targeted_anchor_scan as scan
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sf_stage1b_targeted_anchor_scan as scan  # noqa: E402
 
 
 class Stage1BTargetedAnchorScanTests(unittest.TestCase):
