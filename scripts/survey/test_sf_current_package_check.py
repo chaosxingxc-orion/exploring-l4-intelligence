@@ -23,16 +23,8 @@ SPEC.loader.exec_module(package_check)
 
 
 EXPECTED_COMMANDS = (
-    "python scripts/survey/test_sf_evidence_contract.py",
-    "python scripts/survey/sf_absence_provenance_migrate.py --check",
-    "python scripts/survey/sf_coding_generator.py --check",
-    "python scripts/survey/test_sf_identity_taxonomy_v7_harness.py",
-    "python scripts/survey/test_sf_h5_calibration_contract.py",
-    "python scripts/survey/test_sf_pdf_extractor_contract.py",
-    "python scripts/survey/test_sf_evidence_v7_aggregate.py",
     "python scripts/survey/test_sf_query_compiler_profiles.py",
     "python scripts/survey/sf_query_compiler.py --check --check-against wiki/survey/2026-07-15-sf-queries.jsonl",
-    "python scripts/survey/test_sf_existing_corpus_disposition.py",
     "python scripts/survey/test_sf_bibliography_generator.py",
     "python scripts/survey/sf_current_manifest.py --check",
     "python scripts/survey/sf_release_binding_check.py",

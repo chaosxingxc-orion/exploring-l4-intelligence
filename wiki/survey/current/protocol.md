@@ -520,10 +520,12 @@ missing REC-5 link, or unresolved disagreement fails before the row can support 
 
 ## §7 Schema-v3 evidence, adjudication, and strong PDF anchors
 
-The active **per-paper sidecar** files use schema v3 and are the **single handwritten layer**. The
-committed coding artifact is **generated**, never independently edited. The deterministic generator
-must produce coding bytes that are **byte-identical** to the committed coding artifact; then structure,
-bound-value, source, row-hash, and adjudication **reconciliation** run before derivation.
+The **per-paper sidecar** files (schema v3) were the **single handwritten layer** of the closed
+Stage‑1A/1B evidence-coding campaign. The committed coding artifact is **generated**, never
+independently edited; all coded artifacts are frozen and pinned by the current manifest and audit
+registry. The deterministic generator and its per-artifact contract checks retired with the campaign
+(2026-07-28 workspace cleanup; replay from commits 74cf8e4 / 7078623 / 8439295). New R-era paper
+registrations use the fulltext-ledger + registry-shard contract instead.
 
 Each load-bearing path binds **16 row-level** values:
 
@@ -603,6 +605,10 @@ When and only when §0's three authorizations are present, Stage-1B proceeds in 
    after interpretation; a row without a locator does **not enter an occupancy denominator**;
 8. generate coding, reconcile evidence, complete independent adjudication, and only then derive tables;
 9. rerun E1/E2/E3, release binding, immutability, context, and dual-platform gates before synthesis.
+
+Steps 7–9 describe the closed Stage‑1A/1B coding campaign; their executable gates retired in the
+2026-07-28 workspace cleanup (replay via the recorded commits above). Step 6's fetch-on-encounter
+registration rule remains in force for all new work.
 
 Machine query execution uses `REC-1`; canonical screening/dedup uses `REC-0`; extraction uses `REC-2`;
 conflicts and threat dual-coding use their registered records; selection-process records and T1 route
