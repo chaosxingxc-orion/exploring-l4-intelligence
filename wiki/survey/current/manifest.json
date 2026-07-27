@@ -277,7 +277,7 @@
     {
       "role": "current_research_directions",
       "path": "wiki/survey/current/research-directions.md",
-      "sha256": "d769692a1826a67294cf03a20eafd2412106538ac12e8b624fa34ce60336392f",
+      "sha256": "2b821e87a679b086073fb3d859a5c6da4da51b424f672fb0c69992eedda3907c",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },
