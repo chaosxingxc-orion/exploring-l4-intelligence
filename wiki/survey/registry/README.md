@@ -28,8 +28,9 @@ canonical paper rows across shards.
 projection of the unsigned targeted-anchor scan RC. It is disjoint from the frozen 226-work registry,
 the CURRENT appendix/priority union and the unsigned 14-work capability delta. It is not consumed by
 the frozen registry views and is not a Stage-1C input before independent
-`SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. Regenerate and verify this projection only with
-`scripts/survey/sf_stage1b_targeted_anchor_scan.py`; do not fold it into a frozen v5 shard.
+`SIGN_STAGE1B_TARGETED_ANCHOR_SCAN_RELEASE`. The anchor-scan overlay is frozen; its generator retired
+in the 2026-07-28 cleanup (replay: git show 4eecb37:scripts/survey/sf_stage1b_targeted_anchor_scan.py).
+Do not fold it into a frozen v5 shard.
 
 `stage1c-r1-context-icl-2026-07-27-papers.jsonl` is a separate six-record, fulltext-hash-bound
 nearest-prior shard created for the owner-approved R1 academic problem definition. It registers

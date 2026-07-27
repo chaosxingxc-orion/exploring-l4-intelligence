@@ -126,12 +126,6 @@ BASE_FILE_SPECS = (
         "targeted",
     ),
     FileSpec(
-        "dual_platform_aggregate_checker",
-        "scripts/survey/sf_dual_platform_check.py",
-        "normal-code-lifecycle",
-        "machine-only",
-    ),
-    FileSpec(
         "campaign_audit_semantic_anchor",
         CAMPAIGN_SEMANTIC_ANCHOR_PATH,
         "normal-code-lifecycle",

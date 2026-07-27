@@ -86,13 +86,6 @@
       "load_policy": "machine-only"
     },
     {
-      "role": "dual_platform_aggregate_checker",
-      "path": "scripts/survey/sf_dual_platform_check.py",
-      "sha256": "f5828f8bf565f1278efe1dc6c771a95fcf5682e34ac8c1a51bf9bb205db8e5ba",
-      "mutability": "normal-code-lifecycle",
-      "load_policy": "machine-only"
-    },
-    {
       "role": "campaign_audit_index",
       "path": "wiki/audit/system-first-stage1a/INDEX.md",
       "sha256": "8f6974aa73bc0dc418f42313f3007c5f09d95a480051756ddda1f4a3bfa74cf3",

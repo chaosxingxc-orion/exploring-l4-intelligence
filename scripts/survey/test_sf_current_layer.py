@@ -23,10 +23,6 @@ INTEGRATION_PLAN = REPO / (
     "docs/superpowers/plans/"
     "2026-07-19-ai-context-consolidation-and-stage1b-integration.md"
 )
-REPORT_PATH = (
-    "docs/checks/system-first-stage1a/evidence-v6/"
-    "identity-taxonomy-v6-test.json"
-)
 CURRENT_PACKAGE_REPORT_PATH = (
     "docs/checks/system-first-stage1a/context-v1/current-package-check.json"
 )
@@ -48,11 +44,6 @@ def load_module(name: str):
     return module
 
 
-def current_report():
-    raw = (REPO / REPORT_PATH).read_bytes()
-    return json.loads(raw), raw
-
-
 def git_blob_oid(raw: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
 
@@ -67,141 +58,6 @@ def plan_task_section(task_number: int) -> str:
     if match is None:
         raise AssertionError(f"Task {task_number} missing from integration plan")
     return match.group(0)
-
-
-class OpeningTableContractTests(unittest.TestCase):
-    def setUp(self):
-        self.tables = load_module("sf_current_tables")
-        self.release = load_module("sf_release_binding_check")
-        self.report, self.report_raw = current_report()
-
-    def test_table_is_bound_to_exact_report_bytes_and_canonical_headline(self):
-        raw = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw
-        )
-        text = raw.decode("utf-8")
-        expected_sha = hashlib.sha256(self.report_raw).hexdigest()
-        self.assertIn(
-            f'<!-- source_binding: {{"path":"{REPORT_PATH}",'
-            f'"sha256":"{expected_sha}"}} -->',
-            text,
-        )
-        self.assertIn(self.release.render_headline(self.report), text)
-        self.assertEqual(1, text.count("<!-- generated_headline_begin -->"))
-        self.assertEqual(1, text.count("<!-- generated_headline_end -->"))
-
-    def test_table_states_bounded_stage_and_both_denominators(self):
-        text = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw
-        ).decode("utf-8")
-        self.assertIn("Stage-1A", text)
-        self.assertIn("directional-only / hypothesis-grade", text)
-        self.assertRegex(text, r"method-path[^\n]*11")
-        self.assertRegex(text, r"unique-work[^\n]*8")
-        self.assertIn("zero Stage-1B executions in this repair", text)
-        self.assertIn("not a readiness determination", text)
-        self.assertIn("not a reviewer signature", text)
-        self.assertIn("not owner Stage-1B execution approval", text)
-
-    def test_table_render_is_deterministic_and_timestamp_free(self):
-        first = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw
-        )
-        second = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw
-        )
-        self.assertEqual(first, second)
-        self.assertNotIn(b"generated_at", first)
-        self.assertTrue(first.endswith(b"\n"))
-
-    def test_report_sha_changes_when_source_bytes_change(self):
-        first = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw
-        )
-        changed = self.tables.render_opening_table(
-            self.report, REPORT_PATH, self.report_raw + b" ",
-        )
-        self.assertNotEqual(first, changed)
-
-
-class ReportReleaseContractTests(unittest.TestCase):
-    def setUp(self):
-        self.tables = load_module("sf_current_tables")
-        self.assertTrue(
-            hasattr(self.tables, "parse_validated_report"),
-            "strict frozen report parser is missing",
-        )
-        self.report, self.raw = current_report()
-        self.snapshot = {
-            "input_provenance": self.report["input_provenance"],
-            "input_snapshot_sha256": self.report["input_snapshot_sha256"],
-        }
-
-    def parse(self, raw=None, snapshot=None):
-        return self.tables.parse_validated_report(
-            self.raw if raw is None else raw,
-            self.snapshot if snapshot is None else snapshot,
-        )
-
-    def mutated_raw(self, mutate):
-        document = json.loads(self.raw)
-        mutate(document)
-        return (json.dumps(document, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
-
-    def test_strict_json_rejects_duplicate_root_and_nested_keys(self):
-        duplicate_root = self.raw.replace(b"{\n", b'{\n "verdict": "PASS",\n', 1)
-        duplicate_nested = self.raw.replace(
-            b' "platform": {\n  "os":',
-            b' "platform": {\n  "os": "posix",\n  "os":',
-            1,
-        )
-        for raw in (duplicate_root, duplicate_nested):
-            with self.subTest(raw=raw[:80]):
-                with self.assertRaisesRegex(
-                    self.tables.CurrentTableError, "duplicate key"
-                ):
-                    self.parse(raw=raw)
-
-    def test_strict_json_rejects_nan_and_infinity(self):
-        for token in (b"NaN", b"Infinity", b"-Infinity"):
-            raw = self.raw.replace(b'"3.12.3"', token, 1)
-            with self.subTest(token=token):
-                with self.assertRaisesRegex(
-                    self.tables.CurrentTableError, "non-finite JSON constant"
-                ):
-                    self.parse(raw=raw)
-
-    def test_bool_denominator_and_frozen_occupancy_drift_fail(self):
-        bool_raw = self.mutated_raw(
-            lambda report: report["occupancy"]["policy_A"].__setitem__(
-                "n_method_paths", True
-            )
-        )
-        stale_raw = self.mutated_raw(
-            lambda report: report["occupancy"]["policy_A"][
-                "is_reward_guided"
-            ].__setitem__("n_paths", "999/11")
-        )
-        for raw in (bool_raw, stale_raw):
-            with self.subTest(raw=raw[:80]):
-                with self.assertRaises(self.tables.CurrentTableError):
-                    self.parse(raw=raw)
-
-    def test_provenance_and_snapshot_tampering_fail(self):
-        provenance_raw = self.mutated_raw(
-            lambda report: report["input_provenance"]["taxonomy"].__setitem__(
-                "sha256", "0" * 64
-            )
-        )
-        snapshot_raw = self.mutated_raw(
-            lambda report: report.__setitem__("input_snapshot_sha256", "0" * 64)
-        )
-        for raw in (provenance_raw, snapshot_raw):
-            with self.subTest(raw=raw[:80]):
-                with self.assertRaisesRegex(
-                    self.tables.CurrentTableError, "current release snapshot"
-                ):
-                    self.parse(raw=raw)
 
 
 class CurrentManifestContractTests(unittest.TestCase):
@@ -269,7 +125,7 @@ class CurrentManifestContractTests(unittest.TestCase):
             paths.add(spec.path)
         return paths
 
-    def test_manifest_entries_have_exact_contract_and_real_dual_checker(self):
+    def test_manifest_entries_have_exact_contract(self):
         document = self.build()
         entries = document["files"]
         self.assertTrue(entries)
@@ -280,13 +136,16 @@ class CurrentManifestContractTests(unittest.TestCase):
             )
             self.assertRegex(entry["sha256"], r"^[0-9a-f]{64}$")
             self.assertNotEqual("wiki/survey/current/manifest.json", entry["path"])
-        dual = [
-            entry
-            for entry in entries
-            if entry["role"] == "dual_platform_aggregate_checker"
-        ]
-        self.assertEqual(1, len(dual))
-        self.assertEqual("scripts/survey/sf_dual_platform_check.py", dual[0]["path"])
+
+    def test_manifest_has_no_retired_dual_platform_checker_entry(self):
+        document = self.build()
+        entries = document["files"]
+        self.assertFalse(
+            any(entry["role"] == "dual_platform_aggregate_checker" for entry in entries)
+        )
+        self.assertFalse(
+            any(entry["path"] == "scripts/survey/sf_dual_platform_check.py" for entry in entries)
+        )
 
     def test_stage1b_release_products_are_current_and_release_bound(self):
         document = self.build()
@@ -968,7 +827,6 @@ class TrustedCurrentPathContractTests(unittest.TestCase):
         path = SURVEY_SCRIPTS / "sf_current_path_contract.py"
         self.assertTrue(path.is_file(), f"trusted path helper missing: {path}")
         self.paths = load_module("sf_current_path_contract")
-        self.tables = load_module("sf_current_tables")
         self.manifest = load_module("sf_current_manifest")
 
     def symlink_or_skip(self, target: Path, link: Path, *, directory=False):
@@ -977,46 +835,8 @@ class TrustedCurrentPathContractTests(unittest.TestCase):
         except OSError as error:
             self.skipTest(f"symlink unavailable: {error}")
 
-    def test_fixed_input_rejects_leaf_and_ancestor_symlinks(self):
-        self.assertTrue(
-            hasattr(self.tables, "_read_report_bytes"),
-            "table report fixed-path reader is missing",
-        )
-        relative = REPORT_PATH
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo = Path(temp_dir) / "repo"
-            outside = Path(temp_dir) / "outside"
-            outside.mkdir()
-            outside_file = outside / "report.json"
-            outside_file.write_bytes(b"{}\n")
-
-            leaf = repo.joinpath(*relative.split("/"))
-            leaf.parent.mkdir(parents=True)
-            self.symlink_or_skip(outside_file, leaf)
-            with self.assertRaises(self.paths.TrustedCurrentPathError):
-                self.tables._read_report_bytes(repo, leaf)
-
-            leaf.unlink()
-            for child in sorted(repo.iterdir(), reverse=True):
-                if child.is_dir():
-                    shutil.rmtree(child)
-            docs_target = outside / "docs"
-            report = docs_target / (
-                "checks/system-first-stage1a/evidence-v6/"
-                "identity-taxonomy-v6-test.json"
-            )
-            report.parent.mkdir(parents=True)
-            report.write_bytes(b"{}\n")
-            self.symlink_or_skip(docs_target, repo / "docs", directory=True)
-            with self.assertRaises(self.paths.TrustedCurrentPathError):
-                self.tables._read_report_bytes(repo, repo / relative)
-
-    def test_table_and_manifest_outputs_reject_leaf_and_ancestor_symlinks(self):
+    def test_manifest_output_rejects_leaf_and_ancestor_symlinks(self):
         cases = (
-            (
-                "wiki/survey/current/tables/opening-guarantees.md",
-                self.tables._resolve_output_path,
-            ),
             (
                 "wiki/survey/current/manifest.json",
                 self.manifest._resolve_output_path,
