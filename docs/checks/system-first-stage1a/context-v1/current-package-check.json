@@ -25,59 +25,14 @@
         "git_blob": "be34d99381df72ae64c99adecede8e50c95a985e"
       },
       {
-        "path": "scripts/checks/build_registers.py",
-        "mode": "100644",
-        "git_blob": "4c850817fe471ec8287cd1326f4ac57694ef20a2"
-      },
-      {
-        "path": "scripts/checks/build_release_manifest.py",
-        "mode": "100644",
-        "git_blob": "18d28cfe5aab4ebd1aeb7f6f1d58f425d5a0ca24"
-      },
-      {
-        "path": "scripts/checks/sf_cross_platform_git_preflight.py",
-        "mode": "100644",
-        "git_blob": "9aec6cd49749bd632e967bc1b116517bb76c06e6"
-      },
-      {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
         "git_blob": "4a1830ce7a9d0c8e074c99e2de9e7e484d1a4271"
       },
       {
-        "path": "scripts/checks/test_sf_cross_platform_git_preflight.py",
-        "mode": "100644",
-        "git_blob": "21f07cf16402c9933b88e71e9f492c63bb221f1d"
-      },
-      {
-        "path": "scripts/checks/v42_conformance.py",
-        "mode": "100644",
-        "git_blob": "4b2b2a2cb571d00293c14447c866753a5c1e5c68"
-      },
-      {
-        "path": "scripts/survey/probe_hosts_c4a.sh",
-        "mode": "100644",
-        "git_blob": "aae93eff0a6f80088ce93a297ac622165bc7038c"
-      },
-      {
         "path": "scripts/survey/sf_archive_candidates.py",
         "mode": "100644",
         "git_blob": "f2d8dfabce5a506b3ded77777c13b21f0483f8fc"
-      },
-      {
-        "path": "scripts/survey/sf_arxiv_delta_queries.py",
-        "mode": "100644",
-        "git_blob": "060c15f7d1c46e60d179047d42226e7a5843bc41"
-      },
-      {
-        "path": "scripts/survey/sf_arxiv_query_runner.py",
-        "mode": "100644",
-        "git_blob": "adc8ef2cc20ce02062d527e4283498a83c080274"
-      },
-      {
-        "path": "scripts/survey/sf_asset_path.py",
-        "mode": "100644",
-        "git_blob": "af14bf682e806c90865401d49e09ed1a4c031927"
       },
       {
         "path": "scripts/survey/sf_atom_provenance_fetch.py",
@@ -90,11 +45,6 @@
         "git_blob": "a2a844aa19b4992d33f23c8abc40444fdcee19ac"
       },
       {
-        "path": "scripts/survey/sf_bfs_candidate_builder.py",
-        "mode": "100644",
-        "git_blob": "dac4961ef41d5d45d6370db666b984bc182968f0"
-      },
-      {
         "path": "scripts/survey/sf_bibliography_generator.py",
         "mode": "100644",
         "git_blob": "f86bf96a56d1c71bffc343daa2acde34d6998008"
@@ -105,39 +55,9 @@
         "git_blob": "5b35b39f1dc2d54e8e52a58a128f42bd16f06c2b"
       },
       {
-        "path": "scripts/survey/sf_child_query_realrow_dryrun.py",
-        "mode": "100644",
-        "git_blob": "e9b4201a51bba550e856f1c50c678587d282de5b"
-      },
-      {
-        "path": "scripts/survey/sf_child_query_replay_test.py",
-        "mode": "100644",
-        "git_blob": "e8129113af147a42980c80cdbb661f82236200ed"
-      },
-      {
-        "path": "scripts/survey/sf_child_query_split.py",
-        "mode": "100644",
-        "git_blob": "21422f672ca59113aac22cb0515179c356ce6e02"
-      },
-      {
-        "path": "scripts/survey/sf_citation_calibration.py",
-        "mode": "100644",
-        "git_blob": "4f16675412e0ee19d3dc6df8d231883230cbee48"
-      },
-      {
-        "path": "scripts/survey/sf_citation_closure.py",
-        "mode": "100644",
-        "git_blob": "eebfed7ccce1fff1f5d49baca31d0808659b2f2c"
-      },
-      {
-        "path": "scripts/survey/sf_coding_generator.py",
-        "mode": "100644",
-        "git_blob": "96826602af108f4cfe7fe5177794e871bb0678c6"
-      },
-      {
         "path": "scripts/survey/sf_current_manifest.py",
         "mode": "100644",
-        "git_blob": "77120f64af497ee7d63cd84d9afa765c1f6484a4"
+        "git_blob": "8acc7ad64c88f638a2d36f8a751b128212651c15"
       },
       {
         "path": "scripts/survey/sf_current_package_check.py",
@@ -150,41 +70,6 @@
         "git_blob": "9515ff8fde23a064c8da412a56d2e885b059c533"
       },
       {
-        "path": "scripts/survey/sf_current_tables.py",
-        "mode": "100644",
-        "git_blob": "d5bd2400ea5a585031fa90e4c528a1f6cd64366b"
-      },
-      {
-        "path": "scripts/survey/sf_delta_rec0_closeout.py",
-        "mode": "100644",
-        "git_blob": "e02bb4d2d5b7fa829cfb8690941a8630f9cb4a40"
-      },
-      {
-        "path": "scripts/survey/sf_dual_platform_check.py",
-        "mode": "100644",
-        "git_blob": "9c094f1e98925cbbf3115e7655149b0ce3da07d9"
-      },
-      {
-        "path": "scripts/survey/sf_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "5c919eba8f370c8879a36e6cad56293b1995bbbb"
-      },
-      {
-        "path": "scripts/survey/sf_evidence_v7_aggregate.py",
-        "mode": "100644",
-        "git_blob": "e87a2f02fdbba44767fc91bf848ef1886f4c3c9d"
-      },
-      {
-        "path": "scripts/survey/sf_existing_corpus_disposition.py",
-        "mode": "100644",
-        "git_blob": "e841134ffe9cb099bdfd0abf5eefc26d1662b74a"
-      },
-      {
-        "path": "scripts/survey/sf_fixtures_c4b_gen.py",
-        "mode": "100644",
-        "git_blob": "c87c8568857a59b221775f640ea79ace70c44cc6"
-      },
-      {
         "path": "scripts/survey/sf_fulltext_fetch.py",
         "mode": "100644",
         "git_blob": "bda05b490db5eae86d5482c51011ea5e49d52f0d"
@@ -195,26 +80,6 @@
         "git_blob": "5bfc3d85ec9b7f9bb59fcc674cb68a642bfe3b38"
       },
       {
-        "path": "scripts/survey/sf_h5_calibration_contract.py",
-        "mode": "100644",
-        "git_blob": "67f38915e6420af929925bb3f80570bfc8031a4a"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v5_test.py",
-        "mode": "100644",
-        "git_blob": "951df79ccc476681508043c41e62ad6d030a4fb3"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v6_test.py",
-        "mode": "100644",
-        "git_blob": "ccde4a7fc4a0a215c124f832f0ac17a7022ec402"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v7_test.py",
-        "mode": "100644",
-        "git_blob": "823a3dddbd34467d3c07a101d2716e3c8611dc21"
-      },
-      {
         "path": "scripts/survey/sf_json_contract.py",
         "mode": "100644",
         "git_blob": "0f8801c20170b5c4d77d707cb5873b54811a047a"
@@ -223,36 +88,6 @@
         "path": "scripts/survey/sf_official_metadata_fetch.py",
         "mode": "100644",
         "git_blob": "24b71b2ec17c419ae4c2cf48b6c440e2c93e9abb"
-      },
-      {
-        "path": "scripts/survey/sf_package_summary.py",
-        "mode": "100644",
-        "git_blob": "e0c66f3306b5493861ed702bc6f287ddad8c68e2"
-      },
-      {
-        "path": "scripts/survey/sf_package_summary_test.py",
-        "mode": "100644",
-        "git_blob": "88cdf5c1338f05b2583c1fbc7a7cf028d583fcd9"
-      },
-      {
-        "path": "scripts/survey/sf_pdf_extractor_contract.py",
-        "mode": "100644",
-        "git_blob": "072048b60049a663b2998cf34594923e19a63e1e"
-      },
-      {
-        "path": "scripts/survey/sf_post_stage1b_corpus_refinement.py",
-        "mode": "100644",
-        "git_blob": "ab803ba1fadd28e855280b83724e22bf96cae3b7"
-      },
-      {
-        "path": "scripts/survey/sf_proposal_package_check.py",
-        "mode": "100644",
-        "git_blob": "4fdaa2491d90f067dd270c973ac02b513716eda3"
-      },
-      {
-        "path": "scripts/survey/sf_proposal_source_manifest.py",
-        "mode": "100644",
-        "git_blob": "e4b6d45cc43f7662c350d364d68dedba7f3d73a1"
       },
       {
         "path": "scripts/survey/sf_protocol_contract.py",
@@ -270,39 +105,9 @@
         "git_blob": "ba22131a7c160394f1926b5e69225891defcc6d4"
       },
       {
-        "path": "scripts/survey/sf_record_validator.py",
-        "mode": "100644",
-        "git_blob": "e2670e780ecbcaedf698c3b6006c0e459f9d3658"
-      },
-      {
-        "path": "scripts/survey/sf_record_validator_test.py",
-        "mode": "100644",
-        "git_blob": "47a642fc31f7d1b7eb3c2d88b5c3f0232e023f60"
-      },
-      {
         "path": "scripts/survey/sf_release_binding_check.py",
         "mode": "100644",
         "git_blob": "63657fcf9dbd39052adaa77c0d0f3b46140b5ff0"
-      },
-      {
-        "path": "scripts/survey/sf_reviewer_proposal_check.py",
-        "mode": "100644",
-        "git_blob": "34bfcc11a228d854556359a5e269c5e3854de475"
-      },
-      {
-        "path": "scripts/survey/sf_row_hash.py",
-        "mode": "100644",
-        "git_blob": "0d75c506c591652b95b5e47e7dfef7770b496d3a"
-      },
-      {
-        "path": "scripts/survey/sf_schema_v3_finalize.py",
-        "mode": "100644",
-        "git_blob": "7cc98b70076a0bc760bca1660713d1783df46402"
-      },
-      {
-        "path": "scripts/survey/sf_schema_v3_migrate.py",
-        "mode": "100644",
-        "git_blob": "3b4ae6adea8187eb5b34eb62e89e0ae6b01a1d72"
       },
       {
         "path": "scripts/survey/sf_schema_v3_release_contract.py",
@@ -310,149 +115,9 @@
         "git_blob": "52f142b7fa71105edc6e61074e5b293808fd9f23"
       },
       {
-        "path": "scripts/survey/sf_sentinel_recall_test.py",
-        "mode": "100644",
-        "git_blob": "6aff85127956665b32d42e093ff7076979a74bd7"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_bounded_sampling.py",
-        "mode": "100644",
-        "git_blob": "f05de531e67326e16c4797ece0c2815590207d9b"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_capability_delta.py",
-        "mode": "100644",
-        "git_blob": "5698d34c4fe70e5cbd251e38aa896877c256c037"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_consolidate.py",
-        "mode": "100644",
-        "git_blob": "8596335c10c377400c955900a7a206c6ae552a55"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_evidence_release_contract.py",
-        "mode": "100644",
-        "git_blob": "03b9b03427ef5a87e816f6480b86b0f257c1163f"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_fulltext_triage.py",
-        "mode": "100644",
-        "git_blob": "f4d865359f47e93bf2153ee4e37bf578e06b9a9b"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_priority.py",
-        "mode": "100644",
-        "git_blob": "20fdeb0f5779704fde15226404166005877a03b7"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_registry_export.py",
-        "mode": "100644",
-        "git_blob": "2c283a999494091ae26aba45aa4b4a2be4a6bbc9"
-      },
-      {
         "path": "scripts/survey/sf_stage1b_registry_views.py",
         "mode": "100644",
         "git_blob": "873a6b97be742fc49a712b38f246a6972129561f"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_release_manifest.py",
-        "mode": "100644",
-        "git_blob": "fab562df341458d355e277783cf79da649e4aeba"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_release_replay.py",
-        "mode": "100644",
-        "git_blob": "b37322b5b5e3146a8e99901f8652897981620533"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_repo_verify.py",
-        "mode": "100644",
-        "git_blob": "cb18f1231220c34da8517152d35b3174ee5e780d"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_targeted_anchor_scan.py",
-        "mode": "100644",
-        "git_blob": "4749c35867195262d95b5035b236d8e818604263"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v4_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "a9401f152c980b8f43573227f388e45a4bd33440"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v4_materialize.py",
-        "mode": "100644",
-        "git_blob": "412508bfb4c9b00a49108fc987892f517ed39799"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v4_spec_materialize.py",
-        "mode": "100644",
-        "git_blob": "4de566737dd4b717442aa792c5ce90af737df9b1"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v5_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "99b2bb1a589b940a9bb0b3ffd4dd54d558189abd"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v5_materialize.py",
-        "mode": "100644",
-        "git_blob": "ecbe8a8a0aefb4d1db75f18919d0aa045adc0143"
-      },
-      {
-        "path": "scripts/survey/sf_stage1b_v5_spec_materialize.py",
-        "mode": "100644",
-        "git_blob": "38f57dd518d47f172f6718826ef11ea860a0ba24"
-      },
-      {
-        "path": "scripts/survey/sf_t1_route_runner.py",
-        "mode": "100644",
-        "git_blob": "2333e64e320eb5b44e435fe0112ba928764394ad"
-      },
-      {
-        "path": "scripts/survey/sf_t1_routes_adjudication_validate.py",
-        "mode": "100644",
-        "git_blob": "43509b16d5c95ae461f4ab55894182d9e432c74a"
-      },
-      {
-        "path": "scripts/survey/sf_t1_routes_status_audit.py",
-        "mode": "100644",
-        "git_blob": "694064a4a56cc08c2c14a39702d1e42a439c789a"
-      },
-      {
-        "path": "scripts/survey/sf_t1_routes_v2_gen.py",
-        "mode": "100644",
-        "git_blob": "739be87e5c82fa65eb56ab75592fb37f3656a8c5"
-      },
-      {
-        "path": "scripts/survey/sf_t1_routes_v3_gen.py",
-        "mode": "100644",
-        "git_blob": "515b63fcce9d74e5e7dbdbfe319ba72ecbdad4cb"
-      },
-      {
-        "path": "scripts/survey/sf_t1_routes_validate.py",
-        "mode": "100644",
-        "git_blob": "e34e8d5a62fd05f1750278e84722498d46f43c61"
-      },
-      {
-        "path": "scripts/survey/sf_t1_title_reconcile.py",
-        "mode": "100644",
-        "git_blob": "63bc29102d1f420546b48f0f8b2ca33fc82aa067"
-      },
-      {
-        "path": "scripts/survey/sf_taxonomy_v6_contract.py",
-        "mode": "100644",
-        "git_blob": "227f8622692b92b83b16e484fb33ab8ee19eacdb"
-      },
-      {
-        "path": "scripts/survey/sf_v6_report_contract.py",
-        "mode": "100644",
-        "git_blob": "e942c37f7fca36fb125593939ab7ba4f2dfa35d0"
-      },
-      {
-        "path": "scripts/survey/sf_v6_snapshot_contract.py",
-        "mode": "100644",
-        "git_blob": "efe547f9599057cd854085781ba67f2896f8d738"
       },
       {
         "path": "scripts/survey/test_sf_archive_candidates.py",
@@ -460,24 +125,9 @@
         "git_blob": "992cea0b85dfdef65912c97dc5254d12d9caad85"
       },
       {
-        "path": "scripts/survey/test_sf_arxiv_delta_queries.py",
-        "mode": "100644",
-        "git_blob": "12eda4205c3a4e5fdf5521f8a4ea952577a0e4fd"
-      },
-      {
-        "path": "scripts/survey/test_sf_arxiv_query_runner.py",
-        "mode": "100644",
-        "git_blob": "9fda5e0d9a2025092f89a83ec3a6610a22f876f6"
-      },
-      {
         "path": "scripts/survey/test_sf_audit_immutability_check.py",
         "mode": "100644",
         "git_blob": "c881833564d496779a3092020203da33e21789f5"
-      },
-      {
-        "path": "scripts/survey/test_sf_bfs_candidate_builder.py",
-        "mode": "100644",
-        "git_blob": "6714cd4b99964e0a195eca44e37faaece0625f8b"
       },
       {
         "path": "scripts/survey/test_sf_bibliography_generator.py",
@@ -490,29 +140,14 @@
         "git_blob": "eaac498ca3de57ea49a69869f5473ae2dd008480"
       },
       {
-        "path": "scripts/survey/test_sf_citation_closure.py",
-        "mode": "100644",
-        "git_blob": "40166aee4abc52147d797e016be8cb2064503b76"
-      },
-      {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "ced690b8ee1ea197e29fcc179f9aff1b70d8691f"
+        "git_blob": "20488011db519b42ca8ca401c4efd4d687f37c04"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
         "git_blob": "cfd747239f56220c1ac7a8667fb07b8bfa28379b"
-      },
-      {
-        "path": "scripts/survey/test_sf_delta_rec0_closeout.py",
-        "mode": "100644",
-        "git_blob": "5a3fc3390e76f83993b66ef0037b472afe18b9d6"
-      },
-      {
-        "path": "scripts/survey/test_sf_dual_platform_check.py",
-        "mode": "100644",
-        "git_blob": "3b9080ad084ae515b8fbf81ce04f57e17baf6880"
       },
       {
         "path": "scripts/survey/test_sf_fulltext_fetch.py",
@@ -530,21 +165,6 @@
         "git_blob": "6b0cc247a475768cb00da82a70a3c3b1e7f2dd21"
       },
       {
-        "path": "scripts/survey/test_sf_post_stage1b_corpus_refinement.py",
-        "mode": "100644",
-        "git_blob": "8f356f55628e50cafa74c208e89d6826681f875f"
-      },
-      {
-        "path": "scripts/survey/test_sf_proposal_package_check.py",
-        "mode": "100644",
-        "git_blob": "a571715a2c0b0f45b0e124b562ff181bee44773a"
-      },
-      {
-        "path": "scripts/survey/test_sf_proposal_source_manifest.py",
-        "mode": "100644",
-        "git_blob": "c523e5ef6cb042aad2b4608b3e184f2fc4f99458"
-      },
-      {
         "path": "scripts/survey/test_sf_query_compiler_profiles.py",
         "mode": "100644",
         "git_blob": "d9f740613f9477c95d5b40286fe6a832ce1fc421"
@@ -555,104 +175,9 @@
         "git_blob": "a2a38af22a80171d16213c56301c434793d5dbc9"
       },
       {
-        "path": "scripts/survey/test_sf_reviewer_proposal_check.py",
-        "mode": "100644",
-        "git_blob": "5ab6577700cda763c719e5a54ecfe78d9a09b0a3"
-      },
-      {
-        "path": "scripts/survey/test_sf_schema_v3_finalize.py",
-        "mode": "100644",
-        "git_blob": "b888641c517e25cb72ddb11eaad32bd69701e3b4"
-      },
-      {
-        "path": "scripts/survey/test_sf_schema_v3_migrate.py",
-        "mode": "100644",
-        "git_blob": "4179e6623c9642c9a9046d1e6b5556b55e5bed42"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_bounded_sampling.py",
-        "mode": "100644",
-        "git_blob": "61f2192091019186751d3f616e4043d6af1df8d6"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_capability_delta.py",
-        "mode": "100644",
-        "git_blob": "615b35fc33bc02eaf032cf32a1de2e226d294681"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_consolidate.py",
-        "mode": "100644",
-        "git_blob": "474f4257d2d491d7bad78a7ab75ffa210f57ffe9"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_evidence_release_contract.py",
-        "mode": "100644",
-        "git_blob": "308cade90d4bd2222b977a5c585ebadd2dfddb0f"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_fulltext_triage.py",
-        "mode": "100644",
-        "git_blob": "a3cc8fafa2677cc7a9a33674cf91e7093acb2afe"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_priority.py",
-        "mode": "100644",
-        "git_blob": "3a7ac87c76493da261ee75dc5b96fb808a049816"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_registry_export.py",
-        "mode": "100644",
-        "git_blob": "079f9b060aaf2254df0acb3942e6b986aaacd528"
-      },
-      {
         "path": "scripts/survey/test_sf_stage1b_registry_views.py",
         "mode": "100644",
         "git_blob": "3004661e69350123b191cd1aa93bbd6d0590a388"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_release_manifest.py",
-        "mode": "100644",
-        "git_blob": "51090cc7588ed99868612853d18e2163abb144eb"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_release_replay.py",
-        "mode": "100644",
-        "git_blob": "4ea848ba46cab534b7230242d521d7e2bc9a3db3"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_repo_verify.py",
-        "mode": "100644",
-        "git_blob": "8a13897da1aee838028c3bc60bcb23991a9af8bc"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_targeted_anchor_scan.py",
-        "mode": "100644",
-        "git_blob": "4ed5825396df4cabb7cd073e8c9fb80ffc2e5626"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_v4_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "e2896c890a9c0147e3de26add5fd719aaf33dc9a"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_v4_materialize.py",
-        "mode": "100644",
-        "git_blob": "655e0313cd08ce2976e9c4f40c168b497758342c"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_v5_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "759885fcf0a7335ee8c8c56f5f218a11c4ce10cb"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_v5_materialize.py",
-        "mode": "100644",
-        "git_blob": "45c4ef4ef66acdaeb871f04168fc61524120f992"
-      },
-      {
-        "path": "scripts/survey/test_sf_stage1b_v5_spec_materialize.py",
-        "mode": "100644",
-        "git_blob": "849a62b5a1d0276af3f364d6fd35c965de00c26a"
       },
       {
         "path": "scripts/survey/test_sf_stage1c_common_rubric.py",
@@ -660,22 +185,12 @@
         "git_blob": "5712c0b9a4483878cfcf4cf540069c3c706d7022"
       },
       {
-        "path": "scripts/survey/test_sf_t1_route_runner.py",
-        "mode": "100644",
-        "git_blob": "6c48a1a2aef14596d4941430438ef894048562cf"
-      },
-      {
-        "path": "scripts/survey/test_sf_t1_title_reconcile.py",
-        "mode": "100644",
-        "git_blob": "549ce56e6febea2437edad36dc6089dd3f71e476"
-      },
-      {
         "path": "scripts/wiki-sync.sh",
         "mode": "100644",
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "d982b2c70fd1ada382e5302e2096b4c98e2cdd6a36de4711a147b27ecd858b9e"
+    "sha256": "abfb9596efdd91a3e287a629b10846e18a69b64edb5f3d170a48a0c7a1e8007e"
   },
   "commands": [
     {
