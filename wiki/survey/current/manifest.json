@@ -361,7 +361,7 @@
     {
       "role": "protocol_v2",
       "path": "wiki/survey/current/protocol.md",
-      "sha256": "49f0c65385e287dcb21b7763570b7f1efce46c61c6c7264dc33d24d423321b11",
+      "sha256": "b3c065e6bc64b81babce952d8002b0b4915d77f6b701052dcc610500d5954759",
       "mutability": "supersede-in-place",
       "load_policy": "targeted"
     },

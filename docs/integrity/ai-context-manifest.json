@@ -48,7 +48,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "effective protocol v2",
-      "sha256": "49f0c65385e287dcb21b7763570b7f1efce46c61c6c7264dc33d24d423321b11"
+      "sha256": "b3c065e6bc64b81babce952d8002b0b4915d77f6b701052dcc610500d5954759"
     },
     {
       "path": "wiki/survey/current/status.md",
@@ -62,7 +62,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "be51365b6a38e873544066167246fae43a7e7438e5fa302bf5f548968225d346"
+      "sha256": "3871b3dbbb92cce56611f267306bd8b95009a8c4c40d8d6d58cc9f52e5b4d7f2"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",

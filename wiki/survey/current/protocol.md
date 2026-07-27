@@ -522,10 +522,12 @@ missing REC-5 link, or unresolved disagreement fails before the row can support 
 
 The **per-paper sidecar** files (schema v3) were the **single handwritten layer** of the closed
 Stage‑1A/1B evidence-coding campaign. The committed coding artifact is **generated**, never
-independently edited; all coded artifacts are frozen and pinned by the current manifest and audit
-registry. The deterministic generator and its per-artifact contract checks retired with the campaign
-(2026-07-28 workspace cleanup; replay from commits 74cf8e4 / 7078623 / 8439295). New R-era paper
-registrations use the fulltext-ledger + registry-shard contract instead.
+independently edited; the deterministic generator was required to produce coding bytes
+**byte-identical** to the committed artifact, with structure, bound-value, source, row-hash and
+adjudication **reconciliation** before derivation. All coded artifacts are frozen and pinned by the
+current manifest and audit registry; the generator and its per-artifact contract checks retired with
+the campaign (2026-07-28 workspace cleanup; replay from commits 74cf8e4 / 7078623 / 8439295). New
+R-era paper registrations use the fulltext-ledger + registry-shard contract instead.
 
 Each load-bearing path binds **16 row-level** values:
 
