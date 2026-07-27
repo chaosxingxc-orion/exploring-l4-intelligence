@@ -60,11 +60,6 @@
         "git_blob": "aae93eff0a6f80088ce93a297ac622165bc7038c"
       },
       {
-        "path": "scripts/survey/sf_absence_provenance_migrate.py",
-        "mode": "100644",
-        "git_blob": "0bd1c370d244261e4a42e163d6105472b845d72e"
-      },
-      {
         "path": "scripts/survey/sf_archive_candidates.py",
         "mode": "100644",
         "git_blob": "f2d8dfabce5a506b3ded77777c13b21f0483f8fc"
@@ -147,7 +142,7 @@
       {
         "path": "scripts/survey/sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "963281c0bd3662541e806a82ab8f6841b59b5f74"
+        "git_blob": "9b17c529e4b53d323e784ca082642f96a957c13e"
       },
       {
         "path": "scripts/survey/sf_current_path_contract.py",
@@ -203,26 +198,6 @@
         "path": "scripts/survey/sf_h5_calibration_contract.py",
         "mode": "100644",
         "git_blob": "67f38915e6420af929925bb3f80570bfc8031a4a"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_test.py",
-        "mode": "100644",
-        "git_blob": "c148e3fdeedd04bc445f36075734125f633795f0"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v2_test.py",
-        "mode": "100644",
-        "git_blob": "8a6f08a91acfbfc276bfe36f3a16da8323fa3ee6"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v3_test.py",
-        "mode": "100644",
-        "git_blob": "1213d267eaaaff970870c259de843805faacb3c8"
-      },
-      {
-        "path": "scripts/survey/sf_identity_taxonomy_v4_test.py",
-        "mode": "100644",
-        "git_blob": "40ef1ea8ff56d1e65134d8d030600a6beec60d92"
       },
       {
         "path": "scripts/survey/sf_identity_taxonomy_v5_test.py",
@@ -480,11 +455,6 @@
         "git_blob": "efe547f9599057cd854085781ba67f2896f8d738"
       },
       {
-        "path": "scripts/survey/test_sf_absence_provenance_migrate.py",
-        "mode": "100644",
-        "git_blob": "1d10bea5345997b7622a002b4b367ad0fa605ea3"
-      },
-      {
         "path": "scripts/survey/test_sf_archive_candidates.py",
         "mode": "100644",
         "git_blob": "992cea0b85dfdef65912c97dc5254d12d9caad85"
@@ -525,11 +495,6 @@
         "git_blob": "40166aee4abc52147d797e016be8cb2064503b76"
       },
       {
-        "path": "scripts/survey/test_sf_coding_generator.py",
-        "mode": "100644",
-        "git_blob": "035072225c74bf8de19c3212053afd646ba2f8db"
-      },
-      {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
         "git_blob": "ced690b8ee1ea197e29fcc179f9aff1b70d8691f"
@@ -537,7 +502,7 @@
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "12cafcbb359006baecaa31fd57de24111f8547c8"
+        "git_blob": "cfd747239f56220c1ac7a8667fb07b8bfa28379b"
       },
       {
         "path": "scripts/survey/test_sf_delta_rec0_closeout.py",
@@ -550,44 +515,9 @@
         "git_blob": "3b9080ad084ae515b8fbf81ce04f57e17baf6880"
       },
       {
-        "path": "scripts/survey/test_sf_evidence_contract.py",
-        "mode": "100644",
-        "git_blob": "ad71a8bd54fecab8cb186bf568a9cb8e8d0ba463"
-      },
-      {
-        "path": "scripts/survey/test_sf_evidence_v7_aggregate.py",
-        "mode": "100644",
-        "git_blob": "c8866e8bb6b54f72183a2848fba080b4ebf0e8bd"
-      },
-      {
-        "path": "scripts/survey/test_sf_existing_corpus_disposition.py",
-        "mode": "100644",
-        "git_blob": "d9828092b6f4fa85cc6ec1295eae806d3dbc4eb5"
-      },
-      {
         "path": "scripts/survey/test_sf_fulltext_fetch.py",
         "mode": "100644",
         "git_blob": "a8cf6a639bd58379bdbbc5a9306bcdda0b811d9a"
-      },
-      {
-        "path": "scripts/survey/test_sf_h5_calibration_contract.py",
-        "mode": "100644",
-        "git_blob": "14f222fbc6e84704aa3c37752f804a3e93dde337"
-      },
-      {
-        "path": "scripts/survey/test_sf_identity_taxonomy_v6_contract.py",
-        "mode": "100644",
-        "git_blob": "f686da856ae223fd5a67126e76615f38144bf4e9"
-      },
-      {
-        "path": "scripts/survey/test_sf_identity_taxonomy_v6_harness.py",
-        "mode": "100644",
-        "git_blob": "7a9a8746eeec287b8d0ab92645a69766c2271af1"
-      },
-      {
-        "path": "scripts/survey/test_sf_identity_taxonomy_v7_harness.py",
-        "mode": "100644",
-        "git_blob": "579704dfdc7d0515c79cfc0b03178c04aa9b3082"
       },
       {
         "path": "scripts/survey/test_sf_manifest_consumers.py",
@@ -598,11 +528,6 @@
         "path": "scripts/survey/test_sf_official_metadata_fetch.py",
         "mode": "100644",
         "git_blob": "6b0cc247a475768cb00da82a70a3c3b1e7f2dd21"
-      },
-      {
-        "path": "scripts/survey/test_sf_pdf_extractor_contract.py",
-        "mode": "100644",
-        "git_blob": "2ea736ddd1482c593ddd38b85df3f60581f2f2be"
       },
       {
         "path": "scripts/survey/test_sf_post_stage1b_corpus_refinement.py",
@@ -745,78 +670,25 @@
         "git_blob": "549ce56e6febea2437edad36dc6089dd3f71e476"
       },
       {
-        "path": "scripts/survey/test_sf_v6_release_proof.py",
-        "mode": "100644",
-        "git_blob": "465da5ca5b73fc623c0460a86bbf7957ba952145"
-      },
-      {
         "path": "scripts/wiki-sync.sh",
         "mode": "100644",
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "fd083c807fbacbdc9e188f3d8253e5ea7187d9c37614373ca5ba1765f42a7a92"
+    "sha256": "d982b2c70fd1ada382e5302e2096b4c98e2cdd6a36de4711a147b27ecd858b9e"
   },
   "commands": [
     {
-      "command": "python scripts/survey/test_sf_evidence_contract.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": "...................................................\n----------------------------------------------------------------------\nRan 51 tests\n\nOK"
-    },
-    {
-      "command": "python scripts/survey/sf_absence_provenance_migrate.py --check",
-      "exit_code": 0,
-      "stdout_tail": "[OK] absence migration exact: 18 proof rows; review rows=18",
-      "stderr_tail": ""
-    },
-    {
-      "command": "python scripts/survey/sf_coding_generator.py --check",
-      "exit_code": 0,
-      "stdout_tail": "[OK] coding byte-identical to generator output",
-      "stderr_tail": ""
-    },
-    {
-      "command": "python scripts/survey/test_sf_identity_taxonomy_v7_harness.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": "............\n----------------------------------------------------------------------\nRan 12 tests\n\nOK"
-    },
-    {
-      "command": "python scripts/survey/test_sf_h5_calibration_contract.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests\n\nOK"
-    },
-    {
-      "command": "python scripts/survey/test_sf_pdf_extractor_contract.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests\n\nOK"
-    },
-    {
-      "command": "python scripts/survey/test_sf_evidence_v7_aggregate.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": "........\n----------------------------------------------------------------------\nRan 8 tests\n\nOK"
-    },
-    {
       "command": "python scripts/survey/test_sf_query_compiler_profiles.py",
-      "exit_code": 0,
+      "exit_code": 1,
       "stdout_tail": "",
-      "stderr_tail": "failure_restores_existing_target_bytes_and_mode) ... ok\ntest_rollback_fsync_failure_is_composite_without_backup_debris (__main__.CompilerCliTests.test_rollback_fsync_failure_is_composite_without_backup_debris) ... ok\ntest_rollback_replace_failure_is_composite_and_keeps_recovery_backup (__main__.CompilerCliTests.test_rollback_replace_failure_is_composite_and_keeps_recovery_backup) ... ok\ntest_successful_publish_keeps_parent_fsync_and_leaves_no_debris (__main__.CompilerCliTests.test_successful_publish_keeps_parent_fsync_and_leaves_no_debris) ... ok\ntest_all_record_hashes_recompute (__main__.CompilerProfileTests.test_all_record_hashes_recompute) ... ok\ntest_hash_and_render_reject_nan_and_infinity (__main__.CompilerProfileTests.test_hash_and_render_reject_nan_and_infinity) ... ok\ntest_legacy_current_and_frozen_bytes_are_identical (__main__.CompilerProfileTests.test_legacy_current_and_frozen_bytes_are_identical) ... ok\ntest_one_section_4_term_change_changes_compiled_bytes (__main__.CompilerProfileTests.test_one_section_4_term_change_changes_compiled_bytes) ... ok\ntest_section_4_extraction_requires_exactly_one_exact_h2 (__main__.CompilerProfileTests.test_section_4_extraction_requires_exactly_one_exact_h2) ... ok\ntest_appendix_has_exactly_the_14_explicit_dispositions (__main__.ProtocolStructureTests.test_appendix_has_exactly_the_14_explicit_dispositions) ... ok\ntest_appendix_routes_through_cold_indexes_without_physical_paths (__main__.ProtocolStructureTests.test_appendix_routes_through_cold_indexes_without_physical_paths) ... ok\ntest_coverage_matrix_sources_exist_and_normative_targets_carry_rules (__main__.ProtocolStructureTests.test_coverage_matrix_sources_exist_and_normative_targets_carry_rules) ... ok\ntest_direct_threat_requires_exact_dual_coding_contract (__main__.ProtocolStructureTests.test_direct_threat_requires_exact_dual_coding_contract) ... ok\ntest_e2_requires_complete_identifier_resolution_contract (__main__.ProtocolStructureTests.test_e2_requires_complete_identifier_resolution_contract) ... ok\ntest_exact_final_derivation_formulas (__main__.ProtocolStructureTests.test_exact_final_derivation_formulas) ... ok\ntest_exact_frontmatter_and_fixed_section_map (__main__.ProtocolStructureTests.test_exact_frontmatter_and_fixed_section_map) ... ok\ntest_incremental_scan_contract_covers_both_execution_boundaries (__main__.ProtocolStructureTests.test_incremental_scan_contract_covers_both_execution_boundaries) ... ok\ntest_non_normative_section_4_narrative_mutations_do_not_change_contract (__main__.ProtocolStructureTests.test_non_normative_section_4_narrative_mutations_do_not_change_contract) ... ok\ntest_producer_replay_contract_appears_once (__main__.ProtocolStructureTests.test_producer_replay_contract_appears_once) ... ok\ntest_protocol_is_self_contained_not_amendment_dependent (__main__.ProtocolStructureTests.test_protocol_is_self_contained_not_amendment_dependent) ... ok\ntest_reviewer_facing_reference_contract_is_explicit (__main__.ProtocolStructureTests.test_reviewer_facing_reference_contract_is_explicit) ... ok\ntest_section_4_has_an_explicit_normative_interpretation_fence (__main__.ProtocolStructureTests.test_section_4_has_an_explicit_normative_interpretation_fence) ... ok\ntest_section_4_is_exact_raw_lf_copy_to_next_h2 (__main__.ProtocolStructureTests.test_section_4_is_exact_raw_lf_copy_to_next_h2) ... ok\ntest_section_8_execution_steps_are_exact_and_strictly_ordered (__main__.ProtocolStructureTests.test_section_8_execution_steps_are_exact_and_strictly_ordered) ... ok\ntest_section_contracts_stop_before_appendix_h2 (__main__.ProtocolStructureTests.test_section_contracts_stop_before_appendix_h2) ... ok\ntest_structured_protocol_contract_oracle_accepts_current_protocol (__main__.ProtocolStructureTests.test_structured_protocol_contract_oracle_accepts_current_protocol) ... ok\ntest_structured_protocol_contract_oracle_rejects_semantic_mutations (__main__.ProtocolStructureTests.test_structured_protocol_contract_oracle_rejects_semantic_mutations) ... ok\n\n----------------------------------------------------------------------\nRan 37 tests\n\nOK"
+      "stderr_tail": "edited; all coded artifacts are frozen and pinned by the current manifest and audit registry. the deterministic generator and its per-artifact contract checks retired with the campaign (2026-07-28 workspace cleanup; replay from commits 74cf8e4 / 7078623 / 8439295). new r-era paper registrations use the fulltext-ledger + registry-shard contract instead. each load-bearing path binds 16 row-level values: 1. seven strict bits; 2. internal_visibility; 3. core_topology; 4. core_native_modality; 5. control_horizon; 6. decision_rights; 7. candidate_pool_exists; 8. selection_policy; 9. selection_object; and 10. explicit_candidate_pool_selection. each signal binds 4 signal-level values—form, source, lifecycle, and uses. each edge binds 2 edge-level values—signal_use and decision_right. binding values are type tagged: booleans and integers do not compare equal, including inside lists. missing fields and malformed containers yield stable failures rather than exceptions. supported evidence kinds are canon, tex, pdf_page, and structured absence; unknown kinds fail. a structured absence states the encoded value, inspected scope, reason, source version, coder, and adjudicator. it is not a silent default. every row has an adjudication row hash over its canonical load-bearing content excluding adjudication metadata; any load-bearing change invalidates the hash and requires independent adjudication. finalization is bound to the reviewed raw sidecar snapshot and adjudication artifact bytes, with no caller-supplied trust-root override. lineage requires paper_work_id, fulltext_ref, canonical_record_id, source locator, coder, and semantic adjudicator. the full-text ledger line must bind kind and sha-256; the canonical record id must resolve to the correct work heading. a stable actor id is required, coder must differ from semantic adjudicator for load-bearing rows (coder ≠ semantic_adjudicator), accepted rows say adjudicated_agree, and disagreement goes to the conflict queue. bibliographic identity provenance preserves raw atom bytes and their hash. a registered_boundary is valid only when its machine-readable paper, boundary, reason, adjudicator, and date fields are complete. a held-out record requires frozen provenance, date eligibility, and proof that it did not supply query terms. free page locators and pdf_page evidence use the exact grammar pn anchor='multi-word phrase'. after unicode normalization, case-folding, punctuation removal, and whitespace collapse, an anchor has at least two lexical tokens, at least twelve alphanumeric characters, appears in the page window n-1 through n+1, and occurs no more than three times in the complete pdf. required failures are page-token-without-anchor, page-anchor-too-weak, page-anchor-missing, page-anchor-not-discriminative, page-out-of-range, and pdf-unreadable-for-page-check. a pdf_page claim separately checks page range and anchor presence. text anchor_lexical_tokens >= 2 anchor_alphanumeric_characters >= 12 anchor_page_window = n-1..n+1 complete_pdf_occurrences <= 3 the mutation suite is derived from the derived-formula sensitive surface, not merely the last review's examples. it starts from a clean stamped baseline, legitimately recomputes row hashes for new-row tests, and proves each bad mutation creates a named failure. it covers row, signal, edge, locator, actor, ledger, generator, adjudication, and headline binding. independent semantic counterexamples are authored by a non-implementer and enter an append-only fixture library. every new oracle must undergo an oracle-strength audit with a demonstrated failing input. a path with any required-evidence, locator, source, structure, adjudication, or generator failure is excluded from all load-bearing derivations and makes the overall evidence contract fail.\" : uncovered amendment topic: CoverageItem(amendment=13, source_locator='sidecar 单写链', target_section='§7', required_phrases=('single handwritten layer', 'byte-identical', 'reconciliation'))\n\n----------------------------------------------------------------------\nRan 37 tests\n\nFAILED (failures=1)"
     },
     {
       "command": "python scripts/survey/sf_query_compiler.py --check --check-against wiki/survey/2026-07-15-sf-queries.jsonl",
       "exit_code": 0,
       "stdout_tail": "[sf_query_compiler] parsed 48 base Q fragments from §4 (8 lanes x 6 each) + 3 A3-8 registered addition(s) ['SF-L1-Q7', 'SF-L1-Q8', 'SF-L3-Q7'] + 14 registered lane addition(s) ['SF-L10-Q1', 'SF-L10-Q2', 'SF-L11-Q1', 'SF-L11-Q2', 'SF-L12-Q1', 'SF-L12-Q2', 'SF-L12-Q3', 'SF-L13-Q1', 'SF-L13-Q2', 'SF-L13-Q3', 'SF-L14-Q1', 'SF-L14-Q2', 'SF-L15-Q1', 'SF-L15-Q2']\n[sf_query_compiler] NOTE: found 1 lane subsection(s) in §4 outside the registered compiler lanes, each verified to carry ZERO '- Q<n>' Boolean query lines, so excluded from compilation without loss: ['SF-L9']\n\n[sf_query_compiler] static validation report\n========================================================================\n  [PASS] row_count_equals_expected_total :: got 65, expected 65\n  [PASS] query_id_unique :: n_unique=65\n  [PASS] no_placeholder_or_ellipsis_or_angle_bracket_residue :: clean\n  [PASS] no_stray_brackets_outside_submittedDate :: clean\n  [PASS] balanced_parens_and_quotes :: clean\n  [PASS] boolean_operators_fully_uppercase :: clean\n  [PASS] dates_well_formed_and_ordered :: clean\n  [PASS] each_lane_has_expected_query_count :: all lanes match {'SF-L1': 8, 'SF-L2': 6, 'SF-L3': 7, 'SF-L4': 6, 'SF-L5': 6, 'SF-L6': 6, 'SF-L7': 6, 'SF-L8': 6, 'SF-L10': 2, 'SF-L11': 2, 'SF-L12': 3, 'SF-L13': 3, 'SF-L14': 2, 'SF-L15': 2}\n  [PASS] bonus_categories_match_frozen_mapping :: clean\n  [PASS] bonus_exceptions_applied_correctly :: clean\n  [PASS] bonus_record_sha256_recomputes_identically :: clean\n  [PASS] bonus_compiler_version_tiered_correctly :: clean\n  [PASS] bonus_output_order_is_base_prefix_then_additions_appended :: clean\n========================================================================\nOVERALL: PASS\n[sf_query_compiler] PASS (65 byte-identical records)",
       "stderr_tail": ""
-    },
-    {
-      "command": "python scripts/survey/test_sf_existing_corpus_disposition.py",
-      "exit_code": 0,
-      "stdout_tail": "",
-      "stderr_tail": "......................\n----------------------------------------------------------------------\nRan 22 tests\n\nOK"
     },
     {
       "command": "python scripts/survey/test_sf_bibliography_generator.py",
@@ -867,5 +739,5 @@
       "stderr_tail": ""
     }
   ],
-  "verdict": "PASS"
+  "verdict": "FAIL"
 }
