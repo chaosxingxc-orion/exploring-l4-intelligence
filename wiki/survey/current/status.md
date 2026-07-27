@@ -1,10 +1,15 @@
 # Current Survey Status
 
-- Gate: Stage‑1C complete; endpoint `STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING`.
-- Owner decision: five dimensions and nine finalized directions are effective; see `research-directions.md`.
-- R1 academic problem is owner-approved: measure the finite-menu empirical ceiling, interaction and
-  heterogeneity of demonstration plus query-view context before testing a training-free constructor; cost is
-  recorded but is not an R1 objective. R2 is next for the same opening-report refinement.
+- Gate: Stage‑1C in owner-directed remediation (~70%); endpoint
+  `STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING`.
+- Owner decision (2026-07-27): the five dimensions and nine finalized directions stand as content; the evidence layer is
+  ruled below acceptance. Ruling A: core = Qwen3-Omni-30B via the local llama.cpp lane (Qwen2.5-Omni-7B
+  preference superseded). Ruling B: ASR mainline = general ASR (child-ASR mainline superseded). See
+  `research-directions.md`.
+- R1 problem shape is owner-approved (finite-menu ceiling, interaction and heterogeneity of demonstration
+  plus query-view context before any training-free constructor; cost recorded, not an R1 objective), but its
+  references, cited methods and locked baselines are under step-2 correction per the 2026-07-27 ruling;
+  R2–R9 then rise to the corrected-R1 standard.
 - Object: reliable capability lift for an API-only frozen speech/omni core through external system-level
   in-context control; training-free RL is the selected evolution route.
 - Priority: R5 evidence-state architecture + R6 within-instance reward-guided control + R8
@@ -20,6 +25,7 @@
 - Exposure: literature search/fetch/full-text review and document/formal checks occurred, including six
   R1-neighbor fulltexts; no model/API execution, metric run, reproduction or prototype occurred.
 - Withheld: dataset/model acquisition, technical novelty verdict, Stage‑2A execution, push and wiki publication.
-- Next action: define R2; separately reconcile MMAU-mini/MMAR asset status and bind core/service, data, prompt/decoding, action menu,
+- Next action: step 2 — correct R1 under rulings A/B; then step 3 (R2–R9 refinement). Separately reconcile
+  MMAU-mini/MMAR asset status and bind core/service, data, prompt/decoding, action menu,
   reward, gold fence, baselines, budget, SESOI, reliability thresholds and abort rules; request
   `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`.

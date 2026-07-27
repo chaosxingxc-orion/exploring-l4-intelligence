@@ -1680,8 +1680,10 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(date(2026, 7, 27), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage‑1C capability portfolio is complete",
-            "STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING",
+            "Stage‑1C is in owner-directed remediation",
+            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "Qwen3-Omni-30B",
+            "general ASR",
             "Stage‑1B v5",
             "320-work",
             "API-only",

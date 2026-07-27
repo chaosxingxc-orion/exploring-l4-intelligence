@@ -1,13 +1,19 @@
 ---
 artifact_id: "SF-STAGE1C-CAPABILITY-PORTFOLIO-V1"
 role: "CURRENT effective research-direction contract"
-authority: "owner direction finalized 2026-07-27"
-stage: "STAGE_1C_COMPLETE"
-endpoint: "STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING"
+authority: "owner direction 2026-07-27; same-day remediation ruling applies"
+stage: "STAGE_1C_REMEDIATION"
+endpoint: "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
 # 五维研究方向定稿：API-only 冻结多模态模型的可靠能力激活
+
+> **2026-07-27 owner 整改裁决（先于本文其余内容生效）。** 方向内容成立，证据绑定层未达验收：R1 的
+> 参考文献、引用方法与锁定实验基线需重推导（step 2），R2–R9 随后提升到修正后 R1 标准（step 3）。
+> **裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为可复现载体，精确 revision 在
+> Stage‑2A 授权包冻结）；本文 §4-R1 验证与 §6 中"首选 Qwen2.5-Omni-7B"口径已被取代。**裁决 B**：ASR
+> 主线为通用 ASR，MyST/RSR 儿童 ASR 失去主线地位。上述两节的载体文字在 step-2 重写落地前视为过期。
 
 ## 1. 唯一研究问题
 

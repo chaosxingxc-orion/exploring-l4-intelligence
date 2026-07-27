@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-27 — R1 academic problem definition approved and evidence-registered; R2 refinement next"
+last_refresh: "2026-07-27 — owner remediation ruling: portfolio ~70%; R1 correction first; core=Qwen3-Omni-30B, ASR=general"
 ---
 
 # Research Objective & Current State
@@ -10,12 +10,16 @@ last_refresh: "2026-07-27 — R1 academic problem definition approved and eviden
 
 ## Current gate and authority
 
-Stage‑1C capability portfolio is complete. Endpoint:
-`STAGE1C_COMPLETE_CAPABILITY_DIRECTIONS_FINAL_STAGE2A_CONTRACT_PENDING`.
+Stage‑1C is in owner-directed remediation at ~70%. Endpoint:
+`STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING`.
 
-The 2026-07-27 owner direction finalizes five dimensions and approves R1's academic rewrite, nearest-prior
-fulltext registration and document/formal checks. The authorization excludes model/API execution, datasets, metrics, reproduction,
-prototypes, novelty verdicts, Stage‑2A execution, push and wiki publication remain unauthorized.
+The 2026-07-27 owner direction keeps the five dimensions and nine directions but holds the evidence layer
+below acceptance: R1's references, cited methods and locked baselines must be re-derived; R2–R9 carry no
+numeric thresholds. Steps: P0 record repair; R1 correction; R2–R9 to corrected-R1 standard. Ruling A: the
+program core is Qwen3-Omni-30B via the local llama.cpp lane (revision frozen at Stage‑2A); the prior
+Qwen2.5-Omni-7B preference is superseded. Ruling B: the ASR mainline is general ASR, not child ASR.
+The gate still excludes model/API execution, datasets, metrics, reproduction, prototypes, novelty
+verdicts, Stage‑2A execution, push and wiki publication.
 
 ## Final research object
 
@@ -24,29 +28,27 @@ system-level in-context control to construct, select and update knowledge, memor
 state, so that task capability improves reliably across runs and conditions without changing model
 parameters or internals.
 
-There are nine finalized directions: multi-source context ceiling and adaptive construction; audio-native external
-knowledge acquisition; acoustically keyed persistent memory; runtime skill lifecycle; incumbent-preserving
-evidence-state architecture; within-instance reward-guided context/trajectory control; cross-instance
-experience-driven evolution; condition-adaptive reliable capability lift; and five-dimension integration.
+There are nine finalized directions (R1–R9): multi-source context ceiling/construction; audio-native
+knowledge acquisition; acoustic-keyed memory; runtime skill lifecycle; evidence-state architecture;
+within-instance reward control; cross-instance evolution; condition-adaptive reliable capability lift;
+five-dimension integration.
 
-The prior `C1_DECISION_CALIBRATED_REWARD` primary selection is superseded. Evaluator decision utility,
-headroom, stop/repair/abstain and reward-hacking tests remain shared measurement, control and stress-test
-components; they are not the program's primary research object. Fixed-pool headroom bounds only that
-executed pool and is not a gate on new contexts created by the system.
+The prior `C1_DECISION_CALIBRATED_REWARD` primary selection is superseded; evaluator, headroom,
+stop/repair/abstain and reward-hacking tests are shared measurement components, and fixed-pool headroom
+gates no new system-created contexts.
 
 R1 first measures the menu-limited empirical ceiling, demonstration/query-view interaction and sample
 heterogeneity across ASR and audio understanding/reasoning. Only a nonzero best-fixed-to-oracle opportunity
 opens a training-free constructor study. Generic audio few-shot ICL/demo retrieval are occupied; cost is
-recorded but is not an R1 objective or gate.
+recorded, not an R1 gate.
 
 ## Formal and evidence boundary
 
 Lean is used to audit explicit assumptions and operator-level implications, not to prove empirical
 effectiveness. The old finite-pool read-out bound cannot be generalized to an all-contexts ICL limit.
-The new runtime-reliability lemma proves only that, if reward error is uniformly bounded by `ε`, an
-estimated selected-over-incumbent margin of at least `2ε` implies true non-regression; the error-bound
-hypothesis still requires empirical calibration and stress testing. Implementation-to-theorem conformance
-remains open.
+The runtime-reliability lemma shows only that a `2ε` estimated margin implies true non-regression under a
+uniform reward-error bound `ε`, which still needs empirical calibration. Implementation-to-theorem
+conformance remains open.
 
 Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and its 320-work union remain fixed. The portfolio adds
 35 speech/omni fulltexts, 73 cross-domain donors and T1/T2/T3; R1 separately registers six hash-bound ICL/
@@ -63,8 +65,8 @@ Next action: bind the exact core/service revision, dataset revision/split/hash, 
 menu, runtime reward, gold fence, baselines, budget, SESOI, reliability thresholds and abort rules; then
 request `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`.
 
-Immediate documentation action: define R2 with the same problem/occupancy/dataset/carrier/falsification
-standard; this does not pre-authorize Stage‑2A.
+Immediate documentation action: step 2 — correct R1 (occupancy re-sweep, carrier re-selection, baseline
+re-lock, noise-corrected selection-opportunity estimator) under rulings A/B; step 3 then raises R2–R9.
 
 ## Legacy and routing
 

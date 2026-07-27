@@ -2,7 +2,7 @@
 proposal_id: "R1"
 title: "冻结 Speech/Omni 模型的多源上下文能力上界与自适应构造"
 dimension: "D1 multimodal knowledge"
-status: "owner-approved academic problem definition; experiment execution withheld"
+status: "problem shape owner-approved; references/methods/baselines under owner-directed step-2 correction (2026-07-27 rulings A/B: Qwen3-Omni-30B core, general-ASR mainline); experiment execution withheld"
 evidence_cut: "2026-07-27"
 execution_authority: "WITHHELD"
 ---

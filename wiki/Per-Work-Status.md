@@ -16,16 +16,19 @@
   system-level in-context control. `C1_DECISION_CALIBRATED_REWARD` is retained only as a shared
   measurement/reliability component. The fixed Stage‑1B v5 release remains
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is unchanged evidence.
-  R1's academic problem is owner-approved as a two-stage study of demonstration + query-view menu
-  ceiling/mechanism followed, only if warranted, by training-free adaptive context construction. Six
-  nearest-prior fulltexts are separately hash-registered; R2 is next for direction-definition refinement.
+  R1's academic problem shape is owner-approved as a two-stage study of demonstration + query-view menu
+  ceiling/mechanism followed, only if warranted, by training-free adaptive context construction; six
+  nearest-prior fulltexts are separately hash-registered. Owner remediation ruling (2026-07-27): the
+  portfolio stands at ~70%; R1's references, cited methods and locked baselines are being re-derived under
+  ruling A (core = Qwen3-Omni-30B via the local llama.cpp lane; Qwen2.5-Omni-7B preference superseded) and
+  ruling B (ASR mainline = general ASR); R2–R9 then rise to the corrected-R1 standard.
 - **Legacy disposition:** R1 agreement remains `FAIL` with no adjudication. R2R1 passed 22 focused
   implementation tests but was never independently accepted or distributed; it is
   `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not a valid calibration release. H5 remains
   withheld and non-load-bearing, so cross-modality conclusions are prohibited without blocking the
   selected speech/API-only problem.
-- **Next authorized work:** R2 academic problem refinement plus planning and exact-contract preparation only
-  for the R5+R6+R8 vertical slice:
+- **Next authorized work:** step-2 R1 correction under rulings A/B, then step-3 R2–R9 refinement, plus
+  planning and exact-contract preparation only for the R5+R6+R8 vertical slice:
   freeze one core/service, MMAU-mini/MMAR revisions/splits, action menu, runtime reward, gold fence,
   equal-cost baselines, reliability/cost measures, SESOI and abort rules; then request
   `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`. Model/API calls, metrics, dataset/model acquisition,

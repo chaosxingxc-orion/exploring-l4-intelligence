@@ -1077,7 +1077,9 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C complete",
+            "Stage‑1C in owner-directed remediation",
+            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "Qwen3-Omni-30B",
             "capability-first portfolio",
             "status.md",
             "research-directions.md",
@@ -1100,7 +1102,10 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C complete",
+            "Stage‑1C in owner-directed remediation",
+            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "Qwen3-Omni-30B",
+            "general ASR",
             "nine finalized directions",
             "API-only",
             "reliable capability lift",
