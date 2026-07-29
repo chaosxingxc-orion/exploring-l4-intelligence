@@ -6,26 +6,28 @@ stage: "STAGE_1C_PROPOSAL_DRAFT"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
-# 九项能力激活研究开题报告
+# 九项候选能力激活研究开题报告
 
 ## 1. Portfolio 结论
 
-本目录把 CURRENT 的九条研究方向逐项扩写为以问题定义、学术占位、数据集和实验承载为中心的开题报告。
+本目录把 CURRENT 的原九条候选方向逐项扩写为以问题定义、文献占位、数据集和实验承载为中心的开题报告。
 共同研究对象不是模型参数，
 而是围绕冻结 speech/omni 推理 API 的外部控制平面：系统通过构造、选择和更新 in-context
 状态，决定观察什么、保留什么经验、调用什么技能、谁拥有作答权，以及 reward 如何改变下一步动作。
 
-R1 已按 2026-07-27 owner 指令完成问题重定义；R2-R9 仍保留为待逐项细化的旧版 proposal。九篇文档
-不是九个必须同时启动的独立项目。它们组成一条有依赖的研究路线：
+R1 已由 owner 裁决在 Stage-2 前日落（2026-07-29 确认，Decision-Log 续76）；R2 分析为执行者草稿
+（owner 未校验），其日落/重路由建议已撤回为草稿意见，待按 2026-07-29 方向成立判据与 owner 协同
+重审；R3-R9 同为 owner 未校验的旧版 proposal。九篇文档是九个候选的审计记录，不是九个必须启动的
+独立项目。
+当前保留路线及可选 evidence carrier 为：
 
 ```text
 R5 evidence-state architecture
   └─ R6 within-instance reward control
        └─ R8 reliable capability control
-            ├─ R1 multi-source context ceiling/construction
             ├─ R4 runtime skill lifecycle
             ├─ R3 acoustic-keyed memory ── R7 cross-instance evolution
-            └─ R2 external knowledge acquisition (only when facts are absent from audio)
+            └─ optional published external-knowledge carrier (only when facts are absent from audio)
                          └─ R9 integrated system
 ```
 
@@ -36,8 +38,8 @@ R5 evidence-state architecture
 
 | ID | Proposal | 主维度 | 直接语音证据 | 跨域 donor 的角色 | 建议批次 |
 |---|---|---|---|---|---|
-| R1 | [多源上下文能力上界与自适应构造](R1-adaptive-evidence-supply.md) | D1 知识 | 六个 hash 登记邻居＝Audio Flamingo、MiMo-Audio、MetaSICL、TICL、TICL+、ByCS；TwS/CoM 为 supplement 级证据（D1／前期 registry）【复核更正 2026-07-27 P0】 | 视觉/文本 ICL 只作交互与异质性方法参照 | Stage-2B |
-| R2 | [音频原生外部知识获取与检索调度](R2-audio-native-knowledge-acquisition.md) | D1 知识 | AudioRAG、Omni-DeepSearch、VoiceAgentRAG | 借搜索停止、检索效用归因 | Stage-2D |
+| R1 | [语音/音频上下文学习方法复现与比较](R1-adaptive-evidence-supply.md) | D1 知识 | 八篇直接/近邻论文；只复用论文数据、基线和指标 | 已发表方法按需路由至 R3–R8 | **Owner 确认（2026-07-29）：Stage-1C 日落，不进入 Stage-2** |
+| R2 | [音频驱动外部知识检索的文献归纳与方向处置](R2-audio-native-knowledge-acquisition.md) | D1 知识 | AudioRAG、Omni-DeepSearch、VoiceAgentRAG | 不再借 donor 发明独立调度器；证据路由至 R3/R5/R6/R7/R8/R9 | **执行者草稿，owner 未校验；按 07-29 判据属 (a) 型，待协同重审** |
 | R3 | [声学条件键控的持久多模态记忆](R3-acoustic-keyed-memory.md) | D2 记忆 | AOP-Agent、audio uncertainty；直接跨实例语音工作薄 | 借 M2Note、MemRL、PhysMem、MemCollab 的 schema/门控 | Stage-2C |
 | R4 | [运行时多模态技能的信用、组合与生命周期](R4-runtime-skill-lifecycle.md) | D3 技能 | Speech-Copilot、Audio-Maestro、AuTAgent | 借 Trace2Skill、PANDO 的归纳/退役协议 | Stage-2B |
 | R5 | [Incumbent-preserving 证据状态智能体架构](R5-evidence-state-agent-architecture.md) | D4 系统 | Audio-Mind、Agent-Omni、AudioToolAgent、ARC agents | 借 WebThinker 的取证合同 | Stage-2A |
@@ -63,7 +65,9 @@ speech/omni 模型上提高能力。H5 仍为 `WITHHOLD_NON_LOAD_BEARING`。
 
 ## 4. Review 与执行边界
 
-除 R1 的学术问题定义已获 owner 批准外，其余文件仍是 owner-unsigned workbench proposal。它们可以用于
+R1 日落裁决已经 owner 确认（2026-07-29，Decision-Log 续76）；R2 no-go/merge 建议已撤回为执行者
+草稿意见；R2–R9 均为 owner 未校验（`OWNER_UNVERIFIED`）的 workbench proposal，须按 2026-07-29
+方向成立判据与 owner 协同重审后才能定处置。它们可以用于
 方向评审、Stage-2 合同收敛和实验准备清单，
 但不授权模型/API 调用、数据下载、metrics、reproduction、prototype、技术 novelty verdict、push 或 wiki
 publication。任何执行都要先把 proposal 中仍标为 `TBD_AT_AUTHORIZATION` 的模型、数据、prompt、预算、

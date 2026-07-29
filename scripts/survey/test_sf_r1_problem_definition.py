@@ -30,32 +30,50 @@ class R1ProblemDefinitionContractTests(unittest.TestCase):
     def test_opening_report_carries_the_locked_academic_problem(self) -> None:
         text = R1.read_text(encoding="utf-8")
         for required in (
-            "多源上下文能力上界与自适应构造",
+            "语音/音频上下文学习方法复现与比较研究",
+            "STAGE_1C_DIRECTION_CONFIRMATION",
+            "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+            "OWNER_CONFIRMED_SUNSET_2026-07-29",
+            "Decision-Log 续76",
+            "不做创新点搜索",
+            "数据只复用参考论文",
+            "指标只复用参考论文",
+            "Common Voice 15.0",
+            "GLOBE-V2",
+            "L2-ARCTIC",
+            "MyST",
+            "RSR",
+            "MMAU",
+            "MMAR",
+            "MELD-Hard1k",
+            "Qwen3-Omni-30B",
+            "uniform random",
+            "ECAPA-TDNN",
+            "Vanilla SICL",
+            "WER",
+            "CER",
+            "accuracy",
+        ):
+            self.assertIn(required, text)
+        for retired in (
             "H_{\\mathrm{ctx}}",
             "O_{\\mathrm{sel}}",
             "I_{D\\times G}",
             "R_\\pi",
-            "UNAVAILABLE_SPLIT_FENCE",
-            "MyST",
-            "RSR",
-            "MMAU Test-mini",
-            "MMAR",
-            "MELD-Hard1k",
             "Qwen/Qwen2.5-Omni-7B",
-            "XiaomiMiMo/MiMo-Audio-7B-Instruct",
-            "成本压缩属于后续工作",
         ):
-            self.assertIn(required, text)
-        self.assertIn("以下表述均被禁止作为 R1 创新", text)
-        self.assertIn("给定可执行菜单内的经验上界", text)
+            self.assertNotIn(retired, text)
 
     def test_current_contract_exposes_the_same_r1_boundary(self) -> None:
         text = CURRENT.read_text(encoding="utf-8")
-        self.assertIn("### R1 — 多源上下文能力上界与自适应构造", text)
-        self.assertIn("禁止 test leave-one-out", text)
-        self.assertIn("成本压缩仍属于后续工作", text)
+        self.assertIn("### R1 — 冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较", text)
+        self.assertIn("Common Voice 15.0", text)
+        self.assertIn("不自建数据", text)
+        self.assertIn("不新造 utility", text)
+        self.assertIn("NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2", text)
+        self.assertIn("不进入 Stage-2B", text)
         self.assertIn("MetaSICL", text)
-        self.assertIn("TICL/TICL+", text)
+        self.assertIn("TICL+", text)
 
     def test_registry_is_unique_and_hash_bound_to_fulltext_ledger(self) -> None:
         records = load_jsonl(REGISTRY)
@@ -82,6 +100,8 @@ class R1ProblemDefinitionContractTests(unittest.TestCase):
     def test_supplement_preserves_split_and_claim_boundaries(self) -> None:
         text = SUPPLEMENT.read_text(encoding="utf-8")
         for required in (
+            "SUPERSEDED_AS_DESIGN",
+            "不再承载 R1 的当前研究设计",
             "12 条新增哈希记录",
             "test leave-one-out",
             "Base 与 Instruct",

@@ -4,9 +4,16 @@ artifact_id: "R1-CONTEXT-ICL-EVIDENCE-SUPPLEMENT-V1"
 role: "workbench full-text evidence supplement for the owner-approved R1 problem definition"
 evidence_cut: "2026-07-27"
 execution_authority: "WITHHELD"
+status: "SUPERSEDED_AS_DESIGN; RETAINED_AS_EVIDENCE_NOTES"
+superseded_by: "wiki/survey/workbench/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md"
 ---
 
 # R1 多源上下文：相邻工作、数据集与实验载体补充证据
+
+> **2026-07-28 supersession note.** 本文件保留 2026-07-27 的论文取证笔记，不再承载 R1 的当前研究设计。
+> 其中 Qwen2.5 主载体、MyST/RSR 主线、MELD-Hard1k recipe 重建、多源联合菜单和自适应 selector 均已
+> 被新的 R1 报告取代。Owner 随后（2026-07-29 确认，Decision-Log 续76）裁决 R1 在 Stage-2 前日落：本件及新报告只保留为参考方法、数据、
+> baseline 与 metric 证据包；消费这些方法的保留方向按需复现，不再建立独立 R1 实验。
 
 ## 1. 结论
 

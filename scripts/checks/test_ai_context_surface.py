@@ -1677,22 +1677,25 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 27), refresh_date)
+        self.assertEqual(date(2026, 7, 29), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage‑1C is in owner-directed remediation",
-            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING",
             "Qwen3-Omni-30B",
             "general ASR",
             "Stage‑1B v5",
             "320-work",
             "API-only",
-            "nine finalized directions",
-            "reliable capability lift",
+            "original R1–R9",
+            "improves reliably",
             "system-level in-context control",
             "H5 remains `WITHHOLD_NON_LOAD_BEARING`",
-            "owner direction",
-            "model/API execution",
+            "owner-confirmed (2026-07-29, Decision-Log 续76)",
+            "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+            "OWNER_UNVERIFIED",
+            "direction criterion (2026-07-29)",
+            "Model/API execution",
             "wiki/survey/current/README.md",
             "wiki/survey/current/research-directions.md",
             "wiki/audit/system-first-stage1c-v2-calibration/INDEX.md",
@@ -1742,7 +1745,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 27), per_work_date)
+        self.assertEqual(date(2026, 7, 29), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

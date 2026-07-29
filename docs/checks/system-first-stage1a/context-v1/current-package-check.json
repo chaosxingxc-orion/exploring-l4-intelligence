@@ -27,7 +27,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "e19bcd43f33a3d8c5c7924f89e8d52e97f281c41"
+        "git_blob": "c562e1b61cb3044a202a043952dc9a7cd0e80be3"
       },
       {
         "path": "scripts/survey/sf_archive_candidates.py",
@@ -142,7 +142,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "20488011db519b42ca8ca401c4efd4d687f37c04"
+        "git_blob": "da81b0e0081745cacad55ebf0a9232eefe2a8bf4"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -172,7 +172,12 @@
       {
         "path": "scripts/survey/test_sf_r1_problem_definition.py",
         "mode": "100644",
-        "git_blob": "a2a38af22a80171d16213c56301c434793d5dbc9"
+        "git_blob": "4a29a894a7109c68f6f744126dcef523021b807e"
+      },
+      {
+        "path": "scripts/survey/test_sf_r2_problem_definition.py",
+        "mode": "100644",
+        "git_blob": "a5ebacd1d3a5fd43e6435d2abcd22183255e3c38"
       },
       {
         "path": "scripts/survey/test_sf_stage1b_registry_views.py",
@@ -182,7 +187,7 @@
       {
         "path": "scripts/survey/test_sf_stage1c_common_rubric.py",
         "mode": "100644",
-        "git_blob": "5712c0b9a4483878cfcf4cf540069c3c706d7022"
+        "git_blob": "6c22a76b091cc32c87f2acbb5d810973ff881335"
       },
       {
         "path": "scripts/wiki-sync.sh",
@@ -190,7 +195,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "8d388d8ee48b5aae6be791c6a9537ac0116cefaed2a92202e81f3432bfc5310f"
+    "sha256": "83f6e1fb127f27af6968544c881631d13a02ccfe39bc6871f85d3a0b86b81984"
   },
   "commands": [
     {

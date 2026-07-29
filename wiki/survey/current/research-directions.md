@@ -1,19 +1,24 @@
 ---
 artifact_id: "SF-STAGE1C-CAPABILITY-PORTFOLIO-V1"
 role: "CURRENT effective research-direction contract"
-authority: "owner direction 2026-07-27; same-day remediation ruling applies"
+authority: "owner directions 2026-07-27/28/29 (Decision-Log 续76)"
 stage: "STAGE_1C_REMEDIATION"
-endpoint: "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING"
+endpoint: "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
 # 五维研究方向定稿：API-only 冻结多模态模型的可靠能力激活
 
-> **2026-07-27 owner 整改裁决（先于本文其余内容生效）。** 方向内容成立，证据绑定层未达验收：R1 的
-> 参考文献、引用方法与锁定实验基线需重推导（step 2），R2–R9 随后提升到修正后 R1 标准（step 3）。
-> **裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为可复现载体，精确 revision 在
-> Stage‑2A 授权包冻结）；本文 §4-R1 验证与 §6 中"首选 Qwen2.5-Omni-7B"口径已被取代。**裁决 B**：ASR
-> 主线为通用 ASR，MyST/RSR 儿童 ASR 失去主线地位。上述两节的载体文字在 step-2 重写落地前视为过期。
+> **2026-07-27/28/29 owner 整改裁决（先于本文其余内容生效）。** 五个维度和原九个候选方向继续作为
+> Stage-1C 审计框架，但不保证九项都进入 Stage-2。R1 日落已由 owner 于 2026-07-29 确认
+> （Decision-Log 续76）；R2–R9 整批为执行者草稿、owner 未校验（`OWNER_UNVERIFIED`），待按 07-29
+> 判据协同重审。**裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为后续可复现
+> 载体，精确 revision 在独立执行合同中冻结）。**裁决 B**：ASR 主线为通用 ASR，MyST/RSR 等儿童 ASR
+> 只作支持证据。**方向成立判据（owner 2026-07-29）**：方向必须完成充分调研，且属两型之一——(a) 本
+> 领域存在已有工作，作为方法论基线提供实验、方法和工程依据并参与对比；(b) 本领域无已有工作，借鉴
+> 其他领域内容设计实验、提出方法和改进；两型都必须在具体任务上与存量业内最优（SOTA）基线对比。
+> **裁决 C/D/E（执行者代拟，owner 未签）**：不探索创新点、数据集只复用正式可得版本、指标复用官方
+> 口径——作为工作默认保留，与 07-29 判据冲突处以判据为准。
 
 ## 1. 主研究问题
 
@@ -50,9 +55,9 @@ subject to API-only legality, bounded cost,
 latency、API cost。Evaluator accuracy、headroom、abstention 和 harm 是解释量或约束量，不替代最终任务
 效用。绝对正确性不可承诺；“可靠”只在明确分布、误差假设和阈值下陈述。
 
-R1 的阶段 A 是能力上界与机制识别，例外地不以 latency/cost/budget 为研究变量或通过门；有限菜单保证
-实验可终止，资源只做完整记账。阶段 B 若要把收益归因于“选择”而非“多执行”，可以增加 matched-compute
-对照，但成本压缩仍属于后续工作。
+已日落的 R1 仍保留数据集—方法—基线—指标复现矩阵作为证据包；其基线只由实际消费它们的保留方向
+按需复用，不建立独立实验。R2 同样只复用 AudioRAG、Omni-DeepSearch、VoiceAgentRAG 的原始指标，不
+新造统一 utility、need score、retrieval contribution 或 cost-quality 总分来挽救方向。
 
 ### C3 — system-level ICL 合同
 
@@ -77,53 +82,54 @@ Lean 用于检查“假设是否足以推出结论”和“论文算法是否真
 | D4 多模态智能体系统 | evidence state、组件拓扑和决策权分配 | 谁规划、谁执行、谁作答、何时保留 incumbent | 跨时间改进规律 |
 | D5 智能体系统进化 | 实例内/跨实例策略动力学 | reward 如何改变下一动作，经验如何改变未来控制 | 模型参数训练；TFRL 是路线而非维度本体 |
 
-## 4. 九条定稿研究方向
+## 4. 原九条候选方向及当前处置
 
-### R1 — 多源上下文能力上界与自适应构造
+### R1 — 冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较（已日落）
 
-**问题。** 对冻结 Speech/Omni API，把带标签 audio demonstrations 与当前 query 的 raw audio、分段/窗口、
-ASR view、raw+ASR 和确定性重表达统一成 context configuration。先问这些来源在给定可执行菜单内能产生
-多大经验能力上界、是互补/替代还是干扰、最佳配置为何按样本变化；再问无 test gold、无参数更新的黑盒
-智能体能否逐样本构造 context 并恢复这种选择机会。宽泛的 audio few-shot ICL 与 demo retrieval 已被
-Audio Flamingo、MiMo-Audio、MetaSICL、TICL/TICL+ 和 ByCS 占据，不再作为创新表述。
+**问题。** 在项目选定的冻结、API-only Qwen3-Omni-30B 核心上，参考论文已经提出的 speech/audio
+in-context learning 和 query-side context 方法，能否在其既有数据集、split、baseline 与 metric 口径下得到
+可复现、可比较且边界清楚的结果？R1 不把“audio few-shot”“speech demo retrieval”“audio tool use”或
+“modality topology”重新包装为创新；它只归纳并复现这些已有方法在通用 ASR 和 AU/AR 上何时有益、何时
+退化、哪些协议无法闭合。
 
-**两阶段机制。** 阶段 A 枚举预注册有限菜单
-`(demo subset, query views, order/topology, fixed template)`，分别计算 direct、开发集 best fixed、test-only
-offline menu oracle、context headroom、demo×query-view 交互和样本异质性。阶段 B 只在 headroom 与
-best-fixed-to-oracle selection opportunity 都成立后，使用输入特征、retrieval score、输出一致性和黑盒反馈
-构造 context；不训练 core/controller，不使用 gold-derived runtime signal。
+**研究内容。** 主线一复用 TICL 的通用 ASR 协议，比较 direct/zero-shot、uniform random、Whisper、
+HuBERT、ECAPA-TDNN、WavLM retrieval 与 TICL text-embedding KNN。主线二复用 MetaSICL/MiMo-Audio
+的 MMAU/MMAR direct 与 Vanilla SICL；few-shot demonstration pool 在论文/官方代码可精确还原前保持
+关闭。TICL+、ByCS、Audio Flamingo、TwS 和 CoM 仅按各自原论文任务作独立复现或边界证据，不拼接为
+新的 selector、controller 或多方法菜单。
 
-**验证。** 双主线同等承重：ASR 用 MyST+RSR，AU/AR 用 MMAU Test-mini+MMAR，MELD/MELD-Hard1k 只做
-clean/perturbed 机制压力。示例只能来自 official train/dev 或审计后的独立池；MMAU/MMAR 在独立 demo pool
-闭合前只运行 query-view arm，禁止 test leave-one-out。主模型 Qwen2.5-Omni-7B 跑完整菜单，MiMo-Audio
-7B Instruct 复核 direct、best fixed、menu oracle 与 selector；Base/Instruct 文献数字不得混写。
+**数据与指标。** 通用 ASR 主载体为 TICL 使用的 Common Voice 15.0、GLOBE-V2 和 L2-ARCTIC；
+demonstrations 复用论文的 validated 或 train+validation pool，评估复用 official test。AU/AR 使用论文中的
+MMAU、MMAR public test 与官方脚本。ASR 使用 WER，zh/ja/th 使用 CER；AU/AR 使用 accuracy，并保留
+论文已有 subgroup/category 报告。未正式发布的 MELD-Hard1k 不重建；不自建数据，不新造 utility、
+headroom、recovery ratio 或跨任务总分。
 
-**Lean 义务。** `InfoBoundary` 的 fixed-pool read-out ceiling 不覆盖改变 context 后重新生成。Lean 只审计
-有限菜单定义、gold/runtime 隔离、best-fixed/oracle 定义域和 recovery ratio 非零分母；不证明经验
-headroom、交互、可预测异质性或 selector 有效。
+**参考边界。** Audio Flamingo 是经过 ICL/RAG 专门训练的模型；MiMo 的 few-shot 主证据来自 Base；
+MetaSICL1/2/3 和 CoM 的 PRD 分析路径包含参数训练；ByCS 依赖 Whisper inverse inference；TwS/CoM 的
+部分实现或作者数据未发布。这些结果只定义可复现基线和限制，不能直接当作 Qwen3 核心的已知结果。
 
-**击杀/重路由。** 若菜单 headroom 近零，停止自适应阶段但不外推 all-contexts impossibility；若有
-headroom 而 best fixed 已逼近 oracle，保留固定 context 机制；若 selection opportunity 存在但 selector 不
-超过 best fixed，报告不可恢复的选择机会。只在 synthetic/model/task 子域成立时必须收缩作用域。
+**最终判断。** Owner 已于 2026-07-29 确认 `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`
+（理由：R1 不具备独立研究方向潜力，只提出基础要探索的内容，不构成可对比的研究问题）。上述文献、数据、
+基线和指标作为归纳记录保留；TICL/TICL+/ByCS 与 TwS/CoM 只在 R3–R8 实际消费相应 action 时按原论文
+协议复现。R1 不建立独立实验包，不进入 Stage-2B，也不得成为其他方向的前置条件。详细分析见 workbench
+R1 报告。
 
-### R2 — 音频原生外部知识获取与检索调度
+### R2 — 音频驱动外部知识检索（执行者草稿，owner 未校验）
 
-**问题。** 当答案确实不在 waveform 内时，系统如何决定是否检索、查询什么、购买多少 hop、何时停止，
-并避免 live-search 漂移把能力提升与信息变化混在一起。
+**审计对象。** AudioRAG 已发布 500 题 benchmark 和 text-controller + audio-tool + live-web pipeline；
+Omni-DeepSearch 已发布 640 题 audio-only-start deep-search benchmark、固定搜索预算消融和 accuracy 体系；
+VoiceAgentRAG 已发布跨轮 prefetch/cache 系统和 latency/hit-rate 体系。三者分别占据 benchmark、固定搜索
+pipeline 和 anticipatory supply，但不构成一套可直接合并的 R2 实验。
 
-**机制。** 将 endogenous audio evidence 与 exogenous corpus/web evidence 分开计价；query、retrieval、
-admission、cross-modal verification 和 answer regeneration 都是显式 action。 anticipatory/prefetch 仅在真实
-延迟可隐藏且命中上下文能改善任务答案的场景启用。
+**关键不匹配。** 原 R2 的 H1 要区分 `waveform-sufficient / external-required`，而 AudioRAG 与
+Omni-DeepSearch 在数据构造时都过滤掉不需要检索的题；官方数据没有 negative class。原 H2 的 reward/VoI
+query-hop-stop 没有直接参考方法，属于 R6 的 trajectory controller；two-ledger 属于 R5；条件回归和预算停止
+属于 R8。自行补负例、冻结 web corpus、发明归因指标或统一 utility 都违反当前数据/指标边界。
 
-**验证。** 使用冻结检索快照、可审计 query/tool trace 和同 retrieval budget 基线；分别报告 audio-grounding、
-retrieval、reasoning 与 stopping 贡献。AudioRAG/Omni-DeepSearch 类工作提供 carrier 和 failure taxonomy，
-不提供跨版本可复现的 live-web 绝对数。
-
-**Lean 义务。** 区分“改变 context”与“加入新信息”；形式证明只覆盖预算、终止和信息边界。任何关于
-retrieval 能跨越知识缺口的效果陈述都必须由实验支持。
-
-**击杀/重路由。** 若任务可由 waveform/direct context 完成，或 pinned retrieval 在等成本下不改善效用，
-则该 carrier 移出 R2；R2 本身只保留真正需要外部事实的任务。
+**处置状态。** 原执行者建议（no-go/merge）已撤回为草稿意见，未经 owner 校验，不构成裁决。按
+2026-07-29 方向判据，R2 属 (a) 型——AudioRAG、Omni-DeepSearch、VoiceAgentRAG 是本域已有工作，可
+作为方法论基线在具体任务上与 SOTA 对比——因此 R2 的方向资格待与 owner 协同重审后再定；上述证据
+事实（占据、negative class 缺失、边界约束）独立于处置结论保留。
 
 ### R3 — 声学条件键控的持久多模态记忆
 
@@ -189,7 +195,7 @@ wrapper，关闭动态架构主张并定位失败在 supply、skill、reward 或
 而不是只对终局候选 rerank。
 
 **机制。** 状态为当前 context、evidence、candidate、reward estimates、budget 和 action history；action
-来自 R1-R4；每次动作后更新 advantage 并决定继续或保留 incumbent。Reward 可由 exact task-visible
+来自保留方向及已日落证据包中的 published action；每次动作后更新 advantage 并决定继续或保留 incumbent。Reward 可由 exact task-visible
 checks、counts-only consensus、semantic equivalence、cross-evidence corroboration 和 frozen judge 组合，
 不得使用 test gold、hidden state 或 logprob。
 
@@ -224,7 +230,8 @@ per-session memory；不得用 retrospective best checkpoint 掩盖在线失败�
 
 ### R8 — 条件自适应的可靠能力控制
 
-**问题。** 如何让 R1-R7 的能力增益在声学条件、任务和模型版本变化时保持可重复、低尾部回归和可诊断，
+**问题。** 如何让保留机制与按需外部 action 的能力增益在声学条件、任务和模型版本变化时保持可重复、
+低尾部回归和可诊断，
 而不是把系统改写成“多数时候 abstain”。
 
 **机制。** 对 reward error、agreement、margin、cost 和 acoustic condition 建模；阈值控制是否替换
@@ -250,7 +257,7 @@ structured prompt 和 fixed wrapper 的稳定任务收益；收益来自哪里�
 
 **机制。** 统一 state/action/reward/cost/provenance contract：D1 供应当前证据，D2 保存经验，D3 提供动作，
 D4 分配决策权，D5 在实例内和跨实例更新控制。集成顺序固定为 `R5 baseline architecture → R6 short
-horizon → R8 reliability → R1/R3/R4 expansion → R7 evolution → optional R2`，避免一开始构建不可归因
+horizon → R8 reliability → R4 expansion → R3/R7 evolution → optional external-knowledge carrier`，避免一开始构建不可归因
 的大系统。
 
 **验证。** 使用 factorial/leave-one-component-out、同供给同预算控制、prequential evaluation 和
@@ -269,18 +276,22 @@ composition、full adaptive system。Full-duplex/interactive 只有在 task succ
 | 批次 | 方向 | 目的 |
 |---|---|---|
 | Stage-2A vertical slice | R5 + R6 + R8 | 先证明 API-only evidence-state controller 能可靠改变下一动作并提高任务效用 |
-| Stage-2B mechanism expansion | R1 + R4 | 测量多源 context 上界/交互后，再检验自适应构造与技能信用 |
+| Stage-2B mechanism expansion | R4 | 独立处理运行时技能信用、组合与生命周期；published context/tool baseline 按需复现 |
 | Stage-2C persistent evolution | R3 + R7 | 检验外部记忆和跨实例改进是否成立 |
-| Stage-2D knowledge extension | R2 | 仅在任务确需外部事实时接入检索 |
 | Stage-2E integration | R9 | 端到端组合与 speech-native 外部验证 |
+| Pending owner co-review（07-29 判据） | R2 | 处置待定：按 (a) 型与 owner 协同重审后决定 Stage-2D 去留 |
 
-## 6. 第一份 Stage-2A 合同（方向冻结，执行仍待授权）
+## 6. 第一份 Stage-2A 合同（草案；绑定冻结至 R2–R9 owner 协同重审完成）
+
+> 本节所依赖的 R5/R6/R8 proposal 仍属 owner 未校验批次；合同绑定与授权申请冻结，待协同重审
+> 通过后再启动（owner 2026-07-29，Decision-Log 续76）。
 
 **目标。** 实现并复现一个 `incumbent-preserving reward-guided context controller`，只覆盖 R5/R6/R8
 的最小纵向链。
 
-- **Core contract：** 单一 frozen speech/omni core，仅经 inference API；首选公开可复现、论文基线充分的
-  Qwen2.5-Omni-7B serving lane。具体 model/service revision、hash、prompt 和 decoding 在授权包冻结。
+- **Core contract：** 单一 frozen speech/omni core，仅经 inference API；项目核心为
+  Qwen3-Omni-30B 的本地 llama.cpp serving lane。具体 model/service revision、hash、prompt 和 decoding
+  在授权包冻结；这是一项项目载体裁决，不把参考论文中的 Qwen2.5/MiMo 数字改写为 Qwen3 结果。
 - **Carrier：** MMAU-mini + MMAR；先解决 CURRENT T2 对 local status 的不一致，再冻结 exact revision、
   split、hash 和 contamination/exposure。不得因“已 pin”散文直接假定资产可运行。
 - **Action menu：** `keep incumbent`、structured re-prompt、same-observation resample、一个

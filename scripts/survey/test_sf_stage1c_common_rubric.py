@@ -166,8 +166,8 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
         self.assertIn("C1_DECISION_CALIBRATED_REWARD", table)
         self.assertIn("不再是主研究问题", table)
         self.assertIn("research-directions.md", table)
-        self.assertIn("Stage‑1C in owner-directed remediation", status)
-        self.assertIn("Stage‑2A execution", status)
+        self.assertIn("Stage‑1C research-direction confirmation", status)
+        self.assertIn("Stage‑2A/2B execution", status)
 
     def test_current_manifest_routes_the_new_machine_and_human_surfaces(self) -> None:
         source = MANIFEST_SCRIPT.read_text(encoding="utf-8")

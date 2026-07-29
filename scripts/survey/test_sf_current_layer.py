@@ -897,10 +897,13 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C in owner-directed remediation",
-            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "Stage‑1C research-direction confirmation",
+            "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING",
             "Qwen3-Omni-30B",
-            "capability-first portfolio",
+            "capability-first candidate",
+            "direction-viability criterion (2026-07-29",
+            "OWNER_UNVERIFIED",
+            "datasets and metrics are",
             "status.md",
             "research-directions.md",
             "stage1c-eligible-inputs.md",
@@ -922,17 +925,22 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C in owner-directed remediation",
-            "STAGE1C_PARTIAL_R1_CORRECTION_PENDING_R2R9_REFINEMENT_PENDING",
+            "Stage‑1C research-direction confirmation",
+            "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING",
             "Qwen3-Omni-30B",
             "general ASR",
-            "nine finalized directions",
-            "API-only",
-            "reliable capability lift",
-            "no model/API execution, metric run, reproduction or prototype",
-            "R2R1 `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`",
+            "analysis/synthesis only",
+            "reference papers",
+            "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+            "owner-confirmed (2026-07-29",
+            "OWNER_UNVERIFIED",
+            "AudioRAG/Omni-DeepSearch",
+            "R5+R6+R8 Stage‑2A",
+            "no model/API execution, metric run, reproduction or prototype occurred",
+            "model/API calls",
+            "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
             "H5 remains withheld and non-load-bearing",
-            "Stage‑2A execution",
+            "Stage‑2A/2B execution",
             "Next action",
         ):
             self.assertIn(required, text)

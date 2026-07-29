@@ -1,288 +1,257 @@
 ---
 proposal_id: "R1"
-title: "冻结 Speech/Omni 模型的多源上下文能力上界与自适应构造"
-dimension: "D1 multimodal knowledge"
-status: "problem shape owner-approved; references/methods/baselines under owner-directed step-2 correction (2026-07-27 rulings A/B: Qwen3-Omni-30B core, general-ASR mainline); experiment execution withheld"
-evidence_cut: "2026-07-27"
+title: "冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较研究"
+role: "Stage-1C 研究内容分析报告；供 owner 作方向判断"
+stage: "STAGE_1C_DIRECTION_CONFIRMATION"
+status: "OWNER_CONFIRMED_SUNSET_2026-07-29"
+recommendation: "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2"
+evidence_cut: "2026-07-28"
 execution_authority: "WITHHELD"
 ---
 
-# R1 — 冻结 Speech/Omni 模型的多源上下文能力上界与自适应构造
+# R1 — 冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较研究
 
-## 开题摘要
+## 0. 结论先行
 
-本研究不再把 R1 定义成一个预设的 observation-branch 控制器，也不再询问已经被 2024-2026 年工作占据的
-宽泛问题——“音频模型是否具有 few-shot in-context learning（ICL）能力”。研究对象是冻结、API-only
-Speech/Omni 模型的**多源上下文条件化能力**：示例上下文与当前查询的不同可观测表征，能在多大程度上
-改变任务能力；这些来源之间是互补、替代还是干扰；当能力空间和样本异质性确实存在时，训练自由的黑盒
-智能体能否针对单个样本构造上下文，逼近给定可执行菜单内的经验上界。
+**Owner 裁决（2026-07-29 确认，Decision-Log 续76）：R1 不具备独立研究方向潜力——它只提出了基础要
+探索的内容，不构成可对比的研究问题——不作为独立研究方向进入 Stage-2，原 Stage-2B 名额撤销。**
 
-研究按因果依赖分成两个阶段。阶段 A 先固定有限、可复现的上下文菜单，测量能力空间、来源主效应、交互
-效应和样本级异质性。阶段 B 只在阶段 A 证明存在可恢复的选择机会后，研究不访问 test gold、不修改核心
-模型参数的自适应构造。时延、调用次数、token 和货币成本完整记录，但不进入 R1 的研究目标或击杀条件；
-成本压缩属于后续工作。
+R1 在 Stage‑1C 的正确定位不是发明新的多源上下文控制器，也不是证明一个尚未被研究的创新点，而是：
 
-## 1. 学术问题、对象与边界
+> 在项目选定的冻结 Speech/Omni 核心上，复用参考论文的数据集、数据划分、方法、基线和评价指标，
+> 系统复现并比较语音/音频 in-context learning（ICL）及相关 inference-time context 方法，归纳它们在
+> 通用 ASR 与通用音频理解/推理任务中的适用条件、收益、负迁移和复现边界。
 
-### 1.1 正式问题
+现有文献已经覆盖 audio few-shot、speech demonstration retrieval、acoustic reranking、inverse-inference
+selection、audio tool use 和 modality topology。严格复现这些方法仍有实验价值，但它们是任何实际消费
+context action 的 Stage-2 方向都应完成的 baseline，不构成一项独立研究问题。若把这些方法重新组合成新的
+selector、controller、oracle ceiling 或综合指标，又会越过当前“只分析归纳、不创造创新”的边界。
 
-> 在模型参数完全冻结、只能调用推理接口的条件下，示例上下文与当前查询的不同表征方式，能在多大程度上
-> 改变 Speech/Omni 模型的任务能力？这些上下文来源之间存在怎样的互补、替代或干扰关系？在确认给定
-> 可执行菜单内的能力空间后，黑盒智能体能否针对单个样本自适应构造上下文，并逼近该经验上界？
+因此本报告保留为文献、数据、基线和指标的归纳记录；相关基线由 R3–R8 在实际需要时按原论文协议复用，
+不再为 R1 单独建立实验包、执行合同或 Stage-2 阶段。
 
-R1 的“多源上下文”只包含两类对象：
+## 1. 本阶段的三条硬边界
 
-1. **demonstration context**：与测试样本身份隔离的带标签 speech/audio 示例；
-2. **query context**：同一当前查询的 raw audio、分段/窗口、ASR 文本视图、raw+ASR 组合以及确定性的
-   问题导向重表达。
+### 1.1 只做研究方向确认
 
-第一版固定任务指令和答案格式，避免把任意 prompt wording 搜索混入上下文来源效应；排列与模态拓扑
-`σ` 是研究变量，模板语义 `φ` 是受控变量。
+当前工作等价于开题报告：确认研究内容、研究对象、参考方法、实验基线、数据集和评价体系。允许做文献归纳、
+协议对齐、边界识别和推进判断；不做创新点搜索、技术路线发明或系统实现。
 
-### 1.2 与 R2-R6 的边界
+### 1.2 数据只复用参考论文
 
-- 公开网络、知识库或外部事实检索属于 R2；R1 的示例池不提供测试题缺失的实时世界事实。
-- 跨部署实例持续写入、衰减和迁移的经验库属于 R3；R1 使用预先冻结、与测试集隔离的示例池。
-- 音频工具如何实现、组合和获得信用属于 R4；R1 只把已定义的确定性重表达视为可选 query view。
-- 谁拥有最终作答权和 evidence-state 生命周期属于 R5。
-- reward 如何驱动多步策略、轨迹和下一动作属于 R6；R1 只定义上下文动作空间、离线上界和训练自由
-  selector 的可行性，不主张 reward-learning 创新。
+- 只选参考论文实际使用并可合法取得的公开数据集及其既有划分。
+- 不采集、不合成、不标注、不扩增新的研究数据集。
+- 论文作者创建但已正式发布的数据集可以原样复用；没有发布的作者自建数据集不得由本项目按 recipe 重建后
+  冒充同一 benchmark。
+- 因此，TwS 的 MELD-Hard1k 在官方可核验资产发布前只作为论文证据，不进入 R1 数据计划；原始 MELD 可以
+  作为论文方法的既有载体，但不由本项目制造新的扰动版。
 
-## 2. 2026 年相邻工作占位与新颖性边界
+### 1.3 指标只复用参考论文
 
-| 工作 | 已占据的命题 | 对 R1 的有效证据 | 尚未回答的 R1 问题 |
-|---|---|---|---|
-| Audio Flamingo (2402.01831) | 经过专门训练的 audio LM 可进行 few-shot ICL 与 retrieval | 多类音频分类任务和 unseen-label 实验说明 audio demonstration 可以改变输出 | 不代表任意冻结 API core；未联合分解示例与 query representation |
-| MiMo-Audio (2512.23808) | 大规模预训练可涌现 speech/audio few-shot 能力 | SpeechMMLU、MMAU 等建立强 few-shot carrier | 原论文主要证明模型能力，不研究多源上下文菜单和逐样本选择 |
-| MetaSICL (2601.18904) | vanilla SICL 已跨儿童 ASR、AU/AR、多语 ASR 和 ST 验证 | frozen vanilla arm 在 MyST/RSR/MMAU/MMAR 上提供直接基线 | 主方法更新 LoRA，超出本项目；fixed retrieval、单次运行、未做多源交互与上界恢复 |
-| TICL (2509.13395) | 语义检索的 speech demonstration selection | 口音、多语和儿童 ASR，最高报告 84.7% relative WER reduction | 只优化示例选择，query view 固定；未与非 ASR 音频推理联合研究 |
-| TICL+ (2512.18263) | 语义检索后按声学相似度重排 | 四个儿童 ASR corpus，最高报告相对 zero-shot 53.3%、相对 TICL 37.6% WER reduction | 仍是 ASR demo retrieval；未测 query re-representation 及其交互 |
-| ByCS (2404.14716) | speech/text/vision 的 Bayesian example selection | RASC863/CORAAL 上证明示例—查询交互可用于选择 | Whisper 架构、逐候选 inverse inference 成本高；没有统一上下文构造 |
-| TwS (2509.21749) | 当前音频可在 test time 进行问题导向 DSP/重表达 | MELD/MELD-Hard1k 提供 query-view 机制载体 | 单条破坏性链、合成扰动与算子匹配；没有 demonstration 因子 |
-| Chain of Modality (2604.14520) | 模态顺序/拓扑会改变 omni 结果 | 多个 cell 中 router 输给 best fixed，证明拓扑异质性不能假定可路由 | 音视任务为主，未联合 demo selection 与当前音频多视图 |
+- ASR 使用 WER；中文、日文、泰文按 TICL 的做法使用 CER。
+- AU/AR 与单标签分类使用 accuracy，并按参考论文已有类别/模态分组报告。
+- 只有在复现相应任务时，才使用论文中的 BLEU、CIDEr、F1、BLEU4 或 ROUGE-L。
+- 可以复用论文已报告的 relative WER reduction 或 absolute accuracy gain 作为辅助呈现。
+- 不新造跨任务综合分数、context headroom、selection opportunity、recovery ratio 或自定义 utility。
 
-因此以下表述均被禁止作为 R1 创新：
+## 2. 研究内容
 
-- “首次研究 speech/audio few-shot ICL”；
-- “首次为 speech ICL 选择示例”；
-- “首次在 test time 变换音频”或“首次研究 audio test-time compute”。
+### 2.1 总研究问题
 
-R1 的候选创新假设被收紧为：
+> 参考论文已经提出的语音/音频上下文学习与 inference-time context 方法，在冻结、API-only 的
+> Qwen3-Omni-30B 项目核心上，能否按照其原始数据、基线和指标得到可复现、可比较、边界清楚的结果？
 
-> 将 demonstration context 与当前查询的多种可观测表征统一为一个多源上下文构造问题，在 ASR 与通用
-> 音频理解/推理两条主线上测量菜单内经验上界、交互效应和样本级异质性，并检验训练自由的黑盒智能体
-> 能否恢复其中的选择机会。
+该问题拆成三个研究内容，三者都是归纳与复现，不构成新方法：
 
-这只是 occupancy 后仍待实验验证的组合假设，不使用 “first-ever” 或绝对 novelty verdict。
+1. **通用 ASR 的 demonstration 方法比较。** 比较 direct/zero-shot、uniform random、声学 embedding
+   retrieval、TICL semantic retrieval 等参考论文已经定义的条件，分析不同语言、口音和示例数下的 WER/CER。
+2. **通用音频理解/推理的 few-shot 复现。** 在 MMAU、MMAR 等论文使用的数据集上，比较 direct 与
+   Vanilla SICL；只有在论文或官方代码能够闭合 demonstration pool 来源时才运行 few-shot 条件。
+3. **query-side context 方法的独立复现边界。** TwS 与 CoM 分别说明 waveform tool use 和 modality
+   topology 会改变结果。R1 只把它们作为独立论文方法记录或复现，不与 demonstration retrieval 拼成新机制。
 
-## 3. 形式化定义
+### 2.2 研究问题
 
-给定冻结黑盒模型 `M`、音频查询 `x`、任务指令 `q`、与测试样本隔离的示例池 `D`，以及查询的可用
-表征集合 `G(x)`。一个上下文配置为：
+- **RQ1：** 在通用 ASR 上，Vanilla SICL 是否稳定优于 direct/zero-shot？
+- **RQ2：** 在论文已经比较的条件内，random、声学检索和语义检索的相对排序是否可复现？
+- **RQ3：** 参考方法的收益或损害如何随语言、口音、任务、模态子类和示例数变化？
+- **RQ4：** 在 MMAU/MMAR 上，参考论文的 direct 与 Vanilla SICL 差异能否在严格 split fence 下复现？
+- **RQ5：** 对 TwS/CoM，论文的原始任务、资产和接口是否足以支持独立复现；哪些环节因数据或实现未发布而
+  只能保留为文献结论？
 
-\[
-c=(S_D,S_G,\sigma,\phi)\in\mathcal C_{\mathrm{exec}}(x),
-\]
+RQ1–RQ5 都不询问“如何发明一个更好的选择器”。如果未来需要研究新控制方法，必须在参考方法复现完成、
+Stage‑1C 另行立项后再讨论。
 
-其中 `S_D ⊆ D` 是示例子集，`S_G ⊆ G(x)` 是查询表征子集，`σ` 是顺序/拓扑，`φ` 是冻结模板。输出为：
+## 3. 直接参考论文的研究要素矩阵
 
-\[
-\hat y_c=M(q,x;c).
-\]
+| 论文 | 已有研究问题与方法 | 论文数据集 | 论文基线 | 论文指标 | 对 R1 的正确用途与边界 |
+|---|---|---|---|---|---|
+| Audio Flamingo, 2402.01831 | 经过 ICL/RAG 专门训练的 audio LM；检索 audio-text demonstrations | CREMA-D、RAVDESS、UrbanSound8K、GTZAN、Medley-solos-DB；AudioCaps | 自身 zero-shot；已有 zero-shot SOTA；AudioCaps 上 RECAP | 分类 accuracy；caption CIDEr；其他任务按论文使用 F1、BLEU4、ROUGE-L | 证明 audio few-shot 已被占据；可复用数据/指标，但专门训练模型的结果不能外推到任意冻结 API core |
+| MiMo-Audio, 2512.23808 | MiMo-Audio-7B-Base 的 5-shot/16-shot 能力评估 | 已发布 SpeechMMLU；MMAU；若进入 Instruct 评估还包括 MMSU、MMAR、MMAU-Pro 等 | Baichuan-Audio-Base、Kimi-Audio-Base、Step-Audio2-mini-Base | SpeechMMLU/MMAU accuracy；ASR 使用 WER/CER | 证明大规模预训练可产生 few-shot 能力；Base 与 Instruct 不得混写，不作为 Qwen3 的直接实验结果 |
+| MetaSICL, 2601.18904 | Vanilla SICL；主方法 MetaSICL 为 LoRA post-training | MyST、RSR、MMAU、MMAR、Common Voice de/zh/fr、CoVoST2 | no few-shot；Vanilla SICL；MetaSICL1/2/3；direct fine-tuning | WER、CER、accuracy、BLEU | 只复用原始 checkpoint 的 direct 与 Vanilla SICL；LoRA 行是合同外文献对照。论文未充分写清 MMAU/MMAR 的 demonstration pool，必须先补协议证据 |
+| TICL, 2509.13395 | Whisper pseudo-label + text-embedding KNN 选择 speech demonstrations | Common Voice 15.0、GLOBE-V2、L2-ARCTIC、MyST、OGI、ENNI、RSR | k=0；uniform random；Whisper、HuBERT、ECAPA-TDNN、WavLM retrieval；TICL | WER；zh/ja/th 使用 CER；relative WER reduction；pseudo-label WER | R1 通用 ASR 主参考：数据、split、shots、检索基线和指标都可直接复用；论文也提供明确负结果 |
+| TICL+, 2512.18263 | TICL top-300 semantic candidates 后用 Whisper acoustic embedding rerank | MyST、OGI、ENNI、RSR | zero-shot；TICL k=1–4；TICL+ k=1–4 | WER；相对 zero-shot/TICL 的 WER reduction | 已有声学重排方法；仅在原儿童 ASR 数据上作参考复现，不把儿童 ASR重新升为 R1 主线 |
+| ByCS, 2404.14716 | 基于 inverse inference 的 Bayesian example selection | RASC863 重庆/广州方言词；CORAAL <15s | random；KATE+；ByCS；gold-owned oracle ByCS | WER；中文按字符计算 | 提供更重的示例选择边界基线；oracle 只作离线论文对照，不能进入 runtime；Whisper encoder-decoder 结果不能直接视为 Omni API 结果 |
+| Thinking with Sound, 2509.21749 | 冻结 LALM 在推理中调用音频处理工具并重新编码 waveform | MELD；作者构造的 MELD-Hard1k | baseline LALM；TwS；operator leave-one-out | emotion classification accuracy；absolute accuracy gain | 说明 query-side audio processing 已有直接工作。MELD-Hard1k 未正式发布前不得由本项目重建为自己的数据资产 |
+| Chain of Modality, 2604.14520 | Planner 选择 modality subset、顺序和 parallel/sequential/interleaved topology；intuitive 路径 training-free | Music-AVQA、AVHBench、OmniBench、DailyOmni、WorldSense；分析任务另有 AV-Odyssey、AV-Counting | 固定 sequential/parallel/interleaved；Qwen/Ola direct；ThinkOmni；专用模型 | accuracy | 说明输入顺序/拓扑效果具有任务异质性；仅作为 audio-visual omni 的独立参考。PRD 分析路径使用 SFT，不属于 R1 training-free 复现 |
 
-为统一高低方向，定义 item-level utility：ASR 使用
-`u_i(c)=1-min(WER_i(c),1)`，closed-option AU/AR 使用 `u_i(c)=1[ŷ_i=y_i*]`；原始 WER/CER/accuracy
-仍分别报告，归一化 utility 不取代任务指标。
+## 4. 文献归纳出的稳定事实
 
-### 3.1 菜单内经验上界与能力空间
+### 4.1 已经成立的事实
 
-直接推理配置记为 `c₀`。对**预注册并实际执行**的有限菜单：
+1. **语音/音频 few-shot ICL 不是空白。** Audio Flamingo、MiMo-Audio、MetaSICL、TICL/TICL+ 和 ByCS
+   已分别覆盖能力展示、vanilla SICL、语义检索、声学重排和 inverse-inference selection。
+2. **示例是否有益具有明显异质性。** MetaSICL Table 2 中，Qwen2.5-Omni 的 Vanilla SICL 在
+   Common Voice de/fr 上降低 WER，却把 zh 的 CER 从 7.29 提高到 8.07；TICL 在 Common Voice 的
+   de/es/zh 上也出现退化。
+3. **示例数量不是越多越好。** TICL 在 GLOBE-V2 上测试 `k∈{1,2,3,4,10,15,20}`，论文报告超过约
+   4 个 demonstration 后收益有限且可能下降。
+4. **选择方法的收益依赖任务和候选池。** ByCS 在小 `k` 时相对 KATE+ 更明显，随着 `k` 增加优势缩小；
+   论文也明确指出短答案、候选多样性不足和 inverse-inference 成本是限制。
+5. **query-side 操作已有方法证据，但不能与 demo 方法自动合并。** TwS 在 clean MELD 上只提升
+   0.43–1.56 个百分点，却在作者的 perturbed set 上提升 11.38–36.61 个百分点；CoM 的收益也随模型、
+   子任务和 topology 变化，存在负增益单元格。
 
-\[
-U_i^*=\max_{c\in\mathcal C_{\mathrm{exec}}(x_i)}u_i(c),
-\qquad
-H_{\mathrm{ctx}}=\mathbb E_{i\in test}[U_i^*-u_i(c_0)].
-\]
+### 4.2 仍待复现而不是待“创新”的问题
 
-`U_i*` 只使用 test gold 做离线描述，不能进入任何运行时状态。全文统一称其为“给定可执行菜单内的
-经验上界”，不得写成模型的绝对能力上界或 all-contexts ceiling。
+- Qwen3-Omni-30B 的本地 llama.cpp serving lane 是否支持论文所需的多 audio demonstration 输入与稳定解析。
+- TICL 在 Qwen3 核心、参考数据和原始检索器上的结果是否保持原论文排序。
+- MMAU/MMAR 的合法 demonstration pool 是否能从论文补充材料或官方代码中被唯一还原。
+- 不同论文使用的模型、prompt、split、shots 和指标口径能否形成同模型、同数据的可比矩阵。
+- TwS/CoM 的官方实现与作者自建数据是否发布到足以做原方法复现的程度。
 
-### 3.2 固定策略与自适应选择机会
+这些都是复现与可比性问题。答案可能是“不能复现”或“只在部分条件成立”，仍然构成有效研究结论。
 
-最佳固定配置必须只在 calibration/dev 上选择：
+## 5. 数据集方案
 
-\[
-c_{\mathrm{fixed}}=\arg\max_{c\in\mathcal C_{\mathrm{exec}}}
-\mathbb E_{i\in cal}[u_i(c)].
-\]
+### 5.1 R1 主数据集
 
-它在 test 上不再重选。样本级自适应存在的最大描述性机会为：
-
-\[
-O_{\mathrm{sel}}=
-\mathbb E_{i\in test}[U_i^*]-
-\mathbb E_{i\in test}[u_i(c_{\mathrm{fixed}})].
-\]
-
-若 `O_sel` 接近零，最佳配置几乎不随样本变化，自适应构造没有学术必要性。
-
-### 3.3 来源交互与上界恢复
-
-在匹配的四格设计中，`D` 表示加入示例，`G` 表示加入替代 query view：
-
-\[
-I_{D\times G}=\mathbb E[u(D+G)-u(D)-u(G)+u(c_0)].
-\]
-
-`I>0` 支持互补，`I<0` 支持干扰，接近零支持可加或无交互；因子主效应与置信区间必须同时报告。
-
-为避免逐样本零分母，智能体 `π` 的恢复率定义为 aggregate ratio，而不是先计算 item ratio：
-
-\[
-R_\pi=
-\frac{\mathbb E[u_i(\pi(x_i))]-\mathbb E[u_i(c_0)]}
-{\mathbb E[U_i^*]-\mathbb E[u_i(c_0)]},
-\]
-
-且只在分母大于预注册数值容差 `δ` 时报告。若分母不成立，只报告原始 paired delta。
-
-## 4. 研究问题与可证伪假设
-
-### RQ1 — 多源上下文能力空间是否存在？
-
-在 ASR 与 AU/AR 两条主线上，`H_ctx` 是否稳定大于零？菜单经验上界是否同时超过 direct 和在开发集
-确定的 best fixed？这回答“是否存在已执行菜单可触达的条件化能力”，不回答模型还有多少未知能力。
-
-### RQ2 — demonstration 与 query representation 如何共同作用？
-
-两类来源是互补、替代还是干扰？示例数量、检索相似度、模态组合与排列顺序分别解释多少方差？若收益
-只来自采样次数或模板变化，R1 的多源机制主张失败。
-
-### RQ3 — 最佳配置为何因样本而异？
-
-最佳配置是否随任务类别、音频长度、噪声/混响、口音/年龄、基线正确性和跨调用稳定性系统变化？这些
-异质性是否可由部署时可见变量预测？分析必须区分“存在异质性”和“异质性可路由”。
-
-### RQ4 — 无答案智能体能否恢复选择机会？
-
-仅使用输入、检索分数、确定性特征和黑盒模型反馈的训练自由 selector，能否超过 random、单来源
-selector 和 best fixed，并恢复一部分 `O_sel`？test gold、gold-derived metadata、hidden state、logprob 和
-任何核心模型参数更新均禁止。
-
-### RQ5 — 结论适用于哪些任务与模型？
-
-效应是否在 ASR 与 AU/AR 都成立，并能否在第二个独立模型家族上复现关键对照？若只在一个模型或一条
-主线成立，结论必须收缩到该实例，不宣称通用 Speech/Omni 机制。
-
-## 5. 数据集、示例池与模型载体
-
-### 5.1 紧凑双主线设计
-
-| 主线 | 数据集 | R1 承载内容 | 示例池规则 | 当前 readiness |
+| 优先级 | 数据集 | 复用的论文协议 | 指标 | R1 决定 |
 |---|---|---|---|---|
-| ASR | MyST | 儿童会话语音；demo selection、query view、WER 与异质性 | 仅 official train/dev；test 身份隔离 | metadata verified；资产/许可/hash 待 Stage-2 合同 |
-| ASR | RSR | 儿童朗读语音；与 MyST 构成 distribution contrast | 仅 official train/dev；test 身份隔离 | official training split 被 MetaSICL 使用；本地资产待冻结 |
-| AU/AR | MMAU Test-mini | sound/music/speech 混合；通用音频条件化 | 独立 demo pool 未审计前，只运行 query-view arm | metadata_only；test-mini 1k；禁止 test leave-one-out |
-| AU/AR | MMAR | 多层音频推理；检验机制是否超越 ASR | 独立 demo pool 未审计前，只运行 query-view arm | metadata_only；公开 1k benchmark；禁止 test leave-one-out |
-| 受控机制 | MELD + MELD-Hard1k | clean/扰动配对；query view × demo 的机制压力测试 | MELD train/dev 作 demo，clean/hard paired test 只评测 | MELD 待获取；Hard1k 按 TwS recipe 重建且不声称 byte-identical |
+| P0 | Common Voice 15.0 | TICL：validated split 作 demonstration pool，official test 作评估；1–15 秒 utterances；覆盖 de/en/es/fr/it/ja/pt/zh/nl/pl/ru/th/tr | WER；zh/ja/th 用 CER | **采用，通用 ASR 主载体** |
+| P0 | GLOBE-V2 | TICL：train+validation 作 demonstration pool，official test 评估；`k=0..4` | WER、relative WER reduction | **采用，口音 ASR 载体** |
+| P0 | L2-ARCTIC | TICL：train+validation 作 demonstration pool，official test 评估；`k=0..4` | WER、relative WER reduction | **采用，非母语口音 ASR 载体** |
+| P1 | MMAU | MiMo-Audio 5-shot；MetaSICL public test + official scripts | accuracy，含 speech/sound/music 分项 | **采用为 AU 评估载体；few-shot pool 未闭合前只确认 direct 协议** |
+| P1 | MMAR | MetaSICL public test + official scripts | accuracy，按 modality/subcategory 分项 | **采用为 AR 评估载体；few-shot pool 未闭合前只确认 direct 协议** |
 
-任何示例必须来自 official train/dev，或来自经过来源核验、音频/文本近重复去重和污染审计的独立池。
-若 MMAU/MMAR 没有合法、任务匹配的独立示例池，其 demonstration arm 明确记为 `UNAVAILABLE_SPLIT_FENCE`，
-不得用测试答案 leave-one-out 伪造 few-shot 结论；两者仍承担 raw/transcript/both/重表达的 query-view 实验。
+### 5.2 只用于原论文复现或边界检查的数据集
 
-### 5.2 模型载体
+| 数据集 | 用途 | 限制 |
+|---|---|---|
+| RASC863、CORAAL | ByCS 原方法复现 | 保持论文候选池、`k` 和 WER 口径；不替代通用 ASR 主线 |
+| MyST、OGI、ENNI、RSR | TICL/TICL+ 原方法复现 | 儿童 ASR 只作支持证据，不承担 R1 主结论 |
+| CREMA-D、RAVDESS、UrbanSound8K、GTZAN、Medley-solos-DB、AudioCaps | Audio Flamingo 方法/指标对照 | 结果来自专门训练的 Audio Flamingo，不能作为 Qwen3 的已知基线 |
+| SpeechMMLU | MiMo 5-shot 复现候选 | 只使用作者正式发布版本；不自行 TTS 合成新的 SpeechMMLU |
+| MELD | TwS 原始 clean 任务载体 | 只在复现 TwS 时使用原始公开数据和原标签 |
+| Music-AVQA、AVHBench、OmniBench、DailyOmni、WorldSense | CoM training-free 路径复现候选 | 属于 audio-visual omni 支线，不承担 speech 主结论 |
 
-| 角色 | 模型 | 执行范围 | 解释限制 |
+### 5.3 明确排除
+
+- 自采、自标、自合成或自行扩增的新数据集。
+- 未发布的 MELD-Hard1k 本地重建版。
+- 用 test item 互相充当 demonstrations 的 leave-one-out 伪 few-shot。
+- 为了让方法工作而重新划分且无法对应参考论文的私有 split。
+- 将 Common Voice、MMAU、MMAR 等不同论文版本的数字直接混在一张无版本说明的表中。
+
+## 6. 实验基线方案
+
+### 6.1 通用 ASR 主线：完整复用 TICL
+
+| 编号 | 基线 | 来源 | 条件 |
 |---|---|---|---|
-| 主模型 | `Qwen/Qwen2.5-Omni-7B` | 完整菜单、机制分解、异质性和 selector | 官方接口支持 interleaved audio，但 exact revision/service/decoding 待独立 Stage-2 合同 |
-| 独立复核 | `XiaomiMiMo/MiMo-Audio-7B-Instruct` | direct、best fixed、菜单 oracle、最终 selector 四个关键条件 | MiMo 原论文的系统 few-shot 主证据主要来自 Base；Base/Instruct 数字不得混写，复核必须本地重跑 |
+| A0 | direct / zero-shot，`k=0` | TICL | 同模型、同 prompt、同 decoding |
+| A1 | uniform random demonstrations | TICL | 与检索方法同 `k`、同 pool |
+| A2 | Whisper embedding retrieval | TICL | 原论文声学/内容检索基线 |
+| A3 | HuBERT retrieval | TICL | 原论文 content-oriented baseline |
+| A4 | ECAPA-TDNN retrieval | TICL | 原论文 speaker-oriented baseline |
+| A5 | WavLM retrieval | TICL | 原论文 speaker/content baseline |
+| A6 | TICL text-embedding KNN | TICL | Whisper-large-v3-turbo pseudo-label；单语/多语 MPNet 按论文切换 |
 
-两者都通过服务化推理接口使用；不做 LoRA、微调、梯度更新或内部解码器改写。MetaSICL 的 LoRA 主方法
-只作为 occupancy 边界，唯一可复用实验臂是原始 checkpoint 的 vanilla SICL。
+示例数先严格复用 `k=1,2,3,4`；TICL 的 `k=10,15,20` 只用于 GLOBE-V2 的 paper-defined shot ablation。
 
-## 6. 决定性实验
+### 6.2 AU/AR 主线：完整复用 direct 与 Vanilla SICL
 
-### 6.1 协议与泄漏审计
+| 编号 | 基线 | 来源 | 条件 |
+|---|---|---|---|
+| U0 | direct / no few-shot | MetaSICL、MiMo-Audio | MMAU/MMAR 官方评估脚本 |
+| U1 | Vanilla SICL | MetaSICL | 仅在 demonstration pool、retrieval 和 prompt 能由论文/官方代码唯一还原后运行 |
 
-在任何 capability 表之前冻结 dataset revision/split/hash、query ID、demo ID/source split、去重规则、模型
-revision、prompt template、decoding 和输出解析。calibration/dev 负责选 best fixed 与 selector 阈值；test
-只运行一次预注册方案。所有运行记录至少包含：`model_id, dataset_id, sample_id, demo_ids,
-demo_source_splits, query_views, topology, template_id, decoding_id, output, utility, provenance`。
+MetaSICL1/2/3 是 LoRA post-training，不是 R1 的可执行 baseline；它们只保留为“训练后可达到什么结果”的
+文献对照。MiMo-Audio-7B-Base 的数字也只用于论文背景，不替代 Qwen3 核心上的本地结果。
 
-### 6.2 阶段 A：能力上界与机制
+### 6.3 独立边界基线
 
-第一版可执行菜单使用：
+- **TICL+：** zero-shot、TICL、TICL+，只按其儿童 ASR 原协议复现。
+- **ByCS：** random、KATE+、ByCS；oracle ByCS 只作 gold-owned 离线论文对照。
+- **TwS：** baseline LALM、TwS、operator leave-one-out；只有官方方法资产和数据闭合后才进入复现。
+- **CoM：** fixed sequential、parallel、interleaved 与 training-free CoM；分析任务的 SFT PRD 路径不进入 R1。
 
-- shots `k ∈ {0,1,4,8}`；
-- demonstration policy：random、TICL semantic KNN、ASR 上的 TICL+ acoustic rerank、受限候选池上的
-  ByCS；label-aware best-demo 只作离线 oracle；
-- query view：raw audio、ASR transcript、raw+transcript、一个预注册的 deterministic query-focused
-  segment/transform；
-- topology：demo-before-query 为主，另做一次预注册的 modality/order permutation；
-- `φ` 使用同一任务模板，禁止针对测试样本人工改 prompt。
+上述方法之间不做未经参考论文定义的“全组合菜单”，不增加自适应路由器，也不把多个方法拼成一个新系统。
 
-先在 calibration 的代表性有界子集枚举菜单，冻结保留配置，再在 test 执行。核心对照为 direct、
-same-observation resampling、random demo、semantic/acoustic demo、query-view only、demo+query-view、best fixed
-和 offline menu oracle。通过 `demo present/absent × alternate query view present/absent` 四格设计估计
-`I_{D×G}`，再做 shots、retrieval 和 order 消融。
+## 7. 评价指标与报告体系
 
-### 6.3 阶段 B：训练自由的自适应构造
+| 任务 | 主指标 | 参考来源 | 报告要求 |
+|---|---|---|---|
+| 通用/口音 ASR | WER ↓ | TICL、MetaSICL、ByCS | 按 dataset/language 单独报告；可附 relative WER reduction |
+| 中文/日文/泰文 ASR | CER ↓ | TICL；MetaSICL 对中文使用 CER | 不与 WER 直接平均 |
+| 儿童 ASR | WER ↓ | TICL/TICL+；MetaSICL | 若复现 MetaSICL，保留其 utterance-level WER cap-at-1 口径并单独标记 |
+| AU/AR、单标签分类 | accuracy ↑ | MetaSICL、MiMo-Audio、Audio Flamingo、TwS、CoM | 报告总体值和论文已有 subgroup/category 值 |
+| SpeechMMLU | accuracy ↑ | MiMo-Audio | 四种输入/输出模态分别报告，不混成未定义综合分数 |
+| Speech Translation | BLEU ↑ | MetaSICL | 仅在复现 CoVoST2 支线时使用 |
+| Audio Captioning | CIDEr ↑ | Audio Flamingo | 仅在复现 AudioCaps 支线时使用 |
+| Multi-label classification | F1 ↑ | Audio Flamingo | 仅对论文定义的 multi-label 任务使用 |
+| Dialogue | CIDEr、BLEU4、ROUGE-L ↑ | Audio Flamingo | 仅对原 dialogue 任务使用 |
 
-只有 `H_ctx` 与 `O_sel` 均超过预注册数值容差、且最佳配置存在可解释样本异质性时才进入阶段 B。
-selector 只能读取部署可见量：任务类型、音频长度与确定性声学 proxy、retrieval 分数、direct 输出格式、
-跨采样/跨视图一致性以及 frozen cross-family judge 的可见输出。允许规则、检索、黑盒自评和有限 test-time
-search；不训练 controller，不访问 test gold。
+所有主结论保留任务原始指标。论文未使用的跨任务平均分、utility、headroom、oracle recovery 或新阈值不进入
+R1 评价体系。
 
-比较 random context、best fixed、demo-only selector、query-view-only selector、联合 selector 和 offline
-menu oracle。R1 不要求 cost-matched dominance：资源消耗完整记录，用于解释而非否决能力结果；若要声称
-收益来自“选择”而非“更多执行”，另加相同已执行菜单的 matched-compute 归因对照，但不把成本加入目标。
+## 8. 研究方法与后续复现顺序
 
-### 6.4 统计与稳定性
+### 8.1 Stage‑1C：本报告已经完成的工作
 
-- 对 item-level utility 做 paired bootstrap 95% CI 和 effect size；binary outcome 补 McNemar。
-- ASR 与 AU/AR 原始指标分别报告，不用跨任务平均分隐藏方向相反的效应。
-- 确定性解码可用时固定为确定性；否则重复调用并报告 within-configuration variance。
-- 分桶报告任务、音频长度、clean/noise/reverb、口音/年龄、direct correct/wrong 与模型家族。
-- 成本记录 calls、audio-seconds、context length、latency 和货币成本，但不设 R1 成本通过阈值。
+1. 对八篇直接论文逐篇抽取研究问题、方法、数据、split、baseline、metric、主要发现和限制。
+2. 用 PDF 原页核验 Audio Flamingo、MetaSICL、TICL、ByCS、TwS、CoM 的关键实验表。
+3. 把儿童 ASR 从主线降为支持性复现，把 Common Voice 15.0、GLOBE-V2、L2-ARCTIC 确认为通用 ASR 主载体。
+4. 删除旧稿的自建数据、MELD-Hard1k 本地重建和自定义指标设计。
+5. 把“是否创新”改为“是否值得做严格复现与比较”的推进判断。
 
-## 7. 可证伪结论与停止规则
+### 8.2 日落后的复用原则
 
-R1 的学术完成不要求正结果，预先接受以下闭合路径：
+1. 不为 R1 单独冻结 Stage-2B 协议，也不要求在其他方向之前完整复现八篇方法。
+2. 某个保留方向若使用 speech demonstrations，只复现与该方向实验直接相关的 direct/random/TICL 等基线。
+3. TICL/TICL+/ByCS 的检索与信用线索按需进入 R3/R4/R6/R8；TwS/CoM 的工具动作与模态拓扑按需进入
+   R4/R5/R6/R8。
+4. 数据、split 和指标继续遵守本报告第 5–7 节，不因重路由而允许自建数据或自定义总分。
+5. Audio Flamingo、MiMo-Audio、MetaSICL 的训练贡献只保留为模型能力上界或合同外边界。
 
-1. `H_ctx≈0`：给定菜单没有可利用的上下文能力空间；停止阶段 B，但不得外推为 all-contexts 不可能。
-2. `H_ctx>0` 且 `O_sel≈0`：存在更好的固定上下文，但没有样本级自适应必要性；交付 best fixed 机制结论。
-3. `O_sel>0` 但 deployment-visible 特征不可预测：报告“存在选择机会、无答案 selector 无法恢复”。
-4. selector 不超过 best fixed：自适应主张失败；不能用 offline oracle 或 retrospective best config 代替。
-5. 只在 synthetic Hard1k 有效：结论收缩为合成扰动/operator 匹配，不宣称通用能力激活。
-6. 只在单模型/单主线成立：按模型或任务限定，不宣称 Speech/Omni 普适规律。
-7. demo pool 无法通过 split/contamination audit：对应 few-shot arm 取消，不用测试集标签补洞。
+## 9. 是否值得独立推进：审计判断
 
-## 8. Lean 与数学审计
+### 9.1 日落理由
 
-现有 `TfrlProofs.InfoBoundary` 只证明固定候选 read-out selector 不能超出已抽样池；R1 改变 context 并重新
-生成，因此不属于该定理的量化域。这个事实只阻止错误的 impossibility 外推，不证明任何上下文有效。
+- **没有独占研究问题。** “模型是否有 ICL”已被回答；“哪种已发表方法更好”是基线复现。
+- **基线义务重复。** 任何实际使用 context action 的保留方向都必须在自己的数据与预算下运行相应基线。
+- **方法类别并不统一。** demonstration retrieval、inverse inference、active audio tool use 和 modality topology
+  改变的是不同系统变量，强行并入 R1 会遮蔽它们对 R3–R8 的真正作用。
+- **剩余空间会越过当前边界。** 只有设计新的 selector/controller 或统一评价体系才能让 R1 重新成为独立
+  方法问题，而 Stage-1C 明确不做这些事情。
 
-R1 的上界、主效应、交互和恢复率是经验统计量，不由 Lean 证明。Lean 可以审计的内容限于：有限菜单的
-索引类型、gold 与 runtime state 的类型隔离、best-fixed 与 per-item oracle 的定义域、aggregate recovery
-ratio 的非零分母前提，以及后续 R5/R6 接入时的 incumbent/termination 条件。任何真实 `H_ctx>0`、
-异质性可预测或 selector 有效的结论都必须来自实验。
+### 9.2 最终判定
 
-## 9. 预期贡献与允许措辞
+**`NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`。**
 
-若证据成立，R1 允许按强度递进地贡献：
+R1 的高质量报告价值在于完成方向淘汰：文献归纳、数据、基线和指标继续保留；R1 task ID、独立实验包与
+Stage-2B 路线终止。后续方向不得把“先完整执行 R1”设为进入条件。
 
-1. 一个无测试泄漏、覆盖 ASR 与 AU/AR 的多源上下文干预协议；
-2. demonstration 与 query representation 的主效应、交互和样本异质性图谱；
-3. 给定菜单内经验上界与 best-fixed 之间的选择机会测量；
-4. 一个训练自由黑盒 selector 对该选择机会的可复现实证恢复。
+## 10. Provenance、目的链与失效条件
 
-不允许把 benchmark accuracy 的单点提升写成“模型学会新知识”，不允许把 menu oracle 写成绝对天花板，
-也不允许把 Audio Flamingo、MetaSICL、TICL/TICL+ 的已有效果重新包装成 R1 创新。
+**目的链。** 项目总目标 → Stage‑1C 研究方向确认 → R1 研究内容/数据/基线/指标闭合 → owner 判断 →
+R1 日落并把可复用基线重路由到保留方向。
 
-## 10. Provenance
+**Provenance。** 直接证据为仓外 hash-registered PDF：2402.01831、2512.23808、2601.18904、
+2509.13395、2512.18263、2404.14716、2509.21749、2604.14520；前六篇登记在
+`wiki/survey/registry/stage1c-r1-context-icl-2026-07-27-papers.jsonl`，TwS/CoM 由 Stage‑1C D1 dossier
+记录。关键表格在本次分析中通过 PDF 原页复核。论文数字是原论文结果，不是本项目实验结果。
 
-新增相邻工作全文已于 2026-07-27 通过
-`wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl` 绑定 PDF/e-print SHA-256，并登记在
-`wiki/survey/registry/stage1c-r1-context-icl-2026-07-27-papers.jsonl`。逐篇占位、实验数字和边界摘要见
-`../2026-07-27-r1-context-icl-evidence-supplement.md`。TwS/CoM 与现有数据资产事实继续来自 D1 dossier 和
-T1/T2/T3；本 proposal 的“统一多源上下文 + 能力上界 + 自适应构造”是 `OUR_HYPOTHESIS`。
+**失效条件。** 以下任一情况触发原位修订：论文新版本改变关键协议或结果；官方资产证明 dataset/split 与
+本报告不同；Qwen3-Omni 服务的接口能力与假设不符；owner 改变通用 ASR 主线或“只复用参考数据/指标”的
+边界；新的直接论文使当前方法矩阵明显不完整。任何修订仍不得自动授予实验执行或创新探索权限。

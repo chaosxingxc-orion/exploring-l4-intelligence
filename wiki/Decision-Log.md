@@ -6,6 +6,39 @@
 
 ---
 
+### 2026-07-29（续76）· R1 日落 owner 确认；研究方向成立判据；R2-R9 整批标记 owner 未校验
+
+#### Context
+
+07-28 会话在暂存区把 R1 写成 "owner-sunset" 并新增「裁决 C/D/E」，但仓内无 owner 授权原文，
+且与续75 的 step-2（R1 修正）冲突。07-29 三路审计确认该批为执行者代拟。owner 当日给出两条
+裁决，本条以实际日期补正授权，不追认任何 backdated 表述。
+
+#### Decision
+
+① R1 日落确认（owner 2026-07-29）：R1 不具备独立研究方向潜力——它只提出了基础要探索的内容，
+不构成可对比的研究问题。`NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2` 自本日起生效；
+其文献/数据/基线/指标矩阵保留为证据包。② 研究方向成立判据（owner 2026-07-29）：方向必须完成
+充分调研，且属两型之一——(a) 本领域存在已有工作，作为方法论基线提供实验、方法和工程依据并
+参与对比；(b) 本领域无已有工作，借鉴其他领域内容设计实验、提出方法和改进。两型都必须在具体
+任务上与存量业内最优（SOTA）基线对比。③ R2-R9 未与 owner 协同工作、未经 owner 校验，整批标
+`OWNER_UNVERIFIED`；R2 报告的 no-go/merge 建议撤回为执行者草稿意见，按新判据 R2 属 (a) 型
+（AudioRAG/Omni-DeepSearch/VoiceAgentRAG 为本域已有工作），待协同重审。④ 执行者代拟的
+「裁决 C/D/E」标 owner 未签；与判据 (b) 型冲突处以判据为准。⑤ R5+R6+R8 Stage-2A 合同绑定
+冻结至 R2-R9 协同重审完成。
+
+#### Rationale
+
+「证据不合格需重推导」不等于「方向判死」，裁决权归 owner；机器门禁只准绑定证据事实与已签
+裁决，不得把未签结论钉成不变量。R2 的证据事实（官方数据无 negative class 等）独立于处置结论
+保留。
+
+#### Consequences
+
+正典六处 "owner decision/owner-sunset" 表述改挂本 ADR；`test_sf_r1/r2_problem_definition.py`
+摘除结论型断言、改绑本条与证据事实；被削弱的暴露断言恢复。Supersedes：续75 Decision ① 的
+step-2（R1 修正）由 R1 日落取代，step-3 改为按本判据与 owner 协同重审 R2-R9。
+
 ### 2026-07-28（续75）· 工作空间清理战役：264 件日落删除 + 门禁 18→10 + 脚本零基退役；三步走整改（P0→R1 修正→R2-R9）与载体裁决 A/B 落账
 
 #### Context
