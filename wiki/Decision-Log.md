@@ -6,6 +6,33 @@
 
 ---
 
+### 2026-07-29（续77）· R2 有条件裁 A；检索 trace-logging 放行；主张对象=北极星 system-level+双红线
+
+#### Context
+
+R2 开题报告 v2（blob 062c253）经博导视角评审（wiki/audit/system-first-stage1c-v2/round-03/，
+verdict=MAJOR_REVISION）与 Fable 对抗分析（约八成接受：pre-call/admission 两门混淆、四类信息
+作用未分、量词过强、A0-A6 阶梯与模块标注表采纳；挑战：深度越阶部分归 Stage-2A、裁定时点归
+owner）。owner 三裁决如下。
+
+#### Decision
+
+① **检索 trace-logging 放行**：pin 搜索服务/日期/参数，逐次落盘返回 URL/文档 ID/rank/内容
+hash，共享查询跨实验臂复用同一返回，adaptive 独有查询保留完整 trace——如实披露，不称为
+数据集，不冒充参考论文资产。② **R2 有条件裁 GO_STANDALONE**：以关闭评审 §十四 全部清单项
+（按 proposal 级/authorization 级分层）为生效条件；v3 以评审 §十 的音频特有机制（听错实体→
+高相关错误证据；感知不确定性 vs 知识不确定性；预算在 re-resolve-audio 与 search-external 两
+信息源间分配）为主研究问题重写。③ **主张对象=北极星 system-level capability**，红线两条：
+**模型参数不可修改；不得新增一个模型**。
+
+#### Consequences
+
+R2 状态由 `EXECUTOR_DRAFT_UNVERIFIED_BY_OWNER` 升为
+`CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST`；current 层与 docs/contracts 同批更新；
+v3 为下一交付物。红线②的边界细化（稠密检索 embedding 模型、frozen judge 是否计入"新增
+模型"）待 owner 一句话，v3 先按最严格读法起草（控制平面=确定性逻辑+冻结核自身调用）。
+Supersedes：续76 中 R2 的 OWNER_UNVERIFIED 待协同状态由本条取代；R3-R9 仍 OWNER_UNVERIFIED。
+
 ### 2026-07-29（续76）· R1 日落 owner 确认；研究方向成立判据；R2-R9 整批标记 owner 未校验
 
 #### Context

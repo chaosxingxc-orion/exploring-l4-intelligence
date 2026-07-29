@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-07-29 — R1 sunset owner-confirmed; R2–R9 marked owner-unverified; direction criterion recorded"
+last_refresh: "2026-07-29 — R1 sunset confirmed; R2 conditional GO (续77); R3–R9 owner-unverified; criterion recorded"
 ---
 
 # Research Objective & Current State
@@ -11,11 +11,13 @@ last_refresh: "2026-07-29 — R1 sunset owner-confirmed; R2–R9 marked owner-un
 ## Current gate and authority
 
 Stage‑1C is in owner-directed remediation. Endpoint:
-`STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING`.
+`STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING`.
 
 The five dimensions and original R1–R9 remain an audit frame, not nine guaranteed Stage‑2 projects.
 R1 sunset is owner-confirmed (2026-07-29, Decision-Log 续76): it lacked standalone direction potential.
-R2–R9 are executor drafts the owner has not verified (`OWNER_UNVERIFIED`).
+R2 is owner-ruled conditional GO_STANDALONE (续77): effective on v3 checklist closure; red lines = no
+parameter modification, no additional model; trace-logging approved. R3–R9 are executor drafts the
+owner has not verified (`OWNER_UNVERIFIED`).
 Owner direction criterion (2026-07-29): sufficient survey plus in-domain prior work as a methodological
 baseline, or cross-domain-informed design where the field is empty; both must compare against incumbent
 SOTA on a concrete task. Core = Qwen3-Omni-30B via local llama.cpp; ASR mainline = general ASR.
@@ -31,15 +33,14 @@ parameters or internals.
 
 The original candidates are R1 context methods; R2 external retrieval; R3 memory; R4 skills; R5 evidence-state
 architecture; R6 within-instance control; R7 cross-instance evolution; R8 reliable control; R9 integration.
-Candidate numbering is preserved for provenance even when a direction sunsets.
 
-The prior `C1_DECISION_CALIBRATED_REWARD` primary selection is superseded; evaluator, headroom,
-stop/repair/abstain and reward-hacking tests are shared measurement components, and fixed-pool headroom
-gates no new system-created contexts.
+The prior `C1_DECISION_CALIBRATED_REWARD` primary selection is superseded; its tests remain shared
+measurement components, and fixed-pool headroom gates no new system-created contexts.
 
 R1 = `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; its literature/baseline matrix remains
 reusable. R2 is a type-(a) candidate (AudioRAG, Omni-DeepSearch, VoiceAgentRAG are in-domain prior
-work); its withdrawn merge recommendation is an executor draft opinion awaiting owner co-review.
+work); its v3 recenters on the audio-specific mechanism (misheard entities yield correlated-but-wrong
+evidence; budget split between re-resolving audio and searching external facts).
 
 ## Formal and evidence boundary
 
@@ -60,9 +61,9 @@ frozen API core, with actions `keep / branch-context / acquire / repair / stop`,
 equal-cost baselines and robust task-utility reporting. MMAU-mini/MMAR are the proposed carriers, but their
 CURRENT local-status discrepancy must be resolved before any run.
 
-Next action: owner co-review of R2–R9 under the 2026-07-29 criterion. The R5+R6+R8 contract binding and
-the `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE` request stay frozen until it completes. R1 has
-no Stage‑2B slot; the Stage‑2D question stays open pending the R2 co-review.
+Next action: R2 v3 closes the review checklist, then owner co-review of R3–R9. The R5+R6+R8 contract
+binding and the `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE` request stay frozen until it
+completes. R1 has no Stage‑2B slot; Stage‑2D becomes R2's slot once the conditional GO takes effect.
 
 ## Legacy and routing
 

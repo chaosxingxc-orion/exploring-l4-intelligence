@@ -19,17 +19,17 @@
   `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is unchanged evidence.
   R1 sunset is owner-confirmed (2026-07-29, Decision-Log 续76) as
   `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`: it lacked standalone direction potential; its
-  paper-derived baseline matrix remains reusable but no independent Stage-2B exists. R2–R9 are executor
-  drafts the owner has not co-worked or verified (`OWNER_UNVERIFIED`); the R2 no-go/merge recommendation
-  is withdrawn to draft status pending co-review under the 2026-07-29 direction criterion (sufficient
-  survey; in-domain baseline or cross-domain-informed design; SOTA comparison on a concrete task).
-  Qwen3-Omni-30B via local llama.cpp remains the core.
+  paper-derived baseline matrix remains reusable but no independent Stage-2B exists. R2 is owner-ruled
+  conditional GO_STANDALONE (续77; effective on v3 closing the supervisor-review checklist; red lines =
+  no parameter modification, no additional model; trace-logging approved). R3–R9 are executor drafts
+  the owner has not verified (`OWNER_UNVERIFIED`), pending co-review under the 2026-07-29 direction
+  criterion. Qwen3-Omni-30B via local llama.cpp remains the core.
 - **Legacy disposition:** R1 agreement remains `FAIL` with no adjudication. R2R1 passed 22 focused
   implementation tests but was never independently accepted or distributed; it is
   `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not a valid calibration release. H5 remains
   withheld and non-load-bearing, so cross-modality conclusions are prohibited without blocking the
   selected speech/API-only problem.
-- **Next authorized work:** owner co-review of R2–R9 under the 2026-07-29 criterion. The R5+R6+R8
+- **Next authorized work:** R2 v3 checklist closure, then owner co-review of R3–R9. The R5+R6+R8
   vertical-slice contract preparation and the `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`
   request stay frozen until that co-review completes. Model/API calls, metrics, dataset/model acquisition,
   reproduction, prototypes, technical novelty, push and wiki publication remain closed.

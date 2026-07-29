@@ -70,12 +70,14 @@
       ]
     },
     {
-      "id": "current_layer_marks_r2_as_executor_draft",
+      "id": "current_layer_marks_r2_conditional_go",
       "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
       "type": "must_contain",
       "target": "wiki/survey/current/research-directions.md",
       "strings": [
-        "执行者草稿，owner 未校验"
+        "CONDITIONAL_GO_STANDALONE_PENDING_V3_",
+        "续77",
+        "模型参数不可修改、不得新增一个模型"
       ]
     }
   ]

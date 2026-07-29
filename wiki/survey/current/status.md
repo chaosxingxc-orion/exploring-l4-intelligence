@@ -1,7 +1,7 @@
 # Current Survey Status
 
 - Gate: Stage‑1C research-direction confirmation remains in owner-directed remediation; endpoint
-  `STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING`.
+  `STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING`.
 - Owner rulings (2026-07-27/28): core = Qwen3-Omni-30B via the local llama.cpp lane; ASR mainline =
   general ASR; this stage performs analysis/synthesis only and holds no execution authority; datasets and
   metrics are reused from reference papers or official benchmark protocols as the working default.
@@ -12,11 +12,12 @@
 - R1 sunset is owner-confirmed (2026-07-29): `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2` —
   R1 lacked standalone direction potential, proposing only baseline exploration content. Its paper-derived
   datasets, baselines and metrics remain a reusable evidence package; no Stage-2B slot.
-- R2–R9 remain owner-unverified (`OWNER_UNVERIFIED`): no co-working session has reviewed them. The R2
-  executor report's no-go/merge recommendation is withdrawn to draft status pending owner co-review under
-  the 2026-07-29 criterion; R2 has in-domain prior work (AudioRAG/Omni-DeepSearch/VoiceAgentRAG), so it
-  is a type-(a) candidate. Its evidence facts stand, e.g. official data has no negative class, so need
-  detection cannot be evaluated without new labels.
+- R2 is owner-ruled `CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST` (2026-07-29, Decision-Log 续77,
+  after supervisor coreview + adversarial analysis): effective once v3 closes the review checklist; red
+  lines = no parameter modification, no additional model; retrieval trace-logging approved. R2 has
+  in-domain prior work (AudioRAG/Omni-DeepSearch/VoiceAgentRAG); evidence facts stand, e.g. official data
+  has no negative class, so need detection cannot be evaluated without new labels.
+- R3–R9 remain owner-unverified (`OWNER_UNVERIFIED`): no co-working session has reviewed them.
 - Executor-proposed rulings C/D/E remain owner-unsigned; where they conflict with the 2026-07-29
   criterion, the criterion prevails.
 - C1 evaluator/reward reliability remains a cross-cutting measurement component, not the primary problem;
@@ -28,5 +29,6 @@
 - Exposure: literature search/fetch/full-text and PDF-table review occurred; no model/API execution, metric run, reproduction or prototype occurred.
 - Withheld: data/model acquisition, model/API calls, metric runs, reproduction, prototypes, technical novelty
   verdict, Stage‑2A/2B execution, push and wiki publication.
-- Next action: owner co-review of R2–R9 under the 2026-07-29 criterion. The R5+R6+R8 Stage‑2A
-  vertical-slice contract binding stays frozen until that co-review completes.
+- Next action: R2 v3 closes the supervisor-review checklist; then owner co-review of R3–R9 under the
+  2026-07-29 criterion. The R5+R6+R8 Stage‑2A vertical-slice contract binding stays frozen until that
+  co-review completes.

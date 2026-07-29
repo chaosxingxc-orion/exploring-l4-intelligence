@@ -1,8 +1,9 @@
 ---
 artifact_id: "SF-STAGE1C-R2-COREVIEW-V2"
 role: "R2 开题报告底稿 v2（模板 v2 首例）：跨域知识演进综述 → 本域批判分析 → 共通性 → 实验建议"
-status: "DRAFT_FOR_OWNER_COREVIEW; owner 未签"
+status: "CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST (owner 2026-07-29, Decision-Log 续77); v3 整改中"
 template: "2026-07-29-direction-coreview-template.md (V2)"
+review: "wiki/audit/system-first-stage1c-v2/round-03/2026-07-29-r2-doctoral-supervisor-coreview.md (MAJOR_REVISION)"
 evidence_cut: "2026-07-29"
 supersedes: "V1（同文件 git 历史）"
 execution_authority: "STAGE2A_WITHHELD"
@@ -282,4 +283,8 @@ reward-guided 检索调度与 admission 门能否相对最优固定预算基线�
 归属：**选项 A** 独立方向（本稿 §5 全案）；**选项 B** MERGE（§5 的 L1→R6、L2→R5/R8、
 K1-K4 原样搬运，Stage-2D 撤销）。两案实验内容几乎相同。
 
-**owner 裁定栏**：＿＿＿＿（结论 / 日期 / Decision-Log 条目号）——落笔前本稿全文 owner 未签。
+**owner 裁定栏**：`CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST` / 2026-07-29 / Decision-Log
+续77。三项配套裁决：①检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回 hash、共享查询
+跨臂复用）；②生效条件=v3 关闭博导评审 §十四 全部清单（proposal 级/authorization 级分层）；
+③主张对象=北极星 system-level capability，红线=模型参数不可修改、不得新增一个模型。v3 以评审
+§十 的音频特有机制为主研究问题重写。

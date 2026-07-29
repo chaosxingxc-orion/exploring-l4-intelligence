@@ -1678,7 +1678,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage‑1C is in owner-directed remediation",
-            "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING",
+            "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING",
             "Qwen3-Omni-30B",
             "general ASR",
             "Stage‑1B v5",

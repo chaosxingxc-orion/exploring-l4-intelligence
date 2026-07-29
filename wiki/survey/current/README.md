@@ -1,8 +1,8 @@
 # Current Survey Router
 
 - Gate: **Stage‑1C research-direction confirmation in owner-directed remediation; R1 sunset
-  owner-confirmed 2026-07-29; R2–R9 owner-unverified pending co-review**. Endpoint:
-  `STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING`.
+  owner-confirmed; R2 conditional GO (续77); R3–R9 owner-unverified pending co-review**. Endpoint:
+  `STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING`.
 - Owner rulings (2026-07-27/28): core = Qwen3-Omni-30B via the local llama.cpp lane; ASR mainline =
   general ASR; this stage analyzes and summarizes only; datasets and metrics are reused from reference
   papers/official benchmark protocols as the working default.
@@ -21,12 +21,12 @@
 - Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union remain fixed evidence.
 - R1 owner-confirmed decision (2026-07-29): `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; its
   literature, dataset, baseline and metric matrix remains an evidence package; no Stage-2B slot.
-- R2–R9 are owner-unverified executor drafts (`OWNER_UNVERIFIED`); the R2 no-go/merge recommendation is
-  withdrawn to draft status pending co-review under the criterion. Executor-proposed rulings C/D/E remain
-  owner-unsigned; the criterion prevails on conflict.
+- R2: owner conditional GO_STANDALONE (续77; effective on v3 checklist closure; red lines = no
+  parameter modification, no additional model; trace-logging approved). R3–R9 remain
+  `OWNER_UNVERIFIED` executor drafts. Rulings C/D/E stay owner-unsigned; the criterion prevails.
 - R1 agreement `FAIL` and R2R1 retirement remain unchanged; H5 remains withheld and non-load-bearing;
   Duplex-model development stays outside the primary branch.
 - No model/API calls, metric runs, dataset/model downloads, reproduction, prototypes, technical novelty
-  verdict, push or wiki publication are authorized. Next: owner co-review of R2–R9; the R5+R6+R8
-  Stage‑2A contract binding stays frozen until it completes.
+  verdict, push or wiki publication are authorized. Next: R2 v3 checklist closure, then owner co-review
+  of R3–R9; the R5+R6+R8 Stage‑2A contract binding stays frozen until it completes.
 - Targeted audits: `wiki/audit/system-first-stage1c-v2-calibration/INDEX.md` and `wiki/audit/system-first-stage1b/INDEX.md`. Historical proposals, reviews, responses and amendments are cold audit.

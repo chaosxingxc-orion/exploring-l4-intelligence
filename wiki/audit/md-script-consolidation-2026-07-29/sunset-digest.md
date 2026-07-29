@@ -102,5 +102,22 @@ test_sf_query_compiler_profiles 的修正案覆盖矩阵 oracle 读原件短语�
 cmd3 变红，当场恢复；这九件的最终退役属引擎 3 的合同外置决策，不属清理决策）。配套：build_ai_context_manifest 四元组清空/收缩、sf_release_binding_check
 的 --legacy-regression 死分支随对象退役。
 
-后续波次（B2=CLAUDE/AGENTS 瘦身+过期口径重写、C 收尾、E 收尾）按各自 commit 追加到本 digest。配置化方案（293→约 107 件，合同引擎/资产引擎/薄壳统一）已由普查
+## Wave C（工程仓；独立 git，恢复点=各仓删除 commit 的父提交）
+
+**W1 speech-mllm-training-free-rl**（commits `bbcf317`+`7ed41f6`，已推）：32 件一次性实验
+脚本（cp/p/t/m/repro/dec/probe 系列）+ 3 件过期 MD（loaders STATUS 冒烟快照、未签署
+FREEZE_SHEET 网格草案、wave1_results 派生汇总——源 json 全在仓）。**反向保留**：
+`t7_rag_gate_probe.py`（kb_poc.py 真实 import）、`m5_selector_rescore_dev.py`（同）、
+`p2_baselines.py`（生产强依赖）、`two_pass_runner`（待接线基建）、`deploy_to_e.py`（运维）、
+全部 `_repro/` 勘误/取证 sidecar。docs/TESTING.md 回填 #39 两测试（159 前后全绿）。
+
+**W4 speech-mllm-omni-embedding-rl**（commits `68360b7`+`eb32b55`，已推）：168 件/1.64MB——
+94 脚本（12 薄壳→新 `scripts/cli.py` dispatcher〔引擎 4〕、3 个裸 import 簇整簇、7 件冻结
+方法学链〔FROZEN 审计留痕，恢复点=父 88dc775〕、65 普通）+ 74 MD（bugs 15、docs 主体 46、
+knowledge 非白名单 13；12 组三段式摘要在 `eb32b55` 提交信息正文）。保留：README/AGENTS、
+4 张模型选型卡、verify_paper_evidence、train/eval、两个真依赖脚本、tests/ 全部（31 passed
+前后等值）。遗留：W4 AGENTS.md 与 knowledge/README.md 内约 20 处指向已删文档的死链
+（B2 波修）。
+
+后续（B2=CLAUDE/AGENTS 瘦身+过期口径重写+W4 死链、E 收尾=引擎 3）按各自 commit 追加。配置化方案（293→约 107 件，合同引擎/资产引擎/薄壳统一）已由普查
 报告备好，实施待 owner 在方案上裁定。

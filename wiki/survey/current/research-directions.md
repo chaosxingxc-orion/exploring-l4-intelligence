@@ -3,7 +3,7 @@ artifact_id: "SF-STAGE1C-CAPABILITY-PORTFOLIO-V1"
 role: "CURRENT effective research-direction contract"
 authority: "owner directions 2026-07-27/28/29 (Decision-Log 续76)"
 stage: "STAGE_1C_REMEDIATION"
-endpoint: "STAGE1C_R1_SUNSET_OWNER_CONFIRMED_20260729_R2R9_UNVERIFIED_OWNER_COWORK_PENDING"
+endpoint: "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
@@ -11,8 +11,9 @@ execution_authority: "STAGE2A_WITHHELD"
 
 > **2026-07-27/28/29 owner 整改裁决（先于本文其余内容生效）。** 五个维度和原九个候选方向继续作为
 > Stage-1C 审计框架，但不保证九项都进入 Stage-2。R1 日落已由 owner 于 2026-07-29 确认
-> （Decision-Log 续76）；R2–R9 整批为执行者草稿、owner 未校验（`OWNER_UNVERIFIED`），待按 07-29
-> 判据协同重审。**裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为后续可复现
+> （Decision-Log 续76）；R2 经博导评审+对抗分析后由 owner **有条件裁 GO_STANDALONE**（续77，
+> 以 v3 关闭评审清单为生效条件；红线=模型参数不可修改、不得新增一个模型；检索 trace-logging
+> 放行）；R3–R9 仍为执行者草稿、owner 未校验（`OWNER_UNVERIFIED`），待按 07-29 判据协同重审。**裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为后续可复现
 > 载体，精确 revision 在独立执行合同中冻结）。**裁决 B**：ASR 主线为通用 ASR，MyST/RSR 等儿童 ASR
 > 只作支持证据。**方向成立判据（owner 2026-07-29）**：方向必须完成充分调研，且属两型之一——(a) 本
 > 领域存在已有工作，作为方法论基线提供实验、方法和工程依据并参与对比；(b) 本领域无已有工作，借鉴
@@ -114,7 +115,7 @@ MetaSICL1/2/3 和 CoM 的 PRD 分析路径包含参数训练；ByCS 依赖 Whisp
 协议复现。R1 不建立独立实验包，不进入 Stage-2B，也不得成为其他方向的前置条件。详细分析见 workbench
 R1 报告。
 
-### R2 — 音频驱动外部知识检索（执行者草稿，owner 未校验）
+### R2 — 音频驱动外部知识获取（owner 有条件 GO，待 v3 关闭评审清单）
 
 **审计对象。** AudioRAG 已发布 500 题 benchmark 和 text-controller + audio-tool + live-web pipeline；
 Omni-DeepSearch 已发布 640 题 audio-only-start deep-search benchmark、固定搜索预算消融和 accuracy 体系；
@@ -126,10 +127,13 @@ Omni-DeepSearch 在数据构造时都过滤掉不需要检索的题；官方数�
 query-hop-stop 没有直接参考方法，属于 R6 的 trajectory controller；two-ledger 属于 R5；条件回归和预算停止
 属于 R8。自行补负例、冻结 web corpus、发明归因指标或统一 utility 都违反当前数据/指标边界。
 
-**处置状态。** 原执行者建议（no-go/merge）已撤回为草稿意见，未经 owner 校验，不构成裁决。按
-2026-07-29 方向判据，R2 属 (a) 型——AudioRAG、Omni-DeepSearch、VoiceAgentRAG 是本域已有工作，可
-作为方法论基线在具体任务上与 SOTA 对比——因此 R2 的方向资格待与 owner 协同重审后再定；上述证据
-事实（占据、negative class 缺失、边界约束）独立于处置结论保留。
+**处置状态（owner 2026-07-29，Decision-Log 续77）。** `CONDITIONAL_GO_STANDALONE_PENDING_V3_
+CHECKLIST`：以 v3 关闭博导评审 §十四 全部清单（proposal 级/authorization 级分层）为生效条件。
+主研究问题按评审 §十 的音频特有机制重写（听错实体→高相关错误证据；感知 vs 知识不确定性；预算
+在 re-resolve-audio 与 search-external 两信息源间分配）。红线：模型参数不可修改、不得新增一个
+模型；检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回 hash、共享查询跨臂复用）。
+早期证据事实（占据、negative class 缺失、边界约束）独立保留；开题底稿=proposals/
+2026-07-29-r2-coreview-draft.md（v2，v3 整改中）。
 
 ### R3 — 声学条件键控的持久多模态记忆
 
@@ -279,7 +283,7 @@ composition、full adaptive system。Full-duplex/interactive 只有在 task succ
 | Stage-2B mechanism expansion | R4 | 独立处理运行时技能信用、组合与生命周期；published context/tool baseline 按需复现 |
 | Stage-2C persistent evolution | R3 + R7 | 检验外部记忆和跨实例改进是否成立 |
 | Stage-2E integration | R9 | 端到端组合与 speech-native 外部验证 |
-| Pending owner co-review（07-29 判据） | R2 | 处置待定：按 (a) 型与 owner 协同重审后决定 Stage-2D 去留 |
+| Stage-2D（条件生效） | R2 | owner 有条件 GO（续77）：v3 关闭评审清单后生效；主题=音频特有的外部知识获取调度 |
 
 ## 6. 第一份 Stage-2A 合同（草案；绑定冻结至 R2–R9 owner 协同重审完成）
 
