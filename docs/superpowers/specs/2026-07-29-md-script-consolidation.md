@@ -32,6 +32,11 @@ R5+R6+R8 纵向切片（核=Qwen3-Omni-30B via llama.cpp，ASR 主线=通用 ASR
   每波 `sf_current_package_check.py --check` PASS 后 commit+push。
 - 波次：A=umbrella wiki+docs MD；B=根 MD 与 CLAUDE/AGENTS 瘦身；C=工程仓 MD（各仓独立
   commit）；D=脚本删除+143 回填；E=配置化方案（文档，交 owner 裁定后另行实施）。
+- **scripts/tools/（owner 2026-07-29 裁决）**：设常驻目录存放日常反复使用的工程工具。现存
+  fetch/登记线（sf_fulltext_fetch、sf_fulltext_ledger_status、sf_official_metadata_fetch、
+  sf_atom_provenance_fetch）迁入；被删发现道工具若 R2-R9 重审确需，从台账恢复点按需恢复到
+  此目录。迁移不动 10 条门禁绑定脚本的路径（code_graph 稳定性优先）；门禁外的日用工具才
+  进 tools/。
 
 ## 验证
 
