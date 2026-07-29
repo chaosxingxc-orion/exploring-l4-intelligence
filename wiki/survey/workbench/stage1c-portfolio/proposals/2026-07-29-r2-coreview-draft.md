@@ -1,12 +1,12 @@
 ---
-artifact_id: "SF-STAGE1C-R2-COREVIEW-V5"
-role: "R2 开题报告 v5：关闭 round-05 复审 3 新 MAJOR + MAJOR-C 残留 + 5 MINOR"
-status: "V5_DRAFT_PENDING_ROUND06_SUPERVISOR_COREVIEW"
+artifact_id: "SF-STAGE1C-R2-COREVIEW-V6"
+role: "R2 开题报告 v6：round-06 终审零 MAJOR（MINOR_REVISION），9 项 MINOR 编辑性关闭，待 owner 生效裁定"
+status: "V6_READY_FOR_OWNER_RULING (round-06 verdict: MINOR_REVISION, zero MAJOR, 续77(2) condition adjudged fulfilled)"
 template: "2026-07-29-direction-coreview-template.md (V2)"
-reviews_closed: "round-03/04/05 (均 MAJOR_REVISION), wiki/audit/system-first-stage1c-v2/"
+reviews_closed: "round-03/04/05 (MAJOR_REVISION) + round-06 (MINOR_REVISION, zero MAJOR), wiki/audit/system-first-stage1c-v2/"
 rulings: "Decision-Log 续76/续77/续78"
-evidence_cut: "2026-07-29"
-supersedes: "V4（同文件 git 历史，blob f3063b46）；本件自足，不以任何已取代 blob 承重"
+evidence_cut: "2026-07-30"
+supersedes: "V5（同文件 git 历史，blob 6c4925ed）；本件自足，不以任何已取代 blob 承重"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
@@ -112,7 +112,8 @@ runtime-visible=检索返回、模型中间答案；gold-only=answer 与 golden_
 （Gemini-3-Pro 43.44 最强；本项目核 Qwen3-Omni-30B Thinking 6.56）；三 LLM judge 多数投票；预算
 消融 (5,1)=29.06→(10,3)=43.44→(15,5)=44.06 且类别强非均匀（IMAGE/SPEECH 升、VIDEO/AMBIENT 降）；
 A.6 over-search 完整轨迹（"(10,3) 停下答对，(15,5) 耗尽预算答错"）；oracle 分解 entity-only
-33.76/端到端 43.44/gold-entity 50.00；无成本记账、无 no-tool 直读行、单 split 无快照。
+33.76/端到端 43.44/gold-entity 50.00（**仅 Gemini-3-Pro 口径**）；无成本记账、无 no-tool 直读
+行、单 split 无快照。
 
 **VoiceAgentRAG 2603.02206**
 组织：纯文本合成 KB（NovaCRM 12 文档/76 chunk）+ 内存 FAISS 缓存（document-embedding 建索引，
@@ -207,15 +208,19 @@ need-detection。A5 扰动在官方数据上构造、不新增标注；A0 no-too
 | Omni-DeepSearch-640 | 有（LOCAL_CANDIDATE_UNFROZEN；merged.json 640 条实测可读） | 未入 | 官方仅 train | 三 LLM judge（外部 API） | 无检索快照/负类/dev-test；golden_path=实体链（480 条），trace/* 160 条（25%）无该字段；部分 gold 证据为图像态（如扉页罗马数字例） |
 | AudioRAG-500 | 未落盘 | 未入 | 论文未给 | GPT-4o judge | 无 frozen corpus/工具消融；构造期 gold 泄漏入过滤器与判官 |
 | VoiceAgentRAG-200 | 未落盘 | 未入 | scripted | — | 无语音/答案质量轴（仅 R9 参考） |
-| Spoken-SQuAD / SLUE-SQA-5（**A1′ 承重行**） | 未落盘（公开第三方资产，获取=authorization 义务） | 未入 | 官方 split | gold passage=官方文本/口语段资产（SLUE-SQA-5 的 gold 为 40s 口语段，非纯文本——A1′ 判定协议须按段处理） | A1′ **在开放检索模式下构造**：证据取自该锚的官方 passage 池（外部语料条目=第 1 类信息），非对本题音频的重表达（避免退化为第 2 类）；语音为 TTS/朗读态，作诊断锚不作主载体 |
+| Spoken-SQuAD / SLUE-SQA-5（**A1′ 承重行**） | 未落盘（公开第三方资产，获取=authorization 义务） | 未入 | 官方 split | 官方 QA 判定协议（Spoken-SQuAD=文本 span 比对；SLUE-SQA-5=按 40s 口语段判定的官方口径） | gold passage 资产事实：官方文本/口语段（SLUE-SQA-5 gold 为口语段非纯文本）。A1′ **在开放检索模式下构造**：证据取自该锚的官方 passage 池（外部语料条目=第 1 类信息），非对本题音频的重表达；语音为 TTS/朗读态，作诊断锚不作主载体 |
 
 **载体风险与回退梯（round-05 MAJOR-B）**：项目核 Qwen3-Omni-30B（Thinking）在主载体论文表中仅
 6.56，且同表显示弱模型从 search-guided refinement 获益有限（Mimo-V2.5 给定 gold entity 也只有
-22.03，论文作者明写）——主载体对本核存在**近地板风险**，correct→wrong 判定的样本基数亦小
-（约 40 题量级）。回退梯（触发条件=未过 §5.4 assay-sensitivity 检定）：①按官方 pipeline 校核
-本核 prompt/思维链配置后重测灵敏度；②分层收缩到本核有牵引力的类别子集（如 SPEECH/SINGLE），
-主张范围同步收窄；③仍地板则主载体降级为方向性可行性证据、AudioRAG-500 升为主载体（其 raw
-37.0 远离地板），并如实改写全部 K 判据的载体绑定。判死永不在未过灵敏度检定的载体上宣布。
+22.03——同表数据；作者明写弱模型几乎不受益的原句支撑数对为 12.50/11.72）——主载体对本核存在
+**近地板风险**，correct→wrong 判定的样本基数亦小（约 40 题量级）。回退梯（触发条件=未过 §5.4
+assay-sensitivity 检定）：①按官方 pipeline 校核本核 prompt/思维链配置后重测灵敏度；②分层收缩
+到本核实测有牵引力的类别子集（按本核自测的分层读数选定；论文表本核口径下最高为 IMAGE 10.62 与
+SINGLE 9.38——SPEECH 5.83 反为最差层之一，他核预算消融的 SPEECH 强势不得串用），主张范围同步
+收窄；③仍地板则主载体降级为方向性可行性证据、AudioRAG-500 升为主载体（其 raw 37.0 远离地板；
+其构造期 gold 泄漏入过滤器与判官的污染面照 §3.4 表如实随载体升格进入主结论限定），并如实改写
+全部 K 判据的载体绑定；④梯尽（全部载体失敏）则 R2 不得宣布任何判死或胜出结论，回 owner 重议
+载体或降级为方向性可行性档。判死永不在未过灵敏度检定的载体上宣布。
 judge-API 依赖与 split 冻结方案属 Stage-2 执行合同问题，此处登记不解决。
 
 ## §4 方法合同
@@ -245,6 +250,11 @@ decision quantity（前瞻估计量族，proposal 层声明；选型与权重标
     audCons(ĥ_t) = 截至 t 步已执行的音频重呈现（RE_RESOLVE 产出的重听/重询变体）中，首选假设
     ĥ_t 被复现的比例（t 步前无重呈现时定义为 1，即无证据怀疑感知）。
   V̂(ADMIT(e) | s_t) = γ1·corr(e, ĥ_t) + γ2·srcQual(e) − γ3·confl(e, E_t)
+  其余变量的可实现定义（round-06 MINOR-1）：corr(e, h) = 证据 e 与假设 h 的实体/关系重叠率
+  （确定性字符串/别名匹配）；**gapCorr(E_t, ĥ_t) 只读 corr(e, ĥ_t)**（= 1 − max_{e∈E_t}
+  corr(e, ĥ_t)；E_t 的 corroboration 标记只按 ĥ_t 计，不得从证据侧反推 H_t 全集后验）；
+  nov(q|A) = q 与历史 query 的最大词面/实体重叠的补；srcQual(e) = 预注册来源白名单等级表的
+  查表值；confl(e, E_t) = e 与已接纳证据在同一实体槽上的取值冲突计数（确定性比对）。
   时序合法性：上述全部输入（agree/maxAgree/disp/audCons/gapCorr/nov/srcQual/confl/预算余额）仅
   依赖 t 步及以前已观测量——是"前瞻估计"而非"事后回报"；执行后的实际回报仅用于 §5.2 合理性层的
   离线 calibration（对 delta_E），不进在线决策。
@@ -283,7 +293,7 @@ A4a/A4b 析因强制。
 | A1′ gold-evidence 受限诊断 | 外部证据对冻结核的可恢复上界；**仅构造于官方 gold passage 真实存在的锚数据集**（Spoken-SQuAD/SLUE-SQA-5）；证据"被使用"以 removal/swap 反事实判定，不以出现在上下文为准；如实声明其载体与主载体分布不同 |
 | A2 retrieved + unconditional concat | 检索管线总收益与 evidence-induced harm |
 | A3 同 A2 evidence set + admission/fusion | 使用机制独立贡献（SQ3；§2.3 候选解释检验位） |
-| A4a 同 store 同 answerer 等成本、通用自适应 SEARCH 调度（估计量=V̂_gen，**无任何感知不确定性输入**；re-resolve 为固定档：从 {0, 每题至多 1 次前置重听} 中按 dev 预注册选定，选取规则与档位强度=authorization 预注册项，且 K1a 的对照措辞与之对齐为"最优固定 SEARCH 档 × 选定 re-resolve 固定档"） | 通用 query/hop/stop 的贡献（=MERGE 情形的全部内容） |
+| A4a 同 store 同 answerer 等成本、通用自适应 SEARCH 调度（估计量=V̂_gen，**无任何感知不确定性输入**；re-resolve 为固定档：从 {0, 每题至多 1 次前置重听} 中按 **dev 上最优**选定（round-06 MINOR-3），选取规则=authorization 预注册项，K1a 对照=最优固定 SEARCH 档 × 该选定档） | 通用 query/hop/stop 的贡献（=MERGE 情形的全部内容） |
 | A4b = A4a + 感知不确定性路由（α1 项 + RE_RESOLVE 动作 + 双源分配） | **音频特有机制的唯一识别臂：主张挂 A4b−A4a** |
 | A5 shuffled/irrelevant/conflicting evidence | 盲从/污染/拒绝/correct→wrong。生成器：shuffled/irrelevant=同类别跨题确定性重排与采样（无 LLM）；conflicting=跨题证据置换构造（无 LLM 生成内容）；若执行期改用 LLM 生成，按 C1 记录且声明不参与作答（MINOR-4） |
 | A6 offline oracle over executed pool | 已执行菜单的 recoverable headroom（A1 缺位处的替补上界） |
@@ -306,8 +316,9 @@ tokens, judge calls, wall-clock, API currency, index/snapshot amortized)`；报�
 失败率、等成本最优质量、等质量最低成本、accuracy-cost Pareto、每 hop 边际效用；"等预算"指
 逐实例 hard cap 还是平均预算、落在哪一维=执行合同预注册。
 **探针与信号开销入等预算（MINOR-3 + round-05 MINOR-e）**：`r_consistency`/K2 所需逐步候选答案
-探针（A4 独有 core-call）与 admission 侧 `confl/srcQual` 的计算调用，全部显式计入对应臂的等
-预算（维度与 cap 形式预注册），并报告"扣除探针成本前/后"双读数。
+探针（信号分层后为 **A4b 独有** core-call；A4a 仅在 K2 判定所需限度内使用并同等计费）与
+admission 侧 `confl/srcQual` 的计算调用，全部显式计入对应臂的等预算（维度与 cap 形式预注册），
+并报告"扣除探针成本前/后"双读数。
 
 ### §5.3 复放与污染审计（续77① 范围内，未请求扩展）
 
@@ -319,14 +330,18 @@ adaptive 独有查询保留完整 trace 与内容 hash；单列 reachability/con
 ### §5.4 击杀阈值（定义=本版；数值=authorization 前 power analysis）
 
 **Assay-sensitivity 前置（round-05 MAJOR-B 修复）**：任何 K 判死只在载体通过灵敏度检定后有效。
-检定（authorization 预注册数值）：①A1（gold-entity ceiling）− A0 在项目核上 ≥ 预注册最小可检
-余量；②固定预算档曲线在项目核上斜率非零；③correct→wrong 事件的可用样本基数 ≥ 预注册下限。
+检定（authorization 预注册数值）：①A1（gold-entity ceiling；其 trace/* 不可构造子集由 A6 替补
+承担同一检定角色）− A0 在项目核上 ≥ 预注册最小可检余量；②固定预算档曲线在项目核上斜率非零；
+③correct→wrong 事件的可用样本基数 ≥ 预注册下限。
 未通过者不触发判死，改走 §3.4 载体回退梯；"判死"与"载体无分辨力"由此可区分。
 
-- **K1a（通用调度有效性）**：等预算 A4a vs 最优固定档，paired delta 95% 下置信界 ≤0 → 调度类
-  杠杆整体判死，R2 回落 MERGE-或-kill 讨论。
-- **K1b（音频特有性，独立性判据）**：`A4b − A4a` 的 paired delta 95% 下置信界 ≤0 → 音频特有
-  主张判死，按 §6 路由 MERGE（即使 K1a 通过）。SESOI 数值=authorization 前 power analysis 预注册。
+- **K1a（通用调度有效性）**：等预算 A4a vs **最优固定 SEARCH 档 × 选定 re-resolve 固定档**，
+  paired delta 95% 下置信界 ≤0 → 调度类杠杆整体判死，R2 回落 MERGE-或-kill 讨论。
+- **K1b（音频特有性，独立性判据；合取条件版——round-06 制度性对冲采纳）**：需同时满足
+  ①`A4b − A4a` 的 paired delta 95% 下置信界 >0；②标定后的 β 分量权重与零可区分（否则音频特有
+  信号未实际承重）。任一不满足 → 音频特有主张判死，按 §6 路由 MERGE（即使 K1a 通过）。
+  SESOI 数值=authorization 前 power analysis 预注册。α1 移出 A4a 后差分偏倚单向指向"支持独立"，
+  合取条件②即为其对冲——勉强为正的 K1b 读数不得单独支撑独立主张。
 - **K2（over-search，判官抽样复核估计版；仅依赖已授权落盘量）**：t* = 首个"当步候选答案（离线
   与 gold 比对）正确"的步；over-search 事件 = 最终答案错误 ∧ t>t* 存在 SEARCH。判定输入=已落盘
   答案轨迹与 rank/hash 轨迹；**判官抽样复核**的抽样框=全部 over-search 候选 episode（非全轨迹
@@ -364,11 +379,14 @@ adaptive 独有查询保留完整 trace 与内容 hash；单列 reachability/con
   协议**（MAJOR-3 落点）；judge 保真合同（判官 prompt/重复性/异质复核）；数据集 lock 与分层
   切分；检索服务 pin；三篇检索线检查点发布状态核查；探针成本的预算维度与 cap 形式；A5 扰动
   构造的确定性种子协议。
-- 本版 exposure：新增=round-04 评审的本地资产读取与本响应的核验（零网络/零模型执行/零指标/零
-  下载/零原型）；累计记账见 §1.5。
-- **处置**：本版关闭 round-04 全部 5 MAJOR + 6 MINOR 与 round-03 遗留 6 项；送 round-05 隔离
-  复审；零 MAJOR 后连同两轮评审与逐条回应交 owner 做续77 生效裁定。
+- 本版 exposure：新增=round-05/06 两轮评审的本地资产读取（merged.json 复算、三篇 LaTeX 源
+  复核、v2/v3 blob 对读）与本方对九项 round-06 MINOR 的核验编辑；零网络/零模型执行/零指标/零
+  下载/零原型；累计记账见 §1.5。
+- **处置与评审史**：round-03（12 清单，MAJOR）→ v3 → round-04（5 MAJOR，MAJOR）→ v4 →
+  round-05（3 新 MAJOR，MAJOR）→ v5 → **round-06（零 MAJOR，`MINOR_REVISION`，判定续77②
+  生效条件已成就）**→ 本版（v6）关闭 round-06 全部 9 项 MINOR（编辑性修订，含 K1b 合取条件
+  这一制度性对冲）。交 owner 做续77 生效裁定。
 
-**owner 裁定栏（续77 已录，生效待复审通过后确认）**：`CONDITIONAL_GO_STANDALONE_PENDING_
-V3_CHECKLIST`（清单载体已更替为 round-04 §六 三问）/ 2026-07-29 / Decision-Log 续77；红线细化=
-续78。
+**owner 裁定栏（续77 已录，round-06 判定生效条件成就）**：`CONDITIONAL_GO_STANDALONE_PENDING_
+V3_CHECKLIST` → 清单已由 round-03..06 评审链逐轮更替并于 round-06 判定成就 / 2026-07-29 /
+Decision-Log 续77；红线细化=续78。生效落笔权在 owner。
