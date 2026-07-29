@@ -22,12 +22,12 @@
       {
         "path": "scripts/checks/build_ai_context_manifest.py",
         "mode": "100644",
-        "git_blob": "3228953406cc1160f4abf0d1256111434f1a9284"
+        "git_blob": "50fd4deaaee48a0dc7a14df395db20de1de5f39b"
       },
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "c562e1b61cb3044a202a043952dc9a7cd0e80be3"
+        "git_blob": "790472950d5145b89e4dce2fdf747344f6e38983"
       },
       {
         "path": "scripts/checks/test_lean_axiom_gate_contract.py",
@@ -107,7 +107,7 @@
       {
         "path": "scripts/survey/sf_release_binding_check.py",
         "mode": "100644",
-        "git_blob": "63657fcf9dbd39052adaa77c0d0f3b46140b5ff0"
+        "git_blob": "7c1a95b3ae55547289ef318be63d177be05f0de8"
       },
       {
         "path": "scripts/survey/sf_schema_v3_release_contract.py",
@@ -157,7 +157,7 @@
       {
         "path": "scripts/survey/test_sf_manifest_consumers.py",
         "mode": "100644",
-        "git_blob": "36e8609bda7ac735ee1121ecb763694e5efaa4ac"
+        "git_blob": "824b280d08add114e04f13370574cafba85115fc"
       },
       {
         "path": "scripts/survey/test_sf_official_metadata_fetch.py",
@@ -180,7 +180,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "ae33c9abd35dc53710ad570002d01151d6dc9ed7dfd5c58b713fd295667639fe"
+    "sha256": "7a25ba2e53a5937b37d7f4049f40944e68d4cc63592f1b665bd59963b29516ff"
   },
   "commands": [
     {

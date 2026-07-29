@@ -163,27 +163,25 @@ def _legacy(path: str, path_class: str):
     return {"path": path, "class": path_class}
 
 
-EXACT_NAMED_LEGACY_EXCEPTIONS = (
-    # Pre-routing W4 working proposal draft; retained at its historical path.
-    _legacy("wiki/2026-07-11-W4-fresh-proposal-draft.md", "AUDIT_LEGACY"),
-    # Historical record-denoise survey proposal predating permanent routing.
-    _legacy(
-        "wiki/2026-07-15-record-system-denoise-and-rationale-survey-proposal.md",
-        "AUDIT_LEGACY",
-    ),
-    # Generic English proposal template retained as cold legacy documentation.
-    _legacy("wiki/Research-Proposal-Template.md", "AUDIT_LEGACY"),
-    # Generic Chinese proposal template retained as cold legacy documentation.
-    _legacy("wiki/Research-Proposal-Template_CN.md", "AUDIT_LEGACY"),
-)
+# Emptied 2026-07-29: legacy cold layer retired under the owner delete-to-the-maximum
+# ruling; rows and recovery commands live in
+# wiki/audit/md-script-consolidation-2026-07-29/sunset-ledger.jsonl.
+EXACT_NAMED_LEGACY_EXCEPTIONS = ()
 
 
+# Shrunk 2026-07-29 to the two gate-bound survivors: sf_protocol_contract reads
+# the historicized protocol-v1 bytes (gate cmd 1) and sf_bibliography_generator
+# reads bibliography-v1 (gate cmd 3). Everything else went through the campaign
+# sunset ledger.
 RETAINED_LEGACY_PATHS = (
-    _legacy("wiki/survey/2026-07-15-sf-bundle-manifest.md", "REGISTRY_LEGACY"),
     _legacy(
         "wiki/survey/2026-07-15-system-first-survey-protocol-v1.md",
         "REGISTRY_LEGACY",
     ),
+    _legacy("wiki/survey/2026-07-19-sf-bibliography-v1.md", "REGISTRY_LEGACY"),
+    # The amendment files feed the amendment-coverage oracle in
+    # test_sf_query_compiler_profiles (gate cmd 1); retiring them is an
+    # engine-3 contract decision, not a cleanup decision.
     _legacy("wiki/survey/2026-07-15-sf-protocol-amendment-1.md", "AUDIT_LEGACY"),
     _legacy("wiki/survey/2026-07-16-sf-protocol-amendment-3.md", "AUDIT_LEGACY"),
     _legacy("wiki/survey/2026-07-16-sf-protocol-amendment-4.md", "AUDIT_LEGACY"),
@@ -191,76 +189,18 @@ RETAINED_LEGACY_PATHS = (
     _legacy("wiki/survey/2026-07-17-sf-protocol-amendment-6.md", "AUDIT_LEGACY"),
     _legacy("wiki/survey/2026-07-17-sf-protocol-amendment-7.md", "AUDIT_LEGACY"),
     _legacy("wiki/survey/2026-07-18-sf-protocol-amendment-8.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-18-sf-stage1b-opening-tables.md", "REGISTRY_LEGACY"),
-    _legacy("wiki/survey/2026-07-19-sf-stage1b-opening-tables-v2.md", "REGISTRY_LEGACY"),
-    _legacy("wiki/survey/2026-07-19-sf-stage1b-opening-tables-v3.md", "REGISTRY_LEGACY"),
-    _legacy("wiki/survey/2026-07-19-sf-stage1b-opening-tables-v4.md", "REGISTRY_LEGACY"),
-    # The taxonomy-v5 replay chain generated coding v6; there is no coding-v5
-    # artifact.  These are the exact three platform reports and inputs it used.
-    _legacy("wiki/survey/2026-07-19-sf-identity-taxonomy-v5.json", "REGISTRY_LEGACY"),
-    _legacy("wiki/survey/2026-07-19-sf-known-item-coding-v6.json", "REGISTRY_LEGACY"),
-    _legacy("docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.json", "REGISTRY_LEGACY"),
-    _legacy(
-        "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.nt.json",
-        "REGISTRY_LEGACY",
-    ),
-    _legacy(
-        "docs/checks/2026-07-19-sf-identity-taxonomy-v5-test.posix.json",
-        "REGISTRY_LEGACY",
-    ),
 )
 
 
-_PREEXISTING_AUDIT_DOC_PATHS = (
-    "wiki/2026-07-15-s0-program-identity-signoff.md",
-    "wiki/survey/2026-07-14-canonical-census-v2/census_report_v2.md",
-    "wiki/survey/2026-07-14-canonical-census/census_report.md",
-    "wiki/survey/2026-07-14-claim-ledger-v1/ledger_report.md",
-    "wiki/survey/2026-07-14-claim-ledger-v2/ledger_v2_report.md",
-    "wiki/survey/2026-07-15-sf-seed-manifest-report.md",
-)
+# Emptied 2026-07-29 (same ruling; registered files went through registry sunset rows).
+_PREEXISTING_AUDIT_DOC_PATHS = ()
 
 _PREEXISTING_REGISTRY_DOC_PATHS = (
-    "wiki/2026-07-11-group-split-statistics-design.md",
-    "wiki/2026-07-14-identity-contracts-v1.md",
+    # Sole retained legacy document (owner ruling 2026-07-18(2): historical
+    # experiments are never deleted, downgraded, or pretended away). This is the
+    # canonical carrier of the inherited-prior-exposure union that every future
+    # held-out/preregistration design must consult.
     "wiki/2026-07-18-inherited-prior-exposure-union.md",
-    "wiki/Omni-Embed-Model-Dossier.md",
-    "wiki/Paralinguistic-Suppression-Survey.md",
-    "wiki/Speech-Semantic-Task-Datasets.md",
-    "wiki/Theory-Convergence-and-Constraints.md",
-    "wiki/W4-Research-Plan.md",
-    "wiki/W4-Training-Free-RL-Feasibility.md",
-    "wiki/survey/2026-07-04-stage1-3w-crossdomain-comparisons.md",
-    "wiki/survey/2026-07-04-stage1-L1-asr-st.md",
-    "wiki/survey/2026-07-04-stage1-L2-slu.md",
-    "wiki/survey/2026-07-04-stage1-L3-sqa-reasoning.md",
-    "wiki/survey/2026-07-04-stage1-L4-speech-agentic.md",
-    "wiki/survey/2026-07-04-stage1-X1-prompt-space-quantification.md",
-    "wiki/survey/2026-07-04-stage1-X2-paralinguistic-delta.md",
-    "wiki/survey/2026-07-04-stage1-X3-llm-vlm-testtime-map.md",
-    "wiki/survey/2026-07-07-multimodal-knowledge-systems-alignment.md",
-    "wiki/survey/2026-07-08-speech2vec-dims-1-4.md",
-    "wiki/survey/2026-07-08-speech2vec-dims-5-8.md",
-    "wiki/survey/2026-07-09-datasets-lock-first14.md",
-    "wiki/survey/2026-07-09-datasets-lock-second14.md",
-    "wiki/survey/2026-07-09-embedder-selection-matrix-full.md",
-    "wiki/survey/2026-07-09-theory-scheme-coverage-appendix.md",
-    "wiki/survey/2026-07-09-verifier-backbones-beyond-local.md",
-    "wiki/survey/2026-07-14-coverage-and-kill-matrix-v2.md",
-    "wiki/survey/2026-07-14-neighbor-matrix-v2.md",
-    "wiki/survey/2026-07-14-sota-cards-v2.md",
-    "wiki/survey/2026-07-15-gate-s1-own-library-sweep.md",
-    "wiki/survey/2026-07-15-round2-protocol-v2-instantiated.md",
-    "wiki/survey/2026-07-15-sf-blank-templates.md",
-    "wiki/survey/2026-07-15-sf-secondary-routes.md",
-    "wiki/survey/2026-07-16-sf-t1-proceedings-routes.md",
-    "wiki/survey/2026-07-18-sf-heldout-l12-prereg-c4c.md",
-    "wiki/survey/2026-07-18-sf-known-item-dfs-systemcontrol.md",
-    "wiki/survey/2026-07-18-sf-p0r9-seven-papers-dfs.md",
-    "wiki/survey/2026-07-18-sf-v4-claim-evidence-matrix.md",
-    "wiki/survey/2026-07-18-sf-v5-claim-evidence-matrix.md",
-    "wiki/survey/2026-07-19-sf-bibliography-v1.md",
-    "wiki/survey/replay/SURVEY-RESP-2026-07-14-01/README.md",
 )
 
 # Fixed inventory only: no filesystem scan contributes paths to this tuple.

@@ -410,7 +410,7 @@
     {
       "role": "audit_artifact_registry",
       "path": "wiki/survey/sf-audit-artifact-registry.json",
-      "sha256": "596ae84e12eaad4646038c90cf350b4cdcdc512714332ddc46ecda238e04be7d",
+      "sha256": "c36644858da91fb676a40f81ad19d8d0120792bc6ccafcb0ee858407d80c21b2",
       "mutability": "append-only",
       "load_policy": "machine-only"
     }

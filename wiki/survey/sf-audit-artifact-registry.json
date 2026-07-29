@@ -13,6 +13,11 @@
     {
       "date": "2026-07-28",
       "incident": "workspace-cleanup-2026-07(docs/superpowers/specs/2026-07-28-workspace-cleanup-and-gate-refactor.md):51 条已注册 wiki 根件按 owner 应删尽删裁决从工作树删除;新增顶层 sunset 数组(append-only,path/git_blob/last_commit)豁免其 HEAD/stage0/worktree 存在性要求,改为 git ls-tree <last_commit> -- <path> 历史可复现性校验(sf_audit_immutability_check.py);字节留存于 wiki/audit/workspace-cleanup-2026-07/sunset-ledger.jsonl 与 git 历史,digest 见同目录 sunset-digest.md(本次已 append 登记为第 111 行);ledger.jsonl 本身按登记表既定范围(工作层编码表不入本表)不登记为 artifacts 行"
+    },
+    {
+      "date": "2026-07-29",
+      "incident": "md-script-consolidation-2026-07-29(docs/superpowers/specs/2026-07-29-md-script-consolidation.md):legacy 冷层收官——26 条已注册审计工件按 owner 应删尽删裁决从工作树删除(sunset 数组追加,历史可达校验同 07-28 机制);另 93-N 条未注册 legacy 同批删除入本战役 sunset-ledger;唯一保留=wiki/2026-07-18-inherited-prior-exposure-union.md(owner 07-18 裁决②正典载体,held-out 设计强制约束面);字节留存于 git 历史与 wiki/audit/md-script-consolidation-2026-07-29/",
+      "restore_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
     }
   ],
   "artifacts": [
@@ -716,6 +721,136 @@
       "path": "wiki/2026-07-19-system-first-research-proposal-v8-stage1a-doctoral-review.md",
       "git_blob": "e193a23cdba555a89451788838ccfae4c6bd6ce1",
       "last_commit": "cd6bf997f8e04e445c199752d92c0b3f96712862"
+    },
+    {
+      "path": "wiki/2026-07-11-step1-completion-forensic-integrity-review.md",
+      "git_blob": "5614049487c1f1a2286b2c66c34faa62ddfc2272",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-12-research-proposal-v42-external-review.md",
+      "git_blob": "f2829b3450117f21eb6bdc75868eded4713cd279",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-13-response-v6-stage1-recalibrated-review.md",
+      "git_blob": "1045818b543b26b2cb7c7ce8377cd28d3ca5ac26",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-13-v42-remediation-signoff-doctoral-adversarial-review.md",
+      "git_blob": "612c5285489bb491b5832d048b7424192394d935",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-14-response-to-knowledge-stack-evaluation.md",
+      "git_blob": "b6ec0197d6ae11dde963ebd01baff041e7347b7c",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-15-stage1a-research-proposal-doctoral-adversarial-review-v2-owner-clarified.md",
+      "git_blob": "d405be4b51f1adf853be538df77a66d85f663d69",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-15-system-first-research-proposal-v3-consolidated.md",
+      "git_blob": "30e50c048a2c0fed80a5fe90e2fd02ca229c943b",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
+      "git_blob": "686129ee41cdf08c294114fc29c93a9c63408dc5",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
+      "git_blob": "80bd82072289387be9d2a4391fa2026fe36b3522",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/2026-07-19-system-first-research-proposal-v9-stage1a-doctoral-review.md",
+      "git_blob": "c4c8d082289a720959781a85c0a596d04f6ca150",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-rereview.md",
+      "git_blob": "79c855667fc72809e61e10f75b21f06f49a57a02",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-04-stage1-survey-d5b-review.md",
+      "git_blob": "081446b948edd0c87e4c13ae7951f78a035af9c9",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4-response.md",
+      "git_blob": "300225e906b531e1488ac57f518ac6b8363497d4",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-correction-4a-response.md",
+      "git_blob": "96886f96c8f30f1a1ea48b37d658d44f894c4810",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-p0r8-rereview-application.md",
+      "git_blob": "fe005fa38015d00bb5a67c9dc9d8df96f0cf0529",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-16-gate-s1-rereview-application.md",
+      "git_blob": "a81a01c03dac7e306a05e6629629b85a139e5822",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-17-gate-s1-correction-4b-response.md",
+      "git_blob": "f80e70a66f9fd553c529eeee317111a2a37fab88",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-correction-4c-response.md",
+      "git_blob": "c920b4fef8110b80403c3b4281fd2a7364963a4a",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v4-response.md",
+      "git_blob": "e4b888403d5f302b7442d76905b9e98da3970a98",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-rereview-response.md",
+      "git_blob": "bd2e94294638dd9e10248a484615f76065a9f996",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v5-response.md",
+      "git_blob": "b35681d0ed7ceff9be1b8b531f70b937be720e92",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-gate-s1-v6-response.md",
+      "git_blob": "c2348f198e7eba97d02f1fedcfcf48661ce5afb0",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-18-sf-press-query-review-c4c.md",
+      "git_blob": "92f2f653c57e60327a57991902947e118b6ade28",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v7-response.md",
+      "git_blob": "3fe2eb970e2d752ef02238054cb0397c5b34b655",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v8-response.md",
+      "git_blob": "9d4abf0d00900b6dea44cddf326f4f7bcdf11820",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
+    },
+    {
+      "path": "wiki/survey/2026-07-19-gate-s1-v9-response.md",
+      "git_blob": "df1b4737449d2b8a500cbfd38dd6d5e2bdb51b6a",
+      "last_commit": "300a6181d52b318d27436b5e048fd853554e64e4"
     }
   ]
 }

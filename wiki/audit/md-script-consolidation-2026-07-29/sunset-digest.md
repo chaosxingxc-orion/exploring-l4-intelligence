@@ -83,6 +83,24 @@ oracle，17/25 红因 fixture 未跟进 strict-JSON 硬化——待修不删，�
 被状态查询需求淘汰) / sf_atom_provenance_fetch(已删,被取代)）中活跃两件留在 scripts/survey/
 （在 code_graph 保护内，迁出反而降保护面）；被删发现道工具需要时按台账恢复到 scripts/tools/。
 
-后续波次（B=legacy 89 件+manifest 元组+CLAUDE/AGENTS 瘦身、C=工程仓、E=配置化方案）按各自
-commit 追加到本 digest。配置化方案（293→约 107 件，合同引擎/资产引擎/薄壳统一）已由普查
+## Wave B（legacy 冷层收官，84 件删除 + 10 件反向保留）
+
+manifest legacy_cold_paths 94 件中 84 件删除：AUDIT_LEGACY 冷链（gate-s1 v4-v9 响应与
+corrections、protocol amendment 1/3-8、census/claim-ledger 报告、v3/v9/v10 提案、博士评审、
+法证、s0 签署、denoise 提案、replay 事务等——判决已由 wiki/audit 各 campaign INDEX 与
+Decision-Log 承接，协议正典 07-28 wave-E 已 historicize）+ REGISTRY_LEGACY 冻结中间表
+（stage1 L1-L4/X1-X3、speech2vec、embedder 矩阵、coverage/kill/neighbor/sota v2、opening-tables
+v1-v4、claim-evidence v4/v5、bibliography-v1、taxonomy-v5/coding-v6 json、identity-contracts、
+W4 系列参考文档、提案模板——被 Stage-1B v5 release 38fb943、current 层与 coreview 模板 v2
+取代）。其中 26 件为已注册审计工件，走 registry sunset 数组（blob=注册 pin 逐件核对，
+incident_log 已追加）；58 件未注册走本台账。**反向保留 10 件**：
+`wiki/2026-07-18-inherited-prior-exposure-union.md`（owner 07-18 裁决②正典载体，held-out
+设计强制约束面）；`wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` 与
+`wiki/survey/2026-07-19-sf-bibliography-v1.md`（GATE_BOUND：分别被 sf_protocol_contract 读
+字节、sf_bibliography_generator 消费）；protocol amendment 1/3-8 七件（GATE_BOUND：
+test_sf_query_compiler_profiles 的修正案覆盖矩阵 oracle 读原件短语——首轮删除后门禁 cmd1/
+cmd3 变红，当场恢复；这九件的最终退役属引擎 3 的合同外置决策，不属清理决策）。配套：build_ai_context_manifest 四元组清空/收缩、sf_release_binding_check
+的 --legacy-regression 死分支随对象退役。
+
+后续波次（B2=CLAUDE/AGENTS 瘦身+过期口径重写、C 收尾、E 收尾）按各自 commit 追加到本 digest。配置化方案（293→约 107 件，合同引擎/资产引擎/薄壳统一）已由普查
 报告备好，实施待 owner 在方案上裁定。

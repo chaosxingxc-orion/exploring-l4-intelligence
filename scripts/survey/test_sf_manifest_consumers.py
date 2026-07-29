@@ -531,13 +531,6 @@ class ManifestConsumerContractTests(unittest.TestCase):
             any("generated headline" in failure for failure in current_failures)
         )
 
-    def test_release_cli_rejects_manifest_and_legacy_conflict(self):
-        with self.assertRaises(SystemExit) as raised:
-            self.release.main(
-                ["--manifest", "wiki/survey/current/manifest.json", "--legacy-regression"]
-            )
-        self.assertNotEqual(0, raised.exception.code)
-
     def test_release_cli_does_not_default_explicit_empty_manifest(self):
         fixture = self.fixture()
         for value in ("", "   "):

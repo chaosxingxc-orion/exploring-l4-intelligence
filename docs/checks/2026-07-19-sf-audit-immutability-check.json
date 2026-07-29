@@ -4,7 +4,7 @@
   "registry": "wiki/survey/sf-audit-artifact-registry.json",
   "registry_stage0": {
     "mode": "100644",
-    "git_blob": "67828031a6b8917b472ae61878d5eceac6c33dd5"
+    "git_blob": "66c894fff7b59153a5010c1bfdf4a553c36fcaa8"
   },
   "anchor_stage0": {
     "path": "scripts/checks/ai_context_inventory.py",
@@ -16,7 +16,7 @@
     "count": 111,
     "sha256": "881072cd336922f92f21e981107022ef98457b378ef25cce62f949cb25d05b67"
   },
-  "sunset_registered": 51,
+  "sunset_registered": 77,
   "registry_lineage_contract": "stage0 preserves the exact HEAD prefix; count is HEAD or HEAD+1",
   "artifact_binding_contract": "HEAD=pin; stage0=pin; worktree-bytes=stage0-blob; sunset-exempt: history(last_commit,path)=pin, HEAD/stage0/worktree presence not required",
   "sunset_lineage_contract": "sunset is append-only: every HEAD sunset row must be preserved unchanged in stage0",

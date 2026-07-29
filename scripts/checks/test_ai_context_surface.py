@@ -1336,23 +1336,20 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assertEqual([], failures)
 
-    def test_exact_named_markdown_legacy_exceptions_pass_but_new_peer_fails(self) -> None:
+    def test_named_legacy_exceptions_emptied_and_new_peer_still_fails(self) -> None:
+        # 2026-07-29: the legacy cold layer was retired; the exception tuple must
+        # stay empty so no new file can ride in as an unreviewed "exception".
         legacy = list(builder.EXACT_NAMED_LEGACY_EXCEPTIONS)
-        tracked = []
-        for entry in legacy:
-            self.write(entry["path"], b"historical\n")
-            tracked.append(entry["path"])
+        self.assertEqual(0, len(legacy))
         new_peer = "wiki/2026-07-19-another-proposal.md"
         self.write(new_peer, b"new\n")
-        tracked.append(new_peer)
 
         failures = evaluate_manifest(
             self.repo,
             manifest([], legacy=legacy),
-            tracked_paths=tracked,
+            tracked_paths=[new_peer],
         )
 
-        self.assertEqual(4, len(legacy))
         self.assertEqual(
             {
                 "unclassified-persistent-document",

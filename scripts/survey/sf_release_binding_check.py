@@ -36,12 +36,6 @@ from sf_json_contract import JsonContractError, loads as strict_json_loads
 
 REPO = Path(__file__).resolve().parents[2]
 DEFAULT_MANIFEST = "wiki/survey/current/manifest.json"
-LEGACY_BOUND = (
-    "wiki/survey/2026-07-19-gate-s1-v8-response.md",
-    "wiki/2026-07-19-system-first-research-proposal-v9-consolidated.md",
-    "wiki/survey/2026-07-19-gate-s1-v9-response.md",
-    "wiki/2026-07-19-system-first-research-proposal-v10-consolidated.md",
-)
 BLOCK = re.compile(r"<!--\s*release_binding:\s*(\{.*?\})\s*-->", re.S)
 BINDING_MARKER = re.compile(r"<!--\s*release_binding\b")
 HEADLINE_BEGIN = "<!-- generated_headline_begin -->"
@@ -256,9 +250,7 @@ def _run_oracle_fixtures():
 
 def _parser():
     parser = argparse.ArgumentParser(description=__doc__)
-    mode = parser.add_mutually_exclusive_group()
-    mode.add_argument("--manifest")
-    mode.add_argument("--legacy-regression", action="store_true")
+    parser.add_argument("--manifest")
     return parser
 
 
@@ -275,28 +267,19 @@ def main(argv=None, *, repo=REPO):
     cache = {}
     required_binding_paths = set()
     try:
-        if args.legacy_regression:
-            from ai_context_surface_check import TrustedRepoReader
-
-            reader = TrustedRepoReader(repo)
-            paths = LEGACY_BOUND
-            read_bytes = reader.read_bytes
-            allowed_paths = None
-            validation_mode = "legacy-compat"
-        else:
-            manifest_path = (
-                DEFAULT_MANIFEST if args.manifest is None else args.manifest
-            )
-            view = load_consumer_manifest(repo, manifest_path)
-            paths = view.paths("release_bound_artifacts")
-            read_bytes = view.read_bytes
-            allowed_paths = set(view.artifacts)
-            validation_mode = "current-manifest"
-            required_binding_paths = {
-                entry["path"]
-                for entry in view.document["files"]
-                if entry["role"] == "active_review_transaction"
-            }
+        manifest_path = (
+            DEFAULT_MANIFEST if args.manifest is None else args.manifest
+        )
+        view = load_consumer_manifest(repo, manifest_path)
+        paths = view.paths("release_bound_artifacts")
+        read_bytes = view.read_bytes
+        allowed_paths = set(view.artifacts)
+        validation_mode = "current-manifest"
+        required_binding_paths = {
+            entry["path"]
+            for entry in view.document["files"]
+            if entry["role"] == "active_review_transaction"
+        }
     except (CurrentManifestError, OSError, ValueError) as error:
         print(f"[BINDING] manifest load failed: {error}")
         print("release binding: FAIL (1 failures)")
