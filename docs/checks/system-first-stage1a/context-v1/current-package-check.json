@@ -30,6 +30,11 @@
         "git_blob": "c562e1b61cb3044a202a043952dc9a7cd0e80be3"
       },
       {
+        "path": "scripts/checks/test_lean_axiom_gate_contract.py",
+        "mode": "100644",
+        "git_blob": "478cd40bfccf8b9bcb853d63571bed5f790f3cbe"
+      },
+      {
         "path": "scripts/survey/sf_archive_candidates.py",
         "mode": "100644",
         "git_blob": "12a4cafda8490fc83d67246fb9a637c5623fadd2"
@@ -57,12 +62,17 @@
       {
         "path": "scripts/survey/sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "9b17c529e4b53d323e784ca082642f96a957c13e"
+        "git_blob": "3b7d3f8a859a62215e4fd8ead4615826b5732d57"
       },
       {
         "path": "scripts/survey/sf_current_path_contract.py",
         "mode": "100644",
         "git_blob": "9515ff8fde23a064c8da412a56d2e885b059c533"
+      },
+      {
+        "path": "scripts/survey/sf_declarative_contract.py",
+        "mode": "100644",
+        "git_blob": "8f7a4e2e3bcccd54be007b3a375e6e3d3b4c6703"
       },
       {
         "path": "scripts/survey/sf_fulltext_fetch.py",
@@ -132,7 +142,12 @@
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
         "mode": "100644",
-        "git_blob": "cfd747239f56220c1ac7a8667fb07b8bfa28379b"
+        "git_blob": "ba3fff7bf61b8edf866e4685075d087786bc2dbc"
+      },
+      {
+        "path": "scripts/survey/test_sf_declarative_contract.py",
+        "mode": "100644",
+        "git_blob": "ca6421e7e0afc4b33a3bb9cced0b0b15c72b1e6b"
       },
       {
         "path": "scripts/survey/test_sf_fulltext_fetch.py",
@@ -155,19 +170,9 @@
         "git_blob": "d9f740613f9477c95d5b40286fe6a832ce1fc421"
       },
       {
-        "path": "scripts/survey/test_sf_r1_problem_definition.py",
-        "mode": "100644",
-        "git_blob": "4a29a894a7109c68f6f744126dcef523021b807e"
-      },
-      {
-        "path": "scripts/survey/test_sf_r2_problem_definition.py",
-        "mode": "100644",
-        "git_blob": "a5ebacd1d3a5fd43e6435d2abcd22183255e3c38"
-      },
-      {
         "path": "scripts/survey/test_sf_stage1c_common_rubric.py",
         "mode": "100644",
-        "git_blob": "6c22a76b091cc32c87f2acbb5d810973ff881335"
+        "git_blob": "92e0bfb17fe62e3bd11bd408961b71ff2565866c"
       },
       {
         "path": "scripts/wiki-sync.sh",
@@ -175,7 +180,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "f16e35191bfa400e687b9141cbc0c6a923518b790382587a8b9babaff5b191b7"
+    "sha256": "ae33c9abd35dc53710ad570002d01151d6dc9ed7dfd5c58b713fd295667639fe"
   },
   "commands": [
     {
@@ -224,6 +229,12 @@
       "command": "python scripts/survey/sf_audit_immutability_check.py --check",
       "exit_code": 0,
       "stdout_tail": "audit immutability: PASS (111 registered, 0 artifact failures)",
+      "stderr_tail": ""
+    },
+    {
+      "command": "python scripts/survey/sf_declarative_contract.py --check-all",
+      "exit_code": 0,
+      "stdout_tail": "[PASS] r1-problem-definition::opening_report_carries_the_locked_academic_problem\n[PASS] r1-problem-definition::opening_report_retires_old_symbolic_notation\n[PASS] r1-problem-definition::current_contract_exposes_the_same_r1_boundary\n[PASS] r1-problem-definition::registry_is_unique_and_matches_r1_neighbors\n[PASS] r1-problem-definition::registry_hash_bound_to_fulltext_ledger\n[PASS] r1-problem-definition::supplement_preserves_split_and_claim_boundaries\n[PASS] r2-problem-definition::opening_report_is_marked_unverified_executor_draft\n[PASS] r2-problem-definition::report_uses_reference_datasets_baselines_and_metrics\n[PASS] r2-problem-definition::need_detection_mismatch_and_no_new_data_boundary_are_explicit\n[PASS] r2-problem-definition::current_and_status_expose_r1_sunset_and_r2r9_unverified_state\n[PASS] r2-problem-definition::current_layer_marks_r2_as_executor_draft\n[PASS] stage1c-common-rubric::human_table_carries_bundle_and_rubric_tokens\n[PASS] stage1c-common-rubric::hot_status_exposes_the_same_boundary\n[PASS] stage1c-common-rubric::priority_fulltexts_have_one_reproducible_external_fetch_recipe\ndeclarative contract: PASS",
       "stderr_tail": ""
     },
     {

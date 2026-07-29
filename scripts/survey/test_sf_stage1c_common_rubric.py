@@ -5,13 +5,21 @@ import unittest
 from pathlib import Path
 
 
+# The prose (must_contain-only) test methods that used to live in this file —
+# test_human_table_and_hot_status_expose_the_same_boundary and
+# test_priority_fulltexts_have_one_reproducible_external_fetch_recipe — moved to
+# docs/contracts/stage1c-common-rubric.json, run by
+# scripts/survey/sf_declarative_contract.py. What remains here are the tests the
+# four declarative primitives (must_contain / must_not_contain /
+# jsonl_key_set_equality / registry_ledger_binding) cannot express without
+# semantic loss: structured single-JSON-document field/nested-list validation,
+# the MANIFEST_SCRIPT source-routing check, and the same-line bibliography
+# classification check.
+
 REPO = Path(__file__).resolve().parents[2]
 DATA = REPO / "wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json"
-TABLE = REPO / "wiki/survey/current/tables/stage1c-common-rubric-comparison.md"
-STATUS = REPO / "wiki/survey/current/status.md"
 MANIFEST_SCRIPT = REPO / "scripts/survey/sf_current_manifest.py"
 BIBLIOGRAPHY = REPO / "wiki/survey/current/bibliography.md"
-FETCH_SCRIPT = REPO / "scripts/data/fetch-stage1c-priority-papers.sh"
 
 OUTSIDE_UNION_IDS = {
     "CW-ARXIV-2510.00743",
@@ -36,17 +44,6 @@ RUBRIC = {
     "reproduction_anchor",
     "scope_compatibility",
     "evidence_maturity",
-}
-RUBRIC_HEADINGS = {
-    "Problem distinctness",
-    "Decision causality",
-    "Measurement validity",
-    "Modality necessity",
-    "Failure severity",
-    "Feasibility",
-    "Reproduction anchor",
-    "Scope compatibility",
-    "Evidence maturity",
 }
 BUNDLES = {
     "BUDGET_STOP_REPAIR",
@@ -158,17 +155,6 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
             supersession["effective_spec"],
         )
 
-    def test_human_table_and_hot_status_expose_the_same_boundary(self) -> None:
-        table = TABLE.read_text(encoding="utf-8")
-        status = STATUS.read_text(encoding="utf-8")
-        for token in (*BUNDLES, *RUBRIC_HEADINGS):
-            self.assertIn(token, table)
-        self.assertIn("C1_DECISION_CALIBRATED_REWARD", table)
-        self.assertIn("不再是主研究问题", table)
-        self.assertIn("research-directions.md", table)
-        self.assertIn("Stage‑1C research-direction confirmation", status)
-        self.assertIn("Stage‑2A/2B execution", status)
-
     def test_current_manifest_routes_the_new_machine_and_human_surfaces(self) -> None:
         source = MANIFEST_SCRIPT.read_text(encoding="utf-8")
         self.assertIn(
@@ -191,19 +177,6 @@ class Stage1CCommonRubricContractTests(unittest.TestCase):
             if "Inference-Time Scaling for Joint Audio-Video Generation" in line
         )
         self.assertIn("| BOUNDARY_COMPARATOR |", line)
-
-    def test_priority_fulltexts_have_one_reproducible_external_fetch_recipe(self) -> None:
-        source = FETCH_SCRIPT.read_text(encoding="utf-8")
-        for identity in (
-            "2026.findings-eacl.151",
-            "2026.acl-long.1615",
-            "2508.18240",
-            "2603.16924",
-        ):
-            self.assertIn(identity, source)
-        self.assertIn("SPEECHRL_DATA_DIR", source)
-        self.assertIn("aria2c", source)
-        self.assertIn("sha256sum", source)
 
 
 if __name__ == "__main__":

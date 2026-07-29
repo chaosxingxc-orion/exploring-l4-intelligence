@@ -53,6 +53,7 @@ COMMANDS = (
     "python scripts/survey/sf_quantifier_scan.py",
     "python scripts/survey/sf_archive_candidates.py --check-applied",
     "python scripts/survey/sf_audit_immutability_check.py --check",
+    "python scripts/survey/sf_declarative_contract.py --check-all",
     "python scripts/checks/build_ai_context_manifest.py --check",
     "python scripts/checks/ai_context_surface_check.py",
 )

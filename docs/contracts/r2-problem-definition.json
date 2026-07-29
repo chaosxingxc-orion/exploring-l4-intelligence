@@ -1,0 +1,82 @@
+{
+  "schema": "sf-declarative-contract-v1",
+  "contract_id": "r2-problem-definition",
+  "description": "Prose contract migrated from the retired scripts/survey/test_sf_r2_problem_definition.py (all four test methods).",
+  "cases": [
+    {
+      "id": "opening_report_is_marked_unverified_executor_draft",
+      "source_test": "test_opening_report_is_marked_unverified_executor_draft",
+      "type": "must_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "strings": [
+        "音频驱动外部知识检索的文献归纳、实验载体与方向处置",
+        "STAGE_1C_DIRECTION_CONFIRMATION",
+        "EXECUTOR_DRAFT_UNVERIFIED_BY_OWNER",
+        "WITHDRAWN_TO_DRAFT__PENDING_OWNER_COWORK_UNDER_2026-07-29_CRITERION",
+        "已撤回为草稿意见",
+        "owner 未校验",
+        "Decision-Log 续76",
+        "R5/R6/R8",
+        "R3/R7 或 R9"
+      ]
+    },
+    {
+      "id": "report_uses_reference_datasets_baselines_and_metrics",
+      "source_test": "test_report_uses_reference_datasets_baselines_and_metrics",
+      "type": "must_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "strings": [
+        "AudioRAG",
+        "500",
+        "Omni-DeepSearch",
+        "640",
+        "VoiceAgentRAG",
+        "200",
+        "NovaCRM",
+        "Qwen3-Omni raw 为 37.0%",
+        "46.2%",
+        "GPT-4o judge accuracy",
+        "三位 LLM judge",
+        "cache hit rate",
+        "retrieval latency"
+      ]
+    },
+    {
+      "id": "need_detection_mismatch_and_no_new_data_boundary_are_explicit",
+      "source_test": "test_need_detection_mismatch_and_no_new_data_boundary_are_explicit",
+      "type": "must_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "strings": [
+        "没有负类就不能测 need detection",
+        "不自行混入 waveform-sufficient 负例",
+        "不为 need detection 新标",
+        "不把实时 web 搜索结果抓取并整理成新的 benchmark corpus",
+        "不新造统一 utility",
+        "官方数据没有 negative class"
+      ]
+    },
+    {
+      "id": "current_and_status_expose_r1_sunset_and_r2r9_unverified_state",
+      "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
+      "type": "must_contain",
+      "targets": [
+        "wiki/survey/current/research-directions.md",
+        "wiki/survey/current/status.md"
+      ],
+      "strings": [
+        "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+        "OWNER_UNVERIFIED",
+        "2026-07-29"
+      ]
+    },
+    {
+      "id": "current_layer_marks_r2_as_executor_draft",
+      "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
+      "type": "must_contain",
+      "target": "wiki/survey/current/research-directions.md",
+      "strings": [
+        "执行者草稿，owner 未校验"
+      ]
+    }
+  ]
+}

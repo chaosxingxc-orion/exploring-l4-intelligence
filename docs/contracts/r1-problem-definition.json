@@ -1,0 +1,112 @@
+{
+  "schema": "sf-declarative-contract-v1",
+  "contract_id": "r1-problem-definition",
+  "description": "Prose/JSONL contract migrated from the retired scripts/survey/test_sf_r1_problem_definition.py (all four test methods).",
+  "cases": [
+    {
+      "id": "opening_report_carries_the_locked_academic_problem",
+      "source_test": "test_opening_report_carries_the_locked_academic_problem",
+      "type": "must_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
+      "strings": [
+        "语音/音频上下文学习方法复现与比较研究",
+        "STAGE_1C_DIRECTION_CONFIRMATION",
+        "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+        "OWNER_CONFIRMED_SUNSET_2026-07-29",
+        "Decision-Log 续76",
+        "不做创新点搜索",
+        "数据只复用参考论文",
+        "指标只复用参考论文",
+        "Common Voice 15.0",
+        "GLOBE-V2",
+        "L2-ARCTIC",
+        "MyST",
+        "RSR",
+        "MMAU",
+        "MMAR",
+        "MELD-Hard1k",
+        "Qwen3-Omni-30B",
+        "uniform random",
+        "ECAPA-TDNN",
+        "Vanilla SICL",
+        "WER",
+        "CER",
+        "accuracy"
+      ]
+    },
+    {
+      "id": "opening_report_retires_old_symbolic_notation",
+      "source_test": "test_opening_report_carries_the_locked_academic_problem",
+      "type": "must_not_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
+      "strings": [
+        "H_{\\mathrm{ctx}}",
+        "O_{\\mathrm{sel}}",
+        "I_{D\\times G}",
+        "R_\\pi",
+        "Qwen/Qwen2.5-Omni-7B"
+      ]
+    },
+    {
+      "id": "current_contract_exposes_the_same_r1_boundary",
+      "source_test": "test_current_contract_exposes_the_same_r1_boundary",
+      "type": "must_contain",
+      "target": "wiki/survey/current/research-directions.md",
+      "strings": [
+        "### R1 — 冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较",
+        "Common Voice 15.0",
+        "不自建数据",
+        "不新造 utility",
+        "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
+        "不进入 Stage-2B",
+        "MetaSICL",
+        "TICL+"
+      ]
+    },
+    {
+      "id": "registry_is_unique_and_matches_r1_neighbors",
+      "source_test": "test_registry_is_unique_and_hash_bound_to_fulltext_ledger",
+      "type": "jsonl_key_set_equality",
+      "target": "wiki/survey/registry/stage1c-r1-context-icl-2026-07-27-papers.jsonl",
+      "field": "arxiv_id",
+      "values": [
+        "2402.01831",
+        "2512.23808",
+        "2601.18904",
+        "2509.13395",
+        "2512.18263",
+        "2404.14716"
+      ],
+      "unique_field": "canonical_id"
+    },
+    {
+      "id": "registry_hash_bound_to_fulltext_ledger",
+      "source_test": "test_registry_is_unique_and_hash_bound_to_fulltext_ledger",
+      "type": "registry_ledger_binding",
+      "registry": "wiki/survey/registry/stage1c-r1-context-icl-2026-07-27-papers.jsonl",
+      "ledger": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
+      "id_field": "arxiv_id",
+      "kinds": [
+        "pdf",
+        "eprint"
+      ],
+      "schema": "sf-paper-registry-record-v1"
+    },
+    {
+      "id": "supplement_preserves_split_and_claim_boundaries",
+      "source_test": "test_supplement_preserves_split_and_claim_boundaries",
+      "type": "must_contain",
+      "target": "wiki/survey/workbench/stage1c-portfolio/2026-07-27-r1-context-icl-evidence-supplement.md",
+      "strings": [
+        "SUPERSEDED_AS_DESIGN",
+        "不再承载 R1 的当前研究设计",
+        "12 条新增哈希记录",
+        "test leave-one-out",
+        "Base 与 Instruct",
+        "LoRA",
+        "context intervention protocol",
+        "不构成技术 novelty verdict"
+      ]
+    }
+  ]
+}
