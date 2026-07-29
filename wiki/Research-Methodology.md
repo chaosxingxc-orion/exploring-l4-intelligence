@@ -6,7 +6,9 @@ supersession。CLAUDE.md 只留指针与一行摘要。）
 ## 研究流程阶段（Stage-1A/1B/1C → 2A/2B → 3;dated supersession 2026-07-18,owner 裁决①）
 
 **分界依据 = 活动目的与证据用途**，不是「是否启动过 Python」或「样本是否很少」。每份交付物
-注明所处阶段。**当前 = Stage-1A survey-ready gate**（问题与 survey 设计;系统性 discovery/
+注明所处阶段。**当前阶段以 `wiki/Research-Objective.md` 为准**（2026-07-29 时点 = Stage-1C
+方向确认整改中，Stage-1A/1B 已收官）；本页只保留阶段语义定义。（历史行：Stage-1A survey-ready
+gate——问题与 survey 设计;系统性 discovery/
 mapping 查询尚未执行,定向 ID dereference/raw provenance/全文准备/校准试验已执行;Gate S1
 签署 + owner 批准后第一条 systematic query 即进入 Stage-1B）。
 

@@ -21,9 +21,9 @@
 - Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union remain fixed evidence.
 - R1 owner-confirmed decision (2026-07-29): `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; its
   literature, dataset, baseline and metric matrix remains an evidence package; no Stage-2B slot.
-- R2: owner conditional GO_STANDALONE (续77; effective on v3 checklist closure; red lines = no
-  parameter modification, no additional model; trace-logging approved). R3–R9 remain
-  `OWNER_UNVERIFIED` executor drafts. Rulings C/D/E stay owner-unsigned; the criterion prevails.
+- R2: owner conditional GO_STANDALONE (续77/78; effective on v3 checklist closure; red lines = no
+  parameter modification, no task-trained model, no additional answering LLM; trace-logging approved).
+  R3–R9 remain `OWNER_UNVERIFIED` executor drafts. Rulings C/D/E stay owner-unsigned; the criterion prevails.
 - R1 agreement `FAIL` and R2R1 retirement remain unchanged; H5 remains withheld and non-load-bearing;
   Duplex-model development stays outside the primary branch.
 - No model/API calls, metric runs, dataset/model downloads, reproduction, prototypes, technical novelty

@@ -6,6 +6,17 @@
 
 ---
 
+### 2026-07-29（续78）· 红线②边界细化：只禁「为任务新训练模型」与「新增 LLM 代答」
+
+#### Decision
+
+owner 细化续77 ③ 红线：**embedding 检索器与 frozen judge 属工具级冻结组件，可以用**；红线只
+针对两类行为——①为完成某项任务**新训练一个模型**（任何训练环节都出界）；②**新增 LLM 代答**
+（最终作答权必须留在冻结 omni 核，不得引入第二个 LLM 替核作答——这正是与 AudioRAG 用
+Qwen3-8B 文本控制器代答设计的对照差异）。工具级冻结组件（检索 embedding、judge、DSP、搜索
+引擎）按 C1 合同照常记录版本与成本。R2 v3 据此起草；R6 合同的可选 frozen cross-family judge
+维持有效。Supersedes：续77 Consequences 中「红线②边界待细化」项闭合。
+
 ### 2026-07-29（续77）· R2 有条件裁 A；检索 trace-logging 放行；主张对象=北极星 system-level+双红线
 
 #### Context

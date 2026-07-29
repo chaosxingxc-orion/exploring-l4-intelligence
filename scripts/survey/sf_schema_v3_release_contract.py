@@ -11,6 +11,68 @@ from pathlib import Path, PurePosixPath
 from sf_json_contract import JsonContractError, loads
 
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+EXPECTED_IDS_DATA_PATH = REPO_ROOT / "docs" / "integrity" / "schema-v3-expected-ids.json"
+EXPECTED_IDS_DATA_SCHEMA = "schema-v3-expected-ids-v1"
+
+
+class ExpectedIdsDataError(ValueError):
+    """Raised when the externalized expected-id tables are missing or malformed."""
+
+
+def _require_nonempty_str(value: object, label: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise ExpectedIdsDataError(f"{label} must be a non-empty string")
+    return value
+
+
+def load_expected_ids_data(
+    path: Path = EXPECTED_IDS_DATA_PATH,
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Strict-load the externalized expected work-id / method-path-id tables.
+
+    Fails closed: any missing file, invalid strict-JSON bytes, schema
+    mismatch, or wrong-shaped row raises ``ExpectedIdsDataError`` rather than
+    silently returning a partial or empty table.
+    """
+    try:
+        raw = path.read_bytes()
+    except OSError as error:
+        raise ExpectedIdsDataError(f"cannot read {path}: {error}") from error
+    try:
+        document = loads(raw, str(path))
+    except JsonContractError as error:
+        raise ExpectedIdsDataError(f"{path}: {error}") from error
+    if not isinstance(document, dict) or set(document) != {
+        "schema",
+        "expected_work_ids",
+        "expected_method_path_ids",
+    }:
+        raise ExpectedIdsDataError(f"{path}: unexpected top-level schema")
+    if document["schema"] != EXPECTED_IDS_DATA_SCHEMA:
+        raise ExpectedIdsDataError(
+            f"{path}: expected schema {EXPECTED_IDS_DATA_SCHEMA!r}, found {document['schema']!r}"
+        )
+
+    work_ids_raw = document["expected_work_ids"]
+    if not isinstance(work_ids_raw, list) or not work_ids_raw:
+        raise ExpectedIdsDataError(f"{path}: expected_work_ids must be a non-empty list")
+    work_ids = tuple(
+        _require_nonempty_str(item, f"{path}: expected_work_ids[{index}]")
+        for index, item in enumerate(work_ids_raw)
+    )
+
+    method_ids_raw = document["expected_method_path_ids"]
+    if not isinstance(method_ids_raw, list) or not method_ids_raw:
+        raise ExpectedIdsDataError(f"{path}: expected_method_path_ids must be a non-empty list")
+    method_ids = tuple(
+        _require_nonempty_str(item, f"{path}: expected_method_path_ids[{index}]")
+        for index, item in enumerate(method_ids_raw)
+    )
+
+    return work_ids, method_ids
+
+
 FINAL_SIDECAR_NAMES = (
     "2026.findings-acl.1243.sidecar.json",
     "2026.findings-acl.1724.sidecar.json",
@@ -47,29 +109,7 @@ FINAL_SIDECAR_SHA256 = {
         "49e25753ed7e8ef8b35cf1dd6ebe90a5d2915ae4f1f8e70fbc6d034b052ff616"
     ),
 }
-EXPECTED_WORK_IDS = (
-    "2026.findings-acl.1243",
-    "2026.findings-acl.1724",
-    "2026.findings-acl.511",
-    "2602.16485",
-    "2604.16529",
-    "2605.08083",
-    "2606.01667",
-    "2606.03054",
-)
-EXPECTED_METHOD_PATH_IDS = (
-    "2026.findings-acl.1243#closed-prompt-only",
-    "2026.findings-acl.1243#open-sft-variant",
-    "2026.findings-acl.1724#pipeline",
-    "2026.findings-acl.511#prm-guided-search",
-    "2602.16485#calibrated-orchestration",
-    "2604.16529#pdr-random-k",
-    "2604.16529#rtv",
-    "2604.16529#rtv-pdr-pipeline",
-    "2605.08083#discovered-controller",
-    "2606.01667#agentic-orchestration",
-    "2606.03054#trained-gate",
-)
+EXPECTED_WORK_IDS, EXPECTED_METHOD_PATH_IDS = load_expected_ids_data()
 ADJUDICATION_RELATIVE_PATH = (
     "wiki/survey/current/data/schema-v3-adjudication.json"
 )

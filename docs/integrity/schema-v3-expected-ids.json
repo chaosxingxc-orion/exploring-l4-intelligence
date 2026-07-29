@@ -1,0 +1,26 @@
+{
+  "schema": "schema-v3-expected-ids-v1",
+  "expected_work_ids": [
+    "2026.findings-acl.1243",
+    "2026.findings-acl.1724",
+    "2026.findings-acl.511",
+    "2602.16485",
+    "2604.16529",
+    "2605.08083",
+    "2606.01667",
+    "2606.03054"
+  ],
+  "expected_method_path_ids": [
+    "2026.findings-acl.1243#closed-prompt-only",
+    "2026.findings-acl.1243#open-sft-variant",
+    "2026.findings-acl.1724#pipeline",
+    "2026.findings-acl.511#prm-guided-search",
+    "2602.16485#calibrated-orchestration",
+    "2604.16529#pdr-random-k",
+    "2604.16529#rtv",
+    "2604.16529#rtv-pdr-pipeline",
+    "2605.08083#discovered-controller",
+    "2606.01667#agentic-orchestration",
+    "2606.03054#trained-gate"
+  ]
+}

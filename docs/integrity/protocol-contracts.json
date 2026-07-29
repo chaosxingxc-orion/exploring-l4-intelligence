@@ -1,0 +1,113 @@
+{
+  "schema": "protocol-contracts-v1",
+  "contracts": [
+    {
+      "name": "stage1b-scoped-mapping-authorization",
+      "section": "§0",
+      "clause": "frozen discovery queries, T1 routes, identity/deduplication, REC-0 screening, citation traversal, non-H5 method-path coding, D2 full-text work, and ordinary mapping synthesis are authorized;"
+    },
+    {
+      "name": "stage1b-no-model-dataset-or-prototype",
+      "section": "§0",
+      "clause": "Stage-1B means systematic-mapping execution. Stage-1B runs no research model or smoke and, more explicitly, no research-model call, model smoke, dataset inference/metric experiment, headroom test, or directional prototype may run anywhere in this stage."
+    },
+    {
+      "name": "incremental-boundaries-and-append-only",
+      "section": "§3",
+      "clause": "Date coverage is incremental and replayable. First execution searches through the execution date. Before synthesis freeze, scan from the first-execution date through the freeze date. If Stage-1A spans more than one period, cross-period incremental batches are append-only and carry their own dates and source provenance; old decisions change only by dated supersession."
+    },
+    {
+      "name": "section4-normative-input-fence",
+      "section": "§3",
+      "clause": "Only the frozen compiler profile's ordered lane declarations and backtick query literal declarations in §4 are normative compiler input. The canonical compiled result is exactly the current frozen JSONL's 65 ordered records and their record_sha256 values; compiler output is append-prefix stable, and raw byte equality, not semantic JSON equality, is the release condition."
+    },
+    {
+      "name": "section4-narrative-is-non-normative",
+      "section": "§3",
+      "clause": "All other byte-preserved §4 narrative is NON-NORMATIVE historical annotation, including old 55/61/other counts, dated JSONL canonical claims, amendment/batch labels, and Decision-Log references. It does not override §§0–3 or §§5–10, create an external dependency, or require opening a legacy file. The interpretation fence and §§0–3 and §§5–10 have priority over non-normative §4 narrative."
+    },
+    {
+      "name": "mapping-exit-e1-complete-decisions",
+      "section": "§5",
+      "clause": "E1: all frozen queries and registered routes are complete and every hit has a REC-0 decision;"
+    },
+    {
+      "name": "mapping-exit-e2-two-round-count",
+      "section": "§5",
+      "clause": "E2: backward references extracted from archived e-print plus date-stamped forward citation snapshots produce zero new INCLUDED works for K=2 consecutive closure rounds; and"
+    },
+    {
+      "name": "mapping-exit-e3-zero-unresolved",
+      "section": "§5",
+      "clause": "E3: every registered sentinel and supplied counterexample has a disposition and zero UNRESOLVED items remain."
+    },
+    {
+      "name": "e2-resolution-counts-and-preregistration",
+      "section": "§5",
+      "clause": "E2 identifier resolution is an OPEN precondition until its report closes. Before any E2 claim, resolve every entry by DOI, ACL ID, OpenReview ID, or normalized title. The report gives the four work-level counts total / resolved / ambiguous / unresolved, includes a DOI-only mutation fixture, and freezes a pre-registered unresolved ceiling before resolution results are inspected."
+    },
+    {
+      "name": "e2-k2-is-not-closure",
+      "section": "§5",
+      "clause": "K=2 zero growth on the resolved subgraph is not closure exhaustion and cannot be described as closure dryness or a complete citation graph."
+    },
+    {
+      "name": "information-boundary",
+      "section": "§6",
+      "clause": "The information boundary is absolute: test-item gold may not enter prompt, retrieval, candidate construction, selector, reward, verifier, tool routing, memory, or stopping. read-out uses information already supplied to the frozen core; new-info injects answer-bearing information and is excluded from strict identity."
+    },
+    {
+      "name": "native-speech-audio-omni-set",
+      "section": "§6",
+      "clause": "Topology policy A admits single_core and single_core_multi_call. Native speech is represented by audio_native; the native speech/audio/omni set is therefore {audio_native, omni_native}."
+    },
+    {
+      "name": "frozen-derivation-formulas",
+      "section": "§6",
+      "clause": "data_access_strict_bits = seven_strict_bits_all_false AND internal_visibility == api_only is_s0_core_compatible = data_access_strict_bits AND core_topology IN {single_core, single_core_multi_call} AND core_native_modality IN {audio_native, omni_native} is_reward_guided = EXISTS qualifying_reward_signal(s) is_rq_sys_control_compatible = control_horizon == sequential AND EXISTS valid LIVE edge e driven by the same qualifying reward signal s AND e.signal_use IN s.reward_uses is_project_method_candidate = is_s0_core_compatible AND is_rq_sys_control_compatible reward_guided_selection = candidate_pool_exists == true AND selection_policy IN {scored_select, tournament_select} AND selection_object != none AND EXISTS qualifying reward signal s used for select or prune"
+    },
+    {
+      "name": "offline-calibration-exclusion",
+      "section": "§6",
+      "clause": "The canonical policy label is tournament_select; “tournament” is only a noncanonical shorthand. offline_calibration signals never qualify for is_reward_guided, RQ-SYS control, or reward-guided selection."
+    },
+    {
+      "name": "direct-threat-dual-coding",
+      "section": "§6",
+      "clause": "DIRECT_THREAT requires threat_dual_coding, two distinct extractors, and a resolvable rec5_ref; disagreements > 0 requires a nonempty adjudicator. A missing actor, duplicate extractor, missing REC-5 link, or unresolved disagreement fails before the row can support a claim."
+    },
+    {
+      "name": "strong-pdf-anchor-machine-limits",
+      "section": "§7",
+      "clause": "anchor_lexical_tokens >= 2 anchor_alphanumeric_characters >= 12 anchor_page_window = N-1..N+1 complete_pdf_occurrences <= 3"
+    },
+    {
+      "name": "reviewer-facing-reference-contract",
+      "section": "§9",
+      "clause": "Every reviewer-facing artifact has a self-contained reference appendix with author, year, and stable link. Numeric claims require a page, table, or figure locator. A non-contiguous quotation is explicitly marked as stitched rather than presented as one continuous span. Consistent, dominant, or ceiling claims are limited to the model, task, and setting reported by the paper; evidence from one reported setting cannot silently become a universal statement."
+    },
+    {
+      "name": "third-correction-and-fourth-amendment-lifecycle",
+      "section": "§10",
+      "clause": "Consolidation is mandatory when a third correction would otherwise accumulate on one effective document; that third item is frozen as audit evidence and its surviving rule is folded into the effective file immediately. A fourth amendment is forbidden before consolidation."
+    }
+  ],
+  "ordered_contracts": [
+    {
+      "name": "stage1b-execution-sequence",
+      "section": "§8",
+      "clauses": [
+        "When and only when §0's three authorizations are present, Stage-1B proceeds in this order:",
+        "1. record the execution commit, frozen protocol/query hashes, current registries, platform, actor, and exposure declaration;",
+        "2. run the first-step interface and phrase-behavior checks without a research model;",
+        "3. execute each frozen query with pagination and deterministic overflow splitting, logging every page;",
+        "4. scan registered T1 routes and resolve candidates without discarding duplicate provenance;",
+        "5. create REC-0 rows, screen BFS, then run the triggered DFS and citation-closure procedure in §5;",
+        "6. fetch and register PDF + e-print for included, core, sentinel, or claim-bearing work—FETCH is registered immediately and an unregistered fetch does not count as read;",
+        "7. create per-paper sidecars during coding—the locator is recorded during coding, never appended after interpretation; a row without a locator does not enter an occupancy denominator;",
+        "8. generate coding, reconcile evidence, complete independent adjudication, and only then derive tables;",
+        "9. rerun E1/E2/E3, release binding, immutability, context, and dual-platform gates before synthesis."
+      ]
+    }
+  ]
+}

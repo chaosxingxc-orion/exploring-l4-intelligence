@@ -6,8 +6,9 @@
 
 这是一个**伞仓（umbrella repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
 零权重、零核心结构改动（外挂系统组件另加）的优化——把语音 / omni 多模态大模型在预训练中习得的知识
-「激活」出来，提升其在特定语音任务上的开箱表现；外加四个工作共用的共享库。**当前主研究（W1）**把
-冻结核心搭成 **RDU 前端知识系统 + 奖励引导轨迹选择器**（proposal v4.1）；W4 为独立工作、研究冻结
+「激活」出来，提升其在特定语音任务上的开箱表现；外加四个工作共用的共享库。**当前主研究（W1）**围绕
+API-only 冻结 omni 核心构建**外部奖励引导控制平面**（对知识/记忆/技能/证据状态做系统级 in-context
+控制；Stage-1C 方向确认中，见 Wiki 的 Research-Objective 页）；W4 为独立工作、研究冻结
 omni 自身嵌入空间（2026-07-12 按 owner 签署的 G0 裁决重定位）。完整主旨见 Wiki 的 [[Project-Thesis]] 页。
 
 > 📖 **从这里开始。** 本 README 是人和 AI 协作者的**唯一权威入口**。更深入的文档在 [`docs/`](docs)；
@@ -21,7 +22,7 @@ omni 自身嵌入空间（2026-07-12 按 owner 签署的 G0 裁决重定位）�
 
 | # | 工作（仓库） | 角色 | 方向 | 状态 |
 |---|---|---|---|---|
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **主研究** | 冻结核心 RDU 前端知识系统 + 奖励引导轨迹选择器（ρ 实现率，G0）；proposal v4.1 待签 | 🟢 成熟 · 主研究 |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **主研究** | API-only 冻结 omni 核心外的奖励引导控制平面（知识/记忆/技能/证据状态）；Stage-1C 方向确认，首个 Stage-2A 切片 = R5+R6+R8 | 🟢 成熟 · 主研究 |
 | W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | 独立工作（2026-07-12 重定位） | 冻结 omni 嵌入效用（L0/L1）；fresh proposal 待启（#29）；原"解耦旗舰"表述已被取代 | 🟡 骨架 → 重定位中 |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 支撑 | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 支撑 | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |

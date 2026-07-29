@@ -131,7 +131,9 @@ query-hop-stop 没有直接参考方法，属于 R6 的 trajectory controller；
 CHECKLIST`：以 v3 关闭博导评审 §十四 全部清单（proposal 级/authorization 级分层）为生效条件。
 主研究问题按评审 §十 的音频特有机制重写（听错实体→高相关错误证据；感知 vs 知识不确定性；预算
 在 re-resolve-audio 与 search-external 两信息源间分配）。红线：模型参数不可修改、不得新增一个
-模型；检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回 hash、共享查询跨臂复用）。
+模型（续78 细化：只禁为任务新训练模型与新增 LLM 代答；embedding 检索器、frozen judge 属工具级
+冻结组件可用，最终作答权在冻结核）；检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回
+hash、共享查询跨臂复用）。
 早期证据事实（占据、negative class 缺失、边界约束）独立保留；开题底稿=proposals/
 2026-07-29-r2-coreview-draft.md（v2，v3 整改中）。
 

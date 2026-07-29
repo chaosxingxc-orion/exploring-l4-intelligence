@@ -286,5 +286,6 @@ K1-K4 原样搬运，Stage-2D 撤销）。两案实验内容几乎相同。
 **owner 裁定栏**：`CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST` / 2026-07-29 / Decision-Log
 续77。三项配套裁决：①检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回 hash、共享查询
 跨臂复用）；②生效条件=v3 关闭博导评审 §十四 全部清单（proposal 级/authorization 级分层）；
-③主张对象=北极星 system-level capability，红线=模型参数不可修改、不得新增一个模型。v3 以评审
-§十 的音频特有机制为主研究问题重写。
+③主张对象=北极星 system-level capability，红线=模型参数不可修改、不得新增一个模型（续78 细化：
+只禁为任务新训练模型与新增 LLM 代答；embedding 检索器/frozen judge 属工具级冻结组件可用，最终
+作答权在冻结核）。v3 以评审 §十 的音频特有机制为主研究问题重写。

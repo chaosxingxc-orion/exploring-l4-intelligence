@@ -6,14 +6,14 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "950d7c3be33e86a50658a9502b04dbb5c593f810d59883c6c6dda17e8d29a62c"
+      "sha256": "0a328c7c98eeaf33dca5d35045c36058f6e62196e1b603d0f6c1fb8e86085274"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "d1af2f13326d77b445dff39dfd7a2d795f3cec2078bf7bde4d6f64bb6a6f9c3a"
+      "sha256": "a10cb14734950fb09716d0ad4c1956bd0ee3a57f5134d42d66d60f30632562bd"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current W1-W4 state",
-      "sha256": "7e40269b635b029fb7a1280842026d255b788a5109dbafb387373e4f760936c9"
+      "sha256": "5900728fc1255c5f417dacd1a50500639e2d9751cb26e76bb224c55604550a8c"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -41,7 +41,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "current survey router",
-      "sha256": "edb47be726950af0b007bb4c002fd288ed79f6ee8eb69c169be56eda0fa9962b"
+      "sha256": "77eaaf02951b761d040106eb236abaa9c74448a51da80203554ee1c15792df71"
     },
     {
       "path": "wiki/survey/current/protocol.md",
@@ -55,14 +55,14 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "short current survey gate",
-      "sha256": "f89fcb44dd9244f9bc24e622850b4e962711d5d30da602ff542500f56ebe75cd"
+      "sha256": "2c3774974f465bffc799de07a740a3fdaf311a8a4005c20fde65fe45cc0a98b5"
     },
     {
       "path": "wiki/survey/current/manifest.json",
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "aa6bdfb20c251c29ae3d3a8117d44283e5906c360e2c2fbcf950d5f492f3d74d"
+      "sha256": "3b7efc6c388935a82002a5b77124a941a491156e19fdc682a8de370d4266a98f"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",

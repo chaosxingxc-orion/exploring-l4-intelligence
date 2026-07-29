@@ -86,6 +86,10 @@ bash scripts/data/fetch-data.sh
 bash scripts/data/inventory.sh
 ```
 
+The real umbrella gate is `python scripts/survey/sf_current_package_check.py --check` (runs offline on
+Windows or WSL). Lean proofs live in `proofs/tfrl/`; their axiom footprint is audited by
+`bash scripts/lean_axiom_gate.sh` in WSL, receipts under `docs/checks/lean-axiom-gate/`.
+
 ## Code and Git discipline
 
 - `common/src/speechrl_common/` provides audio, model, reward, data, tracking, and utility helpers.
@@ -103,7 +107,7 @@ bash scripts/data/inventory.sh
 
 Never infer the current stage or execution authority from this guide; read `wiki/Research-Objective.md`.
 A documentation/check repair does not authorize discovery queries, model calls, smoke tests, dataset
-experiments, prototypes, reviewer signatures, or owner Stage-1B execution approval. Exposure claims
+experiments, prototypes, reviewer signatures, or owner Stage-2A execution approval. Exposure claims
 must state their scope and retain inherited prior exposure.
 
 Stage-1A checks identity, routing, protocol coverage, and gate correctness; it does not judge technical

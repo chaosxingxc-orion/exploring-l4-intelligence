@@ -14,7 +14,8 @@
   datasets, baselines and metrics remain a reusable evidence package; no Stage-2B slot.
 - R2 is owner-ruled `CONDITIONAL_GO_STANDALONE_PENDING_V3_CHECKLIST` (2026-07-29, Decision-Log 续77,
   after supervisor coreview + adversarial analysis): effective once v3 closes the review checklist; red
-  lines = no parameter modification, no additional model; retrieval trace-logging approved. R2 has
+  lines = no parameter modification, no task-trained model, no additional answering LLM (frozen
+  tool-grade components such as embedding retrievers and judges are allowed, 续78); trace-logging approved. R2 has
   in-domain prior work (AudioRAG/Omni-DeepSearch/VoiceAgentRAG); evidence facts stand, e.g. official data
   has no negative class, so need detection cannot be evaluated without new labels.
 - R3–R9 remain owner-unverified (`OWNER_UNVERIFIED`): no co-working session has reviewed them.

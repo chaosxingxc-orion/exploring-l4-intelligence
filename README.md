@@ -7,10 +7,12 @@
 The **umbrella repo** for a four-part research series on **training-free RL to activate the
 pretrained knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time optimization
 that changes **no base-model weights and no base-model structure** (external system components are
-added) — plus a shared library all four works build on. The **current primary study (W1)** builds a
-frozen-core **RDU front-end knowledge system with a reward-guided trajectory selector** (proposal
-v4.1); W4 is a separate work on the frozen omni's own embedding space (repositioned 2026-07-12 per
-the owner-signed G0 ruling). Full statement of purpose: the Wiki's [[Project-Thesis]] page.
+added) — plus a shared library all four works build on. The **current primary study (W1)** builds an
+**external reward-guided control plane around an API-only frozen speech/omni core** (system-level
+in-context control over knowledge, memory, skills and evidence state; Stage-1C direction
+confirmation in progress — see the Wiki's Research-Objective page); W4 is a separate work on the
+frozen omni's own embedding space (repositioned 2026-07-12 per the owner-signed G0 ruling). Full
+statement of purpose: the Wiki's [[Project-Thesis]] page.
 
 > 📖 **Start here.** This README is the single canonical entry point for humans **and** their AI
 > assistants. Deeper docs live in [`docs/`](docs); shared team knowledge & "memory" live in the
@@ -24,7 +26,7 @@ Each work is its **own GitHub repo** (independent history/issues) but develops a
 
 | # | Work (repo) | Role | Focus | Status |
 |---|---|---|---|---|
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Primary study** | frozen-core RDU front-end knowledge system + reward-guided trajectory selector (ρ realization rate, G0); proposal v4.1 pending signature | 🟢 Mature · primary |
+| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Primary study** | external reward-guided control plane around an API-only frozen omni core (knowledge/memory/skills/evidence-state); Stage-1C direction confirmation, first Stage-2A slice = R5+R6+R8 | 🟢 Mature · primary |
 | W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | Separate work (repositioned 2026-07-12) | frozen omni embedding utility (L0/L1); fresh proposal pending (#29); former disentanglement-flagship framing superseded | 🟡 Skeleton → repositioning |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 Skeleton |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 Skeleton |

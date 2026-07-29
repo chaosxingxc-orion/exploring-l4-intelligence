@@ -22,7 +22,7 @@
       {
         "path": "scripts/checks/build_ai_context_manifest.py",
         "mode": "100644",
-        "git_blob": "50fd4deaaee48a0dc7a14df395db20de1de5f39b"
+        "git_blob": "6395c94ac3d397744b51795d5060c7b7e6f5a0b1"
       },
       {
         "path": "scripts/checks/test_ai_context_surface.py",
@@ -92,7 +92,7 @@
       {
         "path": "scripts/survey/sf_protocol_contract.py",
         "mode": "100644",
-        "git_blob": "af2eb161d52e85617201297e0fccb975e4bc64e5"
+        "git_blob": "363711611d9e7e650c0882e745b3f4b8142d529b"
       },
       {
         "path": "scripts/survey/sf_quantifier_scan.py",
@@ -112,7 +112,7 @@
       {
         "path": "scripts/survey/sf_schema_v3_release_contract.py",
         "mode": "100644",
-        "git_blob": "52f142b7fa71105edc6e61074e5b293808fd9f23"
+        "git_blob": "68b333c7931d81417e8be9608eddcb71c7501763"
       },
       {
         "path": "scripts/survey/test_sf_archive_candidates.py",
@@ -180,7 +180,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "bb10c11e5dff276d079c3594196db368e76611e5fd6e6d0dc7de375ad883a2cb"
+    "sha256": "4c74ae3e2a2d538664b6f670862dfd945e6b841a86bbebe3a7a066f65e89534d"
   },
   "commands": [
     {

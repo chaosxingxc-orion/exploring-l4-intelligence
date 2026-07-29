@@ -15,8 +15,8 @@ Stage‑1C is in owner-directed remediation. Endpoint:
 
 The five dimensions and original R1–R9 remain an audit frame, not nine guaranteed Stage‑2 projects.
 R1 sunset is owner-confirmed (2026-07-29, Decision-Log 续76): it lacked standalone direction potential.
-R2 is owner-ruled conditional GO_STANDALONE (续77): effective on v3 checklist closure; red lines = no
-parameter modification, no additional model; trace-logging approved. R3–R9 are executor drafts the
+R2 is owner-ruled conditional GO_STANDALONE (续77/78): effective on v3 checklist closure; red lines =
+no parameter modification, no task-trained model, no additional answering LLM; trace-logging approved. R3–R9 are executor drafts the
 owner has not verified (`OWNER_UNVERIFIED`).
 Owner direction criterion (2026-07-29): sufficient survey plus in-domain prior work as a methodological
 baseline, or cross-domain-informed design where the field is empty; both must compare against incumbent

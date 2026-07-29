@@ -44,14 +44,8 @@ AUDIT_CAMPAIGN_INDEX_PATH = "wiki/audit/system-first-stage1a/INDEX.md"
 ACTIVE_REVIEW_TRANSACTION = (
     "wiki/audit/system-first-stage1a/round-12/stage1a-readiness-correction.md"
 )
-BUDGETS_BYTES = {
-    "AGENTS.md": 12288,
-    "CLAUDE.md": 12288,
-    "wiki/Research-Objective.md": 5120,
-    "wiki/Per-Work-Status.md": 8192,
-    "wiki/survey/README.md": 4096,
-    "wiki/survey/current/README.md": 4096,
-}
+ENTRY_SPECS_DATA_PATH = REPO_ROOT / "docs" / "integrity" / "ai-context-entry-specs.json"
+ENTRY_SPECS_DATA_SCHEMA = "ai-context-entry-specs-v1"
 
 
 def _entry(path: str, path_class: str, load_policy: str, purpose: str):
@@ -63,99 +57,96 @@ def _entry(path: str, path_class: str, load_policy: str, purpose: str):
     }
 
 
+class EntrySpecsDataError(ValueError):
+    """Raised when the externalized active-entry/budget table is missing or malformed."""
+
+
+def _require_nonempty_str(value: object, label: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise EntrySpecsDataError(f"{label} must be a non-empty string")
+    return value
+
+
+def load_entry_specs_data(
+    path: Path = ENTRY_SPECS_DATA_PATH,
+) -> tuple[tuple[dict, ...], dict]:
+    """Strict-load the externalized ACTIVE_ENTRY_SPECS / BUDGETS_BYTES tables.
+
+    Fails closed: any missing file, invalid strict-JSON bytes, schema
+    mismatch, or wrong-shaped row raises ``EntrySpecsDataError`` rather than
+    silently returning a partial or empty table.
+    """
+    try:
+        raw = path.read_bytes()
+    except OSError as error:
+        raise EntrySpecsDataError(f"cannot read {path}: {error}") from error
+    try:
+        document = loads_json_strict(raw, str(path))
+    except ContextSurfaceError as error:
+        raise EntrySpecsDataError(f"{path}: {error}") from error
+    if not isinstance(document, dict) or set(document) != {
+        "schema",
+        "active_entries",
+        "budgets_bytes",
+    }:
+        raise EntrySpecsDataError(f"{path}: unexpected top-level schema")
+    if document["schema"] != ENTRY_SPECS_DATA_SCHEMA:
+        raise EntrySpecsDataError(
+            f"{path}: expected schema {ENTRY_SPECS_DATA_SCHEMA!r}, "
+            f"found {document['schema']!r}"
+        )
+
+    entries_raw = document["active_entries"]
+    if not isinstance(entries_raw, list) or not entries_raw:
+        raise EntrySpecsDataError(f"{path}: active_entries must be a non-empty list")
+    entries = []
+    for index, item in enumerate(entries_raw):
+        label = f"{path}: active_entries[{index}]"
+        if not isinstance(item, dict) or set(item) != {
+            "path",
+            "class",
+            "load_policy",
+            "purpose",
+        }:
+            raise EntrySpecsDataError(
+                f"{label} must have exact path/class/load_policy/purpose fields"
+            )
+        entries.append(
+            _entry(
+                _require_nonempty_str(item["path"], f"{label}.path"),
+                _require_nonempty_str(item["class"], f"{label}.class"),
+                _require_nonempty_str(item["load_policy"], f"{label}.load_policy"),
+                _require_nonempty_str(item["purpose"], f"{label}.purpose"),
+            )
+        )
+    if entries[-1]["path"] != MANIFEST_RELATIVE_PATH:
+        raise EntrySpecsDataError(
+            f"{path}: final active_entries row must be the self manifest entry "
+            f"{MANIFEST_RELATIVE_PATH!r}, found {entries[-1]['path']!r}"
+        )
+
+    budgets_raw = document["budgets_bytes"]
+    if not isinstance(budgets_raw, dict) or not budgets_raw:
+        raise EntrySpecsDataError(f"{path}: budgets_bytes must be a non-empty object")
+    budgets: dict[str, int] = {}
+    for raw_key, limit in budgets_raw.items():
+        key_label = f"{path}: budgets_bytes key {raw_key!r}"
+        key = _require_nonempty_str(raw_key, key_label)
+        if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+            raise EntrySpecsDataError(f"{path}: budgets_bytes[{key!r}] must be a positive integer")
+        budgets[key] = limit
+
+    return tuple(entries), budgets
+
+
+ACTIVE_ENTRY_SPECS, BUDGETS_BYTES = load_entry_specs_data()
+
+
 AUDIT_CAMPAIGN_ENTRY_SPEC = _entry(
     AUDIT_CAMPAIGN_INDEX_PATH,
     "HOT",
     "targeted",
     "append-only campaign audit index",
-)
-
-
-ACTIVE_ENTRY_SPECS = (
-    _entry("AGENTS.md", "HOT", "default", "Codex repository operating guidance"),
-    _entry(
-        "wiki/Research-Objective.md",
-        "HOT",
-        "default",
-        "single current research-state entry",
-    ),
-    _entry("wiki/Project-Thesis.md", "HOT", "default", "program north star"),
-    _entry("wiki/Per-Work-Status.md", "HOT", "targeted", "current W1-W4 state"),
-    _entry(
-        "wiki/AI-Collaboration.md",
-        "HOT",
-        "targeted",
-        "canonical AI document placement and lifecycle policy",
-    ),
-    _entry("wiki/survey/current/README.md", "CURRENT", "targeted", "current survey router"),
-    _entry("wiki/survey/current/protocol.md", "CURRENT", "targeted", "effective protocol v2"),
-    _entry("wiki/survey/current/status.md", "CURRENT", "targeted", "short current survey gate"),
-    _entry(
-        "wiki/survey/current/manifest.json",
-        "CURRENT",
-        "targeted",
-        "machine current-survey asset router",
-    ),
-    _entry(
-        "wiki/survey/current/data/identity-taxonomy-v6.json",
-        "CURRENT",
-        "targeted",
-        "current identity taxonomy",
-    ),
-    _entry(
-        "wiki/survey/current/data/known-item-coding-v7.json",
-        "CURRENT",
-        "targeted",
-        "generated schema-v3 known-item coding",
-    ),
-    _entry(
-        "wiki/survey/current/data/schema-v3-adjudication.json",
-        "CURRENT",
-        "targeted",
-        "independent schema-v3 adjudication record",
-    ),
-    _entry(
-        "wiki/survey/2026-07-15-sf-queries.jsonl",
-        "HOT",
-        "targeted",
-        "frozen 65-query bytes",
-    ),
-    _entry(
-        "wiki/survey/current/tables/opening-guarantees.md",
-        "CURRENT",
-        "targeted",
-        "generated current opening guarantees",
-    ),
-    _entry(
-        "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
-        "HOT",
-        "targeted",
-        "canonical v6 evidence report",
-    ),
-    _entry(
-        "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
-        "HOT",
-        "targeted",
-        "Windows v6 evidence report",
-    ),
-    _entry(
-        "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
-        "HOT",
-        "targeted",
-        "WSL/POSIX v6 evidence report",
-    ),
-    _entry(
-        "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
-        "HOT",
-        "targeted",
-        "wiki dry-run publication incident and containment evidence",
-    ),
-    _entry(
-        MANIFEST_RELATIVE_PATH,
-        "HOT",
-        "targeted",
-        "AI context manifest metadata (self-hash intentionally omitted)",
-    ),
 )
 
 

@@ -1,0 +1,127 @@
+{
+  "schema": "ai-context-entry-specs-v1",
+  "active_entries": [
+    {
+      "path": "AGENTS.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "Codex repository operating guidance"
+    },
+    {
+      "path": "wiki/Research-Objective.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "single current research-state entry"
+    },
+    {
+      "path": "wiki/Project-Thesis.md",
+      "class": "HOT",
+      "load_policy": "default",
+      "purpose": "program north star"
+    },
+    {
+      "path": "wiki/Per-Work-Status.md",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "current W1-W4 state"
+    },
+    {
+      "path": "wiki/AI-Collaboration.md",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "canonical AI document placement and lifecycle policy"
+    },
+    {
+      "path": "wiki/survey/current/README.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "current survey router"
+    },
+    {
+      "path": "wiki/survey/current/protocol.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "effective protocol v2"
+    },
+    {
+      "path": "wiki/survey/current/status.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "short current survey gate"
+    },
+    {
+      "path": "wiki/survey/current/manifest.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "machine current-survey asset router"
+    },
+    {
+      "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "current identity taxonomy"
+    },
+    {
+      "path": "wiki/survey/current/data/known-item-coding-v7.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "generated schema-v3 known-item coding"
+    },
+    {
+      "path": "wiki/survey/current/data/schema-v3-adjudication.json",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "independent schema-v3 adjudication record"
+    },
+    {
+      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "frozen 65-query bytes"
+    },
+    {
+      "path": "wiki/survey/current/tables/opening-guarantees.md",
+      "class": "CURRENT",
+      "load_policy": "targeted",
+      "purpose": "generated current opening guarantees"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "canonical v6 evidence report"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "Windows v6 evidence report"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.posix.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "WSL/POSIX v6 evidence report"
+    },
+    {
+      "path": "docs/checks/system-first-stage1a/context-v1/wiki-sync-dry-run-incident.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "wiki dry-run publication incident and containment evidence"
+    },
+    {
+      "path": "docs/integrity/ai-context-manifest.json",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "AI context manifest metadata (self-hash intentionally omitted)"
+    }
+  ],
+  "budgets_bytes": {
+    "AGENTS.md": 12288,
+    "CLAUDE.md": 12288,
+    "wiki/Research-Objective.md": 5120,
+    "wiki/Per-Work-Status.md": 8192,
+    "wiki/survey/README.md": 4096,
+    "wiki/survey/current/README.md": 4096
+  }
+}
