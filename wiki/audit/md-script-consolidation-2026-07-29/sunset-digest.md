@@ -63,5 +63,26 @@ Research-Objective §Stage-2A 的原文来源）；`docs/superpowers/plans/2026-
 （d0-d6 证据链唯一 provenance）；W1 `_repro/LOCKED_HOLDOUT/`（append-only 诚信事故取证现场，
 删=毁证）。
 
-后续波次（B=legacy 89 件+manifest 元组、C=工程仓、D=脚本+143 回填、E=配置化）按各自 commit
-追加到本 digest。
+## Wave D（umbrella 脚本，17 件删除 + 143 件上一役欠账回填）
+
+脚本普查终判（普查面 293 件：umbrella 61 / W1 129 / W2+W3 4 / W4 99）：MUST_GATE 49、
+MUST_INFRA 75、MUST_PYTEST 22、NOT_MUST 141。本波删 umbrella NOT_MUST 17 件（Stage-1B
+closeout 工具组、双语言孪生 .ps1、红测试三件、已合并的 fetch-candidate-* 两件、一次性
+lockfile/verify/probe/mlflow 包装）；另 12 件 gitignored `.tmp_*` 游离脚本物理删除（未入库
+无台账代价）。**保留两件普查建议删除的**：`test_sf_archive_candidates.py`（活门禁 cmd 7 的
+oracle，17/25 红因 fixture 未跟进 strict-JSON 硬化——待修不删，删=让门禁成员裸奔）、
+`scripts/lean_axiom_gate.sh`（Lean 审计线在 Research-Objective 与各 R proposal 仍活跃，删=
+公理足迹失去机器校验；接线或退役待 owner 一句话）。
+
+**143 件回填**：07-28 清理波无台账退役的脚本（survey 135 / checks 5 / data 2 / 根 1）以
+`reason_class=SUNSET_TOOLING_BACKFILL` 补入本台账，blob 全量核验可达；恢复父分别为
+48f495b(97)/3d4381f(27)/ed9c7f5(16)/2346cd8(3)。上一役"暗资产不可控"主扣分项就此闭合。
+
+**scripts/tools/ 裁定落地说明**：owner 要求的常驻日用工具目录以"缺了才建"为准——fetch/
+登记四件套（sf_fulltext_fetch / sf_official_metadata_fetch / sf_fulltext_ledger_status(已删,
+被状态查询需求淘汰) / sf_atom_provenance_fetch(已删,被取代)）中活跃两件留在 scripts/survey/
+（在 code_graph 保护内，迁出反而降保护面）；被删发现道工具需要时按台账恢复到 scripts/tools/。
+
+后续波次（B=legacy 89 件+manifest 元组+CLAUDE/AGENTS 瘦身、C=工程仓、E=配置化方案）按各自
+commit 追加到本 digest。配置化方案（293→约 107 件，合同引擎/资产引擎/薄壳统一）已由普查
+报告备好，实施待 owner 在方案上裁定。
