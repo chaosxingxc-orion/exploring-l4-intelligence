@@ -198,26 +198,26 @@
     },
     {
       "command": "python scripts/survey/sf_current_manifest.py --check",
-      "exit_code": 1,
-      "stdout_tail": "[CURRENT-MANIFEST] current manifest byte mismatch: expected aec4734a2cc8e40b6b9a27c4fe0a090b3c3921f950fe1ad9e132718b67631ad6, found 7fd3c291247a4671afaded957b411af387b7c4e290daf06d474cb336e62116b0\ncurrent survey manifest: FAIL",
+      "exit_code": 0,
+      "stdout_tail": "current survey manifest: PASS",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_release_binding_check.py",
-      "exit_code": 1,
-      "stdout_tail": "[BINDING] manifest load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 0c619dddf8d95661549a024ea00e2773c14b96c593eeff8e81e4fa02cd3a1a42, found 6883dac521f04faa415f0faacfe01d6f7893314a2876a47331efbfbdc5e26b7d\nrelease binding: FAIL (1 failures)",
+      "exit_code": 0,
+      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest; validated=1; not-applicable=13)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_quantifier_scan.py",
-      "exit_code": 1,
-      "stdout_tail": "[QUANTIFIER] manifest/path load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 0c619dddf8d95661549a024ea00e2773c14b96c593eeff8e81e4fa02cd3a1a42, found 6883dac521f04faa415f0faacfe01d6f7893314a2876a47331efbfbdc5e26b7d\nquantifier scan: FAIL (1 input failures, 0 unscoped)",
+      "exit_code": 0,
+      "stdout_tail": "quantifier scan: PASS (0 input failures, 0 unscoped; scope=current-manifest)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_archive_candidates.py --check-applied",
-      "exit_code": 1,
-      "stdout_tail": "[ARCHIVE] archive-current-manifest-invalid: manifest bytes differ from deterministic B4 rebuild\narchive applied: FAIL (1 blocker(s))",
+      "exit_code": 0,
+      "stdout_tail": "archive applied: PASS (7 byte-identical moves; check-only)",
       "stderr_tail": ""
     },
     {
@@ -239,5 +239,5 @@
       "stderr_tail": ""
     }
   ],
-  "verdict": "FAIL"
+  "verdict": "PASS"
 }
