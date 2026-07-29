@@ -142,7 +142,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "da81b0e0081745cacad55ebf0a9232eefe2a8bf4"
+        "git_blob": "1bd3941b699895365be20e419c342a4f17f1bd34"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -195,7 +195,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "83f6e1fb127f27af6968544c881631d13a02ccfe39bc6871f85d3a0b86b81984"
+    "sha256": "5d3260208966e87e1d794a37a93ad4eb37c3c523a8980433e5b9be0b8451c833"
   },
   "commands": [
     {
