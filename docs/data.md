@@ -27,6 +27,16 @@ self-contained, lockfile-driven downloader that fetches *exactly* this baseline 
 collaborating team reproduces identical data. HF datasets pull the recorded commit (cross-team
 reproducible); the W1 `wave0_fetch.sh` engine was retired in favour of this one script.
 
+`fetch-data.sh`, `fetch-candidates.sh`, `fetch-qwen3-omni-gguf.sh`,
+`fetch-stage1c-priority-papers.sh` and `inventory.sh` are 2-3 line delegating shims (2026-07-29) to
+[`scripts/data/fetch-assets.sh`](../scripts/data/fetch-assets.sh) — a single subcommand-dispatch
+engine (`fetch-assets.sh <data|candidates|qwen3-gguf|papers|inventory> [args…]`) that carries each
+former script's fetch logic verbatim (same manifest, same target paths, same flags) plus a small
+shared library of env/venv lines that were byte-identical across two or more of them. The shims'
+CLI, this doc's commands below, and the `datasets.lock.json` schema are all unchanged by that
+merge; see [`scripts/data/README.md`](../scripts/data/README.md) for the engine/shim layout and the
+pre-existing per-script behavioral inconsistencies it preserves as-is.
+
 ```bash
 # 0) one-time: install the download deps if missing (see Dependencies below)
 bash scripts/data/fetch-data.sh --list         # show the manifest, fetch nothing
