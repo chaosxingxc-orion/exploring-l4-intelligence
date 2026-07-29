@@ -75,9 +75,9 @@ SESOI、阈值和 hash 冻结成独立 Stage-2 合同。
 
 ## 5. 重审通道（2026-07-29 起）
 
-- 重审模板：[`2026-07-29-direction-review-template.md`](2026-07-29-direction-review-template.md)
-  （owner 未签草案，经 R2 首例校准后定稿）
-- R2 协同重审底稿：[`2026-07-29-r2-coreview-draft.md`](2026-07-29-r2-coreview-draft.md)
+- 开题报告模板：[`2026-07-29-direction-coreview-template.md`](2026-07-29-direction-coreview-template.md)
+  （owner 未签草案，含 owner 07-29 澄清的三要素结构；经 R2 首例校准后定稿）
+- R2 开题底稿：[`2026-07-29-r2-coreview-draft.md`](2026-07-29-r2-coreview-draft.md)
   （owner 未签；裁定点=独立方向 vs 并入 R6/R8）
 
 ## 6. 证据路由
