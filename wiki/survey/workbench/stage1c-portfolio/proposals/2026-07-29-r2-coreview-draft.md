@@ -1,392 +1,797 @@
 ---
-artifact_id: "SF-STAGE1C-R2-COREVIEW-V6"
-role: "R2 开题报告 v6：round-06 终审零 MAJOR（MINOR_REVISION），9 项 MINOR 编辑性关闭，待 owner 生效裁定"
-status: "V6_READY_FOR_OWNER_RULING (round-06 verdict: MINOR_REVISION, zero MAJOR, 续77(2) condition adjudged fulfilled)"
-template: "2026-07-29-direction-coreview-template.md (V2)"
-reviews_closed: "round-03/04/05 (MAJOR_REVISION) + round-06 (MINOR_REVISION, zero MAJOR), wiki/audit/system-first-stage1c-v2/"
-rulings: "Decision-Log 续76/续77/续78"
+artifact_id: "SF-STAGE1C-R2-COREVIEW-V8"
+role: "R2 开题报告 v8：三阶段结构（谁搜谁/如何组织/如何使用）+ 07-30 七点裁定落地；关闭 round-07 全部 3 MAJOR + 12 MINOR（K1a 成本归因/K5 两级判定与专属前置/信息角色边界载体化）"
+status: "V8_PENDING_ROUND08_REREVIEW; owner 未签"
+template: "2026-07-29-direction-coreview-template.md (V2) + owner 2026-07-30 三阶段澄清与同日七点确认"
+review_chain: "round-03..07 五轮评审见 wiki/audit/system-first-stage1c-v2/（round-06 对 v6 判零 MAJOR；round-07 对 v7 判 3 MAJOR+12 MINOR，本版逐条关闭，回应信在 round-07/）"
+rulings: "Decision-Log 续76/续77/续78/续79（2026-07-30 七点：前置三问分型/三问题簇+联合评价/阶段二有界/假设槽型泛化/效果优先预算降级/key-value 拆分/多面 key 升主）"
 evidence_cut: "2026-07-30"
-supersedes: "V5（同文件 git 历史，blob 6c4925ed）；本件自足，不以任何已取代 blob 承重"
+supersedes: "V7（未提交工作树版，sha256 见 round-07 评审 frontmatter）与 V6（blob 365add8d @ 4b94dd5）；本件自足，不以任何已取代版本承重"
 execution_authority: "STAGE2A_WITHHELD"
 ---
 
-# R2 开题报告 v5：音频驱动的外部知识获取
+# R2 开题报告：音频驱动的外部知识获取
 
-## §0-bis round-05 整改对照（新增于 v5）
+## §0 一页摘要
 
-| round-05 条目 | 本版修复 | 位置 |
+**研究的问题**：在"必须先从音频得出某个语义假设——实体、事件、情感、声学场景、音乐属性等
+任意槽型——再以该假设为钥匙获取外部知识才能回答"的任务上，一个参数完全冻结的黑盒 omni
+模型系统，能否学会**高效地获取和使用外部知识**——即在不训练任何模型的前提下，仅凭部署时
+可观测的信号，决定去哪里搜、搜什么、何时该重听而不是搜、检回来的东西信不信。知识就是
+知识：事实库、情感应对知识、物种志、乐理库，检索与使用的决策结构同构；机制按假设槽型
+无关的方式定义，实验主张按载体实际提供的槽型实例化。
+
+**研究纲领：效果优先**。本阶段的目标是把任务效果的上界摸出来：主判据是相对最强基线的效果
+绝对提升，成本九维全程记账但**只报告、不设限**；等预算对照、成本-质量 Pareto 一类分析属
+后期整合/压降阶段的诊断，不进本阶段主判据。over-search 与证据准入在本报告中是**效果**问题
+（搜多了答错、坏证据毁掉本来对的答案），不是省钱问题。
+
+**为什么值得做**：文本大模型领域在 2024–2026 年完成了一次完整跃迁——知识组织从平铺向量库
+走到图谱与演化记忆，知识获取从"总是检索"走到"每次检索都被定价、被校准"，知识使用从无条件
+拼接走到证据准入与仲裁。视觉多模态领域紧随其后，把 oracle 对照臂和证据审计变成了标准协议。
+而语音/omni 领域的同类工作（本地读集内全部三篇 agentic 系统）还停在"LLM 自由决定+硬编码
+预算常数+检索结果无条件进上下文"的阶段，并且它们自己的实验数据已经暴露了这条路的失效面
+（over-search 轨迹、无效答案增多、最优预算随类别剧烈变化却统一封顶）。**这段落差就是 R2 的
+台阶。**
+
+**音频特有的困难**（区别于把文本方法平移过来的根本理由）：外部检索的 query 依赖模型对音频的
+语义假设，而假设可能**听错/判错**——把 Meyer 听成 Mayer 是实体槽的错，把讽刺听成真诚是情感
+槽的错，决策结构上是同一件事；错误的假设会检回**高度相关但完全错误**的证据——文本域的
+query 不会"听错"，而情感/韵律类假设更是纯声学信号，文本域连对应物都没有。因此系统必须区分
+两种不确定性：*我没听清/判准*（感知不确定性，该重听）与*我不知道这个知识*（知识不确定性，
+该去搜），并把预算在两者之间分配。
+
+**任务分解为三个阶段**：
+
+| 阶段 | 核心问题 | 本报告章节 |
 |---|---|---|
-| MAJOR-A 差分含义未定 | 信号分层三声明：感知不确定性信号（α1/β 路）**只进 A4b**，A4a 的 V̂(SEARCH) 显式去掉 α1 项；A4a 固定 re-resolve 档的选取规则声明；audCons/disp 给可实现定义并入时序合法性枚举 | §4.1/§5.1/§3.2/§6 |
-| MAJOR-B 载体近地板无灵敏度保护 | K 判据加 assay-sensitivity 前置（未过灵敏度检定不得触发任何判死）；§3.4 补载体风险与三级回退 | §5.4/§3.4 |
-| MAJOR-C（=04-MAJOR-5 残留） | §5.2 四层评价与九维成本向量全文回填件内，自足性声明恢复为真 | §5.2 |
-| MINOR-a..e | readiness 第四行按列义重填并升为承重行；A1′ 声明开放检索模式构造（避免退化为第 2 类信息）；K2 改称"判官抽样复核估计"并给抽样框/判官输入/CI 覆盖对象；oracle 三数标注仅 Gemini-3-Pro 且 A1 严格强于论文 oracle；admission 信号开销入等预算条款 | §3.4/§5.1/§5.4/§2.1/§5.2 |
+| 阶段一：谁搜索谁 | query 与知识的 key 各在什么空间？语音搜语音还是语音搜文本？query 如何映射进 key 空间？ | §2 |
+| 阶段二：知识如何高效组织 | 什么信息装进 key（检索头）、什么装进 value（内容头）？文本域怎么组织？图像多模态怎么组织？语音域缺什么？ | §3 |
+| 阶段三：知识如何被高效使用 | 搜索如何规划（GraphRAG/agentic RAG 一系）？证据如何取舍？ | §4 |
 
-## §0 双轮评审整改对照（v4 存档）
+**三阶段的执行关系**：三者是同一系统的**三个研究问题簇**，共享一个**联合评价面**（§6–§7），
+不是时序串行——组织的价值只能通过使用端测量（文本域实证：检索相关性提高时任务性能非单调，
+"更相关≠更好"），故实验端到端联合评价、逐维消融。三阶段的结论全部条件于 §1.5 的前置三问
+（知识 value 的本体、key 的表示、装载拆分）；每章按分型分别给结论。
 
-**round-03 十二项**：#2/#3/#5/#6/#8/#9 已于 v3 关闭（round-04 复核确认）；#1/#4/#7/#10/#11/#12
-六项按 round-04 裁定在本版关闭（对应下表）。**round-04 五项 MAJOR + 六项 MINOR**：
+**主张对象与红线**：北极星是 system-level 任务能力，最终作答权始终在冻结 omni 核。红线：
+不修改任何模型参数；不为本任务新训练任何模型；不新增 LLM 代答。工具级冻结组件（现成
+embedding 检索器、音频向量模型、frozen judge、DSP、搜索引擎）可以使用。
 
-| round-04 条目 | 本版修复 | 位置 |
+**成败判据概要**：主创新（阶段三的调度与准入）挂在可判定的击杀判据 K1–K4 上（§7），其中
+"音频特有"这一独立性主张由 A4b−A4a 差分唯一承载；阶段二为有界研究内容，配独立判据 K5，
+判死不伤主线；判死永远不在无分辨力的载体上宣布（灵敏度前置检定 + 载体回退梯，§5.4）。
+
+---
+
+## §1 研究背景与问题定义
+
+### §1.1 任务结构
+
+R2 面向的任务结构是一条固定的因果链：
+
+```text
+音频观测 → 音频语义假设 h（槽型任意）→ 以 h 为钥匙的外部知识 → 有依据的回答
+（audio observation → audio-derived hypothesis → external knowledge → grounded answer）
+```
+
+假设槽型不限于实体/事件：实体、事件、情感、说话人属性、声学场景、声音事件、音乐属性，
+凡是从音频推得、并作为外部知识检索钥匙的语义槽都在框架内。例一
+（实体槽）：演讲音频提到某场会议，问"主办方后来被谁收购"——先从音频确定"哪场会议"
+（感知），再查"收购方"（知识）。例二（声音事件槽）：一段鸟鸣，问"这种鸟的越冬地在哪"——
+先判定物种假设，再查物种志。例三（情感槽）：一段语音，问"按通行的沟通指南，对这种情绪状态
+的来电者应优先采取什么回应"——先判情绪，再检索应对知识。代表性载体是 Omni-DeepSearch-640
+与 AudioRAG-500 两个 2026 年基准（§5 详析）：前者的 gold 资产为实体链形态，后者音源跨
+sound/music/speech——载体已实际覆盖实体/事件、声音事件、音乐属性槽；情感槽属"机制覆盖、
+载体缺位"（§9 调研待办）。
+
+### §1.2 音频特有机制：听错/判错假设 → 相关但错误的证据
+
+文本 RAG 的 query 来自用户原文，最坏情况是"检索不到"或"检回不相关的"。语音场景多出一个
+文本域不存在的失效模式：**query 本身建立在可能听错/判错的音频语义假设上**。把 "Meyer" 听成
+"Mayer"，检索会返回一批关于 Mayer 的、彼此高度一致、来源可信、与问题语义高度相关的证据——
+每一个表面质量信号都是好的，但整个证据链锚在错误实体上。把讽刺判成真诚、把红隼的叫声判成
+茶隼，同理：检回的"应对真诚道歉的沟通知识"或"茶隼越冬地"条条可信，整链皆错。此时"多搜"
+不但无益反而有害：证据越多，错误假设被表面佐证得越牢。
+
+正确的动作不是继续搜外部，而是**回头重听音频**（re-resolve audio）。于是产生 R2 的核心
+决策问题：**在感知动作（重听/重询问音频）与知识动作（外部检索）之间分配预算**。支撑该机制
+真实存在的载体证据：Omni-DeepSearch 的 oracle 分解显示"实体修复"与"检索改进"是两个独立的
+headroom（entity-only oracle 33.76 / 端到端 43.44 / gold-entity 50.00，仅 Gemini-3-Pro
+口径；此为**实体槽证据**，其他槽型的 headroom 分解读集内无载体）；其附录 A.6 给出完整
+over-search 轨迹——正确证据第 3 轮已到手，预算有余的臂继续
+扩展假设、累积语义合理的干扰项，"(10,3) 档停下来答对了，(15,5) 档耗尽预算反而答错"。
+
+### §1.3 概念框架：知识的三种形式与两道门
+
+为使三个阶段的边界可判定，全文使用如下互斥定义（按"被改变的系统对象"划分）：
+
+| 概念 | 必答问题 | 所属系统模块 |
 |---|---|---|
-| MAJOR-1 音频特有机制无臂识别 | A4 拆 A4a/A4b，独立性主张、K1 与 §6 MERGE 触发全部改挂 `A4b−A4a` 差分 | §5.1/§5.4/§6 |
-| MAJOR-2 A1 资产不存在 | A1 改回 gold-entity+gold-path ceiling（对齐论文 oracle）；新设 A1′ 受限 gold-evidence 诊断，仅在官方 gold passage 真实存在的锚数据集上构造；覆盖缺口与图像态证据如实声明 | §5.1 |
-| MAJOR-3 决策量缺席 | 前瞻估计量 V̂ 的函数族 + 输入时序合法性在 proposal 层声明；选型与标定列入 authorization 清单；"不合成总分"限定为评价层纪律 | §4.1/§7 |
-| MAJOR-4 K2 不可离线判定 | K2 改写为只依赖已授权落盘量（答案轨迹 + rank/hash 轨迹 + 抽样判官复核），如实声明为抽样估计；正文落盘扩展仅作为可选请求单列，不默认 | §5.4 |
-| MAJOR-5 方法卡未施加于承重载体/继承已取代 blob | 三篇承重载体六字段卡就地重编码；§2.1/§2.2 恢复；引用枚举与 readiness 表回填件内；全文无"见 v2"承重 | §1.5/§2/§3.4 |
-| MINOR-1..6 | 按篇分述归因并降级"context placement"为本项目候选解释；两表 gold-entity 对齐；探针成本计入 A4 预算+双读数；A5 生成器身份声明；模板验收项件内回填；WavRAG 消融改按内容引用 | 各节 |
+| **组织形式** | 知识以什么单元/schema/关系/索引/版本/出处存在 | 语料库、chunk/schema、索引、快照 |
+| **供给形式** | 何时取、从哪取、以什么 query 取、取多少、何时停 | query 构造器、检索器、搜索规划器、预算/停止策略 |
+| **使用形式** | 已取回的证据如何被接纳/融合/冲突处理/归因/拒用 | 证据准入、grounding/融合、仲裁、abstention |
 
-## §1 概念词典、主张对象与证据底座
+三阶段与三形式的对应及**章界**：阶段一（§2）只管**模态与映射**——query 在什么模态、知识
+的 key 在什么空间、query 如何映射进 key 空间（供给形式的前半 + 组织形式的表示维度）；阶段二
+（§3）只管**装载与治理**——什么信息进 key、什么进 value、key-value 如何配对，及单元/schema/
+索引/层次/出处/版本；阶段三（§4）管供给决策（规划/触发/停止）+ value 进上下文后的使用形式。
+同一技术允许跨章出现（如 GraphRAG：图构建在阶段二，global/local 查询规划在阶段三），以本
+词典判归属。
 
-### §1.1 三种知识形式的互斥定义（按被改变的系统对象）
+系统里有**两道门**，不可混谈：**采集门**（pre-call acquisition gate）在还没看到工具输出时
+决定"这次调用值不值得买"，信号只能来自先验、预算与历史；**准入门**（post-retrieval
+admission gate）在已看到检索结果、但结果尚未进入冻结核上下文时决定"接纳/拒绝/压缩/标记
+冲突"，信号来自佐证度、来源质量与冲突检测。
 
-| 概念 | 必答问题 | 所属模块 | 不得混入 |
+另一组贯穿全文的区分是**四类信息作用**：① 外部新信息（R2 的研究对象）；② 对已有观测的
+重表达（重听属于此类——它不引入外部新信息，是 R2 预算的竞争对手）；③ 潜在知识激发
+（归 R1 证据包/R6 管辖）；④ 验证与出处（R2 的审计面）。
+
+**信息角色边界（假设泛化后的主张纪律）**：假设槽型放开后，R2 的边界不挂在槽型上，挂在信息
+角色上——主张只覆盖"外部新信息对答案有边际价值"的实例分布。答案完全由音频决定的实例
+（如"说话人是什么情绪"本身就是答案），检索"关于情绪的通用知识"属第③类作用，不提供实例级
+新信息。**该分区在各载体上如何落地，按事实分述**：两个 T1 主载体的构造过滤**主动删除**了
+不需要外部信息即可回答的样本（凭音频与问题即可推理作答者被过滤掉），因此其上全部实例按
+构造落在主张分布内，边界自动满足；相应地，"该学会不搜"的负类实例在现有载体上**按构造
+不存在**——不是被我们排除，是载体没有。在负类上验证"学会不搜"因此需要具备负类的新载体或
+受控注入协议，本阶段不作主张、不设臂；若未来引入，实例级信息角色标注协议列为 authorization
+义务（§9）。评价层在信息角色可判定的载体上按其分桶报告（§6.5）。此边界与 K2 的 over-search
+判据无关：K2 度量的是回合内"已拿到正确答案后仍继续搜"，不需要负类实例。
+
+### §1.4 主张对象与红线
+
+北极星指标是 **system-level task capability**：评价对象是"冻结 omni 核 + 外部控制面"整个
+系统在任务上的表现，不是任何单个组件的中间指标。红线三条：
+
+1. 不修改冻结核的任何参数；
+2. 不为完成本任务**新训练**任何模型（含检索器、分类器、判官）；
+3. 不新增 LLM **代答**——最终作答权必须在冻结 omni 核。
+
+工具级冻结组件明确**可用**：已发布的现成 embedding 检索器、音频向量模型（emotion2vec/
+speech2vec/audio2vec 一类冻结检查点）、frozen judge（离线评估用）、确定性 DSP、商业搜索
+引擎，均记录版本与开销使用。这条边界与 AudioRAG 的
+设计构成干净对照：AudioRAG 新增了 Qwen3-8B 文本 controller 深度介入作答环，其 +9.2pt 增益
+无法归因到"外部知识"还是"多了一个模型"；R2 的全部控制逻辑是外显的确定性规则，冻结核的
+作答权不转移。
+
+### §1.5 前置三问：知识的本体、表示与装载
+
+三阶段的每个问题的答案都不是普适的，而是条件于对"知识"本身的三个前置问题。知识按
+**key-value 模式**理解：**key 是检索头**（query 拿它做匹配的东西），**value 是内容头**
+（真正进入冻结核上下文、参与回答的东西）——两者必须拆开谈，这是全文最重要的一对概念。
+
+**问题一：value 的本体是什么、在哪个模态？**（决定实验可行性，全文分型标签 T1/T2）
+
+- **T1：value 在开放 web/文本**（世界事实、新闻、百科）。R2 两个主载体 Omni-DeepSearch-640
+  与 AudioRAG-500 均属此型。此型下我们**不拥有索引**——key 空间归搜索引擎所有，key 侧的
+  杠杆只剩 query 构造（§2.4）；组织升级实验不可行，组织只承担可复放实验合同角色（§3.4）；
+  主创新落在供给决策与使用端（§4.5）。
+- **T2：value 本体是音频或受控库**（讲座库、播客库、口述档案）。锚数据集 Spoken-SQuAD/
+  SLUE-SQA-5 属此型（官方 gold passage/口语段真实存在）。此型下我们拥有索引，key 表示与
+  key-value 装载才是可设计对象；"语音搜语音/文本搜语音"的必要性也只在此型成立（§2.3）；
+  组织对照实验（O1/O2）唯一可在此型上构造（§3.4）。
+
+**问题二：key 用什么表示？**知识倾向于表示成向量时，key 的空间由编码器决定：文本稀疏
+（BM25 类）、文本稠密（DPR 类）、**音频向量**（emotion2vec/speech2vec/audio2vec 一类已发布
+冻结模型——把不同音频输入转成向量、以相似度比对取回）。key 的表示决定了"谁能搜到谁"：
+情感面知识用 emotion2vec key，才能被情感相似的 query 命中；同一 value 可以有多个不同表示
+的 key（§3.4 多面 key）。
+
+**问题三：什么信息装进 key、什么装进 value？**这是组织的核心问题（§3）：一段音频有语义面、
+副语言面、说话人面、声学场景面——装进 key 的面决定它能被什么 query 检回，装进 value 的
+内容决定检回后对回答有没有用。装载拆分做错，检索和使用会互相拖累（检回了但没用，或有用
+但检不回）。
+
+三阶段结论按 T1/T2 分别给出，跨分型不得互推。
+
+---
+
+## §2 阶段一：谁搜索谁——query 与知识的模态映射
+
+本章只管模态与映射——query 在什么模态、key 在什么空间、query 怎么进 key 空间；key-value
+的装载与治理归 §3。
+
+### §2.1 问题与映射矩阵
+
+外部知识获取的第一个设计决策：**query 在什么模态构造，知识的 key 在什么空间，两者如何进入
+同一匹配空间**。本地读集给出的完整选项矩阵：
+
+| query 模态 | key 空间（value 形态） | 代表工作 | 状态 |
 |---|---|---|---|
-| 组织形式 | 知识以什么单元/schema/关系/索引/版本/provenance 存在 | source registry、corpus、chunk/schema、index、snapshot | 跨实例经验效用、检索触发、答案仲裁 |
-| 供给形式 | 何时取、从哪取、以什么 query 取、取多少、何时停、如何排序压缩送入上下文 | query builder、retriever、search planner、budget/stop policy、context composer | 证据进入后的融合、最终答案选择 |
-| 使用形式 | 已获证据如何被接纳/融合/冲突处理/归因/引用/修订/拒用 | result admission、grounding/fusion、answerer、arbiter、abstention | 索引结构、搜索预算、跨实例写入 |
+| 文本 | 文本稀疏/稠密向量（web/文档 value） | 文本域标准路径（DPR 2004.04906 原理：文档与 query 入同一 embedding 空间，近邻即检索） | 成熟 |
+| 音频→文本 query（级联） | 搜索引擎自有 key（web 文档 value） | AudioRAG 2602.10656、Omni-DeepSearch 2605.08762 的实际路径：冻结核听音频后自己生成文本 query | 语音域现役主流（T1） |
+| 文本 | 音频段向量 key，经 adapter 对齐进文本空间（音频段 value） | SpeechRAG 2412.16500：冻结 E5-Mistral 检索器 + 语音 adapter，文本 query 直接检音频段，绕过 ASR | 研究线（T2） |
+| 语音 | 语音向量 key（口语段 value） | SpeechDPR 2401.13463：端到端口语 passage 检索（UASR+文本稠密检索双 teacher 蒸馏） | 研究线（T2） |
+| 音频/文本混合 | 混合向量 key（音频+文本 value） | WavRAG 2502.14727：原始音频直接 embedding 入库，音频-文本混合知识库 | 研究线（T2） |
 
-**两门拆分**：pre-call acquisition gate（未见工具输出，决定是否购买调用；信号=先验/预算/历史）
-≠ post-retrieval admission gate（已见结果、未进核上下文，决定接纳/拒绝/压缩/标冲突；信号=
-corroboration/来源质量/冲突）。
+注意一个贯穿三篇语音线的事实（读集内）：**key 全部是单向量**——每个 value 只有一个 key、
+只服务一个匹配面。至于其余面（副语言/说话人/场景）是被压缩在该向量里还是被丢弃（SpeechDPR
+的 key 蒸馏自文本稠密检索 teacher，"丢弃"同样可信），读集内没有测量——其组织含义与待测
+问题见 §3.3/§3.4。
 
-### §1.2 v2/v3 表述更正存档
+### §2.2 语音搜语音/文本搜语音：检索表征线三篇深读
 
-继承 v3 §1.2 三处撤回（组织轴"无组织"表述、stop/admission 归轴错误、A-MEM/MemRL 论据撤回）；
-本版新增撤回：v3 A1 的 "gold-evidence 用官方 golden_path 文档本体"（资产核验不成立，round-04
-MAJOR-2）；v3 §2.3 小结"瓶颈共同落在 context placement（作者自归因）"（三篇归因异质，见 §2.3）。
+三篇的方法、数字（LaTeX 源核对）与瓶颈：
 
-### §1.3 四类信息作用
+**SpeechDPR 2401.13463**（语音搜语音）。组织=Spoken Wikipedia 按 40 秒定长切段
+（约 3.9 万段/427 小时），每段单个 768 维向量、平铺内积索引；供给=每查必检、语音 query、
+单跳、固定 top-20；使用=top-20 无条件拼接。**有训练环节**（UASR+文本稠密检索 teacher
+蒸馏，HuBERT 冻结）。结果：top-20 检索 19.73%（ASR 级联 19.94%，基本打平；多模型集成
+28.88%）；去掉蒸馏直接用语音表征，检索率崩到 0.04%——**未经训练的语音 embedding 空间
+不可检索**；即使给 gold passage，下游口语问答 reader 的上限也只有 11.17 FF1——作者归因为
+下游 SQA 模块的能力天花板；WER>40% 的高噪声区间端到端显著优于级联。
 
-1 external new information（R2 研究对象）；2 observation re-representation（R2 预算的竞争对手）；
-3 latent-knowledge elicitation（归 R1 证据包/R6）；4 verification/provenance（R2 的审计面）。
-任务结构前提：`audio observation → entity/event hypothesis → external fact → grounded answer`。
+**SpeechRAG 2412.16500**（文本搜语音）。组织=预切段音频、每段单向量（E5-Mistral 冻结）；
+供给=文本 query→音频段单跳 top-5；使用=拼 prompt 无准入。**有训练环节**（adapter+语音
+编码器解冻；但生成侧 SLM 完全不微调——生成侧 training-free 与我们的红线同形）。结果：
+检索侧几乎无损（0.9702 vs 文本上限 0.9707），但生成端 EM 0.3522 对文本管线 0.7514（低
+WER 区间的 ASR 级联 0.5019 也胜过它）——检索打通了，**损失整体转移到了生成/使用端**；
+仅在高 WER 区间反超级联（45% WER 时 0.7106→0.9952）。作者归因为长音频的上下文容量问题
+（原文带 "possibly" 限定）。
 
-### §1.4 主张对象与红线（owner 已裁）
+**WavRAG 2502.14727**（混合库）。组织=文本-音频混合 KB（Gemini 生成扩展知识），单向量
+（Qwen2-Audio LoRA 训练）；供给=单跳固定 top-k；使用=CoT+自一致性（纯 prompt 级）。
+**有训练环节**（LoRA 1.5M 参数/4×A800；其 generator 用 GPT-4o，属"新增 LLM 代答"形态，
+不可搬）。结果：相对级联 8.35–14.38× 加速；**零训练下限消融**：不训练直接拿 Qwen2-Audio
+当 embedder，Spoken-SQuAD R@1 只有 0.3407、自建集 0.0675；top-2→top-3 反而下降
+（0.6408→0.5129）——**多证据编排反降**，是三篇中唯一直接支持"上下文编排是瓶颈"的证据。
 
-北极星 system-level task capability；**最终作答权在冻结 omni 核**。红线（续77③/续78）：不改参数；
-不为任务新训练模型；不新增 LLM 代答。工具级冻结组件（embedding 检索器/frozen judge/DSP/搜索引擎）
-可用，按 C1 记录版本成本。与 AudioRAG（新增 Qwen3-8B 代答、增益不可归因）的设计对照差异由此确立。
+**读集内小结**：(a) 绕过 ASR 的音频检索在**检索段**可行，且高 WER 区间占优——"语音搜
+语音"有真实生存空间，条件是音频本身高噪声或知识本体就是音频（T2 型）；(b) 三篇**全部有
+训练环节**，红线下只能作方法论基线，其组件仅当官方检查点已发布时可作为工具级冻结组件引入
+（检查点发布状态核查列入 authorization 义务清单）；(c) 端到端损失的作者归因三篇各不
+相同——reader 能力天花板（SpeechDPR）/长音频容量（SpeechRAG）/多证据编排（WavRAG）——
+"使用端存在未被系统处理的损失"因此只是**本项目的候选解释**，由阶段三的 A3 实验检验，
+不作为读集共识。
 
-### §1.5 证据底座与可回溯枚举（件内自足，MINOR-5/模板验收项 1）
+### §2.3 阶段一的裁定逻辑：分型决定谁搜谁
 
-- **深读层（dossier/深读条目在册）**：AudioRAG 2602.10656、Omni-DeepSearch 2605.08762、
-  VoiceAgentRAG 2603.02206（d1/d4 dossier + §2.1 方法卡）；SpeechDPR 2401.13463、SpeechRAG
-  2412.16500、WavRAG 2502.14727（§2.3，LaTeX 源核对，round-04 抽验 15 项全 ✓）；donor 深读
-  （ToolGate 2606.03054、FOVEA 2605.01345、CTA 2602.16699、VOI-search 2605.05701、PRA 2604.09482、
-  Decocted 2604.04373、MemRL 2601.03192、AdaCompute 2604.14853、WebThinker 2504.21776、Reflexion
-  2303.11366，d6 dossier）。
-- **登记未深读（只作机制定位，不引数字）**：2605.13277/2605.15019/2604.25122/2508.21475/
-  2605.05185/2605.16481/2605.14906/2605.10848。
-- **补抓层（机制级定位，PENDING_DEEP_READ）**：19 篇入引用集（含 pre-2024 例外 6 篇），12 篇仅
-  存档——清单与时效规则见 git 历史 v2 §1（此处为记账指针非承重继承）。
-- 全部承重引用回溯 `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl`（sha256+本地路径）。
-- **累计 exposure（件内自足）**：文献检索/fetch/全文与 PDF 表格阅读发生（31 篇 known-ID 抓取
-  62 行 ledger 全 200；3 次 web 题名→id 解析；三篇检索线全文深读含 LaTeX 源解包；round-04 评审
-  执行本地资产读取）。零模型/API 执行、零指标运行、零数据集下载、零复现、零原型。
+按 §1.5 前置分型给结论：
 
-## §2 方法调研（统一方法卡，全部件内）
+- **T1（value 在文本/web，主载体分型）**：key 空间归搜索引擎所有，唯一可行路径是"音频理解
+  →文本 query→搜索引擎"。此时映射的瓶颈不在检索器，而在 **query 构造建立在可能听错/判错
+  的音频语义假设上**（§1.2；主载体上主要是实体/事件与声音事件/音乐属性槽）。key 侧不可
+  设计——阶段一在 T1 上的全部杠杆是 query 侧的。
+- **T2（value 本体是音频/受控库）**：我们拥有索引，key 表示才是可设计对象；语音搜语音/文本
+  搜语音的必要性只在此型成立。红线下我们不训练检索器，可行动作=用已发布的冻结检查点
+  （SpeechDPR/SpeechRAG 若发布；emotion2vec 一类音频向量模型）或现成文本检索器+ASR 转写
+  库做级联。此型是 A1′ 诊断与阶段二组织对照实验的载体（§3.4）。
 
-### §2.1 agentic 线三篇（承重载体，六字段卡就地重编码）
+### §2.4 阶段一的研究内容与实验落点
 
-**AudioRAG 2602.10656**
-组织：无持久库；开放 live web（付费 Google Search），无快照/版本/provenance 字段。
-供给：文本 controller（Qwen3-8B）Think-Call-Answer 自由生成决定 tool/query/hop；无界 hops、无
-显式 stop；两工具 = WebThinker 式 deep explorer + 冻结 omni 作"可查询观察源"。
-使用：检索结果与音频回答无条件进 controller 上下文；无 admission/冲突处理/citation/abstain。
-changed=新增文本控制器与全 pipeline；held-constant=冻结 omni 本体。
-runtime-visible=工具返回文本、omni 回答；gold-only=GPT-4o judge 用的参考答案（评测期）。
-数据/基线/指标/成本：500 题（80% 由 GPT-4o 从八个公开集元数据生成，过滤器与错误判官均见 gold
-audio attribute）；六裸模型基线（Qwen3-Omni raw 37.0）+ 两 agentic 臂（Qwen3-Omni+Qwen3-8B
-46.2）；GPT-4o judge 三次平均 + A/B/C/D 错误分类；无成本记账、无工具消融（+9.2pt 不可归因）；
-wrapper 自增 type-D 无效答案（无限循环）。
+- **多假设 query 构造（T1 上的供给侧杠杆）**：冻结核对音频实体给出多个候选假设时，query
+  是压成单一最优假设，还是并行构造多假设查询、用检索结果反过来佐证哪个假设为真（检索结果
+  与语义假设的佐证结构，即 §6.2 状态空间中的 corr(e,h)）。作为供给侧 BASELINE VARIABLE
+  （single- vs multi-hypothesis）进入 A4 臂族的 query 构造维度。
+- **映射损失与使用损失的分离诊断**：A1（gold-entity ceiling，通用 gold-hypothesis ceiling
+  在主载体资产形态下的实体槽实例）度量"实体假设全对时能恢复
+  多少"——映射环节的 headroom 上界；A1′（gold-evidence 受限诊断，T2 锚）度量"证据全对时
+  冻结核能用回多少"；两者配合把"映射损失"与"使用损失"分开（§6.1）。
 
-**Omni-DeepSearch 2605.08762**
-组织：无持久库；开放网三工具（text/image/video search）；`golden_path` 仅为实体名链（无 URL/
-正文，trace/* 160 条无该字段——round-04 实测），作离线诊断不作运行时组织。
-供给：冻结模型自持 query/工具选择/重试/放弃；每步一 query、每步必搜（禁内部知识）；预算=固定档
-(X,Y)；video 两阶段 verify-then-densify。
-使用：检索结果无条件进上下文；UNKNOWN abstain token 存在但零 coverage 分析；无 admission。
-changed=统一 tool-augmented pipeline；held-constant=各评测模型本体。
-runtime-visible=检索返回、模型中间答案；gold-only=answer 与 golden_path（构造与诊断期）。
-数据/基线/指标/成本：640 题/15 类（五道过滤+人工唯一性复核，构造纪律三篇最严）；12 模型横比
-（Gemini-3-Pro 43.44 最强；本项目核 Qwen3-Omni-30B Thinking 6.56）；三 LLM judge 多数投票；预算
-消融 (5,1)=29.06→(10,3)=43.44→(15,5)=44.06 且类别强非均匀（IMAGE/SPEECH 升、VIDEO/AMBIENT 降）；
-A.6 over-search 完整轨迹（"(10,3) 停下答对，(15,5) 耗尽预算答错"）；oracle 分解 entity-only
-33.76/端到端 43.44/gold-entity 50.00（**仅 Gemini-3-Pro 口径**）；无成本记账、无 no-tool 直读
-行、单 split 无快照。
+---
 
-**VoiceAgentRAG 2603.02206**
-组织：纯文本合成 KB（NovaCRM 12 文档/76 chunk）+ 内存 FAISS 缓存（document-embedding 建索引，
-TTL 300s；prediction-query embedding 版本曾致语义错误命中——工程教训）。
-供给：预期式——LLM 预测 3–5 后续话题异步预取；数量全为常数；无停止概念（时间驱动）。
-使用：单一全局 τ=0.40 决定信缓存或回落；无答案质量轴、无 admission/abstain。
-changed=双 agent 预取缓存架构；held-constant=底层向量库与生成模型。
-runtime-visible=hit/latency；gold-only=无（全程不评答案质量）。
-数据/基线/指标/成本：200 条 scripted 文本轮次；唯一基线 Traditional RAG；hit 75%、110.4ms→
-0.35ms、316×；单次运行无方差。处置：仅作 R9 latency/cache 参考，不承担 R2 能力结论。
+## §3 阶段二：知识如何高效组织
 
-### §2.2 跨域机制位（donor，只借形状不外推效果）
+本章管装载与治理——什么信息进 key、什么进 value、key-value 如何配对；模态映射已在 §2
+裁定。"高效"的度量=任务效用与 answer-bearing coverage 的提升（成本按九维向量记账、只报告
+不设限，§6.5）——不用未定义的"高效"一词下结论。
 
-M1 pre-call gate（ToolGate：11.8/9.9/78.3 基率；prompt 级怀疑无效）｜M2 value-per-budget+双硬
-预算（VOI-search：中预算有时胜高预算）｜M3 校准先验判取（CTA：closed-form retrieve-iff；
-"always acquire 是默认失效模式"）｜M4 margin-shift VoI 免负类标签（PRA；黑箱可行性待评）｜
-M5 forced-answer 四分类离线探针（ToolGate）｜M6 负信息增益/"更相关≠更好"（Decocted）｜
-M7 oracle/headroom 行成为标准协议（M3-VQA 四臂；FOVEA selector ablation）｜M8 类别级预算再分配
-（AdaCompute Lagrange 单价；Omni-DeepSearch 自证最优预算随类别异而统一封顶）。
+### §3.1 文本域的组织演进（2024→2026）
 
-### §2.3 检索表征线三篇（组织轴本域证据，深读层；数字经 LaTeX 源核对）
+**原理基座（pre-2024，按时效例外引入）**：运行时检索拼接（RAG 2005.11401：冻结生成器+
+可替换外部库）与稠密检索（DPR 2004.04906）确立了"知识外置于参数、以向量索引组织"的基本
+形态——并且从一开始就把 **key 与 value 拆开**：DPR 的 key=passage 向量（检索头）、value=
+passage 原文（进上下文的内容头）。ROME 2202.05262 证明事实在参数中虽有结构但难以更新——
+这是"知识必须外置"的原理依据。
 
-【继承 v3 全部三条目与数字——round-04 抽验 15 项全 ✓——此处保留原文字段卡】
-**SpeechDPR 2401.13463**：组织=Spoken Wikipedia 40s 定长切段（~39k/427h）单 768 维向量 flat 内积，
-version/provenance 无；供给=无判据每查必检、语音 query、单跳、固定 K=20；使用=top-20 无准入，
-conflict/citation/abstain 无。有训练（UASR+TDR teacher 蒸馏；HuBERT 冻结）。top-20 19.73%（级联
-19.94%）；去蒸馏 0.04%；gold passage 下 reader 上限 11.17 FF1；WER>40% 端到端显著优于级联；集成
-28.88%。**作者对低上限的归因是下游 SQA 模块能力天花板**——此类瓶颈恰非 training-free 上下文干预
-可解（MINOR-1 更正）。
-**SpeechRAG 2412.16500**：组织=预切段单向量（E5-Mistral 冻结）；供给=文本 query→音频段单跳
-top-5；使用=拼 prompt 无准入。有训练（adapter+语音编码器解冻；SLM 完全不微调——生成侧
-training-free 与红线同形）。检索几乎无损（0.9702 vs 0.9707）而生成 EM 0.3522 vs 0.7514（低 WER
-级联 0.5019 亦胜）；仅高 WER 反超（45% WER：0.7106→0.9952）。**作者归因为长音频上下文容量且带
-"possibly" 限定**（MINOR-1 更正）。
-**WavRAG 2502.14727**：组织=文本-音频混合 KB（Gemini 生成扩展知识）单向量（Qwen2-Audio LoRA）；
-供给=单跳固定 top-k；使用=CoT+USC（纯 prompt 级）。有训练（LoRA 1.5M/4×A800；generator GPT-4o
-属"新增 LLM 代答"形态不可搬）。8.35–14.38× 加速；**零训练下限消融**（按内容引用，表号未在源中
-确认——MINOR-6）：不训练直接拿 Qwen2-Audio 当 embedder，Spoken-SQuAD R@1 0.3407、自建集 0.0675；
-top-2→top-3 反降 0.6408→0.5129——**多证据编排反降是三篇中唯一直接支持"上下文编排是瓶颈"的证据**。
+**2024 年起的三步演进**：
 
-**读集内小结（归因按篇分述，MINOR-1 修复）**：(a) 绕过 ASR 的音频检索在检索段可行且高 WER 区
-占优；(b) 三篇全有训练环节→红线下只作方法论基线，组件不可搬（检查点发布状态核查=authorization
-义务）；(c) 组织 schema（version/provenance/conflict/citation/abstain）三篇逐字段为零，供给全为
-"无判据+单跳+固定 top-k"；(d) 端到端损失的作者归因**三篇异质**——reader 能力天花板（SpeechDPR）/
-长音频容量（SpeechRAG，possibly）/多证据编排（WavRAG）。据此，"上下文侧（placement/编排/容量
-管理）存在未被系统处理的损失"是**本项目提出的候选解释**，其中仅 WavRAG 一篇直接支持编排读法；
-该候选解释通过 A3（同证据集、换使用策略）接受检验，不作为读集共识引用。
+1. **平铺 chunk 向量库 → 图与层次索引**：GraphRAG 2404.16130 用 LLM 预构建实体图+社区
+   摘要，使"全局性问题"（需要跨文档聚合的问题）可以按社区层次检索——组织第一次携带了
+   跨文档结构，同时也是 key 侧的升级：为同一批原文 value 造出新一层"社区摘要 key"；
+   HippoRAG 2405.14831 用海马体式关联索引做单跳成本的多跳关联；LightRAG 2410.05779 双层
+   图检索（低层实体+高层主题）压低图组织的构建与查询成本。
+2. **静态库 → 演化/带效用记账的记忆**：A-MEM 2502.12110 让记忆条目互联并动态演化；
+   MemRL 2601.03192 把库组织成 {intent, experience, utility-Q} 三元组，**只更新真正进过
+   上下文的记忆的效用**——库的价值被逐条测量；Decocted 2604.04373 证明经验蒸馏后的条目
+   优于原始经验，且检索相关性提高时任务性能**非单调**。
+3. **稀疏/稠密对照保持活跃**：Pi-Serini 2605.10848 显示调好的 BM25+足够检索深度即可暴露
+   高证据召回——组织升级的收益必须对着强稀疏基线验证，不能对着弱基线自证。
 
-### §2.4 量词纪律
+**轴结论**：文本域的组织从"静态外挂向量库"走到"带结构、带出处、带效用记账、可演化的库"，
+且每一步升级都被要求给出可测量的增益。
 
-全部"缺席/空位/瓶颈"断言的量词范围=本地已登记且完成相应深读的读集（agentic 3 + 检索线 3 +
-donor 73 + D1 读集 6），cut 2026-07-29。跨域机制位只产生 candidate hypothesis；独立性论证必须
-来自 §3.1 的音频特有结构并由 §5.1 的 A4b−A4a 差分识别。
+### §3.2 图像多模态域的组织演进（2024→2026）
 
-## §3 待开展研究的内容
+**数据集基座（pre-2024 例外）**：OK-VQA 1906.00067 / A-OKVQA 2206.01718 定义了"图像之外
+的知识是否必要"这一问题，其基准沿用至今。
 
-### §3.1 主研究问题
+演进路径：实体/wiki 文档库（Wiki-LLaVA 2404.15406、EchoSight 2407.12735：图像→实体→
+该实体的文档）→ **多粒度证据**（2605.15019：element 级与 scene 级两层证据单元）→
+**在线构建的层次视觉记忆**（2605.16481），并且出现了明确的**组织代价函数**（2605.14906：
+长上下文随长度退化 vs 记忆体在存储压缩中丢失视觉保真度——组织不是免费的，是一条
+保真度/成本权衡曲线）。
 
-> 在"音频先确定实体/事件、答案依赖外部事实"的任务上，冻结黑盒 omni 系统能否仅凭部署可见信号，
-> 估计一次外部证据动作的边际价值，并在固定知识环境、等资源条件下，相对最优固定检索策略，同时
-> 提高任务效用、降低 evidence-induced correct→wrong、减少无效检索？
+按 key-value 读这段演进：Wiki-LLaVA/EchoSight 的 key=图像所指的实体名（实体检索头）、
+value=该实体的百科文档；element/scene 两级证据单元（2605.15019）即同一场景 value 的两层
+key 粒度；层次视觉记忆（2605.16481）=在线构建的多层 key。读集内视觉域出现了"同一 value
+多层（粒度）key"，但**未见跨模态多面 key**（语义面与副语言/场景面并置指向同一 value）——
+语音域 O 臂要补的正是后者。
 
-**音频特有结构**：外部检索 query 依赖可能听错的实体假设；错误实体产生高度相关但完全错误的证据
-（文本域 query 不会"听错"）；系统须区分 perceptual uncertainty 与 external-knowledge
-uncertainty，把预算在 `re-resolve audio` 与 `search external facts` 间分配。证据：Omni-DeepSearch
-oracle 分解（实体修复与检索改进是两个独立 headroom）与 A.6 over-search 轨迹。
-**该机制的实验识别（MAJOR-1 修复）**：由 §5.1 的 **A4b−A4a 差分**唯一承载——A4a 只含通用
-自适应 SEARCH 调度（re-resolve 固定），A4b 在其上加 audio-conditioned 双源分配；差分为正且过
-K1b 才支持"音频特有"主张，否则按 §6 路由 MERGE。
+**轴结论**：视觉域复刻了文本域"平铺→层次/多粒度→在线记忆"的路径，并把"组织的代价"
+显式化了。
 
-三个有序子问题：SQ1 Necessity（诊断层，A0/A1/A1′ 差分，离线）；SQ2 Supply（主创新候选，A4a/A4b）；
-SQ3 Use（次创新候选，A3）。**明确不研究**：部署期 need detection（无负类）；知识组织层=FIXED
-实验合同（除非实验证明现有索引无法承载 audio anchor/provenance/多假设 query）。
+### §3.3 语音域现状：组织轴的全面空位
 
-### §3.2 管辖界线
+本地读集（cut 2026-07-30）内语音域的组织形态：
 
-R2=外部知识 action family 的专用调度与证据取舍。**"通用调度"在本件中的定义=不见任何感知
-不确定性信号的获取调度（V̂_gen）**；"音频特有"=把感知不确定性路由进获取决策（α1/β 路 +
-RE_RESOLVE + 双源分配）。R6 消费其 action 定义；R8 消费其可靠性阈值。判据均匀适用：若
-A4b−A4a 不显著而 A4a 显著，即"唯一新内容=通用调度"，按 §6 路由 R6/R8。
+- 检索表征线：SpeechDPR=40 秒**定长**切段平铺向量库（无语义边界）；SpeechRAG=预切段
+  单向量；WavRAG=混合库单向量。三篇的组织 schema 字段——版本、出处（provenance）、冲突
+  标记、引用支持、abstain 支持——**逐字段为零**。更根本的装载缺陷：**每个 value 只有一个
+  单向量 key、只服务一个（语义）匹配面**——非语义面被压缩还是被丢弃读集内未测量，但无论
+  哪种，情感相似的 query 都检不回按语义索引的知识；文本域"为同一 value 造多层 key"（摘要
+  key、实体 key）的实践在语音域读集内为零。
+- agentic 线：AudioRAG 与 Omni-DeepSearch 干脆**没有持久知识组织**——直接开放 live web，
+  无快照、无文档 ID 落盘、无轨迹可复放（Omni-DeepSearch 的 `golden_path` 只是实体名链，
+  无 URL/正文；其 trace/* 160 条连该字段都没有——本地资产实测）。
+- 图/层次/演化记忆、多粒度证据、组织代价曲线：语音域读集内**全部缺席**。
 
-### §3.3 载体主张收窄
+**与前两域对照的定位**：语音域组织轴停在文本域 2020–2022 的"平铺稠密库"段位，且 agentic
+线因为直连 live web 连"库"都没有——**可复现性在组织层就已经断了**。
 
-只研究 external-required 分布内的 search depth、双源分配、stop 与 admission；不宣称通用
-need-detection。A5 扰动在官方数据上构造、不新增标注；A0 no-tool direct=必要基线与实验卫生，
-非立项贡献。
+### §3.4 阶段二的研究内容（有界）
 
-### §3.4 载体 readiness（件内回填，MINOR-5/模板验收项 6）
+组织轴在 R2 中承担三件事，按承重从低到高：
+
+1. **可复放组织（实验合同角色；T1+T2）**：主载体实验的知识环境必须固定——pin 检索服务/
+   日期/参数，逐次落盘 URL/文档 ID/rank/内容 hash，共享查询跨臂复用同一返回（trace-logging
+   方案，§6.4）。这是把 agentic 线"无组织"的缺陷补成可审计实验的前提，不是创新主张。
+2. **音频锚定的出处 schema（承载阶段一/三所需字段；T1+T2）**：证据条目除常规字段外，携带
+   "它佐证/反驳哪个语义假设"的标记（corr(e,h)）与来源质量等级。这是阶段三准入门的数据
+   前提，属工程设计，不单独立创新主张。
+3. **装载对照实验（阶段二的研究性问题；仅 T2）**：在锚数据集（Spoken-SQuAD/SLUE-SQA-5
+   官方 passage 池）上，等语料对比两种 key 装载——**O1 单面单向量 key**（现状，三篇语音线
+   的形态）vs **O2 多面 key**（同一 value 配多个冻结编码器产出的 key：语义面用文本/级联
+   稠密向量、副语言面用 emotion2vec 一类、声学场景面用现成音频事件/场景向量模型如
+   audio2vec 一类——具体编码器选型=authorization 义务；query 面路由=确定性两选一、
+   authorization 预注册：冻结核在固定 prompt schema 下自报槽型标签选面，或不路由、查全部
+   面后按预注册权重取最大相似度融合）。回答的问题：**把什么信息装进检索头，决定了什么知识
+   能被检回**——非语义面在单向量 key 中是被压缩还是被丢弃，读集内没有测量，正是 O 臂检索层
+   读数要回答的。备选对照（降为第二优先）：平铺 vs 图/层次（文本域已占方法的移植验证）。
+   构建约束：全部用现成冻结组件，冻结 LLM **仅做库预处理期的结构抽取，不参与作答**；构建
+   开销入九维记账。**判据分两级（§7 K5）**：检索层 K5-r=O2 能否检回 O1 检不回的目标 value
+   （按面分层报告）——当前锚载体唯一支持的判定层；任务层 K5-t 仅在具备非语义槽需求的载体上
+   生效（到位前记 PENDING_CARRIER、不判死）。对照臂必须含调优的稀疏基线（Pi-Serini 教训）。
+   **O 臂占用实验资源的小头，authorization 预注册**；O 臂的判定使用阶段三的联合评价面
+   （§6.5），不另立评价体系。
+
+**诚实声明**：T1 主载体（value=开放 web）上 key 装载不可设计（索引归搜索引擎），故第 3 项
+只在 T2 锚数据集上做，结论范围同步收窄、不外推 T1。多面 key 中情感面的端到端验证还受
+"情感型外部知识载体缺位"限制（§9 调研待办）——在此之前情感面 key 只做检索层读数（能否
+检回目标 value），不做任务层主张。若 K5-t 在合格载体上判死（O2 无增益），组织轴回落纯实验
+合同角色——第 1、2 项仍保留，它们是阶段三的前提，不依赖第 3 项的结论；主线（阶段三）不受伤。
+锚载体本身无分辨力（K5 专属前置不过）时不判死、回 owner（§5.4/§7）。
+
+---
+
+## §4 阶段三：知识如何被高效使用
+
+### §4.1 文本域：从"总是检索"到"被定价的获取"（2024→2026）
+
+供给决策端的演进是 R2 最重要的参照系：
+
+1. **质量评估触发**：CRAG 2401.15884 用检索质量评估器决定纠正动作（自适应触发原理的
+   pre-2024 源头是 Self-RAG 2310.11511，按时效例外引入）。
+2. **agentic 深搜**：Search-o1 2501.05366（推理过程中按需发起检索）、Search-R1
+   2503.09516、DeepResearcher 2504.03160、WebThinker 2504.21776（分层委派+报告工具）——
+   模型在推理环内自主决定搜什么、搜几轮。GraphRAG 的 global/local 双查询模式属于
+   组织-使用耦合的规划：问题类型决定走社区摘要层还是实体层。
+3. **被定价/被校准的获取（2026 前沿）**：Calibrate-Then-Act 2602.16699 先校准先验、再按
+   闭式规则判"retrieve iff p_ret·γ ≥ p_da"，并示证**"无条件检索是默认失效模式"**；
+   VOI-search 2605.05701 把每次检索按 value-per-budget 归一并施加双硬预算——中预算档
+   有时胜过高预算档；PRA 2604.09482 用 margin-shift VoI（证据能否移动评估器后验）免除
+   人工负类标签，且打分器与策略分离防污染；AdaCompute 2604.14853 用 Lagrange 单价把
+   固定总预算按类别/实例再分配，精确命中平均预算。
+
+使用端（证据进上下文之后）的演进同步收敛到**准入与仲裁**：Decocted 证明上下文信息增益
+可以为负（I(Y;C|X)<0——"更相关≠更好"）；WebThinker 把证据消费组织成 draft/check/edit
+的证据态写作。
+
+**轴结论**：文本域 2026 年的活跃前沿恰是"何时检索、检索多少、信不信"三个决策的质量——
+**全部是 reward-guided 控制面问题，与训练无关**。本项目按效果优先纲领读这段谱系：借的是
+"选择性获取"的效果论据（无条件检索是默认失效模式、更相关≠更好、多花不一定多得——
+VOI-search 的"中预算有时胜高预算"正是花费与效果不单调的直接证据），定价与成本最优化
+本身归后期整合/压降阶段。
+
+### §4.2 视觉多模态域：门控与协议化（2024→2026）
+
+- **多模态搜索 agent**：MMSearch 2409.12959（第一代基准）→ MMSearch-Plus 2508.21475
+  （provenance-aware）→ OpenSearch-VL 2605.05185。
+- **被门控的获取**：ToolGate 2606.03054 在工具输出进上下文**之前**设 pre-call 门，其
+  15,782 次标注调用给出基率——11.8% helpful / 9.9% harmful / 78.3% unchanged：**获取
+  不免费，且大多数调用是惰性的**；prompt 级的"自我怀疑"提示对此无效。FOVEA 2605.01345
+  用序贯贝叶斯实验设计选观察，并证明贪心选择可证不足（Information Cliff）。MementoGUI
+  2605.18652 连"检索刷新"本身都被门控；cotomi 2605.03231 的 lazy observation 表明预取
+  与轮内获取不可加。regime 边界（2606.28864）：额外测试时算力对推理型任务有利、对纯感知
+  任务有害——获取策略必须按任务类型分层。
+- **协议化**：M3-VQA 2604.25122 把 no-evidence / gold-evidence / heuristic / agentic
+  **四臂对照**变成标准协议，证据链可溯源；ToolGate 的 forced-answer 四分类探针提供离线
+  标签构造法；归因指标（2605.15019 attribution precision / unsupported-claim）成为常规。
+
+**轴结论**：视觉域把"获取要定价、证据要审计、oracle/gold-evidence 臂是标准报告行"变成
+共同实践——这些协议正是语音域实验中系统性缺席的东西。
+
+### §4.3 语音域现状：pre-pricing 阶段的三重失效
+
+本地读集内语音 agentic 线（AudioRAG、Omni-DeepSearch）的使用端事实：
+
+1. **每个采集决策=LLM 自由生成，每个数量=硬编码常数**：AudioRAG 的 Think-Call-Answer 环
+   无界 hops、无显式停止；Omni-DeepSearch 固定预算档 (X,Y)、每步必搜（禁用内部知识）。
+   读集内**没有任何一处 scalar reward 充当推理期控制器**（37 行音频/omni 语料场级事实）。
+2. **检索结果无条件进上下文**：无准入门、无冲突处理、无引用归因、无 abstain 分析
+   （Omni-DeepSearch 的 UNKNOWN token 存在但零 coverage 分析）。没有人测量"这次采集
+   是否改变了答案"。
+3. **停止权是被它们自己的数据实证的失效面**：AudioRAG 的 wrapper 使 type-D 无效答案增多
+   （无限循环）；Omni-DeepSearch 预算消融 (5,1)=29.06 → (10,3)=43.44 → (15,5)=44.06
+   饱和，且第三档强非均匀（IMAGE 38.75→50.00、SPEECH 55.00→70.83 上升；VIDEO
+   36.88→31.25、AMBIENT 36.67→20.83 **下降**。该消融全表为 Gemini-3-Pro 口径，本核口径
+   见 §5.4 不得串用；IMAGE/VIDEO 属检索目标轴、SPEECH/AMBIENT 属音频内容轴，两轴样本
+   分层不同）——最优档位随任务分层剧烈变化，论文却统一封顶；A.6 的 over-search 完整轨迹
+   见 §1.2。
+
+**定位结论**：语音域供给轴停在"pre-pricing agentic"（对应文本域 2025 段位；AudioRAG 即
+WebThinker 的音频移植），使用轴停在"无条件接纳"。**文本/视觉域 2023–2026 的整个
+"自适应→定价"跃迁在语音域尚未发生。**
+
+### §4.4 跨域已成熟、语音域缺席的机制位（改进空间的来源）
+
+| # | 机制 | 跨域出处 | 语音域状态 |
+|---|---|---|---|
+| M1 | pre-call 准入门（证据进上下文前拒绝） | ToolGate | 三篇皆无 |
+| M2 | value-per-budget + 双硬预算 | VOI-search | 只有全局固定档 |
+| M3 | 校准先验决定是否检索 | Calibrate-Then-Act | 载体无负类，不可直测 |
+| M4 | margin-shift VoI 免负类标签 | PRA | 无；API-only 下可行性待评 |
+| M5 | forced-answer 四分类离线探针 | ToolGate | 从不进决策 |
+| M6 | 负信息增益/"更相关≠更好" | Decocted | 无人检查检索页是否含答案 |
+| M7 | oracle/headroom 报告行 | M3-VQA 四臂、FOVEA | 唯一 oracle 行=Omni-DeepSearch 实体分解 |
+| M8 | 按类别/实例再分配固定总预算 | AdaCompute | 自证最优预算随类别异而统一封顶 |
+
+跨域机制位只借"形状"（协议/状态表示/统计量），效果**不跨模态外推**（H5 withheld）。这些
+空位只产生候选假设；"音频特有"的独立性论证必须来自 §1.2 的音频特有结构，并由 §6 的
+A4b−A4a 差分实验识别。按效果优先纲领的取舍：**主杠杆（§4.5 双源动作调度）借的是 M2/M4
+谱系的效果形态**——"选择性获取"的前瞻价值估计本身（M6 的负信息增益与 VOI-search"中预算
+有时胜高预算"的花费-效果非单调证据，都支撑"选对动作比多做动作重要"）；只有其**定价/成本
+最优化形态**（M2 的 value-per-budget 归一、M8 的预算再分配）降为后期参考。次杠杆取
+M1/M5/M6/M7 的效果形态（准入门、离线探针、坏证据识别、oracle 行）。
+
+### §4.5 阶段三的研究内容（主创新候选）
+
+**主研究问题**：
+
+> 在"音频先产出语义假设、答案依赖以假设为钥匙的外部知识"的任务上，冻结黑盒 omni 系统能否
+> 仅凭部署可见信号，估计一次外部证据动作的边际价值，并在固定知识环境下，相对**效果最强的
+> 固定检索策略与已发表 agentic 基线**，提高任务效用、降低 evidence-induced correct→wrong、
+> 减少"搜了反而更糟"的无效检索（成本全程记账但不设限）？
+
+分解为两个杠杆：
+
+- **杠杆一（主）：感知/知识双源动作调度**。对每个候选动作（重听音频 / 外部检索 / 作答 /
+  停止）维护一个前瞻价值估计 V̂（§6.2 给出估计量族），用确定性阈值规则选动作。**音频特有
+  部分**=把感知不确定性信号（语义假设离散度、音频重呈现一致性）路由进获取决策——此刻该
+  重听还是该搜外部，选对动作直接决定效果（选错的两个方向都有载体实证：该重听时继续搜=
+  错误假设被佐证得更牢；该停时继续搜=over-search 答错）。
+- **杠杆二（次）：证据准入门**。检索结果先进候选区，按"与当前语义假设的佐证结构 + 来源
+  质量 − 冲突"决定是否进入冻结核上下文；用 AudioRAG 的 A/B/C/D 错误分类学测 Knowledge-
+  error 下降且 type-D 不增。
+
+**明确不研究**：部署期 need-detection 的通用检测器（载体无负类，不可测）；跨实例/跨轮
+知识写入（归 R3）；通用轨迹控制（归 R6）；阈值可靠性理论（归 R8，R2 产出可被其消费）。
+
+---
+
+## §5 实验基线与数据集
+
+### §5.1 数据集批判性四问
+
+**Omni-DeepSearch-640**（主载体候选，T1）：
+- 构造合理？**高（三者最严）**：音频 QC + 四道 GPT-5 过滤（纯问题推理过滤、first-hop
+  实体泄漏过滤、视觉必要性过滤等）+ 人工唯一性复核；一个非根节点绑定近期新闻以对抗参数
+  捷径；Wikipedia 知识图谱路径 k≥5。
+- 代表性？**中偏高**：15 类覆盖"检索目标×音频内容"两维；仅 640 题、YouTube 开放域，作者
+  自述未覆盖噪声/多语。
+- 构成新标准基线？**接近但未成立**，四个阻断项：仅一个 train split；无冻结检索快照（结果
+  随时间漂移）；无 no-tool 直读行；温度 0 单样本、15 细类每类约 43 题——统计分辨率撑不起
+  12 模型排名。**可作方向性主载体**。
+- 它对比了什么？12 个模型统一 pipeline 横比（Gemini-3-Pro 43.44 最强；最佳开源 Mimo-V2.5
+  11.72；**本项目核 Qwen3-Omni-30B Thinking 仅 6.56**）；预算消融三档与类别非均匀性
+  （§4.3）；oracle 分解三行（§1.2，仅 Gemini-3-Pro 口径）；三 LLM judge 多数投票。
+
+**AudioRAG-500**（次载体，T1）：
+- 构造合理？**中**：两道过滤设计合理，但过滤器与错误判官都见 gold audio attribute，且
+  80% 条目由 GPT-4o 从八个公开数据集元数据生成——检索侧污染未处理。
+- 代表性？**中**：音源跨 sound/music/speech（假设槽型覆盖=言语实体/声音事件/音乐属性），
+  无难度分层。
+- 新标准基线？**否**：n=500、无 CI、无 split、无工具消融、无检索质量测量。
+- 它对比了什么？六个裸模型（Qwen3-Omni raw **37.0**、Gemini-2.5-Flash 45.0 等）+ 两个
+  agentic 臂（Qwen3-Omni+Qwen3-8B 46.2）；GPT-4o judge 三次平均 + A/B/C/D 错误分类学。
+
+**VoiceAgentRAG-200**（VoiceAgentRAG 2603.02206）：合成 12 文档纯文本 KB、scripted 轮次、
+无答案质量轴、唯一基线是 Traditional RAG（hit 75%、110.4ms→0.35ms）。**放弃**——仅作 R9
+latency/cache 参考。
+
+**A1′/O 臂锚数据集（Spoken-SQuAD / SLUE-SQA-5，T2）**：官方 gold passage 真实存在
+（Spoken-SQuAD 文本 span 比对；SLUE-SQA-5 的 gold 为 40 秒口语段，按官方口径整段判定），
+是 gold-evidence 诊断与阶段二组织对照实验的唯一可构造载体；语音为 TTS/朗读态，作诊断锚
+不作主载体。
+
+### §5.2 readiness 表
 
 | 资产 | 本地 | lock | split | 评测依赖 | 缺口/如实声明 |
 |---|---|---|---|---|---|
-| Omni-DeepSearch-640 | 有（LOCAL_CANDIDATE_UNFROZEN；merged.json 640 条实测可读） | 未入 | 官方仅 train | 三 LLM judge（外部 API） | 无检索快照/负类/dev-test；golden_path=实体链（480 条），trace/* 160 条（25%）无该字段；部分 gold 证据为图像态（如扉页罗马数字例） |
+| Omni-DeepSearch-640 | 有（LOCAL_CANDIDATE_UNFROZEN；merged.json 640 条实测可读） | 未入 | 官方仅 train | 三 LLM judge（外部 API） | 无检索快照/负类/dev-test；golden_path=实体名链且仅 480/640 条有（trace/* 160 条无该字段）；部分 gold 证据为图像态 |
 | AudioRAG-500 | 未落盘 | 未入 | 论文未给 | GPT-4o judge | 无 frozen corpus/工具消融；构造期 gold 泄漏入过滤器与判官 |
+| Spoken-SQuAD / SLUE-SQA-5 | 未落盘（公开第三方资产，获取=authorization 义务） | 未入 | 官方 split | 官方 QA 判定协议 | gold passage 官方存在；A1′ 在开放检索模式下构造（证据取自锚的官方 passage 池，非对本题音频的重表达） |
 | VoiceAgentRAG-200 | 未落盘 | 未入 | scripted | — | 无语音/答案质量轴（仅 R9 参考） |
-| Spoken-SQuAD / SLUE-SQA-5（**A1′ 承重行**） | 未落盘（公开第三方资产，获取=authorization 义务） | 未入 | 官方 split | 官方 QA 判定协议（Spoken-SQuAD=文本 span 比对；SLUE-SQA-5=按 40s 口语段判定的官方口径） | gold passage 资产事实：官方文本/口语段（SLUE-SQA-5 gold 为口语段非纯文本）。A1′ **在开放检索模式下构造**：证据取自该锚的官方 passage 池（外部语料条目=第 1 类信息），非对本题音频的重表达；语音为 TTS/朗读态，作诊断锚不作主载体 |
 
-**载体风险与回退梯（round-05 MAJOR-B）**：项目核 Qwen3-Omni-30B（Thinking）在主载体论文表中仅
-6.56，且同表显示弱模型从 search-guided refinement 获益有限（Mimo-V2.5 给定 gold entity 也只有
-22.03——同表数据；作者明写弱模型几乎不受益的原句支撑数对为 12.50/11.72）——主载体对本核存在
-**近地板风险**，correct→wrong 判定的样本基数亦小（约 40 题量级）。回退梯（触发条件=未过 §5.4
-assay-sensitivity 检定）：①按官方 pipeline 校核本核 prompt/思维链配置后重测灵敏度；②分层收缩
-到本核实测有牵引力的类别子集（按本核自测的分层读数选定；论文表本核口径下最高为 IMAGE 10.62 与
-SINGLE 9.38——SPEECH 5.83 反为最差层之一，他核预算消融的 SPEECH 强势不得串用），主张范围同步
-收窄；③仍地板则主载体降级为方向性可行性证据、AudioRAG-500 升为主载体（其 raw 37.0 远离地板；
-其构造期 gold 泄漏入过滤器与判官的污染面照 §3.4 表如实随载体升格进入主结论限定），并如实改写
-全部 K 判据的载体绑定；④梯尽（全部载体失敏）则 R2 不得宣布任何判死或胜出结论，回 owner 重议
-载体或降级为方向性可行性档。判死永不在未过灵敏度检定的载体上宣布。
-judge-API 依赖与 split 冻结方案属 Stage-2 执行合同问题，此处登记不解决。
+### §5.3 基线方法
 
-## §4 方法合同
+- **须复现**（项目核 Qwen3-Omni-30B，官方协议）：no-tool 直读行（论文缺失，补上本身即
+  贡献）；**固定档阶梯**——论文三档 (5,1)/(10,3)/(15,5) 起步，向上扩档直至该档实测成本
+  （至少 retrieval hops 与 core calls 两维的均值与 P95）**不低于自适应臂的实测成本**，
+  保证"效果最强固定策略"不是被论文档位人为封顶的天花板；AudioRAG raw + agentic 两臂。
+  先复现本核 6.56 这个数字，再谈改进。
+- **只引用**：Gemini/Mimo 等他核数字，不改写为本项目结果。
+- **对照臂**：always/never 两个角点；**random-matched-cost（与自适应臂等实测成本的随机
+  调度）保留为最低归因对照**——它回答"同样的量、随机地花"能否达到同样效果，是把"调度更好"
+  与"只是搜得更多"分开的装置。这是效果归因对照，不是预算优化；等预算读数/Pareto 分析仍
+  降为后期诊断。
 
-### §4.1 五元组（decision quantity 落位，MAJOR-3 修复）
+### §5.4 载体风险与回退梯
+
+项目核 Qwen3-Omni-30B（Thinking）在主载体论文表中仅 6.56，且同表显示弱模型从 search-
+guided refinement 获益有限（Mimo-V2.5 给定 gold entity 也只有 22.03；作者明写弱模型几乎
+不受益，原句支撑数对 12.50/11.72）——主载体对本核存在**近地板风险**，correct→wrong 判定
+的样本基数也小（约 40 题量级）。因此设**灵敏度前置检定**（§7）：未通过检定不得触发任何
+判死，改走回退梯：
+
+① 按官方 pipeline 校核本核 prompt/思维链配置后重测灵敏度；② 分层收缩到本核实测有牵引力
+的类别子集（按本核自测分层读数选定；论文表本核口径下最高为 IMAGE 10.62 与 SINGLE 9.38，
+SPEECH 5.83 反为最差层之一——他核预算消融的 SPEECH 强势不得串用），主张范围同步收窄；
+③ 仍地板则主载体降级为方向性可行性证据、AudioRAG-500 升为主载体（raw 37.0 远离地板；
+其构造期 gold 泄漏污染面如实随载体升格进入主结论限定），全部 K 判据的载体绑定如实改写；
+④ 梯尽（全部载体失敏）则 R2 不得宣布任何判死或胜出结论，回 owner 重议载体或降级为方向性
+可行性档。**O 臂的锚载体（Spoken-SQuAD/SLUE-SQA-5）失敏时同用梯④出口**：K5 不触发判死、
+回 owner（其专属分辨力前置见 §7 K5）。judge-API 依赖与 split 冻结方案属 Stage-2 执行合同
+问题，此处登记不解决。
+
+---
+
+## §6 实验设计与方法合同（三阶段的联合评价面）
+
+### §6.1 因果阶梯（A0–A6 + O 臂）
+
+单臂递进、每臂只回答一个问题；三阶段共享此阶梯，逐维消融：
+
+| 臂 | 阶段归属 | 识别对象 |
+|---|---|---|
+| A0 audio-only 直读 | 卫生基线 | incumbent（论文缺失的报告行） |
+| A1 gold-entity + gold-path ceiling（通用 gold-hypothesis ceiling 的实体槽实例，按载体资产形态） | 阶段一 | 实体/路径修复的可恢复上界；对齐论文 oracle 分解（33.76/43.44/50.00，仅 Gemini-3-Pro 口径，本核数值须自测；A1 含 gold-path，严格 ≥ 论文 entity-only oracle，是"上界的上界"）。覆盖 480/640；trace/* 160 条无 golden_path，单列不计入 |
+| A1′ gold-evidence 受限诊断 | 阶段一 | 外部证据对冻结核的可恢复上界；仅构造于官方 gold passage 真实存在的锚数据集（T2）；证据"被使用"以 removal/swap 反事实判定 |
+| O1/O2 单面单向量 key vs 多面 key（等语料，含调优稀疏基线；仅 T2 锚数据集；备选对照=平铺 vs 图/层次） | 阶段二 | key 装载对"检得回且用得上"的牵引力 |
+| A2 检索 + 无条件拼接 | 阶段三 | 检索管线总收益与 evidence-induced harm |
+| A3 同 A2 证据集 + 准入/融合 | 阶段三 | 使用机制的独立贡献（§2.2 候选解释的检验位） |
+| A4a 通用自适应调度（同库同 answerer，成本记账；估计量=V̂_gen，**无任何感知不确定性输入**；re-resolve 为固定档，从 {0, 每题至多 1 次前置重听} 中按 dev 最优选定） | 阶段三 | 通用 query/hop/stop 调度的贡献（=MERGE 情形的全部内容） |
+| A4b = A4a + 感知不确定性路由（α1 项 + RE_RESOLVE 动作 + 双源动作选择） | 阶段三 | **音频特有机制的唯一识别臂：独立性主张挂 A4b−A4a 差分** |
+| A5 shuffled/irrelevant/conflicting 证据扰动 | 阶段三 | 盲从/污染/拒绝/correct→wrong（生成器=同类别跨题确定性重排与置换，无 LLM 生成内容） |
+| A6 已执行动作池上的离线 oracle | 阶段三 | 已执行菜单的 recoverable headroom（A1 缺位处的替补上界） |
+
+载体绑定：主=Omni-DeepSearch-640，次=AudioRAG-500（均 T1）；A1′/O 臂锚=Spoken-SQuAD/
+SLUE-SQA-5（T2）。单次实验只动一个创新模块；调度与准入同动须 A3×A4 析因；A4a/A4b 析因
+强制。
+
+### §6.2 方法合同（五元组）
 
 ```text
-state_t   = { H_t 实体/事件假设集（含各假设自一致性计数 agree(h)）,
-              E_t 已接纳证据（含来源、与 H_t 的 corroboration 标记 corr(e,h)）,
+state_t   = { H_t 音频语义槽假设集（槽型：实体/事件/情感/场景/声音事件/音乐属性等；
+              主载体实例化为实体/事件与声音事件/音乐属性槽；含各假设自一致性计数 agree(h)）,
+              E_t 已接纳证据（含来源、与假设的佐证标记 corr(e,h)）,
               b_t 分维预算余额（core calls / search calls / audio seconds）,
               动作历史 A_{1..t-1} 与各动作后的候选答案漂移记录 }
 action_t  ∈ { RE_RESOLVE_AUDIO, SEARCH(q), ADMIT(e)/REJECT(e), ANSWER, STOP/ABSTAIN }
 
-decision quantity（前瞻估计量族，proposal 层声明；选型与权重标定=authorization 义务）：
+前瞻价值估计量族（信号分层是 A4a/A4b 差分的定义所在）：
+  A4a（通用臂）:  V̂_gen(SEARCH(q)|s_t) = α2·gapCorr(E_t, ĥ_t) + α3·nov(q|A_{1..t-1})
+                  ——无任何 H_t 离散度输入；RE_RESOLVE 不可用（固定档）
+  A4b（音频臂）:  V̂_aud(SEARCH(q)|s_t) = V̂_gen + α1·(1 − maxAgree(H_t))
+                  V̂(RE_RESOLVE|s_t)   = β1·disp(H_t) + β2·(1 − audCons(ĥ_t))
+  准入门:         V̂(ADMIT(e)|s_t)     = γ1·corr(e, ĥ_t) + γ2·srcQual(e) − γ3·confl(e, E_t)
 
-  **信号分层声明（round-05 MAJOR-A 修复，差分含义在此唯一定义）**：
-  感知不确定性信号（disp/audCons 及 α1 项）**只允许进入 A4b**。A4a（通用调度臂）的估计量为
-    V̂_gen(SEARCH(q)|s_t) = α2·gapCorr(E_t, ĥ_t) + α3·nov(q|A_{1..t-1})     ← 无任何 H_t 离散度输入
-  A4b 在 V̂_gen 之上新增两件事：
-    V̂_aud(SEARCH(q)|s_t) = V̂_gen + α1·(1 − maxAgree(H_t))
-    V̂(RE_RESOLVE|s_t)    = β1·disp(H_t) + β2·(1 − audCons(ĥ_t))            ← A4a 中 RE_RESOLVE 不可用
-  于是 `A4b − A4a` 的含义被唯一钉住：**把感知不确定性路由进获取决策（含双源分配）的净价值**。
-  §3.2/§6 的措辞与此对齐：通用调度=不见感知不确定性的调度。
+可实现定义：maxAgree = 已采样候选答案中语义槽众数占比；disp = 1 − maxAgree；
+audCons = 已执行音频重呈现中首选假设被复现的比例（无重呈现时=1）；
+corr(e,h) = 证据与假设的槽值重叠率（确定性匹配：实体/关系槽=字符串/别名匹配，
+类别型槽（情感/物种/场景）=类别及其别名表匹配）；
+gapCorr = 1 − max_{e∈E_t} corr(e, ĥ_t)（只按首选假设计，不从证据侧反推假设全集后验）；
+nov = query 与历史 query 最大词面/实体重叠的补；srcQual = 预注册来源白名单查表；
+confl = 与已接纳证据在同一语义槽上的取值冲突计数。
+时序合法性：全部输入只依赖 t 步及以前的已观测量——是前瞻估计而非事后回报；实际回报仅用于
+离线标定，不进在线决策。
 
-  可实现定义（入时序合法性枚举）：
-    maxAgree(H_t) = 已采样候选答案中实体槽众数占比；disp(H_t) = 1 − maxAgree(H_t)；
-    audCons(ĥ_t) = 截至 t 步已执行的音频重呈现（RE_RESOLVE 产出的重听/重询变体）中，首选假设
-    ĥ_t 被复现的比例（t 步前无重呈现时定义为 1，即无证据怀疑感知）。
-  V̂(ADMIT(e) | s_t) = γ1·corr(e, ĥ_t) + γ2·srcQual(e) − γ3·confl(e, E_t)
-  其余变量的可实现定义（round-06 MINOR-1）：corr(e, h) = 证据 e 与假设 h 的实体/关系重叠率
-  （确定性字符串/别名匹配）；**gapCorr(E_t, ĥ_t) 只读 corr(e, ĥ_t)**（= 1 − max_{e∈E_t}
-  corr(e, ĥ_t)；E_t 的 corroboration 标记只按 ĥ_t 计，不得从证据侧反推 H_t 全集后验）；
-  nov(q|A) = q 与历史 query 的最大词面/实体重叠的补；srcQual(e) = 预注册来源白名单等级表的
-  查表值；confl(e, E_t) = e 与已接纳证据在同一实体槽上的取值冲突计数（确定性比对）。
-  时序合法性：上述全部输入（agree/maxAgree/disp/audCons/gapCorr/nov/srcQual/confl/预算余额）仅
-  依赖 t 步及以前已观测量——是"前瞻估计"而非"事后回报"；执行后的实际回报仅用于 §5.2 合理性层的
-  离线 calibration（对 delta_E），不进在线决策。
-  评价层不合成总分（§5.2 纪律）；决策层的标量组合式即上式（在此显式声明，不再两层缺席）。
-
-policy    : 阈值化规则（确定性逻辑，不新增 LLM）：argmax_a [ V̂(a|s_t) − λ·c(a) ]，且
-            max_a [V̂−λc] ≤ 0 时 ANSWER/STOP；阈值 λ 与权重 α/β/γ 归属=执行合同预注册（dev 上
-            离线标定，禁 test gold）。与自由生成 controller 的可识别差异：决策量/阈值/记账全部
-            外显可审计，且 A4 臂族直接与"prompt 自由决定"对照臂对比。
-transition: SEARCH 输出先进 E_t 候选区（不进核上下文）；仅 ADMIT 的证据进入核上下文；
-            RE_RESOLVE 更新 H_t；一切写入带 provenance。
+policy    : 确定性阈值规则（不新增 LLM）：argmax_a V̂(a|s_t)；max_a V̂ ≤ τ 时 ANSWER/STOP。
+            τ 与 α/β/γ 在 dev 上离线标定（禁 test gold），选型与标定协议=authorization
+            预注册项。步数/调用硬上限只作防死循环的工程护栏（记录、不作为研究对象）。
+transition: SEARCH 输出先进候选区（不进核上下文）；仅 ADMIT 的证据进入核上下文；
+            RE_RESOLVE 更新 H_t；一切写入带出处。
 ```
 
-### §4.2 模块标注表（与 §5.1 对齐，MINOR-2 修复）
+与自由生成 controller 的可识别差异：决策量、阈值、记账全部外显可审计，且 A4 臂族直接与
+"prompt 自由决定"的对照臂对比。
+
+### §6.3 模块标注表
 
 | 模块 | 状态 | 最低对照 |
 |---|---|---|
-| 知识源与索引 | FIXED（执行合同冻结；trace-logging 复放） | 不静默变化 |
-| audio→query | BASELINE VARIABLE | **gold-entity ceiling（=A1）**、single-、multi-hypothesis |
-| retrieval planner | **PROPOSED INNOVATION（主）**，内部析因 A4a/A4b | best fixed / random matched-cost / always与never 角点 / **A4a（通用调度）** |
+| 知识源与索引 | 主载体 FIXED（trace-logging 复放）；T2 锚数据集上 O1/O2 对照 | 不静默变化 |
+| audio→query | BASELINE VARIABLE | gold-entity ceiling（=A1）、single-、multi-hypothesis |
+| retrieval planner | **PROPOSED INNOVATION（主）**，内部析因 A4a/A4b | best fixed / random matched-cost / always与never 角点 / A4a |
 | evidence processor + admission | PROPOSED INNOVATION（次） | raw top-k / relevance-only / admission |
-| context/use | BASELINE VARIABLE（§2.3 候选解释的检验位） | 同一 evidence set 下 unconditional vs structured |
-| controller/evaluator | OFFLINE EVALUATOR（frozen judge 可选，续78 合规） | hand rule / terminal-only / offline oracle |
+| context/use | BASELINE VARIABLE（§2.2 候选解释的检验位） | 同一证据集下 unconditional vs structured |
+| controller/evaluator | OFFLINE EVALUATOR（frozen judge 可选，红线合规） | hand rule / terminal-only / offline oracle |
 
-单次实验只动一个 INNOVATION 模块；planner 与 admission 同动须 A3×A4 析因；planner 模块内
-A4a/A4b 析因强制。
+### §6.4 复放与污染审计
 
-## §5 实验与评价
+pin 检索服务/日期/query/参数；逐次落盘 URL/文档 ID/rank/内容 hash；共享查询跨臂复用同一
+返回；自适应臂独有查询保留完整 trace 与内容 hash；可达性/污染分层单列报告。**可选请求
+（不默认、未获批前不生效）**：将"检索返回正文单向落盘至离线诊断槽（controller 不可读）"
+作为 trace-logging 授权的受限扩展交 owner；若获批，K2 由抽样估计升级为全量判定。
 
-### §5.1 因果阶梯（MAJOR-1/-2 修复后）
+### §6.5 四层评价（不合成总分）
 
-| 臂 | 识别对象 |
-|---|---|
-| A0 audio-only direct | incumbent（实验卫生基线） |
-| A1 gold-entity + gold-path ceiling | 音频实体/路径修复的可恢复上界；对齐论文 oracle 分解（33.76/43.44/50.00——**仅 Gemini-3-Pro 口径**，本核数值须自测；A1 因含 gold-path 严格 ≥ 论文 entity-only oracle，是"上界的上界"，如实标注）。覆盖：480/640；trace/* 160 条无 golden_path，单列不计入 |
-| A1′ gold-evidence 受限诊断 | 外部证据对冻结核的可恢复上界；**仅构造于官方 gold passage 真实存在的锚数据集**（Spoken-SQuAD/SLUE-SQA-5）；证据"被使用"以 removal/swap 反事实判定，不以出现在上下文为准；如实声明其载体与主载体分布不同 |
-| A2 retrieved + unconditional concat | 检索管线总收益与 evidence-induced harm |
-| A3 同 A2 evidence set + admission/fusion | 使用机制独立贡献（SQ3；§2.3 候选解释检验位） |
-| A4a 同 store 同 answerer 等成本、通用自适应 SEARCH 调度（估计量=V̂_gen，**无任何感知不确定性输入**；re-resolve 为固定档：从 {0, 每题至多 1 次前置重听} 中按 **dev 上最优**选定（round-06 MINOR-3），选取规则=authorization 预注册项，K1a 对照=最优固定 SEARCH 档 × 该选定档） | 通用 query/hop/stop 的贡献（=MERGE 情形的全部内容） |
-| A4b = A4a + 感知不确定性路由（α1 项 + RE_RESOLVE 动作 + 双源分配） | **音频特有机制的唯一识别臂：主张挂 A4b−A4a** |
-| A5 shuffled/irrelevant/conflicting evidence | 盲从/污染/拒绝/correct→wrong。生成器：shuffled/irrelevant=同类别跨题确定性重排与采样（无 LLM）；conflicting=跨题证据置换构造（无 LLM 生成内容）；若执行期改用 LLM 生成，按 C1 记录且声明不参与作答（MINOR-4） |
-| A6 offline oracle over executed pool | 已执行菜单的 recoverable headroom（A1 缺位处的替补上界） |
+- **有效性**：反事实边际效用 delta_E = U(M(x,q,E),y) − U(M(x,q),y)；报 official accuracy、
+  paired delta、bootstrap 95% CI、McNemar、SESOI、wrong→correct/correct→wrong、按任务
+  类别/音频类别/hop 深度分桶（信息角色可判定的载体上另按信息角色分桶，§1.3）。
+- **合理性**（离线诊断，不进主 leaderboard）：retrieve-skip、continue-stop、admit-reject
+  混淆矩阵；V̂ 各分量对离线 delta_E 的标定与误差界；answer-bearing coverage、出处覆盖、
+  unsupported claim；A5 下的拒绝率与稳定性；removal/swap 反事实。
+- **可靠性**：seed/run 方差、correct→wrong、worst-group/尾部、coverage-quality 曲线、跨
+  音频类型与检索模态的符号一致性；abstain 不得靠压 coverage 造安全。
+- **效率（记账层，只报告不设限）**：九维成本向量（retrieval hops, result bytes, core
+  calls, audio seconds, controller tokens, judge calls, wall-clock, API currency,
+  index/snapshot amortized），报均值与 P95。探针与信号开销显式入账（A4b 的逐步候选答案
+  探针为其独有 core-call 成本；准入侧 confl/srcQual 计算同；O2 的库构建成本按
+  index/snapshot amortized 维计入）；报告"含/不含探针开销"双读数，保证臂间成本口径可比
+  （无预算 cap 制下双读数的作用是口径透明，效果侧的成本归因由 §5.3 固定档阶梯、
+  random-matched-cost 对照与 §7 的 `COST_DISPARATE` 触发承担）。记账维度与口径=执行合同
+  预注册。等成本最优质量、等质量最低成本、accuracy-cost Pareto、等预算读数=后期整合/压降
+  阶段的诊断，本阶段不进主判据。
 
-载体：主=Omni-DeepSearch-640 + 次=AudioRAG-500（继承）；A1′ 锚=Spoken-SQuAD/SLUE-SQA-5。
+三阶段的"高效"主张全部落在效果对照上：高效组织=O2 相对 O1 的任务效用与 answer-bearing
+coverage 提升；高效使用=A4/A3 相对效果最强固定档与无准入臂的四层读数（成本九维随行报告）。
 
-### §5.2 四层评价（全文件内，round-05 MAJOR-C 修复；不合成总分）
+---
 
-**有效性**：反事实边际效用 `delta_E = U(M(x,q,E),y) − U(M(x,q),y)`；报 official accuracy、
-paired delta、bootstrap 95% CI、McNemar、SESOI、wrong→correct/correct→wrong、按任务类别/音频
-类别/hop 深度分桶。
-**合理性**（离线诊断量，不进主 leaderboard）：retrieve-skip、continue-stop、admit-reject 混淆
-矩阵；V̂ 各分量（含 V̂_gen/V̂_aud/ADMIT 式）对离线 delta_E 的 calibration 与误差界（MAJOR-3
-标定义务落点）；answer-bearing coverage、provenance、unsupported claim；A5 下拒绝率与稳定性；
-removal/swap 反事实。
-**可靠性**：seed/run 方差、correct→wrong、worst-group/尾部、coverage-quality、跨音频类型与
-检索模态符号一致性；abstain 不得靠压 coverage 造安全。
-**效率**：成本保持向量 `(retrieval hops, result bytes, core calls, audio seconds, controller
-tokens, judge calls, wall-clock, API currency, index/snapshot amortized)`；报均值与 P95、超预算
-失败率、等成本最优质量、等质量最低成本、accuracy-cost Pareto、每 hop 边际效用；"等预算"指
-逐实例 hard cap 还是平均预算、落在哪一维=执行合同预注册。
-**探针与信号开销入等预算（MINOR-3 + round-05 MINOR-e）**：`r_consistency`/K2 所需逐步候选答案
-探针（信号分层后为 **A4b 独有** core-call；A4a 仅在 K2 判定所需限度内使用并同等计费）与
-admission 侧 `confl/srcQual` 的计算调用，全部显式计入对应臂的等预算（维度与 cap 形式预注册），
-并报告"扣除探针成本前/后"双读数。
+## §7 击杀判据（定义=本版；数值=authorization 前 power analysis 预注册）
 
-### §5.3 复放与污染审计（续77① 范围内，未请求扩展）
+**灵敏度前置检定**：任何 K 判死只在载体通过检定后有效——① A1（其 trace/* 不可构造子集由
+A6 替补同一角色）− A0 在项目核上 ≥ 预注册最小可检余量；② 固定预算档曲线在本核上斜率非零；
+③ correct→wrong 事件可用样本基数 ≥ 预注册下限。未通过者不触发判死，改走 §5.4 回退梯——
+"杠杆判死"与"载体无分辨力"由此可区分。
 
-pin 服务/日期/query/参数；逐次落盘 URL/document ID/rank/content hash；共享查询跨臂复用同一返回；
-adaptive 独有查询保留完整 trace 与内容 hash；单列 reachability/contamination strata。**可选请求
-（不默认、owner 未裁前不生效）**：将"检索返回正文单向落盘至离线诊断槽（controller 不可读）"作为
-续77① 的受限扩展交 owner——若获批，K2 由抽样估计升级为全量判定，§5.4 相应升级。
-
-### §5.4 击杀阈值（定义=本版；数值=authorization 前 power analysis）
-
-**Assay-sensitivity 前置（round-05 MAJOR-B 修复）**：任何 K 判死只在载体通过灵敏度检定后有效。
-检定（authorization 预注册数值）：①A1（gold-entity ceiling；其 trace/* 不可构造子集由 A6 替补
-承担同一检定角色）− A0 在项目核上 ≥ 预注册最小可检余量；②固定预算档曲线在项目核上斜率非零；
-③correct→wrong 事件的可用样本基数 ≥ 预注册下限。
-未通过者不触发判死，改走 §3.4 载体回退梯；"判死"与"载体无分辨力"由此可区分。
-
-- **K1a（通用调度有效性）**：等预算 A4a vs **最优固定 SEARCH 档 × 选定 re-resolve 固定档**，
-  paired delta 95% 下置信界 ≤0 → 调度类杠杆整体判死，R2 回落 MERGE-或-kill 讨论。
-- **K1b（音频特有性，独立性判据；合取条件版——round-06 制度性对冲采纳）**：需同时满足
-  ①`A4b − A4a` 的 paired delta 95% 下置信界 >0；②标定后的 β 分量权重与零可区分（否则音频特有
-  信号未实际承重）。任一不满足 → 音频特有主张判死，按 §6 路由 MERGE（即使 K1a 通过）。
-  SESOI 数值=authorization 前 power analysis 预注册。α1 移出 A4a 后差分偏倚单向指向"支持独立"，
-  合取条件②即为其对冲——勉强为正的 K1b 读数不得单独支撑独立主张。
-- **K2（over-search，判官抽样复核估计版；仅依赖已授权落盘量）**：t* = 首个"当步候选答案（离线
-  与 gold 比对）正确"的步；over-search 事件 = 最终答案错误 ∧ t>t* 存在 SEARCH。判定输入=已落盘
-  答案轨迹与 rank/hash 轨迹；**判官抽样复核**的抽样框=全部 over-search 候选 episode（非全轨迹
-  池），判官输入=该 episode 的答案轨迹与动作序列（不含检索正文），CI 覆盖对象=over-search
-  事件率的估计；抽样率与判官协议预注册。如实标注：这是"答案轨迹级判定+抽样复核"的事件率估计，
-  非证据内容级全量判定。A4b 未把该率相对最优固定档降低（non-inferiority margin 预注册）→
-  调度杠杆判死（受 assay-sensitivity 前置约束）。若 §5.3 可选请求获批则升级证据内容级全量版。
-- **K3（复制判据）**：AudioRAG-500 上按预注册 replication criterion 判方向一致性（无分辨力的
-  轻微负值不自动算翻转）。
-- **K4（admission）**：A3 未降 Knowledge-error 且 type-D 不增 → admission 判死，留 R5/R8 组件。
+- **K1a（通用调度有效性）**：A4a vs **效果最强的固定策略**（固定档阶梯按 §5.3 向上扫至
+  成本不低于 A4a，取其中效果最高档×选定 re-resolve 固定档；并列报告论文 agentic SOTA 臂
+  与 random-matched-cost 归因对照；成本九维记账报告、不设限），paired delta 95% 下置信界
+  ≤0 → 调度类杠杆整体判死，R2 回落 MERGE-或-kill 讨论。**成本悬殊诚实触发**：若自适应臂
+  实测成本超出对照阶梯最高档的预注册倍数，该读数标注 `COST_DISPARATE` 单独报告，不得单独
+  支撑调度杠杆结论。
+- **K1b（音频特有性=独立性判据；合取条件）**：须同时满足 ① A4b−A4a 的 paired delta 95%
+  下置信界 >0；② 标定后的 β 分量权重与零可区分（否则音频特有信号未实际承重）。任一不满足
+  → 音频特有主张判死，按 §8 路由 MERGE（即使 K1a 通过）。α1 移出 A4a 后差分偏倚单向指向
+  "支持独立"，合取条件②即为其对冲——勉强为正的差分读数不得单独支撑独立主张。
+- **K2（over-search；判官抽样复核估计，仅依赖已授权落盘量）**：t* = 首个"当步候选答案
+  （离线与 gold 比对）正确"的步；over-search 事件 = 最终答案错误 ∧ t>t* 存在 SEARCH。
+  判定输入=已落盘答案轨迹与 rank/hash 轨迹；判官抽样复核的抽样框=全部 over-search 候选
+  episode，判官输入=答案轨迹+动作序列（不含检索正文），CI 覆盖对象=事件率；抽样率与判官
+  协议=authorization 预注册。如实标注：这是"答案轨迹级判定+抽样复核"的事件率估计，**非
+  证据内容级全量判定**（升级路径见 §6.4 可选请求）。A4b 未把该率相对最优固定档降低
+  （non-inferiority margin 预注册）→ 调度杠杆判死。
+- **K3（复制判据）**：AudioRAG-500 上按预注册 replication criterion 判方向一致性（无分辨
+  力的轻微负值不自动算翻转）。
+- **K4（准入门）**：A3 未降 Knowledge-error 或 type-D 增多 → 准入门判死，留 R5/R8 组件。
+- **K5（装载对照，阶段二；仅 T2；两级判定）**：主载体的检定①②（gold-path、retry 档）在
+  锚数据集上不可构造，故 K5 **自带两条专属分辨力前置**（数值=authorization 预注册）：
+  ㈠ 锚上"判别槽为非语义槽"的 query 占比 ≥ 预注册下限；㈡ O1 单面 key 的检索层读数（R@k）
+  距天花板有预注册余量（语义面已饱和则多面 key 无处发挥）。**K5-r（检索层）**：O2 能否
+  检回 O1 检不回的目标 value，按面分层报告——当前锚载体唯一支持的判定层。**K5-t（任务层）**：
+  O2 相对 O1（含调优稀疏基线）无任务效用/answer-bearing coverage 增益 → 装载升级不立研究
+  主张，组织轴回落纯实验合同角色（§3.4 第 1、2 项保留，主线不伤）；K5-t 仅在"具备非语义槽
+  需求的载体"上生效，该载体到位前记 `PENDING_CARRIER`、不判死。前置任一不过 → K5 不触发
+  任何判死，回 owner 重议载体（与 §5.4 梯④同型出口）。
 - 多杠杆×多数据集×多分桶按预注册 multiplicity correction（Holm/max-T，复用 W1 统计基建）。
 
-## §6 独立性判据（可判定版）
+## §8 管辖界线与独立性判据
+
+R2 = 外部知识 action family 的专用调度与证据取舍。"通用调度"在本件中的定义=不见任何感知
+不确定性信号的获取调度（V̂_gen）；"音频特有"=把感知不确定性路由进获取决策。R6 消费 R2 的
+action 定义；R8 消费其可靠性阈值；R3 管跨实例知识写入。判据均匀适用：
 
 | 支持独立 | 判定载体 |
 |---|---|
-| 对象=外部知识 action family 专用 | §3.2 定义 + A4 臂族只含检索域动作 |
-| 音频特有机制可识别 | **K1b：A4b−A4a 下置信界 >0** |
-| 检索特有状态/动作/风险可识别 | §4.1 V̂ 的 β 分量（音频特有）与 γ 分量（admission）各有独立臂（A4b/A3） |
-| 至少一实验单独归因 R2 模块 | A3、A4a/A4b 各自独立归因 |
+| 对象=外部知识 action family 专用 | §6.2 动作空间只含检索域动作 |
+| 音频特有机制可识别 | K1b：A4b−A4a 下置信界 >0 ∧ β 权重非零 |
+| 检索特有状态/动作/风险可识别 | V̂ 的 β 分量（音频特有）与 γ 分量（准入）各有独立臂（A4b/A3） |
+| 至少一实验单独归因 R2 模块 | A3、A4a/A4b、O1/O2 各自独立归因 |
 | 与 incumbent 和 SOTA 闭合比较 | A0 + 固定档复现 + 官方协议 |
 
 | MERGE 触发（任一成立即路由 R6/R8） | 判定载体 |
 |---|---|
-| 唯一新内容=通用 query/hop/stop | **K1b 不显著而 K1a 显著** |
-| 信号/状态/阈值与其他 action family 完全同形 | V̂ 的 β 分量在标定中权重归零 |
+| 唯一新内容=通用 query/hop/stop | K1b 不成立而 K1a 显著 |
+| 信号/状态/阈值与其他 action family 完全同形 | V̂ 的 β 分量标定权重归零 |
 | 音频只是输入载体 | A4b−A4a 在全部音频类别分桶中无一显著 |
-| 无法独立消融 | A3/A4 析因在执行期不可实施（如实报告即触发） |
+| 无法独立消融 | A3/A4 析因执行期不可实施（如实报告即触发） |
 
-## §7 边界、暴露与处置
+## §9 边界、暴露、证据底座与处置
 
-- 红线与合规：§1.4；API-only；test gold 永不进 controller（K2/A1′ 的 gold 判定=离线诊断单列
-  记账）；数据/指标复用官方口径；H5 withheld。
-- **authorization 前义务清单**：K1-K4 数值（power analysis）；**V̂ 估计量族选型与权重/阈值标定
-  协议**（MAJOR-3 落点）；judge 保真合同（判官 prompt/重复性/异质复核）；数据集 lock 与分层
-  切分；检索服务 pin；三篇检索线检查点发布状态核查；探针成本的预算维度与 cap 形式；A5 扰动
-  构造的确定性种子协议。
-- 本版 exposure：新增=round-05/06 两轮评审的本地资产读取（merged.json 复算、三篇 LaTeX 源
-  复核、v2/v3 blob 对读）与本方对九项 round-06 MINOR 的核验编辑；零网络/零模型执行/零指标/零
-  下载/零原型；累计记账见 §1.5。
-- **处置与评审史**：round-03（12 清单，MAJOR）→ v3 → round-04（5 MAJOR，MAJOR）→ v4 →
-  round-05（3 新 MAJOR，MAJOR）→ v5 → **round-06（零 MAJOR，`MINOR_REVISION`，判定续77②
-  生效条件已成就）**→ 本版（v6）关闭 round-06 全部 9 项 MINOR（编辑性修订，含 K1b 合取条件
-  这一制度性对冲）。交 owner 做续77 生效裁定。
+**红线与合规**：§1.4；API-only；test gold 永不进 controller（K2/A1′ 的 gold 判定=离线诊断
+单列记账）；数据/指标复用官方口径；H5 withheld（跨域只借形状不承载效果）。
 
-**owner 裁定栏（续77 已录，round-06 判定生效条件成就）**：`CONDITIONAL_GO_STANDALONE_PENDING_
-V3_CHECKLIST` → 清单已由 round-03..06 评审链逐轮更替并于 round-06 判定成就 / 2026-07-29 /
-Decision-Log 续77；红线细化=续78。生效落笔权在 owner。
+**证据底座**（全部承重引用回溯 `wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl`，
+sha256+本地路径；分层按"正文实际引用"逐 id 枚举，可自校验）：
+- **深读层 16 篇**（数字承重仅限此层）：AudioRAG 2602.10656、Omni-DeepSearch 2605.08762、
+  VoiceAgentRAG 2603.02206（d1/d4 dossier）；SpeechDPR 2401.13463、SpeechRAG 2412.16500、
+  WavRAG 2502.14727（LaTeX 源核对）；donor 十篇（d6 dossier）：ToolGate 2606.03054、
+  FOVEA 2605.01345、CTA 2602.16699、VOI-search 2605.05701、PRA 2604.09482、Decocted
+  2604.04373、MemRL 2601.03192、AdaCompute 2604.14853、WebThinker 2504.21776、Reflexion
+  2303.11366。
+- **登记未深读层 21 篇**（本地全文+hash 在册，只作机制定位、不引数字）：2401.15884、
+  2404.15406、2404.16130、2405.14831、2407.12735、2409.12959、2410.05779、2501.05366、
+  2502.12110、2503.09516、2504.03160、2508.21475、2604.25122、2605.03231、2605.05185、
+  2605.10848、2605.14906、2605.15019、2605.16481、2605.18652、2606.28864。
+- **pre-2024 例外 6 篇**（时效规则：仅原理/数据集例外可引）：RAG 2005.11401、DPR
+  2004.04906、Self-RAG 2310.11511、ROME 2202.05262（原理）；OK-VQA 1906.00067、A-OKVQA
+  2206.01718（数据集）。其余 12 篇同批抓取仅存档不引用；2605.13277 在册但本版未引用，
+  不入枚举。
+
+**累计 exposure**：文献检索/fetch/全文与 PDF 表格阅读发生（31 篇 known-ID 抓取 62 行
+ledger 全 200；3 次 web 题名→id 解析；三篇检索线 LaTeX 源深读；round-04..06 评审的本地
+资产读取：merged.json 复算、LaTeX 源复核、blob 对读）；v7 重写为纯文本编辑。零模型/API
+执行、零指标运行、零数据集下载、零复现、零原型。
+
+**authorization 前义务清单**：K1–K5 数值（power analysis，含 K5 两条专属前置的下限/余量与
+K1a 的 COST_DISPARATE 倍数）；V̂ 估计量族选型与权重/阈值标定协议；judge 保真合同（含 K2
+抽样率与判官协议）；数据集 lock 与分层切分；检索服务 pin；三篇检索线检查点发布状态核查；
+多面 key 冻结编码器选型与检查点核查（emotion2vec/speech2vec/audio2vec 一类的发布状态、
+版本、许可）及 query 面路由/融合规则（§3.4 两选一的选定与参数）；各类别型槽的分类体系与
+别名表（来源/版本/冻结方式——§6.2 类别槽 corr/confl 确定性的前提）；实例级信息角色标注
+协议（仅当引入负类载体或受控注入时，§1.3）；探针成本记账口径；A5 扰动构造的确定性种子
+协议；O 臂资源占比与 O2 构建开销记账口径。
+
+**调研待办（不阻断本件收敛）**：情感/副语言型外部知识载体调研——寻找
+"情感/韵律假设作为 query 钥匙、答案需要外部知识"的成型基准（fetch+数据集四问）；当前读集
+内该槽型为"机制覆盖、载体缺位"，找到合格载体后再议是否入实验。
+
+**评审史与本版性质**：v3–v6 经 round-03..06 四轮隔离博导评审（round-06 对 v6 判零 MAJOR、
+判定续77② 生效条件成就），全部评审件与回应信在 `wiki/audit/system-first-stage1c-v2/`。
+v7 为 owner 2026-07-30 可读性与三阶段结构裁定后的全文重写，同日七点经对抗分析后确认
+（Decision-Log 续79）：①前置分型；②三问题簇+联合评价面（非时序串行）；③阶段二定为有界
+研究内容；④假设槽型泛化（"知识就是知识"，主张边界改挂信息角色）；⑤效果优先——预算类
+判据与定价叙事降为后期阶段，主判据=相对最强基线的效果提升+成本记账不设限；⑥前置分型升为
+知识三问（value 本体/key 表示/装载拆分）；⑦阶段二 O 臂主对照改为单面 key vs 多面 key。
+本版（v8）关闭 round-07 全部 3 MAJOR + 12 MINOR。**数字保真如实声明**：v6→v8 无任何数字
+被改写为不同值；v7 曾净删两数（SpeechRAG 0.5019、SpeechDPR 集成 28.88）与两个 id
+（2603.02206/2303.11366），v8 已全部恢复；净增两数（ToolGate 15,782、Gemini-2.5-Flash
+45.0）经 round-07 本地源核验为真。**相对 round-06 已审范围的变化五处**——(a) 组织从
+FIXED 扩展为有界研究内容（O1/O2+K5 两级）；(b) 假设槽型泛化（实体槽下判据与 v6 等价）；
+(c) K1a/评价层从等预算对照改为"固定档阶梯扫至成本可比+random-matched-cost 归因对照+
+COST_DISPARATE 触发"（K1b/K2/K3/K4 语义不变）；(d) O 臂对照对象由"平铺 vs 图"改为"单面
+vs 多面 key"；(e) §5.1 数据集批判性四问块自 v2 恢复（评审血缘=round-03，其承重数字经
+round-07 逐项源核）。
+
+**处置建议**：`GO_STANDALONE_AS_AUDIO_DRIVEN_KNOWLEDGE_ACQUISITION`（三阶段结构下主创新
+仍在阶段三，独立性判据不变）。**最强反方**：① 阶段二扩展稀释焦点——组织对照只在 T2 锚
+数据集可行、与 T1 主载体结论不闭合，若 K5 判死则白费预算；对策=O 臂预算上限预注册（占总
+预算小头）、K5 判死不伤主线、跨分型不互推。② 管辖论证（query/hop/stop 属 R6、预算可靠性
+属 R8）→ 应 MERGE；回应=判据均匀适用（§8 表），MERGE 触发条件可判定，触发即如实路由。
+
+**owner 裁定栏**：＿＿＿＿（结论 / 日期 / Decision-Log 条目号）——续77 有条件 GO 已录、
+round-06 判定 v6 生效条件成就、07-30 七点设计裁定已录（续79）；v7 收敛版的生效落笔权在
+owner。
