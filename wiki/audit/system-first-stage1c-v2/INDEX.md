@@ -14,6 +14,7 @@ campaign. Current research authority remains in `wiki/Research-Objective.md` and
 | `round-06` | doctoral-supervisor coreview of R2 v5 (+ v6 closure note in-dir) | `wiki/audit/system-first-stage1c-v2/round-06/2026-07-29-r2-v5-doctoral-supervisor-coreview.md` @ `8bd1f428eb872f651b3beb30f744492d95401a8f` | `MINOR_REVISION (zero MAJOR; 续77(2) condition adjudged fulfilled for v6)` |
 | `round-07` | doctoral-supervisor coreview of R2 v7 (+ v8 response in-dir) | `wiki/audit/system-first-stage1c-v2/round-07/2026-07-30-r2-v7-doctoral-supervisor-coreview.md` @ `08e84832918c0352285318ad13d0359039b9e873` | `MAJOR_REVISION_REQUIRED (3 MAJOR + 12 MINOR; target = uncommitted v7 worktree sha in frontmatter)` |
 | `round-08` | doctoral-supervisor coreview of R2 v8 @ 750debf | `wiki/audit/system-first-stage1c-v2/round-08/2026-07-30-r2-v8-doctoral-supervisor-coreview.md` @ `30a6648bbd7f3ed9e1f4b69f16c5e8c09f10947c` | `MAJOR_REVISION_REQUIRED (round-07 15/15 CLOSED; 1 new MAJOR + 7 new MINOR)` |
+| `round-09` | doctoral-supervisor coreview of R2 v9 @ 0f5aa11 (+ v10 closure note in-dir) | `wiki/audit/system-first-stage1c-v2/round-09/2026-07-30-r2-v9-doctoral-supervisor-coreview.md` @ `40e8d93758ab1692f914a581bd7786895f637add` | `MINOR_REVISION (zero MAJOR + 13 MINOR; 续77(2) condition adjudged fulfilled for v9)` |
 
 The registered request is immutable at the exact path and blob above. A reviewer report, verdict or
 correction must be a new artifact; it must not rewrite this submission. The requested
