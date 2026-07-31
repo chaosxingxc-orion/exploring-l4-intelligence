@@ -130,7 +130,7 @@
     {
       "role": "fulltext_ledger",
       "path": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl",
-      "sha256": "6883dac521f04faa415f0faacfe01d6f7893314a2876a47331efbfbdc5e26b7d",
+      "sha256": "d2b664aa784991cb1f3fdcd266e794ef0b8f8e955143361bfb8e1d36bd746b41",
       "mutability": "controlled-append-only",
       "load_policy": "targeted"
     },

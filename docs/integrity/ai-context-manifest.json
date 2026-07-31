@@ -62,7 +62,7 @@
       "class": "CURRENT",
       "load_policy": "targeted",
       "purpose": "machine current-survey asset router",
-      "sha256": "3b7efc6c388935a82002a5b77124a941a491156e19fdc682a8de370d4266a98f"
+      "sha256": "56c7a18ccec41fa0b365813a45e5a97199e859ea174e57ad4fe696581e15f068"
     },
     {
       "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
