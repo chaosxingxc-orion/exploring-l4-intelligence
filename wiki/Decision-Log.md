@@ -6,6 +6,46 @@
 
 ---
 
+### 2026-07-31（续82）· round-13 文献复审三裁决（发音库不降级 / 效果优先维持 / TFRL 身份保留）+ capability-first 主张口径（v15 起草授权）
+
+#### Context
+
+round-13（博导视角文献与技术可行性复审）对 R2 v14（blob ea2cdd0 @ dc5b048）判
+`MAJOR_REVISION_REQUIRED_BEFORE_FORMAL_OPENING`，唯一新事实=十篇近邻一手补扫（PRISM/Lei/
+RAC/DARAG/Siskos/RECAST/BR-ASR/WCTC/RAG-Boost/Speech-Hands）。对该评审的逐条对抗核验
+（三路独立子代理一手源核，记录在 round-13 回应件）：17/17 引用真实存在、零虚构；PRISM
+（EMNLP 2023）确认 training-free 的 TTS 逐实体声学 key-value memory——round-12 失效条件 7
+「知识自构造的发音候选」分支被合法触发，裁决翻转程序干净。核验同时发现：十篇无一同时满足
+API-only+training-free（PRISM/WCTC 白盒、其余含训练、Siskos 黑盒但依赖 CB 接口），评审
+自给的「合取命题」出路确实无人占据；评审若干表述有误（DARAG 为生成式纠错器非 comparator
+且检索为语义非语音学；RECAST 词表上限 4k；RAG-Boost 为 2 页 challenge 稿且自报 raw RAG 使
+WER 13.83→32.98 恶化；Speech-Hands 实为 ACL 2026 oral）。评审三处代拟触及 owner 已裁事项
+（机制核定位/效果优先纲领/TFRL 命名），依 reviewer-drift-guard 上交 owner 落笔。
+
+#### Decision（owner 三裁决 + 口径确认）
+
+①**发音库不降级**：维持机制核定位（续81⑦ 不翻案），重定位为 agentic 搜索/工具调用与使用
+的能力建设之一；不因两年前工作（PRISM 2023，Whisper/Transducer 时代白盒方法）自动降级；
+prior-difference 论证责任升级——新颖性锚点迁至合取命题（API-only 黑盒 × 世界知识 rescore
+环 × agentic 门控查询 × 口音/个性化轴），且须**站在 2026 Qwen3-Omni 视角重新审视过去实验
+结论**（2023 时代结论在冻结 omni 核上是否仍成立=Stage-2A reproduction-first 素材）。
+②**效果优先维持，效率就一般**：round-13 验收清单第 7 项（效率进主判据/matched-cost）
+被拒；效率保持九维记账不设限、不进主判据。③**TFRL 身份保留**：算法视角必须有先进性/
+新颖性，纯 in-context learning 不足以中顶会；落地=按 round-13 MAJOR-5 选项一正式化
+（bandit/黑盒策略优化对象、探索预算、credit assignment、与 random/Bayesian/evolutionary
+search 等预算对照），档 B（运行期自适应）升为身份承载形态。**口径确认**：主张句改
+capability-first——「效果上界超过专用 ASR+biasing/GER 管线」替代「替代 incumbent 成为
+新基线」，卸掉「替代」词汇隐含的成本可比承诺，与裁决②自洽。
+
+#### Consequences
+
+v15 起草授权：round-13 八项验收中 1/2/3/4/5/6/8 接受（其中 2 按 capability-first 改写、
+6 选保留 TFRL+做实、8 的克隆红线第四条仍待 owner——round-12 OBS-1 悬置不变），第 7 项
+拒绝（理由=三阶段研究纲领，回应件如实记录）。十篇近邻 D2 条目+ledger 登记=开题前义务；
+本条不授予 Stage-2A、模型/API 调用（研究模型）、指标运行、数据集获取、原型或 push/wiki
+发布权限。失效条件：十篇 D2 逐篇源核若推翻本轮一手核验的任何承重刻画，对应裁决的
+prior-difference 前提须重开。
+
 ### 2026-07-30（续81）· R2 方向重构十六轮对抗讨论收束（v11 合成授权）
 
 #### Context
