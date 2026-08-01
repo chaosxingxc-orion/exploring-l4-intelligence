@@ -175,7 +175,8 @@ delta、非劣性读数族）；⑤**Cost 效率**——同等质量需要多少
 
 （SRC-sel、DICT-SCALE、P13N、FC、VF-abl 等诊断/参照臂的层归属与判据绑定随 §6.2 臂表，
 其读数不承担上表之外的层归因；K0/K3/K-Gate 为非模块级判据——必要性门、复制门与能力
-预检门（门一，§6.1），均不入模块行。）
+预检门（门一，§6.1），均不入模块行；K-XOVER 随其载荷臂 DICT-SCALE 入 §6.2 臂表、判
+机制核价值窗口，不入模块行。）
 
 ### §1.1 任务结构与两段式
 
@@ -611,7 +612,8 @@ ToolGate 2606.03054（工具输出进上下文前的 pre-call 门；15,782 次�
 （六协议七臂、gold 三级粒度拆 headroom、全程零训练）；regime 边界 2606.28864（内部算力
 对感知任务系统性有害——零音频，仅 H5 类比；其"无条件重表达垫底"是定向反思统一律的
 反面教材）。搜索 agent 主线三篇（MMSearch/MMSearch-Plus/OpenSearch-VL）合计零准入/零
-显式停止/零归因——**donor 支线成熟、主线与语音域同空白**；MMSearch-Plus 的 under-call
+显式停止/零归因——**donor 支线成熟；该三篇主线与 §4.3 所盘点的语音域读集在准入/停止/
+归因三件上呈同型缺项（已检视集合内的描述性盘点）**；MMSearch-Plus 的 under-call
 归因（9/10 全程未调）=失效面的另一半。
 
 ### §4.3 语音域现状（两线五失效，压缩）
@@ -686,7 +688,8 @@ vs ASR+omni 双通道} 由实验裁决（语义理解准确率），如实报告
 |---|---|---|---|---|
 | MMAU/MMAR（短片段理解） | 音频自足 | A0 主路径；面工具增强；触发以不触发为正确 | 总分**非劣性**（READOUT）；副语言子类正 delta（READOUT_ONLY 符号验证、不立主张） | 触发特异性混淆矩阵（§6.5 必报）；非劣界预注册 |
 | SLU（SLURP 类） | 音频自足+实体槽 | 发音库+个性化（PS-abl/P13N 臂） | 发音库开/关的实体槽准确率正 delta（重切片读数=OBS 侧 READOUT 另列） | K-PS；W1 网格现成 |
-| **实体/知识密集 ASR（NB 三臂战场）** | 识别+知识 | 发音库+反思修正 | 实体准确率（主）+该集 WER（本载体 READOUT_ONLY） | **K-NB**+**K-XOVER**（DICT-SCALE 臂随整合载体运行）；§8 六组信息边界分组具名对照组（定义与强实现钉点见 §8 分组合同；入判对手集=整合载体条款）。**载体=身份冻结（本版实例化为数据包，路线 A；数值预注册留 Stage-2A 第零步）**：**主载体数据包=Earnings21 音频/评测集+ConEC version-pinned 上下文与修订转写层**〔Earnings-21 为纯评测语料、**无官方三分**（先前"官方 split"表述纠错；唯一官方分区 Eval-10 仅作快评）；ConEC 层=真实 slides/财报稿/参会者名单+半自动实体纠错 reference——**reference 采 ConEC 修订版**、与原始版对照处双报；核心样本=命名实体子切片（承接 Earnings-21 官方逐 token 实体标注层）；主指标=实体准确率+稀有词/逐实体类 WER、总 WER=READOUT_ONLY；oracle=gold entity/evidence 行+**ConEC oracle 上下文行**（其基线 shallow fusion 仅 10.41→10.29 而 oracle 达 9.69、**稀有词 WER** 余量 24.84→18.72〔ConEC 口径：稀有词=SPGISpeech top-3k 外、约 10% token〕——实体侧 headroom 一手数，强于 Siskos 轴残余；**总体-WER 偏置杠杆天花板≈0.7 点**〔Fox 未发表估计与 ConEC oracle 两独立来源同量级〕且 **Whisper large 零上下文 7.98〔6.94/17.43〕总 WER 与 B-WER 双优于含 oracle 的全部偏置结果**〔规模差 21.7×、实体面 oracle 仍胜 6/8——如实成对引；核质量主导，知识层可主张余量须在本核上重测=第零步 gate 动机〕——**总 WER 在本载体降 READOUT_ONLY**、主判读数=实体准确率与稀有词/实体侧）；近邻子集数据（稀词 38%/OOV 13.49%/6.2pp/77.4%/1.4pp）仅定量级、出自 ~5h 未标识子集；**本核数据包复测=Stage-2A 第零步 gate**（§7 灵敏度前置④，不过走 §5.3 回退梯）〕。**dev/标定合同=Earnings-22+ConEC 层**（ConEC 官方协议：Earnings-21 只作 evaluation；全部可调项〔τ/α/β/γ/δ/融合权重/候选宽度 N/切片/词典规模/prompt/停止规则〕dev 侧标定后冻结；按 call/company 分组防实体与公司泄漏；**dev 侧 reward=稀有词 WER〔标签无关、ConEC 外生定义；其 SPGISpeech top-3k 口径与 omni 核词表分布的错配风险随第零步复测重标定〕**——实体标注仅 Earnings-21 有、逐实体类指标不可在 E-22 上算，实体级标定读数待 §9 新增义务〔E-22 实体标注协议+E-22 上下文层可得性核验〕解锁后启用）。**知识时态与污染协议**：每场 call 的资料记录来源/版本 hash/available_at/相对 call_start 可用性；"当时可得真实上下文/事后可得资料/gold 构造 oracle"三臂分立；实时 web 检回测试转写或其派生页即记 oracle 污染；**预训练污染面**——ConEC 层登记 `IN_DISTRIBUTION_CARRIER`（不得支撑"外部知识供给核所缺信息"的时态结论）、**闭卷参数化召回探针**=第零步 gate 并行 READOUT_ONLY 读数、knowledge-tense 结论须待后 cutoff 第二载体；分段层（WhisperX/Whisper 迭代优化边界）入泄漏防护清单——若本核含 Whisper 谱系编码器须声明；ConEC 已提供的上下文不作 R2 独有构造贡献主张。**评分栈冻结**：fstalign+whisper_normalizer 口径统一；逐实体类数字不与他文表行拼接（跨系统级差实证在案）。复制载体=TED-LIUM3〔与 DARAG 所用 v1 有版本差注记〕；诊断集=PRISM 词典协议〔全合成 VITS、TTS 近逆性条款〕；组④对照载体=LibriSpeech+Rare5k〔稀词≠命名实体，子切片单独报数〕；另登记：PRISM 真实语音偏置协议〔组④/偏置轴候补，D2 在案〕；**Fox 偏置词表**〔随 Earnings21 repo 发布——**oracle 派生自测试参考**（test-gold 禁令：永不进 controller 路径、仅作离线诊断）+名企干扰、全场共享单表，ConEC 评其干扰项 "may be too simple"：诊断/简单模式梯级、非部署级〕；**Earnings25 排除裁定**〔2026-07 新基准：ASR-only、无上下文层、未引 ConEC——仅作外部复制/行业分层候补跟踪〕；SPGISpeech 排除〔稀词仅 6.16%+近邻协议改动〕；自建候补=先导数据集实体密集切片。**同载体基线阶梯（分信息边界报告）**：no-context → ConEC 真实上下文 shallow fusion〔zero-shot 但需 beam 内部；icefall 无现成 recipe、重实现义务在案〕→ ConEC oracle 行 → Fox 词表+alternate-spelling〔诊断级；其 ASP 为 13.6M 核绑定训练件〕→ Huang 2024 trained neural biasing〔同载体训练对手——**非上界**：其自表总 WER 10.40 不敌 shallow fusion 10.29，真上界=ConEC oracle；**无可运行公开物（四条坏指针）**——文献读数对照/结构参考档〕→ RECOVER 1-Best 档〔强制对照臂：单次 API 调用零训练、主载体 E-WER 23.81→15.90；全策略重实现后入判〕→ Siskos 重实现 → frozen omni 裸核 → R2 主张臂。**整合载体条款（对手入判边界逐组）**：NB 主载体同时承载 NB 三臂+A4a/A4b 差分+A2/A3+PS-abl+DICT-SCALE+FC 参照臂+K1a 对照臂族（固定档阶梯/random-matched-cost/serial-composition）+B-adapt〔若其预注册择 NB 主载体主报〕的整合运行——系统至少在一个载体上作为整体运行与归因。K-NB 对手入判：**⓪无上下文强专用 ASR（Whisper-large 级——§0 反向先验② 的载体实测行，
+| **实体/知识密集 ASR（NB 三臂战场）** | 识别+知识 | 发音库+反思修正 | 实体准确率（主）+该集 WER（本载体 READOUT_ONLY；护栏例外——对自身裸核的非劣读数=K-NB 成立侧条件，§7） | **K-NB**+**K-XOVER**（DICT-SCALE 臂随整合载体运行）；§8 六组信息边界分组具名对照组（定义与强实现钉点见 §8 分组合同；入判对手集=整合载体条款）。**载体=身份冻结（本版实例化为数据包，路线 A；数值预注册留 Stage-2A 第零步）**：**主载体数据包=Earnings21 音频/评测集+ConEC version-pinned 上下文与修订转写层**〔Earnings-21 为纯评测语料、**无官方三分**（先前"官方 split"表述纠错；唯一官方分区 Eval-10 仅作快评）；ConEC 层=真实 slides/财报稿/参会者名单+半自动实体纠错 reference——**reference 采 ConEC 修订版**、与原始版对照处双报；核心样本=命名实体子切片（承接 Earnings-21 官方逐 token 实体标注层）；主指标=实体准确率+稀有词/逐实体类 WER、总 WER=READOUT_ONLY；oracle=gold entity/evidence 行+**ConEC oracle 上下文行**（其基线 shallow fusion 仅 10.41→10.29 而 oracle 达 9.69、**稀有词 WER** 余量 24.84→18.72〔ConEC 口径：稀有词=SPGISpeech top-3k 外、约 10% token〕——实体侧 headroom 一手数，强于 Siskos 轴残余；**总体-WER 偏置杠杆天花板≈0.7 点**〔Fox 未发表估计与 ConEC oracle 两独立来源同量级〕且 **Whisper large 零上下文 7.98〔6.94/17.43〕总 WER 与 B-WER 双优于含 oracle 的全部偏置结果**〔规模差 21.7×、实体面 oracle 仍胜 6/8——如实成对引；核质量主导，知识层可主张余量须在本核上重测=第零步 gate 动机〕——**总 WER 在本载体降 READOUT_ONLY（护栏用途除外：对自身裸核的非劣读数=K-NB 成立侧
+条件、携成立侧否决权不携判死权，§7）**、主判读数=实体准确率与稀有词/实体侧）；近邻子集数据（稀词 38%/OOV 13.49%/6.2pp/77.4%/1.4pp）仅定量级、出自 ~5h 未标识子集；**本核数据包复测=Stage-2A 第零步 gate**（§7 灵敏度前置④，不过走 §5.3 回退梯）〕。**dev/标定合同=Earnings-22+ConEC 层**（ConEC 官方协议：Earnings-21 只作 evaluation；全部可调项〔τ/α/β/γ/δ/融合权重/候选宽度 N/切片/词典规模/prompt/停止规则〕dev 侧标定后冻结；按 call/company 分组防实体与公司泄漏；**dev 侧 reward=稀有词 WER〔标签无关、ConEC 外生定义；其 SPGISpeech top-3k 口径与 omni 核词表分布的错配风险随第零步复测重标定〕**——实体标注仅 Earnings-21 有、逐实体类指标不可在 E-22 上算，实体级标定读数待 §9 新增义务〔E-22 实体标注协议+E-22 上下文层可得性核验〕解锁后启用）。**知识时态与污染协议**：每场 call 的资料记录来源/版本 hash/available_at/相对 call_start 可用性；"当时可得真实上下文/事后可得资料/gold 构造 oracle"三臂分立；实时 web 检回测试转写或其派生页即记 oracle 污染；**预训练污染面**——ConEC 层登记 `IN_DISTRIBUTION_CARRIER`（不得支撑"外部知识供给核所缺信息"的时态结论）、**闭卷参数化召回探针**=第零步 gate 并行 READOUT_ONLY 读数、knowledge-tense 结论须待后 cutoff 第二载体；分段层（WhisperX/Whisper 迭代优化边界）入泄漏防护清单——若本核含 Whisper 谱系编码器须声明；ConEC 已提供的上下文不作 R2 独有构造贡献主张。**评分栈冻结**：fstalign+whisper_normalizer 口径统一；逐实体类数字不与他文表行拼接（跨系统级差实证在案）。复制载体=TED-LIUM3〔与 DARAG 所用 v1 有版本差注记〕；诊断集=PRISM 词典协议〔全合成 VITS、TTS 近逆性条款〕；组④对照载体=LibriSpeech+Rare5k〔稀词≠命名实体，子切片单独报数〕；另登记：PRISM 真实语音偏置协议〔组④/偏置轴候补，D2 在案〕；**Fox 偏置词表**〔随 Earnings21 repo 发布——**oracle 派生自测试参考**（test-gold 禁令：永不进 controller 路径、仅作离线诊断）+名企干扰、全场共享单表，ConEC 评其干扰项 "may be too simple"：诊断/简单模式梯级、非部署级〕；**Earnings25 排除裁定**〔2026-07 新基准：ASR-only、无上下文层、未引 ConEC——仅作外部复制/行业分层候补跟踪〕；SPGISpeech 排除〔稀词仅 6.16%+近邻协议改动〕；自建候补=先导数据集实体密集切片。**同载体基线阶梯（分信息边界报告）**：no-context → ConEC 真实上下文 shallow fusion〔zero-shot 但需 beam 内部；icefall 无现成 recipe、重实现义务在案〕→ ConEC oracle 行 → Fox 词表+alternate-spelling〔诊断级；其 ASP 为 13.6M 核绑定训练件〕→ Huang 2024 trained neural biasing〔同载体训练对手——**非上界**：其自表总 WER 10.40 不敌 shallow fusion 10.29，真上界=ConEC oracle；**无可运行公开物（四条坏指针）**——文献读数对照/结构参考档〕→ RECOVER 1-Best 档〔强制对照臂：单次 API 调用零训练、主载体 E-WER 23.81→15.90；全策略重实现后入判〕→ Siskos 重实现 → frozen omni 裸核 → R2 主张臂。**整合载体条款（对手入判边界逐组）**：NB 主载体同时承载 NB 三臂+A4a/A4b 差分+A2/A3+PS-abl+DICT-SCALE+FC 参照臂+K1a 对照臂族（固定档阶梯/random-matched-cost/serial-composition）+B-adapt〔若其预注册择 NB 主载体主报〕的整合运行——系统至少在一个载体上作为整体运行与归因。K-NB 对手入判：**⓪无上下文强专用 ASR（Whisper-large 级——§0 反向先验② 的载体实测行，
 主张臂必须同时胜过其 K-NB 两主指标读数〔实体准确率+稀有词/逐实体类 WER〕方可立"超过
 专用 ASR"口径；其总 WER/B-WER 数字=READOUT 动机数）**；①②入判（自实现、强实现口径钉死 §8）；③白盒参照上界不入对手集（非同边界）；④trained 上界正面交锋钉 LibriSpeech+Rare5k（RECAST/BR-ASR 可运行，Prompt 后端臂按训练工作点）——对照读数不携判死权、主张臂不及则改判"增强"（§7 K-NB 跨载体口径）；⑤DARAG **裁定：不入 NB 主载体入判集**（其纠错器无 Earnings 协议、原载体族含 TED-LIUM v1——移植入判须另行预注册协议）；GER 支的可运行对照钉组④/⑤原载体侧、主载体上 GER 作结构对照——§0 incumbent 措辞按此收窄；**组⑤新设 training-free 黑盒后处理子档：RECOVER 重实现后入判**（终结"组⑤在主载体无同边界对手"状态、其 1-Best 档为强制对照臂）；⑥Siskos 原系统外部不可复现（§8）——按其公开方法重实现后入判、否则只作结构对照；Lei/RAC 不可运行、只作结构对照——主张措辞按此边界自限。载体身份已冻结；K-NB/K-XOVER 数值（SESOI/power/目标区间）以 Stage-2A 第零步余量检定为输入预注册，预注册前不判（判据定义完备） |
 | Spoken QA（Spoken-SQuAD/SLUE-SQA-5） | T2 | 阶段二全量（O-config/A1′） | 阶段二主张 | K5 两级；K-RL（B-adapt 主报载体候选，§6.2） |
@@ -917,14 +920,16 @@ trace/* 不可构造 A1 的子集：调度族判死〔K1a/K1b〕由 A6 替补，
   READOUT_ONLY 复证）**：①A4b−A4a paired delta 95% 下置信界 >0 ∧ ②标定后 β
   权重与零可区分 ∧ ③**A4b vs serial-composition 固定臂（无条件双源串行——按样本选择的
   正面对手）paired delta 95% 下置信界 >0**；任一不满足 → 音频特有主张判死、按 §8 路由
-  MERGE。**联合格条款**：K1a 判死 ∧ K1b 成立 → 双源结论降为信号级 READOUT（部署策略
-  回落最强固定策略、感知路由作其加装项候选），回 owner 定位。配对成本可比：探针
+  MERGE。**联合格条款**：调度族任一判死（K1a 或 K2）∧ K1b 成立 → 双源结论降为信号级 READOUT
+  （部署策略回落最强固定策略、感知路由作其加装项候选），回 owner 定位。配对成本可比：探针
   两臂共用仪器抵消；A4b 成本超 A4a 预注册倍数（core calls/retrieval hops/audio seconds
   三维）→ `COST_DISPARATE`，不得单独支撑独立主张。
 - **K-NB（配置族最佳效果判据；统计口径与 K1a 同型）**：NB 主载体上，主张臂（运行时无专用ASR前端）
-  vs incumbent（ASR+biasing-GER，§8 分组合同实例化；对手入判边界=§5.1 整合载体条款）的**实体准确率与稀有词/逐实体类 WER（§5.1 主指标口径）两读数** paired delta
-  95% 下置信界**均 ≤0〔∧ 合取〕**→ 配置族最佳效果主张判死，降级"理解任务限定的知识
-  增强"；单读数不及则记 `SPLIT_READING`、回 owner 裁定（不自动判死）；若 FC 双通道参照臂在
+  vs incumbent（ASR+biasing-GER，§8 分组合同实例化；对手入判边界=§5.1 整合载体条款）：
+  **对全部入判组**的**实体准确率与稀有词/逐实体类 WER（§5.1 主指标口径）两读数** paired
+  delta 95% 下置信界**均 ≤0〔组×读数全合取〕**→ 配置族最佳效果主张判死，降级"理解任务
+  限定的知识增强"；部分（非全部）组不及、或单读数不及→分别记 `SPLIT_GROUP`/
+  `SPLIT_READING`、回 owner 裁定（不自动判死）；若 FC 双通道参照臂在
   NB 主载体上使主张臂不及（**FC 改判触发同用两读数合取口径；单读数不及记 `SPLIT_READING`
   回 owner**）→ 同样降级为"增强"并如实改判（配置族最佳效果主张
   只能由无专用ASR前端臂承载）。载体身份已冻结（§5.1）；数值（SESOI/power）以 Stage-2A 第零步
@@ -943,7 +948,8 @@ trace/* 不可构造 A1 的子集：调度族判死〔K1a/K1b〕由 A6 替补，
   入判组×两主指标读数的合取**（intersection-union 口径、成立方向无需多重性校正——合取
   只会更保守）**∧ 总 WER 护栏：主张臂总 WER 相对自身裸核臂过预注册非劣界**（护栏为
   成立侧条件、统计式同 paired 口径；未过→记 `SPLIT_READING` 回 owner——护栏非目标函数、
-  与反还原不变量① 不冲突）；任一入判组不及→记 `SPLIT_GROUP` 回 owner（不自动判死）；⓪ 组的成立
+  与反还原不变量① 不冲突）；部分（非全部）入判组不及→记 `SPLIT_GROUP` 回 owner
+  （不自动判死；全部组均不及=判死侧全合取成立、走判死式）；⓪ 组的成立
   读数=K-NB 两主指标口径（实体准确率+稀有词/逐实体类 WER）——其总 WER/B-WER 数字仅作
   动机与 READOUT（§0 反向先验② 之出处）。
 - **K-PS（阶段一机制核判据）**：PS-abl 消融显示发音库贡献在困难实体切片上的 paired delta
@@ -992,8 +998,10 @@ trace/* 不可构造 A1 的子集：调度族判死〔K1a/K1b〕由 A6 替补，
   **K-OPT（档 A 方法位子条款）**：档 A 相对 random-search@equal-budget 无增益 → 档 A
   不立方法主张（其组织学结论由 K5-t 独立裁定、不受本条款影响）。
 - **K-XOVER（机制核价值窗口判据）**：DICT-SCALE 扫描中发音库检索相对 in-context 注入的
-  crossover 不存在于目标词典规模区间 → 机制核动机在该载体判空、按 §5.3 回退梯路由（与
-  K-PS 联动：窗口存在而 K-PS 判死 → 机制核改挂语音学检索+世界知识 rescore）。**目标词典
+  crossover 不存在于目标词典规模区间 → 机制核动机在该载体判空、按 §5.3 回退梯路由（联动
+  条款：窗口存在 ∧ **PS-abl 子消融①〔声学 key vs 语音学检索，ORG 层对照〕为负** → 机制核
+  改挂语音学检索+世界知识 rescore——与 §0/§2.3 门控前实验中止规则同轨；K-PS 复合读数
+  不作该改挂的裁决输入〔不作单层归因〕）。**目标词典
   规模区间定义**：主载体知识源构造的实体清单规模的预注册包络——"全表"=该载体知识源全量
   实体清单、下限锚=先导诊断集实体数（现成刻度锚：ConEC 逐场清单约 100–2000 词、Fox 展开
   3066 unigram），数值随 power 预注册冻结；预注册前与 K-NB 同步不判。
@@ -1141,7 +1149,7 @@ comparator 反驳落红线+信息边界（AuTAgent weak-to-strong 拆"训练太�
 | 信号/状态/阈值与其他 action family 完全同形 | V̂ 的 β 分量标定权重归零 |
 | 音频只是输入载体 | A4b−A4a 在全部音频类别分桶无一显著〔已检视分桶集合〕（载体=NB 主载体） |
 | 无法独立消融 | A3/A4 析因执行期不可实施（如实报告即触发） |
-| K1a 判死 ∧ K1b 成立（联合格） | 双源结论降信号级 READOUT、部署回最强固定策略（载体=NB 主载体；§7 K1b 联合格条款） |
+| 调度族任一判死（K1a 或 K2）∧ K1b 成立（联合格） | 双源结论降信号级 READOUT、部署回最强固定策略（载体=NB 主载体；§7 K1b 联合格条款） |
 
 ## §9 边界、证据底座、义务与处置
 
@@ -1236,8 +1244,8 @@ judge 保真合同（含 K2 抽样率与判官协议）；K4 之 Knowledge-error
 （random/Bayesian/evolutionary）；**档 B 数值与协议收口**（探索率/预算取值、credit
 assignment 协议细目——形式化骨架已入 §6.3 档B形式化块）；**跨动作族 V̂ 统一校准协议**（§6.3
 同尺度合同的落地）；NB 载体族效应量与 power 预注册（载体身份已冻结于 §5.1；输入=Stage-2A 第零步本核
-官方全集余量检定）；组⑤ 入判裁定（DARAG——载体冻结已发生、条件句触发成就，随效应量
-预注册同批裁定；若裁定不入 NB 主载体，§0 incumbent 措辞〔ASR+biasing-GER〕同步收窄）；
+官方全集余量检定）；组⑤ 移植入判协议（DARAG 已裁定不入 NB 主载体入判集且 §0 措辞已同步收窄——该裁定
+已核销，见 §5.1/§7；本条仅存"未来移植须另行预注册协议"义务）；
 主载体 Earnings21 核心样本命名实体子切片定义与标注协议（与组④ 对照载体条目同型）；
 E-21↔E-22 公司/实体不相交审计（dev/test 泄漏面）；近邻复现前置裁定（BR-ASR 目标函数符号一致性与课程参数口径两处源内
 张力——Stage-2A 复现其前必裁，详见其 D2 条目）；组⑥ 重实现协议（重实现范围/识别器替代
@@ -1433,7 +1441,15 @@ serial-composition——按样本选择的正面对手入判据式）+K1a判死�
 以 K-OPT 成立为条件（两者皆不立→零方法主张）〕。**对抗环收敛记录：R1（8 MAJOR 概念+
 16 件文献缺口+3 结构）→R2（7 MAJOR 缝隙级+监督 3 收紧+1 结构）→R3（3 MAJOR 判据
 细则级+2 结构机械项）→R4（3 MAJOR 判据组合格级+1 结构脚注项）——发现面逐轮收窄且
-降级；R5 零新发现确认轮起点=本记录之后的文本状态。****数字纪律（v18 批）**：新增数字均出自六件新条目源核
+降级；R5 零新发现确认轮起点=本记录之后的文本状态。**
+**R5 轮已闭（同日）**：结构面板〔六检查 4 PASS+2 词级残余（§4.2"同空白"句补描述性
+范围——该句在 v18 整改清单外；映射表脚注补 K-XOVER 随臂注）——已修〕；概念面板〔1
+MAJOR+4 MINOR 全数处置：K-NB 判死式补"全部入判组"量词（组×读数全合取）并与
+SPLIT_GROUP 收窄（部分组不及）互斥闭合、总 WER 护栏在 §5.1 加 READOUT_ONLY 例外注
+（携成立侧否决权不携判死权）、K-XOVER 联动改挂改绑子消融①（K-PS 复合读数不作裁决
+输入）、联合格条款扩为调度族任一判死（K1a 或 K2）∧K1b 成立并同步 MERGE 行、§9 组⑤
+DARAG 义务改已核销指针〕。**R6 窄域零确认轮起点=本记录之后的文本状态；收敛记录追加：
+R5（1 MAJOR 判据量词级+4 MINOR+2 词级）——缝隙已收窄至最新增补条款自身的措辞层。****数字纪律（v18 批）**：新增数字均出自六件新条目源核
 （128×/0.9k vs 115.2k、74.30→45.24、61.80→50.05、−14.78/35.68→12.06、8.35 vs 9.60、
 13/15、84,374/3,909、LoRA r=32/r=64 等——逐项以对应 D2/TCR 条目为源）；既有已源核数字
 零改写零删除。
