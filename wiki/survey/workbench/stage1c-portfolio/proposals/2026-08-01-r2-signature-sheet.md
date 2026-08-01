@@ -30,8 +30,9 @@ supersedes: "V1（companion_of V17.1；其「独立性承重」段按续85① �
 - **H-SYS（系统级整体读数；配置族最佳效果主张——全称"预注册配置族内最佳已测系统效果"，
   非模型/任务上界；高风险假设非前提）**：主张臂（运行时无专用ASR前端）在主载体上对入判组
   paired delta 下置信界>0——判据 K-NB；trained 上界对照不及则改判"增强"。
-  （前置 H0/RQ0：gold entity/evidence 相对裸核存在超 SESOI 的 oracle headroom，否则不进
-  主实验。H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
+  （前置 H0/RQ0：gold-evidence〔A1′ masked 口径〕相对裸核存在超 SESOI 的 oracle
+  headroom——判据 K0，否则供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
+  H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
 
 **三形式+两横切轨→模块映射（唯一词典，正文 §1.3）**：ORG=知识以何单元/schema/索引/
 版本/出处存在（knowledge builder；K5）；SUPPLY=何时取/从哪取/取多少/何时停（controller/
@@ -61,9 +62,11 @@ K4）；**OBS**=重听/重切/多假设（观测重处理，非知识形式—�
 /ASR-dump 固定对照族。
 
 **主判据与 kill criteria**：主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率
-九维记账不进主判据）。判死/降级出口全数预注册：K1a（调度不敌固定档→判死）、K1b（双源
-独立性合取不成→MERGE 路由）、K-NB（配置族最佳效果判死/改判"增强"）、K-PS（发音库降
-工程件）、K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K4/K5/K2/K3/K-Gate/K-RL；
+九维记账不进主判据）。判死/降级出口全数预注册：K0（必要性：A1′−A0 无 headroom→供给/使用杠杆不评）、K1a
+（调度不敌固定档→判死）、K1b（双源独立性合取不成→MERGE 路由；判定载体=NB 主载体）、
+K-NB（配置族最佳效果判死/改判"增强"；对手含⓪无上下文强专用 ASR）、K-PS（发音库降
+工程件）、K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K-OPT（档 A 不赢等预算随机
+搜索→不立方法主张）、K4（判定载体=先导多 claim 子层）/K5/K2/K3/K-Gate/K-RL；
 灵敏度前置五条（含本核余量下限与查询/检索两级 headroom 分账）+判别力三分+§5.3 四级
 回退梯——判死永不在无分辨力载体上宣布。评价按 Need→Access→Use→Outcome→Cost 五段链
 组织（§1.0），有效性/合理性/可靠性/效率四类结论不得互相替代。
