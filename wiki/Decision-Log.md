@@ -6,6 +6,45 @@
 
 ---
 
+### 2026-08-01（续85）· round-19 边界纠偏生效（开题只审问题与现状）+ TFRL 身份维持 + v18 重构授权 + 对抗自检基线要求
+
+#### Context
+
+round-18 零 MAJOR 后进入签字就绪，round-19（GPT-5.6 多轮隔离审查）初版以新颖性尺度判
+7 MAJOR；owner 与评审方在提交前协同纠偏为「边界纠偏版」：`novelty_review_in_scope:
+false`、5 MAJOR 全部为报告层要求（SESOI/power/数据 hash/后端保真明示移 Stage-2A）。
+三通道对抗核验（blob 亲验/20 件引文隔离一手核验/本地读集扫描）：20/20 引文真实零虚构；
+PlanRAG-Audio、GRGA、ATIR、MARS 四件 2026 新近邻定性准确（GRGA 逐字 training-free+
+POMDP；ATIR 自述训练 retriever；MARS 选择对象=对话历史）——§3.3「语音域读集内全部缺席」
+不可维持；2 件评审定性错误（AgenticASR「intent routing」串自同作者 2605.29430；G-SPIN
+「entity description/世界知识」串自 DANCER）；MAJOR-2 经核实为提案自身词典内部不一致
+（§1.3 重听=观测重表达、准入=使用形式 vs §6.3 全装进「知识接口查询族」）。
+
+#### Decision（owner 裁决，2026-08-01 会话）
+
+①**开题审查边界**：本阶段只审「研究问题是否讲清、学界现状是否讲准」，新颖性判决双向
+出域——既不作占据/首创判决，也不在正文写「无人做/全部缺席/唯一空位」类排他句；纠偏版
+为 round-19 唯一操作版，初版以 sidecar 留痕（会话转录级重建、无裁决效力）。
+②**v18 重构授权**：采纠偏版骨架——一句话总问题+RQ0–RQ4、现状改五条研究线、唯一词典
+贯穿（OBS/CONTROL 独立于知识三形式）、模块→RQ→形式→变量→判据→失败出口唯一映射表、
+三阶段改 WP1–3；三支柱维持（续83① 不变——重排非收窄，无一支柱退场）。
+③**TFRL 身份维持**（重申续82③）：纠偏版 MAJOR-5 之「TFRL/bandit 不应在开题阶段成为
+必须证明的身份主张」条款不采；档 B 身份主张与 K-RL 判据保留，定位为 WP2/WP3 内的方法
+身份主张而非总研究问题。
+④**对抗自检基线要求**：v18 及后续每个发布件必须过多轮对抗式自检环，且必须含**隔离上下文
+面板、重新搜索（fresh literature search）与监督核验（对承重表述抽查一手源）**三类镜头，
+至一轮零新发现方可送审。
+
+#### Consequences
+
+round-19 三件（纠偏版评审/初版 sidecar/回应件）落审计层并登记 blob；新近邻收编义务落地：
+全文 ledger +19 行（PlanRAG-Audio、GRGA、ATIR、MARS=arXiv 2508.01166、AgenticASR、
+G-SPIN、FineCoS、CB-Whisper、Liu-Trie、Chan 2023、DANCER、Modica、Wang 2026、Pundak=
+ISCA 通道），四件 D2 深读+两件纠错定性件（TCR）起草中，Interactive ASR 2605.29430 自
+stage1b registry 路由入 R2 读集；v18 起草+签字表 companion 同步随后；AgenticASR/G-SPIN
+入任何矩阵/正文必须按 TCR 纠错定性、不得继承评审行描述。本条不授予 Stage-2A、模型/API
+调用、指标运行、研究数据集获取、原型或 push/wiki 发布权限。
+
 ### 2026-08-01（续84）· 主载体数据包定为「Earnings21+ConEC 层」（round-16 MAJOR-1 整改路线 A）
 
 #### Context
