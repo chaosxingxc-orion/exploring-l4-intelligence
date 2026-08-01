@@ -6,6 +6,36 @@
 
 ---
 
+### 2026-08-01（续84）· 主载体数据包定为「Earnings21+ConEC 层」（round-16 MAJOR-1 整改路线 A）
+
+#### Context
+
+round-16（GPT-5.6 签字审查，对 v16.1 blob edb38a2f）判 MAJOR_REVISION：唯一 MAJOR=主载体
+Earnings21 的直接 contextual-ASR 谱系（Fox 2022 偏置词表/ConEC 2024 真实上下文层/Huang
+2024 训练式改进）全部缺席证据底座，连载体源论文（Del Rio 2021）亦未登记；且 v16.1 所写
+「官方 split」经核验为事实错误（Earnings-21=纯评测集、无官方三分）。三路一手核验确认：
+评审承重引用（ConEC）逐字属实；Fox 词表为 oracle 派生（ConEC 自评"too simple"）且其 ASP
+组件为训练件；**Huang 2024 的「trained upper bound」刻画错误**（其自表总 WER 10.40 不敌
+training-free shallow fusion 10.29，真上界=ConEC oracle 行 9.69）；补读后「API-only×
+training-free×双源动作选择×外显世界知识 rescore」合取仍无占据。ConEC oracle 余量
+（B-WER 24.84→18.72）为 K-NB 战场提供强于 Siskos 轴的 headroom 一手数。
+
+#### Decision（owner 裁决）
+
+主载体数据包按整改路线 **A** 执行：**主载体=「Earnings21 音频/评测集 + ConEC
+version-pinned 上下文与修订转写层」**；dev/标定=Earnings-22+ConEC 层（其官方协议：
+Earnings-21 只作 evaluation）；reference 采 ConEC 修订版（实体纠错），与原始版数字对照处
+如实双报。路线 B（排除 ConEC 层）不采。
+
+#### Consequences
+
+v17 整改：三件谱系 D2+矩阵行（Huang 2024 按更正后口径入表、Fox 词表带 oracle 出身警示、
+ConEC baseline 可跑性风险入义务）；载体源论文与 Earnings25 登记（后者排除裁定：ASR-only
+无上下文层）；「官方 split」纠错+数据隔离合同+知识时态/污染协议+同载体基线阶梯；round-16
+MINOR-1..5 关闭；一页纸签字表交付；两条新线索（Contextual Earnings-22 2604.07354/
+ProfASR-Bench 2512.23686）入补扫义务。本条不授予 Stage-2A、模型/API 调用、指标运行、
+数据集获取（研究数据）、原型或 push/wiki 发布权限。
+
 ### 2026-08-01（续83）· 三支柱维持（收敛权在 Stage-2 基线实验）+ 克隆边界升红线第四条 + round-14 复审发起授权
 
 #### Context
