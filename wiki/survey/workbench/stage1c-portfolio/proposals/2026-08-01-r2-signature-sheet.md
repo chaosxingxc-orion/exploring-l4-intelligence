@@ -1,7 +1,7 @@
 ---
 artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V1"
 role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v17 交付"
-companion_of: "2026-07-29-r2-coreview-draft.md (V17)"
+companion_of: "2026-07-29-r2-coreview-draft.md (V17.1)"
 date: "2026-08-01"
 status: "DRAFT_FOR_OWNER_SIGNATURE_REVIEW; owner 未签"
 ---
@@ -11,6 +11,9 @@ status: "DRAFT_FOR_OWNER_SIGNATURE_REVIEW; owner 未签"
 **研究问题（一句话）**：在 API-only 冻结 omni 核上，外置知识系统（实体发音库+世界知识+
 面 key 联邦+T2 库）经门控查询-裁决环调度，能否在实体/知识密集语音任务上以 training-free
 方式取得超过"专用 ASR+biasing/GER"管线的任务效果上界，并将收益归因到组织/供给/使用三层？
+**独立性承重（如实）**：合取前三分量（API-only/training-free/文本侧外显 rescore）已被
+RECOVER 单件占据——新颖性承重腿=**双源动作选择**（门控选择性重解析+按样本调度）及其与
+rescore 的耦合（正文 §0/§1.2/§2.3/§8 五处同步）。
 
 **三条主假设（可独立证伪）**
 - **H-SUPPLY（音频特有供给，最核心独立性主张）**：读取音频不确定性信号的调度（A4b）优于
@@ -41,14 +44,16 @@ reward→冻结配置（档 A）/contextual bandit 策略（档 B；K-RL）。�
 不可运行、**不入④**）⑤retrieval-GER（对照钉原载体侧）⑥黑盒上下文发现（Siskos 重实现后入判）；同载体
 阶梯：no-context→ConEC 真实上下文 shallow fusion→ConEC oracle（9.69；稀有词 WER 余量约
 6pp；总 WER 本载体 READOUT_ONLY——偏置杠杆天花板≈0.7 点+强核零上下文已越 oracle）
-→Fox 词表（诊断级、test-gold 派生不进 controller）→裸核→主张臂；另设 serial-composition/always/never/random-matched-cost
+→Fox 词表（诊断级、test-gold 派生不进 controller）→RECOVER 1-Best（TF 黑盒后处理强制
+对照臂、重实现后入判）→裸核→主张臂；另设 serial-composition/always/never/random-matched-cost
 /ASR-dump 固定对照族。
 
 **主判据与 kill criteria**：主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率
 九维记账不进主判据）。判死/降级出口全数预注册：K1a（调度不敌固定档→判死）、K1b（双源
 独立性合取不成→MERGE 路由）、K-NB（能力上界判死/改判"增强"）、K-PS（发音库降工程件）、
-K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K4/K5/K2/K3/K-Gate/K-RL；灵敏度前置四条
-+判别力三分+§5.3 四级回退梯——判死永不在无分辨力载体上宣布。
+K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K4/K5/K2/K3/K-Gate/K-RL；灵敏度前置五条
+（含本核余量下限与查询/检索两级 headroom 分账）+判别力三分+§5.3 四级回退梯——判死永不在
+无分辨力载体上宣布。
 
 **数据隔离与知识时态**：test gold 永不进 controller；Earnings21 只作最终 evaluation；每场
 call 资料记录来源/hash/available_at，"当时可得/事后可得/gold oracle"三臂分立；检索快照
