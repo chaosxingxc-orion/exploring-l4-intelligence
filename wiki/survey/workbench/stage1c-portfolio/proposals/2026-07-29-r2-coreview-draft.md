@@ -818,7 +818,8 @@ comparator 反驳落红线+信息边界（AuTAgent weak-to-strong 拆"训练太�
   1906.00067、A-OKVQA 2206.01718；
   音频域边界=AuTAgent 2602.13685、EChO-Agent 2606.15141、Agent-Omni 2511.02834、
   NAP/OmniAgent 2606.19341、ARC 总览 2602.14224、AudioGenie-Reasoner 2509.16971；
-  音频近邻线（十件，§8 矩阵）=Lei 2409.15353、RAC 2409.06062、DARAG 2410.13198、Siskos
+  音频近邻线（十二件，§8 矩阵——本行十件+RAC 引文邻域二件见后）=Lei 2409.15353、RAC
+  2409.06062、DARAG 2410.13198、Siskos
   2509.19567、BR-ASR 2505.19179、WCTC-Biasing 2506.01263、RAG-Boost 2508.14048、
   Speech-Hands 2601.09413、PRISM 2023.emnlp-main.916、RECAST 2025.findings-emnlp.203
   （后二者经作者列表+题名双检确认无 arXiv 版，按 ACL Anthology ID 登记，ledger
@@ -860,7 +861,9 @@ judge 保真合同（含 K2 抽样率与判官协议）；数据集 lock 与分�
 （random/Bayesian/evolutionary）；**档 B 数值与协议收口**（探索率/预算取值、credit
 assignment 协议细目——形式化骨架已入 §6.3 档B形式化块）；**跨动作族 V̂ 统一校准协议**（§6.3
 同尺度合同的落地）；NB 载体族效应量与 power 预注册（载体身份已冻结于 §5.1；输入=Stage-2A 第零步本核
-官方全集余量检定）；近邻复现前置裁定（BR-ASR 目标函数符号一致性与课程参数口径两处源内
+官方全集余量检定）；组⑤ 入判裁定（DARAG——载体冻结已发生、条件句触发成就，随效应量
+预注册同批裁定；若裁定不入 NB 主载体，§0 incumbent 措辞〔ASR+biasing-GER〕同步收窄）；
+主载体 Earnings21 核心样本命名实体子切片定义与标注协议（与组④ 对照载体条目同型）；近邻复现前置裁定（BR-ASR 目标函数符号一致性与课程参数口径两处源内
 张力——Stage-2A 复现其前必裁，详见其 D2 条目）；组⑥ 重实现协议（重实现范围/识别器替代
 选型/与原文不可比性声明口径/入判或退回结构对照的裁定时点——与 BR-ASR 前置裁定同型）。
 
@@ -872,7 +875,10 @@ round-04..09 评审的本地资产读取；v15 轮新增：round-13 复核会话
 web 检索〔PRISM/RECAST 判无 arXiv 版〕、9 件全文 fetch〔7 个 arXiv id pdf+eprint 双件=
 14 行+2 件 ACL Anthology 官方 PDF=2 行〕、ledger 追加 16 行〔Speech-Hands 两行承自既有
 批次，十篇合计 18 行登记〕、十篇逐篇 D2 深读〔十路隔离代理，零网络，本地 PDF/eprint
-源核+sha256 复算 18/18 一致〕）。
+源核+sha256 复算 18/18 一致〕；v16 批〔2026-08-01〕：2 件全文 fetch〔2402.01828
+pdf+eprint，ledger 行 1322–1323〕、1 次 DOI 解引用尝试〔Zhang，无 OA，行 1324〕、S2 API
+摘要取回 1 次、四路 arXiv 排除检索〔Zhang/RECAST 判无 arXiv 版口径同型〕、ledger 追加
+3 行、二件新条目〔1 D2+1 摘要级〕深读）。
 零研究模型/API 执行、零指标运行、零数据集下载、零复现、零原型；v11 为纯文本合成（十六轮
 讨论全程零执行，裁决见 Decision-Log 续81）。
 
@@ -941,8 +947,11 @@ TED-LIUM3/PRISM 词典协议/LS+Rare5k；余量检定与数值预注册=Stage-2A
 清单+K-XOVER 区间定义、K-RL/B-adapt 载体绑定、PS-abl@NB=READOUT_ONLY 消歧、K 深度注记、
 反向证据载体口径注、组⑥ 重实现协议）；五 OBS 顺手处理（含 PRISM 真实语音偏置协议登记为
 组④/偏置轴候补）。**数字纪律（v16 批）**：新增数字均出自二件新条目与既有 D2（70.97→
-84.82%〔摘要级〕、5.5 vs 6.7、2500 实体、T̂=20/K=50/K=10、77.4%、1.4pp）；摘要级数字
-随行标注、不入承重判据。
+84.82%〔摘要级〕、5.5 vs 6.7、评测池 14k/训练池 2500、T̂=20/K=50/K=10、77.4%、1.4pp；
+第三读数四数=精度 3.6%/约 96% 注入错误/+5.9pp JGA/−1.2pp WER，源=Wang 条目 §4 复算）；
+摘要级数字随行标注、不入承重判据。**签字前补全批**：round-15 点名两项（组⑤ 入判裁定
+登记、exposure v16 批条目）与同区两处枚举（第三读数四数入声明、近邻线件数标签更新）随
+本批关闭；其余六 MINOR 与五 OBS 按其分类随签字包批次处理。
 
 **处置建议**：`GO_STANDALONE_AS_SPEECH_KNOWLEDGE_SYSTEM`（知识主题/agent 底盘/语音
 战场；能力上界三臂主张+双源机制识别+组织 TFRL 优化三支柱）。**最强反方**：①"这是 ASR
