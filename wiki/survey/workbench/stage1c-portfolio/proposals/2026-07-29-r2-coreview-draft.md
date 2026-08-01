@@ -694,8 +694,8 @@ vs ASR+omni 双通道} 由实验裁决（语义理解准确率），如实报告
 条件、携成立侧否决权不携判死权，§7）**、主判读数=实体准确率与稀有词/实体侧）；近邻子集数据（稀词 38%/OOV 13.49%/6.2pp/77.4%/1.4pp）仅定量级、出自 ~5h 未标识子集；**本核数据包复测=Stage-2A 第零步 gate**（§7 灵敏度前置④，不过走 §5.3 回退梯）〕。**dev/标定合同=Earnings-22+ConEC 层**（ConEC 官方协议：Earnings-21 只作 evaluation；全部可调项〔τ/α/β/γ/δ/融合权重/候选宽度 N/切片/词典规模/prompt/停止规则〕dev 侧标定后冻结；按 call/company 分组防实体与公司泄漏；**dev 侧 reward=稀有词 WER〔标签无关、ConEC 外生定义；其 SPGISpeech top-3k 口径与 omni 核词表分布的错配风险随第零步复测重标定〕**——实体标注仅 Earnings-21 有、逐实体类指标不可在 E-22 上算，实体级标定读数待 §9 新增义务〔E-22 实体标注协议+E-22 上下文层可得性核验〕解锁后启用）。**知识时态与污染协议**：每场 call 的资料记录来源/版本 hash/available_at/相对 call_start 可用性；"当时可得真实上下文/事后可得资料/gold 构造 oracle"三臂分立；实时 web 检回测试转写或其派生页即记 oracle 污染；**预训练污染面**——ConEC 层登记 `IN_DISTRIBUTION_CARRIER`（不得支撑"外部知识供给核所缺信息"的时态结论）、**闭卷参数化召回探针**=第零步 gate 并行 READOUT_ONLY 读数、knowledge-tense 结论须待后 cutoff 第二载体；分段层（WhisperX/Whisper 迭代优化边界）入泄漏防护清单——若本核含 Whisper 谱系编码器须声明；ConEC 已提供的上下文不作 R2 独有构造贡献主张。**评分栈冻结**：fstalign+whisper_normalizer 口径统一；逐实体类数字不与他文表行拼接（跨系统级差实证在案）。复制载体=TED-LIUM3〔与 DARAG 所用 v1 有版本差注记〕；诊断集=PRISM 词典协议〔全合成 VITS、TTS 近逆性条款〕；组④对照载体=LibriSpeech+Rare5k〔稀词≠命名实体，子切片单独报数〕；另登记：PRISM 真实语音偏置协议〔组④/偏置轴候补，D2 在案〕；**Fox 偏置词表**〔随 Earnings21 repo 发布——**oracle 派生自测试参考**（test-gold 禁令：永不进 controller 路径、仅作离线诊断）+名企干扰、全场共享单表，ConEC 评其干扰项 "may be too simple"：诊断/简单模式梯级、非部署级〕；**Earnings25 排除裁定**〔2026-07 新基准：ASR-only、无上下文层、未引 ConEC——仅作外部复制/行业分层候补跟踪〕；SPGISpeech 排除〔稀词仅 6.16%+近邻协议改动〕；自建候补=先导数据集实体密集切片。**同载体基线阶梯（分信息边界报告）**：no-context → ConEC 真实上下文 shallow fusion〔zero-shot 但需 beam 内部；icefall 无现成 recipe、重实现义务在案〕→ ConEC oracle 行 → Fox 词表+alternate-spelling〔诊断级；其 ASP 为 13.6M 核绑定训练件〕→ Huang 2024 trained neural biasing〔同载体训练对手——**非上界**：其自表总 WER 10.40 不敌 shallow fusion 10.29，真上界=ConEC oracle；**无可运行公开物（四条坏指针）**——文献读数对照/结构参考档〕→ RECOVER 1-Best 档〔强制对照臂：单次 API 调用零训练、主载体 E-WER 23.81→15.90；全策略重实现后入判〕→ Siskos 重实现 → frozen omni 裸核 → R2 主张臂。**整合载体条款（对手入判边界逐组）**：NB 主载体同时承载 NB 三臂+A4a/A4b 差分+A2/A3+PS-abl+DICT-SCALE+FC 参照臂+K1a 对照臂族（固定档阶梯/random-matched-cost/serial-composition）+B-adapt〔若其预注册择 NB 主载体主报〕的整合运行——系统至少在一个载体上作为整体运行与归因。K-NB 对手入判：**⓪无上下文强专用 ASR（Whisper-large 级——§0 反向先验② 的载体实测行，
 主张臂必须同时胜过其 K-NB 两主指标读数〔实体准确率+稀有词/逐实体类 WER〕方可立"超过
 专用 ASR"口径；其总 WER/B-WER 数字=READOUT 动机数）**；①②入判（自实现、强实现口径钉死 §8）；③白盒参照上界不入对手集（非同边界）；④trained 上界正面交锋钉 LibriSpeech+Rare5k（RECAST/BR-ASR 可运行，Prompt 后端臂按训练工作点）——对照读数不携判死权、主张臂不及则改判"增强"（§7 K-NB 跨载体口径）；⑤DARAG **裁定：不入 NB 主载体入判集**（其纠错器无 Earnings 协议、原载体族含 TED-LIUM v1——移植入判须另行预注册协议）；GER 支的可运行对照钉组④/⑤原载体侧、主载体上 GER 作结构对照——§0 incumbent 措辞按此收窄；**组⑤新设 training-free 黑盒后处理子档：RECOVER 重实现后入判**（终结"组⑤在主载体无同边界对手"状态、其 1-Best 档为强制对照臂）；⑥Siskos 原系统外部不可复现（§8）——按其公开方法重实现后入判、否则只作结构对照；Lei/RAC 不可运行、只作结构对照——主张措辞按此边界自限。载体身份已冻结；K-NB/K-XOVER 数值（SESOI/power/目标区间）以 Stage-2A 第零步余量检定为输入预注册，预注册前不判（判据定义完备） |
-| Spoken QA（Spoken-SQuAD/SLUE-SQA-5） | T2 | 阶段二全量（O-config/A1′） | 阶段二主张 | K5 两级；K-OPT（O-config 等预算随机搜索对照在此，§7）；K-RL（B-adapt 主报载体候选，§6.2） |
-| SpeechRAG 形态 | T2 跨模态 | 映射+O-config；omni 消费音频 value 的预测优势 | 阶段一/二主张之 READOUT_ONLY 复证（判定权归 Spoken QA 行 K5 两级/K-OPT） | K5-r + A1′ 双读数（均不携判死/成立权） |
+| Spoken QA（Spoken-SQuAD/SLUE-SQA-5） | T2 | 阶段二全量（O-config/A1′） | 阶段二主张 | K5 两级（择一主报载体候选——§7 K5 择一规则）；K-OPT（判定载体随 §7 K-OPT 条款；B-adapt 择 NB 主载体主报时等预算对照同臂注册于该载体）；K-RL（B-adapt 主报载体候选，§6.2） |
+| SpeechRAG 形态 | T2 跨模态 | 映射+O-config；omni 消费音频 value 的预测优势 | 阶段一/二主张之 READOUT_ONLY 复证（判定权归 §7 K5/K-OPT 所定判定载体） | K5-r + A1′ 双读数（均不携判死/成立权） |
 | Omni-DeepSearch/AudioRAG | T1 | 全机器满负荷 | 深搜线效果读数（方向性主载体口径，§5.2） | K2 读数=READOUT_ONLY 复证（判定载体=NB 主载体，§7）；K3 输入；K4=READOUT_ONLY（短答载体形态不合，§7）；K1a/K1b 在本载体=READOUT_ONLY 复证（**K1b 判定载体=NB 主载体**，§5.1 整合载体条款） |
 | **先导数据集（自建，§5.4）** | T1+T2 混合 | 负类触发检定+口音三臂+非词面面+**多 claim 长答子层**+**无/真证据三臂（A0/A1′，no-tool 地板行+oracle 行）** | 触发门查准查全；个性化增益；**准入/融合价值（RQ3）**；**必要性 headroom（RQ0）** | 双混淆矩阵 gold；**K0（必要性门，§7）**；**K-PS（口音层三臂）**；**K4（判定载体=多 claim 子层）**；K5 前置㈠ 的合格载体候补 |
 
@@ -1000,7 +1000,8 @@ oracle 时记 `PENDING_SENSITIVITY` 回 owner；**CONTROL/OPT 层判死（K-RL/K
   K3 同型复制载体。**结论范围**：K5-t 之 RQ1 面级结论以其判定载体为限、不外推——外推
   须第二载体复制（K3 同型协议，§9 义务）。
 - **K-Gate（门一判据；①–④ 四条路由，⑤为配置输入，§6.1）**：②探针稳定性不过阈 → 探针系
-  信号禁用、A4b 记 PENDING_CAPABILITY；③候选裁决不过阈 → 裁决核公理不成立、回 owner
+  信号禁用、A4b 记 PENDING_CAPABILITY（**K1b 不判、不进 §8 MERGE 表——K1b② 在探针禁用
+  下不作"不满足"判读**：悬置≠不成立）；③候选裁决不过阈 → 裁决核公理不成立、回 owner
   重议核；④核裸语义差距超阈 → K-NB 降级理解任务限定；①丢失面清单为空的面 → 组件登记
   蜕壳条件并作摘除对照。
 - **K-PS↔K-NB 关系条款**：两判据载体独立（K-PS 在 SLU/W1 网格与先导口音层；K-NB 在 NB
@@ -1169,7 +1170,7 @@ comparator 反驳落红线+信息边界（AuTAgent weak-to-strong 拆"训练太�
 | MERGE 触发（任一成立即路由 R6/R8） | 判定条件（读数） |
 |---|---|
 | 唯一新内容=通用 query/hop/stop | K1b 不成立而 K1a 显著（载体=NB 主载体） |
-| 信号/状态/阈值与其他 action family 完全同形 | V̂ 的 β 分量标定权重归零 |
+| 信号/状态/阈值与其他 action family 完全同形 | V̂ 的 β 分量**经完成标定后**权重归零（**K-Gate② 致禁用的 `PENDING_CAPABILITY` 状态不触发本行**——探针禁用≠标定归零，与第 4 行 PENDING 处置同型） |
 | 音频只是输入载体 | A4b−A4a 在全部音频类别分桶无一显著〔已检视分桶集合〕**∧ K1b① 不成立**（载体=NB 主载体；K1b 成立时本行降 READOUT——分桶功效不足不推翻已成立的合取式） |
 | 无法独立消融 | A4 析因（A4a/A4b）执行期不可实施 ∧ K1b 不成立（如实报告即触发；A3/A2 析因不可实施或载体形态不足→按 §7 K4 记 `PENDING_CARRIER_FORM`、不触发 MERGE） |
 
@@ -1516,7 +1517,13 @@ ONLY 复证、A6 替补括号补 K2；2 MINOR=灵敏度分层索引漏 CONTROL/O
 gloss 同步证据态键定、MERGE 第 4 行补 K1b 不成立卫兵+K4 形态分流、子消融①/③ 判定
 载体钉定+裁决权入 READOUT 家族注、SpeechRAG 行改 READOUT_ONLY 复证标记、§0 判据级
 同族清单补两员并改非穷举口径；十一项候选经反证检索判已有解、未报〕。
-**R13 概念零轮起点=本记录之后的文本状态。****数字纪律（v18 批）**：新增数字均出自六件新条目源核
+**R13 概念零轮起点=本记录之后的文本状态。**
+**R13 轮已闭（同日）**：概念面板〔1 MAJOR=K-Gate② 之 `PENDING_CAPABILITY` 悬置态被
+MERGE 第 2 行与 K1b② 双重裁决（面板经审计层 round-06/round-10 追溯确认为跨轮缝）——
+第 2 行补"经完成标定后"限定+悬置态不触发注、K-Gate② 补"K1b 不判、悬置≠不成立"；
+1 MINOR=§5.1 把 K5/K-OPT 判定权写死 Spoken QA 行、与 §7 择一规则冲突——改条件化表述
+并同步 SpeechRAG 行定位语；八项候选经反证检索判已有解、未报〕。
+**R14 概念零轮起点=本记录之后的文本状态。****数字纪律（v18 批）**：新增数字均出自六件新条目源核
 （128×/0.9k vs 115.2k、74.30→45.24、61.80→50.05、−14.78/35.68→12.06、8.35 vs 9.60、
 13/15、84,374/3,909、LoRA r=32/r=64 等——逐项以对应 D2/TCR 条目为源）；既有已源核数字
 零改写零删除。
