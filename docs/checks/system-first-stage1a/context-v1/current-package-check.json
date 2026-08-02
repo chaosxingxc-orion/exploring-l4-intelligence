@@ -239,16 +239,16 @@
     },
     {
       "command": "python scripts/checks/build_ai_context_manifest.py --check",
-      "exit_code": 1,
-      "stdout_tail": "manifest-byte-mismatch: expected 843ca19343ccf4d9fdd5b4d98a52631c14c2d068a940563e30daf955707818fb, found 08f6c5f18d706129b0635c1a14a8008a51b76a4c94732acb32dc6e59cd61ec41\nAI context manifest: FAIL",
+      "exit_code": 0,
+      "stdout_tail": "AI context manifest: PASS",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/checks/ai_context_surface_check.py",
-      "exit_code": 1,
-      "stdout_tail": "active-hash-mismatch: wiki/survey/current/manifest.json: 748ba3e9e8b4a82cb6113515c705ee88778e91569ba38f97c305a65a36ede4d1 != 90ffeccb5dbbe6229f0a82bc2c81222f3df07107431ff182ad40f2b4e8e0f4c1\nAI context surface: FAIL (1 failures)",
+      "exit_code": 0,
+      "stdout_tail": "AI context surface: PASS (0 failures)",
       "stderr_tail": ""
     }
   ],
-  "verdict": "FAIL"
+  "verdict": "PASS"
 }
