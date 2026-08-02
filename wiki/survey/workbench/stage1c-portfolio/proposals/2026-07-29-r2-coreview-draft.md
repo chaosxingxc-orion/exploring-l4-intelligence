@@ -1,7 +1,7 @@
 ---
 artifact_id: "SF-STAGE1C-R2-COREVIEW-V18"
 role: "R2 开题报告 v18：按 round-19 边界纠偏版整改（续85）——总问题+RQ0–RQ4 层级、学界现状改五条研究线问题地图（新近邻四件 D2+二件 TCR 收编）、ORG/SUPPLY/USE/OBS/CONTROL 唯一词典贯穿动作与模块、模块→RQ 唯一映射表、WP1–3 工作包化、排他性措辞双向出域（续85①）、配置族最佳效果/无专用ASR前端/启发式评分改名；三支柱维持（续83①）、TFRL 档 B 身份保留（续82③/续85③）；待复审"
-status: "V18_DRAFT_FOR_REVIEW (round-18: MINOR_REVISION zero-MAJOR for v17.1; round-19 边界纠偏版判 MAJOR_REVISION_FOR_PROBLEM_AND_FIELD_CLARITY——本版按其 5 MAJOR 报告层关闭); owner 未签"
+status: "V18_DRAFT_FOR_REVIEW (round-18: MINOR_REVISION zero-MAJOR for v17.1; round-19 边界纠偏版判 MAJOR_REVISION_FOR_PROBLEM_AND_FIELD_CLARITY——本版按其 5 MAJOR 报告层关闭)；对抗自检环已收敛〔概念 R23+结构终扫双镜头零轮，续85④ 达成，环记录见治理节〕; owner 未签"
 template: "2026-07-29-direction-coreview-template.md (V2) + Decision-Log 续79/80/81/82 系列裁定"
 review_chain: "round-03..19 十七轮评审见 wiki/audit/system-first-stage1c-v2/（round-15/round-18 两次零 MAJOR 轮、续77② 两度成就；round-16 签字审查 1 MAJOR 由 v17 关闭；round-17 1 MAJOR 由 v17.1 当日关闭；round-19 初版 7 MAJOR 经 owner 协同纠偏为边界纠偏版 5 报告层 MAJOR——本版 v18 关闭对象；round-19 三通道对抗核验=20/20 引文属实+2 件定性纠错，见 round-19 回应件）；深读条目=d2-entries/（56 件：53 D2+1 摘要级+2 TCR，含音频近邻二十一件）"
 rulings: "Decision-Log 续76/77/78/79/80/81/82/83/84/85"
@@ -1288,7 +1288,7 @@ audio-LLM 副语言损失公开测量；长音频基准盘点；语音语义切�
 设计部分承接此缺口。
 
 **authorization 前义务清单（件内全列）**：K0（H0 之 A1′−A0 SESOI）/K1a/K1b/K-NB/K2/K3/K4/K5/K-Gate/K-PS/K-RL/K-OPT/K-XOVER 数值（power
-analysis，含 K5 两条前置下限/余量、两处 COST_DISPARATE 倍数、判别力条款近地板阈值、K4
+analysis，含 K5 两条前置下限/余量、三处 COST_DISPARATE 倍数（K1a/K1b/K-NB）、判别力条款近地板阈值、K4
 证据密集子桶定义、K-XOVER 目标词典规模区间取值）；V̂ 启发式评分族选型与权重/阈值标定协议（含重听窗口参数与探针频率；标定完成前 V̂ 不称
 价值估计——§6.3 口径）；
 judge 保真合同（含 K2 抽样率与判官协议）；K4 之 Knowledge-error/type-D 操作判读协议；
@@ -1618,7 +1618,16 @@ K-PS 判死同态反向处置——补优先权（K-PS 判死时联动不生效�
 K2 不随）；4 MINOR=R18 fallback"K1a 未判死"支不可达（第 1 行必触发）——删支并明示格
 覆盖；K2 对照被角点排除时无阀——补次强非退化臂+PENDING_COMPARATOR；§0 三臂改架构
 骨架口径+§8 分组合同补⓪组条目；K3 之 T1 复制载体在回退梯③ 升主后另行预注册阀；
-候选清单经反证拒报〕。**R23 概念零轮起点=本记录之后的文本状态。****数字纪律（v18 批）**：新增数字均出自六件新条目源核
+候选清单经反证拒报〕。**R23 概念零轮起点=本记录之后的文本状态。**
+**对抗自检环收敛宣告（2026-08-01）**：R23 概念面板 **CLEAN**（11 项候选全部被在案消解
+机制击落、零发现）+结构机械终扫 **CLEAN**（六检查全绿，含多行容错重扫与旗标孤儿检查；
+其域外提示之 COST_DISPARATE 计数"两处"已更正"三处〔K1a/K1b/K-NB〕"）——**概念/结构
+双镜头在同一文本状态零轮达成，续85④ 基线要求（隔离上下文+重新搜索+监督核验、至一轮
+零新发现）满足**。全环统计：R1–R23 共 23 轮、三类镜头（概念-因果×19、结构-量词×7、
+文献-现状 fresh-search×1+监督核验×2）、修复提交 19 个（0805cba..本批）；发现总量
+约 90 项（其中 MAJOR 约 30 项）呈单调收窄：报告结构层（R1–R3）→判据缝隙层（R4–R11）→
+判据组合格层（R12–R22）→零（R23）；两次面板假阳性经反证记录在案；一次条款簇发散经
+元修复（R17 统一决策程序重写）终止。**数字纪律（v18 批）**：新增数字均出自六件新条目源核
 （128×/0.9k vs 115.2k、74.30→45.24、61.80→50.05、−14.78/35.68→12.06、8.35 vs 9.60、
 13/15、84,374/3,909、LoRA r=32/r=64 等——逐项以对应 D2/TCR 条目为源）；既有已源核数字
 零改写零删除。
