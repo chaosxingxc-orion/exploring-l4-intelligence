@@ -75,14 +75,16 @@ H-ORG 括注）**
 对照臂、重实现后入判）→裸核→主张臂；另设 serial-composition/always/never/random-matched-cost
 /ASR-dump 固定对照族。
 
-**主判据与判定判据（三态总则：SUPPORTED／REFUTED_OR_NEGLIGIBLE〔判死须过预注册反向
+**主判据与判定判据（本段为摘要口径、判据细则与出口一律以正文 §7 条款为准；三态总则：
+SUPPORTED／REFUTED_OR_NEGLIGIBLE〔判死须过预注册反向
 等效/非劣检验、"未证正效应"不构成判死〕／INCONCLUSIVE〔SPLIT/PENDING 族归入〕）**：
 主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率之比较性 estimand=每有效
 实体修正边际成本、不进主判据）。判死/降级出口全数预注册：K0（必要性：A1′−A0 无
 headroom→该载体供给/使用杠杆不评）、K-SUP（供给源选择，RQ2 主判据）、K1a
 （调度不敌固定档→判死）、K1b（双源独立性合取不成→MERGE 路由；判定载体=NB 主载体）、
 K-NB（配置族最佳效果判死/改判"增强"；对手含⓪无上下文强专用 ASR）、K-PS（发音库降
-工程件）、K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K-OPT（档 A 不赢等预算随机
+工程件）、K-XOVER（价值窗口判空→**该载体**回退梯；改挂另有二充分条件=§2.3 中止规则
+或窗口存在∧子消融①为负，全局生效受 §7 灵敏度前置检定）、K-OPT（档 A 不赢等预算随机
 搜索→不立方法主张）、K4（判定载体=先导多 claim 子层）/K5/K2/K3/K-Gate/K-RL；
 灵敏度前置五条（含本核余量下限与查询/检索两级 headroom 分账）+判别力三分+§5.3 四级
 回退梯——判死永不在无分辨力载体上宣布。评价按 Need→Access→Use→Outcome→Cost 五段链
