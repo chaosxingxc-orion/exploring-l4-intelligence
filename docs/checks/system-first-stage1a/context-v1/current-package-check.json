@@ -203,26 +203,26 @@
     },
     {
       "command": "python scripts/survey/sf_current_manifest.py --check",
-      "exit_code": 0,
-      "stdout_tail": "current survey manifest: PASS",
+      "exit_code": 1,
+      "stdout_tail": "[CURRENT-MANIFEST] current manifest byte mismatch: expected 748ba3e9e8b4a82cb6113515c705ee88778e91569ba38f97c305a65a36ede4d1, found 90ffeccb5dbbe6229f0a82bc2c81222f3df07107431ff182ad40f2b4e8e0f4c1\ncurrent survey manifest: FAIL",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_release_binding_check.py",
-      "exit_code": 0,
-      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest; validated=1; not-applicable=13)",
+      "exit_code": 1,
+      "stdout_tail": "[BINDING] manifest load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 5077d3a9917219839700ae8eff722dda2fdeb4343a7438a53cb292db1a7003cc, found b5bd9b3a37d524cf7deb2b99076559c78e4be218722470dac3b0cc4c844f6807\nrelease binding: FAIL (1 failures)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_quantifier_scan.py",
-      "exit_code": 0,
-      "stdout_tail": "quantifier scan: PASS (0 input failures, 0 unscoped; scope=current-manifest)",
+      "exit_code": 1,
+      "stdout_tail": "[QUANTIFIER] manifest/path load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 5077d3a9917219839700ae8eff722dda2fdeb4343a7438a53cb292db1a7003cc, found b5bd9b3a37d524cf7deb2b99076559c78e4be218722470dac3b0cc4c844f6807\nquantifier scan: FAIL (1 input failures, 0 unscoped)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_archive_candidates.py --check-applied",
-      "exit_code": 0,
-      "stdout_tail": "archive applied: PASS (7 byte-identical moves; check-only)",
+      "exit_code": 1,
+      "stdout_tail": "[ARCHIVE] archive-current-manifest-invalid: manifest bytes differ from deterministic B4 rebuild\narchive applied: FAIL (1 blocker(s))",
       "stderr_tail": ""
     },
     {
@@ -250,5 +250,5 @@
       "stderr_tail": ""
     }
   ],
-  "verdict": "PASS"
+  "verdict": "FAIL"
 }
