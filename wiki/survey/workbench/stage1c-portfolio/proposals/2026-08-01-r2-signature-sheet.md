@@ -1,10 +1,10 @@
 ---
-artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V2"
-role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v18 交付（round-19 边界纠偏整改版）"
-companion_of: "2026-07-29-r2-coreview-draft.md (V18)"
+artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V3"
+role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v19 交付（round-20 整改版：RQ 卡片化收窄、K-SUP 主实验、序贯决策合同、三态判定、护栏族、效率 estimand）"
+companion_of: "2026-07-29-r2-coreview-draft.md (V19)"
 date: "2026-08-01"
 status: "DRAFT_FOR_OWNER_SIGNATURE_REVIEW; owner 未签"
-supersedes: "V1（companion_of V17.1；其「独立性承重」段按续85① 新颖性双向出域改为谱系定位段——本表为签字对象的唯一现行版）"
+supersedes: "V2（companion_of V18）；V1（companion_of V17.1）——本表为签字对象的唯一现行版"
 ---
 
 # R2 开题签字表（一页）
@@ -12,9 +12,11 @@ supersedes: "V1（companion_of V17.1；其「独立性承重」段按续85① �
 **总研究问题（一句话）**：在核心 speech/omni 模型冻结、内部状态不可依赖的条件下，如何
 围绕语音任务构造可组织（ORG）、可选择供给（SUPPLY）、可审慎使用（USE）的外部知识控制
 系统，并分别评价知识引入的必要性、有效性、合理性、可靠性与效率？
-**递进子问题**：RQ0 必要性与边界（观测不足≠知识缺口）／RQ1 组织／RQ2 供给（含声学不
-确定性下的双源比价）／RQ3 使用（准入/冲突/拒答）／RQ4 控制与评价。技术模块=RQ 的候选
-方案；模块→RQ→层→变量→对照→判据→失败出口唯一映射表=正文 §1.0。
+**递进子问题（承诺面=实验可识别面）**：RQ0 必要性与边界（观测不足≠知识缺口）／RQ1
+组织——本轮主问题=key/索引/切片/面（value/schema/版本/出处=工程合同+后续分支）／RQ2
+供给——本轮主实验=供给源选择（K-SUP）／RQ3 使用——本轮主问题=证据准入（融合/冲突/
+引用/拒答=后续分支）／RQ4a 控制与优化（双源按样本选择居此）／RQ4b 系统评价。技术模块=
+RQ 的候选方案；RQ 卡片表+总问题级决策表+模块唯一映射表=正文 §1.0。
 **谱系定位（描述性；本阶段对新颖性双向出域——不作首创主张、不必证明交集无占据，
 边界裁定在案）**：RECOVER 已实现 API-only/training-free/文本侧外显 rescore；长音频线已有
 结构化多流库与多维图上的 training-free 规划检索（PlanRAG-Audio/GRGA，知识源封闭于同
@@ -22,10 +24,12 @@ supersedes: "V1（companion_of V17.1；其「独立性承重」段按续85① �
 检索调度）与真假证据准入的耦合（正文 §1.7 五线地图+§8 二十一件矩阵）。
 
 **三条主假设（可独立证伪；RQ 对应）**
-- **H-SUPPLY（RQ2，音频特有供给，最核心机制主张）**：读取音频不确定性信号的调度（A4b）
-  优于不读取者（A4a），且降低错误实体引发的错误检索链——判据 K1b（三重合取：A4b−A4a
-  paired delta 下置信界>0 ∧ β 权重与零可区分 ∧ A4b 胜过 serial-composition 无条件双源
-  串行固定臂；判定载体=NB 主载体）。
+- **H-SUPPLY（RQ2，供给源价值主实验）**：逐源供给（slides/财报稿/参会者）优于等表长
+  合并对照——判据 K-SUP（三态判读；判定载体=NB 主载体 SRC-sel 臂）。
+- **H-CONTROL 之双源选择分量（RQ4a，音频特有机制主张）**：读取音频不确定性信号的调度
+  （A4b）优于不读取者（A4a）——判据 K1b（三重合取：A4b−A4a paired delta 下置信界>0
+  ∧ β 向量联合与零可区分 ∧ A4b 胜过 serial-composition 无条件双源串行固定臂；判定载体
+  =NB 主载体）；序贯策略（档B−档A）=K-RL、档A 方法位=K-OPT。
 - **H-USE（RQ3，知识使用）**：同证据集下显式准入/冲突处理优于无条件拼接，且降低
   correct→wrong——判据 K4（A3−A2）。
 - **H-SYS（系统级整体读数；配置族最佳效果主张——全称"预注册配置族内最佳已测系统效果"，
@@ -41,9 +45,10 @@ supersedes: "V1（companion_of V17.1；其「独立性承重」段按续85① �
 版本/出处存在（knowledge builder；K5）；SUPPLY=何时取/从哪取/取多少/何时停（controller/
 retriever；K1a/K1b/K2）；USE=已取回证据的准入/融合/冲突/拒用（admission/arbitration；
 K4）；**OBS**=重听/重切/多假设（观测重处理，非知识形式——`RE_RESOLVE/RE_SLICE` 属此轨）；
-**CONTROL/OPT**=dev reward→冻结配置（档 A）/contextual bandit 运行期策略（档 B；K-RL，
-方法身份承载——owner 裁定在案）。主实验一次只改一层；工作包 WP1 组织（RQ0/RQ1）/WP2 供给与控制
-（RQ2/RQ4）/WP3 使用与评价（RQ3/RQ4），最低学术产出与失败出口见 §1.0 总表。
+**CONTROL/OPT**=dev reward→冻结配置（档 A）/有限时域序贯决策策略（档 B——dev 学
+test 冻结种子重放、"contextual bandit"旧称退役；K-RL，方法身份承载——owner 裁定在案）。
+主实验一次只改一层；工作包 WP1 组织（RQ0/RQ1）/WP2 供给与控制（RQ2/RQ4a）/WP3 使用与
+评价（RQ3/RQ4b），最低学术产出与失败出口见 §1.0 总表。
 
 **载体（身份已冻结；数值预注册=Stage-2A 第零步）**
 - 主载体数据包=**Earnings21 音频/评测集+ConEC version-pinned 上下文与修订转写层**（真实
@@ -64,8 +69,11 @@ K4）；**OBS**=重听/重切/多假设（观测重处理，非知识形式—�
 对照臂、重实现后入判）→裸核→主张臂；另设 serial-composition/always/never/random-matched-cost
 /ASR-dump 固定对照族。
 
-**主判据与 kill criteria**：主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率
-九维记账不进主判据）。判死/降级出口全数预注册：K0（必要性：A1′−A0 无 headroom→供给/使用杠杆不评）、K1a
+**主判据与判定判据（三态总则：SUPPORTED／REFUTED_OR_NEGLIGIBLE〔判死须过预注册反向
+等效/非劣检验、"未证正效应"不构成判死〕／INCONCLUSIVE〔SPLIT/PENDING 族归入〕）**：
+主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率之比较性 estimand=每有效
+实体修正边际成本、不进主判据）。判死/降级出口全数预注册：K0（必要性：A1′−A0 无
+headroom→该载体供给/使用杠杆不评）、K-SUP（供给源选择，RQ2 主判据）、K1a
 （调度不敌固定档→判死）、K1b（双源独立性合取不成→MERGE 路由；判定载体=NB 主载体）、
 K-NB（配置族最佳效果判死/改判"增强"；对手含⓪无上下文强专用 ASR）、K-PS（发音库降
 工程件）、K-XOVER（价值窗口判空→改挂语音学检索+rescore）、K-OPT（档 A 不赢等预算随机

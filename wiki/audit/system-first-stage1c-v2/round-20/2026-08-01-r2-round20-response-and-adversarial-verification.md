@@ -114,3 +114,14 @@ correct→wrong 上界，护栏型=携成立侧否决权不携判死权、SPLIT_
 
 v19 交付后按续85④/续86 基线跑多轮隔离对抗自检环（隔离上下文+重新搜索+监督核验，至
 零轮）再送"问题树+直接语音/音频现状+统计/控制合同"窄面复审。
+
+---
+
+**更正附注（2026-08-02，追加不改写；载体=D2 条目 2026-08-01-d2-2025-emnlp-main-246）**：
+两处。①§2 首段括注"注意该名不在其摘要、仅在正文/repo"有误——该句转引自隔离 web
+核验代理；本地 D2 三路核（Anthology PDF p.4878/arXiv PDF/eprint LaTeX `abstract` 环境，
+sha256 复算一致）证实 **MCR-Bench 名称在其 PDF 摘要第三句出现**；著录摘要字段（abs 页/
+Anthology 网页）离线未核、为上游断言最可能来源，只作可能性登记。②该篇标题存在双形态：
+排版/正文标题 "…Benchmarking Text Bias…under Cross-Modal Inconsistencies" 与著录标题
+"…Revealing Text Bias…"（arXiv PDF /Title 元数据），引用须按 D2 合同双列不混用。web
+表征被本地全文证伪属监督镜头有效实例；引文真实性判定（14/14 属实）不受影响。
