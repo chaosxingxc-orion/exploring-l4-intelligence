@@ -1,6 +1,6 @@
 ---
 artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V4"
-role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v20 交付（round-21 整改版：RQ0 析因、结论向量、十一判据三态真值表、K-NB 全称反证、RQ4a 拆分、控制器权威定义、载体族双 split、最小确认路径）"
+role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v20 交付（round-21 整改版：RQ0 析因、结论向量、十二判据三态真值表、K-NB 全称反证、RQ4a 拆分、控制器权威定义、载体族双 split、最小确认路径）"
 companion_of: "2026-07-29-r2-coreview-draft.md (V20)"
 date: "2026-08-02"
 status: "DRAFT_FOR_OWNER_SIGNATURE_REVIEW; owner 未签"
@@ -31,11 +31,11 @@ H-ORG 括注）**
 - **H-SUPPLY（RQ2，供给源价值主实验）**：逐源供给（slides/财报稿/参会者）优于等表长
   合并对照——判据 K-SUP（三态判读；判定载体=NB 主载体 SRC-sel 臂；含总 WER 对合并
   对照非劣之成立侧否决条件）。
-- **H-CONTROL 之双源选择分量（RQ4a，音频特有机制主张）**：读取音频不确定性信号的调度
+- **H-CONTROL 之双源选择分量（RQ4a-1，音频特有机制主张）**：读取音频不确定性信号的调度
   （A4b）优于不读取者（A4a）——判据 K1b（三重合取：A4b−A4a paired delta 下置信界>0
   ∧ β 向量联合与零可区分 ∧ A4b 胜过 serial-composition 无条件双源串行固定臂；判定载体
   =NB 主载体）；序贯策略（档B−档A）=K-RL、档A 方法位=K-OPT。
-- **H-USE（RQ3，知识使用）**：同证据集下显式准入/冲突处理优于无条件拼接，且降低
+- **H-USE（RQ3，知识使用）**：同证据集下显式准入优于无条件拼接（融合/冲突处理=后续支线），且降低
   correct→wrong——判据 K4（A3−A2）。
 - **H-SYS（系统级整体读数；配置族最佳效果主张——全称"预注册配置族内最佳已测系统效果"，
   非模型/任务上界；高风险假设非前提）**：主张臂（运行时无专用ASR前端）在主载体上对**全部
@@ -50,10 +50,7 @@ H-ORG 括注）**
   否则供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
   H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
 
-**三形式+两横切轨→模块映射（唯一词典，正文 §1.3）**：ORG=知识以何单元/schema/索引/
-版本/出处存在（knowledge builder；K5）；SUPPLY=何时取/从哪取/取多少/何时停之**变量面**
-（retriever/supplier；判据=K-SUP——触发/停止的**裁决行为**归 CONTROL）；USE=已取回
-证据的准入/融合/冲突/拒用（admission/arbitration；K4）；**OBS**=重听/重切/多假设（观测
+**三形式+两横切轨→模块映射（唯一词典，正文 §1.3）**：ORG=知识以何单元/索引/切片/面存在（knowledge builder；K5——schema/版本/出处=工程合同+后续分支、本轮非实验对象）；SUPPLY=供给源与候选证据之变量面（本轮主实验=供给源选择、判据=K-SUP；何时取/取多少=条件参数、触发/停止裁决归 CONTROL）；USE=已取回证据之准入/拒用（admission；K4——融合/冲突/引用=后续支线）；**OBS**=重听/重切/多假设（观测
 重处理，非知识形式——`RE_RESOLVE/RE_SLICE` 属此轨）；**CONTROL/OPT**=在各轨动作与配置
 间选择（router 主层判据=K1a/K1b/K2）＋dev reward→冻结配置（档 A；K-OPT）/有限时域序贯
 决策策略（档 B——dev 学 test 冻结种子重放、"contextual bandit"旧称退役；K-RL，方法
