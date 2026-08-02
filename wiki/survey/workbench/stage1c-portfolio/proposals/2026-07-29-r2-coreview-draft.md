@@ -396,7 +396,8 @@ N-best/实体描述/检索文档/记忆文档；接口/训练态=文本侧后处
 载体/指标=LS/CV/自建，WER/E-WER；已知失效=过纠（Voice Memory 自报 64% 边际过纠）、
 correct→wrong、幻觉替换。**交换/过期/冲突证据的对抗性准入协议（工具输出层冲突裁决已有三实例——AudioToolAgent
 仲裁式、TalTech 2603.17822 可靠性分层+矛盾检测+假设驱动定向复检、VISA 投票一致性+
-分歧路由〔均见 §4.3〕；三者冲突均非对抗构造、无交换/过期证据受控条件、且 TalTech
+分歧路由〔TalTech/VISA 见 §4.3；AudioToolAgent 见本线上文〕；三者冲突均非对抗构造、
+无交换/过期证据受控条件、且 TalTech
 明文 non-dismissal 政策=标注非拒绝门）、外部世界知识与重听动作的同尺度按样本比价，
 未见于上述已登记件（描述性盘点、分级 D2 义务在案）**。→ 对应
 RQ3；"Agentic ASR" 命名空间 2026 已有占用，R2 不以该名作命名主张（§8 定位表）。
@@ -1051,7 +1052,7 @@ pin 服务/日期/参数；逐次落盘 URL/文档 ID/rank/内容 hash；共享�
 |---|---|---|---|---|---|
 | ①能力门（§6.1 五项预检） | 冻结核+约 50 题级预检集 | K-Gate 路由读数、FC 默认配置 | ③不过→回 owner 重议核（后续全停）；②不过→A4b 系悬置 | 小（无训练） | 换核或收窄至无探针配置 |
 | ②载体门（§5 数据包+先导构造） | E21+ConEC 包、先导集构造合同 | 冻结 dev/test 划分、先导两层、灵敏度前置读数 | 灵敏度/判别力不过→§5.3 回退梯 | 中（构造+标注） | 载体降级/收窄子集 |
-| ③最小核心实验 | ①②产出（含 §2.3 门控前实验中止规则读数〔诊断载体〕——该规则触发之改挂裁定先于本阶段臂冻结；K-XOVER 判据读数（DICT-SCALE）于本阶段末产出、其联动式改挂待 PS-abl 子消融① 读数（随④）落地后按 §7 合取裁定——不早于④〔§7 第二充分条件独立于此〕） | **RQ0 门（K0）→RQ1 同层比较（K5）→RQ2 供给源（K-SUP）→RQ3 准入（K4）→RQ4b 系统效果/护栏/成本画像（K-NB）** | K0 不过→**先导载体上**供给/使用杠杆不评（K4 随之停）、回 owner——NB 主载体余量门=②行灵敏度前置④/第零步 gate（K0 判定载体≠NB 主载体，§7）；各判据按三态出口 | 中 | 按 RQ 卡片"失败后范围"逐项收缩 |
+| ③最小核心实验 | ①②产出（含 §2.3 门控前实验中止规则读数〔诊断载体〕——该规则触发之改挂裁定先于本阶段臂冻结；K-XOVER 判据读数（DICT-SCALE）于本阶段末产出、其联动式改挂待 PS-abl 子消融① 读数（随④）落地后按 §7 合取裁定——不早于④〔§2.3 中止规则=改挂之第一充分条件、其裁定不受本排期约束；§7 第二充分条件即本联动〕） | **RQ0 门（K0）→RQ1 同层比较（K5）→RQ2 供给源（K-SUP）→RQ3 准入（K4）→RQ4b 系统效果/护栏/成本画像（K-NB）** | K0 不过→**先导载体上**供给/使用杠杆不评（K4 随之停）、回 owner——NB 主载体余量门=②行灵敏度前置④/第零步 gate（K0 判定载体≠NB 主载体，§7）；各判据按三态出口 | 中 | 按 RQ 卡片"失败后范围"逐项收缩 |
 | ④条件扩展（依赖③对应读数、互不为前置） | ③读数 | RQ4a 双源选择与调度族（K1b 三合取、K1a/K2——判定载体=NB 主载体）与序贯策略（K-RL/K-OPT）；机制核消融 PS-abl/P13N（K-PS——SLU/W1 网格+诊断集）；面联邦全量；DICT-SCALE 已随③（K-XOVER 载荷臂） | K1b 前提=②过阈（§6.1② 探针稳定性）；K-RL 前提=档 A 在案 | 中-大 | 对应支线停、主线结论不受累 |
 | ⑤独立复制 | ③④成立项 | K3 分栏复制读数 | 方向不一致→REPLICATION_FAILED 范围收窄 | 中 | 主张限主载体 |
 
@@ -1126,9 +1127,9 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   SPLIT` 附分维度在案读数清单回 owner、A4b 不作部署候选；K2 不随本悬置〔β 标定非其
   输入〕**：β 只覆盖已接入通道、其联合归零不蕴含感知机制不在场）∧ ③**A4b vs serial-composition 固定臂（无条件双源串行——按样本选择的
   正面对手）paired delta 95% 下置信界 >0**；任一不满足 → 音频特有主张判死、按 §8 MERGE 表判定路由
-  （K1b 判死 ∧ K1a 未判死之格由 MERGE 第 1 行处置〔该行必触发——K1a 未判死即显著〕；
-  表内无行触发的剩余格=K1a 亦判死：记 `DEPLOYMENT_SPLIT` 附分维度在案读数清单回
-  owner）。**联合格与部署裁定（统一决策
+  （K1b 判死 ∧ K1a SUPPORTED〔显著〕之格由 MERGE 第 1 行处置；表内无行触发之剩余格
+  〔K1a 判死或 INCONCLUSIVE〕：记 `DEPLOYMENT_SPLIT` 附分维度在案读数清单回 owner、
+  清单如实标注 K1a 三态——本括注语义随三态总则，"未判死"不折算"显著"）。**联合格与部署裁定（统一决策
   程序——取代先前的例外子格/部署候选枚举，删除一切自动回落规定）**：当 K1b 成立而调度族
   （K1a 或 K2）存在判死时——①**机制结论**：双源机制结论降为信号级 READOUT、回 owner
   定位（管辖权留 R2、不触发 R6/R8；感知路由作加装项候选登记）；②**部署归属不由本条款
@@ -1282,7 +1283,7 @@ R2=语音任务中**知识**（世界写的）的系统研究；R3=记忆（系�
 |---|---|---|---|---|---|
 | AudioGenie | training-free | 自由生成二元 flag | 单源重表达 | 新增 LLM 代答 | 无 |
 | NAP | SFT+RL | 标量阈值 | 单源媒体重取 | 冻结核 | 无 |
-| ARC 冠军（Track 1；Agent Track 第一名=TalTech 2603.17822 已公开描述，见 §4.3 盘点） | 未声明 | 未公开 | 单源工具 | 未声明 | 无 |
+| ARC 冠军（Track 1——本行三格仅刻画 Track 1 冠军；Agent Track 第一名=TalTech 2603.17822 已公开描述、其刻画见 §4.3 盘点不入本行） | 未声明 | 未公开 | 单源工具 | 未声明 | 无 |
 | AuTAgent | RL 工具选择 | 训练期差分奖励 | 单源工具 | 冻结核 | 无 |
 | AudioRAG/Omni-DeepSearch | training-free | 自由生成 | 含外部知识 | 代答/冻结核 | 无（live web） |
 | GRGA（v18 增补，cut 2026-08-01） | training-free（in-context 规划） | 模型自评蕴含分（反思环，无外置标定） | 单源：同录音图检索+重听工具（无外部知识动作） | 冻结核（API 装配；索引层非 API-only） | 五类边多维图（同录音内、无准入 schema） |
@@ -1748,7 +1749,7 @@ GRGA）"→D2 源核的描述性差异：二者知识源均封闭于目标录音
 | 96 | Search-o1 | Xiaoxi Li et al. | Search-o1: Agentic Search-Enhanced Large Reasoning Models | arXiv 2025（NeurIPS 2024 preprint 选项模板） | preprint | https://arxiv.org/abs/2501.05366 |
 | 97 | A-Mem | Wujiang Xu et al. | A-Mem: Agentic Memory for LLM Agents | arXiv 2025（NeurIPS 2025 preprint 模板） | preprint | https://arxiv.org/abs/2502.12110 |
 | 98 | Search-R1 | Bowen Jin et al. | Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning | COLM 2025 | published | https://arxiv.org/abs/2503.09516 |
-| 99 | TARG | — | Retrieval as a Decision: Training-Free Adaptive Gating for Efficient RAG（需 logits 非 API-only） | arXiv 2025（2026-04 修订） | preprint | https://arxiv.org/abs/2511.09803 |
+| 99 | TARG | — | Retrieval as a Decision: Training-Free Adaptive Gating for Efficient RAG（需 logits 非 API-only） | TMLR 04/2026（PDF 页眉自证；arXiv 2025-11 首发、v2 2026-04） | published | https://arxiv.org/abs/2511.09803 |
 | 100 | DeepResearcher | Yuxiang Zheng et al. | DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments | arXiv 2025 | preprint | https://arxiv.org/abs/2504.03160 |
 | 101 | WebThinker | — | WebThinker | arXiv 2025 | preprint | https://arxiv.org/abs/2504.21776 |
 | 102 | MMSearch-Plus | Xijia Tao et al. | MMSearch-Plus: Benchmarking Provenance-Aware Search for Multimodal Browsing Agents | arXiv 2025（ICLR 2026 rebuttal 修订版，无录用声明） | preprint | https://arxiv.org/abs/2508.21475 |
