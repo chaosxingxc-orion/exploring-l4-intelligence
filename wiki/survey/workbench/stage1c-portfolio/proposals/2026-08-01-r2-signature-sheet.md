@@ -26,7 +26,8 @@ RQ 的候选方案；RQ 卡片表+总问题级决策表+模块唯一映射表=�
 **主假设（可独立证伪；RQ 对应——H-SUPPLY/H-CONTROL 分量/H-USE/H-SYS 四条+前置 H0 与
 H-ORG 括注）**
 - **H-SUPPLY（RQ2，供给源价值主实验）**：逐源供给（slides/财报稿/参会者）优于等表长
-  合并对照——判据 K-SUP（三态判读；判定载体=NB 主载体 SRC-sel 臂）。
+  合并对照——判据 K-SUP（三态判读；判定载体=NB 主载体 SRC-sel 臂；含总 WER 对合并
+  对照非劣之成立侧否决条件）。
 - **H-CONTROL 之双源选择分量（RQ4a，音频特有机制主张）**：读取音频不确定性信号的调度
   （A4b）优于不读取者（A4a）——判据 K1b（三重合取：A4b−A4a paired delta 下置信界>0
   ∧ β 向量联合与零可区分 ∧ A4b 胜过 serial-composition 无条件双源串行固定臂；判定载体
