@@ -1,11 +1,11 @@
 ---
-artifact_id: "SF-STAGE1C-R2-COREVIEW-V19"
-role: "R2 开题报告 v19：按 round-20 六 MAJOR 整改（续86）——RQ 卡片化（RQ1/RQ3 收窄、RQ2 升 SRC-sel 主实验+新判据 K-SUP、RQ4 拆 4a/4b、总问题级决策表）、三态判定总则全格网（SUPPORTED/REFUTED_OR_NEGLIGIBLE/INCONCLUSIVE）、档 B 有限时域序贯决策合同（方案 B、续82③——bandit 旧称退役）、效率比较性 estimand+K-NB 护栏族扩展、§1.7 五线补录（TED-EL/Audiopedia 时间线修正+L4 三分）、治理史移 AUDIT sidecar（companion=2026-08-01-r2-coreview-audit-history.md）、§6.6 执行表+先导/确认分工、参考文献表；三支柱维持（续83①）、TFRL 身份保留（续82③/续86①）；待复审"
-status: "V19_DRAFT_FOR_REVIEW (round-20 判 MAJOR_REVISION——本版按其 6 MAJOR/八项签字门报告层关闭；v18 对抗环收敛记录移审计 sidecar)；owner 未签"
+artifact_id: "SF-STAGE1C-R2-COREVIEW-V20"
+role: "R2 开题报告 v20：按 round-21 六 MAJOR 整改（续87）——RQ0 保留分型承诺+OBS×外证 2×2 析因（裁决③）、总答案=结论向量（裁决②、废单一总标签）、十一判据三态真值表化+K-NB 全称反证逻辑与 mandatory 集/BASELINE_NOT_READY 出口、RQ4a 拆 4a-1/4a-2+等预算析因、档 B 合同补齐（C_t 候选区/策略类/credit assignment/覆盖条件入正文）+控制器权威定义（裁决①：零模型参数训练、新模型必 frozen——控制器非模型）、载体族 discovery/confirmatory 双 split、最小确认路径+效率比率定义合同、OBS-INDEX/§3.3 对齐 RQ1 卡/RQ3 统一证据准入/ABSTAIN 层固定、L2 拆 a/b 两支+L3 声学键→候选→准入轴+L4a 时间线更正+L5 正式层补强、九件新收编+四件发表态升级+§10 至 145 行；三支柱维持（续83①）、TFRL 身份保留（续82③/87①）；待复审"
+status: "V20_DRAFT_FOR_REVIEW (round-21 判 MAJOR_REVISION——本版按其 6 MAJOR/十项签字门报告层关闭；治理史见 companion 审计件)"
 template: "2026-07-29-direction-coreview-template.md (V2) + Decision-Log 续79/80/81/82 系列裁定"
-review_chain: "round-03..20 十八轮评审见 wiki/audit/system-first-stage1c-v2/（round-15/18 两次零 MAJOR 轮；round-19 边界纠偏版 5 MAJOR 由 v18 关闭并过 R1–R23 对抗环双镜头零轮；round-20 6 MAJOR——本版 v19 关闭对象，其三通道核验=14/14 引文属实零定性错+3 处修正，见 round-20 回应件；完整评审史移 companion 审计件）；深读条目=d2-entries/（63 件：60 D2+1 摘要级+2 TCR，含音频近邻二十一件+round-20 直接线五件+环 R1 二件）"
-rulings: "Decision-Log 续76/77/78/79/80/81/82/83/84/85/86"
-evidence_cut: "2026-08-01"
+review_chain: "round-03..21 十九轮评审见 wiki/audit/system-first-stage1c-v2/（round-15/18 两次零 MAJOR 轮；round-19 边界纠偏版 5 MAJOR 由 v18 关闭并过 R1–R23 对抗环双镜头零轮；round-20 6 MAJOR——本版 v19 关闭对象，其三通道核验=14/14 引文属实零定性错+3 处修正，见 round-20 回应件；完整评审史移 companion 审计件）；深读条目=d2-entries/（65 件：62 D2+1 摘要级+2 TCR，含音频近邻二十一件+round-20 直接线五件+环 R1 二件+round-21 二件）"
+rulings: "Decision-Log 续76/77/78/79/80/81/82/83/84/85/86/87"
+evidence_cut: "2026-08-02"
 supersedes: "V17.1（blob bbc41c9e @ 2d2cf52）及更早；本件自足，不以任何已取代版本承重"
 execution_authority: "STAGE2A_WITHHELD"
 ---
@@ -27,12 +27,14 @@ execution_authority: "STAGE2A_WITHHELD"
 
 **递进子问题（每问的承诺面=本轮实验可识别面；更宽外延降为后续分支）**：RQ0 知识必要性
 与边界（哪些错误来自观测不足、哪些来自参数知识不足、哪些可被 task-time 外部知识纠正、
-何时不应引知）；RQ1 知识组织形式——本轮主问题=key/索引/切片/面的组织（value 形态/
+何时不应引知——识别面=OBS×外证 2×2 析因+预注册错误分型，各分量独立 estimand；
+"参数知识存否"以闭卷探针佐证不作判定，裁定依据见治理节）；RQ1 知识组织形式——本轮主问题=key/索引/切片/面的组织（value 形态/
 schema/版本/出处=预注册工程合同+后续分支，本轮不立独立主张）；RQ2 知识供给形式——
 本轮主实验=供给源选择（哪一源更有价值：逐源 vs 等表长合并；何时供给=RQ4a 调度、
 取多少 depth=后续分支、query 构造为伴读变量）；RQ3 知识使用
-形式——本轮主问题=证据准入（融合/冲突消解/引用/拒答=后续分支）；RQ4a 控制与优化
-（双源按样本动作选择〔音频特有机制主张居此〕、调度、序贯策略——冻结核前提下如何选
+形式——本轮主问题=证据准入（融合/冲突消解/引用/拒答=后续分支）；RQ4a 控制与优化——拆二：RQ4a-1 双源按
+样本动作选择〔音频特有机制主张居此；识别面=等预算析因〕、RQ4a-2 序贯策略与优化器身份
+（调度、序贯策略——冻结核前提下如何选
 OBS/SUPPLY/USE 动作与配置）；RQ4b 系统评价（整合系统是否有效、可靠、在什么成本—质量
 边界内成立）。RQ↔模块↔判据唯一映射与 RQ 卡片见 §1.0。
 
@@ -93,7 +95,8 @@ READOUT〕、K3 `REPLICATION_FAILED`〔范围收窄〕等——非穷举，以 �
 动作携带唯一层标签（§1.3 词典）：`RE_RESOLVE`（重听）/`RE_SLICE`（重切）=**OBS 观测
 重处理**（对已有音频观测的重新取得与重表达，**不是知识查询、不产生外部知识**）；
 `SEARCH`（外部检索、发音库匹配）=**SUPPLY 知识供给**；`ADMIT/REJECT`（准入）=**USE
-知识使用**；`ANSWER/STOP/ABSTAIN`=终结动作。全部动作都是**假设条件化**的；何时动、
+知识使用**；`ANSWER/STOP/ABSTAIN`=终结动作（**层固定条款**：ABSTAIN 只居动作层；USE 评价其
+正确性、不以之为 USE 层变量）。全部动作都是**假设条件化**的；何时动、
 动哪轨、动多深由外置确定性门裁决（CONTROL 横切轨，模型零自省）；一切获取类动作的输出
 先落候选区、经准入门才进核上下文（结构防爆总则）。"双源"=OBS 轨（重听已有观测）与
 SUPPLY 轨（取外部知识）两类**信息获取来源**在同一价值尺度下按样本比价——正因一源是
@@ -117,7 +120,9 @@ harness）；可吃性分层：感知 harness 会被吃、门控部分被吃、*
 所在（该命题**本版不设检定臂**：其判定载体=后 cutoff/私域第二时态载体，随 §9 义务落地
 后另立判据名——本版内它只作定位陈述、不作已验主张）。
 
-**红线**：不修改任何模型参数；不为本任务新训练任何模型；不新增 LLM 代答（最终作答权在
+**红线**：不修改任何模型参数；不为本任务新训练任何模型（**权威口径**：本轮不训练任何
+模型参数、新引入模型一律 frozen 已发布检查点；外置控制器之有限决策常量 dev 标定**不属
+此列**——控制器非模型，权威定义见 §6.3，裁定见治理节）；不新增 LLM 代答（最终作答权在
 冻结 omni 核）；**克隆边界（第四条）**——音色克隆 enrollment 仅限当前会话内当事说话人的
 任务音频、不跨会话留存、克隆输出仅用于内部 key 合成比对、永不生成对外播放语音、不涉第三方
 PII 合成（§2.4）。工具级冻结组件（已发布检查点的 ASR/音频向量模型/TTS/判官/DSP/搜索引擎）
@@ -171,24 +176,33 @@ INCONCLUSIVE 一律按 §7 对应阀回 owner、不触发范围收缩）**：
 
 | RQ | 主构念 | 主操纵 | 同层对照 | 判定载体 | estimand | 失败后范围 |
 |---|---|---|---|---|---|---|
-| RQ0 | 外部证据必要性 | 无/真证据（A1′ vs A0） | 裸核 A0 行 | 先导集（多 claim+负类层） | gold-evidence masked headroom（K0） | 该载体上供给/使用杠杆不评、回 owner |
+| RQ0 | 外部证据必要性与错误分型（观察不足/参数知识不足/可外证纠正/负类不应引知） | **OBS×外证 2×2 析因**：A0（双关）/OBS-only（重听预算开、零外证）/A1′（gold-evidence masked、零重听）/双开 | 裸核 A0 行（析因基线格） | 载体族 confirmatory split（多 claim+负类层；§5.4） | 外证主效应（A1′−A0，K0 主分量）＋OBS 主效应＋交互项——各带独立 LCB/SESOI；错误分型按预注册分类学（负类/观测型/知识型/交互型）归账；"参数知识激活"面由闭卷参数化召回探针 READOUT 佐证、不入判定式 | 外证主效应无 headroom→该载体上供给/使用杠杆不评、回 owner（OBS 主效应/交互读数并行保留） |
 | RQ1 | key/索引/切片/面组织价值 | 组织配置（best-of 优化 vs incumbent） | incumbent 配置+等预算随机搜索 | K5 择一载体（先导非语义槽子层/合格锚） | 任务效用+coverage 两读数（K5-t） | 回落实验合同角色；value/schema/版本/出处=后续分支 |
 | RQ2 | 供给源价值 | 供给源（逐源 vs 合并） | 等表长合并对照 | NB 主载体（SRC-sel 臂） | 两主指标 paired delta（K-SUP） | 回落合并供给；query 构造=伴读、depth=后续分支 |
 | RQ3 | 证据准入价值 | 准入门开/关（A3 vs A2） | A2 无条件拼接（同证据集） | 先导多 claim 子层 | Knowledge-error/type-D+该子层预注册答案层指标（K4） | 留 R5/R8；融合/冲突/引用/拒答=后续分支 |
-| RQ4a | 双源按样本动作选择与序贯策略 | 感知路由（A4b vs A4a）；档B vs 档A | serial-composition/固定档阶梯/random-matched-cost | NB 主载体（K1b/K1a/K2）；B-adapt 择一载体（K-RL）；O-config 臂载体（K-OPT，§7 钉定） | K1b 三重合取＋各判据 estimand | K1b REFUTED→按 §8 MERGE 表判定路由〔无行触发之剩余格记 DEPLOYMENT_SPLIT 回 owner〕；K1b 成立而调度族判死→§7 统一决策程序（DEPLOYMENT_SPLIT+分维度读数清单回 owner、无自动回落）；K-RL 不立→以 K-OPT 成立为条件回落配置优化（皆不立→不立方法主张） |
+| RQ4a-1 | 双源按样本动作选择（CONTROL） | **等预算析因**：SUPPLY-only/OBS-only/无条件双源串行/双源自适应（A4b）——固定动作可用性、信息量与调用预算；感知路由差分（A4b vs A4a）为其中一对比 | serial-composition/固定档阶梯/random-matched-cost | NB 主载体（K1b/K1a/K2） | 析因 interaction（选择价值之识别式）＋K1b 三重合取＋K1a/K2 各自 estimand | K1b REFUTED→按 §8 MERGE 表判定路由〔无行触发之剩余格记 DEPLOYMENT_SPLIT 回 owner〕；K1b 成立而调度族判死→§7 统一决策程序（DEPLOYMENT_SPLIT+分维度读数清单回 owner、无自动回落） |
+| RQ4a-2 | 序贯策略与优化器身份（OPT） | 档B vs 档A（共享动作空间/horizon/信息与调参预算——§6.3 同预算合同） | 等预算 random/Bayesian/evolutionary 搜索 | B-adapt 择一载体（K-RL）；O-config 臂载体（K-OPT，§7 钉定） | 档B−档A paired delta（K-RL）＋档A−等预算随机搜索 delta（K-OPT） | K-RL 不立→以 K-OPT 成立为条件回落配置优化（皆不立→不立任何方法主张、K5-t 组织学结论保留）——身份结论不替代 RQ4a-1 双源因果结论 |
 | RQ4b | 系统效果与可靠性 | 整合系统 vs 入判组 | ⓪①②⑤⑥入判组+裸核（③白盒参照不入对手集、④trained 上界=改判读数不携判死权） | NB 主载体 | 两主指标全组合取＋护栏族（K-NB） | 降级"理解任务限定的知识增强"；SPLIT 回 owner |
 
-**总问题级决策表（RQ 三态组合→总结论类；行序即优先权、自上而下取首个触发行；全组合
-空间的其余格=按各判据 PENDING/SPLIT 出口回 owner）**：
+**总问题层答案=结论向量（正典，裁定见治理节）**：总问题的最终答案是 RQ0–RQ4b 的
+**逐问结论向量**——每问按其 §7 判据独立取三态、遵循既有评价体系（"五类结论不得互相
+替代"之 RQ 级延伸）、多载体综合报告；**不合成单一总标签**（示例向量："Need 支持、ORG
+不确定、SUPPLY 某源支持、USE 支持、双源 CONTROL 反证、SYSTEM 有效而成本画像偏高"——
+各分量可并存）。K1a/K2/K-RL/K-OPT 之结论各随其 RQ4a-1/4a-2 分量入向量；RQ4b 之可靠性
+护栏读数与效率画像随 SYSTEM 分量并行报告。
 
-| RQ 结论组合 | 总问题层结论 |
+**总问题级治理路由表（RQ 三态组合→治理路由；不产生总标签、只定组合情形下的处置程序；
+行序即优先权、自上而下取首个触发行；全组合空间的其余格=按各判据 PENDING/SPLIT 出口
+回 owner）**：
+
+| RQ 结论组合 | 治理路由（向量各分量照记、本列不覆盖） |
 |---|---|
-| K0（先导载体）SUPPORTED ∧ ≥1 层判据（K5/K-SUP/K4）SUPPORTED ∧ K1b SUPPORTED | **机制成立**：知识必要+对应形式可归因+双源选择被识别；K-NB 若 REFUTED_OR_NEGLIGIBLE 按 §7 K-NB 降级条款并行记录 |
-| K0（先导载体）SUPPORTED ∧ ≥1 层判据 SUPPORTED ∧ K1b REFUTED_OR_NEGLIGIBLE | **机制线收窄**：层价值成立、双源选择不承载——按 §8 MERGE 表路由；K-NB 若 SUPPORTED 系统结论并行保留 |
+| K0（载体族 confirmatory split）SUPPORTED ∧ ≥1 层判据（K5/K-SUP/K4）SUPPORTED ∧ K1b SUPPORTED | **机制成立**：知识必要+对应形式可归因+双源选择被识别；K-NB 若 REFUTED_OR_NEGLIGIBLE 按 §7 K-NB 降级条款并行记录 |
+| K0（载体族 confirmatory split）SUPPORTED ∧ ≥1 层判据 SUPPORTED ∧ K1b REFUTED_OR_NEGLIGIBLE | **机制线收窄**：层价值成立、双源选择不承载——按 §8 MERGE 表路由；K-NB 若 SUPPORTED 系统结论并行保留 |
 | K-NB SUPPORTED ∧ 各层判据（K5/K-SUP/K4）与 K1b 均未 SUPPORTED | **仅系统有效**：工程成功、机制未识别（归因记 `ATTRIBUTION_OPEN`） |
-| K0（先导载体）SUPPORTED ∧ 所试层判据全 REFUTED_OR_NEGLIGIBLE ∧ K1b SUPPORTED | **双源选择机制成立而知识形式层不承载**——回 owner 议形式层；K-NB 结论并行记录 |
-| K0（先导载体）SUPPORTED ∧ 所试层判据 REFUTED_OR_NEGLIGIBLE | **范围收窄**：headroom 在而所试层机制不承载——回 owner 议机制 |
-| K0（先导载体）REFUTED_OR_NEGLIGIBLE | 先导载体上不评供给/使用杠杆；程序级中止权在 owner——NB 主载体上各判据结论按 §6.6③ 载体分栏独立成立、并行记录，本行不覆盖之 |
+| K0（载体族 confirmatory split）SUPPORTED ∧ 所试层判据全 REFUTED_OR_NEGLIGIBLE ∧ K1b SUPPORTED | **双源选择机制成立而知识形式层不承载**——回 owner 议形式层；K-NB 结论并行记录 |
+| K0（载体族 confirmatory split）SUPPORTED ∧ 所试层判据 REFUTED_OR_NEGLIGIBLE | **范围收窄**：headroom 在而所试层机制不承载——回 owner 议机制 |
+| K0（载体族 confirmatory split）REFUTED_OR_NEGLIGIBLE | 先导载体上不评供给/使用杠杆；程序级中止权在 owner——NB 主载体上各判据结论按 §6.6③ 载体分栏独立成立、并行记录，本行不覆盖之 |
 | 任一层判据 SUPPORTED ∧ K-NB REFUTED_OR_NEGLIGIBLE | 层机制成立而系统集成负结论——层结论保留、集成问题记 RQ4b |
 | 以上各行均不触发且任一主判据 INCONCLUSIVE（含 SPLIT/PENDING 族） | **对应结论项不确定**：按该判据 §7 出口回 owner、就该判据不作双向宣称——不改写其他判据已得的成立/判死结论（悬置≠不成立，与 K-Gate② 同款；主线其余结论不受累，§6.6④ 同口径） |
 
@@ -203,7 +217,7 @@ INCONCLUSIVE 一律按 §7 对应阀回 owner、不触发范围收缩）**：
 | 供给源选择（SRC-sel，RQ2 主实验） | RQ2 | SUPPLY | 多源材料→逐源供给决策 | 供给源（slides/财报稿/参会者） | 等表长合并对照（K-SUP 消费） | K-SUP（三态） | 不立→回落合并供给 |
 | 多假设 query 构造 | RQ2 | SUPPLY | 假设集→检索 query 集 | query 构造策略（伴读变量） | 单假设 baseline variable（READOUT，不入判据式） | 随 K-SUP/K1a 族 READOUT | 无门控形态近净零（§2.2）→仅经门控通道兑现 |
 | 触发电池+V̂ 调度 router | RQ4a | **CONTROL（主层——消费 SUPPLY 面的触发条件参数、选择各轨动作）** | 状态→动作选择 | 触发信号/阈值/权重 | 固定档阶梯、random-matched-cost、serial-composition（均 K1a 消费）；oracle（A6，READOUT） | K1a/K1b；K2（over/under 事件率——判定载体=NB 主载体、判死方向仅 A4b 对最优固定档） | 调度族判死→按 §7 联合格与部署裁定程序（DEPLOYMENT_SPLIT 附分维度读数清单）；K1b 判死→按 §8 MERGE 表判定路由（无行触发则不 MERGE、按 K1a 处置回 owner） |
-| 证据准入/融合/冲突（`ADMIT/REJECT`） | RQ3 | USE | 假设×候选证据→准入证据/拒答 | 准入阈值 γ 族 | A3−A2（同证据集只改准入，K4 消费）；A5 扰动（READOUT） | K4（判定载体=先导多 claim 子层，§7） | 判死→留 R5/R8 |
+| 证据准入（`ADMIT/REJECT`；融合/冲突/引用/拒答=后续支线） | RQ3 | USE | 假设×候选证据→准入证据/拒答 | 准入阈值 γ 族 | A3−A2（同证据集只改准入，K4 消费）；A5 扰动（READOUT） | K4（判定载体=载体族 confirmatory split 多 claim 子层，§7） | 判死→留 R5/R8 |
 | 档 A 配置优化器/档 B 序贯决策策略（dev 学 test 冻结） | RQ4a | OPT/CONTROL 横切 | dev reward→冻结配置/运行期策略 | 优化器/探索策略 | 等预算 random/Bayesian/evolutionary（K-OPT 消费）；B-adapt 档A vs 档B（K-RL 消费） | K-RL（档B 身份）+K-OPT（档A 方法位） | RL 身份不立→回落 reward-guided 配置优化（以 K-OPT 成立为条件；两者皆不立→不立任何方法主张、仅保留 K5-t 组织学结论；方向不死） |
 | trace/归因/成本账本 | RQ4b | EVALUATION（记录轨，§1.3 注） | 运行轨迹→归因与成本读数 | —（记录面） | — | §6.5 五族（不合成总分） | — |
 | NB 三臂整合系统 | RQ4b（系统评价）/系统级 | 跨层（整体读数） | 全模块整体运行 | — | 裸核；ASR+biasing-GER | K-NB（含改判条款） | 判死→降级"理解任务限定的知识增强" |
@@ -238,9 +252,11 @@ lattice 解码+LM rescore 的系统级方案）。
 不存在 Mayer 会议）、门控 agent 环扮演解码器；且加入经典 ASR 没有的维度——说话人/情感等
 面作为**索引维度**（经典 ASR 把说话人当噪声归一化掉）。**Why now（四使能件交集）**：能做
 reasoning 级 rescore 的冻结 LLM（2023+）、成熟冻结专家编码器阵（emotion2vec 等）、agentic
-控制范式（音频域 2026 起步）、评测端首次奖励分面理解（读集内〔cut 2026-07-30〕，omni
+控制范式（音频侧策略控制谱系：长音频 deep-Q 跳读策略 2024 起、training-free 长音频
+检索管线 2025 起、规划化 agentic 线 2026 加密——§1.7 L4a；先前"音频域 2026 起步"
+表述为时间线失真、本版更正）、评测端首次奖励分面理解（读集内〔cut 2026-07-30〕，omni
 基准 2025+）；三个社区（ASR 盯 WER/agentic 在文本/omni 做对齐）的目标函数长期各有指向，
-2026 年起长音频 agentic 线（PlanRAG-Audio/GRGA，§1.7 L4）开始进入邻近区域——这使
+2026 年起长音频**规划化** agentic 线（PlanRAG-Audio/GRGA，§1.7 L4）进入邻近区域——这使
 "把问题结构讲清"比"宣称交点无人"更承重（本阶段边界口径，见治理节）。类比：RAG 把知识从
 LLM 权重外置；本方案把"发音→身份"映射从 ASR 权重外置——**实体层的 RAG-for-ASR，加分面
 与 agentic**。具名近邻二十一件已一手核验入 §8 矩阵（逐件训练态/信息访问边界；对该线的全称
@@ -272,6 +288,8 @@ training-free 规划检索（PlanRAG-Audio/GRGA，知识源封闭于同录音）
 ∈OBS；`SEARCH`（外部检索/发音库匹配）∈SUPPLY；`ADMIT/REJECT`∈USE；`ANSWER/STOP/
 ABSTAIN`=终结动作；**自观测材料裁定**：源自当前任务自身观测的材料，即使被物化入 T2 库，
 对其的再取材动作仍记 OBS 轨（=`RE_SLICE` 族——存量化不改变层归属，成本与归因同 OBS）；
+此类同录音索引/物化结构统一记 **OBS-INDEX**（观测组织件）：只检验观测组织与访问效率、
+**不承担外部知识 ORG 结论**（现状盘点中他文自建之同录音"库/图"按此归类）；
 `SEARCH(q,库)` 之"库"只含**本任务观测之外**的材料库（web/发音库〔key 与 value 均为外部
 构造：G2P/TTS/口音模型+世界知识候选；个性化克隆 key 的音色条件化属**表示对齐**——材料
 内容仍为外部构造、层归属仍记 SUPPLY，其 enrollment 音频处理成本按 OBS 记账（§2.4③）〕
@@ -324,7 +342,7 @@ NB 主载体的信息角色由闭卷探针读数界定（§5.1 污染协议）�
 暗默前提。
 
 ### §1.7 学界现状：五条研究线的问题地图（本版重构，依据见治理节；literature cut=
-2026-08-01 统一口径；逐件证据等级随 §8/§9 登记、引用条目见 §10 参考文献表）
+2026-08-02 统一口径；逐件证据等级随 §8/§9 登记、引用条目见 §10 参考文献表）
 
 学界已分别推进知识问题的不同环节；下面按 ORG/SUPPLY/USE/CONTROL 归位五条线，每条固定
 答六问：**研究问题、知识/证据来源、接口与训练态、代表工作、常用载体与指标、已知失败
@@ -354,24 +372,45 @@ Spoken Darwin-Science 术语载体〔2606.00507，登记级〕）。**六问归�
 双侧证据合同）；知识 provenance/跨源组织/证据准入/答案层合理性通常不是该线研究对象
 ——问题维度差异之描述、非新颖性判断。→ 对应 RQ2 与 NB 载体合同（§5.1）。
 
-**L2 speech/acoustic memory——知识可以带发音或音频 key（ORG）**：实体知识不只能以
-文本字符串组织——Pundak audio exemplars（纠正词音频样例记忆+声学匹配，生产 ASR 白盒）、
+**L2a acoustic/speech-key memory——知识可以带发音或音频 key（ORG）**：实体知识不只能
+以文本字符串组织——Pundak audio exemplars（纠正词音频样例记忆+声学匹配，生产 ASR 白盒）、
 PRISM（TTS 逐实体声学 key-value memory+推理期 kNN，training-free 白盒，§2.3 结构
 先行者）、Chan 2023（外部 off-policy 语音-文本映射入 contextual E2E ASR）、Trie 多发音
 与 CB-Whisper 的 TTS 表征亦属此线的 key 侧材料；同音判别残差 2025 已有训练型攻位
 （PAC：G2P 交错+发音判别 RL〔2509.12647，登记义务〕——§2.3 动机数的谱系坐标）；检索
-表征侧另有 omni-MLLM 检索编码器（Omni-Embed-Audio〔2604.18360，登记义务〕）。→ 直接
-对应 RQ1；R2 的实体发音库定位=该线在**冻结黑盒 omni 接口约束**下的研究实例（§2.3 阶梯
-与中止规则）。
+表征侧另有 omni-MLLM 检索编码器（Omni-Embed-Audio〔2604.18360，登记义务〕）；声学键
+构造 2025 已有 TTS→冻结编码器稠密向量形态（GA-NEC，L3 详——其"phonetic"自称实为编码
+器向量、非音素〔D2 源核〕）。→ 直接对应 RQ1；R2 的实体发音库定位=该线在**冻结黑盒
+omni 接口约束**下的研究实例（§2.3 阶梯与中止规则）。
+
+**L2b speech entity retrieval/linking——ASR 不确定性→实体检索/链接/消歧（自成一线，
+本版自 L2 拆出）**：**wang21b（Interspeech 2021）**——ASR N-best 经 Levenshtein 对齐
+**软融合为单一查询向量**入目录检索（零假设选择/零档位切换——"N-best 选择"引法即误引）
++检索后 top-1 归一化分数**单一全局阈值弃权**（非训练分类器、非请求前置过滤、非逐件
+准入；头条 11.07% 在 θ=0 闸门关闭下取得；全组件私有数据从零训练、零音频通道、逐用户
+设备名目录单源〔D2 源核〕）；Retrieve-and-Copy（EMNLP Industry 2023）——20K 级目录
+规模化检索+拷贝、近音混淆实体与延迟工程〔登记级〕；TED-EL（LREC-COLING 2024）——语音
+实体链接任务定义与语料（L4c 详，谱系第三点）。**六问归位**：问题=ASR 不确定下实体
+如何被检回/链接/消歧；来源=用户目录/实体库；接口/训练态=全训练检索器为主；载体/指标=
+私有或自建，RErr/F1；已知失效=域外拒识只有相对量、绝对水平未报（wang21b）、消歧文本
+侧不可达音频（TED-EL）。→ 对应 RQ1 之 key/索引与 RQ2 之供给对象；**逐件内容依据的
+证据准入与多源仲裁未见于本线已登记件（描述性盘点、量词以已登记集合为界）**。
 
 **L3 ASR correction 与 agentic revision——重心转向候选知识如何使用（USE）**：先得到
 识别结果/多假设、再用描述/语境/LLM 约束/工具调用/迭代修订裁决——DANCER（实体描述增强
 的 NE 纠错，该机制的早期代表；2026 已有以宽域描述/元数据推理链为上下文的后继形态
 〔2606.10838，登记义务〕）、G-SPIN（音素级 GNN 候选邻域+MLM 句内语境评分+LLM 受限重排；
 **无外部知识源**〔TCR 一手核验：`entity description` 仅现于其参考文献、world/external
-knowledge 全 0 命中〕；GNN 有离线训练）、**DeRAGEC**（ACL Findings 2025：对检索到的
-实体候选做 training-free 语音学+定义增强的去噪/过滤后再纠错——**候选准入形态已有
-实例**，CommonVoice+STOP 双载体〔2506.07510，摘要级、分级 D2 义务〕）、RECOVER（API-only
+knowledge 全 0 命中〕；GNN 有离线训练）、Whispering LLaMA（EMNLP 2023：跨模态生成式纠错前驱——声学特征+N-best 入 LLaMA 适配层，
+训练型〔2023.emnlp-main.618，登记级〕）、**GA-NEC**（EMNLP 2025 main："声学键→候选→
+准入"轴上槽位最满的一件——TTS→冻结 Whisper-base 编码器+可训练 CNN 之声学键（非音素）、
+逐库 cross-attention 检索（O(|库|)、声学键+ANN 索引槽留空=其自列 future work）、**两级
+准入门**〔硬阈值+top-5 与逐候选学习式 `<empty>` 弃权——门经 20% 对抗注入**训练**而得、
+非 training-free；准入判定音频条件化〕；catalog-miss 未测（库覆盖率按构造 100%）、
+黑盒边界仅及被纠 ASR 而纠错栈自有白盒〔D2 源核〕）、**DeRAGEC**（Findings ACL 2025
+正式件：对检索到的实体候选做 training-free 语音学+定义增强的去噪/过滤后再纠错——
+**候选准入形态已有实例**，CommonVoice+STOP 双载体〔2025.findings-acl.786 本地在册、
+arXiv 2506.07510 同源；分级 D2 义务〕）、RECOVER（API-only
 training-free 多假设实体纠错+外显 rescore，§8 最强同边界近邻）、**Voice Memory**
 （2026-07：冻结纠错器读逐域 memory.md 整篇前置（无键控存储）、**按话语选择 act/
 abstain**、过纠率为其亮点读数（主目标读数=ρ/WER）、前向 pass 离线优化——按样本克制
@@ -405,7 +444,8 @@ RQ3；"Agentic ASR" 命名空间 2026 已有占用，R2 不以该名作命名主
 **L4 audio retrieval/RAG——按三类信息边界分立（v19 三分重构：三类在知识来源、载体、
 指标与污染风险上不同，不共用一条线承载）**：
 
-- **L4a 同录音内的结构化索引、规划与重听（ORG+OBS+CONTROL）**：PlanRAG-Audio（结构化
+- **L4a 同录音内的结构化索引、规划与重听（OBS-INDEX+CONTROL——同录音索引=观测组织、
+  非知识形式〔§1.3 自观测材料裁定〕，各文自建"库/图"按此归类）**：PlanRAG-Audio（结构化
   多流音频库 transcript/speaker/emotion/sound_event+按 query 规划模态与时间片的确定性
   SQL 检索；预处理一次性、**无查询期音频回访**、知识源封闭于目标录音；短时长文本型任务
   净负〔D2 源核〕）、GRGA（五类边多维图+training-free in-context 规划检索〔逐字
@@ -420,15 +460,22 @@ RQ3；"Agentic ASR" 命名空间 2026 已有占用，R2 不以该名作命名主
   输入音频**、外部世界知识动作零命中；"保留表面矛盾、不裁决孰对"=明文零准入设计；重听
   仅 5.0% 题触发、非通用回退；MMAR 头条 +1.50pp=999 题中 15 题〔D2 源核；零 venue
   声明〕——OBS 侧逐样本条件取证+可审计轨迹已有实例、证据准入与双源同尺度比价均在其
-  动作空间之外）。六问归位：
+  动作空间之外）、**策略控制时间线锚二件（本版时间线更正之据）**：johnson24
+  （Interspeech 2024——deep-Q 学"何时跳过/跳多远"的长音频跳读策略：trained 策略、单
+  动作型〔跳过〕、零外部知识〔interspeech_2024.johnson24，登记级〕）与 yang25n
+  （Interspeech 2025——training-free 双维 chunking〔音频+查询双侧〕+聚合投票+LLM
+  refinement 之长音频检索管线：零策略学习〔interspeech_2025.yang25n，登记级〕）。
+  六问归位：
   问题=长音频如何被寻址与
   规划访问；来源=**任务自身观测**；接口/训练态=冻结件装配为主；指标=长音频 QA/DER；
   已知失效=短时长净负、无准入的并集污染。
-- **L4b 外部音频/语音库检索（ORG+SUPPLY）**：WavRAG/SpeechDPR/SpeechRAG（§2.1 检索表征
-  线，全训练型）、ATIR（音频-文本交错上下文检索：四型任务基准+**训练** MLLM retriever
-  〔D2 源核："train our ATIR model"；emotion/speaker 摘要点名、评测 QA 中心〕）、MARS
+- **L4b 外部音频/语音库检索（ORG+SUPPLY）**：WavRAG（ACL 2025 正式件——原按 arXiv
+  记 preprint、本版发表态升级）/SpeechDPR/SpeechRAG（§2.1 检索表征线，全训练型）、ATIR
+  （音频-文本交错上下文检索：四型任务基准+**训练** MLLM retriever〔D2 源核："train our
+  ATIR model"；emotion/speaker 摘要点名、评测 QA 中心〕）、MARS
   （会话内声学/文本历史上下文检索与选择；检索域=会话内三元组、零重听、Whisper 全量
-  微调〔D2 源核〕）。六问归位：问题=音频/跨模态库如何被检回；来源=外部或历史音频库；
+  微调〔D2 源核〕）、VoxRAG（免转写 spoken query→音频段直检——MAGMaR 2025 workshop 件、
+  低权重登记〔2025.magmar-1.3，登记级〕）。六问归位：问题=音频/跨模态库如何被检回；来源=外部或历史音频库；
   接口/训练态=训练型 retriever 为主；指标=R@k/下游 QA、MER；已知失效=零训练 embedder
   地板、top-k 增益非单调。
 - **L4c 外部世界知识/KB/web grounding（SUPPLY+USE；时间线自 2024 起——v18 曾以 2026
@@ -464,8 +511,11 @@ RQ3；"Agentic ASR" 命名空间 2026 已有占用，R2 不以该名作命名主
 2025）**——音频/文本冲突下的 text bias 基准（对抗文本下音频贡献 Norm_adv 中位数
 2.7%、**Acc_adv** 15/21 格 ≤5%〔两指标分立、格数系于 Acc_adv——D2 源核〕——**外部
 文本证据可近乎完全压制音频观测=R2 准入控制动机的直接证据**；其 TIR 定义与主表不闭合等 8 处内部矛盾 D2 在案、引用按限定）；Modica 2026
-（事实召回机制从文本到语音是否迁移）、Wang 2026（模态推理差距的诊断+RL 方法——本图谱
-引其差距读数、其方法属训练路线）；更早机制框架：SALAD（差距归因=文本能力遗忘+跨模态
+（事实召回机制从文本到语音是否迁移）、Wang 2026 (TARS)（模态推理差距的诊断+RL 方法——本图谱
+引其差距读数、其方法属训练路线）；**正式层补强二件（本版收编）**：NAACL 2025 表示分析
+（跨语言×跨模态层间对齐——模态差距大于语言差距之正式短文证据〔2025.naacl-short.51，
+登记级〕）与 CCFQA（AAAI 2026——八语种 speech/text 事实性平行基准：任务级"参数知识
+能否经语音读出"的正式评测层〔本地在册=arXiv 2508.07295 双件；OJS 正式件付费墙未落盘〕）；更早机制框架：SALAD（差距归因=文本能力遗忘+跨模态
 错位〔2510.13632，登记义务〕）、TextPro-SLM（输入侧最小化差距〔2605.05927，登记义务〕
 ——§4.4"核非全能感知者"公理的公开测量线索）。**六问归位**：问题=参数知识/推理能力在
 语音模态下能否稳定读出；来源=模型内部；接口/训练态=白盒分析+训练干预为主；载体/指标=
@@ -642,10 +692,11 @@ emotion/sound_event 四流，冻结现成模型产出）+规划式 SQL 检索—
 training-free 规划检索——图为组织实例，但证据按并集进入无准入 schema、无外部世界知识
 层。会话史侧另有动态本体记忆 schema（实体/术语/表面变体/潜在 ASR 混淆/语义关系字段
 〔2606.13464，摘要级、登记义务〕）——其组织对象为对话历史、非外部世界知识层；变体/
-混淆类字段在会话史域已有实例，外部知识域的版本/出处/冲突/abstain schema 仍是 R2 的
-实验对象（描述性）。据此，语音域组织研究的开放面收敛为：**面向外部世界知识与音频材料统一寻址的
-schema（版本/出处/冲突/abstain 字段）、query 自适应融合规则与面级消融**——O-config 臂
-的实验问题即此（相邻线坐标见 §1.7 L4，描述性口径）。
+混淆类字段在会话史域已有实例；外部知识域的版本/出处/冲突/abstain schema 为 R2 的
+**工程合同与后续分支**（RQ1 卡片口径——本轮不立独立主张、不作实验对象）。据此，语音域
+组织研究的**本轮实验面**收敛为：**key 表示/索引/切片/面装载与面级消融**——O-config 臂
+的实验问题即此（schema 字段按预注册工程合同随载体构造落盘、其价值检验留后续分支；
+相邻线坐标见 §1.7 L4，描述性口径）。
 
 ### §3.4 阶段二研究内容：key/value 建模三问 + 统一接口 + TFRL 优化
 
@@ -667,7 +718,8 @@ Siskos 线更换现成文本 embedder 在 Earnings21 上使增益塌 69–81%〔
 **问三：任务端到端优化（TFRL，身份两档制）**——key/value 建模空间的配置（切片策略/
 面组合/融合权重/候选宽度 N/**物化边界**）以任务效果为目标做 training-free 优化；
 training-free=零模型参数更新；控制器轻量策略允许在 **dev 交互中**更新，test 期一律
-冻结并按种子可重放（档 B 合同，§6.3）。**档 A（离线策略标定，
+冻结并按种子可重放（档 B 合同，§6.3；控制器=非模型——外置、无梯度、有限决策常量，
+权威定义见 §6.3）。**档 A（离线策略标定，
 入合同）**：dev 上 reward-guided 配置搜索、冻结后进 test（ASR 史上 LM 权重/beam 调优=该
 方法论四十年先例）；如实定位为 derivative-free 配置优化，**必设等预算优化器对照**
 （random search/Bayesian/evolutionary 同预算——赢不过随机搜索的优化器不立方法主张）。
@@ -874,9 +926,15 @@ judge-API 依赖与 split 冻结属执行合同问题，登记不解决。
 Siskos 的 oracle 余量已被其方法吃掉 68–77%（残余约 1.0–1.7pp）——效应量预注册前必须先测
 本核在选定载体上的基线实体错误率与 oracle 余量，余量不足即走回退梯，不得先注册后找载体。
 
-### §5.4 先导数据集构造（门二的解，两层设计）
+### §5.4 载体族构造（门二的解，两层设计；原"先导数据集"更名——同族数据、双 split 分工）
 
-**主载体层（真实长音频改造，先导 150–200 题）**：源=播客/会议/讲座/长访谈（GraphRAG 的
+**Discovery/Confirmatory 双 split 合同（本节全域）**：本载体族预先划分互不重叠的
+**discovery split**（构念/流程/方差先导、阈值/标注规则/prompt/载体选择在此调定）与
+**confirmatory split**（K0/K4 之正式判定读数唯一来源；冻结于任何调定之前、样本量由
+power 输入决定）；去泄漏按源音频/说话人/主题分组切分（同源材料不得跨 split）；
+discovery 读数不得充当任何确认性结论之证据（只作设计输入）。
+
+**主载体层（真实长音频改造，discovery 先导 150–200 题+confirmatory 扩展层）**：源=播客/会议/讲座/长访谈（GraphRAG 的
 Podcast 语料先例；**源音频的说话人授权/许可核查入构造合同**——真实说话人内容的使用与
 再分发边界逐源登记）；问题按三类信息需求设计（定位稀疏片段〔时间戳 gold〕/非词面面承重
 〔情感/说话人/事件为 key〕/音频实体→外部世界知识）＋**多 claim 长答子层**（K4 判定载体，
@@ -915,7 +973,8 @@ COI 对策**：基准独立发布、方法评测预注册。
 ### §6.2 臂族（重构版因果阶梯）与分层接口假设映射
 
 **分层接口纪律（归因总则；ORG/SUPPLY/USE 三形式+OPT 横切）**：ORG（组织：原始材料→可寻址单元；变量=切片/面/key/索引/
-物化）、SUPPLY（供给：当前状态→候选证据集；变量=触发/query/深度/停止）、USE（使用：
+物化）、SUPPLY（供给：当前状态→候选证据集；变量=query/深度/触发与停止之**条件参数面**
+〔触发/停止的裁决行为归 CONTROL，§1.3〕）、USE（使用：
 候选证据集→上下文与答案影响；变量=准入/融合/冲突/abstain）、OPT（优化：dev reward→冻结
 配置或策略）。**主实验一次只改一层**；跨层联合优化只作系统级最终臂、不承担单层机制归因。
 可独立证伪假设与判据绑定（RQ 对应随 §1.0 映射表；结论均按 §7 三态总则判读）：
@@ -999,15 +1058,25 @@ policy    : argmax_a V̂(a|s_t)；max_a V̂ ≤ τ 时 ANSWER/STOP；**跨动作
 transition: 一切查询输出先落候选区，仅 ADMIT 进核上下文；RE_RESOLVE/RE_SLICE 更新假设与
   邻域；一切写入带出处与时间锚。
 档B形式化（有限时域序贯决策合同；采纳依据见治理节）: 对象=有限时域序贯决策过程：
-  状态 s_t 如上（动作改写 H_t/E_t 故转移非平凡——非单步独立决策，"contextual bandit"
-  旧称退役）；动作=统一动作空间〔§1.3 层标签〕；horizon=预注册步数/预算上限（b_t 耗尽
-  或终结动作即止）；转移=§6.3 transition 行；**可观测反馈与奖励延迟**：test/部署期逐步
-  可观测量仅为 V̂ 启发式评分与状态特征——真实效用 delta_E 依赖 gold 标签、仅离线可得，
-  故**一切策略学习（含探索）只发生在 dev**（dev 期 episode 终局 delta_E 经离线 credit
-  assignment 分解至步级动作族——协议入 §9 义务）；**test 期策略完全冻结**、给定种子
-  可重放（§6.4 确定性硬约束按此口径覆盖）——零 test 期学习，TF-Strict 兼容边界=红线
-  约束模型参数、控制器策略属模型外计算且 test 冻结；档 B 相对档 A 的增益由 B-adapt 臂
-  承载（§6.2）、判据=K-RL（§7，对象=序贯策略）。
+  **状态 s_t**=假设集 H_t、已准入证据区 E_t、**候选证据区 C_t（查询/工具输出落入候选区、
+  经 ADMIT/REJECT 方入 E_t——`ADMIT/REJECT(e)` 之操作对象由此显式入状态）**、预算余量
+  b_t 与观测特征（**初始态** s_0=首轮解码假设集+空 E_0/C_0+满预算）；**动作**=统一动作
+  空间〔§1.3 层标签〕（**合法域**：候选区空时 ADMIT/REJECT 不可用、预算耗尽时仅终结
+  动作可用）；**horizon**=预注册步数/预算上限（b_t 耗尽或终结动作即止=**终止态**）；
+  **转移**=§6.3 transition 行（**观测随机性**：检索返回与工具输出为环境随机源、以快照
+  冻结+种子控制）；**episode return**=终局任务效用 delta_E（gold 依赖、仅离线可得）；
+  **可观测反馈与奖励延迟**：test/部署期逐步可观测量仅为 V̂ 启发式评分与状态特征，故
+  **一切策略学习（含探索）只发生在 dev**——**策略类**=外置、非神经、无梯度之序贯策略
+  （规则/表格/线性打分族，有限决策常量为其全部可调面）；**行为/探索策略**=dev 期预注册
+  ε-扰动于决策常量空间（非模型参数空间）；**离线 credit assignment**=dev 期 episode
+  终局 delta_E 分解至步级动作族（协议入 §9 义务）；**覆盖条件**=dev 期状态-动作覆盖
+  读数随 §9 预注册、不足即 K-RL 记 INCONCLUSIVE；**test 期策略完全冻结**、给定随机种子
+  可重放（§6.4 确定性硬约束按此口径覆盖）——零 test 期学习。**控制器权威定义（红线
+  口径，owner 落笔——裁定见治理节）**：本轮**不训练任何模型参数**、一切模型（含新引入
+  者）为冻结已发布检查点；控制器**不是模型**——其 dev 期 reward-guided 常量标定与 ASR
+  史上 LM 融合权重/beam 调优同类、不属红线"新训模型"对象。**档 A/档 B 同预算合同**：
+  两档共享动作空间、horizon、可观测信息与 dev 调参预算（等预算冻结、随 §9 预注册）；
+  档 B 相对档 A 的增益由 B-adapt 臂承载（§6.2）、判据=K-RL（§7，对象=序贯策略）。
 ```
 
 ### §6.4 复放与污染审计
@@ -1039,7 +1108,11 @@ pin 服务/日期/参数；逐次落盘 URL/文档 ID/rank/内容 hash；共享�
   类型与口音分层的符号一致性；abstain 不得靠压 coverage 造安全。
 - **效率（比较性 estimand+记账）**：**效率维度的比较性 estimand=每有效实体修正的完整
   链路边际成本**（增量成本/每修正——描述性报告、带区间、**不进主判据**〔效果优先纲领〕；
-  等成本/等质量/Pareto=后期诊断）；记账面=九维成本向量（retrieval hops, result bytes, core calls, audio
+  等成本/等质量/Pareto=后期诊断）。**比率定义合同**：分子取**净修正**（新修正实体数 −
+  correct→wrong 抵扣项，毛修正数并行报告）；分母=完整链路增量成本（含**索引/快照摊销**
+  按 amortized 维计入）；**净修正 ≤0 之格不报比率**（记 `RATIO_UNDEFINED` 并直接给成本
+  与净修正两个原值——零/负分母与零/负分子均不得折算）；区间估计=paired bootstrap（协议
+  随 §9 预注册）；记账面=九维成本向量（retrieval hops, result bytes, core calls, audio
   seconds, controller tokens, judge calls, wall-clock, API currency, index/snapshot
   amortized），均值+P95；探针=两臂共用仪器同频同额计费；含/不含探针双读数（该 estimand
   的成本先验：核当语义通道较 ASR 贵约一至二个量级——估计值，预检电池⑤实测后替换，
@@ -1056,10 +1129,22 @@ pin 服务/日期/参数；逐次落盘 URL/文档 ID/rank/内容 hash；共享�
 | ④条件扩展（依赖③对应读数、互不为前置） | ③读数 | RQ4a 双源选择与调度族（K1b 三合取、K1a/K2——判定载体=NB 主载体）与序贯策略（K-RL/K-OPT）；机制核消融 PS-abl/P13N（K-PS——SLU/W1 网格+诊断集）；面联邦全量；DICT-SCALE 已随③（K-XOVER 载荷臂） | K1b 前提=②过阈（§6.1② 探针稳定性）；K-RL 前提=档 A 在案 | 中-大 | 对应支线停、主线结论不受累 |
 | ⑤独立复制 | ③④成立项 | K3 分栏复制读数 | 方向不一致→REPLICATION_FAILED 范围收窄 | 中 | 主张限主载体 |
 
-**先导/确认性数据分工**：先导 150–200 题=构念/流程/方差先导与触发门 gold（K0/K4 判定
-子层在其内——其判定读数以子层灵敏度过检为前提）；**确认性判据的样本量由 power 决定、
-用冻结且独立的扩展集**（§5.4 全量层——构造过大工件三问后另批）；先导读数不得直接充当
-确认性结论的全部证据（样本分配与多重比较可行性论证随 §9 预注册）。
+**先导/确认性数据分工（§5.4 双 split 合同为正典）**：discovery split 150–200 题=
+构念/流程/方差先导与触发门 gold、阈值/标注规则/prompt/载体选择在此调定；**K0/K4 正式
+判定读数唯一来源=confirmatory split**（冻结于任何调定之前、样本量由 power 决定、按
+源音频/说话人/主题分组去泄漏——§5.4 全量层构造过大工件三问后另批）；discovery 读数
+不得充当任何确认性结论之证据（样本分配与多重比较可行性论证随 §9 预注册）。
+
+**最小确认路径（minimum confirmatory path；资源上界=可行性规划估计、声明不确定度——
+非成本判据、不触效果优先纲领）**：路径=单主载体（E21+ConEC 数据包）→mandatory
+baseline set（§7 K-NB 冻结条款）→主指标族（实体准确率+稀有词/逐实体类 WER）→确认
+样本量由 power 输入决定（§9）→stop/go 顺序=表中①→②→③（K0 门→K5→K-SUP→K4→
+K-NB，各按三态出口停/续）。**量级上界估计（±一个数量级内、随 Stage-2A 第零步实测
+替换）**：冻结核/API 推理调用 ≤10⁵ 次级（全部臂×confirmatory split）；GPU=零训练、
+推理级（本地冻结核推理数百小时或 API 等价）；标注/构造 ≈1–2 人月（载体族两 split+
+gold 协议）；存储 ≤2TB（音频+检索快照+全程 trace）；经费上界随 §9 预注册。面联邦
+全量/个性化 P13N/档 B/多载体复制/基线全迁移=条件扩展（表中④⑤）、互不为前置、不入
+本路径。
 
 ---
 
@@ -1074,12 +1159,17 @@ NEGLIGIBLE`：效应 95% 上置信界不超过预注册阈值，**或**通过预
 以"下置信界 ≤0/未过阈"直接触发；各判据式中的该类触发语句按本总则判读。数值阈值与
 反向检验协议随 §9 预注册。
 
-**K0（必要性判据；H0 判定式；判定载体=先导数据集〔多 claim 子层+负类层——无/真证据
-三臂对照在此运行〕；`IN_DISTRIBUTION_CARRIER` 登记之载体不承载必要性判定——NB 主载体
-上的 A1′ 行=READOUT_ONLY 佐证、其正读数不能分离外部新信息与潜在知识激发〔§1.3 ③类
-归 R1/R6〕）**：A1′（gold-evidence masked）−A0 paired delta 95% 下置信界 < 预注册
-SESOI → 该载体上无外部证据 headroom、**该载体上**供给/使用杠杆不评（不判方向死；
-程序级中止权在 owner——回 owner 议载体/任务型；SESOI 数值随 §9 power 预注册）。
+**K0（必要性判据；H0 判定式；判定载体=载体族 confirmatory split〔多 claim 子层+负类层
+——**OBS×外证 2×2 析因**在此运行：A0/OBS-only〔重听预算开、零外证〕/A1′〔gold-evidence
+masked、零重听〕/双开〕；`IN_DISTRIBUTION_CARRIER` 登记之载体不承载必要性判定——NB
+主载体上的 A1′ 行=READOUT_ONLY 佐证、其正读数不能分离外部新信息与潜在知识激发〔§1.3
+③类归 R1/R6；"参数知识存否"由闭卷参数化召回探针 READOUT 佐证、不入判定式〕）**：
+主分量=外证主效应（A1′−A0 paired delta）；伴随分量=OBS 主效应与交互项（各自独立
+estimand、错误按预注册分类学〔负类/观测型/知识型/交互型〕归账）。**三态**：
+`SUPPORTED`=外证主效应 LCB 越过预注册 SESOI；`REFUTED_OR_NEGLIGIBLE`=UCB 不超预注册
+可忽略界、或预注册等效/ROPE 检验成立→该载体上无外部证据 headroom、**该载体上**供给/
+使用杠杆不评（OBS 主效应/交互读数并行保留；程序级中止权在 owner——回 owner 议载体/
+任务型）；`INCONCLUSIVE`=其余回 owner。SESOI 数值随 §9 power 预注册。
 **灵敏度前置检定（适用单位=载体及先导数据集之判定子层——K4 多 claim 子层、K5 非语义
 槽子层各自过检定）**：任何判死**与任何全局生效之改挂**只在载体/子层过检定后有效
 （改挂侧检定=其判定载体读数须离地板/天花板双界——诊断载体的近逆性饱和读数不携改挂权、
@@ -1112,12 +1202,13 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   扩至成立侧析取族〕；REFUTED_OR_NEGLIGIBLE=全部源与合并等效（过反向检验）→ 供给源
   选择不立主张、回落合并供给；INCONCLUSIVE=其余（含 SPLIT_READING）回 owner。ConEC
   上下文非 R2 构造贡献——如实。
-- **K1a（通用调度）**：A4a vs 效果最强固定策略（阶梯扫至成本不低于 max(A4a,A4b)，取效果
-  最高档×选定 re-resolve 档；并列论文 SOTA 臂、random-matched-cost 与
-  serial-composition 固定臂〔载体=NB 主载体，§5.1 整合载体条款〕），paired delta 95%
-  下置信界 ≤0 → 调度类杠杆判死。matched-cost 不显著低于 A4a → 读数标 `ALLOCATION_
-  UNPROVEN`；自适应臂成本超阶梯预注册倍数 → `COST_DISPARATE`（仅在阶梯无法扩至成本可比
-  时非空转）。
+- **K1a（通用调度；判定载体=NB 主载体〔§5.1 整合载体条款〕）**：A4a vs 效果最强固定
+  策略（阶梯扫至成本不低于 max(A4a,A4b)，取效果最高档×选定 re-resolve 档；并列论文
+  SOTA 臂、random-matched-cost 与 serial-composition 固定臂）。**三态**：`SUPPORTED`=
+  A4a−最强固定策略 paired delta LCB 越过预注册 SESOI；`REFUTED_OR_NEGLIGIBLE`=UCB 不超
+  预注册可忽略界、或预注册等效/反向非劣检验成立 → 调度类杠杆判死；`INCONCLUSIVE`=其余
+  回 owner。matched-cost 不显著低于 A4a → 读数标 `ALLOCATION_UNPROVEN`；自适应臂成本超
+  阶梯预注册倍数 → `COST_DISPARATE`（仅在阶梯无法扩至成本可比时非空转）。
 - **K1b（双源独立性=合取条件；判定载体=NB 主载体〔整合载体条款〕，T1 深搜线读数为
   READOUT_ONLY 复证）**：①A4b−A4a paired delta 95% 下置信界 >0 ∧ ②标定后 β
   向量（β1,β2）**联合**与零可区分（联合检定；单分量归零不构成② 不满足；**适用前提**=
@@ -1125,11 +1216,17 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   〔声学质量先验/工具置信度等五路〕时，② 记 PENDING_CAPABILITY——**本悬置态下 K1b
   不判、不进 §8 MERGE 表〔悬置≠不成立，各行均不触发〕；若 K1a 判死则记 `DEPLOYMENT_
   SPLIT` 附分维度在案读数清单回 owner、A4b 不作部署候选；K2 不随本悬置〔β 标定非其
-  输入〕**：β 只覆盖已接入通道、其联合归零不蕴含感知机制不在场）∧ ③**A4b vs serial-composition 固定臂（无条件双源串行——按样本选择的
-  正面对手）paired delta 95% 下置信界 >0**；任一不满足 → 音频特有主张判死、按 §8 MERGE 表判定路由
-  （K1b 判死 ∧ K1a SUPPORTED〔显著〕之格由 MERGE 第 1 行处置；表内无行触发之剩余格
-  〔K1a 判死或 INCONCLUSIVE〕：记 `DEPLOYMENT_SPLIT` 附分维度在案读数清单回 owner、
-  清单如实标注 K1a 三态——本括注语义随三态总则，"未判死"不折算"显著"）。**联合格与部署裁定（统一决策
+  输入〕**：β 只覆盖已接入通道、其联合归零不蕴含感知机制不在场）∧ ③**A4b vs
+  serial-composition 固定臂（无条件双源串行——按样本选择的正面对手）**。
+  **三态（合取命题总则实例：全部分量支持才成立、任一承重分量被正式反证则推翻、仅未获
+  支持则不确定）**：`SUPPORTED`=①③ 各自 paired delta LCB 越过预注册 SESOI ∧ ② 联合
+  检定与零可区分；`REFUTED_OR_NEGLIGIBLE`=任一承重分量被**正式反证**——①或③ 之 UCB
+  不超预注册可忽略界/预注册等效检验成立、或 ②（适用前提内）之联合等效检验成立 → 音频
+  特有主张判死、按 §8 MERGE 表判定路由（K1b 判死 ∧ K1a SUPPORTED〔显著〕之格由 MERGE
+  第 1 行处置；表内无行触发之剩余格〔K1a 判死或 INCONCLUSIVE〕：记 `DEPLOYMENT_SPLIT`
+  附分维度在案读数清单回 owner、清单如实标注 K1a 三态——"未判死"不折算"显著"）；
+  `INCONCLUSIVE`=其余（任一分量仅未获支持而无正式反证、或 ② 悬置）——K1b 不判、回
+  owner。**联合格与部署裁定（统一决策
   程序——取代先前的例外子格/部署候选枚举，删除一切自动回落规定）**：当 K1b 成立而调度族
   （K1a 或 K2）存在判死时——①**机制结论**：双源机制结论降为信号级 READOUT、回 owner
   定位（管辖权留 R2、不触发 R6/R8；感知路由作加装项候选登记）；②**部署归属不由本条款
@@ -1140,20 +1237,26 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   删除（其曾多轮被证可指向在案证劣之臂——见治理节）。配对成本可比：探针
   两臂共用仪器抵消；A4b 成本超 A4a 预注册倍数（core calls/retrieval hops/audio seconds
   三维）→ `COST_DISPARATE`，不得单独支撑独立主张。
-- **K-NB（配置族最佳效果判据；统计口径与 K1a 同型）**：NB 主载体上，主张臂（运行时无专用ASR前端）
-  vs incumbent（ASR+biasing-GER，§8 分组合同实例化；对手入判边界=§5.1 整合载体条款）：
-  **对全部入判组**的**实体准确率与稀有词/逐实体类 WER（§5.1 主指标口径）两读数** paired
-  delta 95% 下置信界**均 ≤0〔组×读数全合取〕**→ 配置族最佳效果主张判死，降级"理解任务
-  限定的知识增强"；部分（非全部）组不及、或单读数不及→分别记 `SPLIT_GROUP`/
-  `SPLIT_READING`、回 owner 裁定（不自动判死）；若 FC 双通道参照臂在
-  NB 主载体上使主张臂不及（**FC 改判触发同用两读数合取口径；单读数不及记 `SPLIT_READING`
-  回 owner**）→ 同样降级为"增强"并如实改判（配置族最佳效果主张
-  只能由无专用ASR前端臂承载）。载体身份已冻结（§5.1）；数值（SESOI/power）以 Stage-2A 第零步
-  余量检定为输入预注册，预注册前不判。**跨载体口径**：K-NB 判死权仅在 NB 主载体——对入判组（⓪①②与⑤⑥〔均重实现后入判——⑤现役成员=RECOVER 子档；DARAG 已裁定不入，未来移植须另行预注册协议〕），
-  paired delta 逐组计算；多重性校正的作用域=**跨判据/跨分桶的判死比较族及 K-SUP 条款
-  所扩之成立侧析取族**（本节末条，
-  K-NB 判决作为单成员计入）——K-NB 合取内部（组×读数格）**两向均不施校正**（IU 型全
-  合取自身保守，逐格加宽区间反而放松判死侧）；组④ trained 上界的正面交锋钉
+- **K-NB（配置族最佳效果判据；全称主张=胜过全部 mandatory 入判组——反证逻辑按全称
+  命题）**：NB 主载体上，主张臂（运行时无专用ASR前端）vs incumbent（ASR+biasing-GER，
+  §8 分组合同实例化；对手入判边界=§5.1 整合载体条款）。**mandatory baseline set 冻结
+  条款**：入判组集合、各组版本、信息边界、调优预算与 readiness gate 随 §9 预注册冻结、
+  **不可事后缩减**；任一 mandatory 对手届时不可运行 → 本判据记
+  `INCONCLUSIVE_BASELINE_NOT_READY`（主张不可判、对手不移出入判集、回 owner）。
+  **三态（全称命题总则实例）**：`SUPPORTED`=对**全部** mandatory 入判组×**实体准确率与
+  稀有词/逐实体类 WER（§5.1 主指标口径）两读数**的合取成立 ∧ 护栏族四条过（见成立侧
+  合同）；`REFUTED_OR_NEGLIGIBLE`=**任一** mandatory 对手经预注册**反向检验**坐实不劣/
+  更优（该对手两读数合取上反向 paired delta LCB>0、或预注册等效检验成立）→ 全称主张
+  被反证、判死并降级"理解任务限定的知识增强"；`INCONCLUSIVE`=其余——部分组/单读数仅
+  未获支持分别记 `SPLIT_GROUP`/`SPLIT_READING` 回 owner（未获支持≠反证、不自动判死）。
+  若 FC 双通道参照臂在 NB 主载体上使主张臂不及（**FC 改判触发同用两读数合取口径；单
+  读数不及记 `SPLIT_READING` 回 owner**）→ 同样降级为"增强"并如实改判（配置族最佳效果
+  主张只能由无专用ASR前端臂承载）。载体身份已冻结（§5.1）；数值（SESOI/power/等效界）
+  以 Stage-2A 第零步余量检定为输入预注册，预注册前不判。**跨载体口径**：K-NB 判死权仅在 NB 主载体——对入判组（⓪①②与⑤⑥〔均重实现后入判——⑤现役成员=RECOVER 子档；DARAG 已裁定不入，未来移植须另行预注册协议〕），
+  paired delta 逐组计算；多重性校正的作用域=**跨判据/跨分桶的判死比较族、K-SUP 条款
+  所扩之成立侧析取族、及 K-NB 反证侧之跨对手 ∃ 型比较族**（本节末条——全称主张的反证
+  侧为"任一对手"存在量词、跨对手比较须入校正族）；K-NB **成立侧**合取内部（组×读数格）
+  不施校正（IU 型全合取自身保守）；组④ trained 上界的正面交锋钉
   LibriSpeech+Rare5k 作**强制对照读数**：主张臂不及 trained 上界（不及=paired delta 95%
   下置信界 ≤0，与判死族同式但不入其多重性校正、施于对照方向）→配置族最佳效果主张改判"增强"
   并如实报差距（跨信息边界对手、不携判死权；该载体上仅预注册实体子切片准确率入读数、
@@ -1171,25 +1274,29 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   自身裸核臂过预注册非劣界；②预注册关键 worst-group（口音/音频类别分桶）两主指标非劣；
   ③correct→wrong 事件率不超预注册上界；④coverage 条款——abstain 率超预注册带宽即
   护栏读数无效（不得以大量拒答人为压低风险）**；部分（非全部）入判组不及→记 `SPLIT_GROUP` 回 owner
-  （不自动判死；全部组均不及=判死侧全合取成立、走判死式）；⓪ 组的成立
+  （不自动判死；判死唯经三态条款之反向检验坐实）；⓪ 组的成立
   读数=K-NB 两主指标口径（实体准确率+稀有词/逐实体类 WER）——其总 WER/B-WER 数字仅作
   动机与 READOUT（§0 反向先验② 之出处）。
-- **K-PS（阶段一机制核判据）**：PS-abl 消融显示发音库贡献在困难实体切片上的 paired delta
-  95% 下置信界 ≤0 → 发音库降级为工程组件（不承载机制核主张）；P13N 三臂在口音分层上逐级
-  无增益 → 对应个性化机制（变体族/克隆 key）逐个降级。降级不判方向死——机制核主张回落到
-  双源调度与组织优化两支柱。
+- **K-PS（阶段一机制核判据）**：构念=PS-abl 消融所示发音库贡献（困难实体切片 paired
+  delta）。**三态**：`SUPPORTED`=贡献 LCB 越过预注册 SESOI；`REFUTED_OR_NEGLIGIBLE`=
+  UCB 不超预注册可忽略界、或预注册等效/ROPE 检验成立 → 发音库降级为工程组件（不承载
+  机制核主张；降级不判方向死——机制核主张回落到双源调度与组织优化两支柱）；
+  `INCONCLUSIVE`=其余回 owner。P13N 三臂在口音分层上逐级同式判读（各级独立三态；"无
+  增益"之降级须经等效检验坐实、仅未获支持=不确定），对应个性化机制（变体族/克隆 key）
+  逐个处置。
 - **K2（over/under 双向；判定载体=NB 主载体〔整合载体条款〕，T1 深搜线 over/under 读数
   为 READOUT_ONLY 复证；K-Gate② 悬置态下本判据对 A4b 不判死——随 PENDING_CAPABILITY
   悬置，§6.1②/K-Gate②）**：over-search 事件=最终答错 ∧ t>t*（t*=最早一个当步候选正确的步，定义性用语）存在
   SEARCH；判定输入=已落盘答案与 rank/hash 轨迹；判官抽样复核（抽样框=候选 episode、输入
   不含检索正文、CI 对象=事件率、抽样率与协议预注册）；如实标注为事件率估计非内容级全量。
-  本判据之 ② 态（判死）须由预注册的 harm 方向检验成立（事件率 paired 差下置信界越过
-  预注册 harm 界）；非劣未过阈仅记 INCONCLUSIVE 回 owner——与三态总则同构、方向按 harm
-  估计量取向（§9 预注册）。
-  A4b 的 over-search 事件率相对 **K1a 所定之效果最强固定策略（同一档）** paired 差 95%
-  上置信界 > 预注册非劣界 → 调度杠杆判死（never-search 角点不作本判据对照——其事件率
-  恒零属构造性；**若 K1a 所定臂即 never-search 角点或非阶梯档对照臂，本判据对照取次强
-  非退化固定臂、无此臂时记 `PENDING_COMPARATOR` 回 owner 不判死**）。under-call 对偶读数（§6.5）同报，不单独判死。
+  对照臂=**K1a 所定之效果最强固定策略（同一档）**（never-search 角点不作本判据对照——
+  其事件率恒零属构造性；**若 K1a 所定臂即 never-search 角点或非阶梯档对照臂，对照取次
+  强非退化固定臂、无此臂时记 `PENDING_COMPARATOR` 回 owner 不判**）。**三态（harm 方向
+  估计量：A4b 相对对照臂之 over-search 事件率 paired 差）**：`SUPPORTED`（调度无过度
+  检索伤害）=事件率差 UCB 不超预注册非劣界；`REFUTED_OR_NEGLIGIBLE`（判死）=事件率差
+  LCB 越过预注册 harm 界（harm 方向优越性检验坐实）→ 调度杠杆判死；`INCONCLUSIVE`=
+  其余（含非劣未过而 harm 未坐实）回 owner。under-call 对偶读数（§6.5）同报，不单独
+  判死。
 - **K3（复制；按主张分栏）**：NB 主张复制载体=TED-LIUM3；T1 深搜线复制载体=
   AudioRAG-500（**回退梯③ 触发〔AudioRAG-500 升主〕后 T1 栏复制载体另行预注册、未定
   即记 `PENDING_REPLICATION_CARRIER` 回 owner**）；K4/K5-t 之判定载体结论外推另按 K3 同型协议（本节范围条款）——各按
@@ -1197,24 +1304,28 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   → 对应主张范围收窄至其主载体、记 `REPLICATION_FAILED` 回 owner（不构成主载体上的
   判死）**；复制载体不能产出对应主张的主指标读数（或入判组不可在其上实例化）时记
   `PENDING_REPLICATION_CARRIER` 回 owner——不构成范围收窄、亦不构成判死。
-- **K4（准入门；载体形态前置，对称条款）**：A3 未降 Knowledge-error（构念定义=证据可用
-  而答案仍错的知识使用错型）或 type-D（构念定义=证据误导所致 correct→wrong 替换错型；
-  两构念的操作判读协议随 §9 K4 义务预注册）增多 → 判死留 R5/R8。**成立侧合取**：降
-  Knowledge-error ∧ type-D 不增 ∧ 该子层预注册答案层指标过 SESOI〔第三分量之指标选型
-  与阈值随 §9 K4 义务预注册；单分量不及记 SPLIT_READING 回 owner、不判成立〕。**结论
-  范围**：RQ3 结论
-  以先导载体为限、不外推——外推须第二载体复制（K3 同型协议，§9 义务）。前置：准入价值集中于长文/多 claim 任务（Self-RAG：ASQA −14.0 vs 短答
-  −2.9）——**判定载体=先导数据集多 claim 子层（§5.4 构造合同）**；短答载体上的 A3−A2
-  读数**正负两向**均只作 READOUT、不单独承载 RQ3 结论（判死侧另需 correct→wrong 基数过
-  检定③ 且证据密集子桶一并为负；正向侧同受载体形态约束——对称），载体形态不足即记
+- **K4（准入门；载体形态前置，对称条款；判定载体=载体族 confirmatory split 多 claim
+  子层〔§5.4 双 split 合同〕）**：构念=Knowledge-error（证据可用而答案仍错的知识使用
+  错型）与 type-D（证据误导所致 correct→wrong 替换错型；两构念操作判读协议随 §9 K4
+  义务预注册）。**三态**：`SUPPORTED`=三分量合取——KE 降之 LCB 越 SESOI ∧ type-D 不增
+  〔其"不增"按预注册非劣界读〕∧ 该子层预注册答案层指标过 SESOI〔指标选型与阈值随 §9
+  预注册〕（单分量未获支持记 `SPLIT_READING` 回 owner、不判成立）；
+  `REFUTED_OR_NEGLIGIBLE`=KE 之 UCB 不超可忽略界或预注册等效检验成立、**或** type-D
+  增多经预注册 harm 方向检验坐实（且 correct→wrong 基数过检定③、证据密集子桶一并为负）
+  → 判死留 R5/R8；`INCONCLUSIVE`=其余（含 SPLIT_READING 族）回 owner。**结论范围**：
+  RQ3 结论以载体族为限、不外推——外推须第二载体复制（K3 同型协议，§9 义务）。前置：
+  准入价值集中于长文/多 claim 任务（Self-RAG：ASQA −14.0 vs 短答 −2.9）；短答载体上的
+  A3−A2 读数**正负两向**均只作 READOUT、不单独承载 RQ3 结论（对称），载体形态不足即记
   `PENDING_CARRIER_FORM`、预检读数不得替补。
 - **K5（组织优化两级）**：前置㈠锚上非语义槽 query 占比 ≥ 下限、㈡incumbent 配置
   （单面单向量 key）与调优稀疏基线的
   检索层读数距天花板有余量（不过则不判死、回 owner）。K5-r=检索层报告读数（AR@k，含调优
   稀疏与深度对等，按面分层，不携判死）；K5-t=**best-of{档 A, random-search@equal-budget}
-  配置**相对 incumbent 的任务效用与 coverage 两读数增益 paired delta 95% 下置信界
-  **均 ≤0〔两读数合取〕**→ 组织优化不立主张、回落实验合同角色；单读数不及记
-  `SPLIT_READING` 回 owner（不自动判死——口径与 K-NB 同型）
+  配置**相对 incumbent 的任务效用与 coverage 两读数增益（paired delta）。**三态**：
+  `SUPPORTED`=两读数增益 LCB 均越过预注册 SESOI〔两读数合取〕；`REFUTED_OR_NEGLIGIBLE`=
+  两读数增益 UCB 均不超预注册可忽略界、或预注册等效检验成立 → 组织优化不立主张、回落
+  实验合同角色；`INCONCLUSIVE`=其余——单读数不及记 `SPLIT_READING` 回 owner（未获支持
+  ≠反证、不自动判死——口径与 K-NB 同型）
   ——ORG 层事实（"组织配置是否有价值"）与优化器身份之争分离：档 A vs random-search 的
   对比专归 K-OPT、不进本判据（判死权仅在 K5-t，且仅在具备非语义槽需求的载体上生效，
   否则 `PENDING_CARRIER`）。**判定载体择一规则（与 K-RL 同型口径）**：判定载体=通过
@@ -1237,19 +1348,25 @@ CONTROL/OPT=档A−incumbent 同型；跨层/系统级=A1′）=核能力缺失�
   K5 读数、世界知识 rescore 挂 PS-abl 子消融③；无同层正读数则记 `ATTRIBUTION_OPEN`、
   不指认机制），发音库退为工程件；K-PS 成立 ∧
   K-NB 判死 → 发音库作为组件主张保留、配置族最佳效果主张放弃。
-- **K-RL（方法身份判据）**：B-adapt 臂上档 B−档 A paired delta 95% 下置信界 ≤0 → RL
-  身份不立、方法命名回落 reward-guided 配置优化（**回落以 K-OPT 成立为条件**；K-OPT 亦
-  不立时不立任何方法主张、仅保留 K5-t 组织学结论；方向不判死，档 A 结论保留）。
+- **K-RL（方法身份判据）**：估计量=B-adapt 臂上档 B−档 A paired delta。**三态**：
+  `SUPPORTED`=LCB 越过预注册 SESOI→序贯策略身份成立；`REFUTED_OR_NEGLIGIBLE`=UCB 不超
+  预注册可忽略界、或预注册等效检验成立 → RL 身份不立、方法命名回落 reward-guided 配置
+  优化（**回落以 K-OPT 成立为条件**；K-OPT 亦不立时不立任何方法主张、仅保留 K5-t 组织
+  学结论；方向不判死，档 A 结论保留）；`INCONCLUSIVE`=其余回 owner（身份主张悬置、不
+  回落）。
   **K-OPT（档 A 方法位子条款；判定载体=O-config 臂载体——O 臂主锚 SLUE-SQA-5，若 B-adapt
   预注册择 NB 主载体主报则等预算随机搜索对照**与 O-config incumbent 配置臂**须在该载体
   同臂注册——后者兼为灵敏度①之 CONTROL/OPT 支「档A−incumbent」构念的载体来源；该构念
-  缺席时记 `PENDING_SENSITIVITY` 回 owner、不适用"不构成阻断"总则）**：档 A 相对
-  random-search@equal-budget 无增益 → 档 A 不立方法主张（其组织学结论由 K5-t 独立裁定、
-  不受本条款影响）。
-- **K-XOVER（机制核价值窗口判据；按优势区判读、非按交叉点）**：DICT-SCALE 扫描中，目标
-  词典规模区间内**不存在发音库检索显著优于 in-context 注入的子区间（优势区为空）**→
-  机制核动机在该载体判空、按 §5.3 回退梯路由；**优势区非空（含检索在全区间占优的情形）=
-  窗口存在**，联动条款按此判读（联动条款：窗口存在 ∧ **PS-abl 子消融①〔声学 key vs
+  缺席时记 `PENDING_SENSITIVITY` 回 owner、不适用"不构成阻断"总则）**：估计量=档 A 相对
+  random-search@equal-budget 之增益。**三态**：`SUPPORTED`=LCB 越过预注册 SESOI；
+  `REFUTED_OR_NEGLIGIBLE`=UCB 不超预注册可忽略界或预注册等效检验成立 → 档 A 不立方法
+  主张（其组织学结论由 K5-t 独立裁定、不受本条款影响）；`INCONCLUSIVE`=其余回 owner。
+- **K-XOVER（机制核价值窗口判据；按优势区判读、非按交叉点）**：DICT-SCALE 扫描中判读
+  目标词典规模区间内的优势区。**三态**：`SUPPORTED`（窗口存在）=存在发音库检索之 LCB
+  越过 SESOI 的子区间（含全区间占优）；`REFUTED_OR_NEGLIGIBLE`（判空）=**全目标区间**
+  经预注册等效/非劣检验坐实检索不优于 in-context 注入 → 机制核动机在该载体判空、按
+  §5.3 回退梯路由；`INCONCLUSIVE`=其余（存在既未支持亦未被反证的子区间）回 owner——
+  "未显著"不折算"全区间等效"。联动条款按 `SUPPORTED` 态判读（联动条款：窗口存在 ∧ **PS-abl 子消融①〔声学 key vs
   语音学检索，ORG 层对照〕为负** → 机制核改挂语音学检索+世界知识 rescore——本联动为
   改挂的**第二充分条件**、不改写 §0/§2.3 门控前实验中止规则〔后者独立触发改挂，不以
   窗口存在为前件〕；优势区为空 ∧ 子消融① 为负时改挂与载体判空并存——改挂全局生效、
@@ -1496,7 +1613,15 @@ comparator 反驳落红线+信息边界（AuTAgent weak-to-strong 拆"训练太�
   分数过滤 2510.23849、TARG 2511.09803、构音障碍上下文注入 2605.02782（五件登记级）；
   VISA 2606.07264=既有在册路由（ARC Agent Track 第二名系统件，登记级）。四缺口干涸
   判定：Gap2（双源按样本比价）/Gap3（准入门）/Gap4（载体邻域）干涸、Gap1 仅同族登记级
-  ——合取面无一被占（面板记录见治理节）。
+  ——合取面无一被占（面板记录见治理节）；**round-21 直接线批（ledger 1447–1459）**=
+  anthology/ISCA 通道十一件 pdf 单件：wang21b（D2）、Retrieve-and-Copy
+  2023.emnlp-industry.60、Whispering LLaMA 2023.emnlp-main.618、GA-NEC
+  2025.emnlp-main.1052（D2）、VoxRAG 2025.magmar-1.3、NAACL 表示分析 2025.naacl-short.51、
+  johnson24、yang25n、WavRAG 正式件 2025.acl-long.613、DeRAGEC 正式件
+  2025.findings-acl.786、Speech-Hands 正式件 2026.acl-long.1997（后三件=发表态升级之
+  正式形态落盘、主链接随切）+CCFQA arXiv 2508.07295 双件（AAAI 正式件付费墙未落盘、
+  按 DOI/OJS 一手核记 published）；Audiopedia ICASSP DOI 一手解析核（IEEE 件付费墙、
+  本地在册维持 arXiv）。
 - 同批抓取其余 pre-2024 仅存档不引用；2605.13277 在册未引用不入枚举。（"DeepAgents"在
   正文为工程模式名而非论文引用，具体文献=§9 调研义务"语音域 DeepAgents 应用"。）**新增调研义务（v17 起累积；近邻登记现况=§8 矩阵二十一件全数在册〔二十件 D2+Zhang
 摘要级〕，重解析分量判定已回写 §8 †注，完成记录见治理节）**：Zhang 件合法全文获取
@@ -1565,7 +1690,10 @@ N-best T5/HypR）按引用承重升级 D2；**环 R1 批分级义务**——登�
 多源证据融合 2603.17822/AudioRouter 2602.10439）按引用承重升级 D2；Audio-Mind 与 BCEA
 （已 D2）之 §8 矩阵扩行义务；K4 答案层指标（多 claim 子层第三分量）选型与阈值预注册；
 **环 R3 批分级义务**——登记级六件（VISA/A-STAR/Error-Aware TF-IDF 纠错/偏置分数过滤
-2510.23849/TARG/构音障碍上下文 2605.02782）按引用承重升级 D2；AgenticASR/G-SPIN 全部下游引用锁定 TCR 条目口径（二件
+2510.23849/TARG/构音障碍上下文 2605.02782）按引用承重升级 D2；**round-21 批分级义务**
+——登记级七件（Retrieve-and-Copy/Whispering LLaMA/VoxRAG/NAACL 表示分析/johnson24/
+yang25n/CCFQA）按引用承重升级 D2；DeRAGEC 升全文 D2（承重升级、正式件已落盘）；
+wang21b 之 Figure 2 反算值有网络时对源复核（D2 §13 遗留义务）；AgenticASR/G-SPIN 全部下游引用锁定 TCR 条目口径（二件
 TCR 升全量 D2 义务）；Interactive ASR 2605.29430 D1→本读集 D2 分级义务；后 cutoff/私域
 第二时态载体选型义务（§1.0 激活/增补分立记账的解锁条件——具名候选与 available_at 协议
 随 Stage-2A 前预注册）；本轮评审回应件承诺清单逐项核销（wiki/audit/system-first-stage1c-v2/
@@ -1611,7 +1739,10 @@ MCR-Bench D2 以本地 PDF 证伪 web 核验代理"名不在摘要"结论——�
 ——监督含 §10 十新行 web 抽验零反驳与 TalTech/BCEA/MAD2 本地一手核）、R3 三面板
 （概念/结构回归+监督修复增量核+四缺口定向重搜干涸检查——web 检索产出六件登记级、
 fetch 五件双件=ledger 1437–1446、VISA 既有在册路由；TalTech/MAD2 以本地 PDF 一手
-复核、BCEA 以 D2 复核）〕。
+复核、BCEA 以 D2 复核）；round-21 三通道核验〔2026-08-02：blob 三项亲验+19 件引文与
+5 项发表态隔离一手 web 核（零虚构零定性错；四件发表态滞后在我方）+本地覆盖三线扫描〕；
+round-21 直接线批 fetch=anthology/ISCA 通道 11 件+CCFQA arXiv 双件（ledger 1447–1459）
++二件 D2 深读（wang21b/GA-NEC，隔离零网络、sha256 复算一致）〕。
 零研究模型/API 执行、零指标运行、零数据集下载、零复现、零原型；v11 为纯文本合成（十六轮
 讨论全程零执行，裁决见 Decision-Log 续81）。
 
@@ -1638,160 +1769,169 @@ GRGA）"→D2 源核的描述性差异：二者知识源均封闭于目标录音
 交换证据准入、无重听与检索的同尺度按样本比价（GRGA 证据并集进入；PlanRAG-Audio 查询期
 零音频回访）——问题维度不同，且其存在恰使 L4 线现状更完整（§1.7/§8 四行）。
 
-## §10 参考文献（literature cut=2026-08-01；发表态分列）
+## §10 参考文献（literature cut=2026-08-02；发表态分列）
 
-**编纂说明（证据等级合同）**：条目来源=d2-entries/ 六十三件深读条目 frontmatter、全文 ledger 在册行、正文引用面 id 抽取（主链接构成=arXiv 114/Anthology 16/ISCA 4/DOI 2=136 行——双形态 id 记于 venue 栏、不重复计行；四件占位名不入表见表尾）；分组=A 语音/音频直接线、B 文本/视觉跨域 donor（含 pre-2024 原理例外件）、C 载体/基准与源文献（含候选主载体谱系）；状态栏 published 仅用于本地件内或一手核验有 venue 证据者，录用注记与「件内未自证」照实分列，dataset/benchmark 仅用于无 venue 证据的数据/基准发布件；主链接一律指向本地在册形态（正式版 id 未落盘者在 venue 栏注记）；四件 ISCA 行题名/首作经本地 PDF 首页一手复核；首作栏「—」=本地不可解、不臆测。
+**编纂说明（证据等级合同）**：条目来源=d2-entries/ 六十五件深读条目 frontmatter、全文 ledger 在册行、正文引用面 id 抽取（主链接构成=arXiv 112/Anthology 24/ISCA 7/DOI 2=145 行——双形态 id 记于 venue 栏、不重复计行；四件占位名不入表见表尾）；分组=A 语音/音频直接线、B 文本/视觉跨域 donor（含 pre-2024 原理例外件）、C 载体/基准与源文献（含候选主载体谱系）；状态栏 published 仅用于本地件内或一手核验有 venue 证据者，录用注记与「件内未自证」照实分列，dataset/benchmark 仅用于无 venue 证据的数据/基准发布件；主链接一律指向本地在册形态（正式版 id 未落盘者在 venue 栏注记）；四件 ISCA 行题名/首作经本地 PDF 首页一手复核；首作栏「—」=本地不可解、不臆测。**发表态分层加权（引用权重合同）**：正式同行评议件＞已录用注记件＞纯预印本＞workshop/系统描述件；dataset/benchmark 与跨域 donor 各按其证据角色计权；承重结论优先由全文核验之正式一手件支持——发表态（本栏）与证据等级（D2/登记级，§9）为正交两轴。
 
 ### A. 语音/音频直接线
 
 | # | 短名 | 作者（首作 et al.） | 题名 | Venue/年份 | 状态 | 链接 |
 |---|---|---|---|---|---|---|
 | 1 | FineCoS | — | FineCoS（细粒度短语/token 级上下文选择，训练型） | arXiv 2022 | preprint | https://arxiv.org/abs/2201.12806 |
-| 2 | Pundak | Golan Pundak et al. | On-the-fly ASR Corrections with Audio Exemplars | Interspeech 2022 | published | https://www.isca-archive.org/interspeech_2022/pundak22_interspeech.pdf |
-| 3 | Adaptive Contextual Biasing | Tianyi Xu et al. | Adaptive Contextual Biasing for Transducer Based Streaming Speech Recognition | Interspeech 2023 | published | https://www.isca-archive.org/interspeech_2023/xu23d_interspeech.pdf |
-| 4 | Chan 2023 | Chan et al. | Chan 2023（外部 off-policy 语音-文本映射入 contextual E2E ASR） | arXiv 2023 | preprint | https://arxiv.org/abs/2301.02736 |
-| 5 | N-best T5 | Rao Ma et al. | N-best T5: Robust ASR Error Correction using Multiple Input Hypotheses and Constrained Decoding Space | Interspeech 2023 | published | https://www.isca-archive.org/interspeech_2023/ma23e_interspeech.pdf |
-| 6 | Nigmatulina | Nigmatulina et al. | Nigmatulina（2023 中段音频知识谱系代表） | arXiv 2023 | preprint | https://arxiv.org/abs/2306.15685 |
-| 7 | PRISM | Ashish Mittal et al. | Speech-enriched Memory for Inference-time Adaptation of ASR Models to Word Dictionaries | EMNLP 2023 main | published | https://aclanthology.org/2023.emnlp-main.916/ |
-| 8 | Zhang（Knowledge Prompt Whisper） | Min Zhang et al. | Knowledge Prompt for Whisper: An ASR Entity Correction Approach with Knowledge Base | IEEE BigData 2023 | published | https://doi.org/10.1109/BigData59044.2023.10386366 |
-| 9 | CopyNE | Shilin Zhou et al. | CopyNE: Better Contextual ASR by Copying Named Entities | ACL 2024 | published | https://aclanthology.org/2024.acl-long.147/ |
-| 10 | CTC-Assisted LLM-Based Contextual ASR | — | CTC-Assisted LLM-Based Contextual ASR（粗 CTC 解码筛热词入 LLM prompt） | SLT 2024 | published | https://arxiv.org/abs/2411.06437 |
-| 11 | CTC-WS | — | CTC-WS（解码期分数增强，NeMo 开源强实现支） | arXiv 2024 | preprint | https://arxiv.org/abs/2406.07096 |
-| 12 | DANCER | Yi-Cheng Wang et al. | DANCER: Entity Description Augmented Named Entity Corrector for ASR | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.387/ |
-| 13 | DARAG | Sreyan Ghosh et al. | Failing Forward: Improving Generative Error Correction for ASR with Synthetic Data and Retrieval Augmentation | Findings ACL 2025（2025.findings-acl.125；本地在册全文=arXiv v1、场次经一手核） | published | https://arxiv.org/abs/2410.13198 |
-| 14 | HypR | Yi-Wei Wang et al. | HypR: A comprehensive study for ASR hypothesis revising with a reference corpus | Interspeech 2024 | published | https://www.isca-archive.org/interspeech_2024/wang24j_interspeech.pdf |
-| 15 | Lei（phonetic retrieval ASR） | Zhihong Lei et al. | Contextualization of ASR with LLM using phonetic retrieval-based augmentation | arXiv 2024（ICASSP 2025 命名词干旁证，件内无声明） | preprint（录用注记 ICASSP 2025）(件内未自证) | https://arxiv.org/abs/2409.15353 |
-| 16 | RAC | Ernest Pusateri et al. | Retrieval Augmented Correction of Named Entity Speech Recognition Errors | arXiv 2024（模板残留非录用证据） | preprint | https://arxiv.org/abs/2409.06062 |
-| 17 | SpeechDPR | — | SpeechDPR（语音检索表征线，训练型） | arXiv 2024 | preprint | https://arxiv.org/abs/2401.13463 |
-| 18 | SpeechRAG | — | SpeechRAG（语音检索表征线，训练型） | arXiv 2024 | preprint | https://arxiv.org/abs/2412.16500 |
-| 19 | Thorbecke | Thorbecke et al. | Thorbecke（2024 扩展谱系代表） | arXiv 2024 | preprint | https://arxiv.org/abs/2409.13514 |
-| 20 | Wang（ResLM） | Mingqiu Wang et al. | Retrieval Augmented End-to-End Spoken Dialog Models | arXiv 2024（ICASSP 2024，第三方书目佐证） | published(件内未自证) | https://arxiv.org/abs/2402.01828 |
-| 21 | AudioGenie-Reasoner | — | AudioGenie-Reasoner: A Training-Free Multi-Agent Framework for Coarse-to-Fine Audio Deep Reasoning | arXiv 2025 | preprint | https://arxiv.org/abs/2509.16971 |
-| 22 | Agent-Omni | — | Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything | arXiv 2025（ACL 格式 preprint） | preprint | https://arxiv.org/abs/2511.02834 |
-| 23 | AudioToolAgent | Gijs Wijngaard et al. | AudioToolAgent: An Agentic Framework for Audio-Language Models | arXiv 2025（v2 2026-02） | preprint | https://arxiv.org/abs/2510.02995 |
-| 24 | BR-ASR | Xun Gong et al. | BR-ASR: Efficient and Scalable Bias Retrieval Framework for Contextual Biasing ASR in Speech LLM | Interspeech 2025 | published | https://arxiv.org/abs/2505.19179 |
-| 25 | 偏置分数过滤 | — | A Neural Model for Contextual Biasing Score Learning and Filtering | arXiv 2025 | preprint | https://arxiv.org/abs/2510.23849 |
-| 26 | DeRAGEC | — | DeRAGEC（检索实体候选 training-free 语音学+定义增强去噪过滤） | Findings ACL 2025 | published | https://arxiv.org/abs/2506.07510 |
-| 27 | FlexCTC | — | FlexCTC（NVIDIA 解码侧 boosting，NeMo 开源可运行） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.07315 |
-| 28 | iKnow-audio | Michel Olvera et al. | iKnow-audio: Integrating Knowledge Graphs with Audio-Language Models | EMNLP 2025 main | published | https://aclanthology.org/2025.emnlp-main.1759/ |
-| 29 | Kong（hotword+RL 命名碰撞） | Kong et al. | Kong 2025（GRPO 训练，"hotword+RL"名称碰撞辨析对象） | arXiv 2025 | preprint | https://arxiv.org/abs/2512.21828 |
-| 30 | Liu-Trie | Liu et al. | Liu-Trie（TTS 合成多发音+trie 约束解码，零样本 beam 内部） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.17796 |
-| 31 | MARS | Bingshen Mu et al. | Hearing More with Less: Multi-Modal Retrieval-and-Selection Augmented Conversational LLM-Based ASR | arXiv 2025（外部注记 AAAI-26，件内仅模板级证据） | preprint（录用注记 AAAI-26）(件内未自证) | https://arxiv.org/abs/2508.01166 |
-| 32 | OWSM-Biasing | — | OWSM-Biasing（动态词表偏置于冻结 OWSM 基座） | arXiv 2025 | preprint | https://arxiv.org/abs/2506.09448 |
-| 33 | PAC | — | PAC（G2P 交错+发音判别 RL） | arXiv 2025 | preprint | https://arxiv.org/abs/2509.12647 |
-| 34 | RAG-Boost | Pengcheng Wang et al. | RAG-Boost: Retrieval-Augmented Generation Enhanced LLM-based Speech Recognition | MLC-SLM Workshop 2025（Interspeech 2025 卫星研讨会） | published | https://arxiv.org/abs/2508.14048 |
-| 35 | RECAST | Ashish Mittal et al. | RECAST: Retrieval-Augmented Contextual ASR via Decoder-State Keyword Spotting | Findings EMNLP 2025 | published | https://aclanthology.org/2025.findings-emnlp.203/ |
-| 36 | SALAD | — | SALAD（差距归因=文本能力遗忘+跨模态错位） | arXiv 2025 | preprint | https://arxiv.org/abs/2510.13632 |
-| 37 | Siskos | Dimitrios Siskos et al. | Retrieval Augmented Generation based context discovery for ASR | Findings EMNLP 2025（2025.findings-emnlp.768；本地在册全文=arXiv 件、场次经一手核） | published | https://arxiv.org/abs/2509.19567 |
-| 38 | TurboBias | — | TurboBias（NVIDIA 解码侧 boosting，NeMo 开源可运行） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.07014 |
-| 39 | WavRAG | — | WavRAG（语音检索表征线，训练型） | arXiv 2025 | preprint | https://arxiv.org/abs/2502.14727 |
-| 40 | WCTC-Biasing | Yu Nakagome et al. | WCTC-Biasing: Retraining-free Contextual Biasing ASR with Wildcard CTC-based Keyword Spotting and Inter-layer Biasing | Interspeech 2025 | published | https://arxiv.org/abs/2506.01263 |
-| 41 | Xiang（modality gap） | Bajian Xiang et al. | Understanding the Modality Gap: An Empirical Study on the Speech-Text Alignment Mechanism of Large Speech Language Models | EMNLP 2025 main | published | https://aclanthology.org/2025.emnlp-main.262/ |
-| 42 | Xiao（RAG-LLM contextual ASR） | Cihan Xiao et al. | Contextual ASR with Retrieval Augmented Large Language Model | ICASSP 2025（出版方 OA，件内无 venue 横幅） | published(件内未自证) | https://doi.org/10.1109/ICASSP49660.2025.10890057 |
-| 43 | AgenticASR | Zixuan Jiang et al. | AgenticASR: Refining Speech Recognition in Real-World Scenarios via an Agentic Approach | arXiv 2026（AAAI-2027 模板，无录用声明） | preprint | https://arxiv.org/abs/2607.28175 |
-| 44 | ATIR | Tong Zhao et al. | ATIR: Towards Audio-Text Interleaved Contextual Retrieval | ACL 2026 Long | published | https://aclanthology.org/2026.acl-long.1006/ |
-| 45 | AudioRAG | — | AudioRAG（2026 深搜线） | arXiv 2026 | preprint | https://arxiv.org/abs/2602.10656 |
-| 46 | A-STAR | — | Retrieval-Augmented Self-Taught Reasoning Model with Adaptive Chain-of-Thought for ASR Named Entity Correction | arXiv 2026 | preprint | https://arxiv.org/abs/2602.12287 |
-| 47 | Audio-Mind | Yucheng Wang et al. | Audio-Mind: An Auditable Agentic Framework for Audio Understanding | arXiv 2026（ACL preprint 模板+ARR 节、零 venue 声明） | preprint | https://arxiv.org/abs/2605.28480 |
-| 48 | AudioRouter | Liyang Chen et al. | AudioRouter: Data Efficient Audio Understanding via RL based Dual Reasoning | arXiv 2026 | preprint | https://arxiv.org/abs/2602.10439 |
-| 49 | AuTAgent | Siqian Tong et al. | AuTAgent: A Reinforcement Learning Framework for Tool-Augmented Audio Reasoning | arXiv 2026（ICML 2026 模板，无录用选项） | preprint | https://arxiv.org/abs/2602.13685 |
-| 50 | CLAR | Shangkun Huang et al. | CLAR: CIF-Localized Alignment for Retrieval-Augmented Speech LLM-Based Contextual ASR | arXiv 2026（comments=Submitted to Interspeech 2026，不作录用） | preprint | https://arxiv.org/abs/2603.25460 |
-| 51 | Error-Aware TF-IDF 纠错 | — | Error-Aware TF-IDF Retrieval-Augmented Generation for ASR Error Correction | arXiv 2026（单载体 FLEURS 波斯语） | preprint | https://arxiv.org/abs/2606.24915 |
-| 52 | EChO-Agent | — | EChO-Agent: Evidence Chain Orchestration Agent for Audio Reasoning | Interspeech 2026（挑战赛参赛短文） | preprint（录用注记 Interspeech 2026） | https://arxiv.org/abs/2606.15141 |
-| 53 | 事件接地长音频检索 | Kartik Hegde et al. | Event-Grounded Question Answering over Long Audio via Structured Retrieval | arXiv 2026（comments=Submitted to EMNLP 2026 Industry Track，不作录用） | preprint | https://arxiv.org/abs/2602.14612 |
-| 54 | G-SPIN | Pratik Rakesh Singh et al. | Graph-Based Phonetic Error Correction of Noisy ASR | ACL 2026 Industry Track | published | https://aclanthology.org/2026.acl-industry.151/ |
-| 55 | GRGA | Quanwei Tang et al. | Don't Just Listen, Try Planning: Graph-based Retrieval-Generation Agent for Long-form Audio Meeting Understanding | Findings ACL 2026 | published | https://aclanthology.org/2026.findings-acl.1038/ |
-| 56 | Interactive ASR | — | Interactive ASR 2605.29430（多轮 agentic correction：语义纠错+intent routing+推理式编辑） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.29430 |
-| 57 | LaSR | Heyang Liu et al. | LaSR: Context-Aware Speech Recognition via Latent Reasoning（附 Spoken Darwin-Science 载体） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.00507 |
-| 58 | 流式听思决策 | Zhiyuan Song et al. | Learning When to Think While Listening in Large Audio-Language Models（SFT+DAPO 训练型） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.27190 |
-| 59 | MAD2 | Chaewan Chun et al. | Context-Aware Multimodal Claim Verification in Spoken Dialogues | arXiv 2026 | preprint | https://arxiv.org/abs/2606.11420 |
-| 60 | Modica | Modica et al. | Modica 2026（事实召回机制从文本到语音是否迁移） | *SEM 2026 (starsem-conference) | published | https://aclanthology.org/2026.starsem-conference.28/ |
-| 61 | MoshiRAG | — | MoshiRAG（全双工语音模型的选择性外部知识检索触发） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.12928 |
-| 62 | TalTech 多源证据融合 | Aivo Olev et al. | Multi-Source Evidence Fusion for Audio Question Answering（ARC Agent Track 第一名系统描述） | arXiv 2026（Interspeech 2026 挑战赛系统件） | preprint | https://arxiv.org/abs/2603.17822 |
-| 63 | NAP / OmniAgent | — | Native Active Perception as Reasoning for Omni-Modal Understanding | arXiv 2026（ICML 格式，无录用声明） | preprint | https://arxiv.org/abs/2606.19341 |
-| 64 | Omni-DeepSearch | — | Omni-DeepSearch（2026 深搜线） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.08762 |
-| 65 | Omni-Embed-Audio | — | Omni-Embed-Audio（omni-MLLM 检索编码器） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.18360 |
-| 66 | OmniRAG-Agent | — | OmniRAG-Agent（外部素材库+agent 环+GRPO 训练） | arXiv 2026 | preprint | https://arxiv.org/abs/2602.03707 |
-| 67 | Ontology-Memory 纠错 | — | Ontology Memory 纠错（动态本体记忆含表面变体/潜在 ASR 混淆字段） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.13464 |
-| 68 | PlanRAG-Audio | Masao Someki et al. | PlanRAG-Audio: Planning and Retrieval Augmented Generation for Long-form Audio Understanding | Findings ACL 2026（arXiv 预印本 2605.20414 为来源版） | published | https://aclanthology.org/2026.findings-acl.1304/ |
-| 69 | RECOVER | Abhishek Kumar et al. | RECOVER: Robust Entity Correction via agentic Orchestration of hypothesis Variants for Evidence-based Recovery | arXiv 2026（目标场会 Interspeech 2026 推定，证据强度=模板级） | preprint | https://arxiv.org/abs/2603.16411 |
-| 70 | Speech-Hands | Zhen Wan et al. | Speech-Hands: A Self-Reflection Voice Agentic Approach to Speech Recognition and Audio Reasoning with Omni Perception | arXiv 2026（ACL 2026 Oral，comment 字段自陈） | preprint（录用注记 ACL 2026）(件内未自证) | https://arxiv.org/abs/2601.09413 |
-| 71 | TextPro-SLM | — | TextPro-SLM（输入侧最小化模态差距） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.05927 |
-| 72 | Voice Memory | — | Voice Memory（冻结纠错器读逐域 memory.md 前置，按话语选择 act/abstain） | arXiv 2026 | preprint | https://arxiv.org/abs/2607.26410 |
-| 73 | VoiceAgentRAG | — | VoiceAgentRAG | arXiv 2026 | preprint | https://arxiv.org/abs/2603.02206 |
-| 74 | VISA | — | VISA: A Visual Information Strengthened Audio-Reasoning System for the Interspeech 2026 ARC Agent Track（Agent Track 第二名系统件） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.07264 |
-| 75 | Wang 2026（模态推理差距诊断+RL） | Wang et al. | Wang 2026（模态推理差距的诊断+RL 方法） | ACL 2026 Long | published | https://aclanthology.org/2026.acl-long.857/ |
-| 76 | 构音障碍上下文注入 | — | When Audio-Language Models Fail to Leverage Multimodal Context for Dysarthric Speech Recognition | arXiv 2026 | preprint | https://arxiv.org/abs/2605.02782 |
-| 77 | 2601.21347（未具名） | — | 2601.21347（P 正文仅列 id，无短名/题名可解） | arXiv 2026 | preprint | https://arxiv.org/abs/2601.21347 |
-| 78 | 2604.00610（未具名，2026 上下文推理支） | — | 2604.00610（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.00610 |
-| 79 | 2604.12398（未具名，2026 上下文推理支） | — | 2604.12398（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.12398 |
-| 80 | 2606.10838（未具名，2026 上下文推理支） | — | 2606.10838（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.10838 |
+| 2 | wang21b | Haoyu Wang et al. | Leveraging ASR N-Best in Deep Entity Retrieval | Interspeech 2021 | published | https://www.isca-archive.org/interspeech_2021/wang21b_interspeech.pdf |
+| 3 | Pundak | Golan Pundak et al. | On-the-fly ASR Corrections with Audio Exemplars | Interspeech 2022 | published | https://www.isca-archive.org/interspeech_2022/pundak22_interspeech.pdf |
+| 4 | Adaptive Contextual Biasing | Tianyi Xu et al. | Adaptive Contextual Biasing for Transducer Based Streaming Speech Recognition | Interspeech 2023 | published | https://www.isca-archive.org/interspeech_2023/xu23d_interspeech.pdf |
+| 5 | Retrieve and Copy | Sai Muralidhar Jayanthi et al. | Retrieve and Copy: Scaling ASR Personalization to Large Catalogs | EMNLP 2023 Industry Track | published | https://aclanthology.org/2023.emnlp-industry.60/ |
+| 6 | Chan 2023 | Chan et al. | Chan 2023（外部 off-policy 语音-文本映射入 contextual E2E ASR） | arXiv 2023 | preprint | https://arxiv.org/abs/2301.02736 |
+| 7 | N-best T5 | Rao Ma et al. | N-best T5: Robust ASR Error Correction using Multiple Input Hypotheses and Constrained Decoding Space | Interspeech 2023 | published | https://www.isca-archive.org/interspeech_2023/ma23e_interspeech.pdf |
+| 8 | Nigmatulina | Nigmatulina et al. | Nigmatulina（2023 中段音频知识谱系代表） | arXiv 2023 | preprint | https://arxiv.org/abs/2306.15685 |
+| 9 | PRISM | Ashish Mittal et al. | Speech-enriched Memory for Inference-time Adaptation of ASR Models to Word Dictionaries | EMNLP 2023 main | published | https://aclanthology.org/2023.emnlp-main.916/ |
+| 10 | Whispering LLaMA | Srijith Radhakrishnan et al. | Whispering LLaMA: A Cross-Modal Generative Error Correction Framework for Speech Recognition | EMNLP 2023 main | published | https://aclanthology.org/2023.emnlp-main.618/ |
+| 11 | Zhang（Knowledge Prompt Whisper） | Min Zhang et al. | Knowledge Prompt for Whisper: An ASR Entity Correction Approach with Knowledge Base | IEEE BigData 2023 | published | https://doi.org/10.1109/BigData59044.2023.10386366 |
+| 12 | CopyNE | Shilin Zhou et al. | CopyNE: Better Contextual ASR by Copying Named Entities | ACL 2024 | published | https://aclanthology.org/2024.acl-long.147/ |
+| 13 | CTC-Assisted LLM-Based Contextual ASR | — | CTC-Assisted LLM-Based Contextual ASR（粗 CTC 解码筛热词入 LLM prompt） | SLT 2024 | published | https://arxiv.org/abs/2411.06437 |
+| 14 | CTC-WS | — | CTC-WS（解码期分数增强，NeMo 开源强实现支） | arXiv 2024 | preprint | https://arxiv.org/abs/2406.07096 |
+| 15 | DANCER | Yi-Cheng Wang et al. | DANCER: Entity Description Augmented Named Entity Corrector for ASR | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.387/ |
+| 16 | DARAG | Sreyan Ghosh et al. | Failing Forward: Improving Generative Error Correction for ASR with Synthetic Data and Retrieval Augmentation | Findings ACL 2025（2025.findings-acl.125；本地在册全文=arXiv v1、场次经一手核） | published | https://arxiv.org/abs/2410.13198 |
+| 17 | HypR | Yi-Wei Wang et al. | HypR: A comprehensive study for ASR hypothesis revising with a reference corpus | Interspeech 2024 | published | https://www.isca-archive.org/interspeech_2024/wang24j_interspeech.pdf |
+| 18 | johnson24 | Alexander Johnson et al. | Efficient SQA from Long Audio Contexts: A Policy-driven Approach | Interspeech 2024 | published | https://www.isca-archive.org/interspeech_2024/johnson24_interspeech.pdf |
+| 19 | Lei（phonetic retrieval ASR） | Zhihong Lei et al. | Contextualization of ASR with LLM using phonetic retrieval-based augmentation | arXiv 2024（ICASSP 2025 命名词干旁证，件内无声明） | preprint（录用注记 ICASSP 2025）(件内未自证) | https://arxiv.org/abs/2409.15353 |
+| 20 | RAC | Ernest Pusateri et al. | Retrieval Augmented Correction of Named Entity Speech Recognition Errors | arXiv 2024（模板残留非录用证据） | preprint | https://arxiv.org/abs/2409.06062 |
+| 21 | SpeechDPR | — | SpeechDPR（语音检索表征线，训练型） | arXiv 2024 | preprint | https://arxiv.org/abs/2401.13463 |
+| 22 | SpeechRAG | — | SpeechRAG（语音检索表征线，训练型） | arXiv 2024 | preprint | https://arxiv.org/abs/2412.16500 |
+| 23 | Thorbecke | Thorbecke et al. | Thorbecke（2024 扩展谱系代表） | arXiv 2024 | preprint | https://arxiv.org/abs/2409.13514 |
+| 24 | Wang（ResLM） | Mingqiu Wang et al. | Retrieval Augmented End-to-End Spoken Dialog Models | arXiv 2024（ICASSP 2024，第三方书目佐证） | published(件内未自证) | https://arxiv.org/abs/2402.01828 |
+| 25 | AudioGenie-Reasoner | — | AudioGenie-Reasoner: A Training-Free Multi-Agent Framework for Coarse-to-Fine Audio Deep Reasoning | arXiv 2025 | preprint | https://arxiv.org/abs/2509.16971 |
+| 26 | Agent-Omni | — | Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything | arXiv 2025（ACL 格式 preprint） | preprint | https://arxiv.org/abs/2511.02834 |
+| 27 | AudioToolAgent | Gijs Wijngaard et al. | AudioToolAgent: An Agentic Framework for Audio-Language Models | arXiv 2025（v2 2026-02） | preprint | https://arxiv.org/abs/2510.02995 |
+| 28 | BR-ASR | Xun Gong et al. | BR-ASR: Efficient and Scalable Bias Retrieval Framework for Contextual Biasing ASR in Speech LLM | Interspeech 2025 | published | https://arxiv.org/abs/2505.19179 |
+| 29 | 偏置分数过滤 | — | A Neural Model for Contextual Biasing Score Learning and Filtering | arXiv 2025 | preprint | https://arxiv.org/abs/2510.23849 |
+| 30 | DeRAGEC | Solee Im et al. | DeRAGEC: Denoising Named Entity Candidates with Synthetic Rationale for ASR Error Correction | Findings ACL 2025（正式件 2025.findings-acl.786 本地在册；arXiv 2506.07510 同源） | published | https://aclanthology.org/2025.findings-acl.786/ |
+| 31 | FlexCTC | — | FlexCTC（NVIDIA 解码侧 boosting，NeMo 开源可运行） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.07315 |
+| 32 | GA-NEC | Yuanchang Luo et al. | Generative Annotation for ASR Named Entity Correction | EMNLP 2025 main（pp.20824-20835） | published | https://aclanthology.org/2025.emnlp-main.1052/ |
+| 33 | iKnow-audio | Michel Olvera et al. | iKnow-audio: Integrating Knowledge Graphs with Audio-Language Models | EMNLP 2025 main | published | https://aclanthology.org/2025.emnlp-main.1759/ |
+| 34 | Kong（hotword+RL 命名碰撞） | Kong et al. | Kong 2025（GRPO 训练，"hotword+RL"名称碰撞辨析对象） | arXiv 2025 | preprint | https://arxiv.org/abs/2512.21828 |
+| 35 | Liu-Trie | Liu et al. | Liu-Trie（TTS 合成多发音+trie 约束解码，零样本 beam 内部） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.17796 |
+| 36 | MARS | Bingshen Mu et al. | Hearing More with Less: Multi-Modal Retrieval-and-Selection Augmented Conversational LLM-Based ASR | arXiv 2025（外部注记 AAAI-26，件内仅模板级证据） | preprint（录用注记 AAAI-26）(件内未自证) | https://arxiv.org/abs/2508.01166 |
+| 37 | OWSM-Biasing | — | OWSM-Biasing（动态词表偏置于冻结 OWSM 基座） | arXiv 2025 | preprint | https://arxiv.org/abs/2506.09448 |
+| 38 | PAC | — | PAC（G2P 交错+发音判别 RL） | arXiv 2025 | preprint | https://arxiv.org/abs/2509.12647 |
+| 39 | RAG-Boost | Pengcheng Wang et al. | RAG-Boost: Retrieval-Augmented Generation Enhanced LLM-based Speech Recognition | MLC-SLM Workshop 2025（Interspeech 2025 卫星研讨会） | published | https://arxiv.org/abs/2508.14048 |
+| 40 | RECAST | Ashish Mittal et al. | RECAST: Retrieval-Augmented Contextual ASR via Decoder-State Keyword Spotting | Findings EMNLP 2025 | published | https://aclanthology.org/2025.findings-emnlp.203/ |
+| 41 | SALAD | — | SALAD（差距归因=文本能力遗忘+跨模态错位） | arXiv 2025 | preprint | https://arxiv.org/abs/2510.13632 |
+| 42 | Siskos | Dimitrios Siskos et al. | Retrieval Augmented Generation based context discovery for ASR | Findings EMNLP 2025（2025.findings-emnlp.768；本地在册全文=arXiv 件、场次经一手核） | published | https://arxiv.org/abs/2509.19567 |
+| 43 | VoxRAG | Zackary Rackauckas et al. | VoxRAG: A Step Toward Transcription-Free RAG Systems in Spoken Question Answering | MAGMaR 2025（workshop——低权重层） | published | https://aclanthology.org/2025.magmar-1.3/ |
+| 44 | TurboBias | — | TurboBias（NVIDIA 解码侧 boosting，NeMo 开源可运行） | arXiv 2025 | preprint | https://arxiv.org/abs/2508.07014 |
+| 45 | WavRAG | Yifu Chen et al. | WavRAG: Audio-Integrated Retrieval Augmented Generation for Spoken Dialogue Models | ACL 2025 Long（正式件 2025.acl-long.613 本地在册；arXiv 2502.14727 同源） | published | https://aclanthology.org/2025.acl-long.613/ |
+| 46 | WCTC-Biasing | Yu Nakagome et al. | WCTC-Biasing: Retraining-free Contextual Biasing ASR with Wildcard CTC-based Keyword Spotting and Inter-layer Biasing | Interspeech 2025 | published | https://arxiv.org/abs/2506.01263 |
+| 47 | yang25n | Ruochu Yang et al. | On Retrieval of Long Audios with Complex Text Queries | Interspeech 2025（pp.2660-2664） | published | https://www.isca-archive.org/interspeech_2025/yang25n_interspeech.pdf |
+| 48 | Xiang（modality gap） | Bajian Xiang et al. | Understanding the Modality Gap: An Empirical Study on the Speech-Text Alignment Mechanism of Large Speech Language Models | EMNLP 2025 main | published | https://aclanthology.org/2025.emnlp-main.262/ |
+| 49 | NAACL 表示分析 | Hyunji Lee et al. | How do Multimodal Foundation Models Encode Text and Speech? An Analysis of Cross-Lingual and Cross-Modal Representations | NAACL 2025 short | published | https://aclanthology.org/2025.naacl-short.51/ |
+| 50 | Xiao（RAG-LLM contextual ASR） | Cihan Xiao et al. | Contextual ASR with Retrieval Augmented Large Language Model | ICASSP 2025（出版方 OA，件内无 venue 横幅） | published(件内未自证) | https://doi.org/10.1109/ICASSP49660.2025.10890057 |
+| 51 | AgenticASR | Zixuan Jiang et al. | AgenticASR: Refining Speech Recognition in Real-World Scenarios via an Agentic Approach | arXiv 2026（AAAI-2027 模板，无录用声明） | preprint | https://arxiv.org/abs/2607.28175 |
+| 52 | ATIR | Tong Zhao et al. | ATIR: Towards Audio-Text Interleaved Contextual Retrieval | ACL 2026 Long | published | https://aclanthology.org/2026.acl-long.1006/ |
+| 53 | AudioRAG | — | AudioRAG（2026 深搜线） | arXiv 2026 | preprint | https://arxiv.org/abs/2602.10656 |
+| 54 | A-STAR | — | Retrieval-Augmented Self-Taught Reasoning Model with Adaptive Chain-of-Thought for ASR Named Entity Correction | arXiv 2026 | preprint | https://arxiv.org/abs/2602.12287 |
+| 55 | Audio-Mind | Yucheng Wang et al. | Audio-Mind: An Auditable Agentic Framework for Audio Understanding | arXiv 2026（ACL preprint 模板+ARR 节、零 venue 声明） | preprint | https://arxiv.org/abs/2605.28480 |
+| 56 | AudioRouter | Liyang Chen et al. | AudioRouter: Data Efficient Audio Understanding via RL based Dual Reasoning | arXiv 2026 | preprint | https://arxiv.org/abs/2602.10439 |
+| 57 | AuTAgent | Siqian Tong et al. | AuTAgent: A Reinforcement Learning Framework for Tool-Augmented Audio Reasoning | arXiv 2026（ICML 2026 模板，无录用选项） | preprint | https://arxiv.org/abs/2602.13685 |
+| 58 | CLAR | Shangkun Huang et al. | CLAR: CIF-Localized Alignment for Retrieval-Augmented Speech LLM-Based Contextual ASR | arXiv 2026（comments=Submitted to Interspeech 2026，不作录用） | preprint | https://arxiv.org/abs/2603.25460 |
+| 59 | CCFQA | Yexing Du et al. | CCFQA: A Benchmark for Cross-Lingual and Cross-Modal Speech and Text Factuality Evaluation | AAAI 2026（Vol.40 No.36；正式件付费墙未落盘、本地在册=arXiv 2508.07295 双件） | published(正式件未落盘) | https://arxiv.org/abs/2508.07295 |
+| 60 | Error-Aware TF-IDF 纠错 | — | Error-Aware TF-IDF Retrieval-Augmented Generation for ASR Error Correction | arXiv 2026（单载体 FLEURS 波斯语） | preprint | https://arxiv.org/abs/2606.24915 |
+| 61 | EChO-Agent | — | EChO-Agent: Evidence Chain Orchestration Agent for Audio Reasoning | Interspeech 2026（挑战赛参赛短文） | preprint（录用注记 Interspeech 2026） | https://arxiv.org/abs/2606.15141 |
+| 62 | 事件接地长音频检索 | Kartik Hegde et al. | Event-Grounded Question Answering over Long Audio via Structured Retrieval | arXiv 2026（comments=Submitted to EMNLP 2026 Industry Track，不作录用） | preprint | https://arxiv.org/abs/2602.14612 |
+| 63 | G-SPIN | Pratik Rakesh Singh et al. | Graph-Based Phonetic Error Correction of Noisy ASR | ACL 2026 Industry Track | published | https://aclanthology.org/2026.acl-industry.151/ |
+| 64 | GRGA | Quanwei Tang et al. | Don't Just Listen, Try Planning: Graph-based Retrieval-Generation Agent for Long-form Audio Meeting Understanding | Findings ACL 2026 | published | https://aclanthology.org/2026.findings-acl.1038/ |
+| 65 | Interactive ASR | — | Interactive ASR 2605.29430（多轮 agentic correction：语义纠错+intent routing+推理式编辑） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.29430 |
+| 66 | LaSR | Heyang Liu et al. | LaSR: Context-Aware Speech Recognition via Latent Reasoning（附 Spoken Darwin-Science 载体） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.00507 |
+| 67 | 流式听思决策 | Zhiyuan Song et al. | Learning When to Think While Listening in Large Audio-Language Models（SFT+DAPO 训练型） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.27190 |
+| 68 | MAD2 | Chaewan Chun et al. | Context-Aware Multimodal Claim Verification in Spoken Dialogues | arXiv 2026 | preprint | https://arxiv.org/abs/2606.11420 |
+| 69 | Modica | Modica et al. | Modica 2026（事实召回机制从文本到语音是否迁移） | *SEM 2026 (starsem-conference) | published | https://aclanthology.org/2026.starsem-conference.28/ |
+| 70 | MoshiRAG | — | MoshiRAG（全双工语音模型的选择性外部知识检索触发） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.12928 |
+| 71 | TalTech 多源证据融合 | Aivo Olev et al. | Multi-Source Evidence Fusion for Audio Question Answering（ARC Agent Track 第一名系统描述） | arXiv 2026（Interspeech 2026 挑战赛系统件） | preprint | https://arxiv.org/abs/2603.17822 |
+| 72 | NAP / OmniAgent | — | Native Active Perception as Reasoning for Omni-Modal Understanding | arXiv 2026（ICML 格式，无录用声明） | preprint | https://arxiv.org/abs/2606.19341 |
+| 73 | Omni-DeepSearch | — | Omni-DeepSearch（2026 深搜线） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.08762 |
+| 74 | Omni-Embed-Audio | — | Omni-Embed-Audio（omni-MLLM 检索编码器） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.18360 |
+| 75 | OmniRAG-Agent | — | OmniRAG-Agent（外部素材库+agent 环+GRPO 训练） | arXiv 2026 | preprint | https://arxiv.org/abs/2602.03707 |
+| 76 | Ontology-Memory 纠错 | — | Ontology Memory 纠错（动态本体记忆含表面变体/潜在 ASR 混淆字段） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.13464 |
+| 77 | PlanRAG-Audio | Masao Someki et al. | PlanRAG-Audio: Planning and Retrieval Augmented Generation for Long-form Audio Understanding | Findings ACL 2026（arXiv 预印本 2605.20414 为来源版） | published | https://aclanthology.org/2026.findings-acl.1304/ |
+| 78 | RECOVER | Abhishek Kumar et al. | RECOVER: Robust Entity Correction via agentic Orchestration of hypothesis Variants for Evidence-based Recovery | arXiv 2026（目标场会 Interspeech 2026 推定，证据强度=模板级） | preprint | https://arxiv.org/abs/2603.16411 |
+| 79 | Speech-Hands | Zhen Wan et al. | Speech-Hands: A Self-Reflection Voice Agentic Approach to Speech Recognition and Audio Reasoning with Omni Perception | ACL 2026 Long（正式件 2026.acl-long.1997 本地在册、pp.43124-43142；arXiv 2601.09413 同源，Oral） | published | https://aclanthology.org/2026.acl-long.1997/ |
+| 80 | TextPro-SLM | — | TextPro-SLM（输入侧最小化模态差距） | arXiv 2026 | preprint | https://arxiv.org/abs/2605.05927 |
+| 81 | Voice Memory | — | Voice Memory（冻结纠错器读逐域 memory.md 前置，按话语选择 act/abstain） | arXiv 2026 | preprint | https://arxiv.org/abs/2607.26410 |
+| 82 | VoiceAgentRAG | — | VoiceAgentRAG | arXiv 2026 | preprint | https://arxiv.org/abs/2603.02206 |
+| 83 | VISA | — | VISA: A Visual Information Strengthened Audio-Reasoning System for the Interspeech 2026 ARC Agent Track（Agent Track 第二名系统件） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.07264 |
+| 84 | Wang 2026 (TARS) | Chaoren Wang et al. | Closing the Modality Reasoning Gap for Speech Large Language Models（TARS=其方法名，摘要自陈） | ACL 2026 Long | published | https://aclanthology.org/2026.acl-long.857/ |
+| 85 | 构音障碍上下文注入 | — | When Audio-Language Models Fail to Leverage Multimodal Context for Dysarthric Speech Recognition | arXiv 2026 | preprint | https://arxiv.org/abs/2605.02782 |
+| 86 | 2601.21347（未具名） | — | 2601.21347（P 正文仅列 id，无短名/题名可解） | arXiv 2026 | preprint | https://arxiv.org/abs/2601.21347 |
+| 87 | 2604.00610（未具名，2026 上下文推理支） | — | 2604.00610（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.00610 |
+| 88 | 2604.12398（未具名，2026 上下文推理支） | — | 2604.12398（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2604.12398 |
+| 89 | 2606.10838（未具名，2026 上下文推理支） | — | 2606.10838（宽域描述/推理链/常见词线索训练型 speech-LLM 路线） | arXiv 2026 | preprint | https://arxiv.org/abs/2606.10838 |
 
 ### B. 文本/视觉跨域 donor
 
 | # | 短名 | 作者（首作 et al.） | 题名 | Venue/年份 | 状态 | 链接 |
 |---|---|---|---|---|---|---|
-| 81 | OK-VQA | Kenneth Marino et al. | OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge | CVPR 2019 | published | https://arxiv.org/abs/1906.00067 |
-| 82 | DPR | Vladimir Karpukhin et al. | Dense Passage Retrieval for Open-Domain Question Answering | EMNLP 2020 | published | https://arxiv.org/abs/2004.04906 |
-| 83 | RAG | Patrick Lewis et al. | Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks | NeurIPS 2020 | published | https://arxiv.org/abs/2005.11401 |
-| 84 | ROME | Kevin Meng et al. | Locating and Editing Factual Associations in GPT | NeurIPS 2022 | published | https://arxiv.org/abs/2202.05262 |
-| 85 | A-OKVQA | Dustin Schwenk et al. | A-OKVQA: A Benchmark for Visual Question Answering using World Knowledge | ECCV 2022 | published | https://arxiv.org/abs/2206.01718 |
-| 86 | ReAct | — | ReAct（反思环原理锚，pre-2024 原理例外） | arXiv 2022 | preprint | https://arxiv.org/abs/2210.03629 |
-| 87 | Reflexion | — | Reflexion（反思环原理锚，pre-2024 原理例外） | arXiv 2023 | preprint | https://arxiv.org/abs/2303.11366 |
-| 88 | Self-RAG | Akari Asai et al. | Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection | ICLR 2024 | published | https://arxiv.org/abs/2310.11511 |
-| 89 | CRAG | Shi-Qi Yan et al. | Corrective Retrieval Augmented Generation (CRAG) | arXiv 2024（venue 未在源内声明） | preprint | https://arxiv.org/abs/2401.15884 |
-| 90 | Wiki-LLaVA | — | Wiki-LLaVA: Hierarchical Retrieval-Augmented Generation for Multimodal LLMs | CVPR 2024 workshop（模板推定，未见录用声明） | published(件内未自证) | https://arxiv.org/abs/2404.15406 |
-| 91 | GraphRAG | — | From Local to Global: A GraphRAG Approach to Query-Focused Summarization | arXiv 2024 | preprint | https://arxiv.org/abs/2404.16130 |
-| 92 | HippoRAG | — | HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models | NeurIPS 2024 | published | https://arxiv.org/abs/2405.14831 |
-| 93 | EchoSight | — | EchoSight: Advancing Visual-Language Models with Wiki Knowledge | EMNLP 2024 Findings（模板/时间戳推定） | published(件内未自证) | https://arxiv.org/abs/2407.12735 |
-| 94 | MMSearch | Dongzhi Jiang et al. | MMSearch: Unveiling the Potential of Large Models as Multi-modal Search Engines | ICLR 2025（模板 camera-ready，无录用字样） | published(件内未自证) | https://arxiv.org/abs/2409.12959 |
-| 95 | LightRAG | — | LightRAG: Simple and Fast Retrieval-Augmented Generation | arXiv 2024（ICLR 2025 投稿模板，非 final） | preprint | https://arxiv.org/abs/2410.05779 |
-| 96 | Search-o1 | Xiaoxi Li et al. | Search-o1: Agentic Search-Enhanced Large Reasoning Models | arXiv 2025（NeurIPS 2024 preprint 选项模板） | preprint | https://arxiv.org/abs/2501.05366 |
-| 97 | A-Mem | Wujiang Xu et al. | A-Mem: Agentic Memory for LLM Agents | arXiv 2025（NeurIPS 2025 preprint 模板） | preprint | https://arxiv.org/abs/2502.12110 |
-| 98 | Search-R1 | Bowen Jin et al. | Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning | COLM 2025 | published | https://arxiv.org/abs/2503.09516 |
-| 99 | TARG | — | Retrieval as a Decision: Training-Free Adaptive Gating for Efficient RAG（需 logits 非 API-only） | TMLR 04/2026（PDF 页眉自证；arXiv 2025-11 首发、v2 2026-04） | published | https://arxiv.org/abs/2511.09803 |
-| 100 | DeepResearcher | Yuxiang Zheng et al. | DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments | arXiv 2025 | preprint | https://arxiv.org/abs/2504.03160 |
-| 101 | WebThinker | — | WebThinker | arXiv 2025 | preprint | https://arxiv.org/abs/2504.21776 |
-| 102 | MMSearch-Plus | Xijia Tao et al. | MMSearch-Plus: Benchmarking Provenance-Aware Search for Multimodal Browsing Agents | arXiv 2025（ICLR 2026 rebuttal 修订版，无录用声明） | preprint | https://arxiv.org/abs/2508.21475 |
-| 103 | BCEA | Jian Xu et al. | Look Again Before You Abstain: Budgeted Conformal Evidence Acquisition for Reliable Vision-Language Models（abs 著录题为单数 "…Model"——本地排版/LaTeX 源为复数，主链接从本地） | arXiv 2026（v4 2026-07-21；venue 本地不可核） | preprint | https://arxiv.org/abs/2606.16667 |
-| 104 | M3-VQA | Jiatong Ma et al. | M³-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering | arXiv 2026（ACL 模板） | preprint | https://arxiv.org/abs/2604.25122 |
-| 105 | cotomi Act | Masafumi Oyamada et al. | cotomi Act: Learning to Automate Work by Watching You | CAIS '26 (ACM) | published | https://arxiv.org/abs/2605.03231 |
-| 106 | OpenSearch-VL | Shawn Chen et al. | OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents | arXiv 2026（自定义 tech-report 样式，无 venue 声明） | preprint | https://arxiv.org/abs/2605.05185 |
-| 107 | Pi-Serini | Tz-Huan Hsu et al. | Rethinking Agentic Search with Pi-Serini: Is Lexical Retrieval Sufficient? | arXiv 2026 | preprint | https://arxiv.org/abs/2605.10848 |
-| 108 | GranuRAG | Guanhua Chen et al. | From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG | arXiv 2026（ACL 模板，无录用声明） | preprint | https://arxiv.org/abs/2605.15019 |
-| 109 | MemLens | Xiyu Ren et al. | MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models | arXiv 2026（NeurIPS 2026 preprint 模板） | preprint | https://arxiv.org/abs/2605.14906 |
-| 110 | VAM | Aiden Yiliu Li et al. | Visual Agentic Memory: Enabling Online Long Video Understanding via Online Indexing, Hierarchical Memory, and Agentic Retrieval | arXiv 2026（NeurIPS 2026 preprint 模板） | preprint | https://arxiv.org/abs/2605.16481 |
-| 111 | MementoGUI | Ziyun Zeng et al. | MementoGUI: Learning Agentic Multimodal Memory Control for Long-Horizon GUI Agents | arXiv 2026（preprint 模板） | preprint | https://arxiv.org/abs/2605.18652 |
-| 112 | On Test-Time Scaling for VLMs | Fawaz Sammani et al. | On Test-Time Scaling for Vision-Language Models | arXiv 2026（ECCV 模板，无录用声明） | preprint | https://arxiv.org/abs/2606.28864 |
-| 113 | ToolGate | — | ToolGate | arXiv 2026 | preprint | https://arxiv.org/abs/2606.03054 |
-| 114 | FOVEA | — | FOVEA | arXiv 2026 | preprint | https://arxiv.org/abs/2605.01345 |
-| 115 | CTA | — | CTA | arXiv 2026 | preprint | https://arxiv.org/abs/2602.16699 |
-| 116 | VOI-search | — | VOI-search | arXiv 2026 | preprint | https://arxiv.org/abs/2605.05701 |
-| 117 | PRA | — | PRA | arXiv 2026 | preprint | https://arxiv.org/abs/2604.09482 |
-| 118 | Decocted | — | Decocted | arXiv 2026 | preprint | https://arxiv.org/abs/2604.04373 |
-| 119 | MemRL | — | MemRL | arXiv 2026 | preprint | https://arxiv.org/abs/2601.03192 |
-| 120 | AdaCompute | — | AdaCompute | arXiv 2026 | preprint | https://arxiv.org/abs/2604.14853 |
+| 90 | OK-VQA | Kenneth Marino et al. | OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge | CVPR 2019 | published | https://arxiv.org/abs/1906.00067 |
+| 91 | DPR | Vladimir Karpukhin et al. | Dense Passage Retrieval for Open-Domain Question Answering | EMNLP 2020 | published | https://arxiv.org/abs/2004.04906 |
+| 92 | RAG | Patrick Lewis et al. | Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks | NeurIPS 2020 | published | https://arxiv.org/abs/2005.11401 |
+| 93 | ROME | Kevin Meng et al. | Locating and Editing Factual Associations in GPT | NeurIPS 2022 | published | https://arxiv.org/abs/2202.05262 |
+| 94 | A-OKVQA | Dustin Schwenk et al. | A-OKVQA: A Benchmark for Visual Question Answering using World Knowledge | ECCV 2022 | published | https://arxiv.org/abs/2206.01718 |
+| 95 | ReAct | — | ReAct（反思环原理锚，pre-2024 原理例外） | arXiv 2022 | preprint | https://arxiv.org/abs/2210.03629 |
+| 96 | Reflexion | — | Reflexion（反思环原理锚，pre-2024 原理例外） | arXiv 2023 | preprint | https://arxiv.org/abs/2303.11366 |
+| 97 | Self-RAG | Akari Asai et al. | Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection | ICLR 2024 | published | https://arxiv.org/abs/2310.11511 |
+| 98 | CRAG | Shi-Qi Yan et al. | Corrective Retrieval Augmented Generation (CRAG) | arXiv 2024（venue 未在源内声明） | preprint | https://arxiv.org/abs/2401.15884 |
+| 99 | Wiki-LLaVA | — | Wiki-LLaVA: Hierarchical Retrieval-Augmented Generation for Multimodal LLMs | CVPR 2024 workshop（模板推定，未见录用声明） | published(件内未自证) | https://arxiv.org/abs/2404.15406 |
+| 100 | GraphRAG | — | From Local to Global: A GraphRAG Approach to Query-Focused Summarization | arXiv 2024 | preprint | https://arxiv.org/abs/2404.16130 |
+| 101 | HippoRAG | — | HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models | NeurIPS 2024 | published | https://arxiv.org/abs/2405.14831 |
+| 102 | EchoSight | — | EchoSight: Advancing Visual-Language Models with Wiki Knowledge | EMNLP 2024 Findings（模板/时间戳推定） | published(件内未自证) | https://arxiv.org/abs/2407.12735 |
+| 103 | MMSearch | Dongzhi Jiang et al. | MMSearch: Unveiling the Potential of Large Models as Multi-modal Search Engines | ICLR 2025（模板 camera-ready，无录用字样） | published(件内未自证) | https://arxiv.org/abs/2409.12959 |
+| 104 | LightRAG | — | LightRAG: Simple and Fast Retrieval-Augmented Generation | arXiv 2024（ICLR 2025 投稿模板，非 final） | preprint | https://arxiv.org/abs/2410.05779 |
+| 105 | Search-o1 | Xiaoxi Li et al. | Search-o1: Agentic Search-Enhanced Large Reasoning Models | arXiv 2025（NeurIPS 2024 preprint 选项模板） | preprint | https://arxiv.org/abs/2501.05366 |
+| 106 | A-Mem | Wujiang Xu et al. | A-Mem: Agentic Memory for LLM Agents | arXiv 2025（NeurIPS 2025 preprint 模板） | preprint | https://arxiv.org/abs/2502.12110 |
+| 107 | Search-R1 | Bowen Jin et al. | Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning | COLM 2025 | published | https://arxiv.org/abs/2503.09516 |
+| 108 | TARG | — | Retrieval as a Decision: Training-Free Adaptive Gating for Efficient RAG（需 logits 非 API-only） | TMLR 04/2026（PDF 页眉自证；arXiv 2025-11 首发、v2 2026-04） | published | https://arxiv.org/abs/2511.09803 |
+| 109 | DeepResearcher | Yuxiang Zheng et al. | DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments | arXiv 2025 | preprint | https://arxiv.org/abs/2504.03160 |
+| 110 | WebThinker | — | WebThinker | arXiv 2025 | preprint | https://arxiv.org/abs/2504.21776 |
+| 111 | MMSearch-Plus | Xijia Tao et al. | MMSearch-Plus: Benchmarking Provenance-Aware Search for Multimodal Browsing Agents | arXiv 2025（ICLR 2026 rebuttal 修订版，无录用声明） | preprint | https://arxiv.org/abs/2508.21475 |
+| 112 | BCEA | Jian Xu et al. | Look Again Before You Abstain: Budgeted Conformal Evidence Acquisition for Reliable Vision-Language Models（abs 著录题为单数 "…Model"——本地排版/LaTeX 源为复数，主链接从本地） | arXiv 2026（v4 2026-07-21；venue 本地不可核） | preprint | https://arxiv.org/abs/2606.16667 |
+| 113 | M3-VQA | Jiatong Ma et al. | M³-VQA: A Benchmark for Multimodal, Multi-Entity, Multi-Hop Visual Question Answering | arXiv 2026（ACL 模板） | preprint | https://arxiv.org/abs/2604.25122 |
+| 114 | cotomi Act | Masafumi Oyamada et al. | cotomi Act: Learning to Automate Work by Watching You | CAIS '26 (ACM) | published | https://arxiv.org/abs/2605.03231 |
+| 115 | OpenSearch-VL | Shawn Chen et al. | OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents | arXiv 2026（自定义 tech-report 样式，无 venue 声明） | preprint | https://arxiv.org/abs/2605.05185 |
+| 116 | Pi-Serini | Tz-Huan Hsu et al. | Rethinking Agentic Search with Pi-Serini: Is Lexical Retrieval Sufficient? | arXiv 2026 | preprint | https://arxiv.org/abs/2605.10848 |
+| 117 | GranuRAG | Guanhua Chen et al. | From Scenes to Elements: Multi-Granularity Evidence Retrieval for Verifiable Multimodal RAG | arXiv 2026（ACL 模板，无录用声明） | preprint | https://arxiv.org/abs/2605.15019 |
+| 118 | MemLens | Xiyu Ren et al. | MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models | arXiv 2026（NeurIPS 2026 preprint 模板） | preprint | https://arxiv.org/abs/2605.14906 |
+| 119 | VAM | Aiden Yiliu Li et al. | Visual Agentic Memory: Enabling Online Long Video Understanding via Online Indexing, Hierarchical Memory, and Agentic Retrieval | arXiv 2026（NeurIPS 2026 preprint 模板） | preprint | https://arxiv.org/abs/2605.16481 |
+| 120 | MementoGUI | Ziyun Zeng et al. | MementoGUI: Learning Agentic Multimodal Memory Control for Long-Horizon GUI Agents | arXiv 2026（preprint 模板） | preprint | https://arxiv.org/abs/2605.18652 |
+| 121 | On Test-Time Scaling for VLMs | Fawaz Sammani et al. | On Test-Time Scaling for Vision-Language Models | arXiv 2026（ECCV 模板，无录用声明） | preprint | https://arxiv.org/abs/2606.28864 |
+| 122 | ToolGate | — | ToolGate | arXiv 2026 | preprint | https://arxiv.org/abs/2606.03054 |
+| 123 | FOVEA | — | FOVEA | arXiv 2026 | preprint | https://arxiv.org/abs/2605.01345 |
+| 124 | CTA | — | CTA | arXiv 2026 | preprint | https://arxiv.org/abs/2602.16699 |
+| 125 | VOI-search | — | VOI-search | arXiv 2026 | preprint | https://arxiv.org/abs/2605.05701 |
+| 126 | PRA | — | PRA | arXiv 2026 | preprint | https://arxiv.org/abs/2604.09482 |
+| 127 | Decocted | — | Decocted | arXiv 2026 | preprint | https://arxiv.org/abs/2604.04373 |
+| 128 | MemRL | — | MemRL | arXiv 2026 | preprint | https://arxiv.org/abs/2601.03192 |
+| 129 | AdaCompute | — | AdaCompute | arXiv 2026 | preprint | https://arxiv.org/abs/2604.14853 |
 
 ### C. 载体/基准与源文献
 
 | # | 短名 | 作者（首作 et al.） | 题名 | Venue/年份 | 状态 | 链接 |
 |---|---|---|---|---|---|---|
-| 121 | Fox | Jennifer Drexler Fox et al. | Improving Contextual Recognition of Rare Words with an Alternate Spelling Prediction Model | Interspeech 2022（第三方书目佐证，本地不自证） | published(件内未自证) | https://arxiv.org/abs/2209.01250 |
-| 122 | Huang24f（Early Context Injection） | Ruizhe Huang et al. | Improving Neural Biasing for Contextual Speech Recognition by Early Context Injection and Text Perturbation | Interspeech 2024 | published | https://arxiv.org/abs/2407.10303 |
-| 123 | ConEC | Ruizhe Huang et al. | ConEC: Earnings Call Dataset with Real-world Contexts for Benchmarking Contextual Speech Recognition | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.328/ |
-| 124 | CB-Whisper | Yuang Li et al. | CB-Whisper: Contextual Biasing Whisper Using Open-Vocabulary Keyword-Spotting | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.262/ |
-| 125 | TED-EL | Silin Li et al. | TED-EL: A Corpus for Speech Entity Linking | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.1365/ |
-| 126 | Audiopedia | Abhirama Subramanyam Penamakuri et al. | Audiopedia: Audio QA with Knowledge | arXiv 2024（abs comments 逐字 "Accepted to ICASSP 2025"——一手核） | preprint（录用注记 ICASSP 2025） | https://arxiv.org/abs/2412.20619 |
-| 127 | MCR-Bench | Cheng Wang et al. | When Audio and Text Disagree: Benchmarking Text Bias in Large Audio-Language Models under Cross-Modal Inconsistencies（著录题 "…Revealing Text Bias in Large Audio-Language Models"——双形态并存、引用双列不混用） | EMNLP 2025 main（同一件 arXiv:2508.15407） | published | https://aclanthology.org/2025.emnlp-main.246/ |
-| 128 | ARC 总览（Interspeech 2026 Audio Reasoning Challenge） | Ziyang Ma et al. | The Interspeech 2026 Audio Reasoning Challenge: Evaluating Reasoning Process Quality for Audio Reasoning Models and Agents | Interspeech 2026（挑战赛总览短文） | preprint（录用注记 Interspeech 2026） | https://arxiv.org/abs/2602.14224 |
-| 129 | Earnings-21 | — | Earnings-21（主载体源文献；命名实体标注真实财报电话会语料） | arXiv 2021 | dataset/benchmark | https://arxiv.org/abs/2104.11348 |
-| 130 | Contextual Earnings-22 | — | Contextual Earnings-22（E-22 gold 派生词表层，部署态全局上下文 regime） | arXiv 2026 | dataset/benchmark | https://arxiv.org/abs/2604.07354 |
-| 131 | Earnings25 | — | Earnings25（载体源文献） | arXiv 2026 | dataset/benchmark | https://arxiv.org/abs/2607.23813 |
-| 132 | FinAudio | — | FinAudio（金融域 audio-LLM 评测基准，已在 E21/E22 上评测） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2503.20990 |
-| 133 | BLAB | — | BLAB（超长音频基准：833h+/平均 51 分钟） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2505.03054 |
-| 134 | ContextASR-Bench | — | ContextASR-Bench（LALM 通用上下文基准，40k 条/30 万+实体） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2507.05727 |
-| 135 | Open ASR Leaderboard | — | Open ASR Leaderboard（E21/22 长音频榜，总 WER 数字对齐） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2510.06961 |
-| 136 | ProfASR-Bench | — | ProfASR-Bench（已命名 "context-utilization gap" 并给 oracle/对抗探针） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2512.23686 |
+| 130 | Fox | Jennifer Drexler Fox et al. | Improving Contextual Recognition of Rare Words with an Alternate Spelling Prediction Model | Interspeech 2022（第三方书目佐证，本地不自证） | published(件内未自证) | https://arxiv.org/abs/2209.01250 |
+| 131 | Huang24f（Early Context Injection） | Ruizhe Huang et al. | Improving Neural Biasing for Contextual Speech Recognition by Early Context Injection and Text Perturbation | Interspeech 2024 | published | https://arxiv.org/abs/2407.10303 |
+| 132 | ConEC | Ruizhe Huang et al. | ConEC: Earnings Call Dataset with Real-world Contexts for Benchmarking Contextual Speech Recognition | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.328/ |
+| 133 | CB-Whisper | Yuang Li et al. | CB-Whisper: Contextual Biasing Whisper Using Open-Vocabulary Keyword-Spotting | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.262/ |
+| 134 | TED-EL | Silin Li et al. | TED-EL: A Corpus for Speech Entity Linking | LREC-COLING 2024 | published | https://aclanthology.org/2024.lrec-main.1365/ |
+| 135 | Audiopedia | Abhirama Subramanyam Penamakuri et al. | Audiopedia: Audio QA with Knowledge | ICASSP 2025（DOI 10.1109/ICASSP49660.2025.10889814 解析一手核；IEEE 件付费墙未落盘、本地在册=arXiv 2412.20619） | published(正式件未落盘) | https://arxiv.org/abs/2412.20619 |
+| 136 | MCR-Bench | Cheng Wang et al. | When Audio and Text Disagree: Benchmarking Text Bias in Large Audio-Language Models under Cross-Modal Inconsistencies（著录题 "…Revealing Text Bias in Large Audio-Language Models"——双形态并存、引用双列不混用） | EMNLP 2025 main（同一件 arXiv:2508.15407） | published | https://aclanthology.org/2025.emnlp-main.246/ |
+| 137 | ARC 总览（Interspeech 2026 Audio Reasoning Challenge） | Ziyang Ma et al. | The Interspeech 2026 Audio Reasoning Challenge: Evaluating Reasoning Process Quality for Audio Reasoning Models and Agents | Interspeech 2026（挑战赛总览短文） | preprint（录用注记 Interspeech 2026） | https://arxiv.org/abs/2602.14224 |
+| 138 | Earnings-21 | — | Earnings-21（主载体源文献；命名实体标注真实财报电话会语料） | arXiv 2021 | dataset/benchmark | https://arxiv.org/abs/2104.11348 |
+| 139 | Contextual Earnings-22 | — | Contextual Earnings-22（E-22 gold 派生词表层，部署态全局上下文 regime） | arXiv 2026 | dataset/benchmark | https://arxiv.org/abs/2604.07354 |
+| 140 | Earnings25 | — | Earnings25（载体源文献） | arXiv 2026 | dataset/benchmark | https://arxiv.org/abs/2607.23813 |
+| 141 | FinAudio | — | FinAudio（金融域 audio-LLM 评测基准，已在 E21/E22 上评测） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2503.20990 |
+| 142 | BLAB | — | BLAB（超长音频基准：833h+/平均 51 分钟） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2505.03054 |
+| 143 | ContextASR-Bench | — | ContextASR-Bench（LALM 通用上下文基准，40k 条/30 万+实体） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2507.05727 |
+| 144 | Open ASR Leaderboard | — | Open ASR Leaderboard（E21/22 长音频榜，总 WER 数字对齐） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2510.06961 |
+| 145 | ProfASR-Bench | — | ProfASR-Bench（已命名 "context-utilization gap" 并给 oracle/对抗探针） | arXiv 2025 | dataset/benchmark | https://arxiv.org/abs/2512.23686 |
 
 ---
 

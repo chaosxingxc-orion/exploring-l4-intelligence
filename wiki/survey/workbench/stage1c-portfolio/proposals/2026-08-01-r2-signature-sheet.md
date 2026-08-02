@@ -1,10 +1,10 @@
 ---
-artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V3"
-role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v19 交付（round-20 整改版：RQ 卡片化收窄、K-SUP 主实验、序贯决策合同、三态判定、护栏族、效率 estimand）"
-companion_of: "2026-07-29-r2-coreview-draft.md (V19)"
-date: "2026-08-01"
+artifact_id: "SF-STAGE1C-R2-SIGNATURE-SHEET-V4"
+role: "R2 开题签字表：一页纸签字依据（正文可长、签字对象不可歧义）——随 v20 交付（round-21 整改版：RQ0 析因、结论向量、十一判据三态真值表、K-NB 全称反证、RQ4a 拆分、控制器权威定义、载体族双 split、最小确认路径）"
+companion_of: "2026-07-29-r2-coreview-draft.md (V20)"
+date: "2026-08-02"
 status: "DRAFT_FOR_OWNER_SIGNATURE_REVIEW; owner 未签"
-supersedes: "V2（companion_of V18）；V1（companion_of V17.1）——本表为签字对象的唯一现行版"
+supersedes: "V3（companion_of V19）及更早——本表为签字对象的唯一现行版"
 ---
 
 # R2 开题签字表（一页）
@@ -12,10 +12,13 @@ supersedes: "V2（companion_of V18）；V1（companion_of V17.1）——本表�
 **总研究问题（一句话）**：在核心 speech/omni 模型冻结、内部状态不可依赖的条件下，如何
 围绕语音任务构造可组织（ORG）、可选择供给（SUPPLY）、可审慎使用（USE）的外部知识控制
 系统，并分别评价知识引入的必要性、有效性、合理性、可靠性与效率？
-**递进子问题（承诺面=实验可识别面）**：RQ0 必要性与边界（观测不足≠知识缺口）／RQ1
-组织——本轮主问题=key/索引/切片/面（value/schema/版本/出处=工程合同+后续分支）／RQ2
-供给——本轮主实验=供给源选择（K-SUP）／RQ3 使用——本轮主问题=证据准入（融合/冲突/
-引用/拒答=后续分支）／RQ4a 控制与优化（双源按样本选择居此）／RQ4b 系统评价。技术模块=
+**递进子问题（承诺面=实验可识别面）**：RQ0 必要性与错误分型（识别面=**OBS×外证 2×2
+析因**+预注册错误分型，各分量独立 estimand）／RQ1 组织——本轮主问题=key/索引/切片/面
+（value/schema/版本/出处=工程合同+后续分支）／RQ2 供给——本轮主实验=供给源选择
+（K-SUP）／RQ3 使用——本轮主问题=证据准入（融合/冲突/引用/拒答=后续分支）／RQ4a-1
+双源按样本动作选择（等预算析因识别）／RQ4a-2 序贯策略与优化器身份／RQ4b 系统评价。
+**总答案=RQ0–RQ4b 结论向量**（各按其判据独立三态、多载体综合、不合成单一总标签——
+既有"五类结论不得互相替代"之 RQ 级延伸）。技术模块=
 RQ 的候选方案；RQ 卡片表+总问题级决策表+模块唯一映射表=正文 §1.0。
 **谱系定位（描述性；本阶段对新颖性双向出域——不作首创主张、不必证明交集无占据，
 边界裁定在案）**：RECOVER 已实现 API-only/training-free/文本侧外显 rescore；长音频线已有
@@ -38,10 +41,13 @@ H-ORG 括注）**
   非模型/任务上界；高风险假设非前提）**：主张臂（运行时无专用ASR前端）在主载体上对**全部
   入判组（含⓪无上下文强专用 ASR）×两主指标合取**成立，**且过 §7 K-NB 成立侧护栏族四条**
   （总 WER 对自身裸核非劣/worst-group 非劣/correct→wrong 上界/abstain 带宽——防"修好
-  实体毁掉整句"）——判据 K-NB（dev 选定臂、SPLIT_GROUP/SPLIT_READING
-  出口）；trained 上界对照不及则改判"增强"。
+  实体毁掉整句"）——判据 K-NB（dev 选定臂；全称主张反证逻辑=任一 mandatory 对手经预注册反向检验证优
+  即判死；mandatory baseline set 预注册冻结不可事后缩减、对手不可运行记
+  INCONCLUSIVE_BASELINE_NOT_READY；SPLIT_GROUP/SPLIT_READING=未获支持出口非反证）；
+  trained 上界对照不及则改判"增强"。
   （前置 H0/RQ0：gold-evidence〔A1′ masked 口径〕相对裸核存在超 SESOI 的 oracle
-  headroom——判据 K0，否则供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
+  headroom——判据 K0〔OBS×外证 2×2 析因之外证主效应；OBS 主效应/交互并行报告〕，
+  否则供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
   H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
 
 **三形式+两横切轨→模块映射（唯一词典，正文 §1.3）**：ORG=知识以何单元/schema/索引/
@@ -62,7 +68,8 @@ H-ORG 括注）**
   dev 侧冻结；按 call/company 分组防泄漏）。主载体为分布内载体：直接支持"选择性上下文
   增强与动作选择"结论；参数外知识时态结论待后 cutoff/私域第二载体（义务在案）。
 - 复制载体=TED-LIUM3；诊断集=PRISM 词典协议（全合成）；组④对照=LibriSpeech+Rare5k
-  （实体子切片单独报数）。
+  （实体子切片单独报数）；自建载体族=discovery/confirmatory 双 split（阈值/prompt/标注
+  规则于 discovery 调定、K0/K4 正式判定唯出 confirmatory；按源音频/说话人/主题去泄漏）。
 
 **最强基线（⓪–⑥七组信息边界+同载体阶梯）**：⓪无上下文强专用 ASR（Whisper-large 级，
 入判组）①朴素族（Double Metaphone 级强实现钉死/KBBS)
@@ -81,11 +88,12 @@ SUPPORTED／REFUTED_OR_NEGLIGIBLE〔判死须过预注册反向
 主判据=效果绝对提升（paired delta+CI+SESOI+多重性校正；效率之比较性 estimand=每有效
 实体修正边际成本、不进主判据）。判死/降级出口全数预注册：K0（必要性：A1′−A0 无
 headroom→该载体供给/使用杠杆不评）、K-SUP（供给源选择，RQ2 主判据）、K1a
-（调度不敌固定档→判死）、K1b（双源独立性合取不成→MERGE 路由；判定载体=NB 主载体）、
+（调度不敌固定档→判死）、K1b（合取命题：全部分量支持才成立、任一承重分量被正式反证则推翻→MERGE 路由、仅未获
+支持=不确定；判定载体=NB 主载体）、
 K-NB（配置族最佳效果判死/改判"增强"；对手含⓪无上下文强专用 ASR）、K-PS（发音库降
 工程件）、K-XOVER（价值窗口判空→**该载体**回退梯；改挂另有二充分条件=§2.3 中止规则
 或窗口存在∧子消融①为负，全局生效受 §7 灵敏度前置检定）、K-OPT（档 A 不赢等预算随机
-搜索→不立方法主张）、K4（判定载体=先导多 claim 子层）/K5/K2/K3/K-Gate/K-RL；
+搜索→不立方法主张）、K4（判定载体=载体族 confirmatory split 多 claim 子层）/K5/K2/K3/K-Gate/K-RL；
 灵敏度前置五条（含本核余量下限与查询/检索两级 headroom 分账）+判别力三分+§5.3 四级
 回退梯——判死永不在无分辨力载体上宣布。评价按 Need→Access→Use→Outcome→Cost 五段链
 组织（§1.0），必要性/有效性/合理性/可靠性/效率五类结论不得互相替代。
@@ -94,8 +102,10 @@ K-NB（配置族最佳效果判死/改判"增强"；对手含⓪无上下文强�
 call 资料记录来源/hash/available_at，"当时可得/事后可得/gold oracle"三臂分立；检索快照
 冻结、复放合同全程 trace。
 
-**权限边界**：红线四条（不改参数/不新训模型/不新增代答 LLM/克隆边界——enrollment 仅会话
-内当事人、不留存、不对外播放、不涉第三方 PII）；本签字仅授权开题成立性；Stage-2A 执行
+**权限边界**：红线四条（不改参数/不新训模型〔权威口径：本轮零模型参数训练、新引入模型
+一律 frozen 已发布检查点；外置控制器=非模型——无梯度、有限决策常量 dev 标定 test 冻结，
+不属此列〕/不新增代答 LLM/克隆边界——enrollment 仅会话内当事人、不留存、不对外播放、
+不涉第三方 PII）；本签字仅授权开题成立性；Stage-2A 执行
 （模型/API/数据/指标）另需 authorization（义务清单全列于 §9）。
 
 **owner 签字栏**：＿＿＿＿（结论/日期/Decision-Log 条目号）

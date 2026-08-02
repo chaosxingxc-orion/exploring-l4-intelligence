@@ -417,3 +417,40 @@ Gap4 载体邻域全干、Gap1 仅同族登记级）、监督镜头 R2 全面扫
 +8 件。失败形态谱系（本环）：v19 新表传播完备性（R1–R2）→跨节回扫缺口（R3–R4 三态
 总则 vs v18 二值残句）→签字表压缩层（R5 箭头错映）→零（R6）——收敛层级与 v18 环
 （报告结构→判据缝隙→组合格）互补，共同覆盖报告-判据-签字三层。
+
+**本版（v20，2026-08-02）按 round-21 复审与续87 三裁决整改**：round-21（@v19 环收敛终态
+blob `c4a9e8f4`）判 MAJOR_REVISION 六项全报告层；三通道核验=blob 三项亲验一致、19/19
+引文零虚构零定性错（三轮最净）、5/5 发表态声明属实且滞后在我方（WavRAG=ACL 2025、
+DeRAGEC=Findings ACL 2025、Speech-Hands=2026.acl-long.1997、Audiopedia=ICASSP DOI；
+LongAudio-RAG 题名项对我方不成立——§10 行已用现行题名）。owner 三裁决（续87）：①红线
+权威口径=本轮零模型参数训练、新模型必 frozen——控制器非模型（外置无梯度、有限决策常量
+dev 标定 test 冻结）；②总答案=结论向量（既有评价体系 RQ 级延伸、不合成单标签）；③RQ0
+取选项 2（保留分型承诺+OBS×外证 2×2 析因+预注册错误分型）。结构面：RQ0 卡与 K0 析因化
+（外证主效应=主分量、OBS 主效应/交互并行、闭卷探针佐证不入判定）；决策表改"治理路由表"
++结论向量总则前置；**十一判据三态真值表化**（K0/K-SUP/K1a/K1b/K2/K4/K5-t/K-PS/K-RL/
+K-OPT/K-NB/K-XOVER——SUPPORTED=LCB 越 SESOI、REFUTED=UCB 不超可忽略界或反向检验、
+INCONCLUSIVE=其余；K3/K-Gate 路由型免改）；K1b 改合取命题总则实例（任一承重分量正式
+反证才推翻）；**K-NB 改全称反证逻辑**（任一 mandatory 对手反向检验证优即判死；mandatory
+集冻结不可事后缩减+INCONCLUSIVE_BASELINE_NOT_READY 出口；反证侧 ∃ 型跨对手比较入多重性
+校正族）；K2 双不等式并轨单真值表；RQ4a 拆 4a-1（等预算析因：SUPPLY-only/OBS-only/串行/
+自适应，interaction 识别选择价值）/4a-2（档B vs 档A 同预算合同）；档 B 合同补齐入正文
+（C_t 候选区入状态、初始/终止态、动作合法域、观测随机性、episode return、策略类=外置
+无梯度、行为策略=决策常量空间 ε-扰动、离线 credit assignment、覆盖条件、种子）；控制器
+权威定义入红线/§3.4/§6.3 三处；载体族更名+discovery/confirmatory 双 split 合同（K0/K4
+判定唯出 confirmatory）；最小确认路径（资源上界=声明不确定度之规划估计）；效率比率定义
+合同（净修正分子/correct→wrong 抵扣/RATIO_UNDEFINED/索引摊销/paired bootstrap）。词典
+面：OBS-INDEX 词条（同录音索引=观测组织、L4a 线标签同步）；§3.3 对齐 RQ1 卡（schema/
+版本/出处=工程合同、O-config 实验面=key/索引/切片/面）；RQ3 模块统一"证据准入"；ABSTAIN
+层固定条款；§6.2 SUPPLY 简写补裁决归 CONTROL。文献面：L2 拆 a/b（L2b=语音实体检索/链接
+线：wang21b D2〔N-best 软融合非选择、检索后全局阈值弃权非逐件准入、11.07% 在 θ=0 闸门
+关闭下取得〕+Retrieve-and-Copy+TED-EL 谱系）；L3 补声学键→候选→准入轴（Whispering
+LLaMA+GA-NEC D2〔TTS→冻结编码器声学键非音素、O(|库|) 检索、两级训练型准入门＝硬阈值
++top-5 与学习式 <empty> 弃权（20% 对抗注入训练而得、非 training-free）、音频条件化准入、
+catalog-miss 未测〕）；L4a 补时间线锚二件（johnson24 2024 deep-Q 跳读、yang25n 2025
+training-free 双维 chunking）+L241"音频域 2026 起步"更正；L4b 补 VoxRAG+WavRAG 发表态
+注；L5 补 NAACL 表示分析+CCFQA 正式层+TARS 命名统一；§10 至 145 行（arXiv 112/Anthology
+24/ISCA 7/DOI 2；四件发表态升级主链接随切、编纂说明增发表态分层加权合同）；literature
+cut=2026-08-02。证据批：ledger 1447–1459（anthology/ISCA 通道 11 件+CCFQA arXiv 双件）；
+d2-entries 至 65（62 D2+1 摘要级+2 TCR）。**数字纪律（v20 批）**：新增数字出自二件新 D2
+源核（11.07%/θ=0、20% 注入、top-5、O(|库|)）与面板一手核（pp.20824-20835/43124-43142、
+Vol.40 No.36、2660-2664）；既有已源核数字零改写。签字表升 V4。
