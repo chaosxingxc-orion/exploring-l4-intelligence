@@ -203,26 +203,26 @@
     },
     {
       "command": "python scripts/survey/sf_current_manifest.py --check",
-      "exit_code": 1,
-      "stdout_tail": "[CURRENT-MANIFEST] current manifest byte mismatch: expected 748ba3e9e8b4a82cb6113515c705ee88778e91569ba38f97c305a65a36ede4d1, found 90ffeccb5dbbe6229f0a82bc2c81222f3df07107431ff182ad40f2b4e8e0f4c1\ncurrent survey manifest: FAIL",
+      "exit_code": 0,
+      "stdout_tail": "current survey manifest: PASS",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_release_binding_check.py",
-      "exit_code": 1,
-      "stdout_tail": "[BINDING] manifest load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 5077d3a9917219839700ae8eff722dda2fdeb4343a7438a53cb292db1a7003cc, found b5bd9b3a37d524cf7deb2b99076559c78e4be218722470dac3b0cc4c844f6807\nrelease binding: FAIL (1 failures)",
+      "exit_code": 0,
+      "stdout_tail": "release binding: PASS (0 failures; mode=current-manifest; validated=1; not-applicable=13)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_quantifier_scan.py",
-      "exit_code": 1,
-      "stdout_tail": "[QUANTIFIER] manifest/path load failed: manifest artifact SHA-256 mismatch: wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl: declared 5077d3a9917219839700ae8eff722dda2fdeb4343a7438a53cb292db1a7003cc, found b5bd9b3a37d524cf7deb2b99076559c78e4be218722470dac3b0cc4c844f6807\nquantifier scan: FAIL (1 input failures, 0 unscoped)",
+      "exit_code": 0,
+      "stdout_tail": "quantifier scan: PASS (0 input failures, 0 unscoped; scope=current-manifest)",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/survey/sf_archive_candidates.py --check-applied",
-      "exit_code": 1,
-      "stdout_tail": "[ARCHIVE] archive-current-manifest-invalid: manifest bytes differ from deterministic B4 rebuild\narchive applied: FAIL (1 blocker(s))",
+      "exit_code": 0,
+      "stdout_tail": "archive applied: PASS (7 byte-identical moves; check-only)",
       "stderr_tail": ""
     },
     {
@@ -239,14 +239,14 @@
     },
     {
       "command": "python scripts/checks/build_ai_context_manifest.py --check",
-      "exit_code": 0,
-      "stdout_tail": "AI context manifest: PASS",
+      "exit_code": 1,
+      "stdout_tail": "manifest-byte-mismatch: expected 843ca19343ccf4d9fdd5b4d98a52631c14c2d068a940563e30daf955707818fb, found 08f6c5f18d706129b0635c1a14a8008a51b76a4c94732acb32dc6e59cd61ec41\nAI context manifest: FAIL",
       "stderr_tail": ""
     },
     {
       "command": "python scripts/checks/ai_context_surface_check.py",
-      "exit_code": 0,
-      "stdout_tail": "AI context surface: PASS (0 failures)",
+      "exit_code": 1,
+      "stdout_tail": "active-hash-mismatch: wiki/survey/current/manifest.json: 748ba3e9e8b4a82cb6113515c705ee88778e91569ba38f97c305a65a36ede4d1 != 90ffeccb5dbbe6229f0a82bc2c81222f3df07107431ff182ad40f2b4e8e0f4c1\nAI context surface: FAIL (1 failures)",
       "stderr_tail": ""
     }
   ],
