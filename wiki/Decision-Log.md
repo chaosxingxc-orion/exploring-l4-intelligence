@@ -6,6 +6,42 @@
 
 ---
 
+### 2026-08-01（续86）· round-20 六项 MAJOR 处置（方案 B 序贯合同/三态判定/效率 estimand/文档拆分）+ v19 整改授权
+
+#### Context
+
+round-20（GPT-5.6 多轮隔离审查@v18 blob `e837886a`）判 MAJOR_REVISION：6 项全报告层、
+边界纪律良好（novelty 双向出域明文、非 NO-GO、round-19 五项判基本关闭）。三通道对抗
+核验：14/14 引文真实零定性错（引文卫生三轮持续改善）；三处修正=Failing Forward 即
+DARAG 正式版（已全量 D2、评审重复计数）、Siskos anthology 条目=库内件正式版（已交叉
+登记）、CTC-Assisted 实为 SLT 2024 正式发表；对全项目全新十件（TED-EL/Audiopedia/
+iKnow-audio/Xiang/MCR-Bench/CopyNE/Adaptive-CB/CTC-Assisted/N-best T5/HypR）——其中
+TED-EL/Audiopedia 将"语音实体→外部知识"谱系时间线自 2026 前移至 2024，v18 L4 时间线
+失真指控成立。正文指控四条文本锚亲验坐实（档 B 在线更新张力 L555 vs L842/856、USE
+输出交叉 L234、value 非实验轴 L551、"被证伪"措辞 L813）。
+
+#### Decision（owner 裁决，2026-08-01 会话）
+
+①**MAJOR-3 取方案 B、不采方案 A**：档 B 改写为有限时域序贯决策合同（状态/转移/horizon/
+可观测反馈/离线 credit assignment/策略 dev 学 test 冻结种子重放），"contextual bandit"
+一词退役——TFRL 身份与 K-RL 判据保留（续82③ 重申；方案 B 恰为续82③"按 MDP/bandit
+对象正式化"的落地）。②**效率维度**：以既有"每有效实体修正边际成本"升为效率比较性
+estimand（描述性、不进主判据——续82② 效果优先维持）；可靠性护栏（worst-group 非劣+
+correct→wrong 上界）入 K-NB 成立侧护栏族。③**文档拆分与最小主线**：治理史/环记录移
+AUDIT sidecar、主报告=科学叙事+参考文献表；最小开题主线冻结按"排序非收窄"口径——
+三支柱全数保留为条件扩展承诺（续83① 相容）。④其余全采：RQ 卡片化（RQ1 收窄/RQ2 升
+SRC-sel 主实验/RQ3 收窄准入/RQ4 拆 4a/4b/总问题级决策表）、三态判定语义全格网
+（SUPPORTED/REFUTED_OR_NEGLIGIBLE/INCONCLUSIVE）、§1.7 十件补录+L4 三分+时间线修正、
+标准参考文献表。⑤对抗自检基线要求延续（续85④ 口径：隔离上下文+重新搜索+监督核验、
+至零轮）。
+
+#### Consequences
+
+round-20 二件（评审+回应）落审计层；十件 fetch+五件 D2（TED-EL/Audiopedia/iKnow-audio/
+Xiang/MCR-Bench——iKnow 按声学类别 tagging 限定收编）+五件登记级+DARAG 交叉注；v19
+起草+签字表 V3；完成后送"问题树+直接语音/音频现状+统计/控制合同"窄面复审。本条不授予
+Stage-2A、模型/API 调用、指标运行、研究数据集获取、原型或 push/wiki 发布权限。
+
 ### 2026-08-01（续85）· round-19 边界纠偏生效（开题只审问题与现状）+ TFRL 身份维持 + v18 重构授权 + 对抗自检基线要求
 
 #### Context
