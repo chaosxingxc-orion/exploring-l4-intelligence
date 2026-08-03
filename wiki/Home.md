@@ -13,10 +13,10 @@ is synced to this Wiki via `scripts/wiki-sync.sh`.
 - [[Project-Thesis]] — the research thesis / north star (**read second**)
 - [[Architecture]] — repo model & shared library
 - [[Experiment-Assets]] — admitted study repos, experiment lifecycle and asset graph
-- [[Environment-and-Setup]] — WSL2 / CUDA / py3.12 venv / verl
-- [[Inference-Engine-Choice]] — local 30B on 24 GB: llama.cpp (proven) vs vLLM (deferred to W2), measured evidence
+- [[Environment-and-Setup]] — WSL2 / CUDA / py3.12 venv
+- [[Inference-Engine-Choice]] — local 30B on 24 GB: llama.cpp (proven) vs vLLM (deferred), measured evidence
 - [[Working-Mode]] — cross-repo conventions
-- [[Per-Work-Status]] — per-work status (changes most often)
+- [[Per-Work-Status]] — retired-work tombstones and study pipeline state
 - [[Data-and-Assets]] — models & datasets
 - [[AI-Collaboration]] — how AIs use the Wiki as shared memory
 - [[Onboarding]] — zero-to-first-run
@@ -40,8 +40,8 @@ decisions in the correct Wiki layer; publication remains separately authorized.
 **页面**：[[Research-Objective]] 当前阶段与下一步（客户端指南后**先读**）· [[Project-Thesis]]
 研究主旨/北极星（**次读**）· [[Architecture]] 架构与共享库 · [[Experiment-Assets]] 正式 study 仓与
 实验资产图 · [[Environment-and-Setup]] 环境搭建 · [[Inference-Engine-Choice]]
-本地 30B 推理引擎取舍（llama.cpp 已验证 / vLLM 留待 W2）· [[Working-Mode]]
-协作约定 · [[Per-Work-Status]] 各工作进度（最常更新）· [[Data-and-Assets]] 模型与数据 ·
+本地 30B 推理引擎取舍（llama.cpp 已验证 / vLLM 缓议）· [[Working-Mode]]
+协作约定 · [[Per-Work-Status]] 退役工作墓碑与 study 管线状态 · [[Data-and-Assets]] 模型与数据 ·
 [[AI-Collaboration]] AI 如何把 Wiki 当共享记忆 · [[Onboarding]] 从零跑通 · [[Decision-Log]]
 决策与经验（追加式记忆）。
 

@@ -1,9 +1,10 @@
 # Inference-Engine Choice — local Qwen3-Omni-30B on the 24 GB laptop GPU
 
 > Decision record (2026-06-25 measured; 2026-07-03 written up). One-line verdict: **run the 30B
-> omni model locally with llama.cpp (GGUF, partial offload); vLLM stays the RL-rollout / verl
-> training engine of record for W2 — its Qwen3-Omni support is version-pairing work deferred until
-> then.** This engine choice produced the W1 genuine best-of-N result (Decision-Log 2026-07-02).
+> omni model locally with llama.cpp (GGUF, partial offload); vLLM's Qwen3-Omni support is
+> version-pairing work, deferred indefinitely now that the program is zero-parameter-training on a
+> frozen core.** This engine choice produced the genuine best-of-N result of the retired W1 work
+> (Decision-Log 2026-07-02) and remains the serving path for the admitted study.
 
 ## Measured environment (2026-06-25, this machine)
 
@@ -52,31 +53,30 @@ the W1 multi-seed best-of-N artifact was produced exactly this way.
 
 Provisioning is codified: `scripts/env-setup.sh` **Phase 5** builds llama.cpp (CUDA 12.8, sm_120);
 `scripts/data/fetch-qwen3-omni-gguf.sh` fetches exactly the two GGUF files (whole-repo pull >110 GB
-deliberately avoided — lockfile source kind `hf-manual`). Working best-of-N runner:
-`projects/speech-mllm-training-free-rl/scripts/repro_asr_best_of_n_llamacpp.py`.
+deliberately avoided — lockfile source kind `hf-manual`). Reference best-of-N runners (rescued from
+the retired W1 work):
+`studies/audio-aware-evidence-acquisition/reference/w1-snapshot/baselines/repro_asr_best_of_n_v2.py`
+(includes the proven prompt-cache livelock fix bundle) and `repro_asr_best_of_n_llamacpp.py`.
 
 ## Per-task engine matrix
 
 | Task | Engine | Status |
 |---|---|---|
-| Local 30B omni ASR + best-of-N (W1) | **llama.cpp** (resident `llama-server`) | ✅ proven — produced W1 `f9d111a` |
-| W4 embedding backbone (`omni-embed-nemotron-3b`) | HF / sentence-transformers | ✅ unaffected by this decision |
-| RL rollout + verl training (W2) | **vLLM** (engine of record) | ⏸ deferred — fix the transformers/vllm pairing when W2 starts |
-| Post-fine-tune deployment | verl+vLLM train → `convert_hf_to_gguf.py` / `convert_lora_to_gguf.py` → llama.cpp | planned (merge path preferred) |
+| Local 30B omni ASR + best-of-N / frozen-core serving | **llama.cpp** (resident `llama-server`) | ✅ proven (historical W1 `f9d111a`); current study serving path |
+| Embedding backbones (e.g. `omni-embed-nemotron-3b`) | HF / sentence-transformers | ✅ unaffected by this decision |
+| vLLM serving of Qwen3-Omni | vLLM | ⏸ deferred indefinitely — version-pairing work; no training workload exists under the zero-parameter-training program line |
 
-## LoRA deployment topology
-
-Fine-tune with verl+vLLM (bitsandbytes 4-bit for QLoRA under 24 GB); then either **merge → GGUF**
-(`convert_hf_to_gguf.py`, safest) or **adapter GGUF** (`convert_lora_to_gguf.py`) served by
-llama.cpp. Both converters ship with the Phase-5 build.
+Historical note: the former verl/vLLM fine-tune and LoRA-deployment plans belonged to the retired
+W2-era framing; the admitted program line trains no model parameters, so they are recorded only in
+Git history.
 
 ---
 
 ## 中文
 
-**一句话结论：本地跑 Qwen3-Omni-30B 用 llama.cpp（GGUF + `-ngl 28` 部分卸载）；vLLM 仍是 W2 RL
-rollout / verl 训练的 engine of record，其 Qwen3-Omni 支持属版本配对工程、留到 W2 再解。** W1 的
-真实 best-of-N 结果（Decision-Log 2026-07-02）正是这条路产出的。
+**一句话结论：本地跑 Qwen3-Omni-30B 用 llama.cpp（GGUF + `-ngl 28` 部分卸载）；vLLM 的
+Qwen3-Omni 支持属版本配对工程，在零参数训练的程序主线下无限期缓议。** 已退役 W1 工作的真实
+best-of-N 结果（Decision-Log 2026-07-02）正是这条路产出的，现为获准 study 的服务路径。
 
 **为什么不走 HF/vLLM int4（实测证据）：** HF `from_pretrained` 会把 int4 的 MoE 专家当缺失重新以
 fp32 初始化（~58 GB，OOM，thinker-only 也不行）；vLLM 0.14.0 + transformers 5.12.1 在 engine 初始化
@@ -88,6 +88,7 @@ fp32 初始化（~58 GB，OOM，thinker-only 也不行）；vLLM 0.14.0 + transf
 （base64 wav）；greedy 即 temperature 0，采样用 temp>0 + 不同 seed。环境固化在 `env-setup.sh`
 Phase 5；模型按文件取自 `fetch-qwen3-omni-gguf.sh`（lockfile 来源类型 `hf-manual`）。
 
-**任务取舍：** 本地 30B 推理/best-of-N → llama.cpp（已验证）；W4 嵌入主干不受影响；W2 训练/rollout
-→ vLLM（届时修版本配对）；微调后部署 → `convert_hf_to_gguf.py`（合并路，保险）或
-`convert_lora_to_gguf.py`（adapter 路）→ llama.cpp。
+**任务取舍：** 本地 30B 推理/best-of-N → llama.cpp（已验证）；嵌入主干不受影响；vLLM 无限期缓议。
+昔日 verl/vLLM 微调与 LoRA 部署方案属已退役的 W 时代表述，零参数训练主线下仅存于 Git 历史。
+参考 runner 已抢救至
+`studies/audio-aware-evidence-acquisition/reference/w1-snapshot/baselines/`。

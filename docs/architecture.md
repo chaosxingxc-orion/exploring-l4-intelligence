@@ -2,14 +2,16 @@
 
 ## Repository ownership
 
-This workspace uses three repository classes:
+This workspace uses two repository classes:
 
 1. **Umbrella governance repository** (`exploring-l4-intelligence`) — owns the thesis, current state,
-   Wiki, study registry, shared utilities, integrity manifests and cross-study checks.
-2. **Work repositories** (`projects/`, W1–W4) — independent historical/publication/supporting works.
-   They do not own the primary research program or newly admitted studies.
-3. **Study repositories** (`studies/<semantic-slug>/`) — independent GitHub repositories created only
-   after a research object receives owner GO and an execution contract.
+   Wiki, study registry, shared utilities, data/model acquisition, integrity manifests and
+   cross-study checks. Every new topic's Stage‑1 discussion/survey runs here.
+2. **Study repositories** (`studies/<semantic-slug>/`) — independent GitHub repositories created only
+   after a research object receives owner GO and an execution contract; all Stage‑2+ work lives there.
+
+The historical W1–W4 work repositories were retired on 2026-08-03 (local checkouts deleted, remotes
+kept as cold backups; tombstone `wiki/archive/program/w1-w4-retirement/`).
 
 Candidate labels used during direction analysis are not repository identities. R1, for example, sunset
 before admission and has no engineering repository. A later study is named by the research question
@@ -19,8 +21,7 @@ frozen in its execution contract, not by an R-number.
 
 ```text
 exploring-l4-intelligence/          umbrella Git repository
-├── common/                         stable cross-repository Python utilities
-├── projects/                       W1–W4 independent Git repositories
+├── common/                         stable cross-study Python utilities
 ├── studies/
 │   ├── README.md                   umbrella-tracked admission policy
 │   ├── registry.json               umbrella-tracked admitted-study registry
@@ -31,8 +32,8 @@ exploring-l4-intelligence/          umbrella Git repository
 └── speechrl-data/                  external, gitignored large-asset root
 ```
 
-The umbrella ignores `projects/*/` and `studies/*/`. It tracks the two top-level study registry files,
-but never the nested study code.
+The umbrella ignores `studies/*/`. It tracks the two top-level study registry files, but never the
+nested study code.
 
 ## Experiment asset architecture
 

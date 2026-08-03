@@ -1,28 +1,28 @@
 # Architecture
 
-The workspace uses an **umbrella governance repo + independent work repos + independently admitted
-study repos**. The detailed source is [`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md).
+The workspace uses an **umbrella governance repo + independently admitted study repos**. The detailed
+source is [`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md).
 
 ## Repository model
 
 ```text
 exploring-l4-intelligence/      umbrella Git repository
-├─ common/                      stable cross-repository utilities
-├─ projects/                    W1–W4 independent work repositories
+├─ common/                      stable cross-study utilities
 ├─ studies/
 │  ├─ README.md                 umbrella-owned admission rule
 │  ├─ registry.json             umbrella-owned admitted-study registry
 │  └─ <semantic-study>/         independent Git/GitHub repository
-├─ docs/                        specs, integrity manifests and checks
-├─ scripts/                     executable governance/environment tooling
+├─ docs/                        specs, datasets.lock.json, integrity manifests and checks
+├─ scripts/                     executable governance/environment/data tooling
 └─ wiki/                        program and experiment management truth
 ```
 
-The umbrella, not W1, carries the primary program. W1–W4 retain their own histories and roles but are
-not parents of new research studies. A study repository is created only after its research object closes
-survey, owner GO and an execution contract (`OWNER_GO_AND_EXECUTION_CONTRACT`). Candidate labels such as
-R1/R2 remain survey/audit provenance and must not be repository names. R1 sunset before admission and has
-no repository.
+Program cadence: Stage‑1 discussion/survey/justification for every new topic runs in the umbrella; a
+study repository is created only after its research object closes survey, owner GO and an execution
+contract (`OWNER_GO_AND_EXECUTION_CONTRACT`), and all later work lives in that repo. Candidate labels
+such as R1/R2 remain survey/audit provenance and must not be repository names. R1 sunset before
+admission and has no repository. The historical W1–W4 work repos were retired on 2026-08-03 (local
+checkouts deleted, remotes kept as cold backups; tombstone `wiki/archive/program/w1-w4-retirement/`).
 
 ## Experiment assets
 
@@ -50,10 +50,11 @@ survey is not a global Stage-2 prerequisite.
 
 ## 中文
 
-本工作区采用**伞式治理仓 + 独立工作仓 + 经放行的独立研究仓**。伞仓而不是 W1 承载主程序；W1–W4
-保留各自历史和工作角色，但不作为新 study 的父目录。研究对象只有在完成自身调研、owner GO 与执行合同
-后，才以具体语义名称在 `studies/` 下建立独立 Git/GitHub 仓。R1/R2 等候选编号只留在调研/审计层；R1
-已在入场前日落，所以不建仓。
+本工作区采用**伞式治理仓 + 经放行的独立研究仓**。运行节奏：每个新课题的 Stage‑1（讨论、调研、
+论证）在伞仓完成；研究对象在完成自身调研、owner GO 与执行合同后，以具体语义名称在 `studies/` 下
+建立独立 Git/GitHub 仓，之后全部工作在该仓完成。R1/R2 等候选编号只留在调研/审计层；R1 已在入场前
+日落，不建仓。历史 W1–W4 工作仓已于 2026-08-03 退役（本地删除、远端冷备份，墓碑见
+`wiki/archive/program/w1-w4-retirement/`）。
 
 Wiki 管理研究状态、实验协议、资产索引、偏差、结果与裁决；study 仓管理代码/配置/测试；
 `SPEECHRL_DATA_DIR` 和 MLflow 保存大型资产与运行数据。一个 study 进入工程后可以并行调研下一个候选，
