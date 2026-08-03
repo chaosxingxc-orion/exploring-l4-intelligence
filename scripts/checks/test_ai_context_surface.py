@@ -1690,11 +1690,11 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 8, 2), refresh_date)
+        self.assertEqual(date(2026, 8, 3), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage accounting is now **direction-local**",
-            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING",
+            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_OWNER_GO_SIGNED__STAGE2A_E0_IN_PROGRESS",
             "Qwen3-Omni-30B",
             "general ASR",
             "Stage‑1B v5",
@@ -1709,9 +1709,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "OWNER_UNVERIFIED",
             "direction criterion (2026-07-29)",
             "PASS_STAGE1C_FORMAL_OPENING",
-            "innovation and final",
             "method remain Stage‑2A/2B outputs",
-            "No study repo or model-facing execution is admitted",
+            "GO and execution contract signed 2026-08-03",
+            "model-facing execution is bounded by the contract's budgets",
             "D0_CLOSED",
             "wiki/survey/current/README.md",
             "wiki/survey/current/research-directions.md",
@@ -1761,7 +1761,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 8, 2), per_work_date)
+        self.assertEqual(date(2026, 8, 3), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

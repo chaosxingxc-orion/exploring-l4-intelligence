@@ -16,10 +16,12 @@ Stage accounting is now **direction-local**, not a global R1–R9 waterfall. End
 Core = Qwen3-Omni-30B via local llama.cpp; ASR mainline = general ASR. The owner direction criterion (2026-07-29)
 remains sufficient survey plus a concrete incumbent baseline.
 
-R1–R9 are audit provenance, not engineering identities. Owner GO plus an execution contract creates a
-semantic study repo. R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`, so it has no repo.
+R1–R9 are audit provenance, not engineering identities. Owner GO plus an execution contract
+(`OWNER_GO_AND_EXECUTION_CONTRACT`) creates a semantic study repo under `studies/<semantic-name>/`.
+R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`, so it has no repo.
 
-The first semantic object, **audio-aware evidence acquisition** (R2 provenance), is admitted: owner
+The first semantic object, **audio-aware evidence acquisition** (R2 provenance), is
+`PASS_STAGE1C_FORMAL_OPENING` and admitted: owner
 GO and execution contract signed 2026-08-03
 (`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`).
 Its repository is `studies/audio-aware-evidence-acquisition/` (registered, private remote). Innovation

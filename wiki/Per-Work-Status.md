@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-08-02. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-08-03. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
 
@@ -10,15 +10,16 @@
 - **Carrier:** the umbrella program and its Wiki; W1 is no longer the primary-program carrier.
 - **Repository rule:** admitted research objects use independent semantic GitHub repos under `studies/`.
   Candidate IDs remain audit provenance and never become engineering names. R1 sunset before admission,
-  so it has no repo. `studies/registry.json` currently contains zero admitted studies.
-- **First planned study:** audio-aware evidence acquisition (source-candidate provenance R2), now
-  `PASS_STAGE1C_FORMAL_OPENING`. Close model-free D1–D4 and freeze its Stage‑2A execution contract before
-  requesting `OWNER_GO_AND_EXECUTION_CONTRACT` or creating a repo; innovation and final method remain
-  Stage‑2 outputs.
+  so it has no repo. `studies/registry.json` contains one admitted study.
+- **First admitted study:** audio-aware evidence acquisition (source-candidate provenance R2).
+  `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03; repo
+  `studies/audio-aware-evidence-acquisition/` (private remote) with the freeze sheet in
+  `wiki/experiments/audio-aware-evidence-acquisition/`; innovation and final method remain
+  Stage‑2 outputs. Next: close model-free E0 (D1–D4) plus runtime receipt, then the R0 slice.
 - **Flow:** the admitted study may enter engineering while the next candidate is surveyed; R3–R9 review
-  is not a global prerequisite. D0 acquisition is closed for Earnings21, Earnings22 and ConEC; further
-  unapproved acquisition, model/API calls, metrics, reproduction, prototypes, remote repo creation, push
-  and Wiki publication remain closed today.
+  is not a global prerequisite. D0 acquisition is closed for Earnings21, Earnings22 and ConEC; model/API
+  calls stay gated behind E0 closure and the contract's budget bands; publication and Wiki mirror remain
+  closed today.
 - **Assets:** `wiki/Experiment-Assets.md` is the management router. The legacy 574-row W1 attempt
   inventory resolves to 573 live and one Git-history-only path with zero unresolved assets.
 

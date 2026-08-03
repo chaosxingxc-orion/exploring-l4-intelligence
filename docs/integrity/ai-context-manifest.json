@@ -13,7 +13,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "ba31b8d85f96091a18332c1871eddb6c4535f5b862e51d60288a9cd5c5976b66"
+      "sha256": "021f8ed96cab4c49abdf4c9a588612c37aaf2806416da23b3a560f42edbb530b"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "9552648217cbd0a5a2bfc80505dcc442f43190c9c525757cbb36582086e2a7d4"
+      "sha256": "53c597812b6c8dab5d734d8b33098202ce6bfc2ba315046db5c3c657ec4fd83a"
     },
     {
       "path": "wiki/AI-Collaboration.md",
