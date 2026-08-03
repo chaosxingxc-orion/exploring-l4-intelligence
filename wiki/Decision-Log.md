@@ -3478,3 +3478,21 @@ Stage‑1 进入 Stage‑2 时开独立 study 仓，此后全部工作在该 stu
 「冷备份」；不再需要 `delete_repo` scope；CLAUDE/AGENTS Repository 节补运行节奏句。
 **Supersedes：** 同日退役条目中「远端删除待 token 授权」部分；运行节奏为 2026-08-02 架构条目的
 操作化细则。失效条件：owner 决定真删远端或恢复某 work 仓。
+
+**2026-08-03 · 伞仓公共职能定型：数据三层拆分、「发表即晋升」管线，不设污染档案：**
+**Context：** 目录重整与 W1–W4 退役后，owner 与 Fable5 就伞仓公共职能完成四轮辩论（基线记录拆分、
+载体消耗账、切分归属、发表结晶）。
+**Decision：** ①数据三层拆分：数据集本体=gold truth 不变量（伞仓 lock）；使用方案（split/采样/
+prompt/协议/加载内容）=study 私有；伞仓**不设**「载体污染/消耗」档案。②发表即晋升：study 的
+切分/采样随论文发表结晶为**新数据集**晋升入伞仓——构建方式（可复现派生脚本入 `scripts/data/`）
++数据留档（样本身份/hash 入 lock）+provenance（源数据集、来源 study/论文、当时角色）。先例=
+Rare5k（`derive_rare5k.py`+lock reconstruction 条目）。③程序级可见性两句纪律：写侧=confirmatory
+消耗的实验台账行必须显式带 split 身份 hash 与「已消耗」标记；读侧=新 study 的 Stage‑1 载体选型
+必须扫描既有 study 实验台账+exposure 台账，给出带范围的继承 exposure 声明（四字段纪律的点名
+适用）。④伞仓公共职能终表：数据+模型下载、基线身份档案（身份/readiness/exact-revision pin；
+运行读数归 study；档案文件待 R1 复现队列冻结时落）、各 study 的 Stage‑1 讨论调研场、文献调研
+基建（ledger/registry/fetch 管线）、运行时 pin 档案、治理与门禁。⑤重访触发器：当第二个 study
+与既有 study 实际共用载体时，把「按载体聚合视图」做成只读推导检查（从台账推导，不另存真值）。
+**Consequences：** 不新建任何档案文件；实验台账行格式自 R2 首条正式记录起补 split-hash 与消耗
+标记列。
+**Supersedes：** 细化本日「运行节奏」条目的数据职能部分。失效条件：owner 调整公共职能表。
