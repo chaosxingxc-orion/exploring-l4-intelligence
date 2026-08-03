@@ -47,7 +47,7 @@ H-ORG 括注）**
   trained 上界对照不及则改判"增强"。
   （前置 H0/RQ0：gold-evidence〔A1′ masked 口径〕相对裸核存在超 SESOI 的 oracle
   headroom——判据 K0〔OBS×外证 2×2 析因之外证主效应；OBS 主效应/交互并行报告〕，
-  否则供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
+  否则**该载体上**供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
   H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
 
 **三形式+两横切轨→模块映射（唯一词典，正文 §1.3）**：ORG=知识以何单元/索引/切片/面存在（knowledge builder；K5——schema/版本/出处=工程合同+后续分支、本轮非实验对象）；SUPPLY=供给源与候选证据之变量面（本轮主实验=供给源选择、判据=K-SUP；何时取/取多少=条件参数、触发/停止裁决归 CONTROL）；USE=已取回证据之准入/拒用（admission；K4——融合/冲突/引用=后续支线）；**OBS**=重听/重切/多假设（观测
