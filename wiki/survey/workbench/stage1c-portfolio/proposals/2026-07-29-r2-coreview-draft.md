@@ -177,7 +177,7 @@ INCONCLUSIVE 一律按 §7 对应阀回 owner、不触发范围收缩）**：
 
 | RQ | 主构念 | 主操纵 | 同层对照 | 判定载体 | estimand | 失败后范围 |
 |---|---|---|---|---|---|---|
-| RQ0 | 外部证据必要性与错误分型（观察不足/参数知识不足/可外证纠正/负类不应引知） | **OBS×外证 2×2 析因**：A0（双关）/OBS-only（重听预算开、零外证）/A1′（gold-evidence masked、零重听）/双开 | 裸核 A0 行（析因基线格） | 载体族 confirmatory split（2×2 析因子层+多 claim+负类层；§5.4） | 外证 simple effect@OBS-off（A1′−A0，K0 判定分量、带 LCB/SESOI）＋OBS 主效应＋交互项（READOUT 伴读）；错误分型按预注册分类学（负类/观测型/知识型/交互型）归账；"参数知识激活"面由闭卷参数化召回探针 READOUT 佐证、不入判定式 | 外证主效应无 headroom→该载体上供给/使用杠杆不评、回 owner（OBS 主效应/交互读数并行保留） |
+| RQ0 | 外部证据必要性与错误分型（观察不足/参数知识不足/可外证纠正/负类不应引知） | **OBS×外证 2×2 析因**：A0（双关）/OBS-only（重听预算开、零外证）/A1′（gold-evidence masked、零重听）/双开 | 裸核 A0 行（析因基线格） | 载体族 confirmatory split（2×2 析因子层+多 claim+负类层；§5.4） | 外证 simple effect@OBS-off（A1′−A0，K0 判定分量、带 LCB/SESOI）＋OBS 主效应＋交互项（READOUT 伴读）；错误分型按预注册分类学（负类/观测型/知识型/交互型）归账；"参数知识激活"面由闭卷参数化召回探针 READOUT 佐证、不入判定式 | 外证 simple effect@OBS-off 无 headroom→该载体上供给/使用杠杆不评、回 owner（OBS 主效应/交互读数并行保留） |
 | RQ1 | key/索引/切片/面组织价值 | 组织配置（best-of 优化 vs incumbent） | incumbent 配置+等预算随机搜索 | K5 择一载体（先导非语义槽子层/合格锚） | 任务效用+coverage 两读数（K5-t） | 回落实验合同角色；value/schema/版本/出处=后续分支 |
 | RQ2 | 供给源价值 | 供给源（逐源 vs 合并） | 等表长合并对照 | NB 主载体（SRC-sel 臂） | 两主指标 paired delta（K-SUP） | 回落合并供给；query 构造=伴读、depth=后续分支 |
 | RQ3 | 证据准入价值 | 准入门开/关（A3 vs A2） | A2 无条件拼接（同证据集） | 载体族 confirmatory split 多 claim 子层 | Knowledge-error/type-D+该子层预注册答案层指标（K4） | 留 R5/R8；融合/冲突/引用/拒答=后续分支 |
@@ -1099,7 +1099,7 @@ pin 服务/日期/参数；逐次落盘 URL/文档 ID/rank/内容 hash；共享�
 准入/反事实读数、Outcome→有效性+可靠性、Cost→效率——各类结论由对应指标族支持、
 不得互相替代）
 
-- **必要性**（oracle 行族；H0/K0 判定输入）：A1′（gold-evidence masked）−A0、无/真证据
+- **必要性**（oracle 行族；H0/K0 判定输入）：A1′（gold-evidence masked）−A0=外证 simple effect@OBS-off（判定分量）、OBS 主效应与交互项=2×2 析因伴读 READOUT（§6.2 新臂）、2×2 析因子层
   对照（判定输入）；A6 已执行池离线 oracle=伴读 READOUT（其量为已执行动作池的回收余量
   ——配额/调度侧构念，主口径在合理性 under-call 与灵敏度前置替补，不入 H0 判定）；A1
   （gold-entity）=OBS/映射侧 headroom 读数单列、不入 H0（激活/增补分立记账 §1.0）。
@@ -1177,7 +1177,7 @@ masked、零重听〕/双开〕；`IN_DISTRIBUTION_CARRIER` 登记之载体不�
 分离、如实命名）；伴随分量=OBS 主效应与交互项（READOUT 伴读 estimand、错误按预注册
 分类学〔负类/观测型/知识型/交互型〕归账；**交互显著时**外证结论限 OBS-off 档、扩至
 全档须双开格读数支持——升级路径回 owner）。**三态**：
-`SUPPORTED`=外证主效应 LCB 越过预注册 SESOI；`REFUTED_OR_NEGLIGIBLE`=UCB 不超预注册
+`SUPPORTED`=外证 simple effect@OBS-off 之 LCB 越过预注册 SESOI；`REFUTED_OR_NEGLIGIBLE`=UCB 不超预注册
 可忽略界、或预注册等效/ROPE 检验成立→该载体上无外部证据 headroom、**该载体上**供给/
 使用杠杆不评（OBS 主效应/交互读数并行保留；程序级中止权在 owner——回 owner 议载体/
 任务型）；`INCONCLUSIVE`=其余回 owner。SESOI 数值随 §9 power 预注册。

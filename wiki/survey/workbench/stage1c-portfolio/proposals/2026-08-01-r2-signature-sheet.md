@@ -46,7 +46,7 @@ H-ORG 括注）**
   INCONCLUSIVE_BASELINE_NOT_READY；SPLIT_GROUP/SPLIT_READING=未获支持出口非反证）；
   trained 上界对照不及则改判"增强"。
   （前置 H0/RQ0：gold-evidence〔A1′ masked 口径〕相对裸核存在超 SESOI 的 oracle
-  headroom——判据 K0〔OBS×外证 2×2 析因之外证主效应；OBS 主效应/交互并行报告〕，
+  headroom——判据 K0〔OBS×外证 2×2 析因之外证 simple effect@OBS-off；OBS 主效应/交互并行报告〕，
   否则**该载体上**供给/使用杠杆不评；A1 gold-entity=OBS 侧读数不入 H0。
   H-ORG/RQ1=O-config 三臂，判据 K5，判死权仅 K5-t。）
 
