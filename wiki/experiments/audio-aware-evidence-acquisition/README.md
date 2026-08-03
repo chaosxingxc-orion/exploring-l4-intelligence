@@ -23,6 +23,10 @@ artifact location、artifact hashes、result summary、deviations、decision。�
   `earnings22-original` / `conec` / `qwen3-omni-30b-a3b-instruct-gguf`）；D0 收据：
   `docs/checks/audio-aware-evidence-acquisition/2026-08-02-acquisition/`
 - 模型/工具触达台账：study 仓 `docs/exposure-ledger.md`
+- 数据可复现性与采集计划（E0 前序材料）：
+  [2026-08-02-r2-dataset-reproducibility-and-acquisition-plan.md](2026-08-02-r2-dataset-reproducibility-and-acquisition-plan.md)
+- Stage‑1C 证据档案（含两条未整合文献更正与 RECOVER 收窄细节）：
+  `wiki/archive/working/stage1c-portfolio/2026-08-03-archive-digest.md`
 
 ## Ledger
 

@@ -7,7 +7,7 @@
       "id": "opening_report_carries_the_locked_academic_problem",
       "source_test": "test_opening_report_carries_the_locked_academic_problem",
       "type": "must_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
+      "target": "wiki/archive/working/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
       "strings": [
         "语音/音频上下文学习方法复现与比较研究",
         "STAGE_1C_DIRECTION_CONFIRMATION",
@@ -38,7 +38,7 @@
       "id": "opening_report_retires_old_symbolic_notation",
       "source_test": "test_opening_report_carries_the_locked_academic_problem",
       "type": "must_not_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
+      "target": "wiki/archive/working/stage1c-portfolio/proposals/R1-adaptive-evidence-supply.md",
       "strings": [
         "H_{\\mathrm{ctx}}",
         "O_{\\mathrm{sel}}",
@@ -96,7 +96,7 @@
       "id": "supplement_preserves_split_and_claim_boundaries",
       "source_test": "test_supplement_preserves_split_and_claim_boundaries",
       "type": "must_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/2026-07-27-r1-context-icl-evidence-supplement.md",
+      "target": "wiki/archive/working/stage1c-portfolio/2026-07-27-r1-context-icl-evidence-supplement.md",
       "strings": [
         "SUPERSEDED_AS_DESIGN",
         "不再承载 R1 的当前研究设计",

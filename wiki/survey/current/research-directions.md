@@ -351,7 +351,7 @@ R5+R6+R8 的组合纵切片降回尚待 owner 验证的候选研究对象，不�
 **目的链。** 北极星是冻结黑盒 omni 模型的能力激活；五维提供 context/state/action/dynamics；可靠性和
 Lean 防止把偶然提升或条件命题写成强结论；Stage-2A 最小纵向链用最低复杂度检验这一对象。
 
-**Provenance。** Evidence workbench：`wiki/survey/workbench/stage1c-portfolio/`；Stage-1B v5 固定证据
+**Provenance。** Evidence archive（campaign 2026-08-03 闭合归档）：`wiki/archive/working/stage1c-portfolio/`；Stage-1B v5 固定证据
 release：`38fb9435d0c35e226ad62b16015a6dbee054e6c2`；旧 C1 common-rubric 仅作组件证据。H5 仍为
 `WITHHOLD_NON_LOAD_BEARING`，donor 只借方法/协议，不承载跨模态效果结论。
 

@@ -7,7 +7,7 @@
       "id": "opening_report_is_marked_unverified_executor_draft",
       "source_test": "test_opening_report_is_marked_unverified_executor_draft",
       "type": "must_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "target": "wiki/archive/working/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
       "strings": [
         "音频驱动外部知识检索的文献归纳、实验载体与方向处置",
         "STAGE_1C_DIRECTION_CONFIRMATION",
@@ -24,7 +24,7 @@
       "id": "report_uses_reference_datasets_baselines_and_metrics",
       "source_test": "test_report_uses_reference_datasets_baselines_and_metrics",
       "type": "must_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "target": "wiki/archive/working/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
       "strings": [
         "AudioRAG",
         "500",
@@ -45,7 +45,7 @@
       "id": "need_detection_mismatch_and_no_new_data_boundary_are_explicit",
       "source_test": "test_need_detection_mismatch_and_no_new_data_boundary_are_explicit",
       "type": "must_contain",
-      "target": "wiki/survey/workbench/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
+      "target": "wiki/archive/working/stage1c-portfolio/proposals/R2-audio-native-knowledge-acquisition.md",
       "strings": [
         "没有负类就不能测 need detection",
         "不自行混入 waveform-sufficient 负例",
