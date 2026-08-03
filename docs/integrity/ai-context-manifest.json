@@ -6,7 +6,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "df4ab0cabd6a2ca84d5d4ca6184564e239e60dfbda572afd584e4acce21add62"
+      "sha256": "5a15ffa792c50f191871def76774f654e8a2a2c5768cde34e9c9d0a77e2f8b07"
     },
     {
       "path": "wiki/Research-Objective.md",
@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "a0589c613eec51aec8a6253dd398773b1cc0f29420e7f667ef7ab1975454a55a"
+      "sha256": "3005cec57b80a98cc4de939a2da2debbadc128b65830259e5a83c8a540fb55c9"
     },
     {
       "path": "wiki/AI-Collaboration.md",

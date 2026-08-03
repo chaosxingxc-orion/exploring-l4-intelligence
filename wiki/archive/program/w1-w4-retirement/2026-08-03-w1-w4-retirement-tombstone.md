@@ -17,6 +17,13 @@ diffs destroyed with the checkouts. Rescued adoption candidates live in the admi
 All four repositories had zero unpushed commits at deletion time; every committed byte remains on
 the remote until the pending remote deletion executes.
 
+## Addendum (2026-08-03, same day): remotes retained as cold backups
+
+The owner superseded the remote-deletion instruction before it executed: the four GitHub
+repositories are **kept as cold backups**, unlinked from the program — no active umbrella surface
+references them; their URLs live only in this tombstone. The "pending `delete_repo` token grant"
+cells above are void; no remote deletion is scheduled. Local deletion stands.
+
 ## Uncommitted changes destroyed with the checkouts
 
 W2 and W3 each carried the same two-hunk `configs/config.yaml` working-tree edit (never committed):

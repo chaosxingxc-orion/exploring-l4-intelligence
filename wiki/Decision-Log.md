@@ -3466,3 +3466,15 @@ legacy 574 行 attempt inventory 保持历史字节、解析面按设计转 unre
 残留同日清除。
 **Supersedes：** 取代「W1–W4 保留为独立 work repos」的架构描述（2026-08-02 条目相应部分）。失效条件：
 owner 决定恢复某一 work 仓（从远端 re-clone，若远端已删则不可恢复）。
+
+**2026-08-03 · W1–W4 远端保留冷备份；程序运行节奏定型（Stage‑1 伞仓 / Stage‑2 开仓 / 数据模型公共职能）：**
+**Context：** 同日稍早退役条目将远端删除记为待 `delete_repo` token 授权。owner 随后裁定远端不删。
+**Decision：** ①四个 work 仓远端保留为**冷备份**，仅从伞仓解除链接（活跃面零引用，URL 只存墓碑）；
+本地删除维持。②运行节奏定型：每个新研究课题的 Stage‑1（详细讨论、调研、论证）在伞仓完成；完成
+Stage‑1 进入 Stage‑2 时开独立 study 仓，此后全部工作在该 study 自己的工作目录完成。伞仓长期保留
+**数据与模型下载职能**（`docs/datasets.lock.json` + `scripts/data/`，数据/模型是各 studies 的公共
+资产）；除此之外各 studies 的 Stage‑1 都在伞仓完成。
+**Consequences：** 墓碑追加当日 addendum；Per-Work-Status/CLAUDE/AGENTS 措辞由「删除待授权」改
+「冷备份」；不再需要 `delete_repo` scope；CLAUDE/AGENTS Repository 节补运行节奏句。
+**Supersedes：** 同日退役条目中「远端删除待 token 授权」部分；运行节奏为 2026-08-02 架构条目的
+操作化细则。失效条件：owner 决定真删远端或恢复某 work 仓。
