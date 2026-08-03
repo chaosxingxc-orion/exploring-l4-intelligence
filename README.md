@@ -65,8 +65,10 @@ llama.cpp `llama-server` (GGUF). Full details: [docs/setup.md](docs/setup.md).
 
 ```bash
 # umbrella governance gates (offline, Windows or WSL)
-python scripts/survey/sf_current_package_check.py --check
+python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
+python scripts/checks/ai_context_surface_check.py
+python scripts/checks/build_ai_context_manifest.py --check
 
 # work on the admitted study (inside WSL2, venv active)
 cd studies/audio-aware-evidence-acquisition
@@ -97,8 +99,8 @@ Read the repo through this layering, in order:
 2. **[[Research-Objective]]** — current stage, authority and next action;
 3. **[[Project-Thesis]]** — the program north star.
 
-Load `wiki/survey/current/`, `wiki/Experiment-Assets.md` and per-study ledgers only for a named
-task. Record durable decisions in [[Decision-Log]]; the web wiki is a mirror published by
+Load the literature commons (`wiki/survey/README.md`), `wiki/Experiment-Assets.md` and per-study
+ledgers only for a named task. Record durable decisions in [[Decision-Log]]; the web wiki is a mirror published by
 `scripts/wiki-sync.sh` only when authorized. Full protocol: [[AI-Collaboration]].
 
 ## Docs index

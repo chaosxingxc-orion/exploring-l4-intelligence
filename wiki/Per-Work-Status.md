@@ -21,7 +21,8 @@
   calls stay gated behind E0 closure and the contract's budget bands; publication and Wiki mirror remain
   closed today.
 - **Assets:** `wiki/Experiment-Assets.md` is the management router. The legacy 574-row W1 attempt
-  inventory resolves to 573 live and one Git-history-only path with zero unresolved assets.
+  inventory reports all rows unresolved-by-design since the W1 checkout deletion; recorded bytes
+  stay recoverable through the cold-backup remote and the retirement tombstone.
 
 ## W1
 

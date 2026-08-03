@@ -59,8 +59,10 @@ CONTRIBUTING.md         多仓归属与协作方式
 
 ```bash
 # 伞仓治理门禁（离线，Windows 或 WSL 均可）
-python scripts/survey/sf_current_package_check.py --check
+python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
+python scripts/checks/ai_context_surface_check.py
+python scripts/checks/build_ai_context_manifest.py --check
 
 # 开发已获准的 study（WSL2 内、激活 venv）
 cd studies/audio-aware-evidence-acquisition
@@ -91,7 +93,8 @@ bash scripts/data/inventory.sh       # 审计 COMPLETE / PARTIAL / MISSING
 2. **[[Research-Objective]]** —— 当前阶段、权限与下一步；
 3. **[[Project-Thesis]]** —— 项目北极星。
 
-`wiki/survey/current/`、`wiki/Experiment-Assets.md` 与逐 study 台账只在具名任务时加载。持久决策
+文献公共层（`wiki/survey/README.md`）、`wiki/Experiment-Assets.md` 与逐 study 台账只在具名任务
+时加载。持久决策
 写回 [[Decision-Log]]；web wiki 只是镜像，仅在获授权时用 `scripts/wiki-sync.sh` 发布。完整协议见
 [[AI-Collaboration]]。
 

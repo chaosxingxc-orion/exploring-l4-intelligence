@@ -9,8 +9,10 @@ Zero-to-ready for a new collaborator or AI. Assumes Windows + WSL2 `Ubuntu-24.04
 3. Run `bash scripts/wsl-setup.sh`, `bash scripts/env-setup.sh`, then
    `source ~/.venvs/speechrl/bin/activate` inside WSL2. Never use native/system Python 3.14 for the ML
    stack and never touch `D:/ai-stack/mem0-venv`.
-4. Run `pytest common/tests` and the umbrella gate
-   `python scripts/survey/sf_current_package_check.py --check`.
+4. Run `pytest common/tests` and the umbrella gates:
+   `python scripts/checks/code_graph_check.py`, `python scripts/checks/study_workspace_check.py`,
+   `python scripts/checks/ai_context_surface_check.py`,
+   `python scripts/checks/build_ai_context_manifest.py --check`.
 5. Fetch only authorized assets with `scripts/data/`; models/datasets/outputs live in
    `SPEECHRL_DATA_DIR`, while local MLflow runs stay on ext4.
 6. Do not create a study checkout from a candidate. After owner GO plus an execution contract, use the

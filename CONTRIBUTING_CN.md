@@ -62,8 +62,9 @@
 
 新建文件前先定角色：完整放置表与生命周期以 `wiki/AI-Collaboration.md` 为正典，
 [CONTRIBUTING.md](CONTRIBUTING.md) 的 Documentation routing 表是路由摘要。持久决策连同理由写
-`wiki/Decision-Log.md`；提交前跑相关门禁
-（`python scripts/survey/sf_current_package_check.py --check` 等）。web wiki 只是镜像，
+Decision-Log 当月卷（入口 `wiki/Decision-Log.md`）；提交前跑四道门禁
+（`scripts/checks/` 下 code_graph / study_workspace / ai_context_surface / build_manifest --check）。
+web wiki 只是镜像，
 `scripts/wiki-sync.sh` 仅在获授权时发布。
 
 Wiki 管理实验生命周期与资产关系；代码/配置在 study 仓，大型数据、权重和原始输出在

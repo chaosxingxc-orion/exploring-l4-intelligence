@@ -48,19 +48,23 @@ python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))
   `flash-attn` is optional: the loader (`speechrl_common.models.omni_embed`) falls back to `sdpa` on
   Blackwell sm_120. The Operator-A embedding proof needs **no verl/vLLM**.
 
-## 3. Working on a single work
+## 3. Working on the admitted study
 
 ```bash
-cd "$REPO/projects/speech-mllm-training-free-rl"
+cd "$REPO/studies/audio-aware-evidence-acquisition"
 uv pip install -e ../../common -e .
-bash scripts/train.sh                       # Hydra config in configs/
-bash scripts/train.sh rl.learning_rate=2e-6 # override any key
+pytest
 ```
+
+Run commands, configs and locks are owned by the study repository (see its `README.md` and the
+execution contract under `wiki/experiments/<slug>/`). The historical W1–W4 work repos were retired
+on 2026-08-03.
 
 ## 4. Experiment tracking (local MLflow)
 
 ```bash
-bash "$REPO/scripts/mlflow-ui.sh"   # http://127.0.0.1:5000
+source ~/.venvs/speechrl/bin/activate
+mlflow ui --backend-store-uri "file:$REPO/mlruns"   # http://127.0.0.1:5000
 ```
 
 ## 5. Research skills (run in the Windows Claude Code session)

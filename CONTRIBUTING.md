@@ -78,13 +78,16 @@ fourth numbered amendment/correction: ordinal 4 is invalid, so a completed conso
 next epoch at ordinal 1. Epochs and ordinals are unique and continuous. Artifact front matter and the
 receipt use the exact schemas in `wiki/AI-Collaboration.md`; both are registered, blob-pinned AUDIT
 records. Commit and append-register the immutable receipt, and advance the reviewed registry-prefix
-count/hash anchor, before opening a new epoch. The highest receipt binds the current-manifest protocol
-version and staged SHA. The full lifecycle triggers are in `wiki/AI-Collaboration.md`.
+count/hash anchor, before opening a new epoch. The highest receipt binds the effective-spec bytes at their
+archived carrier (historical current-layer spec ids resolve through the closure relocation). The full
+lifecycle triggers are in `wiki/AI-Collaboration.md`.
 Every audit-registry append atomically stages the registry, the full-prefix count/hash anchor in
 `scripts/checks/ai_context_inventory.py`, and the regenerated immutability report before commit.
 Before moving a
-file, prove it is absent from the audit registry/current manifest, has no live inbound dependency,
-and preserves its stage-0 Git blob and mode with `git mv`. The complete placement and lifecycle policy
+file, prove it is absent from the audit registry, has no live inbound dependency (registered AUDIT
+references are provenance pointers resolved by the archive digests, not blockers), and preserve its
+stage-0 Git blob and mode with `git mv`, recording the move in the target archive's mapping table.
+The complete placement and lifecycle policy
 is canonical in `wiki/AI-Collaboration.md`; this table is only a route summary.
 
 Record durable decisions with rationale in the repository Wiki. Run the applicable checks before
