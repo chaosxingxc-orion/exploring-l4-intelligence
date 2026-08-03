@@ -1,0 +1,71 @@
+{
+  "schema": "speechrl-r2-asset-acquisition-receipt-v1",
+  "observed_at": "2026-08-02",
+  "verdict": "PASS_D0__D1_D4_NOT_EVALUATED",
+  "authority_boundary": "data acquisition, derivation, integrity verification and canonical-lock consolidation; no model/API execution or experiment authority",
+  "canonical_lock": {
+    "path": "docs/datasets.lock.json",
+    "schema": "speechrl-asset-lock-v2",
+    "sha256": "de72d7546ad5f96a7060166fde9028d21f8328686cc22fd69bb7e015b4d64ef7",
+    "bytes": 63498,
+    "assets": 104,
+    "status_counts": {
+      "COMPLETE": 86,
+      "PARTIAL": 3,
+      "MISSING": 6,
+      "BLOCKED": 9
+    }
+  },
+  "r2_core": {
+    "inventory_full": "PASS_DRIFT_0",
+    "earnings_git_head": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
+    "earnings_payload_manifest_entries": 1203,
+    "earnings_payload_manifest_sha256": "5d2071f974302ce77a08b64247ac90f3ad0b2ddab4d7d0eae442bfd22c4f8088",
+    "earnings_symlink_manifest_entries": 30,
+    "earnings_symlink_manifest_sha256": "8a96b36225049f67e0cc3a7fa0c5983ddd18a7a9c1cd24707173584470c88970",
+    "remaining_lfs_pointers": 0,
+    "earnings21": {
+      "regular_files": 676,
+      "bytes": 875886792,
+      "calls": 44,
+      "duration_seconds": 141348.532
+    },
+    "earnings22": {
+      "regular_files": 527,
+      "bytes": 1993169787,
+      "main_calls": 125,
+      "duration_seconds": 428021.0,
+      "subset_symlinks": 30,
+      "materialized_upstream_undeclared_lfs_objects": 125
+    },
+    "conec": {
+      "git_head": "88440713d8b80dc4f19b225f6480237e78c379de",
+      "regular_files": 514,
+      "bytes": 370772197
+    }
+  },
+  "secondary_partial_nonblocking": {
+    "slue-sqa-5": {
+      "complete_files": 4,
+      "total_files": 301,
+      "complete_bytes": 821867405,
+      "total_bytes": 118074483514
+    },
+    "contextasr-bench": {
+      "complete_files": 6,
+      "total_files": 35,
+      "complete_bytes": 104823821,
+      "total_bytes": 96662324651
+    }
+  },
+  "validation": {
+    "canonical_lock_validate": "PASS_104_ASSETS",
+    "r2_core_inventory_full": "PASS_3_COMPLETE_DRIFT_0",
+    "all_asset_inventory": "PASS_86_COMPLETE_3_PARTIAL_6_MISSING_9_BLOCKED_DRIFT_0",
+    "unit_tests": "PASS_7",
+    "python_compile": "PASS",
+    "shell_syntax": "PASS",
+    "diff_check": "PASS",
+    "current_package_check": "KNOWN_UNRELATED_PREEXISTING_FAILURE_TRUSTED_CODE_GRAPH_PATH_SET_DIFFERS"
+  }
+}

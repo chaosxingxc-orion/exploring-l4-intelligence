@@ -1,12 +1,39 @@
 {
-  "_comment": "FROZEN_BASELINE dataset/model lock for speechrl-data. Re-generate with scripts/data/gen-lockfile.py. Dataset/model bytes are not in Git. This records the June/July 2026 baseline only, not the complete current disk inventory. SHA-pinned where metadata exists; ModelScope/unknown entries are content-fingerprinted (size_bytes + files). See docs/data.md and the layered inventory referenced below.",
-  "frozen": true,
-  "scope": "FROZEN_BASELINE",
-  "complete_current_disk_inventory": false,
-  "layered_inventory": "docs/checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json",
-  "generated": "2026-06-24 (amended 2026-07-03: + qwen3-omni-30b-a3b-instruct-gguf; amended 2026-07-09: - qwen3-omni-30b-a3b-instruct [HF int4, GGUF twin retained]; amended 2026-07-09: - minicpm-o-4_5, - moss-audio-8b-instruct [llama.cpp-stack unusable, deferred])",
+  "schema": "speechrl-asset-lock-v2",
+  "_comment": "Canonical current catalog for every governed dataset, model and reference asset. It is the only live source for identity, lifecycle, acquisition status, access limits, revisions and local verification. The original June/July frozen baseline remains embedded as the frozen-baseline profile; non-baseline and planned assets are in asset_catalog. Large bytes live under SPEECHRL_DATA_DIR and are never committed.",
+  "frozen": false,
+  "scope": "CANONICAL_ASSET_CATALOG",
+  "complete_current_disk_inventory": true,
+  "supersedes": [
+    "docs/datasets.candidates.json",
+    "docs/datasets.gap-candidates.json",
+    "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json"
+  ],
+  "generated": "2026-08-02; baseline history retained below; non-baseline catalog refreshed from the 2026-07-23 full inventory and the 2026-08-02 R2 acquisition audit",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
-  "totals": {
+  "profiles": {
+    "frozen-baseline": "The reproducible June/July baseline; default fetch profile for backward compatibility.",
+    "local-candidates": "Observed non-baseline local assets; presence does not authorize an experiment.",
+    "r2-core": "Earnings21, Earnings22 and ConEC Stage-2A minimum data closure.",
+    "r2-diagnostics": "PRISM, Rare5k and BuzzWord diagnostic carriers.",
+    "r2-secondary": "SLUE-SQA-5 and ContextASR-Bench public secondary carriers.",
+    "r2-annotations": "TED-EL annotations only; TED-LIUM3 audio remains source-unstable.",
+    "r2-small-public": "Small optional public assets: ATCO2-1h, Eka-Medical and LibriSQA.",
+    "deferred": "Cataloged but intentionally not in the current acquisition wave."
+  },
+  "status_model": {
+    "COMPLETE": "Required bytes for this record are present at the recorded identity.",
+    "PARTIAL": "Some bytes or metadata are present but the record is not complete.",
+    "MISSING": "No governed local copy is present.",
+    "BLOCKED": "Acquisition is prevented by access, source stability, publication or privacy constraints."
+  },
+  "acquisition_policy": {
+    "owner_effective_date": "2026-08-02",
+    "max_single_dataset_bytes": 1000000000000,
+    "rule": "Datasets larger than 1 TB are excluded from acquisition and from the active research reference set; retain only a tombstone catalog record so they cannot silently re-enter scope.",
+    "local_verification_required": true
+  },
+  "baseline_totals": {
     "locked_datasets": 28,
     "models": 3,
     "total_bytes": 409103904696,
@@ -710,6 +737,810 @@
         "url": "https://github.com/asappresearch/slue-toolkit"
       },
       "revision": "ed23039507c8f01b704a5c43ed89b6e808a49405"
+    }
+  ],
+  "asset_catalog": [
+    {
+      "name": "aishell-1",
+      "kind": "dataset",
+      "local_subdir": "datasets/aishell-1",
+      "source": {"kind": "hf", "id": "carlot/AIShell"},
+      "revision": "692ef58020d79b21f54eb25b15a4813d4f9650d7",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "source card unspecified; original AISHELL-1 is Apache-2.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 20301961842, "files": 47},
+      "note": "Complete train/dev/test repackaged parquet with embedded audio; not the original OpenSLR wav-tree layout."
+    },
+    {
+      "name": "audio2tool",
+      "kind": "dataset",
+      "local_subdir": "datasets/audio2tool",
+      "source": {"kind": "hf", "id": "RVtech/Audio2Tool"},
+      "revision": "f1388da9a3189541ab82adac88824a0661670c43",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-nc-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 10474543420, "files": 72062}
+    },
+    {
+      "name": "audiocaps-qa",
+      "kind": "dataset",
+      "local_subdir": "datasets/audiocaps-qa",
+      "source": {"kind": "hf", "id": "AudioLLMs/audiocaps_qa_test"},
+      "revision": "6cf6853c52f55482126f226a8859eb71f2021e0e",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "upstream card unspecified; underlying AudioCaps terms apply",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 92246909, "files": 11}
+    },
+    {
+      "name": "auditorybench-plusplus",
+      "kind": "dataset",
+      "local_subdir": "datasets/auditorybench-plusplus",
+      "source": {"kind": "hf", "id": "HJOK/AuditoryBenchpp"},
+      "revision": "efb5b30bcbc26a538ab1aae94d14dfdc251cd0bb",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1056591, "files": 23}
+    },
+    {
+      "name": "cn-celeb1",
+      "kind": "dataset",
+      "local_subdir": "datasets/cn-celeb1",
+      "source": {"kind": "direct", "files": [{"filename": "cn-celeb_v2.tar.gz", "url": "https://www.openslr.org/resources/82/cn-celeb_v2.tar.gz"}]},
+      "revision": "OpenSLR SLR82 v2; local extracted fingerprint",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-sa-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 44689206960, "files": 144514}
+    },
+    {
+      "name": "cn-celeb2",
+      "kind": "dataset",
+      "local_subdir": "datasets/cn-celeb2",
+      "source": {"kind": "direct", "files": [
+        {"filename": "cn-celeb2_v2.tar.gzaa", "url": "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzaa"},
+        {"filename": "cn-celeb2_v2.tar.gzab", "url": "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzab"},
+        {"filename": "cn-celeb2_v2.tar.gzac", "url": "https://www.openslr.org/resources/82/cn-celeb2_v2.tar.gzac"}
+      ]},
+      "revision": "OpenSLR SLR82 v2; local extracted fingerprint",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-sa-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 155097180456, "files": 524796}
+    },
+    {
+      "name": "csemotions",
+      "kind": "dataset",
+      "local_subdir": "datasets/csemotions",
+      "source": {"kind": "hf", "id": "AIDC-AI/CSEMOTIONS"},
+      "revision": "130701eb542f4e3f8a82cbc346d2bebb4e299934",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "apache-2.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 3077440433, "files": 12}
+    },
+    {
+      "name": "esd",
+      "kind": "dataset",
+      "local_subdir": "datasets/esd",
+      "source": {"kind": "hf", "id": "sonchuate/ESD_dataset"},
+      "revision": "1d63e6a79546d96d0da14624e53dcde31e5a2ac6",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "research-only original ESD terms; HF card has no license field",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 5802733440, "files": 35023},
+      "note": "Local extracted layout is larger than the compressed HF repository payload."
+    },
+    {
+      "name": "full-duplex-bench-v3",
+      "kind": "dataset",
+      "local_subdir": "datasets/full-duplex-bench-v3",
+      "source": {"kind": "gdrive", "id": "1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz", "filename": "fdb_v3_data_released.zip"},
+      "revision": "sha256:37545bd896f81718136598cf5be25d42ea9aa22efcd91f58370938d05d7d672f",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1683672385, "files": 204, "archive_size_bytes": 736136419}
+    },
+    {
+      "name": "ihbench",
+      "kind": "dataset",
+      "local_subdir": "datasets/ihbench",
+      "source": {"kind": "hf", "id": "bosonai/IHBench"},
+      "revision": "cbd8280ab59bc4a50c48cbe0511a307fba9945cf",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 216559738, "files": 8}
+    },
+    {
+      "name": "omni-deepsearch",
+      "kind": "dataset",
+      "local_subdir": "datasets/omni-deepsearch",
+      "source": {"kind": "hf", "id": "Kirito-Lab/Omni-DeepSearch"},
+      "revision": "f6fafcd1ee9e5d370379b684bee3957c27dc25ac",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "upstream card unspecified",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 632178405, "files": 913}
+    },
+    {
+      "name": "squtr",
+      "kind": "dataset",
+      "local_subdir": "datasets/squtr",
+      "source": {"kind": "hf", "id": "SLLMCommunity/SQuTR"},
+      "revision": "2f1b041e2e98e0d28ed68fbcf22126ef247eb719",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "cc-by-sa-4.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 21069849460, "files": 8}
+    },
+    {
+      "name": "thchs-30",
+      "kind": "dataset",
+      "local_subdir": "datasets/thchs-30",
+      "source": {"kind": "direct", "files": [
+        {"filename": "data_thchs30.tgz", "url": "https://www.openslr.org/resources/18/data_thchs30.tgz"},
+        {"filename": "test-noise.tgz", "url": "https://www.openslr.org/resources/18/test-noise.tgz"},
+        {"filename": "resource.tgz", "url": "https://www.openslr.org/resources/18/resource.tgz"}
+      ]},
+      "revision": "OpenSLR SLR18; local extracted fingerprint",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "apache-2.0",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 16431473109, "files": 53562}
+    },
+    {
+      "name": "voiceagentbench",
+      "kind": "dataset",
+      "local_subdir": "datasets/voiceagentbench",
+      "source": {"kind": "hf", "id": "krutrim-ai-labs/VoiceAgentBench"},
+      "revision": "5ec6b7fcdaf25a1ffd5f538214d91dcf653c9ea4",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "Krutrim community license",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 5833663134, "files": 7665}
+    },
+    {
+      "name": "voxceleb1-test-split",
+      "kind": "dataset",
+      "local_subdir": "datasets/voxceleb1-test-split",
+      "source": {"kind": "hf", "id": "asahi417/voxceleb1-test-split"},
+      "revision": "04d4f200a317e04f1dc45bb5cc891aa89bd93ccf",
+      "lifecycle": "LOCAL_CANDIDATE",
+      "profiles": ["local-candidates"],
+      "status": "COMPLETE",
+      "license": "underlying VoxCeleb CC-BY-SA-4.0; HF card unspecified",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1288185030, "files": 6}
+    },
+    {
+      "name": "earnings21-original",
+      "kind": "dataset",
+      "local_subdir": "datasets/earnings21-22/earnings21",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/revdotcom/speech-datasets.git",
+        "checkout_root": "datasets/earnings21-22",
+        "sparse_paths": ["earnings21", "earnings22"],
+        "lfs_include": ["earnings21/**", "earnings22/**"],
+        "local_lfs_attributes": ["earnings22/media/*.mp3 filter=lfs diff=lfs merge=lfs -text"],
+        "materialize_pointer_roots": ["earnings21", "earnings22"],
+        "fetch_group": "revdotcom-earnings21-22"
+      },
+      "revision": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
+      "lifecycle": "STAGE2_CORE",
+      "profiles": ["r2-core"],
+      "status": "COMPLETE",
+      "license": "CC-BY-SA-4.0",
+      "verification": {
+        "observed_at": "2026-08-02",
+        "git_head": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
+        "payload_files": 676,
+        "payload_size_bytes": 875886792,
+        "main_audio_files": 44,
+        "metadata_rows": 44,
+        "duration_seconds": 141348.532,
+        "duration_hours": 39.26348111111111,
+        "remaining_lfs_pointers": 0,
+        "shared_payload_manifest": "manifests/r2-stage2a-fetch/earnings21-22-payload.sha256",
+        "shared_payload_manifest_entries": 1203,
+        "shared_payload_manifest_sha256": "5d2071f974302ce77a08b64247ac90f3ad0b2ddab4d7d0eae442bfd22c4f8088",
+        "method": "Pinned sparse Git checkout; exact post-copy SHA-256 verification; metadata call/duration reconciliation"
+      },
+      "research_role": "R2 main evaluation carrier; 44 calls, approximately 39 hours",
+      "paper_exact": false,
+      "claim_limit": "Official bytes and entity layer are reproducible; paper-specific slicing and normalization remain protocol work."
+    },
+    {
+      "name": "earnings22-original",
+      "kind": "dataset",
+      "local_subdir": "datasets/earnings21-22/earnings22",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/revdotcom/speech-datasets.git",
+        "checkout_root": "datasets/earnings21-22",
+        "sparse_paths": ["earnings21", "earnings22"],
+        "lfs_include": ["earnings21/**", "earnings22/**"],
+        "local_lfs_attributes": ["earnings22/media/*.mp3 filter=lfs diff=lfs merge=lfs -text"],
+        "materialize_pointer_roots": ["earnings21", "earnings22"],
+        "fetch_group": "revdotcom-earnings21-22"
+      },
+      "revision": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
+      "lifecycle": "STAGE2_CORE",
+      "profiles": ["r2-core"],
+      "status": "COMPLETE",
+      "license": "CC-BY-SA-4.0",
+      "verification": {
+        "observed_at": "2026-08-02",
+        "git_head": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
+        "payload_files": 527,
+        "payload_size_bytes": 1993169787,
+        "main_audio_files": 125,
+        "metadata_rows": 125,
+        "duration_seconds": 428021.0,
+        "duration_hours": 118.89472222222223,
+        "subset_symlinks": 30,
+        "remaining_lfs_pointers": 0,
+        "upstream_lfs_attribute_omission_repaired_locally": true,
+        "shared_payload_manifest": "manifests/r2-stage2a-fetch/earnings21-22-payload.sha256",
+        "shared_payload_manifest_entries": 1203,
+        "shared_payload_manifest_sha256": "5d2071f974302ce77a08b64247ac90f3ad0b2ddab4d7d0eae442bfd22c4f8088",
+        "symlink_manifest": "manifests/r2-stage2a-fetch/earnings21-22-symlinks.txt",
+        "symlink_manifest_sha256": "8a96b36225049f67e0cc3a7fa0c5983ddd18a7a9c1cd24707173584470c88970",
+        "method": "Pinned sparse Git checkout; 125 undeclared LFS pointer blobs materialized and OID-verified; exact post-copy SHA-256 and symlink verification"
+      },
+      "research_role": "R2 dev/calibration carrier; 125 calls, approximately 119 hours",
+      "paper_exact": false,
+      "claim_limit": "No Earnings21-equivalent token entity annotations; the R2 dev reward contract must be frozen separately."
+    },
+    {
+      "name": "conec",
+      "kind": "dataset",
+      "local_subdir": "datasets/conec",
+      "source": {"kind": "git", "url": "https://github.com/huangruizhe/ConEC.git"},
+      "revision": "88440713d8b80dc4f19b225f6480237e78c379de",
+      "lifecycle": "STAGE2_CORE",
+      "profiles": ["r2-core"],
+      "status": "COMPLETE",
+      "license": "paper CC-BY-NC-4.0; repository has no clear dataset-level LICENSE",
+      "verification": {"observed_at": "2026-08-02", "git_head": "88440713d8b80dc4f19b225f6480237e78c379de", "payload_size_bytes": 370772197, "payload_files": 514},
+      "research_role": "Earnings21/22 context, corrected references, PDFs, names, timestamps and WER tags",
+      "paper_exact": false,
+      "claim_limit": "Released corrected artifacts are usable; their construction relied partly on non-public S&P transcripts and cannot be independently regenerated."
+    },
+    {
+      "name": "prism-public",
+      "kind": "dataset",
+      "local_subdir": "datasets/prism",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/AshishMittal/PRISM.git",
+        "attachments": [{"kind": "gdrive", "id": "1utVz2jYshJmJfXDhY2PPqfiargEzt0yI", "filename": "prism-audio.zip", "size_bytes": 469123962, "sha256": "bd446f1a24b056d52c918e17d955a47da0bec90d2ada071c95f8738f464c137a"}]
+      },
+      "revision": "e08a2b157119e24d03ff34738dac7828dee9494f",
+      "lifecycle": "DIAGNOSTIC",
+      "profiles": ["r2-diagnostics"],
+      "status": "COMPLETE",
+      "license": "cc-by-nc-4.0",
+      "verification": {"observed_at": "2026-08-02", "git_head": "e08a2b157119e24d03ff34738dac7828dee9494f", "attachment_archive_entries": 15, "method": "Git commit, exact byte length, SHA-256 and ZIP CRC"},
+      "research_role": "Synthetic VITS entity-rich diagnostic only",
+      "paper_exact": false,
+      "claim_limit": "Public data is available; the PRISM system is white-box and not released as a complete runnable API-only baseline."
+    },
+    {
+      "name": "rare5k-reconstruction",
+      "kind": "dataset",
+      "local_subdir": "datasets/rare5k",
+      "source": {
+        "kind": "derived",
+        "script": "scripts/data/derive_rare5k.py",
+        "args": ["--librispeech", "${DATA_ROOT}/datasets/librispeech", "--output", "${DATA_ROOT}/datasets/rare5k"]
+      },
+      "revision": "derived-from-librispeech-lock-fingerprint-and-script",
+      "lifecycle": "DERIVED",
+      "profiles": ["r2-diagnostics"],
+      "status": "COMPLETE",
+      "license": "inherits LibriSpeech source terms",
+      "dependencies": ["librispeech"],
+      "verification": {
+        "observed_at": "2026-08-02",
+        "parquet_files": 126,
+        "utterances": 281241,
+        "tokens": 9403706,
+        "unique_words": 88949,
+        "common_words": 5000,
+        "rare_words": 83949,
+        "common_sha256": "7001f2540691cd6475a5631161b4c38687bb5db530220ac4dcffeda749cf7973",
+        "rare_sha256": "c2c7c22012ee0e6a9ae33e74c767d3fedd262789d62fc4546205a35614c41b5a"
+      },
+      "paper_exact": false,
+      "claim_limit": "Paper reports about 209.2k rare words but does not publish its tokenizer or word list; local output is an auditable reconstruction, not the canonical artifact."
+    },
+    {
+      "name": "buzzword",
+      "kind": "dataset",
+      "local_subdir": "datasets/buzzword",
+      "source": {"kind": "hf", "id": "Luo9766/BuzzWord"},
+      "revision": "2d7037910ed1fbeacd59f8593ea95b6174f1129b",
+      "lifecycle": "DIAGNOSTIC",
+      "profiles": ["r2-diagnostics"],
+      "status": "COMPLETE",
+      "license": "apache-2.0",
+      "expected_payload": {"size_bytes": 1471751153, "files": 1503, "rows": 1500},
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "2d7037910ed1fbeacd59f8593ea95b6174f1129b", "payload_size_bytes": 1471751153, "payload_files": 1503, "method": "remote pinned file-list and exact local byte-size diff"},
+      "paper_exact": false,
+      "claim_limit": "Dataset is public; the corresponding paper does not release a complete model/checkpoint reproduction package."
+    },
+    {
+      "name": "slue-sqa-5",
+      "kind": "dataset",
+      "local_subdir": "datasets/slue-sqa-5",
+      "source": {"kind": "hf", "id": "asapp/slue-phase-2", "include": ["sqa5/**", "README.md", ".gitattributes"]},
+      "revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["r2-secondary"],
+      "status": "PARTIAL",
+      "license": "mixed: CC-BY-SA-4.0 and Apache-2.0 components; see dataset card",
+      "expected_payload": {"size_bytes": 118074483514, "files": 301, "rows": 50915},
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a", "complete_files": 4, "complete_bytes": 821867405, "missing_files": 297, "missing_bytes": 117252616109, "method": "remote pinned file-list and exact local byte-size diff", "disposition": "resumable secondary acquisition; not a Stage-2 core-start gate"},
+      "dependencies": ["slue-toolkit"],
+      "research_role": "O-arm spoken QA carrier; not an R2 core-start gate"
+    },
+    {
+      "name": "contextasr-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/contextasr-bench",
+      "source": {"kind": "hf", "id": "MrSupW/ContextASR-Bench"},
+      "revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["r2-secondary"],
+      "status": "PARTIAL",
+      "license": "mit",
+      "expected_payload": {"size_bytes": 96662324651, "files": 35, "rows": 41329},
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6", "complete_files": 6, "complete_bytes": 104823821, "missing_files": 29, "missing_bytes": 96557500830, "method": "remote pinned file-list and exact local byte-size diff", "disposition": "resumable secondary acquisition; not a Stage-2 core-start gate"},
+      "research_role": "Second public bilingual contextual-ASR carrier; not an R2 core-start gate"
+    },
+    {
+      "name": "ted-el-annotations",
+      "kind": "dataset",
+      "local_subdir": "datasets/ted-el",
+      "source": {"kind": "git", "url": "https://github.com/BITHLP/TED-EL.git"},
+      "revision": "1338e98bccb29badc34dabf17d08c11642d54189",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": ["r2-annotations"],
+      "status": "COMPLETE",
+      "license": "paper/repository does not clearly state dataset license",
+      "dependencies": ["ted-lium3"],
+      "verification": {"observed_at": "2026-08-02", "git_head": "1338e98bccb29badc34dabf17d08c11642d54189", "payload_size_bytes": 39962679, "payload_files": 3},
+      "claim_limit": "Annotations are public, but complete use is blocked by the TED-LIUM3 audio source and incomplete method release."
+    },
+    {
+      "name": "ted-lium3",
+      "kind": "dataset",
+      "local_subdir": "datasets/ted-lium3",
+      "source": {"kind": "source-unstable", "historical_url": "https://www.openslr.org/resources/51/TEDLIUM_release-3.tgz"},
+      "revision": "sha256:ad1e454d14d1ad550bc2564c462d87c7a7ec83d4dc2b9210f22ab4973b9eccdb",
+      "lifecycle": "SOURCE_UNSTABLE",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "license": "historically CC-BY-NC-ND-3.0",
+      "blocking_reason": "OpenSLR resource 51 and the historical archive URL returned not found/404 on 2026-08-02; only a trusted mirror matching the historical SHA-256 is admissible."
+    },
+    {
+      "name": "atco2-test-1h",
+      "kind": "dataset",
+      "local_subdir": "datasets/atco2-test-1h",
+      "source": {"kind": "direct", "files": [
+        {"filename": "ATCO2-ASRdataset-v1_beta.tgz", "url": "https://www.replaywell.com/atco2/download/ATCO2-ASRdataset-v1_beta.tgz", "size_bytes": 132304362, "sha256": "4f75046ced3c256806390e1e39cc956692bf86205a3d3ccec85d7b83923797fc"},
+        {"filename": "atco2_1h_xml-tar.gz", "url": "https://www.atco2.org/data/atco2_1h_xml-tar.gz", "size_bytes": 49959, "sha256": "3df8028b1de79a031e09142a17bb00c46682a6d1f4f41a08b243f440b5f4c429"}
+      ]},
+      "revision": "sha256:4f75046ced3c256806390e1e39cc956692bf86205a3d3ccec85d7b83923797fc+sha256:3df8028b1de79a031e09142a17bb00c46682a6d1f4f41a08b243f440b5f4c429",
+      "lifecycle": "DEFERRED",
+      "profiles": ["r2-small-public"],
+      "status": "COMPLETE",
+      "license": "research-use public subset; verify terms on official ATCO2 page before redistribution",
+      "research_role": "Optional RECOVER cross-domain trend check; never fetch the 5281h ELRA training set by default",
+      "verification": {"observed_at": "2026-08-02", "method": "exact byte length, SHA-256 and gzip integrity", "archive_entries": {"ATCO2-ASRdataset-v1_beta.tgz": 2253, "atco2_1h_xml-tar.gz": 560}}
+    },
+    {
+      "name": "eka-medical-asr-eval",
+      "kind": "dataset",
+      "local_subdir": "datasets/eka-medical-asr-eval",
+      "source": {"kind": "hf", "id": "ekacare/eka-medical-asr-evaluation-dataset"},
+      "revision": "433e66037c8aebb8f396b938624a5ab6afc4ca36",
+      "lifecycle": "DEFERRED",
+      "profiles": ["r2-small-public"],
+      "status": "COMPLETE",
+      "license": "mit",
+      "expected_payload": {"size_bytes": 281400884, "files": 12},
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "433e66037c8aebb8f396b938624a5ab6afc4ca36", "payload_size_bytes": 281400884, "payload_files": 12, "method": "remote pinned file-list and exact local byte-size diff"}
+    },
+    {
+      "name": "librisqa-metadata",
+      "kind": "dataset",
+      "local_subdir": "datasets/librisqa-metadata",
+      "source": {"kind": "hf", "id": "ZihanZhao/LibriSQA"},
+      "revision": "cebd7df8621f3624e3e630542425f46e214464c7",
+      "lifecycle": "DEFERRED",
+      "profiles": ["r2-small-public"],
+      "status": "COMPLETE",
+      "license": "upstream card unspecified; LibriSpeech dependencies apply",
+      "dependencies": ["librispeech"],
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "cebd7df8621f3624e3e630542425f46e214464c7", "payload_size_bytes": 171379509, "payload_files": 6, "method": "remote pinned file-list and exact local byte-size diff"}
+    },
+    {
+      "name": "esc-50",
+      "kind": "dataset",
+      "local_subdir": "datasets/esc-50",
+      "source": {"kind": "git", "url": "https://github.com/karolpiczak/ESC-50.git"},
+      "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+      "lifecycle": "DEFERRED",
+      "profiles": ["deferred"],
+      "status": "COMPLETE",
+      "license": "cc-by-nc-3.0",
+      "expected_payload": {"size_bytes": 884047129, "files": 2011, "wav_files": 2000},
+      "verification": {"observed_at": "2026-08-02", "resolved_revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6", "payload_size_bytes": 884047129, "payload_files": 2011, "wav_files": 2000, "git_blob_checks": 2011, "git_blob_mismatches": 0, "git_blob_manifest_sha256": "bf95d40f9891a278530e250bd20f81b2ac81ab1789813b87d3483d7895ebf994", "method": "official recursive Git tree plus per-file Git blob SHA-1 verification; minimal promisor Git metadata pins HEAD"},
+      "research_role": "Historical audio-event candidate; not load-bearing for R2"
+    },
+    {
+      "name": "fsd50k",
+      "kind": "dataset",
+      "local_subdir": "datasets/fsd50k",
+      "source": {
+        "kind": "direct",
+        "url": "https://zenodo.org/records/4060432",
+        "files": [
+          {"filename": "FSD50K.dev_audio.z01", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.z01?download=1", "size_bytes": 3221225472, "md5": "faa7cf4cc076fc34a44a479a5ed862a3"},
+          {"filename": "FSD50K.dev_audio.z02", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.z02?download=1", "size_bytes": 3221225472, "md5": "8f9b66153e68571164fb1315d00bc7bc"},
+          {"filename": "FSD50K.dev_audio.z03", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.z03?download=1", "size_bytes": 3221225472, "md5": "1196ef47d267a993d30fa98af54b7159"},
+          {"filename": "FSD50K.dev_audio.z04", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.z04?download=1", "size_bytes": 3221225472, "md5": "d088ac4e11ba53daf9f7574c11cccac9"},
+          {"filename": "FSD50K.dev_audio.z05", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.z05?download=1", "size_bytes": 3221225472, "md5": "81356521aa159accd3c35de22da28c7f"},
+          {"filename": "FSD50K.dev_audio.zip", "url": "https://zenodo.org/records/4060432/files/FSD50K.dev_audio.zip?download=1", "size_bytes": 2306663327, "md5": "c480d119b8f7a7e32fdb58f3ea4d6c5a"},
+          {"filename": "FSD50K.eval_audio.z01", "url": "https://zenodo.org/records/4060432/files/FSD50K.eval_audio.z01?download=1", "size_bytes": 3221225472, "md5": "3090670eaeecc013ca1ff84fe4442aeb"},
+          {"filename": "FSD50K.eval_audio.zip", "url": "https://zenodo.org/records/4060432/files/FSD50K.eval_audio.zip?download=1", "size_bytes": 3037675767, "md5": "6fa47636c3a3ad5c7dfeba99f2637982"},
+          {"filename": "FSD50K.ground_truth.zip", "url": "https://zenodo.org/records/4060432/files/FSD50K.ground_truth.zip?download=1", "size_bytes": 334701, "md5": "ca27382c195e37d2269c4c866dd73485"},
+          {"filename": "FSD50K.metadata.zip", "url": "https://zenodo.org/records/4060432/files/FSD50K.metadata.zip?download=1", "size_bytes": 6700838, "md5": "b9ea0c829a411c1d42adb9da539ed237"},
+          {"filename": "FSD50K.doc.zip", "url": "https://zenodo.org/records/4060432/files/FSD50K.doc.zip?download=1", "size_bytes": 6984, "md5": "3516162b82dc2945d3e7feba0904e800"}
+        ]
+      },
+      "revision": "Zenodo record 4060432; DOI 10.5281/zenodo.4060432; version 1.0",
+      "lifecycle": "DEFERRED",
+      "profiles": ["deferred"],
+      "status": "PARTIAL",
+      "license": "mixed source licenses; dataset metadata CC-BY-4.0",
+      "verification": {"observed_at": "2026-08-02", "method": "official Zenodo multipart release with per-file MD5; resumable acquisition in progress"},
+      "research_role": "Historical audio-event carrier; full official Zenodo multipart release"
+    },
+    {
+      "name": "mlc-slm",
+      "kind": "dataset",
+      "local_subdir": "datasets/mlc-slm",
+      "source": {"kind": "restricted", "url": "https://www.nexdata.ai/competition/mlc-slm"},
+      "revision": "registration and DUA required",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Approximately 1604 hours; requires registration/DUA and is not load-bearing for R2."
+    },
+    {
+      "name": "m3ed",
+      "kind": "dataset",
+      "local_subdir": "datasets/m3ed",
+      "source": {"kind": "restricted", "url": "https://github.com/AIM3-RUC/RUCM3ED"},
+      "revision": "audio distributed via Baidu Pan; exact archive pin unresolved",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "license": "academic/research-only, non-commercial",
+      "blocking_reason": "Manual Baidu-Cloud acquisition and archive identity required."
+    },
+    {
+      "name": "common-voice-22",
+      "kind": "dataset",
+      "local_subdir": "datasets/common-voice-22",
+      "source": {"kind": "restricted", "url": "https://datacollective.mozillafoundation.org/datasets/cmn2p1d1k007b2e65q6om77qu"},
+      "revision": "release 22; locale/config not frozen",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Mozilla Data Collective access terms and an exact locale/config contract must be accepted first; RECOVER entity tables are not released."
+    },
+    {
+      "name": "ami-meeting-corpus",
+      "kind": "dataset",
+      "local_subdir": "datasets/ami",
+      "source": {
+        "kind": "official-selector",
+        "url": "https://groups.inf.ed.ac.uk/ami/download/",
+        "form_endpoint": "https://homepages.inf.ed.ac.uk/cgi/simonk/AMI/estimate.cgi",
+        "mirror_prefix": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus",
+        "selector": {
+          "scenario_sessions": ["ES2002", "ES2003", "ES2004", "ES2005", "ES2006", "ES2007", "ES2008", "ES2009", "ES2010", "ES2011", "ES2012", "ES2013", "ES2014", "ES2015", "ES2016", "IS1000", "IS1001", "IS1002", "IS1003", "IS1004", "IS1005", "IS1006", "IS1007", "IS1008", "IS1009", "TS3003", "TS3004", "TS3005", "TS3006", "TS3007", "TS3008", "TS3009", "TS3010", "TS3011", "TS3012"],
+          "scenario_suffixes": ["a", "b", "c", "d"],
+          "unavailable_scenario_meetings": ["IS1002a", "IS1005d"],
+          "non_scenario_meetings": ["EN2001a", "EN2001b", "EN2001d", "EN2001e", "EN2002a", "EN2002b", "EN2002c", "EN2002d", "EN2003a", "EN2004a", "EN2005a", "EN2006a", "EN2006b", "EN2009b", "EN2009c", "EN2009d", "IB4001", "IB4002", "IB4003", "IB4004", "IB4005", "IB4010", "IB4011", "IN1001", "IN1002", "IN1005", "IN1007", "IN1008", "IN1009", "IN1012", "IN1013", "IN1014", "IN1016"],
+          "media_type": "Mix-Headset",
+          "wav_files": 171
+        },
+        "attachments": [
+          {"filename": "annotations/ami_public_manual_1.6.2.zip", "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip"},
+          {"filename": "annotations/ami_public_auto_1.5.1.zip", "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_auto_1.5.1.zip"},
+          {"filename": "CCBY4.0.txt", "url": "https://groups.inf.ed.ac.uk/ami/download/CCBY4.0.txt"}
+        ],
+        "official_wget_script_sha256": "0eb3ea55e3f5a0f1dc2fe5b04ba0b3b0b5a265214c002887e0bf5f91fbf562e8",
+        "local_resumable_manifest_sha256": "5399b3661d2faef59847738bc763e288c3f087318db6e40c525bc4d7e80631af"
+      },
+      "revision": "AMI public corpus: all 171 available Mix-Headset WAVs selected on 2026-08-02; manual annotations v1.6.2; automatic annotations v1.5.1",
+      "lifecycle": "DEFERRED",
+      "profiles": ["deferred"],
+      "status": "PARTIAL",
+      "license": "cc-by-4.0",
+      "expected_payload": {"wav_files": 171, "annotation_archives": 2, "license_files": 1},
+      "research_role": "Locally verifiable meeting-speech carrier under one fixed mixed-headset condition; not an R2 core-start gate",
+      "claim_limit": "This catalog identity intentionally excludes individual headsets/lapels, microphone arrays and video; those modalities are not missing bytes for this record."
+    },
+    {
+      "name": "msp-podcast",
+      "kind": "dataset",
+      "local_subdir": "datasets/msp-podcast",
+      "source": {"kind": "restricted", "url": "https://www.lab-msp.com/MSP/MSP-Podcast.html"},
+      "revision": "access agreement required",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Requires an application and sharing contact information; no authority to accept those terms was granted."
+    },
+    {
+      "name": "voxpopuli",
+      "kind": "dataset",
+      "local_subdir": "datasets/voxpopuli",
+      "source": {"kind": "restricted", "url": "https://github.com/facebookresearch/voxpopuli"},
+      "revision": "exact language/task snapshot not frozen",
+      "lifecycle": "DEFERRED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "scope_disposition": "EXCLUDED_BY_OWNER_GT_1TB__DO_NOT_DOWNLOAD_OR_REFERENCE",
+      "estimated_full_release_bytes": 6400000000000,
+      "blocking_reason": "Owner excluded VoxPopuli from download and research reference on 2026-08-02. The official 400k-hour release is approximately 6.4 TB; no smaller subset is admitted under this catalog identity."
+    },
+    {
+      "name": "audioset-metadata-features",
+      "kind": "dataset",
+      "local_subdir": "datasets/audioset",
+      "source": {
+        "kind": "direct",
+        "url": "https://research.google.com/audioset/download.html",
+        "files": [
+          {"filename": "features/features.tar.gz", "url": "https://storage.googleapis.com/asia_audioset/youtube_corpus/v1/features/features.tar.gz", "size_bytes": 2588881044, "sha256": "cd95d500ab2422d4233cb822e25cf73033633e2068eab64d39024e85125cb760", "md5": "1e44f31aec58d8c2506aedc53d6e69f5"},
+          {"filename": "csv/balanced_train_segments.csv", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv", "size_bytes": 1211931, "md5": "0ec13c62ec25d1148b9bf3390dee8bd7"},
+          {"filename": "csv/class_labels_indices.csv", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv", "size_bytes": 14675, "md5": "68c0b5c199d6cc789852b144cc3ab500"},
+          {"filename": "csv/eval_segments.csv", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/eval_segments.csv", "size_bytes": 1143389, "md5": "85e796902a4e6a0898980a55f86b55f3"},
+          {"filename": "csv/unbalanced_train_segments.csv", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/unbalanced_train_segments.csv", "size_bytes": 101468408, "md5": "d8f6fc703acf288c405fc97a156d4b85"},
+          {"filename": "qa/qa_true_counts.csv", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/qa/qa_true_counts.csv", "size_bytes": 7746, "md5": "7be39e9d20e3610f16f0ac19119a7423"},
+          {"filename": "qa/rerated_video_ids.txt", "url": "https://storage.googleapis.com/us_audioset/youtube_corpus/v1/qa/rerated_video_ids.txt", "size_bytes": 1593192, "md5": "f308b6e2319302b0e079e17b10b6981d"}
+        ]
+      },
+      "revision": "AudioSet v1 official 2017 CSV, quality-assessment files and 128-D VGGish feature archive; GCS generation 1488737414213291 for features",
+      "lifecycle": "DEFERRED",
+      "profiles": ["deferred"],
+      "status": "PARTIAL",
+      "license": "dataset CC-BY-4.0; ontology CC-BY-SA-4.0 (ontology not included in this payload)",
+      "expected_payload": {"size_bytes": 2694310385, "files": 7},
+      "verification": {"observed_at": "2026-08-02", "method": "official GCS objects with size, MD5 and published feature-archive SHA-256; resumable acquisition in progress"},
+      "research_role": "Locally verifiable environmental-audio metadata and released feature carrier",
+      "claim_limit": "This record freezes only the official metadata, QA files and released 128-D features. It does not contain raw audio; YouTube links decay and cannot support a byte-stable raw-audio snapshot."
+    },
+    {
+      "name": "indicvoices",
+      "kind": "dataset",
+      "local_subdir": "datasets/indicvoices",
+      "source": {"kind": "restricted", "url": "https://ai4bharat.iitm.ac.in/indicvoices"},
+      "revision": "access and exact release unresolved",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Access/license terms require owner review; RECAST release is incomplete and does not justify acquisition now."
+    },
+    {
+      "name": "spgispeech",
+      "kind": "dataset",
+      "local_subdir": "datasets/spgispeech",
+      "source": {"kind": "restricted", "url": "https://huggingface.co/datasets/kensho/spgispeech", "id": "kensho/spgispeech"},
+      "revision": "14e69dd3b80e968282ca55d3eb2b39cc9db2b62e",
+      "lifecycle": "RESTRICTED",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "estimated_full_release_bytes": 781000000000,
+      "blocking_reason": "The approximately 781 GB full release is below the owner's 1 TB exclusion threshold, so it may remain a literature reference. Download is blocked because access requires accepting Kensho terms and sharing contact information; no authority to accept those terms was granted.",
+      "claim_limit": "ConEC provenance does not grant SPGISpeech access or make it a locally reproducible carrier."
+    },
+    {
+      "name": "private-production-750h",
+      "kind": "dataset",
+      "local_subdir": "unavailable/private-production-750h",
+      "source": {"kind": "unavailable", "id": "private 750h production speech from prior work"},
+      "revision": "not publicly released",
+      "lifecycle": "UNAVAILABLE",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Private dataset; method-reference only."
+    },
+    {
+      "name": "prism-enterprise-medical",
+      "kind": "dataset",
+      "local_subdir": "unavailable/prism-enterprise-medical",
+      "source": {"kind": "unavailable", "id": "PRISM private enterprise medical evaluation"},
+      "revision": "not publicly released",
+      "lifecycle": "UNAVAILABLE",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Private; never conflate with the public synthetic PRISM dataset."
+    },
+    {
+      "name": "grga-longaudioqa",
+      "kind": "dataset",
+      "local_subdir": "unavailable/grga-longaudioqa",
+      "source": {"kind": "unavailable", "url": "https://github.com/tangquanwei/GRGA"},
+      "revision": "dataset not released",
+      "lifecycle": "UNAVAILABLE",
+      "profiles": ["deferred"],
+      "status": "BLOCKED",
+      "blocking_reason": "Repository contains partial code and states that the complete dataset will be released later."
+    },
+    {
+      "name": "campplus-zh", "kind": "model", "local_subdir": "models/campplus-zh",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 28044541, "files": 6}
+    },
+    {
+      "name": "clap-htsat-unfused", "kind": "model", "local_subdir": "models/clap-htsat-unfused",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 617896085, "files": 10}
+    },
+    {
+      "name": "clsp", "kind": "model", "local_subdir": "models/clsp",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 2897287869, "files": 9}
+    },
+    {
+      "name": "dasheng", "kind": "model", "local_subdir": "models/dasheng",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 4536274528, "files": 9}
+    },
+    {
+      "name": "emotion2vec-plus-large", "kind": "model", "local_subdir": "models/emotion2vec-plus-large",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1945802619, "files": 7}
+    },
+    {
+      "name": "emotion2vec-s", "kind": "model", "local_subdir": "models/emotion2vec-s",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1132767014, "files": 4}
+    },
+    {
+      "name": "eres2netv2-zh", "kind": "model", "local_subdir": "models/eres2netv2-zh",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 71773687, "files": 5}
+    },
+    {
+      "name": "glap", "kind": "model", "local_subdir": "models/glap",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 3426926767, "files": 9}
+    },
+    {
+      "name": "lco-embedding-omni-3b-gguf", "kind": "model", "local_subdir": "models/lco-embedding-omni-3b-gguf",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 6238572624, "files": 5}
+    },
+    {
+      "name": "lco-embedding-omni-7b-gguf", "kind": "model", "local_subdir": "models/lco-embedding-omni-7b-gguf",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 10740684621, "files": 5}
+    },
+    {
+      "name": "meralion-2-gguf", "kind": "model", "local_subdir": "models/meralion-2-gguf",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 4502513715, "files": 4}
+    },
+    {
+      "name": "meralion-speech-encoder-2", "kind": "model", "local_subdir": "models/meralion-speech-encoder-2",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 2537168545, "files": 10}
+    },
+    {
+      "name": "redimnet-b6", "kind": "model", "local_subdir": "models/redimnet-b6",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 60663214, "files": 1}
+    },
+    {
+      "name": "sense", "kind": "model", "local_subdir": "models/sense",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 2322301004, "files": 12}
+    },
+    {
+      "name": "sensevoice-small", "kind": "model", "local_subdir": "models/sensevoice-small",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 936697563, "files": 8}
+    },
+    {
+      "name": "wavlm-base-plus", "kind": "model", "local_subdir": "models/wavlm-base-plus",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 377620136, "files": 5}
+    },
+    {
+      "name": "wavlm-large", "kind": "model", "local_subdir": "models/wavlm-large",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 1261992949, "files": 5}
+    },
+    {
+      "name": "instruction-following-eval", "kind": "ref-repo", "local_subdir": "repos/instruction_following_eval",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "parapair-audio-bench", "kind": "ref-repo", "local_subdir": "repos/parapair-audio-bench",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "speakersleuth", "kind": "ref-repo", "local_subdir": "repos/speakersleuth",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "stage1b-asset-bundle", "kind": "ref-repo", "local_subdir": "repos/stage1b",
+      "source": {"kind": "observed-local", "id": "local survey/reproduction bundle"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "stage1c-asset-bundle", "kind": "ref-repo", "local_subdir": "repos/stage1c",
+      "source": {"kind": "observed-local", "id": "local survey/reproduction bundle"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "unisrm", "kind": "ref-repo", "local_subdir": "repos/unisrm",
+      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE"
+    },
+    {
+      "name": "unisrm-bench", "kind": "ref-repo", "local_subdir": "repos/unisrm-bench",
+      "source": {"kind": "hf", "id": "lavendery/UniSRM-Bench", "repo_type": "dataset"},
+      "revision": "b96b356e2aa2db1fb3b14883c90acafb653958ca",
+      "lifecycle": "AUXILIARY", "profiles": ["local-candidates"], "status": "COMPLETE",
+      "verification": {"observed_at": "2026-08-02", "payload_files": 1463, "payload_size_bytes": 325920409, "method": "pinned Hugging Face remote file-list and exact local byte-size diff; 9 zero-byte stale cache markers quarantined"}
     }
   ]
 }

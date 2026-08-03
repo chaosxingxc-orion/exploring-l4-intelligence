@@ -69,54 +69,35 @@ USAGE
 # swept in.)
 cmd_data_help() {
   cat <<'HELP'
-# Unified, lockfile-driven downloader — the SINGLE way every team fetches the shared data & models.
-#
-# Source of truth: docs/datasets.lock.json (the frozen manifest: 28 datasets + 5 models + 7 ref
-# repos, each with its source id and pinned revision). Any collaborator with THIS repo + the
-# speechrl venv runs `bash scripts/data/fetch-data.sh` and reproduces the IDENTICAL set:
-#   - HF datasets pin to the recorded commit sha (reproducible across teams)
-#   - ModelScope sets track 'master'; SLURP audio comes from Zenodo 4274930
-# The set is FROZEN: this script only fetches what the lockfile records — never new datasets.
-# To change the set, edit the lockfile deliberately (regenerate it), then re-run.
-#
-#   bash scripts/data/fetch-data.sh             # fetch everything missing (skips complete assets)
-#   bash scripts/data/fetch-data.sh --list      # print the manifest, fetch nothing
-#   bash scripts/data/fetch-data.sh --dry-run   # print the commands, download nothing
-#   bash scripts/data/fetch-data.sh meld slurp  # fetch only the named assets
-#   bash scripts/data/fetch-data.sh --install-deps  # install the download deps (hf/modelscope/aria2) then exit
-#
-# Dependencies: needs the speechrl venv (hf + modelscope CLIs) and aria2c. If they're missing, run
-# `bash scripts/env-setup.sh` (full stack) OR `bash scripts/data/fetch-data.sh --install-deps`
-# (lightweight download deps only). The script preflight-checks and reports exactly what's missing.
-#
-# Models/datasets are NEVER committed to git (see .gitignore and docs/data.md).
-set -uo pipefail
+Lock-driven asset acquisition. docs/datasets.lock.json is the only current authority.
 
-# Unified, lockfile-driven downloader — the SINGLE way every team fetches the shared data & models.
-#
-# Source of truth: docs/datasets.lock.json (the frozen manifest: 28 datasets + 5 models + 7 ref
-# repos, each with its source id and pinned revision). Any collaborator with THIS repo + the
-# speechrl venv runs `bash scripts/data/fetch-data.sh` and reproduces the IDENTICAL set:
-#   - HF datasets pin to the recorded commit sha (reproducible across teams)
-#   - ModelScope sets track 'master'; SLURP audio comes from Zenodo 4274930
-# The set is FROZEN: this script only fetches what the lockfile records — never new datasets.
-# To change the set, edit the lockfile deliberately (regenerate it), then re-run.
-#
-#   bash scripts/data/fetch-data.sh             # fetch everything missing (skips complete assets)
-#   bash scripts/data/fetch-data.sh --list      # print the manifest, fetch nothing
-#   bash scripts/data/fetch-data.sh --dry-run   # print the commands, download nothing
-#   bash scripts/data/fetch-data.sh meld slurp  # fetch only the named assets
-#   bash scripts/data/fetch-data.sh --install-deps  # install the download deps (hf/modelscope/aria2) then exit
-#
-# Dependencies: needs the speechrl venv (hf + modelscope CLIs) and aria2c. If they're missing, run
-# `bash scripts/env-setup.sh` (full stack) OR `bash scripts/data/fetch-data.sh --install-deps`
-# (lightweight download deps only). The script preflight-checks and reports exactly what's missing.
-#
-# Models/datasets are NEVER committed to git (see .gitignore and docs/data.md).
+With no asset names, fetch-data.sh selects the frozen-baseline compatibility profile. Named R2
+profiles are selected through asset_lock.py so the default command never expands acquisition scope.
+
+  bash scripts/data/fetch-data.sh --list
+  bash scripts/data/fetch-data.sh --dry-run
+  bash scripts/data/fetch-data.sh meld slurp
+  python scripts/data/asset_lock.py list --profile r2-core
+  python scripts/data/asset_lock.py fetch --profile r2-core
+  python scripts/data/asset_lock.py inventory --fail-on-drift
+
+Assets stay outside Git. Fetching records local receipts but never edits the canonical lock; status
+changes require independent verification and a reviewed lock update.
 HELP
 }
 
 cmd_data() {
+if [ "${1:-}" = "--list" ]; then
+  shift
+  exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" list --profile frozen-baseline "$@"
+fi
+if [ "${1:-}" = "--dry-run" ]; then
+  shift
+  exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" fetch --profile frozen-baseline --dry-run "$@"
+fi
+if [ "${1:-}" != "--install-deps" ] && [ "${1:-}" != "-h" ] && [ "${1:-}" != "--help" ]; then
+  exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" fetch "$@"
+fi
 set -uo pipefail
 
 WORKSPACE="${SPEECHRL_WORKSPACE:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
@@ -346,7 +327,13 @@ log "done. fetched=$COUNT skipped=$SKIP failed=$FAIL   (manifest: $LOCK)"
 }
 
 cmd_candidates() {
-# fetch-candidates.sh — download the WS-D survey-sourced candidate datasets (docs/datasets.candidates.json).
+if [ "${1:-}" = "--list" ]; then
+  shift
+  exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" list --profile local-candidates "$@"
+fi
+exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" fetch --profile local-candidates "$@"
+# Legacy implementation body retained temporarily below the lock-driven exec boundary; it has no
+# catalog entries and is unreachable. Dataset identities live only in docs/datasets.lock.json.
 #
 # Xet-safe, verifiable HF download via hf-mirror.com. Many HF repos now live on the **Xet** backend,
 # whose presigned CDN URLs are byte-range-locked -> aria2c multi-connection range-splitting gets HTTP
@@ -513,16 +500,7 @@ fetch_gdrive(){ # id dest filename expected_bytes
 
 # name | method | note
 # method = hf:<id> | git:<owner/repo> | gdrive:<id>:<filename>:<bytes> | gated:<url>
-CANDS=(
-  "audiocaps-qa|hf:AudioLLMs/audiocaps_qa_test|AudioCaps-QA AQA (AudioBench; VAT-KG/M3KG-RAG borrow it), 313 rows, not gated"
-  "audio2tool|hf:RVtech/Audio2Tool|audio-native function-calling ~30k, 8 tiers, CC-BY-NC-4.0, not gated"
-  "auditorybench-plusplus|hf:HJOK/AuditoryBenchpp|auditory-knowledge probe (text-only, ~527kB), CC-BY-4.0, not gated"
-  "squtr|hf:SLLMCommunity/SQuTR|spoken-query retrieval robustness, 21.1GB(!), 6 configs, CC-BY-SA-4.0, not gated"
-  "voiceagentbench|hf:krutrim-ai-labs/VoiceAgentBench|exact VoiceAgentBench asset for arXiv:2510.07978, 5.83GB, Krutrim community license"
-  "omni-deepsearch|hf:Kirito-Lab/Omni-DeepSearch|exact Omni-DeepSearch asset for arXiv:2605.08762, 640 rows, public"
-  "ihbench|hf:bosonai/IHBench|exact IHBench asset for arXiv:2606.19595, CC-BY-4.0"
-  "full-duplex-bench-v3|gdrive:1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz:fdb_v3_data_released.zip:736136419|official Full-Duplex-Bench v3 public archive, 736136419 bytes"
-)
+CANDS=()
 
 LIST_ONLY=0; ARGS=()
 for a in "$@"; do if [ "$a" = "--list" ]; then LIST_ONLY=1; else ARGS+=("$a"); fi; done
@@ -752,6 +730,7 @@ done
 }
 
 cmd_inventory() {
+exec "${SPEECHRL_PYTHON:-python3}" "$SCRIPT_DIR/asset_lock.py" inventory "$@"
 # Inventory: detect partial/complete downloads via expected-payload heuristics.
 # Reports per asset: size | files | status (COMPLETE|PARTIAL|MISSING|UNKNOWN).
 # Paths derive from this script's location; override with SPEECHRL_DATA_DIR / SPEECHRL_VENV.

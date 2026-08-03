@@ -2,10 +2,11 @@
 
 Model weights and datasets are **deliberately kept out of this repository**. GitHub holds only code,
 source URLs, immutable revisions/content fingerprints, documentation and download/check scripts.
-[`datasets.lock.json`](datasets.lock.json) is the reproducible `FROZEN_BASELINE`; later local assets
-are tracked separately as `LOCAL_CANDIDATE_UNFROZEN`, and survey/reproduction material is
-`SURVEY_AND_REPRO_AUXILIARY`. The layered inventory is
-[`speechrl-data-layered-inventory.json`](checks/stage1b-closeout/2026-07-22-v4/speechrl-data-layered-inventory.json).
+[`datasets.lock.json`](datasets.lock.json) is the **only current asset authority**. It contains the
+original reproducible `FROZEN_BASELINE` as one named profile, every observed non-baseline local asset,
+the R2 acquisition profiles, deferred/restricted/unavailable records, exact upstream revisions and
+local verification facts. Historical layered inventories are release receipts, not current manifests.
+`datasets.candidates.json` and `datasets.gap-candidates.json` are compatibility pointers with no facts.
 
 ## Where it lives
 
@@ -16,48 +17,45 @@ from WSL (moved off D: on 2026-07-09). Reached via `${SPEECHRL_DATA_DIR:-<repo>/
 (`mlruns`). Layout: `models/`, `datasets/`, `repos/`
 (reference clones; SLURP audio lives here too), `manifests/`.
 
-## Frozen baseline, candidate acquisition and inventory
+## Canonical catalog, profiles and inventory
 
-[`datasets.lock.json`](datasets.lock.json) is the baseline manifest, not a complete statement about
-the current disk. Per baseline asset it
-records the local subdir, source id, **pinned revision** (the HF or git commit sha where the local
-snapshot recorded one; ModelScope tracks `master`; metadata-less entries are content-fingerprinted by
-`size_bytes` + `files`), size, and status. The set is **FROZEN**: `scripts/data/fetch-data.sh` is a
-self-contained, lockfile-driven downloader that fetches *exactly* this baseline and nothing else, so every
-collaborating team reproduces identical data. HF datasets pull the recorded commit (cross-team
-reproducible); the W1 `wave0_fetch.sh` engine was retired in favour of this one script.
+Each lock record separates lifecycle from local state: `lifecycle` says why an asset is governed;
+`status` says whether its bytes are `COMPLETE`, `PARTIAL`, `MISSING` or `BLOCKED`; `profiles` define
+bounded fetch groups. An available dataset is not automatically paper-exact reproducibility—each R2
+record also retains its protocol/implementation claim limit.
 
-`fetch-data.sh`, `fetch-candidates.sh`, `fetch-qwen3-omni-gguf.sh`,
-`fetch-stage1c-priority-papers.sh` and `inventory.sh` are 2-3 line delegating shims (2026-07-29) to
-[`scripts/data/fetch-assets.sh`](../scripts/data/fetch-assets.sh) — a single subcommand-dispatch
-engine (`fetch-assets.sh <data|candidates|qwen3-gguf|papers|inventory> [args…]`) that carries each
-former script's fetch logic verbatim (same manifest, same target paths, same flags) plus a small
-shared library of env/venv lines that were byte-identical across two or more of them. The shims'
-CLI, this doc's commands below, and the `datasets.lock.json` schema are all unchanged by that
-merge; see [`scripts/data/README.md`](../scripts/data/README.md) for the engine/shim layout and the
-pre-existing per-script behavioral inconsistencies it preserves as-is.
+The `frozen-baseline` profile preserves the prior 28-dataset baseline and is still the default for
+`fetch-data.sh` with no names. R2 data must be requested by its explicit profile or asset name. The
+lock-driven implementation is `scripts/data/asset_lock.py`; shell entry points remain compatibility
+wrappers.
+
+`fetch-data.sh`, `fetch-candidates.sh` and `inventory.sh` remain compatibility shims through
+[`scripts/data/fetch-assets.sh`](../scripts/data/fetch-assets.sh), but immediately delegate catalog
+operations to `asset_lock.py`. The GGUF and priority-paper subcommands retain their specialized
+integrity paths. See [`scripts/data/README.md`](../scripts/data/README.md).
 
 ```bash
 # 0) one-time: install the download deps if missing (see Dependencies below)
-bash scripts/data/fetch-data.sh --list         # show the manifest, fetch nothing
-bash scripts/data/fetch-data.sh                 # fetch everything missing (skips complete assets)
+bash scripts/data/fetch-data.sh --list         # show the frozen-baseline profile
+bash scripts/data/fetch-data.sh                 # fetch/verify the frozen-baseline profile
 bash scripts/data/fetch-data.sh meld slurp      # fetch only named assets
 bash scripts/data/fetch-data.sh --dry-run       # print the commands without downloading
-bash scripts/data/inventory.sh                  # audit the on-disk snapshot vs the lock
-bash scripts/data/fetch-candidates.sh --list   # list non-baseline public candidates
-bash scripts/data/fetch-candidates.sh NAME     # revision/size-verified candidate download
+bash scripts/data/inventory.sh                  # inventory every governed asset from the lock
+python scripts/data/asset_lock.py list --profile r2-core
+python scripts/data/asset_lock.py fetch --profile r2-core
+python scripts/data/asset_lock.py fetch --profile r2-diagnostics
 ```
 
-China-mainland mirrors (hf-mirror.com + ModelScope) are the default. Candidate acquisition does not
-silently mutate the frozen baseline. Promote a candidate only through an explicit future baseline
-release; until then its exact status is recorded in the Stage-1C acquisition matrix.
+Fetching never mutates the lock automatically. After bytes are independently verified, update the
+record in one reviewed transaction and retain the local acquisition receipt. Restricted, unavailable
+and source-unstable records fail closed rather than falling back to an untrusted mirror.
 
 ### Dependencies
 
-The downloader needs `python3`, `git`, `curl`, **`aria2c`**, and **`modelscope`** (`jq` optional, speeds
-up `hfd`). HF datasets are fetched via hf-mirror's `hfd`+`aria2c` (auto-downloaded), because the Python
-`hf` CLI rejects hf-mirror's HEAD metadata — so `aria2c` is required for HF in CN; the `hf` CLI is only a
-fallback (direct huggingface.co). The downloader preflight-checks and, if anything's missing, points to:
+The catalog downloader needs `python3`, `git`, `git-lfs`, `curl`, the Hugging Face `hf` CLI,
+`modelscope` for legacy baseline records, and `gdown` for explicitly registered Drive attachments.
+`aria2c` remains useful for the specialized large-file paths. The downloader preflight-checks and,
+if anything is missing, points to:
 
 ```bash
 bash scripts/env-setup.sh                       # full stack (torch/verl + download deps); creates the venv
@@ -69,8 +67,8 @@ bash scripts/data/fetch-data.sh --install-deps  # lightweight: download deps onl
 The frozen baseline contains exactly three model directories:
 `qwen3-omni-30b-a3b-instruct-gguf`, `nemotron3-nano-omni-nvfp4`, and
 `omni-embed-nemotron-3b`. The other observed model directories are
-`LOCAL_CANDIDATE_UNFROZEN`; their presence does not expand the baseline or authorize execution. Use
-the layered inventory for current counts, bytes and provenance status.
+`LOCAL_CANDIDATE`; their presence does not expand the frozen profile or authorize execution. Their
+current counts, bytes and provenance status are in the canonical lock.
 
 ### Superseded historical roster (do not use as current inventory)
 
@@ -161,6 +159,6 @@ commit sha in [`datasets.lock.json`](datasets.lock.json).
 ## Useful env knobs
 
 `SPEECHRL_DATA_DIR`, `SPEECHRL_WORKSPACE`, `SPEECHRL_VENV`, `SPEECHRL_LOCKFILE` (manifest path),
-`SPEECHRL_HF_ENDPOINT` (default hf-mirror.com), `SPEECHRL_MS_WORKERS`, `SPEECHRL_PYTHON`.
-`fetch-data.sh` fetches only the frozen baseline. `fetch-candidates.sh` is an explicit, separately
-verified acquisition path and never edits the baseline lock automatically.
+`SPEECHRL_HF_ENDPOINT`, `SPEECHRL_MS_WORKERS`, `SPEECHRL_PYTHON`. `fetch-data.sh` defaults to the
+frozen profile; named assets and `asset_lock.py --profile ...` select other bounded groups. No fetch
+command edits the canonical lock automatically.
