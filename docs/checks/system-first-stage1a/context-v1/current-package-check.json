@@ -32,7 +32,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "2b3add35c1971554d60ce2d8d2284dd13f05fbd1"
+        "git_blob": "7161ed9f284021b7d4c63afc881ffe1f860954ec"
       },
       {
         "path": "scripts/checks/test_lean_axiom_gate_contract.py",
@@ -147,7 +147,7 @@
       {
         "path": "scripts/survey/test_sf_current_layer.py",
         "mode": "100644",
-        "git_blob": "686de86aaebc171bf73d63a8e3db469052559a70"
+        "git_blob": "9791d7c0d0affbb5e3c0ec073799ff750fd8b2d3"
       },
       {
         "path": "scripts/survey/test_sf_current_package_check.py",
@@ -190,7 +190,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "21dd79eab6b8eb1ffa383da170393d349fd9c946af6f858f2f3e853cf6a251cc"
+    "sha256": "58d86fac20bf98db9ed1acd9c18703c75ec616d47120e314b08bef4f243b433b"
   },
   "commands": [
     {
@@ -244,7 +244,7 @@
     {
       "command": "python scripts/survey/sf_declarative_contract.py --check-all",
       "exit_code": 0,
-      "stdout_tail": "[PASS] r1-problem-definition::opening_report_carries_the_locked_academic_problem\n[PASS] r1-problem-definition::opening_report_retires_old_symbolic_notation\n[PASS] r1-problem-definition::current_contract_exposes_the_same_r1_boundary\n[PASS] r1-problem-definition::registry_is_unique_and_matches_r1_neighbors\n[PASS] r1-problem-definition::registry_hash_bound_to_fulltext_ledger\n[PASS] r1-problem-definition::supplement_preserves_split_and_claim_boundaries\n[PASS] r2-problem-definition::opening_report_is_marked_unverified_executor_draft\n[PASS] r2-problem-definition::report_uses_reference_datasets_baselines_and_metrics\n[PASS] r2-problem-definition::need_detection_mismatch_and_no_new_data_boundary_are_explicit\n[PASS] r2-problem-definition::current_and_status_expose_r1_sunset_and_r2r9_unverified_state\n[PASS] r2-problem-definition::current_layer_marks_r2_conditional_go\n[PASS] stage1c-common-rubric::human_table_carries_bundle_and_rubric_tokens\n[PASS] stage1c-common-rubric::hot_status_exposes_the_same_boundary\n[PASS] stage1c-common-rubric::priority_fulltexts_have_one_reproducible_external_fetch_recipe\ndeclarative contract: PASS",
+      "stdout_tail": "[PASS] r1-problem-definition::opening_report_carries_the_locked_academic_problem\n[PASS] r1-problem-definition::opening_report_retires_old_symbolic_notation\n[PASS] r1-problem-definition::current_contract_exposes_the_same_r1_boundary\n[PASS] r1-problem-definition::registry_is_unique_and_matches_r1_neighbors\n[PASS] r1-problem-definition::registry_hash_bound_to_fulltext_ledger\n[PASS] r1-problem-definition::supplement_preserves_split_and_claim_boundaries\n[PASS] r2-problem-definition::opening_report_is_marked_unverified_executor_draft\n[PASS] r2-problem-definition::report_uses_reference_datasets_baselines_and_metrics\n[PASS] r2-problem-definition::need_detection_mismatch_and_no_new_data_boundary_are_explicit\n[PASS] r2-problem-definition::current_and_status_expose_r1_sunset_and_r2r9_unverified_state\n[PASS] r2-problem-definition::current_layer_marks_r2_formal_opening_and_execution_withheld\n[PASS] stage1c-common-rubric::human_table_carries_bundle_and_rubric_tokens\n[PASS] stage1c-common-rubric::hot_status_exposes_the_same_boundary\n[PASS] stage1c-common-rubric::priority_fulltexts_have_one_reproducible_external_fetch_recipe\ndeclarative contract: PASS",
       "stderr_tail": ""
     },
     {
