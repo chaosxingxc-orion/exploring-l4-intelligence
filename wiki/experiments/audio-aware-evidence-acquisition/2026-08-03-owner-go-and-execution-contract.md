@@ -54,3 +54,13 @@ readiness 合格 closest-prior 复现、X 方向性探索——各步受上表�
 mandatory prior、载体许可/可得性/标签/度量合同失效、未登记 inherited exposure 或泄漏、
 问题可研究性被推翻）。回滚：study 仓归档（registry lifecycle 转 `paused`/`sunset`），
 伞仓治理层与 W1–W4 不受影响。
+
+## Amendment 1（2026-08-03）：W1–W4 退役后的回滚语义澄清
+
+依据重整后架构复核提案（`PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1`）登记；性质为澄清性
+amendment，不产生新授权，原文不作原地改写。
+
+上节"伞仓治理层与 W1–W4 不受影响"签发于同日 W1–W4 退役裁决之前。澄清：四个 W1–W4 工作仓已于
+2026-08-03 退役——本地 checkout 已删除，远端作为脱离程序的 cold backup 保留
+（`wiki/archive/program/w1-w4-retirement/`）。因此本合同的回滚只影响 study 仓生命周期状态与
+伞仓 registry/治理层；回滚不会恢复任何 W1–W4 本地 worktree，也不改变已退役 cold backup 的状态。

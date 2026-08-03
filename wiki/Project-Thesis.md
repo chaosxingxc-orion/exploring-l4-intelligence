@@ -69,10 +69,7 @@ own executable code/config/tests; `SPEECHRL_DATA_DIR` and MLflow own large artif
 |---|---|---|
 | Program | `exploring-l4-intelligence` | Umbrella governance, Wiki truth, study registry, shared infrastructure and cross-study evidence |
 | Admitted studies | `studies/<semantic-name>/` | Independent Git/GitHub engineering and validation repositories created only after `OWNER_GO_AND_EXECUTION_CONTRACT` |
-| W1 | `projects/speech-mllm-training-free-rl` | Legacy/component work containing mature selector/evaluator and training-free-RL evidence; not the program carrier |
-| W4 | `projects/speech-mllm-omni-embedding-rl` | Separate L0/L1 embedding-utility work (fresh proposal pending #29) |
-| W2 | `projects/speech-mllm-efficient-rl-alignment` | Supporting efficient GRPO/DPO (LoRA) speech↔language alignment work |
-| W3 | `projects/speech-mllm-multitask-rl` | Supporting multi-task verifiable-reward RL work |
+| Retired works (cold backup) | W1–W4 remotes, unlinked from the program | Retired 2026-08-03: local checkouts deleted, remotes retained as cold backups; provenance routing via `wiki/archive/program/w1-w4-retirement/` and `docs/integrity/retired-repository-registry.json` |
 
 ## Supersession
 

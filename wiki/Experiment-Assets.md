@@ -5,11 +5,14 @@ lifecycle and asset graph; it does not duplicate executable repositories or larg
 
 ## Current study registry
 
-- Admitted study repositories: **0**. Machine authority: `studies/registry.json`.
-- Planned semantic research object: **audio-aware evidence acquisition**. Source candidate provenance:
-  R2. It is `PASS_STAGE1C_FORMAL_OPENING`; innovation and final method remain deliberately undecided.
-  Repository creation and experiment execution remain withheld until D1–D4 close, the execution contract
-  is frozen, and the owner grants `OWNER_GO_AND_EXECUTION_CONTRACT`.
+- Admitted study repositories: **1**. Machine authority: `studies/registry.json`.
+- **audio-aware evidence acquisition** (source candidate provenance: R2) is admitted:
+  `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03
+  (`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`).
+  Its repository is `studies/audio-aware-evidence-acquisition/` (independent Git history, private
+  remote); current stage: Stage‑2A E0 (D1–D4 model-free closure) in progress. Innovation and final
+  method remain Stage‑2A/2B outputs; model-facing execution stays fail-closed behind E0 closure and
+  the runtime receipt.
 - R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; it has no study repository. Its survey
   and baseline evidence remain reachable through the current survey router and audit history.
 - Candidate analyses R3–R9 are not repositories. They enter the study registry only if and when an
@@ -33,9 +36,10 @@ dataset identity lives in `docs/datasets.lock.json` rather than this page.
 | Run metadata and artifact links | MLflow, referenced by the Wiki record |
 | Release hashes and reproducibility receipts | release-scoped `docs/checks/<study-slug>/<release-id>/` or the study release |
 
-W1–W4 under `projects/` remain independent work repositories. They are not parents or default owners of
-admitted study code. `common/` receives a capability only after it is stable and genuinely shared across
-repositories.
+The historical W1–W4 work repositories were retired on 2026-08-03: local checkouts deleted, remotes
+kept as unlinked cold backups (tombstone `wiki/archive/program/w1-w4-retirement/`). They are not
+parents or owners of admitted study code. `common/` receives a capability only after it is stable and
+genuinely shared across admitted studies (`common/OWNERSHIP.md`).
 
 ## Required experiment record
 
@@ -54,6 +58,7 @@ resolve the following fields; values may link to machine manifests rather than c
 | `artifact location` | External storage location; never an unbound local anecdote |
 | `artifact hashes` | Hashes/manifests needed to verify immutable outputs |
 | `result summary` | Primary result and required reliability/cost diagnostics |
+| `shared code revision` | Exact revision of any shared code consumed from outside the study repo (e.g. the umbrella `common` commit), recorded even when the study commit is unchanged |
 | `deviations` | Departures from the frozen protocol and their disposition |
 | `decision` | Continue, reroute, stop, replicate or release decision |
 

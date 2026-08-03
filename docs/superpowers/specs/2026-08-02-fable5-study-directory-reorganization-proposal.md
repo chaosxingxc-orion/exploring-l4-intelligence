@@ -1,5 +1,13 @@
 # 给 Fable5 的研究工程目录重整提案
 
+> **状态（2026-08-03）：`IMPLEMENTED_AND_SUPERSEDED_2026-08-03`。** 本提案已由 2026-08-03 目录重整
+> 实施完毕，仅作为历史设计理由保留，不再是现行操作说明。下文中的目标树（含 `projects/`）、
+> `PROPOSED_FOR_REVIEW`、`remote_repository_creation: WITHHELD` 均描述实施前状态。现行权威入口：
+> `docs/architecture.md`、owner 执行合同
+> （`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`）
+> 与重整后复核提案
+> （`docs/superpowers/specs/2026-08-03-post-reorganization-architecture-review-and-remediation-proposal.md`）。
+
 ## 文档状态
 
 ```yaml
@@ -8,9 +16,9 @@ date: 2026-08-02
 addressee: Fable5
 decision_owner: research owner
 scope: umbrella and future semantic study repositories
-proposal_status: PROPOSED_FOR_REVIEW
+proposal_status: IMPLEMENTED_AND_SUPERSEDED_2026-08-03
 execution_authority: DOCUMENTATION_ONLY
-remote_repository_creation: WITHHELD
+remote_repository_creation: WITHHELD  # at issuance; repo created 2026-08-03 under OWNER_GO_AND_EXECUTION_CONTRACT
 model_or_api_execution: WITHHELD
 ```
 

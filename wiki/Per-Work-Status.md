@@ -27,8 +27,9 @@
 ## W1
 
 - **Retired 2026-08-03:** `speech-mllm-training-free-rl` retired by owner ruling (historical residue);
-  local checkout deleted, remote kept as a cold backup unlinked from the program. Twelve rescued files
-  live in the admitted study's `reference/w1-snapshot/` (source commit `7ed41f62`).
+  local checkout deleted, remote kept as a cold backup unlinked from the program. Thirteen rescued
+  files live in the admitted study's `reference/w1-snapshot/` (ten at source commit `7ed41f62`, two
+  best-of-N runners at `28d8f0d`/`f9d111a`, `gpu_session.sh` at `7ed41f62`).
 - **Surviving boundary:** Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union
   remain fixed evidence. R1 agreement remains `FAIL`; R2R1 remains
   `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; H5 remains withheld and non-load-bearing.

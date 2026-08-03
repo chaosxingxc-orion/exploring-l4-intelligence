@@ -20,14 +20,14 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "program north star",
-      "sha256": "ed91b29362305f230f7f538d2ef8d3d76d72ee6bb51b2592d4adc7c5833b77c0"
+      "sha256": "c9d45f7c96c143ae3b70005377c2aa47c352a68763c9d6c9ff1672ea02909a3d"
     },
     {
       "path": "wiki/Per-Work-Status.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "8ab7d0d439ba25ca92ee6394fb8c4ee2fbf8ca43ed12274e46447a066bdb6187"
+      "sha256": "1523c05da9ff5586d616f9b08c502b28717c6b8a703ff11244a78a570e8719fe"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -41,7 +41,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "0498eb74c3bbc33eb6b5fdb050da9a90ef60436c2b8e6463ccd1be9335cd8f97"
+      "sha256": "4bcaff0ba4b7ace1466e7e010670098c3b6d9adbcc606ef42578c92671dbafba"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",

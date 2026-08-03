@@ -2,9 +2,18 @@
 
 ## Status
 
-Owner-directed architecture refresh, 2026-08-02. This specification changes repository ownership and
-experiment-asset routing only. It does not authorize model/API calls, downloads, experiments, remote
-GitHub repository creation, pushes, or Wiki publication.
+**`IMPLEMENTED_AND_SUPERSEDED_2026-08-03`.** This specification was implemented by the 2026-08-03
+reorganization and is retained as historical design rationale only — it is no longer a current
+operating instruction. Statements below about keeping W1–W4 under `projects/` and withholding study
+repository creation describe the pre-implementation state. Current operating authority:
+`docs/architecture.md`, the owner execution contract
+(`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`)
+and the post-reorganization review
+(`docs/superpowers/specs/2026-08-03-post-reorganization-architecture-review-and-remediation-proposal.md`).
+
+Original status (2026-08-02): owner-directed architecture refresh. This specification changes
+repository ownership and experiment-asset routing only. It does not authorize model/API calls,
+downloads, experiments, remote GitHub repository creation, pushes, or Wiki publication.
 
 The implementation-oriented handoff for Fable5 is
 [`2026-08-02-fable5-study-directory-reorganization-proposal.md`](2026-08-02-fable5-study-directory-reorganization-proposal.md).
