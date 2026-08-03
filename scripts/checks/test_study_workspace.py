@@ -146,7 +146,7 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         ):
             study_workspace.validate_experiment_control_plane(self.root)
 
-    def test_legacy_inventory_reports_live_history_only_and_unresolved_assets(self) -> None:
+    def test_legacy_inventory_reports_four_state_resolution(self) -> None:
         legacy = self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl"
         live = self.root / "projects" / "work" / "_repro" / "live.json"
         live.parent.mkdir(parents=True)
@@ -154,22 +154,69 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         rows = [
             {"path": "projects/work/_repro/live.json"},
             {"path": "projects/work/_repro/history.json"},
+            {"path": "projects/work/_repro/cold.json"},
+            {"path": "projects/work/_repro/waived.json"},
             {"path": "other/missing.json"},
         ]
         legacy.write_text(
             "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
         )
+        resolution = {
+            "projects/work/_repro/cold.json": {
+                "path": "projects/work/_repro/cold.json",
+                "state": "COLD_BACKUP_RESOLVED",
+            },
+            "projects/work/_repro/waived.json": {
+                "path": "projects/work/_repro/waived.json",
+                "state": "UNRESOLVED",
+                "waiver": {
+                    "waived_by": "owner",
+                    "waived_on": "2026-08-03",
+                    "reason": "test",
+                },
+            },
+        }
 
         inventory = study_workspace.build_experiment_asset_inventory(
             self.root,
             history_lookup=lambda path: "abc123" if path.endswith("history.json") else None,
+            resolution_lookup=resolution,
         )
 
         summary = inventory["legacy_experiment_attempts"]
-        self.assertEqual(3, summary["recorded_entries"])
+        self.assertEqual(5, summary["recorded_entries"])
         self.assertEqual(1, summary["worktree_present"])
-        self.assertEqual(1, summary["history_only"])
+        self.assertEqual(1, summary["local_git_history"])
+        self.assertEqual(1, summary["cold_backup_resolved"])
+        self.assertEqual(1, summary["waived_unresolved"])
         self.assertEqual(1, summary["unresolved"])
+        self.assertEqual(["other/missing.json"], summary["unresolved_assets"])
+
+    def test_unwaived_unresolved_legacy_assets_fail_closed(self) -> None:
+        legacy = self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl"
+        legacy.write_text(
+            json.dumps({"path": "projects/work/_repro/gone.json"}) + "\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "fail-closed"):
+            study_workspace.enforce_legacy_fail_closed(self.root)
+
+        resolution_path = self.root / study_workspace.RESOLUTION_PATH
+        resolution_path.write_text(
+            json.dumps(
+                {
+                    "schema": "legacy-asset-resolution-v1",
+                    "resolutions": [
+                        {
+                            "path": "projects/work/_repro/gone.json",
+                            "state": "COLD_BACKUP_RESOLVED",
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        study_workspace.enforce_legacy_fail_closed(self.root)
 
     def test_registry_and_entry_schema_errors_fail_closed(self) -> None:
         invalid_documents = (

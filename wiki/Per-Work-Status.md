@@ -21,8 +21,10 @@
   calls stay gated behind E0 closure and the contract's budget bands; publication and Wiki mirror remain
   closed today.
 - **Assets:** `wiki/Experiment-Assets.md` is the management router. The legacy 574-row W1 attempt
-  inventory reports all rows unresolved-by-design since the W1 checkout deletion; recorded bytes
-  stay recoverable through the cold-backup remote and the retirement tombstone.
+  inventory is fully resolved against the retired cold-backup remote (574 `COLD_BACKUP_RESOLVED`,
+  0 unresolved) via `docs/integrity/legacy-asset-resolution.json` and the retired-repository
+  registry; offline git bundles of all four retired repos live under
+  `SPEECHRL_DATA_DIR/program-archives/` with registered SHA-256.
 
 ## W1
 

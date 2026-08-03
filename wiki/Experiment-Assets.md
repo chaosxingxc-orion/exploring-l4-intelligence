@@ -68,10 +68,14 @@ prior exposure and state their scope.
 ## Legacy experiment assets
 
 `docs/integrity/experiment_attempt_registry.jsonl` is a 574-row pre-Stage-2 inventory rooted in W1. It
-is preserved rather than rewritten into the new study model. The refreshed machine summary is
-`docs/integrity/experiment-asset-inventory.json`: 573 paths are present in the W1 worktree; the deleted
-`_repro/wave1_results.md` is history-only and recoverable from W1 Git; no row is unresolved. These legacy
-attempts do not become admitted-study experiments and confer no new execution authority.
+is preserved rather than rewritten into the new study model. Since the 2026-08-03 W1–W4 retirement no
+row resolves in a local worktree; every row is bound to the retired cold-backup remote as
+`remote@commit:path` in `docs/integrity/legacy-asset-resolution.json` (574 `COLD_BACKUP_RESOLVED`,
+0 `UNRESOLVED`), against `docs/integrity/retired-repository-registry.json` (remotes, frozen final
+commits, offline git-bundle hashes). The fail-closed rule is machine-enforced: any unresolved row
+without a dated owner waiver fails `study_workspace_check.py` and
+`legacy_asset_resolution_check.py`. These legacy attempts do not become admitted-study experiments
+and confer no new execution authority.
 
 ## Update transaction
 

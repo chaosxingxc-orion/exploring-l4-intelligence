@@ -18,8 +18,9 @@ REGISTRY_PATH = "studies/registry.json"
 CONTROL_PLANE_PATH = "wiki/Experiment-Assets.md"
 INVENTORY_PATH = "docs/integrity/experiment-asset-inventory.json"
 LEGACY_INVENTORY_PATH = "docs/integrity/experiment_attempt_registry.jsonl"
+RESOLUTION_PATH = "docs/integrity/legacy-asset-resolution.json"
 REGISTRY_SCHEMA = "study-repository-registry-v1"
-INVENTORY_SCHEMA = "experiment-asset-inventory-v1"
+INVENTORY_SCHEMA = "experiment-asset-inventory-v2"
 FIXED_REGISTRY_FIELDS = {
     "schema": REGISTRY_SCHEMA,
     "local_root": "studies",
@@ -228,17 +229,46 @@ def _load_legacy_rows(path: Path) -> list[dict]:
     return rows
 
 
+def _load_cold_backup_resolution(root: Path) -> tuple[dict[str, dict], str | None]:
+    """Load the retired-remote resolution map produced by legacy_asset_resolution_check."""
+
+    resolution_path = root / RESOLUTION_PATH
+    if not resolution_path.is_file():
+        return {}, None
+    document = _load_json(resolution_path)
+    if not isinstance(document, dict) or not isinstance(document.get("resolutions"), list):
+        raise StudyWorkspaceError(f"{RESOLUTION_PATH} has an unexpected schema")
+    resolution_map: dict[str, dict] = {}
+    for entry in document["resolutions"]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
+            raise StudyWorkspaceError(f"{RESOLUTION_PATH} contains a malformed entry")
+        resolution_map[entry["path"]] = entry
+    return resolution_map, hashlib.sha256(resolution_path.read_bytes()).hexdigest()
+
+
 def build_experiment_asset_inventory(
     root: Path = REPO,
     history_lookup: Callable[[str], str | None] | None = None,
+    resolution_lookup: dict[str, dict] | None = None,
 ) -> dict:
-    """Build a deterministic summary without rewriting legacy experiment rows."""
+    """Build a deterministic summary without rewriting legacy experiment rows.
+
+    Resolution is four-state: WORKTREE_PRESENT, LOCAL_GIT_HISTORY, COLD_BACKUP_RESOLVED
+    (via the retired-repository resolution file) and UNRESOLVED (fail-closed downstream
+    unless the resolution entry carries a dated waiver).
+    """
 
     lookup = history_lookup or (lambda path: _git_history_lookup(root, path))
+    if resolution_lookup is None:
+        resolution_map, resolution_sha = _load_cold_backup_resolution(root)
+    else:
+        resolution_map, resolution_sha = resolution_lookup, None
     legacy_path = root / LEGACY_INVENTORY_PATH
     rows = _load_legacy_rows(legacy_path)
     present = 0
-    history_only: list[dict[str, str]] = []
+    local_history: list[dict[str, str]] = []
+    cold_backup = 0
+    waived: list[str] = []
     unresolved: list[str] = []
     for row in rows:
         recorded_path = row["path"]
@@ -247,7 +277,17 @@ def build_experiment_asset_inventory(
             continue
         commit = lookup(recorded_path)
         if commit:
-            history_only.append({"path": recorded_path, "latest_path_commit": commit})
+            local_history.append({"path": recorded_path, "latest_path_commit": commit})
+            continue
+        resolution = resolution_map.get(recorded_path)
+        if resolution is not None and resolution.get("state") == "COLD_BACKUP_RESOLVED":
+            cold_backup += 1
+        elif (
+            resolution is not None
+            and resolution.get("state") == "UNRESOLVED"
+            and isinstance(resolution.get("waiver"), dict)
+        ):
+            waived.append(recorded_path)
         else:
             unresolved.append(recorded_path)
 
@@ -271,11 +311,18 @@ def build_experiment_asset_inventory(
             "path": LEGACY_INVENTORY_PATH,
             "sha256": legacy_sha,
             "classification": "PRE_STAGE2_LEGACY_INVENTORY",
+            "resolution_source": {
+                "path": RESOLUTION_PATH,
+                "sha256": resolution_sha,
+            },
             "recorded_entries": len(rows),
             "worktree_present": present,
-            "history_only": len(history_only),
+            "local_git_history": len(local_history),
+            "cold_backup_resolved": cold_backup,
+            "waived_unresolved": len(waived),
             "unresolved": len(unresolved),
-            "history_only_assets": history_only,
+            "local_git_history_assets": local_history,
+            "waived_unresolved_assets": waived,
             "unresolved_assets": unresolved,
         },
     }
@@ -294,6 +341,19 @@ def validate_inventory_file(root: Path = REPO) -> None:
         )
 
 
+def enforce_legacy_fail_closed(root: Path = REPO) -> None:
+    """Fail when any legacy row is unresolved without a dated waiver (P0-2 rule)."""
+
+    summary = build_experiment_asset_inventory(root)["legacy_experiment_attempts"]
+    if summary["unresolved"] > 0:
+        sample = summary["unresolved_assets"][:3]
+        raise StudyWorkspaceError(
+            f"{summary['unresolved']} legacy assets are UNRESOLVED without a waiver "
+            f"(fail-closed); first offenders: {sample}. Regenerate or waive via "
+            f"{RESOLUTION_PATH} (scripts/checks/legacy_asset_resolution_check.py)."
+        )
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -309,6 +369,7 @@ def main(argv: list[str] | None = None) -> int:
             sys.stdout.write(_render_json(build_experiment_asset_inventory(REPO)))
         else:
             validate_inventory_file(REPO)
+            enforce_legacy_fail_closed(REPO)
             print("study workspace and experiment assets: PASS")
     except StudyWorkspaceError as error:
         print(f"study workspace and experiment assets: FAIL: {error}", file=sys.stderr)

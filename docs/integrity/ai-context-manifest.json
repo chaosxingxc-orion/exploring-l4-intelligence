@@ -27,7 +27,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "1523c05da9ff5586d616f9b08c502b28717c6b8a703ff11244a78a570e8719fe"
+      "sha256": "ccc35b172e77b3ae94c467c483d5a2fbc055609141dee037f1d9d4cc2a411f00"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -41,7 +41,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "4bcaff0ba4b7ace1466e7e010670098c3b6d9adbcc606ef42578c92671dbafba"
+      "sha256": "2c720ef05eac1bb0cbc22e4eb5b11646e77df897c8ef86d3b1dfec3ec5981759"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",

@@ -58,7 +58,7 @@
     Qwen3-Omni-30B GGUF, llama.cpp).
   status: directional
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_llamacpp_snr5.json
   code_commit: b7b4b0d
   metric_definition: >
     Corpus-level WER reduction (oracle-8 best-of-N minus greedy decode), single condition SNR=5 only.
@@ -79,7 +79,7 @@
     Minimum Bayes Risk (MBR-8) rescoring improves ASR WER over greedy decode.
   status: "null"
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_llamacpp_snr5.json
   code_commit: b7b4b0d
   metric_definition: >
     Corpus-level WER delta, MBR-8 rescoring vs greedy decode, SNR=5.
@@ -99,7 +99,7 @@
     Three generation seeds demonstrate best-of-N generation stability / reproducibility.
   status: invalid
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/asr_bon_llamacpp_snr5.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_llamacpp_snr5.json
   code_commit: f9d111a
   metric_definition: null
   supersedes: null
@@ -119,7 +119,7 @@
     probe).
   status: "null"
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_paired_v2.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/emotion_pool_paired_v2.json
   code_commit: cdbf1d2
   metric_definition: >
     Across-seed paired t-CI on the dev-selected pooling delta, five dependent runs (not independent
@@ -140,7 +140,7 @@
     is speaker-independent / disentangled from paralinguistic identity).
   status: unverified
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/paralinguistic_negative_probe.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/paralinguistic_negative_probe.json
   code_commit: 7ba8d0b
   metric_definition: >
     Linear-probe accuracy for speaker identity from the frozen embedding vs. chance baseline
@@ -163,7 +163,7 @@
     (mechanism: reward-guided selection).
   status: invalid
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_paired.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/minds14_toolintent_paired.json
   code_commit: ff6be7c
   metric_definition: >
     Paired accuracy delta, policy arm vs. raw-schema baseline arm, MInDS-14 tool/intent selection.
@@ -180,7 +180,7 @@
   reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
   note: >
     Second provenance mismatch: the committed artifact's numbers disagree with
-    projects/speech-mllm-omni-embedding-rl/docs/experiment_inventory.md:86 ("MInDS-14 reproduction |
+    git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@56b8a9c76a4cddac765aa5fab43560f5c4375402#path=docs/experiment_inventory.md:86 ("MInDS-14 reproduction |
     182 | raw-schema Acc@1 = 0.852 | policy Acc@1 = 0.984, delta +0.132 CI [0.082, 0.187]") — treat
     both the doc table and the committed JSON as needing independent reconciliation before either is
     quoted; this mirrors the earlier audit_source latent schema bug (umbrella commit a517bdd) as a
@@ -192,7 +192,7 @@
     Q1b (an omni agentic/memory system is warranted as a new-signal injector).
   status: invalid
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/m3_crossmodal.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/m3_crossmodal.json
   code_commit: 1f4f3b3
   metric_definition: >
     Paired accuracy delta on vocalbench-zh, injected-signal arm vs. base arm, n=150 powered run.
@@ -219,7 +219,7 @@
     (H0 headroom experiment, R1 gate).
   status: invalid
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/_repro/t7_rag_gate_probe.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/t7_rag_gate_probe.json
   code_commit: 013abbd
   metric_definition: >
     Paired accuracy delta, oracle-injection arm (H0) minus base arm, n=60, heysquad SQuAD-style
@@ -245,8 +245,8 @@
   status: invalid
   stage: 1
   artifact:
-    - projects/speech-mllm-omni-embedding-rl/src/omni_embedding_rl/eval_harness.py
-    - projects/speech-mllm-omni-embedding-rl/outputs/2026-06-24/23-08-11/main.log
+    - git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=src/omni_embedding_rl/eval_harness.py
+    - projects/speech-mllm-omni-embedding-rl/outputs/2026-06-24/23-08-11/main.log -- DESTROYED_UNVERSIONED_OUTPUT (untracked Hydra run log deleted with the W4 checkout retirement 2026-08-03; claim already invalid, run identity survives via code_commit 452bd8b and the adjudication record)
   code_commit: 452bd8b
   metric_definition: >
     Diagonal-dominance of the matched-vs-mismatched confusion/similarity matrix under the
@@ -272,8 +272,8 @@
   status: directional
   stage: 1
   artifact:
-    - projects/speech-mllm-training-free-rl/_repro/baselines/
-    - projects/speech-mllm-training-free-rl/_repro/wave1_results.md
+    - git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/baselines/
+    - git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@3b2d4bd330094a281f4ae15020d7d46245579b36#path=_repro/wave1_results.md
   code_commit:
     - 3b2d4bd
     - f8ca276
@@ -297,7 +297,7 @@
     Step-2 Phase-A has started / is executable (the empirical Phase-A pipeline can be run end to end).
   status: invalid
   stage: 1
-  artifact: projects/speech-mllm-training-free-rl/scripts/baselines/phase_a_cells.py
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=scripts/baselines/phase_a_cells.py
   code_commit: 52aa61a
   metric_definition: null
   supersedes: null
@@ -382,7 +382,7 @@
     effect is only +0.015.
   status: directional
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/minds14_toolintent_v2.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/minds14_toolintent_v2.json
   code_commit: 56b8a9c
   metric_definition: >
     Acc@1 per arm on the 437-row eval set; paired bootstrap deltas (seed 42, n=1000); pooled over
@@ -404,7 +404,7 @@
     deltas_vs_naive.cards_only — see _repro/minds14_v2_multiplicity.json's own
     "note_on_duplicates" field). CORRECTED RESULT: the family is 5 UNIQUE pairwise contrasts (2
     duplicate report keys removed); re-run with the newly committed generator
-    projects/speech-mllm-omni-embedding-rl/scripts/minds14_multiplicity_v2.py over the deduped
+    git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@88dc775492d7a7944cd8e1319242dece27b3c2b2#path=scripts/minds14_multiplicity_v2.py over the deduped
     family gives ALL 5 SURVIVE Holm at alpha=0.05 (max-T agrees, 5/5) — same conclusion as before
     (nothing here flips to non-significant), just over the CORRECT, non-inflated family size; see
     _repro/minds14_v2_multiplicity_v2.json for the full per-contrast numbers and provenance.
@@ -434,7 +434,7 @@
     95% CI [+0.0141, +0.0401] (excludes 0), AND bounded below the pre-declared SESOI of 0.05.
   status: directional
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/emotion_pool_grouped_v1.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/emotion_pool_grouped_v1.json
   code_commit: 40d34c2
   metric_definition: >
     Paired per-clip accuracy delta (sel audio_attn vs base audio mean-pool), kNN(k=5) probes,
@@ -467,7 +467,7 @@
     'No speaker information / never written / measured-zero readout' wording is retired.
   status: directional
   stage: 1
-  artifact: projects/speech-mllm-omni-embedding-rl/_repro/speaker_probe_restatement.json
+  artifact: git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@0f587c6e915f567c1d09ecec6f109ae9c5795bf4#path=_repro/speaker_probe_restatement.json
   code_commit: 40d34c2
   metric_definition: >
     Pure arithmetic restatement over the frozen paralinguistic_negative_probe.json (sha256-matched);
@@ -498,11 +498,11 @@
   status: directional
   stage: 1
   artifact:
-    - projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json
-    - projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json
+    - git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_v2_snr5.json
+    - git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_v2_clean.json
   artifact_sha256:
-    projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_snr5.json: 19a7e1464309bab8468c8a75f4cd587ac6416b178d3502ac7494b0b3649e0ea5
-    projects/speech-mllm-training-free-rl/_repro/asr_bon_v2_clean.json: 27591fb96f3b0bc262d38e28b5e57a5a09fbe8119647ecba28c553402d5e1a0d
+    git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_v2_snr5.json: 19a7e1464309bab8468c8a75f4cd587ac6416b178d3502ac7494b0b3649e0ea5
+    git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=_repro/asr_bon_v2_clean.json: 27591fb96f3b0bc262d38e28b5e57a5a09fbe8119647ecba28c553402d5e1a0d
   code_commit: 28d8f0d
   metric_definition: >
     Corpus WER (sum errors / sum ref words, S/D/I/N per hypothesis stored) and macro utterance-WER,

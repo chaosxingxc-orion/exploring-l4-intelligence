@@ -1,0 +1,70 @@
+{
+  "schema": "retired-repository-registry-v1",
+  "retirement_ruling": "Owner ruling 2026-08-03: local checkouts deleted; remotes retained as cold backups unlinked from the program (tombstone addendum). See wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md.",
+  "repositories": [
+    {
+      "repo_id": "speech-mllm-training-free-rl",
+      "work_label": "W1",
+      "remote": "https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git",
+      "final_branch": "master",
+      "final_commit": "7ed41f62e3f33f9f16d0fbbe2d13725ace62502f",
+      "local_state": "RETIRED_NO_WORKTREE",
+      "retention_policy": "COLD_BACKUP_REMOTE_RETAINED_PLUS_OFFLINE_BUNDLE",
+      "verified_at": "2026-08-03",
+      "tombstone": "wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md",
+      "legacy_path_prefix": "projects/speech-mllm-training-free-rl",
+      "offline_bundle": {
+        "path": "SPEECHRL_DATA_DIR/program-archives/speech-mllm-training-free-rl.bundle",
+        "sha256": "d07010ce39269a0ee2da193eccd4adf3c13c43c3c23687d9cae998b1a8707466"
+      }
+    },
+    {
+      "repo_id": "speech-mllm-efficient-rl-alignment",
+      "work_label": "W2",
+      "remote": "https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment.git",
+      "final_branch": "master",
+      "final_commit": "766bbc92e2d1152b341a2bcceca043a1d764126e",
+      "local_state": "RETIRED_NO_WORKTREE",
+      "retention_policy": "COLD_BACKUP_REMOTE_RETAINED_PLUS_OFFLINE_BUNDLE",
+      "verified_at": "2026-08-03",
+      "tombstone": "wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md",
+      "legacy_path_prefix": "projects/speech-mllm-efficient-rl-alignment",
+      "offline_bundle": {
+        "path": "SPEECHRL_DATA_DIR/program-archives/speech-mllm-efficient-rl-alignment.bundle",
+        "sha256": "3f53837a130600ec085d2b0e64c149f692048d370ee965ec335af402702bc6ae"
+      }
+    },
+    {
+      "repo_id": "speech-mllm-multitask-rl",
+      "work_label": "W3",
+      "remote": "https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl.git",
+      "final_branch": "master",
+      "final_commit": "931806c82bba12157a499bc6cbdab5af9077a858",
+      "local_state": "RETIRED_NO_WORKTREE",
+      "retention_policy": "COLD_BACKUP_REMOTE_RETAINED_PLUS_OFFLINE_BUNDLE",
+      "verified_at": "2026-08-03",
+      "tombstone": "wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md",
+      "legacy_path_prefix": "projects/speech-mllm-multitask-rl",
+      "offline_bundle": {
+        "path": "SPEECHRL_DATA_DIR/program-archives/speech-mllm-multitask-rl.bundle",
+        "sha256": "a3ed99990569c830bcfff6913483e2a5e6f7c237bec8ed945d27f2021283cbb7"
+      }
+    },
+    {
+      "repo_id": "speech-mllm-omni-embedding-rl",
+      "work_label": "W4",
+      "remote": "https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git",
+      "final_branch": "master",
+      "final_commit": "0f587c6e915f567c1d09ecec6f109ae9c5795bf4",
+      "local_state": "RETIRED_NO_WORKTREE",
+      "retention_policy": "COLD_BACKUP_REMOTE_RETAINED_PLUS_OFFLINE_BUNDLE",
+      "verified_at": "2026-08-03",
+      "tombstone": "wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md",
+      "legacy_path_prefix": "projects/speech-mllm-omni-embedding-rl",
+      "offline_bundle": {
+        "path": "SPEECHRL_DATA_DIR/program-archives/speech-mllm-omni-embedding-rl.bundle",
+        "sha256": "c2ab62385aa3daf4f5c44ef80dbe20bc461d0ab0c1058a74cdb4656e85d95c14"
+      }
+    }
+  ]
+}

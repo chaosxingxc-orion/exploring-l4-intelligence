@@ -1,5 +1,5 @@
 {
-  "_comment": "F-6 remediation (2026-07-13 v4.2 doctoral review) -- pinned upstream corpus identity for squtr subsets, computed from the REAL corpus.jsonl on the E: data root. Regenerate with `python projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py --generate`. See scripts/knowledge/corpus_lock.py (W1 repo) for the verification contract (verify_corpus_lock, fail-closed).",
+  "_comment": "F-6 remediation (2026-07-13 v4.2 doctoral review) -- pinned upstream corpus identity for squtr subsets, computed from the REAL corpus.jsonl on the E: data root. RETIRED_REGENERATION (2026-08-03): the W1 checkout is retired, so the original command `python projects/speech-mllm-training-free-rl/scripts/knowledge/corpus_lock.py --generate` is non-runnable as written; the pinned generator survives at git+https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl.git@7ed41f62e3f33f9f16d0fbbe2d13725ace62502f#path=scripts/knowledge/corpus_lock.py (verbatim quarantined copy: study reference/w1-snapshot/knowledge/corpus_lock.py). The verification contract (verify_corpus_lock, fail-closed) is defined in that pinned file; this lock's recorded hashes remain authoritative without regeneration.",
   "generated_at": "2026-07-13T01:45:06.804046+00:00",
   "generated_by": "scripts/knowledge/corpus_lock.py (W1 repo)",
   "expected_doc_count": {
