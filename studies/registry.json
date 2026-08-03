@@ -4,5 +4,15 @@
   "repo_creation_gate": "OWNER_GO_AND_EXECUTION_CONTRACT",
   "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
   "experiment_control_plane": "wiki/Experiment-Assets.md",
-  "studies": []
+  "studies": [
+    {
+      "name": "audio-aware evidence acquisition",
+      "slug": "audio-aware-evidence-acquisition",
+      "local_path": "studies/audio-aware-evidence-acquisition",
+      "github_repo": "https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git",
+      "lifecycle": "engineering",
+      "decision_record": "wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md",
+      "experiment_index": "wiki/experiments/audio-aware-evidence-acquisition/README.md"
+    }
+  ]
 }

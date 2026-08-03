@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-02 — audio-aware evidence acquisition passed Stage-1C; D0 closed; Stage-2A execution contract pending"
+last_refresh: "2026-08-03 — owner GO and execution contract signed; study repo admitted; Stage-2A E0 (D1–D4) in progress"
 ---
 
 # Research Objective & Current State
@@ -12,19 +12,21 @@ last_refresh: "2026-08-02 — audio-aware evidence acquisition passed Stage-1C; 
 ## Current gate and authority
 
 Stage accounting is now **direction-local**, not a global R1–R9 waterfall. Endpoint:
-`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING`.
+`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_OWNER_GO_SIGNED__STAGE2A_E0_IN_PROGRESS`.
 Core = Qwen3-Omni-30B via local llama.cpp; ASR mainline = general ASR. The owner direction criterion (2026-07-29)
 remains sufficient survey plus a concrete incumbent baseline.
 
 R1–R9 are audit provenance, not engineering identities. Owner GO plus an execution contract creates a
 semantic study repo. R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`, so it has no repo.
 
-The first semantic object, **audio-aware evidence acquisition** (R2 provenance), is
-`PASS_STAGE1C_FORMAL_OPENING`. Problem selection and Stage‑2A handoff are approved; innovation and final
-method remain Stage‑2A/2B outputs. No parameter modification, task-trained model or additional answering
-LLM is allowed. No study repo or model-facing execution is admitted. Authorized carrier acquisition is
-`D0_CLOSED` for Earnings21, Earnings22 and ConEC; `docs/datasets.lock.json` is the live authority. Datasets
-over 1 TB remain excluded; locally byte-verifiable carriers take priority.
+The first semantic object, **audio-aware evidence acquisition** (R2 provenance), is admitted: owner
+GO and execution contract signed 2026-08-03
+(`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`).
+Its repository is `studies/audio-aware-evidence-acquisition/` (registered, private remote). Innovation
+and final method remain Stage‑2A/2B outputs. No parameter modification, task-trained model or additional
+answering LLM is allowed; model-facing execution is bounded by the contract's budgets and fail-closed
+receipts (E0 closure + runtime receipt before any model touch). Carrier acquisition is `D0_CLOSED` for
+Earnings21, Earnings22 and ConEC; `docs/datasets.lock.json` is the live authority.
 
 R3–R9 remain `OWNER_UNVERIFIED`; they do not block this study and may be surveyed during its engineering.
 
@@ -48,10 +50,11 @@ non-load-bearing (`WITHHOLD_NON_LOAD_BEARING`).
 
 ## Next action
 
-Close model-free D1–D4 (identity, leakage, scoring and ten-sample trace), then freeze the Stage‑2A
-repository/model/runtime/data/baseline/metric/budget contract. Only `OWNER_GO_AND_EXECUTION_CONTRACT`
-permits creating `studies/<semantic-name>/` or any model-facing experiment. Secondary downloads do not
-block the decision; unstable/restricted sources remain fail-closed.
+In the study repo: close model-free E0 (D1–D4: identity, leakage, scoring, ten-sample trace) and land
+the runtime receipt, then deliver the R0 engineering slice (loaders, frozen-core adapter, tracing,
+scorers, three engineering controls) and the first readiness-qualified closest-prior reproduction.
+Engineering sessions start in `studies/audio-aware-evidence-acquisition/`; the survey delta lane and
+program bookkeeping stay umbrella-side.
 
 The Wiki controls experiments; study repos own code/config/tests; `SPEECHRL_DATA_DIR` and MLflow own
 large artifacts. Route through `wiki/Experiment-Assets.md`.

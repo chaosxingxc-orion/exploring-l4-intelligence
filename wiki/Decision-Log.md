@@ -3424,3 +3424,19 @@ only、0 unresolved。当前 HOT/CURRENT、repo/working/onboarding 资产同步�
 统一前置、R5+R6+R8=所有 Stage‑2 唯一入口的说法；不改变 TF-Strict/API-only 北极星，也不产生模型/API、
 下载、metric、prototype、remote repo、push 或 Wiki publication 权限。失效条件：owner 改变 repo ownership、
 study admission gate、实验资产权威边界，或批准首个语义 study 的执行合同。
+
+**2026-08-03 · Owner GO：audio-aware evidence acquisition 建独立仓入工程，数据线并入语义路径：**
+**Context：** round-22 已给 `FORMAL_OPENING_APPROVED`（执行仍 withheld）；目录重整提案经评审通过并由
+Fable5 返回 ACCEPT_WITH_AMENDMENTS；数据侧 D0 已闭（E21/E22/ConEC 固定 revision + canonical lock）。
+**Decision：** owner 签发 `OWNER_GO_AND_EXECUTION_CONTRACT`。创建私有仓
+`chaosxingxc-orion/audio-aware-evidence-acquisition`（master），checkout 至
+`studies/audio-aware-evidence-acquisition/` 并登记 registry；冻结字段（runtime=llama.cpp+Qwen3-Omni-30B
+GGUF、载体三键、mandatory 缩减集、R0 预算带 ≤3000 调用/≤40 GPU 时/付费 API=0、exposure 四字段台账）
+落 `wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`，
+未逐字段指定者按 Fable5 建议值 DEFAULT 生效、可带日期 amendment 修改。数据采集收据路径由
+`docs/checks/r2-stage2a-data/` 语义化为 `docs/checks/audio-aware-evidence-acquisition/`。
+**Consequences：** registry 首条 lifecycle=engineering；实验台账 `wiki/experiments/<slug>/README.md` 建立
+（ID 空间 AAEA-E-<nnn>）；工程 session 主场移至 study checkout；E0（D1–D4）+runtime 收据是首次模型触达
+的 fail-closed 前置；survey delta lane 与程序簿记留伞仓。
+**Supersedes：** 取代「registry 当前为 0、未授权远程建仓」的上一条现状；失效条件：owner 撤回/修订执行
+合同或 STOP_THE_LINE 触发。

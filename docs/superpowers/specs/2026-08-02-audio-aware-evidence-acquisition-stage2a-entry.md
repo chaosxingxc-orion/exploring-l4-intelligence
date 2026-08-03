@@ -2,20 +2,23 @@
 
 ## Status
 
-Draft execution contract prepared after `PASS_STAGE1C_FORMAL_OPENING` on 2026-08-02.
-It is an engineering-entry specification, not execution authority. Model/API calls, smoke runs,
-metrics, reproduction, prototypes, remote repository creation and publication remain withheld until
-the owner changes `authorization` to `OWNER_GO_AND_EXECUTION_CONTRACT` in a dated decision transaction.
+Entry contract prepared after `PASS_STAGE1C_FORMAL_OPENING` on 2026-08-02. The owner signed
+`OWNER_GO_AND_EXECUTION_CONTRACT` on 2026-08-03; the dated decision record and frozen freeze-sheet
+values live in
+`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`.
+This specification remains the authoritative entry sequence (E0→R0→R1→X); execution stays bounded
+by the contract's budgets and fail-closed receipts.
 
 ```yaml
 semantic_research_object: audio-aware evidence acquisition
 source_candidate_provenance: R2
 stage1c_decision: PASS_STAGE1C_FORMAL_OPENING
-authorization: WITHHELD_PENDING_OWNER_GO_AND_EXECUTION_CONTRACT
+authorization: OWNER_GO_AND_EXECUTION_CONTRACT
+authorization_record: wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md
 novelty_status: NOT_YET_DETERMINED
 method_status: EXPLORATION_SPACE_ONLY
 repository_slug: audio-aware-evidence-acquisition
-repository_url: TBD_AT_OWNER_EXECUTION_CONTRACT
+repository_url: https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git
 experiment_index: wiki/experiments/audio-aware-evidence-acquisition/README.md
 ```
 

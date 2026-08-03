@@ -16,10 +16,11 @@ initialize the independent repository at `studies/<slug>/`.
 
 ## Current state
 
-No study repository is admitted yet. The audio-aware-evidence-acquisition direction has passed Stage‑1C
-and received formal-opening permission, but its Stage‑2A execution contract and owner GO remain pending.
-Its future remote repository must not be created by this workspace refresh. R1 remains sunset provenance
-and has no engineering repository.
+One study is admitted: **audio-aware-evidence-acquisition** (owner GO and execution contract
+2026-08-03; see `registry.json` and
+`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`).
+Its checkout lives at `studies/audio-aware-evidence-acquisition/` with its own Git history and
+private remote. R1 remains sunset provenance and has no engineering repository.
 
 Program-level experiment assets and their storage boundaries are routed by
 [`wiki/Experiment-Assets.md`](../wiki/Experiment-Assets.md).
