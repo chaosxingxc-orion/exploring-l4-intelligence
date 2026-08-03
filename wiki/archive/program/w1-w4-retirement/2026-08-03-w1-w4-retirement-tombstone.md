@@ -37,3 +37,19 @@ the three path defaults `data_dir`/`ckpt_dir`/`mlflow_dir` changed their fallbac
   historical bytes preserved; worktree/history resolution now reports them unresolved by design).
 - The ten rescued W1 candidate files in the study repo's `reference/w1-snapshot/`.
 - The umbrella-side probe/eval evidence in `wiki/` audit and archive layers.
+
+## Addendum 2 (2026-08-03): snapshot count correction and cold-backup resolution
+
+Recorded under the post-reorganization remediation (`PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1`,
+P1-4); the paragraphs above are preserved unedited.
+
+- The "ten files" statements above undercount the rescue: after the two best-of-N runners
+  (`repro_asr_best_of_n_v2.py` @ `28d8f0d`, `repro_asr_best_of_n_llamacpp.py` @ `f9d111a`) and
+  `gpu_session.sh` (@ `7ed41f62`) were recovered from remote history, the snapshot holds
+  **thirteen** files. Authoritative per-file provenance (source commit, SHA-256, quarantine
+  status): study repo `reference/w1-snapshot/SNAPSHOT.md`.
+- The 574 inventory rows are no longer "unresolved by design":
+  `docs/integrity/legacy-asset-resolution.json` binds every row to `remote@commit:path` against
+  `docs/integrity/retired-repository-registry.json` (574 `COLD_BACKUP_RESOLVED`, 0 unresolved,
+  fail-closed rule machine-enforced). Offline `git bundle` copies of all four retired repositories
+  live under `SPEECHRL_DATA_DIR/program-archives/` with SHA-256 registered in that registry.

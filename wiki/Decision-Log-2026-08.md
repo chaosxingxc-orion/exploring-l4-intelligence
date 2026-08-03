@@ -2,6 +2,40 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-03（续88）· 重整后架构复核整改 T0–T5 落地（真相对齐/574 冷备解析/工程地板）
+
+#### Context
+
+目录重整落地后，复核提案 `PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1`（specs/2026-08-03）判
+`CONDITIONAL_ACCEPT_WITH_REMEDIATION`：主架构正确，但 HOT 文档与实际目录冲突（P0-1）、574 条
+legacy 资产全 unresolved 而 gate 仍 PASS（P0-2）、study 依赖/测试/lockfile/CI/license 缺失
+（P1-1/1-2）、checker 浅层存在性检查（P1-3）、W1 snapshot 记录十件实为十三件（P1-4）。逐项
+对仓核验属实后按 user 指示执行整改。
+
+#### Decision
+
+T0–T5 全部落地（伞仓 commit 5fa2249/e85ac82/989ae98 + 本笔；study 仓 4ceaba9/5dd1822/
+ac75a61）。要点：①HOT 三页/两份旧 spec/owner 合同（dated Amendment 1）/common README 对齐现
+状；②新 retired-repository-registry + 四态 resolver，574 项全 `COLD_BACKUP_RESOLVED`
+（`remote@commit:path`+blob），`UNRESOLVED>0` 无 waiver 即 gate FAIL；四仓离线 git bundle 落
+`SPEECHRL_DATA_DIR/program-archives/`（SHA-256 入 registry）；claim ledger 18 处死路径升级
+git+https URI；③study 落 42 项无模型 contract tests（信息边界/OBS-SUPPLY 分离/exposure
+schema/FrozenCoreGate fail-closed/快照隔离/治理对齐/入口拒绝）+真实 config 骨架+uv.lock+CI+
+私有阶段 LICENSE/NOTICE；④common 依赖按 YAGNI 判 `DEFERRED_UNTIL_FIRST_CONSUMPTION`（首次消
+费时精确 umbrella commit pin；实验记录增 `shared code revision` 绑定）；⑤registry v2（
+default_branch/package_name/created_at/experiment_namespace/decision_record_blob）+ checker 补
+四盲点（真 Git 校验/`--require-installed` origin+branch/跨源计数与 frontmatter 断言）；
+⑥snapshot 记录统一为十三件逐文件 provenance，tombstone 走 append-only Addendum 2；common
+首次 OWNERSHIP 审计落 `common/OWNERSHIP.md`。
+
+#### Consequences
+
+首次模型触达前的硬门（T0–T3）全部关闭；验收收据
+`docs/checks/program-architecture/2026-08-03-post-reorg-remediation/`。E0（D1–D4）继续为下一
+步；模型触达仍需 E0 closure + runtime receipt（合同不变）。旧 proposal 仅存历史理由；当前操作
+只从 architecture/合同/HOT 三页进入。遗留决定权在 owner：cold backup 是否另设第二离线介质、
+`--require-installed` 是否纳入主开发机默认习惯。
+
 ### 2026-08-02（续87）· round-21 三裁决（红线零训练/结论向量/RQ0 析因）+ v20 整改授权
 
 #### Context

@@ -75,7 +75,7 @@ bash scripts/wsl-setup.sh
 bash scripts/env-setup.sh
 
 cd studies/audio-aware-evidence-acquisition
-uv pip install -e ../../common -e .
+uv pip install -e ".[dev]"
 pytest
 
 pytest common/tests
@@ -93,7 +93,9 @@ own repository. A future direction gets a repo only after its own owner GO plus 
 never pre-create one from a conditional candidate.
 
 Umbrella gates (offline, Windows or WSL): `python scripts/checks/code_graph_check.py`,
-`python scripts/checks/study_workspace_check.py`, `python scripts/checks/ai_context_surface_check.py`,
+`python scripts/checks/study_workspace_check.py` (add `--require-installed` on the primary dev
+machine), `python scripts/checks/legacy_asset_resolution_check.py`,
+`python scripts/checks/ai_context_surface_check.py`,
 `python scripts/checks/build_ai_context_manifest.py --check`. The Stage‑1 survey package and its
 command gate closed on 2026-08-03 (final receipt under `docs/checks/system-first-stage1a/`); the
 Stage‑1B Lean formal layer is likewise retired — formal proofs are rebuilt per admitted study in
@@ -104,8 +106,10 @@ Stage‑2, scoped to that study's claims.
 - `common/src/speechrl_common/` provides audio, model, reward, data, tracking, and utility helpers.
   Keep torch/transformers/librosa/mlflow/jiwer imports inside the functions that use them; package
   top-level imports remain light.
-- The admitted study depends on `common` through editable `../../common`; torch comes from the shared
-  WSL environment. Study config composes `model/`, `dataset/`, `baseline/`, and `experiment/`.
+- The admitted study currently declares no `common` dependency; consumption enters only via the
+  study migration-manifest pin policy (exact umbrella commit + `uv.lock`), with `../../common` as a
+  local dev override. Torch comes from the shared WSL environment. Study config composes `model/`,
+  `dataset/`, `baseline/`, and `experiment/`.
 - Preserve unrelated user changes. Use non-destructive Git operations. Commit each change in the repo
   that owns it; umbrella and admitted-study repos have independent histories. Do not publish,
   push, create a remote study repo, or run non-dry wiki sync without explicit authorization.
