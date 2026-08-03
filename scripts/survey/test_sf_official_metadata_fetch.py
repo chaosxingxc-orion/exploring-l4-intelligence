@@ -143,7 +143,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
             row["raw"]["path"]
             for row in rows
             if row["raw"]["path"].startswith(
-                "wiki/survey/current/data/official-metadata/"
+                "wiki/survey/registry/official-metadata/"
             )
         }
         self.assertEqual(17, len(legacy))
@@ -154,7 +154,7 @@ class OfficialMetadataFetchTest(unittest.TestCase):
             row["raw"]["path"]
             for row in bibliography.load_receipts()
             if row["raw"]["path"].startswith(
-                "wiki/survey/current/data/official-metadata/"
+                "wiki/survey/registry/official-metadata/"
             )
         )
         result = subprocess.run(

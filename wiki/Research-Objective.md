@@ -65,8 +65,9 @@ large artifacts. Route through `wiki/Experiment-Assets.md`.
 ## Legacy and routing
 
 R1 agreement is `FAIL`; R2R1 is `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; Duplex-model
-development remains outside the primary branch. Route survey through `wiki/survey/current/README.md` and
-its contract through `wiki/survey/current/research-directions.md`.
+development remains outside the primary branch. Route literature work through `wiki/survey/README.md`
+(fulltext ledger + registry commons); the closed Stage‑1 survey package is archived at
+`wiki/archive/working/system-first-survey-current/`.
 
 ## Supersession rule
 

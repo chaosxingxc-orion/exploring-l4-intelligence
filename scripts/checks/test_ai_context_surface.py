@@ -168,10 +168,10 @@ class AiContextSurfaceTests(unittest.TestCase):
         active = []
         tracked_paths = []
         for index in range(30):
-            relative_path = f"wiki/survey/current/item-{index:02d}.md"
+            relative_path = f"wiki/survey/registry/item-{index:02d}.md"
             raw = f"item {index}\n".encode("utf-8")
             self.write(relative_path, raw)
-            active.append(self.active_entry(relative_path, raw, "CURRENT"))
+            active.append(self.active_entry(relative_path, raw, "REGISTRY"))
             tracked_paths.append(relative_path)
 
         failures = evaluate_manifest(
@@ -186,10 +186,10 @@ class AiContextSurfaceTests(unittest.TestCase):
         active = []
         tracked_paths = []
         for index in range(31):
-            relative_path = f"wiki/survey/current/item-{index:02d}.md"
+            relative_path = f"wiki/survey/registry/item-{index:02d}.md"
             raw = f"item {index}\n".encode("utf-8")
             self.write(relative_path, raw)
-            active.append(self.active_entry(relative_path, raw, "CURRENT"))
+            active.append(self.active_entry(relative_path, raw, "REGISTRY"))
             tracked_paths.append(relative_path)
 
         failures = evaluate_manifest(
@@ -303,21 +303,21 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assert_failure(failures, "unconsolidated-amendment-forbidden")
 
     def test_missing_active_path_fails(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/survey/registry/status.md"
         expected_raw = b"expected status\n"
 
         failures = evaluate_manifest(
             self.repo,
-            manifest([self.active_entry(relative_path, expected_raw, "CURRENT")]),
+            manifest([self.active_entry(relative_path, expected_raw, "REGISTRY")]),
             tracked_paths=[relative_path],
         )
 
         self.assert_failure(failures, "active-path-missing")
 
     def test_active_hash_mismatch_fails(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/survey/registry/status.md"
         self.write(relative_path, b"actual status\n")
-        entry = self.active_entry(relative_path, b"expected status\n", "CURRENT")
+        entry = self.active_entry(relative_path, b"expected status\n", "REGISTRY")
 
         failures = evaluate_manifest(
             self.repo,
@@ -357,7 +357,9 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assertEqual("HOT", classify_path("wiki/Project-Thesis.md", legacy))
         self.assertEqual("HOT", classify_path("wiki/Experiment-Assets.md", legacy))
-        self.assertEqual("CURRENT", classify_path("wiki/survey/current/legacy.md", legacy))
+        self.assertEqual(
+            "REGISTRY_LEGACY", classify_path("wiki/survey/current/legacy.md", legacy)
+        )
         self.assertEqual("REGISTRY", classify_path("wiki/survey/sidecars/a.json", legacy))
         self.assertEqual("AUDIT", classify_path("wiki/audit/campaign/round/review.md", legacy))
         self.assertEqual("ARCHIVE", classify_path("wiki/archive/review.md", legacy))
@@ -527,7 +529,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         relative_path = "wiki/Project-Thesis.md"
         raw = b"thesis\n"
         self.write(relative_path, raw)
-        wrong_class = self.active_entry(relative_path, raw, "CURRENT")
+        wrong_class = self.active_entry(relative_path, raw, "REGISTRY")
         wrong_policy = self.active_entry(relative_path, raw, "HOT")
         wrong_policy["load_policy"] = "sometimes"
 
@@ -608,22 +610,22 @@ class AiContextSurfaceTests(unittest.TestCase):
                 self.assertIn("manifest-json-invalid:", str(raised.exception))
 
     def test_relative_and_anchored_audit_links_are_normalized(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/Working-Mode.md"
         raw = (
-            b"[review](../../audit/campaign/round-1/review.md#verdict)\n"
+            b"[review](audit/campaign/round-1/review.md#verdict)\n"
         )
         self.write(relative_path, raw)
 
         failures = evaluate_manifest(
             self.repo,
-            manifest([self.active_entry(relative_path, raw, "CURRENT")]),
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
             tracked_paths=[relative_path],
         )
 
         self.assert_failure(failures, "direct-audit-round-link")
 
     def test_exact_active_review_transaction_is_the_only_round_exception(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/survey/registry/status.md"
         active_review = (
             "wiki/audit/system-first-stage1a/round-12/"
             "stage1a-readiness-correction.md"
@@ -638,7 +640,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         failures = evaluate_manifest(
             self.repo,
             manifest(
-                [self.active_entry(relative_path, raw, "CURRENT")],
+                [self.active_entry(relative_path, raw, "REGISTRY")],
                 active_review=active_review,
             ),
             tracked_paths=[relative_path, active_review],
@@ -659,13 +661,13 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assert_failure(failures, "audit-epoch-state-invalid")
 
     def test_percent_encoded_relative_audit_link_cannot_bypass_routing(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
-        raw = b"[review](..%2F..%2Faudit%2Fcampaign%2Fround-1%2Freview.md)\n"
+        relative_path = "wiki/Working-Mode.md"
+        raw = b"[review](audit%2Fcampaign%2Fround-1%2Freview.md)\n"
         self.write(relative_path, raw)
 
         failures = evaluate_manifest(
             self.repo,
-            manifest([self.active_entry(relative_path, raw, "CURRENT")]),
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
             tracked_paths=[relative_path],
         )
 
@@ -717,7 +719,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assertEqual([], failures)
 
     def test_reference_to_exact_active_review_transaction_passes(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/survey/registry/status.md"
         active_review = (
             "wiki/audit/system-first-stage1a/round-12/"
             "stage1a-readiness-correction.md"
@@ -733,7 +735,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         failures = evaluate_manifest(
             self.repo,
             manifest(
-                [self.active_entry(relative_path, raw, "CURRENT")],
+                [self.active_entry(relative_path, raw, "REGISTRY")],
                 active_review=active_review,
             ),
             tracked_paths=[relative_path, active_review],
@@ -742,16 +744,16 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assertEqual([], failures)
 
     def test_percent_encoded_reference_destination_cannot_bypass_routing(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/Working-Mode.md"
         raw = (
             b"See [review][r].\n\n"
-            b"[r]: ..%2F..%2Faudit%2Fcampaign%2Fround-1%2Freview.md\n"
+            b"[r]: audit%2Fcampaign%2Fround-1%2Freview.md\n"
         )
         self.write(relative_path, raw)
 
         failures = evaluate_manifest(
             self.repo,
-            manifest([self.active_entry(relative_path, raw, "CURRENT")]),
+            manifest([self.active_entry(relative_path, raw, "HOT")]),
             tracked_paths=[relative_path],
         )
 
@@ -854,7 +856,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assertEqual([], failures)
 
     def test_multiline_reference_destination_to_active_review_passes(self) -> None:
-        relative_path = "wiki/survey/current/status.md"
+        relative_path = "wiki/survey/registry/status.md"
         active_review = (
             "wiki/audit/system-first-stage1a/round-12/"
             "stage1a-readiness-correction.md"
@@ -871,7 +873,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         failures = evaluate_manifest(
             self.repo,
             manifest(
-                [self.active_entry(relative_path, raw, "CURRENT")],
+                [self.active_entry(relative_path, raw, "REGISTRY")],
                 active_review=active_review,
             ),
             tracked_paths=[relative_path, active_review],
@@ -1091,13 +1093,14 @@ class AiContextSurfaceTests(unittest.TestCase):
             "effective_spec_version": receipt_version,
             "effective_spec_sha256": "0" * 64 if forged_hash else raw_sha256(spec_raw),
         }
-        self.write(spec_path, spec_raw)
+        resolved_spec = surface.resolve_effective_spec(spec_path)
+        self.write(resolved_spec, spec_raw)
         self.write(artifact, b"amendment 1 after consolidation\n")
         self.write(
             receipt,
             (json.dumps(receipt_document, sort_keys=True) + "\n").encode("utf-8"),
         )
-        return artifact, [artifact, receipt, spec_path]
+        return artifact, [artifact, receipt, resolved_spec]
 
     def test_first_numbered_amendment_in_receipted_next_epoch_passes(self) -> None:
         _artifact, tracked = self.epoch_fixture()
@@ -1157,7 +1160,9 @@ class AiContextSurfaceTests(unittest.TestCase):
             "# Effective protocol\n"
         ).encode("utf-8")
         spec_sha = raw_sha256(spec_raw)
-        docs = {spec_path: spec_raw}
+        # Receipts record the historical current-layer path; the live carrier
+        # resolves through the closure relocation to the archive.
+        docs = {surface.resolve_effective_spec(spec_path): spec_raw}
         for epoch, ordinals in layout:
             receipt_path = (
                 f"wiki/audit/{campaign}/epoch-{epoch}/consolidation-receipt.json"
@@ -1193,7 +1198,7 @@ class AiContextSurfaceTests(unittest.TestCase):
             if path.startswith("wiki/audit/")
         }
         document = manifest(
-            [self.active_entry(spec_path, spec_raw, "CURRENT")]
+            []
         )
         return document, sorted(docs), registered, docs
 
@@ -1320,11 +1325,12 @@ class AiContextSurfaceTests(unittest.TestCase):
 
         self.assert_failure(failures, "audit-iteration-metadata-invalid")
 
-    def test_highest_epoch_receipt_requires_exact_current_manifest_binding(self) -> None:
+    def test_highest_epoch_receipt_requires_exact_archived_spec_binding(self) -> None:
         document, tracked, registered, docs = self.registered_epoch_state(
             layout=((1, (1,)),)
         )
-        document["active_entries"][0]["sha256"] = "0" * 64
+        resolved = surface.resolve_effective_spec("wiki/survey/current/protocol.md")
+        docs[resolved] = docs[resolved] + b"tampered\n"
 
         failures = self.validate_epoch_state(document, tracked, registered, docs)
 
@@ -1511,7 +1517,6 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         policy = self.read_text("wiki/AI-Collaboration.md")
         required_roles = (
             "HOT",
-            "CURRENT",
             "REGISTRY",
             "AUDIT",
             "ARCHIVE",
@@ -1526,7 +1531,6 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         )
         required_routes = (
             "wiki/Research-Objective.md",
-            "wiki/survey/current/",
             "wiki/survey/registry/",
             "wiki/audit/<campaign>/<round-id>/",
             "wiki/archive/<knowledge-layer>/<campaign>/",
@@ -1596,7 +1600,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             index for index, line in enumerate(lines) if line.startswith("| **HOT** |")
         )
         current_index = next(
-            index for index, line in enumerate(lines) if line.startswith("| **CURRENT** |")
+            index for index, line in enumerate(lines) if line.startswith("| **REGISTRY** |")
         )
         swapped = list(lines)
         swapped[hot_index], swapped[current_index] = (
@@ -1664,7 +1668,6 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
 
         contributing = self.read_text("CONTRIBUTING.md")
         for route in (
-            "wiki/survey/current/",
             "wiki/survey/registry/",
             "wiki/audit/<campaign>/<round-id>/",
             "wiki/archive/<knowledge-layer>/<campaign>/",
@@ -1713,8 +1716,8 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "GO and execution contract signed 2026-08-03",
             "model-facing execution is bounded by the contract's budgets",
             "D0_CLOSED",
-            "wiki/survey/current/README.md",
-            "wiki/survey/current/research-directions.md",
+            "wiki/survey/README.md",
+            "wiki/archive/working/system-first-survey-current/",
             "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
             "Lean",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
@@ -1733,7 +1736,6 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         for path in (
             "wiki/Research-Objective.md",
             "wiki/Per-Work-Status.md",
-            "wiki/survey/current/status.md",
         ):
             text = self.read_text(path)
             with self.subTest(path=path):
@@ -1771,7 +1773,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                     len(re.findall(rf"^## {work}(?:\s|$)", per_work, flags=re.MULTILINE)),
                 )
         self.assertIn("wiki/archive/", per_work)
-        self.assertIn("wiki/survey/current/README.md", per_work)
+        self.assertIn("wiki/survey/README.md", per_work)
 
         router_raw = self.read_bytes("wiki/survey/README.md")
         router = router_raw.decode("utf-8")
@@ -2070,7 +2072,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
         )
         receipt = "wiki/audit/campaign/epoch-1/consolidation-receipt.json"
         docs = {
-            spec_path: spec_raw,
+            surface.resolve_effective_spec(spec_path): spec_raw,
             artifact: AiContextSurfaceTests.iteration_raw(
                 campaign="campaign",
                 epoch=1,
@@ -2111,17 +2113,8 @@ class AiContextManifestBuilderTests(unittest.TestCase):
             json.dumps({"artifacts": self.artifacts}), encoding="utf-8"
         )
         self.write_anchor_fixture()
-        self.specs = (
-            *self.specs[:-1],
-            {
-                "path": spec_path,
-                "class": "CURRENT",
-                "load_policy": "targeted",
-                "purpose": "effective protocol",
-            },
-            self.specs[-1],
-        )
-        self.tracked.extend((spec_path, artifact, receipt))
+        resolved_spec = surface.resolve_effective_spec(spec_path)
+        self.tracked.extend((resolved_spec, artifact, receipt))
         self.blobs.update(
             {
                 path: git_blob_id(
@@ -2130,7 +2123,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 for path in (
                     self.anchor_relative_path,
                     "wiki/survey/sf-audit-artifact-registry.json",
-                    spec_path,
+                    resolved_spec,
                     artifact,
                     receipt,
                 )
@@ -2301,7 +2294,7 @@ class AiContextManifestBuilderTests(unittest.TestCase):
                 self.repo, inventory, read_blob, allow_untracked_self=True
             )
 
-        self.assertIn(
+        self.assertNotIn(
             "wiki/survey/current/protocol.md",
             {entry["path"] for entry in document["active_entries"]},
         )
@@ -2665,11 +2658,11 @@ class AiContextManifestBuilderTests(unittest.TestCase):
 
     def test_manifest_bootstrap_does_not_excuse_another_untracked_active(self) -> None:
         target = self.repo / "docs/integrity/ai-context-manifest.json"
-        extra_path = "wiki/survey/current/extra.md"
+        extra_path = "wiki/survey/registry/extra.md"
         extra_raw = b"extra\n"
         extra = {
             "path": extra_path,
-            "class": "CURRENT",
+            "class": "REGISTRY",
             "load_policy": "targeted",
             "purpose": "must remain tracked",
             "sha256": raw_sha256(extra_raw),

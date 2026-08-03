@@ -51,7 +51,7 @@
       "id": "current_contract_exposes_the_same_r1_boundary",
       "source_test": "test_current_contract_exposes_the_same_r1_boundary",
       "type": "must_contain",
-      "target": "wiki/survey/current/research-directions.md",
+      "target": "wiki/archive/working/system-first-survey-current/research-directions.md",
       "strings": [
         "### R1 — 冻结 Speech/Omni 模型的语音/音频上下文学习方法复现与比较",
         "Common Voice 15.0",

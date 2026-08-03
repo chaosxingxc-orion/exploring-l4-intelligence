@@ -42,7 +42,7 @@ from ai_context_surface_check import (  # noqa: E402
     git_command_prefix,
     loads_json_strict,
 )
-from sf_query_compiler import atomic_write_bytes  # noqa: E402
+from atomic_write import atomic_write_bytes  # noqa: E402
 
 
 REGISTRY_RELATIVE = "wiki/survey/sf-audit-artifact-registry.json"

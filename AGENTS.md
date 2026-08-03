@@ -28,18 +28,18 @@ Default load surface is exactly:
 2. `wiki/Research-Objective.md` — current stage, blockers, next action; then
 3. `wiki/Project-Thesis.md` — north star.
 
-Load `wiki/Per-Work-Status.md`, `wiki/Experiment-Assets.md`, and `wiki/survey/current/` only for a named
-work, experiment, or survey task. Never broadly load
+Load `wiki/Per-Work-Status.md`, `wiki/Experiment-Assets.md`, and the literature commons
+(`wiki/survey/README.md`) only for a named work, experiment, or survey task. Never broadly load
 `wiki/20*.md`, historical proposal/review/response/amendment files, `wiki/archive/`, or the full
 `wiki/Decision-Log.md`. For provenance, use a campaign index and targeted `rg` only.
 
 Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md` ≤5KB;
-`Per-Work-Status.md ≤8KB`; `survey/README.md ≤4KB`; `survey/current/README.md ≤4KB`; AI context
+`Per-Work-Status.md ≤8KB`; `survey/README.md ≤4KB`; AI context
 manifest ≤30 active entries. The three default entries are fixed.
 
 Path summary: HOT current facts stay in stable root/wiki files; experiment lifecycle and asset routing
-live in `wiki/Experiment-Assets.md` plus per-study `wiki/experiments/<study-name>/`; CURRENT survey
-contracts live under `wiki/survey/current/`; long-lived paper records go to `wiki/survey/registry/`; reviewer transactions
+live in `wiki/Experiment-Assets.md` plus per-study `wiki/experiments/<study-name>/`; long-lived paper
+records and official-metadata receipts go to `wiki/survey/registry/`; reviewer transactions
 are created directly under `wiki/audit/<campaign>/<round-id>/`; superseded unregistered work goes to
 `wiki/archive/`; active exploration goes to `wiki/survey/workbench/<campaign>/`. Engineering specs,
 plans, reports, and executable checks belong in `docs/superpowers/specs/`, `docs/superpowers/plans/`,
@@ -91,9 +91,12 @@ One study is admitted (see `studies/registry.json`); its commands and environmen
 own repository. A future direction gets a repo only after its own owner GO plus execution contract —
 never pre-create one from a conditional candidate.
 
-The real umbrella gate is `python scripts/survey/sf_current_package_check.py --check` (runs offline on
-Windows or WSL). The Stage‑1B program-level Lean formal layer is retired (2026-08-03); formal proofs
-are rebuilt per admitted study in Stage‑2, scoped to that study's claims.
+Umbrella gates (offline, Windows or WSL): `python scripts/checks/code_graph_check.py`,
+`python scripts/checks/study_workspace_check.py`, `python scripts/checks/ai_context_surface_check.py`,
+`python scripts/checks/build_ai_context_manifest.py --check`. The Stage‑1 survey package and its
+command gate closed on 2026-08-03 (final receipt under `docs/checks/system-first-stage1a/`); the
+Stage‑1B Lean formal layer is likewise retired — formal proofs are rebuilt per admitted study in
+Stage‑2, scoped to that study's claims.
 
 ## Code and Git discipline
 

@@ -2,8 +2,8 @@
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
 > Last refreshed 2026-08-03. Historical narration is cold: start from the campaign index or
-> `wiki/archive/`, then use targeted search. Survey detail routes through
-> `wiki/survey/current/README.md`.
+> `wiki/archive/`, then use targeted search. Literature work routes through
+> `wiki/survey/README.md`.
 
 ## Program study pipeline
 

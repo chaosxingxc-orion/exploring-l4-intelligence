@@ -1,0 +1,210 @@
+# Stage-1 survey package — closure digest (2026-08-03)
+
+The Stage-1 survey CURRENT package and its gate-bound loose files closed and moved here via
+blob-preserving `git mv` under the owner's 2026-08-03 whole-package cleanup ruling. The
+13-command gate `sf_current_package_check` retired the same day, green at retirement (last PASS
+at commit `de541ca`); its final receipt stays at
+`docs/checks/system-first-stage1a/context-v1/current-package-check.json`. Immutable audit
+records keep historical `wiki/survey/current/...` spec ids; live checks resolve them through
+the prefix relocation in `scripts/checks/ai_context_surface_check.py` (CURRENT_LAYER_RELOCATION).
+Commit-pinned retrievals of the form `git show <sha>:<path>` remain valid and need no rewrite.
+
+Cross-cutting protections formerly carried by the gate moved to
+`scripts/checks/code_graph_check.py` (trusted code graph, untracked-code ban, symlink guards)
+and `scripts/checks/atomic_write.py`. The official-metadata store and receipts moved to the
+REGISTRY literature commons (`wiki/survey/registry/official-metadata*`), not to this archive.
+
+## Path mapping (machine-generated at closure; blob = pre-move git blob)
+
+| Old path | New path | git blob |
+|---|---|---|
+| `wiki/survey/2026-07-13-scout-ledger-round1.json` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-13-scout-ledger-round1.json` | `25debc13d0713da2652583c2e016689dc5aae4cb` |
+| `wiki/survey/2026-07-14-canonical-census-v2/paper_works.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-canonical-census-v2/paper_works.jsonl` | `529324031cd5f61e17355a4e6caba8c1ba7f8b16` |
+| `wiki/survey/2026-07-14-canonical-census-v2/source_clusters.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-canonical-census-v2/source_clusters.jsonl` | `2cdc6cadfe4908d4108e5ff1e0f531e62f518b28` |
+| `wiki/survey/2026-07-14-canonical-census/census_records.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-canonical-census/census_records.jsonl` | `c286cdc31608c1c8182b16bfe05aba512dde7efe` |
+| `wiki/survey/2026-07-14-claim-ledger-v2/claim_extract_exclusions.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-claim-ledger-v2/claim_extract_exclusions.jsonl` | `972a8ad2839ee93569dcd1f324965a7031456166` |
+| `wiki/survey/2026-07-14-claim-ledger-v2/claim_ledger_v2.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-claim-ledger-v2/claim_ledger_v2.jsonl` | `1765e5615de2c4b855de5af44643c8bbf8d820b4` |
+| `wiki/survey/2026-07-14-claim-ledger-v2/version_pins.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-claim-ledger-v2/version_pins.jsonl` | `f9652d9cf22065da7d1cbe2fec06b3db80d9e919` |
+| `wiki/survey/2026-07-14-scout-ledger-round2.json` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-scout-ledger-round2.json` | `0cc6a07e54daeb22134b51bd2a3ec1333944d261` |
+| `wiki/survey/2026-07-14-search-query-log.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-14-search-query-log.jsonl` | `506ce01d673674c54d83ee78d097255cf71d9520` |
+| `wiki/survey/2026-07-15-sf-queries.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-15-sf-queries.jsonl` | `9e143e5b0054fbba9ddd65a835880bb4b66bad6d` |
+| `wiki/survey/2026-07-15-sf-seed-manifest.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-15-sf-seed-manifest.jsonl` | `7cf761347223e89c1598c2bb731bbb3b7801bc53` |
+| `wiki/survey/2026-07-16-sf-t1-routes-v2.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-16-sf-t1-routes-v2.jsonl` | `8e0a5d3ebcee32ee700d1a94d02493a1d5367b97` |
+| `wiki/survey/2026-07-17-sf-canon.json` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-17-sf-canon.json` | `7f5ce76a3dec64bf5f9982236f02b8493e71dee0` |
+| `wiki/survey/2026-07-17-sf-t1-routes-v3.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-17-sf-t1-routes-v3.jsonl` | `dae803b277433676499d035fce712d72458f705a` |
+| `wiki/survey/2026-07-19-sf-independent-counterexamples-v3.json` | `wiki/archive/working/survey-pipeline-2026-07/2026-07-19-sf-independent-counterexamples-v3.json` | `9bdf7026d11930f69c4c6f6affad326777c5dc8d` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/build_and_validate.py` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/build_and_validate.py` | `fc88e39fce6eb7ddd460321465935261b9e6c944` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/claim_evidence.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/claim_evidence.jsonl` | `4db788a36f224c189a7c8c0008fe398c46667c8a` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/dedup_report.json` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/dedup_report.json` | `456ddcefd12bd0d216b5596c3ae379d7b882f596` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/flow_report.yaml` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/flow_report.yaml` | `12deafcc24fd203a58c631eb0b5e37e4ed39740c` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/manifest.yaml` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/manifest.yaml` | `39fed2546eebf5c1c27144f8c219bd360136ff4d` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/papers.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/papers.jsonl` | `f132f0df78c0756c78769614cc5bba09fc3e80cf` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/round2_new_targets.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/round2_new_targets.jsonl` | `ed180f0b477f2bd5a0cedff354eca65c532fcfb9` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/search_events.jsonl` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/search_events.jsonl` | `d8da5ff293b471155ba0db6d9475df9062fe9b9b` |
+| `wiki/survey/replay/SURVEY-RESP-2026-07-14-01/validation_report.txt` | `wiki/archive/working/survey-pipeline-2026-07/replay/SURVEY-RESP-2026-07-14-01/validation_report.txt` | `5368d6fb20ec7479689a3849c0c1bd846248ab3b` |
+| `wiki/survey/2026-07-15-system-first-survey-protocol-v1.md` | `wiki/archive/working/system-first-stage1a/2026-07-15-system-first-survey-protocol-v1.md` | `830eaee192ae05ff4435ee0e0d6c9a93d62bdc44` |
+| `wiki/survey/2026-07-19-sf-bibliography-v1.md` | `wiki/archive/working/system-first-stage1a/2026-07-19-sf-bibliography-v1.md` | `7cf5ca6e3dfff693d4e11e80c632f11d75e0a402` |
+| `wiki/survey/2026-07-15-sf-protocol-amendment-1.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-15-sf-protocol-amendment-1.md` | `cfbf1ac326a81ad0ccaf867d49f36bf7892fbc30` |
+| `wiki/survey/2026-07-16-sf-protocol-amendment-3.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-16-sf-protocol-amendment-3.md` | `061c1437b4898270a126f04a0c54664eb0fe7e2e` |
+| `wiki/survey/2026-07-16-sf-protocol-amendment-4.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-16-sf-protocol-amendment-4.md` | `f44202048c2489442fba2c3a64a96ba64c210fff` |
+| `wiki/survey/2026-07-16-sf-protocol-amendment-5.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-16-sf-protocol-amendment-5.md` | `f4e118051ee73069033c5a9d4ba581b5d5fccf59` |
+| `wiki/survey/2026-07-17-sf-protocol-amendment-6.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-17-sf-protocol-amendment-6.md` | `d2a0b1e8870bf9f9add2d39d0f8068d4f9ddaeea` |
+| `wiki/survey/2026-07-17-sf-protocol-amendment-7.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-17-sf-protocol-amendment-7.md` | `fe26d33aacc453eabeda199f9a0e62538d3a1e4e` |
+| `wiki/survey/2026-07-18-sf-protocol-amendment-8.md` | `wiki/archive/working/system-first-stage1a/amendments/2026-07-18-sf-protocol-amendment-8.md` | `b2bda863f00f83991a7ade97876ad9dab5510746` |
+| `wiki/survey/current/README.md` | `wiki/archive/working/system-first-survey-current/README.md` | `d92a262696f9f9b5f4d6f4ef4f8b59d67ea4a9d2` |
+| `wiki/survey/current/bibliography.md` | `wiki/archive/working/system-first-survey-current/bibliography.md` | `3be3c1e7e969427a156cf302e11d5d77ec2f06b6` |
+| `wiki/survey/current/core-prior-routing.md` | `wiki/archive/working/system-first-survey-current/core-prior-routing.md` | `71ae98d576456b38cc450f404f3e77b2ac3466a9` |
+| `wiki/survey/current/data/absence-evidence-adjudication-v3.json` | `wiki/archive/working/system-first-survey-current/data/absence-evidence-adjudication-v3.json` | `372cb60c3936cdf9ba40452d749fb31c88b735fc` |
+| `wiki/survey/current/data/existing-corpus-disposition-v1.json` | `wiki/archive/working/system-first-survey-current/data/existing-corpus-disposition-v1.json` | `5194e9d33e421dcd8ba4c068fb08d6299fb18df3` |
+| `wiki/survey/current/data/identity-taxonomy-v6.json` | `wiki/archive/working/system-first-survey-current/data/identity-taxonomy-v6.json` | `8f5772a89afdb13e5fdfefc4b0c67c957bf45804` |
+| `wiki/survey/current/data/known-item-coding-v7.json` | `wiki/archive/working/system-first-survey-current/data/known-item-coding-v7.json` | `b7ad0cf9c4f53f153d852a4d95002c461713a245` |
+| `wiki/survey/current/data/modality-specificity-calibration-v1.json` | `wiki/archive/working/system-first-survey-current/data/modality-specificity-calibration-v1.json` | `c7ec19c3384daafeab9da0db9d13ee853dbb2a77` |
+| `wiki/survey/current/data/negative-evidence-semantic-corrections-v2.json` | `wiki/archive/working/system-first-survey-current/data/negative-evidence-semantic-corrections-v2.json` | `a5c963098cd8a7ef8a8e60febd9a231da45fa7e0` |
+| `wiki/survey/current/data/pdf-extractor-environment-v1.json` | `wiki/archive/working/system-first-survey-current/data/pdf-extractor-environment-v1.json` | `0bfe53b1a72268e315630c4050809c1bb9e10987` |
+| `wiki/survey/current/data/proposal-source-manifest-v1.json` | `wiki/archive/working/system-first-survey-current/data/proposal-source-manifest-v1.json` | `3d843b1317f0e83dba04c49f998c0e97024b74d0` |
+| `wiki/survey/current/data/reviewer-bibliography-selection-v1.json` | `wiki/archive/working/system-first-survey-current/data/reviewer-bibliography-selection-v1.json` | `177facbdb8bb703464b701b8fa822752004decb5` |
+| `wiki/survey/current/data/reviewer-known-items-v3.json` | `wiki/archive/working/system-first-survey-current/data/reviewer-known-items-v3.json` | `b7f0936492114fa75a28d48324baa1ce196b4c93` |
+| `wiki/survey/current/data/schema-v3-adjudication.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3-adjudication.json` | `805f279c549ac2e24cfd8994d5aa19e560d355da` |
+| `wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2026.findings-acl.1243.sidecar.json` | `e7afc4822ec625d779bfbecd90d312daf5c73e2d` |
+| `wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2026.findings-acl.1724.sidecar.json` | `130657b44f11553e57c36fbb56bca43a1ef25611` |
+| `wiki/survey/current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2026.findings-acl.511.sidecar.json` | `a509f76ce8a44b484d80f104454cf08b2a80a5bd` |
+| `wiki/survey/current/data/schema-v3/sidecars/2602.16485.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2602.16485.sidecar.json` | `98f12c7ef9d4be5cd4055cbe6196641308ebcae8` |
+| `wiki/survey/current/data/schema-v3/sidecars/2604.16529.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2604.16529.sidecar.json` | `c68220134248881b34346b2a221f6995569590f9` |
+| `wiki/survey/current/data/schema-v3/sidecars/2605.08083.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2605.08083.sidecar.json` | `9c820b8ce07e1ddf4d74a3ea8bf140923ba538a5` |
+| `wiki/survey/current/data/schema-v3/sidecars/2606.01667.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2606.01667.sidecar.json` | `422aee43af4ca7b6f7d6fd94eb58dbc65b14e98e` |
+| `wiki/survey/current/data/schema-v3/sidecars/2606.03054.sidecar.json` | `wiki/archive/working/system-first-survey-current/data/schema-v3/sidecars/2606.03054.sidecar.json` | `3381a4bc098b671734c41545614880309f2309ac` |
+| `wiki/survey/current/data/stage1b-direct-control-basis-v2.json` | `wiki/archive/working/system-first-survey-current/data/stage1b-direct-control-basis-v2.json` | `a358a5d23dfb9d230942bab0fb935c9838334775` |
+| `wiki/survey/current/data/stage1b-eligible-bundle-reconciliation-v1.json` | `wiki/archive/working/system-first-survey-current/data/stage1b-eligible-bundle-reconciliation-v1.json` | `520ce12cb1f8631fd390a99f1b9fc401dfa02ae7` |
+| `wiki/survey/current/data/stage1b-known-prior-reconciliation-v1.json` | `wiki/archive/working/system-first-survey-current/data/stage1b-known-prior-reconciliation-v1.json` | `e687fa2940c80e9f54bd727ba976c429d235aa26` |
+| `wiki/survey/current/data/stage1b-speech-direct-prior-supplement-v3.json` | `wiki/archive/working/system-first-survey-current/data/stage1b-speech-direct-prior-supplement-v3.json` | `592150d6d72d68f78c710362b287ccb572488c2b` |
+| `wiki/survey/current/data/stage1b-speech-omni-prior-coverage-v1.json` | `wiki/archive/working/system-first-survey-current/data/stage1b-speech-omni-prior-coverage-v1.json` | `ef3ea52780817750543bc5d9e472cc856e212b44` |
+| `wiki/survey/current/data/stage1c-common-rubric-comparison-v1.json` | `wiki/archive/working/system-first-survey-current/data/stage1c-common-rubric-comparison-v1.json` | `07eaf9963940f37a589f0d2b147fd45399561d98` |
+| `wiki/survey/current/manifest.json` | `wiki/archive/working/system-first-survey-current/manifest.json` | `0e409444aa996272537946165def7d7175de9d45` |
+| `wiki/survey/current/mapping-methods-adaptation.md` | `wiki/archive/working/system-first-survey-current/mapping-methods-adaptation.md` | `d9910671e3372a56e71aa81c6f6f7c49e82dd052` |
+| `wiki/survey/current/modality-specificity-codebook.md` | `wiki/archive/working/system-first-survey-current/modality-specificity-codebook.md` | `e7b1b23eda9ab5fc6bd4f64a93a04dbe8da131a0` |
+| `wiki/survey/current/protocol.md` | `wiki/archive/working/system-first-survey-current/protocol.md` | `827fe8a568f645baaf35cc12e0c91e8166a26b86` |
+| `wiki/survey/current/research-directions.md` | `wiki/archive/working/system-first-survey-current/research-directions.md` | `09b5002d29af583a09215b242d7c394070c7d0b8` |
+| `wiki/survey/current/stage1b-transition-reference-appendix.md` | `wiki/archive/working/system-first-survey-current/stage1b-transition-reference-appendix.md` | `d9b391c5a92151f898bee757453e7048281476bb` |
+| `wiki/survey/current/status.md` | `wiki/archive/working/system-first-survey-current/status.md` | `5de229fae5a6f120a5c38a5b48fb9176b0e4217f` |
+| `wiki/survey/current/tables/opening-guarantees.md` | `wiki/archive/working/system-first-survey-current/tables/opening-guarantees.md` | `83ec6a807852bd94f5986d62d51d189a10139576` |
+| `wiki/survey/current/tables/stage1b-mapping-release.md` | `wiki/archive/working/system-first-survey-current/tables/stage1b-mapping-release.md` | `ab06f0616621c65572cf04ea3ec35f7515eeac9d` |
+| `wiki/survey/current/tables/stage1c-common-rubric-comparison.md` | `wiki/archive/working/system-first-survey-current/tables/stage1c-common-rubric-comparison.md` | `ab5babac0d4a07b849d88a97b6743ed84639a3ca` |
+| `wiki/survey/current/tables/stage1c-eligible-inputs.md` | `wiki/archive/working/system-first-survey-current/tables/stage1c-eligible-inputs.md` | `d89a7fd4dfc7943a33ae893f835fe20b48733bcb` |
+| `wiki/survey/current/data/official-metadata/acl-2025.emnlp-industry.75.bib` | `wiki/survey/registry/official-metadata/acl-2025.emnlp-industry.75.bib` | `dad26956f15138a25226c9700ae6920e1eab1d13` |
+| `wiki/survey/current/data/official-metadata/acl-2025.emnlp-main.931.bib` | `wiki/survey/registry/official-metadata/acl-2025.emnlp-main.931.bib` | `3d739c03fe26b4c195f27c40bd756004a6773d6c` |
+| `wiki/survey/current/data/official-metadata/acl-2025.nllp-1.15.bib` | `wiki/survey/registry/official-metadata/acl-2025.nllp-1.15.bib` | `fe8a7788d576126853f8efa90ba5d24f4220454c` |
+| `wiki/survey/current/data/official-metadata/acl-2026.acl-long.211.bib` | `wiki/survey/registry/official-metadata/acl-2026.acl-long.211.bib` | `e076fe949616212ce25afa25eeb34d4550fa6200` |
+| `wiki/survey/current/data/official-metadata/acl-2026.acl-long.288.bib` | `wiki/survey/registry/official-metadata/acl-2026.acl-long.288.bib` | `a92230d276598d74568278b6e959b792de3b088d` |
+| `wiki/survey/current/data/official-metadata/acl-2026.acl-long.6.bib` | `wiki/survey/registry/official-metadata/acl-2026.acl-long.6.bib` | `99f400a2cbded6f65f0465481014140ca689e313` |
+| `wiki/survey/current/data/official-metadata/acl-2026.acl-long.697.bib` | `wiki/survey/registry/official-metadata/acl-2026.acl-long.697.bib` | `ba200b742f317906bcce74c7fe9039c001528896` |
+| `wiki/survey/current/data/official-metadata/acl-2026.eacl-short.50.bib` | `wiki/survey/registry/official-metadata/acl-2026.eacl-short.50.bib` | `f17242c46cb63adc09d254439a1eb5dba39ada98` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.1156.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.1156.bib` | `6f852d814929d4458e8c52355b21d0a0350e467e` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.1243.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.1243.bib` | `5ec67fd79e4d59b461d8e668df94e52ef745a83e` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.1724.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.1724.bib` | `288eccd36a94abdefb5a986cfab3f9794531cd72` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.21.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.21.bib` | `4a136ee86b552bd6fc29a10062660a5ff5ad38af` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.419.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.419.bib` | `47a2bcd19203e9724ea3f2c947f3f21dd6226fc3` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.511.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.511.bib` | `824ffc0339d6da89161bb76c73acacb49cc873a6` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.651.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.651.bib` | `64b5c0affcd1bff5a0d68f78936fffc00075d412` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-acl.95.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-acl.95.bib` | `227da3682903c719e39b3211a8c06fa233d895a0` |
+| `wiki/survey/current/data/official-metadata/acl-2026.findings-eacl.153.bib` | `wiki/survey/registry/official-metadata/acl-2026.findings-eacl.153.bib` | `02e3a243279b15ab289b131057ec694f5fb44b90` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2303.11381.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2303.11381.html` | `6b504c76a64036b633caa999fbf6db705f23623e` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2304.12995.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2304.12995.html` | `c594e2815ae75369df241d791b96c5d066bb46b0` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2305.13738.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2305.13738.html` | `136a8c26c0416134a4a9c4933fb3992172674571` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2503.16492.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2503.16492.html` | `e0c58c48cce17ba20b7ec5b48eb045d38fc7ccbc` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2506.23049.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2506.23049.html` | `33b4d99fac095ec071eab304dbd0c625eec55ba7` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2509.16971.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2509.16971.html` | `464b379cd352cfb8b89f36153563bc361e7ff68e` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2509.21749.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2509.21749.html` | `7b7e59d3d2db59d5845e521865321100d7f93a52` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2510.06223.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2510.06223.html` | `e4142dc9f2ae839e8c598183a4d00522ec279770` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2510.11454.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2510.11454.html` | `d222a4ad68291b07c50ad9dafb6778465315116e` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2512.16978.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2512.16978.html` | `e51d42e6268587bfd821b01245eaa074ab2d0c40` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2512.23646.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2512.23646.html` | `a2fd3cc5d631b0c26b9ab015b7634b9c968a0d27` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2601.20230.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2601.20230.html` | `57672e7385e1d1f7c2224a3dfc306f7039789083` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2602.10656.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2602.10656.html` | `90c4249f087e5f8455e2bbe5884acdab520a34ab` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2603.02206.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2603.02206.html` | `7ab91b279a1cfdc756d9ad3c194927c891f07a1d` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2603.05413.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2603.05413.html` | `319b4891f4b7887ea4a75ebd13d397beaef031fd` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2603.21013.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2603.21013.html` | `9f2ed24a92ecfefd1da8d26a98ea26bac47fb3fa` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2604.09121.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2604.09121.html` | `5ff1f12f49faf9688fc104a4c7d910fb058777ce` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2605.08762.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2605.08762.html` | `107617beb82be7e7cee034207d8187937fdc826d` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2605.13841.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2605.13841.html` | `68c17d645f79f04522d890d515d49222887226c8` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2605.29430.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2605.29430.html` | `02d55343ce59b48dc568db5f87adaf5edabfd1eb` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2606.07264.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2606.07264.html` | `2c5594fa571adb68482732738142d6a04c4591e2` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2606.19595.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2606.19595.html` | `06bb3a2bdcf26a0a9dbda8c219bec02d31048ed3` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2607.07985.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2607.07985.html` | `3c288b46c95d1e08a078057ca1b3b20a5caed581` |
+| `wiki/survey/current/data/official-metadata/arxiv-abs-2607.16610.html` | `wiki/survey/registry/official-metadata/arxiv-abs-2607.16610.html` | `7ec619e33324b3cde1e6af6da3fe9982235fc297` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2306.12577.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2306.12577.xml` | `f7f61e85b296cd46fa4b1ae9524cc5128fc0706d` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2310.04406.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2310.04406.xml` | `9434537fdf44d1f6c5a459c39a6b77c2df8b9ed5` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2406.12045.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2406.12045.xml` | `983ea681103fb41d0d210c3491b9b28a2cf0456a` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2407.09886.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2407.09886.xml` | `d0b5e43a9ad0f280d894f4cc9b882afc625ecd11` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2410.21485.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2410.21485.xml` | `08f2cd881163038f63e45e1e4dfca8e1bd1c3975` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2411.00321.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2411.00321.xml` | `ee7889691279b5f374289aa2b479b2f4737fa2e4` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2502.04128.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2502.04128.xml` | `b2b22c57b3f1aac047aab5700e520297fbdf47bd` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2502.19328.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2502.19328.xml` | `09223cc2ffc9bcd2d96e3769ec9111b772fcbb55` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2502.20379.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2502.20379.xml` | `8cfddf335302d29b59fa08c81c4ff8c38b7d7292` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2504.01931.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2504.01931.xml` | `38f1e896f0871dad6352ca13cb121a39bcec8fca` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2505.09558.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2505.09558.xml` | `603783261ca84cf2194060037fa39bdd5fa6bddc` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2506.05984.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2506.05984.xml` | `f59b6f17329877783d9b4f3abc7812f020b70495` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2506.12928.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2506.12928.xml` | `20f02202ad88802ba1fb892f56d7c66d32db73a2` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2507.12705.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2507.12705.xml` | `ca655015d70c7ea75090dc050086750509f0b8bb` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2508.00890.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2508.00890.xml` | `1e23cdcf918b429184dae1915eb2f68fa7b97cba` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2508.16665.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2508.16665.xml` | `bcbbdb788ad5eeb57cfc17f3d782aa8f1cb28fb2` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2508.21787.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2508.21787.xml` | `e2c756ba9b2f31bb618ab2bf79c16e8f67375a59` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2509.19676.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2509.19676.xml` | `e49200d1938b74d3f3f6c28b72020f3fbc47b737` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2509.25604.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2509.25604.xml` | `2725f2bbca754e785da3aee98e6510a1220d3286` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2509.25845.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2509.25845.xml` | `b05ff36dbd00a06cd677550aa014758918465137` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.00743.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.00743.xml` | `2b59605cd9d3d9ecf7af6b37a9bd70d51f6be39b` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.01123.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.01123.xml` | `c9334a45f5fc04f012bdf3bdc516918aadcac6d2` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.02995.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.02995.xml` | `976f323f2194a3d972929458a52f8ebc2339b41c` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.07978.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.07978.xml` | `8928018c0b81506e9cb5f6e40cc478f50796805e` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.08191.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.08191.xml` | `5dc87e56a3932012aaf674a8afd239803fb3f975` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.14664.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.14664.xml` | `a370ad17e57ea36628fa4777d097af585d7b0315` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.18982.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.18982.xml` | `d7a2278290abf35e21d9834128eaa97bdd9a92c5` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2510.23451.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2510.23451.xml` | `8349634d2960c342dc467bb066300fec347d9e62` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2511.02834.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2511.02834.xml` | `7570646c10d1961d31accc694ed834a3c85a8ff5` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2511.07931.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2511.07931.xml` | `d417a02f53610314b2ec43b257df7314332a33e8` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2512.10170.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2512.10170.xml` | `da2ffa82028d072ee35558135460602c1296ca0b` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2512.10403.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2512.10403.xml` | `43b8d7a1f138e386a0d539dcc9fce02b8c401c70` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2512.16899.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2512.16899.xml` | `5fb47abcd5e655fe670df7bac27d3df35bc9e20a` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2601.04029.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2601.04029.xml` | `b407ee8e3486b1802e993204249ad40ddb4e6ed9` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2601.18510.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2601.18510.xml` | `0605d87add7c5149d3d18d4731858b484e9959ba` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2601.22129.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2601.22129.xml` | `b129dc3be8908cea7953c05fc0f0a9fb040d27a3` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.00846.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.00846.xml` | `345b43f491da4b94498dbc955961f1743bc62443` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.03094.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.03094.xml` | `9af8bbd3ea8190ef5c6cfbc6a21c84bb378bc9ac` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.05570.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.05570.xml` | `23b7fbf65562d595d833c85922f3af05d9807208` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.12276.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.12276.xml` | `b4ac8f827ce16ec42b875c1528c9459c98674bf3` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.13685.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.13685.xml` | `59ff8a88046843d7d6235b60a8db49f9aec1ce79` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.13891.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.13891.xml` | `57e23a2c28dce24ee59d6558fb4d1bf456940673` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.18998.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.18998.xml` | `ce594cd45e02a1f22cefad8e01413bb0af889d25` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2602.22897.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2602.22897.xml` | `2bc69f4f9370e6867cea22df2a43b0db79038619` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.05231.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.05231.xml` | `e1f82f42031a663d1c48d419d6921b15fb465aff` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.09714.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.09714.xml` | `631fc5ea8ab5568794a3705270fbba3779e77e98` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.12520.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.12520.xml` | `8455f67bd3c7ad27a6a5edc869209e9ed8ebe2cf` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.13686.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.13686.xml` | `d571814612b148626cd1f7dd0e2e397d239e295a` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.14889.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.14889.xml` | `3ab38e7dfe828f4605d1f00bd43ba81fc3cb7c73` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2603.19615.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2603.19615.xml` | `c05ea9e138d3ab13be6bf8bcb8373b6a4600a624` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.04847.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.04847.xml` | `fc01098944eb6c254a5ecc1a85b455cbf7a8cb9b` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.15710.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.15710.xml` | `815d0ebc9f6ad0e5bbfe74d7f77963f055e37102` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.16453.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.16453.xml` | `16d278551ba7b91be8346979a63167739e4ed8e6` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.16456.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.16456.xml` | `1ad6f1f8ed015b0b865fc5aef539a0ad77292336` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.22821.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.22821.xml` | `6dda046bbac9175a4448a24770ad70ffaeff9bc5` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.24278.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.24278.xml` | `a355e50dd6431a06c0679efe79703bf586a045d7` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2604.27233.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2604.27233.xml` | `7b7ab5ea8606e3eaac479f48043818fe4e864ca1` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.10344.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.10344.xml` | `ee022c2abebae8aff76167b792901dff2deee643` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.15104.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.15104.xml` | `b963b0be228c61498250b03b91c0eb70a7289593` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.22012.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.22012.xml` | `739868581e7f1b6645de06b68544637d3d5b8c49` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.23261.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.23261.xml` | `c71afd74ab12c47cfbe410b714e76b7ac33baa0e` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.28020.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.28020.xml` | `1eb279525c500eb18f3be8e313360976b9d413ce` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.28192.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.28192.xml` | `ce5bc8282520550e1116811167cb416373a9529f` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.28480.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.28480.xml` | `9860bbd61239dc19411ca61463a9731e8dbfe4bd` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2605.30256.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2605.30256.xml` | `af27d8bca41a5f9bdc55983245fe43958f51e38b` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.00579.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.00579.xml` | `ef7556cf972d3f0a437299895f33a1228ee85a78` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.03183.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.03183.xml` | `91d8290bfa79627c3d619f673daa8112453d7b87` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.11167.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.11167.xml` | `9ef3328bebaa33e09cb606be0fec24dcac34dba7` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.13598.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.13598.xml` | `2411071e1f68388ba355512235e2a2ec0b4e609a` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.15141.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.15141.xml` | `b97e6ef8ce891a6e5d9e3905a0ac08880deb64af` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.19341.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.19341.xml` | `1f966571b61fa4cbbd2d3f5f727d497f7d60a2ae` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2606.24648.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2606.24648.xml` | `06cb2e0ea053013c801ea2f0a89ebc8aea350043` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2607.05511.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2607.05511.xml` | `a2533d7c1cb74ef5c4b5736c3767aa9f083d62fa` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2607.07148.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2607.07148.xml` | `040c98d746aed56cb7f530238f3b30a6cd1f9c2f` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2607.09693.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2607.09693.xml` | `dbc1ffcbc3a03ec33a3b006994fdcee28175f1f6` |
+| `wiki/survey/current/data/official-metadata/arxiv-oai-2607.11433.xml` | `wiki/survey/registry/official-metadata/arxiv-oai-2607.11433.xml` | `0e53fa3e47f3a7b99d00c73e6d523a89be734db3` |
+| `wiki/survey/current/data/official-metadata/github-sierra-research--tau2-bench.json` | `wiki/survey/registry/official-metadata/github-sierra-research--tau2-bench.json` | `4bafb2ddded86ce439210dc626ba4687cf52f77f` |

@@ -6,14 +6,14 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "da81c88212dc9bd6cf1d8b75d96b10b029db6ebb7e75a2819745d9b6e47a9c24"
+      "sha256": "06d171903c46a8484c8212e8104dfc5e348b82a9b8190d082a9ffdccb9d2bf29"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "fdd6f8704c13f7354f0b3379bf7a6067aefe0270e4a89afbe445ce85a5eea478"
+      "sha256": "c8e7cc0e4b43a17c638e3b78045b684aaaf1097e994591a02e892a6c7a611fe0"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,14 +27,14 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "3005cec57b80a98cc4de939a2da2debbadc128b65830259e5a83c8a540fb55c9"
+      "sha256": "d81362b36de233c4aea6d52d453fa4d0b91a89cb1715af235cca712545091812"
     },
     {
       "path": "wiki/AI-Collaboration.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "canonical AI document placement and lifecycle policy",
-      "sha256": "7410bfa3ea3d65063dff6fe0294e0c964277956c4b253cb9b253e2fdbb78f2c1"
+      "sha256": "b17a6a90bb370165e9cbdb4d2213841908d9958db55833a5ac42c307fc0b0d38"
     },
     {
       "path": "wiki/Experiment-Assets.md",
@@ -42,69 +42,6 @@
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
       "sha256": "0498eb74c3bbc33eb6b5fdb050da9a90ef60436c2b8e6463ccd1be9335cd8f97"
-    },
-    {
-      "path": "wiki/survey/current/README.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "current survey router",
-      "sha256": "c55be1d5bfcc7aaa7c07f4d9d060377030674e194a7b87e11941549cd32108ff"
-    },
-    {
-      "path": "wiki/survey/current/protocol.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "effective protocol v2",
-      "sha256": "b3c065e6bc64b81babce952d8002b0b4915d77f6b701052dcc610500d5954759"
-    },
-    {
-      "path": "wiki/survey/current/status.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "short current survey gate",
-      "sha256": "188183ec6b6810a8e5c76f9a9d78d461e97520b3d8f25bb9e4e549b68d14ab44"
-    },
-    {
-      "path": "wiki/survey/current/manifest.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "machine current-survey asset router",
-      "sha256": "392dca3727577e82bda52ba3b41590e8504500716a1a60356ac2bd4de39e42d8"
-    },
-    {
-      "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "current identity taxonomy",
-      "sha256": "976d46358263af6d0bd9f9d48a249aa23e39552aa66d5df501a1ce118cce8893"
-    },
-    {
-      "path": "wiki/survey/current/data/known-item-coding-v7.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "generated schema-v3 known-item coding",
-      "sha256": "c122f6c37434302457f9f46531cbfb317e62548f9734fc3d254b239a69d1d1d6"
-    },
-    {
-      "path": "wiki/survey/current/data/schema-v3-adjudication.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "independent schema-v3 adjudication record",
-      "sha256": "3e08d7a3c1c6db53a31ad0e023f9957e8f1b604a0e3c4e91b1b525c7400acd5f"
-    },
-    {
-      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
-      "class": "HOT",
-      "load_policy": "targeted",
-      "purpose": "frozen 65-query bytes",
-      "sha256": "645b6ffde763d554f3a7771686f054c00fb6c84a949d442a2d4f43ed885c9aab"
-    },
-    {
-      "path": "wiki/survey/current/tables/opening-guarantees.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "generated current opening guarantees",
-      "sha256": "8c4088fdbb8ada60f24e953e112122f01539ce8afb94a24a84640585dfc9e6ef"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
@@ -153,48 +90,11 @@
     "CLAUDE.md": 12288,
     "wiki/Per-Work-Status.md": 8192,
     "wiki/Research-Objective.md": 5120,
-    "wiki/survey/README.md": 4096,
-    "wiki/survey/current/README.md": 4096
+    "wiki/survey/README.md": 4096
   },
   "legacy_cold_paths": [
     {
       "path": "wiki/2026-07-18-inherited-prior-exposure-union.md",
-      "class": "REGISTRY_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-15-sf-protocol-amendment-1.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-15-system-first-survey-protocol-v1.md",
-      "class": "REGISTRY_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-3.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-4.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-16-sf-protocol-amendment-5.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-17-sf-protocol-amendment-6.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-17-sf-protocol-amendment-7.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-18-sf-protocol-amendment-8.md",
-      "class": "AUDIT_LEGACY"
-    },
-    {
-      "path": "wiki/survey/2026-07-19-sf-bibliography-v1.md",
       "class": "REGISTRY_LEGACY"
     }
   ],

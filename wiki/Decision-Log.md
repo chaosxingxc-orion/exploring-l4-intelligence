@@ -3496,3 +3496,25 @@ Rare5k（`derive_rare5k.py`+lock reconstruction 条目）。③程序级可见�
 **Consequences：** 不新建任何档案文件；实验台账行格式自 R2 首条正式记录起补 split-hash 与消耗
 标记列。
 **Supersedes：** 细化本日「运行节奏」条目的数据职能部分。失效条件：owner 调整公共职能表。
+
+**2026-08-03 · Stage‑1 调研包整体封存：CURRENT 类退役、主门禁退役、横切保护移交：**
+**Context：** owner 裁定调研包「整体清理掉」；独立批判代理复核出 14 项风险（三条 KEEP→DELETE
+断边、campaign 索引硬编码载体、搬运合法性、.gitattributes 行尾陷阱、文献收件地址在归档区等），
+执行方案按其修订。
+**Decision：** ①`wiki/survey/current/`（158 件）与门禁绑定散件保 blob 归档至
+`wiki/archive/working/system-first-survey-current/` 与同级 campaign 目录；official-metadata 库
+（118 件+回执）迁入 REGISTRY 文献公共层 `wiki/survey/registry/`。②主门禁
+`sf_current_package_check` 及 current 层引擎群退役（10 模块+7 测试）；保留审计不可变检查、
+声明式合同引擎、文献抓取管线与 bibliography 库件。③横切保护移交新件：
+`scripts/checks/code_graph_check.py`（受信代码图三方相等+未跟踪代码禁令+软链拒绝）与
+`scripts/checks/atomic_write.py`。④**正典澄清（安全移动门语义）**：不可变审计记录中的
+`wiki/survey/current/...` 路径与 spec 引用是**溯源指针而非活指针**，由封存 digest 的强规格映射表
+（旧路径|新路径|blob）与检查器内的前缀重定位（`CURRENT_LAYER_RELOCATION`）解析，不构成
+inbound-reference 搬运阻断；commit-pinned `git show <sha>:<path>` 取回不受影响。⑤七类分类法
+降为六类：CURRENT 类成员归零后从分类器、政策常量与本表移除；ARCHIVE 准入判据由「被 CURRENT
+取代」改为「**闭合**（完成、被取代或废弃）且无活跃依赖」。
+**Consequences：** 伞仓门禁=code_graph/study_workspace/ai_context_surface/build_manifest --check
+四道；ai-context 活跃条目 20→11；oracle 测试面同 commit 重钉（surface 120 绿、全仓 199 绿、审计
+111 件不可变 PASS）；campaign 索引生成器随 stage1a 战役闭合退役，既有 INDEX 冻结为史料。
+**Supersedes：** 「sf_current_package_check 是伞仓真门禁」的表述与 CURRENT 类的一切现行语义。
+失效条件：owner 重启程序级调研包制度。

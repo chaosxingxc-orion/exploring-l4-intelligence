@@ -67,7 +67,6 @@ HOT_FILES = frozenset(
         "wiki/_Footer.md",
         "wiki/_Sidebar.md",
         "wiki/audit/system-first-stage1a/INDEX.md",
-        "wiki/survey/2026-07-15-sf-queries.jsonl",
         "wiki/survey/README.md",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
         "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.nt.json",
@@ -127,6 +126,23 @@ AUDIT_ITERATION_KEYS = {
     "effective_spec_sha256",
 }
 EFFECTIVE_PROTOCOL_PATH = "wiki/survey/current/protocol.md"
+# The Stage-1 survey package closed on 2026-08-03: the protocol carrier moved
+# to the archive with its bytes preserved. Immutable audit records keep the
+# historical spec id above; live existence/byte checks resolve through this
+# prefix relocation.
+CURRENT_LAYER_RELOCATION = (
+    "wiki/survey/current/",
+    "wiki/archive/working/system-first-survey-current/",
+)
+
+
+def resolve_effective_spec(spec: str) -> str:
+    """Map a historically recorded current-layer spec path to its archive home."""
+
+    old_prefix, new_prefix = CURRENT_LAYER_RELOCATION
+    if spec.startswith(old_prefix):
+        return new_prefix + spec[len(old_prefix) :]
+    return spec
 CONSOLIDATION_RECEIPT_SCHEMA = "ai-context-consolidation-receipt-v1"
 CONSOLIDATION_RECEIPT_KEYS = {
     "schema",
@@ -371,8 +387,6 @@ def classify_path(path, legacy_cold_paths):
     legacy = _legacy_map(legacy_cold_paths)
     if canonical in HOT_FILES:
         return "HOT"
-    if canonical.startswith("wiki/survey/current/"):
-        return "CURRENT"
     if canonical.startswith("wiki/survey/registry/") or canonical.startswith(
         "wiki/survey/sidecars/"
     ):
@@ -506,7 +520,6 @@ POLICY_TABLE_HEADERS = (
 )
 POLICY_ROLE_ORDER = (
     "HOT",
-    "CURRENT",
     "REGISTRY",
     "AUDIT",
     "ARCHIVE",
@@ -527,14 +540,6 @@ POLICY_ROLE_SEMANTICS = {
         ("当前事实", "supersede-in-place"),
         ("owner 裁决", "当前阶段", "阻塞项"),
         ("原位替换", "冷索引", "不得日期版本化"),
-    ),
-    "CURRENT": (
-        ("wiki/survey/current/",),
-        ("campaign",),
-        ("否", "按任务定向"),
-        ("当前有效工作规范", "稳定文件名"),
-        ("当前可执行合同",),
-        ("新版原位取代", "ARCHIVE"),
     ),
     "REGISTRY": (
         ("wiki/survey/registry/", "wiki/survey/sidecars/"),
@@ -557,7 +562,7 @@ POLICY_ROLE_SEMANTICS = {
         ("历史", "复现"),
         ("否",),
         ("immutable",),
-        ("CURRENT 取代", "不再有活跃依赖"),
+        ("闭合", "不再有活跃依赖"),
         ("永久冷存", "不回迁"),
     ),
     "WORKBENCH": (
@@ -566,7 +571,7 @@ POLICY_ROLE_SEMANTICS = {
         ("否",),
         ("可变工作知识", "不得承载完成声明"),
         ("探索", "未被接受"),
-        ("整编进 CURRENT/REGISTRY", "归档", "scratch 不提交"),
+        ("整编进 HOT/REGISTRY", "归档", "scratch 不提交"),
     ),
     "Engineering spec": (
         ("docs/superpowers/specs/",),
@@ -655,8 +660,13 @@ def validate_collaboration_policy(text: str) -> list[str]:
         line for line in section_match.group(1).splitlines() if line.strip().startswith("|")
     ]
     parsed = [_markdown_table_cells(line) for line in table_lines]
-    if len(parsed) != 15 or any(row is None for row in parsed):
-        failures.append(_policy_invalid("§2 must contain one header, divider, and 13 rows"))
+    if len(parsed) != len(POLICY_ROLE_ORDER) + 2 or any(row is None for row in parsed):
+        failures.append(
+            _policy_invalid(
+                "§2 must contain one header, divider, and "
+                f"{len(POLICY_ROLE_ORDER)} rows"
+            )
+        )
     else:
         header = tuple(parsed[0])
         if header != POLICY_TABLE_HEADERS:
@@ -1367,7 +1377,7 @@ def validate_audit_epoch_state(
                 _failure("consolidation-epoch-invalid", f"{path}: spec binding fields")
             )
             continue
-        if effective_spec not in tracked:
+        if resolve_effective_spec(effective_spec) not in tracked:
             failures.append(
                 _failure(
                     "consolidation-epoch-invalid",
@@ -1376,7 +1386,7 @@ def validate_audit_epoch_state(
             )
             continue
         try:
-            spec_raw = read_bytes(effective_spec)
+            spec_raw = read_bytes(resolve_effective_spec(effective_spec))
         except Exception as exc:
             failures.append(
                 _failure("consolidation-epoch-invalid", f"{effective_spec}: {exc}")
@@ -1501,21 +1511,17 @@ def validate_audit_epoch_state(
                 )
             )
             continue
-        active = manifest.get("active_entries") if isinstance(manifest, dict) else None
-        matching = (
-            [entry for entry in active if isinstance(entry, dict) and entry.get("path") == EFFECTIVE_PROTOCOL_PATH]
-            if isinstance(active, list)
-            else []
-        )
+        resolved_spec = resolve_effective_spec(EFFECTIVE_PROTOCOL_PATH)
+        spec_raw = read_bytes(resolved_spec)
         if (
-            len(matching) != 1
-            or matching[0].get("class") != "CURRENT"
-            or matching[0].get("sha256") != receipt.get("effective_spec_sha256")
+            not isinstance(spec_raw, bytes)
+            or hashlib.sha256(spec_raw).hexdigest()
+            != receipt.get("effective_spec_sha256")
         ):
             failures.append(
                 _failure(
                     "consolidation-epoch-invalid",
-                    f"{campaign}/epoch-{highest}: current manifest protocol binding",
+                    f"{campaign}/epoch-{highest}: archived protocol binding",
                 )
             )
 
@@ -1582,15 +1588,16 @@ def _validate_numbered_audit_iteration(
     except ContextSurfaceError as exc:
         failures.append(_failure("consolidation-epoch-invalid", str(exc)))
         return
-    if not effective_spec.startswith("wiki/survey/current/") or effective_spec not in tracked:
+    resolved_spec = resolve_effective_spec(effective_spec)
+    if not effective_spec.startswith("wiki/survey/current/") or resolved_spec not in tracked:
         failures.append(
             _failure(
                 "consolidation-epoch-invalid",
-                f"{receipt_path}: effective spec must be tracked CURRENT",
+                f"{receipt_path}: effective spec must resolve to a tracked carrier",
             )
         )
         return
-    spec_raw = read_repo_path(effective_spec, "consolidation-effective-spec-missing")
+    spec_raw = read_repo_path(resolved_spec, "consolidation-effective-spec-missing")
     if spec_raw is None:
         failures.append(_failure("consolidation-epoch-invalid", effective_spec))
         return
@@ -1850,7 +1857,7 @@ def evaluate_manifest(repo, manifest, tracked_paths):
                 )
             elif ordinal >= 4:
                 failures.append(_failure("unconsolidated-amendment-forbidden", path))
-        if path_class not in {"HOT", "CURRENT"} or not path.lower().endswith(".md"):
+        if path_class != "HOT" or not path.lower().endswith(".md"):
             continue
         raw = read_repo_path(path, "persistent-path-missing")
         if raw is None:

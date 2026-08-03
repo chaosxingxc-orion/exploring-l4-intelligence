@@ -38,60 +38,6 @@
       "purpose": "study repository and experiment asset control plane"
     },
     {
-      "path": "wiki/survey/current/README.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "current survey router"
-    },
-    {
-      "path": "wiki/survey/current/protocol.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "effective protocol v2"
-    },
-    {
-      "path": "wiki/survey/current/status.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "short current survey gate"
-    },
-    {
-      "path": "wiki/survey/current/manifest.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "machine current-survey asset router"
-    },
-    {
-      "path": "wiki/survey/current/data/identity-taxonomy-v6.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "current identity taxonomy"
-    },
-    {
-      "path": "wiki/survey/current/data/known-item-coding-v7.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "generated schema-v3 known-item coding"
-    },
-    {
-      "path": "wiki/survey/current/data/schema-v3-adjudication.json",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "independent schema-v3 adjudication record"
-    },
-    {
-      "path": "wiki/survey/2026-07-15-sf-queries.jsonl",
-      "class": "HOT",
-      "load_policy": "targeted",
-      "purpose": "frozen 65-query bytes"
-    },
-    {
-      "path": "wiki/survey/current/tables/opening-guarantees.md",
-      "class": "CURRENT",
-      "load_policy": "targeted",
-      "purpose": "generated current opening guarantees"
-    },
-    {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
       "class": "HOT",
       "load_policy": "targeted",
@@ -127,7 +73,6 @@
     "CLAUDE.md": 12288,
     "wiki/Research-Objective.md": 5120,
     "wiki/Per-Work-Status.md": 8192,
-    "wiki/survey/README.md": 4096,
-    "wiki/survey/current/README.md": 4096
+    "wiki/survey/README.md": 4096
   }
 }

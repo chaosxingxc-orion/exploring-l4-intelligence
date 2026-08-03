@@ -61,8 +61,7 @@ Choose the document role before creating the file:
 
 | New material | Put it in |
 |---|---|
-| current survey protocol, status, table, schema, or manifest | `wiki/survey/current/` |
-| long-lived paper census, claim, or evidence record | `wiki/survey/registry/` |
+| long-lived paper census, claim, evidence record, or official-metadata receipt | `wiki/survey/registry/` |
 | reviewer submission/report/response/sign-off | `wiki/audit/<campaign>/<round-id>/` |
 | new amendment/correction | `wiki/audit/<campaign>/epoch-<N>/<round-id>/<name>-<ordinal>.md` plus registered `epoch-<N>/consolidation-receipt.json`; the path-pinned B8 correction is the only unnumbered exception |
 | superseded, unregistered working artifact | `wiki/archive/<knowledge-layer>/<campaign>/` after the safe-move gate |

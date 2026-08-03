@@ -60,8 +60,8 @@
       "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
       "type": "must_contain",
       "targets": [
-        "wiki/survey/current/research-directions.md",
-        "wiki/survey/current/status.md"
+        "wiki/archive/working/system-first-survey-current/research-directions.md",
+        "wiki/archive/working/system-first-survey-current/status.md"
       ],
       "strings": [
         "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
@@ -73,7 +73,7 @@
       "id": "current_layer_marks_r2_formal_opening_and_execution_withheld",
       "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
       "type": "must_contain",
-      "target": "wiki/survey/current/research-directions.md",
+      "target": "wiki/archive/working/system-first-survey-current/research-directions.md",
       "strings": [
         "PASS_STAGE1C_FORMAL_OPENING",
         "Stage-2A 执行合同待签",

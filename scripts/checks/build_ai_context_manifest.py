@@ -160,27 +160,12 @@ def _legacy(path: str, path_class: str):
 EXACT_NAMED_LEGACY_EXCEPTIONS = ()
 
 
-# Shrunk 2026-07-29 to the two gate-bound survivors: sf_protocol_contract reads
-# the historicized protocol-v1 bytes (gate cmd 1) and sf_bibliography_generator
-# reads bibliography-v1 (gate cmd 3). Everything else went through the campaign
-# sunset ledger.
-RETAINED_LEGACY_PATHS = (
-    _legacy(
-        "wiki/survey/2026-07-15-system-first-survey-protocol-v1.md",
-        "REGISTRY_LEGACY",
-    ),
-    _legacy("wiki/survey/2026-07-19-sf-bibliography-v1.md", "REGISTRY_LEGACY"),
-    # The amendment files feed the amendment-coverage oracle in
-    # test_sf_query_compiler_profiles (gate cmd 1); retiring them is an
-    # engine-3 contract decision, not a cleanup decision.
-    _legacy("wiki/survey/2026-07-15-sf-protocol-amendment-1.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-16-sf-protocol-amendment-3.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-16-sf-protocol-amendment-4.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-16-sf-protocol-amendment-5.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-17-sf-protocol-amendment-6.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-17-sf-protocol-amendment-7.md", "AUDIT_LEGACY"),
-    _legacy("wiki/survey/2026-07-18-sf-protocol-amendment-8.md", "AUDIT_LEGACY"),
-)
+# Emptied 2026-08-03: the Stage-1 survey package closed. The two gate-bound
+# survivors (protocol-v1, bibliography-v1) and amendments 1-8 moved to
+# wiki/archive/working/system-first-stage1a/ with their consumers retired;
+# resolution notes live in the closure digest at
+# wiki/archive/working/system-first-survey-current/.
+RETAINED_LEGACY_PATHS = ()
 
 
 # Emptied 2026-07-29 (same ruling; registered files went through registry sunset rows).

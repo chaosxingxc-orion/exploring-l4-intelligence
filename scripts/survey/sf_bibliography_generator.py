@@ -15,12 +15,24 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[2]
-LEGACY_BIBLIOGRAPHY_PATH = ROOT / "wiki/survey/2026-07-19-sf-bibliography-v1.md"
-RECEIPTS_PATH = ROOT / "wiki/survey/current/data/official-metadata-receipts-v1.jsonl"
-RAW_DIR = ROOT / "wiki/survey/current/data/official-metadata"
-OUTPUT_PATH = ROOT / "wiki/survey/current/bibliography.md"
-UNION_PATH = ROOT / "wiki/survey/current/data/existing-corpus-disposition-v1.json"
-SELECTION_PATH = ROOT / "wiki/survey/current/data/reviewer-bibliography-selection-v1.json"
+# Live literature-commons surfaces (REGISTRY layer since the 2026-08-03
+# Stage-1 package closure): the metadata fetch pipeline reads/writes these.
+RECEIPTS_PATH = ROOT / "wiki/survey/registry/official-metadata-receipts-v1.jsonl"
+RAW_DIR = ROOT / "wiki/survey/registry/official-metadata"
+# Frozen generator inputs/output, archived with the Stage-1 survey package;
+# the bibliography CLI can still regenerate read-only against these bytes.
+LEGACY_BIBLIOGRAPHY_PATH = (
+    ROOT / "wiki/archive/working/system-first-stage1a/2026-07-19-sf-bibliography-v1.md"
+)
+OUTPUT_PATH = ROOT / "wiki/archive/working/system-first-survey-current/bibliography.md"
+UNION_PATH = (
+    ROOT
+    / "wiki/archive/working/system-first-survey-current/data/existing-corpus-disposition-v1.json"
+)
+SELECTION_PATH = (
+    ROOT
+    / "wiki/archive/working/system-first-survey-current/data/reviewer-bibliography-selection-v1.json"
+)
 
 CANONICAL_ROLES = {
     "DEEPLY_READ",
@@ -247,7 +259,9 @@ def legacy_bibliography_policies() -> dict[str, dict[str, Any]]:
             "reference_role": role,
             "chain": legacy_chain(section),
             "direct_neighbor": False,
-            "source_locator": f"{LEGACY_BIBLIOGRAPHY_PATH.relative_to(ROOT).as_posix()}:{line_number}",
+            # Receipts recorded this locator before the 2026-08-03 closure moved
+            # the file; keep the historical identity stable.
+            "source_locator": f"wiki/survey/2026-07-19-sf-bibliography-v1.md:{line_number}",
             "next_action": (
                 "Maintain the frozen D2 evidence binding."
                 if role == "DEEPLY_READ"

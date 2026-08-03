@@ -38,7 +38,7 @@ class RealContractsTests(unittest.TestCase):
 
     def test_discover_finds_exactly_the_three_migrated_contracts(self) -> None:
         self.assertEqual(
-            ["r1-problem-definition", "r2-problem-definition", "stage1c-common-rubric"],
+            ["r1-problem-definition", "r2-problem-definition"],
             engine.discover_contract_ids(),
         )
 

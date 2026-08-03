@@ -24,11 +24,10 @@
 | 类型 | 必须位置 | 谁读取 | 默认加载 | 权威性/可变性 | 进入条件 | 搬运/退出条件 |
 |---|---|---|---|---|---|---|
 | **HOT** | `AGENTS.md` / `CLAUDE.md`; `wiki/Research-Objective.md`; `wiki/Project-Thesis.md`; `wiki/Per-Work-Status.md`; `wiki/Experiment-Assets.md` | 每个新会话读前三项；Per-Work/实验资产按需 | 仅前三项 | 当前事实，supersede-in-place | owner 裁决、当前阶段、阻塞项、跨工作状态或实验资产权威边界必须立即可见 | 原位替换旧状态并留一个冷索引指针；不得日期版本化或堆限定语 |
-| **CURRENT** | `wiki/survey/current/`（router、effective protocol、status、manifest、`tables/`、`data/`） | 正在执行该 campaign 的人/AI | 否，按任务定向 | 当前有效工作规范；稳定文件名，版本写入内容 | 工作规则被接受为当前可执行合同 | 新版原位取代；旧版若未注册且不再被 manifest 引用则进 ARCHIVE |
 | **REGISTRY** | `wiki/survey/registry/`（历史兼容路径 `wiki/survey/sidecars/` 由 manifest 管理） | 做论文核验、编码或写作的人/AI | 否 | 长期 census/claim/证据登记；本体 append-only，判决显式 supersede | 论文 FETCH/精读、canonical ID 或承重 claim 被采用 | 跨 campaign 保留；不得复制进协议散文，失效判决带 token，不删记录 |
 | **AUDIT** | 普通 transaction：`wiki/audit/<campaign>/<round-id>/`；带 ordinal 的迭代修正：`wiki/audit/<campaign>/epoch-<N>/<round-id>/`; index=`wiki/audit/<campaign>/INDEX.md` | reviewer、审计者；AI 仅精确取证 | 否 | round 件与 `consolidation-receipt.json` 首个 commit 起 immutable；index append-only | reviewer submission/report/response/sign-off 直接写永久路径并登记；amendment/correction 走 epoch 状态机，唯一无编号例外是 path-pinned B8 correction | 已注册件永不移动/改写；退出活跃路由后仅由 campaign index 访问 |
-| **ARCHIVE** | `wiki/archive/<knowledge-layer>/<campaign>/` | 仅历史/复现问题 | 否 | 搬入后 immutable | 未注册工作件已被 CURRENT 取代且不再有活跃依赖 | 永久冷存；只有新的审计更正能解释其历史含义，不回迁成 current |
-| **WORKBENCH** | `wiki/survey/workbench/<campaign>/` | 当前探索者 | 否 | 可变工作知识，不得承载完成声明 | 问题尚在探索、规则未被接受 | 有用结论整编进 CURRENT/REGISTRY；保留 dossier 归档；无价值 scratch 不提交 |
+| **ARCHIVE** | `wiki/archive/<knowledge-layer>/<campaign>/` | 仅历史/复现问题 | 否 | 搬入后 immutable | 未注册工作件已**闭合**（完成、被取代或废弃）且不再有活跃依赖 | 永久冷存；只有新的审计更正能解释其历史含义，不回迁成 current |
+| **WORKBENCH** | `wiki/survey/workbench/<campaign>/` | 当前探索者 | 否 | 可变工作知识，不得承载完成声明 | 问题尚在探索、规则未被接受 | 有用结论整编进 HOT/REGISTRY；保留 dossier 归档；无价值 scratch 不提交 |
 | **Engineering spec** | `docs/superpowers/specs/` | 实现者与 reviewer | 否 | 有界工程设计，经 Git review 版本化 | 多步骤工程改动需要先锁范围/约束 | 完成后由 Git 历史保留；research current page 不依赖 plan/spec 才能解释 |
 | **Engineering plan** | `docs/superpowers/plans/` | 实现者 | 否 | 执行中 checkbox 可变 | 已批准设计需要分解执行 | 完成后停止作为 current research pointer；历史由 Git 保存 |
 | **Study repository registry** | `studies/README.md`; `studies/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；只登记已获准的语义命名独立 Git 仓 | 独立研究对象获得 `OWNER_GO_AND_EXECUTION_CONTRACT`，语义名称和执行合同冻结 | 生命周期变化原位更新；候选编号不得成为 repo 名，未获准/已在建仓前日落的候选不得建空仓 |
