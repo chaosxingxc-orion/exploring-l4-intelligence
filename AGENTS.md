@@ -30,8 +30,9 @@ Default load surface is exactly:
 
 Load `wiki/Per-Work-Status.md`, `wiki/Experiment-Assets.md`, and the literature commons
 (`wiki/survey/README.md`) only for a named work, experiment, or survey task. Never broadly load
-`wiki/20*.md`, historical proposal/review/response/amendment files, `wiki/archive/`, or the full
-`wiki/Decision-Log.md`. For provenance, use a campaign index and targeted `rg` only.
+`wiki/20*.md`, historical proposal/review/response/amendment files, `wiki/archive/`, or full
+decision-log volumes (`wiki/Decision-Log-<year>.md`). For provenance, use a campaign index and
+targeted `rg` only.
 
 Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md` ≤5KB;
 `Per-Work-Status.md ≤8KB`; `survey/README.md ≤4KB`; AI context

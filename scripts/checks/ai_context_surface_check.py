@@ -52,6 +52,7 @@ HOT_FILES = frozenset(
         "wiki/AI-Collaboration.md",
         "wiki/Data-and-Assets.md",
         "wiki/Decision-Log.md",
+        "wiki/Decision-Log-2026.md",
         "wiki/Environment-and-Setup.md",
         "wiki/Experiment-Assets.md",
         "wiki/Home.md",
