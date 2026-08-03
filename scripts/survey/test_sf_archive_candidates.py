@@ -115,7 +115,19 @@ class ArchiveRepoFixture(unittest.TestCase):
         )
         for spec in sf_current_manifest.BASE_FILE_SPECS:
             path = self.repo.joinpath(*spec.path.split("/"))
-            if not path.exists():
+            if path.exists():
+                continue
+            evidence_schema = sf_current_manifest._INTEGRATION_EVIDENCE_SCHEMAS.get(
+                spec.path
+            )
+            if evidence_schema is not None:
+                # Schema-validated integration evidence needs a minimal valid
+                # document; plain placeholder bytes fail strict JSON loading.
+                self.write(
+                    spec.path,
+                    (json.dumps({"schema": evidence_schema}) + "\n").encode(),
+                )
+            else:
                 self.write(spec.path, f"fixture {spec.role}\n".encode())
         self.write("wiki/Research-Objective.md", b"hot state\n")
         git(self.repo, "add", ".")
