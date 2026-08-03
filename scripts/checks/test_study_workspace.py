@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import io
 import json
+import subprocess
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
@@ -28,14 +30,13 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         (self.root / "wiki").mkdir()
         (self.root / "docs" / "integrity").mkdir(parents=True)
         (self.root / ".gitignore").write_text("studies/*/\n", encoding="utf-8")
-        (self.root / "wiki" / "Experiment-Assets.md").write_text(
-            "experiment_id\nstudy commit\nconfig hash\nprotocol hash\n"
-            "model revision\ndataset revision\nMLflow run\nartifact location\n"
-            "artifact hashes\nresult summary\ndeviations\ndecision\n",
+        self.write_control_plane(0)
+        (self.root / "wiki" / "Research-Objective.md").write_text(
+            "endpoint: audio-aware-evidence-acquisition in Stage-2A E0\n",
             encoding="utf-8",
         )
         self.registry = {
-            "schema": "study-repository-registry-v1",
+            "schema": "study-repository-registry-v2",
             "local_root": "studies",
             "repo_creation_gate": "OWNER_GO_AND_EXECUTION_CONTRACT",
             "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
@@ -44,10 +45,24 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         }
         self.write_registry()
 
+    def write_control_plane(self, admitted_count: int) -> None:
+        (self.root / "wiki" / "Experiment-Assets.md").write_text(
+            f"Admitted study repositories: **{admitted_count}**.\n"
+            "experiment_id\nstudy commit\nconfig hash\nprotocol hash\n"
+            "model revision\ndataset revision\nMLflow run\nartifact location\n"
+            "artifact hashes\nresult summary\nshared code revision\ndeviations\ndecision\n",
+            encoding="utf-8",
+        )
+
     def write_registry(self) -> None:
         (self.root / "studies" / "registry.json").write_text(
             json.dumps(self.registry), encoding="utf-8"
         )
+        self.write_control_plane(len(self.registry.get("studies", [])))
+
+    @staticmethod
+    def git_blob(raw: bytes) -> str:
+        return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
 
     def admitted_study(self) -> dict:
         slug = "audio-aware-evidence-acquisition"
@@ -56,16 +71,43 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         decision.parent.mkdir(parents=True, exist_ok=True)
         experiment_index.parent.mkdir(parents=True, exist_ok=True)
         decision.write_text("GO\n", encoding="utf-8")
-        experiment_index.write_text("current experiments\n", encoding="utf-8")
+        experiment_index.write_text(
+            "---\n"
+            f'study_slug: "{slug}"\n'
+            f'study_repo: "https://github.com/example/{slug}.git"\n'
+            f'local_checkout: "studies/{slug}"\n'
+            'experiment_id_namespace: "AAEA-E-<nnn>"\n'
+            "---\n\ncurrent experiments\n",
+            encoding="utf-8",
+        )
         return {
             "name": "Audio-aware evidence acquisition",
             "slug": slug,
             "local_path": f"studies/{slug}",
             "github_repo": f"https://github.com/example/{slug}.git",
+            "default_branch": "master",
+            "package_name": slug,
+            "created_at": "2026-08-03",
+            "experiment_namespace": "AAEA-E",
             "lifecycle": "engineering",
             "decision_record": "wiki/decisions/audio-aware.md",
+            "decision_record_blob": self.git_blob(b"GO\n"),
             "experiment_index": f"wiki/experiments/{slug}/README.md",
         }
+
+    def init_git_checkout(self, path: Path, origin: str | None = None) -> None:
+        path.mkdir(parents=True, exist_ok=True)
+        subprocess.run(
+            ["git", "init", "--quiet", "--initial-branch=master", str(path)],
+            check=True,
+            capture_output=True,
+        )
+        if origin is not None:
+            subprocess.run(
+                ["git", "-C", str(path), "remote", "add", "origin", origin],
+                check=True,
+                capture_output=True,
+            )
 
     def test_empty_registry_is_valid_before_any_direction_is_admitted(self) -> None:
         loaded = study_workspace.load_and_validate_registry(self.root)
@@ -73,15 +115,87 @@ class StudyWorkspaceContractTests(unittest.TestCase):
 
     def test_semantic_admitted_study_with_independent_git_is_valid(self) -> None:
         entry = self.admitted_study()
-        checkout = self.root / entry["local_path"]
-        checkout.mkdir(parents=True)
-        (checkout / ".git").mkdir()
+        self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
         self.registry["studies"] = [entry]
         self.write_registry()
 
         loaded = study_workspace.load_and_validate_registry(self.root)
 
         self.assertEqual(entry["slug"], loaded["studies"][0]["slug"])
+
+    def test_fake_git_metadata_is_rejected(self) -> None:
+        entry = self.admitted_study()
+        checkout = self.root / entry["local_path"]
+        checkout.mkdir(parents=True)
+        (checkout / ".git").mkdir()
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        with self.assertRaises(study_workspace.StudyWorkspaceError):
+            study_workspace.load_and_validate_registry(self.root)
+
+    def test_require_installed_demands_checkout_origin_and_branch(self) -> None:
+        entry = self.admitted_study()
+        self.registry["studies"] = [entry]
+        self.write_registry()
+
+        study_workspace.load_and_validate_registry(self.root)
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "not installed"):
+            study_workspace.load_and_validate_registry(self.root, require_installed=True)
+
+        checkout = self.root / entry["local_path"]
+        self.init_git_checkout(checkout, origin="https://github.com/example/wrong.git")
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "origin"):
+            study_workspace.load_and_validate_registry(self.root, require_installed=True)
+
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(checkout),
+                "remote",
+                "set-url",
+                "origin",
+                entry["github_repo"],
+            ],
+            check=True,
+            capture_output=True,
+        )
+        study_workspace.load_and_validate_registry(self.root, require_installed=True)
+
+    def test_cross_source_truth_detects_count_and_frontmatter_drift(self) -> None:
+        entry = self.admitted_study()
+        self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        study_workspace.validate_cross_source_truth(self.root)
+
+        self.write_control_plane(0)
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "admitted-count drift"):
+            study_workspace.validate_cross_source_truth(self.root)
+
+        self.write_control_plane(1)
+        index = self.root / entry["experiment_index"]
+        index.write_text(
+            index.read_text(encoding="utf-8").replace("AAEA-E-<nnn>", "OTHER-1"),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "frontmatter drift"):
+            study_workspace.validate_cross_source_truth(self.root)
+
+        (self.root / "wiki" / "Research-Objective.md").write_text(
+            "endpoint mentions nothing\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "HOT endpoint"):
+            study_workspace.validate_cross_source_truth(self.root)
+
+    def test_decision_record_blob_drift_is_rejected(self) -> None:
+        entry = self.admitted_study()
+        self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
+        entry["decision_record_blob"] = self.git_blob(b"different\n")
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "blob drift"):
+            study_workspace.load_and_validate_registry(self.root)
 
     def test_candidate_number_and_candidate_lifecycle_are_rejected(self) -> None:
         for slug, lifecycle in (

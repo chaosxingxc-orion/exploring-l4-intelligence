@@ -1,5 +1,5 @@
 {
-  "schema": "study-repository-registry-v1",
+  "schema": "study-repository-registry-v2",
   "local_root": "studies",
   "repo_creation_gate": "OWNER_GO_AND_EXECUTION_CONTRACT",
   "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
@@ -10,8 +10,13 @@
       "slug": "audio-aware-evidence-acquisition",
       "local_path": "studies/audio-aware-evidence-acquisition",
       "github_repo": "https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git",
+      "default_branch": "master",
+      "package_name": "audio-aware-evidence-acquisition",
+      "created_at": "2026-08-03",
+      "experiment_namespace": "AAEA-E",
       "lifecycle": "engineering",
       "decision_record": "wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md",
+      "decision_record_blob": "b6c663d06b2f6be0deddebb61f420442581afbd2",
       "experiment_index": "wiki/experiments/audio-aware-evidence-acquisition/README.md"
     }
   ]

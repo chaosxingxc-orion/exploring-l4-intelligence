@@ -19,7 +19,8 @@ CONTROL_PLANE_PATH = "wiki/Experiment-Assets.md"
 INVENTORY_PATH = "docs/integrity/experiment-asset-inventory.json"
 LEGACY_INVENTORY_PATH = "docs/integrity/experiment_attempt_registry.jsonl"
 RESOLUTION_PATH = "docs/integrity/legacy-asset-resolution.json"
-REGISTRY_SCHEMA = "study-repository-registry-v1"
+RESEARCH_OBJECTIVE_PATH = "wiki/Research-Objective.md"
+REGISTRY_SCHEMA = "study-repository-registry-v2"
 INVENTORY_SCHEMA = "experiment-asset-inventory-v2"
 FIXED_REGISTRY_FIELDS = {
     "schema": REGISTRY_SCHEMA,
@@ -34,13 +35,22 @@ STUDY_KEYS = {
     "slug",
     "local_path",
     "github_repo",
+    "default_branch",
+    "package_name",
+    "created_at",
+    "experiment_namespace",
     "lifecycle",
     "decision_record",
+    "decision_record_blob",
     "experiment_index",
 }
 ADMITTED_LIFECYCLES = {"engineering", "validation", "paused", "complete", "sunset"}
+INSTALL_REQUIRED_LIFECYCLES = {"engineering", "validation"}
 SEMANTIC_SLUG = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
 CANDIDATE_TOKEN = re.compile(r"(?:^|-)r\d+(?:-|$)", flags=re.IGNORECASE)
+DATE_FIELD = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
+BLOB_ID = re.compile(r"[0-9a-f]{40}\Z")
+EXPERIMENT_NAMESPACE = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*$")
 CONTROL_PLANE_TERMS = (
     "experiment_id",
     "study commit",
@@ -52,6 +62,7 @@ CONTROL_PLANE_TERMS = (
     "artifact location",
     "artifact hashes",
     "result summary",
+    "shared code revision",
     "deviations",
     "decision",
 )
@@ -116,6 +127,24 @@ def _validate_study_entry(root: Path, entry: object, index: int) -> dict:
             f"{label}.github_repo must be an HTTPS GitHub repository named {slug!r}"
         )
 
+    if not SEMANTIC_SLUG.fullmatch(entry["default_branch"] or "") and entry[
+        "default_branch"
+    ] not in {"master", "main"}:
+        raise StudyWorkspaceError(f"{label}.default_branch is not a plausible branch name")
+    if CANDIDATE_TOKEN.search(entry["package_name"]):
+        raise StudyWorkspaceError(f"{label}.package_name must not embed candidate IDs")
+    if DATE_FIELD.fullmatch(entry["created_at"]) is None:
+        raise StudyWorkspaceError(f"{label}.created_at must be YYYY-MM-DD")
+    namespace = entry["experiment_namespace"]
+    if not EXPERIMENT_NAMESPACE.fullmatch(namespace) or re.search(
+        r"(?:^|-)R\d+(?:-|$)", namespace
+    ):
+        raise StudyWorkspaceError(
+            f"{label}.experiment_namespace must be an uppercase namespace without candidate IDs"
+        )
+    if BLOB_ID.fullmatch(entry["decision_record_blob"]) is None:
+        raise StudyWorkspaceError(f"{label}.decision_record_blob is not a Git blob id")
+
     expected_index = f"wiki/experiments/{slug}/README.md"
     if entry["experiment_index"] != expected_index:
         raise StudyWorkspaceError(f"{label}.experiment_index must equal {expected_index!r}")
@@ -123,6 +152,16 @@ def _validate_study_entry(root: Path, entry: object, index: int) -> dict:
         raise StudyWorkspaceError(f"{label}.decision_record must live under wiki/")
     _require_file(root, entry["decision_record"], f"{label}.decision_record")
     _require_file(root, entry["experiment_index"], f"{label}.experiment_index")
+
+    decision_raw = _repo_path(root, entry["decision_record"]).read_bytes().replace(b"\r\n", b"\n")
+    actual_blob = hashlib.sha1(
+        f"blob {len(decision_raw)}\0".encode("ascii") + decision_raw
+    ).hexdigest()
+    if actual_blob != entry["decision_record_blob"]:
+        raise StudyWorkspaceError(
+            f"{label}.decision_record_blob drift: registry pins "
+            f"{entry['decision_record_blob']}, worktree is {actual_blob}"
+        )
     return entry
 
 
@@ -138,8 +177,65 @@ def _validate_ignore_policy(root: Path) -> None:
         raise StudyWorkspaceError(".gitignore must contain exact independent-repo rule studies/*/")
 
 
-def load_and_validate_registry(root: Path = REPO) -> dict:
-    """Load and validate the admitted study registry and installed checkouts."""
+def _study_git(checkout: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(checkout), *arguments],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    if completed.returncode != 0:
+        raise StudyWorkspaceError(
+            f"git {' '.join(arguments)} failed in {checkout.name}: "
+            f"{completed.stderr.strip() or 'nonzero exit'}"
+        )
+    return completed.stdout.strip()
+
+
+def _validate_installed_checkout(
+    studies_root: Path, entry: dict, *, require_installed: bool
+) -> None:
+    checkout = studies_root / entry["slug"]
+    if not checkout.is_dir():
+        if require_installed and entry["lifecycle"] in INSTALL_REQUIRED_LIFECYCLES:
+            raise StudyWorkspaceError(
+                f"registered study {entry['slug']} ({entry['lifecycle']}) is not installed"
+            )
+        return
+    if not (checkout / ".git").exists():
+        raise StudyWorkspaceError(
+            f"studies/{entry['slug']} must be an independent Git repository with .git metadata"
+        )
+    toplevel = Path(_study_git(checkout, "rev-parse", "--show-toplevel"))
+    if toplevel.resolve() != checkout.resolve():
+        raise StudyWorkspaceError(
+            f"studies/{entry['slug']}/.git is not a real repository root "
+            f"(git resolves to {toplevel})"
+        )
+    if require_installed:
+        origin = _study_git(checkout, "remote", "get-url", "origin")
+        if origin != entry["github_repo"]:
+            raise StudyWorkspaceError(
+                f"studies/{entry['slug']} origin {origin!r} does not match registry "
+                f"{entry['github_repo']!r}"
+            )
+        branch = _study_git(checkout, "symbolic-ref", "--short", "HEAD")
+        if branch != entry["default_branch"]:
+            raise StudyWorkspaceError(
+                f"studies/{entry['slug']} is on branch {branch!r}, registry default is "
+                f"{entry['default_branch']!r}"
+            )
+
+
+def load_and_validate_registry(root: Path = REPO, *, require_installed: bool = False) -> dict:
+    """Load and validate the admitted study registry and installed checkouts.
+
+    Default mode tolerates a registered-but-uninstalled private study while still
+    validating registry, wiki bindings and any installed checkout's Git reality.
+    ``require_installed`` additionally demands every engineering/validation study
+    be installed with matching origin and default branch.
+    """
 
     document = _load_json(root / REGISTRY_PATH)
     if not isinstance(document, dict) or set(document) != REGISTRY_KEYS:
@@ -167,14 +263,94 @@ def load_and_validate_registry(root: Path = REPO) -> dict:
     unexpected = sorted(installed - registered)
     if unexpected:
         raise StudyWorkspaceError(f"unregistered study directory: {unexpected[0]}")
-    for slug in sorted(installed):
-        if not (studies_root / slug / ".git").exists():
-            raise StudyWorkspaceError(
-                f"studies/{slug} must be an independent Git repository with .git metadata"
-            )
+    for entry in entries:
+        _validate_installed_checkout(studies_root, entry, require_installed=require_installed)
 
     _validate_ignore_policy(root)
     return document
+
+
+def _parse_frontmatter(text: str, label: str) -> dict[str, str]:
+    match = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n", text, flags=re.DOTALL)
+    if match is None:
+        raise StudyWorkspaceError(f"{label} lacks a YAML frontmatter block")
+    fields: dict[str, str] = {}
+    for line in match.group(1).splitlines():
+        if not line.strip():
+            continue
+        key, separator, value = line.partition(":")
+        if not separator:
+            continue
+        fields[key.strip()] = value.strip().strip('"')
+    return fields
+
+
+def validate_cross_source_truth(root: Path = REPO) -> None:
+    """Assert registry, Experiment-Assets, HOT endpoint and index frontmatter agree."""
+
+    document = _load_json(root / REGISTRY_PATH)
+    entries = document["studies"] if isinstance(document, dict) else []
+    if not isinstance(entries, list):
+        raise StudyWorkspaceError(f"{REGISTRY_PATH}.studies must be a list")
+
+    try:
+        control_plane = (root / CONTROL_PLANE_PATH).read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise StudyWorkspaceError(f"cannot read experiment control plane: {error}") from error
+    count_match = re.search(r"Admitted study repositories: \*\*(\d+)\*\*", control_plane)
+    if count_match is None:
+        raise StudyWorkspaceError(
+            f"{CONTROL_PLANE_PATH} must state the admitted study count as "
+            "'Admitted study repositories: **N**'"
+        )
+    if int(count_match.group(1)) != len(entries):
+        raise StudyWorkspaceError(
+            f"admitted-count drift: {CONTROL_PLANE_PATH} says {count_match.group(1)}, "
+            f"registry has {len(entries)}"
+        )
+
+    try:
+        hot = (root / RESEARCH_OBJECTIVE_PATH).read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise StudyWorkspaceError(f"cannot read HOT endpoint page: {error}") from error
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        slug = entry.get("slug", "")
+        if entry.get("lifecycle") in INSTALL_REQUIRED_LIFECYCLES and slug not in hot:
+            raise StudyWorkspaceError(
+                f"HOT endpoint {RESEARCH_OBJECTIVE_PATH} does not mention active study {slug}"
+            )
+        index_path = _repo_path(root, entry.get("experiment_index", ""))
+        frontmatter = _parse_frontmatter(
+            index_path.read_text(encoding="utf-8"), entry.get("experiment_index", "")
+        )
+        expectations = (
+            ("study_slug", slug, lambda actual, expected: actual == expected),
+            (
+                "study_repo",
+                entry.get("github_repo", ""),
+                lambda actual, expected: actual == expected,
+            ),
+            (
+                "local_checkout",
+                entry.get("local_path", ""),
+                lambda actual, expected: actual == expected,
+            ),
+            (
+                "experiment_id_namespace",
+                entry.get("experiment_namespace", ""),
+                lambda actual, expected: actual.startswith(expected),
+            ),
+        )
+        for key, expected, accept in expectations:
+            actual = frontmatter.get(key)
+            if actual is None or not accept(actual, expected):
+                raise StudyWorkspaceError(
+                    f"experiment index frontmatter drift for {slug}: {key}={actual!r} "
+                    f"does not match registry {expected!r}"
+                )
 
 
 def validate_experiment_control_plane(root: Path = REPO) -> None:
@@ -361,10 +537,19 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="render the deterministic experiment asset inventory to stdout",
     )
+    parser.add_argument(
+        "--require-installed",
+        action="store_true",
+        help=(
+            "require every engineering/validation study to be installed with matching "
+            "origin and default branch (primary development machine mode)"
+        ),
+    )
     args = parser.parse_args(argv)
     try:
-        load_and_validate_registry(REPO)
+        load_and_validate_registry(REPO, require_installed=args.require_installed)
         validate_experiment_control_plane(REPO)
+        validate_cross_source_truth(REPO)
         if args.render_inventory:
             sys.stdout.write(_render_json(build_experiment_asset_inventory(REPO)))
         else:
