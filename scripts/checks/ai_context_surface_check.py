@@ -52,7 +52,6 @@ HOT_FILES = frozenset(
         "wiki/AI-Collaboration.md",
         "wiki/Data-and-Assets.md",
         "wiki/Decision-Log.md",
-        "wiki/Decision-Log-2026.md",
         "wiki/Environment-and-Setup.md",
         "wiki/Experiment-Assets.md",
         "wiki/Home.md",
@@ -387,6 +386,10 @@ def classify_path(path, legacy_cold_paths):
     canonical = _canonical_path(path)
     legacy = _legacy_map(legacy_cold_paths)
     if canonical in HOT_FILES:
+        return "HOT"
+    # Monthly decision-log volumes are HOT append targets; new months must not
+    # require a constants change.
+    if canonical.startswith("wiki/Decision-Log-") and canonical.endswith(".md"):
         return "HOT"
     if canonical.startswith("wiki/survey/registry/") or canonical.startswith(
         "wiki/survey/sidecars/"

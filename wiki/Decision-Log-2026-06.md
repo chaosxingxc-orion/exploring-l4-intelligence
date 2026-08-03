@@ -1,0 +1,359 @@
+# Decision Log — 2026-06 卷
+
+> 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
+
+### 2026-06-30 · Agent-level direction (survey-first POMDP): GO verdict + the optimization-space theorem machine-checked in Lean
+**Decision.** Pursued the owner's strategic pivot — *is the L4-evolution space agent-system-level no-gradient RL
+(skills+memory) rather than single-model output search?* — as a **survey-first POMDP** (Belief-State + Trajectory
+in [[2026-06-30-agent-level-synthesis]]). **S1** (decisive probe, 41 verified claims) returned **GO** at
+commit-degree *add-new-layer*, scope *speech-grounded*: agent-level self-improvement **compounds**
+(Voyager/ExpeL/AWM/JitRL), the `q*` objective **extends** to agent actions (JitRL closed form), the two omni
+classes map to **memory(embedding)/policy(generative)**, and the **training-free self-improving SPEECH-agent moat
+is open** — but the *mechanism* is not novel, so it's a new layer, not a thesis reframe. Then formalized the
+owner's **optimization-space-adequacy** hypothesis in Lean (`proofs/tfrl/TfrlProofs/OptSpace.lean`, extends
+T1/T3): **OSA-1** flat/degenerate space ⇒ zero gain (recovers T3) + quantitative `gain ≤ spread²/(8β)`; **OSA-2**
+context-isolated agents ⇒ **additive** gain; **OSA-3** rollout deficit + credit-assigned tilt = global optimum.
+`lake build` **green, sorry-free**. Grounded by a convergence survey (θ2, 43 claims / 54 sources,
+[[2026-06-30-survey-agent-convergence]]): proven *finite-N* convergence lives at the **output** level; the agent
+level has only JitRL's *asymptotic* consistency under a **trust-region/slow-drift** precondition — the trust
+region being the hinge between naive non-convergence and credit-assigned convergence.
+**Why.** Owner: optimizing a single model's instruct/output is too small a space; bring it into an agent system
+(context isolation + skills/memory) to enlarge the optimization space — but then rollout-stability/convergence
+needs algorithm-level care. Prove this formally and survey the latest open-source training-free-RL convergence.
+**Consequences.** (1) **Survey-first honored:** [[Project-Thesis]] and the W4 proposal's H1/H2/H3 are **unchanged**;
+the GO + commit-degree is a deferred decision for the owner. (2) The optimization-space hypothesis is now a
+**machine-checked theorem suite** (axis B8 resolved). (3) Two survey rounds archived under `wiki/survey/` with
+real verifiable links (S1 + θ2 convergence). (4) Lean toolchain provisioned on this machine (elan + mathlib
+cache); the W4 proposal's empirical/GPU track stays blocked on R1. (5) Branch
+`docs/research-proposal-template-and-first-proposal`, not pushed.
+
+### 2026-06-26 · First research proposal authored as a POMDP step-by-step build; Step-2 survey archived (93 verified sources)
+**Decision.** Authored the first proposal on the new [[Research-Proposal-Template]] —
+[[2026-06-26-training-free-rl-for-speech-omni-research-proposal]] — for the owner's idea: *how far can
+training-free RL activate pretrained omni-model capabilities across the two model classes (vector/embedding vs
+thinker-talker/generative), with in-context conditioning (explicit task definition + few-shot) as the lever.*
+Built it explicitly as a **partially-observed decision process (POMDP)** — a live Belief-State table + a
+Trajectory log, each step a committable/rollbackable action ordered by value-of-information — rather than
+one-shot. Ran the **Step-2 survey** as a 5-lane multi-agent workflow (`wf_d76b4901-23c`) with per-lane
+adversarial source verification; archived **80 verified claims / 93 real http-linked sources** under
+`wiki/survey/` (index `survey/README.md`). Pre-registered the proposal to **v1.0** (§1 hypotheses, §2 per-family
+δ/α + go/kill/pivot + mandatory controls, §5(T) theory, §6 risks all FROZEN before any pilot).
+**Why.** First real exercise of the template; the owner asked for broad capability coverage (sampled dev/test),
+thorough survey + reproduction with a technical-principle/scheme emphasis, local models only (Qwen3-Omni-30B-A3B
+via llama.cpp), and a step-by-step iterative build.
+**Consequences.** (1) **Central falsifiable claim H1** — model-class asymmetry of ICL activation: reward-selected
+in-context conditioning activates an under-exposed capability on the generative class but not the vector class
+(label-free contrastive bi-encoder) — plus H2 (presence map + activation order content/intent ≥ emotion ≥
+speaker) and H3 (task-def vs demos vs instruction richness; label-sensitivity as the cross-class diagnostic).
+(2) **Step-1 feasibility probe → R1 blocker:** the WSL compute env on this machine is **unprovisioned** (no GPU /
+CUDA / uv / `~/.venvs/speechrl`, `~/speechrl-data/{models,datasets,repos}` empty, no llama.cpp; only system
+py3.14) — so the **empirical track (feasibility round-trip + all pilots) is BLOCKED-pending-provisioning**; the
+prior experiments ran on another host. llama.cpp's Qwen3-Omni audio path itself IS supported (libmtmd, verified).
+(3) **Survey refined H1 (partial rollback):** on the generative class naive few-shot demos mostly fix *format*
+not task accuracy (ALICE, arXiv:2603.20433), audio LLMs "read not listen" (VoxParadox, 2605.27772), and speaker
+resists even on (B) (2603.10827) — so the lever is **explicit task-definition + reward selection**, not raw
+demos; added §6 controls (random-reward null, cross-model sign-consistency, acoustic-grounding). The survey also
+**corrected an in-house citation** — LEACE is arXiv:2306.03819 (the feasibility doc's `2104.01767` is
+WhiteningBERT). (4) v1.0 is **pre-registered and compute-ready**; only the empirical track remains, gated on
+provisioning. (5) Survey synthesis agent hit a transient 401 mid-run; synthesized in-loop from the verified lanes.
+
+### 2026-06-26 · Research Proposal Template rewritten: pre-registration form with a two-tier theory/effectiveness gate
+**Decision.** Reviewed the lightweight `Research Proposal Template` (multi-agent workflow: 6 review
+dimensions + adversarial synthesis, grounded in the NeurIPS reproducibility checklist / Registered
+Reports / ACM artifact badging / Gorman-&-Bedrick / Kapoor-&-Narayanan AND our own W4 docs) and
+rewrote it into a **portable (project-agnostic) 9-section pre-registration form**, delivered as
+**paired monolingual EN / 中文 docs** (`Research-Proposal-Template.md` + `Research-Proposal-Template_CN.md`,
+cross-linked, per the repo's README/CONTRIBUTING `_CN` convention). Its core is repo-independent; the
+W1–W4 framing, repo wikilinks, lockfile/tracker, and wiki-sync hooks live only in a clearly-**optional**
+"wiring into a project knowledge base" footer: front-matter →
+falsifiable hypothesis → pre-registered success/kill/pivot criteria → survey & positioning →
+reproduced results (baseline + method pilot, with a Repro Manifest, locked-test/anti-gaming guards,
+and an operational 三方检测 definition) → two-tier theory/effectiveness gate → risks/ethics/data-
+governance → decision & outcome → AI-tools-&-verification table. Renamed the file to the dashed
+wikilink convention ([[Research-Proposal-Template]]) and linked it from the sidebar.
+**Why.** The template's rigor bar was right but lived *implicitly*, so it depended on the reader and
+eroded across works. Two self-inflicted flaws: (1) old requirement #3 demanded a mathematical proof
+of *effectiveness* — a category error for an empirical thesis that contradicts our own feasibility
+doc ([[W4-Training-Free-RL-Feasibility]]: the operator is proved; the P/L/S effectiveness conditions
+are "to verify empirically"); (2) section order (Reproduced Results before the proposal) + no
+pre-registered kill-criteria invited HARKing (author the hypothesis after seeing the numbers).
+**Consequences.** (1) Requirement #3 is now a **two-tier gate** — (T) operator convergence/
+well-posedness (a written justification with stated assumptions suffices; Lean only for finitary
+theorems) and (E) a pre-registered *empirical* effectiveness criterion; effectiveness is measured,
+never proven. (2) The falsifiable hypothesis + success/kill/pivot criteria are committed **before**
+the pilot. (3) New required fields lift existing team practice into the form: Repro Manifest,
+locked-test-set / selection≠metric / full-sweep guards, paired-bootstrap-CI stats, a logged
+independent 三方检测 (a different teammate **or** an AI agent, from a clean checkout), a 3-line
+ethics/licensing field (voiceprints = biometric, SER = affective), and an AI-output verification
+table (anti-hallucination). (4) Over-engineering deliberately rejected to keep it a tight fill-in
+form: ACM badge tiers, a formal in-principle sign-off gate, full datasheets/model-cards per study,
+an NSF budget section, blanket multiple-comparison correction. **Not yet published** — run
+`scripts/wiki-sync.sh` to publish to the GitHub Wiki.
+
+### 2026-06-25 · Cross-team synthesis closes the goal: SLU/Spoken-QA/SER gains, independently reproduced
+**Decision.** After pushing the 2026-06-24 work, discovered the collaborator ("codex" team) had pushed a
+large frozen-model **policy-surface** Operator-B line to the W4 remote (CoVoST2/FLEURS translation,
+HeySQuAD/URO QA, SLURP/MInDS tool-intent, AISHELL/Wu routing + `docs/lean/` guardrail proofs). Rebased our
+loader commit cleanly on top (W4 `452bd8b`), then **synthesised both teams' evidence into one goal
+close-out** ([[2026-06-25-cross-team-synthesis-semantic-tasks-tfrl-feasibility]]) and **independently
+reproduced** the recognized-source MInDS-14 SLU gain on GPU.
+**Why.** The owner goal asks for feasible sample-level training-free-RL gains on mainstream semantic
+tasks (ASR/SLU/Spoken-Agentic) + Lean convergence + *adversarial* proof the gains are real. The
+collaborator's policy-surface (instruction/wrapper/route/rerank selection over a frozen omni model) is
+Operator-B training-free RL at the interface granularity — the same `argmax_z E[R(z)]` our Lean T1/T4
+formalize — so the two lines compose into the goal rather than competing.
+**Consequences.** (1) **Goal MET.** Frozen-model, paired-CI, recognized-source gains: SLU SLURP
+0.550→0.880 (+0.330), MInDS-14 0.883→0.972 (+0.089); Spoken-QA URO 0.380→0.715 (+0.335) + conservative
+rerank →0.845 (0 regr); emotion/SER +0.097 (our Operator A). (2) **Independent reproduction** on our GPU
+(`speechrl-data/_repro_minds14_toolintent.py`, our `data_minds14` loader + the collaborator's
+`evaluation.tool_intent`, seed 42, n=182): raw-schema 0.852 → policy **0.984**, Δ+0.132 CI [0.082, 0.187],
+1 regression — same sign/significance as their +0.089, confirming realness. (3) **Convergence** backed by
+our `proofs/tfrl` T1–T6 + their `docs/lean/conservative_rerank_gate.lean` (no-regression iff accepted
+overrides correct) which composes with T1/T4. (4) **One blocked leg:** token-level generative best-of-N
+(our 5 local generators incompatible with transformers-4.57/vllm-0.14) — mathematically validated,
+empirically deferred to a stack bump; the collaborator's policy-surface Operator-B uses the frozen
+*embedding* model, so the Operator-B goal leg is met at selection/rerank granularity. Large-scale still
+deferred (validation-only): gated on the emotion-gain significance upgrade, a larger HeySQuAD locked test,
+and the generator-stack fix.
+
+### 2026-06-24 · Training-free RL validation run (waves 0–4): emotion gain + Lean convergence + Operator-B blocker
+**Decision.** Ran the validation-only wave suite on the rebuilt GPU env (RTX 5090). Validated training-free
+RL **Operator A** (frozen omni-embed disentanglement) across factor families and **proved the convergence
+theory in Lean 4**; archived everything to the wiki ([[2026-06-24-tfrl-validation-run-log]] + 3 dated
+per-experiment docs with 5-role adversarial challenges).
+**Why.** Owner goal: feasible sample-level training-free-RL gains on mainstream semantic tasks, with Lean
+math-convergence proof and adversarial validation of the gains.
+**Consequences.** Results: (1) **emotion/SER gain Δ+0.097** (mean→attentive pooling @L16) — a real
+training-free Operator-A gain (scoped: CI-separation marginal at test=300, queue dev-selection+paired
+bootstrap). (2) content exposed (~1.0), intent present-but-not-steerable (~0.25, no pooling gain),
+speaker suppressed (~0.04) — consistent with the disentanglement thesis. (3) **Lean** `proofs/tfrl/`:
+T1 tilting, T3 flat-reward no-go, T4 plurality, T5 MBR-SLLN, T6 regret-O(√log N) **proved sorry-free**;
+T2 KL-bound proved modulo one order-statistics `sorry` (`lake build` 8566 jobs). (4) **Operator-B
+generative best-of-N (ASR/SLU/agentic) BLOCKED** — all 4 downloaded generators incompatible with
+transformers-4.57/vllm-0.14 (minicpm-o-4.5: vllm only 2.6 + audio-encoder bug; qwen3-omni: needs newer
+transformers processor; moss-audio: no modeling code). Fix: bump transformers/vllm or use a
+Qwen2.5-Omni/Qwen2-Audio checkpoint. New reusable code: `common/rl/decode.py`, `data_minds14/librispeech`,
+generalized `eval_harness`, intent/lid conditionings; env-setup gap fixed (sentence-transformers/sklearn/
+sacrebleu). Large-scale deferred pending the emotion-gain significance upgrade + the Operator-B stack fix.
+
+### 2026-06-24 · Dataset set frozen to a lockfile; downloads unified into one script
+**Decision.** Froze the dataset/model set to exactly what is on disk and recorded it in a single
+committed manifest, `docs/datasets.lock.json` (28 datasets + 5 models + 7 ref repos, each with its
+source id and a pinned revision — HF/git commit shas where recoverable, ModelScope `master` else,
+content-fingerprinted as a fallback), generated by `scripts/data/gen-lockfile.py`. Replaced the split
+download path (umbrella `scripts/data/*` + the W1 `wave0_fetch.sh` engine + one-off
+`fetch-semantic-modelscope.sh`/`fetch-semantic-manual.sh` + `campaigns/`) with **one self-contained,
+lockfile-driven downloader**, `scripts/data/fetch-data.sh`, that any collaborator runs to reproduce the
+identical set. It preflight-checks its dependencies and offers `--install-deps` (lightweight: hf +
+modelscope CLIs + aria2) alongside the full `scripts/env-setup.sh`. Deleted the placeholder/partial
+stubs (`voxceleb`, `cvss`, `speech-commands`, `minds14-xtreme_s`) and removed `voxceleb` from the
+registry. Reconciled docs to reality: `fleurs` → `fleurs-r`, real per-dataset HF sources, and the
+total `~281 GB` → `~410 GB` across all 13 places it appeared.
+**Why.** The on-disk set had drifted far past the docs (a semantic-task campaign added ~17 datasets
+that only `wiki/Speech-Semantic-Task-Datasets.md` knew about), and the download logic was fragmented
+across two repos — so collaborating teams could not reliably reproduce the same data. A single manifest
++ a single downloader makes the set explicit, version-pinned, and reproducible cross-team; pinning HF
+commits removes "latest drift" between teams.
+**Consequences.** `docs/datasets.lock.json` is now the source of truth; change the set only by
+regenerating it deliberately. `wave0_fetch.sh` (W1) is retired and its README/Per-Work-Status updated.
+SLURP audio lives at `repos/slurp/scripts/audio/{slurp_real,slurp_synth}` (Zenodo 4274930), linked from
+`datasets/slurp`. `seed-tts-eval` + `aime24/25/26` are kept but flagged `modelscope-manual` (their
+evalscope ids weren't recoverable from disk — fetch manually). `env-setup.sh` now also installs the
+download CLIs; `wsl-setup.sh` installs `aria2`. Speaker-ID is exercised via CREMA-D now that VoxCeleb
+is gone. `DatasetSpec` gained a `revision` field. Publish via `scripts/wiki-sync.sh`.
+
+### 2026-06-23 · Catalog extended — recent (2024-2026) speech-agentic + speech-retrieval datasets
+**Decision.** Extended [[Speech-Semantic-Task-Datasets]] with two web-verified recency batches (workflow
+`wf_b4eb417e-fe1`, 11 agents, 55 candidates → 12 core, **0 hallucinated**): (a) **speech-agentic
+2024-2026** — VoiceAssistant-Eval, VocalBench-zh, Audio-MultiChallenge, SoulX-Duplug-Eval (bilingual
+full-duplex), EVA-Bench, tau2-bench(voice); (b) **speech-retrieval** (the bi-encoder's *native* eval
+surface) — MAEB + MSEB/SVQ (primary), FLEURS-Retrieval, SLUE-SQA-5, WavCaps, SpeechBrown. Both fetch
+scripts updated with the OPEN sets.
+**Why.** The flagship is a frozen retrieval bi-encoder, so MTEB/MSEB-style audio-embedding benchmarks
+(MAEB, SVQ) are the most *direct* way to score it; the agentic batch fills the generative/behavioural axis.
+**Consequences.** ModelScope reality persists — only `evalscope/tau2-bench-data` is hosted there; the rest
+are hf-mirror-only. Flags: VoiceAgentBench / RealTalk-CN **gated**; WavCaps academic-only + 820 GB (out of
+script); SpeechBrown synthetic-TTS (verify id). MAEB (arXiv 2602.16008) ≠ MSEB (arXiv 2602.07143) despite
+similar names. Next: run **MAEB + MSEB/SVQ on omni-embed-nemotron-3b** as the semantic-eval starter.
+
+### 2026-06-23 · Pivot toward semantic tasks (omni-embed is semantic-specialized) + public dataset catalog
+**Decision.** The flagship omni-**embedding** (`omni-embed-nemotron-3b`, contrastive InfoNCE bi-encoder →
+one pooled 2048-d vector) is **semantically specialized** (content ≈1.00, language/intent strong, emotion
+≈0.40, speaker ≈0.04), so we lean onto the semantic axis it is *measured*-strong on: **SLU / Spoken-QA /
+Speech-Translation / speech-agentic**, and curate a verified public dataset set for it (new
+[[Speech-Semantic-Task-Datasets]]). Adversarial caveats kept on the record: "only semantic" overstates
+(partial emotion retained); the verdict is scoped to the embedding/retrieval class, **not** generative
+omni; this is *complementary* to the disentanglement thesis (content/language were always Operator-A
+native), not a reversal. OPEN: full pivot vs. a second track (affects breadth-vs-Spoken-QA-depth in the
+starter set).
+**Why.** [[Paralinguistic-Suppression-Survey]] established that fine speaker-ID is destroyed and emotion
+only partially recoverable in the pooled vector; the high-fidelity, native axis is semantic. Playing to
+that measured strength is the highest-confidence near-term use of the frozen embedding.
+**Consequences.** New [[Speech-Semantic-Task-Datasets]] (16 core datasets across 4 families;
+adversarially link-checked — **0 hallucinated, 0 gated**; license/source flags recorded). New umbrella
+scripts `scripts/data/fetch-semantic-modelscope.sh` + `fetch-semantic-manual.sh` (`--list`/`--dry-run`,
+user runs them). **ModelScope reality (web-verified):** only VoiceBench (`lmms-lab/voicebench`) + FLEURS
+(`pengzhendong/fleurs`, already local) are on ModelScope; everything else goes via hf-mirror or direct
+(SLURP→Zenodo 4274930, STOP→dl.fbaipublicfiles.com/stop). Minimal starter = VoiceBench + HeySQuAD (2 new
+fetches; CoVoST2/FLEURS/MINDS-14 already local). Next: a semantic-eval harness (retrieval/probe +
+generative readout) on the starter set — the positive complement to the survey's speaker/emotion negatives.
+
+### 2026-06-23 · Paralinguistic-suppression survey (D2) + pooling-method probe (D3) — emotion routing upgraded to "Operator A with a richer readout"
+**Decision.** Two converging results refine the per-factor routing. **(D3, own run)** a weight-free
+pooling-METHOD sweep (`scripts/pool_method_probe.py` + `layer_probe.extract_pooled`; CREMA-D, seeds 42
+& 7) shows **mean = std = stats** (no gain), while a **weight-free attentive-statistics pool at mid-layer
+L16 modestly lifts emotion** (0.40 → 0.51 seed-42 CI-separated, → 0.45 seed-7 CIs overlap) and **speaker
+stays floored (≤0.067) across every method × layer × seed**. **(D2, 77-agent 3-vote-verified survey,
+`wf_6694eca5-de9`)** the assertion "omni models lose paralinguistics at pooling" is **right in direction,
+too strong in mechanism, and sharply per-factor**: paralinguistics is **suppressed/unread at the
+pooled-vector + decoder readout, not destroyed** (final-layer probes still 3–55× chance); the single
+masked-mean vector is **near-degenerate** (per-frame outputs cos~0.98 to the LLM mean token), so the big
+emotion lever is an **ordered-trajectory / multi-vector readout** (C-Gate 16.8→77.7%, +61pp) not a smarter
+single vector; **fine-grained speaker-ID is never written to the output** and is recovered **only** by an
+external speaker encoder (ECAPA-LLM 1.03% EER) or a disentangled codec — both non-training-free. Net:
+**emotion → Operator A is viable but needs a richer readout (multi-vector/trajectory/layer/generative)
+before B; speaker → Operator B / external-channel (the natural boundary of the training-free thesis).**
+Full evidence + citations: [[Paralinguistic-Suppression-Survey]].
+**Why.** D3 supplies the **mean-vs-stats-vs-attentive ablation the literature lacks** (the two dedicated
+layer-wise omni studies use mean pooling only); its modest single-vector emotion gain + floored speaker
+match D2's mechanism exactly. D2 corrects the earlier "emotion → B or accept ~0.40" by separating *info
+present-but-unread* (emotion, fix the readout) from *info never written* (speaker, fix the source).
+**Consequences.** New durable [[Paralinguistic-Suppression-Survey]] (D1 injection mechanism verified:
+51-token sequence in, pooled 2048-d out; D2 C1–C5 verdicts + 6-class fix taxonomy; D3 table). New W4 code:
+`layer_probe.extract_pooled` (mean/std/stats/attentive, weight-free) + `scripts/pool_method_probe.py`
+(MLflow `2c61b2f1` seed42, `21453cb1` seed7). [[Per-Work-Status]] emotion verdict updated. Next
+experiments: (1) strict same-audio SSL baseline (emotion2vec/WavLM/ECAPA on the CREMA-D split), (2) a
+multi-vector / ordered-trajectory emotion readout, (3) emotion2vec-fusion (emotion analogue of ECAPA-LLM),
+(4) the W1→W4 RL-on-speaker bridge (PALLM-style, proposed-only in the literature).
+
+### 2026-06-23 · Model-understanding phase (1.2.1) — ICL tested; per-factor verdict now evidence-backed
+**Decision.** After understanding the model thoroughly and **measuring in-context learning** (the lever
+1.1.1 omitted), the per-factor operator decision is upgraded from provisional to evidence-backed:
+**content → Operator A** (~1.0); **emotion → Operator B** or accept a ~0.40 ceiling; **speaker →
+Operator B**; **language → provisional A** (mechanism validated, test on FLEURS). Few-shot is
+structurally and mechanically supported but **not a useful label-conditioned activation lever** for the
+suppressed factors. See [[Omni-Embed-Model-Dossier]] and [[2026-06-23-omni-embed-speech-disentanglement-1.2.1]].
+**Why.** Probes (frozen, training-free) established: native text-query retrieval recovers content (0.99)
+but not emotion (0.27 < 0.36 probe); in-context demos strongly move the query representation
+(move=0.336) yet are label-insensitive (0.047) and **few-shot demos reduce emotion accuracy**
+(0.217→0.150). So no weight-free Operator-A lever (instruction, layer, pooling, native retrieval, ICL)
+exceeds ~0.40 for emotion, and speaker is ~chance across all 37 layers — the contrastive Whisper-ASR
+backbone has discarded it. This is the rigorous version of the 1.1.1 conclusion (which was withdrawn for
+not testing ICL).
+**Consequences.** New durable [[Omni-Embed-Model-Dossier]] (architecture + I/O contract + token
+mechanics + few-shot verdict). New W4 diagnostic code: `io_contract.py`, `icl_forward.py`,
+`scripts/diag/*`; `embed_queries` in `common`. Next: 1.3 Operator B (generative `lm_head` readout) for
+emotion/speaker; 1.4 content/language fan-out. Also fixed an infinite derangement-loop bug in the P7
+control (had hung for hours) — model forwards are ~0.11s.
+
+### 2026-06-22 · F.1 finding (PROVISIONAL) — single-instruction + layer/pooling don't recover speaker; ICL untested
+**Decision.** From the CREMA-D layer/pooling sweep (weight-free Operator A, *single-instruction*
+conditioning): **speaker stays at chance (~0.03) across all 37 Thinker layers AND audio-token pooling**;
+**emotion plateaus at ~0.40**. **Important correction (per review):** this is a *weak* intervention —
+it does not exploit the model's strongest weight-free lever, **in-context learning / activation heads**
+(native text-query cross-modal retrieval, few-shot demonstrations with target-token pooling, rich
+activation prompts). So the negative falsifies only "single-instruction + architectural axes," **not**
+"training-free activation." The earlier "speaker/emotion are Operator-B-mandatory" claim is **withdrawn
+and downgraded to provisional (A(ICL)→B)**, pending experiment 1.2. content remains a clean Operator-A
+win (~1.0). See report `2026-06-22-omni-embed-speech-disentanglement-1.1.1` and
+[[W4-Training-Free-RL-Feasibility]] §0.1.
+**Why.** A single short instruction has little leverage over ~50 content-oriented audio tokens under
+mean pooling, and the model was contrastively trained with only `query:`/`passage:` prompts (weak
+instruction-following) — but its Qwen2.5-Omni backbone has strong ICL, which reshapes the actual
+forward pass and was not tested. Whether ICL survived the retrieval LoRA tuning is an empirical
+question, not an assumption.
+**Consequences.** Next: **experiment 1.2** — activation heads / ICL (text-query zero-shot + few-shot
+with target-token pooling) for speaker/emotion BEFORE any Operator-B claim; then Operator B only for
+factors that stay flat under ICL; then content/language fan-out. New W4 code so far: `layer_probe.py`
+(mid-layer / audio-token pooling) + `scripts/layer_sweep.py`, `scripts/audio_pool_probe.py`.
+
+### 2026-06-22 · W4 per-factor operator decision (from the algorithm-survey workflow)
+**Decision.** Use **Operator A** (embedding-layer inference-time search: instruction/pooling/layer/
+projector + verifiable-reward argmax) for **content** and **language**; **Operator B** (generative
+Qwen2.5-Omni best-of-N/MBR, frozen weights, GRPO update dropped) for **emotion**; **hybrid** for
+**speaker** (A's layer/pooling/LEACE-RLACE projector search, with B readout if the recovered probe
+margin is too low). Any consensus/B path must gate the per-class plurality separatrix on a held-out
+calibration set; prefer verifiable rewards over majority-vote pseudo-rewards everywhere a ground-truth
+signal exists. Full analysis + sources: [[W4-Training-Free-RL-Feasibility]] §0/§4/§5.
+**Why.** A multi-agent survey (11 agents, arXiv-cited, mostly self-verified) established: (a) Operator
+A has real inference-time DoF on a vector-output model (instruction deltas up to ~55pp; closed-form
+LEACE/RLACE/whitening projections); (b) the binding risk is weak steerability, fixed by reward-guided
+selection; (c) omni-embed-nemotron-3b's Whisper-ASR backbone + contrastive mean-pooling **suppress
+speaker/emotion** in the pooled vector (raw emotion probe ~31%), so those factors need layer/pooling
+recovery or the generative readout; (d) consensus pseudo-rewards are Condorcet-fragile on near-chance
+paralinguistic factors.
+**Consequences.** The CREMA-D proof (E.4) tests the falsifiable cross-probe inequality
+`A_t(e_t) > A_t(e_{t'})` per factor with non-target factors held fixed; a flat row for emotion/speaker
+is a valid negative result (factor below the frozen model's separatrix), not a failure. The W4
+`rl/embed_search` config implements Operator A first; Operator B is a future switch behind the same
+interface.
+
+### 2026-06-22 · Re-center the umbrella on training-free knowledge activation; W4 becomes flagship
+**Decision.** Frame the whole series around one thesis: use training-free RL (no weight or structure
+change) to *activate* the cross-modal, multi-granularity task knowledge an omni/multimodal LLM absorbed
+in pretraining, lifting out-of-box performance on speech tasks. Promote **W4** (omni-embedding speech
+disentanglement) to the flagship first work; keep **W1** as the mature training-free *pattern* reference
+whose reward/eval machinery W4 reuses. No git repo or package is renamed — repositioning is by docs,
+ordering, and a Role column. The flagship's first proof runs on CREMA-D (speaker + emotion on the same
+audio). See [[Project-Thesis]] and [[W4-Training-Free-RL-Feasibility]].
+**Why.** The docs stated the series only generically; the real thesis was unwritten, "disentanglement"
+appeared nowhere, and omni-embed was listed as an asset with no motivation. Disentangling a frozen omni
+model purely by reward activation is the strongest, most novel claim, and W1's existing training-free
+machinery is exactly the shared foundation it needs.
+**Consequences.** New canonical page `wiki/Project-Thesis.md`; four-work table reordered W4-first with a
+Role column across README(_CN)/CLAUDE/AGENTS/docs/wiki; `common/` gains an omni-embedding loader +
+embedding/probe/disentanglement reward & metric modules + an eval/probing harness (lazy imports
+preserved); registry adds VoxCeleb/MELD/CREMA-D/CoVoST2/FLEURS/MINDS14/SLURP. The earlier "W1 first"
+seed decision is superseded (W1 stays the pattern reference). W4-specific code/configs/README live in
+W4's own repo.
+
+### 2026-06-22 · Establish the README + Wiki knowledge base
+**Decision.** Make the root README the single canonical onboarding doc (English `README.md` + 中文
+`README_CN.md`), and stand up this Wiki (sourced from `wiki/`, synced by `scripts/wiki-sync.sh`) as
+shared team memory. Sync `CLAUDE.md`/`AGENTS.md` to point here.
+**Why.** Knowledge was scattered across per-tool files and people's heads; humans and their AIs need
+one consistent understanding.
+**Consequences.** Edit wiki content in `wiki/`, not the web Wiki; record notable decisions here.
+
+### (template) · <short title>
+**Decision.** …  **Why.** …  **Consequences.** …
+
+---
+
+## Seed decisions (context already baked into the repo)
+
+- **WSL2-only compute.** RTX 5090 (Blackwell sm_120) lacks stable native-Windows torch wheels;
+  verl/vLLM/flash-attn are Linux-only. All training runs in WSL2.
+- **Python pinned to 3.12.** System Python 3.14 is too new for ML wheels.
+- **Four separate work repos under one umbrella.** Independent history/issues per work, shared code
+  via editable `common/`. Keeps each paper's repo publishable on its own.
+- **Data never in git.** ~410 GB lives in `speechrl-data/` (WSL ext4); `.gitignore` guards it.
+- **verl for RL; Qwen2-Audio as default base** (swappable via `models/` + config).
+- **W1 first.** Training-free RL is the most mature work and the reference pattern for W2–W4.
+  *(Superseded 2026-06-22: W4 is now the flagship first study; W1 remains the training-free pattern reference.)*
+
+---
+
+
+## 早期条目（紧凑格式）
+
+**2026-06-22 · 把系列重定到「免训练知识激活」主旨，W4 升为旗舰：** 全系列围绕一个主旨——用免训练 RL
+（不改权重/结构）激活 omni/多模态 LLM 预训练中习得的跨模态多粒度任务知识，提升语音任务开箱表现。把
+**W4**（omni 嵌入语音解耦）升为旗舰首发工作，**W1** 保持为成熟的免训练「范式」参考、其奖励/评测机制被
+W4 复用；不改任何仓/包名，仅靠文档、排序与「角色」列重定位；首个验证在 CREMA-D（同音频的说话人+情感）。
+下方「先做 W1」的初始决策被本条取代。详见 [[Project-Thesis]]。
+
+**已固化在仓库里的初始决策：** 仅用 WSL2 算力（RTX 5090 无稳定原生 Windows torch；verl/vLLM 仅 Linux）；
+Python 锁 3.12（系统 3.14 太新）；一个伞仓下四个独立工作仓库（各自历史/issue，靠可编辑 `common/` 共享
+代码）；数据绝不进 git（≈410 GB 在 `speechrl-data/`，`.gitignore` 兜底）；RL 用 verl、基座默认
+Qwen2-Audio（可换）；**先做 W1**（免训练 RL 最成熟，是 W2–W4 的参考范式）。
+
+
+## 中文区历史序言
+
+
+> 追加式的轻量 ADR——团队的持久**记忆**。最新在最上。每条：日期 · 决定了什么 · 为什么 · 影响。人和 AI
+> 都往这里追加（见 [[AI-Collaboration]]），再用 `scripts/wiki-sync.sh` 发布。
+
+**条目格式：** 日期 · 标题；**决定**……**为什么**……**影响**……（英文区已有 2026-06-22 的两条与模板）。
+

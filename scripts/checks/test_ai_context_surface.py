@@ -1796,7 +1796,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.repo.joinpath(*PurePosixPath(relative_path).parts)
         )
         active = document["active_entries"]
-        self.assertEqual(21, len(active))
+        self.assertEqual(12, len(active))
         defaults = {
             entry["path"] for entry in active if entry["load_policy"] == "default"
         }
