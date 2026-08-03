@@ -37,6 +37,7 @@ COLD_ACTIVE_CLASSES = {
     "AUDIT",
     "ARCHIVE",
     "WORKBENCH",
+    "EXPERIMENT",
     "AUDIT_LEGACY",
     "REGISTRY_LEGACY",
     "PENDING_ARCHIVE",
@@ -382,6 +383,8 @@ def classify_path(path, legacy_cold_paths):
         return "ARCHIVE"
     if canonical.startswith("wiki/survey/workbench/"):
         return "WORKBENCH"
+    if canonical.startswith("wiki/experiments/"):
+        return "EXPERIMENT"
     if canonical in legacy:
         return legacy[canonical]
     return "UNCLASSIFIED"

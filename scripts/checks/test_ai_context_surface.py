@@ -362,6 +362,10 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assertEqual("AUDIT", classify_path("wiki/audit/campaign/round/review.md", legacy))
         self.assertEqual("ARCHIVE", classify_path("wiki/archive/review.md", legacy))
         self.assertEqual("WORKBENCH", classify_path("wiki/survey/workbench/x/note.md", legacy))
+        self.assertEqual(
+            "EXPERIMENT",
+            classify_path("wiki/experiments/audio-aware-evidence-acquisition/README.md", legacy),
+        )
         self.assertEqual("AUDIT_LEGACY", classify_path("wiki/old-review.md", legacy))
         self.assertEqual("UNCLASSIFIED", classify_path("docs/ordinary.md", legacy))
 
