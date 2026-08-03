@@ -17,7 +17,7 @@
       {
         "path": "scripts/checks/ai_context_surface_check.py",
         "mode": "100644",
-        "git_blob": "348c7a9a9ae49c83fb2ee185fdbbd9347dea8ee8"
+        "git_blob": "e22bba3e0702fd97432fa37efd898c07bb6a20d5"
       },
       {
         "path": "scripts/checks/build_ai_context_manifest.py",
@@ -32,7 +32,7 @@
       {
         "path": "scripts/checks/test_ai_context_surface.py",
         "mode": "100644",
-        "git_blob": "7161ed9f284021b7d4c63afc881ffe1f860954ec"
+        "git_blob": "10f16ddc8b8354b9e1e60bdd12256cdca30d721a"
       },
       {
         "path": "scripts/checks/test_lean_axiom_gate_contract.py",
@@ -190,7 +190,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "58d86fac20bf98db9ed1acd9c18703c75ec616d47120e314b08bef4f243b433b"
+    "sha256": "6955468a9abe4948ff4fff0be4b71e3835952d50158f8ed2f97a4de77ed1f075"
   },
   "commands": [
     {
