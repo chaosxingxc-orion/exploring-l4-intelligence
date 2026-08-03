@@ -3440,3 +3440,15 @@ GGUF、载体三键、mandatory 缩减集、R0 预算带 ≤3000 调用/≤40 GP
 的 fail-closed 前置；survey delta lane 与程序簿记留伞仓。
 **Supersedes：** 取代「registry 当前为 0、未授权远程建仓」的上一条现状；失效条件：owner 撤回/修订执行
 合同或 STOP_THE_LINE 触发。
+
+**2026-08-03 · Stage‑1B 程序级 Lean 形式层退役；公式证明按 study 在 Stage‑2 重构：**
+**Context：** owner 复盘判定 Stage‑1B 存在过量设计——本应用于详细分析的阶段过度投入了原理研究与公式
+讨论；程序级通用形式层（`proofs/tfrl` 23 个 Lean 源、`scripts/lean_axiom_gate.sh` 门禁、
+`docs/checks/lean-axiom-gate/` 收据）不再承载当前研究。
+**Decision：** 统一删除上述三件（Git 历史保留字节）；形式证明推迟到 Stage‑2，由各获准研究对象在自己
+的 study 仓内按自身主张分别重构——不同研究对象应有不同的公式证明，不再维护程序级通用证明库。
+**Consequences：** CLAUDE/AGENTS 门禁句与 `wiki/Research-Objective.md` formal 节原位更新；
+`wiki/survey/current/research-directions.md` 各方向的「Lean 义务」保留（其语义=per-study Stage‑2 义务，
+与本裁决一致）；Stage‑1B v5 调研映射与 H5 `WITHHOLD_NON_LOAD_BEARING` 不受影响。
+**Supersedes：** 取代「Lean proofs live in proofs/tfrl + axiom gate 在册」的现状描述。失效条件：owner
+重启程序级形式层。

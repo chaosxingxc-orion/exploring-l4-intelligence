@@ -46,9 +46,10 @@ and external search.
 
 ## Formal and evidence boundary
 
-Lean audits assumptions and implications, not empirical effectiveness. Stage‑1B v5
-`38fb9435d0c35e226ad62b16015a6dbee054e6c2` and its 320-work union remain fixed; H5 remains
-non-load-bearing (`WITHHOLD_NON_LOAD_BEARING`).
+The Stage‑1B program-level Lean formal layer is retired (owner 2026-08-03): formula/principle
+analysis at that stage was over-design. Formal proofs are rebuilt per admitted study in Stage‑2,
+scoped to that study's claims. Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and its
+320-work union remain fixed; H5 remains non-load-bearing (`WITHHOLD_NON_LOAD_BEARING`).
 
 ## Next action
 

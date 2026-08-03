@@ -97,8 +97,8 @@ owner GO plus an execution contract, register the semantic repository in `studie
 commands and environment lock belong to that independent repository.
 
 The real umbrella gate is `python scripts/survey/sf_current_package_check.py --check` (runs offline on
-Windows or WSL). Lean proofs live in `proofs/tfrl/`; their axiom footprint is audited by
-`bash scripts/lean_axiom_gate.sh` in WSL, receipts under `docs/checks/lean-axiom-gate/`.
+Windows or WSL). The Stage‑1B program-level Lean formal layer is retired (2026-08-03); formal proofs
+are rebuilt per admitted study in Stage‑2, scoped to that study's claims.
 
 ## Code and Git discipline
 

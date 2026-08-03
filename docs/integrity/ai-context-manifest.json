@@ -6,14 +6,14 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "f5098aa32c813f3f788ae98b78fe44c83d0e26149616af595588d0d114bc57bd"
+      "sha256": "743dd597f634dcdd078f613baa7035cdc2c6ee30aabd162ece0013981d21a6a3"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "021f8ed96cab4c49abdf4c9a588612c37aaf2806416da23b3a560f42edbb530b"
+      "sha256": "fdd6f8704c13f7354f0b3379bf7a6067aefe0270e4a89afbe445ce85a5eea478"
     },
     {
       "path": "wiki/Project-Thesis.md",
