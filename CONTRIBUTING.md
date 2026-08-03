@@ -2,7 +2,7 @@
 
 > **English** | [中文](CONTRIBUTING_CN.md)
 
-This is an **umbrella governance repo plus independent work and admitted-study repos**. The single most important rule is:
+This is an **umbrella governance repo plus independent admitted-study repos**. The single most important rule is:
 **commit each change to the repo it belongs to.**
 
 ## Repository classes
@@ -32,7 +32,7 @@ provenance; the engineering identity follows the admitted research object.
 
 ## Shared library (`common/`)
 
-`speechrl-common` is editable-installed by all four works, so a change there ripples to W1–W4.
+`speechrl-common` is editable-installed by admitted studies, so a change there ripples to every study.
 
 - Run `pytest common/tests` before committing — the smoke tests must pass.
 - **Preserve lazy-import discipline:** keep torch/transformers/librosa/mlflow/jiwer imports *inside*
@@ -46,7 +46,7 @@ All training runs in **WSL2** (see [docs/setup.md](docs/setup.md)). Use the shar
 
 ## Git conventions
 
-- Existing umbrella and W1–W4 repos use **`master`**. Each admitted study records its own default branch;
+- The umbrella uses **`master`**. Each admitted study records its own default branch;
   branch for non-trivial work and open a PR.
 - Keep each commit/PR scoped to a single repo.
 - `.gitattributes` forces `eol=lf` (especially `*.sh`) so scripts run in WSL — keep it.

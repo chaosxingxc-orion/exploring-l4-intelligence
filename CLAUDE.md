@@ -62,7 +62,7 @@ not working context.
   `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data` (`SPEECHRL_DATA_DIR`); never commit
   them. Only local MLflow `mlruns` stays on ext4.
 - `gh` is `C:\Program Files\GitHub CLI\gh.exe`. Windows `PYTHONPATH` uses `;`. `.gitattributes`
-  enforces LF, especially for shell scripts. Existing umbrella/work repos use `master`; each admitted
+  enforces LF, especially for shell scripts. The umbrella uses `master`; each admitted
   study records its remote and branch policy in its own repository.
 
 ## Commands
@@ -83,14 +83,13 @@ pytest common/tests
 Assets are frozen in `docs/datasets.lock.json` and live outside Git:
 
 ```bash
-bash scripts/data/fetch-data.sh --list
-bash scripts/data/fetch-data.sh
+bash scripts/data/fetch-assets.sh
 bash scripts/data/inventory.sh
 ```
 
-There is currently no admitted study checkout. Do not create one from a conditional candidate. After
-owner GO plus an execution contract, register the semantic repository in `studies/registry.json`; its
-commands and environment lock belong to that independent repository.
+One study is admitted (see `studies/registry.json`); its commands and environment lock belong to its
+own repository. A future direction gets a repo only after its own owner GO plus execution contract —
+never pre-create one from a conditional candidate.
 
 The real umbrella gate is `python scripts/survey/sf_current_package_check.py --check` (runs offline on
 Windows or WSL). The Stage‑1B program-level Lean formal layer is retired (2026-08-03); formal proofs

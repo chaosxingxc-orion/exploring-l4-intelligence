@@ -2,118 +2,106 @@
 
 > [English](README.md) | **中文**
 >
-> 仓库标识：**`exploring-l4-intelligence`** — 探索迈向 L4 级（"创新者"）智能的路径。
+> 仓库标识：**`exploring-l4-intelligence`** — 探索迈向 L4 级（「创新者」）智能的路径。
 
-这是一个**伞式治理仓（umbrella governance repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
-零权重、零核心结构改动（外挂系统组件另加）的优化——把语音 / omni 多模态大模型在预训练中习得的知识
-「激活」出来。候选方向编号只用于调研与审计；方向获得 owner GO 和执行合同后，才以具体研究名称在
-`studies/` 下建立独立 GitHub 仓。W1–W4 仍是独立工作仓，不再承载整个主研究。完整主旨见 Wiki 的
-[[Project-Thesis]] 页。
+这是研究计划的**伞式治理仓（umbrella governance repo）**：研究对冻结语音 / omni 多模态大模型的
+**免训练、奖励引导的推理时控制**——在 **API-only 冻结核**外围构建外置 reward-guided 控制面，
+零权重、零核心结构改动。完整主旨见 Wiki 的 [[Project-Thesis]]；当前研究状态见
+[[Research-Objective]]。
 
-> 📖 **从这里开始。** 本 README 是人和 AI 协作者的**唯一权威入口**。更深入的文档在 [`docs/`](docs)；
-> 团队共享知识与"记忆"在 **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**
->（源文件在 [`wiki/`](wiki)）。
+> 📖 **从这里开始。** 本 README 是人和 AI 协作者的权威入口。更深入的文档在 [`docs/`](docs)；
+> 项目真理源文件在 [`wiki/`](wiki)。
 
-## 项目仓库 · Program repositories
+## 运行模式 · Program model
 
-每个工作都是**独立的 GitHub 仓库**（独立的历史与 issue），但都通过可编辑安装（editable install）
-依赖同一个 [`common/`](common)（`speechrl-common`）。
+**Stage‑1 在伞仓，Stage‑2 开独立 study 仓。** 每个新研究课题的详细讨论、调研与论证都在伞仓完成
+（Wiki 调研层、审计轮次、owner 裁决）。方向通过 Stage‑1 且 owner 签发
+`OWNER_GO_AND_EXECUTION_CONTRACT` 后，以**具体语义名称建立独立 GitHub 仓**，checkout 到
+`studies/<semantic-name>/`——之后的全部工程、实验与论文都在该仓完成。候选编号（R1、R2……）只是
+调研/审计 provenance，永不作为仓名。
 
-| # | 工作（仓库） | 角色 | 方向 | 状态 |
-|---|---|---|---|---|
-| W1 | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | 历史/组件工作 | 成熟 selector/evaluator 与 training-free-RL 证据；不是主程序载体 | 🟢 成熟证据 |
-| W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | 独立工作（2026-07-12 重定位） | 冻结 omni 嵌入效用（L0/L1）；fresh proposal 待启（#29）；原"解耦旗舰"表述已被取代 | 🟡 骨架 → 重定位中 |
-| W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 支撑 | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
-| W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 支撑 | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |
+伞仓长期保留**公共资产职能**：数据与模型下载（`docs/datasets.lock.json` 是唯一在线资产权威，
+工具在 `scripts/data/`）、基线身份档案、文献调研基建、运行时 pin、治理门禁。数据集是不变的
+gold truth；各 study 怎么用（切分、采样、prompt、协议）是其私有方案——随论文发表的切分会结晶为
+**新数据集**（派生脚本+样本身份+provenance）晋升回伞仓。
 
-目前还没有正式获准的 study 仓。首个计划中的语义研究对象“音频感知的证据获取”已经通过
-Stage-1C 和正式开题，但 owner 的 Stage-2A 执行合同仍待签发。候选 R1 已在建仓前日落，因此不建立
-空工程仓。仓库和实验资产状态统一从 [[Experiment-Assets]] 路由。
+## 已获准的 study
+
+| Study（仓库） | 来源 | 开题 | 状态 |
+|---|---|---|---|
+| [audio-aware-evidence-acquisition](https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition) | R2（system-first-stage1c-v2 战役） | GO 2026-08-03 | Stage‑2A E0（无模型数据门）进行中 |
+
+登记表：[`studies/registry.json`](studies/registry.json)；逐 study 实验台账：
+`wiki/experiments/<slug>/`。历史 W1–W4 工作仓已于 2026-08-03 退役——本地删除、远端保留为程序外
+冷备份（墓碑：`wiki/archive/program/w1-w4-retirement/`）。
 
 ## 仓库结构 · Repo layout
 
 ```
-common/         共享库（speechrl_common）：audio、models、rl rewards、data、tracking、utils
-projects/       四个工作仓库（各自独立的 git 仓库；被本伞仓 gitignore）
-studies/        正式语义研究仓的登记表与本地容器（每个子目录都是独立 git 仓）
-docs/           setup.md、architecture.md、data.md、完整性与检查资产
-scripts/        wsl-setup.sh、env-setup.sh、mlflow-ui.sh、wiki-sync.sh、data/（模型+数据集下载）
-wiki/           GitHub Wiki 源文件 —— 项目真理与实验资产管理平面
-speechrl-data/  数据根目录（≈650 GB 模型/数据集）—— 在 E 盘，被 gitignore；WSL 侧 /mnt/e/…
+common/         共享库（speechrl_common）：audio、models、rewards、data、tracking、utils
+studies/        获准语义 study 仓的登记表与本地容器（每个子目录都是独立 git 仓）
+docs/           setup.md、datasets.lock.json（资产权威）、superpowers/specs、checks、integrity
+scripts/        wsl-setup.sh、env-setup.sh、wiki-sync.sh、data/（下载）、checks/+survey/（门禁）
+wiki/           GitHub Wiki 源文件——项目真理、调研层、审计、实验台账
+speechrl-data/  数据根目录（数百 GB，E 盘，被 gitignore；WSL 侧 /mnt/e/…）
 CLAUDE.md / AGENTS.md   给 AI 协作者的逐工具操作手册（Claude Code / Codex）
 CONTRIBUTING.md         多仓归属与协作方式
 ```
 
 ## 环境 · Environment
 
-**算力在 WSL2 `Ubuntu-24.04`，不在原生 Windows**（默认 `Ubuntu` 是 WSL1、无 GPU）。RTX 5090（Blackwell, sm_120）没有稳定的原生 Windows
-torch 轮子，verl/vLLM/flash-attn 仅 Linux 可用，所有训练都在 WSL2 里跑。Python 固定 **3.12**
-（uv venv 在 `~/.venvs/speechrl`，ext4），torch 走 `cu128` 源。**绝不动 `D:/ai-stack/mem0-venv`**
-（`.mcp.json` 里隔离的 mem0 MCP 环境）。完整说明见 [docs/setup.md](docs/setup.md)。
+**算力在 WSL2 `Ubuntu-24.04`，不在原生 Windows**（默认 `Ubuntu` 是 WSL1、无 GPU）。Python 固定
+**3.12**（uv venv 在 `~/.venvs/speechrl`，ext4）；torch 走 `cu128` 源（RTX 5090，sm_120）。冻结
+30B omni 核的推理走常驻 llama.cpp `llama-server`（GGUF）。完整说明见
+[docs/setup.md](docs/setup.md)。
 
 ## 快速开始 · Quick start
 
-在 **WSL2 Ubuntu** 里（完整指南见 [docs/setup.md](docs/setup.md)）：
-
 ```bash
-bash scripts/wsl-setup.sh     # 一次性：WSL 的 CUDA toolkit + uv
-bash scripts/env-setup.sh     # py3.12 venv + torch cu128 + verl + 可编辑安装 common
-source ~/.venvs/speechrl/bin/activate
+# 伞仓治理门禁（离线，Windows 或 WSL 均可）
+python scripts/survey/sf_current_package_check.py --check
+python scripts/checks/study_workspace_check.py
 
-# 开发现有 W1–W4 工作仓
-cd projects/speech-mllm-training-free-rl
+# 开发已获准的 study（WSL2 内、激活 venv）
+cd studies/audio-aware-evidence-acquisition
 uv pip install -e ../../common -e .
-bash scripts/train.sh                          # 训练（Hydra）
-bash scripts/train.sh rl.learning_rate=2e-6    # 覆盖任意 Hydra 键
-bash scripts/eval.sh
+pytest
 ```
 
-正式 study 的安装和运行命令由其独立仓维护。条件候选不能提前搭空工程；必须先关闭 owner GO 与执行
-合同门禁，再登记到 `studies/registry.json`。
-
-实验追踪：本地 MLflow（`bash scripts/mlflow-ui.sh` → http://127.0.0.1:5000；纯文件存储、无需服务器/
-账号）。配置：每个工作用 Hydra。RL 库：verl。
+获准 study 的运行命令、配置和锁由其自己的仓维护；见该仓 `README.md` 与
+`wiki/experiments/<slug>/` 下的执行合同。
 
 ## 数据与模型 · Data & models
 
-权重和数据集（≈440 GB）**永不进 git** —— 自己在本地拉取（`.gitignore` 兜底，`speechrl-data/`
-永远不会被误推）：
+权重和数据集**永不进 git**。`docs/datasets.lock.json` 是资产身份、生命周期、获取状态与核验的
+唯一在线来源：
 
 ```bash
-bash scripts/data/probe-access.sh   # 只读：检查 HF/ModelScope 可达性
-bash scripts/data/fetch-data.sh     # 下载模型+数据集（跳过已完整的）
-bash scripts/data/inventory.sh      # 审计 COMPLETE / PARTIAL / MISSING
+bash scripts/data/fetch-assets.sh    # 按锁取数（命名 profile；写采集回执）
+bash scripts/data/inventory.sh       # 审计 COMPLETE / PARTIAL / MISSING
 ```
 
-完整清单、镜像（hf-mirror + ModelScope）、逐项目标见 [docs/data.md](docs/data.md)。
-
-## 协作方式 · Working mode
-
-这是多仓工作区，**改谁就提交到谁**：治理、Wiki、共享设施和 study 登记表提交到伞仓；W1–W4 代码
-提交到对应 `projects/` 仓；正式研究代码提交到对应 `studies/` 独立仓。大型实验资产不进 Git，由
-[[Experiment-Assets]] 统一索引。完整约定见 [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md)。
+见 [docs/data.md](docs/data.md) 与 `scripts/data/README.md`。
 
 ## 给 AI 协作者 · For AI assistants
 
-如果你是 AI 协作者（Claude Code / Codex 等），按这个分层理解仓库：
+按此分层按序读仓库：
 
-1. **本 README** —— 权威入口。
-2. **[[Project-Thesis]]**（Wiki）—— 项目主旨、三个核心术语与旗舰主张；读完本页紧接着读。
-3. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** —— 你的逐工具操作手册（命令、坑、纪律）。
-4. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**（源在 [`wiki/`](wiki)）—— 团队共享、可演进的知识与记忆。
-5. **mem0 MCP** —— **本地、个人**记忆，不与团队共享。
+1. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** —— 客户端操作手册；
+2. **[[Research-Objective]]** —— 当前阶段、权限与下一步；
+3. **[[Project-Thesis]]** —— 项目北极星。
 
-规矩：**开工前先读** Wiki 的 [[Project-Thesis]]、[[Home]] 和 [[Per-Work-Status]]；产生重要决策/经验时，**写回** Wiki 的
-[[Decision-Log]]，再 `bash scripts/wiki-sync.sh` 发布。这样人和各自的 AI 才能拿到一致的理解。完整协议
-见 [[AI-Collaboration]]。
+`wiki/survey/current/`、`wiki/Experiment-Assets.md` 与逐 study 台账只在具名任务时加载。持久决策
+写回 [[Decision-Log]]；web wiki 只是镜像，仅在获授权时用 `scripts/wiki-sync.sh` 发布。完整协议见
+[[AI-Collaboration]]。
 
 ## 文档导航 · Docs index
 
 | | |
 |---|---|
-| [docs/setup.md](docs/setup.md) | WSL2 + CUDA + py3.12 venv + torch cu128 + verl |
-| [docs/architecture.md](docs/architecture.md) | 伞式治理仓 + 工作仓 + 独立语义 study 仓模型 |
+| [docs/setup.md](docs/setup.md) | WSL2 + CUDA + py3.12 venv + torch cu128 |
+| [docs/architecture.md](docs/architecture.md) | 伞式治理仓 + 独立语义 study 仓模型 |
 | [docs/data.md](docs/data.md) | 模型、数据集、镜像、下载脚本 |
 | [common/README.md](common/README.md) | `speechrl_common` 模块地图与安装 |
 | [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md) | 多仓协作流程与约定 |
-| [Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki) ([`wiki/`](wiki)) | 共享知识与记忆（Architecture、Working-Mode、Per-Work-Status、AI-Collaboration、Decision-Log、Onboarding） |
+| [Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)（[`wiki/`](wiki)） | 项目真理：研究状态、调研层、审计、实验台账 |
