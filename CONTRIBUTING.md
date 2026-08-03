@@ -9,8 +9,6 @@ This is an **umbrella governance repo plus independent work and admitted-study r
 
 - **`exploring-l4-intelligence`** (umbrella, this repo) — owns `common/`, `docs/`, `scripts/`,
   `wiki/`, `studies/README.md`, `studies/registry.json`, and root `*.md`.
-- **`projects/<work>/`** (W1–W4) — each is its **own git repo** (gitignored by the umbrella) with
-  independent history, issues, and remote.
 - **`studies/<semantic-study>/`** — each owner-admitted research object is its **own Git/GitHub repo**,
   checked out under the umbrella workspace but gitignored by it. Creation requires
   `OWNER_GO_AND_EXECUTION_CONTRACT`; Stage-1 candidate IDs never become repository names.
@@ -21,12 +19,12 @@ This is an **umbrella governance repo plus independent work and admitted-study r
 |---|---|
 | `common/`, `docs/`, `scripts/`, `wiki/`, root README/CONTRIBUTING | the umbrella repo |
 | `studies/README.md` or `studies/registry.json` | the umbrella repo |
-| a work's code / configs / `README.md` (under `projects/<work>/`) | that work's own repo |
 | an admitted study's code / configs / `README.md` (under `studies/<semantic-study>/`) | that study's own repo |
 
-A nested-repository code change is in the wrong place if umbrella `git status` shows it under
-`projects/` or a study checkout. Both containers are ignored by the umbrella. Only the two
-`studies/` registry files belong to the umbrella.
+A nested-repository code change is in the wrong place if umbrella `git status` shows it under a
+study checkout; that container is ignored by the umbrella. Only the two `studies/` registry files
+belong to the umbrella. The historical W1–W4 work repos were retired and deleted on 2026-08-03
+(tombstone: `wiki/archive/program/w1-w4-retirement/`).
 
 Do not pre-create candidate repositories. A direction can sunset before engineering, or several
 candidate analyses can converge into one semantically named study. The umbrella Wiki preserves that

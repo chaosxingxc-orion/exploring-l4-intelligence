@@ -25,47 +25,32 @@
 
 ## W1
 
-- **Repo:** `projects/speech-mllm-training-free-rl`
-- **Role:** legacy/component work containing mature selector/evaluator and training-free-RL evidence;
-  it is not the primary program or the parent of future studies.
-- **Current state:** existing code and `_repro` history remain owned by W1. They may be cited or deliberately
-  adopted by an admitted study but receive no authority automatically. Stage‑1B v5
-  `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union remain fixed evidence.
-- **Legacy boundary:** R1 agreement remains `FAIL`; R2R1 remains
+- **Retired 2026-08-03:** `speech-mllm-training-free-rl` deleted by owner ruling (historical residue);
+  local checkout removed, remote deletion pending a `delete_repo` token grant. Ten registered adoption
+  candidates were rescued into the admitted study's `reference/w1-snapshot/` (source commit `7ed41f62`).
+- **Surviving boundary:** Stage‑1B v5 `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union
+  remain fixed evidence. R1 agreement remains `FAIL`; R2R1 remains
   `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; H5 remains withheld and non-load-bearing.
-- **Next authorized work:** no new W1 experiment follows from the study-repository refresh.
 
 ## W2
 
-- **Repo:** `projects/speech-mllm-efficient-rl-alignment`
-- **Role:** supporting study for efficient GRPO/DPO speech-language alignment.
-- **Current state:** Hydra/shared-library skeleton; the Stage-1A documentation repair authorizes no new
-  implementation or experiment.
-- **Next authorized work:** remain parked; later activation needs its
-  own current protocol and evidence boundary.
+- **Retired 2026-08-03:** `speech-mllm-efficient-rl-alignment` (supporting skeleton) deleted; final HEAD
+  `766bbc9`; its uncommitted config-default tweak is recorded in the tombstone.
 
 ## W3
 
-- **Repo:** `projects/speech-mllm-multitask-rl`
-- **Role:** supporting study for one policy across ASR/ST/SID/SER with task-specific verifiable rewards.
-- **Current state:** Hydra/shared-library skeleton; the Stage-1A documentation repair authorizes no new
-  implementation or experiment.
-- **Next authorized work:** remain parked; later work may reuse shared contracts but cannot inherit W1
-  execution authority.
+- **Retired 2026-08-03:** `speech-mllm-multitask-rl` (supporting skeleton) deleted; final HEAD `931806c`;
+  its uncommitted config-default tweak is recorded in the tombstone.
 
 ## W4
 
-- **Repo:** `projects/speech-mllm-omni-embedding-rl`
-- **Role:** separate repositioned work on L0/L1 embedding-utility/readout limits, not the flagship.
-- **Current state:** prior probes and corrections remain historical evidence and are not upgraded by the
-  W1 repair. A fresh proposal remains pending ticket #29.
-- **Next authorized work:** remain parked until that proposal is independently reviewed and owner-approved;
-  prior exploratory results are not permission for a new run.
+- **Retired 2026-08-03:** `speech-mllm-omni-embedding-rl` deleted; final HEAD `0f587c6`. Historical
+  probes stay citable through Git history and the tombstone only; the ticket #29 proposal lapses.
 
 ## Shared boundaries
 
 - North star: `wiki/Project-Thesis.md`; current stage and blockers: `wiki/Research-Objective.md`.
-- Work-repo code/config/README changes belong in that work repo; admitted-study code belongs in its
-  independent semantic repo; umbrella records and the study registry belong here.
+- Admitted-study code belongs in its independent semantic repo; umbrella records and the study registry
+  belong here. Retirement record: `wiki/archive/program/w1-w4-retirement/`.
 - Historical per-work detail is not repeated. Resolve it from its cold campaign index or `wiki/archive/`
   only for a named provenance question.

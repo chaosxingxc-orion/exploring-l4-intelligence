@@ -3452,3 +3452,17 @@ GGUF、载体三键、mandatory 缩减集、R0 预算带 ≤3000 调用/≤40 GP
 与本裁决一致）；Stage‑1B v5 调研映射与 H5 `WITHHOLD_NON_LOAD_BEARING` 不受影响。
 **Supersedes：** 取代「Lean proofs live in proofs/tfrl + axiom gate 在册」的现状描述。失效条件：owner
 重启程序级形式层。
+
+**2026-08-03 · W1–W4 历史 work 仓退役删除（本地即刻、远端待 token 授权）：**
+**Context：** owner 裁定 `projects/` 下四个 work 仓是历史工作产物（W1 legacy 探针线、W2/W3 支撑骨架、
+W4 已另行重定位），研究主线已由 admitted study 承载。
+**Decision：** 本地与云端全部删除。删除前保全：study 仓迁移清单登记的十个 W1 候选文件按
+copy-and-verify 快照入 `reference/w1-snapshot/`（源 commit `7ed41f62`、SHA-256 清单、未整合状态）；
+四仓终态 HEAD 与 W2/W3 未提交 config 微调存墓碑
+`wiki/archive/program/w1-w4-retirement/2026-08-03-w1-w4-retirement-tombstone.md`。本地删除即刻执行
+（W1 目录留空壳至会话结束）；远端删除因 gh token 缺 `delete_repo` scope 待 owner 授权后执行。
+**Consequences：** CLAUDE/AGENTS 表与命令区、CONTRIBUTING 仓类、Per-Work-Status 四节墓碑化原位更新；
+legacy 574 行 attempt inventory 保持历史字节、解析面按设计转 unresolved；scratch 空目录与 hf_probe*
+残留同日清除。
+**Supersedes：** 取代「W1–W4 保留为独立 work repos」的架构描述（2026-08-02 条目相应部分）。失效条件：
+owner 决定恢复某一 work 仓（从远端 re-clone，若远端已删则不可恢复）。

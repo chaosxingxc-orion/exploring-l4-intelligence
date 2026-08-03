@@ -8,16 +8,10 @@ Umbrella governance repo for a research program on training-free, reward-guided 
 of frozen speech/omni multimodal LLMs. The north star is `wiki/Project-Thesis.md`; current research
 state is `wiki/Research-Objective.md`.
 
-| Work | Repo under `projects/` | Package | Role |
-|---|---|---|---|
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | Legacy/component work; not the program carrier |
-| W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | Supporting skeleton |
-| W3 | `speech-mllm-multitask-rl` | `multitask_rl` | Supporting skeleton |
-| W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | Separate repositioned work |
-
 The umbrella owns `common/`, `docs/`, `scripts/`, `studies/README.md`, `studies/registry.json`, `wiki/`,
-and root Markdown. Each `projects/<work>/` is an independent Git repo and owns its code, configs, and
-README. Each admitted research study is also an independent, semantically named Git repo checked out
+and root Markdown. The historical W1–W4 work repos under `projects/` were retired and deleted on
+2026-08-03 (tombstone: `wiki/archive/program/w1-w4-retirement/`). Each admitted research study is an
+independent, semantically named Git repo checked out
 under `studies/<study-name>/`; candidate IDs such as R1/R2 are audit provenance, never engineering repo
 names. Study creation requires `OWNER_GO_AND_EXECUTION_CONTRACT`. See `CONTRIBUTING.md` and
 `wiki/Experiment-Assets.md`.
@@ -75,13 +69,11 @@ Run ML commands in WSL2 with `source ~/.venvs/speechrl/bin/activate`:
 bash scripts/wsl-setup.sh
 bash scripts/env-setup.sh
 
-cd projects/speech-mllm-training-free-rl
+cd studies/audio-aware-evidence-acquisition
 uv pip install -e ../../common -e .
-bash scripts/train.sh
-bash scripts/eval.sh
+pytest
 
 pytest common/tests
-pytest
 ```
 
 Assets are frozen in `docs/datasets.lock.json` and live outside Git:
@@ -105,10 +97,10 @@ are rebuilt per admitted study in Stage‑2, scoped to that study's claims.
 - `common/src/speechrl_common/` provides audio, model, reward, data, tracking, and utility helpers.
   Keep torch/transformers/librosa/mlflow/jiwer imports inside the functions that use them; package
   top-level imports remain light.
-- Each work depends on `common` through editable `../../common`; torch/verl come from the shared WSL
-  environment. Hydra config composes `model/`, `dataset/`, `rl/`, and `experiment/`.
+- The admitted study depends on `common` through editable `../../common`; torch comes from the shared
+  WSL environment. Study config composes `model/`, `dataset/`, `baseline/`, and `experiment/`.
 - Preserve unrelated user changes. Use non-destructive Git operations. Commit each change in the repo
-  that owns it; umbrella, work, and admitted-study repos have independent histories. Do not publish,
+  that owns it; umbrella and admitted-study repos have independent histories. Do not publish,
   push, create a remote study repo, or run non-dry wiki sync without explicit authorization.
 - `CLAUDE.md` and `AGENTS.md` are mirrored except the client header/description/marketplace line.
 - Git blob bytes are the evidence hash authority: use `git show <commit>:<path>` for historical
