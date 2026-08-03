@@ -122,7 +122,7 @@
       {
         "path": "scripts/survey/test_sf_archive_candidates.py",
         "mode": "100644",
-        "git_blob": "992cea0b85dfdef65912c97dc5254d12d9caad85"
+        "git_blob": "d8d41dc9d3ab2d6599dd8246effbe6daf44469d8"
       },
       {
         "path": "scripts/survey/test_sf_audit_immutability_check.py",
@@ -185,7 +185,7 @@
         "git_blob": "c0f5f4447e43e78693e588647ffc96247361aa46"
       }
     ],
-    "sha256": "5e1d1307e28dee1d7144e94005f35e44ec652dec609e66291dce718b8a5dff15"
+    "sha256": "00aec321589e64bbe984a26c90b612c5423066f515a1106d7bd9108415623625"
   },
   "commands": [
     {
