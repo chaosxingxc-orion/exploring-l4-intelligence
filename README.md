@@ -4,49 +4,50 @@
 >
 > Repo slug: **`exploring-l4-intelligence`** — charting a path toward L4 ("Innovator") intelligence.
 
-The **umbrella repo** for a four-part research series on **training-free RL to activate the
+The **umbrella governance repo** for a research program on **training-free RL to activate the
 pretrained knowledge of speech / omni multimodal LLMs** — reward-guided, inference-time optimization
 that changes **no base-model weights and no base-model structure** (external system components are
-added) — plus a shared library all four works build on. The **current primary study (W1)** builds an
-**external reward-guided control plane around an API-only frozen speech/omni core** (system-level
-in-context control over knowledge, memory, skills and evidence state; Stage-1C direction
-confirmation in progress — see the Wiki's Research-Objective page); W4 is a separate work on the
-frozen omni's own embedding space (repositioned 2026-07-12 per the owner-signed G0 ruling). Full
-statement of purpose: the Wiki's [[Project-Thesis]] page.
+added). The program studies an **external reward-guided control plane around an API-only frozen
+speech/omni core**. Candidate direction IDs are survey provenance only; after a direction receives
+owner GO and an execution contract, it gets an independently versioned, semantically named study
+repository under `studies/`. W1–W4 remain separate work repositories and do not own the primary
+program. Full statement of purpose: the Wiki's [[Project-Thesis]] page.
 
 > 📖 **Start here.** This README is the single canonical entry point for humans **and** their AI
 > assistants. Deeper docs live in [`docs/`](docs); shared team knowledge & "memory" live in the
 > **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)** (sourced
 > from [`wiki/`](wiki)).
 
-## The series
+## Program repositories
 
-Each work is its **own GitHub repo** (independent history/issues) but develops against one shared
-[`common/`](common) (`speechrl-common`) via an editable install.
+The umbrella owns governance, Wiki truth, study registration and stable shared infrastructure. W1–W4
+remain independent GitHub work repositories. Each admitted research object becomes another independent
+GitHub repository checked out under `studies/<semantic-name>/`.
 
 | # | Work (repo) | Role | Focus | Status |
 |---|---|---|---|---|
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **Primary study** | external reward-guided control plane around an API-only frozen omni core (knowledge/memory/skills/evidence-state); Stage-1C direction confirmation, first Stage-2A slice = R5+R6+R8 | 🟢 Mature · primary |
+| W1 | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | Legacy/component work | mature selector/evaluator and training-free-RL evidence; not the program carrier | 🟢 Mature evidence |
 | W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | Separate work (repositioned 2026-07-12) | frozen omni embedding utility (L0/L1); fresh proposal pending (#29); former disentanglement-flagship framing superseded | 🟡 Skeleton → repositioning |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment | 🟡 Skeleton |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards | 🟡 Skeleton |
 
-**W1 carries the current primary study; W4 is a separate, repositioned work** (2026-07-12 — see
-[[Decision-Log]] 续24 and the Thesis supersession note). W1's mature structure and scripts remain the
-pattern to mirror when growing W2–W4. Live per-work
-progress is on the Wiki's [[Per-Work-Status]] page; the project's purpose is on [[Project-Thesis]].
+No study repository is admitted yet. The first planned semantic object, audio-aware evidence
+acquisition, has passed Stage-1C and formal opening; its owner Stage-2A execution contract remains
+unsigned. Candidate R1 sunset before admission and therefore has no empty engineering repository.
+Repository state and experiment assets are routed by [[Experiment-Assets]].
 
 ## Repo layout
 
 ```
 common/         shared library (speechrl_common): audio, models, rl rewards, data, tracking, utils
 projects/       the four work repos (each its OWN git repo; gitignored by this umbrella)
-docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads)
+studies/        registry + local root for admitted semantic study repos (each its OWN git repo)
+docs/           setup.md (WSL2 + env), architecture.md, data.md (downloads), integrity/check assets
 scripts/        wsl-setup.sh, env-setup.sh, mlflow-ui.sh, wiki-sync.sh, data/ (model+dataset downloads)
-wiki/           source for the GitHub Wiki — shared knowledge & memory (push via scripts/wiki-sync.sh)
+wiki/           source for the GitHub Wiki — program truth and experiment asset control plane
 speechrl-data/  data root (~650 GB models/datasets) — on the E: drive, gitignored; /mnt/e/… from WSL
 CLAUDE.md / AGENTS.md   per-tool operating guides for AI assistants (Claude Code / Codex)
-CONTRIBUTING.md         how to work across the five repos
+CONTRIBUTING.md         repository ownership and multi-repo workflow
 ```
 
 ## Environment
@@ -66,13 +67,17 @@ bash scripts/wsl-setup.sh     # one-time: CUDA toolkit for WSL + uv
 bash scripts/env-setup.sh     # py3.12 venv + torch cu128 + verl + editable common
 source ~/.venvs/speechrl/bin/activate
 
-# work on a single study
+# work on an existing W1–W4 repository
 cd projects/speech-mllm-training-free-rl
 uv pip install -e ../../common -e .
 bash scripts/train.sh                          # train (Hydra)
 bash scripts/train.sh rl.learning_rate=2e-6    # override any Hydra key
 bash scripts/eval.sh
 ```
+
+An admitted study keeps its own install/run commands and lockfiles. Do not scaffold one from a
+conditional candidate; first close the owner GO and execution-contract gate and update
+`studies/registry.json`.
 
 Tracking: local MLflow (`bash scripts/mlflow-ui.sh` → http://127.0.0.1:5000; file store, no
 server/account). Config: Hydra per work. RL library: verl.
@@ -92,21 +97,21 @@ Full asset list, mirrors (hf-mirror + ModelScope), and per-asset targets: [docs/
 
 ## Working mode
 
-Five repos (umbrella + four works): **commit each change where it belongs** — `common/`, `docs/`,
-`scripts/`, `wiki/` go to this umbrella; a work's code (including its README) goes to **that work's
-own repo** (they're gitignored here). Default branch is `master`. Changes to `common/` ripple to
-W1–W4 — run `pytest common/tests`. Full conventions: [CONTRIBUTING.md](CONTRIBUTING.md) and the
-Wiki's [[Working-Mode]].
+This is a multi-repository workspace: **commit each change where it belongs**. Umbrella governance,
+Wiki, shared utilities and the study registry go to this repo; W1–W4 code goes to the corresponding
+`projects/` repo; admitted study code goes to its independent `studies/` repo. Large experiment assets
+stay outside Git and are indexed from [[Experiment-Assets]]. Full conventions:
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## For AI assistants
 
 If you are an AI assistant (Claude Code / Codex, etc.), read the repo through this layering:
 
-1. **this README** — canonical onboarding.
-2. **[[Project-Thesis]]** (Wiki) — the project's purpose, the three core terms, and the flagship claim; read right after this.
-3. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** — your per-tool operating guide (commands, gotchas, discipline).
-4. **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)** (source in [`wiki/`](wiki)) — shared, evolving team knowledge & memory.
-5. **mem0 MCP** — local, personal memory — *not* shared with the team.
+1. **[CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)** — the client operating guide.
+2. **[[Research-Objective]]** — current stage, authority and next action.
+3. **[[Project-Thesis]]** — the program north star.
+4. **[[Experiment-Assets]]** — targeted entry for study repositories and experiments.
+5. **mem0 MCP** — local, personal memory; not shared team authority.
 
 Rule of thumb: **before starting**, read the Wiki's [[Home]] and [[Per-Work-Status]]; when you make a
 notable decision or learn something durable, **write it back** to the Wiki's [[Decision-Log]] and
@@ -118,7 +123,7 @@ understanding. See [[AI-Collaboration]] for the full protocol.
 | | |
 |---|---|
 | [docs/setup.md](docs/setup.md) | WSL2 + CUDA + py3.12 venv + torch cu128 + verl |
-| [docs/architecture.md](docs/architecture.md) | umbrella + shared lib + four-repo model |
+| [docs/architecture.md](docs/architecture.md) | umbrella governance + work repos + independent semantic study repos |
 | [docs/data.md](docs/data.md) | models, datasets, mirrors, fetch scripts |
 | [common/README.md](common/README.md) | `speechrl_common` module map & install |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | multi-repo workflow & conventions |

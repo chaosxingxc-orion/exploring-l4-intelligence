@@ -1,0 +1,30 @@
+{
+  "schema": "experiment-asset-inventory-v1",
+  "study_registry": {
+    "path": "studies/registry.json",
+    "sha256": "cb08bb9811100ce350afeae5cee0a11931307ca8c84fdc82fab3509980a51089"
+  },
+  "experiment_control_plane": "wiki/Experiment-Assets.md",
+  "asset_authorities": {
+    "lifecycle_and_index": "umbrella-wiki",
+    "code_and_config": "independent-study-git-repository",
+    "large_artifacts": "SPEECHRL_DATA_DIR",
+    "run_tracking": "MLflow"
+  },
+  "legacy_experiment_attempts": {
+    "path": "docs/integrity/experiment_attempt_registry.jsonl",
+    "sha256": "f05e0efb590bf349b124dded10b682d317301c32d6911d591c3bfd12940a6ffe",
+    "classification": "PRE_STAGE2_LEGACY_INVENTORY",
+    "recorded_entries": 574,
+    "worktree_present": 573,
+    "history_only": 1,
+    "unresolved": 0,
+    "history_only_assets": [
+      {
+        "path": "projects/speech-mllm-training-free-rl/_repro/wave1_results.md",
+        "latest_path_commit": "bbcf3179b3966e9c17183a2c940c12d7af2ad676"
+      }
+    ],
+    "unresolved_assets": []
+  }
+}

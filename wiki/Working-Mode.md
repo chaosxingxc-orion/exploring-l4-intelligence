@@ -1,55 +1,44 @@
 # Working Mode
 
-How we work across the **five repos** (umbrella + W1–W4). See also [CONTRIBUTING.md](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/CONTRIBUTING.md).
+This is a multi-repository workspace. Commit every change to the repository that owns it.
 
-**Where each change goes.** This is the rule that trips people up most:
+## Ownership
 
-- `common/`, `docs/`, `scripts/`, `wiki/`, root `*.md` → commit to **this umbrella repo**.
-- A work's own code/configs/README → commit to **that work's own repo** under `projects/<work>/`
-  (they are gitignored by the umbrella, with independent history/issues/remotes).
+- Umbrella governance, Wiki, `common/`, `docs/`, `scripts/`, `studies/README.md` and
+  `studies/registry.json` → umbrella repo.
+- W1–W4 code/config/README → the corresponding independent repo under `projects/<work>/`.
+- Admitted study code/config/README → its independent semantically named repo under
+  `studies/<semantic-study>/`.
+- Models, datasets and large/raw outputs → `SPEECHRL_DATA_DIR`, never Git.
+- Run tracking → local MLflow; the Wiki pins run IDs and asset hashes.
 
-**Shared-library ripple.** `common/` (`speechrl-common`) is editable-installed by all four works. A
-change there affects W1–W4 — run `pytest common/tests` (the lazy-import smoke tests), and keep heavy
-imports inside functions so `import speechrl_common` stays cheap.
+Do not create an engineering repo from a conditional candidate. Repository creation requires a semantic
+identity, owner GO and an execution contract. Candidate IDs remain survey/audit provenance.
 
-**Git conventions.** Default branch is **`master`** for all five repos. Branch for non-trivial work,
-open a PR, keep commits scoped to one repo. `.gitattributes` forces `eol=lf` (especially `*.sh`) so
-scripts run in WSL — keep it. Never commit data: `speechrl-data/` and all weight/dataset/archive
-formats are gitignored (~440 GB stays local).
+## Git and checks
 
-**Config & tracking.** Hydra per work (`config.yaml` composes `model/ dataset/ rl/ experiment/`);
-override any key on the CLI (`bash scripts/train.sh rl.learning_rate=2e-6`). Tracking is local MLflow
-under `~/speechrl-data/mlruns` — no server, no account.
+Existing umbrella and W1–W4 repos use `master`; each admitted study records its own branch policy.
+Branch non-trivial changes and keep a commit/PR within one repository. Preserve LF normalization and the
+lazy-import boundary in `common/`. Run `pytest common/tests`, the owning repository's tests, and the
+relevant umbrella gate.
 
-**Gotchas.** `gh` resolves to `C:\Program Files\GitHub CLI\gh.exe` (ahead of a shadowing Python
-script). On Windows Python the `PYTHONPATH` separator is `;` (not `:`) when testing without an install.
+Never create remotes, push, or publish the Wiki without explicit authorization. The repository Wiki
+source is authoritative; the web Wiki is a mirror.
 
-**Knowledge & memory.** Record durable decisions/learnings in [[Decision-Log]] and publish via
-`scripts/wiki-sync.sh`. AI assistants follow [[AI-Collaboration]].
+## Research flow
+
+Each study advances independently from survey through validation. Once one study enters engineering,
+survey of the next candidate may proceed in parallel. Record durable state in [[Research-Objective]],
+experiment assets in [[Experiment-Assets]], and detailed placement/lifecycle rules in
+[[AI-Collaboration]].
 
 ---
 
 ## 中文
 
-我们在**五个仓库**（伞仓 + W1–W4）上的协作方式；另见
-[CONTRIBUTING_CN.md](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/CONTRIBUTING_CN.md)。
+这是多仓工作区，改动必须提交到拥有它的仓：治理、Wiki、共享设施和 study 登记表属于伞仓；W1–W4
+代码属于各自 `projects/` 仓；正式研究代码属于各自 `studies/` 独立仓；大型数据、权重和原始输出只放
+`SPEECHRL_DATA_DIR`，运行由 MLflow 跟踪并从 Wiki 绑定 ID/hash。
 
-**改谁提交到谁**（最容易踩的点）：`common/`、`docs/`、`scripts/`、`wiki/`、根目录 `*.md` → 提交到
-**本伞仓**；某个工作自己的代码/配置/README → 提交到 **`projects/<work>/` 那个工作自己的仓库**（它们被
-伞仓 gitignore，有独立历史/issue/remote）。
-
-**共享库波及：** `common/`（`speechrl-common`）被四个工作可编辑安装，改它会影响 W1–W4 —— 跑
-`pytest common/tests`，并保持重导入在函数内部，让 `import speechrl_common` 始终廉价。
-
-**Git 约定：** 五仓默认分支都是 **`master`**；非琐碎改动开分支、提 PR，提交只限于单个仓库；
-`.gitattributes` 强制 `eol=lf`（尤其 `*.sh`），别动它；绝不提交数据（`speechrl-data/` 及各类权重/
-数据集/压缩格式都被忽略）。
-
-**配置与追踪：** 每个工作用 Hydra（`config.yaml` 组合 `model/ dataset/ rl/ experiment/`），命令行可
-覆盖任意键；追踪是本地 MLflow（`~/speechrl-data/mlruns`，无服务器/账号）。
-
-**坑：** `gh` 解析到 `C:\Program Files\GitHub CLI\gh.exe`（在一个同名 Python 脚本之前）；Windows
-Python 下 `PYTHONPATH` 分隔符是 `;` 不是 `:`。
-
-**知识与记忆：** 把持久的决策/经验记到 [[Decision-Log]]，用 `scripts/wiki-sync.sh` 发布；AI 协作者遵循
-[[AI-Collaboration]]。
+条件候选不得提前建工程仓。只有具体语义名称、owner GO 和执行合同都冻结后才能建仓。每个 study 独立
+推进；一个进入工程后，可以并行调研下一个候选。未经明确授权不得创建远程仓、push 或发布 Wiki。

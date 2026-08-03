@@ -356,6 +356,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         ]
 
         self.assertEqual("HOT", classify_path("wiki/Project-Thesis.md", legacy))
+        self.assertEqual("HOT", classify_path("wiki/Experiment-Assets.md", legacy))
         self.assertEqual("CURRENT", classify_path("wiki/survey/current/legacy.md", legacy))
         self.assertEqual("REGISTRY", classify_path("wiki/survey/sidecars/a.json", legacy))
         self.assertEqual("AUDIT", classify_path("wiki/audit/campaign/round/review.md", legacy))
@@ -1465,8 +1466,8 @@ class AiContextSurfaceTests(unittest.TestCase):
         agents = (real_repo / "AGENTS.md").read_text(encoding="utf-8")
         claude = (real_repo / "CLAUDE.md").read_text(encoding="utf-8")
         claude = claude.replace(
-            "Umbrella repo for four studies",
-            "Umbrella repo for changed studies",
+            "Umbrella governance repo for a research program",
+            "Umbrella governance repo for a changed program",
             1,
         )
         self.write("AGENTS.md", agents.encode("utf-8"))
@@ -1513,6 +1514,8 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "WORKBENCH",
             "Engineering spec",
             "Engineering plan",
+            "Study repository registry",
+            "Study experiment index",
             "Check report",
             "Executable rule",
             "Ephemeral scratch",
@@ -1526,6 +1529,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "wiki/survey/workbench/<campaign>/",
             "docs/superpowers/specs/",
             "docs/superpowers/plans/",
+            "studies/registry.json",
+            "wiki/experiments/<study-slug>/README.md",
+            "wiki/Experiment-Assets.md",
             "docs/checks/<campaign>/<release-id>/",
             "scripts/",
             "Not committed",
@@ -1644,6 +1650,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.assertIn("wiki/Research-Objective.md", guide)
             self.assertIn("wiki/Project-Thesis.md", guide)
             self.assertIn("wiki/AI-Collaboration.md", guide)
+            self.assertIn("wiki/Experiment-Assets.md", guide)
+            self.assertIn("studies/registry.json", guide)
+            self.assertIn("direction-local", guide)
             self.assertIn("Research-Objective.md` ≤5KB", guide)
             self.assertIn("Per-Work-Status.md ≤8KB", guide)
             self.assertIn("survey/README.md ≤4KB", guide)
@@ -1660,6 +1669,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "docs/superpowers/plans/",
             "docs/checks/<campaign>/<release-id>/",
             "scripts/",
+            "studies/registry.json",
+            "wiki/Experiment-Assets.md",
+            "wiki/experiments/<study-slug>/README.md",
         ):
             with self.subTest(route=route):
                 self.assertIn(route, contributing)
@@ -1674,34 +1686,37 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 7, 29), refresh_date)
+        self.assertEqual(date(2026, 8, 2), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
-            "Stage‑1C is in owner-directed remediation",
-            "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING",
+            "Stage accounting is now **direction-local**",
+            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING",
             "Qwen3-Omni-30B",
             "general ASR",
             "Stage‑1B v5",
             "320-work",
             "API-only",
-            "original R1–R9",
+            "R1–R9 are audit provenance",
             "improves reliably",
             "system-level in-context control",
-            "H5 remains `WITHHOLD_NON_LOAD_BEARING`",
-            "owner-confirmed (2026-07-29, Decision-Log 续76)",
+            "H5 remains",
+            "WITHHOLD_NON_LOAD_BEARING",
             "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
             "OWNER_UNVERIFIED",
             "direction criterion (2026-07-29)",
-            "Model/API execution",
+            "PASS_STAGE1C_FORMAL_OPENING",
+            "innovation and final",
+            "method remain Stage‑2A/2B outputs",
+            "No study repo or model-facing execution is admitted",
+            "D0_CLOSED",
             "wiki/survey/current/README.md",
             "wiki/survey/current/research-directions.md",
-            "wiki/audit/system-first-stage1c-v2-calibration/INDEX.md",
             "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
-            "focused implementation tests",
             "Lean",
-            "MMAU-mini/MMAR",
             "38fb9435d0c35e226ad62b16015a6dbee054e6c2",
-            "AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE",
+            "OWNER_GO_AND_EXECUTION_CONTRACT",
+            "wiki/Experiment-Assets.md",
+            "studies/<semantic-name>/",
             "Next action",
             "Supersession rule",
         )
@@ -1720,10 +1735,10 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             with self.subTest(path=path):
                 for token in (
                     "Stage‑1B",
-                    "Stage‑1C",
                     "H5",
                 ):
                     self.assertIn(token, text)
+                self.assertRegex(text, r"(?:Stage‑1C|direction-local|Program study pipeline)")
                 self.assertRegex(
                     text,
                     r"(?i)H5[\s\S]{0,220}(?:pending|withhold|withheld|待|尚缺|不得进入)",
@@ -1742,7 +1757,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 7, 29), per_work_date)
+        self.assertEqual(date(2026, 8, 2), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):
@@ -1775,7 +1790,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.repo.joinpath(*PurePosixPath(relative_path).parts)
         )
         active = document["active_entries"]
-        self.assertEqual(20, len(active))
+        self.assertEqual(21, len(active))
         defaults = {
             entry["path"] for entry in active if entry["load_policy"] == "default"
         }
@@ -1790,6 +1805,10 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             entry for entry in active if entry["path"] == "wiki/AI-Collaboration.md"
         )
         self.assertEqual("targeted", policy_entry["load_policy"])
+        experiment_assets = next(
+            entry for entry in active if entry["path"] == "wiki/Experiment-Assets.md"
+        )
+        self.assertEqual(("HOT", "targeted"), (experiment_assets["class"], experiment_assets["load_policy"]))
         audit_index = next(
             entry
             for entry in active

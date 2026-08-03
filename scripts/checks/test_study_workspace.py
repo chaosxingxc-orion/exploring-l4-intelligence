@@ -1,0 +1,279 @@
+"""Contract tests for semantic study repositories and experiment assets."""
+
+from __future__ import annotations
+
+import importlib.util
+import io
+import json
+import tempfile
+import unittest
+from contextlib import redirect_stderr, redirect_stdout
+from pathlib import Path
+from unittest import mock
+
+
+SCRIPT = Path(__file__).with_name("study_workspace_check.py")
+SPEC = importlib.util.spec_from_file_location("study_workspace_check", SCRIPT)
+assert SPEC and SPEC.loader
+study_workspace = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(study_workspace)
+
+
+class StudyWorkspaceContractTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        (self.root / "studies").mkdir()
+        (self.root / "wiki").mkdir()
+        (self.root / "docs" / "integrity").mkdir(parents=True)
+        (self.root / ".gitignore").write_text("studies/*/\n", encoding="utf-8")
+        (self.root / "wiki" / "Experiment-Assets.md").write_text(
+            "experiment_id\nstudy commit\nconfig hash\nprotocol hash\n"
+            "model revision\ndataset revision\nMLflow run\nartifact location\n"
+            "artifact hashes\nresult summary\ndeviations\ndecision\n",
+            encoding="utf-8",
+        )
+        self.registry = {
+            "schema": "study-repository-registry-v1",
+            "local_root": "studies",
+            "repo_creation_gate": "OWNER_GO_AND_EXECUTION_CONTRACT",
+            "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
+            "experiment_control_plane": "wiki/Experiment-Assets.md",
+            "studies": [],
+        }
+        self.write_registry()
+
+    def write_registry(self) -> None:
+        (self.root / "studies" / "registry.json").write_text(
+            json.dumps(self.registry), encoding="utf-8"
+        )
+
+    def admitted_study(self) -> dict:
+        slug = "audio-aware-evidence-acquisition"
+        decision = self.root / "wiki" / "decisions" / "audio-aware.md"
+        experiment_index = self.root / "wiki" / "experiments" / slug / "README.md"
+        decision.parent.mkdir(parents=True, exist_ok=True)
+        experiment_index.parent.mkdir(parents=True, exist_ok=True)
+        decision.write_text("GO\n", encoding="utf-8")
+        experiment_index.write_text("current experiments\n", encoding="utf-8")
+        return {
+            "name": "Audio-aware evidence acquisition",
+            "slug": slug,
+            "local_path": f"studies/{slug}",
+            "github_repo": f"https://github.com/example/{slug}.git",
+            "lifecycle": "engineering",
+            "decision_record": "wiki/decisions/audio-aware.md",
+            "experiment_index": f"wiki/experiments/{slug}/README.md",
+        }
+
+    def test_empty_registry_is_valid_before_any_direction_is_admitted(self) -> None:
+        loaded = study_workspace.load_and_validate_registry(self.root)
+        self.assertEqual([], loaded["studies"])
+
+    def test_semantic_admitted_study_with_independent_git_is_valid(self) -> None:
+        entry = self.admitted_study()
+        checkout = self.root / entry["local_path"]
+        checkout.mkdir(parents=True)
+        (checkout / ".git").mkdir()
+        self.registry["studies"] = [entry]
+        self.write_registry()
+
+        loaded = study_workspace.load_and_validate_registry(self.root)
+
+        self.assertEqual(entry["slug"], loaded["studies"][0]["slug"])
+
+    def test_candidate_number_and_candidate_lifecycle_are_rejected(self) -> None:
+        for slug, lifecycle in (
+            ("r2-external-retrieval", "engineering"),
+            ("audio-aware-evidence-acquisition", "conditional-go"),
+        ):
+            with self.subTest(slug=slug, lifecycle=lifecycle):
+                entry = self.admitted_study()
+                entry.update(
+                    {
+                        "slug": slug,
+                        "local_path": f"studies/{slug}",
+                        "github_repo": f"https://github.com/example/{slug}.git",
+                        "lifecycle": lifecycle,
+                        "experiment_index": f"wiki/experiments/{slug}/README.md",
+                    }
+                )
+                self.registry["studies"] = [entry]
+                self.write_registry()
+                with self.assertRaises(study_workspace.StudyWorkspaceError):
+                    study_workspace.load_and_validate_registry(self.root)
+
+    def test_unregistered_or_non_git_study_directory_is_rejected(self) -> None:
+        unregistered = self.root / "studies" / "unregistered-study"
+        unregistered.mkdir()
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "unregistered study directory"
+        ):
+            study_workspace.load_and_validate_registry(self.root)
+
+        unregistered.rmdir()
+        entry = self.admitted_study()
+        (self.root / entry["local_path"]).mkdir(parents=True)
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "independent Git repository"
+        ):
+            study_workspace.load_and_validate_registry(self.root)
+
+    def test_duplicate_paths_and_missing_wiki_bindings_are_rejected(self) -> None:
+        entry = self.admitted_study()
+        duplicate = dict(entry, name="Duplicate")
+        self.registry["studies"] = [entry, duplicate]
+        self.write_registry()
+        with self.assertRaises(study_workspace.StudyWorkspaceError):
+            study_workspace.load_and_validate_registry(self.root)
+
+        self.registry["studies"] = [entry]
+        (self.root / entry["decision_record"]).unlink()
+        self.write_registry()
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "decision_record"):
+            study_workspace.load_and_validate_registry(self.root)
+
+    def test_experiment_control_plane_requires_complete_asset_keys(self) -> None:
+        study_workspace.validate_experiment_control_plane(self.root)
+        (self.root / "wiki" / "Experiment-Assets.md").write_text(
+            "experiment_id\nstudy commit\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "experiment control plane"
+        ):
+            study_workspace.validate_experiment_control_plane(self.root)
+
+    def test_legacy_inventory_reports_live_history_only_and_unresolved_assets(self) -> None:
+        legacy = self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl"
+        live = self.root / "projects" / "work" / "_repro" / "live.json"
+        live.parent.mkdir(parents=True)
+        live.write_text("{}\n", encoding="utf-8")
+        rows = [
+            {"path": "projects/work/_repro/live.json"},
+            {"path": "projects/work/_repro/history.json"},
+            {"path": "other/missing.json"},
+        ]
+        legacy.write_text(
+            "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
+        )
+
+        inventory = study_workspace.build_experiment_asset_inventory(
+            self.root,
+            history_lookup=lambda path: "abc123" if path.endswith("history.json") else None,
+        )
+
+        summary = inventory["legacy_experiment_attempts"]
+        self.assertEqual(3, summary["recorded_entries"])
+        self.assertEqual(1, summary["worktree_present"])
+        self.assertEqual(1, summary["history_only"])
+        self.assertEqual(1, summary["unresolved"])
+
+    def test_registry_and_entry_schema_errors_fail_closed(self) -> None:
+        invalid_documents = (
+            {**self.registry, "extra": True},
+            {**self.registry, "repo_creation_gate": "CONDITIONAL_GO"},
+            {**self.registry, "studies": {}},
+        )
+        for document in invalid_documents:
+            with self.subTest(document=document):
+                self.registry = document
+                self.write_registry()
+                with self.assertRaises(study_workspace.StudyWorkspaceError):
+                    study_workspace.load_and_validate_registry(self.root)
+
+        entry = self.admitted_study()
+        invalid_entries = []
+        missing_key = dict(entry)
+        missing_key.pop("name")
+        invalid_entries.append(missing_key)
+        invalid_entries.extend(
+            (
+                {**entry, "name": ""},
+                {**entry, "local_path": "studies/wrong"},
+                {**entry, "github_repo": "ssh://example.invalid/repo"},
+                {**entry, "experiment_index": "wiki/experiments/wrong/README.md"},
+                {**entry, "decision_record": "docs/decision.md"},
+            )
+        )
+        for invalid in invalid_entries:
+            with self.subTest(invalid=invalid):
+                self.registry = {
+                    **study_workspace.FIXED_REGISTRY_FIELDS,
+                    "studies": [invalid],
+                }
+                self.write_registry()
+                with self.assertRaises(study_workspace.StudyWorkspaceError):
+                    study_workspace.load_and_validate_registry(self.root)
+
+    def test_strict_json_paths_ignore_and_missing_control_plane_fail_closed(self) -> None:
+        registry_path = self.root / "studies" / "registry.json"
+        registry_path.write_text('{"schema": 1, "schema": 2}', encoding="utf-8")
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "duplicate JSON key"):
+            study_workspace.load_and_validate_registry(self.root)
+
+        registry_path.write_text("{", encoding="utf-8")
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "cannot load strict JSON"):
+            study_workspace.load_and_validate_registry(self.root)
+
+        self.registry = {**study_workspace.FIXED_REGISTRY_FIELDS, "studies": []}
+        self.write_registry()
+        (self.root / ".gitignore").write_text("projects/*/\n", encoding="utf-8")
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, r"studies/\*/"):
+            study_workspace.load_and_validate_registry(self.root)
+
+        with self.assertRaises(study_workspace.StudyWorkspaceError):
+            study_workspace._repo_path(self.root, "../escape")
+        (self.root / "wiki" / "Experiment-Assets.md").unlink()
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "control plane"):
+            study_workspace.validate_experiment_control_plane(self.root)
+
+    def test_legacy_inventory_and_inventory_snapshot_fail_closed(self) -> None:
+        legacy = self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl"
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "cannot read legacy"):
+            study_workspace.build_experiment_asset_inventory(self.root)
+
+        for raw in ('{"path":', '{}\n'):
+            with self.subTest(raw=raw):
+                legacy.write_text(raw, encoding="utf-8")
+                with self.assertRaises(study_workspace.StudyWorkspaceError):
+                    study_workspace.build_experiment_asset_inventory(self.root)
+
+        legacy.write_text("\n", encoding="utf-8")
+        inventory = study_workspace.build_experiment_asset_inventory(self.root)
+        inventory_path = self.root / study_workspace.INVENTORY_PATH
+        inventory_path.write_text("{}\n", encoding="utf-8")
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "is stale"):
+            study_workspace.validate_inventory_file(self.root)
+        inventory_path.write_text(study_workspace._render_json(inventory), encoding="utf-8")
+        study_workspace.validate_inventory_file(self.root)
+
+    def test_cli_checks_renders_and_reports_controlled_failure(self) -> None:
+        legacy = self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl"
+        legacy.write_text("", encoding="utf-8")
+        inventory = study_workspace.build_experiment_asset_inventory(self.root)
+        (self.root / study_workspace.INVENTORY_PATH).write_text(
+            study_workspace._render_json(inventory), encoding="utf-8"
+        )
+        with mock.patch.object(study_workspace, "REPO", self.root):
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(0, study_workspace.main([]))
+            self.assertIn("PASS", output.getvalue())
+
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(0, study_workspace.main(["--render-inventory"]))
+            self.assertIn(study_workspace.INVENTORY_SCHEMA, output.getvalue())
+
+            (self.root / "studies" / "registry.json").unlink()
+            error = io.StringIO()
+            with redirect_stderr(error):
+                self.assertEqual(1, study_workspace.main([]))
+            self.assertIn("FAIL", error.getvalue())
+
+
+if __name__ == "__main__":
+    unittest.main()

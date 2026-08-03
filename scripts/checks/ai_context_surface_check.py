@@ -52,6 +52,7 @@ HOT_FILES = frozenset(
         "wiki/Data-and-Assets.md",
         "wiki/Decision-Log.md",
         "wiki/Environment-and-Setup.md",
+        "wiki/Experiment-Assets.md",
         "wiki/Home.md",
         "wiki/Inference-Engine-Choice.md",
         "wiki/Information-Boundary-Guard.md",
@@ -509,6 +510,8 @@ POLICY_ROLE_ORDER = (
     "WORKBENCH",
     "Engineering spec",
     "Engineering plan",
+    "Study repository registry",
+    "Study experiment index",
     "Check report",
     "Executable rule",
     "Ephemeral scratch",
@@ -578,6 +581,22 @@ POLICY_ROLE_SEMANTICS = {
         ("已批准设计",),
         ("停止作为 current research pointer", "Git 保存"),
     ),
+    "Study repository registry": (
+        ("studies/README.md", "studies/registry.json"),
+        ("owner", "实现者", "CI"),
+        ("否", "工程任务定向"),
+        ("伞仓跟踪", "语义命名独立 Git 仓"),
+        ("OWNER_GO_AND_EXECUTION_CONTRACT",),
+        ("候选编号不得成为 repo 名", "不得建空仓"),
+    ),
+    "Study experiment index": (
+        ("wiki/experiments/<study-slug>/README.md", "wiki/Experiment-Assets.md"),
+        ("owner", "实现者", "reviewer"),
+        ("否", "study 定向"),
+        ("Wiki 管理实验状态与资产图",),
+        ("study 已登记", "实验合同"),
+        ("稳定当前页", "release/audit bytes 不回写"),
+    ),
     "Check report": (
         ("docs/checks/<campaign>/<release-id>/",),
         ("门禁工具", "核验者"),
@@ -633,8 +652,8 @@ def validate_collaboration_policy(text: str) -> list[str]:
         line for line in section_match.group(1).splitlines() if line.strip().startswith("|")
     ]
     parsed = [_markdown_table_cells(line) for line in table_lines]
-    if len(parsed) != 13 or any(row is None for row in parsed):
-        failures.append(_policy_invalid("§2 must contain one header, divider, and 11 rows"))
+    if len(parsed) != 15 or any(row is None for row in parsed):
+        failures.append(_policy_invalid("§2 must contain one header, divider, and 13 rows"))
     else:
         header = tuple(parsed[0])
         if header != POLICY_TABLE_HEADERS:

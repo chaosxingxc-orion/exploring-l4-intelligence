@@ -881,8 +881,8 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C research-direction confirmation",
-            "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING",
+            "direction-local pipeline",
+            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING",
             "Qwen3-Omni-30B",
             "capability-first candidate",
             "direction-viability criterion (2026-07-29",
@@ -909,8 +909,8 @@ class RouterContentContractTests(unittest.TestCase):
         text = raw.decode("utf-8")
         self.assertLessEqual(len(raw), 4096)
         for required in (
-            "Stage‑1C research-direction confirmation",
-            "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING",
+            "direction-local pipeline",
+            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING",
             "Qwen3-Omni-30B",
             "general ASR",
             "analysis/synthesis only",
@@ -919,12 +919,13 @@ class RouterContentContractTests(unittest.TestCase):
             "owner-confirmed (2026-07-29",
             "OWNER_UNVERIFIED",
             "AudioRAG/Omni-DeepSearch",
-            "R5+R6+R8 Stage‑2A",
+            "PASS_STAGE1C_FORMAL_OPENING",
+            "OWNER_GO_AND_EXECUTION_CONTRACT",
             "no model/API execution, metric run, reproduction or prototype occurred",
             "model/API calls",
             "RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE",
             "H5 remains withheld and non-load-bearing",
-            "Stage‑2A/2B execution",
+            "Stage‑2 execution",
             "Next action",
         ):
             self.assertIn(required, text)

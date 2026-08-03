@@ -1,70 +1,60 @@
 # Architecture
 
-An **umbrella + shared library + four independent repos** model. Full version in the repo's
-[`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md);
-this page is the quick view. The project's purpose is [[Project-Thesis]] — training-free RL to
-activate pretrained knowledge; **W1** (external reward-guided control plane around an API-only
-frozen omni core) is the primary study, and W4 is a separate repositioned embedding-utility work.
+The workspace uses an **umbrella governance repo + independent work repos + independently admitted
+study repos**. The detailed source is [`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md).
 
-> **2026-07-11 更正**：W4「task-conditioned disentanglement」主张按 [[2026-07-11-stage1-audit-response-and-rulings]] 降级为 L0/L1（readout availability/suppression；matched>mismatched 判据未过）；disentanglement 措辞在 L2–L3 判据通过前废止；W4 将按 §7.1 问法重新立项（#29）。G0 现行 primary question 见该文档 §4。
+## Repository model
 
-## Repo model
-
+```text
+exploring-l4-intelligence/      umbrella Git repository
+├─ common/                      stable cross-repository utilities
+├─ projects/                    W1–W4 independent work repositories
+├─ studies/
+│  ├─ README.md                 umbrella-owned admission rule
+│  ├─ registry.json             umbrella-owned admitted-study registry
+│  └─ <semantic-study>/         independent Git/GitHub repository
+├─ docs/                        specs, integrity manifests and checks
+├─ scripts/                     executable governance/environment tooling
+└─ wiki/                        program and experiment management truth
 ```
-exploring-l4-intelligence (umbrella, this repo)
-├─ common/        speechrl-common — shared library, editable-installed by each work
-├─ projects/      the four work repos (each its OWN git repo; gitignored here)
-├─ docs/          setup + architecture + data
-├─ scripts/       WSL2 / env / mlflow / wiki-sync / data helpers
-└─ wiki/          source for this Wiki (shared knowledge & memory)
+
+The umbrella, not W1, carries the primary program. W1–W4 retain their own histories and roles but are
+not parents of new research studies. A study repository is created only after its research object closes
+survey, owner GO and an execution contract (`OWNER_GO_AND_EXECUTION_CONTRACT`). Candidate labels such as
+R1/R2 remain survey/audit provenance and must not be repository names. R1 sunset before admission and has
+no repository.
+
+## Experiment assets
+
+The umbrella Wiki manages study state, protocols, experiment indexes, deviations, results and decisions.
+Study Git repos own code/config/tests/lockfiles. `SPEECHRL_DATA_DIR` stores models, datasets and raw/large
+outputs; MLflow stores run tracking. Wiki records bind their URLs, revisions, IDs and hashes. See
+[[Experiment-Assets]].
+
+## Shared library
+
+`common/` remains the light `speechrl_common` package. A capability moves there only after it is stable
+and genuinely reused across repositories. Keep torch/transformers/librosa/mlflow/jiwer imports inside the
+functions that use them, then run `pytest common/tests`.
+
+## Direction-local pipeline
+
+```text
+candidate survey → owner decision → semantic contract → independent study repo → engineering → validation
 ```
 
-The four works are **separate GitHub repos** (independent history/issues) but develop against one
-shared `speechrl-common` via the `[tool.uv.sources]` editable path `../../common`.
-
-| # | Repo | Role | Focus |
-|---|------|------|-------|
-| **W4** | `speech-mllm-omni-embedding-rl` | **Flagship** | training-free RL to disentangle a frozen omni model's embeddings (content/ASR+ST, speaker-ID, emotion/SER, language+intent) |
-| **W1** | `speech-mllm-training-free-rl` | **Pattern reference** | mature training-free reward/eval machinery W4 reuses |
-| W2 | `speech-mllm-efficient-rl-alignment` | Supporting | efficient GRPO/DPO (LoRA) for speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | Supporting | one policy, RL across ASR/ST/SID/SER via verifiable rewards |
-
-## Shared library (`speechrl_common`)
-
-| Module | Purpose |
-|---|---|
-| `audio` | load/resample (16 kHz mono, `io`), log-mel features (`features`) |
-| `models` | Qwen2-Audio loader (`qwen2_audio`), per-task prompt templates (`prompts`) |
-| `rl` | verifiable reward fns (WER / ASR / exact-match) usable as GRPO/TRL callables (`reward`) |
-| `data` | dataset registry + data-root resolution (`registry`) |
-| `tracking` | local-MLflow run helper (`mlflow_logger`) |
-| `utils` | `seed`, `logging`, `checkpoint` path helpers |
-| `configs` | `base.yaml` Hydra config the works compose on top of |
-
-**Lazy-import discipline:** the top level imports only light helpers; torch/transformers/librosa/
-mlflow/jiwer are imported *inside* the functions that use them, so `import speechrl_common` and its
-smoke tests pass before the heavy ML stack is installed. Preserve this when adding code.
-
-**Conventions:** Hydra config per work (`config.yaml` composes `model/ dataset/ rl/ experiment/`);
-local MLflow file store (`~/speechrl-data/mlruns`, no server); verl (Linux-only, in WSL2) for
-GRPO/PPO with vLLM rollouts; artifacts live in the repo-root `speechrl-data/` (`/mnt/d/…` from WSL), never in git; base model
-Qwen2-Audio, swappable to SALMONN / Qwen2.5-Omni via `models/` + config.
+Engineering for one admitted study may overlap survey of the next candidate. Finishing every candidate
+survey is not a global Stage-2 prerequisite.
 
 ---
 
 ## 中文
 
-一个**伞仓 + 共享库 + 四个独立仓库**的模型；完整版见仓库
-[`docs/architecture.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/architecture.md)。
+本工作区采用**伞式治理仓 + 独立工作仓 + 经放行的独立研究仓**。伞仓而不是 W1 承载主程序；W1–W4
+保留各自历史和工作角色，但不作为新 study 的父目录。研究对象只有在完成自身调研、owner GO 与执行合同
+后，才以具体语义名称在 `studies/` 下建立独立 Git/GitHub 仓。R1/R2 等候选编号只留在调研/审计层；R1
+已在入场前日落，所以不建仓。
 
-四个工作是**独立的 GitHub 仓库**（独立历史与 issue），但都通过 `[tool.uv.sources]` 的可编辑路径
-`../../common` 依赖同一个 `speechrl-common`（其模块见上方表格）。
-
-**惰性导入纪律：** 包顶层只导入轻量 helper；torch / transformers / librosa / mlflow / jiwer 都在用到
-它们的函数**内部**才导入，所以重 ML 栈装好之前 `import speechrl_common` 和它的 smoke test 就能通过。
-加代码时请保持这一点。
-
-**约定：** 配置用 Hydra（每个工作 `config.yaml` 组合 `model/ dataset/ rl/ experiment/`）；追踪用本地
-MLflow 文件存储（`~/speechrl-data/mlruns`，无服务器）；RL 库 verl（仅 Linux，在 WSL2 跑）做 GRPO/PPO
-+ vLLM rollout；产物在仓库根 `speechrl-data/`（WSL 侧 `/mnt/d/…`），绝不进 git；基座模型默认 Qwen2-Audio，可通过
-`models/` + config 换成 SALMONN / Qwen2.5-Omni。
+Wiki 管理研究状态、实验协议、资产索引、偏差、结果与裁决；study 仓管理代码/配置/测试；
+`SPEECHRL_DATA_DIR` 和 MLflow 保存大型资产与运行数据。一个 study 进入工程后可以并行调研下一个候选，
+无须等待所有候选完成。统一资产入口见 [[Experiment-Assets]]。

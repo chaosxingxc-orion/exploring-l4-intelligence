@@ -4,20 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository
 
-Umbrella repo for four studies on training-free, reward-guided inference-time control of frozen
-speech/omni multimodal LLMs. The north star is `wiki/Project-Thesis.md`; current research state is
-`wiki/Research-Objective.md`.
+Umbrella governance repo for a research program on training-free, reward-guided inference-time control
+of frozen speech/omni multimodal LLMs. The north star is `wiki/Project-Thesis.md`; current research
+state is `wiki/Research-Objective.md`.
 
 | Work | Repo under `projects/` | Package | Role |
 |---|---|---|---|
-| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | Primary-program carrier |
+| W1 | `speech-mllm-training-free-rl` | `training_free_rl` | Legacy/component work; not the program carrier |
 | W2 | `speech-mllm-efficient-rl-alignment` | `efficient_rl_alignment` | Supporting skeleton |
 | W3 | `speech-mllm-multitask-rl` | `multitask_rl` | Supporting skeleton |
 | W4 | `speech-mllm-omni-embedding-rl` | `omni_embedding_rl` | Separate repositioned work |
 
-The umbrella owns `common/`, `docs/`, `scripts/`, `wiki/`, and root Markdown. Each
-`projects/<work>/` is an independent Git repo and owns its code, configs, and README. If umbrella
-`git status` shows a work-repo file, the change is routed incorrectly. See `CONTRIBUTING.md`.
+The umbrella owns `common/`, `docs/`, `scripts/`, `studies/README.md`, `studies/registry.json`, `wiki/`,
+and root Markdown. Each `projects/<work>/` is an independent Git repo and owns its code, configs, and
+README. Each admitted research study is also an independent, semantically named Git repo checked out
+under `studies/<study-name>/`; candidate IDs such as R1/R2 are audit provenance, never engineering repo
+names. Study creation requires `OWNER_GO_AND_EXECUTION_CONTRACT`. See `CONTRIBUTING.md` and
+`wiki/Experiment-Assets.md`.
 
 ## AI context routing
 
@@ -27,7 +30,8 @@ Default load surface is exactly:
 2. `wiki/Research-Objective.md` — current stage, blockers, next action; then
 3. `wiki/Project-Thesis.md` — north star.
 
-Load `wiki/Per-Work-Status.md` and `wiki/survey/current/` only for a named task. Never broadly load
+Load `wiki/Per-Work-Status.md`, `wiki/Experiment-Assets.md`, and `wiki/survey/current/` only for a named
+work, experiment, or survey task. Never broadly load
 `wiki/20*.md`, historical proposal/review/response/amendment files, `wiki/archive/`, or the full
 `wiki/Decision-Log.md`. For provenance, use a campaign index and targeted `rg` only.
 
@@ -35,8 +39,9 @@ Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md` ≤5KB;
 `Per-Work-Status.md ≤8KB`; `survey/README.md ≤4KB`; `survey/current/README.md ≤4KB`; AI context
 manifest ≤30 active entries. The three default entries are fixed.
 
-Path summary: HOT current facts stay in stable root/wiki files; CURRENT survey contracts live under
-`wiki/survey/current/`; long-lived paper records go to `wiki/survey/registry/`; reviewer transactions
+Path summary: HOT current facts stay in stable root/wiki files; experiment lifecycle and asset routing
+live in `wiki/Experiment-Assets.md` plus per-study `wiki/experiments/<study-name>/`; CURRENT survey
+contracts live under `wiki/survey/current/`; long-lived paper records go to `wiki/survey/registry/`; reviewer transactions
 are created directly under `wiki/audit/<campaign>/<round-id>/`; superseded unregistered work goes to
 `wiki/archive/`; active exploration goes to `wiki/survey/workbench/<campaign>/`. Engineering specs,
 plans, reports, and executable checks belong in `docs/superpowers/specs/`, `docs/superpowers/plans/`,
@@ -59,7 +64,8 @@ not working context.
   `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data` (`SPEECHRL_DATA_DIR`); never commit
   them. Only local MLflow `mlruns` stays on ext4.
 - `gh` is `C:\Program Files\GitHub CLI\gh.exe`. Windows `PYTHONPATH` uses `;`. `.gitattributes`
-  enforces LF, especially for shell scripts. Default branch is `master` in all five repos.
+  enforces LF, especially for shell scripts. Existing umbrella/work repos use `master`; each admitted
+  study records its remote and branch policy in its own repository.
 
 ## Commands
 
@@ -86,6 +92,10 @@ bash scripts/data/fetch-data.sh
 bash scripts/data/inventory.sh
 ```
 
+There is currently no admitted study checkout. Do not create one from a conditional candidate. After
+owner GO plus an execution contract, register the semantic repository in `studies/registry.json`; its
+commands and environment lock belong to that independent repository.
+
 The real umbrella gate is `python scripts/survey/sf_current_package_check.py --check` (runs offline on
 Windows or WSL). Lean proofs live in `proofs/tfrl/`; their axiom footprint is audited by
 `bash scripts/lean_axiom_gate.sh` in WSL, receipts under `docs/checks/lean-axiom-gate/`.
@@ -98,7 +108,8 @@ Windows or WSL). Lean proofs live in `proofs/tfrl/`; their axiom footprint is au
 - Each work depends on `common` through editable `../../common`; torch/verl come from the shared WSL
   environment. Hydra config composes `model/`, `dataset/`, `rl/`, and `experiment/`.
 - Preserve unrelated user changes. Use non-destructive Git operations. Commit each change in the repo
-  that owns it; do not publish, push, or run non-dry wiki sync without explicit authorization.
+  that owns it; umbrella, work, and admitted-study repos have independent histories. Do not publish,
+  push, create a remote study repo, or run non-dry wiki sync without explicit authorization.
 - `CLAUDE.md` and `AGENTS.md` are mirrored except the client header/description/marketplace line.
 - Git blob bytes are the evidence hash authority: use `git show <commit>:<path>` for historical
   evidence, not CRLF working-tree bytes.
@@ -114,6 +125,11 @@ Stage-1A checks identity, routing, protocol coverage, and gate correctness; it d
 novelty or require a prior-difference matrix. Stage-1B maps method paths and proximity without a novelty
 verdict. Stage-1C selects a problem from candidate gap hypotheses; technical-approach innovation
 converges only in reproduction-first Stage-2A and is validated in Stage-2B.
+
+Stage accounting is direction-local: once a semantically named research object closes its own survey,
+owner decision, and execution contract, it may enter engineering while the next candidate is surveyed.
+Completion of all candidate IDs is never a global Stage-2 prerequisite. Sunset candidates receive no
+engineering repository.
 
 After a durable decision, follow `wiki/AI-Collaboration.md`: write rationale before context is lost,
 update the current layer in place, keep audit records append-only, run the relevant executable checks,

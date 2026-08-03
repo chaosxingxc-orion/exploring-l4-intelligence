@@ -210,5 +210,6 @@ reproduction branch。它们可在 Stage‑2A 后期作为 adversarial/validatio
 - 上表 reproduction items 的 exact revisions；
 - abort rules：无 headroom、signal 不可识别、harm 超阈或 asset/license 不闭合。
 
-先前的 C1-only 授权建议已撤回。当前建议 token 为
-`AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`；方向定稿不自授该权限。
+先前的 C1-only 与 portfolio-global R5+R6+R8 授权建议均已撤回。“音频感知的证据获取”已通过
+Stage-1C 正式开题；当前下一裁决是关闭模型无关 D1–D4 并冻结语义 Stage-2A 执行合同，再请求
+`OWNER_GO_AND_EXECUTION_CONTRACT`。开题通过不自授权限，也不提前裁决创新性或最终方法。

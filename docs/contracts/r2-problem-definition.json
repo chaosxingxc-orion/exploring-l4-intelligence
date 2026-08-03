@@ -70,14 +70,15 @@
       ]
     },
     {
-      "id": "current_layer_marks_r2_conditional_go",
+      "id": "current_layer_marks_r2_formal_opening_and_execution_withheld",
       "source_test": "test_current_layer_exposes_r1_sunset_and_r2r9_unverified_state",
       "type": "must_contain",
       "target": "wiki/survey/current/research-directions.md",
       "strings": [
-        "CONDITIONAL_GO_STANDALONE_PENDING_V3_",
-        "续77",
-        "模型参数不可修改、不得新增一个模型"
+        "PASS_STAGE1C_FORMAL_OPENING",
+        "Stage-2A 执行合同待签",
+        "OWNER_GO_AND_EXECUTION_CONTRACT",
+        "模型参数不可修改"
       ]
     }
   ]

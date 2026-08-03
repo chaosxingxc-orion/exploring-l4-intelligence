@@ -4,44 +4,44 @@
 >
 > 仓库标识：**`exploring-l4-intelligence`** — 探索迈向 L4 级（"创新者"）智能的路径。
 
-这是一个**伞仓（umbrella repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
+这是一个**伞式治理仓（umbrella governance repo）**：研究如何用**免训练 RL（training-free RL）**——奖励引导、推理时、
 零权重、零核心结构改动（外挂系统组件另加）的优化——把语音 / omni 多模态大模型在预训练中习得的知识
-「激活」出来，提升其在特定语音任务上的开箱表现；外加四个工作共用的共享库。**当前主研究（W1）**围绕
-API-only 冻结 omni 核心构建**外部奖励引导控制平面**（对知识/记忆/技能/证据状态做系统级 in-context
-控制；Stage-1C 方向确认中，见 Wiki 的 Research-Objective 页）；W4 为独立工作、研究冻结
-omni 自身嵌入空间（2026-07-12 按 owner 签署的 G0 裁决重定位）。完整主旨见 Wiki 的 [[Project-Thesis]] 页。
+「激活」出来。候选方向编号只用于调研与审计；方向获得 owner GO 和执行合同后，才以具体研究名称在
+`studies/` 下建立独立 GitHub 仓。W1–W4 仍是独立工作仓，不再承载整个主研究。完整主旨见 Wiki 的
+[[Project-Thesis]] 页。
 
 > 📖 **从这里开始。** 本 README 是人和 AI 协作者的**唯一权威入口**。更深入的文档在 [`docs/`](docs)；
 > 团队共享知识与"记忆"在 **[GitHub Wiki](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/wiki)**
 >（源文件在 [`wiki/`](wiki)）。
 
-## 四部曲 · The series
+## 项目仓库 · Program repositories
 
 每个工作都是**独立的 GitHub 仓库**（独立的历史与 issue），但都通过可编辑安装（editable install）
 依赖同一个 [`common/`](common)（`speechrl-common`）。
 
 | # | 工作（仓库） | 角色 | 方向 | 状态 |
 |---|---|---|---|---|
-| **W1** | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | **主研究** | API-only 冻结 omni 核心外的奖励引导控制平面（知识/记忆/技能/证据状态）；Stage-1C 方向确认，首个 Stage-2A 切片 = R5+R6+R8 | 🟢 成熟 · 主研究 |
+| W1 | [speech-mllm-training-free-rl](https://github.com/chaosxingxc-orion/speech-mllm-training-free-rl) | 历史/组件工作 | 成熟 selector/evaluator 与 training-free-RL 证据；不是主程序载体 | 🟢 成熟证据 |
 | W4 | [speech-mllm-omni-embedding-rl](https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl) | 独立工作（2026-07-12 重定位） | 冻结 omni 嵌入效用（L0/L1）；fresh proposal 待启（#29）；原"解耦旗舰"表述已被取代 | 🟡 骨架 → 重定位中 |
 | W2 | [speech-mllm-efficient-rl-alignment](https://github.com/chaosxingxc-orion/speech-mllm-efficient-rl-alignment) | 支撑 | 高效 GRPO/DPO（LoRA）做语音↔语言对齐 | 🟡 骨架 |
 | W3 | [speech-mllm-multitask-rl](https://github.com/chaosxingxc-orion/speech-mllm-multitask-rl) | 支撑 | 单一策略，跨 ASR/ST/SID/SER 的可验证奖励 RL | 🟡 骨架 |
 
-**W1 承载当前主研究；W4 为独立重定位工作**（2026-07-12——见 [[Decision-Log]] 续24 与 Thesis 页的
-取代注记）。推进 W2–W4 时仍以 W1 的结构与脚本为模板。每个工作的最新进度看 Wiki 的
-[[Per-Work-Status]]；项目主旨见 [[Project-Thesis]]。
+目前还没有正式获准的 study 仓。首个计划中的语义研究对象“音频感知的证据获取”已经通过
+Stage-1C 和正式开题，但 owner 的 Stage-2A 执行合同仍待签发。候选 R1 已在建仓前日落，因此不建立
+空工程仓。仓库和实验资产状态统一从 [[Experiment-Assets]] 路由。
 
 ## 仓库结构 · Repo layout
 
 ```
 common/         共享库（speechrl_common）：audio、models、rl rewards、data、tracking、utils
 projects/       四个工作仓库（各自独立的 git 仓库；被本伞仓 gitignore）
-docs/           setup.md（WSL2 + 环境）、architecture.md、data.md（下载）
+studies/        正式语义研究仓的登记表与本地容器（每个子目录都是独立 git 仓）
+docs/           setup.md、architecture.md、data.md、完整性与检查资产
 scripts/        wsl-setup.sh、env-setup.sh、mlflow-ui.sh、wiki-sync.sh、data/（模型+数据集下载）
-wiki/           GitHub Wiki 的源文件 —— 共享知识与记忆（用 scripts/wiki-sync.sh 推送）
+wiki/           GitHub Wiki 源文件 —— 项目真理与实验资产管理平面
 speechrl-data/  数据根目录（≈650 GB 模型/数据集）—— 在 E 盘，被 gitignore；WSL 侧 /mnt/e/…
 CLAUDE.md / AGENTS.md   给 AI 协作者的逐工具操作手册（Claude Code / Codex）
-CONTRIBUTING.md         五个仓库的协作方式
+CONTRIBUTING.md         多仓归属与协作方式
 ```
 
 ## 环境 · Environment
@@ -60,13 +60,16 @@ bash scripts/wsl-setup.sh     # 一次性：WSL 的 CUDA toolkit + uv
 bash scripts/env-setup.sh     # py3.12 venv + torch cu128 + verl + 可编辑安装 common
 source ~/.venvs/speechrl/bin/activate
 
-# 开发单个工作
+# 开发现有 W1–W4 工作仓
 cd projects/speech-mllm-training-free-rl
 uv pip install -e ../../common -e .
 bash scripts/train.sh                          # 训练（Hydra）
 bash scripts/train.sh rl.learning_rate=2e-6    # 覆盖任意 Hydra 键
 bash scripts/eval.sh
 ```
+
+正式 study 的安装和运行命令由其独立仓维护。条件候选不能提前搭空工程；必须先关闭 owner GO 与执行
+合同门禁，再登记到 `studies/registry.json`。
 
 实验追踪：本地 MLflow（`bash scripts/mlflow-ui.sh` → http://127.0.0.1:5000；纯文件存储、无需服务器/
 账号）。配置：每个工作用 Hydra。RL 库：verl。
@@ -86,10 +89,9 @@ bash scripts/data/inventory.sh      # 审计 COMPLETE / PARTIAL / MISSING
 
 ## 协作方式 · Working mode
 
-五个仓库（伞仓 + 四个工作），**改谁就提交到谁**：动 `common/`、`docs/`、`scripts/`、`wiki/` 提交到
-本伞仓；动某个工作（含其 README）提交到**那个工作自己的仓库**（它们被本伞仓 gitignore）。默认分支
-`master`。改 `common/` 会波及 W1–W4，记得跑 `pytest common/tests`。完整约定见
-[CONTRIBUTING_CN.md](CONTRIBUTING_CN.md) 与 Wiki 的 [[Working-Mode]]。
+这是多仓工作区，**改谁就提交到谁**：治理、Wiki、共享设施和 study 登记表提交到伞仓；W1–W4 代码
+提交到对应 `projects/` 仓；正式研究代码提交到对应 `studies/` 独立仓。大型实验资产不进 Git，由
+[[Experiment-Assets]] 统一索引。完整约定见 [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md)。
 
 ## 给 AI 协作者 · For AI assistants
 
@@ -110,7 +112,7 @@ bash scripts/data/inventory.sh      # 审计 COMPLETE / PARTIAL / MISSING
 | | |
 |---|---|
 | [docs/setup.md](docs/setup.md) | WSL2 + CUDA + py3.12 venv + torch cu128 + verl |
-| [docs/architecture.md](docs/architecture.md) | 伞仓 + 共享库 + 四仓模型 |
+| [docs/architecture.md](docs/architecture.md) | 伞式治理仓 + 工作仓 + 独立语义 study 仓模型 |
 | [docs/data.md](docs/data.md) | 模型、数据集、镜像、下载脚本 |
 | [common/README.md](common/README.md) | `speechrl_common` 模块地图与安装 |
 | [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md) | 多仓协作流程与约定 |

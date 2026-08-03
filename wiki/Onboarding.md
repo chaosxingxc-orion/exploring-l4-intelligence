@@ -1,42 +1,33 @@
 # Onboarding
 
-Zero-to-first-run for a new collaborator (or their AI). Assumes Windows + WSL2 with an RTX 5090.
+Zero-to-ready for a new collaborator or AI. Assumes Windows + WSL2 `Ubuntu-24.04` with an RTX 5090.
 
-1. **Read** the root [README](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/README.md),
-   then [[Architecture]] and [[Working-Mode]] here.
-2. **Clone** the umbrella, then clone the four work repos into `projects/` (each is a separate repo;
-   they're gitignored by the umbrella):
-   ```bash
-   git clone https://github.com/chaosxingxc-orion/exploring-l4-intelligence.git
-   cd exploring-l4-intelligence/projects
-   for w in training-free-rl efficient-rl-alignment multitask-rl omni-embedding-rl; do
-     git clone https://github.com/chaosxingxc-orion/speech-mllm-$w.git
-   done
-   ```
-3. **Set up the environment** (in WSL2): `bash scripts/wsl-setup.sh` → `bash scripts/env-setup.sh` →
-   `source ~/.venvs/speechrl/bin/activate`. Details + pitfalls: [[Environment-and-Setup]].
-4. **Sanity check:** `pytest common/tests` (passes before the heavy stack is installed) and
-   `python -c "import torch; print(torch.cuda.get_device_name(0))"`.
-5. **Get data** (only what you need): `bash scripts/data/probe-access.sh` →
-   `bash scripts/data/fetch-data.sh`. See [[Data-and-Assets]].
-6. **First run — start with W1** (the mature reference): `cd projects/speech-mllm-training-free-rl &&
-   uv pip install -e ../../common -e . && bash scripts/train.sh`. Watch it in MLflow
-   (`bash scripts/mlflow-ui.sh`).
-7. **If you're an AI assistant:** also read [[AI-Collaboration]] and check [[Per-Work-Status]] before
-   touching a work.
+1. Read the client guide (`AGENTS.md` or `CLAUDE.md`), then [[Research-Objective]] and
+   [[Project-Thesis]]. For a repository/experiment task, also read [[Experiment-Assets]].
+2. Clone the umbrella. Clone only the W1–W4 work repo needed for the task into `projects/`; each is an
+   independent repo and is ignored by the umbrella.
+3. Run `bash scripts/wsl-setup.sh`, `bash scripts/env-setup.sh`, then
+   `source ~/.venvs/speechrl/bin/activate` inside WSL2. Never use native/system Python 3.14 for the ML
+   stack and never touch `D:/ai-stack/mem0-venv`.
+4. Run `pytest common/tests` and the umbrella gate
+   `python scripts/survey/sf_current_package_check.py --check`.
+5. Fetch only authorized assets with `scripts/data/`; models/datasets/outputs live in
+   `SPEECHRL_DATA_DIR`, while local MLflow runs stay on ext4.
+6. Do not create a study checkout from a candidate. After owner GO plus an execution contract, use the
+   semantic URL in `studies/registry.json` and clone that independent repository into `studies/`.
+7. Follow the owning repository's README for execution. Today there is no admitted study repository and
+   no model/API experiment authority; W1 is legacy/component work, not the default first run.
+
+Remote creation, push and Wiki publication require explicit authorization.
 
 ---
 
 ## 中文
 
-新协作者（或其 AI）从零到第一次跑通。前提：Windows + WSL2 + RTX 5090。
+新协作者先读客户端指南、[[Research-Objective]] 和 [[Project-Thesis]]；仓库/实验任务再读
+[[Experiment-Assets]]。伞仓负责治理，按任务需要把 W1–W4 克隆到 `projects/`。环境只用 WSL2
+`Ubuntu-24.04` 和 `~/.venvs/speechrl`，大型资产只放 `SPEECHRL_DATA_DIR`。
 
-（1）**读**根 [README](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/README.md)，
-再读本 Wiki 的 [[Architecture]] 和 [[Working-Mode]]。（2）**克隆**伞仓，再把四个工作仓库克隆进
-`projects/`（各自独立仓库，被伞仓 gitignore）——命令见上。（3）**搭环境**（WSL2 里）：
-`wsl-setup.sh` → `env-setup.sh` → `source` 激活；细节与坑见 [[Environment-and-Setup]]。（4）**自检：**
-`pytest common/tests`（重栈装好前也能过）与 `python -c "import torch; ..."`。（5）**取数据**（按需）：
-`probe-access.sh` → `fetch-data.sh`，见 [[Data-and-Assets]]。（6）**第一次跑——从 W1 开始**（成熟参考）：
-`cd projects/speech-mllm-training-free-rl && uv pip install -e ../../common -e . && bash scripts/train.sh`，
-用 MLflow 看（`mlflow-ui.sh`）。（7）**若你是 AI 协作者：** 动任何工作前再读 [[AI-Collaboration]] 并查
-[[Per-Work-Status]]。
+候选方向不能提前克隆/创建 study。只有 owner GO 与执行合同关闭后，才按 `studies/registry.json` 的
+语义名称和 URL 克隆独立仓。目前正式 study 登记为 0，也没有模型/API 实验权限；W1 是历史/组件工作，
+不是默认首跑入口。未经明确授权不得创建远程仓、push 或发布 Wiki。

@@ -23,13 +23,19 @@
       "path": "wiki/Per-Work-Status.md",
       "class": "HOT",
       "load_policy": "targeted",
-      "purpose": "current W1-W4 state"
+      "purpose": "current work and program-study state"
     },
     {
       "path": "wiki/AI-Collaboration.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "canonical AI document placement and lifecycle policy"
+    },
+    {
+      "path": "wiki/Experiment-Assets.md",
+      "class": "HOT",
+      "load_policy": "targeted",
+      "purpose": "study repository and experiment asset control plane"
     },
     {
       "path": "wiki/survey/current/README.md",

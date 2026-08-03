@@ -1,0 +1,8 @@
+{
+  "schema": "study-repository-registry-v1",
+  "local_root": "studies",
+  "repo_creation_gate": "OWNER_GO_AND_EXECUTION_CONTRACT",
+  "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
+  "experiment_control_plane": "wiki/Experiment-Assets.md",
+  "studies": []
+}

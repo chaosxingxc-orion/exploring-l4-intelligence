@@ -458,5 +458,5 @@
     "surviving_evidence": "Paper facts, measurement contracts, reproduction anchors, Stage-1B v5, R1/R2R1 disposition and H5 boundary remain evidence inputs; prior ranking and primary-problem synthesis do not."
   },
   "dossier_state": "PRIOR_SELECTION_EVIDENCE_SUPERSEDED_BY_CAPABILITY_PORTFOLIO",
-  "next_decision": "Prepare the exact Stage-2A R5+R6+R8 vertical-slice contract and request AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE; do not execute models, metrics, reproduction or prototypes under this direction finalization."
+  "next_decision": "Audio-aware evidence acquisition passed Stage-1C formal opening. Close model-free D1-D4, freeze its semantic Stage-2A execution contract and repository/experiment bindings, then request OWNER_GO_AND_EXECUTION_CONTRACT; do not execute models, metrics, reproduction, prototypes or remote repository creation before that authorization."
 }

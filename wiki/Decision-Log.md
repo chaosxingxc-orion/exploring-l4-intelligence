@@ -3404,3 +3404,23 @@ baseline/harm/cost/abort contract。
 **Supersedes：** 取代“R2R1 independent review → N=56 recode → calibration release 是 Stage‑1C 选题的唯一
 下一动作”；不把 calibration/H5/跨模态结论升级为完成。失效条件：新直接 prior 已在同一 frozen access、
 task、supply、truth 与 shift contract 上闭合 decision utility，或 Stage‑2A 发现无 oracle headroom/信号不可识别。
+
+**2026-08-02 · 研究方向改为局部流水线，以语义 study 独立建仓，Wiki 统一管理实验资产：**
+**Context：** 当前活跃资产把 W1 写成主程序载体，并把 R1–R9 候选分析隐含成未来工程分解；同时把
+R3–R9 共审绑定为首个 Stage‑2 的全局前置。Owner 明确指出：R1 正是“计划研究但论证后日落”的实例，
+说明候选编号不是工程身份；首个条件 GO 方向完成自身调研后应独立进入工程，同时并行调研下一候选。
+**Decision：** R1–R9 只保留为 Stage‑1C 调研/审计 provenance。一个独立研究对象只有在关闭自身充分
+调研、owner GO 与执行合同后，才按具体语义名称创建独立 GitHub 仓；本地统一置于 umbrella 的
+`studies/<semantic-slug>/`，但由自身 Git 管理。R1 在入场前日落，不建空仓。W1–W4 保留为独立 work
+repos，不再承载主程序或默认拥有新 study。Stage 按方向独立记账：一个 study 工程期间可并行调研下一个
+候选，完成所有候选调研不是全局 Stage‑2 前置。umbrella Wiki 是实验生命周期与资产图的管理平面；study
+repo 管代码/配置/测试，`SPEECHRL_DATA_DIR` 与 MLflow 管大型资产和运行数据。
+**Consequences：** 新增 umbrella-owned `studies/README.md`/`registry.json`，但只登记已获
+`OWNER_GO_AND_EXECUTION_CONTRACT` 的 study；当前为 0。首个计划对象以“audio-aware evidence
+acquisition”为工作语义名，仍需关闭 v3 清单和执行合同，未授权远程建仓或实验。新增
+[[Experiment-Assets]]；旧 574-row W1 attempt inventory 保持历史字节，刷新索引得 573 live、1 Git-history-
+only、0 unresolved。当前 HOT/CURRENT、repo/working/onboarding 资产同步原位更新。
+**Supersedes：** 取代 W1=primary-program carrier、候选编号=工程目录、R3–R9 全量共审=首个 study 工程
+统一前置、R5+R6+R8=所有 Stage‑2 唯一入口的说法；不改变 TF-Strict/API-only 北极星，也不产生模型/API、
+下载、metric、prototype、remote repo、push 或 Wiki publication 权限。失效条件：owner 改变 repo ownership、
+study admission gate、实验资产权威边界，或批准首个语义 study 的执行合同。

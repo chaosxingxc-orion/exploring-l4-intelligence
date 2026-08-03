@@ -54,6 +54,10 @@ hf-cache/
 # ── Each work is its own repo (not tracked by the umbrella) ─
 projects/*/
 
+# ── Each admitted study is its own semantic Git repo ─────────
+# The umbrella tracks studies/README.md and studies/registry.json only.
+studies/*/
+
 # ── OS / editor ────────────────────────────────────────
 .DS_Store
 Thumbs.db

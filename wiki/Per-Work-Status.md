@@ -1,38 +1,38 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-07-29. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-08-02. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Survey detail routes through
 > `wiki/survey/current/README.md`.
+
+## Program study pipeline
+
+- **Carrier:** the umbrella program and its Wiki; W1 is no longer the primary-program carrier.
+- **Repository rule:** admitted research objects use independent semantic GitHub repos under `studies/`.
+  Candidate IDs remain audit provenance and never become engineering names. R1 sunset before admission,
+  so it has no repo. `studies/registry.json` currently contains zero admitted studies.
+- **First planned study:** audio-aware evidence acquisition (source-candidate provenance R2), now
+  `PASS_STAGE1C_FORMAL_OPENING`. Close model-free D1–D4 and freeze its Stage‑2A execution contract before
+  requesting `OWNER_GO_AND_EXECUTION_CONTRACT` or creating a repo; innovation and final method remain
+  Stage‑2 outputs.
+- **Flow:** the admitted study may enter engineering while the next candidate is surveyed; R3–R9 review
+  is not a global prerequisite. D0 acquisition is closed for Earnings21, Earnings22 and ConEC; further
+  unapproved acquisition, model/API calls, metrics, reproduction, prototypes, remote repo creation, push
+  and Wiki publication remain closed today.
+- **Assets:** `wiki/Experiment-Assets.md` is the management router. The legacy 574-row W1 attempt
+  inventory resolves to 573 live and one Git-history-only path with zero unresolved assets.
 
 ## W1
 
 - **Repo:** `projects/speech-mllm-training-free-rl`
-- **Role:** primary-program carrier; its selector/evaluator dossier belongs to the external
-  reward-guided control-plane program.
-- **Current state:** Stage‑1C is auditing a capability-first candidate portfolio over multimodal knowledge,
-  memory, skills, agentic-system composition and agentic-system evolution. Original IDs R1–R9 remain for
-  provenance, but candidate status does not imply Stage-2 entry;
-  the primary object is reliable capability activation around an API-only frozen speech/omni core through
-  system-level in-context control. `C1_DECISION_CALIBRATED_REWARD` is retained only as a shared
-  measurement/reliability component. The fixed Stage‑1B v5 release remains
-  `38fb9435d0c35e226ad62b16015a6dbee054e6c2`; its 320-work calibration union is unchanged evidence.
-  R1 sunset is owner-confirmed (2026-07-29, Decision-Log 续76) as
-  `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`: it lacked standalone direction potential; its
-  paper-derived baseline matrix remains reusable but no independent Stage-2B exists. R2 is owner-ruled
-  conditional GO_STANDALONE (续77/78; effective on v3 closing the supervisor-review checklist; red lines
-  = no parameter modification, no task-trained model, no additional answering LLM; trace-logging approved). R3–R9 are executor drafts
-  the owner has not verified (`OWNER_UNVERIFIED`), pending co-review under the 2026-07-29 direction
-  criterion. Qwen3-Omni-30B via local llama.cpp remains the core.
-- **Legacy disposition:** R1 agreement remains `FAIL` with no adjudication. R2R1 passed 22 focused
-  implementation tests but was never independently accepted or distributed; it is
-  `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`, not a valid calibration release. H5 remains
-  withheld and non-load-bearing, so cross-modality conclusions are prohibited without blocking the
-  selected speech/API-only problem.
-- **Next authorized work:** R2 v3 checklist closure, then owner co-review of R3–R9. The R5+R6+R8
-  vertical-slice contract preparation and the `AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`
-  request stay frozen until that co-review completes. Model/API calls, metrics, dataset/model acquisition,
-  reproduction, prototypes, technical novelty, push and wiki publication remain closed.
+- **Role:** legacy/component work containing mature selector/evaluator and training-free-RL evidence;
+  it is not the primary program or the parent of future studies.
+- **Current state:** existing code and `_repro` history remain owned by W1. They may be cited or deliberately
+  adopted by an admitted study but receive no authority automatically. Stage‑1B v5
+  `38fb9435d0c35e226ad62b16015a6dbee054e6c2` and the 320-work union remain fixed evidence.
+- **Legacy boundary:** R1 agreement remains `FAIL`; R2R1 remains
+  `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`; H5 remains withheld and non-load-bearing.
+- **Next authorized work:** no new W1 experiment follows from the study-repository refresh.
 
 ## W2
 
@@ -40,7 +40,7 @@
 - **Role:** supporting study for efficient GRPO/DPO speech-language alignment.
 - **Current state:** Hydra/shared-library skeleton; the Stage-1A documentation repair authorizes no new
   implementation or experiment.
-- **Next authorized work:** remain parked while W1 closes its research gate; later activation needs its
+- **Next authorized work:** remain parked; later activation needs its
   own current protocol and evidence boundary.
 
 ## W3
@@ -64,6 +64,7 @@
 ## Shared boundaries
 
 - North star: `wiki/Project-Thesis.md`; current stage and blockers: `wiki/Research-Objective.md`.
-- Work-repo code/config/README changes belong in that work repo; umbrella records belong here.
+- Work-repo code/config/README changes belong in that work repo; admitted-study code belongs in its
+  independent semantic repo; umbrella records and the study registry belong here.
 - Historical per-work detail is not repeated. Resolve it from its cold campaign index or `wiki/archive/`
   only for a named provenance question.

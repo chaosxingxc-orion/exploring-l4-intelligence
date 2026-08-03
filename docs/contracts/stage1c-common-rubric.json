@@ -32,8 +32,10 @@
       "type": "must_contain",
       "target": "wiki/survey/current/status.md",
       "strings": [
-        "Stage‑1C research-direction confirmation",
-        "Stage‑2A/2B execution"
+        "direction-local pipeline",
+        "PASS_STAGE1C_FORMAL_OPENING",
+        "Stage‑2 execution",
+        "OWNER_GO_AND_EXECUTION_CONTRACT"
       ]
     },
     {

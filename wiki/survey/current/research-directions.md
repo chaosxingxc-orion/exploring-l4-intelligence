@@ -1,25 +1,32 @@
 ---
 artifact_id: "SF-STAGE1C-CAPABILITY-PORTFOLIO-V1"
 role: "CURRENT effective research-direction contract"
-authority: "owner directions 2026-07-27/28/29 (Decision-Log 续76)"
-stage: "STAGE_1C_REMEDIATION"
-endpoint: "STAGE1C_R1_SUNSET_R2_CONDITIONAL_GO_R3R9_UNVERIFIED_OWNER_COWORK_PENDING"
-execution_authority: "STAGE2A_WITHHELD"
+authority: "owner directions 2026-07-27/28/29 and direction-local repository ruling 2026-08-02"
+stage: "DIRECTION_LOCAL_STAGE_PIPELINE"
+endpoint: "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__AUDIO_AWARE_EVIDENCE_ACQUISITION_FORMAL_OPENING_APPROVED__STAGE2A_EXECUTION_CONTRACT_PENDING"
+execution_authority: "NO_ADMITTED_STUDY__EXECUTION_WITHHELD"
 ---
 
 # 五维研究方向定稿：API-only 冻结多模态模型的可靠能力激活
 
 > **2026-07-27/28/29 owner 整改裁决（先于本文其余内容生效）。** 五个维度和原九个候选方向继续作为
 > Stage-1C 审计框架，但不保证九项都进入 Stage-2。R1 日落已由 owner 于 2026-07-29 确认
-> （Decision-Log 续76）；R2 经博导评审+对抗分析后由 owner **有条件裁 GO_STANDALONE**（续77，
-> 以 v3 关闭评审清单为生效条件；红线=模型参数不可修改、不得新增一个模型；检索 trace-logging
-> 放行）；R3–R9 仍为执行者草稿、owner 未校验（`OWNER_UNVERIFIED`），待按 07-29 判据协同重审。**裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为后续可复现
+> （Decision-Log 续76）；R2 来源的语义研究对象 **audio-aware evidence acquisition** 已在
+> 2026-08-02 的阶段对齐 v20 博导评审中通过 Stage-1C 并获正式开题许可。该许可不裁决创新性、
+> 不冻结最终方法，也不授予 Stage-2A 执行权；红线=模型参数不可修改、不得新增一个任务训练模型或
+> answering LLM，检索 trace-logging 放行。R3–R9 仍为执行者草稿、owner 未校验
+> （`OWNER_UNVERIFIED`），待按 07-29 判据协同重审。**裁决 A**：项目核心为 Qwen3-Omni-30B（本地 llama.cpp serving lane 为后续可复现
 > 载体，精确 revision 在独立执行合同中冻结）。**裁决 B**：ASR 主线为通用 ASR，MyST/RSR 等儿童 ASR
 > 只作支持证据。**方向成立判据（owner 2026-07-29）**：方向必须完成充分调研，且属两型之一——(a) 本
 > 领域存在已有工作，作为方法论基线提供实验、方法和工程依据并参与对比；(b) 本领域无已有工作，借鉴
 > 其他领域内容设计实验、提出方法和改进；两型都必须在具体任务上与存量业内最优（SOTA）基线对比。
 > **裁决 C/D/E（执行者代拟，owner 未签）**：不探索创新点、数据集只复用正式可得版本、指标复用官方
 > 口径——作为工作默认保留，与 07-29 判据冲突处以判据为准。
+
+> **2026-08-02 owner 工程架构裁决。** R1–R9 只保留为调研/论证 provenance，不是工程编号。每个通过
+> 自身调研、owner GO 和执行合同的研究对象，按具体语义名称在 `studies/` 下建立独立 GitHub 仓；未入场
+> 即日落的候选（R1）不建仓。一个方向进入工程后可并行调研下一个候选，无须等待所有候选调研完成。
+> W1–W4 不再承载这些 study；umbrella Wiki 统一管理实验生命周期与资产图。
 
 ## 1. 主研究问题
 
@@ -115,7 +122,7 @@ MetaSICL1/2/3 和 CoM 的 PRD 分析路径包含参数训练；ByCS 依赖 Whisp
 协议复现。R1 不建立独立实验包，不进入 Stage-2B，也不得成为其他方向的前置条件。详细分析见 workbench
 R1 报告。
 
-### R2 — 音频驱动外部知识获取（owner 有条件 GO，待 v3 关闭评审清单）
+### R2 — 音频感知证据获取（Stage-1C 通过；Stage-2A 执行合同待签）
 
 **审计对象。** AudioRAG 已发布 500 题 benchmark 和 text-controller + audio-tool + live-web pipeline；
 Omni-DeepSearch 已发布 640 题 audio-only-start deep-search benchmark、固定搜索预算消融和 accuracy 体系；
@@ -127,15 +134,16 @@ Omni-DeepSearch 在数据构造时都过滤掉不需要检索的题；官方数�
 query-hop-stop 没有直接参考方法，属于 R6 的 trajectory controller；two-ledger 属于 R5；条件回归和预算停止
 属于 R8。自行补负例、冻结 web corpus、发明归因指标或统一 utility 都违反当前数据/指标边界。
 
-**处置状态（owner 2026-07-29，Decision-Log 续77）。** `CONDITIONAL_GO_STANDALONE_PENDING_V3_
-CHECKLIST`：以 v3 关闭博导评审 §十四 全部清单（proposal 级/authorization 级分层）为生效条件。
-主研究问题按评审 §十 的音频特有机制重写（听错实体→高相关错误证据；感知 vs 知识不确定性；预算
+**处置状态（2026-08-02 v20 阶段对齐复核）。** `PASS_STAGE1C_FORMAL_OPENING`：round-21 的十项
+报告级签字门已经关闭，问题选择与 Stage-2A 交接成立。创新性和最终方法学均未裁决，必须在
+reproduction-first Stage-2A 中收敛并于 Stage-2B 验证。主研究问题按音频特有机制重写（听错实体→
+高相关错误证据；感知 vs 知识不确定性；预算
 在 re-resolve-audio 与 search-external 两信息源间分配）。红线：模型参数不可修改、不得新增一个
 模型（续78 细化：只禁为任务新训练模型与新增 LLM 代答；embedding 检索器、frozen judge 属工具级
 冻结组件可用，最终作答权在冻结核）；检索 trace-logging 放行（pin 服务/日期/参数、逐次落盘返回
 hash、共享查询跨臂复用）。
-早期证据事实（占据、negative class 缺失、边界约束）独立保留；开题底稿=proposals/
-2026-07-29-r2-coreview-draft.md（v2，v3 整改中）。
+早期证据事实（占据、negative class 缺失、边界约束）独立保留；正式开题底稿=proposals/
+2026-07-29-r2-coreview-draft.md（v20）；正式评审与许可见 audit round-22。
 
 ### R3 — 声学条件键控的持久多模态记忆
 
@@ -277,45 +285,44 @@ composition、full adaptive system。Full-duplex/interactive 只有在 task succ
 **击杀/重路由。** 若 full system 不优于 best component 或 fixed composition，按 factorial 结果拆回贡献
 为正的方向；集成失败不抹去单组件结果，也不得用更多调用掩盖。
 
-## 5. 优先级与依赖
+## 5. 方向局部流水线与优先级
 
-| 批次 | 方向 | 目的 |
+候选编号不定义工程顺序或目录。每个独立研究对象使用自己的流水线：
+`充分调研 → owner 裁决 → 语义名称与执行合同 → 独立 study repo → 工程 → 验证`。一个 study 进入工程后，
+下一个候选可开始调研；只有会推翻该 study 核心机制、合法性或主 baseline 的新证据才重新打开其门禁。
+
+| 当前顺序 | 研究对象 | 处置 |
 |---|---|---|
-| Stage-2A vertical slice | R5 + R6 + R8 | 先证明 API-only evidence-state controller 能可靠改变下一动作并提高任务效用 |
-| Stage-2B mechanism expansion | R4 | 独立处理运行时技能信用、组合与生命周期；published context/tool baseline 按需复现 |
-| Stage-2C persistent evolution | R3 + R7 | 检验外部记忆和跨实例改进是否成立 |
-| Stage-2E integration | R9 | 端到端组合与 speech-native 外部验证 |
-| Stage-2D（条件生效） | R2 | owner 有条件 GO（续77）：v3 关闭评审清单后生效；主题=音频特有的外部知识获取调度 |
+| 1 | **音频感知的证据获取**（来源候选 R2） | Stage-1C 与正式开题已通过；关闭 D1–D4、冻结执行合同并请求 owner GO 后进入独立工程仓 |
+| 2 | 下一个候选研究对象（先从 R3 provenance 开始复核） | 在首个 study 工程期间并行调研；尚不建仓 |
+| later | skills、evidence state、instance/cross-instance control、reliability、integration 等候选 | 分别判断独立/合并/日落；不构成首个 study 的全局前置 |
 
-## 6. 第一份 Stage-2A 合同（草案；绑定冻结至 R2–R9 owner 协同重审完成）
+R5+R6+R8 的组合纵切片降回尚待 owner 验证的候选研究对象，不再是所有 Stage-2 的统一入口。R9 只有在
+集成本身形成独立问题并获 GO 时才建立语义 study repo。
 
-> 本节所依赖的 R5/R6/R8 proposal 仍属 owner 未校验批次；合同绑定与授权申请冻结，待协同重审
-> 通过后再启动（owner 2026-07-29，Decision-Log 续76）。
+## 6. 首个计划 study 的 Stage-2A 建仓合同（尚未生效）
 
-**目标。** 实现并复现一个 `incumbent-preserving reward-guided context controller`，只覆盖 R5/R6/R8
-的最小纵向链。
+**工作语义名称：** `audio-aware evidence acquisition`；GitHub slug 候选为
+`audio-aware-evidence-acquisition`，最终 URL 与执行字段在 owner execution contract 中冻结。
+来源候选 R2 只保留在 Wiki provenance，未来仓名不得携带 `r2`。
 
-- **Core contract：** 单一 frozen speech/omni core，仅经 inference API；项目核心为
-  Qwen3-Omni-30B 的本地 llama.cpp serving lane。具体 model/service revision、hash、prompt 和 decoding
-  在授权包冻结；这是一项项目载体裁决，不把参考论文中的 Qwen2.5/MiMo 数字改写为 Qwen3 结果。
-- **Carrier：** MMAU-mini + MMAR；先解决 CURRENT T2 对 local status 的不一致，再冻结 exact revision、
-  split、hash 和 contamination/exposure。不得因“已 pin”散文直接假定资产可运行。
-- **Action menu：** `keep incumbent`、structured re-prompt、same-observation resample、一个
-  cross-observation branch、一次 bounded repair、stop。暂不加入 live retrieval、跨实例 memory 或
-  full-duplex。
-- **Runtime signals：** exact answer-format/option checks、counts-only consensus、hypothesis-vs-hypothesis
-  semantic equivalence、可选 frozen cross-family judge；test gold 永不进入 controller。
-- **Baselines：** direct readout、structured prompt、random matched-cost、majority/MBR、best fixed action、
-  full fixed chain、terminal-only rerank；offline oracle 只用于解释 action-menu recoverability。
-- **Primary result：** task accuracy/utility 的 paired delta 与下置信界；同时报告 seed variance、
-  worst-group、correct→wrong、wrong→correct、calls/latency/cost。Headroom 不作开门门槛。
-- **Lean gate：** runtime state/action 定义、bounded termination、incumbent recoverability、gold boundary、
-  `2ε` margin theorem均编译；实现—定理 conformance 尚未关闭时只可称 formal model。
-- **Abort/reroute：** API contract 需要内部量；数据/许可证/版本不闭合；controller 使用 gold；equal-cost
-  下不超过 structured prompt/best fixed；可靠性阈值覆盖率近零；效应小于预注册 SESOI。
+**研究机制：** 在冻结 API-only speech/omni 核上，控制预算在 `re-resolve audio` 与
+`search external evidence` 两类信息动作之间分配，针对“听错实体导致高相关但错误证据”的音频特有失败。
 
-建议授权 token：`AUTHORIZE_STAGE2A_CAPABILITY_CONTROL_VERTICAL_SLICE`。本定稿本身不授权模型/API
-调用、metrics、下载、复现、prototype、技术 novelty verdict、push 或 wiki publication。
+**已关闭：** v20 Stage-1C 报告级签字门与正式开题许可；Earnings21、Earnings22、ConEC D0 物化。
+
+**建仓前仍必须关闭：**
+
+- 模型无关的 D1–D4 对齐、信息边界/泄漏、评分与十样本 trace 检查；
+- exact task、正式数据版本、incumbent baseline、官方指标与 exposure；
+- Qwen3-Omni-30B service/model revision、prompt/decoding 和黑盒边界；
+- trace pinning（服务/日期/参数/返回 hash/跨臂共享查询）、预算、停止与 abort/reroute；
+- Wiki `wiki/experiments/<semantic-slug>/README.md`、GitHub URL、artifact/MLflow namespace；
+- 无参数修改、无 task-trained model、无新增 answering LLM、test gold 不进入 controller。
+
+上述关闭后请求 `OWNER_GO_AND_EXECUTION_CONTRACT`，再创建独立 GitHub 仓并登记
+`studies/registry.json`。本定稿不授权模型/API 调用、metrics、下载、复现、prototype、远程建仓、push
+或 Wiki publication。
 
 ## 7. Lean 现有结论的允许用法
 

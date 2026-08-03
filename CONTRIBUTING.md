@@ -2,25 +2,35 @@
 
 > **English** | [中文](CONTRIBUTING_CN.md)
 
-This is an **umbrella repo plus four independent work repos**. The single most important rule is:
+This is an **umbrella governance repo plus independent work and admitted-study repos**. The single most important rule is:
 **commit each change to the repo it belongs to.**
 
-## The five repos
+## Repository classes
 
 - **`exploring-l4-intelligence`** (umbrella, this repo) — owns `common/`, `docs/`, `scripts/`,
-  `wiki/`, and root `*.md`.
+  `wiki/`, `studies/README.md`, `studies/registry.json`, and root `*.md`.
 - **`projects/<work>/`** (W1–W4) — each is its **own git repo** (gitignored by the umbrella) with
   independent history, issues, and remote.
+- **`studies/<semantic-study>/`** — each owner-admitted research object is its **own Git/GitHub repo**,
+  checked out under the umbrella workspace but gitignored by it. Creation requires
+  `OWNER_GO_AND_EXECUTION_CONTRACT`; Stage-1 candidate IDs never become repository names.
 
 ## Where changes go
 
 | You changed… | Commit in… |
 |---|---|
 | `common/`, `docs/`, `scripts/`, `wiki/`, root README/CONTRIBUTING | the umbrella repo |
+| `studies/README.md` or `studies/registry.json` | the umbrella repo |
 | a work's code / configs / `README.md` (under `projects/<work>/`) | that work's own repo |
+| an admitted study's code / configs / `README.md` (under `studies/<semantic-study>/`) | that study's own repo |
 
-A change is in the wrong place if `git status` in the umbrella shows files under `projects/` — those
-belong to the work repo. (`projects/*/` is gitignored here precisely to prevent that.)
+A nested-repository code change is in the wrong place if umbrella `git status` shows it under
+`projects/` or a study checkout. Both containers are ignored by the umbrella. Only the two
+`studies/` registry files belong to the umbrella.
+
+Do not pre-create candidate repositories. A direction can sunset before engineering, or several
+candidate analyses can converge into one semantically named study. The umbrella Wiki preserves that
+provenance; the engineering identity follows the admitted research object.
 
 ## Shared library (`common/`)
 
@@ -38,7 +48,8 @@ All training runs in **WSL2** (see [docs/setup.md](docs/setup.md)). Use the shar
 
 ## Git conventions
 
-- Default branch is **`master`** for all five repos; branch for non-trivial work and open a PR.
+- Existing umbrella and W1–W4 repos use **`master`**. Each admitted study records its own default branch;
+  branch for non-trivial work and open a PR.
 - Keep each commit/PR scoped to a single repo.
 - `.gitattributes` forces `eol=lf` (especially `*.sh`) so scripts run in WSL — keep it.
 - **Never commit data:** `speechrl-data/` and weight/dataset/archive formats are gitignored (~440 GB
@@ -59,6 +70,8 @@ Choose the document role before creating the file:
 | superseded, unregistered working artifact | `wiki/archive/<knowledge-layer>/<campaign>/` after the safe-move gate |
 | mutable campaign exploration or dossier | `wiki/survey/workbench/<campaign>/` |
 | engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
+| study admission and checkout registry | `studies/registry.json` plus the owner decision in the Wiki |
+| experiment lifecycle and asset graph | `wiki/Experiment-Assets.md` → `wiki/experiments/<study-slug>/README.md` |
 | release-scoped reproducibility report | `docs/checks/<campaign>/<release-id>/` |
 | executable policy or validation | `scripts/` with tests |
 | temporary reasoning or scratch | do not commit; promote only distilled conclusions |
@@ -80,3 +93,7 @@ is canonical in `wiki/AI-Collaboration.md`; this table is only a route summary.
 Record durable decisions with rationale in the repository Wiki. Run the applicable checks before
 commit. `scripts/wiki-sync.sh` publishes the repository source to the web mirror only when publication
 is authorized.
+
+The Wiki manages experiments, while bytes retain one storage authority: executable code/config belongs
+to the study repo; large data, weights and raw outputs belong in `SPEECHRL_DATA_DIR`; MLflow owns run
+tracking; Wiki records bind their IDs, locations and hashes. See `wiki/Experiment-Assets.md`.

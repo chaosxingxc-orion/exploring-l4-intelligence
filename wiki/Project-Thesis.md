@@ -54,16 +54,31 @@ ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is u
   memory, tools, evaluation, selection, budget, stopping); the registered plain name for what was
   colloquially「外设优化」.
 
-## How the four works relate
+## Repository and research-object model
 
-| # | Work (repo) | Role |
+The umbrella, not W1, carries the primary program. Stage-1 candidate IDs are argument/audit provenance,
+not durable engineering identities. A research object receives a semantically named independent GitHub
+repository under `studies/` only after its own survey, owner GO and execution contract close. A candidate
+may sunset without a repository (R1), and multiple candidate analyses may converge into one admitted
+study. Engineering for one admitted study may overlap survey of the next candidate.
+
+The umbrella Wiki manages study state, experiment protocols, asset links and decisions. Study Git repos
+own executable code/config/tests; `SPEECHRL_DATA_DIR` and MLflow own large artifacts and run data.
+
+| Class | Repository/location | Role |
 |---|---|---|
-| **W1** | `speech-mllm-training-free-rl` | **Primary-program carrier** — external control plane over a frozen black-box omni core; the mature selector/evaluator line continues as its component dossier |
-| W4 | `speech-mllm-omni-embedding-rl` | Separate work — L0/L1 embedding-utility studies (fresh proposal pending #29) |
-| W2 | `speech-mllm-efficient-rl-alignment` | Supporting — efficient GRPO/DPO (LoRA) speech↔language alignment |
-| W3 | `speech-mllm-multitask-rl` | Supporting — one policy, RL across ASR/ST/SID/SER via verifiable rewards |
+| Program | `exploring-l4-intelligence` | Umbrella governance, Wiki truth, study registry, shared infrastructure and cross-study evidence |
+| Admitted studies | `studies/<semantic-name>/` | Independent Git/GitHub engineering and validation repositories created only after `OWNER_GO_AND_EXECUTION_CONTRACT` |
+| W1 | `projects/speech-mllm-training-free-rl` | Legacy/component work containing mature selector/evaluator and training-free-RL evidence; not the program carrier |
+| W4 | `projects/speech-mllm-omni-embedding-rl` | Separate L0/L1 embedding-utility work (fresh proposal pending #29) |
+| W2 | `projects/speech-mllm-efficient-rl-alignment` | Supporting efficient GRPO/DPO (LoRA) speech↔language alignment work |
+| W3 | `projects/speech-mllm-multitask-rl` | Supporting multi-task verifiable-reward RL work |
 
 ## Supersession
+
+The 2026-08-02 owner architecture ruling supersedes the W1-as-primary-carrier and candidate-ID-as-
+engineering-decomposition assumptions. It changes repository ownership and direction-local stage flow,
+not the north-star research question or TF-Strict boundary.
 
 This 2026-07-15 restatement **supersedes** the 2026-07-12 note (selector-first primary study,
 "primary metric = ρ") and the earlier W4-flagship framing, per owner rulings in Decision-Log

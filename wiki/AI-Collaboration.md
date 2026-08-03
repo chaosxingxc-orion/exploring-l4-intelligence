@@ -23,7 +23,7 @@
 
 | 类型 | 必须位置 | 谁读取 | 默认加载 | 权威性/可变性 | 进入条件 | 搬运/退出条件 |
 |---|---|---|---|---|---|---|
-| **HOT** | `AGENTS.md` / `CLAUDE.md`; `wiki/Research-Objective.md`; `wiki/Project-Thesis.md`; `wiki/Per-Work-Status.md` | 每个新会话读前三项；Per-Work 按需 | 仅前三项 | 当前事实，supersede-in-place | owner 裁决、当前阶段、阻塞项或跨工作状态必须立即可见 | 原位替换旧状态并留一个冷索引指针；不得日期版本化或堆限定语 |
+| **HOT** | `AGENTS.md` / `CLAUDE.md`; `wiki/Research-Objective.md`; `wiki/Project-Thesis.md`; `wiki/Per-Work-Status.md`; `wiki/Experiment-Assets.md` | 每个新会话读前三项；Per-Work/实验资产按需 | 仅前三项 | 当前事实，supersede-in-place | owner 裁决、当前阶段、阻塞项、跨工作状态或实验资产权威边界必须立即可见 | 原位替换旧状态并留一个冷索引指针；不得日期版本化或堆限定语 |
 | **CURRENT** | `wiki/survey/current/`（router、effective protocol、status、manifest、`tables/`、`data/`） | 正在执行该 campaign 的人/AI | 否，按任务定向 | 当前有效工作规范；稳定文件名，版本写入内容 | 工作规则被接受为当前可执行合同 | 新版原位取代；旧版若未注册且不再被 manifest 引用则进 ARCHIVE |
 | **REGISTRY** | `wiki/survey/registry/`（历史兼容路径 `wiki/survey/sidecars/` 由 manifest 管理） | 做论文核验、编码或写作的人/AI | 否 | 长期 census/claim/证据登记；本体 append-only，判决显式 supersede | 论文 FETCH/精读、canonical ID 或承重 claim 被采用 | 跨 campaign 保留；不得复制进协议散文，失效判决带 token，不删记录 |
 | **AUDIT** | 普通 transaction：`wiki/audit/<campaign>/<round-id>/`；带 ordinal 的迭代修正：`wiki/audit/<campaign>/epoch-<N>/<round-id>/`; index=`wiki/audit/<campaign>/INDEX.md` | reviewer、审计者；AI 仅精确取证 | 否 | round 件与 `consolidation-receipt.json` 首个 commit 起 immutable；index append-only | reviewer submission/report/response/sign-off 直接写永久路径并登记；amendment/correction 走 epoch 状态机，唯一无编号例外是 path-pinned B8 correction | 已注册件永不移动/改写；退出活跃路由后仅由 campaign index 访问 |
@@ -31,12 +31,19 @@
 | **WORKBENCH** | `wiki/survey/workbench/<campaign>/` | 当前探索者 | 否 | 可变工作知识，不得承载完成声明 | 问题尚在探索、规则未被接受 | 有用结论整编进 CURRENT/REGISTRY；保留 dossier 归档；无价值 scratch 不提交 |
 | **Engineering spec** | `docs/superpowers/specs/` | 实现者与 reviewer | 否 | 有界工程设计，经 Git review 版本化 | 多步骤工程改动需要先锁范围/约束 | 完成后由 Git 历史保留；research current page 不依赖 plan/spec 才能解释 |
 | **Engineering plan** | `docs/superpowers/plans/` | 实现者 | 否 | 执行中 checkbox 可变 | 已批准设计需要分解执行 | 完成后停止作为 current research pointer；历史由 Git 保存 |
+| **Study repository registry** | `studies/README.md`; `studies/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；只登记已获准的语义命名独立 Git 仓 | 独立研究对象获得 `OWNER_GO_AND_EXECUTION_CONTRACT`，语义名称和执行合同冻结 | 生命周期变化原位更新；候选编号不得成为 repo 名，未获准/已在建仓前日落的候选不得建空仓 |
+| **Study experiment index** | `wiki/experiments/<study-slug>/README.md`，总路由=`wiki/Experiment-Assets.md` | owner、实现者、reviewer | 否，按 study 定向 | Wiki 管理实验状态与资产图；记录必须 pin repo commit、协议/配置/数据/模型与产物 | study 已登记，实验合同进入执行 | 结论整编进稳定当前页；release/audit bytes 不回写，study 日落后保留可恢复索引 |
 | **Check report** | `docs/checks/<campaign>/<release-id>/` | 门禁工具与核验者 | 否 | 被 release 引用后 immutable | 可重复检查产生平台/版本特定结果 | 新 release 新目录；禁止跨平台共用 last-writer-wins 文件名 |
 | **Executable rule** | `scripts/` | CI、操作者、reviewer | 否（执行而非通读） | 正常代码生命周期，测试先行 | 散文规则可机械验证时 | 修改规则必须同步测试；散文只指向检查器，不维护第二套实现 |
 | **Ephemeral scratch** | **Not committed** | 当前会话 | 否 | 无权威性 | 临时推理、草稿、一次性输出 | 交接前提炼有价值结论并附 provenance；其余删除/过期 |
 
 新文档先按上表归类再创建，不能先扔进 `wiki/` 根目录后等未来清理。现有 path-pinned legacy
 文件是兼容例外：保留原路径不等于 active；它们必须在 AI context manifest 的 cold inventory 中。
+
+工程仓与资产字节采用三层权威：`studies/<semantic-slug>/` 是独立 Git/GitHub 执行仓，umbrella Wiki
+是实验生命周期与资产关系的管理权威，`SPEECHRL_DATA_DIR`/MLflow 保存大数据、权重、原始输出和运行
+对象。Wiki 必须索引这些字节的 URI/ID/hash，但不得复制大资产。W1–W4 的 `projects/` 仓不自动拥有任何
+新 study；稳定且确实跨仓复用的能力才提升到 `common/`。
 
 ## 3. 六步生命周期
 
