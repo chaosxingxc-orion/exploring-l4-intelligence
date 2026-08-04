@@ -366,7 +366,7 @@ class AiContextSurfaceTests(unittest.TestCase):
         self.assertEqual("WORKBENCH", classify_path("wiki/survey/workbench/x/note.md", legacy))
         self.assertEqual(
             "EXPERIMENT",
-            classify_path("wiki/experiments/audio-aware-evidence-acquisition/README.md", legacy),
+            classify_path("wiki/experiments/speech-aware-evidence-acquisition/README.md", legacy),
         )
         self.assertEqual("AUDIT_LEGACY", classify_path("wiki/old-review.md", legacy))
         self.assertEqual("UNCLASSIFIED", classify_path("docs/ordinary.md", legacy))
@@ -1693,7 +1693,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
         self.assertIsNotNone(refresh)
         refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 8, 3), refresh_date)
+        self.assertEqual(date(2026, 8, 4), refresh_date)
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage accounting is now **direction-local**",
@@ -1763,7 +1763,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         objective_date = date.fromisoformat(
             re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
         )
-        self.assertEqual(date(2026, 8, 3), per_work_date)
+        self.assertEqual(date(2026, 8, 4), per_work_date)
         self.assertEqual(objective_date, per_work_date)
         self.assertLessEqual(per_work_date, date.today())
         for work in ("W1", "W2", "W3", "W4"):

@@ -32,7 +32,7 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         (self.root / ".gitignore").write_text("studies/*/\n", encoding="utf-8")
         self.write_control_plane(0)
         (self.root / "wiki" / "Research-Objective.md").write_text(
-            "endpoint: audio-aware-evidence-acquisition in Stage-2A E0\n",
+            "endpoint: speech-aware-evidence-acquisition in Stage-2A E0\n",
             encoding="utf-8",
         )
         self.registry = {
@@ -65,8 +65,8 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         return hashlib.sha1(f"blob {len(raw)}\0".encode("ascii") + raw).hexdigest()
 
     def admitted_study(self) -> dict:
-        slug = "audio-aware-evidence-acquisition"
-        decision = self.root / "wiki" / "decisions" / "audio-aware.md"
+        slug = "speech-aware-evidence-acquisition"
+        decision = self.root / "wiki" / "decisions" / "speech-aware.md"
         experiment_index = self.root / "wiki" / "experiments" / slug / "README.md"
         decision.parent.mkdir(parents=True, exist_ok=True)
         experiment_index.parent.mkdir(parents=True, exist_ok=True)
@@ -76,21 +76,21 @@ class StudyWorkspaceContractTests(unittest.TestCase):
             f'study_slug: "{slug}"\n'
             f'study_repo: "https://github.com/example/{slug}.git"\n'
             f'local_checkout: "studies/{slug}"\n'
-            'experiment_id_namespace: "AAEA-E-<nnn>"\n'
+            'experiment_id_namespace: "SAEA-E-<nnn>"\n'
             "---\n\ncurrent experiments\n",
             encoding="utf-8",
         )
         return {
-            "name": "Audio-aware evidence acquisition",
+            "name": "Speech-aware evidence acquisition",
             "slug": slug,
             "local_path": f"studies/{slug}",
             "github_repo": f"https://github.com/example/{slug}.git",
             "default_branch": "master",
             "package_name": slug,
             "created_at": "2026-08-03",
-            "experiment_namespace": "AAEA-E",
+            "experiment_namespace": "SAEA-E",
             "lifecycle": "engineering",
-            "decision_record": "wiki/decisions/audio-aware.md",
+            "decision_record": "wiki/decisions/speech-aware.md",
             "decision_record_blob": self.git_blob(b"GO\n"),
             "experiment_index": f"wiki/experiments/{slug}/README.md",
         }
@@ -176,7 +176,7 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         self.write_control_plane(1)
         index = self.root / entry["experiment_index"]
         index.write_text(
-            index.read_text(encoding="utf-8").replace("AAEA-E-<nnn>", "OTHER-1"),
+            index.read_text(encoding="utf-8").replace("SAEA-E-<nnn>", "OTHER-1"),
             encoding="utf-8",
         )
         with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "frontmatter drift"):
@@ -200,7 +200,7 @@ class StudyWorkspaceContractTests(unittest.TestCase):
     def test_candidate_number_and_candidate_lifecycle_are_rejected(self) -> None:
         for slug, lifecycle in (
             ("r2-external-retrieval", "engineering"),
-            ("audio-aware-evidence-acquisition", "conditional-go"),
+            ("speech-aware-evidence-acquisition", "conditional-go"),
         ):
             with self.subTest(slug=slug, lifecycle=lifecycle):
                 entry = self.admitted_study()
