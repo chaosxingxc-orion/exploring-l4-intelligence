@@ -23,6 +23,14 @@ The pipeline is direction-local: after one direction is admitted, its engineerin
 while the next candidate direction is surveyed. Completion of all candidate surveys is not a global
 prerequisite for an admitted study.
 
+## Paper project registry
+
+Admitted paper repositories: **0**. Machine authority: `papers/registry.json`. A paper project enters
+only by promotion from a qualified study candidate under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`
+(Decision-Log 续91); it owns Stage‑3 large-scale confirmatory experiments and publication. Its
+experiment index will live under `wiki/experiments/papers/<paper-slug>/` at first admission; promotion
+schema and workspace checks for this surface arrive with the first admission, not before.
+
 Current carrier readiness: Earnings21, Earnings22 and ConEC are materialized at pinned revisions
 (`D0_CLOSED`); SLUE-SQA-5, ContextASR-Bench and AMI are complete speech-domain secondary carriers.
 D1–D4 alignment, leakage, scorer and ten-sample trace receipts remain pending. FSD50K, AudioSet and

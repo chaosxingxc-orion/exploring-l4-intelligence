@@ -3,7 +3,7 @@ title: "Experiment index: speech-aware evidence acquisition"
 study_slug: "speech-aware-evidence-acquisition"
 study_repo: "https://github.com/chaosxingxc-orion/speech-aware-evidence-acquisition.git"
 local_checkout: "studies/speech-aware-evidence-acquisition"
-decision_record: "wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md"
+decision_record: "wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md"
 experiment_id_namespace: "SAEA-E-<nnn>"
 source_candidate_provenance: "R2 (system-first-stage1c-v2; provenance only)"
 domain: "speech-only; general/environmental audio excluded"
@@ -17,7 +17,9 @@ ESC-50 等 general-audio 数据不得进入本台账的实验。
 
 ## 当前权威路由
 
-- 当前有效 owner 合同：
+- 当前有效 owner 合同（Stage‑3 边界与 paper gate；registry pin 指向本件）：
+  [2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md](2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md)
+- 仍有效（范围与语义身份）：
   [2026-08-04-owner-speech-domain-scope-and-identity-contract.md](2026-08-04-owner-speech-domain-scope-and-identity-contract.md)
 - 2026-08-03 原 GO 合同：
   [2026-08-03-owner-go-and-execution-contract.md](2026-08-03-owner-go-and-execution-contract.md)

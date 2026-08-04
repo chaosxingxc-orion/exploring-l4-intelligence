@@ -63,13 +63,17 @@ repository under `studies/` only after its own survey, owner GO and execution co
 may sunset without a repository (R1), and multiple candidate analyses may converge into one admitted
 study. Engineering for one admitted study may overlap survey of the next candidate.
 
-The umbrella Wiki manages study state, experiment protocols, asset links and decisions. Study Git repos
-own executable code/config/tests; `SPEECHRL_DATA_DIR` and MLflow own large artifacts and run data.
+A study's endpoint is one or more qualified paper candidates; Stage‑3 large-scale confirmatory
+execution and publication live in a separately admitted paper repository under `papers/`
+(Decision-Log 续91). The umbrella Wiki manages study state, experiment protocols, asset links and
+decisions. Study Git repos own executable code/config/tests; `SPEECHRL_DATA_DIR` and MLflow own
+large artifacts and run data.
 
 | Class | Repository/location | Role |
 |---|---|---|
 | Program | `exploring-l4-intelligence` | Umbrella governance, Wiki truth, study registry, shared infrastructure and cross-study evidence |
-| Admitted studies | `studies/<semantic-name>/` | Independent Git/GitHub engineering and validation repositories created only after `OWNER_GO_AND_EXECUTION_CONTRACT` |
+| Admitted studies | `studies/<semantic-name>/` | Independent Git/GitHub engineering and validation repositories created only after `OWNER_GO_AND_EXECUTION_CONTRACT`; endpoint = qualified paper candidates |
+| Paper projects | `papers/<semantic-name>/` | Independent Stage‑3 repositories admitted only by promotion from a qualified study candidate under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`; they own large-scale confirmatory experiments, manuscripts and publication releases (none admitted) |
 | Retired works (cold backup) | W1–W4 remotes, unlinked from the program | Retired 2026-08-03: local checkouts deleted, remotes retained as cold backups; provenance routing via `wiki/archive/program/w1-w4-retirement/` and `docs/integrity/retired-repository-registry.json` |
 
 ## Supersession

@@ -1,0 +1,8 @@
+{
+  "schema": "paper-repository-registry-v1",
+  "local_root": "papers",
+  "repo_creation_gate": "OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",
+  "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
+  "promotion_control_plane": "wiki/Experiment-Assets.md",
+  "papers": []
+}

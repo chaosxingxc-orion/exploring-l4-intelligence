@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-04 — study narrowed to speech-only; semantic repo/namespace migrated; Stage-2A E0 in progress"
+last_refresh: "2026-08-04 — speech-only scope; Stage-2A E0 in progress; Stage-3 carrier bound to papers/"
 ---
 
 # Research Objective & Current State
@@ -67,8 +67,10 @@ The Wiki controls experiment identity and decisions; the study repo owns code/co
 
 ## Formal, legacy and routing boundaries
 
-The Stage‑1B program-level Lean layer is retired; formal work is rebuilt per admitted study and claim
-in Stage‑2. The fixed Stage‑1B v5 320-work union remains historical evidence, and H5 remains
+Carriers bind stages (Decision-Log 续91): Stage‑1 = umbrella; Stage‑2 = `studies/<slug>`, endpoint =
+qualified paper candidates; Stage‑3 = `papers/<slug>` under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` —
+none admitted, registry empty. The Stage‑1B program-level Lean layer is retired; formal work is
+rebuilt per admitted study and claim in Stage‑2. The fixed Stage‑1B v5 320-work union remains historical evidence, and H5 remains
 `WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not engineering identities; admitted
 repos live at `studies/<semantic-name>/`. R2R1 remains
 `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`. Literature work is a bounded delta lane routed

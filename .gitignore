@@ -58,6 +58,10 @@ projects/*/
 # The umbrella tracks studies/README.md and studies/registry.json only.
 studies/*/
 
+# ── Each admitted paper project is its own semantic Git repo ─
+# The umbrella tracks papers/README.md and papers/registry.json only.
+papers/*/
+
 # ── OS / editor ────────────────────────────────────────
 .DS_Store
 Thumbs.db

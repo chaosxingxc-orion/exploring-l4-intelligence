@@ -2,6 +2,36 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-04（续91）· 三阶段载体绑定：Stage‑3（大规模实证与发表）使命移出 study 仓
+
+#### Context
+
+2026-08-03 运行节奏已定 Stage‑1=伞仓、Stage‑2=独立 study 仓；但 Stage‑3（大规模 confirmatory
+实验、最终结论与论文写作发表）没有自己的载体，其使命隐含滞留在 study 仓的默认授权里。GPT-5.6
+整改提案与四轮对抗评审（specs/ 下 2026-08-04 两件，评审修订为准）确认：三层目录即既有
+Stage‑1/2/3 的载体绑定，不是新流水线。Owner 2026-08-04 裁定缓步实施：先立架构边界，机器件等
+真实内容出现再建，不过度设计。
+
+#### Decision
+
+①载体绑定：Stage‑1=伞仓（方向框定/调研/资格审查）；Stage‑2=`studies/<slug>`（课题分析、
+baseline 复现、机制辨识，**终点=一个或多个 qualified paper candidate**）；Stage‑3=
+`papers/<slug>`（大规模预注册 confirmatory、最终证据、论文写作与发表）。Stage‑2 内验证保持
+有界，不含 production-scale confirmatory。②Stage‑3 仓准入 gate token 冻结为
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`；study gate 保留现有 token。③paper 成功判据=对预注册
+claim 作出可复现、足够统计效力的判断；正/零/负结果同等合法。④最小实施：papers/README+空
+registry+gitignore 占位（暂无 checker）、SAEA 边界合同收窄默认授权；reservation 台账、paper
+checker、study registry v3、promotion schema 等机器件全部推迟（触发器=SAEA 任一 candidate 进入
+paper-candidate-ready 或 owner 启动首个 paper admission）。⑤评审否决项维持：不重组
+wiki/experiments 与 docs/checks 既有路径；不建 wiki/directions/；不改 study gate token。
+
+#### Consequences
+
+Project-Thesis/Architecture/Research-Objective/客户端指南补三阶段绑定；SAEA 签发 Stage‑3
+boundary contract 并 re-pin registry decision_record；papers/ 占位面入伞仓跟踪面。本条不授予
+模型/API 调用、实验、数据下载、远程建仓、push 或 wiki 发布权限。失效条件：owner 修改载体
+绑定、gate token 或成功判据。
+
 ### 2026-08-04（续90）· 独立复核残留门 G0/G1 关闭（收据可证伪化/绑定可证明化）；G2 待推送授权
 
 #### Context

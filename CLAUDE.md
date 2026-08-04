@@ -8,8 +8,8 @@ Umbrella governance repo for a research program on training-free, reward-guided 
 of frozen speech/omni multimodal LLMs. The north star is `wiki/Project-Thesis.md`; current research
 state is `wiki/Research-Objective.md`.
 
-The umbrella owns `common/`, `docs/`, `scripts/`, `studies/README.md`, `studies/registry.json`, `wiki/`,
-and root Markdown. The historical W1–W4 work repos under `projects/` were retired on 2026-08-03:
+The umbrella owns `common/`, `docs/`, `scripts/`, `studies/README.md`, `studies/registry.json`,
+`papers/README.md`, `papers/registry.json`, `wiki/`, and root Markdown. The historical W1–W4 work repos under `projects/` were retired on 2026-08-03:
 local checkouts deleted, remotes kept as cold backups outside the program (tombstone:
 `wiki/archive/program/w1-w4-retirement/`). Program cadence: each new research topic runs its
 Stage‑1 discussion/survey/justification in the umbrella; at Stage‑2 entry the study repo opens and
@@ -17,7 +17,10 @@ all later work lives there. The umbrella retains program-level data/model acquis
 (`docs/datasets.lock.json`, `scripts/data/`) as the shared-asset function. Each admitted research
 study is an independent, semantically named Git repo checked out
 under `studies/<study-name>/`; candidate IDs such as R1/R2 are audit provenance, never engineering repo
-names. Study creation requires `OWNER_GO_AND_EXECUTION_CONTRACT`. See `CONTRIBUTING.md` and
+names. Study creation requires `OWNER_GO_AND_EXECUTION_CONTRACT`. A study ends at qualified paper
+candidates; Stage‑3 (large-scale confirmatory experiments, manuscripts, publication) lives in a
+separately admitted repo under `papers/<paper-slug>/`, created only via
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (none admitted yet). See `CONTRIBUTING.md` and
 `wiki/Experiment-Assets.md`.
 
 ## AI context routing

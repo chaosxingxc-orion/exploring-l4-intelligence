@@ -11,7 +11,11 @@ exploring-l4-intelligence/      umbrella Git repository
 ├─ studies/
 │  ├─ README.md                 umbrella-owned admission rule
 │  ├─ registry.json             umbrella-owned admitted-study registry
-│  └─ <semantic-study>/         independent Git/GitHub repository
+│  └─ <semantic-study>/         independent Git/GitHub repository (Stage‑2)
+├─ papers/
+│  ├─ README.md                 umbrella-owned promotion rule
+│  ├─ registry.json             umbrella-owned admitted-paper registry
+│  └─ <semantic-paper>/         independent Git/GitHub repository (Stage‑3)
 ├─ docs/                        specs, datasets.lock.json, integrity manifests and checks
 ├─ scripts/                     executable governance/environment/data tooling
 └─ wiki/                        program and experiment management truth
@@ -19,7 +23,9 @@ exploring-l4-intelligence/      umbrella Git repository
 
 Program cadence: Stage‑1 discussion/survey/justification for every new topic runs in the umbrella; a
 study repository is created only after its research object closes survey, owner GO and an execution
-contract (`OWNER_GO_AND_EXECUTION_CONTRACT`), and all later work lives in that repo. Candidate labels
+contract (`OWNER_GO_AND_EXECUTION_CONTRACT`), and all later work lives in that repo. A study ends at
+qualified paper candidates; Stage‑3 (large-scale confirmatory experiments and publication) runs in a
+separately admitted repo under `papers/` (`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`). Candidate labels
 such as R1/R2 remain survey/audit provenance and must not be repository names. R1 sunset before
 admission and has no repository. The historical W1–W4 work repos were retired on 2026-08-03 (local
 checkouts deleted, remotes kept as cold backups; tombstone `wiki/archive/program/w1-w4-retirement/`).
@@ -40,7 +46,9 @@ functions that use them, then run `pytest common/tests`.
 ## Direction-local pipeline
 
 ```text
-candidate survey → owner decision → semantic contract → independent study repo → engineering → validation
+candidate survey → owner decision → semantic contract → independent study repo (Stage‑2)
+    → qualified paper candidate → OWNER_GO_AND_PAPER_EXECUTION_CONTRACT
+    → independent paper repo (Stage‑3) → confirmatory evidence → publication | closed-negative
 ```
 
 Engineering for one admitted study may overlap survey of the next candidate. Finishing every candidate
@@ -58,4 +66,6 @@ survey is not a global Stage-2 prerequisite.
 
 Wiki 管理研究状态、实验协议、资产索引、偏差、结果与裁决；study 仓管理代码/配置/测试；
 `SPEECHRL_DATA_DIR` 和 MLflow 保存大型资产与运行数据。一个 study 进入工程后可以并行调研下一个候选，
-无须等待所有候选完成。统一资产入口见 [[Experiment-Assets]]。
+无须等待所有候选完成。study 的终点是一个或多个合格 paper candidate；Stage‑3（大规模 confirmatory
+实验、论文写作与发表）经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级后在 `papers/` 下的独立仓
+完成，伞仓只跟踪 `papers/README.md` 与 `papers/registry.json`。统一资产入口见 [[Experiment-Assets]]。
