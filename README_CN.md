@@ -14,10 +14,12 @@
 
 ## 运行模式 · Program model
 
-**Stage‑1 在伞仓，Stage‑2 开独立 study 仓。** 每个新研究课题的详细讨论、调研与论证都在伞仓完成
-（Wiki 调研层、审计轮次、owner 裁决）。方向通过 Stage‑1 且 owner 签发
+**Stage‑1 在伞仓，Stage‑2 开独立 study 仓，Stage‑3 开独立 paper 仓。** 每个新研究课题的详细讨论、
+调研与论证都在伞仓完成（Wiki 调研层、审计轮次、owner 裁决）。方向通过 Stage‑1 且 owner 签发
 `OWNER_GO_AND_EXECUTION_CONTRACT` 后，以**具体语义名称建立独立 GitHub 仓**，checkout 到
-`studies/<semantic-name>/`——之后的全部工程、实验与论文都在该仓完成。候选编号（R1、R2……）只是
+`studies/<semantic-name>/`。study 的终点是一个或多个**合格 paper candidate**；大规模 confirmatory
+实验、论文写作与发表在 `papers/<semantic-name>/` 下另行获准的独立仓完成（须
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`，当前没有任何 paper 获准）。候选编号（R1、R2……）只是
 调研/审计 provenance，永不作为仓名。
 
 伞仓长期保留**公共资产职能**：数据与模型下载（`docs/datasets.lock.json` 是唯一在线资产权威，

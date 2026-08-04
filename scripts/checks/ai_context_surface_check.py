@@ -531,6 +531,7 @@ POLICY_ROLE_ORDER = (
     "Engineering spec",
     "Engineering plan",
     "Study repository registry",
+    "Paper repository registry",
     "Study experiment index",
     "Check report",
     "Executable rule",
@@ -600,6 +601,14 @@ POLICY_ROLE_SEMANTICS = {
         ("伞仓跟踪", "语义命名独立 Git 仓"),
         ("OWNER_GO_AND_EXECUTION_CONTRACT",),
         ("候选编号不得成为 repo 名", "不得建空仓"),
+    ),
+    "Paper repository registry": (
+        ("papers/README.md", "papers/registry.json"),
+        ("owner", "实现者", "CI"),
+        ("否", "工程任务定向"),
+        ("伞仓跟踪", "语义命名独立 Git 仓"),
+        ("OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",),
+        ("候选编号不得成为 repo 名", "不得建空 paper 仓"),
     ),
     "Study experiment index": (
         ("wiki/experiments/<study-slug>/README.md", "wiki/Experiment-Assets.md"),

@@ -3,7 +3,7 @@
 （2026-07-15 自 CLAUDE.md 迁出成篇——加载面瘦身「动作 C」；本文为正典，修订走 dated
 supersession。CLAUDE.md 只留指针与一行摘要。）
 
-## 研究流程阶段（Stage-1A/1B/1C → 2A/2B → 3;dated supersession 2026-07-18,owner 裁决①）
+## 研究流程阶段（Stage-1A/1B/1C → 2A/2B → 3;dated supersession 2026-07-18,owner 裁决①;Stage‑2B/3 载体绑定 dated supersession 2026-08-04,续91）
 
 **分界依据 = 活动目的与证据用途**，不是「是否启动过 Python」或「样本是否很少」。每份交付物
 注明所处阶段。**当前阶段以 `wiki/Research-Objective.md` 为准**（2026-07-29 时点 = Stage-1C
@@ -18,13 +18,14 @@ mapping 查询尚未执行,定向 ID dereference/raw provenance/全文准备/校
 | **Stage-1B** | systematic survey/mapping **执行** | 检索、去重、题录筛选、全文编码、引文闭包、饱和分析、证据图谱、known-item carry-forward ledger、方法路径/邻近关系事实映射 | **smoke、任务指标、模型/方法比较、headroom/accuracy/WER、技术创新性裁决——全程不得运行研究模型**（owner 签署 2026-07-18） |
 | **Stage-1C** | 证据综合与选题 | 形成 3–5 个候选问题/缺口假设卡并由 owner 选唯一问题；冻结 Stage-2A 复现清单与探索约束（不执行、不冻结创新方案） | 用临时实验为某候选「拉票」；把候选缺口写成已成立的技术创新 |
 | **Stage-2A** | prior 复现、方案探索与技术创新收敛 | **先复现最接近且最强的公开 prior**；复现成立后才做自研方向性原型并收敛技术贡献（廉价小样、owner 显式放行、全部尝试与失败登记、directional-only；**即使只跑一个 item、只为 smoke，也算一次实验和一次 exposure**） | 把方向性结果写成确证;跳过 prior 复现直接宣称超过 SOTA |
-| **Stage-2B** | 方案验证 | 冻结假设、对照、判据后正式实验与统计推断（Research-Proposal-Template 实例、预注册、paired-bootstrap CI、对抗评审） | 事后换主指标、选择性报告 |
-| **Stage-3** | 发表级证据 | 扩展、独立复现、论文级审计、敌意评审至收敛 | 用 Stage-2A 小样代替发表证据 |
+| **Stage-2B** | candidate qualification（方案验证收敛为合格 paper candidate） | 冻结假设、对照、判据；有界验证与统计设计（Research-Proposal-Template 实例、预注册准备、power 估计、paired-bootstrap CI 方案、对抗评审）；冻结 candidate bundle 并申请 paper GO | production-scale confirmatory 与最终优越性结论（属 Stage‑3 paper 仓）；事后换主指标、选择性报告 |
+| **Stage-3** | 发表级证据（独立 paper 仓,续91） | 经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 在 `papers/<slug>` 独立仓执行大规模预注册 confirmatory 与正式统计推断、扩展、独立复现、论文级审计、敌意评审至收敛、论文写作与发表；正/零/负结果同等合法 | 在 study 仓内执行 paper-scale campaign;用 Stage-2A/2B 小样或 probe 代替发表证据 |
 
 **创新性时点（owner 裁决②，2026-07-21）**：Stage-1A 只保证问题、身份、路由、协议与执行门
 正确，不比较“我们的技术方案与 prior 有何创新差异”；Stage-1B 如实映射方法路径、覆盖与邻近性，
 不作创新性胜负裁决；Stage-1C 基于完整证据形成候选问题/缺口假设并选题，但不把假设冻结成技术
-贡献。技术方案的创新性必须从 Stage-2A 的最近 prior 复现与方案探索中收敛，并在 Stage-2B 验证。
+贡献。技术方案的创新性必须从 Stage-2A 的最近 prior 复现与方案探索中收敛，在 Stage-2B 收敛为合格
+paper candidate，最终在 Stage‑3 独立 paper 仓的预注册 confirmatory 中验证（续91）。
 “发现直接邻近 prior”在 Stage-1A/1B 是路由与覆盖事实，不是杀死方向或迫使提前设计差异化方案。
 
 **exposure 记账（四字段,与阶段声明同报,禁止无范围的「0 次」）**：
@@ -39,8 +40,9 @@ INHERITED_PRIOR_EXPOSURE`（历史实验不删除、不降格、不假装未发�
 **Stage-2A**;07-16 裁决「survey 执行仍是 1A」的**目的**（禁止误称提前进阶段）由新表继承并
 加强（连 smoke 都推至 2A）。触发 = v4 博导复审 §1.1 + owner 裁决①（Decision-Log 续65）。
 
-**证据等级纪律**：证据永远保持其产生阶段的等级——Stage-1/2A 数字在 Stage-2B 重建立之前一直
-是 hypothesis-grade。记录 append-only——重定级走带日期的 reflection 文档，绝不改写。读
+**证据等级纪律**：证据永远保持其产生阶段的等级——Stage-1/2 数字在 Stage‑3 paper 仓的预注册
+confirmatory 重建立之前一直是 hypothesis-grade（续91；Stage-2B 产出的是 candidate-grade 设计与
+有界验证，不是发表级证据）。记录 append-only——重定级走带日期的 reflection 文档，绝不改写。读
 2026-07 之前的记录时套用此透镜（彼时阶段名按墓碑映射）。
 
 ## 资源姿态三阶段（owner 2026-07-15）——与「研究流程三阶段」同名异构，勿混

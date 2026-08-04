@@ -23,7 +23,7 @@ exploring-l4-intelligence/      umbrella Git repository
 
 Program cadence: Stage‑1 discussion/survey/justification for every new topic runs in the umbrella; a
 study repository is created only after its research object closes survey, owner GO and an execution
-contract (`OWNER_GO_AND_EXECUTION_CONTRACT`), and all later work lives in that repo. A study ends at
+contract (`OWNER_GO_AND_EXECUTION_CONTRACT`), and Stage‑2 work lives in that repo until it yields
 qualified paper candidates; Stage‑3 (large-scale confirmatory experiments and publication) runs in a
 separately admitted repo under `papers/` (`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`). Candidate labels
 such as R1/R2 remain survey/audit provenance and must not be repository names. R1 sunset before
@@ -58,9 +58,9 @@ survey is not a global Stage-2 prerequisite.
 
 ## 中文
 
-本工作区采用**伞式治理仓 + 经放行的独立研究仓**。运行节奏：每个新课题的 Stage‑1（讨论、调研、
-论证）在伞仓完成；研究对象在完成自身调研、owner GO 与执行合同后，以具体语义名称在 `studies/` 下
-建立独立 Git/GitHub 仓，之后全部工作在该仓完成。R1/R2 等候选编号只留在调研/审计层；R1 已在入场前
+本工作区采用**伞式治理仓 + 经放行的独立研究仓与论文仓**。运行节奏：每个新课题的 Stage‑1（讨论、
+调研、论证）在伞仓完成；研究对象在完成自身调研、owner GO 与执行合同后，以具体语义名称在
+`studies/` 下建立独立 Git/GitHub 仓，Stage‑2 工作在该仓进行、至形成合格 paper candidate 为止。R1/R2 等候选编号只留在调研/审计层；R1 已在入场前
 日落，不建仓。历史 W1–W4 工作仓已于 2026-08-03 退役（本地删除、远端冷备份，墓碑见
 `wiki/archive/program/w1-w4-retirement/`）。
 

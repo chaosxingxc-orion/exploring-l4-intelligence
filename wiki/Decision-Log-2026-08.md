@@ -2,6 +2,48 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-04（续92）· 三阶段实施 review 整改：当前真相全面替换、自包含合同、零状态 paper 门、exposure 最小前置
+
+#### Context
+
+实施 review（specs/2026-08-04-three-stage-architecture-implementation-review-assessment.md，
+对 umbrella d5ea710/bb164e6 + study 0d86ddc）判
+`CONDITIONAL_ACCEPT__PHASE_A_BOUNDARY_LANDED__ACTIVE_TRUTH_AND_FAIL_CLOSED_COVERAGE_INCOMPLETE`：
+Phase A 概念边界成立、无假 admission、未破坏历史资产；但 P0-1（Research-Methodology 等当前文档
+仍授权 Stage‑2B 正式实验于 study 内）、P0-2（独立 study 仓未采用新边界）、P1-1（registry 唯一
+decision_record 指向非自包含补充件）、P1-2（paper registry 无机器消费者）、P1-3（通用实验合同
+未 carrier 化）、P1-4（reservation 触发器晚于 selection exposure）、P2-1/P2-2 属实。逐项对仓
+核验后按 owner"参考并修复"指示执行。
+
+#### Decision
+
+①P0-1 关闭：Research-Methodology Stage‑2B 改为 candidate qualification（production-scale
+confirmatory 与最终结论归 Stage‑3 paper 仓）、证据等级以 Stage‑3 confirmatory 重建为界；
+README/README_CN/CONTRIBUTING_CN/docs/architecture/wiki-Architecture/客户端指南的
+"Stage‑2 后全部工作留 study"句全部替换；Per-Work-Status 写明 paper-scale stop line。
+②P1-1 按评审选项 A 关闭：签发自包含合并合同
+`2026-08-04-owner-consolidated-execution-contract.md`（GO+身份+范围+预算+序列+execution
+scope+Stage‑3 停止线+来源 blob 表），registry/index/HOT 全部 re-pin 到该件；三份旧合同降为
+历史来源。③P1-2 关闭为零状态门：新增 `paper_workspace_check.py`（严格空 registry、零 child、
+ignore 规则、计数一致；任何 paper 条目在 promotion 机器落地前 fail closed）+ 负向测试；
+inventory 升 v3 纳入 paper registry sha256。④P1-3 关闭：Experiment-Assets carrier 化
+（carrier type/split role/split identity hash/consumed 绑定键、paper 权威行、per-carrier
+index 路由），checker 同步。⑤P1-4 采纳评审建议裁决：reservation 台账触发器改为四事件最早者
+（首个 bounded X 读取 discovery 结果前 / 第二个共享 carrier study 前 / 首个 confirmatory
+split 物化或读取前 / 任一 candidate 申请 paper-candidate-ready 前）；即时最小补丁 = SAEA
+实验台账新增 split role/split identity hash/consumed 列并由 checker 强制。⑥P0-2 跨仓关闭：
+study 仓采用合并合同为当前权威、新增 execution-scope fail-closed guard
+（仅接受 model-free-check/baseline-reproduction/bounded-discovery-probe；
+paper-scale-confirmatory 永拒）+ contract tests；umbrella index 登记 adoption commit。
+⑦P2-1/P2-2 关闭：AI-Collaboration 放置表增 Paper repository registry 行（surface-check 常量
+同 commit）；proposal/评审件加裁决状态 banner。⑧R5 完整 promotion 机器维持触发器延期不变。
+
+#### Consequences
+
+Model-free E0 继续；model-facing R0/X runner 在 P0-1/P0-2 关闭后解锁（本条即关闭）；首个
+paper admission 仍 WITHHELD。全部伞仓门禁+study 测试须绿后提交。本条不授予模型/API 调用、
+实验、数据下载、远程建仓、push 或 wiki 发布权限。失效条件：owner 修改载体绑定或触发器。
+
 ### 2026-08-04（续91）· 三阶段载体绑定：Stage‑3（大规模实证与发表）使命移出 study 仓
 
 #### Context

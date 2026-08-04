@@ -11,7 +11,11 @@
   `studies/README.md`、`studies/registry.json` 以及根目录 `*.md`。
 - **`studies/<semantic-study>/`** —— 每个经 owner 放行的研究对象都是**独立 Git/GitHub 仓**；本地
   位于伞仓工作区下，但被伞仓 gitignore。建仓要求 `OWNER_GO_AND_EXECUTION_CONTRACT`，候选编号
-  不得成为仓名。
+  不得成为仓名。study 的终点是合格 paper candidate，不是完成论文。
+- **`papers/<semantic-paper>/`** —— 每个获准的 Stage‑3 论文项目都是**独立 Git/GitHub 仓**（当前
+  没有任何获准 paper）；同样被伞仓 gitignore，伞仓只跟踪 `papers/README.md` 与
+  `papers/registry.json`。建仓要求由合格 study candidate 经
+  `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级；远程建仓、push 与发表始终需要明确授权。
 
 历史 W1–W4 工作仓已于 2026-08-03 退役（本地删除、远端冷备份；墓碑：
 `wiki/archive/program/w1-w4-retirement/`）。
@@ -22,7 +26,9 @@
 |---|---|
 | `common/`、`docs/`、`scripts/`、`wiki/`、根 README/CONTRIBUTING | 伞仓 |
 | `studies/README.md` 或 `studies/registry.json` | 伞仓 |
+| `papers/README.md` 或 `papers/registry.json` | 伞仓 |
 | 获准 study 的代码 / 配置 / `README.md`（在 `studies/<semantic-study>/` 下） | 那个 study 自己的仓库 |
+| 获准 paper 的代码 / 论文稿（在 `papers/<semantic-paper>/` 下） | 那个 paper 自己的仓库 |
 
 如果伞仓 `git status` 显示 study checkout 下的代码，就放错地方了；该容器被伞仓 gitignore，
 `studies/` 中只有 README 和 registry 属于伞仓。候选方向不能提前建空仓：它可能在工程前日落，
@@ -31,8 +37,9 @@
 ## 运行节奏
 
 每个新研究课题的 Stage‑1（详细讨论、调研、论证）在伞仓完成；进入 Stage‑2 时开独立 study 仓，
-之后的全部工作在该仓完成。伞仓长期保留数据与模型下载职能（`docs/datasets.lock.json` +
-`scripts/data/`，公共资产）。数据集是不变的 gold truth；切分/采样/prompt/协议是各 study 的
+study 工作到形成合格 paper candidate 为止；Stage‑3（大规模 confirmatory 实验与论文发表）经
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级后在 `papers/` 下的独立 paper 仓完成。伞仓长期保留
+数据与模型下载职能（`docs/datasets.lock.json` + `scripts/data/`，公共资产）。数据集是不变的 gold truth；切分/采样/prompt/协议是各 study 的
 私有方案，随论文发表的切分结晶为新数据集晋升回伞仓。
 
 ## 共享库 · `common/`
@@ -62,8 +69,9 @@
 
 新建文件前先定角色：完整放置表与生命周期以 `wiki/AI-Collaboration.md` 为正典，
 [CONTRIBUTING.md](CONTRIBUTING.md) 的 Documentation routing 表是路由摘要。持久决策连同理由写
-Decision-Log 当月卷（入口 `wiki/Decision-Log.md`）；提交前跑四道门禁
-（`scripts/checks/` 下 code_graph / study_workspace / ai_context_surface / build_manifest --check）。
+Decision-Log 当月卷（入口 `wiki/Decision-Log.md`）；提交前跑全部伞仓门禁
+（`scripts/checks/` 下 code_graph / study_workspace / legacy_asset_resolution / paper_workspace /
+ai_context_surface / build_manifest --check）。
 web wiki 只是镜像，
 `scripts/wiki-sync.sh` 仅在获授权时发布。
 

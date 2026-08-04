@@ -3,7 +3,7 @@ title: "Umbrella → Studies → Papers 三阶段研究工程架构整改提案"
 proposal_id: "PROGRAM-THREE-STAGE-RESEARCH-REPOSITORY-ARCHITECTURE-V1"
 date: "2026-08-04"
 addressed_to: "research owner and research engineering team"
-proposal_status: "PROPOSED_FOR_REVIEW"
+proposal_status: "REVIEWED__PARTIALLY_ACCEPTED_AND_OWNER_TRIMMED__SEE_DECISION_LOG_XU91_XU92"
 overall_assessment: "CURRENT_TWO-CARRIER_MODEL_CANNOT_REPRESENT_THE_REQUIRED_THREE-STAGE_PIPELINE"
 execution_authority: "DOCUMENTATION_AND_GOVERNANCE_PROPOSAL_ONLY"
 model_execution_effect: "NO_NEW_AUTHORITY"
@@ -14,7 +14,12 @@ scope: "umbrella governance, study repositories, future paper repositories, prom
 
 # Umbrella → Studies → Papers 三阶段研究工程架构整改提案
 
-> **评审状态：`PROPOSED_FOR_REVIEW`。** 本文记录研究 owner 与协作者于 2026-08-04
+> **裁决状态（2026-08-04）：部分接受、部分否决、部分延期。** 有效裁决 = 对抗评审
+> （`2026-08-04-three-stage-architecture-critique-and-decision-request.md` 第 4/5 节）+
+> Decision-Log-2026-08 续91/续92；两者优先于本提案正文。路径重组、`wiki/directions/`、
+> study gate token 改名被否决；promotion 机器件挂触发器延期。本文其余部分保留为输入记录。
+>
+> **原评审状态：`PROPOSED_FOR_REVIEW`。** 本文记录研究 owner 与协作者于 2026-08-04
 > 形成的架构共识及其批判性补全，供工程团队评审和拆解实施。本文自身不修改当前研究阶段，
 > 不撤销或扩大现有 owner contract，不授权模型/API 调用、数据下载、大规模实验、远程 GitHub
 > 仓创建、push、Wiki 发布或论文投稿。任何实施必须在 owner 接受本提案后，由带日期的架构裁决、

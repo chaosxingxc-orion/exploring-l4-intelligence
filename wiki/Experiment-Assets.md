@@ -1,14 +1,15 @@
 # Experiment Assets
 
-The umbrella Wiki is the experiment **control plane** for every admitted research study. It manages the
-lifecycle and asset graph; it does not duplicate executable repositories or large artifact bytes.
+The umbrella Wiki is the experiment **control plane** for every admitted research carrier — Stage‑2
+studies and Stage‑3 paper projects alike. It manages the lifecycle and asset graph; it does not
+duplicate executable repositories or large artifact bytes.
 
 ## Current study registry
 
 - Admitted study repositories: **1**. Machine authority: `studies/registry.json`.
-- **speech-aware evidence acquisition** (source candidate provenance: R2) is admitted. Owner GO was
-  signed 2026-08-03; the current speech-only scope and semantic identity were frozen 2026-08-04
-  (`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`).
+- **speech-aware evidence acquisition** (source candidate provenance: R2) is admitted. The single
+  self-contained effective authority (2026-08-03 GO + speech-only identity + Stage‑3 stop line) is
+  (`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-consolidated-execution-contract.md`).
   Its repository is `studies/speech-aware-evidence-acquisition/` (independent Git history, private
   remote); current stage: Stage‑2A E0 (D1–D4 model-free closure) in progress. General/environmental
   audio is excluded from this study while already downloaded cross-domain assets remain governed in
@@ -25,11 +26,15 @@ prerequisite for an admitted study.
 
 ## Paper project registry
 
-Admitted paper repositories: **0**. Machine authority: `papers/registry.json`. A paper project enters
-only by promotion from a qualified study candidate under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`
-(Decision-Log 续91); it owns Stage‑3 large-scale confirmatory experiments and publication. Its
-experiment index will live under `wiki/experiments/papers/<paper-slug>/` at first admission; promotion
-schema and workspace checks for this surface arrive with the first admission, not before.
+Admitted paper repositories: **0**. Machine authority: `papers/registry.json`, enforced at zero state
+by `scripts/checks/paper_workspace_check.py` (strict empty registry, no child checkouts, ignore rule,
+count consistency — any registered entry fails closed until the promotion machinery extends the
+checker). A paper project enters only by promotion from a qualified study candidate under
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (Decision-Log 续91); it owns Stage‑3 large-scale confirmatory
+experiments and publication. Its experiment index will live under
+`wiki/experiments/papers/<paper-slug>/` at first admission; the paper promotion transaction (registry
+entry, candidate bundle blob, promotion receipt, index creation) is defined together with that
+machinery at first admission, not before.
 
 Current carrier readiness: Earnings21, Earnings22 and ConEC are materialized at pinned revisions
 (`D0_CLOSED`); SLUE-SQA-5, ContextASR-Bench and AMI are complete speech-domain secondary carriers.
@@ -42,7 +47,8 @@ identity lives in `docs/datasets.lock.json` rather than this page.
 | Asset class | Authority |
 |---|---|
 | Study identity, current stage, protocol freeze, deviations, result synthesis and decisions | umbrella Wiki |
-| Code, configs, tests, lockfiles, small fixtures and run entrypoints | independent study Git repository under `studies/<semantic-slug>/` |
+| Code, configs, tests, lockfiles, small fixtures and run entrypoints (Stage‑2) | independent study Git repository under `studies/<semantic-slug>/` |
+| Stage‑3 confirmatory code, manuscripts and publication releases | independent paper Git repository under `papers/<semantic-slug>/` (promotion-gated; none admitted) |
 | Dataset/model revisions and large raw speech/audio carriers, generations, traces, logs and outputs | `SPEECHRL_DATA_DIR` |
 | Run metadata and artifact links | MLflow, referenced by the Wiki record |
 | Release hashes and reproducibility receipts | release-scoped `docs/checks/<study-slug>/<release-id>/` or the study release |
@@ -54,17 +60,23 @@ genuinely shared across admitted studies (`common/OWNERSHIP.md`).
 
 ## Required experiment record
 
-Every formal experiment gets a stable Wiki record under `wiki/experiments/<study-slug>/`. The record must
-resolve the following fields; values may link to machine manifests rather than copy large content:
+Every formal experiment gets a stable Wiki record under its carrier's index: Stage‑2 records under
+`wiki/experiments/<study-slug>/`, Stage‑3 records under `wiki/experiments/papers/<paper-slug>/`
+(created at first paper admission). The record must resolve the following fields; values may link to
+machine manifests rather than copy large content:
 
 | Required binding | Meaning |
 |---|---|
 | `experiment_id` | Stable program-wide experiment identity |
-| `study commit` | GitHub repository URL plus exact Git commit |
+| `carrier type` | `study` or `paper` — which carrier class executed this record |
+| `study commit` | Carrier repository URL plus exact Git commit (study commit for Stage‑2 records; paper commit for Stage‑3 records) |
 | `config hash` | Hash of the effective executable configuration |
 | `protocol hash` | Hash/version of the frozen experimental contract |
 | `model revision` | Exact served model and serving revision |
 | `dataset revision` | Dataset release, split and contamination/exposure binding |
+| `split role` | `discovery`, `dev` or `confirmatory` role of the data this record touched |
+| `split identity hash` | Hash of the exact sample-identity list read by this record |
+| `consumed` | Whether this record consumed (read results from) a confirmatory split — irreversible once `yes` |
 | `MLflow run` | Run ID and tracking-store namespace when MLflow is used |
 | `artifact location` | External storage location; never an unbound local anecdote |
 | `artifact hashes` | Hashes/manifests needed to verify immutable outputs |
@@ -99,4 +111,7 @@ When a study is admitted, update in one reviewed transaction:
    `python scripts/checks/study_workspace_check.py --render-inventory`;
 5. applicable context manifests, checks and current-state pages.
 
-Remote repository creation, push and Wiki publication always require explicit authorization.
+A paper admission uses its own promotion transaction (candidate bundle blob, owner paper GO,
+registry entry, promotion receipt, index creation), defined together with the promotion machinery at
+first admission. Remote repository creation, push and Wiki publication always require explicit
+authorization.

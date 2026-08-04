@@ -16,12 +16,15 @@ research state: [[Research-Objective]].
 
 ## Program model
 
-**Stage‑1 in the umbrella, Stage‑2 in an independent study repo.** Every new research topic runs its
-detailed discussion, survey and justification here (Wiki survey layers, audit rounds, owner
-decisions). When a direction passes Stage‑1 and the owner signs `OWNER_GO_AND_EXECUTION_CONTRACT`,
-it becomes an **independent, semantically named GitHub repository** checked out under
-`studies/<semantic-name>/` — and all later engineering, experiments and papers live there.
-Candidate IDs (R1, R2, …) are survey/audit provenance, never repository names.
+**Stage‑1 in the umbrella, Stage‑2 in an independent study repo, Stage‑3 in an independent paper
+repo.** Every new research topic runs its detailed discussion, survey and justification here (Wiki
+survey layers, audit rounds, owner decisions). When a direction passes Stage‑1 and the owner signs
+`OWNER_GO_AND_EXECUTION_CONTRACT`, it becomes an **independent, semantically named GitHub
+repository** checked out under `studies/<semantic-name>/`. A study ends at one or more **qualified
+paper candidates**; large-scale confirmatory experiments, manuscripts and publication live in a
+separately admitted repository under `papers/<semantic-name>/`, created only via
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (none admitted yet). Candidate IDs (R1, R2, …) are
+survey/audit provenance, never repository names.
 
 The umbrella permanently keeps the **shared-asset functions**: data & model acquisition
 (`docs/datasets.lock.json` is the single live asset authority, tooling in `scripts/data/`),
@@ -46,6 +49,7 @@ checkouts deleted, remotes kept as cold backups outside the program
 ```
 common/         shared library (speechrl_common): audio, models, rewards, data, tracking, utils
 studies/        registry + local root for admitted semantic study repos (each its OWN git repo)
+papers/         registry + local root for admitted Stage-3 paper repos (each its OWN git repo; none yet)
 docs/           setup.md, datasets.lock.json (asset authority), superpowers/specs, checks, integrity
 scripts/        wsl-setup.sh, env-setup.sh, wiki-sync.sh, data/ (downloads), checks/ + survey/ (gates)
 wiki/           source for the GitHub Wiki — program truth, survey layers, audit, experiment ledgers
@@ -68,6 +72,7 @@ llama.cpp `llama-server` (GGUF). Full details: [docs/setup.md](docs/setup.md).
 python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
 python scripts/checks/legacy_asset_resolution_check.py
+python scripts/checks/paper_workspace_check.py
 python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 

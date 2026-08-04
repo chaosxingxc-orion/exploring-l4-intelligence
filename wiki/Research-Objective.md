@@ -17,9 +17,9 @@ Core = Qwen3-Omni-30B through local llama.cpp; study domain = speech and spoken-
 
 The first semantic object, **speech-aware evidence acquisition** (R2 audit provenance), is
 `PASS_STAGE1C_FORMAL_OPENING` and admitted under `OWNER_GO_AND_EXECUTION_CONTRACT`. Owner GO was
-signed 2026-08-03; the owner froze the speech-only boundary and current semantic identity
-on 2026-08-04:
-`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`.
+signed 2026-08-03; the single self-contained effective authority (GO + speech-only identity +
+Stage‑3 stop line) is
+`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-consolidated-execution-contract.md`.
 Repository: `studies/speech-aware-evidence-acquisition/`; remote is private. Innovation and final
 method remain Stage‑2A/2B outputs.
 

@@ -21,7 +21,8 @@ LEGACY_INVENTORY_PATH = "docs/integrity/experiment_attempt_registry.jsonl"
 RESOLUTION_PATH = "docs/integrity/legacy-asset-resolution.json"
 RESEARCH_OBJECTIVE_PATH = "wiki/Research-Objective.md"
 REGISTRY_SCHEMA = "study-repository-registry-v2"
-INVENTORY_SCHEMA = "experiment-asset-inventory-v2"
+INVENTORY_SCHEMA = "experiment-asset-inventory-v3"
+PAPER_REGISTRY_PATH = "papers/registry.json"
 FIXED_REGISTRY_FIELDS = {
     "schema": REGISTRY_SCHEMA,
     "local_root": "studies",
@@ -63,9 +64,13 @@ CONTROL_PLANE_TERMS = (
     "artifact hashes",
     "result summary",
     "shared code revision",
+    "split role",
+    "split identity hash",
+    "consumed",
     "deviations",
     "decision",
 )
+REQUIRED_LEDGER_COLUMNS = ("split role", "split identity hash", "consumed")
 
 
 class StudyWorkspaceError(RuntimeError):
@@ -351,6 +356,16 @@ def validate_cross_source_truth(root: Path = REPO) -> None:
                     f"experiment index frontmatter drift for {slug}: {key}={actual!r} "
                     f"does not match registry {expected!r}"
                 )
+        index_text = index_path.read_text(encoding="utf-8").lower()
+        missing_columns = [
+            column for column in REQUIRED_LEDGER_COLUMNS if column not in index_text
+        ]
+        if missing_columns:
+            raise StudyWorkspaceError(
+                f"experiment index for {slug} lacks required exposure ledger columns "
+                f"{missing_columns}; formal records must carry split role, split identity "
+                "hash and a consumed marker from the first row (2026-08-03 visibility rule)"
+            )
 
 
 def validate_experiment_control_plane(root: Path = REPO) -> None:
@@ -469,6 +484,13 @@ def build_experiment_asset_inventory(
 
     registry_path = root / REGISTRY_PATH
     registry_sha = hashlib.sha256(registry_path.read_bytes()).hexdigest()
+    paper_registry_path = root / PAPER_REGISTRY_PATH
+    try:
+        paper_registry_sha = hashlib.sha256(paper_registry_path.read_bytes()).hexdigest()
+    except OSError as error:
+        raise StudyWorkspaceError(
+            f"cannot read paper registry {PAPER_REGISTRY_PATH}: {error}"
+        ) from error
     legacy_sha = hashlib.sha256(legacy_path.read_bytes()).hexdigest()
     return {
         "schema": INVENTORY_SCHEMA,
@@ -476,10 +498,17 @@ def build_experiment_asset_inventory(
             "path": REGISTRY_PATH,
             "sha256": registry_sha,
         },
+        "paper_registry": {
+            "path": PAPER_REGISTRY_PATH,
+            "sha256": paper_registry_sha,
+        },
         "experiment_control_plane": CONTROL_PLANE_PATH,
         "asset_authorities": {
             "lifecycle_and_index": "umbrella-wiki",
             "code_and_config": "independent-study-git-repository",
+            "stage3_confirmatory_and_publication": (
+                "independent-paper-git-repository (promotion-gated; none admitted)"
+            ),
             "large_artifacts": "SPEECHRL_DATA_DIR",
             "run_tracking": "MLflow",
         },

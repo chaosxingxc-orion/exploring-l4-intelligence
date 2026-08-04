@@ -6,14 +6,14 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "587fd8add45ed53c4b77d4b4c6d7f8ed9f1ee1fabc55e78cadaf11b6970c1371"
+      "sha256": "fa43192db349ff688fdb10d956b684b350a737e50cfc060141959809f2638c47"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "4270eaab3986c71faafee6c09870fc775dc53ef3ac7705b15d33de1ca29c985d"
+      "sha256": "daa09cebd11afff381fa51b526e5216177d3619855bba497203dc53d2d8be481"
     },
     {
       "path": "wiki/Project-Thesis.md",
@@ -27,21 +27,21 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "c61c968db506c431d2ab23ee504fb90d4ccfcf1beaa0060f96d206af0ec4e391"
+      "sha256": "afdb69c7df2ff3b6583e334d6330e0cf573e0498ffac9d48c8ead277d1052610"
     },
     {
       "path": "wiki/AI-Collaboration.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "canonical AI document placement and lifecycle policy",
-      "sha256": "b17a6a90bb370165e9cbdb4d2213841908d9958db55833a5ac42c307fc0b0d38"
+      "sha256": "dea41381b00c02eb817518c4ef8f9dc295bb6f70997074263e266275aa79fe6e"
     },
     {
       "path": "wiki/Experiment-Assets.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "d4cd8a3472bbfa082b522484174fe7eed17705121b70e9325baace9fd7695562"
+      "sha256": "526a55ccfbcfff61f506f6c482b0966f7cd5bd58b0560fd8f7defa40d3673ec5"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",

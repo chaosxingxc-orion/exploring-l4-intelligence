@@ -15,7 +15,10 @@
   `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03; speech-only scope/identity effective
   2026-08-04; repo `studies/speech-aware-evidence-acquisition/` (private remote) with the freeze sheet
   in `wiki/experiments/speech-aware-evidence-acquisition/`. General/environmental audio is excluded;
-  local downloaded bytes are retained globally. Innovation and final method remain Stage‑2 outputs.
+  local downloaded bytes are retained globally. Innovation converges in Stage‑2; the study ends at
+  qualified paper candidates. **Paper-scale stop line (续91):** production-scale confirmatory, final
+  superiority claims and manuscripts require a separately admitted `papers/<slug>` repo via
+  `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` — never the study repo.
   Next: close model-free E0 (D1–D4) plus runtime receipt, then the R0 slice.
 - **Flow:** the admitted study may enter engineering while the next candidate is surveyed; R3–R9 review
   is not a global prerequisite. D0 acquisition is closed for Earnings21, Earnings22 and ConEC; model/API

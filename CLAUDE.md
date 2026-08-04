@@ -13,7 +13,7 @@ The umbrella owns `common/`, `docs/`, `scripts/`, `studies/README.md`, `studies/
 local checkouts deleted, remotes kept as cold backups outside the program (tombstone:
 `wiki/archive/program/w1-w4-retirement/`). Program cadence: each new research topic runs its
 Stage‑1 discussion/survey/justification in the umbrella; at Stage‑2 entry the study repo opens and
-all later work lives there. The umbrella retains program-level data/model acquisition
+Stage‑2 work lives there until it yields qualified paper candidates. The umbrella retains program-level data/model acquisition
 (`docs/datasets.lock.json`, `scripts/data/`) as the shared-asset function. Each admitted research
 study is an independent, semantically named Git repo checked out
 under `studies/<study-name>/`; candidate IDs such as R1/R2 are audit provenance, never engineering repo
@@ -99,6 +99,7 @@ Umbrella gates (offline, Windows or WSL): `python scripts/checks/code_graph_chec
 `python scripts/checks/study_workspace_check.py` (`--require-installed` is the default on the
 primary dev machine; owner 2026-08-03), `python scripts/checks/legacy_asset_resolution_check.py`
 (with `--verify-bundles` on the primary dev machine — bundle-backed semantic proof),
+`python scripts/checks/paper_workspace_check.py` (zero-state paper surface),
 `python scripts/checks/ai_context_surface_check.py`,
 `python scripts/checks/build_ai_context_manifest.py --check`. The Stage‑1 survey package and its
 command gate closed on 2026-08-03 (final receipt under `docs/checks/system-first-stage1a/`); the

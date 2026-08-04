@@ -27,9 +27,23 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         (self.root / "studies").mkdir()
+        (self.root / "papers").mkdir()
         (self.root / "wiki").mkdir()
         (self.root / "docs" / "integrity").mkdir(parents=True)
-        (self.root / ".gitignore").write_text("studies/*/\n", encoding="utf-8")
+        (self.root / ".gitignore").write_text("studies/*/\npapers/*/\n", encoding="utf-8")
+        (self.root / "papers" / "registry.json").write_text(
+            json.dumps(
+                {
+                    "schema": "paper-repository-registry-v1",
+                    "local_root": "papers",
+                    "repo_creation_gate": "OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",
+                    "candidate_id_policy": "AUDIT_ONLY_NEVER_ENGINEERING_IDENTITY",
+                    "promotion_control_plane": "wiki/Experiment-Assets.md",
+                    "papers": [],
+                }
+            ),
+            encoding="utf-8",
+        )
         self.write_control_plane(0)
         (self.root / "wiki" / "Research-Objective.md").write_text(
             "endpoint: speech-aware-evidence-acquisition in Stage-2A E0\n",
@@ -50,7 +64,8 @@ class StudyWorkspaceContractTests(unittest.TestCase):
             f"Admitted study repositories: **{admitted_count}**.\n"
             "experiment_id\nstudy commit\nconfig hash\nprotocol hash\n"
             "model revision\ndataset revision\nMLflow run\nartifact location\n"
-            "artifact hashes\nresult summary\nshared code revision\ndeviations\ndecision\n",
+            "artifact hashes\nresult summary\nshared code revision\n"
+            "split role\nsplit identity hash\nconsumed\ndeviations\ndecision\n",
             encoding="utf-8",
         )
 
@@ -77,7 +92,8 @@ class StudyWorkspaceContractTests(unittest.TestCase):
             f'study_repo: "https://github.com/example/{slug}.git"\n'
             f'local_checkout: "studies/{slug}"\n'
             'experiment_id_namespace: "SAEA-E-<nnn>"\n'
-            "---\n\ncurrent experiments\n",
+            "---\n\ncurrent experiments\n"
+            "| split role | split identity hash | consumed |\n",
             encoding="utf-8",
         )
         return {
@@ -187,6 +203,43 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "HOT endpoint"):
             study_workspace.validate_cross_source_truth(self.root)
+
+    def test_experiment_index_without_exposure_ledger_columns_is_rejected(self) -> None:
+        entry = self.admitted_study()
+        self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        index = self.root / entry["experiment_index"]
+        index.write_text(
+            index.read_text(encoding="utf-8").replace(
+                "| split role | split identity hash | consumed |\n", ""
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "exposure ledger columns"
+        ):
+            study_workspace.validate_cross_source_truth(self.root)
+
+    def test_inventory_pins_paper_registry_hash_and_fails_without_it(self) -> None:
+        (self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl").write_text(
+            "", encoding="utf-8"
+        )
+        inventory = study_workspace.build_experiment_asset_inventory(
+            self.root, history_lookup=lambda path: None, resolution_lookup={}
+        )
+        self.assertEqual(
+            "papers/registry.json", inventory["paper_registry"]["path"]
+        )
+        self.assertEqual(64, len(inventory["paper_registry"]["sha256"]))
+
+        (self.root / "papers" / "registry.json").unlink()
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "paper registry"
+        ):
+            study_workspace.build_experiment_asset_inventory(
+                self.root, history_lookup=lambda path: None, resolution_lookup={}
+            )
 
     def test_decision_record_blob_drift_is_rejected(self) -> None:
         entry = self.admitted_study()

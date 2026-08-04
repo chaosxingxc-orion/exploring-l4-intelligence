@@ -31,6 +31,7 @@
 | **Engineering spec** | `docs/superpowers/specs/` | 实现者与 reviewer | 否 | 有界工程设计，经 Git review 版本化 | 多步骤工程改动需要先锁范围/约束 | 完成后由 Git 历史保留；research current page 不依赖 plan/spec 才能解释 |
 | **Engineering plan** | `docs/superpowers/plans/` | 实现者 | 否 | 执行中 checkbox 可变 | 已批准设计需要分解执行 | 完成后停止作为 current research pointer；历史由 Git 保存 |
 | **Study repository registry** | `studies/README.md`; `studies/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；只登记已获准的语义命名独立 Git 仓 | 独立研究对象获得 `OWNER_GO_AND_EXECUTION_CONTRACT`，语义名称和执行合同冻结 | 生命周期变化原位更新；候选编号不得成为 repo 名，未获准/已在建仓前日落的候选不得建空仓 |
+| **Paper repository registry** | `papers/README.md`; `papers/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；语义命名独立 Git 仓（Stage‑3，续91） | 由合格 study candidate 经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级 | 生命周期原位更新；候选编号不得成为 repo 名；空 registry 合法、不得建空 paper 仓 |
 | **Study experiment index** | `wiki/experiments/<study-slug>/README.md`，总路由=`wiki/Experiment-Assets.md` | owner、实现者、reviewer | 否，按 study 定向 | Wiki 管理实验状态与资产图；记录必须 pin repo commit、协议/配置/数据/模型与产物 | study 已登记，实验合同进入执行 | 结论整编进稳定当前页；release/audit bytes 不回写，study 日落后保留可恢复索引 |
 | **Check report** | `docs/checks/<campaign>/<release-id>/` | 门禁工具与核验者 | 否 | 被 release 引用后 immutable | 可重复检查产生平台/版本特定结果 | 新 release 新目录；禁止跨平台共用 last-writer-wins 文件名 |
 | **Executable rule** | `scripts/` | CI、操作者、reviewer | 否（执行而非通读） | 正常代码生命周期，测试先行 | 散文规则可机械验证时 | 修改规则必须同步测试；散文只指向检查器，不维护第二套实现 |
@@ -39,9 +40,9 @@
 新文档先按上表归类再创建，不能先扔进 `wiki/` 根目录后等未来清理。现有 path-pinned legacy
 文件是兼容例外：保留原路径不等于 active；它们必须在 AI context manifest 的 cold inventory 中。
 
-工程仓与资产字节采用三层权威：`studies/<semantic-slug>/` 是独立 Git/GitHub 执行仓，umbrella Wiki
-是实验生命周期与资产关系的管理权威，`SPEECHRL_DATA_DIR`/MLflow 保存大数据、权重、原始输出和运行
-对象。Wiki 必须索引这些字节的 URI/ID/hash，但不得复制大资产。W1–W4 的 `projects/` 仓不自动拥有任何
+工程仓与资产字节采用三层权威：`studies/<semantic-slug>/`（Stage‑2）与 `papers/<semantic-slug>/`
+（Stage‑3，晋级后）是独立 Git/GitHub 执行仓，umbrella Wiki 是实验生命周期与资产关系的管理权威，
+`SPEECHRL_DATA_DIR`/MLflow 保存大数据、权重、原始输出和运行对象。Wiki 必须索引这些字节的 URI/ID/hash，但不得复制大资产。W1–W4 的 `projects/` 仓不自动拥有任何
 新 study；稳定且确实跨仓复用的能力才提升到 `common/`。
 
 ## 3. 六步生命周期

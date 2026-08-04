@@ -1,13 +1,18 @@
 {
-  "schema": "experiment-asset-inventory-v2",
+  "schema": "experiment-asset-inventory-v3",
   "study_registry": {
     "path": "studies/registry.json",
-    "sha256": "21e1c81e393c0c3a0d49fb00a0047ec0326ea62fe6fd813e65b65a8f92a25630"
+    "sha256": "e617af799db976167c14c0d3d25f634bfc37b776ae1547d7a914e3c3a2f05c3c"
+  },
+  "paper_registry": {
+    "path": "papers/registry.json",
+    "sha256": "3929ffddf0e4eb465a932ed8b1614d9df8d428266967dc34e411e03deb39a723"
   },
   "experiment_control_plane": "wiki/Experiment-Assets.md",
   "asset_authorities": {
     "lifecycle_and_index": "umbrella-wiki",
     "code_and_config": "independent-study-git-repository",
+    "stage3_confirmatory_and_publication": "independent-paper-git-repository (promotion-gated; none admitted)",
     "large_artifacts": "SPEECHRL_DATA_DIR",
     "run_tracking": "MLflow"
   },

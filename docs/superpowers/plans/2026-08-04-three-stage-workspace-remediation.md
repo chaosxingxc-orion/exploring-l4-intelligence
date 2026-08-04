@@ -28,7 +28,29 @@
 - [x] 验证：五道伞仓门禁 PASS；`pytest scripts/checks` 143 passed/2 skipped；
   WSL `pytest common/tests` 21 passed/1 skipped。
 
-## Phase B — 延后（触发器：SAEA 任一 candidate 进入 paper-candidate readiness，或 owner 启动首个 paper admission）
+## Phase A′ — 实施 review 整改（2026-08-04，续92；review：specs/2026-08-04-three-stage-architecture-implementation-review-assessment.md）
+
+- [x] **R0 当前真相全面替换**（P0-1/P1-3/P2-1/P2-2）：Research-Methodology Stage‑2B/3 重定义；
+  README/README_CN/CONTRIBUTING(+CN)/docs/architecture/wiki-Architecture/客户端指南旧
+  "全部工作留 study"句全部替换；Per-Work-Status 停止线；Experiment-Assets carrier 化
+  （carrier type/split role/split identity hash/consumed）；AI-Collaboration 增 Paper registry 行
+  + surface-check 常量与测试同 commit；proposal/评审件裁决 banner。
+- [x] **R1 自包含权威**（P1-1，评审选项 A）：`2026-08-04-owner-consolidated-execution-contract.md`
+  合并 GO+身份+范围+预算+execution scope+Stage‑3 停止线+来源 blob 表；registry/index/HOT 全部
+  re-pin（blob `8ddd0cf2a96908befc8b49e69602185729ba17ba`）。
+- [x] **R2 独立 study 仓采用**（P0-2）：study commit `6c4b37e9ff90becde3df934fa2b87e136f1354eb`
+  ——指南/README/engineering 路由新合同；`contracts.assert_execution_scope` fail-closed（仅
+  model-free-check/baseline-reproduction/bounded-discovery-probe；paper-scale 永拒）；
+  `FrozenCoreGate.assert_model_touch_allowed(execution_profile)` 必须声明 profile；76 项测试绿。
+- [x] **R3 零状态 paper 门**（P1-2）：`paper_workspace_check.py`（严格空 registry/零 child/
+  ignore 规则/计数一致；任何 paper 条目 fail closed）+ 11 项负向测试；inventory 升 v3 纳入
+  paper registry sha256。
+- [x] **R4 exposure 最小前置**（P1-4）：SAEA 台账增 split role/split identity hash/consumed 列，
+  checker 强制（REQUIRED_LEDGER_COLUMNS + CONTROL_PLANE_TERMS）；reservation 台账触发器改为
+  四事件最早者（首个 bounded X 读 discovery 前 / 第二个共享 carrier study 前 / 首个
+  confirmatory split 物化或读取前 / 任一 candidate 申请 paper-candidate-ready 前）。
+
+## Phase B — 延后（触发器已按续92修订：下列四事件最早者，或 owner 启动首个 paper admission——首个 bounded X 读取 discovery 结果前 / 第二个共享 carrier study 前 / 首个 confirmatory split 物化或读取前 / 任一 candidate 申请 paper-candidate-ready 前）
 
 到触发时**按彼时仓库现状另写执行计划**（细节届时重新设计，本节只固定验收语义与已裁决的约束，
 防止降覆盖）：

@@ -11,7 +11,13 @@ This is an **umbrella governance repo plus independent admitted-study repos**. T
   `wiki/`, `studies/README.md`, `studies/registry.json`, and root `*.md`.
 - **`studies/<semantic-study>/`** — each owner-admitted research object is its **own Git/GitHub repo**,
   checked out under the umbrella workspace but gitignored by it. Creation requires
-  `OWNER_GO_AND_EXECUTION_CONTRACT`; Stage-1 candidate IDs never become repository names.
+  `OWNER_GO_AND_EXECUTION_CONTRACT`; Stage-1 candidate IDs never become repository names. A study
+  ends at qualified paper candidates, not at finished papers.
+- **`papers/<semantic-paper>/`** — each admitted Stage-3 paper project is its **own Git/GitHub repo**
+  (none admitted yet), likewise gitignored by the umbrella, which tracks only `papers/README.md` and
+  `papers/registry.json`. Creation requires promotion from a qualified study candidate under
+  `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`; remote creation, push and publication always require
+  explicit authorization.
 
 ## Where changes go
 
@@ -19,7 +25,9 @@ This is an **umbrella governance repo plus independent admitted-study repos**. T
 |---|---|
 | `common/`, `docs/`, `scripts/`, `wiki/`, root README/CONTRIBUTING | the umbrella repo |
 | `studies/README.md` or `studies/registry.json` | the umbrella repo |
+| `papers/README.md` or `papers/registry.json` | the umbrella repo |
 | an admitted study's code / configs / `README.md` (under `studies/<semantic-study>/`) | that study's own repo |
+| an admitted paper's code / manuscript (under `papers/<semantic-paper>/`) | that paper's own repo |
 
 A nested-repository code change is in the wrong place if umbrella `git status` shows it under a
 study checkout; that container is ignored by the umbrella. Only the two `studies/` registry files
@@ -73,6 +81,7 @@ Choose the document role before creating the file:
 | mutable campaign exploration or dossier | `wiki/survey/workbench/<campaign>/` |
 | engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
 | study admission and checkout registry | `studies/registry.json` plus the owner decision in the Wiki |
+| paper admission and checkout registry | `papers/registry.json` plus the owner promotion decision in the Wiki |
 | experiment lifecycle and asset graph | `wiki/Experiment-Assets.md` → `wiki/experiments/<study-slug>/README.md` |
 | release-scoped reproducibility report | `docs/checks/<campaign>/<release-id>/` |
 | executable policy or validation | `scripts/` with tests |
