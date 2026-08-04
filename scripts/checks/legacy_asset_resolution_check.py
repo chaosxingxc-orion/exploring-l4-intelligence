@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -160,7 +161,7 @@ def _load_legacy_paths(root: Path) -> list[str]:
     return paths
 
 
-def _validate_entry(entry: object, index: int, repo_ids: set[str]) -> dict:
+def _validate_entry(entry: object, index: int, by_id: dict[str, dict]) -> dict:
     label = f"resolutions[{index}]"
     if not isinstance(entry, dict):
         raise LegacyResolutionError(f"{label} must be an object")
@@ -193,18 +194,30 @@ def _validate_entry(entry: object, index: int, repo_ids: set[str]) -> dict:
                 raise LegacyResolutionError(f"{label}.waiver.waived_on must be YYYY-MM-DD")
     else:
         expected = {"path", "state", "repo_id", "commit", "repo_path", "git_blob", "uri"}
-        if _require_str(entry.get("repo_id"), f"{label}.repo_id") not in repo_ids:
+        repo_id = _require_str(entry.get("repo_id"), f"{label}.repo_id")
+        if repo_id not in by_id:
             raise LegacyResolutionError(f"{label}.repo_id is not a registered retired repository")
+        owner = by_id[repo_id]
         commit = _require_str(entry.get("commit"), f"{label}.commit")
         if COMMIT_RE.fullmatch(commit) is None:
             raise LegacyResolutionError(f"{label}.commit is not a Git commit id")
-        _require_str(entry.get("repo_path"), f"{label}.repo_path")
+        repo_path = _require_str(entry.get("repo_path"), f"{label}.repo_path")
         blob = _require_str(entry.get("git_blob"), f"{label}.git_blob")
         if COMMIT_RE.fullmatch(blob) is None:
             raise LegacyResolutionError(f"{label}.git_blob is not a Git blob id")
         uri = _require_str(entry.get("uri"), f"{label}.uri")
-        if not uri.startswith("git+https://") or f"@{commit}#path=" not in uri:
-            raise LegacyResolutionError(f"{label}.uri must be git+https://...@<commit>#path=<path>")
+        expected_path = f"{owner['legacy_path_prefix']}/{repo_path}"
+        if entry["path"] != expected_path:
+            raise LegacyResolutionError(
+                f"{label}: path {entry['path']!r} does not equal registered prefix + repo_path "
+                f"({expected_path!r})"
+            )
+        expected_uri = f"git+{owner['remote']}@{commit}#path={repo_path}"
+        if uri != expected_uri:
+            raise LegacyResolutionError(
+                f"{label}: uri {uri!r} does not equal the registered remote binding "
+                f"({expected_uri!r})"
+            )
     if set(entry) != expected:
         raise LegacyResolutionError(f"{label} must have exact keys {sorted(expected)}")
     return entry
@@ -214,7 +227,7 @@ def load_and_validate_resolution(root: Path = REPO) -> dict:
     """Validate coverage, schema and the fail-closed unresolved rule; return the document."""
 
     registry = load_retired_registry(root)
-    repo_ids = {entry["repo_id"] for entry in registry["repositories"]}
+    by_id = {entry["repo_id"]: entry for entry in registry["repositories"]}
     document = _load_json(root / RESOLUTION_PATH)
     if not isinstance(document, dict) or set(document) != {
         "schema",
@@ -254,7 +267,7 @@ def load_and_validate_resolution(root: Path = REPO) -> dict:
     entries = document["resolutions"]
     if not isinstance(entries, list):
         raise LegacyResolutionError("resolutions must be a list")
-    validated = [_validate_entry(entry, index, repo_ids) for index, entry in enumerate(entries)]
+    validated = [_validate_entry(entry, index, by_id) for index, entry in enumerate(entries)]
     resolved_paths = [entry["path"] for entry in validated]
     if len(resolved_paths) != len(set(resolved_paths)):
         raise LegacyResolutionError("duplicate resolution path")
@@ -380,6 +393,101 @@ def build_resolution(root: Path, mirrors: Path) -> dict:
     }
 
 
+DATA_ROOT_TOKEN = "SPEECHRL_DATA_DIR"
+
+
+def _bundle_file(entry: dict, data_root: Path) -> Path:
+    recorded = entry["offline_bundle"]["path"]
+    if not recorded.startswith(DATA_ROOT_TOKEN + "/"):
+        raise LegacyResolutionError(
+            f"{entry['repo_id']}: offline_bundle.path must start with {DATA_ROOT_TOKEN}/"
+        )
+    return data_root / PurePosixPath(recorded[len(DATA_ROOT_TOKEN) + 1 :])
+
+
+def verify_bundles(root: Path, data_root: Path, document: dict) -> dict[str, int]:
+    """Prove every resolution binding from the offline bundles (no network, no trust).
+
+    Re-hashes each registered bundle against the registry SHA-256, clones it into a
+    temporary bare repository, then proves ``commit:repo_path -> git_blob`` for every
+    resolved entry via ``git ls-tree`` of the recorded commit.
+    """
+
+    import tempfile
+
+    registry = load_retired_registry(root)
+    by_id = {entry["repo_id"]: entry for entry in registry["repositories"]}
+
+    bundle_hashes = 0
+    bundles: dict[str, Path] = {}
+    for entry in registry["repositories"]:
+        bundle = _bundle_file(entry, data_root)
+        if not bundle.is_file():
+            raise LegacyResolutionError(f"{entry['repo_id']}: offline bundle missing: {bundle}")
+        actual = hashlib.sha256(bundle.read_bytes()).hexdigest()
+        if actual != entry["offline_bundle"]["sha256"]:
+            raise LegacyResolutionError(
+                f"{entry['repo_id']}: offline bundle SHA-256 drift "
+                f"(registry {entry['offline_bundle']['sha256'][:12]}..., actual {actual[:12]}...)"
+            )
+        bundles[entry["repo_id"]] = bundle
+        bundle_hashes += 1
+
+    groups: dict[tuple[str, str], list[dict]] = {}
+    for entry in document["resolutions"]:
+        if entry["state"] in {"COLD_BACKUP_RESOLVED", "LOCAL_GIT_HISTORY"}:
+            groups.setdefault((entry["repo_id"], entry["commit"]), []).append(entry)
+
+    bindings = 0
+    needed_repos = {repo_id for repo_id, _ in groups}
+    with tempfile.TemporaryDirectory(prefix="legacy-bundle-verify-") as scratch:
+        clones: dict[str, Path] = {}
+        for repo_id in sorted(needed_repos):
+            clone = Path(scratch) / f"{repo_id}.git"
+            completed = _git(
+                ["clone", "--bare", "--quiet", str(bundles[repo_id]), str(clone)]
+            )
+            if completed.returncode != 0:
+                raise LegacyResolutionError(
+                    f"{repo_id}: cannot clone offline bundle: {completed.stderr.strip()}"
+                )
+            probe = _git(
+                ["-C", str(clone), "cat-file", "-e", by_id[repo_id]["final_commit"] + "^{commit}"]
+            )
+            if probe.returncode != 0:
+                raise LegacyResolutionError(
+                    f"{repo_id}: registered final commit is not contained in the offline bundle"
+                )
+            clones[repo_id] = clone
+
+        for (repo_id, commit), members in sorted(groups.items()):
+            listing = _git(["-C", str(clones[repo_id]), "ls-tree", "-r", "-z", commit])
+            if listing.returncode != 0:
+                raise LegacyResolutionError(
+                    f"{repo_id}: commit {commit[:12]}... is unreachable in the offline bundle"
+                )
+            tree: dict[str, str] = {}
+            for record in listing.stdout.split("\0"):
+                if not record:
+                    continue
+                metadata, _, path = record.partition("\t")
+                fields = metadata.split(" ")
+                if len(fields) == 3 and fields[1] == "blob":
+                    tree[path] = fields[2]
+            for member in members:
+                actual_blob = tree.get(member["repo_path"])
+                if actual_blob != member["git_blob"]:
+                    raise LegacyResolutionError(
+                        f"{member['path']}: bundle disproves the binding "
+                        f"(recorded blob {member['git_blob'][:12]}..., "
+                        f"bundle has {str(actual_blob)[:12]}... at "
+                        f"{commit[:12]}...:{member['repo_path']})"
+                    )
+                bindings += 1
+
+    return {"bindings": bindings, "bundle_hashes": bundle_hashes}
+
+
 def verify_remote(root: Path = REPO) -> list[str]:
     """Best-effort network verification that registered remotes are still reachable."""
 
@@ -417,6 +525,23 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="additionally verify the registered remotes are reachable (network)",
     )
+    parser.add_argument(
+        "--verify-bundles",
+        action="store_true",
+        help=(
+            "offline semantic proof: re-hash the registered bundles and prove every "
+            "commit:repo_path -> git_blob binding from them (primary dev machine default)"
+        ),
+    )
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        default=None,
+        help=(
+            f"root that the {'SPEECHRL_DATA_DIR'} token in bundle paths resolves against "
+            "(default: the SPEECHRL_DATA_DIR environment variable)"
+        ),
+    )
     args = parser.parse_args(argv)
     try:
         if args.write:
@@ -431,6 +556,22 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(f"wrote {RESOLUTION_PATH}: {document['summary']}")
         document = load_and_validate_resolution(REPO)
+        if args.verify_bundles:
+            data_root = args.data_root or (
+                Path(os.environ["SPEECHRL_DATA_DIR"])
+                if os.environ.get("SPEECHRL_DATA_DIR")
+                else None
+            )
+            if data_root is None:
+                raise LegacyResolutionError(
+                    "--verify-bundles needs --data-root or the SPEECHRL_DATA_DIR environment "
+                    "variable to locate the offline bundles"
+                )
+            proof = verify_bundles(REPO, data_root, document)
+            print(f"{proof['bindings']} bindings verified")
+            print(f"{document['summary']['UNRESOLVED']} unresolved")
+            print(f"{document['summary']['waived']} waived")
+            print(f"{proof['bundle_hashes']} bundle hashes verified")
         if args.verify_remote:
             problems = verify_remote(REPO)
             if problems:
