@@ -82,7 +82,7 @@ Choose the document role before creating the file:
 | engineering design / execution plan | `docs/superpowers/specs/` / `docs/superpowers/plans/` |
 | study admission and checkout registry | `studies/registry.json` plus the owner decision in the Wiki |
 | paper admission and checkout registry | `papers/registry.json` plus the owner promotion decision in the Wiki |
-| experiment lifecycle and asset graph | `wiki/Experiment-Assets.md` → `wiki/experiments/<study-slug>/README.md` |
+| experiment lifecycle and asset graph | `wiki/Experiment-Assets.md` → study: `wiki/experiments/<study-slug>/README.md`; paper: `wiki/experiments/papers/<paper-slug>/README.md` |
 | release-scoped reproducibility report | `docs/checks/<campaign>/<release-id>/` |
 | executable policy or validation | `scripts/` with tests |
 | temporary reasoning or scratch | do not commit; promote only distilled conclusions |

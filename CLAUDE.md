@@ -42,7 +42,8 @@ Budgets: `AGENTS.md` / `CLAUDE.md` ≤12KB; `Research-Objective.md` ≤5KB;
 manifest ≤30 active entries. The three default entries are fixed.
 
 Path summary: HOT current facts stay in stable root/wiki files; experiment lifecycle and asset routing
-live in `wiki/Experiment-Assets.md` plus per-study `wiki/experiments/<study-name>/`; long-lived paper
+live in `wiki/Experiment-Assets.md` plus per-carrier `wiki/experiments/<study-name>/` and
+`wiki/experiments/papers/<paper-name>/`; long-lived literature-paper
 records and official-metadata receipts go to `wiki/survey/registry/`; reviewer transactions
 are created directly under `wiki/audit/<campaign>/<round-id>/`; superseded unregistered work goes to
 `wiki/archive/`; active exploration goes to `wiki/survey/workbench/<campaign>/`. Engineering specs,
@@ -131,8 +132,9 @@ must state their scope and retain inherited prior exposure.
 
 Stage-1A checks identity, routing, protocol coverage, and gate correctness; it does not judge technical
 novelty or require a prior-difference matrix. Stage-1B maps method paths and proximity without a novelty
-verdict. Stage-1C selects a problem from candidate gap hypotheses; technical-approach innovation
-converges only in reproduction-first Stage-2A and is validated in Stage-2B.
+verdict. Stage-1C selects a problem from candidate gap hypotheses. Innovation converges through
+reproduction-first Stage-2A; Stage-2B qualifies and freezes a paper candidate with bounded
+evidence; final validation and publication-grade claims belong to Stage-3 in the paper repo.
 
 Stage accounting is direction-local: once a semantically named research object closes its own survey,
 owner decision, and execution contract, it may enter engineering while the next candidate is surveyed.

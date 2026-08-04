@@ -33,6 +33,7 @@
 | **Study repository registry** | `studies/README.md`; `studies/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；只登记已获准的语义命名独立 Git 仓 | 独立研究对象获得 `OWNER_GO_AND_EXECUTION_CONTRACT`，语义名称和执行合同冻结 | 生命周期变化原位更新；候选编号不得成为 repo 名，未获准/已在建仓前日落的候选不得建空仓 |
 | **Paper repository registry** | `papers/README.md`; `papers/registry.json` | owner、实现者、CI | 否，按工程任务定向 | 伞仓跟踪；语义命名独立 Git 仓（Stage‑3，续91） | 由合格 study candidate 经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级 | 生命周期原位更新；候选编号不得成为 repo 名；空 registry 合法、不得建空 paper 仓 |
 | **Study experiment index** | `wiki/experiments/<study-slug>/README.md`，总路由=`wiki/Experiment-Assets.md` | owner、实现者、reviewer | 否，按 study 定向 | Wiki 管理实验状态与资产图；记录必须 pin repo commit、协议/配置/数据/模型与产物 | study 已登记，实验合同进入执行 | 结论整编进稳定当前页；release/audit bytes 不回写，study 日落后保留可恢复索引 |
+| **Paper experiment index** | `wiki/experiments/papers/<paper-slug>/README.md`（首个 admission 时创建），总路由=`wiki/Experiment-Assets.md` | owner、实现者、reviewer | 否，按 paper 定向 | Wiki 管理 Stage‑3 实验状态与资产图；记录必须 pin paper commit、协议/数据与产物 | paper 已登记，promotion 完成 | 结论整编进稳定当前页；release/audit bytes 不回写 |
 | **Check report** | `docs/checks/<campaign>/<release-id>/` | 门禁工具与核验者 | 否 | 被 release 引用后 immutable | 可重复检查产生平台/版本特定结果 | 新 release 新目录；禁止跨平台共用 last-writer-wins 文件名 |
 | **Executable rule** | `scripts/` | CI、操作者、reviewer | 否（执行而非通读） | 正常代码生命周期，测试先行 | 散文规则可机械验证时 | 修改规则必须同步测试；散文只指向检查器，不维护第二套实现 |
 | **Ephemeral scratch** | **Not committed** | 当前会话 | 否 | 无权威性 | 临时推理、草稿、一次性输出 | 交接前提炼有价值结论并附 provenance；其余删除/过期 |

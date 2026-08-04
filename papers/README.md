@@ -17,8 +17,10 @@ claim; positive, null and negative results are equally legal completions.
 
 ## Current state
 
-No paper project is admitted; `registry.json` is empty. Promotion schema, workspace checks and the
-promotion receipt machinery are intentionally deferred until the first real candidate approaches
-(trigger: a study candidate reaches paper-candidate readiness, or the owner starts the first paper
-admission). Program-level experiment assets are routed by
+No paper project is admitted; `registry.json` is empty. The zero state is machine-enforced by
+`scripts/checks/paper_workspace_check.py` (strict empty registry, no child checkouts, ignore rule,
+count consistency; any registered entry fails closed). The admission-mode extension of that checker
+— full entry schema, candidate bundle, promotion receipt, origin/branch proof — is intentionally
+deferred until the first real candidate approaches (trigger 续92: the earliest of the four
+pre-exposure events, or the owner starting the first paper admission). Program-level experiment assets are routed by
 [`wiki/Experiment-Assets.md`](../wiki/Experiment-Assets.md).

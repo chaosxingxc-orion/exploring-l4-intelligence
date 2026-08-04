@@ -13,8 +13,9 @@ duplicate executable repositories or large artifact bytes.
   Its repository is `studies/speech-aware-evidence-acquisition/` (independent Git history, private
   remote); current stage: Stage‑2A E0 (D1–D4 model-free closure) in progress. General/environmental
   audio is excluded from this study while already downloaded cross-domain assets remain governed in
-  the canonical lock. Innovation and final method remain Stage‑2A/2B outputs; model-facing execution
-  stays fail-closed behind E0 closure and the runtime receipt.
+  the canonical lock. Innovation and the candidate method are Stage‑2 outputs; final validation is
+  Stage‑3 in the promoted paper repo; model-facing execution stays fail-closed behind E0 closure and
+  the runtime receipt.
 - R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; it has no study repository. Its survey
   and baseline evidence remain reachable through the current survey router and audit history.
 - Candidate analyses R3–R9 are not repositories. They enter the study registry only if and when an

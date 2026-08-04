@@ -20,8 +20,8 @@ The first semantic object, **speech-aware evidence acquisition** (R2 audit prove
 signed 2026-08-03; the single self-contained effective authority (GO + speech-only identity +
 Stage‑3 stop line) is
 `wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-consolidated-execution-contract.md`.
-Repository: `studies/speech-aware-evidence-acquisition/`; remote is private. Innovation and final
-method remain Stage‑2A/2B outputs.
+Repository: `studies/speech-aware-evidence-acquisition/`; remote is private. Innovation and the
+candidate method are Stage‑2 outputs; final validation is Stage‑3 (paper repo).
 
 No parameter modification, task-trained model or additional answering LLM is allowed. Model-facing
 execution remains fail-closed behind E0 D1–D4 and a runtime receipt. D0 is closed for Earnings21,

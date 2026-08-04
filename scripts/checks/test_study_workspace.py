@@ -31,6 +31,8 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         (self.root / "wiki").mkdir()
         (self.root / "docs" / "integrity").mkdir(parents=True)
         (self.root / ".gitignore").write_text("studies/*/\npapers/*/\n", encoding="utf-8")
+        (self.root / "AGENTS.md").write_text("# AGENTS.md\nguide\n", encoding="utf-8")
+        (self.root / "CLAUDE.md").write_text("# CLAUDE.md\nguide\n", encoding="utf-8")
         (self.root / "papers" / "registry.json").write_text(
             json.dumps(
                 {
@@ -93,7 +95,8 @@ class StudyWorkspaceContractTests(unittest.TestCase):
             f'local_checkout: "studies/{slug}"\n'
             'experiment_id_namespace: "SAEA-E-<nnn>"\n'
             "---\n\ncurrent experiments\n"
-            "| split role | split identity hash | consumed |\n",
+            "| experiment_id | date | split role | split identity hash | consumed |\n"
+            "|---|---|---|---|---|\n",
             encoding="utf-8",
         )
         return {
@@ -204,22 +207,57 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "HOT endpoint"):
             study_workspace.validate_cross_source_truth(self.root)
 
-    def test_experiment_index_without_exposure_ledger_columns_is_rejected(self) -> None:
+    def test_ledger_header_only_mutation_is_rejected_despite_prose_terms(self) -> None:
         entry = self.admitted_study()
         self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
         self.registry["studies"] = [entry]
         self.write_registry()
         index = self.root / entry["experiment_index"]
+        frontmatter = index.read_text(encoding="utf-8").split("---\n")[1]
+        # Prose keeps all three terms; the header table loses them. Substring search
+        # over the whole document would pass; header parsing must fail.
         index.write_text(
-            index.read_text(encoding="utf-8").replace(
-                "| split role | split identity hash | consumed |\n", ""
-            ),
+            "---\n" + frontmatter + "---\n\n"
+            "每条记录必须带 split role、split identity hash 与 consumed 标记。\n"
+            "| experiment_id | date |\n|---|---|\n",
             encoding="utf-8",
         )
         with self.assertRaisesRegex(
-            study_workspace.StudyWorkspaceError, "exposure ledger columns"
+            study_workspace.StudyWorkspaceError, "exposure columns"
         ):
             study_workspace.validate_cross_source_truth(self.root)
+
+    def test_experiment_index_without_any_ledger_header_is_rejected(self) -> None:
+        entry = self.admitted_study()
+        self.init_git_checkout(self.root / entry["local_path"], origin=entry["github_repo"])
+        self.registry["studies"] = [entry]
+        self.write_registry()
+        index = self.root / entry["experiment_index"]
+        frontmatter = index.read_text(encoding="utf-8").split("---\n")[1]
+        index.write_text(
+            "---\n" + frontmatter + "---\n\nno table at all\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(
+            study_workspace.StudyWorkspaceError, "ledger table header"
+        ):
+            study_workspace.validate_cross_source_truth(self.root)
+
+    def test_stage_truth_forbids_stage2b_validation_language_on_default_surface(self) -> None:
+        study_workspace.validate_stage_truth(self.root)
+        (self.root / "CLAUDE.md").write_text(
+            "# CLAUDE.md\ninnovation is validated in Stage-2B\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "stage-truth drift"):
+            study_workspace.validate_stage_truth(self.root)
+        (self.root / "CLAUDE.md").write_text(
+            "# CLAUDE.md\n创新在 Stage‑2B 验证。\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "stage-truth drift"):
+            study_workspace.validate_stage_truth(self.root)
+        (self.root / "CLAUDE.md").write_text("# CLAUDE.md\nguide\n", encoding="utf-8")
+        (self.root / "AGENTS.md").unlink()
+        with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "stage-truth surface"):
+            study_workspace.validate_stage_truth(self.root)
 
     def test_inventory_pins_paper_registry_hash_and_fails_without_it(self) -> None:
         (self.root / "docs" / "integrity" / "experiment_attempt_registry.jsonl").write_text(

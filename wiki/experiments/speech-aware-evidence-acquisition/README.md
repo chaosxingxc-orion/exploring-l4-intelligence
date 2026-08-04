@@ -19,8 +19,8 @@ ESC-50 等 general-audio 数据不得进入本台账的实验。
 
 - **当前唯一自包含有效合同**（registry pin 指向本件）：
   [2026-08-04-owner-consolidated-execution-contract.md](2026-08-04-owner-consolidated-execution-contract.md)
-- Study 仓边界采用（execution-scope guard + 指南路由，续92）：study commit
-  `6c4b37e9ff90becde3df934fa2b87e136f1354eb`
+- Study 仓边界采用（续92 guard + 续93 语义 ExecutionPlan 门与合同字段 exposure ledger）：
+  study commit `db284ae6e9a664c262640d93d83bfa873f01516b`（前值 `6c4b37e9…` 由本行取代）
 - 历史来源记录（事实继承、不回写；blob 见合并合同 §9）：
   [2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md](2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md)、
   [2026-08-04-owner-speech-domain-scope-and-identity-contract.md](2026-08-04-owner-speech-domain-scope-and-identity-contract.md)、

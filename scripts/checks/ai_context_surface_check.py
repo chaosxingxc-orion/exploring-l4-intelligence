@@ -533,6 +533,7 @@ POLICY_ROLE_ORDER = (
     "Study repository registry",
     "Paper repository registry",
     "Study experiment index",
+    "Paper experiment index",
     "Check report",
     "Executable rule",
     "Ephemeral scratch",
@@ -616,6 +617,14 @@ POLICY_ROLE_SEMANTICS = {
         ("否", "study 定向"),
         ("Wiki 管理实验状态与资产图",),
         ("study 已登记", "实验合同"),
+        ("稳定当前页", "release/audit bytes 不回写"),
+    ),
+    "Paper experiment index": (
+        ("wiki/experiments/papers/<paper-slug>/README.md", "wiki/Experiment-Assets.md"),
+        ("owner", "实现者", "reviewer"),
+        ("否", "paper 定向"),
+        ("Stage‑3 实验状态与资产图",),
+        ("paper 已登记", "promotion 完成"),
         ("稳定当前页", "release/audit bytes 不回写"),
     ),
     "Check report": (

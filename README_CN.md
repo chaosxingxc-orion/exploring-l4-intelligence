@@ -42,6 +42,7 @@ gold truth；各 study 怎么用（切分、采样、prompt、协议）是其私
 ```
 common/         共享库（speechrl_common）：audio、models、rewards、data、tracking、utils
 studies/        获准语义 study 仓的登记表与本地容器（每个子目录都是独立 git 仓）
+papers/         获准 Stage-3 paper 仓的登记表与本地容器（每个子目录都是独立 git 仓；当前为空）
 docs/           setup.md、datasets.lock.json（资产权威）、superpowers/specs、checks、integrity
 scripts/        wsl-setup.sh、env-setup.sh、wiki-sync.sh、data/（下载）、checks/+survey/（门禁）
 wiki/           GitHub Wiki 源文件——项目真理、调研层、审计、实验台账
@@ -64,6 +65,7 @@ CONTRIBUTING.md         多仓归属与协作方式
 python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
 python scripts/checks/legacy_asset_resolution_check.py
+python scripts/checks/paper_workspace_check.py
 python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 

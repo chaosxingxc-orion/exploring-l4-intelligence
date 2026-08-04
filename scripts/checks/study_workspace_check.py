@@ -71,6 +71,13 @@ CONTROL_PLANE_TERMS = (
     "decision",
 )
 REQUIRED_LEDGER_COLUMNS = ("split role", "split identity hash", "consumed")
+STAGE_TRUTH_SURFACES = (
+    "AGENTS.md",
+    "CLAUDE.md",
+    RESEARCH_OBJECTIVE_PATH,
+    CONTROL_PLANE_PATH,
+)
+STAGE_TRUTH_FORBIDDEN_PHRASES = ("validated in stage-2b", "在 stage-2b 验证")
 
 
 class StudyWorkspaceError(RuntimeError):
@@ -356,16 +363,59 @@ def validate_cross_source_truth(root: Path = REPO) -> None:
                     f"experiment index frontmatter drift for {slug}: {key}={actual!r} "
                     f"does not match registry {expected!r}"
                 )
-        index_text = index_path.read_text(encoding="utf-8").lower()
+        header_cells = _ledger_header_cells(index_path.read_text(encoding="utf-8"))
+        if header_cells is None:
+            raise StudyWorkspaceError(
+                f"experiment index for {slug} lacks a ledger table header containing "
+                "an experiment_id cell"
+            )
         missing_columns = [
-            column for column in REQUIRED_LEDGER_COLUMNS if column not in index_text
+            column for column in REQUIRED_LEDGER_COLUMNS if column not in header_cells
         ]
         if missing_columns:
             raise StudyWorkspaceError(
-                f"experiment index for {slug} lacks required exposure ledger columns "
-                f"{missing_columns}; formal records must carry split role, split identity "
-                "hash and a consumed marker from the first row (2026-08-03 visibility rule)"
+                f"experiment index ledger header for {slug} lacks required exposure columns "
+                f"{missing_columns}; prose mentions do not count — header cells are the "
+                "authority (2026-08-03 visibility rule, 续92)"
             )
+
+
+def _ledger_header_cells(index_text: str) -> list[str] | None:
+    """Return the lowercased cells of the first table header row naming experiment_id."""
+
+    for line in index_text.splitlines():
+        stripped = line.strip()
+        if not (stripped.startswith("|") and stripped.endswith("|")):
+            continue
+        cells = [cell.strip().lower() for cell in stripped[1:-1].split("|")]
+        if "experiment_id" in cells:
+            return cells
+    return None
+
+
+def validate_stage_truth(root: Path = REPO) -> None:
+    """Forbid pre-three-stage semantics on the default-load/control-plane surface.
+
+    Scope is deliberately narrow (guides, HOT endpoint, control plane): immutable
+    audit/archive records legitimately keep the historical phrasing and are never
+    scanned (append-only discipline).
+    """
+
+    for relative in STAGE_TRUTH_SURFACES:
+        try:
+            text = _repo_path(root, relative).read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as error:
+            raise StudyWorkspaceError(
+                f"cannot read stage-truth surface {relative}: {error}"
+            ) from error
+        normalized = text.lower().replace("‑", "-")
+        for phrase in STAGE_TRUTH_FORBIDDEN_PHRASES:
+            if phrase in normalized:
+                raise StudyWorkspaceError(
+                    f"stage-truth drift: {relative} still contains {phrase!r}; final "
+                    "validation and publication-grade claims belong to Stage-3 in the "
+                    "paper repo (续91/续92)"
+                )
 
 
 def validate_experiment_control_plane(root: Path = REPO) -> None:
@@ -579,6 +629,7 @@ def main(argv: list[str] | None = None) -> int:
         load_and_validate_registry(REPO, require_installed=args.require_installed)
         validate_experiment_control_plane(REPO)
         validate_cross_source_truth(REPO)
+        validate_stage_truth(REPO)
         if args.render_inventory:
             sys.stdout.write(_render_json(build_experiment_asset_inventory(REPO)))
         else:

@@ -2,6 +2,47 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-04（续93）· 第二轮 review 整改：默认面阶段语义禁语门、合同字段 exposure ledger、语义 ExecutionPlan 门
+
+#### Context
+
+第二轮 review（specs/2026-08-04-three-stage-architecture-remediation-rereview-assessment.md，对
+umbrella 16f3815 + study 6c4b37e）判 `CONDITIONAL_ACCEPT__CORE_ARCHITECTURE_LANDED__
+CLOSURE_CLAIMS_OVERSTATED`：架构/自包含合同/零状态门 ACCEPT；但 P1-1（AGENTS/CLAUDE 仍留
+"validated in Stage-2B"、RO/EA "final method" 措辞）、P1-2（study exposure ledger 无合同字段；
+checker 全文 substring 可被"正文留词、表头删列"绕过）、P1-3（profile guard 只验标签不验
+split/规模/预算）、P2-1/2/3 属实。对抗核验后按 owner 指示修复；上一轮"全部关闭"的表述确认
+过强，据实更正。
+
+#### Decision
+
+①P1-1 关闭：默认面三句式统一（2A 收敛→2B qualify+freeze candidate→Stage‑3 final validation
+与发表级 claim）；RO/EA 改 candidate method 措辞；新增 `validate_stage_truth` 禁语门——作用域
+**只限** AGENTS/CLAUDE/Research-Objective/Experiment-Assets 四个默认/控制面文件（评审方案的
+必要收窄：该短语合法存在于不可变审计/归档件中，仓域全禁会撞 append-only 纪律），禁
+`validated in stage-2b` 与中文变体（含 U+2011 连字符归一化），负向测试覆盖。②P1-2 关闭：
+study `docs/exposure-ledger.md` 表头增 execution profile/scope/split role/split identity hash/
+consumed/inherited exposure 并写明 consumed=yes 不可逆与 model-free 填写规则；study 测试与
+umbrella checker 均改为**解析真实表头**（首个含 experiment_id/run-id 单元格的表行），
+"正文留词表头删列"回归用例双仓覆盖。③P1-3 按评审推荐方案关闭（对抗裁量：其字段全部为
+合同已冻结值——首切片预算帽 3000 调用/40 GPU-h/72000 audio-s、Stage‑2 split 角色、hash 纪律
+——不属投机设计）：新增 `ExecutionPlan`（saea-execution-plan-v1，R0 时仅可经 dated decision
+扩展）；`FrozenCoreGate.assert_model_touch_allowed(plan)` 先验 plan 再读任何字节，然后要求
+run id 在 exposure ledger 预登记、carrier 在伞仓 lock 中，最后验两收据；confirmatory split
+一律拒绝（比评审更严的 fail-closed：R0 接线如需 confirmatory 通路须 dated owner allowance）；
+超帽/伪标签/裸字符串全部负向测试。④P2-1/2/3 关闭：README_CN 布局与门禁清单、CONTRIBUTING
+双 index 路由、指南 per-carrier 路径摘要与 literature-paper 消歧、AI-Collaboration 增 Paper
+experiment index 行（surface-check 常量同 commit）、papers/README 零状态/延后措辞、plan 状态
+据实更正、contracts 模块权威注释改 consolidated id。⑤R0/R1/X model-facing HOLD 解除条件=本条
+全部落地且门禁绿（实际触达仍需 E0+runtime receipt+有效 ExecutionPlan）；首个 paper admission
+维持 WITHHELD；Phase B 触发器不变。
+
+#### Consequences
+
+study 采用 commit `db284ae6…`（实验索引原位更新）；伞仓门禁新增 stage-truth 与表头解析两类
+失败模式。本条不授予模型/API 调用、实验、数据下载、远程建仓、push 或 wiki 发布权限。失效
+条件：owner 修改默认面禁语表、ExecutionPlan schema 或触发器。
+
 ### 2026-08-04（续92）· 三阶段实施 review 整改：当前真相全面替换、自包含合同、零状态 paper 门、exposure 最小前置
 
 #### Context

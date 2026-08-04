@@ -43,12 +43,28 @@
   model-free-check/baseline-reproduction/bounded-discovery-probe；paper-scale 永拒）；
   `FrozenCoreGate.assert_model_touch_allowed(execution_profile)` 必须声明 profile；76 项测试绿。
 - [x] **R3 零状态 paper 门**（P1-2）：`paper_workspace_check.py`（严格空 registry/零 child/
-  ignore 规则/计数一致；任何 paper 条目 fail closed）+ 11 项负向测试；inventory 升 v3 纳入
-  paper registry sha256。
-- [x] **R4 exposure 最小前置**（P1-4）：SAEA 台账增 split role/split identity hash/consumed 列，
-  checker 强制（REQUIRED_LEDGER_COLUMNS + CONTROL_PLANE_TERMS）；reservation 台账触发器改为
-  四事件最早者（首个 bounded X 读 discovery 前 / 第二个共享 carrier study 前 / 首个
-  confirmatory split 物化或读取前 / 任一 candidate 申请 paper-candidate-ready 前）。
+  ignore 规则/计数一致；任何 paper 条目 fail closed）+ 1 正向/10 负向用例；inventory 升 v3
+  纳入 paper registry sha256。
+- [x] **R4 exposure 最小前置**（P1-4）：本轮只完成 **umbrella experiment index** 增列与
+  checker 强制及触发器改四事件最早者；study 侧 exposure ledger 的合同字段在第二轮 review
+  指出后由 Phase A″ 完成（此前勾选过强，据实更正）。
+
+## Phase A″ — 第二轮 review 整改（2026-08-04，续93；review：specs/2026-08-04-three-stage-architecture-remediation-rereview-assessment.md）
+
+- [x] **P1-1 默认面阶段语义**：AGENTS/CLAUDE 三句式（2A 收敛→2B qualify candidate→Stage‑3
+  final validation）；RO/EA candidate-method 措辞；`validate_stage_truth` 禁语门（作用域仅四个
+  默认/控制面文件——审计/归档件合法保留历史短语，不扫描）+ 正/负向测试。
+- [x] **P1-2 exposure ledger 接口闭合**：study `docs/exposure-ledger.md` 表头增
+  execution profile/scope/split role/split identity hash/consumed/inherited exposure 及语义规则
+  （consumed=yes 不可逆）；study 测试与 umbrella checker 均改为解析真实表头；
+  "正文留词、表头删列"回归用例双仓覆盖。
+- [x] **P1-3 语义 scope 门**：`ExecutionPlan`（saea-execution-plan-v1，字段全为合同冻结值）；
+  gate 先验 plan（confirmatory split 拒绝、首切片预算帽、64-hex hash）再要求 exposure 预登记
+  与 lock carrier，最后验收据；裸 profile 字符串退役；study 套件 82 项全绿。
+- [x] **P2-1/2/3**：README_CN 布局+门禁清单、CONTRIBUTING 双 index 路由、指南 per-carrier
+  摘要、AI-Collaboration Paper experiment index 行（surface 常量同 commit）、papers/README
+  与本计划措辞据实、contracts 模块权威注释改 consolidated id。
+- [x] Study 采用 commit：`db284ae6e9a664c262640d93d83bfa873f01516b`（实验索引原位登记）。
 
 ## Phase B — 延后（触发器已按续92修订：下列四事件最早者，或 owner 启动首个 paper admission——首个 bounded X 读取 discovery 结果前 / 第二个共享 carrier study 前 / 首个 confirmatory split 物化或读取前 / 任一 candidate 申请 paper-candidate-ready 前）
 
@@ -57,15 +73,17 @@
 
 1. **Promotion schema**（candidate bundle + promotion receipt）：BLOCKER/RECOMMENDED 分级
   （评审 C8）；bundle 冻结为 study 仓 Git blob，umbrella receipt 双向绑定 paper initial commit。
-2. **paper_workspace_check**：从 `study_workspace_check.py` 提取共享验证器后实现（评审确认可行）；
-  空 registry 合法、未登记目录 fail、candidate token 禁入 slug/package/namespace、
-  primary_study 必须解析、读 child 内容的校验门控在 `--require-installed`（评审 C4）。
+2. **把零状态 `paper_workspace_check.py` 扩展为 admitted-entry 模式**（零状态版已在 A′ 落地）：
+  entry schema、candidate token 禁入 slug/package/namespace、primary_study 必须解析、
+  origin/branch/blob 校验；读 child 内容的部分门控在 `--require-installed`（评审 C4）；
+  共享验证器提取与此同步（评审确认可行）。
 3. **Program-wide confirmatory reservation ledger**：`docs/integrity/` 下机器台账 + fail-closed
   checker；生效点在任何 confirmatory 读取之前（评审 C2）。在此之前由边界合同 + study 仓
   `docs/exposure-ledger.md` + 2026-08-03 程序可见性纪律（split-hash/已消耗标记）承担。
 4. **study registry v3**：超集 lifecycle 词表（新增 candidate-development/paper-candidate-ready）+
   provenance 字段；registry+checker+tests 单事务（评审 C3）。
-5. **AI-Collaboration 放置表增 paper 行**：必须与 `ai_context_surface_check.py` 的
+5. **AI-Collaboration 放置表**：Paper repository registry 行（A′）与 Paper experiment index 行
+  （A″）均已落地；后续任何新增/修改行仍必须与 `ai_context_surface_check.py` 的
   `POLICY_ROLE_ORDER`/`POLICY_ROLE_SEMANTICS` 常量及测试同 commit（评审 C10）。
 6. **首仓 admission runbook**：语义命名、远程创建显式授权、六步非原子晋级事务、初始 CI、
   `docs/checks/promotion-<paper-slug>/<release-id>/` 收据、合成 dry-run 的 fail-closed 用例。
