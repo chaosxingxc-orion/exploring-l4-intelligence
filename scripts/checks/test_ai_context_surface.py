@@ -1697,7 +1697,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertLessEqual(refresh_date, date.today())
         required_truth = (
             "Stage accounting is direction-local",
-            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_E0_IN_PROGRESS",
+            "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_E0_CLOSED__R0_NEXT",
             "Qwen3-Omni-30B",
             "speech and spoken-language tasks",
             "speech-aware evidence acquisition",
