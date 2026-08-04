@@ -61,12 +61,13 @@ CONTRIBUTING.md         多仓归属与协作方式
 # 伞仓治理门禁（离线，Windows 或 WSL 均可）
 python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
+python scripts/checks/legacy_asset_resolution_check.py
 python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 
 # 开发已获准的 study（WSL2 内、激活 venv）
 cd studies/audio-aware-evidence-acquisition
-uv pip install -e ../../common -e .
+uv pip install -e ".[dev]"
 pytest
 ```
 

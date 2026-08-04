@@ -15,8 +15,9 @@ no stable native-Windows torch wheels, and verl/vLLM/flash-attn are Linux-only.
 2. **Python env + stack** — `bash scripts/env-setup.sh` builds the py3.12 uv venv at
    `~/.venvs/speechrl` (ext4), installs torch from the `cu128` index, then verl/vLLM and editable
    `common`. Activate with `source ~/.venvs/speechrl/bin/activate`.
-3. **Work on a study** — `cd studies/<semantic-slug> && uv pip install -e ../../common -e . && pytest`;
-   run commands are owned by the study repo.
+3. **Work on a study** — `cd studies/<semantic-slug> && uv pip install -e ".[dev]" && pytest`;
+   run commands are owned by the study repo (`../../common` is only a dev override for a study
+   that has pinned that dependency; the current study declares none).
 4. **Tracking** — local MLflow file store (`mlruns` on ext4); the Wiki experiment ledger pins run IDs.
 
 **Pitfalls.** System Python 3.14 is too new for ML wheels — never use it for the stack. If a "no
@@ -43,8 +44,8 @@ are in `docs/setup.md` §5.
 **四个阶段：**（1）WSL2 + CUDA：确保是 WSL2（非 WSL1）Ubuntu，跑 `bash scripts/wsl-setup.sh`，用
 `nvidia-smi` / `nvcc --version` 验证。（2）Python 环境：`bash scripts/env-setup.sh` 建 py3.12 venv
 （`~/.venvs/speechrl`，ext4），装 `cu128` 的 torch、verl/vLLM 和可编辑 `common`；`source` 激活。
-（3）开发 study：`cd studies/<semantic-slug> && uv pip install -e ../../common -e . && pytest`，
-运行命令由 study 仓自管。（4）追踪：本地 MLflow 文件存储（ext4 上的 `mlruns`），run ID 由 Wiki
+（3）开发 study：`cd studies/<semantic-slug> && uv pip install -e ".[dev]" && pytest`，
+运行命令由 study 仓自管（`../../common` 仅对已登记 pin 依赖的 study 作本地开发覆盖；当前 study 无该依赖）。（4）追踪：本地 MLflow 文件存储（ext4 上的 `mlruns`），run ID 由 Wiki
 实验台账绑定。
 
 **坑：** 系统 Python 3.14 太新，别用于该栈；遇到 "no kernel image" 先 torch nightly `cu128`，再

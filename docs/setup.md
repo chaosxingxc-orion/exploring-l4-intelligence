@@ -52,7 +52,7 @@ python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))
 
 ```bash
 cd "$REPO/studies/audio-aware-evidence-acquisition"
-uv pip install -e ../../common -e .
+uv pip install -e ".[dev]"
 pytest
 ```
 

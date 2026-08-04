@@ -23,8 +23,10 @@ This is an **umbrella governance repo plus independent admitted-study repos**. T
 
 A nested-repository code change is in the wrong place if umbrella `git status` shows it under a
 study checkout; that container is ignored by the umbrella. Only the two `studies/` registry files
-belong to the umbrella. The historical W1–W4 work repos were retired and deleted on 2026-08-03
-(tombstone: `wiki/archive/program/w1-w4-retirement/`).
+belong to the umbrella. The historical W1–W4 work repos were retired on 2026-08-03 — local
+checkouts deleted, remotes kept as cold backups (tombstone:
+`wiki/archive/program/w1-w4-retirement/`; machine registry:
+`docs/integrity/retired-repository-registry.json`).
 
 Do not pre-create candidate repositories. A direction can sunset before engineering, or several
 candidate analyses can converge into one semantically named study. The umbrella Wiki preserves that
@@ -32,7 +34,10 @@ provenance; the engineering identity follows the admitted research object.
 
 ## Shared library (`common/`)
 
-`speechrl-common` is editable-installed by admitted studies, so a change there ripples to every study.
+`speechrl-common` is program infrastructure; no admitted study depends on it today. A study that
+starts consuming it must pin an exact umbrella commit (study migration-manifest policy), with
+`../../common` editable installs reserved for local development. Per-module status:
+[`common/OWNERSHIP.md`](common/OWNERSHIP.md).
 
 - Run `pytest common/tests` before committing — the smoke tests must pass.
 - **Preserve lazy-import discipline:** keep torch/transformers/librosa/mlflow/jiwer imports *inside*

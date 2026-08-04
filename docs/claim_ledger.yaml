@@ -180,7 +180,7 @@
   reviewer: "2026-07-10 forensic audit + 2026-07-11 delta verification"
   note: >
     Second provenance mismatch: the committed artifact's numbers disagree with
-    git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@56b8a9c76a4cddac765aa5fab43560f5c4375402#path=docs/experiment_inventory.md:86 ("MInDS-14 reproduction |
+    git+https://github.com/chaosxingxc-orion/speech-mllm-omni-embedding-rl.git@56b8a9c76a4cddac765aa5fab43560f5c4375402#path=docs/experiment_inventory.md line 86 ("MInDS-14 reproduction |
     182 | raw-schema Acc@1 = 0.852 | policy Acc@1 = 0.984, delta +0.132 CI [0.082, 0.187]") — treat
     both the doc table and the committed JSON as needing independent reconciliation before either is
     quoted; this mirrors the earlier audit_source latent schema bug (umbrella commit a517bdd) as a

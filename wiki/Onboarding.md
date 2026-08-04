@@ -10,7 +10,9 @@ Zero-to-ready for a new collaborator or AI. Assumes Windows + WSL2 `Ubuntu-24.04
    `source ~/.venvs/speechrl/bin/activate` inside WSL2. Never use native/system Python 3.14 for the ML
    stack and never touch `D:/ai-stack/mem0-venv`.
 4. Run `pytest common/tests` and the umbrella gates:
-   `python scripts/checks/code_graph_check.py`, `python scripts/checks/study_workspace_check.py`,
+   `python scripts/checks/code_graph_check.py`, `python scripts/checks/study_workspace_check.py`
+   (`--require-installed` on the primary dev machine),
+   `python scripts/checks/legacy_asset_resolution_check.py`,
    `python scripts/checks/ai_context_surface_check.py`,
    `python scripts/checks/build_ai_context_manifest.py --check`.
 5. Fetch only authorized assets with `scripts/data/`; models/datasets/outputs live in

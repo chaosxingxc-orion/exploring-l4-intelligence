@@ -93,8 +93,8 @@ own repository. A future direction gets a repo only after its own owner GO plus 
 never pre-create one from a conditional candidate.
 
 Umbrella gates (offline, Windows or WSL): `python scripts/checks/code_graph_check.py`,
-`python scripts/checks/study_workspace_check.py` (add `--require-installed` on the primary dev
-machine), `python scripts/checks/legacy_asset_resolution_check.py`,
+`python scripts/checks/study_workspace_check.py` (`--require-installed` is the default on the
+primary dev machine; owner 2026-08-03), `python scripts/checks/legacy_asset_resolution_check.py`,
 `python scripts/checks/ai_context_surface_check.py`,
 `python scripts/checks/build_ai_context_manifest.py --check`. The Stage‑1 survey package and its
 command gate closed on 2026-08-03 (final receipt under `docs/checks/system-first-stage1a/`); the

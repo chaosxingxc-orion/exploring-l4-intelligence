@@ -53,10 +53,43 @@ uv lock: resolved 9 packages; uv sync --frozen dry-run resolves
 
 ## Residual items (non-blocking, owner discretion)
 
-- Whether a second offline medium (beyond `SPEECHRL_DATA_DIR`) should hold the four bundles.
-- Whether `--require-installed` becomes the default habit on the primary dev machine.
+- ~~Whether a second offline medium (beyond `SPEECHRL_DATA_DIR`) should hold the four bundles.~~
+  **Ruled 2026-08-03 (owner, in-session): the E drive is the only storage medium; the bundles under
+  `SPEECHRL_DATA_DIR/program-archives/` are the accepted default (and only) offline copy, alongside
+  the GitHub cold-backup remotes.**
+- ~~Whether `--require-installed` becomes the default habit on the primary dev machine.~~
+  **Ruled 2026-08-03 (owner, in-session): adopted as the primary-dev-machine default; recorded in
+  the client guides.**
 - `LEGACY_W_ERA` module physical shrink in `common/` — deferred to the post-R0 pass per T5 timing.
 - Study CI has not run remotely (push withheld); it is exercised locally via the same commands.
 
 R0-engineering-foundation-ready sign-off remains a team/owner action (proposal §13), not asserted
 by this receipt.
+
+## Addendum (2026-08-03): four-round adversarial self-check
+
+Owner-directed adversarial self-review of the remediation itself; converged after four rounds.
+
+- **R1 — mechanical refutation sweep** (stale-truth grep over every active surface). Found and
+  fixed: four live install instructions still showing `uv pip install -e ../../common -e .`
+  (README, README_CN, docs/setup.md, wiki/Environment-and-Setup.md), three gate lists missing the
+  new `legacy_asset_resolution_check` (README, README_CN, wiki/Onboarding.md), two stale CONTRIBUTING
+  claims (W1–W4 "deleted" wording; `common` "editable-installed by admitted studies"), missing
+  `shared code revision` column in the study experiment ledger header. Ruled untouched as
+  append-only/dated history: `release_manifest.json`, `remediation_evidence.yaml`,
+  `prior_exposure_registry.json`, `requirements-freeze-2026-07-09.txt`, decision-log volumes,
+  historical spec quotes.
+- **R2 — independent data re-verification** (fresh code path, not the generator). 574/574
+  resolution entries re-proven against the mirrors (commit contains path, git blob equal, URI
+  well-formed; exactly 1 resolves at a non-final commit — the historically deleted
+  `_repro/wave1_results.md`, as expected). Claim-ledger URIs 17/17 resolvable after fixing one
+  line-anchor glued into a URI (`...experiment_inventory.md:86` → `... line 86`). SNAPSHOT.md
+  13/13 rows = SHA256SUMS = on-disk hashes. All four bundles: SHA-256 matches the registry,
+  `git bundle verify` passes, mirror tips equal the frozen final commits.
+- **R3 — fault injection** (temporary worktree, eight injected drifts): admitted-count drift,
+  decision-record tamper (blob drift), resolution row removal (two distinct failures), unwaived
+  UNRESOLVED, unregistered study directory, frontmatter namespace drift, missing checkout under
+  `--require-installed` — **8/8 caught fail-closed**, baselines green.
+- **R4 — semantic re-read + full acceptance re-run** — no new findings; suite green (outputs below
+  supersede the first-pass table where they differ only by the R1/R2 fixes).
+

@@ -67,12 +67,13 @@ llama.cpp `llama-server` (GGUF). Full details: [docs/setup.md](docs/setup.md).
 # umbrella governance gates (offline, Windows or WSL)
 python scripts/checks/code_graph_check.py
 python scripts/checks/study_workspace_check.py
+python scripts/checks/legacy_asset_resolution_check.py
 python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 
 # work on the admitted study (inside WSL2, venv active)
 cd studies/audio-aware-evidence-acquisition
-uv pip install -e ../../common -e .
+uv pip install -e ".[dev]"
 pytest
 ```
 

@@ -2,6 +2,30 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-03（续89）· owner 两项裁决（E 盘唯一离线介质/--require-installed 默认）+ 整改四轮对抗自检收敛
+
+#### Context
+
+owner 答复续88 遗留问题并指示对整改工作本身做多轮对抗式自检。
+
+#### Decision
+
+①E 盘为唯一存储介质：`SPEECHRL_DATA_DIR/program-archives/` 下的四个 git bundle 即默认且唯一
+离线副本（GitHub cold-backup 远端并存），不再另设第二介质。②`--require-installed` 采纳为主
+开发机默认（写入两份客户端指南）。③对抗自检四轮收敛：R1 机械反证扫描修 10 处活动面残留
+（4 处旧安装指令、3 处 gates 清单缺新门、CONTRIBUTING 2 处旧口径、实验台账缺 shared code
+revision 列），历史 integrity 收据与旧日志条目按 append-only 判不改；R2 独立数据重验全过
+（574/574 resolution 对镜像逐 blob 比中、claim-ledger 17/17 URI 可解析并修 1 处行号粘连、
+SNAPSHOT 13/13 三方一致、4/4 bundle sha256+verify+final-pin）；R3 故障注入 8/8 fail-closed
+（临时 worktree：计数漂移/决策记录篡改/删 resolution 行/无 waiver UNRESOLVED/未登记目录/
+namespace 漂移/缺 checkout）；R4 语义终审+全量验收绿。
+
+#### Consequences
+
+续88 遗留 owner 项全部关闭；剩余延期项仅 T5 的 LEGACY_W_ERA 物理收缩（R0 后）与 study 远程
+CI 首跑（push 授权后）。详单：`docs/checks/program-architecture/2026-08-03-post-reorg-remediation/`
+（Addendum）。
+
 ### 2026-08-03（续88）· 重整后架构复核整改 T0–T5 落地（真相对齐/574 冷备解析/工程地板）
 
 #### Context

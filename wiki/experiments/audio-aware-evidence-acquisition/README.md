@@ -30,7 +30,7 @@ artifact location、artifact hashes、result summary、deviations、decision。�
 
 ## Ledger
 
-| experiment_id | date | study commit | config hash | protocol hash | model rev | dataset rev | mlflow run | artifact location | artifact hashes | result summary | deviations | decision |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| experiment_id | date | study commit | shared code revision | config hash | protocol hash | model rev | dataset rev | mlflow run | artifact location | artifact hashes | result summary | deviations | decision |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
 （尚无正式实验。首条记录前必须：E0 D1–D4 关闭 + runtime 收据落盘。）
