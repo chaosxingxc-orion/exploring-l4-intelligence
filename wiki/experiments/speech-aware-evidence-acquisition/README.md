@@ -20,10 +20,10 @@ ESC-50 等 general-audio 数据不得进入本台账的实验。
 - **当前唯一自包含有效合同**（registry pin 指向本件）：
   [2026-08-04-owner-consolidated-execution-contract.md](2026-08-04-owner-consolidated-execution-contract.md)
 - Study 仓边界采用（续92 guard + 续93 语义 ExecutionPlan 门与合同字段 exposure ledger
-  + 2026-08-04 E0 闭合与三轮对抗加固：runtime-receipt-v2 全 build/bin 绑定、D3 冻结
-  机器强制含符号链接拒绝、exposure 行逐字段核验、首切片预算按切片总量强制含 gpu-hours
-  列且预算单元格必须有限非负）：
-  study commit `af12d6d75ff0f9470973db526eeb77b40a57e7c5`（前值 `879ff1bf…` 由本行取代）
+  + 2026-08-04 E0 闭合与四轮对抗加固：runtime-receipt-v2 全 build/bin 绑定、D3 冻结
+  机器强制含符号链接全序拒绝、exposure 行逐字段核验、首切片预算按切片总量强制含
+  gpu-hours 列且预算单元格必须有限非负）：
+  study commit `c86f62bb7ac90fb89e80b8c0843e32a43216f7bf`（前值 `af12d6d7…` 由本行取代）
 - 历史来源记录（事实继承、不回写；blob 见合并合同 §9）：
   [2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md](2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md)、
   [2026-08-04-owner-speech-domain-scope-and-identity-contract.md](2026-08-04-owner-speech-domain-scope-and-identity-contract.md)、
