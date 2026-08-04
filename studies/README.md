@@ -16,9 +16,10 @@ initialize the independent repository at `studies/<slug>/`.
 
 ## Current state
 
-One study is admitted: **speech-aware-evidence-acquisition**. The owner GO was signed on 2026-08-03;
-the effective speech-only scope and semantic identity were frozen on 2026-08-04 (see `registry.json`
-and `wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`).
+One study is admitted: **speech-aware-evidence-acquisition**. The single self-contained effective
+authority (2026-08-03 GO + speech-only identity + Stage‑3 paper-gate stop line) is pinned in
+`registry.json`:
+`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-consolidated-execution-contract.md`.
 Its checkout lives at `studies/speech-aware-evidence-acquisition/` with its own Git history and private
 remote. General/environmental-audio tasks are outside this study; downloaded cross-domain assets remain
 in the canonical lock. R1 remains sunset provenance and has no engineering repository.
