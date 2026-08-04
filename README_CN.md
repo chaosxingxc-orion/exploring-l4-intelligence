@@ -29,7 +29,7 @@ gold truth；各 study 怎么用（切分、采样、prompt、协议）是其私
 
 | Study（仓库） | 来源 | 开题 | 状态 |
 |---|---|---|---|
-| [audio-aware-evidence-acquisition](https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition) | R2（system-first-stage1c-v2 战役） | GO 2026-08-03 | Stage‑2A E0（无模型数据门）进行中 |
+| [speech-aware-evidence-acquisition](https://github.com/chaosxingxc-orion/speech-aware-evidence-acquisition) | R2（system-first-stage1c-v2 战役） | GO 2026-08-03；speech-only 身份 2026-08-04 | Stage‑2A E0（无模型数据门）进行中 |
 
 登记表：[`studies/registry.json`](studies/registry.json)；逐 study 实验台账：
 `wiki/experiments/<slug>/`。历史 W1–W4 工作仓已于 2026-08-03 退役——本地删除、远端保留为程序外
@@ -66,7 +66,7 @@ python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 
 # 开发已获准的 study（WSL2 内、激活 venv）
-cd studies/audio-aware-evidence-acquisition
+cd studies/speech-aware-evidence-acquisition
 uv pip install -e ".[dev]"
 pytest
 ```

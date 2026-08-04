@@ -10,17 +10,18 @@ knowledge** during pretraining. This series asks one question:
 
 > **How far can _training-free RL_ — reward-guided control that changes none of the core model's
 > weights or internal architecture — go to _activate_ that latent knowledge and lift a frozen,
-> black-box omni model's performance on speech / audio tasks?**
+> black-box omni model's performance on speech and spoken-language tasks?**
 
 **Program statement (owner rulings 2026-07-14/15, Decision-Log 续45/46; Gate S0 SIGNED 2026-07-15,
 training_free_scope = TF-Strict — [[2026-07-15-s0-program-identity-signoff]]).** The object we build and study is an
 **external reward-guided control plane** (an agentic system) around the frozen black-box core:
 observation/supply building, state & external memory, tool/retrieval use, candidate generation,
-evaluation, selection, budget/risk/stopping, provenance & information-boundary guarding.
+evaluation, selection, budget/risk/stopping, provenance & information-boundary guarding. The active
+study boundary is speech-only: environmental/general-audio tasks are not implied by the core being omni.
 **Training-free RL is the north-star principle pulling this system's design** — reward/advantage
 decides the *next action*; in-pool selection is its degenerate special case. The **first innovation
 hypothesis is the system itself** (the founding UMBRELLA identity, 2026-06-26): occupancy against
-ReAct / Reflexion / LATS / IAD / MM-ReAct / AudioToolAgent-class prior work is under survey — **no
+ReAct / Reflexion / LATS / IAD / MM-ReAct and speech-agent/tool-use prior work is under survey — **no
 "first-ever" claims** before that check closes.
 
 - **Black-box contract**: core methods may not require weights, gradients, hidden states, attention,
@@ -101,7 +102,7 @@ dead (L2–L3 criteria unmet).
 冻结黑盒核心的**外部 reward-guided 控制平面**（agentic system）：观察/供给构造、状态与外部记忆、
 工具/检索、候选生成、评估、选择、预算/风险/停止、溯源与信息边界守卫。**免训练 RL 是牵引该系统
 设计的北极星原则**——reward/advantage 决定下一步动作，池内选择是退化特例。**第一创新假设 =
-系统本身**（立项即有的 UMBRELLA 身份）：对 ReAct/Reflexion/LATS/IAD/MM-ReAct/AudioToolAgent 类
+系统本身**（立项即有的 UMBRELLA 身份）：对 ReAct/Reflexion/LATS/IAD/MM-ReAct 与 speech-agent/tool-use 类
 先行工作的占据核查未完成前，**不得宣称任何「首个」**。
 
 - **黑盒合同**：核心方法不得要求 weights/gradients/hidden states/attention/保证 logprobs；

@@ -13,7 +13,7 @@ Status vocabulary:
   future adoption; excluded from the active API story; a new consumer must adopt it explicitly
   (study migration-manifest row + umbrella commit pin), not inherit it.
 
-Consumer rule: as of 2026-08-03 the admitted study `audio-aware-evidence-acquisition` does **not**
+Consumer rule: as of 2026-08-04 the admitted study `speech-aware-evidence-acquisition` does **not**
 import `speechrl_common` (its migration manifest defers the dependency until first consumption, with
 an exact-commit pin required at that point). Active consumers of every module: **none** — the only
 runtime consumer of this package today is its own test suite (`common/tests`).

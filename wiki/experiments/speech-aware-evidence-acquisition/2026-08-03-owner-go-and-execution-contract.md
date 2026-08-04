@@ -2,6 +2,7 @@
 title: "Owner GO and execution contract: audio-aware evidence acquisition"
 record_id: "AAEA-OWNER-GO-EXECUTION-CONTRACT-2026-08-03"
 date: "2026-08-03"
+status: "HISTORICAL_ISSUANCE__EFFECTIVE_IDENTITY_AND_SCOPE_SUPERSEDED_2026-08-04"
 issued_by: "research owner (in-session dated directive, 2026-08-03)"
 semantic_research_object: "audio-aware evidence acquisition"
 source_candidate_provenance: "R2 (system-first-stage1c-v2)"
@@ -12,6 +13,11 @@ default_values_policy: "ADOPTED_AS_PROPOSED_DEFAULT__AMENDABLE_BY_DATED_AMENDMEN
 ---
 
 # Owner GO 与执行合同：audio-aware evidence acquisition
+
+> 历史签发件：本件证明 2026-08-03 的 owner GO 与原始预算授权。当前研究名称、speech-only
+> 域边界、远端/本地路径、包名和实验命名空间已由
+> `2026-08-04-owner-speech-domain-scope-and-identity-contract.md` 自包含取代；下文旧名称与路径保留为
+> 当时事实，不得作为当前路由。
 
 ## 决定
 

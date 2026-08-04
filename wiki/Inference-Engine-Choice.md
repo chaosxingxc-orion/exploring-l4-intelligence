@@ -55,7 +55,7 @@ Provisioning is codified: `scripts/env-setup.sh` **Phase 5** builds llama.cpp (C
 `scripts/data/fetch-qwen3-omni-gguf.sh` fetches exactly the two GGUF files (whole-repo pull >110 GB
 deliberately avoided — lockfile source kind `hf-manual`). Reference best-of-N runners (rescued from
 the retired W1 work):
-`studies/audio-aware-evidence-acquisition/reference/w1-snapshot/baselines/repro_asr_best_of_n_v2.py`
+`studies/speech-aware-evidence-acquisition/reference/w1-snapshot/baselines/repro_asr_best_of_n_v2.py`
 (includes the proven prompt-cache livelock fix bundle) and `repro_asr_best_of_n_llamacpp.py`.
 
 ## Per-task engine matrix
@@ -91,4 +91,4 @@ Phase 5；模型按文件取自 `fetch-qwen3-omni-gguf.sh`（lockfile 来源类�
 **任务取舍：** 本地 30B 推理/best-of-N → llama.cpp（已验证）；嵌入主干不受影响；vLLM 无限期缓议。
 昔日 verl/vLLM 微调与 LoRA 部署方案属已退役的 W 时代表述，零参数训练主线下仅存于 Git 历史。
 参考 runner 已抢救至
-`studies/audio-aware-evidence-acquisition/reference/w1-snapshot/baselines/`。
+`studies/speech-aware-evidence-acquisition/reference/w1-snapshot/baselines/`。

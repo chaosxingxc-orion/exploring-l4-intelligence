@@ -15,6 +15,10 @@ SHA-256 一致，Earnings22 不再含原始 LFS pointer。该裁定只关闭数�
 
 当前资产身份、状态、许可、阻塞原因与验证字段的**唯一 live source**是
 `docs/datasets.lock.json`。本文件是 2026-08-02 的审计快照，不得反向成为第二份状态表。
+2026-08-04 的当前合同已将 profile `r2-core` 语义迁移为 `speech-aware-core`，并将研究边界收窄为
+speech-only；本收据中的旧 profile 名、SQA/ContextASR partial 数和 R2 标题均只描述 2026-08-02
+观测时点。当前 lock 已记录二者和 AMI 为 `COMPLETE`，FSD50K/AudioSet/ESC-50 为本地保留但
+不进入该 study。
 
 ## 核心闭包证据
 
@@ -50,7 +54,7 @@ SHA-256 OID 和 size materialize；最终 `remaining_pointers=0`。`subset10` �
 ## 离线核验
 
 - canonical lock：104 assets；86 `COMPLETE`、3 `PARTIAL`、6 `MISSING`、9 `BLOCKED`；
-- `r2-core --full --fail-on-drift`：3/3 `COMPLETE`，drift=0；
+- 历史 `r2-core --full --fail-on-drift`（现名 `speech-aware-core`）：3/3 `COMPLETE`，drift=0；
 - 全量 inventory、单元测试、Python 编译、shell 语法和 diff whitespace gate 的最终结果见
   同目录 `asset-acquisition-receipt.json`；
 - `sf_current_package_check.py --check` 的 trusted-code-graph 差异来自本任务开始前已有的

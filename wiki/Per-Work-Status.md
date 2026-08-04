@@ -1,7 +1,7 @@
 # Per-Work Status
 
 > Targeted secondary view; default current-state entry is `wiki/Research-Objective.md`.
-> Last refreshed 2026-08-03. Historical narration is cold: start from the campaign index or
+> Last refreshed 2026-08-04. Historical narration is cold: start from the campaign index or
 > `wiki/archive/`, then use targeted search. Literature work routes through
 > `wiki/survey/README.md`.
 
@@ -11,11 +11,12 @@
 - **Repository rule:** admitted research objects use independent semantic GitHub repos under `studies/`.
   Candidate IDs remain audit provenance and never become engineering names. R1 sunset before admission,
   so it has no repo. `studies/registry.json` contains one admitted study.
-- **First admitted study:** audio-aware evidence acquisition (source-candidate provenance R2).
-  `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03; repo
-  `studies/audio-aware-evidence-acquisition/` (private remote) with the freeze sheet in
-  `wiki/experiments/audio-aware-evidence-acquisition/`; innovation and final method remain
-  Stage‑2 outputs. Next: close model-free E0 (D1–D4) plus runtime receipt, then the R0 slice.
+- **First admitted study:** speech-aware evidence acquisition (source-candidate provenance R2).
+  `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03; speech-only scope/identity effective
+  2026-08-04; repo `studies/speech-aware-evidence-acquisition/` (private remote) with the freeze sheet
+  in `wiki/experiments/speech-aware-evidence-acquisition/`. General/environmental audio is excluded;
+  local downloaded bytes are retained globally. Innovation and final method remain Stage‑2 outputs.
+  Next: close model-free E0 (D1–D4) plus runtime receipt, then the R0 slice.
 - **Flow:** the admitted study may enter engineering while the next candidate is surveyed; R3–R9 review
   is not a global prerequisite. D0 acquisition is closed for Earnings21, Earnings22 and ConEC; model/API
   calls stay gated behind E0 closure and the contract's budget bands; publication and Wiki mirror remain

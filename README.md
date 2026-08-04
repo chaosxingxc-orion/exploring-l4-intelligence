@@ -5,8 +5,8 @@
 > Repo slug: **`exploring-l4-intelligence`** — charting a path toward L4 ("Innovator") intelligence.
 
 The **umbrella governance repo** for a research program on **training-free, reward-guided
-inference-time control of frozen speech / omni multimodal LLMs** — an external reward-guided control
-plane around an **API-only frozen speech/omni core**, changing no base-model weights and no
+inference-time control of frozen speech-capable omni/multimodal LLMs** — an external reward-guided
+control plane around an **API-only frozen core**, changing no base-model weights and no
 base-model structure. Full statement of purpose: the Wiki's [[Project-Thesis]] page; current
 research state: [[Research-Objective]].
 
@@ -34,7 +34,7 @@ promoted dataset (derivation script + sample identity + provenance) back in the 
 
 | Study (repo) | Provenance | Opened | State |
 |---|---|---|---|
-| [audio-aware-evidence-acquisition](https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition) | R2, campaign system-first-stage1c-v2 | GO 2026-08-03 | Stage‑2A E0 (model-free data gates) in progress |
+| [speech-aware-evidence-acquisition](https://github.com/chaosxingxc-orion/speech-aware-evidence-acquisition) | R2, campaign system-first-stage1c-v2 | GO 2026-08-03; speech-only identity 2026-08-04 | Stage‑2A E0 (model-free data gates) in progress |
 
 Registry: [`studies/registry.json`](studies/registry.json); per-study experiment ledger:
 `wiki/experiments/<slug>/`. The historical W1–W4 work repos were retired on 2026-08-03 — local
@@ -72,7 +72,7 @@ python scripts/checks/ai_context_surface_check.py
 python scripts/checks/build_ai_context_manifest.py --check
 
 # work on the admitted study (inside WSL2, venv active)
-cd studies/audio-aware-evidence-acquisition
+cd studies/speech-aware-evidence-acquisition
 uv pip install -e ".[dev]"
 pytest
 ```

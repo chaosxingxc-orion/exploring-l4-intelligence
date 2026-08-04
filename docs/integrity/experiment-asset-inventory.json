@@ -2,7 +2,7 @@
   "schema": "experiment-asset-inventory-v2",
   "study_registry": {
     "path": "studies/registry.json",
-    "sha256": "bd78a4649a44e77db673a2da36f7594ec4e9af0f815e548e63a91bbed70eb97c"
+    "sha256": "073e98fa4dd08c191f3d9f76225ee393eda4139d97b22cdb9e59331fec1e7d95"
   },
   "experiment_control_plane": "wiki/Experiment-Assets.md",
   "asset_authorities": {

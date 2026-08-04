@@ -7,7 +7,7 @@ reorganization and is retained as historical design rationale only — it is no 
 operating instruction. Statements below about keeping W1–W4 under `projects/` and withholding study
 repository creation describe the pre-implementation state. Current operating authority:
 `docs/architecture.md`, the owner execution contract
-(`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`)
+(`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`)
 and the post-reorganization review
 (`docs/superpowers/specs/2026-08-03-post-reorganization-architecture-review-and-remediation-proposal.md`).
 

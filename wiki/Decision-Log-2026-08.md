@@ -351,3 +351,25 @@ inbound-reference 搬运阻断；commit-pinned `git show <sha>:<path>` 取回不
 111 件不可变 PASS）；campaign 索引生成器随 stage1a 战役闭合退役，既有 INDEX 冻结为史料。
 **Supersedes：** 「sf_current_package_check 是伞仓真门禁」的表述与 CURRENT 类的一切现行语义。
 失效条件：owner 重启程序级调研包制度。
+
+**2026-08-04 · 现役 study 收窄为 speech-only，并完成语义身份、远端仓与数据绑定迁移：**
+**Context：** owner 复核 R2 数据清单后指出，当前研究聚焦 speech domain；过去文献扫描把 speech
+音频载体与 general/environmental audio 任务混为一谈，并出现“论文新增数据集即自动下载/实验”的
+范围膨胀。同时，FSD50K、AudioSet 等资产已耗时完成下载，owner 明确要求保留本地字节而非删除。
+**Decision：** ①有效研究对象由 `audio-aware evidence acquisition` 收窄并重命名为
+`speech-aware evidence acquisition`，远端改名
+`chaosxingxc-orion/speech-aware-evidence-acquisition`，本地 checkout、Wiki experiment/check 目录、
+Python package 与实验 namespace 统一为 speech-aware / `SAEA-E`。②研究范围只含 ASR、实体、
+contextual biasing、spoken QA、会议语音等 speech/spoken-language 任务；speech 的 WAV/MP3 输入仍是
+合法载体，排除的是 general-audio task，不是所有音频文件。③ Stage‑2 数据绑定：Earnings21/22+
+ConEC 为 core，SLUE-SQA-5、ContextASR-Bench、AMI 为 secondary speech；FSD50K、AudioSet、ESC-50
+保持本地 `COMPLETE`，转为 `retained-cross-domain`，不得进入本 study 的实验、baseline 或结论。
+④ profile 从候选号 `r2-*` 迁移为 admitted study 的 `speech-aware-*` 语义名。⑤有效合同明确分离
+OBS、知识组织 ORG、证据供给 SUPPLY、知识使用 USE，并冻结 effectiveness、reasonableness、
+efficiency 三类评价；新增论文只有被具体预注册实验/baseline 消费时才产生下载提案。
+**Consequences：** 2026-08-03 原 GO 合同与正式开题审计件保留当时事实；当前自包含权威改为
+`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`。
+不删除 `SPEECHRL_DATA_DIR` 中任何已验证资产；Stage‑2A 立即转向 E0→R0，不再以新增下载阻塞工程。
+**Supersedes：** 取代 2026-08-03 GO 条目中的旧 semantic identity、路径、远端、`AAEA-E` 及过宽
+audio-domain 表述；GO、预算与 fail-closed 授权继续有效。失效条件：owner 另行修改 study domain、
+身份或数据保留政策。

@@ -15,9 +15,10 @@
 
 ## 按研究对象划分 · By research object
 
-- **audio-aware evidence acquisition（R2 provenance，现役 study）**：开题评审与整改链＝
-  续76–87（07 卷末段 + 08 卷）；GO/建仓/数据线/执行合同＝08 卷 08-03 各条；实验期决策此后
-  记 08 卷并在 `wiki/experiments/audio-aware-evidence-acquisition/` 留台账指针。
+- **speech-aware evidence acquisition（R2 provenance，现役 study）**：开题评审与整改链＝
+  续76–87（07 卷末段 + 08 卷）；GO/建仓＝08 卷 08-03，speech-only 收窄与全栈语义迁移＝
+  08 卷 08-04；实验期决策记 08 卷并在
+  `wiki/experiments/speech-aware-evidence-acquisition/` 留台账指针。
 - **R1（已日落）**：授权补正与日落＝续76（07 卷）；context/ICL 证据链归档于
   `wiki/archive/working/stage1c-portfolio/`。
 - **R3–R9（候选，OWNER_UNVERIFIED）**：候选定义＝续76–78 附带裁决（07 卷）；提案档案在

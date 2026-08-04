@@ -20,7 +20,7 @@ Zero-to-ready for a new collaborator or AI. Assumes Windows + WSL2 `Ubuntu-24.04
 6. Do not create a study checkout from a candidate. After owner GO plus an execution contract, use the
    semantic URL in `studies/registry.json` and clone that independent repository into `studies/`.
 7. Follow the owning repository's README for execution. One study is admitted
-   (audio-aware-evidence-acquisition); its model/API execution is bounded by its execution contract
+   (speech-aware-evidence-acquisition); its model/API execution is bounded by its execution contract
    (E0 data gates plus runtime receipt before any model touch). The retired W1–W4 work repos are cold
    backups, not entry points.
 
@@ -36,5 +36,5 @@ Remote creation, push and Wiki publication require explicit authorization.
 `SPEECHRL_DATA_DIR`。
 
 候选方向不能提前克隆/创建 study，只有 owner GO 与执行合同关闭后才建仓。当前获准 study 为
-audio-aware-evidence-acquisition，其模型/API 执行受其执行合同约束（先关 E0 数据门+runtime 收据）。
+speech-aware-evidence-acquisition，其模型/API 执行受其执行合同约束（先关 E0 数据门+runtime 收据）。
 已退役的 W1–W4 是冷备份，不是入口。未经明确授权不得创建远程仓、push 或发布 Wiki。

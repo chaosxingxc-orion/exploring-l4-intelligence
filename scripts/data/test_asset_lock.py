@@ -27,17 +27,23 @@ class AssetLockTest(unittest.TestCase):
     def test_lock_is_valid(self) -> None:
         self.assertEqual([], asset_lock.validate(self.lock))
 
-    def test_r2_core_is_exactly_the_minimum_carrier(self) -> None:
+    def test_speech_aware_core_is_exactly_the_minimum_carrier(self) -> None:
         names = {
             item["name"]
-            for item in asset_lock.selected_assets(self.lock, [], "r2-core")
+            for item in asset_lock.selected_assets(self.lock, [], "speech-aware-core")
         }
         self.assertEqual(
             {"earnings21-original", "earnings22-original", "conec"}, names
         )
 
     def test_nonfetchable_assets_are_not_in_active_fetch_profiles(self) -> None:
-        active = {"r2-core", "r2-diagnostics", "r2-secondary", "r2-annotations", "r2-small-public"}
+        active = {
+            "speech-aware-core",
+            "speech-aware-diagnostics",
+            "speech-aware-secondary",
+            "speech-aware-annotations",
+            "speech-aware-small-public",
+        }
         for item in asset_lock.assets(self.lock):
             if active.intersection(item.get("profiles", [])):
                 self.assertNotIn(

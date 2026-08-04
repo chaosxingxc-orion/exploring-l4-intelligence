@@ -51,7 +51,7 @@ python -c "import torch; print(torch.__version__, torch.cuda.get_device_name(0))
 ## 3. Working on the admitted study
 
 ```bash
-cd "$REPO/studies/audio-aware-evidence-acquisition"
+cd "$REPO/studies/speech-aware-evidence-acquisition"
 uv pip install -e ".[dev]"
 pytest
 ```

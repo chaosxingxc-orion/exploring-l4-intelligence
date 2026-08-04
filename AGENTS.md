@@ -74,7 +74,7 @@ Run ML commands in WSL2 with `source ~/.venvs/speechrl/bin/activate`:
 bash scripts/wsl-setup.sh
 bash scripts/env-setup.sh
 
-cd studies/audio-aware-evidence-acquisition
+cd studies/speech-aware-evidence-acquisition
 uv pip install -e ".[dev]"
 pytest
 

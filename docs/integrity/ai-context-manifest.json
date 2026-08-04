@@ -6,28 +6,28 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "c3c0906429df5be16f0ca1d54253d85e3986a2ce41140584199331acc089896c"
+      "sha256": "08d46c467f2e1b524f1f53901e08564c063cf41c02609238be735bbe92e218b2"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "c8e7cc0e4b43a17c638e3b78045b684aaaf1097e994591a02e892a6c7a611fe0"
+      "sha256": "425130de1b70a5af4d7062c50b82272b3cc117bfc8ce80bf6336e6048c433666"
     },
     {
       "path": "wiki/Project-Thesis.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "program north star",
-      "sha256": "c9d45f7c96c143ae3b70005377c2aa47c352a68763c9d6c9ff1672ea02909a3d"
+      "sha256": "39593a178fb78aec1195e1ca65526cbc079944fbfdee522fa917260543ba006c"
     },
     {
       "path": "wiki/Per-Work-Status.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "ccc35b172e77b3ae94c467c483d5a2fbc055609141dee037f1d9d4cc2a411f00"
+      "sha256": "c61c968db506c431d2ab23ee504fb90d4ccfcf1beaa0060f96d206af0ec4e391"
     },
     {
       "path": "wiki/AI-Collaboration.md",
@@ -41,7 +41,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "2c720ef05eac1bb0cbc22e4eb5b11646e77df897c8ef86d3b1dfec3ec5981759"
+      "sha256": "0f7019e9f1508abb0a0a870e70b46ac9d9c0ffa72ea0e5e4766a32dc71b304bb"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",

@@ -6,13 +6,14 @@ lifecycle and asset graph; it does not duplicate executable repositories or larg
 ## Current study registry
 
 - Admitted study repositories: **1**. Machine authority: `studies/registry.json`.
-- **audio-aware evidence acquisition** (source candidate provenance: R2) is admitted:
-  `OWNER_GO_AND_EXECUTION_CONTRACT` signed 2026-08-03
-  (`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`).
-  Its repository is `studies/audio-aware-evidence-acquisition/` (independent Git history, private
-  remote); current stage: Stage‑2A E0 (D1–D4 model-free closure) in progress. Innovation and final
-  method remain Stage‑2A/2B outputs; model-facing execution stays fail-closed behind E0 closure and
-  the runtime receipt.
+- **speech-aware evidence acquisition** (source candidate provenance: R2) is admitted. Owner GO was
+  signed 2026-08-03; the current speech-only scope and semantic identity were frozen 2026-08-04
+  (`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`).
+  Its repository is `studies/speech-aware-evidence-acquisition/` (independent Git history, private
+  remote); current stage: Stage‑2A E0 (D1–D4 model-free closure) in progress. General/environmental
+  audio is excluded from this study while already downloaded cross-domain assets remain governed in
+  the canonical lock. Innovation and final method remain Stage‑2A/2B outputs; model-facing execution
+  stays fail-closed behind E0 closure and the runtime receipt.
 - R1 is `NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2`; it has no study repository. Its survey
   and baseline evidence remain reachable through the current survey router and audit history.
 - Candidate analyses R3–R9 are not repositories. They enter the study registry only if and when an
@@ -23,8 +24,10 @@ while the next candidate direction is surveyed. Completion of all candidate surv
 prerequisite for an admitted study.
 
 Current carrier readiness: Earnings21, Earnings22 and ConEC are materialized at pinned revisions
-(`D0_CLOSED`); D1–D4 alignment, leakage, scorer and ten-sample trace receipts remain pending. Canonical
-dataset identity lives in `docs/datasets.lock.json` rather than this page.
+(`D0_CLOSED`); SLUE-SQA-5, ContextASR-Bench and AMI are complete speech-domain secondary carriers.
+D1–D4 alignment, leakage, scorer and ten-sample trace receipts remain pending. FSD50K, AudioSet and
+ESC-50 are retained local cross-domain assets with no experiment binding here. Canonical dataset
+identity lives in `docs/datasets.lock.json` rather than this page.
 
 ## Authority boundaries
 
@@ -32,7 +35,7 @@ dataset identity lives in `docs/datasets.lock.json` rather than this page.
 |---|---|
 | Study identity, current stage, protocol freeze, deviations, result synthesis and decisions | umbrella Wiki |
 | Code, configs, tests, lockfiles, small fixtures and run entrypoints | independent study Git repository under `studies/<semantic-slug>/` |
-| Dataset/model revisions and large raw audio, generations, traces, logs and outputs | `SPEECHRL_DATA_DIR` |
+| Dataset/model revisions and large raw speech/audio carriers, generations, traces, logs and outputs | `SPEECHRL_DATA_DIR` |
 | Run metadata and artifact links | MLflow, referenced by the Wiki record |
 | Release hashes and reproducibility receipts | release-scoped `docs/checks/<study-slug>/<release-id>/` or the study release |
 

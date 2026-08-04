@@ -77,8 +77,8 @@ profiles are selected through asset_lock.py so the default command never expands
   bash scripts/data/fetch-data.sh --list
   bash scripts/data/fetch-data.sh --dry-run
   bash scripts/data/fetch-data.sh meld slurp
-  python scripts/data/asset_lock.py list --profile r2-core
-  python scripts/data/asset_lock.py fetch --profile r2-core
+  python scripts/data/asset_lock.py list --profile speech-aware-core
+  python scripts/data/asset_lock.py fetch --profile speech-aware-core
   python scripts/data/asset_lock.py inventory --fail-on-drift
 
 Assets stay outside Git. Fetching records local receipts but never edits the canonical lock; status

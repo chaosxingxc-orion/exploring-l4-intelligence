@@ -4,7 +4,8 @@ Model weights and datasets are **deliberately kept out of this repository**. Git
 source URLs, immutable revisions/content fingerprints, documentation and download/check scripts.
 [`datasets.lock.json`](datasets.lock.json) is the **only current asset authority**. It contains the
 original reproducible `FROZEN_BASELINE` as one named profile, every observed non-baseline local asset,
-the R2 acquisition profiles, deferred/restricted/unavailable records, exact upstream revisions and
+the admitted study's semantic acquisition profiles, retained cross-domain assets,
+deferred/restricted/unavailable records, exact upstream revisions and
 local verification facts. Historical layered inventories are release receipts, not current manifests.
 `datasets.candidates.json` and `datasets.gap-candidates.json` are compatibility pointers with no facts.
 
@@ -21,11 +22,12 @@ from WSL (moved off D: on 2026-07-09). Reached via `${SPEECHRL_DATA_DIR:-<repo>/
 
 Each lock record separates lifecycle from local state: `lifecycle` says why an asset is governed;
 `status` says whether its bytes are `COMPLETE`, `PARTIAL`, `MISSING` or `BLOCKED`; `profiles` define
-bounded fetch groups. An available dataset is not automatically paper-exact reproducibility—each R2
+bounded fetch groups. An available dataset is not automatically paper-exact reproducibility—each study
 record also retains its protocol/implementation claim limit.
 
 The `frozen-baseline` profile preserves the prior 28-dataset baseline and is still the default for
-`fetch-data.sh` with no names. R2 data must be requested by its explicit profile or asset name. The
+`fetch-data.sh` with no names. Study data must be requested by its explicit semantic profile or asset
+name. The
 lock-driven implementation is `scripts/data/asset_lock.py`; shell entry points remain compatibility
 wrappers.
 
@@ -41,9 +43,9 @@ bash scripts/data/fetch-data.sh                 # fetch/verify the frozen-baseli
 bash scripts/data/fetch-data.sh meld slurp      # fetch only named assets
 bash scripts/data/fetch-data.sh --dry-run       # print the commands without downloading
 bash scripts/data/inventory.sh                  # inventory every governed asset from the lock
-python scripts/data/asset_lock.py list --profile r2-core
-python scripts/data/asset_lock.py fetch --profile r2-core
-python scripts/data/asset_lock.py fetch --profile r2-diagnostics
+python scripts/data/asset_lock.py list --profile speech-aware-core
+python scripts/data/asset_lock.py fetch --profile speech-aware-core
+python scripts/data/asset_lock.py fetch --profile speech-aware-diagnostics
 ```
 
 Fetching never mutates the lock automatically. After bytes are independently verified, update the

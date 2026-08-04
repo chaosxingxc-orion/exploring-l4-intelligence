@@ -9,16 +9,17 @@
     "docs/datasets.gap-candidates.json",
     "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json"
   ],
-  "generated": "2026-08-02; baseline history retained below; non-baseline catalog refreshed from the 2026-07-23 full inventory and the 2026-08-02 R2 acquisition audit",
+  "generated": "2026-08-04; five public assets closed by official-source verification; active study profiles renamed and narrowed to speech-only while cross-domain bytes remain local",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
   "profiles": {
     "frozen-baseline": "The reproducible June/July baseline; default fetch profile for backward compatibility.",
     "local-candidates": "Observed non-baseline local assets; presence does not authorize an experiment.",
-    "r2-core": "Earnings21, Earnings22 and ConEC Stage-2A minimum data closure.",
-    "r2-diagnostics": "PRISM, Rare5k and BuzzWord diagnostic carriers.",
-    "r2-secondary": "SLUE-SQA-5 and ContextASR-Bench public secondary carriers.",
-    "r2-annotations": "TED-EL annotations only; TED-LIUM3 audio remains source-unstable.",
-    "r2-small-public": "Small optional public assets: ATCO2-1h, Eka-Medical and LibriSQA.",
+    "speech-aware-core": "Earnings21, Earnings22 and ConEC Stage-2A minimum speech-domain closure.",
+    "speech-aware-diagnostics": "PRISM, Rare5k and BuzzWord speech/entity diagnostic carriers.",
+    "speech-aware-secondary": "SLUE-SQA-5, ContextASR-Bench and AMI public secondary speech carriers.",
+    "speech-aware-annotations": "TED-EL annotations only; TED-LIUM3 speech audio remains source-unstable.",
+    "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
+    "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -40,6 +41,43 @@
     "total_h": "381.0G"
   },
   "amendments": [
+    {
+      "date": "2026-08-04",
+      "task": "speech-only study binding and semantic profile migration",
+      "changes": [
+        {
+          "kind": "profile-identity-migration",
+          "note": "Renamed candidate-derived r2-* fetch profiles to the admitted semantic study identity speech-aware-*; asset bytes, revisions, sizes, checksums and COMPLETE status were unchanged.",
+          "entries": ["earnings21-original", "earnings22-original", "conec", "prism-synthetic", "rare5k-reconstruction", "buzzword", "slue-sqa-5", "contextasr-bench", "ami-meeting-corpus", "ted-el-annotations", "atco2-1h", "eka-medical", "librisqa"]
+        },
+        {
+          "kind": "speech-domain-binding",
+          "note": "Admitted AMI as a secondary meeting-speech carrier. FSD50K, AudioSet metadata/features and ESC-50 remain locally COMPLETE but are explicitly outside the speech-aware study and moved to the retained-cross-domain profile; no local data was deleted.",
+          "entries": ["ami-meeting-corpus", "fsd50k", "audioset-metadata-features", "esc-50"]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "task": "official-source dataset closure and canonical lock refresh",
+      "changes": [
+        {
+          "kind": "status-closure",
+          "note": "Closed five formerly partial public assets after exact payload closure and source-appropriate full verification; none is promoted to a speech-aware core-start gate.",
+          "entries": ["audioset-metadata-features", "ami-meeting-corpus", "slue-sqa-5", "fsd50k", "contextasr-bench"]
+        },
+        {
+          "kind": "aggregate-size-correction",
+          "note": "Corrected the AudioSet aggregate expected size from 2694310385 to 2694320385 bytes; the seven governed per-object sizes and hashes were already correct and sum to the corrected value.",
+          "entries": ["audioset-metadata-features"]
+        },
+        {
+          "kind": "stale-cache-cleanup",
+          "note": "Removed seven obsolete Hugging Face .incomplete duplicate cache files after ContextASR-Bench payload hash closure; governed payload files were untouched.",
+          "entries": ["contextasr-bench"]
+        }
+      ]
+    },
     {
       "date": "2026-07-09",
       "task": "A4 (reproducibility pinning debts)",
@@ -945,7 +983,7 @@
       },
       "revision": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
       "lifecycle": "STAGE2_CORE",
-      "profiles": ["r2-core"],
+      "profiles": ["speech-aware-core"],
       "status": "COMPLETE",
       "license": "CC-BY-SA-4.0",
       "verification": {
@@ -963,7 +1001,7 @@
         "shared_payload_manifest_sha256": "5d2071f974302ce77a08b64247ac90f3ad0b2ddab4d7d0eae442bfd22c4f8088",
         "method": "Pinned sparse Git checkout; exact post-copy SHA-256 verification; metadata call/duration reconciliation"
       },
-      "research_role": "R2 main evaluation carrier; 44 calls, approximately 39 hours",
+      "research_role": "Speech-aware study main evaluation carrier; 44 calls, approximately 39 hours",
       "paper_exact": false,
       "claim_limit": "Official bytes and entity layer are reproducible; paper-specific slicing and normalization remain protocol work."
     },
@@ -983,7 +1021,7 @@
       },
       "revision": "c05ab6fd8b4b627d123c922a22a39e993dd37635",
       "lifecycle": "STAGE2_CORE",
-      "profiles": ["r2-core"],
+      "profiles": ["speech-aware-core"],
       "status": "COMPLETE",
       "license": "CC-BY-SA-4.0",
       "verification": {
@@ -1005,9 +1043,9 @@
         "symlink_manifest_sha256": "8a96b36225049f67e0cc3a7fa0c5983ddd18a7a9c1cd24707173584470c88970",
         "method": "Pinned sparse Git checkout; 125 undeclared LFS pointer blobs materialized and OID-verified; exact post-copy SHA-256 and symlink verification"
       },
-      "research_role": "R2 dev/calibration carrier; 125 calls, approximately 119 hours",
+      "research_role": "Speech-aware study dev/calibration carrier; 125 calls, approximately 119 hours",
       "paper_exact": false,
-      "claim_limit": "No Earnings21-equivalent token entity annotations; the R2 dev reward contract must be frozen separately."
+      "claim_limit": "No Earnings21-equivalent token entity annotations; the study dev reward contract must be frozen separately."
     },
     {
       "name": "conec",
@@ -1016,7 +1054,7 @@
       "source": {"kind": "git", "url": "https://github.com/huangruizhe/ConEC.git"},
       "revision": "88440713d8b80dc4f19b225f6480237e78c379de",
       "lifecycle": "STAGE2_CORE",
-      "profiles": ["r2-core"],
+      "profiles": ["speech-aware-core"],
       "status": "COMPLETE",
       "license": "paper CC-BY-NC-4.0; repository has no clear dataset-level LICENSE",
       "verification": {"observed_at": "2026-08-02", "git_head": "88440713d8b80dc4f19b225f6480237e78c379de", "payload_size_bytes": 370772197, "payload_files": 514},
@@ -1035,7 +1073,7 @@
       },
       "revision": "e08a2b157119e24d03ff34738dac7828dee9494f",
       "lifecycle": "DIAGNOSTIC",
-      "profiles": ["r2-diagnostics"],
+      "profiles": ["speech-aware-diagnostics"],
       "status": "COMPLETE",
       "license": "cc-by-nc-4.0",
       "verification": {"observed_at": "2026-08-02", "git_head": "e08a2b157119e24d03ff34738dac7828dee9494f", "attachment_archive_entries": 15, "method": "Git commit, exact byte length, SHA-256 and ZIP CRC"},
@@ -1054,7 +1092,7 @@
       },
       "revision": "derived-from-librispeech-lock-fingerprint-and-script",
       "lifecycle": "DERIVED",
-      "profiles": ["r2-diagnostics"],
+      "profiles": ["speech-aware-diagnostics"],
       "status": "COMPLETE",
       "license": "inherits LibriSpeech source terms",
       "dependencies": ["librispeech"],
@@ -1079,7 +1117,7 @@
       "source": {"kind": "hf", "id": "Luo9766/BuzzWord"},
       "revision": "2d7037910ed1fbeacd59f8593ea95b6174f1129b",
       "lifecycle": "DIAGNOSTIC",
-      "profiles": ["r2-diagnostics"],
+      "profiles": ["speech-aware-diagnostics"],
       "status": "COMPLETE",
       "license": "apache-2.0",
       "expected_payload": {"size_bytes": 1471751153, "files": 1503, "rows": 1500},
@@ -1094,13 +1132,13 @@
       "source": {"kind": "hf", "id": "asapp/slue-phase-2", "include": ["sqa5/**", "README.md", ".gitattributes"]},
       "revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a",
       "lifecycle": "SECONDARY_CARRIER",
-      "profiles": ["r2-secondary"],
-      "status": "PARTIAL",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
       "license": "mixed: CC-BY-SA-4.0 and Apache-2.0 components; see dataset card",
       "expected_payload": {"size_bytes": 118074483514, "files": 301, "rows": 50915},
-      "verification": {"observed_at": "2026-08-02", "resolved_revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a", "complete_files": 4, "complete_bytes": 821867405, "missing_files": 297, "missing_bytes": 117252616109, "method": "remote pinned file-list and exact local byte-size diff", "disposition": "resumable secondary acquisition; not a Stage-2 core-start gate"},
+      "verification": {"observed_at": "2026-08-04", "resolved_revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a", "payload_files": 301, "payload_size_bytes": 118074483514, "lfs_sha256_files": 299, "fixed_revision_raw_sha256_files": {".gitattributes": "79deb409a995d414d9b2e89b5e16a5f46fcaa7596c63242dd0bd72311a422458", "README.md": "57dacc6cba95f40da9dca08689879c509beffa1a3703fdc6de8942ed29fa9dc5"}, "hf_api_file_manifest_sha256": "03ff1c229b383a64c6b2494058946fdea75a66ad627d601f23dda910ae206cc8", "partial_markers": 0, "method": "official Hugging Face pinned file list, exact byte-size closure, per-file LFS SHA-256, and fixed-revision raw-byte SHA-256", "disposition": "complete secondary carrier; not a Stage-2 core-start gate"},
       "dependencies": ["slue-toolkit"],
-      "research_role": "O-arm spoken QA carrier; not an R2 core-start gate"
+      "research_role": "Spoken-QA secondary carrier for the speech-aware study; not a core-start gate"
     },
     {
       "name": "contextasr-bench",
@@ -1109,12 +1147,12 @@
       "source": {"kind": "hf", "id": "MrSupW/ContextASR-Bench"},
       "revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6",
       "lifecycle": "SECONDARY_CARRIER",
-      "profiles": ["r2-secondary"],
-      "status": "PARTIAL",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
       "license": "mit",
       "expected_payload": {"size_bytes": 96662324651, "files": 35, "rows": 41329},
-      "verification": {"observed_at": "2026-08-02", "resolved_revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6", "complete_files": 6, "complete_bytes": 104823821, "missing_files": 29, "missing_bytes": 96557500830, "method": "remote pinned file-list and exact local byte-size diff", "disposition": "resumable secondary acquisition; not a Stage-2 core-start gate"},
-      "research_role": "Second public bilingual contextual-ASR carrier; not an R2 core-start gate"
+      "verification": {"observed_at": "2026-08-04", "resolved_revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6", "payload_files": 35, "payload_size_bytes": 96662324651, "lfs_sha256_files": 33, "fixed_revision_raw_sha256_files": {".gitattributes": "708c4ce5c6d2a59131fd46349e51416d56b66489ccf394f3f3a05a1ed83de13a", "README.md": "2f22b977e75561c787da6cb1e884ff6abd3634cf9219fda1eecf65d776169a0c"}, "hf_api_file_manifest_sha256": "4b88a5e2b879dd2742bd15e31f6156272e6402e06835d91c0d4199047d31747e", "partial_markers": 0, "stale_cache_cleanup": {"files": 7, "bytes": 1363148800, "recycled_files": 3, "permanently_unlinked_files": 4}, "method": "official Hugging Face pinned file list, exact byte-size closure, per-file LFS SHA-256, and fixed-revision raw-byte SHA-256", "disposition": "complete secondary carrier; not a Stage-2 core-start gate"},
+      "research_role": "Public bilingual contextual-ASR secondary carrier; not a core-start gate"
     },
     {
       "name": "ted-el-annotations",
@@ -1123,7 +1161,7 @@
       "source": {"kind": "git", "url": "https://github.com/BITHLP/TED-EL.git"},
       "revision": "1338e98bccb29badc34dabf17d08c11642d54189",
       "lifecycle": "ANNOTATION_ONLY",
-      "profiles": ["r2-annotations"],
+      "profiles": ["speech-aware-annotations"],
       "status": "COMPLETE",
       "license": "paper/repository does not clearly state dataset license",
       "dependencies": ["ted-lium3"],
@@ -1152,7 +1190,7 @@
       ]},
       "revision": "sha256:4f75046ced3c256806390e1e39cc956692bf86205a3d3ccec85d7b83923797fc+sha256:3df8028b1de79a031e09142a17bb00c46682a6d1f4f41a08b243f440b5f4c429",
       "lifecycle": "DEFERRED",
-      "profiles": ["r2-small-public"],
+      "profiles": ["speech-aware-small-public"],
       "status": "COMPLETE",
       "license": "research-use public subset; verify terms on official ATCO2 page before redistribution",
       "research_role": "Optional RECOVER cross-domain trend check; never fetch the 5281h ELRA training set by default",
@@ -1165,7 +1203,7 @@
       "source": {"kind": "hf", "id": "ekacare/eka-medical-asr-evaluation-dataset"},
       "revision": "433e66037c8aebb8f396b938624a5ab6afc4ca36",
       "lifecycle": "DEFERRED",
-      "profiles": ["r2-small-public"],
+      "profiles": ["speech-aware-small-public"],
       "status": "COMPLETE",
       "license": "mit",
       "expected_payload": {"size_bytes": 281400884, "files": 12},
@@ -1178,7 +1216,7 @@
       "source": {"kind": "hf", "id": "ZihanZhao/LibriSQA"},
       "revision": "cebd7df8621f3624e3e630542425f46e214464c7",
       "lifecycle": "DEFERRED",
-      "profiles": ["r2-small-public"],
+      "profiles": ["speech-aware-small-public"],
       "status": "COMPLETE",
       "license": "upstream card unspecified; LibriSpeech dependencies apply",
       "dependencies": ["librispeech"],
@@ -1191,12 +1229,12 @@
       "source": {"kind": "git", "url": "https://github.com/karolpiczak/ESC-50.git"},
       "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
       "lifecycle": "DEFERRED",
-      "profiles": ["deferred"],
+      "profiles": ["retained-cross-domain"],
       "status": "COMPLETE",
       "license": "cc-by-nc-3.0",
       "expected_payload": {"size_bytes": 884047129, "files": 2011, "wav_files": 2000},
       "verification": {"observed_at": "2026-08-02", "resolved_revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6", "payload_size_bytes": 884047129, "payload_files": 2011, "wav_files": 2000, "git_blob_checks": 2011, "git_blob_mismatches": 0, "git_blob_manifest_sha256": "bf95d40f9891a278530e250bd20f81b2ac81ab1789813b87d3483d7895ebf994", "method": "official recursive Git tree plus per-file Git blob SHA-1 verification; minimal promisor Git metadata pins HEAD"},
-      "research_role": "Historical audio-event candidate; not load-bearing for R2"
+      "research_role": "Locally retained general-audio asset; excluded from the speech-aware study"
     },
     {
       "name": "fsd50k",
@@ -1221,11 +1259,12 @@
       },
       "revision": "Zenodo record 4060432; DOI 10.5281/zenodo.4060432; version 1.0",
       "lifecycle": "DEFERRED",
-      "profiles": ["deferred"],
-      "status": "PARTIAL",
+      "profiles": ["retained-cross-domain"],
+      "status": "COMPLETE",
       "license": "mixed source licenses; dataset metadata CC-BY-4.0",
-      "verification": {"observed_at": "2026-08-02", "method": "official Zenodo multipart release with per-file MD5; resumable acquisition in progress"},
-      "research_role": "Historical audio-event carrier; full official Zenodo multipart release"
+      "expected_payload": {"size_bytes": 24678734449, "files": 11},
+      "verification": {"observed_at": "2026-08-04", "resolved_revision": "Zenodo record 4060432; DOI 10.5281/zenodo.4060432; version 1.0", "payload_files": 11, "payload_size_bytes": 24678734449, "official_md5_files": 11, "partial_markers": 0, "method": "official Zenodo release, exact byte lengths, and all per-file MD5 checks"},
+      "research_role": "Locally retained general-audio asset; excluded from the speech-aware study; full official Zenodo multipart release"
     },
     {
       "name": "mlc-slm",
@@ -1236,7 +1275,7 @@
       "lifecycle": "RESTRICTED",
       "profiles": ["deferred"],
       "status": "BLOCKED",
-      "blocking_reason": "Approximately 1604 hours; requires registration/DUA and is not load-bearing for R2."
+      "blocking_reason": "Approximately 1604 hours; requires registration/DUA and is not load-bearing for the active speech-aware study."
     },
     {
       "name": "m3ed",
@@ -1287,12 +1326,13 @@
         "local_resumable_manifest_sha256": "5399b3661d2faef59847738bc763e288c3f087318db6e40c525bc4d7e80631af"
       },
       "revision": "AMI public corpus: all 171 available Mix-Headset WAVs selected on 2026-08-02; manual annotations v1.6.2; automatic annotations v1.5.1",
-      "lifecycle": "DEFERRED",
-      "profiles": ["deferred"],
-      "status": "PARTIAL",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
       "license": "cc-by-4.0",
-      "expected_payload": {"wav_files": 171, "annotation_archives": 2, "license_files": 1},
-      "research_role": "Locally verifiable meeting-speech carrier under one fixed mixed-headset condition; not an R2 core-start gate",
+      "expected_payload": {"size_bytes": 11641468822, "files": 174, "wav_files": 171, "annotation_archives": 2, "license_files": 1},
+      "verification": {"observed_at": "2026-08-04", "payload_files": 174, "payload_size_bytes": 11641468822, "wav_files": 171, "wav_header_checks": 171, "wav_formats": ["mono 16-bit 16 kHz PCM", "stereo 16-bit 16 kHz PCM"], "annotation_archives": {"ami_public_auto_1.5.1.zip": {"entries": 4312, "crc_test": "PASS"}, "ami_public_manual_1.6.2.zip": {"entries": 5183, "crc_test": "PASS"}}, "official_wget_script_sha256": "0eb3ea55e3f5a0f1dc2fe5b04ba0b3b0b5a265214c002887e0bf5f91fbf562e8", "local_resumable_manifest_sha256": "5399b3661d2faef59847738bc763e288c3f087318db6e40c525bc4d7e80631af", "payload_manifest_sha256": "82c07b13a63bf716ed732a8318375e3721be40f2794044a0f07e14c54a84fa9d", "partial_markers": 0, "method": "selector closure, per-file SHA-256 manifest, WAV header validation, ZIP CRC validation, and local completion receipt"},
+      "research_role": "Meeting-speech secondary carrier under one fixed mixed-headset condition; not a core-start gate",
       "claim_limit": "This catalog identity intentionally excludes individual headsets/lapels, microphone arrays and video; those modalities are not missing bytes for this record."
     },
     {
@@ -1338,12 +1378,12 @@
       },
       "revision": "AudioSet v1 official 2017 CSV, quality-assessment files and 128-D VGGish feature archive; GCS generation 1488737414213291 for features",
       "lifecycle": "DEFERRED",
-      "profiles": ["deferred"],
-      "status": "PARTIAL",
+      "profiles": ["retained-cross-domain"],
+      "status": "COMPLETE",
       "license": "dataset CC-BY-4.0; ontology CC-BY-SA-4.0 (ontology not included in this payload)",
-      "expected_payload": {"size_bytes": 2694310385, "files": 7},
-      "verification": {"observed_at": "2026-08-02", "method": "official GCS objects with size, MD5 and published feature-archive SHA-256; resumable acquisition in progress"},
-      "research_role": "Locally verifiable environmental-audio metadata and released feature carrier",
+      "expected_payload": {"size_bytes": 2694320385, "files": 7},
+      "verification": {"observed_at": "2026-08-04", "payload_files": 7, "payload_size_bytes": 2694320385, "official_md5_files": 7, "published_sha256_files": 1, "features_gzip_test": "PASS", "partial_markers": 0, "method": "official us_audioset objects, exact byte lengths, all MD5 checks, published feature-archive SHA-256, and gzip integrity"},
+      "research_role": "Locally retained environmental-audio metadata/features; excluded from the speech-aware study",
       "claim_limit": "This record freezes only the official metadata, QA files and released 128-D features. It does not contain raw audio; YouTube links decay and cannot support a byte-stable raw-audio snapshot."
     },
     {

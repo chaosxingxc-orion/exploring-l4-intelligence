@@ -31,7 +31,7 @@ bash scripts/data/fetch-data.sh --list          # show the manifest, fetch nothi
 bash scripts/data/fetch-data.sh                  # frozen-baseline profile (skips complete)
 bash scripts/data/fetch-data.sh meld slurp       # fetch only named assets
 bash scripts/data/inventory.sh                   # audit vs the lock
-python scripts/data/asset_lock.py fetch --profile r2-core
+python scripts/data/asset_lock.py fetch --profile speech-aware-core
 ```
 
 **Dependencies.** Needs `python3`, `git`, `git-lfs`, `curl`, `hf`, `modelscope` for legacy baseline
