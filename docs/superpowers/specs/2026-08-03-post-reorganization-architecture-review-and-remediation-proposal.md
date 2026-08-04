@@ -5,13 +5,21 @@ date: "2026-08-03"
 addressed_to: "research engineering team, Fable5, and the research owner"
 reviewed_umbrella_commit: "772e6ed15ac0006ddd34e0600b6f994230692eb8"
 reviewed_study_commit: "53d9283d92059e7561c60a2b402af7bd5af074b8"
-proposal_status: "PROPOSED_FOR_TEAM_REVIEW"
+proposal_status: "IMPLEMENTED_WITH_RESIDUAL_GATES"  # updated 2026-08-04; see status note below
 overall_assessment: "CONDITIONAL_ACCEPT_WITH_REMEDIATION"
 execution_authority: "DOCUMENTATION_AND_GOVERNANCE_PROPOSAL_ONLY"
 model_execution_effect: "NO_NEW_AUTHORITY"
 ---
 
 # 工程目录重整后架构复核与整改提案
+
+> **状态（2026-08-04）：`IMPLEMENTED_WITH_RESIDUAL_GATES`。** 团队接受本提案并已实施
+> T0–T5（收据：`docs/checks/program-architecture/2026-08-03-post-reorg-remediation/`）。独立复核
+> （`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`）
+> 确认本地整改有效并提出残留门 G0/G1/G2；G0/G1 已于 2026-08-04 关闭（收据：
+> `docs/checks/program-architecture/2026-08-04-residual-gates-closure/`），G2（推送与远端 CI）
+> 待 owner 明确授权。G0–G2 全部关闭后本状态升级为 `IMPLEMENTED_AND_CLOSED`。原始设计正文
+> 保留不改。
 
 ## 1. 给团队的结论
 

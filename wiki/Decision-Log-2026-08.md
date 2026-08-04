@@ -2,6 +2,31 @@
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
 
+### 2026-08-04（续90）· 独立复核残留门 G0/G1 关闭（收据可证伪化/绑定可证明化）；G2 待推送授权
+
+#### Context
+
+独立复核 `PROGRAM-DIRECTORY-POST-MIGRATION-INDEPENDENT-REVIEW-2026-08-03`（@umbrella 75406d4 /
+study ac75a61）判 `LOCAL_REMEDIATION_VERIFIED__FULL_GOVERNANCE_CLOSURE_WITHHELD`：T0–T5 独立确认
+有效，但 G0（模型触达门接受不存在文件+伪造摘要）、G1（legacy validator 只查格式不证语义绑定）、
+G2（本地领先远端未推送）阻断治理闭环。复核后 study 已收窄更名 speech-aware-evidence-acquisition。
+
+#### Decision
+
+①G0 关闭（study `0d86ddc`）：FrozenCoreGate 改为"验证收据而非信任收据"——版本化 schema+study
+身份；D1–D4 逐项绑定 artifact 并重算 SHA-256；runtime 收据绑定冻结 lock 键（canonical subdir/
+文件数/总字节对齐 datasets.lock）；模型文件仅以受控 data root 下相对路径解析并逐文件重读字节重算
+size+SHA-256；拒绝绝对路径//../逃逸/重复/多余文件；build commit 须 40 位全长并由盘上二进制字节
+背书；评审反例（不存在路径+伪造摘要）成为命名负向测试（study 套件 57 项全绿）。②G1 关闭
+（umbrella `c9c9f6f`）：默认门逐条断言 path==prefix+repo_path 与 uri==git+registered-remote@
+commit#path=repo_path 严格相等；新增离线 `--verify-bundles`（重验 4 个 bundle SHA-256、临时裸
+克隆、final commit 包含性、ls-tree 证明全部 574 条 commit:repo_path→git_blob；不依赖网络
+branch tip），主开发机默认启用；blob/remote/path/commit/bundle-hash 及评审三合一注入均有负向
+测试（checker 套件 143 项）。③G3.1/G3.2 spec 状态收束、G3.3 旧报告字节不动（新收据目录
+`docs/checks/program-architecture/2026-08-04-residual-gates-closure/`）、G3.4 PEP 639 license。
+④G2 保持 OPEN：推送属受保护操作，待 owner 明确授权后执行 F5（推送+远端 CI）与 F6（final
+closure 签发）。
+
 ### 2026-08-03（续89）· owner 两项裁决（E 盘唯一离线介质/--require-installed 默认）+ 整改四轮对抗自检收敛
 
 #### Context

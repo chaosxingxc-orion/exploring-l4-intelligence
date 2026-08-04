@@ -1,9 +1,20 @@
 # Fable5 裁决书：研究工程目录重整提案回应与 Stage-2A 交接包
 
+> **状态（2026-08-04）：`IMPLEMENTED_AND_SUPERSEDED_2026-08-03`。** 本裁决/交接包已由 2026-08-03
+> 目录重整实施完毕，仅作历史设计与交接理由保留，不再是现行入口。下文中的
+> `study_repository: NOT_CREATED`、`uv pip install -e ../../common -e .` 等均描述实施前状态
+> （study 现已建仓并于 2026-08-04 收窄为 `speech-aware-evidence-acquisition`，且不依赖
+> `speechrl_common`）。现行权威入口：owner 合同
+> （`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`）、
+> Stage-2A 入场合同（`docs/superpowers/specs/2026-08-02-speech-aware-evidence-acquisition-stage2a-entry.md`）、
+> study 仓 `README.md`，以及独立复核反馈
+> （`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`）。
+
 ## 文档状态
 
 ```yaml
 artifact_id: FABLE5-STUDY-DIRECTORY-REORGANIZATION-VERDICT-V1
+implementation_status: IMPLEMENTED_AND_SUPERSEDED_2026-08-03  # added 2026-08-04; see banner
 date: 2026-08-02
 responds_to: docs/superpowers/specs/2026-08-02-fable5-study-directory-reorganization-proposal.md
 verdict: ACCEPT_WITH_AMENDMENTS
