@@ -48,7 +48,7 @@
         {
           "kind": "profile-identity-migration",
           "note": "Renamed candidate-derived r2-* fetch profiles to the admitted semantic study identity speech-aware-*; asset bytes, revisions, sizes, checksums and COMPLETE status were unchanged.",
-          "entries": ["earnings21-original", "earnings22-original", "conec", "prism-synthetic", "rare5k-reconstruction", "buzzword", "slue-sqa-5", "contextasr-bench", "ami-meeting-corpus", "ted-el-annotations", "atco2-1h", "eka-medical", "librisqa"]
+          "entries": ["earnings21-original", "earnings22-original", "conec", "prism-public", "rare5k-reconstruction", "buzzword", "slue-sqa-5", "contextasr-bench", "ami-meeting-corpus", "ted-el-annotations", "atco2-test-1h", "eka-medical-asr-eval", "librisqa-metadata"]
         },
         {
           "kind": "speech-domain-binding",

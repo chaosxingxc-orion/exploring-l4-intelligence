@@ -60,7 +60,7 @@ spoken QA、会议语音理解。噪声条件可以作为 speech robustness 的�
 |---|---|---|---|---|
 | Core-main | Earnings21 + ConEC | 实体误听、上下文证据和错误强化 | E0 identity/leakage/scorer/trace 关闭 | 主机制与任务效用 |
 | Core-dev | Earnings22 + ConEC | 阈值、候选宽度、停止策略与 source policy 标定 | 与 confirmatory 隔离 | 配置选择，不作最终确认 |
-| Diagnostic | PRISM synthetic、Rare5k reconstruction、BuzzWord | 稀有词、专名、biasing 的局部失效模式 | 对应 scorer 和 slice 预注册 | 诊断，不外推总体 |
+| Diagnostic | PRISM public、Rare5k reconstruction、BuzzWord | 稀有词、专名、biasing 的局部失效模式 | 对应 scorer 和 slice 预注册 | 诊断，不外推总体 |
 | Secondary-SQA | SLUE-SQA-5 | speech observation 与外部文本证据在 spoken QA 中的交互 | core 最小路径成立 | 跨任务 speech 复制 |
 | Secondary-context | ContextASR-Bench | 双语 contextual ASR、上下文供给形式 | 同边界 baseline 可运行 | 跨语言/上下文复制 |
 | Secondary-meeting | AMI meeting corpus | 多说话人、长上下文与会议实体压力 | 固定 mixed-headset 条件、明确切分 | 条件迁移/压力测试 |

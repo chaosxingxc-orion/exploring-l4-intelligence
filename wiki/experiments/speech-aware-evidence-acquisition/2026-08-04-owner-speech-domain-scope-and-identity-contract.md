@@ -90,9 +90,9 @@ correct-to-wrong 回归。
 | 层级 | lock 键 | Stage-2 角色 | 当前义务 |
 |---|---|---|---|
 | Core | `earnings21-original`, `earnings22-original`, `conec` | 实体密集 ASR/上下文纠错主载体、dev/confirmatory 与证据层 | E0 必须关闭 identity、leakage、scoring、trace |
-| Diagnostic | `prism-synthetic`, `rare5k-reconstruction`, `buzzword` | 稀有词、专名和 contextual biasing 诊断 | 只回答对应诊断问题，不替代 core 结论 |
+| Diagnostic | `prism-public`, `rare5k-reconstruction`, `buzzword` | 稀有词、专名和 contextual biasing 诊断 | 只回答对应诊断问题，不替代 core 结论 |
 | Secondary speech | `slue-sqa-5`, `contextasr-bench`, `ami-meeting-corpus` | spoken QA、双语 contextual ASR、会议语音迁移/压力测试 | 在 core 路径成立后按预注册顺序启用 |
-| Optional speech | `ted-el-annotations`, `atco2-1h`, `eka-medical`, `librisqa` | 实体标注、领域语音和低成本相邻验证 | 非开工门；使用前冻结具体假设 |
+| Optional speech | `ted-el-annotations`, `atco2-test-1h`, `eka-medical-asr-eval`, `librisqa-metadata` | 实体标注、领域语音和低成本相邻验证 | 非开工门；使用前冻结具体假设 |
 | Retained cross-domain | `fsd50k`, `audioset-metadata-features`, `esc-50` | 无本 study 实验角色 | 保留本地，不加载、不引用为支持性实验 |
 
 closest-prior 复现仍以 ConEC/contextual ASR、RECOVER-style 1-best correction、Siskos 实体消解及
