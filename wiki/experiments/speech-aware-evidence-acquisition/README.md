@@ -22,8 +22,13 @@ ESC-50 等 general-audio 数据不得进入本台账的实验。
 - Study 仓边界采用（续92 guard + 续93 语义 ExecutionPlan 门与合同字段 exposure ledger
   + 2026-08-04 E0 闭合与四轮对抗加固：runtime-receipt-v2 全 build/bin 绑定、D3 冻结
   机器强制含符号链接全序拒绝、exposure 行逐字段核验、首切片预算按切片总量强制含
-  gpu-hours 列且预算单元格必须有限非负）：
-  study commit `c86f62bb7ac90fb89e80b8c0843e32a43216f7bf`（前值 `af12d6d7…` 由本行取代）
+  gpu-hours 列且预算单元格必须有限非负
+  + 2026-08-05 R0 工程基线与五轮对抗归零：单一 `core/` 基础包（注册表五缝、gate 绑定唯一
+  请求路径含 D2 精确集合与解码键白名单、driver 四段 plan↔config↔收据绑定、非有限音频
+  拒绝、重跑 fail-closed）、split 冻结收据（discovery 44 / dev 10 / confirmatory 115，
+  `docs/receipts/splits.json`）、model-free 入口实证（gate dry-run exit 0）、smoke runbook
+  `docs/runbooks/2026-08-05-r0-smoke.md` 未执行）：
+  study commit `b0635aa9736d2cbf3a581fc9295110172672c833`（前值 `c86f62bb…` 由本行取代）
 - 历史来源记录（事实继承、不回写；blob 见合并合同 §9）：
   [2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md](2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md)、
   [2026-08-04-owner-speech-domain-scope-and-identity-contract.md](2026-08-04-owner-speech-domain-scope-and-identity-contract.md)、
@@ -63,5 +68,7 @@ exposure 单调不减。
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
 尚无正式实验。E0 D1–D4 与 runtime receipt 已于 2026-08-04 关闭并经 gate dry-run 验证（study 仓
-`docs/receipts/`）；每次模型触达仍须携带合法 `ExecutionPlan` 并先在 study 仓 exposure ledger
-预登记，由 `contracts.FrozenCoreGate` fail-closed 执行。
+`docs/receipts/`）；R0 工程基线于 2026-08-05 交付并经五轮对抗自检归零（study `b0635aa`），
+首个正式实验将是 smoke `SAEA-E-001`（runbook 已备，未执行）。每次模型触达仍须携带合法
+`ExecutionPlan` 并先在 study 仓 exposure ledger 预登记，由 `contracts.FrozenCoreGate`
+fail-closed 执行。

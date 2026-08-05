@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-04 — speech-only scope; Stage-2A E0 closed, R0 next; Stage-3 carrier bound to papers/"
+last_refresh: "2026-08-05 — Stage-2A R0 engineering baseline delivered (study b0635aa); smoke/R1 next"
 ---
 
 # Research Objective & Current State
@@ -12,7 +12,7 @@ last_refresh: "2026-08-04 — speech-only scope; Stage-2A E0 closed, R0 next; St
 ## Current gate and authority
 
 Stage accounting is direction-local. Endpoint:
-`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_E0_CLOSED__R0_NEXT`.
+`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_BASELINE_DELIVERED__SMOKE_R1_NEXT`.
 Core = Qwen3-Omni-30B through local llama.cpp; study domain = speech and spoken-language tasks.
 
 The first semantic object, **speech-aware evidence acquisition** (R2 audit provenance), is
@@ -57,11 +57,11 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-In `studies/speech-aware-evidence-acquisition/`, deliver R0: discovery/confirmatory paths,
-frozen-core adapter, four-axis tracing, scorer adapters and the three engineering controls; then
-reproduce one readiness-qualified closest prior before directional exploration. Model touches need
-a validated ExecutionPlan and a pre-registered exposure row. Core-first execution is followed by
-one secondary speech carrier; no new dataset download is required.
+R0 delivered (study `b0635aa`): `core/` foundation (registry seams, gate-bound adapter,
+one driver), frozen split receipt, scorer adapters, model-free entrypoints; five adversarial
+review rounds closed at zero defects. Next: fill the per-axis readiness memo, owner picks the
+R1 baseline; run smoke `SAEA-E-001` per the study runbook (first model touch: validated
+ExecutionPlan + pre-registered exposure row); then R1 reproduction and X1–X3 probes.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
