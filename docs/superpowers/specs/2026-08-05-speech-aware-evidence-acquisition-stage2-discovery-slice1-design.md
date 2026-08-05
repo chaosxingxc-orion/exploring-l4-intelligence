@@ -115,6 +115,32 @@ study 仓 `docs/exposure-ledger.md` 预登记,由 `contracts.FrozenCoreGate` fai
 台账为 Stage-2B 服务:合格 paper candidate(改进主张 + 零假设 + 机制 + baseline 收据 +
 未读 confirmatory 声明)只能从台账中已有可证伪 delta 主张的轴产生。
 
+## §7 Stage-2 分解(2026-08-05 补充;对齐 Stage-1A/1B/1C 拆法)
+
+模型触达只发生在 2A-R0.3、2A-R1、2A-X、2B-深挖四处,每处独立 `ExecutionPlan` 预算与
+exposure 行;其余全部 model-free。
+
+- **2A-E0** 闭合(已于 2026-08-04 关闭):D1–D4 收据 + runtime receipt + gate dry-run。
+- **2A-R0.1** 脚手架+备忘(model-free):readiness 按轴清单 + 创新点台账;出口 = owner
+  拍板 R1 基线。
+- **2A-R0.2** 工程基线(model-free,假 transport 测试):**两层结构**——Layer 1 可复用
+  基础工程(单一 `core/` 包:统一注册表、统一驱动器 `run_experiment()`、五个抽象缝:
+  载体/split、证据源、传输、评分适配、执行策略;治理层 contracts/gate/D2 arm 形状/冻结
+  scoring 不抽象不留缝);Layer 2 配置化实验(每个实验 = 四片 config + 至多一个新注册
+  组件 + 预注册)。出口 = 全测试通过、双仓 gate 绿。
+- **2A-R0.3** smoke(首次模型触达,SAEA-E-001,dev subset10,~12 调用):出口 = trace
+  完整、预算吻合、哈希齐(wiring 备忘,非结果主张)。
+- **2A-R1** 复现校准(模型触达,discovery split):选定 prior 全协议复现;出口 = 指标落
+  在可解释偏差带内,或 `INCONCLUSIVE_BASELINE_NOT_READY` 留档。
+- **2A-X1–X3** 薄探测(模型触达,各含 prior 复现 arm):每点因子表 + gap memo + 台账
+  条目;出口 = 每点 PROMOTE / PARK / REPAIR(§4)。
+- **2A 收口**(model-free):三门联合表 + go/narrow/repair/stop memo。
+- **2B-深挖**(模型触达;预算需 dated amendment):PROMOTE 轴第二切片 + X4/X5。
+- **2B-资格化 → 冻结**(model-free):改进主张 + 零假设 + 机制 + baseline 收据 +
+  实验/统计设计 + 未读 confirmatory 声明 → qualified paper candidate,study 终点;
+  零/负结果合法。
+- **Stage-3**:不在本仓;`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级 `papers/<slug>`。
+
 ## 失效条件
 
 owner 修改主张类型决定、验证点覆盖、split 分配或晋级判据时,本件按

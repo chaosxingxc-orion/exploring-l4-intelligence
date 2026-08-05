@@ -1,30 +1,35 @@
-# R0 Vertical Slice Implementation Plan (speech-aware-evidence-acquisition)
+# R0 Engineering Baseline Implementation Plan (speech-aware-evidence-acquisition)
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Deliver the R0 reproduction-zero vertical slice of the Stage-2 study `speech-aware-evidence-acquisition` — deterministic loaders, split freeze, evidence schema, four-axis trace sink, frozen-core adapter with the D2 per-arm allowlist as the request choke point, the three engineering control arms, scorer adapters over the frozen scoring stack, MLflow/ledger linkage, and functional model-free entrypoints — plus the lane-A scaffolding (prior readiness memo template, innovation-candidates ledger). **No model touch is executed by this plan**; the final task prepares (but does not run) the R0 smoke.
+> Supersedes the same-day 14-task per-experiment layout (git history preserves it). Owner
+> direction 2026-08-05: build the **reusable foundation first** (Part 1), then instantiate
+> experiments as **configuration** (Part 2); maximize sharing, no fragmentation.
 
-**Architecture:** All new code goes into the already-stubbed subpackages of `src/speech_aware_evidence_acquisition/` (`models/`, `evidence/`, `tracing/`, `experiments/`) plus `data/splits.py`, `data/references.py`, and one new function in `data/loader.py`. Runtime-phase modules (models, evidence, tracing, arms, runner) may never import the scoring-side reference reader; an AST-based contract test enforces that import graph. The frozen `scoring/` package is **never modified** — scorer adapters call it from `experiments/`.
+**Goal:** Deliver the R0 engineering baseline of the Stage-2 study as two layers: (Part 1) a single consolidated `core/` foundation package — one generic registry mechanism, one shared experiment driver `run_experiment()`, five abstraction seams (carrier/split, evidence source, transport, scorer, execution policy) — plus the shared data layer (splits freeze, Earnings21 loader, scoring-side references); then (Part 2) config-driven instantiation: the R0 smoke config set, model-free entrypoints, and the smoke runbook. **No model touch is executed by this plan** — every test uses fake transports; the first real call (R0 smoke, `SAEA-E-001`) is a separately-authorized, owner-visible action.
 
-**Tech Stack:** Python 3.12, stdlib only for runtime code (JSON configs, `urllib` transport); `mlflow` as an optional extra imported lazily; pytest 8.
+**Architecture:** Anti-fragmentation rules: ONE foundation package (`src/speech_aware_evidence_acquisition/core/`; the four stub packages `models/`, `evidence/`, `tracing/`, `experiments/` are deleted), ONE `Registry` class instantiated five times (CARRIERS, EVIDENCE_SOURCES, TRANSPORTS, POLICIES, SCORERS), ONE driver path used by every Stage-2 run (R0 smoke, R1, X probes, 2B deep digs). An experiment differs from another only by its four JSON config fragments and, rarely, one newly registered component. Deliberately NOT abstracted: `contracts.py` governance (gate, ExecutionPlan, boundary, TraceRecord), the frozen `scoring/` package, and the D2 per-arm visible-field shapes — policies compose on top of the three frozen arm shapes, never add arms. The `Policy` seam is defined now but only the `fixed` policy is implemented (X1 re-resolution, X3 verification loops, X4 reward-guided policies register later without driver changes).
 
-**Design authority:** umbrella `docs/superpowers/specs/2026-08-05-speech-aware-evidence-acquisition-stage2-discovery-slice1-design.md` (§3 splits, §5 lane A/B) and `docs/superpowers/specs/2026-08-02-speech-aware-evidence-acquisition-stage2a-entry.md` (R0 deliverables).
+**Tech Stack:** Python 3.12, stdlib-only runtime (JSON configs, `urllib` transport); `mlflow` optional extra imported lazily; pytest 8.
+
+**Design authority:** umbrella `docs/superpowers/specs/2026-08-05-speech-aware-evidence-acquisition-stage2-discovery-slice1-design.md` (§5 lanes, §7 Stage-2 decomposition: this plan is 2A-R0.1 scaffolding + 2A-R0.2 engineering baseline) and `docs/superpowers/specs/2026-08-02-speech-aware-evidence-acquisition-stage2a-entry.md` (R0 deliverables).
 
 ## Global Constraints
 
-- Study repo root (all `Files:` paths below are relative to it): `D:\chao_workspace\exploring-l4-intelligence\studies\speech-aware-evidence-acquisition`. Commit each task **in the study repo**. The umbrella repo is not touched by this plan.
-- **Frozen scoring package:** never create, edit, or delete anything under `src/speech_aware_evidence_acquisition/scoring/` — the gate re-hashes it at every model-touch attempt and any drift re-closes E0. Scorer adapters live in `experiments/`.
-- **Information boundary:** gold / reference / test-annotation / future-turn content never enters a runtime payload. `data/references.py` is scoring-side only.
-- **No general-audio:** `fsd50k`, `audioset-metadata-features`, `esc-50` must not appear in any new source, config, or test (existing governance test greps for this).
-- **No candidate IDs:** never write `R2` into package names, module names, or experiment IDs. Experiment namespace is `SAEA-E-<nnn>`.
-- **No model touch:** nothing in this plan starts llama-server, sends a request to it, or appends a non-model-free row to `docs/exposure-ledger.md`.
-- **No committed data:** raw traces, outputs, and audio stay under `SPEECHRL_DATA_DIR`; `TraceSink` refuses run directories inside the repo.
-- **Split identity hash convention (verified 2026-08-05 against the E0 ledger anchor):** `sha256(("\n".join(sorted(prefixed_ids))).encode("utf-8"))` where each id is `f"{lock_key}/{sample_id}"`, **no trailing newline**. The 213-id full-carrier set reproduces `99a896359a504f463a1657281aa71f4a28a51161c804422d8e2f192b0486ad3e`.
-- Tests must pass on Windows (`pytest` from repo root); POSIX-only behavior uses the existing `skipif(os.name == "nt")` pattern.
-- Python imports stay light at package top level (heavy/optional imports inside functions).
-- Commit messages: `feat(r0): …` / `test(r0): …` / `docs(r0): …`, each ending with the `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` trailer.
+- Study repo root (all `Files:` paths below are relative to it): `D:\chao_workspace\exploring-l4-intelligence\studies\speech-aware-evidence-acquisition`. Commit each task **in the study repo**; the umbrella repo is not touched by this plan.
+- **Frozen scoring package:** never create, edit, or delete anything under `src/speech_aware_evidence_acquisition/scoring/`. Scorer adapters live in `core/scorers.py` and call the frozen stack.
+- **Information boundary:** gold / reference / test-annotation / future-turn content never enters a runtime payload. `data/references.py` is scoring-side only; the ONLY module allowed to import it is `core/scorers.py` (AST contract test).
+- **No general-audio:** `fsd50k`, `audioset-metadata-features`, `esc-50` never appear in any new source, config, or test.
+- **No candidate IDs:** never write `R2` into package/module names or experiment IDs. Experiment namespace is `SAEA-E-<nnn>`.
+- **No model touch:** nothing in this plan starts llama-server, sends it a request, or appends a non-model-free row to `docs/exposure-ledger.md`.
+- **No committed data:** raw traces/outputs/audio stay under `SPEECHRL_DATA_DIR`; `TraceSink` refuses run directories inside the repo.
+- **Split identity hash convention (verified 2026-08-05 against the E0 ledger anchor):** `sha256(("\n".join(sorted(prefixed_ids))).encode("utf-8"))`, each id `f"{lock_key}/{sample_id}"`, no trailing newline; the 213-id full set reproduces `99a896359a504f463a1657281aa71f4a28a51161c804422d8e2f192b0486ad3e`.
+- Tests pass on Windows (`pytest` from repo root); POSIX-only behavior uses the existing `skipif(os.name == "nt")` pattern. Python imports stay light at package top level.
+- Commit messages: `feat(r0): …` / `test(r0): …` / `docs(r0): …`, each ending with the trailer `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`.
 
 ---
+
+# Part 1 — Foundation (`core/` + shared data layer)
 
 ### Task 1: Lane-A scaffolding — readiness memo template + innovation-candidates ledger
 
@@ -34,7 +39,7 @@
 
 **Interfaces:**
 - Consumes: nothing.
-- Produces: the memo skeleton later filled by the (separately-run) readiness survey; the append-only ledger that Task 14's runbook and all future gap memos reference by path `docs/innovation-candidates.md`.
+- Produces: the per-axis memo skeleton the (separately-run) readiness survey fills; the append-only ledger all future gap memos reference by path `docs/innovation-candidates.md`.
 
 - [ ] **Step 1: Write the readiness memo template**
 
@@ -65,7 +70,7 @@ structural-gap evidence (design spec §6 source 3) and must be copied into
 | license | license of code + any shipped data |
 | boundary compatibility | RUNNABLE_AS_ARM / RUNNABLE_R1_FULL / NOT_READY(reason) |
 | scorer alignment | how its reported metric maps onto saea-scoring-v1 |
-| visible fields | which ARM_VISIBLE_FIELDS arm shape it needs |
+| visible fields | which D2 arm shape it needs |
 | not-runnable reason | exact blocker, or `-` |
 
 ## OBS (X1 anchor candidates)
@@ -116,7 +121,7 @@ Entry format:
 (no entries yet)
 ```
 
-- [ ] **Step 3: Verify files render and commit**
+- [ ] **Step 3: Commit**
 
 ```bash
 git add docs/readiness/2026-08-05-prior-readiness-memo.md docs/innovation-candidates.md
@@ -133,15 +138,15 @@ git commit -m "docs(r0): lane-A scaffolding - readiness memo template + innovati
 - Test: `tests/contract/test_splits_receipt.py`
 
 **Interfaces:**
-- Consumes: `data.lock.load_lock/lock_entry/asset_dir/data_root`, `data.loader.load_earnings22/earnings22_subset10_ids` (existing), `e0.artifacts.write_json_artifact/sha256_file` (existing).
-- Produces:
+- Consumes: `data.lock` (`load_lock`, `asset_dir`, `data_root`, `umbrella_lock_path` — follow the module's actual export names, do not rename existing code), `data.loader.load_earnings22/earnings22_subset10_ids`, `e0.artifacts.write_json_artifact`.
+- Produces (consumed later by the driver in Task 11):
+  - `SPLITS_SCHEMA = "saea-splits-v1"`, `SPLITS_RECEIPT_NAME = "splits.json"`
   - `split_identity_hash(prefixed_ids: Iterable[str]) -> str`
-  - `prefixed(lock_key: str, ids: Iterable[str]) -> list[str]`
-  - `SplitSpec` dataclass: `name: str`, `carrier_lock_key: str`, `split_role: str`, `ids: tuple[str, ...]` (carrier-prefixed, sorted), `identity_hash: str`, `count: int` property.
-  - `discovery_split(lock, root) -> SplitSpec` (earnings21, all 44), `dev_split(lock, root) -> SplitSpec` (earnings22 subset10), `confirmatory_split(lock, root) -> SplitSpec` (earnings22 minus subset10; enumerates **file names only**, reads no annotation content).
-  - `freeze_splits(lock, root, receipts_dir) -> dict` writing `docs/receipts/splits.json` (schema `saea-splits-v1`).
-  - CLI: `python -m speech_aware_evidence_acquisition.data.splits` (uses env `SPEECHRL_DATA_DIR` + umbrella lock, fail-closed).
-  - Constant `SPLITS_SCHEMA = "saea-splits-v1"`.
+  - `prefixed(lock_key: str, ids: Iterable[str]) -> list[str]` (sorted)
+  - `SplitSpec` dataclass: `name`, `carrier_lock_key`, `split_role`, `ids: tuple[str, ...]` (carrier-prefixed, sorted), `identity_hash`, `count` property
+  - `discovery_split(lock, root) -> SplitSpec` (earnings21, all), `dev_split(lock, root) -> SplitSpec` (earnings22 subset10), `confirmatory_split(lock, root) -> SplitSpec` (earnings22 minus subset10; **file names only, no annotation content read**)
+  - `freeze_splits(lock, root, receipts_dir) -> dict` writing `docs/receipts/splits.json`
+  - CLI: `python -m speech_aware_evidence_acquisition.data.splits`
 
 - [ ] **Step 1: Write the failing unit tests**
 
@@ -165,9 +170,9 @@ from speech_aware_evidence_acquisition.data.splits import (
 
 
 def test_split_identity_hash_convention_is_frozen():
-    # Known vector: the convention is sha256 over LF-joined sorted ids, no
-    # trailing newline. Changing the convention breaks comparability with the
-    # E0 ledger row and must fail loudly here.
+    # Known vector: sha256 over LF-joined sorted ids, no trailing newline.
+    # Changing the convention breaks comparability with the E0 ledger row and
+    # must fail loudly here.
     assert (
         split_identity_hash(["b/2", "a/1"])
         == "8bd12b24d6eb14c9a141597ec482f69a14c9a5024036441d727b4a968e67a33f"
@@ -240,9 +245,7 @@ def test_committed_splits_receipt_is_coherent():
         assert split["ids"] == sorted(split["ids"]), name
         assert split["identity_hash"] == split_identity_hash(split["ids"]), name
     assert splits["dev"]["count"] == 10
-    dev_ids = set(splits["dev"]["ids"])
-    conf_ids = set(splits["confirmatory"]["ids"])
-    assert dev_ids.isdisjoint(conf_ids)
+    assert set(splits["dev"]["ids"]).isdisjoint(splits["confirmatory"]["ids"])
     assert splits["discovery"]["split_role"] == "discovery"
     assert splits["confirmatory"]["split_role"] == "confirmatory"
 ```
@@ -391,23 +394,19 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-Check the exact names exported by `data/lock.py` before wiring imports (`load_lock`, `lock_entry`, `asset_dir`, `data_root`, `umbrella_lock_path`) — if a name differs, follow the existing module, do not rename existing code.
-
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `pytest tests/unit/test_splits.py tests/contract/test_splits_receipt.py -v`
-Expected: unit tests PASS; contract test SKIPPED (receipt not frozen yet). If the known-vector hash in `test_split_identity_hash_convention_is_frozen` mismatches, recompute it with the implementation and fix **the test constant**, never the convention.
+Expected: unit PASS; contract SKIPPED (receipt not frozen yet). If the known-vector assertion mismatches, recompute the constant from the implementation and fix **the test constant**, never the convention.
 
 - [ ] **Step 5: Freeze the real splits receipt (model-free, dev machine)**
-
-Run (PowerShell, Windows — data on E:):
 
 ```powershell
 $env:SPEECHRL_DATA_DIR = "E:\chao_workspace\exploring-l4-intelligence\speechrl-data"
 python -m speech_aware_evidence_acquisition.data.splits
 ```
 
-Expected output: `discovery: 44 samples, …` / `dev: 10 samples, …` / `confirmatory: 115 samples, …` and `docs/receipts/splits.json` created. Then re-run `pytest tests/contract/test_splits_receipt.py -v` — now PASS (not skipped).
+Expected: `discovery: 44 …` / `dev: 10 …` / `confirmatory: 115 …`; `docs/receipts/splits.json` created. Re-run `pytest tests/contract/test_splits_receipt.py -v` — now PASS.
 
 - [ ] **Step 6: Commit**
 
@@ -418,17 +417,20 @@ git commit -m "feat(r0): split identity + frozen discovery/dev/confirmatory rece
 
 ---
 
-### Task 3: `load_earnings21` in `data/loader.py`
+### Task 3: Data layer completion — `load_earnings21` + scoring-side `references.py`
 
 **Files:**
 - Modify: `src/speech_aware_evidence_acquisition/data/loader.py` (append after `load_earnings22`)
-- Test: `tests/unit/test_identity_and_loader.py` (append tests)
+- Create: `src/speech_aware_evidence_acquisition/data/references.py`
+- Test: `tests/unit/test_identity_and_loader.py` (append), `tests/unit/test_references.py`
 
 **Interfaces:**
 - Consumes: existing `_metadata_rows`, `_float_field`, `SampleRef`, `lock_entry`, `asset_dir`.
-- Produces: `load_earnings21(lock, root) -> list[SampleRef]` — all Earnings21 samples sorted by id, identity-drift fail-closed, metadata CSV `earnings21-file-metadata.csv` with columns `file_id`, `audio_length`, `sample_rate`.
+- Produces:
+  - `load_earnings21(lock, root) -> list[SampleRef]` — metadata CSV `earnings21-file-metadata.csv`, columns `file_id`/`audio_length`/`sample_rate`; identity-drift fail-closed.
+  - `references.ReferenceError(RuntimeError)`; `references.reference_tokens(lock, root, carrier_lock_key, sample_id) -> list[str]` — raw tokens from the carrier's pipe-delimited `.nlp` file (header-driven, requires a `token` column). Only `core/scorers.py` may import this module.
 
-- [ ] **Step 1: Write the failing tests** (append to `tests/unit/test_identity_and_loader.py`)
+- [ ] **Step 1: Write the failing loader tests** (append to `tests/unit/test_identity_and_loader.py`)
 
 ```python
 def test_load_earnings21_returns_identity_checked_samples(synthetic_world):
@@ -444,92 +446,22 @@ def test_load_earnings21_returns_identity_checked_samples(synthetic_world):
     assert first.media_relpath.endswith(f"media/{first.sample_id}.mp3")
     assert first.audio_seconds == 100.5
     assert first.sample_rate_hz == 16000
-    view = first.runtime_view()
-    assert view["speech_ref"] == f"earnings21-original/{first.sample_id}"
+    assert first.runtime_view()["speech_ref"] == f"earnings21-original/{first.sample_id}"
 
 
 def test_load_earnings21_fails_closed_on_identity_drift(synthetic_world):
+    import pytest
+
     from speech_aware_evidence_acquisition.data.loader import LoaderError, load_earnings21
     from speech_aware_evidence_acquisition.data.lock import load_lock
 
-    extra = synthetic_world.e21 / "media" / "9999999.mp3"
-    extra.write_text("orphan", encoding="utf-8")
+    (synthetic_world.e21 / "media" / "9999999.mp3").write_text("orphan", encoding="utf-8")
     lock = load_lock(synthetic_world.lock_path)
-    import pytest
-
     with pytest.raises(LoaderError, match="identity drift"):
         load_earnings21(lock, synthetic_world.data_root)
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
-
-Run: `pytest tests/unit/test_identity_and_loader.py -v -k earnings21`
-Expected: FAIL with `ImportError: cannot import name 'load_earnings21'`
-
-- [ ] **Step 3: Implement** (append to `loader.py`, mirroring `load_earnings22` exactly)
-
-```python
-def load_earnings21(lock: Mapping[str, object], root: Path) -> list[SampleRef]:
-    """All Earnings21 samples, sorted by sample id, identity-checked against media."""
-
-    entry = lock_entry(lock, "earnings21-original")
-    carrier_dir = asset_dir(lock, "earnings21-original", root)
-    subdir = str(entry["local_subdir"]).rstrip("/")
-    rows = _metadata_rows(carrier_dir / "earnings21-file-metadata.csv", "file_id")
-    media_dir = carrier_dir / "media"
-    media_ids = {
-        path.name[: -len(".mp3")] for path in media_dir.glob("*.mp3") if path.is_file()
-    }
-    if media_ids != set(rows):
-        raise LoaderError(
-            "earnings21 media/metadata identity drift: "
-            f"media_only={sorted(media_ids - set(rows))[:5]} "
-            f"metadata_only={sorted(set(rows) - media_ids)[:5]}"
-        )
-    samples = []
-    for sample_id in sorted(rows):
-        row = rows[sample_id]
-        samples.append(
-            SampleRef(
-                carrier_lock_key="earnings21-original",
-                sample_id=sample_id,
-                media_relpath=f"{subdir}/media/{sample_id}.mp3",
-                audio_seconds=_float_field(row, "audio_length", sample_id),
-                sample_rate_hz=int(_float_field(row, "sample_rate", sample_id)),
-            )
-        )
-    return samples
-```
-
-Before finalizing, verify the real CSV column names once on the dev machine (`Get-Content E:\chao_workspace\exploring-l4-intelligence\speechrl-data\datasets\earnings21-22\earnings21\earnings21-file-metadata.csv -TotalCount 1`). The synthetic world (`tests/unit/conftest.py`) mirrors the real layout with `file_id,audio_length,sample_rate`; if the real header differs, fix **both** conftest and this function to the real header in this task.
-
-- [ ] **Step 4: Run tests to verify they pass**
-
-Run: `pytest tests/unit/test_identity_and_loader.py -v`
-Expected: PASS (all, including pre-existing tests)
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add src/speech_aware_evidence_acquisition/data/loader.py tests/unit/test_identity_and_loader.py
-git commit -m "feat(r0): deterministic earnings21 discovery loader"
-```
-
----
-
-### Task 4: `data/references.py` — scoring-side reference token reader
-
-**Files:**
-- Create: `src/speech_aware_evidence_acquisition/data/references.py`
-- Test: `tests/unit/test_references.py`
-
-**Interfaces:**
-- Consumes: `asset_dir` from `data.lock`.
-- Produces (used only by `experiments/scoring_phase.py` in Task 11):
-  - `class ReferenceError(RuntimeError)`
-  - `reference_tokens(lock, root, carrier_lock_key: str, sample_id: str) -> list[str]` — raw token strings from the carrier's `.nlp` reference file (pipe-delimited, header-driven; requires a `token` column). Raw tokens; normalization happens in the frozen scoring stack at comparison time.
-
-- [ ] **Step 1: Write the failing tests**
+- [ ] **Step 2: Write the failing references tests**
 
 `tests/unit/test_references.py`:
 
@@ -571,21 +503,59 @@ def test_unknown_carrier_fails_closed(synthetic_world):
         reference_tokens(lock, synthetic_world.data_root, "conec", "4000001")
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [ ] **Step 3: Run tests to verify they fail**
 
-Run: `pytest tests/unit/test_references.py -v`
-Expected: FAIL with `ModuleNotFoundError`
+Run: `pytest tests/unit/test_identity_and_loader.py -k earnings21 tests/unit/test_references.py -v`
+Expected: FAIL (`ImportError` / `ModuleNotFoundError`)
 
-- [ ] **Step 3: Implement `data/references.py`**
+- [ ] **Step 4: Implement both**
+
+Append to `loader.py` (mirror of `load_earnings22`):
+
+```python
+def load_earnings21(lock: Mapping[str, object], root: Path) -> list[SampleRef]:
+    """All Earnings21 samples, sorted by sample id, identity-checked against media."""
+
+    entry = lock_entry(lock, "earnings21-original")
+    carrier_dir = asset_dir(lock, "earnings21-original", root)
+    subdir = str(entry["local_subdir"]).rstrip("/")
+    rows = _metadata_rows(carrier_dir / "earnings21-file-metadata.csv", "file_id")
+    media_dir = carrier_dir / "media"
+    media_ids = {
+        path.name[: -len(".mp3")] for path in media_dir.glob("*.mp3") if path.is_file()
+    }
+    if media_ids != set(rows):
+        raise LoaderError(
+            "earnings21 media/metadata identity drift: "
+            f"media_only={sorted(media_ids - set(rows))[:5]} "
+            f"metadata_only={sorted(set(rows) - media_ids)[:5]}"
+        )
+    samples = []
+    for sample_id in sorted(rows):
+        row = rows[sample_id]
+        samples.append(
+            SampleRef(
+                carrier_lock_key="earnings21-original",
+                sample_id=sample_id,
+                media_relpath=f"{subdir}/media/{sample_id}.mp3",
+                audio_seconds=_float_field(row, "audio_length", sample_id),
+                sample_rate_hz=int(_float_field(row, "sample_rate", sample_id)),
+            )
+        )
+    return samples
+```
+
+Before finalizing, verify the real CSV header once (`Get-Content E:\chao_workspace\exploring-l4-intelligence\speechrl-data\datasets\earnings21-22\earnings21\earnings21-file-metadata.csv -TotalCount 1`); the synthetic world mirrors the real layout — if the real header differs, fix **both** conftest and this function in this task.
+
+Create `data/references.py`:
 
 ```python
 """Scoring-side reference access. RUNTIME-FORBIDDEN.
 
-This module reads reference transcript tokens for offline scoring only. It
-must never be imported by runtime-phase modules (models, evidence, tracing,
-experiments.arms, experiments.runner) — an AST contract test enforces this.
-References never cross the runtime boundary; they meet the hypothesis only
-inside the scoring phase.
+Reads reference transcript tokens for offline scoring only. The ONLY module
+allowed to import this is core/scorers.py — an AST contract test enforces
+that. References never cross the runtime boundary; they meet the hypothesis
+only inside the scoring phase.
 """
 
 from __future__ import annotations
@@ -636,143 +606,158 @@ def reference_tokens(
     return tokens
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [ ] **Step 5: Run tests to verify they pass**
 
-Run: `pytest tests/unit/test_references.py -v`
+Run: `pytest tests/unit/test_identity_and_loader.py tests/unit/test_references.py -v`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/speech_aware_evidence_acquisition/data/references.py tests/unit/test_references.py
-git commit -m "feat(r0): scoring-side reference token reader (runtime-forbidden)"
+git add src/speech_aware_evidence_acquisition/data/loader.py src/speech_aware_evidence_acquisition/data/references.py tests/unit/test_identity_and_loader.py tests/unit/test_references.py
+git commit -m "feat(r0): earnings21 loader + scoring-side reference reader"
 ```
 
 ---
 
-### Task 5: Evidence schema, ConEC evidence loader, negative/oracle controls
+### Task 4: `core/base.py` — the ONE registry mechanism + shared types
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/evidence/schema.py`
-- Create: `src/speech_aware_evidence_acquisition/evidence/conec.py`
-- Create: `src/speech_aware_evidence_acquisition/evidence/controls.py`
-- Modify: `src/speech_aware_evidence_acquisition/evidence/__init__.py`
-- Test: `tests/unit/test_evidence.py`
+- Create: `src/speech_aware_evidence_acquisition/core/__init__.py` (minimal for now; finalized in Task 12)
+- Create: `src/speech_aware_evidence_acquisition/core/base.py`
+- Test: `tests/unit/test_core_base.py`
 
 **Interfaces:**
-- Consumes: `contracts.assert_information_boundary`, `data.lock.asset_dir`, `e0.artifacts.sha256_file`.
-- Produces:
-  - `class EvidenceError(RuntimeError)`
-  - `@dataclass(frozen=True) EvidenceItem`: `evidence_id: str`, `source_uri: str`, `content: str`, `provenance: Mapping[str, str]` (required keys `lock_key`, `relpath`, `sha256`); methods `validate() -> EvidenceItem`, `runtime_view() -> dict` (`evidence_id`, `source_uri`, `content` only), `provenance_view() -> dict`.
-  - `conec_context_evidence(lock, root, sample_id: str) -> list[EvidenceItem]` — the ConEC supplementary context for one Earnings21 call (`earnings21/contexts/<id>.txt`), fail-closed if absent.
-  - `rotated_mismatch(evidence_by_sample: Mapping[str, list[EvidenceItem]]) -> dict[str, list[EvidenceItem]]` — deterministic mismatched-evidence negative control: each sample receives the next sorted sample's evidence (rotation by one; requires ≥2 samples).
-  - `class OracleEvidenceError(RuntimeError)`; `oracle_evidence(*args, **kwargs)` — **always raises**: the oracle upper bound is a scoring-side analysis interface and never enters a runtime arm (its real computation is specified with the probe that first uses it).
-  - `evidence/__init__.py` re-exports: `EvidenceError`, `EvidenceItem`, `OracleEvidenceError`, `conec_context_evidence`, `oracle_evidence`, `rotated_mismatch`.
+- Consumes: `contracts.assert_information_boundary`.
+- Produces (every later task consumes these — this file is the single import root for the seams):
+  - `class CoreError(RuntimeError)`
+  - `class Registry`: `__init__(kind: str)`, `register(name: str, entry) -> entry` (refuses blank/duplicate names), `resolve(name: str)` (fail-closed with the sorted known names), `names() -> list[str]`
+  - The five registry instances: `CARRIERS` (name = carrier lock key → loader callable `(lock, root) -> list[SampleRef]`), `EVIDENCE_SOURCES` (name → callable `(lock, root, sample_id) -> list[EvidenceItem]`), `TRANSPORTS` (name → factory `(config_values: Mapping, data_root: Path) -> Callable[[bytes], bytes]`), `POLICIES` (name → policy instance with `run_sample(ctx) -> SampleOutcome`), `SCORERS` (name → callable `(outputs_path, lock, root) -> dict`)
+  - `@dataclass(frozen=True) EvidenceItem`: `evidence_id`, `source_uri`, `content`, `provenance: Mapping[str, str]` (required keys `lock_key`/`relpath`/`sha256`); `validate()`, `runtime_view()`, `provenance_view()`; `class EvidenceError(RuntimeError)`
+  - `@dataclass(frozen=True) SampleOutcome`: `sample_id: str`, `request_ids: tuple[str, ...]`, `text: str`, `admitted: bool`, `request_sha256: str`, `response_sha256: str`
+  - `@dataclass(frozen=True) RunResult`: `run_id: str`, `arm: str`, `outputs_path: Path`, `trace_manifest_hash: str`, `cost: Mapping[str, object]`
+  - `@dataclass SampleContext` (mutable is fine): `sample`, `evidence: list[EvidenceItem]`, `adapter`, `sink`, `arm: str`, `task_instruction: str`, `decoding_params: Mapping[str, object]`, `request_id_base: str`, `retrieval_query: str | None`
 
 - [ ] **Step 1: Write the failing tests**
 
-`tests/unit/test_evidence.py`:
+`tests/unit/test_core_base.py`:
 
 ```python
-"""Evidence schema: boundary-safe items, ConEC contexts, deterministic controls."""
+"""One registry mechanism; boundary-safe evidence items."""
 
 import pytest
 
 from speech_aware_evidence_acquisition.contracts import BoundaryViolation
-from speech_aware_evidence_acquisition.data.lock import load_lock
-from speech_aware_evidence_acquisition.evidence import (
+from speech_aware_evidence_acquisition.core.base import (
+    CoreError,
     EvidenceError,
     EvidenceItem,
-    OracleEvidenceError,
-    conec_context_evidence,
-    oracle_evidence,
-    rotated_mismatch,
+    Registry,
 )
 
 
-def _item(evidence_id="ev-1", content="context text"):
+def test_registry_registers_resolves_and_fails_closed():
+    registry = Registry("widget")
+    registry.register("a", 1)
+    assert registry.resolve("a") == 1
+    assert registry.names() == ["a"]
+    with pytest.raises(CoreError, match="duplicate"):
+        registry.register("a", 2)
+    with pytest.raises(CoreError, match="blank"):
+        registry.register("", 3)
+    with pytest.raises(CoreError, match="unknown widget 'zz'"):
+        registry.resolve("zz")
+
+
+def _item(provenance=None):
     return EvidenceItem(
-        evidence_id=evidence_id,
+        evidence_id="ev-1",
         source_uri="conec://earnings21/contexts/4000001.txt",
-        content=content,
-        provenance={"lock_key": "conec", "relpath": "earnings21/contexts/4000001.txt", "sha256": "0" * 64},
+        content="context text",
+        provenance=provenance
+        or {"lock_key": "conec", "relpath": "earnings21/contexts/4000001.txt", "sha256": "0" * 64},
     )
 
 
 def test_evidence_item_validates_and_projects_views():
     item = _item().validate()
-    view = item.runtime_view()
-    assert set(view) == {"evidence_id", "source_uri", "content"}
+    assert set(item.runtime_view()) == {"evidence_id", "source_uri", "content"}
     assert set(item.provenance_view()) == {"lock_key", "relpath", "sha256"}
 
 
 def test_evidence_item_refuses_missing_provenance_keys():
-    bad = EvidenceItem(
-        evidence_id="ev-1", source_uri="u", content="c", provenance={"lock_key": "conec"}
-    )
     with pytest.raises(EvidenceError, match="provenance"):
-        bad.validate()
+        _item(provenance={"lock_key": "conec"}).validate()
 
 
 def test_evidence_item_refuses_forbidden_field_smuggling():
-    bad = EvidenceItem(
-        evidence_id="ev-1",
-        source_uri="u",
-        content="c",
-        provenance={"lock_key": "conec", "relpath": "r", "sha256": "0" * 64, "reference": "x"},
+    bad = _item(
+        provenance={"lock_key": "conec", "relpath": "r", "sha256": "0" * 64, "reference": "x"}
     )
     with pytest.raises(BoundaryViolation):
         bad.validate()
-
-
-def test_conec_context_evidence_loads_and_hashes(synthetic_world):
-    lock = load_lock(synthetic_world.lock_path)
-    items = conec_context_evidence(lock, synthetic_world.data_root, "4000001")
-    assert len(items) == 1
-    assert items[0].content == "ctx"
-    assert items[0].provenance["lock_key"] == "conec"
-    assert len(items[0].provenance["sha256"]) == 64
-
-
-def test_conec_context_evidence_fails_closed_when_missing(synthetic_world):
-    lock = load_lock(synthetic_world.lock_path)
-    with pytest.raises(EvidenceError, match="missing"):
-        conec_context_evidence(lock, synthetic_world.data_root, "0000000")
-
-
-def test_rotated_mismatch_is_a_derangement():
-    table = {"a": [_item("ev-a")], "b": [_item("ev-b")], "c": [_item("ev-c")]}
-    rotated = rotated_mismatch(table)
-    assert set(rotated) == set(table)
-    for sample_id, items in rotated.items():
-        assert items != table[sample_id], sample_id
-    with pytest.raises(EvidenceError, match="at least 2"):
-        rotated_mismatch({"a": [_item()]})
-
-
-def test_oracle_interface_never_enters_runtime():
-    with pytest.raises(OracleEvidenceError, match="scoring-side"):
-        oracle_evidence("anything")
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `pytest tests/unit/test_evidence.py -v`
-Expected: FAIL with `ImportError` on the `evidence` names
+Run: `pytest tests/unit/test_core_base.py -v`
+Expected: FAIL with `ModuleNotFoundError`
 
-- [ ] **Step 3: Implement the three modules**
-
-`evidence/schema.py`:
+- [ ] **Step 3: Implement `core/base.py`** (and a placeholder `core/__init__.py` containing only a docstring `"""Shared Stage-2 engineering foundation (R0)."""`)
 
 ```python
-"""Boundary-safe evidence items with mandatory provenance (R0 evidence schema)."""
+"""Foundation seams: ONE registry mechanism + shared value types (R0).
+
+Anti-fragmentation contract (owner direction 2026-08-05): every pluggable
+dimension of a Stage-2 experiment — carrier, evidence source, transport,
+policy, scorer — registers here through the same Registry class, and every
+run flows through core.driver.run_experiment(). A new experiment is config
+plus at most one newly registered component, never new wiring.
+"""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Mapping
 
 from ..contracts import assert_information_boundary
+
+
+class CoreError(RuntimeError):
+    """A foundation seam refuses: unknown/duplicate registration or wiring misuse."""
+
+
+class Registry:
+    def __init__(self, kind: str) -> None:
+        self._kind = kind
+        self._entries: dict[str, object] = {}
+
+    def register(self, name: str, entry: object) -> object:
+        if not isinstance(name, str) or not name.strip():
+            raise CoreError(f"{self._kind} registry: blank name")
+        if name in self._entries:
+            raise CoreError(f"{self._kind} registry: duplicate name {name!r}")
+        self._entries[name] = entry
+        return entry
+
+    def resolve(self, name: str) -> object:
+        try:
+            return self._entries[name]
+        except KeyError:
+            raise CoreError(
+                f"unknown {self._kind} {name!r}; registered: {self.names()}"
+            ) from None
+
+    def names(self) -> list[str]:
+        return sorted(self._entries)
+
+
+CARRIERS = Registry("carrier")
+EVIDENCE_SOURCES = Registry("evidence source")
+TRANSPORTS = Registry("transport")
+POLICIES = Registry("policy")
+SCORERS = Registry("scorer")
 
 _REQUIRED_PROVENANCE = ("lock_key", "relpath", "sha256")
 
@@ -814,128 +799,66 @@ class EvidenceItem:
 
     def provenance_view(self) -> dict[str, object]:
         return dict(self.provenance)
-```
-
-`evidence/conec.py`:
-
-```python
-"""ConEC supplementary contexts as legal external evidence (Earnings21 side)."""
-
-from __future__ import annotations
-
-from pathlib import Path
-from typing import Mapping
-
-from ..data.lock import asset_dir
-from ..e0.artifacts import sha256_file
-from .schema import EvidenceError, EvidenceItem
 
 
-def conec_context_evidence(
-    lock: Mapping[str, object], root: Path, sample_id: str
-) -> list[EvidenceItem]:
-    relpath = f"earnings21/contexts/{sample_id}.txt"
-    path = asset_dir(lock, "conec", root) / "earnings21" / "contexts" / f"{sample_id}.txt"
-    if not path.is_file():
-        raise EvidenceError(f"conec context missing for {sample_id}: {path}")
-    try:
-        content = path.read_text(encoding="utf-8")
-    except (OSError, UnicodeError) as error:
-        raise EvidenceError(f"cannot read conec context {path}: {error}") from error
-    item = EvidenceItem(
-        evidence_id=f"conec/{sample_id}",
-        source_uri=f"conec://{relpath}",
-        content=content,
-        provenance={"lock_key": "conec", "relpath": relpath, "sha256": sha256_file(path)},
-    )
-    return [item.validate()]
-```
-
-`evidence/controls.py`:
-
-```python
-"""Deterministic negative control and the (runtime-refusing) oracle interface."""
-
-from __future__ import annotations
-
-from typing import Mapping
-
-from .schema import EvidenceError, EvidenceItem
+@dataclass(frozen=True)
+class SampleOutcome:
+    sample_id: str
+    request_ids: tuple[str, ...]
+    text: str
+    admitted: bool
+    request_sha256: str
+    response_sha256: str
 
 
-class OracleEvidenceError(RuntimeError):
-    """Oracle evidence was requested on the runtime path."""
+@dataclass(frozen=True)
+class RunResult:
+    run_id: str
+    arm: str
+    outputs_path: Path
+    trace_manifest_hash: str
+    cost: Mapping[str, object]
 
 
-def rotated_mismatch(
-    evidence_by_sample: Mapping[str, list[EvidenceItem]],
-) -> dict[str, list[EvidenceItem]]:
-    """Each sample receives the next sorted sample's evidence — a deterministic
-    derangement (mismatched-evidence negative control), no randomness involved."""
-
-    ordered = sorted(evidence_by_sample)
-    if len(ordered) < 2:
-        raise EvidenceError("rotated mismatch needs at least 2 samples")
-    return {
-        sample_id: list(evidence_by_sample[ordered[(index + 1) % len(ordered)]])
-        for index, sample_id in enumerate(ordered)
-    }
-
-
-def oracle_evidence(*_args: object, **_kwargs: object) -> None:
-    raise OracleEvidenceError(
-        "oracle evidence is a scoring-side upper-bound analysis interface; it "
-        "never enters a runtime arm (entry contract R0; design spec §2). Its "
-        "computation is specified with the probe that first uses it."
-    )
-```
-
-`evidence/__init__.py`:
-
-```python
-"""R0 evidence schema: boundary-safe items, ConEC contexts, controls."""
-
-from .conec import conec_context_evidence
-from .controls import OracleEvidenceError, oracle_evidence, rotated_mismatch
-from .schema import EvidenceError, EvidenceItem
-
-__all__ = [
-    "EvidenceError",
-    "EvidenceItem",
-    "OracleEvidenceError",
-    "conec_context_evidence",
-    "oracle_evidence",
-    "rotated_mismatch",
-]
+@dataclass
+class SampleContext:
+    sample: object
+    evidence: list[EvidenceItem]
+    adapter: object
+    sink: object
+    arm: str
+    task_instruction: str
+    decoding_params: Mapping[str, object]
+    request_id_base: str
+    retrieval_query: str | None = None
+    extras: dict[str, object] = field(default_factory=dict)
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `pytest tests/unit/test_evidence.py -v`
+Run: `pytest tests/unit/test_core_base.py -v`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/speech_aware_evidence_acquisition/evidence tests/unit/test_evidence.py
-git commit -m "feat(r0): evidence schema, conec contexts, mismatch control, oracle refusal"
+git add src/speech_aware_evidence_acquisition/core tests/unit/test_core_base.py
+git commit -m "feat(r0): core foundation - single registry mechanism + shared value types"
 ```
 
 ---
 
-### Task 6: `tracing/sink.py` — four-axis JSONL trace sink
+### Task 5: `core/tracing.py` — append-only four-axis trace sink
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/tracing/sink.py`
-- Modify: `src/speech_aware_evidence_acquisition/tracing/__init__.py`
+- Create: `src/speech_aware_evidence_acquisition/core/tracing.py`
 - Test: `tests/unit/test_trace_sink.py`
 
 **Interfaces:**
-- Consumes: `contracts.TraceRecord`, `contracts.TraceContractError`, `e0.artifacts.REPO_ROOT`, `e0.artifacts.write_json_artifact`.
+- Consumes: `contracts.TraceRecord`, `e0.artifacts.REPO_ROOT/write_json_artifact`.
 - Produces:
   - `class TraceSinkError(RuntimeError)`
-  - `class TraceSink`: `__init__(self, run_dir: Path, run_id: str)` — creates `run_dir` if needed; **refuses any `run_dir` inside the repo** (raw traces are never committed). `emit(self, channel: str, record_id: str, payload: Mapping) -> str` — builds `TraceRecord`, validates, appends one JSONL line to `<run_dir>/<run_id>.trace.jsonl`, returns the record's `content_hash()`; refuses duplicate `record_id`. `manifest(self) -> dict[str, str]` (record_id → content hash, insertion-ordered). `close(self) -> str` — writes `<run_dir>/<run_id>.trace-manifest.json` (canonical JSON via `write_json_artifact`) and returns its file hash; sink refuses further `emit` after close.
-  - `tracing/__init__.py` re-exports `TraceSink`, `TraceSinkError`.
+  - `class TraceSink`: `__init__(run_dir: Path, run_id: str)` — creates `run_dir`; **refuses any `run_dir` inside the repo**; property `run_id`; `emit(channel, record_id, payload) -> str` (content hash; refuses duplicate ids and post-close emits); `manifest() -> dict[str, str]` (insertion-ordered); `close() -> str` (writes `<run_id>.trace-manifest.json`, returns its file hash).
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -950,11 +873,12 @@ import pytest
 
 from speech_aware_evidence_acquisition.contracts import TraceContractError
 from speech_aware_evidence_acquisition.e0.artifacts import REPO_ROOT
-from speech_aware_evidence_acquisition.tracing import TraceSink, TraceSinkError
+from speech_aware_evidence_acquisition.core.tracing import TraceSink, TraceSinkError
 
 
 def test_emit_appends_validated_lines_and_manifest(tmp_path):
     sink = TraceSink(tmp_path / "run", "SAEA-E-000-test")
+    assert sink.run_id == "SAEA-E-000-test"
     h1 = sink.emit("OBS", "s1/obs", {"obs_speech_ref": "earnings21-original/1"})
     h2 = sink.emit("COST", "s1/cost", {"calls": 1, "latency_seconds": 0.5})
     lines = (tmp_path / "run" / "SAEA-E-000-test.trace.jsonl").read_text(
@@ -999,9 +923,9 @@ def test_close_writes_manifest_and_freezes(tmp_path):
 - [ ] **Step 2: Run tests to verify they fail**
 
 Run: `pytest tests/unit/test_trace_sink.py -v`
-Expected: FAIL with `ImportError`
+Expected: FAIL with `ModuleNotFoundError`
 
-- [ ] **Step 3: Implement `tracing/sink.py`**
+- [ ] **Step 3: Implement `core/tracing.py`**
 
 ```python
 """Append-only four-axis trace sink writing outside the repository (R0)."""
@@ -1037,6 +961,10 @@ class TraceSink:
         self._hashes: dict[str, str] = {}
         self._closed = False
 
+    @property
+    def run_id(self) -> str:
+        return self._run_id
+
     def emit(self, channel: str, record_id: str, payload: Mapping[str, object]) -> str:
         if self._closed:
             raise TraceSinkError("sink is closed")
@@ -1061,16 +989,6 @@ class TraceSink:
         )
 ```
 
-`tracing/__init__.py`:
-
-```python
-"""R0 four-axis trace sink."""
-
-from .sink import TraceSink, TraceSinkError
-
-__all__ = ["TraceSink", "TraceSinkError"]
-```
-
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `pytest tests/unit/test_trace_sink.py -v`
@@ -1079,31 +997,233 @@ Expected: PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/speech_aware_evidence_acquisition/tracing tests/unit/test_trace_sink.py
+git add src/speech_aware_evidence_acquisition/core/tracing.py tests/unit/test_trace_sink.py
 git commit -m "feat(r0): append-only four-axis trace sink with repo refusal"
 ```
 
 ---
 
-### Task 7: `models/frozen_core.py` — gate-bound adapter with the D2 allowlist choke point
+### Task 6: `core/carriers.py` + `core/evidence.py` — registered data components
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/models/frozen_core.py`
-- Modify: `src/speech_aware_evidence_acquisition/models/__init__.py`
-- Create: `tests/contract/gate_fixture.py` (move `GateFixture` here from `tests/contract/test_exposure_and_gate.py` — pure move, byte-identical class body plus the imports it needs; update `test_exposure_and_gate.py` to `from gate_fixture import GateFixture`. A plain helper module, NOT `conftest.py` — two conftest modules from different test dirs would collide on the `conftest` import name)
-- Test: `tests/unit/test_frozen_core_adapter.py`
-- Test: `tests/contract/test_frozen_core_adapter.py`
+- Create: `src/speech_aware_evidence_acquisition/core/carriers.py`
+- Create: `src/speech_aware_evidence_acquisition/core/evidence.py`
+- Test: `tests/unit/test_core_components.py`
 
 **Interfaces:**
-- Consumes: `contracts.FrozenCoreGate`, `contracts.ExecutionPlan`, `contracts.assert_information_boundary`, `e0.d2_leakage.ARM_VISIBLE_FIELDS` (the D2 allowlist, single source), `tracing.TraceSink`.
+- Consumes: `core.base` registries + `EvidenceItem`, `data.loader.load_earnings21/load_earnings22`, `data.lock.asset_dir`, `e0.artifacts.sha256_file`.
+- Produces (all via registries — no direct imports needed downstream):
+  - `CARRIERS`: `"earnings21-original"` → `load_earnings21`, `"earnings22-original"` → `load_earnings22`
+  - `EVIDENCE_SOURCES`: `"none"` → returns `[]`; `"conec-contexts"` → the ConEC supplementary context for one Earnings21 call (`earnings21/contexts/<id>.txt`, fail-closed if absent)
+  - `rotated_mismatch(evidence_by_sample: Mapping[str, list[EvidenceItem]]) -> dict[str, list[EvidenceItem]]` — deterministic derangement decorator over ANY source's table (each sample gets the next sorted sample's evidence; requires ≥2 samples). Exported as a function (the driver applies it on a config flag), NOT a separate source per base source — that is the anti-fragmentation move.
+  - `class OracleEvidenceError(RuntimeError)`; `EVIDENCE_SOURCES` name `"oracle"` → callable that **always raises** `OracleEvidenceError` (the oracle upper bound is scoring-side analysis; it never enters a runtime arm; its computation is specified with the probe that first uses it).
+
+- [ ] **Step 1: Write the failing tests**
+
+`tests/unit/test_core_components.py`:
+
+```python
+"""Registered carriers and evidence sources resolve through the ONE registry."""
+
+import pytest
+
+from speech_aware_evidence_acquisition.core import carriers, evidence  # noqa: F401 (registration)
+from speech_aware_evidence_acquisition.core.base import (
+    CARRIERS,
+    EVIDENCE_SOURCES,
+    EvidenceError,
+    EvidenceItem,
+)
+from speech_aware_evidence_acquisition.core.evidence import (
+    OracleEvidenceError,
+    rotated_mismatch,
+)
+from speech_aware_evidence_acquisition.data.lock import load_lock
+
+
+def test_carriers_are_registered_and_load(synthetic_world):
+    lock = load_lock(synthetic_world.lock_path)
+    e21 = CARRIERS.resolve("earnings21-original")(lock, synthetic_world.data_root)
+    e22 = CARRIERS.resolve("earnings22-original")(lock, synthetic_world.data_root)
+    assert len(e21) == 3 and len(e22) == 12
+
+
+def test_none_source_returns_empty(synthetic_world):
+    lock = load_lock(synthetic_world.lock_path)
+    assert EVIDENCE_SOURCES.resolve("none")(lock, synthetic_world.data_root, "x") == []
+
+
+def test_conec_source_loads_and_hashes(synthetic_world):
+    lock = load_lock(synthetic_world.lock_path)
+    items = EVIDENCE_SOURCES.resolve("conec-contexts")(
+        lock, synthetic_world.data_root, "4000001"
+    )
+    assert len(items) == 1
+    assert items[0].content == "ctx"
+    assert items[0].provenance["lock_key"] == "conec"
+    assert len(items[0].provenance["sha256"]) == 64
+
+
+def test_conec_source_fails_closed_when_missing(synthetic_world):
+    lock = load_lock(synthetic_world.lock_path)
+    with pytest.raises(EvidenceError, match="missing"):
+        EVIDENCE_SOURCES.resolve("conec-contexts")(
+            lock, synthetic_world.data_root, "0000000"
+        )
+
+
+def _item(evidence_id):
+    return EvidenceItem(
+        evidence_id=evidence_id, source_uri="u://x", content=evidence_id,
+        provenance={"lock_key": "conec", "relpath": "r", "sha256": "0" * 64},
+    )
+
+
+def test_rotated_mismatch_is_a_derangement():
+    table = {"a": [_item("ev-a")], "b": [_item("ev-b")], "c": [_item("ev-c")]}
+    rotated = rotated_mismatch(table)
+    assert set(rotated) == set(table)
+    for sample_id, items in rotated.items():
+        assert items != table[sample_id], sample_id
+    with pytest.raises(EvidenceError, match="at least 2"):
+        rotated_mismatch({"a": [_item("ev-a")]})
+
+
+def test_oracle_source_never_enters_runtime(synthetic_world):
+    lock = load_lock(synthetic_world.lock_path)
+    with pytest.raises(OracleEvidenceError, match="scoring-side"):
+        EVIDENCE_SOURCES.resolve("oracle")(lock, synthetic_world.data_root, "4000001")
+```
+
+- [ ] **Step 2: Run tests to verify they fail**
+
+Run: `pytest tests/unit/test_core_components.py -v`
+Expected: FAIL with `ModuleNotFoundError`
+
+- [ ] **Step 3: Implement both modules**
+
+`core/carriers.py`:
+
+```python
+"""Carrier loaders registered under their lock keys (the carrier seam)."""
+
+from __future__ import annotations
+
+from .base import CARRIERS
+from ..data.loader import load_earnings21, load_earnings22
+
+CARRIERS.register("earnings21-original", load_earnings21)
+CARRIERS.register("earnings22-original", load_earnings22)
+```
+
+`core/evidence.py`:
+
+```python
+"""Evidence sources (the evidence seam): conec contexts, none, oracle refusal,
+and the deterministic mismatch decorator applied by the driver on a config flag."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Mapping
+
+from ..data.lock import asset_dir
+from ..e0.artifacts import sha256_file
+from .base import EVIDENCE_SOURCES, EvidenceError, EvidenceItem
+
+
+class OracleEvidenceError(RuntimeError):
+    """Oracle evidence was requested on the runtime path."""
+
+
+def _none_source(
+    lock: Mapping[str, object], root: Path, sample_id: str
+) -> list[EvidenceItem]:
+    return []
+
+
+def _conec_contexts(
+    lock: Mapping[str, object], root: Path, sample_id: str
+) -> list[EvidenceItem]:
+    relpath = f"earnings21/contexts/{sample_id}.txt"
+    path = asset_dir(lock, "conec", root) / "earnings21" / "contexts" / f"{sample_id}.txt"
+    if not path.is_file():
+        raise EvidenceError(f"conec context missing for {sample_id}: {path}")
+    try:
+        content = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise EvidenceError(f"cannot read conec context {path}: {error}") from error
+    item = EvidenceItem(
+        evidence_id=f"conec/{sample_id}",
+        source_uri=f"conec://{relpath}",
+        content=content,
+        provenance={"lock_key": "conec", "relpath": relpath, "sha256": sha256_file(path)},
+    )
+    return [item.validate()]
+
+
+def _oracle_refusal(
+    lock: Mapping[str, object], root: Path, sample_id: str
+) -> list[EvidenceItem]:
+    raise OracleEvidenceError(
+        "oracle evidence is a scoring-side upper-bound analysis interface; it "
+        "never enters a runtime arm (entry contract R0; design spec §2). Its "
+        "computation is specified with the probe that first uses it."
+    )
+
+
+def rotated_mismatch(
+    evidence_by_sample: Mapping[str, list[EvidenceItem]],
+) -> dict[str, list[EvidenceItem]]:
+    """Each sample receives the next sorted sample's evidence — a deterministic
+    derangement (mismatched-evidence negative control), no randomness involved."""
+
+    ordered = sorted(evidence_by_sample)
+    if len(ordered) < 2:
+        raise EvidenceError("rotated mismatch needs at least 2 samples")
+    return {
+        sample_id: list(evidence_by_sample[ordered[(index + 1) % len(ordered)]])
+        for index, sample_id in enumerate(ordered)
+    }
+
+
+EVIDENCE_SOURCES.register("none", _none_source)
+EVIDENCE_SOURCES.register("conec-contexts", _conec_contexts)
+EVIDENCE_SOURCES.register("oracle", _oracle_refusal)
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `pytest tests/unit/test_core_components.py -v`
+Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/speech_aware_evidence_acquisition/core/carriers.py src/speech_aware_evidence_acquisition/core/evidence.py tests/unit/test_core_components.py
+git commit -m "feat(r0): registered carriers + evidence sources with mismatch decorator and oracle refusal"
+```
+
+---
+
+### Task 7: `core/model.py` — gate-bound adapter (D2 allowlist choke point) + llama-server transport
+
+**Files:**
+- Create: `src/speech_aware_evidence_acquisition/core/model.py`
+- Create: `tests/contract/gate_fixture.py` (move `GateFixture` here from `tests/contract/test_exposure_and_gate.py` — byte-identical class body plus the imports it needs; update `test_exposure_and_gate.py` to `from gate_fixture import GateFixture`. A plain helper module, NOT `conftest.py` — two conftest modules from different test dirs would collide on the `conftest` import name)
+- Modify: `tests/contract/test_exposure_and_gate.py` (import the moved fixture)
+- Test: `tests/unit/test_frozen_core_adapter.py`, `tests/unit/test_llama_server_transport.py`, `tests/contract/test_frozen_core_adapter.py`
+
+**Interfaces:**
+- Consumes: `contracts.FrozenCoreGate/ExecutionPlan/assert_information_boundary`, `e0.d2_leakage.ARM_VISIBLE_FIELDS` (single D2 source), `core.tracing.TraceSink`, `core.base.TRANSPORTS/CoreError`.
 - Produces:
   - `class FrozenCoreError(RuntimeError)`
-  - `@dataclass(frozen=True) CoreResponse`: `text: str`, `usage: Mapping[str, int]`, `request_sha256: str`, `response_sha256: str`, `latency_seconds: float`
-  - `class FrozenCoreAdapter`: `__init__(self, gate, plan, arm: str, transport: Callable[[bytes], bytes], sink: TraceSink)` — validates `arm in ARM_VISIBLE_FIELDS`, then calls `gate.assert_model_touch_allowed(plan)` **in the same process that will send requests** (TOCTOU discipline). `request(self, payload: Mapping) -> CoreResponse` — the only request path; enforces payload keys **exactly equal** to the arm's allowlist, boundary-checks, enforces the plan's call and audio-second budgets cumulatively, canonical-JSON-serializes, traces MODEL_REQUEST / MODEL_RESPONSE / COST, returns `CoreResponse`. `cost_summary(self) -> dict` — `calls_used`, `audio_seconds_used`, `latency_seconds_total`, `prompt_tokens_total`, `completion_tokens_total`.
-  - Transport contract: `transport(request_bytes) -> bytes` returning JSON `{"text": str, "usage": {str: int}}` (Task 8 provides the real one).
-  - `models/__init__.py` re-exports `CoreResponse`, `FrozenCoreAdapter`, `FrozenCoreError`.
+  - `@dataclass(frozen=True) CoreResponse`: `text`, `usage: Mapping[str, int]`, `request_sha256`, `response_sha256`, `latency_seconds`
+  - `class FrozenCoreAdapter`: `__init__(gate, plan, arm, transport, sink)` — validates `arm in ARM_VISIBLE_FIELDS`; calls `gate.assert_model_touch_allowed(plan)` in the same process that will send requests (TOCTOU discipline). `request(payload) -> CoreResponse` — the ONLY request path: payload keys must **exactly equal** the arm's allowlist; boundary check; cumulative call + audio-second budget metering against the plan; canonical JSON; MODEL_REQUEST / MODEL_RESPONSE / COST trace records; parses the transport's `{"text","usage"}` contract. `cost_summary() -> dict` (`calls_used`, `audio_seconds_used`, `latency_seconds_total`, `prompt_tokens_total`, `completion_tokens_total`).
+  - `class LlamaServerTransport`: `__init__(base_url, data_root, timeout_seconds=300.0, post=None)` — maps a boundary payload to an OpenAI-style `/v1/chat/completions` body (system = `task_instruction`; user content = base64 `input_audio` from `data_root / media_relpath` + one text part per evidence item; `decoding_params` passed through top-level); `post(url, body) -> bytes` defaults to stdlib urllib, injectable for tests; `__call__(request_bytes) -> bytes` returns canonical `{"text","usage"}` bytes.
+  - Registered: `TRANSPORTS.register("llama-server", factory)` where `factory(values: Mapping, data_root: Path)` builds `LlamaServerTransport(values["base_url"], data_root, values.get("timeout_seconds", 300.0))`.
 
-- [ ] **Step 1: Write the failing unit tests**
+- [ ] **Step 1: Write the failing adapter unit tests**
 
 `tests/unit/test_frozen_core_adapter.py`:
 
@@ -1119,8 +1239,8 @@ from speech_aware_evidence_acquisition.contracts import (
     ExecutionPlan,
 )
 from speech_aware_evidence_acquisition.e0.d2_leakage import ARM_VISIBLE_FIELDS
-from speech_aware_evidence_acquisition.models import FrozenCoreAdapter, FrozenCoreError
-from speech_aware_evidence_acquisition.tracing import TraceSink
+from speech_aware_evidence_acquisition.core.model import FrozenCoreAdapter, FrozenCoreError
+from speech_aware_evidence_acquisition.core.tracing import TraceSink
 
 
 class _OpenGate:
@@ -1167,7 +1287,9 @@ def _payload(arm="bare-core", **overrides):
 
 def _fake_transport(request_bytes):
     assert isinstance(request_bytes, bytes)
-    return json.dumps({"text": "hello world", "usage": {"prompt_tokens": 5, "completion_tokens": 2}}).encode()
+    return json.dumps(
+        {"text": "hello world", "usage": {"prompt_tokens": 5, "completion_tokens": 2}}
+    ).encode()
 
 
 def _adapter(tmp_path, gate=None, plan=None, arm="bare-core"):
@@ -1192,8 +1314,7 @@ def test_request_round_trip_traces_and_counts(tmp_path):
     response = adapter.request(_payload())
     assert response.text == "hello world"
     assert len(response.request_sha256) == 64
-    ids = list(sink.manifest())
-    assert ids == ["req-1/request", "req-1/response", "req-1/cost"]
+    assert list(sink.manifest()) == ["req-1/request", "req-1/response", "req-1/cost"]
     summary = adapter.cost_summary()
     assert summary["calls_used"] == 1
     assert summary["audio_seconds_used"] == 100.0
@@ -1239,33 +1360,138 @@ def test_unknown_arm_refused(tmp_path):
         _adapter(tmp_path, arm="oracle-arm")
 ```
 
-- [ ] **Step 2: Run unit tests to verify they fail**
+- [ ] **Step 2: Write the failing transport unit tests**
 
-Run: `pytest tests/unit/test_frozen_core_adapter.py -v`
-Expected: FAIL with `ImportError`
-
-- [ ] **Step 3: Implement `models/frozen_core.py`**
+`tests/unit/test_llama_server_transport.py`:
 
 ```python
-"""Frozen-core adapter: the ONLY model request path in this repository (R0).
+"""Transport maps boundary payloads to chat-completions bodies without network."""
+
+import base64
+import json
+
+import pytest
+
+from speech_aware_evidence_acquisition.core.model import LlamaServerTransport
+
+
+def _boundary_payload(tmp_path, **overrides):
+    media = tmp_path / "media" / "5000001.mp3"
+    media.parent.mkdir(parents=True, exist_ok=True)
+    media.write_bytes(b"fake-mp3-bytes")
+    payload = {
+        "request_id": "req-1",
+        "carrier_lock_key": "earnings22-original",
+        "sample_id": "5000001",
+        "speech_ref": "earnings22-original/5000001",
+        "media_relpath": "media/5000001.mp3",
+        "audio_seconds": 10.0,
+        "sample_rate_hz": 16000,
+        "task_instruction": "Transcribe the speech verbatim.",
+        "history": [],
+        "decoding_params": {"temperature": 0, "seed": 20260803},
+    }
+    payload.update(overrides)
+    return payload
+
+
+def _canned_response():
+    return json.dumps(
+        {
+            "choices": [{"message": {"content": "hello world"}}],
+            "usage": {"prompt_tokens": 7, "completion_tokens": 2},
+        }
+    ).encode()
+
+
+def test_body_mapping_and_response_projection(tmp_path):
+    captured = {}
+
+    def fake_post(url, body):
+        captured["url"] = url
+        captured["body"] = json.loads(body)
+        return _canned_response()
+
+    transport = LlamaServerTransport("http://127.0.0.1:8080", tmp_path, post=fake_post)
+    raw = transport(json.dumps(_boundary_payload(tmp_path)).encode())
+    result = json.loads(raw)
+    assert result == {
+        "text": "hello world",
+        "usage": {"prompt_tokens": 7, "completion_tokens": 2},
+    }
+    assert captured["url"] == "http://127.0.0.1:8080/v1/chat/completions"
+    body = captured["body"]
+    assert body["temperature"] == 0
+    assert body["seed"] == 20260803
+    assert body["messages"][0] == {
+        "role": "system",
+        "content": "Transcribe the speech verbatim.",
+    }
+    audio_part = body["messages"][1]["content"][0]
+    assert audio_part["type"] == "input_audio"
+    assert audio_part["input_audio"]["format"] == "mp3"
+    assert base64.b64decode(audio_part["input_audio"]["data"]) == b"fake-mp3-bytes"
+
+
+def test_evidence_items_become_text_parts(tmp_path):
+    def fake_post(url, body):
+        parts = json.loads(body)["messages"][1]["content"]
+        assert parts[1] == {"type": "text", "text": "[evidence ev-1] context text"}
+        return _canned_response()
+
+    transport = LlamaServerTransport("http://127.0.0.1:8080", tmp_path, post=fake_post)
+    payload = _boundary_payload(
+        tmp_path,
+        supplied_evidence=[
+            {"evidence_id": "ev-1", "source_uri": "conec://x", "content": "context text"}
+        ],
+        evidence_provenance=[{"lock_key": "conec", "relpath": "x", "sha256": "0" * 64}],
+    )
+    transport(json.dumps(payload).encode())
+
+
+def test_missing_media_fails_closed(tmp_path):
+    transport = LlamaServerTransport(
+        "http://127.0.0.1:8080", tmp_path, post=lambda u, b: _canned_response()
+    )
+    payload = _boundary_payload(tmp_path, media_relpath="media/absent.mp3")
+    with pytest.raises(FileNotFoundError):
+        transport(json.dumps(payload).encode())
+```
+
+- [ ] **Step 3: Run tests to verify they fail**
+
+Run: `pytest tests/unit/test_frozen_core_adapter.py tests/unit/test_llama_server_transport.py -v`
+Expected: FAIL with `ModuleNotFoundError`
+
+- [ ] **Step 4: Implement `core/model.py`**
+
+```python
+"""Frozen-core adapter and transports: the ONLY model request path (R0).
 
 Discipline (docs/engineering.md): the gate is checked in the same process
 that sends requests (no check-then-run-elsewhere TOCTOU gap); the D2 per-arm
 visible-field allowlist is enforced as an exact key set on every request —
 the choke point that makes a leakage a hard error rather than a convention.
+The real llama-server endpoint shape is confirmed at R0 smoke time against
+the receipt-pinned build — tests inject `post` and never open a socket.
 """
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import time
+import urllib.request
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable, Mapping
 
 from ..contracts import ExecutionPlan, assert_information_boundary
 from ..e0.d2_leakage import ARM_VISIBLE_FIELDS
-from ..tracing import TraceSink
+from .base import TRANSPORTS
+from .tracing import TraceSink
 
 
 class FrozenCoreError(RuntimeError):
@@ -1329,7 +1555,10 @@ class FrozenCoreAdapter:
                 f"call budget exhausted: plan {self._plan.run_id} allows "
                 f"{self._plan.planned_model_calls} calls"
             )
-        if self._audio_seconds_used + float(audio_seconds) > self._plan.planned_speech_audio_seconds:
+        if (
+            self._audio_seconds_used + float(audio_seconds)
+            > self._plan.planned_speech_audio_seconds
+        ):
             raise FrozenCoreError(
                 f"audio budget exhausted: plan {self._plan.run_id} allows "
                 f"{self._plan.planned_speech_audio_seconds} speech audio seconds"
@@ -1351,7 +1580,9 @@ class FrozenCoreAdapter:
             text = parsed["text"]
             usage = {str(k): int(v) for k, v in dict(parsed.get("usage", {})).items()}
         except (KeyError, TypeError, ValueError, UnicodeError) as error:
-            raise FrozenCoreError(f"transport returned a malformed response: {error}") from error
+            raise FrozenCoreError(
+                f"transport returned a malformed response: {error}"
+            ) from error
         self._sink.emit(
             "MODEL_RESPONSE",
             f"{request_id}/response",
@@ -1389,28 +1620,82 @@ class FrozenCoreAdapter:
             "prompt_tokens_total": self._prompt_tokens,
             "completion_tokens_total": self._completion_tokens,
         }
+
+
+def _default_post(timeout_seconds: float) -> Callable[[str, bytes], bytes]:
+    def post(url: str, body: bytes) -> bytes:
+        request = urllib.request.Request(
+            url, data=body, headers={"Content-Type": "application/json"}, method="POST"
+        )
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            return response.read()
+
+    return post
+
+
+class LlamaServerTransport:
+    def __init__(
+        self,
+        base_url: str,
+        data_root: Path,
+        timeout_seconds: float = 300.0,
+        post: Callable[[str, bytes], bytes] | None = None,
+    ) -> None:
+        self._url = base_url.rstrip("/") + "/v1/chat/completions"
+        self._data_root = Path(data_root)
+        self._post = post or _default_post(timeout_seconds)
+
+    def __call__(self, request_bytes: bytes) -> bytes:
+        payload: Mapping[str, object] = json.loads(request_bytes.decode("utf-8"))
+        media = self._data_root / str(payload["media_relpath"])
+        if not media.is_file():
+            raise FileNotFoundError(f"media missing for transport: {media}")
+        audio_b64 = base64.b64encode(media.read_bytes()).decode("ascii")
+        content: list[dict[str, object]] = [
+            {
+                "type": "input_audio",
+                "input_audio": {"data": audio_b64, "format": media.suffix.lstrip(".").lower()},
+            }
+        ]
+        for field in ("supplied_evidence", "retrieved_evidence"):
+            for item in payload.get(field, []):  # type: ignore[union-attr]
+                content.append(
+                    {"type": "text", "text": f"[evidence {item['evidence_id']}] {item['content']}"}
+                )
+        body: dict[str, object] = {
+            "messages": [
+                {"role": "system", "content": payload["task_instruction"]},
+                {"role": "user", "content": content},
+            ],
+        }
+        for key, value in dict(payload.get("decoding_params", {})).items():  # type: ignore[arg-type]
+            body[key] = value
+        raw = self._post(self._url, json.dumps(body).encode("utf-8"))
+        parsed = json.loads(raw.decode("utf-8"))
+        text = parsed["choices"][0]["message"]["content"]
+        usage = {str(k): int(v) for k, v in dict(parsed.get("usage", {})).items()}
+        return json.dumps({"text": text, "usage": usage}).encode("utf-8")
+
+
+def _llama_server_factory(values: Mapping[str, object], data_root: Path):
+    return LlamaServerTransport(
+        str(values["base_url"]), data_root, float(values.get("timeout_seconds", 300.0))
+    )
+
+
+TRANSPORTS.register("llama-server", _llama_server_factory)
 ```
 
-`models/__init__.py`:
+- [ ] **Step 5: Run unit tests to verify they pass**
 
-```python
-"""R0 frozen-core adapter (the only model request path)."""
-
-from .frozen_core import CoreResponse, FrozenCoreAdapter, FrozenCoreError
-
-__all__ = ["CoreResponse", "FrozenCoreAdapter", "FrozenCoreError"]
-```
-
-- [ ] **Step 4: Run unit tests to verify they pass**
-
-Run: `pytest tests/unit/test_frozen_core_adapter.py -v`
+Run: `pytest tests/unit/test_frozen_core_adapter.py tests/unit/test_llama_server_transport.py -v`
 Expected: PASS
 
-- [ ] **Step 5: Move `GateFixture` to `tests/contract/gate_fixture.py` and add the contract test**
+- [ ] **Step 6: Move `GateFixture` and add the real-gate contract test**
 
-Move the `GateFixture` class (and only it, plus the imports it needs) from `tests/contract/test_exposure_and_gate.py` into a new plain module `tests/contract/gate_fixture.py`, byte-identical; in `test_exposure_and_gate.py` replace the class definition with `from gate_fixture import GateFixture`. Run `pytest tests/contract/test_exposure_and_gate.py -v` — all pre-existing tests must still pass before continuing.
+Move the `GateFixture` class from `tests/contract/test_exposure_and_gate.py` into `tests/contract/gate_fixture.py` (byte-identical, plus its imports); update `test_exposure_and_gate.py` to `from gate_fixture import GateFixture`. Run `pytest tests/contract/test_exposure_and_gate.py -v` — all pre-existing tests must still pass before continuing.
 
-Then create `tests/contract/test_frozen_core_adapter.py`:
+Create `tests/contract/test_frozen_core_adapter.py`:
 
 ```python
 """Contract: the adapter is inseparable from the real gate (fail-closed end to end)."""
@@ -1422,8 +1707,8 @@ import pytest
 from gate_fixture import GateFixture
 
 from speech_aware_evidence_acquisition.contracts import ExecutionScopeError, GateClosed
-from speech_aware_evidence_acquisition.models import FrozenCoreAdapter
-from speech_aware_evidence_acquisition.tracing import TraceSink
+from speech_aware_evidence_acquisition.core.model import FrozenCoreAdapter
+from speech_aware_evidence_acquisition.core.tracing import TraceSink
 
 
 def _fake_transport(request_bytes):
@@ -1468,224 +1753,23 @@ def test_adapter_refuses_model_free_profiles(tmp_path):
         )
 ```
 
-The three `# adapt` comments mark the only allowed divergence: read `tests/contract/test_exposure_and_gate.py` and use `GateFixture`'s **actual** construction/tamper/plan helpers (they exist there for the existing refusal tests); do not invent new fixture behavior. Remove the `# adapt` comments once wired.
+The three `# adapt` comments mark the only allowed divergence: read `tests/contract/test_exposure_and_gate.py` and use `GateFixture`'s **actual** construction/tamper/plan helpers (they already exist for the existing refusal tests); do not invent new fixture behavior. Remove the comments once wired.
 
-- [ ] **Step 6: Run the full contract suite**
+- [ ] **Step 7: Run the full contract suite, then commit**
 
-Run: `pytest tests/contract -v`
-Expected: PASS (all pre-existing + 3 new)
-
-- [ ] **Step 7: Commit**
+Run: `pytest tests/contract -v` — Expected: PASS (all pre-existing + 3 new).
 
 ```bash
-git add src/speech_aware_evidence_acquisition/models tests/unit/test_frozen_core_adapter.py tests/contract/gate_fixture.py tests/contract/test_exposure_and_gate.py tests/contract/test_frozen_core_adapter.py
-git commit -m "feat(r0): frozen-core adapter - gate-bound, D2 allowlist choke point, budget-metered"
+git add src/speech_aware_evidence_acquisition/core/model.py tests/unit/test_frozen_core_adapter.py tests/unit/test_llama_server_transport.py tests/contract/gate_fixture.py tests/contract/test_exposure_and_gate.py tests/contract/test_frozen_core_adapter.py
+git commit -m "feat(r0): gate-bound frozen-core adapter + llama-server transport (one request path)"
 ```
 
 ---
 
-### Task 8: `models/llama_server.py` — llama-server transport (no network in tests)
+### Task 8: `core/config.py` — deterministic JSON config composition + seed fragments
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/models/llama_server.py`
-- Modify: `src/speech_aware_evidence_acquisition/models/__init__.py` (add `LlamaServerTransport`)
-- Test: `tests/unit/test_llama_server_transport.py`
-
-**Interfaces:**
-- Consumes: the boundary payload JSON produced by `FrozenCoreAdapter` (`_canonical` bytes).
-- Produces: `class LlamaServerTransport`: `__init__(self, base_url: str, data_root: Path, timeout_seconds: float = 300.0, post: Callable[[str, bytes], bytes] | None = None)` — `post(url, body) -> bytes` defaults to a stdlib `urllib.request` POST with `Content-Type: application/json`; injectable for tests. `__call__(self, request_bytes: bytes) -> bytes` — maps the boundary payload to an OpenAI-style `/v1/chat/completions` body (system = `task_instruction`; user content = base64 `input_audio` from `data_root / media_relpath` + one text part per `supplied_evidence`/`retrieved_evidence` item; `decoding_params` passed through top-level), POSTs it, and returns canonical `{"text": ..., "usage": {...}}` bytes for the adapter.
-
-- [ ] **Step 1: Write the failing tests**
-
-`tests/unit/test_llama_server_transport.py`:
-
-```python
-"""Transport maps boundary payloads to chat-completions bodies without network."""
-
-import base64
-import json
-
-from speech_aware_evidence_acquisition.models.llama_server import LlamaServerTransport
-
-
-def _boundary_payload(tmp_path, **overrides):
-    media = tmp_path / "media" / "5000001.mp3"
-    media.parent.mkdir(parents=True, exist_ok=True)
-    media.write_bytes(b"fake-mp3-bytes")
-    payload = {
-        "request_id": "req-1",
-        "carrier_lock_key": "earnings22-original",
-        "sample_id": "5000001",
-        "speech_ref": "earnings22-original/5000001",
-        "media_relpath": "media/5000001.mp3",
-        "audio_seconds": 10.0,
-        "sample_rate_hz": 16000,
-        "task_instruction": "Transcribe the speech verbatim.",
-        "history": [],
-        "decoding_params": {"temperature": 0, "seed": 20260803},
-    }
-    payload.update(overrides)
-    return payload
-
-
-def _canned_response():
-    return json.dumps(
-        {
-            "choices": [{"message": {"content": "hello world"}}],
-            "usage": {"prompt_tokens": 7, "completion_tokens": 2},
-        }
-    ).encode()
-
-
-def test_body_mapping_and_response_projection(tmp_path):
-    captured = {}
-
-    def fake_post(url, body):
-        captured["url"] = url
-        captured["body"] = json.loads(body)
-        return _canned_response()
-
-    transport = LlamaServerTransport("http://127.0.0.1:8080", tmp_path, post=fake_post)
-    raw = transport(json.dumps(_boundary_payload(tmp_path)).encode())
-    result = json.loads(raw)
-    assert result == {"text": "hello world", "usage": {"prompt_tokens": 7, "completion_tokens": 2}}
-    assert captured["url"] == "http://127.0.0.1:8080/v1/chat/completions"
-    body = captured["body"]
-    assert body["temperature"] == 0
-    assert body["seed"] == 20260803
-    assert body["messages"][0] == {"role": "system", "content": "Transcribe the speech verbatim."}
-    audio_part = body["messages"][1]["content"][0]
-    assert audio_part["type"] == "input_audio"
-    assert audio_part["input_audio"]["format"] == "mp3"
-    assert base64.b64decode(audio_part["input_audio"]["data"]) == b"fake-mp3-bytes"
-
-
-def test_evidence_items_become_text_parts(tmp_path):
-    def fake_post(url, body):
-        parts = json.loads(body)["messages"][1]["content"]
-        assert parts[1] == {"type": "text", "text": "[evidence ev-1] context text"}
-        return _canned_response()
-
-    transport = LlamaServerTransport("http://127.0.0.1:8080", tmp_path, post=fake_post)
-    payload = _boundary_payload(
-        tmp_path,
-        supplied_evidence=[
-            {"evidence_id": "ev-1", "source_uri": "conec://x", "content": "context text"}
-        ],
-        evidence_provenance=[{"lock_key": "conec", "relpath": "x", "sha256": "0" * 64}],
-    )
-    transport(json.dumps(payload).encode())
-
-
-def test_missing_media_fails_closed(tmp_path):
-    import pytest
-
-    transport = LlamaServerTransport(
-        "http://127.0.0.1:8080", tmp_path, post=lambda u, b: _canned_response()
-    )
-    payload = _boundary_payload(tmp_path, media_relpath="media/absent.mp3")
-    with pytest.raises(FileNotFoundError):
-        transport(json.dumps(payload).encode())
-```
-
-- [ ] **Step 2: Run tests to verify they fail**
-
-Run: `pytest tests/unit/test_llama_server_transport.py -v`
-Expected: FAIL with `ModuleNotFoundError`
-
-- [ ] **Step 3: Implement `models/llama_server.py`**
-
-```python
-"""HTTP transport for the pinned llama.cpp llama-server (API-shaped boundary).
-
-The adapter hands this transport a boundary payload (already allowlist- and
-boundary-checked); this module maps it to an OpenAI-style chat-completions
-request. The real endpoint shape is confirmed at R0 smoke time against the
-receipt-pinned build — tests inject `post` and never open a socket.
-"""
-
-from __future__ import annotations
-
-import base64
-import json
-import urllib.request
-from pathlib import Path
-from typing import Callable, Mapping
-
-
-def _default_post(timeout_seconds: float) -> Callable[[str, bytes], bytes]:
-    def post(url: str, body: bytes) -> bytes:
-        request = urllib.request.Request(
-            url, data=body, headers={"Content-Type": "application/json"}, method="POST"
-        )
-        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
-            return response.read()
-
-    return post
-
-
-class LlamaServerTransport:
-    def __init__(
-        self,
-        base_url: str,
-        data_root: Path,
-        timeout_seconds: float = 300.0,
-        post: Callable[[str, bytes], bytes] | None = None,
-    ) -> None:
-        self._url = base_url.rstrip("/") + "/v1/chat/completions"
-        self._data_root = Path(data_root)
-        self._post = post or _default_post(timeout_seconds)
-
-    def __call__(self, request_bytes: bytes) -> bytes:
-        payload: Mapping[str, object] = json.loads(request_bytes.decode("utf-8"))
-        media = self._data_root / str(payload["media_relpath"])
-        if not media.is_file():
-            raise FileNotFoundError(f"media missing for transport: {media}")
-        audio_b64 = base64.b64encode(media.read_bytes()).decode("ascii")
-        media_format = media.suffix.lstrip(".").lower()
-        content: list[dict[str, object]] = [
-            {"type": "input_audio", "input_audio": {"data": audio_b64, "format": media_format}}
-        ]
-        for field in ("supplied_evidence", "retrieved_evidence"):
-            for item in payload.get(field, []):  # type: ignore[union-attr]
-                content.append(
-                    {"type": "text", "text": f"[evidence {item['evidence_id']}] {item['content']}"}
-                )
-        body: dict[str, object] = {
-            "messages": [
-                {"role": "system", "content": payload["task_instruction"]},
-                {"role": "user", "content": content},
-            ],
-        }
-        for key, value in dict(payload.get("decoding_params", {})).items():  # type: ignore[arg-type]
-            body[key] = value
-        raw = self._post(self._url, json.dumps(body).encode("utf-8"))
-        parsed = json.loads(raw.decode("utf-8"))
-        text = parsed["choices"][0]["message"]["content"]
-        usage = {str(k): int(v) for k, v in dict(parsed.get("usage", {})).items()}
-        return json.dumps({"text": text, "usage": usage}).encode("utf-8")
-```
-
-Add to `models/__init__.py`: `from .llama_server import LlamaServerTransport` and extend `__all__`.
-
-- [ ] **Step 4: Run tests to verify they pass**
-
-Run: `pytest tests/unit/test_llama_server_transport.py -v`
-Expected: PASS
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add src/speech_aware_evidence_acquisition/models tests/unit/test_llama_server_transport.py
-git commit -m "feat(r0): llama-server transport with injectable post (no network in tests)"
-```
-
----
-
-### Task 9: `experiments/config.py` — deterministic JSON config composition
-
-**Files:**
-- Create: `src/speech_aware_evidence_acquisition/experiments/config.py`
+- Create: `src/speech_aware_evidence_acquisition/core/config.py`
 - Create: `configs/model/qwen3-omni-llamacpp.json`
 - Create: `configs/dataset/earnings22-dev-subset10.json`
 - Create: `configs/baseline/bare-core.json`
@@ -1693,46 +1777,50 @@ git commit -m "feat(r0): llama-server transport with injectable post (no network
 - Test: `tests/unit/test_config_composition.py`
 
 **Interfaces:**
-- Consumes: nothing new (stdlib JSON; existing YAML config `e0-model-free-closure.yaml` is untouched).
+- Consumes: `scoring.SCORING_STACK_VERSION` (frozen stack, read-only).
 - Produces:
   - `class ConfigError(RuntimeError)`
-  - `@dataclass(frozen=True) ComposedConfig`: `values: Mapping[str, object]`, `config_hash: str`, `fragments: Mapping[str, str]` (kind → filename)
-  - `compose(repo_root: Path, model: str, dataset: str, baseline: str, experiment: str) -> ComposedConfig` — reads `configs/<kind>/<name>.json` for the four kinds; top-level keys must be disjoint across fragments (collision → `ConfigError`); `config_hash` = sha256 over canonical JSON of the merged mapping.
-  - `protocol_hash(config_hash: str, arm: str, split_identity_hash: str) -> str` — sha256 over canonical JSON `{"arm":…, "config":…, "scoring": SCORING_STACK_VERSION, "split":…}`.
+  - `@dataclass(frozen=True) ComposedConfig`: `values: Mapping`, `config_hash: str`, `fragments: Mapping[str, str]`
+  - `compose(repo_root, model, dataset, baseline, experiment) -> ComposedConfig` — reads `configs/<kind>/<name>.json`; top-level keys must be **disjoint** across fragments (collision → `ConfigError`, no override semantics); `config_hash` = sha256 over canonical JSON of the merged mapping.
+  - `protocol_hash(config_hash, arm, split_identity_hash) -> str` — sha256 over canonical JSON `{"arm", "config", "scoring": SCORING_STACK_VERSION, "split"}`.
 
-Fragment contents:
+Fragment contents (exact):
 
-`configs/model/qwen3-omni-llamacpp.json`:
+`configs/model/qwen3-omni-llamacpp.json`
 
 ```json
 {
   "model_lock_key": "qwen3-omni-30b-a3b-instruct-gguf",
+  "transport": "llama-server",
   "base_url": "http://127.0.0.1:8080",
   "timeout_seconds": 300.0,
   "decoding_params": {"temperature": 0, "seed": 20260803}
 }
 ```
 
-`configs/dataset/earnings22-dev-subset10.json`:
+`configs/dataset/earnings22-dev-subset10.json`
 
 ```json
 {
   "carrier_lock_key": "earnings22-original",
-  "split_name": "dev",
-  "split_role": "dev"
+  "split_name": "dev"
 }
 ```
 
-`configs/baseline/bare-core.json`:
+`configs/baseline/bare-core.json`
 
 ```json
 {
   "arm": "bare-core",
+  "policy": "fixed",
+  "evidence_source": "none",
+  "evidence_mismatch": false,
+  "scorers": ["asr-wer"],
   "task_instruction": "Transcribe the speech verbatim. Output only the transcript text."
 }
 ```
 
-`configs/experiment/r0-smoke.json`:
+`configs/experiment/r0-smoke.json`
 
 ```json
 {
@@ -1753,7 +1841,7 @@ import json
 
 import pytest
 
-from speech_aware_evidence_acquisition.experiments.config import (
+from speech_aware_evidence_acquisition.core.config import (
     ComposedConfig,
     ConfigError,
     compose,
@@ -1764,9 +1852,9 @@ from speech_aware_evidence_acquisition.scoring import SCORING_STACK_VERSION
 
 def _write_fragments(root, experiment_extra=None):
     for kind, name, body in (
-        ("model", "m", {"base_url": "http://x", "decoding_params": {"temperature": 0}}),
-        ("dataset", "d", {"carrier_lock_key": "earnings22-original", "split_role": "dev"}),
-        ("baseline", "b", {"arm": "bare-core", "task_instruction": "t"}),
+        ("model", "m", {"transport": "llama-server", "base_url": "http://x"}),
+        ("dataset", "d", {"carrier_lock_key": "earnings22-original", "split_name": "dev"}),
+        ("baseline", "b", {"arm": "bare-core", "policy": "fixed", "task_instruction": "t"}),
         ("experiment", "e", {"experiment_id": "SAEA-E-001", **(experiment_extra or {})}),
     ):
         path = root / "configs" / kind / f"{name}.json"
@@ -1801,7 +1889,7 @@ def test_protocol_hash_binds_scoring_version():
     first = protocol_hash("a" * 64, "bare-core", "b" * 64)
     assert len(first) == 64
     assert first != protocol_hash("a" * 64, "fixed-retrieval", "b" * 64)
-    assert SCORING_STACK_VERSION  # bound inside the hash; version bump changes it
+    assert SCORING_STACK_VERSION  # bound inside the hash; a version bump changes it
 
 
 def test_repo_fragments_compose():
@@ -1812,6 +1900,8 @@ def test_repo_fragments_compose():
     )
     assert composed.values["experiment_id"] == "SAEA-E-001"
     assert composed.values["arm"] == "bare-core"
+    assert composed.values["policy"] == "fixed"
+    assert composed.values["transport"] == "llama-server"
     assert composed.values["model_lock_key"] == "qwen3-omni-30b-a3b-instruct-gguf"
 ```
 
@@ -1820,7 +1910,7 @@ def test_repo_fragments_compose():
 Run: `pytest tests/unit/test_config_composition.py -v`
 Expected: FAIL with `ModuleNotFoundError`
 
-- [ ] **Step 3: Implement `experiments/config.py` and the four fragment files**
+- [ ] **Step 3: Implement `core/config.py` + the four fragment files (exact JSON above)**
 
 ```python
 """Deterministic four-fragment config composition (model/dataset/baseline/experiment).
@@ -1883,9 +1973,7 @@ def compose(
                 )
             merged[key] = value
             origins[key] = kind
-    return ComposedConfig(
-        values=merged, config_hash=_canonical_hash(merged), fragments=names
-    )
+    return ComposedConfig(values=merged, config_hash=_canonical_hash(merged), fragments=names)
 
 
 def protocol_hash(config_hash: str, arm: str, split_identity_hash: str) -> str:
@@ -1899,8 +1987,6 @@ def protocol_hash(config_hash: str, arm: str, split_identity_hash: str) -> str:
     )
 ```
 
-Create the four fragment files with the exact JSON shown in the Interfaces section above.
-
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `pytest tests/unit/test_config_composition.py -v`
@@ -1909,37 +1995,46 @@ Expected: PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/speech_aware_evidence_acquisition/experiments/config.py configs tests/unit/test_config_composition.py
+git add src/speech_aware_evidence_acquisition/core/config.py configs tests/unit/test_config_composition.py
 git commit -m "feat(r0): deterministic JSON config composition + r0-smoke fragments"
 ```
 
 ---
 
-### Task 10: `experiments/arms.py` — the three engineering control arms
+### Task 9: `core/policies.py` — arm payload builder + the `fixed` policy
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/experiments/arms.py`
-- Test: `tests/unit/test_arms.py`
+- Create: `src/speech_aware_evidence_acquisition/core/policies.py`
+- Test: `tests/unit/test_policies.py`
 
 **Interfaces:**
-- Consumes: `data.loader.SampleRef`, `evidence.EvidenceItem`, `e0.d2_leakage.ARM_VISIBLE_FIELDS`.
+- Consumes: `core.base.POLICIES/SampleContext/SampleOutcome/EvidenceItem/CoreError`, `e0.d2_leakage.ARM_VISIBLE_FIELDS`.
 - Produces:
   - `class ArmError(RuntimeError)`
-  - `build_request(arm: str, ref: SampleRef, request_id: str, task_instruction: str, decoding_params: Mapping, evidence: list[EvidenceItem] | None = None, retrieval_query: str | None = None) -> dict` — starts from `ref.runtime_view()`; adds `request_id`, `task_instruction`, `history: []`, `decoding_params`; for `fixed-legal-context` requires `evidence` and adds `supplied_evidence` (runtime views) + `evidence_provenance`; for `fixed-retrieval` requires `evidence` + `retrieval_query` and adds `retrieval_query`, `retrieved_evidence`, `evidence_provenance`; `bare-core` refuses evidence/query. Returned keys are exactly `ARM_VISIBLE_FIELDS[arm]` (asserted inside; violation → `ArmError`).
+  - `build_arm_payload(arm, ref, request_id, task_instruction, decoding_params, evidence=None, retrieval_query=None) -> dict` — starts from `ref.runtime_view()`; adds `request_id`/`task_instruction`/`history: []`/`decoding_params`; `fixed-legal-context` requires evidence → `supplied_evidence` + `evidence_provenance`; `fixed-retrieval` requires evidence + query → `retrieval_query` + `retrieved_evidence` + `evidence_provenance`; `bare-core` refuses both. Output keys are asserted **exactly equal** to `ARM_VISIBLE_FIELDS[arm]`.
+  - `class FixedPolicy` — one request per sample, always admits: builds the payload, calls `ctx.adapter.request(...)`, emits the `USE` record (`use_response_sha256`, `use_admitted: True`), returns `SampleOutcome`. Registered as `POLICIES.register("fixed", FixedPolicy())`. (X1 multi-request re-resolution, X3 verification loops, X4 reward-guided policies register here later — the driver never changes.)
 
 - [ ] **Step 1: Write the failing tests**
 
-`tests/unit/test_arms.py`:
+`tests/unit/test_policies.py`:
 
 ```python
-"""Arm builders emit exactly the D2-frozen visible-field sets."""
+"""Arm payload builder emits exactly the D2-frozen field sets; fixed policy runs one request."""
+
+import json
 
 import pytest
 
+from speech_aware_evidence_acquisition.core import policies  # noqa: F401 (registration)
+from speech_aware_evidence_acquisition.core.base import (
+    POLICIES,
+    EvidenceItem,
+    SampleContext,
+)
+from speech_aware_evidence_acquisition.core.policies import ArmError, build_arm_payload
+from speech_aware_evidence_acquisition.core.tracing import TraceSink
 from speech_aware_evidence_acquisition.data.loader import SampleRef
 from speech_aware_evidence_acquisition.e0.d2_leakage import ARM_VISIBLE_FIELDS
-from speech_aware_evidence_acquisition.evidence import EvidenceItem
-from speech_aware_evidence_acquisition.experiments.arms import ArmError, build_request
 
 _REF = SampleRef(
     carrier_lock_key="earnings21-original",
@@ -1953,14 +2048,18 @@ _EVIDENCE = [
         evidence_id="conec/4000001",
         source_uri="conec://earnings21/contexts/4000001.txt",
         content="ctx",
-        provenance={"lock_key": "conec", "relpath": "earnings21/contexts/4000001.txt", "sha256": "0" * 64},
+        provenance={
+            "lock_key": "conec",
+            "relpath": "earnings21/contexts/4000001.txt",
+            "sha256": "0" * 64,
+        },
     )
 ]
 _DECODING = {"temperature": 0, "seed": 20260803}
 
 
 def test_bare_core_exact_fields():
-    payload = build_request("bare-core", _REF, "req-1", "Transcribe.", _DECODING)
+    payload = build_arm_payload("bare-core", _REF, "req-1", "Transcribe.", _DECODING)
     assert set(payload) == set(ARM_VISIBLE_FIELDS["bare-core"])
     assert payload["history"] == []
     assert payload["speech_ref"] == "earnings21-original/4000001"
@@ -1968,11 +2067,11 @@ def test_bare_core_exact_fields():
 
 def test_bare_core_refuses_evidence():
     with pytest.raises(ArmError, match="bare-core"):
-        build_request("bare-core", _REF, "req-1", "T.", _DECODING, evidence=_EVIDENCE)
+        build_arm_payload("bare-core", _REF, "req-1", "T.", _DECODING, evidence=_EVIDENCE)
 
 
 def test_fixed_legal_context_carries_evidence_and_provenance():
-    payload = build_request(
+    payload = build_arm_payload(
         "fixed-legal-context", _REF, "req-1", "T.", _DECODING, evidence=_EVIDENCE
     )
     assert set(payload) == set(ARM_VISIBLE_FIELDS["fixed-legal-context"])
@@ -1982,34 +2081,81 @@ def test_fixed_legal_context_carries_evidence_and_provenance():
 
 def test_fixed_legal_context_requires_evidence():
     with pytest.raises(ArmError, match="evidence"):
-        build_request("fixed-legal-context", _REF, "req-1", "T.", _DECODING)
+        build_arm_payload("fixed-legal-context", _REF, "req-1", "T.", _DECODING)
 
 
 def test_fixed_retrieval_requires_query_and_evidence():
-    payload = build_request(
+    payload = build_arm_payload(
         "fixed-retrieval", _REF, "req-1", "T.", _DECODING,
         evidence=_EVIDENCE, retrieval_query="acme q2",
     )
     assert set(payload) == set(ARM_VISIBLE_FIELDS["fixed-retrieval"])
     assert payload["retrieval_query"] == "acme q2"
     with pytest.raises(ArmError, match="retrieval_query"):
-        build_request("fixed-retrieval", _REF, "req-1", "T.", _DECODING, evidence=_EVIDENCE)
+        build_arm_payload(
+            "fixed-retrieval", _REF, "req-1", "T.", _DECODING, evidence=_EVIDENCE
+        )
 
 
 def test_unknown_arm_refused():
     with pytest.raises(ArmError, match="unknown arm"):
-        build_request("oracle-arm", _REF, "req-1", "T.", _DECODING)
+        build_arm_payload("oracle-arm", _REF, "req-1", "T.", _DECODING)
+
+
+class _OpenGate:
+    def assert_model_touch_allowed(self, plan):
+        pass
+
+
+def test_fixed_policy_runs_one_request_and_admits(tmp_path):
+    from speech_aware_evidence_acquisition.contracts import ExecutionPlan
+    from speech_aware_evidence_acquisition.core.model import FrozenCoreAdapter
+
+    sink = TraceSink(tmp_path / "run", "SAEA-E-000-policy")
+    plan = ExecutionPlan(
+        run_id="SAEA-E-000-policy",
+        execution_profile="bounded-discovery-probe",
+        carrier_lock_key="earnings21-original",
+        split_role="discovery",
+        split_identity_hash="a" * 64,
+        planned_model_calls=5,
+        planned_gpu_hours=1.0,
+        planned_speech_audio_seconds=1000,
+        protocol_hash="b" * 64,
+    )
+    adapter = FrozenCoreAdapter(
+        gate=_OpenGate(),
+        plan=plan,
+        arm="bare-core",
+        transport=lambda b: json.dumps({"text": "hi", "usage": {}}).encode(),
+        sink=sink,
+    )
+    ctx = SampleContext(
+        sample=_REF, evidence=[], adapter=adapter, sink=sink, arm="bare-core",
+        task_instruction="T.", decoding_params=_DECODING, request_id_base="req-0001",
+    )
+    outcome = POLICIES.resolve("fixed").run_sample(ctx)
+    assert outcome.sample_id == "4000001"
+    assert outcome.admitted is True
+    assert outcome.request_ids == ("req-0001",)
+    assert "req-0001/use" in sink.manifest()
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `pytest tests/unit/test_arms.py -v`
+Run: `pytest tests/unit/test_policies.py -v`
 Expected: FAIL with `ModuleNotFoundError`
 
-- [ ] **Step 3: Implement `experiments/arms.py`**
+- [ ] **Step 3: Implement `core/policies.py`**
 
 ```python
-"""The three R0 engineering control arms as pure request builders."""
+"""Execution policies over the three D2-frozen arm shapes (the policy seam).
+
+R0 implements exactly one policy: ``fixed`` — one request per sample, always
+admit. X1 re-resolution (multiple requests), X3 verification/rejection loops
+and X4 reward-guided action selection register here later; the arm payload
+vocabulary never grows without a new D2 receipt.
+"""
 
 from __future__ import annotations
 
@@ -2017,14 +2163,14 @@ from typing import Mapping
 
 from ..data.loader import SampleRef
 from ..e0.d2_leakage import ARM_VISIBLE_FIELDS
-from ..evidence import EvidenceItem
+from .base import POLICIES, EvidenceItem, SampleContext, SampleOutcome
 
 
 class ArmError(RuntimeError):
     """An arm builder was given inputs its D2-frozen field set cannot carry."""
 
 
-def build_request(
+def build_arm_payload(
     arm: str,
     ref: SampleRef,
     request_id: str,
@@ -2064,124 +2210,138 @@ def build_request(
             f"{sorted(set(payload) ^ set(ARM_VISIBLE_FIELDS[arm]))}"
         )
     return payload
+
+
+class FixedPolicy:
+    """One request per sample; the response is always admitted (R0 wiring)."""
+
+    def run_sample(self, ctx: SampleContext) -> SampleOutcome:
+        evidence = ctx.evidence if ctx.arm != "bare-core" else None
+        payload = build_arm_payload(
+            ctx.arm,
+            ctx.sample,
+            ctx.request_id_base,
+            ctx.task_instruction,
+            ctx.decoding_params,
+            evidence=evidence,
+            retrieval_query=ctx.retrieval_query,
+        )
+        response = ctx.adapter.request(payload)
+        ctx.sink.emit(
+            "USE",
+            f"{ctx.request_id_base}/use",
+            {"use_response_sha256": response.response_sha256, "use_admitted": True},
+        )
+        return SampleOutcome(
+            sample_id=ctx.sample.sample_id,
+            request_ids=(ctx.request_id_base,),
+            text=response.text,
+            admitted=True,
+            request_sha256=response.request_sha256,
+            response_sha256=response.response_sha256,
+        )
+
+
+POLICIES.register("fixed", FixedPolicy())
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `pytest tests/unit/test_arms.py -v`
+Run: `pytest tests/unit/test_policies.py -v`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/speech_aware_evidence_acquisition/experiments/arms.py tests/unit/test_arms.py
-git commit -m "feat(r0): three engineering control arms as exact-field request builders"
+git add src/speech_aware_evidence_acquisition/core/policies.py tests/unit/test_policies.py
+git commit -m "feat(r0): arm payload builder + fixed policy (policy seam defined, one impl)"
 ```
 
 ---
 
-### Task 11: Runner + scoring phase + import-isolation contract
+### Task 10: `core/scorers.py` — registered scorer adapters + import isolation
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/experiments/runner.py`
-- Create: `src/speech_aware_evidence_acquisition/experiments/scoring_phase.py`
-- Test: `tests/unit/test_runner_and_scoring.py`
+- Create: `src/speech_aware_evidence_acquisition/core/scorers.py`
+- Test: `tests/unit/test_scorers.py`
 - Test: `tests/contract/test_reference_import_isolation.py`
 
 **Interfaces:**
-- Consumes: everything from Tasks 5–10 plus `data.references.reference_tokens` (scoring phase ONLY) and frozen `scoring.align/tokens_v1/flag_transitions`.
+- Consumes: `data.references.reference_tokens` (**the only permitted importer**), frozen `scoring.align/tokens_v1`, `core.base.SCORERS`.
 - Produces:
-  - `@dataclass(frozen=True) RunResult`: `run_id: str`, `arm: str`, `outputs_path: Path`, `trace_manifest_hash: str`, `cost: Mapping[str, object]`
-  - `run_arm(adapter: FrozenCoreAdapter, arm: str, samples: list[SampleRef], task_instruction: str, decoding_params: Mapping, run_dir: Path, sink: TraceSink, evidence_by_sample: Mapping[str, list[EvidenceItem]] | None = None, retrieval_query_by_sample: Mapping[str, str] | None = None) -> RunResult` — per sample: emits `OBS` (`obs_speech_ref`, `obs_audio_seconds`), and when evidence is present `ORG` (`org_evidence_count`, `org_source_lock_keys`) and `SUPPLY` (`supply_evidence_ids`, `supply_content_bytes`); builds the request via `build_request`; calls `adapter.request`; emits `USE` (`use_response_sha256`, `use_admitted`: `True` — R0's fixed pipeline always admits); appends one JSON line `{"request_id", "sample_id", "arm", "text", "request_sha256", "response_sha256"}` to `<run_dir>/<run_id>.outputs.jsonl`; finally `sink.close()` and returns `RunResult` with `adapter.cost_summary()`.
-  - `score_asr_outputs(outputs_path: Path, lock, root) -> dict` (in `scoring_phase.py`) — reads outputs JSONL; per sample loads `reference_tokens`, computes `align(tokens_v1(" ".join(ref_tokens)), tokens_v1(text))`; returns `{"per_sample": [{sample_id, wer, hits, substitutions, deletions, insertions, ref_hit_mask}], "aggregate": {"mean_wer": …, "samples": N}}`.
-  - `transition_report(baseline: dict, treatment: dict) -> dict` (scoring_phase) — pairs the two `per_sample` lists by `sample_id` and sums `flag_transitions`-style token transitions from the stored `ref_hit_mask`s via frozen `scoring.token_transitions` semantics: use `scoring.transitions.token_transitions`-compatible counting by comparing masks positionally (`correct_to_wrong` = positions True→False, etc.); requires equal mask lengths per sample (same reference), else fail-closed.
+  - `class ScoringPhaseError(RuntimeError)`
+  - `SCORERS` name `"asr-wer"` → `score_asr_outputs(outputs_path, lock, root) -> dict` — reads the run's outputs JSONL; per sample loads reference tokens, computes `align(tokens_v1(" ".join(ref)), tokens_v1(text))`; returns `{"per_sample": [{sample_id, wer, hits, substitutions, deletions, insertions, ref_hit_mask}], "aggregate": {"mean_wer", "samples"}}`.
+  - `transition_report(baseline: dict, treatment: dict) -> dict` — pairs `per_sample` by `sample_id`, compares `ref_hit_mask`s positionally; fail-closed on differing sample sets or mask lengths; returns the four transition totals.
 
-- [ ] **Step 1: Write the failing unit test**
+- [ ] **Step 1: Write the failing unit tests**
 
-`tests/unit/test_runner_and_scoring.py`:
+`tests/unit/test_scorers.py`:
 
 ```python
-"""End-to-end R0 wiring on the synthetic world with a fake transport."""
+"""Scorer adapters over the frozen stack; transition accounting from hit masks."""
 
 import json
 
-from speech_aware_evidence_acquisition.contracts import ExecutionPlan
-from speech_aware_evidence_acquisition.data.loader import load_earnings21
-from speech_aware_evidence_acquisition.data.lock import load_lock
-from speech_aware_evidence_acquisition.models import FrozenCoreAdapter
-from speech_aware_evidence_acquisition.experiments.runner import RunResult, run_arm
-from speech_aware_evidence_acquisition.experiments.scoring_phase import (
-    score_asr_outputs,
+import pytest
+
+from speech_aware_evidence_acquisition.core import scorers  # noqa: F401 (registration)
+from speech_aware_evidence_acquisition.core.base import SCORERS
+from speech_aware_evidence_acquisition.core.scorers import (
+    ScoringPhaseError,
     transition_report,
 )
-from speech_aware_evidence_acquisition.tracing import TraceSink
+from speech_aware_evidence_acquisition.data.lock import load_lock
 
 
-class _OpenGate:
-    def assert_model_touch_allowed(self, plan):
-        pass
-
-
-def _plan():
-    return ExecutionPlan(
-        run_id="SAEA-E-000-wiring",
-        execution_profile="bounded-discovery-probe",
-        carrier_lock_key="earnings21-original",
-        split_role="discovery",
-        split_identity_hash="a" * 64,
-        planned_model_calls=10,
-        planned_gpu_hours=1.0,
-        planned_speech_audio_seconds=1000,
-        protocol_hash="b" * 64,
+def _write_outputs(tmp_path, rows):
+    path = tmp_path / "x.outputs.jsonl"
+    path.write_text(
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in rows), encoding="utf-8"
     )
+    return path
 
 
-def _transport(request_bytes):
-    return json.dumps({"text": "token tags", "usage": {"prompt_tokens": 3, "completion_tokens": 2}}).encode()
-
-
-def test_bare_core_run_produces_outputs_traces_and_scores(synthetic_world, tmp_path):
+def test_asr_wer_scores_against_references(synthetic_world, tmp_path):
+    nlp = synthetic_world.e21 / "transcripts" / "nlp_references" / "4000001.nlp"
+    nlp.write_text("token|tags\nhello|\nworld|\n", encoding="utf-8")
+    outputs = _write_outputs(
+        tmp_path,
+        [{"sample_id": "4000001", "carrier_lock_key": "earnings21-original",
+          "arm": "bare-core", "request_id": "req-0001", "text": "hello world",
+          "request_sha256": "0" * 64, "response_sha256": "0" * 64}],
+    )
     lock = load_lock(synthetic_world.lock_path)
-    samples = load_earnings21(lock, synthetic_world.data_root)[:2]
-    run_dir = tmp_path / "run"
-    sink = TraceSink(run_dir, "SAEA-E-000-wiring")
-    adapter = FrozenCoreAdapter(
-        gate=_OpenGate(), plan=_plan(), arm="bare-core", transport=_transport, sink=sink
-    )
-    result = run_arm(
-        adapter=adapter,
-        arm="bare-core",
-        samples=samples,
-        task_instruction="Transcribe.",
-        decoding_params={"temperature": 0, "seed": 20260803},
-        run_dir=run_dir,
-        sink=sink,
-    )
-    assert isinstance(result, RunResult)
-    lines = result.outputs_path.read_text(encoding="utf-8").splitlines()
-    assert len(lines) == 2
-    assert result.cost["calls_used"] == 2
-    # Four-axis + model + cost records per sample: OBS, MODEL_REQUEST, MODEL_RESPONSE, USE, COST
-    manifest_ids = list(json.loads(
-        (run_dir / "SAEA-E-000-wiring.trace-manifest.json").read_text("utf-8")
-    )["records"])
-    assert any(record_id.endswith("/obs") for record_id in manifest_ids)
-    assert any(record_id.endswith("/use") for record_id in manifest_ids)
+    scores = SCORERS.resolve("asr-wer")(outputs, lock, synthetic_world.data_root)
+    assert scores["aggregate"] == {"mean_wer": 0.0, "samples": 1}
+    assert scores["per_sample"][0]["ref_hit_mask"] == [True, True]
 
-    # Scoring phase. The synthetic default .nlp files are header-only, so write
-    # real token rows first: reference "token tags" == the fake response text.
-    for sample in samples:
-        nlp = (
-            synthetic_world.e21 / "transcripts" / "nlp_references" / f"{sample.sample_id}.nlp"
+
+def test_empty_outputs_fail_closed(tmp_path, synthetic_world):
+    path = tmp_path / "empty.outputs.jsonl"
+    path.write_text("", encoding="utf-8")
+    lock = load_lock(synthetic_world.lock_path)
+    with pytest.raises(ScoringPhaseError, match="empty"):
+        SCORERS.resolve("asr-wer")(path, lock, synthetic_world.data_root)
+
+
+def test_transition_report_counts_mask_flips():
+    baseline = {"per_sample": [{"sample_id": "a", "ref_hit_mask": [True, False, True]}]}
+    treatment = {"per_sample": [{"sample_id": "a", "ref_hit_mask": [True, True, False]}]}
+    report = transition_report(baseline, treatment)
+    assert report == {
+        "correct_to_correct": 1,
+        "correct_to_wrong": 1,
+        "wrong_to_correct": 1,
+        "wrong_to_wrong": 0,
+    }
+
+
+def test_transition_report_fails_closed_on_mismatch():
+    with pytest.raises(ScoringPhaseError, match="differ"):
+        transition_report(
+            {"per_sample": [{"sample_id": "a", "ref_hit_mask": [True]}]},
+            {"per_sample": [{"sample_id": "b", "ref_hit_mask": [True]}]},
         )
-        nlp.write_text("token|tags\ntoken|\ntags|\n", encoding="utf-8")
-    scores = score_asr_outputs(result.outputs_path, lock, synthetic_world.data_root)
-    assert scores["aggregate"]["samples"] == 2
-    assert scores["aggregate"]["mean_wer"] == 0.0
-
-    report = transition_report(scores, scores)
-    assert report["correct_to_wrong"] == 0
-    assert report["wrong_to_correct"] == 0
 ```
 
 - [ ] **Step 2: Write the failing import-isolation contract test**
@@ -2189,27 +2349,13 @@ def test_bare_core_run_produces_outputs_traces_and_scores(synthetic_world, tmp_p
 `tests/contract/test_reference_import_isolation.py`:
 
 ```python
-"""Contract: runtime-phase modules never import the scoring-side reference reader."""
+"""Contract: only core/scorers.py may import the scoring-side reference reader."""
 
 import ast
 from pathlib import Path
 
 SRC = Path(__file__).resolve().parents[2] / "src" / "speech_aware_evidence_acquisition"
-
-RUNTIME_MODULES = [
-    SRC / "models",
-    SRC / "evidence",
-    SRC / "tracing",
-    SRC / "experiments" / "arms.py",
-    SRC / "experiments" / "runner.py",
-    SRC / "experiments" / "config.py",
-    SRC / "data" / "loader.py",
-    SRC / "data" / "splits.py",
-]
-
-
-def _python_files(target: Path):
-    return [target] if target.is_file() else sorted(target.rglob("*.py"))
+ALLOWED = {SRC / "core" / "scorers.py", SRC / "data" / "references.py"}
 
 
 def _imports_references(path: Path) -> bool:
@@ -2227,154 +2373,28 @@ def _imports_references(path: Path) -> bool:
     return False
 
 
-def test_runtime_phase_modules_never_import_references():
+def test_only_the_scoring_phase_imports_references():
     offenders = [
         str(path)
-        for target in RUNTIME_MODULES
-        for path in _python_files(target)
-        if _imports_references(path)
+        for path in sorted(SRC.rglob("*.py"))
+        if path not in ALLOWED and _imports_references(path)
     ]
     assert offenders == [], f"runtime-phase modules import data.references: {offenders}"
 ```
 
 - [ ] **Step 3: Run tests to verify they fail**
 
-Run: `pytest tests/unit/test_runner_and_scoring.py tests/contract/test_reference_import_isolation.py -v`
-Expected: unit FAIL with `ModuleNotFoundError` (runner); contract PASS trivially is acceptable at this point (no offenders yet) — it exists to lock the rule before the modules land.
+Run: `pytest tests/unit/test_scorers.py tests/contract/test_reference_import_isolation.py -v`
+Expected: unit FAIL (`ModuleNotFoundError`); the contract test passes trivially now — it exists to lock the rule repo-wide (it scans every source file, including future ones).
 
-- [ ] **Step 4: Add `TraceSink.run_id`, then implement `experiments/runner.py`**
-
-First add a read-only property to `tracing/sink.py` (after `__init__`):
-
-```python
-    @property
-    def run_id(self) -> str:
-        return self._run_id
-```
-
-and extend `tests/unit/test_trace_sink.py::test_emit_appends_validated_lines_and_manifest` with `assert sink.run_id == "SAEA-E-000-test"`.
-
-```python
-"""R0 run loop: samples -> arms -> adapter -> outputs + four-axis traces.
-
-RUNTIME PHASE: this module must never import data.references (contract test).
-Scoring happens afterwards in experiments.scoring_phase.
-"""
-
-from __future__ import annotations
-
-import json
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Mapping
-
-from ..data.loader import SampleRef
-from ..evidence import EvidenceItem
-from ..models import FrozenCoreAdapter
-from ..tracing import TraceSink
-from .arms import build_request
-
-
-@dataclass(frozen=True)
-class RunResult:
-    run_id: str
-    arm: str
-    outputs_path: Path
-    trace_manifest_hash: str
-    cost: Mapping[str, object]
-
-
-def run_arm(
-    adapter: FrozenCoreAdapter,
-    arm: str,
-    samples: list[SampleRef],
-    task_instruction: str,
-    decoding_params: Mapping[str, object],
-    run_dir: Path,
-    sink: TraceSink,
-    evidence_by_sample: Mapping[str, list[EvidenceItem]] | None = None,
-    retrieval_query_by_sample: Mapping[str, str] | None = None,
-) -> RunResult:
-    run_id = sink.run_id
-    outputs_path = Path(run_dir) / f"{run_id}.outputs.jsonl"
-    with outputs_path.open("w", encoding="utf-8", newline="\n") as outputs:
-        for index, sample in enumerate(samples, start=1):
-            request_id = f"req-{index:04d}"
-            view = sample.runtime_view()
-            sink.emit(
-                "OBS",
-                f"{request_id}/obs",
-                {"obs_speech_ref": view["speech_ref"], "obs_audio_seconds": view["audio_seconds"]},
-            )
-            evidence = None
-            query = None
-            if evidence_by_sample is not None:
-                evidence = evidence_by_sample.get(sample.sample_id)
-                sink.emit(
-                    "ORG",
-                    f"{request_id}/org",
-                    {
-                        "org_evidence_count": len(evidence or []),
-                        "org_source_lock_keys": sorted(
-                            {item.provenance["lock_key"] for item in evidence or []}
-                        ),
-                    },
-                )
-                sink.emit(
-                    "SUPPLY",
-                    f"{request_id}/supply",
-                    {
-                        "supply_evidence_ids": [item.evidence_id for item in evidence or []],
-                        "supply_content_bytes": sum(
-                            len(item.content.encode("utf-8")) for item in evidence or []
-                        ),
-                    },
-                )
-            if retrieval_query_by_sample is not None:
-                query = retrieval_query_by_sample.get(sample.sample_id)
-            payload = build_request(
-                arm, sample, request_id, task_instruction, decoding_params,
-                evidence=evidence, retrieval_query=query,
-            )
-            response = adapter.request(payload)
-            sink.emit(
-                "USE",
-                f"{request_id}/use",
-                {"use_response_sha256": response.response_sha256, "use_admitted": True},
-            )
-            outputs.write(
-                json.dumps(
-                    {
-                        "request_id": request_id,
-                        "sample_id": sample.sample_id,
-                        "carrier_lock_key": sample.carrier_lock_key,
-                        "arm": arm,
-                        "text": response.text,
-                        "request_sha256": response.request_sha256,
-                        "response_sha256": response.response_sha256,
-                    },
-                    ensure_ascii=False,
-                    sort_keys=True,
-                )
-                + "\n"
-            )
-    manifest_hash = sink.close()
-    return RunResult(
-        run_id=run_id,
-        arm=arm,
-        outputs_path=outputs_path,
-        trace_manifest_hash=manifest_hash,
-        cost=adapter.cost_summary(),
-    )
-```
-
-- [ ] **Step 5: Implement `experiments/scoring_phase.py`**
+- [ ] **Step 4: Implement `core/scorers.py`**
 
 ```python
 """Scoring phase: outputs JSONL + reference layers -> frozen-scoring results.
 
-This is the ONLY module allowed to import data.references. It runs strictly
-after the runtime phase, on recorded outputs — never inside a request loop.
+This is the ONLY module allowed to import data.references (AST contract
+test). It runs strictly after the runtime phase, on recorded outputs — never
+inside a request loop.
 """
 
 from __future__ import annotations
@@ -2385,6 +2405,7 @@ from typing import Mapping
 
 from ..data.references import reference_tokens
 from ..scoring import align, tokens_v1
+from .base import SCORERS
 
 
 class ScoringPhaseError(RuntimeError):
@@ -2394,22 +2415,22 @@ class ScoringPhaseError(RuntimeError):
 def score_asr_outputs(
     outputs_path: Path, lock: Mapping[str, object], root: Path
 ) -> dict[str, object]:
-    per_sample: list[dict[str, object]] = []
     try:
         lines = Path(outputs_path).read_text(encoding="utf-8").splitlines()
     except (OSError, UnicodeError) as error:
         raise ScoringPhaseError(f"cannot read outputs {outputs_path}: {error}") from error
     if not lines:
         raise ScoringPhaseError(f"outputs file {outputs_path} is empty")
+    per_sample: list[dict[str, object]] = []
     for number, line in enumerate(lines, start=1):
         try:
             row = json.loads(line)
         except json.JSONDecodeError as error:
             raise ScoringPhaseError(f"outputs line {number} malformed: {error}") from error
-        ref_raw = reference_tokens(lock, root, row["carrier_lock_key"], row["sample_id"])
-        ref = tokens_v1(" ".join(ref_raw))
-        hyp = tokens_v1(row["text"])
-        result = align(ref, hyp)
+        ref = tokens_v1(
+            " ".join(reference_tokens(lock, root, row["carrier_lock_key"], row["sample_id"]))
+        )
+        result = align(ref, tokens_v1(row["text"]))
         per_sample.append(
             {
                 "sample_id": row["sample_id"],
@@ -2422,10 +2443,15 @@ def score_asr_outputs(
             }
         )
     mean_wer = sum(entry["wer"] for entry in per_sample) / len(per_sample)
-    return {"per_sample": per_sample, "aggregate": {"mean_wer": mean_wer, "samples": len(per_sample)}}
+    return {
+        "per_sample": per_sample,
+        "aggregate": {"mean_wer": mean_wer, "samples": len(per_sample)},
+    }
 
 
-def transition_report(baseline: Mapping[str, object], treatment: Mapping[str, object]) -> dict[str, int]:
+def transition_report(
+    baseline: Mapping[str, object], treatment: Mapping[str, object]
+) -> dict[str, int]:
     base_by_id = {entry["sample_id"]: entry for entry in baseline["per_sample"]}
     treat_by_id = {entry["sample_id"]: entry for entry in treatment["per_sample"]}
     if set(base_by_id) != set(treat_by_id):
@@ -2453,39 +2479,463 @@ def transition_report(baseline: Mapping[str, object], treatment: Mapping[str, ob
             else:
                 totals["wrong_to_wrong"] += 1
     return totals
+
+
+SCORERS.register("asr-wer", score_asr_outputs)
 ```
 
-- [ ] **Step 6: Run all new tests to verify they pass**
+- [ ] **Step 5: Run tests to verify they pass, then commit**
 
-Run: `pytest tests/unit/test_runner_and_scoring.py tests/unit/test_trace_sink.py tests/contract/test_reference_import_isolation.py -v`
-Expected: PASS (including the updated sink test with `run_id` property)
-
-- [ ] **Step 7: Commit**
+Run: `pytest tests/unit/test_scorers.py tests/contract/test_reference_import_isolation.py -v` — Expected: PASS.
 
 ```bash
-git add src/speech_aware_evidence_acquisition/experiments src/speech_aware_evidence_acquisition/tracing tests/unit/test_runner_and_scoring.py tests/unit/test_trace_sink.py tests/contract/test_reference_import_isolation.py
-git commit -m "feat(r0): run loop + scoring phase with enforced reference import isolation"
+git add src/speech_aware_evidence_acquisition/core/scorers.py tests/unit/test_scorers.py tests/contract/test_reference_import_isolation.py
+git commit -m "feat(r0): registered scorer adapters + repo-wide reference import isolation"
 ```
 
 ---
 
-### Task 12: `experiments/mlruns.py` — MLflow linkage + umbrella ledger row
+### Task 11: `core/driver.py` — the ONE experiment driver + CLI
 
 **Files:**
-- Create: `src/speech_aware_evidence_acquisition/experiments/mlruns.py`
-- Modify: `pyproject.toml` (add optional extra `tracking = ["mlflow>=2.14"]` under `[project.optional-dependencies]`)
-- Test: `tests/unit/test_mlruns.py`
+- Create: `src/speech_aware_evidence_acquisition/core/driver.py`
+- Test: `tests/unit/test_driver.py`
 
 **Interfaces:**
-- Consumes: `RunResult`, `ComposedConfig`, `ExecutionPlan`.
+- Consumes: everything above via `core.base` registries; `data.splits.SPLITS_RECEIPT_NAME/split_identity_hash`; `contracts.ExecutionPlan`; `contracts.FrozenCoreGate.for_study_repo` (CLI live mode only).
 - Produces:
-  - `LEDGER_COLUMNS: tuple[str, ...]` — exactly the 21 column names of the umbrella experiment-index table, in order: `("experiment_id", "date", "speech task/carrier", "changed axes", "study commit", "shared code revision", "config hash", "protocol hash", "model rev", "dataset rev", "split role", "split identity hash", "consumed", "MLflow run", "artifact location", "artifact hashes", "effectiveness", "reasonableness", "efficiency", "deviations", "decision")`
-  - `ledger_row(cells: Mapping[str, str]) -> str` — renders one markdown row; requires exactly the `LEDGER_COLUMNS` keys, refuses `|` inside cells.
-  - `log_run(result: RunResult, composed: ComposedConfig, plan: ExecutionPlan, protocol: str, tracking_uri: str, metrics: Mapping[str, float] | None = None) -> str` — lazy `import mlflow` (raise `MlflowUnavailable(RuntimeError)` with install hint if missing); sets tracking URI, experiment `speech-aware-evidence-acquisition`, run name `plan.run_id`; logs params (`arm`, `config_hash`, `protocol_hash`, `split_role`, `split_identity_hash`, `execution_profile`, `carrier_lock_key`), metrics (cost summary + optional score metrics), artifacts (`result.outputs_path` and the trace manifest next to it); returns the MLflow run id.
+  - `load_split(repo_root, split_name) -> tuple[set[str], str]` — reads the frozen `docs/receipts/splits.json`; returns (bare sample ids, identity hash); fail-closed if absent.
+  - `run_experiment(composed: ComposedConfig, plan: ExecutionPlan, gate, lock, root, run_dir, transport, repo_root=REPO_ROOT) -> RunResult` — the single shared path: resolve carrier + split (**refuses a plan whose `split_identity_hash` differs from the frozen receipt**); resolve evidence source (+ `rotated_mismatch` when `evidence_mismatch` is true); resolve policy; build `TraceSink` + `FrozenCoreAdapter`; per sample emit `OBS` (+ `ORG`/`SUPPLY` when evidence present), delegate to `policy.run_sample`, append one outputs JSONL line; close sink; return `RunResult` with `adapter.cost_summary()`.
+  - CLI (`python -m speech_aware_evidence_acquisition.core.driver …`): subcommand `score --outputs <path> --scorers asr-wer` (model-free; prints aggregate JSON) and subcommand `run --model … --dataset … --baseline … --experiment … --plan <plan.json> --run-dir <dir>` (live: builds the real gate via `FrozenCoreGate.for_study_repo`, the transport from the registry, and calls `run_experiment`; exercised only at smoke time).
+
+- [ ] **Step 1: Write the failing end-to-end test**
+
+`tests/unit/test_driver.py`:
+
+```python
+"""End-to-end wiring on the synthetic world with a fake transport."""
+
+import json
+
+import pytest
+
+import speech_aware_evidence_acquisition.core  # noqa: F401 (populate registries)
+from speech_aware_evidence_acquisition.contracts import ExecutionPlan
+from speech_aware_evidence_acquisition.core.base import CoreError, RunResult
+from speech_aware_evidence_acquisition.core.config import ComposedConfig
+from speech_aware_evidence_acquisition.core.driver import load_split, run_experiment
+from speech_aware_evidence_acquisition.data.lock import load_lock
+from speech_aware_evidence_acquisition.data.splits import discovery_split, freeze_splits
+
+
+class _OpenGate:
+    def assert_model_touch_allowed(self, plan):
+        pass
+
+
+def _composed(**overrides):
+    values = {
+        "carrier_lock_key": "earnings21-original",
+        "split_name": "discovery",
+        "arm": "bare-core",
+        "policy": "fixed",
+        "evidence_source": "none",
+        "evidence_mismatch": False,
+        "scorers": ["asr-wer"],
+        "task_instruction": "Transcribe.",
+        "decoding_params": {"temperature": 0, "seed": 20260803},
+        "experiment_id": "SAEA-E-000",
+    }
+    values.update(overrides)
+    return ComposedConfig(
+        values=values, config_hash="d" * 64,
+        fragments={"model": "m", "dataset": "d", "baseline": "b", "experiment": "e"},
+    )
+
+
+def _plan(split_hash, **overrides):
+    base = dict(
+        run_id="SAEA-E-000-driver",
+        execution_profile="bounded-discovery-probe",
+        carrier_lock_key="earnings21-original",
+        split_role="discovery",
+        split_identity_hash=split_hash,
+        planned_model_calls=10,
+        planned_gpu_hours=1.0,
+        planned_speech_audio_seconds=1000,
+        protocol_hash="b" * 64,
+    )
+    base.update(overrides)
+    return ExecutionPlan(**base)
+
+
+def _transport(request_bytes):
+    return json.dumps({"text": "token tags", "usage": {"prompt_tokens": 3}}).encode()
+
+
+def _frozen_world(synthetic_world, tmp_path):
+    lock = load_lock(synthetic_world.lock_path)
+    receipts = tmp_path / "repo" / "docs" / "receipts"
+    freeze_splits(lock, synthetic_world.data_root, receipts)
+    return lock, tmp_path / "repo"
+
+
+def test_run_experiment_end_to_end(synthetic_world, tmp_path):
+    lock, repo_root = _frozen_world(synthetic_world, tmp_path)
+    ids, split_hash = load_split(repo_root, "discovery")
+    assert len(ids) == 3
+    result = run_experiment(
+        composed=_composed(),
+        plan=_plan(split_hash),
+        gate=_OpenGate(),
+        lock=lock,
+        root=synthetic_world.data_root,
+        run_dir=tmp_path / "run",
+        transport=_transport,
+        repo_root=repo_root,
+    )
+    assert isinstance(result, RunResult)
+    lines = result.outputs_path.read_text(encoding="utf-8").splitlines()
+    assert len(lines) == 3
+    assert result.cost["calls_used"] == 3
+    manifest = json.loads(
+        (tmp_path / "run" / "SAEA-E-000-driver.trace-manifest.json").read_text("utf-8")
+    )["records"]
+    assert any(record_id.endswith("/obs") for record_id in manifest)
+    assert any(record_id.endswith("/use") for record_id in manifest)
+
+
+def test_run_experiment_refuses_wrong_split_hash(synthetic_world, tmp_path):
+    lock, repo_root = _frozen_world(synthetic_world, tmp_path)
+    with pytest.raises(CoreError, match="split"):
+        run_experiment(
+            composed=_composed(),
+            plan=_plan("f" * 64),
+            gate=_OpenGate(),
+            lock=lock,
+            root=synthetic_world.data_root,
+            run_dir=tmp_path / "run",
+            transport=_transport,
+            repo_root=repo_root,
+        )
+
+
+def test_run_experiment_supplies_evidence_with_org_and_supply_traces(
+    synthetic_world, tmp_path
+):
+    lock, repo_root = _frozen_world(synthetic_world, tmp_path)
+    _, split_hash = load_split(repo_root, "discovery")
+    result = run_experiment(
+        composed=_composed(arm="fixed-legal-context", evidence_source="conec-contexts"),
+        plan=_plan(split_hash),
+        gate=_OpenGate(),
+        lock=lock,
+        root=synthetic_world.data_root,
+        run_dir=tmp_path / "run2",
+        transport=_transport,
+        repo_root=repo_root,
+    )
+    manifest = json.loads(
+        (tmp_path / "run2" / "SAEA-E-000-driver.trace-manifest.json").read_text("utf-8")
+    )["records"]
+    assert any(record_id.endswith("/org") for record_id in manifest)
+    assert any(record_id.endswith("/supply") for record_id in manifest)
+    assert result.arm == "fixed-legal-context"
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `pytest tests/unit/test_driver.py -v`
+Expected: FAIL with `ModuleNotFoundError` (`core.driver`; the `core` package import may also fail until `__init__` is finalized — finalize it in Step 3)
+
+- [ ] **Step 3: Implement `core/driver.py` and finalize `core/__init__.py`**
+
+`core/driver.py`:
+
+```python
+"""The ONE experiment driver: config + plan -> gate -> run -> outputs (R0).
+
+Every Stage-2 run (R0 smoke, R1 reproduction, X probes, 2B deep digs) goes
+through run_experiment(); an experiment differs from another only by its four
+config fragments and, rarely, a newly registered component. RUNTIME PHASE:
+this module never imports data.references.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Callable, Mapping
+
+from ..contracts import ExecutionPlan
+from ..e0.artifacts import REPO_ROOT
+from ..data.splits import SPLITS_RECEIPT_NAME
+from .base import (
+    CARRIERS,
+    EVIDENCE_SOURCES,
+    POLICIES,
+    SCORERS,
+    TRANSPORTS,
+    CoreError,
+    RunResult,
+    SampleContext,
+)
+from .config import ComposedConfig, compose
+from .evidence import rotated_mismatch
+from .model import FrozenCoreAdapter
+from .tracing import TraceSink
+
+
+def load_split(repo_root: Path, split_name: str) -> tuple[set[str], str]:
+    receipt_path = Path(repo_root) / "docs" / "receipts" / SPLITS_RECEIPT_NAME
+    if not receipt_path.is_file():
+        raise CoreError(f"splits receipt missing: {receipt_path} (freeze splits first)")
+    document = json.loads(receipt_path.read_text(encoding="utf-8"))
+    try:
+        split = document["splits"][split_name]
+    except KeyError:
+        raise CoreError(
+            f"unknown split {split_name!r}; frozen splits: {sorted(document['splits'])}"
+        ) from None
+    ids = {prefixed.split("/", 1)[1] for prefixed in split["ids"]}
+    return ids, split["identity_hash"]
+
+
+def run_experiment(
+    composed: ComposedConfig,
+    plan: ExecutionPlan,
+    gate: object,
+    lock: Mapping[str, object],
+    root: Path,
+    run_dir: Path,
+    transport: Callable[[bytes], bytes],
+    repo_root: Path = REPO_ROOT,
+) -> RunResult:
+    values = composed.values
+    arm = str(values["arm"])
+    sample_ids, split_hash = load_split(repo_root, str(values["split_name"]))
+    if plan.split_identity_hash != split_hash:
+        raise CoreError(
+            "plan split identity hash does not match the frozen splits receipt "
+            f"for split {values['split_name']!r}"
+        )
+    loader = CARRIERS.resolve(str(values["carrier_lock_key"]))
+    samples = [s for s in loader(lock, root) if s.sample_id in sample_ids]
+    if {s.sample_id for s in samples} != sample_ids:
+        raise CoreError("split ids missing from the carrier's loaded samples")
+    source = EVIDENCE_SOURCES.resolve(str(values.get("evidence_source", "none")))
+    evidence_by_sample = {
+        s.sample_id: source(lock, root, s.sample_id) for s in samples
+    }
+    if values.get("evidence_mismatch", False):
+        evidence_by_sample = rotated_mismatch(evidence_by_sample)
+    policy = POLICIES.resolve(str(values["policy"]))
+    sink = TraceSink(run_dir, plan.run_id)
+    adapter = FrozenCoreAdapter(
+        gate=gate, plan=plan, arm=arm, transport=transport, sink=sink
+    )
+    outputs_path = Path(run_dir) / f"{plan.run_id}.outputs.jsonl"
+    with outputs_path.open("w", encoding="utf-8", newline="\n") as outputs:
+        for index, sample in enumerate(sorted(samples, key=lambda s: s.sample_id), start=1):
+            request_id_base = f"req-{index:04d}"
+            view = sample.runtime_view()
+            sink.emit(
+                "OBS",
+                f"{request_id_base}/obs",
+                {
+                    "obs_speech_ref": view["speech_ref"],
+                    "obs_audio_seconds": view["audio_seconds"],
+                },
+            )
+            evidence = evidence_by_sample.get(sample.sample_id, [])
+            if evidence:
+                sink.emit(
+                    "ORG",
+                    f"{request_id_base}/org",
+                    {
+                        "org_evidence_count": len(evidence),
+                        "org_source_lock_keys": sorted(
+                            {item.provenance["lock_key"] for item in evidence}
+                        ),
+                    },
+                )
+                sink.emit(
+                    "SUPPLY",
+                    f"{request_id_base}/supply",
+                    {
+                        "supply_evidence_ids": [item.evidence_id for item in evidence],
+                        "supply_content_bytes": sum(
+                            len(item.content.encode("utf-8")) for item in evidence
+                        ),
+                    },
+                )
+            ctx = SampleContext(
+                sample=sample,
+                evidence=evidence,
+                adapter=adapter,
+                sink=sink,
+                arm=arm,
+                task_instruction=str(values["task_instruction"]),
+                decoding_params=dict(values.get("decoding_params", {})),
+                request_id_base=request_id_base,
+                retrieval_query=values.get("retrieval_query"),
+            )
+            outcome = policy.run_sample(ctx)
+            outputs.write(
+                json.dumps(
+                    {
+                        "request_id": request_id_base,
+                        "sample_id": outcome.sample_id,
+                        "carrier_lock_key": sample.carrier_lock_key,
+                        "arm": arm,
+                        "text": outcome.text,
+                        "admitted": outcome.admitted,
+                        "request_sha256": outcome.request_sha256,
+                        "response_sha256": outcome.response_sha256,
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
+                + "\n"
+            )
+    manifest_hash = sink.close()
+    return RunResult(
+        run_id=plan.run_id,
+        arm=arm,
+        outputs_path=outputs_path,
+        trace_manifest_hash=manifest_hash,
+        cost=adapter.cost_summary(),
+    )
+
+
+def _cli_score(args: argparse.Namespace) -> int:
+    from ..data.lock import data_root, load_lock, umbrella_lock_path
+
+    lock = load_lock(umbrella_lock_path())
+    root = data_root()
+    for name in args.scorers.split(","):
+        scores = SCORERS.resolve(name.strip())(Path(args.outputs), lock, root)
+        print(json.dumps({name.strip(): scores["aggregate"]}, indent=2, sort_keys=True))
+    return 0
+
+
+def _cli_run(args: argparse.Namespace) -> int:
+    from ..contracts import FrozenCoreGate
+    from ..data.lock import data_root, load_lock, umbrella_lock_path
+
+    lock = load_lock(umbrella_lock_path())
+    root = data_root()
+    composed = compose(REPO_ROOT, args.model, args.dataset, args.baseline, args.experiment)
+    plan = ExecutionPlan(**json.loads(Path(args.plan).read_text(encoding="utf-8")))
+    gate = FrozenCoreGate.for_study_repo(REPO_ROOT, root, Path(args.runtime_root))
+    transport_factory = TRANSPORTS.resolve(str(composed.values["transport"]))
+    transport = transport_factory(composed.values, root)
+    result = run_experiment(
+        composed, plan, gate, lock, root, Path(args.run_dir), transport
+    )
+    print(json.dumps({"run_id": result.run_id, "cost": dict(result.cost)}, indent=2))
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="saea-driver")
+    sub = parser.add_subparsers(dest="command", required=True)
+    score = sub.add_parser("score", help="model-free scoring of recorded outputs")
+    score.add_argument("--outputs", required=True)
+    score.add_argument("--scorers", default="asr-wer")
+    score.set_defaults(func=_cli_score)
+    run = sub.add_parser("run", help="gate-enforced live run (requires a plan file)")
+    run.add_argument("--model", required=True)
+    run.add_argument("--dataset", required=True)
+    run.add_argument("--baseline", required=True)
+    run.add_argument("--experiment", required=True)
+    run.add_argument("--plan", required=True)
+    run.add_argument("--run-dir", required=True)
+    run.add_argument("--runtime-root", required=True)
+    run.set_defaults(func=_cli_run)
+    args = parser.parse_args(argv)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+Check `FrozenCoreGate.for_study_repo`'s actual signature in `contracts.py` before wiring `_cli_run` (it exists as the canonical factory; follow its real parameter names — do not change contracts.py).
+
+Finalize `core/__init__.py`:
+
+```python
+"""Shared Stage-2 engineering foundation (R0): one registry, one driver.
+
+Importing this package registers all built-in components (carriers, evidence
+sources, transports, policies, scorers).
+"""
+
+from . import carriers, evidence, model, policies, scorers  # noqa: F401 (registration)
+from .base import (
+    CARRIERS,
+    EVIDENCE_SOURCES,
+    POLICIES,
+    SCORERS,
+    TRANSPORTS,
+    CoreError,
+    EvidenceError,
+    EvidenceItem,
+    RunResult,
+    SampleContext,
+    SampleOutcome,
+)
+from .config import ComposedConfig, ConfigError, compose, protocol_hash
+from .driver import load_split, run_experiment
+from .model import CoreResponse, FrozenCoreAdapter, FrozenCoreError, LlamaServerTransport
+from .tracing import TraceSink, TraceSinkError
+
+__all__ = [
+    "CARRIERS", "EVIDENCE_SOURCES", "POLICIES", "SCORERS", "TRANSPORTS",
+    "ComposedConfig", "ConfigError", "CoreError", "CoreResponse",
+    "EvidenceError", "EvidenceItem", "FrozenCoreAdapter", "FrozenCoreError",
+    "LlamaServerTransport", "RunResult", "SampleContext", "SampleOutcome",
+    "TraceSink", "TraceSinkError", "compose", "load_split", "protocol_hash",
+    "run_experiment",
+]
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `pytest tests/unit/test_driver.py -v`
+Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/speech_aware_evidence_acquisition/core tests/unit/test_driver.py
+git commit -m "feat(r0): single experiment driver + CLI - config in, gated run out"
+```
+
+---
+
+### Task 12: `core/tracking.py` (MLflow + ledger row) + delete the stub packages
+
+**Files:**
+- Create: `src/speech_aware_evidence_acquisition/core/tracking.py`
+- Modify: `src/speech_aware_evidence_acquisition/core/__init__.py` (add tracking exports)
+- Modify: `pyproject.toml` (add `[project.optional-dependencies] tracking = ["mlflow>=2.14"]`)
+- Delete: `src/speech_aware_evidence_acquisition/models/`, `.../evidence/`, `.../tracing/`, `.../experiments/` (the four one-line stub packages)
+- Test: `tests/unit/test_tracking.py`
+
+**Interfaces:**
+- Consumes: `core.base.RunResult`, `core.config.ComposedConfig`, `contracts.ExecutionPlan`.
+- Produces:
+  - `LEDGER_COLUMNS: tuple[str, ...]` — exactly the 21 umbrella experiment-index columns in order: `("experiment_id", "date", "speech task/carrier", "changed axes", "study commit", "shared code revision", "config hash", "protocol hash", "model rev", "dataset rev", "split role", "split identity hash", "consumed", "MLflow run", "artifact location", "artifact hashes", "effectiveness", "reasonableness", "efficiency", "deviations", "decision")`
+  - `ledger_row(cells: Mapping[str, str]) -> str` — one markdown row; requires exactly the `LEDGER_COLUMNS` keys; refuses `|` inside cells.
+  - `class MlflowUnavailable(RuntimeError)`; `log_run(result, composed, plan, protocol, tracking_uri, metrics=None) -> str` — lazy `import mlflow`; logs params (`arm`, `config_hash`, `protocol_hash`, `split_role`, `split_identity_hash`, `execution_profile`, `carrier_lock_key`), metrics (numeric cost + optional extra), artifacts (outputs + trace manifest); returns the MLflow run id.
 
 - [ ] **Step 1: Write the failing tests**
 
-`tests/unit/test_mlruns.py`:
+`tests/unit/test_tracking.py`:
 
 ```python
 """MLflow linkage (stubbed) and the umbrella ledger row renderer."""
@@ -2495,7 +2945,7 @@ import types
 
 import pytest
 
-from speech_aware_evidence_acquisition.experiments.mlruns import (
+from speech_aware_evidence_acquisition.core.tracking import (
     LEDGER_COLUMNS,
     MlflowUnavailable,
     ledger_row,
@@ -2522,23 +2972,24 @@ def test_ledger_row_renders_and_validates():
 
 
 def test_log_run_requires_mlflow(monkeypatch):
-    # Setting sys.modules["mlflow"] = None makes `import mlflow` raise
-    # ImportError even when mlflow IS installed in this environment.
+    # sys.modules["mlflow"] = None makes `import mlflow` raise ImportError even
+    # when mlflow IS installed in this environment.
     monkeypatch.setitem(sys.modules, "mlflow", None)
-    from speech_aware_evidence_acquisition.experiments import mlruns
+    from speech_aware_evidence_acquisition.core import tracking
 
     with pytest.raises(MlflowUnavailable, match="tracking"):
-        mlruns._require_mlflow()
+        tracking._require_mlflow()
 
 
 def test_log_run_with_stub_mlflow(tmp_path, monkeypatch):
     calls = {"params": {}, "metrics": {}, "artifacts": []}
-
     stub = types.SimpleNamespace(
         set_tracking_uri=lambda uri: calls.setdefault("uri", uri),
         set_experiment=lambda name: calls.setdefault("experiment", name),
         start_run=lambda run_name: types.SimpleNamespace(
-            __enter__=lambda s: types.SimpleNamespace(info=types.SimpleNamespace(run_id="mlrun-1")),
+            __enter__=lambda s: types.SimpleNamespace(
+                info=types.SimpleNamespace(run_id="mlrun-1")
+            ),
             __exit__=lambda s, *a: False,
         ),
         log_params=lambda params: calls["params"].update(params),
@@ -2546,11 +2997,11 @@ def test_log_run_with_stub_mlflow(tmp_path, monkeypatch):
         log_artifact=lambda path: calls["artifacts"].append(path),
     )
     monkeypatch.setitem(sys.modules, "mlflow", stub)
-    # exercise via the public API with minimal fakes
+
     from speech_aware_evidence_acquisition.contracts import ExecutionPlan
-    from speech_aware_evidence_acquisition.experiments.config import ComposedConfig
-    from speech_aware_evidence_acquisition.experiments.mlruns import log_run
-    from speech_aware_evidence_acquisition.experiments.runner import RunResult
+    from speech_aware_evidence_acquisition.core.base import RunResult
+    from speech_aware_evidence_acquisition.core.config import ComposedConfig
+    from speech_aware_evidence_acquisition.core.tracking import log_run
 
     outputs = tmp_path / "SAEA-E-000-x.outputs.jsonl"
     outputs.write_text("{}\n", encoding="utf-8")
@@ -2558,11 +3009,14 @@ def test_log_run_with_stub_mlflow(tmp_path, monkeypatch):
     result = RunResult(
         run_id="SAEA-E-000-x", arm="bare-core", outputs_path=outputs,
         trace_manifest_hash="c" * 64,
-        cost={"calls_used": 2, "audio_seconds_used": 20.0, "latency_seconds_total": 1.0,
-              "prompt_tokens_total": 5, "completion_tokens_total": 4},
+        cost={"calls_used": 2, "audio_seconds_used": 20.0,
+              "latency_seconds_total": 1.0, "prompt_tokens_total": 5,
+              "completion_tokens_total": 4},
     )
-    composed = ComposedConfig(values={"arm": "bare-core"}, config_hash="d" * 64,
-                              fragments={"model": "m", "dataset": "d", "baseline": "b", "experiment": "e"})
+    composed = ComposedConfig(
+        values={"arm": "bare-core"}, config_hash="d" * 64,
+        fragments={"model": "m", "dataset": "d", "baseline": "b", "experiment": "e"},
+    )
     plan = ExecutionPlan(
         run_id="SAEA-E-000-x", execution_profile="bounded-discovery-probe",
         carrier_lock_key="earnings22-original", split_role="dev",
@@ -2578,10 +3032,10 @@ def test_log_run_with_stub_mlflow(tmp_path, monkeypatch):
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `pytest tests/unit/test_mlruns.py -v`
+Run: `pytest tests/unit/test_tracking.py -v`
 Expected: FAIL with `ModuleNotFoundError`
 
-- [ ] **Step 3: Implement `experiments/mlruns.py`**
+- [ ] **Step 3: Implement `core/tracking.py`**
 
 ```python
 """MLflow linkage and the umbrella experiment-index row renderer (R0).
@@ -2595,8 +3049,8 @@ from __future__ import annotations
 from typing import Mapping
 
 from ..contracts import ExecutionPlan
+from .base import RunResult
 from .config import ComposedConfig
-from .runner import RunResult
 
 LEDGER_COLUMNS: tuple[str, ...] = (
     "experiment_id", "date", "speech task/carrier", "changed axes", "study commit",
@@ -2613,7 +3067,7 @@ class MlflowUnavailable(RuntimeError):
 
 def _require_mlflow():
     try:
-        import mlflow  # noqa: PLC0415 (lazy by design)
+        import mlflow
     except ImportError as error:
         raise MlflowUnavailable(
             'mlflow is required for run tracking: pip install -e ".[tracking]"'
@@ -2624,8 +3078,7 @@ def _require_mlflow():
 def ledger_row(cells: Mapping[str, str]) -> str:
     if set(cells) != set(LEDGER_COLUMNS):
         raise ValueError(
-            f"ledger row must have exactly the columns {LEDGER_COLUMNS}; "
-            f"got {sorted(cells)}"
+            f"ledger row must have exactly the columns {LEDGER_COLUMNS}; got {sorted(cells)}"
         )
     for column, value in cells.items():
         if "|" in value:
@@ -2668,27 +3121,31 @@ def log_run(
         return active.info.run_id
 ```
 
-Add to `pyproject.toml` under `[project.optional-dependencies]`:
+Add to `core/__init__.py` exports: `from .tracking import LEDGER_COLUMNS, MlflowUnavailable, ledger_row, log_run` (+ `__all__` entries). Add to `pyproject.toml`:
 
 ```toml
 tracking = ["mlflow>=2.14"]
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [ ] **Step 4: Delete the four stub packages**
 
-Run: `pytest tests/unit/test_mlruns.py -v`
-Expected: PASS
+First verify nothing references them: `grep -rn "speech_aware_evidence_acquisition\.\(models\|evidence\|tracing\|experiments\)" src tests docs scripts` must return nothing (the new code lives under `core.*`). Then `git rm -r src/speech_aware_evidence_acquisition/models src/speech_aware_evidence_acquisition/evidence src/speech_aware_evidence_acquisition/tracing src/speech_aware_evidence_acquisition/experiments`.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Run the FULL suite (foundation gate), then commit**
+
+Run: `pytest`
+Expected: PASS, zero failures — the Part-1 foundation is complete.
 
 ```bash
-git add src/speech_aware_evidence_acquisition/experiments/mlruns.py pyproject.toml tests/unit/test_mlruns.py
-git commit -m "feat(r0): lazy mlflow linkage + umbrella ledger row renderer"
+git add -A src/speech_aware_evidence_acquisition tests/unit/test_tracking.py pyproject.toml
+git commit -m "feat(r0): tracking linkage + ledger renderer; consolidate foundation into core/ (stub packages removed)"
 ```
 
 ---
 
-### Task 13: Entrypoints — `reproduce.sh` / `evaluate.sh` become functional (model-free)
+# Part 2 — Config-driven instantiation
+
+### Task 13: Entrypoints — `reproduce.sh` / `evaluate.sh` wrap the shared driver (model-free)
 
 **Files:**
 - Modify: `scripts/reproduce.sh`
@@ -2696,8 +3153,8 @@ git commit -m "feat(r0): lazy mlflow linkage + umbrella ledger row renderer"
 - Modify: `tests/contract/test_scripts_fail_closed.py`
 
 **Interfaces:**
-- Consumes: `python -m speech_aware_evidence_acquisition.e0.generate verify` (existing gate dry-run CLI); `experiments.scoring_phase.score_asr_outputs`.
-- Produces: model-free entrypoints. `reproduce.sh` (no args) runs the E0 gate dry-run (verify); `reproduce.sh --help` prints usage and exits 0; **neither script can reach a model touch** — there is no code path in them that starts or calls llama-server. `evaluate.sh <outputs.jsonl>` scores a recorded outputs file; `evaluate.sh` with no args prints usage and exits 2.
+- Consumes: `python -m speech_aware_evidence_acquisition.e0.generate verify` (existing gate dry-run) and `python -m speech_aware_evidence_acquisition.core.driver score`.
+- Produces: functional, **model-free** entrypoints. Neither script contains any model-touch path (no llama-server launch, no chat-completions call); the live `driver run` subcommand is reachable only by explicitly authoring a plan file, never from these scripts.
 
 - [ ] **Step 1: Update the contract test first (it defines the new behavior)**
 
@@ -2745,11 +3202,12 @@ def test_entrypoints_contain_no_model_touch_path(script):
     text = (REPO_ROOT / "scripts" / script).read_text(encoding="utf-8")
     assert "llama-server" not in text
     assert "chat/completions" not in text
+    assert "driver run" not in text
 ```
 
-- [ ] **Step 2: Run to verify the new expectations fail**
+- [ ] **Step 2: Run to verify the new expectations fail (WSL)**
 
-Run: `pytest tests/contract/test_scripts_fail_closed.py -v` (in WSL: `wsl -d Ubuntu-24.04 -- bash -lc "cd /mnt/d/chao_workspace/exploring-l4-intelligence/studies/speech-aware-evidence-acquisition && source ~/.venvs/speechrl/bin/activate && pytest tests/contract/test_scripts_fail_closed.py -v"`)
+Run: `wsl -d Ubuntu-24.04 -- bash -lc "cd /mnt/d/chao_workspace/exploring-l4-intelligence/studies/speech-aware-evidence-acquisition && source ~/.venvs/speechrl/bin/activate && pytest tests/contract/test_scripts_fail_closed.py -v"`
 Expected: FAIL (`--help` currently exits 2 without "model-free")
 
 - [ ] **Step 3: Rewrite the scripts**
@@ -2759,7 +3217,7 @@ Expected: FAIL (`--help` currently exits 2 without "model-free")
 ```bash
 #!/usr/bin/env bash
 # Model-free reproduction entrypoint (R0). This script never touches the model:
-# a model-facing run additionally requires a validated ExecutionPlan and a
+# a model-facing run additionally requires a validated ExecutionPlan file and a
 # pre-registered exposure ledger row, driven explicitly from Python — never here.
 set -euo pipefail
 
@@ -2769,7 +3227,7 @@ usage: reproduce.sh [--help]
 
 Runs the model-free verification chain: the E0 closure + runtime receipt gate
 dry-run (authorizes nothing). Requires SPEECHRL_DATA_DIR and the pinned
-runtime under ~/llama.cpp per docs/engineering.md.
+runtime per docs/engineering.md.
 EOF
 }
 
@@ -2787,15 +3245,15 @@ python -m speech_aware_evidence_acquisition.e0.generate verify
 ```bash
 #!/usr/bin/env bash
 # Model-free scoring entrypoint (R0): scores a recorded outputs JSONL against
-# the frozen scoring stack. Never touches the model.
+# the frozen scoring stack via the shared driver. Never touches the model.
 set -euo pipefail
 
 usage() {
   cat <<'EOF'
-usage: evaluate.sh <outputs.jsonl>
+usage: evaluate.sh <outputs.jsonl> [scorers]
 
 model-free scoring of a recorded run outputs file (frozen saea-scoring-v1).
-Requires SPEECHRL_DATA_DIR for reference layers.
+Default scorers: asr-wer. Requires SPEECHRL_DATA_DIR for reference layers.
 EOF
 }
 
@@ -2803,46 +3261,36 @@ if [[ "${1:-}" == "--help" ]]; then
   usage
   exit 0
 fi
-if [[ $# -ne 1 ]]; then
+if [[ $# -lt 1 ]]; then
   usage >&2
   exit 2
 fi
 
 export PYTHONDONTWRITEBYTECODE=1
-python - "$1" <<'EOF'
-import json, sys
-from pathlib import Path
-from speech_aware_evidence_acquisition.data.lock import data_root, load_lock, umbrella_lock_path
-from speech_aware_evidence_acquisition.experiments.scoring_phase import score_asr_outputs
-
-scores = score_asr_outputs(Path(sys.argv[1]), load_lock(umbrella_lock_path()), data_root())
-print(json.dumps(scores["aggregate"], indent=2, sort_keys=True))
-EOF
+python -m speech_aware_evidence_acquisition.core.driver score \
+  --outputs "$1" --scorers "${2:-asr-wer}"
 ```
 
-- [ ] **Step 4: Run the contract test to verify it passes (WSL)**
+- [ ] **Step 4: Run the contract test to verify it passes (WSL), then commit**
 
-Run: same WSL command as Step 2.
-Expected: PASS
-
-- [ ] **Step 5: Commit**
+Run: same WSL command as Step 2 — Expected: PASS.
 
 ```bash
 git add scripts/reproduce.sh scripts/evaluate.sh tests/contract/test_scripts_fail_closed.py
-git commit -m "feat(r0): model-free reproduce/evaluate entrypoints replace pre-R0 refusal"
+git commit -m "feat(r0): model-free reproduce/evaluate entrypoints wrap the shared driver"
 ```
 
 ---
 
-### Task 14: R0 smoke runbook + engineering doc update + full-suite gate
+### Task 14: R0 smoke runbook + engineering doc + full-suite gate on both OSes
 
 **Files:**
 - Create: `docs/runbooks/2026-08-05-r0-smoke.md`
-- Modify: `docs/engineering.md` (append an "R0 slice delivered" subsection under the E0 closure section)
+- Modify: `docs/engineering.md` (append an "R0 engineering baseline" subsection after the E0 closure section)
 
 **Interfaces:**
-- Consumes: everything delivered above; `docs/receipts/splits.json` (dev split hash) from Task 2.
-- Produces: the runbook that a **future, owner-visible session** follows to execute the first model touch. This task itself performs **no model touch and appends no ledger row**.
+- Consumes: everything delivered above; `docs/receipts/splits.json` (dev split hash).
+- Produces: the runbook a **future, owner-visible session** follows for the first model touch. This task performs **no model touch and appends no ledger row**.
 
 - [ ] **Step 1: Write `docs/runbooks/2026-08-05-r0-smoke.md`**
 
@@ -2858,17 +3306,18 @@ exposure ledger row before any result is read.
 
 1. Clean study tree at the delivered R0 commit; receipts intact
    (`pytest tests/contract/test_real_receipts.py`).
-2. `docs/receipts/splits.json` frozen (dev split hash `<read from the file>`).
+2. `docs/receipts/splits.json` frozen (dev split hash read from the file).
 3. WSL Ubuntu-24.04; `source ~/.venvs/speechrl/bin/activate`;
    `SPEECHRL_DATA_DIR=/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data`.
-4. Bytecode discipline: `export PYTHONDONTWRITEBYTECODE=1` and remove any
+4. Bytecode discipline: `export PYTHONDONTWRITEBYTECODE=1`; remove any
    `src/speech_aware_evidence_acquisition/scoring/__pycache__`.
-5. llama-server from the receipt-pinned build
-   (`/home/chao/llama.cpp`, commit `fdbd6abee20e408de21e90ca77a24cd50a6ea073`)
-   serving the lock-pinned GGUF; confirm `llama-server --version` reports
-   `(fdbd6ab)` before starting.
+5. llama-server from the receipt-pinned build (`/home/chao/llama.cpp`, commit
+   `fdbd6abee20e408de21e90ca77a24cd50a6ea073`) serving the lock-pinned GGUF;
+   `llama-server --version` must report `(fdbd6ab)` before starting.
 
-## Execution plan (values to instantiate verbatim)
+## Execution plan file (values to instantiate verbatim)
+
+Write `$SPEECHRL_DATA_DIR/runs/SAEA-E-001-r0-smoke/plan.json`:
 
 - run_id: `SAEA-E-001-r0-smoke`
 - execution_profile: `bounded-discovery-probe`
@@ -2887,31 +3336,41 @@ exposure ledger row before any result is read.
 
 1. Append the exposure ledger row (consumed=no, budgets as above) — BEFORE
    any request.
-2. Drive the run from Python (llama-server transport + FrozenCoreAdapter +
-   run_arm) with the plan above; run_dir under
-   `$SPEECHRL_DATA_DIR/runs/SAEA-E-001-r0-smoke/`.
-3. Score with `scripts/evaluate.sh <outputs.jsonl>`; log to MLflow
-   (`log_run`, tracking dir on ext4 per umbrella policy).
-4. Draft the umbrella experiment-index row with `ledger_row(...)`; register
-   it in the umbrella wiki (separate umbrella commit).
-5. Write the wiring-integrity memo: traces complete (OBS/USE per sample),
-   budgets respected, hashes recorded — R0 exit criterion, not a result claim.
+2. Run through the ONE driver path:
+   `python -m speech_aware_evidence_acquisition.core.driver run
+   --model qwen3-omni-llamacpp --dataset earnings22-dev-subset10
+   --baseline bare-core --experiment r0-smoke
+   --plan <plan.json> --run-dir $SPEECHRL_DATA_DIR/runs/SAEA-E-001-r0-smoke
+   --runtime-root /home/chao/llama.cpp`
+3. Score: `bash scripts/evaluate.sh <outputs.jsonl>`; log to MLflow
+   (`core.tracking.log_run`, tracking dir on ext4 per umbrella policy).
+4. Draft the umbrella experiment-index row with `core.tracking.ledger_row`;
+   register it in the umbrella wiki (separate umbrella commit).
+5. Write the wiring-integrity memo: traces complete (OBS/USE per sample;
+   ORG/SUPPLY absent for bare-core), budgets respected, hashes recorded —
+   the R0 exit criterion is measurement integrity, not a result claim.
 ```
 
 - [ ] **Step 2: Append to `docs/engineering.md`** (after the E0 closure section)
 
 ```markdown
-## R0 slice (delivered 2026-08-05)
+## R0 engineering baseline (delivered 2026-08-05)
 
-Module map: `data/splits.py` (frozen discovery/dev/confirmatory partition,
-receipt `docs/receipts/splits.json`); `data/references.py` (scoring-side only;
-AST contract test forbids runtime-phase import); `evidence/` (schema + ConEC
-contexts + rotated-mismatch control + runtime-refusing oracle interface);
-`tracing/` (append-only JSONL sink, repo-refusal); `models/` (FrozenCoreAdapter
-— gate-bound, D2 allowlist exact-set choke point, per-plan budget metering;
-LlamaServerTransport); `experiments/` (config composition, three control arms,
-run loop, scoring phase over frozen saea-scoring-v1, lazy MLflow linkage,
-umbrella ledger-row renderer). Entrypoints `scripts/reproduce.sh` /
+Two-layer structure (owner direction 2026-08-05: maximize reuse, no
+fragmentation). Layer 1 — ONE foundation package `core/`: one `Registry`
+mechanism with five seams (CARRIERS, EVIDENCE_SOURCES, TRANSPORTS, POLICIES,
+SCORERS), one gate-bound request path (`FrozenCoreAdapter` — D2 allowlist
+exact-set choke point, per-plan budget metering), one experiment driver
+(`core.driver.run_experiment`), append-only trace sink (repo-refusal), lazy
+MLflow linkage + umbrella ledger-row renderer. Shared data layer:
+`data/splits.py` (frozen partition, receipt `docs/receipts/splits.json`,
+hash convention identical to the E0 ledger row), `data/references.py`
+(scoring-side; only `core/scorers.py` may import it — AST contract test).
+Layer 2 — experiments are configuration: four disjoint JSON fragments
+(`configs/{model,dataset,baseline,experiment}/`); a new experiment is config
+plus at most one newly registered component. Policies compose over the three
+D2-frozen arm shapes; only `fixed` is implemented (X1/X3/X4 policies register
+later without driver changes). Entrypoints `scripts/reproduce.sh` /
 `scripts/evaluate.sh` are functional and model-free. First model touch:
 `docs/runbooks/2026-08-05-r0-smoke.md` (owner-visible; requires ExecutionPlan
 + pre-registered exposure row; not executed by the delivery plan).
@@ -2920,24 +3379,25 @@ umbrella ledger-row renderer). Entrypoints `scripts/reproduce.sh` /
 - [ ] **Step 3: Run the full suite on Windows**
 
 Run: `pytest`
-Expected: PASS, zero failures; note the total count (was 145 pre-R0; now substantially higher).
+Expected: PASS, zero failures.
 
 - [ ] **Step 4: Run the full suite in WSL (POSIX-only tests included)**
 
 Run: `wsl -d Ubuntu-24.04 -- bash -lc "cd /mnt/d/chao_workspace/exploring-l4-intelligence/studies/speech-aware-evidence-acquisition && source ~/.venvs/speechrl/bin/activate && uv pip install -e '.[dev]' -q && pytest -q"`
-Expected: PASS including `test_scripts_fail_closed.py` and the real-receipt suite.
+Expected: PASS including the entrypoint contract and the real-receipt suite.
 
 - [ ] **Step 5: Commit**
 
 ```bash
 git add docs/runbooks/2026-08-05-r0-smoke.md docs/engineering.md
-git commit -m "docs(r0): smoke runbook (not executed) + engineering map for the delivered slice"
+git commit -m "docs(r0): smoke runbook (not executed) + engineering map for the two-layer baseline"
 ```
 
 ---
 
 ## Self-Review Notes (kept for the executor)
 
-- **Spec coverage:** design §5 lane A → Task 1; §3 splits → Task 2; entry-contract R0 deliverables map: deterministic loaders → Tasks 3–4; evidence schema + negative/oracle controls → Task 5; four-axis trace → Task 6; frozen-core adapter → Tasks 7–8; config composition → Task 9; three engineering controls → Task 10; discovery/confirmatory path + scorer adapters → Tasks 2+11; MLflow/umbrella linkage + cost accounting → Tasks 7+12; entrypoints → Task 13; smoke preparation (not execution) → Task 14. R1/X probes are **out of scope by design** (planned after the readiness memo and the owner's R1 decision).
-- **Known intentional deferrals** (not placeholders): entity/QA reference extraction from `wer_tags`/ConEC annotations is specified with the probe that first consumes it (readiness memo pins the format); oracle-evidence computation likewise. Both interfaces exist and fail closed until then. GPU/CPU accounting at R0 = registered plan ceilings + per-request latency totals (the server is GPU-resident, so latency is the occupancy proxy); direct GPU sampling is specified with R1 if the memo shows it matters.
-- **Adaptation points:** Task 2 Step 3 (lock.py export names), Task 3 Step 3 (real CSV header), Task 7 Step 5 (GateFixture helper names) — each bounded to "follow the existing code, don't invent".
+- **Spec coverage:** design §5 lane A → Task 1; §3 splits → Task 2; §7 2A-R0.2 two-layer baseline → Tasks 4–12 (Layer 1) + 8/13/14 (Layer 2); entry-contract R0 deliverables: deterministic loaders → Task 3; evidence schema + negative/oracle controls → Tasks 4+6; four-axis trace → Tasks 5+11; frozen-core adapter → Task 7; config composition → Task 8; three engineering controls → Task 9 (arms) + Task 8 (configs); discovery/confirmatory paths → Tasks 2+11 (driver refuses plans whose split hash mismatches the frozen receipt; confirmatory stays unread); scorer adapters → Task 10; MLflow/umbrella linkage + cost accounting → Tasks 7+12; entrypoints → Task 13; smoke preparation (not execution) → Task 14. R1/X probes are **out of scope by design** — planned after the readiness memo and the owner's R1 decision, as configs + registered components over this foundation.
+- **Anti-fragmentation invariants** (report any violation instead of working around it): exactly one `Registry` class; exactly one request path (`FrozenCoreAdapter.request`); exactly one driver (`run_experiment`); the four stub packages are gone after Task 12; no experiment-specific wiring module ever gets added — if a task seems to need one, the seam is wrong, stop and surface it.
+- **Known intentional deferrals** (not placeholders): entity/QA reference extraction from `wer_tags`/ConEC annotations — specified with the probe that first consumes it (readiness memo pins the format); oracle-evidence computation — the registered source refuses at runtime until then; GPU/CPU accounting at R0 = registered plan ceilings + per-request latency totals (server is GPU-resident, latency is the occupancy proxy; direct GPU sampling specified with R1 if the memo shows it matters); X1/X3/X4 policies — the seam exists, implementations register later.
+- **Adaptation points** (bounded to "follow the existing code, don't invent"): Task 2 (lock.py export names), Task 3 (real CSV header check), Task 7 Step 6 (GateFixture helper names), Task 11 (`FrozenCoreGate.for_study_repo` parameter names).
