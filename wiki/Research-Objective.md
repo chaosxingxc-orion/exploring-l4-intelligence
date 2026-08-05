@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-05 — Stage-2A R0 engineering baseline delivered (study b0635aa); smoke/R1 next"
+last_refresh: "2026-08-05 — independent review returned R0 REPAIR; repair in progress, R1 withheld"
 ---
 
 # Research Objective & Current State
@@ -12,7 +12,7 @@ last_refresh: "2026-08-05 — Stage-2A R0 engineering baseline delivered (study 
 ## Current gate and authority
 
 Stage accounting is direction-local. Endpoint:
-`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_BASELINE_DELIVERED__SMOKE_R1_NEXT`.
+`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_REPAIR__R1_WITHHELD`.
 Core = Qwen3-Omni-30B through local llama.cpp; study domain = speech and spoken-language tasks.
 
 The first semantic object, **speech-aware evidence acquisition** (R2 audit provenance), is
@@ -24,8 +24,8 @@ Repository: `studies/speech-aware-evidence-acquisition/`; remote is private. Inn
 candidate method are Stage‑2 outputs; final validation is Stage‑3 (paper repo).
 
 No parameter modification, task-trained model or additional answering LLM is allowed. Model-facing
-execution stays fail-closed behind E0 D1–D4 and a runtime receipt — closed 2026-08-04,
-gate-verified (study `docs/receipts/`). D0 is closed for Earnings21,
+execution stays fail-closed behind E0 D1–D4 and a runtime receipt (closed 2026-08-04,
+gate-verified). D0 is closed for Earnings21,
 Earnings22 and ConEC. SLUE-SQA-5, ContextASR-Bench and AMI are complete secondary speech carriers.
 FSD50K, AudioSet and ESC-50 remain local governed bytes but are outside this study and cannot enter an
 experiment, baseline or claim. `docs/datasets.lock.json` is the only live asset authority.
@@ -57,11 +57,12 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-R0 delivered (study `b0635aa`): `core/` foundation (registry seams, gate-bound adapter,
-one driver), frozen split receipt, scorer adapters, model-free entrypoints; five adversarial
-review rounds closed at zero defects. Next: fill the per-axis readiness memo, owner picks the
-R1 baseline; run smoke `SAEA-E-001` per the study runbook (first model touch: validated
-ExecutionPlan + pre-registered exposure row); then R1 reproduction and X1–X3 probes.
+R0.2 baseline delivered; the 2026-08-05 independent review returned **REPAIR** and withheld R1
+model-facing execution. Every P0/P1 finding was confirmed here and is being closed on branch
+`r0-repair`: verified splits, carrier scope, payload/media binding, one-time attempts, session
+attestation, run-bundle closure. Internal review waves are not evidence of defect-freedom.
+Next: finish the repair, pass a fresh independent rereview, then readiness memo → owner picks
+R1 → smoke SAEA-E-001.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
