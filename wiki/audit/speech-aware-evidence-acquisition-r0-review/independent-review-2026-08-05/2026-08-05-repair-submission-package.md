@@ -130,7 +130,7 @@ D1–D4 收据自 E0 关闭起未改（`docs/receipts/*.json` 在整个修复窗
 
 ## 11. 本轮 owner 指令带来的合同/设计变更（2026-08-06/07）
 
-1. **数值预算帽废止**（signed amendment `2026-08-06-owner-amendment-retire-first-slice-budget-caps.md`）：
+1. **数值预算帽废止**（signed amendment：`wiki/audit/speech-aware-evidence-acquisition-r0-review/2026-08-06-owner-amendment-retire-first-slice-budget-caps.md`）：
    P0-4 的一次性消费部分仍关闭；数值上限部分由 owner 主动收窄合同义务，**不得再作为缺陷上报**。
 2. **GGUF 验证放宽**（owner 批准）：全量哈希改为廉价身份（size/mtime_ns/st_ino/st_dev）比对 +
    变更/显式/每进程首次触达时全量。冷 2m25s → 热 0.85s。残余弱点"同尺寸同 mtime 原地替换"
