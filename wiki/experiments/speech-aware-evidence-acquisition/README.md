@@ -42,6 +42,8 @@ ESC-50 等 general-audio 数据不得进入本台账的实验。
 - E0 闭合 + runtime 收据（2026-08-04 关闭，gate dry-run 已验证）：study 仓 `docs/receipts/`
   （`e0-closure.json`、`runtime.json`；闭合事件 ledger 行 `SAEA-E0-CLOSURE-2026-08-04`）
 - 模型/工具 exposure：study 仓 `docs/exposure-ledger.md`
+- 已发表基线对照表（R0.1 调查产物，探测后回填 ours 行）：
+  [published-baselines.md](published-baselines.md)
 - Stage-1C 历史证据：`wiki/archive/working/stage1c-portfolio/2026-08-03-archive-digest.md`
 
 ## 登记要求
