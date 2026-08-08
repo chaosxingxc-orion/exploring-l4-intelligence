@@ -30,7 +30,7 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | Siskos + CB-LLM context `[abl]` | 同上 | WER | 31.8 | 同上 |
 | Siskos + oracle context `[abl]` | 同上 | WER | 29.7 | 同上 |
 | RECOVER correction (t? — LLM 纠错管线，声称黑盒) | RECOVER preprint, E21 among 5 sets | rel. E-WER ↓ / recall ↑ | 8–46% rel / 最高 +22pp | arXiv:2603.16411（未评审，无码）|
-| **ours: no-context / matched-ConEC / mismatched（R4=P2b）** | 3-arm, dev subset10 起步 | WER + per-entity-class WER | — | 待回填 |
+| **ours: no-context / matched-ConEC / mismatched（R4=P2b；T4 扩展=ConEC bias-list 实体类注入）** | 3-arm, dev subset10 起步，样本经 sample-once manifest | WER + per-entity-class WER | — | 待回填 |
 
 ## slurp（Family B）
 
@@ -46,7 +46,7 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | AIR-Bench 直答（8 系统，最好 Qwen-Audio-Chat）| AIR-Bench 1k 子集，GPT-4 judge | acc | 77.8（最差 NExT-GPT 25.6）| arXiv:2402.07729 |
 | AIR-Bench 级联 Whisper+GPT-4 `[abl]` | 同上 | acc | 87.7 | 同上 |
 | **ours: direct vs self-cascade（R3=P2a）** | AIR-Bench 200 题配对，确定性判分 | acc | — | 待回填 |
-| **ours: prompt-only slot filling（方向 7，post-P2）** | 官方 scorer | SLU-F1 | —（文献中零先例）| 待回填 |
+| **ours: prompt-only slot filling（T3，plan P3 类比轨道）** | 官方 scorer，样本经 sample-once manifest 登记 | SLU-F1 | —（文献零先例；对位 ZS 线 50.0→63.3）| 待回填 |
 
 ## speech-massive（Family B）
 
@@ -78,6 +78,8 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | HeySQuAD 微调 (t) | arXiv:2304.13689 | 相对增益 | +12.51%（人声转写参与训练）/ +2.03%（更高质量转写评测）`[abl]`；绝对 EM/F1 原文表待录（可选）| 同左 |
 | AudioBench 直答行（slue_p2_sqa5）| AudioBench，LLM-judge 0-100 | judge score | SALMONN 83.92；Qwen2-Audio-Inst 82.99；Qwen-Audio-Chat 80.05；WavLLM 76.12；**级联 Whisper+Llama3 76.12 —— 此处直答＞级联（闭卷文档 QA 反向数据点）**；spoken_squad 行不在论文 v4 表内（leaderboard 侧，冻结时再核）| arXiv:2406.16020 |
 | **ours: AudioBench 协议重跑（A1，判分替换）** | 采样 + pinned 开源 judge | judge/EM-F1 | — | 待回填 |
+| **ours: T1 SpeechDPR 类比（training-free 检索）** | 核转写 + pinned BM25，有界池（与原文全库不可等比） | Top-N / frame-F1 | —（方向对照 19.73 / 0.558）| 待回填 |
+| **ours: T2 SpeechRAG 类比（检索阶梯 closed-book/retrieved/oracle）** | 核转写段落 + pinned 检索器（spoken-squad）| EM/F1 | —（对照 "不劣化" 声明；兼作 C 族 SUPPLY 灵敏度阶梯）| 待回填 |
 
 ## ami-meeting-corpus（Family E）
 
