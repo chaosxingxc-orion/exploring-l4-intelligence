@@ -70,12 +70,13 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 
 | system / condition | protocol | metric | value | source |
 |---|---|---|---|---|
-| SLUE-SQA-5 官方 pipeline (t) | SLUE Phase-2 ACL 2023 | frame-F1 | 数值待提取（P0 补）| arXiv:2212.10525 |
-| SpeechDPR (t) | ICASSP 2024 | Top-20 retr. acc → frame-F1 | 数值待提取（P0 补）| arXiv:2401.13463 |
-| Spoken-SQuAD 2018 floor (t) | Interspeech 2018 | EM/F1 | 数值待提取（P0 补）| arXiv:1804.00320 |
+| SLUE-SQA-5 pipeline-oracle：gold 转写+DeBERTa (t) | SLUE Phase-2 ACL 2023 | frame-F1 (test/verified) | 62.3 / 70.3 | arXiv:2212.10525 |
+| SLUE-SQA-5 最佳真实 pipeline（NeMo ASR+DeBERTa）(t) | 同上 | frame-F1 (test/verified) | 43.3 / 45.9（w2v2 39.6/40.1；whisper 32.7/35.7）| 同上 |
+| SpeechDPR (t) | ICASSP 2024 | Top-20 retr. / OpenSQA frame-F1 | 19.73 / 0.558（级联师生 19.94-19.90 / 0.561-0.565；WER>40% 时 SpeechDPR 显著占优 `[abl]`）| arXiv:2401.13463 |
+| Spoken-SQuAD 2018 floor：最佳 FusionNet (t) | Interspeech 2018，ASR WER 22.7 | EM / F1 | 46.51 / 60.06（clean-text 均值上界 64.41/74.54）| arXiv:1804.00320 |
 | Su & Fung 2020 文献天花板 (t) | ICASSP 2020 | F1 | 77.67 | IEEE 9053979 |
-| HeySQuAD 微调 RoBERTa (t) | arXiv:2304.13689 | EM/F1 | 数值待提取（P0 补）| 同左 |
-| AudioBench 直答行（slue_p2_sqa5 / spoken_squad）| AudioBench，LLM-judge 0-100 | judge score | 数值待提取（P0 补）| arXiv:2406.16020 |
+| HeySQuAD 微调 (t) | arXiv:2304.13689 | 相对增益 | +12.51%（人声转写参与训练）/ +2.03%（更高质量转写评测）`[abl]`；绝对 EM/F1 原文表待录（可选）| 同左 |
+| AudioBench 直答行（slue_p2_sqa5）| AudioBench，LLM-judge 0-100 | judge score | SALMONN 83.92；Qwen2-Audio-Inst 82.99；Qwen-Audio-Chat 80.05；WavLLM 76.12；**级联 Whisper+Llama3 76.12 —— 此处直答＞级联（闭卷文档 QA 反向数据点）**；spoken_squad 行不在论文 v4 表内（leaderboard 侧，冻结时再核）| arXiv:2406.16020 |
 | **ours: AudioBench 协议重跑（A1，判分替换）** | 采样 + pinned 开源 judge | judge/EM-F1 | — | 待回填 |
 
 ## ami-meeting-corpus（Family E）
@@ -132,11 +133,14 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | **ours: BBA direct vs self-cascade（R2=P2a）** | 200 题配对，pinned 判分 | acc | — | 待回填 |
 | **ours: VoiceBench 确定性子集（A2）** | MCQ/rule 子集采样 | per-subset | — | 待回填 |
 
-## P0 数字补录清单（模型无关，随 P0 一并完成）
+## P0 数字补录清单（2026-08-07 已完成主体）
 
-SLUE-SQA-5 官方 frame-F1；SpeechDPR 两级数值；Spoken-SQuAD 2018 floor
-EM/F1；HeySQuAD 微调 EM/F1；AudioBench 两个 SQA 子集的发表行；
-（可选）QMSum ROUGE 存档值；UniverSLU 90.3 的原文复核。
+已补：SLUE-SQA-5 frame-F1（含 oracle 上界）；SpeechDPR 两级数值；
+Spoken-SQuAD 2018 floor；HeySQuAD 相对增益；AudioBench slue_p2_sqa5 行。
+残留（低优先，冻结前处理）：UniverSLU 90.3 原文表复核；AudioBench
+spoken_squad leaderboard 行；HeySQuAD 绝对 EM/F1；（可选）QMSum ROUGE
+存档值。发现的反向数据点已入表：AudioBench 闭卷文档 QA 场景直答＞级联，
+与 FDB-v3 self-correction 反例同属"级联并非处处占优"证据。
 
 ## 回填规则
 
