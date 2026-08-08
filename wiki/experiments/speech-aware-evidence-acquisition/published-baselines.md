@@ -30,7 +30,7 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | Siskos + CB-LLM context `[abl]` | 同上 | WER | 31.8 | 同上 |
 | Siskos + oracle context `[abl]` | 同上 | WER | 29.7 | 同上 |
 | RECOVER correction (t? — LLM 纠错管线，声称黑盒) | RECOVER preprint, E21 among 5 sets | rel. E-WER ↓ / recall ↑ | 8–46% rel / 最高 +22pp | arXiv:2603.16411（未评审，无码）|
-| **ours: no-context / matched-ConEC / mismatched（R4=P2b；T4 扩展=ConEC bias-list 实体类注入）** | 3-arm, dev subset10 起步，样本经 sample-once manifest | WER + per-entity-class WER | — | 待回填 |
+| **ours: no-context / matched-ConEC / mismatched（R4=P2b=SAEA-E-002；T4 扩展=ConEC bias-list 实体类注入）** | 3-arm，earnings21-discovery 冻结 44 样本（2026-08-08 Route-1 重定标：e22 subset10 无注册 ConEC 证据层）；三臂 dry-run 已 FINALIZED | WER（实体级 WER 待 owner 钉 wer_tags 适配器）| — | 待回填 |
 
 ## slurp（Family B）
 
