@@ -671,6 +671,23 @@
       "note": "Q8_0 GGUF + bf16 mmproj for llama.cpp -- the W1 genuine best-of-N engine (30B on 24 GB via -ngl 28); file-selective fetch via scripts/data/fetch-qwen3-omni-gguf.sh (whole-repo pull >110 GB deliberately avoided)"
     },
     {
+      "name": "qwen3-omni-30b-a3b-instruct-gguf-q4km",
+      "kind": "model",
+      "local_subdir": "models/qwen3-omni-30b-a3b-instruct-gguf-q4km",
+      "source": {
+        "kind": "local-requant",
+        "id": "llama-quantize Q4_K_M from qwen3-omni-30b-a3b-instruct-gguf (Q8_0)"
+      },
+      "revision": "llama.cpp fdbd6abee20e408de21e90ca77a24cd50a6ea073 (clean tree), --allow-requantize Q4_K_M",
+      "status": "COMPLETE",
+      "size_h": "19.3G",
+      "size_bytes": 20764519520,
+      "files": 2,
+      "task": "-",
+      "factor_family": "model",
+      "note": "Q4_K_M GGUF + the same bf16 mmproj (copied), for the speech-aware-evidence-acquisition study. Admitted on the owner's 2026-08-09 session directive to run experiments on an INT4 model. Provenance chain closed: source Q8_0 sha256 8a50e5a7d29ae6a28fea9ca45e3bb0a142e76ec07e6787a7703cd498eb08ffaa and mmproj sha256 f0dfe825fb692d426362b1ac79678fc08daa4758f7151526cad110515f122883 both match ggml-org's published hashes; requant product sha256 0751c279498785c0b07130ae7748038d1e2cfd04617928e4557063807f98066d, byte-size identical to ggml-org's published Q4_K_M (18557053952) with a tensor-for-tensor identical q4_K/q6_K mixture (llama-quantize --dry-run comparison). Fits entirely in 24 GB VRAM (21.6G resident, no CPU-expert offload): measured 16.24 s per 60 s audio slice vs 67.64 s for Q8_0, a 4.17x speedup. Measured Q4-vs-Q8 transcript agreement on 8 dev-split slices: mean WER 1.50% (entity names identical across all slices; divergence concentrated in function words, with one observed digit change) -- see the study's docs/readiness/2026-08-09-* records"
+    },
+    {
       "name": "nemotron3-nano-omni-nvfp4",
       "kind": "model",
       "local_subdir": "models/nemotron3-nano-omni-nvfp4",
