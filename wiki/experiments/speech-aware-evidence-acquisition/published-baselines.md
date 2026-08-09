@@ -30,7 +30,8 @@ confirmatory 115，study `docs/receipts/splits.json`）。
 | Siskos + CB-LLM context `[abl]` | 同上 | WER | 31.8 | 同上 |
 | Siskos + oracle context `[abl]` | 同上 | WER | 29.7 | 同上 |
 | RECOVER correction (t? — LLM 纠错管线，声称黑盒) | RECOVER preprint, E21 among 5 sets | rel. E-WER ↓ / recall ↑ | 8–46% rel / 最高 +22pp | arXiv:2603.16411（未评审，无码）|
-| **ours: no-context / matched-ConEC / mismatched（R4=P2b=SAEA-E-002；T4 扩展=ConEC bias-list 实体类注入）** | 3-arm，earnings21-discovery 冻结 44 样本（2026-08-08 Route-1 重定标：e22 subset10 无注册 ConEC 证据层）；三臂 dry-run 已 FINALIZED | WER（实体级 WER 待 owner 钉 wer_tags 适配器）| — | 待回填 |
+| **ours: SAEA-E-001 bare-core 参考底线（e22 dev subset10, 10 通话）** | obs-agent-loop 分段协议（60s 缓冲、模型断句+VAD 吸附+有界步进）、INT4 Qwen3-Omni、openJiuwen 执行器、冻结 asr-wer | WER | **0.2674**（逐通话 0.2157–0.3252；795 切片/47,393 音频秒/2.53 GPU 小时） | 已回填 2026-08-09；台账行 SAEA-E-001；**对照证据**：同模型整通协议只产出 2–106 词（已废弃），分段后产出 7,556–11,036 词 |
+| **ours: no-context / matched-ConEC / mismatched（R4=P2b=SAEA-E-002；T4 扩展=ConEC bias-list 实体类注入）** | 3-arm，earnings21-discovery 的冻结 10-of-44 迷你子集（sample-once 收据，manifest 绑定）；三臂各 610 切片、音频秒完全相同（配对设计） | WER（实体级 WER 待 owner 钉 wer_tags 适配器）| 运行中（2026-08-09） | 分析口径已在见结果前预注册：配对精确 Wilcoxon + 中位差 + bootstrap CI，单位=通话 |
 
 ## slurp（Family B）
 
