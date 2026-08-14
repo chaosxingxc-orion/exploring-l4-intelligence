@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-14 — discovery campaigns deep in flight; P1 supply decomposition landed; metadata-roster supply won both ledgers; cross-call KB route closed by measurement"
+last_refresh: "2026-08-14 — metadata-roster supply won both ledgers; cross-call KB route closed"
 ---
 
 # Research Objective & Current State
@@ -57,20 +57,12 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery is deep in flight under the owner's goal-mode standing GO (formal smoke
-SAEA-E-001 completed 2026-08-09; ~86 registered exposure rows). 2026-08-14 state, durable:
-(1) P1 supply decomposition — targeted re-listen alone pays nothing; ORACLE static supply flips
-10/14 targeted rare entities but taxes the rest; a **deployment-legal metadata roster**
-(company + speakers, verbatim, typos preserved) **wins BOTH ledgers** vs the locked zero
-(macro 14.29 vs 14.48; entity 813 vs 782) and flips Aldeyra 6/6 — KX-Q2's deployment-legal
-claim restored on the text side. (2) The cross-call error-pattern KB route is **closed by
-measurement** (reachability partition: the KB-reachable stratum holds zero rare proper names);
-own-history audio + document-label is the largest reachable stratum. (3) Replay delivery is
-blocked by flag targeting (zero overlap with entity errors) and a pass-1 exemplar-hijack
-defect — both recorded in the study repo's P1 verdict. Next: N10 framing-matched block relaunch
-+ metadata-roster ten-call replication (night GPU queue), speech-lexicon v2 (in build),
-retrieval benchmark v3, entity-aware flag redesign. Detail: study
-`docs/readiness/2026-08-14-*.md` + `docs/exposure-ledger.md`.
+Stage-2A discovery in flight (goal-mode standing GO; SAEA-E-001 done 2026-08-09).
+2026-08-14: a **deployment-legal metadata roster wins both ledgers** vs locked zero
+(14.29 vs 14.48; entity 813 vs 782), Aldeyra 6/6 — KX-Q2 restored on the text side; the
+cross-call error-pattern KB route is **closed by measurement**; replay delivery blocked
+(flag targeting + pass-1 exemplar hijack). Next: N10 + metadata ten-call night block,
+lexicon v2, benchmark v3, entity-aware flagging. See study `docs/readiness/`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
