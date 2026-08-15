@@ -1,0 +1,199 @@
+{
+  "schema": "speechrl-r2-asset-acquisition-receipt-v1",
+  "check_id": "SAEA-DATA-ACQUISITION-WAVE2-2026-08-15",
+  "observed_at": "2026-08-15",
+  "verdict": "PASS_ACQUISITION_AND_REGISTRATION_ONLY",
+  "authority_boundary": "dataset acquisition, on-disk re-verification, integrity verification and canonical-lock registration; no model/API execution, no experiment authority, no study-repo or GPU/llama-server change",
+  "canonical_lock": {
+    "path": "docs/datasets.lock.json",
+    "schema": "speechrl-asset-lock-v2",
+    "sha256": "21f8fc116e2e90bedc4b940429f792004931df408b8314288c1759ff0d76ded2",
+    "git_blob_sha1": "c01dbb3183c79a3798766c4fe4e5e8b1d6f734dc",
+    "bytes": 92798,
+    "assets": 110,
+    "asset_catalog_entries": 69,
+    "status_counts": {"COMPLETE": 99, "PARTIAL": 0, "MISSING": 0, "BLOCKED": 11}
+  },
+  "reverified_in_place": {
+    "slurp": {
+      "disposition": "verified-complete; not re-fetched",
+      "variant": "original upstream: pinned pswietojanski/slurp checkout plus the Zenodo 4274930 audio release; superset of the HF qmeeus/slurp repackaging",
+      "local_subdir": "repos/slurp/scripts/audio",
+      "git_head": "8eb16545762be97ace75334109d73824217311f1",
+      "payload_files": 141656,
+      "payload_size_bytes": 13507477690,
+      "lock_fingerprint_match": "exact",
+      "slurp_real_flac_files": 72395,
+      "slurp_real_bytes": 3911348301,
+      "slurp_synth_flac_files": 69257,
+      "slurp_synth_bytes": 2837310779,
+      "real_plus_synth_audio_bytes": 6748659080,
+      "referenced_unique_real_recordings": 72395,
+      "referenced_missing_on_disk": 0,
+      "on_disk_not_referenced": 0,
+      "annotation_files": ["dataset/slurp/train.jsonl", "dataset/slurp/devel.jsonl", "dataset/slurp/test.jsonl", "dataset/slurp/train_synthetic.jsonl", "dataset/slurp/metadata.json"],
+      "utterances": {"train": 11514, "devel": 2033, "test": 2974, "train_synthetic": 19711},
+      "entity_slot_annotations": {"train": 11367, "devel": 2022, "test": 2823, "train_synthetic": 14623},
+      "per_recording_fields": ["file", "wer", "ent_wer", "status"],
+      "ent_wer_present": true,
+      "slot_annotations_present": true
+    },
+    "slue-sqa-5": {
+      "disposition": "verified-complete; not re-fetched",
+      "revision": "e2989c55a53593a8e39b8f8ebdb47ccaccbe484a",
+      "remote_pinned_files": 301,
+      "remote_pinned_bytes": 118074483514,
+      "local_files": 301,
+      "local_bytes": 118074483514,
+      "partial_markers": 0,
+      "splits": {
+        "verified_test": {"shards": 3, "rows": 408, "bytes": 866778007},
+        "test": {"shards": 14, "rows": 2382, "bytes": 5677818113},
+        "validation": {"shards": 12, "rows": 1939, "bytes": 4623616828},
+        "train": {"shards": 270, "rows": 46186, "bytes": 106906260175}
+      },
+      "total_rows": 50915,
+      "columns": ["question_id", "question_audio", "question_speaker_id", "raw_question_text", "normalized_question_text", "document_id", "document_audio", "document_speaker_id", "raw_document_text", "normalized_document_text", "word2time", "answer_spans"],
+      "requested_fields_present": ["document_audio", "raw_document_text"],
+      "train_note": "the 106.9 GB train split was already resident from the 2026-08-03 fetch; the do-not-pull instruction produced no acquisition action this round and no local data was deleted"
+    },
+    "spoken-squad": {
+      "disposition": "verified-complete for the test set; not re-fetched",
+      "revision": "b55aab98726d0eab95eeef1ee9992a0532b3226e",
+      "remote_pinned_files": 23,
+      "remote_pinned_bytes": 3403613158,
+      "local_files": 23,
+      "local_bytes": 3403613158,
+      "partial_markers": 0,
+      "test_shards": 21,
+      "rows": 5351,
+      "unique_question_texts": 5335,
+      "columns": ["context", "instruction", "answer"],
+      "question_id_column_present": false,
+      "legacy_lock_fingerprint_reconciliation": {
+        "lock_files": 25,
+        "lock_size_bytes": 3403615926,
+        "delta_files": 2,
+        "delta_bytes": 2768,
+        "delta_source": [".hfd/last_download_command (162 bytes)", ".hfd/repo_metadata.json (2606 bytes)"],
+        "action": "left unchanged so the historical fingerprint stays reproducible"
+      },
+      "original_question_list_present": false,
+      "resolution": "fetched squad-v11-dev as the reconstruction reference"
+    }
+  },
+  "newly_downloaded": {
+    "halas": {
+      "source": {"kind": "hf", "id": "MatBar99/HALAS"},
+      "revision": "317cef3a10d1097edc37e8eb1c007f415e3d0c55",
+      "local_subdir": "datasets/halas",
+      "payload_files": 6,
+      "payload_size_bytes": 7186701,
+      "partial_markers": 0,
+      "remote_vs_local_sha256_files": 6,
+      "remote_vs_local_sha256_failures": 0,
+      "rows": {"HALAS_dataset.csv": 3611, "train.csv": 2866, "test.csv": 745, "columns": 41},
+      "carrier_join": {
+        "join_key": "audio_id is <segment_index>_<earnings22_call_stem>.wav",
+        "distinct_earnings22_calls": 125,
+        "matched_against_governed_earnings22_media": 125,
+        "unmatched": 0,
+        "annotated_audio_hours": 2.8467
+      },
+      "license_verbatim": "unknown",
+      "license_evidence": "cardData.license == \"unknown\"; HF tag license:unknown; no SPDX identifier, LICENSE file or terms text published",
+      "license_disposition": "UNRESOLVED_FOR_PUBLICATION - local research use only; redistribution, derived release and Stage-3 publication use blocked until upstream terms are resolved in writing"
+    },
+    "slideasr-bench": {
+      "source": {"kind": "hf", "id": "RUIH/SlideASR-Bench"},
+      "revision": "6f05006aeca495af24a5ff080a75c3884f1915ca",
+      "local_subdir": "datasets/slideasr-bench",
+      "license": "mit",
+      "payload_files": 16939,
+      "payload_size_bytes": 10836763656,
+      "missing_files": 0,
+      "size_mismatches": 0,
+      "partial_markers": 0,
+      "lfs_sha256_files": 16934,
+      "lfs_sha256_failures": 0,
+      "non_lfs_raw_sha256_files": 5,
+      "pin_unit_rationale": "upstream serves one audio tree for both split indexes, so the pinned unit is the whole repository at the fixed revision and the test-only restriction is enforced at consumption",
+      "composition": {
+        "audio_wav_files": 8467,
+        "audio_bytes": 9883054910,
+        "audio_languages": {"English": 4819, "Mandarin": 3648},
+        "slide_image_files": 8467,
+        "slide_image_bytes": 940766287,
+        "record_fields": ["uniq_id", "language", "duration", "audio", "text", "domain_label", "entity_list", "slide", "slide_info"]
+      },
+      "consumed_test_split": {
+        "rows": 2054,
+        "audio_bytes": 2130709552,
+        "audio_hours": 18.495,
+        "missing_audio": 0,
+        "languages": {"English": 1208, "Mandarin": 846},
+        "entity_list_items": 13895,
+        "entity_list_per_row_min": 5,
+        "entity_list_per_row_max": 12
+      },
+      "unconsumed_train_split": {"rows": 6413, "audio_hours": 67.2922, "entity_list_items": 44240},
+      "consumption_boundary": "test-split audio plus per-example entity_list only; the 8,467 slide images and train.jsonl are pinned for byte closure but never read by any loader, reward or trace"
+    },
+    "squad-v11-dev": {
+      "source": {"kind": "direct", "url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json"},
+      "local_subdir": "datasets/squad-v1.1-dev",
+      "license": "CC-BY-SA-4.0",
+      "payload_files": 1,
+      "payload_size_bytes": 4854279,
+      "sha256": "95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9",
+      "declared_version": "1.1",
+      "articles": 48,
+      "paragraphs": 2067,
+      "questions": 10570,
+      "unique_question_texts": 10533,
+      "reconstruction_check": {
+        "spoken_squad_test_rows": 5351,
+        "spoken_squad_unique_question_texts": 5335,
+        "matched_in_squad_dev": 5335,
+        "squad_dev_questions_absent_from_spoken_squad": 5198,
+        "join_key": "verbatim question text (the AudioLLMs mirror exposes no question_id)"
+      }
+    }
+  },
+  "validation": {
+    "canonical_lock_validate": "PASS_110_ASSETS",
+    "all_asset_inventory": "PASS_99_COMPLETE_0_PARTIAL_0_MISSING_11_BLOCKED_DRIFT_0",
+    "speech_aware_secondary_inventory_full": "PASS_4_COMPLETE_DRIFT_0",
+    "speech_aware_annotations_inventory_full": "PASS_3_COMPLETE_DRIFT_0",
+    "speech_aware_core_inventory_full": "PASS_3_COMPLETE_DRIFT_0",
+    "unit_tests": "PASS_7",
+    "code_graph_check": "PASS_24_TRUSTED_NODES",
+    "ai_context_surface_check": "KNOWN_UNRELATED_CONCURRENT_FAILURE_1 (mid-task run was PASS_0_FAILURES; the closing re-run reports new-audit-artifact-outside-audit-root for wiki/experiments/speech-aware-evidence-acquisition/2026-08-15-owner-amendment-dual-track-agentic.md, introduced by parallel-session commit 402cffb, unrelated to this data change and neither rewritten nor masked here)",
+    "legacy_asset_resolution_check": "PASS_574_COLD_BACKUP_RESOLVED_0_UNRESOLVED",
+    "ai_context_manifest_check": "PASS",
+    "study_workspace_check": "PASS",
+    "paper_workspace_check": "PASS"
+  },
+  "non_blocking_observations": [
+    {
+      "topic": "slurp-audio-triplicated-on-disk",
+      "detail": "Beyond the governed repos/slurp/scripts/audio copy (141,656 files / 13,507,477,690 bytes) there is a full second copy at datasets/slurp and a third nested at datasets/slurp/audio; the datasets/slurp subtree totals 283,312 files / 27,014,955,380 bytes. None of these paths is a symlink, junction or hardlink (PowerShell LinkType empty; fsutil hardlink list reports a single link), so the duplication is real. The legacy fetch_slurp path intended a datasets/slurp -> repos/slurp/scripts/audio symlink and produced copies instead. No deletion was performed; reclaiming the 27.0 GB needs a separate owner disposition.",
+      "action_taken": "recorded only"
+    },
+    {
+      "topic": "slue-sqa-5-train-resident",
+      "detail": "The 106.9 GB SLUE-SQA-5 train split was already on disk before this task; it was neither fetched nor deleted this round.",
+      "action_taken": "recorded only"
+    },
+    {
+      "topic": "unrelated-preexisting-worktree-change",
+      "detail": "wiki/survey/2026-07-17-sf-fulltext-ledger.jsonl was already modified in the umbrella worktree by another session before this task started; it was never touched here and that session committed it itself as 6a42d1d during this task.",
+      "action_taken": "preserved, not committed by this task"
+    },
+    {
+      "topic": "parallel-session-umbrella-commits",
+      "detail": "Two umbrella commits landed from another session while this task ran: 6a42d1d (survey ledger backfill) and 402cffb (owner dual-track record plus two survey notes). Neither touched docs/datasets.lock.json; the lock diff against HEAD is exactly this task's 86 insertions / 3 deletions. 402cffb is the sole cause of the closing ai_context_surface_check failure.",
+      "action_taken": "verified no collision on the lock; recorded"
+    }
+  ]
+}

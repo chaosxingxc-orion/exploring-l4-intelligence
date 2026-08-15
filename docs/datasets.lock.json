@@ -9,15 +9,15 @@
     "docs/datasets.gap-candidates.json",
     "docs/checks/stage1b-closeout/2026-07-23-v5/speechrl-data-layered-inventory-python.json"
   ],
-  "generated": "2026-08-04; five public assets closed by official-source verification; active study profiles renamed and narrowed to speech-only while cross-domain bytes remain local",
+  "generated": "2026-08-15; acquisition wave 2 for the speech-aware study: SLURP, SLUE-SQA-5 and Spoken-SQuAD re-verified in place against their recommended variants, and HALAS, SlideASR-Bench and the SQuAD v1.1 dev reconstruction reference registered and closed by official-source verification",
   "data_root": "${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}",
   "profiles": {
     "frozen-baseline": "The reproducible June/July baseline; default fetch profile for backward compatibility.",
     "local-candidates": "Observed non-baseline local assets; presence does not authorize an experiment.",
     "speech-aware-core": "Earnings21, Earnings22 and ConEC Stage-2A minimum speech-domain closure.",
     "speech-aware-diagnostics": "PRISM, Rare5k and BuzzWord speech/entity diagnostic carriers.",
-    "speech-aware-secondary": "SLUE-SQA-5, ContextASR-Bench and AMI public secondary speech carriers.",
-    "speech-aware-annotations": "TED-EL annotations only; TED-LIUM3 speech audio remains source-unstable.",
+    "speech-aware-secondary": "SLUE-SQA-5, ContextASR-Bench, AMI and SlideASR-Bench public secondary speech carriers.",
+    "speech-aware-annotations": "Annotation-only overlays that carry no speech bytes of their own: TED-EL (TED-LIUM3 audio remains source-unstable), HALAS over Earnings22, and the SQuAD v1.1 dev reference used to reconstruct the pre-deletion Spoken-SQuAD question list.",
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
@@ -41,6 +41,37 @@
     "total_h": "381.0G"
   },
   "amendments": [
+    {
+      "date": "2026-08-15",
+      "task": "speech-aware acquisition wave 2: three on-disk re-verifications and three new registrations",
+      "changes": [
+        {
+          "kind": "on-disk-reverification",
+          "note": "Re-verified three existing holdings against their recommended variants; no bytes were re-downloaded and no identity, revision or size field was changed. SLURP: the governed holding is the ORIGINAL upstream variant (pinned pswietojanski/slurp checkout plus the Zenodo 4274930 audio release), a superset of the qmeeus/slurp HF repackaging; 72,395 real FLAC recordings on disk reconcile one-for-one with the 72,395 unique recordings referenced by train/devel/test.jsonl (0 missing, 0 unreferenced), 69,257 synthetic recordings are also present, and the four official jsonl indexes carry per-utterance entities/slot spans plus per-recording wer and ent_wer. SLUE-SQA-5: sqa5 holds verified_test (3 shards, 408 rows), test (14 shards, 2,382 rows), validation (12 shards, 1,939 rows) and train (270 shards, 46,186 rows), each with document_audio and raw_document_text columns; the two requested evaluation splits were already resident, so the do-not-fetch instruction for train had no acquisition effect and no local data was deleted. Spoken-SQuAD: the AudioLLMs/spoken_squad_test mirror is byte-complete at the pinned revision (23 payload files, 3,403,613,158 bytes, 5,351 rows).",
+          "entries": ["slurp", "slue-sqa-5", "spoken-squad"]
+        },
+        {
+          "kind": "fingerprint-reconciliation",
+          "note": "Explaining, not changing, the spoken-squad legacy fingerprint. The recorded files=25 / size_bytes=3403615926 counts two non-payload downloader bookkeeping files under .hfd (last_download_command 162 bytes and repo_metadata.json 2,606 bytes; 2,768 bytes total) on top of the 23 governed payload files totalling 3,403,613,158 bytes, which match the pinned upstream file list exactly. The record is left as-is so the historical fingerprint stays reproducible.",
+          "entries": ["spoken-squad"]
+        },
+        {
+          "kind": "asset-registration",
+          "note": "Registered three new assets. HALAS: span-level ASR hallucination annotations over Earnings-22, no audio of its own. SlideASR-Bench: entity-dense contextual-ASR secondary carrier pinned as a whole repository because upstream serves one audio tree for both split indexes; consumption is scoped to the test split audio plus per-example entity_list, with slide images and train.jsonl explicitly unused. SQuAD v1.1 dev: text-only reconstruction reference for the pre-deletion Spoken-SQuAD question list, needed because the AudioLLMs mirror ships only the 5,335 surviving question texts, exposes no question_id, and omits 5,198 of the 10,570 original dev questions.",
+          "entries": ["halas", "slideasr-bench", "squad-v11-dev"]
+        },
+        {
+          "kind": "license-flag",
+          "note": "HALAS is recorded with its upstream license field verbatim as \"unknown\"; no SPDX identifier, LICENSE file or terms text is published upstream. The entry carries license_note UNRESOLVED_FOR_PUBLICATION and a claim_limit blocking redistribution, derived release and any Stage-3 publication use until the terms are resolved in writing.",
+          "entries": ["halas"]
+        },
+        {
+          "kind": "profile-description-update",
+          "note": "Extended two profile descriptions to cover the new members: speech-aware-secondary now names SlideASR-Bench, and speech-aware-annotations is restated as the annotation-only overlay profile covering TED-EL, HALAS and the SQuAD v1.1 dev reference. Profile membership of existing assets was unchanged.",
+          "entries": ["speech-aware-secondary", "speech-aware-annotations"]
+        }
+      ]
+    },
     {
       "date": "2026-08-04",
       "task": "speech-only study binding and semantic profile migration",
@@ -1206,6 +1237,40 @@
       "research_role": "Public bilingual contextual-ASR secondary carrier; not a core-start gate"
     },
     {
+      "name": "slideasr-bench",
+      "kind": "dataset",
+      "local_subdir": "datasets/slideasr-bench",
+      "source": {"kind": "hf", "id": "RUIH/SlideASR-Bench"},
+      "revision": "6f05006aeca495af24a5ff080a75c3884f1915ca",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
+      "license": "mit",
+      "expected_payload": {"size_bytes": 10836763656, "files": 16939, "rows": 8467},
+      "verification": {"observed_at": "2026-08-15", "resolved_revision": "6f05006aeca495af24a5ff080a75c3884f1915ca", "payload_files": 16939, "payload_size_bytes": 10836763656, "missing_files": 0, "size_mismatches": 0, "lfs_sha256_files": 16934, "lfs_sha256_failures": 0, "fixed_revision_raw_sha256_files": {".gitattributes": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0", ".gitignore": "7f4d7e9994facd3b249e797edfb5c268eaa902e35af41efd46ed9a30555218f9", "README.md": "d8d7a46d41a1a37fe4f0a5f637bf55c649310185329127d8a2204632e480be17", "SlideASR-S/test.jsonl": "7ffcaeb22530e9c092085e0bf557d96fcce568843d53aa24f027eef5f9329d41", "SlideASR-S/train.jsonl": "2caec8b74b8c77af21310d4925f7d2fec69db37e4a3b2900a70198cdba648a46"}, "partial_markers": 0, "composition": {"audio_wav_files": 8467, "audio_bytes": 9883054910, "audio_languages": {"English": 4819, "Mandarin": 3648}, "slide_image_files": 8467, "slide_image_bytes": 940766287, "record_fields": ["uniq_id", "language", "duration", "audio", "text", "domain_label", "entity_list", "slide", "slide_info"]}, "consumed_test_split": {"rows": 2054, "audio_bytes": 2130709552, "audio_hours": 18.495, "missing_audio": 0, "languages": {"English": 1208, "Mandarin": 846}, "entity_list_items": 13895, "entity_list_per_row_min": 5, "entity_list_per_row_max": 12}, "unconsumed_train_split": {"rows": 6413, "audio_hours": 67.2922, "entity_list_items": 44240}, "method": "official Hugging Face pinned file list, exact byte-size closure, per-file LFS SHA-256 against upstream OIDs on all 16,934 LFS objects, and fixed-revision raw-byte SHA-256 on the five non-LFS files", "disposition": "complete secondary carrier; not a Stage-2 core-start gate"},
+      "consumption_boundary": "Speech-only scoping: this study consumes the SlideASR-S test split audio (SlideASR-S/audio/**, human-speech WAV) and the per-example entity_list text carried in SlideASR-S/test.jsonl. The 8467 slide images under SlideASR-S/slides/** are pinned for byte-complete revision verification but are never read by any loader, reward or trace; the 6413-row SlideASR-S/train.jsonl is likewise not consumed, preserving discovery/confirmatory isolation. The consumed unit is the 2054-row test split: 18.495 hours of English and Mandarin speech with 13,895 entity_list items.",
+      "acquisition_note": "The upstream repository does not separate splits by directory: one audio tree serves both jsonl indexes, so the pinned unit is the whole repository at the fixed revision and the test-only restriction is enforced at consumption, not at download.",
+      "research_role": "Public entity-dense contextual-ASR secondary carrier for the speech-aware study; not a core-start gate"
+    },
+    {
+      "name": "halas",
+      "kind": "dataset",
+      "local_subdir": "datasets/halas",
+      "source": {"kind": "hf", "id": "MatBar99/HALAS"},
+      "revision": "317cef3a10d1097edc37e8eb1c007f415e3d0c55",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": ["speech-aware-annotations"],
+      "status": "COMPLETE",
+      "license": "unknown",
+      "license_note": "UNRESOLVED_FOR_PUBLICATION. The upstream dataset card declares the license field verbatim as \"unknown\" (cardData.license == \"unknown\", HF tag license:unknown); no SPDX identifier, LICENSE file or terms text is published. Local research use only; redistribution, derived release and any Stage-3 publication use are blocked until the upstream terms are resolved in writing.",
+      "dependencies": ["earnings22-original"],
+      "expected_payload": {"size_bytes": 7186701, "files": 6, "rows": 3611},
+      "verification": {"observed_at": "2026-08-15", "resolved_revision": "317cef3a10d1097edc37e8eb1c007f415e3d0c55", "payload_files": 6, "payload_size_bytes": 7186701, "lfs_sha256_files": 0, "fixed_revision_raw_sha256_files": {".gitattributes": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb", "HALAS_dataset.csv": "45e4719fe551cab4023b18a4f3ee23cddbcc554ddc0ea14f4726d0e142124cda", "README.md": "a27af92563d95a872c5cb70241135444d311d84b5abd00becb1c019ac77ba24e", "prompt.txt": "74aac0e274512de7e2aacc66c9cee9683427932e65a890dff3881c62f983430b", "test.csv": "2ce7f5fa81b84b22fef1db2ffde6b0f405c34ace324e8df3c1ebf02b3b3c3856", "train.csv": "3410840473e183eb95a7bf19b8eac0c483bea8f9ae6326c626a96dfe00c3d8d8"}, "partial_markers": 0, "annotation_rows": {"HALAS_dataset.csv": 3611, "train.csv": 2866, "test.csv": 745, "columns": 41}, "carrier_join": {"join_key": "audio_id is <segment_index>_<earnings22_call_stem>.wav", "distinct_earnings22_calls": 125, "matched_against_governed_earnings22_media": 125, "unmatched": 0, "annotated_audio_hours": 2.8467}, "method": "official Hugging Face pinned file list, exact byte-size closure, and fixed-revision remote-vs-local raw-byte SHA-256 on all six files", "disposition": "complete annotation overlay; not a Stage-2 core-start gate; publication use blocked by the unresolved upstream license"},
+      "consumption_boundary": "Annotation overlay only: HALAS carries no audio. Span-level hallucination labels are keyed to Earnings-22 audio ids and must be joined against the governed earnings22-original bytes.",
+      "research_role": "Span-level ASR hallucination annotations over Earnings-22; candidate OBS/USE diagnostic label source, not a core-start gate",
+      "claim_limit": "License is declared \"unknown\" upstream; no publication-grade or redistributed claim may rest on these annotations until the terms are resolved."
+    },
+    {
       "name": "ted-el-annotations",
       "kind": "dataset",
       "local_subdir": "datasets/ted-el",
@@ -1218,6 +1283,24 @@
       "dependencies": ["ted-lium3"],
       "verification": {"observed_at": "2026-08-02", "git_head": "1338e98bccb29badc34dabf17d08c11642d54189", "payload_size_bytes": 39962679, "payload_files": 3},
       "claim_limit": "Annotations are public, but complete use is blocked by the TED-LIUM3 audio source and incomplete method release."
+    },
+    {
+      "name": "squad-v11-dev",
+      "kind": "dataset",
+      "local_subdir": "datasets/squad-v1.1-dev",
+      "source": {"kind": "direct", "files": [
+        {"filename": "dev-v1.1.json", "url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json", "size_bytes": 4854279, "sha256": "95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9"}
+      ]},
+      "revision": "sha256:95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": ["speech-aware-annotations"],
+      "status": "COMPLETE",
+      "license": "CC-BY-SA-4.0",
+      "dependencies": ["spoken-squad"],
+      "expected_payload": {"size_bytes": 4854279, "files": 1, "rows": 10570},
+      "verification": {"observed_at": "2026-08-15", "payload_files": 1, "payload_size_bytes": 4854279, "sha256": "95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9", "declared_version": "1.1", "articles": 48, "paragraphs": 2067, "questions": 10570, "unique_question_texts": 10533, "partial_markers": 0, "method": "official rajpurkar.github.io SQuAD-explorer download, exact byte length, SHA-256, and structural row closure", "spoken_squad_reconstruction_check": {"spoken_squad_test_rows": 5351, "spoken_squad_unique_question_texts": 5335, "matched_in_squad_dev": 5335, "squad_dev_questions_absent_from_spoken_squad": 5198, "join_key": "verbatim question text (the AudioLLMs mirror exposes no question_id)"}},
+      "consumption_boundary": "Text reference only; carries no audio. Used solely to recover the original SQuAD v1.1 dev question inventory that the Spoken-SQuAD authors truncated when ASR noise destroyed an answer span.",
+      "research_role": "Reconstruction reference for the pre-deletion Spoken-SQuAD question list; the AudioLLMs/spoken_squad_test mirror ships only the surviving questions and exposes no question_id."
     },
     {
       "name": "ted-lium3",
