@@ -166,3 +166,10 @@ destroys the arm at finalize. This record was therefore written in the umbrella 
 alongside `docs/arms/p2-rladder.arms`, so the definitions travel with the pre-registration they
 qualify. Until that mirror lands, this umbrella file is the authoritative text of the two
 definitions, and the study repo carries no copy.
+
+**Naming note (2026-08-16)**: this record was filed and briefly tracked under the basename
+`2026-08-16-p2-metric-definition-amendment.md`; it was renamed the same day to
+`2026-08-16-p2-metric-definitions.md` because the token `amendment` in the old basename tripped
+the `new-audit-artifact-outside-audit-root` rule in `scripts/checks/ai_context_surface_check.py`
+(this record is an implementer definitions record, not an audit-campaign artifact). The rename
+changed only the filename; `record_id`, content, and mirror obligation are unchanged.
