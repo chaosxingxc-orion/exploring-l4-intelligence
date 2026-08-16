@@ -276,6 +276,23 @@ that: authorize the labeled archival replay; an auditable number beats an unaudi
   pass over all 14 cited works (plus the three named artifacts) launched immediately; fetch log
   under `wiki/survey/workbench/2026-08-16-proposal-citation-verification/`. Worth-citing verdicts
   will replace the §11 rows.
+  **Outcome (same day): nothing in §11 is fabricated** — the earlier "fabrication-shaped URL"
+  finding is retracted (control test: the same proceedings path with a zero hash 404s; the
+  NeurIPS-shaped path is shared proceedings software). Defect profile is sloppy citation and
+  undisclosed preprint status: 4 rows survive as-is; 6 need corrected citations (notably row 2 →
+  "Retrieval Augmented Generation based context discovery for ASR", arXiv 2509.19567, no code;
+  row 9 → AlignRAG, arXiv 2504.14858; row 10 → CF-RAG, ICLR 2026 poster; row 11 → MMSU arXiv
+  2506.04779 + ICLR 2026); 3 must be re-labelled as preprints (RECOVER is *under review*, Voice
+  Memory is CC-BY-NC-SA); 2 demote to related-work-only (WavRAG, Audio2Tool-until-artifact);
+  0 drop; 3 additions required (EChO-Agent arXiv 2606.15141; the Interspeech 2026 challenge agent
+  track; the post-ASR edit-quality-metric lineage, survey 2508.07285). Two standing warnings for
+  the gap statement: HER/RIR must cite the existing edit-rate metric lineage rather than claim
+  metric novelty; and with Voice Memory + RECOVER jointly covering everything else, **localized
+  audio verification and legal-source provenance now carry the entire differentiation load** —
+  N2 and the candidate package must treat those two as the isolated variables. Bonus sweep: no
+  2025–2026 system combines them on a frozen speech-LLM (the two nearest fail cleanly: EChO-Agent
+  lacks entity retrieval/abstention accounting; "Listen, Do Not Copy" requires GDPO training).
+  Remaining work: consolidate the workbench log into the survey registry (Sonnet, gap, doc-only).
 - **D2 — Option B ratified.** Study repo: hard freeze during any arm flight (no edits, commits,
   checkouts, installs by any session or agent). Umbrella: mechanically free. Changes touching a
   live block's registered semantics wait for the gap, or land only before any affected read with
@@ -297,14 +314,34 @@ that: authorize the labeled archival replay; an auditable number beats an unaudi
   archival replay of the already-spent r0bias read (same pinned scripts, sealed trace, zero model
   contact, labeled as archival replay) may proceed without a further owner round-trip.
 
-**PRE — dataset preprocessing for the 44-call block (inserted after G0):**
-register the tool-campaign exposure row first (study commit, in the gap), then launch the
-preprocessing of the 34 unflown earnings21 discovery calls at ~20 workers: slice derivation
-(90s-era buffers), per-call metadata rosters, entity/benchmark ledger construction (gold stays on
-the scoring side only, never in runtime artifacts), and any MMS_FA alignment the lexicon lane
-needs. Owner-mandated deliverables: per-file hashes, aligned/failed counts, throughput
-(slices/min + wall). Runs in background across Phases 1–2; must be COMPLETE and hash-manifested
-before N2 registration. Owner: Opus supervises, CPU-only, no omni model load.
+**PRE — dataset preprocessing for the 44-call block (inserted after G0; owner-corrected
+three-track design, 2026-08-16):**
+register the tool-campaign exposure rows first (study commit, in the gap), then run three tracks.
+Track A (CPU, ~20 workers, RAM-capped): slice derivation (90s-era buffers), per-call metadata
+rosters, entity/benchmark ledger construction for the 34 unflown earnings21 discovery calls (gold
+stays on the scoring side only, never in runtime artifacts). Track B (GPU): MMS_FA alignment
+(~1.2GB torchaudio model — v1 ran it CPU-only solely because the GPU was occupied by E-005; in
+the gap it runs on GPU, batched) over the backlog of *already-flown* runs' own-draft transcripts
+plus lexicon v2 construction; the 34 new calls have no drafts yet, so their alignment follows
+their first pass by design. Track C (GPU, after Track A's slices and ticket FC1): pre-build the
+featcache for all 44-call slices with the mmproj audio encoder loaded ALONE on GPU at large batch.
+Rationale: the production server runs `--no-mmproj-offload` because VRAM is full, so encoding
+currently burns CPU in-flight — the exact mixed-load pattern behind the 232MHz SW-power-cap
+lockup; pre-encoding converts per-arm encoding cost into a one-time cost and empties the CPU side
+during flights. Cache-hit proof per the standing rule: zero "encoding" lines in server logs +
+untouched cache-dir mtimes. Deliverables: per-file hashes, aligned/failed counts, throughput
+(slices/min + wall). Tracks A/B start immediately in the gap; C follows A. PRE must be complete
+and hash-manifested before N2 registration; if FC1 proves infeasible, N2 flies with in-flight
+encoding as today (no block).
+
+**FC1 — encode-only featcache builder (Sonnet, gap only, timeboxed feasibility probe first):**
+a small driver that loads only the mmproj audio encoder on GPU and writes encoder outputs into
+the featcache patch's own key/value format (the patch is ours; the format is under our control).
+If mtmd initialization cannot be decoupled from the main model within the timebox, fallback: a
+warmup server instance with the main model at `-ngl 0` (CPU RAM) and mmproj fully offloaded to
+GPU. Acceptance: cache entries byte-identical to ones produced by the production server on the
+same slices (spot-checked), deterministic rebuild, full test suite green; a ledger row registers
+the tool contact before any cache is consumed.
 
 ### Contingencies
 
