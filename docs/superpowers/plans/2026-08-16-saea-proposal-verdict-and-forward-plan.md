@@ -343,6 +343,44 @@ GPU. Acceptance: cache entries byte-identical to ones produced by the production
 same slices (spot-checked), deterministic rebuild, full test suite green; a ledger row registers
 the tool contact before any cache is consumed.
 
+## 7. PRE Track A design outcome (2026-08-16 evening) and two pending owner rulings
+
+The read-only design probe corrected the Track A premise and shrank its cost:
+
+- The "34 unflown calls" HAVE flown: `SAEA-BENCH-kb34-floor` (2026-08-14) decoded exactly this
+  set (12.59% macro, n=34) and `SAEA-TOOL-lexicon-v2` aligned their drafts. The full 44-call
+  buf90 slice corpus already exists on disk (1,251 slices / 3.4 GB for the 34), the slices were
+  proven byte-reproducible offline (sha256 match under the librosa fallback decoder), and the
+  26 GB featcache is content-keyed, so existing entries stay warm for any future arm.
+- Track A therefore reduces to: (1) hash-manifest + cross-verify the existing corpus
+  (zero-code, ~5 min at 20 workers); (2) metadata-roster builder for the 34 (the frozen-ten
+  roster rule was reverse-engineered and verified: company_name + sorted unique speaker names,
+  Operator/placeholder excluded, typos preserved, no recasing); (3) gold-side entity inventory
+  (scripts/-side only — src/ placement would break the reference-import-isolation test). Steps
+  2–3 are small Sonnet scripts. Whole of Track A: under 30 minutes wall.
+- The Tier-2 precut-reuse change to `obs_loop.py` (worth ~15–19 min GPU-idle per arm) is
+  deferred to its own registered change with a byte-equivalence test.
+- Environment pin recorded: **ffmpeg is absent and must stay absent** — all slices ever cut used
+  the librosa fallback; installing ffmpeg would change slice bytes and cold the featcache.
+- Exposure row drafted (profile `model-free-check`, split hash `8572f5d6…`, 0 calls / 0 GPU-h);
+  to be committed before any output is read.
+
+**Pending owner rulings surfaced by the probe:**
+
+1. **kb-construction intersection prohibition vs the n=44 block.** The frozen
+   `kb-construction-sample` receipt (owner decision 2026-08-13) states the 34 calls' gold may
+   enter offline KB construction ONLY and "runtime evaluation splits must never intersect this
+   set". An n=44 discovery block intersects it by construction. Recommendation: supersede the
+   restriction by owner ruling with two conditions — (a) no gold-derived KB/lexicon artifact
+   sourced from these calls may appear in any N2 runtime path (the error-pattern KB route the
+   restriction protected was closed by measurement on 2026-08-14; the lexicon is draft-derived,
+   zero gold), and (b) the n=44 block stays discovery-tier. Without this ruling N2 cannot use
+   earnings21 scale at all (the discovery split is the whole corpus).
+2. **Reconfirmation that N2 is gated by the routing gate**, per the registered MUST-NOT-FLY line
+   ("no scaling past n=10 until the oracle-routing gate shows S1 retains a usable fraction") —
+   already the plan's N1-before-N2 order; restated here so the n=44 approval is not read as
+   overriding it.
+
 ### Contingencies
 
 - **Watcher exits STALL:** diagnose processes + GPU clocks first (`clocks.sm` first — known SW-power-cap
