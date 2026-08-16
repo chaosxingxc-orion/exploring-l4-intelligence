@@ -1,44 +1,60 @@
-# MD 与脚本整编战役 spec（2026-07-29）
+# MD and script consolidation campaign spec (2026-07-29)
 
 ## Authority
 
-owner 2026-07-29 指令（逐义）：包括 wiki 内文件、CLAUDE.md、AGENTS.md 和工程内 md 及相关脚本
-都做清理。**md 看内容**：与当前工作无直接关系的直接移除；弱关系的摘要后归档；只保留强关系。
-**脚本判断是否必须使用**：不是必须的都删除；必须使用的再分析能否用模板+配置优化、降低脚本
-数量、转化为配置文件。追加裁决：**「一句话，应删尽删！」**——边界件默认删除（台账保恢复），
-仅门禁绑定或 R2–R9 重审证据承重的保留。
+owner 2026-07-29 directive (sense by sense): clean up everything, including files inside the wiki,
+CLAUDE.md, AGENTS.md, and the Markdown and related scripts inside the engineering repos.
+**For Markdown, judge by content**: anything with no direct relation to the current work is removed
+outright; weakly related material is summarized and then archived; only strongly related material is
+kept. **For scripts, judge whether they are strictly required**: everything not required is deleted;
+for those that are required, analyze further whether a template + configuration can optimize them,
+reduce the script count, and turn them into configuration files. Supplementary ruling: **"In one
+sentence: delete everything that should be deleted!"** — borderline items are deleted by default (the
+ledger preserves recoverability), and only items bound to a gate or load-bearing as R2–R9 re-review
+evidence are kept.
 
-当前工作定义（判级基准）：Stage-1C R2–R9 开题报告式协同重审（07-29 判据与模板）→ Stage-2A
-R5+R6+R8 纵向切片（核=Qwen3-Omni-30B via llama.cpp，ASR 主线=通用 ASR）。
+Definition of the current work (the grading baseline): Stage-1C R2–R9 opening-report-style
+collaborative re-review (07-29 criteria and templates) → Stage-2A R5+R6+R8 vertical slice
+(core = Qwen3-Omni-30B via llama.cpp, ASR main line = general ASR).
 
-## 处置规则
+## Disposition rules
 
-- MD：STRONG 保留（current 加载面、活跃 proposals/模板、dossier/T1-T3 证据、HOT 正典、
-  README/CONTRIBUTING、门禁引用件）；WEAK 先写 2-4 行摘要汇入本役 digest 再删除入台账；
-  NONE 直接删除入台账。CLAUDE.md/AGENTS.md 不删，做节级瘦身（镜像同步、≤12KB）。
-- 脚本：MUST_GATE（10 条门禁及其 import 闭包）/ MUST_INFRA（env/data/wiki-sync/train/eval 入口）/
-  MUST_PYTEST（守活跃不变量）保留；其余 NOT_MUST 删除入台账。MUST 群出模板+配置收敛方案
-  （引擎+声明式配置），实施与否由 owner 在方案上裁定。
-- `wiki/audit/**`、`wiki/archive/**` 一字不动。已注册 AUDIT 工件若需删除，走 registry sunset
-  数组（path/git_blob/last_commit，历史可达校验），沿用 07-28 机制。
+- MD: STRONG is kept (the current load surface, active proposals/templates, dossier/T1-T3 evidence,
+  the HOT canon, README/CONTRIBUTING, gate-referenced files); WEAK first gets a 2-4 line summary
+  merged into this campaign's digest and is then deleted into the ledger; NONE is deleted straight
+  into the ledger. CLAUDE.md/AGENTS.md are not deleted but slimmed section by section (mirrored in
+  sync, ≤12KB).
+- Scripts: MUST_GATE (the 10 gates and their import closure) / MUST_INFRA (env/data/wiki-sync/train/eval
+  entry points) / MUST_PYTEST (guarding active invariants) are kept; everything else, NOT_MUST, is
+  deleted into the ledger. The MUST group produces a template + configuration convergence proposal
+  (engine + declarative configuration); whether it is implemented is ruled on by the owner against
+  that proposal.
+- `wiki/audit/**` and `wiki/archive/**` are not touched by a single character. If a registered AUDIT
+  artifact must be deleted, it goes through the registry sunset array (path/git_blob/last_commit, with
+  history-reachability verification), reusing the 07-28 mechanism.
 
-## 机制
+## Mechanism
 
-- 本役审计目录：`wiki/audit/md-script-consolidation-2026-07-29/`——`sunset-ledger.jsonl`
-  （沿用 07-28 行 schema，decided_by=owner-2026-07-29）+ `sunset-digest.md`（WEAK 摘要与
-  各链终局）。上一役 143 件脚本无台账欠账在本役 ledger 以
-  `reason_class=SUNSET_TOOLING_BACKFILL` 回填。
-- 每波收尾：涉 current 层则同 commit 重盖 manifest + ai-context manifest + package 回执；
-  每波 `sf_current_package_check.py --check` PASS 后 commit+push。
-- 波次：A=umbrella wiki+docs MD；B=根 MD 与 CLAUDE/AGENTS 瘦身；C=工程仓 MD（各仓独立
-  commit）；D=脚本删除+143 回填；E=配置化方案（文档，交 owner 裁定后另行实施）。
-- **scripts/tools/（owner 2026-07-29 裁决）**：设常驻目录存放日常反复使用的工程工具。现存
-  fetch/登记线（sf_fulltext_fetch、sf_fulltext_ledger_status、sf_official_metadata_fetch、
-  sf_atom_provenance_fetch）迁入；被删发现道工具若 R2-R9 重审确需，从台账恢复点按需恢复到
-  此目录。迁移不动 10 条门禁绑定脚本的路径（code_graph 稳定性优先）；门禁外的日用工具才
-  进 tools/。
+- This campaign's audit directory: `wiki/audit/md-script-consolidation-2026-07-29/` — `sunset-ledger.jsonl`
+  (reusing the 07-28 row schema, decided_by=owner-2026-07-29) + `sunset-digest.md` (WEAK summaries and
+  the final state of each chain). The previous campaign's ledger debt of 143 scripts is backfilled into
+  this campaign's ledger as `reason_class=SUNSET_TOOLING_BACKFILL`.
+- At the close of each wave: if the current layer is involved, re-stamp the manifest + ai-context
+  manifest + package receipt in the same commit; each wave commits and pushes after
+  `sf_current_package_check.py --check` PASSes.
+- Waves: A = umbrella wiki+docs MD; B = root MD plus the CLAUDE/AGENTS slimming; C = engineering-repo MD
+  (each repo commits independently); D = script deletion + the 143 backfill; E = the configuration-driven
+  proposal (a document, implemented separately after the owner rules on it).
+- **scripts/tools/ (owner ruling 2026-07-29)**: establish a permanent directory holding the engineering
+  tools used repeatedly day to day. The existing fetch/registration line (sf_fulltext_fetch,
+  sf_fulltext_ledger_status, sf_official_metadata_fetch, sf_atom_provenance_fetch) moves in; a deleted
+  discovery-track tool, if the R2-R9 re-review genuinely needs it, is restored on demand into this
+  directory from its ledger recovery point. The move does not change the paths of the 10 gate-bound
+  scripts (code_graph stability comes first); only day-to-day tools outside the gates go into tools/.
 
-## 验证
+## Verification
 
-每波删除后：门禁 10 条 PASS、加载面无悬空、被删件抽样 `git show` 可恢复。盘点输入：两路
-Opus 判级报告（MD 判级 / 脚本必用性+配置化），主会话逐表复核后执行。
+After each wave's deletions: the 10 gates PASS, the load surface has no dangling references, and a
+sample of deleted files is recoverable via `git show`. Inventory inputs: two parallel Opus grading
+reports (MD grading / script necessity + configuration-driven design), executed after the main session
+reviews them table by table.

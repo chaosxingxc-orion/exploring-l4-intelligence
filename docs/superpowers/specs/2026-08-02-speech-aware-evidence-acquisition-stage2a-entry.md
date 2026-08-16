@@ -2,10 +2,11 @@
 
 ## Status
 
-Stage-1C 于 2026-08-02 获 `PASS_STAGE1C_FORMAL_OPENING`，owner 于 2026-08-03 签发 GO，并于
-2026-08-04 将对象收窄为 speech-only、完成语义身份迁移。当前冻结值以
-`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`
-为准；本件规定 E0→R0→R1→X 的工程顺序。
+Stage-1C received `PASS_STAGE1C_FORMAL_OPENING` on 2026-08-02, the owner issued GO on 2026-08-03, and on
+2026-08-04 the object was narrowed to speech-only and the semantic identity migration was completed. The
+authoritative frozen values are those in
+`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`;
+this document specifies the E0→R0→R1→X engineering order.
 
 ```yaml
 semantic_research_object: speech-aware evidence acquisition
@@ -24,89 +25,101 @@ experiment_index: wiki/experiments/speech-aware-evidence-acquisition/README.md
 
 ## Purpose
 
-Stage-2A 的首要任务不是继续扩大论文和数据清单，而是把 research question 变成可执行、可归因、
-可复核的 speech-domain 实验。先证明载体身份、信息边界、scorer、trace 与 closest-prior 路径可运行，
-再测试外部控制平面的候选机制。创新性和最终技术方法仍由 Stage-2A/2B 证据决定。
+Stage-2A's primary task is not to keep expanding the paper and data lists, but to turn the research
+question into executable, attributable, re-verifiable speech-domain experiments. First prove that carrier
+identity, the information boundary, the scorer, the trace and the closest-prior path are runnable; only
+then test candidate mechanisms of the external control plane. Novelty and the final technical method are
+still decided by Stage-2A/2B evidence.
 
 ## Immutable boundary
 
-- 冻结 Qwen3-Omni 核只经 API-shaped boundary 访问；不修改参数、结构或声学训练范式。
-- 无 task-trained model，无第二个具有最终答案权的 LLM。
-- 范围只含 speech signal 与语言任务；general/environmental audio 数据不得进入任何 arm。
-- gold answer、reference transcript、test annotation、future turn 不得进入 runtime。
-- `OBS`、`ORG`、`SUPPLY`、`USE` 分开 trace；外部响应、工具动作、请求与派生物均可版本化和哈希。
-- discovery 与 confirmatory 隔离；confirmatory 规则在读取结果前冻结。
+- The frozen Qwen3-Omni core is reached only across an API-shaped boundary; parameters, structure and the
+  acoustic training paradigm are never modified.
+- No task-trained model, and no second LLM holding final answer authority.
+- Scope covers only the speech signal and language tasks; general/environmental audio data must never
+  enter any arm.
+- Gold answers, reference transcripts, test annotations and future turns must never enter runtime.
+- `OBS`, `ORG`, `SUPPLY` and `USE` are traced separately; external responses, tool actions, requests and
+  derivatives are all versionable and hashable.
+- Discovery and confirmatory stay isolated; confirmatory rules are frozen before any result is read.
 
 ## Research axes
 
-1. `OBS`：从 speech signal 形成的转写、实体与片段观察；
-2. `ORG`：知识的粒度、结构、索引、来源和时间组织；
-3. `SUPPLY`：证据选择、数量、顺序、模板与供给时机；
-4. `USE`：证据准入、核验、拒绝、再查询、停止和最终采用。
+1. `OBS`: transcripts, entities and segment observations formed from the speech signal;
+2. `ORG`: the granularity, structure, indexing, provenance and temporal organization of knowledge;
+3. `SUPPLY`: evidence selection, quantity, ordering, templates and supply timing;
+4. `USE`: evidence admission, verification, rejection, re-querying, stopping and final adoption.
 
-一次机制实验只能把预注册的轴视作 intervention；其余轴必须冻结或纳入完整 factorial。只报“加知识
-前后总分”不能支撑机制结论。
+A single mechanism experiment may treat only the pre-registered axis as the intervention; every other axis
+must be frozen or included in a full factorial. Reporting only the "total score before and after adding
+knowledge" cannot support a mechanism conclusion.
 
 ## Entry sequence
 
 ### E0 — model-free closure
 
-1. 对 `earnings21-original`、`earnings22-original`、`conec` 做跨层 sample/segment identity；
-2. 固化每个 arm 的 runtime visible fields 和 leakage checks；
-3. 固化 WER/entity/QA scorer、normalization、correct-to-wrong 与 wrong-to-correct；
-4. 生成十样本 loader/provenance/四轴 trace 收据；
-5. 核验 license/redistribution，数据身份只引用 `docs/datasets.lock.json`；
-6. 明确检查 FSD50K、AudioSet、ESC-50 未进入依赖图或测试发现路径。
+1. Establish cross-layer sample/segment identity for `earnings21-original`, `earnings22-original` and `conec`;
+2. Fix the runtime visible fields and leakage checks for each arm;
+3. Fix the WER/entity/QA scorer, normalization, correct-to-wrong and wrong-to-correct;
+4. Produce ten-sample loader/provenance/four-axis trace receipts;
+5. Verify license/redistribution, with dataset identity referenced only from `docs/datasets.lock.json`;
+6. Explicitly check that FSD50K, AudioSet and ESC-50 have not entered the dependency graph or the test
+   discovery path.
 
 ### R0 — reproduction-zero vertical slice
 
-- 一个 discovery carrier 和一个未读 confirmatory carrier；
-- deterministic loader、frozen-core adapter、四轴 trace 与 scorer adapters；
-- bare core、固定合法 context、固定 retrieval/context 三个工程控制；
-- random/mismatched evidence 负对照和 oracle-evidence 上界接口（oracle 不进入正式 runtime）；
-- MLflow 与 umbrella experiment index 的 URI/hash 连接；
-- 调用、token、latency、GPU/CPU、speech-audio seconds 与证据 bytes 记账。
+- One discovery carrier and one unread confirmatory carrier;
+- Deterministic loader, frozen-core adapter, four-axis trace and scorer adapters;
+- Three engineering controls: bare core, fixed legal context, and fixed retrieval/context;
+- A random/mismatched-evidence negative control and an oracle-evidence upper-bound interface (the oracle
+  never enters formal runtime);
+- URI/hash linkage between MLflow and the umbrella experiment index;
+- Accounting of calls, tokens, latency, GPU/CPU, speech-audio seconds and evidence bytes.
 
-R0 只验证 wiring 与 measurement integrity，不构成优越性或创新性证据。
+R0 verifies wiring and measurement integrity only; it constitutes no evidence of superiority or novelty.
 
 ### R1 — closest/strongest-prior reproduction
 
-优先在相同 speech task、carrier 与 information boundary 下冻结 ConEC/contextual ASR、RECOVER-style
-correction、实体消解和 contextual-biasing 候选。首次 run 前记录 exact runnable revision、prompt、
-scorer 与不可运行原因。冻结 mandatory baseline 失败时报告 `INCONCLUSIVE_BASELINE_NOT_READY`。
+Prioritize freezing the ConEC/contextual ASR, RECOVER-style correction, entity resolution and
+contextual-biasing candidates under the same speech task, carrier and information boundary. Before the
+first run, record the exact runnable revision, prompt, scorer and any reason a candidate cannot run. If a
+frozen mandatory baseline fails, report `INCONCLUSIVE_BASELINE_NOT_READY`.
 
 ### X — directional exploration
 
-在至少一个 closest-prior 可信复现之后，按最小可辨识顺序测试：
+After at least one credible closest-prior reproduction, test in order of minimum distinguishability:
 
-1. `OBS` 是否减少实体误听；
-2. 在 OBS 冻结时，`ORG/SUPPLY` 是否提高合法证据可访问性；
-3. 在供给冻结时，`USE` 是否降低错误证据造成的 correct-to-wrong；
-4. reward-guided next action 是否优于固定一次检索/固定 rerank；
-5. 增益是否在 secondary speech carriers 上保留，而不是只适配 Earnings。
+1. Whether `OBS` reduces entity mishearing;
+2. With OBS frozen, whether `ORG/SUPPLY` improves legal-evidence accessibility;
+3. With supply frozen, whether `USE` reduces correct-to-wrong caused by incorrect evidence;
+4. Whether a reward-guided next action beats a fixed single retrieval / fixed rerank;
+5. Whether the gain is retained on secondary speech carriers rather than only fitting Earnings.
 
 ## Evaluation gates
 
-| Gate | 必须回答 |
+| Gate | Must answer |
 |---|---|
-| Effectiveness | 任务/实体/QA 指标是否提高，分布和尾部是否稳定？ |
-| Reasonableness | 增益来自哪一轴？证据是否相关、有来源、无 gold 泄漏？是否增加 correct-to-wrong？ |
-| Efficiency | 增益对应多少调用、token、latency、GPU/CPU、speech seconds 和 evidence bytes？是否位于 Pareto 前沿？ |
+| Effectiveness | Do the task/entity/QA metrics improve, and are the distribution and the tail stable? |
+| Reasonableness | Which axis does the gain come from? Is the evidence relevant, sourced and free of gold leakage? Does it increase correct-to-wrong? |
+| Efficiency | How many calls, tokens, latency, GPU/CPU, speech seconds and evidence bytes does the gain cost? Is it on the Pareto frontier? |
 
 ## First two-week deliverable
 
-- E0 四门与 runtime receipt；
-- core carrier 的 end-to-end discovery/confirmatory 路径；
-- bare/fixed-context/random-evidence/oracle-bound controls；
-- 一个 readiness-qualified closest-prior smoke/reproduction attempt；
-- 一张 effectiveness/reasonableness/efficiency 联合表；
-- 下一切片的 go/narrow/repair/stop memo。
+- The four E0 gates and the runtime receipt;
+- An end-to-end discovery/confirmatory path for the core carrier;
+- The bare/fixed-context/random-evidence/oracle-bound controls;
+- One readiness-qualified closest-prior smoke/reproduction attempt;
+- One joint effectiveness/reasonableness/efficiency table;
+- A go/narrow/repair/stop memo for the next slice.
 
-遇到信息泄漏、样本身份漂移、scorer 不一致、许可问题、runtime pin 不可复现或未处理的同边界更强
-runnable prior 时立即 stop-the-line。
+Stop the line immediately on information leakage, sample-identity drift, scorer inconsistency, licensing
+problems, a non-reproducible runtime pin, or an unaddressed stronger runnable prior at the same boundary.
 
 ## Literature and data delta policy
 
-文献采用每周有界 delta lane。新工作默认只更新 prior/threat queue；只有推翻研究问题、载体合法性、
-信息边界或可复现合同时才重开 Stage-1。新论文提到数据集不自动产生下载义务；只有被一个预注册实验、
-baseline 或诊断问题消费，且小于 1 TB、公开可得、许可可接受时才进入 acquisition proposal。
+Literature is adopted through a bounded weekly delta lane. New work by default only updates the
+prior/threat queue; Stage-1 reopens only when the research question, carrier legality, information
+boundary or reproducibility contract is overturned. A dataset mentioned in a new paper creates no
+download obligation automatically; it enters an acquisition proposal only when it is consumed by a
+pre-registered experiment, baseline or diagnostic question, and is under 1 TB, publicly available and
+acceptably licensed.

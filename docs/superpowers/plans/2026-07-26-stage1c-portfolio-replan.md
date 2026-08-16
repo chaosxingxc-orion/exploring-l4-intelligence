@@ -14,7 +14,8 @@
    system, and training-free RL for the agentic system.
 2. Stage-1C fixes research **content and direction**, not specific innovation points. Output must
    take a high-dimensional technical perspective and integrate future research directions
-   (提纲挈领). Works appearing during Stage-2 are absorbed by reference + improvement-space
+   (drawing out the guiding threads rather than enumerating details). Works appearing during
+   Stage-2 are absorbed by reference + improvement-space
    analysis, not treated as kills. Expected output: **8-10 research proposals** (direction
    charters), each with a complete survey, experiment/dataset/model readiness analysis, plus one
    final **next-step proposal** (dataset download/preparation list, recommended and comparison

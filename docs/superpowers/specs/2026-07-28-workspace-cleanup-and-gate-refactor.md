@@ -2,8 +2,10 @@
 
 **Status: DRAFT — doc-side scope locked by owner rulings 2026-07-28; script-side dispositions
 pending the gates-audit report.**
-**Authority:** owner 2026-07-28 ("都清理掉" → "应删尽删" → "脚本更是，系统性的清理和重构，
-尽量保证正式开展大规模分析和锁定研究方向之前，工作空间干净").
+**Authority:** owner 2026-07-28 ("clean it all up" → "delete everything that should be deleted" →
+"the scripts even more so — a systematic cleanup and refactor, so that as far as possible the
+workspace is clean before large-scale analysis formally begins and the research direction is
+locked").
 **Campaign:** `workspace-cleanup-2026-07`. Inputs: three read-only inventory reports
 (document disposition, audit-file sunset analysis, gates audit) produced 2026-07-28.
 

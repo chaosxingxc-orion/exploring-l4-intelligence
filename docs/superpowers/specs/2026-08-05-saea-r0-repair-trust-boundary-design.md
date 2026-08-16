@@ -1,12 +1,14 @@
-# SAEA R0 修复设计：信任边界与 run transaction 闭合
+# SAEA R0 repair design: trust boundary and run-transaction closure
 
 ## Status
 
-回应独立评审 `wiki/audit/speech-aware-evidence-acquisition-r0-review/independent-review-2026-08-05/`
-（verdict `R0_REPAIR__R1_MODEL_FACING_EXECUTION_WITHHELD_PENDING_P0_CLOSURE_AND_R0_SMOKE`）。
-所有 P0/P1 声明经本方独立复核**全部确认**（控制面代码核读 + 两个验证 agent 的可执行探针，
-证据见 study `.superpowers/sdd/r0-repair/verification.md`）。本件冻结修复范围与验收判据；
-不修改 owner 合同，不扩大到 R1/X/2B 范围。
+This responds to the independent review
+`wiki/audit/speech-aware-evidence-acquisition-r0-review/independent-review-2026-08-05/`
+(verdict `R0_REPAIR__R1_MODEL_FACING_EXECUTION_WITHHELD_PENDING_P0_CLOSURE_AND_R0_SMOKE`).
+All P0/P1 claims were **confirmed in full** by our own independent re-verification (a close reading of the
+control-plane code plus executable probes from two verification agents; evidence in study
+`.superpowers/sdd/r0-repair/verification.md`). This document freezes the repair scope and acceptance
+criteria; it does not modify the owner contract and does not expand into R1/X/2B scope.
 
 ```yaml
 record_kind: r0-repair-design
@@ -17,94 +19,114 @@ reviewed_umbrella_commit: 047cf39dcbb7b8cde56757d69eb63a98c9f86de0
 verdict_accepted: true
 ```
 
-## §1 根因（决定修复方式，不只是补洞）
+## §1 Root causes (these determine the repair method, not just patching holes)
 
-1. **威胁模型同源。** 前五轮对抗的"治理不变量"清单由实施方自己从 diff 推导：覆盖文件治理
-   （冻结面、禁用数据集、无模型触达、无提交字节），完全未覆盖**运行期信任边界**——收据是否
-   自洽、payload 值是否与 plan 一致、回答请求的进程是否即被 pin 的那个。审查者在被审查者的
-   世界观内攻击，故全部 held。
-2. **验证锚点错位。** 任务级评审对照"计划中的 authoritative code block"，逐字一致即 PASS。
-   当计划本身缺一条检查，链上无人能发现。独立评审从**合同**做承诺-证据矩阵，才暴露
-   "承诺 measurement integrity、交付 wiring"。
-3. **自证 artifact 被当作已验证 artifact。** 系统性模式：哈希了能哈希的东西，未把哈希绑定到
-   实际发生的事（splits.json 自证；runtime receipt 只证磁盘不证 server；outputs.text 与其自身
-   response hash 无关系）。
-4. **预算是进程内存计数而非持久化事务。** exposure ledger 被设计为"人写的审计记录"，无
-   attempt 语义、无一次性消费、无失败成本落盘。
-5. **结论措辞越界。** "这些攻击未发现缺陷"被表述为"零缺陷"。
+1. **The threat model was self-sourced.** The "governance invariants" list used by the first five
+   adversarial rounds was derived by the implementer from their own diff: it covered file governance
+   (frozen surface, forbidden datasets, no model contact, no committed bytes) and covered the
+   **runtime trust boundary** not at all — whether receipts are self-consistent, whether payload values
+   agree with the plan, whether the process answering a request is the one that was pinned. The reviewer
+   attacked from inside the reviewed party's worldview, so everything was held.
+2. **The verification anchor was misplaced.** Task-level review compared against the "authoritative code
+   block in the plan", and literal agreement counted as PASS. When the plan itself is missing a check,
+   nobody in the chain can discover it. Only the independent review, building a promise-evidence matrix
+   from the **contract**, exposed "measurement integrity promised, wiring delivered".
+3. **Self-attested artifacts were treated as verified artifacts.** A systematic pattern: hashing whatever
+   could be hashed, without binding the hash to what actually happened (splits.json is self-attested; the
+   runtime receipt attests the disk but not the server; outputs.text bears no relation to its own response
+   hash).
+4. **The budget was an in-process memory counter rather than a persisted transaction.** The exposure ledger
+   was designed as a "human-written audit record", with no attempt semantics, no one-shot consumption, and
+   no failure cost written to disk.
+5. **The conclusion overstepped in its wording.** "These attacks found no defects" was written up as "zero
+   defects".
 
-### 由根因导出的方法变更（本次修复必须遵守）
+### Method changes derived from the root causes (mandatory for this repair)
 
-- 计划**不再给 authoritative code block**：给**不变量 + 回归探针**，实现由执行者推导，评审对照
-  不变量而非字面代码；
-- 每个修复任务必须携带一个**从 ACCEPT 变 REJECT** 的可执行探针；
-- 终审威胁模型来自**合同承诺**与**外部输入信任边界**，由独立视角生成，不复用实施方清单；
-- 结论只能表述为"以下攻击面在 X 轮中未被攻破"，附攻击清单。
+- The plan **no longer supplies an authoritative code block**: it supplies **invariants + regression
+  probes**, the implementation is derived by the executor, and review compares against the invariants
+  rather than literal code;
+- Every repair task must carry an executable probe that **turns from ACCEPT to REJECT**;
+- The final threat model comes from the **contract promises** and the **external-input trust boundary**,
+  is generated from an independent perspective, and never reuses the implementer's list;
+- Conclusions may only be phrased as "the following attack surfaces were not broken in X rounds", with the
+  attack list attached.
 
-## §2 修复范围与不在范围
+## §2 Repair scope and out of scope
 
-**在范围（P0）：** split 收据真实性、carrier/media/payload 值级绑定、runtime session 身份、
-一次性 attempt 预算。
-**在范围（P1）：** run bundle 哈希闭包与 finalizer、三条工程控制的正式 config、scorer seam
-端到端、成本记账补全、CI 与文档对齐。
-**不在范围（合法延期，评审亦确认）：** X1/X3/X4 policy、oracle 具体算法、confirmatory 大规模
-验证、paper-scale 与 manuscript。
+**In scope (P0):** split receipt authenticity, carrier/media/payload value-level binding, runtime session
+identity, one-shot attempt budget.
+**In scope (P1):** run-bundle hash closure and finalizer, formal configs for the three engineering controls,
+the scorer seam end to end, completing cost accounting, CI and documentation alignment.
+**Out of scope (legitimately deferred, as the review also confirmed):** X1/X3/X4 policy, the concrete oracle
+algorithm, large-scale confirmatory validation, paper-scale work and manuscripts.
 
-**冻结面调整（显式声明）：** `contracts.py` 此前"不可改"是 R0 实施计划的自设约束，非 owner 合同
-条款；gate 加固必须修改它。E0 收据不覆盖 `contracts.py`（D3 只冻结 `scoring/`），修改后必须
-重跑 receipt 校验与全部 contract 测试。`scoring/`、`e0/`、既有 `docs/receipts/*.json`、
-`docs/exposure-ledger.md` 仍不可改。
+**Frozen-surface adjustment (stated explicitly):** the earlier "cannot be changed" status of `contracts.py`
+was a self-imposed constraint of the R0 implementation plan, not an owner contract clause; gate hardening
+must modify it. The E0 receipt does not cover `contracts.py` (D3 freezes only `scoring/`), and after any
+modification the receipt verification and all contract tests must be rerun. `scoring/`, `e0/`, the existing
+`docs/receipts/*.json` and `docs/exposure-ledger.md` remain unmodifiable.
 
-## §3 必须成立的不变量（验收判据）
+## §3 Invariants that must hold (acceptance criteria)
 
-- **I1 split 真实性：** 任何模型触达前，splits 收据必须通过严格解析（schema、精确键集、
-  每 split 的 carrier/role/count/ids 排序唯一且前缀一致、identity_hash 由 ids 重算相等、
-  同载体 split 之间互斥），并与**当前 loader 实时重算**结果逐位相等；不一致一律 fail closed。
-- **I2 载体范围：** plan carrier 必须属于本 study 的 speech 载体白名单（由 umbrella lock 的
-  profile 推导）且不在 general-audio 拒绝名单；exposure 行的载体列必须被解析并与 plan 一致。
-- **I3 payload 值级绑定：** adapter 必须核验 `payload.carrier_lock_key == plan.carrier_lock_key`、
-  `speech_ref == f"{carrier}/{sample_id}"`、`sample_id ∈ 冻结 split ids`、`audio_seconds` 与
-  loader 事实一致。
-- **I4 媒体禁闭：** `media_relpath` 只接受规范化 POSIX 相对路径；解析后必须位于该 carrier 的
-  `local_subdir` 之内；绝对路径、盘符、反斜杠、`..`、symlink 逃逸一律拒绝（adapter 与 transport
-  双层）。
-- **I5 server 身份：** endpoint 仅限本机；每次 run 必须存在 session receipt，绑定二进制哈希、
-  PID、argv、端口与 model/mmproj 路径；无 session receipt 或身份不符则拒绝触达。
-- **I6 一次性 attempt：** `(run_id, attempt_id)` 为不可复用主键，gate 以原子独占方式开启；
-  实际用量在**发送前**持久化，失败不丢；重试必须新 attempt；slice 上限对"登记预留"与
-  "实际用量"取保守上界。
-- **I7 产物闭包：** 每个 attempt 产出 run manifest，绑定 study commit、config/protocol/plan/split
-  身份、exposure 行与 attempt id、outputs/raw trace/trace manifest/scores/session receipt 的哈希、
-  实际成本与终态；scorer 必须经 manifest 入口并先完成全链校验（response hash 对应 text、
-  sample 集合等于冻结 split、无重复）。
-- **I8 记账完整：** calls/tokens/latency/audio 之外，补 GPU/CPU/峰值显存实测、证据字节、
-  失败 attempt 成本；无法实测项必须显式记为 deviation 并提请 owner 处置，不得静默省略。
-- **I9 CI 真实性：** CI 反映当前 R0 语义；clean-clone job 先安装包；active tree lint 设门；
-  五个探针成为常驻回归；coverage/type-check 若未配置须显式标注 `NOT_CONFIGURED`。
+- **I1 split authenticity:** before any model contact, the splits receipt must pass strict parsing (schema,
+  exact key set, per-split carrier/role/count/ids sorted, unique and prefix-consistent, identity_hash
+  recomputed from ids and equal, splits on the same carrier mutually exclusive), and must be bit-for-bit
+  equal to a **live recomputation by the current loader**; any mismatch fails closed.
+- **I2 carrier scope:** the plan carrier must belong to this study's speech-carrier allowlist (derived from
+  the umbrella lock profile) and must not be on the general-audio denylist; the carrier column of the
+  exposure row must be parsed and must agree with the plan.
+- **I3 payload value-level binding:** the adapter must verify `payload.carrier_lock_key == plan.carrier_lock_key`,
+  `speech_ref == f"{carrier}/{sample_id}"`, `sample_id ∈ frozen split ids`, and that `audio_seconds` agrees
+  with the loader's facts.
+- **I4 media confinement:** `media_relpath` accepts only a normalized POSIX relative path; after resolution
+  it must lie inside that carrier's `local_subdir`; absolute paths, drive letters, backslashes, `..` and
+  symlink escapes are all rejected (at both the adapter and transport layers).
+- **I5 server identity:** the endpoint is restricted to the local machine; every run must have a session
+  receipt binding the binary hash, PID, argv, port and the model/mmproj paths; contact is refused when there
+  is no session receipt or the identity does not match.
+- **I6 one-shot attempt:** `(run_id, attempt_id)` is a non-reusable primary key and the gate opens it
+  atomically and exclusively; actual usage is persisted **before sending** and is not lost on failure; a
+  retry must use a new attempt; the slice ceiling takes the conservative upper bound over both "registered
+  reservation" and "actual usage".
+- **I7 artifact closure:** every attempt produces a run manifest binding the study commit, the
+  config/protocol/plan/split identities, the exposure row and attempt id, the hashes of outputs / raw trace /
+  trace manifest / scores / session receipt, the actual cost and the final state; the scorer must go through
+  the manifest entry point and complete full-chain verification first (response hash corresponds to text, the
+  sample set equals the frozen split, no duplicates).
+- **I8 accounting completeness:** beyond calls/tokens/latency/audio, add measured GPU/CPU/peak VRAM, evidence
+  bytes, and the cost of failed attempts; anything that cannot be measured must be explicitly recorded as a
+  deviation and referred to the owner, never silently omitted.
+- **I9 CI authenticity:** CI reflects current R0 semantics; the clean-clone job installs the package first;
+  active-tree lint is gated; the five probes become permanent regressions; if coverage/type-check are not
+  configured they must be explicitly marked `NOT_CONFIGURED`.
 
-## §4 常驻回归探针（必须从 ACCEPT 变 REJECT）
+## §4 Permanent regression probes (each must turn from ACCEPT to REJECT)
 
-| # | 攻击 | 当前 | 修复后 |
+| # | Attack | Current | After repair |
 |---|---|---|---|
-| P1 | exposure 行为 earnings21，plan carrier=`fsd50k` | ACCEPT | REJECT |
-| P2 | 收据 ids 被替换、identity_hash 保留旧值 | ACCEPT | REJECT |
-| P3 | data root 外绝对 media 路径 | READ/SEND | REJECT |
-| P4 | 同一 exposure 行/plan 重复开门、计数归零 | ACCEPT×2 | 第二次 REJECT |
-| P5 | earnings21 plan 下提交 `fsd50k` payload | ACCEPT | REJECT |
+| P1 | exposure row is earnings21, plan carrier=`fsd50k` | ACCEPT | REJECT |
+| P2 | receipt ids replaced, identity_hash left at the old value | ACCEPT | REJECT |
+| P3 | absolute media path outside the data root | READ/SEND | REJECT |
+| P4 | same exposure row/plan opens the gate twice, count reset to zero | ACCEPT×2 | second one REJECT |
+| P5 | submitting an `fsd50k` payload under an earnings21 plan | ACCEPT | REJECT |
 
-## §5 交付顺序
+## §5 Delivery order
 
-H1 split 闭合 → H2 载体/媒体/payload 绑定 → H4 attempt 记账 → H3 session 身份 →
-H5 bundle+finalizer → H6 config/scorer/成本 → H7 CI/文档 → 全新独立视角终审 → 提交 fresh
-rereview 包。R0.3 smoke 与 R1 在终审通过且 owner 处置到位前不启动。
+H1 split closure → H2 carrier/media/payload binding → H4 attempt accounting → H3 session identity →
+H5 bundle+finalizer → H6 config/scorer/cost → H7 CI/documentation → a final review from a completely fresh
+independent perspective → submit the fresh rereview package. R0.3 smoke and R1 do not start until the final
+review passes and the owner's dispositions are in place.
 
-## §6 需要 owner 处置的项（不得由实施方自行解释）
+## §6 Items requiring owner disposition (the implementer must not interpret these unilaterally)
 
-1. entity/QA scorer adapter 是否属于 R0 交付（其参考层格式尚未冻结），或明确移出并接受；
-2. GPU/CPU/VRAM 记账：本设计选择**实测采样**而非延期，若采样在本机不可得，需 owner 接受
-   deviation；
-3. R0.3 `SAEA-E-001` 执行授权与 attempt 预注册。
+1. Whether the entity/QA scorer adapter belongs to the R0 deliverable (its reference-layer format is not yet
+   frozen), or is explicitly moved out and accepted as such;
+2. GPU/CPU/VRAM accounting: this design chooses **measured sampling** rather than deferral; if sampling is
+   not obtainable on this machine, the owner must accept the deviation;
+3. Execution authorization for R0.3 `SAEA-E-001` and its attempt pre-registration.
 
-## 失效条件
+## Invalidation conditions
 
-owner 修改上述范围、判据或授权时就地取代本件并保留日期记录。
+When the owner modifies the scope, criteria or authorization above, this document is superseded in place
+and the dated record is retained.
