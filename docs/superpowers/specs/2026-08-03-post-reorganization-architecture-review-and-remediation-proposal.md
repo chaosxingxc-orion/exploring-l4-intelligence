@@ -1,5 +1,5 @@
 ---
-title: "工程目录重整后架构复核与整改提案"
+title: "Post-reorganization architecture review and remediation proposal"
 proposal_id: "PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1"
 date: "2026-08-03"
 addressed_to: "research engineering team, Fable5, and the research owner"
@@ -11,91 +11,104 @@ execution_authority: "DOCUMENTATION_AND_GOVERNANCE_PROPOSAL_ONLY"
 model_execution_effect: "NO_NEW_AUTHORITY"
 ---
 
-# 工程目录重整后架构复核与整改提案
+# Post-reorganization architecture review and remediation proposal
 
-> **状态（2026-08-04）：`IMPLEMENTED_WITH_RESIDUAL_GATES`。** 团队接受本提案并已实施
-> T0–T5（收据：`docs/checks/program-architecture/2026-08-03-post-reorg-remediation/`）。独立复核
-> （`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`）
-> 确认本地整改有效并提出残留门 G0/G1/G2；G0/G1 已于 2026-08-04 关闭（收据：
-> `docs/checks/program-architecture/2026-08-04-residual-gates-closure/`），G2（推送与远端 CI）
-> 待 owner 明确授权。G0–G2 全部关闭后本状态升级为 `IMPLEMENTED_AND_CLOSED`。原始设计正文
-> 保留不改。
+> **Status (2026-08-04): `IMPLEMENTED_WITH_RESIDUAL_GATES`.** The team accepted this proposal and has
+> implemented T0–T5 (receipts: `docs/checks/program-architecture/2026-08-03-post-reorg-remediation/`). The
+> independent review
+> (`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`)
+> confirmed the local remediation is effective and raised the residual gates G0/G1/G2; G0/G1 were closed on
+> 2026-08-04 (receipt: `docs/checks/program-architecture/2026-08-04-residual-gates-closure/`), and G2 (push
+> and remote CI) awaits explicit owner authorization. Once G0–G2 are all closed this status is upgraded to
+> `IMPLEMENTED_AND_CLOSED`. The original design body is retained unchanged.
 
-## 1. 给团队的结论
+## 1. Conclusion for the team
 
-这次重整的**主架构选择是正确的**：伞仓承担 Stage‑1、研究治理、共享资产和实验索引；正式研究对象
-使用语义名称建立独立 Git 仓；R/W 编号不再充当工程身份；W1–W4 本地 checkout 已退出活动工作区。
-不建议推倒重来，也不建议把 study 重新并回伞仓。
+**The main architectural choice of this reorganization is correct**: the umbrella carries Stage‑1, research
+governance, shared assets and the experiment index; a formal research object gets its own Git repository under
+a semantic name; R/W numbering no longer serves as engineering identity; the W1–W4 local checkouts have left
+the active workspace. Starting over is not recommended, and neither is merging the study back into the umbrella.
 
-但目前只能评为 `CONDITIONAL_ACCEPT_WITH_REMEDIATION`。目录的物理边界已经整理好，治理真相、历史
-资产解析、独立构建能力和自动检查尚未同步完成。若现在直接进入模型触达，实验可以运行，却不能保证
-另一台机器能从两个仓的提交记录重建同一环境，也不能保证历史证据引用仍可解析。
+However, the present rating can only be `CONDITIONAL_ACCEPT_WITH_REMEDIATION`. The physical directory
+boundaries are in order, but governance truth, historical asset resolution, independent build capability and
+automated checks have not been brought into line with them. Entering model contact now would let experiments
+run, but would not guarantee that another machine could rebuild the same environment from the two
+repositories' commit records, nor that historical evidence references still resolve.
 
-建议：**D1–D4 的无模型 E0 工作可以继续；首次模型触达和 R0 结果生成前，必须关闭本文 P0/P1 项。**
-这不是重新讨论研究方向，也不涉及创新性或方法学裁决，只是让已经选择的目录架构真正可复现、可审计。
+Recommendation: **the model-free E0 work of D1–D4 may continue; the P0/P1 items in this document must be
+closed before the first model contact and before any R0 result is generated.** This does not reopen the
+research direction and involves no novelty or methodological ruling; it merely makes the already-chosen
+directory architecture genuinely reproducible and auditable.
 
-## 2. 本次复核看到的正确部分
+## 2. What this review found to be correct
 
-1. 伞仓与 `studies/audio-aware-evidence-acquisition/` 都是干净 Git worktree；study 有独立 `.git`，
-   `origin` 与 registry URL 一致，远程 `master` 为同一提交 `53d9283d...`。
-2. 伞仓通过 `studies/*/` 忽略 study 内容，只跟踪 `studies/README.md` 与 `studies/registry.json`。
-3. `projects/` 已从活动目录消失；W1–W4 远端以 cold backup 形式保留，四个 `master` HEAD 与 retirement
-   tombstone 登记一致。
-4. `Research-Objective.md`、study registry、experiment index 和 owner execution contract 已把首个
-   study 路由到语义名称，且没有把 R2 写进仓名、包名和实验命名空间。
-5. 现行 umbrella 四门全部通过：code graph、study workspace、AI context surface、AI context manifest；
-   `common/tests` 为 21 passed、1 skipped；W1 snapshot 的 13 项 SHA‑256 全部核验通过。
+1. Both the umbrella and `studies/audio-aware-evidence-acquisition/` are clean Git worktrees; the study has its
+   own `.git`, `origin` matches the registry URL, and the remote `master` is the same commit `53d9283d...`.
+2. The umbrella ignores study contents through `studies/*/` and tracks only `studies/README.md` and
+   `studies/registry.json`.
+3. `projects/` has disappeared from the active directory; W1–W4 remotes are retained as cold backups, and the
+   four `master` HEADs agree with the retirement tombstone registration.
+4. `Research-Objective.md`, the study registry, the experiment index and the owner execution contract now route
+   the first study to its semantic name, and R2 has not been written into the repository name, package name or
+   experiment namespace.
+5. All four current umbrella gates pass: code graph, study workspace, AI context surface, AI context manifest;
+   `common/tests` is 21 passed, 1 skipped; all 13 SHA‑256 values of the W1 snapshot verify.
 
-这些结果说明不需要改变“两类仓 + 三个资产平面”的方向。问题在于现有检查主要验证结构存在，尚未
-验证跨文件语义一致、远程依赖可重建和 study 是否拥有最低可执行质量门。
+These results show the "two repository classes + three asset planes" direction does not need to change. The
+problem is that the existing checks mainly verify that structure exists; they do not yet verify cross-file
+semantic consistency, that remote dependencies can be rebuilt, or that the study has a minimum executable
+quality gate.
 
-## 3. 缺陷与严重度
+## 3. Defects and severity
 
-| ID | 严重度 | 缺陷 | 直接后果 |
+| ID | Severity | Defect | Direct consequence |
 |---|---|---|---|
-| P0-1 | BLOCKER | HOT/管理文档与实际目录互相冲突 | AI 或团队可能把已获批 study 当成未获批，或继续向已删除 `projects/` 路由工作 |
-| P0-2 | BLOCKER | 574 条 legacy experiment asset 全部为 `unresolved`，但 workspace gate 仍 PASS | 历史 claim 看似存在，实际路径不可解析；审计链断裂 |
-| P1-1 | MAJOR | study 的独立性只成立在 Git 层，不成立在构建/依赖层 | 单独 clone study 无法按声明重建环境；`../../common` 是未锁定的隐式依赖 |
-| P1-2 | MAJOR | study 没有任何测试、lockfile、CI 或 license/notice | `pytest` 输出 `no tests ran`；远程仓目前只有目录骨架，不能作为 R0 fail-closed 基线 |
-| P1-3 | MAJOR | registry/workspace checker 只做浅层存在性检查 | 假 `.git`、错误 origin、缺失已登记 checkout、Wiki/registry 状态漂移都可能漏检 |
-| P1-4 | MAJOR | W1 snapshot 的数量、来源 commit、远端状态与迁移记录不一致 | 13 个文件被写成“十个”；新增 3 项没有同等粒度的 adoption 登记，来源叙述自相矛盾 |
-| P2-1 | MINOR | `common/` 的身份仍停留在“四个 work repo 的共享库” | 已退役 W/W4 术语继续塑造新 study；模块是否真为跨 study 共用没有可机检证据 |
-| P2-2 | MINOR | 已实施的旧 proposal/spec 仍以 `WITHHELD`/未建仓/保留 projects 的口吻留在 active specs | 后续协作者可能误用过期实施说明，而不是现行 architecture/contract |
+| P0-1 | BLOCKER | HOT/management documents conflict with the actual directory | An AI or the team may treat an admitted study as unadmitted, or keep routing work to the deleted `projects/` |
+| P0-2 | BLOCKER | All 574 legacy experiment assets are `unresolved`, yet the workspace gate still PASSes | Historical claims appear to exist while their paths do not resolve; the audit chain is broken |
+| P1-1 | MAJOR | The study's independence holds at the Git layer but not at the build/dependency layer | Cloning the study alone cannot rebuild the declared environment; `../../common` is an unpinned implicit dependency |
+| P1-2 | MAJOR | The study has no tests, lockfile, CI or license/notice | `pytest` outputs `no tests ran`; the remote repository is currently only a directory skeleton and cannot serve as an R0 fail-closed baseline |
+| P1-3 | MAJOR | The registry/workspace checker performs only shallow existence checks | A fake `.git`, a wrong origin, a missing registered checkout, and Wiki/registry state drift can all go undetected |
+| P1-4 | MAJOR | The W1 snapshot's count, source commits and remote state disagree with the migration record | 13 files are written up as "ten"; the 3 additions have no adoption registration at equal granularity, and the provenance narrative contradicts itself |
+| P2-1 | MINOR | `common/`'s identity is still "the shared library of four work repos" | Retired W/W4 terminology keeps shaping the new study; there is no machine-checkable evidence that a module is genuinely shared across studies |
+| P2-2 | MINOR | Already-implemented old proposals/specs remain in active specs speaking of `WITHHELD` / no repository / retaining projects | Later collaborators may follow stale implementation instructions rather than the current architecture/contract |
 
-## 4. P0-1：统一当前真相
+## 4. P0-1: unify current truth
 
-### 4.1 证据
+### 4.1 Evidence
 
-- `wiki/Research-Objective.md` 与 `studies/registry.json`：1 个 study 已获 owner GO，当前为 Stage‑2A E0。
-- `wiki/Experiment-Assets.md`：仍写“Admitted study repositories: 0”、等待 execution contract，且写
-  W1–W4 仍位于 `projects/`。
-- `wiki/Project-Thesis.md`：repository table 仍把 W1–W4 的已删除本地路径列为当前 repository classes。
-- `docs/superpowers/specs/2026-08-02-study-repositories-and-experiment-assets.md`：仍写“keep W1–W4 in
-  projects”和“create no nested study repository yet”。
-- `docs/superpowers/specs/2026-08-02-fable5-study-directory-reorganization-proposal.md`：仍为
-  `PROPOSED_FOR_REVIEW`、`remote_repository_creation: WITHHELD`，目标树仍含 `projects/`。
+- `wiki/Research-Objective.md` and `studies/registry.json`: 1 study has owner GO and is currently at Stage‑2A E0.
+- `wiki/Experiment-Assets.md`: still says "Admitted study repositories: 0", still waits on the execution
+  contract, and still says W1–W4 are located in `projects/`.
+- `wiki/Project-Thesis.md`: the repository table still lists the deleted local paths of W1–W4 as current
+  repository classes.
+- `docs/superpowers/specs/2026-08-02-study-repositories-and-experiment-assets.md`: still says "keep W1–W4 in
+  projects" and "create no nested study repository yet".
+- `docs/superpowers/specs/2026-08-02-fable5-study-directory-reorganization-proposal.md`: still
+  `PROPOSED_FOR_REVIEW`, `remote_repository_creation: WITHHELD`, and its target tree still contains `projects/`.
 
-### 4.2 修改建议
+### 4.2 Suggested changes
 
-在一个 umbrella truth-alignment transaction 中完成：
+Complete these within one umbrella truth-alignment transaction:
 
-1. 把 `wiki/Experiment-Assets.md` 更新为：1 个 admitted study、owner GO 已签、E0 进行中、W1–W4
-   本地退役、远端 cold backup；删除“573 live / 1 history-only”等旧统计。
-2. 把 `wiki/Project-Thesis.md` 的 repository table 改为三类：umbrella、admitted studies、retired
-   cold-backup provenance。W1–W4 不再以活动路径出现。
-3. 将两份 2026-08-02 architecture proposal 标记为 `IMPLEMENTED_AND_SUPERSEDED_2026-08-03`，正文顶部
-   指向 `docs/architecture.md`、owner contract 和本提案。保留历史设计理由，但不得继续充当当前操作说明。
-4. owner contract 中“回滚后 W1–W4 不受影响”的句子不应原地改写；新增 dated amendment，澄清本地仓已
-   退役，回滚只影响 study 与 umbrella registry，不会恢复旧 worktree。
-5. 更新 `common/README.md` 的“四个 works / W4 flagship / each work repo”旧语义。
-6. 重建 AI context manifest，并新增跨源事实断言：registry study count、Experiment‑Assets count、HOT
-   endpoint、study index frontmatter 必须一致。
+1. Update `wiki/Experiment-Assets.md` to: 1 admitted study, owner GO signed, E0 in progress, W1–W4 locally
+   retired with remotes as cold backups; delete stale statistics such as "573 live / 1 history-only".
+2. Change the repository table in `wiki/Project-Thesis.md` to three classes: umbrella, admitted studies, and
+   retired cold-backup provenance. W1–W4 no longer appear as active paths.
+3. Mark both 2026-08-02 architecture proposals as `IMPLEMENTED_AND_SUPERSEDED_2026-08-03`, with a pointer at
+   the top of the body to `docs/architecture.md`, the owner contract and this proposal. Retain the historical
+   design rationale, but they must no longer serve as current operating instructions.
+4. The sentence in the owner contract stating "W1–W4 are unaffected after a rollback" must not be rewritten in
+   place; add a dated amendment clarifying that the local repositories are retired and that a rollback affects
+   only the study and the umbrella registry and will not restore the old worktrees.
+5. Update the stale "four works / W4 flagship / each work repo" semantics in `common/README.md`.
+6. Rebuild the AI context manifest and add cross-source fact assertions: the registry study count, the
+   Experiment‑Assets count, the HOT endpoint and the study index frontmatter must agree.
 
-## 5. P0-2：让 legacy evidence 从“存在清单”变成“可解析资产”
+## 5. P0-2: turn legacy evidence from an "existence list" into a "resolvable asset"
 
-### 5.1 证据
+### 5.1 Evidence
 
-`docs/integrity/experiment-asset-inventory.json` 当前记录：
+`docs/integrity/experiment-asset-inventory.json` currently records:
 
 ```text
 recorded_entries = 574
@@ -104,159 +117,183 @@ history_only = 0
 unresolved = 574
 ```
 
-这是删除本地 W1 后的真实结果，但 `study_workspace_check.py` 只比较“生成结果是否和文件一致”，没有把
-非零 unresolved 当成失败，因此仍报告 PASS。与此同时，`docs/claim_ledger.yaml` 和
-`docs/corpus.lock.json` 仍包含大量 `projects/...` 路径和已失效的本地复现命令。
+This is the true result after deleting the local W1, but `study_workspace_check.py` only compares "does the
+generated result match the file" and does not treat a non-zero unresolved as a failure, so it still reports
+PASS. Meanwhile `docs/claim_ledger.yaml` and `docs/corpus.lock.json` still contain many `projects/...` paths
+and local reproduction commands that no longer work.
 
-W1–W4 cold-backup remotes 在本次复核中仍可访问，且 `master` 与 tombstone 的 final HEAD 一致。因此
-这里不是证据已经丢失，而是**解析器没有理解 retired remote authority**。
+The W1–W4 cold-backup remotes were still reachable during this review, and `master` agrees with the tombstone's
+final HEAD. So the evidence has not been lost; rather, **the resolver does not understand retired remote
+authority**.
 
-### 5.2 修改建议
+### 5.2 Suggested changes
 
-1. 新建 `docs/integrity/retired-repository-registry.json`，每个退役仓至少登记：
-   `repo_id`、remote URL、final branch/commit、retention policy、verified_at、tombstone、local state。
-2. 将 legacy resolver 从两态扩展为四态：
-   `WORKTREE_PRESENT`、`LOCAL_GIT_HISTORY`、`COLD_BACKUP_RESOLVED`、`UNRESOLVED`。
-   `projects/<repo>/<path>` 应解析成 `remote@final_commit:path`，而不是直接判 unresolved。
-3. 生成 `docs/integrity/legacy-asset-resolution.json`：574 条逐项绑定 remote、commit、path 和可选 blob
-   hash。目标是 `unresolved = 0`；确实无法恢复的条目必须有 owner waiver 和原因，不能静默通过。
-4. 给 `study_workspace_check.py` 增加 fail-closed 规则：`UNRESOLVED > 0` 即失败，除非每项都有带日期
-   waiver；cold backup 的 branch HEAD 漂移不影响已冻结 commit，但定期验证 commit 可获取。
-5. `docs/claim_ledger.yaml` 不必把 574 条内容复制回来；把死路径升级为 resolution key 或
-   `git+https://...@commit#path=` URI。`docs/corpus.lock.json` 的再生成命令必须指向仍可获取的 commit/
-   snapshot，或明确标为 retired/non-runnable。
-6. 为避免 GitHub 成为唯一备份，建议在 `SPEECHRL_DATA_DIR/program-archives/` 保存四个 `git bundle`，
-   并在 umbrella manifest 登记 bundle SHA‑256。bundle 不进入 Git。
+1. Create `docs/integrity/retired-repository-registry.json`, registering for each retired repository at least:
+   `repo_id`, remote URL, final branch/commit, retention policy, verified_at, tombstone, local state.
+2. Extend the legacy resolver from two states to four:
+   `WORKTREE_PRESENT`, `LOCAL_GIT_HISTORY`, `COLD_BACKUP_RESOLVED`, `UNRESOLVED`.
+   `projects/<repo>/<path>` should resolve to `remote@final_commit:path` rather than being judged unresolved.
+3. Generate `docs/integrity/legacy-asset-resolution.json`: all 574 entries bound item by item to remote, commit,
+   path and an optional blob hash. The target is `unresolved = 0`; entries genuinely unrecoverable must carry an
+   owner waiver and a reason and must not pass silently.
+4. Add a fail-closed rule to `study_workspace_check.py`: `UNRESOLVED > 0` fails unless every item has a dated
+   waiver; branch-HEAD drift on a cold backup does not affect an already-frozen commit, but commit
+   retrievability should be verified periodically.
+5. `docs/claim_ledger.yaml` need not copy the 574 entries back; upgrade dead paths to a resolution key or a
+   `git+https://...@commit#path=` URI. The regeneration commands in `docs/corpus.lock.json` must point at a
+   still-retrievable commit/snapshot, or be explicitly marked retired/non-runnable.
+6. To avoid GitHub becoming the only backup, keep four `git bundle` files under
+   `SPEECHRL_DATA_DIR/program-archives/` and register the bundle SHA‑256 values in the umbrella manifest. The
+   bundles do not enter Git.
 
-## 6. P1-1：修复独立 study 的依赖合同
+## 6. P1-1: repair the independent study's dependency contract
 
-### 6.1 证据
+### 6.1 Evidence
 
-study `pyproject.toml` 没有 runtime/dev dependencies，也没有声明 `speechrl-common`；但 README、AGENTS
-和 migration manifest 都要求：
+The study `pyproject.toml` has no runtime/dev dependencies and does not declare `speechrl-common`; yet the
+README, AGENTS and the migration manifest all require:
 
 ```bash
 uv pip install -e ../../common -e .
 ```
 
-这意味着它只能在当前伞仓相邻目录布局中工作，且每次安装消费的是 umbrella `common/` 当前 worktree，
-没有 commit pin。独立 Git 历史无法单独解释一个实验使用了哪一版 common。
+This means it works only within the current umbrella's adjacent-directory layout, and each installation consumes
+the umbrella `common/` current worktree with no commit pin. An independent Git history cannot explain on its own
+which version of common an experiment used.
 
-### 6.2 修改建议
+### 6.2 Suggested changes
 
-短期建议采用“**远程精确 pin + 本地 editable override**”：
+In the short term, adopt "**an exact remote pin + a local editable override**":
 
-1. 在 study `pyproject.toml` 声明实际使用的依赖与 dev extra；在首次真正 import `speechrl_common` 前，
-   将其绑定到 umbrella 的精确 commit/subdirectory，生成并提交 `uv.lock`。
-2. `../../common` 只作为开发 override；CI 和 release reproduction 必须从锁定 commit 安装。
-3. 每个 experiment record 增加 `shared_code_revision`，即使 study commit 不变也能识别 common 漂移。
-4. 当前 study 源码尚未 import `speechrl_common`，所以也可以在 R0 前先删除“ACTIVE dependency”声明；
-   真正消费第一个模块时再以精确 pin 加入，避免提前依赖整个 legacy-rich common 包。
-5. 当至少两个 admitted study 真正消费同一能力后，再决定把 `common/` 抽成独立版本化仓/包；现在不为
-   追求形式独立而再创建一个无人复用的仓。
+1. Declare the actually used dependencies and a dev extra in the study `pyproject.toml`; before the first real
+   import of `speechrl_common`, bind it to an exact umbrella commit/subdirectory and generate and commit `uv.lock`.
+2. `../../common` serves only as a development override; CI and release reproduction must install from the
+   locked commit.
+3. Add `shared_code_revision` to every experiment record, so common drift is identifiable even when the study
+   commit is unchanged.
+4. The current study source does not yet import `speechrl_common`, so the "ACTIVE dependency" declaration may
+   also simply be removed before R0; add it back with an exact pin when the first module is genuinely consumed,
+   avoiding a premature dependency on the whole legacy-rich common package.
+5. Only after at least two admitted studies genuinely consume the same capability should `common/` be extracted
+   into an independently versioned repository/package; do not create another repository nobody reuses merely for
+   the appearance of independence.
 
-## 7. P1-2：把 study 骨架变成最低可执行工程基线
+## 7. P1-2: turn the study skeleton into a minimum executable engineering baseline
 
-### 7.1 证据
+### 7.1 Evidence
 
-- `pytest` 在规定的 WSL2 Python 3.12 环境中没有收集到任何测试。
-- `configs/*` 与 `tests/*` 只有 `.gitkeep`。
-- `scripts/reproduce.sh` 和 `scripts/evaluate.sh` 只打印“R0 slice not delivered”并退出 2。
-- 没有 `uv.lock`、CI workflow、`LICENSE` 或 third-party notice。
+- `pytest` collected no tests in the prescribed WSL2 Python 3.12 environment.
+- `configs/*` and `tests/*` contain only `.gitkeep`.
+- `scripts/reproduce.sh` and `scripts/evaluate.sh` only print "R0 slice not delivered" and exit 2.
+- There is no `uv.lock`, CI workflow, `LICENSE` or third-party notice.
 
-在 E0 期间这些 placeholder 可以存在，但不能被称为已经完成的 engineering foundation，更不能在首次
-模型调用后才补测试，因为届时信息边界与 trace 合同已经可能被错误实现。
+These placeholders may exist during E0, but they cannot be called a completed engineering foundation, and tests
+must not be added only after the first model call, because by then the information boundary and trace contracts
+may already have been implemented incorrectly.
 
-### 7.2 修改建议
+### 7.2 Suggested changes
 
-首次模型触达前至少交付以下**无模型 contract tests**：
+Deliver at least the following **model-free contract tests** before the first model contact:
 
-1. registry、owner contract、experiment index、study origin 和 package identity 相互一致；
-2. 三个 carrier lock key 与模型 lock key存在，loader 不把数据字节写进 Git；
-3. gold/reference transcript/test annotation/future turn 字段在 runtime request schema 中 fail-closed；
-4. OBS 与 SUPPLY trace 字段分离，request/response/tool/cost 均可序列化并 hash；
-5. exposure ledger schema 可校验，模型入口在 E0/runtime receipt 缺失时必须拒绝；
-6. `reference/w1-snapshot/` 不在 package discovery/import path 中；
-7. `reproduce.sh`/`evaluate.sh` 的 pre-E0 拒绝行为本身有测试，而不是只靠人工阅读。
+1. The registry, owner contract, experiment index, study origin and package identity are mutually consistent;
+2. The three carrier lock keys and the model lock key exist, and the loader does not write dataset bytes into Git;
+3. gold/reference transcript/test annotation/future turn fields fail closed in the runtime request schema;
+4. OBS and SUPPLY trace fields are separated, and request/response/tool/cost are all serializable and hashable;
+5. The exposure ledger schema validates, and the model entry point must refuse when the E0/runtime receipt is
+   missing;
+6. `reference/w1-snapshot/` is not on the package discovery/import path;
+7. The pre-E0 refusal behavior of `reproduce.sh`/`evaluate.sh` is itself tested rather than relying on human
+   reading.
 
-同时：
+Also:
 
-- 用最小实际 YAML/schema/README 取代 config `.gitkeep`；
-- 提交 `uv.lock`，增加 `python -m build` 和 `pytest` CI；
-- 明确私有阶段的 license policy，并为 W1 snapshot 添加来源 license/NOTICE；
-- 质量门要求“至少收集一个测试且全部通过”，避免 `no tests ran` 被 CI 误当成成功。
+- Replace the config `.gitkeep` files with minimal real YAML/schema/README;
+- Commit `uv.lock` and add `python -m build` and `pytest` CI;
+- State the license policy for the private phase and add source license/NOTICE for the W1 snapshot;
+- Have the quality gate require "at least one test collected and all passing", so `no tests ran` is not
+  mistaken for success by CI.
 
-## 8. P1-3：升级 registry 与 workspace checker
+## 8. P1-3: upgrade the registry and workspace checker
 
-当前 checker 做到了 slug、路径、字段集合、decision/index 文件存在和“未登记目录不得出现”，但仍有
-四个盲点：
+The current checker covers slug, path, field set, existence of the decision/index files and "no unregistered
+directory may appear", but four blind spots remain:
 
-1. registered study 不安装时不会失败；只检查 `installed - registered`，不检查反向差集；
-2. `.git` 只检查路径存在，不验证它是真 Git 仓；
-3. 不验证 nested repo 的 `origin`、branch、remote HEAD 是否匹配 registry；
-4. 不解析 experiment index frontmatter，也不检查 Experiment‑Assets 中的 admitted count/state。
+1. A registered study that is not installed does not fail; only `installed - registered` is checked, never the
+   reverse difference;
+2. `.git` is checked only for path existence, not verified to be a real Git repository;
+3. The nested repo's `origin`, branch and remote HEAD are not verified against the registry;
+4. The experiment index frontmatter is not parsed, and the admitted count/state in Experiment‑Assets is not
+   checked.
 
-建议 registry schema v2 增加稳定身份字段：`default_branch`、`package_name`、`created_at`、
-`experiment_namespace`、decision-record Git blob。不要把每个实验 commit 放进 registry；实验 commit
-仍属于 Wiki ledger。
+Registry schema v2 should add stable identity fields: `default_branch`, `package_name`, `created_at`,
+`experiment_namespace`, and the decision-record Git blob. Do not put every experiment commit into the registry;
+experiment commits still belong to the Wiki ledger.
 
-建议 checker 增加两种模式：
+The checker should gain two modes:
 
-- 默认模式：允许未 checkout 的 private study，但验证 registry、Wiki、decision、remote identity；
-- `--require-installed`：供主开发机使用，要求所有 lifecycle=`engineering|validation` 的 study 已安装，
-  `git rev-parse` 成功、origin 匹配、branch policy 合法。
+- Default mode: allows a private study that is not checked out, but verifies the registry, Wiki, decision and
+  remote identity;
+- `--require-installed`: for the main development machine, requiring every study with
+  lifecycle=`engineering|validation` to be installed, `git rev-parse` to succeed, origin to match, and the
+  branch policy to be legal.
 
-另在每个 study 仓配置自己的 CI；umbrella `code_graph_check.py` 只覆盖 umbrella 的 20 个 trusted nodes，
-不应被理解为已经验证 nested study code。
+Each study repository should also configure its own CI; the umbrella `code_graph_check.py` covers only the
+umbrella's 20 trusted nodes and must not be read as having verified nested study code.
 
-## 9. P1-4：修复 W1 snapshot provenance
+## 9. P1-4: repair the W1 snapshot provenance
 
-当前 snapshot 的 SHA‑256 是完整的，13/13 均通过；问题在记录层：
+The snapshot's SHA‑256 values are complete and 13/13 pass; the problem is in the record layer:
 
-- migration manifest 与 retirement tombstone 写“十个文件”；实际为 13 个；
-- `repro_asr_best_of_n_v2.py`、`repro_asr_best_of_n_llamacpp.py` 和 `gpu_session.sh` 来自不同历史 commit，
-  没有进入与其他候选同粒度的表格；
-- snapshot 文档仍写 remote 被删除，而 tombstone addendum 和现场验证确认 remote 被保留；
-- 两个 legacy runner 内含硬编码 `/mnt/d/.../common/src`，目前因未集成而无害，但不得原样晋升到 `src/`。
+- The migration manifest and the retirement tombstone say "ten files"; there are in fact 13;
+- `repro_asr_best_of_n_v2.py`, `repro_asr_best_of_n_llamacpp.py` and `gpu_session.sh` come from different
+  historical commits and never entered the table at the same granularity as the other candidates;
+- The snapshot documentation still says the remote was deleted, while the tombstone addendum and on-site
+  verification confirm the remote was retained;
+- The two legacy runners contain a hardcoded `/mnt/d/.../common/src`, currently harmless because they are not
+  integrated, but they must not be promoted into `src/` as they are.
 
-建议：
+Suggestions:
 
-1. 将 snapshot manifest 改为每文件一行：原 repo、原路径、source commit、SHA‑256、license、当前状态、
-   adoption target；数量统一为 13。
-2. 统一措辞为“local checkout retired; remote retained as cold backup”。
-3. 将 13 项状态设为 `QUARANTINED_REFERENCE_NOT_EXECUTABLE`；任何进入 `src/` 的文件必须新增 dated
-   adoption row、去除绝对路径、补测试并重新 hash。
-4. 增加静态检查，禁止生产源码 import `reference.w1-snapshot` 或把 reference 目录加入 `sys.path`。
+1. Change the snapshot manifest to one row per file: original repo, original path, source commit, SHA‑256,
+   license, current status, adoption target; unify the count to 13.
+2. Standardize the wording as "local checkout retired; remote retained as cold backup".
+3. Set all 13 items to `QUARANTINED_REFERENCE_NOT_EXECUTABLE`; any file entering `src/` must add a dated
+   adoption row, remove absolute paths, add tests and be re-hashed.
+4. Add a static check forbidding production source from importing `reference.w1-snapshot` or adding the
+   reference directory to `sys.path`.
 
-## 10. P2：收缩 common 与清理过期说明
+## 10. P2: shrink common and clean up stale instructions
 
-`common/` 可以继续留在 umbrella，但应重新做一次 module-level ownership audit：
+`common/` may stay in the umbrella, but it should undergo another module-level ownership audit:
 
-- `audio/io`、data-root、轻量 tracking 等若确实是 program infrastructure，可保留；
-- `omni_embed`、`disentanglement`、W4 probe 等只有退役 work 消费的模块，应标记 legacy、迁出活动 API，
-  或等待真实新消费者后再恢复；
-- 新能力只有两个 admitted study 实际消费后才能晋升 shared；
-- 建议新增 `common/OWNERSHIP.md`，逐模块记录 consumer study、owner、stability 和 deprecation 状态。
+- `audio/io`, the data root, lightweight tracking and similar may be retained if they are genuinely program
+  infrastructure;
+- Modules consumed only by retired works, such as `omni_embed`, `disentanglement` and the W4 probes, should be
+  marked legacy and moved out of the active API, or await a real new consumer before being restored;
+- A new capability is promoted to shared only after two admitted studies actually consume it;
+- Adding `common/OWNERSHIP.md` is recommended, recording per module the consumer study, owner, stability and
+  deprecation status.
 
-旧 proposal/spec 不必删除。历史理由有价值，但必须用 frontmatter/tombstone 明确其实施状态；当前操作只
-从 `docs/architecture.md`、`wiki/Research-Objective.md`、`wiki/Experiment-Assets.md` 和 owner contract
-进入。
+Old proposals/specs need not be deleted. Historical rationale has value, but their implementation status must be
+made explicit through frontmatter/tombstone; current operations enter only from `docs/architecture.md`,
+`wiki/Research-Objective.md`, `wiki/Experiment-Assets.md` and the owner contract.
 
-## 11. 建议的实施交易顺序
+## 11. Suggested implementation transaction order
 
-| 交易 | 所属仓 | 内容 | 是否阻断模型触达 |
+| Transaction | Owning repo | Content | Blocks model contact? |
 |---|---|---|---|
-| T0 truth alignment | umbrella | 修正 Experiment‑Assets、Project‑Thesis、active spec 状态、common README，重建 manifests | 是 |
-| T1 legacy resolution | umbrella | retired repo registry、remote-aware resolver、574 项 resolution、claim/lock 路由、checker fail-closed | 是 |
-| T2 minimum study gate | study | dependencies/lock、contract tests、CI、license/NOTICE、真实 config skeleton | 是 |
-| T3 dependency pin | study + umbrella | 精确 common revision；experiment ledger 增加 shared-code pin | 是 |
-| T4 snapshot correction | study + umbrella tombstone/amendment | 13 项逐文件 provenance、remote 状态和 quarantine rule | R0 前完成 |
-| T5 common module audit | umbrella | consumer/ownership/deprecation 清单与模块收缩 | 可在 R0 后、X 前完成 |
+| T0 truth alignment | umbrella | Correct Experiment‑Assets, Project‑Thesis, active spec status and the common README; rebuild the manifests | Yes |
+| T1 legacy resolution | umbrella | Retired repo registry, remote-aware resolver, resolution of all 574 entries, claim/lock routing, checker fail-closed | Yes |
+| T2 minimum study gate | study | Dependencies/lock, contract tests, CI, license/NOTICE, a real config skeleton | Yes |
+| T3 dependency pin | study + umbrella | An exact common revision; add a shared-code pin to the experiment ledger | Yes |
+| T4 snapshot correction | study + umbrella tombstone/amendment | Per-file provenance for all 13 items, remote status and the quarantine rule | Complete before R0 |
+| T5 common module audit | umbrella | Consumer/ownership/deprecation list and module shrinkage | May be completed after R0 and before X |
 
-跨仓不能假装原子 commit。协调顺序应为：先让被引用 authority 在所属仓提交并取得 commit/blob，再让消费
-仓 pin 它，最后由 umbrella Wiki ledger 记录 study commit。不得在两个仓都写“latest”。
+Cross-repository work cannot pretend to be an atomic commit. The coordination order should be: first let the
+referenced authority commit in its own repository and obtain a commit/blob, then let the consuming repository pin
+it, and finally have the umbrella Wiki ledger record the study commit. Never write "latest" in both repositories.
 
-## 12. 验收标准
+## 12. Acceptance criteria
 
 ### Umbrella
 
@@ -269,8 +306,8 @@ python scripts/checks/build_ai_context_manifest.py --check
 pytest common/tests
 ```
 
-要求：current truth 无冲突；legacy `UNRESOLVED=0`；installed study origin/branch 与 registry 一致；AI
-manifest green；common 每个活动模块有 consumer/owner 状态。
+Requirements: no conflicts in current truth; legacy `UNRESOLVED=0`; the installed study's origin/branch agrees
+with the registry; the AI manifest is green; every active module of common has a consumer/owner status.
 
 ### Study
 
@@ -280,25 +317,29 @@ python -m build
 pytest -q
 ```
 
-要求：测试收集数大于 0；无模型 contract tests 全绿；E0/runtime receipt 缺失时模型入口 fail-closed；
-snapshot 不可 import；lockfile 与依赖 pin 已提交；CI 在干净 clone 中复现。
+Requirements: the number of collected tests is greater than 0; the model-free contract tests are all green; the
+model entry point fails closed when the E0/runtime receipt is missing; the snapshot is not importable; the
+lockfile and dependency pins are committed; CI reproduces in a clean clone.
 
-### 文档与审计
+### Documentation and audit
 
-- registry、Research‑Objective、Experiment‑Assets、experiment index 对 admitted count/state 一致；
-- owner contract 不被原地改写，退役后的澄清走 dated amendment；
-- 两份旧 proposal 明示 superseded/implemented；
-- D1–D4 继续登记为 E0，无任何创新性、方法有效性或实验结果主张。
+- The registry, Research‑Objective, Experiment‑Assets and the experiment index agree on the admitted count/state;
+- The owner contract is not rewritten in place, and post-retirement clarifications go through a dated amendment;
+- Both old proposals explicitly state superseded/implemented;
+- D1–D4 continue to be registered as E0, with no claim of novelty, method effectiveness or experimental results.
 
-## 13. 请求团队裁决
+## 13. Ruling requested from the team
 
-请团队逐项回复：
+The team is asked to reply point by point:
 
-1. 是否接受总体裁决 `CONDITIONAL_ACCEPT_WITH_REMEDIATION`？
-2. 是否同意 T0–T3 为首次模型触达前的硬门？
-3. legacy cold backup 是否同时制作离线 `git bundle`，还是只依赖 GitHub private remotes？
-4. `common` 短期采用精确 umbrella commit pin，还是在第二个 study 出现前暂不依赖？
-5. 谁负责 umbrella T0/T1，谁负责 study T2/T3/T4？
+1. Is the overall ruling `CONDITIONAL_ACCEPT_WITH_REMEDIATION` accepted?
+2. Is it agreed that T0–T3 are hard gates before the first model contact?
+3. Should the legacy cold backups also be made as offline `git bundle` files, or is relying on the GitHub private
+   remotes sufficient?
+4. Should `common` use an exact umbrella commit pin in the short term, or should the dependency be deferred until
+   a second study appears?
+5. Who owns umbrella T0/T1, and who owns study T2/T3/T4?
 
-建议团队批准本整改提案后，先执行 T0 与 T1；Fable5 在 study 仓并行执行 T2–T4。完成后再由一次
-post-remediation review 签发“R0 engineering foundation ready”，而不是把目录存在等同于工程基建完成。
+After the team approves this remediation proposal, the recommendation is to execute T0 and T1 first, with Fable5
+executing T2–T4 in parallel in the study repository. A post-remediation review then issues "R0 engineering
+foundation ready", rather than treating the existence of directories as completed engineering infrastructure.

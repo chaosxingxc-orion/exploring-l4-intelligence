@@ -1,14 +1,15 @@
-# 给 Fable5 的研究工程目录重整提案
+# Research-engineering directory reorganization proposal for Fable5
 
-> **状态（2026-08-03）：`IMPLEMENTED_AND_SUPERSEDED_2026-08-03`。** 本提案已由 2026-08-03 目录重整
-> 实施完毕，仅作为历史设计理由保留，不再是现行操作说明。下文中的目标树（含 `projects/`）、
-> `PROPOSED_FOR_REVIEW`、`remote_repository_creation: WITHHELD` 均描述实施前状态。现行权威入口：
-> `docs/architecture.md`、owner 执行合同
-> （`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`）
-> 与重整后复核提案
-> （`docs/superpowers/specs/2026-08-03-post-reorganization-architecture-review-and-remediation-proposal.md`）。
+> **Status (2026-08-03): `IMPLEMENTED_AND_SUPERSEDED_2026-08-03`.** This proposal was fully implemented by
+> the 2026-08-03 directory reorganization and is retained only as a historical design rationale; it is no
+> longer operating instructions. The target tree below (including `projects/`), `PROPOSED_FOR_REVIEW` and
+> `remote_repository_creation: WITHHELD` all describe the pre-implementation state. The current
+> authoritative entry points: `docs/architecture.md`, the owner execution contract
+> (`wiki/experiments/audio-aware-evidence-acquisition/2026-08-03-owner-go-and-execution-contract.md`)
+> and the post-reorganization review proposal
+> (`docs/superpowers/specs/2026-08-03-post-reorganization-architecture-review-and-remediation-proposal.md`).
 
-## 文档状态
+## Document status
 
 ```yaml
 proposal_id: FABLE5-STUDY-DIRECTORY-REORGANIZATION-V1
@@ -22,30 +23,36 @@ remote_repository_creation: WITHHELD  # at issuance; repo created 2026-08-03 und
 model_or_api_execution: WITHHELD
 ```
 
-本提案把已经确定的研究治理原则转成可执行的目录与资产迁移方案。请 Fable5 审阅后返回
-`ACCEPT`、`ACCEPT_WITH_AMENDMENTS` 或 `REJECT_WITH_ALTERNATIVE`；在 owner 签发
-`OWNER_GO_AND_EXECUTION_CONTRACT` 前，不创建远程仓、不初始化正式 study checkout、不搬迁代码，
-也不运行任何模型实验。
+This proposal turns already-settled research governance principles into an executable directory and asset
+migration plan. Fable5 is asked to review and return `ACCEPT`, `ACCEPT_WITH_AMENDMENTS` or
+`REJECT_WITH_ALTERNATIVE`; before the owner issues `OWNER_GO_AND_EXECUTION_CONTRACT`, no remote repository is
+created, no formal study checkout is initialized, no code is migrated, and no model experiment is run.
 
-## 一、为什么需要重整
+## 1. Why reorganization is needed
 
-当前目录同时承载了三种不同身份：W1–W4 的历史/支撑工程、R1–R9 的调研论证编号，以及未来正式
-研究对象的工程实现。如果继续直接用 W 或 R 作为工程目录，会产生四个结构性问题：
+The current directory carries three different identities at once: the historical/supporting engineering of
+W1–W4, the research-argument numbering R1–R9, and the engineering implementation of future formal research
+objects. Continuing to use W or R directly as engineering directories produces four structural problems:
 
-1. **论证编号被误当成工程身份。** R1 已在 Stage‑2 前日落，说明候选编号并不天然对应一个工程仓；
-   R2 也只是 `audio-aware evidence acquisition` 的来源 provenance，而不是长期研究名称。
-2. **方向间被制造出虚假的串联依赖。** R2 进入工程不应等待 R3–R9 调研完成；后续方向也不应被迫
-   接入所谓 R2→R3→… 的单一代码链。
-3. **Git 生命周期被混在一起。** 正式研究对象需要自己的 issue、CI、release、复现实验 commit 和论文
-   历史；把它仅作为伞仓普通子目录会把治理文档和实验代码绑在同一个发布周期中。
-4. **Wiki 管理与文件存储容易混淆。** Wiki 应管理实验身份、协议、资产链接和决策，不应复制模型、
-   数据、原始 trace 或另一个 Git 仓的完整代码。
+1. **Argument numbering is mistaken for engineering identity.** R1 was already sunset before Stage‑2, which
+   shows that a candidate number does not naturally correspond to an engineering repository; R2 is likewise
+   only the source provenance of `audio-aware evidence acquisition`, not a long-term research name.
+2. **False serial dependencies are manufactured between directions.** R2 entering engineering should not wait
+   for the R3–R9 research to complete, and later directions should not be forced into a single so-called
+   R2→R3→… code chain.
+3. **Git lifecycles get mixed together.** A formal research object needs its own issues, CI, releases,
+   reproduction-experiment commits and paper history; treating it as an ordinary umbrella subdirectory ties
+   governance documents and experiment code to the same release cycle.
+4. **Wiki management and file storage are easily confused.** The Wiki should manage experiment identity,
+   protocols, asset links and decisions; it should not copy models, data, raw traces or the complete code of
+   another Git repository.
 
-因此，建议采用：**伞仓负责研究治理和实验资产图；每个获准的语义研究对象拥有独立 GitHub 仓；
-本地统一 checkout 到伞仓的 `studies/` 下。** `studies/` 是本地工作区容器和登记面，不是把所有研究
-重新合并进一个 Git 仓。
+The recommendation is therefore: **the umbrella owns research governance and the experiment-asset graph; each
+admitted semantic research object has its own GitHub repository; local checkouts are unified under the
+umbrella's `studies/`.** `studies/` is a local workspace container and registration surface, not a merging of
+all research back into one Git repository.
 
-## 二、建议的目标拓扑
+## 2. Proposed target topology
 
 ```text
 exploring-l4-intelligence/                    # umbrella Git repo
@@ -72,7 +79,7 @@ exploring-l4-intelligence/                    # umbrella Git repo
 └── scripts/                                  # umbrella governance and shared asset tooling
 ```
 
-第一项工程的长期标识建议冻结为：
+The long-term identity of the first engineering project is proposed to be frozen as:
 
 ```yaml
 research_name: audio-aware evidence acquisition
@@ -81,68 +88,75 @@ python_package: audio_aware_evidence_acquisition
 source_provenance: R2
 ```
 
-`R2` 不得出现在远程仓名、Python package、MLflow experiment 主命名空间或正式实验 ID 中。它只保留在
-proposal、review、Decision‑Log 和 registry 的 provenance 字段里。R1 不创建任何空仓或占位目录。
+`R2` must never appear in the remote repository name, the Python package, the primary MLflow experiment
+namespace or a formal experiment ID. It is retained only in the provenance fields of proposals, reviews, the
+Decision‑Log and the registry. R1 gets no empty repository and no placeholder directory.
 
-## 三、为什么是独立 GitHub 仓，而不只是伞仓子目录
+## 3. Why an independent GitHub repository rather than just an umbrella subdirectory
 
-本地目录与 GitHub 仓不是二选一。建议形态是“**独立 GitHub 仓 + `studies/` 下本地 checkout**”：
+A local directory and a GitHub repository are not mutually exclusive. The recommended form is
+"**an independent GitHub repository + a local checkout under `studies/`**":
 
-| 需求 | 仅作为伞仓普通目录 | 独立仓并 checkout 到 `studies/` |
+| Requirement | As an ordinary umbrella directory | Independent repo checked out into `studies/` |
 |---|---|---|
-| 独立 issue、CI、release、论文版本 | 与治理仓耦合 | 独立管理 |
-| 研究日落、拆分或合并 | 容易留下半成品目录 | 可独立归档或转向 |
-| 代码审查与复现实验 commit | 被 Wiki/治理改动稀释 | 每个 commit 都属于该研究对象 |
-| 跨研究复用 | 容易复制粘贴 | 稳定后才提升到 `common/` |
-| 本地协作便利性 | 方便 | 同样方便，由 `studies/` 统一容纳 |
-| 伞仓状态清洁 | 容易误收实验文件 | nested repo 被 umbrella ignore |
+| Independent issues, CI, releases, paper versions | Coupled to the governance repo | Managed independently |
+| Sunsetting, splitting or merging research | Easily leaves half-finished directories | Can be archived or redirected independently |
+| Code review and reproduction-experiment commits | Diluted by Wiki/governance changes | Every commit belongs to that research object |
+| Cross-research reuse | Invites copy-paste | Promoted to `common/` only once stable |
+| Local collaboration convenience | Convenient | Equally convenient, held together by `studies/` |
+| Umbrella status cleanliness | Easily picks up stray experiment files | The nested repo is ignored by the umbrella |
 
-独立仓不削弱 Wiki。恰恰相反，Wiki 成为跨仓的实验 control plane：它把问题、协议、study commit、
-dataset/model revision、MLflow run、外部 artifact、结果、偏差和决策连接成一张可审计资产图。
+An independent repository does not weaken the Wiki. On the contrary, the Wiki becomes the cross-repository
+experiment control plane: it links questions, protocols, study commits, dataset/model revisions, MLflow runs,
+external artifacts, results, deviations and decisions into one auditable asset graph.
 
-## 四、资产所有权与迁移判断
+## 4. Asset ownership and migration judgment
 
-| 当前或未来资产 | 目标 authority | 本轮动作 |
+| Current or future asset | Target authority | Action this round |
 |---|---|---|
-| R2 v20 proposal、round‑22 review/permission | umbrella Wiki/audit | 保留原位，不复制到 study 仓 |
-| 当前研究状态、GO/NO-GO、阶段裁决 | umbrella Wiki | 保留并持续 supersede in place |
-| program-level dataset identity/hash/license | `docs/datasets.lock.json` | 保留原位；study 仅按键引用 |
-| 数据、模型、音频、原始 generation/trace | `SPEECHRL_DATA_DIR` | 不迁入 Git；通过 manifest/hash 引用 |
-| study 专用 loader、scorer、adapter、controller | 独立 study repo | owner GO 后新建或显式迁入 |
-| study config、tests、CI、lockfile、run entrypoint | 独立 study repo | owner GO 后创建 |
-| 正式实验记录、协议偏差与研究决策 | `wiki/experiments/<slug>/` | admission 交易中创建 |
-| 运行元数据与大结果 | MLflow/外部 artifact store | Wiki 保存 ID、URI 和 hash |
-| release 复现回执 | study release 或 umbrella `docs/checks/` | 按 release 生成 |
-| W1–W4 既有代码和 `_repro` 历史 | 原 work repo | 不搬历史；按需引用或显式采用 |
-| 多个 study 稳定共用的轻量能力 | `common/` | 至少两个真实消费者后再提升 |
+| The R2 v20 proposal, the round‑22 review/permission | umbrella Wiki/audit | Stay in place, not copied into the study repo |
+| Current research state, GO/NO-GO, stage rulings | umbrella Wiki | Retained and superseded in place over time |
+| program-level dataset identity/hash/license | `docs/datasets.lock.json` | Stays in place; the study references it by key only |
+| Data, models, audio, raw generations/traces | `SPEECHRL_DATA_DIR` | Never migrated into Git; referenced via manifest/hash |
+| study-specific loaders, scorers, adapters, controllers | independent study repo | Created fresh or explicitly migrated after owner GO |
+| study config, tests, CI, lockfile, run entrypoint | independent study repo | Created after owner GO |
+| Formal experiment records, protocol deviations and research decisions | `wiki/experiments/<slug>/` | Created in the admission transaction |
+| Run metadata and large results | MLflow / external artifact store | The Wiki stores IDs, URIs and hashes |
+| release reproduction receipts | study release or umbrella `docs/checks/` | Generated per release |
+| Existing W1–W4 code and `_repro` history | the original work repo | History is not moved; referenced or explicitly adopted as needed |
+| Lightweight capabilities genuinely shared by multiple studies | `common/` | Promoted only after at least two real consumers |
 
-核心规则是：**按 authority 迁移，而不是按“看起来相关”迁移。** 文献、决策和实验索引属于伞仓；
-可执行研究代码属于 study 仓；大字节资产属于外部数据根；W1 历史不因新方向获批而自动改名或搬家。
+The core rule is: **migrate by authority, not by "looks related".** Literature, decisions and the experiment
+index belong to the umbrella; executable research code belongs to the study repository; large-byte assets
+belong to the external data root; W1 history is not renamed or moved just because a new direction was approved.
 
-## 五、分阶段实施建议
+## 5. Phased implementation proposal
 
-### Phase 0 — 当前可做：无模型、无建仓准备
+### Phase 0 — doable now: model-free, no-repository preparation
 
-1. 关闭 Earnings21、Earnings22、ConEC 的 D1–D4：样本身份、信息边界/泄漏、评分器和十样本 trace。
-2. 完成 Stage‑2A execution contract 的精确字段：远程 URL、runtime/model revision、baseline revision、
-   split、prompt、metric、预算、停止条件和 exposure。
-3. 为可能迁入的代码建立只读 inventory：来源仓、当前 commit、license、依赖、测试状态、目标归属。
-4. 不创建 `studies/audio-aware-evidence-acquisition/` 占位目录；空目录会制造“已经 admission”的假象。
+1. Close D1–D4 for Earnings21, Earnings22 and ConEC: sample identity, information boundary/leakage, scorer,
+   and a ten-sample trace.
+2. Complete the exact fields of the Stage‑2A execution contract: remote URL, runtime/model revision, baseline
+   revision, split, prompt, metric, budget, stop conditions and exposure.
+3. Build a read-only inventory for code that may be migrated in: source repo, current commit, license,
+   dependencies, test status, target ownership.
+4. Do not create a `studies/audio-aware-evidence-acquisition/` placeholder directory; an empty directory
+   creates the illusion that admission has already happened.
 
-### Phase 1 — owner GO 交易：创建研究身份
+### Phase 1 — the owner GO transaction: creating the research identity
 
-以下动作必须在同一个可审查交易中完成：
+The following actions must complete within one reviewable transaction:
 
-1. owner 签发 `OWNER_GO_AND_EXECUTION_CONTRACT`；
-2. 创建独立 GitHub 仓 `audio-aware-evidence-acquisition`；
-3. checkout 到 `studies/audio-aware-evidence-acquisition/`，确认其拥有独立 `.git`；
-4. 在 `studies/registry.json` 登记 URL、default branch、decision record 和 Wiki experiment index；
-5. 创建 `wiki/experiments/audio-aware-evidence-acquisition/README.md`；
-6. 运行 study-workspace、context-surface 和 registry fail-closed checks。
+1. The owner issues `OWNER_GO_AND_EXECUTION_CONTRACT`;
+2. Create the independent GitHub repository `audio-aware-evidence-acquisition`;
+3. Check it out to `studies/audio-aware-evidence-acquisition/` and confirm it has its own `.git`;
+4. Register the URL, default branch, decision record and Wiki experiment index in `studies/registry.json`;
+5. Create `wiki/experiments/audio-aware-evidence-acquisition/README.md`;
+6. Run the study-workspace, context-surface and registry fail-closed checks.
 
-### Phase 2 — 工程基建：先建立可复现纵向链
+### Phase 2 — engineering infrastructure: build a reproducible vertical chain first
 
-建议独立仓的初始结构为：
+The proposed initial structure of the independent repository:
 
 ```text
 audio-aware-evidence-acquisition/
@@ -173,57 +187,67 @@ audio-aware-evidence-acquisition/
     └── migration-manifest.md # adopted files and provenance
 ```
 
-首个两周切片只交付 loader→frozen-core adapter→trace→scorer→artifact link 的 reproduction-zero
-纵向链，以及一个 readiness-qualified closest-prior 尝试。它不执行 v20 的全量搜索，不形成创新性结论。
+The first two-week slice delivers only the reproduction-zero vertical chain
+loader→frozen-core adapter→trace→scorer→artifact link, plus one readiness-qualified closest-prior attempt. It
+does not execute v20's full search and forms no novelty conclusion.
 
 ### Phase 3 — reproduction-first Stage‑2A
 
-1. 先复现最接近且最强、且 readiness 合格的公开 prior；
-2. 复现失败必须区分实现缺陷、载体不匹配和 baseline-not-ready；
-3. 至少一个 prior 路径可信后，才进入 OBS、ORG/SUPPLY、USE/CONTROL 的方向性原型；
-4. 用实验决定三支柱的保留、合并、拆分或日落，并开始收敛具体方法和创新主张；
-5. 最终方案冻结后才进入 Stage‑2B。
+1. First reproduce the closest, strongest, readiness-qualified public prior;
+2. A failed reproduction must distinguish implementation defect, carrier mismatch and baseline-not-ready;
+3. Only after at least one prior path is credible does work move to directional prototypes for OBS,
+   ORG/SUPPLY and USE/CONTROL;
+4. Use experiments to decide whether the three pillars are retained, merged, split or sunset, and begin
+   converging on a concrete method and novelty claim;
+5. Stage‑2B is entered only after the final approach is frozen.
 
-## 六、安全迁移协议
+## 6. Safe migration protocol
 
-任何现有代码进入新 study 仓时，建议执行以下 copy-and-verify 流程，而不是直接移动：
+When any existing code enters the new study repository, run the following copy-and-verify flow rather than
+moving it directly:
 
-1. 在 `migration-manifest.md` 登记来源 repo、commit、原路径、license 和迁移理由；
-2. 复制最小必要文件，保留来源，不删除 W1–W4 历史；
-3. 对复制前后内容做 hash 或 Git blob 核验；
-4. 先让新仓测试通过，再更新 umbrella Wiki/registry 引用；
-5. 只有确认存在至少两个真实消费者时，才把通用实现抽到 `common/`；
-6. 若新仓初始化失败，删除尚未登记的临时 checkout 即可回滚，umbrella 与 W1–W4 不受影响。
+1. Register the source repo, commit, original path, license and migration rationale in `migration-manifest.md`;
+2. Copy the minimum necessary files, keep the source, and delete no W1–W4 history;
+3. Verify content before and after the copy by hash or Git blob;
+4. Get the new repository's tests passing first, then update umbrella Wiki/registry references;
+5. Extract a general implementation into `common/` only after confirming at least two real consumers exist;
+6. If initializing the new repository fails, rolling back is simply deleting the not-yet-registered temporary
+   checkout; the umbrella and W1–W4 are unaffected.
 
-禁止事项：跨仓改写历史、批量搬运 `_repro`、把数据或模型放进 Git、先创建空仓后补授权、把 W1
-直接改名成新 study、用 R2 或 Stage‑2 作为长期工程目录名。
+Prohibited: rewriting history across repositories, bulk-moving `_repro`, putting data or models into Git,
+creating an empty repository before authorization arrives, renaming W1 directly into the new study, and using
+R2 or Stage‑2 as a long-term engineering directory name.
 
-## 七、Fable5 需要给出的反馈
+## 7. The feedback Fable5 needs to give
 
-请 Fable5 针对以下问题逐项回复：
+Fable5 is asked to reply point by point on the following:
 
-1. 是否接受 `audio-aware-evidence-acquisition` / `audio_aware_evidence_acquisition` 作为仓与包名？
-2. 哪些现有实现确实需要从 W1 或 umbrella 被新 study 消费？请给出文件级清单与来源 commit，不做整仓搬迁。
-3. 哪些数据/评分/trace 工具属于 program-level shared tooling，哪些只属于本 study？
-4. 第一条 runnable closest-prior reproduction 建议选择哪一项，理由及公开 artifact readiness 是什么？
-5. execution contract 还缺哪些必须由 owner 冻结的选择？
-6. 对本提案返回：`ACCEPT`、`ACCEPT_WITH_AMENDMENTS` 或 `REJECT_WITH_ALTERNATIVE`。
+1. Are `audio-aware-evidence-acquisition` / `audio_aware_evidence_acquisition` accepted as the repository and
+   package names?
+2. Which existing implementations genuinely need to be consumed by the new study from W1 or the umbrella?
+   Give a file-level list with source commits; no whole-repository migration.
+3. Which data/scoring/trace tooling is program-level shared tooling, and which belongs to this study only?
+4. Which item is recommended as the first runnable closest-prior reproduction, and what is the rationale and
+   public-artifact readiness?
+5. Which choices that must be frozen by the owner are still missing from the execution contract?
+6. Return one of `ACCEPT`, `ACCEPT_WITH_AMENDMENTS` or `REJECT_WITH_ALTERNATIVE` for this proposal.
 
-## 八、验收条件
+## 8. Acceptance conditions
 
-目录重整只有同时满足以下条件才算完成：
+The directory reorganization counts as complete only when all of the following hold simultaneously:
 
-- umbrella 不追踪任何 study 子仓文件，只追踪 `studies/README.md` 与 `studies/registry.json`；
-- study slug 与 package 名不含 R 编号、W 编号或阶段编号；
-- 每个 checkout 都在 registry 中，且拥有独立 `.git`；
-- Wiki experiment index 能解析到 study commit、协议/config hash、数据/model revision 和 artifact；
-- W1–W4 历史与用户未归档资产没有被移动或删除；
-- 数据、模型和大输出没有进入 Git；
-- study workspace、AI context、CURRENT manifest 与审计不可变性检查通过；
-- 没有把正式开题许可误写成创新性裁决或模型实验授权。
+- The umbrella tracks no file of any study sub-repository, only `studies/README.md` and `studies/registry.json`;
+- study slugs and package names contain no R number, W number or stage number;
+- Every checkout is in the registry and has its own `.git`;
+- The Wiki experiment index resolves to study commit, protocol/config hash, data/model revision and artifacts;
+- W1–W4 history and unarchived user assets have not been moved or deleted;
+- Data, models and large outputs have not entered Git;
+- The study workspace, AI context, CURRENT manifest and audit immutability checks pass;
+- A formal opening permission has not been miswritten as a novelty ruling or a model-experiment authorization.
 
-## 九、建议裁决
+## 9. Recommended ruling
 
-建议 owner 先批准本提案的**目录与 authority 模型**，并要求 Fable5 提交文件级迁移清单和 execution
-contract amendment；两者复核通过后，再签发远程建仓与 Stage‑2A execution GO。这样可以立即结束
-目录争论，同时保留对实验载体、预算和 closest-prior 选择的独立把关。
+It is recommended that the owner first approve this proposal's **directory and authority model** and require
+Fable5 to submit a file-level migration list and an execution contract amendment; only after both are reviewed
+should remote repository creation and the Stage‑2A execution GO be issued. This ends the directory debate
+immediately while retaining independent oversight of the experiment carrier, budget and closest-prior choice.
