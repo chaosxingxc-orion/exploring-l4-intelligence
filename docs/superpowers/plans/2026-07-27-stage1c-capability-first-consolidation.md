@@ -1,117 +1,139 @@
-# Stage-1C 五维研究方向能力优先整编计划
+# Stage-1C capability-first consolidation plan for the five research dimensions
 
-**状态：完成（2026-07-27）。** 本计划整编 2026-07-26/27 的五维 dossiers、T1/T2/T3 汇聚表和 32 个子方向，
-不重做其论文事实层。目标是把 owner 的五条统一约束写成一个 CURRENT 研究合同，并消除 C1/headroom
-旧框架与五维组合之间的竞争解释。
+**Status: complete (2026-07-27).** This plan consolidates the five-dimension dossiers, the T1/T2/T3
+aggregation tables and the 32 sub-directions from 2026-07-26/27; it does not redo their paper-fact layer.
+The goal is to write the owner's five unifying constraints into one CURRENT research contract and to
+eliminate the competing explanations between the old C1/headroom framework and the five-dimension
+combination.
 
-## 1. 必须满足的最终合同
+## 1. The final contract that must be satisfied
 
-1. 核心模型始终是 `API-only` 黑盒：方法不得依赖权重、梯度、隐藏状态、attention、logprobs 或解码器
-   内部改写；本地 open-weight 模型也必须通过与 proprietary API 等价的推理接口使用。
-2. 研究目标是**可靠兑现能力提升**。可靠性约束端到端任务效用的方差、尾部退化、跨条件稳定性和
-   incumbent 回归率；evaluator 可靠性只是其中一个组件。
-3. 知识、记忆、技能和编排共同构造 system-level in-context state。静态 fixed-pool headroom 只描述
-   已执行供给，不得成为是否研究系统控制的前置门。
-4. Lean 用于审计论文假设、算法—命题对应和条件保证；它不证明真实 evaluator 的误差界，也不代替
-   capability 实验。每条承重定理必须列出假设、适用算子、不可推出项和代码一致性状态。
-5. 主提案必须以任务能力为因变量。安全、防注入、reward hacking、abstain 等内容保留为横切压力测试、
-   veto 或 fallback，不独立占据主论文槽位。
+1. The core model is always an `API-only` black box: a method must never depend on weights, gradients,
+   hidden states, attention, logprobs or rewriting inside the decoder; a local open-weight model must also be
+   used through an inference interface equivalent to a proprietary API.
+2. The research goal is **reliably realized capability improvement**. Reliability constrains the variance of
+   end-to-end task utility, tail degradation, cross-condition stability and the incumbent regression rate;
+   evaluator reliability is only one component of it.
+3. Knowledge, memory, skills and orchestration jointly construct system-level in-context state. Static
+   fixed-pool headroom describes only the supply already executed, and must never become a precondition gate
+   on whether system control is studied at all.
+4. Lean is used to audit paper assumptions, the algorithm-proposition correspondence and conditional
+   guarantees; it does not prove error bounds for a real evaluator and does not replace capability
+   experiments. Every load-bearing theorem must list its assumptions, the applicable operator, what cannot be
+   derived from it, and its code-conformance status.
+5. The main proposal must take task capability as the dependent variable. Safety, injection defense, reward
+   hacking, abstention and similar topics are retained as cross-cutting stress tests, vetoes or fallbacks, and
+   never occupy a main-paper slot on their own.
 
-## 2. 既有成果的处置
+## 2. Disposition of existing results
 
-| 既有内容 | 处置 | 原因 |
+| Existing content | Disposition | Reason |
 |---|---|---|
-| D0-D6 全文 dossiers、T1/T2/T3 表 | 保留 | 论文事实、资产和实验字段可复用 |
-| 五维定义：knowledge / memory / skills / system / evolution | 保留并收紧 | 维度正确；需统一解释为同一 control plane 的状态/动作/动力学 |
-| 32 个子方向 | 保留为设计菜单 | 不全部升级为独立课题；映射进 9 条能力主线 |
-| P1/P2/P3/P5/P6/P8 | 改名并并入最终方向 | 具备直接能力机制与可执行实验 |
-| P9 headroom/E1 gate | 降为横切测量合同 | 不再是“先判断有没有空间”的主问题 |
-| P10 reward hacking | 降为所有 reward-guided 实验的压力测试 | 失败模式重要，但不是能力提升主线 |
-| P11 stop/abstain/budget | 并入运行时控制与可靠性目标 | stop/rollback 服务于稳定能力提升，不单独写成拒答论文 |
-| D4.5 注入/溯源防护 | 保留为 evidence-state invariant | 不作为安全方向或新槽位 |
-| D4.7 full-duplex | 降为后期验证载体 | 仅在能隔离任务能力归因时启用，不做 specialized model branch |
-| C1 primary selection | 撤销主问题身份，保留组件证据 | evaluator decision utility 是横切仪器，不是整个项目的研究对象 |
+| The full-text D0-D6 dossiers, the T1/T2/T3 tables | Keep | Paper facts, assets and experiment fields are reusable |
+| The five dimension definitions: knowledge / memory / skills / system / evolution | Keep and tighten | The dimensions are correct; they need a unified interpretation as the state/actions/dynamics of one control plane |
+| The 32 sub-directions | Keep as a design menu | Not all are promoted to standalone topics; they are mapped into the 9 capability main lines |
+| P1/P2/P3/P5/P6/P8 | Rename and merge into the final directions | They have direct capability mechanisms and executable experiments |
+| P9 headroom/E1 gate | Demote to a cross-cutting measurement contract | No longer the primary question of "first judge whether there is any room" |
+| P10 reward hacking | Demote to a stress test for every reward-guided experiment | The failure mode matters, but it is not the capability-improvement main line |
+| P11 stop/abstain/budget | Merge into runtime control and the reliability objective | stop/rollback serves stable capability improvement and is not written up as a standalone abstention paper |
+| D4.5 injection/provenance defense | Keep as an evidence-state invariant | Not treated as a safety direction or a new slot |
+| D4.7 full-duplex | Demote to a late-stage validation carrier | Enabled only when task-capability attribution can be isolated; no specialized model branch |
+| C1 primary selection | Revoke its primary-question status, keep the component evidence | Evaluator decision utility is cross-cutting instrumentation, not the research object of the whole project |
 
-## 3. 从 32 个子方向到 9 条定稿主线
+## 3. From 32 sub-directions to 9 finalized main lines
 
-| final id | 来源 | 合并原则 |
+| final id | Source | Merging principle |
 |---|---|---|
-| R1 自适应观察与证据供给 | D1.1/1.2/1.3/1.5 | topology、branching、pricing、effect probe 合为一个闭环 |
-| R2 音频原生外部知识获取 | D1.4/1.6 | retrieval 与 anticipatory supply 共享 acquisition/cost contract |
-| R3 声学条件键控持久记忆 | D2.1-D2.7 | key、schema、write/read gate、生命周期和归因不可拆开 |
-| R4 运行时技能生命周期 | D3.1-D3.6 | skill/tool 的信用、组合、修复、归纳、退役形成一条链 |
-| R5 证据状态智能体架构 | D4.1-D4.6 | 决策权、作答权、evidence state、incumbent 保留统一设计 |
-| R6 实例内 reward-guided context control | D5.3/5.4 + D1/D3 actions | reward 必须决定下一动作，而不只做终局 rerank |
-| R7 跨实例经验驱动进化 | D5.5 + D2/D3 | 不改权重，通过外部记忆、advantage 和策略统计随时间变强 |
-| R8 条件自适应的可靠能力控制 | D5.1/5.2/5.6 | headroom/gate/hacking 变成 robust utility 的诊断与约束 |
-| R9 五维集成能力激活系统 | D4 + D5 + R1-R8 | 端到端验证组合是否优于同供给、同预算的强控制组 |
+| R1 Adaptive observation and evidence supply | D1.1/1.2/1.3/1.5 | Topology, branching, pricing and effect probe merge into one closed loop |
+| R2 Audio-native external knowledge acquisition | D1.4/1.6 | Retrieval and anticipatory supply share the acquisition/cost contract |
+| R3 Acoustically keyed persistent memory | D2.1-D2.7 | Key, schema, write/read gate, lifecycle and attribution cannot be separated |
+| R4 Runtime skill lifecycle | D3.1-D3.6 | Credit, composition, repair, induction and retirement of skills/tools form one chain |
+| R5 Evidence-state agentic architecture | D4.1-D4.6 | Decision authority, answering authority, evidence state and incumbent retention are designed together |
+| R6 Within-instance reward-guided context control | D5.3/5.4 + D1/D3 actions | Reward must decide the next action, not merely perform a final rerank |
+| R7 Cross-instance experience-driven evolution | D5.5 + D2/D3 | No weight changes; improvement over time through external memory, advantage and policy statistics |
+| R8 Condition-adaptive reliable capability control | D5.1/5.2/5.6 | headroom/gate/hacking become diagnostics and constraints on robust utility |
+| R9 Five-dimension integrated capability activation system | D4 + D5 + R1-R8 | End-to-end validation of whether the combination beats a strong control group at the same supply and budget |
 
-## 4. 关键修改
+## 4. Key changes
 
-### 4.1 目标函数
+### 4.1 Objective function
 
-把“先测 headroom，再决定是否控制”改为：
+Replace "first measure headroom, then decide whether to control" with:
 
 ```text
 maximize robust task utility of the external controller
 subject to API-only legality, bounded cost, and a preregistered regression/tail-risk constraint
 ```
 
-headroom、oracle、evaluator calibration 都作为结果解释量；它们可以击杀某个**已执行 action menu**，
-但不能击杀尚未构造的新 context、memory、skill 或 evidence state。
+headroom, oracle and evaluator calibration all become quantities that explain results; they may kill a
+particular **already-executed action menu**, but they cannot kill a new context, memory, skill or evidence
+state that has not yet been constructed.
 
-### 4.2 基线与归因
+### 4.2 Baselines and attribution
 
-每条方向至少包含：direct readout、structured-prompt、best fixed action、random matched-cost、
-consensus/MBR、full fixed chain；gold oracle 仅离线报告。所有比较固定同一 core、任务、输入、最大供给与
-计费口径，分别报告生成增益、控制增益、额外信息增益和成本。
+Every direction contains at least: direct readout, structured-prompt, best fixed action, random matched-cost,
+consensus/MBR, full fixed chain; the gold oracle is reported offline only. All comparisons hold the same core,
+task, input, maximum supply and billing convention fixed, and report generation gain, control gain, additional
+information gain and cost separately.
 
-### 4.3 可靠性
+### 4.3 Reliability
 
-可靠性最低报告集为：paired task delta、置信区间、重复运行方差、worst-group/CVaR-style tail、
-correct→wrong 与 wrong→correct 计数、跨声学条件/语言/任务符号一致性、calls/latency/API cost。
-绝对“保证正确”不作承诺；能承诺的是已定义分布和误差假设下的高概率非回归或有界风险。
+The minimum reliability reporting set is: paired task delta, confidence intervals, repeat-run variance,
+worst-group/CVaR-style tail, correct→wrong and wrong→correct counts, sign consistency across acoustic
+conditions/languages/tasks, and calls/latency/API cost. No absolute "guaranteed correct" is promised; what can
+be promised is high-probability non-regression or bounded risk under a defined distribution and stated error
+assumptions.
 
-### 4.4 Lean 审计
+### 4.4 Lean audit
 
-现有 `InfoBoundary` 只覆盖 fixed-pool read-out；不得再写成“ICL 不足”。`AgenticElements` 的
-all-contexts gap 是强前提，有限采样 oracle miss 不证明该前提。新增 runtime reliability 命题：若部署可用
-reward 对真实 utility 的一致误差不超过 `ε`，则 estimated margin `≥ 2ε` 保证相对 incumbent 非回归，
-`> 2ε` 保证严格提升。真实世界是否满足误差界仍由实验负责。
+The existing `InfoBoundary` covers only fixed-pool read-out; it must no longer be written up as "ICL is
+insufficient". The all-contexts gap in `AgenticElements` is a strong premise, and a finite-sample oracle miss
+does not prove that premise. A new runtime reliability proposition is added: if the deployable reward's
+consistent error with respect to true utility does not exceed `ε`, then an estimated margin `≥ 2ε` guarantees
+non-regression relative to the incumbent, and `> 2ε` guarantees strict improvement. Whether the real world
+satisfies the error bound remains the responsibility of experiments.
 
-每篇参考方法进入 proposal 前填一行：
+Before a reference method enters a proposal, fill in one row:
 
 ```text
 paper claim | mathematical assumptions | black-box operator | Lean status |
 implementation conformance | empirical assumptions | allowed conclusion
 ```
 
-## 5. Stage-2A 最小纵向验证建议
+## 5. Recommended minimal Stage-2A vertical validation
 
-第一批只验证 `R5 + R6 + R8`：围绕一个 frozen API core 建立 incumbent-preserving evidence-state
-controller，用黑盒可得信号决定 `keep / branch-context / acquire-evidence / repair / stop`。推荐
-MMAU-mini + MMAR 作为闭集任务载体，先隔离系统控制效应；开放式、RAG、跨实例记忆和 full-duplex
-在该纵向链通过后再接入。
+The first batch validates only `R5 + R6 + R8`: build an incumbent-preserving evidence-state controller around
+one frozen API core, using black-box-available signals to decide
+`keep / branch-context / acquire-evidence / repair / stop`. MMAU-mini + MMAR are recommended as closed-set task
+carriers so that the system-control effect is isolated first; open-ended tasks, RAG, cross-instance memory and
+full-duplex are connected only after that vertical chain passes.
 
-运行前必须另行绑定并授权：模型/服务 revision、数据 revision/split/hash、prompt、采样参数、action menu、
-reward、预算、SESOI、可靠性阈值、gold fence 和 abort rule。方向定稿不授权模型/API 调用、下载、复现、
-prototype、push 或 wiki publication。
+Before running, the following must be separately bound and authorized: model/service revision, data
+revision/split/hash, prompt, sampling parameters, action menu, reward, budget, SESOI, reliability threshold,
+gold fence and abort rule. Finalizing the directions does not authorize model/API calls, downloads,
+reproduction, prototypes, pushes or wiki publication.
 
-## 6. 文件与检查
+## 6. Files and checks
 
-- [x] 新增 `wiki/survey/current/research-directions.md`，成为唯一有效方向合同。
-- [x] 原位更新 `wiki/Research-Objective.md`、`wiki/Project-Thesis.md`、`wiki/Per-Work-Status.md`。
-- [x] 更新 CURRENT router/status/manifest；旧 C1 表改为“组件证据，主问题身份已撤销”。
-- [x] 更新 workbench README，把 master 标为已整编证据底稿，不再承担完成声明。
-- [x] 修正 Lean 过度外推注释，加入 runtime-reliability 条件定理与 smoke test。
-- [x] 运行 context surface、CURRENT layer、Stage-1C evidence、manifest replay、Lean targeted
-  typecheck/Smoke 和量化措辞扫描。全根 `lake build` 因既有 mathlib/Tilting `.olean` 首次缓存未完成而
-  未作为本次 PASS 证据；新增模块和两个 Smoke 例均已由 Lean 4.31.0 直接通过。
-- [x] 不改 Stage-1B v5、audit bytes、full-text ledger 既有行或任何项目代码；仅把前序已追加的 ledger
-  working bytes 重新绑定进 CURRENT manifest。
+- [x] Added `wiki/survey/current/research-directions.md` as the single direction contract in force.
+- [x] Updated `wiki/Research-Objective.md`, `wiki/Project-Thesis.md` and `wiki/Per-Work-Status.md` in place.
+- [x] Updated the CURRENT router/status/manifest; the old C1 table now reads "component evidence, primary-question
+  status revoked".
+- [x] Updated the workbench README, marking master as consolidated evidence source material that no longer
+  carries a completion claim.
+- [x] Corrected the Lean over-extrapolation comments and added the runtime-reliability conditional theorem and a
+  smoke test.
+- [x] Ran the context surface, CURRENT layer, Stage-1C evidence, manifest replay, Lean targeted typecheck/Smoke,
+  and the quantitative-wording scan. A whole-root `lake build` was not used as PASS evidence this time because
+  the first-time cache for the existing mathlib/Tilting `.olean` was incomplete; the new modules and both Smoke
+  examples passed directly under Lean 4.31.0.
+- [x] Did not modify Stage-1B v5, audit bytes, existing full-text ledger rows or any project code; only rebound
+  the previously appended ledger working bytes into the CURRENT manifest.
 
-## 7. 失效条件
+## 7. Invalidation conditions
 
-本定稿只在 owner 改变五条统一约束、核心不再 API-only、五维范围被重裁、H5 获得新签署，或 Stage-2A
-实验提供足以改变方向排序的证据时 supersede。新论文只更新 nearest-prior/实现选择，不自动杀死方向；
-只有其在相同黑盒、供给、预算和可靠性合同下支配对应机制，才触发合并或重路由。
+This finalization is superseded only when the owner changes the five unifying constraints, the core ceases to be
+API-only, the five-dimension scope is re-cut, H5 receives a new signature, or Stage-2A experiments provide
+evidence sufficient to change the direction ordering. A new paper only updates the nearest-prior/implementation
+choice and never automatically kills a direction; only if it dominates the corresponding mechanism under the same
+black-box, supply, budget and reliability contract does it trigger a merge or a re-route.

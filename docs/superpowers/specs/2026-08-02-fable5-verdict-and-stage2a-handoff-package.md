@@ -1,16 +1,18 @@
-# Fable5 裁决书：研究工程目录重整提案回应与 Stage-2A 交接包
+# Fable5 verdict: response to the research-engineering directory reorganization proposal and the Stage-2A handoff package
 
-> **状态（2026-08-04）：`IMPLEMENTED_AND_SUPERSEDED_2026-08-03`。** 本裁决/交接包已由 2026-08-03
-> 目录重整实施完毕，仅作历史设计与交接理由保留，不再是现行入口。下文中的
-> `study_repository: NOT_CREATED`、`uv pip install -e ../../common -e .` 等均描述实施前状态
-> （study 现已建仓并于 2026-08-04 收窄为 `speech-aware-evidence-acquisition`，且不依赖
-> `speechrl_common`）。现行权威入口：owner 合同
-> （`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`）、
-> Stage-2A 入场合同（`docs/superpowers/specs/2026-08-02-speech-aware-evidence-acquisition-stage2a-entry.md`）、
-> study 仓 `README.md`，以及独立复核反馈
-> （`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`）。
+> **Status (2026-08-04): `IMPLEMENTED_AND_SUPERSEDED_2026-08-03`.** This verdict/handoff package was fully
+> implemented by the 2026-08-03 directory reorganization and is retained only as a historical design and
+> handoff rationale; it is no longer the current entry point. The values below such as
+> `study_repository: NOT_CREATED` and `uv pip install -e ../../common -e .` describe the pre-implementation
+> state (the study repository has since been created and was narrowed on 2026-08-04 to
+> `speech-aware-evidence-acquisition`, and it does not depend on `speechrl_common`). The current
+> authoritative entry points: the owner contract
+> (`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-speech-domain-scope-and-identity-contract.md`),
+> the Stage-2A entry contract (`docs/superpowers/specs/2026-08-02-speech-aware-evidence-acquisition-stage2a-entry.md`),
+> the study repo `README.md`, and the independent re-review feedback
+> (`docs/checks/program-architecture/2026-08-03-post-reorg-remediation-independent-review/feedback.md`).
 
-## 文档状态
+## Document status
 
 ```yaml
 artifact_id: FABLE5-STUDY-DIRECTORY-REORGANIZATION-VERDICT-V1
@@ -27,101 +29,119 @@ inventory_source_commits:
   w1_training_free_rl: 7ed41f6
 ```
 
-## 一、裁决
+## 1. Verdict
 
-对目录重整提案返回 **`ACCEPT_WITH_AMENDMENTS`**。
+The directory reorganization proposal receives **`ACCEPT_WITH_AMENDMENTS`**.
 
-接受的核心：伞仓管研究治理与实验资产图、每个获准语义研究对象独立 GitHub 仓、本地统一
-checkout 到 `studies/`、candidate 编号只作 provenance、按 authority 而非"看起来相关"迁移。
-这套拓扑与既有门禁（registry admitted-only、fail-closed workspace check、审计不可变）完全自洽。
+The accepted core: the umbrella owns research governance and the experiment-asset graph; each admitted
+semantic research object gets its own GitHub repository; local checkouts are unified under `studies/`;
+candidate numbering serves only as provenance; migration follows authority rather than "looks related". This
+topology is fully self-consistent with the existing gates (registry admitted-only, fail-closed workspace
+check, immutable audit).
 
-本次事务已执行的部分：伞仓侧重整批次全部入 HEAD 并通过三道门禁
-（`study_workspace_check` PASS、`sf_current_package_check --check` PASS、
-`ai_context_surface_check` PASS、检查套件 131 项测试绿）。
+What this transaction executed: the entire umbrella-side reorganization batch is in HEAD and passes three
+gates (`study_workspace_check` PASS, `sf_current_package_check --check` PASS, `ai_context_surface_check` PASS,
+check suite 131 tests green).
 
-本次事务明确未执行的部分：`studies/audio-aware-evidence-acquisition/` **未创建**。这不是遗漏，
-是提案与门禁的一致要求——registry 只收 admitted 仓，workspace check 硬性要求每个 checkout
-已注册、带真实 GitHub remote URL、有独立 `.git`。在 owner 签发
-`OWNER_GO_AND_EXECUTION_CONTRACT` 之前，任何形态的 study 目录（占位、种子、未注册本地仓）
-都会把 fail-closed 门禁打红，或迫使 registry 写入虚假条目。工程目录的创建被本文第五节
-runbook 机械化为一次单事务操作，等待的只是 owner 一个裁决。
+What this transaction explicitly did not execute: `studies/audio-aware-evidence-acquisition/` was **not
+created**. That is not an omission but a consistent requirement of the proposal and the gates — the registry
+accepts only admitted repositories, and the workspace check strictly requires every checkout to be
+registered, to carry a real GitHub remote URL, and to have its own `.git`. Before the owner issues
+`OWNER_GO_AND_EXECUTION_CONTRACT`, a study directory in any form (placeholder, seed, unregistered local repo)
+would either turn the fail-closed gates red or force a false entry into the registry. Creating the
+engineering directory is mechanized by the runbook in section 5 below into a single-transaction operation; all
+that is awaited is one owner ruling.
 
-## 二、提案六问逐答
+## 2. Answers to the proposal's six questions
 
-### Q1 — 仓名与包名
+### Q1 — Repository name and package name
 
-接受 `audio-aware-evidence-acquisition`（仓/slug）与 `audio_aware_evidence_acquisition`
-（Python package）。slug 通过 workspace check 的语义 kebab-case 校验且不含 candidate token。
+Accept `audio-aware-evidence-acquisition` (repository/slug) and `audio_aware_evidence_acquisition`
+(Python package). The slug passes the workspace check's semantic kebab-case validation and contains no
+candidate token.
 
-### Q2 — 需被新 study 消费的现有实现（文件级）
+### Q2 — Existing implementations to be consumed by the new study (file level)
 
-采纳方式分两类：**DEPEND**（study 以 editable 依赖消费，不复制）与
-**COPY_AND_VERIFY**（按提案第六节协议在 R0 逐件复制核验，落 `migration-manifest.md`）。
-全部条目当前为 CANDIDATE 态，本清单不构成搬迁授权。
+Adoption falls into two classes: **DEPEND** (the study consumes it as an editable dependency, no copying) and
+**COPY_AND_VERIFY** (copied and verified item by item at R0 per the protocol in the proposal's section 6, and
+recorded in `migration-manifest.md`). All entries are currently in CANDIDATE state; this list does not
+constitute migration authorization.
 
-| 来源（commit 见 frontmatter） | 目标位置 | 方式 | 理由 |
+| Source (commits in the frontmatter) | Target location | Method | Reason |
 |---|---|---|---|
-| `common/src/speechrl_common/`（audio/io、rl/metrics、models/generative_omni、models/prompts、tracking/mlflow_logger、utils/seed） | study 依赖 `../../common` | DEPEND | 已是 program-level 共享层，与 W1–W4 同机制 |
-| W1 `scripts/baselines/two_pass_runner.py` | `src/.../models/` 冻结核 adapter 参考 | COPY_AND_VERIFY | llama-server + input_audio 的真实可运行调用路径在此 |
-| W1 `scripts/baselines/provenance.py` | `src/.../tracing/` | COPY_AND_VERIFY | 请求/响应/成本 provenance 记账基元 |
-| W1 `scripts/baselines/metrics.py`、`stats.py`、`deterministic_draw.py` | `src/.../scoring/` 与实验统计 | COPY_AND_VERIFY | 评分与确定性抽样基元，探针战役中经过实测 |
-| W1 `scripts/loaders/_common.py`、`registry.py` | `src/.../data/` loader 骨架 | COPY_AND_VERIFY（仅模式） | 载体 loader 的注册/公共层模式；载体本身全部新写 |
-| W1 `scripts/knowledge/kb_retrieve.py`、`kb_schema.py`、`corpus_lock.py` | `src/.../evidence/` 候选 | DEFER_TO_METHOD | 证据供给侧候选；方法未收敛前不采纳（KB 全量构建处于 PARKED） |
+| `common/src/speechrl_common/` (audio/io, rl/metrics, models/generative_omni, models/prompts, tracking/mlflow_logger, utils/seed) | study depends on `../../common` | DEPEND | Already a program-level shared layer, same mechanism as W1–W4 |
+| W1 `scripts/baselines/two_pass_runner.py` | `src/.../models/` frozen-core adapter reference | COPY_AND_VERIFY | The real runnable call path for llama-server + input_audio lives here |
+| W1 `scripts/baselines/provenance.py` | `src/.../tracing/` | COPY_AND_VERIFY | The request/response/cost provenance accounting primitive |
+| W1 `scripts/baselines/metrics.py`, `stats.py`, `deterministic_draw.py` | `src/.../scoring/` and experiment statistics | COPY_AND_VERIFY | Scoring and deterministic-sampling primitives, measured in practice during the probe campaign |
+| W1 `scripts/loaders/_common.py`, `registry.py` | `src/.../data/` loader skeleton | COPY_AND_VERIFY (pattern only) | The registration/common-layer pattern for carrier loaders; the carriers themselves are all written fresh |
+| W1 `scripts/knowledge/kb_retrieve.py`, `kb_schema.py`, `corpus_lock.py` | `src/.../evidence/` candidate | DEFER_TO_METHOD | Evidence-supply-side candidates; not adopted before the method converges (full KB construction is PARKED) |
 
-**明确不迁移**：W1 的 27 个探针时代数据集 loader、baselines wave/cell 一次性实验脚本、
-KB 全量构建管线、任何 `_repro` 历史。Earnings21、Earnings22、ConEC 无现成 loader，属 study 新代码。
+**Explicitly not migrated**: W1's 27 probe-era dataset loaders, the baselines wave/cell one-off experiment
+scripts, the full KB construction pipeline, and any `_repro` history. Earnings21, Earnings22 and ConEC have no
+existing loader and are new study code.
 
-### Q3 — program-level 与 study-only 的划分
+### Q3 — The program-level / study-only division
 
-- **Program-level（留伞仓）**：`scripts/data/` 采集与资产锁工具、`docs/datasets.lock.json`、
-  `docs/checks/` 回执、三道治理门禁、`speechrl_common` 共享层。
-- **Study-only（独立仓）**：三载体 loader 与 split 管理、冻结核 API adapter、evidence
-  schema（provenance/OBS-SUPPLY 分离/准入/最终使用）、scorer adapter、trace、实验组合层。
+- **Program-level (stays in the umbrella)**: the `scripts/data/` acquisition and asset-lock tooling,
+  `docs/datasets.lock.json`, the `docs/checks/` receipts, the three governance gates, and the
+  `speechrl_common` shared layer.
+- **Study-only (independent repository)**: the three carrier loaders and split management, the frozen-core API
+  adapter, the evidence schema (provenance / OBS-SUPPLY separation / admission / final use), the scorer
+  adapter, the trace, and the experiment composition layer.
 
-### Q4 — 首个 closest-prior reproduction 建议
+### Q4 — Recommendation for the first closest-prior reproduction
 
-建议 **ConEC 上下文偏置 / contextual-ASR 线**作为首个 reproduction：公开 GitHub artifact、与已
-锁载体 Earnings21/22 同谱系（readiness 在候选中最高）、信息边界与本研究同构。RECOVER 类纠正线
-与 Siskos 实体消解线列为第二/第三队列；Corona 2017、Raghuvanshi 2019、Flemotomos 2024、
-COALA 2026 按 entry contract 先作 threat/reproduction 候选评估，再冻结 mandatory 表。
-mandatory 表的最终冻结属 owner execution contract 裁决。
+Recommend the **ConEC context biasing / contextual-ASR line** as the first reproduction: a public GitHub
+artifact, the same lineage as the already-locked carriers Earnings21/22 (the highest readiness among the
+candidates), and an information boundary isomorphic to this research. The RECOVER-style correction line and
+the Siskos entity-resolution line are queued second and third; Corona 2017, Raghuvanshi 2019, Flemotomos 2024
+and COALA 2026 are first assessed as threat/reproduction candidates per the entry contract, and only then is
+the mandatory table frozen. The final freezing of the mandatory table is a ruling of the owner execution
+contract.
 
-### Q5 — execution contract 仍需 owner 冻结的字段
+### Q5 — Fields the execution contract still needs the owner to freeze
 
-| 字段 | 建议值（可直接采纳） | 必须 owner 裁决 |
+| Field | Suggested value (directly adoptable) | Must be ruled by the owner |
 |---|---|---|
-| 远程仓 | — | GitHub org/URL |
-| Runtime | llama.cpp llama-server 常驻 + Qwen3-Omni-30B GGUF（`-ngl 28`，既有实测路径） | build commit 与 GGUF 文件 hash 定版 |
-| 载体 | lock 内 Earnings21/22/ConEC 三键 | discovery/confirmatory split 种子与冻结程序 |
-| Baseline | Q4 队列次序 | mandatory 名单 + exact revision |
-| 预算 | — | 调用/GPU/音频秒/首切片上限与 stop-go 检查点 |
-| Exposure | 继承 exposure 排除表沿用现行记账 | 每 run 触达台账格式确认 |
+| Remote repository | — | GitHub org/URL |
+| Runtime | llama.cpp llama-server resident + Qwen3-Omni-30B GGUF (`-ngl 28`, the existing measured path) | Pinning the build commit and the GGUF file hashes |
+| Carriers | The three keys Earnings21/22/ConEC inside the lock | The discovery/confirmatory split seed and freezing procedure |
+| Baseline | The Q4 queue order | The mandatory list + exact revisions |
+| Budget | — | Calls/GPU/audio-seconds/first-slice ceilings and the stop-go checkpoints |
+| Exposure | The inherited exposure exclusion table continues with current accounting | Confirming the per-run contact ledger format |
 
-### Q6 — 总回复
+### Q6 — Overall reply
 
-`ACCEPT_WITH_AMENDMENTS`，修正案见下节。
+`ACCEPT_WITH_AMENDMENTS`; the amendments are in the next section.
 
-## 三、修正案
+## 3. Amendments
 
-- **A1（Phase-1 原子性升为显式约束）**：workspace check 要求 registry 条目携带真实 GitHub URL
-  且本地 checkout 有独立 `.git`，因此"本地 checkout 先行、远程后补"在机制上不可行。Phase 1
-  六步（签发合同→远程建仓→checkout→registry→experiment index→门禁）必须单事务完成。
-- **A2（pre-GO 调研主场明确化）**：owner GO 之前，本方向一切调研（文献 delta lane、D1–D4
-  无模型数据闭环、contract 字段准备）的主场是**伞仓根目录**——这些工作的 authority 本就在伞仓。
-  不得以任何临时目录冒充 study 仓。启动面见第六节。
-- **A3（迁移清单为候选态）**：Q2 清单在 R0 按 copy-and-verify 协议逐件裁决落
-  `migration-manifest.md`；采纳与否以新仓测试通过为准，不因清单在册而自动搬迁。
+- **A1 (Phase-1 atomicity raised to an explicit constraint)**: the workspace check requires a registry entry to
+  carry a real GitHub URL and the local checkout to have its own `.git`, so "local checkout first, remote added
+  later" is mechanically infeasible. The six steps of Phase 1 (issue the contract → create the remote → checkout
+  → registry → experiment index → gates) must complete as a single transaction.
+- **A2 (clarifying where pre-GO research happens)**: before the owner GO, all research for this direction
+  (literature delta lane, the D1–D4 model-free data closure, contract field preparation) has its home in the
+  **umbrella root** — the authority for that work already lies in the umbrella. No temporary directory may
+  masquerade as the study repository. The startup surface is in section 6.
+- **A3 (the migration list is in candidate state)**: the Q2 list is ruled on item by item at R0 under the
+  copy-and-verify protocol and recorded in `migration-manifest.md`; adoption depends on the new repository's
+  tests passing, and nothing is migrated automatically just because it is on the list.
 
-## 四、Owner-GO 冻结前置
+## 4. Prerequisites to freeze before Owner GO
 
-owner 只需完成一件事：审阅第 Q5 表，把"必须 owner 裁决"列的六个值写成具体值，并以带日期的
-决策记录签发 `OWNER_GO_AND_EXECUTION_CONTRACT`。其余全部机械化。
+The owner need only do one thing: review the Q5 table, write concrete values for the six entries in the
+"must be ruled by the owner" column, and issue `OWNER_GO_AND_EXECUTION_CONTRACT` as a dated decision record.
+Everything else is mechanized.
 
-## 五、GO 事务 runbook（签发后单事务执行）
+## 5. GO transaction runbook (executed as a single transaction after issuance)
 
-1. 创建远程仓 `https://github.com/<org>/audio-aware-evidence-acquisition.git`（需 owner 明示授权）；
-2. `git init` 本地仓并首提交种子，checkout 至 `studies/audio-aware-evidence-acquisition/`；
-3. `studies/registry.json` 写入条目（模板如下，`decision_record` 指向 owner 签发的决策记录）：
+1. Create the remote repository `https://github.com/<org>/audio-aware-evidence-acquisition.git` (requires
+   explicit owner authorization);
+2. `git init` the local repository, make the seed initial commit, and check it out to
+   `studies/audio-aware-evidence-acquisition/`;
+3. Write the entry into `studies/registry.json` (template below; `decision_record` points at the decision record
+   the owner issued):
 
 ```json
 {
@@ -135,60 +155,70 @@ owner 只需完成一件事：审阅第 Q5 表，把"必须 owner 裁决"列的�
 }
 ```
 
-4. 创建 `wiki/experiments/audio-aware-evidence-acquisition/README.md`（实验台账索引）；
-5. 跑 `study_workspace_check`、`sf_current_package_check --check`、`ai_context_surface_check`；
-6. 伞仓单 commit 收束；study 仓按提案 Phase 2 骨架推进 R0 纵向链。
+4. Create `wiki/experiments/audio-aware-evidence-acquisition/README.md` (the experiment ledger index);
+5. Run `study_workspace_check`, `sf_current_package_check --check` and `ai_context_surface_check`;
+6. Close with a single umbrella commit; the study repository advances the R0 vertical chain along the
+   proposal's Phase 2 skeleton.
 
-study 仓种子 `CLAUDE.md` 内容（GO 时原样落盘，之后由该仓自治演进）：
+Seed `CLAUDE.md` content for the study repository (written to disk verbatim at GO, thereafter evolved
+autonomously by that repository):
 
 ```markdown
 # CLAUDE.md — audio-aware-evidence-acquisition
 
-独立研究仓：冻结 speech/omni 核上的音频感知证据获取（provenance: 见伞仓 wiki 审计层）。
+Standalone research repository: audio-aware evidence acquisition on a frozen speech/omni core
+(provenance: see the umbrella wiki audit layer).
 
-## 研究边界（不可变）
-- 冻结 Qwen3-Omni 核经 API 形态服务边界访问；零参数修改；无任务训练模型；无第二答题 LLM。
-- gold 答案/参考转写/测试标注/未来轮不得越过运行时边界。
-- OBS 重解析与外部证据供给分开可追踪；一切外部响应/工具动作/模型请求版本化可哈希。
-- discovery 与 confirmatory 不相交；confirmatory 判据读结果前冻结。
+## Research boundary (immutable)
+- The frozen Qwen3-Omni core is reached across an API-shaped service boundary; zero parameter
+  modification; no task-trained model; no second answering LLM.
+- Gold answers / reference transcripts / test annotations / future turns must never cross the runtime
+  boundary.
+- OBS re-parsing and external evidence supply are separately traceable; every external response / tool
+  action / model request is versioned and hashable.
+- discovery and confirmatory are disjoint; confirmatory criteria are frozen before results are read.
 
-## 路由
-- 当前研究状态与实验台账：伞仓 `wiki/Research-Objective.md`、
-  `wiki/Experiment-Assets.md`、`wiki/experiments/audio-aware-evidence-acquisition/README.md`。
-- 数据身份：伞仓 `docs/datasets.lock.json`（按键引用，不复制 hash）；字节在
-  `SPEECHRL_DATA_DIR`，永不入 Git。
-- 执行合同（模型触达、预算、baseline、停止条件的唯一授权面）：伞仓
+## Routing
+- Current research state and experiment ledger: umbrella `wiki/Research-Objective.md`,
+  `wiki/Experiment-Assets.md`, `wiki/experiments/audio-aware-evidence-acquisition/README.md`.
+- Dataset identity: umbrella `docs/datasets.lock.json` (referenced by key, hashes never copied); bytes live
+  under `SPEECHRL_DATA_DIR` and never enter Git.
+- Execution contract (the sole authorization surface for model contact, budget, baselines and stop
+  conditions): umbrella
   `docs/superpowers/specs/2026-08-02-audio-aware-evidence-acquisition-stage2a-entry.md`
-  及 owner 签发的 GO 决策记录。
+  and the GO decision record issued by the owner.
 
-## 环境
-- WSL2 `Ubuntu-24.04` + `~/.venvs/speechrl`（Python 3.12）；推理走 llama.cpp llama-server
-  （GGUF，`-ngl 28` 常驻）。安装：`uv pip install -e ../../common -e .`。
+## Environment
+- WSL2 `Ubuntu-24.04` + `~/.venvs/speechrl` (Python 3.12); inference goes through llama.cpp llama-server
+  (GGUF, `-ngl 28` resident). Install: `uv pip install -e ../../common -e .`.
 
-## 禁止
-- 未经执行合同的任何模型/API 触达（含单样本 smoke）；向本仓提交数据/权重/原始 trace；
-  绕过 migration-manifest 搬运 W1–W4 代码；push 未经伞仓授权。
+## Prohibited
+- Any model/API contact without the execution contract (including a single-sample smoke); committing data /
+  weights / raw traces to this repository; moving W1–W4 code in around the migration-manifest; pushing
+  without umbrella authorization.
 ```
 
-## 六、pre-GO 阶段：R2 方向调研 session 启动面
+## 6. Pre-GO phase: the startup surface for an R2 direction research session
 
-在 GO 之前为本方向单开 session 时，工作目录取**伞仓根**，按序载入：
+When opening a dedicated session for this direction before GO, take the **umbrella root** as the working
+directory and load, in order:
 
-1. `CLAUDE.md`（自动载入）→ `wiki/Research-Objective.md` → `wiki/Project-Thesis.md`；
-2. 本裁决书；
+1. `CLAUDE.md` (loaded automatically) → `wiki/Research-Objective.md` → `wiki/Project-Thesis.md`;
+2. This verdict;
 3. `docs/superpowers/specs/2026-08-02-audio-aware-evidence-acquisition-stage2a-entry.md`
-   （E0/R0/R1/X 序列与 freeze sheet）；
-4. 正式开题许可说明（路径见治理节）——含文献截止 `2026-08-02`、STOP_THE_LINE 四触发器、
-   delta ledger 规则。
+   (the E0/R0/R1/X sequence and the freeze sheet);
+4. The formal opening permission note (path in the governance section) — including the literature cutoff
+   `2026-08-02`, the four STOP_THE_LINE triggers, and the delta ledger rules.
 
-该 session 允许的工作：文献 delta lane（每周有界）、D1–D4 无模型数据闭环、prior readiness
-评估、contract 字段准备。禁止：模型触达、建仓、把调研产出写进 `studies/`。
+Work permitted in that session: the literature delta lane (bounded weekly), the D1–D4 model-free data closure,
+prior readiness assessment, and contract field preparation. Forbidden: model contact, creating a repository,
+and writing research output into `studies/`.
 
-## 七、治理与佐证
+## 7. Governance and supporting evidence
 
-- 提案：`docs/superpowers/specs/2026-08-02-fable5-study-directory-reorganization-proposal.md`
-- 架构规格：`docs/superpowers/specs/2026-08-02-study-repositories-and-experiment-assets.md`
-- 开题许可：`wiki/audit/system-first-stage1c-v2/round-22/2026-08-02-audio-aware-evidence-acquisition-formal-opening-permission-note.md`
-  （`FORMAL_OPENING_APPROVED` 与 `STAGE2A_EXECUTION_WITHHELD` 并行有效）
-- 伞仓重整落地：commits `c4a26a6`（46 件治理批次）、`b9d7a30`（stage-0 报告重盖）；
-  三门禁 PASS、检查套件 131 项测试绿。
+- Proposal: `docs/superpowers/specs/2026-08-02-fable5-study-directory-reorganization-proposal.md`
+- Architecture specification: `docs/superpowers/specs/2026-08-02-study-repositories-and-experiment-assets.md`
+- Formal opening permission: `wiki/audit/system-first-stage1c-v2/round-22/2026-08-02-audio-aware-evidence-acquisition-formal-opening-permission-note.md`
+  (`FORMAL_OPENING_APPROVED` and `STAGE2A_EXECUTION_WITHHELD` are simultaneously in force)
+- Umbrella reorganization landing: commits `c4a26a6` (the 46-item governance batch), `b9d7a30` (re-stamping the
+  stage-0 report); three gates PASS, check suite 131 tests green.
