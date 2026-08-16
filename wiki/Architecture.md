@@ -53,19 +53,3 @@ candidate survey → owner decision → semantic contract → independent study 
 
 Engineering for one admitted study may overlap survey of the next candidate. Finishing every candidate
 survey is not a global Stage-2 prerequisite.
-
----
-
-## 中文
-
-本工作区采用**伞式治理仓 + 经放行的独立研究仓与论文仓**。运行节奏：每个新课题的 Stage‑1（讨论、
-调研、论证）在伞仓完成；研究对象在完成自身调研、owner GO 与执行合同后，以具体语义名称在
-`studies/` 下建立独立 Git/GitHub 仓，Stage‑2 工作在该仓进行、至形成合格 paper candidate 为止。R1/R2 等候选编号只留在调研/审计层；R1 已在入场前
-日落，不建仓。历史 W1–W4 工作仓已于 2026-08-03 退役（本地删除、远端冷备份，墓碑见
-`wiki/archive/program/w1-w4-retirement/`）。
-
-Wiki 管理研究状态、实验协议、资产索引、偏差、结果与裁决；study 仓管理代码/配置/测试；
-`SPEECHRL_DATA_DIR` 和 MLflow 保存大型资产与运行数据。一个 study 进入工程后可以并行调研下一个候选，
-无须等待所有候选完成。study 的终点是一个或多个合格 paper candidate；Stage‑3（大规模 confirmatory
-实验、论文写作与发表）经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 晋级后在 `papers/` 下的独立仓
-完成，伞仓只跟踪 `papers/README.md` 与 `papers/registry.json`。统一资产入口见 [[Experiment-Assets]]。

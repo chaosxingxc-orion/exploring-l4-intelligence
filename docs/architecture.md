@@ -12,7 +12,7 @@ This workspace uses three repository classes:
    ends at one or more qualified paper candidates.
 3. **Paper repositories** (`papers/<semantic-slug>/`) — independent GitHub repositories admitted only
    by promotion from a qualified study candidate under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`
-   (Decision-Log 续91; none admitted yet). Stage‑3 work — large-scale pre-registered confirmatory
+   (Decision-Log continuation entry 91; none admitted yet). Stage‑3 work — large-scale pre-registered confirmatory
    experiments, final evidence, manuscripts and publication releases — lives there, never in a study
    repository.
 

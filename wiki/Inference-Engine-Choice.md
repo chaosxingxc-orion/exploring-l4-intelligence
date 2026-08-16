@@ -69,26 +69,3 @@ the retired W1 work):
 Historical note: the former verl/vLLM fine-tune and LoRA-deployment plans belonged to the retired
 W2-era framing; the admitted program line trains no model parameters, so they are recorded only in
 Git history.
-
----
-
-## 中文
-
-**一句话结论：本地跑 Qwen3-Omni-30B 用 llama.cpp（GGUF + `-ngl 28` 部分卸载）；vLLM 的
-Qwen3-Omni 支持属版本配对工程，在零参数训练的程序主线下无限期缓议。** 已退役 W1 工作的真实
-best-of-N 结果（Decision-Log 2026-07-02）正是这条路产出的，现为获准 study 的服务路径。
-
-**为什么不走 HF/vLLM int4（实测证据）：** HF `from_pretrained` 会把 int4 的 MoE 专家当缺失重新以
-fp32 初始化（~58 GB，OOM，thinker-only 也不行）；vLLM 0.14.0 + transformers 5.12.1 在 engine 初始化
-即崩（峰值显存仅 350 MiB，`Qwen2VLImageProcessor` 无 `max_pixels`）——是多模态处理器版本配对问题，
-不是显存问题。探索性的 vLLM 脚本已于 2026-07-03 退役。
-
-**可行路径：** Q8_0 30.3 GB > 24 GB 显存 → `-ngl 28` 部分卸载（MoE 3B 激活保持速度）；常驻
-`llama-server` 约 4 分钟加载、每条生成约 2.8 秒；音频走 `/v1/chat/completions` 的 `input_audio`
-（base64 wav）；greedy 即 temperature 0，采样用 temp>0 + 不同 seed。环境固化在 `env-setup.sh`
-Phase 5；模型按文件取自 `fetch-qwen3-omni-gguf.sh`（lockfile 来源类型 `hf-manual`）。
-
-**任务取舍：** 本地 30B 推理/best-of-N → llama.cpp（已验证）；嵌入主干不受影响；vLLM 无限期缓议。
-昔日 verl/vLLM 微调与 LoRA 部署方案属已退役的 W 时代表述，零参数训练主线下仅存于 Git 历史。
-参考 runner 已抢救至
-`studies/speech-aware-evidence-acquisition/reference/w1-snapshot/baselines/`。

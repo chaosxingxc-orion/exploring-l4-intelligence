@@ -514,13 +514,13 @@ def normalize_agent_guide(text):
 
 
 POLICY_TABLE_HEADERS = (
-    "类型",
-    "必须位置",
-    "谁读取",
-    "默认加载",
-    "权威性/可变性",
-    "进入条件",
-    "搬运/退出条件",
+    "Type",
+    "Required location",
+    "Who reads it",
+    "Default load",
+    "Authority / mutability",
+    "Entry condition",
+    "Move / exit condition",
 )
 POLICY_ROLE_ORDER = (
     "HOT",
@@ -541,115 +541,115 @@ POLICY_ROLE_ORDER = (
 POLICY_ROLE_SEMANTICS = {
     "HOT": (
         ("AGENTS.md", "wiki/Research-Objective.md", "wiki/Project-Thesis.md"),
-        ("每个新会话", "前三项", "按需"),
-        ("仅前三项",),
-        ("当前事实", "supersede-in-place"),
-        ("owner 裁决", "当前阶段", "阻塞项"),
-        ("原位替换", "冷索引", "不得日期版本化"),
+        ("every new session", "first three", "on demand"),
+        ("first three only",),
+        ("current fact", "supersede-in-place"),
+        ("owner ruling", "current stage", "blockers"),
+        ("replace in place", "cold index", "never date-versioned"),
     ),
     "REGISTRY": (
         ("wiki/survey/registry/", "wiki/survey/sidecars/"),
-        ("论文核验", "编码", "写作"),
-        ("否",),
+        ("verifies", "codes", "writes"),
+        ("No",),
         ("append-only", "supersede"),
-        ("FETCH", "精读", "canonical ID", "claim"),
-        ("跨 campaign 保留", "不得复制", "不删记录"),
+        ("FETCH", "close reading", "canonical ID", "claim"),
+        ("retained across campaigns", "never copied", "no record is deleted"),
     ),
     "AUDIT": (
         ("wiki/audit/<campaign>/<round-id>/", "INDEX.md"),
-        ("reviewer", "审计者", "精确取证"),
-        ("否",),
+        ("reviewer", "auditor", "exact forensics"),
+        ("No",),
         ("immutable", "append-only"),
         ("submission", "report", "response", "correction", "sign-off"),
-        ("永不移动/改写", "campaign index"),
+        ("never moved or rewritten", "campaign index"),
     ),
     "ARCHIVE": (
         ("wiki/archive/<knowledge-layer>/<campaign>/",),
-        ("历史", "复现"),
-        ("否",),
+        ("history", "reproduction"),
+        ("No",),
         ("immutable",),
-        ("闭合", "不再有活跃依赖"),
-        ("永久冷存", "不回迁"),
+        ("closed", "no active dependency"),
+        ("permanent cold storage", "never returns as current"),
     ),
     "WORKBENCH": (
         ("wiki/survey/workbench/<campaign>/",),
-        ("当前探索者",),
-        ("否",),
-        ("可变工作知识", "不得承载完成声明"),
-        ("探索", "未被接受"),
-        ("整编进 HOT/REGISTRY", "归档", "scratch 不提交"),
+        ("the current explorer",),
+        ("No",),
+        ("mutable working knowledge", "must not carry completion claims"),
+        ("under exploration", "not yet accepted"),
+        ("consolidated into HOT/REGISTRY", "archive", "scratch is not committed"),
     ),
     "Engineering spec": (
         ("docs/superpowers/specs/",),
-        ("实现者", "reviewer"),
-        ("否",),
-        ("工程设计", "Git review"),
-        ("多步骤工程改动",),
-        ("Git 历史保留", "research current page 不依赖"),
+        ("implementer", "reviewer"),
+        ("No",),
+        ("engineering design", "Git review"),
+        ("multi-step engineering change",),
+        ("Git history retains", "research current page does not depend"),
     ),
     "Engineering plan": (
         ("docs/superpowers/plans/",),
-        ("实现者",),
-        ("否",),
-        ("checkbox 可变",),
-        ("已批准设计",),
-        ("停止作为 current research pointer", "Git 保存"),
+        ("implementer",),
+        ("No",),
+        ("checkbox mutable",),
+        ("approved design",),
+        ("stops being a current research pointer", "Git preserves"),
     ),
     "Study repository registry": (
         ("studies/README.md", "studies/registry.json"),
-        ("owner", "实现者", "CI"),
-        ("否", "工程任务定向"),
-        ("伞仓跟踪", "语义命名独立 Git 仓"),
+        ("owner", "implementer", "CI"),
+        ("No", "engineering-task directed"),
+        ("umbrella tracking", "semantically named standalone Git repo"),
         ("OWNER_GO_AND_EXECUTION_CONTRACT",),
-        ("候选编号不得成为 repo 名", "不得建空仓"),
+        ("candidate ID must never become a repo name", "no empty repo"),
     ),
     "Paper repository registry": (
         ("papers/README.md", "papers/registry.json"),
-        ("owner", "实现者", "CI"),
-        ("否", "工程任务定向"),
-        ("伞仓跟踪", "语义命名独立 Git 仓"),
+        ("owner", "implementer", "CI"),
+        ("No", "engineering-task directed"),
+        ("umbrella tracking", "semantically named standalone Git repo"),
         ("OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",),
-        ("候选编号不得成为 repo 名", "不得建空 paper 仓"),
+        ("candidate ID must never become a repo name", "no empty paper repo"),
     ),
     "Study experiment index": (
         ("wiki/experiments/<study-slug>/README.md", "wiki/Experiment-Assets.md"),
-        ("owner", "实现者", "reviewer"),
-        ("否", "study 定向"),
-        ("Wiki 管理实验状态与资产图",),
-        ("study 已登记", "实验合同"),
-        ("稳定当前页", "release/audit bytes 不回写"),
+        ("owner", "implementer", "reviewer"),
+        ("No", "study directed"),
+        ("Wiki governs experiment state and the asset graph",),
+        ("study is registered", "experiment contract"),
+        ("stable current page", "release/audit bytes are never written back"),
     ),
     "Paper experiment index": (
         ("wiki/experiments/papers/<paper-slug>/README.md", "wiki/Experiment-Assets.md"),
-        ("owner", "实现者", "reviewer"),
-        ("否", "paper 定向"),
-        ("Stage‑3 实验状态与资产图",),
-        ("paper 已登记", "promotion 完成"),
-        ("稳定当前页", "release/audit bytes 不回写"),
+        ("owner", "implementer", "reviewer"),
+        ("No", "paper directed"),
+        ("Stage-3 experiment state and the asset graph",),
+        ("paper is registered", "promotion is complete"),
+        ("stable current page", "release/audit bytes are never written back"),
     ),
     "Check report": (
         ("docs/checks/<campaign>/<release-id>/",),
-        ("门禁工具", "核验者"),
-        ("否",),
-        ("release 引用后 immutable",),
-        ("可重复检查", "平台/版本"),
-        ("新 release 新目录", "禁止跨平台"),
+        ("gate tooling", "verifiers"),
+        ("No",),
+        ("immutable once a release cites it",),
+        ("repeatable check", "platform- or version-specific"),
+        ("new release, new directory", "no cross-platform sharing"),
     ),
     "Executable rule": (
         ("scripts/",),
-        ("CI", "操作者", "reviewer"),
-        ("否", "执行而非通读"),
-        ("代码生命周期", "测试先行"),
-        ("机械验证",),
-        ("同步测试", "不维护第二套实现"),
+        ("CI", "operator", "reviewer"),
+        ("No", "executed, not read through"),
+        ("code lifecycle", "tests first"),
+        ("mechanically verifiable",),
+        ("tests change with the rule", "never maintains a second implementation"),
     ),
     "Ephemeral scratch": (
         ("Not committed",),
-        ("当前会话",),
-        ("否",),
-        ("无权威性",),
-        ("临时推理", "草稿", "一次性输出"),
-        ("提炼", "provenance", "删除/过期"),
+        ("the current session",),
+        ("No",),
+        ("no authority",),
+        ("temporary reasoning", "drafts", "one-off output"),
+        ("distil", "provenance", "delete or expire"),
     ),
 }
 
@@ -665,6 +665,17 @@ def _policy_invalid(detail: str) -> str:
     return _failure("collaboration-policy-invalid", detail)
 
 
+def _collapse_whitespace(text: str) -> str:
+    """Collapse whitespace runs so prose tokens survive Markdown line wrapping.
+
+    Policy tokens are semantic phrases, not layout.  Matching them against
+    collapsed text keeps a reflow of the paragraph from silently disarming a
+    semantic assertion.
+    """
+
+    return re.sub(r"\s+", " ", text)
+
+
 def validate_collaboration_policy(text: str) -> list[str]:
     """Validate the canonical policy structurally and semantically."""
 
@@ -672,7 +683,7 @@ def validate_collaboration_policy(text: str) -> list[str]:
     if not isinstance(text, str):
         return [_policy_invalid("policy must be UTF-8 text")]
     section_match = re.search(
-        r"^## 2\. 文档类型与唯一位置\s*$([\s\S]*?)(?=^## 3\.)",
+        r"^## 2\. Document types and their single location\s*$([\s\S]*?)(?=^## 3\.)",
         text,
         re.MULTILINE,
     )
@@ -716,11 +727,14 @@ def validate_collaboration_policy(text: str) -> list[str]:
                             f"{role}/{POLICY_TABLE_HEADERS[column_offset]} missing {missing!r}"
                         )
                     )
-    if any(token in section_match.group(1) for token in ("允许覆写", "可改写", "可以移动并覆盖")):
+    if any(
+        token in section_match.group(1)
+        for token in ("may be rewritten", "overwrite allowed", "may be moved and overwritten")
+    ):
         failures.append(_policy_invalid("§2 reverses immutable/exit semantics"))
 
     lifecycle_match = re.search(
-        r"^## 3\. 六步生命周期\s*$([\s\S]*?)(?=^## 4\.)",
+        r"^## 3\. Six-step lifecycle\s*$([\s\S]*?)(?=^## 4\.)",
         text,
         re.MULTILINE,
     )
@@ -749,19 +763,21 @@ def validate_collaboration_policy(text: str) -> list[str]:
         if tuple(lifecycle) != expected:
             failures.append(_policy_invalid(f"lifecycle order differs: {lifecycle!r}"))
         lifecycle_tokens = (
-            "结论、推理摘要、目的链、provenance、失效条件",
-            "指定唯一角色",
-            "CURRENT 稳定文件中",
-            "更新 current manifest",
-            "AUDIT 永久路径",
-            "先提炼、再清 manifest/引用、最后搬运",
+            "conclusion, reasoning summary, purpose chain, provenance, invalidation",
+            "assign exactly one role",
+            "in the stable CURRENT file",
+            "update the current manifest",
+            "permanent AUDIT path",
+            "distil first, then clear the manifest and references",
         )
+        lifecycle_text = _collapse_whitespace(lifecycle_match.group(1))
         for token in lifecycle_tokens:
-            if token not in lifecycle_match.group(1):
+            if token not in lifecycle_text:
                 failures.append(_policy_invalid(f"lifecycle missing semantic {token!r}"))
 
     trigger_match = re.search(
-        r"^## 4\. 强制整编与搬运时点\s*$([\s\S]*?)(?=^### 搬运前安全门)",
+        r"^## 4\. Mandatory consolidation and move triggers\s*$([\s\S]*?)"
+        r"(?=^### Pre-move safety gate)",
         text,
         re.MULTILINE,
     )
@@ -769,7 +785,7 @@ def validate_collaboration_policy(text: str) -> list[str]:
         failures.append(_policy_invalid("missing exact §4 trigger section"))
     else:
         trigger_text = trigger_match.group(1)
-        if "以下任一事件先发生就立即 Consolidate：" not in trigger_text:
+        if "Consolidate immediately when any of the following happens first:" not in trigger_text:
             failures.append(_policy_invalid("triggers must direct immediate Consolidate"))
         bullets = [
             line[2:].strip()
@@ -779,8 +795,8 @@ def validate_collaboration_policy(text: str) -> list[str]:
         if len(bullets) != 6:
             failures.append(_policy_invalid(f"expected exactly six triggers, found {len(bullets)}"))
         trigger_semantics = (
-            ("第三次", "amendment", "correction"),
-            ("超过 context budget",),
+            ("third", "amendment", "correction"),
+            ("exceeds its context budget",),
             ("reviewer Gate MAJOR", "executable contract"),
             ("handoff ambiguity",),
             ("stage/release boundary",),
@@ -790,24 +806,24 @@ def validate_collaboration_policy(text: str) -> list[str]:
             if index >= len(bullets) or any(token not in bullets[index] for token in tokens):
                 failures.append(_policy_invalid(f"trigger {index + 1} semantics differ"))
         for token in (
-            "第三次修正必须立即折叠",
-            "第四次修正禁止新增",
+            "the third correction must be folded in immediately",
+            "a fourth correction must never be added",
             "ordinal",
             "consolidation epoch",
             "consolidation-receipt.json",
             "schema=`ai-context-audit-iteration-v1`",
-            "Artifact 与 receipt 都必须进入 audit registry",
-            "epoch 从 1 连续递增",
-            "ordinal 唯一且连续",
-            "先 commit receipt、append 注册",
+            "both the artifact and the receipt must enter the audit registry",
+            "epochs increase from 1 without gaps",
+            "ordinals are unique and contiguous",
+            "commit the receipt first, then append the registration",
             "registry prefix count/hash anchor",
             "wiki/survey/current/protocol.md",
         ):
-            if token not in trigger_text:
+            if token.lower() not in _collapse_whitespace(trigger_text).lower():
                 failures.append(_policy_invalid(f"consolidation rule missing {token!r}"))
 
     move_match = re.search(
-        r"^### 搬运前安全门（强制）\s*$([\s\S]*?)(?=^## 5\.)",
+        r"^### Pre-move safety gate \(mandatory\)\s*$([\s\S]*?)(?=^## 5\.)",
         text,
         re.MULTILINE,
     )
@@ -817,19 +833,84 @@ def validate_collaboration_policy(text: str) -> list[str]:
         move_items = re.findall(r"^([1-5])\. (.+)$", move_match.group(1), re.MULTILINE)
         if tuple(number for number, _ in move_items) != ("1", "2", "3", "4", "5"):
             failures.append(_policy_invalid("move gate must contain five ordered items"))
+        move_text = _collapse_whitespace(move_match.group(1))
         for token in (
             "stage-0",
-            "regular-file path、mode 与 Git blob",
+            "regular-file path, mode, and Git blob",
             "audit registry",
             "current manifest",
             "inbound reference",
             "active script",
-            "partial/both-path 状态 fail closed",
+            "partial/both-path states fail closed",
             "git mv",
-            "mode/blob 相同",
+            "the mode and blob are identical",
         ):
-            if token not in move_match.group(1):
+            if token not in move_text:
                 failures.append(_policy_invalid(f"move gate missing {token!r}"))
+    return failures
+
+
+ENGLISH_ONLY_PATHS = frozenset(
+    {
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "README.md",
+        "docs/architecture.md",
+        "papers/README.md",
+        "studies/README.md",
+        "wiki/AI-Collaboration.md",
+        "wiki/Architecture.md",
+        "wiki/Data-and-Assets.md",
+        "wiki/Environment-and-Setup.md",
+        "wiki/Experiment-Assets.md",
+        "wiki/Home.md",
+        "wiki/Inference-Engine-Choice.md",
+        "wiki/Information-Boundary-Guard.md",
+        "wiki/Onboarding.md",
+        "wiki/Per-Work-Status.md",
+        "wiki/Project-Thesis.md",
+        "wiki/README.md",
+        "wiki/Research-Methodology.md",
+        "wiki/Research-Objective.md",
+        "wiki/Working-Mode.md",
+        "wiki/_Footer.md",
+        "wiki/_Sidebar.md",
+        "wiki/survey/README.md",
+    }
+)
+CJK_RE = re.compile(
+    "["
+    "\u3000-\u303f"  # CJK punctuation
+    "\u3040-\u30ff"  # Hiragana / Katakana
+    "\u3400-\u4dbf"  # CJK extension A
+    "\u4e00-\u9fff"  # CJK unified ideographs
+    "\uf900-\ufaff"  # CJK compatibility ideographs
+    "\uff00-\uffef"  # halfwidth / fullwidth forms
+    "]"
+)
+
+
+def validate_english_only(path: str, text: str) -> list[str]:
+    """Require an English-only surface to carry no CJK character.
+
+    This is the executable form of the program's first principle: every active
+    document is authored in English so that nothing needs translating on its way
+    into a model context.  The scope is the explicit ``ENGLISH_ONLY_PATHS`` set,
+    never "every HOT file" — immutable records (``wiki/audit/``,
+    ``wiki/archive/``), release-pinned check reports, path-pinned legacy files,
+    and the historical ``wiki/Decision-Log-*.md`` volumes keep their original
+    bytes by owner ruling and are superseded, never rewritten.
+    """
+
+    failures: list[str] = []
+    for number, line in enumerate(text.splitlines(), start=1):
+        found = CJK_RE.findall(line)
+        if found:
+            sample = "".join(dict.fromkeys(found))[:12]
+            failures.append(
+                _failure("non-english-active-document", f"{path}:{number}: {sample}")
+            )
     return failures
 
 
@@ -1932,6 +2013,17 @@ def evaluate_manifest(repo, manifest, tracked_paths):
                 failures.append(_policy_invalid(f"invalid UTF-8: {exc}"))
             else:
                 failures.extend(validate_collaboration_policy(policy_text))
+
+    for path in sorted(ENGLISH_ONLY_PATHS & tracked_seen):
+        raw = read_repo_path(path, "english-only-path-missing")
+        if raw is None:
+            continue
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            failures.append(_failure("active-file-invalid-utf8", f"{path}: {exc}"))
+            continue
+        failures.extend(validate_english_only(path, text))
 
     return failures
 

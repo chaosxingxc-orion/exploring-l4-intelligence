@@ -6,42 +6,42 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "Codex repository operating guidance",
-      "sha256": "1deea2fef605e3ae27092f45c833f26906b32d3556e5bda5ee05a06213c80e19"
+      "sha256": "3d1e95a00dc3742a37f2f949d9790d1793d9a92db5937b9cd43e890cbd7a7198"
     },
     {
       "path": "wiki/Research-Objective.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "75a64fcb54cd365c40508f312dd8df7a9485094e0dccb6c23b46743a0f1907f0"
+      "sha256": "129b2e3e886c881619ae2a9ec9e2415082d471ed6224a3daca6b46c3a0fed49c"
     },
     {
       "path": "wiki/Project-Thesis.md",
       "class": "HOT",
       "load_policy": "default",
       "purpose": "program north star",
-      "sha256": "d066b1576888e081f9159abf392492994d4f7cbf4572da73966e289bd6562a32"
+      "sha256": "194881df90a2d192036fd4dcfe6cfa1b43a82604b2ff196dda64f25c60895b24"
     },
     {
       "path": "wiki/Per-Work-Status.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "current work and program-study state",
-      "sha256": "afdb69c7df2ff3b6583e334d6330e0cf573e0498ffac9d48c8ead277d1052610"
+      "sha256": "9608f31bd14d914dfbab9dea1b03a1c39fcfddb9b683008f5f2f6bd5a274712e"
     },
     {
       "path": "wiki/AI-Collaboration.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "canonical AI document placement and lifecycle policy",
-      "sha256": "debb843cbde7e5033b76bd59703cf1b825eb3925a4c4bcb5d47b03983e55b7ef"
+      "sha256": "fa7c0cd4f04afb876fc33aaee1b1a4f8de3a63a3f4caa9852b373f9100580256"
     },
     {
       "path": "wiki/Experiment-Assets.md",
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "20adfe53a74ffeaee8c8fedddb9cd3368e614fd12fedd616335db003eb714345"
+      "sha256": "81ce7b2c2034d25e81f0fa51d9ef50432475ae4d13e719fd1219f7cb7d274922"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",

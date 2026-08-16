@@ -25,16 +25,3 @@ Zero-to-ready for a new collaborator or AI. Assumes Windows + WSL2 `Ubuntu-24.04
    backups, not entry points.
 
 Remote creation, push and Wiki publication require explicit authorization.
-
----
-
-## 中文
-
-新协作者先读客户端指南、[[Research-Objective]] 和 [[Project-Thesis]]；仓库/实验任务再读
-[[Experiment-Assets]]。伞仓负责治理与 Stage‑1 调研；获准 study 按 `studies/registry.json` 的 URL
-克隆到 `studies/<slug>/`。环境只用 WSL2 `Ubuntu-24.04` 和 `~/.venvs/speechrl`，大型资产只放
-`SPEECHRL_DATA_DIR`。
-
-候选方向不能提前克隆/创建 study，只有 owner GO 与执行合同关闭后才建仓。当前获准 study 为
-speech-aware-evidence-acquisition，其模型/API 执行受其执行合同约束（先关 E0 数据门+runtime 收据）。
-已退役的 W1–W4 是冷备份，不是入口。未经明确授权不得创建远程仓、push 或发布 Wiki。

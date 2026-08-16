@@ -69,7 +69,7 @@ The Wiki controls experiment identity and decisions; the study repo owns code/co
 
 ## Formal, legacy and routing boundaries
 
-Carriers bind stages (Decision-Log 续91): Stage‑1 = umbrella; Stage‑2 = `studies/<slug>`, endpoint =
+Carriers bind stages (Decision-Log continuation entry 91): Stage‑1 = umbrella; Stage‑2 = `studies/<slug>`, endpoint =
 qualified paper candidates; Stage‑3 = `papers/<slug>` under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` —
 none admitted, registry empty. The Stage‑1B program-level Lean layer is retired; formal work is
 rebuilt per admitted study and claim in Stage‑2. The fixed Stage‑1B v5 320-work union remains

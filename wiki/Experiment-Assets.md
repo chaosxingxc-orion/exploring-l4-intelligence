@@ -31,7 +31,7 @@ Admitted paper repositories: **0**. Machine authority: `papers/registry.json`, e
 by `scripts/checks/paper_workspace_check.py` (strict empty registry, no child checkouts, ignore rule,
 count consistency — any registered entry fails closed until the promotion machinery extends the
 checker). A paper project enters only by promotion from a qualified study candidate under
-`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (Decision-Log 续91); it owns Stage‑3 large-scale confirmatory
+`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (Decision-Log continuation entry 91); it owns Stage‑3 large-scale confirmatory
 experiments and publication. Its experiment index will live under
 `wiki/experiments/papers/<paper-slug>/` at first admission; the paper promotion transaction (registry
 entry, candidate bundle blob, promotion receipt, index creation) is defined together with that

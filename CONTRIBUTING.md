@@ -1,6 +1,7 @@
 # Contributing
 
-> **English** | [中文](CONTRIBUTING_CN.md)
+> Authored in English. Every document in this program is English-only, and every input is
+> translated to English before it reaches a model.
 
 This is an **umbrella governance repo plus independent admitted-study repos**. The single most important rule is:
 **commit each change to the repo it belongs to.**

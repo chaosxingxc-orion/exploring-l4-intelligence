@@ -172,7 +172,17 @@ class BibliographyGeneratorTest(unittest.TestCase):
             self.assertTrue(receipt["official_url"].startswith("https://"))
 
     def test_no_placeholder_metadata_survives(self):
-        forbidden = ("登记待读", "作者见官方页", "TBD", "UNKNOWN_AUTHOR", "placeholder")
+        # The CJK entries are legacy placeholder literals written by pre-2026-08
+        # registry tooling; they stay verbatim so old records keep being caught.
+        forbidden = (
+            "登记待读",
+            "作者见官方页",
+            "registered pending read",
+            "author on official page",
+            "TBD",
+            "UNKNOWN_AUTHOR",
+            "placeholder",
+        )
         for receipt in self.receipts:
             combined = receipt["normalized"]["title"] + " " + " ".join(
                 receipt["normalized"]["authors"]

@@ -1,6 +1,77 @@
 # Decision Log — 2026-08 卷
 
 > 条目按原序保存（新在上）；追加与分卷规则见 [[Decision-Log]]。
+>
+> From continuation entry 94 (2026-08-15) onward, every new entry is authored in English under the
+> program's English-only first principle. Earlier entries keep their original bytes by owner ruling.
+
+### 2026-08-15 (continuation entry 94) · English-only first principle: active surface converted, gate made executable, owner contract re-issued
+
+#### Context
+
+The program had no language rule. Documents mixed English and Chinese — 350 of 413 tracked umbrella
+Markdown files carried CJK text — and `wiki/AI-Collaboration.md`, the canonical placement policy, was
+validated by `scripts/checks/ai_context_surface_check.py` against hardcoded Chinese section titles
+and semantic tokens, so the policy could not be translated without simultaneously retargeting its
+oracle and tests. Model inputs were fed in whichever language the source happened to use.
+
+#### Decision
+
+Three first principles are added to `AGENTS.md`/`CLAUDE.md` (umbrella and study): (1) everything
+entering a model context is English — translate the source first and pass the translation, never the
+original; (2) every document this program authors is English-only; (3) conventions are stated in
+English and preferably enforced by a gate.
+
+Scope of the conversion, by owner ruling: the current-truth surface plus every oracle. That is
+`wiki/AI-Collaboration.md`, the fifteen other HOT wiki pages, `wiki/survey/README.md`, the root
+Markdown, both study guides, and every checker/test keying on Chinese tokens. `README_CN.md` and
+`CONTRIBUTING_CN.md` are deleted and the bilingual `## 中文` mirror sections are removed; the
+English original was already authoritative in every pair.
+
+Out of scope by the same ruling, and deliberately untouched: `wiki/audit/` (66 files) and
+`wiki/archive/` (253 files), which are immutable; release-pinned `docs/checks/` reports;
+path-pinned legacy files; `docs/superpowers/` specs and plans; and the `wiki/Decision-Log-*.md`
+volumes, whose historical decision text is preserved rather than rewritten.
+
+The signed owner execution contract
+`wiki/experiments/speech-aware-evidence-acquisition/2026-08-04-owner-consolidated-execution-contract.md`
+is **re-issued in English with its terms unchanged**. Its pre-translation bytes are Git blob
+`8ddd0cf2a96908befc8b49e69602185729ba17ba`; `studies/registry.json:decision_record_blob` is re-pinned
+to `d1d8fce657ec593e35ff140ebab13f6d3545e5c6` in the same commit. Scope, budget, carrier binding,
+paper gate, and authority are identical to the 2026-08-04 acceptance — including the ≤3,000-call /
+≤40 GPU-hour / ≤20-hour numeric caps as originally written, whose retirement remains recorded in the
+2026-08-06 amendment and is not folded in here.
+
+#### Rationale
+
+A language rule that lives only in prose decays. Making it executable was the point: principle (2)
+now has a gate. `ai_context_surface_check.validate_english_only` fails closed on any CJK codepoint in
+an explicit `ENGLISH_ONLY_PATHS` set, so the rule is enforced on exactly the surface the owner scoped
+and cannot silently expand onto immutable records. The set is an explicit allowlist rather than
+"every HOT file" precisely because the decision-log volumes are HOT and must stay as they are.
+
+Re-issuing the contract rather than leaving it Chinese was an owner call: the contract is read by
+every session that touches the study, so it is model input under principle (1), and translating at
+read time on each session is exactly the silent-drift risk the principle exists to remove.
+
+#### Consequences
+
+The policy oracle now keys on English anchors (`## 2. Document types and their single location`,
+`## 3. Six-step lifecycle`, `## 4. Mandatory consolidation and move triggers`,
+`### Pre-move safety gate (mandatory)`) and matches semantic tokens against whitespace-collapsed
+text, so a Markdown reflow can no longer silently disarm an assertion. The Chinese variant of the
+stage-truth forbidden phrase is dropped from `study_workspace_check.py`; the CJK gate strictly
+subsumes it. Two CJK literals survive in `scripts/survey/sf_bibliography_generator.py` as
+legacy-data detectors — they match placeholder strings written by pre-2026-08 registry tooling and
+would stop catching those records if translated.
+
+Remaining language debt, unconverted by scope: `docs/superpowers/` (15 files), the seven other owner
+records under `wiki/experiments/`, and the decision-log volumes.
+
+#### Supersedes
+
+The bilingual document convention recorded in `wiki/README.md` ("an English block first, then a
+`## 中文` block"). No research decision, stage, authorization, or budget changes.
 
 ### 2026-08-04（续93）· 第二轮 review 整改：默认面阶段语义禁语门、合同字段 exposure ledger、语义 ExecutionPlan 门
 

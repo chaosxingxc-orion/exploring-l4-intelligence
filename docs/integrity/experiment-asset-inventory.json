@@ -2,7 +2,7 @@
   "schema": "experiment-asset-inventory-v3",
   "study_registry": {
     "path": "studies/registry.json",
-    "sha256": "e617af799db976167c14c0d3d25f634bfc37b776ae1547d7a914e3c3a2f05c3c"
+    "sha256": "700eda96e8dd06c673b4d3cbdbd1542be19e56dfb47b3e5b84097ee0b3344129"
   },
   "paper_registry": {
     "path": "papers/registry.json",

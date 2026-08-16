@@ -1,67 +1,89 @@
-# Research Methodology（研究方法论）
+# Research Methodology
 
-（2026-07-15 自 CLAUDE.md 迁出成篇——加载面瘦身「动作 C」；本文为正典，修订走 dated
-supersession。CLAUDE.md 只留指针与一行摘要。）
+(Split out of CLAUDE.md on 2026-07-15 as part of "action C", the load-surface slimming. This page is
+canonical; revisions go through dated supersession. CLAUDE.md keeps only a pointer and a one-line
+summary.)
 
-## 研究流程阶段（Stage-1A/1B/1C → 2A/2B → 3;dated supersession 2026-07-18,owner 裁决①;Stage‑2B/3 载体绑定 dated supersession 2026-08-04,续91）
+## Research process stages (Stage-1A/1B/1C → 2A/2B → 3; dated supersession 2026-07-18, owner ruling ①; Stage-2B/3 carrier binding, dated supersession 2026-08-04, continuation entry 91)
 
-**分界依据 = 活动目的与证据用途**，不是「是否启动过 Python」或「样本是否很少」。每份交付物
-注明所处阶段。**当前阶段以 `wiki/Research-Objective.md` 为准**（2026-07-29 时点 = Stage-1C
-方向确认整改中，Stage-1A/1B 已收官）；本页只保留阶段语义定义。（历史行：Stage-1A survey-ready
-gate——问题与 survey 设计;系统性 discovery/
-mapping 查询尚未执行,定向 ID dereference/raw provenance/全文准备/校准试验已执行;Gate S1
-签署 + owner 批准后第一条 systematic query 即进入 Stage-1B）。
+**The dividing line is the purpose of the activity and the use of its evidence**, not "whether Python
+was ever started" or "whether the sample is small". Every deliverable states the stage it sits in.
+**The current stage is authoritative in `wiki/Research-Objective.md`** (as of 2026-07-29: Stage-1C
+direction-confirmation remediation, with Stage-1A/1B closed out); this page keeps only the semantic
+definition of each stage. (Historical line: the Stage-1A survey-ready gate covered the problem and
+the survey design; systematic discovery/mapping queries had not been executed, while targeted ID
+dereference, raw provenance, fulltext preparation, and calibration trials had been; the first
+systematic query after the Gate S1 signature plus owner approval enters Stage-1B.)
 
-| 阶段 | 使命 | 允许 | 禁止（下一阶段才允许） |
+| Stage | Mission | Permitted | Forbidden (allowed only in the next stage) |
 |---|---|---|---|
-| **Stage-1A** | 问题与 survey 设计 | 问题树、纳排标准、检索式、种子/哨兵、编码 schema、known-item 身份/路由与协议覆盖检查、脚本静态与变异测试 | systematic mapping;任何研究模型调用;技术方案创新性结论或差异矩阵 |
-| **Stage-1B** | systematic survey/mapping **执行** | 检索、去重、题录筛选、全文编码、引文闭包、饱和分析、证据图谱、known-item carry-forward ledger、方法路径/邻近关系事实映射 | **smoke、任务指标、模型/方法比较、headroom/accuracy/WER、技术创新性裁决——全程不得运行研究模型**（owner 签署 2026-07-18） |
-| **Stage-1C** | 证据综合与选题 | 形成 3–5 个候选问题/缺口假设卡并由 owner 选唯一问题；冻结 Stage-2A 复现清单与探索约束（不执行、不冻结创新方案） | 用临时实验为某候选「拉票」；把候选缺口写成已成立的技术创新 |
-| **Stage-2A** | prior 复现、方案探索与技术创新收敛 | **先复现最接近且最强的公开 prior**；复现成立后才做自研方向性原型并收敛技术贡献（廉价小样、owner 显式放行、全部尝试与失败登记、directional-only；**即使只跑一个 item、只为 smoke，也算一次实验和一次 exposure**） | 把方向性结果写成确证;跳过 prior 复现直接宣称超过 SOTA |
-| **Stage-2B** | candidate qualification（方案验证收敛为合格 paper candidate） | 冻结假设、对照、判据；有界验证与统计设计（Research-Proposal-Template 实例、预注册准备、power 估计、paired-bootstrap CI 方案、对抗评审）；冻结 candidate bundle 并申请 paper GO | production-scale confirmatory 与最终优越性结论（属 Stage‑3 paper 仓）；事后换主指标、选择性报告 |
-| **Stage-3** | 发表级证据（独立 paper 仓,续91） | 经 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` 在 `papers/<slug>` 独立仓执行大规模预注册 confirmatory 与正式统计推断、扩展、独立复现、论文级审计、敌意评审至收敛、论文写作与发表；正/零/负结果同等合法 | 在 study 仓内执行 paper-scale campaign;用 Stage-2A/2B 小样或 probe 代替发表证据 |
+| **Stage-1A** | problem and survey design | problem tree, inclusion/exclusion criteria, search strings, seeds/sentinels, coding schema, known-item identity/routing and protocol-coverage checks, static and mutation testing of scripts | systematic mapping; any research-model call; conclusions about the novelty of a technical approach, or a prior-difference matrix |
+| **Stage-1B** | **execution** of the systematic survey/mapping | search, deduplication, record screening, fulltext coding, citation closure, saturation analysis, evidence mapping, known-item carry-forward ledger, factual mapping of method paths and proximity | **smoke runs, task metrics, model/method comparison, headroom/accuracy/WER, and novelty verdicts — the research model must not be run at any point** (owner signature 2026-07-18) |
+| **Stage-1C** | evidence synthesis and problem selection | produce 3–5 candidate problem/gap hypothesis cards and have the owner select the single problem; freeze the Stage-2A reproduction list and exploration constraints (without executing them, and without freezing an innovation) | using ad-hoc experiments to "campaign" for a candidate; writing a candidate gap up as an established technical innovation |
+| **Stage-2A** | prior reproduction, approach exploration, and convergence of the technical innovation | **reproduce the closest and strongest public prior first**; only once that reproduction holds may an in-house directional prototype follow and converge the technical contribution (cheap small samples, explicit owner release, every attempt and failure registered, directional-only; **even a single item run purely as a smoke test counts as one experiment and one exposure**) | writing a directional result up as confirmatory; skipping prior reproduction and claiming to beat SOTA |
+| **Stage-2B** | candidate qualification (converging a validated approach into a qualified paper candidate) | freeze the hypothesis, controls, and criteria; bounded validation and statistical design (a Research-Proposal-Template instance, pre-registration preparation, power estimation, a paired-bootstrap CI plan, adversarial review); freeze the candidate bundle and request paper GO | production-scale confirmatory work and final superiority conclusions (those belong to the Stage-3 paper repo); switching the primary metric after the fact, or selective reporting |
+| **Stage-3** | publication-grade evidence (standalone paper repo, continuation entry 91) | through `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`, execute in the standalone `papers/<slug>` repo: large-scale pre-registered confirmatory runs and formal statistical inference, extensions, independent reproduction, paper-level audit, adversarial review to convergence, manuscript writing, and publication; positive, null, and negative results are equally legitimate | running a paper-scale campaign inside a study repo; substituting Stage-2A/2B small samples or probes for publication evidence |
 
-**创新性时点（owner 裁决②，2026-07-21）**：Stage-1A 只保证问题、身份、路由、协议与执行门
-正确，不比较“我们的技术方案与 prior 有何创新差异”；Stage-1B 如实映射方法路径、覆盖与邻近性，
-不作创新性胜负裁决；Stage-1C 基于完整证据形成候选问题/缺口假设并选题，但不把假设冻结成技术
-贡献。技术方案的创新性必须从 Stage-2A 的最近 prior 复现与方案探索中收敛，在 Stage-2B 收敛为合格
-paper candidate，最终在 Stage‑3 独立 paper 仓的预注册 confirmatory 中验证（续91）。
-“发现直接邻近 prior”在 Stage-1A/1B 是路由与覆盖事实，不是杀死方向或迫使提前设计差异化方案。
+**When novelty is decided (owner ruling ②, 2026-07-21).** Stage-1A only guarantees that the problem,
+identity, routing, protocol, and execution gates are correct; it does not compare "how our technical
+approach differs from prior work". Stage-1B maps method paths, coverage, and proximity faithfully and
+issues no novelty verdict. Stage-1C forms candidate problems and gap hypotheses from the complete
+evidence and selects the topic, but does not freeze a hypothesis into a technical contribution. The
+novelty of a technical approach must converge out of the closest-prior reproduction and approach
+exploration in Stage-2A, converge into a qualified paper candidate in Stage-2B, and finally be
+validated by the pre-registered confirmatory work in the standalone Stage-3 paper repo (continuation
+entry 91). "We found a directly adjacent prior" is a routing and coverage fact in Stage-1A/1B; it
+does not kill a direction and does not force an early differentiated design.
 
-**exposure 记账（四字段,与阶段声明同报,禁止无范围的「0 次」）**：
-`current_activity_stage` / `new_model_touches_since_gate_freeze`（附起算 commit）/
-`cumulative_model_touches`（项目累计,非零即写非零）/ `legacy_experiments =
-INHERITED_PRIOR_EXPOSURE`（历史实验不删除、不降格、不假装未发生;是后续复现、数据切分与
-假设冻结必须排除或分层处理的 exposure union,正典 =
-[[2026-07-18-inherited-prior-exposure-union]]）。
+**Exposure accounting (four fields, reported alongside the stage declaration; an unscoped "0 times"
+is forbidden):** `current_activity_stage` / `new_model_touches_since_gate_freeze` (with the commit it
+counts from) / `cumulative_model_touches` (project cumulative; if it is non-zero, write the non-zero
+number) / `legacy_experiments = INHERITED_PRIOR_EXPOSURE` (historical experiments are never deleted,
+never downgraded, and never treated as if they had not happened; they are the exposure union that
+later reproduction, data splitting, and hypothesis freezing must exclude or stratify — canonical in
+[[2026-07-18-inherited-prior-exposure-union]]).
 
-**墓碑（供审计,勿再引用为现行语义）**：2026-07-18 前的「Stage-1B = 方向性原型探索」语义与
-续40 排序（1A→1B 探针→1C 双证据收官）由本节 dated supersession 取代——方向性原型自此属
-**Stage-2A**;07-16 裁决「survey 执行仍是 1A」的**目的**（禁止误称提前进阶段）由新表继承并
-加强（连 smoke 都推至 2A）。触发 = v4 博导复审 §1.1 + owner 裁决①（Decision-Log 续65）。
+**Tombstone (for audit; do not cite as current semantics).** The pre-2026-07-18 reading of
+"Stage-1B = directional prototype exploration" and the continuation-entry-40 ordering (1A → 1B probe
+→ 1C dual-evidence closeout) are superseded by the dated supersession in this section — directional
+prototypes belong to **Stage-2A** from that point on. The **purpose** of the 07-16 ruling that
+"survey execution is still 1A" (forbidding a premature claim of stage advancement) is inherited and
+strengthened by the new table, which pushes even a smoke run to 2A. Trigger: v4 doctoral re-review
+§1.1 plus owner ruling ① (Decision-Log continuation entry 65).
 
-**证据等级纪律**：证据永远保持其产生阶段的等级——Stage-1/2 数字在 Stage‑3 paper 仓的预注册
-confirmatory 重建立之前一直是 hypothesis-grade（续91；Stage-2B 产出的是 candidate-grade 设计与
-有界验证，不是发表级证据）。记录 append-only——重定级走带日期的 reflection 文档，绝不改写。读
-2026-07 之前的记录时套用此透镜（彼时阶段名按墓碑映射）。
+**Evidence-grade discipline.** Evidence always keeps the grade of the stage that produced it:
+Stage-1/2 numbers stay hypothesis-grade until they are re-established by pre-registered confirmatory
+work in the Stage-3 paper repo (continuation entry 91; what Stage-2B produces is candidate-grade
+design and bounded validation, not publication-grade evidence). Records are append-only — a
+regrading goes through a dated reflection document and never a rewrite. Apply this lens when reading
+anything written before 2026-07 (stage names of that era map through the tombstone).
 
-## 资源姿态三阶段（owner 2026-07-15）——与「研究流程三阶段」同名异构，勿混
+## Three phases of resource posture (owner, 2026-07-15) — same name, different structure from the three research-process stages; do not conflate them
 
-**全力摸高 → 持续整合 → 成本压降**（第三阶段往往对应第三类论文）。
+**Reach for the ceiling → consolidate continuously → drive cost down** (the third phase often
+corresponds to a third kind of paper).
 
-- 前期**预算不限定**——先探「这套方案能把能力天花板顶到多高」，「能到多高」本身就是第一
-  阶段的科学产出（预算照实记录、不设 cap）。
-- **勿用第③阶段判据（等预算增量、成本归一）评估第①阶段方案的可行性**；等预算类对照一律
-  标 `PHASE-3_TOOL` 延后启用。
-- Why：过早预算归一会系统性杀死天花板探索——等预算下无增量就砍方向，将永远发现不了「贵但
-  能到达的高点」；高点存在，②③阶段的整合与压降才有目标空间。归因严谨在①阶段的正确用法
-  是「记录预算、事后归因」，不是「预算约束前置进设计」。
+- Early on the **budget is not bounded** — first find out "how high this approach can push the
+  capability ceiling". "How high it can go" is itself the scientific output of the first phase
+  (record the budget faithfully, set no cap).
+- **Do not use phase-③ criteria (equal-budget deltas, cost normalization) to judge the feasibility of
+  a phase-① approach**; every equal-budget comparison is labelled `PHASE-3_TOOL` and deferred.
+- Why: normalizing budget too early systematically kills ceiling exploration. Cutting a direction
+  because it shows no gain at equal budget means never discovering the "expensive but reachable"
+  high point; only once that high point is known do the consolidation and cost reduction of phases ②
+  and ③ have a target to aim at. The rigorous use of attribution in phase ① is "record the budget and
+  attribute afterwards", not "push the budget constraint forward into the design".
 
-## 理论轨——按 study 在 Stage‑2 重构（2026-08-03 起）
+## Theory track — rebuilt per study in Stage-2 (from 2026-08-03)
 
-程序级 Lean 形式层已退役（原 `proofs/tfrl/` 仅存 Git 历史）：分析/调研阶段不再建通用公式库，
-这是 Stage‑1B 过量设计的复盘结论。形式化义务转移至各获准 study 的 Stage‑2，且**不同研究对象
-各建各的证明**：证明对象限定为该 study 自己的承重主张——给出**正确性证明**与**收敛证明**
-（静态恒等式不是结果）；工程实现必须与定理是**同一对象**（双轨：代码的算子 ⟷ 定理的算子）；
-收敛通常需要**显式约束项**兜住问题边缘（信任域、预算帽、慢漂移前提、奖励误差界），先证
-无约束过程不收敛、再证有约束过程收敛。W 时代的理论轨记录仅存 Git 历史与归档。
+The program-level Lean formal layer is retired (the former `proofs/tfrl/` survives only in Git
+history): the analysis and survey stages no longer build a general formula library, which is the
+retrospective conclusion on Stage-1B over-design. The formalization obligation moves into Stage-2 of
+each admitted study, and **each research object builds its own proofs**: the proof object is limited
+to that study's own load-bearing claims, giving a **correctness proof** and a **convergence proof**
+(a static identity is not a result); the engineering implementation and the theorem must be the
+**same object** (dual track: the operator in the code ⟷ the operator in the theorem); convergence
+usually needs an **explicit constraint term** to hold the edge of the problem (trust region, budget
+cap, slow-drift premise, reward error bound), proving first that the unconstrained process does not
+converge and then that the constrained one does. The W-era theory-track records survive only in Git
+history and the archive.

@@ -77,7 +77,10 @@ STAGE_TRUTH_SURFACES = (
     RESEARCH_OBJECTIVE_PATH,
     CONTROL_PLANE_PATH,
 )
-STAGE_TRUTH_FORBIDDEN_PHRASES = ("validated in stage-2b", "在 stage-2b 验证")
+# The former Chinese variant of this phrase was dropped on 2026-08-15: every
+# stage-truth surface is now English-only, and `ai_context_surface_check`
+# fails closed on any CJK character there, which strictly subsumes it.
+STAGE_TRUTH_FORBIDDEN_PHRASES = ("validated in stage-2b",)
 
 
 class StudyWorkspaceError(RuntimeError):
@@ -376,7 +379,7 @@ def validate_cross_source_truth(root: Path = REPO) -> None:
             raise StudyWorkspaceError(
                 f"experiment index ledger header for {slug} lacks required exposure columns "
                 f"{missing_columns}; prose mentions do not count — header cells are the "
-                "authority (2026-08-03 visibility rule, 续92)"
+                "authority (2026-08-03 visibility rule, continuation entry 92)"
             )
 
 
@@ -414,7 +417,7 @@ def validate_stage_truth(root: Path = REPO) -> None:
                 raise StudyWorkspaceError(
                     f"stage-truth drift: {relative} still contains {phrase!r}; final "
                     "validation and publication-grade claims belong to Stage-3 in the "
-                    "paper repo (续91/续92)"
+                    "paper repo (continuation entries 91/92)"
                 )
 
 

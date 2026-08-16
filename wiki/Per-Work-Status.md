@@ -16,7 +16,7 @@
   2026-08-04; repo `studies/speech-aware-evidence-acquisition/` (private remote) with the freeze sheet
   in `wiki/experiments/speech-aware-evidence-acquisition/`. General/environmental audio is excluded;
   local downloaded bytes are retained globally. Innovation converges in Stage‑2; the study ends at
-  qualified paper candidates. **Paper-scale stop line (续91):** production-scale confirmatory, final
+  qualified paper candidates. **Paper-scale stop line (continuation entry 91):** production-scale confirmatory, final
   superiority claims and manuscripts require a separately admitted `papers/<slug>` repo via
   `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` — never the study repo.
   Next: close model-free E0 (D1–D4) plus runtime receipt, then the R0 slice.

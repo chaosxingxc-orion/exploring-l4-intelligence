@@ -1,6 +1,7 @@
 # Exploring L4 Intelligence
 
-> **English** | [中文](README_CN.md)
+> Authored in English. Every document in this program is English-only, and every input is
+> translated to English before it reaches a model.
 >
 > Repo slug: **`exploring-l4-intelligence`** — charting a path toward L4 ("Innovator") intelligence.
 

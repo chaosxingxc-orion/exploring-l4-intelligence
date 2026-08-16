@@ -6,7 +6,7 @@ program's cumulative literature infrastructure.
 
 | Need | Route | Loading rule |
 |---|---|---|
-| Fulltext fetch ledger (append-only; FETCH 即登记) | `2026-07-17-sf-fulltext-ledger.jsonl` | Targeted `rg` only; payload bytes live outside Git under `$SPEECHRL_DATA_DIR/survey-fulltext/` |
+| Fulltext fetch ledger (append-only; every FETCH is registered) | `2026-07-17-sf-fulltext-ledger.jsonl` | Targeted `rg` only; payload bytes live outside Git under `$SPEECHRL_DATA_DIR/survey-fulltext/` |
 | Long-lived paper census, claims, evidence records, official-metadata receipts | `registry/` | Targeted lookup only; append-only, cross-campaign |
 | Audit artifact blob registry | `sf-audit-artifact-registry.json` | Machinery for `scripts/survey/sf_audit_immutability_check.py` |
 | Mutable exploration for a live campaign | `workbench/<campaign>/` | Never default context and never a completion claim |

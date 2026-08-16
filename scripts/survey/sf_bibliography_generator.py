@@ -726,9 +726,22 @@ def validate_receipts(receipts: list[dict[str, Any]]) -> list[str]:
         )
         if not normalized.get("title") or not normalized.get("authors"):
             failures.add("PLACEHOLDER_OR_EMPTY_METADATA")
+        # The two CJK literals are legacy-data detectors, not prose: they are the
+        # placeholder strings written by the pre-2026-08 registry tooling
+        # ("registered, pending read" and "author on the official page"). They stay
+        # verbatim because removing them would stop matching records that still
+        # carry them; new placeholders are English.
         if any(
             token.casefold() in combined.casefold()
-            for token in ("登记待读", "作者见官方页", "TBD", "UNKNOWN_AUTHOR", "placeholder")
+            for token in (
+                "登记待读",
+                "作者见官方页",
+                "registered pending read",
+                "author on official page",
+                "TBD",
+                "UNKNOWN_AUTHOR",
+                "placeholder",
+            )
         ):
             failures.add("PLACEHOLDER_OR_EMPTY_METADATA")
     return sorted(failures)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """arXiv full-text fetcher (correction #4B / amendment-7 — owner full-text doctrine
-2026-07-16: 承重阅读对象 = 论文全文,不是 abs 摘要页).
+2026-07-16: the load-bearing reading object is the paper full text, not the abstract page).
 
 Per arXiv ID fetches BOTH renditions and persists them OUTSIDE git (data drive):
   <data-dir>/<id>/<id>.pdf      — PDF rendition   (arxiv.org/pdf/<id>)

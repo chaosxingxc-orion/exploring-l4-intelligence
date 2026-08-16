@@ -3,7 +3,7 @@
 
 The full promotion machinery (candidate bundles, promotion receipts, per-entry
 schema, ``--require-installed`` checkout proof) is intentionally deferred until
-the first real paper admission (Decision-Log-2026-08 续91/续92). Until that
+the first real paper admission (Decision-Log-2026-08 continuation entries 91/92). Until that
 machinery extends this checker, the paper surface is machine-frozen at zero
 state: a strict empty registry, no child checkouts or stray files, the ignore
 rule present, and the control-plane count equal to zero. Any registered paper

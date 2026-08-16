@@ -31,27 +31,6 @@ everything is unified in `fetch-data.sh`. Full tables + env knobs: `docs/data.md
 
 ---
 
-## 中文
-
-模型权重与数据集（≈650 GB）**有意不进 git**——GitHub 只放代码、文档和下载脚本。权威的资产清单（每个
-模型与数据集、来源、镜像、环境变量）是仓库的
-[`docs/data.md`](https://github.com/chaosxingxc-orion/exploring-l4-intelligence/blob/master/docs/data.md)。
-
-**放在哪：** `speechrl-data/` 现在在 **E 盘**——WSL 侧 `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data`（2026-07-09 从 D 盘迁出；仓库代码仍在 D 盘）。
-按 `${SPEECHRL_DATA_DIR:-<repo>/speechrl-data}` 解析，且已在 WSL `~/.bashrc` 中把 `SPEECHRL_DATA_DIR` 固化为该 E 盘路径（仓库根的回退默认已不再存放数据）；ext4 `~/speechrl-data/` 只放 MLflow 存储。目录：`models/`、`datasets/`、`repos/`、`manifests/`、
-`checkpoints/`、`mlruns/`、`hf-cache/`。
-
-**拉取/审计：** 统一的、由 lockfile 驱动的下载器复现完全一致的数据集——各团队跑同一条命令得到相同数据
-（HF 资产锁定到记录的 commit）：`bash scripts/data/fetch-data.sh --list`（看清单）、
-`bash scripts/data/fetch-data.sh`（下载缺失项，跳过已完成）、`bash scripts/data/inventory.sh`（审计）。
-
-**依赖：** 需要 speechrl venv（`hf` + `modelscope` CLI）与 `aria2c`。缺失时下载器会提示，并指向
-`bash scripts/env-setup.sh`（完整栈）或 `bash scripts/data/fetch-data.sh --install-deps`（仅轻量下载依赖）。
-默认镜像 hf-mirror.com + ModelScope。原 `wave0_fetch.sh` 引擎与一次性脚本已退役，全部统一到 `fetch-data.sh`。
-完整模型/数据表与环境变量见 `docs/data.md`。
-
----
-
 ## Relocating the data root (cross-drive move runbook)
 
 `speechrl-data/` is env-var-addressed (`SPEECHRL_DATA_DIR`), so moving it across drives is mostly a
@@ -80,16 +59,8 @@ the bytes. The 2026-07-09 D:→E: move (649.5 GB / 555,618 files) is the referen
    code is env-var-addressed and stayed clean). The knowledge base
    (`$SPEECHRL_KB_DIR/knowledge_base/*/values.jsonl`, field `key_audio_ref`) had 100 baked-in
    `/mnt/d/...` paths; rewrite old→new with a `.bak` backup + verify a sample resolves and JSON parses.
-6. **Update docs + the one hardcoded fetch script** (`CLAUDE.md`/`AGENTS.md`/`README(_CN)`/`docs/data.md`/
+6. **Update docs + the one hardcoded fetch script** (`CLAUDE.md`/`AGENTS.md`/`README.md`/`docs/data.md`/
    `docs/setup.md`/this page + `scripts/data/fetch-qwen3-omni-gguf.sh`). The repo/code itself **stays
    put** — only the data root moves, so code paths like `common/src` absolute refs are unaffected.
 
 > Don't declare "done" at the delete step — steps 5–6 are where cross-drive moves silently rot.
-
-**中文速记：** 换盘搬 `speechrl-data` 主要是 robocopy 复制，但真正的风险是"派生了旧绝对路径"的东西：
-(1) robocopy 退出码 **1=成功**，看 FAILED 列，`/NDL` 不是 `/NDD`；(2) 删源前多工具字节校验（robocopy +
-PowerShell 计数 + 最大文件 SHA-256），防"空变量 == 空变量 → 假 OK"；(3) 删模型前确认没有 llama-server
-mmap 占用，用 `rd /s /q` 删；(4) 环境变量三层覆盖：`~/.bashrc`（放交互守卫**之前**）+ **`WSLENV`**（覆盖
-非交互 `wsl bash <脚本>` 分离式运行，免 sudo，对新进程生效）；(5) 反思阶段 grep **下游存储**（KB
-`values.jsonl` 的 `key_audio_ref` 曾有 100 条 `/mnt/d` 死路径），不只是代码；(6) 更新文档 + 唯一硬编码的
-`fetch-qwen3-omni-gguf.sh`。**删完不等于做完。**

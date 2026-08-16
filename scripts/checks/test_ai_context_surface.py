@@ -150,7 +150,7 @@ class AiContextSurfaceTests(unittest.TestCase):
 
     def test_one_hot_file_within_budget_passes(self) -> None:
         relative_path = "wiki/Project-Thesis.md"
-        raw = "# 项目论文\r\n".encode("utf-8")
+        raw = "# Project Thesis\r\n".encode("utf-8")
         self.write(relative_path, raw)
 
         failures = evaluate_manifest(
@@ -1548,7 +1548,13 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         for token in (*required_roles, *required_routes):
             with self.subTest(token=token):
                 self.assertIn(token, policy)
-        for column in ("谁读取", "默认加载", "权威性", "进入条件", "搬运/退出条件"):
+        for column in (
+            "Who reads it",
+            "Default load",
+            "Authority / mutability",
+            "Entry condition",
+            "Move / exit condition",
+        ):
             with self.subTest(column=column):
                 self.assertIn(column, policy)
 
@@ -1566,32 +1572,55 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         self.assertEqual(sorted(positions), positions)
 
         required_meanings = (
-            "第三次 amendment 或 correction",
-            "超过 context budget",
+            "third amendment or correction",
+            "exceeds its context budget",
             "reviewer Gate MAJOR",
             "handoff",
             "stage/release boundary",
             "competing active claims",
-            "第三次修正必须立即折叠",
-            "第四次修正",
-            "禁止",
+            "the third correction must be folded in immediately",
+            "a fourth correction must never be added",
             "stage-0",
             "current manifest",
             "audit registry",
             "inbound reference",
             "Git blob",
             "git mv",
-            "补丁链",
+            "patch chain",
             "active truth",
         )
+        collapsed = re.sub(r"\s+", " ", policy)
         for token in required_meanings:
             with self.subTest(token=token):
-                self.assertIn(token, policy)
+                self.assertIn(token, collapsed)
 
     def test_executable_collaboration_policy_validator_accepts_real_policy(self) -> None:
         policy = self.read_text("wiki/AI-Collaboration.md")
 
         self.assertEqual([], surface.validate_collaboration_policy(policy))
+
+    def test_english_only_validator_accepts_english_and_rejects_cjk(self) -> None:
+        self.assertEqual([], surface.validate_english_only("wiki/Home.md", "# Home\n\nPlain ASCII.\n"))
+        self.assertEqual(
+            [],
+            surface.validate_english_only(
+                "wiki/Home.md", "Typography — en/em dashes, é, ≤ and § stay legal.\n"
+            ),
+        )
+        for sample in ("中文", "あ", "（fullwidth）", "、"):
+            with self.subTest(sample=sample):
+                failures = surface.validate_english_only("wiki/Home.md", f"ok\n{sample}\n")
+                self.assertEqual(
+                    ["non-english-active-document"], failure_codes(failures)
+                )
+                self.assertIn("wiki/Home.md:2", failures[0])
+
+    def test_every_english_only_path_is_free_of_cjk(self) -> None:
+        for path in sorted(surface.ENGLISH_ONLY_PATHS):
+            with self.subTest(path=path):
+                self.assertEqual(
+                    [], surface.validate_english_only(path, self.read_text(path))
+                )
 
     def test_executable_collaboration_policy_validator_rejects_semantic_mutations(self) -> None:
         policy = self.read_text("wiki/AI-Collaboration.md")
@@ -1612,30 +1641,31 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         )
         mutations = {
             "trigger-weakened": policy.replace(
-                "以下任一事件先发生就立即 Consolidate：",
-                "以下事件可以忽略：",
+                "Consolidate immediately when any of the following happens first:",
+                "The following events may be ignored:",
                 1,
             ),
             "audit-overwrite": policy.replace(
-                "round 件与 `consolidation-receipt.json` 首个 commit 起 immutable；index append-only",
-                "round 件与 receipt 允许覆写；index 可改写",
+                "round artifacts and `consolidation-receipt.json` are immutable from their "
+                "first commit; the index is append-only",
+                "round artifacts and receipts may be rewritten; the index may be rewritten",
                 1,
             ),
             "role-row-swap": "\n".join(swapped) + "\n",
             "exit-reversed": policy.replace(
-                "已注册件永不移动/改写",
-                "已注册件可以移动并覆盖",
+                "registered artifacts are never moved or rewritten",
+                "registered artifacts may be moved and overwritten",
                 1,
             ),
             "step-reordered": step_reordered,
             "receipt-order-removed": policy.replace(
-                "先 commit receipt、append 注册",
-                "稍后再处理 receipt",
+                "receipt first, then append the registration",
+                "receipt handled at some later point",
                 1,
             ),
             "epoch-continuity-removed": policy.replace(
-                "epoch 从 1 连续递增",
-                "epoch 可任意编号",
+                "Epochs increase from 1 without gaps",
+                "Epochs may be numbered arbitrarily",
                 1,
             ),
         }
@@ -1664,7 +1694,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.assertIn("Research-Objective.md` ≤5KB", guide)
             self.assertIn("Per-Work-Status.md ≤8KB", guide)
             self.assertIn("survey/README.md ≤4KB", guide)
-            self.assertNotIn("搬运/退出条件", guide)
+            self.assertNotIn("Move / exit condition", guide)
 
         contributing = self.read_text("CONTRIBUTING.md")
         for route in (
@@ -1757,7 +1787,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                 self.assertRegex(text, r"(?:Stage‑1C|direction-local|Program study pipeline)")
                 self.assertRegex(
                     text,
-                    r"(?i)H5[\s\S]{0,220}(?:pending|withhold|withheld|待|尚缺|不得进入)",
+                    r"(?i)H5[\s\S]{0,220}(?:pending|withhold|withheld|missing|not admitted)",
                 )
                 for stale in ("2225c48", ".wiki-tmp", "4506900"):
                     self.assertNotIn(stale, text)

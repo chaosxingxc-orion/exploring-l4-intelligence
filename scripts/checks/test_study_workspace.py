@@ -218,7 +218,7 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         # over the whole document would pass; header parsing must fail.
         index.write_text(
             "---\n" + frontmatter + "---\n\n"
-            "每条记录必须带 split role、split identity hash 与 consumed 标记。\n"
+            "Every record must carry a split role, a split identity hash, and a consumed mark.\n"
             "| experiment_id | date |\n|---|---|\n",
             encoding="utf-8",
         )
@@ -249,8 +249,9 @@ class StudyWorkspaceContractTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "stage-truth drift"):
             study_workspace.validate_stage_truth(self.root)
+        # Normalization covers both letter case and the non-breaking hyphen.
         (self.root / "CLAUDE.md").write_text(
-            "# CLAUDE.md\n创新在 Stage‑2B 验证。\n", encoding="utf-8"
+            "# CLAUDE.md\nInnovation is VALIDATED IN STAGE‑2B.\n", encoding="utf-8"
         )
         with self.assertRaisesRegex(study_workspace.StudyWorkspaceError, "stage-truth drift"):
             study_workspace.validate_stage_truth(self.root)

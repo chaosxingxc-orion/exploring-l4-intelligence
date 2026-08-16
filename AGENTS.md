@@ -2,6 +2,29 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
+## First principles
+
+These override every other convention here. Where a downstream document disagrees, this section wins.
+
+1. **English before the model.** Everything that enters a model context must be English — owner
+   instructions, paper excerpts, log lines, review comments, dataset cards, pasted files, tool
+   output. If a source is in another language, translate it to English first and pass the
+   translation, never the original. Keep the source addressable (path, commit, or quoted hash) so
+   the translation stays auditable, never drop content while translating, and where a term has no
+   faithful English form keep it verbatim and gloss it once.
+2. **English-only documents.** Every document this program authors is written in English: root
+   Markdown, `wiki/`, `docs/`, study repositories, code comments and docstrings, specs, plans,
+   check reports, decision records, and audit submissions. Non-English text in a mutable document
+   is a defect; repair it the next time that file is touched.
+3. **Conventions are executable English.** Rules are stated in English, in the imperative, and are
+   preferably enforced by a gate under `scripts/checks/` rather than by prose alone.
+
+Two narrow carve-outs. Immutable records (`wiki/audit/`, `wiki/archive/`) and any hash-pinned bytes
+are never rewritten in place — supersede them with an English successor instead.
+`wiki/AI-Collaboration.md` and its oracle in `scripts/checks/ai_context_surface_check.py` still key
+on Chinese section identifiers; converting them is one paired change (policy + oracle + tests), not
+a drive-by edit.
+
 ## Repository
 
 Umbrella governance repo for a research program on training-free, reward-guided inference-time control
