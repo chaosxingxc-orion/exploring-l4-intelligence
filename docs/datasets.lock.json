@@ -20,6 +20,7 @@
     "speech-aware-annotations": "Annotation-only overlays that carry no speech bytes of their own: TED-EL (TED-LIUM3 audio remains source-unstable), HALAS over Earnings22, and the SQuAD v1.1 dev reference used to reconstruct the pre-deletion Spoken-SQuAD question list.",
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
+    "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -1876,6 +1877,219 @@
       "scope_note": "Deliberately scoped to speech-and-linguistic-content configs. EXCLUDED by the research boundary (sound/music, AudioSet- or FreeSound-derived): audiocaps_test, audiocaps_qa_test, wavcaps_test, wavcaps_qa_test, clotho_aqa_test, mu_chomusic_test, MMAU-mini-do-not-use. EXCLUDED as paralinguistic rather than linguistic content: iemocap_emotion/gender, voxceleb_accent/gender, meld_*. EXCLUDED as already governed at original-source identity: librispeech_test_clean/other, covost2_*, spoken_squad_test, slue_p2_sqa5_test, earnings21/22_test, aishell_1_zh_test. HELD pending an owner licence ruling: cn_college_listen_mcq_test (exam-recording provenance, no declared licence anywhere) and public_sg_speech_qa_test (IMDA National Speech Corpus carries its own separate terms of use). HELD as out-of-budget and separately licensed: peoples_speech_test, gigaspeech_test, tedlium3_test and tedlium3_long_form_test (TED-LIUM 3 is CC BY-NC-ND, whose no-derivatives term conflicts with derived feature extraction), seame_dev_* (LDC-licensed, paid).",
       "research_role": "Speech QA and speech-instruction evaluation configs for USE-side contrasts, plus an English ASR reference set under an unambiguous upstream licence.",
       "claim_limit": "These AudioBench repackagings declare NO licence of their own — neither in the dataset card nor in the README, which carry only citations. Upstream terms therefore govern each config and were the selection criterion; Common Voice 15 is CC0-1.0, while the three TTS-synthesised sets inherit their source-corpus terms (Alpaca is CC BY-NC 4.0, so non-commercial). No redistribution of these bytes; re-derive from upstream if a release is ever needed."
+    },
+    {
+      "name": "meetingqa",
+      "kind": "dataset",
+      "local_subdir": "datasets/meetingqa",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/adobe-research/meetingqa.git"
+      },
+      "revision": "5e3d1fbf4fefb60790d2445ce6721085b274024b",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": [
+        "meeting-minutes-text"
+      ],
+      "status": "COMPLETE",
+      "license": "CC-BY-NC-SA-4.0",
+      "license_note": "DECLARED. The repository LICENSE file is the verbatim Creative Commons legal code whose first line reads \"Attribution-NonCommercial-ShareAlike 4.0 International\" (20849 bytes, sha256 1349a4b6148492b44f629e64eed676612e234fe9a839e4f3b277c1482c8849f1). The NonCommercial and ShareAlike obligations bind every downstream use, so the owner allowance for sources that declare no licence does NOT apply to this record. Commercial use is prohibited and any redistributed derivative must carry the same licence.",
+      "dependencies": [
+        "ami-meeting-corpus"
+      ],
+      "expected_payload": {
+        "size_bytes": 311215568,
+        "files": 255,
+        "qa_instances": 7735,
+        "meetings": 166
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "git_head": "5e3d1fbf4fefb60790d2445ce6721085b274024b",
+        "git_head_date": "2025-09-19T10:34:44-07:00",
+        "payload_files": 255,
+        "payload_size_bytes": 311215568,
+        "payload_manifest_sha256": "80268fe4ee82f5800907374a7d27b2369fc35274de26f4423d23c3442c6c2b80",
+        "license_file_sha256": "1349a4b6148492b44f629e64eed676612e234fe9a839e4f3b277c1482c8849f1",
+        "qa_instance_counts": {
+          "train": 3007,
+          "dev": 2252,
+          "test": 2476,
+          "total": 7735
+        },
+        "multi_span_counts": {
+          "train": 2998,
+          "dev": 2251,
+          "test": 2475
+        },
+        "annotated_transcript_meetings": {
+          "train": 64,
+          "dev": 48,
+          "test": 54,
+          "total": 166
+        },
+        "carrier_join": {
+          "join_key": "the SQuAD-style `title` field and the <AMI_ID>.json transcript filenames are AMI meeting ids",
+          "distinct_meeting_ids": 166,
+          "matched_against_governed_ami_media": 166,
+          "unmatched": 0
+        },
+        "partial_markers": 0,
+        "method": "full git clone at pinned HEAD, per-file SHA-256 manifest, JSON structural row counts and meeting-id closure against the governed AMI corpus",
+        "disposition": "complete extractive-QA annotation overlay; carries no audio of its own"
+      },
+      "consumption_boundary": "Annotation overlay only: MeetingQA ships QA annotations and processed AMI transcripts and no audio. All 166 meeting ids resolve inside the governed ami-meeting-corpus record (171 local meetings), so speech-side use must join against those bytes.",
+      "research_role": "Extractive question answering over meeting transcripts (ACL 2023, Prasad et al.); text-layer QA carrier for the meeting-minutes-agent topic.",
+      "claim_limit": "CC BY-NC-SA 4.0 forbids commercial use and imposes ShareAlike on derivatives; any publication or release path must clear both terms before these annotations are used."
+    },
+    {
+      "name": "qmsum",
+      "kind": "dataset",
+      "local_subdir": "datasets/qmsum",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/Yale-LILY/QMSum.git"
+      },
+      "revision": "83d7768c1f2b4dfeb091385d3dc7e239b8e5bb7e",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": [
+        "meeting-minutes-text"
+      ],
+      "status": "COMPLETE",
+      "license": "MIT",
+      "license_note": "DECLARED. The repository LICENSE file is the verbatim MIT licence, first line \"MIT License\", carrying \"Copyright (c) 2021 Yale-LILY\" (1066 bytes, sha256 8308d90c6321345cbd4adc8b479ddbece28ddbdca44f3f0b9bf033c3999a4a80).",
+      "dependencies": [
+        "ami-meeting-corpus"
+      ],
+      "expected_payload": {
+        "size_bytes": 124261854,
+        "files": 718,
+        "meetings": 232,
+        "queries": 1810
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "git_head": "83d7768c1f2b4dfeb091385d3dc7e239b8e5bb7e",
+        "git_head_date": "2023-08-29T09:07:05+08:00",
+        "payload_files": 718,
+        "payload_size_bytes": 124261854,
+        "payload_manifest_sha256": "adcd009fb7f0a244bd73947503745194d973ac057009f67e6ae42d5d236f2949",
+        "license_file_sha256": "8308d90c6321345cbd4adc8b479ddbece28ddbdca44f3f0b9bf033c3999a4a80",
+        "split_counts": {
+          "train": {
+            "meetings": 162,
+            "general_queries": 162,
+            "specific_queries": 1095
+          },
+          "val": {
+            "meetings": 35,
+            "general_queries": 35,
+            "specific_queries": 237
+          },
+          "test": {
+            "meetings": 35,
+            "general_queries": 37,
+            "specific_queries": 244
+          },
+          "total_meetings": 232,
+          "total_queries": 1810
+        },
+        "domain_counts": {
+          "Product_AMI": 137,
+          "Academic_ICSI": 59,
+          "Committee": 36
+        },
+        "carrier_join": {
+          "join_key": "Product-domain per-meeting filenames are AMI meeting ids",
+          "product_meetings": 137,
+          "matched_against_governed_ami_media": 137,
+          "unmatched": 0,
+          "icsi_audio_held_locally": false
+        },
+        "partial_markers": 0,
+        "method": "full git clone at pinned HEAD, per-file SHA-256 manifest, JSONL structural counts and AMI meeting-id closure against the governed AMI corpus",
+        "disposition": "complete query-based summarization overlay; carries no audio of its own"
+      },
+      "consumption_boundary": "Text-only: QMSum ships meeting transcripts plus query/summary annotations and no audio. The Product domain is AMI and joins to the governed AMI media by meeting id; the Academic domain is ICSI, whose audio is NOT held locally; the Committee domain is parliamentary transcripts with no local audio counterpart.",
+      "research_role": "Query-based multi-domain meeting summarization (NAACL 2021, Zhong et al.); text-layer ORG/SUPPLY carrier for the meeting-minutes-agent topic.",
+      "claim_limit": "Only the 137 Product-domain meetings have governed local audio; ICSI and Committee rows are transcript-only and cannot support any speech-side claim."
+    },
+    {
+      "name": "m3-slu",
+      "kind": "dataset",
+      "local_subdir": "datasets/m3-slu",
+      "source": {
+        "kind": "hf-multirepo",
+        "repos": [
+          {
+            "id": "M3-SLU/M3-SLU-Task1",
+            "revision": "c3836ecf34f2a1e7c4efb75ed84cb6e5f64cafe2",
+            "parquet_shards": 44,
+            "upstream_bytes": 14998977333
+          },
+          {
+            "id": "M3-SLU/M3-SLU-Task2",
+            "revision": "5ee25ccd444daadc40f331dc406b07f9617d66a7",
+            "parquet_shards": 111,
+            "upstream_bytes": 27762966561
+          }
+        ]
+      },
+      "revision": "M3-SLU/M3-SLU-Task1@c3836ecf34f2a1e7c4efb75ed84cb6e5f64cafe2; M3-SLU/M3-SLU-Task2@5ee25ccd444daadc40f331dc406b07f9617d66a7",
+      "lifecycle": "ANNOTATION_ONLY",
+      "profiles": [
+        "meeting-minutes-text"
+      ],
+      "status": "PARTIAL",
+      "license": "cc-by-4.0",
+      "license_note": "DECLARED. Both dataset cards carry `license: cc-by-4.0` verbatim in their YAML front matter and the Hugging Face repo metadata reports gated=false, private=false for both. Verbatim card copies are stored under datasets/m3-slu/upstream-cards/ with their SHA-256 in the local acquisition receipt.",
+      "dependencies": [
+        "ami-meeting-corpus",
+        "meld"
+      ],
+      "expected_payload": {
+        "size_bytes": 28103474,
+        "files": 7,
+        "rows": 10908
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "acquisition_mode": "TEXT_LAYER_ONLY",
+        "payload_files": 7,
+        "payload_size_bytes": 28103474,
+        "upstream_parquet_bytes": 42761943894,
+        "transfer_ratio": 0.000657,
+        "row_counts": {
+          "task1_preview": 50,
+          "task1_sample": 3780,
+          "task2_preview": 50,
+          "task2_sample": 7028,
+          "total": 10908
+        },
+        "data_source_counts": {
+          "task1_sample": {
+            "CHIME-6": 532,
+            "MELD": 51,
+            "MultiDialog": 2111,
+            "AMI": 1086
+          },
+          "task2_sample": {
+            "CHIME-6": 1006,
+            "MELD": 100,
+            "MultiDialog": 3791,
+            "AMI": 2131
+          }
+        },
+        "duplicate_ids": 0,
+        "rows_with_empty_script": 0,
+        "shard_lfs_sha256_recorded": 155,
+        "method": "Hugging Face pinned-revision tree listing with per-shard LFS SHA-256 recorded, then pyarrow column projection over HTTP range requests to transfer only the text columns; local per-file SHA-256 receipt",
+        "disposition": "text layer complete for both tasks at the pinned revisions; the audio column was deliberately not transferred"
+      },
+      "access_note": "RELEASE STATUS observed 2026-08-17: M3-SLU is fully released and ungated on Hugging Face. The two full repos supersede the earlier 100-row M3-SLU-sample / -Task1-sample / -Task2-sample repos, whose cards still read \"The full dataset (10K+ samples) will be released later in 2025\". The released row counts (3780 + 7028 = 10808) are below the arXiv:2510.19358 Table 3 figures (4926 + 7947 = 12873); the AMI Task 2 count matches exactly at 2131.",
+      "consumption_boundary": "Text layer only. This record holds id/instruction/question/answer/script/n_speakers/data_source for every released row and NO audio. The audio-bearing parquet release is 42.76 GB across both tasks and can be fetched later from the pinned revisions. M3-SLU ids are corpus-tagged sequence ids (ami_task1_N, chime_task1_N, meld_task2_N, multi_task2_N), so the release exposes no source meeting id and no per-meeting join to the governed AMI corpus is possible from the text layer alone.",
+      "research_role": "Speaker-attributed QA and speaker-attribution matching over multi-party speech (LREC 2026 submission, arXiv:2510.19358); QA-face probe carrier for the meeting-minutes-agent topic.",
+      "claim_limit": "Status is PARTIAL: the benchmark's audio is not held locally, so no end-to-end speaker-attributed audio claim can rest on this record until the 42.76 GB audio release is fetched under its own decision."
     }
   ]
 }
