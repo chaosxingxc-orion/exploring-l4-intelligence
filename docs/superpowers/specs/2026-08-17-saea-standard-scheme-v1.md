@@ -85,7 +85,28 @@ Copy-rate is a first-class metric on every arm of every probe.
 `score(sample, response)`, `extract_consumption(sample, supply, response)`. One adapter per
 carrier; the runner, contracts, exposure discipline and flight lock are shared.
 
-### 4.6 Runner
+### 4.6 Within-episode dialogue history (lock, fidelity, anti-accumulation)
+
+Scope: a single episode only. Cross-episode history stores and their retrieval are memory
+research and out of scope (§7).
+
+- **Lock**: history is an append-only sequence of the content-hashed per-turn artifacts
+  (ObsPacket, SupplyPacket, core response, ConsumptionTrace). No entry is ever rewritten;
+  a correction appends a successor entry naming the hash it supersedes.
+- **Fidelity**: each entry stores what was actually observed and emitted — audio_ref, raw
+  hypothesis, and the exact prompt block — never a paraphrase. Any digest is a separate
+  artifact carrying `derived_from` hashes, so summarization loss is visible, not silent.
+- **Provenance**: history-derived content re-entering a prompt is `self-supplied` tier — a
+  hypothesis, never knowledge. It passes the same supply gate (threshold, dose, form) as
+  external evidence and cannot back a legal-tier claim unless the self-supplied rung is
+  separately measured.
+- **Anti-accumulation**: the P2 copy law (7/9 blind-copy of supplied text) predicts that
+  re-supplied past outputs are parroted, freezing early errors in. Mandatory mitigations in
+  any multi-turn probe: (i) compact-roster form for history-derived supply (form law), (ii)
+  per-turn copy-rate with a registered tripwire threshold, (iii) periodic zero-history control
+  turns so drift attributable to history is measured, not assumed.
+
+### 4.7 Runner
 One config schema (existing model/dataset/baseline/experiment composition), enforcing
 `contracts.ExecutionPlan` + `assert_execution_scope` (fail-closed), the E0' flight lock, and
 manifest finalization. Zero-supply and supplied arms differ only in `SupplyPacket`.
