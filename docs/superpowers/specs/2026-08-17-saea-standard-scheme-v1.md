@@ -34,7 +34,7 @@ line is deferred wholesale to the future memory-focused studies.
 | L2 | Context-conditioned entity ASR | contextasr-bench | transitional |
 | L3 | SLU (slots/intent) | SLURP (labels acquired + adapter built 2026-08-17; SpokenWOZ candidate) | medium |
 | L4 | Spoken QA / meeting understanding | slue-sqa-5 (librisqa REJECTED 2026-08-17: its QA pairs need no external knowledge — no coupling slot; survey b179634) | high |
-| L5 | Agentic speech (tool use) | Audio2Tool (+ survey candidates) | measured headroom: tool-acc 84.6% vs EM 15.6% |
+| L5 | Agentic speech (tool use) | Audio2Tool (+ survey candidates) | headroom UNMEASURED — the previously quoted 84.6%/15.6% gap is unsourced (prose-only; contradicted by both recoverable archival reads, where tool-acc ≈ EM) and was retired 2026-08-17; the A0 baseline re-fly measures the real gap |
 
 Primary claim surface: the supply-benefit-versus-task-level curve. L1 anchors it at zero; L5
 anchors the headroom. Earnings work is never re-opened as a claim generator.
