@@ -16,13 +16,15 @@ shared rails and "mounting a technique" becomes a config change, not a new pipel
 ## 2. Research object (as ratified)
 
 A standard, fully-instrumented closed-loop scheme for speech-aware agents on a frozen omni core:
-speech-keyed, threshold-gated retrieval from legally-tiered knowledge stores, delivered as
-prompt-level supply (owner ruling 2026-08-17: no logit-level control anywhere). The scheme
-reproduces published consumption findings as calibration, then serves as the testbed on which
-text-agent techniques are mounted and their multimodal transfer measured (use/copy/ignore, dose
-law, price of legality, allocation bound). Runtime memory writes are out of scope (knowledge-only
-ruling 2026-08-16; memory research belongs to future studies): all knowledge stores are built
-offline and are read-only at runtime.
+threshold-gated retrieval from legally-tiered knowledge stores, keyed by task-native queries, and
+delivered as prompt-level supply (owner ruling 2026-08-17: no logit-level control anywhere). The
+scheme reproduces published consumption findings as calibration, then serves as the testbed on
+which text-agent techniques are mounted and their multimodal transfer measured (use/copy/ignore,
+dose law, price of legality, allocation bound). Runtime memory writes are out of scope
+(knowledge-only ruling 2026-08-16; memory research belongs to future studies): all knowledge
+stores are built offline and are read-only at runtime. Speech-keyed multi-view retrieval
+(content/speaker embedding keying) is likewise out of scope by owner ruling 2026-08-17 — that
+line is deferred wholesale to the future memory-focused studies.
 
 ## 3. Capability ladder (task portfolio)
 
@@ -46,29 +48,28 @@ the study boundary.
 ```
             ┌── ORG (offline build) ───────────────────────────┐
             │ legal-tier KB: shipped docs / metadata rosters /  │
-            │ lexicons; multi-view indices (content, speaker,   │
-            │ core-perception); E1' tier fields stamped at build │
+            │ lexicons; E1' tier fields stamped at build time   │
             └───────────────┬──────────────────────────────────┘
 speech ─→ OBS ─→ SUPPLY gate ┴─→ prompt assembly ─→ frozen core ─→ answer
-          │        multi-view retrieval,             (single answer │
-          │        threshold τ, dose D, form F        authority)    ▼
-          │                                              ConsumptionTrace
-          └── views: content emb / speaker emb /          (USE|COPY|IGNORE)
-              core-perception (featcache)                        │
+                   task-native-key retrieval,        (single answer │
+                   threshold τ, dose D, form F        authority)    ▼
+                                                         ConsumptionTrace
+                                                          (USE|COPY|IGNORE)
+                                                                 │
                                           TaskAdapter scoring ←──┘
 ```
 
 ### 4.1 ObsPacket (OBS output)
-`audio_ref{path, sha256}`, `spans[]`, `views{view_id → vector_ref}`, `first_pass` (optional core
-hypothesis; absent in engineering tests), `obs_version`, `hash`. Views are produced by pinned,
-logged, frozen tool-level encoders only (multi-view embedding, no disentanglement research —
-owner ruling 2026-08-17).
+`audio_ref{path, sha256}`, `spans[]`, `first_pass` (optional core hypothesis; absent in
+engineering tests), `obs_version`, `hash`. No embedding-view fields: speech-keyed retrieval is
+out of scope for this study (owner ruling 2026-08-17; deferred to the memory studies).
 
 ### 4.2 EvidenceItem / EvidenceSet (ORG → SUPPLY)
 `EvidenceItem{content, source_ref, span_source, reference_source, tier}` — legality fields reuse
 `core/legality.py` (E1') verbatim; the either-field rule stays machine-enforced: any gold-derived
 field forces ceiling tier, and deployment-tier arms reject ceiling items before flight.
-`EvidenceSet{items[], query_ref, retrieval_params{views, τ, k}, hash}`.
+`EvidenceSet{items[], query_ref, retrieval_params{key_kind, τ, k}, hash}` where `key_kind` names
+the task-native query key (e.g. `task-context`, `first-pass-text`).
 
 ### 4.3 SupplyPacket (SUPPLY → core)
 `form ∈ {roster, text, kv}`, `dose{n_items, token_count}`, `prompt_block`,
@@ -94,7 +95,7 @@ manifest finalization. Zero-supply and supplied arms differ only in `SupplyPacke
 | Edge | Claim | Status |
 |---|---|---|
 | ORG → SUPPLY | legal coverage bounds any supply gain (coverage → gain transfer) | T-NDL measuring (number/date three-way decomposition) |
-| OBS → SUPPLY | multi-view speech keying beats decoded-text keying (N1 killed the latter) | T-INV queued |
+| OBS → SUPPLY | aperture law: global compact supply works where per-span routing is structurally dead | measured (N1: routing recall 0.94%, no usable operating point; kb34: global 10/14 flips) |
 | SUPPLY → USE | dose/form law: compact roster 10/14 flips vs whole-text 7/9 blind-copy | measured (P2, kb34) |
 | USE | copy/use/ignore instrumentation with per-span provenance | built (P2 evaluator → rails) |
 | task level | supply benefit grows with capability level | new primary; L1 anchor measured |
@@ -108,6 +109,7 @@ deployment-tier arm; every inter-module artifact round-trips with a stable hash.
 
 ## 7. Out of scope
 
-Runtime memory writes (future memory studies); logit-level control (`logit_bias` ruled out);
-any second answering LLM; paper-scale confirmatory campaigns (Stage-3, machine-enforced);
+Runtime memory writes AND speech-keyed multi-view retrieval — both deferred to the future
+memory-focused studies (owner rulings 2026-08-16/17); logit-level control (`logit_bias` ruled
+out); any second answering LLM; paper-scale confirmatory campaigns (Stage-3, machine-enforced);
 FSD50K/AudioSet/ESC-50 in any form.
