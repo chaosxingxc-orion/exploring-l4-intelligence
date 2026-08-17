@@ -447,3 +447,40 @@ against memory-bearing priors (e.g. Voice Memory) must state this boundary expli
   intervention on a live run — owner call unless the block is otherwise lost.
 - **Umbrella collision:** five untracked files belong to a parallel session; commit only
   uniquely-named files; never `git add -A` in the umbrella.
+
+## 2026-08-17 — owner ruling chain and dispatch state
+
+Rulings, in order, all ratified in-session:
+
+1. **`logit_bias` rejected.** The claim surface is re-scoped to **prompt-level supply** (per
+   commercial omni endpoints); no logit-level pricing arm is ever flown.
+2. **DEMO lane demoted** to a gated ≤16-request copy-contamination screen (In-Context Fixation
+   risk accepted as the owner's "decoding-noise context pollution" reading).
+3. **Capability-ladder pivot (GO).** Earnings ASR (L1) is harvested and demoted to calibration
+   substrate; the claim surface moves to L2 contextasr-bench, L3 SLURP (acquisition pending),
+   L4 slue-sqa-5 / librisqa / AMI, L5 Audio2Tool. Primary claim: the
+   supply-benefit-versus-task-level curve (L1 anchors ~0 via the copy trap; L5 headroom
+   tool-acc 84.6% vs EM 15.6%). Rationale: a frozen omni never out-transcribes dedicated ASR
+   (the owner's LLM-vs-BERT analogy); its edge is what it does with what it hears. The prior
+   SQA G1 rejection is re-opened for review under ladder criteria.
+4. **B0 rails freeze is the first-priority engineering item.** Architecture spec frozen at
+   `docs/superpowers/specs/2026-08-17-saea-standard-scheme-v1.md` (`07d32a1`), superseding the
+   2026-08-08 unified-agent-abstraction draft.
+5. **Multi-view speech keying scoped OUT** (spec amendment `e5cb9d5`): content/speaker embedding
+   retrieval and its calibration probe (T-INV, cancelled before dispatch) are deferred wholesale
+   to the future memory-focused studies. Retrieval in SAEA is task-native-keyed. This supersedes
+   the same-day speech-keyed wording ratified earlier that morning.
+6. **"Consumption law" demoted** from research object to the scheme's instrument panel
+   (use/copy/ignore, dose law, price of legality, allocation bound), measured per mounted
+   technique; being scooped on individual findings is accepted — reproduction on the standard
+   scheme is calibration, not failure.
+
+Dispatch state (2026-08-17 afternoon): four parallel background agents — (A) carrier byte
+inventory + featcache prebuild campaign (the GPU-saturation prerequisite; per-dataset cache dirs;
+train splits skipped) + split-policy proposals; (B) 2024–2026 SLU/SQA/agentic-speech dataset
+expansion survey with G1' admission verdicts (download nothing); (C) B0 rails implementation
+(typed contracts + TaskAdapter + runner + Audio2Tool adapter, mock-only, views field removed per
+ruling 5); (D) T-NDL number/date three-way decomposition (format vs pre-published-in-ConEC vs
+novel; the KB-worthiness numbers). Study-side artifacts today: P-A2T preregistration DRAFT
+(`b27bad9`, five-arm roster-precision design, all numerics TBD until inventory binds them).
+GPU queue: featcache today → P-A2T + first zero-supply baselines next (T-INV slot released).
