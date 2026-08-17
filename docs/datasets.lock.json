@@ -42,6 +42,32 @@
   },
   "amendments": [
     {
+      "date": "2026-08-17",
+      "task": "speech-aware acquisition wave 3: the SLURP label side is brought under governed local identity, and the AMI annotation archives plus the ContextASR-Dialogue English shards are materialised. No new bytes were fetched from any paid source; total program spend for this wave is zero.",
+      "changes": [
+        {
+          "kind": "annotation-acquisition",
+          "note": "SLURP previously had 141,652 FLAC recordings on disk under datasets/slurp with no label side at that path -- the annotations existed only inside the reference checkout at repos/slurp/dataset. A governed copy of the seven label-side files (train/devel/test/train_synthetic.jsonl, metadata.json, lm.txt, LICENSE.txt) now lives at datasets/slurp/metadata with per-file SHA-256. Identity was proved rather than assumed: the git blob SHA-1 of every file was compared against the GitHub contents API at the pinned commit 8eb16545762be97ace75334109d73824217311f1 and all matched, and the checkout's working tree is diff-clean against that commit, so no re-download was warranted. The full audio reconcile now covers all four splits, not just the real ones: 141,648 unique recordings[] references resolve against the local inventory with 0 missing (100.00%), comprising 50,627 train + 8,690 devel + 13,078 test against 72,395 real FLAC and 69,253 against 69,257 synthetic FLAC. The 4 unreferenced files are all synthetic and form one contiguous generation-timestamp cluster; the real side stays exactly one-for-one, reproducing the 2026-08-15 finding. License is split and is now recorded verbatim on the entry: the textual part is CC BY 4.0 and the audio part is CC BY-NC 4.0, which constrains audio-derived results to non-commercial research use.",
+          "entries": ["slurp"]
+        },
+        {
+          "kind": "archive-materialisation",
+          "note": "The two AMI annotation archives were extracted in place into version-named subdirectories (manual_1.6.2/ and auto_1.5.1/). Entry counts reproduce the 2026-08-04 CRC audit exactly (5,183 and 4,312) and both archives re-tested CRC PASS; the zips are unmodified. Extraction yielded 5,158 files / 205,293,665 bytes and 4,295 files / 809,561,283 bytes respectively, the shortfall against entry counts being directory records. This is what makes the meeting-domain label layers reachable: the manual set carries namedEntities, topics, dialogueActs, segments, words and both abstractive and extractive summaries. Receipt at datasets/ami/annotations/extraction-receipt.json. No unzip binary exists on this host and installing one is prohibited, so extraction used the Python standard-library zipfile module.",
+          "entries": ["ami-meeting-corpus"]
+        },
+        {
+          "kind": "archive-materialisation",
+          "note": "ContextASR-Dialogue English was extracted from its 6 resident tar shards (25,562,296,320 archive bytes) into datasets/contextasr-bench/audio/ContextASR-Dialogue/English, matching the relative audio paths in the shipped index. Every shard carries a SHA-256 computed in a single pass during extraction; shards 1 and 2 were additionally re-read and reproduced identical digests. The subset closes completely against its index: 5,273 of 5,273 records resolve, 0 missing, 0 WAV header failures, 0 decode failures on a seeded 25-file sample, and 0 duration mismatches over 0.5s, with measured duration equal to declared duration at 798,687.24 seconds (221.858 hours) across 25,558,223,694 extracted bytes. Media shape: 70,038 dialogue turns over 3 to 5 distinct speakers, 58,741 entity mentions and 3,733 distinct movie_name values. Following the sibling ContextASR-Speech English receipt, the reference transcript text and the per-dialogue entity_list were counted but deliberately not materialised, pending the owner ruling on their legal/ceiling tier. Receipt at derived/carrier-manifests/2026-08-17/contextasr-dialogue-english.manifest.json. Process note for auditors: the first extraction pass covered only shards 1-5 because the shard list was read from a truncated directory listing rather than a glob; the index reconcile caught the resulting 273-file tail gap (ids 12499-13209) and shard 6 was then extracted, after which the subset closed exactly. The Mandarin subsets remain unextracted and are out of scope for this English-only study.",
+          "entries": ["contextasr-bench"]
+        },
+        {
+          "kind": "redundancy-observation",
+          "note": "Recording, not changing, a SLURP storage redundancy found during this wave. The same audio payload is reachable at both datasets/slurp and repos/slurp/scripts/audio as distinct files rather than links, and both source archives (slurp_real.tar.gz 3,918,185,662 bytes and slurp_synth.tar.gz 2,839,670,545 bytes) are retained alongside their extracted contents. Measured apparent size is 26G under datasets/slurp and 13G under repos/slurp. Note that DrvFS synthesises inode numbers, so the link-versus-copy determination rests on the du figures rather than on inode identity. Nothing was deleted: reclaiming this space is an owner decision, and the entry's local_subdir still points at repos/slurp/scripts/audio.",
+          "entries": ["slurp"]
+        }
+      ]
+    },
+    {
       "date": "2026-08-15",
       "task": "speech-aware acquisition wave 2: three on-disk re-verifications and three new registrations",
       "changes": [
@@ -270,7 +296,10 @@
         "url": "https://github.com/pswietojanski/slurp"
       },
       "revision": "8eb16545762be97ace75334109d73824217311f1",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
       "status": "COMPLETE",
+      "license": "mixed: textual part Creative Commons Attribution 4.0 International (CC BY 4.0), audio part Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0); verbatim in LICENSE.txt at the pinned commit",
       "size_h": "12.6G",
       "size_bytes": 13507477690,
       "files": 141656,
@@ -279,7 +308,43 @@
       "note": "English SLU; audio at repos/slurp/scripts/audio",
       "audio_zenodo_record": "4274930",
       "transcripts": "repos/slurp/dataset (git)",
-      "datasets_symlink": "datasets/slurp -> repos/slurp/scripts/audio (create on setup)"
+      "datasets_symlink": "datasets/slurp -> repos/slurp/scripts/audio (create on setup)",
+      "annotations": {
+        "governed_copy": "datasets/slurp/metadata",
+        "placed_on": "2026-08-17",
+        "files": ["train.jsonl", "devel.jsonl", "test.jsonl", "train_synthetic.jsonl", "metadata.json", "lm.txt", "LICENSE.txt"],
+        "records": {"train": 11514, "devel": 2033, "test": 2974, "train_synthetic": 19711},
+        "record_fields": "slurp_id, sentence, sentence_annotation, intent, scenario, action, tokens[], entities[{span,type}], recordings[{file,wer,ent_wer,status}]",
+        "sha256": {
+          "train.jsonl": "4a05a3de6c7f028aff298c4a90196e6a3fecd1938d96fb1c125d6fd10d5e301e",
+          "devel.jsonl": "00d346b183ecc2d160853cd3dc20e8ccd207d9e1809cf6e2c05182076bd0ecc9",
+          "test.jsonl": "fe3449af69b42fda7163345482556066c35a80f7e552a6d67e212a0e2f0783cc",
+          "train_synthetic.jsonl": "8394ac2573e1d72b3b736ceff8b342e7a6569243db84295aa568766aef0035db",
+          "metadata.json": "be7943d576c0b79b34ae32796e5c9474bd3d4d123bb35e38f73497f4a429fb83",
+          "lm.txt": "295a336c38481b954e23ba42c81b944d48119af7d013eccff456338dd619d754",
+          "LICENSE.txt": "97547dd6236684935697b26629fb6e70b3be4ed535c2d85fdc053a6389192849"
+        },
+        "receipt": "datasets/slurp/annotation-receipt.json"
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "method": "git blob SHA-1 of every annotation file compared against the GitHub contents API at the pinned commit, empty working-tree diff against HEAD, per-file SHA-256, and a full recordings[]-to-FLAC reconcile over all four splits",
+        "upstream_blob_sha1_match": true,
+        "audio_reconcile": {
+          "local_unique_flac": 141652,
+          "slurp_real": 72395,
+          "slurp_synth": 69257,
+          "unique_recording_refs": 141648,
+          "resolved": 141648,
+          "missing": 0,
+          "match_rate_pct": 100.0,
+          "unreferenced_local_flac": 4,
+          "unreferenced_note": "All four are synthetic (audio-15903109849-8891*-synth.flac, one contiguous generation-timestamp cluster) and are not referenced by train_synthetic.jsonl; the real side is exactly one-for-one, consistent with the 2026-08-15 re-verification."
+        },
+        "disposition": "complete secondary carrier whose label side is now governed locally; not a Stage-2 core-start gate"
+      },
+      "research_role": "English SLU intent + slot carrier for the speech-aware study; SLURP slot-SLU is admitted through the 2026-08-15 owner entity clause. Not a core-start gate.",
+      "claim_limit": "Audio is CC BY-NC 4.0, so audio-derived results are non-commercial research use only. The governed holding is the ORIGINAL upstream variant (pinned checkout plus the Zenodo 4274930 audio release), not the qmeeus/slurp HF repackaging."
     },
     {
       "name": "speech-massive",
@@ -1234,6 +1299,11 @@
       "license": "mit",
       "expected_payload": {"size_bytes": 96662324651, "files": 35, "rows": 41329},
       "verification": {"observed_at": "2026-08-04", "resolved_revision": "7906fd98d1d093bf244df80e726e07fc8afed6a6", "payload_files": 35, "payload_size_bytes": 96662324651, "lfs_sha256_files": 33, "fixed_revision_raw_sha256_files": {".gitattributes": "708c4ce5c6d2a59131fd46349e51416d56b66489ccf394f3f3a05a1ed83de13a", "README.md": "2f22b977e75561c787da6cb1e884ff6abd3634cf9219fda1eecf65d776169a0c"}, "hf_api_file_manifest_sha256": "4b88a5e2b879dd2742bd15e31f6156272e6402e06835d91c0d4199047d31747e", "partial_markers": 0, "stale_cache_cleanup": {"files": 7, "bytes": 1363148800, "recycled_files": 3, "permanently_unlinked_files": 4}, "method": "official Hugging Face pinned file list, exact byte-size closure, per-file LFS SHA-256, and fixed-revision raw-byte SHA-256", "disposition": "complete secondary carrier; not a Stage-2 core-start gate"},
+      "derived_materialization": [
+        {"subset": "ContextASR-Speech / English", "extracted_on": "2026-08-17", "extracted_root": "datasets/contextasr-bench/audio/ContextASR-Speech/English", "receipt": "derived/carrier-manifests/2026-08-17/contextasr-speech-english.manifest.json"},
+        {"subset": "ContextASR-Dialogue / English", "extracted_on": "2026-08-17", "extracted_root": "datasets/contextasr-bench/audio/ContextASR-Dialogue/English", "archives": 6, "archive_bytes": 25562296320, "receipt": "derived/carrier-manifests/2026-08-17/contextasr-dialogue-english.manifest.json"}
+      ],
+      "materialization_note": "Extraction is in-place beside the source tars, matching the relative audio paths recorded in the shipped index jsonl. The tars are retained unmodified; the Mandarin subsets of both test sets remain unextracted and are out of scope for the English-only speech-aware study.",
       "research_role": "Public bilingual contextual-ASR secondary carrier; not a core-start gate"
     },
     {
@@ -1466,6 +1536,11 @@
       "license": "cc-by-4.0",
       "expected_payload": {"size_bytes": 11641468822, "files": 174, "wav_files": 171, "annotation_archives": 2, "license_files": 1},
       "verification": {"observed_at": "2026-08-04", "payload_files": 174, "payload_size_bytes": 11641468822, "wav_files": 171, "wav_header_checks": 171, "wav_formats": ["mono 16-bit 16 kHz PCM", "stereo 16-bit 16 kHz PCM"], "annotation_archives": {"ami_public_auto_1.5.1.zip": {"entries": 4312, "crc_test": "PASS"}, "ami_public_manual_1.6.2.zip": {"entries": 5183, "crc_test": "PASS"}}, "official_wget_script_sha256": "0eb3ea55e3f5a0f1dc2fe5b04ba0b3b0b5a265214c002887e0bf5f91fbf562e8", "local_resumable_manifest_sha256": "5399b3661d2faef59847738bc763e288c3f087318db6e40c525bc4d7e80631af", "payload_manifest_sha256": "82c07b13a63bf716ed732a8318375e3721be40f2794044a0f07e14c54a84fa9d", "partial_markers": 0, "method": "selector closure, per-file SHA-256 manifest, WAV header validation, ZIP CRC validation, and local completion receipt"},
+      "derived_materialization": [
+        {"archive": "ami_public_manual_1.6.2.zip", "extracted_on": "2026-08-17", "extracted_root": "datasets/ami/annotations/manual_1.6.2", "zip_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d", "zip_entries": 5183, "extracted_files": 5158, "extracted_bytes": 205293665, "crc_test": "PASS"},
+        {"archive": "ami_public_auto_1.5.1.zip", "extracted_on": "2026-08-17", "extracted_root": "datasets/ami/annotations/auto_1.5.1", "zip_sha256": "eb7b8582acf53a5fa8ce2503fc079f193964ee144dc8da5700e973aa8f801439", "zip_entries": 4312, "extracted_files": 4295, "extracted_bytes": 809561283, "crc_test": "PASS"}
+      ],
+      "materialization_note": "Both annotation archives were extracted in place into version-named subdirectories on 2026-08-17; the zips are retained unmodified and their entry counts reproduce the 2026-08-04 CRC audit exactly. Extracted-file counts sit below entry counts because zip entries include directory records. The manual set carries the layers this study cares about (namedEntities, topics, dialogueActs, segments, words, abstractive and extractive summaries); the automatic set adds ASR, wordAlignment and phonemes. Receipt: datasets/ami/annotations/extraction-receipt.json.",
       "research_role": "Meeting-speech secondary carrier under one fixed mixed-headset condition; not a core-start gate",
       "claim_limit": "This catalog identity intentionally excludes individual headsets/lapels, microphone arrays and video; those modalities are not missing bytes for this record."
     },
