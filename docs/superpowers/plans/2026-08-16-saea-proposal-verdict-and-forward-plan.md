@@ -505,8 +505,11 @@ Evening updates, same day:
   keys; NOVEL floor 32.2%).
 - **Delegated rulings** (owner: "follow your recommendations on items needing my ruling"):
   1. ContextASR per-utterance `entity_list` is **ceiling tier** (doctrine dim 3); the published
-     setting flies only as a ceiling companion arm; the legal-tier L2 arm uses a domain-pooled
-     global roster.
+     setting flies only as a ceiling companion arm. AMENDED same evening on extraction evidence:
+     `domain_label` is too fine-grained to anchor the legal arm (3,275 domains over 15,326
+     items ≈ 4.7 utterances/domain — near-oracle). The legal-tier L2 arm uses a **subset-wide
+     global roster**; `domain_label` pooling is demoted to an intermediate dilution rung on the
+     precision ladder.
   2. **P-A2T flight approved** once numerics bind and the registered successor + exposure row
      land (the 2026-08-15 single-probe authorization was consumed by the T2 read; this GO covers
      the new probe).
