@@ -1,8 +1,12 @@
 # OWNER_GO_AND_PAPER_EXECUTION_CONTRACT — meeting-minutes-agent
 
-Date: 2026-08-17. Status: IN FORCE. Repository: `papers/meeting-minutes-agent/` (independent Git
-repository, umbrella-ignored). This record is the machine-checked authorization behind the
-registry entry in `papers/registry.json`.
+Date: 2026-08-17. Status: **PROVISIONAL** — the owner directed the scaffold to be stood up
+immediately, then ruled (same session, later message) that the final go/no-go on opening this
+topic awaits the 2026-08-17 meeting-dataset and methods surveys and a joint owner analysis. No
+engineering work proceeds in the repository until that final decision; the scaffold stands ready
+and is fully reversible (registry removal + checkout deletion). Repository:
+`papers/meeting-minutes-agent/` (independent Git repository, umbrella-ignored). This record is
+the machine-checked authorization behind the registry entry in `papers/registry.json`.
 
 ## Owner authorization (translated from the owner's Chinese instructions, 2026-08-17 session)
 

@@ -44,7 +44,7 @@ AUTHORIZATION_KIND = "OWNER_GO_AND_PAPER_EXECUTION_CONTRACT"
 NAME_PATTERN = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 CANDIDATE_ID_TOKEN = re.compile(r"(^|-)r\d+(-|$)")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-ENTRY_STATUSES = {"ACTIVE", "CLOSED"}
+ENTRY_STATUSES = {"PROVISIONAL", "ACTIVE", "CLOSED"}
 REQUIRED_CHECKOUT_FILES = ("CLAUDE.md", "README.md")
 
 
