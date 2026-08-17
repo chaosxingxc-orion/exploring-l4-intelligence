@@ -21,7 +21,7 @@
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
-    "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers. Distinct from meeting-minutes-text, which carries no audio.",
+    "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, and MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset. Distinct from meeting-minutes-text, which carries no audio.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -2337,6 +2337,169 @@
       "acquisition_note": "hf-mirror.com serves nothing for this repository (a probe against the largest file returned zero bytes against a working official fetch), so the official endpoint with the aria2c-based hfd downloader is the only working channel. The transfer is resumable: re-running the same hfd invocation skips files already present, which is how it survived repeated harness reaping of long-running jobs.",
       "research_role": "Real-human-speech agentic tool-calling carrier - spoken requests paired with tool-call targets - for USE-side and SUPPLY-side contrasts under the bounded Audio2Tool leverage probe.",
       "claim_limit": "CC BY-NC 4.0: non-commercial research use only. Only the mono half is governed here, so any claim depending on multichannel or microphone-array processing is outside this holding."
+    },
+    {
+      "name": "meetingbank",
+      "kind": "dataset",
+      "local_subdir": "datasets/meetingbank",
+      "source": {
+        "kind": "hf-multirepo",
+        "repos": [
+          {
+            "id": "huuuyeah/meetingbank",
+            "role": "segment-level summarization instances (text layer)",
+            "revision": "5b4fb6f67f490be93e249d70b732780932d19fe3"
+          },
+          {
+            "id": "huuuyeah/MeetingBank_Audio",
+            "role": "per-city meeting audio archives and timestamped ASR transcripts",
+            "revision": "27779a666ff5fd879f4c5567489ff47e82364abd"
+          }
+        ],
+        "zenodo_record": {
+          "doi": "10.5281/zenodo.7989108",
+          "url": "https://zenodo.org/records/7989108",
+          "file": "MeetingBank.zip",
+          "size_bytes": 637072469,
+          "md5": "9c8303b01d25639388199ef625ccdb39",
+          "note": "Authoritative checksum read from the Zenodo API record, not from the rendered page. This single archive carries the whole text and alignment layer for all six cities, plus the shipped Legistar index Metadata/MeetingBank.json."
+        },
+        "utils_repo": "https://github.com/YebowenHu/MeetingBank-utils"
+      },
+      "revision": "huuuyeah/meetingbank@5b4fb6f67f490be93e249d70b732780932d19fe3; huuuyeah/MeetingBank_Audio@27779a666ff5fd879f4c5567489ff47e82364abd; Zenodo 10.5281/zenodo.7989108 v2 (2023-05-30)",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": [
+        "meeting-minutes-speech"
+      ],
+      "status": "PARTIAL",
+      "license": "cc-by-nc-nd-4.0",
+      "license_note": "DECLARED, BUT THE UPSTREAM DECLARATIONS CONFLICT THREE WAYS; the most restrictive is recorded above and treated as binding. Verbatim, observed 2026-08-17: (a) the LICENSE.txt shipped INSIDE the official Zenodo release (2845 bytes, sha256 9f051c8d3a55c6ffb0c3214c693433be279078b1ca4e768a232b7f95b104d33a, kept at datasets/meetingbank/text/zenodo/LICENSE.txt) is headed \"## Attribution-NonCommercial-NoDerivatives 4.0 International\" = CC BY-NC-ND 4.0; (b) both Hugging Face dataset cards carry `license: cc-by-nc-sa-4.0` verbatim on line 2 of their YAML front matter (huuuyeah/meetingbank and huuuyeah/MeetingBank_Audio), gated=false, private=false; (c) the Zenodo record metadata reports {\"id\": \"cc-by-4.0\"} via the Zenodo API. The GitHub utils repository YebowenHu/MeetingBank-utils ships no LICENSE file and its README has no licence section. Because a licence IS declared, the owner allowance for sources that declare no licence does NOT apply. Binding obligations under the recorded terms: NonCommercial forbids commercial use, and NoDerivatives forbids distributing adapted or derived material at all -- a strictly stronger constraint than the ShareAlike of the Hugging Face declaration. Internal non-commercial research use is unaffected; ANY external release of this subset or of material derived from it must resolve the conflict with the authors first.",
+      "expected_payload": {
+        "text_layer_bytes": 6216658691,
+        "text_layer_files": 1420,
+        "audio_subset_archives": 3,
+        "audio_subset_bytes": 4710708445,
+        "audio_subset_hours": 81.78,
+        "audio_subset_meetings": 50,
+        "full_corpus_audio_bytes": 197228441026,
+        "full_corpus_hours": 3579
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "acquisition_mode": "FULL_TEXT_LAYER_PLUS_BOUNDED_AUDIO_SUBSET",
+        "text_layer": {
+          "segment_instances": {
+            "train": 5169,
+            "validation": 861,
+            "test": 862,
+            "total": 6892
+          },
+          "distinct_meetings_in_text_layer": 1248,
+          "meetings_in_shipped_index": 1250,
+          "per_city_meetings": {
+            "DenverCityCouncil": 365,
+            "LongBeachCC": 307,
+            "SeattleCityCouncil": 292,
+            "AlamedaCC": 140,
+            "KingCountyCC": 112,
+            "BostonCC": 32
+          },
+          "per_city_hours_from_shipped_transcripts": {
+            "LongBeach": 1103.2,
+            "Denver": 979.6,
+            "Alameda": 730.3,
+            "Seattle": 446.0,
+            "KingCounty": 247.0,
+            "Boston": 72.6,
+            "sum": 3578.7,
+            "note": "Sums to the advertised 3,579 h, an independent cross-check."
+          },
+          "files": 1420,
+          "bytes": 6216658691,
+          "invalid_files": 0,
+          "per_file_sha256_manifest": "sha256-receipt.json",
+          "sha256_of_text_manifest": "fdbeb4a9951f82a0f15e271aa01c524e4a32cad8cb0a216912dc0ba68ac44dd6"
+        },
+        "audio_subset": {
+          "status": "COMPLETE",
+          "archives_expected": 3,
+          "archives_landed": 3,
+          "bytes": 4710708445,
+          "extracted_mp3_files": 50,
+          "extracted_mp3_bytes": 4710700259,
+          "hours_exact": 81.78,
+          "hours_projected": 81.78,
+          "codec": "MP3 MPEG_LAYER_III, 44100 Hz, 2ch, 128 kbps CBR",
+          "bitrate_check": "byte-derived hours equal transcript-derived hours to 0.00 h for all three cities, confirming 128 kbps CBR",
+          "cities": {
+            "Seattle": {
+              "chunk": "Seattle/mp3/Seattle-mp3-9.zip",
+              "chunk_bytes": 1413900947,
+              "chunk_sha256": "5d81853658531f79f2f1ef7e6bda8d97cec68ee644ab8ca925c1212a5f897db4",
+              "meetings": 20,
+              "dev_meetings": 10,
+              "heldout_meetings": 10,
+              "hours_projected": 24.55,
+              "hours_exact_from_shipped_transcripts": 24.55,
+              "meetings_in_shipped_index": 18,
+              "meetings_absent_from_shipped_index": 2,
+              "legistar_bills_covered": 61,
+              "summarization_instances_covered": 61
+            },
+            "Denver": {
+              "chunk": "Denver/mp3/Denver-13.zip",
+              "chunk_bytes": 1657804545,
+              "chunk_sha256": "da49ad0c247af896ff0c76c630d40df78e64038de042d5784b7be8b3469cb028",
+              "meetings": 20,
+              "dev_meetings": 10,
+              "heldout_meetings": 10,
+              "hours_projected": 28.78,
+              "hours_exact_from_shipped_transcripts": 28.78,
+              "meetings_in_shipped_index": 20,
+              "meetings_absent_from_shipped_index": 0,
+              "legistar_bills_covered": 77,
+              "summarization_instances_covered": 77
+            },
+            "LongBeach": {
+              "chunk": "LongBeach/mp3/LongBeach-mp3-4.zip",
+              "chunk_bytes": 1639002953,
+              "chunk_sha256": "81e954f159801b521fc5adf1d10bd8216ef67a1ddb80a068a6878bdee5175a5b",
+              "meetings": 10,
+              "dev_meetings": 5,
+              "heldout_meetings": 5,
+              "hours_projected": 28.45,
+              "hours_exact_from_shipped_transcripts": 28.45,
+              "meetings_in_shipped_index": 10,
+              "meetings_absent_from_shipped_index": 0,
+              "legistar_bills_covered": 77,
+              "summarization_instances_covered": 77
+            }
+          },
+          "selection_seed": 20260817,
+          "selection_rule": "For each city, restrict to chunks whose projected duration lies in [10,30] h, then draw ONE chunk uniformly at random with the seed; redraw if the 3-city total falls outside [50,100] h.",
+          "manifest": "audio-subset/subset-manifest.json",
+          "archive_receipt": "audio-subset/archive-receipt.json"
+        },
+        "shipped_index_validation": {
+          "file": "audio-subset/shipped-index-validation.json",
+          "method": "No aligner was built. Metadata/MeetingBank.json (the shipped Legistar index) resolves audio stem -> meeting key -> per-bill startTime/endTime; those boundaries were tested against the real audio decoded with soundfile/libsndfile 1.2.2 (ffmpeg absent by design).",
+          "meetings_checked": 8,
+          "meetings_consistent": 8,
+          "all_bill_spans_inside_audio": true,
+          "max_abs_video_duration_delta_s": 0.96,
+          "decode_probes_nonsilent": true,
+          "text_layer_join": {
+            "legistar_bills_covered": 215,
+            "summarization_instances_covered": 215
+          },
+          "known_gap": "1 of 50 fetched meetings (Seattle full_011916V, 987 s) has audio and an ASR transcript but no entry in the shipped index and no summarization gold."
+        },
+        "method": "Hugging Face pinned-revision tree listing; remote zip central directories read over HTTP range requests so the subset was designed before any bulk transfer; aria2c resumable fetch; completion asserted only when the aria2 control file is gone AND the zip central directory parses (file size alone is not evidence of completion for a multi-connection transfer and produced three full-size but corrupt artifacts before this rule was adopted); per-file SHA-256 receipt.",
+        "disposition": "Text and alignment layers are complete for all six cities; the audio is a deliberately bounded city-stratified subset, not a failed full download."
+      },
+      "consumption_boundary": "Speech bytes are a BOUNDED SUBSET by design: 81.78 h of 3579 h (2.3% of the corpus) across 3 of 6 cities, 50 meetings. The remaining audio stays upstream and may be fetched later under its own decision. Audio is packaged upstream as per-city multi-GB zip archives, not per-meeting files, so the smallest fetchable unit is an archive and the subset is selected at archive granularity. The text and alignment layers, by contrast, are complete for the whole corpus.",
+      "research_role": "Meeting-minutes-agent topic: entity-dense, long-form US city-council meetings (ACL 2023, Hu et al., arXiv:2305.17529) with per-bill Legistar agenda-item gold, website-index segment boundaries and word-level timestamped transcripts; the only meeting-minutes carrier in this catalogue that ships its own speech bytes.",
+      "claim_limit": "Status is PARTIAL and four limits bind any claim. (1) WER IS NOT SUPPORTED: the shipped reference transcripts are machine ASR output (engineVersion v1.0.2, en-US, per-word confidences), so transcript-level WER against them measures agreement with another recogniser, not accuracy. Valid surfaces are summarization, spoken QA and agenda-item segmentation. (2) THE GOLD IS PER-BILL, NOT PER-DISCUSSION: summaries are Legistar agenda-item/bill descriptions with website-index segment boundaries, not verbatim human-written minutes; measured here, 353 of 6495 bills (5.4%) recur across more than one meeting, so 749 instances (10.9%) carry gold text identical across different audio. (3) THE OFFICIAL SPLITS ARE SEGMENT-LEVEL: bill-disjoint (0 bills span train and test) but NOT meeting-disjoint -- 791 of 1248 meetings have segments in more than one official split -- so any meeting-level or full-audio evaluation must re-split by meeting, as the local manifest does. (4) SAMPLING IS NOT DATE-RANDOM FOR SEATTLE: Seattle audio ids are date-encoded (full_MMDDYYV), so archive membership is a calendar block; the drawn Seattle chunk spans only mid-January to end-February across 2016-2018, while Denver and LongBeach ids are opaque Granicus uuids and are date-random. Separately, the ACL 2023 paper excludes San Francisco, evidence the authors treated per-city permissions as binding; per-city redistribution constraints should be assumed to survive into any release."
     }
   ]
 }
