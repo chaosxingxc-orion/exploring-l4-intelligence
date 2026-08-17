@@ -21,6 +21,7 @@
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
+    "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers. Distinct from meeting-minutes-text, which carries no audio.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -2090,6 +2091,119 @@
       "consumption_boundary": "Text layer only. This record holds id/instruction/question/answer/script/n_speakers/data_source for every released row and NO audio. The audio-bearing parquet release is 42.76 GB across both tasks and can be fetched later from the pinned revisions. M3-SLU ids are corpus-tagged sequence ids (ami_task1_N, chime_task1_N, meld_task2_N, multi_task2_N), so the release exposes no source meeting id and no per-meeting join to the governed AMI corpus is possible from the text layer alone.",
       "research_role": "Speaker-attributed QA and speaker-attribution matching over multi-party speech (LREC 2026 submission, arXiv:2510.19358); QA-face probe carrier for the meeting-minutes-agent topic.",
       "claim_limit": "Status is PARTIAL: the benchmark's audio is not held locally, so no end-to-end speaker-attributed audio claim can rest on this record until the 42.76 GB audio release is fetched under its own decision."
+    },
+    {
+      "name": "icsi-meeting-corpus",
+      "kind": "dataset",
+      "local_subdir": "datasets/icsi",
+      "source": {
+        "kind": "official-mirror",
+        "url": "https://groups.inf.ed.ac.uk/ami/icsi/",
+        "download_page": "https://groups.inf.ed.ac.uk/ami/icsi/download/",
+        "license_page": "https://groups.inf.ed.ac.uk/ami/icsi/license.shtml",
+        "signal_mirror_prefix": "https://groups.inf.ed.ac.uk/ami/ICSIsignals/NXT",
+        "annotation_prefix": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations",
+        "media_type": "interaction (mixed headset), one WAV per meeting",
+        "meetings": 75,
+        "attachments": [
+          {
+            "filename": "annotations/ICSI_core_NXT.zip",
+            "url": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip"
+          },
+          {
+            "filename": "annotations/ICSI_plus_NXT.zip",
+            "url": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_plus_NXT.zip"
+          },
+          {
+            "filename": "annotations/ICSI_original_transcripts.zip",
+            "url": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_original_transcripts.zip"
+          },
+          {
+            "filename": "CCBY4.0.txt",
+            "url": "https://groups.inf.ed.ac.uk/ami/download/CCBY4.0.txt"
+          }
+        ]
+      },
+      "revision": "ICSI Meeting Corpus: all 75 mixed 'interaction' WAVs from the Edinburgh NXT signal mirror, fetched 2026-08-17; annotation archives ICSI_core_NXT, ICSI_plus_NXT and ICSI_original_transcripts as published on the mirror (2016-07-25 build; the distribution carries no version numbers)",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": [
+        "meeting-minutes-speech"
+      ],
+      "status": "COMPLETE",
+      "license": "cc-by-4.0",
+      "license_note": "DECLARED, not defaulted. The corpus home page states verbatim: \"All of the signals and transcription, and some of the annotations, have been released publicly under the Creative Commons Attribution 4.0 International Licence (CC BY 4.0).\" The licence page states verbatim: \"The ICSI corpus and its annotations are released under the Creative Commons Attribution 4.0 license agreement (also called CC BY 4.0). Use of this data implies agreement with the terms below.\" Distribution is open HTTP from Edinburgh with no registration, click-through or LDC gate; it is NOT the LDC-licensed ICSI release. Both statements plus the full CC BY 4.0 legal code are stored locally as LICENSE-ICSI-verbatim.txt and CCBY4.0.txt.",
+      "expected_payload": {
+        "size_bytes": 8337006709,
+        "files": 80,
+        "wav_files": 75,
+        "annotation_archives": 3,
+        "license_files": 2
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "wav_files": 75,
+        "wav_size_matches": 75,
+        "wav_header_checks": 75,
+        "wav_formats": [
+          "1ch 16-bit 16000 Hz PCM"
+        ],
+        "audio_bytes": 8258288402,
+        "audio_duration_h": 71.687,
+        "annotation_archives": {
+          "ICSI_core_NXT.zip": {
+            "entries": 1956,
+            "crc_test": "PASS",
+            "sha256": "cf4860245b9ca9c9ed11a66e5a74cfea2a99a686a52f7580aa0a6bc2225895a9"
+          },
+          "ICSI_original_transcripts.zip": {
+            "entries": 90,
+            "crc_test": "PASS",
+            "sha256": "9db98ebdd61a085b4f45f24f46e9c9f6c6f26c3c9cd41643a3b9e74362c85de7"
+          },
+          "ICSI_plus_NXT.zip": {
+            "entries": 4391,
+            "crc_test": "PASS",
+            "sha256": "e4ab79a8b638bdd29121d744c452c680fe23791e406ffe5125e2f5b118923439"
+          }
+        },
+        "payload_manifest_sha256": "cb7f4227f4f3c7d5af6ed9f49fef60e5fce6aae225e12771b0ef7710f0be3663",
+        "partial_markers": 0,
+        "mismatches": 0,
+        "method": "every remote Content-Length recorded before transfer and re-checked per file after it, per-file SHA-256 over all 75 WAVs and 3 archives, WAV header validation, ZIP CRC validation; receipt datasets/icsi/icsi-acquisition-receipt.json"
+      },
+      "annotation_layers": {
+        "present_core": [
+          "Words",
+          "Segments",
+          "DialogueActs (MRDA)",
+          "SpeechQuality"
+        ],
+        "present_plus": [
+          "Summarization/abstractive",
+          "Summarization/extractive",
+          "summlink",
+          "ExtractiveSummaries (student1-6)",
+          "TopicSegmentation (agill1, alastair, galley, s0199920, sashby, wxu)",
+          "GalleyTopics",
+          "TNOTopics",
+          "AutomaticTopics (TopLevel, SubTopic)",
+          "AutomaticSpeechRecognition",
+          "AutomaticProsody",
+          "WredeHotspots (hotspots, involvement)",
+          "subjectivity/autosubj_ref_v1",
+          "BalesCodings",
+          "Anno22L/Ontologies"
+        ],
+        "present_original": [
+          "76 .mrt original ICSI transcripts plus doc/ and DTD"
+        ],
+        "absent": [
+          "named entities"
+        ],
+        "absent_note": "No named-entity layer exists in any of the three public ICSI archives: a scan for namedent/entit/ne.xml over all 6437 zip entries returns zero hits. This differs from AMI, whose manual set does carry namedEntities. Any ICSI entity work must annotate from scratch."
+      },
+      "research_role": "Meeting-speech carrier for the meeting-minutes-agent topic, which is ACTIVE under the 2026-08-17 OWNER_GO_AND_PAPER_EXECUTION_CONTRACT: 71.7 h of mixed-headset multi-party speech with summaries, topic segmentation and MRDA dialogue acts. Supplies the speech bytes underlying the text-layer records in the meeting-minutes-text profile, whose QMSum and MeetingQA annotations are defined over ICSI transcripts.",
+      "claim_limit": "This catalog identity is the mixed 'interaction' signal only. The mirror also publishes per-channel SPH under ICSIsignals/SPH/ (75 meetings x ~12 channels, close-talking and tabletop PZM); those are deliberately not held and are not missing bytes for this record. The named-entity layer does not exist upstream and is likewise not a fetch gap. This record is an acquisition receipt only: it fixes bytes and identity, and grants no experiment authority of its own - consumption runs under the meeting-minutes-agent paper execution contract."
     }
   ]
 }
