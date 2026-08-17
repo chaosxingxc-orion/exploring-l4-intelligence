@@ -269,6 +269,7 @@ that: authorize the labeled archival replay; an auditable number beats an unaudi
 | E1' | Machine-enforced packet legality fields (`span_source`/`reference_source`/`legality_tier`/`source_tier`), fail-closed either-field rule | Sonnet | gap only |
 | E3' | Opportunity ledger generalizing G4: coverage→route→delivery→verify→accept denominators from immutable events | Sonnet | gap only |
 | S1 | Survey repair: hard-verify the two unattested citations; rebuild §11 rows with receipts; classify priors per contract §4 with `INCONCLUSIVE_BASELINE_NOT_READY` | Opus | model-free, anytime |
+| DEMO | Owner-proposed (2026-08-16 evening) demonstration-conditioned replay: build a pinned multimodal few-shot bank from the kb-construction 34 (speech spans + drafts + gold; offline construction explicitly permitted by that receipt), MANDATORY reject-case demonstrations (clip + correct draft + wrong candidate → draft) so the pattern teaches adjudication, not parroting (P2 measured 49/53 verbatim parroting under zero-shot framing WITH audio present). Bank construction is model-free and may start anytime; any result-bearing screen is a NEW vehicle + fresh preregistration per the P2 verdict §4, sequenced AFTER the N1 routing gate (forensics: consumption-side perfection on current flags is worth only −0.28pp entity-WER; routing is the choke point) | Sonnet builds bank; Fable registers screen | bank: model-free, anytime; screen: after N1 |
 
 ## 6. Owner rulings (recorded 2026-08-16, conversational instruction)
 
