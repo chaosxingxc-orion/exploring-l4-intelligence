@@ -427,6 +427,16 @@ finding + gap positioning, with powered confirmation explicitly deferred to Stag
 Inputs pending before the formal re-plan: the multi-carrier readiness/baseline audit, the
 adversarial deep-reading check (wf_54db2a07), and N1 routing recall (wf_536837e1).
 
+**OWNER BOUNDARY RULING, same night — knowledge, not memory.** The owner reaffirmed §1.3 of
+the reviewed proposal as a standing boundary: memory and knowledge are distinct research
+objects; **SAEA studies knowledge only, and memory research will be carried out in separate
+future studies** (their own Stage-1 → owner GO → own repos, never pre-created from SAEA).
+Operational edges: episode-local state (gate G5) is the machine boundary; pre-campaign-pinned
+artifacts (rosters, lexicons, the DEMO demonstration bank) are knowledge and stay in-scope;
+cross-item outcome writing, reward-learned persistent policies, and consolidation/forgetting
+questions are out of scope; memory literature goes to a deferred successor survey. Positioning
+against memory-bearing priors (e.g. Voice Memory) must state this boundary explicitly.
+
 ### Contingencies
 
 - **Watcher exits STALL:** diagnose processes + GPU clocks first (`clocks.sm` first — known SW-power-cap
