@@ -2260,17 +2260,19 @@
       "kind": "dataset",
       "local_subdir": "datasets/spokenwoz",
       "source": {
-        "kind": "hf",
+        "kind": "hf-bundle",
         "id": "ssz1111/SpokenWOZ-* (four repositories designated by the official project page)",
         "official_page": "https://spokenwoz.github.io/",
         "repos": {
-          "train-text": "ssz1111/SpokenWOZ-Train-Text",
-          "test-text": "ssz1111/SpokenWOZ-Test-Text-Fixed",
-          "test-audio": "ssz1111/SpokenWOZ-Test-Audio-Fixed",
-          "train-audio": "ssz1111/SpokenWOZ-Train-Audio (deliberately NOT fetched)"
+          "train-audio": "ssz1111/SpokenWOZ-Train-Audio (deliberately NOT fetched; training-free charter)"
         }
       },
-      "revision": "per-repository; train-text d3aad10f2e5a37e7e1e84375f0db368b5872a044, test-text d6c2d9e53b1005e327db582d327b69311092eb65, test-audio 937f06db7b47e265c56a9927d868a85c94d701b5",
+      "revision": "per-member 40-hex revisions in members[]",
+      "members": [
+        {"config": "train-text", "repo": "ssz1111/SpokenWOZ-Train-Text", "revision": "d3aad10f2e5a37e7e1e84375f0db368b5872a044"},
+        {"config": "test-text", "repo": "ssz1111/SpokenWOZ-Test-Text-Fixed", "revision": "d6c2d9e53b1005e327db582d327b69311092eb65"},
+        {"config": "test-audio", "repo": "ssz1111/SpokenWOZ-Test-Audio-Fixed", "revision": "937f06db7b47e265c56a9927d868a85c94d701b5"}
+      ],
       "lifecycle": "SECONDARY_CARRIER",
       "profiles": ["speech-aware-secondary"],
       "status": "COMPLETE",

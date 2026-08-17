@@ -41,7 +41,7 @@ class AssetLockTest(unittest.TestCase):
         self.assertTrue(
             any("hf-bundle member needs a 40-hex revision" in error for error in errors)
         )
-        bundle["members"] = []
+        bundle["members"].clear()
         errors = asset_lock.validate(lock)
         self.assertTrue(
             any("non-empty members" in error for error in errors)
