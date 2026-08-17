@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-14 — metadata-roster supply won both ledgers; cross-call KB route closed"
+last_refresh: "2026-08-16 — P2 R-ladder VOIDED: reflection-operator language dropped; targeted legal supply is the surviving candidate"
 ---
 
 # Research Objective & Current State
@@ -58,11 +58,17 @@ The evaluation contract has three inseparable parts:
 ## Next action
 
 Stage-2A discovery in flight (goal-mode standing GO; SAEA-E-001 done 2026-08-09).
-2026-08-14: a **deployment-legal metadata roster wins both ledgers** vs locked zero
-(14.29 vs 14.48; entity 813 vs 782), Aldeyra 6/6 — KX-Q2 restored on the text side; the
-cross-call error-pattern KB route is **closed by measurement**; replay delivery blocked
-(flag targeting + pass-1 exemplar hijack). Next: N10 + metadata ten-call night block,
-lexicon v2, benchmark v3, entity-aware flagging. See study `docs/readiness/`.
+2026-08-16: the **P2 R-ladder registered read is closed — VOIDED**: verify framing copies
+deranged wrong references at the same raw rate as bias framing (7/9 vs 7/9 pre-localize;
+pin floor 2), and the replay chain recovered **zero** of 54 delivered-correct opportunities
+(RIR 0/54, 0/53) — per the registered branch rule the candidate **drops reflection-operator
+language** and keeps **targeted, legal, small-N supply** (the 2026-08-14 metadata-roster
+result remains the deployment-legal method line: 12.09 vs 12.38 macro at n=10, +117 entity,
+p=.19). N10 replication, D7E delivery gate, D4 screens, and P2 all consumed. Next: N0 power
+analysis on the frozen 44-call split, N1 oracle-flag routing gate (MUST-NOT-FLY binds scale
+until it passes), then a legal targeted-supply block at power-sized n — pending the owner
+ruling on the kb-construction runtime-intersection prohibition. Verdict:
+study `docs/readiness/2026-08-16-p2-rladder-verdict.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
