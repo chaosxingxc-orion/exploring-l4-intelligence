@@ -517,6 +517,14 @@ Evening updates, same day:
      reported during transition); engineering ticket queued behind B0.
   4. **N1 routing metrics re-run** against the ~952 genuinely-wrong mentions (three denominators:
      all true-wrong / NAME / NAME 5+ chars) before any routing figure is quoted again —
-     dispatched.
+     dispatched. LANDED same evening (bundle `e045b98`/`0514025` + archived report `75fe513`):
+     the blanket per-span NO-GO survives (4.41% routing vs a 22.4% matched-budget oracle
+     ceiling), but **name-scoped routing is exonerated** — shipped flag 13.14% vs 40.25%
+     reachable at the same 54-window budget; failure decomposes into floor/budget (15.7 pts)
+     and roster quality (11.4 pts); 4/10 calls never produced a window. Delegated ruling
+     applied: the N1 gate is re-scoped to **name-scoped per-span routing** with its pass line
+     set against the matched-budget oracle (40.25%), the 0.94% figure is retired (targeting
+     recall on a denominator two-thirds writing convention), and the MUST-NOT-FLY scale bar
+     stays bound until a flag clears its own roster ceiling (28.81%).
   5. Number/date KB rejected; any future KB is name-scoped with the 32.2% NOVEL ceiling
      pre-registered.
