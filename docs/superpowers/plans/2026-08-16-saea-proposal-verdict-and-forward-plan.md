@@ -484,3 +484,36 @@ ruling 5); (D) T-NDL number/date three-way decomposition (format vs pre-publishe
 novel; the KB-worthiness numbers). Study-side artifacts today: P-A2T preregistration DRAFT
 (`b27bad9`, five-arm roster-precision design, all numerics TBD until inventory binds them).
 GPU queue: featcache today → P-A2T + first zero-supply baselines next (T-INV slot released).
+
+Evening updates, same day:
+
+- **Featcache campaign correctly not run** (run-ops value gate, accepted): the cache's only
+  writer is the patched llama-server, so the Audio2Tool warm (30.0 min audio, ~2 min GPU) rides
+  free on the probe's first arm; every other carrier lacks receipts/loaders. Standalone-mmproj
+  prebuild proven feasible and documented, then STOOD DOWN as value-negative. The true critical
+  path is CPU extraction (contextasr tars, slue parquet projection, AMI partition lists,
+  librisqa join spec) — dispatched.
+- **B0 landed**: `rails/` module with the four typed packets, five-method TaskAdapter, mock-only
+  runner (ExecutionPlan + scope + flight-lock enforcement), working Audio2Tool adapter, SLURP
+  stub; suite 2046 passed / 9 skipped (+51, zero regressions); stale lock-blocked docstrings
+  fixed. Commits `8cd624c`..`1614722`.
+- **T-NDL decomposition landed** (bundle `25c640e` + archived report `7cf2a3e`): numeric error
+  mass is **86.5% FORMAT / 8.5% pre-published (4.3% decoy floor) / 5.0% novel**; 66.9% of ALL
+  wrong mentions are writing-convention artifacts; the quoted 84.75% was the non-name mass, not
+  number/date (72.5%); part of the residual is reference defects. **A number/date KB is dead
+  (~3% net mass); names are the KB target** (52.5% pre-published; 54.2% at 0% decoy on 5+ char
+  keys; NOVEL floor 32.2%).
+- **Delegated rulings** (owner: "follow your recommendations on items needing my ruling"):
+  1. ContextASR per-utterance `entity_list` is **ceiling tier** (doctrine dim 3); the published
+     setting flies only as a ceiling companion arm; the legal-tier L2 arm uses a domain-pooled
+     global roster.
+  2. **P-A2T flight approved** once numerics bind and the registered successor + exposure row
+     land (the 2026-08-15 single-probe authorization was consumed by the T2 read; this GO covers
+     the new probe).
+  3. Entity-WER gains a **frozen format-normalizing scorer v2** (v1 never mutated; both scores
+     reported during transition); engineering ticket queued behind B0.
+  4. **N1 routing metrics re-run** against the ~952 genuinely-wrong mentions (three denominators:
+     all true-wrong / NAME / NAME 5+ chars) before any routing figure is quoted again —
+     dispatched.
+  5. Number/date KB rejected; any future KB is name-scoped with the 32.2% NOVEL ceiling
+     pre-registered.
