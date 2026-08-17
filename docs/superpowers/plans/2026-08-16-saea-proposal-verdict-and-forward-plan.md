@@ -409,6 +409,24 @@ Owner decision points: (1) NOW/blocking — kb-construction runtime-intersection
 global-compact-only N2; (4) at B2 — ratify the N2 arm set; (5) optional — Decision-Log
 continuation entry for today's rulings, drafted on request.
 
+**OWNER RULING, 2026-08-16 late night — breadth-first pivot ("同意, go").** The owner ruled
+that the plan had drifted into large-scale-experiment territory inconsistent with Stage-2A's
+small-scale-feasibility mandate, and that carriers beyond earnings21/22 have zero baseline
+evidence. Ratified changes: (a) **N2 (n=44 powered block) is shelved from Stage-2 entirely** —
+it moves to the Stage-3 paper repo's confirmation plan; decision points (2)–(4) above are
+superseded; no GPU block over ~5h may be registered in Stage-2A. (b) **Phase B/C are replaced
+by a probe network**: per-carrier, small-n, individually preregistered feasibility probes
+(each ≤5h GPU) — P-SLURP (~100 items, zero vs ontology/roster supply, slot-F1/intent),
+P-QA (SLUE-SQA-5 or Spoken-SQuAD, zero vs evidence supply, deterministic answer score),
+P-CTX (ContextASR-Bench subset, zero vs roster, benchmarked against its published context
+deltas), P-E21 (earnings demoted to the mechanism line: flag-v2 validation and supply-form
+probes at n≤10), DEMO screen after N1. Every probe needs a G1–G6 admission receipt, split
+legality registration, and its own adapter/scorer built first. (c) The candidate package
+repositions as: mechanism chain (earnings) + cross-task breadth map + the VOID negative
+finding + gap positioning, with powered confirmation explicitly deferred to Stage-3.
+Inputs pending before the formal re-plan: the multi-carrier readiness/baseline audit, the
+adversarial deep-reading check (wf_54db2a07), and N1 routing recall (wf_536837e1).
+
 ### Contingencies
 
 - **Watcher exits STALL:** diagnose processes + GPU clocks first (`clocks.sm` first — known SW-power-cap
