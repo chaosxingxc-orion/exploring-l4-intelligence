@@ -27,15 +27,15 @@ prerequisite for an admitted study.
 
 ## Paper project registry
 
-Admitted paper repositories: **0**. Machine authority: `papers/registry.json`, enforced at zero state
-by `scripts/checks/paper_workspace_check.py` (strict empty registry, no child checkouts, ignore rule,
-count consistency — any registered entry fails closed until the promotion machinery extends the
-checker). A paper project enters only by promotion from a qualified study candidate under
-`OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` (Decision-Log continuation entry 91); it owns Stage‑3 large-scale confirmatory
-experiments and publication. Its experiment index will live under
-`wiki/experiments/papers/<paper-slug>/` at first admission; the paper promotion transaction (registry
-entry, candidate bundle blob, promotion receipt, index creation) is defined together with that
-machinery at first admission, not before.
+Admitted paper repositories: **1**. Machine authority: `papers/registry.json`, enforced in
+admission mode by `scripts/checks/paper_workspace_check.py` (per-entry schema, name policy,
+checkout and authorization-record existence, ignore rule, count consistency; unregistered
+checkouts fail closed). A paper project enters under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` —
+by promotion from a qualified study candidate (Decision-Log continuation entry 91) or by direct
+owner admission recorded in the entry's authorization record. Admitted: `meeting-minutes-agent`
+(2026-08-17, direct owner admission; index and contract under
+`wiki/experiments/papers/meeting-minutes-agent/`). Candidate-bundle and promotion-receipt
+machinery remains deferred until the first promotion-path admission.
 
 Current carrier readiness: Earnings21, Earnings22 and ConEC are materialized at pinned revisions
 (`D0_CLOSED`); SLUE-SQA-5, ContextASR-Bench and AMI are complete speech-domain secondary carriers.
