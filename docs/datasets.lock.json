@@ -1854,18 +1854,18 @@
       "name": "audiobench-speech",
       "kind": "dataset-bundle",
       "local_subdir": "datasets/audiobench-speech",
-      "source": {"kind": "hf", "id": "AudioLLMs/* (per-config repositories)", "benchmark": "AudioBench (NAACL 2025), https://github.com/AudioLLMs/AudioBench"},
-      "revision": "per-config; see members[]",
+      "source": {"kind": "hf-bundle", "id": "AudioLLMs/* (per-config repositories)", "benchmark": "AudioBench (NAACL 2025), https://github.com/AudioLLMs/AudioBench"},
+      "revision": "per-member 40-hex revisions in members[]",
       "lifecycle": "SECONDARY_CARRIER",
       "profiles": ["speech-aware-secondary"],
       "status": "COMPLETE",
       "license": "UNDECLARED upstream — see claim_limit",
       "expected_payload": {"size_bytes": 3524177488, "files": 22, "configs": 4},
       "members": [
-        {"config": "common_voice_15_en_test", "repo": "AudioLLMs/common_voice_15_en_test", "revision": "d7af6c5f", "files": 9, "size_bytes": 2787277247, "upstream": "Mozilla Common Voice 15 (upstream CC0-1.0)", "task": "English ASR"},
-        {"config": "dream_tts_mcq_test", "repo": "AudioLLMs/dream_tts_mcq_test", "revision": "a495d7c2", "files": 7, "size_bytes": 707368081, "upstream": "DREAM dialogue MCQ, TTS-synthesised", "task": "spoken QA (multiple choice)"},
-        {"config": "openhermes_instruction_test", "repo": "AudioLLMs/openhermes_instruction_test", "revision": "574f252d", "files": 3, "size_bytes": 17283541, "upstream": "OpenHermes instructions, TTS-synthesised", "task": "speech instruction following"},
-        {"config": "alpaca_audio_test", "repo": "AudioLLMs/alpaca_audio_test", "revision": "7eb2ab27", "files": 3, "size_bytes": 12248619, "upstream": "Alpaca instructions, TTS-synthesised", "task": "speech instruction following"}
+        {"config": "common_voice_15_en_test", "repo": "AudioLLMs/common_voice_15_en_test", "revision": "d7af6c5f2e2965f019b369f86a7a9f1be3ccc0a9", "files": 9, "size_bytes": 2787277247, "upstream": "Mozilla Common Voice 15 (upstream CC0-1.0)", "task": "English ASR"},
+        {"config": "dream_tts_mcq_test", "repo": "AudioLLMs/dream_tts_mcq_test", "revision": "a495d7c2a1facf4eb27af6dfc4c3878de8828cf8", "files": 7, "size_bytes": 707368081, "upstream": "DREAM dialogue MCQ, TTS-synthesised", "task": "spoken QA (multiple choice)"},
+        {"config": "openhermes_instruction_test", "repo": "AudioLLMs/openhermes_instruction_test", "revision": "574f252dd1847b08bbb4331c9d7100bd872f0cfe", "files": 3, "size_bytes": 17283541, "upstream": "OpenHermes instructions, TTS-synthesised", "task": "speech instruction following"},
+        {"config": "alpaca_audio_test", "repo": "AudioLLMs/alpaca_audio_test", "revision": "7eb2ab279975033690d67bee66e45eb612a430ee", "files": 3, "size_bytes": 12248619, "upstream": "Alpaca instructions, TTS-synthesised", "task": "speech instruction following"}
       ],
       "verification": {
         "observed_at": "2026-08-17",

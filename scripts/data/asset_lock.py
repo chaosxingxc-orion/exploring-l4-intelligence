@@ -107,6 +107,19 @@ def validate(lock: dict[str, Any]) -> list[str]:
                 errors.append(f"{label}: {method} source needs a 40-hex revision")
         if method == "hf" and not source.get("id"):
             errors.append(f"{label}: hf source needs id")
+        if method == "hf-bundle":
+            members = item.get("members") or []
+            if not members:
+                errors.append(f"{label}: hf-bundle source needs a non-empty members[] list")
+            for member in members:
+                member_label = f"{label}.members[{member.get('config') or member.get('repo') or '?'}]"
+                if not member.get("repo"):
+                    errors.append(f"{member_label}: hf-bundle member needs repo")
+                member_revision = str(member.get("revision") or "")
+                if len(member_revision) != 40 or any(
+                    c not in "0123456789abcdef" for c in member_revision
+                ):
+                    errors.append(f"{member_label}: hf-bundle member needs a 40-hex revision")
         if method == "git" and not source.get("url"):
             errors.append(f"{label}: git source needs url")
         if method in {"restricted", "source-unstable", "unavailable"} and item.get("status") == "COMPLETE":

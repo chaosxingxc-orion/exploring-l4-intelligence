@@ -27,6 +27,26 @@ class AssetLockTest(unittest.TestCase):
     def test_lock_is_valid(self) -> None:
         self.assertEqual([], asset_lock.validate(self.lock))
 
+    def test_hf_bundle_members_require_full_revisions(self) -> None:
+        import copy
+
+        lock = copy.deepcopy(self.lock)
+        bundle = next(
+            item
+            for item in asset_lock.assets(lock)
+            if item.get("source", {}).get("kind") == "hf-bundle"
+        )
+        bundle["members"][0]["revision"] = bundle["members"][0]["revision"][:8]
+        errors = asset_lock.validate(lock)
+        self.assertTrue(
+            any("hf-bundle member needs a 40-hex revision" in error for error in errors)
+        )
+        bundle["members"] = []
+        errors = asset_lock.validate(lock)
+        self.assertTrue(
+            any("non-empty members" in error for error in errors)
+        )
+
     def test_speech_aware_core_is_exactly_the_minimum_carrier(self) -> None:
         names = {
             item["name"]
