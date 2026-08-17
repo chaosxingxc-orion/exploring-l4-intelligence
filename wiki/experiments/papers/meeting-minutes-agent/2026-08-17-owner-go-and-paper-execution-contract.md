@@ -1,12 +1,17 @@
 # OWNER_GO_AND_PAPER_EXECUTION_CONTRACT — meeting-minutes-agent
 
-Date: 2026-08-17. Status: **PROVISIONAL** — the owner directed the scaffold to be stood up
-immediately, then ruled (same session, later message) that the final go/no-go on opening this
-topic awaits the 2026-08-17 meeting-dataset and methods surveys and a joint owner analysis. No
-engineering work proceeds in the repository until that final decision; the scaffold stands ready
-and is fully reversible (registry removal + checkout deletion). Repository:
-`papers/meeting-minutes-agent/` (independent Git repository, umbrella-ignored). This record is
-the machine-checked authorization behind the registry entry in `papers/registry.json`.
+Date: 2026-08-17. Status: **ACTIVE** — final GO given by the owner on 2026-08-17 (late
+session) after the three-survey synthesis
+(`wiki/survey/workbench/2026-08-17-meeting-agent-direction/SYNTHESIS.md`, `a3ff5a0`) and the
+detailed founding workplan were reviewed. The GO approved: the four-track workplan
+(engineering / data production / local analysis / GPU flights), the promotion of a bounded
+MeetingBank subset into the core acquisition set, and the one-time installation of meeteval +
+rouge-score into the shared venv. Accompanying owner ruling on licensing: **where a dataset
+declares no license, the program treats it as fully authorized for our use** (each dataset's
+license text, or its absence, continues to be recorded verbatim in receipts and lock entries).
+Repository: `papers/meeting-minutes-agent/` (independent Git repository, umbrella-ignored).
+This record is the machine-checked authorization behind the registry entry in
+`papers/registry.json`.
 
 ## Owner authorization (translated from the owner's Chinese instructions, 2026-08-17 session)
 

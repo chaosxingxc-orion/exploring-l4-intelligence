@@ -9,7 +9,7 @@
       "name": "meeting-minutes-agent",
       "local_path": "papers/meeting-minutes-agent",
       "admitted": "2026-08-17",
-      "status": "PROVISIONAL",
+      "status": "ACTIVE",
       "authorization": {
         "kind": "OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",
         "record": "wiki/experiments/papers/meeting-minutes-agent/2026-08-17-owner-go-and-paper-execution-contract.md"
