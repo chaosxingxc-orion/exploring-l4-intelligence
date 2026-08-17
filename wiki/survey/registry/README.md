@@ -38,3 +38,18 @@ Audio Flamingo, MiMo-Audio, MetaSICL, TICL, TICL+ and Bayesian Example Selection
 baseline or carrier evidence. It is not part of the frozen Stage-1B views and is not a technical
 novelty verdict. Its PDF/e-print hashes resolve through the shared fulltext ledger; scoped synthesis
 lives in `wiki/survey/workbench/stage1c-portfolio/2026-07-27-r1-context-icl-evidence-supplement.md`.
+
+`proposal-citation-verification-2026-08-16-papers.jsonl` is a separate twelve-record shard
+consolidating the 2026-08-16 SAEA proposal Section 11 citation re-verification pass
+(`wiki/survey/workbench/2026-08-16-proposal-citation-verification/notes.md`): the corrected
+citations for rows 2, 9, 10, and 11 (title/venue/identity errors found and fixed), five further
+rows carried through unchanged (AudioBench, RECOVER, Voice Memory, DeRAGEC, ConEC), and three
+bonus-sweep additions the workbench mandated (EChO-Agent, the Interspeech 2026 Audio Reasoning
+Challenge Agent Track, and the post-ASR edit-quality-metric lineage survey arXiv 2508.07285 --
+the last of these is id-only, flagged `strongest_boundary_or_falsifier: "TITLE NOT CONFIRMED"`,
+since the source session never issued a direct fetch against it). This shard's verification method
+was WebFetch/WebSearch tool summaries, not downloaded-and-hashed PDF/e-print bytes, so its
+`provenance` is **log-backed**: each record carries `fetch_log` (the notes.md path) and
+`fetch_log_sha256` (the hash of that log file, recomputed at consolidation time) in place of the
+`pdf_sha256`/`eprint_sha256`/`fulltext_ledger` fields used by the fulltext-hash-bound shards above.
+It is not part of the frozen Stage-1B views and is not a technical novelty verdict.
