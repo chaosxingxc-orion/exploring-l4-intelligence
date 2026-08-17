@@ -41,7 +41,7 @@
       "class": "HOT",
       "load_policy": "targeted",
       "purpose": "study repository and experiment asset control plane",
-      "sha256": "81ce7b2c2034d25e81f0fa51d9ef50432475ae4d13e719fd1219f7cb7d274922"
+      "sha256": "40807670ba4eff4f98292c5058616d33c2f73096b8d9e6fd5f7a9d506190853a"
     },
     {
       "path": "docs/checks/system-first-stage1a/evidence-v6/identity-taxonomy-v6-test.json",
