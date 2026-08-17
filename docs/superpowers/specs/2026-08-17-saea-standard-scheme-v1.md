@@ -32,8 +32,8 @@ line is deferred wholesale to the future memory-focused studies.
 |---|---|---|---|
 | L1 | ASR / entity transcription | earnings21/22 (harvested; calibration substrate only) | ~0 (measured: copy trap; the zero anchor of the curve) |
 | L2 | Context-conditioned entity ASR | contextasr-bench | transitional |
-| L3 | SLU (slots/intent) | SLURP (acquisition pending) | medium |
-| L4 | Spoken QA / meeting understanding | slue-sqa-5, librisqa, AMI | high |
+| L3 | SLU (slots/intent) | SLURP (labels acquired + adapter built 2026-08-17; SpokenWOZ candidate) | medium |
+| L4 | Spoken QA / meeting understanding | slue-sqa-5 (librisqa REJECTED 2026-08-17: its QA pairs need no external knowledge — no coupling slot; survey b179634) | high |
 | L5 | Agentic speech (tool use) | Audio2Tool (+ survey candidates) | measured headroom: tool-acc 84.6% vs EM 15.6% |
 
 Primary claim surface: the supply-benefit-versus-task-level curve. L1 anchors it at zero; L5
