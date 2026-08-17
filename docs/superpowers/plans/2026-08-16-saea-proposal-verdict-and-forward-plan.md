@@ -382,6 +382,33 @@ The read-only design probe corrected the Track A premise and shrank its cost:
    already the plan's N1-before-N2 order; restated here so the n=44 approval is not read as
    overriding it.
 
+## 8. Post-P2 execution queue (added after the VOIDED verdict, 2026-08-16 night)
+
+Phase A (model-free, parallel, from 2026-08-17 morning): A1 N0 power analysis from real paired
+diffs incl. an n-composition recommendation (34 fresh vs 44 incl. the exposure-heavy frozen ten);
+A2 N1 routing-gate offline measurement — flag recall over the ~2,822 wrong entity tokens from
+already-consumed traces, miss taxonomy (out-of-band / common-word collision / budget
+monopolization / roster absence), flag-v2 requirements; A3 survey workbench→registry
+consolidation; A4 featcache per-dataset directory convention + cache-dir parameterization + FC1
+feasibility probe; A5 DEMO bank construction (kb34 gold, offline-permitted; reject-case
+demonstrations mandatory); A6 E1' machine-enforced legality fields; A7 E0' flight lockfile +
+narrowed manifest bind (hard precondition for the 20–36h N2 flight); A8 minor repairs (Chinese
+string in build_probe_samples.py; 4320211 gold-gap note).
+
+Phase B (after A1+A2): B1 flag v2 only if the miss taxonomy shows fixable channels; B2 N2
+preregistration — legal targeted-supply block at the N0-sized n (candidate arms: locked zero vs
+global compact metadata roster vs flag-targeted supply), requires owner ruling on the
+kb-construction intersection + E0' landed; B3 the N2 flight (~10–12h/arm on ext4-loaded models,
+featcache-prewarmed if FC1 lands).
+
+Phase C: N2 reads under fresh pins; task ladder (SLURP first) behind its gates; DEMO screen
+after N1; WP6 candidate-package assembly.
+
+Owner decision points: (1) NOW/blocking — kb-construction runtime-intersection ruling;
+(2) after N0 — n composition and target n; (3) after N1 — invest in flag v2 vs
+global-compact-only N2; (4) at B2 — ratify the N2 arm set; (5) optional — Decision-Log
+continuation entry for today's rulings, drafted on request.
+
 ### Contingencies
 
 - **Watcher exits STALL:** diagnose processes + GPU clocks first (`clocks.sm` first — known SW-power-cap
