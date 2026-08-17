@@ -58,8 +58,13 @@
           "entries": ["audiobench-speech"]
         },
         {
-          "kind": "acquisition-in-progress",
-          "note": "Recording, not yet registering, three larger SAEA-half carriers whose transfers were still streaming when this amendment was written; each gets its own entry once byte closure is verified. SD-QA: official source is github.com/ffaisal93/SD-QA under Apache-2.0 (the WillHeld/SD-QA Hugging Face mirror declares no licence and was therefore not used); the English subset is 11 dialects (aus, gbr, ind_n, ind_s, irl, kenya, nga, nzl, phl, usa, zaf) across dev and test, with constant questions per dialect. Both git paths failed here — a blob-filtered partial clone stalled with a dead fetch, and the ghfast.top proxy returned HTTP 504 on the 6.4 GB pack — so the working channel is per-file raw.githubusercontent fetches at a pinned commit, driven by the audio_file column of each dialect metadata.csv (22,037 English wav). SpokenWOZ: licence CC BY-NC 4.0 per the official spokenwoz.github.io project page, which designates four Hugging Face repositories as the distribution point; those repositories themselves declare no licence, so the project page is the licence of record. Total 12,823,386,187 bytes over 4 repositories, free and ungated, no form. WearVox: ungated, public, cc-by-nc-4.0, 59,449,535,253 bytes over 7,688 files. Its payload splits into wav/ (3,842 mono files, 4.500 GB) and wav_mc/ (3,842 multichannel files, 54.894 GB) over the same recordings, so the mono half is fetched first as the part a mono-consuming frozen core can actually use. Measured official-endpoint throughput on large files is 3.16 MB/s, projecting roughly 5.2 hours for the full repository; the mirror serves nothing for this repository.",
+          "kind": "asset-registration",
+          "note": "The three larger SAEA-half carriers all landed and are now registered as their own entries. SD-QA: 22,266 recording references resolve against 22,037 unique English wav with 0 missing, 22,064 payload files and 3,289,716,933 bytes over 11 dialects and both splits, 28.621 audio hours, 0 genuine header failures. SpokenWOZ: byte closure on all three acquired subsets (18 files, 2,481,729,692 bytes, 0 missing, 0 LFS SHA-256 failures); train-split audio deliberately skipped because the study is training-free. WearVox: the mono half closed at its full 3,842 files and 4,499,678,584 bytes with the three root metadata files present; the 54.894 GB multichannel half is deferred by design. Two general lessons for future waves are recorded on the entries: hf-mirror.com serves neither SpokenNativQA nor WearVox, and a raw-HTTP file-by-file fetch must be driven from a list pruned to the not-yet-present files, because aria2c otherwise burns the whole window re-checking files it already holds.",
+          "entries": ["sd-qa", "spokenwoz", "wearvox"]
+        },
+        {
+          "kind": "pre-registration-facts",
+          "note": "The verification facts established BEFORE fetching each of the three, retained because they are the audit trail for the verify-then-fetch rule. SD-QA: official source is github.com/ffaisal93/SD-QA under Apache-2.0 (the WillHeld/SD-QA Hugging Face mirror declares no licence and was therefore not used); the English subset is 11 dialects (aus, gbr, ind_n, ind_s, irl, kenya, nga, nzl, phl, usa, zaf) across dev and test, with constant questions per dialect. Both git paths failed here — a blob-filtered partial clone stalled with a dead fetch, and the ghfast.top proxy returned HTTP 504 on the 6.4 GB pack — so the working channel is per-file raw.githubusercontent fetches at a pinned commit, driven by the audio_file column of each dialect metadata.csv (22,037 English wav). SpokenWOZ: licence CC BY-NC 4.0 per the official spokenwoz.github.io project page, which designates four Hugging Face repositories as the distribution point; those repositories themselves declare no licence, so the project page is the licence of record. Total 12,823,386,187 bytes over 4 repositories, free and ungated, no form. WearVox: ungated, public, cc-by-nc-4.0, 59,449,535,253 bytes over 7,688 files. Its payload splits into wav/ (3,842 mono files, 4.500 GB) and wav_mc/ (3,842 multichannel files, 54.894 GB) over the same recordings, so the mono half is fetched first as the part a mono-consuming frozen core can actually use. Measured official-endpoint throughput on large files is 3.16 MB/s, projecting roughly 5.2 hours for the full repository; the mirror serves nothing for this repository.",
           "entries": ["sd-qa", "spokenwoz", "wearvox"]
         }
       ]
@@ -2204,6 +2209,132 @@
       },
       "research_role": "Meeting-speech carrier for the meeting-minutes-agent topic, which is ACTIVE under the 2026-08-17 OWNER_GO_AND_PAPER_EXECUTION_CONTRACT: 71.7 h of mixed-headset multi-party speech with summaries, topic segmentation and MRDA dialogue acts. Supplies the speech bytes underlying the text-layer records in the meeting-minutes-text profile, whose QMSum and MeetingQA annotations are defined over ICSI transcripts.",
       "claim_limit": "This catalog identity is the mixed 'interaction' signal only. The mirror also publishes per-channel SPH under ICSIsignals/SPH/ (75 meetings x ~12 channels, close-talking and tabletop PZM); those are deliberately not held and are not missing bytes for this record. The named-entity layer does not exist upstream and is likewise not a fetch gap. This record is an acquisition receipt only: it fixes bytes and identity, and grants no experiment authority of its own - consumption runs under the meeting-minutes-agent paper execution contract."
+    },
+    {
+      "name": "sd-qa",
+      "kind": "dataset",
+      "local_subdir": "datasets/sd-qa",
+      "source": {
+        "kind": "git-raw",
+        "url": "https://github.com/ffaisal93/SD-QA",
+        "raw_prefix": "https://raw.githubusercontent.com/ffaisal93/SD-QA",
+        "paper": "SD-QA: Spoken Dialectal Question Answering for the Real World (EMNLP Findings 2021)"
+      },
+      "revision": "c49e9ebb5adb6a0afc560d31e2248fbcc7984a9d",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
+      "license": "Apache-2.0 (the repository LICENSE and README state that both the code and the data are released under it)",
+      "expected_payload": {"payload_files": 22064, "payload_size_bytes": 3289716933, "unique_wav": 22037, "recording_references": 22266, "label_files": 4, "dialect_metadata_files": 22},
+      "scope": {
+        "language": "English (eng) only; the other eight SD-QA languages were not fetched",
+        "splits": ["dev", "test"],
+        "dialects": ["aus", "gbr", "ind_n", "ind_s", "irl", "kenya", "nga", "nzl", "phl", "usa", "zaf"],
+        "n_dialects": 11
+      },
+      "verification": {
+        "observed_at": "2026-08-17",
+        "payload_files": 22064,
+        "payload_size_bytes": 3289716933,
+        "recordings_referenced": 22266,
+        "recordings_resolved": 22266,
+        "unique_wav_files": 22037,
+        "missing": 0,
+        "genuine_header_failures": 0,
+        "decode_check_sampled": 10,
+        "decode_check_failures": 0,
+        "audio_hours": 28.621,
+        "audio_format": "16 kHz mono 16-bit PCM WAV",
+        "method": "per-file raw.githubusercontent fetch at the pinned commit, with the file list derived from the audio_file column of all 22 dialect metadata.csv files, then a full existence and WAV-header pass plus a decode test",
+        "reference_vs_unique_note": "22,266 recording references resolve against 22,037 unique files: 229 references point at a file already counted under another row, so the reference count is intentionally higher than the file count.",
+        "header_check_note": "A first-pass check assuming a canonical 44-byte WAV header flagged 5,555 files. That was a checker artefact, not a data defect: the flagged files carry a 4,096-byte header (extra RIFF chunks before the data chunk), and a decode test on a sample of the flagged set read every frame successfully. Genuine header failures are 0.",
+        "receipt": "datasets/sd-qa/.speechrl-fetch-receipt.json",
+        "disposition": "complete English subset; not a Stage-2 core-start gate"
+      },
+      "acquisition_note": "Two git paths failed from this host and are recorded so they are not retried blindly: a blob-filtered partial clone with sparse checkout stalled with a dead fetch subprocess after about 1 GB, and a shallow clone through the ghfast.top proxy returned HTTP 504 on the 6.4 GB pack. The working channel is per-file raw HTTP at a pinned commit. Per-file latency to raw.githubusercontent measured about 19 s, so the transfer is latency-bound rather than bandwidth-bound: it needs high concurrency (32 parallel slots) AND an input list pruned to only the not-yet-present files, because aria2c otherwise spends the whole window re-checking files it already holds and makes no forward progress.",
+      "research_role": "Dialect-robustness carrier for spoken QA: the same question set is spoken by speakers of 11 English dialects, isolating accent as the variable while holding question content fixed. Directly usable for OBS-side robustness contrasts.",
+      "claim_limit": "Apache-2.0 permits derivative work and redistribution with attribution, making this the least restrictive carrier in the wave. Questions derive from TyDi QA, which must be cited alongside SD-QA. Only the English subset is governed here; the other eight languages are outside this repository's English-only boundary and are not missing bytes for this record."
+    },
+    {
+      "name": "spokenwoz",
+      "kind": "dataset",
+      "local_subdir": "datasets/spokenwoz",
+      "source": {
+        "kind": "hf",
+        "id": "ssz1111/SpokenWOZ-* (four repositories designated by the official project page)",
+        "official_page": "https://spokenwoz.github.io/",
+        "repos": {
+          "train-text": "ssz1111/SpokenWOZ-Train-Text",
+          "test-text": "ssz1111/SpokenWOZ-Test-Text-Fixed",
+          "test-audio": "ssz1111/SpokenWOZ-Test-Audio-Fixed",
+          "train-audio": "ssz1111/SpokenWOZ-Train-Audio (deliberately NOT fetched)"
+        }
+      },
+      "revision": "per-repository; train-text d3aad10f2e5a37e7e1e84375f0db368b5872a044, test-text d6c2d9e53b1005e327db582d327b69311092eb65, test-audio 937f06db7b47e265c56a9927d868a85c94d701b5",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
+      "license": "cc-by-nc-4.0 per the official project page; the Hugging Face repositories themselves declare no licence, so the project page is the licence of record",
+      "expected_payload": {"size_bytes": 2481729692, "files": 18},
+      "corpus_facts": {"dialogues": 5700, "turns": 203000, "audio_hours_full_corpus": 249, "note": "real human-to-human task-oriented dialogue recorded over the phone"},
+      "verification": {
+        "observed_at": "2026-08-17",
+        "payload_files": 18,
+        "payload_size_bytes": 2481729692,
+        "per_subset": {
+          "train-text": {"files": 13, "bytes": 247401767, "byte_closure": true},
+          "test-text": {"files": 3, "bytes": 52243760, "byte_closure": true},
+          "test-audio": {"files": 2, "bytes": 2182084165, "byte_closure": true}
+        },
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "lfs_sha256_failures": 0,
+        "byte_closure": true,
+        "gated": false,
+        "method": "per-repository official huggingface.co pinned file list, exact byte-size closure, and full per-file LFS SHA-256 verification",
+        "receipt": "datasets/spokenwoz/<subset>/.speechrl-fetch-receipt.json",
+        "disposition": "complete for the evaluation scope defined below; not a Stage-2 core-start gate"
+      },
+      "scope_note": "Scoped to the evaluation-usable portion: test audio plus both text sides. SpokenWOZ-Train-Audio (10,341,656,495 bytes) is deliberately NOT acquired, because this study is training-free by charter - it trains no parameters and fits no task model - so training-split audio carries no evidential value while costing four times the bytes of everything else in this wave. Acquire it only if a future owner decision creates a use for training-split audio.",
+      "research_role": "Real human-to-human task-oriented dialogue carrier: multi-turn, goal-directed, telephone-quality speech with dialogue-state annotations, complementing the synthesised dialogue in ContextASR-Dialogue.",
+      "claim_limit": "CC BY-NC 4.0: non-commercial research use only. The licence is asserted by the official project page rather than by the distributing repositories, so re-confirm it before any release. Train-split audio is out of scope by the decision above and is not missing bytes for this record."
+    },
+    {
+      "name": "wearvox",
+      "kind": "dataset",
+      "local_subdir": "datasets/wearvox",
+      "source": {"kind": "hf", "id": "zlinao/WearVox", "venue": "ICLR 2026", "authors": "Meta Reality Labs"},
+      "revision": "43ca69a6a6e03e589dc0818c71b2a10d1c3d1486",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
+      "license": "cc-by-nc-4.0",
+      "upstream_payload": {
+        "size_bytes": 59449535253, "files": 7688,
+        "composition": {
+          "wav (mono)": {"files": 3842, "bytes": 4499678584},
+          "wav_mc (multichannel)": {"files": 3842, "bytes": 54894000000},
+          "root metadata": {"files": 4}
+        },
+        "hf_api_file_manifest_sha256": "d3eaf6c9724dbdc6604abf2da701519368bf1dccd9af9846434eda2bdef355d8"
+      },
+      "expected_payload": {"size_bytes": 4499678584, "files": 3842, "scope": "wav/ mono plus root metadata"},
+      "verification": {
+        "observed_at": "2026-08-17",
+        "mono_wav_files": 3842,
+        "mono_wav_bytes": 4499678584,
+        "files_missing": 0,
+        "root_metadata_present": ["README.md", "audio_metadata.json", "data_public.json"],
+        "byte_closure_for_acquired_scope": true,
+        "gated": false,
+        "private": false,
+        "method": "official huggingface.co pinned file list; the mono subset closed at its full 3,842-file count",
+        "disposition": "complete for the acquired mono scope; the multichannel half is deferred by design, not missing"
+      },
+      "scope_note": "The repository holds the same 3,842 recordings twice: wav/ mono at 4.500 GB and wav_mc/ multichannel at 54.894 GB, so the multichannel half is 92 percent of the bytes. The frozen core is reached across an API-shaped boundary and consumes mono speech, so the mono half plus metadata is the usable portion and was fetched first; wav_mc/ is deferred pending an owner decision and is not missing bytes for this record. Measured single-stream throughput from the official endpoint was 3.16 MB/s on large files, projecting about 5.2 hours for the full repository, but sustained concurrent throughput on this host was far lower, which is the practical reason the multichannel half is deferred - a cost decision, not a licence or access constraint.",
+      "acquisition_note": "hf-mirror.com serves nothing for this repository (a probe against the largest file returned zero bytes against a working official fetch), so the official endpoint with the aria2c-based hfd downloader is the only working channel. The transfer is resumable: re-running the same hfd invocation skips files already present, which is how it survived repeated harness reaping of long-running jobs.",
+      "research_role": "Real-human-speech agentic tool-calling carrier - spoken requests paired with tool-call targets - for USE-side and SUPPLY-side contrasts under the bounded Audio2Tool leverage probe.",
+      "claim_limit": "CC BY-NC 4.0: non-commercial research use only. Only the mono half is governed here, so any claim depending on multichannel or microphone-array processing is outside this holding."
     }
   ]
 }
