@@ -21,7 +21,7 @@
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
-    "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, and MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset. Distinct from meeting-minutes-text, which carries no audio.",
+    "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset, and NOTSOFAR-1's single-channel far-field office meetings with multi-judge human verbatim speaker-attributed references. Distinct from meeting-minutes-text, which carries no audio.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -2501,6 +2501,139 @@
       "consumption_boundary": "Speech bytes are a BOUNDED SUBSET by design: 81.78 h of 3579 h (2.3% of the corpus) across 3 of 6 cities, 50 meetings. The remaining audio stays upstream and may be fetched later under its own decision. Audio is packaged upstream as per-city multi-GB zip archives, not per-meeting files, so the smallest fetchable unit is an archive and the subset is selected at archive granularity. The text and alignment layers, by contrast, are complete for the whole corpus.",
       "research_role": "Meeting-minutes-agent topic: entity-dense, long-form US city-council meetings (ACL 2023, Hu et al., arXiv:2305.17529) with per-bill Legistar agenda-item gold, website-index segment boundaries and word-level timestamped transcripts; the only meeting-minutes carrier in this catalogue that ships its own speech bytes.",
       "claim_limit": "Status is PARTIAL and four limits bind any claim. (1) WER IS NOT SUPPORTED: the shipped reference transcripts are machine ASR output (engineVersion v1.0.2, en-US, per-word confidences), so transcript-level WER against them measures agreement with another recogniser, not accuracy. Valid surfaces are summarization, spoken QA and agenda-item segmentation. (2) THE GOLD IS PER-BILL, NOT PER-DISCUSSION: summaries are Legistar agenda-item/bill descriptions with website-index segment boundaries, not verbatim human-written minutes; measured here, 353 of 6495 bills (5.4%) recur across more than one meeting, so 749 instances (10.9%) carry gold text identical across different audio. (3) THE OFFICIAL SPLITS ARE SEGMENT-LEVEL: bill-disjoint (0 bills span train and test) but NOT meeting-disjoint -- 791 of 1248 meetings have segments in more than one official split -- so any meeting-level or full-audio evaluation must re-split by meeting, as the local manifest does. (4) SAMPLING IS NOT DATE-RANDOM FOR SEATTLE: Seattle audio ids are date-encoded (full_MMDDYYV), so archive membership is a calendar block; the drawn Seattle chunk spans only mid-January to end-February across 2016-2018, while Denver and LongBeach ids are opaque Granicus uuids and are date-random. Separately, the ACL 2023 paper excludes San Francisco, evidence the authors treated per-city permissions as binding; per-city redistribution constraints should be assumed to survive into any release."
+    },
+    {
+      "name": "notsofar1",
+      "kind": "dataset",
+      "local_subdir": "datasets/notsofar1",
+      "source": {
+        "kind": "hf",
+        "id": "microsoft/NOTSOFAR",
+        "code_repo": "https://github.com/microsoft/NOTSOFAR1-Challenge",
+        "challenge_page": "https://www.chimechallenge.org/challenges/chime8/task2/index",
+        "paper": "Vinnikov et al., NOTSOFAR-1 Challenge: New Datasets, Baseline, and Tasks for Distant Meeting Transcription, Interspeech 2024, pages 5003-5007, doi 10.21437/Interspeech.2024-1788",
+        "subsets_acquired": [
+          "benchmark-datasets/dev_set/240825.1_dev1/MTG",
+          "benchmark-datasets/eval_set/240629.1_eval_small_with_GT/MTG",
+          "benchmark-datasets/eval_set/240825.1_eval_full_with_GT/MTG"
+        ]
+      },
+      "revision": "ba8fd0f034ce185fe4d24f47e53b4b8194795f07",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": [
+        "meeting-minutes-speech"
+      ],
+      "status": "COMPLETE",
+      "license": "cc-by-4.0",
+      "license_note": "DECLARED, not defaulted. The official code repository states verbatim under 'Data License': \"The data provided in this repository is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to use, share, and adapt the data as long as appropriate credit is given.\" The Hugging Face dataset repository additionally ships the full CC BY 4.0 legal code as LICENSE.txt (18,650 bytes, first line \"Attribution 4.0 International\"), which is stored locally with the payload. NOTE the two-licence split: the GitHub repository's own LICENSE file is the MIT Licence and governs the BASELINE CODE only, not the corpus; the data licence of record is CC BY 4.0 as quoted above. Attribution is therefore required, and unlike SpokenWOZ or WearVox there is no non-commercial restriction.",
+      "auth_note": "UNGATED and token-free. The Hugging Face API reports gated=false and private=false, and anonymous unauthenticated fetches were verified to succeed end to end: HTTP 200 for the JSON annotation layers and HTTP 206 range responses for LFS audio served from the public xet CDN with X-Xet-Cas-Uid=public. The project README instructs setting HF_TOKEN, but that instruction is a convenience and is NOT enforced for this repository - no account, form, click-through or approval queue stands between this program and the bytes. Zero cost.",
+      "corpus_facts": {
+        "released_meetings_open_research": 237,
+        "paper_challenge_era_meetings": 280,
+        "avg_meeting_duration_min": 6,
+        "rooms_total_corpus": 30,
+        "attendees_per_meeting": "4-8",
+        "language": "English",
+        "sc_hours_full_corpus": 152,
+        "mc_hours_full_corpus": 106,
+        "published_baseline_tcpwer_dev_set_1": {
+          "single_channel": 46.8,
+          "multi_channel": 32.4
+        },
+        "note": "The paper's Table 1 reports 280 meetings across train/dev/eval for the challenge-era corpus and sums to about 152 h SC and 106 h MC, matching its prose figure of 'around 150 hours of SC data and 110 hours of MC data'. The currently distributed open-research corpus is 237 meetings: Dev-set-2 was withdrawn for legal and quality reasons and is licensed for challenge use only. Any citation of '315 meetings' is unsupported by either primary source."
+      },
+      "acquired_scope_facts": {
+        "unique_meetings": 165,
+        "sc_sessions": 1156,
+        "close_talk_streams": 1180,
+        "transcript_segments": 59581,
+        "transcript_word_tokens": 369708,
+        "distinct_rooms": 14,
+        "subset_relationship": "eval_small (80 meetings) is a strict subset of eval_full (129 meetings) and dev1 (36 meetings) is disjoint from both, so the three acquired sets cover 165 unique meetings, not 245."
+      },
+      "expected_payload": {
+        "size_bytes": 28069650528,
+        "files": 3074,
+        "scope": "single-channel sc_* device audio, per-speaker close_talk audio, and every JSON annotation/metadata layer for dev1 + eval_small + eval_full"
+      },
+      "verification": {
+        "observed_at": "2026-08-18",
+        "payload_files": 3074,
+        "payload_size_bytes": 28069650528,
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "lfs_sha256_verified": 2336,
+        "lfs_sha256_failures": 0,
+        "json_parsed_ok": 735,
+        "json_parse_failures": 0,
+        "control_files_present": 0,
+        "audio_files": 2336,
+        "audio_duration_h": {
+          "close_talk": 123.782,
+          "sc_audio": 119.428
+        },
+        "audio_formats": [
+          "16000 Hz 1ch PCM_16"
+        ],
+        "payload_manifest_sha256": "62c6a09096c31385085d50735b43f5766881b2c2ee46be870fe7d2b0c0f06188",
+        "gated": false,
+        "byte_closure": true,
+        "method": "official huggingface.co pinned-revision file list at revision ba8fd0f034ce185fe4d24f47e53b4b8194795f07; per-file byte-size closure; per-file SHA-256 verified against the upstream official LFS digests for every audio file (this is what makes the hf-mirror.com transfer channel safe); all JSON layers parsed; soundfile decode spot-check",
+        "receipt": "datasets/notsofar1/notsofar1-acquisition-receipt.json",
+        "manifest": "datasets/notsofar1/notsofar1-payload-manifest.txt",
+        "disposition": "complete for the acquired single-channel scope; not a Stage-2 core-start gate"
+      },
+      "annotation_layers": {
+        "gt_transcription.json": [
+          "speaker_id",
+          "ct_wav_file_name",
+          "start_time",
+          "end_time",
+          "text",
+          "word_timing (per-word [token, start, end])"
+        ],
+        "gt_meeting_metadata.json": [
+          "meeting_id",
+          "MtgType",
+          "MeetingDurationSec",
+          "Room",
+          "NumParticipants",
+          "ParticipantAliases",
+          "Topic",
+          "Hashtags",
+          "ParticipantAliasToCtDevice"
+        ],
+        "devices.json": [
+          "device_name",
+          "is_mc",
+          "is_close_talk",
+          "channels_num",
+          "wav_file_names"
+        ],
+        "verbatim_markup_inventory": {
+          "<ST/>": 30161,
+          "<FILL/>": 3364,
+          "<UNKNOWN/>": 1730,
+          "<PName>...</PName>": 1297,
+          "<FILLlaugh/>": 1169,
+          "<BA/>": 996,
+          "<ISSUE/>": 184,
+          "<FL/>": 18,
+          "<SN/>": 2,
+          "<PAUSE/>": 1
+        },
+        "absent": [
+          "named entities",
+          "abstractive summaries",
+          "dialogue acts",
+          "topic segmentation"
+        ],
+        "absent_note": "NOTSOFAR-1 ships no named-entity layer, no summary layer and no dialogue-act layer. Its annotation value is concentrated entirely in speaker-attributed, word-timed verbatim transcription. This is the mirror image of ICSI, which carries summaries, topic segmentation and MRDA dialogue acts but likewise no named entities."
+      },
+      "transcript_quality_evidence": "STRONGEST human-verbatim guarantee of any meeting corpus held by this program, and it is human-ORIGINATED rather than machine-then-corrected. The paper states verbatim that the transcription process 'for the development and evaluation sets relies on close-talk recordings and is conducted entirely without human access to machine-generated transcriptions', explicitly to avoid the machine bias whereby 'competing algorithms will be penalized for deviating from the transcription algorithm'. On segmentation and adjudication it states: 'attendees wore close-talk microphones ... Human annotators then corrected any segmentation errors, and additional throat microphones were employed for quality control. For most meetings, transcription was carried out independently by two professional transcribers, with a third judge resolving non-consensus cases.' The conclusion restates that 'Annotations were created based on the agreement of multiple human listeners'. Local byte-level corroboration: disfluencies and backchannels are retained at a 4.01 percent share of dev1 tokens (um 424, uh 651, hmm 844, mm 720), and the transcripts carry a full verbatim markup scheme for self-truncation, fillers, laughter, backchannels and unintelligible speech rather than cleaned-up prose.",
+      "research_role": "Speaker-attributed verbatim meeting-speech carrier for the meeting-minutes-agent topic. Supplies what ICSI and MeetingBank cannot: single-device far-field office meetings with word-timed, multi-judge human verbatim references and a published speaker-attributed tcpWER baseline (SC 46.8) that makes OBS-side and ORG-side effects measurable against an external number.",
+      "scope_note": "DELIBERATELY DEFERRED, not missing: (1) the multi-channel mc_* 7-microphone arrays are not held, because the frozen core is reached across an API-shaped boundary and consumes mono - array processing is outside the claim surface; they run to 52.53 GiB in 4,725 files summed over the three acquired sets, or 40.01 GiB of unique bytes once the eval_small/eval_full duplication noted below is removed; (2) the 240825.1_train split (27.46 GiB) is not held, because this study is training-free by charter; (3) the ~17.8 TiB css-datasets simulated training corpus is out of scope for the same reason. TRANSFER DEDUPLICATION: every one of the 1,659 eval_small WAVs is byte-identical (matching upstream LFS SHA-256 at the same relative path) to its eval_full counterpart, so eval_small audio was materialised locally from eval_full instead of being transferred twice, saving 6.08 GiB; eval_small keeps its own devices.json because its device selection (2 devices per track) is what defines the challenge evaluation set. ACQUISITION CHANNEL: the official endpoint sustained only about 95 KB/s per stream from this host with repeated partial-transfer failures, so the payload was fetched through the hf-mirror.com endpoint with aria2c; mirror integrity is not trusted on faith - every audio file was verified against the SHA-256 digest published by the official huggingface.co API.",
+      "claim_limit": "CC BY 4.0 requires attribution on any downstream use or release. TWO SUBSTANTIVE LIMITS ON WHY THIS CORPUS WAS QUEUED. (1) ENTITY DENSITY DOES NOT HOLD. This corpus was admitted to the queue on the hypothesis that it combines entity density with human-verified verbatim transcripts; the verbatim half is confirmed and exceptionally strong, but the entity half is refuted. The meetings are scripted generic-scenario discussions ('Design the car of the future', 'Electric scooters regulation', 'Holiday gifts for the staff'), participants are pseudonymous aliases, person-name spans are wrapped in <PName> tags, and there is no entity annotation layer at all. Measured capitalised-token candidates run 14-16 per 1000 words but are dominated by segment-initial function words; genuine named entities are sparse and common-knowledge (Europe 34, Mars 16, Tuesday 37, Mexico 30, ChatGPT 13, Airbnb 9), with no rare domain-specific entities of the kind that make Earnings21/22 and ConEC useful for entity-biasing work. Do NOT cite NOTSOFAR-1 as an entity-dense carrier; cite it as a verbatim, speaker-attributed, far-field meeting carrier. (2) SPEAKER OVERLAP IN DEV1. The upstream README warns that dev1 has 12 speakers, 10 of which also appear in the training set; the evaluation sets are disjoint from training in both speakers and rooms, so eval_full is the sound choice for any held-out claim. This record is an acquisition receipt only: it fixes bytes and identity and grants no experiment authority - consumption runs under the meeting-minutes-agent execution contract."
     }
   ]
 }
