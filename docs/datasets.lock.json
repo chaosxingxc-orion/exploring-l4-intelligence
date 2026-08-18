@@ -2047,7 +2047,7 @@
       "profiles": [
         "meeting-minutes-text"
       ],
-      "status": "PARTIAL",
+      "status": "COMPLETE",
       "license": "cc-by-4.0",
       "license_note": "DECLARED. Both dataset cards carry `license: cc-by-4.0` verbatim in their YAML front matter and the Hugging Face repo metadata reports gated=false, private=false for both. Verbatim card copies are stored under datasets/m3-slu/upstream-cards/ with their SHA-256 in the local acquisition receipt.",
       "dependencies": [
@@ -2055,17 +2055,24 @@
         "meld"
       ],
       "expected_payload": {
-        "size_bytes": 28103474,
-        "files": 7,
-        "rows": 10908
+        "size_bytes": 42790047368,
+        "files": 162,
+        "rows": 10908,
+        "text_layer_size_bytes": 28103474,
+        "text_layer_files": 7,
+        "audio_shards": 155,
+        "audio_size_bytes": 42761943894
       },
       "verification": {
-        "observed_at": "2026-08-17",
-        "acquisition_mode": "TEXT_LAYER_ONLY",
-        "payload_files": 7,
-        "payload_size_bytes": 28103474,
+        "observed_at": "2026-08-18",
+        "acquisition_mode": "TEXT_LAYER_PLUS_FULL_AUDIO",
+        "payload_files": 162,
+        "payload_size_bytes": 42790047368,
+        "text_layer_files": 7,
+        "text_layer_size_bytes": 28103474,
         "upstream_parquet_bytes": 42761943894,
-        "transfer_ratio": 0.000657,
+        "local_parquet_bytes": 42761943894,
+        "transfer_ratio": 1.0,
         "row_counts": {
           "task1_preview": 50,
           "task1_sample": 3780,
@@ -2090,13 +2097,29 @@
         "duplicate_ids": 0,
         "rows_with_empty_script": 0,
         "shard_lfs_sha256_recorded": 155,
-        "method": "Hugging Face pinned-revision tree listing with per-shard LFS SHA-256 recorded, then pyarrow column projection over HTTP range requests to transfer only the text columns; local per-file SHA-256 receipt",
-        "disposition": "text layer complete for both tasks at the pinned revisions; the audio column was deliberately not transferred"
+        "shard_lfs_sha256_matched": 155,
+        "audio_shards": {
+          "task1": 44,
+          "task2": 111,
+          "total": 155,
+          "task1_bytes": 14998977333,
+          "task2_bytes": 27762966561
+        },
+        "audio_verification_method": "completion is never inferred from file size: every shard must carry no aria2 control file, show parquet PAR1 magic at head and tail, match the upstream byte length, and match the upstream LFS SHA-256 recorded in datasets/m3-slu/.upstream-manifest.json at the pinned revisions",
+        "audio_verdicts": {
+          "COMPLETE": 155,
+          "CORRUPT": 0,
+          "MISSING": 0
+        },
+        "decode_spot_check": "16 audio cells across both tasks, including all 10 shards resumed on 2026-08-18, pulled by pyarrow column projection and decoded in memory with soundfile: 16/16 decoded, 16/16 non-silent, 16 kHz RIFF/WAV, 71-455 s per cell; no ffmpeg and no installs",
+        "method": "Hugging Face pinned-revision tree listing with per-shard LFS SHA-256 recorded; the text columns first by pyarrow column projection over HTTP range requests, then the full audio-bearing parquet release by resumable aria2c direct from huggingface.co at the same pinned revisions; local per-file SHA-256 receipt",
+        "disposition": "text layer and full audio layer complete for both tasks at the pinned revisions; all 155 shard SHA-256s match the upstream LFS oids and the local audio byte total equals the upstream total exactly",
+        "receipt": "datasets/m3-slu/acquisition-receipt.json"
       },
       "access_note": "RELEASE STATUS observed 2026-08-17: M3-SLU is fully released and ungated on Hugging Face. The two full repos supersede the earlier 100-row M3-SLU-sample / -Task1-sample / -Task2-sample repos, whose cards still read \"The full dataset (10K+ samples) will be released later in 2025\". The released row counts (3780 + 7028 = 10808) are below the arXiv:2510.19358 Table 3 figures (4926 + 7947 = 12873); the AMI Task 2 count matches exactly at 2131.",
-      "consumption_boundary": "Text layer only. This record holds id/instruction/question/answer/script/n_speakers/data_source for every released row and NO audio. The audio-bearing parquet release is 42.76 GB across both tasks and can be fetched later from the pinned revisions. M3-SLU ids are corpus-tagged sequence ids (ami_task1_N, chime_task1_N, meld_task2_N, multi_task2_N), so the release exposes no source meeting id and no per-meeting join to the governed AMI corpus is possible from the text layer alone.",
+      "consumption_boundary": "Text layer plus full audio. This record holds id/instruction/question/answer/script/n_speakers/data_source for every released row AND the complete audio-bearing parquet release, 155 shards and 42.76 GB across both tasks, under datasets/m3-slu/audio/task1 and datasets/m3-slu/audio/task2 at the same pinned revisions. The audio is multi-party human meeting and dialogue speech, in scope for speech and linguistic-content work only. M3-SLU ids are corpus-tagged sequence ids (ami_task1_N, chime_task1_N, meld_task2_N, multi_task2_N), so the release exposes no source meeting id and no per-meeting join to the governed AMI corpus is possible from the release metadata alone.",
       "research_role": "Speaker-attributed QA and speaker-attribution matching over multi-party speech (LREC 2026 submission, arXiv:2510.19358); QA-face probe carrier for the meeting-minutes-agent topic.",
-      "claim_limit": "Status is PARTIAL: the benchmark's audio is not held locally, so no end-to-end speaker-attributed audio claim can rest on this record until the 42.76 GB audio release is fetched under its own decision."
+      "claim_limit": "Status is COMPLETE: both the text layer and the full 42.76 GB audio release are held locally at the pinned revisions and verified shard by shard against the upstream LFS SHA-256s, so an end-to-end speaker-attributed audio path is now materially available. Two limits still bind. The released row counts remain below the arXiv:2510.19358 Table 3 figures (see access_note), so any claim must be scoped to the released subset and never to the paper's reported benchmark size. The lifecycle stays ANNOTATION_ONLY: acquisition and verification alone admit this record to no execution profile, and any use in a study requires its own owner decision."
     },
     {
       "name": "icsi-meeting-corpus",
