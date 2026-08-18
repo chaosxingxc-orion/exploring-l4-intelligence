@@ -318,7 +318,7 @@
     {
       "name": "slurp",
       "kind": "dataset",
-      "local_subdir": "repos/slurp/scripts/audio",
+      "local_subdir": "datasets/slurp",
       "source": {
         "kind": "git",
         "url": "https://github.com/pswietojanski/slurp"
