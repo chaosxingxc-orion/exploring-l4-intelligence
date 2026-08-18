@@ -972,11 +972,12 @@
       "local_subdir": "datasets/audio2tool",
       "source": {"kind": "hf", "id": "RVtech/Audio2Tool"},
       "revision": "f1388da9a3189541ab82adac88824a0661670c43",
-      "lifecycle": "LOCAL_CANDIDATE",
-      "profiles": ["local-candidates"],
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-diagnostics"],
       "status": "COMPLETE",
       "license": "cc-by-nc-4.0",
-      "verification": {"observed_at": "2026-07-23", "size_bytes": 10474543420, "files": 72062}
+      "verification": {"observed_at": "2026-07-23", "size_bytes": 10474543420, "files": 72062},
+      "promotion": {"date": "2026-08-18", "from": "LOCAL_CANDIDATE/local-candidates", "authority": "2026-08-15 owner amendment (single bounded Audio2Tool leverage probe admitted) + 2026-08-17 owner delegated ruling 2 (P-A2T flight approved once numerics bind) + 2026-08-17 capability-ladder GO (L5 = Audio2Tool). This dedicated record also retroactively covers the same authority chain under which slurp was promoted in the wave-acquisition commit 1677b07 without its own amendment entry. NC license constraint carried on audio-derived results.", "research_role": "L5 agentic-speech carrier: frozen 400-item discovery split (hash e1d751e6...), zero-supply A0 baseline (baseline-reproduction) then Stage-2 supply probe (bounded-discovery-probe)"}
     },
     {
       "name": "audiocaps-qa",
