@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-16 — P2 R-ladder VOIDED: reflection-operator language dropped; targeted legal supply is the surviving candidate"
+last_refresh: "2026-08-18 — SAEA supply-law probe chain consumed (five registered reads); meeting-minutes-agent admitted 2026-08-17 and published to a private remote"
 ---
 
 # Research Objective & Current State
@@ -57,12 +57,18 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (goal-mode standing GO; SAEA-E-001 done 2026-08-09).
-2026-08-16: **P2 R-ladder VOIDED** — verify framing copies wrong references at the bias
-rate (7/9 vs 7/9); replay recovered 0/54. Reflection-operator language dropped; the
-candidate is **targeted legal small-N supply** (metadata-roster line). kb34
-intersection superseded (owner GO); n=44 admitted pending N0 power and the N1 routing
-gate. Verdict: study `docs/readiness/` 2026-08-16.
+Stage-2A discovery in flight (goal-mode standing GO). 2026-08-18 state: the registered
+probe chain on the supply thesis is consumed — P-SLU (UNRESOLVED, rule-gap; legal roster
++0.42 SLU-F1, ~64% schema grounding), A2T A0 (+30.0pp real gap, 120-sample headroom),
+Stage-2 (COPY-TRAP, 16 conversions vs 34 value-injections), Stage-2b (Q-A CONFIRMED-CUT:
+strip `argument_defaults` → 34→2 injections at half the conversions, 4:1; Q-B: wrong-row
+augment inert), Stage-2c (ROBUST envelope [8,10]/120 conv, [2,4] induced; DEPLOY-AUGMENT
+CHANNEL-REOPENED — in-context registry defaults resume copying, so the clean regime is an
+ORG-side action). Verdicts: study `docs/readiness/` 2026-08-18. In flight: P-SLU s2
+(format-matched filler control + closed-set self-scoping re-fly) and the loss-decomposition
+re-read; next milestone is Stage-2B candidate qualification around the supply law. Both
+carrier repos and this umbrella now push to private `chaosxingxc-orion` remotes (owner
+order 2026-08-18).
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
@@ -70,8 +76,10 @@ The Wiki controls experiment identity and decisions; the study repo owns code/co
 ## Formal, legacy and routing boundaries
 
 Carriers bind stages (Decision-Log continuation entry 91): Stage‑1 = umbrella; Stage‑2 = `studies/<slug>`, endpoint =
-qualified paper candidates; Stage‑3 = `papers/<slug>` under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT` —
-none admitted, registry empty. The Stage‑1B program-level Lean layer is retired; formal work is
+qualified paper candidates; Stage‑3 = `papers/<slug>` under `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`.
+One papers carrier is admitted: **`papers/meeting-minutes-agent/`** (owner GO 2026-08-17, its own
+standalone research object — AI meeting notes on the frozen core; private remote with collaborator
+EuphoriaYan, admin). It is a research carrier from scratch, not a promotion of a SAEA candidate. The Stage‑1B program-level Lean layer is retired; formal work is
 rebuilt per admitted study and claim in Stage‑2. The fixed Stage‑1B v5 320-work union remains
 historical evidence; H5 remains `WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not
 engineering identities; admitted repos live at `studies/<semantic-name>/`. R2R1 remains
