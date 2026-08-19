@@ -22,6 +22,7 @@
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
     "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset, and NOTSOFAR-1's single-channel far-field office meetings with multi-judge human verbatim speaker-attributed references. Distinct from meeting-minutes-text, which carries no audio.",
+    "meeting-minutes-tools": "Pinned frozen TOOL models for the meeting-minutes-agent topic (segmentation pre-pass only; answer authority stays with the frozen core). Currently the NVIDIA Sortformer streaming diarizer v2 payloads.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -43,6 +44,22 @@
     "total_h": "381.0G"
   },
   "amendments": [
+    {
+      "date": "2026-08-18",
+      "task": "meeting-minutes-agent diarization tool acquisition: the owner locked NVIDIA Sortformer v2 and authorized the download the same day. Register-then-fetch of the pinned checkpoint pair, deployment-runtime build, and reference-venv preparation. Zero cost; ungated source; no diarization was run on any corpus audio.",
+      "changes": [
+        {
+          "kind": "asset-registration",
+          "note": "diar-sortformer-4spk-v2 registered as the first member of the new meeting-minutes-tools profile (lifecycle AUXILIARY, kind model). Identity verified live against the official huggingface.co API BEFORE fetching: revision 5240a64075176943f677d30fa2171c780229f341, ungated, cc-by-4.0, and exactly two governed payloads whose HF LFS oids are recorded as source.files sha256 (.nemo 471,367,680 B; q8_0 GGUF 147,075,776 B). Fetched via the standard asset_lock path (hf_complete.py pinned manifest + aria2c, official endpoint) in 376 s; post-download sha256sum matches both oids and inventory --full reports COMPLETE with zero drift. One working copy at models/diar-sortformer-4spk-v2; no scatter or hub-cache duplicates. The CC-BY-NC v1 alternate was deliberately NOT downloaded (contingent smoke arm only).",
+          "entries": ["diar-sortformer-4spk-v2"]
+        },
+        {
+          "kind": "runtime-and-venv-preparation",
+          "note": "Two runtime paths prepared without touching the shared speechrl venv. (a) NVIDIA NeMo-Speech.cpp built CUDA-native on WSL2 ext4 at pinned commit 4c749a700500e077d4732a539eb082bf2208dac7 (no release tag exists yet; submodule + patch identity, build flags, binary sha256 and the single bundled-sample execution proof are on the entry's deployment_runtime object). (b) Isolated reference venv ~/.venvs/diar: torch/torchaudio 2.9.1+cu128 first, then nemo_toolkit[asr]==3.0.0 PLAIN -- the cu12/cu13 extras that would replace torch with a cu126/cu132 build were avoided, pip attempted no torch replacement, and the pinned .nemo checkpoint restores as SortformerEncLabelModel with 117,693,960 parameters (model load only, CPU, zero audio). The 2.7.0 fallback pin was not needed. Receipt: docs/checks/meeting-minutes-agent/2026-08-18-diar-acquisition/README.md.",
+          "entries": ["diar-sortformer-4spk-v2"]
+        }
+      ]
+    },
     {
       "date": "2026-08-17",
       "task": "speech-aware acquisition wave 4 (SAEA half of the survey-confirmed shortlist): verify-then-fetch of SpokenNativQA and a scoped AudioBench speech bundle. Zero cost; no paid, gated or form-walled source was used. The meeting-domain half of the shortlist is deliberately NOT acquired here, pending an owner decision.",
@@ -878,6 +895,74 @@
       "factor_family": "tool-model",
       "license": "Apache-2.0 (ungated)",
       "note": "ECAPA-TDNN speaker embeddings (VoxCeleb-trained, EER 0.8%) for speaker-indexed knowledge construction and same-speaker retrieval. Downloaded 2026-08-13 on owner authorization; speechbrain 1.1.0 added to the shared speechrl venv (torch untouched at 2.9.1+cu128). pyannote community-1 (HF-gated) deliberately NOT acquired pending owner gating decision; MFA 3.3.9 deferred until span-anchoring arms are scheduled. First runtime drive requires a tool-smoke exposure-ledger row in the study repo."
+    },
+    {
+      "name": "diar-sortformer-4spk-v2",
+      "kind": "model",
+      "local_subdir": "models/diar-sortformer-4spk-v2",
+      "source": {
+        "kind": "hf",
+        "id": "nvidia/diar_streaming_sortformer_4spk-v2",
+        "repo_type": "model",
+        "include": [
+          "diar_streaming_sortformer_4spk-v2.nemo",
+          "diar_streaming_sortformer_4spk-v2.q8_0.gguf"
+        ],
+        "files": [
+          {
+            "filename": "diar_streaming_sortformer_4spk-v2.nemo",
+            "size_bytes": 471367680,
+            "sha256": "b371afce2c4958186469df33d939936b9746c89f38b10a69cfd2c61254e83329"
+          },
+          {
+            "filename": "diar_streaming_sortformer_4spk-v2.q8_0.gguf",
+            "size_bytes": 147075776,
+            "sha256": "0679cfeb1ce356d0dea9470b31274f4bfc7eb927497d82005483770666da998a"
+          }
+        ]
+      },
+      "revision": "5240a64075176943f677d30fa2171c780229f341",
+      "lifecycle": "AUXILIARY",
+      "profiles": ["meeting-minutes-tools"],
+      "status": "COMPLETE",
+      "license": "cc-by-4.0",
+      "verification": {
+        "observed_at": "2026-08-18",
+        "resolved_revision": "5240a64075176943f677d30fa2171c780229f341",
+        "payload_files": 2,
+        "payload_size_bytes": 618443456,
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "sha256_failures": 0,
+        "byte_closure": true,
+        "gated": false,
+        "method": "official huggingface.co pinned revision via the standard asset_lock fetch path (hf_complete.py + aria2c); post-download sha256sum of both payloads matches the HF LFS oids recorded in source.files; download wall-clock 376 s, hash pass 4 s",
+        "receipt": "models/diar-sortformer-4spk-v2/.speechrl-asset.json",
+        "disposition": "complete pinned tool model; first diarization run on corpus audio stays gated behind the registered smoke"
+      },
+      "size_h": "590M",
+      "size_bytes": 618443456,
+      "files": 2,
+      "task": "speaker-diarization",
+      "factor_family": "tool-model",
+      "note": "NVIDIA streaming Sortformer diarizer v2 (117M params, max 4 speakers, 16 kHz mono): the owner-locked primary diarization TOOL for the meeting-minutes-agent topic (owner ruling 2026-08-18, download authorized same day). Two governed payloads at the pinned revision: the fp32 .nemo checkpoint (NeMo reference path, isolated venv ~/.venvs/diar) and the first-party q8_0 GGUF consumed by NVIDIA NeMo-Speech.cpp (deployment path). Ungated, CC-BY-4.0. Scope: segmentation pre-pass only; the frozen core keeps answer authority. AMI/ICSI appear in NVIDIA's training-data list (partition unstated), so any AMI DER measured with this tool is an in-domain number - carried as a caveat by the registered smoke (papers/meeting-minutes-agent docs/readiness/2026-08-18-diar-smoke-preregistration.md). Pin source: papers/meeting-minutes-agent docs/plans/2026-08-18-diarization-tool-selection.md.",
+      "deployment_runtime": {
+        "runtime": "NVIDIA NeMo-Speech.cpp (Apache-2.0), CUDA build, WSL2 ext4 sibling of the llama.cpp checkouts",
+        "checkout": "/home/chao/nemo-speech.cpp",
+        "commit": "4c749a700500e077d4732a539eb082bf2208dac7",
+        "version": "1.0.0",
+        "submodules": {
+          "ggml": "c03b4e2bcece5134827881af90242086daf75be5 (project's pinned CUDA patch series applied by scripts/configure.sh; reported c03b4e2b-dirty by design)",
+          "llama.cpp": "560445bf34c87356ad0f8d80fb03ec5488850b65 (present, not linked by the diar preset)"
+        },
+        "build": "CMake preset cuda-diar (Ninja, Release, GGML_CUDA=ON, CMAKE_CUDA_ARCHITECTURES=120 -> 120a, nvcc /usr/local/cuda-12.8, GCC 13.3.0, cmake 4.3.4 + CMAKE_POLICY_VERSION_MINIMUM=3.5 for the sentencepiece subbuild); private static sentencepiece built repo-locally under .deps/ at google/sentencepiece 17d7580d6407802f85855d2cc9190634e2c95624 - no system package installed",
+        "binary": "build/cuda-diar/bin/nemo-speech",
+        "binary_sha256": "1a3e3f4fe7db4c48e5d6e44a76d5adf2bbfef80024c023b0eab2766eb61aca78",
+        "binary_size_bytes": 366048,
+        "execution_proof": "2026-08-18: --version reports 1.0.0; exactly ONE bundled-sample run (test_files/asr/wav/test/jfk.wav, 11 s, ships with the runtime repo - NOT program corpus audio) with the pinned q8_0 GGUF on CUDA0 (RTX 5090, compute 12.0): all 971 tensors loaded, plausible single-speaker RTTM emitted, 19.48 s wall including model load. No AMI/ICSI/corpus audio was touched; the corpus smoke stays separately gated."
+      },
+      "research_role": "Frozen tool-level speaker diarization for turn-aware 90 s transport packing in the meeting-minutes-agent paper repo (TOOL_DIAR tier); same-family alternate diar_sortformer_4spk-v1 (CC-BY-NC-4.0) deliberately NOT acquired unless the registered smoke's contingent Arm C triggers.",
+      "claim_limit": "4-speaker design bound: AMI scenario meetings fit exactly; ICSI (3-10 speakers) is outside this tool's bound and must use the registered fallback (pyannote 3.1) instead. CC BY 4.0 attribution carried on any release."
     }
   ],
   "ref_repos": [
