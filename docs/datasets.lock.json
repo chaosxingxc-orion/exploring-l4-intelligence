@@ -23,6 +23,7 @@
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
     "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset, and NOTSOFAR-1's single-channel far-field office meetings with multi-judge human verbatim speaker-attributed references. Distinct from meeting-minutes-text, which carries no audio.",
     "meeting-minutes-tools": "Pinned frozen TOOL models for the meeting-minutes-agent topic (segmentation pre-pass only; answer authority stays with the frozen core). Currently the NVIDIA Sortformer streaming diarizer v2 payloads.",
+    "speech-aware-tools": "Pinned frozen TOOL models for the speech-aware-evidence-acquisition study, entering under the charter's frozen tool-level retriever/judge clause (encode-only; final answer authority stays with the frozen core). Currently the Qwen3-Embedding-0.6B GGUF text embedder for the P-EMB-3M cascade arm.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -44,6 +45,22 @@
     "total_h": "381.0G"
   },
   "amendments": [
+    {
+      "date": "2026-08-20",
+      "task": "speech-aware-evidence-acquisition P-EMB-3M cascade-arm text-embedder acquisition: the owner approved a single bounded local text embedder for the CASCADE construction (core T0 self-transcription -> local text embedder -> text-text label matching). Register-then-fetch of the pinned single-file GGUF, plus a bounded server sanity check with zero corpus contact. Zero cost; ungated source; no study dataset audio or text was touched.",
+      "changes": [
+        {
+          "kind": "asset-registration",
+          "note": "qwen3-embedding-0.6b-gguf registered as the first member of the new speech-aware-tools profile (lifecycle AUXILIARY, kind model). Identity verified live against the official huggingface.co API BEFORE fetching: revision 370f27d7550e0def9b39c1f16d3fbaa13aa67728, ungated, apache-2.0, GGUF metadata reports 595,776,512 total params. Exactly one governed payload selected out of the repo's two published GGUFs -- Qwen3-Embedding-0.6B-Q8_0.gguf (639,150,592 B), whose HF LFS oid is recorded as source.files sha256; the larger f16 sibling (1,197,629,632 B) was deliberately NOT fetched. Fetched via the standard asset_lock path (hf_complete.py pinned manifest + aria2c, official endpoint) in ~309 s; post-download sha256sum matches the oid and inventory --full --fail-on-drift reports COMPLETE with zero drift. One working copy at models/qwen3-embedding-0.6b-gguf; no scatter or hub-cache duplicates.",
+          "entries": ["qwen3-embedding-0.6b-gguf"]
+        },
+        {
+          "kind": "sanity-check",
+          "note": "The study's pre-existing pinned llama.cpp-featcache llama-server (build 5d9dfcb58ea860295da8fc93c7b5bed9e2c71151, unmodified) served the new GGUF once with --embedding --pooling last on a spare port (GPU idle, -ngl 99), embedded one synthetic string twice, then was torn down. Dimension 1024 (L2 norm approx 1.0), matching the model card. Determinism was NOT bit-exact across the two identical-input calls under GPU batched serving (cosine similarity 0.999910, max abs diff 1.40e-3) -- consistent with known llama.cpp CUDA batching float jitter, recorded as an observed fact rather than assumed. Zero corpus audio or text contact; the frozen Qwen3-Omni core was never started. Receipt: docs/checks/speech-aware-evidence-acquisition/2026-08-20-qwen3emb-acquisition/README.md.",
+          "entries": ["qwen3-embedding-0.6b-gguf"]
+        }
+      ]
+    },
     {
       "date": "2026-08-18",
       "task": "meeting-minutes-agent diarization tool acquisition: the owner locked NVIDIA Sortformer v2 and authorized the download the same day. Register-then-fetch of the pinned checkpoint pair, deployment-runtime build, and reference-venv preparation. Zero cost; ungated source; no diarization was run on any corpus audio.",
@@ -963,6 +980,52 @@
       },
       "research_role": "Frozen tool-level speaker diarization for turn-aware 90 s transport packing in the meeting-minutes-agent paper repo (TOOL_DIAR tier); same-family alternate diar_sortformer_4spk-v1 (CC-BY-NC-4.0) deliberately NOT acquired unless the registered smoke's contingent Arm C triggers.",
       "claim_limit": "4-speaker design bound: AMI scenario meetings fit exactly; ICSI (3-10 speakers) is outside this tool's bound and must use the registered fallback (pyannote 3.1) instead. CC BY 4.0 attribution carried on any release."
+    },
+    {
+      "name": "qwen3-embedding-0.6b-gguf",
+      "kind": "model",
+      "local_subdir": "models/qwen3-embedding-0.6b-gguf",
+      "source": {
+        "kind": "hf",
+        "id": "Qwen/Qwen3-Embedding-0.6B-GGUF",
+        "repo_type": "model",
+        "include": [
+          "Qwen3-Embedding-0.6B-Q8_0.gguf"
+        ],
+        "files": [
+          {
+            "filename": "Qwen3-Embedding-0.6B-Q8_0.gguf",
+            "size_bytes": 639150592,
+            "sha256": "06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439"
+          }
+        ]
+      },
+      "revision": "370f27d7550e0def9b39c1f16d3fbaa13aa67728",
+      "lifecycle": "AUXILIARY",
+      "profiles": ["speech-aware-tools"],
+      "status": "COMPLETE",
+      "license": "apache-2.0",
+      "verification": {
+        "observed_at": "2026-08-20",
+        "resolved_revision": "370f27d7550e0def9b39c1f16d3fbaa13aa67728",
+        "payload_files": 1,
+        "payload_size_bytes": 639150592,
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "sha256_failures": 0,
+        "byte_closure": true,
+        "gated": false,
+        "method": "official huggingface.co API identity check (repo, sha, gated, license) BEFORE any download, then the standard asset_lock fetch path (hf_complete.py + aria2c, official endpoint); post-download sha256sum of the payload matches the HF LFS oid recorded in source.files; asset_lock.py inventory --full --fail-on-drift reports COMPLETE, drift=0",
+        "receipt": "models/qwen3-embedding-0.6b-gguf/.speechrl-asset.json",
+        "disposition": "complete pinned tool model; first contact on any study corpus stays gated behind its own exposure-ledger row"
+      },
+      "size_h": "610M",
+      "size_bytes": 639150592,
+      "files": 1,
+      "task": "text-embedding",
+      "factor_family": "tool-model",
+      "note": "Qwen3-Embedding-0.6B (595.8M params, dim 1024, apache-2.0, ungated), Q8_0 single-file GGUF -- the local text embedder for the owner-approved P-EMB-3M cascade arm in the speech-aware-evidence-acquisition study (umbrella wiki/experiments/speech-aware-evidence-acquisition/2026-08-15-owner-go-dual-track-agentic.md CASCADE construction: core T0 self-transcription -> local text embedder (qwen3-embedding class) -> text-text label matching; ruling recorded in the study's docs/readiness/2026-08-20-embedder-charter-adjudication.md, selection context in docs/readiness/2026-08-20-omni-embedding-selection.md). Enters under the charter's frozen tool-level retriever clause: encode-only, final answer authority stays with the frozen Qwen3-Omni core. The repo also ships an f16 GGUF (1,197,629,632 B); Q8_0 was selected as the smaller single-file variant sufficient for a text-only encode-only tool. Sanity-served once with the pinned llama.cpp-featcache llama-server (build 5d9dfcb58ea860295da8fc93c7b5bed9e2c71151) with --embedding --pooling last on a spare port against one synthetic string, zero corpus contact; dimension and determinism recorded on the acquisition receipt, not here.",
+      "acquisition_receipt": "docs/checks/speech-aware-evidence-acquisition/2026-08-20-qwen3emb-acquisition/README.md"
     }
   ],
   "ref_repos": [
