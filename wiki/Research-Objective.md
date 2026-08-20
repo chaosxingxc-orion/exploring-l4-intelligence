@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-18 — supply-law probe chain consumed; meeting carrier admitted + published"
+last_refresh: "2026-08-20 — routing-tier arc closed; embedder path adjudicated"
 ---
 
 # Research Objective & Current State
@@ -55,12 +55,13 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (goal-mode standing GO). 2026-08-18: the supply-thesis probe
-chain (P-SLU, A2T A0, S2/2b/2c) is consumed — harm rides supplied VALUES (strip defaults:
-34→2 injections, half the conversions, form-ROBUST); wrong rows are inert; augmenting
-re-opens the copy channel (ORG-side fix). Verdicts: study `docs/readiness/`. In flight:
-P-SLU s2 + the loss-decomp re-read; next: Stage-2B qualification. Repos push to private
-remotes (owner order 2026-08-18).
+Stage-2A discovery in flight (goal-mode standing GO). 2026-08-20: routing-tier arc closed —
+decode routing is the only working router; few-shot supply and bare embedding matching both
+refuted (P-FEW, P-EMB-1/2). Owner scoped that refutation and adjudicated a retriever-clause
+path for dedicated embedders (P-EMB-3M design, gated on P-EMB-3L + an E-1 report, neither
+flown). Stage-2B freeze `bb995d5` awaits owner approval. Verdicts: study `docs/readiness/`;
+digest: `wiki/experiments/speech-aware-evidence-acquisition/README.md`. Repos push to
+private remotes (owner order 2026-08-18).
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.

@@ -81,3 +81,88 @@ baseline was delivered on 2026-08-05 with five adversarial self-check rounds dri
 `b0635aa`), and the first formal experiment was to be the smoke `SAEA-E-001` (runbook prepared, not yet
 executed). Every model contact must still carry a valid `ExecutionPlan` and be pre-registered in the study
 repo exposure ledger first, enforced fail-closed by `contracts.FrozenCoreGate`.
+
+## Second-arc probe verdicts (routing tier + embedder path, consumed 2026-08-19 – 2026-08-20)
+
+The study also runs a lighter `bounded-discovery-probe` track with its own `SAEA-PROBE-<name>-<n>`
+exposure rows (study repo `docs/exposure-ledger.md`), evidenced in `docs/readiness/` and consolidated
+in the study's living `docs/readiness/2026-08-19-scheme-scoreboard.md`. These are not `SAEA-E-<nnn>`
+formal ledger rows.
+
+- **P-FEW** — `INCONCLUSIVE-FEW` (consumed 2026-08-19, study `docs/readiness/2026-08-19-pfew-verdict.md`).
+  Few-shot demo supply on the closed-set SLURP decode router: BAL−NONE = **+0.0000**, 90% CI
+  **[−0.0667, +0.0667]** (n=60 SLURP devel; the point sits inside the ±0.05 equivalence band but the
+  CI overhangs it, so neither FS-HELPS nor a certified FS-INERT fires). Skew-label capture is **0/59
+  incremental** (predicted-label marginal unmoved 3→3→3 across arms); a small, CI-separated ICL-noise
+  cost (NONE−SKEW +0.0667) is real but is not label-prior capture. Closed-set decode routing itself
+  reproduces `{exact: 60}` mapping under three prompt constructions (2/2 confirmations), gold agreement
+  measured at **0.78–0.82 across two sessions** (cross-session reproduction noise ±2 samples on n=60).
+- **P-EMB-1** — `EMB-WEAK` (consumed 2026-08-19, study `docs/readiness/2026-08-19-pemb1-verdict.md`).
+  Bare mean-pooled cosine matching on the frozen core, SLURP 18-way: **3/60 = 0.0500**, below uniform
+  chance (0.0556); two-attractor collapse (`general`+`play` = 91.7% of predictions); permutation test
+  P=0.8774 (observed agreement fully explained by the prediction marginal, not content).
+- **P-EMB-2** — `EMB-CLOSED` (consumed 2026-08-19, study `docs/readiness/2026-08-19-pemb2-verdict.md`).
+  Same construction on Audio2Tool tool selection (152 registry rows), scored on the 183 tool-wrong ids
+  the V4 supply account cannot otherwise reach: **2/183 = 0.0109** top-1, top-5 **below** chance,
+  **400/400 winning cosines negative**. The 183 stay closed; the informational 217-id degradation figure
+  carries no clause. P-EMB-1/2 together put bare generation-core mean-pooled embedding routing at 0/2,
+  both clean rather than marginal.
+- **Owner correction (2026-08-19, `833b6c9`) + adjudication (2026-08-20,
+  `docs/readiness/2026-08-20-embedder-charter-adjudication.md`)**: the P-EMB-1/2 refutation is **scoped
+  to generation-core pooled embeddings only**, not to embedding routing as a family. Dedicated embedding
+  models — including ones derived from generative thinkers, e.g. LCO-Embedding-Omni — enter under the
+  charter's frozen tool-level retriever clause; binding condition: the integration must **structurally
+  forbid generation** (`encode()`-only, fail-closed machine check, never convention), final answer
+  authority stays with the frozen core. The owner also approved the **P-EMB-3M** multi-model
+  routing-comparison design named in the adjudication text (local dedicated embedders — LCO-3B primary,
+  GLAP, CLSP, omni-embed-nemotron control — plus a CASCADE arm: core self-transcription → local text
+  embedder (qwen3-embedding class) → text-text label matching), gated on an **E-1 feasibility/identity
+  report that has not yet been produced**. Caution for this refresh: the study's 2026-08-20 selection
+  ticket (`docs/readiness/2026-08-20-omni-embedding-selection.md`) surveys LCO-Embedding-Omni-3B as a
+  `sentence-transformers`/safetensors model for a new isolated venv, not a GGUF served on the pinned
+  llama.cpp core, and never names GLAP or CLSP among its candidates (LCO-3B, jina-v5-omni, SONAR,
+  omni-embed-nemotron-3b, LCO-7B, Tevatron OmniEmbed, BidirLM, CLAP — rejected); no LCO-Embedding-Omni
+  GGUF-servability check exists anywhere in the study's records as of this refresh. Only
+  `qwen3-embedding-0.6b-gguf` (the CASCADE arm's text embedder, see acquisitions below) has a recorded
+  llama.cpp servability sanity check.
+- **P-EMB-3L** — registered (study `docs/readiness/2026-08-20-pemb3l-preregistration-REGISTERED.md`,
+  commit `18da9a9`; exposure row `SAEA-PROBE-pemb3l-234` ledgered `eccf7f8`, `consumed = no`), flight
+  machinery built (`339e8ce`), **not yet flown**. Question: does any training-free construction on the
+  LOCAL core (last-pooling bare/instruct, mean-pooling instruct) form a usable SLURP routing space —
+  `LOCAL-SPACE-EXISTS` (any arm ≥0.30) defers external-embedder adoption; `LOCAL-EXHAUSTED` (every arm
+  ≤0.15) opens it. Owner order: fly P-EMB-3L before the external-embedder ticket proceeds.
+- **Stage-2B qualification freeze candidate** — study commit `bb995d5` (2026-08-19,
+  `docs/readiness/2026-08-18-stage2b-candidate-qualification-DRAFT.md`): speech-term program complete,
+  regression term measured (36/97 regressions vs a 0/97 re-fly baseline), acoustic-mediation risk
+  demonstrated (P-TRAP, a USE-side risk), refusal claim inverted per V1. **Awaiting owner freeze
+  approval** — not yet an owner decision.
+
+### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
+
+- `diar-sortformer-4spk-v2` (umbrella `docs/datasets.lock.json`, commit `6ca5f50`,
+  meeting-minutes-tools profile) — owner-locked primary diarization tool for the
+  `papers/meeting-minutes-agent` topic.
+- `qwen3-embedding-0.6b-gguf` (umbrella `docs/datasets.lock.json`, commit `0d4865b`,
+  speech-aware-tools profile) — Q8_0 single-file GGUF, dim 1024, the local text embedder for the SAEA
+  P-EMB-3M CASCADE arm; sanity-served once on the pinned llama.cpp-featcache llama-server (`--embedding
+  --pooling last`) against one synthetic string only, zero corpus contact; first contact on any study
+  corpus stays gated behind its own exposure-ledger row.
+
+### Meeting line (papers/meeting-minutes-agent — no dedicated wiki ledger exists yet; noted here per
+### the study-adjacent routing convention pending `wiki/experiments/papers/meeting-minutes-agent/`)
+
+- G1 floors campaign scored (2026-08-19, `papers/meeting-minutes-agent`
+  `docs/readiness/2026-08-19-g1-floors-verdict.md`, commit `6a9485e`; descriptive one-shot read, no
+  branch verdict computed): pooled over 18 dev-18 meetings, **Z-turn cpWER 0.6099** vs **Z-oracle
+  cpWER 0.6061** (deployment-gap CI **[-0.0124,+0.0193]** includes zero — the diarization tool costs
+  ~nothing on cpWER; the primary confusion-cost gap alone is CI-separated from zero at −0.0090).
+  Removing turn metadata from the prompt (arm Z-free) costs **+0.2627 cpWER** on identical audio, CI
+  excludes zero, roughly three quarters of it speaker assignment. QA macro F1 **0.0725 (Z-turn) /
+  0.0970 (Z-oracle)**. SAER-M was `NOT SCOREABLE` on this campaign's replies (id-join failure);
+  repaired to definition **v1.1** the same day (`3d5e2e1`, content-based bullet-to-gold alignment) —
+  re-score against this campaign not yet flown.
+- PRECOMP wave-1 **18/18** meetings complete (`4631f68`); wave-2 **75/76 PARTIAL** (`b26b9be`,
+  2026-08-20): `ES2005d` refused fail-closed on a float-epsilon transport-slice overrun (1.1e-13 s
+  over a strict 120.0 s bound); the fix is sequenced for the coordinator, deliberately not applied
+  mid-wave (would cold-start the slice cache). Feature cache `ami-q4km` grew to **52,071 entries**
+  (+28.92 GiB).
