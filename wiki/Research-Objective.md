@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-20 — routing-tier arc closed; embedder path adjudicated"
+last_refresh: "2026-08-23 — decoder-joint speech-native matching positive; knowledge-plane baseline program adopted"
 ---
 
 # Research Objective & Current State
@@ -55,13 +55,13 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (goal-mode standing GO). 2026-08-20: routing-tier arc closed —
-decode routing is the only working router; few-shot supply and bare embedding matching both
-refuted (P-FEW, P-EMB-1/2). Owner scoped that refutation and adjudicated a retriever-clause
-path for dedicated embedders (P-EMB-3M design, gated on P-EMB-3L + an E-1 report, neither
-flown). Stage-2B freeze `bb995d5` awaits owner approval. Verdicts: study `docs/readiness/`;
-digest: `wiki/experiments/speech-aware-evidence-acquisition/README.md`. Repos push to
-private remotes (owner order 2026-08-18).
+Stage-2A discovery in flight (standing GO). 2026-08-23: embedding arc closed; decoder-joint
+speech×TRAIN-text-key matching 90/108 vs 77/108 direct (EFFECT-C108); five controllers
+rejected. Owner rulings adopt the knowledge-plane baseline program (Q-K-V;
+train-build/dev-use/test-once; DEV 100/500/1000; openJiuwen AgentLoop base landed; GPU gate
+decoupled): study `docs/readiness/2026-08-23-knowledge-plane-baseline-rulings.md`. Stage-2B
+freeze `bb995d5` awaits owner approval. Digest:
+`wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.

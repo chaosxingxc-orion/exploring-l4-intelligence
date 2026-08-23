@@ -126,16 +126,57 @@ formal ledger rows.
   `qwen3-embedding-0.6b-gguf` (the CASCADE arm's text embedder, see acquisitions below) has a recorded
   llama.cpp servability sanity check.
 - **P-EMB-3L** — registered (study `docs/readiness/2026-08-20-pemb3l-preregistration-REGISTERED.md`,
-  commit `18da9a9`; exposure row `SAEA-PROBE-pemb3l-234` ledgered `eccf7f8`, `consumed = no`), flight
-  machinery built (`339e8ce`), **not yet flown**. Question: does any training-free construction on the
-  LOCAL core (last-pooling bare/instruct, mean-pooling instruct) form a usable SLURP routing space —
-  `LOCAL-SPACE-EXISTS` (any arm ≥0.30) defers external-embedder adoption; `LOCAL-EXHAUSTED` (every arm
-  ≤0.15) opens it. Owner order: fly P-EMB-3L before the external-embedder ticket proceeds.
+  commit `18da9a9`; exposure row `SAEA-PROBE-pemb3l-234`). Question: does any training-free
+  construction on the LOCAL core form a usable SLURP routing space. **Superseded: flown and
+  consumed 2026-08-20 with verdict `LOCAL-EXHAUSTED` — see the third-arc section below.**
 - **Stage-2B qualification freeze candidate** — study commit `bb995d5` (2026-08-19,
   `docs/readiness/2026-08-18-stage2b-candidate-qualification-DRAFT.md`): speech-term program complete,
   regression term measured (36/97 regressions vs a 0/97 re-fly baseline), acoustic-mediation risk
   demonstrated (P-TRAP, a USE-side risk), refusal claim inverted per V1. **Awaiting owner freeze
   approval** — not yet an owner decision.
+
+### Third arc: embedder closure and the speech-native AgentLoop line (2026-08-20 → 2026-08-23)
+
+- **P-EMB-3L** — `LOCAL-EXHAUSTED` (consumed 2026-08-20, study
+  `docs/readiness/2026-08-20-pemb3l-verdict.md`): all three local constructions 3/60 = 0.0500;
+  the local branch is closed. A build defect was found and later reproduced on a second model:
+  `--pooling` is inert on this llama.cpp build's audio side, so LCO audio verdicts are
+  stack-scoped, never model-level.
+- **P-EMB-3M** — `EMB-WEAK-SCOPED (M1) + CASCADE-ROUTES (M4)` (consumed 2026-08-20, study
+  `docs/readiness/2026-08-20-pemb3m-verdict.md`): LCO-3B audio 3/60 = 0.0500 (pooling-override
+  scoped); GLAP control 0.1333; CASCADE — core self-transcript → qwen3-embedding-0.6b text↔text
+  — **45/60 = 0.7500** (text-mediated, not speech-native); CLSP dropped on a runtime error.
+- **P-CORR-F** — `CORRECTIVE-PERCEPT + DOSE-INSUFFICIENT` (consumed 2026-08-20, study
+  `docs/readiness/2026-08-20-pcorrf-verdict.md`): percept-keyed train-mined type-corrective
+  supply Δ₁ = **+0.0508**, 90% CI [+0.0098, +0.0968]; the percept gate is near-binary (96.7%
+  self vs 0.0% cross capture); supply-side FILTERING becomes the open duty (85.7% wrong-entry
+  admission). Disclosure: byte-identical resends diverged 6/20 at temperature 0, `-np 4`.
+- **P-EMB-4R** — `REGISTER-RESCUE(a-glap) + KNN-BEATS-LABEL-MATCH` (consumed 2026-08-21, study
+  `docs/readiness/2026-08-21-pemb4r-verdict.md`): register-aligned utterance↔utterance kNN
+  rescues a weak GLAP audio signal (0.3167, recall@5 0.5667); LCO arms stay weak/scoped; T-QW
+  text kNN 0.8667 is a text-mediated diagnostic only; C-DECODE canceled by owner pre-read with
+  zero contacts. Successor named: decoder-joint speech-feature × text-key matching.
+- **Speech-native AgentLoop / training-free-RL line (M5→M11, 2026-08-21→23; study
+  `docs/readiness/2026-08-21-speech-native-agent-loop-training-free-rl-plan.md`)**: the
+  decoder-joint successor executed at scale on train-only discovery splits. Strongest result
+  (EFFECT-C108, read 2026-08-22): embedded **K1-M1 90/108 vs direct K0-M0 77/108** (net +13;
+  key-text shuffle collapses to 0/108; speech-swap 75/108), mmproj-free, every contact carrying
+  the original speech packet. Five external controller generations (M5-v2, M6, M7, M8, M9)
+  were all rejected against preregistered bars on this near-ceiling surface; the GPU 95/90
+  serving gate remained unmet after 7+ engineering cells (mean occupancy 94–96% throughout).
+  The task-independent knowledge contracts (`KnowledgeSnapshot`/`QueryState` BUILD/USE
+  separation), the shared speech-native agent runner, and the openJiuwen executor
+  (`openjiuwen-workflow-v1`) landed model-free through study commit `8f51e95d`.
+- **2026-08-23 owner rulings — knowledge-plane baseline program** (study
+  `docs/readiness/2026-08-23-knowledge-plane-baseline-rulings.md`, commit `418ec684`): Q-K-V
+  organization (speech-primary Q; multi-dimensional K with a ranking layer; un-embedded
+  prior-bearing V); construction-on-TRAIN / use-on-DEV / report-on-TEST separation with a DEV
+  100/500/1000 optimization ladder; train tiers renamed T108/T500; **E108 GPU gate decoupled
+  from scientific admission** (95/90 retained as the engineering-baseline acceptance
+  criterion); Audio2Tool admitted as the second surface; scoreboard v5; the 2026-08-19 design
+  queue superseded (P-CORR-R / P-TARGET-P1 / P-STRIP-AUG parked, never registered); 29-item
+  cross-modal retrieval survey landed
+  (`docs/readiness/2026-08-23-cross-modal-retrieval-survey.md`).
 
 ### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
 
