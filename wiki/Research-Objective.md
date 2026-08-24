@@ -55,15 +55,12 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). 2026-08-24: the DEV-100 iterative campaign
-(owner ladder tier 1; frozen two-contact knowledge-conditioned form over a TRAIN-built KB)
-completed at its 6-round cap and FROZE at **72/100 vs 48/100 direct** (+24, C→W 0,
-replication Δ=0) — reviewer-elevated: paired 90% CI [+11,+27], conservative floor +15,
-literature-consistent (kNN-Prompt envelope; HyDE pedigree). Key mechanism: the label-binding
-repair made the protect-direct term live (damage 11→0). Verdict + audits: study
-`docs/readiness/2026-08-24-dev100-campaign-verdict.md`. Next: DEV-500 confirmatory
-(unexposed-400 one-touch, bracketing ablations), then Audio2Tool. Stage-2B freeze `bb995d5`
-awaits owner approval. Digest:
+Stage-2A discovery in flight (standing GO). 2026-08-24: the DEV-100 campaign (owner ladder
+tier 1) FROZE at **72/100 vs 48/100 direct** (+24, C→W 0, replication Δ=0) —
+reviewer-elevated: 90% CI [+11,+27], conservative floor +15, literature-consistent. Verdict
++ audits: study `docs/readiness/2026-08-24-dev100-campaign-verdict.md`. Next: DEV-500
+confirmatory (unexposed-400 one-touch, bracketing ablations), then Audio2Tool. Stage-2B
+freeze `bb995d5` awaits owner approval. Digest:
 `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
