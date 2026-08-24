@@ -204,10 +204,18 @@ formal ledger rows.
   confirmations establish single-slot decode determinism across restarts, VM/Windows
   reboots, and binaries; the 8-slot direct-decode byte-variance channel (±2 samples) is the
   characterized residual noise term.
-- **Next per the ladder**: DEV-500 confirmatory preregistration (statistic over the 400
-  UNEXPOSED samples only — DEV-100 is a nested subset; bracketing ablations: random-exemplar
-  ICL, random-retrieval, oracle-retrieval ceiling; stronger prompt-matched direct control),
-  then Audio2Tool (structural-headroom second surface), then DEV-1000 and the baseline lock.
+- **DEV-500 CONFIRMATORY (same day, complete)**: four arms flown mechanically clean (2,506
+  core contacts, zero rail incidents), then the preregistered one-touch read — **unexposed-400
+  M0 52.50% → frozen BLEND 72.25% (+19.75 pp), 90% CI [+16.5, +23.0] excludes zero, McNemar
+  p 7.2e-22, W→C 81 / C→W 2 — CLAIM CONDITION MET**. Bracketing ablations attribute the gain
+  to the retrieval SIGNAL: vs random-retrieval +15.75 pp; random-exemplar ICL is NEGATIVE
+  (−5.5 vs M0). Dispatched-subgroup surgical profile: 62.31% vs 2.31% (W→C 78 / C→W 0).
+  BLEND operates AT the k=5 retrieval-reachability ceiling (71.5%; k=32 → 84.25% — the next
+  tier's quantified headroom). Verdict: study
+  `docs/readiness/2026-08-24-dev500-confirmatory-verdict.md`. **Gates open: DEV-1000
+  (baseline-lock tier; optional k-widening mini-campaign on DEV-100/500 first) and
+  Audio2Tool (generality surface).** The training-free RL space stays open above the frozen
+  cell (the retain/dispatch channel: 33% dispatch rate, +78/0 flips).
 
 ### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
 

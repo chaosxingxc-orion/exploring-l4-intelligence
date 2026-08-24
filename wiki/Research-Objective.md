@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-24 — DEV-100 campaign frozen: 72/100 vs 48 direct, reviewer-audited"
+last_refresh: "2026-08-24 — DEV-500 CONFIRMED: +19.75pp held-out, CI excludes zero"
 ---
 
 # Research Objective & Current State
@@ -55,12 +55,14 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). 2026-08-24: the DEV-100 campaign (owner ladder
-tier 1) FROZE at **72/100 vs 48/100 direct** (+24, C→W 0, replication Δ=0) —
-reviewer-elevated: 90% CI [+11,+27], conservative floor +15, literature-consistent. Verdict
-+ audits: study `docs/readiness/2026-08-24-dev100-campaign-verdict.md`. Next: DEV-500
-confirmatory (unexposed-400 one-touch, bracketing ablations), then Audio2Tool. Stage-2B
-freeze `bb995d5` awaits owner approval. Digest:
+Stage-2A discovery in flight (standing GO). 2026-08-24: the DEV-100 campaign froze at 72/100
+vs 48 direct; the **DEV-500 confirmatory one-touch read then CONFIRMED the frozen cell on
+held-out data: unexposed-400 +19.75 pp (52.50→72.25%), 90% CI [+16.5,+23.0] excludes zero,
+McNemar p 7e-22, W→C 81 / C→W 2; ablations attribute the gain to the retrieval signal
+(random exemplars are NEGATIVE); BLEND operates at the k=5 reachability ceiling.** Verdicts:
+study `docs/readiness/2026-08-24-dev500-confirmatory-verdict.md` (+ dev100 campaign verdict
+and reviewer/literature audits). **DEV-1000 and Audio2Tool gates OPEN.** Stage-2B freeze
+`bb995d5` awaits owner approval. Digest:
 `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
