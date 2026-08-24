@@ -178,6 +178,37 @@ formal ledger rows.
   cross-modal retrieval survey landed
   (`docs/readiness/2026-08-23-cross-modal-retrieval-survey.md`).
 
+### Fourth arc: the DEV-100 iterative campaign (2026-08-24, complete and frozen)
+
+- **DEV ladder governance landed** (study `2d07139b`): FINAL60 reserved-unread + nested
+  DEV-100/500/1000 identity receipts (devel side, probe-60 excluded at utterance
+  granularity); train-scale KB-BUILD v1 (`70897f8e`, 11.5k-utterance distribution-modeled
+  snapshot, 100% label coverage, decontaminated); the first cross-task policy registered in
+  all four knowledge registries (`bbdb9902`, two-contact α-blend form).
+- **DEV-100 campaign** (`SAEA-DEV100-KB-ALPHA-BLEND-CAMPAIGN`, 6 rounds, frozen 2026-08-24,
+  study `docs/readiness/2026-08-24-dev100-campaign-verdict.md`): **BLEND 72/100 vs direct
+  48/100 (+24), C→W 0 at the frozen α-.45 cell, exact replication Δ=0**. Ladder
+  63→63→65→67→72→72; knob science: τ inert, rank weights mathematically inert, α live only
+  after the label-identity binding repair (f1060078; damage 11→5→0; retain-primary 0→67).
+  Reviewer elevation: paired 90% CI [+11,+27] (0/10k replicates ≤0), conservative
+  variance-channel floor +15 [+6,+24], McNemar p 5.5e-4, train-prior rule control 39-41;
+  literature-consistent, upper-middle envelope (closest: kNN-Prompt; HyDE-pedigree retrieval
+  keys). Frozen knobs: study `configs/policy/kb-policy-v1-dev100.json`.
+- **Serving/engineering legacy**: the sustained-decode pathology was isolated BUILD-BOUND to
+  the 2026-08-23 zero-copy custom llama.cpp build (quarantined; base featcache binary
+  healthy at identical ~24.1 GiB peaks — the zero-copy build's serving measurements carry a
+  pathology annotation); two-leg resident hosting (systemd user unit + Windows keepalive;
+  WSL VM powers off ~14 s after the last client detaches); decode-rate sentinel + canary +
+  clock/VRAM sampling preflight suite; run-cumulative ExecutionPlan semantics; prompt-cache
+  reuse measured 0.83-0.88 (near structural ceiling). Nine byte-identical canary
+  confirmations establish single-slot decode determinism across restarts, VM/Windows
+  reboots, and binaries; the 8-slot direct-decode byte-variance channel (±2 samples) is the
+  characterized residual noise term.
+- **Next per the ladder**: DEV-500 confirmatory preregistration (statistic over the 400
+  UNEXPOSED samples only — DEV-100 is a nested subset; bracketing ablations: random-exemplar
+  ICL, random-retrieval, oracle-retrieval ceiling; stronger prompt-matched direct control),
+  then Audio2Tool (structural-headroom second surface), then DEV-1000 and the baseline lock.
+
 ### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
 
 - `diar-sortformer-4spk-v2` (umbrella `docs/datasets.lock.json`, commit `6ca5f50`,
