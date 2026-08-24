@@ -55,14 +55,12 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). 2026-08-24: the DEV-100 campaign froze at 72/100
-vs 48 direct; the **DEV-500 confirmatory one-touch read then CONFIRMED the frozen cell on
-held-out data: unexposed-400 +19.75 pp (52.50→72.25%), 90% CI [+16.5,+23.0] excludes zero,
-McNemar p 7e-22, W→C 81 / C→W 2; ablations attribute the gain to the retrieval signal
-(random exemplars are NEGATIVE); BLEND operates at the k=5 reachability ceiling.** Verdicts:
-study `docs/readiness/2026-08-24-dev500-confirmatory-verdict.md` (+ dev100 campaign verdict
-and reviewer/literature audits). **DEV-1000 and Audio2Tool gates OPEN.** Stage-2B freeze
-`bb995d5` awaits owner approval. Digest:
+Stage-2A discovery in flight (standing GO). 2026-08-24: DEV-100 froze at 72 vs 48 direct;
+the **DEV-500 one-touch read CONFIRMED the frozen cell held-out: unexposed-400 +19.75 pp
+(52.50→72.25%), 90% CI [+16.5,+23.0] excludes zero; ablations attribute the gain to the
+retrieval signal; BLEND sits at the k=5 reachability ceiling.** Verdict: study
+`docs/readiness/2026-08-24-dev500-confirmatory-verdict.md`. **DEV-1000 and Audio2Tool gates
+OPEN.** Stage-2B freeze `bb995d5` awaits owner approval. Digest:
 `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
