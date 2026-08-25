@@ -78,9 +78,12 @@ Every record must also declare:
 One formal experiment is registered (SAEA-E-001, completed 2026-08-09). E0 D1–D4 and the runtime receipt
 were closed on 2026-08-04 and verified by gate dry-run (study repo `docs/receipts/`); the R0 engineering
 baseline was delivered on 2026-08-05 with five adversarial self-check rounds driven to zero (study
-`b0635aa`), and the first formal experiment was to be the smoke `SAEA-E-001` (runbook prepared, not yet
-executed). Every model contact must still carry a valid `ExecutionPlan` and be pre-registered in the study
-repo exposure ledger first, enforced fail-closed by `contracts.FrozenCoreGate`.
+`b0635aa`), and the smoke `SAEA-E-001` was executed on 2026-08-09 against the frozen dev subset10 and is
+registered in the ledger above (the previous clause "the first formal experiment was to be the smoke
+`SAEA-E-001` (runbook prepared, not yet executed)", written 2026-08-05 at `047cf39` and true until the run
+landed at `7f9725a`, is superseded by this line). Every model contact must still carry a valid
+`ExecutionPlan` and be pre-registered in the study repo exposure ledger first, enforced fail-closed by
+`contracts.FrozenCoreGate`.
 
 ## Second-arc probe verdicts (routing tier + embedder path, consumed 2026-08-19 – 2026-08-20)
 
