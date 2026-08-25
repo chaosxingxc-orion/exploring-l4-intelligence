@@ -217,6 +217,113 @@ formal ledger rows.
   Audio2Tool (generality surface).** The training-free RL space stays open above the frozen
   cell (the retain/dispatch channel: 33% dispatch rate, +78/0 flips).
 
+### Fifth arc: the DEV-1000 baseline lock and the Audio2Tool second carrier (2026-08-25)
+
+- **BASELINE LOCKED — DEV-1000 one-touch read** (study `docs/readiness/2026-08-25-baseline-lock-verdict.md`,
+  lock commit `d9fef537`; row `SAEA-SN-MF-DEV1000-LOCK-READ`, campaign row
+  `SAEA-DEV1000-BASELINE-LOCK` consumed=yes; artifacts
+  `docs/checks/speech-aware-evidence-acquisition/2026-08-25-dev1000-lock-read/`). Primary
+  statistic on the **500 UNEXPOSED** samples (DEV-1000 minus DEV-500): M0 278/500 = 55.60% →
+  BLEND 379/500 = 75.80%, **+101 samples = +20.20 pp, 90% CI [+17.20,+23.40]** (0 of 10,000
+  replicates ≤ 0), 95% CI [+16.60,+24.00], McNemar exact **p = 1.04e-25**, W→C 106 / C→W 5.
+  **Lock condition (90% CI lower bound ≥ +10 pp) MET with +7.20 pp of margin.** Scale-stable:
+  DEV-500 unexposed-400 +19.75 [+16.50,+23.00] σ̂ 2.0563 vs DEV-1000 unexposed-500 +20.20
+  [+17.20,+23.40] σ̂ 1.8986 — each point estimate lies inside the other's interval. Mechanism
+  unchanged across tiers: the dead-direct dispatch subgroup carries the gain (3.13% → 62.50%,
+  +59.38 pp on 160 samples), the retain subgroup is safe (+2.37 pp), 17 of 18 scenarios
+  non-negative (play +26, recommendation +23, qa +12; weather −1).
+- **The δ retain-override is FALSIFIED out of sample and REMOVED.** The v2 candidate's δ ≥ 0.14
+  retain-override held on every exposed population but out of sample failed: of 14 fires, the 3
+  in the unexposed half recovered **0** and damaged **3** (net −3 samples, −0.60 pp), while the
+  11 in the previously-exposed half recovered 11/11. **The locked baseline is therefore the v1
+  frozen cell `configs/policy/kb-policy-v1-dev100.json`** (sha256 `d68afd2c…a919`), not v2;
+  without the override the unexposed-500 margin is +20.80 pp (382/500). The δ signal is recorded
+  as fit-not-validated, not discarded as a direction.
+- **What the lock pins**: α 0.45, τ 0.65, recall top-k 5, fusion m 5 / c 2 / top_l 3, rrf
+  0.5/0.3/0.2, TRAIN priors, pair-boundary stage off, facet-side percept admission, the f1060078
+  label-identity repair — over the KB-BUILD v1 full TRAIN snapshot
+  (`docs/receipts/knowledge/slurp-kb-size-full.json`), served by the BASE `llama.cpp-featcache`
+  binary at the np8 profile, executed through the openJiuwen AgentLoop (`openjiuwen-workflow-v1`)
+  in the two-contact knowledge-conditioned form. Scope: **authorizes** the Audio2Tool generality
+  campaign against the locked form, training-free RL over a fixed environment, and DEV-tier
+  engineering optimization; **does NOT authorize** test contact, superiority or generalization
+  claims, or Stage-3 activity. FINAL60 stays reserved-unread.
+- **RANKER SCALE DEFECT FOUND AND REPAIRED** (study `docs/readiness/2026-08-25-a2t-admission-scale-sweep.md`,
+  audit landed `21926b5f`, repair commit `1341c2db`; row `SAEA-SN-MF-A2T-ADMISSION-SCALE-SWEEP`
+  registered at `e9656577` before any computation; receipt
+  `docs/checks/speech-aware-evidence-acquisition/2026-08-25-a2t-admission-scale-sweep/sweep-report.json`
+  sha256 `88f606fe…a74d66`; **0 contacts of any kind**). The ranker
+  `saea-rank-wcos-prior-agree-v1` summed an **unbounded** prior-mass dimension with a cosine
+  **bounded by 1** inside one weighted sum. Commensurability invariant
+  `sup(prior) < w_cos·τ / w_prior = 1.08333`: SLURP's sup is **1.0000** (inside, margin +0.0833,
+  a probability by construction), Audio2Tool's is **4.1000** (a 3.78× violation). Consequence on
+  A2T: prior-mass facets filled the whole top-m=5 window and **0 content facets were admitted on
+  all 104 trajectories**; on SLURP, 0 of 500 trajectories were affected. The landed repair
+  (`_dimension_scales`, variant A6-DIMSUP-FLOOR1) divides each ranker dimension by
+  `max(1.0, sup over the recalled set)`.
+- **The repair is IDENTITY-PRESERVING on the locked SLURP cell, proved by measurement, not
+  asserted.** All 15 candidate variants replayed over the sealed DEV-1000 NEW500 flight through
+  the identical code path: **admitted set differs on 0/500, supply differs on 0/500, dispatch
+  differs on 0/500.** Regression obligations run against the landed fix: SLURP flight-replay
+  decisions **497/500** (the 3 being explained v2 override fires), SLURP flown supply reproduced
+  **163/163**, the SLURP `V0-FROZEN` gate still PASSes, SLURP dispatch 160; on A2T the
+  `V0-FROZEN` gate now FAILS by design, dispatch goes **0 → 15** matching the 15 label-free ids
+  exactly, 104/104 trajectories admit a content facet, supplied-value distribution 2:35 3:28 4:36
+  5:5, gold-bearing supply 68. FIX-2 (fail-closed invariant assertion) and FIX-3 (the upstream
+  `prior_score` repair) remain open and block nothing.
+- **CORRECTION — the A2T zero-dispatch was an IMPLEMENTATION DEFECT, not a finding** (study
+  `docs/checks/speech-aware-evidence-acquisition/2026-08-25-a2t-g1/README.md`, CORRECTION section,
+  commit `401418cd`, after the owner ruling). The BLEND attempt-3 "paired first signal" measured a
+  broken configuration; its −1.92 pp delta is the documented multi-slot decode-variance channel and
+  **no paradigm-level conclusion about Audio2Tool follows from it**. The earlier coordinator wording
+  framing it as "the paradigm's boundary precisely located" is withdrawn. What stands unaffected:
+  the mechanics (the derived serving geometry, prompt-fit margin +12,331, packet promotion, KB
+  vectors), the two-pass co-residency design, the VRAM-oversubscription diagnosis, the replay
+  machinery, the M0 arm's own numbers, and every spend and rail record.
+- **A2T G1 BLEND attempt 4 — the post-repair flight: THE SUPPLY PATH FIRES** (study
+  `docs/checks/speech-aware-evidence-acquisition/2026-08-25-a2t-g1/g1-read-attempt4.json` sha256
+  `cb5e5658…d086f89`, landed `26307ee9`; registered under row `SAEA-A2T-G1` at `3e12e8c4`
+  **before any contact**; launcher `6bbd6e62`; attempt `attempt-20260825T144405Z-a2tg1blend`;
+  mechanical report `arm2-blend-mechanical-report-attempt4.json` sha256 `641c4b5e…459436`).
+  Population **A2T-G1-104, EXPOSED**, split identity hash `516f92d9…`; the policy cell is
+  byte-identical to the locked SLURP cell and the rails pin moved to the repair commit
+  `1341c2db` as a takeoff gate; serving geometry is the §8.1-derived `-c 65536 -np 2`
+  (32,768 tokens/slot, margin +12,183); composed config hash `df6bf4d4…38f9`.
+  **Mechanics: 104/104 trajectories, 15 of 104 dispatched and 15 real evidence contacts flown
+  where the defective ranker dispatched 0**; dispatch lands exactly on the 15 dead-direct
+  (label-free) trajectories, decision replay holds 104/104, branch-only replay holds 15/15, and a
+  content facet enters the admission window on 104/104 (τ 0.65, best content cosine 0.759–0.957).
+  **Paired signal vs the landed M0 on the same 104: tool accuracy 0.5962 (62/104) → 0.6058
+  (63/104) = +0.96 pp, CI90 [−2.88,+4.81], McNemar p 1.0, W→C 3 / C→W 2 — the interval does NOT
+  separate from zero. Exact match is not merely flat but IDENTICAL to the sample, 0.2788 (29/104)
+  in both arms, CI90 [−1.92,+1.92].** Empty-call rate collapses 0.1346 (14) → 0.0288 (3) and
+  unparsed answers 4 → 0; mean slot F1 0.3766 → 0.3738. **Attribution: all three tool-accuracy
+  wrong→correct flips are on trajectories that dispatched AND whose direct text was byte-identical
+  to M0, so only the evidence contact can account for them**; one C→W is decode-variance (divergent,
+  never dispatched) and one is reported AMBIGUOUS and not counted for the method.
+  Spend: 18 core contacts (2 canary + 15 evidence + 1 resend; Pass A replayed at 0 contacts against
+  attempt 3's hashed messages documents, 104/104 matched), 58.247 metered audio s, 0 embedding tool
+  contacts, 0.004626 GPU active hours; campaign cumulative 321/400 core contacts.
+- **The bound on that reading, carried verbatim in substance.** The report's own hard stop: *"G1
+  authorizes MECHANICS AND FIRST SIGNAL ONLY. No generality claim, no superiority claim, no test
+  contact, no knob change and no Stage-3 activity follows from this report."* The plan's smuggling
+  guard is applied to the result itself — a tool-accuracy gain that leaves exact match flat is a
+  DIFFERENT claim and must not be smuggled, and the empty-call collapse is a different metric that
+  must not be substituted for the primary one. Stated limitations, inherited whole: the tier is
+  EXPOSED so every number is a secondary reading; n=104 is below the plan's own n ≥ 400 power floor
+  so the intervals are descriptive, not confirmatory; the `a2t-gold-v1` scorer's semantics are
+  interpretation, not ground truth; the corpus and its speaker assignments are synthetic; and no
+  ablation arm flew, so nothing here attributes the effect to retrieval as opposed to the second
+  contact (ABL-RANDRET answers that at G2). Two reporting artifacts are disclosed rather than left
+  to be found: the imported `bootstrap_gain` hard-codes a "over the 100 DEV-100 ids" resampling
+  label while the actual universe is the 104 A2T-G1-104 ids, and the A0 comparator was read on the
+  parent 400-item split, so it is an anchor and not a paired comparison.
+- **Open decision and standing debt.** The G1 report recommends **not** opening G2 as scoped and
+  taking cheaper decisions to the owner first; the unexposed Audio2Tool tier (n ≥ 400) and
+  training-free RL over the now-live dispatch channel both remain open. Operational debt carried
+  from G1: the SLURP np8 service was stopped for the A2T np2 flight and **remains DOWN — a later
+  mission must respawn it before any SLURP arm flies.**
+
 ### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
 
 - `diar-sortformer-4spk-v2` (umbrella `docs/datasets.lock.json`, commit `6ca5f50`,
