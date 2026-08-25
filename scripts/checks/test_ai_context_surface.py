@@ -1513,6 +1513,52 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
     def read_bytes(cls, relative_path: str) -> bytes:
         return cls.repo.joinpath(*PurePosixPath(relative_path).parts).read_bytes()
 
+    # Each HOT current-state page declares its own refresh date in its own
+    # header form; the oracle reads that declaration from the file and never
+    # carries a calendar constant of its own.
+    HOT_REFRESH_DECLARATIONS = {
+        "wiki/Research-Objective.md": r'^last_refresh: "(\d{4}-\d{2}-\d{2})',
+        "wiki/Per-Work-Status.md": r"Last refreshed (\d{4}-\d{2}-\d{2})",
+    }
+
+    def hot_refresh_date(self, relative_path: str) -> date:
+        """Return the refresh date a HOT current-state page declares for itself."""
+        found = re.search(
+            self.HOT_REFRESH_DECLARATIONS[relative_path],
+            self.read_text(relative_path),
+            re.MULTILINE,
+        )
+        self.assertIsNotNone(found, f"{relative_path} declares no refresh date")
+        return date.fromisoformat(found.group(1))
+
+    def assert_hot_current_state_pages_refresh_together(self) -> date:
+        """The two HOT current-state pages must be superseded in one transaction.
+
+        ``wiki/Research-Objective.md`` and ``wiki/Per-Work-Status.md`` are both
+        HOT "current fact, supersede-in-place" surfaces (``wiki/AI-Collaboration.md``
+        §2).  When one moves and the other does not, the pair states **competing
+        active claims for the same current field**, which §4 lists as an immediate
+        consolidation trigger.  Equal self-declared refresh dates are the
+        machine-checkable form of that rule, and neither page may be dated into
+        the future.
+
+        Both dates are read from the files.  A hard-coded calendar date here
+        would go red on every legitimate refresh of either page and would
+        therefore stop the oracle from catching the drift it exists to catch.
+        """
+        objective_date = self.hot_refresh_date("wiki/Research-Objective.md")
+        per_work_date = self.hot_refresh_date("wiki/Per-Work-Status.md")
+        self.assertEqual(
+            objective_date,
+            per_work_date,
+            "HOT current-state pages drifted apart: "
+            f"wiki/Research-Objective.md={objective_date.isoformat()} vs "
+            f"wiki/Per-Work-Status.md={per_work_date.isoformat()}; refresh the "
+            "stale page's content, never only its date.",
+        )
+        self.assertLessEqual(objective_date, date.today())
+        return objective_date
+
     def test_collaboration_policy_declares_every_document_role_and_route(self) -> None:
         policy = self.read_text("wiki/AI-Collaboration.md")
         required_roles = (
@@ -1720,11 +1766,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         text = raw.decode("utf-8")
 
         self.assertLessEqual(len(raw), 5120)
-        refresh = re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', text, re.MULTILINE)
-        self.assertIsNotNone(refresh)
-        refresh_date = date.fromisoformat(refresh.group(1))
-        self.assertEqual(date(2026, 8, 4), refresh_date)
-        self.assertLessEqual(refresh_date, date.today())
+        self.assert_hot_current_state_pages_refresh_together()
         required_truth = (
             "Stage accounting is direction-local",
             "DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_INCOMPLETE__R1_WITHHELD",
@@ -1796,16 +1838,7 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         per_work_raw = self.read_bytes("wiki/Per-Work-Status.md")
         per_work = per_work_raw.decode("utf-8")
         self.assertLessEqual(len(per_work_raw), 8192)
-        refreshed = re.search(r"Last refreshed (\d{4}-\d{2}-\d{2})", per_work)
-        self.assertIsNotNone(refreshed)
-        per_work_date = date.fromisoformat(refreshed.group(1))
-        objective = self.read_text("wiki/Research-Objective.md")
-        objective_date = date.fromisoformat(
-            re.search(r'^last_refresh: "(\d{4}-\d{2}-\d{2})', objective, re.MULTILINE).group(1)
-        )
-        self.assertEqual(date(2026, 8, 4), per_work_date)
-        self.assertEqual(objective_date, per_work_date)
-        self.assertLessEqual(per_work_date, date.today())
+        self.assert_hot_current_state_pages_refresh_together()
         for work in ("W1", "W2", "W3", "W4"):
             with self.subTest(work=work):
                 self.assertEqual(
