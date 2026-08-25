@@ -327,6 +327,179 @@ formal ledger rows.
   from G1: the SLURP np8 service was stopped for the A2T np2 flight and **remains DOWN — a later
   mission must respawn it before any SLURP arm flies.**
 
+### Sixth arc: the limit located by measurement, and the matured synthesis (2026-08-25, after the G1 flight)
+
+- **ONE CONSOLIDATING RECORD, AND ITS VERIFICATION IS PART OF THE PRODUCT** (study
+  `docs/readiness/2026-08-25-stage2a-matured-synthesis.md`, landed `3f131afd`; row
+  `SAEA-SN-MF-STAGE2A-MATURED-SYNTHESIS` registered **before** any verification ran; receipt
+  `docs/checks/speech-aware-evidence-acquisition/2026-08-25-stage2a-synthesis/verification-report.json`;
+  verifier `src/speech_aware_evidence_acquisition/analysis/stage2a_synthesis_verification.py`).
+  Seven registered model-free diagnostic rungs landed after the A2T G1 attempt-4 flight —
+  cross-carrier ceiling decomposition (`54ed885c`, precision pass `2bf4ccb7`), A2T gold-absence
+  diagnosis (`aaa366ad`, correction `36ad85c2`), matching-vs-extraction (`d4c75c7a`), query-key
+  degeneracy cross-carrier (`27129962`), extraction conditioned on dispatch (`6c6ec719`),
+  field-level supply accounting (`27b2be09`) and the A2T oracle query bound (`5020adce`, correction
+  `274ce62a`) — each registered in the study exposure ledger before any computation. The synthesis is
+  the document written to be read, in its own words, "instead of the nine" readiness documents of the
+  day. **351 checks passed / 0 failed** — 332 receipt-field claims, 6 reductions over per-sample
+  lists, 2 live-artifact digests and 11 source-line assertions — across **12 SHA-256-verified
+  receipts**, fail-closed (any mismatch raises and no report is written); the offline guard was armed
+  before the first input was opened and recorded **0 outbound connection attempts against 0 targets**.
+  Seven quantities are declared unverified and omitted rather than carried, and five disagreements
+  between the landed documents are stated with the receipt that settles each. Spend across the arc:
+  **0 frozen-core / 0 embedding-tool / 0 tokenizer contacts, 0 HTTP or socket requests, 0 audio
+  seconds, 0.0 GPU hours, 0 gold labels newly opened**; no knob changed, nothing written under
+  `configs/`, `rails/` or `core/`; `consumed` stays **no**.
+- **The locked SLURP cell is UNCHANGED.** DEV-1000 unexposed-500 **+20.20 pp, 90% CI
+  [+17.20,+23.40]** stands exactly as landed at `d9fef537`. Every unexposed-500 statistic in this arc
+  is a **SECONDARY reading on the locked baseline's own population**: descriptive, and it revises,
+  re-tunes and re-opens nothing.
+- **NEW — WHERE SUPPLY IS ACTUALLY DELIVERED, THE GAIN OPERATES ON THE EXTRACTION AXIS TOO, AND THE
+  DELIVERY RATE TRAVELS WITH EVERY NUMBER.** Only a DISPATCHED trajectory receives evidence; a
+  RETAINED one stops at contact 0 and is handed nothing (the two sets are proved equal, not assumed).
+  Delivery: **SLURP DEV-1000-NEW500 163 of 500 = 32.60%**, Audio2Tool **15 of 104 = 14.42%**.
+  **Nothing in this bullet is a population effect.** On the delivered SLURP stratum (n = 163):
+  matching `scenario_action_exact` 7 → 100 = **+57.0552 pp**, CI90 [+50.3067,+63.8037]; extraction
+  macro `slot_f1_exact_mean` **+9.4391 pts**, CI90 [+4.3558,+14.5194]; official micro `slu_f1`
+  **+13.7570 pts**, CI90 [+8.8840,+18.6695] — both extraction intervals exclude zero. **The
+  matching-free cell still moves**: both arms matching-WRONG *and* supply delivered, n = **59**, macro
+  **+6.7797 pts** CI90 [+1.6949,+11.8644] and official **+15.2312 pts** CI90 [+8.2127,+22.9778], both
+  excluding zero — no matching movement can explain either. Three-way decomposition of the
+  +3.5438-point aggregate: matching-attributable **+2.5438** (n = 111), supply-attributable
+  **+0.9333** (n = 62), unsupplied residue +0.0667 (n = 327) — the matching term still dominates at
+  71.78% and that finding is untouched; what is new is that 93.33% of the remaining point is
+  supply-attributable. The retained stratum (n = 337, no evidence delivered) moves **+0.6924** macro
+  points with a CI90 that does **not** exclude zero. Cells conditioned on the arms' matching outcome
+  **and** on the dispatch decision are conditioned on post-treatment variables twice over, so they
+  carry collider bias and are **mechanism readings, never effect sizes** — a rule fixed in each row's
+  ledger entry before any n was known. (Study
+  `docs/readiness/2026-08-25-extraction-conditioned-on-dispatch.md`, receipt
+  `.../2026-08-25-extraction-conditioned-on-dispatch/read-report.json` sha256 `7662fbc3…6a337525`;
+  delivery rates `.../2026-08-25-field-level-supply-accounting/accounting-report.json` sha256
+  `ca973be8…0766de4c6`.)
+- **THE STRONGEST CAUTION, AND IT MUST TRAVEL WITH THE EXTRACTION CLAIM: THE EXPOSED HALF DOES NOT
+  REPLICATE THE SLURP SUPPLY TERM.** Same carrier, same policy cell, same flight — the
+  supply-attributable term is **+0.9333 pts on the unexposed 500 (n = 62)** against **−0.0533 pts on
+  the prior-exposed nested DEV-500 (n = 57)**, and the exposed matching-free cell (n = 55) reads
+  **−0.4848** macro points with a CI90 that does not exclude zero. **Until that is explained, the
+  extraction result is one population's result.**
+- **THE LIMITING FACTOR IS NOW LOCATED BY MEASUREMENT — four candidate explanations each REFUSED with
+  a number, rather than argued away.** (R1) **KB build coverage — 0 of 11**: of the 11 gold-absent
+  dispatched A2T trajectories, 0 are a BUILD defect and 11 are a RANKING defect, and over all 104
+  trajectories 0 have a gold tool with no KB value and 0 have one with no vectored facet — a
+  build-coverage lever has nothing to fix on this population. (R2) **Retrieval width and depth — no
+  admissible depth reaches gold**: under the locked `top_l` = 3, **0 of 11** gold values enter the
+  supply at any depth in the 12,601-vector KB; lifting `top_l` entirely reaches 2 of 11; reachability
+  rises from 0 at k = 5 to 1.000 at k = 512 and none of that rise converts into an admitted supply —
+  with K-WIDEN K1's standing prior (supply changed on 32 of 100 trajectories, **0 width-attributable
+  flips**) making the refusal decisive rather than merely arithmetical. (R3) **The τ percept gate — a
+  runtime-legal query clears τ on 15/15 and supplies gold on 0/15**: the oracle rung's N1 query uses
+  no gold at all (the L2-normalized mean of the vectored content facets of the trajectory's own tier,
+  determined by the sample id alone) and lifts the gold-facet cosine from the landed below-τ band
+  0.565332–0.635625 to 0.7209 / 0.7898 / 0.8587 — yet it supplies gold to none, binding at the recall
+  window every time, because the lift raises **148–150 τ-passing targets simultaneously** and the gold
+  target lands at rank **11–99** among them. **τ is a threshold on similarity, and similarity is not
+  the scarce resource — DISCRIMINATION is**; any argument from "the gold cosine is only 0.0144–0.0847
+  below the bar" to "a small improvement converts" is refuted, at zero cost, on this carrier. (R4) **A
+  hand-fit dispatch override — 11/11 in sample, 0/3 with 3 damaged out of sample**: the δ ≥ 0.14
+  retain-override recovered 11 of 11 on the prior-exposed half and recovered 0 while damaging 3 on the
+  unexposed half (realized −0.60 pp); its registered zero-loss-by-construction property reads `false`
+  in the receipt. **In-sample perfection is not evidence, and every future dispatch-widening proposal
+  inherits this prior and must be gated out of sample.**
+- **What remains after the four refusals: DISCRIMINATION UNDER A DEGENERATE RETRIEVAL QUERY — and it
+  is carrier-scoped, measured rather than assumed.** The 15 A2T dead-direct trajectories carry **5
+  distinct query vectors = 0.3333 per trajectory**, **11 of the 15 share ONE key** (73.33% of the
+  group) and that one key produced exactly one flown supply, against **0.9438** distinct keys per
+  trajectory on the 89 label-recovered. The cause is the α veto and it is arithmetic, not an empirical
+  regularity: at α = 0.45 a recovered direct label beats every rival by a guaranteed `1 − 2α` =
+  **+0.10** margin and the worst margin actually observed **attains** that structural floor
+  (0.10000000000000003), so `retain == direct-label-recovered` is structural, evidence can only ever
+  reach the label-free set, and **93.33%** of that set's A2T contact-0 answers are structurally empty —
+  the α veto selects exactly the trajectories whose answer is empty, and **the answer IS the query**.
+  The pathology does **not** transfer: dead-over-live degeneracy ratio **0.353** on Audio2Tool against
+  **1.240** (unexposed) and **1.027** (exposed) on SLURP, whose dead-direct answers are structurally
+  empty at 1.25% / 1.81%, whose τ refuses the gold facet on only 10 and 14 of those trajectories, and
+  whose dead-direct median gold-facet position is **1** against Audio2Tool's **83** — SLURP's keys
+  repeat because short labels **collide**, benignly, and the collision happens *more* in its healthy
+  label-recovered group.
+- **The oracle bound: the KB itself can deliver — and it NAMES NO LEGAL FIX.** The pre-registered O3
+  oracle (every vectored content facet targeting the gold tool, each withheld from the retrievable
+  pool in turn) supplies gold to **11 of the 11** gold-absent trajectories, against decision bands
+  fixed in the registration before any number was seen (≤ 1 refutes, ≥ 8 survives) — registered
+  outcome **SURVIVES**; **twin-free 11 of 11**; and in the typical case a *randomly chosen* same-tool
+  sibling query delivers **1,596 / 1,871 = 85.30%**. Under the oracle no stage binds: τ, `k`, `m`, `c`
+  and `top_l` are all sufficient once the query is right, so **the cell is not the ceiling, the query
+  is**. But every oracle query is built from the trajectory's own gold tool identity — information no
+  runtime query could legally have — so **it bounds from above and proposes nothing**; whether any
+  legal contact-0 construction can produce a tool-identifying query is explicitly declared unverified
+  and would need a model contact. Decontamination was **measured, not asserted** (the rung's first
+  version asserted it from the builder's source and its own successor commit `274ce62a` corrected
+  that): 0 of 104 evaluation units are in the KB, **6 of 104** evaluation utterance *texts* appear
+  verbatim as a KB content facet, and **0** of those six are among the 15 dispatched trajectories the
+  bound measures.
+- **Audio2Tool remains MECHANICS ONLY — the population verdict is unchanged.** Tool accuracy 62 → 63
+  of 104 = **+0.9615 pp**, CI90 [−2.8846,+4.8077], **41.56% of replicates at or below zero**, McNemar
+  mid-p 0.6875; exact match **29 → 29 = 0.0000 pp**, CI90 [−1.9231,+1.9231] — and the tool-accuracy
+  line must never be reported without the exact-match line beside it. Where supply is delivered (15 of
+  104 = 14.42%) the dispatched slot micro-F1 is **+12.1212 pts but its CI90 [0.0000,+23.0769] touches
+  zero at n = 15**, so it is carried as **NOT established**; the retained 89 read −3.0250 pts
+  [−6.1940,−0.5941], and the population aggregate slot micro-F1 falls 0.437870 → 0.412088. The two
+  carriers' magnitudes are accounted for arithmetically, and nothing is left over for "the method is
+  weaker on Audio2Tool" as a separate hypothesis: reachable share 14.42% vs 32.00% (**2.2187×**) times
+  within-reach conversion +13.3333 pp vs +59.3750 pp (**4.4531×**), both decompositions closing
+  exactly against their observed population deltas. The channels are separated: **form repair alone
+  converts 1 of the 11 that changed form; gold-bearing supply converts 2 of 4** (n = 4 is a mechanism
+  reading and nothing extrapolates it), and the empty-call collapse 14/104 → 3/104 is the FORM channel
+  working and **must never be substituted for an accuracy claim**. K3 stays **REFUSED** on Audio2Tool
+  — its own carve-out preserves 1 of the 15, and projected dispatch falls 15/104 → 3/104 on the arm
+  that measures actual form repair — and unprojected on SLURP.
+- **THE EPISTEMIC RECORD — four claims made and WITHDRAWN in one day, each refuted by a measurement,
+  each caught by a gate fixed before the number was seen** (the synthesis carries the table). (1)
+  *"The A2T zero-dispatch is a paradigm boundary"* — refuted: it was a ranker commensurability defect,
+  `sup(prior_score)` 4.1 against a required bound of 1.08333, with 0 content facets reaching the
+  top-`m` window on 104/104 trajectories; caught because G1 published its mechanism invariants as
+  FALSIFIED rather than quietly passing them, which forced an implementation audit instead of a
+  conclusion about the paradigm. (2) *"KB coverage is the lever"* — refuted at 0 BUILD / 11 RANKING;
+  caught because the BUILD/RANKING partition and its 104/104 fidelity gate were pre-registered, so a
+  negative could not be re-partitioned after the numbers were seen. (3) *"SLURP's prior code was
+  correct"* — refuted against source rather than restated from landed prose: **both** builders divide
+  one globally accumulated counter by another, differently keyed, with no restriction of the numerator
+  to the denominator's key, and SLURP's ratio is a probability only because
+  `intent = f"{scenario}_{action}"` nests intent inside scenario in the **label vocabulary** — the
+  local name `intent_total_in_scenario` asserts a restriction the expression never performs, so the
+  SLURP builder carries the identical latent defect and would break under a non-nesting label scheme.
+  Caught by the synthesis's own rule of re-checking every claim against its source. (4) *"The supply
+  does not serve extraction"* — refuted: the landed conditioned read was measured where **no supply
+  had been delivered** (its cell held 3 dispatched of 273 on SLURP unexposed, 2 of 255 on the exposed
+  half and **0 of 60** on Audio2Tool); caught by a successor row that reproduced the landed
+  arithmetic to the digit before challenging its interpretation, leaving the matching-dominance
+  finding untouched. **These four rows are evidence that the gating discipline works, and they belong
+  in this ledger as much as the numbers do.**
+- **What this arc does NOT authorize, carried at its source strength.** No generality claim, no
+  superiority claim, no cross-carrier transfer claim, and no conclusion about capability beyond the
+  two already-read populations — "the locked cell generalizes" is neither established nor implied
+  here. No knob change: α, τ, `k`, `m`, `c`, `top_l`, `top_k` and the rank weights were read and
+  reported, never written. No flight, re-flight or G2 opening; no revision of the lock; **no new
+  agenda item** — the obvious reading of the degeneracy finding is a design observation, and any
+  key-construction item needs its own registration, its own two-sided falsifier, its own
+  dispatch-preservation clause and an owner decision. **No test contact: FINAL60 stays
+  reserved-unread.** No Stage-3 activity of any kind.
+- **Open owner decisions the synthesis frames and explicitly does not make.** **D1 — the α trade**:
+  widening dispatch buys reach (with no α gate, 68 of 104 A2T trajectories would carry gold-bearing
+  supply, but 64 of those sit in the retained set, where 60 of the 89 retained are already correct
+  under BLEND), against two costs — the adverse out-of-sample prior of the δ override above, and the
+  fact that a per-carrier α **breaks the byte-identical transfer claim**, itself a scientific asset.
+  **D2 — whether to open a new Audio2Tool contact cell at all**: the mechanism caps the population
+  effect near **+1.9231 pp** (reach × within-reach conversion), so a whole-population design is the
+  wrong thing to power against, and the cheapest thing that would make any A2T number interpretable is
+  a repeated-decode replication at fixed config. **D3 — a hash-manifested release freeze** of the
+  locked baseline (policy config, KB snapshot, `rails/kb_policy.py` at `1341c2db`, serving profile)
+  into a single artifact. **D4 — the umbrella `required_truth` token list and the stale endpoint-token
+  fields**, which is an owner call the study repository does not touch: umbrella
+  `docs/superpowers/specs/2026-08-25-research-objective-required-truth-reconciliation-decision-request.md`
+  is OPEN and unresolved. Standing operational debt from G1 is unchanged: the SLURP np8 service
+  remains DOWN and a later mission must respawn it before any SLURP arm flies.
+
 ### Related umbrella acquisitions (2026-08-18 to 2026-08-20)
 
 - `diar-sortformer-4spk-v2` (umbrella `docs/datasets.lock.json`, commit `6ca5f50`,

@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-25 — SLURP baseline LOCKED; Audio2Tool G1 = mechanics only"
+last_refresh: "2026-08-25 — SLURP LOCKED; limit located; Audio2Tool mechanics only"
 ---
 
 # Research Objective & Current State
@@ -56,15 +56,15 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). **The SLURP baseline is LOCKED**: DEV-1000 unexposed-500
-55.60% → 75.80%, **+20.20 pp, 90% CI [+17.20,+23.40]**, scale-stable vs DEV-500's +19.75; the δ
-retain-override was falsified out of sample and removed; locked cell
-`configs/policy/kb-policy-v1-dev100.json`. **Second carrier Audio2Tool G1 — MECHANICS AND FIRST
-SIGNAL ONLY, no generality claim**: a ranker cross-dimension scale defect was repaired
-identity-preserving on the locked cell, and the post-repair arm fires the supply path (15 of 104
-dispatch, gains method-attributable) with a population delta **NOT separated from zero**. Open
-decision: the unexposed Audio2Tool tier (G2), or cheaper decisions first; training-free RL stays
-open. Digest: `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
+Stage-2A discovery in flight (standing GO). **SLURP baseline LOCKED, unchanged**: DEV-1000
+unexposed-500 **+20.20 pp, CI90 [+17.20,+23.40]**. **New, delivery-conditional**: where supply is
+delivered (163/500 = **32.60%**) the gain also moves EXTRACTION (+9.4391 macro pts, CI90 excludes
+zero; matching-free cell too) — **not** a population effect; the exposed half does **not** replicate
+that term (−0.0533 vs +0.9333). **The limit is located**: KB build, retrieval depth, the τ gate and
+a hand-fit dispatch override are each refused by measurement; what remains is discrimination under a
+degenerate query. Audio2Tool stays **MECHANICS ONLY**: delta not separated from zero. Open: G2 or
+cheaper decisions first; training-free RL stays open. Digest:
+`wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 ## Formal, legacy and routing boundaries
 
