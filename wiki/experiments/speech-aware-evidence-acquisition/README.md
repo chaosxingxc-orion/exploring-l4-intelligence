@@ -409,8 +409,8 @@ formal ledger rows.
 - **What remains after the four refusals: DISCRIMINATION UNDER A DEGENERATE RETRIEVAL QUERY — and it
   is carrier-scoped, measured rather than assumed.** The 15 A2T dead-direct trajectories carry **5
   distinct query vectors = 0.3333 per trajectory**, **11 of the 15 share ONE key** (73.33% of the
-  group) and that one key produced exactly one flown supply, against **0.9438** distinct keys per
-  trajectory on the 89 label-recovered. The cause is the α veto and it is arithmetic, not an empirical
+  group) and that whole cluster carries **one** distinct supply between them, against **0.9438**
+  distinct keys per trajectory on the 89 label-recovered. The cause is the α veto and it is arithmetic, not an empirical
   regularity: at α = 0.45 a recovered direct label beats every rival by a guaranteed `1 − 2α` =
   **+0.10** margin and the worst margin actually observed **attains** that structural floor
   (0.10000000000000003), so `retain == direct-label-recovered` is structural, evidence can only ever
