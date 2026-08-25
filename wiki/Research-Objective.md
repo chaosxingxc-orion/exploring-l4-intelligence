@@ -60,8 +60,8 @@ Stage-2A discovery in flight (standing GO). 2026-08-25: the owner ladder complet
 90% CI [+17.20,+23.40] (condition ≥+10 met), scale-stable vs DEV-500's +19.75.** A δ
 override candidate was falsified out of sample and removed; the locked cell is
 `configs/policy/kb-policy-v1-dev100.json`. Verdict: study
-`docs/readiness/2026-08-25-baseline-lock-verdict.md`. Next: Audio2Tool generality;
-training-free RL over the locked environment. Digest:
+`docs/readiness/2026-08-25-baseline-lock-verdict.md`. Next: Audio2Tool generality and
+training-free RL. Digest:
 `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
