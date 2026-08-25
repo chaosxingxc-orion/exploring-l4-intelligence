@@ -61,8 +61,8 @@ Stage-2A discovery in flight (standing GO). 2026-08-25: the owner ladder complet
 override candidate was falsified out of sample and removed; the locked cell is
 `configs/policy/kb-policy-v1-dev100.json`. Verdict: study
 `docs/readiness/2026-08-25-baseline-lock-verdict.md`. Next: Audio2Tool generality;
-training-free RL over the locked environment. Stage-2B freeze `bb995d5` awaits owner
-approval. Digest: `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
+training-free RL over the locked environment. Digest:
+`wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
