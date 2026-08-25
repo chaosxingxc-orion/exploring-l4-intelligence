@@ -6,7 +6,7 @@
   },
   "paper_registry": {
     "path": "papers/registry.json",
-    "sha256": "3929ffddf0e4eb465a932ed8b1614d9df8d428266967dc34e411e03deb39a723"
+    "sha256": "d49b8c36987f0f7109085a996644a1faec2841128e2c10ba5b94ff9d5adc0ef5"
   },
   "experiment_control_plane": "wiki/Experiment-Assets.md",
   "asset_authorities": {
