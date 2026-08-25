@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-24 — DEV-500 CONFIRMED: +19.75pp held-out, CI excludes zero"
+last_refresh: "2026-08-25 — BASELINE LOCKED: DEV-1000 unexposed-500 +20.20pp, CI [+17.2,+23.4]"
 ---
 
 # Research Objective & Current State
@@ -55,13 +55,14 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). 2026-08-24: DEV-100 froze at 72 vs 48 direct;
-the **DEV-500 one-touch read CONFIRMED the frozen cell held-out: unexposed-400 +19.75 pp
-(52.50→72.25%), 90% CI [+16.5,+23.0] excludes zero; ablations attribute the gain to the
-retrieval signal; BLEND sits at the k=5 reachability ceiling.** Verdict: study
-`docs/readiness/2026-08-24-dev500-confirmatory-verdict.md`. **DEV-1000 and Audio2Tool gates
-OPEN.** Stage-2B freeze `bb995d5` awaits owner approval. Digest:
-`wiki/experiments/speech-aware-evidence-acquisition/README.md`.
+Stage-2A discovery in flight (standing GO). 2026-08-25: the owner ladder completed and the
+**DEV-1000 one-touch read LOCKED the baseline — unexposed-500 55.60% → 75.80%, +20.20 pp,
+90% CI [+17.20,+23.40] (condition ≥+10 met), scale-stable vs DEV-500's +19.75.** A δ
+override candidate was falsified out of sample and removed; the locked cell is
+`configs/policy/kb-policy-v1-dev100.json`. Verdict: study
+`docs/readiness/2026-08-25-baseline-lock-verdict.md`. Next: Audio2Tool generality;
+training-free RL over the locked environment. Stage-2B freeze `bb995d5` awaits owner
+approval. Digest: `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 The Wiki controls experiment identity and decisions; the study repo owns code/config/tests;
 `SPEECHRL_DATA_DIR` and MLflow own large artifacts. Route through `wiki/Experiment-Assets.md`.
