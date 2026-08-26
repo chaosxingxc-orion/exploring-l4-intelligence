@@ -1,8 +1,10 @@
 # Owner amendment — dual-track agentic decision + SLURP entry (2026-08-15)
 
-Owner decisions recorded verbatim-in-substance from the 2026-08-15 session (question:
-governance path for the agentic task system; answer: 双轨(推荐); question: SLURP slot-SLU
-entry via the entity clause; answer: 确认入场).
+Owner decisions recorded verbatim-in-substance from the 2026-08-15 session. Question:
+governance path for the agentic task system — answer `双轨(推荐)` ("dual-track, recommended").
+Question: SLURP slot-SLU entry via the entity clause — answer `确认入场` ("confirmed, admitted").
+The owner's two answers stay in their original characters as the quoted source and are glossed
+once here, per the program's first principle; nothing else in this record is non-English.
 
 ## Amendment 1 — bounded audio2tool carrier admission (this study)
 
@@ -34,3 +36,10 @@ owner GO + execution contract per program cadence; nothing is pre-created.
 Boundary-note: the study CLAUDE.md boundary section is owner-immutable to agents; this
 dated owner record is the amendment authority, and the study file carries a pointer line
 only.
+
+---
+
+**Gloss repair (2026-08-25).** The owner's two verbatim answers gained a one-time English gloss
+beside them; no term, scope, authority, or date changed and nothing was translated away.
+Pre-repair bytes are Git blob `23c6f3293f6d754d5c998598de46043d34c8a556`; recorded in
+`wiki/Decision-Log-2026-08.md` continuation entry 95.

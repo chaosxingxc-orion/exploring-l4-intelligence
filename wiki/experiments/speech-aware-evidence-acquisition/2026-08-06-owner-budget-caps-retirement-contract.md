@@ -8,48 +8,69 @@ status: "SIGNED_BY_OWNER"
 model_touch_performed: false
 ---
 
-# Owner amendment：废止首切片数值预算帽
+# Owner amendment — retire the first-slice numeric budget caps
 
-## 1. 处置
+## 1. Disposition
 
-Owner 于 2026-08-06 明确签署：**废止合并执行合同 §6 Resources 行中的三个数值上限**
-（≤3,000 次冻结核调用、≤40 GPU-hours、≤20 小时 speech audio）。这些数值自本件生效之日起
-不再是机器强制条件，也不再作为 gate 的拒绝理由。
+On 2026-08-06 the owner signed explicitly: **retire the three numeric ceilings in the Resources row
+of the consolidated execution contract §6** (≤3,000 frozen-core calls, ≤40 GPU-hours, ≤20 hours of
+speech audio). From the effective date of this record those figures are no longer machine-enforced
+conditions, and are no longer a ground on which a gate refuses.
 
-理由（owner 表述）：本 study 处于 Stage‑2 探索期，数值帽在设计与计划讨论中反复占用注意力，
-与其带来的实际保护不成比例。
+Reason (as the owner stated it): this study is in its Stage-2 exploration period, and the numeric
+caps repeatedly took up attention in design and planning discussion, out of proportion to the actual
+protection they delivered.
 
-## 2. 保留不变的部分（不在本次废止范围内）
+## 2. What is retained unchanged (outside the scope of this retirement)
 
-本 amendment **只废止数值上限**。以下机制**继续有效并继续机器强制**：
+This amendment **retires the numeric ceilings only**. The following mechanisms **remain in force and
+remain machine-enforced**:
 
-- **付费 API = 0**：合同 §6 该项不变；
-- **exposure 预登记**：每次模型/工具触达前必须在 study 仓 `docs/exposure-ledger.md` 落行，
-  含 execution profile、split role、split identity hash、consumed 标记与 carrier；
-- **一次性 attempt 语义**：`(run_id, attempt_id)` 不可复用；用量在发送前持久化；失败的 attempt
-  其实际用量仍进入耐久记录；重试必须新 attempt；
-- **逐 run 自我一致性**：`ExecutionPlan` 仍声明本次计划的调用数/音频秒数/GPU 小时，并仍与其
-  exposure 行逐字段核验（登记值 ≥ 计划值），运行中不得超出**自己登记**的额度；
-- **Stage‑3 停止线**：`paper-scale-confirmatory` 等 profile 仍一律 fail closed（合同 §7 不变）。
+- **Paid API spend = 0**: that item of contract §6 is unchanged;
+- **Exposure pre-registration**: before every model/tool contact a row must land in the study repo's
+  `docs/exposure-ledger.md`, carrying the execution profile, split role, split identity hash,
+  consumed flag, and carrier;
+- **One-shot attempt semantics**: `(run_id, attempt_id)` is never reusable; usage is persisted
+  before sending; a failed attempt's actual usage still enters the durable record; a retry must use
+  a new attempt;
+- **Per-run self-consistency**: the `ExecutionPlan` still declares this run's planned call count /
+  audio seconds / GPU hours, and is still verified field by field against its exposure row
+  (registered value ≥ planned value); a run must never exceed the allowance **it registered for
+  itself**;
+- **Stage-3 stop line**: profiles such as `paper-scale-confirmatory` still fail closed without
+  exception (contract §7 unchanged).
 
-即：曝光台账仍然回答"谁在什么时候触达了什么"，只是不再有全切片的数字天花板。
+That is: the exposure ledger still answers "who touched what, and when" — there is simply no longer
+a whole-slice numeric ceiling.
 
-## 3. 工程后果（如实记录）
+## 3. Engineering consequences (recorded honestly)
 
-2026-08-05 的独立评审将"同一 exposure 额度可重复消费"列为 P0‑4。该发现的**一次性消费部分**
-仍然关闭（见 §2 attempt 语义）；其**数值上限部分**因本 amendment 而不再适用——不是回归，
-而是 owner 主动收窄了合同义务。后续任何复核不应再以"首切片数值帽未强制"为缺陷。
+The 2026-08-05 independent review filed "the same exposure allowance can be consumed repeatedly" as
+P0-4. The **one-time-consumption half** of that finding stays closed (see the attempt semantics in
+§2); its **numeric-ceiling half** no longer applies because of this amendment — this is not a
+regression, but the owner deliberately narrowing the contract's obligations. No later review should
+file "the first-slice numeric caps are not enforced" as a defect.
 
-若 owner 日后希望恢复数值预算，需要新的 dated amendment；实施方不得自行重新引入。
+If the owner later wishes to restore numeric budgets, that requires a new dated amendment; the
+implementer must never reintroduce them unilaterally.
 
-## 4. 实施方义务
+## 4. Implementer obligations
 
-- 从代码中移除 `FIRST_SLICE_CAPS` 及其全切片求和检查；
-- 不在任何设计、计划或状态文档中再次提出预算分配议题；
-- study `docs/engineering.md` 与 exposure ledger 说明文字同步更正，不得残留"帽已强制"的表述；
-- 台账的 calls / speech audio seconds / gpu hours 三列**保留为记录**（有用的事实），
-  但不再承担强制语义。
+- remove `FIRST_SLICE_CAPS` and its whole-slice summation check from the code;
+- never raise the budget-allocation question again in any design, plan, or status document;
+- correct the study's `docs/engineering.md` and the exposure-ledger explanatory text in step,
+  leaving no residual wording that says "the caps are enforced";
+- the ledger's three columns — calls / speech audio seconds / gpu hours — **are retained as a
+  record** (they are useful facts) but no longer carry enforcement semantics.
 
-## 5. 失效条件
+## 5. Invalidation condition
 
-Owner 以新的 dated 记录恢复或修改预算义务时，本件就地被取代。
+This record is superseded in place when the owner restores or modifies the budget obligations by a
+new dated record.
+
+---
+
+**Language conversion (2026-08-25).** Re-issued in English with terms, scope, dates, signature, and
+authority unchanged; content is preserved throughout — this is a language conversion, not an edit.
+Pre-conversion bytes are Git blob `657bf44b8702913af03f25d9bab1593810e38daf`; the conversion is
+recorded in `wiki/Decision-Log-2026-08.md` continuation entry 95.

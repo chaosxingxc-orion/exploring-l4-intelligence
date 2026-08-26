@@ -12,61 +12,83 @@ formal_opening: "wiki/audit/system-first-stage1c-v2/round-22/2026-08-02-audio-aw
 default_values_policy: "ADOPTED_AS_PROPOSED_DEFAULT__AMENDABLE_BY_DATED_AMENDMENT"
 ---
 
-# Owner GO 与执行合同：audio-aware evidence acquisition
+# Owner GO and execution contract — audio-aware evidence acquisition
 
-> 历史签发件：本件证明 2026-08-03 的 owner GO 与原始预算授权。当前研究名称、speech-only
-> 域边界、远端/本地路径、包名和实验命名空间已由
-> `2026-08-04-owner-speech-domain-scope-and-identity-contract.md` 自包含取代；下文旧名称与路径保留为
-> 当时事实，不得作为当前路由。
+> Historical issuance: this record evidences the 2026-08-03 owner GO and the original budget
+> authorization. The current research name, the speech-only domain boundary, the remote/local
+> paths, the package name, and the experiment namespace have been superseded self-containedly by
+> `2026-08-04-owner-speech-domain-scope-and-identity-contract.md`; the old names and paths below are
+> retained as facts of that date and must never be used as current routing.
 
-## 决定
+## Decision
 
-Owner 于 2026-08-03 签发 `OWNER_GO_AND_EXECUTION_CONTRACT`：批准语义研究对象
-**audio-aware evidence acquisition** 进入工程，创建独立仓
-`https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git`（private），checkout 至
-`studies/audio-aware-evidence-acquisition/`，并按 Stage-2A 入场合同的 E0→R0→R1→X 序列执行。
-同批指示：数据采集线按目录重整决议调整（收据路径语义化、canonical lock 收束）。
+On 2026-08-03 the owner issued `OWNER_GO_AND_EXECUTION_CONTRACT`: the semantic research object
+**audio-aware evidence acquisition** is approved to enter engineering, a standalone repository
+`https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git` (private) is created and
+checked out to `studies/audio-aware-evidence-acquisition/`, and execution follows the E0→R0→R1→X
+sequence of the Stage-2A entry contract. Issued in the same batch: the data-acquisition line is
+adjusted per the directory-reorganization resolution (receipt paths made semantic, the canonical
+lock consolidated).
 
-Owner 签发时未逐字段指定冻结值；下表中标记 `DEFAULT` 的值按 Fable5 裁决书建议值生效，owner
-可随时以带日期的 amendment 改任何一行。本合同不裁决创新性；创新与最终方法仍是 Stage-2A/2B 的
-产出。
+At issuance the owner did not specify the frozen values field by field; the values marked `DEFAULT`
+in the table below take effect at the value the Fable5 adjudication recommended, and the owner may
+change any row at any time by a dated amendment. This contract adjudicates no question of novelty;
+innovation and the final method remain outputs of Stage-2A/2B.
 
-## 冻结字段（freeze sheet）
+## Frozen fields (freeze sheet)
 
-| 字段 | 冻结值 | 来源 |
+| Field | Frozen value | Source |
 |---|---|---|
-| Repository | `https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git`，default branch `master`，本地 `studies/audio-aware-evidence-acquisition/` | owner GO |
-| Core/runtime | lock 键 `qwen3-omni-30b-a3b-instruct-gguf`（Q8_0 GGUF + bf16 mmproj，2 files，34,691,959,904 B），llama.cpp llama-server 常驻 `-ngl 28`；**首次模型调用前必须落 E0 runtime 收据：llama.cpp build commit + 逐文件 sha256**（fail-closed） | DEFAULT |
-| Carriers | lock 键 `earnings21-original`、`earnings22-original`（rev `c05ab6fd8b4b627d123c922a22a39e993dd37635`）、`conec`（rev `88440713d8b80dc4f19b225f6480237e78c379de`）；D0 收据 `docs/checks/audio-aware-evidence-acquisition/2026-08-02-acquisition/`；discovery/confirmatory 双 split 按 v20 载体族合同，派生种子 `20260803`，派生脚本入 study 仓版本控制，confirmatory 在最小确认路径触发前不读 | DEFAULT |
-| Information boundary | 按入场合同不可变边界：gold/参考转写/测试标注/未来轮不越运行时边界；各臂可见字段在 R0 配置中显式声明并 hash | 入场合同 |
-| Baselines | mandatory 缩减集冻结为 {ConEC 上下文线（首个复现目标）、RECOVER 1-Best 梯级（强制对照臂）、Siskos 实体消解线、FlexCTC/TurboBias NeMo 偏置组}；Corona 2017 / Raghuvanshi 2019 / Flemotomos 2024 / COALA 2026 于 R1 第零步作 threat/reproduction 候选评估；**exact runnable revision 在首次复现 run 前以带日期 amendment 冻结**；失败报 `INCONCLUSIVE_BASELINE_NOT_READY`，不得静默换弱对手 | DEFAULT |
-| Prompts/tools | prompt hash 与冻结检索器/judge revision 逐 run 入 trace；来源/日期/query 记日志；最终答案权在冻结核 | 入场合同 |
-| Metrics | 按 v20：任务/实体指标、correct-to-wrong 与 wrong-to-correct 转移、尾部与成本报告；评分栈在 E0 D3 冻结 | 入场合同 |
-| Resources | R0 首切片上限：≤3,000 次冻结核调用、≤40 本地 GPU 时（RTX 5090）、≤20 h 处理音频、付费 API 支出=0（任何非零需 amendment）；切片末 go/narrow/repair/stop 备忘录为 stop-go 检查点 | DEFAULT |
-| Exposure | study 仓 `docs/exposure-ledger.md` 逐触达行（读结果前登记）；exposure 声明四字段（scope/date/counts/inherited）；继承 exposure：三载体截至本日零模型触达（仅 D0 无模型采集核验） | DEFAULT |
-| Wiki | 实验 ID 命名空间 `AAEA-E-<nnn>`（不含候选编号）；台账 `wiki/experiments/audio-aware-evidence-acquisition/README.md`；协议/config hash、MLflow/artifact 路由与偏差流程按 `wiki/Experiment-Assets.md` | owner GO |
+| Repository | `https://github.com/chaosxingxc-orion/audio-aware-evidence-acquisition.git`, default branch `master`, local `studies/audio-aware-evidence-acquisition/` | owner GO |
+| Core/runtime | lock key `qwen3-omni-30b-a3b-instruct-gguf` (Q8_0 GGUF + bf16 mmproj, 2 files, 34,691,959,904 B), llama.cpp llama-server resident at `-ngl 28`; **before the first model call an E0 runtime receipt must land: llama.cpp build commit + per-file sha256** (fail-closed) | DEFAULT |
+| Carriers | lock keys `earnings21-original`, `earnings22-original` (rev `c05ab6fd8b4b627d123c922a22a39e993dd37635`), `conec` (rev `88440713d8b80dc4f19b225f6480237e78c379de`); D0 receipt `docs/checks/audio-aware-evidence-acquisition/2026-08-02-acquisition/`; the discovery/confirmatory dual split follows the v20 carrier-family contract, derivation seed `20260803`, the derivation script enters study-repo version control, and confirmatory is not read until the minimal confirmation path is triggered | DEFAULT |
+| Information boundary | the immutable boundary of the entry contract: gold labels / reference transcripts / test annotations / future turns never cross the runtime boundary; each arm's visible fields are declared explicitly in the R0 config and hashed | entry contract |
+| Baselines | the mandatory reduced set is frozen as {the ConEC context line (first reproduction target), the RECOVER 1-Best ladder (mandatory control arm), the Siskos entity-resolution line, the FlexCTC/TurboBias NeMo biasing group}; Corona 2017 / Raghuvanshi 2019 / Flemotomos 2024 / COALA 2026 are assessed as threat/reproduction candidates at step zero of R1; **the exact runnable revision is frozen by a dated amendment before the first reproduction run**; on failure report `INCONCLUSIVE_BASELINE_NOT_READY` and never silently substitute a weaker opponent | DEFAULT |
+| Prompts/tools | the prompt hash and the frozen retriever/judge revision enter the trace on every run; source, date, and query are logged; final answer authority rests with the frozen core | entry contract |
+| Metrics | per v20: task/entity metrics, correct-to-wrong and wrong-to-correct transitions, tail and cost reporting; the scoring stack is frozen at E0 D3 | entry contract |
+| Resources | R0 first-slice ceilings: ≤3,000 frozen-core calls, ≤40 local GPU-hours (RTX 5090), ≤20 h of processed audio, paid API spend = 0 (any non-zero requires an amendment); the end-of-slice go/narrow/repair/stop memo is the stop-go checkpoint | DEFAULT |
+| Exposure | one row per contact in the study repo's `docs/exposure-ledger.md` (registered before results are read); the exposure declaration carries four fields (scope/date/counts/inherited); inherited exposure: as of this date the three carriers have zero model contact (only the D0 model-free acquisition verification) | DEFAULT |
+| Wiki | experiment ID namespace `AAEA-E-<nnn>` (carrying no candidate number); ledger `wiki/experiments/audio-aware-evidence-acquisition/README.md`; protocol/config hashes, MLflow/artifact routing, and the deviation process follow `wiki/Experiment-Assets.md` | owner GO |
 
-## 授权范围与保留
+## Scope of authorization, and what stays withheld
 
-本合同授权：study 仓创建与推送、E0（D1–D4 无模型数据闭环）、R0 工程纵向链、R1
-readiness 合格 closest-prior 复现、X 方向性探索——各步受上表预算与 fail-closed 收据约束。
+This contract authorizes: creating and pushing the study repository, E0 (the D1–D4 model-free data
+closure), the R0 engineering vertical chain, R1 readiness-qualified closest-prior reproduction, and
+X directional exploration — each step bound by the budget in the table above and by fail-closed
+receipts.
 
-仍不授权：付费 API 支出、wiki 镜像发布、公开 release、创新性/优越性结论、超预算带的任何
-触达。R2 等候选编号不得进入包名、MLflow 主命名空间与正式实验 ID。
+Still not authorized: paid API spend, publishing a wiki mirror, a public release,
+novelty/superiority conclusions, and any contact outside the budget band. Candidate numbers such as
+R2 must never enter package names, the MLflow main namespace, or formal experiment IDs.
 
-## 失效与回滚
+## Invalidation and rollback
 
-失效条件：owner 撤回或修订本合同；STOP_THE_LINE 触发器命中（同任务同边界更强可跑
-mandatory prior、载体许可/可得性/标签/度量合同失效、未登记 inherited exposure 或泄漏、
-问题可研究性被推翻）。回滚：study 仓归档（registry lifecycle 转 `paused`/`sunset`），
-伞仓治理层与 W1–W4 不受影响。
+Invalidation condition: the owner withdraws or revises this contract; or a STOP_THE_LINE trigger
+fires (a stronger runnable mandatory prior on the same task and the same boundary; a carrier
+licence/availability/label/metric contract lapsing; unregistered inherited exposure or a leak; the
+researchability of the problem being overturned). Rollback: the study repository is archived
+(registry lifecycle moves to `paused`/`sunset`); the umbrella governance layer and W1–W4 are
+unaffected.
 
-## Amendment 1（2026-08-03）：W1–W4 退役后的回滚语义澄清
+## Amendment 1 (2026-08-03) — rollback semantics clarified after the W1–W4 retirement
 
-依据重整后架构复核提案（`PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1`）登记；性质为澄清性
-amendment，不产生新授权，原文不作原地改写。
+Registered under the post-reorganization architecture review proposal
+(`PROGRAM-DIRECTORY-POST-MIGRATION-REVIEW-V1`); it is a clarifying amendment, creates no new
+authorization, and does not rewrite the original text in place.
 
-上节"伞仓治理层与 W1–W4 不受影响"签发于同日 W1–W4 退役裁决之前。澄清：四个 W1–W4 工作仓已于
-2026-08-03 退役——本地 checkout 已删除，远端作为脱离程序的 cold backup 保留
-（`wiki/archive/program/w1-w4-retirement/`）。因此本合同的回滚只影响 study 仓生命周期状态与
-伞仓 registry/治理层；回滚不会恢复任何 W1–W4 本地 worktree，也不改变已退役 cold backup 的状态。
+The preceding section's phrase "the umbrella governance layer and W1–W4 are unaffected" was issued
+before that same day's W1–W4 retirement ruling. Clarification: the four W1–W4 work repositories were
+retired on 2026-08-03 — the local checkouts were deleted and the remotes are kept as cold backups
+outside the program (`wiki/archive/program/w1-w4-retirement/`). This contract's rollback therefore
+affects only the study repository's lifecycle state and the umbrella registry/governance layer; a
+rollback restores no W1–W4 local worktree, and changes nothing about the state of the retired cold
+backups.
+
+---
+
+**Language conversion (2026-08-25).** Re-issued in English with terms, scope, budget, dates, and
+authority unchanged; content is preserved throughout — this is a language conversion, not an edit.
+Amendment 1's undertaking not to "rewrite the original text in place" is undisturbed: the
+pre-conversion characters remain the authoritative original and stay addressable as Git blob
+`e059b6257fad4be45f3014297a26c4a40257b9af`. The conversion is recorded in
+`wiki/Decision-Log-2026-08.md` continuation entry 95.

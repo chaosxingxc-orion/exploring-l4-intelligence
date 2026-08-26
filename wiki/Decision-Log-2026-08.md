@@ -5,6 +5,94 @@
 > From continuation entry 94 (2026-08-15) onward, every new entry is authored in English under the
 > program's English-only first principle. Earlier entries keep their original bytes by owner ruling.
 
+### 2026-08-25 (continuation entry 95) · The five Chinese owner-authority records re-issued in English; the English-only gate extended to `wiki/experiments/`
+
+#### Context
+
+Continuation entry 94 converted the current-truth surface and named what it left behind: "the seven
+other owner records under `wiki/experiments/`". Five of them still carried Chinese —
+`2026-08-04-owner-speech-domain-scope-and-identity-contract.md` (1,848 CJK ideographs, 29.5% of its
+characters), `2026-08-03-owner-go-and-execution-contract.md` (848, 19.8%),
+`2026-08-06-owner-budget-caps-retirement-contract.md` (554, 32.1%),
+`2026-08-08-owner-go-baseline-reproduction.md` (403, 25.6%), and
+`2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md` (256, 15.9%). These are not cold
+records: the study `CLAUDE.md` cites the 2026-08-06 amendment as the authority that retired the
+numeric budget caps, and `wiki/audit/speech-aware-evidence-acquisition-r0-review/INDEX.md` cites it
+by path as execution authority with a reviewer-facing consequence. Every session that touches the
+study reads them, so under first principle (1) they are model input being translated at read time,
+session after session — the silent-drift risk the principle exists to remove. No gate caught this
+because `validate_english_only` scopes to a 25-entry `ENGLISH_ONLY_PATHS` allowlist and
+`wiki/experiments/**` was never in it.
+
+#### Decision
+
+All five are **re-issued in English with their terms unchanged**, following the protocol entry 94
+established at `c6053a2` rather than an in-place rewrite: no term, scope, budget, authority, date,
+or signature changes; each pre-conversion blob stays addressable; every pin that pointed at a
+converted file is re-pinned in the same commit.
+
+| Record | Pre-conversion blob | English blob |
+|---|---|---|
+| `2026-08-03-owner-go-and-execution-contract.md` | `e059b6257fad4be45f3014297a26c4a40257b9af` | `c897071cbbe230828ee0f50dcd250edc50793cae` |
+| `2026-08-04-owner-speech-domain-scope-and-identity-contract.md` | `57bf8e23f7282162d06936b5ea484ea6fb5bdea8` | `5d45308246ea2ce624e972c89995e0655f0b00f8` |
+| `2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md` | `5f91226f25d6bfd5c5cd427c57fecc635eb43066` | `f045dd1fbf436b88a0cd49f46a3694058a79b543` |
+| `2026-08-06-owner-budget-caps-retirement-contract.md` | `657bf44b8702913af03f25d9bab1593810e38daf` | `b94c008e071deb7fffa73bf859717bf14d13721b` |
+| `2026-08-08-owner-go-baseline-reproduction.md` | `532d726cda342507fd5629821da82d364840b9fa` | `2d81c7d0a6c5da3f134f873631abd477de579c15` |
+| `2026-08-15-owner-go-dual-track-agentic.md` (gloss repair only) | `23c6f3293f6d754d5c998598de46043d34c8a556` | `f5f1c667d7e068e76781f8811382d9ca7750e688` |
+
+Owner directives quoted verbatim are **not translated away**. The 2026-08-08 `/goal` directive keeps
+its original characters as the quoted source with a one-time English gloss beside it, and the
+2026-08-15 record's two verbatim answers gain the gloss they lacked — the house pattern entry 94's
+successor record already used. The only structural move: the 2026-08-08 YAML `authority` field now
+points at the verbatim directive in the body instead of carrying it inline, so the front matter is
+English while the directive itself is preserved in full, in the same file, in the same commit.
+
+Pins re-pinned in the conversion commit: the consolidated execution contract's §9 source-record
+table (three rows, now carrying both a current-blob and a pre-conversion-blob column), and
+`studies/registry.json:decision_record_blob` → `f27a9258752a6356503bb90a32a216d86a00fde7`, because
+editing §9 moved the consolidated contract's own blob. `docs/integrity/experiment-asset-inventory.json`
+re-renders with the registry hash. No other blob pin to any of the six exists in either repository:
+the study repo cites all six by path only.
+
+The durable fix lands in the immediately following commit: `ENGLISH_ONLY_PATHS` gains every tracked
+`.md` under `wiki/experiments/`, and `validate_english_only` gains the first principle's own
+carve-out in executable form — CJK is permitted only inside an inline code span that carries an
+English gloss in parentheses immediately after it, which is exactly "keep it verbatim and gloss it
+once" and nothing wider.
+
+#### Rationale
+
+Entry 94 chose an explicit allowlist over "every HOT file" so the rule could not creep onto
+immutable records. That reasoning still holds, and it decides the new scope: `wiki/experiments/` is
+the Wiki's mutable governance layer for experiment lifecycle and execution authority, superseded in
+place, and is neither `wiki/audit/` nor `wiki/archive/` (immutable), nor release-pinned
+`docs/checks/`, nor the append-only `wiki/Decision-Log-*.md` volumes, nor the hash-pinned
+`wiki/survey/registry/` receipts. It is precisely the class the five defects belonged to, so it is
+the smallest scope that makes recurrence impossible where it actually happened.
+
+Extending coverage without a verbatim carve-out would have forced a choice between a red gate and
+translating an owner's signed words — which is why the carve-out is part of the same change rather
+than a later patch.
+
+#### Consequences
+
+`wiki/experiments/` now holds zero unglossed CJK. The two files that retain CJK retain it
+deliberately, as glossed verbatim owner directives, and the gate proves that on every run.
+
+Remaining language debt, unconverted and deliberately untouched: `docs/superpowers/` specs and plans
+(3 files with CJK, 8,287 ideographs, of which 8,285 sit in two 2026-08-04 review documents);
+`wiki/2026-07-18-inherited-prior-exposure-union.md` (a path-pinned legacy file);
+`wiki/survey/` sidecar and sentinel JSON (hash-bound registry receipts); three CJK literals in
+`scripts/survey/` and `scripts/checks/` that are legacy-data detectors or gate fixtures and would
+stop working if translated; and the `wiki/Decision-Log-*.md` volumes plus `wiki/audit/` and
+`wiki/archive/`, which keep their bytes by owner ruling.
+
+#### Supersedes
+
+Entry 94's "remaining language debt … the seven other owner records under `wiki/experiments/`", to
+the extent of those six records. No research decision, stage, authorization, scope, or budget
+changes; the numeric caps stay retired exactly as the 2026-08-06 amendment retired them.
+
 ### 2026-08-15 (continuation entry 94) · English-only first principle: active surface converted, gate made executable, owner contract re-issued
 
 #### Context

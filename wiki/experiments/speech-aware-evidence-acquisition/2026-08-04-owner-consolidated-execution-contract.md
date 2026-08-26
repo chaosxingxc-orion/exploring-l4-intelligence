@@ -155,11 +155,17 @@ recoverability statement, and a lock amendment.
 
 ## 9. Source records (historical, never written back)
 
-| Record | Path | Git blob |
-|---|---|---|
-| 2026-08-03 GO contract (source of budget and authorization) | `2026-08-03-owner-go-and-execution-contract.md` | `e059b6257fad4be45f3014297a26c4a40257b9af` |
-| 2026-08-04 speech-only scope/identity contract | `2026-08-04-owner-speech-domain-scope-and-identity-contract.md` | `57bf8e23f7282162d06936b5ea484ea6fb5bdea8` |
-| 2026-08-04 Stage-3 boundary / paper-gate contract | `2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md` | `5f91226f25d6bfd5c5cd427c57fecc635eb43066` |
+| Record | Path | Git blob (current) | Git blob (pre-conversion) |
+|---|---|---|---|
+| 2026-08-03 GO contract (source of budget and authorization) | `2026-08-03-owner-go-and-execution-contract.md` | `c897071cbbe230828ee0f50dcd250edc50793cae` | `e059b6257fad4be45f3014297a26c4a40257b9af` |
+| 2026-08-04 speech-only scope/identity contract | `2026-08-04-owner-speech-domain-scope-and-identity-contract.md` | `5d45308246ea2ce624e972c89995e0655f0b00f8` | `57bf8e23f7282162d06936b5ea484ea6fb5bdea8` |
+| 2026-08-04 Stage-3 boundary / paper-gate contract | `2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md` | `f045dd1fbf436b88a0cd49f46a3694058a79b543` | `5f91226f25d6bfd5c5cd427c57fecc635eb43066` |
+
+The three source records were re-issued in English on 2026-08-25 with terms, scope, budget, dates,
+and authority unchanged (a language conversion, not an edit; `wiki/Decision-Log-2026-08.md`
+continuation entry 95). The current-blob column is re-pinned to the English bytes in the same commit
+as that conversion; the pre-conversion column keeps the original characters addressable in Git
+history. No historical fact is written back by either column.
 
 This contract supersedes the "in force" status of those three contracts (their issuance facts,
 historical exposure, budget, and authorization facts are all inherited and never written back).
