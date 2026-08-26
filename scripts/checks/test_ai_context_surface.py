@@ -1737,6 +1737,9 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             self.assertIn("wiki/Experiment-Assets.md", guide)
             self.assertIn("studies/registry.json", guide)
             self.assertIn("direction-local", guide)
+            self.assertIn(
+                "final validation and publication-grade claims belong to Stage-3", guide
+            )
             self.assertIn("Research-Objective.md` ≤5KB", guide)
             self.assertIn("Per-Work-Status.md ≤8KB", guide)
             self.assertIn("survey/README.md ≤4KB", guide)
@@ -1782,13 +1785,11 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "Owner GO was",
             "signed 2026-08-03",
             "speech-only boundary",
-            "candidate method are Stage‑2 outputs",
-            "final validation is Stage‑3",
+            "endpoint = qualified paper candidates",
+            "OWNER_GO_AND_PAPER_EXECUTION_CONTRACT",
             "fail-closed behind E0 D1–D4",
             "D0 is closed",
-            "SLUE-SQA-5, ContextASR-Bench and AMI",
             "FSD50K, AudioSet and ESC-50",
-            "H5 remains",
             "WITHHOLD_NON_LOAD_BEARING",
             "NO_GO_AS_STANDALONE_DIRECTION__SUNSET_BEFORE_STAGE2",
             "OWNER_UNVERIFIED",
@@ -1796,7 +1797,6 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
             "`ORG`",
             "`SUPPLY`",
             "`USE`",
-            "External knowledge is introduced",
             "effectiveness",
             "reasonableness",
             "efficiency",
@@ -1812,6 +1812,23 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
         for token in required_truth:
             with self.subTest(token=token):
                 self.assertIn(token, text)
+
+        # Facts whose wording moves, pinned verb-agnostically.  A literal token
+        # pinned the phrasing rather than the claim and went stale on an edit
+        # that changed nothing the program had decided.
+        self.assertRegex(text, r"H5\s+\w+\s+`WITHHOLD_NON_LOAD_BEARING`")
+        self.assertRegex(
+            text,
+            r"External knowledge [\s\S]{0,120}verifiability gaps"
+            r"[\s\S]{0,200}reward hacking",
+        )
+        # Re-homed, not dropped: the secondary-carrier roster is a current field
+        # of the asset control plane, whose declared HOT carrier is
+        # wiki/Experiment-Assets.md.  A second copy of it on this page would be
+        # the consolidation trigger wiki/AI-Collaboration.md forbids, so the
+        # guarantee is asserted where the fact actually lives.
+        assets = self.read_text("wiki/Experiment-Assets.md")
+        self.assertIn("SLUE-SQA-5, ContextASR-Bench and AMI", assets)
         self.assertNotIn("ready for sign-off", text)
 
     def test_hot_state_preserves_stage1c_authority_boundary(self) -> None:

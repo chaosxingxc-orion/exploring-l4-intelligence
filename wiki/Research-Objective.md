@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-25 — SLURP LOCKED; limit located; Audio2Tool mechanics only"
+last_refresh: "2026-08-25"
 ---
 
 # Research Objective & Current State
@@ -77,8 +77,9 @@ claim in Stage‑2; the fixed Stage‑1B v5 320-work union stays historical evid
 `WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not engineering identities;
 admitted repos live at `studies/<semantic-name>/`. R2R1 remains
 `RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`. Literature work is a bounded delta lane
-through `wiki/survey/README.md`, reopening Stage‑1 only if new evidence invalidates the problem,
-carrier legality, information boundary or reproducibility contract.
+through `wiki/survey/README.md`; retired:
+`wiki/archive/working/system-first-survey-current/`. It reopens Stage‑1 only if new evidence
+invalidates the problem, carrier legality, information boundary or reproducibility contract.
 
 ## Supersession rule
 
