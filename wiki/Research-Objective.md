@@ -13,7 +13,7 @@ last_refresh: "2026-08-25"
 ## Current gate and authority
 
 Stage accounting is direction-local. Endpoint:
-`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_INCOMPLETE__R1_WITHHELD`.
+`DIRECTION_LOCAL_PIPELINE__R1_SUNSET__SPEECH_AWARE_EVIDENCE_ACQUISITION_OWNER_GO__STAGE2A_R0_CLOSED__R1_RELEASED`.
 Core = Qwen3-Omni-30B through local llama.cpp; study domain = speech and spoken-language tasks.
 
 The first semantic object, **speech-aware evidence acquisition** (R2 audit provenance), is
