@@ -1661,8 +1661,75 @@ class AiContextRepositoryPolicyTests(unittest.TestCase):
                 )
                 self.assertIn("wiki/Home.md:2", failures[0])
 
+    def test_english_only_validator_allows_glossed_verbatim_and_nothing_wider(self) -> None:
+        # The first principle's own carve-out: keep a source term verbatim and
+        # gloss it once.  Legal only as an inline code span plus an English
+        # parenthetical gloss immediately after it.
+        for legal in (
+            'answer `双轨(推荐)` ("dual-track, recommended").',
+            "answer `确认入场` (confirmed, admitted).",
+            '`双轨` ("a") and `确认入场` ("b") on one line',
+        ):
+            with self.subTest(legal=legal):
+                self.assertEqual(
+                    [], surface.validate_english_only("wiki/experiments/x/y.md", legal)
+                )
+        for illegal in (
+            "answer: 双轨",  # bare prose
+            "answer `双轨` and then more",  # code span, no gloss
+            "answer `双轨` (123)",  # gloss carries no English
+            "answer `双轨` (确认)",  # the gloss is itself non-English
+            '前言 `双轨` ("dual-track")',  # CJK outside the quoted span
+        ):
+            with self.subTest(illegal=illegal):
+                self.assertEqual(
+                    ["non-english-active-document"],
+                    failure_codes(
+                        surface.validate_english_only("wiki/experiments/x/y.md", illegal)
+                    ),
+                )
+
+    def test_english_only_scope_covers_experiments_and_spares_frozen_surfaces(self) -> None:
+        tracked = [
+            "CLAUDE.md",
+            "wiki/experiments/some-study/README.md",
+            "wiki/experiments/papers/some-paper/contract.md",
+            "wiki/experiments/some-study/receipt.json",
+            "wiki/audit/campaign/round-1/report.md",
+            "wiki/archive/working/note.md",
+            "wiki/Decision-Log-2026-08.md",
+            "wiki/survey/sidecars/1234.sidecar.json",
+            "docs/checks/campaign/release/report.md",
+        ]
+        covered = surface.english_only_paths(tracked)
+
+        self.assertIn("CLAUDE.md", covered)
+        self.assertIn("wiki/experiments/some-study/README.md", covered)
+        self.assertIn("wiki/experiments/papers/some-paper/contract.md", covered)
+        for spared in (
+            "wiki/experiments/some-study/receipt.json",
+            "wiki/audit/campaign/round-1/report.md",
+            "wiki/archive/working/note.md",
+            "wiki/Decision-Log-2026-08.md",
+            "wiki/survey/sidecars/1234.sidecar.json",
+            "docs/checks/campaign/release/report.md",
+        ):
+            with self.subTest(spared=spared):
+                self.assertNotIn(spared, covered)
+
     def test_every_english_only_path_is_free_of_cjk(self) -> None:
-        for path in sorted(surface.ENGLISH_ONLY_PATHS):
+        tracked = _git_tracked_paths(self.repo)
+        covered = surface.english_only_paths(tracked)
+
+        self.assertTrue(surface.ENGLISH_ONLY_PATHS <= covered)
+        experiments = {
+            path for path in covered if path.startswith("wiki/experiments/")
+        }
+        self.assertTrue(
+            experiments,
+            "the wiki/experiments prefix scope must resolve to real tracked files",
+        )
+        for path in sorted(covered):
             with self.subTest(path=path):
                 self.assertEqual(
                     [], surface.validate_english_only(path, self.read_text(path))

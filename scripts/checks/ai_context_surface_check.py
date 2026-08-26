@@ -14,6 +14,7 @@ import re
 import stat
 import subprocess
 import sys
+from collections.abc import Iterable
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urlsplit
 
@@ -879,6 +880,18 @@ ENGLISH_ONLY_PATHS = frozenset(
         "wiki/survey/README.md",
     }
 )
+# Prefix-scoped extension of the allowlist above, as ``(prefix, suffix)`` pairs.
+# A tracked path under one of these prefixes is English-only without having to
+# be enumerated, so a *new* file in that directory is covered the day it lands.
+# ``wiki/experiments/`` is the Wiki's mutable governance layer for experiment
+# lifecycle and execution authority: it is superseded in place, it is read by
+# every session that touches a study, and it is deliberately none of the
+# byte-frozen surfaces -- not ``wiki/audit/`` or ``wiki/archive/`` (immutable),
+# not release-pinned ``docs/checks/``, not the append-only
+# ``wiki/Decision-Log-*.md`` volumes, not the hash-bound ``wiki/survey/``
+# receipts.  Extend this tuple only with a surface that carries the same
+# supersede-in-place mutability.
+ENGLISH_ONLY_PREFIXES: tuple[tuple[str, str], ...] = (("wiki/experiments/", ".md"),)
 CJK_RE = re.compile(
     "["
     "\u3000-\u303f"  # CJK punctuation
@@ -891,21 +904,84 @@ CJK_RE = re.compile(
 )
 
 
+ASCII_LETTER_RE = re.compile(r"[A-Za-z]")
+GLOSSED_VERBATIM_RE = re.compile(
+    r"`(?P<quoted>[^`\n]+)`[ \t]*\((?P<gloss>\"[^\"()\n]+\"|[^()\n]+)\)"
+)
+
+
+def strip_glossed_verbatim(line: str) -> str:
+    """Remove verbatim quotations that carry a one-time English gloss.
+
+    The first principle keeps a source term "verbatim and gloss it once", so the
+    gate has to recognise that one shape and refuse every other one.  The shape
+    is an inline code span holding the verbatim characters, immediately followed
+    by a parenthetical gloss that is itself English:
+
+        ``answer `<verbatim>` ("dual-track, recommended")``
+
+    Only the code-span text is stripped.  The gloss stays in the line, so a
+    "gloss" that is itself non-English is still caught, and prose outside the
+    construct is never exempted.
+    """
+
+    kept: list[str] = []
+    cursor = 0
+    for match in GLOSSED_VERBATIM_RE.finditer(line):
+        gloss = match.group("gloss")
+        if not ASCII_LETTER_RE.search(gloss) or CJK_RE.search(gloss):
+            continue
+        start, end = match.span("quoted")
+        if start < cursor:
+            continue
+        kept.append(line[cursor:start])
+        cursor = end
+    kept.append(line[cursor:])
+    return "".join(kept)
+
+
+def english_only_paths(tracked: Iterable[str]) -> set[str]:
+    """Resolve the English-only scope against the tracked-path set.
+
+    The explicit ``ENGLISH_ONLY_PATHS`` allowlist plus every tracked path that
+    matches an ``ENGLISH_ONLY_PREFIXES`` scope.  Keeping the prefix scopes
+    separate from the allowlist is what stops the rule creeping onto immutable
+    or hash-pinned bytes: a directory is covered only when it is named here.
+    """
+
+    tracked = set(tracked)
+    covered = set(ENGLISH_ONLY_PATHS) & tracked
+    for prefix, suffix in ENGLISH_ONLY_PREFIXES:
+        covered.update(
+            path
+            for path in tracked
+            if path.startswith(prefix) and path.lower().endswith(suffix)
+        )
+    return covered
+
+
 def validate_english_only(path: str, text: str) -> list[str]:
-    """Require an English-only surface to carry no CJK character.
+    """Require an English-only surface to carry no unglossed CJK character.
 
     This is the executable form of the program's first principle: every active
     document is authored in English so that nothing needs translating on its way
-    into a model context.  The scope is the explicit ``ENGLISH_ONLY_PATHS`` set,
-    never "every HOT file" — immutable records (``wiki/audit/``,
+    into a model context.  The scope is ``english_only_paths`` — the explicit
+    ``ENGLISH_ONLY_PATHS`` set plus the ``ENGLISH_ONLY_PREFIXES`` scopes — and
+    never "every HOT file": immutable records (``wiki/audit/``,
     ``wiki/archive/``), release-pinned check reports, path-pinned legacy files,
-    and the historical ``wiki/Decision-Log-*.md`` volumes keep their original
-    bytes by owner ruling and are superseded, never rewritten.
+    hash-bound registry receipts, and the historical ``wiki/Decision-Log-*.md``
+    volumes keep their original bytes by owner ruling and are superseded, never
+    rewritten.
+
+    The same first principle carries its own carve-out — "where a term has no
+    faithful English form keep it verbatim and gloss it once" — so a verbatim
+    owner directive quoted inside an inline code span and immediately followed
+    by an English parenthetical gloss is legal, and nothing wider is.
     """
 
     failures: list[str] = []
     for number, line in enumerate(text.splitlines(), start=1):
-        found = CJK_RE.findall(line)
+        found = CJK_RE.findall(strip_glossed_verbatim(line))
         if found:
             sample = "".join(dict.fromkeys(found))[:12]
             failures.append(
@@ -2014,7 +2090,7 @@ def evaluate_manifest(repo, manifest, tracked_paths):
             else:
                 failures.extend(validate_collaboration_policy(policy_text))
 
-    for path in sorted(ENGLISH_ONLY_PATHS & tracked_seen):
+    for path in sorted(english_only_paths(tracked_seen)):
         raw = read_repo_path(path, "english-only-path-missing")
         if raw is None:
             continue
