@@ -150,7 +150,9 @@ against that band.
 |---|---|---|---|---|---|
 | **Qwen-3-Omni-30B (the same core) direct answering** | paper protocol, deterministic metric | 92.4 | 74.7 | 41.7 | arXiv:2604.22821 |
 | Whisper-v3 + Gemma-27B cascade | same as above | 87.9 | — | 50.5 | same as above |
-| **ours: GGUF runtime rerun (R1=P1)** | 50×8 tier sampling, reimplemented scorer | — | — | — | to be filled in (all tier columns) |
+| **ours: GGUF runtime rerun** | 50×8 frozen split, registered `a2t-toolcall` scorer (tool-name multiset), build 04ccc72a Q4_K_M, n=400 | 64.0 | 50.0 | 26.0 | `SAEA-A2T-DIRECT-CALIBRATION-V1`, 2026-09-04 |
+
+**NOT ACCEPTED.** The row above is cell A0'-legacy-raw (legacy registry contract, raw audio through the bf16 mmproj), the closest of four calibration cells to the paper across all eight tiers (summed absolute gap 142.3 pp). **No cell passed the preregistered acceptance rule** (per-tier tool-accuracy |delta| <= 5 pp on tiers 1, 2, 5 and 6 with the tier rank order preserved); the tier-1 gap is 28.4 pp for this cell and 42.4 pp for the native-contract cells. All eight tiers, both other cells, the paired contrasts and the acceptance evaluation are in `studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-04-a2t-direct-baseline-calibration-v1-verdict.md`. Two protocol factors were varied and neither closes the gap: the native OpenAI-format `tools` contract is significantly WORSE for tool accuracy (−5.75 pp raw, −8.75 pp packets), and the mmproj-free packet audio path is statistically null against raw audio. This row must not be used as an accepted baseline for mechanism work.
 
 ## voiceagentbench (Family D)
 
