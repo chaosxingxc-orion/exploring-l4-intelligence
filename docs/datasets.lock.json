@@ -46,6 +46,22 @@
   },
   "amendments": [
     {
+      "date": "2026-09-06",
+      "task": "Owner-authorized acquisition of OpenAI Whisper large-v3 in transformers format as a pinned frozen TOOL model for the speech-aware-evidence-acquisition study. Purpose: the Earnings-22 dev self-run anchor SAEA-E22-DEV-WHISPER-ANCHOR-V1, a tool-model reference run under the Open ASR leaderboard protocol (transformers inference, Whisper English text normalizer on both sides) that replaces a cross-paper quoted number with one measured on the study's own rows. Register-then-fetch; zero cost; ungated apache-2.0 source; no corpus audio, no transcription, no GPU and no frozen-core contact.",
+      "changes": [
+        {
+          "kind": "asset-registration",
+          "note": "whisper-large-v3 registered as the second member of the speech-aware-tools profile (lifecycle AUXILIARY, kind model). Identity verified live against the official huggingface.co model API BEFORE fetching: revision 06f233fe06e710322aca913c1bc4249a0d71fce1, private false, gated false, apache-2.0, pipeline automatic-speech-recognition, 21 published files. Exactly 11 of those 21 are governed here -- the fp16 model.safetensors (3,087,130,976 B, HF LFS oid recorded as source.files sha256) plus config.json, generation_config.json, preprocessor_config.json, tokenizer.json, tokenizer_config.json, vocab.json, merges.txt, added_tokens.json, special_tokens_map.json and normalizer.json, 3,091,519,764 B in total. The duplicate serializations were deliberately NOT fetched: pytorch_model.bin, flax_model.msgpack, both fp32 safetensors shards, both fp32 .bin shards and their two fp32 index files (about 21.6 GB avoided); the repo publishes no ONNX or TFLite directory at this revision. Fetched via the standard asset_lock path (hf_complete.py pinned manifest + aria2c, official endpoint) in 1,425 s wall for 3.09 GB; one round, missing=0. Byte closure: model.safetensors sha256 matches the LFS oid and all ten non-LFS files match their upstream Git blob SHA-1 exactly; zero partial markers; inventory --full --fail-on-drift reports COMPLETE with drift=0. One working copy at models/whisper-large-v3; no scatter and no hub-cache duplicate.",
+          "entries": ["whisper-large-v3"]
+        },
+        {
+          "kind": "load-smoke",
+          "note": "CPU-only load smoke with CUDA_VISIBLE_DEVICES empty and the hub offline, in the shared ~/.venvs/speechrl (transformers 5.12.1, torch 2.9.1+cu128; nothing installed or upgraded). WhisperProcessor and WhisperForConditionalGeneration both instantiate from the local directory at dtype float32 with low_cpu_mem_usage: 1,543,490,560 parameters on device cpu, d_model 1280, 32 encoder and 32 decoder layers, 128 mel bins, feature extractor 16 kHz / 30 s windows, tokenizer length 51,866, generation config carrying alignment heads and 100 language ids. No audio was read, no transcription was run and the GPU -- which was serving a study cell throughout -- was never touched. Receipt: docs/checks/speech-aware-evidence-acquisition/2026-09-06-whisper-acquisition/README.md.",
+          "entries": ["whisper-large-v3"]
+        }
+      ]
+    },
+    {
       "date": "2026-08-20",
       "task": "speech-aware-evidence-acquisition P-EMB-3M cascade-arm text-embedder acquisition: the owner approved a single bounded local text embedder for the CASCADE construction (core T0 self-transcription -> local text embedder -> text-text label matching). Register-then-fetch of the pinned single-file GGUF, plus a bounded server sanity check with zero corpus contact. Zero cost; ungated source; no study dataset audio or text was touched.",
       "changes": [
@@ -1026,6 +1042,115 @@
       "factor_family": "tool-model",
       "note": "Qwen3-Embedding-0.6B (595.8M params, dim 1024, apache-2.0, ungated), Q8_0 single-file GGUF -- the local text embedder for the owner-approved P-EMB-3M cascade arm in the speech-aware-evidence-acquisition study (umbrella wiki/experiments/speech-aware-evidence-acquisition/2026-08-15-owner-go-dual-track-agentic.md CASCADE construction: core T0 self-transcription -> local text embedder (qwen3-embedding class) -> text-text label matching; ruling recorded in the study's docs/readiness/2026-08-20-embedder-charter-adjudication.md, selection context in docs/readiness/2026-08-20-omni-embedding-selection.md). Enters under the charter's frozen tool-level retriever clause: encode-only, final answer authority stays with the frozen Qwen3-Omni core. The repo also ships an f16 GGUF (1,197,629,632 B); Q8_0 was selected as the smaller single-file variant sufficient for a text-only encode-only tool. Sanity-served once with the pinned llama.cpp-featcache llama-server (build 5d9dfcb58ea860295da8fc93c7b5bed9e2c71151) with --embedding --pooling last on a spare port against one synthetic string, zero corpus contact; dimension and determinism recorded on the acquisition receipt, not here.",
       "acquisition_receipt": "docs/checks/speech-aware-evidence-acquisition/2026-08-20-qwen3emb-acquisition/README.md"
+    },
+    {
+      "name": "whisper-large-v3",
+      "kind": "model",
+      "local_subdir": "models/whisper-large-v3",
+      "source": {
+        "kind": "hf",
+        "id": "openai/whisper-large-v3",
+        "repo_type": "model",
+        "include": [
+          "added_tokens.json",
+          "config.json",
+          "generation_config.json",
+          "merges.txt",
+          "model.safetensors",
+          "normalizer.json",
+          "preprocessor_config.json",
+          "special_tokens_map.json",
+          "tokenizer.json",
+          "tokenizer_config.json",
+          "vocab.json"
+        ],
+        "files": [
+          {
+            "filename": "added_tokens.json",
+            "size_bytes": 34648,
+            "sha256": "3c51f66c4c21f9e126970078f11ae77a78c74aee8df606ee9daba86e467108e0"
+          },
+          {
+            "filename": "config.json",
+            "size_bytes": 1272,
+            "sha256": "ad0e8d1e46f4d01f7861a21509e5d0f977d6cc1f367a370603c92541d819807b"
+          },
+          {
+            "filename": "generation_config.json",
+            "size_bytes": 3903,
+            "sha256": "fbdfa70135de9b1d31553393f14e80aaeb1936ea36576b2ba864055943c09d23"
+          },
+          {
+            "filename": "merges.txt",
+            "size_bytes": 493869,
+            "sha256": "2df2990a395e35e8dfbc7511e08c12d56018d8d04691e0133e5d63b21e154dc6"
+          },
+          {
+            "filename": "model.safetensors",
+            "size_bytes": 3087130976,
+            "sha256": "a8e94b85976e5864ba3e9525c7e6c83b2a1eca42d4b797a0c7c24d778e40fd95"
+          },
+          {
+            "filename": "normalizer.json",
+            "size_bytes": 52666,
+            "sha256": "bf1c507dc8724ca9cf9903640dacfb69dae2f00edee4f21ceba106a7392f26dd"
+          },
+          {
+            "filename": "preprocessor_config.json",
+            "size_bytes": 340,
+            "sha256": "7ccc62c6f2765af1f3b46c00c9b5894426835a05021c8b9c01eecb6dfb542711"
+          },
+          {
+            "filename": "special_tokens_map.json",
+            "size_bytes": 2072,
+            "sha256": "1c70773c078cb2ca96e0fcff113102f1d3e2b1504272c3bb63b035d4a6700d87"
+          },
+          {
+            "filename": "tokenizer.json",
+            "size_bytes": 2480617,
+            "sha256": "6d8cbd7cd0d8d5815e478dac67b85a26bbe77c1f5e0c6d76d1ce2abc0e5f21ca"
+          },
+          {
+            "filename": "tokenizer_config.json",
+            "size_bytes": 282843,
+            "sha256": "844b642c73a91359722f47b35705f7174686df33d252695d8572cf9ac03a6389"
+          },
+          {
+            "filename": "vocab.json",
+            "size_bytes": 1036558,
+            "sha256": "e2aa043ef015641d363d8288e7c241c85e36a5c761fb303598e0710233344387"
+          }
+        ]
+      },
+      "revision": "06f233fe06e710322aca913c1bc4249a0d71fce1",
+      "lifecycle": "AUXILIARY",
+      "profiles": ["speech-aware-tools"],
+      "status": "COMPLETE",
+      "license": "apache-2.0",
+      "verification": {
+        "observed_at": "2026-09-06",
+        "resolved_revision": "06f233fe06e710322aca913c1bc4249a0d71fce1",
+        "payload_files": 11,
+        "payload_size_bytes": 3091519764,
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "sha256_failures": 0,
+        "git_blob_sha1_failures": 0,
+        "byte_closure": true,
+        "gated": false,
+        "method": "official huggingface.co model API identity check (repo, sha, private, gated, license, sibling inventory) BEFORE any download, then the standard asset_lock fetch path (hf_complete.py pinned-revision manifest + aria2c, official https://huggingface.co endpoint, one connection per file). hf_complete.py independently resolved the same revision and reported total_files=11 total_bytes=3091519764, matching the registered entry exactly; one round, missing=0 afterwards. Post-download every governed file was re-hashed locally: model.safetensors sha256 matches the HF LFS oid recorded in source.files, and all ten non-LFS text files match their upstream Git blob SHA-1 at the pinned revision byte for byte (model.safetensors is LFS-tracked, so its Git blob is the pointer file rather than the payload and the LFS oid is its upstream identity). Zero partial markers. asset_lock.py inventory --full --fail-on-drift reports COMPLETE with drift=0.",
+        "receipt": "models/whisper-large-v3/.speechrl-asset.json",
+        "disposition": "complete pinned tool model, loadable on CPU; first contact with any study corpus audio stays gated behind its own exposure-ledger row in the study repository"
+      },
+      "size_h": "2.9G",
+      "size_bytes": 3091519764,
+      "files": 11,
+      "task": "automatic-speech-recognition",
+      "factor_family": "tool-model",
+      "note": "OpenAI Whisper large-v3 (1,543,490,560 parameters measured on load, d_model 1280, 32 encoder and 32 decoder layers, 128 mel bins, 16 kHz, 30 s windows), transformers-format fp16 safetensors plus the WhisperProcessor files, at the pinned revision 06f233fe06e710322aca913c1bc4249a0d71fce1 (apache-2.0, ungated). Acquired 2026-09-06 on the owner's acquisition GO for the Earnings-22 dev self-run anchor SAEA-E22-DEV-WHISPER-ANCHOR-V1: a TOOL-model reference run under the Open ASR leaderboard protocol (transformers inference, Whisper English text normalizer) that gives the study a self-measured anchor next to the published Earnings-22 numbers instead of a cross-paper quote. Exactly 11 of the repo's 21 published files are governed here -- the fp16 model.safetensors weight file (3,087,130,976 B, HF LFS oid recorded as source.files sha256) and the ten config/tokenizer/normalizer text files. The duplicate serializations were deliberately NOT fetched: pytorch_model.bin (3,087,394,553 B), flax_model.msgpack (6,174,007,324 B), the fp32 safetensors and .bin shard pairs (about 12.3 GB together) and their two fp32 index files. The repo publishes no ONNX or TFLite directory at this revision.",
+      "research_role": "Frozen tool-level ASR reference model for the speech-aware-evidence-acquisition study: it produces the study's own Earnings-22 dev anchor transcripts under the Open ASR leaderboard protocol so leaderboard-comparable WER can be measured in-house. It is never a frozen-core component, never an answering model, and never part of any OBS/ORG/SUPPLY/USE control path.",
+      "claim_limit": "Anchor use only. Any run of this model on study corpus audio requires its own exposure-ledger row in the study repository before the result is read, and the split discipline is unchanged: the anchor is measured on Earnings-22 dev, never on a confirmatory split. Numbers produced by this tool are a locally measured reference, not a published baseline; the frozen Qwen3-Omni core keeps all answer authority.",
+      "acquisition_receipt": "docs/checks/speech-aware-evidence-acquisition/2026-09-06-whisper-acquisition/README.md"
     }
   ],
   "ref_repos": [
