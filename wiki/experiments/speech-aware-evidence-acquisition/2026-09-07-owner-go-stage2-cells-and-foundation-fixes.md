@@ -53,6 +53,12 @@ sector, region, call date — what a participant holds before the call), never a
 transcript or anything derived from one, with a token-matched placebo as the form twin; the flight
 decision follows the KC-E1 verdict. The test split is not read again.
 
+Addendum, same session (answer `E22不需要对外部信息做搜集，不然你最终结果没法和学术参考进行有效对比`,
+"E22 must not collect external information, or the final result cannot be compared with the academic
+references"): no corpus-external source of any kind enters the E22 brief — no public ticker-to-company
+table, no filings, no listings. The brief is the corpus metadata file alone (ticker, country, region,
+dialect family), so the cell stays comparable with the published Earnings-22 numbers.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
