@@ -69,6 +69,17 @@ pass-1 text + brief and may emit only span-bounded substitutions; one contact pe
 twin KU-E1fc). It flies on the Earnings-21 session as soon as its preregistration, prompt fit and wire check
 close, ahead of the Audio2Tool and SLURP items of Decision 6.
 
+## Decision 8 — the Earnings-21 silence tail, the promotion recovery, and memory reclaim (2026-09-08, answer `按你的建议走`, "go with your recommendation")
+
+The Earnings-21 silence-tail cell (`SAEA-E21-FULL44-TAIL2S-V1`: corpus WER 8.200 -> 7.271, -0.93 CI90
+[-1.05, -0.79], but PERSON entity WER +0.69 [+0.13, +1.35], NOT ADMITTED under the imported margin) does not
+re-lock the Earnings-21 comparator yet. Before any re-lock the study measures Earnings-21's own greedy null
+with one comparator replicate at the comparator's geometry (np6, about 1 GPU-hour); the adoption decision
+follows that measurement. KC-E1f keeps its preregistered base (the sealed 8.200 comparator). The SLURP `@ts2`
+packet promotion takes its one recovery re-registration (+3 speech seconds of ceiling for the last row, after
+a crashed gate attempt's real spend) in a no-server gap, and at that gap `.wslconfig` switches
+`autoMemoryReclaim` to `dropcache` with a `wsl --shutdown`.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
