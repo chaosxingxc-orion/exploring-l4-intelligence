@@ -59,6 +59,16 @@ references"): no corpus-external source of any kind enters the E22 brief — no 
 table, no filings, no listings. The brief is the corpus metadata file alone (ticker, country, region,
 dialect family), so the cell stays comparable with the published Earnings-22 numbers.
 
+## Decision 7 — KC-E1f GO (answer `GO，KC-E1f 准备好后起飞`, "GO, fly KC-E1f as soon as it is ready")
+
+After the KC-E1 verdict (REJECTED as HARMFUL under its rule: PERSON entity WER +4.15 pp CI90 [+2.63, +5.74],
+content-driven, but the corpus-WER and numeric-accuracy guards fail because the whole-prompt brief makes the
+core transcribe less, deletions +2,692), the owner admits KC-E1f: the same capped brief consumed as a
+second-pass entity repair on the USE axis (pass 1 = the sealed comparator's hypotheses; pass 2 sees audio +
+pass-1 text + brief and may emit only span-bounded substitutions; one contact per window; token-matched
+twin KU-E1fc). It flies on the Earnings-21 session as soon as its preregistration, prompt fit and wire check
+close, ahead of the Audio2Tool and SLURP items of Decision 6.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
