@@ -105,6 +105,29 @@ business performance. These are exactly the richer information sources a multimo
 in and a discriminative model (conventional ASR) cannot. The coordinator's analysis and the proposed program
 are recorded in the study (readiness note to follow) and summarized in the session transcript.
 
+## Direction — the agent system, its harness and its admission gate (owner instructions, 2026-09-08)
+
+Four instructions given in sequence the same day, quoted in substance:
+1. The cells had been transferring the whole task load onto single calls of the frozen core; the study builds an
+   agent SYSTEM whose system-level optimization lowers the core's burden and raises task performance
+   systematically; consider a ReAct-style revise stage that evaluates quality and proposes revisions.
+2. The agent definition must converge to a few named agents calling each other in a loop, with a planning
+   mode, and with observation modes chosen per task (a meeting task calls speaker diarization, a noisy input
+   calls enhancement, the loop listens selectively to the key audio worth improving).
+3. Analyse and abstract the tools -- general and task-specific -- the agents call, supply them uniformly,
+   and design and implement on the openJiuwen framework; reuse the existing openJiuwen-based implementation
+   unless it is completely unreusable.
+4. Standardize the agent harness on `rails` so it is reused across tasks (never one agent system per task);
+   before any large-scale test of the engineering base, ensure every module of the division brings a positive
+   gain or at least does not hurt the baseline.
+
+Coordinator's response: the design note `docs/readiness/2026-09-08-agent-system-episode-and-core-pressure-v1.md`
+(four agents Planner / Observer / Solver / Reviewer in one loop; three mode tables; the tool layer on openJiuwen
+local tools; the core-pressure covariates), a read-only assessment of the existing openJiuwen implementation, and
+the MODULE ADMISSION GATE: each harness module (a planner rule, an observe mode, a knowledge view, a judge, a tool)
+carries a per-carrier admission receipt -- module on vs off, paired, non-inferiority with the carrier's own null
+margin, positive gain preferred -- and the harness's default plan contains only admitted or neutral modules.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
