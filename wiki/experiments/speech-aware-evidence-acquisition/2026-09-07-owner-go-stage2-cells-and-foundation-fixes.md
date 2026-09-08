@@ -80,6 +80,31 @@ packet promotion takes its one recovery re-registration (+3 speech seconds of ce
 a crashed gate attempt's real spend) in a no-server gap, and at that gap `.wslconfig` switches
 `autoMemoryReclaim` to `dropcache` with a `wsl --shutdown`.
 
+## Decision 9 — five answers of 2026-09-08 (answer `决策项1：A，决策项2：A，决策项3：同意，决策项4：A；决策项5：确认`, "item 1: A, item 2: A, item 3: agreed, item 4: A, item 5: confirmed")
+
+1. KC-E1f is re-decided (a v2 verdict row, zero contacts) under non-inferiority guards whose margins come from
+   the Earnings-21 own-null replicate (margin = the null's CI90 half-width per metric); the v1 REJECTED record
+   stays beside it.
+2. The Earnings-21 comparator stays the sealed 8.200 direct baseline; the silence tail is recorded as a measured
+   OBS convention beside the WER anchor, not adopted, because the paper-facing Earnings metric is the agentic
+   entity metric and the tail worsens PERSON.
+3. Family rule: every "not worse" guard in a preregistration is a non-inferiority test with a margin fixed in
+   advance from the carrier's own noise measurement (Earnings-21: the replicate; SLURP: the measured 28 %
+   greedy flip rate; Audio2Tool: the imported greedy null), never a margin-less superiority test.
+4. Stage 2 exploration continues (KU-S3, OBS-E1, KU-A1) before any candidate freeze.
+5. The SLURP silence-tail cell's row cites Decisions 3 and 6 as its GO.
+
+## Direction — speech-to-knowledge matching (owner thought, 2026-09-08)
+
+The owner adds a research emphasis, quoted in substance: intent matching and its improvement have had too little
+attention; in the agentic era the AI understanding audio intent DIRECTLY is where the value lies. Under that
+hypothesis the study should systematically explore how speech signals (multi-speaker) are matched to already
+constructed knowledge domains, in three dimensions: (1) text-domain knowledge; (2) existing speech-domain
+knowledge — the same speaker's semantically diverse expressions of one intent; (3) state knowledge that raises
+business performance. These are exactly the richer information sources a multimodal generative model can take
+in and a discriminative model (conventional ASR) cannot. The coordinator's analysis and the proposed program
+are recorded in the study (readiness note to follow) and summarized in the session transcript.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
