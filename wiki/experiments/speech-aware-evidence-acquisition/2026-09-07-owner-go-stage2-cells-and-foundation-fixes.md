@@ -173,6 +173,24 @@ H. Speech enhancement as an observe mode: first check whether the datasets and t
 I. Default plans and the candidate freeze wait for the KV and KU-S4 families; replicated modules enter the
    default plans then.
 
+## Decision 13 — five answers of 2026-09-09 (answer `决策J：你提醒我了，我希望你做一组实验去分析下，是否可以在observe阶段用短语音快速生成草稿，然后在plan阶段接受长语音和前置草稿，让模型去系统性的刷新一次？决策K：按你的建议走；决策L：A；决策M：按你的建议走；决策N：按你建议走`)
+
+J. Instead of flying OBS-E1b as prepared, the owner asks for an experiment GROUP on a two-pass design: in the
+   Observe stage the short speech units (speaker turns) produce drafts quickly; in the Plan stage the model
+   receives the LONG speech (the 90-s window) together with the prior drafts and refreshes the transcript
+   once, systematically. The coordinator prepares the family (the sealed OBS-E1 unit outputs serve as the
+   pass-1 drafts at zero new contacts; pass 2 = long window + stitched draft; a free-refresh arm and a
+   substitution-constrained arm; a self-draft twin that feeds the comparator's own long-window hypothesis
+   back; comparators = the sealed comparator, OBS-E1 and KC-E1f). OBS-E1b stays prepared, not registered.
+K. Family rule adopted: paired arms fly inside the same server process wherever possible; when they cannot,
+   the non-inferiority margin comes from a same-day, same-process replicate. Reads of cross-process pairs
+   say so.
+L. Option A: the legacy contact executor stays unreachable-by-accident; the 32 SLURP speech-native baselines
+   are rewritten as phase programs per carrier before Stage 2B, without GPU, not now.
+M. The SLURP session runs in the coordinator's order (tail, own null, logprob probe, KV-0, KV-2, KV-1, KV-3,
+   KU-S3, KU-S4N, KU-S4a/b/c, KC-S1b replication).
+N. The depth-2 dispatcher admission is deferred to the end of the Earnings-21 session.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
