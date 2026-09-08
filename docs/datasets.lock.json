@@ -16,14 +16,14 @@
     "local-candidates": "Observed non-baseline local assets; presence does not authorize an experiment.",
     "speech-aware-core": "Earnings21, Earnings22 and ConEC Stage-2A minimum speech-domain closure.",
     "speech-aware-diagnostics": "PRISM, Rare5k and BuzzWord speech/entity diagnostic carriers.",
-    "speech-aware-secondary": "SLUE-SQA-5, ContextASR-Bench, AMI and SlideASR-Bench public secondary speech carriers.",
+    "speech-aware-secondary": "SLUE-VoxPopuli, SLUE-SQA-5, ContextASR-Bench, AMI and SlideASR-Bench public secondary speech carriers.",
     "speech-aware-annotations": "Annotation-only overlays that carry no speech bytes of their own: TED-EL (TED-LIUM3 audio remains source-unstable), HALAS over Earnings22, and the SQuAD v1.1 dev reference used to reconstruct the pre-deletion Spoken-SQuAD question list.",
     "speech-aware-small-public": "Small optional speech assets: ATCO2-1h, Eka-Medical and LibriSQA.",
     "retained-cross-domain": "Locally complete general/environmental-audio assets retained for reuse but excluded from the speech-aware study.",
     "meeting-minutes-text": "Text-layer meeting assets for the meeting-minutes-agent topic: MeetingQA and QMSum over AMI/ICSI transcripts, and the M3-SLU speaker-attributed text layer. None of these records carry speech bytes of their own.",
     "meeting-minutes-speech": "Speech-bearing meeting carriers for the meeting-minutes-agent topic: the ICSI Meeting Corpus mixed-headset signals and their CC BY annotation layers, MeetingBank's complete text/alignment layer with a bounded city-stratified audio subset, and NOTSOFAR-1's single-channel far-field office meetings with multi-judge human verbatim speaker-attributed references. Distinct from meeting-minutes-text, which carries no audio.",
     "meeting-minutes-tools": "Pinned frozen TOOL models for the meeting-minutes-agent topic (segmentation pre-pass only; answer authority stays with the frozen core). Currently the NVIDIA Sortformer streaming diarizer v2 payloads.",
-    "speech-aware-tools": "Pinned frozen TOOL models for the speech-aware-evidence-acquisition study, entering under the charter's frozen tool-level retriever/judge clause (encode-only; final answer authority stays with the frozen core). Currently the Qwen3-Embedding-0.6B GGUF text embedder for the P-EMB-3M cascade arm.",
+    "speech-aware-tools": "Pinned frozen TOOL models for the speech-aware-evidence-acquisition study, entering under the charter's frozen tool-level retriever/judge clause (encode-only; final answer authority stays with the frozen core). Includes the Qwen3-Embedding-0.6B GGUF diagnostic text embedder and the LCO-Embedding-Omni-3B GGUF speech-native representation comparator.",
     "deferred": "Cataloged but intentionally not in the current acquisition wave."
   },
   "status_model": {
@@ -58,6 +58,27 @@
           "kind": "load-smoke",
           "note": "CPU-only load smoke with CUDA_VISIBLE_DEVICES empty and the hub offline, in the shared ~/.venvs/speechrl (transformers 5.12.1, torch 2.9.1+cu128; nothing installed or upgraded). WhisperProcessor and WhisperForConditionalGeneration both instantiate from the local directory at dtype float32 with low_cpu_mem_usage: 1,543,490,560 parameters on device cpu, d_model 1280, 32 encoder and 32 decoder layers, 128 mel bins, feature extractor 16 kHz / 30 s windows, tokenizer length 51,866, generation config carrying alignment heads and 100 language ids. No audio was read, no transcription was run and the GPU -- which was serving a study cell throughout -- was never touched. Receipt: docs/checks/speech-aware-evidence-acquisition/2026-09-06-whisper-acquisition/README.md.",
           "entries": ["whisper-large-v3"]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "task": "Owner-authorized admission of the official SLUE-VoxPopuli v0.2 benchmark subset for Stage-2 speech-native NER development evaluation. This is a distinct 398,450,006-byte author-redistributed subset, not the excluded approximately 6.4 TB full VoxPopuli release. Register before fetch; preserve TRAIN knowledge construction, DEV method optimization, and TEST isolation.",
+      "changes": [
+        {
+          "kind": "owner-scope-successor",
+          "note": "Add a dedicated slue-voxpopuli catalog identity from the official ASAPP SLUE toolkit download endpoint. The prior voxpopuli tombstone continues to exclude the complete 400k-hour release. This successor permits only the curated SLUE subset required by the owner-selected official NER task and does not authorize TEST access in Stage 2.",
+          "entries": ["slue-voxpopuli"]
+        },
+        {
+          "kind": "model-identity-qualification",
+          "note": "Resolve the existing LCO-Embedding-Omni-3B GGUF holding against the exact Hugging Face revision and all three local file hashes. Admit it only as an encode-only speech-native representation comparator; runtime and request semantics still require a separate qualification before corpus contact.",
+          "entries": ["lco-embedding-omni-3b-gguf"]
+        },
+        {
+          "kind": "data-layout-reconciliation",
+          "note": "Bind the SLURP upstream Git identity check to the already governed repos/slurp checkout while retaining datasets/slurp as the annotation and audio carrier. This records the existing split layout and removes a false asset drift without changing any dataset bytes or experimental authority.",
+          "entries": ["slurp"]
         }
       ]
     },
@@ -371,7 +392,8 @@
       "local_subdir": "datasets/slurp",
       "source": {
         "kind": "git",
-        "url": "https://github.com/pswietojanski/slurp"
+        "url": "https://github.com/pswietojanski/slurp",
+        "checkout_root": "repos/slurp"
       },
       "revision": "8eb16545762be97ace75334109d73824217311f1",
       "lifecycle": "SECONDARY_CARRIER",
@@ -1858,6 +1880,55 @@
       "blocking_reason": "Requires an application and sharing contact information; no authority to accept those terms was granted."
     },
     {
+      "name": "slue-voxpopuli",
+      "kind": "dataset",
+      "local_subdir": "datasets/slue-voxpopuli",
+      "source": {
+        "kind": "direct",
+        "url": "https://github.com/asappresearch/slue-toolkit",
+        "files": [
+          {
+            "filename": "slue-voxpopuli_v0.2_blind.zip",
+            "url": "https://public-dataset-model-store.awsdev.asapp.com/users/sshon/public/slue/slue-voxpopuli_v0.2_blind.zip",
+            "size_bytes": 398450006,
+            "sha256": "21d12d2bcb44f8dd78885211f381f4443c9a18ea5703b21d5f43460f0661c53e"
+          }
+        ]
+      },
+      "revision": "SLUE-VoxPopuli v0.2 blind archive distributed by the pinned slue-toolkit source at ed23039507c8f01b704a5c43ed89b6e808a49405; upstream object last-modified 2022-09-26",
+      "lifecycle": "SECONDARY_CARRIER",
+      "profiles": ["speech-aware-secondary"],
+      "status": "COMPLETE",
+      "license": "cc0-1.0",
+      "expected_payload": {"size_bytes": 398450006, "files": 1},
+      "verification": {
+        "observed_at": "2026-08-30",
+        "archive_sha256": "21d12d2bcb44f8dd78885211f381f4443c9a18ea5703b21d5f43460f0661c53e",
+        "archive_size_bytes": 398450006,
+        "archive_entries": 8603,
+        "archive_uncompressed_bytes": 404968563,
+        "zip_crc_test": "PASS",
+        "fine_tune_audio_files": 5000,
+        "dev_audio_files": 1753,
+        "test_materialized": false,
+        "partial_markers": 0,
+        "method": "official ASAPP direct object, exact byte length, full ZIP CRC test, SHA-256, and TRAIN/DEV-only materialization"
+      },
+      "derived_materialization": {
+        "root": "datasets/slue-voxpopuli/materialized-v0.2/slue-voxpopuli",
+        "allowed_splits": ["fine-tune", "dev"],
+        "files": 6756,
+        "size_bytes": 322030040,
+        "fine_tune_tsv_sha256": "81f671502d8a13cf7003ff8190b5bb4892b91e6122cc8e55f7bd73005434feb2",
+        "dev_tsv_sha256": "456c49d514da6c390803b728b98a54b388b868900143c835ec45422efe2079e0",
+        "license_sha256": "ae076adf41af797b5bf862547df2d27eb10f5c7acf19a7d3b0f5270629b26416",
+        "test_audio_extracted": false,
+        "test_tsv_extracted": false
+      },
+      "research_role": "Official SLUE-VoxPopuli NER TRAIN knowledge carrier and DEV evaluation carrier for Stage 2; the official split identities and speaker-overlap properties must be preserved.",
+      "claim_limit": "The Stage-2 loader must expose only TRAIN for knowledge construction and DEV for method optimization. TEST audio, labels, annotations, and metrics remain fail-closed. This record does not reopen the excluded full VoxPopuli corpus."
+    },
+    {
       "name": "voxpopuli",
       "kind": "dataset",
       "local_subdir": "datasets/voxpopuli",
@@ -2004,9 +2075,28 @@
     },
     {
       "name": "lco-embedding-omni-3b-gguf", "kind": "model", "local_subdir": "models/lco-embedding-omni-3b-gguf",
-      "source": {"kind": "observed-local", "id": "UNRESOLVED_LOCAL_SOURCE"}, "revision": "UNRESOLVED_LOCAL_REVISION",
-      "lifecycle": "LOCAL_CANDIDATE", "profiles": ["local-candidates"], "status": "COMPLETE",
-      "verification": {"observed_at": "2026-07-23", "size_bytes": 6238572624, "files": 5}
+      "source": {
+        "kind": "hf",
+        "id": "marksverdhei/LCO-Embedding-Omni-3B-GGUF",
+        "files": [
+          {"filename": "LCO-Embedding-Omni-3B-Q8_0.gguf", "size_bytes": 3616087264, "sha256": "53a9898bdb562ae599a81528a2935153457b82e7cac3aa5b10e5eecefc887d6a"},
+          {"filename": "mmproj-LCO-Embedding-Omni-3b-F16.gguf", "size_bytes": 2622477952, "sha256": "765beb616247081f53c9a0b7fed02b96981c5bad563209b5a47ca770f056a13a"},
+          {"filename": "README.md", "size_bytes": 5946, "sha256": "fa0368e76da1ecdfa30a88f29104f696e0ec93534fb9527975e1513272a743f0"}
+        ]
+      },
+      "revision": "af8a36fbb6e7629c9dbcb218478c6b1477b36e09",
+      "lifecycle": "AUXILIARY", "profiles": ["speech-aware-tools"], "status": "COMPLETE",
+      "license": "apache-2.0",
+      "verification": {
+        "observed_at": "2026-08-30",
+        "size_bytes": 6238571162,
+        "files": 3,
+        "verified_files": 3,
+        "source_api": "official huggingface.co model API at the pinned revision",
+        "method": "exact local SHA-256 and size match to the pinned Hugging Face tree and LFS object identifiers"
+      },
+      "research_role": "Frozen encode-only speech-native semantic representation comparator for Stage-2 Key construction; final answer authority remains with the frozen Qwen3-Omni core.",
+      "claim_limit": "This is a community GGUF conversion of the Apache-2.0 LCO-Embedding-Omni-3B base model. It is not production-qualified until the pinned ht-llama.cpp build, last-token pooling request contract, speech input path, output width, determinism, and feature receipts pass independently."
     },
     {
       "name": "lco-embedding-omni-7b-gguf", "kind": "model", "local_subdir": "models/lco-embedding-omni-7b-gguf",

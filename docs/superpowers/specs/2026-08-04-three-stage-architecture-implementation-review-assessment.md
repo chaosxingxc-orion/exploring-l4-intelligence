@@ -1,5 +1,5 @@
 ---
-title: "Umbrella → Studies → Papers 三阶段架构实施 Review Assessment"
+title: "Umbrella → Studies → Papers three-stage architecture implementation review assessment"
 assessment_id: "PROGRAM-THREE-STAGE-ARCHITECTURE-IMPLEMENTATION-REVIEW-2026-08-04"
 date: "2026-08-04"
 addressed_to: "research engineering team and research owner"
@@ -14,17 +14,18 @@ model_execution_effect: "NO_NEW_AUTHORITY"
 remote_repository_effect: "NO_NEW_AUTHORITY"
 ---
 
-# Umbrella → Studies → Papers 三阶段架构实施 Review Assessment
+# Umbrella → Studies → Papers three-stage architecture implementation review assessment
 
-> 本 review 针对 umbrella `d5ea710`（核心治理实施 commit `bb164e6`）和当前独立 study
-> `speech-aware-evidence-acquisition@0d86ddc`。它审查工程团队是否正确落实 2026-08-04 owner
-> 裁决（Decision-Log-2026-08 续91）及其 minimal-first 实施计划。本文只给出 review 结论、缺陷与
-> 验收建议，不修改 owner authority，不授权模型/API 调用、实验、远程建仓、push、Wiki 发布或论文
-> 投稿。
+> This review targets umbrella `d5ea710` (core governance implementation commit `bb164e6`) and the current
+> independent study `speech-aware-evidence-acquisition@0d86ddc`. It examines whether the engineering team
+> correctly implemented the 2026-08-04 owner ruling (Decision-Log-2026-08 continuation entry 91) and its
+> minimal-first implementation plan. This document gives only review conclusions, defects and acceptance
+> recommendations; it does not modify owner authority and authorizes no model/API calls, experiments, remote
+> repository creation, pushes, Wiki publication or paper submission.
 
-## 1. 总体裁决
+## 1. Overall verdict
 
-总体结论为：
+The overall conclusion is:
 
 ```text
 CONDITIONAL_ACCEPT
@@ -35,74 +36,81 @@ Paper zero-state machine enforcement: NOT LANDED
 First paper admission readiness: WITHHELD
 ```
 
-工程团队**正确理解并落地了三阶段架构的核心概念**：
+The engineering team **correctly understood and landed the core concepts of the three-stage architecture**:
 
-- Stage‑1 = umbrella；
-- Stage‑2 = `studies/<slug>`，终点为 qualified paper candidate；
-- Stage‑3 = `papers/<slug>`，负责大规模 confirmatory、最终证据、论文与发表；
-- study gate 保留 `OWNER_GO_AND_EXECUTION_CONTRACT`；
-- paper gate 使用新 token `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`；
-- paper 的成功不是必须正提升，正、零、负结果同等合法；
-- paper repo 使用语义命名、独立 Git/GitHub，不使用 R2、venue 或年份作为工程身份；
-- 没有真实 candidate 时只建立 `papers/README.md` 和空 registry，没有预建空 paper 仓；
-- 没有重组既有 `wiki/experiments/` 和 `docs/checks/` 路径；
-- 当前 SAEA 的 E0/R0/R1/bounded-X 保留，paper-scale 工作被散文合同移出默认授权。
+- Stage‑1 = umbrella;
+- Stage‑2 = `studies/<slug>`, ending at a qualified paper candidate;
+- Stage‑3 = `papers/<slug>`, owning large-scale confirmatory work, final evidence, papers and publication;
+- the study gate keeps `OWNER_GO_AND_EXECUTION_CONTRACT`;
+- the paper gate uses the new token `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`;
+- a paper's success does not require a positive improvement — positive, zero and negative results are equally
+  legitimate;
+- paper repos use semantic naming and independent Git/GitHub, and never use R2, a venue or a year as engineering
+  identity;
+- with no real candidate, only `papers/README.md` and an empty registry are created, with no pre-built empty
+  paper repository;
+- the existing `wiki/experiments/` and `docs/checks/` paths were not restructured;
+- SAEA's current E0/R0/R1/bounded-X is retained, and paper-scale work is moved out of default authority by a
+  prose contract.
 
-这说明团队没有把 proposal 机械照搬，也没有误把“新增 papers 根”理解为立刻创建论文工程。它遵循
-了 owner 在续91中签发的“先立边界、机器件后置、不过度设计”裁决。
+This shows the team did not mechanically transcribe the proposal, and did not mistake "adding a papers root" for
+immediately creating paper engineering. It followed the owner's continuation entry 91 ruling of "set the boundary
+first, defer the machinery, do not over-design".
 
-但当前状态只能接受为**Phase A 概念边界落地**，不能被称为“三阶段工程整改完成”。主要原因不是
-被明确延期的 promotion bundle，而是：
+But the current state can only be accepted as **Phase A conceptual boundary landed**, and cannot be called
+"three-stage engineering remediation complete". The main reason is not the explicitly deferred promotion bundle,
+but that:
 
-1. 多个仍在使用的当前文档继续给出旧的两阶段执行指令；
-2. 独立 SAEA study repo 完全没有收到新的 Stage‑3 边界；
-3. registry 的唯一 `decision_record` 被改指向一份非自包含补充合同；
-4. `papers/registry.json` 被称为 machine authority，却没有任何程序读取或验证；
-5. 当前实验资产合同仍把所有正式实验写成 study-owned；
-6. confirmatory reservation 的延后触发器晚于 Stage‑2 X，存在时序风险。
+1. several documents still in use continue to give the old two-stage execution instructions;
+2. the independent SAEA study repo has received the new Stage‑3 boundary not at all;
+3. the registry's sole `decision_record` was re-pointed at a non-self-contained supplementary contract;
+4. `papers/registry.json` is called a machine authority, yet no program reads or validates it;
+5. the current experiment-asset contract still writes every formal experiment as study-owned;
+6. the deferred trigger for confirmatory reservation comes later than Stage‑2 X, creating a sequencing risk.
 
-这些问题不会阻断当前纯 model-free E0，但在首次可执行 model-facing runner、bounded X、第二个
-共享 carrier 的 study 或首个 paper admission 之前，必须按下文分层关闭。
+None of these blocks the current purely model-free E0, but they must be closed in the layered order below before
+the first executable model-facing runner, bounded X, a second shared-carrier study, or the first paper admission.
 
-## 2. Review 基线与实际变更
+## 2. Review baseline and actual changes
 
-### 2.1 审查到的 umbrella 变更
+### 2.1 Umbrella changes examined
 
-从 `d4f07fa..d5ea710` 共变更 18 个路径，核心实施位于 `bb164e6`：
+18 paths changed across `d4f07fa..d5ea710`, with the core implementation in `bb164e6`:
 
-- 新增 `papers/README.md`、`papers/registry.json`；
-- `.gitignore` 新增 `papers/*/`；
-- `Project-Thesis`、`Research-Objective`、`wiki/Architecture`、客户端指南加入三阶段绑定；
-- 新增 SAEA Stage‑3 boundary/paper-gate contract；
-- `studies/registry.json` 与 experiment index 将 `decision_record` re-pin 到新合同；
-- 更新 experiment asset inventory 与 AI context manifest；
-- 续91写入 owner 裁决；
-- 原 proposal、对抗评审与 minimal-first plan 随后进入 Git。
+- added `papers/README.md` and `papers/registry.json`;
+- added `papers/*/` to `.gitignore`;
+- `Project-Thesis`, `Research-Objective`, `wiki/Architecture` and the client guides gained the three-stage binding;
+- added the SAEA Stage‑3 boundary/paper-gate contract;
+- `studies/registry.json` and the experiment index re-pinned `decision_record` to the new contract;
+- updated the experiment asset inventory and the AI context manifest;
+- wrote the owner ruling into continuation entry 91;
+- the original proposal, the adversarial review and the minimal-first plan subsequently entered Git.
 
-### 2.2 当前物理状态
+### 2.2 Current physical state
 
-- umbrella worktree：clean；
-- study worktree：clean；
-- `papers/` 只有 umbrella-owned README 与空 registry；
-- 不存在 paper child checkout；
-- `papers/registry.json` 中 `papers=[]`；
-- 没有创建或推送新的 paper remote；
-- 当前正式实验 ledger 仍为空。
+- umbrella worktree: clean;
+- study worktree: clean;
+- `papers/` contains only the umbrella-owned README and an empty registry;
+- no paper child checkout exists;
+- `papers=[]` in `papers/registry.json`;
+- no new paper remote has been created or pushed;
+- the current formal experiment ledger is still empty.
 
-以上均符合“空 registry 合法、空 paper repo 非法”和“不提前建仓”的 owner 裁决。
+All of the above conforms to the owner ruling of "an empty registry is legal, an empty paper repo is not" and
+"do not create repositories in advance".
 
-### 2.3 本次独立验证
+### 2.3 Independent verification performed here
 
-在 Windows 侧先运行两个不依赖 WSL 数据路径的门：
+Two gates that do not depend on WSL data paths were run first on the Windows side:
 
 ```text
 code graph: PASS (22 trusted nodes)
 study workspace and experiment assets: PASS
 ```
 
-`legacy_asset_resolution_check.py --verify-bundles` 必须按仓库约定在 WSL2 运行；Windows 直接运行会把
-`/mnt/e/...` 误解析为 Windows 当前盘路径，这不是本次实现缺陷。在 `Ubuntu-24.04`、
-`~/.venvs/speechrl` 中重跑后：
+`legacy_asset_resolution_check.py --verify-bundles` must be run in WSL2 per repository convention; running it
+directly on Windows misresolves `/mnt/e/...` as a path on the current Windows drive, which is not a defect of this
+implementation. After rerunning in `Ubuntu-24.04` with `~/.venvs/speechrl`:
 
 ```text
 574 bindings verified
@@ -114,432 +122,463 @@ pytest scripts/checks: 145 passed, 202 subtests passed
 pytest common/tests: 21 passed, 1 skipped
 ```
 
-所有现有门禁均为绿色，但现有门禁没有读取 `papers/registry.json`，也没有检查三阶段语义一致性。因此
-“全部 PASS”只能证明旧 study/asset/context 基础没有被这次改动破坏，不能证明 paper-stage 已经
-fail closed。
+Every existing gate is green, but no existing gate reads `papers/registry.json` and none checks three-stage
+semantic consistency. So "everything PASSes" can only prove that this change did not break the old
+study/asset/context foundation; it cannot prove that the paper stage is fail closed.
 
-## 3. 正确实施项
+## 3. Correctly implemented items
 
-### C-1 — 三阶段职责理解正确
+### C-1 — The three-stage responsibilities are understood correctly
 
-`wiki/Decision-Log-2026-08.md:17-25`、`wiki/Project-Thesis.md:66-76` 与
-`papers/README.md:9-16` 对三个 carrier、两个 gate 和 paper 成功标准的描述一致。尤其是明确了：
+`wiki/Decision-Log-2026-08.md:17-25`, `wiki/Project-Thesis.md:66-76` and `papers/README.md:9-16` describe the
+three carriers, the two gates and the paper success criterion consistently. In particular they make clear that:
 
-- study 的结果是 candidate，不是默认完成论文；
-- paper owns large-scale confirmatory 与 publication；
-- 正/零/负结论均可完成；
-- 一个 candidate 的 GO 不自动授权同 study 的其他 candidate。
+- a study's result is a candidate, not a finished paper by default;
+- a paper owns large-scale confirmatory work and publication;
+- positive, zero and negative conclusions all count as completion;
+- GO for one candidate does not automatically authorize other candidates in the same study.
 
-这些是本次整改最重要的语义成果，应保留。
+These are the most important semantic results of this remediation and should be retained.
 
-### C-2 — Minimal-first 没有制造假 admission
+### C-2 — Minimal-first did not manufacture a fake admission
 
-团队没有为了“架构看起来完整”创建空 paper repo、空 remote、空 CI 或虚假的 promotion receipt。
-`papers/README.md:13-22` 清楚写出 empty registry 合法、empty child repo 非法以及延后触发器。这符合
-本程序此前“不为未获准研究对象预建仓”的经验。
+The team did not create an empty paper repo, empty remote, empty CI or a fake promotion receipt just to make the
+architecture "look complete". `papers/README.md:13-22` states clearly that an empty registry is legal, an empty
+child repo is not, and lists the deferral triggers. This matches this program's earlier experience of "never
+pre-create a repository for an unadmitted research object".
 
-### C-3 — 没有破坏现有路径和历史资产
+### C-3 — Existing paths and historical assets were not damaged
 
-团队接受对抗评审 C1：不搬迁当前 `wiki/experiments/<study-slug>/` 和 `docs/checks/<campaign>/`
-路径。574 项 legacy bindings、四个 offline bundles、study origin/branch 和 AI context manifest
-仍通过验证。没有为了三阶段结构重写历史 experiment/audit bytes。
+The team accepted adversarial review C1: the current `wiki/experiments/<study-slug>/` and `docs/checks/<campaign>/`
+paths were not moved. The 574 legacy bindings, four offline bundles, study origin/branch and the AI context
+manifest still verify. No historical experiment/audit bytes were rewritten for the sake of the three-stage
+structure.
 
-### C-4 — SAEA 的散文 stop line 已经出现
+### C-4 — SAEA's prose stop line now exists
 
-新合同 `2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md:25-35` 将 study 终点写成
-qualified paper candidate，并把 production-scale implementation、large confirmatory、最终优越性
-claim 和 publication 放到 paper gate 之后。这是正确的 authority 方向。
+The new contract `2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md:25-35` writes the study endpoint as
+a qualified paper candidate, and places production-scale implementation, large confirmatory work, final
+superiority claims and publication behind the paper gate. This is the correct direction for authority.
 
 ## 4. Findings
 
-### P0-1 — BLOCKER：活动阶段方法学仍授权 Stage‑2B 正式实验，直接冲突续91
+### P0-1 — BLOCKER: the active-stage methodology still authorizes formal Stage‑2B experiments, directly conflicting with continuation entry 91
 
-#### 证据
+#### Evidence
 
-owner 续91规定：
+Owner continuation entry 91 states:
 
 ```text
-Stage‑2 内验证保持有界，不含 production-scale confirmatory；
-Stage‑3 才拥有大规模预注册 confirmatory、最终证据与发表。
+Validation inside Stage‑2 stays bounded and contains no production-scale confirmatory work;
+only Stage‑3 owns large-scale pre-registered confirmatory work, final evidence and publication.
 ```
 
-但当前 `wiki/Research-Methodology.md` 仍规定：
+But the current `wiki/Research-Methodology.md` still specifies:
 
-- 第 21 行：Stage‑2B = “冻结假设、对照、判据后正式实验与统计推断”；
-- 第 22 行：Stage‑3 仅是“扩展、独立复现、论文级审计”；
-- 第 27 行：技术创新“在 Stage‑2B 验证”；
-- 第 42 行：Stage‑1/2A 数字在 Stage‑2B 重建后升级证据等级。
+- line 21: Stage‑2B = "formal experiments and statistical inference after freezing hypotheses, controls and
+  criteria";
+- line 22: Stage‑3 is merely "extension, independent reproduction, paper-level audit";
+- line 27: technical innovation is "validated in Stage‑2B";
+- line 42: Stage‑1/2A numbers are upgraded in evidence rank after being rebuilt in Stage‑2B.
 
-这不是措辞差异，而是实验 authority 的相反分配：旧方法学允许在 study repo 完成正式统计验证，
-新裁决则要求 paper gate 和独立 paper repo。
+This is not a wording difference but the opposite allocation of experiment authority: the old methodology allows
+formal statistical validation to be completed in the study repo, whereas the new ruling requires the paper gate
+and an independent paper repo.
 
-同类旧口径仍出现在：
+The same stale framing still appears in:
 
-- `README.md:19-23`：Stage‑2 study 建仓后“all later engineering, experiments and papers live there”；
-- `README_CN.md:17-20`：后续全部工程、实验和论文在 study；
-- `CONTRIBUTING_CN.md:33-34`：进入 Stage‑2 后全部工作在 study；
-- `docs/architecture.md:5-11`：只有两类仓，all Stage‑2+ work lives in study；
-- `AGENTS.md:15-23` 与 `CLAUDE.md`：先写 all later work lives in study，随后又写 Stage‑3 在 papers；
-- `wiki/Architecture.md:26-28`、`:63-71`：同一页内部同时保留两种说法。
+- `README.md:19-23`: after the Stage‑2 study repo is created, "all later engineering, experiments and papers live
+  there";
+- `README_CN.md:17-20`: all later engineering, experiments and papers live in the study;
+- `CONTRIBUTING_CN.md:33-34`: after entering Stage‑2 all work is in the study;
+- `docs/architecture.md:5-11`: only two repository classes, all Stage‑2+ work lives in the study;
+- `AGENTS.md:15-23` and `CLAUDE.md`: first say all later work lives in the study, then say Stage‑3 is in papers;
+- `wiki/Architecture.md:26-28` and `:63-71`: both statements are retained on the same page.
 
-#### 影响
+#### Impact
 
-一个新协作者可以完全遵循当前 `README`、canonical architecture 或 research methodology，却绕过
-paper gate，在 study repo 中执行 Stage‑2B 正式实验并形成论文。这会使续91只在少数 HOT 段落中
-有效，而不是程序级执行规则。
+A new collaborator could follow the current `README`, the canonical architecture or the research methodology
+exactly, bypass the paper gate, run formal Stage‑2B experiments in the study repo, and produce a paper. That would
+make continuation entry 91 effective only in a few HOT paragraphs rather than a program-level execution rule.
 
-#### 必须修复
+#### Required repair
 
-在一个 truth-alignment transaction 中：
+Within one truth-alignment transaction:
 
-1. 将 `wiki/Research-Methodology.md` 的 Stage‑2B 改为 candidate qualification/冻结，而非最终
-   confirmatory；Stage‑3 接管足够规模的正式统计推断、最终 evidence 与论文；
-2. 修复 README/README_CN、CONTRIBUTING/CONTRIBUTING_CN、`docs/architecture.md`、
-   `wiki/Architecture.md`、AGENTS/CLAUDE 的旧“all later work”句；
-3. 更新 `wiki/Per-Work-Status.md`，明确当前 SAEA 的 paper-scale stop line；
-4. 历史 Decision-Log 条目保持 append-only，只由续91的 `Supersedes`/当前路由解释，不回写旧条目；
-5. 重建 AI context manifest 并运行 surface/budget checks。
+1. Change `wiki/Research-Methodology.md`'s Stage‑2B to candidate qualification/freezing rather than final
+   confirmatory work; Stage‑3 takes over formal statistical inference at adequate scale, final evidence and papers;
+2. Fix the old "all later work" sentences in README/README_CN, CONTRIBUTING/CONTRIBUTING_CN,
+   `docs/architecture.md`, `wiki/Architecture.md` and AGENTS/CLAUDE;
+3. Update `wiki/Per-Work-Status.md` to state SAEA's current paper-scale stop line;
+4. Keep historical Decision-Log entries append-only, explained only by continuation entry 91's `Supersedes` and
+   current routing, never written back into old entries;
+5. Rebuild the AI context manifest and run the surface/budget checks.
 
-#### 关闭门
+#### Closing gate
 
-P0-1 在任何可执行 R0/R1/X model-facing runner 交付前关闭。纯 model-free E0 可以继续。
+P0-1 closes before any executable R0/R1/X model-facing runner is delivered. Purely model-free E0 may continue.
 
-### P0-2 — BLOCKER：独立 SAEA repo 没有采用新 Stage‑3 边界
+### P0-2 — BLOCKER: the independent SAEA repo has not adopted the new Stage‑3 boundary
 
-#### 证据
+#### Evidence
 
-umbrella 的三阶段裁决提交于 `bb164e6`（11:48），但 study HEAD 仍是此前的 `0d86ddc`（10:43）。
-Study repo 中：
+The umbrella's three-stage ruling was committed at `bb164e6` (11:48), but the study HEAD is still the earlier
+`0d86ddc` (10:43). In the study repo:
 
-- `AGENTS.md:19-24` 将旧 speech scope/identity contract 称为“当前合同”，没有 Stage‑3 paper gate；
-- `README.md:15-16` 同样把旧合同称为 Current execution authority；
-- `docs/engineering.md:33-42` 只描述 R0，未声明 paper-scale stop line；
-- `contracts.py:236-444` 的 `FrozenCoreGate` 只验证 E0 与 runtime receipt；
-- `test_governance_alignment.py` 只检查 registry 指向的文件存在，不检查新 boundary contract 的语义；
-- study 的 local agent guidance、CI 和 entry gate 都无法区分 `baseline/bounded-probe` 与
-  `paper-scale/confirmatory`。
+- `AGENTS.md:19-24` calls the old speech scope/identity contract the "current contract" with no Stage‑3 paper gate;
+- `README.md:15-16` likewise calls the old contract the current execution authority;
+- `docs/engineering.md:33-42` describes only R0 and declares no paper-scale stop line;
+- `FrozenCoreGate` in `contracts.py:236-444` validates only E0 and the runtime receipt;
+- `test_governance_alignment.py` only checks that the file the registry points at exists, not the semantics of the
+  new boundary contract;
+- the study's local agent guidance, CI and entry gate cannot distinguish `baseline/bounded-probe` from
+  `paper-scale/confirmatory`.
 
-这意味着从 umbrella 看，SAEA 已被收窄；但单独 clone 或直接进入 study repo 的执行者仍只看到旧
-authority。现有 model gate 在 E0 关闭后会允许任何调用它的 runner，不知道调用属于 bounded X 还是
-禁止的 paper-scale campaign。
+This means that from the umbrella's viewpoint SAEA has been narrowed, but an executor who clones the study alone or
+enters the study repo directly still sees only the old authority. After E0 closes, the existing model gate would
+allow any runner that calls it, with no knowledge of whether the call is bounded X or a forbidden paper-scale
+campaign.
 
-#### 影响
+#### Impact
 
-当前 E0 尚未关闭且 runner 仍未实现，所以没有发生越界执行；但一旦 R0/X 入口变成可运行代码，散文
-合同无法在独立仓内 fail closed。三阶段边界只存在于 umbrella，而没有到达实际执行仓。
+E0 is not yet closed and the runner is not yet implemented, so no out-of-bounds execution has occurred; but once
+the R0/X entry becomes runnable code, a prose contract cannot fail closed inside the independent repo. The
+three-stage boundary exists only in the umbrella and has not reached the repository that actually executes.
 
-#### 必须修复
+#### Required repair
 
-这是一个跨仓事务，不能只改 umbrella：
+This is a cross-repository transaction and cannot be done in the umbrella alone:
 
-1. 先在 umbrella 解决 P1-1 的有效合同问题；
-2. 在 SAEA repo 更新 AGENTS/CLAUDE、README 和 engineering current authority；
-3. 由 study 自己设计并实现最小 execution-scope interface，至少可区分：
-   `baseline-reproduction`、`bounded-discovery-probe`、`paper-scale-confirmatory`；
-4. Study repo 对第三类必须在无 paper contract/paper repo 的情况下 fail closed；更简单的实现也可以是
-   study repo 永不接受 paper-scale profile；
-5. 增加 contract tests，证明伪造 stage 字符串、超出 bounded budget、confirmatory profile 和缺少
-   paper authority 时都会拒绝；
-6. umbrella registry/index 最后 pin 新 study commit 与有效合同。
+1. First resolve the effective-contract problem of P1-1 in the umbrella;
+2. Update AGENTS/CLAUDE, README and the engineering current authority in the SAEA repo;
+3. Have the study itself design and implement a minimal execution-scope interface that can at least distinguish
+   `baseline-reproduction`, `bounded-discovery-probe` and `paper-scale-confirmatory`;
+4. The study repo must fail closed on the third class when there is no paper contract/paper repo; an even simpler
+   implementation is for the study repo to never accept a paper-scale profile;
+5. Add contract tests proving refusal for a forged stage string, an over-budget bounded plan, a confirmatory
+   profile, and missing paper authority;
+6. Finally, have the umbrella registry/index pin the new study commit and the effective contract.
 
-伞仓不应规定 study 内部目录布局，但有权通过 owner contract 要求这一跨仓可验证接口。
+The umbrella should not prescribe the study's internal directory layout, but it is entitled to require this
+cross-repository verifiable interface through the owner contract.
 
-#### 关闭门
+#### Closing gate
 
-P0-2 在首个 model-facing R0/X runner 可执行前关闭。当前 model-free E0 不受阻。
+P0-2 closes before the first model-facing R0/X runner becomes executable. The current model-free E0 is unblocked.
 
-### P1-1 — MAJOR：registry 的唯一 decision record 被改成非自包含补充合同
+### P1-1 — MAJOR: the registry's sole decision record was changed to a non-self-contained supplementary contract
 
-#### 证据
+#### Evidence
 
-`studies/registry.json:18-19` 和 experiment index frontmatter 当前 pin：
+`studies/registry.json:18-19` and the experiment index frontmatter currently pin:
 
 ```text
 2026-08-04-owner-stage3-boundary-and-paper-gate-contract.md
 ```
 
-但该文件 frontmatter 明确写：
+But that file's frontmatter explicitly says:
 
 ```text
 relation: supplements ...; narrows default execution authority only
 ```
 
-它没有自包含重述：
+It does not self-containedly restate:
 
-- `OWNER_GO_AND_EXECUTION_CONTRACT` authorization；
-- semantic repo URL/local path/package/namespace；
-- speech-only 完整范围与排除项；
-- frozen core、数据、baseline、信息边界；
-- 预算和 stop lines 的具体值；
-- 原 scope contract 的完整路径/blob。
+- the `OWNER_GO_AND_EXECUTION_CONTRACT` authorization;
+- the semantic repo URL / local path / package / namespace;
+- the complete speech-only scope and its exclusions;
+- the frozen core, data, baselines and information boundary;
+- the concrete values of budgets and stop lines;
+- the full path/blob of the original scope contract.
 
-同时 `Research-Objective.md:18-23`、`Experiment-Assets.md:8-16` 和 `studies/README.md:19-23`
-仍把原 speech-domain scope/identity contract 当作当前权威。于是 registry 的“唯一 decision_record”与
-其他 current surfaces 指向不同合同；要理解有效 authority 必须追一条 supplement chain。
+Meanwhile `Research-Objective.md:18-23`, `Experiment-Assets.md:8-16` and `studies/README.md:19-23` still treat the
+original speech-domain scope/identity contract as the current authority. So the registry's "sole decision_record"
+points at a different contract from the other current surfaces, and understanding the effective authority requires
+following a supplement chain.
 
-这违反本仓“active truth 必须自包含，amendment/response chain 不得充当 working context”的规则，也
-削弱了 registry decision-record blob 的审计意义：机器证明的是补充件字节没漂移，不是完整执行合同
-没漂移。
+This violates this repository's rule that "active truth must be self-contained and amendment/response chains must
+not serve as working context", and it weakens the audit meaning of the registry decision-record blob: the machine
+proves that the supplement's bytes have not drifted, not that the complete execution contract has not drifted.
 
-#### 修复选项
+#### Repair options
 
-优先推荐 A：
+Option A is preferred:
 
-- 新建一份**自包含**的 effective owner contract，继承原 GO 事实，同时完整重述 speech-only 身份、
-  E0/R0/R1/bounded-X、预算/exposure 和 Stage‑3 stop line；
-- registry/index 只 pin 这一份 effective contract/blob；
-- 原两份合同留作历史/来源记录。
+- issue a **self-contained** effective owner contract that inherits the original GO facts while completely
+  restating the speech-only identity, E0/R0/R1/bounded-X, budget/exposure and the Stage‑3 stop line;
+- have the registry/index pin only this one effective contract/blob;
+- keep the two original contracts as historical/source records.
 
-可接受的 B：
+Acceptable option B:
 
-- registry `decision_record` 恢复指向自包含 scope/identity contract；
-- 在未来 registry v3 增加独立、机器校验的 `stage_boundary_record` 字段；
-- 在 v3 落地前，experiment index 明确列出两份 current authority，但不得称补充件为唯一 current
-  effective contract。
+- restore `decision_record` in the registry to point at the self-contained scope/identity contract;
+- add a separate, machine-validated `stage_boundary_record` field in a future registry v3;
+- before v3 lands, have the experiment index explicitly list both current authorities, but never call the
+  supplement the sole current effective contract.
 
-### P1-2 — MAJOR：`papers/registry.json` 被称为 machine authority，但没有任何机器消费者
+### P1-2 — MAJOR: `papers/registry.json` is called a machine authority but has no machine consumer
 
-#### 证据
+#### Evidence
 
-`wiki/Experiment-Assets.md:28` 将 `papers/registry.json` 称为 Machine authority；然而：
+`wiki/Experiment-Assets.md:28` calls `papers/registry.json` a Machine authority; however:
 
-- `rg` 在 `scripts/`、tests 和 `docs/integrity/` 中找不到 `papers/registry.json`、
-  `paper-repository-registry` 或 paper workspace checker；
-- `study_workspace_check.py` 只读取 `studies/registry.json`；
-- `.gitignore` 已经忽略 `papers/*/`；
-- experiment asset inventory 不含 paper registry path/hash；
-- code graph 与 AI context manifest 不登记 paper registry；
-- 当前所有门禁在 paper schema 完全不受检查的情况下仍 PASS。
+- `rg` finds no `papers/registry.json`, `paper-repository-registry` or paper workspace checker in `scripts/`, the
+  tests or `docs/integrity/`;
+- `study_workspace_check.py` reads only `studies/registry.json`;
+- `.gitignore` already ignores `papers/*/`;
+- the experiment asset inventory contains no paper registry path/hash;
+- the code graph and the AI context manifest do not register the paper registry;
+- every current gate still PASSes while the paper schema is entirely unchecked.
 
-#### 影响
+#### Impact
 
-当前空状态没有伪 admission，因此不阻断 E0。但任何人都可以在 `papers/` 下创建未登记 child repo，
-umbrella `git status` 看不到它，现有 gate 也不会失败；也可以破坏 registry schema/count 而不触发当前
-workspace checks。“Machine authority”目前只是散文称谓。
+The current empty state contains no fake admission, so E0 is not blocked. But anyone could create an unregistered
+child repo under `papers/`, the umbrella `git status` would not see it, and no existing gate would fail; the
+registry schema/count could likewise be broken without tripping the current workspace checks. "Machine authority"
+is at present only a prose label.
 
-#### 建议修复
+#### Suggested repair
 
-不需要现在实现完整 promotion graph，但应立即增加一个低成本 zero-state gate：
+The full promotion graph need not be implemented now, but a low-cost zero-state gate should be added immediately:
 
-- strict JSON/duplicate-key/schema/fixed-field validation；
-- `papers=[]` 与 `Admitted paper repositories: **0**` 一致；
-- `papers/` 下不存在任何 child directory；
-- `.gitignore` 精确包含 `papers/*/`；
-- paper registry hash 进入确定性 asset inventory；
-- 负向测试覆盖 malformed registry、非空未登记目录、count drift。
+- strict JSON/duplicate-key/schema/fixed-field validation;
+- `papers=[]` agrees with `Admitted paper repositories: **0**`;
+- no child directory exists under `papers/`;
+- `.gitignore` contains exactly `papers/*/`;
+- the paper registry hash enters the deterministic asset inventory;
+- negative tests cover a malformed registry, a non-empty unregistered directory and count drift.
 
-到真实 candidate 时再扩展 entry schema、origin/branch、primary/supporting study、promotion receipt 和
-`--require-installed`，即可同时遵守 owner 的 minimal-first 裁决与 fail-closed 原则。
+Extending the entry schema, origin/branch, primary/supporting study, promotion receipt and `--require-installed`
+can wait for a real candidate, which satisfies both the owner's minimal-first ruling and the fail-closed principle.
 
-### P1-3 — MAJOR：Experiment-Assets 对 paper 的声明与通用实验合同互相冲突
+### P1-3 — MAJOR: Experiment-Assets' paper declarations conflict with the general experiment contract
 
-#### 证据
+#### Evidence
 
-`wiki/Experiment-Assets.md:26-32` 新增 paper registry，并声明未来 paper experiment index 位于：
+`wiki/Experiment-Assets.md:26-32` adds the paper registry and declares that a future paper experiment index lives
+at:
 
 ```text
 wiki/experiments/papers/<paper-slug>/
 ```
 
-但同一文件：
+But in the same file:
 
-- authority table 第 44-49 行只定义 study identity 和 independent study repo；
-- 第 57 行仍写“Every formal experiment”都进入 `wiki/experiments/<study-slug>/`；
-- required binding 使用 `study commit`，没有 carrier type 或 paper commit；
-- update transaction 第 98 行附近只定义 study admission，没有 paper promotion transaction；
-- experiment asset inventory 只绑定 `study_registry`。
+- the authority table at lines 44-49 defines only study identity and the independent study repo;
+- line 57 still says "Every formal experiment" goes into `wiki/experiments/<study-slug>/`;
+- the required binding uses `study commit`, with no carrier type and no paper commit;
+- the update transaction near line 98 defines only study admission, with no paper promotion transaction;
+- the experiment asset inventory binds only `study_registry`.
 
-#### 影响
+#### Impact
 
-首个 paper 到来时，工程团队无法从 current control plane 判断：paper 实验应该登记 paper commit 还是
-study commit、使用哪一条 update transaction、是否进入现有 asset inventory。新 section 宣布了路径，
-但没有把它整合进权威表和通用实验 schema。
+When the first paper arrives, the engineering team cannot determine from the current control plane whether a paper
+experiment should register a paper commit or a study commit, which update transaction to use, or whether it enters
+the existing asset inventory. The new section announces a path without integrating it into the authority table and
+the general experiment schema.
 
-#### 建议修复
+#### Suggested repair
 
-不迁移现有 study 路径，只把通用术语扩成 carrier-aware：
+Do not migrate existing study paths; only make the general terminology carrier-aware:
 
-- `carrier_type = study | paper`；
-- `carrier repository URL + exact commit`；
-- Stage‑2 记录继续在 `wiki/experiments/<study-slug>/`；
-- Stage‑3 记录可使用已裁决的 `wiki/experiments/papers/<paper-slug>/`；
-- authority table 同时列出 study 与 paper code/config/tests；
-- update transaction 分成 study admission 与 paper promotion；
-- empty paper registry 也进入 asset graph hash。
+- `carrier_type = study | paper`;
+- carrier repository URL + exact commit;
+- Stage‑2 records continue under `wiki/experiments/<study-slug>/`;
+- Stage‑3 records may use the already-ruled `wiki/experiments/papers/<paper-slug>/`;
+- the authority table lists both study and paper code/config/tests;
+- the update transaction splits into study admission and paper promotion;
+- an empty paper registry also enters the asset graph hash.
 
-### P1-4 — MAJOR / OWNER-ACCEPTED RISK：confirmatory reservation 的触发器晚于 candidate 形成过程
+### P1-4 — MAJOR / OWNER-ACCEPTED RISK: the confirmatory reservation trigger comes later than the candidate-formation process
 
-#### 证据
+#### Evidence
 
-对抗评审 C2 已正确指出：reservation 是 Stage‑2 前置，因为 R0/X 已经建立 discovery/confirmatory
-边界，多个 studies 也可能在 paper 之前共享 carrier。原评审修订答复要求立即建立 program ledger。
+Adversarial review C2 already correctly pointed out that reservation is a Stage‑2 prerequisite, because R0/X
+already establish the discovery/confirmatory boundary and multiple studies may share a carrier before any paper.
+The revised review answers required creating the program ledger immediately.
 
-owner 续91随后有意收缩实施，把 reservation ledger 延后到：
+Owner continuation entry 91 subsequently contracted the implementation deliberately, deferring the reservation
+ledger to:
 
 ```text
-SAEA candidate 进入 paper-candidate-ready
-或 owner 启动首个 paper admission
+a SAEA candidate entering paper-candidate-ready
+or the owner starting the first paper admission
 ```
 
-该延期是 owner 明确接受的风险，不能归咎为团队擅自遗漏。但触发器仍存在时序问题：bounded X 用于
-形成 candidate；如果直到 candidate ready 才建立 reservation，selection exposure 已经发生。若期间
-第二个 study 共享 Earnings21/22/ConEC，单仓 exposure ledger 也无法阻止跨仓重复消费。
+That deferral is a risk the owner explicitly accepted and cannot be blamed on the team as an unauthorized omission.
+But the trigger still has a sequencing problem: bounded X is used to form the candidate; if reservation is not
+established until the candidate is ready, selection exposure has already occurred. And if a second study shares
+Earnings21/22/ConEC in the meantime, a single-repository exposure ledger cannot prevent cross-repository duplicate
+consumption.
 
-当前已有 2026-08-03 程序纪律作为临时保护：
+The 2026-08-03 program discipline already provides temporary protection:
 
-- 首条正式 experiment ledger row 必须带 split identity hash 和“已消耗”标记；
-- 新 study 的 Stage‑1 carrier selection 必须扫描已有 experiment/exposure ledgers；
-- 第二个 study 实际共享 carrier 时建立只读聚合视图。
+- the first formal experiment ledger row must carry the split identity hash and a "consumed" marker;
+- carrier selection during a new study's Stage‑1 must scan the existing experiment/exposure ledgers;
+- a read-only aggregate view is created when a second study actually shares a carrier.
 
-但当前 SAEA experiment ledger 表头尚无显式 `split identity hash` / `consumed` 字段，且没有机器检查。
+But the current SAEA experiment ledger header has no explicit `split identity hash` / `consumed` fields, and there
+is no machine check.
 
-#### 建议裁决
+#### Suggested ruling
 
-无需立即实现 proposal 中完整 reservation 系统，但应把触发器改成以下事件的**最早一个**：
+The full reservation system in the proposal need not be implemented immediately, but the trigger should be changed
+to the **earliest** of the following events:
 
-1. 首个 bounded X run 读取 discovery 结果之前；
-2. 第二个 study 计划使用相同 carrier/split family 之前；
-3. 首个 confirmatory split 被物化、查询或读取之前；
-4. 任何 candidate 请求 `paper-candidate-ready` 之前。
+1. before the first bounded X run reads a discovery result;
+2. before a second study plans to use the same carrier/split family;
+3. before the first confirmatory split is materialized, queried or read;
+4. before any candidate requests `paper-candidate-ready`.
 
-在 ledger 系统落地前，至少立即给 SAEA experiment index 增加 split hash、role、consumed/exposure
-字段，并用 test 验证首条正式记录不能省略。这是对 owner minimal-first 的最小安全补丁，而不是提前
-实现完整 promotion architecture。
+Before the ledger system lands, at minimum add split hash, role, and consumed/exposure fields to the SAEA experiment
+index immediately, with a test verifying that the first formal record cannot omit them. This is the smallest safety
+patch to the owner's minimal-first stance, not an early implementation of the full promotion architecture.
 
-### P2-1 — MINOR：canonical placement 与贡献指南没有登记 paper 层
+### P2-1 — MINOR: the canonical placement table and the contribution guide do not register the paper layer
 
-`wiki/AI-Collaboration.md:33-42` 的 canonical placement table 只有 Study repository registry 和
-Study experiment index；工程资产三层权威也只写 study repo。`CONTRIBUTING.md`/中文版本仍把仓类写成
-umbrella + studies，没有说明：
+The canonical placement table at `wiki/AI-Collaboration.md:33-42` contains only Study repository registry and Study
+experiment index; the three-layer engineering asset authority likewise mentions only the study repo.
+`CONTRIBUTING.md` and its Chinese version still describe the repository classes as umbrella + studies, without
+stating:
 
-- `papers/README.md`/registry 属于 umbrella；
-- `papers/<slug>/` 的改动提交到独立 paper repo；
-- paper remote creation/push/publication 仍需明确授权；
-- paper index、promotion receipt 和 release 的归属。
+- that `papers/README.md`/registry belong to the umbrella;
+- that changes under `papers/<slug>/` are committed to the independent paper repo;
+- that paper remote creation/push/publication still require explicit authorization;
+- where the paper index, promotion receipts and releases belong.
 
-对抗评审 C10 正确说明：修改 AI-Collaboration table 必须与
-`ai_context_surface_check.py` 的 `POLICY_ROLE_ORDER`/`POLICY_ROLE_SEMANTICS` 和 tests 同 commit。
-这项工作可以很小，不应等到首个 paper admission 才修 CONTRIBUTING 的错误所有权模型。
+Adversarial review C10 correctly notes that modifying the AI-Collaboration table must happen in the same commit as
+the `POLICY_ROLE_ORDER`/`POLICY_ROLE_SEMANTICS` constants of `ai_context_surface_check.py` and their tests. This
+work can be very small, and CONTRIBUTING's incorrect ownership model should not wait until the first paper admission
+to be fixed.
 
-### P2-2 — MINOR：proposal/review 元数据仍停留在裁决前状态
+### P2-2 — MINOR: the proposal/review metadata is still in its pre-ruling state
 
-原 proposal frontmatter 仍是：
+The original proposal's frontmatter is still:
 
 ```text
 proposal_status: PROPOSED_FOR_REVIEW
 supersession_effect: NONE_UNTIL_OWNER_ACCEPTANCE...
 ```
 
-但 owner 已在续91作出部分接受、部分否决和延期裁决。对抗评审文件标题仍为“裁决请求”，frontmatter
-仍写 `execution_authority: DOCUMENTATION_ONLY`，没有顶部 status note 指向续91。Companion plan 能解释
-现状，但执行者必须读三份文件才能知道 proposal 哪些段落有效。
+But the owner has already made a partial-accept, partial-reject and deferral ruling in continuation entry 91. The
+adversarial review file is still titled "decision request", its frontmatter still says
+`execution_authority: DOCUMENTATION_ONLY`, and it carries no status note at the top pointing to continuation
+entry 91. The companion plan can explain the current state, but an executor must read three files to learn which
+paragraphs of the proposal are in force.
 
-建议保留原正文，只更新 frontmatter/status banner：
+The recommendation is to keep the original body and update only the frontmatter/status banner:
 
 ```text
-REVIEWED__PARTIALLY_ACCEPTED_AND_OWNER_TRIMMED__SEE_DECISION_LOG_续91
+REVIEWED__PARTIALLY_ACCEPTED_AND_OWNER_TRIMMED__SEE_DECISION_LOG_XU91
 ```
 
-并明确“评审正文第 4/5 节 + owner 续91优先于原 proposal”。这不会改写历史理由，只修复当前路由。
+and to state explicitly that "sections 4/5 of the review body + owner continuation entry 91 take precedence over
+the original proposal". This rewrites no historical rationale and repairs only current routing.
 
-## 5. 对“延期项”的公平判定
+## 5. A fair judgment on the "deferred items"
 
-以下没有在 Phase A 实现，**不应单独算工程团队错误**，因为 owner 续91明确延期：
+The following were not implemented in Phase A and **should not be counted as engineering team errors**, because
+owner continuation entry 91 explicitly deferred them:
 
-- full paper entry schema；
-- primary/supporting study graph；
-- 20 字段 candidate bundle 的 BLOCKER/RECOMMENDED 分级；
-- promotion receipt 双向 commit 绑定；
-- full `paper_workspace_check --require-installed`；
-- synthetic cross-repo promotion dry run；
-- study registry v3 lifecycle；
-- 首个 paper admission runbook 和 CI；
-- 真实 paper child repo/remote。
+- the full paper entry schema;
+- the primary/supporting study graph;
+- BLOCKER/RECOMMENDED grading of the 20-field candidate bundle;
+- bidirectional commit binding of the promotion receipt;
+- the full `paper_workspace_check --require-installed`;
+- a synthetic cross-repo promotion dry run;
+- study registry v3 lifecycle;
+- the first paper admission runbook and CI;
+- a real paper child repo/remote.
 
-但是，延期必须满足两个条件：
+However, a deferral must satisfy two conditions:
 
-1. 当前零状态不能被散文误称为已经机器闭环；
-2. 触发器必须早于第一个不可逆动作，而不是与该动作同时或更晚。
+1. the current zero state must not be described in prose as already machine-closed;
+2. the trigger must come before the first irreversible action, not at the same time or later.
 
-因此 P1-2 的 zero-state gate、P1-4 的 Stage‑2 exposure 前置仍需要提前处理；其余完整 machinery 可以
-按 owner 决定留到真实 candidate。
+The P1-2 zero-state gate and the P1-4 Stage‑2 exposure prerequisite therefore still need to be handled early; the
+remaining full machinery may, as the owner decided, wait for a real candidate.
 
-## 6. 建议整改顺序
+## 6. Suggested remediation order
 
-### R0 — Current truth alignment（umbrella，立即）
+### R0 — Current truth alignment (umbrella, immediate)
 
-关闭 P0-1、P1-3、P2-1、P2-2：
+Closes P0-1, P1-3, P2-1, P2-2:
 
-- 修 Research-Methodology、README、CONTRIBUTING、docs/wiki Architecture、AGENTS/CLAUDE、Per-Work；
-- generalize Experiment-Assets 的 carrier authority；
-- 更新 AI-Collaboration + checker constants/tests；
-- 给 proposal/review 加 owner adjudication status note；
-- 重建 manifest 并跑全部 umbrella gates。
+- fix Research-Methodology, README, CONTRIBUTING, docs/wiki Architecture, AGENTS/CLAUDE, Per-Work;
+- generalize the carrier authority in Experiment-Assets;
+- update AI-Collaboration + the checker constants/tests;
+- add an owner adjudication status note to the proposal/review;
+- rebuild the manifest and run all umbrella gates.
 
-这是文档与既有 checker 的小事务，不需要 model、数据、paper repo 或远程权限。
+This is a small transaction over documents and existing checkers; it needs no model, data, paper repo or remote
+permissions.
 
-### R1 — Self-contained authority（umbrella，立即）
+### R1 — Self-contained authority (umbrella, immediate)
 
-关闭 P1-1：签发一份自包含 effective SAEA contract 或采用双字段 schema，再 re-pin registry/index/
-inventory。此步需要 owner 对载体合同形式确认，但不改变已裁决的研究边界。
+Closes P1-1: issue a self-contained effective SAEA contract or adopt the two-field schema, then re-pin the
+registry/index/inventory. This step needs the owner to confirm the form of the carrier contract, but it does not
+change the already-ruled research boundary.
 
-### R2 — Independent study adoption（SAEA + umbrella，R0 runner 前）
+### R2 — Independent study adoption (SAEA + umbrella, before the R0 runner)
 
-关闭 P0-2：先提交 study repo 的 guidance/tests/execution-scope guard，取得 study commit；再由 umbrella
-记录该 commit 与 contract。不能只在 umbrella 宣布 study 已收窄。
+Closes P0-2: first commit the study repo's guidance/tests/execution-scope guard and obtain the study commit; then
+have the umbrella record that commit and the contract. It is not enough to announce in the umbrella that the study
+has been narrowed.
 
-### R3 — Zero-state paper gate（umbrella，近期）
+### R3 — Zero-state paper gate (umbrella, near term)
 
-关闭 P1-2：只验证空 registry、零 child、count、ignore 和 hash；完整 paper schema 仍触发器化。
+Closes P1-2: validate only the empty registry, zero children, count, ignore rule and hash; the full paper schema
+stays trigger-driven.
 
-### R4 — Exposure/reservation minimum（umbrella + study，bounded X 前）
+### R4 — Exposure/reservation minimum (umbrella + study, before bounded X)
 
-关闭 P1-4：扩 experiment ledger 字段与测试；在四个最早触发事件之一发生时升级为 program-wide
-reservation/derived view。
+Closes P1-4: extend the experiment ledger fields and tests; upgrade to a program-wide reservation/derived view when
+one of the four earliest trigger events occurs.
 
-### R5 — Full promotion machinery（真实 candidate 时）
+### R5 — Full promotion machinery (at a real candidate)
 
-按 owner Phase B 实施：candidate schema、paper entry schema、promotion receipt、完整 paper checker、
-dry run、首仓 admission。R0–R4 关闭不代表 R5 自动授权。
+Implement per the owner's Phase B: candidate schema, paper entry schema, promotion receipt, the full paper checker,
+the dry run, and the first repository admission. Closing R0–R4 does not automatically authorize R5.
 
-## 7. 修复后验收标准
+## 7. Acceptance criteria after repair
 
-### 7.1 语义一致性
+### 7.1 Semantic consistency
 
-- 任一 current onboarding/architecture/methodology 页面都不得再写 Stage‑2 后所有论文工作留在 study；
-- Stage‑2B 明确止于 candidate qualification，不拥有 production-scale confirmatory；
-- Stage‑3 明确拥有正式规模统计推断、最终 evidence 与 publication；
-- `Per-Work-Status` 和 SAEA index 明确当前 paper-scale stop line；
-- 历史日志不回写，续91拥有清晰 supersession routing。
+- No current onboarding/architecture/methodology page may still say that after Stage‑2 all paper work stays in the
+  study;
+- Stage‑2B explicitly stops at candidate qualification and does not own production-scale confirmatory work;
+- Stage‑3 explicitly owns formal-scale statistical inference, final evidence and publication;
+- `Per-Work-Status` and the SAEA index state the current paper-scale stop line;
+- historical logs are not written back, and continuation entry 91 has clear supersession routing.
 
-### 7.2 SAEA 独立仓
+### 7.2 The independent SAEA repository
 
-- standalone clone 的 AGENTS/README 能发现当前 paper gate；
-- study runner 不能接受 paper-scale/confirmatory execution profile；
-- contract test 对伪造 profile、超预算、缺 authority 失败；
-- E0/R0/R1/bounded-X 合法路径保持可执行；
-- study 与 umbrella 各自 commit 后，registry/ledger 精确 pin。
+- a standalone clone's AGENTS/README reveals the current paper gate;
+- the study runner cannot accept a paper-scale/confirmatory execution profile;
+- contract tests fail for a forged profile, an over-budget plan and missing authority;
+- the legal E0/R0/R1/bounded-X paths remain executable;
+- after the study and the umbrella each commit, the registry/ledger pins exactly.
 
-### 7.3 Paper 零状态
+### 7.3 Paper zero state
 
-- malformed/duplicate-key paper registry 失败；
-- `papers/` 出现未登记 child 时失败；
-- paper count 与 Experiment-Assets 不一致时失败；
-- registry hash 漂移使 asset inventory 失败；
-- empty registry 继续合法；
-- 不要求创建 paper remote 或 child repo。
+- a malformed/duplicate-key paper registry fails;
+- an unregistered child appearing under `papers/` fails;
+- a mismatch between the paper count and Experiment-Assets fails;
+- registry hash drift fails the asset inventory;
+- an empty registry stays legal;
+- creating a paper remote or child repo is not required.
 
 ### 7.4 Exposure
 
-- 首条正式 study experiment 必须带 split hash、role、consumed/exposure；
-- inherited exposure 单调不减；
-- bounded X 前可证明 confirmatory 未读；
-- 第二个共享 carrier study 到来时产生跨仓只读冲突检查；
-- paper promotion 不会因换 repo 把已读数据重新标为未读。
+- the first formal study experiment must carry split hash, role and consumed/exposure;
+- inherited exposure is monotonically non-decreasing;
+- it can be proven before bounded X that confirmatory data is unread;
+- a cross-repository read-only conflict check is produced when a second shared-carrier study arrives;
+- paper promotion never re-marks already-read data as unread by changing repository.
 
-### 7.5 命令门
+### 7.5 Command gate
 
-在 WSL2 `Ubuntu-24.04`、`~/.venvs/speechrl` 中至少通过：
+In WSL2 `Ubuntu-24.04` with `~/.venvs/speechrl`, at minimum the following must pass:
 
 ```text
 python scripts/checks/code_graph_check.py
@@ -551,7 +590,7 @@ pytest scripts/checks -q
 pytest common/tests -q
 ```
 
-并新增等价的：
+plus new equivalents of:
 
 ```text
 paper zero-state registry/workspace negative tests
@@ -560,17 +599,19 @@ SAEA execution-scope negative tests
 split-hash / consumed / inherited-exposure record tests
 ```
 
-## 8. 给工程团队的最终判定
+## 8. Final determination for the engineering team
 
-本轮不是失败实施。团队正确完成了 owner 明确批准的最小目录基础，并且没有破坏现有 study、legacy
-资产或 context gates。值得保留的成果是：三阶段载体已获 owner 裁决，paper 根存在但没有假项目，
-SAEA 在 umbrella 层已有 paper-scale stop line，正/零/负结果政策也已固定。
+This round is not a failed implementation. The team correctly completed the minimal directory foundation the owner
+explicitly approved, and did not damage the existing study, legacy assets or context gates. The results worth
+keeping are: the three-stage carriers have an owner ruling, the papers root exists without any fake project, SAEA
+has a paper-scale stop line at the umbrella layer, and the positive/zero/negative results policy is fixed.
 
-但团队对“最小实施”的理解收缩得过头：它不仅延期了未来 promotion machinery，也遗漏了**当前活动
-真相的完整替换**和**独立 study 执行面的同步**。这两项不是过度设计，而是让已经签发的边界真正生效
-所必需的工作。
+But the team contracted its reading of "minimal implementation" too far: it deferred not only the future promotion
+machinery but also **the complete replacement of current active truth** and **synchronizing the independent study's
+execution surface**. Those two are not over-design; they are the work required to make an already-issued boundary
+actually effective.
 
-因此本 review 的交付判定是：
+The delivery determination of this review is therefore:
 
 ```text
 Phase A directory foundation: ACCEPT
@@ -584,6 +625,6 @@ Current model-free E0: MAY_CONTINUE
 Model-facing R0/X implementation: HOLD_BEFORE_P0-1/P0-2_CLOSE
 ```
 
-建议团队先按 R0→R4 完成一轮小而完整的 remediation，再申请独立复核。不要提前实现真实 paper
-promotion，也不要因为当前所有旧门禁为绿就把三阶段架构标记为 fully implemented。
-
+The recommendation is that the team first complete one small but complete remediation round following R0→R4, and
+then request an independent re-review. Do not implement real paper promotion early, and do not mark the three-stage
+architecture as fully implemented merely because every old gate is currently green.
