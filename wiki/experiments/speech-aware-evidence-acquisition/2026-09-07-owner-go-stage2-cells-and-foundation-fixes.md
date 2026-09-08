@@ -142,6 +142,22 @@ uncovered slot is "no exemplar", counted as a covariate. The owner also asks for
 slot filling, where the study's SLU-F1 (44.35 after KC-S1b) sits below the published zero-shot line (WHISMA
 63.3) and the trained pipelines (69.5-76.8).
 
+## Decision 11 — five answers of 2026-09-08, evening (answer `决策A：GO，同时要扩展下…决策B：GO…决策C：reviewer不去给修改建议，就是criticism；决策D：提交修改；决策E，按照你的建议走`)
+
+A. KU-S3v (static slot-value cards) is GO, and the local-optimization stage of the slot task is WIDENED to the
+   whole knowledge-view space: type descriptions, few-shot exemplars, vocabulary cards, and retrieved knowledge
+   are all candidates, each admitted one at a time with its form twin under the family rule.
+B. The openJiuwen change list items #1-#6 are GO (Reviewer seam and JUDGES registry; registration of the existing
+   judges; relaxation of the frozen-packet invariant for registered derivations; the Observer seam; the tool
+   catalog with ToolCard manifests and the first eight wrappers with byte-equivalence tests; the four config
+   tables with a null arm), planned as parallel worktree waves merged serially; #7-#9 follow the GPU queue.
+C. The Reviewer is CRITICISM ONLY: it scores and flags, it never proposes a revision; revisions are the Solver's,
+   under the system's constraints.
+D. The pending umbrella changes are committed as found (umbrella commit of the same day); the study's P-EMB
+   pins are re-pinned against the committed lock.
+E. The GPU order follows the coordinator's recommendation: the Earnings-21 series first (OBS-E1, the dispatcher
+   admission, the KC-E1f replication), then Audio2Tool, then the SLURP line.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
