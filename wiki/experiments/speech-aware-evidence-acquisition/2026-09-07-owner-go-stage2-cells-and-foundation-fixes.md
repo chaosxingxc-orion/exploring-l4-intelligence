@@ -128,6 +128,20 @@ the MODULE ADMISSION GATE: each harness module (a planner rule, an observe mode,
 carries a per-carrier admission receipt -- module on vs off, paired, non-inferiority with the carrier's own null
 margin, positive gain preferred -- and the harness's default plan contains only admitted or neutral modules.
 
+## Decision 10 — the SLURP intent line (answer `可以，按照你的建议走，先锁定单模型的工程基线，之后再进行详细分析`, "yes, follow your recommendation: lock the single-model engineering baseline first, then the detailed analysis"; 2026-09-08)
+
+After MF-8 (`SAEA-SLURP-MF8-SPEECH-TO-KNOWLEDGE-AUDIT-V1`: 999 of 1,000 DEV rows have their speaker in TRAIN;
+gold-free candidate recall on the comparator's errors 86.6 % at k = 8 from scenario-legal top-3 plus the
+Nemotron speech vectors; the legality judge flags 42 rows at 100 % precision; multi-audio prompts are supported
+on both transport routes; k = 8 exemplars cost 337 tokens): the SLURP session flies, in order, the silence-tail
+cell, the SLURP own-null replicate (1,000 contacts, the margin source), KU-S3, KU-S4N (candidate narrowing only:
+the core chooses among about eight system-selected candidates), then KU-S4a (same-speaker audio exemplars) with
+its twins KU-S4b (other-speaker) and KU-S4c (TRAIN gold text); the primary stratum is the rows whose candidates
+are all covered by the speaker's own exemplars (658 of 1,000 at k = 8), all rows secondary; the fallback for an
+uncovered slot is "no exemplar", counted as a covariate. The owner also asks for an improvement plan on SLURP
+slot filling, where the study's SLU-F1 (44.35 after KC-S1b) sits below the published zero-shot line (WHISMA
+63.3) and the trained pipelines (69.5-76.8).
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
