@@ -158,6 +158,21 @@ D. The pending umbrella changes are committed as found (umbrella commit of the s
 E. The GPU order follows the coordinator's recommendation: the Earnings-21 series first (OBS-E1, the dispatcher
    admission, the KC-E1f replication), then Audio2Tool, then the SLURP line.
 
+## Decision 12 — four answers of 2026-09-08, late (answer `决策项F：按你建议走，注意并行执行；决策项G：GO；决策项H：这个看下数据集和任务项是否支撑吧，应该还需要调研下本地可部署的最新最强的模型是什么；决策项I：按你建议走`)
+
+F. openJiuwen items #7-#9 are done as parallel worktree waves merged in GPU gaps: #7 rails standardization
+   (register the unregistered ids, fold the two out-of-base controllers, dispose of the launcher directories),
+   #8 PORT the Earnings-21 obs path onto the openJiuwen graph (the `window_hook` seam), #9 move Earnings to
+   `FlightRuntime` and retire the legacy contact executor.
+G. The first whole-loop Earnings-21 cell (plan -> speaker-turn units + brief state -> sealed draft -> judges flag
+   -> selective re-listen with context -> substitution-only revise -> commit) is GO for model-free preparation;
+   it flies after the SLURP line.
+H. Speech enhancement as an observe mode: first check whether the datasets and tasks support it (the Audio2Tool
+   noisy tier, the far-field SLURP recordings, the Earnings calls), and survey the latest, strongest locally
+   deployable enhancement models; no experiment before that survey.
+I. Default plans and the candidate freeze wait for the KV and KU-S4 families; replicated modules enter the
+   default plans then.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
