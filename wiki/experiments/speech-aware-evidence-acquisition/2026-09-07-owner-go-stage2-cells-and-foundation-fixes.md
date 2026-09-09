@@ -12,20 +12,20 @@ for host memory pressure: `.wslconfig` allowed the WSL VM 56 GB of a 63.4 GB hos
 GGUF mmap plus page cache filled it. Nothing of the dead attempt is scored; its spend (1,520 calls,
 134,821 speech seconds) is durable. The coordinator put four questions to the owner.
 
-## Decision 1 — WSL memory cap (answer `可以`, "yes")
+## Decision 1 — WSL memory cap (answer `可以` ("yes"))
 
 `.wslconfig` is lowered to `memory=44GB` with `[experimental] autoMemoryReclaim=gradual` (backup
 `.wslconfig.bak-20260907`), applied with `wsl --shutdown`. The serving monitor gains host-memory
 sampling (study E7c) and `serving_session.sh start` refuses below 12 GB host free.
 
-## Decision 2 — KC-E1 recovery re-registration (answer `继续`, "continue")
+## Decision 2 — KC-E1 recovery re-registration (answer `继续` ("continue"))
 
 The one permitted recovery of `SAEA-E21-KC-E1-BRIEF-44-V1` is registered with run-cumulative ceilings
 (1,520 + 1,750 = 3,270 calls; 285,000 speech seconds; the realized GPU-hours plus 1.6), and the
 preregistration's section-6 envelope for both cells is amended accordingly (KU-E1c keeps 1,750 /
 150,000 / 1.6). The raise is headroom, not new exposure: all 44 calls were exposed many times over.
 
-## Decision 3 — Audio2Tool 16 kHz re-lock consequence (answer `统一`, "agreed")
+## Decision 3 — Audio2Tool 16 kHz re-lock consequence (answer `统一` ("agreed"))
 
 Pre-approved, conditional on the admission of the `@16k` cell of
 `docs/readiness/2026-09-07-a2t-input-rate-standardization-v1-preregistration.md`: the ORG-1 union
@@ -44,7 +44,7 @@ agent, each with its form twin and equal-contact control:
 - OBS-E1, `docs/readiness/2026-09-07-e21-obs-speaker-turn-units-v1-preregistration.md`
   (speaker-turn transport units replacing the fixed 90-second windows; the seam lands first).
 
-## Decision 5 — Earnings-22 knowledge enhancement (answer `如果E22对齐了之后，其实可以对他进行知识加强的`, "once E22 is aligned, it can be knowledge-enhanced too")
+## Decision 5 — Earnings-22 knowledge enhancement (answer `如果E22对齐了之后，其实可以对他进行知识加强的` ("once E22 is aligned, it can be knowledge-enhanced too"))
 
 Earnings-22 is not confined to the WER anchor. With the short-form alignment closed (test 9.24
 under the silence-tail convention), a knowledge cell on the E22 DEV clips is admitted for
@@ -53,13 +53,12 @@ sector, region, call date — what a participant holds before the call), never a
 transcript or anything derived from one, with a token-matched placebo as the form twin; the flight
 decision follows the KC-E1 verdict. The test split is not read again.
 
-Addendum, same session (answer `E22不需要对外部信息做搜集，不然你最终结果没法和学术参考进行有效对比`,
-"E22 must not collect external information, or the final result cannot be compared with the academic
-references"): no corpus-external source of any kind enters the E22 brief — no public ticker-to-company
+Addendum, same session (answer `E22不需要对外部信息做搜集，不然你最终结果没法和学术参考进行有效对比` ("E22 must not collect external information, or the final result cannot be compared with the academic references")):
+no corpus-external source of any kind enters the E22 brief — no public ticker-to-company
 table, no filings, no listings. The brief is the corpus metadata file alone (ticker, country, region,
 dialect family), so the cell stays comparable with the published Earnings-22 numbers.
 
-## Decision 7 — KC-E1f GO (answer `GO，KC-E1f 准备好后起飞`, "GO, fly KC-E1f as soon as it is ready")
+## Decision 7 — KC-E1f GO (answer `GO，KC-E1f 准备好后起飞` ("GO, fly KC-E1f as soon as it is ready"))
 
 After the KC-E1 verdict (REJECTED as HARMFUL under its rule: PERSON entity WER +4.15 pp CI90 [+2.63, +5.74],
 content-driven, but the corpus-WER and numeric-accuracy guards fail because the whole-prompt brief makes the
@@ -69,7 +68,7 @@ pass-1 text + brief and may emit only span-bounded substitutions; one contact pe
 twin KU-E1fc). It flies on the Earnings-21 session as soon as its preregistration, prompt fit and wire check
 close, ahead of the Audio2Tool and SLURP items of Decision 6.
 
-## Decision 8 — the Earnings-21 silence tail, the promotion recovery, and memory reclaim (2026-09-08, answer `按你的建议走`, "go with your recommendation")
+## Decision 8 — the Earnings-21 silence tail, the promotion recovery, and memory reclaim (2026-09-08, answer `按你的建议走` ("go with your recommendation"))
 
 The Earnings-21 silence-tail cell (`SAEA-E21-FULL44-TAIL2S-V1`: corpus WER 8.200 -> 7.271, -0.93 CI90
 [-1.05, -0.79], but PERSON entity WER +0.69 [+0.13, +1.35], NOT ADMITTED under the imported margin) does not
@@ -80,7 +79,7 @@ packet promotion takes its one recovery re-registration (+3 speech seconds of ce
 a crashed gate attempt's real spend) in a no-server gap, and at that gap `.wslconfig` switches
 `autoMemoryReclaim` to `dropcache` with a `wsl --shutdown`.
 
-## Decision 9 — five answers of 2026-09-08 (answer `决策项1：A，决策项2：A，决策项3：同意，决策项4：A；决策项5：确认`, "item 1: A, item 2: A, item 3: agreed, item 4: A, item 5: confirmed")
+## Decision 9 — five answers of 2026-09-08 (answer `决策项1：A，决策项2：A，决策项3：同意，决策项4：A；决策项5：确认` ("item 1: A, item 2: A, item 3: agreed, item 4: A, item 5: confirmed"))
 
 1. KC-E1f is re-decided (a v2 verdict row, zero contacts) under non-inferiority guards whose margins come from
    the Earnings-21 own-null replicate (margin = the null's CI90 half-width per metric); the v1 REJECTED record
@@ -128,7 +127,7 @@ the MODULE ADMISSION GATE: each harness module (a planner rule, an observe mode,
 carries a per-carrier admission receipt -- module on vs off, paired, non-inferiority with the carrier's own null
 margin, positive gain preferred -- and the harness's default plan contains only admitted or neutral modules.
 
-## Decision 10 — the SLURP intent line (answer `可以，按照你的建议走，先锁定单模型的工程基线，之后再进行详细分析`, "yes, follow your recommendation: lock the single-model engineering baseline first, then the detailed analysis"; 2026-09-08)
+## Decision 10 — the SLURP intent line (answer `可以，按照你的建议走，先锁定单模型的工程基线，之后再进行详细分析` ("yes, follow your recommendation: lock the single-model engineering baseline first, then the detailed analysis"); 2026-09-08)
 
 After MF-8 (`SAEA-SLURP-MF8-SPEECH-TO-KNOWLEDGE-AUDIT-V1`: 999 of 1,000 DEV rows have their speaker in TRAIN;
 gold-free candidate recall on the comparator's errors 86.6 % at k = 8 from scenario-legal top-3 plus the
@@ -142,7 +141,7 @@ uncovered slot is "no exemplar", counted as a covariate. The owner also asks for
 slot filling, where the study's SLU-F1 (44.35 after KC-S1b) sits below the published zero-shot line (WHISMA
 63.3) and the trained pipelines (69.5-76.8).
 
-## Decision 11 — five answers of 2026-09-08, evening (answer `决策A：GO，同时要扩展下…决策B：GO…决策C：reviewer不去给修改建议，就是criticism；决策D：提交修改；决策E，按照你的建议走`)
+## Decision 11 — five answers of 2026-09-08, evening (answer `决策A：GO，同时要扩展下…决策B：GO…决策C：reviewer不去给修改建议，就是criticism；决策D：提交修改；决策E，按照你的建议走` ("decision A: GO, and widen it as well; decision B: GO; decision C: the reviewer gives no revision suggestions, it is criticism only; decision D: commit the changes; decision E: go with your recommendation"))
 
 A. KU-S3v (static slot-value cards) is GO, and the local-optimization stage of the slot task is WIDENED to the
    whole knowledge-view space: type descriptions, few-shot exemplars, vocabulary cards, and retrieved knowledge
@@ -158,7 +157,7 @@ D. The pending umbrella changes are committed as found (umbrella commit of the s
 E. The GPU order follows the coordinator's recommendation: the Earnings-21 series first (OBS-E1, the dispatcher
    admission, the KC-E1f replication), then Audio2Tool, then the SLURP line.
 
-## Decision 12 — four answers of 2026-09-08, late (answer `决策项F：按你建议走，注意并行执行；决策项G：GO；决策项H：这个看下数据集和任务项是否支撑吧，应该还需要调研下本地可部署的最新最强的模型是什么；决策项I：按你建议走`)
+## Decision 12 — four answers of 2026-09-08, late (answer `决策项F：按你建议走，注意并行执行；决策项G：GO；决策项H：这个看下数据集和任务项是否支撑吧，应该还需要调研下本地可部署的最新最强的模型是什么；决策项I：按你建议走` ("item F: go with your recommendation, and mind parallel execution; item G: GO; item H: first check whether the datasets and task items support it, and also survey what the latest and strongest locally deployable model is; item I: go with your recommendation"))
 
 F. openJiuwen items #7-#9 are done as parallel worktree waves merged in GPU gaps: #7 rails standardization
    (register the unregistered ids, fold the two out-of-base controllers, dispose of the launcher directories),
@@ -173,7 +172,7 @@ H. Speech enhancement as an observe mode: first check whether the datasets and t
 I. Default plans and the candidate freeze wait for the KV and KU-S4 families; replicated modules enter the
    default plans then.
 
-## Decision 13 — five answers of 2026-09-09 (answer `决策J：你提醒我了，我希望你做一组实验去分析下，是否可以在observe阶段用短语音快速生成草稿，然后在plan阶段接受长语音和前置草稿，让模型去系统性的刷新一次？决策K：按你的建议走；决策L：A；决策M：按你的建议走；决策N：按你建议走`)
+## Decision 13 — five answers of 2026-09-09 (answer `决策J：你提醒我了，我希望你做一组实验去分析下，是否可以在observe阶段用短语音快速生成草稿，然后在plan阶段接受长语音和前置草稿，让模型去系统性的刷新一次？决策K：按你的建议走；决策L：A；决策M：按你的建议走；决策N：按你建议走` ("decision J: you reminded me; I would like a group of experiments to analyse whether the observe stage can quickly generate drafts from short speech and the plan stage can then take the long speech together with the prior drafts and let the model refresh once, systematically; decision K: go with your recommendation; decision L: A; decision M: go with your recommendation; decision N: go with your recommendation"))
 
 J. Instead of flying OBS-E1b as prepared, the owner asks for an experiment GROUP on a two-pass design: in the
    Observe stage the short speech units (speaker turns) produce drafts quickly; in the Plan stage the model
@@ -191,7 +190,7 @@ M. The SLURP session runs in the coordinator's order (tail, own null, logprob pr
    KU-S3, KU-S4N, KU-S4a/b/c, KC-S1b replication).
 N. The depth-2 dispatcher admission is deferred to the end of the Earnings-21 session.
 
-## Decision 14 — three answers of 2026-09-09 and a statistics ruling (answer `决策O：按你的建议综合对比后形成方案基线；决策P：按你的建议来；决策Q：同意；…两类都大差不差，我们没必要花费过多的GPU时来反复复核这个指标，毕竟这个指标目前也只是在dev集上跑`)
+## Decision 14 — three answers of 2026-09-09 and a statistics ruling (answer `决策O：按你的建议综合对比后形成方案基线；决策P：按你的建议来；决策Q：同意；…两类都大差不差，我们没必要花费过多的GPU时来反复复核这个指标，毕竟这个指标目前也只是在dev集上跑` ("decision O: as you recommend, form the scheme baseline after a consolidated comparison; decision P: as you recommend; decision Q: agreed; ... the two kinds differ little, and we need not spend too many GPU hours re-verifying this metric repeatedly, since for now it only runs on the dev split"))
 
 O. Statistical power on SLURP: fly the preregistered single-pass cells on DEV-1000 first; only a promising arm that
    lands in the grey band (inside the own-null band but positive) earns extra resolution, and then the cheapest
@@ -207,7 +206,7 @@ single passes with the carrier's own null margin remain the default; a second pa
 cheap and decisive; means are the estimate, best-of-N is never used for admission (selection bias) and, if ever
 reported, is labelled as an optimistic bound.
 
-## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
+## Decision 6 — GPU order (answer `按你的逻辑走` ("follow your logic"))
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
 `@16k+ts2`) → SLURP session (silence-tail cell, KU-S3) → OBS-E1 once its seam lands; ready-first
