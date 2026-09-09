@@ -18,6 +18,26 @@ enter an experiment in this ledger.
 
 ## Current authoritative routing
 
+- **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
+  Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
+  preprocessing fixes into the study's local `master`. The existing results ledger is the
+  study-side index of decided and pending cells:
+  `studies/speech-aware-evidence-acquisition/docs/results/stage2-results-ledger.md` (JSON twin beside it).
+  The working plan and preserved-worktree inventory are
+  `studies/speech-aware-evidence-acquisition/docs/superpowers/plans/experiment-handoff/RECOVERY-PLAN.md`.
+  These links supersede the older arc's next-action summaries below as current operational routing.
+- **Execution is not a verdict:** all seven SLURP KV cells have finalized attempts and successful
+  whole-manifest score batches on study commit `2afb4b5c`; their scientific read/decision and ledger
+  closure remain pending. Source:
+  `studies/speech-aware-evidence-acquisition/docs/checks/speech-aware-evidence-acquisition/2026-09-09-owner-recovery/runtime-snapshot.json`.
+  Reconcile missing predecessor-decision evidence and the declared null/estimator binding before
+  interpreting the results; preserve the flown protocol and sealed bytes. No automatic re-flight.
+- **Current module boundaries:** KC-E1f scientific replication is MET, with its separate default-plan
+  switch-form proof still UNMET. SLURP tail and the original whole-answer logprob primary are NOT
+  ADMITTED. LP-2 is a prepared successor, not an admitted replacement. KU-S4 exemplar arms still need
+  packet promotion; the unfinished worktree is preserved. The owner order remains Decisions 13-14 in
+  [2026-09-07-owner-go-stage2-cells-and-foundation-fixes.md](2026-09-07-owner-go-stage2-cells-and-foundation-fixes.md).
+  This recovery changes coordination and engineering integration, not scientific execution scope.
 - **The single self-contained contract currently in force** (the registry pin points at this file):
   [2026-08-04-owner-consolidated-execution-contract.md](2026-08-04-owner-consolidated-execution-contract.md)
 - Study-repo boundary adoption (continuation entry 92 guard + continuation entry 93 semantic

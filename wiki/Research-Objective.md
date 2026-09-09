@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-08-25"
+last_refresh: "2026-09-09"
 ---
 
 # Research Objective & Current State
@@ -56,14 +56,13 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A discovery in flight (standing GO). **SLURP baseline LOCKED, unchanged**: DEV-1000
-unexposed-500 **+20.20 pp, CI90 [+17.20,+23.40]**. **New, delivery-conditional**: where supply is
-delivered (163/500 = **32.60%**) the gain also moves EXTRACTION (+9.4391 macro pts, CI90 excludes
-zero; matching-free cell too) — **not** a population effect; the exposed half does **not** replicate
-that term (−0.0533 vs +0.9333). **The limit is located**: KB build, retrieval depth, the τ gate and
-a hand-fit dispatch override are each refused by measurement; what remains is discrimination under a
-degenerate query. Audio2Tool stays **MECHANICS ONLY**: delta not separated from zero. Open: G2 or
-cheaper decisions first; training-free RL stays open. Digest:
+Stage-2A continues under the standing contract. The owner directed Codex to recover Fable5.1's
+completed work from Git history and worktrees. Shared-harness, KU-S3/KU-S4, LP-2 preparation and
+results-ledger work are integrated locally. Seven SLURP KV flights are sealed and scored, but
+their scientific decisions and exposure-accounting closure remain pending; do not re-fly them.
+KC-E1f's scientific replication is MET; its default-plan switch-form proof remains UNMET.
+The next work is KV closure, then the recorded SLURP and E21 queues. No experiment was active
+in the recovery snapshot. Current evidence and action routing:
 `wiki/experiments/speech-aware-evidence-acquisition/README.md`.
 
 ## Formal, legacy and routing boundaries
