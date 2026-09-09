@@ -191,6 +191,22 @@ M. The SLURP session runs in the coordinator's order (tail, own null, logprob pr
    KU-S3, KU-S4N, KU-S4a/b/c, KC-S1b replication).
 N. The depth-2 dispatcher admission is deferred to the end of the Earnings-21 session.
 
+## Decision 14 — three answers of 2026-09-09 and a statistics ruling (answer `决策O：按你的建议综合对比后形成方案基线；决策P：按你的建议来；决策Q：同意；…两类都大差不差，我们没必要花费过多的GPU时来反复复核这个指标，毕竟这个指标目前也只是在dev集上跑`)
+
+O. Statistical power on SLURP: fly the preregistered single-pass cells on DEV-1000 first; only a promising arm that
+   lands in the grey band (inside the own-null band but positive) earns extra resolution, and then the cheapest
+   adequate step (a second pass averaged, or a larger roster after the same-roster replication rule is met);
+   the comparison is consolidated into a scheme baseline.
+P. Earnings-21 session order: DR-1c -> DR-1f -> DR-1s -> E21-LOOP-1 -> the depth-2 dispatcher admission; OBS-E1b
+   stays prepared and unflown.
+Q. A study-side Stage-2 results ledger (one row per cell: rule, numbers, status, admission entry, citable sentence)
+   is produced, model-free, in parallel.
+Statistics ruling: the owner sees two acceptable summaries -- the mean over N repeated runs, or the best of N -- and
+does not want GPU hours spent re-verifying a metric that is only measured on the DEV split. Coordinator's reading:
+single passes with the carrier's own null margin remain the default; a second pass only for grey-band arms where it is
+cheap and decisive; means are the estimate, best-of-N is never used for admission (selection bias) and, if ever
+reported, is labelled as an optimistic bound.
+
 ## Decision 6 — GPU order (answer `按你的逻辑走`, "follow your logic")
 
 Earnings-21 session (KC-E1 re-fly, KU-E1c, the silence-tail cell) → Audio2Tool session (`@16k`,
