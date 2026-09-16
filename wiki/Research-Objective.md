@@ -59,10 +59,10 @@ The evaluation contract has three inseparable parts:
 Focus SLURP; E21 and Audio2Tool are held. The older dual-store agent has two positive matched
 exploratory comparisons. Candidate-five and broad/factored did not advance.
 
-Read the [Fable5.1 handoff](../studies/speech-aware-evidence-acquisition/docs/handoff/2026-09-16-fable51/START-HERE.md).
-At capture, the sole full1080 typed-context recovery was running; direct was complete and
-first-scored, paired quality unread. Recheck liveness; finish seal, score and analysis before
-conditional replication. Do not replay failed recovery or rescore direct.
+Read the [latest Fable5.1 handoff](../studies/speech-aware-evidence-acquisition/docs/handoff/2026-09-16-fable51/LATEST.md).
+Typed-context recovery is CLOSED after 6,645 calls: Reviewer overflowed its slot by 302 tokens.
+No complete system score exists; direct is first-scored but quality-unread. No third replay,
+partial scoring or held replica. Diagnose dynamic context capacity; preserve the old base.
 
 Lock a stable agent base before trajectory sampling and training-free optimization.
 Engineering is not an RL result.
