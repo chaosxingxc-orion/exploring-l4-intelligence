@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-09-09"
+last_refresh: "2026-09-16"
 ---
 
 # Research Objective & Current State
@@ -56,14 +56,16 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Stage-2A continues under the standing contract. The owner directed Codex to recover Fable5.1's
-completed work from Git history and worktrees. Shared-harness, KU-S3/KU-S4, LP-2 preparation and
-results-ledger work are integrated locally. Seven SLURP KV flights are sealed and scored, but
-their scientific decisions and exposure-accounting closure remain pending; do not re-fly them.
-KC-E1f's scientific replication is MET; its default-plan switch-form proof remains UNMET.
-The next work is KV closure, then the recorded SLURP and E21 queues. No experiment was active
-in the recovery snapshot. Current evidence and action routing:
-`wiki/experiments/speech-aware-evidence-acquisition/README.md`.
+Focus SLURP; E21 and Audio2Tool are held. The older dual-store agent has two positive matched
+exploratory comparisons. Candidate-five and broad/factored did not advance.
+
+Read the [Fable5.1 handoff](../studies/speech-aware-evidence-acquisition/docs/handoff/2026-09-16-fable51/START-HERE.md).
+At capture, the sole full1080 typed-context recovery was running; direct was complete and
+first-scored, paired quality unread. Recheck liveness; finish seal, score and analysis before
+conditional replication. Do not replay failed recovery or rescore direct.
+
+Lock a stable agent base before trajectory sampling and training-free optimization.
+Engineering is not an RL result.
 
 ## Formal, legacy and routing boundaries
 
