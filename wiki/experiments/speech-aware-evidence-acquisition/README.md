@@ -34,6 +34,16 @@ enter an experiment in this ledger.
   retained as a NEUTRAL module with a SLURP default plan, projection v3 is the fixed post-processing
   of every official number (owner decisions 6-10 of 2026-09-17), and cells B1/B2/B4 re-register on
   the anchor; GPU order B1 -> B2 -> B4b -> B4a -> B4c (conditional), one cell in flight.
+  Results of 2026-09-17 (study `docs/results/`): **B4b (slot store v2) ADMITTED**, official SLU +2.55 pp
+  CI95 [+1.13, +3.98], provisional until a same-roster replicate; **B1 (twenty speech-keyed TRAIN
+  exemplars supplied to the Solver) SLU 48.53 -> 61.14, +12.61 pp CI95 [+10.54, +14.60]**, intent 80.19,
+  projection v3 62.67, symmetric 62.97, all 18 scenarios gaining, +27.25 over direct, ADMITTED pending its
+  derangement twin (flies next); its first attempt aborted on a Solver-revisit phase-supply refusal fixed
+  by E3c. Owner directive 11: one unified Node Context Policy before every agent node (audit
+  `docs/results/2026-09-17-slurp-node-context-audit-v1.md`, design
+  `docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, E8a/E8b merged; B7a flying, B7r/B7c/B7b
+  registered). Owner decisions 12-17 fix the order B1 twin -> B2 v3 -> B7a -> B4b replicate -> B4a ->
+  B7r -> B7c -> B7b -> B5 -> B5r -> B6. The v2 base now sits within about 1.5 pp (v3 terms) of the bar.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the
