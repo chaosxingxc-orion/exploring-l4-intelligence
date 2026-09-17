@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-09-16"
+last_refresh: "2026-09-17"
 ---
 
 # Research Objective & Current State
@@ -56,16 +56,14 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Focus SLURP; E21 and Audio2Tool are held. The older dual-store agent has two positive matched
-exploratory comparisons. Candidate-five and broad/factored did not advance.
-
-Read the [latest Fable5.1 handoff](../studies/speech-aware-evidence-acquisition/docs/handoff/2026-09-16-fable51/LATEST.md).
-Typed-context recovery is CLOSED after 6,645 calls: Reviewer overflowed its slot by 302 tokens.
-No complete system score exists; direct is first-scored but quality-unread. No third replay,
-partial scoring or held replica. Diagnose dynamic context capacity; preserve the old base.
-
-Lock a stable agent base before trajectory sampling and training-free optimization.
-Engineering is not an RL result.
+Focus SLURP; E21 and Audio2Tool are held. Fable 5.1 coordinates from 2026-09-17 (study
+`docs/superpowers/plans/experiment-handoff/OWNER-FABLE-TAKEOVER-2026-09-16.md`). Base = the retained
+dual-store agent (TRAIN A SLU 48.53 / intent 77.96; DEV1000 +14.6 over direct, twice); candidate-five,
+broad/factored and typed-context did not advance. Owner bar (2026-09-16): SLU-F1 >= 64 and intent
+>= 78, replicated. Program: study `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`
+(offline audits, then one-factor cells: review-off, exemplar grounding, sample-and-aggregate, USE
+projection, targeted ORG fixes; combine, replicate, confirm on DEV1000). TRAIN A direct score
+released as the anchor; the four-row slot-view proof declined for now. Stage 3 only after the lock.
 
 ## Formal, legacy and routing boundaries
 

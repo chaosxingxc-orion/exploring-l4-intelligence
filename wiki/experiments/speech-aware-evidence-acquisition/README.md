@@ -18,6 +18,17 @@ enter an experiment in this ledger.
 
 ## Current authoritative routing
 
+- **Current frontier, 2026-09-17:** Fable 5.1 took over coordination from Codex by local files
+  (study `docs/superpowers/plans/experiment-handoff/OWNER-FABLE-TAKEOVER-2026-09-16.md`, receipt
+  `docs/handoff/2026-09-16-fable51/TAKEOVER-FABLE51-20260917T010325Z.md`, coordination generation 169).
+  Owner decisions of 2026-09-16: acceptance bar SLU-F1 >= 64 and intent >= 78 replicated on the same
+  roster; the four-row candidate-bound slot-view proof declined for now; the TRAIN A direct score of
+  `SAEA-SLURP-DIRECT-MAX512-TRAIN-FOLD-A-SOURCE-RECOVERY-V1` released as the direct anchor; a
+  Reviewer-off ablation flies first. The program is the study spec
+  `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md` (Phase A offline audits and
+  engineering in worktrees, then one-factor Phase B admission cells on TRAIN A 1,080, combination,
+  same-roster replication and DEV1000 confirmation, then the v2 lock before any Stage 3 work). The
+  Codex-era handoff v4 package remains the historical record of the 2026-09-09 to 2026-09-16 recovery.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the
