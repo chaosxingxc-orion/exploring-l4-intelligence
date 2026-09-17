@@ -58,13 +58,13 @@ The evaluation contract has three inseparable parts:
 
 Focus SLURP; E21 and Audio2Tool are held. Fable 5.1 coordinates from 2026-09-17 (study
 `docs/superpowers/plans/experiment-handoff/OWNER-FABLE-TAKEOVER-2026-09-16.md`). Base = the sealed
-dual-store anchor (TRAIN A SLU 48.53 / intent 77.96; DEV1000 +14.6 over direct, twice). Owner bar
-(2026-09-16): SLU-F1 >= 64 and intent >= 78, replicated. Program: study
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. Cells B0/B0r (review loop off,
-2026-09-17): nil effect but HARMFUL under the measured TRAIN A own null (SLU 1.12 / intent 1.01 pp);
-the loop stays; projection v3 adopted beside every official number. Next GPU cells on the anchor, one
-in flight: B1 exemplar supply -> B2 sample-and-aggregate -> B4b/B4a ORG stores; then combine,
-replicate, confirm on DEV1000. Stage 3 only after the lock.
+dual-store anchor (TRAIN A SLU 48.53 / intent 77.96). Owner bar (2026-09-16): SLU-F1 >= 64 and intent
+>= 78, replicated. Program: study `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`.
+Results 2026-09-17: B0/B0r (review loop off) HARMFUL under the own null, loop retained; **B4b (slot
+store v2) ADMITTED, SLU +2.55 pp CI95 [+1.13, +3.98]**, provisional until replicated; B1 (exemplar
+supply) recovering after a revisit-refusal abort (E3c fixed). Owner directive 11: one unified node
+context policy (design `docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, cells
+B7a/B7b). GPU order: B1 -> B2 v3 -> B4a -> B7a -> B7r -> B7c -> B7b -> B5/B5r/B6. Stage 3 after the lock.
 
 ## Formal, legacy and routing boundaries
 
