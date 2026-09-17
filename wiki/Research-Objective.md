@@ -57,13 +57,14 @@ The evaluation contract has three inseparable parts:
 ## Next action
 
 Focus SLURP; E21 and Audio2Tool are held. Fable 5.1 coordinates from 2026-09-17 (study
-`docs/superpowers/plans/experiment-handoff/OWNER-FABLE-TAKEOVER-2026-09-16.md`). Base = the retained
-dual-store agent (TRAIN A SLU 48.53 / intent 77.96; DEV1000 +14.6 over direct, twice); candidate-five,
-broad/factored and typed-context did not advance. Owner bar (2026-09-16): SLU-F1 >= 64 and intent
->= 78, replicated. Program: study `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`
-(offline audits, then one-factor cells: review-off, exemplar grounding, sample-and-aggregate, USE
-projection, targeted ORG fixes; combine, replicate, confirm on DEV1000). TRAIN A direct score
-released as the anchor; the four-row slot-view proof declined for now. Stage 3 only after the lock.
+`docs/superpowers/plans/experiment-handoff/OWNER-FABLE-TAKEOVER-2026-09-16.md`). Base = the sealed
+dual-store anchor (TRAIN A SLU 48.53 / intent 77.96; DEV1000 +14.6 over direct, twice). Owner bar
+(2026-09-16): SLU-F1 >= 64 and intent >= 78, replicated. Program: study
+`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. Cells B0/B0r (review loop off,
+2026-09-17): nil effect but HARMFUL under the measured TRAIN A own null (SLU 1.12 / intent 1.01 pp);
+the loop stays; projection v3 adopted beside every official number. Next GPU cells on the anchor, one
+in flight: B1 exemplar supply -> B2 sample-and-aggregate -> B4b/B4a ORG stores; then combine,
+replicate, confirm on DEV1000. Stage 3 only after the lock.
 
 ## Formal, legacy and routing boundaries
 

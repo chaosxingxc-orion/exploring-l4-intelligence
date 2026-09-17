@@ -29,6 +29,11 @@ enter an experiment in this ledger.
   engineering in worktrees, then one-factor Phase B admission cells on TRAIN A 1,080, combination,
   same-roster replication and DEV1000 confirmation, then the v2 lock before any Stage 3 work). The
   Codex-era handoff v4 package remains the historical record of the 2026-09-09 to 2026-09-16 recovery.
+  Cells B0 and B0r (review loop off) flew 2026-09-17: nil effect, HARMFUL under the measured TRAIN A
+  own null (study `docs/results/2026-09-17-slurp-b0-review-off-redecision-v2.md`); the loop is
+  retained as a NEUTRAL module with a SLURP default plan, projection v3 is the fixed post-processing
+  of every official number (owner decisions 6-10 of 2026-09-17), and cells B1/B2/B4 re-register on
+  the anchor; GPU order B1 -> B2 -> B4b -> B4a -> B4c (conditional), one cell in flight.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the
