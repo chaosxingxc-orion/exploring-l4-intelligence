@@ -58,8 +58,17 @@ enter an experiment in this ledger.
   never assumed additive (B1 61.14 + B4b 2.55 = 63.69 official if additive, so B5e is expected to miss by
   a few tenths and route through decision 20); the serving wrapper, its monitor and every campaign run as
   Windows Scheduled Tasks with the battery and idle conditions disabled, AC sleep off. B5e's smoke passed;
-  its first arm attempt aborted at 25 contacts on a coordinator-caused task stop and re-flies as its one
-  recovery.
+  its first arm attempt aborted at 25 contacts on a coordinator-caused task stop and re-flew as its one
+  recovery. **B5e read 2026-09-18** (study `docs/results/2026-09-18-slurp-b5e-combination-verdict.md`):
+  official pooled SLU-F1 62.34 / intent 80.09 (v3 63.78 / 81.85): the intent bar clears, the SLU bar is
+  missed by 1.66 pp (v3 would not have cleared 64 either); B5e minus anchor +13.80 [+11.77, +15.80], minus
+  B1 +1.20 [-0.11, +2.48] with intent -0.09 [-1.51, +1.38], interaction -1.36 [-3.29, +0.56]; the
+  combination reads HARMFUL by the registered clause 3 on the intent CI95 lower bound alone (an
+  interval-width trigger: the own-null margin came from a request-identical replicate), so owner decision
+  25 (whether HARMFUL needs a real loss) is pending; B5er not registered; decision 20's path: B2 v3
+  (flying), the B4b replicate resume (E10, first use), B7a, B4a, then B5b. E10 (resume-recovery) merged
+  with E10b/E10c after the first resume attempt aborted with zero contacts on an artifact-identity
+  mismatch.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the

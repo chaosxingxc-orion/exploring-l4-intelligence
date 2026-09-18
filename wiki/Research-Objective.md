@@ -62,9 +62,9 @@ Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor
 `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. B0/B0r HARMFUL (loop retained);
 **B4b (slot store v2) ADMITTED +2.55 [+1.13, +3.98]**; **B1 (speech-keyed exemplars) SLU 61.14,
 +12.61 [+10.54, +14.60], intent 80.19, ADMITTED after its twin (B1 - twin +7.83 [+5.85, +9.75])**.
-Directive 11: node context policy (B7a-B7b). Order: B5e (M1+M4b, recovery flying) -> B5er -> v2.0
-lock -> B6 -> B4b replicate resume -> B2 v3, B7a, B4a, B7r/c/b as v2.1. Decision 22: every cell
-supports checkpoint resume (E10); 24: task-owned, no sleep.
+**B5e (M1+M4b) 62.34 / 80.09 official: bar NOT met (SLU -1.66); vs B1 +1.20 [-0.11, +2.48]; HARMFUL
+only by interval width (decision 25)**. NCP B7a-B7b. Decision-20 order: B2 v3 -> B4b resume (E10)
+-> B7a -> B4a -> B5b. Decisions 22/24: resume for every cell; task-owned.
 
 ## Formal, legacy and routing boundaries
 
