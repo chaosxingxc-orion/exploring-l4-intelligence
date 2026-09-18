@@ -56,15 +56,15 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Focus SLURP; E21 and Audio2Tool are held. Fable 5.1 coordinates from 2026-09-17 (takeover note in
-the study repo). Base = the sealed dual-store anchor (TRAIN A SLU 48.53 / intent 77.96). Owner bar:
-SLU-F1 >= 64 and intent >= 78, replicated. Program: study
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. 2026-09-17: B0/B0r HARMFUL (loop
-retained); **B4b (slot store v2) ADMITTED +2.55 [+1.13, +3.98]**; **B1 (speech-keyed exemplars) SLU
-61.14, +12.61 [+10.54, +14.60], intent 80.19, v3 62.67, ADMITTED 2026-09-18: B1 - twin +7.83
-[+5.85, +9.75]**. Directive 11: node context policy (study
-`docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, B7a-B7b). Decisions 18-21 order:
-B4b replicate -> B5e (M1+M4b) -> B5er -> v2.0 lock -> B6 -> B2 v3, B7a, B4a, B7r/c/b as v2.1.
+Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor
+(TRAIN A SLU 48.53 / intent 77.96). Bar: OFFICIAL SLU-F1 >= 64 and intent >= 78, replicated
+(decision 23: v3 beside, never the bar; gains never assumed additive). Program: study
+`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. B0/B0r HARMFUL (loop retained);
+**B4b (slot store v2) ADMITTED +2.55 [+1.13, +3.98]**; **B1 (speech-keyed exemplars) SLU 61.14,
++12.61 [+10.54, +14.60], intent 80.19, ADMITTED after its twin (B1 - twin +7.83 [+5.85, +9.75])**.
+Directive 11: node context policy (B7a-B7b). Order: B5e (M1+M4b, recovery flying) -> B5er -> v2.0
+lock -> B6 -> B4b replicate resume -> B2 v3, B7a, B4a, B7r/c/b as v2.1. Decision 22: every cell
+supports checkpoint resume (E10); 24: task-owned, no sleep.
 
 ## Formal, legacy and routing boundaries
 

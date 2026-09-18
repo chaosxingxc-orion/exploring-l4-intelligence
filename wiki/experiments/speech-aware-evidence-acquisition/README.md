@@ -50,7 +50,16 @@ enter an experiment in this ledger.
   (2026-09-18) make it bar-first: B4b replicate (flying) -> B5e (M1 + M4b, the early combination) -> B5er
   -> lock "SLURP base v2.0" -> B6 DEV1000 -> B2 v3, B7a, B4a, B4c, B7r, B7c, B7b as v2.1 admissions;
   the bar is never lowered on a B5e miss (B5b reads first). Both recovery smokes (B2 v3 on the E2d fix,
-  B7a on the E8c fix) passed structurally on 2026-09-18. B1 alone sits 1.33 pp (v3 terms) below the bar.
+  B7a on the E8c fix) passed structurally on 2026-09-18. Owner decisions 22-24 (2026-09-18): every
+  registered cell must support checkpoint resume (item E10: trace replay of the aborted attempt, kept rows
+  without selection, merged manifest with a declared predecessor; the B4b replicate, aborted at 577/1,080
+  rows when the inherited server died, is its first use); the program bar and every final evaluation read
+  the OFFICIAL unprojected SLURP evaluate.py number, projection v3 beside as a diagnostic, and gains are
+  never assumed additive (B1 61.14 + B4b 2.55 = 63.69 official if additive, so B5e is expected to miss by
+  a few tenths and route through decision 20); the serving wrapper, its monitor and every campaign run as
+  Windows Scheduled Tasks with the battery and idle conditions disabled, AC sleep off. B5e's smoke passed;
+  its first arm attempt aborted at 25 contacts on a coordinator-caused task stop and re-flies as its one
+  recovery.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the
