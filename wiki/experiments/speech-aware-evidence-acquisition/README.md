@@ -37,13 +37,20 @@ enter an experiment in this ledger.
   Results of 2026-09-17 (study `docs/results/`): **B4b (slot store v2) ADMITTED**, official SLU +2.55 pp
   CI95 [+1.13, +3.98], provisional until a same-roster replicate; **B1 (twenty speech-keyed TRAIN
   exemplars supplied to the Solver) SLU 48.53 -> 61.14, +12.61 pp CI95 [+10.54, +14.60]**, intent 80.19,
-  projection v3 62.67, symmetric 62.97, all 18 scenarios gaining, +27.25 over direct, ADMITTED pending its
-  derangement twin (flies next); its first attempt aborted on a Solver-revisit phase-supply refusal fixed
-  by E3c. Owner directive 11: one unified Node Context Policy before every agent node (audit
+  projection v3 62.67, symmetric 62.97, all 18 scenarios gaining, +27.25 over direct, **ADMITTED after the
+  derangement-twin read of 2026-09-18** (B1 minus twin +7.83 pp CI95 [+5.85, +9.75]; the twin alone +4.77
+  over the anchor with nil intent, so the speech key carries 62 % of the SLU gain and nearly all of the
+  intent gain; study `docs/results/2026-09-18-slurp-b1-twin-verdict.md`; harness-admission entry M1,
+  provisional until the combination pair replicates); its first attempt aborted on a Solver-revisit
+  phase-supply refusal fixed by E3c. Owner directive 11: one unified Node Context Policy before every agent node (audit
   `docs/results/2026-09-17-slurp-node-context-audit-v1.md`, design
-  `docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, E8a/E8b merged; B7a flying, B7r/B7c/B7b
-  registered). Owner decisions 12-17 fix the order B1 twin -> B2 v3 -> B7a -> B4b replicate -> B4a ->
-  B7r -> B7c -> B7b -> B5 -> B5r -> B6. The v2 base now sits within about 1.5 pp (v3 terms) of the bar.
+  `docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, E8a/E8b/E8c merged; B7a's first arm aborted on an illegal Planner action, its
+  recovery smoke passed, arm held; B7r/B7c/B7b registered). Owner decisions 12-17 fixed the order B1 twin
+  -> B2 v3 -> B7a -> B4b replicate -> B4a -> B7r -> B7c -> B7b -> B5 -> B5r -> B6; owner decisions 18-21
+  (2026-09-18) make it bar-first: B4b replicate (flying) -> B5e (M1 + M4b, the early combination) -> B5er
+  -> lock "SLURP base v2.0" -> B6 DEV1000 -> B2 v3, B7a, B4a, B4c, B7r, B7c, B7b as v2.1 admissions;
+  the bar is never lowered on a B5e miss (B5b reads first). Both recovery smokes (B2 v3 on the E2d fix,
+  B7a on the E8c fix) passed structurally on 2026-09-18. B1 alone sits 1.33 pp (v3 terms) below the bar.
 - **Current frontier, 2026-09-09:** owner-directed recovery after Fable5.1 exhausted its allowance.
   Codex recovered the completed Wave 9 integration, KU-S3 exact-arithmetic norm cache and Audio2Tool
   preprocessing fixes into the study's local `master`. The existing results ledger is the

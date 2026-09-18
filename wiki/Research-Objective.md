@@ -60,11 +60,11 @@ Focus SLURP; E21 and Audio2Tool are held. Fable 5.1 coordinates from 2026-09-17 
 the study repo). Base = the sealed dual-store anchor (TRAIN A SLU 48.53 / intent 77.96). Owner bar:
 SLU-F1 >= 64 and intent >= 78, replicated. Program: study
 `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. 2026-09-17: B0/B0r HARMFUL (loop
-retained); **B4b (slot store v2) ADMITTED, SLU +2.55 [+1.13, +3.98]**; **B1 (exemplar supply) SLU 48.53 ->
-61.14, +12.61 [+10.54, +14.60], intent 80.19, v3 62.67, ADMITTED pending its twin**.
-Directive 11: one unified node context policy (study
-`docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, cells B7a-B7b). GPU order:
-B1 -> B2 v3 -> B4a -> B7a -> B7r -> B7c -> B7b -> B5/B5r/B6; Stage 3 after the lock.
+retained); **B4b (slot store v2) ADMITTED +2.55 [+1.13, +3.98]**; **B1 (speech-keyed exemplars) SLU
+61.14, +12.61 [+10.54, +14.60], intent 80.19, v3 62.67, ADMITTED 2026-09-18: B1 - twin +7.83
+[+5.85, +9.75]**. Directive 11: node context policy (study
+`docs/superpowers/specs/2026-09-17-node-context-policy-design.md`, B7a-B7b). Decisions 18-21 order:
+B4b replicate -> B5e (M1+M4b) -> B5er -> v2.0 lock -> B6 -> B2 v3, B7a, B4a, B7r/c/b as v2.1.
 
 ## Formal, legacy and routing boundaries
 
