@@ -57,14 +57,14 @@ The evaluation contract has three inseparable parts:
 ## Next action
 
 Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor (TRAIN A 48.53 / 77.96).
-Decision 28 (2026-09-19): TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published
-TEST baselines nor extended to test; the one test read comes after Stage-3 training-free
-RL. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (decision 23). Program:
+Decision 28: TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published TEST
+baselines nor extended to test. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (decision 23). Program:
 `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. **B4b slot store v2 ADMITTED,
 REPLICATED +1.54**; **B1 exemplars 61.14 / 80.19 ADMITTED**; **B5e 62.34 / 80.09 NEUTRAL, bar not
 met**; B2 NEUTRAL; **B8a normaliser node ADMITTED (+3.46 / +1.53; default plan)**. B7a v1 CLOSED
 (512-token Reviewer completion, default finite-completion policy; E13 gate PASS); v2 arm
-in flight. Order: B7r -> B8b -> B4a -> B8c (E14) -> B5b.
+in flight. Order: B7r -> B8b -> B4a -> B8c (E14) -> B5b per node (31) -> B6 DEV-2000 (34) -> lock
+on 64/78 replicated or headroom exhausted (30) -> base lock doc (33) -> Stage 3; one test read after (29).
 
 ## Formal, legacy and routing boundaries
 
@@ -73,13 +73,11 @@ Carriers bind stages (Decision-Log continuation entry 91): Stage‑1 = umbrella;
 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`. One papers carrier is admitted:
 **`papers/meeting-minutes-agent/`** (owner GO 2026-08-17; from-scratch object; private remote).
 The Stage‑1B program-level Lean layer is retired; formal work is rebuilt per admitted study and
-claim in Stage‑2; the fixed Stage‑1B v5 320-work union stays historical evidence and H5 stays
-`WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not engineering identities;
+claim in Stage‑2; the Stage‑1B v5 union is historical evidence; H5 stays `WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not engineering identities;
 admitted repos live at `studies/<semantic-name>/`. R2R1 remains
-`RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`. Literature work is a bounded delta lane
-through `wiki/survey/README.md`; retired:
-`wiki/archive/working/system-first-survey-current/`. It reopens Stage‑1 only if new evidence
-invalidates the problem, carrier legality, information boundary or reproducibility contract.
+`RETIRED_WITHOUT_DISTRIBUTION_OR_INDEPENDENT_ACCEPTANCE`. Literature work is a bounded delta lane through
+`wiki/survey/README.md`; Stage‑1 reopens only if new evidence invalidates the problem, carrier
+legality, information boundary or reproducibility contract.
 
 ## Supersession rule
 
