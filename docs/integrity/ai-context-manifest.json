@@ -13,7 +13,7 @@
       "class": "HOT",
       "load_policy": "default",
       "purpose": "single current research-state entry",
-      "sha256": "b3a5ced50982fe2e24bd47b48bd2b5bb6c6a823d9a91384db78c5f13bc6061b8"
+      "sha256": "b4a0ccd6d0fcf3bd031c9bc9e38edc7881536bce0f44c6988662fa96db61ba62"
     },
     {
       "path": "wiki/Project-Thesis.md",

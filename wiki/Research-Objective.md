@@ -60,11 +60,10 @@ Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor (TRAIN
 Decision 28: TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published TEST
 baselines. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (23). Program:
 `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. ADMITTED: B4b slot store v2
-(replicated +1.54), B1 exemplars (61.14 / 80.19), B8a normaliser node (default plan). NEUTRAL: B2,
+(replicated +1.54), B1 exemplars (61.14 / 80.19; B1r 62.23 REPLICATED, null 1.24/1.22), B8a normaliser node (default plan). NEUTRAL: B2,
 B5e (62.34 / 80.09, bar not met). HARMFUL: B0/B0r, B7a v2 (L1 family closed, 32), B4a v2 (streak
 2 of 3, decision 30), **EFF-1 constant tool rendering (GPU-h halved; 137 rows deliver tool-call
-strings, -9.17 intent; repair = decode ban or withdraw the Reviewer's tool, owner)**. Flying: B1r
-(37). Then B8b-anchor -> index cell + twin (48, 50; after the repair) -> B9a (44) -> B5b (31) ->
+strings; repair 0-A / 0-B, owner)**. Then B8b-anchor (aborted; E22 + E10 resume) -> index cell + twin (48, 50; after the repair) -> B9a (44) -> B5b (31) ->
 B6 (34) -> lock (30) -> base lock (42-43) -> Stage 3; one test read after (29).
 
 ## Formal, legacy and routing boundaries
