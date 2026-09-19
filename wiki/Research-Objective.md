@@ -58,20 +58,21 @@ The evaluation contract has three inseparable parts:
 
 Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor (TRAIN A 48.53 / 77.96).
 Decision 28: TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published TEST
-baselines nor extended to test. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (decision 23). Program:
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. **B4b slot store v2 ADMITTED,
-REPLICATED +1.54**; **B1 exemplars 61.14 / 80.19 ADMITTED**; **B5e 62.34 / 80.09 NEUTRAL, bar not
-met**; B2 NEUTRAL; **B8a normaliser node ADMITTED (+3.46 / +1.53; default plan)**. B7a v1 CLOSED
-(512-token Reviewer completion, default finite-completion policy; E13 gate PASS); v2 arm
-in flight. Order: B7r -> B8b -> B4a -> B8c (E14) -> B5b per node (31) -> B6 DEV-2000 (34) -> lock
-on 64/78 replicated or headroom exhausted (30) -> base lock doc (33) -> Stage 3; one test read after (29).
+baselines. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (23). Program:
+`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. ADMITTED: B4b slot store v2
+(replicated +1.54), B1 exemplars (61.14 / 80.19), B8a normaliser node (+3.46 / +1.53, default plan).
+NEUTRAL: B2, B5e (62.34 / 80.09, bar not met). HARMFUL: B0/B0r, **B7a v2 NCP L1 (by width; +11.6 %
+GPU-h for nothing; L1 family closed, 32)**. Throughput (41): prefill-bound; the Reviewer-only tools
+block breaks the prefix cache; fix E17, cell EFF-1. Order: B4a -> EFF-1 -> B1 replicate
+(37) -> B8b on the anchor -> B8c -> B9a acquisition (44) -> B5b per node (31) -> B6 DEV-2000 (34) ->
+lock (30) -> base lock (42-43) -> Stage 3; one test read after (29).
 
 ## Formal, legacy and routing boundaries
 
-Carriers bind stages (Decision-Log continuation entry 91): Stage‑1 = umbrella; Stage‑2 =
+Carriers bind stages (Decision-Log entry 91): Stage‑1 = umbrella; Stage‑2 =
 `studies/<slug>`, endpoint = qualified paper candidates; Stage‑3 = `papers/<slug>` under
 `OWNER_GO_AND_PAPER_EXECUTION_CONTRACT`. One papers carrier is admitted:
-**`papers/meeting-minutes-agent/`** (owner GO 2026-08-17; from-scratch object; private remote).
+**`papers/meeting-minutes-agent/`** (owner GO 2026-08-17; private remote).
 The Stage‑1B program-level Lean layer is retired; formal work is rebuilt per admitted study and
 claim in Stage‑2; the Stage‑1B v5 union is historical evidence; H5 stays `WITHHOLD_NON_LOAD_BEARING`. Candidate IDs are audit provenance, not engineering identities;
 admitted repos live at `studies/<semantic-name>/`. R2R1 remains
