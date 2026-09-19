@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-09-17"
+last_refresh: "2026-09-19"
 ---
 
 # Research Objective & Current State
@@ -56,16 +56,15 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor
-(TRAIN A SLU 48.53 / intent 77.96). Bar: OFFICIAL SLU-F1 >= 64 and intent >= 78, replicated
-(decision 23: official number; no additivity). Program: study
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. B0/B0r HARMFUL;
-**B4b (slot store v2) ADMITTED +2.55, REPLICATED +1.54 [+0.30, +2.93]; default plan pins v2**;
-**B1 (speech-keyed exemplars) 61.14 / 80.19, +12.61, ADMITTED (twin +7.83)**; **B5e (M1+M4b)
-62.34 / 80.09: bar NOT met; NEUTRAL (decision 25)**; B2 v3 NEUTRAL. B7a v1 CLOSED (2nd abort: a
-512-token Reviewer completion under the default finite-completion policy; fix =
-`deliver-latest-or-abstain` + E13 gate), v2 registered. Order: B8a read -> B7a v2 -> B7r -> B8b
--> B4a -> B8c -> B5b. Decisions 22/24 in force.
+Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor (TRAIN A 48.53 / 77.96).
+Decision 28 (2026-09-19): TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published
+TEST baselines nor extended to test; the one test read comes after Stage-3 training-free
+RL. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (decision 23). Program:
+`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. **B4b slot store v2 ADMITTED,
+REPLICATED +1.54**; **B1 exemplars 61.14 / 80.19 ADMITTED**; **B5e 62.34 / 80.09 NEUTRAL, bar not
+met**; B2 NEUTRAL; **B8a normaliser node ADMITTED (+3.46 / +1.53; default plan)**. B7a v1 CLOSED
+(512-token Reviewer completion, default finite-completion policy; E13 gate PASS); v2 arm
+in flight. Order: B7r -> B8b -> B4a -> B8c (E14) -> B5b.
 
 ## Formal, legacy and routing boundaries
 
