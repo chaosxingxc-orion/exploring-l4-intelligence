@@ -58,13 +58,14 @@ The evaluation contract has three inseparable parts:
 
 Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor
 (TRAIN A SLU 48.53 / intent 77.96). Bar: OFFICIAL SLU-F1 >= 64 and intent >= 78, replicated
-(decision 23: v3 beside, never the bar; gains never assumed additive). Program: study
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. B0/B0r HARMFUL (loop retained);
-**B4b (slot store v2) ADMITTED +2.55 [+1.13, +3.98]**; **B1 (speech-keyed exemplars) SLU 61.14,
-+12.61 [+10.54, +14.60], intent 80.19, ADMITTED after its twin (B1 - twin +7.83 [+5.85, +9.75])**.
-**B5e (M1+M4b) 62.34 / 80.09 official: bar NOT met (SLU -1.66); vs B1 +1.20 [-0.11, +2.48]; HARMFUL
-only by interval width (decision 25)**. NCP B7a-B7b. Decision-20 order: B2 v3 -> B4b resume (E10)
--> B7a -> B4a -> B5b. Decisions 22/24: resume for every cell; task-owned.
+(decision 23: official number; no additivity). Program: study
+`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. B0/B0r HARMFUL;
+**B4b (slot store v2) ADMITTED +2.55, REPLICATED +1.54 [+0.30, +2.93]; default plan pins v2**;
+**B1 (speech-keyed exemplars) 61.14 / 80.19, +12.61, ADMITTED (twin +7.83)**; **B5e (M1+M4b)
+62.34 / 80.09: bar NOT met; NEUTRAL (decision 25)**; B2 v3 NEUTRAL. B7a v1 CLOSED (2nd abort: a
+512-token Reviewer completion under the default finite-completion policy; fix =
+`deliver-latest-or-abstain` + E13 gate), v2 registered. Order: B8a read -> B7a v2 -> B7r -> B8b
+-> B4a -> B8c -> B5b. Decisions 22/24 in force.
 
 ## Formal, legacy and routing boundaries
 
