@@ -62,9 +62,10 @@ baselines. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (23). Progra
 `docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. ADMITTED: B4b slot store v2
 (replicated +1.54), B1 exemplars (61.14 / 80.19; B1r 62.23 REPLICATED, null 1.24/1.22), B8a normaliser node (default plan). NEUTRAL: B2,
 B5e (62.34 / 80.09, bar not met). HARMFUL: B0/B0r, B7a v2 (L1 family closed, 32), B4a v2 (streak
-2 of 3, decision 30), **EFF-1 constant tool rendering (GPU-h halved; 137 rows deliver tool-call
-strings; repair 0-A / 0-B, owner)**. B8b NEUTRAL; v2.0 PROVISIONAL lock (30/57). 0-B on B1 flying + twin (48, 50; after the repair) -> B9a (44) -> B5b (31) ->
-B6 (34) -> lock (30) -> base lock (42-43) -> Stage 3; one test read after (29).
+2 of 3, decision 30), EFF-1 (137 rows emit tool-call strings). B8b NEUTRAL; v2.0 PROVISIONAL
+lock (30/57). **Reviewer tool RETIRED (B1-notool NEUTRAL, prefill -69 %, GPU-h 0.42x) = base;
+next: index cell + twin (48, 50, 53)** -> B9a (44) -> B5b (31) -> B6 (34) -> lock (30) -> base
+lock (42-43) -> Stage 3; one test read after (29).
 
 ## Formal, legacy and routing boundaries
 
