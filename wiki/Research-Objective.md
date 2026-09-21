@@ -63,9 +63,9 @@ baselines. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (23). Progra
 (replicated +1.54), B1 exemplars (61.14 / 80.19; B1r 62.23 REPLICATED, null 1.24/1.22), B8a normaliser node (default plan). NEUTRAL: B2,
 B5e (62.34 / 80.09, bar not met). HARMFUL: B0/B0r, B7a v2 (L1 family closed, 32), B4a v2 (streak
 2 of 3, decision 30), EFF-1 (137 rows emit tool-call strings). B8b NEUTRAL; v2.0 PROVISIONAL
-lock (30/57). Reviewer tool RETIRED = base (B1-notool). **Index IDX HARMFUL (SLU -7.4; twin -10.0
-= form loss; MISLEADING TERSENESS); form closed, next = owner (72)** -> G2 -> node reads (51) ->
-B9a (44) -> B5b (31) -> B6 (34) -> lock (30) -> base lock (42-43) -> Stage 3 (70).
+lock (30/57). Reviewer tool RETIRED = base. **Index IDX HARMFUL (SLU -7.4; twin -10.0 = form
+loss); closed; next form = owner (72)** -> G2 -> node reads (51) -> B9a -> B5b -> B6 -> lock (30)
+-> base lock (42-43) -> Stage 3.
 
 ## Formal, legacy and routing boundaries
 
