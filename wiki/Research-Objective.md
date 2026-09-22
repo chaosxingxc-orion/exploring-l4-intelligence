@@ -60,11 +60,13 @@ Focus SLURP; E21 and Audio2Tool are generalisation carriers only (76). Decisions
 DEV numbers are DEVELOPMENT numbers, no dev bar; 64 / 78 are TEST targets read once after Stage 3.
 **v2.0 LOCKED 2026-09-22** on the default plan as flown (PLAN 63.63 / 82.22; PLANr 63.80 / 82.50
 REPLICATED; own null 1.25 / 0.99): M1 exemplars + M4b slot store v2 + M3 normaliser node, Reviewer
-tool RETIRED, np4 (record `docs/results/2026-09-22-slurp-v2-lock-v1.md`). HARMFUL: B0, B7a v2,
-B4a v2, EFF-1, IDX/IDXT (index form closed, 72). Seal path (78): B9a-rec (E36 fixed the
-acquisition binding) -> B6 DEV-2000 direct vs plan (88) -> base lock v3 (42-43) -> Stage 3
-(training-free RL over knowledge content and context dimensions, spec 2026-09-21; primitive
-Reviewer verdict E37 (84); pruning cells (85)). E35 Earnings on FlightRuntime in progress (89).
+tool RETIRED, np4 (`docs/results/2026-09-22-slurp-v2-lock-v1.md`). **Seal path (78) complete**:
+B9a-rec = the Acquisition node flew but is INERT (18 ACQUIRE routes, 0 items; E36 binding empty by
+construction; repair E36b awaits the owner); B6 = the locked plan vs the bare core on fresh
+DEV-2000-ADDED: SLU 38.09 -> 65.40 (+27.3 [+24.0, +30.5]), intent 61.7 -> 76.6 (+14.9). HARMFUL:
+B0, B7a v2, B4a v2, EFF-1, IDX/IDXT. Next: owner decisions on E36b (B9a v2) and the E35 Earnings
+flights (serving switch); then base lock v3 (42-43) and Stage 3 (training-free RL spec 2026-09-21;
+primitive Reviewer verdict E37 (84); pruning cells (85)).
 
 ## Formal, legacy and routing boundaries
 
