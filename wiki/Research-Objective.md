@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-09-19"
+last_refresh: "2026-09-22"
 ---
 
 # Research Objective & Current State
@@ -56,16 +56,15 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Focus SLURP; E21 and Audio2Tool held. Base = the sealed dual-store anchor (TRAIN A 48.53 / 77.96).
-Decision 28: TRAIN A / DEV numbers are DEVELOPMENT numbers, never compared with published TEST
-baselines. Dev bar: official SLU-F1 >= 64, intent >= 78, replicated (23). Program:
-`docs/superpowers/specs/2026-09-16-slurp-v2-base-program-design.md`. ADMITTED: B4b slot store v2
-(replicated +1.54), B1 exemplars (61.14 / 80.19; B1r 62.23 REPLICATED, null 1.24/1.22), B8a normaliser node (default plan). NEUTRAL: B2,
-B5e (62.34 / 80.09, bar not met). HARMFUL: B0/B0r, B7a v2 (L1 family closed, 32), B4a v2 (streak
-2 of 3, decision 30), EFF-1 (137 rows emit tool-call strings). B8b NEUTRAL; v2.0 PROVISIONAL
-lock (30/57). Reviewer tool RETIRED = base. **Index IDX HARMFUL (SLU -7.4; twin -10.0 = form
-loss); closed; next form = owner (72)** -> G2 -> node reads (51) -> B9a -> B5b -> B6 -> lock (30)
--> base lock (42-43) -> Stage 3.
+Focus SLURP; E21 and Audio2Tool are generalisation carriers only (76). Decisions 28/86: TRAIN A /
+DEV numbers are DEVELOPMENT numbers, no dev bar; 64 / 78 are TEST targets read once after Stage 3.
+**v2.0 LOCKED 2026-09-22** on the default plan as flown (PLAN 63.63 / 82.22; PLANr 63.80 / 82.50
+REPLICATED; own null 1.25 / 0.99): M1 exemplars + M4b slot store v2 + M3 normaliser node, Reviewer
+tool RETIRED, np4 (record `docs/results/2026-09-22-slurp-v2-lock-v1.md`). HARMFUL: B0, B7a v2,
+B4a v2, EFF-1, IDX/IDXT (index form closed, 72). Seal path (78): B9a-rec (E36 fixed the
+acquisition binding) -> B6 DEV-2000 direct vs plan (88) -> base lock v3 (42-43) -> Stage 3
+(training-free RL over knowledge content and context dimensions, spec 2026-09-21; primitive
+Reviewer verdict E37 (84); pruning cells (85)). E35 Earnings on FlightRuntime in progress (89).
 
 ## Formal, legacy and routing boundaries
 
