@@ -56,15 +56,17 @@ The evaluation contract has three inseparable parts:
 
 ## Next action
 
-Focus SLURP; E21 and Audio2Tool are generalisation carriers only (76). Decisions 28/86: TRAIN A /
-DEV numbers are DEVELOPMENT numbers, no dev bar; 64 / 78 are TEST targets read once after Stage 3.
-**v2.0 LOCKED 2026-09-22** on the default plan as flown (PLAN 63.63 / 82.22; PLANr replicated; own
-null 1.25 / 0.99): M1 exemplars + M4b slot store v2 + M3 normaliser node, Reviewer tool RETIRED, np4
-(`docs/results/2026-09-22-slurp-v2-lock-v1.md`). **Seal path (78) complete**: B9a-rec = the
-Acquisition node flew but is INERT (18 ACQUIRE routes, 0 items; repair E36b awaits the owner); B6 =
-locked plan vs bare core on fresh DEV-2000-ADDED: SLU 38.09 -> 65.40 (+27.3), intent 61.7 -> 76.6
-(+14.9). Next: owner decisions on E36b (B9a v2) and
-the E35 Earnings flights (serving switch); then base lock v3 (42-43) and Stage 3 (spec 2026-09-21; E37 primitive verdict (84); pruning cells (85)).
+SLURP first; E21 / Audio2Tool generalise (76). TRAIN A / DEV numbers are development numbers
+(28/86); **decision 99: the Stage-3 gain is locked on TRAIN (CI95 lower bound
+> 0, replicated) and validated by the one-shot COMPLETE official test-split read beside the
+published SLURP ladder**. **v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3
+recorded 2026-09-22**: plan vs bare core on fresh
+DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; the
+six-node form as flown harms WER through one harness defect, E13 voiding 76/342 windows -> item
+E39, base lock v3.1 after a four-row dry run). **Stage 3 open** (80-85, 93-101):
+TF-RL algorithm registry + label gate (101), roster R01 (800), ROLL-1 held on its preparations,
+S3-3 dry run 367/1,080 rows disagree; queue A (100): R-PRIM (E37) flying -> R01 encoding ->
+ROLL-1 -> pruning x2 -> ADV-1 -> CELL-1 (TF-GRPO), then GEPA / ACE arms.
 
 ## Formal, legacy and routing boundaries
 
