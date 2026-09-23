@@ -64,9 +64,10 @@ recorded 2026-09-22**: plan vs bare core on fresh
 DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; the
 six-node form as flown harms WER through one harness defect, E13 voiding 76/342 windows -> item
 E39, base lock v3.1 after a four-row dry run). **Stage 3 open** (80-85, 93-101):
-TF-RL algorithm registry + label gate (101), roster R01 (800), ROLL-1 held on its preparations,
-S3-3 dry run 367/1,080 rows disagree; queue A (100): R-PRIM (E37) flying -> R01 encoding ->
-ROLL-1 -> pruning x2 -> ADV-1 -> CELL-1 (TF-GRPO), then GEPA / ACE arms.
+TF-RL algorithm registry + label gate (101); R-PRIM NEUTRAL by width (parse 100 %), pruning P1 / P0
+NEUTRAL by width (review loop kept, line closed); roster R01 narrowed to the clean subset R01C (625 rows,
+decision 102 provisional: knowledge-source rows leave); **ROLL-1 flying** (grouped-Solver N = 5) ->
+S3-3 pairs -> ADV-1 -> CELL-1 (TF-GRPO), then GEPA / ACE arms; E39b dry run sealed (read pending).
 
 ## Formal, legacy and routing boundaries
 
