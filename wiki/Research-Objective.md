@@ -57,17 +57,15 @@ The evaluation contract has three inseparable parts:
 ## Next action
 
 SLURP first; E21 / Audio2Tool generalise (76). TRAIN A / DEV numbers are development numbers
-(28/86); **decision 99: the Stage-3 gain is locked on TRAIN (CI95 lower bound
-> 0, replicated) and validated by the one-shot COMPLETE official test-split read beside the
-published SLURP ladder**. **v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3
-recorded 2026-09-22**: plan vs bare core on fresh
-DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; the
-six-node form as flown harms WER through one harness defect, E13 voiding 76/342 windows -> item
-E39, base lock v3.1 after a four-row dry run). **Stage 3 open** (80-85, 93-101):
-TF-RL algorithm registry + label gate (101); R-PRIM NEUTRAL by width (parse 100 %), pruning P1 / P0
-NEUTRAL by width (review loop kept, line closed); roster R01 narrowed to the clean subset R01C (625 rows,
-decision 102 provisional: knowledge-source rows leave); **ROLL-1 flying** (grouped-Solver N = 5) ->
-S3-3 pairs -> ADV-1 -> CELL-1 (TF-GRPO), then GEPA / ACE arms; E39b dry run sealed (read pending).
+(28/86); **decision 99: the Stage-3 gain is locked on TRAIN (CI95 lower bound > 0, replicated) and
+validated by the one-shot COMPLETE official test-split read beside the published SLURP ladder**.
+**v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3 recorded 2026-09-22**: plan vs bare
+core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural
+PASS; the six-node form as flown harms WER through one harness defect, E13 voiding 76/342 windows ->
+items E39 / E39b, base lock v3.1). **Stage 3 open** (80-85, 93-102): TF-RL registry + label gate
+(101); R-PRIM, P1, P0 NEUTRAL by width (review loop kept); roster narrowed to the clean subset R01C
+(625 rows, decision 102 provisional); **ROLL-1 flying** -> S3-3 pairs -> ADV-1 -> CELL-1 (TF-GRPO),
+then GEPA / ACE arms; E39b dry run sealed.
 
 ## Formal, legacy and routing boundaries
 
