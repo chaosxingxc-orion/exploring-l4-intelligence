@@ -60,7 +60,7 @@ SLURP first; E21 / Audio2Tool generalise (76). TRAIN A / DEV numbers are develop
 (28/86); **decision 99: the Stage-3 gain is locked on TRAIN (CI95 lower bound > 0, replicated) and
 validated by the one-shot COMPLETE official test-split read beside the published SLURP ladder**.
 **v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3 recorded 2026-09-22**: plan vs bare
-core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; E13 voiding 76/342 windows harms WER -> E39 / E39b, base lock v3.1). **Stage 3 open** (80-109), TRAIN A: CELL-1 (deltas v1r) NEUTRAL (SLU -0.48, intent -0.74); CELL-2 (retention) NEUTRAL by width (SLU +0.64 [-0.76, +1.92], intent -0.09; twin +0.05 / -0.93); CELL-1-GEPA (2nd family) NEUTRAL (SLU -0.04, intent -0.09); CELL-3 (gated v2, fresh DEV-2000-ADDED) HARMFUL (SLU -1.44; twin +0.38 = content loss); delta line CLOSED (111); next = variant rollouts + aggregation (112).
+core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; E13 voiding 76/342 windows harms WER -> E39 / E39b, base lock v3.1). **Stage 3 open** (80-109), TRAIN A: CELL-1 (v1r) NEUTRAL (SLU -0.48); CELL-2 (retention) NEUTRAL by width (SLU +0.64 [-0.76, +1.92], intent -0.09; twin +0.05 / -0.93); CELL-1-GEPA NEUTRAL (SLU -0.04); CELL-3 (gated v2, fresh DEV-2000-ADDED) HARMFUL (SLU -1.44; twin +0.38 = content loss); delta line CLOSED (111); next = variant rollouts + aggregation (112).
 
 ## Formal, legacy and routing boundaries
 
