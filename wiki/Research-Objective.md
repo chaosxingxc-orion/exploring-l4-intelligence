@@ -1,7 +1,7 @@
 ---
 title: "Research Objective & Current State"
 role: "HOT single current-state entry; supersede in place"
-last_refresh: "2026-09-22"
+last_refresh: "2026-09-24"
 ---
 
 # Research Objective & Current State
@@ -62,10 +62,7 @@ validated by the one-shot COMPLETE official test-split read beside the published
 **v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3 recorded 2026-09-22**: plan vs bare
 core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural
 PASS; the six-node form as flown harms WER through one harness defect, E13 voiding 76/342 windows ->
-items E39 / E39b, base lock v3.1). **Stage 3 open** (80-85, 93-102): TF-RL registry + label gate
-(101); R-PRIM, P1, P0 NEUTRAL by width (review loop kept); roster narrowed to the clean subset R01C
-(625 rows, decision 102 provisional); **ROLL-1 flying** -> S3-3 pairs -> ADV-1 -> CELL-1 (TF-GRPO),
-then GEPA / ACE arms; E39b dry run sealed.
+items E39 / E39b, base lock v3.1). **Stage 3 open** (80-109): TF-RL registry + label gate; R-PRIM / P1 / P0 NEUTRAL; first TF-GRPO loop CLOSED 2026-09-23 (ROLL-1 -> ADV-1 -> stage3-deltas-v1r -> CELL-1 + twin, TRAIN A): **NEUTRAL, no gain** (SLU -0.48 [-2.18, +1.24], intent -0.74 [-2.17, +0.57] vs PLAN); iteration 2 by decision 83 prepared; DEV remainder and TEST-FULL preparations ready (108 pending); next = decision 110 (CELL-2 / GEPA).
 
 ## Formal, legacy and routing boundaries
 
