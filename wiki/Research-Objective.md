@@ -60,7 +60,7 @@ SLURP first; E21 / Audio2Tool generalise (76). TRAIN A / DEV numbers are develop
 (28/86); **decision 99: the Stage-3 gain is locked on TRAIN (CI95 lower bound > 0, replicated) and
 validated by the one-shot COMPLETE official test-split read beside the published SLURP ladder**.
 **v2.0 LOCKED** (PLAN 63.63 / 82.22, replicated); **base lock v3 recorded 2026-09-22**: plan vs bare
-core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; E13 voiding 76/342 windows harms WER -> E39 / E39b, base lock v3.1). **Stage 3 open** (80-109), TRAIN A: CELL-1 (deltas v1r) NEUTRAL (SLU -0.48, intent -0.74); CELL-2 (decision-83 retention) NEUTRAL by width 2026-09-24 (SLU +0.64 [-0.76, +1.92], intent -0.09 [-1.22, +0.96]; twin +0.05 / -0.93; `general` -10.6); GEPA store released, CELL-1-GEPA flying; DEV/TEST prep ready (108 pending); next = GEPA read, decision 110 (iteration 3 targets `general`).
+core on fresh DEV-2000-ADDED +27.3 SLU / +14.9 intent; Earnings joined FlightRuntime (E35 structural PASS; E13 voiding 76/342 windows harms WER -> E39 / E39b, base lock v3.1). **Stage 3 open** (80-109), TRAIN A: CELL-1 (deltas v1r) NEUTRAL (SLU -0.48, intent -0.74); CELL-2 (decision-83 retention) NEUTRAL by width 2026-09-24 (SLU +0.64 [-0.76, +1.92], intent -0.09 [-1.22, +0.96]; twin +0.05 / -0.93; `general` -10.6); GEPA store released, CELL-1-GEPA flying; DEV/TEST prep ready (108 pending); next = GEPA read, decision 110 (iteration 3: `general`).
 
 ## Formal, legacy and routing boundaries
 
