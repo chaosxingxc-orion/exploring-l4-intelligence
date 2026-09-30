@@ -46,6 +46,17 @@
   },
   "amendments": [
     {
+      "date": "2026-09-29",
+      "task": "Owner decision 201 (option A, 2026-09-29: the research direction is now to build the system and optimise it at system level; tools such as a pinned ASR are legitimate system components under the unchanged boundary: the frozen core keeps final answer authority, tools are pinned and logged, gold never enters runtime) with coordinator ruling Q3: register the study-pinned openai-whisper large-v3 .pt checkpoint before E5-0 runs. Registration only: no download, no copy, no model load and no forward; the bytes already exist on WSL ext4 from the 2026-09-12 acquisition.",
+      "changes": [
+        {
+          "kind": "asset-registration",
+          "note": "whisper-large-v3-openai-pt registered in the speech-aware-tools profile (lifecycle AUXILIARY, kind model, source direct): large-v3.pt, 3,087,371,615 B, sha256 e5b1a55b89c1367dacf97e3e19bfd829a01529dbfdeefa8caeb59b3f1b81dadb, equal to the sha256 embedded in the official openaipublic URL and re-hashed 2026-09-29. local_subdir models/whisper-large-v3-openai-pt is a WSL directory symlink to the one ext4 working copy (data no-duplication rule: no second copy).",
+          "entries": ["whisper-large-v3-openai-pt"]
+        }
+      ]
+    },
+    {
       "date": "2026-09-06",
       "task": "Owner-authorized acquisition of OpenAI Whisper large-v3 in transformers format as a pinned frozen TOOL model for the speech-aware-evidence-acquisition study. Purpose: the Earnings-22 dev self-run anchor SAEA-E22-DEV-WHISPER-ANCHOR-V1, a tool-model reference run under the Open ASR leaderboard protocol (transformers inference, Whisper English text normalizer on both sides) that replaces a cross-paper quoted number with one measured on the study's own rows. Register-then-fetch; zero cost; ungated apache-2.0 source; no corpus audio, no transcription, no GPU and no frozen-core contact.",
       "changes": [
@@ -1173,6 +1184,59 @@
       "research_role": "Frozen tool-level ASR reference model for the speech-aware-evidence-acquisition study: it produces the study's own Earnings-22 dev anchor transcripts under the Open ASR leaderboard protocol so leaderboard-comparable WER can be measured in-house. It is never a frozen-core component, never an answering model, and never part of any OBS/ORG/SUPPLY/USE control path.",
       "claim_limit": "Anchor use only. Any run of this model on study corpus audio requires its own exposure-ledger row in the study repository before the result is read, and the split discipline is unchanged: the anchor is measured on Earnings-22 dev, never on a confirmatory split. Numbers produced by this tool are a locally measured reference, not a published baseline; the frozen Qwen3-Omni core keeps all answer authority.",
       "acquisition_receipt": "docs/checks/speech-aware-evidence-acquisition/2026-09-06-whisper-acquisition/README.md"
+    },
+    {
+      "name": "whisper-large-v3-openai-pt",
+      "kind": "model",
+      "local_subdir": "models/whisper-large-v3-openai-pt",
+      "source": {
+        "kind": "direct",
+        "id": "openai-whisper 20250625 _MODELS['large-v3'] (official content-addressed checkpoint URL)",
+        "files": [
+          {
+            "filename": "large-v3.pt",
+            "url": "https://openaipublic.azureedge.net/main/whisper/models/e5b1a55b89c1367dacf97e3e19bfd829a01529dbfdeefa8caeb59b3f1b81dadb/large-v3.pt",
+            "size_bytes": 3087371615,
+            "sha256": "e5b1a55b89c1367dacf97e3e19bfd829a01529dbfdeefa8caeb59b3f1b81dadb"
+          }
+        ]
+      },
+      "revision": "checkpoint large-v3.pt sha256 e5b1a55b89c1367dacf97e3e19bfd829a01529dbfdeefa8caeb59b3f1b81dadb (the sha256 embedded in the official openai-whisper 20250625 download URL; the checkpoint is content-addressed and has no Git revision)",
+      "lifecycle": "AUXILIARY",
+      "profiles": ["speech-aware-tools"],
+      "status": "COMPLETE",
+      "license": "MIT (openai/whisper code and model weights)",
+      "verification": {
+        "observed_at": "2026-09-29",
+        "resolved_revision": "e5b1a55b89c1367dacf97e3e19bfd829a01529dbfdeefa8caeb59b3f1b81dadb",
+        "payload_files": 1,
+        "payload_size_bytes": 3087371615,
+        "files_missing": 0,
+        "size_mismatches": 0,
+        "sha256_failures": 0,
+        "byte_closure": true,
+        "gated": false,
+        "method": "Downloaded 2026-09-12 by the study's local speech-tool acquisition (model-free-check profile) from the official openaipublic URL; its sha256 equals the sha256 embedded in that URL (study receipt /home/chao/speech-tools/whisper-vad/receipts/acquisition-complete-v1.json, sha256 68e6326bdd5ff6f8a30bfa26ace731d6a3f72b44a3da17e8eab59d25f9df95dd). Re-hashed 2026-09-29 in WSL with sha256sum at registration: match. The study's verify_whisper_inventory re-verified the checkpoint, all 18 patched-source and asset files and the 12 package versions of the recovery runtime inventory the same day (no model load, no forward).",
+        "receipt": "studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-12-slurp-whisper-recovery-v1/runtime-inventory.json (sha256 79c79469975a8c014f6fc1b94bb3ab439f9e0cdc877c11378ec33d37170dc697)",
+        "disposition": "complete pinned tool model; one working copy on WSL ext4, reached from the data root through a WSL directory symlink (no duplicate bytes); every study run on corpus audio stays gated behind its own exposure-ledger row in the study repository"
+      },
+      "deployment_runtime": {
+        "runtime": "openai-whisper 20250625 with the study's batched-beam source repair saea-beam-batch-v1 (decoding policy unchanged) in the CUDA venv ~/.venvs/saea-whisper-gpu (torch 2.9.1, triton 3.5.1); the CPU fallback uses the same venv with device cpu and fp16 false",
+        "checkpoint_path": "/home/chao/speech-tools/whisper-vad/models/whisper/large-v3.pt",
+        "local_subdir_binding": "models/whisper-large-v3-openai-pt is a WSL symlink to /home/chao/speech-tools/whisper-vad/models/whisper (created 2026-09-29); resolve it in WSL, native Windows tools cannot follow LX symlinks",
+        "whisper_source_path": "/home/chao/speech-tools/whisper-vad/sources/openai_whisper-20250625-saea-beam-batch-v1",
+        "source_patch": "studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-12-slurp-whisper-recovery-v1/whisper-batched-beam.patch (sha256 5856e1202effcc8a9a7434658a633970e159a071d07cb8ce2df179a1787e6c2f)",
+        "runtime_inventory": "studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-12-slurp-whisper-recovery-v1/runtime-inventory.json (sha256 79c79469975a8c014f6fc1b94bb3ab439f9e0cdc877c11378ec33d37170dc697)"
+      },
+      "size_h": "2.9G",
+      "size_bytes": 3087371615,
+      "files": 1,
+      "task": "automatic-speech-recognition",
+      "factor_family": "tool-model",
+      "note": "OpenAI Whisper large-v3 in its original openai-whisper .pt serialization: a different file from the transformers-format whisper-large-v3 entry (same model, different bytes, different runtime). It is the study-pinned checkpoint behind the SLURP DEV-1000 full-utterance catalog (SAEA-SLURP-WHISPER-OBSERVATIONS-RECOVERY-V1) and the TRAIN Fold A live Reviewer ASR artifacts, and the pinned tool of E5-0 (owner decision 201; coordinator ruling Q3 of 2026-09-29: the .pt with the existing plumbing, registered here before E5-0 runs so this lock stays the single source of model identity).",
+      "research_role": "Frozen tool-level ASR for the speech-aware-evidence-acquisition study's E5 line. Now an INSTRUMENT: the E5-0 transcript pass and the E5-1 offline oracle bound what a perfect ASR tool call could yield for slot-value verification. Later, a tool the frozen core is OFFERED and decides to call itself (E5-2, not built). It never answers: final answer authority stays with the frozen core.",
+      "claim_limit": "Tool use only; never a frozen-core comparator and never a system-default delivery step. Every run on study corpus audio needs its own exposure-ledger row, countersigned before contact; under decision 201 transcripts never enter the intent decision, the Perception or Solver prompts, or any retrieval key. Its numbers are tool-quality and oracle-bound measurements, not system results.",
+      "acquisition_receipt": "studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-12-local-speech-tool-readiness-complete-v1.json"
     }
   ],
   "ref_repos": [
