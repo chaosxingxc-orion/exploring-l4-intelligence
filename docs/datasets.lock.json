@@ -1031,23 +1031,6 @@
       "note": "Owner decision 261 (2026-10-11): pre-download only -- the thinking-mode twin of the serving core (official ggml-org GGUF, Q4_K_M + bf16 mmproj) so a bare-core vs PLAN read can be registered later if the owner opens that line; NOT admitted for any flight, no serving session, no lock change; file-selective fetch by /home/chao/saea-queue/fetch_thinking_gguf.sh (mirror endpoint, aria2c resume) mirroring scripts/data/fetch-assets.sh's qwen3-gguf shim. Fits the 24 GB card only at Q4_K_M; thinking-mode decode lengths exceed the study's 512-640-token completion ceilings, so any use needs its own geometry registration."
     },
     {
-      "name": "qwen3-omni-30b-a3b-thinking-gguf-q4km",
-      "kind": "model",
-      "local_subdir": "models/qwen3-omni-30b-a3b-thinking-gguf-q4km",
-      "source": {
-        "kind": "hf-manual",
-        "id": "ggml-org/Qwen3-Omni-30B-A3B-Thinking-GGUF"
-      },
-      "revision": "main at fetch time (2026-10-11); to be pinned by per-file sha256 in the fetch receipt /home/chao/fetch-thinking-gguf.out",
-      "status": "FETCHING",
-      "size_h": "~20.8G (18.6G Q4_K_M + 2.21G bf16 mmproj, per the repository tree)",
-      "size_bytes": null,
-      "files": 2,
-      "task": "-",
-      "factor_family": "model",
-      "note": "Owner decision 261 (2026-10-11): pre-download only -- the thinking-mode twin of the serving core (Qwen3-Omni-30B-A3B-Thinking, official ggml-org GGUF, Q4_K_M + bf16 mmproj) so that a bare-core vs PLAN read can be registered later if the owner opens that line; NOT admitted for any flight, no serving session, no lock change; file-selective fetch by /home/chao/saea-queue/fetch_thinking_gguf.sh (mirror endpoint, aria2c resume), mirroring scripts/data/fetch-assets.sh's qwen3-gguf shim. Fits the 24 GB card only at the Q4_K_M size; thinking-mode decode lengths exceed the study's 512-640-token completion ceilings, so any use needs its own geometry registration."
-    },
-    {
       "name": "nemotron3-nano-omni-nvfp4",
       "kind": "model",
       "local_subdir": "models/nemotron3-nano-omni-nvfp4",
