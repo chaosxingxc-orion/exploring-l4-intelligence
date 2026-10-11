@@ -1021,14 +1021,14 @@
         "kind": "hf-manual",
         "id": "ggml-org/Qwen3-Omni-30B-A3B-Thinking-GGUF"
       },
-      "revision": "main at fetch time (2026-10-11); pinned by per-file sha256 in the fetch receipt /home/chao/fetch-thinking-gguf.out once complete",
-      "status": "FETCHING",
-      "size_h": "~20.8G (18.6G Q4_K_M + 2.21G bf16 mmproj per the repository tree)",
-      "size_bytes": null,
+      "revision": "ggml-org/Qwen3-Omni-30B-A3B-Thinking-GGUF main, fetched 2026-10-11T04:14Z-06:32Z; per-file sha256 pinned and verified against the repository's Git LFS pointers: Qwen3-Omni-30B-A3B-Thinking-Q4_K_M.gguf afdaeff6f23c740429aadb3fa180f9d53b78278fe0d331b594b0b71bd9bf4835 (18557053248 bytes); mmproj-Qwen3-Omni-30B-A3B-Thinking-bf16.gguf 57b7240fb3d8941f5969d760c694a754cbe74f7db428605d63e1dacceda98b38 (2207465664 bytes)",
+      "status": "COMPLETE",
+      "size_h": "19.3G",
+      "size_bytes": 20764518912,
       "files": 2,
       "task": "-",
       "factor_family": "model",
-      "note": "Owner decision 261 (2026-10-11): pre-download only -- the thinking-mode twin of the serving core (official ggml-org GGUF, Q4_K_M + bf16 mmproj) so a bare-core vs PLAN read can be registered later if the owner opens that line; NOT admitted for any flight, no serving session, no lock change; file-selective fetch by /home/chao/saea-queue/fetch_thinking_gguf.sh (mirror endpoint, aria2c resume) mirroring scripts/data/fetch-assets.sh's qwen3-gguf shim. Fits the 24 GB card only at Q4_K_M; thinking-mode decode lengths exceed the study's 512-640-token completion ceilings, so any use needs its own geometry registration."
+      "note": "Owner decision 261 (2026-10-11): pre-downloaded thinking-mode twin of the serving core (official ggml-org GGUF, Q4_K_M + bf16 mmproj); fetch receipt /home/chao/fetch-thinking-gguf.out (aria2c through the mirror endpoint, both files reported OK). Owner decision 266-E (2026-10-11) admits it for ONE bare-core read on SLURP TRAIN Fold B (direct-only, Thinking vs Instruct, own serving session and completion cap, reasoning channel never delivered); NOT the serving core of any system cell and no lock change. Fits the 24 GB card only at Q4_K_M; thinking-mode decode lengths exceed the study's 512-640-token completion ceilings, so the read registers its own geometry and measures decode cost on a 4-row smoke first."
     },
     {
       "name": "nemotron3-nano-omni-nvfp4",
