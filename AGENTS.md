@@ -87,7 +87,7 @@ not working context.
 - Torch uses the `cu128` index for RTX 5090 (sm_120). If no compatible kernel exists, try nightly
   `cu128`, then source build with `TORCH_CUDA_ARCH_LIST=12.0`.
 - Data/checkpoints/outputs live at
-  `/mnt/e/chao_workspace/exploring-l4-intelligence/speechrl-data` (`SPEECHRL_DATA_DIR`); never commit
+  `/home/chao/saea-data/speechrl-data` (`SPEECHRL_DATA_DIR`; ext4 VHDX disk 1, decisions 284/296; the E: original is retired); never commit
   them. Only local MLflow `mlruns` stays on ext4.
 - `gh` is `C:\Program Files\GitHub CLI\gh.exe`. Windows `PYTHONPATH` uses `;`. `.gitattributes`
   enforces LF, especially for shell scripts. The umbrella uses `master`; each admitted
