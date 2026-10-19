@@ -1381,6 +1381,84 @@
       "research_role": "Frozen tool-level ASR for the speech-aware-evidence-acquisition study's E5 line. Now an INSTRUMENT: the E5-0 transcript pass and the E5-1 offline oracle bound what a perfect ASR tool call could yield for slot-value verification. Later, a tool the frozen core is OFFERED and decides to call itself (E5-2, not built). It never answers: final answer authority stays with the frozen core.",
       "claim_limit": "Tool use only; never a frozen-core comparator and never a system-default delivery step. Every run on study corpus audio needs its own exposure-ledger row, countersigned before contact; under decision 201 transcripts never enter the intent decision, the Perception or Solver prompts, or any retrieval key. Its numbers are tool-quality and oracle-bound measurements, not system results.",
       "acquisition_receipt": "studies/speech-aware-evidence-acquisition/docs/readiness/2026-09-12-local-speech-tool-readiness-complete-v1.json"
+    },
+    {
+      "name": "qwen3-asr-0.6b-gguf",
+      "kind": "model",
+      "local_subdir": "models/qwen3-asr-gguf/qwen3-asr-0.6b",
+      "source": {
+        "kind": "hf",
+        "id": "ggml-org/Qwen3-ASR-0.6B-GGUF",
+        "repo_type": "model",
+        "include": [
+          "Qwen3-ASR-0.6B-bf16.gguf",
+          "mmproj-Qwen3-ASR-0.6B-bf16.gguf"
+        ],
+        "files": [
+          {
+            "filename": "Qwen3-ASR-0.6B-bf16.gguf",
+            "size_bytes": 1509343168,
+            "sha256": "12b2894d9a7c98cd8f26670f5a47ab738f42bcc98df21e109be493870c71ba50"
+          },
+          {
+            "filename": "mmproj-Qwen3-ASR-0.6B-bf16.gguf",
+            "size_bytes": 378575520,
+            "sha256": "dae36c855f9a82a8916bea2238b24bda69a39d8da8b2f46dee7c103775656039"
+          }
+        ]
+      },
+      "revision": "928ab958557df9aa2ef1c93e0e83c7ad0933fae2",
+      "lifecycle": "AUXILIARY",
+      "profiles": [
+        "speech-aware-tools"
+      ],
+      "status": "COMPLETE",
+      "size_h": "1.8G",
+      "license": "apache-2.0",
+      "size_bytes": 1887918688,
+      "files": 2,
+      "task": "speech-recognition",
+      "factor_family": "tool-model",
+      "note": "Qwen3-ASR-0.6B (open Qwen3-ASR series; base_model Qwen/Qwen3-ASR-0.6B), official ggml-org GGUF conversion: bf16 language-model GGUF plus bf16 mmproj (audio tower), the highest-fidelity pair published (Q8_0 siblings exist and are NOT fetched). Owner rulings 339 (triggered ASR tool, called by the core's own decision, never a default transcript) and 342 A (ASR candidates = ONLY the open Qwen3-ASR series, 0.6B and 1.7B; VRAM-bounded tool). Served by the pinned llama.cpp-featcache build 04ccc72a2 (mtmd qwen3 audio support, upstream #19441) behind an OpenAI-compatible llama-server sidecar on its own port, CPU only (-ngl 0) while the core holds the GPU; the entry authorises acquisition only, every corpus contact stays behind its own exposure-ledger row."
+    },
+    {
+      "name": "qwen3-asr-1.7b-gguf",
+      "kind": "model",
+      "local_subdir": "models/qwen3-asr-gguf/qwen3-asr-1.7b",
+      "source": {
+        "kind": "hf",
+        "id": "ggml-org/Qwen3-ASR-1.7B-GGUF",
+        "repo_type": "model",
+        "include": [
+          "Qwen3-ASR-1.7B-bf16.gguf",
+          "mmproj-Qwen3-ASR-1.7B-bf16.gguf"
+        ],
+        "files": [
+          {
+            "filename": "Qwen3-ASR-1.7B-bf16.gguf",
+            "size_bytes": 4069674944,
+            "sha256": "1af18763dfafde2bbf071ef8a0952f7bee66f140c3565e5ccc5afb07dc1f9227"
+          },
+          {
+            "filename": "mmproj-Qwen3-ASR-1.7B-bf16.gguf",
+            "size_bytes": 641773984,
+            "sha256": "8882e9ddab3186f9aa71b1417c847177913e1466655ac944cf86e9b846735d62"
+          }
+        ]
+      },
+      "revision": "36a678687ba7d07a74ca70ccb0e36902e005fb80",
+      "lifecycle": "AUXILIARY",
+      "profiles": [
+        "speech-aware-tools"
+      ],
+      "status": "COMPLETE",
+      "size_h": "4.4G",
+      "license": "apache-2.0",
+      "size_bytes": 4711448928,
+      "files": 2,
+      "task": "speech-recognition",
+      "factor_family": "tool-model",
+      "note": "Qwen3-ASR-1.7B (open Qwen3-ASR series; base_model Qwen/Qwen3-ASR-1.7B), official ggml-org GGUF conversion: bf16 language-model GGUF plus bf16 mmproj (audio tower), the highest-fidelity pair published (Q8_0 siblings exist and are NOT fetched). Owner rulings 339 (triggered ASR tool, called by the core's own decision, never a default transcript) and 342 A (ASR candidates = ONLY the open Qwen3-ASR series, 0.6B and 1.7B; VRAM-bounded tool). Served by the pinned llama.cpp-featcache build 04ccc72a2 (mtmd qwen3 audio support, upstream #19441) behind an OpenAI-compatible llama-server sidecar on its own port, CPU only (-ngl 0) while the core holds the GPU; the entry authorises acquisition only, every corpus contact stays behind its own exposure-ledger row."
     }
   ],
   "ref_repos": [
